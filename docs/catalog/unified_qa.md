@@ -42,18 +42,18 @@ More information can be found at: https://github.com/allenai/unifiedqa.
 
 ```python
 FeaturesDict({
-    'input': tf.string,
-    'output': tf.string,
+    'input': object,
+    'output': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape | Dtype     | Description
-:------ | :----------- | :---- | :-------- | :----------
-        | FeaturesDict |       |           |
-input   | Tensor       |       | tf.string |
-output  | Tensor       |       | tf.string |
+Feature | Class        | Shape | Dtype  | Description
+:------ | :----------- | :---- | :----- | :----------
+        | FeaturesDict |       |        |
+input   | Tensor       |       | object |
+output  | Tensor       |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

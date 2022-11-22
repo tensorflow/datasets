@@ -42,11 +42,11 @@ using the provided paper ids with the Semantic Scholar API
 
 *   **Download size**: `22.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.26 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -60,42 +60,42 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'citeEnd': tf.int64,
-    'citeStart': tf.int64,
-    'citedPaperId': Text(shape=(), dtype=tf.string),
-    'citingPaperId': Text(shape=(), dtype=tf.string),
-    'excerpt_index': tf.int32,
-    'id': Text(shape=(), dtype=tf.string),
-    'isKeyCitation': tf.bool,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'label2': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-    'label2_confidence': tf.float32,
-    'label_confidence': tf.float32,
-    'sectionName': Text(shape=(), dtype=tf.string),
-    'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=7),
-    'string': Text(shape=(), dtype=tf.string),
+    'citeEnd': int64,
+    'citeStart': int64,
+    'citedPaperId': Text(shape=(), dtype=object),
+    'citingPaperId': Text(shape=(), dtype=object),
+    'excerpt_index': int32,
+    'id': Text(shape=(), dtype=object),
+    'isKeyCitation': bool,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'label2': ClassLabel(shape=(), dtype=int64, num_classes=4),
+    'label2_confidence': float32,
+    'label_confidence': float32,
+    'sectionName': Text(shape=(), dtype=object),
+    'source': ClassLabel(shape=(), dtype=int64, num_classes=7),
+    'string': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-citeEnd           | Tensor       |       | tf.int64   |
-citeStart         | Tensor       |       | tf.int64   |
-citedPaperId      | Text         |       | tf.string  |
-citingPaperId     | Text         |       | tf.string  |
-excerpt_index     | Tensor       |       | tf.int32   |
-id                | Text         |       | tf.string  |
-isKeyCitation     | Tensor       |       | tf.bool    |
-label             | ClassLabel   |       | tf.int64   |
-label2            | ClassLabel   |       | tf.int64   |
-label2_confidence | Tensor       |       | tf.float32 |
-label_confidence  | Tensor       |       | tf.float32 |
-sectionName       | Text         |       | tf.string  |
-source            | ClassLabel   |       | tf.int64   |
-string            | Text         |       | tf.string  |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+citeEnd           | Tensor       |       | int64   |
+citeStart         | Tensor       |       | int64   |
+citedPaperId      | Text         |       | object  |
+citingPaperId     | Text         |       | object  |
+excerpt_index     | Tensor       |       | int32   |
+id                | Text         |       | object  |
+isKeyCitation     | Tensor       |       | bool    |
+label             | ClassLabel   |       | int64   |
+label2            | ClassLabel   |       | int64   |
+label2_confidence | Tensor       |       | float32 |
+label_confidence  | Tensor       |       | float32 |
+sectionName       | Text         |       | object  |
+source            | ClassLabel   |       | int64   |
+string            | Text         |       | object  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -155,34 +155,34 @@ Split                                  | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
-    'book_id': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'speaker_id': Text(shape=(), dtype=tf.string),
-    'transcript': Text(shape=(), dtype=tf.string),
-    'user_id': Text(shape=(), dtype=tf.string),
+    'audio': Audio(shape=(None,), dtype=int64),
+    'book_id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'speaker_id': Text(shape=(), dtype=object),
+    'transcript': Text(shape=(), dtype=object),
+    'user_id': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature    | Class        | Shape   | Dtype     | Description                |
-| :--------- | :----------- | :------ | :-------- | :------------------------- |
-|            | FeaturesDict |         |           |                            |
-| audio      | Audio        | (None,) | tf.int64  | The audio clip containing  |
-:            :              :         :           : a snippet from a book read :
-:            :              :         :           : aloud                      :
-| book_id    | Text         |         | tf.string | The book that this         |
-:            :              :         :           : utterance is read from     :
-| id         | Text         |         | tf.string | The id of this unique      |
-:            :              :         :           : utterance                  :
-| speaker_id | Text         |         | tf.string | The speaker who read this  |
-:            :              :         :           : utterance                  :
-| transcript | Text         |         | tf.string | The text that the speaker  |
-:            :              :         :           : read to produce the audio  :
-| user_id    | Text         |         | tf.string | The user that this         |
-:            :              :         :           : utterance belongs to       :
-:            :              :         :           : (unique speaker and book)  :
+| Feature    | Class        | Shape   | Dtype  | Description                  |
+| :--------- | :----------- | :------ | :----- | :--------------------------- |
+|            | FeaturesDict |         |        |                              |
+| audio      | Audio        | (None,) | int64  | The audio clip containing a  |
+:            :              :         :        : snippet from a book read     :
+:            :              :         :        : aloud                        :
+| book_id    | Text         |         | object | The book that this utterance |
+:            :              :         :        : is read from                 :
+| id         | Text         |         | object | The id of this unique        |
+:            :              :         :        : utterance                    :
+| speaker_id | Text         |         | object | The speaker who read this    |
+:            :              :         :        : utterance                    :
+| transcript | Text         |         | object | The text that the speaker    |
+:            :              :         :        : read to produce the audio    :
+| user_id    | Text         |         | object | The user that this utterance |
+:            :              :         :        : belongs to (unique speaker   :
+:            :              :         :        : and book)                    :
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

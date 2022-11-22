@@ -93,22 +93,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(224, 224, 3), dtype=tf.uint8),
-    'label_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-    'rotation': Tensor(shape=(3, 3), dtype=tf.float32),
-    'rotations_equivalent': Tensor(shape=(None, 3, 3), dtype=tf.float32),
+    'image': Image(shape=(224, 224, 3), dtype=uint8),
+    'label_shape': ClassLabel(shape=(), dtype=int64, num_classes=8),
+    'rotation': Tensor(shape=(3, 3), dtype=float32),
+    'rotations_equivalent': Tensor(shape=(None, 3, 3), dtype=float32),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class        | Shape         | Dtype      | Description
-:------------------- | :----------- | :------------ | :--------- | :----------
-                     | FeaturesDict |               |            |
-image                | Image        | (224, 224, 3) | tf.uint8   |
-label_shape          | ClassLabel   |               | tf.int64   |
-rotation             | Tensor       | (3, 3)        | tf.float32 |
-rotations_equivalent | Tensor       | (None, 3, 3)  | tf.float32 |
+Feature              | Class        | Shape         | Dtype   | Description
+:------------------- | :----------- | :------------ | :------ | :----------
+                     | FeaturesDict |               |         |
+image                | Image        | (224, 224, 3) | uint8   |
+label_shape          | ClassLabel   |               | int64   |
+rotation             | Tensor       | (3, 3)        | float32 |
+rotations_equivalent | Tensor       | (None, 3, 3)  | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

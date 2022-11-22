@@ -62,18 +62,18 @@ data = tfds.load(
 
 ```python
 FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
+    'actions': Text(shape=(), dtype=object),
+    'commands': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-actions  | Text         |       | tf.string |
-commands | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+actions  | Text         |       | object |
+commands | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

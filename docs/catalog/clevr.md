@@ -61,44 +61,43 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'file_name': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
     'objects': Sequence({
-        '3d_coords': Tensor(shape=(3,), dtype=tf.float32),
-        'color': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-        'material': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'pixel_coords': Tensor(shape=(3,), dtype=tf.float32),
-        'rotation': tf.float32,
-        'shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-        'size': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        '3d_coords': Tensor(shape=(3,), dtype=float32),
+        'color': ClassLabel(shape=(), dtype=int64, num_classes=8),
+        'material': ClassLabel(shape=(), dtype=int64, num_classes=2),
+        'pixel_coords': Tensor(shape=(3,), dtype=float32),
+        'rotation': float32,
+        'shape': ClassLabel(shape=(), dtype=int64, num_classes=3),
+        'size': ClassLabel(shape=(), dtype=int64, num_classes=2),
     }),
     'question_answer': Sequence({
-        'answer': Text(shape=(), dtype=tf.string),
-        'question': Text(shape=(), dtype=tf.string),
+        'answer': Text(shape=(), dtype=object),
+        'question': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature                  | Class        | Shape  | Dtype      | Description |
-| :----------------------- | :----------- | :----- | :--------- | :---------- |
-|                          | FeaturesDict |        |            |             |
-| file_name                | Text         |        | tf.string  |             |
-| image                    | Image        | (None, | tf.uint8   |             |
-:                          :              : None,  :            :             :
-:                          :              : 3)     :            :             :
-| objects                  | Sequence     |        |            |             |
-| objects/3d_coords        | Tensor       | (3,)   | tf.float32 |             |
-| objects/color            | ClassLabel   |        | tf.int64   |             |
-| objects/material         | ClassLabel   |        | tf.int64   |             |
-| objects/pixel_coords     | Tensor       | (3,)   | tf.float32 |             |
-| objects/rotation         | Tensor       |        | tf.float32 |             |
-| objects/shape            | ClassLabel   |        | tf.int64   |             |
-| objects/size             | ClassLabel   |        | tf.int64   |             |
-| question_answer          | Sequence     |        |            |             |
-| question_answer/answer   | Text         |        | tf.string  |             |
-| question_answer/question | Text         |        | tf.string  |             |
+| Feature                  | Class        | Shape    | Dtype   | Description |
+| :----------------------- | :----------- | :------- | :------ | :---------- |
+|                          | FeaturesDict |          |         |             |
+| file_name                | Text         |          | object  |             |
+| image                    | Image        | (None,   | uint8   |             |
+:                          :              : None, 3) :         :             :
+| objects                  | Sequence     |          |         |             |
+| objects/3d_coords        | Tensor       | (3,)     | float32 |             |
+| objects/color            | ClassLabel   |          | int64   |             |
+| objects/material         | ClassLabel   |          | int64   |             |
+| objects/pixel_coords     | Tensor       | (3,)     | float32 |             |
+| objects/rotation         | Tensor       |          | float32 |             |
+| objects/shape            | ClassLabel   |          | int64   |             |
+| objects/size             | ClassLabel   |          | int64   |             |
+| question_answer          | Sequence     |          |         |             |
+| question_answer/answer   | Text         |          | object  |             |
+| question_answer/question | Text         |          | object  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

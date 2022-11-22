@@ -92,18 +92,18 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'original': Text(shape=(), dtype=tf.string),
-    'simplifications': Sequence(Text(shape=(), dtype=tf.string)),
+    'original': Text(shape=(), dtype=object),
+    'simplifications': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class          | Shape   | Dtype     | Description
-:-------------- | :------------- | :------ | :-------- | :----------
-                | FeaturesDict   |         |           |
-original        | Text           |         | tf.string |
-simplifications | Sequence(Text) | (None,) | tf.string |
+Feature         | Class          | Shape   | Dtype  | Description
+:-------------- | :------------- | :------ | :----- | :----------
+                | FeaturesDict   |         |        |
+original        | Text           |         | object |
+simplifications | Sequence(Text) | (None,) | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -159,26 +159,26 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'aspect': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'original': Text(shape=(), dtype=tf.string),
-    'original_sentence_id': tf.int32,
-    'rating': tf.int32,
-    'simplification': Text(shape=(), dtype=tf.string),
-    'worker_id': tf.int32,
+    'aspect': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'original': Text(shape=(), dtype=object),
+    'original_sentence_id': int32,
+    'rating': int32,
+    'simplification': Text(shape=(), dtype=object),
+    'worker_id': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class        | Shape | Dtype     | Description
-:------------------- | :----------- | :---- | :-------- | :----------
-                     | FeaturesDict |       |           |
-aspect               | ClassLabel   |       | tf.int64  |
-original             | Text         |       | tf.string |
-original_sentence_id | Tensor       |       | tf.int32  |
-rating               | Tensor       |       | tf.int32  |
-simplification       | Text         |       | tf.string |
-worker_id            | Tensor       |       | tf.int32  |
+Feature              | Class        | Shape | Dtype  | Description
+:------------------- | :----------- | :---- | :----- | :----------
+                     | FeaturesDict |       |        |
+aspect               | ClassLabel   |       | int64  |
+original             | Text         |       | object |
+original_sentence_id | Tensor       |       | int32  |
+rating               | Tensor       |       | int32  |
+simplification       | Text         |       | object |
+worker_id            | Tensor       |       | int32  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

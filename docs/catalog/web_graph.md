@@ -76,20 +76,20 @@ All versions of the dataset have following features:
 
 ```python
 FeaturesDict({
-    'col_tag': Sequence(tf.int64),
-    'gt_tag': Sequence(tf.int64),
-    'row_tag': tf.int64,
+    'col_tag': Sequence(int64),
+    'gt_tag': Sequence(int64),
+    'row_tag': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class            | Shape   | Dtype    | Description
-:------ | :--------------- | :------ | :------- | :----------
-        | FeaturesDict     |         |          |
-col_tag | Sequence(Tensor) | (None,) | tf.int64 |
-gt_tag  | Sequence(Tensor) | (None,) | tf.int64 |
-row_tag | Tensor           |         | tf.int64 |
+Feature | Class            | Shape   | Dtype | Description
+:------ | :--------------- | :------ | :---- | :----------
+        | FeaturesDict     |         |       |
+col_tag | Sequence(Tensor) | (None,) | int64 |
+gt_tag  | Sequence(Tensor) | (None,) | int64 |
+row_tag | Tensor           |         | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

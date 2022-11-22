@@ -62,28 +62,28 @@ Split | Examples
 ```python
 FeaturesDict({
     'thread': Sequence({
-        'author': Text(shape=(), dtype=tf.string),
-        'created_utc': Text(shape=(), dtype=tf.string),
-        'id': Text(shape=(), dtype=tf.string),
-        'link_id': Text(shape=(), dtype=tf.string),
-        'parent_id': Text(shape=(), dtype=tf.string),
-        'text': Text(shape=(), dtype=tf.string),
+        'author': Text(shape=(), dtype=object),
+        'created_utc': Text(shape=(), dtype=object),
+        'id': Text(shape=(), dtype=object),
+        'link_id': Text(shape=(), dtype=object),
+        'parent_id': Text(shape=(), dtype=object),
+        'text': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature            | Class        | Shape | Dtype     | Description
-:----------------- | :----------- | :---- | :-------- | :----------
-                   | FeaturesDict |       |           |
-thread             | Sequence     |       |           |
-thread/author      | Text         |       | tf.string |
-thread/created_utc | Text         |       | tf.string |
-thread/id          | Text         |       | tf.string |
-thread/link_id     | Text         |       | tf.string |
-thread/parent_id   | Text         |       | tf.string |
-thread/text        | Text         |       | tf.string |
+Feature            | Class        | Shape | Dtype  | Description
+:----------------- | :----------- | :---- | :----- | :----------
+                   | FeaturesDict |       |        |
+thread             | Sequence     |       |        |
+thread/author      | Text         |       | object |
+thread/created_utc | Text         |       | object |
+thread/id          | Text         |       | object |
+thread/link_id     | Text         |       | object |
+thread/parent_id   | Text         |       | object |
+thread/text        | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

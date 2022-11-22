@@ -83,22 +83,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'actions': Tensor(shape=(None, 5), dtype=tf.float32),
-    'filename': Text(shape=(), dtype=tf.string),
-    'states': Tensor(shape=(None, 5), dtype=tf.float32),
-    'video': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'actions': Tensor(shape=(None, 5), dtype=float32),
+    'filename': Text(shape=(), dtype=object),
+    'states': Tensor(shape=(None, 5), dtype=float32),
+    'video': Video(Image(shape=(64, 64, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape             | Dtype      | Description
-:------- | :----------- | :---------------- | :--------- | :----------
-         | FeaturesDict |                   |            |
-actions  | Tensor       | (None, 5)         | tf.float32 |
-filename | Text         |                   | tf.string  |
-states   | Tensor       | (None, 5)         | tf.float32 |
-video    | Video(Image) | (None, 64, 64, 3) | tf.uint8   |
+Feature  | Class        | Shape             | Dtype   | Description
+:------- | :----------- | :---------------- | :------ | :----------
+         | FeaturesDict |                   |         |
+actions  | Tensor       | (None, 5)         | float32 |
+filename | Text         |                   | object  |
+states   | Tensor       | (None, 5)         | float32 |
+video    | Video(Image) | (None, 64, 64, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -159,22 +159,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'actions': Tensor(shape=(None, 5), dtype=tf.float32),
-    'filename': Text(shape=(), dtype=tf.string),
-    'states': Tensor(shape=(None, 5), dtype=tf.float32),
-    'video': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'actions': Tensor(shape=(None, 5), dtype=float32),
+    'filename': Text(shape=(), dtype=object),
+    'states': Tensor(shape=(None, 5), dtype=float32),
+    'video': Video(Image(shape=(128, 128, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape               | Dtype      | Description
-:------- | :----------- | :------------------ | :--------- | :----------
-         | FeaturesDict |                     |            |
-actions  | Tensor       | (None, 5)           | tf.float32 |
-filename | Text         |                     | tf.string  |
-states   | Tensor       | (None, 5)           | tf.float32 |
-video    | Video(Image) | (None, 128, 128, 3) | tf.uint8   |
+Feature  | Class        | Shape               | Dtype   | Description
+:------- | :----------- | :------------------ | :------ | :----------
+         | FeaturesDict |                     |         |
+actions  | Tensor       | (None, 5)           | float32 |
+filename | Text         |                     | object  |
+states   | Tensor       | (None, 5)           | float32 |
+video    | Video(Image) | (None, 128, 128, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -235,22 +235,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'actions': Tensor(shape=(None, 5), dtype=tf.float32),
-    'filename': Text(shape=(), dtype=tf.string),
-    'states': Tensor(shape=(None, 5), dtype=tf.float32),
-    'video': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'actions': Tensor(shape=(None, 5), dtype=float32),
+    'filename': Text(shape=(), dtype=object),
+    'states': Tensor(shape=(None, 5), dtype=float32),
+    'video': Video(Image(shape=(64, 64, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape             | Dtype      | Description
-:------- | :----------- | :---------------- | :--------- | :----------
-         | FeaturesDict |                   |            |
-actions  | Tensor       | (None, 5)         | tf.float32 |
-filename | Text         |                   | tf.string  |
-states   | Tensor       | (None, 5)         | tf.float32 |
-video    | Video(Image) | (None, 64, 64, 3) | tf.uint8   |
+Feature  | Class        | Shape             | Dtype   | Description
+:------- | :----------- | :---------------- | :------ | :----------
+         | FeaturesDict |                   |         |
+actions  | Tensor       | (None, 5)         | float32 |
+filename | Text         |                   | object  |
+states   | Tensor       | (None, 5)         | float32 |
+video    | Video(Image) | (None, 64, 64, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -311,22 +311,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'actions': Tensor(shape=(None, 5), dtype=tf.float32),
-    'filename': Text(shape=(), dtype=tf.string),
-    'states': Tensor(shape=(None, 5), dtype=tf.float32),
-    'video': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'actions': Tensor(shape=(None, 5), dtype=float32),
+    'filename': Text(shape=(), dtype=object),
+    'states': Tensor(shape=(None, 5), dtype=float32),
+    'video': Video(Image(shape=(128, 128, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape               | Dtype      | Description
-:------- | :----------- | :------------------ | :--------- | :----------
-         | FeaturesDict |                     |            |
-actions  | Tensor       | (None, 5)           | tf.float32 |
-filename | Text         |                     | tf.string  |
-states   | Tensor       | (None, 5)           | tf.float32 |
-video    | Video(Image) | (None, 128, 128, 3) | tf.uint8   |
+Feature  | Class        | Shape               | Dtype   | Description
+:------- | :----------- | :------------------ | :------ | :----------
+         | FeaturesDict |                     |         |
+actions  | Tensor       | (None, 5)           | float32 |
+filename | Text         |                     | object  |
+states   | Tensor       | (None, 5)           | float32 |
+video    | Video(Image) | (None, 128, 128, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

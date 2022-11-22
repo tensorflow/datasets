@@ -41,22 +41,22 @@ This means that the results are not directly comparable across languages.
 
 ```python
 FeaturesDict({
-    'source_language': Text(shape=(), dtype=tf.string),
-    'source_sentence': Text(shape=(), dtype=tf.string),
-    'target_language': Text(shape=(), dtype=tf.string),
-    'target_sentence': Text(shape=(), dtype=tf.string),
+    'source_language': Text(shape=(), dtype=object),
+    'source_sentence': Text(shape=(), dtype=object),
+    'target_language': Text(shape=(), dtype=object),
+    'target_sentence': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype     | Description
-:-------------- | :----------- | :---- | :-------- | :----------
-                | FeaturesDict |       |           |
-source_language | Text         |       | tf.string |
-source_sentence | Text         |       | tf.string |
-target_language | Text         |       | tf.string |
-target_sentence | Text         |       | tf.string |
+Feature         | Class        | Shape | Dtype  | Description
+:-------------- | :----------- | :---- | :----- | :----------
+                | FeaturesDict |       |        |
+source_language | Text         |       | object |
+source_sentence | Text         |       | object |
+target_language | Text         |       | object |
+target_sentence | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

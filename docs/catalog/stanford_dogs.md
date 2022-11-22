@@ -38,11 +38,11 @@ bounding box annotations are provided for all the 12,000 images.
 
 *   **Download size**: `778.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `744.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -55,25 +55,25 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=120),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=120),
     'objects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape           | Dtype      | Description
-:------------- | :----------- | :-------------- | :--------- | :----------
-               | FeaturesDict |                 |            |
-image          | Image        | (None, None, 3) | tf.uint8   |
-image/filename | Text         |                 | tf.string  |
-label          | ClassLabel   |                 | tf.int64   |
-objects        | Sequence     |                 |            |
-objects/bbox   | BBoxFeature  | (4,)            | tf.float32 |
+Feature        | Class        | Shape           | Dtype   | Description
+:------------- | :----------- | :-------------- | :------ | :----------
+               | FeaturesDict |                 |         |
+image          | Image        | (None, None, 3) | uint8   |
+image/filename | Text         |                 | object  |
+label          | ClassLabel   |                 | int64   |
+objects        | Sequence     |                 |         |
+objects/bbox   | BBoxFeature  | (4,)            | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

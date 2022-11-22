@@ -63,26 +63,26 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'first_speaker': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'first_speaker': ClassLabel(shape=(), dtype=int64, num_classes=2),
     'metadata': FeaturesDict({
         'services': Sequence({
-            'name': tf.string,
+            'name': object,
         }),
     }),
-    'utterances': Sequence(Text(shape=(), dtype=tf.string)),
+    'utterances': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                | Class          | Shape   | Dtype     | Description
-:--------------------- | :------------- | :------ | :-------- | :----------
-                       | FeaturesDict   |         |           |
-first_speaker          | ClassLabel     |         | tf.int64  |
-metadata               | FeaturesDict   |         |           |
-metadata/services      | Sequence       |         |           |
-metadata/services/name | Tensor         |         | tf.string |
-utterances             | Sequence(Text) | (None,) | tf.string |
+Feature                | Class          | Shape   | Dtype  | Description
+:--------------------- | :------------- | :------ | :----- | :----------
+                       | FeaturesDict   |         |        |
+first_speaker          | ClassLabel     |         | int64  |
+metadata               | FeaturesDict   |         |        |
+metadata/services      | Sequence       |         |        |
+metadata/services/name | Tensor         |         | object |
+utterances             | Sequence(Text) | (None,) | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

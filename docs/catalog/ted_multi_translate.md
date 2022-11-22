@@ -48,23 +48,23 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'talk_name': Text(shape=(), dtype=tf.string),
+    'talk_name': Text(shape=(), dtype=object),
     'translations': TranslationVariableLanguages({
-        'language': Text(shape=(), dtype=tf.string),
-        'translation': Text(shape=(), dtype=tf.string),
+        'language': Text(shape=(), dtype=object),
+        'translation': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                  | Class                        | Shape | Dtype     | Description
-:----------------------- | :--------------------------- | :---- | :-------- | :----------
-                         | FeaturesDict                 |       |           |
-talk_name                | Text                         |       | tf.string |
-translations             | TranslationVariableLanguages |       |           |
-translations/language    | Text                         |       | tf.string |
-translations/translation | Text                         |       | tf.string |
+Feature                  | Class                        | Shape | Dtype  | Description
+:----------------------- | :--------------------------- | :---- | :----- | :----------
+                         | FeaturesDict                 |       |        |
+talk_name                | Text                         |       | object |
+translations             | TranslationVariableLanguages |       |        |
+translations/language    | Text                         |       | object |
+translations/translation | Text                         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

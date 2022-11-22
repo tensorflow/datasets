@@ -64,24 +64,24 @@ Split              | Examples
 
 ```python
 FeaturesDict({
-    'domain': tf.int32,
-    'domain_name': Text(shape=(), dtype=tf.string),
-    'intent': tf.int32,
-    'intent_name': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
+    'domain': int32,
+    'domain_name': Text(shape=(), dtype=object),
+    'intent': int32,
+    'intent_name': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape | Dtype     | Description
-:---------- | :----------- | :---- | :-------- | :----------
-            | FeaturesDict |       |           |
-domain      | Tensor       |       | tf.int32  |
-domain_name | Text         |       | tf.string |
-intent      | Tensor       |       | tf.int32  |
-intent_name | Text         |       | tf.string |
-text        | Text         |       | tf.string |
+Feature     | Class        | Shape | Dtype  | Description
+:---------- | :----------- | :---- | :----- | :----------
+            | FeaturesDict |       |        |
+domain      | Tensor       |       | int32  |
+domain_name | Text         |       | object |
+intent      | Tensor       |       | int32  |
+intent_name | Text         |       | object |
+text        | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

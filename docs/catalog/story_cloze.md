@@ -60,20 +60,20 @@ system to choose the correct ending to a four-sentence story.
 
 ```python
 FeaturesDict({
-    'context': Text(shape=(), dtype=tf.string),
-    'endings': Sequence(Text(shape=(), dtype=tf.string)),
-    'label': tf.int32,
+    'context': Text(shape=(), dtype=object),
+    'endings': Sequence(Text(shape=(), dtype=object)),
+    'label': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class          | Shape   | Dtype     | Description
-:------ | :------------- | :------ | :-------- | :----------
-        | FeaturesDict   |         |           |
-context | Text           |         | tf.string |
-endings | Sequence(Text) | (None,) | tf.string |
-label   | Tensor         |         | tf.int32  |
+Feature | Class          | Shape   | Dtype  | Description
+:------ | :------------- | :------ | :----- | :----------
+        | FeaturesDict   |         |        |
+context | Text           |         | object |
+endings | Sequence(Text) | (None,) | object |
+label   | Tensor         |         | int32  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

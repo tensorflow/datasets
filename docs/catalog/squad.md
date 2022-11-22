@@ -85,28 +85,28 @@ Split          | Examples
 ```python
 FeaturesDict({
     'answers': Sequence({
-        'answer_start': tf.int32,
-        'text': Text(shape=(), dtype=tf.string),
+        'answer_start': int32,
+        'text': Text(shape=(), dtype=object),
     }),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': tf.string,
-    'question': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'context': Text(shape=(), dtype=object),
+    'id': object,
+    'question': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class        | Shape | Dtype     | Description
-:------------------- | :----------- | :---- | :-------- | :----------
-                     | FeaturesDict |       |           |
-answers              | Sequence     |       |           |
-answers/answer_start | Tensor       |       | tf.int32  |
-answers/text         | Text         |       | tf.string |
-context              | Text         |       | tf.string |
-id                   | Tensor       |       | tf.string |
-question             | Text         |       | tf.string |
-title                | Text         |       | tf.string |
+Feature              | Class        | Shape | Dtype  | Description
+:------------------- | :----------- | :---- | :----- | :----------
+                     | FeaturesDict |       |        |
+answers              | Sequence     |       |        |
+answers/answer_start | Tensor       |       | int32  |
+answers/text         | Text         |       | object |
+context              | Text         |       | object |
+id                   | Tensor       |       | object |
+question             | Text         |       | object |
+title                | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -169,37 +169,37 @@ Split          | Examples
 ```python
 FeaturesDict({
     'answers': Sequence({
-        'answer_start': tf.int32,
-        'text': Text(shape=(), dtype=tf.string),
+        'answer_start': int32,
+        'text': Text(shape=(), dtype=object),
     }),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': tf.string,
-    'is_impossible': tf.bool,
+    'context': Text(shape=(), dtype=object),
+    'id': object,
+    'is_impossible': bool,
     'plausible_answers': Sequence({
-        'answer_start': tf.int32,
-        'text': Text(shape=(), dtype=tf.string),
+        'answer_start': int32,
+        'text': Text(shape=(), dtype=object),
     }),
-    'question': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype     | Description
-:----------------------------- | :----------- | :---- | :-------- | :----------
-                               | FeaturesDict |       |           |
-answers                        | Sequence     |       |           |
-answers/answer_start           | Tensor       |       | tf.int32  |
-answers/text                   | Text         |       | tf.string |
-context                        | Text         |       | tf.string |
-id                             | Tensor       |       | tf.string |
-is_impossible                  | Tensor       |       | tf.bool   |
-plausible_answers              | Sequence     |       |           |
-plausible_answers/answer_start | Tensor       |       | tf.int32  |
-plausible_answers/text         | Text         |       | tf.string |
-question                       | Text         |       | tf.string |
-title                          | Text         |       | tf.string |
+Feature                        | Class        | Shape | Dtype  | Description
+:----------------------------- | :----------- | :---- | :----- | :----------
+                               | FeaturesDict |       |        |
+answers                        | Sequence     |       |        |
+answers/answer_start           | Tensor       |       | int32  |
+answers/text                   | Text         |       | object |
+context                        | Text         |       | object |
+id                             | Tensor       |       | object |
+is_impossible                  | Tensor       |       | bool   |
+plausible_answers              | Sequence     |       |        |
+plausible_answers/answer_start | Tensor       |       | int32  |
+plausible_answers/text         | Text         |       | object |
+question                       | Text         |       | object |
+title                          | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

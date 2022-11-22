@@ -56,37 +56,37 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answerKey': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-    'clarity': tf.float32,
-    'fact1': Text(shape=(), dtype=tf.string),
-    'humanScore': tf.float32,
+    'answerKey': ClassLabel(shape=(), dtype=int64, num_classes=4),
+    'clarity': float32,
+    'fact1': Text(shape=(), dtype=object),
+    'humanScore': float32,
     'question': FeaturesDict({
-        'choice_A': Text(shape=(), dtype=tf.string),
-        'choice_B': Text(shape=(), dtype=tf.string),
-        'choice_C': Text(shape=(), dtype=tf.string),
-        'choice_D': Text(shape=(), dtype=tf.string),
-        'stem': Text(shape=(), dtype=tf.string),
+        'choice_A': Text(shape=(), dtype=object),
+        'choice_B': Text(shape=(), dtype=object),
+        'choice_C': Text(shape=(), dtype=object),
+        'choice_D': Text(shape=(), dtype=object),
+        'stem': Text(shape=(), dtype=object),
     }),
-    'turkIdAnonymized': Text(shape=(), dtype=tf.string),
+    'turkIdAnonymized': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-answerKey         | ClassLabel   |       | tf.int64   |
-clarity           | Tensor       |       | tf.float32 |
-fact1             | Text         |       | tf.string  |
-humanScore        | Tensor       |       | tf.float32 |
-question          | FeaturesDict |       |            |
-question/choice_A | Text         |       | tf.string  |
-question/choice_B | Text         |       | tf.string  |
-question/choice_C | Text         |       | tf.string  |
-question/choice_D | Text         |       | tf.string  |
-question/stem     | Text         |       | tf.string  |
-turkIdAnonymized  | Text         |       | tf.string  |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+answerKey         | ClassLabel   |       | int64   |
+clarity           | Tensor       |       | float32 |
+fact1             | Text         |       | object  |
+humanScore        | Tensor       |       | float32 |
+question          | FeaturesDict |       |         |
+question/choice_A | Text         |       | object  |
+question/choice_B | Text         |       | object  |
+question/choice_C | Text         |       | object  |
+question/choice_D | Text         |       | object  |
+question/stem     | Text         |       | object  |
+turkIdAnonymized  | Text         |       | object  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -50,34 +50,34 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'At-Bats': tf.int32,
-    'BattingAverage': tf.float32,
-    'FirstName': tf.string,
-    'Hits': tf.int32,
-    'LastName': tf.string,
-    'RemainingAt-Bats': tf.int32,
-    'RemainingAverage': tf.float32,
-    'SeasonAt-Bats': tf.int32,
-    'SeasonAverage': tf.float32,
-    'SeasonHits': tf.int32,
+    'At-Bats': int32,
+    'BattingAverage': float32,
+    'FirstName': object,
+    'Hits': int32,
+    'LastName': object,
+    'RemainingAt-Bats': int32,
+    'RemainingAverage': float32,
+    'SeasonAt-Bats': int32,
+    'SeasonAverage': float32,
+    'SeasonHits': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape | Dtype      | Description
-:--------------- | :----------- | :---- | :--------- | :----------
-                 | FeaturesDict |       |            |
-At-Bats          | Tensor       |       | tf.int32   |
-BattingAverage   | Tensor       |       | tf.float32 |
-FirstName        | Tensor       |       | tf.string  |
-Hits             | Tensor       |       | tf.int32   |
-LastName         | Tensor       |       | tf.string  |
-RemainingAt-Bats | Tensor       |       | tf.int32   |
-RemainingAverage | Tensor       |       | tf.float32 |
-SeasonAt-Bats    | Tensor       |       | tf.int32   |
-SeasonAverage    | Tensor       |       | tf.float32 |
-SeasonHits       | Tensor       |       | tf.int32   |
+Feature          | Class        | Shape | Dtype   | Description
+:--------------- | :----------- | :---- | :------ | :----------
+                 | FeaturesDict |       |         |
+At-Bats          | Tensor       |       | int32   |
+BattingAverage   | Tensor       |       | float32 |
+FirstName        | Tensor       |       | object  |
+Hits             | Tensor       |       | int32   |
+LastName         | Tensor       |       | object  |
+RemainingAt-Bats | Tensor       |       | int32   |
+RemainingAverage | Tensor       |       | float32 |
+SeasonAt-Bats    | Tensor       |       | int32   |
+SeasonAverage    | Tensor       |       | float32 |
+SeasonHits       | Tensor       |       | int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

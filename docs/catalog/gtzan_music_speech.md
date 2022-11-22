@@ -53,20 +53,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
-    'audio/filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'audio': Audio(shape=(None,), dtype=int64),
+    'audio/filename': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape   | Dtype     | Description
-:------------- | :----------- | :------ | :-------- | :----------
-               | FeaturesDict |         |           |
-audio          | Audio        | (None,) | tf.int64  |
-audio/filename | Text         |         | tf.string |
-label          | ClassLabel   |         | tf.int64  |
+Feature        | Class        | Shape   | Dtype  | Description
+:------------- | :----------- | :------ | :----- | :----------
+               | FeaturesDict |         |        |
+audio          | Audio        | (None,) | int64  |
+audio/filename | Text         |         | object |
+label          | ClassLabel   |         | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

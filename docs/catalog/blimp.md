@@ -50,34 +50,34 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'UID': Text(shape=(), dtype=tf.string),
-    'field': Text(shape=(), dtype=tf.string),
-    'lexically_identical': tf.bool,
-    'linguistics_term': Text(shape=(), dtype=tf.string),
-    'one_prefix_method': tf.bool,
-    'pair_id': tf.int32,
-    'sentence_bad': Text(shape=(), dtype=tf.string),
-    'sentence_good': Text(shape=(), dtype=tf.string),
-    'simple_LM_method': tf.bool,
-    'two_prefix_method': tf.bool,
+    'UID': Text(shape=(), dtype=object),
+    'field': Text(shape=(), dtype=object),
+    'lexically_identical': bool,
+    'linguistics_term': Text(shape=(), dtype=object),
+    'one_prefix_method': bool,
+    'pair_id': int32,
+    'sentence_bad': Text(shape=(), dtype=object),
+    'sentence_good': Text(shape=(), dtype=object),
+    'simple_LM_method': bool,
+    'two_prefix_method': bool,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature             | Class        | Shape | Dtype     | Description
-:------------------ | :----------- | :---- | :-------- | :----------
-                    | FeaturesDict |       |           |
-UID                 | Text         |       | tf.string |
-field               | Text         |       | tf.string |
-lexically_identical | Tensor       |       | tf.bool   |
-linguistics_term    | Text         |       | tf.string |
-one_prefix_method   | Tensor       |       | tf.bool   |
-pair_id             | Tensor       |       | tf.int32  |
-sentence_bad        | Text         |       | tf.string |
-sentence_good       | Text         |       | tf.string |
-simple_LM_method    | Tensor       |       | tf.bool   |
-two_prefix_method   | Tensor       |       | tf.bool   |
+Feature             | Class        | Shape | Dtype  | Description
+:------------------ | :----------- | :---- | :----- | :----------
+                    | FeaturesDict |       |        |
+UID                 | Text         |       | object |
+field               | Text         |       | object |
+lexically_identical | Tensor       |       | bool   |
+linguistics_term    | Text         |       | object |
+one_prefix_method   | Tensor       |       | bool   |
+pair_id             | Tensor       |       | int32  |
+sentence_bad        | Text         |       | object |
+sentence_good       | Text         |       | object |
+simple_LM_method    | Tensor       |       | bool   |
+two_prefix_method   | Tensor       |       | bool   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

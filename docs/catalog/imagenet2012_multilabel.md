@@ -141,28 +141,30 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'correct_multi_labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1000)),
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'is_problematic': tf.bool,
-    'original_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-    'unclear_multi_labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1000)),
-    'wrong_multi_labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1000)),
+    'correct_multi_labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
+    'file_name': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'is_problematic': bool,
+    'original_label': ClassLabel(shape=(), dtype=int64, num_classes=1000),
+    'unclear_multi_labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
+    'wrong_multi_labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                | Shape           | Dtype     | Description
-:------------------- | :------------------- | :-------------- | :-------- | :----------
-                     | FeaturesDict         |                 |           |
-correct_multi_labels | Sequence(ClassLabel) | (None,)         | tf.int64  |
-file_name            | Text                 |                 | tf.string |
-image                | Image                | (None, None, 3) | tf.uint8  |
-is_problematic       | Tensor               |                 | tf.bool   |
-original_label       | ClassLabel           |                 | tf.int64  |
-unclear_multi_labels | Sequence(ClassLabel) | (None,)         | tf.int64  |
-wrong_multi_labels   | Sequence(ClassLabel) | (None,)         | tf.int64  |
+| Feature              | Class                | Shape   | Dtype  | Description |
+| :------------------- | :------------------- | :------ | :----- | :---------- |
+|                      | FeaturesDict         |         |        |             |
+| correct_multi_labels | Sequence(ClassLabel) | (None,) | int64  |             |
+| file_name            | Text                 |         | object |             |
+| image                | Image                | (None,  | uint8  |             |
+:                      :                      : None,   :        :             :
+:                      :                      : 3)      :        :             :
+| is_problematic       | Tensor               |         | bool   |             |
+| original_label       | ClassLabel           |         | int64  |             |
+| unclear_multi_labels | Sequence(ClassLabel) | (None,) | int64  |             |
+| wrong_multi_labels   | Sequence(ClassLabel) | (None,) | int64  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

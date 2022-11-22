@@ -56,30 +56,30 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'author': tf.string,
-    'body': tf.string,
-    'content': tf.string,
-    'id': tf.string,
-    'normalizedBody': tf.string,
-    'subreddit': tf.string,
-    'subreddit_id': tf.string,
-    'summary': tf.string,
+    'author': object,
+    'body': object,
+    'content': object,
+    'id': object,
+    'normalizedBody': object,
+    'subreddit': object,
+    'subreddit_id': object,
+    'summary': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape | Dtype     | Description
-:------------- | :----------- | :---- | :-------- | :----------
-               | FeaturesDict |       |           |
-author         | Tensor       |       | tf.string |
-body           | Tensor       |       | tf.string |
-content        | Tensor       |       | tf.string |
-id             | Tensor       |       | tf.string |
-normalizedBody | Tensor       |       | tf.string |
-subreddit      | Tensor       |       | tf.string |
-subreddit_id   | Tensor       |       | tf.string |
-summary        | Tensor       |       | tf.string |
+Feature        | Class        | Shape | Dtype  | Description
+:------------- | :----------- | :---- | :----- | :----------
+               | FeaturesDict |       |        |
+author         | Tensor       |       | object |
+body           | Tensor       |       | object |
+content        | Tensor       |       | object |
+id             | Tensor       |       | object |
+normalizedBody | Tensor       |       | object |
+subreddit      | Tensor       |       | object |
+subreddit_id   | Tensor       |       | object |
+summary        | Tensor       |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

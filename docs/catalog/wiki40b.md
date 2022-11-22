@@ -45,20 +45,20 @@ found at https://tfhub.dev/google/collections/wiki40b-lm/1.
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'version_id': Text(shape=(), dtype=tf.string),
-    'wikidata_id': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=object),
+    'version_id': Text(shape=(), dtype=object),
+    'wikidata_id': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape | Dtype     | Description
-:---------- | :----------- | :---- | :-------- | :----------
-            | FeaturesDict |       |           |
-text        | Text         |       | tf.string |
-version_id  | Text         |       | tf.string |
-wikidata_id | Text         |       | tf.string |
+Feature     | Class        | Shape | Dtype  | Description
+:---------- | :----------- | :---- | :----- | :----------
+            | FeaturesDict |       |        |
+text        | Text         |       | object |
+version_id  | Text         |       | object |
+wikidata_id | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

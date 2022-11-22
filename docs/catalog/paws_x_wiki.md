@@ -63,20 +63,20 @@ while 1 indicates the pair is a paraphrase.
 
 ```python
 FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=object),
+    'sentence2': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype     | Description
-:-------- | :----------- | :---- | :-------- | :----------
-          | FeaturesDict |       |           |
-label     | ClassLabel   |       | tf.int64  |
-sentence1 | Text         |       | tf.string |
-sentence2 | Text         |       | tf.string |
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | object |
+sentence2 | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

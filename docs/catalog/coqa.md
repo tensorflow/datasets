@@ -52,28 +52,28 @@ Split     | Examples
 ```python
 FeaturesDict({
     'answers': Sequence({
-        'answer_end': tf.int32,
-        'answer_start': tf.int32,
-        'input_text': Text(shape=(), dtype=tf.string),
+        'answer_end': int32,
+        'answer_start': int32,
+        'input_text': Text(shape=(), dtype=object),
     }),
-    'questions': Sequence(Text(shape=(), dtype=tf.string)),
-    'source': Text(shape=(), dtype=tf.string),
-    'story': Text(shape=(), dtype=tf.string),
+    'questions': Sequence(Text(shape=(), dtype=object)),
+    'source': Text(shape=(), dtype=object),
+    'story': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class          | Shape   | Dtype     | Description
-:------------------- | :------------- | :------ | :-------- | :----------
-                     | FeaturesDict   |         |           |
-answers              | Sequence       |         |           |
-answers/answer_end   | Tensor         |         | tf.int32  |
-answers/answer_start | Tensor         |         | tf.int32  |
-answers/input_text   | Text           |         | tf.string |
-questions            | Sequence(Text) | (None,) | tf.string |
-source               | Text           |         | tf.string |
-story                | Text           |         | tf.string |
+Feature              | Class          | Shape   | Dtype  | Description
+:------------------- | :------------- | :------ | :----- | :----------
+                     | FeaturesDict   |         |        |
+answers              | Sequence       |         |        |
+answers/answer_end   | Tensor         |         | int32  |
+answers/answer_start | Tensor         |         | int32  |
+answers/input_text   | Text           |         | object |
+questions            | Sequence(Text) | (None,) | object |
+source               | Text           |         | object |
+story                | Text           |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

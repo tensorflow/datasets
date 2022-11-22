@@ -52,30 +52,29 @@ Split        | Examples
 
 ```python
 FeaturesDict({
-    'embedding': Tensor(shape=(128,), dtype=tf.float32),
-    'index': Scalar(shape=(), dtype=tf.int64),
+    'embedding': Tensor(shape=(128,), dtype=float32),
+    'index': Scalar(shape=(), dtype=int64),
     'neighbors': Sequence({
-        'distance': Scalar(shape=(), dtype=tf.float32),
-        'index': Scalar(shape=(), dtype=tf.int64),
+        'distance': Scalar(shape=(), dtype=float32),
+        'index': Scalar(shape=(), dtype=int64),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature            | Class        | Shape  | Dtype      | Description        |
-| :----------------- | :----------- | :----- | :--------- | :----------------- |
-|                    | FeaturesDict |        |            |                    |
-| embedding          | Tensor       | (128,) | tf.float32 |                    |
-| index              | Scalar       |        | tf.int64   | Index within the   |
-:                    :              :        :            : split.             :
-| neighbors          | Sequence     |        |            | The computed       |
-:                    :              :        :            : neighbors, which   :
-:                    :              :        :            : is only available  :
-:                    :              :        :            : for the test       :
-:                    :              :        :            : split.             :
-| neighbors/distance | Scalar       |        | tf.float32 | Neighbor distance. |
-| neighbors/index    | Scalar       |        | tf.int64   | Neighbor index.    |
+| Feature            | Class        | Shape  | Dtype   | Description         |
+| :----------------- | :----------- | :----- | :------ | :------------------ |
+|                    | FeaturesDict |        |         |                     |
+| embedding          | Tensor       | (128,) | float32 |                     |
+| index              | Scalar       |        | int64   | Index within the    |
+:                    :              :        :         : split.              :
+| neighbors          | Sequence     |        |         | The computed        |
+:                    :              :        :         : neighbors, which is :
+:                    :              :        :         : only available for  :
+:                    :              :        :         : the test split.     :
+| neighbors/distance | Scalar       |        | float32 | Neighbor distance.  |
+| neighbors/index    | Scalar       |        | int64   | Neighbor index.     |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

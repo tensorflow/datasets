@@ -42,27 +42,27 @@ community.
 
 ```python
 FeaturesDict({
-    'answerKey': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'answerKey': ClassLabel(shape=(), dtype=int64, num_classes=5),
     'choices': Sequence({
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-        'text': Text(shape=(), dtype=tf.string),
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
+        'text': Text(shape=(), dtype=object),
     }),
-    'id': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'id': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape | Dtype     | Description
-:------------ | :----------- | :---- | :-------- | :----------
-              | FeaturesDict |       |           |
-answerKey     | ClassLabel   |       | tf.int64  |
-choices       | Sequence     |       |           |
-choices/label | ClassLabel   |       | tf.int64  |
-choices/text  | Text         |       | tf.string |
-id            | Text         |       | tf.string |
-question      | Text         |       | tf.string |
+Feature       | Class        | Shape | Dtype  | Description
+:------------ | :----------- | :---- | :----- | :----------
+              | FeaturesDict |       |        |
+answerKey     | ClassLabel   |       | int64  |
+choices       | Sequence     |       |        |
+choices/label | ClassLabel   |       | int64  |
+choices/text  | Text         |       | object |
+id            | Text         |       | object |
+question      | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

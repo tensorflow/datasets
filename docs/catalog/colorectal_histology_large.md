@@ -35,11 +35,11 @@
 
 *   **Download size**: `707.65 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `464.91 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -51,18 +51,18 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(5000, 5000, 3), dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=object),
+    'image': Image(shape=(5000, 5000, 3), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape           | Dtype     | Description
-:------- | :----------- | :-------------- | :-------- | :----------
-         | FeaturesDict |                 |           |
-filename | Text         |                 | tf.string |
-image    | Image        | (5000, 5000, 3) | tf.uint8  |
+Feature  | Class        | Shape           | Dtype  | Description
+:------- | :----------- | :-------------- | :----- | :----------
+         | FeaturesDict |                 |        |
+filename | Text         |                 | object |
+image    | Image        | (5000, 5000, 3) | uint8  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

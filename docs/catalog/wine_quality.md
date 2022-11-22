@@ -69,40 +69,40 @@ Output variable (based on sensory data):
 ```python
 FeaturesDict({
     'features': FeaturesDict({
-        'alcohol': tf.float32,
-        'chlorides': tf.float32,
-        'citric acid': tf.float32,
-        'density': tf.float32,
-        'fixed acidity': tf.float32,
-        'free sulfur dioxide': tf.float32,
-        'pH': tf.float32,
-        'residual sugar': tf.float32,
-        'sulphates': tf.float64,
-        'total sulfur dioxide': tf.float32,
-        'volatile acidity': tf.float32,
+        'alcohol': float32,
+        'chlorides': float32,
+        'citric acid': float32,
+        'density': float32,
+        'fixed acidity': float32,
+        'free sulfur dioxide': float32,
+        'pH': float32,
+        'residual sugar': float32,
+        'sulphates': float64,
+        'total sulfur dioxide': float32,
+        'volatile acidity': float32,
     }),
-    'quality': tf.int32,
+    'quality': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape | Dtype      | Description
-:---------------------------- | :----------- | :---- | :--------- | :----------
-                              | FeaturesDict |       |            |
-features                      | FeaturesDict |       |            |
-features/alcohol              | Tensor       |       | tf.float32 |
-features/chlorides            | Tensor       |       | tf.float32 |
-features/citric acid          | Tensor       |       | tf.float32 |
-features/density              | Tensor       |       | tf.float32 |
-features/fixed acidity        | Tensor       |       | tf.float32 |
-features/free sulfur dioxide  | Tensor       |       | tf.float32 |
-features/pH                   | Tensor       |       | tf.float32 |
-features/residual sugar       | Tensor       |       | tf.float32 |
-features/sulphates            | Tensor       |       | tf.float64 |
-features/total sulfur dioxide | Tensor       |       | tf.float32 |
-features/volatile acidity     | Tensor       |       | tf.float32 |
-quality                       | Tensor       |       | tf.int32   |
+Feature                       | Class        | Shape | Dtype   | Description
+:---------------------------- | :----------- | :---- | :------ | :----------
+                              | FeaturesDict |       |         |
+features                      | FeaturesDict |       |         |
+features/alcohol              | Tensor       |       | float32 |
+features/chlorides            | Tensor       |       | float32 |
+features/citric acid          | Tensor       |       | float32 |
+features/density              | Tensor       |       | float32 |
+features/fixed acidity        | Tensor       |       | float32 |
+features/free sulfur dioxide  | Tensor       |       | float32 |
+features/pH                   | Tensor       |       | float32 |
+features/residual sugar       | Tensor       |       | float32 |
+features/sulphates            | Tensor       |       | float64 |
+features/total sulfur dioxide | Tensor       |       | float32 |
+features/volatile acidity     | Tensor       |       | float32 |
+quality                       | Tensor       |       | int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -49,24 +49,24 @@ comprehension.
 
 ```python
 FeaturesDict({
-    'answers': Sequence(Text(shape=(), dtype=tf.string)),
-    'article': Text(shape=(), dtype=tf.string),
-    'example_id': Text(shape=(), dtype=tf.string),
-    'options': Sequence(Sequence(Text(shape=(), dtype=tf.string))),
-    'questions': Sequence(Text(shape=(), dtype=tf.string)),
+    'answers': Sequence(Text(shape=(), dtype=object)),
+    'article': Text(shape=(), dtype=object),
+    'example_id': Text(shape=(), dtype=object),
+    'options': Sequence(Sequence(Text(shape=(), dtype=object))),
+    'questions': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class                    | Shape        | Dtype     | Description
-:--------- | :----------------------- | :----------- | :-------- | :----------
-           | FeaturesDict             |              |           |
-answers    | Sequence(Text)           | (None,)      | tf.string |
-article    | Text                     |              | tf.string |
-example_id | Text                     |              | tf.string |
-options    | Sequence(Sequence(Text)) | (None, None) | tf.string |
-questions  | Sequence(Text)           | (None,)      | tf.string |
+Feature    | Class                    | Shape        | Dtype  | Description
+:--------- | :----------------------- | :----------- | :----- | :----------
+           | FeaturesDict             |              |        |
+answers    | Sequence(Text)           | (None,)      | object |
+article    | Text                     |              | object |
+example_id | Text                     |              | object |
+options    | Sequence(Sequence(Text)) | (None, None) | object |
+questions  | Sequence(Text)           | (None,)      | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

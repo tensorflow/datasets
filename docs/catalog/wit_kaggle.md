@@ -132,56 +132,56 @@ Split                            | Examples
 
 ```python
 FeaturesDict({
-    'attribution_passes_lang_id': tf.bool,
-    'caption_alt_text_description': Text(shape=(), dtype=tf.string),
-    'caption_attribution_description': Text(shape=(), dtype=tf.string),
-    'caption_reference_description': Text(shape=(), dtype=tf.string),
-    'caption_title_and_reference_description': Text(shape=(), dtype=tf.string),
-    'context_page_description': Text(shape=(), dtype=tf.string),
-    'context_section_description': Text(shape=(), dtype=tf.string),
-    'embedding': Tensor(shape=(2048,), dtype=tf.float32),
-    'hierarchical_section_title': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image_url': Text(shape=(), dtype=tf.string),
-    'is_main_image': tf.bool,
-    'language': Text(shape=(), dtype=tf.string),
-    'metadata_url': Text(shape=(), dtype=tf.string),
-    'mime_type': Text(shape=(), dtype=tf.string),
-    'original_height': tf.int32,
-    'original_width': tf.int32,
-    'page_changed_recently': tf.bool,
-    'page_title': Text(shape=(), dtype=tf.string),
-    'page_url': Text(shape=(), dtype=tf.string),
-    'section_title': Text(shape=(), dtype=tf.string),
+    'attribution_passes_lang_id': bool,
+    'caption_alt_text_description': Text(shape=(), dtype=object),
+    'caption_attribution_description': Text(shape=(), dtype=object),
+    'caption_reference_description': Text(shape=(), dtype=object),
+    'caption_title_and_reference_description': Text(shape=(), dtype=object),
+    'context_page_description': Text(shape=(), dtype=object),
+    'context_section_description': Text(shape=(), dtype=object),
+    'embedding': Tensor(shape=(2048,), dtype=float32),
+    'hierarchical_section_title': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image_url': Text(shape=(), dtype=object),
+    'is_main_image': bool,
+    'language': Text(shape=(), dtype=object),
+    'metadata_url': Text(shape=(), dtype=object),
+    'mime_type': Text(shape=(), dtype=object),
+    'original_height': int32,
+    'original_width': int32,
+    'page_changed_recently': bool,
+    'page_title': Text(shape=(), dtype=object),
+    'page_url': Text(shape=(), dtype=object),
+    'section_title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                 | Class        | Shape           | Dtype      | Description
-:-------------------------------------- | :----------- | :-------------- | :--------- | :----------
-                                        | FeaturesDict |                 |            |
-attribution_passes_lang_id              | Tensor       |                 | tf.bool    |
-caption_alt_text_description            | Text         |                 | tf.string  |
-caption_attribution_description         | Text         |                 | tf.string  |
-caption_reference_description           | Text         |                 | tf.string  |
-caption_title_and_reference_description | Text         |                 | tf.string  |
-context_page_description                | Text         |                 | tf.string  |
-context_section_description             | Text         |                 | tf.string  |
-embedding                               | Tensor       | (2048,)         | tf.float32 |
-hierarchical_section_title              | Text         |                 | tf.string  |
-image                                   | Image        | (None, None, 3) | tf.uint8   |
-image_url                               | Text         |                 | tf.string  |
-is_main_image                           | Tensor       |                 | tf.bool    |
-language                                | Text         |                 | tf.string  |
-metadata_url                            | Text         |                 | tf.string  |
-mime_type                               | Text         |                 | tf.string  |
-original_height                         | Tensor       |                 | tf.int32   |
-original_width                          | Tensor       |                 | tf.int32   |
-page_changed_recently                   | Tensor       |                 | tf.bool    |
-page_title                              | Text         |                 | tf.string  |
-page_url                                | Text         |                 | tf.string  |
-section_title                           | Text         |                 | tf.string  |
+Feature                                 | Class        | Shape           | Dtype   | Description
+:-------------------------------------- | :----------- | :-------------- | :------ | :----------
+                                        | FeaturesDict |                 |         |
+attribution_passes_lang_id              | Tensor       |                 | bool    |
+caption_alt_text_description            | Text         |                 | object  |
+caption_attribution_description         | Text         |                 | object  |
+caption_reference_description           | Text         |                 | object  |
+caption_title_and_reference_description | Text         |                 | object  |
+context_page_description                | Text         |                 | object  |
+context_section_description             | Text         |                 | object  |
+embedding                               | Tensor       | (2048,)         | float32 |
+hierarchical_section_title              | Text         |                 | object  |
+image                                   | Image        | (None, None, 3) | uint8   |
+image_url                               | Text         |                 | object  |
+is_main_image                           | Tensor       |                 | bool    |
+language                                | Text         |                 | object  |
+metadata_url                            | Text         |                 | object  |
+mime_type                               | Text         |                 | object  |
+original_height                         | Tensor       |                 | int32   |
+original_width                          | Tensor       |                 | int32   |
+page_changed_recently                   | Tensor       |                 | bool    |
+page_title                              | Text         |                 | object  |
+page_url                                | Text         |                 | object  |
+section_title                           | Text         |                 | object  |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -242,26 +242,26 @@ Split                 | Examples
 
 ```python
 FeaturesDict({
-    'caption_title_and_reference_description': Text(shape=(), dtype=tf.string),
-    'embedding': Tensor(shape=(2048,), dtype=tf.float32),
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image_url': Text(shape=(), dtype=tf.string),
-    'metadata_url': Text(shape=(), dtype=tf.string),
+    'caption_title_and_reference_description': Text(shape=(), dtype=object),
+    'embedding': Tensor(shape=(2048,), dtype=float32),
+    'id': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image_url': Text(shape=(), dtype=object),
+    'metadata_url': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                 | Class        | Shape           | Dtype      | Description
-:-------------------------------------- | :----------- | :-------------- | :--------- | :----------
-                                        | FeaturesDict |                 |            |
-caption_title_and_reference_description | Text         |                 | tf.string  |
-embedding                               | Tensor       | (2048,)         | tf.float32 |
-id                                      | Text         |                 | tf.string  |
-image                                   | Image        | (None, None, 3) | tf.uint8   |
-image_url                               | Text         |                 | tf.string  |
-metadata_url                            | Text         |                 | tf.string  |
+Feature                                 | Class        | Shape           | Dtype   | Description
+:-------------------------------------- | :----------- | :-------------- | :------ | :----------
+                                        | FeaturesDict |                 |         |
+caption_title_and_reference_description | Text         |                 | object  |
+embedding                               | Tensor       | (2048,)         | float32 |
+id                                      | Text         |                 | object  |
+image                                   | Image        | (None, None, 3) | uint8   |
+image_url                               | Text         |                 | object  |
+metadata_url                            | Text         |                 | object  |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

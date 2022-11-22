@@ -50,11 +50,9 @@ classes.
 
 *   **Download size**: `565.11 GiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -69,54 +67,56 @@ Split          | Examples
 ```python
 FeaturesDict({
     'bobjects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': tf.int8,
-        'is_group_of': tf.int8,
-        'is_inside': tf.int8,
-        'is_occluded': tf.int8,
-        'is_truncated': tf.int8,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'is_depiction': int8,
+        'is_group_of': int8,
+        'is_inside': int8,
+        'is_occluded': int8,
+        'is_truncated': int8,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=int64, num_classes=6),
     }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
     'objects': Sequence({
-        'confidence': tf.int32,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'confidence': int32,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=int64, num_classes=6),
     }),
     'objects_trainable': Sequence({
-        'confidence': tf.int32,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'confidence': int32,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=int64, num_classes=6),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape           | Dtype      | Description
-:--------------------------- | :----------- | :-------------- | :--------- | :----------
-                             | FeaturesDict |                 |            |
-bobjects                     | Sequence     |                 |            |
-bobjects/bbox                | BBoxFeature  | (4,)            | tf.float32 |
-bobjects/is_depiction        | Tensor       |                 | tf.int8    |
-bobjects/is_group_of         | Tensor       |                 | tf.int8    |
-bobjects/is_inside           | Tensor       |                 | tf.int8    |
-bobjects/is_occluded         | Tensor       |                 | tf.int8    |
-bobjects/is_truncated        | Tensor       |                 | tf.int8    |
-bobjects/label               | ClassLabel   |                 | tf.int64   |
-bobjects/source              | ClassLabel   |                 | tf.int64   |
-image                        | Image        | (None, None, 3) | tf.uint8   |
-image/filename               | Text         |                 | tf.string  |
-objects                      | Sequence     |                 |            |
-objects/confidence           | Tensor       |                 | tf.int32   |
-objects/label                | ClassLabel   |                 | tf.int64   |
-objects/source               | ClassLabel   |                 | tf.int64   |
-objects_trainable            | Sequence     |                 |            |
-objects_trainable/confidence | Tensor       |                 | tf.int32   |
-objects_trainable/label      | ClassLabel   |                 | tf.int64   |
-objects_trainable/source     | ClassLabel   |                 | tf.int64   |
+| Feature                      | Class        | Shape  | Dtype   | Description |
+| :--------------------------- | :----------- | :----- | :------ | :---------- |
+|                              | FeaturesDict |        |         |             |
+| bobjects                     | Sequence     |        |         |             |
+| bobjects/bbox                | BBoxFeature  | (4,)   | float32 |             |
+| bobjects/is_depiction        | Tensor       |        | int8    |             |
+| bobjects/is_group_of         | Tensor       |        | int8    |             |
+| bobjects/is_inside           | Tensor       |        | int8    |             |
+| bobjects/is_occluded         | Tensor       |        | int8    |             |
+| bobjects/is_truncated        | Tensor       |        | int8    |             |
+| bobjects/label               | ClassLabel   |        | int64   |             |
+| bobjects/source              | ClassLabel   |        | int64   |             |
+| image                        | Image        | (None, | uint8   |             |
+:                              :              : None,  :         :             :
+:                              :              : 3)     :         :             :
+| image/filename               | Text         |        | object  |             |
+| objects                      | Sequence     |        |         |             |
+| objects/confidence           | Tensor       |        | int32   |             |
+| objects/label                | ClassLabel   |        | int64   |             |
+| objects/source               | ClassLabel   |        | int64   |             |
+| objects_trainable            | Sequence     |        |         |             |
+| objects_trainable/confidence | Tensor       |        | int32   |             |
+| objects_trainable/label      | ClassLabel   |        | int64   |             |
+| objects_trainable/source     | ClassLabel   |        | int64   |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -178,6 +178,8 @@ objects_trainable/source     | ClassLabel   |                 | tf.int64   |
 
 *   **Config description**: Images at their original resolution and quality.
 
+*   **Dataset size**: `562.42 GiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -225,6 +227,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Images have roughly 300,000 pixels, at 72 JPEG
     quality.
 
+*   **Dataset size**: `81.92 GiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -271,6 +275,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images have roughly 200,000 pixels, at 72 JPEG
     quality.
+
+*   **Dataset size**: `60.70 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

@@ -94,54 +94,54 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(64000,), dtype=tf.float32),
-    'id': tf.string,
+    'audio': Audio(shape=(64000,), dtype=float32),
+    'id': object,
     'instrument': FeaturesDict({
-        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'family': ClassLabel(shape=(), dtype=int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=int64, num_classes=3),
     }),
-    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'pitch': ClassLabel(shape=(), dtype=int64, num_classes=128),
     'qualities': FeaturesDict({
-        'bright': tf.bool,
-        'dark': tf.bool,
-        'distortion': tf.bool,
-        'fast_decay': tf.bool,
-        'long_release': tf.bool,
-        'multiphonic': tf.bool,
-        'nonlinear_env': tf.bool,
-        'percussive': tf.bool,
-        'reverb': tf.bool,
-        'tempo-synced': tf.bool,
+        'bright': bool,
+        'dark': bool,
+        'distortion': bool,
+        'fast_decay': bool,
+        'long_release': bool,
+        'multiphonic': bool,
+        'nonlinear_env': bool,
+        'percussive': bool,
+        'reverb': bool,
+        'tempo-synced': bool,
     }),
-    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'velocity': ClassLabel(shape=(), dtype=int64, num_classes=128),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                 | Class        | Shape    | Dtype      | Description
-:---------------------- | :----------- | :------- | :--------- | :----------
-                        | FeaturesDict |          |            |
-audio                   | Audio        | (64000,) | tf.float32 |
-id                      | Tensor       |          | tf.string  |
-instrument              | FeaturesDict |          |            |
-instrument/family       | ClassLabel   |          | tf.int64   |
-instrument/label        | ClassLabel   |          | tf.int64   |
-instrument/source       | ClassLabel   |          | tf.int64   |
-pitch                   | ClassLabel   |          | tf.int64   |
-qualities               | FeaturesDict |          |            |
-qualities/bright        | Tensor       |          | tf.bool    |
-qualities/dark          | Tensor       |          | tf.bool    |
-qualities/distortion    | Tensor       |          | tf.bool    |
-qualities/fast_decay    | Tensor       |          | tf.bool    |
-qualities/long_release  | Tensor       |          | tf.bool    |
-qualities/multiphonic   | Tensor       |          | tf.bool    |
-qualities/nonlinear_env | Tensor       |          | tf.bool    |
-qualities/percussive    | Tensor       |          | tf.bool    |
-qualities/reverb        | Tensor       |          | tf.bool    |
-qualities/tempo-synced  | Tensor       |          | tf.bool    |
-velocity                | ClassLabel   |          | tf.int64   |
+Feature                 | Class        | Shape    | Dtype   | Description
+:---------------------- | :----------- | :------- | :------ | :----------
+                        | FeaturesDict |          |         |
+audio                   | Audio        | (64000,) | float32 |
+id                      | Tensor       |          | object  |
+instrument              | FeaturesDict |          |         |
+instrument/family       | ClassLabel   |          | int64   |
+instrument/label        | ClassLabel   |          | int64   |
+instrument/source       | ClassLabel   |          | int64   |
+pitch                   | ClassLabel   |          | int64   |
+qualities               | FeaturesDict |          |         |
+qualities/bright        | Tensor       |          | bool    |
+qualities/dark          | Tensor       |          | bool    |
+qualities/distortion    | Tensor       |          | bool    |
+qualities/fast_decay    | Tensor       |          | bool    |
+qualities/long_release  | Tensor       |          | bool    |
+qualities/multiphonic   | Tensor       |          | bool    |
+qualities/nonlinear_env | Tensor       |          | bool    |
+qualities/percussive    | Tensor       |          | bool    |
+qualities/reverb        | Tensor       |          | bool    |
+qualities/tempo-synced  | Tensor       |          | bool    |
+velocity                | ClassLabel   |          | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -204,54 +204,54 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(64000,), dtype=tf.float32),
-    'id': tf.string,
+    'audio': Audio(shape=(64000,), dtype=float32),
+    'id': object,
     'instrument': FeaturesDict({
-        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'family': ClassLabel(shape=(), dtype=int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=int64, num_classes=3),
     }),
-    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'pitch': ClassLabel(shape=(), dtype=int64, num_classes=128),
     'qualities': FeaturesDict({
-        'bright': tf.bool,
-        'dark': tf.bool,
-        'distortion': tf.bool,
-        'fast_decay': tf.bool,
-        'long_release': tf.bool,
-        'multiphonic': tf.bool,
-        'nonlinear_env': tf.bool,
-        'percussive': tf.bool,
-        'reverb': tf.bool,
-        'tempo-synced': tf.bool,
+        'bright': bool,
+        'dark': bool,
+        'distortion': bool,
+        'fast_decay': bool,
+        'long_release': bool,
+        'multiphonic': bool,
+        'nonlinear_env': bool,
+        'percussive': bool,
+        'reverb': bool,
+        'tempo-synced': bool,
     }),
-    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'velocity': ClassLabel(shape=(), dtype=int64, num_classes=128),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                 | Class        | Shape    | Dtype      | Description
-:---------------------- | :----------- | :------- | :--------- | :----------
-                        | FeaturesDict |          |            |
-audio                   | Audio        | (64000,) | tf.float32 |
-id                      | Tensor       |          | tf.string  |
-instrument              | FeaturesDict |          |            |
-instrument/family       | ClassLabel   |          | tf.int64   |
-instrument/label        | ClassLabel   |          | tf.int64   |
-instrument/source       | ClassLabel   |          | tf.int64   |
-pitch                   | ClassLabel   |          | tf.int64   |
-qualities               | FeaturesDict |          |            |
-qualities/bright        | Tensor       |          | tf.bool    |
-qualities/dark          | Tensor       |          | tf.bool    |
-qualities/distortion    | Tensor       |          | tf.bool    |
-qualities/fast_decay    | Tensor       |          | tf.bool    |
-qualities/long_release  | Tensor       |          | tf.bool    |
-qualities/multiphonic   | Tensor       |          | tf.bool    |
-qualities/nonlinear_env | Tensor       |          | tf.bool    |
-qualities/percussive    | Tensor       |          | tf.bool    |
-qualities/reverb        | Tensor       |          | tf.bool    |
-qualities/tempo-synced  | Tensor       |          | tf.bool    |
-velocity                | ClassLabel   |          | tf.int64   |
+Feature                 | Class        | Shape    | Dtype   | Description
+:---------------------- | :----------- | :------- | :------ | :----------
+                        | FeaturesDict |          |         |
+audio                   | Audio        | (64000,) | float32 |
+id                      | Tensor       |          | object  |
+instrument              | FeaturesDict |          |         |
+instrument/family       | ClassLabel   |          | int64   |
+instrument/label        | ClassLabel   |          | int64   |
+instrument/source       | ClassLabel   |          | int64   |
+pitch                   | ClassLabel   |          | int64   |
+qualities               | FeaturesDict |          |         |
+qualities/bright        | Tensor       |          | bool    |
+qualities/dark          | Tensor       |          | bool    |
+qualities/distortion    | Tensor       |          | bool    |
+qualities/fast_decay    | Tensor       |          | bool    |
+qualities/long_release  | Tensor       |          | bool    |
+qualities/multiphonic   | Tensor       |          | bool    |
+qualities/nonlinear_env | Tensor       |          | bool    |
+qualities/percussive    | Tensor       |          | bool    |
+qualities/reverb        | Tensor       |          | bool    |
+qualities/tempo-synced  | Tensor       |          | bool    |
+velocity                | ClassLabel   |          | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -316,68 +316,68 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(64000,), dtype=tf.float32),
+    'audio': Audio(shape=(64000,), dtype=float32),
     'f0': FeaturesDict({
-        'confidence': Tensor(shape=(1000,), dtype=tf.float32),
-        'hz': Tensor(shape=(1000,), dtype=tf.float32),
-        'midi': Tensor(shape=(1000,), dtype=tf.float32),
+        'confidence': Tensor(shape=(1000,), dtype=float32),
+        'hz': Tensor(shape=(1000,), dtype=float32),
+        'midi': Tensor(shape=(1000,), dtype=float32),
     }),
-    'id': tf.string,
+    'id': object,
     'instrument': FeaturesDict({
-        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'family': ClassLabel(shape=(), dtype=int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=int64, num_classes=3),
     }),
     'loudness': FeaturesDict({
-        'db': Tensor(shape=(1000,), dtype=tf.float32),
+        'db': Tensor(shape=(1000,), dtype=float32),
     }),
-    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'pitch': ClassLabel(shape=(), dtype=int64, num_classes=128),
     'qualities': FeaturesDict({
-        'bright': tf.bool,
-        'dark': tf.bool,
-        'distortion': tf.bool,
-        'fast_decay': tf.bool,
-        'long_release': tf.bool,
-        'multiphonic': tf.bool,
-        'nonlinear_env': tf.bool,
-        'percussive': tf.bool,
-        'reverb': tf.bool,
-        'tempo-synced': tf.bool,
+        'bright': bool,
+        'dark': bool,
+        'distortion': bool,
+        'fast_decay': bool,
+        'long_release': bool,
+        'multiphonic': bool,
+        'nonlinear_env': bool,
+        'percussive': bool,
+        'reverb': bool,
+        'tempo-synced': bool,
     }),
-    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'velocity': ClassLabel(shape=(), dtype=int64, num_classes=128),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                 | Class        | Shape    | Dtype      | Description
-:---------------------- | :----------- | :------- | :--------- | :----------
-                        | FeaturesDict |          |            |
-audio                   | Audio        | (64000,) | tf.float32 |
-f0                      | FeaturesDict |          |            |
-f0/confidence           | Tensor       | (1000,)  | tf.float32 |
-f0/hz                   | Tensor       | (1000,)  | tf.float32 |
-f0/midi                 | Tensor       | (1000,)  | tf.float32 |
-id                      | Tensor       |          | tf.string  |
-instrument              | FeaturesDict |          |            |
-instrument/family       | ClassLabel   |          | tf.int64   |
-instrument/label        | ClassLabel   |          | tf.int64   |
-instrument/source       | ClassLabel   |          | tf.int64   |
-loudness                | FeaturesDict |          |            |
-loudness/db             | Tensor       | (1000,)  | tf.float32 |
-pitch                   | ClassLabel   |          | tf.int64   |
-qualities               | FeaturesDict |          |            |
-qualities/bright        | Tensor       |          | tf.bool    |
-qualities/dark          | Tensor       |          | tf.bool    |
-qualities/distortion    | Tensor       |          | tf.bool    |
-qualities/fast_decay    | Tensor       |          | tf.bool    |
-qualities/long_release  | Tensor       |          | tf.bool    |
-qualities/multiphonic   | Tensor       |          | tf.bool    |
-qualities/nonlinear_env | Tensor       |          | tf.bool    |
-qualities/percussive    | Tensor       |          | tf.bool    |
-qualities/reverb        | Tensor       |          | tf.bool    |
-qualities/tempo-synced  | Tensor       |          | tf.bool    |
-velocity                | ClassLabel   |          | tf.int64   |
+Feature                 | Class        | Shape    | Dtype   | Description
+:---------------------- | :----------- | :------- | :------ | :----------
+                        | FeaturesDict |          |         |
+audio                   | Audio        | (64000,) | float32 |
+f0                      | FeaturesDict |          |         |
+f0/confidence           | Tensor       | (1000,)  | float32 |
+f0/hz                   | Tensor       | (1000,)  | float32 |
+f0/midi                 | Tensor       | (1000,)  | float32 |
+id                      | Tensor       |          | object  |
+instrument              | FeaturesDict |          |         |
+instrument/family       | ClassLabel   |          | int64   |
+instrument/label        | ClassLabel   |          | int64   |
+instrument/source       | ClassLabel   |          | int64   |
+loudness                | FeaturesDict |          |         |
+loudness/db             | Tensor       | (1000,)  | float32 |
+pitch                   | ClassLabel   |          | int64   |
+qualities               | FeaturesDict |          |         |
+qualities/bright        | Tensor       |          | bool    |
+qualities/dark          | Tensor       |          | bool    |
+qualities/distortion    | Tensor       |          | bool    |
+qualities/fast_decay    | Tensor       |          | bool    |
+qualities/long_release  | Tensor       |          | bool    |
+qualities/multiphonic   | Tensor       |          | bool    |
+qualities/nonlinear_env | Tensor       |          | bool    |
+qualities/percussive    | Tensor       |          | bool    |
+qualities/reverb        | Tensor       |          | bool    |
+qualities/tempo-synced  | Tensor       |          | bool    |
+velocity                | ClassLabel   |          | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

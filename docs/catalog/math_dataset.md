@@ -50,12 +50,6 @@ train_examples, val_examples = tfds.load(
 
 *   **Download size**: `2.17 GiB`
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
 *   **Splits**:
 
 Split     | Examples
@@ -67,18 +61,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'answer': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-answer   | Text         |       | tf.string |
-question | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+answer   | Text         |       | object |
+question | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -101,6 +95,12 @@ question | Text         |       | tf.string |
 
 
 ## math_dataset/algebra__linear_1d (default config)
+
+*   **Dataset size**: `141.27 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -141,6 +141,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/algebra__linear_1d_composed
 
+*   **Dataset size**: `246.31 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -179,6 +185,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/algebra__linear_2d
+
+*   **Dataset size**: `174.46 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -219,6 +231,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/algebra__linear_2d_composed
 
+*   **Dataset size**: `281.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -257,6 +275,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/algebra__polynomial_roots
+
+*   **Dataset size**: `209.67 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -297,6 +321,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/algebra__polynomial_roots_composed
 
+*   **Dataset size**: `297.84 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -335,6 +365,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/algebra__sequence_next_term
+
+*   **Dataset size**: `186.03 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -375,6 +411,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/algebra__sequence_nth_term
 
+*   **Dataset size**: `222.03 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -413,6 +455,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/arithmetic__add_or_sub
+
+*   **Dataset size**: `138.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -453,6 +501,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/arithmetic__add_or_sub_in_base
 
+*   **Dataset size**: `142.87 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -491,6 +545,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/arithmetic__add_sub_multiple
+
+*   **Dataset size**: `140.18 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -531,6 +591,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/arithmetic__div
 
+*   **Dataset size**: `128.14 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -569,6 +635,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/arithmetic__mixed
+
+*   **Dataset size**: `143.08 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -609,6 +681,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/arithmetic__mul
 
+*   **Dataset size**: `123.42 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -647,6 +725,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/arithmetic__mul_div_multiple
+
+*   **Dataset size**: `140.60 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -687,6 +771,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/arithmetic__nearest_integer_root
 
+*   **Dataset size**: `185.02 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -725,6 +815,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/arithmetic__simplify_surd
+
+*   **Dataset size**: `254.30 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -765,6 +861,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/calculus__differentiate
 
+*   **Dataset size**: `244.75 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -803,6 +905,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/calculus__differentiate_composed
+
+*   **Dataset size**: `310.79 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -843,6 +951,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/comparison__closest
 
+*   **Dataset size**: `179.75 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -881,6 +995,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/comparison__closest_composed
+
+*   **Dataset size**: `256.87 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -921,6 +1041,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/comparison__kth_biggest
 
+*   **Dataset size**: `195.94 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -959,6 +1085,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/comparison__kth_biggest_composed
+
+*   **Dataset size**: `267.90 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -999,6 +1131,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/comparison__pair
 
+*   **Dataset size**: `135.12 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1037,6 +1175,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/comparison__pair_composed
+
+*   **Dataset size**: `231.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1077,6 +1221,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/comparison__sort
 
+*   **Dataset size**: `179.28 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1115,6 +1265,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/comparison__sort_composed
+
+*   **Dataset size**: `260.00 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1155,6 +1311,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/measurement__conversion
 
+*   **Dataset size**: `166.67 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1193,6 +1355,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/measurement__time
+
+*   **Dataset size**: `165.06 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1233,6 +1401,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__base_conversion
 
+*   **Dataset size**: `139.60 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1271,6 +1445,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/numbers__div_remainder
+
+*   **Dataset size**: `172.82 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1311,6 +1491,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__div_remainder_composed
 
+*   **Dataset size**: `273.13 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1349,6 +1535,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/numbers__gcd
+
+*   **Dataset size**: `175.57 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1389,6 +1581,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__gcd_composed
 
+*   **Dataset size**: `284.52 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1427,6 +1625,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/numbers__is_factor
+
+*   **Dataset size**: `125.69 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1467,6 +1671,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__is_factor_composed
 
+*   **Dataset size**: `232.11 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1505,6 +1715,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/numbers__is_prime
+
+*   **Dataset size**: `123.88 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1545,6 +1761,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__is_prime_composed
 
+*   **Dataset size**: `231.57 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1583,6 +1805,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/numbers__lcm
+
+*   **Dataset size**: `184.13 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1623,6 +1851,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__lcm_composed
 
+*   **Dataset size**: `267.70 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1661,6 +1895,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/numbers__list_prime_factors
+
+*   **Dataset size**: `158.40 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1701,6 +1941,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__list_prime_factors_composed
 
+*   **Dataset size**: `251.96 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1739,6 +1985,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/numbers__place_value
+
+*   **Dataset size**: `144.20 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1779,6 +2031,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__place_value_composed
 
+*   **Dataset size**: `243.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1817,6 +2075,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/numbers__round_number
+
+*   **Dataset size**: `159.81 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1857,6 +2121,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/numbers__round_number_composed
 
+*   **Dataset size**: `247.42 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1895,6 +2165,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/polynomials__add
+
+*   **Dataset size**: `304.24 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1935,6 +2211,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/polynomials__coefficient_named
 
+*   **Dataset size**: `266.31 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1973,6 +2255,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/polynomials__collect
+
+*   **Dataset size**: `190.81 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2013,6 +2301,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/polynomials__compose
 
+*   **Dataset size**: `280.29 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2051,6 +2345,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/polynomials__evaluate
+
+*   **Dataset size**: `162.76 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2091,6 +2391,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/polynomials__evaluate_composed
 
+*   **Dataset size**: `272.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2129,6 +2435,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/polynomials__expand
+
+*   **Dataset size**: `248.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2169,6 +2481,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/polynomials__simplify_power
 
+*   **Dataset size**: `262.49 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2208,6 +2526,12 @@ dataButton.addEventListener('click', async () => {
 
 ## math_dataset/probability__swr_p_level_set
 
+*   **Dataset size**: `273.22 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2246,6 +2570,12 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## math_dataset/probability__swr_p_sequence
+
+*   **Dataset size**: `261.34 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

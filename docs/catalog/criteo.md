@@ -98,46 +98,46 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'conversion': tf.bool,
-    'exposure': tf.bool,
-    'f0': tf.float32,
-    'f1': tf.float32,
-    'f10': tf.float32,
-    'f11': tf.float32,
-    'f2': tf.float32,
-    'f3': tf.float32,
-    'f4': tf.float32,
-    'f5': tf.float32,
-    'f6': tf.float32,
-    'f7': tf.float32,
-    'f8': tf.float32,
-    'f9': tf.float32,
-    'treatment': tf.int64,
-    'visit': tf.bool,
+    'conversion': bool,
+    'exposure': bool,
+    'f0': float32,
+    'f1': float32,
+    'f10': float32,
+    'f11': float32,
+    'f2': float32,
+    'f3': float32,
+    'f4': float32,
+    'f5': float32,
+    'f6': float32,
+    'f7': float32,
+    'f8': float32,
+    'f9': float32,
+    'treatment': int64,
+    'visit': bool,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype      | Description
-:--------- | :----------- | :---- | :--------- | :----------
-           | FeaturesDict |       |            |
-conversion | Tensor       |       | tf.bool    |
-exposure   | Tensor       |       | tf.bool    |
-f0         | Tensor       |       | tf.float32 |
-f1         | Tensor       |       | tf.float32 |
-f10        | Tensor       |       | tf.float32 |
-f11        | Tensor       |       | tf.float32 |
-f2         | Tensor       |       | tf.float32 |
-f3         | Tensor       |       | tf.float32 |
-f4         | Tensor       |       | tf.float32 |
-f5         | Tensor       |       | tf.float32 |
-f6         | Tensor       |       | tf.float32 |
-f7         | Tensor       |       | tf.float32 |
-f8         | Tensor       |       | tf.float32 |
-f9         | Tensor       |       | tf.float32 |
-treatment  | Tensor       |       | tf.int64   |
-visit      | Tensor       |       | tf.bool    |
+Feature    | Class        | Shape | Dtype   | Description
+:--------- | :----------- | :---- | :------ | :----------
+           | FeaturesDict |       |         |
+conversion | Tensor       |       | bool    |
+exposure   | Tensor       |       | bool    |
+f0         | Tensor       |       | float32 |
+f1         | Tensor       |       | float32 |
+f10        | Tensor       |       | float32 |
+f11        | Tensor       |       | float32 |
+f2         | Tensor       |       | float32 |
+f3         | Tensor       |       | float32 |
+f4         | Tensor       |       | float32 |
+f5         | Tensor       |       | float32 |
+f6         | Tensor       |       | float32 |
+f7         | Tensor       |       | float32 |
+f8         | Tensor       |       | float32 |
+f9         | Tensor       |       | float32 |
+treatment  | Tensor       |       | int64   |
+visit      | Tensor       |       | bool    |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

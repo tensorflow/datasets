@@ -63,22 +63,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'age': tf.float32,
-    'height': tf.float32,
-    'male': tf.int32,
-    'weight': tf.float32,
+    'age': float32,
+    'height': float32,
+    'male': int32,
+    'weight': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape | Dtype      | Description
-:------ | :----------- | :---- | :--------- | :----------
-        | FeaturesDict |       |            |
-age     | Tensor       |       | tf.float32 |
-height  | Tensor       |       | tf.float32 |
-male    | Tensor       |       | tf.int32   |
-weight  | Tensor       |       | tf.float32 |
+Feature | Class        | Shape | Dtype   | Description
+:------ | :----------- | :---- | :------ | :----------
+        | FeaturesDict |       |         |
+age     | Tensor       |       | float32 |
+height  | Tensor       |       | float32 |
+male    | Tensor       |       | int32   |
+weight  | Tensor       |       | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

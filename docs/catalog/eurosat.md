@@ -40,12 +40,6 @@ URL: https://github.com/phelber/eurosat
 
     *   **`2.0.0`** (default): No release notes.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
 *   **Splits**:
 
 Split     | Examples
@@ -72,24 +66,30 @@ Split     | Examples
 
 *   **Download size**: `89.91 MiB`
 
+*   **Dataset size**: `89.50 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'filename': Text(shape=(), dtype=object),
+    'image': Image(shape=(64, 64, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape       | Dtype     | Description
-:------- | :----------- | :---------- | :-------- | :----------
-         | FeaturesDict |             |           |
-filename | Text         |             | tf.string |
-image    | Image        | (64, 64, 3) | tf.uint8  |
-label    | ClassLabel   |             | tf.int64  |
+Feature  | Class        | Shape       | Dtype  | Description
+:------- | :----------- | :---------- | :----- | :----------
+         | FeaturesDict |             |        |
+filename | Text         |             | object |
+image    | Image        | (64, 64, 3) | uint8  |
+label    | ClassLabel   |             | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -143,24 +143,30 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `1.93 GiB`
 
+*   **Dataset size**: `5.36 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'sentinel2': Tensor(shape=(64, 64, 13), dtype=tf.float32),
+    'filename': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'sentinel2': Tensor(shape=(64, 64, 13), dtype=float32),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape        | Dtype      | Description
-:-------- | :----------- | :----------- | :--------- | :----------
-          | FeaturesDict |              |            |
-filename  | Text         |              | tf.string  |
-label     | ClassLabel   |              | tf.int64   |
-sentinel2 | Tensor       | (64, 64, 13) | tf.float32 |
+Feature   | Class        | Shape        | Dtype   | Description
+:-------- | :----------- | :----------- | :------ | :----------
+          | FeaturesDict |              |         |
+filename  | Text         |              | object  |
+label     | ClassLabel   |              | int64   |
+sentinel2 | Tensor       | (64, 64, 13) | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

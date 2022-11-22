@@ -64,35 +64,35 @@ Split          | Examples
 ```python
 FeaturesDict({
     'bobjects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_group_of': tf.bool,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=500),
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'is_group_of': bool,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=500),
     }),
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'id': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
     'objects': Sequence({
-        'confidence': tf.float32,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=500),
-        'source': Text(shape=(), dtype=tf.string),
+        'confidence': float32,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=500),
+        'source': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class        | Shape           | Dtype      | Description
-:------------------- | :----------- | :-------------- | :--------- | :----------
-                     | FeaturesDict |                 |            |
-bobjects             | Sequence     |                 |            |
-bobjects/bbox        | BBoxFeature  | (4,)            | tf.float32 |
-bobjects/is_group_of | Tensor       |                 | tf.bool    |
-bobjects/label       | ClassLabel   |                 | tf.int64   |
-id                   | Text         |                 | tf.string  |
-image                | Image        | (None, None, 3) | tf.uint8   |
-objects              | Sequence     |                 |            |
-objects/confidence   | Tensor       |                 | tf.float32 |
-objects/label        | ClassLabel   |                 | tf.int64   |
-objects/source       | Text         |                 | tf.string  |
+Feature              | Class        | Shape           | Dtype   | Description
+:------------------- | :----------- | :-------------- | :------ | :----------
+                     | FeaturesDict |                 |         |
+bobjects             | Sequence     |                 |         |
+bobjects/bbox        | BBoxFeature  | (4,)            | float32 |
+bobjects/is_group_of | Tensor       |                 | bool    |
+bobjects/label       | ClassLabel   |                 | int64   |
+id                   | Text         |                 | object  |
+image                | Image        | (None, None, 3) | uint8   |
+objects              | Sequence     |                 |         |
+objects/confidence   | Tensor       |                 | float32 |
+objects/label        | ClassLabel   |                 | int64   |
+objects/source       | Text         |                 | object  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -106,7 +106,7 @@ objects/source       | Text         |                 | tf.string  |
 *   **Config description**: Images have at most 200,000 pixels, at 72 JPEG
     quality.
 
-*   **Dataset size**: `59.40 GiB`
+*   **Dataset size**: `59.06 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -155,7 +155,7 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Images have at most 300,000 pixels, at 72 JPEG
     quality.
 
-*   **Dataset size**: `80.44 GiB`
+*   **Dataset size**: `80.10 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

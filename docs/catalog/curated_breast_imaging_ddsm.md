@@ -136,20 +136,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'id': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape           | Dtype     | Description
-:------ | :----------- | :-------------- | :-------- | :----------
-        | FeaturesDict |                 |           |
-id      | Text         |                 | tf.string |
-image   | Image        | (None, None, 1) | tf.uint8  |
-label   | ClassLabel   |                 | tf.int64  |
+Feature | Class        | Shape           | Dtype  | Description
+:------ | :----------- | :-------------- | :----- | :----------
+        | FeaturesDict |                 |        |
+id      | Text         |                 | object |
+image   | Image        | (None, None, 1) | uint8  |
+label   | ClassLabel   |                 | int64  |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -214,40 +214,40 @@ Split     | Examples
 ```python
 FeaturesDict({
     'abnormalities': Sequence({
-        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-        'calc_distribution': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-        'calc_type': ClassLabel(shape=(), dtype=tf.int64, num_classes=48),
-        'id': tf.int32,
-        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
-        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'assessment': ClassLabel(shape=(), dtype=int64, num_classes=6),
+        'calc_distribution': ClassLabel(shape=(), dtype=int64, num_classes=10),
+        'calc_type': ClassLabel(shape=(), dtype=int64, num_classes=48),
+        'id': int32,
+        'mask': Image(shape=(None, None, 1), dtype=uint8),
+        'pathology': ClassLabel(shape=(), dtype=int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=int64, num_classes=6),
     }),
-    'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 1), dtype=tf.uint8),
-    'patient': Text(shape=(), dtype=tf.string),
-    'view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'breast': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'id': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 1), dtype=uint8),
+    'patient': Text(shape=(), dtype=object),
+    'view': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                         | Class        | Shape           | Dtype     | Description
-:------------------------------ | :----------- | :-------------- | :-------- | :----------
-                                | FeaturesDict |                 |           |
-abnormalities                   | Sequence     |                 |           |
-abnormalities/assessment        | ClassLabel   |                 | tf.int64  |
-abnormalities/calc_distribution | ClassLabel   |                 | tf.int64  |
-abnormalities/calc_type         | ClassLabel   |                 | tf.int64  |
-abnormalities/id                | Tensor       |                 | tf.int32  |
-abnormalities/mask              | Image        | (None, None, 1) | tf.uint8  |
-abnormalities/pathology         | ClassLabel   |                 | tf.int64  |
-abnormalities/subtlety          | ClassLabel   |                 | tf.int64  |
-breast                          | ClassLabel   |                 | tf.int64  |
-id                              | Text         |                 | tf.string |
-image                           | Image        | (None, None, 1) | tf.uint8  |
-patient                         | Text         |                 | tf.string |
-view                            | ClassLabel   |                 | tf.int64  |
+Feature                         | Class        | Shape           | Dtype  | Description
+:------------------------------ | :----------- | :-------------- | :----- | :----------
+                                | FeaturesDict |                 |        |
+abnormalities                   | Sequence     |                 |        |
+abnormalities/assessment        | ClassLabel   |                 | int64  |
+abnormalities/calc_distribution | ClassLabel   |                 | int64  |
+abnormalities/calc_type         | ClassLabel   |                 | int64  |
+abnormalities/id                | Tensor       |                 | int32  |
+abnormalities/mask              | Image        | (None, None, 1) | uint8  |
+abnormalities/pathology         | ClassLabel   |                 | int64  |
+abnormalities/subtlety          | ClassLabel   |                 | int64  |
+breast                          | ClassLabel   |                 | int64  |
+id                              | Text         |                 | object |
+image                           | Image        | (None, None, 1) | uint8  |
+patient                         | Text         |                 | object |
+view                            | ClassLabel   |                 | int64  |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -312,44 +312,42 @@ Split     | Examples
 ```python
 FeaturesDict({
     'abnormalities': Sequence({
-        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-        'id': tf.int32,
-        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
-        'mass_margins': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-        'mass_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=21),
-        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'assessment': ClassLabel(shape=(), dtype=int64, num_classes=6),
+        'id': int32,
+        'mask': Image(shape=(None, None, 1), dtype=uint8),
+        'mass_margins': ClassLabel(shape=(), dtype=int64, num_classes=20),
+        'mass_shape': ClassLabel(shape=(), dtype=int64, num_classes=21),
+        'pathology': ClassLabel(shape=(), dtype=int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=int64, num_classes=6),
     }),
-    'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 1), dtype=tf.uint8),
-    'patient': Text(shape=(), dtype=tf.string),
-    'view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'breast': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'id': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 1), dtype=uint8),
+    'patient': Text(shape=(), dtype=object),
+    'view': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature                    | Class        | Shape  | Dtype     | Description |
-| :------------------------- | :----------- | :----- | :-------- | :---------- |
-|                            | FeaturesDict |        |           |             |
-| abnormalities              | Sequence     |        |           |             |
-| abnormalities/assessment   | ClassLabel   |        | tf.int64  |             |
-| abnormalities/id           | Tensor       |        | tf.int32  |             |
-| abnormalities/mask         | Image        | (None, | tf.uint8  |             |
-:                            :              : None,  :           :             :
-:                            :              : 1)     :           :             :
-| abnormalities/mass_margins | ClassLabel   |        | tf.int64  |             |
-| abnormalities/mass_shape   | ClassLabel   |        | tf.int64  |             |
-| abnormalities/pathology    | ClassLabel   |        | tf.int64  |             |
-| abnormalities/subtlety     | ClassLabel   |        | tf.int64  |             |
-| breast                     | ClassLabel   |        | tf.int64  |             |
-| id                         | Text         |        | tf.string |             |
-| image                      | Image        | (None, | tf.uint8  |             |
-:                            :              : None,  :           :             :
-:                            :              : 1)     :           :             :
-| patient                    | Text         |        | tf.string |             |
-| view                       | ClassLabel   |        | tf.int64  |             |
+| Feature                    | Class        | Shape    | Dtype  | Description |
+| :------------------------- | :----------- | :------- | :----- | :---------- |
+|                            | FeaturesDict |          |        |             |
+| abnormalities              | Sequence     |          |        |             |
+| abnormalities/assessment   | ClassLabel   |          | int64  |             |
+| abnormalities/id           | Tensor       |          | int32  |             |
+| abnormalities/mask         | Image        | (None,   | uint8  |             |
+:                            :              : None, 1) :        :             :
+| abnormalities/mass_margins | ClassLabel   |          | int64  |             |
+| abnormalities/mass_shape   | ClassLabel   |          | int64  |             |
+| abnormalities/pathology    | ClassLabel   |          | int64  |             |
+| abnormalities/subtlety     | ClassLabel   |          | int64  |             |
+| breast                     | ClassLabel   |          | int64  |             |
+| id                         | Text         |          | object |             |
+| image                      | Image        | (None,   | uint8  |             |
+:                            :              : None, 1) :        :             :
+| patient                    | Text         |          | object |             |
+| view                       | ClassLabel   |          | int64  |             |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

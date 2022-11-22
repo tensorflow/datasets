@@ -34,28 +34,22 @@ horses/zebras, apple/orange,...)
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape           | Dtype    | Description
-:------ | :----------- | :-------------- | :------- | :----------
-        | FeaturesDict |                 |          |
-image   | Image        | (None, None, 3) | tf.uint8 |
-label   | ClassLabel   |                 | tf.int64 |
+Feature | Class        | Shape           | Dtype | Description
+:------ | :----------- | :-------------- | :---- | :----------
+        | FeaturesDict |                 |       |
+image   | Image        | (None, None, 3) | uint8 |
+label   | ClassLabel   |                 | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -87,6 +81,12 @@ label   | ClassLabel   |                 | tf.int64 |
 ## cycle_gan/apple2orange (default config)
 
 *   **Download size**: `74.82 MiB`
+
+*   **Dataset size**: `76.89 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
@@ -143,6 +143,12 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `126.50 MiB`
 
+*   **Dataset size**: `127.52 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split      | Examples
@@ -197,6 +203,12 @@ dataButton.addEventListener('click', async () => {
 ## cycle_gan/horse2zebra
 
 *   **Download size**: `111.45 MiB`
+
+*   **Dataset size**: `112.55 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
@@ -253,6 +265,12 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `291.09 MiB`
 
+*   **Dataset size**: `295.75 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Splits**:
 
 Split      | Examples
@@ -307,6 +325,12 @@ dataButton.addEventListener('click', async () => {
 ## cycle_gan/cezanne2photo
 
 *   **Download size**: `266.92 MiB`
+
+*   **Dataset size**: `269.56 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
@@ -363,6 +387,12 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `279.38 MiB`
 
+*   **Dataset size**: `282.62 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Splits**:
 
 Split      | Examples
@@ -417,6 +447,12 @@ dataButton.addEventListener('click', async () => {
 ## cycle_gan/vangogh2photo
 
 *   **Download size**: `292.39 MiB`
+
+*   **Dataset size**: `295.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
@@ -473,6 +509,12 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `1.38 GiB`
 
+*   **Dataset size**: `701.08 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Splits**:
 
 Split      | Examples
@@ -527,6 +569,12 @@ dataButton.addEventListener('click', async () => {
 ## cycle_gan/cityscapes
 
 *   **Download size**: `266.65 MiB`
+
+*   **Dataset size**: `167.36 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
@@ -583,6 +631,12 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `33.51 MiB`
 
+*   **Dataset size**: `34.83 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split      | Examples
@@ -637,6 +691,12 @@ dataButton.addEventListener('click', async () => {
 ## cycle_gan/iphone2dslr_flower
 
 *   **Download size**: `324.22 MiB`
+
+*   **Dataset size**: `325.82 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 

@@ -42,11 +42,11 @@ networks are presented in the original paper.
 
 *   **Download size**: `2.62 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.88 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -58,72 +58,72 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'class_label': tf.float32,
-    'jet_1_b-tag': tf.float64,
-    'jet_1_eta': tf.float64,
-    'jet_1_phi': tf.float64,
-    'jet_1_pt': tf.float64,
-    'jet_2_b-tag': tf.float64,
-    'jet_2_eta': tf.float64,
-    'jet_2_phi': tf.float64,
-    'jet_2_pt': tf.float64,
-    'jet_3_b-tag': tf.float64,
-    'jet_3_eta': tf.float64,
-    'jet_3_phi': tf.float64,
-    'jet_3_pt': tf.float64,
-    'jet_4_b-tag': tf.float64,
-    'jet_4_eta': tf.float64,
-    'jet_4_phi': tf.float64,
-    'jet_4_pt': tf.float64,
-    'lepton_eta': tf.float64,
-    'lepton_pT': tf.float64,
-    'lepton_phi': tf.float64,
-    'm_bb': tf.float64,
-    'm_jj': tf.float64,
-    'm_jjj': tf.float64,
-    'm_jlv': tf.float64,
-    'm_lv': tf.float64,
-    'm_wbb': tf.float64,
-    'm_wwbb': tf.float64,
-    'missing_energy_magnitude': tf.float64,
-    'missing_energy_phi': tf.float64,
+    'class_label': float32,
+    'jet_1_b-tag': float64,
+    'jet_1_eta': float64,
+    'jet_1_phi': float64,
+    'jet_1_pt': float64,
+    'jet_2_b-tag': float64,
+    'jet_2_eta': float64,
+    'jet_2_phi': float64,
+    'jet_2_pt': float64,
+    'jet_3_b-tag': float64,
+    'jet_3_eta': float64,
+    'jet_3_phi': float64,
+    'jet_3_pt': float64,
+    'jet_4_b-tag': float64,
+    'jet_4_eta': float64,
+    'jet_4_phi': float64,
+    'jet_4_pt': float64,
+    'lepton_eta': float64,
+    'lepton_pT': float64,
+    'lepton_phi': float64,
+    'm_bb': float64,
+    'm_jj': float64,
+    'm_jjj': float64,
+    'm_jlv': float64,
+    'm_lv': float64,
+    'm_wbb': float64,
+    'm_wwbb': float64,
+    'missing_energy_magnitude': float64,
+    'missing_energy_phi': float64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                  | Class        | Shape | Dtype      | Description
-:----------------------- | :----------- | :---- | :--------- | :----------
-                         | FeaturesDict |       |            |
-class_label              | Tensor       |       | tf.float32 |
-jet_1_b-tag              | Tensor       |       | tf.float64 |
-jet_1_eta                | Tensor       |       | tf.float64 |
-jet_1_phi                | Tensor       |       | tf.float64 |
-jet_1_pt                 | Tensor       |       | tf.float64 |
-jet_2_b-tag              | Tensor       |       | tf.float64 |
-jet_2_eta                | Tensor       |       | tf.float64 |
-jet_2_phi                | Tensor       |       | tf.float64 |
-jet_2_pt                 | Tensor       |       | tf.float64 |
-jet_3_b-tag              | Tensor       |       | tf.float64 |
-jet_3_eta                | Tensor       |       | tf.float64 |
-jet_3_phi                | Tensor       |       | tf.float64 |
-jet_3_pt                 | Tensor       |       | tf.float64 |
-jet_4_b-tag              | Tensor       |       | tf.float64 |
-jet_4_eta                | Tensor       |       | tf.float64 |
-jet_4_phi                | Tensor       |       | tf.float64 |
-jet_4_pt                 | Tensor       |       | tf.float64 |
-lepton_eta               | Tensor       |       | tf.float64 |
-lepton_pT                | Tensor       |       | tf.float64 |
-lepton_phi               | Tensor       |       | tf.float64 |
-m_bb                     | Tensor       |       | tf.float64 |
-m_jj                     | Tensor       |       | tf.float64 |
-m_jjj                    | Tensor       |       | tf.float64 |
-m_jlv                    | Tensor       |       | tf.float64 |
-m_lv                     | Tensor       |       | tf.float64 |
-m_wbb                    | Tensor       |       | tf.float64 |
-m_wwbb                   | Tensor       |       | tf.float64 |
-missing_energy_magnitude | Tensor       |       | tf.float64 |
-missing_energy_phi       | Tensor       |       | tf.float64 |
+Feature                  | Class        | Shape | Dtype   | Description
+:----------------------- | :----------- | :---- | :------ | :----------
+                         | FeaturesDict |       |         |
+class_label              | Tensor       |       | float32 |
+jet_1_b-tag              | Tensor       |       | float64 |
+jet_1_eta                | Tensor       |       | float64 |
+jet_1_phi                | Tensor       |       | float64 |
+jet_1_pt                 | Tensor       |       | float64 |
+jet_2_b-tag              | Tensor       |       | float64 |
+jet_2_eta                | Tensor       |       | float64 |
+jet_2_phi                | Tensor       |       | float64 |
+jet_2_pt                 | Tensor       |       | float64 |
+jet_3_b-tag              | Tensor       |       | float64 |
+jet_3_eta                | Tensor       |       | float64 |
+jet_3_phi                | Tensor       |       | float64 |
+jet_3_pt                 | Tensor       |       | float64 |
+jet_4_b-tag              | Tensor       |       | float64 |
+jet_4_eta                | Tensor       |       | float64 |
+jet_4_phi                | Tensor       |       | float64 |
+jet_4_pt                 | Tensor       |       | float64 |
+lepton_eta               | Tensor       |       | float64 |
+lepton_pT                | Tensor       |       | float64 |
+lepton_phi               | Tensor       |       | float64 |
+m_bb                     | Tensor       |       | float64 |
+m_jj                     | Tensor       |       | float64 |
+m_jjj                    | Tensor       |       | float64 |
+m_jlv                    | Tensor       |       | float64 |
+m_lv                     | Tensor       |       | float64 |
+m_wbb                    | Tensor       |       | float64 |
+m_wwbb                   | Tensor       |       | float64 |
+missing_energy_magnitude | Tensor       |       | float64 |
+missing_energy_phi       | Tensor       |       | float64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -35,11 +35,11 @@ specific class)
 
 *   **Download size**: `1.94 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.90 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -52,62 +52,61 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'PetID': Text(shape=(), dtype=tf.string),
+    'PetID': Text(shape=(), dtype=object),
     'attributes': FeaturesDict({
-        'Age': tf.int64,
-        'Breed1': tf.int64,
-        'Breed2': tf.int64,
-        'Color1': tf.int64,
-        'Color2': tf.int64,
-        'Color3': tf.int64,
-        'Dewormed': tf.int64,
-        'Fee': tf.int64,
-        'FurLength': tf.int64,
-        'Gender': tf.int64,
-        'Health': tf.int64,
-        'MaturitySize': tf.int64,
-        'Quantity': tf.int64,
-        'State': tf.int64,
-        'Sterilized': tf.int64,
-        'Type': tf.int64,
-        'Vaccinated': tf.int64,
-        'VideoAmt': tf.int64,
+        'Age': int64,
+        'Breed1': int64,
+        'Breed2': int64,
+        'Color1': int64,
+        'Color2': int64,
+        'Color3': int64,
+        'Dewormed': int64,
+        'Fee': int64,
+        'FurLength': int64,
+        'Gender': int64,
+        'Health': int64,
+        'MaturitySize': int64,
+        'Quantity': int64,
+        'State': int64,
+        'Sterilized': int64,
+        'Type': int64,
+        'Vaccinated': int64,
+        'VideoAmt': int64,
     }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature                 | Class        | Shape    | Dtype     | Description |
-| :---------------------- | :----------- | :------- | :-------- | :---------- |
-|                         | FeaturesDict |          |           |             |
-| PetID                   | Text         |          | tf.string |             |
-| attributes              | FeaturesDict |          |           |             |
-| attributes/Age          | Tensor       |          | tf.int64  |             |
-| attributes/Breed1       | Tensor       |          | tf.int64  |             |
-| attributes/Breed2       | Tensor       |          | tf.int64  |             |
-| attributes/Color1       | Tensor       |          | tf.int64  |             |
-| attributes/Color2       | Tensor       |          | tf.int64  |             |
-| attributes/Color3       | Tensor       |          | tf.int64  |             |
-| attributes/Dewormed     | Tensor       |          | tf.int64  |             |
-| attributes/Fee          | Tensor       |          | tf.int64  |             |
-| attributes/FurLength    | Tensor       |          | tf.int64  |             |
-| attributes/Gender       | Tensor       |          | tf.int64  |             |
-| attributes/Health       | Tensor       |          | tf.int64  |             |
-| attributes/MaturitySize | Tensor       |          | tf.int64  |             |
-| attributes/Quantity     | Tensor       |          | tf.int64  |             |
-| attributes/State        | Tensor       |          | tf.int64  |             |
-| attributes/Sterilized   | Tensor       |          | tf.int64  |             |
-| attributes/Type         | Tensor       |          | tf.int64  |             |
-| attributes/Vaccinated   | Tensor       |          | tf.int64  |             |
-| attributes/VideoAmt     | Tensor       |          | tf.int64  |             |
-| image                   | Image        | (None,   | tf.uint8  |             |
-:                         :              : None, 3) :           :             :
-| image/filename          | Text         |          | tf.string |             |
-| label                   | ClassLabel   |          | tf.int64  |             |
+Feature                 | Class        | Shape           | Dtype  | Description
+:---------------------- | :----------- | :-------------- | :----- | :----------
+                        | FeaturesDict |                 |        |
+PetID                   | Text         |                 | object |
+attributes              | FeaturesDict |                 |        |
+attributes/Age          | Tensor       |                 | int64  |
+attributes/Breed1       | Tensor       |                 | int64  |
+attributes/Breed2       | Tensor       |                 | int64  |
+attributes/Color1       | Tensor       |                 | int64  |
+attributes/Color2       | Tensor       |                 | int64  |
+attributes/Color3       | Tensor       |                 | int64  |
+attributes/Dewormed     | Tensor       |                 | int64  |
+attributes/Fee          | Tensor       |                 | int64  |
+attributes/FurLength    | Tensor       |                 | int64  |
+attributes/Gender       | Tensor       |                 | int64  |
+attributes/Health       | Tensor       |                 | int64  |
+attributes/MaturitySize | Tensor       |                 | int64  |
+attributes/Quantity     | Tensor       |                 | int64  |
+attributes/State        | Tensor       |                 | int64  |
+attributes/Sterilized   | Tensor       |                 | int64  |
+attributes/Type         | Tensor       |                 | int64  |
+attributes/Vaccinated   | Tensor       |                 | int64  |
+attributes/VideoAmt     | Tensor       |                 | int64  |
+image                   | Image        | (None, None, 3) | uint8  |
+image/filename          | Text         |                 | object |
+label                   | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

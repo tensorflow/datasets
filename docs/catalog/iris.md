@@ -40,11 +40,11 @@ separable from each other.
 
 *   **Download size**: `4.44 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.62 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -56,18 +56,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'features': Tensor(shape=(4,), dtype=tf.float32),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'features': Tensor(shape=(4,), dtype=float32),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype      | Description
-:------- | :----------- | :---- | :--------- | :----------
-         | FeaturesDict |       |            |
-features | Tensor       | (4,)  | tf.float32 |
-label    | ClassLabel   |       | tf.int64   |
+Feature  | Class        | Shape | Dtype   | Description
+:------- | :----------- | :---- | :------ | :----------
+         | FeaturesDict |       |         |
+features | Tensor       | (4,)  | float32 |
+label    | ClassLabel   |       | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

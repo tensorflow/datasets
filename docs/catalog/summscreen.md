@@ -89,26 +89,26 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'episode_number': Text(shape=(), dtype=tf.string),
-    'episode_title': Text(shape=(), dtype=tf.string),
-    'recap': Text(shape=(), dtype=tf.string),
-    'show_title': Text(shape=(), dtype=tf.string),
-    'transcript': Text(shape=(), dtype=tf.string),
-    'transcript_author': Text(shape=(), dtype=tf.string),
+    'episode_number': Text(shape=(), dtype=object),
+    'episode_title': Text(shape=(), dtype=object),
+    'recap': Text(shape=(), dtype=object),
+    'show_title': Text(shape=(), dtype=object),
+    'transcript': Text(shape=(), dtype=object),
+    'transcript_author': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype     | Description
-:---------------- | :----------- | :---- | :-------- | :----------
-                  | FeaturesDict |       |           |
-episode_number    | Text         |       | tf.string |
-episode_title     | Text         |       | tf.string |
-recap             | Text         |       | tf.string |
-show_title        | Text         |       | tf.string |
-transcript        | Text         |       | tf.string |
-transcript_author | Text         |       | tf.string |
+Feature           | Class        | Shape | Dtype  | Description
+:---------------- | :----------- | :---- | :----- | :----------
+                  | FeaturesDict |       |        |
+episode_number    | Text         |       | object |
+episode_title     | Text         |       | object |
+recap             | Text         |       | object |
+show_title        | Text         |       | object |
+transcript        | Text         |       | object |
+transcript_author | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -169,26 +169,26 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'episode_summary': Text(shape=(), dtype=tf.string),
-    'recap': Text(shape=(), dtype=tf.string),
-    'recap_author': Text(shape=(), dtype=tf.string),
-    'show_title': Text(shape=(), dtype=tf.string),
-    'transcript': Text(shape=(), dtype=tf.string),
-    'transcript_author': Tensor(shape=(None,), dtype=tf.string),
+    'episode_summary': Text(shape=(), dtype=object),
+    'recap': Text(shape=(), dtype=object),
+    'recap_author': Text(shape=(), dtype=object),
+    'show_title': Text(shape=(), dtype=object),
+    'transcript': Text(shape=(), dtype=object),
+    'transcript_author': Tensor(shape=(None,), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape   | Dtype     | Description
-:---------------- | :----------- | :------ | :-------- | :----------
-                  | FeaturesDict |         |           |
-episode_summary   | Text         |         | tf.string |
-recap             | Text         |         | tf.string |
-recap_author      | Text         |         | tf.string |
-show_title        | Text         |         | tf.string |
-transcript        | Text         |         | tf.string |
-transcript_author | Tensor       | (None,) | tf.string |
+Feature           | Class        | Shape   | Dtype  | Description
+:---------------- | :----------- | :------ | :----- | :----------
+                  | FeaturesDict |         |        |
+episode_summary   | Text         |         | object |
+recap             | Text         |         | object |
+recap_author      | Text         |         | object |
+show_title        | Text         |         | object |
+transcript        | Text         |         | object |
+transcript_author | Tensor       | (None,) | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

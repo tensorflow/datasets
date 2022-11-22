@@ -42,28 +42,26 @@ research lab, Jadavpur University, India.
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'image': Image(shape=(32, 32, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape       | Dtype    | Description
-:------ | :----------- | :---------- | :------- | :----------
-        | FeaturesDict |             |          |
-image   | Image        | (32, 32, 3) | tf.uint8 |
-label   | ClassLabel   |             | tf.int64 |
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (32, 32, 3) | uint8 |
+label   | ClassLabel   |             | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -123,6 +121,8 @@ label   | ClassLabel   |             | tf.int64 |
 
 *   **Download size**: `573.81 KiB`
 
+*   **Dataset size**: `1.71 MiB`
+
 *   **Splits**:
 
 Split     | Examples
@@ -178,6 +178,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `275.29 KiB`
 
+*   **Dataset size**: `869.50 KiB`
+
 *   **Splits**:
 
 Split     | Examples
@@ -232,6 +234,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: CMATERdb Telugu Numerals
 
 *   **Download size**: `283.90 KiB`
+
+*   **Dataset size**: `860.47 KiB`
 
 *   **Splits**:
 

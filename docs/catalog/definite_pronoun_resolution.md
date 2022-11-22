@@ -59,22 +59,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'candidates': Sequence(Text(shape=(), dtype=tf.string)),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'pronoun': Text(shape=(), dtype=tf.string),
-    'sentence': Text(shape=(), dtype=tf.string),
+    'candidates': Sequence(Text(shape=(), dtype=object)),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'pronoun': Text(shape=(), dtype=object),
+    'sentence': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class          | Shape | Dtype     | Description
-:--------- | :------------- | :---- | :-------- | :----------
-           | FeaturesDict   |       |           |
-candidates | Sequence(Text) | (2,)  | tf.string |
-label      | ClassLabel     |       | tf.int64  |
-pronoun    | Text           |       | tf.string |
-sentence   | Text           |       | tf.string |
+Feature    | Class          | Shape | Dtype  | Description
+:--------- | :------------- | :---- | :----- | :----------
+           | FeaturesDict   |       |        |
+candidates | Sequence(Text) | (2,)  | object |
+label      | ClassLabel     |       | int64  |
+pronoun    | Text           |       | object |
+sentence   | Text           |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

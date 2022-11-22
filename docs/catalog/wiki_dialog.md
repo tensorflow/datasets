@@ -52,26 +52,26 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'author_num': Sequence(tf.int32),
-    'passage': Text(shape=(), dtype=tf.string),
-    'pid': Text(shape=(), dtype=tf.string),
-    'sentences': Sequence(Text(shape=(), dtype=tf.string)),
-    'title': Text(shape=(), dtype=tf.string),
-    'utterances': Sequence(Text(shape=(), dtype=tf.string)),
+    'author_num': Sequence(int32),
+    'passage': Text(shape=(), dtype=object),
+    'pid': Text(shape=(), dtype=object),
+    'sentences': Sequence(Text(shape=(), dtype=object)),
+    'title': Text(shape=(), dtype=object),
+    'utterances': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class            | Shape   | Dtype     | Description
-:--------- | :--------------- | :------ | :-------- | :----------
-           | FeaturesDict     |         |           |
-author_num | Sequence(Tensor) | (None,) | tf.int32  |
-passage    | Text             |         | tf.string |
-pid        | Text             |         | tf.string |
-sentences  | Sequence(Text)   | (None,) | tf.string |
-title      | Text             |         | tf.string |
-utterances | Sequence(Text)   | (None,) | tf.string |
+Feature    | Class            | Shape   | Dtype  | Description
+:--------- | :--------------- | :------ | :----- | :----------
+           | FeaturesDict     |         |        |
+author_num | Sequence(Tensor) | (None,) | int32  |
+passage    | Text             |         | object |
+pid        | Text             |         | object |
+sentences  | Sequence(Text)   | (None,) | object |
+title      | Text             |         | object |
+utterances | Sequence(Text)   | (None,) | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

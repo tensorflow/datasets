@@ -42,11 +42,11 @@ handwritten characters from 50 different alphabets.
 
 *   **Download size**: `17.95 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.29 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -61,22 +61,22 @@ Split      | Examples
 
 ```python
 FeaturesDict({
-    'alphabet': ClassLabel(shape=(), dtype=tf.int64, num_classes=50),
-    'alphabet_char_id': tf.int64,
-    'image': Image(shape=(105, 105, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1623),
+    'alphabet': ClassLabel(shape=(), dtype=int64, num_classes=50),
+    'alphabet_char_id': int64,
+    'image': Image(shape=(105, 105, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=1623),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape         | Dtype    | Description
-:--------------- | :----------- | :------------ | :------- | :----------
-                 | FeaturesDict |               |          |
-alphabet         | ClassLabel   |               | tf.int64 |
-alphabet_char_id | Tensor       |               | tf.int64 |
-image            | Image        | (105, 105, 3) | tf.uint8 |
-label            | ClassLabel   |               | tf.int64 |
+Feature          | Class        | Shape         | Dtype | Description
+:--------------- | :----------- | :------------ | :---- | :----------
+                 | FeaturesDict |               |       |
+alphabet         | ClassLabel   |               | int64 |
+alphabet_char_id | Tensor       |               | int64 |
+image            | Image        | (105, 105, 3) | uint8 |
+label            | ClassLabel   |               | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

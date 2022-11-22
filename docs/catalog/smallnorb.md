@@ -68,28 +68,28 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(96, 96, 1), dtype=tf.uint8),
-    'image2': Image(shape=(96, 96, 1), dtype=tf.uint8),
-    'instance': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'label_azimuth': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-    'label_category': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'label_elevation': ClassLabel(shape=(), dtype=tf.int64, num_classes=9),
-    'label_lighting': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    'image': Image(shape=(96, 96, 1), dtype=uint8),
+    'image2': Image(shape=(96, 96, 1), dtype=uint8),
+    'instance': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'label_azimuth': ClassLabel(shape=(), dtype=int64, num_classes=18),
+    'label_category': ClassLabel(shape=(), dtype=int64, num_classes=5),
+    'label_elevation': ClassLabel(shape=(), dtype=int64, num_classes=9),
+    'label_lighting': ClassLabel(shape=(), dtype=int64, num_classes=6),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape       | Dtype    | Description
-:-------------- | :----------- | :---------- | :------- | :----------
-                | FeaturesDict |             |          |
-image           | Image        | (96, 96, 1) | tf.uint8 |
-image2          | Image        | (96, 96, 1) | tf.uint8 |
-instance        | ClassLabel   |             | tf.int64 |
-label_azimuth   | ClassLabel   |             | tf.int64 |
-label_category  | ClassLabel   |             | tf.int64 |
-label_elevation | ClassLabel   |             | tf.int64 |
-label_lighting  | ClassLabel   |             | tf.int64 |
+Feature         | Class        | Shape       | Dtype | Description
+:-------------- | :----------- | :---------- | :---- | :----------
+                | FeaturesDict |             |       |
+image           | Image        | (96, 96, 1) | uint8 |
+image2          | Image        | (96, 96, 1) | uint8 |
+instance        | ClassLabel   |             | int64 |
+label_azimuth   | ClassLabel   |             | int64 |
+label_category  | ClassLabel   |             | int64 |
+label_elevation | ClassLabel   |             | int64 |
+label_lighting  | ClassLabel   |             | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

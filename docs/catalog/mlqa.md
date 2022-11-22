@@ -45,28 +45,28 @@ evaluating multilingual question answering performance. The dataset consists of
 ```python
 FeaturesDict({
     'answers': Sequence({
-        'answer_start': tf.int32,
-        'text': Text(shape=(), dtype=tf.string),
+        'answer_start': int32,
+        'text': Text(shape=(), dtype=object),
     }),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': tf.string,
-    'question': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'context': Text(shape=(), dtype=object),
+    'id': object,
+    'question': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class        | Shape | Dtype     | Description
-:------------------- | :----------- | :---- | :-------- | :----------
-                     | FeaturesDict |       |           |
-answers              | Sequence     |       |           |
-answers/answer_start | Tensor       |       | tf.int32  |
-answers/text         | Text         |       | tf.string |
-context              | Text         |       | tf.string |
-id                   | Tensor       |       | tf.string |
-question             | Text         |       | tf.string |
-title                | Text         |       | tf.string |
+Feature              | Class        | Shape | Dtype  | Description
+:------------------- | :----------- | :---- | :----- | :----------
+                     | FeaturesDict |       |        |
+answers              | Sequence     |       |        |
+answers/answer_start | Tensor       |       | int32  |
+answers/text         | Text         |       | object |
+context              | Text         |       | object |
+id                   | Tensor       |       | object |
+question             | Text         |       | object |
+title                | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -92,7 +92,7 @@ title                | Text         |       | tf.string |
 
 *   **Config description**: MLQA 'ar' dev and test splits.
 
-*   **Dataset size**: `9.27 MiB`
+*   **Dataset size**: `9.28 MiB`
 
 *   **Splits**:
 

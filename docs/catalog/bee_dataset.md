@@ -89,27 +89,27 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'input': Image(shape=(300, 150, 3), dtype=tf.uint8),
+    'input': Image(shape=(300, 150, 3), dtype=uint8),
     'output': FeaturesDict({
-        'cooling_output': tf.float64,
-        'pollen_output': tf.float64,
-        'varroa_output': tf.float64,
-        'wasps_output': tf.float64,
+        'cooling_output': float64,
+        'pollen_output': float64,
+        'varroa_output': float64,
+        'wasps_output': float64,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature               | Class        | Shape         | Dtype      | Description
-:-------------------- | :----------- | :------------ | :--------- | :----------
-                      | FeaturesDict |               |            |
-input                 | Image        | (300, 150, 3) | tf.uint8   |
-output                | FeaturesDict |               |            |
-output/cooling_output | Tensor       |               | tf.float64 |
-output/pollen_output  | Tensor       |               | tf.float64 |
-output/varroa_output  | Tensor       |               | tf.float64 |
-output/wasps_output   | Tensor       |               | tf.float64 |
+Feature               | Class        | Shape         | Dtype   | Description
+:-------------------- | :----------- | :------------ | :------ | :----------
+                      | FeaturesDict |               |         |
+input                 | Image        | (300, 150, 3) | uint8   |
+output                | FeaturesDict |               |         |
+output/cooling_output | Tensor       |               | float64 |
+output/pollen_output  | Tensor       |               | float64 |
+output/varroa_output  | Tensor       |               | float64 |
+output/wasps_output   | Tensor       |               | float64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -164,27 +164,27 @@ dataButton.addEventListener('click', async () => {
 
 ```python
 FeaturesDict({
-    'input': Image(shape=(200, 100, 3), dtype=tf.uint8),
+    'input': Image(shape=(200, 100, 3), dtype=uint8),
     'output': FeaturesDict({
-        'cooling_output': tf.float64,
-        'pollen_output': tf.float64,
-        'varroa_output': tf.float64,
-        'wasps_output': tf.float64,
+        'cooling_output': float64,
+        'pollen_output': float64,
+        'varroa_output': float64,
+        'wasps_output': float64,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature               | Class        | Shape         | Dtype      | Description
-:-------------------- | :----------- | :------------ | :--------- | :----------
-                      | FeaturesDict |               |            |
-input                 | Image        | (200, 100, 3) | tf.uint8   |
-output                | FeaturesDict |               |            |
-output/cooling_output | Tensor       |               | tf.float64 |
-output/pollen_output  | Tensor       |               | tf.float64 |
-output/varroa_output  | Tensor       |               | tf.float64 |
-output/wasps_output   | Tensor       |               | tf.float64 |
+Feature               | Class        | Shape         | Dtype   | Description
+:-------------------- | :----------- | :------------ | :------ | :----------
+                      | FeaturesDict |               |         |
+input                 | Image        | (200, 100, 3) | uint8   |
+output                | FeaturesDict |               |         |
+output/cooling_output | Tensor       |               | float64 |
+output/pollen_output  | Tensor       |               | float64 |
+output/varroa_output  | Tensor       |               | float64 |
+output/wasps_output   | Tensor       |               | float64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -239,27 +239,27 @@ dataButton.addEventListener('click', async () => {
 
 ```python
 FeaturesDict({
-    'input': Image(shape=(150, 75, 3), dtype=tf.uint8),
+    'input': Image(shape=(150, 75, 3), dtype=uint8),
     'output': FeaturesDict({
-        'cooling_output': tf.float64,
-        'pollen_output': tf.float64,
-        'varroa_output': tf.float64,
-        'wasps_output': tf.float64,
+        'cooling_output': float64,
+        'pollen_output': float64,
+        'varroa_output': float64,
+        'wasps_output': float64,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature               | Class        | Shape        | Dtype      | Description
-:-------------------- | :----------- | :----------- | :--------- | :----------
-                      | FeaturesDict |              |            |
-input                 | Image        | (150, 75, 3) | tf.uint8   |
-output                | FeaturesDict |              |            |
-output/cooling_output | Tensor       |              | tf.float64 |
-output/pollen_output  | Tensor       |              | tf.float64 |
-output/varroa_output  | Tensor       |              | tf.float64 |
-output/wasps_output   | Tensor       |              | tf.float64 |
+Feature               | Class        | Shape        | Dtype   | Description
+:-------------------- | :----------- | :----------- | :------ | :----------
+                      | FeaturesDict |              |         |
+input                 | Image        | (150, 75, 3) | uint8   |
+output                | FeaturesDict |              |         |
+output/cooling_output | Tensor       |              | float64 |
+output/pollen_output  | Tensor       |              | float64 |
+output/varroa_output  | Tensor       |              | float64 |
+output/wasps_output   | Tensor       |              | float64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

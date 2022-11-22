@@ -38,11 +38,9 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
 
 *   **Download size**: `80.23 MiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -81,22 +79,24 @@ Split            | Examples
 
 *   **Config description**: Plain text
 
+*   **Dataset size**: `129.83 MiB`
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(), dtype=tf.string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape | Dtype     | Description
-:------ | :----------- | :---- | :-------- | :----------
-        | FeaturesDict |       |           |
-label   | ClassLabel   |       | tf.int64  |
-text    | Text         |       | tf.string |
+Feature | Class        | Shape | Dtype  | Description
+:------ | :----------- | :---- | :----- | :----------
+        | FeaturesDict |       |        |
+label   | ClassLabel   |       | int64  |
+text    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -140,22 +140,24 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses byte-level text encoding with
     `tfds.deprecated.text.ByteTextEncoder`
 
+*   **Dataset size**: `129.88 MiB`
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'text': Text(shape=(None,), dtype=int64, encoder=<ByteTextEncoder vocab_size=257>),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape   | Dtype    | Description
-:------ | :----------- | :------ | :------- | :----------
-        | FeaturesDict |         |          |
-label   | ClassLabel   |         | tf.int64 |
-text    | Text         | (None,) | tf.int64 |
+Feature | Class        | Shape   | Dtype | Description
+:------ | :----------- | :------ | :---- | :----------
+        | FeaturesDict |         |       |
+label   | ClassLabel   |         | int64 |
+text    | Text         | (None,) | int64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -199,22 +201,24 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
     8k vocab size
 
+*   **Dataset size**: `54.72 MiB`
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8185>),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'text': Text(shape=(None,), dtype=int64, encoder=<SubwordTextEncoder vocab_size=8185>),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape   | Dtype    | Description
-:------ | :----------- | :------ | :------- | :----------
-        | FeaturesDict |         |          |
-label   | ClassLabel   |         | tf.int64 |
-text    | Text         | (None,) | tf.int64 |
+Feature | Class        | Shape   | Dtype | Description
+:------ | :----------- | :------ | :---- | :----------
+        | FeaturesDict |         |       |
+label   | ClassLabel   |         | int64 |
+text    | Text         | (None,) | int64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -258,22 +262,24 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
     32k vocab size
 
+*   **Dataset size**: `50.33 MiB`
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32650>),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'text': Text(shape=(None,), dtype=int64, encoder=<SubwordTextEncoder vocab_size=32650>),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape   | Dtype    | Description
-:------ | :----------- | :------ | :------- | :----------
-        | FeaturesDict |         |          |
-label   | ClassLabel   |         | tf.int64 |
-text    | Text         | (None,) | tf.int64 |
+Feature | Class        | Shape   | Dtype | Description
+:------ | :----------- | :------ | :---- | :----------
+        | FeaturesDict |         |       |
+label   | ClassLabel   |         | int64 |
+text    | Text         | (None,) | int64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -57,20 +57,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'label-coarse': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    'label-fine': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
-    'text': Text(shape=(), dtype=tf.string),
+    'label-coarse': ClassLabel(shape=(), dtype=int64, num_classes=6),
+    'label-fine': ClassLabel(shape=(), dtype=int64, num_classes=47),
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature      | Class        | Shape | Dtype     | Description
-:----------- | :----------- | :---- | :-------- | :----------
-             | FeaturesDict |       |           |
-label-coarse | ClassLabel   |       | tf.int64  |
-label-fine   | ClassLabel   |       | tf.int64  |
-text         | Text         |       | tf.string |
+Feature      | Class        | Shape | Dtype  | Description
+:----------- | :----------- | :---- | :----- | :----------
+             | FeaturesDict |       |        |
+label-coarse | ClassLabel   |       | int64  |
+label-fine   | ClassLabel   |       | int64  |
+text         | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -43,11 +43,9 @@ the corrupted Cifar10 test images uploaded by the original authors.
 
 *   **Download size**: `2.72 GiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -59,18 +57,18 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'image': Image(shape=(32, 32, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape       | Dtype    | Description
-:------ | :----------- | :---------- | :------- | :----------
-        | FeaturesDict |             |          |
-image   | Image        | (32, 32, 3) | tf.uint8 |
-label   | ClassLabel   |             | tf.int64 |
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (32, 32, 3) | uint8 |
+label   | ClassLabel   |             | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -93,6 +91,8 @@ label   | ClassLabel   |             | tf.int64 |
 ## cifar10_corrupted/brightness_1 (default config)
 
 *   **Config description**: Corruption method: brightness, severity level: 1
+
+*   **Dataset size**: `21.89 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -140,6 +140,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: brightness, severity level: 2
 
+*   **Dataset size**: `21.90 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -185,6 +187,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/brightness_3
 
 *   **Config description**: Corruption method: brightness, severity level: 3
+
+*   **Dataset size**: `21.85 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -232,6 +236,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: brightness, severity level: 4
 
+*   **Dataset size**: `21.75 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -277,6 +283,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/brightness_5
 
 *   **Config description**: Corruption method: brightness, severity level: 5
+
+*   **Dataset size**: `21.37 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -324,6 +332,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: contrast, severity level: 1
 
+*   **Dataset size**: `20.41 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -369,6 +379,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/contrast_2
 
 *   **Config description**: Corruption method: contrast, severity level: 2
+
+*   **Dataset size**: `18.29 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -416,6 +428,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: contrast, severity level: 3
 
+*   **Dataset size**: `17.18 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -461,6 +475,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/contrast_4
 
 *   **Config description**: Corruption method: contrast, severity level: 4
+
+*   **Dataset size**: `15.75 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -508,6 +524,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: contrast, severity level: 5
 
+*   **Dataset size**: `12.56 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -553,6 +571,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/defocus_blur_1
 
 *   **Config description**: Corruption method: defocus_blur, severity level: 1
+
+*   **Dataset size**: `21.29 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -600,6 +620,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: defocus_blur, severity level: 2
 
+*   **Dataset size**: `20.45 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -645,6 +667,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/defocus_blur_3
 
 *   **Config description**: Corruption method: defocus_blur, severity level: 3
+
+*   **Dataset size**: `19.71 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -692,6 +716,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: defocus_blur, severity level: 4
 
+*   **Dataset size**: `19.19 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -737,6 +763,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/defocus_blur_5
 
 *   **Config description**: Corruption method: defocus_blur, severity level: 5
+
+*   **Dataset size**: `18.19 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -784,6 +812,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: elastic, severity level: 1
 
+*   **Dataset size**: `20.89 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -829,6 +859,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/elastic_2
 
 *   **Config description**: Corruption method: elastic, severity level: 2
+
+*   **Dataset size**: `20.35 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -876,6 +908,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: elastic, severity level: 3
 
+*   **Dataset size**: `20.01 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -921,6 +955,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/elastic_4
 
 *   **Config description**: Corruption method: elastic, severity level: 4
+
+*   **Dataset size**: `20.33 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -968,6 +1004,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: elastic, severity level: 5
 
+*   **Dataset size**: `20.97 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1013,6 +1051,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/fog_1
 
 *   **Config description**: Corruption method: fog, severity level: 1
+
+*   **Dataset size**: `21.12 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1060,6 +1100,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: fog, severity level: 2
 
+*   **Dataset size**: `20.16 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1105,6 +1147,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/fog_3
 
 *   **Config description**: Corruption method: fog, severity level: 3
+
+*   **Dataset size**: `19.61 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1152,6 +1196,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: fog, severity level: 4
 
+*   **Dataset size**: `19.35 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1197,6 +1243,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/fog_5
 
 *   **Config description**: Corruption method: fog, severity level: 5
+
+*   **Dataset size**: `19.21 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1244,6 +1292,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: frost, severity level: 1
 
+*   **Dataset size**: `22.46 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1289,6 +1339,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/frost_2
 
 *   **Config description**: Corruption method: frost, severity level: 2
+
+*   **Dataset size**: `22.44 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1336,6 +1388,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: frost, severity level: 3
 
+*   **Dataset size**: `22.82 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1382,6 +1436,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: frost, severity level: 4
 
+*   **Dataset size**: `23.02 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1427,6 +1483,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/frost_5
 
 *   **Config description**: Corruption method: frost, severity level: 5
+
+*   **Dataset size**: `23.39 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1475,6 +1533,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Corruption method: frosted_glass_blur, severity
     level: 1
 
+*   **Dataset size**: `23.40 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1521,6 +1581,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: frosted_glass_blur, severity
     level: 2
+
+*   **Dataset size**: `23.12 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1569,6 +1631,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Corruption method: frosted_glass_blur, severity
     level: 3
 
+*   **Dataset size**: `22.56 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1615,6 +1679,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: frosted_glass_blur, severity
     level: 4
+
+*   **Dataset size**: `23.11 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1663,6 +1729,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Corruption method: frosted_glass_blur, severity
     level: 5
 
+*   **Dataset size**: `22.84 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1708,6 +1776,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/gaussian_blur_1
 
 *   **Config description**: Corruption method: gaussian_blur, severity level: 1
+
+*   **Dataset size**: `21.30 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1755,6 +1825,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: gaussian_blur, severity level: 2
 
+*   **Dataset size**: `19.73 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1800,6 +1872,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/gaussian_blur_3
 
 *   **Config description**: Corruption method: gaussian_blur, severity level: 3
+
+*   **Dataset size**: `19.13 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1847,6 +1921,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: gaussian_blur, severity level: 4
 
+*   **Dataset size**: `18.63 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1892,6 +1968,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/gaussian_blur_5
 
 *   **Config description**: Corruption method: gaussian_blur, severity level: 5
+
+*   **Dataset size**: `17.75 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1939,6 +2017,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: gaussian_noise, severity level: 1
 
+*   **Dataset size**: `25.38 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -1984,6 +2064,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/gaussian_noise_2
 
 *   **Config description**: Corruption method: gaussian_noise, severity level: 2
+
+*   **Dataset size**: `26.54 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2031,6 +2113,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: gaussian_noise, severity level: 3
 
+*   **Dataset size**: `27.54 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2076,6 +2160,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/gaussian_noise_4
 
 *   **Config description**: Corruption method: gaussian_noise, severity level: 4
+
+*   **Dataset size**: `27.96 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2123,6 +2209,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: gaussian_noise, severity level: 5
 
+*   **Dataset size**: `28.34 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2168,6 +2256,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/impulse_noise_1
 
 *   **Config description**: Corruption method: impulse_noise, severity level: 1
+
+*   **Dataset size**: `22.63 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2215,6 +2305,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: impulse_noise, severity level: 2
 
+*   **Dataset size**: `23.18 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2260,6 +2352,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/impulse_noise_3
 
 *   **Config description**: Corruption method: impulse_noise, severity level: 3
+
+*   **Dataset size**: `23.64 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2307,6 +2401,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: impulse_noise, severity level: 4
 
+*   **Dataset size**: `24.39 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2352,6 +2448,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/impulse_noise_5
 
 *   **Config description**: Corruption method: impulse_noise, severity level: 5
+
+*   **Dataset size**: `24.98 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2400,6 +2498,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Corruption method: jpeg_compression, severity level:
     1
 
+*   **Dataset size**: `22.39 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2446,6 +2546,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: jpeg_compression, severity level:
     2
+
+*   **Dataset size**: `22.06 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2494,6 +2596,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Corruption method: jpeg_compression, severity level:
     3
 
+*   **Dataset size**: `21.92 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2540,6 +2644,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: jpeg_compression, severity level:
     4
+
+*   **Dataset size**: `21.73 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2588,6 +2694,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Corruption method: jpeg_compression, severity level:
     5
 
+*   **Dataset size**: `21.42 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2633,6 +2741,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/motion_blur_1
 
 *   **Config description**: Corruption method: motion_blur, severity level: 1
+
+*   **Dataset size**: `20.55 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2680,6 +2790,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: motion_blur, severity level: 2
 
+*   **Dataset size**: `19.90 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2725,6 +2837,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/motion_blur_3
 
 *   **Config description**: Corruption method: motion_blur, severity level: 3
+
+*   **Dataset size**: `19.39 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2772,6 +2886,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: motion_blur, severity level: 4
 
+*   **Dataset size**: `19.39 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2817,6 +2933,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/motion_blur_5
 
 *   **Config description**: Corruption method: motion_blur, severity level: 5
+
+*   **Dataset size**: `18.96 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2864,6 +2982,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: pixelate, severity level: 1
 
+*   **Dataset size**: `20.44 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -2909,6 +3029,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/pixelate_2
 
 *   **Config description**: Corruption method: pixelate, severity level: 2
+
+*   **Dataset size**: `18.92 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -2956,6 +3078,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: pixelate, severity level: 3
 
+*   **Dataset size**: `18.14 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3001,6 +3125,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/pixelate_4
 
 *   **Config description**: Corruption method: pixelate, severity level: 4
+
+*   **Dataset size**: `15.69 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3048,6 +3174,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: pixelate, severity level: 5
 
+*   **Dataset size**: `12.41 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3093,6 +3221,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/saturate_1
 
 *   **Config description**: Corruption method: saturate, severity level: 1
+
+*   **Dataset size**: `21.58 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3140,6 +3270,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: saturate, severity level: 2
 
+*   **Dataset size**: `21.03 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3185,6 +3317,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/saturate_3
 
 *   **Config description**: Corruption method: saturate, severity level: 3
+
+*   **Dataset size**: `22.01 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3232,6 +3366,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: saturate, severity level: 4
 
+*   **Dataset size**: `21.88 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3277,6 +3413,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/saturate_5
 
 *   **Config description**: Corruption method: saturate, severity level: 5
+
+*   **Dataset size**: `21.59 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3324,6 +3462,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: shot_noise, severity level: 1
 
+*   **Dataset size**: `24.64 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3369,6 +3509,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/shot_noise_2
 
 *   **Config description**: Corruption method: shot_noise, severity level: 2
+
+*   **Dataset size**: `25.50 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3416,6 +3558,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: shot_noise, severity level: 3
 
+*   **Dataset size**: `26.66 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3461,6 +3605,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/shot_noise_4
 
 *   **Config description**: Corruption method: shot_noise, severity level: 4
+
+*   **Dataset size**: `26.85 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3508,6 +3654,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: shot_noise, severity level: 5
 
+*   **Dataset size**: `26.11 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3553,6 +3701,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/snow_1
 
 *   **Config description**: Corruption method: snow, severity level: 1
+
+*   **Dataset size**: `22.65 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3600,6 +3750,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: snow, severity level: 2
 
+*   **Dataset size**: `23.55 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3645,6 +3797,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/snow_3
 
 *   **Config description**: Corruption method: snow, severity level: 3
+
+*   **Dataset size**: `23.28 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3692,6 +3846,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: snow, severity level: 4
 
+*   **Dataset size**: `22.91 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3737,6 +3893,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/snow_5
 
 *   **Config description**: Corruption method: snow, severity level: 5
+
+*   **Dataset size**: `22.40 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3784,6 +3942,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: spatter, severity level: 1
 
+*   **Dataset size**: `22.59 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3829,6 +3989,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/spatter_2
 
 *   **Config description**: Corruption method: spatter, severity level: 2
+
+*   **Dataset size**: `23.31 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3876,6 +4038,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: spatter, severity level: 3
 
+*   **Dataset size**: `23.97 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -3921,6 +4085,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/spatter_4
 
 *   **Config description**: Corruption method: spatter, severity level: 4
+
+*   **Dataset size**: `22.80 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -3968,6 +4134,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: spatter, severity level: 5
 
+*   **Dataset size**: `23.44 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -4013,6 +4181,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/speckle_noise_1
 
 *   **Config description**: Corruption method: speckle_noise, severity level: 1
+
+*   **Dataset size**: `24.59 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -4060,6 +4230,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: speckle_noise, severity level: 2
 
+*   **Dataset size**: `25.85 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -4105,6 +4277,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/speckle_noise_3
 
 *   **Config description**: Corruption method: speckle_noise, severity level: 3
+
+*   **Dataset size**: `26.38 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -4152,6 +4326,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: speckle_noise, severity level: 4
 
+*   **Dataset size**: `27.28 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -4197,6 +4373,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/speckle_noise_5
 
 *   **Config description**: Corruption method: speckle_noise, severity level: 5
+
+*   **Dataset size**: `28.01 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -4244,6 +4422,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: zoom_blur, severity level: 1
 
+*   **Dataset size**: `20.14 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -4289,6 +4469,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/zoom_blur_2
 
 *   **Config description**: Corruption method: zoom_blur, severity level: 2
+
+*   **Dataset size**: `19.76 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -4336,6 +4518,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: zoom_blur, severity level: 3
 
+*   **Dataset size**: `19.45 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -4382,6 +4566,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: zoom_blur, severity level: 4
 
+*   **Dataset size**: `19.20 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -4427,6 +4613,8 @@ dataButton.addEventListener('click', async () => {
 ## cifar10_corrupted/zoom_blur_5
 
 *   **Config description**: Corruption method: zoom_blur, severity level: 5
+
+*   **Dataset size**: `18.86 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

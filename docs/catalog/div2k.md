@@ -39,28 +39,26 @@ challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)
 
     *   **`2.0.0`** (default): No release notes.
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'hr': Image(shape=(None, None, 3), dtype=uint8),
+    'lr': Image(shape=(None, None, 3), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape           | Dtype    | Description
-:------ | :----------- | :-------------- | :------- | :----------
-        | FeaturesDict |                 |          |
-hr      | Image        | (None, None, 3) | tf.uint8 |
-lr      | Image        | (None, None, 3) | tf.uint8 |
+Feature | Class        | Shape           | Dtype | Description
+:------ | :----------- | :-------------- | :---- | :----------
+        | FeaturesDict |                 |       |
+hr      | Image        | (None, None, 3) | uint8 |
+lr      | Image        | (None, None, 3) | uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -89,6 +87,8 @@ lr      | Image        | (None, None, 3) | tf.uint8 |
 *   **Config description**: Uses bicubic_x2 data.
 
 *   **Download size**: `4.68 GiB`
+
+*   **Dataset size**: `4.68 GiB`
 
 *   **Splits**:
 
@@ -140,6 +140,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `4.16 GiB`
 
+*   **Dataset size**: `4.16 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -189,6 +191,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses bicubic_x4 data.
 
 *   **Download size**: `3.97 GiB`
+
+*   **Dataset size**: `3.97 GiB`
 
 *   **Splits**:
 
@@ -240,6 +244,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `3.78 GiB`
 
+*   **Dataset size**: `3.78 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -289,6 +295,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses unknown_x2 data.
 
 *   **Download size**: `4.48 GiB`
+
+*   **Dataset size**: `4.48 GiB`
 
 *   **Splits**:
 
@@ -340,6 +348,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `4.10 GiB`
 
+*   **Dataset size**: `4.11 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -389,6 +399,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses unknown_x4 data.
 
 *   **Download size**: `3.93 GiB`
+
+*   **Dataset size**: `3.93 GiB`
 
 *   **Splits**:
 
@@ -440,6 +452,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `4.00 GiB`
 
+*   **Dataset size**: `4.00 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -490,6 +504,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `3.98 GiB`
 
+*   **Dataset size**: `3.99 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -539,6 +555,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses realistic_wild_x4 data.
 
 *   **Download size**: `4.74 GiB`
+
+*   **Dataset size**: `14.62 GiB`
 
 *   **Splits**:
 

@@ -101,22 +101,22 @@ The resulting directory structure may then be processed by TFDS:
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'is_clean': tf.bool,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
+    'id': Text(shape=(), dtype=object),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'is_clean': bool,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=100),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape           | Dtype     | Description
-:------- | :----------- | :-------------- | :-------- | :----------
-         | FeaturesDict |                 |           |
-id       | Text         |                 | tf.string |
-image    | Image        | (None, None, 3) | tf.uint8  |
-is_clean | Tensor       |                 | tf.bool   |
-label    | ClassLabel   |                 | tf.int64  |
+Feature  | Class        | Shape           | Dtype  | Description
+:------- | :----------- | :-------------- | :----- | :----------
+         | FeaturesDict |                 |        |
+id       | Text         |                 | object |
+image    | Image        | (None, None, 3) | uint8  |
+is_clean | Tensor       |                 | bool   |
+label    | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

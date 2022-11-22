@@ -38,11 +38,9 @@ For resized ImageNet for supervised learning
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -55,16 +53,16 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape           | Dtype    | Description
-:------ | :----------- | :-------------- | :------- | :----------
-        | FeaturesDict |                 |          |
-image   | Image        | (None, None, 3) | tf.uint8 |
+Feature | Class        | Shape           | Dtype | Description
+:------ | :----------- | :-------------- | :---- | :----------
+        | FeaturesDict |                 |       |
+image   | Image        | (None, None, 3) | uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -97,6 +95,8 @@ image   | Image        | (None, None, 3) | tf.uint8 |
     of 32x32 resolution.
 
 *   **Download size**: `3.98 GiB`
+
+*   **Dataset size**: `3.05 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -146,6 +146,8 @@ dataButton.addEventListener('click', async () => {
     of 64x64 resolution.
 
 *   **Download size**: `11.73 GiB`
+
+*   **Dataset size**: `10.80 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

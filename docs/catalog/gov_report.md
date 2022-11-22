@@ -78,24 +78,24 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'released_date': Text(shape=(), dtype=tf.string),
-    'reports': Text(shape=(), dtype=tf.string),
-    'summary': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'id': Text(shape=(), dtype=object),
+    'released_date': Text(shape=(), dtype=object),
+    'reports': Text(shape=(), dtype=object),
+    'summary': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape | Dtype     | Description
-:------------ | :----------- | :---- | :-------- | :----------
-              | FeaturesDict |       |           |
-id            | Text         |       | tf.string |
-released_date | Text         |       | tf.string |
-reports       | Text         |       | tf.string |
-summary       | Text         |       | tf.string |
-title         | Text         |       | tf.string |
+Feature       | Class        | Shape | Dtype  | Description
+:------------ | :----------- | :---- | :----- | :----------
+              | FeaturesDict |       |        |
+id            | Text         |       | object |
+released_date | Text         |       | object |
+reports       | Text         |       | object |
+summary       | Text         |       | object |
+title         | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -157,30 +157,30 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'fastfact': Text(shape=(), dtype=tf.string),
-    'highlight': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'published_date': Text(shape=(), dtype=tf.string),
-    'released_date': Text(shape=(), dtype=tf.string),
-    'report': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-    'url': Text(shape=(), dtype=tf.string),
+    'fastfact': Text(shape=(), dtype=object),
+    'highlight': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'published_date': Text(shape=(), dtype=object),
+    'released_date': Text(shape=(), dtype=object),
+    'report': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
+    'url': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape | Dtype     | Description
-:------------- | :----------- | :---- | :-------- | :----------
-               | FeaturesDict |       |           |
-fastfact       | Text         |       | tf.string |
-highlight      | Text         |       | tf.string |
-id             | Text         |       | tf.string |
-published_date | Text         |       | tf.string |
-released_date  | Text         |       | tf.string |
-report         | Text         |       | tf.string |
-title          | Text         |       | tf.string |
-url            | Text         |       | tf.string |
+Feature        | Class        | Shape | Dtype  | Description
+:------------- | :----------- | :---- | :----- | :----------
+               | FeaturesDict |       |        |
+fastfact       | Text         |       | object |
+highlight      | Text         |       | object |
+id             | Text         |       | object |
+published_date | Text         |       | object |
+released_date  | Text         |       | object |
+report         | Text         |       | object |
+title          | Text         |       | object |
+url            | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -243,24 +243,24 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'released_date': Text(shape=(), dtype=tf.string),
-    'reports': Text(shape=(), dtype=tf.string),
-    'summary': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'id': Text(shape=(), dtype=object),
+    'released_date': Text(shape=(), dtype=object),
+    'reports': Text(shape=(), dtype=object),
+    'summary': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape | Dtype     | Description
-:------------ | :----------- | :---- | :-------- | :----------
-              | FeaturesDict |       |           |
-id            | Text         |       | tf.string |
-released_date | Text         |       | tf.string |
-reports       | Text         |       | tf.string |
-summary       | Text         |       | tf.string |
-title         | Text         |       | tf.string |
+Feature       | Class        | Shape | Dtype  | Description
+:------------ | :----------- | :---- | :----- | :----------
+              | FeaturesDict |       |        |
+id            | Text         |       | object |
+released_date | Text         |       | object |
+reports       | Text         |       | object |
+summary       | Text         |       | object |
+title         | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -323,30 +323,30 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'fastfact': Text(shape=(), dtype=tf.string),
-    'highlight': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'published_date': Text(shape=(), dtype=tf.string),
-    'released_date': Text(shape=(), dtype=tf.string),
-    'report': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-    'url': Text(shape=(), dtype=tf.string),
+    'fastfact': Text(shape=(), dtype=object),
+    'highlight': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'published_date': Text(shape=(), dtype=object),
+    'released_date': Text(shape=(), dtype=object),
+    'report': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
+    'url': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape | Dtype     | Description
-:------------- | :----------- | :---- | :-------- | :----------
-               | FeaturesDict |       |           |
-fastfact       | Text         |       | tf.string |
-highlight      | Text         |       | tf.string |
-id             | Text         |       | tf.string |
-published_date | Text         |       | tf.string |
-released_date  | Text         |       | tf.string |
-report         | Text         |       | tf.string |
-title          | Text         |       | tf.string |
-url            | Text         |       | tf.string |
+Feature        | Class        | Shape | Dtype  | Description
+:------------- | :----------- | :---- | :----- | :----------
+               | FeaturesDict |       |        |
+fastfact       | Text         |       | object |
+highlight      | Text         |       | object |
+id             | Text         |       | object |
+published_date | Text         |       | object |
+released_date  | Text         |       | object |
+report         | Text         |       | object |
+title          | Text         |       | object |
+url            | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -408,24 +408,24 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'released_date': Text(shape=(), dtype=tf.string),
-    'reports': Text(shape=(), dtype=tf.string),
-    'summary': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'id': Text(shape=(), dtype=object),
+    'released_date': Text(shape=(), dtype=object),
+    'reports': Text(shape=(), dtype=object),
+    'summary': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape | Dtype     | Description
-:------------ | :----------- | :---- | :-------- | :----------
-              | FeaturesDict |       |           |
-id            | Text         |       | tf.string |
-released_date | Text         |       | tf.string |
-reports       | Text         |       | tf.string |
-summary       | Text         |       | tf.string |
-title         | Text         |       | tf.string |
+Feature       | Class        | Shape | Dtype  | Description
+:------------ | :----------- | :---- | :----- | :----------
+              | FeaturesDict |       |        |
+id            | Text         |       | object |
+released_date | Text         |       | object |
+reports       | Text         |       | object |
+summary       | Text         |       | object |
+title         | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -487,30 +487,30 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'fastfact': Text(shape=(), dtype=tf.string),
-    'highlight': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'published_date': Text(shape=(), dtype=tf.string),
-    'released_date': Text(shape=(), dtype=tf.string),
-    'report': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-    'url': Text(shape=(), dtype=tf.string),
+    'fastfact': Text(shape=(), dtype=object),
+    'highlight': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'published_date': Text(shape=(), dtype=object),
+    'released_date': Text(shape=(), dtype=object),
+    'report': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
+    'url': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape | Dtype     | Description
-:------------- | :----------- | :---- | :-------- | :----------
-               | FeaturesDict |       |           |
-fastfact       | Text         |       | tf.string |
-highlight      | Text         |       | tf.string |
-id             | Text         |       | tf.string |
-published_date | Text         |       | tf.string |
-released_date  | Text         |       | tf.string |
-report         | Text         |       | tf.string |
-title          | Text         |       | tf.string |
-url            | Text         |       | tf.string |
+Feature        | Class        | Shape | Dtype  | Description
+:------------- | :----------- | :---- | :----- | :----------
+               | FeaturesDict |       |        |
+fastfact       | Text         |       | object |
+highlight      | Text         |       | object |
+id             | Text         |       | object |
+published_date | Text         |       | object |
+released_date  | Text         |       | object |
+report         | Text         |       | object |
+title          | Text         |       | object |
+url            | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

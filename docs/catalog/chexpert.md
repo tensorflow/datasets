@@ -71,22 +71,22 @@ Split | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image_view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=4)),
-    'name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image_view': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'label': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=4)),
+    'name': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class                | Shape           | Dtype     | Description
-:--------- | :------------------- | :-------------- | :-------- | :----------
-           | FeaturesDict         |                 |           |
-image      | Image                | (None, None, 3) | tf.uint8  |
-image_view | ClassLabel           |                 | tf.int64  |
-label      | Sequence(ClassLabel) | (None,)         | tf.int64  |
-name       | Text                 |                 | tf.string |
+Feature    | Class                | Shape           | Dtype  | Description
+:--------- | :------------------- | :-------------- | :----- | :----------
+           | FeaturesDict         |                 |        |
+image      | Image                | (None, None, 3) | uint8  |
+image_view | ClassLabel           |                 | int64  |
+label      | Sequence(ClassLabel) | (None,)         | int64  |
+name       | Text                 |                 | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

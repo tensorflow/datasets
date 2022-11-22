@@ -54,26 +54,26 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=200),
-    'label_name': Text(shape=(), dtype=tf.string),
-    'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+    'bbox': BBoxFeature(shape=(4,), dtype=float32),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=200),
+    'label_name': Text(shape=(), dtype=object),
+    'segmentation_mask': Image(shape=(None, None, 1), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape           | Dtype      | Description
-:---------------- | :----------- | :-------------- | :--------- | :----------
-                  | FeaturesDict |                 |            |
-bbox              | BBoxFeature  | (4,)            | tf.float32 |
-image             | Image        | (None, None, 3) | tf.uint8   |
-image/filename    | Text         |                 | tf.string  |
-label             | ClassLabel   |                 | tf.int64   |
-label_name        | Text         |                 | tf.string  |
-segmentation_mask | Image        | (None, None, 1) | tf.uint8   |
+Feature           | Class        | Shape           | Dtype   | Description
+:---------------- | :----------- | :-------------- | :------ | :----------
+                  | FeaturesDict |                 |         |
+bbox              | BBoxFeature  | (4,)            | float32 |
+image             | Image        | (None, None, 3) | uint8   |
+image/filename    | Text         |                 | object  |
+label             | ClassLabel   |                 | int64   |
+label_name        | Text         |                 | object  |
+segmentation_mask | Image        | (None, None, 1) | uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

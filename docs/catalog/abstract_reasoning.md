@@ -47,8 +47,6 @@ a particular matrix.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -58,7 +56,7 @@ a particular matrix.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -72,33 +70,28 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=(12,), dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=(4, 12), dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=uint8)),
+    'filename': Text(shape=(), dtype=object),
+    'meta_target': Tensor(shape=(12,), dtype=int64),
+    'relation_structure_encoded': Tensor(shape=(4, 12), dtype=int64),
+    'target': ClassLabel(shape=(), dtype=int64, num_classes=8),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature                    | Class        | Shape | Dtype     | Description |
-| :------------------------- | :----------- | :---- | :-------- | :---------- |
-|                            | FeaturesDict |       |           |             |
-| answers                    | Video(Image) | (8,   | tf.uint8  |             |
-:                            :              : 160,  :           :             :
-:                            :              : 160,  :           :             :
-:                            :              : 1)    :           :             :
-| context                    | Video(Image) | (8,   | tf.uint8  |             |
-:                            :              : 160,  :           :             :
-:                            :              : 160,  :           :             :
-:                            :              : 1)    :           :             :
-| filename                   | Text         |       | tf.string |             |
-| meta_target                | Tensor       | (12,) | tf.int64  |             |
-| relation_structure_encoded | Tensor       | (4,   | tf.int64  |             |
-:                            :              : 12)   :           :             :
-| target                     | ClassLabel   |       | tf.int64  |             |
+| Feature                    | Class        | Shape    | Dtype  | Description |
+| :------------------------- | :----------- | :------- | :----- | :---------- |
+|                            | FeaturesDict |          |        |             |
+| answers                    | Video(Image) | (8, 160, | uint8  |             |
+:                            :              : 160, 1)  :        :             :
+| context                    | Video(Image) | (8, 160, | uint8  |             |
+:                            :              : 160, 1)  :        :             :
+| filename                   | Text         |          | object |             |
+| meta_target                | Tensor       | (12,)    | int64  |             |
+| relation_structure_encoded | Tensor       | (4, 12)  | int64  |             |
+| target                     | ClassLabel   |          | int64  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -137,6 +130,8 @@ FeaturesDict({
     $o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
     separation occurring at the level of the input variables (i.e. pixel \
     manifestations).
+
+*   **Dataset size**: `42.02 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -187,6 +182,8 @@ dataButton.addEventListener('click', async () => {
     $S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
     Thus, generalisation is required for every question in the test set.
 
+*   **Dataset size**: `37.09 GiB`
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -230,6 +227,8 @@ dataButton.addEventListener('click', async () => {
     the attributes were restricted to the lower half of the discrete set during
     \
     training, whereas in the test set they took values in the upper half.
+
+*   **Dataset size**: `35.91 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -278,6 +277,8 @@ dataButton.addEventListener('click', async () => {
     in the training set, and all structures $S$ had at least one such pair \
     $(t_1, t_2)$ as a subset.
 
+*   **Dataset size**: `41.07 GiB`
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -325,6 +326,8 @@ dataButton.addEventListener('click', async () => {
     These held-out triples never occurred in questions in the training set, and
     \
     every $S$ in the test set contained at least one of them.
+
+*   **Dataset size**: `41.45 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -375,6 +378,8 @@ dataButton.addEventListener('click', async () => {
     $S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
     set, all $S$ contained triples with $a_1$ and $a_2$.
 
+*   **Dataset size**: `40.98 GiB`
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -420,6 +425,8 @@ dataButton.addEventListener('click', async () => {
     triple \
     with $o$=shape and $a$=colour.
 
+*   **Dataset size**: `41.21 GiB`
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -464,6 +471,8 @@ dataButton.addEventListener('click', async () => {
     All structures governing puzzles in the test set contained at least one
     triple \
     with $o$=line and $a$=type.
+
+*   **Dataset size**: `41.40 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

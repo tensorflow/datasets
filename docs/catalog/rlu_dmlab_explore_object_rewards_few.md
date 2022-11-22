@@ -70,42 +70,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
-    'episode_return': tf.float32,
+    'episode_id': int64,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': tf.int64,
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': int64,
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'last_action': tf.int64,
-            'last_reward': tf.float32,
-            'pixels': Image(shape=(72, 96, 3), dtype=tf.uint8),
+            'last_action': int64,
+            'last_reward': float32,
+            'pixels': Image(shape=(72, 96, 3), dtype=uint8),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape       | Dtype      | Description
-:---------------------------- | :----------- | :---------- | :--------- | :----------
-                              | FeaturesDict |             |            |
-episode_id                    | Tensor       |             | tf.int64   |
-episode_return                | Tensor       |             | tf.float32 |
-steps                         | Dataset      |             |            |
-steps/action                  | Tensor       |             | tf.int64   |
-steps/discount                | Tensor       |             | tf.float32 |
-steps/is_first                | Tensor       |             | tf.bool    |
-steps/is_last                 | Tensor       |             | tf.bool    |
-steps/is_terminal             | Tensor       |             | tf.bool    |
-steps/observation             | FeaturesDict |             |            |
-steps/observation/last_action | Tensor       |             | tf.int64   |
-steps/observation/last_reward | Tensor       |             | tf.float32 |
-steps/observation/pixels      | Image        | (72, 96, 3) | tf.uint8   |
-steps/reward                  | Tensor       |             | tf.float32 |
+| Feature                       | Class        | Shape | Dtype   | Description |
+| :---------------------------- | :----------- | :---- | :------ | :---------- |
+|                               | FeaturesDict |       |         |             |
+| episode_id                    | Tensor       |       | int64   |             |
+| episode_return                | Tensor       |       | float32 |             |
+| steps                         | Dataset      |       |         |             |
+| steps/action                  | Tensor       |       | int64   |             |
+| steps/discount                | Tensor       |       | float32 |             |
+| steps/is_first                | Tensor       |       | bool    |             |
+| steps/is_last                 | Tensor       |       | bool    |             |
+| steps/is_terminal             | Tensor       |       | bool    |             |
+| steps/observation             | FeaturesDict |       |         |             |
+| steps/observation/last_action | Tensor       |       | int64   |             |
+| steps/observation/last_reward | Tensor       |       | float32 |             |
+| steps/observation/pixels      | Image        | (72,  | uint8   |             |
+:                               :              : 96,   :         :             :
+:                               :              : 3)    :         :             :
+| steps/reward                  | Tensor       |       | float32 |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

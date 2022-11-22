@@ -75,28 +75,28 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'date': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'program': Text(shape=(), dtype=tf.string),
-    'speaker': Sequence(Text(shape=(), dtype=tf.string)),
-    'summary': Text(shape=(), dtype=tf.string),
-    'url': Text(shape=(), dtype=tf.string),
-    'utt': Sequence(Text(shape=(), dtype=tf.string)),
+    'date': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'program': Text(shape=(), dtype=object),
+    'speaker': Sequence(Text(shape=(), dtype=object)),
+    'summary': Text(shape=(), dtype=object),
+    'url': Text(shape=(), dtype=object),
+    'utt': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class          | Shape   | Dtype     | Description
-:------ | :------------- | :------ | :-------- | :----------
-        | FeaturesDict   |         |           |
-date    | Text           |         | tf.string |
-id      | Text           |         | tf.string |
-program | Text           |         | tf.string |
-speaker | Sequence(Text) | (None,) | tf.string |
-summary | Text           |         | tf.string |
-url     | Text           |         | tf.string |
-utt     | Sequence(Text) | (None,) | tf.string |
+Feature | Class          | Shape   | Dtype  | Description
+:------ | :------------- | :------ | :----- | :----------
+        | FeaturesDict   |         |        |
+date    | Text           |         | object |
+id      | Text           |         | object |
+program | Text           |         | object |
+speaker | Sequence(Text) | (None,) | object |
+summary | Text           |         | object |
+url     | Text           |         | object |
+utt     | Sequence(Text) | (None,) | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -55,38 +55,38 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'channel': Text(shape=(), dtype=tf.string),
-    'conversion': tf.int64,
-    'history': tf.float32,
-    'history_segment': Text(shape=(), dtype=tf.string),
-    'mens': tf.int64,
-    'newbie': tf.int64,
-    'recency': tf.int64,
-    'segment': Text(shape=(), dtype=tf.string),
-    'spend': tf.float32,
-    'visit': tf.int64,
-    'womens': tf.int64,
-    'zip_code': Text(shape=(), dtype=tf.string),
+    'channel': Text(shape=(), dtype=object),
+    'conversion': int64,
+    'history': float32,
+    'history_segment': Text(shape=(), dtype=object),
+    'mens': int64,
+    'newbie': int64,
+    'recency': int64,
+    'segment': Text(shape=(), dtype=object),
+    'spend': float32,
+    'visit': int64,
+    'womens': int64,
+    'zip_code': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype      | Description
-:-------------- | :----------- | :---- | :--------- | :----------
-                | FeaturesDict |       |            |
-channel         | Text         |       | tf.string  |
-conversion      | Tensor       |       | tf.int64   |
-history         | Tensor       |       | tf.float32 |
-history_segment | Text         |       | tf.string  |
-mens            | Tensor       |       | tf.int64   |
-newbie          | Tensor       |       | tf.int64   |
-recency         | Tensor       |       | tf.int64   |
-segment         | Text         |       | tf.string  |
-spend           | Tensor       |       | tf.float32 |
-visit           | Tensor       |       | tf.int64   |
-womens          | Tensor       |       | tf.int64   |
-zip_code        | Text         |       | tf.string  |
+Feature         | Class        | Shape | Dtype   | Description
+:-------------- | :----------- | :---- | :------ | :----------
+                | FeaturesDict |       |         |
+channel         | Text         |       | object  |
+conversion      | Tensor       |       | int64   |
+history         | Tensor       |       | float32 |
+history_segment | Text         |       | object  |
+mens            | Tensor       |       | int64   |
+newbie          | Tensor       |       | int64   |
+recency         | Tensor       |       | int64   |
+segment         | Text         |       | object  |
+spend           | Tensor       |       | float32 |
+visit           | Tensor       |       | int64   |
+womens          | Tensor       |       | int64   |
+zip_code        | Text         |       | object  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -80,36 +80,36 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(64, 64, 1), dtype=tf.uint8),
-    'label_orientation': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-    'label_scale': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    'label_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'label_x_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
-    'label_y_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
-    'value_orientation': tf.float32,
-    'value_scale': tf.float32,
-    'value_shape': tf.float32,
-    'value_x_position': tf.float32,
-    'value_y_position': tf.float32,
+    'image': Image(shape=(64, 64, 1), dtype=uint8),
+    'label_orientation': ClassLabel(shape=(), dtype=int64, num_classes=40),
+    'label_scale': ClassLabel(shape=(), dtype=int64, num_classes=6),
+    'label_shape': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'label_x_position': ClassLabel(shape=(), dtype=int64, num_classes=32),
+    'label_y_position': ClassLabel(shape=(), dtype=int64, num_classes=32),
+    'value_orientation': float32,
+    'value_scale': float32,
+    'value_shape': float32,
+    'value_x_position': float32,
+    'value_y_position': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape       | Dtype      | Description
-:---------------- | :----------- | :---------- | :--------- | :----------
-                  | FeaturesDict |             |            |
-image             | Image        | (64, 64, 1) | tf.uint8   |
-label_orientation | ClassLabel   |             | tf.int64   |
-label_scale       | ClassLabel   |             | tf.int64   |
-label_shape       | ClassLabel   |             | tf.int64   |
-label_x_position  | ClassLabel   |             | tf.int64   |
-label_y_position  | ClassLabel   |             | tf.int64   |
-value_orientation | Tensor       |             | tf.float32 |
-value_scale       | Tensor       |             | tf.float32 |
-value_shape       | Tensor       |             | tf.float32 |
-value_x_position  | Tensor       |             | tf.float32 |
-value_y_position  | Tensor       |             | tf.float32 |
+Feature           | Class        | Shape       | Dtype   | Description
+:---------------- | :----------- | :---------- | :------ | :----------
+                  | FeaturesDict |             |         |
+image             | Image        | (64, 64, 1) | uint8   |
+label_orientation | ClassLabel   |             | int64   |
+label_scale       | ClassLabel   |             | int64   |
+label_shape       | ClassLabel   |             | int64   |
+label_x_position  | ClassLabel   |             | int64   |
+label_y_position  | ClassLabel   |             | int64   |
+value_orientation | Tensor       |             | float32 |
+value_scale       | Tensor       |             | float32 |
+value_shape       | Tensor       |             | float32 |
+value_x_position  | Tensor       |             | float32 |
+value_y_position  | Tensor       |             | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

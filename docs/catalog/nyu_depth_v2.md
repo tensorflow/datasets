@@ -53,18 +53,18 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'depth': Tensor(shape=(480, 640), dtype=tf.float16),
-    'image': Image(shape=(480, 640, 3), dtype=tf.uint8),
+    'depth': Tensor(shape=(480, 640), dtype=float16),
+    'image': Image(shape=(480, 640, 3), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape         | Dtype      | Description
-:------ | :----------- | :------------ | :--------- | :----------
-        | FeaturesDict |               |            |
-depth   | Tensor       | (480, 640)    | tf.float16 |
-image   | Image        | (480, 640, 3) | tf.uint8   |
+Feature | Class        | Shape         | Dtype   | Description
+:------ | :----------- | :------------ | :------ | :----------
+        | FeaturesDict |               |         |
+depth   | Tensor       | (480, 640)    | float16 |
+image   | Image        | (480, 640, 3) | uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

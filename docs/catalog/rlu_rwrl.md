@@ -92,38 +92,38 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -180,38 +180,38 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -268,38 +268,38 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -356,38 +356,38 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -444,38 +444,38 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -532,44 +532,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -626,44 +626,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -720,44 +720,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -814,44 +814,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -908,44 +908,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1002,40 +1002,40 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1092,40 +1092,40 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1182,40 +1182,40 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1272,40 +1272,40 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1362,40 +1362,40 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1452,46 +1452,46 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1548,46 +1548,46 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1644,46 +1644,46 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1740,46 +1740,46 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1836,46 +1836,46 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1932,58 +1932,58 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/dummy-0  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | float32 |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2040,58 +2040,58 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/dummy-0  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | float32 |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2148,58 +2148,58 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/dummy-0  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | float32 |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2256,58 +2256,58 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/dummy-0  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | float32 |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2364,58 +2364,58 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_return             | Tensor       |       | tf.float32 |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       | (1,)  | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       | (1,)  | tf.float32 |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_return             | Tensor       |       | float32 |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       | (1,)  | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/dummy-0  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | float32 |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2472,64 +2472,64 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/dummy-0          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2586,64 +2586,64 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/dummy-0          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2700,64 +2700,64 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/dummy-0          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2814,64 +2814,64 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/dummy-0          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2928,64 +2928,64 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(12,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(12,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'egocentric_state': Tensor(shape=(44,), dtype=tf.float32),
-            'force_torque': Tensor(shape=(24,), dtype=tf.float32),
-            'imu': Tensor(shape=(6,), dtype=tf.float32),
-            'torso_upright': Tensor(shape=(1,), dtype=tf.float32),
-            'torso_velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'egocentric_state': Tensor(shape=(44,), dtype=float32),
+            'force_torque': Tensor(shape=(24,), dtype=float32),
+            'imu': Tensor(shape=(6,), dtype=float32),
+            'torso_upright': Tensor(shape=(1,), dtype=float32),
+            'torso_velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class        | Shape | Dtype      | Description
-:--------------------------------- | :----------- | :---- | :--------- | :----------
-                                   | FeaturesDict |       |            |
-episode_return                     | Tensor       |       | tf.float32 |
-steps                              | Dataset      |       |            |
-steps/action                       | Tensor       | (12,) | tf.float32 |
-steps/discount                     | Tensor       | (1,)  | tf.float32 |
-steps/is_first                     | Tensor       |       | tf.bool    |
-steps/is_last                      | Tensor       |       | tf.bool    |
-steps/is_terminal                  | Tensor       |       | tf.bool    |
-steps/observation                  | FeaturesDict |       |            |
-steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
-steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
-steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
-steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
-steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
-steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/reward                       | Tensor       | (1,)  | tf.float32 |
+Feature                            | Class        | Shape | Dtype   | Description
+:--------------------------------- | :----------- | :---- | :------ | :----------
+                                   | FeaturesDict |       |         |
+episode_return                     | Tensor       |       | float32 |
+steps                              | Dataset      |       |         |
+steps/action                       | Tensor       | (12,) | float32 |
+steps/discount                     | Tensor       | (1,)  | float32 |
+steps/is_first                     | Tensor       |       | bool    |
+steps/is_last                      | Tensor       |       | bool    |
+steps/is_terminal                  | Tensor       |       | bool    |
+steps/observation                  | FeaturesDict |       |         |
+steps/observation/dummy-0          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | float32 |
+steps/observation/force_torque     | Tensor       | (24,) | float32 |
+steps/observation/imu              | Tensor       | (6,)  | float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | float32 |
+steps/reward                       | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3042,60 +3042,60 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/dummy-0      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | float32 |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3152,60 +3152,60 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/dummy-0      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | float32 |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3262,60 +3262,60 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/dummy-0      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | float32 |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3372,60 +3372,60 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/dummy-0      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | float32 |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3482,60 +3482,60 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_return                 | Tensor       |       | tf.float32 |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       | (1,)  | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       | (1,)  | tf.float32 |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_return                 | Tensor       |       | float32 |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       | (1,)  | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/dummy-0      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | float32 |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3592,66 +3592,66 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3708,66 +3708,66 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3824,66 +3824,66 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3940,66 +3940,66 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4056,66 +4056,66 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_return': tf.float32,
+    'episode_return': float32,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': Tensor(shape=(1,), dtype=tf.float32),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': Tensor(shape=(1,), dtype=float32),
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'dummy-0': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-1': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-2': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-3': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-4': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-5': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-6': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-7': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-8': Tensor(shape=(1,), dtype=tf.float32),
-            'dummy-9': Tensor(shape=(1,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'dummy-0': Tensor(shape=(1,), dtype=float32),
+            'dummy-1': Tensor(shape=(1,), dtype=float32),
+            'dummy-2': Tensor(shape=(1,), dtype=float32),
+            'dummy-3': Tensor(shape=(1,), dtype=float32),
+            'dummy-4': Tensor(shape=(1,), dtype=float32),
+            'dummy-5': Tensor(shape=(1,), dtype=float32),
+            'dummy-6': Tensor(shape=(1,), dtype=float32),
+            'dummy-7': Tensor(shape=(1,), dtype=float32),
+            'dummy-8': Tensor(shape=(1,), dtype=float32),
+            'dummy-9': Tensor(shape=(1,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': Tensor(shape=(1,), dtype=tf.float32),
+        'reward': Tensor(shape=(1,), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_return                   | Tensor       |       | tf.float32 |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       | (1,)  | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
-steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       | (1,)  | tf.float32 |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_return                   | Tensor       |       | float32 |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       | (1,)  | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       | (1,)  | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

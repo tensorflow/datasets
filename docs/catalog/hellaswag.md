@@ -67,26 +67,26 @@ Split                          | Examples
 
 ```python
 FeaturesDict({
-    'activity_label': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
-    'endings': Sequence(Text(shape=(), dtype=tf.string)),
-    'label': tf.int32,
-    'source_id': Text(shape=(), dtype=tf.string),
-    'split_type': Text(shape=(), dtype=tf.string),
+    'activity_label': Text(shape=(), dtype=object),
+    'context': Text(shape=(), dtype=object),
+    'endings': Sequence(Text(shape=(), dtype=object)),
+    'label': int32,
+    'source_id': Text(shape=(), dtype=object),
+    'split_type': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class          | Shape   | Dtype     | Description
-:------------- | :------------- | :------ | :-------- | :----------
-               | FeaturesDict   |         |           |
-activity_label | Text           |         | tf.string |
-context        | Text           |         | tf.string |
-endings        | Sequence(Text) | (None,) | tf.string |
-label          | Tensor         |         | tf.int32  |
-source_id      | Text           |         | tf.string |
-split_type     | Text           |         | tf.string |
+Feature        | Class          | Shape   | Dtype  | Description
+:------------- | :------------- | :------ | :----- | :----------
+               | FeaturesDict   |         |        |
+activity_label | Text           |         | object |
+context        | Text           |         | object |
+endings        | Sequence(Text) | (None,) | object |
+label          | Tensor         |         | int32  |
+source_id      | Text           |         | object |
+split_type     | Text           |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

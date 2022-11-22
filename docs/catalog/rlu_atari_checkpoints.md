@@ -66,43 +66,42 @@ Checkpoints are ordered in time (so checkpoint 0 ran before checkpoint 1).
 
 ```python
 FeaturesDict({
-    'checkpoint_id': tf.int64,
-    'episode_id': tf.int64,
-    'episode_return': Scalar(shape=(), dtype=tf.float32),
+    'checkpoint_id': int64,
+    'episode_id': int64,
+    'episode_return': Scalar(shape=(), dtype=float32),
     'steps': Dataset({
-        'action': tf.int64,
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Image(shape=(84, 84, 1), dtype=tf.uint8),
-        'reward': Scalar(shape=(), dtype=tf.float32),
+        'action': int64,
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Image(shape=(84, 84, 1), dtype=uint8),
+        'reward': Scalar(shape=(), dtype=float32),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature           | Class        | Shape | Dtype      | Description | Value |
-:                   :              :       :            :             : range :
-| :---------------- | :----------- | :---- | :--------- | :---------- | :---- |
-|                   | FeaturesDict |       |            |             |       |
-| checkpoint_id     | Tensor       |       | tf.int64   |             |       |
-| episode_id        | Tensor       |       | tf.int64   |             |       |
-| episode_return    | Scalar       |       | tf.float32 | Sum of the  |       |
-:                   :              :       :            : clipped     :       :
-:                   :              :       :            : rewards.    :       :
-| steps             | Dataset      |       |            |             |       |
-| steps/action      | Tensor       |       | tf.int64   |             |       |
-| steps/discount    | Tensor       |       | tf.float32 |             |       |
-| steps/is_first    | Tensor       |       | tf.bool    |             |       |
-| steps/is_last     | Tensor       |       | tf.bool    |             |       |
-| steps/is_terminal | Tensor       |       | tf.bool    |             |       |
-| steps/observation | Image        | (84,  | tf.uint8   |             |       |
-:                   :              : 84,   :            :             :       :
-:                   :              : 1)    :            :             :       :
-| steps/reward      | Scalar       |       | tf.float32 | Clipped     | [-1,  |
-:                   :              :       :            : reward.     : 1]    :
+| Feature           | Class        | Shape  | Dtype   | Description | Value   |
+:                   :              :        :         :             : range   :
+| :---------------- | :----------- | :----- | :------ | :---------- | :------ |
+|                   | FeaturesDict |        |         |             |         |
+| checkpoint_id     | Tensor       |        | int64   |             |         |
+| episode_id        | Tensor       |        | int64   |             |         |
+| episode_return    | Scalar       |        | float32 | Sum of the  |         |
+:                   :              :        :         : clipped     :         :
+:                   :              :        :         : rewards.    :         :
+| steps             | Dataset      |        |         |             |         |
+| steps/action      | Tensor       |        | int64   |             |         |
+| steps/discount    | Tensor       |        | float32 |             |         |
+| steps/is_first    | Tensor       |        | bool    |             |         |
+| steps/is_last     | Tensor       |        | bool    |             |         |
+| steps/is_terminal | Tensor       |        | bool    |             |         |
+| steps/observation | Image        | (84,   | uint8   |             |         |
+:                   :              : 84, 1) :         :             :         :
+| steps/reward      | Scalar       |        | float32 | Clipped     | [-1, 1] |
+:                   :              :        :         : reward.     :         :
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

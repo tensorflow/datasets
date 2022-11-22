@@ -42,11 +42,11 @@ images, so labels are not provided.
 
 *   **Download size**: `104.68 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.68 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -60,16 +60,16 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape       | Dtype    | Description
-:------ | :----------- | :---------- | :------- | :----------
-        | FeaturesDict |             |          |
-image   | Image        | (28, 28, 1) | tf.uint8 |
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -115,22 +115,22 @@ refcocog | umd       | test  | 5023  | 2600
 ```python
 FeaturesDict({
     'coco_annotations': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': tf.int64,
-        'label': tf.int64,
+        'area': int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'id': int64,
+        'label': int64,
     }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/id': tf.int64,
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/id': int64,
     'objects': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'gt_box_index': tf.int64,
-        'id': tf.int64,
-        'label': tf.int64,
+        'area': int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'gt_box_index': int64,
+        'id': int64,
+        'label': int64,
         'refexp': Sequence({
-            'raw': Text(shape=(), dtype=tf.string),
-            'refexp_id': tf.int64,
+            'raw': Text(shape=(), dtype=object),
+            'refexp_id': int64,
         }),
     }),
 })
@@ -138,27 +138,26 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature                  | Class        | Shape  | Dtype      | Description |
-| :----------------------- | :----------- | :----- | :--------- | :---------- |
-|                          | FeaturesDict |        |            |             |
-| coco_annotations         | Sequence     |        |            |             |
-| coco_annotations/area    | Tensor       |        | tf.int64   |             |
-| coco_annotations/bbox    | BBoxFeature  | (4,)   | tf.float32 |             |
-| coco_annotations/id      | Tensor       |        | tf.int64   |             |
-| coco_annotations/label   | Tensor       |        | tf.int64   |             |
-| image                    | Image        | (None, | tf.uint8   |             |
-:                          :              : None,  :            :             :
-:                          :              : 3)     :            :             :
-| image/id                 | Tensor       |        | tf.int64   |             |
-| objects                  | Sequence     |        |            |             |
-| objects/area             | Tensor       |        | tf.int64   |             |
-| objects/bbox             | BBoxFeature  | (4,)   | tf.float32 |             |
-| objects/gt_box_index     | Tensor       |        | tf.int64   |             |
-| objects/id               | Tensor       |        | tf.int64   |             |
-| objects/label            | Tensor       |        | tf.int64   |             |
-| objects/refexp           | Sequence     |        |            |             |
-| objects/refexp/raw       | Text         |        | tf.string  |             |
-| objects/refexp/refexp_id | Tensor       |        | tf.int64   |             |
+| Feature                  | Class        | Shape    | Dtype   | Description |
+| :----------------------- | :----------- | :------- | :------ | :---------- |
+|                          | FeaturesDict |          |         |             |
+| coco_annotations         | Sequence     |          |         |             |
+| coco_annotations/area    | Tensor       |          | int64   |             |
+| coco_annotations/bbox    | BBoxFeature  | (4,)     | float32 |             |
+| coco_annotations/id      | Tensor       |          | int64   |             |
+| coco_annotations/label   | Tensor       |          | int64   |             |
+| image                    | Image        | (None,   | uint8   |             |
+:                          :              : None, 3) :         :             :
+| image/id                 | Tensor       |          | int64   |             |
+| objects                  | Sequence     |          |         |             |
+| objects/area             | Tensor       |          | int64   |             |
+| objects/bbox             | BBoxFeature  | (4,)     | float32 |             |
+| objects/gt_box_index     | Tensor       |          | int64   |             |
+| objects/id               | Tensor       |          | int64   |             |
+| objects/label            | Tensor       |          | int64   |             |
+| objects/refexp           | Sequence     |          |         |             |
+| objects/refexp/raw       | Text         |          | object  |             |
+| objects/refexp/refexp_id | Tensor       |          | int64   |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

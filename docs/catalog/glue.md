@@ -72,20 +72,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-idx      | Tensor       |       | tf.int32  |
-label    | ClassLabel   |       | tf.int64  |
-sentence | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+idx      | Tensor       |       | int32  |
+label    | ClassLabel   |       | int64  |
+sentence | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -170,20 +170,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-idx      | Tensor       |       | tf.int32  |
-label    | ClassLabel   |       | tf.int64  |
-sentence | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+idx      | Tensor       |       | int32  |
+label    | ClassLabel   |       | int64  |
+sentence | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -269,22 +269,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=object),
+    'sentence2': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype     | Description
-:-------- | :----------- | :---- | :-------- | :----------
-          | FeaturesDict |       |           |
-idx       | Tensor       |       | tf.int32  |
-label     | ClassLabel   |       | tf.int64  |
-sentence1 | Text         |       | tf.string |
-sentence2 | Text         |       | tf.string |
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | object |
+sentence2 | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -368,22 +368,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'question1': Text(shape=(), dtype=tf.string),
-    'question2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'question1': Text(shape=(), dtype=object),
+    'question2': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype     | Description
-:-------- | :----------- | :---- | :-------- | :----------
-          | FeaturesDict |       |           |
-idx       | Tensor       |       | tf.int32  |
-label     | ClassLabel   |       | tf.int64  |
-question1 | Text         |       | tf.string |
-question2 | Text         |       | tf.string |
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+question1 | Text         |       | object |
+question2 | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -469,22 +469,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': tf.float32,
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': float32,
+    'sentence1': Text(shape=(), dtype=object),
+    'sentence2': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype      | Description
-:-------- | :----------- | :---- | :--------- | :----------
-          | FeaturesDict |       |            |
-idx       | Tensor       |       | tf.int32   |
-label     | Tensor       |       | tf.float32 |
-sentence1 | Text         |       | tf.string  |
-sentence2 | Text         |       | tf.string  |
+Feature   | Class        | Shape | Dtype   | Description
+:-------- | :----------- | :---- | :------ | :----------
+          | FeaturesDict |       |         |
+idx       | Tensor       |       | int32   |
+label     | Tensor       |       | float32 |
+sentence1 | Text         |       | object  |
+sentence2 | Text         |       | object  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -578,22 +578,22 @@ Split                     | Examples
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=object),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-hypothesis | Text         |       | tf.string |
-idx        | Tensor       |       | tf.int32  |
-label      | ClassLabel   |       | tf.int64  |
-premise    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | object |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -692,22 +692,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=object),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-hypothesis | Text         |       | tf.string |
-idx        | Tensor       |       | tf.int32  |
-label      | ClassLabel   |       | tf.int64  |
-premise    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | object |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -806,22 +806,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=object),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-hypothesis | Text         |       | tf.string |
-idx        | Tensor       |       | tf.int32  |
-label      | ClassLabel   |       | tf.int64  |
-premise    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | object |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -931,22 +931,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'question': Text(shape=(), dtype=tf.string),
-    'sentence': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'question': Text(shape=(), dtype=object),
+    'sentence': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-idx      | Tensor       |       | tf.int32  |
-label    | ClassLabel   |       | tf.int64  |
-question | Text         |       | tf.string |
-sentence | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+idx      | Tensor       |       | int32  |
+label    | ClassLabel   |       | int64  |
+question | Text         |       | object |
+sentence | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1034,22 +1034,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=object),
+    'sentence2': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype     | Description
-:-------- | :----------- | :---- | :-------- | :----------
-          | FeaturesDict |       |           |
-idx       | Tensor       |       | tf.int32  |
-label     | ClassLabel   |       | tf.int64  |
-sentence1 | Text         |       | tf.string |
-sentence2 | Text         |       | tf.string |
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | object |
+sentence2 | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1176,22 +1176,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=object),
+    'sentence2': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype     | Description
-:-------- | :----------- | :---- | :-------- | :----------
-          | FeaturesDict |       |           |
-idx       | Tensor       |       | tf.int32  |
-label     | ClassLabel   |       | tf.int64  |
-sentence1 | Text         |       | tf.string |
-sentence2 | Text         |       | tf.string |
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | object |
+sentence2 | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1275,22 +1275,22 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=object),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-hypothesis | Text         |       | tf.string |
-idx        | Tensor       |       | tf.int32  |
-label      | ClassLabel   |       | tf.int64  |
-premise    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | object |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -75,121 +75,123 @@ Split          | Examples
 ```python
 FeaturesDict({
     'attributes': FeaturesDict({
-        '5_o_Clock_Shadow': tf.bool,
-        'Arched_Eyebrows': tf.bool,
-        'Attractive': tf.bool,
-        'Bags_Under_Eyes': tf.bool,
-        'Bald': tf.bool,
-        'Bangs': tf.bool,
-        'Big_Lips': tf.bool,
-        'Big_Nose': tf.bool,
-        'Black_Hair': tf.bool,
-        'Blond_Hair': tf.bool,
-        'Blurry': tf.bool,
-        'Brown_Hair': tf.bool,
-        'Bushy_Eyebrows': tf.bool,
-        'Chubby': tf.bool,
-        'Double_Chin': tf.bool,
-        'Eyeglasses': tf.bool,
-        'Goatee': tf.bool,
-        'Gray_Hair': tf.bool,
-        'Heavy_Makeup': tf.bool,
-        'High_Cheekbones': tf.bool,
-        'Male': tf.bool,
-        'Mouth_Slightly_Open': tf.bool,
-        'Mustache': tf.bool,
-        'Narrow_Eyes': tf.bool,
-        'No_Beard': tf.bool,
-        'Oval_Face': tf.bool,
-        'Pale_Skin': tf.bool,
-        'Pointy_Nose': tf.bool,
-        'Receding_Hairline': tf.bool,
-        'Rosy_Cheeks': tf.bool,
-        'Sideburns': tf.bool,
-        'Smiling': tf.bool,
-        'Straight_Hair': tf.bool,
-        'Wavy_Hair': tf.bool,
-        'Wearing_Earrings': tf.bool,
-        'Wearing_Hat': tf.bool,
-        'Wearing_Lipstick': tf.bool,
-        'Wearing_Necklace': tf.bool,
-        'Wearing_Necktie': tf.bool,
-        'Young': tf.bool,
+        '5_o_Clock_Shadow': bool,
+        'Arched_Eyebrows': bool,
+        'Attractive': bool,
+        'Bags_Under_Eyes': bool,
+        'Bald': bool,
+        'Bangs': bool,
+        'Big_Lips': bool,
+        'Big_Nose': bool,
+        'Black_Hair': bool,
+        'Blond_Hair': bool,
+        'Blurry': bool,
+        'Brown_Hair': bool,
+        'Bushy_Eyebrows': bool,
+        'Chubby': bool,
+        'Double_Chin': bool,
+        'Eyeglasses': bool,
+        'Goatee': bool,
+        'Gray_Hair': bool,
+        'Heavy_Makeup': bool,
+        'High_Cheekbones': bool,
+        'Male': bool,
+        'Mouth_Slightly_Open': bool,
+        'Mustache': bool,
+        'Narrow_Eyes': bool,
+        'No_Beard': bool,
+        'Oval_Face': bool,
+        'Pale_Skin': bool,
+        'Pointy_Nose': bool,
+        'Receding_Hairline': bool,
+        'Rosy_Cheeks': bool,
+        'Sideburns': bool,
+        'Smiling': bool,
+        'Straight_Hair': bool,
+        'Wavy_Hair': bool,
+        'Wearing_Earrings': bool,
+        'Wearing_Hat': bool,
+        'Wearing_Lipstick': bool,
+        'Wearing_Necklace': bool,
+        'Wearing_Necktie': bool,
+        'Young': bool,
     }),
-    'image': Image(shape=(218, 178, 3), dtype=tf.uint8),
+    'image': Image(shape=(218, 178, 3), dtype=uint8),
     'landmarks': FeaturesDict({
-        'lefteye_x': tf.int64,
-        'lefteye_y': tf.int64,
-        'leftmouth_x': tf.int64,
-        'leftmouth_y': tf.int64,
-        'nose_x': tf.int64,
-        'nose_y': tf.int64,
-        'righteye_x': tf.int64,
-        'righteye_y': tf.int64,
-        'rightmouth_x': tf.int64,
-        'rightmouth_y': tf.int64,
+        'lefteye_x': int64,
+        'lefteye_y': int64,
+        'leftmouth_x': int64,
+        'leftmouth_y': int64,
+        'nose_x': int64,
+        'nose_y': int64,
+        'righteye_x': int64,
+        'righteye_y': int64,
+        'rightmouth_x': int64,
+        'rightmouth_y': int64,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape         | Dtype    | Description
-:----------------------------- | :----------- | :------------ | :------- | :----------
-                               | FeaturesDict |               |          |
-attributes                     | FeaturesDict |               |          |
-attributes/5_o_Clock_Shadow    | Tensor       |               | tf.bool  |
-attributes/Arched_Eyebrows     | Tensor       |               | tf.bool  |
-attributes/Attractive          | Tensor       |               | tf.bool  |
-attributes/Bags_Under_Eyes     | Tensor       |               | tf.bool  |
-attributes/Bald                | Tensor       |               | tf.bool  |
-attributes/Bangs               | Tensor       |               | tf.bool  |
-attributes/Big_Lips            | Tensor       |               | tf.bool  |
-attributes/Big_Nose            | Tensor       |               | tf.bool  |
-attributes/Black_Hair          | Tensor       |               | tf.bool  |
-attributes/Blond_Hair          | Tensor       |               | tf.bool  |
-attributes/Blurry              | Tensor       |               | tf.bool  |
-attributes/Brown_Hair          | Tensor       |               | tf.bool  |
-attributes/Bushy_Eyebrows      | Tensor       |               | tf.bool  |
-attributes/Chubby              | Tensor       |               | tf.bool  |
-attributes/Double_Chin         | Tensor       |               | tf.bool  |
-attributes/Eyeglasses          | Tensor       |               | tf.bool  |
-attributes/Goatee              | Tensor       |               | tf.bool  |
-attributes/Gray_Hair           | Tensor       |               | tf.bool  |
-attributes/Heavy_Makeup        | Tensor       |               | tf.bool  |
-attributes/High_Cheekbones     | Tensor       |               | tf.bool  |
-attributes/Male                | Tensor       |               | tf.bool  |
-attributes/Mouth_Slightly_Open | Tensor       |               | tf.bool  |
-attributes/Mustache            | Tensor       |               | tf.bool  |
-attributes/Narrow_Eyes         | Tensor       |               | tf.bool  |
-attributes/No_Beard            | Tensor       |               | tf.bool  |
-attributes/Oval_Face           | Tensor       |               | tf.bool  |
-attributes/Pale_Skin           | Tensor       |               | tf.bool  |
-attributes/Pointy_Nose         | Tensor       |               | tf.bool  |
-attributes/Receding_Hairline   | Tensor       |               | tf.bool  |
-attributes/Rosy_Cheeks         | Tensor       |               | tf.bool  |
-attributes/Sideburns           | Tensor       |               | tf.bool  |
-attributes/Smiling             | Tensor       |               | tf.bool  |
-attributes/Straight_Hair       | Tensor       |               | tf.bool  |
-attributes/Wavy_Hair           | Tensor       |               | tf.bool  |
-attributes/Wearing_Earrings    | Tensor       |               | tf.bool  |
-attributes/Wearing_Hat         | Tensor       |               | tf.bool  |
-attributes/Wearing_Lipstick    | Tensor       |               | tf.bool  |
-attributes/Wearing_Necklace    | Tensor       |               | tf.bool  |
-attributes/Wearing_Necktie     | Tensor       |               | tf.bool  |
-attributes/Young               | Tensor       |               | tf.bool  |
-image                          | Image        | (218, 178, 3) | tf.uint8 |
-landmarks                      | FeaturesDict |               |          |
-landmarks/lefteye_x            | Tensor       |               | tf.int64 |
-landmarks/lefteye_y            | Tensor       |               | tf.int64 |
-landmarks/leftmouth_x          | Tensor       |               | tf.int64 |
-landmarks/leftmouth_y          | Tensor       |               | tf.int64 |
-landmarks/nose_x               | Tensor       |               | tf.int64 |
-landmarks/nose_y               | Tensor       |               | tf.int64 |
-landmarks/righteye_x           | Tensor       |               | tf.int64 |
-landmarks/righteye_y           | Tensor       |               | tf.int64 |
-landmarks/rightmouth_x         | Tensor       |               | tf.int64 |
-landmarks/rightmouth_y         | Tensor       |               | tf.int64 |
+| Feature                        | Class        | Shape | Dtype | Description |
+| :----------------------------- | :----------- | :---- | :---- | :---------- |
+|                                | FeaturesDict |       |       |             |
+| attributes                     | FeaturesDict |       |       |             |
+| attributes/5_o_Clock_Shadow    | Tensor       |       | bool  |             |
+| attributes/Arched_Eyebrows     | Tensor       |       | bool  |             |
+| attributes/Attractive          | Tensor       |       | bool  |             |
+| attributes/Bags_Under_Eyes     | Tensor       |       | bool  |             |
+| attributes/Bald                | Tensor       |       | bool  |             |
+| attributes/Bangs               | Tensor       |       | bool  |             |
+| attributes/Big_Lips            | Tensor       |       | bool  |             |
+| attributes/Big_Nose            | Tensor       |       | bool  |             |
+| attributes/Black_Hair          | Tensor       |       | bool  |             |
+| attributes/Blond_Hair          | Tensor       |       | bool  |             |
+| attributes/Blurry              | Tensor       |       | bool  |             |
+| attributes/Brown_Hair          | Tensor       |       | bool  |             |
+| attributes/Bushy_Eyebrows      | Tensor       |       | bool  |             |
+| attributes/Chubby              | Tensor       |       | bool  |             |
+| attributes/Double_Chin         | Tensor       |       | bool  |             |
+| attributes/Eyeglasses          | Tensor       |       | bool  |             |
+| attributes/Goatee              | Tensor       |       | bool  |             |
+| attributes/Gray_Hair           | Tensor       |       | bool  |             |
+| attributes/Heavy_Makeup        | Tensor       |       | bool  |             |
+| attributes/High_Cheekbones     | Tensor       |       | bool  |             |
+| attributes/Male                | Tensor       |       | bool  |             |
+| attributes/Mouth_Slightly_Open | Tensor       |       | bool  |             |
+| attributes/Mustache            | Tensor       |       | bool  |             |
+| attributes/Narrow_Eyes         | Tensor       |       | bool  |             |
+| attributes/No_Beard            | Tensor       |       | bool  |             |
+| attributes/Oval_Face           | Tensor       |       | bool  |             |
+| attributes/Pale_Skin           | Tensor       |       | bool  |             |
+| attributes/Pointy_Nose         | Tensor       |       | bool  |             |
+| attributes/Receding_Hairline   | Tensor       |       | bool  |             |
+| attributes/Rosy_Cheeks         | Tensor       |       | bool  |             |
+| attributes/Sideburns           | Tensor       |       | bool  |             |
+| attributes/Smiling             | Tensor       |       | bool  |             |
+| attributes/Straight_Hair       | Tensor       |       | bool  |             |
+| attributes/Wavy_Hair           | Tensor       |       | bool  |             |
+| attributes/Wearing_Earrings    | Tensor       |       | bool  |             |
+| attributes/Wearing_Hat         | Tensor       |       | bool  |             |
+| attributes/Wearing_Lipstick    | Tensor       |       | bool  |             |
+| attributes/Wearing_Necklace    | Tensor       |       | bool  |             |
+| attributes/Wearing_Necktie     | Tensor       |       | bool  |             |
+| attributes/Young               | Tensor       |       | bool  |             |
+| image                          | Image        | (218, | uint8 |             |
+:                                :              : 178,  :       :             :
+:                                :              : 3)    :       :             :
+| landmarks                      | FeaturesDict |       |       |             |
+| landmarks/lefteye_x            | Tensor       |       | int64 |             |
+| landmarks/lefteye_y            | Tensor       |       | int64 |             |
+| landmarks/leftmouth_x          | Tensor       |       | int64 |             |
+| landmarks/leftmouth_y          | Tensor       |       | int64 |             |
+| landmarks/nose_x               | Tensor       |       | int64 |             |
+| landmarks/nose_y               | Tensor       |       | int64 |             |
+| landmarks/righteye_x           | Tensor       |       | int64 |             |
+| landmarks/righteye_y           | Tensor       |       | int64 |             |
+| landmarks/rightmouth_x         | Tensor       |       | int64 |             |
+| landmarks/rightmouth_y         | Tensor       |       | int64 |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

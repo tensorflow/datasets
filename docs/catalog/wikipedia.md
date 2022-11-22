@@ -33,18 +33,18 @@ cleaning to strip markdown and unwanted sections (references, etc.).
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape | Dtype     | Description
-:------ | :----------- | :---- | :-------- | :----------
-        | FeaturesDict |       |           |
-text    | Text         |       | tf.string |
-title   | Text         |       | tf.string |
+Feature | Class        | Shape | Dtype  | Description
+:------ | :----------- | :---- | :----- | :----------
+        | FeaturesDict |       |        |
+text    | Text         |       | object |
+title   | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -904,7 +904,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `692.29 KiB`
 
-*   **Dataset size**: `937.43 KiB`
+*   **Dataset size**: `351.44 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -914,7 +914,7 @@ dataButton.addEventListener('click', async () => {
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 1,919
+`'train'` | 535
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

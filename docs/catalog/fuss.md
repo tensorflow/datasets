@@ -69,36 +69,36 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': tf.string,
-    'jams': tf.string,
-    'mixture_audio': Audio(shape=(160000,), dtype=tf.int16),
+    'id': object,
+    'jams': object,
+    'mixture_audio': Audio(shape=(160000,), dtype=int16),
     'segments': Sequence({
-        'end_time_seconds': tf.float32,
-        'label': tf.string,
-        'start_time_seconds': tf.float32,
+        'end_time_seconds': float32,
+        'label': object,
+        'start_time_seconds': float32,
     }),
     'sources': Sequence({
-        'audio': Audio(shape=(160000,), dtype=tf.int16),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+        'audio': Audio(shape=(160000,), dtype=int16),
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=4),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                     | Class        | Shape     | Dtype      | Description
-:-------------------------- | :----------- | :-------- | :--------- | :----------
-                            | FeaturesDict |           |            |
-id                          | Tensor       |           | tf.string  |
-jams                        | Tensor       |           | tf.string  |
-mixture_audio               | Audio        | (160000,) | tf.int16   |
-segments                    | Sequence     |           |            |
-segments/end_time_seconds   | Tensor       |           | tf.float32 |
-segments/label              | Tensor       |           | tf.string  |
-segments/start_time_seconds | Tensor       |           | tf.float32 |
-sources                     | Sequence     |           |            |
-sources/audio               | Audio        | (160000,) | tf.int16   |
-sources/label               | ClassLabel   |           | tf.int64   |
+Feature                     | Class        | Shape     | Dtype   | Description
+:-------------------------- | :----------- | :-------- | :------ | :----------
+                            | FeaturesDict |           |         |
+id                          | Tensor       |           | object  |
+jams                        | Tensor       |           | object  |
+mixture_audio               | Audio        | (160000,) | int16   |
+segments                    | Sequence     |           |         |
+segments/end_time_seconds   | Tensor       |           | float32 |
+segments/label              | Tensor       |           | object  |
+segments/start_time_seconds | Tensor       |           | float32 |
+sources                     | Sequence     |           |         |
+sources/audio               | Audio        | (160000,) | int16   |
+sources/label               | ClassLabel   |           | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

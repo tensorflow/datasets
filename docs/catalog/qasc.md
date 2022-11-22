@@ -53,35 +53,35 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answerKey': Text(shape=(), dtype=tf.string),
+    'answerKey': Text(shape=(), dtype=object),
     'choices': Sequence({
-        'label': Text(shape=(), dtype=tf.string),
-        'text': Text(shape=(), dtype=tf.string),
+        'label': Text(shape=(), dtype=object),
+        'text': Text(shape=(), dtype=object),
     }),
-    'combinedfact': Text(shape=(), dtype=tf.string),
-    'fact1': Text(shape=(), dtype=tf.string),
-    'fact2': Text(shape=(), dtype=tf.string),
-    'formatted_question': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'combinedfact': Text(shape=(), dtype=object),
+    'fact1': Text(shape=(), dtype=object),
+    'fact2': Text(shape=(), dtype=object),
+    'formatted_question': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature            | Class        | Shape | Dtype     | Description
-:----------------- | :----------- | :---- | :-------- | :----------
-                   | FeaturesDict |       |           |
-answerKey          | Text         |       | tf.string |
-choices            | Sequence     |       |           |
-choices/label      | Text         |       | tf.string |
-choices/text       | Text         |       | tf.string |
-combinedfact       | Text         |       | tf.string |
-fact1              | Text         |       | tf.string |
-fact2              | Text         |       | tf.string |
-formatted_question | Text         |       | tf.string |
-id                 | Text         |       | tf.string |
-question           | Text         |       | tf.string |
+Feature            | Class        | Shape | Dtype  | Description
+:----------------- | :----------- | :---- | :----- | :----------
+                   | FeaturesDict |       |        |
+answerKey          | Text         |       | object |
+choices            | Sequence     |       |        |
+choices/label      | Text         |       | object |
+choices/text       | Text         |       | object |
+combinedfact       | Text         |       | object |
+fact1              | Text         |       | object |
+fact2              | Text         |       | object |
+formatted_question | Text         |       | object |
+id                 | Text         |       | object |
+question           | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

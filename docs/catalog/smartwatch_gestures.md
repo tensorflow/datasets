@@ -54,35 +54,35 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'attempt': tf.uint8,
+    'attempt': uint8,
     'features': Sequence({
-        'accel_x': tf.float64,
-        'accel_y': tf.float64,
-        'accel_z': tf.float64,
-        'time_event': tf.uint64,
-        'time_millis': tf.uint64,
-        'time_nanos': tf.uint64,
+        'accel_x': float64,
+        'accel_y': float64,
+        'accel_z': float64,
+        'time_event': uint64,
+        'time_millis': uint64,
+        'time_nanos': uint64,
     }),
-    'gesture': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-    'participant': tf.uint8,
+    'gesture': ClassLabel(shape=(), dtype=int64, num_classes=20),
+    'participant': uint8,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class        | Shape | Dtype      | Description
-:------------------- | :----------- | :---- | :--------- | :----------
-                     | FeaturesDict |       |            |
-attempt              | Tensor       |       | tf.uint8   |
-features             | Sequence     |       |            |
-features/accel_x     | Tensor       |       | tf.float64 |
-features/accel_y     | Tensor       |       | tf.float64 |
-features/accel_z     | Tensor       |       | tf.float64 |
-features/time_event  | Tensor       |       | tf.uint64  |
-features/time_millis | Tensor       |       | tf.uint64  |
-features/time_nanos  | Tensor       |       | tf.uint64  |
-gesture              | ClassLabel   |       | tf.int64   |
-participant          | Tensor       |       | tf.uint8   |
+Feature              | Class        | Shape | Dtype   | Description
+:------------------- | :----------- | :---- | :------ | :----------
+                     | FeaturesDict |       |         |
+attempt              | Tensor       |       | uint8   |
+features             | Sequence     |       |         |
+features/accel_x     | Tensor       |       | float64 |
+features/accel_y     | Tensor       |       | float64 |
+features/accel_z     | Tensor       |       | float64 |
+features/time_event  | Tensor       |       | uint64  |
+features/time_millis | Tensor       |       | uint64  |
+features/time_nanos  | Tensor       |       | uint64  |
+gesture              | ClassLabel   |       | int64   |
+participant          | Tensor       |       | uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

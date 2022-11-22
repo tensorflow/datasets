@@ -55,18 +55,18 @@ ds = tfds.load("mslr_web")
 
 ```python
 FeaturesDict({
-    'float_features': Tensor(shape=(None, 136), dtype=tf.float64),
-    'label': Tensor(shape=(None,), dtype=tf.float64),
+    'float_features': Tensor(shape=(None, 136), dtype=float64),
+    'label': Tensor(shape=(None,), dtype=float64),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape       | Dtype      | Description
-:------------- | :----------- | :---------- | :--------- | :----------
-               | FeaturesDict |             |            |
-float_features | Tensor       | (None, 136) | tf.float64 |
-label          | Tensor       | (None,)     | tf.float64 |
+Feature        | Class        | Shape       | Dtype   | Description
+:------------- | :----------- | :---------- | :------ | :----------
+               | FeaturesDict |             |         |
+float_features | Tensor       | (None, 136) | float64 |
+label          | Tensor       | (None,)     | float64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

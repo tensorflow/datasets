@@ -38,8 +38,6 @@ conditions.
 
 *   **Download size**: `1.13 MiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -51,7 +49,7 @@ conditions.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -66,20 +64,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
+    'name': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape           | Dtype     | Description
-:------ | :----------- | :-------------- | :-------- | :----------
-        | FeaturesDict |                 |           |
-image   | Image        | (None, None, 3) | tf.uint8  |
-label   | ClassLabel   |                 | tf.int64  |
-name    | Text         |                 | tf.string |
+Feature | Class        | Shape           | Dtype  | Description
+:------ | :----------- | :-------------- | :----- | :----------
+        | FeaturesDict |                 |        |
+image   | Image        | (None, None, 3) | uint8  |
+label   | ClassLabel   |                 | int64  |
+name    | Text         |                 | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -101,6 +99,8 @@ name    | Text         |                 | tf.string |
 ## diabetic_retinopathy_detection/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.
+
+*   **Dataset size**: `89.15 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -148,6 +148,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images have roughly 1,000,000 pixels, at 72 quality.
 
+*   **Dataset size**: `3.96 GiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -193,6 +195,8 @@ dataButton.addEventListener('click', async () => {
 ## diabetic_retinopathy_detection/250K
 
 *   **Config description**: Images have roughly 250,000 pixels, at 72 quality.
+
+*   **Dataset size**: `1.30 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -242,6 +246,8 @@ dataButton.addEventListener('click', async () => {
     Kaggle competition did in 2015: first they are resized so that the radius of
     an eyeball is 300 pixels, then they are cropped to 90% of the radius, and
     finally they are encoded with 72 JPEG quality.
+
+*   **Dataset size**: `3.65 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

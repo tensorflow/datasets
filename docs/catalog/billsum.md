@@ -39,11 +39,11 @@ summary.
 
 *   **Download size**: `64.14 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `260.84 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -57,20 +57,20 @@ Split       | Examples
 
 ```python
 FeaturesDict({
-    'summary': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'summary': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape | Dtype     | Description
-:------ | :----------- | :---- | :-------- | :----------
-        | FeaturesDict |       |           |
-summary | Text         |       | tf.string |
-text    | Text         |       | tf.string |
-title   | Text         |       | tf.string |
+Feature | Class        | Shape | Dtype  | Description
+:------ | :----------- | :---- | :----- | :----------
+        | FeaturesDict |       |        |
+summary | Text         |       | object |
+text    | Text         |       | object |
+title   | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
