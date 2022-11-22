@@ -43,39 +43,39 @@ to represent steps and episodes.
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'goal': Tensor(shape=(2,), dtype=tf.float32),
-            'qpos': Tensor(shape=(15,), dtype=tf.float32),
-            'qvel': Tensor(shape=(14,), dtype=tf.float32),
+            'goal': Tensor(shape=(2,), dtype=float32),
+            'qpos': Tensor(shape=(15,), dtype=float32),
+            'qvel': Tensor(shape=(14,), dtype=float32),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(29,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(29,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-steps             | Dataset      |       |            |
-steps/action      | Tensor       | (8,)  | tf.float32 |
-steps/discount    | Tensor       |       | tf.float32 |
-steps/infos       | FeaturesDict |       |            |
-steps/infos/goal  | Tensor       | (2,)  | tf.float32 |
-steps/infos/qpos  | Tensor       | (15,) | tf.float32 |
-steps/infos/qvel  | Tensor       | (14,) | tf.float32 |
-steps/is_first    | Tensor       |       | tf.bool    |
-steps/is_last     | Tensor       |       | tf.bool    |
-steps/is_terminal | Tensor       |       | tf.bool    |
-steps/observation | Tensor       | (29,) | tf.float32 |
-steps/reward      | Tensor       |       | tf.float32 |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+steps             | Dataset      |       |         |
+steps/action      | Tensor       | (8,)  | float32 |
+steps/discount    | Tensor       |       | float32 |
+steps/infos       | FeaturesDict |       |         |
+steps/infos/goal  | Tensor       | (2,)  | float32 |
+steps/infos/qpos  | Tensor       | (15,) | float32 |
+steps/infos/qvel  | Tensor       | (14,) | float32 |
+steps/is_first    | Tensor       |       | bool    |
+steps/is_last     | Tensor       |       | bool    |
+steps/is_terminal | Tensor       |       | bool    |
+steps/observation | Tensor       | (29,) | float32 |
+steps/reward      | Tensor       |       | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

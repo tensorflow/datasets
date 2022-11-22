@@ -78,20 +78,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'ner': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=9)),
-    'pos': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=60)),
-    'tokens': Sequence(Text(shape=(), dtype=tf.string)),
+    'ner': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=9)),
+    'pos': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=60)),
+    'tokens': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class                | Shape   | Dtype     | Description
-:------ | :------------------- | :------ | :-------- | :----------
-        | FeaturesDict         |         |           |
-ner     | Sequence(ClassLabel) | (None,) | tf.int64  |
-pos     | Sequence(ClassLabel) | (None,) | tf.int64  |
-tokens  | Sequence(Text)       | (None,) | tf.string |
+Feature | Class                | Shape   | Dtype  | Description
+:------ | :------------------- | :------ | :----- | :----------
+        | FeaturesDict         |         |        |
+ner     | Sequence(ClassLabel) | (None,) | int64  |
+pos     | Sequence(ClassLabel) | (None,) | int64  |
+tokens  | Sequence(Text)       | (None,) | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -148,20 +148,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'ner': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=9)),
-    'pos': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=12)),
-    'tokens': Sequence(Text(shape=(), dtype=tf.string)),
+    'ner': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=9)),
+    'pos': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=12)),
+    'tokens': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class                | Shape   | Dtype     | Description
-:------ | :------------------- | :------ | :-------- | :----------
-        | FeaturesDict         |         |           |
-ner     | Sequence(ClassLabel) | (None,) | tf.int64  |
-pos     | Sequence(ClassLabel) | (None,) | tf.int64  |
-tokens  | Sequence(Text)       | (None,) | tf.string |
+Feature | Class                | Shape   | Dtype  | Description
+:------ | :------------------- | :------ | :----- | :----------
+        | FeaturesDict         |         |        |
+ner     | Sequence(ClassLabel) | (None,) | int64  |
+pos     | Sequence(ClassLabel) | (None,) | int64  |
+tokens  | Sequence(Text)       | (None,) | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

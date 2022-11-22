@@ -57,22 +57,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'id': tf.string,
-    'speech': Audio(shape=(None,), dtype=tf.int16),
-    'text': Text(shape=(), dtype=tf.string),
-    'text_normalized': Text(shape=(), dtype=tf.string),
+    'id': object,
+    'speech': Audio(shape=(None,), dtype=int16),
+    'text': Text(shape=(), dtype=object),
+    'text_normalized': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape   | Dtype     | Description
-:-------------- | :----------- | :------ | :-------- | :----------
-                | FeaturesDict |         |           |
-id              | Tensor       |         | tf.string |
-speech          | Audio        | (None,) | tf.int16  |
-text            | Text         |         | tf.string |
-text_normalized | Text         |         | tf.string |
+Feature         | Class        | Shape   | Dtype  | Description
+:-------------- | :----------- | :------ | :----- | :----------
+                | FeaturesDict |         |        |
+id              | Tensor       |         | object |
+speech          | Audio        | (None,) | int16  |
+text            | Text         |         | object |
+text_normalized | Text         |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

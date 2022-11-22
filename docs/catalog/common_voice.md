@@ -37,32 +37,32 @@ Mozilla Common Voice Dataset
 
 ```python
 FeaturesDict({
-    'accent': Text(shape=(), dtype=tf.string),
-    'age': Text(shape=(), dtype=tf.string),
-    'client_id': Text(shape=(), dtype=tf.string),
-    'downvotes': Scalar(shape=(), dtype=tf.int32),
-    'gender': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'segment': Text(shape=(), dtype=tf.string),
-    'sentence': Text(shape=(), dtype=tf.string),
-    'upvotes': Scalar(shape=(), dtype=tf.int32),
-    'voice': Audio(shape=(None,), dtype=tf.int64),
+    'accent': Text(shape=(), dtype=object),
+    'age': Text(shape=(), dtype=object),
+    'client_id': Text(shape=(), dtype=object),
+    'downvotes': Scalar(shape=(), dtype=int32),
+    'gender': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'segment': Text(shape=(), dtype=object),
+    'sentence': Text(shape=(), dtype=object),
+    'upvotes': Scalar(shape=(), dtype=int32),
+    'voice': Audio(shape=(None,), dtype=int64),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape   | Dtype     | Description
-:-------- | :----------- | :------ | :-------- | :----------
-          | FeaturesDict |         |           |
-accent    | Text         |         | tf.string | Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts
-age       | Text         |         | tf.string | Age bucket of the speaker (e.g. teens, or fourties), see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts
-client_id | Text         |         | tf.string | Hashed UUID of a given user
-downvotes | Scalar       |         | tf.int32  | Number of people who said audio does not match text
-gender    | ClassLabel   |         | tf.int64  | Gender of the speaker
-segment   | Text         |         | tf.string | If sentence belongs to a custom dataset segment, it will be listed here
-sentence  | Text         |         | tf.string | Supposed transcription of the audio
-upvotes   | Scalar       |         | tf.int32  | Number of people who said audio matches the text
-voice     | Audio        | (None,) | tf.int64  |
+Feature   | Class        | Shape   | Dtype  | Description
+:-------- | :----------- | :------ | :----- | :----------
+          | FeaturesDict |         |        |
+accent    | Text         |         | object | Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts
+age       | Text         |         | object | Age bucket of the speaker (e.g. teens, or fourties), see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts
+client_id | Text         |         | object | Hashed UUID of a given user
+downvotes | Scalar       |         | int32  | Number of people who said audio does not match text
+gender    | ClassLabel   |         | int64  | Gender of the speaker
+segment   | Text         |         | object | If sentence belongs to a custom dataset segment, it will be listed here
+sentence  | Text         |         | object | Supposed transcription of the audio
+upvotes   | Scalar       |         | int32  | Number of people who said audio matches the text
+voice     | Audio        | (None,) | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

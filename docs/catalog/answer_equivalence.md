@@ -58,36 +58,36 @@ Split         | Examples
 
 ```python
 FeaturesDict({
-    'candidate': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
-    'gold_index': tf.int32,
-    'qid': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-    'question_1': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'question_2': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'question_3': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'question_4': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'reference': Text(shape=(), dtype=tf.string),
-    'score': tf.float32,
+    'candidate': Text(shape=(), dtype=object),
+    'context': Text(shape=(), dtype=object),
+    'gold_index': int32,
+    'qid': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
+    'question_1': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'question_2': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'question_3': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'question_4': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'reference': Text(shape=(), dtype=object),
+    'score': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype      | Description
-:--------- | :----------- | :---- | :--------- | :----------
-           | FeaturesDict |       |            |
-candidate  | Text         |       | tf.string  |
-context    | Text         |       | tf.string  |
-gold_index | Tensor       |       | tf.int32   |
-qid        | Text         |       | tf.string  |
-question   | Text         |       | tf.string  |
-question_1 | ClassLabel   |       | tf.int64   |
-question_2 | ClassLabel   |       | tf.int64   |
-question_3 | ClassLabel   |       | tf.int64   |
-question_4 | ClassLabel   |       | tf.int64   |
-reference  | Text         |       | tf.string  |
-score      | Tensor       |       | tf.float32 |
+Feature    | Class        | Shape | Dtype   | Description
+:--------- | :----------- | :---- | :------ | :----------
+           | FeaturesDict |       |         |
+candidate  | Text         |       | object  |
+context    | Text         |       | object  |
+gold_index | Tensor       |       | int32   |
+qid        | Text         |       | object  |
+question   | Text         |       | object  |
+question_1 | ClassLabel   |       | int64   |
+question_2 | ClassLabel   |       | int64   |
+question_3 | ClassLabel   |       | int64   |
+question_4 | ClassLabel   |       | int64   |
+reference  | Text         |       | object  |
+score      | Tensor       |       | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

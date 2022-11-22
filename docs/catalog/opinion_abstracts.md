@@ -78,27 +78,27 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    '_critic_consensus': tf.string,
+    '_critic_consensus': object,
     '_critics': Sequence({
-        'key': tf.string,
-        'value': tf.string,
+        'key': object,
+        'value': object,
     }),
-    '_movie_id': tf.string,
-    '_movie_name': tf.string,
+    '_movie_id': object,
+    '_movie_name': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype     | Description
-:---------------- | :----------- | :---- | :-------- | :----------
-                  | FeaturesDict |       |           |
-_critic_consensus | Tensor       |       | tf.string |
-_critics          | Sequence     |       |           |
-_critics/key      | Tensor       |       | tf.string |
-_critics/value    | Tensor       |       | tf.string |
-_movie_id         | Tensor       |       | tf.string |
-_movie_name       | Tensor       |       | tf.string |
+Feature           | Class        | Shape | Dtype  | Description
+:---------------- | :----------- | :---- | :----- | :----------
+                  | FeaturesDict |       |        |
+_critic_consensus | Tensor       |       | object |
+_critics          | Sequence     |       |        |
+_critics/key      | Tensor       |       | object |
+_critics/value    | Tensor       |       | object |
+_movie_id         | Tensor       |       | object |
+_movie_name       | Tensor       |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -158,26 +158,26 @@ Split     | Examples
 ```python
 FeaturesDict({
     '_argument_sentences': Sequence({
-        'key': tf.string,
-        'value': tf.string,
+        'key': object,
+        'value': object,
     }),
-    '_claim': tf.string,
-    '_claim_id': tf.string,
-    '_debate_name': tf.string,
+    '_claim': object,
+    '_claim_id': object,
+    '_debate_name': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                   | Class        | Shape | Dtype     | Description
-:------------------------ | :----------- | :---- | :-------- | :----------
-                          | FeaturesDict |       |           |
-_argument_sentences       | Sequence     |       |           |
-_argument_sentences/key   | Tensor       |       | tf.string |
-_argument_sentences/value | Tensor       |       | tf.string |
-_claim                    | Tensor       |       | tf.string |
-_claim_id                 | Tensor       |       | tf.string |
-_debate_name              | Tensor       |       | tf.string |
+Feature                   | Class        | Shape | Dtype  | Description
+:------------------------ | :----------- | :---- | :----- | :----------
+                          | FeaturesDict |       |        |
+_argument_sentences       | Sequence     |       |        |
+_argument_sentences/key   | Tensor       |       | object |
+_argument_sentences/value | Tensor       |       | object |
+_claim                    | Tensor       |       | object |
+_claim_id                 | Tensor       |       | object |
+_debate_name              | Tensor       |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

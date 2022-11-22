@@ -81,43 +81,43 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'area': tf.float32,
+    'area': float32,
     'features': FeaturesDict({
-        'DC': tf.float32,
-        'DMC': tf.float32,
-        'FFMC': tf.float32,
-        'ISI': tf.float32,
-        'RH': tf.float32,
-        'X': tf.uint8,
-        'Y': tf.uint8,
-        'day': ClassLabel(shape=(), dtype=tf.int64, num_classes=7),
-        'month': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
-        'rain': tf.float32,
-        'temp': tf.float32,
-        'wind': tf.float32,
+        'DC': float32,
+        'DMC': float32,
+        'FFMC': float32,
+        'ISI': float32,
+        'RH': float32,
+        'X': uint8,
+        'Y': uint8,
+        'day': ClassLabel(shape=(), dtype=int64, num_classes=7),
+        'month': ClassLabel(shape=(), dtype=int64, num_classes=12),
+        'rain': float32,
+        'temp': float32,
+        'wind': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape | Dtype      | Description
-:------------- | :----------- | :---- | :--------- | :----------
-               | FeaturesDict |       |            |
-area           | Tensor       |       | tf.float32 |
-features       | FeaturesDict |       |            |
-features/DC    | Tensor       |       | tf.float32 |
-features/DMC   | Tensor       |       | tf.float32 |
-features/FFMC  | Tensor       |       | tf.float32 |
-features/ISI   | Tensor       |       | tf.float32 |
-features/RH    | Tensor       |       | tf.float32 |
-features/X     | Tensor       |       | tf.uint8   |
-features/Y     | Tensor       |       | tf.uint8   |
-features/day   | ClassLabel   |       | tf.int64   |
-features/month | ClassLabel   |       | tf.int64   |
-features/rain  | Tensor       |       | tf.float32 |
-features/temp  | Tensor       |       | tf.float32 |
-features/wind  | Tensor       |       | tf.float32 |
+Feature        | Class        | Shape | Dtype   | Description
+:------------- | :----------- | :---- | :------ | :----------
+               | FeaturesDict |       |         |
+area           | Tensor       |       | float32 |
+features       | FeaturesDict |       |         |
+features/DC    | Tensor       |       | float32 |
+features/DMC   | Tensor       |       | float32 |
+features/FFMC  | Tensor       |       | float32 |
+features/ISI   | Tensor       |       | float32 |
+features/RH    | Tensor       |       | float32 |
+features/X     | Tensor       |       | uint8   |
+features/Y     | Tensor       |       | uint8   |
+features/day   | ClassLabel   |       | int64   |
+features/month | ClassLabel   |       | int64   |
+features/rain  | Tensor       |       | float32 |
+features/temp  | Tensor       |       | float32 |
+features/wind  | Tensor       |       | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

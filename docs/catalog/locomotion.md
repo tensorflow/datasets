@@ -75,30 +75,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape  | Dtype      | Description
-:---------------- | :----------- | :----- | :--------- | :----------
-                  | FeaturesDict |        |            |
-steps             | Dataset      |        |            |
-steps/action      | Tensor       | (8,)   | tf.float32 |
-steps/discount    | Tensor       |        | tf.float32 |
-steps/is_first    | Tensor       |        | tf.bool    |
-steps/is_last     | Tensor       |        | tf.bool    |
-steps/is_terminal | Tensor       |        | tf.bool    |
-steps/observation | Tensor       | (111,) | tf.float32 |
-steps/reward      | Tensor       |        | tf.float32 |
+Feature           | Class        | Shape  | Dtype   | Description
+:---------------- | :----------- | :----- | :------ | :----------
+                  | FeaturesDict |        |         |
+steps             | Dataset      |        |         |
+steps/action      | Tensor       | (8,)   | float32 |
+steps/discount    | Tensor       |        | float32 |
+steps/is_first    | Tensor       |        | bool    |
+steps/is_last     | Tensor       |        | bool    |
+steps/is_terminal | Tensor       |        | bool    |
+steps/observation | Tensor       | (111,) | float32 |
+steps/reward      | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -161,30 +161,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(3,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(11,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(3,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(11,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-steps             | Dataset      |       |            |
-steps/action      | Tensor       | (3,)  | tf.float32 |
-steps/discount    | Tensor       |       | tf.float32 |
-steps/is_first    | Tensor       |       | tf.bool    |
-steps/is_last     | Tensor       |       | tf.bool    |
-steps/is_terminal | Tensor       |       | tf.bool    |
-steps/observation | Tensor       | (11,) | tf.float32 |
-steps/reward      | Tensor       |       | tf.float32 |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+steps             | Dataset      |       |         |
+steps/action      | Tensor       | (3,)  | float32 |
+steps/discount    | Tensor       |       | float32 |
+steps/is_first    | Tensor       |       | bool    |
+steps/is_last     | Tensor       |       | bool    |
+steps/is_terminal | Tensor       |       | bool    |
+steps/observation | Tensor       | (11,) | float32 |
+steps/reward      | Tensor       |       | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -247,30 +247,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(17,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(17,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-steps             | Dataset      |       |            |
-steps/action      | Tensor       | (6,)  | tf.float32 |
-steps/discount    | Tensor       |       | tf.float32 |
-steps/is_first    | Tensor       |       | tf.bool    |
-steps/is_last     | Tensor       |       | tf.bool    |
-steps/is_terminal | Tensor       |       | tf.bool    |
-steps/observation | Tensor       | (17,) | tf.float32 |
-steps/reward      | Tensor       |       | tf.float32 |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+steps             | Dataset      |       |         |
+steps/action      | Tensor       | (6,)  | float32 |
+steps/discount    | Tensor       |       | float32 |
+steps/is_first    | Tensor       |       | bool    |
+steps/is_last     | Tensor       |       | bool    |
+steps/is_terminal | Tensor       |       | bool    |
+steps/observation | Tensor       | (17,) | float32 |
+steps/reward      | Tensor       |       | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -333,30 +333,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(17,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(17,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-steps             | Dataset      |       |            |
-steps/action      | Tensor       | (6,)  | tf.float32 |
-steps/discount    | Tensor       |       | tf.float32 |
-steps/is_first    | Tensor       |       | tf.bool    |
-steps/is_last     | Tensor       |       | tf.bool    |
-steps/is_terminal | Tensor       |       | tf.bool    |
-steps/observation | Tensor       | (17,) | tf.float32 |
-steps/reward      | Tensor       |       | tf.float32 |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+steps             | Dataset      |       |         |
+steps/action      | Tensor       | (6,)  | float32 |
+steps/discount    | Tensor       |       | float32 |
+steps/is_first    | Tensor       |       | bool    |
+steps/is_last     | Tensor       |       | bool    |
+steps/is_terminal | Tensor       |       | bool    |
+steps/observation | Tensor       | (17,) | float32 |
+steps/reward      | Tensor       |       | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -419,30 +419,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(17,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(376,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(17,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(376,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape  | Dtype      | Description
-:---------------- | :----------- | :----- | :--------- | :----------
-                  | FeaturesDict |        |            |
-steps             | Dataset      |        |            |
-steps/action      | Tensor       | (17,)  | tf.float32 |
-steps/discount    | Tensor       |        | tf.float32 |
-steps/is_first    | Tensor       |        | tf.bool    |
-steps/is_last     | Tensor       |        | tf.bool    |
-steps/is_terminal | Tensor       |        | tf.bool    |
-steps/observation | Tensor       | (376,) | tf.float32 |
-steps/reward      | Tensor       |        | tf.float32 |
+Feature           | Class        | Shape  | Dtype   | Description
+:---------------- | :----------- | :----- | :------ | :----------
+                  | FeaturesDict |        |         |
+steps             | Dataset      |        |         |
+steps/action      | Tensor       | (17,)  | float32 |
+steps/discount    | Tensor       |        | float32 |
+steps/is_first    | Tensor       |        | bool    |
+steps/is_last     | Tensor       |        | bool    |
+steps/is_terminal | Tensor       |        | bool    |
+steps/observation | Tensor       | (376,) | float32 |
+steps/reward      | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

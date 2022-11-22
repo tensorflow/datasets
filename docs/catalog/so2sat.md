@@ -77,20 +77,20 @@ Split | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=17),
-    'sample_id': tf.int64,
+    'image': Image(shape=(32, 32, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=17),
+    'sample_id': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape       | Dtype    | Description
-:-------- | :----------- | :---------- | :------- | :----------
-          | FeaturesDict |             |          |
-image     | Image        | (32, 32, 3) | tf.uint8 |
-label     | ClassLabel   |             | tf.int64 |
-sample_id | Tensor       |             | tf.int64 |
+Feature   | Class        | Shape       | Dtype | Description
+:-------- | :----------- | :---------- | :---- | :----------
+          | FeaturesDict |             |       |
+image     | Image        | (32, 32, 3) | uint8 |
+label     | ClassLabel   |             | int64 |
+sample_id | Tensor       |             | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -104,22 +104,22 @@ sample_id | Tensor       |             | tf.int64 |
 
 ```python
 FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=17),
-    'sample_id': tf.int64,
-    'sentinel1': Tensor(shape=(32, 32, 8), dtype=tf.float32),
-    'sentinel2': Tensor(shape=(32, 32, 10), dtype=tf.float32),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=17),
+    'sample_id': int64,
+    'sentinel1': Tensor(shape=(32, 32, 8), dtype=float32),
+    'sentinel2': Tensor(shape=(32, 32, 10), dtype=float32),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape        | Dtype      | Description
-:-------- | :----------- | :----------- | :--------- | :----------
-          | FeaturesDict |              |            |
-label     | ClassLabel   |              | tf.int64   |
-sample_id | Tensor       |              | tf.int64   |
-sentinel1 | Tensor       | (32, 32, 8)  | tf.float32 |
-sentinel2 | Tensor       | (32, 32, 10) | tf.float32 |
+Feature   | Class        | Shape        | Dtype   | Description
+:-------- | :----------- | :----------- | :------ | :----------
+          | FeaturesDict |              |         |
+label     | ClassLabel   |              | int64   |
+sample_id | Tensor       |              | int64   |
+sentinel1 | Tensor       | (32, 32, 8)  | float32 |
+sentinel2 | Tensor       | (32, 32, 10) | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

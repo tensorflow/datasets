@@ -79,18 +79,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'features': Tensor(shape=(4,), dtype=tf.float32),
-    'species': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'features': Tensor(shape=(4,), dtype=float32),
+    'species': ClassLabel(shape=(), dtype=int64, num_classes=3),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype      | Description
-:------- | :----------- | :---- | :--------- | :----------
-         | FeaturesDict |       |            |
-features | Tensor       | (4,)  | tf.float32 |
-species  | ClassLabel   |       | tf.int64   |
+Feature  | Class        | Shape | Dtype   | Description
+:------- | :----------- | :---- | :------ | :----------
+         | FeaturesDict |       |         |
+features | Tensor       | (4,)  | float32 |
+species  | ClassLabel   |       | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -153,28 +153,28 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'body_mass_g': tf.float32,
-    'culmen_depth_mm': tf.float32,
-    'culmen_length_mm': tf.float32,
-    'flipper_length_mm': tf.float32,
-    'island': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'sex': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'species': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'body_mass_g': float32,
+    'culmen_depth_mm': float32,
+    'culmen_length_mm': float32,
+    'flipper_length_mm': float32,
+    'island': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'sex': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'species': ClassLabel(shape=(), dtype=int64, num_classes=3),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-body_mass_g       | Tensor       |       | tf.float32 |
-culmen_depth_mm   | Tensor       |       | tf.float32 |
-culmen_length_mm  | Tensor       |       | tf.float32 |
-flipper_length_mm | Tensor       |       | tf.float32 |
-island            | ClassLabel   |       | tf.int64   |
-sex               | ClassLabel   |       | tf.int64   |
-species           | ClassLabel   |       | tf.int64   |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+body_mass_g       | Tensor       |       | float32 |
+culmen_depth_mm   | Tensor       |       | float32 |
+culmen_length_mm  | Tensor       |       | float32 |
+flipper_length_mm | Tensor       |       | float32 |
+island            | ClassLabel   |       | int64   |
+sex               | ClassLabel   |       | int64   |
+species           | ClassLabel   |       | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -240,48 +240,48 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'Body Mass (g)': tf.float32,
-    'Clutch Completion': Text(shape=(), dtype=tf.string),
-    'Comments': Text(shape=(), dtype=tf.string),
-    'Culmen Depth (mm)': tf.float32,
-    'Culmen Length (mm)': tf.float32,
-    'Date Egg': Text(shape=(), dtype=tf.string),
-    'Delta 13 C (o/oo)': tf.float32,
-    'Delta 15 N (o/oo)': tf.float32,
-    'Flipper Length (mm)': tf.float32,
-    'Individual ID': Text(shape=(), dtype=tf.string),
-    'Island': Text(shape=(), dtype=tf.string),
-    'Region': Text(shape=(), dtype=tf.string),
-    'Sample Number': tf.int32,
-    'Sex': Text(shape=(), dtype=tf.string),
-    'Species': Text(shape=(), dtype=tf.string),
-    'Stage': Text(shape=(), dtype=tf.string),
-    'studyName': Text(shape=(), dtype=tf.string),
+    'Body Mass (g)': float32,
+    'Clutch Completion': Text(shape=(), dtype=object),
+    'Comments': Text(shape=(), dtype=object),
+    'Culmen Depth (mm)': float32,
+    'Culmen Length (mm)': float32,
+    'Date Egg': Text(shape=(), dtype=object),
+    'Delta 13 C (o/oo)': float32,
+    'Delta 15 N (o/oo)': float32,
+    'Flipper Length (mm)': float32,
+    'Individual ID': Text(shape=(), dtype=object),
+    'Island': Text(shape=(), dtype=object),
+    'Region': Text(shape=(), dtype=object),
+    'Sample Number': int32,
+    'Sex': Text(shape=(), dtype=object),
+    'Species': Text(shape=(), dtype=object),
+    'Stage': Text(shape=(), dtype=object),
+    'studyName': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature             | Class        | Shape | Dtype      | Description
-:------------------ | :----------- | :---- | :--------- | :----------
-                    | FeaturesDict |       |            |
-Body Mass (g)       | Tensor       |       | tf.float32 |
-Clutch Completion   | Text         |       | tf.string  |
-Comments            | Text         |       | tf.string  |
-Culmen Depth (mm)   | Tensor       |       | tf.float32 |
-Culmen Length (mm)  | Tensor       |       | tf.float32 |
-Date Egg            | Text         |       | tf.string  |
-Delta 13 C (o/oo)   | Tensor       |       | tf.float32 |
-Delta 15 N (o/oo)   | Tensor       |       | tf.float32 |
-Flipper Length (mm) | Tensor       |       | tf.float32 |
-Individual ID       | Text         |       | tf.string  |
-Island              | Text         |       | tf.string  |
-Region              | Text         |       | tf.string  |
-Sample Number       | Tensor       |       | tf.int32   |
-Sex                 | Text         |       | tf.string  |
-Species             | Text         |       | tf.string  |
-Stage               | Text         |       | tf.string  |
-studyName           | Text         |       | tf.string  |
+Feature             | Class        | Shape | Dtype   | Description
+:------------------ | :----------- | :---- | :------ | :----------
+                    | FeaturesDict |       |         |
+Body Mass (g)       | Tensor       |       | float32 |
+Clutch Completion   | Text         |       | object  |
+Comments            | Text         |       | object  |
+Culmen Depth (mm)   | Tensor       |       | float32 |
+Culmen Length (mm)  | Tensor       |       | float32 |
+Date Egg            | Text         |       | object  |
+Delta 13 C (o/oo)   | Tensor       |       | float32 |
+Delta 15 N (o/oo)   | Tensor       |       | float32 |
+Flipper Length (mm) | Tensor       |       | float32 |
+Individual ID       | Text         |       | object  |
+Island              | Text         |       | object  |
+Region              | Text         |       | object  |
+Sample Number       | Tensor       |       | int32   |
+Sex                 | Text         |       | object  |
+Species             | Text         |       | object  |
+Stage               | Text         |       | object  |
+studyName           | Text         |       | object  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

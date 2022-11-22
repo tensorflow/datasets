@@ -35,11 +35,11 @@ under Grant 5T32GM007171-44. A usage example is available
 
 *   **Download size**: `12.78 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `13.79 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -57,52 +57,52 @@ Split          | Examples
 ```python
 FeaturesDict({
     'das': FeaturesDict({
-        'dB': Tensor(shape=(None,), dtype=tf.float32),
-        'imag': Tensor(shape=(None,), dtype=tf.float32),
-        'real': Tensor(shape=(None,), dtype=tf.float32),
+        'dB': Tensor(shape=(None,), dtype=float32),
+        'imag': Tensor(shape=(None,), dtype=float32),
+        'real': Tensor(shape=(None,), dtype=float32),
     }),
-    'dtce': Tensor(shape=(None,), dtype=tf.float32),
-    'f0_hz': tf.float32,
-    'final_angle': tf.float32,
-    'final_radius': tf.float32,
-    'focus_cm': tf.float32,
-    'harmonic': tf.bool,
-    'height': tf.uint32,
-    'initial_angle': tf.float32,
-    'initial_radius': tf.float32,
-    'probe': tf.string,
-    'scanner': tf.string,
-    'target': tf.string,
-    'timestamp_id': tf.uint32,
-    'voltage': tf.float32,
-    'width': tf.uint32,
+    'dtce': Tensor(shape=(None,), dtype=float32),
+    'f0_hz': float32,
+    'final_angle': float32,
+    'final_radius': float32,
+    'focus_cm': float32,
+    'harmonic': bool,
+    'height': uint32,
+    'initial_angle': float32,
+    'initial_radius': float32,
+    'probe': object,
+    'scanner': object,
+    'target': object,
+    'timestamp_id': uint32,
+    'voltage': float32,
+    'width': uint32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape   | Dtype      | Description
-:------------- | :----------- | :------ | :--------- | :----------
-               | FeaturesDict |         |            |
-das            | FeaturesDict |         |            |
-das/dB         | Tensor       | (None,) | tf.float32 |
-das/imag       | Tensor       | (None,) | tf.float32 |
-das/real       | Tensor       | (None,) | tf.float32 |
-dtce           | Tensor       | (None,) | tf.float32 |
-f0_hz          | Tensor       |         | tf.float32 |
-final_angle    | Tensor       |         | tf.float32 |
-final_radius   | Tensor       |         | tf.float32 |
-focus_cm       | Tensor       |         | tf.float32 |
-harmonic       | Tensor       |         | tf.bool    |
-height         | Tensor       |         | tf.uint32  |
-initial_angle  | Tensor       |         | tf.float32 |
-initial_radius | Tensor       |         | tf.float32 |
-probe          | Tensor       |         | tf.string  |
-scanner        | Tensor       |         | tf.string  |
-target         | Tensor       |         | tf.string  |
-timestamp_id   | Tensor       |         | tf.uint32  |
-voltage        | Tensor       |         | tf.float32 |
-width          | Tensor       |         | tf.uint32  |
+Feature        | Class        | Shape   | Dtype   | Description
+:------------- | :----------- | :------ | :------ | :----------
+               | FeaturesDict |         |         |
+das            | FeaturesDict |         |         |
+das/dB         | Tensor       | (None,) | float32 |
+das/imag       | Tensor       | (None,) | float32 |
+das/real       | Tensor       | (None,) | float32 |
+dtce           | Tensor       | (None,) | float32 |
+f0_hz          | Tensor       |         | float32 |
+final_angle    | Tensor       |         | float32 |
+final_radius   | Tensor       |         | float32 |
+focus_cm       | Tensor       |         | float32 |
+harmonic       | Tensor       |         | bool    |
+height         | Tensor       |         | uint32  |
+initial_angle  | Tensor       |         | float32 |
+initial_radius | Tensor       |         | float32 |
+probe          | Tensor       |         | object  |
+scanner        | Tensor       |         | object  |
+target         | Tensor       |         | object  |
+timestamp_id   | Tensor       |         | uint32  |
+voltage        | Tensor       |         | float32 |
+width          | Tensor       |         | uint32  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

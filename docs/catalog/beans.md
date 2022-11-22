@@ -36,7 +36,7 @@ and collected by the Makerere AI research lab.
 
     *   **`0.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `171.69 MiB`
 
 *   **Dataset size**: `171.63 MiB`
 
@@ -56,18 +56,18 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(500, 500, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'image': Image(shape=(500, 500, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape         | Dtype    | Description
-:------ | :----------- | :------------ | :------- | :----------
-        | FeaturesDict |               |          |
-image   | Image        | (500, 500, 3) | tf.uint8 |
-label   | ClassLabel   |               | tf.int64 |
+Feature | Class        | Shape         | Dtype | Description
+:------ | :----------- | :------------ | :---- | :----------
+        | FeaturesDict |               |       |
+image   | Image        | (500, 500, 3) | uint8 |
+label   | ClassLabel   |               | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

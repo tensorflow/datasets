@@ -36,83 +36,67 @@ answering the questions.
 
     *   **`1.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `119.78 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 10,832
-`'train'`      | 87,622
-`'validation'` | 11,313
-
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
     'answer': FeaturesDict({
-        'aliases': Sequence(Text(shape=(), dtype=tf.string)),
-        'matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
-        'normalized_aliases': Sequence(Text(shape=(), dtype=tf.string)),
-        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
-        'normalized_value': Text(shape=(), dtype=tf.string),
-        'type': Text(shape=(), dtype=tf.string),
-        'value': Text(shape=(), dtype=tf.string),
+        'aliases': Sequence(Text(shape=(), dtype=object)),
+        'matched_wiki_entity_name': Text(shape=(), dtype=object),
+        'normalized_aliases': Sequence(Text(shape=(), dtype=object)),
+        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=object),
+        'normalized_value': Text(shape=(), dtype=object),
+        'type': Text(shape=(), dtype=object),
+        'value': Text(shape=(), dtype=object),
     }),
     'entity_pages': Sequence({
-        'doc_source': Text(shape=(), dtype=tf.string),
-        'filename': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
-        'wiki_context': Text(shape=(), dtype=tf.string),
+        'doc_source': Text(shape=(), dtype=object),
+        'filename': Text(shape=(), dtype=object),
+        'title': Text(shape=(), dtype=object),
+        'wiki_context': Text(shape=(), dtype=object),
     }),
-    'question': Text(shape=(), dtype=tf.string),
-    'question_id': Text(shape=(), dtype=tf.string),
-    'question_source': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=object),
+    'question_id': Text(shape=(), dtype=object),
+    'question_source': Text(shape=(), dtype=object),
     'search_results': Sequence({
-        'description': Text(shape=(), dtype=tf.string),
-        'filename': Text(shape=(), dtype=tf.string),
-        'rank': tf.int32,
-        'search_context': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
-        'url': Text(shape=(), dtype=tf.string),
+        'description': Text(shape=(), dtype=object),
+        'filename': Text(shape=(), dtype=object),
+        'rank': int32,
+        'search_context': Text(shape=(), dtype=object),
+        'title': Text(shape=(), dtype=object),
+        'url': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                    | Class          | Shape   | Dtype     | Description
-:----------------------------------------- | :------------- | :------ | :-------- | :----------
-                                           | FeaturesDict   |         |           |
-answer                                     | FeaturesDict   |         |           |
-answer/aliases                             | Sequence(Text) | (None,) | tf.string |
-answer/matched_wiki_entity_name            | Text           |         | tf.string |
-answer/normalized_aliases                  | Sequence(Text) | (None,) | tf.string |
-answer/normalized_matched_wiki_entity_name | Text           |         | tf.string |
-answer/normalized_value                    | Text           |         | tf.string |
-answer/type                                | Text           |         | tf.string |
-answer/value                               | Text           |         | tf.string |
-entity_pages                               | Sequence       |         |           |
-entity_pages/doc_source                    | Text           |         | tf.string |
-entity_pages/filename                      | Text           |         | tf.string |
-entity_pages/title                         | Text           |         | tf.string |
-entity_pages/wiki_context                  | Text           |         | tf.string |
-question                                   | Text           |         | tf.string |
-question_id                                | Text           |         | tf.string |
-question_source                            | Text           |         | tf.string |
-search_results                             | Sequence       |         |           |
-search_results/description                 | Text           |         | tf.string |
-search_results/filename                    | Text           |         | tf.string |
-search_results/rank                        | Tensor         |         | tf.int32  |
-search_results/search_context              | Text           |         | tf.string |
-search_results/title                       | Text           |         | tf.string |
-search_results/url                         | Text           |         | tf.string |
+Feature                                    | Class          | Shape   | Dtype  | Description
+:----------------------------------------- | :------------- | :------ | :----- | :----------
+                                           | FeaturesDict   |         |        |
+answer                                     | FeaturesDict   |         |        |
+answer/aliases                             | Sequence(Text) | (None,) | object |
+answer/matched_wiki_entity_name            | Text           |         | object |
+answer/normalized_aliases                  | Sequence(Text) | (None,) | object |
+answer/normalized_matched_wiki_entity_name | Text           |         | object |
+answer/normalized_value                    | Text           |         | object |
+answer/type                                | Text           |         | object |
+answer/value                               | Text           |         | object |
+entity_pages                               | Sequence       |         |        |
+entity_pages/doc_source                    | Text           |         | object |
+entity_pages/filename                      | Text           |         | object |
+entity_pages/title                         | Text           |         | object |
+entity_pages/wiki_context                  | Text           |         | object |
+question                                   | Text           |         | object |
+question_id                                | Text           |         | object |
+question_source                            | Text           |         | object |
+search_results                             | Sequence       |         |        |
+search_results/description                 | Text           |         | object |
+search_results/filename                    | Text           |         | object |
+search_results/rank                        | Tensor         |         | int32  |
+search_results/search_context              | Text           |         | object |
+search_results/title                       | Text           |         | object |
+search_results/url                         | Text           |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -144,6 +128,22 @@ archivePrefix = {arXiv},
 *   **Config description**: Question-answer pairs where all documents for a
     given question contain the answer string(s). Includes context from Wikipedia
     and search results.
+
+*   **Download size**: `2.48 GiB`
+
+*   **Dataset size**: `14.99 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 17,210
+`'train'`      | 138,384
+`'validation'` | 18,669
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -186,6 +186,22 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Question-answer pairs where all documents for a
     given question contain the answer string(s).
+
+*   **Download size**: `2.48 GiB`
+
+*   **Dataset size**: `196.84 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 17,210
+`'train'`      | 138,384
+`'validation'` | 18,669
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -231,6 +247,22 @@ dataButton.addEventListener('click', async () => {
     makes the unfiltered dataset more appropriate for IR-style QA. Includes
     context from Wikipedia and search results.
 
+*   **Download size**: `3.07 GiB`
+
+*   **Dataset size**: `27.27 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,832
+`'train'`      | 87,622
+`'validation'` | 11,313
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -273,6 +305,22 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: 110k question-answer pairs for open domain QA where
     not all documents for a given question contain the answer string(s). This
     makes the unfiltered dataset more appropriate for IR-style QA.
+
+*   **Download size**: `603.25 MiB`
+
+*   **Dataset size**: `119.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,832
+`'train'`      | 87,622
+`'validation'` | 11,313
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

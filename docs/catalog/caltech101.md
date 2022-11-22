@@ -57,20 +57,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/file_name': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/file_name': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=102),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape           | Dtype     | Description
-:-------------- | :----------- | :-------------- | :-------- | :----------
-                | FeaturesDict |                 |           |
-image           | Image        | (None, None, 3) | tf.uint8  |
-image/file_name | Text         |                 | tf.string |
-label           | ClassLabel   |                 | tf.int64  |
+Feature         | Class        | Shape           | Dtype  | Description
+:-------------- | :----------- | :-------------- | :----- | :----------
+                | FeaturesDict |                 |        |
+image           | Image        | (None, None, 3) | uint8  |
+image/file_name | Text         |                 | object |
+label           | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

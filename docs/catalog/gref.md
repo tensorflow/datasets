@@ -73,19 +73,19 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/id': tf.int64,
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/id': int64,
     'objects': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': tf.int64,
-        'label': tf.int64,
-        'label_name': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+        'area': int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'id': int64,
+        'label': int64,
+        'label_name': ClassLabel(shape=(), dtype=int64, num_classes=80),
         'refexp': Sequence({
-            'raw': Text(shape=(), dtype=tf.string),
-            'referent': Text(shape=(), dtype=tf.string),
-            'refexp_id': tf.int64,
-            'tokens': Sequence(Text(shape=(), dtype=tf.string)),
+            'raw': Text(shape=(), dtype=object),
+            'referent': Text(shape=(), dtype=object),
+            'refexp_id': int64,
+            'tokens': Sequence(Text(shape=(), dtype=object)),
         }),
     }),
 })
@@ -93,22 +93,24 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                  | Class          | Shape           | Dtype      | Description
-:----------------------- | :------------- | :-------------- | :--------- | :----------
-                         | FeaturesDict   |                 |            |
-image                    | Image          | (None, None, 3) | tf.uint8   |
-image/id                 | Tensor         |                 | tf.int64   |
-objects                  | Sequence       |                 |            |
-objects/area             | Tensor         |                 | tf.int64   |
-objects/bbox             | BBoxFeature    | (4,)            | tf.float32 |
-objects/id               | Tensor         |                 | tf.int64   |
-objects/label            | Tensor         |                 | tf.int64   |
-objects/label_name       | ClassLabel     |                 | tf.int64   |
-objects/refexp           | Sequence       |                 |            |
-objects/refexp/raw       | Text           |                 | tf.string  |
-objects/refexp/referent  | Text           |                 | tf.string  |
-objects/refexp/refexp_id | Tensor         |                 | tf.int64   |
-objects/refexp/tokens    | Sequence(Text) | (None,)         | tf.string  |
+| Feature                  | Class          | Shape   | Dtype   | Description |
+| :----------------------- | :------------- | :------ | :------ | :---------- |
+|                          | FeaturesDict   |         |         |             |
+| image                    | Image          | (None,  | uint8   |             |
+:                          :                : None,   :         :             :
+:                          :                : 3)      :         :             :
+| image/id                 | Tensor         |         | int64   |             |
+| objects                  | Sequence       |         |         |             |
+| objects/area             | Tensor         |         | int64   |             |
+| objects/bbox             | BBoxFeature    | (4,)    | float32 |             |
+| objects/id               | Tensor         |         | int64   |             |
+| objects/label            | Tensor         |         | int64   |             |
+| objects/label_name       | ClassLabel     |         | int64   |             |
+| objects/refexp           | Sequence       |         |         |             |
+| objects/refexp/raw       | Text           |         | object  |             |
+| objects/refexp/referent  | Text           |         | object  |             |
+| objects/refexp/refexp_id | Tensor         |         | int64   |             |
+| objects/refexp/tokens    | Sequence(Text) | (None,) | object  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

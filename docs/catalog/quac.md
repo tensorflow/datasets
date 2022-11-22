@@ -58,41 +58,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'answers': Sequence({
-        'answer_start': tf.int32,
-        'text': Text(shape=(), dtype=tf.string),
+        'answer_start': int32,
+        'text': Text(shape=(), dtype=object),
     }),
-    'background': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
-    'followup': Text(shape=(), dtype=tf.string),
+    'background': Text(shape=(), dtype=object),
+    'context': Text(shape=(), dtype=object),
+    'followup': Text(shape=(), dtype=object),
     'orig_answer': FeaturesDict({
-        'answer_start': tf.int32,
-        'text': Text(shape=(), dtype=tf.string),
+        'answer_start': int32,
+        'text': Text(shape=(), dtype=object),
     }),
-    'question': Text(shape=(), dtype=tf.string),
-    'section_title': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-    'yesno': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=object),
+    'section_title': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
+    'yesno': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                  | Class        | Shape | Dtype     | Description
-:----------------------- | :----------- | :---- | :-------- | :----------
-                         | FeaturesDict |       |           |
-answers                  | Sequence     |       |           |
-answers/answer_start     | Tensor       |       | tf.int32  |
-answers/text             | Text         |       | tf.string |
-background               | Text         |       | tf.string |
-context                  | Text         |       | tf.string |
-followup                 | Text         |       | tf.string |
-orig_answer              | FeaturesDict |       |           |
-orig_answer/answer_start | Tensor       |       | tf.int32  |
-orig_answer/text         | Text         |       | tf.string |
-question                 | Text         |       | tf.string |
-section_title            | Text         |       | tf.string |
-title                    | Text         |       | tf.string |
-yesno                    | Text         |       | tf.string |
+Feature                  | Class        | Shape | Dtype  | Description
+:----------------------- | :----------- | :---- | :----- | :----------
+                         | FeaturesDict |       |        |
+answers                  | Sequence     |       |        |
+answers/answer_start     | Tensor       |       | int32  |
+answers/text             | Text         |       | object |
+background               | Text         |       | object |
+context                  | Text         |       | object |
+followup                 | Text         |       | object |
+orig_answer              | FeaturesDict |       |        |
+orig_answer/answer_start | Tensor       |       | int32  |
+orig_answer/text         | Text         |       | object |
+question                 | Text         |       | object |
+section_title            | Text         |       | object |
+title                    | Text         |       | object |
+yesno                    | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

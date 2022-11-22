@@ -32,8 +32,6 @@ alzheimers data, and the other on entrance exams data.
 
     *   **`0.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
@@ -43,38 +41,38 @@ alzheimers data, and the other on entrance exams data.
 ```python
 FeaturesDict({
     'answer_options': Sequence({
-        'answer_id': Text(shape=(), dtype=tf.string),
-        'answer_str': Text(shape=(), dtype=tf.string),
+        'answer_id': Text(shape=(), dtype=object),
+        'answer_str': Text(shape=(), dtype=object),
     }),
-    'correct_answer_id': Text(shape=(), dtype=tf.string),
-    'correct_answer_str': Text(shape=(), dtype=tf.string),
-    'document_id': Text(shape=(), dtype=tf.string),
-    'document_str': Text(shape=(), dtype=tf.string),
-    'question_id': Text(shape=(), dtype=tf.string),
-    'question_str': Text(shape=(), dtype=tf.string),
-    'test_id': Text(shape=(), dtype=tf.string),
-    'topic_id': Text(shape=(), dtype=tf.string),
-    'topic_name': Text(shape=(), dtype=tf.string),
+    'correct_answer_id': Text(shape=(), dtype=object),
+    'correct_answer_str': Text(shape=(), dtype=object),
+    'document_id': Text(shape=(), dtype=object),
+    'document_str': Text(shape=(), dtype=object),
+    'question_id': Text(shape=(), dtype=object),
+    'question_str': Text(shape=(), dtype=object),
+    'test_id': Text(shape=(), dtype=object),
+    'topic_id': Text(shape=(), dtype=object),
+    'topic_name': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                   | Class        | Shape | Dtype     | Description
-:------------------------ | :----------- | :---- | :-------- | :----------
-                          | FeaturesDict |       |           |
-answer_options            | Sequence     |       |           |
-answer_options/answer_id  | Text         |       | tf.string |
-answer_options/answer_str | Text         |       | tf.string |
-correct_answer_id         | Text         |       | tf.string |
-correct_answer_str        | Text         |       | tf.string |
-document_id               | Text         |       | tf.string |
-document_str              | Text         |       | tf.string |
-question_id               | Text         |       | tf.string |
-question_str              | Text         |       | tf.string |
-test_id                   | Text         |       | tf.string |
-topic_id                  | Text         |       | tf.string |
-topic_name                | Text         |       | tf.string |
+Feature                   | Class        | Shape | Dtype  | Description
+:------------------------ | :----------- | :---- | :----- | :----------
+                          | FeaturesDict |       |        |
+answer_options            | Sequence     |       |        |
+answer_options/answer_id  | Text         |       | object |
+answer_options/answer_str | Text         |       | object |
+correct_answer_id         | Text         |       | object |
+correct_answer_str        | Text         |       | object |
+document_id               | Text         |       | object |
+document_str              | Text         |       | object |
+question_id               | Text         |       | object |
+question_str              | Text         |       | object |
+test_id                   | Text         |       | object |
+topic_id                  | Text         |       | object |
+topic_name                | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -115,6 +113,8 @@ isbn="978-3-642-40802-1"
 
 *   **Config description**: This configuration includes the main track for DE
     language in 2011 year.
+
+*   **Download size**: `217.08 KiB`
 
 *   **Dataset size**: `1.69 MiB`
 
@@ -166,6 +166,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for EN
     language in 2011 year.
 
+*   **Download size**: `197.74 KiB`
+
 *   **Dataset size**: `1.52 MiB`
 
 *   **Splits**:
@@ -215,6 +217,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for ES
     language in 2011 year.
+
+*   **Download size**: `212.52 KiB`
 
 *   **Dataset size**: `1.64 MiB`
 
@@ -266,6 +270,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for IT
     language in 2011 year.
 
+*   **Download size**: `209.73 KiB`
+
 *   **Dataset size**: `1.61 MiB`
 
 *   **Splits**:
@@ -315,6 +321,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for RO
     language in 2011 year.
+
+*   **Download size**: `216.32 KiB`
 
 *   **Dataset size**: `1.68 MiB`
 
@@ -366,6 +374,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for AR
     language in 2012 year.
 
+*   **Download size**: `347.83 KiB`
+
 *   **Dataset size**: `2.62 MiB`
 
 *   **Splits**:
@@ -415,6 +425,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for BG
     language in 2012 year.
+
+*   **Download size**: `434.63 KiB`
 
 *   **Dataset size**: `3.33 MiB`
 
@@ -466,6 +478,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for DE
     language in 2012 year.
 
+*   **Download size**: `275.00 KiB`
+
 *   **Dataset size**: `2.02 MiB`
 
 *   **Splits**:
@@ -515,6 +529,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for EN
     language in 2012 year.
+
+*   **Download size**: `237.76 KiB`
 
 *   **Dataset size**: `1.71 MiB`
 
@@ -566,6 +582,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for ES
     language in 2012 year.
 
+*   **Download size**: `271.92 KiB`
+
 *   **Dataset size**: `1.99 MiB`
 
 *   **Splits**:
@@ -615,6 +633,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for IT
     language in 2012 year.
+
+*   **Download size**: `273.49 KiB`
 
 *   **Dataset size**: `2.01 MiB`
 
@@ -666,6 +686,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for RO
     language in 2012 year.
 
+*   **Download size**: `272.99 KiB`
+
 *   **Dataset size**: `2.01 MiB`
 
 *   **Splits**:
@@ -715,6 +737,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the alzheimers track for
     EN language in 2012 year.
+
+*   **Download size**: `173.19 KiB`
 
 *   **Dataset size**: `1.57 MiB`
 
@@ -766,6 +790,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for AR
     language in 2013 year.
 
+*   **Download size**: `369.44 KiB`
+
 *   **Dataset size**: `4.04 MiB`
 
 *   **Splits**:
@@ -815,6 +841,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for BG
     language in 2013 year.
+
+*   **Download size**: `452.74 KiB`
 
 *   **Dataset size**: `5.21 MiB`
 
@@ -866,6 +894,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for EN
     language in 2013 year.
 
+*   **Download size**: `268.52 KiB`
+
 *   **Dataset size**: `2.81 MiB`
 
 *   **Splits**:
@@ -915,6 +945,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for ES
     language in 2013 year.
+
+*   **Download size**: `307.78 KiB`
 
 *   **Dataset size**: `3.35 MiB`
 
@@ -966,6 +998,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for RO
     language in 2013 year.
 
+*   **Download size**: `306.16 KiB`
+
 *   **Dataset size**: `3.26 MiB`
 
 *   **Splits**:
@@ -1016,6 +1050,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the alzheimers track for
     EN language in 2013 year.
 
+*   **Download size**: `267.98 KiB`
+
 *   **Dataset size**: `2.50 MiB`
 
 *   **Splits**:
@@ -1065,6 +1101,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the entrance_exam track
     for EN language in 2013 year.
+
+*   **Download size**: `53.32 KiB`
 
 *   **Dataset size**: `186.01 KiB`
 

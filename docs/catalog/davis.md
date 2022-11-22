@@ -49,27 +49,27 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'num_frames': tf.int64,
-        'video_name': tf.string,
+        'num_frames': int64,
+        'video_name': object,
     }),
     'video': Sequence({
-        'frames': Image(shape=(None, None, 3), dtype=tf.uint8),
-        'segmentations': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'frames': Image(shape=(None, None, 3), dtype=uint8),
+        'segmentations': Image(shape=(None, None, 1), dtype=uint8),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature             | Class        | Shape           | Dtype     | Description
-:------------------ | :----------- | :-------------- | :-------- | :----------
-                    | FeaturesDict |                 |           |
-metadata            | FeaturesDict |                 |           |
-metadata/num_frames | Tensor       |                 | tf.int64  |
-metadata/video_name | Tensor       |                 | tf.string |
-video               | Sequence     |                 |           |
-video/frames        | Image        | (None, None, 3) | tf.uint8  |
-video/segmentations | Image        | (None, None, 1) | tf.uint8  |
+Feature             | Class        | Shape           | Dtype  | Description
+:------------------ | :----------- | :-------------- | :----- | :----------
+                    | FeaturesDict |                 |        |
+metadata            | FeaturesDict |                 |        |
+metadata/num_frames | Tensor       |                 | int64  |
+metadata/video_name | Tensor       |                 | object |
+video               | Sequence     |                 |        |
+video/frames        | Image        | (None, None, 3) | uint8  |
+video/segmentations | Image        | (None, None, 1) | uint8  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

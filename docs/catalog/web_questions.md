@@ -54,20 +54,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'answers': Sequence(Text(shape=(), dtype=tf.string)),
-    'question': Text(shape=(), dtype=tf.string),
-    'url': Text(shape=(), dtype=tf.string),
+    'answers': Sequence(Text(shape=(), dtype=object)),
+    'question': Text(shape=(), dtype=object),
+    'url': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class          | Shape   | Dtype     | Description
-:------- | :------------- | :------ | :-------- | :----------
-         | FeaturesDict   |         |           |
-answers  | Sequence(Text) | (None,) | tf.string |
-question | Text           |         | tf.string |
-url      | Text           |         | tf.string |
+Feature  | Class          | Shape   | Dtype  | Description
+:------- | :------------- | :------ | :----- | :----------
+         | FeaturesDict   |         |        |
+answers  | Sequence(Text) | (None,) | object |
+question | Text           |         | object |
+url      | Text           |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

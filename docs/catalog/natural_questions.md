@@ -81,69 +81,69 @@ journal = {Transactions of the Association of Computational Linguistics}
 ```python
 FeaturesDict({
     'annotations': Sequence({
-        'id': tf.string,
+        'id': object,
         'long_answer': FeaturesDict({
-            'end_byte': tf.int64,
-            'end_token': tf.int64,
-            'start_byte': tf.int64,
-            'start_token': tf.int64,
+            'end_byte': int64,
+            'end_token': int64,
+            'start_byte': int64,
+            'start_token': int64,
         }),
         'short_answers': Sequence({
-            'end_byte': tf.int64,
-            'end_token': tf.int64,
-            'start_byte': tf.int64,
-            'start_token': tf.int64,
-            'text': Text(shape=(), dtype=tf.string),
+            'end_byte': int64,
+            'end_token': int64,
+            'start_byte': int64,
+            'start_token': int64,
+            'text': Text(shape=(), dtype=object),
         }),
-        'yes_no_answer': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'yes_no_answer': ClassLabel(shape=(), dtype=int64, num_classes=2),
     }),
     'document': FeaturesDict({
-        'html': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
+        'html': Text(shape=(), dtype=object),
+        'title': Text(shape=(), dtype=object),
         'tokens': Sequence({
-            'is_html': tf.bool,
-            'token': Text(shape=(), dtype=tf.string),
+            'is_html': bool,
+            'token': Text(shape=(), dtype=object),
         }),
-        'url': Text(shape=(), dtype=tf.string),
+        'url': Text(shape=(), dtype=object),
     }),
-    'id': tf.string,
+    'id': object,
     'question': FeaturesDict({
-        'text': Text(shape=(), dtype=tf.string),
-        'tokens': Sequence(tf.string),
+        'text': Text(shape=(), dtype=object),
+        'tokens': Sequence(object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                               | Class            | Shape   | Dtype     | Description
-:------------------------------------ | :--------------- | :------ | :-------- | :----------
-                                      | FeaturesDict     |         |           |
-annotations                           | Sequence         |         |           |
-annotations/id                        | Tensor           |         | tf.string |
-annotations/long_answer               | FeaturesDict     |         |           |
-annotations/long_answer/end_byte      | Tensor           |         | tf.int64  |
-annotations/long_answer/end_token     | Tensor           |         | tf.int64  |
-annotations/long_answer/start_byte    | Tensor           |         | tf.int64  |
-annotations/long_answer/start_token   | Tensor           |         | tf.int64  |
-annotations/short_answers             | Sequence         |         |           |
-annotations/short_answers/end_byte    | Tensor           |         | tf.int64  |
-annotations/short_answers/end_token   | Tensor           |         | tf.int64  |
-annotations/short_answers/start_byte  | Tensor           |         | tf.int64  |
-annotations/short_answers/start_token | Tensor           |         | tf.int64  |
-annotations/short_answers/text        | Text             |         | tf.string |
-annotations/yes_no_answer             | ClassLabel       |         | tf.int64  |
-document                              | FeaturesDict     |         |           |
-document/html                         | Text             |         | tf.string |
-document/title                        | Text             |         | tf.string |
-document/tokens                       | Sequence         |         |           |
-document/tokens/is_html               | Tensor           |         | tf.bool   |
-document/tokens/token                 | Text             |         | tf.string |
-document/url                          | Text             |         | tf.string |
-id                                    | Tensor           |         | tf.string |
-question                              | FeaturesDict     |         |           |
-question/text                         | Text             |         | tf.string |
-question/tokens                       | Sequence(Tensor) | (None,) | tf.string |
+Feature                               | Class            | Shape   | Dtype  | Description
+:------------------------------------ | :--------------- | :------ | :----- | :----------
+                                      | FeaturesDict     |         |        |
+annotations                           | Sequence         |         |        |
+annotations/id                        | Tensor           |         | object |
+annotations/long_answer               | FeaturesDict     |         |        |
+annotations/long_answer/end_byte      | Tensor           |         | int64  |
+annotations/long_answer/end_token     | Tensor           |         | int64  |
+annotations/long_answer/start_byte    | Tensor           |         | int64  |
+annotations/long_answer/start_token   | Tensor           |         | int64  |
+annotations/short_answers             | Sequence         |         |        |
+annotations/short_answers/end_byte    | Tensor           |         | int64  |
+annotations/short_answers/end_token   | Tensor           |         | int64  |
+annotations/short_answers/start_byte  | Tensor           |         | int64  |
+annotations/short_answers/start_token | Tensor           |         | int64  |
+annotations/short_answers/text        | Text             |         | object |
+annotations/yes_no_answer             | ClassLabel       |         | int64  |
+document                              | FeaturesDict     |         |        |
+document/html                         | Text             |         | object |
+document/title                        | Text             |         | object |
+document/tokens                       | Sequence         |         |        |
+document/tokens/is_html               | Tensor           |         | bool   |
+document/tokens/token                 | Text             |         | object |
+document/url                          | Text             |         | object |
+id                                    | Tensor           |         | object |
+question                              | FeaturesDict     |         |        |
+question/text                         | Text             |         | object |
+question/tokens                       | Sequence(Tensor) | (None,) | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -193,26 +193,26 @@ dataButton.addEventListener('click', async () => {
 
 ```python
 FeaturesDict({
-    'all_answers': Sequence(Text(shape=(), dtype=tf.string)),
-    'answer': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'all_answers': Sequence(Text(shape=(), dtype=object)),
+    'answer': Text(shape=(), dtype=object),
+    'context': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class          | Shape   | Dtype     | Description
-:---------- | :------------- | :------ | :-------- | :----------
-            | FeaturesDict   |         |           |
-all_answers | Sequence(Text) | (None,) | tf.string |
-answer      | Text           |         | tf.string |
-context     | Text           |         | tf.string |
-id          | Text           |         | tf.string |
-question    | Text           |         | tf.string |
-title       | Text           |         | tf.string |
+Feature     | Class          | Shape   | Dtype  | Description
+:---------- | :------------- | :------ | :----- | :----------
+            | FeaturesDict   |         |        |
+all_answers | Sequence(Text) | (None,) | object |
+answer      | Text           |         | object |
+context     | Text           |         | object |
+id          | Text           |         | object |
+question    | Text           |         | object |
+title       | Text           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

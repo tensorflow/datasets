@@ -51,73 +51,73 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'activity': tf.float32,
+    'activity': float32,
     'features': FeaturesDict({
-        'Uppm': tf.float32,
-        'adjwt': tf.float32,
-        'basement': tf.string,
-        'cntyfips': tf.int32,
-        'county': tf.string,
-        'dupflag': tf.int32,
-        'floor': tf.int32,
-        'idnum': tf.int32,
-        'lat': tf.float32,
-        'lon': tf.float32,
-        'pcterr': tf.float32,
-        'region': tf.int32,
-        'rep': tf.int32,
-        'room': tf.int32,
-        'startdt': tf.int32,
-        'starttm': tf.int32,
-        'state': tf.string,
-        'state2': tf.string,
-        'stfips': tf.int32,
-        'stopdt': tf.int32,
-        'stoptm': tf.int32,
-        'stratum': tf.int32,
-        'typebldg': tf.int32,
-        'wave': tf.int32,
-        'windoor': tf.string,
-        'zip': tf.int32,
-        'zipflag': tf.int32,
+        'Uppm': float32,
+        'adjwt': float32,
+        'basement': object,
+        'cntyfips': int32,
+        'county': object,
+        'dupflag': int32,
+        'floor': int32,
+        'idnum': int32,
+        'lat': float32,
+        'lon': float32,
+        'pcterr': float32,
+        'region': int32,
+        'rep': int32,
+        'room': int32,
+        'startdt': int32,
+        'starttm': int32,
+        'state': object,
+        'state2': object,
+        'stfips': int32,
+        'stopdt': int32,
+        'stoptm': int32,
+        'stratum': int32,
+        'typebldg': int32,
+        'wave': int32,
+        'windoor': object,
+        'zip': int32,
+        'zipflag': int32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-activity          | Tensor       |       | tf.float32 |
-features          | FeaturesDict |       |            |
-features/Uppm     | Tensor       |       | tf.float32 |
-features/adjwt    | Tensor       |       | tf.float32 |
-features/basement | Tensor       |       | tf.string  |
-features/cntyfips | Tensor       |       | tf.int32   |
-features/county   | Tensor       |       | tf.string  |
-features/dupflag  | Tensor       |       | tf.int32   |
-features/floor    | Tensor       |       | tf.int32   |
-features/idnum    | Tensor       |       | tf.int32   |
-features/lat      | Tensor       |       | tf.float32 |
-features/lon      | Tensor       |       | tf.float32 |
-features/pcterr   | Tensor       |       | tf.float32 |
-features/region   | Tensor       |       | tf.int32   |
-features/rep      | Tensor       |       | tf.int32   |
-features/room     | Tensor       |       | tf.int32   |
-features/startdt  | Tensor       |       | tf.int32   |
-features/starttm  | Tensor       |       | tf.int32   |
-features/state    | Tensor       |       | tf.string  |
-features/state2   | Tensor       |       | tf.string  |
-features/stfips   | Tensor       |       | tf.int32   |
-features/stopdt   | Tensor       |       | tf.int32   |
-features/stoptm   | Tensor       |       | tf.int32   |
-features/stratum  | Tensor       |       | tf.int32   |
-features/typebldg | Tensor       |       | tf.int32   |
-features/wave     | Tensor       |       | tf.int32   |
-features/windoor  | Tensor       |       | tf.string  |
-features/zip      | Tensor       |       | tf.int32   |
-features/zipflag  | Tensor       |       | tf.int32   |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+activity          | Tensor       |       | float32 |
+features          | FeaturesDict |       |         |
+features/Uppm     | Tensor       |       | float32 |
+features/adjwt    | Tensor       |       | float32 |
+features/basement | Tensor       |       | object  |
+features/cntyfips | Tensor       |       | int32   |
+features/county   | Tensor       |       | object  |
+features/dupflag  | Tensor       |       | int32   |
+features/floor    | Tensor       |       | int32   |
+features/idnum    | Tensor       |       | int32   |
+features/lat      | Tensor       |       | float32 |
+features/lon      | Tensor       |       | float32 |
+features/pcterr   | Tensor       |       | float32 |
+features/region   | Tensor       |       | int32   |
+features/rep      | Tensor       |       | int32   |
+features/room     | Tensor       |       | int32   |
+features/startdt  | Tensor       |       | int32   |
+features/starttm  | Tensor       |       | int32   |
+features/state    | Tensor       |       | object  |
+features/state2   | Tensor       |       | object  |
+features/stfips   | Tensor       |       | int32   |
+features/stopdt   | Tensor       |       | int32   |
+features/stoptm   | Tensor       |       | int32   |
+features/stratum  | Tensor       |       | int32   |
+features/typebldg | Tensor       |       | int32   |
+features/wave     | Tensor       |       | int32   |
+features/windoor  | Tensor       |       | object  |
+features/zip      | Tensor       |       | int32   |
+features/zipflag  | Tensor       |       | int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

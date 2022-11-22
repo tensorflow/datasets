@@ -37,36 +37,36 @@ and then browsing the annotation guidelines.
 
 ```python
 FeaturesDict({
-    'deprel': Sequence(Text(shape=(), dtype=tf.string)),
-    'deps': Sequence(Text(shape=(), dtype=tf.string)),
-    'feats': Sequence(Text(shape=(), dtype=tf.string)),
-    'head': Sequence(Text(shape=(), dtype=tf.string)),
-    'idx': Text(shape=(), dtype=tf.string),
-    'lemmas': Sequence(Text(shape=(), dtype=tf.string)),
-    'misc': Sequence(Text(shape=(), dtype=tf.string)),
-    'text': Text(shape=(), dtype=tf.string),
-    'tokens': Sequence(Text(shape=(), dtype=tf.string)),
-    'upos': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=18)),
-    'xpos': Sequence(Text(shape=(), dtype=tf.string)),
+    'deprel': Sequence(Text(shape=(), dtype=object)),
+    'deps': Sequence(Text(shape=(), dtype=object)),
+    'feats': Sequence(Text(shape=(), dtype=object)),
+    'head': Sequence(Text(shape=(), dtype=object)),
+    'idx': Text(shape=(), dtype=object),
+    'lemmas': Sequence(Text(shape=(), dtype=object)),
+    'misc': Sequence(Text(shape=(), dtype=object)),
+    'text': Text(shape=(), dtype=object),
+    'tokens': Sequence(Text(shape=(), dtype=object)),
+    'upos': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=18)),
+    'xpos': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class                | Shape   | Dtype     | Description
-:------ | :------------------- | :------ | :-------- | :----------
-        | FeaturesDict         |         |           |
-deprel  | Sequence(Text)       | (None,) | tf.string |
-deps    | Sequence(Text)       | (None,) | tf.string |
-feats   | Sequence(Text)       | (None,) | tf.string |
-head    | Sequence(Text)       | (None,) | tf.string |
-idx     | Text                 |         | tf.string |
-lemmas  | Sequence(Text)       | (None,) | tf.string |
-misc    | Sequence(Text)       | (None,) | tf.string |
-text    | Text                 |         | tf.string |
-tokens  | Sequence(Text)       | (None,) | tf.string |
-upos    | Sequence(ClassLabel) | (None,) | tf.int64  |
-xpos    | Sequence(Text)       | (None,) | tf.string |
+Feature | Class                | Shape   | Dtype  | Description
+:------ | :------------------- | :------ | :----- | :----------
+        | FeaturesDict         |         |        |
+deprel  | Sequence(Text)       | (None,) | object |
+deps    | Sequence(Text)       | (None,) | object |
+feats   | Sequence(Text)       | (None,) | object |
+head    | Sequence(Text)       | (None,) | object |
+idx     | Text                 |         | object |
+lemmas  | Sequence(Text)       | (None,) | object |
+misc    | Sequence(Text)       | (None,) | object |
+text    | Text                 |         | object |
+tokens  | Sequence(Text)       | (None,) | object |
+upos    | Sequence(ClassLabel) | (None,) | int64  |
+xpos    | Sequence(Text)       | (None,) | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -53,30 +53,30 @@ num_comments: number of comments. - upvote_ratio: upvote ratio.
 
 ```python
 FeaturesDict({
-    'documents': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'num_comments': tf.float32,
-    'score': tf.float32,
-    'title': Text(shape=(), dtype=tf.string),
-    'tldr': Text(shape=(), dtype=tf.string),
-    'ups': tf.float32,
-    'upvote_ratio': tf.float32,
+    'documents': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'num_comments': float32,
+    'score': float32,
+    'title': Text(shape=(), dtype=object),
+    'tldr': Text(shape=(), dtype=object),
+    'ups': float32,
+    'upvote_ratio': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature      | Class        | Shape | Dtype      | Description
-:----------- | :----------- | :---- | :--------- | :----------
-             | FeaturesDict |       |            |
-documents    | Text         |       | tf.string  |
-id           | Text         |       | tf.string  |
-num_comments | Tensor       |       | tf.float32 |
-score        | Tensor       |       | tf.float32 |
-title        | Text         |       | tf.string  |
-tldr         | Text         |       | tf.string  |
-ups          | Tensor       |       | tf.float32 |
-upvote_ratio | Tensor       |       | tf.float32 |
+Feature      | Class        | Shape | Dtype   | Description
+:----------- | :----------- | :---- | :------ | :----------
+             | FeaturesDict |       |         |
+documents    | Text         |       | object  |
+id           | Text         |       | object  |
+num_comments | Tensor       |       | float32 |
+score        | Tensor       |       | float32 |
+title        | Text         |       | object  |
+tldr         | Text         |       | object  |
+ups          | Tensor       |       | float32 |
+upvote_ratio | Tensor       |       | float32 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

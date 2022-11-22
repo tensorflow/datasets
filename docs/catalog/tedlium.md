@@ -38,24 +38,24 @@ at 16kHz. It contains about 118 hours of speech.
 
 ```python
 FeaturesDict({
-    'gender': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'id': tf.string,
-    'speaker_id': tf.string,
-    'speech': Audio(shape=(None,), dtype=tf.int64),
-    'text': Text(shape=(), dtype=tf.string),
+    'gender': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'id': object,
+    'speaker_id': object,
+    'speech': Audio(shape=(None,), dtype=int64),
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape   | Dtype     | Description
-:--------- | :----------- | :------ | :-------- | :----------
-           | FeaturesDict |         |           |
-gender     | ClassLabel   |         | tf.int64  |
-id         | Tensor       |         | tf.string |
-speaker_id | Tensor       |         | tf.string |
-speech     | Audio        | (None,) | tf.int64  |
-text       | Text         |         | tf.string |
+Feature    | Class        | Shape   | Dtype  | Description
+:--------- | :----------- | :------ | :----- | :----------
+           | FeaturesDict |         |        |
+gender     | ClassLabel   |         | int64  |
+id         | Tensor       |         | object |
+speaker_id | Tensor       |         | object |
+speech     | Audio        | (None,) | int64  |
+text       | Text         |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

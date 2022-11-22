@@ -38,18 +38,18 @@ The original source is the Common Crawl dataset: https://commoncrawl.org
 
 ```python
 FeaturesDict({
-    'abbreviated_snippet': Text(shape=(), dtype=tf.string),
-    'original_snippet': Text(shape=(), dtype=tf.string),
+    'abbreviated_snippet': Text(shape=(), dtype=object),
+    'original_snippet': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature             | Class        | Shape | Dtype     | Description
-:------------------ | :----------- | :---- | :-------- | :----------
-                    | FeaturesDict |       |           |
-abbreviated_snippet | Text         |       | tf.string |
-original_snippet    | Text         |       | tf.string |
+Feature             | Class        | Shape | Dtype  | Description
+:------------------ | :----------- | :---- | :----- | :----------
+                    | FeaturesDict |       |        |
+abbreviated_snippet | Text         |       | object |
+original_snippet    | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -78,8 +78,8 @@ original_snippet    | Text         |       | tf.string |
 
 Split          | Examples
 :------------- | --------:
-`'train'`      | 9,576,782
-`'validation'` | 991,682
+`'train'`      | 9,575,852
+`'validation'` | 991,422
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

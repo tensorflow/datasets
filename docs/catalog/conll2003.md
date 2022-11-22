@@ -54,22 +54,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'chunks': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=23)),
-    'ner': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=9)),
-    'pos': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=47)),
-    'tokens': Sequence(Text(shape=(), dtype=tf.string)),
+    'chunks': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=23)),
+    'ner': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=9)),
+    'pos': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=47)),
+    'tokens': Sequence(Text(shape=(), dtype=object)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class                | Shape   | Dtype     | Description
-:------ | :------------------- | :------ | :-------- | :----------
-        | FeaturesDict         |         |           |
-chunks  | Sequence(ClassLabel) | (None,) | tf.int64  |
-ner     | Sequence(ClassLabel) | (None,) | tf.int64  |
-pos     | Sequence(ClassLabel) | (None,) | tf.int64  |
-tokens  | Sequence(Text)       | (None,) | tf.string |
+Feature | Class                | Shape   | Dtype  | Description
+:------ | :------------------- | :------ | :----- | :----------
+        | FeaturesDict         |         |        |
+chunks  | Sequence(ClassLabel) | (None,) | int64  |
+ner     | Sequence(ClassLabel) | (None,) | int64  |
+pos     | Sequence(ClassLabel) | (None,) | int64  |
+tokens  | Sequence(Text)       | (None,) | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -52,48 +52,48 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'ambiguous_question': Text(shape=(), dtype=tf.string),
+    'ambiguous_question': Text(shape=(), dtype=object),
     'annotations': Sequence({
         'knowledge': Sequence({
-            'content': Text(shape=(), dtype=tf.string),
-            'wikipage': Text(shape=(), dtype=tf.string),
+            'content': Text(shape=(), dtype=object),
+            'wikipage': Text(shape=(), dtype=object),
         }),
-        'long_answer': Text(shape=(), dtype=tf.string),
+        'long_answer': Text(shape=(), dtype=object),
     }),
     'qa_pairs': Sequence({
-        'context': Text(shape=(), dtype=tf.string),
-        'question': Text(shape=(), dtype=tf.string),
-        'short_answers': Sequence(Text(shape=(), dtype=tf.string)),
-        'wikipage': Text(shape=(), dtype=tf.string),
+        'context': Text(shape=(), dtype=object),
+        'question': Text(shape=(), dtype=object),
+        'short_answers': Sequence(Text(shape=(), dtype=object)),
+        'wikipage': Text(shape=(), dtype=object),
     }),
-    'sample_id': tf.int32,
+    'sample_id': int32,
     'wikipages': Sequence({
-        'title': Text(shape=(), dtype=tf.string),
-        'url': Text(shape=(), dtype=tf.string),
+        'title': Text(shape=(), dtype=object),
+        'url': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class          | Shape   | Dtype     | Description
-:----------------------------- | :------------- | :------ | :-------- | :----------
-                               | FeaturesDict   |         |           |
-ambiguous_question             | Text           |         | tf.string | Disambiguated question from AmbigQA.
-annotations                    | Sequence       |         |           | Long-form answers to the ambiguous question constructed by ASQA annotators.
-annotations/knowledge          | Sequence       |         |           | List of additional knowledge pieces.
-annotations/knowledge/content  | Text           |         | tf.string | A passage from Wikipedia.
-annotations/knowledge/wikipage | Text           |         | tf.string | Title of the Wikipedia page the passage was taken from.
-annotations/long_answer        | Text           |         | tf.string | Annotation.
-qa_pairs                       | Sequence       |         |           | Q&A pairs from AmbigQA which are used for disambiguation.
-qa_pairs/context               | Text           |         | tf.string | Additional context provided.
-qa_pairs/question              | Text           |         | tf.string |
-qa_pairs/short_answers         | Sequence(Text) | (None,) | tf.string | List of short answers from AmbigQA.
-qa_pairs/wikipage              | Text           |         | tf.string | Title of the Wikipedia page the additional context was taken from.
-sample_id                      | Tensor         |         | tf.int32  |
-wikipages                      | Sequence       |         |           | List of Wikipedia pages visited by AmbigQA annotators.
-wikipages/title                | Text           |         | tf.string | Title of the Wikipedia page.
-wikipages/url                  | Text           |         | tf.string | Link to the Wikipedia page.
+Feature                        | Class          | Shape   | Dtype  | Description
+:----------------------------- | :------------- | :------ | :----- | :----------
+                               | FeaturesDict   |         |        |
+ambiguous_question             | Text           |         | object | Disambiguated question from AmbigQA.
+annotations                    | Sequence       |         |        | Long-form answers to the ambiguous question constructed by ASQA annotators.
+annotations/knowledge          | Sequence       |         |        | List of additional knowledge pieces.
+annotations/knowledge/content  | Text           |         | object | A passage from Wikipedia.
+annotations/knowledge/wikipage | Text           |         | object | Title of the Wikipedia page the passage was taken from.
+annotations/long_answer        | Text           |         | object | Annotation.
+qa_pairs                       | Sequence       |         |        | Q&A pairs from AmbigQA which are used for disambiguation.
+qa_pairs/context               | Text           |         | object | Additional context provided.
+qa_pairs/question              | Text           |         | object |
+qa_pairs/short_answers         | Sequence(Text) | (None,) | object | List of short answers from AmbigQA.
+qa_pairs/wikipage              | Text           |         | object | Title of the Wikipedia page the additional context was taken from.
+sample_id                      | Tensor         |         | int32  |
+wikipages                      | Sequence       |         |        | List of Wikipedia pages visited by AmbigQA annotators.
+wikipages/title                | Text           |         | object | Title of the Wikipedia page.
+wikipages/url                  | Text           |         | object | Link to the Wikipedia page.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

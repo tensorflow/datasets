@@ -60,20 +60,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=365),
+    'filename': Text(shape=(), dtype=object),
+    'image': Image(shape=(256, 256, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=365),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape         | Dtype     | Description
-:------- | :----------- | :------------ | :-------- | :----------
-         | FeaturesDict |               |           |
-filename | Text         |               | tf.string |
-image    | Image        | (256, 256, 3) | tf.uint8  |
-label    | ClassLabel   |               | tf.int64  |
+Feature  | Class        | Shape         | Dtype  | Description
+:------- | :----------- | :------------ | :----- | :----------
+         | FeaturesDict |               |        |
+filename | Text         |               | object |
+image    | Image        | (256, 256, 3) | uint8  |
+label    | ClassLabel   |               | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

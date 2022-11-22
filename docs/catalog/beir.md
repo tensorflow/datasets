@@ -38,28 +38,28 @@ within the benchmark.
 
 ```python
 FeaturesDict({
-    'passage': Text(shape=(), dtype=tf.string),
-    'passage_id': Text(shape=(), dtype=tf.string),
-    'passage_metadata': Text(shape=(), dtype=tf.string),
-    'query': Text(shape=(), dtype=tf.string),
-    'query_id': Text(shape=(), dtype=tf.string),
-    'query_metadata': Text(shape=(), dtype=tf.string),
-    'score': tf.float32,
+    'passage': Text(shape=(), dtype=object),
+    'passage_id': Text(shape=(), dtype=object),
+    'passage_metadata': Text(shape=(), dtype=object),
+    'query': Text(shape=(), dtype=object),
+    'query_id': Text(shape=(), dtype=object),
+    'query_metadata': Text(shape=(), dtype=object),
+    'score': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape | Dtype      | Description
-:--------------- | :----------- | :---- | :--------- | :----------
-                 | FeaturesDict |       |            |
-passage          | Text         |       | tf.string  |
-passage_id       | Text         |       | tf.string  |
-passage_metadata | Text         |       | tf.string  |
-query            | Text         |       | tf.string  |
-query_id         | Text         |       | tf.string  |
-query_metadata   | Text         |       | tf.string  |
-score            | Tensor       |       | tf.float32 |
+Feature          | Class        | Shape | Dtype   | Description
+:--------------- | :----------- | :---- | :------ | :----------
+                 | FeaturesDict |       |         |
+passage          | Text         |       | object  |
+passage_id       | Text         |       | object  |
+passage_metadata | Text         |       | object  |
+query            | Text         |       | object  |
+query_id         | Text         |       | object  |
+query_metadata   | Text         |       | object  |
+score            | Tensor       |       | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

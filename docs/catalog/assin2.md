@@ -94,24 +94,24 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'entailment': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'id': tf.int32,
-    'similarity': tf.float32,
-    'text': Text(shape=(), dtype=tf.string),
+    'entailment': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'hypothesis': Text(shape=(), dtype=object),
+    'id': int32,
+    'similarity': float32,
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype      | Description
-:--------- | :----------- | :---- | :--------- | :----------
-           | FeaturesDict |       |            |
-entailment | ClassLabel   |       | tf.int64   |
-hypothesis | Text         |       | tf.string  |
-id         | Tensor       |       | tf.int32   |
-similarity | Tensor       |       | tf.float32 |
-text       | Text         |       | tf.string  |
+Feature    | Class        | Shape | Dtype   | Description
+:--------- | :----------- | :---- | :------ | :----------
+           | FeaturesDict |       |         |
+entailment | ClassLabel   |       | int64   |
+hypothesis | Text         |       | object  |
+id         | Tensor       |       | int32   |
+similarity | Tensor       |       | float32 |
+text       | Text         |       | object  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -112,41 +112,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'height': tf.int32,
-        'num_frames': tf.int32,
-        'video_name': tf.string,
-        'width': tf.int32,
+        'height': int32,
+        'num_frames': int32,
+        'video_name': object,
+        'width': int32,
     }),
     'tracks': Sequence({
-        'areas': Sequence(tf.float32),
-        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=tf.float32)),
-        'category': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-        'frames': Sequence(tf.int32),
-        'is_crowd': tf.bool,
-        'segmentations': Video(Image(shape=(None, None, 1), dtype=tf.uint8)),
+        'areas': Sequence(float32),
+        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=float32)),
+        'category': ClassLabel(shape=(), dtype=int64, num_classes=40),
+        'frames': Sequence(int32),
+        'is_crowd': bool,
+        'segmentations': Video(Image(shape=(None, None, 1), dtype=uint8)),
     }),
-    'video': Video(Image(shape=(None, None, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(None, None, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                 | Shape                 | Dtype      | Description
-:------------------- | :-------------------- | :-------------------- | :--------- | :----------
-                     | FeaturesDict          |                       |            |
-metadata             | FeaturesDict          |                       |            |
-metadata/height      | Tensor                |                       | tf.int32   |
-metadata/num_frames  | Tensor                |                       | tf.int32   |
-metadata/video_name  | Tensor                |                       | tf.string  |
-metadata/width       | Tensor                |                       | tf.int32   |
-tracks               | Sequence              |                       |            |
-tracks/areas         | Sequence(Tensor)      | (None,)               | tf.float32 |
-tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)             | tf.float32 |
-tracks/category      | ClassLabel            |                       | tf.int64   |
-tracks/frames        | Sequence(Tensor)      | (None,)               | tf.int32   |
-tracks/is_crowd      | Tensor                |                       | tf.bool    |
-tracks/segmentations | Video(Image)          | (None, None, None, 1) | tf.uint8   |
-video                | Video(Image)          | (None, None, None, 3) | tf.uint8   |
+Feature              | Class                 | Shape                 | Dtype   | Description
+:------------------- | :-------------------- | :-------------------- | :------ | :----------
+                     | FeaturesDict          |                       |         |
+metadata             | FeaturesDict          |                       |         |
+metadata/height      | Tensor                |                       | int32   |
+metadata/num_frames  | Tensor                |                       | int32   |
+metadata/video_name  | Tensor                |                       | object  |
+metadata/width       | Tensor                |                       | int32   |
+tracks               | Sequence              |                       |         |
+tracks/areas         | Sequence(Tensor)      | (None,)               | float32 |
+tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)             | float32 |
+tracks/category      | ClassLabel            |                       | int64   |
+tracks/frames        | Sequence(Tensor)      | (None,)               | int32   |
+tracks/is_crowd      | Tensor                |                       | bool    |
+tracks/segmentations | Video(Image)          | (None, None, None, 1) | uint8   |
+video                | Video(Image)          | (None, None, None, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -205,41 +205,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'height': tf.int32,
-        'num_frames': tf.int32,
-        'video_name': tf.string,
-        'width': tf.int32,
+        'height': int32,
+        'num_frames': int32,
+        'video_name': object,
+        'width': int32,
     }),
     'tracks': Sequence({
-        'areas': Sequence(tf.float32),
-        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=tf.float32)),
-        'category': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-        'frames': Sequence(tf.int32),
-        'is_crowd': tf.bool,
-        'segmentations': Video(Image(shape=(480, 640, 1), dtype=tf.uint8)),
+        'areas': Sequence(float32),
+        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=float32)),
+        'category': ClassLabel(shape=(), dtype=int64, num_classes=40),
+        'frames': Sequence(int32),
+        'is_crowd': bool,
+        'segmentations': Video(Image(shape=(480, 640, 1), dtype=uint8)),
     }),
-    'video': Video(Image(shape=(480, 640, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(480, 640, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                 | Shape               | Dtype      | Description
-:------------------- | :-------------------- | :------------------ | :--------- | :----------
-                     | FeaturesDict          |                     |            |
-metadata             | FeaturesDict          |                     |            |
-metadata/height      | Tensor                |                     | tf.int32   |
-metadata/num_frames  | Tensor                |                     | tf.int32   |
-metadata/video_name  | Tensor                |                     | tf.string  |
-metadata/width       | Tensor                |                     | tf.int32   |
-tracks               | Sequence              |                     |            |
-tracks/areas         | Sequence(Tensor)      | (None,)             | tf.float32 |
-tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)           | tf.float32 |
-tracks/category      | ClassLabel            |                     | tf.int64   |
-tracks/frames        | Sequence(Tensor)      | (None,)             | tf.int32   |
-tracks/is_crowd      | Tensor                |                     | tf.bool    |
-tracks/segmentations | Video(Image)          | (None, 480, 640, 1) | tf.uint8   |
-video                | Video(Image)          | (None, 480, 640, 3) | tf.uint8   |
+Feature              | Class                 | Shape               | Dtype   | Description
+:------------------- | :-------------------- | :------------------ | :------ | :----------
+                     | FeaturesDict          |                     |         |
+metadata             | FeaturesDict          |                     |         |
+metadata/height      | Tensor                |                     | int32   |
+metadata/num_frames  | Tensor                |                     | int32   |
+metadata/video_name  | Tensor                |                     | object  |
+metadata/width       | Tensor                |                     | int32   |
+tracks               | Sequence              |                     |         |
+tracks/areas         | Sequence(Tensor)      | (None,)             | float32 |
+tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)           | float32 |
+tracks/category      | ClassLabel            |                     | int64   |
+tracks/frames        | Sequence(Tensor)      | (None,)             | int32   |
+tracks/is_crowd      | Tensor                |                     | bool    |
+tracks/segmentations | Video(Image)          | (None, 480, 640, 1) | uint8   |
+video                | Video(Image)          | (None, 480, 640, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -298,41 +298,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'height': tf.int32,
-        'num_frames': tf.int32,
-        'video_name': tf.string,
-        'width': tf.int32,
+        'height': int32,
+        'num_frames': int32,
+        'video_name': object,
+        'width': int32,
     }),
     'tracks': Sequence({
-        'areas': Sequence(tf.float32),
-        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=tf.float32)),
-        'category': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-        'frames': Sequence(tf.int32),
-        'is_crowd': tf.bool,
-        'segmentations': Video(Image(shape=(480, 640, 1), dtype=tf.uint8)),
+        'areas': Sequence(float32),
+        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=float32)),
+        'category': ClassLabel(shape=(), dtype=int64, num_classes=40),
+        'frames': Sequence(int32),
+        'is_crowd': bool,
+        'segmentations': Video(Image(shape=(480, 640, 1), dtype=uint8)),
     }),
-    'video': Video(Image(shape=(480, 640, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(480, 640, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                 | Shape               | Dtype      | Description
-:------------------- | :-------------------- | :------------------ | :--------- | :----------
-                     | FeaturesDict          |                     |            |
-metadata             | FeaturesDict          |                     |            |
-metadata/height      | Tensor                |                     | tf.int32   |
-metadata/num_frames  | Tensor                |                     | tf.int32   |
-metadata/video_name  | Tensor                |                     | tf.string  |
-metadata/width       | Tensor                |                     | tf.int32   |
-tracks               | Sequence              |                     |            |
-tracks/areas         | Sequence(Tensor)      | (None,)             | tf.float32 |
-tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)           | tf.float32 |
-tracks/category      | ClassLabel            |                     | tf.int64   |
-tracks/frames        | Sequence(Tensor)      | (None,)             | tf.int32   |
-tracks/is_crowd      | Tensor                |                     | tf.bool    |
-tracks/segmentations | Video(Image)          | (None, 480, 640, 1) | tf.uint8   |
-video                | Video(Image)          | (None, 480, 640, 3) | tf.uint8   |
+Feature              | Class                 | Shape               | Dtype   | Description
+:------------------- | :-------------------- | :------------------ | :------ | :----------
+                     | FeaturesDict          |                     |         |
+metadata             | FeaturesDict          |                     |         |
+metadata/height      | Tensor                |                     | int32   |
+metadata/num_frames  | Tensor                |                     | int32   |
+metadata/video_name  | Tensor                |                     | object  |
+metadata/width       | Tensor                |                     | int32   |
+tracks               | Sequence              |                     |         |
+tracks/areas         | Sequence(Tensor)      | (None,)             | float32 |
+tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)           | float32 |
+tracks/category      | ClassLabel            |                     | int64   |
+tracks/frames        | Sequence(Tensor)      | (None,)             | int32   |
+tracks/is_crowd      | Tensor                |                     | bool    |
+tracks/segmentations | Video(Image)          | (None, 480, 640, 1) | uint8   |
+video                | Video(Image)          | (None, 480, 640, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -391,41 +391,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'height': tf.int32,
-        'num_frames': tf.int32,
-        'video_name': tf.string,
-        'width': tf.int32,
+        'height': int32,
+        'num_frames': int32,
+        'video_name': object,
+        'width': int32,
     }),
     'tracks': Sequence({
-        'areas': Sequence(tf.float32),
-        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=tf.float32)),
-        'category': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-        'frames': Sequence(tf.int32),
-        'is_crowd': tf.bool,
-        'segmentations': Video(Image(shape=(None, None, 1), dtype=tf.uint8)),
+        'areas': Sequence(float32),
+        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=float32)),
+        'category': ClassLabel(shape=(), dtype=int64, num_classes=40),
+        'frames': Sequence(int32),
+        'is_crowd': bool,
+        'segmentations': Video(Image(shape=(None, None, 1), dtype=uint8)),
     }),
-    'video': Video(Image(shape=(None, None, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(None, None, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                 | Shape                 | Dtype      | Description
-:------------------- | :-------------------- | :-------------------- | :--------- | :----------
-                     | FeaturesDict          |                       |            |
-metadata             | FeaturesDict          |                       |            |
-metadata/height      | Tensor                |                       | tf.int32   |
-metadata/num_frames  | Tensor                |                       | tf.int32   |
-metadata/video_name  | Tensor                |                       | tf.string  |
-metadata/width       | Tensor                |                       | tf.int32   |
-tracks               | Sequence              |                       |            |
-tracks/areas         | Sequence(Tensor)      | (None,)               | tf.float32 |
-tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)             | tf.float32 |
-tracks/category      | ClassLabel            |                       | tf.int64   |
-tracks/frames        | Sequence(Tensor)      | (None,)               | tf.int32   |
-tracks/is_crowd      | Tensor                |                       | tf.bool    |
-tracks/segmentations | Video(Image)          | (None, None, None, 1) | tf.uint8   |
-video                | Video(Image)          | (None, None, None, 3) | tf.uint8   |
+Feature              | Class                 | Shape                 | Dtype   | Description
+:------------------- | :-------------------- | :-------------------- | :------ | :----------
+                     | FeaturesDict          |                       |         |
+metadata             | FeaturesDict          |                       |         |
+metadata/height      | Tensor                |                       | int32   |
+metadata/num_frames  | Tensor                |                       | int32   |
+metadata/video_name  | Tensor                |                       | object  |
+metadata/width       | Tensor                |                       | int32   |
+tracks               | Sequence              |                       |         |
+tracks/areas         | Sequence(Tensor)      | (None,)               | float32 |
+tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)             | float32 |
+tracks/category      | ClassLabel            |                       | int64   |
+tracks/frames        | Sequence(Tensor)      | (None,)               | int32   |
+tracks/is_crowd      | Tensor                |                       | bool    |
+tracks/segmentations | Video(Image)          | (None, None, None, 1) | uint8   |
+video                | Video(Image)          | (None, None, None, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -485,41 +485,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'height': tf.int32,
-        'num_frames': tf.int32,
-        'video_name': tf.string,
-        'width': tf.int32,
+        'height': int32,
+        'num_frames': int32,
+        'video_name': object,
+        'width': int32,
     }),
     'tracks': Sequence({
-        'areas': Sequence(tf.float32),
-        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=tf.float32)),
-        'category': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-        'frames': Sequence(tf.int32),
-        'is_crowd': tf.bool,
-        'segmentations': Video(Image(shape=(None, None, 1), dtype=tf.uint8)),
+        'areas': Sequence(float32),
+        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=float32)),
+        'category': ClassLabel(shape=(), dtype=int64, num_classes=40),
+        'frames': Sequence(int32),
+        'is_crowd': bool,
+        'segmentations': Video(Image(shape=(None, None, 1), dtype=uint8)),
     }),
-    'video': Video(Image(shape=(None, None, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(None, None, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                 | Shape                 | Dtype      | Description
-:------------------- | :-------------------- | :-------------------- | :--------- | :----------
-                     | FeaturesDict          |                       |            |
-metadata             | FeaturesDict          |                       |            |
-metadata/height      | Tensor                |                       | tf.int32   |
-metadata/num_frames  | Tensor                |                       | tf.int32   |
-metadata/video_name  | Tensor                |                       | tf.string  |
-metadata/width       | Tensor                |                       | tf.int32   |
-tracks               | Sequence              |                       |            |
-tracks/areas         | Sequence(Tensor)      | (None,)               | tf.float32 |
-tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)             | tf.float32 |
-tracks/category      | ClassLabel            |                       | tf.int64   |
-tracks/frames        | Sequence(Tensor)      | (None,)               | tf.int32   |
-tracks/is_crowd      | Tensor                |                       | tf.bool    |
-tracks/segmentations | Video(Image)          | (None, None, None, 1) | tf.uint8   |
-video                | Video(Image)          | (None, None, None, 3) | tf.uint8   |
+Feature              | Class                 | Shape                 | Dtype   | Description
+:------------------- | :-------------------- | :-------------------- | :------ | :----------
+                     | FeaturesDict          |                       |         |
+metadata             | FeaturesDict          |                       |         |
+metadata/height      | Tensor                |                       | int32   |
+metadata/num_frames  | Tensor                |                       | int32   |
+metadata/video_name  | Tensor                |                       | object  |
+metadata/width       | Tensor                |                       | int32   |
+tracks               | Sequence              |                       |         |
+tracks/areas         | Sequence(Tensor)      | (None,)               | float32 |
+tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)             | float32 |
+tracks/category      | ClassLabel            |                       | int64   |
+tracks/frames        | Sequence(Tensor)      | (None,)               | int32   |
+tracks/is_crowd      | Tensor                |                       | bool    |
+tracks/segmentations | Video(Image)          | (None, None, None, 1) | uint8   |
+video                | Video(Image)          | (None, None, None, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -579,41 +579,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'height': tf.int32,
-        'num_frames': tf.int32,
-        'video_name': tf.string,
-        'width': tf.int32,
+        'height': int32,
+        'num_frames': int32,
+        'video_name': object,
+        'width': int32,
     }),
     'tracks': Sequence({
-        'areas': Sequence(tf.float32),
-        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=tf.float32)),
-        'category': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-        'frames': Sequence(tf.int32),
-        'is_crowd': tf.bool,
-        'segmentations': Video(Image(shape=(480, 640, 1), dtype=tf.uint8)),
+        'areas': Sequence(float32),
+        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=float32)),
+        'category': ClassLabel(shape=(), dtype=int64, num_classes=40),
+        'frames': Sequence(int32),
+        'is_crowd': bool,
+        'segmentations': Video(Image(shape=(480, 640, 1), dtype=uint8)),
     }),
-    'video': Video(Image(shape=(480, 640, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(480, 640, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                 | Shape               | Dtype      | Description
-:------------------- | :-------------------- | :------------------ | :--------- | :----------
-                     | FeaturesDict          |                     |            |
-metadata             | FeaturesDict          |                     |            |
-metadata/height      | Tensor                |                     | tf.int32   |
-metadata/num_frames  | Tensor                |                     | tf.int32   |
-metadata/video_name  | Tensor                |                     | tf.string  |
-metadata/width       | Tensor                |                     | tf.int32   |
-tracks               | Sequence              |                     |            |
-tracks/areas         | Sequence(Tensor)      | (None,)             | tf.float32 |
-tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)           | tf.float32 |
-tracks/category      | ClassLabel            |                     | tf.int64   |
-tracks/frames        | Sequence(Tensor)      | (None,)             | tf.int32   |
-tracks/is_crowd      | Tensor                |                     | tf.bool    |
-tracks/segmentations | Video(Image)          | (None, 480, 640, 1) | tf.uint8   |
-video                | Video(Image)          | (None, 480, 640, 3) | tf.uint8   |
+Feature              | Class                 | Shape               | Dtype   | Description
+:------------------- | :-------------------- | :------------------ | :------ | :----------
+                     | FeaturesDict          |                     |         |
+metadata             | FeaturesDict          |                     |         |
+metadata/height      | Tensor                |                     | int32   |
+metadata/num_frames  | Tensor                |                     | int32   |
+metadata/video_name  | Tensor                |                     | object  |
+metadata/width       | Tensor                |                     | int32   |
+tracks               | Sequence              |                     |         |
+tracks/areas         | Sequence(Tensor)      | (None,)             | float32 |
+tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)           | float32 |
+tracks/category      | ClassLabel            |                     | int64   |
+tracks/frames        | Sequence(Tensor)      | (None,)             | int32   |
+tracks/is_crowd      | Tensor                |                     | bool    |
+tracks/segmentations | Video(Image)          | (None, 480, 640, 1) | uint8   |
+video                | Video(Image)          | (None, 480, 640, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -673,41 +673,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'height': tf.int32,
-        'num_frames': tf.int32,
-        'video_name': tf.string,
-        'width': tf.int32,
+        'height': int32,
+        'num_frames': int32,
+        'video_name': object,
+        'width': int32,
     }),
     'tracks': Sequence({
-        'areas': Sequence(tf.float32),
-        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=tf.float32)),
-        'category': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-        'frames': Sequence(tf.int32),
-        'is_crowd': tf.bool,
-        'segmentations': Video(Image(shape=(480, 640, 1), dtype=tf.uint8)),
+        'areas': Sequence(float32),
+        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=float32)),
+        'category': ClassLabel(shape=(), dtype=int64, num_classes=40),
+        'frames': Sequence(int32),
+        'is_crowd': bool,
+        'segmentations': Video(Image(shape=(480, 640, 1), dtype=uint8)),
     }),
-    'video': Video(Image(shape=(480, 640, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(480, 640, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                 | Shape               | Dtype      | Description
-:------------------- | :-------------------- | :------------------ | :--------- | :----------
-                     | FeaturesDict          |                     |            |
-metadata             | FeaturesDict          |                     |            |
-metadata/height      | Tensor                |                     | tf.int32   |
-metadata/num_frames  | Tensor                |                     | tf.int32   |
-metadata/video_name  | Tensor                |                     | tf.string  |
-metadata/width       | Tensor                |                     | tf.int32   |
-tracks               | Sequence              |                     |            |
-tracks/areas         | Sequence(Tensor)      | (None,)             | tf.float32 |
-tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)           | tf.float32 |
-tracks/category      | ClassLabel            |                     | tf.int64   |
-tracks/frames        | Sequence(Tensor)      | (None,)             | tf.int32   |
-tracks/is_crowd      | Tensor                |                     | tf.bool    |
-tracks/segmentations | Video(Image)          | (None, 480, 640, 1) | tf.uint8   |
-video                | Video(Image)          | (None, 480, 640, 3) | tf.uint8   |
+Feature              | Class                 | Shape               | Dtype   | Description
+:------------------- | :-------------------- | :------------------ | :------ | :----------
+                     | FeaturesDict          |                     |         |
+metadata             | FeaturesDict          |                     |         |
+metadata/height      | Tensor                |                     | int32   |
+metadata/num_frames  | Tensor                |                     | int32   |
+metadata/video_name  | Tensor                |                     | object  |
+metadata/width       | Tensor                |                     | int32   |
+tracks               | Sequence              |                     |         |
+tracks/areas         | Sequence(Tensor)      | (None,)             | float32 |
+tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)           | float32 |
+tracks/category      | ClassLabel            |                     | int64   |
+tracks/frames        | Sequence(Tensor)      | (None,)             | int32   |
+tracks/is_crowd      | Tensor                |                     | bool    |
+tracks/segmentations | Video(Image)          | (None, 480, 640, 1) | uint8   |
+video                | Video(Image)          | (None, 480, 640, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -766,41 +766,41 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'height': tf.int32,
-        'num_frames': tf.int32,
-        'video_name': tf.string,
-        'width': tf.int32,
+        'height': int32,
+        'num_frames': int32,
+        'video_name': object,
+        'width': int32,
     }),
     'tracks': Sequence({
-        'areas': Sequence(tf.float32),
-        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=tf.float32)),
-        'category': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
-        'frames': Sequence(tf.int32),
-        'is_crowd': tf.bool,
-        'segmentations': Video(Image(shape=(None, None, 1), dtype=tf.uint8)),
+        'areas': Sequence(float32),
+        'bboxes': Sequence(BBoxFeature(shape=(4,), dtype=float32)),
+        'category': ClassLabel(shape=(), dtype=int64, num_classes=40),
+        'frames': Sequence(int32),
+        'is_crowd': bool,
+        'segmentations': Video(Image(shape=(None, None, 1), dtype=uint8)),
     }),
-    'video': Video(Image(shape=(None, None, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(None, None, 3), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                 | Shape                 | Dtype      | Description
-:------------------- | :-------------------- | :-------------------- | :--------- | :----------
-                     | FeaturesDict          |                       |            |
-metadata             | FeaturesDict          |                       |            |
-metadata/height      | Tensor                |                       | tf.int32   |
-metadata/num_frames  | Tensor                |                       | tf.int32   |
-metadata/video_name  | Tensor                |                       | tf.string  |
-metadata/width       | Tensor                |                       | tf.int32   |
-tracks               | Sequence              |                       |            |
-tracks/areas         | Sequence(Tensor)      | (None,)               | tf.float32 |
-tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)             | tf.float32 |
-tracks/category      | ClassLabel            |                       | tf.int64   |
-tracks/frames        | Sequence(Tensor)      | (None,)               | tf.int32   |
-tracks/is_crowd      | Tensor                |                       | tf.bool    |
-tracks/segmentations | Video(Image)          | (None, None, None, 1) | tf.uint8   |
-video                | Video(Image)          | (None, None, None, 3) | tf.uint8   |
+Feature              | Class                 | Shape                 | Dtype   | Description
+:------------------- | :-------------------- | :-------------------- | :------ | :----------
+                     | FeaturesDict          |                       |         |
+metadata             | FeaturesDict          |                       |         |
+metadata/height      | Tensor                |                       | int32   |
+metadata/num_frames  | Tensor                |                       | int32   |
+metadata/video_name  | Tensor                |                       | object  |
+metadata/width       | Tensor                |                       | int32   |
+tracks               | Sequence              |                       |         |
+tracks/areas         | Sequence(Tensor)      | (None,)               | float32 |
+tracks/bboxes        | Sequence(BBoxFeature) | (None, 4)             | float32 |
+tracks/category      | ClassLabel            |                       | int64   |
+tracks/frames        | Sequence(Tensor)      | (None,)               | int32   |
+tracks/is_crowd      | Tensor                |                       | bool    |
+tracks/segmentations | Video(Image)          | (None, None, None, 1) | uint8   |
+video                | Video(Image)          | (None, None, None, 3) | uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

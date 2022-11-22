@@ -90,26 +90,26 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'edge_feat': Tensor(shape=(None, 3), dtype=tf.float32),
-    'edge_index': Tensor(shape=(None, 2), dtype=tf.int64),
-    'labels': Tensor(shape=(128,), dtype=tf.float32),
-    'node_feat': Tensor(shape=(None, 9), dtype=tf.float32),
-    'num_edges': Tensor(shape=(None,), dtype=tf.int64),
-    'num_nodes': Tensor(shape=(None,), dtype=tf.int64),
+    'edge_feat': Tensor(shape=(None, 3), dtype=float32),
+    'edge_index': Tensor(shape=(None, 2), dtype=int64),
+    'labels': Tensor(shape=(128,), dtype=float32),
+    'node_feat': Tensor(shape=(None, 9), dtype=float32),
+    'num_edges': Tensor(shape=(None,), dtype=int64),
+    'num_nodes': Tensor(shape=(None,), dtype=int64),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape     | Dtype      | Description
-:--------- | :----------- | :-------- | :--------- | :----------
-           | FeaturesDict |           |            |
-edge_feat  | Tensor       | (None, 3) | tf.float32 |
-edge_index | Tensor       | (None, 2) | tf.int64   |
-labels     | Tensor       | (128,)    | tf.float32 |
-node_feat  | Tensor       | (None, 9) | tf.float32 |
-num_edges  | Tensor       | (None,)   | tf.int64   |
-num_nodes  | Tensor       | (None,)   | tf.int64   |
+Feature    | Class        | Shape     | Dtype   | Description
+:--------- | :----------- | :-------- | :------ | :----------
+           | FeaturesDict |           |         |
+edge_feat  | Tensor       | (None, 3) | float32 |
+edge_index | Tensor       | (None, 2) | int64   |
+labels     | Tensor       | (128,)    | float32 |
+node_feat  | Tensor       | (None, 9) | float32 |
+num_edges  | Tensor       | (None,)   | int64   |
+num_nodes  | Tensor       | (None,)   | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

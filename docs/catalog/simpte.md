@@ -77,58 +77,58 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'X1': tf.float32,
-    'X10': tf.float32,
-    'X11': tf.float32,
-    'X12': tf.float32,
-    'X13': tf.float32,
-    'X14': tf.float32,
-    'X15': tf.float32,
-    'X16': tf.float32,
-    'X17': tf.float32,
-    'X18': tf.float32,
-    'X19': tf.float32,
-    'X2': tf.float32,
-    'X20': tf.float32,
-    'X3': tf.float32,
-    'X4': tf.float32,
-    'X5': tf.float32,
-    'X6': tf.float32,
-    'X7': tf.float32,
-    'X8': tf.float32,
-    'X9': tf.float32,
-    'treat': tf.int32,
-    'y': tf.int32,
+    'X1': float32,
+    'X10': float32,
+    'X11': float32,
+    'X12': float32,
+    'X13': float32,
+    'X14': float32,
+    'X15': float32,
+    'X16': float32,
+    'X17': float32,
+    'X18': float32,
+    'X19': float32,
+    'X2': float32,
+    'X20': float32,
+    'X3': float32,
+    'X4': float32,
+    'X5': float32,
+    'X6': float32,
+    'X7': float32,
+    'X8': float32,
+    'X9': float32,
+    'treat': int32,
+    'y': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape | Dtype      | Description
-:------ | :----------- | :---- | :--------- | :----------
-        | FeaturesDict |       |            |
-X1      | Tensor       |       | tf.float32 |
-X10     | Tensor       |       | tf.float32 |
-X11     | Tensor       |       | tf.float32 |
-X12     | Tensor       |       | tf.float32 |
-X13     | Tensor       |       | tf.float32 |
-X14     | Tensor       |       | tf.float32 |
-X15     | Tensor       |       | tf.float32 |
-X16     | Tensor       |       | tf.float32 |
-X17     | Tensor       |       | tf.float32 |
-X18     | Tensor       |       | tf.float32 |
-X19     | Tensor       |       | tf.float32 |
-X2      | Tensor       |       | tf.float32 |
-X20     | Tensor       |       | tf.float32 |
-X3      | Tensor       |       | tf.float32 |
-X4      | Tensor       |       | tf.float32 |
-X5      | Tensor       |       | tf.float32 |
-X6      | Tensor       |       | tf.float32 |
-X7      | Tensor       |       | tf.float32 |
-X8      | Tensor       |       | tf.float32 |
-X9      | Tensor       |       | tf.float32 |
-treat   | Tensor       |       | tf.int32   |
-y       | Tensor       |       | tf.int32   |
+Feature | Class        | Shape | Dtype   | Description
+:------ | :----------- | :---- | :------ | :----------
+        | FeaturesDict |       |         |
+X1      | Tensor       |       | float32 |
+X10     | Tensor       |       | float32 |
+X11     | Tensor       |       | float32 |
+X12     | Tensor       |       | float32 |
+X13     | Tensor       |       | float32 |
+X14     | Tensor       |       | float32 |
+X15     | Tensor       |       | float32 |
+X16     | Tensor       |       | float32 |
+X17     | Tensor       |       | float32 |
+X18     | Tensor       |       | float32 |
+X19     | Tensor       |       | float32 |
+X2      | Tensor       |       | float32 |
+X20     | Tensor       |       | float32 |
+X3      | Tensor       |       | float32 |
+X4      | Tensor       |       | float32 |
+X5      | Tensor       |       | float32 |
+X6      | Tensor       |       | float32 |
+X7      | Tensor       |       | float32 |
+X8      | Tensor       |       | float32 |
+X9      | Tensor       |       | float32 |
+treat   | Tensor       |       | int32   |
+y       | Tensor       |       | int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

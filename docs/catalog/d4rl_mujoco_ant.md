@@ -85,30 +85,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape  | Dtype      | Description
-:---------------- | :----------- | :----- | :--------- | :----------
-                  | FeaturesDict |        |            |
-steps             | Dataset      |        |            |
-steps/action      | Tensor       | (8,)   | tf.float32 |
-steps/discount    | Tensor       |        | tf.float32 |
-steps/is_first    | Tensor       |        | tf.bool    |
-steps/is_last     | Tensor       |        | tf.bool    |
-steps/is_terminal | Tensor       |        | tf.bool    |
-steps/observation | Tensor       | (111,) | tf.float32 |
-steps/reward      | Tensor       |        | tf.float32 |
+Feature           | Class        | Shape  | Dtype   | Description
+:---------------- | :----------- | :----- | :------ | :----------
+                  | FeaturesDict |        |         |
+steps             | Dataset      |        |         |
+steps/action      | Tensor       | (8,)   | float32 |
+steps/discount    | Tensor       |        | float32 |
+steps/is_first    | Tensor       |        | bool    |
+steps/is_last     | Tensor       |        | bool    |
+steps/is_terminal | Tensor       |        | bool    |
+steps/observation | Tensor       | (111,) | float32 |
+steps/reward      | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -168,30 +168,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape  | Dtype      | Description
-:---------------- | :----------- | :----- | :--------- | :----------
-                  | FeaturesDict |        |            |
-steps             | Dataset      |        |            |
-steps/action      | Tensor       | (8,)   | tf.float32 |
-steps/discount    | Tensor       |        | tf.float32 |
-steps/is_first    | Tensor       |        | tf.bool    |
-steps/is_last     | Tensor       |        | tf.bool    |
-steps/is_terminal | Tensor       |        | tf.bool    |
-steps/observation | Tensor       | (111,) | tf.float32 |
-steps/reward      | Tensor       |        | tf.float32 |
+Feature           | Class        | Shape  | Dtype   | Description
+:---------------- | :----------- | :----- | :------ | :----------
+                  | FeaturesDict |        |         |
+steps             | Dataset      |        |         |
+steps/action      | Tensor       | (8,)   | float32 |
+steps/discount    | Tensor       |        | float32 |
+steps/is_first    | Tensor       |        | bool    |
+steps/is_last     | Tensor       |        | bool    |
+steps/is_terminal | Tensor       |        | bool    |
+steps/observation | Tensor       | (111,) | float32 |
+steps/reward      | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -251,30 +251,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape  | Dtype      | Description
-:---------------- | :----------- | :----- | :--------- | :----------
-                  | FeaturesDict |        |            |
-steps             | Dataset      |        |            |
-steps/action      | Tensor       | (8,)   | tf.float32 |
-steps/discount    | Tensor       |        | tf.float32 |
-steps/is_first    | Tensor       |        | tf.bool    |
-steps/is_last     | Tensor       |        | tf.bool    |
-steps/is_terminal | Tensor       |        | tf.bool    |
-steps/observation | Tensor       | (111,) | tf.float32 |
-steps/reward      | Tensor       |        | tf.float32 |
+Feature           | Class        | Shape  | Dtype   | Description
+:---------------- | :----------- | :----- | :------ | :----------
+                  | FeaturesDict |        |         |
+steps             | Dataset      |        |         |
+steps/action      | Tensor       | (8,)   | float32 |
+steps/discount    | Tensor       |        | float32 |
+steps/is_first    | Tensor       |        | bool    |
+steps/is_last     | Tensor       |        | bool    |
+steps/is_terminal | Tensor       |        | bool    |
+steps/observation | Tensor       | (111,) | float32 |
+steps/reward      | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -334,30 +334,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape  | Dtype      | Description
-:---------------- | :----------- | :----- | :--------- | :----------
-                  | FeaturesDict |        |            |
-steps             | Dataset      |        |            |
-steps/action      | Tensor       | (8,)   | tf.float32 |
-steps/discount    | Tensor       |        | tf.float32 |
-steps/is_first    | Tensor       |        | tf.bool    |
-steps/is_last     | Tensor       |        | tf.bool    |
-steps/is_terminal | Tensor       |        | tf.bool    |
-steps/observation | Tensor       | (111,) | tf.float32 |
-steps/reward      | Tensor       |        | tf.float32 |
+Feature           | Class        | Shape  | Dtype   | Description
+:---------------- | :----------- | :----- | :------ | :----------
+                  | FeaturesDict |        |         |
+steps             | Dataset      |        |         |
+steps/action      | Tensor       | (8,)   | float32 |
+steps/discount    | Tensor       |        | float32 |
+steps/is_first    | Tensor       |        | bool    |
+steps/is_last     | Tensor       |        | bool    |
+steps/is_terminal | Tensor       |        | bool    |
+steps/observation | Tensor       | (111,) | float32 |
+steps/reward      | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -417,30 +417,30 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape  | Dtype      | Description
-:---------------- | :----------- | :----- | :--------- | :----------
-                  | FeaturesDict |        |            |
-steps             | Dataset      |        |            |
-steps/action      | Tensor       | (8,)   | tf.float32 |
-steps/discount    | Tensor       |        | tf.float32 |
-steps/is_first    | Tensor       |        | tf.bool    |
-steps/is_last     | Tensor       |        | tf.bool    |
-steps/is_terminal | Tensor       |        | tf.bool    |
-steps/observation | Tensor       | (111,) | tf.float32 |
-steps/reward      | Tensor       |        | tf.float32 |
+Feature           | Class        | Shape  | Dtype   | Description
+:---------------- | :----------- | :----- | :------ | :----------
+                  | FeaturesDict |        |         |
+steps             | Dataset      |        |         |
+steps/action      | Tensor       | (8,)   | float32 |
+steps/discount    | Tensor       |        | float32 |
+steps/is_first    | Tensor       |        | bool    |
+steps/is_last     | Tensor       |        | bool    |
+steps/is_terminal | Tensor       |        | bool    |
+steps/observation | Tensor       | (111,) | float32 |
+steps/reward      | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -499,79 +499,79 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': tf.string,
-    'iteration': tf.int32,
+    'algorithm': object,
+    'iteration': int32,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
-            'bias': Tensor(shape=(256,), dtype=tf.float32),
-            'weight': Tensor(shape=(256, 111), dtype=tf.float32),
+            'bias': Tensor(shape=(256,), dtype=float32),
+            'weight': Tensor(shape=(256, 111), dtype=float32),
         }),
         'fc1': FeaturesDict({
-            'bias': Tensor(shape=(256,), dtype=tf.float32),
-            'weight': Tensor(shape=(256, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(256,), dtype=float32),
+            'weight': Tensor(shape=(256, 256), dtype=float32),
         }),
         'last_fc': FeaturesDict({
-            'bias': Tensor(shape=(8,), dtype=tf.float32),
-            'weight': Tensor(shape=(8, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(8,), dtype=float32),
+            'weight': Tensor(shape=(8, 256), dtype=float32),
         }),
         'last_fc_log_std': FeaturesDict({
-            'bias': Tensor(shape=(8,), dtype=tf.float32),
-            'weight': Tensor(shape=(8, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(8,), dtype=float32),
+            'weight': Tensor(shape=(8, 256), dtype=float32),
         }),
-        'nonlinearity': tf.string,
-        'output_distribution': tf.string,
+        'nonlinearity': object,
+        'output_distribution': object,
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float32,
-            'qpos': Tensor(shape=(15,), dtype=tf.float32),
-            'qvel': Tensor(shape=(14,), dtype=tf.float32),
+            'action_log_probs': float32,
+            'qpos': Tensor(shape=(15,), dtype=float32),
+            'qvel': Tensor(shape=(14,), dtype=float32),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape      | Dtype      | Description
-:---------------------------- | :----------- | :--------- | :--------- | :----------
-                              | FeaturesDict |            |            |
-algorithm                     | Tensor       |            | tf.string  |
-iteration                     | Tensor       |            | tf.int32   |
-policy                        | FeaturesDict |            |            |
-policy/fc0                    | FeaturesDict |            |            |
-policy/fc0/bias               | Tensor       | (256,)     | tf.float32 |
-policy/fc0/weight             | Tensor       | (256, 111) | tf.float32 |
-policy/fc1                    | FeaturesDict |            |            |
-policy/fc1/bias               | Tensor       | (256,)     | tf.float32 |
-policy/fc1/weight             | Tensor       | (256, 256) | tf.float32 |
-policy/last_fc                | FeaturesDict |            |            |
-policy/last_fc/bias           | Tensor       | (8,)       | tf.float32 |
-policy/last_fc/weight         | Tensor       | (8, 256)   | tf.float32 |
-policy/last_fc_log_std        | FeaturesDict |            |            |
-policy/last_fc_log_std/bias   | Tensor       | (8,)       | tf.float32 |
-policy/last_fc_log_std/weight | Tensor       | (8, 256)   | tf.float32 |
-policy/nonlinearity           | Tensor       |            | tf.string  |
-policy/output_distribution    | Tensor       |            | tf.string  |
-steps                         | Dataset      |            |            |
-steps/action                  | Tensor       | (8,)       | tf.float32 |
-steps/discount                | Tensor       |            | tf.float32 |
-steps/infos                   | FeaturesDict |            |            |
-steps/infos/action_log_probs  | Tensor       |            | tf.float32 |
-steps/infos/qpos              | Tensor       | (15,)      | tf.float32 |
-steps/infos/qvel              | Tensor       | (14,)      | tf.float32 |
-steps/is_first                | Tensor       |            | tf.bool    |
-steps/is_last                 | Tensor       |            | tf.bool    |
-steps/is_terminal             | Tensor       |            | tf.bool    |
-steps/observation             | Tensor       | (111,)     | tf.float32 |
-steps/reward                  | Tensor       |            | tf.float32 |
+Feature                       | Class        | Shape      | Dtype   | Description
+:---------------------------- | :----------- | :--------- | :------ | :----------
+                              | FeaturesDict |            |         |
+algorithm                     | Tensor       |            | object  |
+iteration                     | Tensor       |            | int32   |
+policy                        | FeaturesDict |            |         |
+policy/fc0                    | FeaturesDict |            |         |
+policy/fc0/bias               | Tensor       | (256,)     | float32 |
+policy/fc0/weight             | Tensor       | (256, 111) | float32 |
+policy/fc1                    | FeaturesDict |            |         |
+policy/fc1/bias               | Tensor       | (256,)     | float32 |
+policy/fc1/weight             | Tensor       | (256, 256) | float32 |
+policy/last_fc                | FeaturesDict |            |         |
+policy/last_fc/bias           | Tensor       | (8,)       | float32 |
+policy/last_fc/weight         | Tensor       | (8, 256)   | float32 |
+policy/last_fc_log_std        | FeaturesDict |            |         |
+policy/last_fc_log_std/bias   | Tensor       | (8,)       | float32 |
+policy/last_fc_log_std/weight | Tensor       | (8, 256)   | float32 |
+policy/nonlinearity           | Tensor       |            | object  |
+policy/output_distribution    | Tensor       |            | object  |
+steps                         | Dataset      |            |         |
+steps/action                  | Tensor       | (8,)       | float32 |
+steps/discount                | Tensor       |            | float32 |
+steps/infos                   | FeaturesDict |            |         |
+steps/infos/action_log_probs  | Tensor       |            | float32 |
+steps/infos/qpos              | Tensor       | (15,)      | float32 |
+steps/infos/qvel              | Tensor       | (14,)      | float32 |
+steps/is_first                | Tensor       |            | bool    |
+steps/is_last                 | Tensor       |            | bool    |
+steps/is_terminal             | Tensor       |            | bool    |
+steps/observation             | Tensor       | (111,)     | float32 |
+steps/reward                  | Tensor       |            | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -630,79 +630,79 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': tf.string,
-    'iteration': tf.int32,
+    'algorithm': object,
+    'iteration': int32,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
-            'bias': Tensor(shape=(256,), dtype=tf.float32),
-            'weight': Tensor(shape=(256, 111), dtype=tf.float32),
+            'bias': Tensor(shape=(256,), dtype=float32),
+            'weight': Tensor(shape=(256, 111), dtype=float32),
         }),
         'fc1': FeaturesDict({
-            'bias': Tensor(shape=(256,), dtype=tf.float32),
-            'weight': Tensor(shape=(256, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(256,), dtype=float32),
+            'weight': Tensor(shape=(256, 256), dtype=float32),
         }),
         'last_fc': FeaturesDict({
-            'bias': Tensor(shape=(8,), dtype=tf.float32),
-            'weight': Tensor(shape=(8, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(8,), dtype=float32),
+            'weight': Tensor(shape=(8, 256), dtype=float32),
         }),
         'last_fc_log_std': FeaturesDict({
-            'bias': Tensor(shape=(8,), dtype=tf.float32),
-            'weight': Tensor(shape=(8, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(8,), dtype=float32),
+            'weight': Tensor(shape=(8, 256), dtype=float32),
         }),
-        'nonlinearity': tf.string,
-        'output_distribution': tf.string,
+        'nonlinearity': object,
+        'output_distribution': object,
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float32,
-            'qpos': Tensor(shape=(15,), dtype=tf.float32),
-            'qvel': Tensor(shape=(14,), dtype=tf.float32),
+            'action_log_probs': float32,
+            'qpos': Tensor(shape=(15,), dtype=float32),
+            'qvel': Tensor(shape=(14,), dtype=float32),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape      | Dtype      | Description
-:---------------------------- | :----------- | :--------- | :--------- | :----------
-                              | FeaturesDict |            |            |
-algorithm                     | Tensor       |            | tf.string  |
-iteration                     | Tensor       |            | tf.int32   |
-policy                        | FeaturesDict |            |            |
-policy/fc0                    | FeaturesDict |            |            |
-policy/fc0/bias               | Tensor       | (256,)     | tf.float32 |
-policy/fc0/weight             | Tensor       | (256, 111) | tf.float32 |
-policy/fc1                    | FeaturesDict |            |            |
-policy/fc1/bias               | Tensor       | (256,)     | tf.float32 |
-policy/fc1/weight             | Tensor       | (256, 256) | tf.float32 |
-policy/last_fc                | FeaturesDict |            |            |
-policy/last_fc/bias           | Tensor       | (8,)       | tf.float32 |
-policy/last_fc/weight         | Tensor       | (8, 256)   | tf.float32 |
-policy/last_fc_log_std        | FeaturesDict |            |            |
-policy/last_fc_log_std/bias   | Tensor       | (8,)       | tf.float32 |
-policy/last_fc_log_std/weight | Tensor       | (8, 256)   | tf.float32 |
-policy/nonlinearity           | Tensor       |            | tf.string  |
-policy/output_distribution    | Tensor       |            | tf.string  |
-steps                         | Dataset      |            |            |
-steps/action                  | Tensor       | (8,)       | tf.float32 |
-steps/discount                | Tensor       |            | tf.float32 |
-steps/infos                   | FeaturesDict |            |            |
-steps/infos/action_log_probs  | Tensor       |            | tf.float32 |
-steps/infos/qpos              | Tensor       | (15,)      | tf.float32 |
-steps/infos/qvel              | Tensor       | (14,)      | tf.float32 |
-steps/is_first                | Tensor       |            | tf.bool    |
-steps/is_last                 | Tensor       |            | tf.bool    |
-steps/is_terminal             | Tensor       |            | tf.bool    |
-steps/observation             | Tensor       | (111,)     | tf.float32 |
-steps/reward                  | Tensor       |            | tf.float32 |
+Feature                       | Class        | Shape      | Dtype   | Description
+:---------------------------- | :----------- | :--------- | :------ | :----------
+                              | FeaturesDict |            |         |
+algorithm                     | Tensor       |            | object  |
+iteration                     | Tensor       |            | int32   |
+policy                        | FeaturesDict |            |         |
+policy/fc0                    | FeaturesDict |            |         |
+policy/fc0/bias               | Tensor       | (256,)     | float32 |
+policy/fc0/weight             | Tensor       | (256, 111) | float32 |
+policy/fc1                    | FeaturesDict |            |         |
+policy/fc1/bias               | Tensor       | (256,)     | float32 |
+policy/fc1/weight             | Tensor       | (256, 256) | float32 |
+policy/last_fc                | FeaturesDict |            |         |
+policy/last_fc/bias           | Tensor       | (8,)       | float32 |
+policy/last_fc/weight         | Tensor       | (8, 256)   | float32 |
+policy/last_fc_log_std        | FeaturesDict |            |         |
+policy/last_fc_log_std/bias   | Tensor       | (8,)       | float32 |
+policy/last_fc_log_std/weight | Tensor       | (8, 256)   | float32 |
+policy/nonlinearity           | Tensor       |            | object  |
+policy/output_distribution    | Tensor       |            | object  |
+steps                         | Dataset      |            |         |
+steps/action                  | Tensor       | (8,)       | float32 |
+steps/discount                | Tensor       |            | float32 |
+steps/infos                   | FeaturesDict |            |         |
+steps/infos/action_log_probs  | Tensor       |            | float32 |
+steps/infos/qpos              | Tensor       | (15,)      | float32 |
+steps/infos/qvel              | Tensor       | (14,)      | float32 |
+steps/is_first                | Tensor       |            | bool    |
+steps/is_last                 | Tensor       |            | bool    |
+steps/is_terminal             | Tensor       |            | bool    |
+steps/observation             | Tensor       | (111,)     | float32 |
+steps/reward                  | Tensor       |            | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -762,39 +762,39 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float32,
-            'qpos': Tensor(shape=(15,), dtype=tf.float32),
-            'qvel': Tensor(shape=(14,), dtype=tf.float32),
+            'action_log_probs': float32,
+            'qpos': Tensor(shape=(15,), dtype=float32),
+            'qvel': Tensor(shape=(14,), dtype=float32),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape  | Dtype      | Description
-:--------------------------- | :----------- | :----- | :--------- | :----------
-                             | FeaturesDict |        |            |
-steps                        | Dataset      |        |            |
-steps/action                 | Tensor       | (8,)   | tf.float32 |
-steps/discount               | Tensor       |        | tf.float32 |
-steps/infos                  | FeaturesDict |        |            |
-steps/infos/action_log_probs | Tensor       |        | tf.float32 |
-steps/infos/qpos             | Tensor       | (15,)  | tf.float32 |
-steps/infos/qvel             | Tensor       | (14,)  | tf.float32 |
-steps/is_first               | Tensor       |        | tf.bool    |
-steps/is_last                | Tensor       |        | tf.bool    |
-steps/is_terminal            | Tensor       |        | tf.bool    |
-steps/observation            | Tensor       | (111,) | tf.float32 |
-steps/reward                 | Tensor       |        | tf.float32 |
+Feature                      | Class        | Shape  | Dtype   | Description
+:--------------------------- | :----------- | :----- | :------ | :----------
+                             | FeaturesDict |        |         |
+steps                        | Dataset      |        |         |
+steps/action                 | Tensor       | (8,)   | float32 |
+steps/discount               | Tensor       |        | float32 |
+steps/infos                  | FeaturesDict |        |         |
+steps/infos/action_log_probs | Tensor       |        | float32 |
+steps/infos/qpos             | Tensor       | (15,)  | float32 |
+steps/infos/qvel             | Tensor       | (14,)  | float32 |
+steps/is_first               | Tensor       |        | bool    |
+steps/is_last                | Tensor       |        | bool    |
+steps/is_terminal            | Tensor       |        | bool    |
+steps/observation            | Tensor       | (111,) | float32 |
+steps/reward                 | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -853,44 +853,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': tf.string,
-    'iteration': tf.int32,
+    'algorithm': object,
+    'iteration': int32,
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float64),
-        'discount': tf.float64,
+        'action': Tensor(shape=(8,), dtype=float64),
+        'discount': float64,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float64,
-            'qpos': Tensor(shape=(15,), dtype=tf.float64),
-            'qvel': Tensor(shape=(14,), dtype=tf.float64),
+            'action_log_probs': float64,
+            'qpos': Tensor(shape=(15,), dtype=float64),
+            'qvel': Tensor(shape=(14,), dtype=float64),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float64),
-        'reward': tf.float64,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float64),
+        'reward': float64,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape  | Dtype      | Description
-:--------------------------- | :----------- | :----- | :--------- | :----------
-                             | FeaturesDict |        |            |
-algorithm                    | Tensor       |        | tf.string  |
-iteration                    | Tensor       |        | tf.int32   |
-steps                        | Dataset      |        |            |
-steps/action                 | Tensor       | (8,)   | tf.float64 |
-steps/discount               | Tensor       |        | tf.float64 |
-steps/infos                  | FeaturesDict |        |            |
-steps/infos/action_log_probs | Tensor       |        | tf.float64 |
-steps/infos/qpos             | Tensor       | (15,)  | tf.float64 |
-steps/infos/qvel             | Tensor       | (14,)  | tf.float64 |
-steps/is_first               | Tensor       |        | tf.bool    |
-steps/is_last                | Tensor       |        | tf.bool    |
-steps/is_terminal            | Tensor       |        | tf.bool    |
-steps/observation            | Tensor       | (111,) | tf.float64 |
-steps/reward                 | Tensor       |        | tf.float64 |
+Feature                      | Class        | Shape  | Dtype   | Description
+:--------------------------- | :----------- | :----- | :------ | :----------
+                             | FeaturesDict |        |         |
+algorithm                    | Tensor       |        | object  |
+iteration                    | Tensor       |        | int32   |
+steps                        | Dataset      |        |         |
+steps/action                 | Tensor       | (8,)   | float64 |
+steps/discount               | Tensor       |        | float64 |
+steps/infos                  | FeaturesDict |        |         |
+steps/infos/action_log_probs | Tensor       |        | float64 |
+steps/infos/qpos             | Tensor       | (15,)  | float64 |
+steps/infos/qvel             | Tensor       | (14,)  | float64 |
+steps/is_first               | Tensor       |        | bool    |
+steps/is_last                | Tensor       |        | bool    |
+steps/is_terminal            | Tensor       |        | bool    |
+steps/observation            | Tensor       | (111,) | float64 |
+steps/reward                 | Tensor       |        | float64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -949,44 +949,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': tf.string,
-    'iteration': tf.int32,
+    'algorithm': object,
+    'iteration': int32,
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float64),
-        'discount': tf.float64,
+        'action': Tensor(shape=(8,), dtype=float64),
+        'discount': float64,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float64,
-            'qpos': Tensor(shape=(15,), dtype=tf.float64),
-            'qvel': Tensor(shape=(14,), dtype=tf.float64),
+            'action_log_probs': float64,
+            'qpos': Tensor(shape=(15,), dtype=float64),
+            'qvel': Tensor(shape=(14,), dtype=float64),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float64),
-        'reward': tf.float64,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float64),
+        'reward': float64,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape  | Dtype      | Description
-:--------------------------- | :----------- | :----- | :--------- | :----------
-                             | FeaturesDict |        |            |
-algorithm                    | Tensor       |        | tf.string  |
-iteration                    | Tensor       |        | tf.int32   |
-steps                        | Dataset      |        |            |
-steps/action                 | Tensor       | (8,)   | tf.float64 |
-steps/discount               | Tensor       |        | tf.float64 |
-steps/infos                  | FeaturesDict |        |            |
-steps/infos/action_log_probs | Tensor       |        | tf.float64 |
-steps/infos/qpos             | Tensor       | (15,)  | tf.float64 |
-steps/infos/qvel             | Tensor       | (14,)  | tf.float64 |
-steps/is_first               | Tensor       |        | tf.bool    |
-steps/is_last                | Tensor       |        | tf.bool    |
-steps/is_terminal            | Tensor       |        | tf.bool    |
-steps/observation            | Tensor       | (111,) | tf.float64 |
-steps/reward                 | Tensor       |        | tf.float64 |
+Feature                      | Class        | Shape  | Dtype   | Description
+:--------------------------- | :----------- | :----- | :------ | :----------
+                             | FeaturesDict |        |         |
+algorithm                    | Tensor       |        | object  |
+iteration                    | Tensor       |        | int32   |
+steps                        | Dataset      |        |         |
+steps/action                 | Tensor       | (8,)   | float64 |
+steps/discount               | Tensor       |        | float64 |
+steps/infos                  | FeaturesDict |        |         |
+steps/infos/action_log_probs | Tensor       |        | float64 |
+steps/infos/qpos             | Tensor       | (15,)  | float64 |
+steps/infos/qvel             | Tensor       | (14,)  | float64 |
+steps/is_first               | Tensor       |        | bool    |
+steps/is_last                | Tensor       |        | bool    |
+steps/is_terminal            | Tensor       |        | bool    |
+steps/observation            | Tensor       | (111,) | float64 |
+steps/reward                 | Tensor       |        | float64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1046,39 +1046,39 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float32,
-            'qpos': Tensor(shape=(15,), dtype=tf.float32),
-            'qvel': Tensor(shape=(14,), dtype=tf.float32),
+            'action_log_probs': float32,
+            'qpos': Tensor(shape=(15,), dtype=float32),
+            'qvel': Tensor(shape=(14,), dtype=float32),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape  | Dtype      | Description
-:--------------------------- | :----------- | :----- | :--------- | :----------
-                             | FeaturesDict |        |            |
-steps                        | Dataset      |        |            |
-steps/action                 | Tensor       | (8,)   | tf.float32 |
-steps/discount               | Tensor       |        | tf.float32 |
-steps/infos                  | FeaturesDict |        |            |
-steps/infos/action_log_probs | Tensor       |        | tf.float32 |
-steps/infos/qpos             | Tensor       | (15,)  | tf.float32 |
-steps/infos/qvel             | Tensor       | (14,)  | tf.float32 |
-steps/is_first               | Tensor       |        | tf.bool    |
-steps/is_last                | Tensor       |        | tf.bool    |
-steps/is_terminal            | Tensor       |        | tf.bool    |
-steps/observation            | Tensor       | (111,) | tf.float32 |
-steps/reward                 | Tensor       |        | tf.float32 |
+Feature                      | Class        | Shape  | Dtype   | Description
+:--------------------------- | :----------- | :----- | :------ | :----------
+                             | FeaturesDict |        |         |
+steps                        | Dataset      |        |         |
+steps/action                 | Tensor       | (8,)   | float32 |
+steps/discount               | Tensor       |        | float32 |
+steps/infos                  | FeaturesDict |        |         |
+steps/infos/action_log_probs | Tensor       |        | float32 |
+steps/infos/qpos             | Tensor       | (15,)  | float32 |
+steps/infos/qvel             | Tensor       | (14,)  | float32 |
+steps/is_first               | Tensor       |        | bool    |
+steps/is_last                | Tensor       |        | bool    |
+steps/is_terminal            | Tensor       |        | bool    |
+steps/observation            | Tensor       | (111,) | float32 |
+steps/reward                 | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1137,79 +1137,79 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': tf.string,
-    'iteration': tf.int32,
+    'algorithm': object,
+    'iteration': int32,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
-            'bias': Tensor(shape=(256,), dtype=tf.float32),
-            'weight': Tensor(shape=(256, 111), dtype=tf.float32),
+            'bias': Tensor(shape=(256,), dtype=float32),
+            'weight': Tensor(shape=(256, 111), dtype=float32),
         }),
         'fc1': FeaturesDict({
-            'bias': Tensor(shape=(256,), dtype=tf.float32),
-            'weight': Tensor(shape=(256, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(256,), dtype=float32),
+            'weight': Tensor(shape=(256, 256), dtype=float32),
         }),
         'last_fc': FeaturesDict({
-            'bias': Tensor(shape=(8,), dtype=tf.float32),
-            'weight': Tensor(shape=(8, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(8,), dtype=float32),
+            'weight': Tensor(shape=(8, 256), dtype=float32),
         }),
         'last_fc_log_std': FeaturesDict({
-            'bias': Tensor(shape=(8,), dtype=tf.float32),
-            'weight': Tensor(shape=(8, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(8,), dtype=float32),
+            'weight': Tensor(shape=(8, 256), dtype=float32),
         }),
-        'nonlinearity': tf.string,
-        'output_distribution': tf.string,
+        'nonlinearity': object,
+        'output_distribution': object,
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float64,
-            'qpos': Tensor(shape=(15,), dtype=tf.float64),
-            'qvel': Tensor(shape=(14,), dtype=tf.float64),
+            'action_log_probs': float64,
+            'qpos': Tensor(shape=(15,), dtype=float64),
+            'qvel': Tensor(shape=(14,), dtype=float64),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape      | Dtype      | Description
-:---------------------------- | :----------- | :--------- | :--------- | :----------
-                              | FeaturesDict |            |            |
-algorithm                     | Tensor       |            | tf.string  |
-iteration                     | Tensor       |            | tf.int32   |
-policy                        | FeaturesDict |            |            |
-policy/fc0                    | FeaturesDict |            |            |
-policy/fc0/bias               | Tensor       | (256,)     | tf.float32 |
-policy/fc0/weight             | Tensor       | (256, 111) | tf.float32 |
-policy/fc1                    | FeaturesDict |            |            |
-policy/fc1/bias               | Tensor       | (256,)     | tf.float32 |
-policy/fc1/weight             | Tensor       | (256, 256) | tf.float32 |
-policy/last_fc                | FeaturesDict |            |            |
-policy/last_fc/bias           | Tensor       | (8,)       | tf.float32 |
-policy/last_fc/weight         | Tensor       | (8, 256)   | tf.float32 |
-policy/last_fc_log_std        | FeaturesDict |            |            |
-policy/last_fc_log_std/bias   | Tensor       | (8,)       | tf.float32 |
-policy/last_fc_log_std/weight | Tensor       | (8, 256)   | tf.float32 |
-policy/nonlinearity           | Tensor       |            | tf.string  |
-policy/output_distribution    | Tensor       |            | tf.string  |
-steps                         | Dataset      |            |            |
-steps/action                  | Tensor       | (8,)       | tf.float32 |
-steps/discount                | Tensor       |            | tf.float32 |
-steps/infos                   | FeaturesDict |            |            |
-steps/infos/action_log_probs  | Tensor       |            | tf.float64 |
-steps/infos/qpos              | Tensor       | (15,)      | tf.float64 |
-steps/infos/qvel              | Tensor       | (14,)      | tf.float64 |
-steps/is_first                | Tensor       |            | tf.bool    |
-steps/is_last                 | Tensor       |            | tf.bool    |
-steps/is_terminal             | Tensor       |            | tf.bool    |
-steps/observation             | Tensor       | (111,)     | tf.float32 |
-steps/reward                  | Tensor       |            | tf.float32 |
+Feature                       | Class        | Shape      | Dtype   | Description
+:---------------------------- | :----------- | :--------- | :------ | :----------
+                              | FeaturesDict |            |         |
+algorithm                     | Tensor       |            | object  |
+iteration                     | Tensor       |            | int32   |
+policy                        | FeaturesDict |            |         |
+policy/fc0                    | FeaturesDict |            |         |
+policy/fc0/bias               | Tensor       | (256,)     | float32 |
+policy/fc0/weight             | Tensor       | (256, 111) | float32 |
+policy/fc1                    | FeaturesDict |            |         |
+policy/fc1/bias               | Tensor       | (256,)     | float32 |
+policy/fc1/weight             | Tensor       | (256, 256) | float32 |
+policy/last_fc                | FeaturesDict |            |         |
+policy/last_fc/bias           | Tensor       | (8,)       | float32 |
+policy/last_fc/weight         | Tensor       | (8, 256)   | float32 |
+policy/last_fc_log_std        | FeaturesDict |            |         |
+policy/last_fc_log_std/bias   | Tensor       | (8,)       | float32 |
+policy/last_fc_log_std/weight | Tensor       | (8, 256)   | float32 |
+policy/nonlinearity           | Tensor       |            | object  |
+policy/output_distribution    | Tensor       |            | object  |
+steps                         | Dataset      |            |         |
+steps/action                  | Tensor       | (8,)       | float32 |
+steps/discount                | Tensor       |            | float32 |
+steps/infos                   | FeaturesDict |            |         |
+steps/infos/action_log_probs  | Tensor       |            | float64 |
+steps/infos/qpos              | Tensor       | (15,)      | float64 |
+steps/infos/qvel              | Tensor       | (14,)      | float64 |
+steps/is_first                | Tensor       |            | bool    |
+steps/is_last                 | Tensor       |            | bool    |
+steps/is_terminal             | Tensor       |            | bool    |
+steps/observation             | Tensor       | (111,)     | float32 |
+steps/reward                  | Tensor       |            | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1268,44 +1268,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': tf.string,
-    'iteration': tf.int32,
+    'algorithm': object,
+    'iteration': int32,
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float64,
-            'qpos': Tensor(shape=(15,), dtype=tf.float64),
-            'qvel': Tensor(shape=(14,), dtype=tf.float64),
+            'action_log_probs': float64,
+            'qpos': Tensor(shape=(15,), dtype=float64),
+            'qvel': Tensor(shape=(14,), dtype=float64),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape  | Dtype      | Description
-:--------------------------- | :----------- | :----- | :--------- | :----------
-                             | FeaturesDict |        |            |
-algorithm                    | Tensor       |        | tf.string  |
-iteration                    | Tensor       |        | tf.int32   |
-steps                        | Dataset      |        |            |
-steps/action                 | Tensor       | (8,)   | tf.float32 |
-steps/discount               | Tensor       |        | tf.float32 |
-steps/infos                  | FeaturesDict |        |            |
-steps/infos/action_log_probs | Tensor       |        | tf.float64 |
-steps/infos/qpos             | Tensor       | (15,)  | tf.float64 |
-steps/infos/qvel             | Tensor       | (14,)  | tf.float64 |
-steps/is_first               | Tensor       |        | tf.bool    |
-steps/is_last                | Tensor       |        | tf.bool    |
-steps/is_terminal            | Tensor       |        | tf.bool    |
-steps/observation            | Tensor       | (111,) | tf.float32 |
-steps/reward                 | Tensor       |        | tf.float32 |
+Feature                      | Class        | Shape  | Dtype   | Description
+:--------------------------- | :----------- | :----- | :------ | :----------
+                             | FeaturesDict |        |         |
+algorithm                    | Tensor       |        | object  |
+iteration                    | Tensor       |        | int32   |
+steps                        | Dataset      |        |         |
+steps/action                 | Tensor       | (8,)   | float32 |
+steps/discount               | Tensor       |        | float32 |
+steps/infos                  | FeaturesDict |        |         |
+steps/infos/action_log_probs | Tensor       |        | float64 |
+steps/infos/qpos             | Tensor       | (15,)  | float64 |
+steps/infos/qvel             | Tensor       | (14,)  | float64 |
+steps/is_first               | Tensor       |        | bool    |
+steps/is_last                | Tensor       |        | bool    |
+steps/is_terminal            | Tensor       |        | bool    |
+steps/observation            | Tensor       | (111,) | float32 |
+steps/reward                 | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1364,79 +1364,79 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': tf.string,
-    'iteration': tf.int32,
+    'algorithm': object,
+    'iteration': int32,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
-            'bias': Tensor(shape=(256,), dtype=tf.float32),
-            'weight': Tensor(shape=(256, 111), dtype=tf.float32),
+            'bias': Tensor(shape=(256,), dtype=float32),
+            'weight': Tensor(shape=(256, 111), dtype=float32),
         }),
         'fc1': FeaturesDict({
-            'bias': Tensor(shape=(256,), dtype=tf.float32),
-            'weight': Tensor(shape=(256, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(256,), dtype=float32),
+            'weight': Tensor(shape=(256, 256), dtype=float32),
         }),
         'last_fc': FeaturesDict({
-            'bias': Tensor(shape=(8,), dtype=tf.float32),
-            'weight': Tensor(shape=(8, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(8,), dtype=float32),
+            'weight': Tensor(shape=(8, 256), dtype=float32),
         }),
         'last_fc_log_std': FeaturesDict({
-            'bias': Tensor(shape=(8,), dtype=tf.float32),
-            'weight': Tensor(shape=(8, 256), dtype=tf.float32),
+            'bias': Tensor(shape=(8,), dtype=float32),
+            'weight': Tensor(shape=(8, 256), dtype=float32),
         }),
-        'nonlinearity': tf.string,
-        'output_distribution': tf.string,
+        'nonlinearity': object,
+        'output_distribution': object,
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float64,
-            'qpos': Tensor(shape=(15,), dtype=tf.float64),
-            'qvel': Tensor(shape=(14,), dtype=tf.float64),
+            'action_log_probs': float64,
+            'qpos': Tensor(shape=(15,), dtype=float64),
+            'qvel': Tensor(shape=(14,), dtype=float64),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape      | Dtype      | Description
-:---------------------------- | :----------- | :--------- | :--------- | :----------
-                              | FeaturesDict |            |            |
-algorithm                     | Tensor       |            | tf.string  |
-iteration                     | Tensor       |            | tf.int32   |
-policy                        | FeaturesDict |            |            |
-policy/fc0                    | FeaturesDict |            |            |
-policy/fc0/bias               | Tensor       | (256,)     | tf.float32 |
-policy/fc0/weight             | Tensor       | (256, 111) | tf.float32 |
-policy/fc1                    | FeaturesDict |            |            |
-policy/fc1/bias               | Tensor       | (256,)     | tf.float32 |
-policy/fc1/weight             | Tensor       | (256, 256) | tf.float32 |
-policy/last_fc                | FeaturesDict |            |            |
-policy/last_fc/bias           | Tensor       | (8,)       | tf.float32 |
-policy/last_fc/weight         | Tensor       | (8, 256)   | tf.float32 |
-policy/last_fc_log_std        | FeaturesDict |            |            |
-policy/last_fc_log_std/bias   | Tensor       | (8,)       | tf.float32 |
-policy/last_fc_log_std/weight | Tensor       | (8, 256)   | tf.float32 |
-policy/nonlinearity           | Tensor       |            | tf.string  |
-policy/output_distribution    | Tensor       |            | tf.string  |
-steps                         | Dataset      |            |            |
-steps/action                  | Tensor       | (8,)       | tf.float32 |
-steps/discount                | Tensor       |            | tf.float32 |
-steps/infos                   | FeaturesDict |            |            |
-steps/infos/action_log_probs  | Tensor       |            | tf.float64 |
-steps/infos/qpos              | Tensor       | (15,)      | tf.float64 |
-steps/infos/qvel              | Tensor       | (14,)      | tf.float64 |
-steps/is_first                | Tensor       |            | tf.bool    |
-steps/is_last                 | Tensor       |            | tf.bool    |
-steps/is_terminal             | Tensor       |            | tf.bool    |
-steps/observation             | Tensor       | (111,)     | tf.float32 |
-steps/reward                  | Tensor       |            | tf.float32 |
+Feature                       | Class        | Shape      | Dtype   | Description
+:---------------------------- | :----------- | :--------- | :------ | :----------
+                              | FeaturesDict |            |         |
+algorithm                     | Tensor       |            | object  |
+iteration                     | Tensor       |            | int32   |
+policy                        | FeaturesDict |            |         |
+policy/fc0                    | FeaturesDict |            |         |
+policy/fc0/bias               | Tensor       | (256,)     | float32 |
+policy/fc0/weight             | Tensor       | (256, 111) | float32 |
+policy/fc1                    | FeaturesDict |            |         |
+policy/fc1/bias               | Tensor       | (256,)     | float32 |
+policy/fc1/weight             | Tensor       | (256, 256) | float32 |
+policy/last_fc                | FeaturesDict |            |         |
+policy/last_fc/bias           | Tensor       | (8,)       | float32 |
+policy/last_fc/weight         | Tensor       | (8, 256)   | float32 |
+policy/last_fc_log_std        | FeaturesDict |            |         |
+policy/last_fc_log_std/bias   | Tensor       | (8,)       | float32 |
+policy/last_fc_log_std/weight | Tensor       | (8, 256)   | float32 |
+policy/nonlinearity           | Tensor       |            | object  |
+policy/output_distribution    | Tensor       |            | object  |
+steps                         | Dataset      |            |         |
+steps/action                  | Tensor       | (8,)       | float32 |
+steps/discount                | Tensor       |            | float32 |
+steps/infos                   | FeaturesDict |            |         |
+steps/infos/action_log_probs  | Tensor       |            | float64 |
+steps/infos/qpos              | Tensor       | (15,)      | float64 |
+steps/infos/qvel              | Tensor       | (14,)      | float64 |
+steps/is_first                | Tensor       |            | bool    |
+steps/is_last                 | Tensor       |            | bool    |
+steps/is_terminal             | Tensor       |            | bool    |
+steps/observation             | Tensor       | (111,)     | float32 |
+steps/reward                  | Tensor       |            | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1496,39 +1496,39 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float64,
-            'qpos': Tensor(shape=(15,), dtype=tf.float64),
-            'qvel': Tensor(shape=(14,), dtype=tf.float64),
+            'action_log_probs': float64,
+            'qpos': Tensor(shape=(15,), dtype=float64),
+            'qvel': Tensor(shape=(14,), dtype=float64),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape  | Dtype      | Description
-:--------------------------- | :----------- | :----- | :--------- | :----------
-                             | FeaturesDict |        |            |
-steps                        | Dataset      |        |            |
-steps/action                 | Tensor       | (8,)   | tf.float32 |
-steps/discount               | Tensor       |        | tf.float32 |
-steps/infos                  | FeaturesDict |        |            |
-steps/infos/action_log_probs | Tensor       |        | tf.float64 |
-steps/infos/qpos             | Tensor       | (15,)  | tf.float64 |
-steps/infos/qvel             | Tensor       | (14,)  | tf.float64 |
-steps/is_first               | Tensor       |        | tf.bool    |
-steps/is_last                | Tensor       |        | tf.bool    |
-steps/is_terminal            | Tensor       |        | tf.bool    |
-steps/observation            | Tensor       | (111,) | tf.float32 |
-steps/reward                 | Tensor       |        | tf.float32 |
+Feature                      | Class        | Shape  | Dtype   | Description
+:--------------------------- | :----------- | :----- | :------ | :----------
+                             | FeaturesDict |        |         |
+steps                        | Dataset      |        |         |
+steps/action                 | Tensor       | (8,)   | float32 |
+steps/discount               | Tensor       |        | float32 |
+steps/infos                  | FeaturesDict |        |         |
+steps/infos/action_log_probs | Tensor       |        | float64 |
+steps/infos/qpos             | Tensor       | (15,)  | float64 |
+steps/infos/qvel             | Tensor       | (14,)  | float64 |
+steps/is_first               | Tensor       |        | bool    |
+steps/is_last                | Tensor       |        | bool    |
+steps/is_terminal            | Tensor       |        | bool    |
+steps/observation            | Tensor       | (111,) | float32 |
+steps/reward                 | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1587,44 +1587,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': tf.string,
-    'iteration': tf.int32,
+    'algorithm': object,
+    'iteration': int32,
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float64,
-            'qpos': Tensor(shape=(15,), dtype=tf.float64),
-            'qvel': Tensor(shape=(14,), dtype=tf.float64),
+            'action_log_probs': float64,
+            'qpos': Tensor(shape=(15,), dtype=float64),
+            'qvel': Tensor(shape=(14,), dtype=float64),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape  | Dtype      | Description
-:--------------------------- | :----------- | :----- | :--------- | :----------
-                             | FeaturesDict |        |            |
-algorithm                    | Tensor       |        | tf.string  |
-iteration                    | Tensor       |        | tf.int32   |
-steps                        | Dataset      |        |            |
-steps/action                 | Tensor       | (8,)   | tf.float32 |
-steps/discount               | Tensor       |        | tf.float32 |
-steps/infos                  | FeaturesDict |        |            |
-steps/infos/action_log_probs | Tensor       |        | tf.float64 |
-steps/infos/qpos             | Tensor       | (15,)  | tf.float64 |
-steps/infos/qvel             | Tensor       | (14,)  | tf.float64 |
-steps/is_first               | Tensor       |        | tf.bool    |
-steps/is_last                | Tensor       |        | tf.bool    |
-steps/is_terminal            | Tensor       |        | tf.bool    |
-steps/observation            | Tensor       | (111,) | tf.float32 |
-steps/reward                 | Tensor       |        | tf.float32 |
+Feature                      | Class        | Shape  | Dtype   | Description
+:--------------------------- | :----------- | :----- | :------ | :----------
+                             | FeaturesDict |        |         |
+algorithm                    | Tensor       |        | object  |
+iteration                    | Tensor       |        | int32   |
+steps                        | Dataset      |        |         |
+steps/action                 | Tensor       | (8,)   | float32 |
+steps/discount               | Tensor       |        | float32 |
+steps/infos                  | FeaturesDict |        |         |
+steps/infos/action_log_probs | Tensor       |        | float64 |
+steps/infos/qpos             | Tensor       | (15,)  | float64 |
+steps/infos/qvel             | Tensor       | (14,)  | float64 |
+steps/is_first               | Tensor       |        | bool    |
+steps/is_last                | Tensor       |        | bool    |
+steps/is_terminal            | Tensor       |        | bool    |
+steps/observation            | Tensor       | (111,) | float32 |
+steps/reward                 | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1684,39 +1684,39 @@ Split     | Examples
 ```python
 FeaturesDict({
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=tf.float32),
-        'discount': tf.float32,
+        'action': Tensor(shape=(8,), dtype=float32),
+        'discount': float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float64,
-            'qpos': Tensor(shape=(15,), dtype=tf.float64),
-            'qvel': Tensor(shape=(14,), dtype=tf.float64),
+            'action_log_probs': float64,
+            'qpos': Tensor(shape=(15,), dtype=float64),
+            'qvel': Tensor(shape=(14,), dtype=float64),
         }),
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
-        'observation': Tensor(shape=(111,), dtype=tf.float32),
-        'reward': tf.float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
+        'observation': Tensor(shape=(111,), dtype=float32),
+        'reward': float32,
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape  | Dtype      | Description
-:--------------------------- | :----------- | :----- | :--------- | :----------
-                             | FeaturesDict |        |            |
-steps                        | Dataset      |        |            |
-steps/action                 | Tensor       | (8,)   | tf.float32 |
-steps/discount               | Tensor       |        | tf.float32 |
-steps/infos                  | FeaturesDict |        |            |
-steps/infos/action_log_probs | Tensor       |        | tf.float64 |
-steps/infos/qpos             | Tensor       | (15,)  | tf.float64 |
-steps/infos/qvel             | Tensor       | (14,)  | tf.float64 |
-steps/is_first               | Tensor       |        | tf.bool    |
-steps/is_last                | Tensor       |        | tf.bool    |
-steps/is_terminal            | Tensor       |        | tf.bool    |
-steps/observation            | Tensor       | (111,) | tf.float32 |
-steps/reward                 | Tensor       |        | tf.float32 |
+Feature                      | Class        | Shape  | Dtype   | Description
+:--------------------------- | :----------- | :----- | :------ | :----------
+                             | FeaturesDict |        |         |
+steps                        | Dataset      |        |         |
+steps/action                 | Tensor       | (8,)   | float32 |
+steps/discount               | Tensor       |        | float32 |
+steps/infos                  | FeaturesDict |        |         |
+steps/infos/action_log_probs | Tensor       |        | float64 |
+steps/infos/qpos             | Tensor       | (15,)  | float64 |
+steps/infos/qvel             | Tensor       | (14,)  | float64 |
+steps/is_first               | Tensor       |        | bool    |
+steps/is_last                | Tensor       |        | bool    |
+steps/is_terminal            | Tensor       |        | bool    |
+steps/observation            | Tensor       | (111,) | float32 |
+steps/reward                 | Tensor       |        | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

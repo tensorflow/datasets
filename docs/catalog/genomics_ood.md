@@ -82,22 +82,22 @@ Split              | Examples
 
 ```python
 FeaturesDict({
-    'domain': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=130),
-    'seq': Text(shape=(), dtype=tf.string),
-    'seq_info': Text(shape=(), dtype=tf.string),
+    'domain': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=130),
+    'seq': Text(shape=(), dtype=object),
+    'seq_info': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-domain   | Text         |       | tf.string |
-label    | ClassLabel   |       | tf.int64  |
-seq      | Text         |       | tf.string |
-seq_info | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+domain   | Text         |       | object |
+label    | ClassLabel   |       | int64  |
+seq      | Text         |       | object |
+seq_info | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

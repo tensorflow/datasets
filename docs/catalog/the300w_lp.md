@@ -36,11 +36,11 @@ localization.
 
 *   **Download size**: `2.63 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.33 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -52,36 +52,36 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'color_params': Tensor(shape=(7,), dtype=tf.float32),
-    'exp_params': Tensor(shape=(29,), dtype=tf.float32),
-    'illum_params': Tensor(shape=(10,), dtype=tf.float32),
-    'image': Image(shape=(450, 450, 3), dtype=tf.uint8),
-    'landmarks_2d': Tensor(shape=(68, 2), dtype=tf.float32),
-    'landmarks_3d': Tensor(shape=(68, 2), dtype=tf.float32),
-    'landmarks_origin': Tensor(shape=(68, 2), dtype=tf.float32),
-    'pose_params': Tensor(shape=(7,), dtype=tf.float32),
-    'roi': Tensor(shape=(4,), dtype=tf.float32),
-    'shape_params': Tensor(shape=(199,), dtype=tf.float32),
-    'tex_params': Tensor(shape=(199,), dtype=tf.float32),
+    'color_params': Tensor(shape=(7,), dtype=float32),
+    'exp_params': Tensor(shape=(29,), dtype=float32),
+    'illum_params': Tensor(shape=(10,), dtype=float32),
+    'image': Image(shape=(450, 450, 3), dtype=uint8),
+    'landmarks_2d': Tensor(shape=(68, 2), dtype=float32),
+    'landmarks_3d': Tensor(shape=(68, 2), dtype=float32),
+    'landmarks_origin': Tensor(shape=(68, 2), dtype=float32),
+    'pose_params': Tensor(shape=(7,), dtype=float32),
+    'roi': Tensor(shape=(4,), dtype=float32),
+    'shape_params': Tensor(shape=(199,), dtype=float32),
+    'tex_params': Tensor(shape=(199,), dtype=float32),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape         | Dtype      | Description
-:--------------- | :----------- | :------------ | :--------- | :----------
-                 | FeaturesDict |               |            |
-color_params     | Tensor       | (7,)          | tf.float32 |
-exp_params       | Tensor       | (29,)         | tf.float32 |
-illum_params     | Tensor       | (10,)         | tf.float32 |
-image            | Image        | (450, 450, 3) | tf.uint8   |
-landmarks_2d     | Tensor       | (68, 2)       | tf.float32 |
-landmarks_3d     | Tensor       | (68, 2)       | tf.float32 |
-landmarks_origin | Tensor       | (68, 2)       | tf.float32 |
-pose_params      | Tensor       | (7,)          | tf.float32 |
-roi              | Tensor       | (4,)          | tf.float32 |
-shape_params     | Tensor       | (199,)        | tf.float32 |
-tex_params       | Tensor       | (199,)        | tf.float32 |
+Feature          | Class        | Shape         | Dtype   | Description
+:--------------- | :----------- | :------------ | :------ | :----------
+                 | FeaturesDict |               |         |
+color_params     | Tensor       | (7,)          | float32 |
+exp_params       | Tensor       | (29,)         | float32 |
+illum_params     | Tensor       | (10,)         | float32 |
+image            | Image        | (450, 450, 3) | uint8   |
+landmarks_2d     | Tensor       | (68, 2)       | float32 |
+landmarks_3d     | Tensor       | (68, 2)       | float32 |
+landmarks_origin | Tensor       | (68, 2)       | float32 |
+pose_params      | Tensor       | (7,)          | float32 |
+roi              | Tensor       | (4,)          | float32 |
+shape_params     | Tensor       | (199,)        | float32 |
+tex_params       | Tensor       | (199,)        | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

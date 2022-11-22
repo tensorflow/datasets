@@ -82,26 +82,26 @@ Split                           | Examples
 
 ```python
 FeaturesDict({
-    'concept_set_id': tf.int32,
-    'concepts': Sequence(tf.string),
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'target': tf.string,
+    'concept_set_id': int32,
+    'concepts': Sequence(object),
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'target': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class            | Shape   | Dtype     | Description
-:------------- | :--------------- | :------ | :-------- | :----------
-               | FeaturesDict     |         |           |
-concept_set_id | Tensor           |         | tf.int32  |
-concepts       | Sequence(Tensor) | (None,) | tf.string |
-gem_id         | Tensor           |         | tf.string |
-gem_parent_id  | Tensor           |         | tf.string |
-references     | Sequence(Tensor) | (None,) | tf.string |
-target         | Tensor           |         | tf.string |
+Feature        | Class            | Shape   | Dtype  | Description
+:------------- | :--------------- | :------ | :----- | :----------
+               | FeaturesDict     |         |        |
+concept_set_id | Tensor           |         | int32  |
+concepts       | Sequence(Tensor) | (None,) | object |
+gem_id         | Tensor           |         | object |
+gem_parent_id  | Tensor           |         | object |
+references     | Sequence(Tensor) | (None,) | object |
+target         | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -260,28 +260,28 @@ Split                           | Examples
 
 ```python
 FeaturesDict({
-    'dialog_act': tf.string,
-    'dialog_act_delexicalized': tf.string,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'target': tf.string,
-    'target_delexicalized': tf.string,
+    'dialog_act': object,
+    'dialog_act_delexicalized': object,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'target': object,
+    'target_delexicalized': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                  | Class            | Shape   | Dtype     | Description
-:----------------------- | :--------------- | :------ | :-------- | :----------
-                         | FeaturesDict     |         |           |
-dialog_act               | Tensor           |         | tf.string |
-dialog_act_delexicalized | Tensor           |         | tf.string |
-gem_id                   | Tensor           |         | tf.string |
-gem_parent_id            | Tensor           |         | tf.string |
-references               | Sequence(Tensor) | (None,) | tf.string |
-target                   | Tensor           |         | tf.string |
-target_delexicalized     | Tensor           |         | tf.string |
+Feature                  | Class            | Shape   | Dtype  | Description
+:----------------------- | :--------------- | :------ | :----- | :----------
+                         | FeaturesDict     |         |        |
+dialog_act               | Tensor           |         | object |
+dialog_act_delexicalized | Tensor           |         | object |
+gem_id                   | Tensor           |         | object |
+gem_parent_id            | Tensor           |         | object |
+references               | Sequence(Tensor) | (None,) | object |
+target                   | Tensor           |         | object |
+target_delexicalized     | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -432,30 +432,30 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'dart_id': tf.int32,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'subtree_was_extended': tf.bool,
-    'target': tf.string,
-    'target_sources': Sequence(tf.string),
-    'tripleset': Sequence(tf.string),
+    'dart_id': int32,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'subtree_was_extended': bool,
+    'target': object,
+    'target_sources': Sequence(object),
+    'tripleset': Sequence(object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class            | Shape   | Dtype     | Description
-:------------------- | :--------------- | :------ | :-------- | :----------
-                     | FeaturesDict     |         |           |
-dart_id              | Tensor           |         | tf.int32  |
-gem_id               | Tensor           |         | tf.string |
-gem_parent_id        | Tensor           |         | tf.string |
-references           | Sequence(Tensor) | (None,) | tf.string |
-subtree_was_extended | Tensor           |         | tf.bool   |
-target               | Tensor           |         | tf.string |
-target_sources       | Sequence(Tensor) | (None,) | tf.string |
-tripleset            | Sequence(Tensor) | (None,) | tf.string |
+Feature              | Class            | Shape   | Dtype  | Description
+:------------------- | :--------------- | :------ | :----- | :----------
+                     | FeaturesDict     |         |        |
+dart_id              | Tensor           |         | int32  |
+gem_id               | Tensor           |         | object |
+gem_parent_id        | Tensor           |         | object |
+references           | Sequence(Tensor) | (None,) | object |
+subtree_was_extended | Tensor           |         | bool   |
+target               | Tensor           |         | object |
+target_sources       | Sequence(Tensor) | (None,) | object |
+tripleset            | Sequence(Tensor) | (None,) | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -603,24 +603,24 @@ Split                           | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'meaning_representation': tf.string,
-    'references': Sequence(tf.string),
-    'target': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'meaning_representation': object,
+    'references': Sequence(object),
+    'target': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                | Class            | Shape   | Dtype     | Description
-:--------------------- | :--------------- | :------ | :-------- | :----------
-                       | FeaturesDict     |         |           |
-gem_id                 | Tensor           |         | tf.string |
-gem_parent_id          | Tensor           |         | tf.string |
-meaning_representation | Tensor           |         | tf.string |
-references             | Sequence(Tensor) | (None,) | tf.string |
-target                 | Tensor           |         | tf.string |
+Feature                | Class            | Shape   | Dtype  | Description
+:--------------------- | :--------------- | :------ | :----- | :----------
+                       | FeaturesDict     |         |        |
+gem_id                 | Tensor           |         | object |
+gem_parent_id          | Tensor           |         | object |
+meaning_representation | Tensor           |         | object |
+references             | Sequence(Tensor) | (None,) | object |
+target                 | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -770,32 +770,32 @@ Split                           | Examples
 
 ```python
 FeaturesDict({
-    'date': tf.string,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'target': tf.string,
-    'text': tf.string,
-    'title': tf.string,
-    'topic': tf.string,
-    'url': tf.string,
+    'date': object,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'target': object,
+    'text': object,
+    'title': object,
+    'topic': object,
+    'url': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class            | Shape   | Dtype     | Description
-:------------ | :--------------- | :------ | :-------- | :----------
-              | FeaturesDict     |         |           |
-date          | Tensor           |         | tf.string |
-gem_id        | Tensor           |         | tf.string |
-gem_parent_id | Tensor           |         | tf.string |
-references    | Sequence(Tensor) | (None,) | tf.string |
-target        | Tensor           |         | tf.string |
-text          | Tensor           |         | tf.string |
-title         | Tensor           |         | tf.string |
-topic         | Tensor           |         | tf.string |
-url           | Tensor           |         | tf.string |
+Feature       | Class            | Shape   | Dtype  | Description
+:------------ | :--------------- | :------ | :----- | :----------
+              | FeaturesDict     |         |        |
+date          | Tensor           |         | object |
+gem_id        | Tensor           |         | object |
+gem_parent_id | Tensor           |         | object |
+references    | Sequence(Tensor) | (None,) | object |
+target        | Tensor           |         | object |
+text          | Tensor           |         | object |
+title         | Tensor           |         | object |
+topic         | Tensor           |         | object |
+url           | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -942,32 +942,32 @@ Split                           | Examples
 
 ```python
 FeaturesDict({
-    'date': tf.string,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'target': tf.string,
-    'text': tf.string,
-    'title': tf.string,
-    'topic': tf.string,
-    'url': tf.string,
+    'date': object,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'target': object,
+    'text': object,
+    'title': object,
+    'topic': object,
+    'url': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class            | Shape   | Dtype     | Description
-:------------ | :--------------- | :------ | :-------- | :----------
-              | FeaturesDict     |         |           |
-date          | Tensor           |         | tf.string |
-gem_id        | Tensor           |         | tf.string |
-gem_parent_id | Tensor           |         | tf.string |
-references    | Sequence(Tensor) | (None,) | tf.string |
-target        | Tensor           |         | tf.string |
-text          | Tensor           |         | tf.string |
-title         | Tensor           |         | tf.string |
-topic         | Tensor           |         | tf.string |
-url           | Tensor           |         | tf.string |
+Feature       | Class            | Shape   | Dtype  | Description
+:------------ | :--------------- | :------ | :----- | :----------
+              | FeaturesDict     |         |        |
+date          | Tensor           |         | object |
+gem_id        | Tensor           |         | object |
+gem_parent_id | Tensor           |         | object |
+references    | Sequence(Tensor) | (None,) | object |
+target        | Tensor           |         | object |
+text          | Tensor           |         | object |
+title         | Tensor           |         | object |
+topic         | Tensor           |         | object |
+url           | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1122,41 +1122,41 @@ Split                              | Examples
 
 ```python
 FeaturesDict({
-    'context': Sequence(tf.string),
+    'context': Sequence(object),
     'dialog_acts': Sequence({
-        'act': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'slot': tf.string,
-        'values': Sequence(tf.string),
+        'act': ClassLabel(shape=(), dtype=int64, num_classes=18),
+        'slot': object,
+        'values': Sequence(object),
     }),
-    'dialog_id': tf.string,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'prompt': tf.string,
-    'references': Sequence(tf.string),
-    'service': tf.string,
-    'target': tf.string,
-    'turn_id': tf.int32,
+    'dialog_id': object,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'prompt': object,
+    'references': Sequence(object),
+    'service': object,
+    'target': object,
+    'turn_id': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature            | Class            | Shape   | Dtype     | Description
-:----------------- | :--------------- | :------ | :-------- | :----------
-                   | FeaturesDict     |         |           |
-context            | Sequence(Tensor) | (None,) | tf.string |
-dialog_acts        | Sequence         |         |           |
-dialog_acts/act    | ClassLabel       |         | tf.int64  |
-dialog_acts/slot   | Tensor           |         | tf.string |
-dialog_acts/values | Sequence(Tensor) | (None,) | tf.string |
-dialog_id          | Tensor           |         | tf.string |
-gem_id             | Tensor           |         | tf.string |
-gem_parent_id      | Tensor           |         | tf.string |
-prompt             | Tensor           |         | tf.string |
-references         | Sequence(Tensor) | (None,) | tf.string |
-service            | Tensor           |         | tf.string |
-target             | Tensor           |         | tf.string |
-turn_id            | Tensor           |         | tf.int32  |
+Feature            | Class            | Shape   | Dtype  | Description
+:----------------- | :--------------- | :------ | :----- | :----------
+                   | FeaturesDict     |         |        |
+context            | Sequence(Tensor) | (None,) | object |
+dialog_acts        | Sequence         |         |        |
+dialog_acts/act    | ClassLabel       |         | int64  |
+dialog_acts/slot   | Tensor           |         | object |
+dialog_acts/values | Sequence(Tensor) | (None,) | object |
+dialog_id          | Tensor           |         | object |
+gem_id             | Tensor           |         | object |
+gem_parent_id      | Tensor           |         | object |
+prompt             | Tensor           |         | object |
+references         | Sequence(Tensor) | (None,) | object |
+service            | Tensor           |         | object |
+target             | Tensor           |         | object |
+turn_id            | Tensor           |         | int32  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1304,60 +1304,60 @@ Split                           | Examples
 
 ```python
 FeaturesDict({
-    'example_id': tf.string,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'highlighted_cells': Sequence(Sequence(tf.int32)),
-    'overlap_subset': tf.string,
-    'references': Sequence(tf.string),
+    'example_id': object,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'highlighted_cells': Sequence(Sequence(int32)),
+    'overlap_subset': object,
+    'references': Sequence(object),
     'sentence_annotations': Sequence({
-        'final_sentence': tf.string,
-        'original_sentence': tf.string,
-        'sentence_after_ambiguity': tf.string,
-        'sentence_after_deletion': tf.string,
+        'final_sentence': object,
+        'original_sentence': object,
+        'sentence_after_ambiguity': object,
+        'sentence_after_deletion': object,
     }),
     'table': Sequence(Sequence({
-        'column_span': tf.int32,
-        'is_header': tf.bool,
-        'row_span': tf.int32,
-        'value': tf.string,
+        'column_span': int32,
+        'is_header': bool,
+        'row_span': int32,
+        'value': object,
     })),
-    'table_page_title': tf.string,
-    'table_section_text': tf.string,
-    'table_section_title': tf.string,
-    'table_webpage_url': tf.string,
-    'target': tf.string,
-    'totto_id': tf.int32,
+    'table_page_title': object,
+    'table_section_text': object,
+    'table_section_title': object,
+    'table_webpage_url': object,
+    'target': object,
+    'totto_id': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                       | Class                      | Shape        | Dtype     | Description
-:-------------------------------------------- | :------------------------- | :----------- | :-------- | :----------
-                                              | FeaturesDict               |              |           |
-example_id                                    | Tensor                     |              | tf.string |
-gem_id                                        | Tensor                     |              | tf.string |
-gem_parent_id                                 | Tensor                     |              | tf.string |
-highlighted_cells                             | Sequence(Sequence(Tensor)) | (None, None) | tf.int32  |
-overlap_subset                                | Tensor                     |              | tf.string |
-references                                    | Sequence(Tensor)           | (None,)      | tf.string |
-sentence_annotations                          | Sequence                   |              |           |
-sentence_annotations/final_sentence           | Tensor                     |              | tf.string |
-sentence_annotations/original_sentence        | Tensor                     |              | tf.string |
-sentence_annotations/sentence_after_ambiguity | Tensor                     |              | tf.string |
-sentence_annotations/sentence_after_deletion  | Tensor                     |              | tf.string |
-table                                         | Sequence                   |              |           |
-table/column_span                             | Tensor                     |              | tf.int32  |
-table/is_header                               | Tensor                     |              | tf.bool   |
-table/row_span                                | Tensor                     |              | tf.int32  |
-table/value                                   | Tensor                     |              | tf.string |
-table_page_title                              | Tensor                     |              | tf.string |
-table_section_text                            | Tensor                     |              | tf.string |
-table_section_title                           | Tensor                     |              | tf.string |
-table_webpage_url                             | Tensor                     |              | tf.string |
-target                                        | Tensor                     |              | tf.string |
-totto_id                                      | Tensor                     |              | tf.int32  |
+Feature                                       | Class                      | Shape        | Dtype  | Description
+:-------------------------------------------- | :------------------------- | :----------- | :----- | :----------
+                                              | FeaturesDict               |              |        |
+example_id                                    | Tensor                     |              | object |
+gem_id                                        | Tensor                     |              | object |
+gem_parent_id                                 | Tensor                     |              | object |
+highlighted_cells                             | Sequence(Sequence(Tensor)) | (None, None) | int32  |
+overlap_subset                                | Tensor                     |              | object |
+references                                    | Sequence(Tensor)           | (None,)      | object |
+sentence_annotations                          | Sequence                   |              |        |
+sentence_annotations/final_sentence           | Tensor                     |              | object |
+sentence_annotations/original_sentence        | Tensor                     |              | object |
+sentence_annotations/sentence_after_ambiguity | Tensor                     |              | object |
+sentence_annotations/sentence_after_deletion  | Tensor                     |              | object |
+table                                         | Sequence                   |              |        |
+table/column_span                             | Tensor                     |              | int32  |
+table/is_header                               | Tensor                     |              | bool   |
+table/row_span                                | Tensor                     |              | int32  |
+table/value                                   | Tensor                     |              | object |
+table_page_title                              | Tensor                     |              | object |
+table_section_text                            | Tensor                     |              | object |
+table_section_title                           | Tensor                     |              | object |
+table_webpage_url                             | Tensor                     |              | object |
+target                                        | Tensor                     |              | object |
+totto_id                                      | Tensor                     |              | int32  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1508,28 +1508,28 @@ Split                           | Examples
 
 ```python
 FeaturesDict({
-    'category': tf.string,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'input': Sequence(tf.string),
-    'references': Sequence(tf.string),
-    'target': tf.string,
-    'webnlg_id': tf.string,
+    'category': object,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'input': Sequence(object),
+    'references': Sequence(object),
+    'target': object,
+    'webnlg_id': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class            | Shape   | Dtype     | Description
-:------------ | :--------------- | :------ | :-------- | :----------
-              | FeaturesDict     |         |           |
-category      | Tensor           |         | tf.string |
-gem_id        | Tensor           |         | tf.string |
-gem_parent_id | Tensor           |         | tf.string |
-input         | Sequence(Tensor) | (None,) | tf.string |
-references    | Sequence(Tensor) | (None,) | tf.string |
-target        | Tensor           |         | tf.string |
-webnlg_id     | Tensor           |         | tf.string |
+Feature       | Class            | Shape   | Dtype  | Description
+:------------ | :--------------- | :------ | :----- | :----------
+              | FeaturesDict     |         |        |
+category      | Tensor           |         | object |
+gem_id        | Tensor           |         | object |
+gem_parent_id | Tensor           |         | object |
+input         | Sequence(Tensor) | (None,) | object |
+references    | Sequence(Tensor) | (None,) | object |
+target        | Tensor           |         | object |
+webnlg_id     | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1686,28 +1686,28 @@ Split                           | Examples
 
 ```python
 FeaturesDict({
-    'category': tf.string,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'input': Sequence(tf.string),
-    'references': Sequence(tf.string),
-    'target': tf.string,
-    'webnlg_id': tf.string,
+    'category': object,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'input': Sequence(object),
+    'references': Sequence(object),
+    'target': object,
+    'webnlg_id': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class            | Shape   | Dtype     | Description
-:------------ | :--------------- | :------ | :-------- | :----------
-              | FeaturesDict     |         |           |
-category      | Tensor           |         | tf.string |
-gem_id        | Tensor           |         | tf.string |
-gem_parent_id | Tensor           |         | tf.string |
-input         | Sequence(Tensor) | (None,) | tf.string |
-references    | Sequence(Tensor) | (None,) | tf.string |
-target        | Tensor           |         | tf.string |
-webnlg_id     | Tensor           |         | tf.string |
+Feature       | Class            | Shape   | Dtype  | Description
+:------------ | :--------------- | :------ | :----- | :----------
+              | FeaturesDict     |         |        |
+category      | Tensor           |         | object |
+gem_id        | Tensor           |         | object |
+gem_parent_id | Tensor           |         | object |
+input         | Sequence(Tensor) | (None,) | object |
+references    | Sequence(Tensor) | (None,) | object |
+target        | Tensor           |         | object |
+webnlg_id     | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1876,24 +1876,24 @@ Split                                    | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
-    'target': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
+    'target': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class            | Shape   | Dtype     | Description
-:------------ | :--------------- | :------ | :-------- | :----------
-              | FeaturesDict     |         |           |
-gem_id        | Tensor           |         | tf.string |
-gem_parent_id | Tensor           |         | tf.string |
-references    | Sequence(Tensor) | (None,) | tf.string |
-source        | Tensor           |         | tf.string |
-target        | Tensor           |         | tf.string |
+Feature       | Class            | Shape   | Dtype  | Description
+:------------ | :--------------- | :------ | :----- | :----------
+              | FeaturesDict     |         |        |
+gem_id        | Tensor           |         | object |
+gem_parent_id | Tensor           |         | object |
+references    | Sequence(Tensor) | (None,) | object |
+source        | Tensor           |         | object |
+target        | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2054,26 +2054,26 @@ Split                              | Examples
 
 ```python
 FeaturesDict({
-    'document': tf.string,
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'target': tf.string,
-    'xsum_id': tf.string,
+    'document': object,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'target': object,
+    'xsum_id': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class            | Shape   | Dtype     | Description
-:------------ | :--------------- | :------ | :-------- | :----------
-              | FeaturesDict     |         |           |
-document      | Tensor           |         | tf.string |
-gem_id        | Tensor           |         | tf.string |
-gem_parent_id | Tensor           |         | tf.string |
-references    | Sequence(Tensor) | (None,) | tf.string |
-target        | Tensor           |         | tf.string |
-xsum_id       | Tensor           |         | tf.string |
+Feature       | Class            | Shape   | Dtype  | Description
+:------------ | :--------------- | :------ | :----- | :----------
+              | FeaturesDict     |         |        |
+document      | Tensor           |         | object |
+gem_id        | Tensor           |         | object |
+gem_parent_id | Tensor           |         | object |
+references    | Sequence(Tensor) | (None,) | object |
+target        | Tensor           |         | object |
+xsum_id       | Tensor           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2217,38 +2217,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'ar': Text(shape=(), dtype=tf.string),
-        'en': Text(shape=(), dtype=tf.string),
+        'ar': Text(shape=(), dtype=object),
+        'en': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'ar': Text(shape=(), dtype=tf.string),
-        'en': Text(shape=(), dtype=tf.string),
+        'ar': Text(shape=(), dtype=object),
+        'en': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/ar | Text             |         | tf.string |
-source_aligned/en | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/ar | Text             |         | tf.string |
-target_aligned/en | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/ar | Text             |         | object |
+source_aligned/en | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/ar | Text             |         | object |
+target_aligned/en | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2391,38 +2391,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'zh': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'zh': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'zh': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'zh': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/zh | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/zh | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/zh | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/zh | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2565,38 +2565,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'cs': Text(shape=(), dtype=tf.string),
-        'en': Text(shape=(), dtype=tf.string),
+        'cs': Text(shape=(), dtype=object),
+        'en': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'cs': Text(shape=(), dtype=tf.string),
-        'en': Text(shape=(), dtype=tf.string),
+        'cs': Text(shape=(), dtype=object),
+        'en': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/cs | Text             |         | tf.string |
-source_aligned/en | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/cs | Text             |         | tf.string |
-target_aligned/en | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/cs | Text             |         | object |
+source_aligned/en | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/cs | Text             |         | object |
+target_aligned/en | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2739,38 +2739,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'nl': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'nl': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'nl': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'nl': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/nl | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/nl | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/nl | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/nl | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2913,34 +2913,34 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3083,38 +3083,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'fr': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'fr': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'fr': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'fr': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/fr | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/fr | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/fr | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/fr | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3257,38 +3257,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'de': Text(shape=(), dtype=tf.string),
-        'en': Text(shape=(), dtype=tf.string),
+        'de': Text(shape=(), dtype=object),
+        'en': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'de': Text(shape=(), dtype=tf.string),
-        'en': Text(shape=(), dtype=tf.string),
+        'de': Text(shape=(), dtype=object),
+        'en': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/de | Text             |         | tf.string |
-source_aligned/en | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/de | Text             |         | tf.string |
-target_aligned/en | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/de | Text             |         | object |
+source_aligned/en | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/de | Text             |         | object |
+target_aligned/en | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3431,38 +3431,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'hi': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'hi': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'hi': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'hi': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/hi | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/hi | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/hi | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/hi | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3605,38 +3605,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'id': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'id': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'id': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'id': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/id | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/id | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/id | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/id | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3779,38 +3779,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'it': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'it': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'it': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'it': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/it | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/it | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/it | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/it | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3953,38 +3953,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'ja': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'ja': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'ja': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'ja': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/ja | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/ja | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/ja | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/ja | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4127,38 +4127,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'ko': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'ko': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'ko': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'ko': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/ko | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/ko | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/ko | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/ko | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4301,38 +4301,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'pt': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'pt': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'pt': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'pt': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/pt | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/pt | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/pt | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/pt | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4475,38 +4475,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'ru': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'ru': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'ru': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'ru': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/ru | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/ru | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/ru | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/ru | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4649,38 +4649,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'es': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'es': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'es': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'es': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/es | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/es | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/es | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/es | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4823,38 +4823,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'th': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'th': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'th': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'th': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/th | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/th | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/th | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/th | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4997,38 +4997,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'tr': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'tr': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'tr': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'tr': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/tr | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/tr | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/tr | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/tr | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5171,38 +5171,38 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'gem_id': tf.string,
-    'gem_parent_id': tf.string,
-    'references': Sequence(tf.string),
-    'source': tf.string,
+    'gem_id': object,
+    'gem_parent_id': object,
+    'references': Sequence(object),
+    'source': object,
     'source_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'vi': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'vi': Text(shape=(), dtype=object),
     }),
-    'target': tf.string,
+    'target': object,
     'target_aligned': Translation({
-        'en': Text(shape=(), dtype=tf.string),
-        'vi': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=object),
+        'vi': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class            | Shape   | Dtype     | Description
-:---------------- | :--------------- | :------ | :-------- | :----------
-                  | FeaturesDict     |         |           |
-gem_id            | Tensor           |         | tf.string |
-gem_parent_id     | Tensor           |         | tf.string |
-references        | Sequence(Tensor) | (None,) | tf.string |
-source            | Tensor           |         | tf.string |
-source_aligned    | Translation      |         |           |
-source_aligned/en | Text             |         | tf.string |
-source_aligned/vi | Text             |         | tf.string |
-target            | Tensor           |         | tf.string |
-target_aligned    | Translation      |         |           |
-target_aligned/en | Text             |         | tf.string |
-target_aligned/vi | Text             |         | tf.string |
+Feature           | Class            | Shape   | Dtype  | Description
+:---------------- | :--------------- | :------ | :----- | :----------
+                  | FeaturesDict     |         |        |
+gem_id            | Tensor           |         | object |
+gem_parent_id     | Tensor           |         | object |
+references        | Sequence(Tensor) | (None,) | object |
+source            | Tensor           |         | object |
+source_aligned    | Translation      |         |        |
+source_aligned/en | Text             |         | object |
+source_aligned/vi | Text             |         | object |
+target            | Tensor           |         | object |
+target_aligned    | Translation      |         |        |
+target_aligned/en | Text             |         | object |
+target_aligned/vi | Text             |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -37,18 +37,18 @@ paper.
 
 ```python
 FeaturesDict({
-    'completion': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
+    'completion': Text(shape=(), dtype=object),
+    'context': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-completion | Text         |       | tf.string |
-context    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+completion | Text         |       | object |
+context    | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

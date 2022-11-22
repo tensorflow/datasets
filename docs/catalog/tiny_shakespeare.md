@@ -43,7 +43,7 @@ d = d.batch(batch_size)
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.06 MiB`
 
 *   **Dataset size**: `1.06 MiB`
 
@@ -63,16 +63,16 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape | Dtype     | Description
-:------ | :----------- | :---- | :-------- | :----------
-        | FeaturesDict |       |           |
-text    | Text         |       | tf.string |
+Feature | Class        | Shape | Dtype  | Description
+:------ | :----------- | :---- | :----- | :----------
+        | FeaturesDict |       |        |
+text    | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

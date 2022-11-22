@@ -60,11 +60,11 @@ array.
 
 *   **Download size**: `255.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.68 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -76,40 +76,40 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
-    'label_floor_hue': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'label_object_hue': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'label_orientation': ClassLabel(shape=(), dtype=tf.int64, num_classes=15),
-    'label_scale': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-    'label_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-    'label_wall_hue': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'value_floor_hue': tf.float32,
-    'value_object_hue': tf.float32,
-    'value_orientation': tf.float32,
-    'value_scale': tf.float32,
-    'value_shape': tf.float32,
-    'value_wall_hue': tf.float32,
+    'image': Image(shape=(64, 64, 3), dtype=uint8),
+    'label_floor_hue': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'label_object_hue': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'label_orientation': ClassLabel(shape=(), dtype=int64, num_classes=15),
+    'label_scale': ClassLabel(shape=(), dtype=int64, num_classes=8),
+    'label_shape': ClassLabel(shape=(), dtype=int64, num_classes=4),
+    'label_wall_hue': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'value_floor_hue': float32,
+    'value_object_hue': float32,
+    'value_orientation': float32,
+    'value_scale': float32,
+    'value_shape': float32,
+    'value_wall_hue': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape       | Dtype      | Description
-:---------------- | :----------- | :---------- | :--------- | :----------
-                  | FeaturesDict |             |            |
-image             | Image        | (64, 64, 3) | tf.uint8   |
-label_floor_hue   | ClassLabel   |             | tf.int64   |
-label_object_hue  | ClassLabel   |             | tf.int64   |
-label_orientation | ClassLabel   |             | tf.int64   |
-label_scale       | ClassLabel   |             | tf.int64   |
-label_shape       | ClassLabel   |             | tf.int64   |
-label_wall_hue    | ClassLabel   |             | tf.int64   |
-value_floor_hue   | Tensor       |             | tf.float32 |
-value_object_hue  | Tensor       |             | tf.float32 |
-value_orientation | Tensor       |             | tf.float32 |
-value_scale       | Tensor       |             | tf.float32 |
-value_shape       | Tensor       |             | tf.float32 |
-value_wall_hue    | Tensor       |             | tf.float32 |
+Feature           | Class        | Shape       | Dtype   | Description
+:---------------- | :----------- | :---------- | :------ | :----------
+                  | FeaturesDict |             |         |
+image             | Image        | (64, 64, 3) | uint8   |
+label_floor_hue   | ClassLabel   |             | int64   |
+label_object_hue  | ClassLabel   |             | int64   |
+label_orientation | ClassLabel   |             | int64   |
+label_scale       | ClassLabel   |             | int64   |
+label_shape       | ClassLabel   |             | int64   |
+label_wall_hue    | ClassLabel   |             | int64   |
+value_floor_hue   | Tensor       |             | float32 |
+value_object_hue  | Tensor       |             | float32 |
+value_orientation | Tensor       |             | float32 |
+value_scale       | Tensor       |             | float32 |
+value_shape       | Tensor       |             | float32 |
+value_wall_hue    | Tensor       |             | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

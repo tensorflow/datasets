@@ -46,7 +46,7 @@ This dataset can be downloaded upon requests. Unzip all the contents
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.13 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -58,7 +58,7 @@ This dataset can be downloaded upon requests. Unzip all the contents
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -72,36 +72,36 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'compression': tf.float32,
-    'compression_bin': Text(shape=(), dtype=tf.string),
-    'coverage': tf.float32,
-    'coverage_bin': Text(shape=(), dtype=tf.string),
-    'date': Text(shape=(), dtype=tf.string),
-    'density': tf.float32,
-    'density_bin': Text(shape=(), dtype=tf.string),
-    'summary': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-    'url': Text(shape=(), dtype=tf.string),
+    'compression': float32,
+    'compression_bin': Text(shape=(), dtype=object),
+    'coverage': float32,
+    'coverage_bin': Text(shape=(), dtype=object),
+    'date': Text(shape=(), dtype=object),
+    'density': float32,
+    'density_bin': Text(shape=(), dtype=object),
+    'summary': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
+    'url': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype      | Description
-:-------------- | :----------- | :---- | :--------- | :----------
-                | FeaturesDict |       |            |
-compression     | Tensor       |       | tf.float32 |
-compression_bin | Text         |       | tf.string  |
-coverage        | Tensor       |       | tf.float32 |
-coverage_bin    | Text         |       | tf.string  |
-date            | Text         |       | tf.string  |
-density         | Tensor       |       | tf.float32 |
-density_bin     | Text         |       | tf.string  |
-summary         | Text         |       | tf.string  |
-text            | Text         |       | tf.string  |
-title           | Text         |       | tf.string  |
-url             | Text         |       | tf.string  |
+Feature         | Class        | Shape | Dtype   | Description
+:-------------- | :----------- | :---- | :------ | :----------
+                | FeaturesDict |       |         |
+compression     | Tensor       |       | float32 |
+compression_bin | Text         |       | object  |
+coverage        | Tensor       |       | float32 |
+coverage_bin    | Text         |       | object  |
+date            | Text         |       | object  |
+density         | Tensor       |       | float32 |
+density_bin     | Text         |       | object  |
+summary         | Text         |       | object  |
+text            | Text         |       | object  |
+title           | Text         |       | object  |
+url             | Text         |       | object  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

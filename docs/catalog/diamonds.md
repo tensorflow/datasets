@@ -58,36 +58,36 @@ Split     | Examples
 ```python
 FeaturesDict({
     'features': FeaturesDict({
-        'carat': tf.float32,
-        'clarity': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-        'color': ClassLabel(shape=(), dtype=tf.int64, num_classes=7),
-        'cut': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-        'depth': tf.float32,
-        'table': tf.float32,
-        'x': tf.float32,
-        'y': tf.float32,
-        'z': tf.float32,
+        'carat': float32,
+        'clarity': ClassLabel(shape=(), dtype=int64, num_classes=8),
+        'color': ClassLabel(shape=(), dtype=int64, num_classes=7),
+        'cut': ClassLabel(shape=(), dtype=int64, num_classes=5),
+        'depth': float32,
+        'table': float32,
+        'x': float32,
+        'y': float32,
+        'z': float32,
     }),
-    'price': tf.float32,
+    'price': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape | Dtype      | Description
-:--------------- | :----------- | :---- | :--------- | :----------
-                 | FeaturesDict |       |            |
-features         | FeaturesDict |       |            |
-features/carat   | Tensor       |       | tf.float32 |
-features/clarity | ClassLabel   |       | tf.int64   |
-features/color   | ClassLabel   |       | tf.int64   |
-features/cut     | ClassLabel   |       | tf.int64   |
-features/depth   | Tensor       |       | tf.float32 |
-features/table   | Tensor       |       | tf.float32 |
-features/x       | Tensor       |       | tf.float32 |
-features/y       | Tensor       |       | tf.float32 |
-features/z       | Tensor       |       | tf.float32 |
-price            | Tensor       |       | tf.float32 |
+Feature          | Class        | Shape | Dtype   | Description
+:--------------- | :----------- | :---- | :------ | :----------
+                 | FeaturesDict |       |         |
+features         | FeaturesDict |       |         |
+features/carat   | Tensor       |       | float32 |
+features/clarity | ClassLabel   |       | int64   |
+features/color   | ClassLabel   |       | int64   |
+features/cut     | ClassLabel   |       | int64   |
+features/depth   | Tensor       |       | float32 |
+features/table   | Tensor       |       | float32 |
+features/x       | Tensor       |       | float32 |
+features/y       | Tensor       |       | float32 |
+features/z       | Tensor       |       | float32 |
+price            | Tensor       |       | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

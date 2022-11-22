@@ -36,11 +36,11 @@ inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
 *   **Download size**: `6.23 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.89 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -53,26 +53,26 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'abstractive_explanation': Text(shape=(), dtype=tf.string),
-    'answer': Text(shape=(), dtype=tf.string),
-    'choices': Sequence(Text(shape=(), dtype=tf.string)),
-    'extractive_explanation': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'abstractive_explanation': Text(shape=(), dtype=object),
+    'answer': Text(shape=(), dtype=object),
+    'choices': Sequence(Text(shape=(), dtype=object)),
+    'extractive_explanation': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                 | Class          | Shape   | Dtype     | Description
-:---------------------- | :------------- | :------ | :-------- | :----------
-                        | FeaturesDict   |         |           |
-abstractive_explanation | Text           |         | tf.string |
-answer                  | Text           |         | tf.string |
-choices                 | Sequence(Text) | (None,) | tf.string |
-extractive_explanation  | Text           |         | tf.string |
-id                      | Text           |         | tf.string |
-question                | Text           |         | tf.string |
+Feature                 | Class          | Shape   | Dtype  | Description
+:---------------------- | :------------- | :------ | :----- | :----------
+                        | FeaturesDict   |         |        |
+abstractive_explanation | Text           |         | object |
+answer                  | Text           |         | object |
+choices                 | Sequence(Text) | (None,) | object |
+extractive_explanation  | Text           |         | object |
+id                      | Text           |         | object |
+question                | Text           |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -36,7 +36,7 @@ training/validation data from the MNIST dataset.
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.25 MiB`
 
 *   **Dataset size**: `91.70 MiB`
 
@@ -54,16 +54,16 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
+    'image_sequence': Video(Image(shape=(64, 64, 1), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape           | Dtype    | Description
-:------------- | :----------- | :-------------- | :------- | :----------
-               | FeaturesDict |                 |          |
-image_sequence | Video(Image) | (20, 64, 64, 1) | tf.uint8 |
+Feature        | Class        | Shape           | Dtype | Description
+:------------- | :----------- | :-------------- | :---- | :----------
+               | FeaturesDict |                 |       |
+image_sequence | Video(Image) | (20, 64, 64, 1) | uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

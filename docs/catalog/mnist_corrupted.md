@@ -36,11 +36,9 @@ images uploaded by the original authors
 
 *   **Download size**: `235.23 MiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -53,18 +51,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape       | Dtype    | Description
-:------ | :----------- | :---------- | :------- | :----------
-        | FeaturesDict |             |          |
-image   | Image        | (28, 28, 1) | tf.uint8 |
-label   | ClassLabel   |             | tf.int64 |
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -85,6 +83,8 @@ label   | ClassLabel   |             | tf.int64 |
 ## mnist_corrupted/identity (default config)
 
 *   **Config description**: Corruption method: identity
+
+*   **Dataset size**: `21.00 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -132,6 +132,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: shot_noise
 
+*   **Dataset size**: `15.05 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -177,6 +179,8 @@ dataButton.addEventListener('click', async () => {
 ## mnist_corrupted/impulse_noise
 
 *   **Config description**: Corruption method: impulse_noise
+
+*   **Dataset size**: `24.61 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -224,6 +228,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: glass_blur
 
+*   **Dataset size**: `35.91 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -269,6 +275,8 @@ dataButton.addEventListener('click', async () => {
 ## mnist_corrupted/motion_blur
 
 *   **Config description**: Corruption method: motion_blur
+
+*   **Dataset size**: `32.45 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -316,6 +324,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: shear
 
+*   **Dataset size**: `27.73 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -361,6 +371,8 @@ dataButton.addEventListener('click', async () => {
 ## mnist_corrupted/scale
 
 *   **Config description**: Corruption method: scale
+
+*   **Dataset size**: `17.41 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -408,6 +420,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: rotate
 
+*   **Dataset size**: `27.09 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -453,6 +467,8 @@ dataButton.addEventListener('click', async () => {
 ## mnist_corrupted/brightness
 
 *   **Config description**: Corruption method: brightness
+
+*   **Dataset size**: `20.52 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -500,6 +516,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: translate
 
+*   **Dataset size**: `20.88 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -545,6 +563,8 @@ dataButton.addEventListener('click', async () => {
 ## mnist_corrupted/stripe
 
 *   **Config description**: Corruption method: stripe
+
+*   **Dataset size**: `23.09 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -592,6 +612,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: fog
 
+*   **Dataset size**: `35.76 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -637,6 +659,8 @@ dataButton.addEventListener('click', async () => {
 ## mnist_corrupted/spatter
 
 *   **Config description**: Corruption method: spatter
+
+*   **Dataset size**: `29.67 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -684,6 +708,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: dotted_line
 
+*   **Dataset size**: `24.45 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -730,6 +756,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Corruption method: zigzag
 
+*   **Dataset size**: `25.91 MiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -775,6 +803,8 @@ dataButton.addEventListener('click', async () => {
 ## mnist_corrupted/canny_edges
 
 *   **Config description**: Corruption method: canny_edges
+
+*   **Dataset size**: `13.23 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

@@ -51,8 +51,6 @@ WARNING: This dataset currently requires you to prepare images on your own.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -60,10 +58,6 @@ WARNING: This dataset currently requires you to prepare images on your own.
     data4x4.tar .. data1024x1024.tar).
     Detailed instructions are here:
     https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
 
 *   **Splits**:
 
@@ -101,22 +95,28 @@ Split     | Examples
 
 *   **Config description**: CelebaHQ images in 1024 x 1024 resolution
 
+*   **Dataset size**: `54.04 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(1024, 1024, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape           | Dtype     | Description
-:------------- | :----------- | :-------------- | :-------- | :----------
-               | FeaturesDict |                 |           |
-image          | Image        | (1024, 1024, 3) | tf.uint8  |
-image/filename | Text         |                 | tf.string |
+Feature        | Class        | Shape           | Dtype  | Description
+:------------- | :----------- | :-------------- | :----- | :----------
+               | FeaturesDict |                 |        |
+image          | Image        | (1024, 1024, 3) | uint8  |
+image/filename | Text         |                 | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -164,22 +164,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 512 x 512 resolution
 
+*   **Dataset size**: `15.33 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(512, 512, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(512, 512, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape         | Dtype     | Description
-:------------- | :----------- | :------------ | :-------- | :----------
-               | FeaturesDict |               |           |
-image          | Image        | (512, 512, 3) | tf.uint8  |
-image/filename | Text         |               | tf.string |
+Feature        | Class        | Shape         | Dtype  | Description
+:------------- | :----------- | :------------ | :----- | :----------
+               | FeaturesDict |               |        |
+image          | Image        | (512, 512, 3) | uint8  |
+image/filename | Text         |               | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -227,22 +233,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 256 x 256 resolution
 
+*   **Dataset size**: `4.21 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(256, 256, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape         | Dtype     | Description
-:------------- | :----------- | :------------ | :-------- | :----------
-               | FeaturesDict |               |           |
-image          | Image        | (256, 256, 3) | tf.uint8  |
-image/filename | Text         |               | tf.string |
+Feature        | Class        | Shape         | Dtype  | Description
+:------------- | :----------- | :------------ | :----- | :----------
+               | FeaturesDict |               |        |
+image          | Image        | (256, 256, 3) | uint8  |
+image/filename | Text         |               | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -290,22 +302,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 128 x 128 resolution
 
+*   **Dataset size**: `1.13 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(128, 128, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape         | Dtype     | Description
-:------------- | :----------- | :------------ | :-------- | :----------
-               | FeaturesDict |               |           |
-image          | Image        | (128, 128, 3) | tf.uint8  |
-image/filename | Text         |               | tf.string |
+Feature        | Class        | Shape         | Dtype  | Description
+:------------- | :----------- | :------------ | :----- | :----------
+               | FeaturesDict |               |        |
+image          | Image        | (128, 128, 3) | uint8  |
+image/filename | Text         |               | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -353,22 +371,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 64 x 64 resolution
 
+*   **Dataset size**: `310.94 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(64, 64, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape       | Dtype     | Description
-:------------- | :----------- | :---------- | :-------- | :----------
-               | FeaturesDict |             |           |
-image          | Image        | (64, 64, 3) | tf.uint8  |
-image/filename | Text         |             | tf.string |
+Feature        | Class        | Shape       | Dtype  | Description
+:------------- | :----------- | :---------- | :----- | :----------
+               | FeaturesDict |             |        |
+image          | Image        | (64, 64, 3) | uint8  |
+image/filename | Text         |             | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -416,22 +440,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 32 x 32 resolution
 
+*   **Dataset size**: `85.39 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(32, 32, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape       | Dtype     | Description
-:------------- | :----------- | :---------- | :-------- | :----------
-               | FeaturesDict |             |           |
-image          | Image        | (32, 32, 3) | tf.uint8  |
-image/filename | Text         |             | tf.string |
+Feature        | Class        | Shape       | Dtype  | Description
+:------------- | :----------- | :---------- | :----- | :----------
+               | FeaturesDict |             |        |
+image          | Image        | (32, 32, 3) | uint8  |
+image/filename | Text         |             | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -479,22 +509,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 16 x 16 resolution
 
+*   **Dataset size**: `25.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(16, 16, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(16, 16, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape       | Dtype     | Description
-:------------- | :----------- | :---------- | :-------- | :----------
-               | FeaturesDict |             |           |
-image          | Image        | (16, 16, 3) | tf.uint8  |
-image/filename | Text         |             | tf.string |
+Feature        | Class        | Shape       | Dtype  | Description
+:------------- | :----------- | :---------- | :----- | :----------
+               | FeaturesDict |             |        |
+image          | Image        | (16, 16, 3) | uint8  |
+image/filename | Text         |             | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -542,22 +578,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 8 x 8 resolution
 
+*   **Dataset size**: `9.42 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(8, 8, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(8, 8, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape     | Dtype     | Description
-:------------- | :----------- | :-------- | :-------- | :----------
-               | FeaturesDict |           |           |
-image          | Image        | (8, 8, 3) | tf.uint8  |
-image/filename | Text         |           | tf.string |
+Feature        | Class        | Shape     | Dtype  | Description
+:------------- | :----------- | :-------- | :----- | :----------
+               | FeaturesDict |           |        |
+image          | Image        | (8, 8, 3) | uint8  |
+image/filename | Text         |           | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -605,22 +647,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 4 x 4 resolution
 
+*   **Dataset size**: `5.10 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(4, 4, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(4, 4, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape     | Dtype     | Description
-:------------- | :----------- | :-------- | :-------- | :----------
-               | FeaturesDict |           |           |
-image          | Image        | (4, 4, 3) | tf.uint8  |
-image/filename | Text         |           | tf.string |
+Feature        | Class        | Shape     | Dtype  | Description
+:------------- | :----------- | :-------- | :----- | :----------
+               | FeaturesDict |           |        |
+image          | Image        | (4, 4, 3) | uint8  |
+image/filename | Text         |           | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -668,22 +716,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 2 x 2 resolution
 
+*   **Dataset size**: `3.94 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(2, 2, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(2, 2, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape     | Dtype     | Description
-:------------- | :----------- | :-------- | :-------- | :----------
-               | FeaturesDict |           |           |
-image          | Image        | (2, 2, 3) | tf.uint8  |
-image/filename | Text         |           | tf.string |
+Feature        | Class        | Shape     | Dtype  | Description
+:------------- | :----------- | :-------- | :----- | :----------
+               | FeaturesDict |           |        |
+image          | Image        | (2, 2, 3) | uint8  |
+image/filename | Text         |           | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -731,22 +785,28 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 1 x 1 resolution
 
+*   **Dataset size**: `3.62 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(1, 1, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(1, 1, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape     | Dtype     | Description
-:------------- | :----------- | :-------- | :-------- | :----------
-               | FeaturesDict |           |           |
-image          | Image        | (1, 1, 3) | tf.uint8  |
-image/filename | Text         |           | tf.string |
+Feature        | Class        | Shape     | Dtype  | Description
+:------------- | :----------- | :-------- | :----- | :----------
+               | FeaturesDict |           |        |
+image          | Image        | (1, 1, 3) | uint8  |
+image/filename | Text         |           | object |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

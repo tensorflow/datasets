@@ -68,25 +68,25 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(480, 640, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(480, 640, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
     'objects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape         | Dtype      | Description
-:------------- | :----------- | :------------ | :--------- | :----------
-               | FeaturesDict |               |            |
-image          | Image        | (480, 640, 3) | tf.uint8   |
-image/filename | Text         |               | tf.string  |
-objects        | Sequence     |               |            |
-objects/bbox   | BBoxFeature  | (4,)          | tf.float32 |
-objects/label  | ClassLabel   |               | tf.int64   |
+Feature        | Class        | Shape         | Dtype   | Description
+:------------- | :----------- | :------------ | :------ | :----------
+               | FeaturesDict |               |         |
+image          | Image        | (480, 640, 3) | uint8   |
+image/filename | Text         |               | object  |
+objects        | Sequence     |               |         |
+objects/bbox   | BBoxFeature  | (4,)          | float32 |
+objects/label  | ClassLabel   |               | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

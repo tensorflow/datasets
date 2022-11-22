@@ -51,22 +51,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'angle': tf.int64,
-    'angle_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=72),
-    'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
-    'object_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
+    'angle': int64,
+    'angle_label': ClassLabel(shape=(), dtype=int64, num_classes=72),
+    'image': Image(shape=(128, 128, 3), dtype=uint8),
+    'object_id': ClassLabel(shape=(), dtype=int64, num_classes=100),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape         | Dtype    | Description
-:---------- | :----------- | :------------ | :------- | :----------
-            | FeaturesDict |               |          |
-angle       | Tensor       |               | tf.int64 |
-angle_label | ClassLabel   |               | tf.int64 |
-image       | Image        | (128, 128, 3) | tf.uint8 |
-object_id   | ClassLabel   |               | tf.int64 |
+Feature     | Class        | Shape         | Dtype | Description
+:---------- | :----------- | :------------ | :---- | :----------
+            | FeaturesDict |               |       |
+angle       | Tensor       |               | int64 |
+angle_label | ClassLabel   |               | int64 |
+image       | Image        | (128, 128, 3) | uint8 |
+object_id   | ClassLabel   |               | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

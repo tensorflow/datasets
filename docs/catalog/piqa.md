@@ -60,24 +60,24 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'goal': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sol1': Text(shape=(), dtype=tf.string),
-    'sol2': Text(shape=(), dtype=tf.string),
+    'goal': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sol1': Text(shape=(), dtype=object),
+    'sol2': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape | Dtype     | Description
-:------ | :----------- | :---- | :-------- | :----------
-        | FeaturesDict |       |           |
-goal    | Text         |       | tf.string |
-id      | Text         |       | tf.string |
-label   | ClassLabel   |       | tf.int64  |
-sol1    | Text         |       | tf.string |
-sol2    | Text         |       | tf.string |
+Feature | Class        | Shape | Dtype  | Description
+:------ | :----------- | :---- | :----- | :----------
+        | FeaturesDict |       |        |
+goal    | Text         |       | object |
+id      | Text         |       | object |
+label   | ClassLabel   |       | int64  |
+sol1    | Text         |       | object |
+sol2    | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

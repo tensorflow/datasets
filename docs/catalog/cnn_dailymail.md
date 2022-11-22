@@ -70,22 +70,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'article': Text(shape=(), dtype=tf.string),
-    'highlights': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'publisher': Text(shape=(), dtype=tf.string),
+    'article': Text(shape=(), dtype=object),
+    'highlights': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'publisher': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-article    | Text         |       | tf.string |
-highlights | Text         |       | tf.string |
-id         | Text         |       | tf.string |
-publisher  | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+article    | Text         |       | object |
+highlights | Text         |       | object |
+id         | Text         |       | object |
+publisher  | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -35,45 +35,43 @@ the official dataset, the test set of VOC2012 does not contain annotations.
 
     *   **`4.0.0`** (default): No release notes.
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'labels_no_difficult': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
+    'labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=20)),
+    'labels_no_difficult': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=20)),
     'objects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_difficult': tf.bool,
-        'is_truncated': tf.bool,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-        'pose': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'is_difficult': bool,
+        'is_truncated': bool,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=20),
+        'pose': ClassLabel(shape=(), dtype=int64, num_classes=5),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class                | Shape           | Dtype      | Description
-:------------------- | :------------------- | :-------------- | :--------- | :----------
-                     | FeaturesDict         |                 |            |
-image                | Image                | (None, None, 3) | tf.uint8   |
-image/filename       | Text                 |                 | tf.string  |
-labels               | Sequence(ClassLabel) | (None,)         | tf.int64   |
-labels_no_difficult  | Sequence(ClassLabel) | (None,)         | tf.int64   |
-objects              | Sequence             |                 |            |
-objects/bbox         | BBoxFeature          | (4,)            | tf.float32 |
-objects/is_difficult | Tensor               |                 | tf.bool    |
-objects/is_truncated | Tensor               |                 | tf.bool    |
-objects/label        | ClassLabel           |                 | tf.int64   |
-objects/pose         | ClassLabel           |                 | tf.int64   |
+Feature              | Class                | Shape           | Dtype   | Description
+:------------------- | :------------------- | :-------------- | :------ | :----------
+                     | FeaturesDict         |                 |         |
+image                | Image                | (None, None, 3) | uint8   |
+image/filename       | Text                 |                 | object  |
+labels               | Sequence(ClassLabel) | (None,)         | int64   |
+labels_no_difficult  | Sequence(ClassLabel) | (None,)         | int64   |
+objects              | Sequence             |                 |         |
+objects/bbox         | BBoxFeature          | (4,)            | float32 |
+objects/is_difficult | Tensor               |                 | bool    |
+objects/is_truncated | Tensor               |                 | bool    |
+objects/label        | ClassLabel           |                 | int64   |
+objects/pose         | ClassLabel           |                 | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -93,6 +91,8 @@ objects.
     [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
 
 *   **Download size**: `868.85 MiB`
+
+*   **Dataset size**: `837.73 MiB`
 
 *   **Splits**:
 
@@ -166,6 +166,8 @@ objects.
     [http://host.robots.ox.ac.uk/pascal/VOC/voc2012/](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/)
 
 *   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `2.44 GiB`
 
 *   **Splits**:
 

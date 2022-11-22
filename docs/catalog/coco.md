@@ -43,11 +43,9 @@ defines 200 classes but only uses 133.
 
     *   **`1.1.0`** (default): No release notes.
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -88,6 +86,8 @@ defines 200 classes but only uses 133.
 
 *   **Download size**: `37.57 GiB`
 
+*   **Dataset size**: `37.35 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -101,33 +101,33 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'image/id': tf.int64,
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
+    'image/id': int64,
     'objects': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': tf.int64,
-        'is_crowd': tf.bool,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+        'area': int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'id': int64,
+        'is_crowd': bool,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=80),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape           | Dtype      | Description
-:--------------- | :----------- | :-------------- | :--------- | :----------
-                 | FeaturesDict |                 |            |
-image            | Image        | (None, None, 3) | tf.uint8   |
-image/filename   | Text         |                 | tf.string  |
-image/id         | Tensor       |                 | tf.int64   |
-objects          | Sequence     |                 |            |
-objects/area     | Tensor       |                 | tf.int64   |
-objects/bbox     | BBoxFeature  | (4,)            | tf.float32 |
-objects/id       | Tensor       |                 | tf.int64   |
-objects/is_crowd | Tensor       |                 | tf.bool    |
-objects/label    | ClassLabel   |                 | tf.int64   |
+Feature          | Class        | Shape           | Dtype   | Description
+:--------------- | :----------- | :-------------- | :------ | :----------
+                 | FeaturesDict |                 |         |
+image            | Image        | (None, None, 3) | uint8   |
+image/filename   | Text         |                 | object  |
+image/id         | Tensor       |                 | int64   |
+objects          | Sequence     |                 |         |
+objects/area     | Tensor       |                 | int64   |
+objects/bbox     | BBoxFeature  | (4,)            | float32 |
+objects/id       | Tensor       |                 | int64   |
+objects/is_crowd | Tensor       |                 | bool    |
+objects/label    | ClassLabel   |                 | int64   |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -178,6 +178,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `25.20 GiB`
 
+*   **Dataset size**: `24.98 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -190,33 +192,33 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'image/id': tf.int64,
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
+    'image/id': int64,
     'objects': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': tf.int64,
-        'is_crowd': tf.bool,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+        'area': int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'id': int64,
+        'is_crowd': bool,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=80),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape           | Dtype      | Description
-:--------------- | :----------- | :-------------- | :--------- | :----------
-                 | FeaturesDict |                 |            |
-image            | Image        | (None, None, 3) | tf.uint8   |
-image/filename   | Text         |                 | tf.string  |
-image/id         | Tensor       |                 | tf.int64   |
-objects          | Sequence     |                 |            |
-objects/area     | Tensor       |                 | tf.int64   |
-objects/bbox     | BBoxFeature  | (4,)            | tf.float32 |
-objects/id       | Tensor       |                 | tf.int64   |
-objects/is_crowd | Tensor       |                 | tf.bool    |
-objects/label    | ClassLabel   |                 | tf.int64   |
+Feature          | Class        | Shape           | Dtype   | Description
+:--------------- | :----------- | :-------------- | :------ | :----------
+                 | FeaturesDict |                 |         |
+image            | Image        | (None, None, 3) | uint8   |
+image/filename   | Text         |                 | object  |
+image/id         | Tensor       |                 | int64   |
+objects          | Sequence     |                 |         |
+objects/area     | Tensor       |                 | int64   |
+objects/bbox     | BBoxFeature  | (4,)            | float32 |
+objects/id       | Tensor       |                 | int64   |
+objects/is_crowd | Tensor       |                 | bool    |
+objects/label    | ClassLabel   |                 | int64   |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -267,6 +269,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `19.57 GiB`
 
+*   **Dataset size**: `19.63 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -278,41 +282,39 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'image/id': tf.int64,
-    'panoptic_image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'panoptic_image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=object),
+    'image/id': int64,
+    'panoptic_image': Image(shape=(None, None, 3), dtype=uint8),
+    'panoptic_image/filename': Text(shape=(), dtype=object),
     'panoptic_objects': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': tf.int64,
-        'is_crowd': tf.bool,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=133),
+        'area': int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'id': int64,
+        'is_crowd': bool,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=133),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature                   | Class        | Shape  | Dtype      | Description |
-| :------------------------ | :----------- | :----- | :--------- | :---------- |
-|                           | FeaturesDict |        |            |             |
-| image                     | Image        | (None, | tf.uint8   |             |
-:                           :              : None,  :            :             :
-:                           :              : 3)     :            :             :
-| image/filename            | Text         |        | tf.string  |             |
-| image/id                  | Tensor       |        | tf.int64   |             |
-| panoptic_image            | Image        | (None, | tf.uint8   |             |
-:                           :              : None,  :            :             :
-:                           :              : 3)     :            :             :
-| panoptic_image/filename   | Text         |        | tf.string  |             |
-| panoptic_objects          | Sequence     |        |            |             |
-| panoptic_objects/area     | Tensor       |        | tf.int64   |             |
-| panoptic_objects/bbox     | BBoxFeature  | (4,)   | tf.float32 |             |
-| panoptic_objects/id       | Tensor       |        | tf.int64   |             |
-| panoptic_objects/is_crowd | Tensor       |        | tf.bool    |             |
-| panoptic_objects/label    | ClassLabel   |        | tf.int64   |             |
+| Feature                   | Class        | Shape    | Dtype   | Description |
+| :------------------------ | :----------- | :------- | :------ | :---------- |
+|                           | FeaturesDict |          |         |             |
+| image                     | Image        | (None,   | uint8   |             |
+:                           :              : None, 3) :         :             :
+| image/filename            | Text         |          | object  |             |
+| image/id                  | Tensor       |          | int64   |             |
+| panoptic_image            | Image        | (None,   | uint8   |             |
+:                           :              : None, 3) :         :             :
+| panoptic_image/filename   | Text         |          | object  |             |
+| panoptic_objects          | Sequence     |          |         |             |
+| panoptic_objects/area     | Tensor       |          | int64   |             |
+| panoptic_objects/bbox     | BBoxFeature  | (4,)     | float32 |             |
+| panoptic_objects/id       | Tensor       |          | int64   |             |
+| panoptic_objects/is_crowd | Tensor       |          | bool    |             |
+| panoptic_objects/label    | ClassLabel   |          | int64   |             |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

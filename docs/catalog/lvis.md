@@ -59,35 +59,35 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/id': tf.int64,
-    'neg_category_ids': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1203)),
-    'not_exhaustive_category_ids': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1203)),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/id': int64,
+    'neg_category_ids': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1203)),
+    'not_exhaustive_category_ids': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1203)),
     'objects': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': tf.int64,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1203),
-        'segmentation': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'area': int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'id': int64,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=1203),
+        'segmentation': Image(shape=(None, None, 1), dtype=uint8),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                     | Class                | Shape           | Dtype      | Description
-:-------------------------- | :------------------- | :-------------- | :--------- | :----------
-                            | FeaturesDict         |                 |            |
-image                       | Image                | (None, None, 3) | tf.uint8   |
-image/id                    | Tensor               |                 | tf.int64   |
-neg_category_ids            | Sequence(ClassLabel) | (None,)         | tf.int64   |
-not_exhaustive_category_ids | Sequence(ClassLabel) | (None,)         | tf.int64   |
-objects                     | Sequence             |                 |            |
-objects/area                | Tensor               |                 | tf.int64   |
-objects/bbox                | BBoxFeature          | (4,)            | tf.float32 |
-objects/id                  | Tensor               |                 | tf.int64   |
-objects/label               | ClassLabel           |                 | tf.int64   |
-objects/segmentation        | Image                | (None, None, 1) | tf.uint8   |
+Feature                     | Class                | Shape           | Dtype   | Description
+:-------------------------- | :------------------- | :-------------- | :------ | :----------
+                            | FeaturesDict         |                 |         |
+image                       | Image                | (None, None, 3) | uint8   |
+image/id                    | Tensor               |                 | int64   |
+neg_category_ids            | Sequence(ClassLabel) | (None,)         | int64   |
+not_exhaustive_category_ids | Sequence(ClassLabel) | (None,)         | int64   |
+objects                     | Sequence             |                 |         |
+objects/area                | Tensor               |                 | int64   |
+objects/bbox                | BBoxFeature          | (4,)            | float32 |
+objects/id                  | Tensor               |                 | int64   |
+objects/label               | ClassLabel           |                 | int64   |
+objects/segmentation        | Image                | (None, None, 1) | uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

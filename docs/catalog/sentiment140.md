@@ -65,24 +65,24 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'date': Text(shape=(), dtype=tf.string),
-    'polarity': tf.int32,
-    'query': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'user': Text(shape=(), dtype=tf.string),
+    'date': Text(shape=(), dtype=object),
+    'polarity': int32,
+    'query': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
+    'user': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-date     | Text         |       | tf.string |
-polarity | Tensor       |       | tf.int32  |
-query    | Text         |       | tf.string |
-text     | Text         |       | tf.string |
-user     | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+date     | Text         |       | object |
+polarity | Tensor       |       | int32  |
+query    | Text         |       | object |
+text     | Text         |       | object |
+user     | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

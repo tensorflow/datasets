@@ -54,80 +54,80 @@ via https://waymo.com/open/licensing/
 ```python
 FeaturesDict({
     'camera_FRONT': FeaturesDict({
-        'image': Image(shape=(1280, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(1280, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'camera_FRONT_LEFT': FeaturesDict({
-        'image': Image(shape=(1280, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(1280, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'camera_FRONT_RIGHT': FeaturesDict({
-        'image': Image(shape=(1280, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(1280, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'camera_SIDE_LEFT': FeaturesDict({
-        'image': Image(shape=(886, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(886, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'camera_SIDE_RIGHT': FeaturesDict({
-        'image': Image(shape=(886, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(886, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'context': FeaturesDict({
-        'name': Text(shape=(), dtype=tf.string),
+        'name': Text(shape=(), dtype=object),
     }),
-    'timestamp_micros': tf.int64,
+    'timestamp_micros': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape           | Dtype      | Description
-:----------------------------- | :----------- | :-------------- | :--------- | :----------
-                               | FeaturesDict |                 |            |
-camera_FRONT                   | FeaturesDict |                 |            |
-camera_FRONT/image             | Image        | (1280, 1920, 3) | tf.uint8   |
-camera_FRONT/labels            | Sequence     |                 |            |
-camera_FRONT/labels/bbox       | BBoxFeature  | (4,)            | tf.float32 |
-camera_FRONT/labels/type       | ClassLabel   |                 | tf.int64   |
-camera_FRONT_LEFT              | FeaturesDict |                 |            |
-camera_FRONT_LEFT/image        | Image        | (1280, 1920, 3) | tf.uint8   |
-camera_FRONT_LEFT/labels       | Sequence     |                 |            |
-camera_FRONT_LEFT/labels/bbox  | BBoxFeature  | (4,)            | tf.float32 |
-camera_FRONT_LEFT/labels/type  | ClassLabel   |                 | tf.int64   |
-camera_FRONT_RIGHT             | FeaturesDict |                 |            |
-camera_FRONT_RIGHT/image       | Image        | (1280, 1920, 3) | tf.uint8   |
-camera_FRONT_RIGHT/labels      | Sequence     |                 |            |
-camera_FRONT_RIGHT/labels/bbox | BBoxFeature  | (4,)            | tf.float32 |
-camera_FRONT_RIGHT/labels/type | ClassLabel   |                 | tf.int64   |
-camera_SIDE_LEFT               | FeaturesDict |                 |            |
-camera_SIDE_LEFT/image         | Image        | (886, 1920, 3)  | tf.uint8   |
-camera_SIDE_LEFT/labels        | Sequence     |                 |            |
-camera_SIDE_LEFT/labels/bbox   | BBoxFeature  | (4,)            | tf.float32 |
-camera_SIDE_LEFT/labels/type   | ClassLabel   |                 | tf.int64   |
-camera_SIDE_RIGHT              | FeaturesDict |                 |            |
-camera_SIDE_RIGHT/image        | Image        | (886, 1920, 3)  | tf.uint8   |
-camera_SIDE_RIGHT/labels       | Sequence     |                 |            |
-camera_SIDE_RIGHT/labels/bbox  | BBoxFeature  | (4,)            | tf.float32 |
-camera_SIDE_RIGHT/labels/type  | ClassLabel   |                 | tf.int64   |
-context                        | FeaturesDict |                 |            |
-context/name                   | Text         |                 | tf.string  |
-timestamp_micros               | Tensor       |                 | tf.int64   |
+Feature                        | Class        | Shape           | Dtype   | Description
+:----------------------------- | :----------- | :-------------- | :------ | :----------
+                               | FeaturesDict |                 |         |
+camera_FRONT                   | FeaturesDict |                 |         |
+camera_FRONT/image             | Image        | (1280, 1920, 3) | uint8   |
+camera_FRONT/labels            | Sequence     |                 |         |
+camera_FRONT/labels/bbox       | BBoxFeature  | (4,)            | float32 |
+camera_FRONT/labels/type       | ClassLabel   |                 | int64   |
+camera_FRONT_LEFT              | FeaturesDict |                 |         |
+camera_FRONT_LEFT/image        | Image        | (1280, 1920, 3) | uint8   |
+camera_FRONT_LEFT/labels       | Sequence     |                 |         |
+camera_FRONT_LEFT/labels/bbox  | BBoxFeature  | (4,)            | float32 |
+camera_FRONT_LEFT/labels/type  | ClassLabel   |                 | int64   |
+camera_FRONT_RIGHT             | FeaturesDict |                 |         |
+camera_FRONT_RIGHT/image       | Image        | (1280, 1920, 3) | uint8   |
+camera_FRONT_RIGHT/labels      | Sequence     |                 |         |
+camera_FRONT_RIGHT/labels/bbox | BBoxFeature  | (4,)            | float32 |
+camera_FRONT_RIGHT/labels/type | ClassLabel   |                 | int64   |
+camera_SIDE_LEFT               | FeaturesDict |                 |         |
+camera_SIDE_LEFT/image         | Image        | (886, 1920, 3)  | uint8   |
+camera_SIDE_LEFT/labels        | Sequence     |                 |         |
+camera_SIDE_LEFT/labels/bbox   | BBoxFeature  | (4,)            | float32 |
+camera_SIDE_LEFT/labels/type   | ClassLabel   |                 | int64   |
+camera_SIDE_RIGHT              | FeaturesDict |                 |         |
+camera_SIDE_RIGHT/image        | Image        | (886, 1920, 3)  | uint8   |
+camera_SIDE_RIGHT/labels       | Sequence     |                 |         |
+camera_SIDE_RIGHT/labels/bbox  | BBoxFeature  | (4,)            | float32 |
+camera_SIDE_RIGHT/labels/type  | ClassLabel   |                 | int64   |
+context                        | FeaturesDict |                 |         |
+context/name                   | Text         |                 | object  |
+timestamp_micros               | Tensor       |                 | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

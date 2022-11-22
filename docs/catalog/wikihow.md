@@ -51,8 +51,6 @@ clean up extra commas.
 
 *   **Download size**: `5.21 MiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -61,7 +59,7 @@ clean up extra commas.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -90,6 +88,8 @@ clean up extra commas.
 *   **Config description**: Use the concatenation of all paragraphs as the
     articles and the bold lines as the reference summaries
 
+*   **Dataset size**: `531.56 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -102,20 +102,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'headline': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'headline': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-headline | Text         |       | tf.string |
-text     | Text         |       | tf.string |
-title    | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+headline | Text         |       | object |
+text     | Text         |       | object |
+title    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -158,6 +158,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: use each paragraph and its summary.
 
+*   **Dataset size**: `1.07 GiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -170,24 +172,24 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'headline': Text(shape=(), dtype=tf.string),
-    'overview': Text(shape=(), dtype=tf.string),
-    'sectionLabel': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'headline': Text(shape=(), dtype=object),
+    'overview': Text(shape=(), dtype=object),
+    'sectionLabel': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature      | Class        | Shape | Dtype     | Description
-:----------- | :----------- | :---- | :-------- | :----------
-             | FeaturesDict |       |           |
-headline     | Text         |       | tf.string |
-overview     | Text         |       | tf.string |
-sectionLabel | Text         |       | tf.string |
-text         | Text         |       | tf.string |
-title        | Text         |       | tf.string |
+Feature      | Class        | Shape | Dtype  | Description
+:----------- | :----------- | :---- | :----- | :----------
+             | FeaturesDict |       |        |
+headline     | Text         |       | object |
+overview     | Text         |       | object |
+sectionLabel | Text         |       | object |
+text         | Text         |       | object |
+title        | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

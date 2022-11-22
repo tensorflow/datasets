@@ -47,18 +47,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'features': Tensor(shape=(24,), dtype=tf.int32),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'features': Tensor(shape=(24,), dtype=int32),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype    | Description
-:------- | :----------- | :---- | :------- | :----------
-         | FeaturesDict |       |          |
-features | Tensor       | (24,) | tf.int32 |
-label    | ClassLabel   |       | tf.int64 |
+Feature  | Class        | Shape | Dtype | Description
+:------- | :----------- | :---- | :---- | :----------
+         | FeaturesDict |       |       |
+features | Tensor       | (24,) | int32 |
+label    | ClassLabel   |       | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

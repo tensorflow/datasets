@@ -46,11 +46,11 @@ set aside 20% (1016 images) of the data for testing.
 
     *   **`2.0.0`** (default): No release notes.
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `317.94 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -63,28 +63,28 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'currframe': tf.float64,
-    'image': Image(shape=(480, 720, 3), dtype=tf.uint8),
-    'moviename': Text(shape=(), dtype=tf.string),
-    'poselet_hit_idx': Sequence(tf.uint16),
-    'torsobox': BBoxFeature(shape=(4,), dtype=tf.float32),
-    'xcoords': Sequence(tf.float64),
-    'ycoords': Sequence(tf.float64),
+    'currframe': float64,
+    'image': Image(shape=(480, 720, 3), dtype=uint8),
+    'moviename': Text(shape=(), dtype=object),
+    'poselet_hit_idx': Sequence(uint16),
+    'torsobox': BBoxFeature(shape=(4,), dtype=float32),
+    'xcoords': Sequence(float64),
+    'ycoords': Sequence(float64),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class            | Shape         | Dtype      | Description
-:-------------- | :--------------- | :------------ | :--------- | :----------
-                | FeaturesDict     |               |            |
-currframe       | Tensor           |               | tf.float64 |
-image           | Image            | (480, 720, 3) | tf.uint8   |
-moviename       | Text             |               | tf.string  |
-poselet_hit_idx | Sequence(Tensor) | (None,)       | tf.uint16  |
-torsobox        | BBoxFeature      | (4,)          | tf.float32 |
-xcoords         | Sequence(Tensor) | (None,)       | tf.float64 |
-ycoords         | Sequence(Tensor) | (None,)       | tf.float64 |
+Feature         | Class            | Shape         | Dtype   | Description
+:-------------- | :--------------- | :------------ | :------ | :----------
+                | FeaturesDict     |               |         |
+currframe       | Tensor           |               | float64 |
+image           | Image            | (480, 720, 3) | uint8   |
+moviename       | Text             |               | object  |
+poselet_hit_idx | Sequence(Tensor) | (None,)       | uint16  |
+torsobox        | BBoxFeature      | (4,)          | float32 |
+xcoords         | Sequence(Tensor) | (None,)       | float64 |
+ycoords         | Sequence(Tensor) | (None,)       | float64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

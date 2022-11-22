@@ -103,18 +103,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'float_features': Tensor(shape=(None, 699), dtype=tf.float64),
-    'label': Tensor(shape=(None,), dtype=tf.float64),
+    'float_features': Tensor(shape=(None, 699), dtype=float64),
+    'label': Tensor(shape=(None,), dtype=float64),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape       | Dtype      | Description
-:------------- | :----------- | :---------- | :--------- | :----------
-               | FeaturesDict |             |            |
-float_features | Tensor       | (None, 699) | tf.float64 |
-label          | Tensor       | (None,)     | tf.float64 |
+Feature        | Class        | Shape       | Dtype   | Description
+:------------- | :----------- | :---------- | :------ | :----------
+               | FeaturesDict |             |         |
+float_features | Tensor       | (None, 699) | float64 |
+label          | Tensor       | (None,)     | float64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -173,18 +173,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'float_features': Tensor(shape=(None, 700), dtype=tf.float64),
-    'label': Tensor(shape=(None,), dtype=tf.float64),
+    'float_features': Tensor(shape=(None, 700), dtype=float64),
+    'label': Tensor(shape=(None,), dtype=float64),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape       | Dtype      | Description
-:------------- | :----------- | :---------- | :--------- | :----------
-               | FeaturesDict |             |            |
-float_features | Tensor       | (None, 700) | tf.float64 |
-label          | Tensor       | (None,)     | tf.float64 |
+Feature        | Class        | Shape       | Dtype   | Description
+:------------- | :----------- | :---------- | :------ | :----------
+               | FeaturesDict |             |         |
+float_features | Tensor       | (None, 700) | float64 |
+label          | Tensor       | (None,)     | float64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

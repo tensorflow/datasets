@@ -31,12 +31,6 @@ resources, and a new public leaderboard.
 
     *   **`1.0.2`** (default): No release notes.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -60,6 +54,12 @@ resources, and a new public leaderboard.
 
 *   **Download size**: `3.93 MiB`
 
+*   **Dataset size**: `10.75 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split          | Examples
@@ -72,22 +72,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'passage': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'passage': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-idx      | Tensor       |       | tf.int32  |
-label    | ClassLabel   |       | tf.int64  |
-passage  | Text         |       | tf.string |
-question | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+idx      | Tensor       |       | int32  |
+label    | ClassLabel   |       | int64  |
+passage  | Text         |       | object |
+question | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -166,6 +166,12 @@ get the correct citation for each contained dataset.
 
 *   **Download size**: `73.71 KiB`
 
+*   **Dataset size**: `229.28 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split          | Examples
@@ -178,22 +184,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=object),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-hypothesis | Text         |       | tf.string |
-idx        | Tensor       |       | tf.int32  |
-label      | ClassLabel   |       | tf.int64  |
-premise    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | object |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -271,6 +277,12 @@ get the correct citation for each contained dataset.
 
 *   **Download size**: `42.96 KiB`
 
+*   **Dataset size**: `196.00 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split          | Examples
@@ -283,26 +295,26 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'choice1': Text(shape=(), dtype=tf.string),
-    'choice2': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'premise': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'choice1': Text(shape=(), dtype=object),
+    'choice2': Text(shape=(), dtype=object),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'premise': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-choice1  | Text         |       | tf.string |
-choice2  | Text         |       | tf.string |
-idx      | Tensor       |       | tf.int32  |
-label    | ClassLabel   |       | tf.int64  |
-premise  | Text         |       | tf.string |
-question | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+choice1  | Text         |       | object |
+choice2  | Text         |       | object |
+idx      | Tensor       |       | int32  |
+label    | ClassLabel   |       | int64  |
+premise  | Text         |       | object |
+question | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -381,6 +393,12 @@ get the correct citation for each contained dataset.
 
 *   **Download size**: `1.06 MiB`
 
+*   **Dataset size**: `70.39 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split          | Examples
@@ -393,31 +411,31 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
+    'answer': Text(shape=(), dtype=object),
     'idx': FeaturesDict({
-        'answer': tf.int32,
-        'paragraph': tf.int32,
-        'question': tf.int32,
+        'answer': int32,
+        'paragraph': int32,
+        'question': int32,
     }),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'paragraph': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'paragraph': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape | Dtype     | Description
-:------------ | :----------- | :---- | :-------- | :----------
-              | FeaturesDict |       |           |
-answer        | Text         |       | tf.string |
-idx           | FeaturesDict |       |           |
-idx/answer    | Tensor       |       | tf.int32  |
-idx/paragraph | Tensor       |       | tf.int32  |
-idx/question  | Tensor       |       | tf.int32  |
-label         | ClassLabel   |       | tf.int64  |
-paragraph     | Text         |       | tf.string |
-question      | Text         |       | tf.string |
+Feature       | Class        | Shape | Dtype  | Description
+:------------ | :----------- | :---- | :----- | :----------
+              | FeaturesDict |       |        |
+answer        | Text         |       | object |
+idx           | FeaturesDict |       |        |
+idx/answer    | Tensor       |       | int32  |
+idx/paragraph | Tensor       |       | int32  |
+idx/question  | Tensor       |       | int32  |
+label         | ClassLabel   |       | int64  |
+paragraph     | Text         |       | object |
+question      | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -493,6 +511,12 @@ get the correct citation for each contained dataset.
 
 *   **Download size**: `49.36 MiB`
 
+*   **Dataset size**: `166.40 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split          | Examples
@@ -505,29 +529,29 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answers': Sequence(Text(shape=(), dtype=tf.string)),
-    'entities': Sequence(Text(shape=(), dtype=tf.string)),
+    'answers': Sequence(Text(shape=(), dtype=object)),
+    'entities': Sequence(Text(shape=(), dtype=object)),
     'idx': FeaturesDict({
-        'passage': tf.int32,
-        'query': tf.int32,
+        'passage': int32,
+        'query': int32,
     }),
-    'passage': Text(shape=(), dtype=tf.string),
-    'query': Text(shape=(), dtype=tf.string),
+    'passage': Text(shape=(), dtype=object),
+    'query': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class          | Shape   | Dtype     | Description
-:---------- | :------------- | :------ | :-------- | :----------
-            | FeaturesDict   |         |           |
-answers     | Sequence(Text) | (None,) | tf.string |
-entities    | Sequence(Text) | (None,) | tf.string |
-idx         | FeaturesDict   |         |           |
-idx/passage | Tensor         |         | tf.int32  |
-idx/query   | Tensor         |         | tf.int32  |
-passage     | Text           |         | tf.string |
-query       | Text           |         | tf.string |
+Feature     | Class          | Shape   | Dtype  | Description
+:---------- | :------------- | :------ | :----- | :----------
+            | FeaturesDict   |         |        |
+answers     | Sequence(Text) | (None,) | object |
+entities    | Sequence(Text) | (None,) | object |
+idx         | FeaturesDict   |         |        |
+idx/passage | Tensor         |         | int32  |
+idx/query   | Tensor         |         | int32  |
+passage     | Text           |         | object |
+query       | Text           |         | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -608,6 +632,12 @@ get the correct citation for each contained dataset.
 
 *   **Download size**: `733.32 KiB`
 
+*   **Dataset size**: `2.15 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split          | Examples
@@ -620,22 +650,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=object),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'premise': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-hypothesis | Text         |       | tf.string |
-idx        | Tensor       |       | tf.int32  |
-label      | ClassLabel   |       | tf.int64  |
-premise    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | object |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -736,6 +766,12 @@ get the correct citation for each contained dataset.
 
 *   **Download size**: `386.93 KiB`
 
+*   **Dataset size**: `1.67 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split          | Examples
@@ -748,32 +784,32 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'end1': tf.int32,
-    'end2': tf.int32,
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
-    'start1': tf.int32,
-    'start2': tf.int32,
-    'word': Text(shape=(), dtype=tf.string),
+    'end1': int32,
+    'end2': int32,
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=object),
+    'sentence2': Text(shape=(), dtype=object),
+    'start1': int32,
+    'start2': int32,
+    'word': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype     | Description
-:-------- | :----------- | :---- | :-------- | :----------
-          | FeaturesDict |       |           |
-end1      | Tensor       |       | tf.int32  |
-end2      | Tensor       |       | tf.int32  |
-idx       | Tensor       |       | tf.int32  |
-label     | ClassLabel   |       | tf.int64  |
-sentence1 | Text         |       | tf.string |
-sentence2 | Text         |       | tf.string |
-start1    | Tensor       |       | tf.int32  |
-start2    | Tensor       |       | tf.int32  |
-word      | Text         |       | tf.string |
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+end1      | Tensor       |       | int32  |
+end2      | Tensor       |       | int32  |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | object |
+sentence2 | Text         |       | object |
+start1    | Tensor       |       | int32  |
+start2    | Tensor       |       | int32  |
+word      | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -879,6 +915,12 @@ phrases (and thus more choices for the model), but low to no ambiguity.
 
 *   **Download size**: `31.98 KiB`
 
+*   **Dataset size**: `219.70 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split          | Examples
@@ -891,28 +933,28 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'span1_index': tf.int32,
-    'span1_text': Text(shape=(), dtype=tf.string),
-    'span2_index': tf.int32,
-    'span2_text': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'span1_index': int32,
+    'span1_text': Text(shape=(), dtype=object),
+    'span2_index': int32,
+    'span2_text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape | Dtype     | Description
-:---------- | :----------- | :---- | :-------- | :----------
-            | FeaturesDict |       |           |
-idx         | Tensor       |       | tf.int32  |
-label       | ClassLabel   |       | tf.int64  |
-span1_index | Tensor       |       | tf.int32  |
-span1_text  | Text         |       | tf.string |
-span2_index | Tensor       |       | tf.int32  |
-span2_text  | Text         |       | tf.string |
-text        | Text         |       | tf.string |
+Feature     | Class        | Shape | Dtype  | Description
+:---------- | :----------- | :---- | :----- | :----------
+            | FeaturesDict |       |        |
+idx         | Tensor       |       | int32  |
+label       | ClassLabel   |       | int64  |
+span1_index | Tensor       |       | int32  |
+span1_text  | Text         |       | object |
+span2_index | Tensor       |       | int32  |
+span2_text  | Text         |       | object |
+text        | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1014,6 +1056,12 @@ text.
 
 *   **Download size**: `31.98 KiB`
 
+*   **Dataset size**: `219.70 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split          | Examples
@@ -1026,28 +1074,28 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'span1_index': tf.int32,
-    'span1_text': Text(shape=(), dtype=tf.string),
-    'span2_index': tf.int32,
-    'span2_text': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'span1_index': int32,
+    'span1_text': Text(shape=(), dtype=object),
+    'span2_index': int32,
+    'span2_text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape | Dtype     | Description
-:---------- | :----------- | :---- | :-------- | :----------
-            | FeaturesDict |       |           |
-idx         | Tensor       |       | tf.int32  |
-label       | ClassLabel   |       | tf.int64  |
-span1_index | Tensor       |       | tf.int32  |
-span1_text  | Text         |       | tf.string |
-span2_index | Tensor       |       | tf.int32  |
-span2_text  | Text         |       | tf.string |
-text        | Text         |       | tf.string |
+Feature     | Class        | Shape | Dtype  | Description
+:---------- | :----------- | :---- | :----- | :----------
+            | FeaturesDict |       |        |
+idx         | Tensor       |       | int32  |
+label       | ClassLabel   |       | int64  |
+span1_index | Tensor       |       | int32  |
+span1_text  | Text         |       | object |
+span2_index | Tensor       |       | int32  |
+span2_text  | Text         |       | object |
+text        | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1128,6 +1176,12 @@ get the correct citation for each contained dataset.
 
 *   **Download size**: `33.15 KiB`
 
+*   **Dataset size**: `290.53 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split    | Examples
@@ -1138,22 +1192,22 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=object),
+    'sentence2': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype     | Description
-:-------- | :----------- | :---- | :-------- | :----------
-          | FeaturesDict |       |           |
-idx       | Tensor       |       | tf.int32  |
-label     | ClassLabel   |       | tf.int64  |
-sentence1 | Text         |       | tf.string |
-sentence2 | Text         |       | tf.string |
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | object |
+sentence2 | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1230,6 +1284,12 @@ get the correct citation for each contained dataset.
 
 *   **Download size**: `10.17 KiB`
 
+*   **Dataset size**: `69.75 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split    | Examples
@@ -1240,22 +1300,22 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=object),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'premise': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-hypothesis | Text         |       | tf.string |
-idx        | Tensor       |       | tf.int32  |
-label      | ClassLabel   |       | tf.int64  |
-premise    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | object |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | object |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

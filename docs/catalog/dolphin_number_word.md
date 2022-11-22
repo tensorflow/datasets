@@ -50,26 +50,26 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'ans': Text(shape=(), dtype=tf.string),
-    'equations': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'index': tf.int32,
-    'sources': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
+    'ans': Text(shape=(), dtype=object),
+    'equations': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'index': int32,
+    'sources': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype     | Description
-:-------- | :----------- | :---- | :-------- | :----------
-          | FeaturesDict |       |           |
-ans       | Text         |       | tf.string |
-equations | Text         |       | tf.string |
-id        | Text         |       | tf.string |
-index     | Tensor       |       | tf.int32  |
-sources   | Text         |       | tf.string |
-text      | Text         |       | tf.string |
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+ans       | Text         |       | object |
+equations | Text         |       | object |
+id        | Text         |       | object |
+index     | Tensor       |       | int32  |
+sources   | Text         |       | object |
+text      | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -83,24 +83,24 @@ Split            | Examples
 
 ```python
 FeaturesDict({
-    'illumination': Tensor(shape=(3,), dtype=tf.float32),
-    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'pose_mat': Tensor(shape=(3, 3), dtype=tf.float32),
-    'pose_quat': Tensor(shape=(4,), dtype=tf.float32),
+    'illumination': Tensor(shape=(3,), dtype=float32),
+    'image': Image(shape=(256, 256, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'pose_mat': Tensor(shape=(3, 3), dtype=float32),
+    'pose_quat': Tensor(shape=(4,), dtype=float32),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature      | Class        | Shape         | Dtype      | Description
-:----------- | :----------- | :------------ | :--------- | :----------
-             | FeaturesDict |               |            |
-illumination | Tensor       | (3,)          | tf.float32 |
-image        | Image        | (256, 256, 3) | tf.uint8   |
-label        | ClassLabel   |               | tf.int64   |
-pose_mat     | Tensor       | (3, 3)        | tf.float32 |
-pose_quat    | Tensor       | (4,)          | tf.float32 |
+Feature      | Class        | Shape         | Dtype   | Description
+:----------- | :----------- | :------------ | :------ | :----------
+             | FeaturesDict |               |         |
+illumination | Tensor       | (3,)          | float32 |
+image        | Image        | (256, 256, 3) | uint8   |
+label        | ClassLabel   |               | int64   |
+pose_mat     | Tensor       | (3, 3)        | float32 |
+pose_quat    | Tensor       | (4,)          | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

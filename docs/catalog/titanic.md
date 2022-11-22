@@ -52,42 +52,42 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'age': tf.float32,
-    'boat': tf.string,
-    'body': tf.int32,
-    'cabin': tf.string,
-    'embarked': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-    'fare': tf.float32,
-    'home.dest': tf.string,
-    'name': tf.string,
-    'parch': tf.int32,
-    'pclass': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'sex': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sibsp': tf.int32,
-    'survived': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'ticket': tf.string,
+    'age': float32,
+    'boat': object,
+    'body': int32,
+    'cabin': object,
+    'embarked': ClassLabel(shape=(), dtype=int64, num_classes=4),
+    'fare': float32,
+    'home.dest': object,
+    'name': object,
+    'parch': int32,
+    'pclass': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'sex': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sibsp': int32,
+    'survived': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'ticket': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape | Dtype      | Description
-:-------- | :----------- | :---- | :--------- | :----------
-          | FeaturesDict |       |            |
-age       | Tensor       |       | tf.float32 |
-boat      | Tensor       |       | tf.string  |
-body      | Tensor       |       | tf.int32   |
-cabin     | Tensor       |       | tf.string  |
-embarked  | ClassLabel   |       | tf.int64   |
-fare      | Tensor       |       | tf.float32 |
-home.dest | Tensor       |       | tf.string  |
-name      | Tensor       |       | tf.string  |
-parch     | Tensor       |       | tf.int32   |
-pclass    | ClassLabel   |       | tf.int64   |
-sex       | ClassLabel   |       | tf.int64   |
-sibsp     | Tensor       |       | tf.int32   |
-survived  | ClassLabel   |       | tf.int64   |
-ticket    | Tensor       |       | tf.string  |
+Feature   | Class        | Shape | Dtype   | Description
+:-------- | :----------- | :---- | :------ | :----------
+          | FeaturesDict |       |         |
+age       | Tensor       |       | float32 |
+boat      | Tensor       |       | object  |
+body      | Tensor       |       | int32   |
+cabin     | Tensor       |       | object  |
+embarked  | ClassLabel   |       | int64   |
+fare      | Tensor       |       | float32 |
+home.dest | Tensor       |       | object  |
+name      | Tensor       |       | object  |
+parch     | Tensor       |       | int32   |
+pclass    | ClassLabel   |       | int64   |
+sex       | ClassLabel   |       | int64   |
+sibsp     | Tensor       |       | int32   |
+survived  | ClassLabel   |       | int64   |
+ticket    | Tensor       |       | object  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -62,18 +62,18 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int16),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
+    'audio': Audio(shape=(None,), dtype=int16),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=12),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape   | Dtype    | Description
-:------ | :----------- | :------ | :------- | :----------
-        | FeaturesDict |         |          |
-audio   | Audio        | (None,) | tf.int16 |
-label   | ClassLabel   |         | tf.int64 |
+Feature | Class        | Shape   | Dtype | Description
+:------ | :----------- | :------ | :---- | :----------
+        | FeaturesDict |         |       |
+audio   | Audio        | (None,) | int16 |
+label   | ClassLabel   |         | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

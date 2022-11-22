@@ -115,20 +115,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=object),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature            | Class        | Shape           | Dtype     | Description
-:----------------- | :----------- | :-------------- | :-------- | :----------
-                   | FeaturesDict |                 |           |
-image_id           | Text         |                 | tf.string |
-image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
-segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
+Feature            | Class        | Shape           | Dtype  | Description
+:----------------- | :----------- | :-------------- | :----- | :----------
+                   | FeaturesDict |                 |        |
+image_id           | Text         |                 | object |
+image_left         | Image        | (1024, 2048, 3) | uint8  |
+segmentation_label | Image        | (1024, 2048, 1) | uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -186,20 +186,20 @@ Split           | Examples
 
 ```python
 FeaturesDict({
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=object),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature            | Class        | Shape           | Dtype     | Description
-:----------------- | :----------- | :-------------- | :-------- | :----------
-                   | FeaturesDict |                 |           |
-image_id           | Text         |                 | tf.string |
-image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
-segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
+Feature            | Class        | Shape           | Dtype  | Description
+:----------------- | :----------- | :-------------- | :----- | :----------
+                   | FeaturesDict |                 |        |
+image_id           | Text         |                 | object |
+image_left         | Image        | (1024, 2048, 3) | uint8  |
+segmentation_label | Image        | (1024, 2048, 1) | uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -256,22 +256,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=uint8),
+    'image_id': Text(shape=(), dtype=object),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape           | Dtype     | Description
-:------------ | :----------- | :-------------- | :-------- | :----------
-              | FeaturesDict |                 |           |
-disparity_map | Image        | (1024, 2048, 1) | tf.uint8  |
-image_id      | Text         |                 | tf.string |
-image_left    | Image        | (1024, 2048, 3) | tf.uint8  |
-image_right   | Image        | (1024, 2048, 3) | tf.uint8  |
+Feature       | Class        | Shape           | Dtype  | Description
+:------------ | :----------- | :-------------- | :----- | :----------
+              | FeaturesDict |                 |        |
+disparity_map | Image        | (1024, 2048, 1) | uint8  |
+image_id      | Text         |                 | object |
+image_left    | Image        | (1024, 2048, 3) | uint8  |
+image_right   | Image        | (1024, 2048, 3) | uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -329,22 +329,22 @@ Split           | Examples
 
 ```python
 FeaturesDict({
-    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=uint8),
+    'image_id': Text(shape=(), dtype=object),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape           | Dtype     | Description
-:------------ | :----------- | :-------------- | :-------- | :----------
-              | FeaturesDict |                 |           |
-disparity_map | Image        | (1024, 2048, 1) | tf.uint8  |
-image_id      | Text         |                 | tf.string |
-image_left    | Image        | (1024, 2048, 3) | tf.uint8  |
-image_right   | Image        | (1024, 2048, 3) | tf.uint8  |
+Feature       | Class        | Shape           | Dtype  | Description
+:------------ | :----------- | :-------------- | :----- | :----------
+              | FeaturesDict |                 |        |
+disparity_map | Image        | (1024, 2048, 1) | uint8  |
+image_id      | Text         |                 | object |
+image_left    | Image        | (1024, 2048, 3) | uint8  |
+image_right   | Image        | (1024, 2048, 3) | uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

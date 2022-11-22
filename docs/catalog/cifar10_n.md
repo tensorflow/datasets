@@ -79,42 +79,42 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'aggre_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'random_label1': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'random_label2': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'random_label3': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'worker1_id': tf.int64,
-    'worker1_time': tf.float32,
-    'worker2_id': tf.int64,
-    'worker2_time': tf.float32,
-    'worker3_id': tf.int64,
-    'worker3_time': tf.float32,
-    'worse_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'aggre_label': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'id': Text(shape=(), dtype=object),
+    'image': Image(shape=(32, 32, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'random_label1': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'random_label2': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'random_label3': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'worker1_id': int64,
+    'worker1_time': float32,
+    'worker2_id': int64,
+    'worker2_time': float32,
+    'worker3_id': int64,
+    'worker3_time': float32,
+    'worse_label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape       | Dtype      | Description
-:------------ | :----------- | :---------- | :--------- | :----------
-              | FeaturesDict |             |            |
-aggre_label   | ClassLabel   |             | tf.int64   |
-id            | Text         |             | tf.string  |
-image         | Image        | (32, 32, 3) | tf.uint8   |
-label         | ClassLabel   |             | tf.int64   |
-random_label1 | ClassLabel   |             | tf.int64   |
-random_label2 | ClassLabel   |             | tf.int64   |
-random_label3 | ClassLabel   |             | tf.int64   |
-worker1_id    | Tensor       |             | tf.int64   |
-worker1_time  | Tensor       |             | tf.float32 |
-worker2_id    | Tensor       |             | tf.int64   |
-worker2_time  | Tensor       |             | tf.float32 |
-worker3_id    | Tensor       |             | tf.int64   |
-worker3_time  | Tensor       |             | tf.float32 |
-worse_label   | ClassLabel   |             | tf.int64   |
+Feature       | Class        | Shape       | Dtype   | Description
+:------------ | :----------- | :---------- | :------ | :----------
+              | FeaturesDict |             |         |
+aggre_label   | ClassLabel   |             | int64   |
+id            | Text         |             | object  |
+image         | Image        | (32, 32, 3) | uint8   |
+label         | ClassLabel   |             | int64   |
+random_label1 | ClassLabel   |             | int64   |
+random_label2 | ClassLabel   |             | int64   |
+random_label3 | ClassLabel   |             | int64   |
+worker1_id    | Tensor       |             | int64   |
+worker1_time  | Tensor       |             | float32 |
+worker2_id    | Tensor       |             | int64   |
+worker2_time  | Tensor       |             | float32 |
+worker3_id    | Tensor       |             | int64   |
+worker3_time  | Tensor       |             | float32 |
+worse_label   | ClassLabel   |             | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

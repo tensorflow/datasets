@@ -45,34 +45,34 @@ recognition and speech-to-text translation.
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
-    'gender': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'id': Scalar(shape=(), dtype=tf.int32),
-    'lang_group_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=7),
-    'lang_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
-    'language': Text(shape=(), dtype=tf.string),
-    'num_samples': Scalar(shape=(), dtype=tf.int32),
-    'path': tf.string,
-    'raw_transcription': Text(shape=(), dtype=tf.string),
-    'transcription': Text(shape=(), dtype=tf.string),
+    'audio': Audio(shape=(None,), dtype=int64),
+    'gender': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'id': Scalar(shape=(), dtype=int32),
+    'lang_group_id': ClassLabel(shape=(), dtype=int64, num_classes=7),
+    'lang_id': ClassLabel(shape=(), dtype=int64, num_classes=102),
+    'language': Text(shape=(), dtype=object),
+    'num_samples': Scalar(shape=(), dtype=int32),
+    'path': object,
+    'raw_transcription': Text(shape=(), dtype=object),
+    'transcription': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape   | Dtype     | Description
-:---------------- | :----------- | :------ | :-------- | :----------
-                  | FeaturesDict |         |           |
-audio             | Audio        | (None,) | tf.int64  |
-gender            | ClassLabel   |         | tf.int64  |
-id                | Scalar       |         | tf.int32  | Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id.
-lang_group_id     | ClassLabel   |         | tf.int64  |
-lang_id           | ClassLabel   |         | tf.int64  |
-language          | Text         |         | tf.string | Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag.
-num_samples       | Scalar       |         | tf.int32  | Total number of frames in the audio
-path              | Tensor       |         | tf.string |
-raw_transcription | Text         |         | tf.string | Raw Transcription from FLoRes.
-transcription     | Text         |         | tf.string | Normalized transcription.
+Feature           | Class        | Shape   | Dtype  | Description
+:---------------- | :----------- | :------ | :----- | :----------
+                  | FeaturesDict |         |        |
+audio             | Audio        | (None,) | int64  |
+gender            | ClassLabel   |         | int64  |
+id                | Scalar       |         | int32  | Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id.
+lang_group_id     | ClassLabel   |         | int64  |
+lang_id           | ClassLabel   |         | int64  |
+language          | Text         |         | object | Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag.
+num_samples       | Scalar       |         | int32  | Total number of frames in the audio
+path              | Tensor       |         | object |
+raw_transcription | Text         |         | object | Raw Transcription from FLoRes.
+transcription     | Text         |         | object | Normalized transcription.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

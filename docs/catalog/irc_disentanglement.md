@@ -58,24 +58,24 @@ Split          | Examples
 ```python
 FeaturesDict({
     'day': Sequence({
-        'id': Text(shape=(), dtype=tf.string),
-        'parents': Sequence(Text(shape=(), dtype=tf.string)),
-        'text': Text(shape=(), dtype=tf.string),
-        'timestamp': Text(shape=(), dtype=tf.string),
+        'id': Text(shape=(), dtype=object),
+        'parents': Sequence(Text(shape=(), dtype=object)),
+        'text': Text(shape=(), dtype=object),
+        'timestamp': Text(shape=(), dtype=object),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class          | Shape   | Dtype     | Description
-:------------ | :------------- | :------ | :-------- | :----------
-              | FeaturesDict   |         |           |
-day           | Sequence       |         |           |
-day/id        | Text           |         | tf.string |
-day/parents   | Sequence(Text) | (None,) | tf.string |
-day/text      | Text           |         | tf.string |
-day/timestamp | Text           |         | tf.string |
+Feature       | Class          | Shape   | Dtype  | Description
+:------------ | :------------- | :------ | :----- | :----------
+              | FeaturesDict   |         |        |
+day           | Sequence       |         |        |
+day/id        | Text           |         | object |
+day/parents   | Sequence(Text) | (None,) | object |
+day/text      | Text           |         | object |
+day/timestamp | Text           |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

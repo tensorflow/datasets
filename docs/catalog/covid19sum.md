@@ -67,41 +67,41 @@ Split | Examples
 
 ```python
 FeaturesDict({
-    'abstract': tf.string,
-    'authors': tf.string,
+    'abstract': object,
+    'authors': object,
     'body_text': Sequence({
-        'section': tf.string,
-        'text': tf.string,
+        'section': object,
+        'text': object,
     }),
-    'doi': tf.string,
-    'journal': tf.string,
-    'license': tf.string,
-    'publish_time': tf.string,
-    'sha': tf.string,
-    'source_x': tf.string,
-    'title': tf.string,
-    'url': tf.string,
+    'doi': object,
+    'journal': object,
+    'license': object,
+    'publish_time': object,
+    'sha': object,
+    'source_x': object,
+    'title': object,
+    'url': object,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype     | Description
-:---------------- | :----------- | :---- | :-------- | :----------
-                  | FeaturesDict |       |           |
-abstract          | Tensor       |       | tf.string |
-authors           | Tensor       |       | tf.string |
-body_text         | Sequence     |       |           |
-body_text/section | Tensor       |       | tf.string |
-body_text/text    | Tensor       |       | tf.string |
-doi               | Tensor       |       | tf.string |
-journal           | Tensor       |       | tf.string |
-license           | Tensor       |       | tf.string |
-publish_time      | Tensor       |       | tf.string |
-sha               | Tensor       |       | tf.string |
-source_x          | Tensor       |       | tf.string |
-title             | Tensor       |       | tf.string |
-url               | Tensor       |       | tf.string |
+Feature           | Class        | Shape | Dtype  | Description
+:---------------- | :----------- | :---- | :----- | :----------
+                  | FeaturesDict |       |        |
+abstract          | Tensor       |       | object |
+authors           | Tensor       |       | object |
+body_text         | Sequence     |       |        |
+body_text/section | Tensor       |       | object |
+body_text/text    | Tensor       |       | object |
+doi               | Tensor       |       | object |
+journal           | Tensor       |       | object |
+license           | Tensor       |       | object |
+publish_time      | Tensor       |       | object |
+sha               | Tensor       |       | object |
+source_x          | Tensor       |       | object |
+title             | Tensor       |       | object |
+url               | Tensor       |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

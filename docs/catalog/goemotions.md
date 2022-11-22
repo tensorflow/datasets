@@ -57,72 +57,72 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'admiration': tf.bool,
-    'amusement': tf.bool,
-    'anger': tf.bool,
-    'annoyance': tf.bool,
-    'approval': tf.bool,
-    'caring': tf.bool,
-    'comment_text': Text(shape=(), dtype=tf.string),
-    'confusion': tf.bool,
-    'curiosity': tf.bool,
-    'desire': tf.bool,
-    'disappointment': tf.bool,
-    'disapproval': tf.bool,
-    'disgust': tf.bool,
-    'embarrassment': tf.bool,
-    'excitement': tf.bool,
-    'fear': tf.bool,
-    'gratitude': tf.bool,
-    'grief': tf.bool,
-    'joy': tf.bool,
-    'love': tf.bool,
-    'nervousness': tf.bool,
-    'neutral': tf.bool,
-    'optimism': tf.bool,
-    'pride': tf.bool,
-    'realization': tf.bool,
-    'relief': tf.bool,
-    'remorse': tf.bool,
-    'sadness': tf.bool,
-    'surprise': tf.bool,
+    'admiration': bool,
+    'amusement': bool,
+    'anger': bool,
+    'annoyance': bool,
+    'approval': bool,
+    'caring': bool,
+    'comment_text': Text(shape=(), dtype=object),
+    'confusion': bool,
+    'curiosity': bool,
+    'desire': bool,
+    'disappointment': bool,
+    'disapproval': bool,
+    'disgust': bool,
+    'embarrassment': bool,
+    'excitement': bool,
+    'fear': bool,
+    'gratitude': bool,
+    'grief': bool,
+    'joy': bool,
+    'love': bool,
+    'nervousness': bool,
+    'neutral': bool,
+    'optimism': bool,
+    'pride': bool,
+    'realization': bool,
+    'relief': bool,
+    'remorse': bool,
+    'sadness': bool,
+    'surprise': bool,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape | Dtype     | Description
-:------------- | :----------- | :---- | :-------- | :----------
-               | FeaturesDict |       |           |
-admiration     | Tensor       |       | tf.bool   |
-amusement      | Tensor       |       | tf.bool   |
-anger          | Tensor       |       | tf.bool   |
-annoyance      | Tensor       |       | tf.bool   |
-approval       | Tensor       |       | tf.bool   |
-caring         | Tensor       |       | tf.bool   |
-comment_text   | Text         |       | tf.string |
-confusion      | Tensor       |       | tf.bool   |
-curiosity      | Tensor       |       | tf.bool   |
-desire         | Tensor       |       | tf.bool   |
-disappointment | Tensor       |       | tf.bool   |
-disapproval    | Tensor       |       | tf.bool   |
-disgust        | Tensor       |       | tf.bool   |
-embarrassment  | Tensor       |       | tf.bool   |
-excitement     | Tensor       |       | tf.bool   |
-fear           | Tensor       |       | tf.bool   |
-gratitude      | Tensor       |       | tf.bool   |
-grief          | Tensor       |       | tf.bool   |
-joy            | Tensor       |       | tf.bool   |
-love           | Tensor       |       | tf.bool   |
-nervousness    | Tensor       |       | tf.bool   |
-neutral        | Tensor       |       | tf.bool   |
-optimism       | Tensor       |       | tf.bool   |
-pride          | Tensor       |       | tf.bool   |
-realization    | Tensor       |       | tf.bool   |
-relief         | Tensor       |       | tf.bool   |
-remorse        | Tensor       |       | tf.bool   |
-sadness        | Tensor       |       | tf.bool   |
-surprise       | Tensor       |       | tf.bool   |
+Feature        | Class        | Shape | Dtype  | Description
+:------------- | :----------- | :---- | :----- | :----------
+               | FeaturesDict |       |        |
+admiration     | Tensor       |       | bool   |
+amusement      | Tensor       |       | bool   |
+anger          | Tensor       |       | bool   |
+annoyance      | Tensor       |       | bool   |
+approval       | Tensor       |       | bool   |
+caring         | Tensor       |       | bool   |
+comment_text   | Text         |       | object |
+confusion      | Tensor       |       | bool   |
+curiosity      | Tensor       |       | bool   |
+desire         | Tensor       |       | bool   |
+disappointment | Tensor       |       | bool   |
+disapproval    | Tensor       |       | bool   |
+disgust        | Tensor       |       | bool   |
+embarrassment  | Tensor       |       | bool   |
+excitement     | Tensor       |       | bool   |
+fear           | Tensor       |       | bool   |
+gratitude      | Tensor       |       | bool   |
+grief          | Tensor       |       | bool   |
+joy            | Tensor       |       | bool   |
+love           | Tensor       |       | bool   |
+nervousness    | Tensor       |       | bool   |
+neutral        | Tensor       |       | bool   |
+optimism       | Tensor       |       | bool   |
+pride          | Tensor       |       | bool   |
+realization    | Tensor       |       | bool   |
+relief         | Tensor       |       | bool   |
+remorse        | Tensor       |       | bool   |
+sadness        | Tensor       |       | bool   |
+surprise       | Tensor       |       | bool   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

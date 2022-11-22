@@ -38,11 +38,11 @@ justifying the classification
 
 *   **Download size**: `1.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `62.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -56,22 +56,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'evidences': Sequence(Text(shape=(), dtype=tf.string)),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'passage': Text(shape=(), dtype=tf.string),
-    'query_and_answer': Text(shape=(), dtype=tf.string),
+    'evidences': Sequence(Text(shape=(), dtype=object)),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'passage': Text(shape=(), dtype=object),
+    'query_and_answer': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class          | Shape   | Dtype     | Description
-:--------------- | :------------- | :------ | :-------- | :----------
-                 | FeaturesDict   |         |           |
-evidences        | Sequence(Text) | (None,) | tf.string |
-label            | ClassLabel     |         | tf.int64  |
-passage          | Text           |         | tf.string |
-query_and_answer | Text           |         | tf.string |
+Feature          | Class          | Shape   | Dtype  | Description
+:--------------- | :------------- | :------ | :----- | :----------
+                 | FeaturesDict   |         |        |
+evidences        | Sequence(Text) | (None,) | object |
+label            | ClassLabel     |         | int64  |
+passage          | Text           |         | object |
+query_and_answer | Text           |         | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

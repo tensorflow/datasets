@@ -53,18 +53,18 @@ summary: Patent abastract.
 
 ```python
 FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
+    'abstract': Text(shape=(), dtype=object),
+    'description': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape | Dtype     | Description
-:---------- | :----------- | :---- | :-------- | :----------
-            | FeaturesDict |       |           |
-abstract    | Text         |       | tf.string |
-description | Text         |       | tf.string |
+Feature     | Class        | Shape | Dtype  | Description
+:---------- | :----------- | :---- | :----- | :----------
+            | FeaturesDict |       |        |
+abstract    | Text         |       | object |
+description | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

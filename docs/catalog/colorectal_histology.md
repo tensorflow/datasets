@@ -36,11 +36,11 @@ x 150 x 3 RGB image of one of 8 classes.
 
 *   **Download size**: `246.14 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `179.23 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -52,20 +52,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(150, 150, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+    'filename': Text(shape=(), dtype=object),
+    'image': Image(shape=(150, 150, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape         | Dtype     | Description
-:------- | :----------- | :------------ | :-------- | :----------
-         | FeaturesDict |               |           |
-filename | Text         |               | tf.string |
-image    | Image        | (150, 150, 3) | tf.uint8  |
-label    | ClassLabel   |               | tf.int64  |
+Feature  | Class        | Shape         | Dtype  | Description
+:------- | :----------- | :------------ | :----- | :----------
+         | FeaturesDict |               |        |
+filename | Text         |               | object |
+image    | Image        | (150, 150, 3) | uint8  |
+label    | ClassLabel   |               | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -57,30 +57,30 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer0': Text(shape=(), dtype=tf.string),
-    'answer1': Text(shape=(), dtype=tf.string),
-    'answer2': Text(shape=(), dtype=tf.string),
-    'answer3': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-    'question': Text(shape=(), dtype=tf.string),
+    'answer0': Text(shape=(), dtype=object),
+    'answer1': Text(shape=(), dtype=object),
+    'answer2': Text(shape=(), dtype=object),
+    'answer3': Text(shape=(), dtype=object),
+    'context': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=object),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=4),
+    'question': Text(shape=(), dtype=object),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-answer0  | Text         |       | tf.string |
-answer1  | Text         |       | tf.string |
-answer2  | Text         |       | tf.string |
-answer3  | Text         |       | tf.string |
-context  | Text         |       | tf.string |
-id       | Text         |       | tf.string |
-label    | ClassLabel   |       | tf.int64  |
-question | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+answer0  | Text         |       | object |
+answer1  | Text         |       | object |
+answer2  | Text         |       | object |
+answer3  | Text         |       | object |
+context  | Text         |       | object |
+id       | Text         |       | object |
+label    | ClassLabel   |       | int64  |
+question | Text         |       | object |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
