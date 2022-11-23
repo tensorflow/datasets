@@ -60,6 +60,7 @@ from tensorflow_datasets.text.paws_x_wiki import PawsXWiki
 from tensorflow_datasets.text.pg19 import Pg19
 from tensorflow_datasets.text.piqa import PIQA
 from tensorflow_datasets.text.qa4mre import Qa4mre
+from tensorflow_datasets.text.qrecc import QReCC
 from tensorflow_datasets.text.quac import Quac
 from tensorflow_datasets.text.quality import Quality
 from tensorflow_datasets.text.race import Race

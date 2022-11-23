@@ -1,0 +1,40 @@
+[
+  {
+      "Context": [],
+      "Question": "What can you tell me about Gary Cherone?",
+      "Rewrite": "What can you tell me about Gary Cherone?",
+      "Answer": "Gary Francis Caine Cherone is an American rock singer and songwriter, known for his work as the lead vocalist of Extreme and for his short stint for Van Halen.",
+      "Answer_URL": "https://en.wikipedia.org/wiki/Van_Halen",
+      "Conversation_no": 1,
+      "Turn_no": 1,
+      "Conversation_source": "quac"
+  },
+  {
+      "Context": [
+          "What can you tell me about Gary Cherone?",
+          "Gary Francis Caine Cherone is an American rock singer and songwriter, known for his work as the lead vocalist of Extreme and for his short stint for Van Halen."
+      ],
+      "Question": "Did Gary sing well?",
+      "Rewrite": "Did Gary Cherone sing well?",
+      "Answer": "Yes, Gary Cherone is also known for his work as the lead vocalist of the Boston rock group Extreme.",
+      "Answer_URL": "https://en.wikipedia.org/wiki/Van_Halen",
+      "Conversation_no": 1,
+      "Turn_no": 2,
+      "Conversation_source": "quac"
+  },
+  {
+      "Context": [
+          "What can you tell me about Gary Cherone?",
+          "Gary Francis Caine Cherone is an American rock singer and songwriter, known for his work as the lead vocalist of Extreme and for his short stint for Van Halen.",
+          "Did Gary Cherone sing well?",
+          "Yes, Gary Cherone is also known for his work as the lead vocalist of the Boston rock group Extreme."
+      ],
+      "Question": "What significant fact can you tell me about Gary that you liked?",
+      "Rewrite": "What significant fact can you tell me about Gary Cherone that you liked?",
+      "Answer": "I like that Gary Cherone remained in contact and on good terms with Van Halen.",
+      "Answer_URL": "https://en.wikipedia.org/wiki/Van_Halen",
+      "Conversation_no": 1,
+      "Turn_no": 3,
+      "Conversation_source": "quac"
+  }
+]
