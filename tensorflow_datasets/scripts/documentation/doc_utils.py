@@ -39,7 +39,7 @@ NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
 
 
 def get_pwc_catalog_urls() -> Mapping[str, str]:
-  with open(constants.PWC_LINKS_PATH, 'r') as f:
+  with open(tfds.core.tfds_path() / constants.PWC_LINKS_REL_PATH, 'r') as f:
     return json.load(f)
 
 
