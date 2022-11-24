@@ -1318,6 +1318,7 @@ protein_net/casp12/1.0.0
 protein_net/casp7/1.0.0
 protein_net/casp8/1.0.0
 protein_net/casp9/1.0.0
+q_re_cc/1.0.0
 qa4mre/2011.main.DE/0.1.0
 qa4mre/2011.main.EN/0.1.0
 qa4mre/2011.main.ES/0.1.0
