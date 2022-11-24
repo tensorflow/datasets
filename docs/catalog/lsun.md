@@ -34,18 +34,9 @@ tower etc.
     *   **`3.1.0`** (default): Add builder config for missing `person` object
         category, and add `id` to the feature dict
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -93,6 +84,17 @@ image   | Image        | (None, None, 3) | uint8  |
 
 *   **Config description**: Images of category classroom
 
+*   **Download size**: `3.06 GiB`
+
+*   **Dataset size**: `3.15 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 168,103
+`'validation'` | 300
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -138,6 +140,17 @@ dataButton.addEventListener('click', async () => {
 ## lsun/bedroom
 
 *   **Config description**: Images of category bedroom
+
+*   **Download size**: `42.77 GiB`
+
+*   **Dataset size**: `44.48 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'train'`      | 3,033,042
+`'validation'` | 300
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -185,6 +198,17 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category bridge
 
+*   **Download size**: `15.35 GiB`
+
+*   **Dataset size**: `15.80 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 818,687
+`'validation'` | 300
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -230,6 +254,17 @@ dataButton.addEventListener('click', async () => {
 ## lsun/church_outdoor
 
 *   **Config description**: Images of category church_outdoor
+
+*   **Download size**: `2.29 GiB`
+
+*   **Dataset size**: `2.36 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 126,227
+`'validation'` | 300
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -277,6 +312,17 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category conference_room
 
+*   **Download size**: `3.78 GiB`
+
+*   **Dataset size**: `3.90 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 229,069
+`'validation'` | 300
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -322,6 +368,17 @@ dataButton.addEventListener('click', async () => {
 ## lsun/dining_room
 
 *   **Config description**: Images of category dining_room
+
+*   **Download size**: `10.80 GiB`
+
+*   **Dataset size**: `11.17 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 657,571
+`'validation'` | 300
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -369,6 +426,17 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category kitchen
 
+*   **Download size**: `33.34 GiB`
+
+*   **Dataset size**: `34.61 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'train'`      | 2,212,277
+`'validation'` | 300
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -414,6 +482,17 @@ dataButton.addEventListener('click', async () => {
 ## lsun/living_room
 
 *   **Config description**: Images of category living_room
+
+*   **Download size**: `21.23 GiB`
+
+*   **Dataset size**: `21.97 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'train'`      | 1,315,802
+`'validation'` | 300
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -461,6 +540,17 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category restaurant
 
+*   **Download size**: `12.57 GiB`
+
+*   **Dataset size**: `12.88 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 626,331
+`'validation'` | 300
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -506,6 +596,17 @@ dataButton.addEventListener('click', async () => {
 ## lsun/tower
 
 *   **Config description**: Images of category tower
+
+*   **Download size**: `11.19 GiB`
+
+*   **Dataset size**: `11.61 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 708,264
+`'validation'` | 300
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -553,6 +654,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category airplane
 
+*   **Download size**: `33.72 GiB`
+
+*   **Dataset size**: `29.96 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,530,696
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -564,6 +675,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/bicycle
 
 *   **Config description**: Images of category bicycle
+
+*   **Download size**: `129.24 GiB`
+
+*   **Dataset size**: `119.72 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,347,211
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -577,6 +698,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category bird
 
+*   **Download size**: `65.10 GiB`
+
+*   **Dataset size**: `59.78 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,310,362
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -588,6 +719,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/boat
 
 *   **Config description**: Images of category boat
+
+*   **Download size**: `85.66 GiB`
+
+*   **Dataset size**: `79.61 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,651,165
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -601,6 +742,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category bottle
 
+*   **Download size**: `63.66 GiB`
+
+*   **Dataset size**: `56.79 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,202,760
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -612,6 +763,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/bus
 
 *   **Config description**: Images of category bus
+
+*   **Download size**: `24.33 GiB`
+
+*   **Dataset size**: `21.93 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 695,891
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -625,6 +786,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category car
 
+*   **Download size**: `173.03 GiB`
+
+*   **Dataset size**: `159.63 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,520,756
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -636,6 +807,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/cat
 
 *   **Config description**: Images of category cat
+
+*   **Download size**: `41.69 GiB`
+
+*   **Dataset size**: `36.38 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,657,266
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -649,6 +830,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category chair
 
+*   **Download size**: `115.79 GiB`
+
+*   **Dataset size**: `105.04 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,037,807
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -660,6 +851,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/cow
 
 *   **Config description**: Images of category cow
+
+*   **Download size**: `14.94 GiB`
+
+*   **Dataset size**: `13.22 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 377,379
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -673,6 +874,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category dining_table
 
+*   **Download size**: `48.27 GiB`
+
+*   **Dataset size**: `44.20 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,537,123
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -684,6 +895,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/dog
 
 *   **Config description**: Images of category dog
+
+*   **Download size**: `144.92 GiB`
+
+*   **Dataset size**: `133.33 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,054,817
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -697,6 +918,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category horse
 
+*   **Download size**: `68.79 GiB`
+
+*   **Dataset size**: `63.99 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,000,340
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -708,6 +939,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/motorbike
 
 *   **Config description**: Images of category motorbike
+
+*   **Download size**: `41.86 GiB`
+
+*   **Dataset size**: `38.65 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,194,101
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -721,6 +962,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category potted_plant
 
+*   **Download size**: `42.70 GiB`
+
+*   **Dataset size**: `39.71 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,104,859
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -732,6 +983,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/sheep
 
 *   **Config description**: Images of category sheep
+
+*   **Download size**: `17.75 GiB`
+
+*   **Dataset size**: `15.88 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 418,983
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -745,6 +1006,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category sofa
 
+*   **Download size**: `56.33 GiB`
+
+*   **Dataset size**: `50.33 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,365,870
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -757,6 +1028,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Images of category train
 
+*   **Download size**: `42.72 GiB`
+
+*   **Dataset size**: `39.40 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,148,020
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -768,6 +1049,16 @@ dataButton.addEventListener('click', async () => {
 ## lsun/tv-monitor
 
 *   **Config description**: Images of category tv-monitor
+
+*   **Download size**: `45.70 GiB`
+
+*   **Dataset size**: `39.47 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,463,284
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
