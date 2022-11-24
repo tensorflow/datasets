@@ -32,12 +32,14 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
                        parameterized.TestCase):
 
   @parameterized.parameters(
-      (tf.uint8, 3),
-      (tf.uint16, 3),
-      (tf.uint8, 4),
+      (np.uint8, np.uint8, 3),
+      (tf.uint8, np.uint8, 3),
+      (np.uint16, np.uint16, 3),
+      (tf.uint16, np.uint16, 3),
+      (np.uint8, np.uint8, 4),
+      (tf.uint8, np.uint8, 4),
   )
-  def test_images(self, dtype, channels):
-    np_dtype = dtype.as_numpy_dtype
+  def test_images(self, dtype, np_dtype, channels):
     img = randint(256, size=(128, 100, channels), dtype=np_dtype)
     img_other_shape = randint(256, size=(64, 200, channels), dtype=np_dtype)
 
@@ -56,7 +58,7 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
             [[0, 0, 255, 255], [255, 255, 0, 255], [126, 127, 128, 255]],
         ],
         dtype=np_dtype)[:, :, :channels]  # Truncate (h, w, 4) -> (h, w, c)
-    if dtype == tf.uint16:
+    if dtype == np.uint16 or dtype == tf.uint16:
       img_file_expected_content *= 257  # Scale int16 images
 
     self.assertFeature(
@@ -125,7 +127,7 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
             use_colormap=True,
         ),
         shape=(32, 64, 1),
-        dtype=tf.uint8,
+        dtype=np.uint8,
         tests=[
             testing.FeatureExpectationItem(
                 value=img_shaped,
@@ -143,14 +145,18 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
             _use_colormap=True,
         ))
 
-  def test_images_float(self):
+  @parameterized.parameters(
+      (np.float32,),
+      (tf.float32,),
+  )
+  def test_images_float(self, dtype):
     img = np.random.rand(28, 28, 1).astype(np.float32)
     img_other_shape = np.random.rand(12, 34, 1).astype(np.float32)
 
     self.assertFeature(
-        feature=features_lib.Image(shape=(None, None, 1), dtype=tf.float32),
+        feature=features_lib.Image(shape=(None, None, 1), dtype=dtype),
         shape=(None, None, 1),
-        dtype=tf.float32,
+        dtype=dtype,
         tests=[
             # Numpy array
             testing.FeatureExpectationItem(
@@ -178,8 +184,11 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
 @pytest.mark.parametrize(
     'shape, dtype, encoding_format, err_msg',
     [
+        (None, np.uint16, r'jpeg', 'Acceptable `dtype` for jpeg:'),
         (None, tf.uint16, r'jpeg', 'Acceptable `dtype` for jpeg:'),
+        (None, np.float32, None, 'only support single-channel'),
         (None, tf.float32, None, 'only support single-channel'),
+        ((None, None, 1), np.float64, None, 'Acceptable `dtype`'),
         ((None, None, 1), tf.float64, None, 'Acceptable `dtype`'),
     ],
 )

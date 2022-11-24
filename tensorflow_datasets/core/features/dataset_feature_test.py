@@ -15,6 +15,7 @@
 
 """Tests for tensorflow_datasets.core.features.dataset_feature."""
 
+from absl.testing import parameterized
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -30,16 +31,18 @@ class IncrementDecoder(decode_lib.Decoder):
     return serialized_example + 1
 
 
-class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
+class DatasetDictFeatureTest(parameterized.TestCase,
+                             testing.FeatureExpectationsTestCase):
 
-  def test_int(self):
+  @parameterized.parameters((np.int32), (tf.int32))
+  def test_int(self, dtype):
 
     self.assertFeatureEagerOnly(
-        feature=feature_lib.Dataset({'int': tf.int32}),
+        feature=feature_lib.Dataset({'int': dtype}),
         shape={'int': ()},  # shape of each element of the dataset
-        dtype={'int': tf.int32},
+        dtype={'int': dtype},
         serialized_info={
-            'int': feature_lib.TensorInfo(shape=(None,), dtype=tf.int32),
+            'int': feature_lib.TensorInfo(shape=(None,), dtype=dtype),
         },
         tests=[
             # Python array
@@ -71,7 +74,8 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
         ],
         test_attributes=dict(_length=None))
 
-  def test_label(self):
+  @parameterized.parameters((np.int64), (tf.int64))
+  def test_label(self, dtype):
 
     self.assertFeatureEagerOnly(
         feature=feature_lib.Dataset(
@@ -80,9 +84,9 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
             },
             length=None),
         shape={'label': ()},
-        dtype={'label': tf.int64},
+        dtype={'label': dtype},
         serialized_info={
-            'label': feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
+            'label': feature_lib.TensorInfo(shape=(None,), dtype=dtype),
         },
         tests=[
             testing.FeatureExpectationItem(
@@ -107,14 +111,18 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
         ],
         test_attributes=dict(_length=None))
 
-  def test_nested(self):
+  @parameterized.parameters(
+      (np.object_, np.int32, np.uint8),
+      (tf.string, tf.int32, tf.uint8),
+  )
+  def test_nested(self, a_dtype, bc_dtype, bd_dtype):
 
     self.assertFeatureEagerOnly(
         feature=feature_lib.Dataset({
-            'a': tf.string,
+            'a': a_dtype,
             'b': {
-                'c': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
-                'd': tf.uint8,
+                'c': feature_lib.Tensor(shape=(4, 2), dtype=bc_dtype),
+                'd': bd_dtype,
             }
         }, length=None),
         shape={
@@ -125,10 +133,10 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
             }
         },
         dtype={
-            'a': tf.string,
+            'a': np.object_,
             'b': {
-                'c': tf.int32,
-                'd': tf.uint8,
+                'c': np.int32,
+                'd': np.uint8,
             }
         },
         tests=[
@@ -169,14 +177,18 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
-  def test_input_dict(self):
+  @parameterized.parameters(
+      (np.object_, np.int32, np.uint8),
+      (tf.string, tf.int32, tf.uint8),
+  )
+  def test_input_dict(self, a_dtype, bc_dtype, bd_dtype):
 
     self.assertFeatureEagerOnly(
         feature=feature_lib.Dataset({
-            'a': tf.string,
+            'a': a_dtype,
             'b': {
-                'c': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
-                'd': tf.uint8,
+                'c': feature_lib.Tensor(shape=(4, 2), dtype=bc_dtype),
+                'd': bd_dtype,
             }
         }, length=None),
         shape={
@@ -187,10 +199,10 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
             }
         },
         dtype={
-            'a': tf.string,
+            'a': np.object_,
             'b': {
-                'c': tf.int32,
-                'd': tf.uint8,
+                'c': np.int32,
+                'd': np.uint8,
             }
         },
         tests=[
@@ -243,13 +255,17 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
-  def test_decoding(self):
+  @parameterized.parameters(
+      (np.object_, np.uint8),
+      (tf.string, tf.uint8),
+  )
+  def test_decoding(self, a_dtype, bc_dtype):
 
     self.assertFeatureEagerOnly(
         feature=feature_lib.Dataset({
-            'a': tf.string,
+            'a': a_dtype,
             'b': {
-                'c': tf.uint8,
+                'c': bc_dtype,
             }
         },
                                     length=None),
@@ -260,9 +276,9 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
             }
         },
         dtype={
-            'a': tf.string,
+            'a': np.object_,
             'b': {
-                'c': tf.uint8,
+                'c': np.uint8,
             }
         },
         tests=[
@@ -290,14 +306,16 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
 
-class DatasetFeatureTest(testing.FeatureExpectationsTestCase):
+class DatasetFeatureTest(parameterized.TestCase,
+                         testing.FeatureExpectationsTestCase):
 
-  def test_int(self):
+  @parameterized.parameters((np.int32), (tf.int32))
+  def test_int(self, dtype):
 
     self.assertFeatureEagerOnly(
-        feature=feature_lib.Dataset(tf.int32, length=3),
+        feature=feature_lib.Dataset(dtype, length=3),
         shape=(),
-        dtype=tf.int32,
+        dtype=np.int32,
         tests=[
             # Python array
             testing.FeatureExpectationItem(
@@ -324,7 +342,7 @@ class DatasetFeatureTest(testing.FeatureExpectationsTestCase):
         feature=feature_lib.Dataset(
             feature_lib.ClassLabel(names=['left', 'right']),),
         shape=(),
-        dtype=tf.int64,
+        dtype=np.int64,
         tests=[
             testing.FeatureExpectationItem(
                 value=['right', 'left', 'left'],

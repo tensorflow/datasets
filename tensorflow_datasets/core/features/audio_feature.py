@@ -53,7 +53,7 @@ class Audio(tensor_feature.Tensor):
       *,
       file_format: Optional[str] = None,
       shape: utils.Shape = (None,),
-      dtype: Union[np.dtype, tf.dtypes.DType] = np.int64,
+      dtype: type_utils.TfdsDType = np.int64,
       sample_rate: Optional[int] = None,
       encoding: Union[str, Encoding] = Encoding.NONE,
       doc: feature_lib.DocArg = None,
@@ -137,7 +137,7 @@ class Audio(tensor_feature.Tensor):
       return cls(
           file_format=value['file_format'],
           shape=tuple(value['shape']),
-          dtype=tf.dtypes.as_dtype(value['dtype']),
+          dtype=feature_lib.dtype_from_str(value['dtype']),
           sample_rate=value['sample_rate'],
       )
     return cls(
@@ -150,7 +150,7 @@ class Audio(tensor_feature.Tensor):
   def to_json_content(self) -> feature_pb2.AudioFeature:
     return feature_pb2.AudioFeature(
         shape=feature_lib.to_shape_proto(self.shape),
-        dtype=feature_lib.dtype_name(self.dtype),
+        dtype=feature_lib.dtype_to_string(self.dtype),
         file_format=self._file_format,
         sample_rate=self._sample_rate,
         encoding=self._encoding.name,

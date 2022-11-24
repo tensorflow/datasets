@@ -43,7 +43,7 @@ class Dataset(sequence_feature.Sequence):
 
   ```python
     features=tfds.features.FeatureDict({
-     'agent_id': tf.string,
+     'agent_id': np.object_,
       'episode': tfds.features.Dataset({
         'observation': tfds.features.Image(),
         'reward': tfds.features.Image(),

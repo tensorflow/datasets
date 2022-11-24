@@ -28,7 +28,6 @@ from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Json = type_utils.Json
 
@@ -73,7 +72,7 @@ class BBoxFeature(tensor_feature.Tensor):
       *,
       doc: feature_lib.DocArg = None,
   ):
-    super(BBoxFeature, self).__init__(shape=(4,), dtype=tf.float32, doc=doc)
+    super(BBoxFeature, self).__init__(shape=(4,), dtype=np.float32, doc=doc)
 
   def encode_example(self, bbox):
     """See base class for details."""
@@ -110,7 +109,7 @@ class BBoxFeature(tensor_feature.Tensor):
   def to_json_content(self) -> feature_pb2.BoundingBoxFeature:
     return feature_pb2.BoundingBoxFeature(
         shape=feature_lib.to_shape_proto(self._shape),
-        dtype=feature_lib.dtype_name(self._dtype),
+        dtype=feature_lib.dtype_to_string(self._dtype),
     )
 
 

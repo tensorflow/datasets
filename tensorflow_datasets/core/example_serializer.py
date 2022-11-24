@@ -137,7 +137,7 @@ def _dict_to_tf_example(
   return tf.train.Example(features=tf.train.Features(feature=features))
 
 
-def _is_string(item):
+def _is_string(item) -> bool:
   """Check if the object contains string or bytes."""
   if isinstance(item, (six.binary_type, six.string_types)):
     return True
@@ -173,11 +173,11 @@ def _item_to_tf_feature(
     v = v.astype(int)
 
   vals = v.flat  # Convert v into a 1-d array (without extra copy)
-  if utils.is_np_sub_dtype(v.dtype, np.integer):
+  if tf_utils.is_integer(v.dtype):
     return tf.train.Feature(int64_list=tf.train.Int64List(value=vals))
-  elif utils.is_np_sub_dtype(v.dtype, np.floating):
+  elif tf_utils.is_floating(v.dtype):
     return tf.train.Feature(float_list=tf.train.FloatList(value=vals))
-  elif utils.is_same_tf_dtype(tensor_info.dtype, tf.string):
+  elif tf_utils.is_string(tensor_info.np_dtype):
     vals = [tf.compat.as_bytes(x) for x in vals]
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=vals))
   else:
@@ -243,7 +243,7 @@ def _add_ragged_fields(example_data, tensor_info: feature_lib.TensorInfo):
     return (example_data, tensor_info)
   # Multiple level sequence:
   else:
-    tensor_info_length = feature_lib.TensorInfo(shape=(None,), dtype=tf.int64)
+    tensor_info_length = feature_lib.TensorInfo(shape=(None,), dtype=np.int64)
     ragged_attr_dict = {
         "ragged_row_lengths_{}".format(i): (length, tensor_info_length)
         for i, length in enumerate(nested_row_lengths)

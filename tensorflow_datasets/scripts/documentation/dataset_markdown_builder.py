@@ -404,7 +404,7 @@ class FeatureDocumentationSection(Section):
     def format_row(doc: feature_lib.CatalogFeatureDocumentation) -> str:
       if doc.tensor_info:
         shape = str(doc.tensor_info.shape) if doc.tensor_info.shape else ''
-        dtype = feature_lib.dtype_name(
+        dtype = feature_lib.dtype_to_string(
             doc.tensor_info.np_dtype) if doc.tensor_info.dtype else ''
       else:
         shape = ''

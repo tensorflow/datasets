@@ -30,11 +30,14 @@ class FeatureTensorTest(
 ):
 
   @parameterized.parameters([
-      (features_lib.Encoding.NONE,),
-      (features_lib.Encoding.ZLIB,),
-      (features_lib.Encoding.BYTES,),
+      (np.float32, features_lib.Encoding.NONE),
+      (tf.float32, features_lib.Encoding.NONE),
+      (np.float32, features_lib.Encoding.ZLIB),
+      (tf.float32, features_lib.Encoding.ZLIB),
+      (np.float32, features_lib.Encoding.BYTES),
+      (tf.float32, features_lib.Encoding.BYTES),
   ])
-  def test_shape_static(self, encoding: features_lib.Encoding):
+  def test_shape_static(self, dtype, encoding: features_lib.Encoding):
     np_input = np.random.rand(2, 3).astype(np.float32)
     array_input = [
         [1, 2, 3],
@@ -44,10 +47,10 @@ class FeatureTensorTest(
     self.assertFeature(
         feature=features_lib.Tensor(
             shape=(2, 3),
-            dtype=tf.float32,
+            dtype=dtype,
             encoding=encoding,
         ),
-        dtype=tf.float32,
+        dtype=dtype,
         shape=(2, 3),
         tests=[
             # Np array
@@ -80,21 +83,24 @@ class FeatureTensorTest(
     )
 
   @parameterized.parameters([
-      (features_lib.Encoding.NONE,),
-      (features_lib.Encoding.ZLIB,),
-      (features_lib.Encoding.BYTES,),
+      (np.int32, features_lib.Encoding.NONE),
+      (tf.int32, features_lib.Encoding.NONE),
+      (np.int32, features_lib.Encoding.ZLIB),
+      (tf.int32, features_lib.Encoding.ZLIB),
+      (np.int32, features_lib.Encoding.BYTES),
+      (tf.int32, features_lib.Encoding.BYTES),
   ])
-  def test_shape_dynamic(self, encoding: features_lib.Encoding):
+  def test_shape_dynamic(self, dtype, encoding: features_lib.Encoding):
     np_input_dynamic_1 = np.random.randint(256, size=(2, 3, 2), dtype=np.int32)
     np_input_dynamic_2 = np.random.randint(256, size=(5, 3, 2), dtype=np.int32)
 
     self.assertFeature(
         feature=features_lib.Tensor(
             shape=(None, 3, 2),
-            dtype=tf.int32,
+            dtype=dtype,
             encoding=encoding,
         ),
-        dtype=tf.int32,
+        dtype=dtype,
         shape=(None, 3, 2),
         tests=[
             testing.FeatureExpectationItem(
@@ -114,21 +120,25 @@ class FeatureTensorTest(
         ])
 
   @parameterized.parameters([
-      (features_lib.Encoding.NONE,),
-      (features_lib.Encoding.ZLIB,),
-      (features_lib.Encoding.BYTES,),
+      (np.int32, features_lib.Encoding.NONE),
+      (tf.int32, features_lib.Encoding.NONE),
+      (np.int32, features_lib.Encoding.ZLIB),
+      (tf.int32, features_lib.Encoding.ZLIB),
+      (np.int32, features_lib.Encoding.BYTES),
+      (tf.int32, features_lib.Encoding.BYTES),
   ])
-  def test_shape_dynamic_none_second(self, encoding: features_lib.Encoding):
+  def test_shape_dynamic_none_second(self, dtype,
+                                     encoding: features_lib.Encoding):
     np_input_dynamic_1 = np.random.randint(256, size=(3, 2, 2), dtype=np.int32)
     np_input_dynamic_2 = np.random.randint(256, size=(3, 5, 2), dtype=np.int32)
 
     self.assertFeature(
         feature=features_lib.Tensor(
             shape=(3, None, 2),  # None not at the first position.
-            dtype=tf.int32,
+            dtype=dtype,
             encoding=encoding,
         ),
-        dtype=tf.int32,
+        dtype=dtype,
         shape=(3, None, 2),
         tests=[
             testing.FeatureExpectationItem(
@@ -149,11 +159,12 @@ class FeatureTensorTest(
 
   @parameterized.parameters([
       # (features_lib.Encoding.NONE,),  # Multiple unknown dims requires bytes
-      (
-          features_lib.Encoding.ZLIB,),
-      (features_lib.Encoding.BYTES,),
+      (np.uint8, features_lib.Encoding.ZLIB),
+      (tf.uint8, features_lib.Encoding.ZLIB),
+      (np.uint8, features_lib.Encoding.BYTES),
+      (tf.uint8, features_lib.Encoding.BYTES),
   ])
-  def test_features_shape_dynamic_multi_none(self,
+  def test_features_shape_dynamic_multi_none(self, dtype,
                                              encoding: features_lib.Encoding):
     x = np.random.randint(256, size=(2, 3, 1), dtype=np.uint8)
     x_other_shape = np.random.randint(256, size=(4, 4, 1), dtype=np.uint8)
@@ -162,11 +173,11 @@ class FeatureTensorTest(
     self.assertFeature(
         feature=features_lib.Tensor(
             shape=(None, None, 1),
-            dtype=tf.uint8,
+            dtype=dtype,
             encoding=encoding,
         ),
         shape=(None, None, 1),
-        dtype=tf.uint8,
+        dtype=dtype,
         tests=[
             testing.FeatureExpectationItem(
                 value=x,
@@ -186,12 +197,16 @@ class FeatureTensorTest(
 
   @parameterized.parameters([
       # NONE only support single unknown dim, not 2.
-      (features_lib.Encoding.BYTES, (2, None, 1)),
-      (features_lib.Encoding.ZLIB, (None, None, 1)),
-      (features_lib.Encoding.BYTES, (None, None, 1)),
+      (np.uint8, features_lib.Encoding.BYTES, (2, None, 1)),
+      (tf.uint8, features_lib.Encoding.BYTES, (2, None, 1)),
+      (np.uint8, features_lib.Encoding.ZLIB, (None, None, 1)),
+      (tf.uint8, features_lib.Encoding.ZLIB, (None, None, 1)),
+      (np.uint8, features_lib.Encoding.BYTES, (None, None, 1)),
+      (tf.uint8, features_lib.Encoding.BYTES, (None, None, 1)),
   ])
   def test_features_multi_none_sequence(
       self,
+      dtype,
       encoding: features_lib.Encoding,
       shape,
   ):
@@ -202,11 +217,11 @@ class FeatureTensorTest(
         feature=features_lib.Sequence(
             features_lib.Tensor(
                 shape=shape,
-                dtype=tf.uint8,
+                dtype=dtype,
                 encoding=encoding,
             ),),
         shape=(None,) + shape,
-        dtype=tf.uint8,
+        dtype=dtype,
         tests=[
             testing.FeatureExpectationItem(
                 value=x,
@@ -222,18 +237,21 @@ class FeatureTensorTest(
     )
 
   @parameterized.parameters([
-      (features_lib.Encoding.NONE,),
-      (features_lib.Encoding.ZLIB,),
-      (features_lib.Encoding.BYTES,),
+      (np.bool_, features_lib.Encoding.NONE),
+      (tf.bool, features_lib.Encoding.NONE),
+      (np.bool_, features_lib.Encoding.ZLIB),
+      (tf.bool, features_lib.Encoding.ZLIB),
+      (np.bool_, features_lib.Encoding.BYTES),
+      (tf.bool, features_lib.Encoding.BYTES),
   ])
-  def test_bool_flat(self, encoding: features_lib.Encoding):
+  def test_bool_flat(self, dtype, encoding: features_lib.Encoding):
     self.assertFeature(
         feature=features_lib.Tensor(
             shape=(),
-            dtype=tf.bool,
+            dtype=dtype,
             encoding=encoding,
         ),
-        dtype=tf.bool,
+        dtype=dtype,
         shape=(),
         tests=[
             testing.FeatureExpectationItem(
@@ -255,18 +273,21 @@ class FeatureTensorTest(
         ])
 
   @parameterized.parameters([
-      (features_lib.Encoding.NONE,),
-      (features_lib.Encoding.ZLIB,),
-      (features_lib.Encoding.BYTES,),
+      (np.bool_, features_lib.Encoding.NONE),
+      (tf.bool, features_lib.Encoding.NONE),
+      (np.bool_, features_lib.Encoding.ZLIB),
+      (tf.bool, features_lib.Encoding.ZLIB),
+      (np.bool_, features_lib.Encoding.BYTES),
+      (tf.bool, features_lib.Encoding.BYTES),
   ])
-  def test_bool_array(self, encoding: features_lib.Encoding):
+  def test_bool_array(self, dtype, encoding: features_lib.Encoding):
     self.assertFeature(
         feature=features_lib.Tensor(
             shape=(3,),
-            dtype=tf.bool,
+            dtype=dtype,
             encoding=encoding,
         ),
-        dtype=tf.bool,
+        dtype=np.bool_,
         shape=(3,),
         tests=[
             testing.FeatureExpectationItem(
@@ -280,21 +301,22 @@ class FeatureTensorTest(
         ])
 
   @parameterized.parameters([
-      (features_lib.Encoding.NONE,),
+      (np.object_, features_lib.Encoding.NONE),
+      (tf.string, features_lib.Encoding.NONE),
       # Bytes encoding not supported for tf.string
   ])
-  def test_string(self, encoding: features_lib.Encoding):
+  def test_string(self, dtype, encoding: features_lib.Encoding):
     nonunicode_text = 'hello world'
     unicode_text = u'你好'
 
     self.assertFeature(
         feature=features_lib.Tensor(
             shape=(),
-            dtype=tf.string,
+            dtype=dtype,
             encoding=encoding,
         ),
         shape=(),
-        dtype=tf.string,
+        dtype=np.object_,
         tests=[
             # Non-unicode
             testing.FeatureExpectationItem(
@@ -322,11 +344,11 @@ class FeatureTensorTest(
     self.assertFeature(
         feature=features_lib.Tensor(
             shape=(2, 1),
-            dtype=tf.string,
+            dtype=dtype,
             encoding=encoding,
         ),
         shape=(2, 1),
-        dtype=tf.string,
+        dtype=np.object_,
         tests=[
             testing.FeatureExpectationItem(
                 value=[[nonunicode_text], [unicode_text]],
@@ -353,12 +375,27 @@ def test_invalid_input():
   with pytest.raises(ValueError, match='Multiple unknown dimensions'):
     features_lib.Tensor(
         shape=(2, None, None),
+        dtype=np.uint8,
+    ).encode_example(None)
+
+  with pytest.raises(ValueError, match='Multiple unknown dimensions'):
+    features_lib.Tensor(
+        shape=(2, None, None),
         dtype=tf.uint8,
     ).encode_example(None)
 
   with pytest.raises(
       NotImplementedError,
-      match='does not support `encoding=` when dtype=tf.string'):
+      match='does not support `encoding=` when dtype is string'):
+    features_lib.Tensor(
+        shape=(2, 1),
+        dtype=np.str_,
+        encoding=features_lib.Encoding.BYTES,
+    )
+
+  with pytest.raises(
+      NotImplementedError,
+      match='does not support `encoding=` when dtype is string'):
     features_lib.Tensor(
         shape=(2, 1),
         dtype=tf.string,

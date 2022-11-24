@@ -65,8 +65,8 @@ def test_from_shape_proto_unspecified():
   assert [28, 28, None] == feature.from_shape_proto(shape_proto)
 
 
-def test_dtype_name():
-  assert feature.dtype_name(np.int64) == "int64"
+def test_dtype_to_string():
+  assert feature.dtype_to_string(np.int64) == "int64"
 
 
 def test_dtype_from_str():
@@ -79,7 +79,7 @@ def test_encode_and_dtype_from_str():
       np.object_
   ]
   for dtype in dtypes:
-    assert feature.dtype_from_str(feature.dtype_name(dtype)) == dtype
+    assert feature.dtype_from_str(feature.dtype_to_string(dtype)) == dtype
 
 
 @pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
@@ -88,7 +88,7 @@ def test_tensor_info_tensor_shape(dtype):
   tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=dtype)
   assert tensor_info.shape == (28, 28, 3)
   assert tensor_info.to_tensor_spec() == tf.TensorSpec(
-      shape=tensor_shape, dtype=tf.int64)
+      shape=tensor_shape, dtype=np.int64)
 
 
 @pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
@@ -97,7 +97,7 @@ def test_tensor_info_tensor_shape_with_none(dtype):
   tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=dtype)
   assert tensor_info.shape == (None, None, 3)
   assert tensor_info.to_tensor_spec() == tf.TensorSpec(
-      shape=tensor_shape, dtype=tf.int64)
+      shape=tensor_shape, dtype=np.int64)
 
 
 @pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])

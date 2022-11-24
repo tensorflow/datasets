@@ -30,15 +30,22 @@ from tensorflow_datasets.core import features
 class AudioFeatureTest(testing.FeatureExpectationsTestCase,
                        parameterized.TestCase):
 
-  @parameterized.parameters([(1,), (2,), (8,)])
-  def test_numpy_array(self, num_channels):
+  @parameterized.parameters([
+      (np.int64, 1),
+      (tf.int64, 1),
+      (np.int64, 2),
+      (tf.int64, 2),
+      (np.int64, 8),
+      (tf.int64, 8),
+  ])
+  def test_numpy_array(self, dtype, num_channels):
     np_audio = _create_np_audio(num_channels)
 
     self.assertFeature(
         feature=features.Audio(
             sample_rate=1000, shape=_shape_for_channels(num_channels)),
         shape=_shape_for_channels(num_channels),
-        dtype=tf.int64,
+        dtype=dtype,
         tests=[
             testing.FeatureExpectationItem(
                 value=np_audio,
@@ -50,14 +57,15 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
             sample_rate=1000,
         ))
 
-  @parameterized.parameters([(1,), (2,), (8,)])
-  def test_numpy_array_float(self, num_channels):
+  @parameterized.parameters([(np.float32, 1), (tf.float32, 1), (np.float32, 2),
+                             (tf.float32, 2), (np.float32, 8), (tf.float32, 8)])
+  def test_numpy_array_float(self, dtype, num_channels):
     np_audio = _create_np_audio(num_channels).astype(np.float32)
     self.assertFeature(
         feature=features.Audio(
-            dtype=tf.float32, shape=_shape_for_channels(num_channels)),
+            dtype=dtype, shape=_shape_for_channels(num_channels)),
         shape=_shape_for_channels(num_channels),
-        dtype=tf.float32,
+        dtype=np.float32,
         tests=[
             testing.FeatureExpectationItem(
                 value=np_audio,
@@ -76,7 +84,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
         feature=features.Audio(
             file_format='wav', shape=_shape_for_channels(num_channels)),
         shape=_shape_for_channels(num_channels),
-        dtype=tf.int64,
+        dtype=np.int64,
         tests=[
             testing.FeatureExpectationItem(
                 value=tmp_file,

@@ -27,7 +27,6 @@ from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Json = type_utils.Json
 WORKER_COUNT = 16
@@ -62,7 +61,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
   ```
   features = tfds.features.FeaturesDict({
       'input': tfds.features.Image(),
-      'output': tf.int32,
+      'output': np.int32,
   })
   ```
 
@@ -93,10 +92,10 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   ```
   tfds.features.FeaturesDict({
-      'input': tf.int32,
+      'input': np.int32,
       'target': {
-          'height': tf.int32,
-          'width': tf.int32,
+          'height': np.int32,
+          'width': np.int32,
       },
   })
   ```
@@ -110,7 +109,6 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
       'target/width': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
   }
   ```
-
   """
 
   def __init__(
@@ -124,7 +122,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     Args:
       feature_dict (dict): Dictionary containing the feature connectors of a
         example. The keys should correspond to the data dict as returned by
-        tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically be
+        tf.data.Dataset(). Types (np.int32,...) and dicts will automatically be
         converted into FeatureConnector.
       doc: Documentation of this feature (e.g. description).
 
@@ -304,8 +302,8 @@ def to_feature(value: feature_lib.FeatureConnectorArg):
   """Convert the given value to Feature if necessary."""
   if isinstance(value, feature_lib.FeatureConnector):
     return value
-  elif utils.is_tensorflow_dtype(value):  # tf.int32, np.int32,...
-    return tensor_feature.Tensor(shape=(), dtype=tf.as_dtype(value))
+  elif utils.is_np_or_tf_dtype(value):  # tf.int32, np.int32,...
+    return tensor_feature.Tensor(shape=(), dtype=value)
   elif isinstance(value, dict):
     return FeaturesDict(value)
   else:

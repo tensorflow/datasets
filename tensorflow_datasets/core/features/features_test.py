@@ -18,7 +18,11 @@
 import pathlib
 import sys
 import textwrap
+from unittest import mock
 
+from absl import logging
+from absl.testing import parameterized
+import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
@@ -31,12 +35,12 @@ class AnInputConnector(features_lib.FeatureConnector):
     # With this connector, the way the data is on disk ({'a', 'b'}) do not match
     # the way it is exposed to the user (int64), so we overwrite
     # FeaturesDict.get_tensor_info
-    return features_lib.TensorInfo(shape=(), dtype=tf.int64)
+    return features_lib.TensorInfo(shape=(), dtype=np.int64)
 
   def get_serialized_info(self):
     return {
-        'a': features_lib.TensorInfo(shape=(), dtype=tf.int64),
-        'b': features_lib.TensorInfo(shape=(), dtype=tf.int64),
+        'a': features_lib.TensorInfo(shape=(), dtype=np.int64),
+        'b': features_lib.TensorInfo(shape=(), dtype=np.int64),
     }
 
   def encode_example(self, example_data):
@@ -52,7 +56,7 @@ class AnOutputConnector(features_lib.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
 
   def get_tensor_info(self):
-    return features_lib.TensorInfo(shape=(), dtype=tf.float32)
+    return features_lib.TensorInfo(shape=(), dtype=np.float32)
 
   def encode_example(self, example_data):
     return example_data * 10.0
@@ -61,13 +65,19 @@ class AnOutputConnector(features_lib.FeatureConnector):
     return tfexample_data / 10.0
 
 
-class FeatureDictTest(testing.FeatureExpectationsTestCase):
+class FeatureDictTest(parameterized.TestCase,
+                      testing.FeatureExpectationsTestCase):
 
   def test_tensor_info(self):
 
     self.assertEqual(
         features_lib.TensorInfo(shape=(None, 3), dtype=tf.string),
         features_lib.TensorInfo(shape=(None, 3), dtype=tf.string),
+    )
+
+    self.assertEqual(
+        features_lib.TensorInfo(shape=(None, 3), dtype=np.object_),
+        features_lib.TensorInfo(shape=(None, 3), dtype=np.object_),
     )
 
     self.assertNotEqual(
@@ -80,37 +90,53 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
         features_lib.TensorInfo(shape=(5, 3), dtype=tf.string),
     )
 
+    self.assertNotEqual(
+        features_lib.TensorInfo(shape=(2, 3), dtype=np.object_),
+        features_lib.TensorInfo(shape=(5, 3), dtype=np.object_),
+    )
+
     t = features_lib.TensorInfo(shape=(None, 3), dtype=tf.string)
     self.assertEqual(t, features_lib.TensorInfo.copy_from(t))
 
-  def test_tensor_spec(self):
+  @parameterized.parameters(
+      (np.int64, np.str_,
+       mock.Mock(
+           side_effect=Exception(
+               'no warning should be raised when using NumPy types'))),
+      (tf.int64, tf.string, mock.Mock()))
+  def test_tensor_spec(self, image_dtype, metadata_dtype, warning_mock):
+    logging.warning = warning_mock
     feature = features_lib.FeaturesDict({
         'input': AnInputConnector(),
         'output': AnOutputConnector(),
         'img': {
             'size': {
-                'height': features_lib.Tensor(shape=(2, 3), dtype=tf.int64),
-                'width': features_lib.Tensor(shape=[None, 3], dtype=tf.int64),
+                'height':
+                    features_lib.Tensor(shape=(2, 3), dtype=image_dtype),
+                'width':
+                    features_lib.Tensor(shape=[None, 3], dtype=image_dtype),
             },
             'image': features_lib.Image(shape=(28, 28, 1)),
-            'metadata/path': tf.string,
+            'metadata/path': metadata_dtype,
         }
     })
     self.assertAllEqualNested(
         feature.get_tensor_spec(), {
-            'input': tf.TensorSpec(shape=[], dtype=tf.int64),
-            'output': tf.TensorSpec(shape=[], dtype=tf.float32),
+            'input': tf.TensorSpec(shape=[], dtype=np.int64),
+            'output': tf.TensorSpec(shape=[], dtype=np.float32),
             'img': {
                 'size': {
-                    'height': tf.TensorSpec(shape=[2, 3], dtype=tf.int64),
-                    'width': tf.TensorSpec(shape=[None, 3], dtype=tf.int64),
+                    'height': tf.TensorSpec(shape=[2, 3], dtype=np.int64),
+                    'width': tf.TensorSpec(shape=[None, 3], dtype=np.int64),
                 },
-                'image': tf.TensorSpec(shape=[28, 28, 1], dtype=tf.uint8),
-                'metadata/path': tf.TensorSpec(shape=[], dtype=tf.string),
+                'image': tf.TensorSpec(shape=[28, 28, 1], dtype=np.uint8),
+                'metadata/path': tf.TensorSpec(shape=[], dtype=np.object_),
             }
         })
 
-  def test_fdict(self):
+  @parameterized.parameters((np.int64, np.str_, np.str_),
+                            (tf.int64, tf.string, np.object_))
+  def test_fdict(self, image_dtype, metadata_dtype, output_metadata_dtype):
 
     self.assertFeature(
         feature=features_lib.FeaturesDict({
@@ -118,36 +144,37 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
             'output': AnOutputConnector(),
             'img': {
                 'size': {
-                    'height': tf.int64,
-                    'width': tf.int64,
+                    'height': image_dtype,
+                    'width': image_dtype,
                 },
-                'metadata/path': tf.string,
+                'metadata/path': metadata_dtype,
             }
         }),
         serialized_info={
             'input': {
-                'a': features_lib.TensorInfo(shape=(), dtype=tf.int64),
-                'b': features_lib.TensorInfo(shape=(), dtype=tf.int64),
+                'a': features_lib.TensorInfo(shape=(), dtype=np.int64),
+                'b': features_lib.TensorInfo(shape=(), dtype=np.int64),
             },
-            'output': features_lib.TensorInfo(shape=(), dtype=tf.float32),
+            'output': features_lib.TensorInfo(shape=(), dtype=np.float32),
             'img': {
                 'size': {
-                    'height': features_lib.TensorInfo(shape=(), dtype=tf.int64),
-                    'width': features_lib.TensorInfo(shape=(), dtype=tf.int64),
+                    'height': features_lib.TensorInfo(shape=(), dtype=np.int64),
+                    'width': features_lib.TensorInfo(shape=(), dtype=np.int64),
                 },
                 'metadata/path':
-                    features_lib.TensorInfo(shape=(), dtype=tf.string),
+                    features_lib.TensorInfo(
+                        shape=(), dtype=output_metadata_dtype),
             }
         },
         dtype={
-            'input': tf.int64,
-            'output': tf.float32,
+            'input': np.int64,
+            'output': np.float32,
             'img': {
                 'size': {
-                    'height': tf.int64,
-                    'width': tf.int64,
+                    'height': np.int64,
+                    'width': np.int64,
                 },
-                'metadata/path': tf.string,
+                'metadata/path': output_metadata_dtype,
             }
         },
         shape={
@@ -205,13 +232,20 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
-  def test_feature_getitem(self):
-    fdict = features_lib.FeaturesDict({
-        'integer': tf.int32,
-        'string': tf.string,
-    })
-    self.assertEqual(fdict['integer'].dtype, tf.int32)
-    self.assertEqual(fdict['string'].dtype, tf.string)
+  @parameterized.parameters(
+      ({
+          'integer': np.int32,
+          'string': np.object_,
+      },),
+      ({
+          'integer': tf.int32,
+          'string': tf.string,
+      },),
+  )
+  def test_feature_getitem(self, features_dict):
+    fdict = features_lib.FeaturesDict(features_dict)
+    self.assertEqual(fdict['integer'].dtype, np.int32)
+    self.assertEqual(fdict['string'].dtype, np.object_)
 
   def test_feature__repr__(self):
 
@@ -245,7 +279,8 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
       fd.save_metadata(data_dir)
       fd.load_metadata(data_dir)
 
-  def test_repr_tensor(self):
+  @parameterized.parameters((np.int32), (tf.int32))
+  def test_repr_tensor(self, dtype):
 
     # Top level Tensor is printed expanded
     self.assertEqual(
@@ -265,11 +300,11 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
     self.assertEqual(
         repr(
             features_lib.FeaturesDict({
-                'colapsed': features_lib.Tensor(shape=(), dtype=tf.int32),
+                'colapsed': features_lib.Tensor(shape=(), dtype=dtype),
                 # Tensor with defined shape are printed expanded
-                'noncolapsed': features_lib.Tensor(shape=(1,), dtype=tf.int32),
+                'noncolapsed': features_lib.Tensor(shape=(1,), dtype=dtype),
                 # Tensor inherited are expanded
-                'child': ChildTensor(shape=(), dtype=tf.int32),
+                'child': ChildTensor(shape=(), dtype=dtype),
             })),
         textwrap.dedent("""\
         FeaturesDict({
@@ -287,7 +322,7 @@ def test_custom_feature_connector(tmp_path: pathlib.Path):
   assert feature_qualname not in features_lib.FeatureConnector._registered_features
 
   # Save tfds.feature.Tensor to avoid importing the custom feature connector
-  feature = features_lib.Tensor(shape=(), dtype=tf.int32)
+  feature = features_lib.Tensor(shape=(), dtype=np.int32)
   feature.save_config(tmp_path)
 
   # Update the features.json file to simulate as if the original

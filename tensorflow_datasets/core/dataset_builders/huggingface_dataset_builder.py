@@ -29,6 +29,7 @@ import io
 from typing import Any, Dict, Mapping, Optional, Union
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import download
@@ -39,27 +40,26 @@ from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tf_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _IMAGE_ENCODING_FORMAT = "png"
 
 
-def _convert_to_tf_dtype(dtype: str) -> tf.dtypes.DType:
-  """Returns the `tf.dtype` scalar feature."""
+def _convert_to_np_dtype(dtype: str) -> np.dtype:
+  """Returns the `np.dtype` scalar feature."""
   str2val = {
-      "bool_": tf.bool,
-      "float": tf.float32,
-      "double": tf.float64,
-      "large_string": tf.string,
-      "utf8": tf.string,
+      "bool_": np.bool_,
+      "float": np.float32,
+      "double": np.float64,
+      "large_string": np.object_,
+      "utf8": np.object_,
   }
   if dtype in str2val:
     return str2val[dtype]
-  elif hasattr(tf.dtypes, dtype):
-    return getattr(tf.dtypes, dtype)
+  elif hasattr(np, dtype):
+    return getattr(np, dtype)
   elif dtype.startswith("timestamp"):
     # Timestamps are converted to seconds since UNIX epoch.
-    return tf.int64
+    return np.int64
   else:
     raise ValueError(
         f"Unrecognized type {dtype}. Please open an issue if you think "
@@ -78,7 +78,7 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
   if isinstance(hf_features, hf_datasets.Sequence):
     return feature_lib.Sequence(feature=extract_features(hf_features.feature))
   if isinstance(hf_features, hf_datasets.Value):
-    return feature_lib.Scalar(dtype=_convert_to_tf_dtype(hf_features.dtype))
+    return feature_lib.Scalar(dtype=_convert_to_np_dtype(hf_features.dtype))
   if isinstance(hf_features, hf_datasets.ClassLabel):
     if hf_features.names:
       return feature_lib.ClassLabel(names=hf_features.names)
