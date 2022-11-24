@@ -810,6 +810,9 @@ toc:
     title: pg19
   - path: /datasets/catalog/piqa
     title: piqa
+  - path: /datasets/catalog/q_re_cc
+    status: nightly
+    title: q_re_cc
   - path: /datasets/catalog/qa4mre
     title: qa4mre
   - path: /datasets/catalog/quac

@@ -81,7 +81,7 @@ journal = {Transactions of the Association of Computational Linguistics}
 ```python
 FeaturesDict({
     'annotations': Sequence({
-        'id': object,
+        'id': str,
         'long_answer': FeaturesDict({
             'end_byte': int64,
             'end_token': int64,
@@ -106,10 +106,10 @@ FeaturesDict({
         }),
         'url': Text(shape=(), dtype=object),
     }),
-    'id': object,
+    'id': str,
     'question': FeaturesDict({
         'text': Text(shape=(), dtype=object),
-        'tokens': Sequence(object),
+        'tokens': Sequence(str),
     }),
 })
 ```
@@ -120,7 +120,7 @@ Feature                               | Class            | Shape   | Dtype  | De
 :------------------------------------ | :--------------- | :------ | :----- | :----------
                                       | FeaturesDict     |         |        |
 annotations                           | Sequence         |         |        |
-annotations/id                        | Tensor           |         | object |
+annotations/id                        | Tensor           |         | str    |
 annotations/long_answer               | FeaturesDict     |         |        |
 annotations/long_answer/end_byte      | Tensor           |         | int64  |
 annotations/long_answer/end_token     | Tensor           |         | int64  |
@@ -140,7 +140,7 @@ document/tokens                       | Sequence         |         |        |
 document/tokens/is_html               | Tensor           |         | bool   |
 document/tokens/token                 | Text             |         | object |
 document/url                          | Text             |         | object |
-id                                    | Tensor           |         | object |
+id                                    | Tensor           |         | str    |
 question                              | FeaturesDict     |         |        |
 question/text                         | Text             |         | object |
 question/tokens                       | Sequence(Tensor) | (None,) | object |

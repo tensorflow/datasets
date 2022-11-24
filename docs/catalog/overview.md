@@ -519,6 +519,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`paws_x_wiki`](paws_x_wiki.md)
 *   [`pg19`](pg19.md)
 *   [`piqa`](piqa.md)
+*   [`q_re_cc`](q_re_cc.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`qa4mre`](qa4mre.md)
 *   [`quac`](quac.md)
 *   [`quality`](quality.md)
