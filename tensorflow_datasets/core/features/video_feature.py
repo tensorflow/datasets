@@ -205,7 +205,7 @@ class Video(sequence_feature.Sequence):
   def to_json_content(self) -> feature_pb2.VideoFeature:
     return feature_pb2.VideoFeature(
         shape=feature_lib.to_shape_proto(self.shape),
-        dtype=feature_lib.dtype_name(self.dtype),
+        dtype=feature_lib.dtype_to_string(self.dtype),
         encoding_format=self._encoding_format,
         use_colormap=self._use_colormap,
         ffmpeg_extra_args=self._extra_ffmpeg_args,

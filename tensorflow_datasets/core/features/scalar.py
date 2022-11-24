@@ -26,7 +26,7 @@ from tensorflow_datasets.core.utils import type_utils
 class Scalar(tensor_feature.Tensor):
   """A scalar feature of a particular dtype (e.g.
 
-  tf.int64 or tf.float).
+  np.int64 or np.float).
 
   Equivalent to `tfds.features.Tensor(shape=(), dtype=dtype)`.
 

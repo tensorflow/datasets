@@ -141,22 +141,9 @@ def convert_to_shape(shape: Any) -> type_utils.Shape:
       f'Shape of type {type(shape)} with content {shape} is not supported!')
 
 
-def is_tensorflow_dtype(value) -> bool:
-  """Returns True is the given value is a TensorFlow dtype."""
-  try:
-    tf.as_dtype(value)
-  except TypeError:
-    return False
-  return True
-
-
-def is_numpy_dtype(value) -> bool:
-  """Returns True is the given value is a NumPy dtype."""
-  try:
-    np.dtype(value)
-  except (TypeError, ValueError):
-    return False
-  return True
+def is_np_or_tf_dtype(value: Any) -> bool:
+  """Returns True is the given value is a NumPy or TensorFlow dtype."""
+  return enp.lazy.is_np_dtype(value) or enp.lazy.is_tf_dtype(value)
 
 
 def np_dtype(value) -> Optional[np.dtype]:
@@ -169,14 +156,14 @@ def np_dtype(value) -> Optional[np.dtype]:
 
 def _is_dtype(numpy_dtypes: List[np.dtype], tf_dtype: Any,
               dtype: type_utils.TfdsDType) -> bool:
-  if is_numpy_dtype(dtype):
+  if enp.lazy.is_np_dtype(dtype):
     return any(
         [is_np_sub_dtype(dtype, numpy_dtype) for numpy_dtype in numpy_dtypes])
   if enp.lazy.has_tf and isinstance(dtype, tf.dtypes.DType):
     if isinstance(tf_dtype, str):
       return getattr(dtype, tf_dtype)
     return dtype == tf_dtype
-  raise TypeError(f'type {dtype} not recognized')
+  return False
 
 
 @py_utils.memoize()

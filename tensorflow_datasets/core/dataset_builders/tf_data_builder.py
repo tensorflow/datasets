@@ -67,7 +67,7 @@ class TfDataBuilder(
           "test": my_ds_test,
       },
       features=tfds.features.FeaturesDict({
-          "number": tfds.features.Scalar(dtype=tf.int64),
+          "number": tfds.features.Scalar(dtype=int64),
       }),
       description="My dataset with a single number.",
       release_notes={
@@ -121,7 +121,7 @@ class TfDataBuilder(
             "test": ds_test,
         },
         features=tfds.features.FeaturesDict({
-            "number": tfds.features.Scalar(dtype=tf.int64),
+            "number": tfds.features.Scalar(dtype=int64),
         }),
         config="single_number",
         description="My dataset with a single number.",

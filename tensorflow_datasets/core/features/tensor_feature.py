@@ -86,7 +86,7 @@ class Tensor(feature_lib.FeatureConnector):
     """
     super().__init__(doc=doc)
     self._shape = tuple(shape)
-    self._dtype = dtype
+    self._dtype = type_utils.cast_to_numpy(dtype)
     if isinstance(encoding, str):
       encoding = encoding.lower()
     self._encoding = Encoding(encoding)
@@ -94,10 +94,10 @@ class Tensor(feature_lib.FeatureConnector):
     self._encoded_to_bytes = self._encoding != Encoding.NONE
     self._dynamic_shape = self._shape.count(None) > 1
 
-    if self._dtype == tf.string and self._encoded_to_bytes:
+    if tf_utils.is_string(self._dtype) and self._encoded_to_bytes:
       raise NotImplementedError(
           'tfds.features.Tensor() does not support `encoding=` when '
-          'dtype=tf.string. Please open a PR if you need this feature.')
+          'dtype is string. Please open a PR if you need this feature.')
 
   @py_utils.memoize()
   def get_tensor_info(self) -> feature_lib.TensorInfo:
@@ -108,7 +108,7 @@ class Tensor(feature_lib.FeatureConnector):
   def get_serialized_info(self):
     """See base class for details."""
     if self._encoded_to_bytes:  # Values encoded (stored as bytes)
-      serialized_spec = feature_lib.TensorInfo(shape=(), dtype=tf.string)
+      serialized_spec = feature_lib.TensorInfo(shape=(), dtype=np.object_)
     else:
       serialized_spec = feature_lib.TensorInfo(
           shape=self._shape,
@@ -122,7 +122,7 @@ class Tensor(feature_lib.FeatureConnector):
           'shape':
               feature_lib.TensorInfo(
                   shape=(len(self._shape),),
-                  dtype=tf.int32,
+                  dtype=np.int32,
               ),
           'value':
               serialized_spec,
@@ -186,7 +186,7 @@ class Tensor(feature_lib.FeatureConnector):
     if self._encoded_to_bytes:
       if self._encoding == Encoding.ZLIB:
         value = tf.io.decode_compressed(value, compression_type='ZLIB')
-      value = tf.io.decode_raw(value, self._dtype)
+      value = tf.io.decode_raw(value, self.tf_dtype)
       value = tf.reshape(value, shape)
 
     return value
@@ -219,7 +219,7 @@ class Tensor(feature_lib.FeatureConnector):
     if isinstance(value, dict):
       return cls(
           shape=tuple(value['shape']),
-          dtype=tf.dtypes.as_dtype(value['dtype']),
+          dtype=feature_lib.dtype_from_str(value['dtype']),
           # Use .get for backward-compatibility
           encoding=value.get('encoding', Encoding.NONE),
       )
@@ -232,7 +232,7 @@ class Tensor(feature_lib.FeatureConnector):
   def to_json_content(self) -> feature_pb2.TensorFeature:
     return feature_pb2.TensorFeature(
         shape=feature_lib.to_shape_proto(self._shape),
-        dtype=feature_lib.dtype_name(self._dtype),
+        dtype=feature_lib.dtype_to_string(self._dtype),
         encoding=self._encoding.value)
 
 
@@ -240,8 +240,8 @@ def get_inner_feature_repr(feature):
   """Utils which returns the object which should get printed in __repr__.
 
   This is used in container features (Sequence, FeatureDict) to print scalar
-  Tensor in a less verbose way `Sequence(tf.int32)` rather than
-  `Sequence(Tensor(shape=(), dtype=tf.in32))`.
+  Tensor in a less verbose way `Sequence(int32)` rather than
+  `Sequence(Tensor(shape=(), dtype=int32))`.
 
   Args:
     feature: The feature to display
@@ -249,10 +249,10 @@ def get_inner_feature_repr(feature):
   Returns:
     Either the feature or it's inner value.
   """
-  # We only print `tf.int32` rather than `Tensor(shape=(), dtype=tf.int32)`
+  # We only print `int32` rather than `Tensor(shape=(), dtype=int32)`
   # * For the base `Tensor` class (and not subclass).
   # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
   if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison
-    return feature_lib.dtype_name(feature.np_dtype)
+    return feature_lib.dtype_to_string(feature.np_dtype)
   else:
     return repr(feature)
