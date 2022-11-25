@@ -148,7 +148,7 @@ class Tensor(feature_lib.FeatureConnector):
     if not isinstance(example_data, np.ndarray):
       example_data = np.array(example_data, dtype=np_dtype)
     # Ensure the shape and dtype match
-    if not tf_utils.equals(example_data.dtype, np_dtype):
+    if not tf_utils.is_same_dtype_type(example_data.dtype, np_dtype):
       raise ValueError('Dtype {} do not match {}'.format(
           example_data.dtype, np_dtype))
 

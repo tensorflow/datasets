@@ -17,6 +17,7 @@
 """Tests for tensorflow_datasets.core.features.tensor_feature."""
 
 from absl.testing import parameterized
+import jax.numpy as jnp
 import numpy as np
 import pytest
 import tensorflow as tf
@@ -401,3 +402,14 @@ def test_invalid_input():
         dtype=tf.string,
         encoding=features_lib.Encoding.BYTES,
     )
+
+
+def test_jax_bfloat16():
+  features = features_lib.FeaturesDict({
+      'data':
+          features_lib.Tensor(shape=(1,), dtype=tf.bfloat16, encoding='bytes')
+  })
+  data = {
+      'data': jnp.array([6.], dtype=jnp.bfloat16),
+  }
+  features.encode_example(data)

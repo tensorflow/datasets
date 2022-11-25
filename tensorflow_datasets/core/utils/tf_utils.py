@@ -187,14 +187,11 @@ def is_string(dtype: type_utils.TfdsDType) -> bool:
 
 
 @py_utils.memoize()
-def equals(a, b):
-  return (is_bool(a) and is_bool(b)) or (is_floating(a) and is_floating(b)) or (
-      is_integer(a) and is_integer(b)) or (is_string(a) and is_string(b))
-
-
-@py_utils.memoize()
-def is_same_tf_dtype(v1: tf.dtypes.DType, v2: tf.dtypes.DType) -> bool:
-  return v1 == v2
+def is_same_dtype_type(a, b):
+  if a == b:
+    return True
+  # NumPy strings can have different DTypes and yet be of the same DType type.
+  return is_string(a) and is_string(b)
 
 
 @py_utils.memoize()
