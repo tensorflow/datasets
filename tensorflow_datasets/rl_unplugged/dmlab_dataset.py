@@ -20,7 +20,6 @@ from __future__ import annotations
 import dataclasses
 from typing import Any, Dict
 
-import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
@@ -97,24 +96,24 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
                     'pixels':
                         tfds.features.Image(
                             shape=_PIXELS_SHAPE,
-                            dtype=np.uint8,
+                            dtype=tf.uint8,
                             encoding_format='png'),
                     'last_action':
-                        np.int64,
+                        tf.int64,
                     'last_reward':
-                        np.float32,
+                        tf.float32,
                 },
-                'action': np.int64,
-                'reward': np.float32,
-                'is_terminal': np.bool_,
-                'is_first': np.bool_,
-                'is_last': np.bool_,
-                'discount': np.float32,
+                'action': tf.int64,
+                'reward': tf.float32,
+                'is_terminal': tf.bool,
+                'is_first': tf.bool,
+                'is_last': tf.bool,
+                'discount': tf.float32,
             }),
         'episode_id':
-            np.int64,
+            tf.int64,
         'episode_return':
-            np.float32,
+            tf.float32,
     })
 
   def get_description(self):

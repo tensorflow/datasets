@@ -23,7 +23,6 @@ import textwrap
 import typing
 from typing import Any, Mapping, Optional, Union
 
-import tensorflow_datasets.core.utils as type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -54,7 +53,7 @@ _CITATION = """\
 """
 
 if typing.TYPE_CHECKING:
-  FeatureType = Union[type_utils.TfdsDType, tfds.core.features.FeatureConnector]
+  FeatureType = Union[tf.dtypes.DType, tfds.core.features.FeatureConnector]
 else:
   FeatureType = Any
 

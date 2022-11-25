@@ -28,7 +28,6 @@ import os
 import typing
 from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
-from etils import enp
 from etils import epath
 import numpy as np
 import six
@@ -142,7 +141,7 @@ class TensorInfo(object):
     return '{}(shape={}, dtype={})'.format(
         type(self).__name__,
         self.shape,
-        dtype_to_string(self.np_dtype),
+        dtype_name(self.np_dtype),
     )
 
 
@@ -300,7 +299,7 @@ class FeatureConnector(object):
   def tf_dtype(self) -> TreeDict[np.dtype]:
 
     def convert_to_tensorflow(value):
-      if enp.lazy.is_np_dtype(value):
+      if tf_utils.is_numpy_dtype(value):
         return tf.dtypes.as_dtype(value)
       return value.tf_dtype
 
@@ -863,7 +862,7 @@ class FeatureConnector(object):
     # Ensure ordering of keys by adding them one-by-one
     repr_info = collections.OrderedDict()
     repr_info['shape'] = tensor_info.shape
-    repr_info['dtype'] = dtype_to_string(tensor_info.np_dtype)
+    repr_info['dtype'] = dtype_name(tensor_info.np_dtype)
     additional_info = self._additional_repr_info()
     for k, v in additional_info.items():
       repr_info[k] = v
@@ -1050,7 +1049,7 @@ def from_shape_proto(shape: feature_pb2.Shape) -> utils.Shape:
   return [parse_dimension(dimension) for dimension in shape.dimensions]
 
 
-def dtype_to_string(dtype: type_utils.TfdsDType) -> str:
+def dtype_name(dtype: type_utils.TfdsDType) -> str:
   np_dtype: np.dtype = type_utils.cast_to_numpy(dtype)
   return np.dtype(np_dtype).name
 

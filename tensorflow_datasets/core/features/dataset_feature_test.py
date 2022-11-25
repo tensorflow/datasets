@@ -15,7 +15,6 @@
 
 """Tests for tensorflow_datasets.core.features.dataset_feature."""
 
-from absl.testing import parameterized
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -31,18 +30,16 @@ class IncrementDecoder(decode_lib.Decoder):
     return serialized_example + 1
 
 
-class DatasetDictFeatureTest(parameterized.TestCase,
-                             testing.FeatureExpectationsTestCase):
+class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
 
-  @parameterized.parameters((np.int32), (tf.int32))
-  def test_int(self, dtype):
+  def test_int(self):
 
     self.assertFeatureEagerOnly(
-        feature=feature_lib.Dataset({'int': dtype}),
+        feature=feature_lib.Dataset({'int': tf.int32}),
         shape={'int': ()},  # shape of each element of the dataset
-        dtype={'int': dtype},
+        dtype={'int': tf.int32},
         serialized_info={
-            'int': feature_lib.TensorInfo(shape=(None,), dtype=dtype),
+            'int': feature_lib.TensorInfo(shape=(None,), dtype=tf.int32),
         },
         tests=[
             # Python array
@@ -74,8 +71,7 @@ class DatasetDictFeatureTest(parameterized.TestCase,
         ],
         test_attributes=dict(_length=None))
 
-  @parameterized.parameters((np.int64), (tf.int64))
-  def test_label(self, dtype):
+  def test_label(self):
 
     self.assertFeatureEagerOnly(
         feature=feature_lib.Dataset(
@@ -84,9 +80,9 @@ class DatasetDictFeatureTest(parameterized.TestCase,
             },
             length=None),
         shape={'label': ()},
-        dtype={'label': dtype},
+        dtype={'label': tf.int64},
         serialized_info={
-            'label': feature_lib.TensorInfo(shape=(None,), dtype=dtype),
+            'label': feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
         },
         tests=[
             testing.FeatureExpectationItem(
@@ -111,18 +107,14 @@ class DatasetDictFeatureTest(parameterized.TestCase,
         ],
         test_attributes=dict(_length=None))
 
-  @parameterized.parameters(
-      (np.object_, np.int32, np.uint8),
-      (tf.string, tf.int32, tf.uint8),
-  )
-  def test_nested(self, a_dtype, bc_dtype, bd_dtype):
+  def test_nested(self):
 
     self.assertFeatureEagerOnly(
         feature=feature_lib.Dataset({
-            'a': a_dtype,
+            'a': tf.string,
             'b': {
-                'c': feature_lib.Tensor(shape=(4, 2), dtype=bc_dtype),
-                'd': bd_dtype,
+                'c': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
+                'd': tf.uint8,
             }
         }, length=None),
         shape={
@@ -133,10 +125,10 @@ class DatasetDictFeatureTest(parameterized.TestCase,
             }
         },
         dtype={
-            'a': np.object_,
+            'a': tf.string,
             'b': {
-                'c': np.int32,
-                'd': np.uint8,
+                'c': tf.int32,
+                'd': tf.uint8,
             }
         },
         tests=[
@@ -177,18 +169,14 @@ class DatasetDictFeatureTest(parameterized.TestCase,
         ],
     )
 
-  @parameterized.parameters(
-      (np.object_, np.int32, np.uint8),
-      (tf.string, tf.int32, tf.uint8),
-  )
-  def test_input_dict(self, a_dtype, bc_dtype, bd_dtype):
+  def test_input_dict(self):
 
     self.assertFeatureEagerOnly(
         feature=feature_lib.Dataset({
-            'a': a_dtype,
+            'a': tf.string,
             'b': {
-                'c': feature_lib.Tensor(shape=(4, 2), dtype=bc_dtype),
-                'd': bd_dtype,
+                'c': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
+                'd': tf.uint8,
             }
         }, length=None),
         shape={
@@ -199,10 +187,10 @@ class DatasetDictFeatureTest(parameterized.TestCase,
             }
         },
         dtype={
-            'a': np.object_,
+            'a': tf.string,
             'b': {
-                'c': np.int32,
-                'd': np.uint8,
+                'c': tf.int32,
+                'd': tf.uint8,
             }
         },
         tests=[
@@ -255,17 +243,13 @@ class DatasetDictFeatureTest(parameterized.TestCase,
         ],
     )
 
-  @parameterized.parameters(
-      (np.object_, np.uint8),
-      (tf.string, tf.uint8),
-  )
-  def test_decoding(self, a_dtype, bc_dtype):
+  def test_decoding(self):
 
     self.assertFeatureEagerOnly(
         feature=feature_lib.Dataset({
-            'a': a_dtype,
+            'a': tf.string,
             'b': {
-                'c': bc_dtype,
+                'c': tf.uint8,
             }
         },
                                     length=None),
@@ -276,9 +260,9 @@ class DatasetDictFeatureTest(parameterized.TestCase,
             }
         },
         dtype={
-            'a': np.object_,
+            'a': tf.string,
             'b': {
-                'c': np.uint8,
+                'c': tf.uint8,
             }
         },
         tests=[
@@ -306,16 +290,14 @@ class DatasetDictFeatureTest(parameterized.TestCase,
     )
 
 
-class DatasetFeatureTest(parameterized.TestCase,
-                         testing.FeatureExpectationsTestCase):
+class DatasetFeatureTest(testing.FeatureExpectationsTestCase):
 
-  @parameterized.parameters((np.int32), (tf.int32))
-  def test_int(self, dtype):
+  def test_int(self):
 
     self.assertFeatureEagerOnly(
-        feature=feature_lib.Dataset(dtype, length=3),
+        feature=feature_lib.Dataset(tf.int32, length=3),
         shape=(),
-        dtype=np.int32,
+        dtype=tf.int32,
         tests=[
             # Python array
             testing.FeatureExpectationItem(
@@ -342,7 +324,7 @@ class DatasetFeatureTest(parameterized.TestCase,
         feature=feature_lib.Dataset(
             feature_lib.ClassLabel(names=['left', 'right']),),
         shape=(),
-        dtype=np.int64,
+        dtype=tf.int64,
         tests=[
             testing.FeatureExpectationItem(
                 value=['right', 'left', 'left'],
