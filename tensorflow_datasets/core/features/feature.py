@@ -28,7 +28,6 @@ import os
 import typing
 from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
-from absl import logging
 from etils import enp
 from etils import epath
 import numpy as np
@@ -128,8 +127,6 @@ class TensorInfo(object):
   @property
   def dtype(self) -> TreeDict[type_utils.TfdsDType]:
     """Return the TensorFlow DType of this TensorInfo."""
-    logging.warning('Please change your code to use np.dtype on field '
-                    '`TensorInfo.np_dtype` or use `TensorInfo.tf_dtype`.')
     return self.tf_dtype
 
   @property
@@ -287,8 +284,6 @@ class FeatureConnector(object):
   @py_utils.memoized_property
   def dtype(self) -> TreeDict[tf.dtypes.DType]:
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
-    logging.warning('Please change your code to use np.dtype on field '
-                    '`Feature.np_dtype` or use `Feature.tf_dtype`.')
     return self.tf_dtype
 
   @py_utils.memoized_property
