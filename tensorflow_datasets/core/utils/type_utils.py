@@ -18,7 +18,6 @@
 import typing
 from typing import cast, Any, Dict, List, Optional, Tuple, TypeVar, Union
 
-from absl import logging
 from etils import enp
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -74,10 +73,6 @@ def cast_to_numpy(dtype: TfdsDType) -> np.dtype:
       numpy_dtype = np.object_
     else:
       numpy_dtype = dtype.as_numpy_dtype
-    logging.warning(
-        'You use TensorFlow DType %s in tfds.features.TensorInfo. '
-        'This will soon be deprecated in favor of NumPy DTypes. '
-        'In the meantime it was converted to %s.', dtype, numpy_dtype)
     return numpy_dtype
   return cast(np.dtype, dtype)
 
