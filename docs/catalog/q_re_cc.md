@@ -31,18 +31,20 @@ built on questions from TREC CAsT, QuAC and Google Natural Questions.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.60 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `69.29 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 16,451
+`'train'` | 63,501
 
 *   **Feature structure**:
 
