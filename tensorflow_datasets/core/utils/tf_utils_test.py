@@ -79,10 +79,9 @@ def test_is_np_sub_dtype():
   assert not tf_utils.is_np_sub_dtype(np.float, np.integer)
 
 
-def test_is_same_tf_dtype():
-  assert tf_utils.is_same_tf_dtype(tf.int32, tf.int32)
-  assert not tf_utils.is_same_tf_dtype(tf.int32, tf.int64)
-  assert not tf_utils.is_same_tf_dtype(tf.int64, tf.int32)
+def test_is_same_dtype_type():
+  assert tf_utils.is_same_dtype_type(np.int32, tf.int32)
+  assert tf_utils.is_same_dtype_type(np.dtype('<U15'), np.dtype('<U0'))
 
 
 def test_merge_shape():
