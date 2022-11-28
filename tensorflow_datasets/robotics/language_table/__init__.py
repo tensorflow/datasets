@@ -13,6 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Robotics datasets."""
-from tensorflow_datasets.robotics.language_table import LanguageTable
-from tensorflow_datasets.robotics.mt_opt import MtOpt
+"""language_table dataset."""
+
+from tensorflow_datasets.robotics.language_table.language_table import LanguageTable
