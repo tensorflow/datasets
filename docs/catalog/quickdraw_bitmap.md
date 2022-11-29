@@ -41,7 +41,7 @@ contains these drawings converted from vector format into 28x28 grayscale images
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `36.82 GiB`
 
 *   **Dataset size**: `Unknown size`
 
@@ -51,8 +51,9 @@ contains these drawings converted from vector format into 28x28 grayscale images
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | ---------:
+`'train'` | 50,426,266
 
 *   **Feature structure**:
 
