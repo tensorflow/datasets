@@ -160,7 +160,7 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
     beam = tfds.core.lazy_imports.apache_beam
 
     builder = tfds.builder('c4', config='en', version='3.1.0')
-    return (tfds.beam.ReadFromTFDS(builder, split=split)
+    return (tfds.beam.ReadFromTFDS(builder, split=split, workers_per_shard=10)
             | 'AsNumpy' >> beam.Map(tfds.as_numpy)
             | 'ExtractSnippets' >> beam.FlatMap(
                 c4_wsrs_utils.extract_snippets,
