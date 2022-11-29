@@ -100,16 +100,6 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
           min_snippet_token_len=3,
           num_snippets_per_substitution=4000,
           description='Default C4-WSRS dataset.'),
-      C4WSRSConfig(
-          'deterministic',
-          max_sentences_per_snippet=1,
-          max_snippet_char_len=1024,
-          alpha_keep_no_rs=0.,
-          alpha_keep_rs=0.,
-          subsitution_rate=1.,
-          min_snippet_token_len=3,
-          num_snippets_per_substitution=4000,
-          description='Deterministic C4-WSRS dataset.'),
   ]
 
   def _info(self) -> tfds.core.DatasetInfo:
