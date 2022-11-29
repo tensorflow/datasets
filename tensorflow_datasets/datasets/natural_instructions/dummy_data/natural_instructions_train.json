@@ -1,0 +1,77 @@
+{
+  "Contributors": [
+      "Pulkit Verma"
+  ],
+  "Source": [
+      "synthetic"
+  ],
+  "URL": [
+      "NaN"
+  ],
+  "Categories": [
+      "Program Execution"
+  ],
+  "Reasoning": [],
+  "Definition": [
+      "In this task, you are given inputs i and A, where i is an integer and A is a list. You need to output the first i elements of A, starting with the 1st element in A. i will always have a value less than the length of A"
+  ],
+  "Input_language": [
+      "English"
+  ],
+  "Output_language": [
+      "English"
+  ],
+  "Instruction_language": [
+      "English"
+  ],
+  "Domains": [
+      "Mathematics"
+  ],
+  "Positive Examples": [
+      {
+          "input": "3, ['a', '34', 'f', '931', '7', '3432', '13245', '762']",
+          "output": "a, 34, f",
+          "explanation": "Here, the first 3 elements from the list are 'a', '34', and 'f'."
+      },
+      {
+          "input": "6, ['5191', '9389', '9907', '8877', 'N', '6453', 's', 'k', '6209', 'W', '4591', 'B', 'p']",
+          "output": "5191, 9389, 9907, 8877, N, 6453",
+          "explanation": "Here, the first 6 elements from the list are '5191', '9389', '9907', '8877', 'N', and '6453'."
+      }
+  ],
+  "Negative Examples": [
+      {
+          "input": "5, ['7475', 'B', '2459', 'm', '8349', 'O', 'q', 'Y', 'f']",
+          "output": "7475, 2459",
+          "explanation": "Here, the answer should have been '7475, B, 2459, m, 8349' as the first 5 elements of the list are '7475', 'B', '2459', 'm', and '8349'."
+      },
+      {
+          "input": "2, ['878', '3', 'g', '4324', 'fsfs', '24322']",
+          "output": "878, 3, g",
+          "explanation": "Here, the answer should have been '878, 3' as the first 2 elements of the list are '878' and '3'."
+      }
+  ],
+  "Instances": [
+      {
+          "id": "task063-75d82a0556b84113b2cc419c2abc9948",
+          "input": "7, ['q', 'q', '6047', 'e', '4093', 'w', 'D', '2021', 'R', 'j', '1003', 'Y', 'L', 'Q', 'I', 'F', 'B', '8745', 'H', 'Z', 'O', 'g']",
+          "output": [
+              "q, q, 6047, e, 4093, w, D"
+          ]
+      },
+      {
+          "id": "task063-62a4be2dbad84644895e452d7d5db203",
+          "input": "2, ['n', 'f', 'V', 'a', '4729', '1347']",
+          "output": [
+              "n, f"
+          ]
+      },
+      {
+          "id": "task063-391b1edec9934c63b19d009c42fffb02",
+          "input": "7, ['6463', '5403', '1335', '3567', 'X', '129', '1263', 'F', 'u', '5551', 'a', '8569', 'C', '5993', '1397', 'C', 'm', 'i', 'M', 'f', '1691', 'O', 'S', '379', 'k', 'I', 'k']",
+          "output": [
+              "6463, 5403, 1335, 3567, X, 129, 1263"
+          ]
+      }
+  ]
+}
