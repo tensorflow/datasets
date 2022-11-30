@@ -43,9 +43,12 @@ def test_convert_to_np_dtype():
       "double") == np.float64
   assert huggingface_dataset_builder._convert_to_np_dtype(
       "large_string") == np.object_
+  assert huggingface_dataset_builder._convert_to_np_dtype(
+      "string") == np.object_
   assert huggingface_dataset_builder._convert_to_np_dtype("utf8") == np.object_
   assert huggingface_dataset_builder._convert_to_np_dtype("int32") == np.int32
   assert huggingface_dataset_builder._convert_to_np_dtype("int64") == np.int64
+  assert huggingface_dataset_builder._convert_to_np_dtype("int64") == tf.int64
   assert huggingface_dataset_builder._convert_to_np_dtype(
       "timestamp[s, tz=UTC]") == np.int64
   with pytest.raises(ValueError, match="Unrecognized type.+"):
