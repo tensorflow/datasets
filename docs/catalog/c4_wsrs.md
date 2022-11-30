@@ -24,6 +24,8 @@ Common Crawl's web crawl corpus.
 
 The original source is the Common Crawl dataset: https://commoncrawl.org
 
+*   **Config description**: Default C4-WSRS dataset.
+
 *   **Homepage**:
     [https://github.com/google-research/google-research/tree/master/deciphering_clinical_abbreviations](https://github.com/google-research/google-research/tree/master/deciphering_clinical_abbreviations)
 
@@ -33,6 +35,21 @@ The original source is the Common Crawl dataset: https://commoncrawl.org
 *   **Versions**:
 
     *   **`1.0.0`** (default): Initial release.
+
+*   **Download size**: `143.01 KiB`
+
+*   **Dataset size**: `5.84 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'train'`      | 9,575,852
+`'validation'` | 991,422
 
 *   **Feature structure**:
 
@@ -58,28 +75,6 @@ original_snippet    | Text         |       | object |
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Citation**:
-
-
-## c4_wsrs/default (default config)
-
-*   **Config description**: Default C4-WSRS dataset.
-
-*   **Download size**: `143.01 KiB`
-
-*   **Dataset size**: `5.84 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | --------:
-`'train'`      | 9,575,852
-`'validation'` | 991,422
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -118,23 +113,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## c4_wsrs/deterministic
+*   **Citation**:
 
-*   **Config description**: Deterministic C4-WSRS dataset.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+## c4_wsrs/default (default config)
