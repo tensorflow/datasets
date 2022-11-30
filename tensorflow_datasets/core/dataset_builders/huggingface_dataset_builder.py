@@ -40,6 +40,7 @@ from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _IMAGE_ENCODING_FORMAT = "png"
 
@@ -52,6 +53,7 @@ def _convert_to_np_dtype(dtype: str) -> np.dtype:
       "double": np.float64,
       "large_string": np.object_,
       "utf8": np.object_,
+      "string": np.object_,
   }
   if dtype in str2val:
     return str2val[dtype]
@@ -60,6 +62,8 @@ def _convert_to_np_dtype(dtype: str) -> np.dtype:
   elif dtype.startswith("timestamp"):
     # Timestamps are converted to seconds since UNIX epoch.
     return np.int64
+  elif hasattr(tf.dtypes, dtype):
+    return getattr(tf.dtypes, dtype)
   else:
     raise ValueError(
         f"Unrecognized type {dtype}. Please open an issue if you think "
@@ -198,14 +202,17 @@ class HuggingfaceDatasetBuilder(
       hf_config: Optional[str] = None,
       ignore_verifications: bool = False,
       data_dir: Optional[epath.PathLike] = None,
+      **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
     self._ignore_verifications = ignore_verifications
+    self.config_kwargs = config_kwargs
     tfds_config = _convert_config_name(hf_config)
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
     self._hf_builder = hf_datasets.load_dataset_builder(self._hf_repo_id,
-                                                        self._hf_config)
+                                                        self._hf_config,
+                                                        **self.config_kwargs)
     self._hf_info = self._hf_builder.info
     version = str(self._hf_info.version or self._hf_builder.VERSION or "1.0.0")
     self.VERSION = utils.Version(version)  # pylint: disable=invalid-name
@@ -248,7 +255,8 @@ class HuggingfaceDatasetBuilder(
     hf_dataset_dict = hf_datasets.load_dataset(
         self._hf_repo_id,
         self._hf_config,
-        ignore_verifications=self._ignore_verifications)
+        ignore_verifications=self._ignore_verifications,
+        **self.config_kwargs)
     return {
         split: self._generate_examples(data)
         for split, data in hf_dataset_dict.items()
