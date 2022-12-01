@@ -35,6 +35,7 @@ from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
+MAX_RETRIES = 10
 
 # Response interface. Has `.url` and `.headers` attribute
 Response = Union[requests.Response, urllib.response.addinfourl]
@@ -279,6 +280,15 @@ def _open_with_requests(
 ) -> Iterator[Tuple[Response, Iterable[bytes]]]:
   """Open url with request."""
   with requests.Session() as session:
+    retries = requests.packages.urllib3.util.retry.Retry(
+        total=MAX_RETRIES,
+        backoff_factor=0.2,
+        status_forcelist=[500, 502, 503, 504],
+        raise_on_redirect=True,
+        raise_on_status=True)
+    session.mount('http://', requests.adapters.HTTPAdapter(max_retries=retries))
+    session.mount('https://',
+                  requests.adapters.HTTPAdapter(max_retries=retries))
     if _DRIVE_URL.match(url):
       url = _normalize_drive_url(url)
     with session.get(url, stream=True, **kwargs) as response:
