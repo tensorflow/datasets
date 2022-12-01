@@ -86,7 +86,7 @@ The dataset collection info contains four fields:
     corresponding release notes.
 *   citation: An optional (list of) BibTeX citation(s) for the dataset
     collection. There are two ways to define a dataset collection's citation:
-    (1) As a (multi-line) string directly in the colletion's `my_collection.py`
+    (1) As a (multi-line) string directly in the collection's `my_collection.py`
     file - similarly as it is already done for TFDS datasets; (2) In a
     `citations.bib` file, which must be placed in the dataset collection folder.
 
