@@ -24,8 +24,11 @@ _DATASET_DIR = "https://raw.githubusercontent.com/allenai/natural-instructions/m
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for natural_instructions dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  name = "natural_instructions"
+  VERSION = tfds.core.Version("1.0.1")
   RELEASE_NOTES = {
+      "1.0.1": "Added task name field, and fixed ID used for shuffling to use "
+               "stable IDs.",
       "1.0.0": "Initial release.",
   }
 
@@ -38,6 +41,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "input": tfds.features.Text(),
             "output": tfds.features.Text(),
             "source": tfds.features.Text(),
+            "task_name": tfds.features.Text(),
             "definition": tfds.features.Text(),
         }),
         supervised_keys=None,
@@ -58,9 +62,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    idx = 0
-    filepaths = list(path.values()) if isinstance(path, dict) else [path]
-    for fp in filepaths:
+    filepaths = path if isinstance(path, dict) else {"test": path}
+    for task_name, fp in filepaths.items():
       data = json.loads(fp.read_text())
       source = data["Source"]
       definition = data["Definition"]
@@ -69,12 +72,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       if isinstance(definition, list):
         definition = definition[0]
       for row in data["Instances"]:
-        idx += 1
-        yield idx, {
+        yield row["id"], {
             "id": row["id"],
             "input": row["input"],
             "output": row["output"][0],
             "source": source,
+            "task_name": task_name,
             "definition": definition,
         }
 
