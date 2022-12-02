@@ -53,7 +53,7 @@ workers:
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
-If you're using `tfds-nightly`, make sure to to echo from `tfds-nightly` in case
+If you're using `tfds-nightly`, make sure to echo from `tfds-nightly` in case
 the dataset has been updated since the last release.
 
 ```sh
