@@ -26,7 +26,7 @@ from tensorflow_datasets.core.utils import type_utils
     (tf.int64, np.int64),
     (np.float64, np.float64),
     (tf.float64, np.float64),
-    (tf.string, np.str_),
+    (tf.string, np.object_),
 ])
 def test_tree_parallel_map(input_args, expected_output):
   assert type_utils.cast_to_numpy(input_args) == expected_output
