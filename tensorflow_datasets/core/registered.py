@@ -246,11 +246,13 @@ def _get_existing_dataset_packages(
   ds_dir_pkg = '.'.join(['tensorflow_datasets'] +
                         datasets_dir.split(os.path.sep))
   for child in datasets_dir_path.iterdir():
-    # Except for `__init__.py`, all children of datasets/ directory are packages
-    # of datasets.
-    # There are no exceptions, so no needs to check child is a directory and
-    # contains a `builder.py` module.
-    if child.name != '__init__.py':
+    # Except for a few exceptions, all children of datasets/ directory are
+    # packages of datasets, no needs to check child is a directory and contains
+    # a `builder.py` module.
+    exceptions = [
+        '__init__.py',
+    ]
+    if child.name not in exceptions:
       pkg_path = epath.Path(datasets_dir_path) / child.name
       builder_module = f'{ds_dir_pkg}.{child.name}.{child.name}_dataset_builder'
       datasets[child.name] = (pkg_path, builder_module)
