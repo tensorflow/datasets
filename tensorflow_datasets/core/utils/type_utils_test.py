@@ -21,6 +21,10 @@ import tensorflow as tf
 from tensorflow_datasets.core.utils import type_utils
 
 
+def test_foo():
+  assert False
+
+
 @pytest.mark.parametrize('input_args,expected_output', [
     (np.int64, np.int64),
     (tf.int64, np.int64),
