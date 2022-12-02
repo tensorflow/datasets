@@ -22,6 +22,7 @@ and this project adheres to
     new corresponding method.
 -   `tfds.core.DatasetBuilder` can have a default limit for the number of
     simultaneous downloads. `tfds.download.DownloadConfig` can override it.
+-   `tfds.features.Audio` supports storing raw audio data for lazy decoding.
 
 ### Changed
 

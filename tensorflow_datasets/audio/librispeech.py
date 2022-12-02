@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import os
+from typing import Iterable, List
 
 from etils import epath
 import numpy as np
@@ -39,6 +40,10 @@ _DESCRIPTION = """\
 LibriSpeech is a corpus of approximately 1000 hours of read English speech with sampling rate of 16 kHz,
 prepared by Vassil Panayotov with the assistance of Daniel Povey. The data is derived from read
 audiobooks from the LibriVox project, and has been carefully segmented and aligned.
+
+It's recommended to use lazy audio decoding for faster reading and smaller dataset size:
+- install `tensorflow_io` library: `pip install tensorflow-io`
+- enable lazy decoding: `tfds.load('librispeech', builder_kwargs={'config': 'lazy_decode'})`
 """
 
 _URL = "http://www.openslr.org/12"
@@ -54,25 +59,54 @@ _DL_URLS = {
 }
 
 
-class Librispeech(tfds.core.BeamBasedBuilder):
+class LibrispeechConfig(tfds.core.BuilderConfig):
+  """Librispeech dataset config."""
+
+  def __init__(self, *args, lazy_decode: bool = False, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.lazy_decode = lazy_decode
+
+
+class Librispeech(tfds.core.GeneratorBasedBuilder):
   """Librispeech dataset."""
 
-  VERSION = tfds.core.Version("2.1.1")
+  VERSION = tfds.core.Version("2.1.2")
   RELEASE_NOTES = {
+      "2.1.2": "Add 'lazy_decode' config.",
       "2.1.1": "Fix speech data type with dtype=tf.int16.",
   }
   MAX_SIMULTANEOUS_DOWNLOADS = 5  # in accordance with http://www.openslr.org
+  BUILDER_CONFIGS = [
+      LibrispeechConfig(
+          name="default",
+          description="Default dataset.",
+          version=tfds.core.Version("2.1.1")),
+      LibrispeechConfig(
+          name="lazy_decode",
+          description="Raw audio dataset.",
+          lazy_decode=True,
+          version=tfds.core.Version("2.1.2")),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "speech": tfds.features.Audio(sample_rate=16000, dtype=np.int16),
-            "text": tfds.features.Text(),
-            "speaker_id": np.int64,
-            "chapter_id": np.int64,
-            "id": np.str_,
+            "speech":
+                tfds.features.Audio(
+                    sample_rate=16000,
+                    dtype=np.int16,
+                    lazy_decode=self.builder_config.lazy_decode,
+                    file_format="flac"),
+            "text":
+                tfds.features.Text(),
+            "speaker_id":
+                np.int64,
+            "chapter_id":
+                np.int64,
+            "id":
+                np.str_,
         }),
         supervised_keys=("speech", "text"),
         homepage=_URL,
@@ -80,21 +114,21 @@ class Librispeech(tfds.core.BeamBasedBuilder):
         metadata=tfds.core.MetadataDict(sample_rate=16000,),
     )
 
-  def _populate_metadata(self, dirs):
+  def _populate_metadata(self, dirs: Iterable[epath.Path]):
     # All dirs contain the same metadata.
-    directory = list(dirs.values())[0]
+    directory = list(dirs)[0]
     self.info.metadata["speakers"] = self._read_metadata_file(
-        os.path.join(directory, "LibriSpeech/SPEAKERS.TXT"),
+        directory / "LibriSpeech/SPEAKERS.TXT",
         ["speaker_id", "gender", "subset", "minutes", "name"])
     self.info.metadata["chapters"] = self._read_metadata_file(
-        os.path.join(directory, "LibriSpeech/CHAPTERS.TXT"), [
+        directory / "LibriSpeech/CHAPTERS.TXT", [
             "chapter_id", "speaker_id", "minutes", "subset", "project_id",
             "book_id", "chapter_title", "project_title"
         ])
 
-  def _read_metadata_file(self, path, field_names):
+  def _read_metadata_file(self, path: epath.Path, field_names: List[str]):
     metadata = {}
-    with epath.Path(path).open() as f:
+    with path.open() as f:
       for line in f:
         if line.startswith(";"):
           continue
@@ -104,40 +138,41 @@ class Librispeech(tfds.core.BeamBasedBuilder):
         }
     return metadata
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     extracted_dirs = dl_manager.download_and_extract(_DL_URLS)
-    self._populate_metadata(extracted_dirs)
-    splits = [
-        tfds.core.SplitGenerator(name=k, gen_kwargs={"directory": v})
-        for k, v in extracted_dirs.items()
-    ]
+    self._populate_metadata(extracted_dirs.values())
+    splits = {
+        split: self._generate_examples(directory)
+        for split, directory in extracted_dirs.items()
+    }
     return splits
 
-  def _build_pcollection(self, pipeline, directory):
+  def _generate_examples(self, directory: epath.Path):
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
-    return (pipeline
-            | beam.Create([directory])
+
+    transcripts_glob = os.path.join(directory, "LibriSpeech", "*/*/*/*.txt")
+    transcripts_files = tf.io.gfile.glob(transcripts_glob)
+
+    return (beam.Create(transcripts_files)
             | beam.FlatMap(_generate_librispeech_examples)
             | beam.Reshuffle())
 
 
-def _generate_librispeech_examples(directory):
-  """Generate examples from a Librispeech directory."""
-  transcripts_glob = os.path.join(directory, "LibriSpeech", "*/*/*/*.txt")
-  for transcript_file in tf.io.gfile.glob(transcripts_glob):
-    path = os.path.dirname(transcript_file)
-    with tf.io.gfile.GFile(os.path.join(path, transcript_file)) as f:
-      for line in f:
-        line = line.strip()
-        key, transcript = line.split(" ", 1)
-        audio_file = "%s.flac" % key
-        speaker_id, chapter_id = [int(el) for el in key.split("-")[:2]]
-        example = {
-            "id": key,
-            "speaker_id": speaker_id,
-            "chapter_id": chapter_id,
-            "speech": os.path.join(path, audio_file),
-            "text": transcript
-        }
-        yield key, example
+def _generate_librispeech_examples(transcript_file: str):
+  """Generate examples from a Librispeech transcript file."""
+  audio_dir = os.path.dirname(transcript_file)
+  with tf.io.gfile.GFile(transcript_file) as f:
+    for line in f:
+      line = line.strip()
+      key, transcript = line.split(" ", 1)
+      audio_file = "%s.flac" % key
+      speaker_id, chapter_id = [int(el) for el in key.split("-")[:2]]
+      example = {
+          "id": key,
+          "speaker_id": speaker_id,
+          "chapter_id": chapter_id,
+          "speech": os.path.join(audio_dir, audio_file),
+          "text": transcript
+      }
+      yield key, example
