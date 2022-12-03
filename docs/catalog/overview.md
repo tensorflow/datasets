@@ -285,6 +285,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
+*   [`natural_instructions`](natural_instructions.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Nearest neighbors`
 
@@ -313,6 +315,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
+*   [`natural_instructions`](natural_instructions.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Question answering`
 
@@ -466,7 +470,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`bccd`](bccd.md)
 *   [`beir`](beir.md)
 *   [`big_patent`](big_patent.md)
-*   [`bigearthnet`](bigearthnet.md)
 *   [`billsum`](billsum.md)
 *   [`blimp`](blimp.md)
 *   [`booksum`](booksum.md)
@@ -514,6 +517,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`mrqa`](mrqa.md)
 *   [`multi_nli`](multi_nli.md)
 *   [`multi_nli_mismatch`](multi_nli_mismatch.md)
+*   [`natural_instructions`](natural_instructions.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`openbookqa`](openbookqa.md)
 *   [`paws_wiki`](paws_wiki.md)
 *   [`paws_x_wiki`](paws_x_wiki.md)
@@ -560,6 +565,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`bool_q`](bool_q.md)
+*   [`natural_instructions`](natural_instructions.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Text generation`
 
@@ -569,6 +576,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
+*   [`natural_instructions`](natural_instructions.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Text summarization`
 
