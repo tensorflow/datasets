@@ -428,6 +428,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/natural_instructions
+    status: nightly
+    title: natural_instructions
   title: Natural language understanding
 - section:
   - path: /datasets/catalog/deep1b
@@ -468,6 +471,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/natural_instructions
+    status: nightly
+    title: natural_instructions
   title: Question answering
 - section:
   - path: /datasets/catalog/coqa
@@ -706,8 +712,6 @@ toc:
     title: beir
   - path: /datasets/catalog/big_patent
     title: big_patent
-  - path: /datasets/catalog/bigearthnet
-    title: bigearthnet
   - path: /datasets/catalog/billsum
     title: billsum
   - path: /datasets/catalog/blimp
@@ -800,6 +804,9 @@ toc:
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
+  - path: /datasets/catalog/natural_instructions
+    status: nightly
+    title: natural_instructions
   - path: /datasets/catalog/openbookqa
     title: openbookqa
   - path: /datasets/catalog/paws_wiki
@@ -887,6 +894,9 @@ toc:
     title: ag_news_subset
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/natural_instructions
+    status: nightly
+    title: natural_instructions
   title: Text classification
 - section:
   - path: /datasets/catalog/aeslc
@@ -901,6 +911,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
+  - path: /datasets/catalog/natural_instructions
+    status: nightly
+    title: natural_instructions
   title: Text generation
 - section:
   - path: /datasets/catalog/aeslc
