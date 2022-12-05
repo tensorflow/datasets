@@ -302,6 +302,7 @@ class FeatureTensorTest(
         ])
 
   @parameterized.parameters([
+      (np.str_, features_lib.Encoding.NONE),
       (np.object_, features_lib.Encoding.NONE),
       (tf.string, features_lib.Encoding.NONE),
       # Bytes encoding not supported for tf.string

@@ -109,7 +109,7 @@ class BBoxFeature(tensor_feature.Tensor):
   def to_json_content(self) -> feature_pb2.BoundingBoxFeature:
     return feature_pb2.BoundingBoxFeature(
         shape=feature_lib.to_shape_proto(self._shape),
-        dtype=feature_lib.dtype_to_string(self._dtype),
+        dtype=feature_lib.dtype_to_str(self._dtype),
     )
 
 

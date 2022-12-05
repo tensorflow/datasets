@@ -65,21 +65,34 @@ def test_from_shape_proto_unspecified():
   assert [28, 28, None] == feature.from_shape_proto(shape_proto)
 
 
-def test_dtype_to_string():
-  assert feature.dtype_to_string(np.int64) == "int64"
+def test_dtype_to_str():
+  assert feature.dtype_to_str(np.int64) == "int64"
 
 
 def test_dtype_from_str():
   assert feature.dtype_from_str("int64") == np.int64
 
 
+def test_dtype_for_string_types():
+  assert feature.dtype_from_str("str") == np.object_
+  assert feature.dtype_from_str("string") == np.object_
+  assert feature.dtype_to_str(np.str_) == "string"
+  assert feature.dtype_to_str(np.object_) == "string"
+  assert feature.dtype_to_str(tf.string) == "string"
+
+
 def test_encode_and_dtype_from_str():
   dtypes = [
-      tf.int64, tf.string, tf.bfloat16, tf.bool, np.int64, np.str_, np.bool_,
-      np.object_
+      tf.int64,
+      tf.string,
+      tf.bfloat16,
+      tf.bool,
+      np.int64,
+      np.bool_,
+      np.object_,
   ]
   for dtype in dtypes:
-    assert feature.dtype_from_str(feature.dtype_to_string(dtype)) == dtype
+    assert feature.dtype_from_str(feature.dtype_to_str(dtype)) == dtype
 
 
 @pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])

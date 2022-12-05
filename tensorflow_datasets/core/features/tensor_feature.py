@@ -25,6 +25,7 @@ import numpy as np
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
@@ -86,7 +87,7 @@ class Tensor(feature_lib.FeatureConnector):
     """
     super().__init__(doc=doc)
     self._shape = tuple(shape)
-    self._dtype = type_utils.cast_to_numpy(dtype)
+    self._dtype = dtype_utils.cast_to_numpy(dtype)
     if isinstance(encoding, str):
       encoding = encoding.lower()
     self._encoding = Encoding(encoding)
@@ -148,7 +149,7 @@ class Tensor(feature_lib.FeatureConnector):
     if not isinstance(example_data, np.ndarray):
       example_data = np.array(example_data, dtype=np_dtype)
     # Ensure the shape and dtype match
-    if not tf_utils.is_same_dtype_type(example_data.dtype, np_dtype):
+    if example_data.dtype != np_dtype:
       raise ValueError('Dtype {} do not match {}'.format(
           example_data.dtype, np_dtype))
 
@@ -232,7 +233,7 @@ class Tensor(feature_lib.FeatureConnector):
   def to_json_content(self) -> feature_pb2.TensorFeature:
     return feature_pb2.TensorFeature(
         shape=feature_lib.to_shape_proto(self._shape),
-        dtype=feature_lib.dtype_to_string(self._dtype),
+        dtype=feature_lib.dtype_to_str(self._dtype),
         encoding=self._encoding.value)
 
 
@@ -253,6 +254,6 @@ def get_inner_feature_repr(feature):
   # * For the base `Tensor` class (and not subclass).
   # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
   if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison
-    return feature_lib.dtype_to_string(feature.np_dtype)
+    return feature_lib.dtype_to_str(feature.np_dtype)
   else:
     return repr(feature)

@@ -13,20 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for type_utils."""
-
 import numpy as np
 import pytest
 import tensorflow as tf
-from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils import dtype_utils
 
 
 @pytest.mark.parametrize('input_args,expected_output', [
     (np.int64, np.int64),
     (tf.int64, np.int64),
-    (np.float64, np.float64),
-    (tf.float64, np.float64),
     (tf.string, np.object_),
+    (np.str_, np.object_),
 ])
 def test_tree_parallel_map(input_args, expected_output):
-  assert type_utils.cast_to_numpy(input_args) == expected_output
+  assert dtype_utils.cast_to_numpy(input_args) == expected_output

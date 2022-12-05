@@ -35,6 +35,7 @@ import six
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import tree_utils
@@ -85,7 +86,7 @@ class TensorInfo(object):
     """
     self.shape = tf_utils.convert_to_shape(shape)
     self._dtype = dtype
-    self.np_dtype: np.dtype = type_utils.cast_to_numpy(dtype)
+    self.np_dtype: np.dtype = dtype_utils.cast_to_numpy(dtype)
     # For backwards compatibility: now it is named np_dtype.
     self.numpy_dtype = self.np_dtype
     self.default_value = default_value
@@ -142,7 +143,7 @@ class TensorInfo(object):
     return '{}(shape={}, dtype={})'.format(
         type(self).__name__,
         self.shape,
-        dtype_to_string(self.np_dtype),
+        dtype_to_str(self.np_dtype),
     )
 
 
@@ -863,7 +864,7 @@ class FeatureConnector(object):
     # Ensure ordering of keys by adding them one-by-one
     repr_info = collections.OrderedDict()
     repr_info['shape'] = tensor_info.shape
-    repr_info['dtype'] = dtype_to_string(tensor_info.np_dtype)
+    repr_info['dtype'] = dtype_to_str(tensor_info.np_dtype)
     additional_info = self._additional_repr_info()
     for k, v in additional_info.items():
       repr_info[k] = v
@@ -1050,14 +1051,22 @@ def from_shape_proto(shape: feature_pb2.Shape) -> utils.Shape:
   return [parse_dimension(dimension) for dimension in shape.dimensions]
 
 
-def dtype_to_string(dtype: type_utils.TfdsDType) -> str:
-  np_dtype: np.dtype = type_utils.cast_to_numpy(dtype)
+_STRING_NAME = 'string'
+
+
+def dtype_to_str(dtype: type_utils.TfdsDType) -> str:
+  np_dtype: np.dtype = dtype_utils.cast_to_numpy(dtype)
+  if np_dtype == np.object_:
+    return _STRING_NAME
   return np.dtype(np_dtype).name
 
 
 def dtype_from_str(dtype: str) -> type_utils.TfdsDType:
+  if dtype == _STRING_NAME:
+    return np.object_
   try:
-    return np.dtype(dtype)
+    np_dtype = np.dtype(dtype)
+    return dtype_utils.cast_to_numpy(np_dtype)
   except TypeError:
     return tf.dtypes.as_dtype(dtype)
 
