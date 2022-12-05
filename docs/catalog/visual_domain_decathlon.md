@@ -84,7 +84,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=100),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -95,7 +95,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -166,7 +166,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=100),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -177,7 +177,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -248,7 +248,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -259,7 +259,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -330,7 +330,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=47),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -341,7 +341,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -412,7 +412,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=43),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -423,7 +423,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -494,7 +494,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=1000),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -505,7 +505,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -576,7 +576,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=1623),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -587,7 +587,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -658,7 +658,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -669,7 +669,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -740,7 +740,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=101),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -751,7 +751,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -822,7 +822,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=102),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -833,7 +833,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

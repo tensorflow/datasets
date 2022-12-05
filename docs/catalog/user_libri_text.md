@@ -147,8 +147,8 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'book_id': Text(shape=(), dtype=object),
-    'text': Text(shape=(), dtype=object),
+    'book_id': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -157,9 +157,9 @@ FeaturesDict({
 | Feature | Class        | Shape | Dtype  | Description                        |
 | :------ | :----------- | :---- | :----- | :--------------------------------- |
 |         | FeaturesDict |       |        |                                    |
-| book_id | Text         |       | object | The book that this text was pulled |
+| book_id | Text         |       | string | The book that this text was pulled |
 :         :              :       :        : from                               :
-| text    | Text         |       | object | A sentence of text extracted from  |
+| text    | Text         |       | string | A sentence of text extracted from  |
 :         :              :       :        : a book                             :
 
 *   **Supervised keys** (See

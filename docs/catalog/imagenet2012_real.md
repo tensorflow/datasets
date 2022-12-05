@@ -71,7 +71,7 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=object),
+    'file_name': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'original_label': ClassLabel(shape=(), dtype=int64, num_classes=1000),
     'real_label': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
@@ -83,7 +83,7 @@ FeaturesDict({
 Feature        | Class                | Shape           | Dtype  | Description
 :------------- | :------------------- | :-------------- | :----- | :----------
                | FeaturesDict         |                 |        |
-file_name      | Text                 |                 | object |
+file_name      | Text                 |                 | string |
 image          | Image                | (None, None, 3) | uint8  |
 original_label | ClassLabel           |                 | int64  |
 real_label     | Sequence(ClassLabel) | (None,)         | int64  |

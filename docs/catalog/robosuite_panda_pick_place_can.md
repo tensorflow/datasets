@@ -86,8 +86,8 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'agent_id': object,
-    'episode_id': object,
+    'agent_id': string,
+    'episode_id': string,
     'episode_index': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -122,8 +122,8 @@ FeaturesDict({
 Feature                                  | Class        | Shape           | Dtype   | Description
 :--------------------------------------- | :----------- | :-------------- | :------ | :----------
                                          | FeaturesDict |                 |         |
-agent_id                                 | Tensor       |                 | object  |
-episode_id                               | Tensor       |                 | object  |
+agent_id                                 | Tensor       |                 | string  |
+episode_id                               | Tensor       |                 | string  |
 episode_index                            | Tensor       |                 | int32   |
 steps                                    | Dataset      |                 |         |
 steps/action                             | Tensor       | (7,)            | float64 |
@@ -209,8 +209,8 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'agent_id': object,
-    'episode_id': object,
+    'agent_id': string,
+    'episode_id': string,
     'episode_index': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -249,8 +249,8 @@ FeaturesDict({
 Feature                                    | Class        | Shape           | Dtype   | Description
 :----------------------------------------- | :----------- | :-------------- | :------ | :----------
                                            | FeaturesDict |                 |         |
-agent_id                                   | Tensor       |                 | object  |
-episode_id                                 | Tensor       |                 | object  |
+agent_id                                   | Tensor       |                 | string  |
+episode_id                                 | Tensor       |                 | string  |
 episode_index                              | Tensor       |                 | int32   |
 steps                                      | Dataset      |                 |         |
 steps/action                               | Tensor       | (7,)            | float64 |
@@ -339,8 +339,8 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'agent_id': object,
-    'episode_id': object,
+    'agent_id': string,
+    'episode_id': string,
     'episode_index': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float32),
@@ -375,8 +375,8 @@ FeaturesDict({
 Feature                                  | Class        | Shape           | Dtype   | Description
 :--------------------------------------- | :----------- | :-------------- | :------ | :----------
                                          | FeaturesDict |                 |         |
-agent_id                                 | Tensor       |                 | object  |
-episode_id                               | Tensor       |                 | object  |
+agent_id                                 | Tensor       |                 | string  |
+episode_id                               | Tensor       |                 | string  |
 episode_index                            | Tensor       |                 | int32   |
 steps                                    | Dataset      |                 |         |
 steps/action                             | Tensor       | (7,)            | float32 |

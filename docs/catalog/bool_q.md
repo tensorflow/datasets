@@ -58,9 +58,9 @@ Split          | Examples
 ```python
 FeaturesDict({
     'answer': bool,
-    'passage': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'passage': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -70,9 +70,9 @@ Feature  | Class        | Shape | Dtype  | Description
 :------- | :----------- | :---- | :----- | :----------
          | FeaturesDict |       |        |
 answer   | Tensor       |       | bool   |
-passage  | Text         |       | object |
-question | Text         |       | object |
-title    | Text         |       | object |
+passage  | Text         |       | string |
+question | Text         |       | string |
+title    | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

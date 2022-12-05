@@ -50,14 +50,14 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'UID': Text(shape=(), dtype=object),
-    'field': Text(shape=(), dtype=object),
+    'UID': Text(shape=(), dtype=string),
+    'field': Text(shape=(), dtype=string),
     'lexically_identical': bool,
-    'linguistics_term': Text(shape=(), dtype=object),
+    'linguistics_term': Text(shape=(), dtype=string),
     'one_prefix_method': bool,
     'pair_id': int32,
-    'sentence_bad': Text(shape=(), dtype=object),
-    'sentence_good': Text(shape=(), dtype=object),
+    'sentence_bad': Text(shape=(), dtype=string),
+    'sentence_good': Text(shape=(), dtype=string),
     'simple_LM_method': bool,
     'two_prefix_method': bool,
 })
@@ -68,14 +68,14 @@ FeaturesDict({
 Feature             | Class        | Shape | Dtype  | Description
 :------------------ | :----------- | :---- | :----- | :----------
                     | FeaturesDict |       |        |
-UID                 | Text         |       | object |
-field               | Text         |       | object |
+UID                 | Text         |       | string |
+field               | Text         |       | string |
 lexically_identical | Tensor       |       | bool   |
-linguistics_term    | Text         |       | object |
+linguistics_term    | Text         |       | string |
 one_prefix_method   | Tensor       |       | bool   |
 pair_id             | Tensor       |       | int32  |
-sentence_bad        | Text         |       | object |
-sentence_good       | Text         |       | object |
+sentence_bad        | Text         |       | string |
+sentence_good       | Text         |       | string |
 simple_LM_method    | Tensor       |       | bool   |
 two_prefix_method   | Tensor       |       | bool   |
 

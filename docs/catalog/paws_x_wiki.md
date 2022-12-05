@@ -64,8 +64,8 @@ while 1 indicates the pair is a paraphrase.
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=object),
-    'sentence2': Text(shape=(), dtype=object),
+    'sentence1': Text(shape=(), dtype=string),
+    'sentence2': Text(shape=(), dtype=string),
 })
 ```
 
@@ -75,8 +75,8 @@ Feature   | Class        | Shape | Dtype  | Description
 :-------- | :----------- | :---- | :----- | :----------
           | FeaturesDict |       |        |
 label     | ClassLabel   |       | int64  |
-sentence1 | Text         |       | object |
-sentence2 | Text         |       | object |
+sentence1 | Text         |       | string |
+sentence2 | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

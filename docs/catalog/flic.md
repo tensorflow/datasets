@@ -65,7 +65,7 @@ Split     | Examples
 FeaturesDict({
     'currframe': float64,
     'image': Image(shape=(480, 720, 3), dtype=uint8),
-    'moviename': Text(shape=(), dtype=object),
+    'moviename': Text(shape=(), dtype=string),
     'poselet_hit_idx': Sequence(uint16),
     'torsobox': BBoxFeature(shape=(4,), dtype=float32),
     'xcoords': Sequence(float64),
@@ -80,7 +80,7 @@ Feature         | Class            | Shape         | Dtype   | Description
                 | FeaturesDict     |               |         |
 currframe       | Tensor           |               | float64 |
 image           | Image            | (480, 720, 3) | uint8   |
-moviename       | Text             |               | object  |
+moviename       | Text             |               | string  |
 poselet_hit_idx | Sequence(Tensor) | (None,)       | uint16  |
 torsobox        | BBoxFeature      | (4,)          | float32 |
 xcoords         | Sequence(Tensor) | (None,)       | float64 |

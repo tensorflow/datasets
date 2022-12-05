@@ -49,11 +49,11 @@ comprehension.
 
 ```python
 FeaturesDict({
-    'answers': Sequence(Text(shape=(), dtype=object)),
-    'article': Text(shape=(), dtype=object),
-    'example_id': Text(shape=(), dtype=object),
-    'options': Sequence(Sequence(Text(shape=(), dtype=object))),
-    'questions': Sequence(Text(shape=(), dtype=object)),
+    'answers': Sequence(Text(shape=(), dtype=string)),
+    'article': Text(shape=(), dtype=string),
+    'example_id': Text(shape=(), dtype=string),
+    'options': Sequence(Sequence(Text(shape=(), dtype=string))),
+    'questions': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
@@ -62,11 +62,11 @@ FeaturesDict({
 Feature    | Class                    | Shape        | Dtype  | Description
 :--------- | :----------------------- | :----------- | :----- | :----------
            | FeaturesDict             |              |        |
-answers    | Sequence(Text)           | (None,)      | object |
-article    | Text                     |              | object |
-example_id | Text                     |              | object |
-options    | Sequence(Sequence(Text)) | (None, None) | object |
-questions  | Sequence(Text)           | (None,)      | object |
+answers    | Sequence(Text)           | (None,)      | string |
+article    | Text                     |              | string |
+example_id | Text                     |              | string |
+options    | Sequence(Sequence(Text)) | (None, None) | string |
+questions  | Sequence(Text)           | (None,)      | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

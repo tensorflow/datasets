@@ -69,12 +69,12 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': object,
-    'jams': object,
+    'id': string,
+    'jams': string,
     'mixture_audio': Audio(shape=(160000,), dtype=int16),
     'segments': Sequence({
         'end_time_seconds': float32,
-        'label': object,
+        'label': string,
         'start_time_seconds': float32,
     }),
     'sources': Sequence({
@@ -89,12 +89,12 @@ FeaturesDict({
 Feature                     | Class        | Shape     | Dtype   | Description
 :-------------------------- | :----------- | :-------- | :------ | :----------
                             | FeaturesDict |           |         |
-id                          | Tensor       |           | object  |
-jams                        | Tensor       |           | object  |
+id                          | Tensor       |           | string  |
+jams                        | Tensor       |           | string  |
 mixture_audio               | Audio        | (160000,) | int16   |
 segments                    | Sequence     |           |         |
 segments/end_time_seconds   | Tensor       |           | float32 |
-segments/label              | Tensor       |           | object  |
+segments/label              | Tensor       |           | string  |
 segments/start_time_seconds | Tensor       |           | float32 |
 sources                     | Sequence     |           |         |
 sources/audio               | Audio        | (160000,) | int16   |

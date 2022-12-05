@@ -63,7 +63,7 @@ FeaturesDict({
     'annoyance': bool,
     'approval': bool,
     'caring': bool,
-    'comment_text': Text(shape=(), dtype=object),
+    'comment_text': Text(shape=(), dtype=string),
     'confusion': bool,
     'curiosity': bool,
     'desire': bool,
@@ -100,7 +100,7 @@ anger          | Tensor       |       | bool   |
 annoyance      | Tensor       |       | bool   |
 approval       | Tensor       |       | bool   |
 caring         | Tensor       |       | bool   |
-comment_text   | Text         |       | object |
+comment_text   | Text         |       | string |
 confusion      | Tensor       |       | bool   |
 curiosity      | Tensor       |       | bool   |
 desire         | Tensor       |       | bool   |

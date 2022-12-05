@@ -58,7 +58,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/file_name': Text(shape=(), dtype=object),
+    'image/file_name': Text(shape=(), dtype=string),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=102),
 })
 ```
@@ -69,7 +69,7 @@ Feature         | Class        | Shape           | Dtype  | Description
 :-------------- | :----------- | :-------------- | :----- | :----------
                 | FeaturesDict |                 |        |
 image           | Image        | (None, None, 3) | uint8  |
-image/file_name | Text         |                 | object |
+image/file_name | Text         |                 | string |
 label           | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See

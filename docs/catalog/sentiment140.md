@@ -65,11 +65,11 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'date': Text(shape=(), dtype=object),
+    'date': Text(shape=(), dtype=string),
     'polarity': int32,
-    'query': Text(shape=(), dtype=object),
-    'text': Text(shape=(), dtype=object),
-    'user': Text(shape=(), dtype=object),
+    'query': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'user': Text(shape=(), dtype=string),
 })
 ```
 
@@ -78,11 +78,11 @@ FeaturesDict({
 Feature  | Class        | Shape | Dtype  | Description
 :------- | :----------- | :---- | :----- | :----------
          | FeaturesDict |       |        |
-date     | Text         |       | object |
+date     | Text         |       | string |
 polarity | Tensor       |       | int32  |
-query    | Text         |       | object |
-text     | Text         |       | object |
-user     | Text         |       | object |
+query    | Text         |       | string |
+text     | Text         |       | string |
+user     | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

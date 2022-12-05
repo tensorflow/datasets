@@ -50,11 +50,11 @@ FeaturesDict({
     'id': Scalar(shape=(), dtype=int32),
     'lang_group_id': ClassLabel(shape=(), dtype=int64, num_classes=7),
     'lang_id': ClassLabel(shape=(), dtype=int64, num_classes=102),
-    'language': Text(shape=(), dtype=object),
+    'language': Text(shape=(), dtype=string),
     'num_samples': Scalar(shape=(), dtype=int32),
-    'path': object,
-    'raw_transcription': Text(shape=(), dtype=object),
-    'transcription': Text(shape=(), dtype=object),
+    'path': string,
+    'raw_transcription': Text(shape=(), dtype=string),
+    'transcription': Text(shape=(), dtype=string),
 })
 ```
 
@@ -68,11 +68,11 @@ gender            | ClassLabel   |         | int64  |
 id                | Scalar       |         | int32  | Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id.
 lang_group_id     | ClassLabel   |         | int64  |
 lang_id           | ClassLabel   |         | int64  |
-language          | Text         |         | object | Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag.
+language          | Text         |         | string | Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag.
 num_samples       | Scalar       |         | int32  | Total number of frames in the audio
-path              | Tensor       |         | object |
-raw_transcription | Text         |         | object | Raw Transcription from FLoRes.
-transcription     | Text         |         | object | Normalized transcription.
+path              | Tensor       |         | string |
+raw_transcription | Text         |         | string | Raw Transcription from FLoRes.
+transcription     | Text         |         | string | Normalized transcription.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

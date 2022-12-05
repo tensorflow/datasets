@@ -61,7 +61,7 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=object),
+    'file_name': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'objects': Sequence({
         '3d_coords': Tensor(shape=(3,), dtype=float32),
@@ -73,8 +73,8 @@ FeaturesDict({
         'size': ClassLabel(shape=(), dtype=int64, num_classes=2),
     }),
     'question_answer': Sequence({
-        'answer': Text(shape=(), dtype=object),
-        'question': Text(shape=(), dtype=object),
+        'answer': Text(shape=(), dtype=string),
+        'question': Text(shape=(), dtype=string),
     }),
 })
 ```
@@ -84,7 +84,7 @@ FeaturesDict({
 | Feature                  | Class        | Shape    | Dtype   | Description |
 | :----------------------- | :----------- | :------- | :------ | :---------- |
 |                          | FeaturesDict |          |         |             |
-| file_name                | Text         |          | object  |             |
+| file_name                | Text         |          | string  |             |
 | image                    | Image        | (None,   | uint8   |             |
 :                          :              : None, 3) :         :             :
 | objects                  | Sequence     |          |         |             |
@@ -96,8 +96,8 @@ FeaturesDict({
 | objects/shape            | ClassLabel   |          | int64   |             |
 | objects/size             | ClassLabel   |          | int64   |             |
 | question_answer          | Sequence     |          |         |             |
-| question_answer/answer   | Text         |          | object  |             |
-| question_answer/question | Text         |          | object  |             |
+| question_answer/answer   | Text         |          | string  |             |
+| question_answer/question | Text         |          | string  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

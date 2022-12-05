@@ -56,14 +56,14 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'author': object,
-    'body': object,
-    'content': object,
-    'id': object,
-    'normalizedBody': object,
-    'subreddit': object,
-    'subreddit_id': object,
-    'summary': object,
+    'author': string,
+    'body': string,
+    'content': string,
+    'id': string,
+    'normalizedBody': string,
+    'subreddit': string,
+    'subreddit_id': string,
+    'summary': string,
 })
 ```
 
@@ -72,14 +72,14 @@ FeaturesDict({
 Feature        | Class        | Shape | Dtype  | Description
 :------------- | :----------- | :---- | :----- | :----------
                | FeaturesDict |       |        |
-author         | Tensor       |       | object |
-body           | Tensor       |       | object |
-content        | Tensor       |       | object |
-id             | Tensor       |       | object |
-normalizedBody | Tensor       |       | object |
-subreddit      | Tensor       |       | object |
-subreddit_id   | Tensor       |       | object |
-summary        | Tensor       |       | object |
+author         | Tensor       |       | string |
+body           | Tensor       |       | string |
+content        | Tensor       |       | string |
+id             | Tensor       |       | string |
+normalizedBody | Tensor       |       | string |
+subreddit      | Tensor       |       | string |
+subreddit_id   | Tensor       |       | string |
+summary        | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

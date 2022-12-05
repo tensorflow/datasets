@@ -89,7 +89,7 @@ FeaturesDict({
         }),
     }),
     'context': FeaturesDict({
-        'name': Text(shape=(), dtype=object),
+        'name': Text(shape=(), dtype=string),
     }),
     'timestamp_micros': int64,
 })
@@ -126,7 +126,7 @@ camera_SIDE_RIGHT/labels       | Sequence     |                 |         |
 camera_SIDE_RIGHT/labels/bbox  | BBoxFeature  | (4,)            | float32 |
 camera_SIDE_RIGHT/labels/type  | ClassLabel   |                 | int64   |
 context                        | FeaturesDict |                 |         |
-context/name                   | Text         |                 | object  |
+context/name                   | Text         |                 | string  |
 timestamp_micros               | Tensor       |                 | int64   |
 
 *   **Supervised keys** (See

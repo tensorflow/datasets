@@ -41,18 +41,18 @@ alzheimers data, and the other on entrance exams data.
 ```python
 FeaturesDict({
     'answer_options': Sequence({
-        'answer_id': Text(shape=(), dtype=object),
-        'answer_str': Text(shape=(), dtype=object),
+        'answer_id': Text(shape=(), dtype=string),
+        'answer_str': Text(shape=(), dtype=string),
     }),
-    'correct_answer_id': Text(shape=(), dtype=object),
-    'correct_answer_str': Text(shape=(), dtype=object),
-    'document_id': Text(shape=(), dtype=object),
-    'document_str': Text(shape=(), dtype=object),
-    'question_id': Text(shape=(), dtype=object),
-    'question_str': Text(shape=(), dtype=object),
-    'test_id': Text(shape=(), dtype=object),
-    'topic_id': Text(shape=(), dtype=object),
-    'topic_name': Text(shape=(), dtype=object),
+    'correct_answer_id': Text(shape=(), dtype=string),
+    'correct_answer_str': Text(shape=(), dtype=string),
+    'document_id': Text(shape=(), dtype=string),
+    'document_str': Text(shape=(), dtype=string),
+    'question_id': Text(shape=(), dtype=string),
+    'question_str': Text(shape=(), dtype=string),
+    'test_id': Text(shape=(), dtype=string),
+    'topic_id': Text(shape=(), dtype=string),
+    'topic_name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -62,17 +62,17 @@ Feature                   | Class        | Shape | Dtype  | Description
 :------------------------ | :----------- | :---- | :----- | :----------
                           | FeaturesDict |       |        |
 answer_options            | Sequence     |       |        |
-answer_options/answer_id  | Text         |       | object |
-answer_options/answer_str | Text         |       | object |
-correct_answer_id         | Text         |       | object |
-correct_answer_str        | Text         |       | object |
-document_id               | Text         |       | object |
-document_str              | Text         |       | object |
-question_id               | Text         |       | object |
-question_str              | Text         |       | object |
-test_id                   | Text         |       | object |
-topic_id                  | Text         |       | object |
-topic_name                | Text         |       | object |
+answer_options/answer_id  | Text         |       | string |
+answer_options/answer_str | Text         |       | string |
+correct_answer_id         | Text         |       | string |
+correct_answer_str        | Text         |       | string |
+document_id               | Text         |       | string |
+document_str              | Text         |       | string |
+question_id               | Text         |       | string |
+question_str              | Text         |       | string |
+test_id                   | Text         |       | string |
+topic_id                  | Text         |       | string |
+topic_name                | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

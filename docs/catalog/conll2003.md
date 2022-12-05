@@ -57,7 +57,7 @@ FeaturesDict({
     'chunks': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=23)),
     'ner': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=9)),
     'pos': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=47)),
-    'tokens': Sequence(Text(shape=(), dtype=object)),
+    'tokens': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
@@ -69,7 +69,7 @@ Feature | Class                | Shape   | Dtype  | Description
 chunks  | Sequence(ClassLabel) | (None,) | int64  |
 ner     | Sequence(ClassLabel) | (None,) | int64  |
 pos     | Sequence(ClassLabel) | (None,) | int64  |
-tokens  | Sequence(Text)       | (None,) | object |
+tokens  | Sequence(Text)       | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

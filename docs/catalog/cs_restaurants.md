@@ -51,20 +51,20 @@ Split          | Examples
 FeaturesDict({
     'delex_input_text': FeaturesDict({
         'table': Sequence({
-            'column_header': object,
-            'content': object,
+            'column_header': string,
+            'content': string,
             'row_number': int16,
         }),
     }),
-    'delex_target_text': object,
+    'delex_target_text': string,
     'input_text': FeaturesDict({
         'table': Sequence({
-            'column_header': object,
-            'content': object,
+            'column_header': string,
+            'content': string,
             'row_number': int16,
         }),
     }),
-    'target_text': object,
+    'target_text': string,
 })
 ```
 
@@ -75,16 +75,16 @@ Feature                              | Class        | Shape | Dtype  | Descripti
                                      | FeaturesDict |       |        |
 delex_input_text                     | FeaturesDict |       |        |
 delex_input_text/table               | Sequence     |       |        |
-delex_input_text/table/column_header | Tensor       |       | object |
-delex_input_text/table/content       | Tensor       |       | object |
+delex_input_text/table/column_header | Tensor       |       | string |
+delex_input_text/table/content       | Tensor       |       | string |
 delex_input_text/table/row_number    | Tensor       |       | int16  |
-delex_target_text                    | Tensor       |       | object |
+delex_target_text                    | Tensor       |       | string |
 input_text                           | FeaturesDict |       |        |
 input_text/table                     | Sequence     |       |        |
-input_text/table/column_header       | Tensor       |       | object |
-input_text/table/content             | Tensor       |       | object |
+input_text/table/column_header       | Tensor       |       | string |
+input_text/table/content             | Tensor       |       | string |
 input_text/table/row_number          | Tensor       |       | int16  |
-target_text                          | Tensor       |       | object |
+target_text                          | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

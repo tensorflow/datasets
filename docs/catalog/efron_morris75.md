@@ -52,9 +52,9 @@ Split     | Examples
 FeaturesDict({
     'At-Bats': int32,
     'BattingAverage': float32,
-    'FirstName': object,
+    'FirstName': string,
     'Hits': int32,
-    'LastName': object,
+    'LastName': string,
     'RemainingAt-Bats': int32,
     'RemainingAverage': float32,
     'SeasonAt-Bats': int32,
@@ -70,9 +70,9 @@ Feature          | Class        | Shape | Dtype   | Description
                  | FeaturesDict |       |         |
 At-Bats          | Tensor       |       | int32   |
 BattingAverage   | Tensor       |       | float32 |
-FirstName        | Tensor       |       | object  |
+FirstName        | Tensor       |       | string  |
 Hits             | Tensor       |       | int32   |
-LastName         | Tensor       |       | object  |
+LastName         | Tensor       |       | string  |
 RemainingAt-Bats | Tensor       |       | int32   |
 RemainingAverage | Tensor       |       | float32 |
 SeasonAt-Bats    | Tensor       |       | int32   |

@@ -98,15 +98,15 @@ Split          | Examples
 ```python
 FeaturesDict({
     'article_id': int32,
-    'id': object,
+    'id': string,
     'identity_attack': float32,
     'insult': float32,
     'obscene': float32,
     'parent_id': int32,
-    'parent_text': Text(shape=(), dtype=object),
+    'parent_text': Text(shape=(), dtype=string),
     'severe_toxicity': float32,
     'sexual_explicit': float32,
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
     'threat': float32,
     'toxicity': float32,
 })
@@ -118,15 +118,15 @@ Feature         | Class        | Shape | Dtype   | Description
 :-------------- | :----------- | :---- | :------ | :----------
                 | FeaturesDict |       |         |
 article_id      | Tensor       |       | int32   |
-id              | Tensor       |       | object  |
+id              | Tensor       |       | string  |
 identity_attack | Tensor       |       | float32 |
 insult          | Tensor       |       | float32 |
 obscene         | Tensor       |       | float32 |
 parent_id       | Tensor       |       | int32   |
-parent_text     | Text         |       | object  |
+parent_text     | Text         |       | string  |
 severe_toxicity | Tensor       |       | float32 |
 sexual_explicit | Tensor       |       | float32 |
-text            | Text         |       | object  |
+text            | Text         |       | string  |
 threat          | Tensor       |       | float32 |
 toxicity        | Tensor       |       | float32 |
 
@@ -230,7 +230,7 @@ FeaturesDict({
     'heterosexual': float32,
     'hindu': float32,
     'homosexual_gay_or_lesbian': float32,
-    'id': object,
+    'id': string,
     'identity_attack': float32,
     'insult': float32,
     'intellectual_or_learning_disability': float32,
@@ -245,12 +245,12 @@ FeaturesDict({
     'other_religion': float32,
     'other_sexual_orientation': float32,
     'parent_id': int32,
-    'parent_text': Text(shape=(), dtype=object),
+    'parent_text': Text(shape=(), dtype=string),
     'physical_disability': float32,
     'psychiatric_or_mental_illness': float32,
     'severe_toxicity': float32,
     'sexual_explicit': float32,
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
     'threat': float32,
     'toxicity': float32,
     'transgender': float32,
@@ -274,7 +274,7 @@ female                              | Tensor       |       | float32 |
 heterosexual                        | Tensor       |       | float32 |
 hindu                               | Tensor       |       | float32 |
 homosexual_gay_or_lesbian           | Tensor       |       | float32 |
-id                                  | Tensor       |       | object  |
+id                                  | Tensor       |       | string  |
 identity_attack                     | Tensor       |       | float32 |
 insult                              | Tensor       |       | float32 |
 intellectual_or_learning_disability | Tensor       |       | float32 |
@@ -289,12 +289,12 @@ other_race_or_ethnicity             | Tensor       |       | float32 |
 other_religion                      | Tensor       |       | float32 |
 other_sexual_orientation            | Tensor       |       | float32 |
 parent_id                           | Tensor       |       | int32   |
-parent_text                         | Text         |       | object  |
+parent_text                         | Text         |       | string  |
 physical_disability                 | Tensor       |       | float32 |
 psychiatric_or_mental_illness       | Tensor       |       | float32 |
 severe_toxicity                     | Tensor       |       | float32 |
 sexual_explicit                     | Tensor       |       | float32 |
-text                                | Text         |       | object  |
+text                                | Text         |       | string  |
 threat                              | Tensor       |       | float32 |
 toxicity                            | Tensor       |       | float32 |
 transgender                         | Tensor       |       | float32 |
@@ -414,7 +414,7 @@ FeaturesDict({
     'heterosexual': float32,
     'hindu': float32,
     'homosexual_gay_or_lesbian': float32,
-    'id': object,
+    'id': string,
     'identity_attack': float32,
     'implicitly_offensive': float32,
     'insult': float32,
@@ -432,12 +432,12 @@ FeaturesDict({
     'other_religion': float32,
     'other_sexual_orientation': float32,
     'parent_id': int32,
-    'parent_text': Text(shape=(), dtype=object),
+    'parent_text': Text(shape=(), dtype=string),
     'physical_disability': float32,
     'psychiatric_or_mental_illness': float32,
     'severe_toxicity': float32,
     'sexual_explicit': float32,
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
     'threat': float32,
     'toxicity': float32,
     'transgender': float32,
@@ -469,7 +469,7 @@ female                              | Tensor       |       | float32 |
 heterosexual                        | Tensor       |       | float32 |
 hindu                               | Tensor       |       | float32 |
 homosexual_gay_or_lesbian           | Tensor       |       | float32 |
-id                                  | Tensor       |       | object  |
+id                                  | Tensor       |       | string  |
 identity_attack                     | Tensor       |       | float32 |
 implicitly_offensive                | Tensor       |       | float32 |
 insult                              | Tensor       |       | float32 |
@@ -487,12 +487,12 @@ other_race_or_ethnicity             | Tensor       |       | float32 |
 other_religion                      | Tensor       |       | float32 |
 other_sexual_orientation            | Tensor       |       | float32 |
 parent_id                           | Tensor       |       | int32   |
-parent_text                         | Text         |       | object  |
+parent_text                         | Text         |       | string  |
 physical_disability                 | Tensor       |       | float32 |
 psychiatric_or_mental_illness       | Tensor       |       | float32 |
 severe_toxicity                     | Tensor       |       | float32 |
 sexual_explicit                     | Tensor       |       | float32 |
-text                                | Text         |       | object  |
+text                                | Text         |       | string  |
 threat                              | Tensor       |       | float32 |
 toxicity                            | Tensor       |       | float32 |
 transgender                         | Tensor       |       | float32 |
@@ -585,11 +585,11 @@ Split          | Examples
 ```python
 FeaturesDict({
     'article_id': int32,
-    'id': object,
+    'id': string,
     'parent_id': int32,
-    'parent_text': Text(shape=(), dtype=object),
+    'parent_text': Text(shape=(), dtype=string),
     'spans': Tensor(shape=(None,), dtype=int32),
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -599,11 +599,11 @@ Feature     | Class        | Shape   | Dtype  | Description
 :---------- | :----------- | :------ | :----- | :----------
             | FeaturesDict |         |        |
 article_id  | Tensor       |         | int32  |
-id          | Tensor       |         | object |
+id          | Tensor       |         | string |
 parent_id   | Tensor       |         | int32  |
-parent_text | Text         |         | object |
+parent_text | Text         |         | string |
 spans       | Tensor       | (None,) | int32  |
-text        | Text         |         | object |
+text        | Text         |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -687,15 +687,15 @@ Split     | Examples
 FeaturesDict({
     'article_id': int32,
     'contextual_toxicity': float32,
-    'id': object,
+    'id': string,
     'identity_attack': float32,
     'insult': float32,
     'obscene': float32,
     'parent_id': int32,
-    'parent_text': Text(shape=(), dtype=object),
+    'parent_text': Text(shape=(), dtype=string),
     'severe_toxicity': float32,
     'sexual_explicit': float32,
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
     'threat': float32,
     'toxicity': float32,
 })
@@ -708,15 +708,15 @@ Feature             | Class        | Shape | Dtype   | Description
                     | FeaturesDict |       |         |
 article_id          | Tensor       |       | int32   |
 contextual_toxicity | Tensor       |       | float32 |
-id                  | Tensor       |       | object  |
+id                  | Tensor       |       | string  |
 identity_attack     | Tensor       |       | float32 |
 insult              | Tensor       |       | float32 |
 obscene             | Tensor       |       | float32 |
 parent_id           | Tensor       |       | int32   |
-parent_text         | Text         |       | object  |
+parent_text         | Text         |       | string  |
 severe_toxicity     | Tensor       |       | float32 |
 sexual_explicit     | Tensor       |       | float32 |
-text                | Text         |       | object  |
+text                | Text         |       | string  |
 threat              | Tensor       |       | float32 |
 toxicity            | Tensor       |       | float32 |
 

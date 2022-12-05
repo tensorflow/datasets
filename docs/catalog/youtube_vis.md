@@ -114,7 +114,7 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'height': int32,
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -137,7 +137,7 @@ Feature              | Class                 | Shape                 | Dtype   |
 metadata             | FeaturesDict          |                       |         |
 metadata/height      | Tensor                |                       | int32   |
 metadata/num_frames  | Tensor                |                       | int32   |
-metadata/video_name  | Tensor                |                       | object  |
+metadata/video_name  | Tensor                |                       | string  |
 metadata/width       | Tensor                |                       | int32   |
 tracks               | Sequence              |                       |         |
 tracks/areas         | Sequence(Tensor)      | (None,)               | float32 |
@@ -207,7 +207,7 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'height': int32,
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -230,7 +230,7 @@ Feature              | Class                 | Shape               | Dtype   | D
 metadata             | FeaturesDict          |                     |         |
 metadata/height      | Tensor                |                     | int32   |
 metadata/num_frames  | Tensor                |                     | int32   |
-metadata/video_name  | Tensor                |                     | object  |
+metadata/video_name  | Tensor                |                     | string  |
 metadata/width       | Tensor                |                     | int32   |
 tracks               | Sequence              |                     |         |
 tracks/areas         | Sequence(Tensor)      | (None,)             | float32 |
@@ -300,7 +300,7 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'height': int32,
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -323,7 +323,7 @@ Feature              | Class                 | Shape               | Dtype   | D
 metadata             | FeaturesDict          |                     |         |
 metadata/height      | Tensor                |                     | int32   |
 metadata/num_frames  | Tensor                |                     | int32   |
-metadata/video_name  | Tensor                |                     | object  |
+metadata/video_name  | Tensor                |                     | string  |
 metadata/width       | Tensor                |                     | int32   |
 tracks               | Sequence              |                     |         |
 tracks/areas         | Sequence(Tensor)      | (None,)             | float32 |
@@ -393,7 +393,7 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'height': int32,
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -416,7 +416,7 @@ Feature              | Class                 | Shape                 | Dtype   |
 metadata             | FeaturesDict          |                       |         |
 metadata/height      | Tensor                |                       | int32   |
 metadata/num_frames  | Tensor                |                       | int32   |
-metadata/video_name  | Tensor                |                       | object  |
+metadata/video_name  | Tensor                |                       | string  |
 metadata/width       | Tensor                |                       | int32   |
 tracks               | Sequence              |                       |         |
 tracks/areas         | Sequence(Tensor)      | (None,)               | float32 |
@@ -487,7 +487,7 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'height': int32,
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -510,7 +510,7 @@ Feature              | Class                 | Shape                 | Dtype   |
 metadata             | FeaturesDict          |                       |         |
 metadata/height      | Tensor                |                       | int32   |
 metadata/num_frames  | Tensor                |                       | int32   |
-metadata/video_name  | Tensor                |                       | object  |
+metadata/video_name  | Tensor                |                       | string  |
 metadata/width       | Tensor                |                       | int32   |
 tracks               | Sequence              |                       |         |
 tracks/areas         | Sequence(Tensor)      | (None,)               | float32 |
@@ -581,7 +581,7 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'height': int32,
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -604,7 +604,7 @@ Feature              | Class                 | Shape               | Dtype   | D
 metadata             | FeaturesDict          |                     |         |
 metadata/height      | Tensor                |                     | int32   |
 metadata/num_frames  | Tensor                |                     | int32   |
-metadata/video_name  | Tensor                |                     | object  |
+metadata/video_name  | Tensor                |                     | string  |
 metadata/width       | Tensor                |                     | int32   |
 tracks               | Sequence              |                     |         |
 tracks/areas         | Sequence(Tensor)      | (None,)             | float32 |
@@ -675,7 +675,7 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'height': int32,
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -698,7 +698,7 @@ Feature              | Class                 | Shape               | Dtype   | D
 metadata             | FeaturesDict          |                     |         |
 metadata/height      | Tensor                |                     | int32   |
 metadata/num_frames  | Tensor                |                     | int32   |
-metadata/video_name  | Tensor                |                     | object  |
+metadata/video_name  | Tensor                |                     | string  |
 metadata/width       | Tensor                |                     | int32   |
 tracks               | Sequence              |                     |         |
 tracks/areas         | Sequence(Tensor)      | (None,)             | float32 |
@@ -768,7 +768,7 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'height': int32,
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -791,7 +791,7 @@ Feature              | Class                 | Shape                 | Dtype   |
 metadata             | FeaturesDict          |                       |         |
 metadata/height      | Tensor                |                       | int32   |
 metadata/num_frames  | Tensor                |                       | int32   |
-metadata/video_name  | Tensor                |                       | object  |
+metadata/video_name  | Tensor                |                       | string  |
 metadata/width       | Tensor                |                       | int32   |
 tracks               | Sequence              |                       |         |
 tracks/areas         | Sequence(Tensor)      | (None,)               | float32 |

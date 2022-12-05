@@ -87,7 +87,7 @@ FeaturesDict({
     'atom_mask': Tensor(shape=(60,), dtype=float32),
     'atoms': Tensor(shape=(60, 27), dtype=float32),
     'dist2topk_nbs': Tensor(shape=(1,), dtype=float32),
-    'molecule_id': object,
+    'molecule_id': string,
     'pair_mask': Tensor(shape=(60, 60), dtype=float32),
     'pairs': Tensor(shape=(60, 60, 12), dtype=float32),
 })
@@ -102,7 +102,7 @@ active        | Tensor       | (2,)         | int64   |
 atom_mask     | Tensor       | (60,)        | float32 |
 atoms         | Tensor       | (60, 27)     | float32 |
 dist2topk_nbs | Tensor       | (1,)         | float32 |
-molecule_id   | Tensor       |              | object  |
+molecule_id   | Tensor       |              | string  |
 pair_mask     | Tensor       | (60, 60)     | float32 |
 pairs         | Tensor       | (60, 60, 12) | float32 |
 

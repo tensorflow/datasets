@@ -46,10 +46,10 @@ which supports 176 of the 282 languages from the original WikiANN corpus.
 
 ```python
 FeaturesDict({
-    'langs': Sequence(Text(shape=(), dtype=object)),
-    'spans': Sequence(Text(shape=(), dtype=object)),
+    'langs': Sequence(Text(shape=(), dtype=string)),
+    'spans': Sequence(Text(shape=(), dtype=string)),
     'tags': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=7)),
-    'tokens': Sequence(Text(shape=(), dtype=object)),
+    'tokens': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
@@ -58,10 +58,10 @@ FeaturesDict({
 Feature | Class                | Shape   | Dtype  | Description
 :------ | :------------------- | :------ | :----- | :----------
         | FeaturesDict         |         |        |
-langs   | Sequence(Text)       | (None,) | object |
-spans   | Sequence(Text)       | (None,) | object |
+langs   | Sequence(Text)       | (None,) | string |
+spans   | Sequence(Text)       | (None,) | string |
 tags    | Sequence(ClassLabel) | (None,) | int64  |
-tokens  | Sequence(Text)       | (None,) | object |
+tokens  | Sequence(Text)       | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -45,9 +45,9 @@ found at https://tfhub.dev/google/collections/wiki40b-lm/1.
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=object),
-    'version_id': Text(shape=(), dtype=object),
-    'wikidata_id': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
+    'version_id': Text(shape=(), dtype=string),
+    'wikidata_id': Text(shape=(), dtype=string),
 })
 ```
 
@@ -56,9 +56,9 @@ FeaturesDict({
 Feature     | Class        | Shape | Dtype  | Description
 :---------- | :----------- | :---- | :----- | :----------
             | FeaturesDict |       |        |
-text        | Text         |       | object |
-version_id  | Text         |       | object |
-wikidata_id | Text         |       | object |
+text        | Text         |       | string |
+version_id  | Text         |       | string |
+wikidata_id | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

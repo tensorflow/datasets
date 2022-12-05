@@ -62,18 +62,18 @@ Split          | Examples
 FeaturesDict({
     'citeEnd': int64,
     'citeStart': int64,
-    'citedPaperId': Text(shape=(), dtype=object),
-    'citingPaperId': Text(shape=(), dtype=object),
+    'citedPaperId': Text(shape=(), dtype=string),
+    'citingPaperId': Text(shape=(), dtype=string),
     'excerpt_index': int32,
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'isKeyCitation': bool,
     'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
     'label2': ClassLabel(shape=(), dtype=int64, num_classes=4),
     'label2_confidence': float32,
     'label_confidence': float32,
-    'sectionName': Text(shape=(), dtype=object),
+    'sectionName': Text(shape=(), dtype=string),
     'source': ClassLabel(shape=(), dtype=int64, num_classes=7),
-    'string': Text(shape=(), dtype=object),
+    'string': Text(shape=(), dtype=string),
 })
 ```
 
@@ -84,18 +84,18 @@ Feature           | Class        | Shape | Dtype   | Description
                   | FeaturesDict |       |         |
 citeEnd           | Tensor       |       | int64   |
 citeStart         | Tensor       |       | int64   |
-citedPaperId      | Text         |       | object  |
-citingPaperId     | Text         |       | object  |
+citedPaperId      | Text         |       | string  |
+citingPaperId     | Text         |       | string  |
 excerpt_index     | Tensor       |       | int32   |
-id                | Text         |       | object  |
+id                | Text         |       | string  |
 isKeyCitation     | Tensor       |       | bool    |
 label             | ClassLabel   |       | int64   |
 label2            | ClassLabel   |       | int64   |
 label2_confidence | Tensor       |       | float32 |
 label_confidence  | Tensor       |       | float32 |
-sectionName       | Text         |       | object  |
+sectionName       | Text         |       | string  |
 source            | ClassLabel   |       | int64   |
-string            | Text         |       | object  |
+string            | Text         |       | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

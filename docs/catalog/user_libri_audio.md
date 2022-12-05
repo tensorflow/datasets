@@ -156,11 +156,11 @@ Split                                  | Examples
 ```python
 FeaturesDict({
     'audio': Audio(shape=(None,), dtype=int64),
-    'book_id': Text(shape=(), dtype=object),
-    'id': Text(shape=(), dtype=object),
-    'speaker_id': Text(shape=(), dtype=object),
-    'transcript': Text(shape=(), dtype=object),
-    'user_id': Text(shape=(), dtype=object),
+    'book_id': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'speaker_id': Text(shape=(), dtype=string),
+    'transcript': Text(shape=(), dtype=string),
+    'user_id': Text(shape=(), dtype=string),
 })
 ```
 
@@ -172,15 +172,15 @@ FeaturesDict({
 | audio      | Audio        | (None,) | int64  | The audio clip containing a  |
 :            :              :         :        : snippet from a book read     :
 :            :              :         :        : aloud                        :
-| book_id    | Text         |         | object | The book that this utterance |
+| book_id    | Text         |         | string | The book that this utterance |
 :            :              :         :        : is read from                 :
-| id         | Text         |         | object | The id of this unique        |
+| id         | Text         |         | string | The id of this unique        |
 :            :              :         :        : utterance                    :
-| speaker_id | Text         |         | object | The speaker who read this    |
+| speaker_id | Text         |         | string | The speaker who read this    |
 :            :              :         :        : utterance                    :
-| transcript | Text         |         | object | The text that the speaker    |
+| transcript | Text         |         | string | The text that the speaker    |
 :            :              :         :        : read to produce the audio    :
-| user_id    | Text         |         | object | The user that this utterance |
+| user_id    | Text         |         | string | The user that this utterance |
 :            :              :         :        : belongs to (unique speaker   :
 :            :              :         :        : and book)                    :
 

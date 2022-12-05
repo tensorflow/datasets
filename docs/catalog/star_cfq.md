@@ -39,8 +39,8 @@ data = tfds.load('star_cfq/single_pool_10x_b_cfq')
 
 ```python
 FeaturesDict({
-    'query': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
+    'query': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
@@ -49,8 +49,8 @@ FeaturesDict({
 Feature  | Class        | Shape | Dtype  | Description
 :------- | :----------- | :---- | :----- | :----------
          | FeaturesDict |       |        |
-query    | Text         |       | object |
-question | Text         |       | object |
+query    | Text         |       | string |
+question | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

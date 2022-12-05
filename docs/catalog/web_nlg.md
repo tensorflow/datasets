@@ -58,14 +58,14 @@ Split           | Examples
 ```python
 FeaturesDict({
     'input_text': FeaturesDict({
-        'context': object,
+        'context': string,
         'table': Sequence({
-            'column_header': object,
-            'content': object,
+            'column_header': string,
+            'content': string,
             'row_number': int16,
         }),
     }),
-    'target_text': object,
+    'target_text': string,
 })
 ```
 
@@ -75,12 +75,12 @@ Feature                        | Class        | Shape | Dtype  | Description
 :----------------------------- | :----------- | :---- | :----- | :----------
                                | FeaturesDict |       |        |
 input_text                     | FeaturesDict |       |        |
-input_text/context             | Tensor       |       | object |
+input_text/context             | Tensor       |       | string |
 input_text/table               | Sequence     |       |        |
-input_text/table/column_header | Tensor       |       | object |
-input_text/table/content       | Tensor       |       | object |
+input_text/table/column_header | Tensor       |       | string |
+input_text/table/content       | Tensor       |       | string |
 input_text/table/row_number    | Tensor       |       | int16  |
-target_text                    | Tensor       |       | object |
+target_text                    | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

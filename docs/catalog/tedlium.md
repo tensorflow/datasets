@@ -39,10 +39,10 @@ at 16kHz. It contains about 118 hours of speech.
 ```python
 FeaturesDict({
     'gender': ClassLabel(shape=(), dtype=int64, num_classes=3),
-    'id': object,
-    'speaker_id': object,
+    'id': string,
+    'speaker_id': string,
     'speech': Audio(shape=(None,), dtype=int64),
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -52,10 +52,10 @@ Feature    | Class        | Shape   | Dtype  | Description
 :--------- | :----------- | :------ | :----- | :----------
            | FeaturesDict |         |        |
 gender     | ClassLabel   |         | int64  |
-id         | Tensor       |         | object |
-speaker_id | Tensor       |         | object |
+id         | Tensor       |         | string |
+speaker_id | Tensor       |         | string |
 speech     | Audio        | (None,) | int64  |
-text       | Text         |         | object |
+text       | Text         |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

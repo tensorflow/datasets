@@ -52,7 +52,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'image': Image(shape=(150, 150, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=8),
 })
@@ -63,7 +63,7 @@ FeaturesDict({
 Feature  | Class        | Shape         | Dtype  | Description
 :------- | :----------- | :------------ | :----- | :----------
          | FeaturesDict |               |        |
-filename | Text         |               | object |
+filename | Text         |               | string |
 image    | Image        | (150, 150, 3) | uint8  |
 label    | ClassLabel   |               | int64  |
 

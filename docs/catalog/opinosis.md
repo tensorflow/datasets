@@ -52,8 +52,8 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'review_sents': Text(shape=(), dtype=object),
-    'summaries': Sequence(Text(shape=(), dtype=object)),
+    'review_sents': Text(shape=(), dtype=string),
+    'summaries': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
@@ -62,8 +62,8 @@ FeaturesDict({
 Feature      | Class          | Shape   | Dtype  | Description
 :----------- | :------------- | :------ | :----- | :----------
              | FeaturesDict   |         |        |
-review_sents | Text           |         | object |
-summaries    | Sequence(Text) | (None,) | object |
+review_sents | Text           |         | string |
+summaries    | Sequence(Text) | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

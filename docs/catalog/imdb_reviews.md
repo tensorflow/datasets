@@ -86,7 +86,7 @@ Split            | Examples
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -96,7 +96,7 @@ Feature | Class        | Shape | Dtype  | Description
 :------ | :----------- | :---- | :----- | :----------
         | FeaturesDict |       |        |
 label   | ClassLabel   |       | int64  |
-text    | Text         |       | object |
+text    | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

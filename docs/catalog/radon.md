@@ -55,9 +55,9 @@ FeaturesDict({
     'features': FeaturesDict({
         'Uppm': float32,
         'adjwt': float32,
-        'basement': object,
+        'basement': string,
         'cntyfips': int32,
-        'county': object,
+        'county': string,
         'dupflag': int32,
         'floor': int32,
         'idnum': int32,
@@ -69,15 +69,15 @@ FeaturesDict({
         'room': int32,
         'startdt': int32,
         'starttm': int32,
-        'state': object,
-        'state2': object,
+        'state': string,
+        'state2': string,
         'stfips': int32,
         'stopdt': int32,
         'stoptm': int32,
         'stratum': int32,
         'typebldg': int32,
         'wave': int32,
-        'windoor': object,
+        'windoor': string,
         'zip': int32,
         'zipflag': int32,
     }),
@@ -93,9 +93,9 @@ activity          | Tensor       |       | float32 |
 features          | FeaturesDict |       |         |
 features/Uppm     | Tensor       |       | float32 |
 features/adjwt    | Tensor       |       | float32 |
-features/basement | Tensor       |       | object  |
+features/basement | Tensor       |       | string  |
 features/cntyfips | Tensor       |       | int32   |
-features/county   | Tensor       |       | object  |
+features/county   | Tensor       |       | string  |
 features/dupflag  | Tensor       |       | int32   |
 features/floor    | Tensor       |       | int32   |
 features/idnum    | Tensor       |       | int32   |
@@ -107,15 +107,15 @@ features/rep      | Tensor       |       | int32   |
 features/room     | Tensor       |       | int32   |
 features/startdt  | Tensor       |       | int32   |
 features/starttm  | Tensor       |       | int32   |
-features/state    | Tensor       |       | object  |
-features/state2   | Tensor       |       | object  |
+features/state    | Tensor       |       | string  |
+features/state2   | Tensor       |       | string  |
 features/stfips   | Tensor       |       | int32   |
 features/stopdt   | Tensor       |       | int32   |
 features/stoptm   | Tensor       |       | int32   |
 features/stratum  | Tensor       |       | int32   |
 features/typebldg | Tensor       |       | int32   |
 features/wave     | Tensor       |       | int32   |
-features/windoor  | Tensor       |       | object  |
+features/windoor  | Tensor       |       | string  |
 features/zip      | Tensor       |       | int32   |
 features/zipflag  | Tensor       |       | int32   |
 

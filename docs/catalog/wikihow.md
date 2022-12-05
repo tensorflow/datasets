@@ -102,9 +102,9 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'headline': Text(shape=(), dtype=object),
-    'text': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'headline': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -113,9 +113,9 @@ FeaturesDict({
 Feature  | Class        | Shape | Dtype  | Description
 :------- | :----------- | :---- | :----- | :----------
          | FeaturesDict |       |        |
-headline | Text         |       | object |
-text     | Text         |       | object |
-title    | Text         |       | object |
+headline | Text         |       | string |
+text     | Text         |       | string |
+title    | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -172,11 +172,11 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'headline': Text(shape=(), dtype=object),
-    'overview': Text(shape=(), dtype=object),
-    'sectionLabel': Text(shape=(), dtype=object),
-    'text': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'headline': Text(shape=(), dtype=string),
+    'overview': Text(shape=(), dtype=string),
+    'sectionLabel': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -185,11 +185,11 @@ FeaturesDict({
 Feature      | Class        | Shape | Dtype  | Description
 :----------- | :----------- | :---- | :----- | :----------
              | FeaturesDict |       |        |
-headline     | Text         |       | object |
-overview     | Text         |       | object |
-sectionLabel | Text         |       | object |
-text         | Text         |       | object |
-title        | Text         |       | object |
+headline     | Text         |       | string |
+overview     | Text         |       | string |
+sectionLabel | Text         |       | string |
+text         | Text         |       | string |
+title        | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

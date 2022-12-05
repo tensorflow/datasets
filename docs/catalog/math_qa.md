@@ -52,14 +52,14 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'Problem': Text(shape=(), dtype=object),
-    'Rationale': Text(shape=(), dtype=object),
-    'annotated_formula': Text(shape=(), dtype=object),
-    'category': Text(shape=(), dtype=object),
-    'correct': Text(shape=(), dtype=object),
-    'correct_option': Text(shape=(), dtype=object),
-    'linear_formula': Text(shape=(), dtype=object),
-    'options': Text(shape=(), dtype=object),
+    'Problem': Text(shape=(), dtype=string),
+    'Rationale': Text(shape=(), dtype=string),
+    'annotated_formula': Text(shape=(), dtype=string),
+    'category': Text(shape=(), dtype=string),
+    'correct': Text(shape=(), dtype=string),
+    'correct_option': Text(shape=(), dtype=string),
+    'linear_formula': Text(shape=(), dtype=string),
+    'options': Text(shape=(), dtype=string),
 })
 ```
 
@@ -68,14 +68,14 @@ FeaturesDict({
 Feature           | Class        | Shape | Dtype  | Description
 :---------------- | :----------- | :---- | :----- | :----------
                   | FeaturesDict |       |        |
-Problem           | Text         |       | object |
-Rationale         | Text         |       | object |
-annotated_formula | Text         |       | object |
-category          | Text         |       | object |
-correct           | Text         |       | object |
-correct_option    | Text         |       | object |
-linear_formula    | Text         |       | object |
-options           | Text         |       | object |
+Problem           | Text         |       | string |
+Rationale         | Text         |       | string |
+annotated_formula | Text         |       | string |
+category          | Text         |       | string |
+correct           | Text         |       | string |
+correct_option    | Text         |       | string |
+linear_formula    | Text         |       | string |
+options           | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

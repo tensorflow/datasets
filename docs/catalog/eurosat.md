@@ -76,7 +76,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'image': Image(shape=(64, 64, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
@@ -87,7 +87,7 @@ FeaturesDict({
 Feature  | Class        | Shape       | Dtype  | Description
 :------- | :----------- | :---------- | :----- | :----------
          | FeaturesDict |             |        |
-filename | Text         |             | object |
+filename | Text         |             | string |
 image    | Image        | (64, 64, 3) | uint8  |
 label    | ClassLabel   |             | int64  |
 
@@ -153,7 +153,7 @@ dataButton.addEventListener('click', async () => {
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
     'sentinel2': Tensor(shape=(64, 64, 13), dtype=float32),
 })
@@ -164,7 +164,7 @@ FeaturesDict({
 Feature   | Class        | Shape        | Dtype   | Description
 :-------- | :----------- | :----------- | :------ | :----------
           | FeaturesDict |              |         |
-filename  | Text         |              | object  |
+filename  | Text         |              | string  |
 label     | ClassLabel   |              | int64   |
 sentinel2 | Tensor       | (64, 64, 13) | float32 |
 

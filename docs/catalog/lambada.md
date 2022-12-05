@@ -55,7 +55,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'passage': Text(shape=(), dtype=object),
+    'passage': Text(shape=(), dtype=string),
 })
 ```
 
@@ -64,7 +64,7 @@ FeaturesDict({
 Feature | Class        | Shape | Dtype  | Description
 :------ | :----------- | :---- | :----- | :----------
         | FeaturesDict |       |        |
-passage | Text         |       | object |
+passage | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

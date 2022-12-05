@@ -47,46 +47,46 @@ More information can be found at:
 
 ```python
 FeaturesDict({
-    'command': Sequence(Text(shape=(), dtype=object)),
-    'manner': Text(shape=(), dtype=object),
-    'meaning': Sequence(Text(shape=(), dtype=object)),
-    'referred_target': Text(shape=(), dtype=object),
+    'command': Sequence(Text(shape=(), dtype=string)),
+    'manner': Text(shape=(), dtype=string),
+    'meaning': Sequence(Text(shape=(), dtype=string)),
+    'referred_target': Text(shape=(), dtype=string),
     'situation': FeaturesDict({
         'agent_direction': int32,
         'agent_position': FeaturesDict({
             'column': int32,
             'row': int32,
         }),
-        'direction_to_target': Text(shape=(), dtype=object),
+        'direction_to_target': Text(shape=(), dtype=string),
         'distance_to_target': int32,
         'grid_size': int32,
         'placed_objects': Sequence({
             'object': FeaturesDict({
-                'color': Text(shape=(), dtype=object),
-                'shape': Text(shape=(), dtype=object),
+                'color': Text(shape=(), dtype=string),
+                'shape': Text(shape=(), dtype=string),
                 'size': int32,
             }),
             'position': FeaturesDict({
                 'column': int32,
                 'row': int32,
             }),
-            'vector': Text(shape=(), dtype=object),
+            'vector': Text(shape=(), dtype=string),
         }),
         'target_object': FeaturesDict({
             'object': FeaturesDict({
-                'color': Text(shape=(), dtype=object),
-                'shape': Text(shape=(), dtype=object),
+                'color': Text(shape=(), dtype=string),
+                'shape': Text(shape=(), dtype=string),
                 'size': int32,
             }),
             'position': FeaturesDict({
                 'column': int32,
                 'row': int32,
             }),
-            'vector': Text(shape=(), dtype=object),
+            'vector': Text(shape=(), dtype=string),
         }),
     }),
-    'target_commands': Sequence(Text(shape=(), dtype=object)),
-    'verb_in_command': Text(shape=(), dtype=object),
+    'target_commands': Sequence(Text(shape=(), dtype=string)),
+    'verb_in_command': Text(shape=(), dtype=string),
 })
 ```
 
@@ -95,38 +95,38 @@ FeaturesDict({
 Feature                                  | Class          | Shape   | Dtype  | Description
 :--------------------------------------- | :------------- | :------ | :----- | :----------
                                          | FeaturesDict   |         |        |
-command                                  | Sequence(Text) | (None,) | object |
-manner                                   | Text           |         | object |
-meaning                                  | Sequence(Text) | (None,) | object |
-referred_target                          | Text           |         | object |
+command                                  | Sequence(Text) | (None,) | string |
+manner                                   | Text           |         | string |
+meaning                                  | Sequence(Text) | (None,) | string |
+referred_target                          | Text           |         | string |
 situation                                | FeaturesDict   |         |        |
 situation/agent_direction                | Tensor         |         | int32  |
 situation/agent_position                 | FeaturesDict   |         |        |
 situation/agent_position/column          | Tensor         |         | int32  |
 situation/agent_position/row             | Tensor         |         | int32  |
-situation/direction_to_target            | Text           |         | object |
+situation/direction_to_target            | Text           |         | string |
 situation/distance_to_target             | Tensor         |         | int32  |
 situation/grid_size                      | Tensor         |         | int32  |
 situation/placed_objects                 | Sequence       |         |        |
 situation/placed_objects/object          | FeaturesDict   |         |        |
-situation/placed_objects/object/color    | Text           |         | object |
-situation/placed_objects/object/shape    | Text           |         | object |
+situation/placed_objects/object/color    | Text           |         | string |
+situation/placed_objects/object/shape    | Text           |         | string |
 situation/placed_objects/object/size     | Tensor         |         | int32  |
 situation/placed_objects/position        | FeaturesDict   |         |        |
 situation/placed_objects/position/column | Tensor         |         | int32  |
 situation/placed_objects/position/row    | Tensor         |         | int32  |
-situation/placed_objects/vector          | Text           |         | object |
+situation/placed_objects/vector          | Text           |         | string |
 situation/target_object                  | FeaturesDict   |         |        |
 situation/target_object/object           | FeaturesDict   |         |        |
-situation/target_object/object/color     | Text           |         | object |
-situation/target_object/object/shape     | Text           |         | object |
+situation/target_object/object/color     | Text           |         | string |
+situation/target_object/object/shape     | Text           |         | string |
 situation/target_object/object/size      | Tensor         |         | int32  |
 situation/target_object/position         | FeaturesDict   |         |        |
 situation/target_object/position/column  | Tensor         |         | int32  |
 situation/target_object/position/row     | Tensor         |         | int32  |
-situation/target_object/vector           | Text           |         | object |
-target_commands                          | Sequence(Text) | (None,) | object |
-verb_in_command                          | Text           |         | object |
+situation/target_object/vector           | Text           |         | string |
+target_commands                          | Sequence(Text) | (None,) | string |
+verb_in_command                          | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

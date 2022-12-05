@@ -101,7 +101,7 @@ The resulting directory structure may then be processed by TFDS:
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'is_clean': bool,
     'label': ClassLabel(shape=(), dtype=int64, num_classes=100),
@@ -113,7 +113,7 @@ FeaturesDict({
 Feature  | Class        | Shape           | Dtype  | Description
 :------- | :----------- | :-------------- | :----- | :----------
          | FeaturesDict |                 |        |
-id       | Text         |                 | object |
+id       | Text         |                 | string |
 image    | Image        | (None, None, 3) | uint8  |
 is_clean | Tensor       |                 | bool   |
 label    | ClassLabel   |                 | int64  |

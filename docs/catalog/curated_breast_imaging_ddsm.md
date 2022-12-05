@@ -136,7 +136,7 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 1), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
 })
@@ -147,7 +147,7 @@ FeaturesDict({
 Feature | Class        | Shape           | Dtype  | Description
 :------ | :----------- | :-------------- | :----- | :----------
         | FeaturesDict |                 |        |
-id      | Text         |                 | object |
+id      | Text         |                 | string |
 image   | Image        | (None, None, 1) | uint8  |
 label   | ClassLabel   |                 | int64  |
 
@@ -223,9 +223,9 @@ FeaturesDict({
         'subtlety': ClassLabel(shape=(), dtype=int64, num_classes=6),
     }),
     'breast': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 1), dtype=uint8),
-    'patient': Text(shape=(), dtype=object),
+    'patient': Text(shape=(), dtype=string),
     'view': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
@@ -244,9 +244,9 @@ abnormalities/mask              | Image        | (None, None, 1) | uint8  |
 abnormalities/pathology         | ClassLabel   |                 | int64  |
 abnormalities/subtlety          | ClassLabel   |                 | int64  |
 breast                          | ClassLabel   |                 | int64  |
-id                              | Text         |                 | object |
+id                              | Text         |                 | string |
 image                           | Image        | (None, None, 1) | uint8  |
-patient                         | Text         |                 | object |
+patient                         | Text         |                 | string |
 view                            | ClassLabel   |                 | int64  |
 
 *   **Figure**
@@ -321,9 +321,9 @@ FeaturesDict({
         'subtlety': ClassLabel(shape=(), dtype=int64, num_classes=6),
     }),
     'breast': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 1), dtype=uint8),
-    'patient': Text(shape=(), dtype=object),
+    'patient': Text(shape=(), dtype=string),
     'view': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
@@ -343,10 +343,10 @@ FeaturesDict({
 | abnormalities/pathology    | ClassLabel   |          | int64  |             |
 | abnormalities/subtlety     | ClassLabel   |          | int64  |             |
 | breast                     | ClassLabel   |          | int64  |             |
-| id                         | Text         |          | object |             |
+| id                         | Text         |          | string |             |
 | image                      | Image        | (None,   | uint8  |             |
 :                            :              : None, 1) :        :             :
-| patient                    | Text         |          | object |             |
+| patient                    | Text         |          | string |             |
 | view                       | ClassLabel   |          | int64  |             |
 
 *   **Figure**

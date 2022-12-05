@@ -102,7 +102,7 @@ Split          | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
     'image/id': int64,
     'objects': Sequence({
         'area': int64,
@@ -120,7 +120,7 @@ Feature          | Class        | Shape           | Dtype   | Description
 :--------------- | :----------- | :-------------- | :------ | :----------
                  | FeaturesDict |                 |         |
 image            | Image        | (None, None, 3) | uint8   |
-image/filename   | Text         |                 | object  |
+image/filename   | Text         |                 | string  |
 image/id         | Tensor       |                 | int64   |
 objects          | Sequence     |                 |         |
 objects/area     | Tensor       |                 | int64   |
@@ -193,7 +193,7 @@ Split          | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
     'image/id': int64,
     'objects': Sequence({
         'area': int64,
@@ -211,7 +211,7 @@ Feature          | Class        | Shape           | Dtype   | Description
 :--------------- | :----------- | :-------------- | :------ | :----------
                  | FeaturesDict |                 |         |
 image            | Image        | (None, None, 3) | uint8   |
-image/filename   | Text         |                 | object  |
+image/filename   | Text         |                 | string  |
 image/id         | Tensor       |                 | int64   |
 objects          | Sequence     |                 |         |
 objects/area     | Tensor       |                 | int64   |
@@ -283,10 +283,10 @@ Split          | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
     'image/id': int64,
     'panoptic_image': Image(shape=(None, None, 3), dtype=uint8),
-    'panoptic_image/filename': Text(shape=(), dtype=object),
+    'panoptic_image/filename': Text(shape=(), dtype=string),
     'panoptic_objects': Sequence({
         'area': int64,
         'bbox': BBoxFeature(shape=(4,), dtype=float32),
@@ -304,11 +304,11 @@ FeaturesDict({
 |                           | FeaturesDict |          |         |             |
 | image                     | Image        | (None,   | uint8   |             |
 :                           :              : None, 3) :         :             :
-| image/filename            | Text         |          | object  |             |
+| image/filename            | Text         |          | string  |             |
 | image/id                  | Tensor       |          | int64   |             |
 | panoptic_image            | Image        | (None,   | uint8   |             |
 :                           :              : None, 3) :         :             :
-| panoptic_image/filename   | Text         |          | object  |             |
+| panoptic_image/filename   | Text         |          | string  |             |
 | panoptic_objects          | Sequence     |          |         |             |
 | panoptic_objects/area     | Tensor       |          | int64   |             |
 | panoptic_objects/bbox     | BBoxFeature  | (4,)     | float32 |             |

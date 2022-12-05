@@ -37,17 +37,17 @@ and then browsing the annotation guidelines.
 
 ```python
 FeaturesDict({
-    'deprel': Sequence(Text(shape=(), dtype=object)),
-    'deps': Sequence(Text(shape=(), dtype=object)),
-    'feats': Sequence(Text(shape=(), dtype=object)),
-    'head': Sequence(Text(shape=(), dtype=object)),
-    'idx': Text(shape=(), dtype=object),
-    'lemmas': Sequence(Text(shape=(), dtype=object)),
-    'misc': Sequence(Text(shape=(), dtype=object)),
-    'text': Text(shape=(), dtype=object),
-    'tokens': Sequence(Text(shape=(), dtype=object)),
+    'deprel': Sequence(Text(shape=(), dtype=string)),
+    'deps': Sequence(Text(shape=(), dtype=string)),
+    'feats': Sequence(Text(shape=(), dtype=string)),
+    'head': Sequence(Text(shape=(), dtype=string)),
+    'idx': Text(shape=(), dtype=string),
+    'lemmas': Sequence(Text(shape=(), dtype=string)),
+    'misc': Sequence(Text(shape=(), dtype=string)),
+    'text': Text(shape=(), dtype=string),
+    'tokens': Sequence(Text(shape=(), dtype=string)),
     'upos': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=18)),
-    'xpos': Sequence(Text(shape=(), dtype=object)),
+    'xpos': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
@@ -56,17 +56,17 @@ FeaturesDict({
 Feature | Class                | Shape   | Dtype  | Description
 :------ | :------------------- | :------ | :----- | :----------
         | FeaturesDict         |         |        |
-deprel  | Sequence(Text)       | (None,) | object |
-deps    | Sequence(Text)       | (None,) | object |
-feats   | Sequence(Text)       | (None,) | object |
-head    | Sequence(Text)       | (None,) | object |
-idx     | Text                 |         | object |
-lemmas  | Sequence(Text)       | (None,) | object |
-misc    | Sequence(Text)       | (None,) | object |
-text    | Text                 |         | object |
-tokens  | Sequence(Text)       | (None,) | object |
+deprel  | Sequence(Text)       | (None,) | string |
+deps    | Sequence(Text)       | (None,) | string |
+feats   | Sequence(Text)       | (None,) | string |
+head    | Sequence(Text)       | (None,) | string |
+idx     | Text                 |         | string |
+lemmas  | Sequence(Text)       | (None,) | string |
+misc    | Sequence(Text)       | (None,) | string |
+text    | Text                 |         | string |
+tokens  | Sequence(Text)       | (None,) | string |
 upos    | Sequence(ClassLabel) | (None,) | int64  |
-xpos    | Sequence(Text)       | (None,) | object |
+xpos    | Sequence(Text)       | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

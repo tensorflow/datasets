@@ -44,7 +44,7 @@ poor and data rich regimes.
 ```python
 FeaturesDict({
     'evolutionary': Tensor(shape=(None, 21), dtype=float32),
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'length': int32,
     'mask': Tensor(shape=(None,), dtype=bool),
     'primary': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=20)),
@@ -58,7 +58,7 @@ Feature      | Class                | Shape      | Dtype   | Description
 :----------- | :------------------- | :--------- | :------ | :----------
              | FeaturesDict         |            |         |
 evolutionary | Tensor               | (None, 21) | float32 |
-id           | Text                 |            | object  |
+id           | Text                 |            | string  |
 length       | Tensor               |            | int32   |
 mask         | Tensor               | (None,)    | bool    |
 primary      | Sequence(ClassLabel) | (None,)    | int64   |

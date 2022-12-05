@@ -29,10 +29,10 @@
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=object),
-    'input': Text(shape=(), dtype=object),
-    'output': Text(shape=(), dtype=object),
-    'pid': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
+    'input': Text(shape=(), dtype=string),
+    'output': Text(shape=(), dtype=string),
+    'pid': Text(shape=(), dtype=string),
 })
 ```
 
@@ -41,10 +41,10 @@ FeaturesDict({
 Feature | Class        | Shape | Dtype  | Description
 :------ | :----------- | :---- | :----- | :----------
         | FeaturesDict |       |        |
-id      | Text         |       | object |
-input   | Text         |       | object |
-output  | Text         |       | object |
-pid     | Text         |       | object |
+id      | Text         |       | string |
+input   | Text         |       | string |
+output  | Text         |       | string |
+pid     | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

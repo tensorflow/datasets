@@ -112,9 +112,9 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=object),
-    'context_passage': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
+    'answer': Text(shape=(), dtype=string),
+    'context_passage': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
@@ -123,9 +123,9 @@ FeaturesDict({
 Feature         | Class        | Shape | Dtype  | Description
 :-------------- | :----------- | :---- | :----- | :----------
                 | FeaturesDict |       |        |
-answer          | Text         |       | object |
-context_passage | Text         |       | object |
-question        | Text         |       | object |
+answer          | Text         |       | string |
+context_passage | Text         |       | string |
+question        | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -185,10 +185,10 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=object),
-    'context_passage': Text(shape=(), dtype=object),
-    'context_sentence': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
+    'answer': Text(shape=(), dtype=string),
+    'context_passage': Text(shape=(), dtype=string),
+    'context_sentence': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
@@ -197,10 +197,10 @@ FeaturesDict({
 Feature          | Class        | Shape | Dtype  | Description
 :--------------- | :----------- | :---- | :----- | :----------
                  | FeaturesDict |       |        |
-answer           | Text         |       | object |
-context_passage  | Text         |       | object |
-context_sentence | Text         |       | object |
-question         | Text         |       | object |
+answer           | Text         |       | string |
+context_passage  | Text         |       | string |
+context_sentence | Text         |       | string |
+question         | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -493,7 +493,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'iteration': int32,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
@@ -512,8 +512,8 @@ FeaturesDict({
             'bias': Tensor(shape=(3,), dtype=float32),
             'weight': Tensor(shape=(3, 256), dtype=float32),
         }),
-        'nonlinearity': object,
-        'output_distribution': object,
+        'nonlinearity': string,
+        'output_distribution': string,
     }),
     'steps': Dataset({
         'action': Tensor(shape=(3,), dtype=float32),
@@ -537,7 +537,7 @@ FeaturesDict({
 Feature                       | Class        | Shape      | Dtype   | Description
 :---------------------------- | :----------- | :--------- | :------ | :----------
                               | FeaturesDict |            |         |
-algorithm                     | Tensor       |            | object  |
+algorithm                     | Tensor       |            | string  |
 iteration                     | Tensor       |            | int32   |
 policy                        | FeaturesDict |            |         |
 policy/fc0                    | FeaturesDict |            |         |
@@ -552,8 +552,8 @@ policy/last_fc/weight         | Tensor       | (3, 256)   | float32 |
 policy/last_fc_log_std        | FeaturesDict |            |         |
 policy/last_fc_log_std/bias   | Tensor       | (3,)       | float32 |
 policy/last_fc_log_std/weight | Tensor       | (3, 256)   | float32 |
-policy/nonlinearity           | Tensor       |            | object  |
-policy/output_distribution    | Tensor       |            | object  |
+policy/nonlinearity           | Tensor       |            | string  |
+policy/output_distribution    | Tensor       |            | string  |
 steps                         | Dataset      |            |         |
 steps/action                  | Tensor       | (3,)       | float32 |
 steps/discount                | Tensor       |            | float32 |
@@ -624,7 +624,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'iteration': int32,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
@@ -643,8 +643,8 @@ FeaturesDict({
             'bias': Tensor(shape=(3,), dtype=float32),
             'weight': Tensor(shape=(3, 256), dtype=float32),
         }),
-        'nonlinearity': object,
-        'output_distribution': object,
+        'nonlinearity': string,
+        'output_distribution': string,
     }),
     'steps': Dataset({
         'action': Tensor(shape=(3,), dtype=float32),
@@ -668,7 +668,7 @@ FeaturesDict({
 Feature                       | Class        | Shape      | Dtype   | Description
 :---------------------------- | :----------- | :--------- | :------ | :----------
                               | FeaturesDict |            |         |
-algorithm                     | Tensor       |            | object  |
+algorithm                     | Tensor       |            | string  |
 iteration                     | Tensor       |            | int32   |
 policy                        | FeaturesDict |            |         |
 policy/fc0                    | FeaturesDict |            |         |
@@ -683,8 +683,8 @@ policy/last_fc/weight         | Tensor       | (3, 256)   | float32 |
 policy/last_fc_log_std        | FeaturesDict |            |         |
 policy/last_fc_log_std/bias   | Tensor       | (3,)       | float32 |
 policy/last_fc_log_std/weight | Tensor       | (3, 256)   | float32 |
-policy/nonlinearity           | Tensor       |            | object  |
-policy/output_distribution    | Tensor       |            | object  |
+policy/nonlinearity           | Tensor       |            | string  |
+policy/output_distribution    | Tensor       |            | string  |
 steps                         | Dataset      |            |         |
 steps/action                  | Tensor       | (3,)       | float32 |
 steps/discount                | Tensor       |            | float32 |
@@ -847,7 +847,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'iteration': int32,
     'steps': Dataset({
         'action': Tensor(shape=(3,), dtype=float64),
@@ -871,7 +871,7 @@ FeaturesDict({
 Feature                      | Class        | Shape | Dtype   | Description
 :--------------------------- | :----------- | :---- | :------ | :----------
                              | FeaturesDict |       |         |
-algorithm                    | Tensor       |       | object  |
+algorithm                    | Tensor       |       | string  |
 iteration                    | Tensor       |       | int32   |
 steps                        | Dataset      |       |         |
 steps/action                 | Tensor       | (3,)  | float64 |
@@ -943,7 +943,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'iteration': int32,
     'steps': Dataset({
         'action': Tensor(shape=(3,), dtype=float64),
@@ -967,7 +967,7 @@ FeaturesDict({
 Feature                      | Class        | Shape | Dtype   | Description
 :--------------------------- | :----------- | :---- | :------ | :----------
                              | FeaturesDict |       |         |
-algorithm                    | Tensor       |       | object  |
+algorithm                    | Tensor       |       | string  |
 iteration                    | Tensor       |       | int32   |
 steps                        | Dataset      |       |         |
 steps/action                 | Tensor       | (3,)  | float64 |
@@ -1131,7 +1131,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'iteration': int32,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
@@ -1150,8 +1150,8 @@ FeaturesDict({
             'bias': Tensor(shape=(3,), dtype=float32),
             'weight': Tensor(shape=(3, 256), dtype=float32),
         }),
-        'nonlinearity': object,
-        'output_distribution': object,
+        'nonlinearity': string,
+        'output_distribution': string,
     }),
     'steps': Dataset({
         'action': Tensor(shape=(3,), dtype=float32),
@@ -1175,7 +1175,7 @@ FeaturesDict({
 Feature                       | Class        | Shape      | Dtype   | Description
 :---------------------------- | :----------- | :--------- | :------ | :----------
                               | FeaturesDict |            |         |
-algorithm                     | Tensor       |            | object  |
+algorithm                     | Tensor       |            | string  |
 iteration                     | Tensor       |            | int32   |
 policy                        | FeaturesDict |            |         |
 policy/fc0                    | FeaturesDict |            |         |
@@ -1190,8 +1190,8 @@ policy/last_fc/weight         | Tensor       | (3, 256)   | float32 |
 policy/last_fc_log_std        | FeaturesDict |            |         |
 policy/last_fc_log_std/bias   | Tensor       | (3,)       | float32 |
 policy/last_fc_log_std/weight | Tensor       | (3, 256)   | float32 |
-policy/nonlinearity           | Tensor       |            | object  |
-policy/output_distribution    | Tensor       |            | object  |
+policy/nonlinearity           | Tensor       |            | string  |
+policy/output_distribution    | Tensor       |            | string  |
 steps                         | Dataset      |            |         |
 steps/action                  | Tensor       | (3,)       | float32 |
 steps/discount                | Tensor       |            | float32 |
@@ -1262,7 +1262,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'iteration': int32,
     'steps': Dataset({
         'action': Tensor(shape=(3,), dtype=float32),
@@ -1286,7 +1286,7 @@ FeaturesDict({
 Feature                      | Class        | Shape | Dtype   | Description
 :--------------------------- | :----------- | :---- | :------ | :----------
                              | FeaturesDict |       |         |
-algorithm                    | Tensor       |       | object  |
+algorithm                    | Tensor       |       | string  |
 iteration                    | Tensor       |       | int32   |
 steps                        | Dataset      |       |         |
 steps/action                 | Tensor       | (3,)  | float32 |
@@ -1358,7 +1358,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'iteration': int32,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
@@ -1377,8 +1377,8 @@ FeaturesDict({
             'bias': Tensor(shape=(3,), dtype=float32),
             'weight': Tensor(shape=(3, 256), dtype=float32),
         }),
-        'nonlinearity': object,
-        'output_distribution': object,
+        'nonlinearity': string,
+        'output_distribution': string,
     }),
     'steps': Dataset({
         'action': Tensor(shape=(3,), dtype=float32),
@@ -1402,7 +1402,7 @@ FeaturesDict({
 Feature                       | Class        | Shape      | Dtype   | Description
 :---------------------------- | :----------- | :--------- | :------ | :----------
                               | FeaturesDict |            |         |
-algorithm                     | Tensor       |            | object  |
+algorithm                     | Tensor       |            | string  |
 iteration                     | Tensor       |            | int32   |
 policy                        | FeaturesDict |            |         |
 policy/fc0                    | FeaturesDict |            |         |
@@ -1417,8 +1417,8 @@ policy/last_fc/weight         | Tensor       | (3, 256)   | float32 |
 policy/last_fc_log_std        | FeaturesDict |            |         |
 policy/last_fc_log_std/bias   | Tensor       | (3,)       | float32 |
 policy/last_fc_log_std/weight | Tensor       | (3, 256)   | float32 |
-policy/nonlinearity           | Tensor       |            | object  |
-policy/output_distribution    | Tensor       |            | object  |
+policy/nonlinearity           | Tensor       |            | string  |
+policy/output_distribution    | Tensor       |            | string  |
 steps                         | Dataset      |            |         |
 steps/action                  | Tensor       | (3,)       | float32 |
 steps/discount                | Tensor       |            | float32 |
@@ -1581,7 +1581,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'iteration': int32,
     'steps': Dataset({
         'action': Tensor(shape=(3,), dtype=float32),
@@ -1605,7 +1605,7 @@ FeaturesDict({
 Feature                      | Class        | Shape | Dtype   | Description
 :--------------------------- | :----------- | :---- | :------ | :----------
                              | FeaturesDict |       |         |
-algorithm                    | Tensor       |       | object  |
+algorithm                    | Tensor       |       | string  |
 iteration                    | Tensor       |       | int32   |
 steps                        | Dataset      |       |         |
 steps/action                 | Tensor       | (3,)  | float32 |

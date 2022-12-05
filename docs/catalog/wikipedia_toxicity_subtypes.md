@@ -105,13 +105,13 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'identity_attack': float32,
     'insult': float32,
-    'language': Text(shape=(), dtype=object),
+    'language': Text(shape=(), dtype=string),
     'obscene': float32,
     'severe_toxicity': float32,
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
     'threat': float32,
     'toxicity': float32,
 })
@@ -122,13 +122,13 @@ FeaturesDict({
 Feature         | Class        | Shape | Dtype   | Description
 :-------------- | :----------- | :---- | :------ | :----------
                 | FeaturesDict |       |         |
-id              | Text         |       | object  |
+id              | Text         |       | string  |
 identity_attack | Tensor       |       | float32 |
 insult          | Tensor       |       | float32 |
-language        | Text         |       | object  |
+language        | Text         |       | string  |
 obscene         | Tensor       |       | float32 |
 severe_toxicity | Tensor       |       | float32 |
-text            | Text         |       | object  |
+text            | Text         |       | string  |
 threat          | Tensor       |       | float32 |
 toxicity        | Tensor       |       | float32 |
 
@@ -201,9 +201,9 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=object),
-    'language': Text(shape=(), dtype=object),
-    'text': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
+    'language': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
     'toxicity': float32,
 })
 ```
@@ -213,9 +213,9 @@ FeaturesDict({
 Feature  | Class        | Shape | Dtype   | Description
 :------- | :----------- | :---- | :------ | :----------
          | FeaturesDict |       |         |
-id       | Text         |       | object  |
-language | Text         |       | object  |
-text     | Text         |       | object  |
+id       | Text         |       | string  |
+language | Text         |       | string  |
+text     | Text         |       | string  |
 toxicity | Tensor       |       | float32 |
 
 *   **Examples**

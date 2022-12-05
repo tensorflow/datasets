@@ -55,17 +55,17 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'A': Text(shape=(), dtype=object),
+    'A': Text(shape=(), dtype=string),
     'A-coref': bool,
     'A-offset': int32,
-    'B': Text(shape=(), dtype=object),
+    'B': Text(shape=(), dtype=string),
     'B-coref': bool,
     'B-offset': int32,
-    'ID': Text(shape=(), dtype=object),
-    'Pronoun': Text(shape=(), dtype=object),
+    'ID': Text(shape=(), dtype=string),
+    'Pronoun': Text(shape=(), dtype=string),
     'Pronoun-offset': int32,
-    'Text': Text(shape=(), dtype=object),
-    'URL': Text(shape=(), dtype=object),
+    'Text': Text(shape=(), dtype=string),
+    'URL': Text(shape=(), dtype=string),
 })
 ```
 
@@ -74,17 +74,17 @@ FeaturesDict({
 Feature        | Class        | Shape | Dtype  | Description
 :------------- | :----------- | :---- | :----- | :----------
                | FeaturesDict |       |        |
-A              | Text         |       | object |
+A              | Text         |       | string |
 A-coref        | Tensor       |       | bool   |
 A-offset       | Tensor       |       | int32  |
-B              | Text         |       | object |
+B              | Text         |       | string |
 B-coref        | Tensor       |       | bool   |
 B-offset       | Tensor       |       | int32  |
-ID             | Text         |       | object |
-Pronoun        | Text         |       | object |
+ID             | Text         |       | string |
+Pronoun        | Text         |       | string |
 Pronoun-offset | Tensor       |       | int32  |
-Text           | Text         |       | object |
-URL            | Text         |       | object |
+Text           | Text         |       | string |
+URL            | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

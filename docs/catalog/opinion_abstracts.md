@@ -78,13 +78,13 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    '_critic_consensus': object,
+    '_critic_consensus': string,
     '_critics': Sequence({
-        'key': object,
-        'value': object,
+        'key': string,
+        'value': string,
     }),
-    '_movie_id': object,
-    '_movie_name': object,
+    '_movie_id': string,
+    '_movie_name': string,
 })
 ```
 
@@ -93,12 +93,12 @@ FeaturesDict({
 Feature           | Class        | Shape | Dtype  | Description
 :---------------- | :----------- | :---- | :----- | :----------
                   | FeaturesDict |       |        |
-_critic_consensus | Tensor       |       | object |
+_critic_consensus | Tensor       |       | string |
 _critics          | Sequence     |       |        |
-_critics/key      | Tensor       |       | object |
-_critics/value    | Tensor       |       | object |
-_movie_id         | Tensor       |       | object |
-_movie_name       | Tensor       |       | object |
+_critics/key      | Tensor       |       | string |
+_critics/value    | Tensor       |       | string |
+_movie_id         | Tensor       |       | string |
+_movie_name       | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -158,12 +158,12 @@ Split     | Examples
 ```python
 FeaturesDict({
     '_argument_sentences': Sequence({
-        'key': object,
-        'value': object,
+        'key': string,
+        'value': string,
     }),
-    '_claim': object,
-    '_claim_id': object,
-    '_debate_name': object,
+    '_claim': string,
+    '_claim_id': string,
+    '_debate_name': string,
 })
 ```
 
@@ -173,11 +173,11 @@ Feature                   | Class        | Shape | Dtype  | Description
 :------------------------ | :----------- | :---- | :----- | :----------
                           | FeaturesDict |       |        |
 _argument_sentences       | Sequence     |       |        |
-_argument_sentences/key   | Tensor       |       | object |
-_argument_sentences/value | Tensor       |       | object |
-_claim                    | Tensor       |       | object |
-_claim_id                 | Tensor       |       | object |
-_debate_name              | Tensor       |       | object |
+_argument_sentences/key   | Tensor       |       | string |
+_argument_sentences/value | Tensor       |       | string |
+_claim                    | Tensor       |       | string |
+_claim_id                 | Tensor       |       | string |
+_debate_name              | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -50,10 +50,10 @@ Note that the 'p315' text was lost due to a hard disk error.
 FeaturesDict({
     'accent': ClassLabel(shape=(), dtype=int64, num_classes=13),
     'gender': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'id': object,
+    'id': string,
     'speaker': ClassLabel(shape=(), dtype=int64, num_classes=110),
     'speech': Audio(shape=(None,), dtype=int16),
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -64,10 +64,10 @@ Feature | Class        | Shape   | Dtype  | Description
         | FeaturesDict |         |        |
 accent  | ClassLabel   |         | int64  |
 gender  | ClassLabel   |         | int64  |
-id      | Tensor       |         | object |
+id      | Tensor       |         | string |
 speaker | ClassLabel   |         | int64  |
 speech  | Audio        | (None,) | int16  |
-text    | Text         |         | object |
+text    | Text         |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

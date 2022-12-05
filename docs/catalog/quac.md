@@ -59,19 +59,19 @@ Split          | Examples
 FeaturesDict({
     'answers': Sequence({
         'answer_start': int32,
-        'text': Text(shape=(), dtype=object),
+        'text': Text(shape=(), dtype=string),
     }),
-    'background': Text(shape=(), dtype=object),
-    'context': Text(shape=(), dtype=object),
-    'followup': Text(shape=(), dtype=object),
+    'background': Text(shape=(), dtype=string),
+    'context': Text(shape=(), dtype=string),
+    'followup': Text(shape=(), dtype=string),
     'orig_answer': FeaturesDict({
         'answer_start': int32,
-        'text': Text(shape=(), dtype=object),
+        'text': Text(shape=(), dtype=string),
     }),
-    'question': Text(shape=(), dtype=object),
-    'section_title': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
-    'yesno': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=string),
+    'section_title': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
+    'yesno': Text(shape=(), dtype=string),
 })
 ```
 
@@ -82,17 +82,17 @@ Feature                  | Class        | Shape | Dtype  | Description
                          | FeaturesDict |       |        |
 answers                  | Sequence     |       |        |
 answers/answer_start     | Tensor       |       | int32  |
-answers/text             | Text         |       | object |
-background               | Text         |       | object |
-context                  | Text         |       | object |
-followup                 | Text         |       | object |
+answers/text             | Text         |       | string |
+background               | Text         |       | string |
+context                  | Text         |       | string |
+followup                 | Text         |       | string |
 orig_answer              | FeaturesDict |       |        |
 orig_answer/answer_start | Tensor       |       | int32  |
-orig_answer/text         | Text         |       | object |
-question                 | Text         |       | object |
-section_title            | Text         |       | object |
-title                    | Text         |       | object |
-yesno                    | Text         |       | object |
+orig_answer/text         | Text         |       | string |
+question                 | Text         |       | string |
+section_title            | Text         |       | string |
+title                    | Text         |       | string |
+yesno                    | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

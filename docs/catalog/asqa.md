@@ -52,24 +52,24 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'ambiguous_question': Text(shape=(), dtype=object),
+    'ambiguous_question': Text(shape=(), dtype=string),
     'annotations': Sequence({
         'knowledge': Sequence({
-            'content': Text(shape=(), dtype=object),
-            'wikipage': Text(shape=(), dtype=object),
+            'content': Text(shape=(), dtype=string),
+            'wikipage': Text(shape=(), dtype=string),
         }),
-        'long_answer': Text(shape=(), dtype=object),
+        'long_answer': Text(shape=(), dtype=string),
     }),
     'qa_pairs': Sequence({
-        'context': Text(shape=(), dtype=object),
-        'question': Text(shape=(), dtype=object),
-        'short_answers': Sequence(Text(shape=(), dtype=object)),
-        'wikipage': Text(shape=(), dtype=object),
+        'context': Text(shape=(), dtype=string),
+        'question': Text(shape=(), dtype=string),
+        'short_answers': Sequence(Text(shape=(), dtype=string)),
+        'wikipage': Text(shape=(), dtype=string),
     }),
     'sample_id': int32,
     'wikipages': Sequence({
-        'title': Text(shape=(), dtype=object),
-        'url': Text(shape=(), dtype=object),
+        'title': Text(shape=(), dtype=string),
+        'url': Text(shape=(), dtype=string),
     }),
 })
 ```
@@ -79,21 +79,21 @@ FeaturesDict({
 Feature                        | Class          | Shape   | Dtype  | Description
 :----------------------------- | :------------- | :------ | :----- | :----------
                                | FeaturesDict   |         |        |
-ambiguous_question             | Text           |         | object | Disambiguated question from AmbigQA.
+ambiguous_question             | Text           |         | string | Disambiguated question from AmbigQA.
 annotations                    | Sequence       |         |        | Long-form answers to the ambiguous question constructed by ASQA annotators.
 annotations/knowledge          | Sequence       |         |        | List of additional knowledge pieces.
-annotations/knowledge/content  | Text           |         | object | A passage from Wikipedia.
-annotations/knowledge/wikipage | Text           |         | object | Title of the Wikipedia page the passage was taken from.
-annotations/long_answer        | Text           |         | object | Annotation.
+annotations/knowledge/content  | Text           |         | string | A passage from Wikipedia.
+annotations/knowledge/wikipage | Text           |         | string | Title of the Wikipedia page the passage was taken from.
+annotations/long_answer        | Text           |         | string | Annotation.
 qa_pairs                       | Sequence       |         |        | Q&A pairs from AmbigQA which are used for disambiguation.
-qa_pairs/context               | Text           |         | object | Additional context provided.
-qa_pairs/question              | Text           |         | object |
-qa_pairs/short_answers         | Sequence(Text) | (None,) | object | List of short answers from AmbigQA.
-qa_pairs/wikipage              | Text           |         | object | Title of the Wikipedia page the additional context was taken from.
+qa_pairs/context               | Text           |         | string | Additional context provided.
+qa_pairs/question              | Text           |         | string |
+qa_pairs/short_answers         | Sequence(Text) | (None,) | string | List of short answers from AmbigQA.
+qa_pairs/wikipage              | Text           |         | string | Title of the Wikipedia page the additional context was taken from.
 sample_id                      | Tensor         |         | int32  |
 wikipages                      | Sequence       |         |        | List of Wikipedia pages visited by AmbigQA annotators.
-wikipages/title                | Text           |         | object | Title of the Wikipedia page.
-wikipages/url                  | Text           |         | object | Link to the Wikipedia page.
+wikipages/title                | Text           |         | string | Title of the Wikipedia page.
+wikipages/url                  | Text           |         | string | Link to the Wikipedia page.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

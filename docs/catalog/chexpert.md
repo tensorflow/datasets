@@ -74,7 +74,7 @@ FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'image_view': ClassLabel(shape=(), dtype=int64, num_classes=2),
     'label': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=4)),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -86,7 +86,7 @@ Feature    | Class                | Shape           | Dtype  | Description
 image      | Image                | (None, None, 3) | uint8  |
 image_view | ClassLabel           |                 | int64  |
 label      | Sequence(ClassLabel) | (None,)         | int64  |
-name       | Text                 |                 | object |
+name       | Text                 |                 | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

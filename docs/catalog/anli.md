@@ -43,10 +43,10 @@ iterative, adversarial human-and-model-in-the-loop procedure.
 
 ```python
 FeaturesDict({
-    'context': Text(shape=(), dtype=object),
-    'hypothesis': Text(shape=(), dtype=object),
+    'context': Text(shape=(), dtype=string),
+    'hypothesis': Text(shape=(), dtype=string),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
-    'uid': Text(shape=(), dtype=object),
+    'uid': Text(shape=(), dtype=string),
 })
 ```
 
@@ -55,10 +55,10 @@ FeaturesDict({
 Feature    | Class        | Shape | Dtype  | Description
 :--------- | :----------- | :---- | :----- | :----------
            | FeaturesDict |       |        |
-context    | Text         |       | object |
-hypothesis | Text         |       | object |
+context    | Text         |       | string |
+hypothesis | Text         |       | string |
 label      | ClassLabel   |       | int64  |
-uid        | Text         |       | object |
+uid        | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

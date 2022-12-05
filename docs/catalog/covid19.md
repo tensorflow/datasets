@@ -54,16 +54,16 @@ Split     | Examples
 FeaturesDict({
     'adult_female_mortality_rate': float64,
     'adult_male_mortality_rate': float64,
-    'age_bin_0': object,
-    'age_bin_1': object,
-    'age_bin_2': object,
-    'age_bin_3': object,
-    'age_bin_4': object,
-    'age_bin_5': object,
-    'age_bin_6': object,
-    'age_bin_7': object,
-    'age_bin_8': object,
-    'age_bin_9': object,
+    'age_bin_0': string,
+    'age_bin_1': string,
+    'age_bin_2': string,
+    'age_bin_3': string,
+    'age_bin_4': string,
+    'age_bin_5': string,
+    'age_bin_6': string,
+    'age_bin_7': string,
+    'age_bin_8': string,
+    'age_bin_9': string,
     'aggregation_level': float64,
     'area_rural_sq_km': float64,
     'area_sq_km': float64,
@@ -72,8 +72,8 @@ FeaturesDict({
     'cancel_public_events': float64,
     'comorbidity_mortality_rate': float64,
     'contact_tracing': float64,
-    'country_code': object,
-    'country_name': object,
+    'country_code': string,
+    'country_name': string,
     'cumulative_confirmed': float64,
     'cumulative_confirmed_age_0': float64,
     'cumulative_confirmed_age_1': float64,
@@ -165,8 +165,8 @@ FeaturesDict({
     'current_hospitalized_patients': float64,
     'current_intensive_care_patients': float64,
     'current_ventilator_patients': float64,
-    'datacommons_id': object,
-    'date': object,
+    'datacommons_id': string,
+    'date': string,
     'debt_relief': float64,
     'dew_point': float64,
     'diabetes_prevalence': float64,
@@ -185,13 +185,13 @@ FeaturesDict({
     'international_support': float64,
     'international_travel_controls': float64,
     'investment_in_vaccines': float64,
-    'iso_3166_1_alpha_2': object,
-    'iso_3166_1_alpha_3': object,
+    'iso_3166_1_alpha_2': string,
+    'iso_3166_1_alpha_3': string,
     'latitude': float64,
     'life_expectancy': float64,
-    'locality_code': object,
-    'locality_name': object,
-    'location_key': object,
+    'locality_code': string,
+    'locality_name': string,
+    'location_key': string,
     'longitude': float64,
     'maximum_temperature_celsius': float64,
     'minimum_temperature_celsius': float64,
@@ -290,10 +290,10 @@ FeaturesDict({
     'new_vaccine_doses_administered_pfizer': float64,
     'new_ventilator_patients': float64,
     'nurses_per_1000': float64,
-    'openstreetmap_id': object,
+    'openstreetmap_id': string,
     'out_of_pocket_health_expenditure_usd': float64,
     'physicians_per_1000': float64,
-    'place_id': object,
+    'place_id': string,
     'pollution_mortality_rate': float64,
     'population': float64,
     'population_age_00_09': float64,
@@ -744,13 +744,13 @@ FeaturesDict({
     'snowfall_mm': float64,
     'stay_at_home_requirements': float64,
     'stringency_index': float64,
-    'subregion1_code': object,
-    'subregion1_name': object,
-    'subregion2_code': object,
-    'subregion2_name': object,
+    'subregion1_code': string,
+    'subregion1_name': string,
+    'subregion2_code': string,
+    'subregion2_name': string,
     'testing_policy': float64,
     'vaccination_policy': float64,
-    'wikidata_id': object,
+    'wikidata_id': string,
     'workplace_closing': float64,
 })
 ```
@@ -762,16 +762,16 @@ Feature                                                 | Class        | Shape |
                                                         | FeaturesDict |       |         |
 adult_female_mortality_rate                             | Tensor       |       | float64 |
 adult_male_mortality_rate                               | Tensor       |       | float64 |
-age_bin_0                                               | Tensor       |       | object  |
-age_bin_1                                               | Tensor       |       | object  |
-age_bin_2                                               | Tensor       |       | object  |
-age_bin_3                                               | Tensor       |       | object  |
-age_bin_4                                               | Tensor       |       | object  |
-age_bin_5                                               | Tensor       |       | object  |
-age_bin_6                                               | Tensor       |       | object  |
-age_bin_7                                               | Tensor       |       | object  |
-age_bin_8                                               | Tensor       |       | object  |
-age_bin_9                                               | Tensor       |       | object  |
+age_bin_0                                               | Tensor       |       | string  |
+age_bin_1                                               | Tensor       |       | string  |
+age_bin_2                                               | Tensor       |       | string  |
+age_bin_3                                               | Tensor       |       | string  |
+age_bin_4                                               | Tensor       |       | string  |
+age_bin_5                                               | Tensor       |       | string  |
+age_bin_6                                               | Tensor       |       | string  |
+age_bin_7                                               | Tensor       |       | string  |
+age_bin_8                                               | Tensor       |       | string  |
+age_bin_9                                               | Tensor       |       | string  |
 aggregation_level                                       | Tensor       |       | float64 |
 area_rural_sq_km                                        | Tensor       |       | float64 |
 area_sq_km                                              | Tensor       |       | float64 |
@@ -780,8 +780,8 @@ average_temperature_celsius                             | Tensor       |       |
 cancel_public_events                                    | Tensor       |       | float64 |
 comorbidity_mortality_rate                              | Tensor       |       | float64 |
 contact_tracing                                         | Tensor       |       | float64 |
-country_code                                            | Tensor       |       | object  |
-country_name                                            | Tensor       |       | object  |
+country_code                                            | Tensor       |       | string  |
+country_name                                            | Tensor       |       | string  |
 cumulative_confirmed                                    | Tensor       |       | float64 |
 cumulative_confirmed_age_0                              | Tensor       |       | float64 |
 cumulative_confirmed_age_1                              | Tensor       |       | float64 |
@@ -873,8 +873,8 @@ cumulative_ventilator_patients                          | Tensor       |       |
 current_hospitalized_patients                           | Tensor       |       | float64 |
 current_intensive_care_patients                         | Tensor       |       | float64 |
 current_ventilator_patients                             | Tensor       |       | float64 |
-datacommons_id                                          | Tensor       |       | object  |
-date                                                    | Tensor       |       | object  |
+datacommons_id                                          | Tensor       |       | string  |
+date                                                    | Tensor       |       | string  |
 debt_relief                                             | Tensor       |       | float64 |
 dew_point                                               | Tensor       |       | float64 |
 diabetes_prevalence                                     | Tensor       |       | float64 |
@@ -893,13 +893,13 @@ infant_mortality_rate                                   | Tensor       |       |
 international_support                                   | Tensor       |       | float64 |
 international_travel_controls                           | Tensor       |       | float64 |
 investment_in_vaccines                                  | Tensor       |       | float64 |
-iso_3166_1_alpha_2                                      | Tensor       |       | object  |
-iso_3166_1_alpha_3                                      | Tensor       |       | object  |
+iso_3166_1_alpha_2                                      | Tensor       |       | string  |
+iso_3166_1_alpha_3                                      | Tensor       |       | string  |
 latitude                                                | Tensor       |       | float64 |
 life_expectancy                                         | Tensor       |       | float64 |
-locality_code                                           | Tensor       |       | object  |
-locality_name                                           | Tensor       |       | object  |
-location_key                                            | Tensor       |       | object  |
+locality_code                                           | Tensor       |       | string  |
+locality_name                                           | Tensor       |       | string  |
+location_key                                            | Tensor       |       | string  |
 longitude                                               | Tensor       |       | float64 |
 maximum_temperature_celsius                             | Tensor       |       | float64 |
 minimum_temperature_celsius                             | Tensor       |       | float64 |
@@ -998,10 +998,10 @@ new_vaccine_doses_administered_moderna                  | Tensor       |       |
 new_vaccine_doses_administered_pfizer                   | Tensor       |       | float64 |
 new_ventilator_patients                                 | Tensor       |       | float64 |
 nurses_per_1000                                         | Tensor       |       | float64 |
-openstreetmap_id                                        | Tensor       |       | object  |
+openstreetmap_id                                        | Tensor       |       | string  |
 out_of_pocket_health_expenditure_usd                    | Tensor       |       | float64 |
 physicians_per_1000                                     | Tensor       |       | float64 |
-place_id                                                | Tensor       |       | object  |
+place_id                                                | Tensor       |       | string  |
 pollution_mortality_rate                                | Tensor       |       | float64 |
 population                                              | Tensor       |       | float64 |
 population_age_00_09                                    | Tensor       |       | float64 |
@@ -1452,13 +1452,13 @@ smoking_prevalence                                      | Tensor       |       |
 snowfall_mm                                             | Tensor       |       | float64 |
 stay_at_home_requirements                               | Tensor       |       | float64 |
 stringency_index                                        | Tensor       |       | float64 |
-subregion1_code                                         | Tensor       |       | object  |
-subregion1_name                                         | Tensor       |       | object  |
-subregion2_code                                         | Tensor       |       | object  |
-subregion2_name                                         | Tensor       |       | object  |
+subregion1_code                                         | Tensor       |       | string  |
+subregion1_name                                         | Tensor       |       | string  |
+subregion2_code                                         | Tensor       |       | string  |
+subregion2_name                                         | Tensor       |       | string  |
 testing_policy                                          | Tensor       |       | float64 |
 vaccination_policy                                      | Tensor       |       | float64 |
-wikidata_id                                             | Tensor       |       | object  |
+wikidata_id                                             | Tensor       |       | string  |
 workplace_closing                                       | Tensor       |       | float64 |
 
 *   **Supervised keys** (See

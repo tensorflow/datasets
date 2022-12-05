@@ -55,18 +55,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'channel': Text(shape=(), dtype=object),
+    'channel': Text(shape=(), dtype=string),
     'conversion': int64,
     'history': float32,
-    'history_segment': Text(shape=(), dtype=object),
+    'history_segment': Text(shape=(), dtype=string),
     'mens': int64,
     'newbie': int64,
     'recency': int64,
-    'segment': Text(shape=(), dtype=object),
+    'segment': Text(shape=(), dtype=string),
     'spend': float32,
     'visit': int64,
     'womens': int64,
-    'zip_code': Text(shape=(), dtype=object),
+    'zip_code': Text(shape=(), dtype=string),
 })
 ```
 
@@ -75,18 +75,18 @@ FeaturesDict({
 Feature         | Class        | Shape | Dtype   | Description
 :-------------- | :----------- | :---- | :------ | :----------
                 | FeaturesDict |       |         |
-channel         | Text         |       | object  |
+channel         | Text         |       | string  |
 conversion      | Tensor       |       | int64   |
 history         | Tensor       |       | float32 |
-history_segment | Text         |       | object  |
+history_segment | Text         |       | string  |
 mens            | Tensor       |       | int64   |
 newbie          | Tensor       |       | int64   |
 recency         | Tensor       |       | int64   |
-segment         | Text         |       | object  |
+segment         | Text         |       | string  |
 spend           | Tensor       |       | float32 |
 visit           | Tensor       |       | int64   |
 womens          | Tensor       |       | int64   |
-zip_code        | Text         |       | object  |
+zip_code        | Text         |       | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

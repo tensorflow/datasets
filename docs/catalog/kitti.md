@@ -67,7 +67,7 @@ Split          | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/file_name': Text(shape=(), dtype=object),
+    'image/file_name': Text(shape=(), dtype=string),
     'objects': Sequence({
         'alpha': float32,
         'bbox': BBoxFeature(shape=(4,), dtype=float32),
@@ -88,7 +88,7 @@ FeaturesDict({
 |                    | FeaturesDict |              |         |                 |
 | image              | Image        | (None, None, | uint8   |                 |
 :                    :              : 3)           :         :                 :
-| image/file_name    | Text         |              | object  |                 |
+| image/file_name    | Text         |              | string  |                 |
 | objects            | Sequence     |              |         |                 |
 | objects/alpha      | Tensor       |              | float32 | Observation     |
 :                    :              :              :         : angle of        :

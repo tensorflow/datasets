@@ -38,12 +38,12 @@ within the benchmark.
 
 ```python
 FeaturesDict({
-    'passage': Text(shape=(), dtype=object),
-    'passage_id': Text(shape=(), dtype=object),
-    'passage_metadata': Text(shape=(), dtype=object),
-    'query': Text(shape=(), dtype=object),
-    'query_id': Text(shape=(), dtype=object),
-    'query_metadata': Text(shape=(), dtype=object),
+    'passage': Text(shape=(), dtype=string),
+    'passage_id': Text(shape=(), dtype=string),
+    'passage_metadata': Text(shape=(), dtype=string),
+    'query': Text(shape=(), dtype=string),
+    'query_id': Text(shape=(), dtype=string),
+    'query_metadata': Text(shape=(), dtype=string),
     'score': float32,
 })
 ```
@@ -53,12 +53,12 @@ FeaturesDict({
 Feature          | Class        | Shape | Dtype   | Description
 :--------------- | :----------- | :---- | :------ | :----------
                  | FeaturesDict |       |         |
-passage          | Text         |       | object  |
-passage_id       | Text         |       | object  |
-passage_metadata | Text         |       | object  |
-query            | Text         |       | object  |
-query_id         | Text         |       | object  |
-query_metadata   | Text         |       | object  |
+passage          | Text         |       | string  |
+passage_id       | Text         |       | string  |
+passage_metadata | Text         |       | string  |
+query            | Text         |       | string  |
+query_id         | Text         |       | string  |
+query_metadata   | Text         |       | string  |
 score            | Tensor       |       | float32 |
 
 *   **Supervised keys** (See

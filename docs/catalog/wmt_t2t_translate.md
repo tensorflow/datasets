@@ -73,8 +73,8 @@ Split          | Examples
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=object),
-    'en': Text(shape=(), dtype=object),
+    'de': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
@@ -83,8 +83,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-de      | Text        |       | object |
-en      | Text        |       | object |
+de      | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
