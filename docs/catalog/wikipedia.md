@@ -33,8 +33,8 @@ cleaning to strip markdown and unwanted sections (references, etc.).
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -43,8 +43,8 @@ FeaturesDict({
 Feature | Class        | Shape | Dtype  | Description
 :------ | :----------- | :---- | :----- | :----------
         | FeaturesDict |       |        |
-text    | Text         |       | object |
-title   | Text         |       | object |
+text    | Text         |       | string |
+title   | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

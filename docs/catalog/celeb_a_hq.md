@@ -106,7 +106,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(1024, 1024, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -116,7 +116,7 @@ Feature        | Class        | Shape           | Dtype  | Description
 :------------- | :----------- | :-------------- | :----- | :----------
                | FeaturesDict |                 |        |
 image          | Image        | (1024, 1024, 3) | uint8  |
-image/filename | Text         |                 | object |
+image/filename | Text         |                 | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -175,7 +175,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(512, 512, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -185,7 +185,7 @@ Feature        | Class        | Shape         | Dtype  | Description
 :------------- | :----------- | :------------ | :----- | :----------
                | FeaturesDict |               |        |
 image          | Image        | (512, 512, 3) | uint8  |
-image/filename | Text         |               | object |
+image/filename | Text         |               | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -244,7 +244,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(256, 256, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -254,7 +254,7 @@ Feature        | Class        | Shape         | Dtype  | Description
 :------------- | :----------- | :------------ | :----- | :----------
                | FeaturesDict |               |        |
 image          | Image        | (256, 256, 3) | uint8  |
-image/filename | Text         |               | object |
+image/filename | Text         |               | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -313,7 +313,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(128, 128, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -323,7 +323,7 @@ Feature        | Class        | Shape         | Dtype  | Description
 :------------- | :----------- | :------------ | :----- | :----------
                | FeaturesDict |               |        |
 image          | Image        | (128, 128, 3) | uint8  |
-image/filename | Text         |               | object |
+image/filename | Text         |               | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -382,7 +382,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(64, 64, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -392,7 +392,7 @@ Feature        | Class        | Shape       | Dtype  | Description
 :------------- | :----------- | :---------- | :----- | :----------
                | FeaturesDict |             |        |
 image          | Image        | (64, 64, 3) | uint8  |
-image/filename | Text         |             | object |
+image/filename | Text         |             | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -451,7 +451,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -461,7 +461,7 @@ Feature        | Class        | Shape       | Dtype  | Description
 :------------- | :----------- | :---------- | :----- | :----------
                | FeaturesDict |             |        |
 image          | Image        | (32, 32, 3) | uint8  |
-image/filename | Text         |             | object |
+image/filename | Text         |             | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -520,7 +520,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(16, 16, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -530,7 +530,7 @@ Feature        | Class        | Shape       | Dtype  | Description
 :------------- | :----------- | :---------- | :----- | :----------
                | FeaturesDict |             |        |
 image          | Image        | (16, 16, 3) | uint8  |
-image/filename | Text         |             | object |
+image/filename | Text         |             | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -589,7 +589,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(8, 8, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -599,7 +599,7 @@ Feature        | Class        | Shape     | Dtype  | Description
 :------------- | :----------- | :-------- | :----- | :----------
                | FeaturesDict |           |        |
 image          | Image        | (8, 8, 3) | uint8  |
-image/filename | Text         |           | object |
+image/filename | Text         |           | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -658,7 +658,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(4, 4, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -668,7 +668,7 @@ Feature        | Class        | Shape     | Dtype  | Description
 :------------- | :----------- | :-------- | :----- | :----------
                | FeaturesDict |           |        |
 image          | Image        | (4, 4, 3) | uint8  |
-image/filename | Text         |           | object |
+image/filename | Text         |           | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -727,7 +727,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(2, 2, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -737,7 +737,7 @@ Feature        | Class        | Shape     | Dtype  | Description
 :------------- | :----------- | :-------- | :----- | :----------
                | FeaturesDict |           |        |
 image          | Image        | (2, 2, 3) | uint8  |
-image/filename | Text         |           | object |
+image/filename | Text         |           | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -796,7 +796,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'image': Image(shape=(1, 1, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -806,7 +806,7 @@ Feature        | Class        | Shape     | Dtype  | Description
 :------------- | :----------- | :-------- | :----- | :----------
                | FeaturesDict |           |        |
 image          | Image        | (1, 1, 3) | uint8  |
-image/filename | Text         |           | object |
+image/filename | Text         |           | string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

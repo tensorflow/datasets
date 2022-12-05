@@ -241,22 +241,22 @@ Split     | Examples
 ```python
 FeaturesDict({
     'Body Mass (g)': float32,
-    'Clutch Completion': Text(shape=(), dtype=object),
-    'Comments': Text(shape=(), dtype=object),
+    'Clutch Completion': Text(shape=(), dtype=string),
+    'Comments': Text(shape=(), dtype=string),
     'Culmen Depth (mm)': float32,
     'Culmen Length (mm)': float32,
-    'Date Egg': Text(shape=(), dtype=object),
+    'Date Egg': Text(shape=(), dtype=string),
     'Delta 13 C (o/oo)': float32,
     'Delta 15 N (o/oo)': float32,
     'Flipper Length (mm)': float32,
-    'Individual ID': Text(shape=(), dtype=object),
-    'Island': Text(shape=(), dtype=object),
-    'Region': Text(shape=(), dtype=object),
+    'Individual ID': Text(shape=(), dtype=string),
+    'Island': Text(shape=(), dtype=string),
+    'Region': Text(shape=(), dtype=string),
     'Sample Number': int32,
-    'Sex': Text(shape=(), dtype=object),
-    'Species': Text(shape=(), dtype=object),
-    'Stage': Text(shape=(), dtype=object),
-    'studyName': Text(shape=(), dtype=object),
+    'Sex': Text(shape=(), dtype=string),
+    'Species': Text(shape=(), dtype=string),
+    'Stage': Text(shape=(), dtype=string),
+    'studyName': Text(shape=(), dtype=string),
 })
 ```
 
@@ -266,22 +266,22 @@ Feature             | Class        | Shape | Dtype   | Description
 :------------------ | :----------- | :---- | :------ | :----------
                     | FeaturesDict |       |         |
 Body Mass (g)       | Tensor       |       | float32 |
-Clutch Completion   | Text         |       | object  |
-Comments            | Text         |       | object  |
+Clutch Completion   | Text         |       | string  |
+Comments            | Text         |       | string  |
 Culmen Depth (mm)   | Tensor       |       | float32 |
 Culmen Length (mm)  | Tensor       |       | float32 |
-Date Egg            | Text         |       | object  |
+Date Egg            | Text         |       | string  |
 Delta 13 C (o/oo)   | Tensor       |       | float32 |
 Delta 15 N (o/oo)   | Tensor       |       | float32 |
 Flipper Length (mm) | Tensor       |       | float32 |
-Individual ID       | Text         |       | object  |
-Island              | Text         |       | object  |
-Region              | Text         |       | object  |
+Individual ID       | Text         |       | string  |
+Island              | Text         |       | string  |
+Region              | Text         |       | string  |
 Sample Number       | Tensor       |       | int32   |
-Sex                 | Text         |       | object  |
-Species             | Text         |       | object  |
-Stage               | Text         |       | object  |
-studyName           | Text         |       | object  |
+Sex                 | Text         |       | string  |
+Species             | Text         |       | string  |
+Stage               | Text         |       | string  |
+studyName           | Text         |       | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -57,8 +57,8 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'email_body': Text(shape=(), dtype=object),
-    'subject_line': Text(shape=(), dtype=object),
+    'email_body': Text(shape=(), dtype=string),
+    'subject_line': Text(shape=(), dtype=string),
 })
 ```
 
@@ -67,8 +67,8 @@ FeaturesDict({
 Feature      | Class        | Shape | Dtype  | Description
 :----------- | :----------- | :---- | :----- | :----------
              | FeaturesDict |       |        |
-email_body   | Text         |       | object |
-subject_line | Text         |       | object |
+email_body   | Text         |       | string |
+subject_line | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

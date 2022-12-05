@@ -142,7 +142,7 @@ Split          | Examples
 ```python
 FeaturesDict({
     'correct_multi_labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
-    'file_name': Text(shape=(), dtype=object),
+    'file_name': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'is_problematic': bool,
     'original_label': ClassLabel(shape=(), dtype=int64, num_classes=1000),
@@ -157,7 +157,7 @@ FeaturesDict({
 | :------------------- | :------------------- | :------ | :----- | :---------- |
 |                      | FeaturesDict         |         |        |             |
 | correct_multi_labels | Sequence(ClassLabel) | (None,) | int64  |             |
-| file_name            | Text                 |         | object |             |
+| file_name            | Text                 |         | string |             |
 | image                | Image                | (None,  | uint8  |             |
 :                      :                      : None,   :        :             :
 :                      :                      : 3)      :        :             :

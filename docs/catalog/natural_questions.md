@@ -81,7 +81,7 @@ journal = {Transactions of the Association of Computational Linguistics}
 ```python
 FeaturesDict({
     'annotations': Sequence({
-        'id': str,
+        'id': string,
         'long_answer': FeaturesDict({
             'end_byte': int64,
             'end_token': int64,
@@ -93,23 +93,23 @@ FeaturesDict({
             'end_token': int64,
             'start_byte': int64,
             'start_token': int64,
-            'text': Text(shape=(), dtype=object),
+            'text': Text(shape=(), dtype=string),
         }),
         'yes_no_answer': ClassLabel(shape=(), dtype=int64, num_classes=2),
     }),
     'document': FeaturesDict({
-        'html': Text(shape=(), dtype=object),
-        'title': Text(shape=(), dtype=object),
+        'html': Text(shape=(), dtype=string),
+        'title': Text(shape=(), dtype=string),
         'tokens': Sequence({
             'is_html': bool,
-            'token': Text(shape=(), dtype=object),
+            'token': Text(shape=(), dtype=string),
         }),
-        'url': Text(shape=(), dtype=object),
+        'url': Text(shape=(), dtype=string),
     }),
-    'id': str,
+    'id': string,
     'question': FeaturesDict({
-        'text': Text(shape=(), dtype=object),
-        'tokens': Sequence(str),
+        'text': Text(shape=(), dtype=string),
+        'tokens': Sequence(string),
     }),
 })
 ```
@@ -120,7 +120,7 @@ Feature                               | Class            | Shape   | Dtype  | De
 :------------------------------------ | :--------------- | :------ | :----- | :----------
                                       | FeaturesDict     |         |        |
 annotations                           | Sequence         |         |        |
-annotations/id                        | Tensor           |         | str    |
+annotations/id                        | Tensor           |         | string |
 annotations/long_answer               | FeaturesDict     |         |        |
 annotations/long_answer/end_byte      | Tensor           |         | int64  |
 annotations/long_answer/end_token     | Tensor           |         | int64  |
@@ -131,19 +131,19 @@ annotations/short_answers/end_byte    | Tensor           |         | int64  |
 annotations/short_answers/end_token   | Tensor           |         | int64  |
 annotations/short_answers/start_byte  | Tensor           |         | int64  |
 annotations/short_answers/start_token | Tensor           |         | int64  |
-annotations/short_answers/text        | Text             |         | object |
+annotations/short_answers/text        | Text             |         | string |
 annotations/yes_no_answer             | ClassLabel       |         | int64  |
 document                              | FeaturesDict     |         |        |
-document/html                         | Text             |         | object |
-document/title                        | Text             |         | object |
+document/html                         | Text             |         | string |
+document/title                        | Text             |         | string |
 document/tokens                       | Sequence         |         |        |
 document/tokens/is_html               | Tensor           |         | bool   |
-document/tokens/token                 | Text             |         | object |
-document/url                          | Text             |         | object |
-id                                    | Tensor           |         | str    |
+document/tokens/token                 | Text             |         | string |
+document/url                          | Text             |         | string |
+id                                    | Tensor           |         | string |
 question                              | FeaturesDict     |         |        |
-question/text                         | Text             |         | object |
-question/tokens                       | Sequence(Tensor) | (None,) | object |
+question/text                         | Text             |         | string |
+question/tokens                       | Sequence(Tensor) | (None,) | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -193,12 +193,12 @@ dataButton.addEventListener('click', async () => {
 
 ```python
 FeaturesDict({
-    'all_answers': Sequence(Text(shape=(), dtype=object)),
-    'answer': Text(shape=(), dtype=object),
-    'context': Text(shape=(), dtype=object),
-    'id': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'all_answers': Sequence(Text(shape=(), dtype=string)),
+    'answer': Text(shape=(), dtype=string),
+    'context': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -207,12 +207,12 @@ FeaturesDict({
 Feature     | Class          | Shape   | Dtype  | Description
 :---------- | :------------- | :------ | :----- | :----------
             | FeaturesDict   |         |        |
-all_answers | Sequence(Text) | (None,) | object |
-answer      | Text           |         | object |
-context     | Text           |         | object |
-id          | Text           |         | object |
-question    | Text           |         | object |
-title       | Text           |         | object |
+all_answers | Sequence(Text) | (None,) | string |
+answer      | Text           |         | string |
+context     | Text           |         | string |
+id          | Text           |         | string |
+question    | Text           |         | string |
+title       | Text           |         | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

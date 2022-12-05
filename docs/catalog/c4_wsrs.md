@@ -55,8 +55,8 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'abbreviated_snippet': Text(shape=(), dtype=object),
-    'original_snippet': Text(shape=(), dtype=object),
+    'abbreviated_snippet': Text(shape=(), dtype=string),
+    'original_snippet': Text(shape=(), dtype=string),
 })
 ```
 
@@ -65,8 +65,8 @@ FeaturesDict({
 Feature             | Class        | Shape | Dtype  | Description
 :------------------ | :----------- | :---- | :----- | :----------
                     | FeaturesDict |       |        |
-abbreviated_snippet | Text         |       | object |
-original_snippet    | Text         |       | object |
+abbreviated_snippet | Text         |       | string |
+original_snippet    | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

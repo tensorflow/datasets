@@ -92,8 +92,8 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'original': Text(shape=(), dtype=object),
-    'simplifications': Sequence(Text(shape=(), dtype=object)),
+    'original': Text(shape=(), dtype=string),
+    'simplifications': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
@@ -102,8 +102,8 @@ FeaturesDict({
 Feature         | Class          | Shape   | Dtype  | Description
 :-------------- | :------------- | :------ | :----- | :----------
                 | FeaturesDict   |         |        |
-original        | Text           |         | object |
-simplifications | Sequence(Text) | (None,) | object |
+original        | Text           |         | string |
+simplifications | Sequence(Text) | (None,) | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -160,10 +160,10 @@ Split    | Examples
 ```python
 FeaturesDict({
     'aspect': ClassLabel(shape=(), dtype=int64, num_classes=3),
-    'original': Text(shape=(), dtype=object),
+    'original': Text(shape=(), dtype=string),
     'original_sentence_id': int32,
     'rating': int32,
-    'simplification': Text(shape=(), dtype=object),
+    'simplification': Text(shape=(), dtype=string),
     'worker_id': int32,
 })
 ```
@@ -174,10 +174,10 @@ Feature              | Class        | Shape | Dtype  | Description
 :------------------- | :----------- | :---- | :----- | :----------
                      | FeaturesDict |       |        |
 aspect               | ClassLabel   |       | int64  |
-original             | Text         |       | object |
+original             | Text         |       | string |
 original_sentence_id | Tensor       |       | int32  |
 rating               | Tensor       |       | int32  |
-simplification       | Text         |       | object |
+simplification       | Text         |       | string |
 worker_id            | Tensor       |       | int32  |
 
 *   **Examples**

@@ -64,7 +64,7 @@ Split          | Examples
 FeaturesDict({
     'audio': Audio(shape=(None,), dtype=int64),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=1252),
-    'youtube_id': Text(shape=(), dtype=object),
+    'youtube_id': Text(shape=(), dtype=string),
 })
 ```
 
@@ -75,7 +75,7 @@ Feature    | Class        | Shape   | Dtype  | Description
            | FeaturesDict |         |        |
 audio      | Audio        | (None,) | int64  |
 label      | ClassLabel   |         | int64  |
-youtube_id | Text         |         | object |
+youtube_id | Text         |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

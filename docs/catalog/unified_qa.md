@@ -42,8 +42,8 @@ More information can be found at: https://github.com/allenai/unifiedqa.
 
 ```python
 FeaturesDict({
-    'input': object,
-    'output': object,
+    'input': string,
+    'output': string,
 })
 ```
 
@@ -52,8 +52,8 @@ FeaturesDict({
 Feature | Class        | Shape | Dtype  | Description
 :------ | :----------- | :---- | :----- | :----------
         | FeaturesDict |       |        |
-input   | Tensor       |       | object |
-output  | Tensor       |       | object |
+input   | Tensor       |       | string |
+output  | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

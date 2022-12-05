@@ -70,9 +70,9 @@ FeaturesDict({
     'height': uint32,
     'initial_angle': float32,
     'initial_radius': float32,
-    'probe': object,
-    'scanner': object,
-    'target': object,
+    'probe': string,
+    'scanner': string,
+    'target': string,
     'timestamp_id': uint32,
     'voltage': float32,
     'width': uint32,
@@ -97,9 +97,9 @@ harmonic       | Tensor       |         | bool    |
 height         | Tensor       |         | uint32  |
 initial_angle  | Tensor       |         | float32 |
 initial_radius | Tensor       |         | float32 |
-probe          | Tensor       |         | object  |
-scanner        | Tensor       |         | object  |
-target         | Tensor       |         | object  |
+probe          | Tensor       |         | string  |
+scanner        | Tensor       |         | string  |
+target         | Tensor       |         | string  |
 timestamp_id   | Tensor       |         | uint32  |
 voltage        | Tensor       |         | float32 |
 width          | Tensor       |         | uint32  |

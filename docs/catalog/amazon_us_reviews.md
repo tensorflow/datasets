@@ -62,17 +62,17 @@ review_body - The review text. review_date - The date the review was written.
 ```python
 FeaturesDict({
     'data': FeaturesDict({
-        'customer_id': object,
+        'customer_id': string,
         'helpful_votes': int32,
-        'marketplace': object,
-        'product_category': object,
-        'product_id': object,
-        'product_parent': object,
-        'product_title': object,
-        'review_body': object,
-        'review_date': object,
-        'review_headline': object,
-        'review_id': object,
+        'marketplace': string,
+        'product_category': string,
+        'product_id': string,
+        'product_parent': string,
+        'product_title': string,
+        'review_body': string,
+        'review_date': string,
+        'review_headline': string,
+        'review_id': string,
         'star_rating': int32,
         'total_votes': int32,
         'verified_purchase': ClassLabel(shape=(), dtype=int64, num_classes=2),
@@ -87,17 +87,17 @@ Feature                | Class        | Shape | Dtype  | Description
 :--------------------- | :----------- | :---- | :----- | :----------
                        | FeaturesDict |       |        |
 data                   | FeaturesDict |       |        |
-data/customer_id       | Tensor       |       | object |
+data/customer_id       | Tensor       |       | string |
 data/helpful_votes     | Tensor       |       | int32  |
-data/marketplace       | Tensor       |       | object |
-data/product_category  | Tensor       |       | object |
-data/product_id        | Tensor       |       | object |
-data/product_parent    | Tensor       |       | object |
-data/product_title     | Tensor       |       | object |
-data/review_body       | Tensor       |       | object |
-data/review_date       | Tensor       |       | object |
-data/review_headline   | Tensor       |       | object |
-data/review_id         | Tensor       |       | object |
+data/marketplace       | Tensor       |       | string |
+data/product_category  | Tensor       |       | string |
+data/product_id        | Tensor       |       | string |
+data/product_parent    | Tensor       |       | string |
+data/product_title     | Tensor       |       | string |
+data/review_body       | Tensor       |       | string |
+data/review_date       | Tensor       |       | string |
+data/review_headline   | Tensor       |       | string |
+data/review_id         | Tensor       |       | string |
 data/star_rating       | Tensor       |       | int32  |
 data/total_votes       | Tensor       |       | int32  |
 data/verified_purchase | ClassLabel   |       | int64  |

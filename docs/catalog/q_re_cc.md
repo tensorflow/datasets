@@ -50,13 +50,13 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=object),
-    'answer_url': Text(shape=(), dtype=object),
-    'context': Sequence(Text(shape=(), dtype=object)),
+    'answer': Text(shape=(), dtype=string),
+    'answer_url': Text(shape=(), dtype=string),
+    'context': Sequence(Text(shape=(), dtype=string)),
     'conversation_id': Scalar(shape=(), dtype=int32),
-    'question': Text(shape=(), dtype=object),
-    'question_rewrite': Text(shape=(), dtype=object),
-    'source': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=string),
+    'question_rewrite': Text(shape=(), dtype=string),
+    'source': Text(shape=(), dtype=string),
     'turn_id': Scalar(shape=(), dtype=int32),
 })
 ```
@@ -66,14 +66,14 @@ FeaturesDict({
 | Feature          | Class          | Shape   | Dtype  | Description   |
 | :--------------- | :------------- | :------ | :----- | :------------ |
 |                  | FeaturesDict   |         |        |               |
-| answer           | Text           |         | object |               |
-| answer_url       | Text           |         | object |               |
-| context          | Sequence(Text) | (None,) | object |               |
+| answer           | Text           |         | string |               |
+| answer_url       | Text           |         | string |               |
+| context          | Sequence(Text) | (None,) | string |               |
 | conversation_id  | Scalar         |         | int32  | The id of the |
 :                  :                :         :        : conversation. :
-| question         | Text           |         | object |               |
-| question_rewrite | Text           |         | object |               |
-| source           | Text           |         | object | The original  |
+| question         | Text           |         | string |               |
+| question_rewrite | Text           |         | string |               |
+| source           | Text           |         | string | The original  |
 :                  :                :         :        : source of the :
 :                  :                :         :        : data --       :
 :                  :                :         :        : either QuAC,  :

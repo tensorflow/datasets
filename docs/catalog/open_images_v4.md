@@ -77,7 +77,7 @@ FeaturesDict({
         'source': ClassLabel(shape=(), dtype=int64, num_classes=6),
     }),
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
     'objects': Sequence({
         'confidence': int32,
         'label': ClassLabel(shape=(), dtype=int64, num_classes=19995),
@@ -108,7 +108,7 @@ FeaturesDict({
 | image                        | Image        | (None, | uint8   |             |
 :                              :              : None,  :         :             :
 :                              :              : 3)     :         :             :
-| image/filename               | Text         |        | object  |             |
+| image/filename               | Text         |        | string  |             |
 | objects                      | Sequence     |        |         |             |
 | objects/confidence           | Tensor       |        | int32   |             |
 | objects/label                | ClassLabel   |        | int64   |             |

@@ -58,16 +58,16 @@ Split         | Examples
 
 ```python
 FeaturesDict({
-    'candidate': Text(shape=(), dtype=object),
-    'context': Text(shape=(), dtype=object),
+    'candidate': Text(shape=(), dtype=string),
+    'context': Text(shape=(), dtype=string),
     'gold_index': int32,
-    'qid': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
+    'qid': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
     'question_1': ClassLabel(shape=(), dtype=int64, num_classes=3),
     'question_2': ClassLabel(shape=(), dtype=int64, num_classes=3),
     'question_3': ClassLabel(shape=(), dtype=int64, num_classes=3),
     'question_4': ClassLabel(shape=(), dtype=int64, num_classes=3),
-    'reference': Text(shape=(), dtype=object),
+    'reference': Text(shape=(), dtype=string),
     'score': float32,
 })
 ```
@@ -77,16 +77,16 @@ FeaturesDict({
 Feature    | Class        | Shape | Dtype   | Description
 :--------- | :----------- | :---- | :------ | :----------
            | FeaturesDict |       |         |
-candidate  | Text         |       | object  |
-context    | Text         |       | object  |
+candidate  | Text         |       | string  |
+context    | Text         |       | string  |
 gold_index | Tensor       |       | int32   |
-qid        | Text         |       | object  |
-question   | Text         |       | object  |
+qid        | Text         |       | string  |
+question   | Text         |       | string  |
 question_1 | ClassLabel   |       | int64   |
 question_2 | ClassLabel   |       | int64   |
 question_3 | ClassLabel   |       | int64   |
 question_4 | ClassLabel   |       | int64   |
-reference  | Text         |       | object  |
+reference  | Text         |       | string  |
 score      | Tensor       |       | float32 |
 
 *   **Supervised keys** (See

@@ -70,10 +70,10 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'article': Text(shape=(), dtype=object),
-    'highlights': Text(shape=(), dtype=object),
-    'id': Text(shape=(), dtype=object),
-    'publisher': Text(shape=(), dtype=object),
+    'article': Text(shape=(), dtype=string),
+    'highlights': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'publisher': Text(shape=(), dtype=string),
 })
 ```
 
@@ -82,10 +82,10 @@ FeaturesDict({
 Feature    | Class        | Shape | Dtype  | Description
 :--------- | :----------- | :---- | :----- | :----------
            | FeaturesDict |       |        |
-article    | Text         |       | object |
-highlights | Text         |       | object |
-id         | Text         |       | object |
-publisher  | Text         |       | object |
+article    | Text         |       | string |
+highlights | Text         |       | string |
+id         | Text         |       | string |
+publisher  | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

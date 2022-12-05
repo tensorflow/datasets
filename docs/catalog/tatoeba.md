@@ -41,10 +41,10 @@ This means that the results are not directly comparable across languages.
 
 ```python
 FeaturesDict({
-    'source_language': Text(shape=(), dtype=object),
-    'source_sentence': Text(shape=(), dtype=object),
-    'target_language': Text(shape=(), dtype=object),
-    'target_sentence': Text(shape=(), dtype=object),
+    'source_language': Text(shape=(), dtype=string),
+    'source_sentence': Text(shape=(), dtype=string),
+    'target_language': Text(shape=(), dtype=string),
+    'target_sentence': Text(shape=(), dtype=string),
 })
 ```
 
@@ -53,10 +53,10 @@ FeaturesDict({
 Feature         | Class        | Shape | Dtype  | Description
 :-------------- | :----------- | :---- | :----- | :----------
                 | FeaturesDict |       |        |
-source_language | Text         |       | object |
-source_sentence | Text         |       | object |
-target_language | Text         |       | object |
-target_sentence | Text         |       | object |
+source_language | Text         |       | string |
+source_sentence | Text         |       | string |
+target_language | Text         |       | string |
+target_sentence | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

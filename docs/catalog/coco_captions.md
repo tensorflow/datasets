@@ -68,10 +68,10 @@ Split       | Examples
 FeaturesDict({
     'captions': Sequence({
         'id': int64,
-        'text': object,
+        'text': string,
     }),
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
     'image/id': int64,
     'objects': Sequence({
         'area': int64,
@@ -90,9 +90,9 @@ Feature          | Class        | Shape           | Dtype   | Description
                  | FeaturesDict |                 |         |
 captions         | Sequence     |                 |         |
 captions/id      | Tensor       |                 | int64   |
-captions/text    | Tensor       |                 | object  |
+captions/text    | Tensor       |                 | string  |
 image            | Image        | (None, None, 3) | uint8   |
-image/filename   | Text         |                 | object  |
+image/filename   | Text         |                 | string  |
 image/id         | Tensor       |                 | int64   |
 objects          | Sequence     |                 |         |
 objects/area     | Tensor       |                 | int64   |

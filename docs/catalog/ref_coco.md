@@ -129,7 +129,7 @@ FeaturesDict({
         'id': int64,
         'label': int64,
         'refexp': Sequence({
-            'raw': Text(shape=(), dtype=object),
+            'raw': Text(shape=(), dtype=string),
             'refexp_id': int64,
         }),
     }),
@@ -156,7 +156,7 @@ FeaturesDict({
 | objects/id               | Tensor       |          | int64   |             |
 | objects/label            | Tensor       |          | int64   |             |
 | objects/refexp           | Sequence     |          |         |             |
-| objects/refexp/raw       | Text         |          | object  |             |
+| objects/refexp/raw       | Text         |          | string  |             |
 | objects/refexp/refexp_id | Tensor       |          | int64   |             |
 
 *   **Supervised keys** (See

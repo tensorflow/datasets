@@ -95,7 +95,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'audio': Audio(shape=(64000,), dtype=float32),
-    'id': object,
+    'id': string,
     'instrument': FeaturesDict({
         'family': ClassLabel(shape=(), dtype=int64, num_classes=11),
         'label': ClassLabel(shape=(), dtype=int64, num_classes=1006),
@@ -124,7 +124,7 @@ Feature                 | Class        | Shape    | Dtype   | Description
 :---------------------- | :----------- | :------- | :------ | :----------
                         | FeaturesDict |          |         |
 audio                   | Audio        | (64000,) | float32 |
-id                      | Tensor       |          | object  |
+id                      | Tensor       |          | string  |
 instrument              | FeaturesDict |          |         |
 instrument/family       | ClassLabel   |          | int64   |
 instrument/label        | ClassLabel   |          | int64   |
@@ -205,7 +205,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'audio': Audio(shape=(64000,), dtype=float32),
-    'id': object,
+    'id': string,
     'instrument': FeaturesDict({
         'family': ClassLabel(shape=(), dtype=int64, num_classes=11),
         'label': ClassLabel(shape=(), dtype=int64, num_classes=1006),
@@ -234,7 +234,7 @@ Feature                 | Class        | Shape    | Dtype   | Description
 :---------------------- | :----------- | :------- | :------ | :----------
                         | FeaturesDict |          |         |
 audio                   | Audio        | (64000,) | float32 |
-id                      | Tensor       |          | object  |
+id                      | Tensor       |          | string  |
 instrument              | FeaturesDict |          |         |
 instrument/family       | ClassLabel   |          | int64   |
 instrument/label        | ClassLabel   |          | int64   |
@@ -322,7 +322,7 @@ FeaturesDict({
         'hz': Tensor(shape=(1000,), dtype=float32),
         'midi': Tensor(shape=(1000,), dtype=float32),
     }),
-    'id': object,
+    'id': string,
     'instrument': FeaturesDict({
         'family': ClassLabel(shape=(), dtype=int64, num_classes=11),
         'label': ClassLabel(shape=(), dtype=int64, num_classes=1006),
@@ -358,7 +358,7 @@ f0                      | FeaturesDict |          |         |
 f0/confidence           | Tensor       | (1000,)  | float32 |
 f0/hz                   | Tensor       | (1000,)  | float32 |
 f0/midi                 | Tensor       | (1000,)  | float32 |
-id                      | Tensor       |          | object  |
+id                      | Tensor       |          | string  |
 instrument              | FeaturesDict |          |         |
 instrument/family       | ClassLabel   |          | int64   |
 instrument/label        | ClassLabel   |          | int64   |

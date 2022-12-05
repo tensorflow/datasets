@@ -60,7 +60,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'audio': Audio(shape=(None,), dtype=int64),
-    'audio/filename': Text(shape=(), dtype=object),
+    'audio/filename': Text(shape=(), dtype=string),
     'label': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=2)),
 })
 ```
@@ -71,7 +71,7 @@ Feature        | Class                | Shape   | Dtype  | Description
 :------------- | :------------------- | :------ | :----- | :----------
                | FeaturesDict         |         |        |
 audio          | Audio                | (None,) | int64  |
-audio/filename | Text                 |         | object |
+audio/filename | Text                 |         | string |
 label          | Sequence(ClassLabel) | (None,) | int64  |
 
 *   **Supervised keys** (See

@@ -51,7 +51,7 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'image': Image(shape=(5000, 5000, 3), dtype=uint8),
 })
 ```
@@ -61,7 +61,7 @@ FeaturesDict({
 Feature  | Class        | Shape           | Dtype  | Description
 :------- | :----------- | :-------------- | :----- | :----------
          | FeaturesDict |                 |        |
-filename | Text         |                 | object |
+filename | Text         |                 | string |
 image    | Image        | (5000, 5000, 3) | uint8  |
 
 *   **Supervised keys** (See

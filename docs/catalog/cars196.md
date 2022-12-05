@@ -64,7 +64,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'bbox': BBoxFeature(shape=(4,), dtype=float32),
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=196),
 })
@@ -76,7 +76,7 @@ Feature | Class        | Shape           | Dtype   | Description
 :------ | :----------- | :-------------- | :------ | :----------
         | FeaturesDict |                 |         |
 bbox    | BBoxFeature  | (4,)            | float32 |
-id      | Text         |                 | object  |
+id      | Text         |                 | string  |
 image   | Image        | (None, None, 3) | uint8   |
 label   | ClassLabel   |                 | int64   |
 

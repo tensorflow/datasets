@@ -73,7 +73,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': object,
+    'episode_id': string,
     'skill': uint8,
     'steps': Dataset({
         'action': FeaturesDict({
@@ -92,7 +92,7 @@ FeaturesDict({
             'state_dense': Tensor(shape=(7,), dtype=float32),
         }),
     }),
-    'task_code': object,
+    'task_code': string,
 })
 ```
 
@@ -101,7 +101,7 @@ FeaturesDict({
 Feature                            | Class        | Shape         | Dtype   | Description
 :--------------------------------- | :----------- | :------------ | :------ | :----------
                                    | FeaturesDict |               |         |
-episode_id                         | Tensor       |               | object  |
+episode_id                         | Tensor       |               | string  |
 skill                              | Tensor       |               | uint8   |
 steps                              | Dataset      |               |         |
 steps/action                       | FeaturesDict |               |         |
@@ -117,7 +117,7 @@ steps/observation/gripper_closed   | Tensor       |               | bool    |
 steps/observation/height_to_bottom | Tensor       |               | float32 |
 steps/observation/image            | Image        | (512, 640, 3) | uint8   |
 steps/observation/state_dense      | Tensor       | (7,)          | float32 |
-task_code                          | Tensor       |               | object  |
+task_code                          | Tensor       |               | string  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -178,7 +178,7 @@ FeaturesDict({
     'image_1': Image(shape=(480, 640, 3), dtype=uint8),
     'image_2': Image(shape=(480, 640, 3), dtype=uint8),
     'success': bool,
-    'task_code': object,
+    'task_code': string,
 })
 ```
 
@@ -191,7 +191,7 @@ image_0   | Image        | (512, 640, 3) | uint8  |
 image_1   | Image        | (480, 640, 3) | uint8  |
 image_2   | Image        | (480, 640, 3) | uint8  |
 success   | Tensor       |               | bool   |
-task_code | Tensor       |               | object |
+task_code | Tensor       |               | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

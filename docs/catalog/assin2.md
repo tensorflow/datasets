@@ -95,10 +95,10 @@ Split          | Examples
 ```python
 FeaturesDict({
     'entailment': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'hypothesis': Text(shape=(), dtype=object),
+    'hypothesis': Text(shape=(), dtype=string),
     'id': int32,
     'similarity': float32,
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -108,10 +108,10 @@ Feature    | Class        | Shape | Dtype   | Description
 :--------- | :----------- | :---- | :------ | :----------
            | FeaturesDict |       |         |
 entailment | ClassLabel   |       | int64   |
-hypothesis | Text         |       | object  |
+hypothesis | Text         |       | string  |
 id         | Tensor       |       | int32   |
 similarity | Tensor       |       | float32 |
-text       | Text         |       | object  |
+text       | Text         |       | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

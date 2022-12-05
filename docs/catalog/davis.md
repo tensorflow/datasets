@@ -50,7 +50,7 @@ Split          | Examples
 FeaturesDict({
     'metadata': FeaturesDict({
         'num_frames': int64,
-        'video_name': object,
+        'video_name': string,
     }),
     'video': Sequence({
         'frames': Image(shape=(None, None, 3), dtype=uint8),
@@ -66,7 +66,7 @@ Feature             | Class        | Shape           | Dtype  | Description
                     | FeaturesDict |                 |        |
 metadata            | FeaturesDict |                 |        |
 metadata/num_frames | Tensor       |                 | int64  |
-metadata/video_name | Tensor       |                 | object |
+metadata/video_name | Tensor       |                 | string |
 video               | Sequence     |                 |        |
 video/frames        | Image        | (None, None, 3) | uint8  |
 video/segmentations | Image        | (None, None, 1) | uint8  |

@@ -60,8 +60,8 @@ system to choose the correct ending to a four-sentence story.
 
 ```python
 FeaturesDict({
-    'context': Text(shape=(), dtype=object),
-    'endings': Sequence(Text(shape=(), dtype=object)),
+    'context': Text(shape=(), dtype=string),
+    'endings': Sequence(Text(shape=(), dtype=string)),
     'label': int32,
 })
 ```
@@ -71,8 +71,8 @@ FeaturesDict({
 Feature | Class          | Shape   | Dtype  | Description
 :------ | :------------- | :------ | :----- | :----------
         | FeaturesDict   |         |        |
-context | Text           |         | object |
-endings | Sequence(Text) | (None,) | object |
+context | Text           |         | string |
+endings | Sequence(Text) | (None,) | string |
 label   | Tensor         |         | int32  |
 
 *   **Supervised keys** (See

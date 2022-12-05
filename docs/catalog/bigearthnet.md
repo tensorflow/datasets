@@ -104,19 +104,19 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'image': Image(shape=(120, 120, 3), dtype=uint8),
     'labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=43)),
     'metadata': FeaturesDict({
-        'acquisition_date': Text(shape=(), dtype=object),
+        'acquisition_date': Text(shape=(), dtype=string),
         'coordinates': FeaturesDict({
             'lrx': int64,
             'lry': int64,
             'ulx': int64,
             'uly': int64,
         }),
-        'projection': Text(shape=(), dtype=object),
-        'tile_source': Text(shape=(), dtype=object),
+        'projection': Text(shape=(), dtype=string),
+        'tile_source': Text(shape=(), dtype=string),
     }),
 })
 ```
@@ -126,18 +126,18 @@ FeaturesDict({
 Feature                   | Class                | Shape         | Dtype  | Description
 :------------------------ | :------------------- | :------------ | :----- | :----------
                           | FeaturesDict         |               |        |
-filename                  | Text                 |               | object |
+filename                  | Text                 |               | string |
 image                     | Image                | (120, 120, 3) | uint8  |
 labels                    | Sequence(ClassLabel) | (None,)       | int64  |
 metadata                  | FeaturesDict         |               |        |
-metadata/acquisition_date | Text                 |               | object |
+metadata/acquisition_date | Text                 |               | string |
 metadata/coordinates      | FeaturesDict         |               |        |
 metadata/coordinates/lrx  | Tensor               |               | int64  |
 metadata/coordinates/lry  | Tensor               |               | int64  |
 metadata/coordinates/ulx  | Tensor               |               | int64  |
 metadata/coordinates/uly  | Tensor               |               | int64  |
-metadata/projection       | Text                 |               | object |
-metadata/tile_source      | Text                 |               | object |
+metadata/projection       | Text                 |               | string |
+metadata/tile_source      | Text                 |               | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -207,18 +207,18 @@ FeaturesDict({
     'B11': Tensor(shape=(60, 60), dtype=float32),
     'B12': Tensor(shape=(60, 60), dtype=float32),
     'B8A': Tensor(shape=(60, 60), dtype=float32),
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=43)),
     'metadata': FeaturesDict({
-        'acquisition_date': Text(shape=(), dtype=object),
+        'acquisition_date': Text(shape=(), dtype=string),
         'coordinates': FeaturesDict({
             'lrx': int64,
             'lry': int64,
             'ulx': int64,
             'uly': int64,
         }),
-        'projection': Text(shape=(), dtype=object),
-        'tile_source': Text(shape=(), dtype=object),
+        'projection': Text(shape=(), dtype=string),
+        'tile_source': Text(shape=(), dtype=string),
     }),
 })
 ```
@@ -240,17 +240,17 @@ B09                       | Tensor               | (20, 20)   | float32 |
 B11                       | Tensor               | (60, 60)   | float32 |
 B12                       | Tensor               | (60, 60)   | float32 |
 B8A                       | Tensor               | (60, 60)   | float32 |
-filename                  | Text                 |            | object  |
+filename                  | Text                 |            | string  |
 labels                    | Sequence(ClassLabel) | (None,)    | int64   |
 metadata                  | FeaturesDict         |            |         |
-metadata/acquisition_date | Text                 |            | object  |
+metadata/acquisition_date | Text                 |            | string  |
 metadata/coordinates      | FeaturesDict         |            |         |
 metadata/coordinates/lrx  | Tensor               |            | int64   |
 metadata/coordinates/lry  | Tensor               |            | int64   |
 metadata/coordinates/ulx  | Tensor               |            | int64   |
 metadata/coordinates/uly  | Tensor               |            | int64   |
-metadata/projection       | Text                 |            | object  |
-metadata/tile_source      | Text                 |            | object  |
+metadata/projection       | Text                 |            | string  |
+metadata/tile_source      | Text                 |            | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

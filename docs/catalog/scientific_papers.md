@@ -50,9 +50,9 @@ Both "arxiv" and "pubmed" have two features:
 
 ```python
 FeaturesDict({
-    'abstract': Text(shape=(), dtype=object),
-    'article': Text(shape=(), dtype=object),
-    'section_names': Text(shape=(), dtype=object),
+    'abstract': Text(shape=(), dtype=string),
+    'article': Text(shape=(), dtype=string),
+    'section_names': Text(shape=(), dtype=string),
 })
 ```
 
@@ -61,9 +61,9 @@ FeaturesDict({
 Feature       | Class        | Shape | Dtype  | Description
 :------------ | :----------- | :---- | :----- | :----------
               | FeaturesDict |       |        |
-abstract      | Text         |       | object |
-article       | Text         |       | object |
-section_names | Text         |       | object |
+abstract      | Text         |       | string |
+article       | Text         |       | string |
+section_names | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

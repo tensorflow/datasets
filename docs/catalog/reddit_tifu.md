@@ -53,12 +53,12 @@ num_comments: number of comments. - upvote_ratio: upvote ratio.
 
 ```python
 FeaturesDict({
-    'documents': Text(shape=(), dtype=object),
-    'id': Text(shape=(), dtype=object),
+    'documents': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
     'num_comments': float32,
     'score': float32,
-    'title': Text(shape=(), dtype=object),
-    'tldr': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=string),
+    'tldr': Text(shape=(), dtype=string),
     'ups': float32,
     'upvote_ratio': float32,
 })
@@ -69,12 +69,12 @@ FeaturesDict({
 Feature      | Class        | Shape | Dtype   | Description
 :----------- | :----------- | :---- | :------ | :----------
              | FeaturesDict |       |         |
-documents    | Text         |       | object  |
-id           | Text         |       | object  |
+documents    | Text         |       | string  |
+id           | Text         |       | string  |
 num_comments | Tensor       |       | float32 |
 score        | Tensor       |       | float32 |
-title        | Text         |       | object  |
-tldr         | Text         |       | object  |
+title        | Text         |       | string  |
+tldr         | Text         |       | string  |
 ups          | Tensor       |       | float32 |
 upvote_ratio | Tensor       |       | float32 |
 

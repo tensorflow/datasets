@@ -67,20 +67,20 @@ Split | Examples
 
 ```python
 FeaturesDict({
-    'abstract': object,
-    'authors': object,
+    'abstract': string,
+    'authors': string,
     'body_text': Sequence({
-        'section': object,
-        'text': object,
+        'section': string,
+        'text': string,
     }),
-    'doi': object,
-    'journal': object,
-    'license': object,
-    'publish_time': object,
-    'sha': object,
-    'source_x': object,
-    'title': object,
-    'url': object,
+    'doi': string,
+    'journal': string,
+    'license': string,
+    'publish_time': string,
+    'sha': string,
+    'source_x': string,
+    'title': string,
+    'url': string,
 })
 ```
 
@@ -89,19 +89,19 @@ FeaturesDict({
 Feature           | Class        | Shape | Dtype  | Description
 :---------------- | :----------- | :---- | :----- | :----------
                   | FeaturesDict |       |        |
-abstract          | Tensor       |       | object |
-authors           | Tensor       |       | object |
+abstract          | Tensor       |       | string |
+authors           | Tensor       |       | string |
 body_text         | Sequence     |       |        |
-body_text/section | Tensor       |       | object |
-body_text/text    | Tensor       |       | object |
-doi               | Tensor       |       | object |
-journal           | Tensor       |       | object |
-license           | Tensor       |       | object |
-publish_time      | Tensor       |       | object |
-sha               | Tensor       |       | object |
-source_x          | Tensor       |       | object |
-title             | Tensor       |       | object |
-url               | Tensor       |       | object |
+body_text/section | Tensor       |       | string |
+body_text/text    | Tensor       |       | string |
+doi               | Tensor       |       | string |
+journal           | Tensor       |       | string |
+license           | Tensor       |       | string |
+publish_time      | Tensor       |       | string |
+sha               | Tensor       |       | string |
+source_x          | Tensor       |       | string |
+title             | Tensor       |       | string |
+url               | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

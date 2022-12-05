@@ -42,7 +42,7 @@ tower etc.
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
 })
 ```
@@ -52,7 +52,7 @@ FeaturesDict({
 Feature | Class        | Shape           | Dtype  | Description
 :------ | :----------- | :-------------- | :----- | :----------
         | FeaturesDict |                 |        |
-id      | Text         |                 | object |
+id      | Text         |                 | string |
 image   | Image        | (None, None, 3) | uint8  |
 
 *   **Supervised keys** (See

@@ -80,11 +80,11 @@ Split          | Examples
 FeaturesDict({
     'bpm': int32,
     'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
-    'id': object,
-    'midi': object,
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
         'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
-        'secondary': object,
+        'secondary': string,
     }),
     'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
     'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
@@ -98,11 +98,11 @@ Feature         | Class        | Shape | Dtype  | Description
                 | FeaturesDict |       |        |
 bpm             | Tensor       |       | int32  |
 drummer         | ClassLabel   |       | int64  |
-id              | Tensor       |       | object |
-midi            | Tensor       |       | object |
+id              | Tensor       |       | string |
+midi            | Tensor       |       | string |
 style           | FeaturesDict |       |        |
 style/primary   | ClassLabel   |       | int64  |
-style/secondary | Tensor       |       | object |
+style/secondary | Tensor       |       | string |
 time_signature  | ClassLabel   |       | int64  |
 type            | ClassLabel   |       | int64  |
 
@@ -170,11 +170,11 @@ FeaturesDict({
     'audio': Audio(shape=(None,), dtype=float32),
     'bpm': int32,
     'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
-    'id': object,
-    'midi': object,
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
         'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
-        'secondary': object,
+        'secondary': string,
     }),
     'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
     'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
@@ -189,11 +189,11 @@ Feature         | Class        | Shape   | Dtype   | Description
 audio           | Audio        | (None,) | float32 |
 bpm             | Tensor       |         | int32   |
 drummer         | ClassLabel   |         | int64   |
-id              | Tensor       |         | object  |
-midi            | Tensor       |         | object  |
+id              | Tensor       |         | string  |
+midi            | Tensor       |         | string  |
 style           | FeaturesDict |         |         |
 style/primary   | ClassLabel   |         | int64   |
-style/secondary | Tensor       |         | object  |
+style/secondary | Tensor       |         | string  |
 time_signature  | ClassLabel   |         | int64   |
 type            | ClassLabel   |         | int64   |
 
@@ -261,11 +261,11 @@ Split          | Examples
 FeaturesDict({
     'bpm': int32,
     'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
-    'id': object,
-    'midi': object,
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
         'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
-        'secondary': object,
+        'secondary': string,
     }),
     'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
     'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
@@ -279,11 +279,11 @@ Feature         | Class        | Shape | Dtype  | Description
                 | FeaturesDict |       |        |
 bpm             | Tensor       |       | int32  |
 drummer         | ClassLabel   |       | int64  |
-id              | Tensor       |       | object |
-midi            | Tensor       |       | object |
+id              | Tensor       |       | string |
+midi            | Tensor       |       | string |
 style           | FeaturesDict |       |        |
 style/primary   | ClassLabel   |       | int64  |
-style/secondary | Tensor       |       | object |
+style/secondary | Tensor       |       | string |
 time_signature  | ClassLabel   |       | int64  |
 type            | ClassLabel   |       | int64  |
 
@@ -351,11 +351,11 @@ FeaturesDict({
     'audio': Audio(shape=(None,), dtype=float32),
     'bpm': int32,
     'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
-    'id': object,
-    'midi': object,
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
         'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
-        'secondary': object,
+        'secondary': string,
     }),
     'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
     'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
@@ -370,11 +370,11 @@ Feature         | Class        | Shape   | Dtype   | Description
 audio           | Audio        | (None,) | float32 |
 bpm             | Tensor       |         | int32   |
 drummer         | ClassLabel   |         | int64   |
-id              | Tensor       |         | object  |
-midi            | Tensor       |         | object  |
+id              | Tensor       |         | string  |
+midi            | Tensor       |         | string  |
 style           | FeaturesDict |         |         |
 style/primary   | ClassLabel   |         | int64   |
-style/secondary | Tensor       |         | object  |
+style/secondary | Tensor       |         | string  |
 time_signature  | ClassLabel   |         | int64   |
 type            | ClassLabel   |         | int64   |
 
@@ -442,11 +442,11 @@ Split          | Examples
 FeaturesDict({
     'bpm': int32,
     'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
-    'id': object,
-    'midi': object,
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
         'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
-        'secondary': object,
+        'secondary': string,
     }),
     'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
     'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
@@ -460,11 +460,11 @@ Feature         | Class        | Shape | Dtype  | Description
                 | FeaturesDict |       |        |
 bpm             | Tensor       |       | int32  |
 drummer         | ClassLabel   |       | int64  |
-id              | Tensor       |       | object |
-midi            | Tensor       |       | object |
+id              | Tensor       |       | string |
+midi            | Tensor       |       | string |
 style           | FeaturesDict |       |        |
 style/primary   | ClassLabel   |       | int64  |
-style/secondary | Tensor       |       | object |
+style/secondary | Tensor       |       | string |
 time_signature  | ClassLabel   |       | int64  |
 type            | ClassLabel   |       | int64  |
 

@@ -37,13 +37,13 @@ Mozilla Common Voice Dataset
 
 ```python
 FeaturesDict({
-    'accent': Text(shape=(), dtype=object),
-    'age': Text(shape=(), dtype=object),
-    'client_id': Text(shape=(), dtype=object),
+    'accent': Text(shape=(), dtype=string),
+    'age': Text(shape=(), dtype=string),
+    'client_id': Text(shape=(), dtype=string),
     'downvotes': Scalar(shape=(), dtype=int32),
     'gender': ClassLabel(shape=(), dtype=int64, num_classes=3),
-    'segment': Text(shape=(), dtype=object),
-    'sentence': Text(shape=(), dtype=object),
+    'segment': Text(shape=(), dtype=string),
+    'sentence': Text(shape=(), dtype=string),
     'upvotes': Scalar(shape=(), dtype=int32),
     'voice': Audio(shape=(None,), dtype=int64),
 })
@@ -54,13 +54,13 @@ FeaturesDict({
 Feature   | Class        | Shape   | Dtype  | Description
 :-------- | :----------- | :------ | :----- | :----------
           | FeaturesDict |         |        |
-accent    | Text         |         | object | Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts
-age       | Text         |         | object | Age bucket of the speaker (e.g. teens, or fourties), see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts
-client_id | Text         |         | object | Hashed UUID of a given user
+accent    | Text         |         | string | Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts
+age       | Text         |         | string | Age bucket of the speaker (e.g. teens, or fourties), see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts
+client_id | Text         |         | string | Hashed UUID of a given user
 downvotes | Scalar       |         | int32  | Number of people who said audio does not match text
 gender    | ClassLabel   |         | int64  | Gender of the speaker
-segment   | Text         |         | object | If sentence belongs to a custom dataset segment, it will be listed here
-sentence  | Text         |         | object | Supposed transcription of the audio
+segment   | Text         |         | string | If sentence belongs to a custom dataset segment, it will be listed here
+sentence  | Text         |         | string | Supposed transcription of the audio
 upvotes   | Scalar       |         | int32  | Number of people who said audio matches the text
 voice     | Audio        | (None,) | int64  |
 

@@ -52,7 +52,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(250, 250, 3), dtype=uint8),
-    'label': Text(shape=(), dtype=object),
+    'label': Text(shape=(), dtype=string),
 })
 ```
 
@@ -62,7 +62,7 @@ Feature | Class        | Shape         | Dtype  | Description
 :------ | :----------- | :------------ | :----- | :----------
         | FeaturesDict |               |        |
 image   | Image        | (250, 250, 3) | uint8  |
-label   | Text         |               | object |
+label   | Text         |               | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

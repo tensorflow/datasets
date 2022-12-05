@@ -69,8 +69,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'bg': Text(shape=(), dtype=object),
-    'en': Text(shape=(), dtype=object),
+    'bg': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
@@ -79,8 +79,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-bg      | Text        |       | object |
-en      | Text        |       | object |
+bg      | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -145,8 +145,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=object),
-    'en': Text(shape=(), dtype=object),
+    'cs': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
@@ -155,8 +155,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-cs      | Text        |       | object |
-en      | Text        |       | object |
+cs      | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -221,8 +221,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'da': Text(shape=(), dtype=object),
-    'en': Text(shape=(), dtype=object),
+    'da': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
@@ -231,8 +231,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-da      | Text        |       | object |
-en      | Text        |       | object |
+da      | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -297,8 +297,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=object),
-    'en': Text(shape=(), dtype=object),
+    'de': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
@@ -307,8 +307,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-de      | Text        |       | object |
-en      | Text        |       | object |
+de      | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -373,8 +373,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'el': Text(shape=(), dtype=object),
-    'en': Text(shape=(), dtype=object),
+    'el': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
@@ -383,8 +383,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-el      | Text        |       | object |
-en      | Text        |       | object |
+el      | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -449,8 +449,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'es': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'es': Text(shape=(), dtype=string),
 })
 ```
 
@@ -459,8 +459,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-es      | Text        |       | object |
+en      | Text        |       | string |
+es      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -525,8 +525,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'et': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'et': Text(shape=(), dtype=string),
 })
 ```
 
@@ -535,8 +535,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-et      | Text        |       | object |
+en      | Text        |       | string |
+et      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -601,8 +601,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'fi': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'fi': Text(shape=(), dtype=string),
 })
 ```
 
@@ -611,8 +611,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-fi      | Text        |       | object |
+en      | Text        |       | string |
+fi      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -677,8 +677,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'fr': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'fr': Text(shape=(), dtype=string),
 })
 ```
 
@@ -687,8 +687,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-fr      | Text        |       | object |
+en      | Text        |       | string |
+fr      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -753,8 +753,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'ga': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'ga': Text(shape=(), dtype=string),
 })
 ```
 
@@ -763,8 +763,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-ga      | Text        |       | object |
+en      | Text        |       | string |
+ga      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -829,8 +829,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'hr': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'hr': Text(shape=(), dtype=string),
 })
 ```
 
@@ -839,8 +839,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-hr      | Text        |       | object |
+en      | Text        |       | string |
+hr      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -905,8 +905,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'hu': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'hu': Text(shape=(), dtype=string),
 })
 ```
 
@@ -915,8 +915,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-hu      | Text        |       | object |
+en      | Text        |       | string |
+hu      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -981,8 +981,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'it': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'it': Text(shape=(), dtype=string),
 })
 ```
 
@@ -991,8 +991,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-it      | Text        |       | object |
+en      | Text        |       | string |
+it      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1057,8 +1057,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'lt': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'lt': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1067,8 +1067,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-lt      | Text        |       | object |
+en      | Text        |       | string |
+lt      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1133,8 +1133,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'lv': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'lv': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1143,8 +1143,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-lv      | Text        |       | object |
+en      | Text        |       | string |
+lv      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1209,8 +1209,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'mt': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'mt': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1219,8 +1219,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-mt      | Text        |       | object |
+en      | Text        |       | string |
+mt      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1285,8 +1285,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'nl': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'nl': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1295,8 +1295,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-nl      | Text        |       | object |
+en      | Text        |       | string |
+nl      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1361,8 +1361,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'pl': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'pl': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1371,8 +1371,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-pl      | Text        |       | object |
+en      | Text        |       | string |
+pl      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1437,8 +1437,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'pt': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'pt': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1447,8 +1447,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-pt      | Text        |       | object |
+en      | Text        |       | string |
+pt      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1513,8 +1513,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'ro': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'ro': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1523,8 +1523,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-ro      | Text        |       | object |
+en      | Text        |       | string |
+ro      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1589,8 +1589,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'sk': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'sk': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1599,8 +1599,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-sk      | Text        |       | object |
+en      | Text        |       | string |
+sk      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1665,8 +1665,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'sl': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'sl': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1675,8 +1675,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-sl      | Text        |       | object |
+en      | Text        |       | string |
+sl      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -1741,8 +1741,8 @@ Split     | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=object),
-    'sv': Text(shape=(), dtype=object),
+    'en': Text(shape=(), dtype=string),
+    'sv': Text(shape=(), dtype=string),
 })
 ```
 
@@ -1751,8 +1751,8 @@ Translation({
 Feature | Class       | Shape | Dtype  | Description
 :------ | :---------- | :---- | :----- | :----------
         | Translation |       |        |
-en      | Text        |       | object |
-sv      | Text        |       | object |
+en      | Text        |       | string |
+sv      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

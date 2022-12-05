@@ -54,12 +54,12 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'explanation_1': Text(shape=(), dtype=object),
-    'explanation_2': Text(shape=(), dtype=object),
-    'explanation_3': Text(shape=(), dtype=object),
-    'hypothesis': Text(shape=(), dtype=object),
+    'explanation_1': Text(shape=(), dtype=string),
+    'explanation_2': Text(shape=(), dtype=string),
+    'explanation_3': Text(shape=(), dtype=string),
+    'hypothesis': Text(shape=(), dtype=string),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
-    'premise': Text(shape=(), dtype=object),
+    'premise': Text(shape=(), dtype=string),
 })
 ```
 
@@ -68,12 +68,12 @@ FeaturesDict({
 Feature       | Class        | Shape | Dtype  | Description
 :------------ | :----------- | :---- | :----- | :----------
               | FeaturesDict |       |        |
-explanation_1 | Text         |       | object |
-explanation_2 | Text         |       | object |
-explanation_3 | Text         |       | object |
-hypothesis    | Text         |       | object |
+explanation_1 | Text         |       | string |
+explanation_2 | Text         |       | string |
+explanation_3 | Text         |       | string |
+hypothesis    | Text         |       | string |
 label         | ClassLabel   |       | int64  |
-premise       | Text         |       | object |
+premise       | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

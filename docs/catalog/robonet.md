@@ -84,7 +84,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'actions': Tensor(shape=(None, 5), dtype=float32),
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'states': Tensor(shape=(None, 5), dtype=float32),
     'video': Video(Image(shape=(64, 64, 3), dtype=uint8)),
 })
@@ -96,7 +96,7 @@ Feature  | Class        | Shape             | Dtype   | Description
 :------- | :----------- | :---------------- | :------ | :----------
          | FeaturesDict |                   |         |
 actions  | Tensor       | (None, 5)         | float32 |
-filename | Text         |                   | object  |
+filename | Text         |                   | string  |
 states   | Tensor       | (None, 5)         | float32 |
 video    | Video(Image) | (None, 64, 64, 3) | uint8   |
 
@@ -160,7 +160,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'actions': Tensor(shape=(None, 5), dtype=float32),
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'states': Tensor(shape=(None, 5), dtype=float32),
     'video': Video(Image(shape=(128, 128, 3), dtype=uint8)),
 })
@@ -172,7 +172,7 @@ Feature  | Class        | Shape               | Dtype   | Description
 :------- | :----------- | :------------------ | :------ | :----------
          | FeaturesDict |                     |         |
 actions  | Tensor       | (None, 5)           | float32 |
-filename | Text         |                     | object  |
+filename | Text         |                     | string  |
 states   | Tensor       | (None, 5)           | float32 |
 video    | Video(Image) | (None, 128, 128, 3) | uint8   |
 
@@ -236,7 +236,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'actions': Tensor(shape=(None, 5), dtype=float32),
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'states': Tensor(shape=(None, 5), dtype=float32),
     'video': Video(Image(shape=(64, 64, 3), dtype=uint8)),
 })
@@ -248,7 +248,7 @@ Feature  | Class        | Shape             | Dtype   | Description
 :------- | :----------- | :---------------- | :------ | :----------
          | FeaturesDict |                   |         |
 actions  | Tensor       | (None, 5)         | float32 |
-filename | Text         |                   | object  |
+filename | Text         |                   | string  |
 states   | Tensor       | (None, 5)         | float32 |
 video    | Video(Image) | (None, 64, 64, 3) | uint8   |
 
@@ -312,7 +312,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'actions': Tensor(shape=(None, 5), dtype=float32),
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'states': Tensor(shape=(None, 5), dtype=float32),
     'video': Video(Image(shape=(128, 128, 3), dtype=uint8)),
 })
@@ -324,7 +324,7 @@ Feature  | Class        | Shape               | Dtype   | Description
 :------- | :----------- | :------------------ | :------ | :----------
          | FeaturesDict |                     |         |
 actions  | Tensor       | (None, 5)           | float32 |
-filename | Text         |                     | object  |
+filename | Text         |                     | string  |
 states   | Tensor       | (None, 5)           | float32 |
 video    | Video(Image) | (None, 128, 128, 3) | uint8   |
 

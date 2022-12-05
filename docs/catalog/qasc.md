@@ -53,17 +53,17 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answerKey': Text(shape=(), dtype=object),
+    'answerKey': Text(shape=(), dtype=string),
     'choices': Sequence({
-        'label': Text(shape=(), dtype=object),
-        'text': Text(shape=(), dtype=object),
+        'label': Text(shape=(), dtype=string),
+        'text': Text(shape=(), dtype=string),
     }),
-    'combinedfact': Text(shape=(), dtype=object),
-    'fact1': Text(shape=(), dtype=object),
-    'fact2': Text(shape=(), dtype=object),
-    'formatted_question': Text(shape=(), dtype=object),
-    'id': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
+    'combinedfact': Text(shape=(), dtype=string),
+    'fact1': Text(shape=(), dtype=string),
+    'fact2': Text(shape=(), dtype=string),
+    'formatted_question': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
@@ -72,16 +72,16 @@ FeaturesDict({
 Feature            | Class        | Shape | Dtype  | Description
 :----------------- | :----------- | :---- | :----- | :----------
                    | FeaturesDict |       |        |
-answerKey          | Text         |       | object |
+answerKey          | Text         |       | string |
 choices            | Sequence     |       |        |
-choices/label      | Text         |       | object |
-choices/text       | Text         |       | object |
-combinedfact       | Text         |       | object |
-fact1              | Text         |       | object |
-fact2              | Text         |       | object |
-formatted_question | Text         |       | object |
-id                 | Text         |       | object |
-question           | Text         |       | object |
+choices/label      | Text         |       | string |
+choices/text       | Text         |       | string |
+combinedfact       | Text         |       | string |
+fact1              | Text         |       | string |
+fact2              | Text         |       | string |
+formatted_question | Text         |       | string |
+id                 | Text         |       | string |
+question           | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

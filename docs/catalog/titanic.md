@@ -53,19 +53,19 @@ Split     | Examples
 ```python
 FeaturesDict({
     'age': float32,
-    'boat': object,
+    'boat': string,
     'body': int32,
-    'cabin': object,
+    'cabin': string,
     'embarked': ClassLabel(shape=(), dtype=int64, num_classes=4),
     'fare': float32,
-    'home.dest': object,
-    'name': object,
+    'home.dest': string,
+    'name': string,
     'parch': int32,
     'pclass': ClassLabel(shape=(), dtype=int64, num_classes=3),
     'sex': ClassLabel(shape=(), dtype=int64, num_classes=2),
     'sibsp': int32,
     'survived': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'ticket': object,
+    'ticket': string,
 })
 ```
 
@@ -75,19 +75,19 @@ Feature   | Class        | Shape | Dtype   | Description
 :-------- | :----------- | :---- | :------ | :----------
           | FeaturesDict |       |         |
 age       | Tensor       |       | float32 |
-boat      | Tensor       |       | object  |
+boat      | Tensor       |       | string  |
 body      | Tensor       |       | int32   |
-cabin     | Tensor       |       | object  |
+cabin     | Tensor       |       | string  |
 embarked  | ClassLabel   |       | int64   |
 fare      | Tensor       |       | float32 |
-home.dest | Tensor       |       | object  |
-name      | Tensor       |       | object  |
+home.dest | Tensor       |       | string  |
+name      | Tensor       |       | string  |
 parch     | Tensor       |       | int32   |
 pclass    | ClassLabel   |       | int64   |
 sex       | ClassLabel   |       | int64   |
 sibsp     | Tensor       |       | int32   |
 survived  | ClassLabel   |       | int64   |
-ticket    | Tensor       |       | object  |
+ticket    | Tensor       |       | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

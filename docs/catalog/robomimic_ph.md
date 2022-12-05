@@ -84,7 +84,7 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -124,7 +124,7 @@ Feature                                | Class        | Shape | Dtype   | Descri
 50_percent                             | Tensor       |       | bool    |
 50_percent_train                       | Tensor       |       | bool    |
 50_percent_valid                       | Tensor       |       | bool    |
-episode_id                             | Tensor       |       | object  |
+episode_id                             | Tensor       |       | string  |
 horizon                                | Tensor       |       | int32   |
 steps                                  | Dataset      |       |         |
 steps/action                           | Tensor       | (7,)  | float64 |
@@ -206,7 +206,7 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -248,7 +248,7 @@ Feature                                    | Class        | Shape       | Dtype 
 50_percent                                 | Tensor       |             | bool    |
 50_percent_train                           | Tensor       |             | bool    |
 50_percent_valid                           | Tensor       |             | bool    |
-episode_id                                 | Tensor       |             | object  |
+episode_id                                 | Tensor       |             | string  |
 horizon                                    | Tensor       |             | int32   |
 steps                                      | Dataset      |             |         |
 steps/action                               | Tensor       | (7,)        | float64 |
@@ -332,7 +332,7 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -372,7 +372,7 @@ Feature                                | Class        | Shape | Dtype   | Descri
 50_percent                             | Tensor       |       | bool    |
 50_percent_train                       | Tensor       |       | bool    |
 50_percent_valid                       | Tensor       |       | bool    |
-episode_id                             | Tensor       |       | object  |
+episode_id                             | Tensor       |       | string  |
 horizon                                | Tensor       |       | int32   |
 steps                                  | Dataset      |       |         |
 steps/action                           | Tensor       | (7,)  | float64 |
@@ -454,7 +454,7 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -496,7 +496,7 @@ Feature                                    | Class        | Shape       | Dtype 
 50_percent                                 | Tensor       |             | bool    |
 50_percent_train                           | Tensor       |             | bool    |
 50_percent_valid                           | Tensor       |             | bool    |
-episode_id                                 | Tensor       |             | object  |
+episode_id                                 | Tensor       |             | string  |
 horizon                                    | Tensor       |             | int32   |
 steps                                      | Dataset      |             |         |
 steps/action                               | Tensor       | (7,)        | float64 |
@@ -580,7 +580,7 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -620,7 +620,7 @@ Feature                                | Class        | Shape | Dtype   | Descri
 50_percent                             | Tensor       |       | bool    |
 50_percent_train                       | Tensor       |       | bool    |
 50_percent_valid                       | Tensor       |       | bool    |
-episode_id                             | Tensor       |       | object  |
+episode_id                             | Tensor       |       | string  |
 horizon                                | Tensor       |       | int32   |
 steps                                  | Dataset      |       |         |
 steps/action                           | Tensor       | (7,)  | float64 |
@@ -702,7 +702,7 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -744,7 +744,7 @@ Feature                                    | Class        | Shape       | Dtype 
 50_percent                                 | Tensor       |             | bool    |
 50_percent_train                           | Tensor       |             | bool    |
 50_percent_valid                           | Tensor       |             | bool    |
-episode_id                                 | Tensor       |             | object  |
+episode_id                                 | Tensor       |             | string  |
 horizon                                    | Tensor       |             | int32   |
 steps                                      | Dataset      |             |         |
 steps/action                               | Tensor       | (7,)        | float64 |
@@ -828,7 +828,7 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(14,), dtype=float64),
@@ -878,7 +878,7 @@ Feature                                | Class        | Shape  | Dtype   | Descr
 50_percent                             | Tensor       |        | bool    |
 50_percent_train                       | Tensor       |        | bool    |
 50_percent_valid                       | Tensor       |        | bool    |
-episode_id                             | Tensor       |        | object  |
+episode_id                             | Tensor       |        | string  |
 horizon                                | Tensor       |        | int32   |
 steps                                  | Dataset      |        |         |
 steps/action                           | Tensor       | (14,)  | float64 |
@@ -970,7 +970,7 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(14,), dtype=float64),
@@ -1024,7 +1024,7 @@ Feature                                    | Class        | Shape       | Dtype 
 50_percent                                 | Tensor       |             | bool    |
 50_percent_train                           | Tensor       |             | bool    |
 50_percent_valid                           | Tensor       |             | bool    |
-episode_id                                 | Tensor       |             | object  |
+episode_id                                 | Tensor       |             | string  |
 horizon                                    | Tensor       |             | int32   |
 steps                                      | Dataset      |             |         |
 steps/action                               | Tensor       | (14,)       | float64 |
@@ -1114,7 +1114,7 @@ dataButton.addEventListener('click', async () => {
 
 ```python
 FeaturesDict({
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -1148,7 +1148,7 @@ FeaturesDict({
 Feature                                | Class        | Shape | Dtype   | Description
 :------------------------------------- | :----------- | :---- | :------ | :----------
                                        | FeaturesDict |       |         |
-episode_id                             | Tensor       |       | object  |
+episode_id                             | Tensor       |       | string  |
 horizon                                | Tensor       |       | int32   |
 steps                                  | Dataset      |       |         |
 steps/action                           | Tensor       | (7,)  | float64 |
@@ -1224,7 +1224,7 @@ dataButton.addEventListener('click', async () => {
 
 ```python
 FeaturesDict({
-    'episode_id': object,
+    'episode_id': string,
     'horizon': int32,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
@@ -1260,7 +1260,7 @@ FeaturesDict({
 Feature                                    | Class        | Shape         | Dtype   | Description
 :----------------------------------------- | :----------- | :------------ | :------ | :----------
                                            | FeaturesDict |               |         |
-episode_id                                 | Tensor       |               | object  |
+episode_id                                 | Tensor       |               | string  |
 horizon                                    | Tensor       |               | int32   |
 steps                                      | Dataset      |               |         |
 steps/action                               | Tensor       | (7,)          | float64 |

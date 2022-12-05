@@ -50,7 +50,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'task_id': Text(shape=(), dtype=object),
+    'task_id': Text(shape=(), dtype=string),
     'test': Sequence({
         'input': Sequence(Sequence(int32)),
         'output': Sequence(Sequence(int32)),
@@ -67,7 +67,7 @@ FeaturesDict({
 Feature      | Class                      | Shape        | Dtype  | Description
 :----------- | :------------------------- | :----------- | :----- | :----------
              | FeaturesDict               |              |        |
-task_id      | Text                       |              | object |
+task_id      | Text                       |              | string |
 test         | Sequence                   |              |        |
 test/input   | Sequence(Sequence(Tensor)) | (None, None) | int32  |
 test/output  | Sequence(Sequence(Tensor)) | (None, None) | int32  |

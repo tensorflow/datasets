@@ -115,7 +115,7 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image_id': Text(shape=(), dtype=object),
+    'image_id': Text(shape=(), dtype=string),
     'image_left': Image(shape=(1024, 2048, 3), dtype=uint8),
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=uint8),
 })
@@ -126,7 +126,7 @@ FeaturesDict({
 Feature            | Class        | Shape           | Dtype  | Description
 :----------------- | :----------- | :-------------- | :----- | :----------
                    | FeaturesDict |                 |        |
-image_id           | Text         |                 | object |
+image_id           | Text         |                 | string |
 image_left         | Image        | (1024, 2048, 3) | uint8  |
 segmentation_label | Image        | (1024, 2048, 1) | uint8  |
 
@@ -186,7 +186,7 @@ Split           | Examples
 
 ```python
 FeaturesDict({
-    'image_id': Text(shape=(), dtype=object),
+    'image_id': Text(shape=(), dtype=string),
     'image_left': Image(shape=(1024, 2048, 3), dtype=uint8),
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=uint8),
 })
@@ -197,7 +197,7 @@ FeaturesDict({
 Feature            | Class        | Shape           | Dtype  | Description
 :----------------- | :----------- | :-------------- | :----- | :----------
                    | FeaturesDict |                 |        |
-image_id           | Text         |                 | object |
+image_id           | Text         |                 | string |
 image_left         | Image        | (1024, 2048, 3) | uint8  |
 segmentation_label | Image        | (1024, 2048, 1) | uint8  |
 
@@ -257,7 +257,7 @@ Split          | Examples
 ```python
 FeaturesDict({
     'disparity_map': Image(shape=(1024, 2048, 1), dtype=uint8),
-    'image_id': Text(shape=(), dtype=object),
+    'image_id': Text(shape=(), dtype=string),
     'image_left': Image(shape=(1024, 2048, 3), dtype=uint8),
     'image_right': Image(shape=(1024, 2048, 3), dtype=uint8),
 })
@@ -269,7 +269,7 @@ Feature       | Class        | Shape           | Dtype  | Description
 :------------ | :----------- | :-------------- | :----- | :----------
               | FeaturesDict |                 |        |
 disparity_map | Image        | (1024, 2048, 1) | uint8  |
-image_id      | Text         |                 | object |
+image_id      | Text         |                 | string |
 image_left    | Image        | (1024, 2048, 3) | uint8  |
 image_right   | Image        | (1024, 2048, 3) | uint8  |
 
@@ -330,7 +330,7 @@ Split           | Examples
 ```python
 FeaturesDict({
     'disparity_map': Image(shape=(1024, 2048, 1), dtype=uint8),
-    'image_id': Text(shape=(), dtype=object),
+    'image_id': Text(shape=(), dtype=string),
     'image_left': Image(shape=(1024, 2048, 3), dtype=uint8),
     'image_right': Image(shape=(1024, 2048, 3), dtype=uint8),
 })
@@ -342,7 +342,7 @@ Feature       | Class        | Shape           | Dtype  | Description
 :------------ | :----------- | :-------------- | :----- | :----------
               | FeaturesDict |                 |        |
 disparity_map | Image        | (1024, 2048, 1) | uint8  |
-image_id      | Text         |                 | object |
+image_id      | Text         |                 | string |
 image_left    | Image        | (1024, 2048, 3) | uint8  |
 image_right   | Image        | (1024, 2048, 3) | uint8  |
 

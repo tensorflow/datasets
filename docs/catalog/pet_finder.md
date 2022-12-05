@@ -52,7 +52,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'PetID': Text(shape=(), dtype=object),
+    'PetID': Text(shape=(), dtype=string),
     'attributes': FeaturesDict({
         'Age': int64,
         'Breed1': int64,
@@ -74,7 +74,7 @@ FeaturesDict({
         'VideoAmt': int64,
     }),
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
 })
 ```
@@ -84,7 +84,7 @@ FeaturesDict({
 Feature                 | Class        | Shape           | Dtype  | Description
 :---------------------- | :----------- | :-------------- | :----- | :----------
                         | FeaturesDict |                 |        |
-PetID                   | Text         |                 | object |
+PetID                   | Text         |                 | string |
 attributes              | FeaturesDict |                 |        |
 attributes/Age          | Tensor       |                 | int64  |
 attributes/Breed1       | Tensor       |                 | int64  |
@@ -105,7 +105,7 @@ attributes/Type         | Tensor       |                 | int64  |
 attributes/Vaccinated   | Tensor       |                 | int64  |
 attributes/VideoAmt     | Tensor       |                 | int64  |
 image                   | Image        | (None, None, 3) | uint8  |
-image/filename          | Text         |                 | object |
+image/filename          | Text         |                 | string |
 label                   | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See

@@ -58,16 +58,16 @@ Split          | Examples
 FeaturesDict({
     'answerKey': ClassLabel(shape=(), dtype=int64, num_classes=4),
     'clarity': float32,
-    'fact1': Text(shape=(), dtype=object),
+    'fact1': Text(shape=(), dtype=string),
     'humanScore': float32,
     'question': FeaturesDict({
-        'choice_A': Text(shape=(), dtype=object),
-        'choice_B': Text(shape=(), dtype=object),
-        'choice_C': Text(shape=(), dtype=object),
-        'choice_D': Text(shape=(), dtype=object),
-        'stem': Text(shape=(), dtype=object),
+        'choice_A': Text(shape=(), dtype=string),
+        'choice_B': Text(shape=(), dtype=string),
+        'choice_C': Text(shape=(), dtype=string),
+        'choice_D': Text(shape=(), dtype=string),
+        'stem': Text(shape=(), dtype=string),
     }),
-    'turkIdAnonymized': Text(shape=(), dtype=object),
+    'turkIdAnonymized': Text(shape=(), dtype=string),
 })
 ```
 
@@ -78,15 +78,15 @@ Feature           | Class        | Shape | Dtype   | Description
                   | FeaturesDict |       |         |
 answerKey         | ClassLabel   |       | int64   |
 clarity           | Tensor       |       | float32 |
-fact1             | Text         |       | object  |
+fact1             | Text         |       | string  |
 humanScore        | Tensor       |       | float32 |
 question          | FeaturesDict |       |         |
-question/choice_A | Text         |       | object  |
-question/choice_B | Text         |       | object  |
-question/choice_C | Text         |       | object  |
-question/choice_D | Text         |       | object  |
-question/stem     | Text         |       | object  |
-turkIdAnonymized  | Text         |       | object  |
+question/choice_A | Text         |       | string  |
+question/choice_B | Text         |       | string  |
+question/choice_C | Text         |       | string  |
+question/choice_D | Text         |       | string  |
+question/stem     | Text         |       | string  |
+turkIdAnonymized  | Text         |       | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

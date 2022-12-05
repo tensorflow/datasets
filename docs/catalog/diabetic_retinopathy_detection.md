@@ -66,7 +66,7 @@ Split          | Examples
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
-    'name': Text(shape=(), dtype=object),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
@@ -77,7 +77,7 @@ Feature | Class        | Shape           | Dtype  | Description
         | FeaturesDict |                 |        |
 image   | Image        | (None, None, 3) | uint8  |
 label   | ClassLabel   |                 | int64  |
-name    | Text         |                 | object |
+name    | Text         |                 | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

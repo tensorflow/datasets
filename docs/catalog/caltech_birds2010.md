@@ -50,9 +50,9 @@ Split     | Examples
 FeaturesDict({
     'bbox': BBoxFeature(shape=(4,), dtype=float32),
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=200),
-    'label_name': Text(shape=(), dtype=object),
+    'label_name': Text(shape=(), dtype=string),
     'segmentation_mask': Image(shape=(None, None, 1), dtype=uint8),
 })
 ```
@@ -64,9 +64,9 @@ Feature           | Class        | Shape           | Dtype   | Description
                   | FeaturesDict |                 |         |
 bbox              | BBoxFeature  | (4,)            | float32 |
 image             | Image        | (None, None, 3) | uint8   |
-image/filename    | Text         |                 | object  |
+image/filename    | Text         |                 | string  |
 label             | ClassLabel   |                 | int64   |
-label_name        | Text         |                 | object  |
+label_name        | Text         |                 | string  |
 segmentation_mask | Image        | (None, None, 1) | uint8   |
 
 *   **Supervised keys** (See

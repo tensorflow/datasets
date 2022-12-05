@@ -48,8 +48,8 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer': Sequence(object),
-    'question': object,
+    'answer': Sequence(string),
+    'question': string,
 })
 ```
 
@@ -58,8 +58,8 @@ FeaturesDict({
 Feature  | Class            | Shape   | Dtype  | Description
 :------- | :--------------- | :------ | :----- | :----------
          | FeaturesDict     |         |        |
-answer   | Sequence(Tensor) | (None,) | object |
-question | Tensor           |         | object |
+answer   | Sequence(Tensor) | (None,) | string |
+question | Tensor           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

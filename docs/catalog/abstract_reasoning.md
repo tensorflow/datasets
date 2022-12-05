@@ -72,7 +72,7 @@ Split          | Examples
 FeaturesDict({
     'answers': Video(Image(shape=(160, 160, 1), dtype=uint8)),
     'context': Video(Image(shape=(160, 160, 1), dtype=uint8)),
-    'filename': Text(shape=(), dtype=object),
+    'filename': Text(shape=(), dtype=string),
     'meta_target': Tensor(shape=(12,), dtype=int64),
     'relation_structure_encoded': Tensor(shape=(4, 12), dtype=int64),
     'target': ClassLabel(shape=(), dtype=int64, num_classes=8),
@@ -88,7 +88,7 @@ FeaturesDict({
 :                            :              : 160, 1)  :        :             :
 | context                    | Video(Image) | (8, 160, | uint8  |             |
 :                            :              : 160, 1)  :        :             :
-| filename                   | Text         |          | object |             |
+| filename                   | Text         |          | string |             |
 | meta_target                | Tensor       | (12,)    | int64  |             |
 | relation_structure_encoded | Tensor       | (4, 12)  | int64  |             |
 | target                     | ClassLabel   |          | int64  |             |

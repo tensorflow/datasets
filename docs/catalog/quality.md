@@ -46,19 +46,19 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'article': Text(shape=(), dtype=object),
-    'article_id': Text(shape=(), dtype=object),
+    'article': Text(shape=(), dtype=string),
+    'article_id': Text(shape=(), dtype=string),
     'difficults': Sequence(bool),
     'gold_labels': Sequence(int32),
-    'options': Sequence(Sequence(Text(shape=(), dtype=object))),
-    'question_ids': Sequence(Text(shape=(), dtype=object)),
-    'questions': Sequence(Text(shape=(), dtype=object)),
-    'set_unique_id': Text(shape=(), dtype=object),
-    'source': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
-    'topic': Text(shape=(), dtype=object),
-    'url': Text(shape=(), dtype=object),
-    'writer_id': Text(shape=(), dtype=object),
+    'options': Sequence(Sequence(Text(shape=(), dtype=string))),
+    'question_ids': Sequence(Text(shape=(), dtype=string)),
+    'questions': Sequence(Text(shape=(), dtype=string)),
+    'set_unique_id': Text(shape=(), dtype=string),
+    'source': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
+    'topic': Text(shape=(), dtype=string),
+    'url': Text(shape=(), dtype=string),
+    'writer_id': Text(shape=(), dtype=string),
     'writer_labels': Sequence(int32),
 })
 ```
@@ -68,19 +68,19 @@ FeaturesDict({
 Feature       | Class                    | Shape        | Dtype  | Description
 :------------ | :----------------------- | :----------- | :----- | :----------
               | FeaturesDict             |              |        |
-article       | Text                     |              | object |
-article_id    | Text                     |              | object |
+article       | Text                     |              | string |
+article_id    | Text                     |              | string |
 difficults    | Sequence(Tensor)         | (None,)      | bool   |
 gold_labels   | Sequence(Tensor)         | (None,)      | int32  |
-options       | Sequence(Sequence(Text)) | (None, None) | object |
-question_ids  | Sequence(Text)           | (None,)      | object |
-questions     | Sequence(Text)           | (None,)      | object |
-set_unique_id | Text                     |              | object |
-source        | Text                     |              | object |
-title         | Text                     |              | object |
-topic         | Text                     |              | object |
-url           | Text                     |              | object |
-writer_id     | Text                     |              | object |
+options       | Sequence(Sequence(Text)) | (None, None) | string |
+question_ids  | Sequence(Text)           | (None,)      | string |
+questions     | Sequence(Text)           | (None,)      | string |
+set_unique_id | Text                     |              | string |
+source        | Text                     |              | string |
+title         | Text                     |              | string |
+topic         | Text                     |              | string |
+url           | Text                     |              | string |
+writer_id     | Text                     |              | string |
 writer_labels | Sequence(Tensor)         | (None,)      | int32  |
 
 *   **Supervised keys** (See

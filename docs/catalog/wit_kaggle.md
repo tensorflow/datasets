@@ -133,26 +133,26 @@ Split                            | Examples
 ```python
 FeaturesDict({
     'attribution_passes_lang_id': bool,
-    'caption_alt_text_description': Text(shape=(), dtype=object),
-    'caption_attribution_description': Text(shape=(), dtype=object),
-    'caption_reference_description': Text(shape=(), dtype=object),
-    'caption_title_and_reference_description': Text(shape=(), dtype=object),
-    'context_page_description': Text(shape=(), dtype=object),
-    'context_section_description': Text(shape=(), dtype=object),
+    'caption_alt_text_description': Text(shape=(), dtype=string),
+    'caption_attribution_description': Text(shape=(), dtype=string),
+    'caption_reference_description': Text(shape=(), dtype=string),
+    'caption_title_and_reference_description': Text(shape=(), dtype=string),
+    'context_page_description': Text(shape=(), dtype=string),
+    'context_section_description': Text(shape=(), dtype=string),
     'embedding': Tensor(shape=(2048,), dtype=float32),
-    'hierarchical_section_title': Text(shape=(), dtype=object),
+    'hierarchical_section_title': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image_url': Text(shape=(), dtype=object),
+    'image_url': Text(shape=(), dtype=string),
     'is_main_image': bool,
-    'language': Text(shape=(), dtype=object),
-    'metadata_url': Text(shape=(), dtype=object),
-    'mime_type': Text(shape=(), dtype=object),
+    'language': Text(shape=(), dtype=string),
+    'metadata_url': Text(shape=(), dtype=string),
+    'mime_type': Text(shape=(), dtype=string),
     'original_height': int32,
     'original_width': int32,
     'page_changed_recently': bool,
-    'page_title': Text(shape=(), dtype=object),
-    'page_url': Text(shape=(), dtype=object),
-    'section_title': Text(shape=(), dtype=object),
+    'page_title': Text(shape=(), dtype=string),
+    'page_url': Text(shape=(), dtype=string),
+    'section_title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -162,26 +162,26 @@ Feature                                 | Class        | Shape           | Dtype
 :-------------------------------------- | :----------- | :-------------- | :------ | :----------
                                         | FeaturesDict |                 |         |
 attribution_passes_lang_id              | Tensor       |                 | bool    |
-caption_alt_text_description            | Text         |                 | object  |
-caption_attribution_description         | Text         |                 | object  |
-caption_reference_description           | Text         |                 | object  |
-caption_title_and_reference_description | Text         |                 | object  |
-context_page_description                | Text         |                 | object  |
-context_section_description             | Text         |                 | object  |
+caption_alt_text_description            | Text         |                 | string  |
+caption_attribution_description         | Text         |                 | string  |
+caption_reference_description           | Text         |                 | string  |
+caption_title_and_reference_description | Text         |                 | string  |
+context_page_description                | Text         |                 | string  |
+context_section_description             | Text         |                 | string  |
 embedding                               | Tensor       | (2048,)         | float32 |
-hierarchical_section_title              | Text         |                 | object  |
+hierarchical_section_title              | Text         |                 | string  |
 image                                   | Image        | (None, None, 3) | uint8   |
-image_url                               | Text         |                 | object  |
+image_url                               | Text         |                 | string  |
 is_main_image                           | Tensor       |                 | bool    |
-language                                | Text         |                 | object  |
-metadata_url                            | Text         |                 | object  |
-mime_type                               | Text         |                 | object  |
+language                                | Text         |                 | string  |
+metadata_url                            | Text         |                 | string  |
+mime_type                               | Text         |                 | string  |
 original_height                         | Tensor       |                 | int32   |
 original_width                          | Tensor       |                 | int32   |
 page_changed_recently                   | Tensor       |                 | bool    |
-page_title                              | Text         |                 | object  |
-page_url                                | Text         |                 | object  |
-section_title                           | Text         |                 | object  |
+page_title                              | Text         |                 | string  |
+page_url                                | Text         |                 | string  |
+section_title                           | Text         |                 | string  |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -242,12 +242,12 @@ Split                 | Examples
 
 ```python
 FeaturesDict({
-    'caption_title_and_reference_description': Text(shape=(), dtype=object),
+    'caption_title_and_reference_description': Text(shape=(), dtype=string),
     'embedding': Tensor(shape=(2048,), dtype=float32),
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image_url': Text(shape=(), dtype=object),
-    'metadata_url': Text(shape=(), dtype=object),
+    'image_url': Text(shape=(), dtype=string),
+    'metadata_url': Text(shape=(), dtype=string),
 })
 ```
 
@@ -256,12 +256,12 @@ FeaturesDict({
 Feature                                 | Class        | Shape           | Dtype   | Description
 :-------------------------------------- | :----------- | :-------------- | :------ | :----------
                                         | FeaturesDict |                 |         |
-caption_title_and_reference_description | Text         |                 | object  |
+caption_title_and_reference_description | Text         |                 | string  |
 embedding                               | Tensor       | (2048,)         | float32 |
-id                                      | Text         |                 | object  |
+id                                      | Text         |                 | string  |
 image                                   | Image        | (None, None, 3) | uint8   |
-image_url                               | Text         |                 | object  |
-metadata_url                            | Text         |                 | object  |
+image_url                               | Text         |                 | string  |
+metadata_url                            | Text         |                 | string  |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

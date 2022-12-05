@@ -75,13 +75,13 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'date': Text(shape=(), dtype=object),
-    'id': Text(shape=(), dtype=object),
-    'program': Text(shape=(), dtype=object),
-    'speaker': Sequence(Text(shape=(), dtype=object)),
-    'summary': Text(shape=(), dtype=object),
-    'url': Text(shape=(), dtype=object),
-    'utt': Sequence(Text(shape=(), dtype=object)),
+    'date': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'program': Text(shape=(), dtype=string),
+    'speaker': Sequence(Text(shape=(), dtype=string)),
+    'summary': Text(shape=(), dtype=string),
+    'url': Text(shape=(), dtype=string),
+    'utt': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
@@ -90,13 +90,13 @@ FeaturesDict({
 Feature | Class          | Shape   | Dtype  | Description
 :------ | :------------- | :------ | :----- | :----------
         | FeaturesDict   |         |        |
-date    | Text           |         | object |
-id      | Text           |         | object |
-program | Text           |         | object |
-speaker | Sequence(Text) | (None,) | object |
-summary | Text           |         | object |
-url     | Text           |         | object |
-utt     | Sequence(Text) | (None,) | object |
+date    | Text           |         | string |
+id      | Text           |         | string |
+program | Text           |         | string |
+speaker | Sequence(Text) | (None,) | string |
+summary | Text           |         | string |
+url     | Text           |         | string |
+utt     | Sequence(Text) | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

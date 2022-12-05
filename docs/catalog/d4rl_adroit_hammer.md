@@ -444,7 +444,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
             'bias': Tensor(shape=(256,), dtype=float32),
@@ -458,8 +458,8 @@ FeaturesDict({
             'bias': Tensor(shape=(26,), dtype=float32),
             'weight': Tensor(shape=(256, 26), dtype=float32),
         }),
-        'nonlinearity': object,
-        'output_distribution': object,
+        'nonlinearity': string,
+        'output_distribution': string,
     }),
     'steps': Dataset({
         'action': Tensor(shape=(26,), dtype=float32),
@@ -484,7 +484,7 @@ FeaturesDict({
 Feature                    | Class        | Shape      | Dtype   | Description
 :------------------------- | :----------- | :--------- | :------ | :----------
                            | FeaturesDict |            |         |
-algorithm                  | Tensor       |            | object  |
+algorithm                  | Tensor       |            | string  |
 policy                     | FeaturesDict |            |         |
 policy/fc0                 | FeaturesDict |            |         |
 policy/fc0/bias            | Tensor       | (256,)     | float32 |
@@ -495,8 +495,8 @@ policy/fc1/weight          | Tensor       | (256, 256) | float32 |
 policy/last_fc             | FeaturesDict |            |         |
 policy/last_fc/bias        | Tensor       | (26,)      | float32 |
 policy/last_fc/weight      | Tensor       | (256, 26)  | float32 |
-policy/nonlinearity        | Tensor       |            | object  |
-policy/output_distribution | Tensor       |            | object  |
+policy/nonlinearity        | Tensor       |            | string  |
+policy/output_distribution | Tensor       |            | string  |
 steps                      | Dataset      |            |         |
 steps/action               | Tensor       | (26,)      | float32 |
 steps/discount             | Tensor       |            | float32 |
@@ -568,7 +568,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'algorithm': object,
+    'algorithm': string,
     'policy': FeaturesDict({
         'fc0': FeaturesDict({
             'bias': Tensor(shape=(32,), dtype=float32),
@@ -586,8 +586,8 @@ FeaturesDict({
             'bias': Tensor(shape=(26,), dtype=float32),
             'weight': Tensor(shape=(26, 32), dtype=float32),
         }),
-        'nonlinearity': object,
-        'output_distribution': object,
+        'nonlinearity': string,
+        'output_distribution': string,
     }),
     'steps': Dataset({
         'action': Tensor(shape=(26,), dtype=float32),
@@ -614,7 +614,7 @@ FeaturesDict({
 Feature                       | Class        | Shape    | Dtype   | Description
 :---------------------------- | :----------- | :------- | :------ | :----------
                               | FeaturesDict |          |         |
-algorithm                     | Tensor       |          | object  |
+algorithm                     | Tensor       |          | string  |
 policy                        | FeaturesDict |          |         |
 policy/fc0                    | FeaturesDict |          |         |
 policy/fc0/bias               | Tensor       | (32,)    | float32 |
@@ -628,8 +628,8 @@ policy/last_fc/weight         | Tensor       | (26, 32) | float32 |
 policy/last_fc_log_std        | FeaturesDict |          |         |
 policy/last_fc_log_std/bias   | Tensor       | (26,)    | float32 |
 policy/last_fc_log_std/weight | Tensor       | (26, 32) | float32 |
-policy/nonlinearity           | Tensor       |          | object  |
-policy/output_distribution    | Tensor       |          | object  |
+policy/nonlinearity           | Tensor       |          | string  |
+policy/output_distribution    | Tensor       |          | string  |
 steps                         | Dataset      |          |         |
 steps/action                  | Tensor       | (26,)    | float32 |
 steps/discount                | Tensor       |          | float32 |

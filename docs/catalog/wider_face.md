@@ -64,7 +64,7 @@ FeaturesDict({
         'pose': bool,
     }),
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
@@ -82,7 +82,7 @@ faces/invalid      | Tensor       |                 | bool    |
 faces/occlusion    | Tensor       |                 | uint8   |
 faces/pose         | Tensor       |                 | bool    |
 image              | Image        | (None, None, 3) | uint8   |
-image/filename     | Text         |                 | object  |
+image/filename     | Text         |                 | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

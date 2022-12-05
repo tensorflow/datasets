@@ -86,12 +86,12 @@ Split          | Examples
 FeaturesDict({
     'answers': Sequence({
         'answer_start': int32,
-        'text': Text(shape=(), dtype=object),
+        'text': Text(shape=(), dtype=string),
     }),
-    'context': Text(shape=(), dtype=object),
-    'id': object,
-    'question': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'context': Text(shape=(), dtype=string),
+    'id': string,
+    'question': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -102,11 +102,11 @@ Feature              | Class        | Shape | Dtype  | Description
                      | FeaturesDict |       |        |
 answers              | Sequence     |       |        |
 answers/answer_start | Tensor       |       | int32  |
-answers/text         | Text         |       | object |
-context              | Text         |       | object |
-id                   | Tensor       |       | object |
-question             | Text         |       | object |
-title                | Text         |       | object |
+answers/text         | Text         |       | string |
+context              | Text         |       | string |
+id                   | Tensor       |       | string |
+question             | Text         |       | string |
+title                | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -170,17 +170,17 @@ Split          | Examples
 FeaturesDict({
     'answers': Sequence({
         'answer_start': int32,
-        'text': Text(shape=(), dtype=object),
+        'text': Text(shape=(), dtype=string),
     }),
-    'context': Text(shape=(), dtype=object),
-    'id': object,
+    'context': Text(shape=(), dtype=string),
+    'id': string,
     'is_impossible': bool,
     'plausible_answers': Sequence({
         'answer_start': int32,
-        'text': Text(shape=(), dtype=object),
+        'text': Text(shape=(), dtype=string),
     }),
-    'question': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -191,15 +191,15 @@ Feature                        | Class        | Shape | Dtype  | Description
                                | FeaturesDict |       |        |
 answers                        | Sequence     |       |        |
 answers/answer_start           | Tensor       |       | int32  |
-answers/text                   | Text         |       | object |
-context                        | Text         |       | object |
-id                             | Tensor       |       | object |
+answers/text                   | Text         |       | string |
+context                        | Text         |       | string |
+id                             | Tensor       |       | string |
 is_impossible                  | Tensor       |       | bool   |
 plausible_answers              | Sequence     |       |        |
 plausible_answers/answer_start | Tensor       |       | int32  |
-plausible_answers/text         | Text         |       | object |
-question                       | Text         |       | object |
-title                          | Text         |       | object |
+plausible_answers/text         | Text         |       | string |
+question                       | Text         |       | string |
+title                          | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

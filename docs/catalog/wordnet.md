@@ -45,9 +45,9 @@ lexical relations.
 
 ```python
 FeaturesDict({
-    'lhs': Text(shape=(), dtype=object),
-    'relation': Text(shape=(), dtype=object),
-    'rhs': Text(shape=(), dtype=object),
+    'lhs': Text(shape=(), dtype=string),
+    'relation': Text(shape=(), dtype=string),
+    'rhs': Text(shape=(), dtype=string),
 })
 ```
 
@@ -56,9 +56,9 @@ FeaturesDict({
 Feature  | Class        | Shape | Dtype  | Description
 :------- | :----------- | :---- | :----- | :----------
          | FeaturesDict |       |        |
-lhs      | Text         |       | object |
-relation | Text         |       | object |
-rhs      | Text         |       | object |
+lhs      | Text         |       | string |
+relation | Text         |       | string |
+rhs      | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

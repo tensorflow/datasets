@@ -41,30 +41,30 @@ answering the questions.
 ```python
 FeaturesDict({
     'answer': FeaturesDict({
-        'aliases': Sequence(Text(shape=(), dtype=object)),
-        'matched_wiki_entity_name': Text(shape=(), dtype=object),
-        'normalized_aliases': Sequence(Text(shape=(), dtype=object)),
-        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=object),
-        'normalized_value': Text(shape=(), dtype=object),
-        'type': Text(shape=(), dtype=object),
-        'value': Text(shape=(), dtype=object),
+        'aliases': Sequence(Text(shape=(), dtype=string)),
+        'matched_wiki_entity_name': Text(shape=(), dtype=string),
+        'normalized_aliases': Sequence(Text(shape=(), dtype=string)),
+        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=string),
+        'normalized_value': Text(shape=(), dtype=string),
+        'type': Text(shape=(), dtype=string),
+        'value': Text(shape=(), dtype=string),
     }),
     'entity_pages': Sequence({
-        'doc_source': Text(shape=(), dtype=object),
-        'filename': Text(shape=(), dtype=object),
-        'title': Text(shape=(), dtype=object),
-        'wiki_context': Text(shape=(), dtype=object),
+        'doc_source': Text(shape=(), dtype=string),
+        'filename': Text(shape=(), dtype=string),
+        'title': Text(shape=(), dtype=string),
+        'wiki_context': Text(shape=(), dtype=string),
     }),
-    'question': Text(shape=(), dtype=object),
-    'question_id': Text(shape=(), dtype=object),
-    'question_source': Text(shape=(), dtype=object),
+    'question': Text(shape=(), dtype=string),
+    'question_id': Text(shape=(), dtype=string),
+    'question_source': Text(shape=(), dtype=string),
     'search_results': Sequence({
-        'description': Text(shape=(), dtype=object),
-        'filename': Text(shape=(), dtype=object),
+        'description': Text(shape=(), dtype=string),
+        'filename': Text(shape=(), dtype=string),
         'rank': int32,
-        'search_context': Text(shape=(), dtype=object),
-        'title': Text(shape=(), dtype=object),
-        'url': Text(shape=(), dtype=object),
+        'search_context': Text(shape=(), dtype=string),
+        'title': Text(shape=(), dtype=string),
+        'url': Text(shape=(), dtype=string),
     }),
 })
 ```
@@ -75,28 +75,28 @@ Feature                                    | Class          | Shape   | Dtype  |
 :----------------------------------------- | :------------- | :------ | :----- | :----------
                                            | FeaturesDict   |         |        |
 answer                                     | FeaturesDict   |         |        |
-answer/aliases                             | Sequence(Text) | (None,) | object |
-answer/matched_wiki_entity_name            | Text           |         | object |
-answer/normalized_aliases                  | Sequence(Text) | (None,) | object |
-answer/normalized_matched_wiki_entity_name | Text           |         | object |
-answer/normalized_value                    | Text           |         | object |
-answer/type                                | Text           |         | object |
-answer/value                               | Text           |         | object |
+answer/aliases                             | Sequence(Text) | (None,) | string |
+answer/matched_wiki_entity_name            | Text           |         | string |
+answer/normalized_aliases                  | Sequence(Text) | (None,) | string |
+answer/normalized_matched_wiki_entity_name | Text           |         | string |
+answer/normalized_value                    | Text           |         | string |
+answer/type                                | Text           |         | string |
+answer/value                               | Text           |         | string |
 entity_pages                               | Sequence       |         |        |
-entity_pages/doc_source                    | Text           |         | object |
-entity_pages/filename                      | Text           |         | object |
-entity_pages/title                         | Text           |         | object |
-entity_pages/wiki_context                  | Text           |         | object |
-question                                   | Text           |         | object |
-question_id                                | Text           |         | object |
-question_source                            | Text           |         | object |
+entity_pages/doc_source                    | Text           |         | string |
+entity_pages/filename                      | Text           |         | string |
+entity_pages/title                         | Text           |         | string |
+entity_pages/wiki_context                  | Text           |         | string |
+question                                   | Text           |         | string |
+question_id                                | Text           |         | string |
+question_source                            | Text           |         | string |
 search_results                             | Sequence       |         |        |
-search_results/description                 | Text           |         | object |
-search_results/filename                    | Text           |         | object |
+search_results/description                 | Text           |         | string |
+search_results/filename                    | Text           |         | string |
 search_results/rank                        | Tensor         |         | int32  |
-search_results/search_context              | Text           |         | object |
-search_results/title                       | Text           |         | object |
-search_results/url                         | Text           |         | object |
+search_results/search_context              | Text           |         | string |
+search_results/title                       | Text           |         | string |
+search_results/url                         | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

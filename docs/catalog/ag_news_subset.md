@@ -69,9 +69,9 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'description': Text(shape=(), dtype=object),
+    'description': Text(shape=(), dtype=string),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=4),
-    'title': Text(shape=(), dtype=object),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -80,9 +80,9 @@ FeaturesDict({
 Feature     | Class        | Shape | Dtype  | Description
 :---------- | :----------- | :---- | :----- | :----------
             | FeaturesDict |       |        |
-description | Text         |       | object |
+description | Text         |       | string |
 label       | ClassLabel   |       | int64  |
-title       | Text         |       | object |
+title       | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

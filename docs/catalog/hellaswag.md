@@ -67,12 +67,12 @@ Split                          | Examples
 
 ```python
 FeaturesDict({
-    'activity_label': Text(shape=(), dtype=object),
-    'context': Text(shape=(), dtype=object),
-    'endings': Sequence(Text(shape=(), dtype=object)),
+    'activity_label': Text(shape=(), dtype=string),
+    'context': Text(shape=(), dtype=string),
+    'endings': Sequence(Text(shape=(), dtype=string)),
     'label': int32,
-    'source_id': Text(shape=(), dtype=object),
-    'split_type': Text(shape=(), dtype=object),
+    'source_id': Text(shape=(), dtype=string),
+    'split_type': Text(shape=(), dtype=string),
 })
 ```
 
@@ -81,12 +81,12 @@ FeaturesDict({
 Feature        | Class          | Shape   | Dtype  | Description
 :------------- | :------------- | :------ | :----- | :----------
                | FeaturesDict   |         |        |
-activity_label | Text           |         | object |
-context        | Text           |         | object |
-endings        | Sequence(Text) | (None,) | object |
+activity_label | Text           |         | string |
+context        | Text           |         | string |
+endings        | Sequence(Text) | (None,) | string |
 label          | Tensor         |         | int32  |
-source_id      | Text           |         | object |
-split_type     | Text           |         | object |
+source_id      | Text           |         | string |
+split_type     | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

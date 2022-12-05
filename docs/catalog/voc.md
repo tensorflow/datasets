@@ -44,7 +44,7 @@ the official dataset, the test set of VOC2012 does not contain annotations.
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=uint8),
-    'image/filename': Text(shape=(), dtype=object),
+    'image/filename': Text(shape=(), dtype=string),
     'labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=20)),
     'labels_no_difficult': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=20)),
     'objects': Sequence({
@@ -63,7 +63,7 @@ Feature              | Class                | Shape           | Dtype   | Descri
 :------------------- | :------------------- | :-------------- | :------ | :----------
                      | FeaturesDict         |                 |         |
 image                | Image                | (None, None, 3) | uint8   |
-image/filename       | Text                 |                 | object  |
+image/filename       | Text                 |                 | string  |
 labels               | Sequence(ClassLabel) | (None,)         | int64   |
 labels_no_difficult  | Sequence(ClassLabel) | (None,)         | int64   |
 objects              | Sequence             |                 |         |

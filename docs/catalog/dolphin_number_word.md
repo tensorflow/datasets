@@ -50,12 +50,12 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'ans': Text(shape=(), dtype=object),
-    'equations': Text(shape=(), dtype=object),
-    'id': Text(shape=(), dtype=object),
+    'ans': Text(shape=(), dtype=string),
+    'equations': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
     'index': int32,
-    'sources': Text(shape=(), dtype=object),
-    'text': Text(shape=(), dtype=object),
+    'sources': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -64,12 +64,12 @@ FeaturesDict({
 Feature   | Class        | Shape | Dtype  | Description
 :-------- | :----------- | :---- | :----- | :----------
           | FeaturesDict |       |        |
-ans       | Text         |       | object |
-equations | Text         |       | object |
-id        | Text         |       | object |
+ans       | Text         |       | string |
+equations | Text         |       | string |
+id        | Text         |       | string |
 index     | Tensor       |       | int32  |
-sources   | Text         |       | object |
-text      | Text         |       | object |
+sources   | Text         |       | string |
+text      | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

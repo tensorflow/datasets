@@ -54,11 +54,11 @@ FeaturesDict({
     'answers': Sequence({
         'answer_end': int32,
         'answer_start': int32,
-        'input_text': Text(shape=(), dtype=object),
+        'input_text': Text(shape=(), dtype=string),
     }),
-    'questions': Sequence(Text(shape=(), dtype=object)),
-    'source': Text(shape=(), dtype=object),
-    'story': Text(shape=(), dtype=object),
+    'questions': Sequence(Text(shape=(), dtype=string)),
+    'source': Text(shape=(), dtype=string),
+    'story': Text(shape=(), dtype=string),
 })
 ```
 
@@ -70,10 +70,10 @@ Feature              | Class          | Shape   | Dtype  | Description
 answers              | Sequence       |         |        |
 answers/answer_end   | Tensor         |         | int32  |
 answers/answer_start | Tensor         |         | int32  |
-answers/input_text   | Text           |         | object |
-questions            | Sequence(Text) | (None,) | object |
-source               | Text           |         | object |
-story                | Text           |         | object |
+answers/input_text   | Text           |         | string |
+questions            | Sequence(Text) | (None,) | string |
+source               | Text           |         | string |
+story                | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -82,10 +82,10 @@ FeaturesDict({
         'label': int64,
         'label_name': ClassLabel(shape=(), dtype=int64, num_classes=80),
         'refexp': Sequence({
-            'raw': Text(shape=(), dtype=object),
-            'referent': Text(shape=(), dtype=object),
+            'raw': Text(shape=(), dtype=string),
+            'referent': Text(shape=(), dtype=string),
             'refexp_id': int64,
-            'tokens': Sequence(Text(shape=(), dtype=object)),
+            'tokens': Sequence(Text(shape=(), dtype=string)),
         }),
     }),
 })
@@ -107,10 +107,10 @@ FeaturesDict({
 | objects/label            | Tensor         |         | int64   |             |
 | objects/label_name       | ClassLabel     |         | int64   |             |
 | objects/refexp           | Sequence       |         |         |             |
-| objects/refexp/raw       | Text           |         | object  |             |
-| objects/refexp/referent  | Text           |         | object  |             |
+| objects/refexp/raw       | Text           |         | string  |             |
+| objects/refexp/referent  | Text           |         | string  |             |
 | objects/refexp/refexp_id | Tensor         |         | int64   |             |
-| objects/refexp/tokens    | Sequence(Text) | (None,) | object  |             |
+| objects/refexp/tokens    | Sequence(Text) | (None,) | string  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

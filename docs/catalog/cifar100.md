@@ -62,7 +62,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'coarse_label': ClassLabel(shape=(), dtype=int64, num_classes=20),
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(32, 32, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=100),
 })
@@ -74,7 +74,7 @@ Feature      | Class        | Shape       | Dtype  | Description
 :----------- | :----------- | :---------- | :----- | :----------
              | FeaturesDict |             |        |
 coarse_label | ClassLabel   |             | int64  |
-id           | Text         |             | object |
+id           | Text         |             | string |
 image        | Image        | (32, 32, 3) | uint8  |
 label        | ClassLabel   |             | int64  |
 

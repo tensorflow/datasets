@@ -55,11 +55,11 @@ FeaturesDict({
     'answerKey': ClassLabel(shape=(), dtype=int64, num_classes=5),
     'choices': Sequence({
         'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
-        'text': Text(shape=(), dtype=object),
+        'text': Text(shape=(), dtype=string),
     }),
-    'id': Text(shape=(), dtype=object),
-    'paragraph': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
+    'paragraph': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
@@ -71,10 +71,10 @@ Feature       | Class        | Shape | Dtype  | Description
 answerKey     | ClassLabel   |       | int64  |
 choices       | Sequence     |       |        |
 choices/label | ClassLabel   |       | int64  |
-choices/text  | Text         |       | object |
-id            | Text         |       | object |
-paragraph     | Text         |       | object |
-question      | Text         |       | object |
+choices/text  | Text         |       | string |
+id            | Text         |       | string |
+paragraph     | Text         |       | string |
+question      | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

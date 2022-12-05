@@ -68,12 +68,12 @@ FeaturesDict({
         'is_group_of': bool,
         'label': ClassLabel(shape=(), dtype=int64, num_classes=500),
     }),
-    'id': Text(shape=(), dtype=object),
+    'id': Text(shape=(), dtype=string),
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'objects': Sequence({
         'confidence': float32,
         'label': ClassLabel(shape=(), dtype=int64, num_classes=500),
-        'source': Text(shape=(), dtype=object),
+        'source': Text(shape=(), dtype=string),
     }),
 })
 ```
@@ -87,12 +87,12 @@ bobjects             | Sequence     |                 |         |
 bobjects/bbox        | BBoxFeature  | (4,)            | float32 |
 bobjects/is_group_of | Tensor       |                 | bool    |
 bobjects/label       | ClassLabel   |                 | int64   |
-id                   | Text         |                 | object  |
+id                   | Text         |                 | string  |
 image                | Image        | (None, None, 3) | uint8   |
 objects              | Sequence     |                 |         |
 objects/confidence   | Tensor       |                 | float32 |
 objects/label        | ClassLabel   |                 | int64   |
-objects/source       | Text         |                 | object  |
+objects/source       | Text         |                 | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

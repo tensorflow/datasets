@@ -73,16 +73,16 @@ Split          | Examples
 ```python
 FeaturesDict({
     'compression': float32,
-    'compression_bin': Text(shape=(), dtype=object),
+    'compression_bin': Text(shape=(), dtype=string),
     'coverage': float32,
-    'coverage_bin': Text(shape=(), dtype=object),
-    'date': Text(shape=(), dtype=object),
+    'coverage_bin': Text(shape=(), dtype=string),
+    'date': Text(shape=(), dtype=string),
     'density': float32,
-    'density_bin': Text(shape=(), dtype=object),
-    'summary': Text(shape=(), dtype=object),
-    'text': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
-    'url': Text(shape=(), dtype=object),
+    'density_bin': Text(shape=(), dtype=string),
+    'summary': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
+    'url': Text(shape=(), dtype=string),
 })
 ```
 
@@ -92,16 +92,16 @@ Feature         | Class        | Shape | Dtype   | Description
 :-------------- | :----------- | :---- | :------ | :----------
                 | FeaturesDict |       |         |
 compression     | Tensor       |       | float32 |
-compression_bin | Text         |       | object  |
+compression_bin | Text         |       | string  |
 coverage        | Tensor       |       | float32 |
-coverage_bin    | Text         |       | object  |
-date            | Text         |       | object  |
+coverage_bin    | Text         |       | string  |
+date            | Text         |       | string  |
 density         | Tensor       |       | float32 |
-density_bin     | Text         |       | object  |
-summary         | Text         |       | object  |
-text            | Text         |       | object  |
-title           | Text         |       | object  |
-url             | Text         |       | object  |
+density_bin     | Text         |       | string  |
+summary         | Text         |       | string  |
+text            | Text         |       | string  |
+title           | Text         |       | string  |
+url             | Text         |       | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

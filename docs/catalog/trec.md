@@ -59,7 +59,7 @@ Split     | Examples
 FeaturesDict({
     'label-coarse': ClassLabel(shape=(), dtype=int64, num_classes=6),
     'label-fine': ClassLabel(shape=(), dtype=int64, num_classes=47),
-    'text': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -70,7 +70,7 @@ Feature      | Class        | Shape | Dtype  | Description
              | FeaturesDict |       |        |
 label-coarse | ClassLabel   |       | int64  |
 label-fine   | ClassLabel   |       | int64  |
-text         | Text         |       | object |
+text         | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

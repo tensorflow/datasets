@@ -98,12 +98,12 @@ Split          | Examples
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'dataset': object,
+        'dataset': string,
         'height': int32,
         'neg_category_ids': Tensor(shape=(None,), dtype=int32),
         'not_exhaustive_category_ids': Tensor(shape=(None,), dtype=int32),
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -111,7 +111,7 @@ FeaturesDict({
         'category': ClassLabel(shape=(), dtype=int64, num_classes=363),
         'frames': Sequence(int32),
         'is_crowd': bool,
-        'scale_category': object,
+        'scale_category': string,
         'track_id': int32,
     }),
     'video': Video(Image(shape=(480, 640, 3), dtype=uint8)),
@@ -124,19 +124,19 @@ Feature                              | Class                 | Shape            
 :----------------------------------- | :-------------------- | :------------------ | :------ | :----------
                                      | FeaturesDict          |                     |         |
 metadata                             | FeaturesDict          |                     |         |
-metadata/dataset                     | Tensor                |                     | object  |
+metadata/dataset                     | Tensor                |                     | string  |
 metadata/height                      | Tensor                |                     | int32   |
 metadata/neg_category_ids            | Tensor                | (None,)             | int32   |
 metadata/not_exhaustive_category_ids | Tensor                | (None,)             | int32   |
 metadata/num_frames                  | Tensor                |                     | int32   |
-metadata/video_name                  | Tensor                |                     | object  |
+metadata/video_name                  | Tensor                |                     | string  |
 metadata/width                       | Tensor                |                     | int32   |
 tracks                               | Sequence              |                     |         |
 tracks/bboxes                        | Sequence(BBoxFeature) | (None, 4)           | float32 |
 tracks/category                      | ClassLabel            |                     | int64   |
 tracks/frames                        | Sequence(Tensor)      | (None,)             | int32   |
 tracks/is_crowd                      | Tensor                |                     | bool    |
-tracks/scale_category                | Tensor                |                     | object  |
+tracks/scale_category                | Tensor                |                     | string  |
 tracks/track_id                      | Tensor                |                     | int32   |
 video                                | Video(Image)          | (None, 480, 640, 3) | uint8   |
 
@@ -188,12 +188,12 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'metadata': FeaturesDict({
-        'dataset': object,
+        'dataset': string,
         'height': int32,
         'neg_category_ids': Tensor(shape=(None,), dtype=int32),
         'not_exhaustive_category_ids': Tensor(shape=(None,), dtype=int32),
         'num_frames': int32,
-        'video_name': object,
+        'video_name': string,
         'width': int32,
     }),
     'tracks': Sequence({
@@ -201,7 +201,7 @@ FeaturesDict({
         'category': ClassLabel(shape=(), dtype=int64, num_classes=363),
         'frames': Sequence(int32),
         'is_crowd': bool,
-        'scale_category': object,
+        'scale_category': string,
         'track_id': int32,
     }),
     'video': Video(Image(shape=(None, None, 3), dtype=uint8)),
@@ -214,19 +214,19 @@ Feature                              | Class                 | Shape            
 :----------------------------------- | :-------------------- | :-------------------- | :------ | :----------
                                      | FeaturesDict          |                       |         |
 metadata                             | FeaturesDict          |                       |         |
-metadata/dataset                     | Tensor                |                       | object  |
+metadata/dataset                     | Tensor                |                       | string  |
 metadata/height                      | Tensor                |                       | int32   |
 metadata/neg_category_ids            | Tensor                | (None,)               | int32   |
 metadata/not_exhaustive_category_ids | Tensor                | (None,)               | int32   |
 metadata/num_frames                  | Tensor                |                       | int32   |
-metadata/video_name                  | Tensor                |                       | object  |
+metadata/video_name                  | Tensor                |                       | string  |
 metadata/width                       | Tensor                |                       | int32   |
 tracks                               | Sequence              |                       |         |
 tracks/bboxes                        | Sequence(BBoxFeature) | (None, 4)             | float32 |
 tracks/category                      | ClassLabel            |                       | int64   |
 tracks/frames                        | Sequence(Tensor)      | (None,)               | int32   |
 tracks/is_crowd                      | Tensor                |                       | bool    |
-tracks/scale_category                | Tensor                |                       | object  |
+tracks/scale_category                | Tensor                |                       | string  |
 tracks/track_id                      | Tensor                |                       | int32   |
 video                                | Video(Image)          | (None, None, None, 3) | uint8   |
 

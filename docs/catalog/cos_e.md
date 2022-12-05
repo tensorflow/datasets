@@ -53,12 +53,12 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'abstractive_explanation': Text(shape=(), dtype=object),
-    'answer': Text(shape=(), dtype=object),
-    'choices': Sequence(Text(shape=(), dtype=object)),
-    'extractive_explanation': Text(shape=(), dtype=object),
-    'id': Text(shape=(), dtype=object),
-    'question': Text(shape=(), dtype=object),
+    'abstractive_explanation': Text(shape=(), dtype=string),
+    'answer': Text(shape=(), dtype=string),
+    'choices': Sequence(Text(shape=(), dtype=string)),
+    'extractive_explanation': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
@@ -67,12 +67,12 @@ FeaturesDict({
 Feature                 | Class          | Shape   | Dtype  | Description
 :---------------------- | :------------- | :------ | :----- | :----------
                         | FeaturesDict   |         |        |
-abstractive_explanation | Text           |         | object |
-answer                  | Text           |         | object |
-choices                 | Sequence(Text) | (None,) | object |
-extractive_explanation  | Text           |         | object |
-id                      | Text           |         | object |
-question                | Text           |         | object |
+abstractive_explanation | Text           |         | string |
+answer                  | Text           |         | string |
+choices                 | Sequence(Text) | (None,) | string |
+extractive_explanation  | Text           |         | string |
+id                      | Text           |         | string |
+question                | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

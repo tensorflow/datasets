@@ -74,10 +74,10 @@ FeaturesDict({
     'spans': Sequence({
         'limit': int32,
         'start': int32,
-        'type': object,
+        'type': string,
     }),
-    'text': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -89,9 +89,9 @@ Feature     | Class        | Shape | Dtype  | Description
 spans       | Sequence     |       |        |
 spans/limit | Tensor       |       | int32  |
 spans/start | Tensor       |       | int32  |
-spans/type  | Tensor       |       | object |
-text        | Text         |       | object |
-title       | Text         |       | object |
+spans/type  | Tensor       |       | string |
+text        | Text         |       | string |
+title       | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -153,10 +153,10 @@ FeaturesDict({
     'spans': Sequence({
         'limit': int32,
         'start': int32,
-        'type': object,
+        'type': string,
     }),
-    'text': Text(shape=(), dtype=object),
-    'title': Text(shape=(), dtype=object),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
@@ -171,9 +171,9 @@ sentences/start | Tensor       |       | int32  |
 spans           | Sequence     |       |        |
 spans/limit     | Tensor       |       | int32  |
 spans/start     | Tensor       |       | int32  |
-spans/type      | Tensor       |       | object |
-text            | Text         |       | object |
-title           | Text         |       | object |
+spans/type      | Tensor       |       | string |
+text            | Text         |       | string |
+title           | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

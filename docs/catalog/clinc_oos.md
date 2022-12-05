@@ -65,10 +65,10 @@ Split              | Examples
 ```python
 FeaturesDict({
     'domain': int32,
-    'domain_name': Text(shape=(), dtype=object),
+    'domain_name': Text(shape=(), dtype=string),
     'intent': int32,
-    'intent_name': Text(shape=(), dtype=object),
-    'text': Text(shape=(), dtype=object),
+    'intent_name': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
@@ -78,10 +78,10 @@ Feature     | Class        | Shape | Dtype  | Description
 :---------- | :----------- | :---- | :----- | :----------
             | FeaturesDict |       |        |
 domain      | Tensor       |       | int32  |
-domain_name | Text         |       | object |
+domain_name | Text         |       | string |
 intent      | Tensor       |       | int32  |
-intent_name | Text         |       | object |
-text        | Text         |       | object |
+intent_name | Text         |       | string |
+text        | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

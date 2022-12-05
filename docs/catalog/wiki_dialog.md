@@ -53,11 +53,11 @@ Split          | Examples
 ```python
 FeaturesDict({
     'author_num': Sequence(int32),
-    'passage': Text(shape=(), dtype=object),
-    'pid': Text(shape=(), dtype=object),
-    'sentences': Sequence(Text(shape=(), dtype=object)),
-    'title': Text(shape=(), dtype=object),
-    'utterances': Sequence(Text(shape=(), dtype=object)),
+    'passage': Text(shape=(), dtype=string),
+    'pid': Text(shape=(), dtype=string),
+    'sentences': Sequence(Text(shape=(), dtype=string)),
+    'title': Text(shape=(), dtype=string),
+    'utterances': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
@@ -67,11 +67,11 @@ Feature    | Class            | Shape   | Dtype  | Description
 :--------- | :--------------- | :------ | :----- | :----------
            | FeaturesDict     |         |        |
 author_num | Sequence(Tensor) | (None,) | int32  |
-passage    | Text             |         | object |
-pid        | Text             |         | object |
-sentences  | Sequence(Text)   | (None,) | object |
-title      | Text             |         | object |
-utterances | Sequence(Text)   | (None,) | object |
+passage    | Text             |         | string |
+pid        | Text             |         | string |
+sentences  | Sequence(Text)   | (None,) | string |
+title      | Text             |         | string |
+utterances | Sequence(Text)   | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
