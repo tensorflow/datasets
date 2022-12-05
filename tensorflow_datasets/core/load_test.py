@@ -41,6 +41,9 @@ def test_community_public_load():
   ), mock.patch(
       'tensorflow_datasets.core.community.community_register.builder_cls',
       return_value=testing.DummyDataset,
+  ), mock.patch(
+      'tensorflow_datasets.core.registered.list_imported_builders',
+      return_value=[],
   ):
     assert load.list_builders() == ['ns:ds']
 
