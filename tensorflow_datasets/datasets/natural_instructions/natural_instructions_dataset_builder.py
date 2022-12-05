@@ -34,8 +34,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             "id": tfds.features.Text(),
             "input": tfds.features.Text(),
