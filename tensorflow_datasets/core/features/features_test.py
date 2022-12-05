@@ -134,7 +134,7 @@ class FeatureDictTest(parameterized.TestCase,
             }
         })
 
-  @parameterized.parameters((np.int64, np.str_, np.str_),
+  @parameterized.parameters((np.int64, np.str_, np.object_),
                             (tf.int64, tf.string, np.object_))
   def test_fdict(self, image_dtype, metadata_dtype, output_metadata_dtype):
 
@@ -236,6 +236,10 @@ class FeatureDictTest(parameterized.TestCase,
       ({
           'integer': np.int32,
           'string': np.object_,
+      },),
+      ({
+          'integer': np.int32,
+          'string': np.str_,
       },),
       ({
           'integer': tf.int32,

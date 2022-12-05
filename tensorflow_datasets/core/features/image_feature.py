@@ -28,6 +28,7 @@ import numpy as np
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
@@ -75,7 +76,7 @@ class _ImageEncoder:
   np_dtype: Optional[np.dtype] = None
 
   def __post_init__(self):
-    self.np_dtype = type_utils.cast_to_numpy(self.dtype)
+    self.np_dtype = dtype_utils.cast_to_numpy(self.dtype)
 
   # TODO(tfds): Should deprecate the TFGraph runner in favor of simpler
   # implementation
@@ -244,7 +245,7 @@ class Image(feature_lib.FeatureConnector):
     super().__init__(doc=doc)
     # Set and validate values
     shape = shape or (None, None, 3)
-    dtype = type_utils.cast_to_numpy(dtype or np.uint8)
+    dtype = dtype_utils.cast_to_numpy(dtype or np.uint8)
     self._encoding_format = get_and_validate_encoding(encoding_format)
     self._shape = get_and_validate_shape(shape, self._encoding_format)
     self._dtype = get_and_validate_dtype(dtype, self._encoding_format)
@@ -329,7 +330,7 @@ class Image(feature_lib.FeatureConnector):
   def to_json_content(self) -> feature_pb2.ImageFeature:
     return feature_pb2.ImageFeature(
         shape=feature_lib.to_shape_proto(self._shape),
-        dtype=feature_lib.dtype_to_string(self._dtype),
+        dtype=feature_lib.dtype_to_str(self._dtype),
         encoding_format=self._encoding_format,
         use_colormap=self._use_colormap,
     )

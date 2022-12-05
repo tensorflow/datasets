@@ -187,14 +187,6 @@ def is_string(dtype: type_utils.TfdsDType) -> bool:
 
 
 @py_utils.memoize()
-def is_same_dtype_type(a, b):
-  if a == b:
-    return True
-  # NumPy strings can have different DTypes and yet be of the same DType type.
-  return is_string(a) and is_string(b)
-
-
-@py_utils.memoize()
 def is_np_sub_dtype(value: np.dtype, super_type: np.dtype) -> bool:
   try:
     return np.issubdtype(value, super_type)

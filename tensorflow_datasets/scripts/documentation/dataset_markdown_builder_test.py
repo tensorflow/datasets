@@ -59,7 +59,7 @@ def test_feature_documentation_section():
       ':------ | :---- | :---- | :---- | :---------- | :----------',
       ' | FeaturesDict |  |  | My test features | ',
       'a | Scalar |  | int64 | a feature | From 1 to 10',
-      'b | Text |  | object | Some text | ',
+      'b | Text |  | string | Some text | ',
       'c | Image | (None, None, 1) | uint8 |  | ',
       'd | Tensor |  | int64 |  | ',
       'e | Sequence(Tensor) | (None,) | float32 | Floats | ',
@@ -69,7 +69,7 @@ def test_feature_documentation_section():
       'g/b | Scalar |  | int64 | b | ',
       'h | Dataset |  |  | Dataset of something | ',
       'h/a | Tensor |  | float32 |  | ',
-      'h/b | Text |  | object | Nested text | ',
+      'h/b | Text |  | string | Nested text | ',
   ])
 
 
@@ -90,7 +90,7 @@ def test_feature_documentation_section_missing_value_range():
       ':------ | :---- | :---- | :---- | :----------',
       ' | FeaturesDict |  |  | My test features',
       'a | Scalar |  | int64 | a feature',
-      'b | Text |  | object | Some text',
+      'b | Text |  | string | Some text',
   ])
 
 
