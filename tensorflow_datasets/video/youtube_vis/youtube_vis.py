@@ -419,13 +419,13 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
                 'category':
                     tfds.features.ClassLabel(names_file=names_file),
                 'is_crowd':
-                    tf.bool,
+                    np.bool_,
                 'areas':
-                    tfds.features.Sequence(tf.float32),
+                    tfds.features.Sequence(np.float32),
                 # Labels do not occur for all frames. This indicates the
                 # indices of the frames that have labels.
                 'frames':
-                    tfds.features.Sequence(tf.int32)
+                    tfds.features.Sequence(np.int32)
             })
     }
     return tfds.core.DatasetInfo(

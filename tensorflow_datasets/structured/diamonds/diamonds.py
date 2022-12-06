@@ -21,6 +21,7 @@ import collections
 from typing import Dict
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -90,7 +91,7 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'features': {k: v for k, v in _features().items()},
-            'price': tf.float32,
+            'price': np.float32,
         }),
         supervised_keys=('features', 'price'),
         homepage='https://ggplot2.tidyverse.org/reference/diamonds.html',

@@ -21,7 +21,7 @@ import json
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -68,12 +68,12 @@ class Dart(tfds.core.GeneratorBasedBuilder):
                 'table':  # Each row will be one triple fact.
                     tfds.features.Sequence({
                         # we'll only have subject/predicate/object headers
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
+                        'column_header': np.str_,
+                        'row_number': np.int16,
+                        'content': np.str_,
                     }),
             },
-            'target_text': tf.string,
+            'target_text': np.str_,
         }),
         supervised_keys=('input_text', 'target_text'),
         # Homepage of the dataset for documentation

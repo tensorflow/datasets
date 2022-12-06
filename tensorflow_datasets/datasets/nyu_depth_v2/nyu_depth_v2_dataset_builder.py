@@ -33,7 +33,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(480, 640, 3)),
-            'depth': tfds.features.Tensor(shape=(480, 640), dtype=tf.float16),
+            'depth': tfds.features.Tensor(shape=(480, 640), dtype=np.float16),
         }),
         supervised_keys=('image', 'depth'),
         homepage='https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html',

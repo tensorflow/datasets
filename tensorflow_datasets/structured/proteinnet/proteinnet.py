@@ -154,13 +154,13 @@ class ProteinNet(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Sequence(
                     tfds.features.ClassLabel(names=self.AMINOACIDS)),
             'evolutionary':
-                tfds.features.Tensor(shape=(None, 21), dtype=tf.float32),
+                tfds.features.Tensor(shape=(None, 21), dtype=np.float32),
             'tertiary':
-                tfds.features.Tensor(shape=(None, 3), dtype=tf.float32),
+                tfds.features.Tensor(shape=(None, 3), dtype=np.float32),
             'mask':
-                tfds.features.Tensor(shape=(None,), dtype=tf.bool),
+                tfds.features.Tensor(shape=(None,), dtype=np.bool_),
             'length':
-                tfds.features.Tensor(shape=(), dtype=tf.int32),
+                tfds.features.Tensor(shape=(), dtype=np.int32),
         }),
         supervised_keys=('primary', 'tertiary'),
         homepage=_PROTEINNET_HOMEPAGE,

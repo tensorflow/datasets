@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import csv
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -91,28 +91,28 @@ class Simpte(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'y': tf.int32,
-            'treat': tf.int32,
-            'X1': tf.float32,
-            'X2': tf.float32,
-            'X3': tf.float32,
-            'X4': tf.float32,
-            'X5': tf.float32,
-            'X6': tf.float32,
-            'X7': tf.float32,
-            'X8': tf.float32,
-            'X9': tf.float32,
-            'X10': tf.float32,
-            'X11': tf.float32,
-            'X12': tf.float32,
-            'X13': tf.float32,
-            'X14': tf.float32,
-            'X15': tf.float32,
-            'X16': tf.float32,
-            'X17': tf.float32,
-            'X18': tf.float32,
-            'X19': tf.float32,
-            'X20': tf.float32,
+            'y': np.int32,
+            'treat': np.int32,
+            'X1': np.float32,
+            'X2': np.float32,
+            'X3': np.float32,
+            'X4': np.float32,
+            'X5': np.float32,
+            'X6': np.float32,
+            'X7': np.float32,
+            'X8': np.float32,
+            'X9': np.float32,
+            'X10': np.float32,
+            'X11': np.float32,
+            'X12': np.float32,
+            'X13': np.float32,
+            'X14': np.float32,
+            'X15': np.float32,
+            'X16': np.float32,
+            'X17': np.float32,
+            'X18': np.float32,
+            'X19': np.float32,
+            'X20': np.float32,
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if

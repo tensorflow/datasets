@@ -21,7 +21,7 @@ import json
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 
@@ -38,12 +38,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'qid': tfds.features.Text(),
-            'gold_index': tf.int32,
+            'gold_index': np.int32,
             'context': tfds.features.Text(),
             'question': tfds.features.Text(),
             'reference': tfds.features.Text(),
             'candidate': tfds.features.Text(),
-            'score': tf.float32,
+            'score': np.float32,
             'question_1': tfds.features.ClassLabel(names=['no', 'yes', 'null']),
             'question_2': tfds.features.ClassLabel(names=['no', 'yes', 'null']),
             'question_3': tfds.features.ClassLabel(names=['no', 'yes', 'null']),

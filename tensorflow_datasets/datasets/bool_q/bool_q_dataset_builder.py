@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _HOMEPAGE_URL = "https://github.com/google-research-datasets/boolean-questions"
@@ -39,7 +39,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "question": tfds.features.Text(),
             "passage": tfds.features.Text(),
-            "answer": tf.bool,
+            "answer": np.bool_,
             "title": tfds.features.Text(),
         }),
         homepage=_HOMEPAGE_URL,

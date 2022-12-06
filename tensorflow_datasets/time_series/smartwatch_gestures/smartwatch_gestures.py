@@ -17,7 +17,7 @@
 
 from __future__ import annotations
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -62,17 +62,17 @@ class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'features':
                 tfds.features.Sequence({
-                    'time_millis': tf.uint64,
-                    'time_nanos': tf.uint64,
-                    'time_event': tf.uint64,
-                    'accel_x': tf.float64,
-                    'accel_y': tf.float64,
-                    'accel_z': tf.float64,
+                    'time_millis': np.uint64,
+                    'time_nanos': np.uint64,
+                    'time_event': np.uint64,
+                    'accel_x': np.float64,
+                    'accel_y': np.float64,
+                    'accel_z': np.float64,
                 }),
             'participant':
-                tf.uint8,
+                np.uint8,
             'attempt':
-                tf.uint8,
+                np.uint8,
             'gesture':
                 class_label
         }),

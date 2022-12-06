@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import csv
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -56,18 +56,18 @@ class Hillstrom(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             # These are the features of your dataset like images, labels ...
-            'history': tf.float32,
+            'history': np.float32,
             'zip_code': tfds.features.Text(),
             'segment': tfds.features.Text(),
-            'recency': tf.int64,
+            'recency': np.int64,
             'history_segment': tfds.features.Text(),
-            'mens': tf.int64,
-            'womens': tf.int64,
-            'newbie': tf.int64,
+            'mens': np.int64,
+            'womens': np.int64,
+            'newbie': np.int64,
             'channel': tfds.features.Text(),
-            'visit': tf.int64,
-            'conversion': tf.int64,
-            'spend': tf.float32
+            'visit': np.int64,
+            'conversion': np.int64,
+            'spend': np.float32
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if

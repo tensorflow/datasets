@@ -20,7 +20,6 @@ import random
 
 import numpy as np
 import six
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = ("https://github.com/deepmind/abstract-reasoning-matrices")
@@ -154,9 +153,9 @@ class Builder(tfds.core.BeamBasedBuilder):
             "target":
                 tfds.features.ClassLabel(num_classes=8),
             "meta_target":
-                tfds.features.Tensor(shape=[12], dtype=tf.int64),
+                tfds.features.Tensor(shape=[12], dtype=np.int64),
             "relation_structure_encoded":
-                tfds.features.Tensor(shape=[4, 12], dtype=tf.int64),
+                tfds.features.Tensor(shape=[4, 12], dtype=np.int64),
             "filename":
                 tfds.features.Text(),
         }),

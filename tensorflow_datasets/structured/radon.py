@@ -104,7 +104,7 @@ class Radon(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'activity': tf.float32,
+            'activity': np.float32,
             'features': {
                 name: dtype for name, (dtype, _) in features().items()
             }

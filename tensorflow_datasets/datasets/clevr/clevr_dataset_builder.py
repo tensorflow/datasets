@@ -20,6 +20,7 @@ import json
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -59,11 +60,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "size":
                     tfds.features.ClassLabel(names=["small", "large"]),
                 "rotation":
-                    tfds.features.Tensor(shape=(), dtype=tf.float32),
+                    tfds.features.Tensor(shape=(), dtype=np.float32),
                 "3d_coords":
-                    tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+                    tfds.features.Tensor(shape=(3,), dtype=np.float32),
                 "pixel_coords":
-                    tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+                    tfds.features.Tensor(shape=(3,), dtype=np.float32),
             })
     }
     if self.version > "3.0.0":

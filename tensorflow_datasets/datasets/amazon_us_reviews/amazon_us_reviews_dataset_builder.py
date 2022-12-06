@@ -19,7 +19,7 @@ import collections
 import csv
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DATA_OPTIONS_V1_00 = [
@@ -93,16 +93,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "data":
                 collections.OrderedDict([
-                    ("marketplace", tf.string), ("customer_id", tf.string),
-                    ("review_id", tf.string), ("product_id", tf.string),
-                    ("product_parent", tf.string), ("product_title", tf.string),
-                    ("product_category", tf.string), ("star_rating", tf.int32),
-                    ("helpful_votes", tf.int32), ("total_votes", tf.int32),
+                    ("marketplace", np.str_), ("customer_id", np.str_),
+                    ("review_id", np.str_), ("product_id", np.str_),
+                    ("product_parent", np.str_), ("product_title", np.str_),
+                    ("product_category", np.str_), ("star_rating", np.int32),
+                    ("helpful_votes", np.int32), ("total_votes", np.int32),
                     ("vine", tfds.features.ClassLabel(names=["Y", "N"])),
                     ("verified_purchase",
                      tfds.features.ClassLabel(names=["Y", "N"])),
-                    ("review_headline", tf.string), ("review_body", tf.string),
-                    ("review_date", tf.string)
+                    ("review_headline", np.str_), ("review_body", np.str_),
+                    ("review_date", np.str_)
                 ])
         }),
         supervised_keys=None,

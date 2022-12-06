@@ -30,7 +30,6 @@ from typing import List
 from absl import logging
 from etils import epath
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -221,14 +220,14 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Sequence({
                     'label': all_class_label,
                     # Original data is 0, .1, ..., 1. We use 0, 1, 2, ..., 10.
-                    'confidence': tf.int32,
+                    'confidence': np.int32,
                     'source': source_class_label,
                 }),
             'objects_trainable':
                 tfds.features.Sequence({
                     'label': trainable_class_label,
                     # Original data is 0, .1, ..., 1. We use 0, 1, 2, ..., 10.
-                    'confidence': tf.int32,
+                    'confidence': np.int32,
                     'source': source_class_label,
                 }),
             'bobjects':
@@ -238,11 +237,11 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
                     'bbox': tfds.features.BBoxFeature(),
                     # Following values can be:
                     # 1 (true), 0 (false) and -1 (unknown).
-                    'is_occluded': tf.int8,
-                    'is_truncated': tf.int8,
-                    'is_group_of': tf.int8,
-                    'is_depiction': tf.int8,
-                    'is_inside': tf.int8,
+                    'is_occluded': np.int8,
+                    'is_truncated': np.int8,
+                    'is_group_of': np.int8,
+                    'is_depiction': np.int8,
+                    'is_inside': np.int8,
                 }),
         }),
         homepage='https://storage.googleapis.com/openimages/web/index.html',

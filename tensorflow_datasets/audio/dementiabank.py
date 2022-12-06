@@ -135,7 +135,7 @@ class Dementiabank(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='mp3', sample_rate=44100),
             'label': tfds.features.ClassLabel(names=['dementia', 'control']),
-            'speaker_id': tf.string,
+            'speaker_id': np.str_,
         }),
         supervised_keys=('audio', 'label'),
         homepage='https://dementia.talkbank.org/',

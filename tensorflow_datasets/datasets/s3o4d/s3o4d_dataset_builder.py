@@ -36,9 +36,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
             'label': tfds.features.ClassLabel(names=['bunny', 'dragon']),
-            'illumination': tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-            'pose_quat': tfds.features.Tensor(shape=(4,), dtype=tf.float32),
-            'pose_mat': tfds.features.Tensor(shape=(3, 3), dtype=tf.float32),
+            'illumination': tfds.features.Tensor(shape=(3,), dtype=np.float32),
+            'pose_quat': tfds.features.Tensor(shape=(4,), dtype=np.float32),
+            'pose_mat': tfds.features.Tensor(shape=(3, 3), dtype=np.float32),
         }),
         supervised_keys=None,
         homepage='https://github.com/deepmind/deepmind-research/tree/master/geomancer#stanford-3d-objects-for-disentangling-s3o4d',

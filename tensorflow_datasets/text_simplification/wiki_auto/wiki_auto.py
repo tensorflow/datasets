@@ -16,6 +16,7 @@
 """wiki_auto dataset for text simplification."""
 import json
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -133,7 +134,7 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
           'simple_sentence':
               tfds.features.Text(),
           'GLEU-score':
-              tf.float64,
+              np.float64,
       })
     elif (self.builder_config.name == 'auto_acl' or
           self.builder_config.name == 'auto_full_no_split' or
@@ -148,7 +149,7 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
               tfds.features.Text(),
           'normal': {
               'normal_article_id':
-                  tf.int32,
+                  np.int32,
               'normal_article_title':
                   tfds.features.Text(),
               'normal_article_url':
@@ -161,7 +162,7 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
           },
           'simple': {
               'simple_article_id':
-                  tf.int32,
+                  np.int32,
               'simple_article_title':
                   tfds.features.Text(),
               'simple_article_url':

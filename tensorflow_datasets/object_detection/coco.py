@@ -23,6 +23,7 @@ import os
 
 from absl import logging
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -187,29 +188,29 @@ class Coco(tfds.core.GeneratorBasedBuilder):
               tfds.features.Text(),
           'panoptic_objects':
               tfds.features.Sequence({
-                  'id': tf.int64,
+                  'id': np.int64,
                   # Coco has unique id for each annotation. The id can be used
                   # for mapping panoptic image to semantic segmentation label.
-                  'area': tf.int64,
+                  'area': np.int64,
                   'bbox': tfds.features.BBoxFeature(),
                   # Coco2017 has 200 categories but only 133 are present in the
                   # dataset
                   'label': tfds.features.ClassLabel(num_classes=133),
-                  'is_crowd': tf.bool,
+                  'is_crowd': np.bool_,
               }),
       })
     else:
       features.update({
           'objects':
               tfds.features.Sequence({
-                  'id': tf.int64,
+                  'id': np.int64,
                   # Coco has unique id for each annotation. The id can be used
                   # for mapping panoptic image to semantic segmentation label.
-                  'area': tf.int64,
+                  'area': np.int64,
                   'bbox': tfds.features.BBoxFeature(),
                   # Coco has 91 categories but only 80 appear in the dataset
                   'label': tfds.features.ClassLabel(num_classes=80),
-                  'is_crowd': tf.bool,
+                  'is_crowd': np.bool_,
               }),
       })
     # More info could be added, like segmentation (as png mask), captions,

@@ -17,6 +17,7 @@
 
 import csv
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -84,14 +85,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           'simplification':
               tfds.features.Text(),
           'original_sentence_id':
-              tf.int32,
+              np.int32,
           'aspect':
               tfds.features.ClassLabel(
                   names=['meaning', 'fluency', 'simplicity']),
           'worker_id':
-              tf.int32,
+              np.int32,
           'rating':
-              tf.int32,
+              np.int32,
       })
 
     return self.dataset_info_from_configs(

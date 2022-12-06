@@ -21,7 +21,7 @@ import json
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -64,7 +64,7 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
             'context': tfds.features.Text(),
             'endings': tfds.features.Sequence(tfds.features.Text()),
             'activity_label': tfds.features.Text(),
-            'label': tf.int32,
+            'label': np.int32,
             'split_type': tfds.features.Text(),
             'source_id': tfds.features.Text(),
         }),

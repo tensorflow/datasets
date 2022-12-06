@@ -23,7 +23,7 @@ import json
 import textwrap
 
 from etils import epath
-import tensorflow.compat.v2 as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -140,40 +140,40 @@ class MRQA(tfds.core.GeneratorBasedBuilder):
   }
   DEFAULT_FEATURES = tfds.features.FeaturesDict({
       'subset':
-          tf.string,
+          np.str_,
       'context':
-          tf.string,
+          np.str_,
       'context_tokens':
           tfds.features.Sequence({
-              'tokens': tf.string,
-              'offsets': tf.int32,
+              'tokens': np.str_,
+              'offsets': np.int32,
           }),
       'qid':
-          tf.string,
+          np.str_,
       'question':
-          tf.string,
+          np.str_,
       'question_tokens':
           tfds.features.Sequence({
-              'tokens': tf.string,
-              'offsets': tf.int32,
+              'tokens': np.str_,
+              'offsets': np.int32,
           }),
       'detected_answers':
           tfds.features.Sequence({
               'text':
-                  tf.string,
+                  np.str_,
               'char_spans':
                   tfds.features.Sequence({
-                      'start': tf.int32,
-                      'end': tf.int32,
+                      'start': np.int32,
+                      'end': np.int32,
                   }),
               'token_spans':
                   tfds.features.Sequence({
-                      'start': tf.int32,
-                      'end': tf.int32,
+                      'start': np.int32,
+                      'end': np.int32,
                   }),
           }),
       'answers':
-          tfds.features.Sequence(tf.string),
+          tfds.features.Sequence(np.str_),
   })
   BUILDER_CONFIGS = [
       MRQAConfig(

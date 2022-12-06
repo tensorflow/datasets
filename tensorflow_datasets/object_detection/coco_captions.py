@@ -23,7 +23,7 @@ import os
 
 from absl import logging
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 from tensorflow_datasets.object_detection import coco
 import tensorflow_datasets.public_api as tfds
 
@@ -66,8 +66,8 @@ class CocoCaptions(coco.Coco):
 
     features = dict(coco_info.features)
     features['captions'] = tfds.features.Sequence({
-        'text': tf.string,
-        'id': tf.int64,
+        'text': np.str_,
+        'id': np.int64,
     })
     return tfds.core.DatasetInfo(
         builder=self,

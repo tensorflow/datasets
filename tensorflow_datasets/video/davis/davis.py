@@ -116,8 +116,8 @@ class Davis(tfds.core.GeneratorBasedBuilder):
                         ),
                 }),
             'metadata': {
-                'num_frames': tf.int64,
-                'video_name': tf.string,
+                'num_frames': np.int64,
+                'video_name': np.str_,
             },
         }),
         supervised_keys=None,

@@ -20,6 +20,7 @@ from __future__ import annotations
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -71,7 +72,7 @@ class PetFinder(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),
             "PetID": tfds.features.Text(),
-            "attributes": {name: tf.int64 for name in _INT_FEATS},
+            "attributes": {name: np.int64 for name in _INT_FEATS},
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
         supervised_keys=("attributes", "label"),

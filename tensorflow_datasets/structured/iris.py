@@ -15,6 +15,7 @@
 
 """Iris dataset."""
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -55,7 +56,7 @@ class Iris(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             "features":
-                tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(4,), dtype=np.float32),
             # Here, labels can be one of 3 classes
             "label":
                 tfds.features.ClassLabel(

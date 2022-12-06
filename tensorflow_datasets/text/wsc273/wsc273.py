@@ -17,7 +17,7 @@
 
 from __future__ import annotations
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -58,11 +58,11 @@ class Wsc273(tfds.core.GeneratorBasedBuilder):
             "option1_normalized": tfds.features.Text(),
             "option2": tfds.features.Text(),
             "option2_normalized": tfds.features.Text(),
-            "pronoun_start": tf.int32,
-            "pronoun_end": tf.int32,
+            "pronoun_start": np.int32,
+            "pronoun_end": np.int32,
             "pronoun_text": tfds.features.Text(),
-            "label": tf.int32,
-            "idx": tf.int32,
+            "label": np.int32,
+            "idx": np.int32,
         }),
         homepage=_HOMEPAGE_URL,
         citation=_CITATION,

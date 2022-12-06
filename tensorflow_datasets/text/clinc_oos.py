@@ -21,7 +21,7 @@ import csv
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DOWNLOAD_URL = 'https://github.com/jereliu/datasets/raw/master/clinc_oos.zip'
@@ -81,8 +81,8 @@ class ClincOOS(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'text': tfds.features.Text(),
-            'intent': tf.int32,
-            'domain': tf.int32,
+            'intent': np.int32,
+            'domain': np.int32,
             'intent_name': tfds.features.Text(),
             'domain_name': tfds.features.Text()
         }),

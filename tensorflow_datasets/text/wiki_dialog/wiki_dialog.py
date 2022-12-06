@@ -19,7 +19,7 @@ import json
 import os
 from typing import Any, Dict, Sequence, Tuple
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -99,7 +99,7 @@ class WikiDialog(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Sequence(tfds.features.Text()),
             'author_num':
                 tfds.features.Sequence(
-                    tfds.features.Tensor(shape=[], dtype=tf.int32)),
+                    tfds.features.Tensor(shape=[], dtype=np.int32)),
         }),
         citation=_CITATION,
         homepage='https://github.com/google-research/dialog-inpainting#wikidialog-oq',

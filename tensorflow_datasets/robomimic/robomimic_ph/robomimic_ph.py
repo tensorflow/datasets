@@ -20,6 +20,7 @@ from __future__ import annotations
 import dataclasses
 
 import h5py
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.robomimic import dataset_utils
@@ -111,12 +112,12 @@ def _builder_configs():
 
 def _float_tensor_feature(size: int) -> tfds.features.Tensor:
   return tfds.features.Tensor(
-      shape=(size,), dtype=tf.float64, encoding=tfds.features.Encoding.ZLIB)
+      shape=(size,), dtype=np.float64, encoding=tfds.features.Encoding.ZLIB)
 
 
 def _image_feature(size: int) -> tfds.features.Image:
   return tfds.features.Image(
-      shape=(size, size, 3), dtype=tf.uint8, encoding_format='png')
+      shape=(size, size, 3), dtype=np.uint8, encoding_format='png')
 
 
 class RobomimicPh(tfds.core.GeneratorBasedBuilder):
@@ -202,18 +203,18 @@ class RobomimicPh(tfds.core.GeneratorBasedBuilder):
 
     features = tfds.features.FeaturesDict({
         'horizon':
-            tf.int32,
+            np.int32,
         'episode_id':
-            tf.string,
+            np.str_,
         'steps':
             tfds.features.Dataset({
                 'action': _float_tensor_feature(action_size),
                 'observation': observation,
-                'reward': tf.float64,
-                'is_first': tf.bool,
-                'is_last': tf.bool,
-                'is_terminal': tf.bool,
-                'discount': tf.int32,
+                'reward': np.float64,
+                'is_first': np.bool_,
+                'is_last': np.bool_,
+                'is_terminal': np.bool_,
+                'discount': np.int32,
                 'states': _float_tensor_feature(states_dim),
             }),
         **episode_metadata,

@@ -26,7 +26,7 @@ from __future__ import annotations
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = ("https://drive.google.com/uc?export=download&"
@@ -72,9 +72,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "image":
                 tfds.features.Image(
                     shape=(218, 178, 3), encoding_format="jpeg"),
-            "landmarks": {name: tf.int64 for name in LANDMARK_HEADINGS},
+            "landmarks": {name: np.int64 for name in LANDMARK_HEADINGS},
             # Attributes could be some special MultiLabel FeatureConnector
-            "attributes": {name: tf.bool for name in ATTR_HEADINGS},
+            "attributes": {name: np.bool_ for name in ATTR_HEADINGS},
         }),
         homepage="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
     )

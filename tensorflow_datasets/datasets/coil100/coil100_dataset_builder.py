@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -55,7 +56,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "angle_label": tfds.features.ClassLabel(names=_ANGLE_LABELS),
             "object_id": tfds.features.ClassLabel(names=_OBJECT_IDS),
-            "angle": tf.int64,
+            "angle": np.int64,
         }),
         supervised_keys=("image", "angle_label"),
         homepage="http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php",

@@ -34,9 +34,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Image(
                     shape=(450, 450, 3), encoding_format="jpeg"),
             "landmarks_68_3d_xy_normalized":
-                tfds.features.Tensor(shape=(68, 2), dtype=tf.float32),
+                tfds.features.Tensor(shape=(68, 2), dtype=np.float32),
             "landmarks_68_3d_z":
-                tfds.features.Tensor(shape=(68, 1), dtype=tf.float32),
+                tfds.features.Tensor(shape=(68, 1), dtype=np.float32),
         }),
         homepage="http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm",
     )

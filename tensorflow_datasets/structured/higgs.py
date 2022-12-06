@@ -20,7 +20,7 @@ from __future__ import annotations
 import csv
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 # From https://arxiv.org/abs/1402.4735
@@ -69,37 +69,37 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'class_label': tf.float32,  # 1 for signal, 0 for background
+            'class_label': np.float32,  # 1 for signal, 0 for background
             # 21 low-level features
-            'lepton_pT': tf.float64,
-            'lepton_eta': tf.float64,
-            'lepton_phi': tf.float64,
-            'missing_energy_magnitude': tf.float64,
-            'missing_energy_phi': tf.float64,
-            'jet_1_pt': tf.float64,
-            'jet_1_eta': tf.float64,
-            'jet_1_phi': tf.float64,
-            'jet_1_b-tag': tf.float64,
-            'jet_2_pt': tf.float64,
-            'jet_2_eta': tf.float64,
-            'jet_2_phi': tf.float64,
-            'jet_2_b-tag': tf.float64,
-            'jet_3_pt': tf.float64,
-            'jet_3_eta': tf.float64,
-            'jet_3_phi': tf.float64,
-            'jet_3_b-tag': tf.float64,
-            'jet_4_pt': tf.float64,
-            'jet_4_eta': tf.float64,
-            'jet_4_phi': tf.float64,
-            'jet_4_b-tag': tf.float64,
+            'lepton_pT': np.float64,
+            'lepton_eta': np.float64,
+            'lepton_phi': np.float64,
+            'missing_energy_magnitude': np.float64,
+            'missing_energy_phi': np.float64,
+            'jet_1_pt': np.float64,
+            'jet_1_eta': np.float64,
+            'jet_1_phi': np.float64,
+            'jet_1_b-tag': np.float64,
+            'jet_2_pt': np.float64,
+            'jet_2_eta': np.float64,
+            'jet_2_phi': np.float64,
+            'jet_2_b-tag': np.float64,
+            'jet_3_pt': np.float64,
+            'jet_3_eta': np.float64,
+            'jet_3_phi': np.float64,
+            'jet_3_b-tag': np.float64,
+            'jet_4_pt': np.float64,
+            'jet_4_eta': np.float64,
+            'jet_4_phi': np.float64,
+            'jet_4_b-tag': np.float64,
             # 7 high-level features
-            'm_jj': tf.float64,
-            'm_jjj': tf.float64,
-            'm_lv': tf.float64,
-            'm_jlv': tf.float64,
-            'm_bb': tf.float64,
-            'm_wbb': tf.float64,
-            'm_wwbb': tf.float64
+            'm_jj': np.float64,
+            'm_jjj': np.float64,
+            'm_lv': np.float64,
+            'm_jlv': np.float64,
+            'm_bb': np.float64,
+            'm_wbb': np.float64,
+            'm_wwbb': np.float64
         }),
         supervised_keys=None,
         homepage='https://archive.ics.uci.edu/ml/datasets/HIGGS',

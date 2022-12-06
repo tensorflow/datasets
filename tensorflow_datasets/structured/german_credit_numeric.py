@@ -16,7 +16,7 @@
 """German Credit (numeric) dataset."""
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data-numeric"
@@ -49,7 +49,7 @@ class GermanCreditNumeric(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "features": tfds.features.Tensor(shape=(24,), dtype=tf.int32),
+            "features": tfds.features.Tensor(shape=(24,), dtype=np.int32),
             "label": tfds.features.ClassLabel(names=["Bad", "Good"]),
         }),
         supervised_keys=("features", "label"),

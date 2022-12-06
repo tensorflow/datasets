@@ -285,9 +285,9 @@ class Tao(tfds.core.BeamBasedBuilder):
             'video_name':
                 tf.string,
             'neg_category_ids':
-                tfds.features.Tensor(shape=(None,), dtype=tf.int32),
+                tfds.features.Tensor(shape=(None,), dtype=np.int32),
             'not_exhaustive_category_ids':
-                tfds.features.Tensor(shape=(None,), dtype=tf.int32),
+                tfds.features.Tensor(shape=(None,), dtype=np.int32),
             'dataset':
                 tf.string,
         },
@@ -295,12 +295,12 @@ class Tao(tfds.core.BeamBasedBuilder):
             tfds.features.Sequence({
                 'bboxes': tfds.features.Sequence(tfds.features.BBoxFeature()),
                 'category': tfds.features.ClassLabel(names_file=names_file),
-                'is_crowd': tf.bool,
-                'track_id': tf.int32,
-                'scale_category': tf.string,
+                'is_crowd': np.bool_,
+                'track_id': np.int32,
+                'scale_category': np.str_,
                 # Labels do not occur for all frames. This indicates the
                 # indices of the frames that have labels.
-                'frames': tfds.features.Sequence(tf.int32)
+                'frames': tfds.features.Sequence(np.int32)
             }),
     }
 

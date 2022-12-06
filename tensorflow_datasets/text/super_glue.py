@@ -21,6 +21,7 @@ import json
 import os
 
 from etils import epath
+import numpy as np
 import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -444,14 +445,14 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
       features["end2"] = tf.int32
     if self.builder_config.name == "multirc":
       features["idx"] = tfds.features.FeaturesDict({
-          "paragraph": tf.int32,
-          "question": tf.int32,
-          "answer": tf.int32,
+          "paragraph": np.int32,
+          "question": np.int32,
+          "answer": np.int32,
       })
     elif self.builder_config.name == "record":
       features["idx"] = tfds.features.FeaturesDict({
-          "passage": tf.int32,
-          "query": tf.int32,
+          "passage": np.int32,
+          "query": np.int32,
       })
     else:
       features["idx"] = tf.int32

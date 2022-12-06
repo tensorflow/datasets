@@ -18,6 +18,7 @@
 import dataclasses
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.image_classification.siscore import siscore_labels
 import tensorflow_datasets.public_api as tfds
@@ -89,7 +90,7 @@ class Siscore(tfds.core.GeneratorBasedBuilder):
         builder=self,
         features=tfds.features.FeaturesDict({
             "image_id":
-                tf.int64,
+                np.int64,
             "image":
                 tfds.features.Image(),
             # ImageNet label space

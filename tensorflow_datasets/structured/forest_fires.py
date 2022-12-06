@@ -21,6 +21,7 @@ import collections
 import csv
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -128,7 +129,7 @@ class ForestFires(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'area': tf.float32,
+            'area': np.float32,
             'features': {name: dtype for name, dtype in features().items()}
         }),
         supervised_keys=('area', 'features'),

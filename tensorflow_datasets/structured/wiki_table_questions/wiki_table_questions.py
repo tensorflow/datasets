@@ -21,7 +21,7 @@ import csv
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -75,15 +75,15 @@ class WikiTableQuestions(tfds.core.GeneratorBasedBuilder):
             'input_text': {
                 'table':
                     tfds.features.Sequence({
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
+                        'column_header': np.str_,
+                        'row_number': np.int16,
+                        'content': np.str_,
                     }),
                 # Here the context corresponds to the question.
                 'context':
-                    tf.string,
+                    np.str_,
             },
-            'target_text': tf.string,
+            'target_text': np.str_,
         }),
         supervised_keys=('input_text', 'target_text'),
         homepage='https://ppasupat.github.io/WikiTableQuestions/#usage-notes',

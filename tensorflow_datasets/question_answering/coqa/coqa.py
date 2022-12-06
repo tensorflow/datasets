@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -62,8 +63,8 @@ class Coqa(tfds.core.GeneratorBasedBuilder):
             "answers":
                 tfds.features.Sequence({
                     "input_text": tfds.features.Text(),
-                    "answer_start": tf.int32,
-                    "answer_end": tf.int32,
+                    "answer_start": np.int32,
+                    "answer_end": np.int32,
                 }),
         }),
         supervised_keys=None,

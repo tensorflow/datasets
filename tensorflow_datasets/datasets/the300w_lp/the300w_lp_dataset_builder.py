@@ -38,25 +38,25 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Image(
                     shape=(450, 450, 3), encoding_format="jpeg"),
             "landmarks_origin":
-                tfds.features.Tensor(shape=(68, 2), dtype=tf.float32),
+                tfds.features.Tensor(shape=(68, 2), dtype=np.float32),
             "landmarks_2d":
-                tfds.features.Tensor(shape=(68, 2), dtype=tf.float32),
+                tfds.features.Tensor(shape=(68, 2), dtype=np.float32),
             "landmarks_3d":
-                tfds.features.Tensor(shape=(68, 2), dtype=tf.float32),
+                tfds.features.Tensor(shape=(68, 2), dtype=np.float32),
             "roi":
-                tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(4,), dtype=np.float32),
             "illum_params":
-                tfds.features.Tensor(shape=(10,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(10,), dtype=np.float32),
             "color_params":
-                tfds.features.Tensor(shape=(7,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(7,), dtype=np.float32),
             "tex_params":
-                tfds.features.Tensor(shape=(199,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(199,), dtype=np.float32),
             "shape_params":
-                tfds.features.Tensor(shape=(199,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(199,), dtype=np.float32),
             "exp_params":
-                tfds.features.Tensor(shape=(29,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(29,), dtype=np.float32),
             "pose_params":
-                tfds.features.Tensor(shape=(7,), dtype=tf.float32)
+                tfds.features.Tensor(shape=(7,), dtype=np.float32)
         }),
         homepage=_PROJECT_URL,
     )

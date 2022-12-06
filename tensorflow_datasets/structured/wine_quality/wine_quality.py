@@ -20,6 +20,7 @@ from __future__ import annotations
 import csv
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -120,7 +121,7 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "quality": tf.int32,
+            "quality": np.int32,
             "features": features_dict,
         }),
         supervised_keys=("features", "quality"),
