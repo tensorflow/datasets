@@ -19,6 +19,7 @@ import json
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -63,19 +64,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Sequence({
                     "input":
                         tfds.features.Sequence(
-                            tfds.features.Sequence(tf.int32)),
+                            tfds.features.Sequence(np.int32)),
                     "output":
                         tfds.features.Sequence(
-                            tfds.features.Sequence(tf.int32)),
+                            tfds.features.Sequence(np.int32)),
                 }),
             "test":
                 tfds.features.Sequence({
                     "input":
                         tfds.features.Sequence(
-                            tfds.features.Sequence(tf.int32)),
+                            tfds.features.Sequence(np.int32)),
                     "output":
                         tfds.features.Sequence(
-                            tfds.features.Sequence(tf.int32)),
+                            tfds.features.Sequence(np.int32)),
                 })
         }),
         # If there's a common (input, target) tuple from the features,

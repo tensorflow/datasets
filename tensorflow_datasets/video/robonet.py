@@ -136,10 +136,10 @@ class Robonet(tfds.core.BeamBasedBuilder):
                 encoding_format='png'),  # pytype: disable=wrong-arg-types  # gen-stub-imports
         # Robot actions: float32, [None, ACTIONS_DIM]
         'actions':
-            tfds.features.Tensor(shape=(None, ACTIONS_DIM), dtype=tf.float32),
+            tfds.features.Tensor(shape=(None, ACTIONS_DIM), dtype=np.float32),
         # Robot states: float32, [None, STATE_DIM]
         'states':
-            tfds.features.Tensor(shape=(None, STATES_DIM), dtype=tf.float32),
+            tfds.features.Tensor(shape=(None, STATES_DIM), dtype=np.float32),
         # Filename: Text
         'filename':
             tfds.features.Text()

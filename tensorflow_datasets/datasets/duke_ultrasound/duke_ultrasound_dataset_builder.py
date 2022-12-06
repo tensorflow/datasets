@@ -52,25 +52,25 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'das': {
-                'dB': tfds.features.Tensor(shape=(None,), dtype=tf.float32),
-                'real': tfds.features.Tensor(shape=(None,), dtype=tf.float32),
-                'imag': tfds.features.Tensor(shape=(None,), dtype=tf.float32)
+                'dB': tfds.features.Tensor(shape=(None,), dtype=np.float32),
+                'real': tfds.features.Tensor(shape=(None,), dtype=np.float32),
+                'imag': tfds.features.Tensor(shape=(None,), dtype=np.float32)
             },
-            'dtce': tfds.features.Tensor(shape=(None,), dtype=tf.float32),
-            'f0_hz': tfds.features.Tensor(shape=(), dtype=tf.float32),
-            'voltage': tfds.features.Tensor(shape=(), dtype=tf.float32),
-            'focus_cm': tfds.features.Tensor(shape=(), dtype=tf.float32),
-            'height': tfds.features.Tensor(shape=(), dtype=tf.uint32),
-            'width': tfds.features.Tensor(shape=(), dtype=tf.uint32),
-            'initial_radius': tfds.features.Tensor(shape=(), dtype=tf.float32),
-            'final_radius': tfds.features.Tensor(shape=(), dtype=tf.float32),
-            'initial_angle': tfds.features.Tensor(shape=(), dtype=tf.float32),
-            'final_angle': tfds.features.Tensor(shape=(), dtype=tf.float32),
-            'probe': tfds.features.Tensor(shape=(), dtype=tf.string),
-            'scanner': tfds.features.Tensor(shape=(), dtype=tf.string),
-            'target': tfds.features.Tensor(shape=(), dtype=tf.string),
-            'timestamp_id': tfds.features.Tensor(shape=(), dtype=tf.uint32),
-            'harmonic': tfds.features.Tensor(shape=(), dtype=tf.bool)
+            'dtce': tfds.features.Tensor(shape=(None,), dtype=np.float32),
+            'f0_hz': tfds.features.Tensor(shape=(), dtype=np.float32),
+            'voltage': tfds.features.Tensor(shape=(), dtype=np.float32),
+            'focus_cm': tfds.features.Tensor(shape=(), dtype=np.float32),
+            'height': tfds.features.Tensor(shape=(), dtype=np.uint32),
+            'width': tfds.features.Tensor(shape=(), dtype=np.uint32),
+            'initial_radius': tfds.features.Tensor(shape=(), dtype=np.float32),
+            'final_radius': tfds.features.Tensor(shape=(), dtype=np.float32),
+            'initial_angle': tfds.features.Tensor(shape=(), dtype=np.float32),
+            'final_angle': tfds.features.Tensor(shape=(), dtype=np.float32),
+            'probe': tfds.features.Tensor(shape=(), dtype=np.str_),
+            'scanner': tfds.features.Tensor(shape=(), dtype=np.str_),
+            'target': tfds.features.Tensor(shape=(), dtype=np.str_),
+            'timestamp_id': tfds.features.Tensor(shape=(), dtype=np.uint32),
+            'harmonic': tfds.features.Tensor(shape=(), dtype=np.bool_)
         }),
         supervised_keys=('das/dB', 'dtce'),
         homepage='https://github.com/ouwen/mimicknet')

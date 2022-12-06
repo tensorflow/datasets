@@ -73,12 +73,12 @@ class WiderFace(tfds.core.GeneratorBasedBuilder):
         'faces':
             tfds.features.Sequence({
                 'bbox': tfds.features.BBoxFeature(),
-                'blur': tf.uint8,
-                'expression': tf.bool,
-                'illumination': tf.bool,
-                'occlusion': tf.uint8,
-                'pose': tf.bool,
-                'invalid': tf.bool,
+                'blur': np.uint8,
+                'expression': np.bool_,
+                'illumination': np.bool_,
+                'occlusion': np.uint8,
+                'pose': np.bool_,
+                'invalid': np.bool_,
             }),
     }
     return tfds.core.DatasetInfo(

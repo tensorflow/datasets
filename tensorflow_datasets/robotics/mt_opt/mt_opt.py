@@ -20,6 +20,7 @@ from __future__ import annotations
 import os
 from typing import Any, Dict, Generator, Tuple
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -58,35 +59,35 @@ def _steps_features():
       'action':
           tfds.features.FeaturesDict({
               'close_gripper':
-                  tf.bool,
+                  np.bool_,
               'open_gripper':
-                  tf.bool,
+                  np.bool_,
               'target_pose':
                   tfds.features.Tensor(
                       shape=(7,),
-                      dtype=tf.float32,
+                      dtype=np.float32,
                       encoding=tfds.features.Encoding.ZLIB),
               'terminate':
-                  tf.bool,
+                  np.bool_,
           }),
       'is_first':
-          tf.bool,
+          np.bool_,
       'is_last':
-          tf.bool,
+          np.bool_,
       'is_terminal':
-          tf.bool,
+          np.bool_,
       'observation':
           tfds.features.FeaturesDict({
               'gripper_closed':
-                  tf.bool,
+                  np.bool_,
               'height_to_bottom':
-                  tf.float32,
+                  np.float32,
               'image':
-                  tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
+                  tfds.features.Image(shape=(512, 640, 3), dtype=np.uint8),
               'state_dense':
                   tfds.features.Tensor(
                       shape=(7,),
-                      dtype=tf.float32,
+                      dtype=np.float32,
                       encoding=tfds.features.Encoding.ZLIB),
           }),
   })
@@ -95,17 +96,17 @@ def _steps_features():
 def _name_to_features(config_name: str):
   if config_name == 'rlds':
     return tfds.features.FeaturesDict({
-        'episode_id': tf.string,
-        'skill': tf.uint8,
+        'episode_id': np.str_,
+        'skill': np.uint8,
         'steps': tfds.features.Dataset(_steps_features()),
-        'task_code': tf.string,
+        'task_code': np.str_,
     })
   return tfds.features.FeaturesDict({
-      'image_0': tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
-      'image_1': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
-      'image_2': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
-      'success': tf.bool,
-      'task_code': tf.string,
+      'image_0': tfds.features.Image(shape=(512, 640, 3), dtype=np.uint8),
+      'image_1': tfds.features.Image(shape=(480, 640, 3), dtype=np.uint8),
+      'image_2': tfds.features.Image(shape=(480, 640, 3), dtype=np.uint8),
+      'success': np.bool_,
+      'task_code': np.str_,
   })
 
 
@@ -114,17 +115,17 @@ def _name_to_features(config_name: str):
 def _name_to_features_encode(config_name: str):
   if config_name == 'rlds':
     return tfds.features.FeaturesDict({
-        'episode_id': tf.string,
-        'skill': tf.uint8,
+        'episode_id': np.str_,
+        'skill': np.uint8,
         'steps': tfds.features.Sequence(_steps_features()),
-        'task_code': tf.string,
+        'task_code': np.str_,
     })
   return tfds.features.FeaturesDict({
-      'image_0': tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
-      'image_1': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
-      'image_2': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
-      'success': tf.bool,
-      'task_code': tf.string,
+      'image_0': tfds.features.Image(shape=(512, 640, 3), dtype=np.uint8),
+      'image_1': tfds.features.Image(shape=(480, 640, 3), dtype=np.uint8),
+      'image_2': tfds.features.Image(shape=(480, 640, 3), dtype=np.uint8),
+      'success': np.bool_,
+      'task_code': np.str_,
   })
 
 

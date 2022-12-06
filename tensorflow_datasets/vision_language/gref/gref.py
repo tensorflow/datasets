@@ -20,7 +20,7 @@ from __future__ import annotations
 import collections
 import json
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -123,16 +123,16 @@ class Gref(tfds.core.GeneratorBasedBuilder):
             'image':
                 tfds.features.Image(encoding_format='jpeg'),
             'image/id':
-                tf.int64,
+                np.int64,
             'objects':
                 tfds.features.Sequence({
-                    'id': tf.int64,
-                    'area': tf.int64,
+                    'id': np.int64,
+                    'area': np.int64,
                     'bbox': tfds.features.BBoxFeature(),
-                    'label': tf.int64,
+                    'label': np.int64,
                     'label_name': tfds.features.ClassLabel(num_classes=80),
                     'refexp': tfds.features.Sequence({
-                        'refexp_id': tf.int64,
+                        'refexp_id': np.int64,
                         'tokens': tfds.features.Sequence(tfds.features.Text()),
                         'referent': tfds.features.Text(),
                         'raw': tfds.features.Text()}),

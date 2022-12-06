@@ -19,7 +19,7 @@ import json
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -80,23 +80,23 @@ class Scicite(tfds.core.GeneratorBasedBuilder):
             "citedPaperId":
                 tfds.features.Text(),
             "excerpt_index":
-                tf.int32,
+                np.int32,
             "isKeyCitation":
-                tf.bool,
+                np.bool_,
             "label2":
                 tfds.features.ClassLabel(names=[
                     "supportive", "not_supportive", "cant_determine", "none"
                 ]),
             "citeEnd":
-                tf.int64,
+                np.int64,
             "citeStart":
-                tf.int64,
+                np.int64,
             "source":
                 tfds.features.ClassLabel(names=_SOURCE_NAMES),
             "label_confidence":
-                tf.float32,
+                np.float32,
             "label2_confidence":
-                tf.float32,
+                np.float32,
             "id":
                 tfds.features.Text(),
         }),

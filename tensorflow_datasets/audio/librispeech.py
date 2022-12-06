@@ -20,6 +20,7 @@ from __future__ import annotations
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -67,11 +68,11 @@ class Librispeech(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "speech": tfds.features.Audio(sample_rate=16000, dtype=tf.int16),
+            "speech": tfds.features.Audio(sample_rate=16000, dtype=np.int16),
             "text": tfds.features.Text(),
-            "speaker_id": tf.int64,
-            "chapter_id": tf.int64,
-            "id": tf.string,
+            "speaker_id": np.int64,
+            "chapter_id": np.int64,
+            "id": np.str_,
         }),
         supervised_keys=("speech", "text"),
         homepage=_URL,

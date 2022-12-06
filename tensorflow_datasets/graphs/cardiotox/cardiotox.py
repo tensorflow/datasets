@@ -16,6 +16,7 @@
 """cardiotox dataset."""
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -105,23 +106,23 @@ class Cardiotox(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     features = {
         _LABEL_NAME:
-            tfds.features.Tensor(shape=[_NUM_CLASSES], dtype=tf.int64),
+            tfds.features.Tensor(shape=[_NUM_CLASSES], dtype=np.int64),
         _NODES_FEATURE_NAME:
             tfds.features.Tensor(
-                shape=[_MAX_NODES, _NODE_FEATURE_LENGTH], dtype=tf.float32),
+                shape=[_MAX_NODES, _NODE_FEATURE_LENGTH], dtype=np.float32),
         _EDGES_FEATURE_NAME:
             tfds.features.Tensor(
                 shape=[_MAX_NODES, _MAX_NODES, _EDGE_FEATURE_LENGTH],
-                dtype=tf.float32),
+                dtype=np.float32),
         _NODE_MASK_FEATURE_NAME:
-            tfds.features.Tensor(shape=[_MAX_NODES], dtype=tf.float32),
+            tfds.features.Tensor(shape=[_MAX_NODES], dtype=np.float32),
         _EDGE_MASK_FEATURE_NAME:
             tfds.features.Tensor(
-                shape=[_MAX_NODES, _MAX_NODES], dtype=tf.float32),
+                shape=[_MAX_NODES, _MAX_NODES], dtype=np.float32),
         _DISTANCE_TO_TRAIN_NAME:
-            tfds.features.Tensor(shape=[1], dtype=tf.float32),
+            tfds.features.Tensor(shape=[1], dtype=np.float32),
         _EXAMPLE_NAME:
-            tfds.features.Tensor(shape=[], dtype=tf.string),
+            tfds.features.Tensor(shape=[], dtype=np.str_),
     }
     return tfds.core.DatasetInfo(
         builder=self,

@@ -136,7 +136,7 @@ class CremaD(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='wav', sample_rate=16000),
             'label': tfds.features.ClassLabel(names=list(LABELS)),
-            'speaker_id': tf.string
+            'speaker_id': np.str_
         }),
         supervised_keys=('audio', 'label'),
         homepage=_HOMEPAGE,

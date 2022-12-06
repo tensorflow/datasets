@@ -21,6 +21,7 @@ import os
 
 from absl import logging
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -101,7 +102,7 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
                     file_format="wav",
                     shape=(160000,),
                     sample_rate=16000,
-                    dtype=tf.int16),
+                    dtype=np.int16),
             "sources":
                 tfds.features.Sequence({
                     "audio":
@@ -109,20 +110,20 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
                             file_format="wav",
                             shape=(160000,),
                             sample_rate=16000,
-                            dtype=tf.int16),
+                            dtype=np.int16),
                     "label":
                         tfds.features.ClassLabel(names=source_labels),
                 }),
             "segments":
                 tfds.features.Sequence({
-                    "start_time_seconds": tf.float32,
-                    "end_time_seconds": tf.float32,
-                    "label": tf.string
+                    "start_time_seconds": np.float32,
+                    "end_time_seconds": np.float32,
+                    "label": np.str_
                 }),
             "jams":
-                tf.string,
+                np.str_,
             "id":
-                tf.string,
+                np.str_,
         }),
         supervised_keys=("mixture_audio", "sources"),
         homepage=_URL,

@@ -17,7 +17,7 @@
 import dataclasses
 import json
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -77,11 +77,11 @@ class Quality(tfds.core.GeneratorBasedBuilder):
             tfds.features.Sequence(
                 tfds.features.Sequence(tfds.features.Text())),
         'gold_labels':
-            tfds.features.Sequence(tf.int32),  # 0, 1, 2, 3
+            tfds.features.Sequence(np.int32),  # 0, 1, 2, 3
         'writer_labels':
-            tfds.features.Sequence(tf.int32),  # 0, 1, 2, 3
+            tfds.features.Sequence(np.int32),  # 0, 1, 2, 3
         'difficults':
-            tfds.features.Sequence(tf.bool)
+            tfds.features.Sequence(np.bool_)
     }
     features_dict.update({k: tfds.features.Text() for k in _ONE2ONE_FIELDS})
     return tfds.core.DatasetInfo(

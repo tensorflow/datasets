@@ -308,7 +308,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
         'article_id': tf.int32,
     }
     if mode == 'spans':
-      features['spans'] = tfds.features.Tensor(shape=(None,), dtype=tf.int32)
+      features['spans'] = tfds.features.Tensor(shape=(None,), dtype=np.int32)
       supervised_value = 'spans'
     else:
       for label in _labels(mode):

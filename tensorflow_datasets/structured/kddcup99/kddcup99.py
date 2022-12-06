@@ -18,7 +18,7 @@
 import csv
 import gzip
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -62,7 +62,7 @@ class Kddcup99(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'duration':
-                tf.int32,
+                np.int32,
             'protocol_type':
                 tfds.features.ClassLabel(names=['icmp', 'tcp', 'udp']),
             'service':
@@ -154,79 +154,79 @@ class Kddcup99(tfds.core.GeneratorBasedBuilder):
                     'SH',
                 ]),
             'src_bytes':
-                tf.int32,
+                np.int32,
             'dst_bytes':
-                tf.int32,
+                np.int32,
             'land':
-                tf.bool,
+                np.bool_,
             'wrong_fragment':
-                tf.int32,
+                np.int32,
             'urgent':
-                tf.int32,
+                np.int32,
             'hot':
-                tf.int32,
+                np.int32,
             'num_failed_logins':
-                tf.int32,
+                np.int32,
             'logged_in':
-                tf.bool,
+                np.bool_,
             'num_compromised':
-                tf.int32,
+                np.int32,
             'root_shell':
-                tf.bool,
+                np.bool_,
             'su_attempted':
-                tf.int32,
+                np.int32,
             'num_root':
-                tf.int32,
+                np.int32,
             'num_file_creations':
-                tf.int32,
+                np.int32,
             'num_shells':
-                tf.int32,
+                np.int32,
             'num_access_files':
-                tf.int32,
+                np.int32,
             'num_outbound_cmds':
-                tf.int32,
+                np.int32,
             'is_hot_login':
-                tf.bool,
+                np.bool_,
             'is_guest_login':
-                tf.bool,
+                np.bool_,
             'count':
-                tf.int32,
+                np.int32,
             'srv_count':
-                tf.int32,
+                np.int32,
             'serror_rate':
-                tf.float32,
+                np.float32,
             'srv_serror_rate':
-                tf.float32,
+                np.float32,
             'rerror_rate':
-                tf.float32,
+                np.float32,
             'srv_rerror_rate':
-                tf.float32,
+                np.float32,
             'same_srv_rate':
-                tf.float32,
+                np.float32,
             'diff_srv_rate':
-                tf.float32,
+                np.float32,
             'srv_diff_host_rate':
-                tf.float32,
+                np.float32,
             'dst_host_count':
-                tf.int32,
+                np.int32,
             'dst_host_srv_count':
-                tf.int32,
+                np.int32,
             'dst_host_same_srv_rate':
-                tf.float32,
+                np.float32,
             'dst_host_diff_srv_rate':
-                tf.float32,
+                np.float32,
             'dst_host_same_src_port_rate':
-                tf.float32,
+                np.float32,
             'dst_host_srv_diff_host_rate':
-                tf.float32,
+                np.float32,
             'dst_host_serror_rate':
-                tf.float32,
+                np.float32,
             'dst_host_srv_serror_rate':
-                tf.float32,
+                np.float32,
             'dst_host_rerror_rate':
-                tf.float32,
+                np.float32,
             'dst_host_srv_rerror_rate':
-                tf.float32,
+                np.float32,
             'label':
                 tfds.features.ClassLabel(names=[
                     'apache2',

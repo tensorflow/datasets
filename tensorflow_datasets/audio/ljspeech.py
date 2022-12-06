@@ -20,7 +20,7 @@ from __future__ import annotations
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -60,8 +60,8 @@ class Ljspeech(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "id": tf.string,
-            "speech": tfds.features.Audio(sample_rate=22050, dtype=tf.int16),
+            "id": np.str_,
+            "speech": tfds.features.Audio(sample_rate=22050, dtype=np.int16),
             "text": tfds.features.Text(),
             "text_normalized": tfds.features.Text(),
         }),

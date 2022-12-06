@@ -17,7 +17,6 @@
 
 import numpy as np
 from six import moves
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = ("https://github.com/deepmind/dsprites-dataset/blob/master/"
@@ -43,11 +42,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         "label_orientation": tfds.features.ClassLabel(num_classes=40),
         "label_x_position": tfds.features.ClassLabel(num_classes=32),
         "label_y_position": tfds.features.ClassLabel(num_classes=32),
-        "value_shape": tfds.features.Tensor(shape=[], dtype=tf.float32),
-        "value_scale": tfds.features.Tensor(shape=[], dtype=tf.float32),
-        "value_orientation": tfds.features.Tensor(shape=[], dtype=tf.float32),
-        "value_x_position": tfds.features.Tensor(shape=[], dtype=tf.float32),
-        "value_y_position": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_shape": tfds.features.Tensor(shape=[], dtype=np.float32),
+        "value_scale": tfds.features.Tensor(shape=[], dtype=np.float32),
+        "value_orientation": tfds.features.Tensor(shape=[], dtype=np.float32),
+        "value_x_position": tfds.features.Tensor(shape=[], dtype=np.float32),
+        "value_y_position": tfds.features.Tensor(shape=[], dtype=np.float32),
     }
     if self.version > "2.0.0":
       features_dict["id"] = tfds.features.Text()

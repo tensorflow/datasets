@@ -120,7 +120,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     }
     if self.builder_config.include_audio:
       features_dict["audio"] = tfds.features.Audio(
-          dtype=tf.float32, sample_rate=self.builder_config.audio_rate)
+          dtype=np.float32, sample_rate=self.builder_config.audio_rate)
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(features_dict),
         homepage="https://g.co/magenta/groove-dataset",

@@ -20,6 +20,7 @@ from __future__ import annotations
 import dataclasses
 from typing import Any, Dict, Optional
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
@@ -184,22 +185,22 @@ class RluControlSuite(rlu_common.RLUBuilder):
                 'action':
                     tfds.features.Tensor(
                         shape=(self.builder_config.action_size,),
-                        dtype=tf.float32),
+                        dtype=np.float32),
                 'reward':
-                    tf.float32,
+                    np.float32,
                 'is_terminal':
-                    tf.bool,
+                    np.bool_,
                 'is_first':
-                    tf.bool,
+                    np.bool_,
                 'is_last':
-                    tf.bool,
+                    np.bool_,
                 'discount':
-                    tf.float32,
+                    np.float32,
             }),
         'episode_id':
-            tf.int64,
+            np.int64,
         'timestamp':
-            tf.int64
+            np.int64
     })
 
   def get_description(self):

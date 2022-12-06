@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rlds import rlds_base
@@ -81,33 +82,33 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
           name='human_dc29b40a',
           observation_info={
               'object-state':
-                  tfds.features.Tensor(shape=(14,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(14,), dtype=np.float64),
               'Can_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float64),
               'Can_to_robot0_eef_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float32),
               'robot0_joint_pos_cos':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float64),
               'robot0_gripper_qpos':
-                  tfds.features.Tensor(shape=(2,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(2,), dtype=np.float64),
               'robot0_proprio-state':
-                  tfds.features.Tensor(shape=(32,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(32,), dtype=np.float64),
               'robot0_joint_vel':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float64),
               'robot0_joint_pos_sin':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float64),
               'Can_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float64),
               'Can_to_robot0_eef_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float64),
               'robot0_gripper_qvel':
-                  tfds.features.Tensor(shape=(2,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(2,), dtype=np.float64),
               'robot0_eef_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float64),
               'robot0_eef_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float64),
           },
-          action_info=tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+          action_info=tfds.features.Tensor(shape=(7,), dtype=np.float64),
           reward_info=tf.float64,
           discount_info=tf.float64,
           episode_metadata_info={
@@ -131,51 +132,51 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
               'birdview_image':
                   tfds.features.Image(
                       shape=(256, 256, 3),
-                      dtype=tf.uint8,
+                      dtype=np.uint8,
                       encoding_format='png'),
               'object-state':
-                  tfds.features.Tensor(shape=(14,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(14,), dtype=np.float64),
               'Can_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float64),
               'Can_to_robot0_eef_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float32),
               'robot0_joint_pos_cos':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float64),
               'robot0_eye_in_hand_image':
                   tfds.features.Image(
                       shape=(256, 256, 3),
-                      dtype=tf.uint8,
+                      dtype=np.uint8,
                       encoding_format='png'),
               'robot0_gripper_qpos':
-                  tfds.features.Tensor(shape=(2,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(2,), dtype=np.float64),
               'robot0_proprio-state':
-                  tfds.features.Tensor(shape=(32,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(32,), dtype=np.float64),
               'robot0_robotview_image':
                   tfds.features.Image(
                       shape=(256, 256, 3),
-                      dtype=tf.uint8,
+                      dtype=np.uint8,
                       encoding_format='png'),
               'robot0_joint_vel':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float64),
               'robot0_joint_pos_sin':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float64),
               'agentview_image':
                   tfds.features.Image(
                       shape=(256, 256, 3),
-                      dtype=tf.uint8,
+                      dtype=np.uint8,
                       encoding_format='png'),
               'Can_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float64),
               'Can_to_robot0_eef_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float64),
               'robot0_gripper_qvel':
-                  tfds.features.Tensor(shape=(2,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(2,), dtype=np.float64),
               'robot0_eef_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float64),
               'robot0_eef_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float64),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float64),
           },
-          action_info=tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+          action_info=tfds.features.Tensor(shape=(7,), dtype=np.float64),
           reward_info=tf.float64,
           discount_info=tf.float64,
           episode_metadata_info={
@@ -199,33 +200,33 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
           name='synthetic_stochastic_sac_afe13968',
           observation_info={
               'object-state':
-                  tfds.features.Tensor(shape=(14,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(14,), dtype=np.float32),
               'Can_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float32),
               'Can_to_robot0_eef_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float32),
               'robot0_joint_pos_cos':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float32),
               'robot0_gripper_qpos':
-                  tfds.features.Tensor(shape=(2,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(2,), dtype=np.float32),
               'robot0_proprio-state':
-                  tfds.features.Tensor(shape=(32,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(32,), dtype=np.float32),
               'robot0_joint_vel':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float32),
               'robot0_joint_pos_sin':
-                  tfds.features.Tensor(shape=(7,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(7,), dtype=np.float32),
               'Can_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float32),
               'Can_to_robot0_eef_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float32),
               'robot0_gripper_qvel':
-                  tfds.features.Tensor(shape=(2,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(2,), dtype=np.float32),
               'robot0_eef_pos':
-                  tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(3,), dtype=np.float32),
               'robot0_eef_quat':
-                  tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+                  tfds.features.Tensor(shape=(4,), dtype=np.float32),
           },
-          action_info=tfds.features.Tensor(shape=(7,), dtype=tf.float32),
+          action_info=tfds.features.Tensor(shape=(7,), dtype=np.float32),
           reward_info=tf.float64,
           discount_info=tf.float64,
           episode_metadata_info={

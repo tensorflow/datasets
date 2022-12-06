@@ -17,7 +17,6 @@
 
 import numpy as np
 from six import moves
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = ("https://storage.googleapis.com/3d-shapes/3dshapes.h5")
@@ -49,17 +48,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "label_orientation":
                 tfds.features.ClassLabel(num_classes=15),
             "value_floor_hue":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_wall_hue":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_object_hue":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_scale":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_shape":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_orientation":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
         }),
         homepage="https://github.com/deepmind/3d-shapes",
     )

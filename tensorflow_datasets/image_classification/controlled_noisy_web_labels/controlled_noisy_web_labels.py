@@ -273,7 +273,7 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
     features['image'] = tfds.features.Image()
     features['label'] = tfds.features.ClassLabel(
         num_classes=self.builder_config.num_classes)
-    features['is_clean'] = tfds.features.Tensor(shape=(), dtype=tf.bool)
+    features['is_clean'] = tfds.features.Tensor(shape=(), dtype=np.bool_)
     features['id'] = tfds.features.Text()
 
     return tfds.core.DatasetInfo(

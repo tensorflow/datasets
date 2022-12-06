@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -62,10 +63,10 @@ class Pg19(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'book_text': tfds.features.Text(),
-            'book_id': tf.int32,
-            'book_title': tf.string,
-            'publication_date': tf.string,
-            'book_link': tf.string
+            'book_id': np.int32,
+            'book_title': np.str_,
+            'publication_date': np.str_,
+            'book_link': np.str_
         }),
         supervised_keys=None,
         homepage='https://github.com/deepmind/pg19',

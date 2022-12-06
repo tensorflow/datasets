@@ -17,6 +17,7 @@
 
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -69,7 +70,7 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
             "alphabet":
                 tfds.features.ClassLabel(num_classes=_NUM_ALPHABETS),
             "alphabet_char_id":
-                tf.int64,
+                np.int64,
             "label":
                 tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
         }),

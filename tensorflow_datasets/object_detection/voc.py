@@ -20,6 +20,7 @@ from __future__ import annotations
 import os
 import xml.etree.ElementTree
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -186,8 +187,8 @@ class Voc(tfds.core.GeneratorBasedBuilder):
                     "label": tfds.features.ClassLabel(names=_VOC_LABELS),
                     "bbox": tfds.features.BBoxFeature(),
                     "pose": tfds.features.ClassLabel(names=_VOC_POSES),
-                    "is_truncated": tf.bool,
-                    "is_difficult": tf.bool,
+                    "is_truncated": np.bool_,
+                    "is_difficult": np.bool_,
                 }),
             "labels":
                 tfds.features.Sequence(

@@ -23,6 +23,7 @@ import os
 import textwrap
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -226,13 +227,13 @@ class Gem(tfds.core.GeneratorBasedBuilder):
       scenario using these concepts.
       """),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "concept_set_id": tf.int32,
-              "concepts": tfds.features.Sequence(tf.string),
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "concept_set_id": np.int32,
+              "concepts": tfds.features.Sequence(np.str_),
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "data":
@@ -267,14 +268,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           (attributes) and their values. The output is a natural language
           sentence."""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "dialog_act": tf.string,
-              "dialog_act_delexicalized": tf.string,
-              "target_delexicalized": tf.string,
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "dialog_act": np.str_,
+              "dialog_act_delexicalized": np.str_,
+              "target_delexicalized": np.str_,
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "train":
@@ -307,15 +308,15 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             input being a set of entity-relation triples following a
             tree-structured ontology."""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "dart_id": tf.int32,
-              "tripleset": tfds.features.Sequence(tf.string),
-              "subtree_was_extended": tf.bool,
-              "target_sources": tfds.features.Sequence(tf.string),
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "dart_id": np.int32,
+              "tripleset": tfds.features.Sequence(np.str_),
+              "subtree_was_extended": np.bool_,
+              "target_sources": tfds.features.Sequence(np.str_),
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "train":
@@ -340,12 +341,12 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             -- generation of restaurant descriptions/recommendations based on up
             to 8 different attributes (name, area, price range etc.)"""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "meaning_representation": tf.string,
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "meaning_representation": np.str_,
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "train":
@@ -373,16 +374,16 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             MLSum is a large-scale multiLingual summarization dataset. It is
             buillt from online news outlets, this split focusing on German."""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "text": tf.string,
-              "topic": tf.string,
-              "url": tf.string,
-              "title": tf.string,
-              "date": tf.string,
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "text": np.str_,
+              "topic": np.str_,
+              "url": np.str_,
+              "title": np.str_,
+              "date": np.str_,
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "train":
@@ -410,16 +411,16 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             buillt from online news outlets, this split focusing on
             Spanish."""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "text": tf.string,
-              "topic": tf.string,
-              "url": tf.string,
-              "title": tf.string,
-              "date": tf.string,
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "text": np.str_,
+              "topic": np.str_,
+              "url": np.str_,
+              "title": np.str_,
+              "date": np.str_,
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "train":
@@ -449,31 +450,31 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             calendar, travel, and weather."""),
           features=tfds.features.FeaturesDict({
               "gem_id":
-                  tf.string,
+                  np.str_,
               "gem_parent_id":
-                  tf.string,
+                  np.str_,
               "dialog_id":
-                  tf.string,
+                  np.str_,
               "turn_id":
-                  tf.int32,
+                  np.int32,
               "service":
-                  tf.string,
+                  np.str_,
               "prompt":
-                  tf.string,
+                  np.str_,
               "context":
                   tfds.features.Sequence(
-                      tf.string),  # multiple references for validation.
+                      np.str_),  # multiple references for validation.
               "dialog_acts":
                   tfds.features.Sequence({
                       "act": tfds.features.ClassLabel(names=_SGD_ACTS),
-                      "slot": tf.string,
-                      "values": tfds.features.Sequence(tf.string),
+                      "slot": np.str_,
+                      "values": tfds.features.Sequence(np.str_),
                   }),
               "target":
-                  tf.string,  # single target for train.
+                  np.str_,  # single target for train.
               "references":
                   tfds.features.Sequence(
-                      tf.string),  # multiple references for validation.
+                      np.str_),  # multiple references for validation.
           }),
           data_urls={
               "data":
@@ -497,45 +498,45 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             language description for the highlighted part of the table."""),
           features=tfds.features.FeaturesDict({
               "gem_id":
-                  tf.string,
+                  np.str_,
               "gem_parent_id":
-                  tf.string,
+                  np.str_,
               "totto_id":
-                  tf.int32,
+                  np.int32,
               "table_page_title":
-                  tf.string,
+                  np.str_,
               "table_webpage_url":
-                  tf.string,
+                  np.str_,
               "table_section_title":
-                  tf.string,
+                  np.str_,
               "table_section_text":
-                  tf.string,
+                  np.str_,
               "table":
                   tfds.features.Sequence(
                       tfds.features.Sequence({
-                          "column_span": tf.int32,
-                          "is_header": tf.bool,
-                          "row_span": tf.int32,
-                          "value": tf.string,
+                          "column_span": np.int32,
+                          "is_header": np.bool_,
+                          "row_span": np.int32,
+                          "value": np.str_,
                       })),
               "highlighted_cells":
-                  tfds.features.Sequence(tfds.features.Sequence(tf.int32)),
+                  tfds.features.Sequence(tfds.features.Sequence(np.int32)),
               "example_id":
-                  tf.string,
+                  np.str_,
               "overlap_subset":
-                  tf.string,
+                  np.str_,
               "sentence_annotations":
                   tfds.features.Sequence({
-                      "original_sentence": tf.string,
-                      "sentence_after_deletion": tf.string,
-                      "sentence_after_ambiguity": tf.string,
-                      "final_sentence": tf.string,
+                      "original_sentence": np.str_,
+                      "sentence_after_deletion": np.str_,
+                      "sentence_after_ambiguity": np.str_,
+                      "final_sentence": np.str_,
                   }),
               "target":
-                  tf.string,  # single target for train.
+                  np.str_,  # single target for train.
               "references":
                   tfds.features.Sequence(
-                      tf.string),  # multiple references for validation.
+                      np.str_),  # multiple references for validation.
           }),
           data_urls={
               "data":
@@ -560,14 +561,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             promote the development of RDF verbalisers able to generate short
             text and to handle micro-planning."""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "input": tfds.features.Sequence(tf.string),
-              "category": tf.string,
-              "webnlg_id": tf.string,
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "input": tfds.features.Sequence(np.str_),
+              "category": np.str_,
+              "webnlg_id": np.str_,
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "train":
@@ -603,14 +604,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             promote the development of RDF verbalisers able to generate short
             text and to handle micro-planning."""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "input": tfds.features.Sequence(tf.string),
-              "category": tf.string,
-              "webnlg_id": tf.string,
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "input": tfds.features.Sequence(np.str_),
+              "category": np.str_,
+              "webnlg_id": np.str_,
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "train":
@@ -645,12 +646,12 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             simplification systems. ASSET and TURK are high-quality
             simplification datasets used for testing."""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "source": tf.string,
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "source": np.str_,
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "train":
@@ -706,13 +707,13 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             extreme form, its about summarizing a document in a single
             sentence."""),
           features=tfds.features.FeaturesDict({
-              "gem_id": tf.string,
-              "gem_parent_id": tf.string,
-              "xsum_id": tf.string,
-              "document": tf.string,
-              "target": tf.string,  # single target for train.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "xsum_id": np.str_,
+              "document": np.str_,
+              "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  tf.string),  # multiple references for validation.
+                  np.str_),  # multiple references for validation.
           }),
           data_urls={
               "data":
@@ -742,13 +743,13 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 of cross-lingual abstractive summarization systems.."""),
             features=tfds.features.FeaturesDict({
                 "gem_id":
-                    tf.string,
+                    np.str_,
                 "gem_parent_id":
-                    tf.string,
+                    np.str_,
                 "source":
-                    tf.string,
+                    np.str_,
                 "target":
-                    tf.string,  # single target for train.
+                    np.str_,  # single target for train.
                 "source_aligned":
                     tfds.features.Translation(languages=[ln, "en"]
                                              ),  # parallel in English.
@@ -756,7 +757,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                     tfds.features.Translation(languages=[ln, "en"]),
                 "references":
                     tfds.features.Sequence(
-                        tf.string),  # multiple references for validation.
+                        np.str_),  # multiple references for validation.
             }),
             data_urls={"data": data_url},
             citation=textwrap.dedent("""\

@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -129,11 +130,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'field': tfds.features.Text(),
             'linguistics_term': tfds.features.Text(),
             'UID': tfds.features.Text(),
-            'simple_LM_method': tf.bool,
-            'one_prefix_method': tf.bool,
-            'two_prefix_method': tf.bool,
-            'lexically_identical': tf.bool,
-            'pair_id': tf.int32,
+            'simple_LM_method': np.bool_,
+            'one_prefix_method': np.bool_,
+            'two_prefix_method': np.bool_,
+            'lexically_identical': np.bool_,
+            'pair_id': np.int32,
         }),
         supervised_keys=None,
         # Homepage of the dataset for documentation

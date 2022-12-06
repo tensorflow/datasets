@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import csv
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -89,22 +89,22 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'f0': tf.float32,
-            'f1': tf.float32,
-            'f2': tf.float32,
-            'f3': tf.float32,
-            'f4': tf.float32,
-            'f5': tf.float32,
-            'f6': tf.float32,
-            'f7': tf.float32,
-            'f8': tf.float32,
-            'f9': tf.float32,
-            'f10': tf.float32,
-            'f11': tf.float32,
-            'treatment': tf.int64,
-            'conversion': tf.bool,
-            'visit': tf.bool,
-            'exposure': tf.bool
+            'f0': np.float32,
+            'f1': np.float32,
+            'f2': np.float32,
+            'f3': np.float32,
+            'f4': np.float32,
+            'f5': np.float32,
+            'f6': np.float32,
+            'f7': np.float32,
+            'f8': np.float32,
+            'f9': np.float32,
+            'f10': np.float32,
+            'f11': np.float32,
+            'treatment': np.int64,
+            'conversion': np.bool_,
+            'visit': np.bool_,
+            'exposure': np.bool_
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if

@@ -21,7 +21,7 @@ import json
 import os
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.question_answering import qa_utils
 
@@ -53,7 +53,7 @@ _HOMEPAGE_URL = "https://rajpurkar.github.io/SQuAD-explorer/"
 def _v2_features():
   return tfds.features.FeaturesDict({
       "id":
-          tf.string,
+          np.str_,
       "title":
           tfds.features.Text(),
       "context":
@@ -61,16 +61,16 @@ def _v2_features():
       "plausible_answers":
           tfds.features.Sequence({
               "text": tfds.features.Text(),
-              "answer_start": tf.int32,
+              "answer_start": np.int32,
           }),
       "question":
           tfds.features.Text(),
       "is_impossible":
-          tf.bool,
+          np.bool_,
       "answers":
           tfds.features.Sequence({
               "text": tfds.features.Text(),
-              "answer_start": tf.int32,
+              "answer_start": np.int32,
           }),
   })
 

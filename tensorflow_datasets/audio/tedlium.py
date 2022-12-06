@@ -177,11 +177,11 @@ class Tedlium(tfds.core.BeamBasedBuilder):
             "text":
                 tfds.features.Text(),
             "speaker_id":
-                tf.string,
+                np.str_,
             "gender":
                 tfds.features.ClassLabel(names=["unknown", "female", "male"]),
             "id":
-                tf.string,
+                np.str_,
         }),
         supervised_keys=("speech", "text"),
         homepage=self.builder_config.url,

@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -40,7 +41,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='wav', sample_rate=44100),
             'label': tfds.features.ClassLabel(names=_LABELS),
-            'speaker_id': tf.string
+            'speaker_id': np.str_
         }),
         supervised_keys=('audio', 'label'),
         homepage='https://accentdb.github.io/',

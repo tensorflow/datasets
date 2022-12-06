@@ -16,6 +16,7 @@
 """glove_100_angular dataset."""
 
 import h5py
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -60,18 +61,18 @@ class Glove100Angular(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'index':
                 tfds.features.Scalar(
-                    dtype=tf.int64, doc='Index within the split.'),
+                    dtype=np.int64, doc='Index within the split.'),
             'embedding':
-                tfds.features.Tensor(shape=(100,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(100,), dtype=np.float32),
             'neighbors':
                 tfds.features.Sequence(
                     {
                         'index':
                             tfds.features.Scalar(
-                                dtype=tf.int64, doc='Neighbor index.'),
+                                dtype=np.int64, doc='Neighbor index.'),
                         'distance':
                             tfds.features.Scalar(
-                                dtype=tf.float32, doc='Neighbor distance.'),
+                                dtype=np.float32, doc='Neighbor distance.'),
                     },
                     doc='The computed neighbors, which is only available for the test split.'
                 )

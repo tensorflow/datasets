@@ -22,6 +22,7 @@ import os
 
 from absl import logging
 from etils import epath
+import numpy as np
 import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -141,7 +142,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Sequence({
                     "description": tfds.features.Text(),
                     "filename": tfds.features.Text(),
-                    "rank": tf.int32,
+                    "rank": np.int32,
                     "title": tfds.features.Text(),
                     "url": tfds.features.Text(),
                     "search_context": tfds.features.Text(),

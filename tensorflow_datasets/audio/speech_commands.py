@@ -19,7 +19,6 @@ import os
 
 import numpy as np
 from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -79,7 +78,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio':
                 tfds.features.Audio(
-                    file_format='wav', sample_rate=SAMPLE_RATE, dtype=tf.int16),
+                    file_format='wav', sample_rate=SAMPLE_RATE, dtype=np.int16),
             'label':
                 tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN])
         }),

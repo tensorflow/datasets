@@ -19,7 +19,7 @@ from __future__ import annotations
 import json
 import random
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 
@@ -75,10 +75,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     features = tfds.features.FeaturesDict({
         'input': tfds.features.Image(shape=t_shape),
         'output': {
-            'varroa_output': tf.float64,
-            'pollen_output': tf.float64,
-            'wasps_output': tf.float64,
-            'cooling_output': tf.float64,
+            'varroa_output': np.float64,
+            'pollen_output': np.float64,
+            'wasps_output': np.float64,
+            'cooling_output': np.float64,
         }
     })
 

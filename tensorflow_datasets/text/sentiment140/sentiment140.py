@@ -21,6 +21,7 @@ import codecs
 import csv
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -64,7 +65,7 @@ class Sentiment140(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "polarity": tf.int32,
+            "polarity": np.int32,
             "date": tfds.features.Text(),
             "query": tfds.features.Text(),
             "user": tfds.features.Text(),

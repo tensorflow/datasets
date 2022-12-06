@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Optional
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
@@ -176,9 +177,9 @@ class RluLocomotion(rlu_common.RLUBuilder):
               rlu_common.float_tensor_feature(12),
           'egocentric_camera':
               tfds.features.Image(
-                  shape=(64, 64, 3), dtype=tf.uint8, encoding_format='png'),
+                  shape=(64, 64, 3), dtype=np.uint8, encoding_format='png'),
       }
-      action_features = tfds.features.Tensor(shape=(56,), dtype=tf.float32)
+      action_features = tfds.features.Tensor(shape=(56,), dtype=np.float32)
     else:  # 'rodent' datasets
       walker_features = {
           'joints_pos':
@@ -203,9 +204,9 @@ class RluLocomotion(rlu_common.RLUBuilder):
               rlu_common.float_tensor_feature(4),
           'egocentric_camera':
               tfds.features.Image(
-                  shape=(64, 64, 3), dtype=tf.uint8, encoding_format='png'),
+                  shape=(64, 64, 3), dtype=np.uint8, encoding_format='png'),
       }
-      action_features = tfds.features.Tensor(shape=(38,), dtype=tf.float32)
+      action_features = tfds.features.Tensor(shape=(38,), dtype=np.float32)
 
     return tfds.features.FeaturesDict({
         'steps':
@@ -214,16 +215,16 @@ class RluLocomotion(rlu_common.RLUBuilder):
                     'walker': walker_features,
                 },
                 'action': action_features,
-                'reward': tf.float32,
-                'is_terminal': tf.bool,
-                'is_first': tf.bool,
-                'is_last': tf.bool,
-                'discount': tf.float32,
+                'reward': np.float32,
+                'is_terminal': np.bool_,
+                'is_first': np.bool_,
+                'is_last': np.bool_,
+                'discount': np.float32,
             }),
         'episode_id':
-            tf.int64,
+            np.int64,
         'timestamp':
-            tf.int64,
+            np.int64,
     })
 
   def get_description(self):

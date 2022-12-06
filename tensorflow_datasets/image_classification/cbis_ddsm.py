@@ -188,7 +188,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'patient': tfds.features.Text(),
         'abnormalities': {
             'id':
-                tfds.features.Tensor(shape=(), dtype=tf.int32),
+                tfds.features.Tensor(shape=(), dtype=np.int32),
             'mask':
                 tfds.features.Image(shape=(None, None, 1)),
             'assessment':

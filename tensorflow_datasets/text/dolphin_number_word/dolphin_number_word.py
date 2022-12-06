@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import json
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DS_PATH = 'https://www.microsoft.com/en-us/research/uploads/prod/2016/02//dolphin-number_word_std.zip'
@@ -62,7 +62,7 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
         # Per author's recommendation, we discard the ans_simple field.
         features=tfds.features.FeaturesDict({
             'id': tfds.features.Text(),
-            'index': tf.int32,
+            'index': np.int32,
             'text': tfds.features.Text(),
             'sources': tfds.features.Text(),  # Flattened list of str.
             'equations': tfds.features.Text(),  # Flattened list of str.

@@ -20,6 +20,7 @@ from __future__ import annotations
 import os
 from typing import Any, Dict, Generator, List, Tuple
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -51,7 +52,7 @@ def get_files(prefix: str, num_shards: int) -> List[str]:
 
 def float_tensor_feature(size: int) -> tfds.features.Tensor:
   return tfds.features.Tensor(
-      shape=(size,), dtype=tf.float32, encoding=tfds.features.Encoding.ZLIB)
+      shape=(size,), dtype=np.float32, encoding=tfds.features.Encoding.ZLIB)
 
 
 class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):

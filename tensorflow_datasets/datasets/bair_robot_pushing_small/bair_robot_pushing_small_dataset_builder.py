@@ -52,9 +52,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "image_aux1":
                 tfds.features.Image(shape=IMG_SHAPE),
             "action":
-                tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(4,), dtype=np.float32),
             "endeffector_pos":
-                tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(3,), dtype=np.float32),
         },
         length=FRAMES_PER_VIDEO)
 

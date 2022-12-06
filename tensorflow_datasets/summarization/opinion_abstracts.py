@@ -21,6 +21,7 @@ import json
 import os
 from typing import Any, Dict, Iterator, List, Optional, Text, Tuple
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -108,16 +109,16 @@ class OpinionAbstracts(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             config.name_key:
-                tf.string,
+                np.str_,
             config.id_key:
-                tf.string,
+                np.str_,
             config.summary_key:
-                tf.string,
+                np.str_,
             config.opinions_key:
                 tfds.features.Sequence(
                     tfds.features.FeaturesDict({
-                        "key": tf.string,
-                        "value": tf.string
+                        "key": np.str_,
+                        "value": np.str_
                     })),
         }),
         supervised_keys=(config.opinions_key, config.summary_key),

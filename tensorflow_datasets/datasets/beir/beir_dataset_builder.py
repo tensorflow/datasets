@@ -22,7 +22,7 @@ import json
 import os
 from typing import Mapping
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _BASE_DOWNLOAD_URL = 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets'
@@ -221,7 +221,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'passage_id': tfds.features.Text(),
             'passage': tfds.features.Text(),
             'passage_metadata': tfds.features.Text(),
-            'score': tf.float32,
+            'score': np.float32,
         }),
         homepage='https://github.com/beir-cellar/beir',
     )

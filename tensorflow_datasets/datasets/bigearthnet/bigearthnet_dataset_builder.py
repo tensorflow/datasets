@@ -22,7 +22,6 @@ import json
 import os
 
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _LABELS = [
@@ -93,10 +92,10 @@ class Builder(tfds.core.BeamBasedBuilder):
     metadata_dict = tfds.features.FeaturesDict({
         'acquisition_date': tfds.features.Text(),
         'coordinates': {
-            'lrx': tf.int64,
-            'lry': tf.int64,
-            'ulx': tf.int64,
-            'uly': tf.int64,
+            'lrx': np.int64,
+            'lry': np.int64,
+            'ulx': np.int64,
+            'uly': np.int64,
         },
         'projection': tfds.features.Text(),
         'tile_source': tfds.features.Text(),
@@ -116,29 +115,29 @@ class Builder(tfds.core.BeamBasedBuilder):
     elif self.builder_config.selection == 'all':
       features = tfds.features.FeaturesDict({
           'B01':
-              tfds.features.Tensor(shape=[20, 20], dtype=tf.float32),
+              tfds.features.Tensor(shape=[20, 20], dtype=np.float32),
           'B02':
-              tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
+              tfds.features.Tensor(shape=[120, 120], dtype=np.float32),
           'B03':
-              tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
+              tfds.features.Tensor(shape=[120, 120], dtype=np.float32),
           'B04':
-              tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
+              tfds.features.Tensor(shape=[120, 120], dtype=np.float32),
           'B05':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+              tfds.features.Tensor(shape=[60, 60], dtype=np.float32),
           'B06':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+              tfds.features.Tensor(shape=[60, 60], dtype=np.float32),
           'B07':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+              tfds.features.Tensor(shape=[60, 60], dtype=np.float32),
           'B08':
-              tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
+              tfds.features.Tensor(shape=[120, 120], dtype=np.float32),
           'B09':
-              tfds.features.Tensor(shape=[20, 20], dtype=tf.float32),
+              tfds.features.Tensor(shape=[20, 20], dtype=np.float32),
           'B11':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+              tfds.features.Tensor(shape=[60, 60], dtype=np.float32),
           'B12':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+              tfds.features.Tensor(shape=[60, 60], dtype=np.float32),
           'B8A':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+              tfds.features.Tensor(shape=[60, 60], dtype=np.float32),
           'labels':
               tfds.features.Sequence(tfds.features.ClassLabel(names=_LABELS)),
           'filename':

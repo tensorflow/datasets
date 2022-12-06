@@ -17,7 +17,7 @@
 
 import json
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -62,10 +62,10 @@ class QReCC(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Text(),
             "conversation_id":
                 tfds.features.Scalar(
-                    tf.int32, doc="The id of the conversation."),
+                    np.int32, doc="The id of the conversation."),
             "turn_id":
                 tfds.features.Scalar(
-                    tf.int32,
+                    np.int32,
                     doc="The id of the conversation turn, within a conversation."
                 ),
             "source":

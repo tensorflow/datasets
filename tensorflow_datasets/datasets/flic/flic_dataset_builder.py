@@ -17,6 +17,7 @@
 
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -85,15 +86,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Image(
                     shape=(480, 720, 3), encoding_format="jpeg"),
             "poselet_hit_idx":
-                tfds.features.Sequence(tf.uint16),
+                tfds.features.Sequence(np.uint16),
             "moviename":
                 tfds.features.Text(),
             "xcoords":
-                tfds.features.Sequence(tf.float64),
+                tfds.features.Sequence(np.float64),
             "ycoords":
-                tfds.features.Sequence(tf.float64),
+                tfds.features.Sequence(np.float64),
             "currframe":
-                tfds.features.Tensor(shape=(), dtype=tf.float64),
+                tfds.features.Tensor(shape=(), dtype=np.float64),
             "torsobox":
                 tfds.features.BBoxFeature(),
         }),

@@ -16,7 +16,6 @@
 """So2SAT remote sensing dataset."""
 
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -93,19 +92,19 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
       features = tfds.features.FeaturesDict({
           'image': tfds.features.Image(shape=[32, 32, 3]),
           'label': tfds.features.ClassLabel(names=_LABELS),
-          'sample_id': tfds.features.Tensor(shape=(), dtype=tf.int64),
+          'sample_id': tfds.features.Tensor(shape=(), dtype=np.int64),
       })
       supervised_keys = ('image', 'label')
     elif self.builder_config.selection == 'all':
       features = tfds.features.FeaturesDict({
           'sentinel1':
-              tfds.features.Tensor(shape=[32, 32, 8], dtype=tf.float32),
+              tfds.features.Tensor(shape=[32, 32, 8], dtype=np.float32),
           'sentinel2':
-              tfds.features.Tensor(shape=[32, 32, 10], dtype=tf.float32),
+              tfds.features.Tensor(shape=[32, 32, 10], dtype=np.float32),
           'label':
               tfds.features.ClassLabel(names=_LABELS),
           'sample_id':
-              tfds.features.Tensor(shape=(), dtype=tf.int64),
+              tfds.features.Tensor(shape=(), dtype=np.int64),
       })
       supervised_keys = None
     return tfds.core.DatasetInfo(

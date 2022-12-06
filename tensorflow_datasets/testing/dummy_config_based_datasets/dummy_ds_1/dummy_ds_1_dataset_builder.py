@@ -17,7 +17,7 @@
 
 from __future__ import annotations
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 
@@ -28,7 +28,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({'x': tf.int64}),)
+        features=tfds.features.FeaturesDict({'x': np.int64}),)
 
   def _split_generators(self, dl_manager):
     return [

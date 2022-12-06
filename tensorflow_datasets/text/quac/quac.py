@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 
 from etils import epath
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -71,12 +71,12 @@ class Quac(tfds.core.GeneratorBasedBuilder):
             "answers":
                 tfds.features.Sequence({
                     "text": tfds.features.Text(),
-                    "answer_start": tf.int32,
+                    "answer_start": np.int32,
                 }),
             "orig_answer":
                 tfds.features.FeaturesDict({
                     "text": tfds.features.Text(),
-                    "answer_start": tf.int32,
+                    "answer_start": np.int32,
                 }),
             "section_title":
                 tfds.features.Text(),

@@ -21,7 +21,7 @@ import collections
 import json
 import operator
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -254,26 +254,26 @@ class RefCoco(tfds.core.GeneratorBasedBuilder):
             'image':
                 tfds.features.Image(encoding_format='jpeg'),
             'image/id':
-                tf.int64,
+                np.int64,
             'objects':
                 tfds.features.Sequence({
-                    'id': tf.int64,
-                    'area': tf.int64,
+                    'id': np.int64,
+                    'area': np.int64,
                     'bbox': tfds.features.BBoxFeature(),
-                    'label': tf.int64,
-                    'gt_box_index': tf.int64,
+                    'label': np.int64,
+                    'gt_box_index': np.int64,
                     'refexp':
                         tfds.features.Sequence({
-                            'refexp_id': tf.int64,
+                            'refexp_id': np.int64,
                             'raw': tfds.features.Text(),
                         }),
                 }),
             'coco_annotations':
                 tfds.features.Sequence({
-                    'id': tf.int64,
-                    'area': tf.int64,
+                    'id': np.int64,
+                    'area': np.int64,
                     'bbox': tfds.features.BBoxFeature(),
-                    'label': tf.int64,
+                    'label': np.int64,
                 }),
         }),
         supervised_keys=None,

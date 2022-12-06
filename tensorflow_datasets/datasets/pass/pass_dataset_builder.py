@@ -15,6 +15,7 @@
 
 """PASS dataset."""
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -56,10 +57,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Text(),  # The hash, as computed from YFCC-100M.
             'image/gps_lon': tfds.features.Tensor(
                 shape=(),
-                dtype=tf.float32),  # Longitude of image if existent, otw. NaN.
+                dtype=np.float32),  # Longitude of image if existent, otw. NaN.
             'image/gps_lat': tfds.features.Tensor(
                 shape=(),
-                dtype=tf.float32),  # Latitude of image if existent, otw. NaN.
+                dtype=np.float32),  # Latitude of image if existent, otw. NaN.
             'image/date_taken': tfds.features.Text(
             ),  # Datetime of image if not NaN, else empty string.
         }),

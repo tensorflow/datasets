@@ -20,6 +20,7 @@ from __future__ import annotations
 import dataclasses
 from typing import Any, Dict
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -232,30 +233,30 @@ def features_dict():
                           84,
                           84,
                           1,
-                      ), dtype=tf.uint8, encoding_format='png'),
+                      ), dtype=np.uint8, encoding_format='png'),
               'action':
-                  tf.int64,
+                  np.int64,
               'reward':
                   tfds.features.Scalar(
-                      dtype=tf.float32,
+                      dtype=np.float32,
                       doc=tfds.features.Documentation(
                           desc='Clipped reward.', value_range='[-1, 1]')),
               'is_terminal':
-                  tf.bool,
+                  np.bool_,
               'is_first':
-                  tf.bool,
+                  np.bool_,
               'is_last':
-                  tf.bool,
+                  np.bool_,
               'discount':
-                  tf.float32,
+                  np.float32,
           }),
       'checkpoint_id':
-          tf.int64,
+          np.int64,
       'episode_id':
-          tf.int64,
+          np.int64,
       'episode_return':
           tfds.features.Scalar(
-              dtype=tf.float32,
+              dtype=np.float32,
               doc=tfds.features.Documentation(
                   desc='Sum of the clipped rewards.')),
   })

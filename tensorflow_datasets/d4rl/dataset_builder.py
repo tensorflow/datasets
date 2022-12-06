@@ -20,6 +20,7 @@ from __future__ import annotations
 import dataclasses
 from typing import Any, Dict, FrozenSet, Optional
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.d4rl import dataset_utils
 import tensorflow_datasets.public_api as tfds
@@ -474,7 +475,7 @@ def get_features_dict(
     # D4RL adroit in the v0-cloned config, action uses a different float type
     # than the rest of the dataset.
     steps_dict['action'] = tfds.features.Tensor(
-        shape=(ds_config.action_len,), dtype=tf.float32)
+        shape=(ds_config.action_len,), dtype=np.float32)
 
   if builder_config.step_metadata_keys:
     steps_dict['infos'] = _get_step_metadata(builder_config, ds_config)
