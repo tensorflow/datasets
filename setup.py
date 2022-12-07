@@ -93,6 +93,7 @@ TESTS_REQUIRE = [
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
     'pyyaml',
+    'tensorflow-io',
 ]
 
 # Additional deps for formatting
