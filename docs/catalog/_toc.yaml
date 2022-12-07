@@ -729,8 +729,6 @@ toc:
     title: c4_wsrs
   - path: /datasets/catalog/caltech101
     title: caltech101
-  - path: /datasets/catalog/celeb_a_hq
-    title: celeb_a_hq (manual)
   - path: /datasets/catalog/cfq
     title: cfq
   - path: /datasets/catalog/cityscapes

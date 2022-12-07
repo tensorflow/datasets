@@ -479,7 +479,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`c4_wsrs`](c4_wsrs.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`caltech101`](caltech101.md)
-*   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`cfq`](cfq.md)
 *   [`cityscapes`](cityscapes.md)
 *   [`civil_comments`](civil_comments.md)
