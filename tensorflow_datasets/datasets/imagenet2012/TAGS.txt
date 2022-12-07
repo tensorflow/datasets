@@ -1,0 +1,8 @@
+content.data-type.image
+content.language.en
+ml.task.conditional-image-generation
+ml.task.density-estimation
+ml.task.image-classification
+ml.task.image-clustering
+ml.task.image-compression
+ml.task.image-generation

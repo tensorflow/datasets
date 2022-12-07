@@ -13,15 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Imagenet validation with multi-label annotations (http://proceedings.mlr.press/v119/shankar20c.html)."""
+"""Imagenet validation with multi-label annotations (http://proceedings.mlr.press/v119/shankar20c.html).
+"""
 
 import json
 import os
-import tarfile
 
-from etils import epath
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -145,9 +145,6 @@ _CITATION = """\
 }
 """
 
-_VALIDATION_LABELS_FNAME = 'image_classification/imagenet2012_validation_labels.txt'
-_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
-
 _MULTI_LABELS_URL = 'https://storage.googleapis.com/brain-car-datasets/imagenet-mistakes/human_accuracy_v3.0.0.json'
 
 
@@ -183,26 +180,6 @@ def _get_multi_labels_and_problematic_images(
   return val_annotated_images, problematic_images, imagenet_m_2022
 
 
-def _get_original_labels(val_path):
-  """Returns original labels for ImageNet validation data.
-
-  Args:
-    val_path: path to TAR file containing validation images. It is used to
-      retrieve the name of pictures and associate them to labels.
-
-  Returns:
-    dict, mapping from image name (str) to label (str).
-  """
-  labels_path = os.fspath(tfds.core.tfds_path(_VALIDATION_LABELS_FNAME))
-  with epath.Path(labels_path).open() as labels_f:
-    # `splitlines` to remove trailing `\r` in Windows
-    labels = labels_f.read().strip().splitlines()
-  with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
-    tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
-    images = sorted(tar.getnames())
-  return dict(zip(images, labels))
-
-
 class Imagenet2012Multilabel(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for imagenet2012_multilabel dataset."""
 
@@ -221,7 +198,7 @@ class Imagenet2012Multilabel(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    names_file = tfds.core.tfds_path(_LABELS_FNAME)
+    names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -257,7 +234,7 @@ class Imagenet2012Multilabel(tfds.core.GeneratorBasedBuilder):
           'ImageNet requires manual download of the data. Please download '
           'the train and val set and place them into: {}'.format(val_path))
 
-    original_labels = _get_original_labels(val_path)
+    original_labels = imagenet_common.get_validation_labels(val_path)
 
     (multi_labels, problematic_images, imagenet_m_2022_errors
     ) = _get_multi_labels_and_problematic_images(dl_manager)

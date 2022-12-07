@@ -20,6 +20,7 @@ import re
 
 from etils import epath
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -53,7 +54,6 @@ _CLASSES = [
     "airplane", "bear", "bicycle", "bird", "boat", "bottle", "car", "cat",
     "chair", "clock", "dog", "elephant", "keyboard", "knife", "oven", "truck"
 ]
-_IMAGENET_LABELS_FNAME = "image_classification/imagenet2012_labels.txt"
 
 
 class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
@@ -64,7 +64,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     """Define dataset info."""
 
-    imagenet_names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FNAME)
+    imagenet_names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),

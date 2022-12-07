@@ -19,7 +19,7 @@ import io
 import os
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-from tensorflow_datasets.image_classification import imagenet
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -46,8 +46,6 @@ _CITATION = r"""\
 }
 """
 
-_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
-
 _TRAIN_SUBSET = ('https://drive.google.com/uc?export=download&'
                  'id=1Sl1cwy6Dei1I1BMS1YKjI35fkaR1UA_7')
 
@@ -72,7 +70,7 @@ class ImagenetLt(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     """Define the dataset info."""
-    names_file = tfds.core.tfds_path(_LABELS_FNAME)
+    names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -136,14 +134,15 @@ class ImagenetLt(tfds.core.GeneratorBasedBuilder):
         'test':
             self._generate_examples(
                 archive=dl_manager.iter_archive(val_path),
-                validation_labels=imagenet.get_validation_labels(val_path))
+                validation_labels=imagenet_common.get_validation_labels(
+                    val_path))
     }
 
   def _generate_examples(self, archive, subset=None, validation_labels=None):
     """Yields examples."""
     # Test split in ImageNet-LT is the validation split in the original ImageNet
     if validation_labels:
-      for key, example in imagenet.generate_examples_validation(
+      for key, example in imagenet_common.generate_examples_validation(
           archive, validation_labels):
         yield key, example
 

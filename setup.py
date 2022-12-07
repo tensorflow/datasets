@@ -104,6 +104,8 @@ DEV_REQUIRE = [
 
 # Static files needed by datasets.
 DATASET_FILES = [
+    'datasets/imagenet2012/labels.txt',
+    'datasets/imagenet2012/validation_labels.txt',
     'graphs/ogbg_molpcba/ogbg_molpcba_tasks.txt',
     'image_classification/caltech101_labels.txt',
     'image_classification/categories_places365.txt',
@@ -118,8 +120,6 @@ DATASET_FILES = [
     'image_classification/i_naturalist2018/inaturalist2018_supercategories.txt',
     'image_classification/i_naturalist2021/i_naturalist2021_labels.txt',
     'image_classification/i_naturalist2021/i_naturalist2021_supercategories.txt',
-    'image_classification/imagenet2012_labels.txt',
-    'image_classification/imagenet2012_validation_labels.txt',
     'image_classification/imagenet_resized_labels.txt',
     'image_classification/imagenette_labels.txt',
     'image_classification/imagewang_labels.txt',

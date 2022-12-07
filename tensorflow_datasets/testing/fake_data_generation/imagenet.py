@@ -28,7 +28,7 @@ from absl import flags
 import tensorflow.compat.v1 as tf
 
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image_classification import imagenet  # pytype: disable=import-error
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
@@ -71,7 +71,7 @@ def _generate_train_archive():
   output_path = os.path.join(_ilsvrc2012_output_dir(),
                              'ILSVRC2012_img_train.tar')
   tar = tarfile.open(output_path, mode='w')
-  names_file = tfds.core.tfds_path(imagenet._LABELS_FNAME)  # pylint: disable=protected-access
+  names_file = imagenet_common.label_names_file()
   label_names = tfds.features.ClassLabel(names_file=names_file).names
   for i in range(TRAIN_SYNSET_NUMBER):
     synset_name = label_names[i]

@@ -18,6 +18,7 @@
 import os
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""
@@ -47,7 +48,6 @@ represented as a dictionary with the following keys:
 
 """
 
-_IMAGENET_LABELS_FILENAME = r'image_classification/imagenet2012_labels.txt'
 _IMAGENET_R_URL = r'https://people.eecs.berkeley.edu/~hendrycks/imagenet-r.tar'
 
 
@@ -64,7 +64,7 @@ class ImagenetR(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
-    names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FILENAME)
+    names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.

@@ -15,6 +15,7 @@
 
 """ImageNet-Sketch dataset."""
 
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -36,7 +37,6 @@ _CITATION = """\
 """
 
 _BASE_URL = 'https://github.com/HaohanWang/ImageNet-Sketch'
-_IMAGENET_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 _IMAGENET_SKETCH_URL = 'https://drive.google.com/u/0/uc?id=1Mj0i5HBthqH1p_yeXzsg22gZduvgoNeA&export=download'
 
 
@@ -50,7 +50,7 @@ class ImagenetSketch(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    imagenet_names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FNAME)
+    imagenet_names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),

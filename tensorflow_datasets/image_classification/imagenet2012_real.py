@@ -17,10 +17,9 @@
 
 import json
 import os
-import tarfile
 
-from etils import epath
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -58,8 +57,6 @@ _CITATION = """\
 }
 """
 
-_VALIDATION_LABELS_FNAME = 'image_classification/imagenet2012_validation_labels.txt'
-_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 
 _REAL_LABELS_URL = 'https://raw.githubusercontent.com/google-research/reassessed-imagenet/master/real.json'
 
@@ -79,7 +76,7 @@ class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
   """
 
   def _info(self):
-    names_file = tfds.core.tfds_path(_LABELS_FNAME)
+    names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -107,26 +104,6 @@ class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
           for i, labels in enumerate(json.load(f))
       }
 
-  @staticmethod
-  def _get_original_labels(val_path):
-    """Returns labels for validation.
-
-    Args:
-      val_path: path to TAR file containing validation images. It is used to
-        retrieve the name of pictures and associate them to labels.
-
-    Returns:
-      dict, mapping from image name (str) to label (str).
-    """
-    labels_path = os.fspath(tfds.core.tfds_path(_VALIDATION_LABELS_FNAME))
-    with epath.Path(labels_path).open() as labels_f:
-      # `splitlines` to remove trailing `\r` in Windows
-      labels = labels_f.read().strip().splitlines()
-    with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
-      tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
-      images = sorted(tar.getnames())
-    return dict(zip(images, labels))
-
   def _split_generators(self, dl_manager):
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
     if not tf.io.gfile.exists(val_path):
@@ -137,9 +114,12 @@ class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                'archive': dl_manager.iter_archive(val_path),
-                'original_labels': self._get_original_labels(val_path),
-                'real_labels': self._get_real_labels(dl_manager),
+                'archive':
+                    dl_manager.iter_archive(val_path),
+                'original_labels':
+                    imagenet_common.get_validation_labels(val_path),
+                'real_labels':
+                    self._get_real_labels(dl_manager),
             },
         ),
     ]

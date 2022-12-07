@@ -20,8 +20,9 @@ Apply common corruptions to the images in ImageNet2012 dataset.
 from absl import logging
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.datasets.imagenet2012 import imagenet2012_dataset_builder
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 from tensorflow_datasets.image_classification import corruptions
-from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -42,13 +43,6 @@ _CITATION = """\
   url={https://openreview.net/forum?id=HJz6tiCqYm},
 }
 """
-
-_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
-
-# This file contains the validation labels, in the alphabetic order of
-# corresponding image names (and not in the order they have been added to the
-# tar file).
-_VALIDATION_LABELS_FNAME = 'image_classification/imagenet2012_validation_labels.txt'
 
 _FROST_FILEBASE = 'https://raw.githubusercontent.com/hendrycks/robustness/master/ImageNet-C/imagenet_c/imagenet_c/frost/'
 _FROST_FILENAMES = [
@@ -159,7 +153,7 @@ def _decode_and_center_crop(image_bytes):
   return image
 
 
-class Imagenet2012Corrupted(Imagenet2012):
+class Imagenet2012Corrupted(imagenet2012_dataset_builder.Builder):
   """Corrupted ImageNet2012 dataset."""
   BUILDER_CONFIGS = _make_builder_configs()
 
@@ -169,7 +163,7 @@ class Imagenet2012Corrupted(Imagenet2012):
     Returns:
       tfds.core.DatasetInfo.
     """
-    names_file = tfds.core.tfds_path(_LABELS_FNAME)
+    names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
