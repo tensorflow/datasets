@@ -25,6 +25,7 @@ import sys
 from typing import List, Optional
 
 import numpy as np
+from tensorflow_datasets.core.utils import bool_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -121,8 +122,10 @@ class WitKaggleConfig(tfds.core.BuilderConfig):
 class WitKaggle(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for wit_kaggle dataset."""
 
-  VERSION = tfds.core.Version("1.0.1")
+  VERSION = tfds.core.Version("1.0.2")
   RELEASE_NOTES = {
+      "1.0.2":
+          "Fixes parsing of boolean fields.",
       "1.0.1":
           "Optimize Beam pipeline to avoid strugglers, ignoring rows without "
           "an image URL. Also added more Beam counters.",
@@ -337,6 +340,10 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
         sample = {"image_url": sample_url}
         for feature_key in self.builder_config.split_specific_features.keys():
           sample[feature_key] = sample_info[feature_key]
+          is_boolean_feature = self.builder_config.split_specific_features[
+              feature_key].np_dtype == np.bool_
+          if is_boolean_feature:
+            sample[feature_key] = bool_utils.parse_bool(sample[feature_key])
         # Test samples don't have gold captions.
         if "caption_title_and_reference_description" not in sample_info:
           sample["caption_title_and_reference_description"] = ""

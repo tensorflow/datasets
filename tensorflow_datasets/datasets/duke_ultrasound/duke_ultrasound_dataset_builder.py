@@ -20,6 +20,7 @@ import os
 
 from etils import epath
 import numpy as np
+from tensorflow_datasets.core.utils import bool_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -41,7 +42,11 @@ _DEFAULT_SPLITS = {
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DAS beamformed phantom images and paired post-processed images."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
+  RELEASE_NOTES = {
+      '1.0.1': 'Fixes parsing of boolean field `harmonic`.',
+      '1.0.0': 'Initial release.',
+  }
 
   def __init__(self, custom_csv_splits=None, **kwargs):
     """custom_csv_splits is a dictionary of { 'name': 'csvpaths'}."""
@@ -136,5 +141,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'scanner': row['scanner'],
             'target': row['target'],
             'timestamp_id': row['timestamp_id'],
-            'harmonic': row['harm']
+            'harmonic': bool_utils.parse_bool(row['harm'])
         }

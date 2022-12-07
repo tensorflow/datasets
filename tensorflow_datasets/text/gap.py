@@ -21,6 +21,7 @@ import csv
 
 from etils import epath
 import numpy as np
+from tensorflow_datasets.core.utils import bool_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -61,7 +62,11 @@ class Gap(tfds.core.GeneratorBasedBuilder):
   of (ambiguous pronoun, antecedent name), sampled from Wikipedia.
   """
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
+  RELEASE_NOTES = {
+      '0.1.1': 'Fixes parsing of boolean field `A-coref` and `B-coref`.',
+      '0.1.0': 'Initial release.',
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -112,4 +117,6 @@ class Gap(tfds.core.GeneratorBasedBuilder):
     with epath.Path(filepath).open() as tsvfile:
       reader = csv.DictReader(tsvfile, dialect='excel-tab')
       for i, row in enumerate(reader):
+        row['A-coref'] = bool_utils.parse_bool(row['A-coref'])
+        row['B-coref'] = bool_utils.parse_bool(row['B-coref'])
         yield i, row
