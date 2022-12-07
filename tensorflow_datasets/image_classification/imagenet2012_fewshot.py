@@ -18,7 +18,7 @@
 import os
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-from tensorflow_datasets.image_classification import imagenet
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 from tensorflow_datasets.image_classification import imagenet2012_subset
 import tensorflow_datasets.public_api as tfds
 
@@ -44,7 +44,6 @@ _CITATION = """\
 """
 
 # pylint: disable=line-too-long
-_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 SUBSET2FILES = {
     '1shot': tfds.core.gcs_path('downloads/imagenet2012_fewshot/1shot.txt'),
     '5shot': tfds.core.gcs_path('downloads/imagenet2012_fewshot/5shot.txt'),
@@ -65,7 +64,7 @@ class Imagenet2012Fewshot(imagenet2012_subset.Imagenet2012Subset):
   ]
 
   def _info(self):
-    names_file = tfds.core.tfds_path(_LABELS_FNAME)
+    names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -109,5 +108,6 @@ class Imagenet2012Fewshot(imagenet2012_subset.Imagenet2012Subset):
         tfds.Split.VALIDATION:
             self._generate_examples(
                 archive=dl_manager.iter_archive(val_path),
-                validation_labels=imagenet.get_validation_labels(val_path)),
+                validation_labels=imagenet_common.get_validation_labels(
+                    val_path)),
     }

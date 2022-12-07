@@ -20,7 +20,8 @@ import os
 
 from etils import epath
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-from tensorflow_datasets.image_classification import imagenet
+from tensorflow_datasets.datasets.imagenet2012 import imagenet2012_dataset_builder
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -57,7 +58,6 @@ _CITATION = """\
 """
 
 # pylint: disable=line-too-long
-_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 SUBSET2FILES = {
     '1pct':
         'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/1percent.txt',
@@ -66,7 +66,7 @@ SUBSET2FILES = {
 }
 
 
-class Imagenet2012Subset(imagenet.Imagenet2012):
+class Imagenet2012Subset(imagenet2012_dataset_builder.Builder):
   """Class balanced subset of Imagenet 2012 dataset."""
 
   BUILDER_CONFIGS = [
@@ -78,7 +78,7 @@ class Imagenet2012Subset(imagenet.Imagenet2012):
   ]
 
   def _info(self):
-    names_file = tfds.core.tfds_path(_LABELS_FNAME)
+    names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -125,8 +125,10 @@ class Imagenet2012Subset(imagenet.Imagenet2012):
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                'archive': dl_manager.iter_archive(val_path),
-                'validation_labels': imagenet.get_validation_labels(val_path),
+                'archive':
+                    dl_manager.iter_archive(val_path),
+                'validation_labels':
+                    imagenet_common.get_validation_labels(val_path),
             },
         ),
     ]
@@ -134,7 +136,7 @@ class Imagenet2012Subset(imagenet.Imagenet2012):
   def _generate_examples(self, archive, subset=None, validation_labels=None):
     """Yields examples."""
     if validation_labels:  # Validation split
-      for key, example in imagenet.generate_examples_validation(
+      for key, example in imagenet_common.generate_examples_validation(
           archive, validation_labels):
         yield key, example
     # Training split. Main archive contains archives names after a synset noun.

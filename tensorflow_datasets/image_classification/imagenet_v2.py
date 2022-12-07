@@ -17,6 +17,7 @@
 import os
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""
@@ -58,8 +59,6 @@ _TAR_TOPDIR = {
     'threshold-0.7': 'imagenetv2-threshold0.7-format-val',
     'topimages': 'imagenetv2-top-images-format-val',
 }
-
-_IMAGENET_LABELS_FILENAME = r'image_classification/imagenet2012_labels.txt'
 
 
 class ImagenetV2Config(tfds.core.BuilderConfig):
@@ -108,7 +107,7 @@ class ImagenetV2(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = list(_create_builder_configs())
 
   def _info(self):
-    names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FILENAME)
+    names_file = imagenet_common.label_names_file()
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.
