@@ -79,6 +79,7 @@ to:
 *   **Versions**:
 
     *   **`1.0.0`** (default): Initial release.
+    *   `1.0.1`: Fixed parsing of fields `conversion`, `visit` and `exposure`.
 
 *   **Download size**: `297.00 MiB`
 

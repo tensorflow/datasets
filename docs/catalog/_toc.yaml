@@ -80,6 +80,12 @@ toc:
     title: arc
   title: Common sense reasoning
 - section:
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  title: Conditional image generation
+- section:
   - path: /datasets/catalog/clevr
     title: clevr
   title: Coreference resolution
@@ -108,6 +114,10 @@ toc:
     title: caltech101
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
   title: Density estimation
 - section:
   - path: /datasets/catalog/universal_dependencies
@@ -170,6 +180,10 @@ toc:
     title: dsprites
   - path: /datasets/catalog/flic
     title: flic
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
   - path: /datasets/catalog/lost_and_found
     title: lost_and_found
   - path: /datasets/catalog/lsun
@@ -200,7 +214,23 @@ toc:
     title: celeb_a
   - path: /datasets/catalog/flic
     title: flic
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
   title: Image classification
+- section:
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  title: Image clustering
+- section:
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  title: Image compression
 - section:
   - path: /datasets/catalog/binarized_mnist
     title: binarized_mnist
@@ -212,6 +242,10 @@ toc:
     title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012
+    title: imagenet2012 (manual)
   title: Image generation
 - section:
   - path: /datasets/catalog/celeb_a_hq
@@ -294,8 +328,6 @@ toc:
     title: i_naturalist2018
   - path: /datasets/catalog/i_naturalist2021
     title: i_naturalist2021
-  - path: /datasets/catalog/imagenet2012
-    title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
   - path: /datasets/catalog/imagenet2012_fewshot
