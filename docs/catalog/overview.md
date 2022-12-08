@@ -75,6 +75,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
 *   [`arc`](arc.md)
 
+### `Conditional image generation`
+
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012`](imagenet2012.md)
+
 ### `Coreference resolution`
 
 *   [`clevr`](clevr.md)
@@ -95,6 +100,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`caltech101`](caltech101.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012`](imagenet2012.md)
 
 ### `Dependency parsing`
 
@@ -136,6 +143,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`downsampled_imagenet`](downsampled_imagenet.md)
 *   [`dsprites`](dsprites.md)
 *   [`flic`](flic.md)
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012`](imagenet2012.md)
 *   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
@@ -153,6 +162,18 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`caltech101`](caltech101.md)
 *   [`celeb_a`](celeb_a.md)
 *   [`flic`](flic.md)
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012`](imagenet2012.md)
+
+### `Image clustering`
+
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012`](imagenet2012.md)
+
+### `Image compression`
+
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012`](imagenet2012.md)
 
 ### `Image generation`
 
@@ -161,6 +182,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`cityscapes`](cityscapes.md)
 *   [`clevr`](clevr.md)
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012`](imagenet2012.md)
 
 ### `Image super resolution`
 
@@ -208,7 +231,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`i_naturalist2017`](i_naturalist2017.md)
 *   [`i_naturalist2018`](i_naturalist2018.md)
 *   [`i_naturalist2021`](i_naturalist2021.md)
-*   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
 *   [`imagenet2012_fewshot`](imagenet2012_fewshot.md)
 *   [`imagenet2012_multilabel`](imagenet2012_multilabel.md)

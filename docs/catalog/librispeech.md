@@ -40,18 +40,23 @@ enable lazy decoding: `tfds.load('librispeech', builder_kwargs={'config':
 *   **Source code**:
     [`tfds.audio.Librispeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/librispeech.py)
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `57.14 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split              | Examples
+:----------------- | -------:
+`'dev_clean'`      | 2,703
+`'dev_other'`      | 2,864
+`'test_clean'`     | 2,620
+`'test_other'`     | 2,939
+`'train_clean100'` | 28,539
+`'train_clean360'` | 104,014
+`'train_other500'` | 148,688
 
 *   **Feature structure**:
 
@@ -111,6 +116,8 @@ text       | Text         |         | string |
     *   **`2.1.1`** (default): Fix speech data type with dtype=tf.int16.
     *   `2.1.2`: Add 'lazy_decode' config.
 
+*   **Dataset size**: `304.47 GiB`
+
 ## librispeech/lazy_decode <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 *   **Config description**: Raw audio dataset.
@@ -119,3 +126,5 @@ text       | Text         |         | string |
 
     *   `2.1.1`: Fix speech data type with dtype=tf.int16.
     *   **`2.1.2`** (default): Add 'lazy_decode' config.
+
+*   **Dataset size**: `59.37 GiB`
