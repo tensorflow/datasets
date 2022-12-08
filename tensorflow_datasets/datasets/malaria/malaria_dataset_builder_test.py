@@ -16,11 +16,11 @@
 """Malaria Dataset Test."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import malaria
+from tensorflow_datasets.datasets.malaria import malaria_dataset_builder
 
 
 class MalariaTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = malaria.Malaria
+  DATASET_CLASS = malaria_dataset_builder.Builder
   SPLITS = {
       "train": 4,
   }
