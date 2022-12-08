@@ -271,6 +271,14 @@ class FeatureTensorTest(
                 value=False,
                 expected=False,
             ),
+            testing.FeatureExpectationItem(
+                value=1,
+                expected=True,
+            ),
+            testing.FeatureExpectationItem(
+                value=0,
+                expected=False,
+            ),
         ])
 
   @parameterized.parameters([

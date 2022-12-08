@@ -80,6 +80,7 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
+      '1.0.1': 'Fixed parsing of fields `conversion`, `visit` and `exposure`.',
       '1.0.0': 'Initial release.',
   }
 
@@ -158,8 +159,8 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
             'f10': row['f10'],
             'f11': row['f11'],
             'treatment': row['treatment'],
-            'conversion': row['conversion'],
-            'visit': row['visit'],
-            'exposure': row['exposure']
+            'conversion': int(row['conversion']),
+            'visit': int(row['visit']),
+            'exposure': int(row['exposure'])
         }
         index += 1
