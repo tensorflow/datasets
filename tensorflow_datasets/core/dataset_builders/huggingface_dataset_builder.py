@@ -36,6 +36,7 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -100,8 +101,8 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
   raise ValueError(f"Type {type(hf_features)} is not supported.")
 
 
-def _convert_dataset_name(hf_name: str) -> str:
-  """Convert Huggingface dataset name to a TFDS compatible name.
+def _from_hf_to_tfds(hf_name: str) -> str:
+  """Converts Huggingface dataset name to a TFDS compatible name.
 
   Huggingface dataset names can contain characters that are not supported in
   TFDS. For example, in Huggingface a dataset name like `a/b` is supported,
@@ -117,6 +118,30 @@ def _convert_dataset_name(hf_name: str) -> str:
     the TFDS compatible dataset name.
   """
   return hf_name.replace("-", "_").replace("/", "__").lower()
+
+
+def _from_tfds_to_hf(tfds_name: str) -> str:
+  """Finds the original HF repo ID.
+
+  As TFDS doesn't support case-sensitive names, we list all HF datasets and pick
+  the dataset that has a case-insensitive match.
+
+  Args:
+    tfds_name: the dataset name in TFDS.
+
+  Returns:
+    the HF dataset name.
+
+  Raises:
+    Exception: if the name doesn't correspond to any existing dataset.
+  """
+  hf_datasets = lazy_imports_lib.lazy_imports.datasets
+  hf_names = hf_datasets.list_datasets()
+  for hf_name in hf_names:
+    if _from_hf_to_tfds(hf_name) == tfds_name.lower():
+      return hf_name
+  raise registered.DatasetNotFoundError(
+      f"\"{tfds_name}\" is not listed in Hugging Face datasets.")
 
 
 def _convert_config_name(hf_config: Optional[str]) -> Optional[str]:
@@ -223,7 +248,7 @@ class HuggingfaceDatasetBuilder(
           description=self._hf_info.description)
     else:
       self._converted_builder_config = None
-    self.name = _convert_dataset_name(hf_repo_id)
+    self.name = _from_hf_to_tfds(hf_repo_id)
     super().__init__(
         file_format=file_format, config=tfds_config, data_dir=data_dir)
     if self._hf_config:
@@ -266,3 +291,11 @@ class HuggingfaceDatasetBuilder(
     dataset_info = self._info()
     for i, example in enumerate(data):
       yield i, _convert_example(example, dataset_info)
+
+
+def builder(name: str,
+            config: Optional[str] = None,
+            **builder_kwargs) -> HuggingfaceDatasetBuilder:
+  hf_repo_id = _from_tfds_to_hf(name)
+  return HuggingfaceDatasetBuilder(
+      hf_repo_id=hf_repo_id, hf_config=config, **builder_kwargs)

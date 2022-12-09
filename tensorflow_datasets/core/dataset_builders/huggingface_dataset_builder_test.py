@@ -15,23 +15,47 @@
 
 """Tests for huggingface_dataset_builder."""
 import datetime
+from unittest import mock
 
 import numpy as np
 import pytest
 import tensorflow as tf
 from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
 
 
-def test_convert_dataset_name():
-  assert huggingface_dataset_builder._convert_dataset_name("x") == "x"
-  assert huggingface_dataset_builder._convert_dataset_name("X") == "x"
-  assert huggingface_dataset_builder._convert_dataset_name("x-y") == "x_y"
-  assert huggingface_dataset_builder._convert_dataset_name("x/y") == "x__y"
+class FakeHfDatasets:
+
+  def list_datasets(self):
+    return ["mnist", "bigscience/P3", "x", "x/Y-z", "fashion_mnist"]
+
+
+def test_from_hf_to_tfds():
+  assert huggingface_dataset_builder._from_hf_to_tfds("x") == "x"
+  assert huggingface_dataset_builder._from_hf_to_tfds("X") == "x"
+  assert huggingface_dataset_builder._from_hf_to_tfds("x-y") == "x_y"
+  assert huggingface_dataset_builder._from_hf_to_tfds("x/y") == "x__y"
+
+
+@mock.patch.object(lazy_imports_lib.lazy_imports, "datasets", FakeHfDatasets())
+def test_from_tfds_to_hf():
+  assert huggingface_dataset_builder._from_tfds_to_hf("x") == "x"
+  assert huggingface_dataset_builder._from_tfds_to_hf("X") == "x"
+  assert huggingface_dataset_builder._from_tfds_to_hf(
+      "bigscience__p3") == "bigscience/P3"
+  assert huggingface_dataset_builder._from_tfds_to_hf(
+      "fashion_mnist") == "fashion_mnist"
+  assert huggingface_dataset_builder._from_tfds_to_hf("x__y_z") == "x/Y-z"
+  with pytest.raises(
+      registered.DatasetNotFoundError,
+      match="\"z\" is not listed in Hugging Face datasets."):
+    assert huggingface_dataset_builder._from_tfds_to_hf("z")
 
 
 def test_convert_config_name():
+  assert huggingface_dataset_builder._convert_config_name(None) is None
   assert huggingface_dataset_builder._convert_config_name("x") == "x"
   assert huggingface_dataset_builder._convert_config_name("X") == "x"
 

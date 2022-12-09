@@ -29,6 +29,13 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import visibility
+def test_load_hf_dataset():
+  builder = object()
+  with mock.patch(
+      'tensorflow_datasets.core.dataset_builders.huggingface_dataset_builder.builder',
+      return_value=builder,
+  ):
+    assert load.builder('huggingface:x/y') is builder
 
 
 @visibility.set_availables_tmp([

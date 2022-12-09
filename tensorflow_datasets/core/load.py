@@ -40,6 +40,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import visibility
+from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder  # pylint:disable=unused-import
 from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
@@ -166,6 +167,9 @@ def builder(
           'explicitly set')
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
   if name.namespace:
+    if name.namespace == 'huggingface':
+      return huggingface_dataset_builder.builder(
+          name=name.name, **builder_kwargs)
     if (visibility.DatasetType.COMMUNITY_PUBLIC.is_available() and
         community.community_register.has_namespace(name.namespace)):
       return community.community_register.builder(name=name, **builder_kwargs)
