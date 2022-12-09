@@ -16,7 +16,7 @@
 """Tests for corrupted_imagenet."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import imagenet2012_corrupted
+from tensorflow_datasets.datasets.imagenet2012_corrupted import imagenet2012_corrupted_dataset_builder
 
 
 class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
@@ -28,7 +28,7 @@ class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
       "spatter_3", "speckle_noise_4"
   ]
 
-  DATASET_CLASS = imagenet2012_corrupted.Imagenet2012Corrupted
+  DATASET_CLASS = imagenet2012_corrupted_dataset_builder.Builder
   SPLITS = {  # Expected number of examples on the train/validation splits.
       "validation": 10,
   }
