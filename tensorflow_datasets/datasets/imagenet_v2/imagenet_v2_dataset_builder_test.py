@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """Tests for ImageNet-v2 image classification dataset."""
-from tensorflow_datasets.image_classification import imagenet_v2
+from tensorflow_datasets.datasets.imagenet_v2 import imagenet_v2_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
@@ -24,7 +24,7 @@ class ImagenetV2Test(tfds.testing.DatasetBuilderTestCase):
       'matched-frequency', 'threshold-0.7', 'topimages'
   ]
 
-  DATASET_CLASS = imagenet_v2.ImagenetV2
+  DATASET_CLASS = imagenet_v2_dataset_builder.Builder
   SPLITS = {
       'test': 10,  # Number of fake test examples.
   }
