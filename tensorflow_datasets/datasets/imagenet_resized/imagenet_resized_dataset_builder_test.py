@@ -14,14 +14,14 @@
 # limitations under the License.
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import imagenet_resized
+from tensorflow_datasets.datasets.imagenet_resized import imagenet_resized_dataset_builder
 
 
 class ImagenetResizedTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = [
       "8x8",
   ]
-  DATASET_CLASS = imagenet_resized.ImagenetResized
+  DATASET_CLASS = imagenet_resized_dataset_builder.Builder
   SPLITS = {
       "train": 3,
       "validation": 1,
