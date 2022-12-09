@@ -13,29 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for imagenet2012_fewshot."""
+"""Tests for imagenet2012_fewshot_dataset_builder."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import imagenet2012_fewshot
+from tensorflow_datasets.datasets.imagenet2012_fewshot import imagenet2012_fewshot_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
-imagenet2012_fewshot.Imagenet2012Fewshot.PNG_IMAGES = ["n01440764_1.JPEG"]
-imagenet2012_fewshot.Imagenet2012Fewshot.CMYK_IMAGES = [
+imagenet2012_fewshot_dataset_builder.Builder.PNG_IMAGES = ["n01440764_1.JPEG"]
+imagenet2012_fewshot_dataset_builder.Builder.CMYK_IMAGES = [
     "n01440764_2.JPEG",
     "n01440764_3.JPEG",
 ]
 
-fake_example_dir = testing.test_utils.fake_examples_dir()
-imagenet2012_fewshot.SUBSET2FILES = {
+imagenet2012_fewshot_dataset_builder.SUBSET2FILES = {
     "1shot":
-        tfds.core.as_path(fake_example_dir + "/imagenet2012_fewshot/1shot.txt"),
+        tfds.core.tfds_path("datasets/imagenet2012_fewshot/dummy_data/1shot.txt"
+                           ),
 }
-imagenet2012_fewshot.TUNE_FILE = tfds.core.as_path(
-    fake_example_dir + "/imagenet2012_fewshot/tune.txt")
+imagenet2012_fewshot_dataset_builder.TUNE_FILE = tfds.core.tfds_path(
+    "datasets/imagenet2012_fewshot/dummy_data/tune.txt")
 
 
 class Imagenet2012FewshotTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imagenet2012_fewshot.Imagenet2012Fewshot
+  DATASET_CLASS = imagenet2012_fewshot_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["1shot"]
   SPLITS = {  # Expected number of examples on each split.
       "train": 1,
