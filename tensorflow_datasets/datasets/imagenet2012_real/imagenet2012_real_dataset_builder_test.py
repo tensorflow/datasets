@@ -15,14 +15,14 @@
 
 """my_dataset dataset."""
 
-from tensorflow_datasets.image_classification import imagenet2012_real
+from tensorflow_datasets.datasets.imagenet2012_real import imagenet2012_real_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class ImageNet2012RealTest(tfds.testing.DatasetBuilderTestCase):
   """Test for ImageNet2012Real dataset."""
 
-  DATASET_CLASS = imagenet2012_real.Imagenet2012Real
+  DATASET_CLASS = imagenet2012_real_dataset_builder.Builder
   SPLITS = {"validation": 10}
   DL_DOWNLOAD_RESULT = "real.json"
 
