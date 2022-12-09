@@ -16,11 +16,11 @@
 """Tests for imdb dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import imdb
+from tensorflow_datasets.datasets.imdb_reviews import imdb_reviews_dataset_builder
 
 
 class IMDBReviewsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imdb.IMDBReviews
+  DATASET_CLASS = imdb_reviews_dataset_builder.Builder
   SPLITS = {
       "train": 5,
       "test": 4,
