@@ -18,13 +18,13 @@
 import collections
 
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.image_classification.imagenet_sketch import imagenet_sketch
+from tensorflow_datasets.datasets.imagenet_sketch import imagenet_sketch_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class ImagenetSketchTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ImageNet-Sketch dataset."""
-  DATASET_CLASS = imagenet_sketch.ImagenetSketch
+  DATASET_CLASS = imagenet_sketch_dataset_builder.Builder
   SPLITS = {
       'test': 10,  # Number of fake test examples.
   }
