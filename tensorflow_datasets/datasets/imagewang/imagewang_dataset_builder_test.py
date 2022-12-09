@@ -16,11 +16,11 @@
 """Tests for Imagewang."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import imagewang
+from tensorflow_datasets.datasets.imagewang import imagewang_dataset_builder
 
 
 class ImagewangFullSizeTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imagewang.Imagewang
+  DATASET_CLASS = imagewang_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["full-size"]
   SPLITS = {
       "train": 4,
@@ -29,7 +29,7 @@ class ImagewangFullSizeTest(testing.DatasetBuilderTestCase):
 
 
 class Imagewang320Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imagewang.Imagewang
+  DATASET_CLASS = imagewang_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["320px"]
   SPLITS = {
       "train": 4,
@@ -38,7 +38,7 @@ class Imagewang320Test(testing.DatasetBuilderTestCase):
 
 
 class Imagewang160Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imagewang.Imagewang
+  DATASET_CLASS = imagewang_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["160px"]
   SPLITS = {
       "train": 4,
