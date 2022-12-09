@@ -15,14 +15,13 @@
 
 """imagenet_lt dataset."""
 
-from tensorflow_datasets.image_classification.imagenet_lt import imagenet_lt
+from tensorflow_datasets.datasets.imagenet_lt import imagenet_lt_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class ImagenetLtTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for imagenet_lt dataset."""
-  # TODO(imagenet_lt):
-  DATASET_CLASS = imagenet_lt.ImagenetLt
+  DATASET_CLASS = imagenet_lt_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train examples
       'validation': 1,  # Number of fake validation examples
