@@ -16,17 +16,17 @@
 """Tests for imagenet2012_subset dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import imagenet2012_subset
+from tensorflow_datasets.datasets.imagenet2012_subset import imagenet2012_subset_dataset_builder
 
-imagenet2012_subset.Imagenet2012Subset.PNG_IMAGES = ["n01440764_1.JPEG"]
-imagenet2012_subset.Imagenet2012Subset.CMYK_IMAGES = [
+imagenet2012_subset_dataset_builder.Builder.PNG_IMAGES = ["n01440764_1.JPEG"]
+imagenet2012_subset_dataset_builder.Builder.CMYK_IMAGES = [
     "n01440764_2.JPEG",
     "n01440764_3.JPEG",
 ]
 
 
 class Imagenet2012SubsetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imagenet2012_subset.Imagenet2012Subset
+  DATASET_CLASS = imagenet2012_subset_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["1pct"]
   SPLITS = {  # Expected number of examples on each split.
       "train": 1,
