@@ -15,13 +15,13 @@
 
 """imagenet2012_multilabel dataset."""
 
-from tensorflow_datasets.image_classification.imagenet2012_multilabel import imagenet2012_multilabel
+from tensorflow_datasets.datasets.imagenet2012_multilabel import imagenet2012_multilabel_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class Imagenet2012MultilabelTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for imagenet2012_multilabel dataset."""
-  DATASET_CLASS = imagenet2012_multilabel.Imagenet2012Multilabel
+  DATASET_CLASS = imagenet2012_multilabel_dataset_builder.Builder
   SPLITS = {
       'validation': 3,
       'imagenet_m': 3
