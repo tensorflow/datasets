@@ -43,6 +43,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`caltech101`](caltech101.md)
+*   [`kddcup99`](kddcup99.md)
 *   [`lost_and_found`](lost_and_found.md)
 
 ### `Audio`
@@ -78,7 +79,6 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Conditional image generation`
 
 *   [`imagenet2012`](imagenet2012.md)
-*   [`imagenet2012`](imagenet2012.md)
 
 ### `Coreference resolution`
 
@@ -100,7 +100,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`caltech101`](caltech101.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
-*   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012`](imagenet2012.md)
 
 ### `Dependency parsing`
@@ -144,7 +143,19 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`dsprites`](dsprites.md)
 *   [`flic`](flic.md)
 *   [`imagenet2012`](imagenet2012.md)
-*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
+*   [`imagenet2012_fewshot`](imagenet2012_fewshot.md)
+*   [`imagenet2012_multilabel`](imagenet2012_multilabel.md)
+*   [`imagenet2012_real`](imagenet2012_real.md)
+*   [`imagenet2012_subset`](imagenet2012_subset.md)
+*   [`imagenet_a`](imagenet_a.md)
+*   [`imagenet_lt`](imagenet_lt.md)
+*   [`imagenet_r`](imagenet_r.md)
+*   [`imagenet_resized`](imagenet_resized.md)
+*   [`imagenet_sketch`](imagenet_sketch.md)
+*   [`imagenet_v2`](imagenet_v2.md)
+*   [`imagenette`](imagenette.md)
+*   [`imagewang`](imagewang.md)
 *   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
@@ -163,17 +174,19 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`celeb_a`](celeb_a.md)
 *   [`flic`](flic.md)
 *   [`imagenet2012`](imagenet2012.md)
-*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet_resized`](imagenet_resized.md)
+*   [`imagenet_sketch`](imagenet_sketch.md)
+*   [`imagenette`](imagenette.md)
+*   [`imagewang`](imagewang.md)
 
 ### `Image clustering`
 
-*   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012`](imagenet2012.md)
 
 ### `Image compression`
 
 *   [`imagenet2012`](imagenet2012.md)
-*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet_resized`](imagenet_resized.md)
 
 ### `Image generation`
 
@@ -182,7 +195,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`cityscapes`](cityscapes.md)
 *   [`clevr`](clevr.md)
-*   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012`](imagenet2012.md)
 
 ### `Image super resolution`
@@ -231,19 +243,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`i_naturalist2017`](i_naturalist2017.md)
 *   [`i_naturalist2018`](i_naturalist2018.md)
 *   [`i_naturalist2021`](i_naturalist2021.md)
-*   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
-*   [`imagenet2012_fewshot`](imagenet2012_fewshot.md)
-*   [`imagenet2012_multilabel`](imagenet2012_multilabel.md)
-*   [`imagenet2012_real`](imagenet2012_real.md)
-*   [`imagenet2012_subset`](imagenet2012_subset.md)
-*   [`imagenet_a`](imagenet_a.md)
-*   [`imagenet_lt`](imagenet_lt.md)
-*   [`imagenet_r`](imagenet_r.md)
-*   [`imagenet_resized`](imagenet_resized.md)
-*   [`imagenet_sketch`](imagenet_sketch.md)
-*   [`imagenet_v2`](imagenet_v2.md)
-*   [`imagenette`](imagenette.md)
-*   [`imagewang`](imagewang.md)
 *   [`kmnist`](kmnist.md)
 *   [`lfw`](lfw.md)
 *   [`malaria`](malaria.md)
@@ -285,6 +284,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`billsum`](billsum.md)
 *   [`blimp`](blimp.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
+*   [`irc_disentanglement`](irc_disentanglement.md)
 
 ### `Monolingual`
 
@@ -295,6 +295,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
+*   [`imdb_reviews`](imdb_reviews.md)
 
 ### `Natural language inference`
 
@@ -307,6 +308,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
+*   [`imdb_reviews`](imdb_reviews.md)
 *   [`natural_instructions`](natural_instructions.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
@@ -410,6 +412,10 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 *   [`scene_parse150`](scene_parse150.md)
 
+### `Sentiment analysis`
+
+*   [`imdb_reviews`](imdb_reviews.md)
+
 ### `Sequence to sequence language modelling`
 
 *   [`big_patent`](big_patent.md)
@@ -432,7 +438,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`higgs`](higgs.md)
 *   [`howell`](howell.md)
 *   [`iris`](iris.md)
-*   [`kddcup99`](kddcup99.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
 *   [`penguins`](penguins.md)
@@ -474,6 +479,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ble_wind_field`](ble_wind_field.md)
 *   [`efron_morris75`](efron_morris75.md)
+*   [`kddcup99`](kddcup99.md)
 
 ### `Text`
 
@@ -586,6 +592,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`bool_q`](bool_q.md)
+*   [`imdb_reviews`](imdb_reviews.md)
 *   [`natural_instructions`](natural_instructions.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
