@@ -15,12 +15,12 @@
 
 """irc_disentanglement dataset."""
 
+from tensorflow_datasets.datasets.irc_disentanglement import irc_disentanglement_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text import irc_disentanglement
 
 
 class IrcDisentanglementTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = irc_disentanglement.IrcDisentanglement
+  DATASET_CLASS = irc_disentanglement_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "validation": 1,  # Number of fake validation example
