@@ -15,15 +15,14 @@
 
 """kdd_cup_99 dataset."""
 
+from tensorflow_datasets.datasets.kddcup99 import kddcup99_dataset_builder
 import tensorflow_datasets.public_api as tfds
-
-from tensorflow_datasets.structured.kddcup99 import kddcup99
 
 
 class KddCup99Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for kdd_cup_99 dataset."""
 
-  DATASET_CLASS = kddcup99.Kddcup99
+  DATASET_CLASS = kddcup99_dataset_builder.Builder
   SPLITS = {
       'train': 100,
       'test': 10,
