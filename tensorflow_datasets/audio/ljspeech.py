@@ -13,86 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""LJSpeech dataset."""
+"""Dataset definition for ljspeech.
 
-from __future__ import annotations
-
-import os
-
-from etils import epath
-import numpy as np
-import tensorflow_datasets.public_api as tfds
-
-_CITATION = """\
-@misc{ljspeech17,
-  author       = {Keith Ito},
-  title        = {The LJ Speech Dataset},
-  howpublished = {\\url{https://keithito.com/LJ-Speech-Dataset/}},
-  year         = 2017
-}
+DEPRECATED!
+If you want to use the Ljspeech dataset builder class, use:
+tfds.builder_cls('ljspeech')
 """
 
-_DESCRIPTION = """\
-This is a public domain speech dataset consisting of 13,100 short audio clips of
-a single speaker reading passages from 7 non-fiction books. A transcription is
-provided for each clip. Clips vary in length from 1 to 10 seconds and have a
-total length of approximately 24 hours.
+from tensorflow_datasets.core import lazy_builder_import
 
-The texts were published between 1884 and 1964, and are in the public domain.
-The audio was recorded in 2016-17 by the LibriVox project and is also in the
-public domain.
-"""
-
-_URL = "https://keithito.com/LJ-Speech-Dataset/"
-_DL_URL = "https://data.keithito.com/data/speech/LJSpeech-1.1.tar.bz2"
-
-
-class Ljspeech(tfds.core.GeneratorBasedBuilder):
-  """LJSpeech dataset."""
-
-  VERSION = tfds.core.Version("1.1.1")
-  RELEASE_NOTES = {
-      "1.1.1": "Fix speech data type with dtype=tf.int16.",
-  }
-
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "id": np.str_,
-            "speech": tfds.features.Audio(sample_rate=22050, dtype=np.int16),
-            "text": tfds.features.Text(),
-            "text_normalized": tfds.features.Text(),
-        }),
-        supervised_keys=("text_normalized", "speech"),
-        homepage=_URL,
-        citation=_CITATION,
-        metadata=tfds.core.MetadataDict(sample_rate=22050),
-    )
-
-  def _split_generators(self, dl_manager):
-    extracted_dir = dl_manager.download_and_extract(_DL_URL)
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"directory": extracted_dir},
-        ),
-    ]
-
-  def _generate_examples(self, directory):
-    """Yields examples."""
-    metadata_path = os.path.join(directory, "LJSpeech-1.1", "metadata.csv")
-    with epath.Path(metadata_path).open() as f:
-      for line in f:
-        line = line.strip()
-        key, transcript, transcript_normalized = line.split("|")
-        wav_path = os.path.join(directory, "LJSpeech-1.1", "wavs",
-                                "%s.wav" % key)
-        example = {
-            "id": key,
-            "speech": wav_path,
-            "text": transcript,
-            "text_normalized": transcript_normalized,
-        }
-        yield key, example
+Ljspeech = lazy_builder_import.LazyBuilderImport('ljspeech')
