@@ -16,13 +16,13 @@
 import collections
 
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.image_classification import imagenet_r
+from tensorflow_datasets.datasets.imagenet_r import imagenet_r_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class ImagenetRTest(tfds.testing.DatasetBuilderTestCase):
 
-  DATASET_CLASS = imagenet_r.ImagenetR
+  DATASET_CLASS = imagenet_r_dataset_builder.Builder
   SPLITS = {
       'test': 10,  # Number of fake test examples.
   }
