@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="kddcup99" />
-  <meta itemprop="description" content="This is the data set used for The Third International Knowledge Discovery and&#10;Data Mining Tools Competition, which was held in conjunction with KDD-99 The&#10;Fifth International Conference on Knowledge Discovery and Data Mining. The&#10;competition task was to build a network intrusion detector, a predictive model&#10;capable of distinguishing between &#x27;bad&#x27; connections, called intrusions or&#10;attacks, and &#x27;good&#x27; normal connections. This database contains a standard set&#10;of data to be audited, which includes a wide variety of intrusions simulated in&#10;a military network environment.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;kddcup99&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="This is the data set used for The Third International Knowledge Discovery and&#10;Data Mining Tools Competition, which was held in conjunction with KDD-99 The&#10;Fifth International Conference on Knowledge Discovery and Data Mining. The&#10;competition task was to build a network intrusion detector, a predictive model&#10;capable of distinguishing between &#x27;bad&#x27; connections, called intrusions or&#10;attacks, and &#x27;good&#x27; normal connections. This database contains a standard set of&#10;data to be audited, which includes a wide variety of intrusions simulated in a&#10;military network environment.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;kddcup99&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/kddcup99" />
   <meta itemprop="sameAs" content="https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html" />
   <meta itemprop="citation" content="@misc{Dua:2019 ,&#10;  author = &quot;Dua, Dheeru and Graff, Casey&quot;,&#10;  year = 2017,&#10;  title = &quot;{UCI} Machine Learning Repository&quot;,&#10;  url = &quot;http://archive.ics.uci.edu/ml&quot;,&#10;  institution = &quot;University of California, Irvine, School of Information and&#10;Computer Sciences&quot;&#10;}" />
@@ -33,7 +33,7 @@ military network environment.
     [https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html](https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html)
 
 *   **Source code**:
-    [`tfds.structured.kddcup99.Kddcup99`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/kddcup99/kddcup99.py)
+    [`tfds.datasets.kddcup99.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/kddcup99/kddcup99_dataset_builder.py)
 
 *   **Versions**:
 

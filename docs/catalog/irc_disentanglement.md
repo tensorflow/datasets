@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="irc_disentanglement" />
-  <meta itemprop="description" content="IRC Disentanglement dataset contains over 77,563 messages from Ubuntu IRC&#10;channel.&#10;&#10;Features include message id, message text and timestamp.&#10;Target is list of messages that current message replies to.&#10;Each record contains a list of messages from one day of IRC chat.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;irc_disentanglement&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="IRC Disentanglement dataset contains over 77,563 messages from Ubuntu IRC&#10;channel.&#10;&#10;Features include message id, message text and timestamp. Target is list of&#10;messages that current message replies to. Each record contains a list of&#10;messages from one day of IRC chat.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;irc_disentanglement&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/irc_disentanglement" />
   <meta itemprop="sameAs" content="https://jkk.name/irc-disentanglement" />
   <meta itemprop="citation" content="@InProceedings{acl19disentangle,&#10;  author    = {Jonathan K. Kummerfeld and Sai R. Gouravajhala and Joseph Peper and Vignesh Athreya and Chulaka Gunasekara and Jatin Ganhotra and Siva Sankalp Patel and Lazaros Polymenakos and Walter S. Lasecki},&#10;  title     = {A Large-Scale Corpus for Conversation Disentanglement},&#10;  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},&#10;  location  = {Florence, Italy},&#10;  month     = {July},&#10;  year      = {2019},&#10;  doi       = {10.18653/v1/P19-1374},&#10;  pages     = {3846--3856},&#10;  url       = {https://aclweb.org/anthology/papers/P/P19/P19-1374/},&#10;  arxiv     = {https://arxiv.org/abs/1810.11118},&#10;  software  = {https://jkk.name/irc-disentanglement},&#10;  data      = {https://jkk.name/irc-disentanglement},&#10;}" />
@@ -31,7 +31,7 @@ messages from one day of IRC chat.
     [https://jkk.name/irc-disentanglement](https://jkk.name/irc-disentanglement)
 
 *   **Source code**:
-    [`tfds.text.IrcDisentanglement`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/irc_disentanglement.py)
+    [`tfds.datasets.irc_disentanglement.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/irc_disentanglement/irc_disentanglement_dataset_builder.py)
 
 *   **Versions**:
 

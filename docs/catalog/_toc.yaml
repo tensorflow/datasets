@@ -24,6 +24,8 @@ toc:
     title: ag_news_subset
   - path: /datasets/catalog/caltech101
     title: caltech101
+  - path: /datasets/catalog/kddcup99
+    title: kddcup99
   - path: /datasets/catalog/lost_and_found
     title: lost_and_found
   title: Anomaly detection
@@ -82,8 +84,6 @@ toc:
 - section:
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
-  - path: /datasets/catalog/imagenet2012
-    title: imagenet2012 (manual)
   title: Conditional image generation
 - section:
   - path: /datasets/catalog/clevr
@@ -114,8 +114,6 @@ toc:
     title: caltech101
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
-  - path: /datasets/catalog/imagenet2012
-    title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
   title: Density estimation
@@ -182,8 +180,32 @@ toc:
     title: flic
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
-  - path: /datasets/catalog/imagenet2012
-    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012_corrupted
+    title: imagenet2012_corrupted (manual)
+  - path: /datasets/catalog/imagenet2012_fewshot
+    title: imagenet2012_fewshot (manual)
+  - path: /datasets/catalog/imagenet2012_multilabel
+    title: imagenet2012_multilabel (manual)
+  - path: /datasets/catalog/imagenet2012_real
+    title: imagenet2012_real (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
+  - path: /datasets/catalog/imagenet_a
+    title: imagenet_a
+  - path: /datasets/catalog/imagenet_lt
+    title: imagenet_lt (manual)
+  - path: /datasets/catalog/imagenet_r
+    title: imagenet_r
+  - path: /datasets/catalog/imagenet_resized
+    title: imagenet_resized
+  - path: /datasets/catalog/imagenet_sketch
+    title: imagenet_sketch
+  - path: /datasets/catalog/imagenet_v2
+    title: imagenet_v2
+  - path: /datasets/catalog/imagenette
+    title: imagenette
+  - path: /datasets/catalog/imagewang
+    title: imagewang
   - path: /datasets/catalog/lost_and_found
     title: lost_and_found
   - path: /datasets/catalog/lsun
@@ -216,20 +238,24 @@ toc:
     title: flic
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
-  - path: /datasets/catalog/imagenet2012
-    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet_resized
+    title: imagenet_resized
+  - path: /datasets/catalog/imagenet_sketch
+    title: imagenet_sketch
+  - path: /datasets/catalog/imagenette
+    title: imagenette
+  - path: /datasets/catalog/imagewang
+    title: imagewang
   title: Image classification
 - section:
-  - path: /datasets/catalog/imagenet2012
-    title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
   title: Image clustering
 - section:
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
-  - path: /datasets/catalog/imagenet2012
-    title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet_resized
+    title: imagenet_resized
   title: Image compression
 - section:
   - path: /datasets/catalog/binarized_mnist
@@ -242,8 +268,6 @@ toc:
     title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
-  - path: /datasets/catalog/imagenet2012
-    title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
   title: Image generation
@@ -328,32 +352,6 @@ toc:
     title: i_naturalist2018
   - path: /datasets/catalog/i_naturalist2021
     title: i_naturalist2021
-  - path: /datasets/catalog/imagenet2012_corrupted
-    title: imagenet2012_corrupted (manual)
-  - path: /datasets/catalog/imagenet2012_fewshot
-    title: imagenet2012_fewshot (manual)
-  - path: /datasets/catalog/imagenet2012_multilabel
-    title: imagenet2012_multilabel (manual)
-  - path: /datasets/catalog/imagenet2012_real
-    title: imagenet2012_real (manual)
-  - path: /datasets/catalog/imagenet2012_subset
-    title: imagenet2012_subset (manual)
-  - path: /datasets/catalog/imagenet_a
-    title: imagenet_a
-  - path: /datasets/catalog/imagenet_lt
-    title: imagenet_lt (manual)
-  - path: /datasets/catalog/imagenet_r
-    title: imagenet_r
-  - path: /datasets/catalog/imagenet_resized
-    title: imagenet_resized
-  - path: /datasets/catalog/imagenet_sketch
-    title: imagenet_sketch
-  - path: /datasets/catalog/imagenet_v2
-    title: imagenet_v2
-  - path: /datasets/catalog/imagenette
-    title: imagenette
-  - path: /datasets/catalog/imagewang
-    title: imagewang
   - path: /datasets/catalog/kmnist
     title: kmnist
   - path: /datasets/catalog/lfw
@@ -428,6 +426,8 @@ toc:
     title: blimp
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
+  - path: /datasets/catalog/irc_disentanglement
+    title: irc_disentanglement
   title: Language modelling
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -444,6 +444,8 @@ toc:
     title: bool_q
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
+  - path: /datasets/catalog/imdb_reviews
+    title: imdb_reviews
   title: Monolingual
 - section:
   - path: /datasets/catalog/anli
@@ -460,6 +462,8 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/imdb_reviews
+    title: imdb_reviews
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
@@ -608,6 +612,10 @@ toc:
     title: scene_parse150
   title: Semantic segmentation
 - section:
+  - path: /datasets/catalog/imdb_reviews
+    title: imdb_reviews
+  title: Sentiment analysis
+- section:
   - path: /datasets/catalog/big_patent
     title: big_patent
   - path: /datasets/catalog/billsum
@@ -640,8 +648,6 @@ toc:
     title: howell
   - path: /datasets/catalog/iris
     title: iris
-  - path: /datasets/catalog/kddcup99
-    title: kddcup99
   - path: /datasets/catalog/movie_lens
     title: movie_lens
   - path: /datasets/catalog/movielens
@@ -712,6 +718,8 @@ toc:
     title: ble_wind_field
   - path: /datasets/catalog/efron_morris75
     title: efron_morris75
+  - path: /datasets/catalog/kddcup99
+    title: kddcup99
   title: Tabular
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -924,6 +932,8 @@ toc:
     title: ag_news_subset
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/imdb_reviews
+    title: imdb_reviews
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions

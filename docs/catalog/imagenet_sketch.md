@@ -30,7 +30,7 @@ constructed by flip or rotation.
     [https://github.com/HaohanWang/ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch)
 
 *   **Source code**:
-    [`tfds.image_classification.imagenet_sketch.ImagenetSketch`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_sketch/imagenet_sketch.py)
+    [`tfds.datasets.imagenet_sketch.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/imagenet_sketch/imagenet_sketch_dataset_builder.py)
 
 *   **Versions**:
 
