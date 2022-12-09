@@ -19,7 +19,7 @@ import os
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
-from tensorflow_datasets.image_classification import imagenet2012_subset
+from tensorflow_datasets.datasets.imagenet2012_subset import imagenet2012_subset_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 # pylint: disable=line-too-long
@@ -31,7 +31,7 @@ SUBSET2FILES = {
 TUNE_FILE = tfds.core.gcs_path('downloads/imagenet2012_fewshot/tune.txt')
 
 
-class Builder(imagenet2012_subset.Imagenet2012Subset):
+class Builder(imagenet2012_subset_dataset_builder.Builder):
   """Class balanced subset of Imagenet 2012 dataset for few-shot learning."""
 
   BUILDER_CONFIGS = [
