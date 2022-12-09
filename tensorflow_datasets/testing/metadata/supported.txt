@@ -808,6 +808,8 @@ i_naturalist2017/0.1.0
 i_naturalist2018/1.0.0
 i_naturalist2021/1.0.0
 imagenet2012/5.0.0
+imagenet2012/5.0.0
+imagenet2012/5.1.0
 imagenet2012/5.1.0
 imagenet2012_corrupted/brightness_1/3.1.0
 imagenet2012_corrupted/brightness_1/5.0.0
