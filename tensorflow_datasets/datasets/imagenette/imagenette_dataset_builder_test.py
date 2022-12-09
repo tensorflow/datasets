@@ -20,11 +20,11 @@ French horn, garbage truck, gas pump, golf ball, parachute).
 """
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import imagenette
+from tensorflow_datasets.datasets.imagenette import imagenette_dataset_builder
 
 
 class ImagenetteTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imagenette.Imagenette
+  DATASET_CLASS = imagenette_dataset_builder.Builder
   SPLITS = {
       "train": 4,  # Number of fake train example
       "validation": 4,  # Number of fake test example
