@@ -54,23 +54,38 @@ _TOP_LEVEL_DIR = "1-billion-word-language-modeling-benchmark-r13output"
 _TRAIN_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
                                   "training-monolingual.tokenized.shuffled",
                                   "news.en-*")
+
 _HELDOUT_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
                                     "heldout-monolingual.tokenized.shuffled",
                                     "news.en.heldout-*")
+_TEST_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
+                                 "heldout-monolingual.tokenized.shuffled",
+                                 "news.en.heldout-00000-of-00050")
 
 
 def _train_data_filenames(tmp_dir):
   return tf.io.gfile.glob(os.path.join(tmp_dir, _TRAIN_FILE_FORMAT))
 
 
+def _validation_data_filenames(tmp_dir):
+  heldout_filenames = tf.io.gfile.glob(
+      os.path.join(tmp_dir, _HELDOUT_FILE_FORMAT))
+  validation_filenames = sorted(
+      list(set(heldout_filenames) - set(_test_data_filenames(tmp_dir))))
+  return validation_filenames
+
+
 def _test_data_filenames(tmp_dir):
-  return tf.io.gfile.glob(os.path.join(tmp_dir, _HELDOUT_FILE_FORMAT))
+  return tf.io.gfile.glob(os.path.join(tmp_dir, _TEST_FILE_FORMAT))
 
 
 class Lm1b(tfds.core.GeneratorBasedBuilder):
   """1 Billion Word Language Model Benchmark dataset."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "Divides the Test split into Validation and canonical Test.",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -88,10 +103,13 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     lm1b_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
 
     train_files = _train_data_filenames(lm1b_path)
+    validation_files = _validation_data_filenames(lm1b_path)
     test_files = _test_data_filenames(lm1b_path)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN, gen_kwargs={"files": train_files}),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION, gen_kwargs={"files": validation_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST, gen_kwargs={"files": test_files}),
     ]
