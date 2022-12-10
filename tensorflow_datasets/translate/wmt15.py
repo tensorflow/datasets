@@ -18,7 +18,7 @@
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.translate import wmt
 
-_URL = "http://www.statmt.org/wmt15/translation-task.html"
+_URL = "https://www.statmt.org/wmt15/translation-task.html"
 _CITATION = """
 @InProceedings{bojar-EtAl:2015:WMT,
   author    = {Bojar, Ond\v{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Haddow, Barry  and  Huck, Matthias  and  Hokamp, Chris  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco},
@@ -29,7 +29,7 @@ _CITATION = """
   address   = {Lisbon, Portugal},
   publisher = {Association for Computational Linguistics},
   pages     = {1--46},
-  url       = {http://aclweb.org/anthology/W15-3001}
+  url       = {https://aclweb.org/anthology/W15-3001}
 }
 """
 

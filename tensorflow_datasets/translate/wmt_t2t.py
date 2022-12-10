@@ -29,7 +29,7 @@ _CITATION = """
   address   = {Baltimore, Maryland, USA},
   publisher = {Association for Computational Linguistics},
   pages     = {12--58},
-  url       = {http://www.aclweb.org/anthology/W/W14/W14-3302}
+  url       = {https://www.aclweb.org/anthology/W/W14/W14-3302}
 }
 """
 

@@ -39,11 +39,11 @@ _CITATION = """\
   publisher = {Association for Computational Linguistics},
   pages     = {529--535},
   abstract  = {The performance of Neural Machine Translation (NMT) systems often suffers in low-resource scenarios where sufficiently large-scale parallel corpora cannot be obtained. Pre-trained word embeddings have proven to be invaluable for improving performance in natural language analysis tasks, which often suffer from paucity of data. However, their utility for NMT has not been extensively explored. In this work, we perform five sets of experiments that analyze when we can expect pre-trained word embeddings to help in NMT tasks. We show that such embeddings can be surprisingly effective in some cases -- providing gains of up to 20 BLEU points in the most favorable setting.},
-  url       = {http://www.aclweb.org/anthology/N18-2084}
+  url       = {https://www.aclweb.org/anthology/N18-2084}
 }
 """
 
-_DATA_URL = 'http://phontron.com/data/ted_talks.tar.gz'
+_DATA_URL = 'https://phontron.com/data/ted_talks.tar.gz'
 
 _LANGUAGES = ('en', 'es', 'pt-br', 'fr', 'ru', 'he', 'ar', 'ko', 'zh-cn', 'it',
               'ja', 'zh-tw', 'nl', 'ro', 'tr', 'de', 'vi', 'pl', 'pt', 'bg',
