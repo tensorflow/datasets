@@ -16,11 +16,11 @@
 """Tests the data loading for Kitti."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.object_detection import kitti
+from tensorflow_datasets.datasets.kitti import kitti_dataset_builder
 
 
 class KittiTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = kitti.Kitti
+  DATASET_CLASS = kitti_dataset_builder.Builder
   SPLITS = {
       "train": 6,
       "validation": 2,
