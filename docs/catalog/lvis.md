@@ -31,7 +31,7 @@ LVIS: A dataset for large vocabulary instance segmentation.
 *   **Homepage**: [https://www.lvisdataset.org/](https://www.lvisdataset.org/)
 
 *   **Source code**:
-    [`tfds.object_detection.lvis.Lvis`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/lvis/lvis.py)
+    [`tfds.datasets.lvis.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/lvis/lvis_dataset_builder.py)
 
 *   **Versions**:
 

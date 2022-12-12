@@ -33,7 +33,7 @@ public domain.
     [https://keithito.com/LJ-Speech-Dataset/](https://keithito.com/LJ-Speech-Dataset/)
 
 *   **Source code**:
-    [`tfds.audio.Ljspeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/ljspeech.py)
+    [`tfds.datasets.ljspeech.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ljspeech/ljspeech_dataset_builder.py)
 
 *   **Versions**:
 

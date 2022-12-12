@@ -38,7 +38,7 @@ the Kitti homepage.
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 
 *   **Source code**:
-    [`tfds.object_detection.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/kitti.py)
+    [`tfds.datasets.kitti.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/kitti/kitti_dataset_builder.py)
 
 *   **Versions**:
 

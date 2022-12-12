@@ -156,8 +156,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`imagenet_v2`](imagenet_v2.md)
 *   [`imagenette`](imagenette.md)
 *   [`imagewang`](imagewang.md)
+*   [`kitti`](kitti.md)
+*   [`lfw`](lfw.md)
 *   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
+*   [`lvis`](lvis.md)
+*   [`malaria`](malaria.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 *   [`pass`](pass.md)
 *   [`s3o4d`](s3o4d.md)
@@ -178,6 +182,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`imagenet_sketch`](imagenet_sketch.md)
 *   [`imagenette`](imagenette.md)
 *   [`imagewang`](imagewang.md)
+*   [`kitti`](kitti.md)
+*   [`lvis`](lvis.md)
+*   [`malaria`](malaria.md)
 
 ### `Image clustering`
 
@@ -201,11 +208,13 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`div2k`](div2k.md)
+*   [`kitti`](kitti.md)
 
 ### `Image to image translation`
 
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`cityscapes`](cityscapes.md)
+*   [`kitti`](kitti.md)
 *   [`scene_parse150`](scene_parse150.md)
 
 ### `Image classification`
@@ -244,8 +253,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`i_naturalist2018`](i_naturalist2018.md)
 *   [`i_naturalist2021`](i_naturalist2021.md)
 *   [`kmnist`](kmnist.md)
-*   [`lfw`](lfw.md)
-*   [`malaria`](malaria.md)
 *   [`mnist`](mnist.md)
 *   [`mnist_corrupted`](mnist_corrupted.md)
 *   [`omniglot`](omniglot.md)
@@ -276,6 +283,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Instance segmentation`
 
 *   [`cityscapes`](cityscapes.md)
+*   [`lvis`](lvis.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 
 ### `Language modelling`
@@ -285,6 +293,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`blimp`](blimp.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
+*   [`lambada`](lambada.md)
+*   [`librispeech_lm`](librispeech_lm.md)
+*   [`lm1b`](lm1b.md)
 
 ### `Monolingual`
 
@@ -296,6 +307,17 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`bool_q`](bool_q.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`imdb_reviews`](imdb_reviews.md)
+*   [`kitti`](kitti.md)
+*   [`lambada`](lambada.md)
+*   [`librispeech`](librispeech.md)
+*   [`librispeech_lm`](librispeech_lm.md)
+*   [`libritts`](libritts.md)
+*   [`ljspeech`](ljspeech.md)
+*   [`lm1b`](lm1b.md)
+
+### `Multilingual`
+
+*   [`librispeech`](librispeech.md)
 
 ### `Natural language inference`
 
@@ -309,6 +331,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
 *   [`imdb_reviews`](imdb_reviews.md)
+*   [`math_dataset`](math_dataset.md)
 *   [`natural_instructions`](natural_instructions.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
@@ -321,13 +344,13 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Object detection`
 
 *   [`flic`](flic.md)
+*   [`kitti`](kitti.md)
+*   [`lvis`](lvis.md)
 
 ### `Object detection`
 
 *   [`coco`](coco.md)
 *   [`coco_captions`](coco_captions.md)
-*   [`kitti`](kitti.md)
-*   [`lvis`](lvis.md)
 *   [`open_images_challenge2019_detection`](open_images_challenge2019_detection.md)
 *   [`open_images_v4`](open_images_v4.md)
 *   [`voc`](voc.md)
@@ -339,6 +362,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
+*   [`math_dataset`](math_dataset.md)
 *   [`natural_instructions`](natural_instructions.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
@@ -408,6 +432,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`bigearthnet`](bigearthnet.md)
 *   [`cityscapes`](cityscapes.md)
+*   [`kitti`](kitti.md)
 *   [`lost_and_found`](lost_and_found.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 *   [`scene_parse150`](scene_parse150.md)
@@ -421,9 +446,15 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 
+### `Speech`
+
+*   [`librispeech`](librispeech.md)
+*   [`libritts`](libritts.md)
+
 ### `Speech recognition`
 
 *   [`accentdb`](accentdb.md)
+*   [`librispeech`](librispeech.md)
 
 ### `Structured`
 
@@ -534,8 +565,13 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`hellaswag`](hellaswag.md)
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
+*   [`kitti`](kitti.md)
 *   [`lambada`](lambada.md)
+*   [`lfw`](lfw.md)
+*   [`librispeech`](librispeech.md)
 *   [`librispeech_lm`](librispeech_lm.md)
+*   [`libritts`](libritts.md)
+*   [`ljspeech`](ljspeech.md)
 *   [`lm1b`](lm1b.md)
 *   [`lost_and_found`](lost_and_found.md)
 *   [`math_dataset`](math_dataset.md)
@@ -604,6 +640,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
+*   [`lambada`](lambada.md)
+*   [`lm1b`](lm1b.md)
 *   [`natural_instructions`](natural_instructions.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
