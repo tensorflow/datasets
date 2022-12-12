@@ -16,11 +16,11 @@
 """Tests for lm1b dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import lm1b
+from tensorflow_datasets.datasets.lm1b import lm1b_dataset_builder
 
 
 class Lm1bTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = lm1b.Lm1b
+  DATASET_CLASS = lm1b_dataset_builder.Builder
   SPLITS = {
       "train": 3,
       "test": 2,
