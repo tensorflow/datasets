@@ -16,11 +16,11 @@
 """Tests for librispeech dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio import librispeech
+from tensorflow_datasets.datasets.librispeech import librispeech_dataset_builder
 
 
 class LibrispeechTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = librispeech.Librispeech
+  DATASET_CLASS = librispeech_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["default"]
   SPLITS = {
       "train_clean100": 2,
