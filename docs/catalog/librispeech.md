@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="librispeech" />
-  <meta itemprop="description" content="LibriSpeech is a corpus of approximately 1000 hours of read English speech with sampling rate of 16 kHz,&#10;prepared by Vassil Panayotov with the assistance of Daniel Povey. The data is derived from read&#10;audiobooks from the LibriVox project, and has been carefully segmented and aligned.&#10;&#10;It&#x27;s recommended to use lazy audio decoding for faster reading and smaller dataset size:&#10;- install `tensorflow_io` library: `pip install tensorflow-io`&#10;- enable lazy decoding: `tfds.load(&#x27;librispeech&#x27;, builder_kwargs={&#x27;config&#x27;: &#x27;lazy_decode&#x27;})`&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;librispeech&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="LibriSpeech is a corpus of approximately 1000 hours of read English speech with&#10;sampling rate of 16 kHz, prepared by Vassil Panayotov with the assistance of&#10;Daniel Povey. The data is derived from read audiobooks from the LibriVox&#10;project, and has been carefully segmented and aligned.&#10;&#10;It&#x27;s recommended to use lazy audio decoding for faster reading and smaller&#10;dataset size: - install `tensorflow_io` library: `pip install tensorflow-io` -&#10;enable lazy decoding: `tfds.load(&#x27;librispeech&#x27;, builder_kwargs={&#x27;config&#x27;:&#10;&#x27;lazy_decode&#x27;})`&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;librispeech&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/librispeech" />
   <meta itemprop="sameAs" content="http://www.openslr.org/12" />
   <meta itemprop="citation" content="@inproceedings{panayotov2015librispeech,&#10;  title={Librispeech: an ASR corpus based on public domain audio books},&#10;  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},&#10;  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},&#10;  pages={5206--5210},&#10;  year={2015},&#10;  organization={IEEE}&#10;}" />
@@ -38,7 +38,7 @@ enable lazy decoding: `tfds.load('librispeech', builder_kwargs={'config':
 *   **Homepage**: [http://www.openslr.org/12](http://www.openslr.org/12)
 
 *   **Source code**:
-    [`tfds.audio.Librispeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/librispeech.py)
+    [`tfds.datasets.librispeech.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/librispeech/librispeech_dataset_builder.py)
 
 *   **Download size**: `57.14 GiB`
 

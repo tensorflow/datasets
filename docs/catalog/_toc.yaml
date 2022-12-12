@@ -206,10 +206,18 @@ toc:
     title: imagenette
   - path: /datasets/catalog/imagewang
     title: imagewang
+  - path: /datasets/catalog/kitti
+    title: kitti
+  - path: /datasets/catalog/lfw
+    title: lfw
   - path: /datasets/catalog/lost_and_found
     title: lost_and_found
   - path: /datasets/catalog/lsun
     title: lsun
+  - path: /datasets/catalog/lvis
+    title: lvis
+  - path: /datasets/catalog/malaria
+    title: malaria
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
   - path: /datasets/catalog/pass
@@ -246,6 +254,12 @@ toc:
     title: imagenette
   - path: /datasets/catalog/imagewang
     title: imagewang
+  - path: /datasets/catalog/kitti
+    title: kitti
+  - path: /datasets/catalog/lvis
+    title: lvis
+  - path: /datasets/catalog/malaria
+    title: malaria
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -276,12 +290,16 @@ toc:
     title: celeb_a_hq (manual)
   - path: /datasets/catalog/div2k
     title: div2k
+  - path: /datasets/catalog/kitti
+    title: kitti
   title: Image super resolution
 - section:
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
   - path: /datasets/catalog/cityscapes
     title: cityscapes (manual)
+  - path: /datasets/catalog/kitti
+    title: kitti
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
   title: Image to image translation
@@ -354,10 +372,6 @@ toc:
     title: i_naturalist2021
   - path: /datasets/catalog/kmnist
     title: kmnist
-  - path: /datasets/catalog/lfw
-    title: lfw
-  - path: /datasets/catalog/malaria
-    title: malaria
   - path: /datasets/catalog/mnist
     title: mnist
   - path: /datasets/catalog/mnist_corrupted
@@ -414,6 +428,8 @@ toc:
 - section:
   - path: /datasets/catalog/cityscapes
     title: cityscapes (manual)
+  - path: /datasets/catalog/lvis
+    title: lvis
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
   title: Instance segmentation
@@ -428,6 +444,12 @@ toc:
     title: e2e_cleaned
   - path: /datasets/catalog/irc_disentanglement
     title: irc_disentanglement
+  - path: /datasets/catalog/lambada
+    title: lambada
+  - path: /datasets/catalog/librispeech_lm
+    title: librispeech_lm
+  - path: /datasets/catalog/lm1b
+    title: lm1b
   title: Language modelling
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -446,7 +468,25 @@ toc:
     title: e2e_cleaned
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
+  - path: /datasets/catalog/kitti
+    title: kitti
+  - path: /datasets/catalog/lambada
+    title: lambada
+  - path: /datasets/catalog/librispeech
+    title: librispeech
+  - path: /datasets/catalog/librispeech_lm
+    title: librispeech_lm
+  - path: /datasets/catalog/libritts
+    title: libritts
+  - path: /datasets/catalog/ljspeech
+    title: ljspeech
+  - path: /datasets/catalog/lm1b
+    title: lm1b
   title: Monolingual
+- section:
+  - path: /datasets/catalog/librispeech
+    title: librispeech
+  title: Multilingual
 - section:
   - path: /datasets/catalog/anli
     title: anli
@@ -464,6 +504,8 @@ toc:
     title: clevr
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
+  - path: /datasets/catalog/math_dataset
+    title: math_dataset
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
@@ -479,16 +521,16 @@ toc:
 - section:
   - path: /datasets/catalog/flic
     title: flic
+  - path: /datasets/catalog/kitti
+    title: kitti
+  - path: /datasets/catalog/lvis
+    title: lvis
   title: Object detection
 - section:
   - path: /datasets/catalog/coco
     title: coco
   - path: /datasets/catalog/coco_captions
     title: coco_captions
-  - path: /datasets/catalog/kitti
-    title: kitti
-  - path: /datasets/catalog/lvis
-    title: lvis
   - path: /datasets/catalog/open_images_challenge2019_detection
     title: open_images_challenge2019_detection
   - path: /datasets/catalog/open_images_v4
@@ -507,6 +549,8 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/math_dataset
+    title: math_dataset
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
@@ -604,6 +648,8 @@ toc:
     title: bigearthnet
   - path: /datasets/catalog/cityscapes
     title: cityscapes (manual)
+  - path: /datasets/catalog/kitti
+    title: kitti
   - path: /datasets/catalog/lost_and_found
     title: lost_and_found
   - path: /datasets/catalog/nyu_depth_v2
@@ -622,8 +668,16 @@ toc:
     title: billsum
   title: Sequence to sequence language modelling
 - section:
+  - path: /datasets/catalog/librispeech
+    title: librispeech
+  - path: /datasets/catalog/libritts
+    title: libritts
+  title: Speech
+- section:
   - path: /datasets/catalog/accentdb
     title: accentdb
+  - path: /datasets/catalog/librispeech
+    title: librispeech
   title: Speech recognition
 - section:
   - path: /datasets/catalog/cherry_blossoms
@@ -822,10 +876,20 @@ toc:
     title: imdb_reviews
   - path: /datasets/catalog/irc_disentanglement
     title: irc_disentanglement
+  - path: /datasets/catalog/kitti
+    title: kitti
   - path: /datasets/catalog/lambada
     title: lambada
+  - path: /datasets/catalog/lfw
+    title: lfw
+  - path: /datasets/catalog/librispeech
+    title: librispeech
   - path: /datasets/catalog/librispeech_lm
     title: librispeech_lm
+  - path: /datasets/catalog/libritts
+    title: libritts
+  - path: /datasets/catalog/ljspeech
+    title: ljspeech
   - path: /datasets/catalog/lm1b
     title: lm1b
   - path: /datasets/catalog/lost_and_found
@@ -951,6 +1015,10 @@ toc:
     title: bool_q
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
+  - path: /datasets/catalog/lambada
+    title: lambada
+  - path: /datasets/catalog/lm1b
+    title: lm1b
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
