@@ -60,12 +60,14 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'click',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'dm-tree',
     'etils[epath]',
     'numpy',
     'promise',
     'protobuf>=3.12.2',
+    'psutil',
     'requests>=2.19.0',
     'six',
     'tensorflow-metadata',

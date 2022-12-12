@@ -1295,6 +1295,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     split_builder = split_builder_lib.SplitBuilder(
         split_dict=self.info.splits,
         features=self.info.features,
+        dataset_size=self.info.dataset_size,
         max_examples_per_split=download_config.max_examples_per_split,
         beam_options=download_config.beam_options,
         beam_runner=download_config.beam_runner,

@@ -73,8 +73,9 @@ tfds build $DATASET_NAME/$DATASET_CONFIG \
 
 ### Locally
 
-To run your script locally using the default Apache Beam runner, the command is
-the same as for other datasets:
+To run your script locally using the
+[default Apache Beam runner](https://beam.apache.org/documentation/runners/direct/)
+(it must fit all data in memory), the command is the same as for other datasets:
 
 ```sh
 tfds build my_dataset
@@ -86,6 +87,34 @@ computer). It is recommended to generate the datasets using a distributed
 environment. Have a look at the
 [Apache Beam Documentation](https://beam.apache.org/) for a list of supported
 runtimes.
+
+### With Apache Flink
+
+To run the pipeline using [Apache Flink](https://flink.apache.org/) you can read
+the
+[official documentation](https://beam.apache.org/documentation/runners/flink).
+Make sure your Beam is compliant with
+[Flink Version Compatibility](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)
+
+To make it easier to launch the script, it's helpful to define the following
+variables using the actual values for your Flink setup and the dataset you want
+to generate:
+
+```sh
+DATASET_NAME=<dataset-name>
+DATASET_CONFIG=<dataset-config>
+FLINK_CONFIG_DIR=<flink-config-directory>
+FLINK_VERSION=<flink-version>
+```
+
+To run on an embedded Flink cluster, you can launch the job using the command
+below:
+
+```sh
+tfds build $DATASET_NAME/$DATASET_CONFIG \
+  --beam_pipeline_options=\
+"runner=FlinkRunner,flink_version=$FLINK_VERSION,flink_conf_dir=$FLINK_CONFIG_DIR"
+```
 
 ### With a custom script
 
