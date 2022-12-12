@@ -149,14 +149,11 @@ class Librispeech(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, directory: epath.Path):
     """Generates examples as dicts."""
-    beam = tfds.core.lazy_imports.apache_beam
-
     transcripts_glob = os.path.join(directory, "LibriSpeech", "*/*/*/*.txt")
     transcripts_files = tf.io.gfile.glob(transcripts_glob)
 
-    return (beam.Create(transcripts_files)
-            | beam.FlatMap(_generate_librispeech_examples)
-            | beam.Reshuffle())
+    for transcript_file in transcripts_files:
+      yield from _generate_librispeech_examples(transcript_file)
 
 
 def _generate_librispeech_examples(transcript_file: str):
