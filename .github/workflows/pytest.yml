@@ -82,7 +82,6 @@ jobs:
           --ignore="tensorflow_datasets/testing/test_utils.py" \
           --ignore="tensorflow_datasets/image/lsun_test.py" \
           --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 
   notebooktest-job:
     # For merged PR, activate testing only on the master branch.
