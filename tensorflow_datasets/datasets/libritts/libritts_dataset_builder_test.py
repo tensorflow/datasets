@@ -16,11 +16,11 @@
 """Tests for libritts dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio import libritts
+from tensorflow_datasets.datasets.libritts import libritts_dataset_builder
 
 
 class LibriTTSTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = libritts.Libritts
+  DATASET_CLASS = libritts_dataset_builder.Builder
   SPLITS = {
       "train_clean100": 2,
       "train_clean360": 2,

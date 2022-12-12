@@ -1,0 +1,5 @@
+content.data-type.audio
+content.data-type.speech
+content.data-type.text
+content.language.en
+content.monolingual
