@@ -16,11 +16,11 @@
 """Tests for mctaco dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import mctaco
+from tensorflow_datasets.datasets.mctaco import mctaco_dataset_builder
 
 
 class MctacoTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = mctaco.Mctaco
+  DATASET_CLASS = mctaco_dataset_builder.Builder
   DL_EXTRACT_RESULT = {
       "validation": "dev_3783.tsv",
       "test": "test_9942.tsv",
