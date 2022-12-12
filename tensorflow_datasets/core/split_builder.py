@@ -24,6 +24,8 @@ import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Union
 
 from absl import logging
+import click
+import psutil
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
@@ -124,6 +126,7 @@ class SplitBuilder:
       *,
       split_dict: splits_lib.SplitDict,  # Used for precomputed nb of examples
       features: features_lib.FeatureConnector,
+      dataset_size: utils.Size,
       beam_options: Optional['beam.options.pipeline_options.PipelineOptions'],
       beam_runner: Optional['beam.runners.PipelineRunner'],
       max_examples_per_split: Optional[int],
@@ -131,6 +134,7 @@ class SplitBuilder:
   ):
     self._split_dict = split_dict
     self._features = features
+    self._dataset_size = dataset_size
     self._max_examples_per_split = max_examples_per_split
 
     self._in_contextmanager: bool = False
@@ -225,6 +229,14 @@ class SplitBuilder:
           **********************************************************************
           """)
       print_fn(msg)
+
+      total_memory = psutil.virtual_memory().total
+      if self._dataset_size >= total_memory:
+        if not click.confirm(
+            f'The dataset is {self._dataset_size} in size, but your machine has'
+            f' only {utils.Size(total_memory)} of memory. Continue?',
+            default=True):
+          sys.exit(1)
 
     beam_options = (
         self._beam_options or beam.options.pipeline_options.PipelineOptions())
