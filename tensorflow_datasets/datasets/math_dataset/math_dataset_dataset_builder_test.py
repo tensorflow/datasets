@@ -16,11 +16,11 @@
 """Tests for Mathematical dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import math_dataset
+from tensorflow_datasets.datasets.math_dataset import math_dataset_dataset_builder
 
 
 class MathDatasetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = math_dataset.MathDataset
+  DATASET_CLASS = math_dataset_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["algebra__linear_1d"]
   SPLITS = {
       "train": 6,  # Number of fake train example pairs
