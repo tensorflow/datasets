@@ -33,7 +33,7 @@ _NAME_CLASS_REG = re.compile(r'^' + _NAME_CLASS + r'$')
 # Regex matching 'dataset/config:1.*.*/arg=123'
 _NAME_REG = re.compile(r'^'
                        r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
-                       r'(/(?P<config>[\w\-\.]+))?'
+                       r'(/(?P<config>[\w\+\-\.]+))?'
                        r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
                        r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
                        r'$')
