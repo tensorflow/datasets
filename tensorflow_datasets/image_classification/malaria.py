@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset class for Malaria dataset."""
+"""Dataset definition for malaria.
 
 import fnmatch
 import os
@@ -46,50 +46,6 @@ _CITATION = """\
 }
 """
 
+from tensorflow_datasets.core import lazy_builder_import
 
-class Malaria(tfds.core.GeneratorBasedBuilder):
-  """Malaria Cell Image Dataset Class."""
-
-  VERSION = tfds.core.Version("1.0.0")
-
-  def _info(self):
-    """Define Dataset Info."""
-
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(names=_NAMES),
-        }),
-        supervised_keys=("image", "label"),
-        homepage="https://lhncbc.nlm.nih.gov/publication/pub9932",
-        citation=_CITATION,
-    )
-
-  def _split_generators(self, dl_manager):
-    """Define Splits."""
-
-    path = dl_manager.download_and_extract(_URL)
-
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "data_dir_path": os.path.join(path, "cell_images"),
-            },
-        ),
-    ]
-
-  def _generate_examples(self, data_dir_path):
-    """Generate images and labels for splits."""
-    folder_names = ["Parasitized", "Uninfected"]
-
-    for folder in folder_names:
-      folder_path = os.path.join(data_dir_path, folder)
-      for file_name in tf.io.gfile.listdir(folder_path):
-        if fnmatch.fnmatch(file_name, "*.png"):
-          image = os.path.join(folder_path, file_name)
-          label = folder.lower()
-          image_id = "%s_%s" % (folder, file_name)
-          yield image_id, {"image": image, "label": label}
+Malaria = lazy_builder_import.LazyBuilderImport('malaria')
