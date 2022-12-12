@@ -276,6 +276,10 @@ class FeatureTensorTest(
                 expected=True,
             ),
             testing.FeatureExpectationItem(
+                value=2,
+                expected=True,
+            ),
+            testing.FeatureExpectationItem(
                 value=0,
                 expected=False,
             ),
@@ -411,6 +415,22 @@ def test_invalid_input():
         dtype=tf.string,
         encoding=features_lib.Encoding.BYTES,
     )
+
+  with pytest.raises(
+      TypeError, match='converting it to `bool` will always output `True`'):
+    features_lib.Tensor(
+        shape=(),
+        dtype=np.bool_,
+        encoding=features_lib.Encoding.BYTES,
+    ).encode_example('0')
+
+  with pytest.raises(
+      TypeError, match='converting it to `bool` will always output `True`'):
+    features_lib.Tensor(
+        shape=(),
+        dtype=np.bool_,
+        encoding=features_lib.Encoding.BYTES,
+    ).encode_example('False')
 
 
 def test_jax_bfloat16():

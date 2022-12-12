@@ -152,6 +152,11 @@ class Tensor(feature_lib.FeatureConnector):
                        f'For {self}')
 
     np_dtype = self._serialized_dtype
+    if np_dtype == np.bool_ and isinstance(example_data, str):
+      raise TypeError(
+          f'Error encoding: {example_data!r}. {example_data!r} is a string, so '
+          'converting it to `bool` will always output `True`. Please, fix '
+          '`_generate_examples` with a better parsing.')
     if isinstance(example_data, tf.Tensor):
       raise TypeError(
           f'Error encoding: {example_data!r}. `_generate_examples` should '

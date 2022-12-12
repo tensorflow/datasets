@@ -360,6 +360,10 @@ def _generate_examples(self, images_path, label_path):
       }
 ```
 
+Warning: When parsing boolean values from strings or integers, use the util
+function `tfds.core.utils.bool_utils.parse_bool` to avoid parsing errors (e.g.,
+`bool("False") == True`).
+
 #### File access and `tf.io.gfile`
 
 In order to support Cloud storage systems, avoid the use of the Python built-in

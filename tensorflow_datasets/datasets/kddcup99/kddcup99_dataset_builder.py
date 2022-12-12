@@ -19,6 +19,7 @@ import csv
 import gzip
 
 import numpy as np
+from tensorflow_datasets.core.utils import bool_utils
 import tensorflow_datasets.public_api as tfds
 
 _TRAIN_URL = 'http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data.gz'
@@ -28,8 +29,10 @@ _TEST_URL = 'http://kdd.ics.uci.edu/databases/kddcup99/corrected.gz'
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for kdd_cup_99 dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
+      '1.0.1': 'Fixes parsing of boolean fields `land`, `logged_in`, '
+               '`root_shell`, `is_hot_login` and `is_guest_login`.',
       '1.0.0': 'Initial release.',
   }
 
@@ -269,5 +272,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       with gzip.open(f, 'rt', newline='') as gz:
         reader = csv.DictReader(gz, self.info.features)
         for index, row in enumerate(reader):
+          row['land'] = bool_utils.parse_bool(row['land'])
+          row['logged_in'] = bool_utils.parse_bool(row['logged_in'])
+          row['root_shell'] = bool_utils.parse_bool(row['root_shell'])
+          row['is_hot_login'] = bool_utils.parse_bool(row['is_hot_login'])
+          row['is_guest_login'] = bool_utils.parse_bool(row['is_guest_login'])
           row['label'] = row['label'].rstrip('.')
           yield index, row
