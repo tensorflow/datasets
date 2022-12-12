@@ -16,12 +16,12 @@
 """lfw test script."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import lfw
+from tensorflow_datasets.datasets.lfw import lfw_dataset_builder
 
 
 class LFWTest(testing.DatasetBuilderTestCase):
   """Test Class."""
-  DATASET_CLASS = lfw.LFW
+  DATASET_CLASS = lfw_dataset_builder.Builder
 
   SPLITS = {
       "train": 8,
