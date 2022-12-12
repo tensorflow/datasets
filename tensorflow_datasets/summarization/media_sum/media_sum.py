@@ -56,20 +56,11 @@ _CITATION = """
 class MediaSum(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for media_sum dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '2.0.0': 'Change from manual_dir to download_and_extract',
   }
-
-  MANUAL_DOWNLOAD_INSTRUCTIONS = """
-  manual_dir should contain the files:
-
-    * news_dialogue.json
-    * train_val_test_split.json
-
-  The files can be downloaded and extracted from the dataset's GitHub page:
-  https://github.com/zcgzcgzcg1/MediaSum/tree/main/data
-  """
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -92,10 +83,15 @@ class MediaSum(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    archive = {
-        'samples': dl_manager.manual_dir / 'news_dialogue.json',
-        'splits_ids': dl_manager.manual_dir / 'train_val_test_split.json',
-    }
+    samples_url = tfds.download.Resource(
+        url='https://drive.google.com/u/0/uc?id=1ZAKZM1cGhEw2A4_n4bGGMYyF8iPjLZni',
+        extract_method=tfds.download.ExtractMethod.ZIP)
+    archive = dl_manager.download_and_extract({
+        'samples':
+            samples_url,
+        'splits_ids':
+            'https://raw.githubusercontent.com/zcgzcgzcg1/MediaSum/main/data/train_val_test_split.json',
+    })
 
     splits_ids = self._load_json_file(archive['splits_ids'])
     raw_samples = self._load_json_file(archive['samples'])

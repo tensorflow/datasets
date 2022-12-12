@@ -28,6 +28,11 @@ class MediaSumTest(tfds.testing.DatasetBuilderTestCase):
       'test': 1,
   }
 
+  DL_EXTRACT_RESULT = {
+      'samples': 'news_dialogue.json',
+      'splits_ids': 'train_val_test_split.json'
+  }
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()
