@@ -67,6 +67,13 @@ jobs:
     - run: pip install -e .[tests-all]
 
     # Run tests
+    # Ignores:
+    # * Nsynth is run in isolation due to dependency conflict (crepe).
+    # * Lsun tests is disabled because the tensorflow_io used in open-source
+    #   is linked to static libraries compiled again specific TF version, which
+    #   makes test fails with linking error (libtensorflow_io_golang.so).
+    # * imagenet2012_corrupted requires imagemagick binary.
+    # * test_utils.py, test_feature.py is not a test file
     - name: Run core tests
       run: |
         pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard_id }} --num-shards=4 \
@@ -74,7 +81,7 @@ jobs:
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \
           --ignore="tensorflow_datasets/image/lsun_test.py" \
-          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
+          --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 
   notebooktest-job:
