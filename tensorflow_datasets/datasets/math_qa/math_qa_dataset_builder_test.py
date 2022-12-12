@@ -16,13 +16,13 @@
 """math_qa dataset."""
 
 from absl.testing import parameterized
+from tensorflow_datasets.datasets.math_qa import math_qa_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.math_qa import math_qa
 
 
 class MathQaTest(tfds.testing.DatasetBuilderTestCase, parameterized.TestCase):
   """Tests for math_qa dataset."""
-  DATASET_CLASS = math_qa.MathQa
+  DATASET_CLASS = math_qa_dataset_builder.Builder
   SPLITS = {"train": 2, "validation": 1, "test": 1}
 
   @parameterized.named_parameters(
@@ -30,10 +30,13 @@ class MathQaTest(tfds.testing.DatasetBuilderTestCase, parameterized.TestCase):
       ("list", "['a ) 1 , 2', 'b )3', 'c ) none of these']"),
   )
   def test_extract_answer_text(self, options_text):
-    self.assertEqual(math_qa.extract_answer_text(options_text, "a"), "1 , 2")
-    self.assertEqual(math_qa.extract_answer_text(options_text, "b"), "3")
     self.assertEqual(
-        math_qa.extract_answer_text(options_text, "c"), "none of these")
+        math_qa_dataset_builder.extract_answer_text(options_text, "a"), "1 , 2")
+    self.assertEqual(
+        math_qa_dataset_builder.extract_answer_text(options_text, "b"), "3")
+    self.assertEqual(
+        math_qa_dataset_builder.extract_answer_text(options_text, "c"),
+        "none of these")
 
 
 if __name__ == "__main__":
