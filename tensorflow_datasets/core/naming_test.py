@@ -216,6 +216,10 @@ def test_dataset_name():
              'version': '1.0.0',
              'config': '128x128',
          })),
+        ('huggingface:swiss_judgment_prediction/all+mt',
+         (naming.DatasetName('huggingface:swiss_judgment_prediction'), {
+             'config': 'all+mt',
+         })),
     ],
 )
 def test_parse_builder_name_kwargs(name, result):
