@@ -16,11 +16,11 @@
 """Tests for LibrispeechLm dataset builder."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import librispeech_lm
+from tensorflow_datasets.datasets.librispeech_lm import librispeech_lm_dataset_builder
 
 
 class LibrispeechLmTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = librispeech_lm.LibrispeechLm
+  DATASET_CLASS = librispeech_lm_dataset_builder.Builder
   SPLITS = {
       "train": 4,  # Number of fake train examples.
   }
