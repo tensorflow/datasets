@@ -16,11 +16,11 @@
 """Tests for ljspeech dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio import ljspeech
+from tensorflow_datasets.datasets.ljspeech import ljspeech_dataset_builder
 
 
 class LJSpeechTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ljspeech.Ljspeech
+  DATASET_CLASS = ljspeech_dataset_builder.Builder
   SPLITS = {
       "train": 2,
   }
