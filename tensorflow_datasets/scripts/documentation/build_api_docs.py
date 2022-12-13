@@ -18,11 +18,26 @@ import os
 
 from absl import app
 from absl import flags
+from absl import logging
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
-
 from tensorflow_docs.api_generator import generate_lib
+
+from tensorflow.tools.docs import doc_controls  # pylint: disable=g-direct-tensorflow-import
+
+# Force the definition of all documentation decorators declared in
+# third_party/py/tensorflow_datasets/core/utils/docs.py to TensorFlow decorators
+try:
+  tfds.core.utils.docs.deprecated = doc_controls.set_deprecated
+  tfds.core.utils.docs.doc_private = doc_controls.doc_private
+  tfds.core.utils.docs.do_not_doc = doc_controls.do_not_generate_docs
+  # Same as `do_not_doc`, but also applied to children
+  tfds.core.utils.docs.do_not_doc_inheritable = doc_controls.do_not_doc_inheritable
+  # Document the parent, but not the children
+  tfds.core.utils.docs.do_not_doc_in_subclasses = doc_controls.do_not_doc_in_subclasses
+except AttributeError:
+  logging.info("Could not set TensorFlow documentation decorators.")
 
 FLAGS = flags.FLAGS
 

@@ -68,7 +68,7 @@ class SplitGeneratorLegacy:
       the builder.
   """
   name: str
-  gen_kwargs: Dict[str, Any]
+  gen_kwargs: Optional[Dict[str, Any]] = dataclasses.field(default_factory=dict)
 
 
 class _SplitInfoFuture:

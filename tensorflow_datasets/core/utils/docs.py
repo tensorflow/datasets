@@ -28,28 +28,28 @@ class A:
     pass
 ```
 
+The functions exposed below are dummy decorators. This allows not having to load
+TensorFlow. The functions are monkey patched when needed in
+scripts/documentation/build_api_docs.py with actual TensorFlow documentation
+decorators.
 """
 
-from tensorflow.tools.docs import doc_controls  # pylint: disable=g-direct-tensorflow-import
+from typing import Any, TypeVar
+
+_T = TypeVar('_T')
 
 
-def _no_op_decorator(obj):
+# Some TensorFlow documentation decorators used to obfuscate typing: b/262340871
+def _no_op_decorator_without_type(obj) -> Any:
   return obj
 
 
-try:
-  deprecated = doc_controls.set_deprecated
-  doc_private = doc_controls.doc_private
-  do_not_doc = doc_controls.do_not_generate_docs
-  # Same as `do_not_doc`, but also applied to childs
-  do_not_doc_inheritable = doc_controls.do_not_doc_inheritable
-  # Document the parent, but not the childs
-  do_not_doc_in_subclasses = doc_controls.do_not_doc_in_subclasses
-except AttributeError:
-  # Decorators are only required by `tensorflow_docs` which uses tf-nightly
-  # It can be no-op for older versions of TF.
-  deprecated = _no_op_decorator
-  doc_private = _no_op_decorator
-  do_not_doc = _no_op_decorator
-  do_not_doc_inheritable = _no_op_decorator
-  do_not_doc_in_subclasses = _no_op_decorator
+def _no_op_decorator(obj: _T) -> _T:
+  return obj
+
+
+deprecated = _no_op_decorator_without_type
+doc_private = _no_op_decorator
+do_not_doc = _no_op_decorator
+do_not_doc_inheritable = _no_op_decorator
+do_not_doc_in_subclasses = _no_op_decorator_without_type
