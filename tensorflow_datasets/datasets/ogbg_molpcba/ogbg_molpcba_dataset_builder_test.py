@@ -15,14 +15,14 @@
 
 """ogbg_molpcba dataset tests."""
 
-from tensorflow_datasets.graphs.ogbg_molpcba import ogbg_molpcba
+from tensorflow_datasets.datasets.ogbg_molpcba import ogbg_molpcba_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class OgbgMolpcbaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ogbg_molpcba dataset."""
   # TODO(ameyasd): Add reasonable tests.
-  DATASET_CLASS = ogbg_molpcba.OgbgMolpcba
+  DATASET_CLASS = ogbg_molpcba_dataset_builder.Builder
   SPLITS = {
       'train': 4,  # Number of fake train examples.
       'validation': 4,  # Number of fake validation examples.

@@ -108,8 +108,8 @@ DEV_REQUIRE = [
 DATASET_FILES = [
     'datasets/imagenet2012/labels.txt',
     'datasets/imagenet2012/validation_labels.txt',
-    'graphs/ogbg_molpcba/ogbg_molpcba_tasks.txt',
     'datasets/lvis/classes.txt',
+    'datasets/ogbg_molpcba/tasks.txt',
     'image_classification/caltech101_labels.txt',
     'image_classification/categories_places365.txt',
     'image_classification/cbis_ddsm_calc_distributions.txt',
