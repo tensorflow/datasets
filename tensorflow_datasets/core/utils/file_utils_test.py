@@ -18,6 +18,7 @@
 import os
 from absl.testing import flagsaver
 from etils import epath
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import file_utils
@@ -169,6 +170,20 @@ def test_list_datasets_in_data_dir_with_namespace(mock_fs: testing.MockFs):
           version='1.0.0',
           data_dir=data_dir),
   ]
+
+
+@pytest.mark.parametrize(
+    ['filename', 'result'],
+    [
+        ('abc', False),
+        ('dataset_info.json', True),
+        ('features.json', True),
+        ('mnist-test.tfrecord-00000-of-00001', True),
+        ('mnist-test.arrayrecord-00000-of-00001', True),
+    ],
+)
+def test_looks_like_a_tfds_file(filename, result):
+  assert file_utils._looks_like_a_tfds_file(filename) == result
 
 if __name__ == '__main__':
   testing.test_main()

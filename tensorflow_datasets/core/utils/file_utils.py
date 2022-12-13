@@ -19,6 +19,7 @@ import concurrent.futures
 import functools
 import multiprocessing
 import os
+import re
 from typing import Iterator, List, Optional
 
 from absl import logging
@@ -153,6 +154,12 @@ def is_version_folder(
     return looks_like_a_version
 
 
+def _looks_like_a_tfds_file(filename: str) -> bool:
+  filename_has_shard_re = re.compile(r'.*\d{5,}-of-\d{5,}.*')
+  return (bool(filename_has_shard_re.match(filename)) or
+          filename.endswith('.json'))
+
+
 def list_dataset_variants(
     dataset_name: str,
     dataset_dir: epath.PathLike,
@@ -185,6 +192,8 @@ def list_dataset_variants(
 
   def get_dataset_references(
       config_or_version_dir: epath.Path) -> Iterator[naming.DatasetReference]:
+    if _looks_like_a_tfds_file(config_or_version_dir.name):
+      return
     logging.info('Getting configs and versions in %s', config_or_version_dir)
     if is_version_folder_(config_or_version_dir):
       if include_versions:
