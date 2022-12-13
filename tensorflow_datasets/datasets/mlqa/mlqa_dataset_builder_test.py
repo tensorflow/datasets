@@ -16,11 +16,11 @@
 """Tests for mlqa dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import mlqa
+from tensorflow_datasets.datasets.mlqa import mlqa_dataset_builder
 
 
 class MlqaTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = mlqa.Mlqa
+  DATASET_CLASS = mlqa_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["en"]
 
   DL_EXTRACT_RESULT = {
