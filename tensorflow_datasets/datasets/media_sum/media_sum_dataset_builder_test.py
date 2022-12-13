@@ -15,13 +15,13 @@
 
 """media_sum dataset."""
 
+from tensorflow_datasets.datasets.media_sum import media_sum_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.summarization.media_sum import media_sum
 
 
 class MediaSumTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for media_sum dataset."""
-  DATASET_CLASS = media_sum.MediaSum
+  DATASET_CLASS = media_sum_dataset_builder.Builder
   SPLITS = {
       'train': 3,
       'val': 1,
