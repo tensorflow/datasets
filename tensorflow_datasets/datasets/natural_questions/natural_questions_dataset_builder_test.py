@@ -16,12 +16,12 @@
 """Tests for natural_questions dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import natural_questions
+from tensorflow_datasets.datasets.natural_questions import natural_questions_dataset_builder
 
 
 class NaturalQuestionsTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["default"]
-  DATASET_CLASS = natural_questions.NaturalQuestions
+  DATASET_CLASS = natural_questions_dataset_builder.Builder
   SPLITS = {
       "train": 3,
       "validation": 2,
