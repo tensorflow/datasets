@@ -441,6 +441,35 @@ class DatasetBuilder(registered.RegisteredDataset):
         builder_configs=self.BUILDER_CONFIGS,
         default_config_name=self.DEFAULT_BUILDER_CONFIG_NAME)
 
+  def get_reference(
+      self,
+      namespace: Optional[str] = None,
+  ) -> naming.DatasetReference:
+    """Returns a reference to the dataset produced by this dataset builder.
+
+    Includes the config if specified, the version, and the data_dir that should
+    contain this dataset.
+
+    Arguments:
+      namespace: if this dataset is a community dataset, and therefore has a
+        namespace, then the namespace must be provided such that it can be set
+        in the reference. Note that a dataset builder is not aware that it is
+        part of a namespace.
+
+    Returns:
+      a reference to this instantiated builder.
+    """
+    if self.builder_config:
+      config = self.builder_config.name
+    else:
+      config = None
+    return naming.DatasetReference(
+        dataset_name=self.name,
+        namespace=namespace,
+        config=config,
+        version=self.version,
+        data_dir=epath.Path(self._data_dir_root))
+
   def download_and_prepare(
       self,
       *,

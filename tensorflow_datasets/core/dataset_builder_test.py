@@ -35,6 +35,7 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import load
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import file_utils
@@ -446,6 +447,17 @@ class DatasetBuilderTest(testing.TestCase):
     builder = VersionDummyDataset(config="custom", data_dir=tmp_path)
     self.assertEqual(builder.version, config_version)
     self.assertEqual(builder.release_notes, config_release_notes)
+
+  def test_get_reference(self):
+    tmp_dir = self.get_temp_dir()
+    builder = DummyDatasetWithConfigs(config="plus1", data_dir=tmp_dir)
+    reference = builder.get_reference()
+    expected_reference = naming.DatasetReference(
+        dataset_name="dummy_dataset_with_configs",
+        config="plus1",
+        version="0.0.1",
+        data_dir=epath.Path(tmp_dir))
+    self.assertEqual(reference, expected_reference)
 
 
 class DatasetBuilderMultiDirTest(testing.TestCase):
