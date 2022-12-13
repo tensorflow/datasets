@@ -676,7 +676,6 @@ drop/2.0.0
 dsprites/2.0.0
 dsprites/2.1.0
 dtd/3.0.1
-duke_ultrasound/1.0.0
 e2e_cleaned/0.1.0
 efron_morris75/1.0.0
 emnist/balanced/3.0.0
@@ -700,7 +699,6 @@ food101/2.1.0
 forest_fires/0.0.1
 fuss/reverberant/1.2.0
 fuss/unprocessed/1.2.0
-gap/0.1.0
 geirhos_conflict_stimuli/1.0.0
 gem/common_gen/1.1.0
 gem/cs_restaurants/1.1.0
@@ -1042,7 +1040,6 @@ iris/2.0.0
 istella/main/1.1.0
 istella/s/1.1.0
 istella/x/1.1.0
-kddcup99/1.0.0
 kitti/3.1.0
 kitti/3.2.0
 kitti/3.3.0
@@ -4930,8 +4927,6 @@ wine_quality/red/1.0.0
 wine_quality/white/1.0.0
 winogrande/1.1.0
 wit/1.1.0
-wit_kaggle/test_without_gold/1.0.1
-wit_kaggle/train_with_extended_features/1.0.1
 wmt13_translate/cs-en/1.0.0
 wmt13_translate/de-en/1.0.0
 wmt13_translate/es-en/1.0.0
