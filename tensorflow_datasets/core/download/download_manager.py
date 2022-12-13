@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Download manager interface."""
+from __future__ import annotations
 
 import concurrent.futures
 import dataclasses
@@ -103,6 +104,10 @@ class DownloadConfig:
   try_download_gcs: bool = True
   verify_ssl: bool = True
   override_max_simultaneous_downloads: Optional[int] = None
+
+  def replace(self, **kwargs: Any) -> DownloadConfig:
+    """Returns a copy with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
 
 
 class DownloadManager(object):
