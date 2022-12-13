@@ -33,6 +33,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import decode
+from tensorflow_datasets.core import download as download_lib
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
@@ -579,7 +580,11 @@ def load(
   dbuilder = builder(name, data_dir=data_dir, try_gcs=try_gcs, **builder_kwargs)
   if download:
     download_and_prepare_kwargs = download_and_prepare_kwargs or {}
-    dbuilder.download_and_prepare(**download_and_prepare_kwargs)
+    download_config = download_and_prepare_kwargs.pop('download_config', None)
+    download_config = download_config or download_lib.DownloadConfig()
+    download_config = download_config.replace(try_download_gcs=try_gcs)
+    dbuilder.download_and_prepare(
+        download_config=download_config, **download_and_prepare_kwargs)
 
   if as_dataset_kwargs is None:
     as_dataset_kwargs = {}
