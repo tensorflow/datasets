@@ -30,7 +30,7 @@ NQ to be a more realistic and challenging task than prior QA datasets.
     [https://ai.google.com/research/NaturalQuestions/dataset](https://ai.google.com/research/NaturalQuestions/dataset)
 
 *   **Source code**:
-    [`tfds.question_answering.NaturalQuestions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/natural_questions.py)
+    [`tfds.datasets.natural_questions.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/natural_questions/natural_questions_dataset_builder.py)
 
 *   **Versions**:
 

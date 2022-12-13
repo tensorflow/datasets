@@ -18,6 +18,8 @@ toc:
     title: billsum
   - path: /datasets/catalog/booksum
     title: booksum (manual)
+  - path: /datasets/catalog/newsroom
+    title: newsroom (manual)
   title: Abstractive text summarization
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -76,10 +78,16 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/ogbg_molpcba
+    title: ogbg_molpcba
+  title: Biology
+- section:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
   - path: /datasets/catalog/arc
     title: arc
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
   title: Common sense reasoning
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -128,16 +136,20 @@ toc:
     title: aeslc
   - path: /datasets/catalog/booksum
     title: booksum (manual)
+  - path: /datasets/catalog/newsroom
+    title: newsroom (manual)
   title: Document summarization
 - section:
   - path: /datasets/catalog/caltech101
     title: caltech101
   title: Fine grained image classification
 - section:
-  - path: /datasets/catalog/cardiotox
-    title: cardiotox
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
+  title: Graph
+- section:
+  - path: /datasets/catalog/cardiotox
+    title: cardiotox
   title: Graphs
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -450,7 +462,13 @@ toc:
     title: librispeech_lm
   - path: /datasets/catalog/lm1b
     title: lm1b
+  - path: /datasets/catalog/math_qa
+    title: math_qa
   title: Language modelling
+- section:
+  - path: /datasets/catalog/mlqa
+    title: mlqa
+  title: Machine translation
 - section:
   - path: /datasets/catalog/ag_news_subset
     title: ag_news_subset
@@ -482,10 +500,16 @@ toc:
     title: ljspeech
   - path: /datasets/catalog/lm1b
     title: lm1b
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/natural_questions_open
+    title: natural_questions_open
   title: Monolingual
 - section:
   - path: /datasets/catalog/librispeech
     title: librispeech
+  - path: /datasets/catalog/mlqa
+    title: mlqa
   title: Multilingual
 - section:
   - path: /datasets/catalog/anli
@@ -506,9 +530,17 @@ toc:
     title: imdb_reviews
   - path: /datasets/catalog/math_dataset
     title: math_dataset
+  - path: /datasets/catalog/math_qa
+    title: math_qa
+  - path: /datasets/catalog/mlqa
+    title: mlqa
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/natural_questions_open
+    title: natural_questions_open
   title: Natural language understanding
 - section:
   - path: /datasets/catalog/deep1b
@@ -543,6 +575,10 @@ toc:
     title: wider_face
   title: Object detection
 - section:
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  title: Open domain question answering
+- section:
   - path: /datasets/catalog/beir
     title: beir
   - path: /datasets/catalog/bool_q
@@ -551,23 +587,27 @@ toc:
     title: clevr
   - path: /datasets/catalog/math_dataset
     title: math_dataset
+  - path: /datasets/catalog/math_qa
+    title: math_qa
+  - path: /datasets/catalog/mlqa
+    title: mlqa
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/natural_questions_open
+    title: natural_questions_open
   title: Question answering
+- section:
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  title: Question generation
 - section:
   - path: /datasets/catalog/coqa
     title: coqa
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa
-  - path: /datasets/catalog/mctaco
-    title: mctaco
-  - path: /datasets/catalog/mlqa
-    title: mlqa
-  - path: /datasets/catalog/natural_questions
-    title: natural_questions
-  - path: /datasets/catalog/natural_questions_open
-    title: natural_questions_open
   - path: /datasets/catalog/qasc
     title: qasc
   - path: /datasets/catalog/squad
@@ -666,6 +706,8 @@ toc:
     title: big_patent
   - path: /datasets/catalog/billsum
     title: billsum
+  - path: /datasets/catalog/math_qa
+    title: math_qa
   title: Sequence to sequence language modelling
 - section:
   - path: /datasets/catalog/librispeech
@@ -738,12 +780,8 @@ toc:
     title: gigaword
   - path: /datasets/catalog/gov_report
     title: gov_report
-  - path: /datasets/catalog/media_sum
-    title: media_sum (manual)
   - path: /datasets/catalog/multi_news
     title: multi_news
-  - path: /datasets/catalog/newsroom
-    title: newsroom (manual)
   - path: /datasets/catalog/opinion_abstracts
     title: opinion_abstracts
   - path: /datasets/catalog/opinosis
@@ -898,6 +936,12 @@ toc:
     title: math_dataset
   - path: /datasets/catalog/math_qa
     title: math_qa
+  - path: /datasets/catalog/mctaco
+    title: mctaco
+  - path: /datasets/catalog/media_sum
+    title: media_sum (manual)
+  - path: /datasets/catalog/mlqa
+    title: mlqa
   - path: /datasets/catalog/movie_rationales
     title: movie_rationales
   - path: /datasets/catalog/mrqa
@@ -909,6 +953,12 @@ toc:
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/natural_questions_open
+    title: natural_questions_open
+  - path: /datasets/catalog/newsroom
+    title: newsroom (manual)
   - path: /datasets/catalog/openbookqa
     title: openbookqa
   - path: /datasets/catalog/paws_wiki
@@ -1019,9 +1069,17 @@ toc:
     title: lambada
   - path: /datasets/catalog/lm1b
     title: lm1b
+  - path: /datasets/catalog/math_qa
+    title: math_qa
+  - path: /datasets/catalog/mctaco
+    title: mctaco
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/newsroom
+    title: newsroom (manual)
   title: Text generation
 - section:
   - path: /datasets/catalog/aeslc
@@ -1032,6 +1090,8 @@ toc:
     title: billsum
   - path: /datasets/catalog/booksum
     title: booksum (manual)
+  - path: /datasets/catalog/newsroom
+    title: newsroom (manual)
   title: Text summarization
 - section:
   - path: /datasets/catalog/wiki_auto
