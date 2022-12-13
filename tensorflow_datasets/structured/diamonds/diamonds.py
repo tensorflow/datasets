@@ -18,7 +18,6 @@
 from __future__ import annotations
 
 import collections
-from typing import Dict
 
 from etils import epath
 import numpy as np
@@ -98,9 +97,7 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(
-      self, dl_manager: tfds.download.DownloadManager
-  ) -> Dict[str, tfds.core.SplitGenerator]:
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     data = dl_manager.download({'data': _URL})
     # There is no predefined train/val/test split for this dataset.

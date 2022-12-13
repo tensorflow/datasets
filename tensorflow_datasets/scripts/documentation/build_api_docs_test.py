@@ -21,6 +21,7 @@ import tempfile
 
 from absl.testing import absltest
 
+from tensorflow_datasets.core.utils import docs
 from tensorflow_datasets.scripts.documentation import build_api_docs
 
 
@@ -44,6 +45,13 @@ class BuildDocsTest(absltest.TestCase):
     with open(os.path.join(self.workdir, "tfds.md")) as f:
       content = f.read()
     self.assertIn("__init__.py", content)
+
+  def test_tensorflow_decorators_are_used_and_not_dummy_decorator(self):
+    self.assertEqual(docs.deprecated.__name__, "set_deprecated")
+    self.assertEqual(docs.doc_private.__name__, "doc_private")
+    self.assertEqual(docs.do_not_doc.__name__, "do_not_generate_docs")
+    self.assertEqual(docs.do_not_doc_inheritable.__name__,
+                     "do_not_doc_inheritable")
 
 
 if __name__ == "__main__":
