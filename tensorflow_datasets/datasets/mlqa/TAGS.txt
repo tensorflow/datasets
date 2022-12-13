@@ -1,0 +1,12 @@
+content.data-type.text
+content.language.ar
+content.language.de
+content.language.en
+content.language.es
+content.language.hi
+content.language.vi
+content.language.zh
+content.multilingual
+ml.task.machine-translation
+ml.task.natural-language-understanding
+ml.task.question-answering
