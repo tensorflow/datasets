@@ -108,30 +108,16 @@ def _pydub_load_audio(fobj: BinaryIO, file_format: Optional[str]) -> np.ndarray:
     return raw_samples
 
 
-@tf.function(
-    input_signature=(
-        tf.TensorSpec(shape=(), dtype=tf.string),
-        tf.OptionalSpec(tf.TensorSpec(shape=(), dtype=tf.string)),
-    ))
-def _tf_decode_audio(audio_tensor: tf.Tensor,
-                     file_format_tensor: tf.Tensor) -> tf.Tensor:
-  """Decode audio from tf.Tensor."""
-
-  def pydub_decode(audio_tensor: tf.Tensor,
-                   file_format_tensor: tf.Tensor) -> np.ndarray:
-    fobj = io.BytesIO(audio_tensor.numpy())
-    if file_format_tensor.has_value():
-      file_format = file_format_tensor.get_value().numpy()
-    else:
-      file_format = None
-    return _pydub_load_audio(fobj, file_format)
-
-  # pydub.AudioSegment.get_array_of_samples returns an array with type code `b`,
-  # `h` or `i` which can be all converted to `tf.int32`
-  result = tf.py_function(pydub_decode, [audio_tensor, file_format_tensor],
-                          tf.int32)
-
-  return result
+def _pydub_decode_audio(
+    audio_tensor: tf.Tensor,
+    file_format_tensor: tf.experimental.Optional) -> np.ndarray:
+  """Decode audio from tf.Tensor using pydub library."""
+  fobj = io.BytesIO(audio_tensor.numpy())
+  if file_format_tensor.has_value():
+    file_format = file_format_tensor.get_value().numpy()
+  else:
+    file_format = None
+  return _pydub_load_audio(fobj, file_format)
 
 
 class _LazyDecoder(_AudioDecoder):
@@ -162,9 +148,9 @@ class _LazyDecoder(_AudioDecoder):
 
   def decode_audio(self, audio_tensor: tf.Tensor) -> tf.Tensor:
     if self._tfio_file_format:
-      audio_tensor = _tfio_decode_fn()[self._tfio_file_format](
+      decoded_audio_tensor = _tfio_decode_fn()[self._tfio_file_format](
           audio_tensor, dtype=self._dtype)
-      audio_tensor = tf.squeeze(audio_tensor)
+      decoded_audio_tensor = tf.squeeze(decoded_audio_tensor)
     else:
       if self._file_format:
         file_format_tensor = tf.experimental.Optional.from_value(
@@ -172,11 +158,16 @@ class _LazyDecoder(_AudioDecoder):
       else:
         file_format_tensor = tf.experimental.Optional.empty(
             tf.TensorSpec(shape=(), dtype=tf.string))
-      audio_tensor = _tf_decode_audio(audio_tensor, file_format_tensor)
 
-    audio_tensor.set_shape(self._shape)
+      # pydub.AudioSegment.get_array_of_samples returns an array with type code
+      # `b`, `h` or `i` which can be all converted to `tf.int32`
+      decoded_audio_tensor = tf.py_function(_pydub_decode_audio,
+                                            [audio_tensor, file_format_tensor],
+                                            tf.int32)
 
-    return tf.cast(audio_tensor, self._dtype)
+    decoded_audio_tensor.set_shape(self._shape)
+
+    return tf.cast(decoded_audio_tensor, self._dtype)
 
 
 class _EagerDecoder(_AudioDecoder):
