@@ -13,18 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for Opinosis Opinion Dataset."""
+"""OpinionAbstracts Dataset Test."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import opinosis
+from tensorflow_datasets.datasets.opinion_abstracts import opinion_abstracts_dataset_builder
 
 
-class OpinosisTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = opinosis.Opinosis
+class OpinionAbstractsTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = opinion_abstracts_dataset_builder.Builder
   SPLITS = {
-      "train": 2,  # Number of fake test example
+      "train": 1,
   }
-  DL_EXTRACT_RESULT = ""
 
 
 if __name__ == "__main__":
