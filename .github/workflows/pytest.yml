@@ -77,7 +77,7 @@ jobs:
     - name: Run core tests
       run: |
         pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard_id }} --num-shards=4 \
-          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \
           --ignore="tensorflow_datasets/image/lsun_test.py" \
