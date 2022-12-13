@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="math_qa" />
-  <meta itemprop="description" content="A large-scale dataset of math word problems and an interpretable neural math problem solver that learns to map problems to operation programs.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;math_qa&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="A large-scale dataset of math word problems and an interpretable neural math&#10;problem solver that learns to map problems to operation programs.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;math_qa&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/math_qa" />
   <meta itemprop="sameAs" content="https://math-qa.github.io/" />
   <meta itemprop="citation" content="@misc{amini2019mathqa,&#10;      title={MathQA: Towards Interpretable Math Word Problem Solving with Operation-Based Formalisms},&#10;      author={Aida Amini and Saadia Gabriel and Peter Lin and Rik Koncel-Kedziorski and Yejin Choi and Hannaneh Hajishirzi},&#10;      year={2019},&#10;      eprint={1905.13319},&#10;      archivePrefix={arXiv},&#10;      primaryClass={cs.CL}&#10;}" />
@@ -26,7 +26,7 @@ problem solver that learns to map problems to operation programs.
 *   **Homepage**: [https://math-qa.github.io/](https://math-qa.github.io/)
 
 *   **Source code**:
-    [`tfds.text.math_qa.MathQa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/math_qa/math_qa.py)
+    [`tfds.datasets.math_qa.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/math_qa/math_qa_dataset_builder.py)
 
 *   **Versions**:
 

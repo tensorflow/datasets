@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="mlqa" />
-  <meta itemprop="description" content="MLQA (Multilingual Question Answering Dataset) is a benchmark dataset for evaluating multilingual question answering performance. The dataset consists of 7 languages: Arabic, German, Spanish, English, Hindi, Vietnamese, Chinese.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;mlqa&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="MLQA (Multilingual Question Answering Dataset) is a benchmark dataset for&#10;evaluating multilingual question answering performance. The dataset consists of&#10;7 languages: Arabic, German, Spanish, English, Hindi, Vietnamese, Chinese.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;mlqa&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/mlqa" />
   <meta itemprop="sameAs" content="https://github.com/facebookresearch/MLQA" />
   <meta itemprop="citation" content="@article{lewis2019mlqa,&#10;  title={MLQA: Evaluating Cross-lingual Extractive Question Answering},&#10;  author={Lewis, Patrick and Ouguz, Barlas and Rinott, Ruty and Riedel,   Sebastian and Schwenk, Holger},&#10;  journal={arXiv preprint arXiv:1910.07475},&#10;  year={2019}&#10;}" />
@@ -28,7 +28,7 @@ evaluating multilingual question answering performance. The dataset consists of
     [https://github.com/facebookresearch/MLQA](https://github.com/facebookresearch/MLQA)
 
 *   **Source code**:
-    [`tfds.question_answering.Mlqa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/mlqa.py)
+    [`tfds.datasets.mlqa.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/mlqa/mlqa_dataset_builder.py)
 
 *   **Versions**:
 

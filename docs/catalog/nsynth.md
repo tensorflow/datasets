@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="nsynth" />
-  <meta itemprop="description" content="The NSynth Dataset is an audio dataset containing ~300k musical notes, each&#10;with a unique pitch, timbre, and envelope. Each note is annotated with three&#10;additional pieces of information based on a combination of human evaluation&#10;and heuristic algorithms: Source, Family, and Qualities.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;nsynth&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The NSynth Dataset is an audio dataset containing ~300k musical notes, each with&#10;a unique pitch, timbre, and envelope. Each note is annotated with three&#10;additional pieces of information based on a combination of human evaluation and&#10;heuristic algorithms: Source, Family, and Qualities.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;nsynth&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/nsynth" />
   <meta itemprop="sameAs" content="https://g.co/magenta/nsynth-dataset" />
   <meta itemprop="citation" content="@InProceedings{pmlr-v70-engel17a,&#10;  title =     {Neural Audio Synthesis of Musical Notes with {W}ave{N}et Autoencoders},&#10;  author =     {Jesse Engel and Cinjon Resnick and Adam Roberts and Sander Dieleman and Mohammad Norouzi and Douglas Eck and Karen Simonyan},&#10;  booktitle =    {Proceedings of the 34th International Conference on Machine Learning},&#10;  pages =   {1068--1077},&#10;  year =      {2017},&#10;  editor =      {Doina Precup and Yee Whye Teh},&#10;  volume =     {70},&#10;  series =    {Proceedings of Machine Learning Research},&#10;  address =     {International Convention Centre, Sydney, Australia},&#10;  month =     {06--11 Aug},&#10;  publisher =     {PMLR},&#10;  pdf =     {http://proceedings.mlr.press/v70/engel17a/engel17a.pdf},&#10;  url =   {http://proceedings.mlr.press/v70/engel17a.html},&#10;}" />
@@ -29,7 +29,7 @@ heuristic algorithms: Source, Family, and Qualities.
     [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
 *   **Source code**:
-    [`tfds.audio.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
+    [`tfds.datasets.nsynth.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder.py)
 
 *   **Versions**:
 
