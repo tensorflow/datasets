@@ -16,11 +16,11 @@
 """Test for NEWSROOM dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import newsroom
+from tensorflow_datasets.datasets.newsroom import newsroom_dataset_builder
 
 
 class NewsroomTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = newsroom.Newsroom
+  DATASET_CLASS = newsroom_dataset_builder.Builder
   SPLITS = {
       "train": 3,  # Number of fake train example
       "validation": 2,  # Number of fake validation example
