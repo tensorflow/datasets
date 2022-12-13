@@ -15,14 +15,14 @@
 
 """Nsynth Dataset Builder test."""
 
-from tensorflow_datasets.audio import nsynth
+from tensorflow_datasets.datasets.nsynth import nsynth_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class NsynthFullTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = nsynth.Nsynth
+  DATASET_CLASS = nsynth_dataset_builder.Builder
   # Make test run faster by using fewer output shards.
-  nsynth._SPLIT_SHARDS = {
+  nsynth_dataset_builder._SPLIT_SHARDS = {
       "train": 1,
       "valid": 1,
       "test": 1,
