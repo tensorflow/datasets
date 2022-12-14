@@ -16,12 +16,12 @@
 """Tests for camelyon_patch.py."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import patch_camelyon
+from tensorflow_datasets.datasets.patch_camelyon import patch_camelyon_dataset_builder
 
 
 class PatchCamelyonTest(testing.DatasetBuilderTestCase):
 
-  DATASET_CLASS = patch_camelyon.PatchCamelyon
+  DATASET_CLASS = patch_camelyon_dataset_builder.Builder
 
   SPLITS = {
       'train': 5,
