@@ -15,11 +15,11 @@
 
 """Tests for imagenet dataset module."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification.oxford_iiit_pet import OxfordIIITPet
+from tensorflow_datasets.datasets.oxford_iiit_pet import oxford_iiit_pet_dataset_builder
 
 
 class OxfordIIITPetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = OxfordIIITPet
+  DATASET_CLASS = oxford_iiit_pet_dataset_builder.Builder
   SPLITS = {  # Expected number of examples on each split.
       "train": 5,
       "test": 5,
