@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="paws_x_wiki" />
-  <meta itemprop="description" content="This dataset contains 23,659 human translated PAWS evaluation pairs and&#10;296,406 machine translated training pairs in six typologically distinct languages:&#10;&#10;* French&#10;* Spanish&#10;* German&#10;* Chinese&#10;* Japanese&#10;* Korean&#10;&#10;For further details, see the accompanying paper:&#10;PAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification&#10;at  https://arxiv.org/abs/1908.11828&#10;&#10;Similar to PAWS Dataset, examples are split into Train/Dev/Test sections.&#10;All files are in the tsv format with four columns:&#10;&#10;id    A unique id for each pair&#10;sentence1 The first sentence&#10;sentence2    The second sentence&#10;(noisy_)label   (Noisy) label for each pair&#10;&#10;Each label has two possible values: 0 indicates the pair has different meaning,&#10;while 1 indicates the pair is a paraphrase.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;paws_x_wiki&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="This dataset contains 23,659 human translated PAWS evaluation pairs and 296,406&#10;machine translated training pairs in six typologically distinct languages:&#10;&#10;*   French&#10;*   Spanish&#10;*   German&#10;*   Chinese&#10;*   Japanese&#10;*   Korean&#10;&#10;For further details, see the accompanying paper: PAWS-X: A Cross-lingual&#10;Adversarial Dataset for Paraphrase Identification at&#10;https://arxiv.org/abs/1908.11828&#10;&#10;Similar to PAWS Dataset, examples are split into Train/Dev/Test sections. All&#10;files are in the tsv format with four columns:&#10;&#10;1. `id`: A unique id for each pair.&#10;2. `sentence1`: The first sentence.&#10;3. `sentence2`: The second sentence.&#10;4. `(noisy_)label`: (Noisy) label for each pair.&#10;&#10;Each label has two possible values: 0 indicates the pair has different meaning,&#10;while 1 indicates the pair is a paraphrase.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;paws_x_wiki&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/paws_x_wiki" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/paws/tree/master/pawsx" />
   <meta itemprop="citation" content="@InProceedings{pawsx2019emnlp,&#10;  title = {{PAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification}},&#10;  author = {Yang, Yinfei and Zhang, Yuan and Tar, Chris and Baldridge, Jason},&#10;  booktitle = {Proc. of EMNLP},&#10;  year = {2019}&#10;}" />
@@ -31,8 +31,10 @@ https://arxiv.org/abs/1908.11828
 Similar to PAWS Dataset, examples are split into Train/Dev/Test sections. All
 files are in the tsv format with four columns:
 
-id A unique id for each pair sentence1 The first sentence sentence2 The second
-sentence (noisy_)label (Noisy) label for each pair
+1.  `id`: A unique id for each pair.
+2.  `sentence1`: The first sentence.
+3.  `sentence2`: The second sentence.
+4.  `(noisy_)label`: (Noisy) label for each pair.
 
 Each label has two possible values: 0 indicates the pair has different meaning,
 while 1 indicates the pair is a paraphrase.
@@ -47,7 +49,7 @@ while 1 indicates the pair is a paraphrase.
     [https://github.com/google-research-datasets/paws/tree/master/pawsx](https://github.com/google-research-datasets/paws/tree/master/pawsx)
 
 *   **Source code**:
-    [`tfds.text.paws_x_wiki.PawsXWiki`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/paws_x_wiki/paws_x_wiki.py)
+    [`tfds.datasets.paws_x_wiki.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/paws_x_wiki/paws_x_wiki_dataset_builder.py)
 
 *   **Versions**:
 

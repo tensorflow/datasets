@@ -48,18 +48,20 @@ military network environment.
         Fixes parsing of boolean fields `land`, `logged_in`, `root_shell`,
         `is_hot_login` and `is_guest_login`.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `18.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.25 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 311,029
+`'train'` | 4,898,431
 
 *   **Feature structure**:
 

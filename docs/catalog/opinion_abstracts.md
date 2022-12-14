@@ -27,7 +27,7 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
     [http://www.ccs.neu.edu/home/luwang/data.html](http://www.ccs.neu.edu/home/luwang/data.html)
 
 *   **Source code**:
-    [`tfds.summarization.OpinionAbstracts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinion_abstracts.py)
+    [`tfds.datasets.opinion_abstracts.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/opinion_abstracts/opinion_abstracts_dataset_builder.py)
 
 *   **Versions**:
 
