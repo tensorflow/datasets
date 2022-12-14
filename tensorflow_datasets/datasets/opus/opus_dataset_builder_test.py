@@ -17,8 +17,8 @@
 """Tests for OPUS translate dataset module."""
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.opus import opus_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.translate import opus
 
 
 class OpusTestCustomConfigTest(tfds.testing.DatasetBuilderTestCase):
@@ -27,18 +27,18 @@ class OpusTestCustomConfigTest(tfds.testing.DatasetBuilderTestCase):
   def setUpClass(cls):
     super(OpusTestCustomConfigTest, cls).setUpClass()
 
-    config = opus.OpusConfig(
+    config = opus_dataset_builder.OpusConfig(
         version=tfds.core.Version("0.1.0"),
         language_pair=("de", "en"),
         subsets=["Tanzil", "EMEA"])
-    opus.Opus.BUILDER_CONFIGS = [config]
+    opus_dataset_builder.Builder.BUILDER_CONFIGS = [config]
 
   @classmethod
   def tearDownClass(cls):
     super(OpusTestCustomConfigTest, cls).tearDownClass()
-    opus.Opus.BUILDER_CONFIGS.pop()
+    opus_dataset_builder.Builder.BUILDER_CONFIGS.pop()
 
-  DATASET_CLASS = opus.Opus
+  DATASET_CLASS = opus_dataset_builder.Builder
 
   SPLITS = {
       "train": 30,
