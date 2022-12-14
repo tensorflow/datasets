@@ -16,12 +16,12 @@
 """paws_x_wiki dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text.paws_x_wiki import paws_x_wiki
+from tensorflow_datasets.datasets.paws_x_wiki import paws_x_wiki_dataset_builder
 
 
 class PawsXWikiTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["es", "ja"]
-  DATASET_CLASS = paws_x_wiki.PawsXWiki
+  DATASET_CLASS = paws_x_wiki_dataset_builder.Builder
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "validation": 2,  # Number of fake validation examples
