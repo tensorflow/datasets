@@ -14,12 +14,12 @@
 # limitations under the License.
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import paws_wiki
+from tensorflow_datasets.datasets.paws_wiki import paws_wiki_dataset_builder
 
 
 class PawsWikiLabeldFinalTokenizedTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["labeled_final_tokenized"]
-  DATASET_CLASS = paws_wiki.PawsWiki
+  DATASET_CLASS = paws_wiki_dataset_builder.Builder
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "validation": 2,  # Number of fake validation examples
@@ -30,7 +30,7 @@ class PawsWikiLabeldFinalTokenizedTest(testing.DatasetBuilderTestCase):
 
 class PawsWikiLabeledSwapRawTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["labeled_swap_raw"]
-  DATASET_CLASS = paws_wiki.PawsWiki
+  DATASET_CLASS = paws_wiki_dataset_builder.Builder
   SPLITS = {
       "train": 2,  # Number of fake train examples
   }
