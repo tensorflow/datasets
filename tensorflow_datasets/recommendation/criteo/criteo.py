@@ -78,7 +78,7 @@ year = {2018}
 class Criteo(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for criteo dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
       '1.0.1': 'Fixed parsing of fields `conversion`, `visit` and `exposure`.',
       '1.0.0': 'Initial release.',
