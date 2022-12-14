@@ -1,0 +1,5 @@
+content.data-type.image
+content.data-type.text
+ml.task.fine-grained-image-classification
+ml.task.image-classification
+ml.task.image-generation
