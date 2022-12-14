@@ -15,20 +15,15 @@
 
 """Tests for open_images_challenge2019.py."""
 
-import os
-
 from tensorflow_datasets import testing
-from tensorflow_datasets.object_detection import open_images_challenge2019
+from tensorflow_datasets.datasets.open_images_challenge2019_detection import open_images_challenge2019_detection_dataset_builder
 
-_BASE_EXAMPLE_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)), "testing", "test_data",
-    "fake_examples")
-
-open_images_challenge2019._NUM_CLASSES = 6  # This is only done for testing!
+# This is only done for testing!
+open_images_challenge2019_detection_dataset_builder._NUM_CLASSES = 6
 
 
 class OpenImagesChallenge2019DetectionTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = open_images_challenge2019.OpenImagesChallenge2019Detection
+  DATASET_CLASS = open_images_challenge2019_detection_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["200k"]
   DL_DOWNLOAD_RESULT = {
       "train_images": ["train_%02d.zip" % i for i in range(9)],
@@ -47,8 +42,6 @@ class OpenImagesChallenge2019DetectionTest(testing.DatasetBuilderTestCase):
       "hierarchy":
           "challenge-2019-label500-hierarchy.json",
   }
-  EXAMPLE_DIR = os.path.join(_BASE_EXAMPLE_DIR,
-                             "open_images_challenge2019_detection")
 
   SPLITS = {  # Expected number of examples on each split.
       "train": 15,
