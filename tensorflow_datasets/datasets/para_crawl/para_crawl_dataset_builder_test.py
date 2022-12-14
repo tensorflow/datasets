@@ -15,13 +15,13 @@
 
 """Tests for para_crawl dataset module."""
 
+from tensorflow_datasets.datasets.para_crawl import para_crawl_dataset_builder
 import tensorflow_datasets.testing as tfds_test
-from tensorflow_datasets.translate import para_crawl
 
 
 class ParacrawlTest(tfds_test.DatasetBuilderTestCase):
 
-  DATASET_CLASS = para_crawl.ParaCrawl
+  DATASET_CLASS = para_crawl_dataset_builder.Builder
   SPLITS = {
       "train": 5,
   }
