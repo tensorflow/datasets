@@ -16,11 +16,11 @@
 """TODO(oxford_102_flowers): Add a description here."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import oxford_flowers102
+from tensorflow_datasets.datasets.oxford_flowers102 import oxford_flowers102_dataset_builder
 
 
 class OxfordFlowers102Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = oxford_flowers102.OxfordFlowers102
+  DATASET_CLASS = oxford_flowers102_dataset_builder.Builder
   SPLITS = {
       "train": 3,
       "test": 3,
