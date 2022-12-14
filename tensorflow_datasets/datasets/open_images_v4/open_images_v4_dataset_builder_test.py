@@ -15,11 +15,11 @@
 
 """Tests for open_images dataset module."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.object_detection import open_images
+from tensorflow_datasets.datasets.open_images_v4 import open_images_v4_dataset_builder
 
 
 class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = open_images.OpenImagesV4
+  DATASET_CLASS = open_images_v4_dataset_builder.Builder
   SPLITS = {  # Expected number of examples on each split.
       'train': 512,
       'test': 36,
@@ -45,7 +45,8 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
   def test_read_csv_line(self):
     line = b'foo1,foo2,foo3'
     expected_line = ['foo1', 'foo2', 'foo3']
-    self.assertEqual(open_images._read_csv_line(line), expected_line)
+    self.assertEqual(
+        open_images_v4_dataset_builder._read_csv_line(line), expected_line)
 
 
 if __name__ == '__main__':
