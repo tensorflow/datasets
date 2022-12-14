@@ -88,6 +88,8 @@ toc:
     title: arc
   - path: /datasets/catalog/natural_questions
     title: natural_questions
+  - path: /datasets/catalog/openbookqa
+    title: openbookqa
   title: Common sense reasoning
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -142,6 +144,10 @@ toc:
 - section:
   - path: /datasets/catalog/caltech101
     title: caltech101
+  - path: /datasets/catalog/oxford_flowers102
+    title: oxford_flowers102
+  - path: /datasets/catalog/oxford_iiit_pet
+    title: oxford_iiit_pet
   title: Fine grained image classification
 - section:
   - path: /datasets/catalog/ogbg_molpcba
@@ -232,8 +238,18 @@ toc:
     title: malaria
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
+  - path: /datasets/catalog/open_images_challenge2019_detection
+    title: open_images_challenge2019_detection
+  - path: /datasets/catalog/open_images_v4
+    title: open_images_v4
+  - path: /datasets/catalog/oxford_flowers102
+    title: oxford_flowers102
+  - path: /datasets/catalog/oxford_iiit_pet
+    title: oxford_iiit_pet
   - path: /datasets/catalog/pass
     title: pass
+  - path: /datasets/catalog/patch_camelyon
+    title: patch_camelyon
   - path: /datasets/catalog/s3o4d
     title: s3o4d
   - path: /datasets/catalog/scene_parse150
@@ -272,6 +288,12 @@ toc:
     title: lvis
   - path: /datasets/catalog/malaria
     title: malaria
+  - path: /datasets/catalog/open_images_v4
+    title: open_images_v4
+  - path: /datasets/catalog/oxford_flowers102
+    title: oxford_flowers102
+  - path: /datasets/catalog/oxford_iiit_pet
+    title: oxford_iiit_pet
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -282,6 +304,10 @@ toc:
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
+  - path: /datasets/catalog/oxford_iiit_pet
+    title: oxford_iiit_pet
+  - path: /datasets/catalog/patch_camelyon
+    title: patch_camelyon
   title: Image compression
 - section:
   - path: /datasets/catalog/binarized_mnist
@@ -296,6 +322,8 @@ toc:
     title: clevr
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/oxford_flowers102
+    title: oxford_flowers102
   title: Image generation
 - section:
   - path: /datasets/catalog/celeb_a_hq
@@ -390,12 +418,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/oxford_flowers102
-    title: oxford_flowers102
-  - path: /datasets/catalog/oxford_iiit_pet
-    title: oxford_iiit_pet
-  - path: /datasets/catalog/patch_camelyon
-    title: patch_camelyon
   - path: /datasets/catalog/pet_finder
     title: pet_finder
   - path: /datasets/catalog/places365_small
@@ -464,10 +486,18 @@ toc:
     title: lm1b
   - path: /datasets/catalog/math_qa
     title: math_qa
+  - path: /datasets/catalog/opus
+    title: opus
+  - path: /datasets/catalog/paws_wiki
+    title: paws_wiki
+  - path: /datasets/catalog/paws_x_wiki
+    title: paws_x_wiki
   title: Language modelling
 - section:
   - path: /datasets/catalog/mlqa
     title: mlqa
+  - path: /datasets/catalog/opus
+    title: opus
   title: Machine translation
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -504,16 +534,28 @@ toc:
     title: natural_questions
   - path: /datasets/catalog/natural_questions_open
     title: natural_questions_open
+  - path: /datasets/catalog/openbookqa
+    title: openbookqa
+  - path: /datasets/catalog/paws_wiki
+    title: paws_wiki
   title: Monolingual
+- section:
+  - path: /datasets/catalog/opinion_abstracts
+    title: opinion_abstracts
+  title: Movies and tv shows
 - section:
   - path: /datasets/catalog/librispeech
     title: librispeech
   - path: /datasets/catalog/mlqa
     title: mlqa
+  - path: /datasets/catalog/paws_x_wiki
+    title: paws_x_wiki
   title: Multilingual
 - section:
   - path: /datasets/catalog/anli
     title: anli
+  - path: /datasets/catalog/paws_wiki
+    title: paws_wiki
   title: Natural language inference
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -541,6 +583,14 @@ toc:
     title: natural_questions
   - path: /datasets/catalog/natural_questions_open
     title: natural_questions_open
+  - path: /datasets/catalog/openbookqa
+    title: openbookqa
+  - path: /datasets/catalog/opus
+    title: opus
+  - path: /datasets/catalog/paws_wiki
+    title: paws_wiki
+  - path: /datasets/catalog/paws_x_wiki
+    title: paws_x_wiki
   title: Natural language understanding
 - section:
   - path: /datasets/catalog/deep1b
@@ -557,16 +607,14 @@ toc:
     title: kitti
   - path: /datasets/catalog/lvis
     title: lvis
+  - path: /datasets/catalog/open_images_v4
+    title: open_images_v4
   title: Object detection
 - section:
   - path: /datasets/catalog/coco
     title: coco
   - path: /datasets/catalog/coco_captions
     title: coco_captions
-  - path: /datasets/catalog/open_images_challenge2019_detection
-    title: open_images_challenge2019_detection
-  - path: /datasets/catalog/open_images_v4
-    title: open_images_v4
   - path: /datasets/catalog/voc
     title: voc
   - path: /datasets/catalog/waymo_open_dataset
@@ -598,6 +646,8 @@ toc:
     title: natural_questions
   - path: /datasets/catalog/natural_questions_open
     title: natural_questions_open
+  - path: /datasets/catalog/openbookqa
+    title: openbookqa
   title: Question answering
 - section:
   - path: /datasets/catalog/natural_questions
@@ -629,6 +679,10 @@ toc:
   - path: /datasets/catalog/yahoo_ltrc
     title: yahoo_ltrc (manual)
   title: Ranking
+- section:
+  - path: /datasets/catalog/opus
+    title: opus
+  title: Reading comprehension
 - section:
   - path: /datasets/catalog/criteo
     title: criteo
@@ -694,6 +748,8 @@ toc:
     title: lost_and_found
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
+  - path: /datasets/catalog/open_images_v4
+    title: open_images_v4
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
   title: Semantic segmentation
@@ -708,6 +764,10 @@ toc:
     title: billsum
   - path: /datasets/catalog/math_qa
     title: math_qa
+  - path: /datasets/catalog/opus
+    title: opus
+  - path: /datasets/catalog/paws_wiki
+    title: paws_wiki
   title: Sequence to sequence language modelling
 - section:
   - path: /datasets/catalog/librispeech
@@ -782,10 +842,6 @@ toc:
     title: gov_report
   - path: /datasets/catalog/multi_news
     title: multi_news
-  - path: /datasets/catalog/opinion_abstracts
-    title: opinion_abstracts
-  - path: /datasets/catalog/opinosis
-    title: opinosis
   - path: /datasets/catalog/reddit
     title: reddit
   - path: /datasets/catalog/reddit_tifu
@@ -812,6 +868,8 @@ toc:
     title: efron_morris75
   - path: /datasets/catalog/kddcup99
     title: kddcup99
+  - path: /datasets/catalog/opinion_abstracts
+    title: opinion_abstracts
   title: Tabular
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -959,8 +1017,26 @@ toc:
     title: natural_questions_open
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/open_images_challenge2019_detection
+    title: open_images_challenge2019_detection
+  - path: /datasets/catalog/open_images_v4
+    title: open_images_v4
   - path: /datasets/catalog/openbookqa
     title: openbookqa
+  - path: /datasets/catalog/opinion_abstracts
+    title: opinion_abstracts
+  - path: /datasets/catalog/opinosis
+    title: opinosis
+  - path: /datasets/catalog/opus
+    title: opus
+  - path: /datasets/catalog/oxford_flowers102
+    title: oxford_flowers102
+  - path: /datasets/catalog/oxford_iiit_pet
+    title: oxford_iiit_pet
+  - path: /datasets/catalog/para_crawl
+    title: para_crawl
+  - path: /datasets/catalog/patch_camelyon
+    title: patch_camelyon
   - path: /datasets/catalog/paws_wiki
     title: paws_wiki
   - path: /datasets/catalog/paws_x_wiki
@@ -1051,6 +1127,10 @@ toc:
   - path: /datasets/catalog/natural_instructions
     status: nightly
     title: natural_instructions
+  - path: /datasets/catalog/paws_wiki
+    title: paws_wiki
+  - path: /datasets/catalog/paws_x_wiki
+    title: paws_x_wiki
   title: Text classification
 - section:
   - path: /datasets/catalog/aeslc
@@ -1080,6 +1160,8 @@ toc:
     title: natural_questions
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/openbookqa
+    title: openbookqa
   title: Text generation
 - section:
   - path: /datasets/catalog/aeslc
@@ -1112,10 +1194,6 @@ toc:
     title: flores
   - path: /datasets/catalog/mtnt
     title: mtnt
-  - path: /datasets/catalog/opus
-    title: opus
-  - path: /datasets/catalog/para_crawl
-    title: para_crawl
   - path: /datasets/catalog/tatoeba
     title: tatoeba
   - path: /datasets/catalog/ted_hrlr_translate

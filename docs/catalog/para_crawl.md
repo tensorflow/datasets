@@ -26,7 +26,7 @@ Web-Scale Parallel Corpora for Official European Languages.
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 *   **Source code**:
-    [`tfds.translate.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
+    [`tfds.datasets.para_crawl.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/para_crawl/para_crawl_dataset_builder.py)
 
 *   **Versions**:
 

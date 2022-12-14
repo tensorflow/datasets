@@ -36,7 +36,7 @@ builder = tfds.builder("opus", config=config)
 *   **Homepage**: [http://opus.nlpl.eu/](http://opus.nlpl.eu/)
 
 *   **Source code**:
-    [`tfds.translate.Opus`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/opus.py)
+    [`tfds.datasets.opus.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/opus/opus_dataset_builder.py)
 
 *   **Versions**:
 

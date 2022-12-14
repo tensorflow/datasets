@@ -37,7 +37,7 @@ Imagenet, trainable on a single GPU.
     [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 
 *   **Source code**:
-    [`tfds.image_classification.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/patch_camelyon.py)
+    [`tfds.datasets.patch_camelyon.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/patch_camelyon/patch_camelyon_dataset_builder.py)
 
 *   **Versions**:
 

@@ -30,7 +30,7 @@ anonymized crowd-worker ID.
     [https://leaderboard.allenai.org/open_book_qa/submissions/get-started](https://leaderboard.allenai.org/open_book_qa/submissions/get-started)
 
 *   **Source code**:
-    [`tfds.text.Openbookqa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/openbookqa.py)
+    [`tfds.datasets.openbookqa.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/openbookqa/openbookqa_dataset_builder.py)
 
 *   **Versions**:
 
