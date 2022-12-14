@@ -15,15 +15,15 @@
 
 """openbookQA dataset."""
 
+from tensorflow_datasets.datasets.openbookqa import openbookqa_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text import openbookqa
 
 
 class OpenbookqaTest(tfds.testing.DatasetBuilderTestCase):
   # TODO(openbookQA):
   # DL_EXTRACT_RESULT = os.path.dirname('extract_test')
 
-  DATASET_CLASS = openbookqa.Openbookqa
+  DATASET_CLASS = openbookqa_dataset_builder.Builder
   SPLITS = {
       "train": 3,  # Number of fake train example
       "test": 1,  # Number of fake test example
