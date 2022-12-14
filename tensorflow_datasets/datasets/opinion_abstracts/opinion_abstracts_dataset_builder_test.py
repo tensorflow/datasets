@@ -16,11 +16,11 @@
 """OpinionAbstracts Dataset Test."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import opinion_abstracts
+from tensorflow_datasets.datasets.opinion_abstracts import opinion_abstracts_dataset_builder
 
 
 class OpinionAbstractsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = opinion_abstracts.OpinionAbstracts
+  DATASET_CLASS = opinion_abstracts_dataset_builder.Builder
   SPLITS = {
       "train": 1,
   }
