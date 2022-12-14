@@ -16,11 +16,11 @@
 """Test for Opinosis Opinion Dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import opinosis
+from tensorflow_datasets.datasets.opinosis import opinosis_dataset_builder
 
 
 class OpinosisTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = opinosis.Opinosis
+  DATASET_CLASS = opinosis_dataset_builder.Builder
   SPLITS = {
       "train": 2,  # Number of fake test example
   }
