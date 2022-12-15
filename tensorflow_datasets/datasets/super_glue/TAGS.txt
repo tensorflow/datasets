@@ -1,0 +1,13 @@
+content.data-type.text
+content.language.en
+content.monolingual
+ml.task.common-sense-reasoning
+ml.task.coreference-resolution
+ml.task.natural-language-inference
+ml.task.natural-language-understanding
+ml.task.question-answering
+ml.task.reading-comprehension
+ml.task.text-classification
+ml.task.text-generation
+ml.task.textual-entailment
+ml.task.word-sense-disambiguation
