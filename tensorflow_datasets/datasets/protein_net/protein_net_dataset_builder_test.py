@@ -15,13 +15,13 @@
 
 """ProteinNet dataset tests."""
 
+from tensorflow_datasets.datasets.protein_net import protein_net_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.structured.proteinnet.proteinnet import ProteinNet
 
 
 class ProteinNetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ProteinNet dataset."""
-  DATASET_CLASS = ProteinNet
+  DATASET_CLASS = protein_net_dataset_builder.Builder
   SPLITS = {  # Number of fake examples.
       'train_100': 3,
       'test': 4,
@@ -32,12 +32,12 @@ class ProteinNetTest(tfds.testing.DatasetBuilderTestCase):
   @classmethod
   def setUpClass(cls):
     super().setUpClass()
-    cls._all_thresholds = ProteinNet.THRESHOLDS
-    ProteinNet.THRESHOLDS = [100]
+    cls._all_thresholds = protein_net_dataset_builder.Builder.THRESHOLDS
+    protein_net_dataset_builder.Builder.THRESHOLDS = [100]
 
   @classmethod
   def tearDownClass(cls):
-    ProteinNet.THRESHOLDS = cls._all_thresholds
+    protein_net_dataset_builder.Builder.THRESHOLDS = cls._all_thresholds
     super().tearDownClass()
 
 
