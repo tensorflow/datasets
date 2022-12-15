@@ -15,14 +15,14 @@
 
 """Unit tests for penguins dataset."""
 
+from tensorflow_datasets.datasets.penguins import penguins_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.structured.penguins import penguins
 
 
 class PenguinsSimpleTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for penguins dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = ['simple']
-  DATASET_CLASS = penguins.Penguins
+  DATASET_CLASS = penguins_dataset_builder.Builder
   SPLITS = {'train': 4}
   DL_EXTRACT_RESULT = 'simple.csv'
 
@@ -30,7 +30,7 @@ class PenguinsSimpleTest(tfds.testing.DatasetBuilderTestCase):
 class PenguinsRawTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for penguins/raw dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = ['raw']
-  DATASET_CLASS = penguins.Penguins
+  DATASET_CLASS = penguins_dataset_builder.Builder
   SPLITS = {'train': 6}
   DL_EXTRACT_RESULT = 'raw.csv'
 
@@ -38,7 +38,7 @@ class PenguinsRawTest(tfds.testing.DatasetBuilderTestCase):
 class PenguinsProcessedTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for penguins/raw dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = ['processed']
-  DATASET_CLASS = penguins.Penguins
+  DATASET_CLASS = penguins_dataset_builder.Builder
   SPLITS = {'train': 3}
   DL_EXTRACT_RESULT = 'processed.csv'
 
