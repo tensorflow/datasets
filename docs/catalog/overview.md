@@ -182,6 +182,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`oxford_iiit_pet`](oxford_iiit_pet.md)
 *   [`pass`](pass.md)
 *   [`patch_camelyon`](patch_camelyon.md)
+*   [`pet_finder`](pet_finder.md)
+*   [`places365_small`](places365_small.md)
+*   [`placesfull`](placesfull.md)
+*   [`plant_leaves`](plant_leaves.md)
+*   [`plant_village`](plant_village.md)
+*   [`plantae_k`](plantae_k.md)
 *   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
@@ -206,6 +212,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`open_images_v4`](open_images_v4.md)
 *   [`oxford_flowers102`](oxford_flowers102.md)
 *   [`oxford_iiit_pet`](oxford_iiit_pet.md)
+*   [`places365_small`](places365_small.md)
+*   [`plant_village`](plant_village.md)
 
 ### `Image clustering`
 
@@ -280,12 +288,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`mnist`](mnist.md)
 *   [`mnist_corrupted`](mnist_corrupted.md)
 *   [`omniglot`](omniglot.md)
-*   [`pet_finder`](pet_finder.md)
-*   [`places365_small`](places365_small.md)
-*   [`placesfull`](placesfull.md)
-*   [`plant_leaves`](plant_leaves.md)
-*   [`plant_village`](plant_village.md)
-*   [`plantae_k`](plantae_k.md)
 *   [`quickdraw_bitmap`](quickdraw_bitmap.md)
 *   [`resisc45`](resisc45.md)
 *   [`rock_paper_scissors`](rock_paper_scissors.md)
@@ -321,6 +323,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`opus`](opus.md)
 *   [`paws_wiki`](paws_wiki.md)
 *   [`paws_x_wiki`](paws_x_wiki.md)
+*   [`pg19`](pg19.md)
 
 ### `Machine translation`
 
@@ -348,6 +351,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`natural_questions_open`](natural_questions_open.md)
 *   [`openbookqa`](openbookqa.md)
 *   [`paws_wiki`](paws_wiki.md)
+*   [`plant_village`](plant_village.md)
 
 ### `Movies and tv shows`
 
@@ -383,6 +387,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`opus`](opus.md)
 *   [`paws_wiki`](paws_wiki.md)
 *   [`paws_x_wiki`](paws_x_wiki.md)
+*   [`pg19`](pg19.md)
+*   [`piqa`](piqa.md)
 
 ### `Nearest neighbors`
 
@@ -422,6 +428,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`natural_questions`](natural_questions.md)
 *   [`natural_questions_open`](natural_questions_open.md)
 *   [`openbookqa`](openbookqa.md)
+*   [`piqa`](piqa.md)
 
 ### `Question generation`
 
@@ -447,6 +454,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Reading comprehension`
 
 *   [`opus`](opus.md)
+*   [`pg19`](pg19.md)
 
 ### `Recommendation`
 
@@ -488,6 +496,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Scene classification`
 
 *   [`bigearthnet`](bigearthnet.md)
+*   [`places365_small`](places365_small.md)
 
 ### `Semantic segmentation`
 
@@ -497,6 +506,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`lost_and_found`](lost_and_found.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 *   [`open_images_v4`](open_images_v4.md)
+*   [`places365_small`](places365_small.md)
 *   [`scene_parse150`](scene_parse150.md)
 
 ### `Sentiment analysis`
@@ -536,8 +546,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`iris`](iris.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
-*   [`penguins`](penguins.md)
-*   [`protein_net`](protein_net.md)
 *   [`radon`](radon.md)
 *   [`rock_you`](rock_you.md)
 *   [`titanic`](titanic.md)
@@ -662,8 +670,16 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`patch_camelyon`](patch_camelyon.md)
 *   [`paws_wiki`](paws_wiki.md)
 *   [`paws_x_wiki`](paws_x_wiki.md)
+*   [`penguins`](penguins.md)
+*   [`pet_finder`](pet_finder.md)
 *   [`pg19`](pg19.md)
 *   [`piqa`](piqa.md)
+*   [`places365_small`](places365_small.md)
+*   [`placesfull`](placesfull.md)
+*   [`plant_leaves`](plant_leaves.md)
+*   [`plant_village`](plant_village.md)
+*   [`plantae_k`](plantae_k.md)
+*   [`protein_net`](protein_net.md)
 *   [`q_re_cc`](q_re_cc.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`qa4mre`](qa4mre.md)
@@ -728,6 +744,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`natural_questions`](natural_questions.md)
 *   [`newsroom`](newsroom.md)
 *   [`openbookqa`](openbookqa.md)
+*   [`piqa`](piqa.md)
 
 ### `Text summarization`
 

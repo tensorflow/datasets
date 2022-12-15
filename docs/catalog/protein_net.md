@@ -29,7 +29,7 @@ poor and data rich regimes.
     [https://github.com/aqlaboratory/proteinnet](https://github.com/aqlaboratory/proteinnet)
 
 *   **Source code**:
-    [`tfds.structured.proteinnet.ProteinNet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/proteinnet/proteinnet.py)
+    [`tfds.datasets.protein_net.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/protein_net/protein_net_dataset_builder.py)
 
 *   **Versions**:
 

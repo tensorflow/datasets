@@ -250,6 +250,18 @@ toc:
     title: pass
   - path: /datasets/catalog/patch_camelyon
     title: patch_camelyon
+  - path: /datasets/catalog/pet_finder
+    title: pet_finder
+  - path: /datasets/catalog/places365_small
+    title: places365_small
+  - path: /datasets/catalog/placesfull
+    title: placesfull
+  - path: /datasets/catalog/plant_leaves
+    title: plant_leaves
+  - path: /datasets/catalog/plant_village
+    title: plant_village
+  - path: /datasets/catalog/plantae_k
+    title: plantae_k
   - path: /datasets/catalog/s3o4d
     title: s3o4d
   - path: /datasets/catalog/scene_parse150
@@ -294,6 +306,10 @@ toc:
     title: oxford_flowers102
   - path: /datasets/catalog/oxford_iiit_pet
     title: oxford_iiit_pet
+  - path: /datasets/catalog/places365_small
+    title: places365_small
+  - path: /datasets/catalog/plant_village
+    title: plant_village
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -418,18 +434,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/pet_finder
-    title: pet_finder
-  - path: /datasets/catalog/places365_small
-    title: places365_small
-  - path: /datasets/catalog/placesfull
-    title: placesfull
-  - path: /datasets/catalog/plant_leaves
-    title: plant_leaves
-  - path: /datasets/catalog/plant_village
-    title: plant_village
-  - path: /datasets/catalog/plantae_k
-    title: plantae_k
   - path: /datasets/catalog/quickdraw_bitmap
     title: quickdraw_bitmap
   - path: /datasets/catalog/resisc45
@@ -492,6 +496,8 @@ toc:
     title: paws_wiki
   - path: /datasets/catalog/paws_x_wiki
     title: paws_x_wiki
+  - path: /datasets/catalog/pg19
+    title: pg19
   title: Language modelling
 - section:
   - path: /datasets/catalog/mlqa
@@ -538,6 +544,8 @@ toc:
     title: openbookqa
   - path: /datasets/catalog/paws_wiki
     title: paws_wiki
+  - path: /datasets/catalog/plant_village
+    title: plant_village
   title: Monolingual
 - section:
   - path: /datasets/catalog/opinion_abstracts
@@ -591,6 +599,10 @@ toc:
     title: paws_wiki
   - path: /datasets/catalog/paws_x_wiki
     title: paws_x_wiki
+  - path: /datasets/catalog/pg19
+    title: pg19
+  - path: /datasets/catalog/piqa
+    title: piqa
   title: Natural language understanding
 - section:
   - path: /datasets/catalog/deep1b
@@ -648,6 +660,8 @@ toc:
     title: natural_questions_open
   - path: /datasets/catalog/openbookqa
     title: openbookqa
+  - path: /datasets/catalog/piqa
+    title: piqa
   title: Question answering
 - section:
   - path: /datasets/catalog/natural_questions
@@ -682,6 +696,8 @@ toc:
 - section:
   - path: /datasets/catalog/opus
     title: opus
+  - path: /datasets/catalog/pg19
+    title: pg19
   title: Reading comprehension
 - section:
   - path: /datasets/catalog/criteo
@@ -736,6 +752,8 @@ toc:
 - section:
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
+  - path: /datasets/catalog/places365_small
+    title: places365_small
   title: Scene classification
 - section:
   - path: /datasets/catalog/bigearthnet
@@ -750,6 +768,8 @@ toc:
     title: nyu_depth_v2
   - path: /datasets/catalog/open_images_v4
     title: open_images_v4
+  - path: /datasets/catalog/places365_small
+    title: places365_small
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
   title: Semantic segmentation
@@ -808,10 +828,6 @@ toc:
     title: movie_lens
   - path: /datasets/catalog/movielens
     title: movielens
-  - path: /datasets/catalog/penguins
-    title: penguins
-  - path: /datasets/catalog/protein_net
-    title: protein_net
   - path: /datasets/catalog/radon
     title: radon
   - path: /datasets/catalog/rock_you
@@ -1041,10 +1057,26 @@ toc:
     title: paws_wiki
   - path: /datasets/catalog/paws_x_wiki
     title: paws_x_wiki
+  - path: /datasets/catalog/penguins
+    title: penguins
+  - path: /datasets/catalog/pet_finder
+    title: pet_finder
   - path: /datasets/catalog/pg19
     title: pg19
   - path: /datasets/catalog/piqa
     title: piqa
+  - path: /datasets/catalog/places365_small
+    title: places365_small
+  - path: /datasets/catalog/placesfull
+    title: placesfull
+  - path: /datasets/catalog/plant_leaves
+    title: plant_leaves
+  - path: /datasets/catalog/plant_village
+    title: plant_village
+  - path: /datasets/catalog/plantae_k
+    title: plantae_k
+  - path: /datasets/catalog/protein_net
+    title: protein_net
   - path: /datasets/catalog/q_re_cc
     status: nightly
     title: q_re_cc
@@ -1162,6 +1194,8 @@ toc:
     title: newsroom (manual)
   - path: /datasets/catalog/openbookqa
     title: openbookqa
+  - path: /datasets/catalog/piqa
+    title: piqa
   title: Text generation
 - section:
   - path: /datasets/catalog/aeslc
