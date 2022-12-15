@@ -17,54 +17,31 @@ concurrency:
   # Cancel only PR intermediate builds
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
-
 jobs:
   pytest-job:
     # For merged PR, activate testing only on the master branch, based on:
     # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
-    if:
-      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+    if: |
+      github.ref == 'refs/heads/master'
+      || (
+        github.event.action != 'closed'
+        && github.event.pull_request.merged == false)
 
-    name: "Core TFDS tests on ${{ matrix.tf_version }}"
+    name: 'Core TFDS tests on ${{ matrix.tf-version }}'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
       # Do not cancel in-progress jobs if any matrix job fails.
       fail-fast: false
       matrix:
-        tf_version: ["tensorflow", "tf-nightly"]
-        shard_id: [0, 1, 2, 3]
+        tf-version: ['tensorflow', 'tf-nightly']
+        shard-id: [0, 1, 2, 3]
 
     steps:
     - uses: actions/checkout@v2
-
-    # Install deps
-    - uses: actions/setup-python@v2
+    - uses: ./.github/actions/setup
       with:
-        python-version: 3.7
-
-    # Get current date.
-    - name: Get current date
-      id: date
-      run: |
-        echo "::set-output name=today::$(date +'%Y-%m-%d')"
-
-    # The cache is refreshed everyday.
-    - uses: actions/cache@v2
-      with:
-        path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}-${{ matrix.tf_version }}
-
-    - run: pip install ${{ matrix.tf_version }}
-
-    # Update the package directory before installing.
-    - run: sudo apt-get update
-    # Install the protocol buffer compiler for gcld3 tests.
-    - run: sudo apt install -y protobuf-compiler
-    # Install ffmpeg for Audio FeatureConnector tests.
-    - run: sudo apt-get install ffmpeg
-
-    - run: pip install -e .[tests-all]
+        tf-version: ${{ matrix.tf-version }}
 
     # Run tests
     # Ignores:
@@ -75,43 +52,59 @@ jobs:
     # * imagenet2012_corrupted requires imagemagick binary.
     # * test_utils.py, test_feature.py is not a test file.
     # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
+    # * github_api is run separately to not overuse API quota.
     - name: Run core tests
       run: |
-        pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard_id }} --num-shards=4 \
+        pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard-id }} --num-shards=4 \
           --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \
           --ignore="tensorflow_datasets/image/lsun_test.py" \
           --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
-          --ignore="tensorflow_datasets/import_without_tf_test.py"
+          --ignore="tensorflow_datasets/import_without_tf_test.py" \
+          --ignore="tensorflow_datasets/core/github_api/github_path_test.py"
 
-  notebooktest-job:
+  githubapitest-job:
     # For merged PR, activate testing only on the master branch.
-    if:
-      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+    if: |
+      github.ref == 'refs/heads/master'
+      || (
+        github.event.action != 'closed'
+        && github.event.pull_request.merged == false)
 
-    name: "Notebook tests"
+    name: 'Github API tests'
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-    - uses: styfle/cancel-workflow-action@0.9.1
-      with:
-        access_token: ${{ github.token }}
     - uses: actions/checkout@v2
-
-    # Install deps.
-    - uses: actions/setup-python@v2
+    - uses: ./.github/actions/setup
       with:
-        python-version: 3.7
+        tf-version: tensorflow
 
-    - run: pip --version
-    - run: pip install tf-nightly
+    - name: Run Github API tests
+      run: pytest --durations=100 -vv -n auto tensorflow_datasets/core/github_api/github_path_test.py
+
+  notebooktest-job:
+    # For merged PR, activate testing only on the master branch.
+    if: |
+      github.ref == 'refs/heads/master'
+      || (
+        github.event.action != 'closed'
+        && github.event.pull_request.merged == false)
+
+    name: 'Notebook tests'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/setup
+      with:
+        tf-version: tf-nightly
+
     - run: pip install ipython
-    - run: sudo apt install -y protobuf-compiler
-
-    - run: pip install -e .[tests-all]
 
     # Test each notebook sequentially.
     - name: Run notebook
