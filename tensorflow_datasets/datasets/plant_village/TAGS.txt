@@ -1,0 +1,5 @@
+content.data-type.image
+content.data-type.text
+content.language.en
+content.monolingual
+ml.task.image-classification
