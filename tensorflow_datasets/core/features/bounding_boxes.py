@@ -43,7 +43,7 @@ class BBoxFeature(tensor_feature.Tensor):
   inside a `tfds.features.Sequence`.
 
   Input:
-    * `tfds.features.BBox` tuple.
+    * `tfds.features.BBox` tuple or 4-dim `np.ndarray`.
 
   Output:
     bbox: tf.Tensor of type `tf.float32` and shape `[4,]` which contains the
@@ -74,8 +74,17 @@ class BBoxFeature(tensor_feature.Tensor):
   ):
     super(BBoxFeature, self).__init__(shape=(4,), dtype=np.float32, doc=doc)
 
-  def encode_example(self, bbox):
+  def encode_example(self, bbox: Union[BBox, np.ndarray]):
     """See base class for details."""
+
+    if isinstance(bbox, np.ndarray):
+      if bbox.shape != (4,):
+        raise ValueError(
+            'array representing BBox should have exactly 4 floats. '
+            f'Instead, it has {bbox.shape}.')
+      bbox = bbox.astype(np.float64)
+      bbox = BBox(ymin=bbox[0], xmin=bbox[1], ymax=bbox[2], xmax=bbox[3])
+
     # Validate the coordinates
     for coordinate in bbox:
       if not isinstance(coordinate, float):
