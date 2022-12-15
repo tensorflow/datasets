@@ -13,21 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""schema_guided_dialogue dataset."""
+"""Tests for SCAN dataset module."""
 
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.schema_guided_dialogue import schema_guided_dialogue
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.scan import scan_dataset_builder
 
 
-class SchemaGuidedDialogueTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for schema_guided_dialogue dataset."""
-  DATASET_CLASS = schema_guided_dialogue.SchemaGuidedDialogue
+class ScanTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = scan_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ["simple"]
   SPLITS = {
-      'train': 3,  # Number of fake train example
-      'dev': 2,  # Number of fake train example
-      'test': 1,  # Number of fake test example
+      "train": 3,  # Number of fake train example
+      "test": 1,  # Number of fake test example
   }
 
 
-if __name__ == '__main__':
-  tfds.testing.test_main()
+if __name__ == "__main__":
+  testing.test_main()
