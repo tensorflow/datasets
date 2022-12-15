@@ -19,13 +19,14 @@
   called in `setUpClass`/`tearDownClass`.
 * Pytest: Those functions are wrapped in `@fixture`.
 
+This file is not part of `tensorflow_datasets.testing` because this module still
+heavily depends on TensorFlow.
 """
 
 from unittest import mock
 
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core.github_api import github_path
-from tensorflow_datasets.testing import test_utils
 
 
 def assert_no_api_call():

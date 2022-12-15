@@ -23,8 +23,8 @@ import textwrap
 import typing
 from typing import Any, Mapping, Optional, Union
 
+import numpy as np
 import tensorflow_datasets.core.utils as type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _PENGUINS_PATH = ('https://storage.googleapis.com/download.tensorflow.org/'
@@ -64,10 +64,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           file_name='penguins_processed.csv',
           features={
               'species': tfds.features.ClassLabel(num_classes=3),
-              'culmen_length_mm': tf.float32,
-              'culmen_depth_mm': tf.float32,
-              'flipper_length_mm': tf.float32,
-              'body_mass_g': tf.float32,
+              'culmen_length_mm': np.float32,
+              'culmen_depth_mm': np.float32,
+              'flipper_length_mm': np.float32,
+              'body_mass_g': np.float32,
           },
           description=textwrap.dedent("""\
             `penguins/processed` is a drop-in replacement for the `iris`
@@ -92,13 +92,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                   tfds.features.ClassLabel(
                       names=['Biscoe', 'Dream', 'Torgersen']),
               'culmen_length_mm':
-                  tf.float32,
+                  np.float32,
               'culmen_depth_mm':
-                  tf.float32,
+                  np.float32,
               'flipper_length_mm':
-                  tf.float32,
+                  np.float32,
               'body_mass_g':
-                  tf.float32,
+                  np.float32,
               'sex':
                   tfds.features.ClassLabel(names=['FEMALE', 'MALE', 'NA']),
           },
@@ -120,7 +120,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           """),
           features={
               'studyName': tfds.features.Text(),
-              'Sample Number': tf.int32,
+              'Sample Number': np.int32,
               'Species': tfds.features.Text(),
               'Region': tfds.features.Text(),
               'Island': tfds.features.Text(),
@@ -128,13 +128,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               'Individual ID': tfds.features.Text(),
               'Clutch Completion': tfds.features.Text(),
               'Date Egg': tfds.features.Text(),
-              'Culmen Length (mm)': tf.float32,
-              'Culmen Depth (mm)': tf.float32,
-              'Flipper Length (mm)': tf.float32,
-              'Body Mass (g)': tf.float32,
+              'Culmen Length (mm)': np.float32,
+              'Culmen Depth (mm)': np.float32,
+              'Flipper Length (mm)': np.float32,
+              'Body Mass (g)': np.float32,
               'Sex': tfds.features.Text(),
-              'Delta 15 N (o/oo)': tf.float32,
-              'Delta 13 C (o/oo)': tf.float32,
+              'Delta 15 N (o/oo)': np.float32,
+              'Delta 13 C (o/oo)': np.float32,
               'Comments': tfds.features.Text(),
           },
           label='Species',
@@ -207,7 +207,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       return value
 
     feature_type = self.builder_config.features[field]
-    if feature_type == tf.float32:
+    if feature_type == np.float32:
       # Field is a float. If it won't parse, clean it up.
       try:
         return float(value)

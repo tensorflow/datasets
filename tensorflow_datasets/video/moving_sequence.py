@@ -103,7 +103,7 @@ def _bounce_to_bbox(points):
   return tf.math.minimum(2 - points, points)
 
 
-def _get_random_unit_vector(ndims=2, dtype=tf.float32):
+def _get_random_unit_vector(ndims, dtype):
   x = tf.random.normal((ndims,), dtype=dtype)
   return x / tf.linalg.norm(x, axis=-1, keepdims=True)
 

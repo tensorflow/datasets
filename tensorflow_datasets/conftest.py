@@ -19,25 +19,19 @@
 plugins (hooks and fixtures) common to all tests.
 
 See: https://docs.pytest.org/en/latest/writing_plugins.html
-
 """
+from __future__ import annotations
+
+import typing
 from typing import Iterator, Type
 
 import pytest
-from tensorflow_datasets import testing
-from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import visibility
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-from tensorflow_datasets.testing import setup_teardown
+from tensorflow_datasets import setup_teardown
+if typing.TYPE_CHECKING:
+  from tensorflow_datasets import testing
+  from tensorflow_datasets.core import dataset_builder
 
 # Global setup/teardown
-
-
-@pytest.fixture(scope='session', autouse=True)
-def activate_eager():
-  """Globally and automatically enable eager."""
-  tf.compat.v1.enable_v2_behavior()
-
 
 # Register fixtures which are automatically applied once when tests start.
 
@@ -48,6 +42,7 @@ def disable_community_datasets():
   # For tests, only public datasets are available (no-community datasets)
   # Kokoro pytest tests are executed without absl.app, so the default
   # visibility isn't automatically set.
+  from tensorflow_datasets.core import visibility  # pylint: disable=g-import-not-at-top
   visibility.set_availables([
       visibility.DatasetType.TFDS_PUBLIC,
   ])
@@ -73,6 +68,7 @@ del global_dict  # Do not modifying global beyond this point
 @pytest.fixture
 def mock_fs() -> Iterator[testing.MockFs]:
   """Patch `tf.io.gfile` API into a virtual file system."""
+  from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
   with testing.MockFs() as fs:
     yield fs
 
@@ -91,6 +87,7 @@ def _make_dataset(
 def dummy_mnist(
     tmp_path_factory: pytest.TempPathFactory) -> dataset_builder.DatasetBuilder:
   """Dummy mnist dataset builder pre-generated."""
+  from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
   return _make_dataset(tmp_path_factory, testing.DummyMnist)
 
 
@@ -98,4 +95,5 @@ def dummy_mnist(
 def dummy_dataset(
     tmp_path_factory: pytest.TempPathFactory) -> dataset_builder.DatasetBuilder:
   """Dummy dataset builder pre-generated."""
+  from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
   return _make_dataset(tmp_path_factory, testing.DummyDataset)

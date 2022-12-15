@@ -58,8 +58,11 @@ _TASK_NAMES = [
 ]
 
 
-def _sequence(shape_size: Optional[int] = None,
-              dtype: tf.DType = tf.float32) -> tf.io.FixedLenSequenceFeature:
+def _sequence(
+    shape_size: Optional[int] = None,
+    dtype: Optional[tf.DType] = None) -> tf.io.FixedLenSequenceFeature:
+  if dtype is None:
+    dtype = tf.float32
   if shape_size:
     shape = [shape_size]
   else:
