@@ -16,12 +16,11 @@
 """Test for PetFinder."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import pet_finder
+from tensorflow_datasets.datasets.pet_finder import pet_finder_dataset_builder
 
 
 class PetFinderTest(testing.DatasetBuilderTestCase):
-  # petfinder:
-  DATASET_CLASS = pet_finder.PetFinder
+  DATASET_CLASS = pet_finder_dataset_builder.Builder
   SPLITS = {
       'train': 2,  # Number of fake train example
       'test': 2,  # Number of fake test example
