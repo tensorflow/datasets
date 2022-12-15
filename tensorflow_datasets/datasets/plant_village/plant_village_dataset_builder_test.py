@@ -16,11 +16,11 @@
 """Test for PlantVillage dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import plant_village
+from tensorflow_datasets.datasets.plant_village import plant_village_dataset_builder
 
 
 class PlantVillageTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = plant_village.PlantVillage
+  DATASET_CLASS = plant_village_dataset_builder.Builder
   SPLITS = {"train": 38}
 
 
