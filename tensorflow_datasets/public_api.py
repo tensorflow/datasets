@@ -44,6 +44,7 @@ from tensorflow_datasets.core.subsplits_utils import even_splits
 from tensorflow_datasets.core.subsplits_utils import split_for_jax_process
 from tensorflow_datasets.core.utils.benchmark import benchmark
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
+from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
 from tensorflow_datasets.core.utils.read_config import ReadConfig
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
 from tensorflow_datasets.core.utils.tqdm_utils import display_progress_bar
@@ -54,10 +55,9 @@ from tensorflow_datasets.version import __version__
 
 deprecated = core.utils.docs.deprecated(deprecated)
 
-with core.registered.skip_registration():
-  # We import testing namespace but without registering the tests datasets
-  # (e.g. DummyMnist,...).
+with lazy_imports():
   from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
+del lazy_imports
 
 __all__ = [
     "as_dataframe",

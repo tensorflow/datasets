@@ -183,7 +183,7 @@ def is_integer(dtype: type_utils.TfdsDType) -> bool:
 
 @py_utils.memoize()
 def is_string(dtype: type_utils.TfdsDType) -> bool:
-  return _is_dtype([np.character, object], tf.string, dtype)
+  return _is_dtype([np.character, object], np.object_, dtype)
 
 
 @py_utils.memoize()

@@ -103,10 +103,10 @@ def lazy_imports(error_callback: Optional[Callback] = None,
   ```
 
   Args:
-    error_callback: a callback to trigger when an import fails. The
-      callback is passed kwargs containing: 1) exception (ImportError): the
-      exception that was raised after the error; 2) module_name (str): the name
-      of the imported module.
+    error_callback: a callback to trigger when an import fails. The callback is
+      passed kwargs containing: 1) exception (ImportError): the exception that
+      was raised after the error; 2) module_name (str): the name of the imported
+      module.
     success_callback: a callback to trigger when an import succeeds. The
       callback is passed kwargs containing: 1) import_time_ms (float): the
       import time (in milliseconds); 2) module (Any): the imported module;

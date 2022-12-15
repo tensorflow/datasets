@@ -16,7 +16,6 @@
 """Locomotion dataset."""
 
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rlds import rlds_base
 
@@ -68,8 +67,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='ant_sac_1M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(111,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(8,), dtype=np.float32),
-          reward_info=tf.float32,
-          discount_info=tf.float32,
+          reward_info=np.float32,
+          discount_info=np.float32,
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -80,8 +79,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='hopper_sac_1M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(11,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(3,), dtype=np.float32),
-          reward_info=tf.float32,
-          discount_info=tf.float32,
+          reward_info=np.float32,
+          discount_info=np.float32,
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -92,8 +91,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='halfcheetah_sac_1M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(17,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(6,), dtype=np.float32),
-          reward_info=tf.float32,
-          discount_info=tf.float32,
+          reward_info=np.float32,
+          discount_info=np.float32,
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -104,8 +103,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='walker2d_sac_1M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(17,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(6,), dtype=np.float32),
-          reward_info=tf.float32,
-          discount_info=tf.float32,
+          reward_info=np.float32,
+          discount_info=np.float32,
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -116,8 +115,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='humanoid_sac_15M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(376,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(17,), dtype=np.float32),
-          reward_info=tf.float32,
-          discount_info=tf.float32,
+          reward_info=np.float32,
+          discount_info=np.float32,
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,

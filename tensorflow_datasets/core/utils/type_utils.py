@@ -35,8 +35,10 @@ Tree = Union[T, Any]
 
 if typing.TYPE_CHECKING:
   Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
+  TfdsDType = Union[np.dtype, tf.DType, tf.dtypes.DType]
 else:
   Tensor = Any
+  TfdsDType = Any
 
 # Nested dict of tensor
 TensorDict = TreeDict[Tensor]
@@ -53,8 +55,6 @@ Json = Dict[str, JsonValue]
 
 Key = Union[int, str, bytes]
 KeySerializedExample = Tuple[Key, bytes]  # `(key, serialized_proto)`
-
-TfdsDType = Union[np.dtype, tf.DType, tf.dtypes.DType]
 
 
 __all__ = sorted(k for k in globals()

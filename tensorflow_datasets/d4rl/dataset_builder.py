@@ -18,7 +18,7 @@
 from __future__ import annotations
 
 import dataclasses
-from typing import Any, Dict, FrozenSet, Optional
+from typing import Any, Dict, FrozenSet, Optional, Union
 
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -34,7 +34,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
   file_suffix: str = 'medium'
   env: str = 'mujoco'
   # All use float32 except for the replay datasets.
-  float_type: tf.DType = tf.float32
+  float_type: np.dtype = np.float32
   # All datasets have step metadata except for mujoco v0.
   step_metadata_keys: FrozenSet[str] = frozenset([])
   episode_metadata_keys: FrozenSet[str] = frozenset([])
@@ -43,7 +43,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
   has_policy_last_fc_log_std: bool = False
   policy_size: int = 256
   # Some datasets were regenerated with different metadata type.
-  step_metadata_type: tf.DType = tf.float32
+  step_metadata_type: np.dtype = np.float32
 
 
 @dataclasses.dataclass
@@ -177,8 +177,8 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v1',
         env='mujoco',
         file_suffix='_medium_replay-v1',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -188,8 +188,8 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v1',
         env='mujoco',
         file_suffix='_full_replay-v1',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -207,7 +207,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_expert-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
@@ -219,7 +219,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_full_replay-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -229,7 +229,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
@@ -241,7 +241,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium_expert-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         description=_MUJOCO_DESCRIPTION,
     ),
@@ -250,7 +250,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium_replay-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -260,7 +260,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_random-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         description=_MUJOCO_DESCRIPTION,
     ),
@@ -279,8 +279,8 @@ ADROIT_BUILDER_CONFIGS = [
         dataset_dir='hand_dapg',
         env='adroit',
         file_suffix='-demos-v0-bc-combined',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL]),
         description=_ADROIT_DESCRIPTION,
     ),
@@ -331,8 +331,8 @@ ADROIT_BUILDER_CONFIGS = [
 
 
 def _get_step_metadata(
-    builder_config: BuilderConfig,
-    ds_config: DatasetConfig) -> Dict[str, tfds.features.FeatureConnector]:
+    builder_config: BuilderConfig, ds_config: DatasetConfig
+) -> Dict[str, Union[np.dtype, tfds.features.FeatureConnector]]:
   """Builds the features dict of the step metadata.
 
   Args:

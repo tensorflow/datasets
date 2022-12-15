@@ -18,7 +18,6 @@
 from __future__ import annotations
 
 import dataclasses
-import functools
 import os
 import tempfile
 from typing import Any, List, Optional, Union
@@ -38,12 +37,10 @@ Json = type_utils.Json
 PilImage = Any  # Require lazy deps.
 
 
-@functools.lru_cache(maxsize=None)
-def _encode_fn():
-  return {
-      'png': tf.image.encode_png,
-      'jpeg': tf.image.encode_jpeg,
-  }
+_ENCODE_FN = {
+    'png': lambda: tf.image.encode_png,
+    'jpeg': lambda: tf.image.encode_jpeg,
+}
 
 
 _ACCEPTABLE_CHANNELS = {
@@ -109,7 +106,7 @@ class _ImageEncoder:
     # It has created subtle issues for imagenet_corrupted: images are read as
     # JPEG images to apply some processing, but final image saved as PNG
     # (default) rather than JPEG.
-    return self._runner.run(_encode_fn()[self.encoding_format or 'png'],
+    return self._runner.run(_ENCODE_FN[self.encoding_format or 'png'](),
                             np_image)
 
   def decode_image(self, img: tf.Tensor) -> tf.Tensor:
@@ -427,7 +424,7 @@ def _get_repr_html_gif(images: List[PilImage]) -> str:
 
 def get_and_validate_encoding(encoding_format: Optional[str]) -> Optional[str]:
   """Update the encoding format."""
-  supported = _encode_fn().keys()
+  supported = _ENCODE_FN.keys()
   if encoding_format and encoding_format not in supported:
     raise ValueError(f'`encoding_format` must be one of {supported}.')
   return encoding_format

@@ -19,7 +19,6 @@ from __future__ import annotations
 
 
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rlds import rlds_base
 
@@ -109,15 +108,15 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
                   tfds.features.Tensor(shape=(4,), dtype=np.float64),
           },
           action_info=tfds.features.Tensor(shape=(7,), dtype=np.float64),
-          reward_info=tf.float64,
-          discount_info=tf.float64,
+          reward_info=np.float64,
+          discount_info=np.float64,
           episode_metadata_info={
-              'agent_id': tf.string,
-              'episode_index': tf.int32,
-              'episode_id': tf.string,
+              'agent_id': np.str_,
+              'episode_index': np.int32,
+              'episode_id': np.str_,
           },
           step_metadata_info={
-              'tag:placed': tf.bool,
+              'tag:placed': np.bool_,
               'image': tfds.features.Image(),
           },
           citation=_CITATION,
@@ -177,15 +176,15 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
                   tfds.features.Tensor(shape=(4,), dtype=np.float64),
           },
           action_info=tfds.features.Tensor(shape=(7,), dtype=np.float64),
-          reward_info=tf.float64,
-          discount_info=tf.float64,
+          reward_info=np.float64,
+          discount_info=np.float64,
           episode_metadata_info={
-              'agent_id': tf.string,
-              'episode_index': tf.int32,
-              'episode_id': tf.string,
+              'agent_id': np.str_,
+              'episode_index': np.int32,
+              'episode_id': np.str_,
           },
           step_metadata_info={
-              'tag:placed': tf.bool,
+              'tag:placed': np.bool_,
               'image': tfds.features.Image(),
           },
           citation=_CITATION,
@@ -227,15 +226,15 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
                   tfds.features.Tensor(shape=(4,), dtype=np.float32),
           },
           action_info=tfds.features.Tensor(shape=(7,), dtype=np.float32),
-          reward_info=tf.float64,
-          discount_info=tf.float64,
+          reward_info=np.float64,
+          discount_info=np.float64,
           episode_metadata_info={
-              'agent_id': tf.string,
-              'episode_index': tf.int32,
-              'episode_id': tf.string,
+              'agent_id': np.str_,
+              'episode_index': np.int32,
+              'episode_id': np.str_,
           },
           step_metadata_info={
-              'tag:placed': tf.bool,
+              'tag:placed': np.bool_,
               'image': tfds.features.Image(),
           },
           citation=_CITATION,
