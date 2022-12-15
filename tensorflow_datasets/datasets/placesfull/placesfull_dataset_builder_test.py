@@ -15,13 +15,13 @@
 
 """placesfull dataset."""
 
-from tensorflow_datasets.image_classification.placesfull import placesfull
+from tensorflow_datasets.datasets.placesfull import placesfull_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class PlacesfullTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for placesfull dataset."""
-  DATASET_CLASS = placesfull.Placesfull
+  DATASET_CLASS = placesfull_dataset_builder.Builder
   SPLITS = {'train': 3}
 
   DL_DOWNLOAD_RESULT = {
