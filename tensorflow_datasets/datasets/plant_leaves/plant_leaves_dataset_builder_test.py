@@ -16,11 +16,11 @@
 """Test for the PlantLeaves dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import plant_leaves
+from tensorflow_datasets.datasets.plant_leaves import plant_leaves_dataset_builder
 
 
 class PlantLeavesTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = plant_leaves.PlantLeaves
+  DATASET_CLASS = plant_leaves_dataset_builder.Builder
   SPLITS = {"train": 22}
   # NOTE: Must match file names in the test directory.
   DL_EXTRACT_RESULT = {
