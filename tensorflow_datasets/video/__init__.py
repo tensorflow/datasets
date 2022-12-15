@@ -20,7 +20,6 @@ from tensorflow_datasets.video.davis import Davis
 from tensorflow_datasets.video.moving_mnist import MovingMnist
 from tensorflow_datasets.video.robonet import Robonet
 from tensorflow_datasets.video.starcraft import StarcraftVideo
-from tensorflow_datasets.video.starcraft import StarcraftVideoConfig
 from tensorflow_datasets.video.tao import Tao
 from tensorflow_datasets.video.ucf101 import Ucf101
 from tensorflow_datasets.video.ucf101 import Ucf101Config
