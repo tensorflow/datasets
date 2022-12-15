@@ -16,11 +16,11 @@
 """Test for the PlantLeaves dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import plantae_k
+from tensorflow_datasets.datasets.plantae_k import plantae_k_dataset_builder
 
 
 class PlantaeKTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = plantae_k.PlantaeK
+  DATASET_CLASS = plantae_k_dataset_builder.Builder
   # See note below about the +1
   SPLITS = {"train": 16 + 1}
   _LABEL_TAGS = [
