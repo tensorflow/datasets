@@ -13,7 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for places365_small.
+"""Dataset class for Places365-Standard small(256x256) dataset."""
+import csv
+import os
 
 from etils import epath
 import six.moves.urllib as urllib
@@ -27,38 +29,20 @@ _FILE_ANNOTATION_URL = "filelist_places365-standard.tar"
 
 _IMAGE_SHAPE = (256, 256, 3)
 
-_DESCRIPTION = (
-    "The Places365-Standard dataset contains 1.8 million train images from 365"
-    " scene categories,which are used to train the Places365 CNNs.There are 50"
-    " images per category in the validation set and 900 images per category in"
-    " the testing set.")
-
 _LABELS_FNAME = "image_classification/categories_places365.txt"
 
-_CITATION = """\
 
- @article{zhou2017places,
-  title={Places: A 10 million Image Database for Scene Recognition},
-  author={Zhou, Bolei and Lapedriza, Agata and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2017},
-  publisher={IEEE}
-}
-
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-class Places365Small(tfds.core.GeneratorBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Places365 Images dataset."""
 
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("2.1.0")
+  RELEASE_NOTES = {
+      "2.1.0": "Changed the example keys in order to ease integration with KYD."
+  }
 
   def _info(self):
     names_file = tfds.core.tfds_path(_LABELS_FNAME)
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=(_DESCRIPTION),
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(names_file=names_file),
@@ -66,7 +50,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label", "filename"),
         homepage="http://places2.csail.mit.edu/",
-        citation=_CITATION)
+    )
 
   def _split_generators(self, dl_manager):
     output_archives = dl_manager.download({
