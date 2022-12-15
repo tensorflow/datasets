@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from tensorflow_datasets.image_classification import places365_small
+from tensorflow_datasets.datasets.places365_small import places365_small_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class Places365SmallTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = places365_small.Places365Small
+  DATASET_CLASS = places365_small_dataset_builder.Builder
   SPLITS = {'train': 2, 'test': 2, 'validation': 2}
 
   DL_DOWNLOAD_RESULT = {
