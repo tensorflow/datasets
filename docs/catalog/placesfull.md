@@ -37,7 +37,7 @@ and education purposes.
 *   **Homepage**: [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
 
 *   **Source code**:
-    [`tfds.image_classification.placesfull.Placesfull`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/placesfull/placesfull.py)
+    [`tfds.datasets.placesfull.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/placesfull/placesfull_dataset_builder.py)
 
 *   **Versions**:
 
