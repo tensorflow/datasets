@@ -525,7 +525,7 @@ cos_e/0.0.1
 cosmos_qa/1.0.0
 covid19/1.0.0
 crema_d/1.0.0
-criteo/1.0.0
+criteo/1.0.1
 cs_restaurants/1.0.0
 curated_breast_imaging_ddsm/original-calc/3.0.0
 curated_breast_imaging_ddsm/original-mass/3.0.0
@@ -4930,6 +4930,8 @@ wine_quality/red/1.0.0
 wine_quality/white/1.0.0
 winogrande/1.1.0
 wit/1.1.0
+wit_kaggle/test_without_gold/1.0.2
+wit_kaggle/train_with_extended_features/1.0.2
 wmt13_translate/cs-en/1.0.0
 wmt13_translate/de-en/1.0.0
 wmt13_translate/es-en/1.0.0

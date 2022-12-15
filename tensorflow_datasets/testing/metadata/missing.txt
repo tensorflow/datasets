@@ -33,6 +33,4 @@ so2sat/all/2.1.0
 so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
 voxforge/1.0.0
-wit_kaggle/test_without_gold/1.0.2
-wit_kaggle/train_with_extended_features/1.0.2
 xtreme_s/fleurs.all/2.0.0
