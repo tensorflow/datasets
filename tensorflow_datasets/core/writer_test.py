@@ -214,6 +214,16 @@ class WriterTest(testing.TestCase):
       (7, b'g'),
       (8, b'hi'),
   ]
+  RECORDS_WITH_HOLES = [
+      (1, b'a'),
+      (2, b'b'),
+      (3, b'c'),
+      (4, b'd'),
+      (50000, b'e'),
+      (600000, b'f'),
+      (7000000, b'g'),
+      (80000000, b'hi'),
+  ]
   SHARDS_CONTENT = [
       [b'f', b'g'],
       [b'd'],
@@ -283,6 +293,28 @@ class WriterTest(testing.TestCase):
         writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
       shards_length, total_size = self._write(
           to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
+    self.assertEqual(shards_length,
+                     [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING])
+    self.assertEqual(total_size, 9)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(written_files, [
+        f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+        for i in range(self.NUM_SHARDS)
+        if shards_length[i]
+    ])
+    self.assertEqual(all_recs, self.SHARDS_CONTENT_NO_SHUFFLING)
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
+
+  def test_write_tfrecord_sorted_by_key_with_holes(self):
+    """Stores records as tfrecord in a fixed number of shards without shuffling.
+    """
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
+    with mock.patch.object(
+        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
+      shards_length, total_size = self._write(
+          to_write=self.RECORDS_WITH_HOLES, disable_shuffling=True)
     self.assertEqual(shards_length,
                      [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING])
     self.assertEqual(total_size, 9)
@@ -407,6 +439,32 @@ class TfrecordsWriterBeamTest(testing.TestCase):
         if shards_length[i]
     ])
     self.assertEqual(all_recs, self.SHARDS_CONTENT_NO_SHUFFLING)
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
+
+  def test_write_tfrecord_sorted_by_key_with_holes(self):
+    """Stores records as tfrecord in a fixed number of shards without shuffling.
+
+    Note that the keys are not consecutive but contain gaps.
+    """
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
+    records_with_holes = [(i**4, str(i**4).encode('utf-8')) for i in range(10)]
+    expected_shards = [[b'0', b'1', b'16', b'81', b'256', b'625', b'1296'],
+                       [b'2401', b'4096'], [b'6561']]
+
+    with mock.patch.object(
+        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
+      shards_length, total_size = self._write(
+          to_write=records_with_holes, disable_shuffling=True)
+    self.assertEqual(shards_length, [len(shard) for shard in expected_shards])
+    self.assertEqual(total_size, 28)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(written_files, [
+        f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+        for i in range(self.NUM_SHARDS)
+    ])
+    self.assertEqual(all_recs, expected_shards)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
 
