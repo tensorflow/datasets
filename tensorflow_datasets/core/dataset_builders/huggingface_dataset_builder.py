@@ -40,7 +40,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _IMAGE_ENCODING_FORMAT = "png"
@@ -173,13 +173,13 @@ def _convert_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
   elif isinstance(feature, feature_lib.Scalar):
     if value is not None:
       return value
-    elif tf_utils.is_string(feature.np_dtype):
+    elif dtype_utils.is_string(feature.np_dtype):
       return ""
-    elif tf_utils.is_integer(feature.np_dtype):
+    elif dtype_utils.is_integer(feature.np_dtype):
       return 0
-    elif tf_utils.is_bool(feature.np_dtype):
+    elif dtype_utils.is_bool(feature.np_dtype):
       return False
-    elif tf_utils.is_floating(feature.np_dtype):
+    elif dtype_utils.is_floating(feature.np_dtype):
       return 0.0
     raise ValueError(f"Could not get default value for {feature}")
   raise ValueError(f"Type {type(value)} of value {value} "

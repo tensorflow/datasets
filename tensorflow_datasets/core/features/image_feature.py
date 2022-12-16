@@ -29,7 +29,6 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -461,7 +460,7 @@ def _get_and_validate_colormap(use_colormap, shape, dtype: np.dtype,
     if shape[-1] != 1:
       raise ValueError(
           f'Colormap is only available for gray-scale images. Got: {shape}')
-    if not tf_utils.is_integer(dtype):
+    if not dtype_utils.is_integer(dtype):
       raise ValueError(
           f'Colormap is only available for integer images. Got: {dtype}')
 

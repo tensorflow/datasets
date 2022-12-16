@@ -19,9 +19,8 @@ from __future__ import annotations
 
 import collections
 import contextlib
-from typing import Any, List, Optional, Union
+from typing import Any, Union
 
-from etils import enp
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tree_utils
@@ -139,64 +138,6 @@ def convert_to_shape(shape: Any) -> type_utils.Shape:
     return tuple(shape)
   raise ValueError(
       f'Shape of type {type(shape)} with content {shape} is not supported!')
-
-
-def is_np_or_tf_dtype(value: Any) -> bool:
-  """Returns True is the given value is a NumPy or TensorFlow dtype."""
-  return enp.lazy.is_np_dtype(value) or enp.lazy.is_tf_dtype(value)
-
-
-def np_dtype(value) -> Optional[np.dtype]:
-  """Returns the NumPy dtype if it exists, else None."""
-  try:
-    return enp.lazy.as_dtype(value)
-  except TypeError:
-    return None
-
-
-def _is_dtype(numpy_dtypes: List[np.dtype], tf_dtype: Any,
-              dtype: type_utils.TfdsDType) -> bool:
-  if enp.lazy.is_np_dtype(dtype):
-    return any(
-        [is_np_sub_dtype(dtype, numpy_dtype) for numpy_dtype in numpy_dtypes])
-  if enp.lazy.has_tf and isinstance(dtype, tf.dtypes.DType):
-    if isinstance(tf_dtype, str):
-      return getattr(dtype, tf_dtype)
-    return dtype == tf_dtype
-  return False
-
-
-@py_utils.memoize()
-def is_bool(dtype: type_utils.TfdsDType) -> bool:
-  return _is_dtype([np.bool_], 'is_bool', dtype)
-
-
-@py_utils.memoize()
-def is_floating(dtype: type_utils.TfdsDType) -> bool:
-  return _is_dtype([np.floating], 'is_floating', dtype)
-
-
-@py_utils.memoize()
-def is_integer(dtype: type_utils.TfdsDType) -> bool:
-  return _is_dtype([np.integer], 'is_integer', dtype)
-
-
-@py_utils.memoize()
-def is_string(dtype: type_utils.TfdsDType) -> bool:
-  return _is_dtype([np.character, object], np.object_, dtype)
-
-
-@py_utils.memoize()
-def is_np_sub_dtype(value: np.dtype, super_type: np.dtype) -> bool:
-  try:
-    return np.issubdtype(value, super_type)
-  except TypeError:
-    return False
-
-
-@py_utils.memoize()
-def is_same_np_dtype(v1: np.dtype, v2: np.dtype) -> bool:
-  return v1 == v2
 
 
 @py_utils.memoize(maxsize=1000)

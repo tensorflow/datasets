@@ -27,7 +27,6 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -105,7 +104,7 @@ class Tensor(feature_lib.FeatureConnector):
     self._encoded_to_bytes = self._encoding != Encoding.NONE
     self._dynamic_shape = self._shape.count(None) > 1
 
-    if tf_utils.is_string(self._dtype) and self._encoded_to_bytes:
+    if dtype_utils.is_string(self._dtype) and self._encoded_to_bytes:
       raise NotImplementedError(
           'tfds.features.Tensor() does not support `encoding=` when '
           'dtype is string. Please open a PR if you need this feature.')

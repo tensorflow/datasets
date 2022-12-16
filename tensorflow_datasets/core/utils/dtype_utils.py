@@ -15,13 +15,15 @@
 
 """TFDS DType utils to handle both NumPy and TensorFlow DTypes."""
 
-from typing import cast
+from typing import cast, Any, List
 
 from etils import enp
 import numpy as np
-from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+TfdsDType = type_utils.TfdsDType
 
 
 def cast_to_numpy(dtype: type_utils.TfdsDType) -> np.dtype:
@@ -40,6 +42,59 @@ def cast_to_numpy(dtype: type_utils.TfdsDType) -> np.dtype:
   # optimize for memory and for consistency with tf.string:
   # np.array(['', '1234567890'], dtype=np.str_).nbytes == 80
   # np.array(['', '1234567890'], dtype=np.object_).nbytes == 16
-  if tf_utils.is_string(dtype):
+  if is_string(dtype):
     return np.object_
   return cast(np.dtype, dtype)
+
+
+def is_np_or_tf_dtype(value: Any) -> bool:
+  """Returns True is the given value is a NumPy or TensorFlow dtype."""
+  return enp.lazy.is_np_dtype(value) or enp.lazy.is_tf_dtype(value)
+
+
+def _is_dtype(numpy_dtypes: List[np.dtype], tf_dtype: Any,
+              dtype: TfdsDType) -> bool:
+  if enp.lazy.is_np_dtype(dtype):
+    return any(
+        [is_np_sub_dtype(dtype, numpy_dtype) for numpy_dtype in numpy_dtypes])
+  if enp.lazy.has_tf and isinstance(dtype, tf.dtypes.DType):
+    if isinstance(tf_dtype, str):
+      return getattr(dtype, tf_dtype)
+    return dtype == tf_dtype
+  raise TypeError(f'type {dtype} not recognized')
+
+
+@py_utils.memoize()
+def is_bool(dtype: TfdsDType) -> bool:
+  return _is_dtype([np.bool_], 'is_bool', dtype)
+
+
+@py_utils.memoize()
+def is_floating(dtype: TfdsDType) -> bool:
+  return _is_dtype([np.floating], 'is_floating', dtype)
+
+
+@py_utils.memoize()
+def is_integer(dtype: TfdsDType) -> bool:
+  return _is_dtype([np.integer], 'is_integer', dtype)
+
+
+@py_utils.memoize()
+def is_string(dtype: TfdsDType) -> bool:
+  return _is_dtype([np.character, object], np.object_, dtype)
+
+
+@py_utils.memoize()
+def is_same_dtype_type(a, b):
+  if a == b:
+    return True
+  # NumPy strings can have different DTypes and yet be of the same DType type.
+  return is_string(a) and is_string(b)
+
+
+@py_utils.memoize()
+def is_np_sub_dtype(value: np.dtype, super_type: np.dtype) -> bool:
+  try:
+    return np.issubdtype(value, super_type)
+  except TypeError:
+    return False

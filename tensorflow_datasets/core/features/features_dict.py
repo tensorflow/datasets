@@ -25,6 +25,7 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
@@ -302,7 +303,7 @@ def to_feature(value: feature_lib.FeatureConnectorArg):
   """Convert the given value to Feature if necessary."""
   if isinstance(value, feature_lib.FeatureConnector):
     return value
-  elif utils.is_np_or_tf_dtype(value):  # tf.int32, np.int32,...
+  elif dtype_utils.is_np_or_tf_dtype(value):  # tf.int32, np.int32,...
     return tensor_feature.Tensor(shape=(), dtype=value)
   elif isinstance(value, dict):
     return FeaturesDict(value)
