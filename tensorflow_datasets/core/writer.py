@@ -416,23 +416,32 @@ class BeamWriter(object):
   def _write_final_shard(
       self,
       shardid_examples: Tuple[int, List[type_utils.KeySerializedExample]],
-      num_shards: int,
+      non_empty_shard_ids: List[int],
   ) -> _ShardInfo:
-    """Write all examples of a shard to disk."""
-    shard_id, examples = shardid_examples
+    """Write all examples of a shard to disk.
+
+    Arguments:
+      shardid_examples: tuple of the shard id and the serialized examples that
+        belong to that shard.
+      non_empty_shard_ids: list of the shard ids of all the non-empty shards.
+        Must be sorted.
+
+    Returns:
+      the shard info of the written shard.
+    """
+    original_shard_id, examples = shardid_examples
     if not examples:
       raise AssertionError("Not a single example present in the PCollection!")
+    # There may be empty shards, this ensures there are no gaps.
+    shard_id = non_empty_shard_ids.index(original_shard_id)
     examples = sorted(examples)
     # Compare continuous examples
     for ex0, ex1 in zip(examples[:-1], examples[1:]):
       if ex0[0] == ex1[0]:  # Different keys
         _raise_error_for_duplicated_keys(ex0[1], ex1[1],
                                          self._serializer.example_specs)
-    if num_shards <= shard_id:
-      raise AssertionError("Incorrect number of shards! "
-                           f"num_shards={num_shards}, shard_id={shard_id}")
     shard_path = self._filename_template.sharded_filepath(
-        shard_index=shard_id, num_shards=num_shards)
+        shard_index=shard_id, num_shards=len(non_empty_shard_ids))
     with utils.incomplete_file(epath.Path(shard_path)) as tmp_path:
       logging.info("Writing %d examples to %s.", len(examples),
                    os.fspath(tmp_path))
@@ -470,12 +479,8 @@ class BeamWriter(object):
       self,
       shard_infos: List[_ShardInfo],
       total_size: int,
-      num_shards: int,
   ) -> None:
     """Stores the split info to disk."""
-    if num_shards != len(shard_infos):
-      raise AssertionError("Incorrect number of shards! "
-                           f"Expected: {num_shards}, got {len(shard_infos)}.")
     shard_infos = sorted(shard_infos, key=lambda x: x.id)
     shard_lengths = [info.num_examples for info in shard_infos]
     with utils.incomplete_file(epath.Path(self._split_info_path)) as tmp_path:
@@ -484,6 +489,15 @@ class BeamWriter(object):
               "total_size": total_size,
               "shard_lengths": shard_lengths
           }))
+
+  def _sort_shard_ids(self, shard_ids: List[int],
+                      ideal_num_shards: int) -> List[int]:
+    """Returns the sorted shard ids and logs information."""
+    if len(shard_ids) != ideal_num_shards:
+      logging.info(
+          "Ideally there would be %d shards, but got %d non-empty shards.",
+          ideal_num_shards, len(shard_ids))
+    return sorted(shard_ids)
 
   def write_from_pcollection(self, examples_pcollection):
     """Returns PTransform to write (key, example) PCollection to tfrecords."""
@@ -506,25 +520,40 @@ class BeamWriter(object):
         | beam.Values()
         | beam.Map(len)
         | "TotalSize" >> beam.CombineGlobally(sum))
-    num_shards = beam.pvalue.AsSingleton(
+    ideal_num_shards = beam.pvalue.AsSingleton(
         num_examples | "NumberOfShards" >> beam.Map(
             self._number_of_shards, total_size=total_size))
 
-    return (serialized_examples
-            | "AssignShard" >> beam.Map(
-                self._assign_shard,
-                largest_key=beam.pvalue.AsSingleton(largest_key),
-                num_shards=num_shards)
-            # (shard_id, serialized_example)
-            | "GroupShards" >> beam.GroupByKey()
-            # (shard_id, [serialized_example])
-            | "WriteFinalShards" >> beam.Map(
-                self._write_final_shard, num_shards=num_shards)
-            | "CollectShardInfo" >> beam.transforms.combiners.ToList()
-            | "CalculateSplitInfo" >> beam.ParDo(
-                self._store_split_info,
-                total_size=total_size,
-                num_shards=num_shards))
+    examples_per_shard = (
+        serialized_examples
+        | "AssignShard" >> beam.Map(
+            self._assign_shard,
+            largest_key=beam.pvalue.AsSingleton(largest_key),
+            num_shards=ideal_num_shards)
+        # (shard_id, serialized_example)
+        | "GroupShards" >> beam.GroupByKey()
+        # (shard_id, [serialized_example])
+    )
+
+    # There may be shards that did not get assigned any examples. We will ignore
+    # those shards and for that we need the ids of shards that are non-empty.
+    non_empty_shard_ids = beam.pvalue.AsSingleton(
+        examples_per_shard
+        | "GetIdsOfNonEmptyShards" >> beam.Keys()
+        | "CollectIdsOfNonEmptyShards" >> beam.transforms.combiners.ToList()
+        | "SortIdsOfNonEmptyShards" >> beam.Map(
+            self._sort_shard_ids, ideal_num_shards=ideal_num_shards))
+
+    return (
+        examples_per_shard
+        # (shard_id, [serialized_example])
+        | "WriteFinalShards" >> beam.Map(
+            self._write_final_shard, non_empty_shard_ids=non_empty_shard_ids)
+        # (_ShardInfo)
+        | "CollectShardInfo" >> beam.transforms.combiners.ToList()
+        # [_ShardInfo]
+        | "CalculateSplitInfo" >> beam.ParDo(
+            self._store_split_info, total_size=total_size))
 
   def finalize(self):
     """Deletes tmp directory and returns shard_lengths and total_size."""
