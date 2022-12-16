@@ -59,6 +59,7 @@ class FileAdapter(abc.ABC):
 
   FILE_SUFFIX: ClassVar[str]
   BUFFER_SIZE = 8 << 20  # 8 MiB per file.
+  RECORD_SIZE = -1
 
   @classmethod
   @abc.abstractmethod
@@ -66,6 +67,7 @@ class FileAdapter(abc.ABC):
       cls,
       filename: epath.PathLike,
       buffer_size: Optional[int] = None,
+      record_size: Optional[int] = None,
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     raise NotImplementedError()
@@ -100,8 +102,10 @@ class TfRecordFileAdapter(FileAdapter):
       cls,
       filename: epath.PathLike,
       buffer_size: Optional[int] = None,
+      record_size: Optional[int] = None,
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
+    del record_size  # Unused
     buffer_size = buffer_size or cls.BUFFER_SIZE
     return tf.data.TFRecordDataset(filename, buffer_size=buffer_size)
 
@@ -136,7 +140,9 @@ class RiegeliFileAdapter(FileAdapter):
       cls,
       filename: epath.PathLike,
       buffer_size: Optional[int] = None,
+      record_size: Optional[int] = None,
   ) -> tf.data.Dataset:
+    del record_size  # Unused
     buffer_size = buffer_size or cls.BUFFER_SIZE
     from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top
     return riegeli_tf.RiegeliDataset(filename, buffer_size=buffer_size)
