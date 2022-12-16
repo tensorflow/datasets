@@ -22,7 +22,7 @@ from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.decode import base
 from tensorflow_datasets.core.features import features_dict
-from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils import dtype_utils
 
 # Expected feature specs provided by the user
 _FeatureSpecElem = Union[features_lib.FeatureConnector, Any]
@@ -89,7 +89,7 @@ def _normalize_feature_item(
   """Extracts the features matching the expected_feature structure."""
   # If user provide a FeatureConnector, use this
   if (isinstance(expected_feature, features_lib.FeatureConnector)) or (
-      tf_utils.is_np_or_tf_dtype(expected_feature)):
+      dtype_utils.is_np_or_tf_dtype(expected_feature)):
     return expected_feature
   # If the user provide a bool, use the matching feature connector
   # Example: {'cameras': True} -> `{'camera': FeatureDict({'image': Image()})}`

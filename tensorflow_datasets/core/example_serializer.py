@@ -26,7 +26,7 @@ import numpy as np
 import six
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
-from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 TensorInfo = feature_lib.TensorInfo
@@ -153,7 +153,7 @@ def _item_to_np_array(item, dtype: np.dtype, shape: Shape) -> np.ndarray:
   """Single item to a np.array."""
   result = np.asanyarray(item, dtype=dtype)
   utils.assert_shape_match(result.shape, shape)
-  if tf_utils.is_string(dtype) and not _is_string(item):
+  if dtype_utils.is_string(dtype) and not _is_string(item):
     raise ValueError(
         f"Unsupported value: {result}\nCould not convert to bytes list.")
   return result
@@ -169,15 +169,15 @@ def _item_to_tf_feature(
   )
 
   # Convert boolean to integer (tf.train.Example does not support bool)
-  if utils.is_same_np_dtype(v.dtype, np.bool_):
+  if v.dtype == np.bool_:
     v = v.astype(int)
 
   vals = v.flat  # Convert v into a 1-d array (without extra copy)
-  if tf_utils.is_integer(v.dtype):
+  if dtype_utils.is_integer(v.dtype):
     return tf.train.Feature(int64_list=tf.train.Int64List(value=vals))
-  elif tf_utils.is_floating(v.dtype):
+  elif dtype_utils.is_floating(v.dtype):
     return tf.train.Feature(float_list=tf.train.FloatList(value=vals))
-  elif tf_utils.is_string(tensor_info.np_dtype):
+  elif dtype_utils.is_string(tensor_info.np_dtype):
     vals = [tf.compat.as_bytes(x) for x in vals]
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=vals))
   else:

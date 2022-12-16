@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
-from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -132,12 +132,12 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
   # This create limitation like float64 downsampled to float32, bool converted
   # to int64 which is space ineficient, no support for complexes or quantized
   # It seems quite space inefficient to convert bool to int64
-  if (tf_utils.is_integer(tensor_info.tf_dtype) or
-      tf_utils.is_bool(tensor_info.tf_dtype)):
+  if (dtype_utils.is_integer(tensor_info.tf_dtype) or
+      dtype_utils.is_bool(tensor_info.tf_dtype)):
     dtype = tf.int64
-  elif tf_utils.is_floating(tensor_info.tf_dtype):
+  elif dtype_utils.is_floating(tensor_info.tf_dtype):
     dtype = tf.float32
-  elif tf_utils.is_string(tensor_info.tf_dtype):
+  elif dtype_utils.is_string(tensor_info.tf_dtype):
     dtype = tf.string
   else:
     # TFRecord only support 3 types
