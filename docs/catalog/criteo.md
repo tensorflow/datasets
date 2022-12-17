@@ -88,18 +88,19 @@ to:
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Fixed parsing of fields `conversion`, `visit` and `exposure`.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `297.00 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.55 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | ---------:
+`'train'` | 13,979,592
 
 *   **Feature structure**:
 
