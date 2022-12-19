@@ -16,11 +16,11 @@
 """Tests for Reddit dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import reddit
+from tensorflow_datasets.datasets.reddit import reddit_dataset_builder
 
 
 class RedditTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = reddit.Reddit
+  DATASET_CLASS = reddit_dataset_builder.Builder
   SPLITS = {
       "train": 2,  # Number of fake train example
   }
