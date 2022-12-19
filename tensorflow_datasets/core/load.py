@@ -140,8 +140,16 @@ def builder(
       arguments `a=True` and `b=3` (for builders with configs, it would be
       `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'` config and pass to the
       builder keyword arguments `a=True` and `b=3`).
-    try_gcs: `bool`, if True, tfds.load will see if the dataset exists on the
-      public GCS bucket before building it locally.
+    try_gcs: `bool`, if True, `tfds.load` will see if the dataset exists on the
+      public GCS bucket before building it locally. This is equivalent to
+      passing `data_dir='gs://tfds-data/datasets'`. Warning: `try_gcs` is
+      different than `builder_kwargs.download_config.try_download_gcs`.
+      `try_gcs` (default: False) overrides `data_dir` to be the public GCS
+      bucket. `try_download_gcs` (default: True) allows downloading from GCS
+      while keeping a different `data_dir` than the public GCS bucket.  So, to
+      fully bypass GCS, please use `try_gcs=False` and
+      `download_and_prepare_kwargs={'download_config':
+      tfds.core.download.DownloadConfig(try_download_gcs=False)})`.
     **builder_kwargs: `dict` of keyword arguments passed to the
       `tfds.core.DatasetBuilder`.
 
@@ -558,8 +566,16 @@ def load(
       cache_dir and manual_dir will automatically be deduced from data_dir.
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
       `tfds.core.DatasetBuilder.as_dataset`.
-    try_gcs: `bool`, if True, tfds.load will see if the dataset exists on the
-      public GCS bucket before building it locally.
+    try_gcs: `bool`, if True, `tfds.load` will see if the dataset exists on the
+      public GCS bucket before building it locally. This is equivalent to
+      passing `data_dir='gs://tfds-data/datasets'`. Warning: `try_gcs` is
+      different than `builder_kwargs.download_config.try_download_gcs`.
+      `try_gcs` (default: False) overrides `data_dir` to be the public GCS
+      bucket. `try_download_gcs` (default: True) allows downloading from GCS
+      while keeping a different `data_dir` than the public GCS bucket.  So, to
+      fully bypass GCS, please use `try_gcs=False` and
+      `download_and_prepare_kwargs={'download_config':
+      tfds.core.download.DownloadConfig(try_download_gcs=False)})`.
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
