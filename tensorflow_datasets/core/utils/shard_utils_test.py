@@ -19,6 +19,36 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import shard_utils
 
 
+class ShardConfigTest(parameterized.TestCase):
+
+  @parameterized.named_parameters(
+      ('imagenet train, 137 GiB', 137 << 30, 1281167, True, 1024),
+      ('imagenet evaluation, 6.3 GiB', 6300 * (1 << 20), 50000, True, 64),
+      ('very large, but few examples, 52 GiB', 52 << 30, 512, True, 512),
+      ('xxl, 10 TiB', 10 << 40, 10**9, True, 11264),
+      ('xxl, 10 PiB, 100B examples', 10 << 50, 10**11, True, 10487808),
+      ('xs, 100 MiB, 100K records', 10 << 20, 100 * 10**3, True, 1),
+      ('m, 499 MiB, 200K examples', 400 << 20, 200 * 10**3, True, 4),
+  )
+  def test_get_number_shards_default_config(self, total_size, num_examples,
+                                            uses_precise_sharding,
+                                            expected_num_shards):
+    shard_config = shard_utils.ShardConfig()
+    self.assertEqual(
+        expected_num_shards,
+        shard_config.get_number_shards(
+            total_size=total_size,
+            num_examples=num_examples,
+            uses_precise_sharding=uses_precise_sharding))
+
+  def test_get_number_shards_if_specified(self):
+    shard_config = shard_utils.ShardConfig(num_shards=42)
+    self.assertEqual(
+        42,
+        shard_config.get_number_shards(
+            total_size=100, num_examples=1, uses_precise_sharding=True))
+
+
 class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
 
   def test_read_all_even_sharding(self):

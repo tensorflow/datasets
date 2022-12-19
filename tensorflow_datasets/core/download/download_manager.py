@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Download manager interface."""
+from __future__ import annotations
 
 import concurrent.futures
 import dataclasses
@@ -33,6 +34,7 @@ from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
+from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 
@@ -90,6 +92,13 @@ class DownloadConfig:
     override_max_simultaneous_downloads: `int`, optional max number of
       simultaneous downloads. If set, it will override dataset builder and
       downloader default values.
+    num_shards: optional number of shards that should be created. If `None`,
+      then the number of shards is computed based on the total size of the
+      dataset and the min and max shard size.
+    min_shard_size: optional minimum shard size in bytes. If `None`, 64 MB is
+      used.
+    max_shard_size: optional maximum shard size in bytes. If `None`, 1 GiB is
+      used.
   """
   extract_dir: Optional[epath.PathLike] = None
   manual_dir: Optional[epath.PathLike] = None
@@ -103,6 +112,19 @@ class DownloadConfig:
   try_download_gcs: bool = True
   verify_ssl: bool = True
   override_max_simultaneous_downloads: Optional[int] = None
+  num_shards: Optional[int] = None
+  min_shard_size: int = shard_utils.DEFAULT_MIN_SHARD_SIZE
+  max_shard_size: int = shard_utils.DEFAULT_MAX_SHARD_SIZE
+
+  def get_shard_config(self) -> shard_utils.ShardConfig:
+    return shard_utils.ShardConfig(
+        num_shards=self.num_shards,
+        min_shard_size=self.min_shard_size,
+        max_shard_size=self.max_shard_size)
+
+  def replace(self, **kwargs: Any) -> DownloadConfig:
+    """Returns a copy with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
 
 
 class DownloadManager(object):

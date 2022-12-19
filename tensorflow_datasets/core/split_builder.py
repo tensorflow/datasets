@@ -34,6 +34,7 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import writer as writer_lib
+from tensorflow_datasets.core.utils import shard_utils
 
 if typing.TYPE_CHECKING:
   import apache_beam as beam  # pytype: disable=import-error
@@ -131,6 +132,7 @@ class SplitBuilder:
       beam_runner: Optional['beam.runners.PipelineRunner'],
       max_examples_per_split: Optional[int],
       file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
+      shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     self._split_dict = split_dict
     self._features = features
@@ -142,6 +144,7 @@ class SplitBuilder:
     self._beam_runner = beam_runner
     self._beam_pipeline: Optional['beam.Pipeline'] = None
     self._file_format = file_format
+    self._shard_config = shard_config
 
   @contextlib.contextmanager
   def maybe_beam_pipeline(self) -> Iterator[PipelineProxy]:
@@ -381,6 +384,7 @@ class SplitBuilder:
         disable_shuffling=disable_shuffling,
         # TODO(weide) remove this because it's already in filename_template?
         file_format=self._file_format,
+        shard_config=self._shard_config,
     )
     for key, example in utils.tqdm(
         generator,
@@ -422,6 +426,7 @@ class SplitBuilder:
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
         file_format=self._file_format,
+        shard_config=self._shard_config,
     )
 
     def _encode_example(key_ex, encode_fn=self._features.encode_example):
