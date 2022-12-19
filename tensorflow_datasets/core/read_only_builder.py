@@ -354,7 +354,7 @@ def _get_dataset_dir(
 
 def _contains_dataset(dataset_dir: epath.PathLike) -> bool:
   try:
-    return epath.Path(feature_lib.make_config_path(dataset_dir)).exists()
+    return feature_lib.make_config_path(dataset_dir).exists()
   except (OSError, tf.errors.PermissionDeniedError):
     return False
 
