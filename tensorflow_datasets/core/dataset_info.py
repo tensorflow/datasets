@@ -62,12 +62,13 @@ Nest = Union[Tuple["Nest", ...], Dict[str, "Nest"], str]  # pytype: disable=not-
 SupervisedKeysType = Union[Tuple[Nest, Nest], Tuple[Nest, Nest, Nest]]
 
 
-def dataset_info_path(dataset_info_dir: epath.PathLike) -> epath.Path:
-  return epath.Path(dataset_info_dir) / constants.DATASET_INFO_FILENAME
+def dataset_info_path(dataset_info_dir: epath.PathLike) -> str:
+  return os.path.join(
+      os.fspath(dataset_info_dir), constants.DATASET_INFO_FILENAME)
 
 
-def license_path(dataset_info_dir: epath.PathLike) -> epath.Path:
-  return epath.Path(dataset_info_dir) / constants.LICENSE_FILENAME
+def license_path(dataset_info_dir: epath.PathLike) -> str:
+  return os.path.join(os.fspath(dataset_info_dir), constants.LICENSE_FILENAME)
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -516,12 +517,13 @@ class DatasetInfo(object):
       self.metadata.save_metadata(dataset_info_dir)
 
     if self.redistribution_info.license:
-      license_path(dataset_info_dir).write_text(
-          self.redistribution_info.license)
+      with tf.io.gfile.GFile(license_path(dataset_info_dir), "w") as f:
+        f.write(self.redistribution_info.license)
 
-    dataset_info_path(dataset_info_dir).write_text(self.as_json)
+    with tf.io.gfile.GFile(dataset_info_path(dataset_info_dir), "w") as f:
+      f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir: epath.PathLike) -> None:
+  def read_from_directory(self, dataset_info_dir: str) -> None:
     """Update DatasetInfo from the JSON files in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -530,23 +532,24 @@ class DatasetInfo(object):
     This will overwrite all previous metadata.
 
     Args:
-      dataset_info_dir: The directory containing the metadata file. This should
-        be the root directory of a specific dataset version.
+      dataset_info_dir: `str` The directory containing the metadata file. This
+        should be the root directory of a specific dataset version.
 
     Raises:
       FileNotFoundError: If the dataset_info.json can't be found.
     """
     logging.info("Load dataset info from %s", dataset_info_dir)
 
-    # Load the metadata from disk
-    try:
-      parsed_proto = read_from_json(dataset_info_path(dataset_info_dir))
-    except Exception as e:
+    json_filename = dataset_info_path(dataset_info_dir)
+    if not tf.io.gfile.exists(json_filename):
       raise FileNotFoundError(
           "Tried to load `DatasetInfo` from a directory which does not exist or"
           " does not contain `dataset_info.json`. Please delete the directory "
           f"`{dataset_info_dir}`  if you are trying to re-generate the "
-          "dataset.") from e
+          "dataset.")
+
+    # Load the metadata from disk
+    parsed_proto = read_from_json(json_filename)
 
     if str(self.version) != parsed_proto.version:
       raise AssertionError(
@@ -571,12 +574,12 @@ class DatasetInfo(object):
     if self.features:
       self.features.load_metadata(dataset_info_dir)
     # For `ReadOnlyBuilder`, reconstruct the features from the config.
-    elif feature_lib.make_config_path(dataset_info_dir).exists():
+    elif tf.io.gfile.exists(feature_lib.make_config_path(dataset_info_dir)):
       self._features = feature_lib.FeatureConnector.from_config(
           dataset_info_dir)
     # Restore the MetaDataDict from metadata.json if there is any
     if (self.metadata is not None or
-        _metadata_filepath(dataset_info_dir).exists()):
+        tf.io.gfile.exists(_metadata_filepath(dataset_info_dir))):
       # If the dataset was loaded from file, self.metadata will be `None`, so
       # we create a MetadataDict first.
       if self.metadata is None:
@@ -623,7 +626,7 @@ class DatasetInfo(object):
     """Initialize DatasetInfo from GCS bucket info files."""
     # In order to support Colab, we use the HTTP GCS API to access the metadata
     # files. They are copied locally and then loaded.
-    tmp_dir = epath.Path(tempfile.mkdtemp("tfds"))
+    tmp_dir = tempfile.mkdtemp("tfds")
     data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
       return
@@ -631,8 +634,8 @@ class DatasetInfo(object):
         "Load pre-computed DatasetInfo (eg: splits, num examples,...) "
         "from GCS: %s", self.full_name)
     for path in data_files:
-      out_fname = tmp_dir / path.name
-      epath.Path(path).copy(out_fname)
+      out_fname = os.path.join(tmp_dir, path.name)
+      tf.io.gfile.copy(os.fspath(path), out_fname)
     self.read_from_directory(tmp_dir)
 
   def __repr__(self):
@@ -836,9 +839,9 @@ def read_proto_from_builder_dir(
   Raises:
     FileNotFoundError: If the builder_dir does not exist.
   """
-  info_path = epath.Path(
-      os.path.expanduser(builder_dir)) / constants.DATASET_INFO_FILENAME
-  if not info_path.exists():
+  info_path = os.path.join(
+      os.path.expanduser(builder_dir), constants.DATASET_INFO_FILENAME)
+  if not tf.io.gfile.exists(info_path):
     raise FileNotFoundError(
         f"Could not load dataset info: {info_path} does not exist.")
   return read_from_json(info_path)
@@ -858,8 +861,8 @@ def pack_as_supervised_ds(
     return ds
 
 
-def _metadata_filepath(data_dir: epath.PathLike) -> epath.Path:
-  return epath.Path(data_dir) / constants.METADATA_FILENAME
+def _metadata_filepath(data_dir):
+  return os.path.join(data_dir, constants.METADATA_FILENAME)
 
 
 class MetadataDict(Metadata, dict):
@@ -870,13 +873,13 @@ class MetadataDict(Metadata, dict):
 
   def save_metadata(self, data_dir):
     """Save the metadata."""
-    with _metadata_filepath(data_dir).open(mode="w") as f:
+    with tf.io.gfile.GFile(_metadata_filepath(data_dir), "w") as f:
       json.dump(self, f)
 
   def load_metadata(self, data_dir):
     """Restore the metadata."""
     self.clear()
-    with _metadata_filepath(data_dir).open(mode="r") as f:
+    with tf.io.gfile.GFile(_metadata_filepath(data_dir), "r") as f:
       self.update(json.load(f))
 
 
@@ -885,10 +888,10 @@ class BeamMetadataDict(MetadataDict):
 
   def __init__(self, *args, **kwargs):
     super(BeamMetadataDict, self).__init__(*args, **kwargs)
-    self._tempdir = epath.Path(tempfile.mkdtemp("tfds_beam_metadata"))
+    self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
 
-  def _temp_filepath(self, key) -> epath.Path:
-    return self._tempdir / f"{key}.json"
+  def _temp_filepath(self, key):
+    return os.path.join(self._tempdir, "%s.json" % key)
 
   def __setitem__(self, key, item):
     """Creates write sink for beam PValues or sets value of key in `dict`.
@@ -930,7 +933,7 @@ class BeamMetadataDict(MetadataDict):
           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
           | "metadata_%s_tojson" % key >> beam.Map(_to_json)
           | "metadata_%s_write" % key >> beam.io.WriteToText(
-              os.fspath(self._temp_filepath(key)),
+              self._temp_filepath(key),
               num_shards=1,
               shard_name_template="",
           ))
@@ -941,7 +944,7 @@ class BeamMetadataDict(MetadataDict):
     beam = lazy_imports_lib.lazy_imports.apache_beam
     for key, item in self.items():
       if isinstance(item, beam.pvalue.PValue):
-        with self._temp_filepath(key).open(mode="r") as f:
+        with tf.io.gfile.GFile(self._temp_filepath(key), "r") as f:
           self[key] = json.load(f)
-    self._tempdir.rmtree()
+    tf.io.gfile.rmtree(self._tempdir)
     super(BeamMetadataDict, self).save_metadata(data_dir)
