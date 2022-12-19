@@ -220,6 +220,7 @@ class DatasetBuilderTest(testing.TestCase):
       self.assertSetEqual(
           set([
               "dataset_info.json",
+              "features.json",
               "image.image.json",
               "mnist-test.tfrecord-00000-of-00001",
               "mnist-train.tfrecord-00000-of-00001",
