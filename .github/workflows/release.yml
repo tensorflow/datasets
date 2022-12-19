@@ -1,19 +1,33 @@
 name: Publish tensorflow-datasets to PyPI
 
 # Allow to trigger the workflow manually (e.g. when deps changes)
-on: [push, workflow_dispatch]
+on:
+  # Event triggered on a push to master branch
+  push:
+    branches:
+      - 'master'
+
+  # Event manually triggered (in the Github UI)
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        description: Git ref (e.g. SHA or tag) (Optional)
+        default: ""
+        required: false
 
 jobs:
   publish-job:
     # Prevents action from running on forks and non-master branches.
-    if: |
-      github.repository == 'tensorflow/datasets'
-      && github.ref == 'refs/heads/master'
+    if: github.repository == 'tensorflow/datasets'
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.inputs.git-ref }}
+
     - name: Remove the `-nightly` suffix.
       # For stable version, we overwrite `version.py` by `version_stable.py` to
       # remove the `-nightly` suffix.
@@ -26,3 +40,4 @@ jobs:
         pypi-token: ${{ secrets.PYPI_API_TOKEN }}
         gh-token: ${{ secrets.GITHUB_TOKEN }}
         parse-changelog: true
+        git-ref: 'skip'
