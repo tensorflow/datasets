@@ -23,6 +23,11 @@ and this project adheres to
 -   `tfds.core.DatasetBuilder` can have a default limit for the number of
     simultaneous downloads. `tfds.download.DownloadConfig` can override it.
 -   `tfds.features.Audio` supports storing raw audio data for lazy decoding.
+-   The number of shards can be overridden when preparing a dataset:
+    `builder.download_and_prepare(download_config=tfds.download.DownloadConfig(num_shards=42))`.
+    Alternatively, you can configure the min and max shard size if you want TFDS
+    to compute the number of shards for you, but want to have control over the
+    shard sizes.
 
 ### Changed
 
