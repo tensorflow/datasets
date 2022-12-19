@@ -611,6 +611,18 @@ class DatasetBuilder(registered.RegisteredDataset):
           self.info.write_to_directory(self._data_dir)
       # The generated DatasetInfo contains references to `tmp_data_dir`
       self.info.update_data_dir(self._data_dir)
+
+    # Clean up incomplete files from preempted workers.
+    deleted_incomplete_files = []
+    for f in self.data_path.iterdir():
+      if utils.is_incomplete_file(f):
+        deleted_incomplete_files.append(f)
+        f.unlink()
+    if deleted_incomplete_files:
+      logging.info("Deleted %d incomplete files. A small selection: %s",
+                   len(deleted_incomplete_files),
+                   "\n".join(deleted_incomplete_files[:3]))
+
     self._log_download_done()
 
   @tfds_logging.as_dataset()

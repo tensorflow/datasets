@@ -24,6 +24,7 @@ import logging
 import operator
 import os
 import random
+import re
 import shutil
 import string
 import sys
@@ -311,7 +312,7 @@ def _get_incomplete_path(filename):
   """Returns a temporary filename based on filename."""
   random_suffix = ''.join(
       random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
-  return filename + '.incomplete' + random_suffix
+  return filename + constants.INCOMPLETE_SUFFIX + random_suffix
 
 
 @contextlib.contextmanager
@@ -331,13 +332,21 @@ def incomplete_dir(dirname: epath.PathLike) -> Iterator[str]:
 @contextlib.contextmanager
 def incomplete_file(path: epath.Path,) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = path.parent / f'{path.name}.incomplete.{uuid.uuid4().hex}'
+  tmp_path = path.parent / f'{path.name}{constants.INCOMPLETE_SUFFIX}.{uuid.uuid4().hex}'
   try:
     yield tmp_path
     tmp_path.replace(path)
   finally:
     # Eventually delete the tmp_path if exception was raised
     tmp_path.unlink(missing_ok=True)
+
+
+def is_incomplete_file(path: epath.Path) -> bool:
+  """Returns whether the given filename suggests that it's incomplete."""
+  return bool(
+      re.search(
+          rf'^.+{re.escape(constants.INCOMPLETE_SUFFIX)}\.[0-9a-fA-F]{{32}}$',
+          path.name))
 
 
 @contextlib.contextmanager
