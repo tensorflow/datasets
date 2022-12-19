@@ -1,0 +1,4 @@
+content.data-type.text
+ml.task.abstractive-text-summarization
+ml.task.text-generation
+ml.task.text-summarization

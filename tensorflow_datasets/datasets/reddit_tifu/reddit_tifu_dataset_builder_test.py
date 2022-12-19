@@ -16,11 +16,11 @@
 """Test for Reddit TIFU Dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import reddit_tifu
+from tensorflow_datasets.datasets.reddit_tifu import reddit_tifu_dataset_builder
 
 
 class RedditTifuTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = reddit_tifu.RedditTifu
+  DATASET_CLASS = reddit_tifu_dataset_builder.Builder
   SPLITS = {
       "train": 3,  # Number of fake train example
   }
@@ -29,7 +29,7 @@ class RedditTifuTest(testing.DatasetBuilderTestCase):
 
 
 class RedditTifuSplitTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = reddit_tifu.RedditTifu
+  DATASET_CLASS = reddit_tifu_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "test": 1,  # Number of fake test example
