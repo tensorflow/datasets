@@ -24,7 +24,6 @@ import functools
 import html
 import importlib
 import json
-import os
 import typing
 from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
@@ -536,9 +535,8 @@ class FeatureConnector(object):
     Args:
       root_dir: `path/to/dir` containing the `features.json`
     """
-    with tf.io.gfile.GFile(make_config_path(root_dir), 'w') as f:
-      json_dict = json_format.MessageToDict(self.to_proto())
-      f.write(json.dumps(json_dict, indent=4))
+    json_dict = json_format.MessageToDict(self.to_proto())
+    make_config_path(root_dir).write_text(json.dumps(json_dict, indent=4))
     self.save_metadata(root_dir, feature_name=None)
 
   @classmethod
@@ -557,9 +555,8 @@ class FeatureConnector(object):
     Returns:
       The reconstructed feature instance.
     """
-    with tf.io.gfile.GFile(make_config_path(root_dir)) as f:
-      content = json.loads(f.read())
-      feature = FeatureConnector.from_json(content)
+    content = json.loads(make_config_path(root_dir).read_text())
+    feature = FeatureConnector.from_json(content)
     feature.load_metadata(root_dir, feature_name=None)
     return feature
 
@@ -953,9 +950,9 @@ class FeatureConnector(object):
     pass
 
 
-def make_config_path(root_dir: epath.PathLike) -> str:
+def make_config_path(root_dir: epath.PathLike) -> epath.Path:
   """Returns the path to the features config."""
-  return os.fspath(epath.Path(root_dir) / constants.FEATURES_FILENAME)
+  return epath.Path(root_dir) / constants.FEATURES_FILENAME
 
 
 def _repr_html(ex) -> str:
