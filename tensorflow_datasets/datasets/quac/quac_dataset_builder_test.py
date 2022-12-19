@@ -15,13 +15,13 @@
 
 """quac dataset."""
 
+from tensorflow_datasets.datasets.quac import quac_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.quac import quac
 
 
 class QuacTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for quac dataset."""
-  DATASET_CLASS = quac.Quac
+  DATASET_CLASS = quac_dataset_builder.Builder
   DL_EXTRACT_RESULT = {
       "train": "train_v0.2.json",
       "val": "val_v0.2.json",
