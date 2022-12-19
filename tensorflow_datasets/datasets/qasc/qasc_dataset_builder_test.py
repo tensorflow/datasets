@@ -15,14 +15,14 @@
 
 """qasc dataset."""
 
+from tensorflow_datasets.datasets.qasc import qasc_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.question_answering.qasc import qasc
 
 
 class QascTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc dataset."""
 
-  DATASET_CLASS = qasc.Qasc
+  DATASET_CLASS = qasc_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "test": 1,  # Number of fake test example

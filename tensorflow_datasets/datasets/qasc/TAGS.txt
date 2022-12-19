@@ -1,0 +1,4 @@
+content.data-type.text
+ml.task.natural-language-understanding
+ml.task.question-answering
+ml.task.reading-comprehension
