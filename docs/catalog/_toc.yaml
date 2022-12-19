@@ -20,6 +20,10 @@ toc:
     title: booksum (manual)
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/reddit
+    title: reddit
+  - path: /datasets/catalog/reddit_tifu
+    title: reddit_tifu
   title: Abstractive text summarization
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -152,6 +156,8 @@ toc:
 - section:
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
+  - path: /datasets/catalog/reddit
+    title: reddit
   title: Graph
 - section:
   - path: /datasets/catalog/cardiotox
@@ -262,6 +268,8 @@ toc:
     title: plant_village
   - path: /datasets/catalog/plantae_k
     title: plantae_k
+  - path: /datasets/catalog/quickdraw_bitmap
+    title: quickdraw_bitmap
   - path: /datasets/catalog/s3o4d
     title: s3o4d
   - path: /datasets/catalog/scene_parse150
@@ -434,8 +442,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/quickdraw_bitmap
-    title: quickdraw_bitmap
   - path: /datasets/catalog/resisc45
     title: resisc45 (manual)
   - path: /datasets/catalog/rock_paper_scissors
@@ -498,6 +504,8 @@ toc:
     title: paws_x_wiki
   - path: /datasets/catalog/pg19
     title: pg19
+  - path: /datasets/catalog/reddit
+    title: reddit
   title: Language modelling
 - section:
   - path: /datasets/catalog/mlqa
@@ -546,6 +554,12 @@ toc:
     title: paws_wiki
   - path: /datasets/catalog/plant_village
     title: plant_village
+  - path: /datasets/catalog/quac
+    title: quac
+  - path: /datasets/catalog/race
+    title: race
+  - path: /datasets/catalog/reddit
+    title: reddit
   title: Monolingual
 - section:
   - path: /datasets/catalog/opinion_abstracts
@@ -603,6 +617,12 @@ toc:
     title: pg19
   - path: /datasets/catalog/piqa
     title: piqa
+  - path: /datasets/catalog/qasc
+    title: qasc
+  - path: /datasets/catalog/quac
+    title: quac
+  - path: /datasets/catalog/race
+    title: race
   title: Natural language understanding
 - section:
   - path: /datasets/catalog/deep1b
@@ -662,6 +682,12 @@ toc:
     title: openbookqa
   - path: /datasets/catalog/piqa
     title: piqa
+  - path: /datasets/catalog/qasc
+    title: qasc
+  - path: /datasets/catalog/quac
+    title: quac
+  - path: /datasets/catalog/race
+    title: race
   title: Question answering
 - section:
   - path: /datasets/catalog/natural_questions
@@ -672,8 +698,6 @@ toc:
     title: coqa
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa
-  - path: /datasets/catalog/qasc
-    title: qasc
   - path: /datasets/catalog/squad
     title: squad
   - path: /datasets/catalog/trivia_qa
@@ -698,6 +722,12 @@ toc:
     title: opus
   - path: /datasets/catalog/pg19
     title: pg19
+  - path: /datasets/catalog/qasc
+    title: qasc
+  - path: /datasets/catalog/quac
+    title: quac
+  - path: /datasets/catalog/race
+    title: race
   title: Reading comprehension
 - section:
   - path: /datasets/catalog/criteo
@@ -788,6 +818,8 @@ toc:
     title: opus
   - path: /datasets/catalog/paws_wiki
     title: paws_wiki
+  - path: /datasets/catalog/reddit
+    title: reddit
   title: Sequence to sequence language modelling
 - section:
   - path: /datasets/catalog/librispeech
@@ -828,8 +860,6 @@ toc:
     title: movie_lens
   - path: /datasets/catalog/movielens
     title: movielens
-  - path: /datasets/catalog/radon
-    title: radon
   - path: /datasets/catalog/rock_you
     title: rock_you
   - path: /datasets/catalog/titanic
@@ -858,10 +888,6 @@ toc:
     title: gov_report
   - path: /datasets/catalog/multi_news
     title: multi_news
-  - path: /datasets/catalog/reddit
-    title: reddit
-  - path: /datasets/catalog/reddit_tifu
-    title: reddit_tifu
   - path: /datasets/catalog/samsum
     title: samsum (manual)
   - path: /datasets/catalog/scientific_papers
@@ -886,6 +912,8 @@ toc:
     title: kddcup99
   - path: /datasets/catalog/opinion_abstracts
     title: opinion_abstracts
+  - path: /datasets/catalog/radon
+    title: radon
   title: Tabular
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -1082,6 +1110,8 @@ toc:
     title: q_re_cc
   - path: /datasets/catalog/qa4mre
     title: qa4mre
+  - path: /datasets/catalog/qasc
+    title: qasc
   - path: /datasets/catalog/quac
     title: quac
   - path: /datasets/catalog/quality
@@ -1090,6 +1120,8 @@ toc:
     title: race
   - path: /datasets/catalog/reddit_disentanglement
     title: reddit_disentanglement (manual)
+  - path: /datasets/catalog/reddit_tifu
+    title: reddit_tifu
   - path: /datasets/catalog/salient_span_wikipedia
     title: salient_span_wikipedia
   - path: /datasets/catalog/scan
@@ -1196,6 +1228,12 @@ toc:
     title: openbookqa
   - path: /datasets/catalog/piqa
     title: piqa
+  - path: /datasets/catalog/race
+    title: race
+  - path: /datasets/catalog/reddit
+    title: reddit
+  - path: /datasets/catalog/reddit_tifu
+    title: reddit_tifu
   title: Text generation
 - section:
   - path: /datasets/catalog/aeslc
@@ -1208,6 +1246,10 @@ toc:
     title: booksum (manual)
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/reddit
+    title: reddit
+  - path: /datasets/catalog/reddit_tifu
+    title: reddit_tifu
   title: Text summarization
 - section:
   - path: /datasets/catalog/wiki_auto

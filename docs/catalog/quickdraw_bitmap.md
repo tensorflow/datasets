@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="quickdraw_bitmap" />
-  <meta itemprop="description" content="The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;quickdraw_bitmap&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/quickdraw_bitmap-3.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="The Quick Draw Dataset is a collection of 50 million drawings across 345&#10;categories, contributed by players of the game Quick, Draw!. The bitmap dataset&#10;contains these drawings converted from vector format into 28x28 grayscale images&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;quickdraw_bitmap&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/quickdraw_bitmap-3.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/quickdraw_bitmap" />
   <meta itemprop="sameAs" content="https://github.com/googlecreativelab/quickdraw-dataset" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/HaE17,&#10;  author    = {David Ha and&#10;               Douglas Eck},&#10;  title     = {A Neural Representation of Sketch Drawings},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1704.03477},&#10;  year      = {2017},&#10;  url       = {http://arxiv.org/abs/1704.03477},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1704.03477},&#10;  timestamp = {Mon, 13 Aug 2018 16:48:30 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/HaE17},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
@@ -34,7 +34,7 @@ contains these drawings converted from vector format into 28x28 grayscale images
     [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
 *   **Source code**:
-    [`tfds.image_classification.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/quickdraw.py)
+    [`tfds.datasets.quickdraw_bitmap.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/quickdraw_bitmap/quickdraw_bitmap_dataset_builder.py)
 
 *   **Versions**:
 
