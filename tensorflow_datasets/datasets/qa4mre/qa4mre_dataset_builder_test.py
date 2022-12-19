@@ -16,11 +16,11 @@
 """Tests for Qa4mre dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import qa4mre
+from tensorflow_datasets.datasets.qa4mre import qa4mre_dataset_builder
 
 
 class Qa4mreMainTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = qa4mre.Qa4mre
+  DATASET_CLASS = qa4mre_dataset_builder.Builder
 
   DL_EXTRACT_RESULT = {
       "2011.main.DE": "2011.main.DE.xml",
