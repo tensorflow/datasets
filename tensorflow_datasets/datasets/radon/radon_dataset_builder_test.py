@@ -15,12 +15,12 @@
 
 """Radon dataset test."""
 
+from tensorflow_datasets.datasets.radon import radon_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.structured import radon
 
 
 class RadonTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = radon.Radon
+  DATASET_CLASS = radon_dataset_builder.Builder
   SPLITS = {
       "train": 3,
   }
