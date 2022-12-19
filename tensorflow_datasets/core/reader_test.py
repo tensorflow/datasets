@@ -85,13 +85,12 @@ class ReaderTest(testing.TestCase):
   def _write_tfrecord(self, split_name, shards_number, records):
     filename_template = self._filename_template(split=split_name)
     num_examples = len(records)
-    with mock.patch.object(
-        writer_lib, '_get_number_shards', return_value=shards_number):
-      shard_specs = writer_lib._get_shard_specs(
-          num_examples=num_examples,
-          total_size=0,
-          bucket_lengths=[num_examples],
-          filename_template=filename_template)
+    shard_specs = writer_lib._get_shard_specs(
+        num_examples=num_examples,
+        total_size=0,
+        bucket_lengths=[num_examples],
+        filename_template=filename_template,
+        shard_config=shard_utils.ShardConfig(num_shards=shards_number))
     serialized_records = [(key, six.b(rec)) for key, rec in enumerate(records)]
     for shard_spec in shard_specs:
       _write_tfrecord_from_shard_spec(shard_spec,
@@ -284,7 +283,7 @@ class ReaderTest(testing.TestCase):
     # If num_workers == num_shards, then a single shard is read
     self.assertEqual(read(num_workers=5, index=1), _b(b'cde'))  # Shard 1
     # If num_workers > num_shards, raise error
-    with self.assertRaisesRegexp(ValueError, 'Cannot shard the pipeline'):
+    with self.assertRaisesRegex(ValueError, 'Cannot shard the pipeline'):
       read(num_workers=6, index=0)
 
   def test_shuffle_files_should_be_disabled(self):

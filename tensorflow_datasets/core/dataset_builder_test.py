@@ -608,11 +608,10 @@ class OrderedDatasetBuilderTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(OrderedDatasetBuilderTest, cls).setUpClass()
-    with mock.patch("tensorflow_datasets.core.writer._get_number_shards",
-                    lambda x, y: 10):
-      cls.builder = DummyOrderedDataset(
-          data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
-      cls.builder.download_and_prepare()
+    cls.builder = DummyOrderedDataset(
+        data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
+    cls.builder.download_and_prepare(
+        download_config=download.DownloadConfig(num_shards=10))
 
   @testing.run_in_graph_and_eager_modes()
   def test_sorted_by_key(self):

@@ -38,13 +38,6 @@ from tensorflow_datasets.core.utils import type_utils
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
 Example = Any
 
-_MIN_SHARD_SIZE = 64 << 20  # 64 MiB
-_MAX_SHARD_SIZE = 1024 << 20  # 1 GiB
-
-# TFRECORD overheads.
-# https://github.com/tensorflow/tensorflow/blob/27325fabed898880fa1b33a04d4b125a6ef4bbc8/tensorflow/core/lib/io/record_writer.h#L104
-_TFRECORD_REC_OVERHEAD = 16
-
 _INDEX_PATH_SUFFIX = "_index.json"
 
 
@@ -102,6 +95,7 @@ def _get_shard_specs(
     total_size: int,
     bucket_lengths: List[int],
     filename_template: naming.ShardedFileTemplate,
+    shard_config: shard_utils.ShardConfig,
 ) -> List[_ShardSpec]:
   """Returns list of _ShardSpec instances, corresponding to shards to write.
 
@@ -110,8 +104,9 @@ def _get_shard_specs(
     total_size: int (bytes), sum of example sizes.
     bucket_lengths: list of ints, number of examples in each bucket.
     filename_template: template to format sharded filenames.
+    shard_config: the configuration for creating shards.
   """
-  num_shards = _get_number_shards(total_size, num_examples)
+  num_shards = shard_config.get_number_shards(total_size, num_examples)
   shard_boundaries = _get_shard_boundaries(num_examples, num_shards)
   shard_specs = []
   bucket_indexes = [str(i) for i in range(len(bucket_lengths))]
@@ -181,55 +176,6 @@ def _write_index_file(sharded_index_path: epath.PathLike,
   logging.info("Wrote index file to %s", os.fspath(sharded_index_path))
 
 
-def _get_number_shards(
-    total_size: int,
-    num_examples: int,
-    uses_precise_sharding: bool = True,
-) -> int:
-  """Returns number of shards for num_examples of total_size in bytes.
-
-  Each shard should be at least 128MB.
-  A pod has 16*16=256 TPU devices containing 1024 TPU chips (2048 cores).
-  So if the dataset is large enough, we want the number of shards to be a
-  multiple of 1024, but with shards as big as possible.
-  If the dataset is too small, we want the number of shards to be a power
-  of two so it distributes better on smaller TPU configs (8, 16, 32, ... cores).
-
-  Args:
-    total_size: the size of the data (serialized, not couting any overhead).
-    num_examples: the number of records in the data.
-    uses_precise_sharding: whether a mechanism is used to exactly control how
-      many examples go in each shard.
-
-  Returns:
-    number of shards to use.
-  """
-  total_size += num_examples * _TFRECORD_REC_OVERHEAD
-  max_shards_number = total_size // _MIN_SHARD_SIZE
-  if uses_precise_sharding:
-    max_shard_size = _MAX_SHARD_SIZE
-  else:
-    # When the pipeline does not control exactly how many rows go into each
-    # shard (called 'precise sharding' here), we use a smaller max shard size
-    # so that the pipeline doesn't fail if a shard gets some more examples.
-    max_shard_size = 0.9 * _MAX_SHARD_SIZE
-  min_shards_number = total_size // max_shard_size
-  if min_shards_number <= 1024 <= max_shards_number and num_examples >= 1024:
-    return 1024
-  elif min_shards_number > 1024:
-    i = 2
-    while True:
-      n = 1024 * i
-      if n >= min_shards_number and num_examples >= n:
-        return n
-      i += 1
-  else:
-    for n in [512, 256, 128, 64, 32, 16, 8, 4, 2]:
-      if min_shards_number <= n <= max_shards_number and num_examples >= n:
-        return n
-  return 1
-
-
 class Writer(object):
   """Shuffles and writes Examples to sharded TFRecord files.
 
@@ -243,6 +189,7 @@ class Writer(object):
       hash_salt,
       disable_shuffling: bool,
       file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     """Initializes Writer.
 
@@ -253,6 +200,7 @@ class Writer(object):
       disable_shuffling (bool): Specifies whether to shuffle the records.
       file_format (FileFormat): format of the record files in which the dataset
         should be written in.
+      shard_config: the configuration for creating shards.
     """
     self._serializer = serializer
     self._shuffler = shuffle.Shuffler(
@@ -262,6 +210,7 @@ class Writer(object):
     self._num_examples = 0
     self._filename_template = filename_template
     self._file_format = file_format
+    self._shard_config = shard_config or shard_utils.ShardConfig()
 
   def write(self, key, example):
     """Writes given Example.
@@ -283,7 +232,7 @@ class Writer(object):
     filename = self._filename_template.sharded_filepaths_pattern()
     shard_specs = _get_shard_specs(self._num_examples, self._shuffler.size,
                                    self._shuffler.bucket_lengths,
-                                   self._filename_template)
+                                   self._filename_template, self._shard_config)
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
     # parallelize, but one would need to be careful not to sort buckets twice.
@@ -356,6 +305,7 @@ class BeamWriter(object):
       hash_salt,
       disable_shuffling: bool,
       file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
+      shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     """Init BeamWriter.
 
@@ -370,13 +320,15 @@ class BeamWriter(object):
       disable_shuffling: bool, specifies whether to shuffle the records.
       file_format: file_adapters.FileFormat, format of the record files in which
         the dataset will be read/written from.
+      shard_config: the configuration for creating shards.
     """
     self._original_state = dict(
         serializer=serializer,
         filename_template=filename_template,
         hash_salt=hash_salt,
         disable_shuffling=disable_shuffling,
-        file_format=file_format)
+        file_format=file_format,
+        shard_config=shard_config)
     self._filename_template = filename_template
     self._split_info_path = f"{filename_template.filepath_prefix()}.split_info.json"
     self._serializer = serializer
@@ -384,6 +336,7 @@ class BeamWriter(object):
     self._split_info = None
     self._file_format = file_format
     self._disable_shuffling = disable_shuffling
+    self._shard_config = shard_config or shard_utils.ShardConfig()
 
   @functools.lru_cache()
   def _get_counter(self, name: str, namespace: str = "BeamWriter"):
@@ -454,8 +407,9 @@ class BeamWriter(object):
     shard_size = sum(map(len, examples))
     return _ShardInfo(id=shard_id, num_examples=len(examples), size=shard_size)
 
-  def _number_of_shards(self, num_examples: int, total_size: int):
-    num_shards = _get_number_shards(
+  def _number_of_shards(self, num_examples: int, total_size: int) -> int:
+    """Returns the number of shards."""
+    num_shards = self._shard_config.get_number_shards(
         total_size=total_size,
         num_examples=num_examples,
         uses_precise_sharding=False)
@@ -467,7 +421,7 @@ class BeamWriter(object):
       key_serialized_example: Tuple[Any, bytes],
       num_shards: int,
       largest_key: List[int],
-  ):
+  ) -> Tuple[int, Tuple[Any, bytes]]:
     """Assigns a shard id to the example."""
     key, _ = key_serialized_example
     largest_key = largest_key[0]

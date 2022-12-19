@@ -17,6 +17,7 @@
 
 import json
 import os
+from typing import Optional
 from unittest import mock
 
 from etils import epath
@@ -36,8 +37,6 @@ class GetShardSpecsTest(testing.TestCase):
   # Here we don't need to test all possible reading configs, as this is tested
   # by shard_utils.py.
 
-  @mock.patch.object(writer_lib, '_get_number_shards',
-                     mock.Mock(return_value=6))
   def test_1bucket_6shards(self):
     specs = writer_lib._get_shard_specs(
         num_examples=8,
@@ -47,7 +46,8 @@ class GetShardSpecsTest(testing.TestCase):
             dataset_name='bar',
             split='train',
             data_dir='/',
-            filetype_suffix='tfrecord'))
+            filetype_suffix='tfrecord'),
+        shard_config=shard_utils.ShardConfig(num_shards=6))
     self.assertEqual(
         specs,
         [
@@ -84,8 +84,6 @@ class GetShardSpecsTest(testing.TestCase):
                        ]),
         ])
 
-  @mock.patch.object(writer_lib, '_get_number_shards',
-                     mock.Mock(return_value=2))
   def test_4buckets_2shards(self):
     specs = writer_lib._get_shard_specs(
         num_examples=8,
@@ -95,7 +93,8 @@ class GetShardSpecsTest(testing.TestCase):
             dataset_name='bar',
             split='train',
             data_dir='/',
-            filetype_suffix='tfrecord'))
+            filetype_suffix='tfrecord'),
+        shard_config=shard_utils.ShardConfig(num_shards=2))
     self.assertEqual(
         specs,
         [
@@ -115,51 +114,6 @@ class GetShardSpecsTest(testing.TestCase):
                                filename='3', skip=0, take=-1, num_examples=3),
                        ]),
         ])
-
-
-class GetNumberShardsTest(testing.TestCase):
-
-  def test_imagenet_train(self):
-    size = 137 << 30  # 137 GiB
-    num_examples = 1281167
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 1024)
-
-  def test_imagenet_evaluation(self):
-    size = 6300 * (1 << 20)  # 6.3 GiB
-    num_examples = 50000
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 64)
-
-  def test_verylarge_few_examples(self):
-    size = 52 << 30  # 52 GiB
-    num_examples = 512
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 512)
-
-  def test_xxl(self):
-    size = 10 << 40  # 10 TiB
-    num_examples = 10**9  # 1B
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 11264)
-
-  def test_xxxl(self):
-    size = 10 << 50  # 10 PiB
-    num_examples = 10**11  # 100B
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 10487808)
-
-  def test_xs(self):
-    size = 100 << 20  # 100 MiB
-    num_examples = 100 * 10**3  # 100K
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 1)
-
-  def test_m(self):
-    size = 400 << 20  # 499 MiB
-    num_examples = 200 * 10**3  # 200K
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 4)
 
 
 def _read_records(path, file_format=file_adapters.DEFAULT_FILE_FORMAT):
@@ -247,6 +201,7 @@ class WriterTest(testing.TestCase):
       split: str = 'train',
       disable_shuffling=False,
       file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
     filename_template = naming.ShardedFileTemplate(
@@ -254,12 +209,15 @@ class WriterTest(testing.TestCase):
         split=split,
         filetype_suffix=filetype_suffix,
         data_dir=self.tmp_dir)
+    shard_config = shard_config or shard_utils.ShardConfig(
+        num_shards=self.NUM_SHARDS)
     writer = writer_lib.Writer(
         serializer=testing.DummySerializer('dummy specs'),
         filename_template=filename_template,
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
-        file_format=file_format)
+        file_format=file_format,
+        shard_config=shard_config)
     for key, record in to_write:
       writer.write(key, record)
     return writer.finalize()
@@ -267,9 +225,7 @@ class WriterTest(testing.TestCase):
   def test_write_tfrecord(self):
     """Stores records as tfrecord in a fixed number of shards with shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(
-        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
-      shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
+    shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
     self.assertEqual(self.NUM_SHARDS, len(shards_length))
     self.assertEqual(shards_length,
                      [len(shard) for shard in self.SHARDS_CONTENT])
@@ -289,10 +245,8 @@ class WriterTest(testing.TestCase):
     """Stores records as tfrecord in a fixed number of shards without shuffling.
     """
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(
-        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
-      shards_length, total_size = self._write(
-          to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
+    shards_length, total_size = self._write(
+        to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
     self.assertEqual(shards_length,
                      [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING])
     self.assertEqual(total_size, 9)
@@ -311,10 +265,8 @@ class WriterTest(testing.TestCase):
     """Stores records as tfrecord in a fixed number of shards without shuffling.
     """
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(
-        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
-      shards_length, total_size = self._write(
-          to_write=self.RECORDS_WITH_HOLES, disable_shuffling=True)
+    shards_length, total_size = self._write(
+        to_write=self.RECORDS_WITH_HOLES, disable_shuffling=True)
     self.assertEqual(shards_length,
                      [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING])
     self.assertEqual(total_size, 9)
@@ -332,24 +284,25 @@ class WriterTest(testing.TestCase):
   @mock.patch.object(example_parser, 'ExampleParser', testing.DummyParser)
   def test_write_duplicated_keys(self):
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=1):
-      with self.assertRaisesWithPredicateMatch(
-          AssertionError, 'Two examples share the same hashed key'):
-        self._write(to_write=to_write)
+    with self.assertRaisesWithPredicateMatch(
+        AssertionError, 'Two examples share the same hashed key'):
+      shard_config = shard_utils.ShardConfig(num_shards=1)
+      self._write(to_write=to_write, shard_config=shard_config)
 
   def test_empty_split(self):
     to_write = []
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=1):
-      with self.assertRaisesWithPredicateMatch(AssertionError,
-                                               self.EMPTY_SPLIT_ERROR):
-        self._write(to_write=to_write)
+    with self.assertRaisesWithPredicateMatch(AssertionError,
+                                             self.EMPTY_SPLIT_ERROR):
+      shard_config = shard_utils.ShardConfig(num_shards=1)
+      self._write(to_write=to_write, shard_config=shard_config)
 
   def test_too_small_split(self):
     to_write = [(1, b'a')]
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=2):
-      with self.assertRaisesWithPredicateMatch(AssertionError,
-                                               self.TOO_SMALL_SPLIT_ERROR):
-        self._write(to_write=to_write)
+    with self.assertRaisesWithPredicateMatch(AssertionError,
+                                             self.TOO_SMALL_SPLIT_ERROR):
+      shard_config = shard_utils.ShardConfig(num_shards=2)
+      self._write(to_write=to_write, shard_config=shard_config)
+      self._write(to_write=to_write)
 
 
 class TfrecordsWriterBeamTest(testing.TestCase):
@@ -370,6 +323,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
       split: str = 'train',
       disable_shuffling=False,
       file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
     filename_template = naming.ShardedFileTemplate(
@@ -377,6 +331,8 @@ class TfrecordsWriterBeamTest(testing.TestCase):
         split=split,
         filetype_suffix=filetype_suffix,
         data_dir=self.tmp_dir)
+    shard_config = shard_config or shard_utils.ShardConfig(
+        num_shards=self.NUM_SHARDS)
     beam = lazy_imports_lib.lazy_imports.apache_beam
     writer = writer_lib.BeamWriter(
         serializer=testing.DummySerializer('dummy specs'),
@@ -384,6 +340,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
         file_format=file_format,
+        shard_config=shard_config,
     )
     # Here we need to disable type check as `beam.Create` is not capable of
     # inferring the type of the PCollection elements.
@@ -402,9 +359,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
   def test_write_tfrecord(self):
     """Stores records as tfrecord in a fixed number of shards with shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(
-        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
-      shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
+    shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
     self.assertEqual(self.NUM_SHARDS, len(shards_length))
     self.assertEqual(shards_length,
                      [len(shard) for shard in self.SHARDS_CONTENT])
@@ -424,10 +379,8 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     """Stores records as tfrecord in a fixed number of shards without shuffling.
     """
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(
-        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
-      shards_length, total_size = self._write(
-          to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
+    shards_length, total_size = self._write(
+        to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
     self.assertEqual(shards_length,
                      [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING])
     self.assertEqual(total_size, 10)
@@ -452,10 +405,8 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     expected_shards = [[b'0', b'1', b'16', b'81', b'256', b'625', b'1296'],
                        [b'2401', b'4096'], [b'6561']]
 
-    with mock.patch.object(
-        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
-      shards_length, total_size = self._write(
-          to_write=records_with_holes, disable_shuffling=True)
+    shards_length, total_size = self._write(
+        to_write=records_with_holes, disable_shuffling=True)
     self.assertEqual(shards_length, [len(shard) for shard in expected_shards])
     self.assertEqual(total_size, 28)
     written_files, all_recs = _read_records(path)

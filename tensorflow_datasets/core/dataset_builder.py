@@ -1329,6 +1329,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         beam_options=download_config.beam_options,
         beam_runner=download_config.beam_runner,
         file_format=self.info.file_format,
+        shard_config=download_config.get_shard_config(),
     )
     # Wrap the generation inside a context manager.
     # If `beam` is used during generation (when a pipeline gets created),
