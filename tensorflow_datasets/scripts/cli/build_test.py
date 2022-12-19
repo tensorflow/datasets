@@ -177,6 +177,33 @@ def test_build_dataset_configs():
     _build('trivia_qa --config_idx 100')
 
 
+def test_make_download_config():
+  dap_kwargs = (
+      '--download_and_prepare_kwargs={"download_config":{"num_shards":42,'
+      '"extract_dir":"/a/b","manual_dir":"/not/used","register_checksums":true}}'
+  )
+  cmd_flags = ['tfds', 'build', '--manual_dir=/is/used', dap_kwargs]
+  args = main._parse_flags(cmd_flags)
+  dl_config = build_lib._make_download_config(args, dataset_name='mnist')
+  assert dl_config.num_shards == 42
+  assert os.fspath(dl_config.extract_dir) == '/a/b'
+  assert os.fspath(dl_config.manual_dir) == '/is/used'
+  assert not dl_config.register_checksums
+  assert not dl_config.force_checksums_validation
+  assert dl_config.download_mode == tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
+
+
+def test_make_download_config_download_mode():
+  dap_kwargs = ('--download_and_prepare_kwargs={'
+                '"download_config":{"download_mode":"force_redownload"}}')
+  cmd_flags = ['tfds', 'build', dap_kwargs]
+  args = main._parse_flags(cmd_flags)
+  dl_config = build_lib._make_download_config(args, dataset_name='mnist')
+  assert not dl_config.register_checksums
+  assert not dl_config.force_checksums_validation
+  assert dl_config.download_mode == tfds.download.GenerateMode.FORCE_REDOWNLOAD
+
+
 def test_exclude_datasets():
   # Exclude all datasets except 2
   all_ds = [b for b in tfds.list_builders() if b not in ('mnist', 'cifar10')]
