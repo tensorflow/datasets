@@ -15,12 +15,12 @@
 
 """Tests for Quickdraw data."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import quickdraw
+from tensorflow_datasets.datasets.quickdraw_bitmap import quickdraw_bitmap_dataset_builder
 
 
 class QuickdrawTest(testing.DatasetBuilderTestCase):
 
-  DATASET_CLASS = quickdraw.QuickdrawBitmap
+  DATASET_CLASS = quickdraw_bitmap_dataset_builder.Builder
   SPLITS = {
       "train": 9,
   }
