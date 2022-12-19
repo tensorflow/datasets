@@ -324,3 +324,17 @@ def test_incomplete_file(tmp_path: pathlib.Path):
     assert not filepath.exists()
   assert filepath.read_text() == 'content'
   assert not tmp_filepath.exists()  # Tmp file is deleted
+
+
+@pytest.mark.parametrize(['path', 'is_incomplete'], [
+    ('/a/bcd.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf', True),
+    ('/a/incomplete-dataset.tfrecord-00000-of-00100', False),
+    ('/a/bcd.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf.suffix', False),
+    ('/a/bcd.incomplete.a8c53d7beff74beb3', False),
+])
+def test_is_incomplete_file(path: str, is_incomplete: bool):
+  assert py_utils.is_incomplete_file(epath.Path(path)) == is_incomplete
+
+
+if __name__ == '__main__':
+  tf.test.main()
