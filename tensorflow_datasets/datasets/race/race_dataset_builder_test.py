@@ -15,13 +15,13 @@
 
 """race dataset."""
 
+from tensorflow_datasets.datasets.race import race_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.race import race
 
 
 class RaceTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for race dataset."""
-  DATASET_CLASS = race.Race
+  DATASET_CLASS = race_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["high"]
   SPLITS = {
       "train": 1,  # Number of fake train example
