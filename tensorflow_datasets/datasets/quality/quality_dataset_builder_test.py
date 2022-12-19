@@ -14,13 +14,13 @@
 # limitations under the License.
 
 """QuALITY dataset."""
+from tensorflow_datasets.datasets.quality import quality_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.quality import quality
 
 
 class QualityTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for quality dataset."""
-  DATASET_CLASS = quality.Quality
+  DATASET_CLASS = quality_dataset_builder.Builder
   SPLITS = {
       # Number of fake examples in dummy_data
       'train': 2,
