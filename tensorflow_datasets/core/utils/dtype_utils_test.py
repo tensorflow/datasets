@@ -61,9 +61,9 @@ def test_dtype(fn, dtype, result):
 def test_is_np_sub_dtype():
   assert dtype_utils.is_np_sub_dtype(np.int32, np.integer)
   assert dtype_utils.is_np_sub_dtype(np.int64, np.integer)
-  assert dtype_utils.is_np_sub_dtype(np.float, np.floating)
+  assert dtype_utils.is_np_sub_dtype(float, np.floating)
   assert not dtype_utils.is_np_sub_dtype(np.int64, np.floating)
-  assert not dtype_utils.is_np_sub_dtype(np.float, np.integer)
+  assert not dtype_utils.is_np_sub_dtype(float, np.integer)
 
 
 def test_is_same_dtype_type():
