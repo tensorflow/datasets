@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="radon" />
-  <meta itemprop="description" content="Radon is a radioactive gas that enters homes through contact&#10;points with the ground. It is a carcinogen that is the primary cause of lung&#10;cancer in non-smokers. Radon levels vary greatly from household to household.&#10;This dataset contains measured radon levels in U.S homes by county and state.&#10;The &#x27;activity&#x27; label is the measured radon concentration in pCi/L. Important&#10;predictors are &#x27;floor&#x27; (the floor of the house in which the measurement was&#10;taken), &#x27;county&#x27; (the U.S. county in which the house is located), and &#x27;Uppm&#x27; (a&#10;measurement of uranium level of the soil by county).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;radon&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="Radon is a radioactive gas that enters homes through contact points with the&#10;ground. It is a carcinogen that is the primary cause of lung cancer in&#10;non-smokers. Radon levels vary greatly from household to household. This dataset&#10;contains measured radon levels in U.S homes by county and state. The &#x27;activity&#x27;&#10;label is the measured radon concentration in pCi/L. Important predictors are&#10;&#x27;floor&#x27; (the floor of the house in which the measurement was taken), &#x27;county&#x27;&#10;(the U.S. county in which the house is located), and &#x27;Uppm&#x27; (a measurement of&#10;uranium level of the soil by county).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;radon&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/radon" />
   <meta itemprop="sameAs" content="http://www.stat.columbia.edu/~gelman/arm/examples/radon/" />
   <meta itemprop="citation" content="@book{GelmanHill:2007,&#10;  author = {Gelman, Andrew and Hill, Jennifer},&#10;  title = {Data Analysis Using Regression and Multilevel/Hierarchical Models},&#10;  publisher = {Cambridge University Press},&#10;  series = {Analytical methods for social research},&#10;  year = 2007&#10;}" />
@@ -27,7 +27,7 @@ uranium level of the soil by county).
     [http://www.stat.columbia.edu/~gelman/arm/examples/radon/](http://www.stat.columbia.edu/~gelman/arm/examples/radon/)
 
 *   **Source code**:
-    [`tfds.structured.Radon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/radon.py)
+    [`tfds.datasets.radon.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/radon/radon_dataset_builder.py)
 
 *   **Versions**:
 

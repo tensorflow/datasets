@@ -22,7 +22,7 @@ We provide only the raw version.
     [https://github.com/nyu-mll/quality](https://github.com/nyu-mll/quality)
 
 *   **Source code**:
-    [`tfds.text.quality.Quality`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/quality/quality.py)
+    [`tfds.datasets.quality.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/quality/quality_dataset_builder.py)
 
 *   **Versions**:
 

@@ -39,6 +39,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
 *   [`newsroom`](newsroom.md)
+*   [`reddit`](reddit.md)
+*   [`reddit_tifu`](reddit_tifu.md)
 
 ### `Anomaly detection`
 
@@ -129,6 +131,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Graph`
 
 *   [`ogbg_molpcba`](ogbg_molpcba.md)
+*   [`reddit`](reddit.md)
 
 ### `Graphs`
 
@@ -188,6 +191,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`plant_leaves`](plant_leaves.md)
 *   [`plant_village`](plant_village.md)
 *   [`plantae_k`](plantae_k.md)
+*   [`quickdraw_bitmap`](quickdraw_bitmap.md)
 *   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
@@ -288,7 +292,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`mnist`](mnist.md)
 *   [`mnist_corrupted`](mnist_corrupted.md)
 *   [`omniglot`](omniglot.md)
-*   [`quickdraw_bitmap`](quickdraw_bitmap.md)
 *   [`resisc45`](resisc45.md)
 *   [`rock_paper_scissors`](rock_paper_scissors.md)
 *   [`siscore`](siscore.md)
@@ -324,6 +327,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`paws_wiki`](paws_wiki.md)
 *   [`paws_x_wiki`](paws_x_wiki.md)
 *   [`pg19`](pg19.md)
+*   [`reddit`](reddit.md)
 
 ### `Machine translation`
 
@@ -352,6 +356,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`openbookqa`](openbookqa.md)
 *   [`paws_wiki`](paws_wiki.md)
 *   [`plant_village`](plant_village.md)
+*   [`quac`](quac.md)
+*   [`race`](race.md)
+*   [`reddit`](reddit.md)
 
 ### `Movies and tv shows`
 
@@ -389,6 +396,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`paws_x_wiki`](paws_x_wiki.md)
 *   [`pg19`](pg19.md)
 *   [`piqa`](piqa.md)
+*   [`qasc`](qasc.md)
+*   [`quac`](quac.md)
+*   [`race`](race.md)
 
 ### `Nearest neighbors`
 
@@ -429,6 +439,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`natural_questions_open`](natural_questions_open.md)
 *   [`openbookqa`](openbookqa.md)
 *   [`piqa`](piqa.md)
+*   [`qasc`](qasc.md)
+*   [`quac`](quac.md)
+*   [`race`](race.md)
 
 ### `Question generation`
 
@@ -438,7 +451,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`coqa`](coqa.md)
 *   [`cosmos_qa`](cosmos_qa.md)
-*   [`qasc`](qasc.md)
 *   [`squad`](squad.md)
 *   [`trivia_qa`](trivia_qa.md)
 *   [`tydi_qa`](tydi_qa.md)
@@ -455,6 +467,9 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`opus`](opus.md)
 *   [`pg19`](pg19.md)
+*   [`qasc`](qasc.md)
+*   [`quac`](quac.md)
+*   [`race`](race.md)
 
 ### `Recommendation`
 
@@ -520,6 +535,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`math_qa`](math_qa.md)
 *   [`opus`](opus.md)
 *   [`paws_wiki`](paws_wiki.md)
+*   [`reddit`](reddit.md)
 
 ### `Speech`
 
@@ -546,7 +562,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`iris`](iris.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
-*   [`radon`](radon.md)
 *   [`rock_you`](rock_you.md)
 *   [`titanic`](titanic.md)
 *   [`web_graph`](web_graph.md)
@@ -563,8 +578,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`gigaword`](gigaword.md)
 *   [`gov_report`](gov_report.md)
 *   [`multi_news`](multi_news.md)
-*   [`reddit`](reddit.md)
-*   [`reddit_tifu`](reddit_tifu.md)
 *   [`samsum`](samsum.md)
 *   [`scientific_papers`](scientific_papers.md)
 *   [`summscreen`](summscreen.md)
@@ -581,6 +594,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`efron_morris75`](efron_morris75.md)
 *   [`kddcup99`](kddcup99.md)
 *   [`opinion_abstracts`](opinion_abstracts.md)
+*   [`radon`](radon.md)
 
 ### `Text`
 
@@ -683,10 +697,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`q_re_cc`](q_re_cc.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`qa4mre`](qa4mre.md)
+*   [`qasc`](qasc.md)
 *   [`quac`](quac.md)
 *   [`quality`](quality.md)
 *   [`race`](race.md)
 *   [`reddit_disentanglement`](reddit_disentanglement.md)
+*   [`reddit_tifu`](reddit_tifu.md)
 *   [`salient_span_wikipedia`](salient_span_wikipedia.md)
 *   [`scan`](scan.md)
 *   [`schema_guided_dialogue`](schema_guided_dialogue.md)
@@ -745,6 +761,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`newsroom`](newsroom.md)
 *   [`openbookqa`](openbookqa.md)
 *   [`piqa`](piqa.md)
+*   [`race`](race.md)
+*   [`reddit`](reddit.md)
+*   [`reddit_tifu`](reddit_tifu.md)
 
 ### `Text summarization`
 
@@ -753,6 +772,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
 *   [`newsroom`](newsroom.md)
+*   [`reddit`](reddit.md)
+*   [`reddit_tifu`](reddit_tifu.md)
 
 ### `Text simplification`
 

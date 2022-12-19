@@ -32,7 +32,7 @@ comprehension.
     [https://www.cs.cmu.edu/~glai1/data/race/](https://www.cs.cmu.edu/~glai1/data/race/)
 
 *   **Source code**:
-    [`tfds.text.race.Race`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/race/race.py)
+    [`tfds.datasets.race.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/race/race_dataset_builder.py)
 
 *   **Versions**:
 
