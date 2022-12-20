@@ -88,7 +88,7 @@ class _OpenImagesChallenge2019(tfds.core.BeamBasedBuilder):  # pytype: disable=i
         "test_images": [_TEST_IMAGES_URL],
         "validation_images": [_VALIDATION_IMAGES_URL]
     }
-    urls.update(self.annotation_urls)
+    urls.update(self.annotation_urls)  # pytype: disable=wrong-arg-types
     paths = dl_manager.download(urls)
     return [
         tfds.core.SplitGenerator(
