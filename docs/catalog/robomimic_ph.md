@@ -6,7 +6,7 @@
   <meta itemprop="description" content="The Proficient Human datasets were collected by 1 proficient operator using the&#10;[RoboTurk](https://roboturk.stanford.edu/) platform (with the exception of&#10;Transport, which had 2 proficient operators working together). Each dataset&#10;consists of 200 successful trajectories.&#10;&#10;Each task has two versions: one with low dimensional observations (`low_dim`),&#10;and one with images (`image`).&#10;&#10;The datasets follow the [RLDS format](https://github.com/google-research/rlds)&#10;to represent steps and episodes.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;robomimic_ph&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/robomimic_ph" />
   <meta itemprop="sameAs" content="https://arise-initiative.github.io/robomimic-web/" />
-  <meta itemprop="citation" content="@inproceedings{robomimic2021,&#10;  title={What Matters in Learning from Offline Human Demonstrations for Robot Manipulation},&#10;  author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany&#10;          and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese&#10;          and Yuke Zhu and Roberto Mart&#x27;{i}n-Mart&#x27;{i}n},&#10;  booktitle={Conference on Robot Learning},&#10;  year={2021}&#10;}" />
+  <meta itemprop="citation" content="@inproceedings{robomimic2021,&#10;  title={What Matters in Learning from Offline Human Demonstrations for Robot Manipulation},&#10;  author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany&#10;          and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese&#10;          and Yuke Zhu and Roberto Mart\&#x27;{i}n-Mart\&#x27;{i}n},&#10;  booktitle={Conference on Robot Learning},&#10;  year={2021}&#10;}" />
 </div>
 
 # `robomimic_ph`
@@ -29,7 +29,7 @@ to represent steps and episodes.
     [https://arise-initiative.github.io/robomimic-web/](https://arise-initiative.github.io/robomimic-web/)
 
 *   **Source code**:
-    [`tfds.robomimic.robomimic_ph.RobomimicPh`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/robomimic/robomimic_ph/robomimic_ph.py)
+    [`tfds.datasets.robomimic_ph.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/robomimic_ph/robomimic_ph_dataset_builder.py)
 
 *   **Versions**:
 
@@ -57,7 +57,7 @@ Split     | Examples
   title={What Matters in Learning from Offline Human Demonstrations for Robot Manipulation},
   author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany
           and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese
-          and Yuke Zhu and Roberto Mart'{i}n-Mart'{i}n},
+          and Yuke Zhu and Roberto Mart\'{i}n-Mart\'{i}n},
   booktitle={Conference on Robot Learning},
   year={2021}
 }

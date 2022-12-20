@@ -192,6 +192,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`plant_village`](plant_village.md)
 *   [`plantae_k`](plantae_k.md)
 *   [`quickdraw_bitmap`](quickdraw_bitmap.md)
+*   [`ref_coco`](ref_coco.md)
+*   [`resisc45`](resisc45.md)
 *   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
@@ -218,6 +220,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`oxford_iiit_pet`](oxford_iiit_pet.md)
 *   [`places365_small`](places365_small.md)
 *   [`plant_village`](plant_village.md)
+*   [`resisc45`](resisc45.md)
 
 ### `Image clustering`
 
@@ -292,7 +295,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`mnist`](mnist.md)
 *   [`mnist_corrupted`](mnist_corrupted.md)
 *   [`omniglot`](omniglot.md)
-*   [`resisc45`](resisc45.md)
 *   [`rock_paper_scissors`](rock_paper_scissors.md)
 *   [`siscore`](siscore.md)
 *   [`smallnorb`](smallnorb.md)
@@ -477,6 +479,10 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`hillstrom`](hillstrom.md)
 *   [`simpte`](simpte.md)
 
+### `Reinforcement learning`
+
+*   [`robomimic_ph`](robomimic_ph.md)
+
 ### `Rgb d`
 
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
@@ -500,10 +506,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`locomotion`](locomotion.md)
 *   [`robosuite_panda_pick_place_can`](robosuite_panda_pick_place_can.md)
 
-### `Robomimic`
-
-*   [`robomimic_ph`](robomimic_ph.md)
-
 ### `Robotics`
 
 *   [`mt_opt`](mt_opt.md)
@@ -512,6 +514,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`bigearthnet`](bigearthnet.md)
 *   [`places365_small`](places365_small.md)
+*   [`resisc45`](resisc45.md)
 
 ### `Semantic segmentation`
 
@@ -522,6 +525,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 *   [`open_images_v4`](open_images_v4.md)
 *   [`places365_small`](places365_small.md)
+*   [`ref_coco`](ref_coco.md)
 *   [`scene_parse150`](scene_parse150.md)
 
 ### `Sentiment analysis`
@@ -703,6 +707,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`race`](race.md)
 *   [`reddit_disentanglement`](reddit_disentanglement.md)
 *   [`reddit_tifu`](reddit_tifu.md)
+*   [`ref_coco`](ref_coco.md)
+*   [`resisc45`](resisc45.md)
 *   [`salient_span_wikipedia`](salient_span_wikipedia.md)
 *   [`scan`](scan.md)
 *   [`schema_guided_dialogue`](schema_guided_dialogue.md)
@@ -788,6 +794,10 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`universal_dependencies`](universal_dependencies.md)
 *   [`xtreme_pos`](xtreme_pos.md)
 
+### `Trajectory`
+
+*   [`robomimic_ph`](robomimic_ph.md)
+
 ### `Translate`
 
 *   [`flores`](flores.md)
@@ -829,7 +839,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`gref`](gref.md)
 *   [`grounded_scan`](grounded_scan.md)
-*   [`ref_coco`](ref_coco.md)
+*   [`laion400m`](laion400m.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wit`](wit.md)
 *   [`wit_kaggle`](wit_kaggle.md)
 
