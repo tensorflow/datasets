@@ -10,20 +10,6 @@ and this project adheres to
 
 ### Added
 
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
-## [4.8.0] - 2022-12-20
-
-### Added
-
 -   [API] `DatasetBuilder`'s description and citations can be specified in
     dedicated `README.md` and `CITATIONS.bib` files, within the dataset package
     (see https://www.tensorflow.org/datasets/add_dataset).
