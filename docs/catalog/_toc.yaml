@@ -270,6 +270,10 @@ toc:
     title: plantae_k
   - path: /datasets/catalog/quickdraw_bitmap
     title: quickdraw_bitmap
+  - path: /datasets/catalog/ref_coco
+    title: ref_coco (manual)
+  - path: /datasets/catalog/resisc45
+    title: resisc45 (manual)
   - path: /datasets/catalog/s3o4d
     title: s3o4d
   - path: /datasets/catalog/scene_parse150
@@ -318,6 +322,8 @@ toc:
     title: places365_small
   - path: /datasets/catalog/plant_village
     title: plant_village
+  - path: /datasets/catalog/resisc45
+    title: resisc45 (manual)
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -442,8 +448,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/resisc45
-    title: resisc45 (manual)
   - path: /datasets/catalog/rock_paper_scissors
     title: rock_paper_scissors
   - path: /datasets/catalog/siscore
@@ -738,6 +742,10 @@ toc:
     title: simpte (manual)
   title: Recommendation
 - section:
+  - path: /datasets/catalog/robomimic_ph
+    title: robomimic_ph
+  title: Reinforcement learning
+- section:
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
   title: Rgb d
@@ -772,10 +780,6 @@ toc:
     title: robosuite_panda_pick_place_can
   title: Rlds
 - section:
-  - path: /datasets/catalog/robomimic_ph
-    title: robomimic_ph
-  title: Robomimic
-- section:
   - path: /datasets/catalog/mt_opt
     title: mt_opt
   title: Robotics
@@ -784,6 +788,8 @@ toc:
     title: bigearthnet
   - path: /datasets/catalog/places365_small
     title: places365_small
+  - path: /datasets/catalog/resisc45
+    title: resisc45 (manual)
   title: Scene classification
 - section:
   - path: /datasets/catalog/bigearthnet
@@ -800,6 +806,8 @@ toc:
     title: open_images_v4
   - path: /datasets/catalog/places365_small
     title: places365_small
+  - path: /datasets/catalog/ref_coco
+    title: ref_coco (manual)
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
   title: Semantic segmentation
@@ -1122,6 +1130,10 @@ toc:
     title: reddit_disentanglement (manual)
   - path: /datasets/catalog/reddit_tifu
     title: reddit_tifu
+  - path: /datasets/catalog/ref_coco
+    title: ref_coco (manual)
+  - path: /datasets/catalog/resisc45
+    title: resisc45 (manual)
   - path: /datasets/catalog/salient_span_wikipedia
     title: salient_span_wikipedia
   - path: /datasets/catalog/scan
@@ -1266,6 +1278,10 @@ toc:
     title: xtreme_pos
   title: Token classification
 - section:
+  - path: /datasets/catalog/robomimic_ph
+    title: robomimic_ph
+  title: Trajectory
+- section:
   - path: /datasets/catalog/flores
     title: flores
   - path: /datasets/catalog/mtnt
@@ -1328,8 +1344,9 @@ toc:
     title: gref (manual)
   - path: /datasets/catalog/grounded_scan
     title: grounded_scan
-  - path: /datasets/catalog/ref_coco
-    title: ref_coco (manual)
+  - path: /datasets/catalog/laion400m
+    status: nightly
+    title: laion400m (manual)
   - path: /datasets/catalog/wit
     title: wit
   - path: /datasets/catalog/wit_kaggle
