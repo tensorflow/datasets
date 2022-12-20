@@ -21,7 +21,7 @@ Note that this is an experimental new feature, so the API may change.
 from __future__ import annotations
 
 import functools
-from typing import Any, Callable, Iterator, List, Optional
+from typing import Any, Callable, Iterator, List, Mapping, Optional, Union
 
 import numpy as np
 
@@ -33,10 +33,58 @@ KeyExample = split_builder_lib.KeyExample
 ExampleTransformFn = Callable[[Example], Iterator[Example]]
 
 
-def remove_feature(feature_name: str) -> ExampleTransformFn:
+def remove_feature(feature_name: Union[str, List[str]]) -> ExampleTransformFn:
+  """Removes the feature(s) with the given name."""
+
+  if isinstance(feature_name, str):
+    feature_name = [feature_name]
 
   def apply_on_example(example: Example) -> Iterator[Example]:
-    del example[feature_name]
+    for name in feature_name:
+      del example[name]
+    yield example
+
+  return apply_on_example
+
+
+def rename_feature(from_: str, to: str) -> ExampleTransformFn:
+  """Renames the feature.
+
+  Note that if `to` already exists in the example, then it will be overridden.
+
+  Arguments:
+    from_: the name of the feature that must be renamed.
+    to: the feature name to which it must be renamed.
+
+  Returns:
+    function that renames the feature of an example.
+  """
+
+  def apply_on_example(example: Example) -> Iterator[Example]:
+    example[to] = example.pop(from_)
+    yield example
+
+  return apply_on_example
+
+
+def rename_features(name_mapping: Mapping[str, str]) -> ExampleTransformFn:
+  """Renames all the feature specified in the given mapping.
+
+  Note that if the 'to feature name' already exists in the example, then it will
+  be overridden. The order in which the renames are doing is not guaranteed, so
+  this should not be used to swap the content of two features.
+
+  Arguments:
+    name_mapping: mapping from the feature name that must be renamed to the new
+      feature name.
+
+  Returns:
+    function that renames the feature of an example.
+  """
+
+  def apply_on_example(example: Example) -> Iterator[Example]:
+    for from_name, to_name in name_mapping.items():
+      example[to_name] = example.pop(from_name)
     yield example
 
   return apply_on_example
