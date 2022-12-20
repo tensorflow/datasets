@@ -616,7 +616,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     deleted_incomplete_files = []
     for f in self.data_path.iterdir():
       if utils.is_incomplete_file(f):
-        deleted_incomplete_files.append(f)
+        deleted_incomplete_files.append(os.fspath(f))
         f.unlink()
     if deleted_incomplete_files:
       logging.info("Deleted %d incomplete files. A small selection: %s",
