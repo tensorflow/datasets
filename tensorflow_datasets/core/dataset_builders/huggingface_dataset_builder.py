@@ -80,7 +80,8 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
         name: extract_features(hf_inner_feature)
         for name, hf_inner_feature in hf_features.items()
     })
-  if isinstance(hf_features, hf_datasets.Sequence):
+  if (isinstance(hf_features, hf_datasets.Sequence) or
+      isinstance(hf_features, list)):
     return feature_lib.Sequence(feature=extract_features(hf_features.feature))
   if isinstance(hf_features, hf_datasets.Value):
     return feature_lib.Scalar(dtype=_convert_to_np_dtype(hf_features.dtype))
