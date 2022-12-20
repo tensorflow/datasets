@@ -15,14 +15,14 @@
 
 """RefCoco datasets tests."""
 
+from tensorflow_datasets.datasets.ref_coco import ref_coco_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.vision_language.refcoco import refcoco
 
 
 class RefcocoGoogleTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for refcoco_google."""
 
-  DATASET_CLASS = refcoco.RefCoco
+  DATASET_CLASS = ref_coco_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['refcoco_google']
   SPLITS = {
       tfds.Split.TRAIN: 1,
@@ -34,7 +34,7 @@ class RefcocoGoogleTest(tfds.testing.DatasetBuilderTestCase):
 class RefcocoUncTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for refcoco_unc."""
 
-  DATASET_CLASS = refcoco.RefCoco
+  DATASET_CLASS = ref_coco_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['refcoco_unc']
   SPLITS = {
       tfds.Split.TRAIN: 1,
@@ -47,7 +47,7 @@ class RefcocoUncTest(tfds.testing.DatasetBuilderTestCase):
 class RefcocoplusUncTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for refcocoplus_unc."""
 
-  DATASET_CLASS = refcoco.RefCoco
+  DATASET_CLASS = ref_coco_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['refcocoplus_unc']
   SPLITS = {
       tfds.Split.TRAIN: 1,
@@ -60,7 +60,7 @@ class RefcocoplusUncTest(tfds.testing.DatasetBuilderTestCase):
 class RefcocogGoogleTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for refcocog_google."""
 
-  DATASET_CLASS = refcoco.RefCoco
+  DATASET_CLASS = ref_coco_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['refcocog_google']
   SPLITS = {
       tfds.Split.TRAIN: 1,
@@ -71,7 +71,7 @@ class RefcocogGoogleTest(tfds.testing.DatasetBuilderTestCase):
 class RefcocogUmdTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for refcocog_umd."""
 
-  DATASET_CLASS = refcoco.RefCoco
+  DATASET_CLASS = ref_coco_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['refcocog_umd']
   SPLITS = {
       tfds.Split.TRAIN: 1,
