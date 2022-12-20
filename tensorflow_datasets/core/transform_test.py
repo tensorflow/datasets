@@ -98,3 +98,25 @@ def test_do_fn():
   apply_do_fn = transform.apply_do_fn(fn=duplicate)
   example = {"a": 1}
   assert list(apply_do_fn(example)) == [example, example]
+
+
+def test_remove_feature():
+  remove_fn = transform.remove_feature("a")
+  assert list(remove_fn(example={"a": 1, "b": 2})) == [{"b": 2}]
+
+
+def test_remove_feature_multiple():
+  remove_fn = transform.remove_feature(["a", "b"])
+  assert list(remove_fn(example={"a": 1, "b": 2, "c": 3})) == [{"c": 3}]
+
+
+def test_rename_feature():
+  rename_fn = transform.rename_feature("a", "b")
+  assert list(rename_fn(example={"a": 1})) == [{"b": 1}]
+
+
+def test_rename_features():
+  rename_fn = transform.rename_features({"a": "x", "b": "y"})
+  example = {"a": 1, "b": 2, "c": 3}
+  expected = {"x": 1, "y": 2, "c": 3}
+  assert list(rename_fn(example=example)) == [expected]
