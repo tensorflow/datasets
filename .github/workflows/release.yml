@@ -37,7 +37,7 @@ jobs:
     - name: Publish the package
       uses: etils-actions/pypi-auto-publish@v1
       with:
-        pypi-token: ${{ secrets.PYPI_API_TOKEN }}
+        pypi-token: ${{ secrets.PYPI_PASSWORD }}
         gh-token: ${{ secrets.GITHUB_TOKEN }}
         parse-changelog: true
         pkg-name: tensorflow-datasets
