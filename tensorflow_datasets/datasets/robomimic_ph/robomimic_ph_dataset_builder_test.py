@@ -15,13 +15,13 @@
 
 """robomimic_ph dataset."""
 
+from tensorflow_datasets.datasets.robomimic_ph import robomimic_ph_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.robomimic.robomimic_ph import robomimic_ph
 
 
 class RobomimicPhLiftLowDimTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for robomimic_ph dataset."""
-  DATASET_CLASS = robomimic_ph.RobomimicPh
+  DATASET_CLASS = robomimic_ph_dataset_builder.Builder
   SPLITS = {'train': 2}
   SKIP_TF1_GRAPH_MODE = True
 
