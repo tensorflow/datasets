@@ -16,11 +16,11 @@
 """Tests for RESICS45."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import resisc45
+from tensorflow_datasets.datasets.resisc45 import resisc45_dataset_builder
 
 
 class Resisc45Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = resisc45.Resisc45
+  DATASET_CLASS = resisc45_dataset_builder.Builder
   SPLITS = {
       "train": 3,
   }
