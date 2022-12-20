@@ -31,4 +31,6 @@ __all__ = [
     "ConllUDatasetBuilder",
     "HuggingfaceDatasetBuilder",
     "TfDataBuilder",
+    "ViewBuilder",
+    "ViewConfig",
 ]
