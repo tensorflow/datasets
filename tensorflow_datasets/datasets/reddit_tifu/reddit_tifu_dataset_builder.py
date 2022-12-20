@@ -42,7 +42,7 @@ class RedditTifuConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(RedditTifuConfig, self).__init__(
-        version=tfds.core.Version("1.1.1"), **kwargs)
+        version=tfds.core.Version("1.1.2"), **kwargs)
     self.summary_key = summary_key
 
 
@@ -58,6 +58,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           "being released to ensure that results on Reddit Tifu Long are "
           "reproducible and comparable."
           "Also add `id` to the datapoints.",
+      "1.1.2": "Corrected splits uploaded."
   }
   BUILDER_CONFIGS = [
       RedditTifuConfig(
