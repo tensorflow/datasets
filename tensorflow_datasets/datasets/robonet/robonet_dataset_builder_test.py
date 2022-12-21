@@ -13,14 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.video.robonet."""
+"""Tests for tensorflow_datasets.video.{dataset_name}_dataset_builder."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.video import robonet
+from tensorflow_datasets.datasets.robonet import robonet_dataset_builder
 
 
 class Robonet64Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = robonet.Robonet
+  DATASET_CLASS = robonet_dataset_builder.Builder
 
   SPLITS = {
       "train": 9,
