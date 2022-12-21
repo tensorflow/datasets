@@ -12,11 +12,6 @@
 # `conll2003`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The shared task of CoNLL-2003 concerns language-independent named entity
@@ -131,4 +126,4 @@ dataButton.addEventListener('click', async () => {
 ```
 
 
-## conll2003/conll2003 (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## conll2003/conll2003 (default config)

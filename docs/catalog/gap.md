@@ -12,11 +12,6 @@
 # `gap`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
@@ -39,9 +34,8 @@ applications.
 *   **Versions**:
 
     *   `0.1.0`: Initial release.
-    *   **`0.1.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fixes parsing of boolean field `A-coref` and `B-coref`.
+    *   **`0.1.1`** (default): Fixes parsing of boolean field `A-coref` and
+        `B-coref`.
 
 *   **Download size**: `2.29 MiB`
 
