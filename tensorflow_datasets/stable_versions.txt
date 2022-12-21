@@ -237,6 +237,7 @@ c4/webtextlike/2.2.1
 c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
 c4/webtextlike/3.1.0
+c4_wsrs/default/1.0.0
 caltech101/3.0.1
 caltech_birds2010/0.1.1
 caltech_birds2011/0.1.1
@@ -525,7 +526,9 @@ common_voice/vot/2.0.0
 common_voice/zh-CN/2.0.0
 common_voice/zh-HK/2.0.0
 common_voice/zh-TW/2.0.0
-conll2003/conll2022/1.0.0
+conll2002/es/1.0.0
+conll2002/nl/1.0.0
+conll2003/conll2003/1.0.0
 controlled_noisy_web_labels/mini_imagenet_blue/1.0.0
 controlled_noisy_web_labels/mini_imagenet_red/1.0.0
 coqa/1.0.0
@@ -534,7 +537,7 @@ cosmos_qa/1.0.0
 covid19/1.0.0
 covid19sum/1.0.0
 crema_d/1.0.0
-criteo/1.0.0
+criteo/1.0.1
 cs_restaurants/1.0.0
 curated_breast_imaging_ddsm/original-calc/3.0.0
 curated_breast_imaging_ddsm/original-mass/3.0.0
@@ -685,7 +688,7 @@ drop/2.0.0
 dsprites/2.0.0
 dsprites/2.1.0
 dtd/3.0.1
-duke_ultrasound/1.0.0
+duke_ultrasound/1.0.1
 e2e_cleaned/0.1.0
 efron_morris75/1.0.0
 emnist/balanced/3.0.0
@@ -709,7 +712,7 @@ food101/2.1.0
 forest_fires/0.0.1
 fuss/reverberant/1.2.0
 fuss/unprocessed/1.2.0
-gap/0.1.0
+gap/0.1.1
 geirhos_conflict_stimuli/1.0.0
 gem/common_gen/1.1.0
 gem/cs_restaurants/1.1.0
@@ -1063,14 +1066,17 @@ iris/2.0.0
 istella/main/1.1.0
 istella/s/1.1.0
 istella/x/1.1.0
-kddcup99/1.0.0
+kddcup99/1.0.1
 kitti/3.1.0
 kitti/3.2.0
 kitti/3.3.0
 kmnist/3.0.1
+laion400m/embeddings/1.0.0
+laion400m/images/1.0.0
 lambada/1.0.0
 lfw/0.1.0
-librispeech/2.1.1
+librispeech/default/2.1.1
+librispeech/lazy_decode/2.1.2
 librispeech_lm/0.1.0
 libritts/1.0.1
 ljspeech/1.1.1
@@ -1250,6 +1256,7 @@ mtnt/fr-en/1.0.0
 multi_news/1.0.0
 multi_nli/1.1.0
 multi_nli_mismatch/0.1.0
+natural_instructions/1.0.1
 natural_questions/default/0.0.2
 natural_questions/default/0.1.0
 natural_questions/longt5/0.0.2
@@ -1341,6 +1348,7 @@ protein_net/casp12/1.0.0
 protein_net/casp7/1.0.0
 protein_net/casp8/1.0.0
 protein_net/casp9/1.0.0
+q_re_cc/1.0.0
 qa4mre/2011.main.DE/0.1.0
 qa4mre/2011.main.EN/0.1.0
 qa4mre/2011.main.ES/0.1.0
@@ -1371,8 +1379,9 @@ race/middle/2.0.0
 radon/1.0.0
 reddit/1.0.0
 reddit_disentanglement/2.0.0
-reddit_tifu/long/1.1.0
-reddit_tifu/short/1.1.0
+reddit_tifu/long/1.1.2
+reddit_tifu/long_split/1.1.2
+reddit_tifu/short/1.1.2
 ref_coco/refcoco_google/1.0.0
 ref_coco/refcoco_unc/1.0.0
 ref_coco/refcocog_google/1.0.0
@@ -4955,8 +4964,8 @@ wine_quality/red/1.0.0
 wine_quality/white/1.0.0
 winogrande/1.1.0
 wit/1.1.0
-wit_kaggle/test_without_gold/1.0.1
-wit_kaggle/train_with_extended_features/1.0.1
+wit_kaggle/test_without_gold/1.0.2
+wit_kaggle/train_with_extended_features/1.0.2
 wmt13_translate/cs-en/1.0.0
 wmt13_translate/de-en/1.0.0
 wmt13_translate/es-en/1.0.0
@@ -4989,7 +4998,6 @@ wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0
 wmt18_translate/et-en/1.0.0
 wmt18_translate/fi-en/1.0.0
-wmt18_translate/kk-en/1.0.0
 wmt18_translate/ru-en/1.0.0
 wmt18_translate/tr-en/1.0.0
 wmt18_translate/zh-en/1.0.0

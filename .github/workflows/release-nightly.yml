@@ -20,12 +20,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Publish the package (if local `__version__` > pip version)
-    - name: Publish the package
-      uses: etils-actions/pypi-auto-publish@v1
+    - uses: actions/checkout@v3
       with:
-        pypi-token: ${{ secrets.PYPI_PASSWORD }}
-        gh-token: ${{ secrets.GITHUB_TOKEN }}
-        parse-changelog: false
-        pkg-name: tensorflow-datasets
-        git-ref: ${{ github.event.inputs.git-ref }}
+        ref: ${{ github.event.inputs.git-ref }}
+
+    - name: Setup Python.
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Install deps.
+      run: pip install setuptools wheel twine
+
+    - name: Create the source distribution and build the wheels.
+      run: |
+        python setup.py sdist --nightly
+        python setup.py bdist_wheel --nightly
+
+    - name: Publish the package.
+      run: |
+        twine check dist/*
+        twine upload dist/*
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.NIGHTLY_PYPI_PASSWORD }}
