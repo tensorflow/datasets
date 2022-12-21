@@ -12,11 +12,6 @@
 # `criteo`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 # Criteo Uplift Modeling Dataset
@@ -84,9 +79,8 @@ to:
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.0.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fixed parsing of fields `conversion`, `visit` and `exposure`.
+    *   **`1.0.1`** (default): Fixed parsing of fields `conversion`, `visit` and
+        `exposure`.
 
 *   **Download size**: `297.00 MiB`
 

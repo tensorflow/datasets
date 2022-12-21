@@ -603,7 +603,6 @@ toc:
   - path: /datasets/catalog/mlqa
     title: mlqa
   - path: /datasets/catalog/natural_instructions
-    status: nightly
     title: natural_instructions
   - path: /datasets/catalog/natural_questions
     title: natural_questions
@@ -676,7 +675,6 @@ toc:
   - path: /datasets/catalog/mlqa
     title: mlqa
   - path: /datasets/catalog/natural_instructions
-    status: nightly
     title: natural_instructions
   - path: /datasets/catalog/natural_questions
     title: natural_questions
@@ -967,7 +965,6 @@ toc:
   - path: /datasets/catalog/c4
     title: c4 (manual)
   - path: /datasets/catalog/c4_wsrs
-    status: nightly
     title: c4_wsrs
   - path: /datasets/catalog/caltech101
     title: caltech101
@@ -982,7 +979,6 @@ toc:
   - path: /datasets/catalog/clinc_oos
     title: clinc_oos
   - path: /datasets/catalog/conll2002
-    status: nightly
     title: conll2002
   - path: /datasets/catalog/conll2003
     title: conll2003
@@ -1061,7 +1057,6 @@ toc:
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
   - path: /datasets/catalog/natural_instructions
-    status: nightly
     title: natural_instructions
   - path: /datasets/catalog/natural_questions
     title: natural_questions
@@ -1114,7 +1109,6 @@ toc:
   - path: /datasets/catalog/protein_net
     title: protein_net
   - path: /datasets/catalog/q_re_cc
-    status: nightly
     title: q_re_cc
   - path: /datasets/catalog/qa4mre
     title: qa4mre
@@ -1201,7 +1195,6 @@ toc:
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/natural_instructions
-    status: nightly
     title: natural_instructions
   - path: /datasets/catalog/paws_wiki
     title: paws_wiki
@@ -1230,7 +1223,6 @@ toc:
   - path: /datasets/catalog/mctaco
     title: mctaco
   - path: /datasets/catalog/natural_instructions
-    status: nightly
     title: natural_instructions
   - path: /datasets/catalog/natural_questions
     title: natural_questions
@@ -1345,7 +1337,6 @@ toc:
   - path: /datasets/catalog/grounded_scan
     title: grounded_scan
   - path: /datasets/catalog/laion400m
-    status: nightly
     title: laion400m (manual)
   - path: /datasets/catalog/wit
     title: wit

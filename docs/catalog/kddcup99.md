@@ -12,11 +12,6 @@
 # `kddcup99`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 This is the data set used for The Third International Knowledge Discovery and
@@ -43,10 +38,8 @@ military network environment.
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.0.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fixes parsing of boolean fields `land`, `logged_in`, `root_shell`,
-        `is_hot_login` and `is_guest_login`.
+    *   **`1.0.1`** (default): Fixes parsing of boolean fields `land`,
+        `logged_in`, `root_shell`, `is_hot_login` and `is_guest_login`.
 
 *   **Download size**: `18.62 MiB`
 
