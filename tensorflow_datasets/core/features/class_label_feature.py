@@ -197,7 +197,7 @@ class ClassLabel(tensor_feature.Tensor):
       return cls(**value)
     return cls(num_classes=value.num_classes)
 
-  def to_json_content(self) -> feature_pb2.ClassLabel:
+  def to_json_content(self) -> feature_pb2.ClassLabel:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.ClassLabel(num_classes=self.num_classes)
 
   @classmethod

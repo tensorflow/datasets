@@ -202,7 +202,7 @@ class Video(sequence_feature.Sequence):
         ffmpeg_extra_args=value.ffmpeg_extra_args,
     )
 
-  def to_json_content(self) -> feature_pb2.VideoFeature:
+  def to_json_content(self) -> feature_pb2.VideoFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.VideoFeature(
         shape=feature_lib.to_shape_proto(self.shape),
         dtype=feature_lib.dtype_to_str(self.dtype),

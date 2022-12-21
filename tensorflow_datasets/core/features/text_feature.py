@@ -197,7 +197,7 @@ class Text(tensor_feature.Tensor):
           "with `tensorflow_text`.")
     return cls()
 
-  def to_json_content(self) -> Union[Json, feature_pb2.TextFeature]:
+  def to_json_content(self) -> Union[Json, feature_pb2.TextFeature]:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     if self._encoder:
       logging.warning(
           "Dataset is using deprecated text encoder API which will be removed "
