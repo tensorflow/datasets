@@ -25,9 +25,14 @@ glue/rte/1.0.1
 glue/sst2/1.0.1
 glue/stsb/1.0.1
 glue/wnli/1.0.1
+laion400m/embeddings/1.0.0
+laion400m/images/1.0.0
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 reddit_disentanglement/2.0.0
+reddit_tifu/long/1.1.2
+reddit_tifu/long_split/1.1.2
+reddit_tifu/short/1.1.2
 so2sat/all/2.0.0
 so2sat/all/2.1.0
 so2sat/rgb/2.0.0
