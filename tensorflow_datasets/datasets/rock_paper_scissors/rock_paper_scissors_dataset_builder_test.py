@@ -15,14 +15,14 @@
 
 """Tests for Rock, Paper, Scissors data module."""
 
-from tensorflow_datasets.image_classification import rock_paper_scissors
+from tensorflow_datasets.datasets.rock_paper_scissors import rock_paper_scissors_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
-rock_paper_scissors._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access
+rock_paper_scissors_dataset_builder._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access
 
 
 class RockPaperScissorsTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = rock_paper_scissors.RockPaperScissors
+  DATASET_CLASS = rock_paper_scissors_dataset_builder.Builder
 
   SPLITS = {
       'train': 3,
