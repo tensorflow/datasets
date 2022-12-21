@@ -115,7 +115,7 @@ class BBoxFeature(tensor_feature.Tensor):
     del value  # Unused
     return cls()
 
-  def to_json_content(self) -> feature_pb2.BoundingBoxFeature:
+  def to_json_content(self) -> feature_pb2.BoundingBoxFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.BoundingBoxFeature(
         shape=feature_lib.to_shape_proto(self._shape),
         dtype=feature_lib.dtype_to_str(self._dtype),

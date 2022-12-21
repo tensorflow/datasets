@@ -312,7 +312,7 @@ class Audio(tensor_feature.Tensor):
         sample_rate=value.sample_rate,
         encoding=value.encoding)
 
-  def to_json_content(self) -> feature_pb2.AudioFeature:
+  def to_json_content(self) -> feature_pb2.AudioFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.AudioFeature(
         shape=feature_lib.to_shape_proto(self.shape),
         dtype=feature_lib.dtype_to_str(self.dtype),
