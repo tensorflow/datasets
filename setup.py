@@ -228,6 +228,7 @@ setup(
                 # Bundle `datasets/` folder in PyPI releases
                 'datasets/*/*',
                 'core/utils/colormap.csv',
+                'core/valid_tags.txt',
                 'scripts/documentation/templates/*',
                 'url_checksums/*',
                 'checksums.tsv',
