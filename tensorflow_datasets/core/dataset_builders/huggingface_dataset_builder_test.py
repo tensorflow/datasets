@@ -124,3 +124,46 @@ def test_convert_value_image():
   image_feature = feature_lib.Image()
   image = lazy_imports_lib.lazy_imports.PIL_Image.new(mode="RGB", size=(4, 4))
   assert huggingface_dataset_builder._convert_value(image, image_feature)
+
+
+hf_datasets = lazy_imports_lib.lazy_imports.datasets
+@pytest.mark.parametrize(["hf_features", "tfds_features"], [
+    (hf_datasets.Features({
+        "id": hf_datasets.Value("string"),
+        "meta": {
+            "left_context":
+                hf_datasets.Value("string"),
+            "partial_evidence": [{
+                "start_id": hf_datasets.Value("int32"),
+                "meta": {
+                    "evidence_span": [hf_datasets.Value("string")]
+                },
+            }],
+        }
+    }),
+     feature_lib.FeaturesDict({
+         "id":
+             feature_lib.Scalar(dtype=np.str_),
+         "meta":
+             feature_lib.FeaturesDict({
+                 "left_context":
+                     feature_lib.Scalar(dtype=np.str_),
+                 "partial_evidence":
+                     feature_lib.Sequence({
+                         "meta":
+                             feature_lib.FeaturesDict({
+                                 "evidence_span":
+                                     feature_lib.Sequence(
+                                         feature_lib.Scalar(dtype=np.str_)),
+                             }),
+                         "start_id":
+                             feature_lib.Scalar(dtype=np.int32),
+                     }),
+             }),
+     })),
+    (hf_datasets.Audio(sampling_rate=48000),
+     feature_lib.Audio(sample_rate=48000)),
+])
+def test_extract_features(hf_features, tfds_features):
+  assert repr(huggingface_dataset_builder.extract_features(
+      hf_features)) == repr(tfds_features)

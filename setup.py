@@ -96,6 +96,7 @@ TESTS_REQUIRE = [
     # Required by scripts/documentation/
     'pyyaml',
     'tensorflow-io',
+    'datasets',
 ]
 
 # Additional deps for formatting
