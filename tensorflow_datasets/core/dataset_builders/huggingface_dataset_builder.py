@@ -49,6 +49,7 @@ _IMAGE_ENCODING_FORMAT = "png"
 def _convert_to_np_dtype(dtype: str) -> np.dtype:
   """Returns the `np.dtype` scalar feature."""
   str2val = {
+      "bool": np.bool_,
       "bool_": np.bool_,
       "float": np.float32,
       "double": np.float64,
@@ -82,6 +83,10 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
     })
   if isinstance(hf_features, hf_datasets.Sequence):
     return feature_lib.Sequence(feature=extract_features(hf_features.feature))
+  if isinstance(hf_features, list):
+    if len(hf_features) != 1:
+      raise ValueError(f"List {hf_features} should have a length of 1.")
+    return feature_lib.Sequence(feature=extract_features(hf_features[0]))
   if isinstance(hf_features, hf_datasets.Value):
     return feature_lib.Scalar(dtype=_convert_to_np_dtype(hf_features.dtype))
   if isinstance(hf_features, hf_datasets.ClassLabel):
@@ -98,6 +103,8 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
         languages=hf_features.languages,)
   if isinstance(hf_features, hf_datasets.Image):
     return feature_lib.Image(encoding_format=_IMAGE_ENCODING_FORMAT)
+  if isinstance(hf_features, hf_datasets.Audio):
+    return feature_lib.Audio(sample_rate=hf_features.sampling_rate)
   raise ValueError(f"Type {type(hf_features)} is not supported.")
 
 
