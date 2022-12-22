@@ -16,11 +16,11 @@
 """Test for scicite dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import scicite
+from tensorflow_datasets.datasets.scicite import scicite_dataset_builder
 
 
 class SciciteTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = scicite.Scicite
+  DATASET_CLASS = scicite_dataset_builder.Builder
   SPLITS = {
       "train": 3,  # Number of fake train example
       "validation": 1,  # Number of fake validation example
