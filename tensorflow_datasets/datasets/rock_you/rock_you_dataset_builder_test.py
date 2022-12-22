@@ -16,11 +16,11 @@
 """Tests for rockyou dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.structured import rock_you
+from tensorflow_datasets.datasets.rock_you import rock_you_dataset_builder
 
 
 class RockYouTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = rock_you.RockYou
+  DATASET_CLASS = rock_you_dataset_builder.Builder
 
   SPLITS = {
       "train": 11,
