@@ -16,11 +16,11 @@
 """sentiment140 dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text.sentiment140 import sentiment140
+from tensorflow_datasets.datasets.sentiment140 import sentiment140_dataset_builder
 
 
 class Sentiment140Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = sentiment140.Sentiment140
+  DATASET_CLASS = sentiment140_dataset_builder.Builder
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "test": 2,  # Number of fake test examples
