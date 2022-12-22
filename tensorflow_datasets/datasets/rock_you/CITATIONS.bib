@@ -1,0 +1,40 @@
+"""The rockyou dataset."""
+
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import tensorflow_datasets.public_api as tfds
+
+_DOWNLOAD_URL = "https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt"
+
+
+class Builder(tfds.core.GeneratorBasedBuilder):
+  """This dataset contains passwords that were leaked or stolen from from various sites."""
+
+  VERSION = tfds.core.Version("1.0.0")
+
+  def _info(self):
+    return self.dataset_info_from_configs(        features=tfds.features.FeaturesDict({
+            "password": tfds.features.Text(),
+        }),
+        supervised_keys=None,
+        homepage="https://wiki.skullsecurity.org/Passwords",    )
+
+  def _split_generators(self, dl_manager):
+    dl_path = dl_manager.download(_DOWNLOAD_URL)
+    return [
+        tfds.core.SplitGenerator(
+            name="train",
+            gen_kwargs={
+                "path": dl_path,
+            },
+        )
+    ]
+
+  def _generate_examples(self, path):
+
+    with tf.io.gfile.GFile(path, "rb") as f:
+      blines = f.readlines()
+
+    for i, bline in enumerate(blines):
+      yield i, {
+          "password": bline.strip(),
+      }
