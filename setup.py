@@ -63,7 +63,7 @@ REQUIRED_PKGS = [
     'click',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'dm-tree',
-    'etils[epath]',
+    'etils[enp,epath]>=0.9.0',
     'numpy',
     'promise',
     'protobuf>=3.12.2',
