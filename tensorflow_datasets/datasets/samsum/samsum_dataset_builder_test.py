@@ -16,11 +16,11 @@
 """SAMSum dataset test."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import samsum
+from tensorflow_datasets.datasets.samsum import samsum_dataset_builder
 
 
 class SamsumTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = samsum.Samsum
+  DATASET_CLASS = samsum_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "validation": 1,  # Number of fake train example
