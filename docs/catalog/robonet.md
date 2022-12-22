@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="robonet" />
-  <meta itemprop="description" content="RoboNet contains over 15 million video frames of robot-object&#10;interaction, taken from 113 unique camera viewpoints.&#10;&#10;* The actions are deltas in position and rotation to the robot&#10;end-effector with one additional dimension of the action vector&#10;reserved for the gripper joint.&#10;&#10;* The states are cartesian end-effector control action space&#10;with restricted rotation, and a gripper joint&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;robonet&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="RoboNet contains over 15 million video frames of robot-object interaction, taken&#10;from 113 unique camera viewpoints.&#10;&#10;*   The actions are deltas in position and rotation to the robot end-effector&#10;    with one additional dimension of the action vector reserved for the gripper&#10;    joint.&#10;&#10;*   The states are cartesian end-effector control action space with restricted&#10;    rotation, and a gripper joint&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;robonet&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/robonet" />
   <meta itemprop="sameAs" content="https://www.robonet.wiki/" />
   <meta itemprop="citation" content="@article{dasari2019robonet,&#10;  title={RoboNet: Large-Scale Multi-Robot Learning},&#10;  author={Dasari, Sudeep and Ebert, Frederik and Tian, Stephen and&#10;  Nair, Suraj and Bucher, Bernadette and Schmeckpeper, Karl&#10;  and Singh, Siddharth and Levine, Sergey and Finn, Chelsea},&#10;  journal={arXiv preprint arXiv:1910.11215},&#10;  year={2019}&#10;}" />
@@ -33,7 +33,7 @@ from 113 unique camera viewpoints.
 *   **Homepage**: [https://www.robonet.wiki/](https://www.robonet.wiki/)
 
 *   **Source code**:
-    [`tfds.video.Robonet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/robonet.py)
+    [`tfds.datasets.robonet.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/robonet/robonet_dataset_builder.py)
 
 *   **Versions**:
 

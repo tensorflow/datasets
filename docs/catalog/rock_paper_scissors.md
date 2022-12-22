@@ -26,7 +26,7 @@ Images of hands playing rock, paper, scissor game.
     [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
 
 *   **Source code**:
-    [`tfds.image_classification.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/rock_paper_scissors.py)
+    [`tfds.datasets.rock_paper_scissors.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/rock_paper_scissors/rock_paper_scissors_dataset_builder.py)
 
 *   **Versions**:
 

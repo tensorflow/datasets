@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="sentiment140" />
-  <meta itemprop="description" content="Sentiment140 allows you to discover the sentiment of a brand, product, or topic on Twitter.&#10;&#10;The data is a CSV with emoticons removed. Data file format has 6 fields:&#10;&#10;0. the polarity of the tweet (0 = negative, 2 = neutral, 4 = positive)&#10;1. the id of the tweet (2087)&#10;2. the date of the tweet (Sat May 16 23:58:44 UTC 2009)&#10;3. the query (lyx). If there is no query, then this value is NO_QUERY.&#10;4. the user that tweeted (robotickilldozr)&#10;5. the text of the tweet (Lyx is cool)&#10;&#10;For more information, refer to the paper&#10;Twitter Sentiment Classification with Distant Supervision at&#10;https://cs.stanford.edu/people/alecmgo/papers/TwitterDistantSupervision09.pdf&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;sentiment140&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="Sentiment140 allows you to discover the sentiment of a brand, product, or topic&#10;on Twitter.&#10;&#10;The data is a CSV with emoticons removed. Data file format has 6 fields:&#10;&#10;1.  the polarity of the tweet (0 = negative, 2 = neutral, 4 = positive)&#10;2.  the id of the tweet (2087)&#10;3.  the date of the tweet (Sat May 16 23:58:44 UTC 2009)&#10;4.  the query (lyx). If there is no query, then this value is NO_QUERY.&#10;5.  the user that tweeted (robotickilldozr)&#10;6.  the text of the tweet (Lyx is cool)&#10;&#10;For more information, refer to the paper Twitter Sentiment Classification with&#10;Distant Supervision at&#10;https://cs.stanford.edu/people/alecmgo/papers/TwitterDistantSupervision09.pdf&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;sentiment140&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/sentiment140" />
   <meta itemprop="sameAs" content="http://help.sentiment140.com/home" />
   <meta itemprop="citation" content="@ONLINE {Sentiment140,&#10;    author = &quot;Go, Alec and Bhayani, Richa and Huang, Lei&quot;,&#10;    title  = &quot;Twitter Sentiment Classification using Distant Supervision&quot;,&#10;    year   = &quot;2009&quot;,&#10;    url    = &quot;http://help.sentiment140.com/home&quot;&#10;}" />
@@ -40,7 +40,7 @@ https://cs.stanford.edu/people/alecmgo/papers/TwitterDistantSupervision09.pdf
     [http://help.sentiment140.com/home](http://help.sentiment140.com/home)
 
 *   **Source code**:
-    [`tfds.text.sentiment140.Sentiment140`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/sentiment140/sentiment140.py)
+    [`tfds.datasets.sentiment140.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/sentiment140/sentiment140_dataset_builder.py)
 
 *   **Versions**:
 

@@ -37,7 +37,7 @@ the performance in zero-shot or few shot settings.
     [https://github.com/google-research-datasets/dstc8-schema-guided-dialogue](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue)
 
 *   **Source code**:
-    [`tfds.text.schema_guided_dialogue.SchemaGuidedDialogue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/schema_guided_dialogue/schema_guided_dialogue.py)
+    [`tfds.datasets.schema_guided_dialogue.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/schema_guided_dialogue/schema_guided_dialogue_dataset_builder.py)
 
 *   **Versions**:
 
