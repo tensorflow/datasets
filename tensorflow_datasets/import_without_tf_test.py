@@ -16,10 +16,19 @@
 """Test import."""
 
 import sys
+from unittest import mock
 
+from absl import logging
 import tensorflow_datasets as tfds
 
 
 def test_import_tfds_without_loading_tf():
-  assert tfds is not None
-  assert 'tensorflow' not in sys.modules
+  with mock.patch.object(logging, 'log_first_n') as log_first_n:
+    assert 'tensorflow' not in sys.modules
+
+    with tfds.testing.tmp_dir() as data_dir:
+      tfds.testing.DummyMnist(data_dir=data_dir).download_and_prepare()
+      tfds.load('dummy_mnist', split='train', data_dir=data_dir)
+
+    # No warning concerning TensorFlow DTypes was dispatched while loading
+    assert not log_first_n.called
