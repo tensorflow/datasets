@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="sci_tail" />
-  <meta itemprop="description" content="The SciTail dataset is an entailment dataset created from multiple-choice&#10;science exams and web sentences. Each question and the correct answer choice&#10;are converted into an assertive statement to form the hypothesis. Information&#10;retrieval is used to obtain relevant text from a large text corpus of web&#10;sentences, and these sentences are used as a premise P. The annotation of such&#10;premise-hypothesis pair is crowdsourced as supports (entails) or not (neutral),&#10;in order to create the SciTail dataset. The dataset contains 27,026 examples&#10;with 10,101 examples with entails label and 16,925 examples with neutral label.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;sci_tail&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The SciTail dataset is an entailment dataset created from multiple-choice&#10;science exams and web sentences. Each question and the correct answer choice are&#10;converted into an assertive statement to form the hypothesis. Information&#10;retrieval is used to obtain relevant text from a large text corpus of web&#10;sentences, and these sentences are used as a premise P. The annotation of such&#10;premise-hypothesis pair is crowdsourced as supports (entails) or not (neutral),&#10;in order to create the SciTail dataset. The dataset contains 27,026 examples&#10;with 10,101 examples with entails label and 16,925 examples with neutral label.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;sci_tail&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/sci_tail" />
   <meta itemprop="sameAs" content="https://allenai.org/data/scitail" />
   <meta itemprop="citation" content="@inproceedings{khot2018scitail,&#10;    title={Scitail: A textual entailment dataset from science question answering},&#10;    author={Khot, Tushar and Sabharwal, Ashish and Clark, Peter},&#10;    booktitle={Proceedings of the 32th AAAI Conference on Artificial Intelligence (AAAI 2018)},&#10;    url = &quot;http://ai2-website.s3.amazonaws.com/publications/scitail-aaai-2018_cameraready.pdf&quot;,&#10;    year={2018}&#10;}" />
@@ -33,7 +33,7 @@ with 10,101 examples with entails label and 16,925 examples with neutral label.
     [https://allenai.org/data/scitail](https://allenai.org/data/scitail)
 
 *   **Source code**:
-    [`tfds.text.scitail.SciTail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scitail/scitail.py)
+    [`tfds.datasets.sci_tail.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/sci_tail/sci_tail_dataset_builder.py)
 
 *   **Versions**:
 

@@ -3,10 +3,10 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="scan" />
-  <meta itemprop="description" content="SCAN tasks with various splits.&#10;&#10;SCAN is a set of simple language-driven navigation tasks for studying&#10;compositional learning and zero-shot generalization.&#10;&#10;Most splits are described at https://github.com/brendenlake/SCAN. For the MCD&#10;splits please see https://arxiv.org/abs/1912.09713.pdf.&#10;&#10;Basic usage:&#10;&#10;```&#10;data = tfds.load(&#x27;scan/length&#x27;)&#10;```&#10;&#10;More advanced example:&#10;&#10;```&#10;data = tfds.load(&#10;    &#x27;scan&#x27;,&#10;    builder_kwargs=dict(&#10;        config=tfds.text.ScanConfig(&#10;            name=&#x27;simple_p8&#x27;, directory=&#x27;simple_split/size_variations&#x27;)))&#10;```&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;scan&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="SCAN tasks with various splits.&#10;&#10;SCAN is a set of simple language-driven navigation tasks for studying&#10;compositional learning and zero-shot generalization.&#10;&#10;Most splits are described at https://github.com/brendenlake/SCAN. For the MCD&#10;splits please see https://arxiv.org/abs/1912.09713.pdf.&#10;&#10;Basic usage:&#10;&#10;```&#10;data = tfds.load(&#x27;scan/length&#x27;)&#10;```&#10;&#10;More advanced example:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;from tensorflow_datasets.datasets.scan import scan_dataset_builder&#10;&#10;data = tfds.load(&#10;    &#x27;scan&#x27;,&#10;    builder_kwargs=dict(&#10;        config=scan_dataset_builder.ScanConfig(&#10;            name=&#x27;simple_p8&#x27;, directory=&#x27;simple_split/size_variations&#x27;)))&#10;```&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;scan&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/scan" />
   <meta itemprop="sameAs" content="https://github.com/brendenlake/SCAN" />
-  <meta itemprop="citation" content="@inproceedings{Lake2018GeneralizationWS,&#10;  title={Generalization without Systematicity: On the Compositional Skills of&#10;         Sequence-to-Sequence Recurrent Networks},&#10;  author={Brenden M. Lake and Marco Baroni},&#10;  booktitle={ICML},&#10;  year={2018},&#10;  url={https://arxiv.org/pdf/1711.00350.pdf},&#10;}&#10;@inproceedings{Keysers2020,&#10;  title={Measuring Compositional Generalization: A Comprehensive Method on&#10;         Realistic Data},&#10;  author={Daniel Keysers and Nathanael Sch&quot;{a}rli and Nathan Scales and&#10;          Hylke Buisman and Daniel Furrer and Sergii Kashubin and&#10;          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and&#10;          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and&#10;          Olivier Bousquet},&#10;  note={Additional citation for MCD splits},&#10;  booktitle={ICLR},&#10;  year={2020},&#10;  url={https://arxiv.org/abs/1912.09713.pdf},&#10;}" />
+  <meta itemprop="citation" content="@inproceedings{Lake2018GeneralizationWS,&#10;  title={Generalization without Systematicity: On the Compositional Skills of&#10;         Sequence-to-Sequence Recurrent Networks},&#10;  author={Brenden M. Lake and Marco Baroni},&#10;  booktitle={ICML},&#10;  year={2018},&#10;  url={https://arxiv.org/pdf/1711.00350.pdf},&#10;}&#10;@inproceedings{Keysers2020,&#10;  title={Measuring Compositional Generalization: A Comprehensive Method on&#10;         Realistic Data},&#10;  author={Daniel Keysers and Nathanael Sch\&quot;{a}rli and Nathan Scales and&#10;          Hylke Buisman and Daniel Furrer and Sergii Kashubin and&#10;          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and&#10;          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and&#10;          Olivier Bousquet},&#10;  note={Additional citation for MCD splits},&#10;  booktitle={ICLR},&#10;  year={2020},&#10;  url={https://arxiv.org/abs/1912.09713.pdf},&#10;}" />
 </div>
 
 # `scan`
@@ -31,10 +31,13 @@ data = tfds.load('scan/length')
 More advanced example:
 
 ```
+import tensorflow_datasets as tfds
+from tensorflow_datasets.datasets.scan import scan_dataset_builder
+
 data = tfds.load(
     'scan',
     builder_kwargs=dict(
-        config=tfds.text.ScanConfig(
+        config=scan_dataset_builder.ScanConfig(
             name='simple_p8', directory='simple_split/size_variations')))
 ```
 
@@ -48,7 +51,7 @@ data = tfds.load(
     [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
 
 *   **Source code**:
-    [`tfds.text.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
+    [`tfds.datasets.scan.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/scan/scan_dataset_builder.py)
 
 *   **Versions**:
 
@@ -97,7 +100,7 @@ commands | Text         |       | string |
 @inproceedings{Keysers2020,
   title={Measuring Compositional Generalization: A Comprehensive Method on
          Realistic Data},
-  author={Daniel Keysers and Nathanael Sch"{a}rli and Nathan Scales and
+  author={Daniel Keysers and Nathanael Sch\"{a}rli and Nathan Scales and
           Hylke Buisman and Daniel Furrer and Sergii Kashubin and
           Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and
           Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and

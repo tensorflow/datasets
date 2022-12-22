@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="simpte" />
-  <meta itemprop="description" content="Full name: Simulations for Personalized Treatment Effects&#10;Generated with the R&#x27;s Uplift package: https://rdrr.io/cran/uplift/man/sim_pte.html&#10;The package could be downloaded here: https://cran.r-project.org/src/contrib/Archive/uplift/&#10;&#10;Dataset generated in R version 4.1.2 with following code:&#10;&#10;  library(uplift)&#10;&#10;  set.seed(123)&#10;&#10;  train &lt;- sim_pte(n = 1000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)&#10;  test &lt;- sim_pte(n = 2000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)&#10;&#10;  train$treat &lt;- ifelse(train$treat == 1, 2, 1)&#10;  test$treat &lt;- ifelse(test$treat == 1, 2, 1)&#10;&#10;  train$y &lt;- ifelse(train$y == 1, 2, 1)&#10;  test$y &lt;- ifelse(test$y == 1, 2, 1)&#10;&#10;  train$ts = NULL&#10;  test$ts = NULL&#10;&#10;&#10;Parameters:&#10;  n = number of samples&#10;  p = number of predictors&#10;  ro = covariance between predictors&#10;  sigma = mutiplier of the error term&#10;  beta.den = beta is mutiplied by 1/beta.den&#10;&#10;Creator: Leo Guelman leo.guelman@gmail.com&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;simpte&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="Full name: Simulations for Personalized Treatment Effects&#10;&#10;Generated with the R&#x27;s Uplift package:&#10; https://rdrr.io/cran/uplift/man/sim_pte.html&#10;&#10;The package could be downloaded here:&#10; https://cran.r-project.org/src/contrib/Archive/uplift/&#10;&#10;Dataset generated in R version 4.1.2 with following code:&#10;&#10;```&#10;  library(uplift)&#10;&#10;  set.seed(123)&#10;&#10;  train &lt;- sim_pte(n = 1000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)&#10;  test &lt;- sim_pte(n = 2000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)&#10;&#10;  train$treat &lt;- ifelse(train$treat == 1, 2, 1)&#10;  test$treat &lt;- ifelse(test$treat == 1, 2, 1)&#10;&#10;  train$y &lt;- ifelse(train$y == 1, 2, 1)&#10;  test$y &lt;- ifelse(test$y == 1, 2, 1)&#10;&#10;  train$ts = NULL&#10;  test$ts = NULL&#10;```&#10;&#10;Parameters:&#10;&#10;  - `n` = number of samples&#10;  - `p` = number of predictors&#10;  - `ro` = covariance between predictors&#10;  - `sigma` = mutiplier of the error term&#10;  - `beta.den` = beta is mutiplied by 1/beta.den&#10;&#10;Creator: Leo Guelman leo.guelman@gmail.com&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;simpte&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/simpte" />
   <meta itemprop="sameAs" content="https://rdrr.io/cran/uplift/man/sim_pte.html" />
   <meta itemprop="citation" content="@misc{https://doi.org/10.48550/arxiv.1212.2995,&#10;  doi = {10.48550/ARXIV.1212.2995},&#10;  url = {https://arxiv.org/abs/1212.2995},&#10;  author = {Tian, Lu and Alizadeh, Ash and Gentles, Andrew and Tibshirani, Robert},&#10;  keywords = {Methodology (stat.ME), FOS: Computer and information sciences, FOS: Computer and information sciences},&#10;  title = {A Simple Method for Detecting Interactions between a Treatment and a Large Number of Covariates},&#10;  publisher = {arXiv},&#10;  year = {2012},&#10;  copyright = {arXiv.org perpetual, non-exclusive license}&#10;}" />
@@ -16,29 +16,41 @@ Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
-Full name: Simulations for Personalized Treatment Effects Generated with the R's
-Uplift package: https://rdrr.io/cran/uplift/man/sim_pte.html The package could
-be downloaded here: https://cran.r-project.org/src/contrib/Archive/uplift/
+Full name: Simulations for Personalized Treatment Effects
+
+Generated with the R's Uplift package:
+https://rdrr.io/cran/uplift/man/sim_pte.html
+
+The package could be downloaded here:
+https://cran.r-project.org/src/contrib/Archive/uplift/
 
 Dataset generated in R version 4.1.2 with following code:
 
-library(uplift)
+```
+  library(uplift)
 
-set.seed(123)
+  set.seed(123)
 
-train <- sim_pte(n = 1000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4) test
-<- sim_pte(n = 2000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)
+  train <- sim_pte(n = 1000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)
+  test <- sim_pte(n = 2000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)
 
-train$treat <- ifelse(train$treat == 1, 2, 1) test$treat <- ifelse(test$treat ==
-1, 2, 1)
+  train$treat <- ifelse(train$treat == 1, 2, 1)
+  test$treat <- ifelse(test$treat == 1, 2, 1)
 
-train$y <- ifelse(train$y == 1, 2, 1) test$y <- ifelse(test$y == 1, 2, 1)
+  train$y <- ifelse(train$y == 1, 2, 1)
+  test$y <- ifelse(test$y == 1, 2, 1)
 
-train$ts = NULL test$ts = NULL
+  train$ts = NULL
+  test$ts = NULL
+```
 
-Parameters: n = number of samples p = number of predictors ro = covariance
-between predictors sigma = mutiplier of the error term beta.den = beta is
-mutiplied by 1/beta.den
+Parameters:
+
+-   `n` = number of samples
+-   `p` = number of predictors
+-   `ro` = covariance between predictors
+-   `sigma` = mutiplier of the error term
+-   `beta.den` = beta is mutiplied by 1/beta.den
 
 Creator: Leo Guelman leo.guelman@gmail.com
 
@@ -46,7 +58,7 @@ Creator: Leo Guelman leo.guelman@gmail.com
     [https://rdrr.io/cran/uplift/man/sim_pte.html](https://rdrr.io/cran/uplift/man/sim_pte.html)
 
 *   **Source code**:
-    [`tfds.recommendation.simPTE.Simpte`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/recommendation/simPTE/simPTE.py)
+    [`tfds.datasets.simpte.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/simpte/simpte_dataset_builder.py)
 
 *   **Versions**:
 

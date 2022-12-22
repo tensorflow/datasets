@@ -20,7 +20,7 @@ Wikipedia sentences with labeled salient spans.
     [https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia](https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia)
 
 *   **Source code**:
-    [`tfds.text.SalientSpanWikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/salient_span_wikipedia.py)
+    [`tfds.datasets.salient_span_wikipedia.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/salient_span_wikipedia/salient_span_wikipedia_dataset_builder.py)
 
 *   **Versions**:
 
