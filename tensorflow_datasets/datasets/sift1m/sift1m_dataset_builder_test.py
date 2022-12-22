@@ -15,13 +15,13 @@
 
 """sift1m dataset."""
 
-from tensorflow_datasets.nearest_neighbors.sift1m import sift1m
+from tensorflow_datasets.datasets.sift1m import sift1m_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class Sift1mTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for sift1m dataset."""
-  DATASET_CLASS = sift1m.Sift1m
+  DATASET_CLASS = sift1m_dataset_builder.Builder
   SPLITS = {
       'database': 3,  # Number of fake train example
       'test': 2,  # Number of fake test example
