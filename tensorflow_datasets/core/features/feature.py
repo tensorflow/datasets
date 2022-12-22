@@ -27,6 +27,7 @@ import json
 import typing
 from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
+from absl import logging
 from etils import enp
 from etils import epath
 import numpy as np
@@ -57,6 +58,13 @@ if typing.TYPE_CHECKING:
                               Dict[str, 'FeatureConnectorArg'], tf.dtypes.DType]
 else:
   FeatureConnectorArg = Any
+
+
+def log_tf_warning(class_name: str) -> None:
+  logging.log_first_n(
+      logging.WARNING, f'`{class_name}.dtype` is deprecated. Please change '
+      f'your code to use NumPy with the field `{class_name}.np_dtype` '
+      f'or use TensorFlow with the field `{class_name}.tf_dtype`.', 10)
 
 
 class TensorInfo(object):
@@ -127,6 +135,7 @@ class TensorInfo(object):
   @property
   def dtype(self) -> TreeDict[type_utils.TfdsDType]:
     """Return the TensorFlow DType of this TensorInfo."""
+    log_tf_warning('TensorInfo')
     return self.tf_dtype
 
   @property
@@ -284,6 +293,7 @@ class FeatureConnector(object):
   @py_utils.memoized_property
   def dtype(self) -> TreeDict[tf.dtypes.DType]:
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
+    log_tf_warning('FeatureConnector')
     return self.tf_dtype
 
   @py_utils.memoized_property

@@ -17,6 +17,7 @@
 
 from typing import cast, Any, List
 
+from absl import logging
 from etils import enp
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils
@@ -37,7 +38,12 @@ def cast_to_numpy(dtype: type_utils.TfdsDType) -> np.dtype:
   """
   tf_already_loaded = enp.lazy.has_tf
   if tf_already_loaded and isinstance(dtype, tf.dtypes.DType):
-    return np.dtype(dtype.as_numpy_dtype)
+    np_dtype = np.dtype(dtype.as_numpy_dtype)
+    logging.log_first_n(
+        logging.WARNING, f'You use TensorFlow DType {dtype} in tfds.features '
+        'This will soon be deprecated in favor of NumPy DTypes. '
+        f'In the meantime it was converted to {np_dtype}.', 10)
+    return np_dtype
   # Strings are managed as np.object_ (rather than np.str_) in order to
   # optimize for memory and for consistency with tf.string:
   # np.array(['', '1234567890'], dtype=np.str_).nbytes == 80
