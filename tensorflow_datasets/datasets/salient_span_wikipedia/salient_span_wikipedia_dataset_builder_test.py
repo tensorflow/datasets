@@ -14,17 +14,18 @@
 # limitations under the License.
 
 """Tests for salient_span_wikipedia dataset module."""
-import os
-
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import salient_span_wikipedia
+from tensorflow_datasets.datasets.salient_span_wikipedia import salient_span_wikipedia_dataset_builder
 
 
 class SalientSpanWikipediaSentencesTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = salient_span_wikipedia.SalientSpanWikipedia
-  salient_span_wikipedia._INPUT_FILE_PATTERN = os.path.join(
-      testing.test_utils.fake_examples_dir(), 'salient_span_wikipedia',
-      'test_examples.tfrecord.gz')
+  DATASET_CLASS = salient_span_wikipedia_dataset_builder.Builder
+
+  @classmethod
+  def setUpClass(cls):
+    super().setUpClass()
+    salient_span_wikipedia_dataset_builder._INPUT_FILE_PATTERN = str(
+        cls.dummy_data / 'test_examples.tfrecord.gz')
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['sentences']
   SPLITS = {'train': 4}
