@@ -15,13 +15,13 @@
 
 """schema_guided_dialogue dataset."""
 
+from tensorflow_datasets.datasets.schema_guided_dialogue import schema_guided_dialogue_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.schema_guided_dialogue import schema_guided_dialogue
 
 
 class SchemaGuidedDialogueTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for schema_guided_dialogue dataset."""
-  DATASET_CLASS = schema_guided_dialogue.SchemaGuidedDialogue
+  DATASET_CLASS = schema_guided_dialogue_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'dev': 2,  # Number of fake train example
