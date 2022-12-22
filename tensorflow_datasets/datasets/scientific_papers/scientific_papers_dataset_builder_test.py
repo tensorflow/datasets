@@ -16,11 +16,11 @@
 """Scientific Papers Dataset Test."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import scientific_papers
+from tensorflow_datasets.datasets.scientific_papers import scientific_papers_dataset_builder
 
 
 class ScientificPapersTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = scientific_papers.ScientificPapers
+  DATASET_CLASS = scientific_papers_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "validation": 1,  # Number of fake validation example
