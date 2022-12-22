@@ -15,13 +15,13 @@
 
 """scitail dataset."""
 
+from tensorflow_datasets.datasets.sci_tail import sci_tail_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.scitail import scitail
 
 
 class SciTailTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for scitail dataset."""
-  DATASET_CLASS = scitail.SciTail
+  DATASET_CLASS = sci_tail_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake dev example
