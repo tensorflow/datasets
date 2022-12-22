@@ -16,11 +16,11 @@
 """Tests for SCAN dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import scan
+from tensorflow_datasets.datasets.scan import scan_dataset_builder
 
 
 class ScanTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = scan.Scan
+  DATASET_CLASS = scan_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["simple"]
   SPLITS = {
       "train": 3,  # Number of fake train example
