@@ -16,11 +16,11 @@
 """Tests for SAVEE dataset builder."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio import savee
+from tensorflow_datasets.datasets.savee import savee_dataset_builder
 
 
 class SaveeTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = savee.Savee
+  DATASET_CLASS = savee_dataset_builder.Builder
   SPLITS = {
       "train": 8,
       "validation": 4,
