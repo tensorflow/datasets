@@ -27,6 +27,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 TfdsDType = type_utils.TfdsDType
 
 
+@py_utils.memoize()
 def cast_to_numpy(dtype: type_utils.TfdsDType) -> np.dtype:
   """Casts any np.dtype or tf.dtypes.DType to np.dtype.
 
