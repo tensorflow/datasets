@@ -32,6 +32,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `3d`
 
 *   [`aflw2k3d`](aflw2k3d.md)
+*   [`smallnorb`](smallnorb.md)
 
 ### `Abstractive text summarization`
 
@@ -205,6 +206,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
+*   [`siscore`](siscore.md)
+*   [`smallnorb`](smallnorb.md)
 *   [`symmetric_solids`](symmetric_solids.md)
 *   [`the300w_lp`](the300w_lp.md)
 
@@ -229,6 +232,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`places365_small`](places365_small.md)
 *   [`plant_village`](plant_village.md)
 *   [`resisc45`](resisc45.md)
+*   [`siscore`](siscore.md)
+*   [`smallnorb`](smallnorb.md)
 
 ### `Image clustering`
 
@@ -303,8 +308,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`mnist`](mnist.md)
 *   [`mnist_corrupted`](mnist_corrupted.md)
 *   [`omniglot`](omniglot.md)
-*   [`siscore`](siscore.md)
-*   [`smallnorb`](smallnorb.md)
 *   [`so2sat`](so2sat.md)
 *   [`stanford_dogs`](stanford_dogs.md)
 *   [`stanford_online_products`](stanford_online_products.md)
@@ -730,6 +733,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`scientific_papers`](scientific_papers.md)
 *   [`scrolls`](scrolls.md)
 *   [`sentiment140`](sentiment140.md)
+*   [`smallnorb`](smallnorb.md)
 *   [`snli`](snli.md)
 *   [`squad_question_generation`](squad_question_generation.md)
 *   [`star_cfq`](star_cfq.md)

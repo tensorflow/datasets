@@ -10,6 +10,8 @@ toc:
 - section:
   - path: /datasets/catalog/aflw2k3d
     title: aflw2k3d
+  - path: /datasets/catalog/smallnorb
+    title: smallnorb
   title: 3d
 - section:
   - path: /datasets/catalog/aeslc
@@ -292,6 +294,10 @@ toc:
     title: scene_parse150
   - path: /datasets/catalog/shapes3d
     title: shapes3d
+  - path: /datasets/catalog/siscore
+    title: siscore
+  - path: /datasets/catalog/smallnorb
+    title: smallnorb
   - path: /datasets/catalog/symmetric_solids
     title: symmetric_solids
   - path: /datasets/catalog/the300w_lp
@@ -336,6 +342,10 @@ toc:
     title: plant_village
   - path: /datasets/catalog/resisc45
     title: resisc45 (manual)
+  - path: /datasets/catalog/siscore
+    title: siscore
+  - path: /datasets/catalog/smallnorb
+    title: smallnorb
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -460,10 +470,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/siscore
-    title: siscore
-  - path: /datasets/catalog/smallnorb
-    title: smallnorb
   - path: /datasets/catalog/so2sat
     title: so2sat
   - path: /datasets/catalog/stanford_dogs
@@ -1178,6 +1184,8 @@ toc:
     title: scrolls
   - path: /datasets/catalog/sentiment140
     title: sentiment140
+  - path: /datasets/catalog/smallnorb
+    title: smallnorb
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/squad_question_generation
