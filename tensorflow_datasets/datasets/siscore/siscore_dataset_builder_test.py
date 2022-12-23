@@ -15,7 +15,7 @@
 
 """Test for Siscore dataset."""
 
-from tensorflow_datasets.image_classification.siscore import siscore
+from tensorflow_datasets.datasets.siscore import siscore_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
@@ -23,7 +23,7 @@ class SiscoreTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for siscore dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = ['rotation', 'size', 'location']
 
-  DATASET_CLASS = siscore.Siscore
+  DATASET_CLASS = siscore_dataset_builder.Builder
   SPLITS = {
       'test': 2,
   }
