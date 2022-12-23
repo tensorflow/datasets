@@ -190,3 +190,33 @@ x = f(y)  # Clear inputs/outputs
 
 x = self.f(y)  # Does f depend on additional hidden variables ? Is it stateful ?
 ```
+
+## Lazy imports in Python
+
+We lazily import big modules like TensorFlow. Lazy imports defer the actual
+import of the module to the first usage of the module. So users who don't need
+this big module will never import it.
+
+```python
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+# After this statement, TensorFlow is not imported yet
+
+...
+
+features = tfds.features.Image(dtype=tf.uint8)
+# After using it (`tf.uint8`), TensorFlow is now imported
+```
+
+Under the hood, the
+[`LazyModule` class](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/utils/lazy_imports_utils.py)
+acts as a factory, that will only actually import the module when an attribute
+is accessed (`__getattr__`).
+
+You can also use it conveniently with a context manager:
+
+```python
+from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
+
+with lazy_imports(error_callback=..., success_callback=...):
+  import some_big_module
+```
