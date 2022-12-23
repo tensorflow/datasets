@@ -15,12 +15,12 @@
 
 """Smallnorb dataset test."""
 
-from tensorflow_datasets.image_classification import smallnorb
+from tensorflow_datasets.datasets.smallnorb import smallnorb_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class SmallnorbTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = smallnorb.Smallnorb
+  DATASET_CLASS = smallnorb_dataset_builder.Builder
   SPLITS = {"train": 5, "test": 5}
   DL_EXTRACT_RESULT = {
       "training_dat": "smallnorb-5x46789x9x18x6x2x96x96-training-dat.mat",

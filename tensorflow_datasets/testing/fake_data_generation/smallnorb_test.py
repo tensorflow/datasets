@@ -18,7 +18,7 @@ import os
 from absl.testing import absltest
 from absl.testing import parameterized
 import numpy as np
-from tensorflow_datasets.image_classification import smallnorb as smallnorb_tfds
+from tensorflow_datasets.datasets.smallnorb import smallnorb_dataset_builder as smallnorb_tfds
 from tensorflow_datasets.testing import test_utils
 from tensorflow_datasets.testing.fake_data_generation import smallnorb as smallnorb_builder
 

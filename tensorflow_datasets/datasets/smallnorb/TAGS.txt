@@ -1,0 +1,4 @@
+content.data-type.3d
+content.data-type.image
+content.data-type.text
+ml.task.image-classification
