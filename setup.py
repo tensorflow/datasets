@@ -233,6 +233,7 @@ setup(
                 'community-datasets.toml',
                 'dataset_collections/*/*.md',
                 'dataset_collections/*/*.bib',
+                'core/valid_tags.txt',
             ],
     },
     exclude_package_data={
