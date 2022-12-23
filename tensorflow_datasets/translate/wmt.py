@@ -24,7 +24,6 @@ import re
 import xml.etree.cElementTree as ElementTree
 
 from absl import logging
-from etils import epath
 import six
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -814,7 +813,7 @@ def _parse_parallel_sentences(f1, f2):
       lang = "zh" if lang in ("ch", "cn") else lang
     else:
       lang = split_path[-1]
-    with epath.Path(path).open() as f:
+    with tf.io.gfile.GFile(path) as f:
       return f.read().split("\n"), lang
 
   def _parse_sgm(path):
@@ -824,7 +823,7 @@ def _parse_parallel_sentences(f1, f2):
     # Note: We can't use the XML parser since some of the files are badly
     # formatted.
     seg_re = re.compile(r"<seg id=\"\d+\">(.*)</seg>")
-    with epath.Path(path).open() as f:
+    with tf.io.gfile.GFile(path) as f:
       for line in f:
         seg_match = re.match(seg_re, line)
         if seg_match:
@@ -858,10 +857,10 @@ def _parse_parallel_sentences(f1, f2):
 
 
 def _parse_frde_bitext(fr_path, de_path):
-  with epath.Path(fr_path).open() as f:
-    fr_sentences = f.read().split("\n")
-  with epath.Path(de_path).open() as f:
-    de_sentences = f.read().split("\n")
+  with tf.io.gfile.GFile(fr_path) as f:
+    fr_sentences = f.read().splitlines()
+  with tf.io.gfile.GFile(de_path) as f:
+    de_sentences = f.read().splitlines()
   assert len(fr_sentences) == len(de_sentences), (
       "Sizes do not match: %d vs %d for %s vs %s." %
       (len(fr_sentences), len(de_sentences), fr_path, de_path))
@@ -906,7 +905,7 @@ def _parse_tsv(path, language_pair=None):
     l1, l2 = lang_match.groups()
   else:
     l1, l2 = language_pair
-  with epath.Path(path).open() as f:
+  with tf.io.gfile.GFile(path) as f:
     for j, line in enumerate(f):
       cols = line.split("\t")
       if len(cols) != 2:
@@ -922,7 +921,7 @@ def _parse_wikiheadlines(path):
   lang_match = re.match(r".*\.([a-z][a-z])-([a-z][a-z])$", path)
   assert lang_match is not None, "Invalid Wikiheadlines filename: %s" % path
   l1, l2 = lang_match.groups()
-  with epath.Path(path).open() as f:
+  with tf.io.gfile.GFile(path) as f:
     for line_id, line in enumerate(f):
       s1, s2 = line.split("|||")
       yield line_id, {l1: s1.strip(), l2: s2.strip()}
@@ -933,7 +932,7 @@ def _parse_czeng(*paths, **kwargs):
   filter_path = kwargs.get("filter_path", None)
   if filter_path:
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
-    with epath.Path(filter_path).open() as f:
+    with tf.io.gfile.GFile(filter_path) as f:
       bad_blocks = set(
           re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split())  # pytype: disable=attribute-error
     logging.info("Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
@@ -960,7 +959,7 @@ def _parse_czeng(*paths, **kwargs):
 
 
 def _parse_hindencorp(path):
-  with epath.Path(path).open() as f:
+  with tf.io.gfile.GFile(path) as f:
     for line_id, line in enumerate(f):
       split_line = line.split("\t")
       if len(split_line) != 5:
