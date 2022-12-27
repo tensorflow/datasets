@@ -13,6 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""cifar10_n dataset."""
+"""cifar10_h dataset."""
 
-from tensorflow_datasets.image_classification.cifar10_n.cifar10_n import Cifar10N
+from tensorflow_datasets.image_classification.cifar10_h.cifar10_h import Cifar10H
