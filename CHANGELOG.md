@@ -12,6 +12,19 @@ and this project adheres to
 
 ### Changed
 
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [4.8.1] - 2023-01-02
+
+### Changed
+
+- Added file `valid_tags.txt` to not break builds.
 - TFDS no longer relies on TensorFlow DTypes. We chose NumPy DTypes to keep the
 typing expressiveness, while dropping the heavy dependency on TensorFlow. We
 migrated all our internal datasets. Please, migrate accordingly:
@@ -20,13 +33,6 @@ migrated all our internal datasets. Please, migrate accordingly:
     - `tf.int64`, `tf.int32`, etc: `np.int64`, `np.int32`, etc
     - `tf.float64`, `tf.float32`, etc: `np.float64`, `np.float32`, etc
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [4.8.0] - 2022-12-21
 
