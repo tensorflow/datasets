@@ -29,7 +29,6 @@ from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, U
 
 from absl import logging
 from etils import epath
-import six
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_metadata
@@ -316,7 +315,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   def versions(self) -> List[utils.Version]:
     """Versions (canonical + availables), in preference order."""
     return [
-        utils.Version(v) if isinstance(v, six.string_types) else v
+        utils.Version(v) if isinstance(v, str) else v
         for v in [self.canonical_version] + self.supported_versions
     ]
 
@@ -1075,7 +1074,7 @@ class DatasetBuilder(registered.RegisteredDataset):
                      self.name, builder_config.name)
     if not builder_config:
       return None
-    if isinstance(builder_config, six.string_types):
+    if isinstance(builder_config, str):
       name = builder_config
       builder_config = self.builder_configs.get(name)
       if builder_config is None:

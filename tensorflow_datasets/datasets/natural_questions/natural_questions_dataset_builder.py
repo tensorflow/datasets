@@ -14,23 +14,16 @@
 # limitations under the License.
 
 """Natural Questions: A Benchmark for Question Answering Research."""
+import html
 import json
 import os
 import re
 from typing import Optional
 
 import numpy as np
-import six
 import tensorflow_datasets.public_api as tfds
 
 _BEAM_NAMESPACE = 'TFDS_LONGT5'
-
-if six.PY2:
-  import HTMLParser as html_parser  # pylint:disable=g-import-not-at-top
-  html_unescape = html_parser.HTMLParser().unescape
-else:
-  import html  # pylint:disable=g-import-not-at-top
-  html_unescape = html.unescape
 
 _URL = 'https://ai.google.com/research/NaturalQuestions/dataset'
 
@@ -188,7 +181,7 @@ class Builder(tfds.core.BeamBasedBuilder):
       ans_bytes = ans_bytes.replace(b'\xc2\xa0', b' ')
       text = ans_bytes.decode('utf-8')
       # Remove HTML markup.
-      text = re.sub('<([^>]*)>', '', html_unescape(text))
+      text = re.sub('<([^>]*)>', '', html.unescape(text))
       # Replace \xa0 characters with spaces.
       return {
           'start_token': short_ans['start_token'],

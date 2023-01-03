@@ -15,8 +15,8 @@
 
 """Dataset class for Cars196 Dataset."""
 import os
+import urllib
 
-import six.moves.urllib as urllib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 

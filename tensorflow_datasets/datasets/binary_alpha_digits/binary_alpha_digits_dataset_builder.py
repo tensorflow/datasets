@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """TensorFlow dataset for Binary Alphadigits."""
-import six.moves.urllib as urllib
+import urllib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 

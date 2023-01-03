@@ -20,7 +20,6 @@ import itertools
 import os
 from unittest import mock
 
-import six
 import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
@@ -91,7 +90,9 @@ class ReaderTest(testing.TestCase):
         bucket_lengths=[num_examples],
         filename_template=filename_template,
         shard_config=shard_utils.ShardConfig(num_shards=shards_number))
-    serialized_records = [(key, six.b(rec)) for key, rec in enumerate(records)]
+    serialized_records = [
+        (key, bytes(rec, encoding='utf-8')) for key, rec in enumerate(records)
+    ]
     for shard_spec in shard_specs:
       _write_tfrecord_from_shard_spec(shard_spec,
                                       lambda unused_i: iter(serialized_records))
@@ -123,7 +124,8 @@ class ReaderTest(testing.TestCase):
         split_infos=[train_info],
     )
     read_data = list(tfds.as_numpy(ds))
-    self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijkl'])
+    self.assertEqual(read_data,
+                     [bytes(l, encoding='utf-8') for l in 'abcdefghijkl'])
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
@@ -136,7 +138,8 @@ class ReaderTest(testing.TestCase):
         split_infos=[train_info],
     )
     read_data = list(tfds.as_numpy(ds))
-    self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijklab'])
+    self.assertEqual(read_data,
+                     [bytes(l, encoding='utf-8') for l in 'abcdefghijklab'])
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
@@ -155,7 +158,8 @@ class ReaderTest(testing.TestCase):
         split_infos=split_info,
     )
     read_data = list(tfds.as_numpy(ds))
-    self.assertEqual(read_data, [six.b(l) for l in 'bcdefghijkmno'])
+    self.assertEqual(read_data,
+                     [bytes(l, encoding='utf-8') for l in 'bcdefghijkmno'])
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
@@ -246,7 +250,7 @@ class ReaderTest(testing.TestCase):
         shuffle_files=False,
     )
     read_data = list(tfds.as_numpy(ds))
-    self.assertEqual(read_data, [six.b(l) for l in 'defk'])
+    self.assertEqual(read_data, [bytes(l, encoding='utf-8') for l in 'defk'])
 
   def test_input_context(self):
     split_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
@@ -269,8 +273,6 @@ class ReaderTest(testing.TestCase):
               )))
 
     def _b(bytes_str):
-      if six.PY2:
-        return list(bytes_str)
       # Convert to List[bytes] (rather than List[int])
       return [bytes([b]) for b in bytes_str]
 

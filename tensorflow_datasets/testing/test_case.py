@@ -21,7 +21,6 @@ import tempfile
 from unittest import mock
 
 from absl import logging
-import six
 from tensorflow_datasets import setup_teardown
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -85,7 +84,7 @@ class TestCase(tf.test.TestCase):
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
 
   def assertRaisesWithPredicateMatch(self, err_type, predicate):
-    if isinstance(predicate, six.string_types):
+    if isinstance(predicate, str):
       predicate_fct = lambda err: predicate in str(err)
     else:
       predicate_fct = predicate

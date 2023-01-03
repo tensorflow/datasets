@@ -17,7 +17,6 @@
 """Tests for WMT translate dataset module."""
 
 import os
-import six
 from tensorflow_datasets import testing
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.translate import wmt
@@ -86,10 +85,7 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
             os.path.join(self.dummy_data, "second.en.txt"))
     ]
     self.assertEqual(results[1]["cs"], "zmizel")
-    if six.PY3:
-      self.assertEqual(results[0]["cs"], "běžím")
-    else:
-      self.assertTrue(results[0]["cs"] == u"běžím")  # pylint: disable=g-generic-assert
+    self.assertEqual(results[0]["cs"], "běžím")
 
 
 if __name__ == "__main__":

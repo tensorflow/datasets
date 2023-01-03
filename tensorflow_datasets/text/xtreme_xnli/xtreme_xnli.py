@@ -18,7 +18,6 @@
 import collections
 import csv
 
-import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -115,7 +114,7 @@ class XtremeXnli(tfds.core.GeneratorBasedBuilder):
           }
           rows_per_pair_id[key].append(row)
 
-    for rows in six.itervalues(rows_per_pair_id):
+    for rows in rows_per_pair_id.values():
       premise = {row['language']: row['sentence1'] for row in rows}
       hypothesis = {row['language']: row['sentence2'] for row in rows}
       yield rows[0]['pairID'], {

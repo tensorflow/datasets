@@ -42,7 +42,6 @@ from typing import Any, Dict, Optional, Tuple, Union
 
 from absl import logging
 from etils import epath
-import six
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
@@ -70,8 +69,7 @@ def license_path(dataset_info_dir: epath.PathLike) -> epath.Path:
   return epath.Path(dataset_info_dir) / constants.LICENSE_FILENAME
 
 
-@six.add_metaclass(abc.ABCMeta)
-class Metadata(dict):
+class Metadata(dict, metaclass=abc.ABCMeta):
   """Abstract base class for DatasetInfo metadata container.
 
   `builder.info.metadata` allows the dataset to expose additional general

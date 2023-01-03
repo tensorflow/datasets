@@ -20,7 +20,6 @@ import csv
 import os
 
 from etils import epath
-import six
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -101,7 +100,7 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
       for row in reader:
         rows_per_pair_id[row['pairID']].append(row)
 
-    for rows in six.itervalues(rows_per_pair_id):
+    for rows in rows_per_pair_id.values():
       premise = {row['language']: row['sentence1'] for row in rows}
       hypothesis = {row['language']: row['sentence2'] for row in rows}
       yield rows[0]['pairID'], {

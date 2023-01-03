@@ -31,7 +31,6 @@ from absl import logging
 from etils import enp
 from etils import epath
 import numpy as np
-import six
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
@@ -190,8 +189,7 @@ class CatalogFeatureDocumentation:
     return dataclasses.replace(self, **kwargs)
 
 
-@six.add_metaclass(abc.ABCMeta)
-class FeatureConnector(object):
+class FeatureConnector(object, metaclass=abc.ABCMeta):
   """Abstract base class for feature types.
 
   This class provides an interface between the way the information is stored

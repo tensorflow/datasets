@@ -21,10 +21,10 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
+import urllib
 
 from etils import epath
 import numpy as np
-import six.moves.urllib as urllib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
