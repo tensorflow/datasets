@@ -14,6 +14,9 @@ and this project adheres to
 
 ### Deprecated
 
+-   Python 3.7 support: this is the last version of TFDS supporting Python 3.7.
+    Future versions will use Python 3.8.
+
 ### Removed
 
 ### Fixed
