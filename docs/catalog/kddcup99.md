@@ -24,7 +24,7 @@ data to be audited, which includes a wide variety of intrusions simulated in a
 military network environment.
 
 *   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/kdd-cup-1999">
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/kdd-cup-1999-data-data-set">
     Explore on Papers With Code
     <span class="material-icons icon-after" aria-hidden="true"> north_east
     </span> </a>

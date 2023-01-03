@@ -25,7 +25,7 @@ categories, contributed by players of the game Quick, Draw!. The bitmap dataset
 contains these drawings converted from vector format into 28x28 grayscale images
 
 *   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/quick,-draw!-dataset">
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/quick-draw-dataset">
     Explore on Papers With Code
     <span class="material-icons icon-after" aria-hidden="true"> north_east
     </span> </a>

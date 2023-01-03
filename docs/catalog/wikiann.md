@@ -21,7 +21,7 @@ corresponds to the balanced train, dev, and test splits of Rahimi et al. (2019),
 which supports 176 of the 282 languages from the original WikiANN corpus.
 
 *   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikiann">
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikiann-1">
     Explore on Papers With Code
     <span class="material-icons icon-after" aria-hidden="true"> north_east
     </span> </a>
