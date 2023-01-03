@@ -22,7 +22,7 @@ One class is linearly separable from the other 2; the latter are NOT linearly
 separable from each other.
 
 *   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/iris">
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/iris-1">
     Explore on Papers With Code
     <span class="material-icons icon-after" aria-hidden="true"> north_east
     </span> </a>

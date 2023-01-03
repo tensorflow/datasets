@@ -20,7 +20,7 @@ has 60 examples. The tracks are all 22050Hz Mono 16-bit audio files in .wav
 format.
 
 *   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gtzan_music_speech">
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gtzan-music-speech">
     Explore on Papers With Code
     <span class="material-icons icon-after" aria-hidden="true"> north_east
     </span> </a>
