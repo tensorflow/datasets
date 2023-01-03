@@ -14,9 +14,9 @@
 # limitations under the License.
 
 """Street View House Numbers (SVHN) Dataset, cropped version."""
+import urllib
 
 import numpy as np
-from six.moves import urllib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 

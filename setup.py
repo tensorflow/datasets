@@ -69,7 +69,6 @@ REQUIRED_PKGS = [
     'protobuf>=3.12.2',
     'psutil',
     'requests>=2.19.0',
-    'six',
     'tensorflow-metadata',
     'termcolor',
     'toml',

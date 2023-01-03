@@ -22,7 +22,6 @@ from __future__ import unicode_literals
 import collections
 
 from absl import logging
-import six
 from tensorflow_datasets.core.deprecated.text import text_encoder
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -105,7 +104,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
 
     for subword_id in subword_ids:
       subword = self._id_to_subword(subword_id)
-      if isinstance(subword, six.binary_type):
+      if isinstance(subword, bytes):
         # Byte-encoded
         prev_bytes.append(subword)
       else:
@@ -340,7 +339,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     for _ in range(num_iterations):
       encoder = cls(vocab_list=subwords)
       subword_counts = collections.defaultdict(int)
-      for token, count in six.iteritems(token_counts):
+      for token, count in token_counts.items():
         start_idx = 0
         for subword in encoder._token_to_subwords(token):  # pylint: disable=protected-access
           last_idx = min(len(token), start_idx + max_subword_length)
@@ -351,7 +350,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
 
       # Group subword candidates by length and filter bad candidates
       len_to_subwords = [set() for _ in range(max_subword_length + 1)]
-      for subword, count in six.iteritems(subword_counts):
+      for subword, count in subword_counts.items():
         if count < min_token_count:
           continue
         # Skip single bytes because they're always in the vocab

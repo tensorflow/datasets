@@ -20,7 +20,6 @@ import re
 from typing import List, Union
 
 from etils import epath
-import six
 
 _VERSION_TMPL = (r"^(?P<major>{v})" r"\.(?P<minor>{v})" r"\.(?P<patch>{v})$")
 _VERSION_WILDCARD_REG = re.compile(_VERSION_TMPL.format(v=r"\d+|\*"))
@@ -102,7 +101,7 @@ class Version(object):
     return self.major, self.minor, self.patch
 
   def _validate_operand(self, other):
-    if isinstance(other, six.string_types):
+    if isinstance(other, str):
       return Version(other)
     elif isinstance(other, Version):
       return other

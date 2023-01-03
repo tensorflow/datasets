@@ -16,9 +16,9 @@
 """Dataset class for Placesfull (256x256) dataset."""
 import csv
 import os
+import urllib
 
 from etils import epath
-from six.moves import urllib
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.csail.mit.edu/places/places365/"

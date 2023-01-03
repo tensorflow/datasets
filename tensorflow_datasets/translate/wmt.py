@@ -24,7 +24,6 @@ import re
 import xml.etree.cElementTree as ElementTree
 
 from absl import logging
-import six
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -83,8 +82,8 @@ class SubDataset(object):
       manual_dl_files: `<list>(string)` (optional), the list of files that must
         be manually downloaded to the data directory.
     """
-    self._paths = (path,) if isinstance(path, six.string_types) else path
-    self._urls = (url,) if isinstance(url, six.string_types) else url
+    self._paths = (path,) if isinstance(path, str) else path
+    self._urls = (url,) if isinstance(url, str) else url
     self._manual_dl_files = manual_dl_files if manual_dl_files else []
     self.name = name
     self.target = target
@@ -883,11 +882,7 @@ def _parse_tmx(path):
     return segs[0].text
 
   with tf.io.gfile.GFile(path, "rb") as f:
-    if six.PY3:
-      # Workaround due to: https://github.com/tensorflow/tensorflow/issues/33563
-      utf_f = codecs.getreader("utf-8")(f)
-    else:
-      utf_f = f
+    utf_f = codecs.getreader("utf-8")(f)
     for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
       if elem.tag == "tu":
         yield line_id, {

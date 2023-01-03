@@ -19,7 +19,6 @@ from __future__ import annotations
 
 from typing import Union
 
-import six
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import sequence_feature
@@ -225,7 +224,7 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     # multiple translations for a single language.
     translation_tuples = []
     for lang, text in translation_dict.items():
-      if isinstance(text, six.string_types):
+      if isinstance(text, str):
         translation_tuples.append((lang, text))
       else:
         translation_tuples.extend([(lang, el) for el in text])

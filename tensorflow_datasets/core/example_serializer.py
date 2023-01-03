@@ -23,7 +23,6 @@ import dataclasses
 from typing import Any, Mapping
 
 import numpy as np
-import six
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import dtype_utils
@@ -139,7 +138,7 @@ def _dict_to_tf_example(
 
 def _is_string(item) -> bool:
   """Check if the object contains string or bytes."""
-  if isinstance(item, (six.binary_type, six.string_types)):
+  if isinstance(item, (bytes, str)):
     return True
   elif (isinstance(item, (tuple, list)) and all(_is_string(x) for x in item)):
     return True

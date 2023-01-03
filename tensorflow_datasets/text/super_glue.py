@@ -22,7 +22,6 @@ import os
 
 from etils import epath
 import numpy as np
-import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -605,15 +604,15 @@ def _fix_wst(ex):
 
 def _cast_label(label):
   """Converts the label into the appropriate string version."""
-  if isinstance(label, six.string_types):
+  if isinstance(label, str):
     return label
   elif isinstance(label, bool):
     return "True" if label else "False"
-  elif isinstance(label, six.integer_types):
+  elif isinstance(label, int):
     assert label in (0, 1)
     return str(label)
   else:
-    raise ValueError("Invalid label format.")
+    raise ValueError(f"Invalid label format: {type(label)}")
 
 
 def _get_record_entities(passage):

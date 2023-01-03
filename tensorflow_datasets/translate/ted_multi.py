@@ -19,7 +19,6 @@ import csv
 import os
 
 from etils import epath
-import six
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -104,7 +103,7 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
         yield idx, {
             'translations': {
                 lang: text
-                for lang, text in six.iteritems(row)
+                for lang, text in row.items()
                 if lang != 'talk_name' and _is_translation_complete(text)
             },
             'talk_name': row['talk_name']

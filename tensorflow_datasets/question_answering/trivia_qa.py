@@ -23,7 +23,6 @@ import os
 from absl import logging
 from etils import epath
 import numpy as np
-import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -281,7 +280,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
         return new_items
 
       def _strip_if_str(v):
-        return v.strip() if isinstance(v, six.string_types) else v
+        return v.strip() if isinstance(v, str) else v
 
       def _transpose_and_strip_dicts(dicts, field_names):
         return {

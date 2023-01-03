@@ -22,7 +22,6 @@ import hashlib
 import json
 import re
 
-import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -36,7 +35,7 @@ ALL_REGEX = _re_compile(r"(\W+)")
 
 
 
-class TextEncoderConfig(object):
+class TextEncoderConfig():
   """Configuration for `tfds.features.Text`."""
 
   def __init__(self,
@@ -60,8 +59,7 @@ class TextEncoderConfig(object):
     self.name = name
 
 
-@six.add_metaclass(abc.ABCMeta)
-class TextEncoder(object):
+class TextEncoder(metaclass=abc.ABCMeta):
   """Abstract base class for converting between text and integers.
 
   **A note on padding**:
@@ -178,7 +176,7 @@ class ByteTextEncoder(TextEncoder):
     i = 0
     while i < len(tmp_decoded):
       el = tmp_decoded[i]
-      if isinstance(el, six.string_types):
+      if isinstance(el, str):
         strs.append(el)
         i += 1
       else:

@@ -16,7 +16,6 @@
 """Shapes3D dataset."""
 
 import numpy as np
-from six import moves
 import tensorflow_datasets.public_api as tfds
 
 _URL = ("https://storage.googleapis.com/3d-shapes/3dshapes.h5")
@@ -95,8 +94,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     for i in range(values_array.shape[1]):
       labels_array[:, i] = _discretize(values_array[:, i])  # pylint: disable=unsupported-assignment-operation
 
-    for i, (image, labels, values) in enumerate(
-        moves.zip(image_array, labels_array, values_array)):
+    for i, (image, labels,
+            values) in enumerate(zip(image_array, labels_array, values_array)):
       record = {
           "image": image,
           "label_floor_hue": labels[0],

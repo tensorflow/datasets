@@ -16,7 +16,6 @@
 """Smallnorb dataset."""
 
 import numpy as np
-from six import moves
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -115,7 +114,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     dat_arr, cat_arr, info_arr = _load_chunk(dat_path, cat_path, info_path)
 
     for i, (image, category,
-            info_vec) in enumerate(moves.zip(dat_arr, cat_arr, info_arr)):
+            info_vec) in enumerate(zip(dat_arr, cat_arr, info_arr)):
       record = {
           "image": image[0],
           "image2": image[1],

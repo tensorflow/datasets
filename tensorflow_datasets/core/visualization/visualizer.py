@@ -20,7 +20,6 @@ from __future__ import annotations
 import abc
 from typing import Any
 
-import six
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -38,8 +37,7 @@ def extract_keys(feature_dict, feature_cls):
   return [k for k, f in feature_dict.items() if isinstance(f, feature_cls)]
 
 
-@six.add_metaclass(abc.ABCMeta)
-class Visualizer(object):
+class Visualizer(object, metaclass=abc.ABCMeta):
   """Visualizer."""
 
   @abc.abstractmethod

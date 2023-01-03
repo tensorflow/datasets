@@ -16,7 +16,6 @@
 """dSprites dataset."""
 
 import numpy as np
-from six import moves
 import tensorflow_datasets.public_api as tfds
 
 _URL = ("https://github.com/deepmind/dsprites-dataset/blob/master/"
@@ -81,8 +80,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       class_array = np.array(h5dataset["latents"]["classes"])
       values_array = np.array(h5dataset["latents"]["values"])
 
-    for i, (image, classes, values) in enumerate(
-        moves.zip(image_array, class_array, values_array)):
+    for i, (image, classes,
+            values) in enumerate(zip(image_array, class_array, values_array)):
       record = dict(
           image=np.expand_dims(image, -1),
           label_shape=classes[1],
