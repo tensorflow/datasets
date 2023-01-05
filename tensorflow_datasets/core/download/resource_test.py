@@ -57,7 +57,9 @@ https://github.com/brendenlake/omniglot/raw/master/python/images_background_smal
 https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json
 https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/valid-00000-of-00001.tfrecords
 https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00005-of-00010.tfrecords
-https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz\
+https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz
+https://somehost.example.com/path/to/file.tar.gz?query-parameters=value&parameter-with-a-dot=size-12.5&and-more-parameters=with-their-values&is-this-the-extension=no
+https://somehost.example.com/path/to/file.with-no-extension-but-a-dot-somewhere-and-the-whole-thing-is-longer-than-the-maximum-allowed-characters\
 """.split('\n')
   expected = """\
 data.statmt.org_wmt17_translation-task_devDjZ11PU9sKPPvF2sZTAzTsV7Pi3IYHaPDMOoeEuby2E.tgz
@@ -73,7 +75,9 @@ bren_omni_raw_mast_pyth_imag_back_smalUSA8LkdUW89lgXr31txDoVFbI9BtQhxvtZWYTIdAJA
 rajpurkar_SQuAD-explorer_train-v1.1uLsZc14btZFRCgHMAy9Mn5abwO6wga4bMozTBvOyQAg.json
 scv_Brawl_64x64_png_valid-0_1Ez3yPwN0QDCxBd0xHeLb2DfUERJjkqFd2dyL5Z7-ULg.tfrecords
 scv_CollectMi_128x128_png_train-5_10kiunW_2RTDhXuPrxCVkUZKCoWpADYBUWE8DpraC8zAA.tfrecords
-cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.tar.gz\
+cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.tar.gz
+some.exam.com_path_to_file-para_valu_pa6KFrwWxom3oLGuRv2mHErUlx3XXd-jwJWlgvHMXh2Yc.tar.gz
+some.exam.com_path_to_file.with-no-exte-but-a-gSqjzNXcNOyu4vaF84g8NRJtgyCH2Lt6bn0PCyvvlMk\
 """.split('\n')
 
   def test_(self):

@@ -138,15 +138,21 @@ def _sanitize_url(url, max_length):
   for suffix in _NETLOC_COMMON_SUFFIXES:
     if netloc.endswith(suffix):
       netloc = netloc[:-len(suffix)]
-  url = '%s%s%s%s' % (netloc, url.path, url.params, url.query)
+  path = url.path
   # Get the extension:
   for ext in _KNOWN_EXTENSIONS:
-    if url.endswith(ext):
+    if path.endswith(ext):
       extension = ext
-      url = url[:-len(extension)]
+      path = path[:-len(extension)]
       break
   else:
-    url, extension = os.path.splitext(url)
+    path, extension = os.path.splitext(path)
+    if len(extension) >= max_length:
+      # If the extension is this long, the remaining url would be empty and the extension
+      # is most likely not actually an extension but the final part of a filename without
+      # an extension but with dot separators, so we clear the extension
+      path, extension = url.path, ""
+  url = '%s%s%s%s' % (netloc, path, url.params, url.query)
   max_length -= len(extension)
   # Replace non authorized chars (including '/') by '_':
   url = re.sub(r'[^a-zA-Z0-9\.\-_]+', '_', url)
