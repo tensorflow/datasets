@@ -24,16 +24,20 @@ import textwrap
 from typing import Any, Dict, List, Mapping, MutableMapping, Optional, Tuple, Union
 
 from etils import epath
+from tensorflow_datasets.core import partition as partition_lib
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
 _NAME_CLASS = r'[a-zA-Z][\w]*'
 _NAME_CLASS_REG = re.compile(r'^' + _NAME_CLASS + r'$')
+_CONFIG_REGEX = r'(?P<config>[\w\+\-\.]+)'
+_PARTITION_REGEX = r'(?P<partition>(,?\w+=[\w\-]+)+)'
 
-# Regex matching 'dataset/config:1.*.*/arg=123'
+# Regex matching 'dataset/config<partition1=x,partition2=y>:1.*.*/arg=123'
 _NAME_REG = re.compile(r'^'
                        r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
-                       r'(/(?P<config>[\w\+\-\.]+))?'
+                       fr'(/{_CONFIG_REGEX})?'
+                       fr'(\<{_PARTITION_REGEX}\>)?'
                        r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
                        r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
                        r'$')
@@ -60,7 +64,7 @@ DEFAULT_FILENAME_TEMPLATE = '{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}'
 _first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
 _all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
-Value = Union[str, int, float, bool]
+Value = Union[str, int, float, bool, partition_lib.PartitionInfo]
 
 
 @dataclasses.dataclass(eq=True, order=True, frozen=True)
@@ -145,11 +149,12 @@ def _dataset_name_and_kwargs_from_name_str(
   err_msg = textwrap.dedent(f"""\
       Parsing builder name string {name_str} failed.
       The builder name string must be of the following format:
-        dataset_name[/config_name][:version][/kwargs]
+        dataset_name[/config_name[<partition=value>]][:version][/kwargs]
 
         Where:
 
           * dataset_name and config_name are string following python variable naming.
+          * partition is of the form '<partition_1=value_1,partition_2=value_2>'
           * version is of the form x.y.z where {{x,y,z}} can be any digit or *.
           * kwargs is a comma list separated of arguments and values to pass to
             builder.
@@ -159,6 +164,8 @@ def _dataset_name_and_kwargs_from_name_str(
           my_dataset:1.2.*
           my_dataset/config1
           my_dataset/config1:1.*.*
+          my_dataset/config1<partition1=a,partition2=en>
+          my_dataset/config1<partition1=a,partition2=en>:1.*.*
           my_dataset/config1/arg1=val1,arg2=val2
           my_dataset/config1:1.2.3/right=True,foo=bar,rate=1.2
       """)
@@ -170,6 +177,10 @@ def _dataset_name_and_kwargs_from_name_str(
   # Normalize the name to accept CamelCase
   name = camelcase_to_snakecase(name)
   kwargs = _kwargs_str_to_kwargs(res.group('kwargs'))
+  partition = res.group('partition')
+  if partition:
+    kwargs['partition'] = partition_lib.PartitionInfo.parse_tfds_partition_info(
+        tfds_name=partition)
   try:
     for attr in ['config', 'version']:
       val = res.group(attr)
@@ -183,6 +194,105 @@ def _dataset_name_and_kwargs_from_name_str(
     py_utils.reraise(e, prefix=err_msg)  # pytype: disable=bad-return-type
 
 
+def parse_config_and_partition(
+    name_str: str,
+    partition_spec: Optional[partition_lib.PartitionSpec],
+) -> Tuple[str, Optional[partition_lib.PartitionInfo]]:
+  """Returns the config and the optional partition from the given string.
+
+  Arguments:
+    name_str: the string encoding the config and optional partition. For
+      example, `my_config` only encodes the config named `my_config`, but
+      `my_config<language=en>` encodes the config `my_config` and a partition
+      called `language` with value `en`.
+    partition_spec: optional specification of the partitioning of a dataset.
+      Used to properly instantiate the returned `PartitionInfo`.
+
+  Returns:
+    the config and optional partition parsed from the given string.
+  """
+  config_and_partition_regex = re.compile(
+      fr'^({_CONFIG_REGEX})?(\<{_PARTITION_REGEX}\>)?$')
+  m = config_and_partition_regex.match(name_str)
+  if not m:
+    raise ValueError(
+        f"Could not extract config and optional partition from '{name_str}'!")
+  config = m.group('config')
+  partition = m.group('partition')
+  if partition:
+    partition = partition_lib.PartitionInfo.parse_tfds_partition_info(
+        tfds_name=partition, spec=partition_spec)
+    return config, partition
+  return config, None
+
+
+def tfds_name_for_partition(
+    partition: Optional[partition_lib.PartitionInfo]) -> str:
+  """Returns the partition formatted to use in tfds.load."""
+  if partition is None:
+    return ''
+  if partition.spec is None:
+    raise ValueError('No PartitionSpec was given, cannot format partition!')
+  partitions = []
+  for partitioning in partition.spec.partitions:
+    partition_name = partitioning.name
+    partitions.append(f'{partition_name}={partition.values[partition_name]}')
+  partition_str = ','.join(partitions)
+  return f'<{partition_str}>'
+
+
+def tfds_name_for(
+    name: str,
+    namespace: Optional[str] = None,
+    config: Optional[str] = None,
+    partition: Optional[partition_lib.PartitionInfo] = None,
+    version: Union[None, str, version_lib.Version] = None,
+) -> str:
+  """Returns the 'TFDS name'.
+
+  Arguments:
+    name: name of the dataset.
+    namespace: optional namespace in which this dataset belongs.
+    config: optional config to be used in the dataset.
+    partition: optional partition of this dataset.
+    version: version of the dataset to be used. If `None`, the latest version
+      will be loaded. An error is raised if the specified version cannot be
+      provided.
+
+  Returns:
+    the TFDS name, e.g. `c4/en.noclean:3.1.0`.
+  """
+  tfds_name = name
+  if namespace:
+    tfds_name = f'{namespace}:{tfds_name}'
+  if config:
+    tfds_name += f'/{config}'
+  if partition:
+    tfds_name += tfds_name_for_partition(partition)
+  if version:
+    tfds_name += f':{version}'
+  return tfds_name
+
+
+def builder_config_name_for(
+    config: Optional[str],
+    partition: Optional[partition_lib.PartitionInfo],
+) -> str:
+  """Returns the config and partition formatted to use in tfds.load."""
+  if config is None and partition is None:
+    raise ValueError('The config and/or the partition need to have a value!')
+  parts = []
+  if config:
+    parts.append(config)
+  if partition is not None:
+    if partition.spec is None:
+      raise ValueError('No PartitionSpec was given, cannot format partition!')
+    for partitioning in partition.spec.partitions:
+      partition_name = partitioning.name
+      parts.append(partition.values[partition_name])
+  return '.'.join(parts)
+
+
 @dataclasses.dataclass(order=True)
 class DatasetReference:
   """Reference to a dataset.
@@ -191,6 +301,7 @@ class DatasetReference:
     dataset_name: name of the dataset.
     namespace: optional namespace in which this dataset belongs.
     config: optional config to be used in the dataset.
+    partition: optional partition of this dataset.
     version: version of the dataset to be used. If `None`, the latest version
       will be loaded. An error is raised if the specified version cannot be
       provided.
@@ -205,6 +316,7 @@ class DatasetReference:
   dataset_name: str
   namespace: Optional[str] = None
   config: Optional[str] = None
+  partition: Optional[partition_lib.PartitionInfo] = None
   version: Union[None, str, version_lib.Version] = None
   data_dir: Union[None, str, os.PathLike] = None  # pylint: disable=g-bare-generic
   split_mapping: Optional[Mapping[str, str]] = None
@@ -224,14 +336,12 @@ class DatasetReference:
     Returns:
       The TFDS name of the `DatasetReference`.
     """
-    dataset_name = self.dataset_name
-    if self.namespace:
-      dataset_name = f'{self.namespace}:{dataset_name}'
-    if self.config:
-      dataset_name += f'/{self.config}'
-    if self.version and include_version:
-      dataset_name += f':{self.version}'
-    return dataset_name
+    return tfds_name_for(
+        name=self.dataset_name,
+        namespace=self.namespace,
+        config=self.config,
+        partition=self.partition,
+        version=self.version if include_version else None)
 
   def get_split(self, split: str) -> str:
     if self.split_mapping:
@@ -282,11 +392,13 @@ class DatasetReference:
     version, config = None, None
     version = builder_kwargs.get('version')
     config = builder_kwargs.get('config')
+    partition = builder_kwargs.get('partition')
     return cls(
         dataset_name=parsed_name.name,
         namespace=parsed_name.namespace,
         version=version,
         config=config,
+        partition=partition,
         split_mapping=split_mapping,
         data_dir=data_dir)
 
@@ -528,8 +640,7 @@ class ShardedFileTemplate:
       shard_index: int,
       num_shards: Optional[int],
   ) -> epath.Path:
-    """Returns the filename (including full path if `data_dir` is set) for the given shard.
-    """
+    """Returns the filename (including full path if `data_dir` is set) for the given shard."""
     return self.data_dir / self.relative_filepath(
         shard_index=shard_index, num_shards=num_shards)
 

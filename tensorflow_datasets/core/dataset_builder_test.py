@@ -36,6 +36,7 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import partition as partition_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import file_utils
@@ -67,7 +68,6 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({"x": tf.int64}),
@@ -98,6 +98,44 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
   def _split_generators(self, _):
     # Error: ALL cannot be used as Split key
     return {"all": self._generate_examples(range(5))}
+
+
+_DUMMY_PARTITION_SPEC = partition_lib.PartitionSpec(partitions=[
+    partition_lib.create_date_partitioning(
+        name="snapshot",
+        start_date="2022-12-01",
+        end_date="2022-12-02",
+        date_format="%Y%m%d"),
+    partition_lib.Partitioning(name="lang", possible_values=["en", "nl"]),
+])
+
+
+class DummyPartitionedDataset(dataset_builder.GeneratorBasedBuilder):
+  VERSION = "1.0.0"
+  PARTITION_SPEC = _DUMMY_PARTITION_SPEC
+  BUILDER_CONFIGS = [
+      dataset_builder.BuilderConfig(
+          name="", config_name="basic", partition=partition_info)
+      for partition_info in _DUMMY_PARTITION_SPEC.get_partition_infos()
+  ]
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": tf.int64}),
+        supervised_keys=("x", "x"),
+    )
+
+  def _split_generators(self, dl_manager):
+    del dl_manager
+    return {
+        "train": self._generate_examples(range(20)),
+        "test": self._generate_examples(range(20, 30)),
+    }
+
+  def _generate_examples(self, range_):
+    for i in range_:
+      yield i, {"x": int(self.partition.values["snapshot"])}
 
 
 class GetBuilderDatadirPathTest(testing.TestCase):
@@ -133,7 +171,7 @@ year = "2022"
 }""")
 
 
-class DatasetBuilderTest(testing.TestCase):
+class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
@@ -320,6 +358,37 @@ class DatasetBuilderTest(testing.TestCase):
                      "plus1")
     self.assertEqual(DummyDatasetWithDefaultConfig.default_builder_config.name,
                      "plus2")
+
+  @parameterized.parameters(
+      ("basic<lang=en,snapshot=20221201>", "en", "20221201"),
+      ("basic.20221202.en", "en", "20221202"),
+      ("basic<snapshot=20221201,lang=nl>", "nl", "20221201"),
+  )
+  @testing.run_in_graph_and_eager_modes()
+  def test_with_partitions(self, config, language, snapshot):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = DummyPartitionedDataset(config=config, data_dir=tmp_dir)
+      builder.download_and_prepare()
+      data_dir = os.path.join(tmp_dir, builder.name, "basic", snapshot,
+                              language, "1.0.0")
+      # Test that subdirectories were created per config
+      self.assertTrue(
+          tf.io.gfile.exists(data_dir), msg=f"{data_dir} did not exist")
+      # 1 train shard, 1 test shard, plus metadata files
+      self.assertGreater(len(tf.io.gfile.listdir(data_dir)), 2)
+
+      # Test that the config was used and they didn't collide.
+      train_data, test_data = [  # pylint: disable=g-complex-comprehension
+          [
+              el["x"]
+              for el in dataset_utils.as_numpy(builder.as_dataset(split=split))
+          ]
+          for split in ["train", "test"]
+      ]
+      self.assertEqual([int(snapshot)] * 20, train_data)
+      self.assertEqual([int(snapshot)] * 10, test_data)
+      self.assertLen(train_data, 20)
+      self.assertLen(test_data, 10)
 
   def test_read_config(self):
     is_called = []

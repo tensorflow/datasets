@@ -25,7 +25,7 @@ import json
 import os
 import sys
 import typing
-from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, Union
+from typing import Any, ClassVar, Dict, Iterable, List, Mapping, Optional, Tuple, Type, Union
 
 from absl import logging
 from etils import epath
@@ -37,6 +37,7 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import partition as partition_lib
 from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
@@ -78,17 +79,41 @@ class BuilderConfig:
 
   DatasetBuilder subclasses with data configuration options should subclass
   `BuilderConfig` and add their own properties.
+
+  Attributes:
+    name: the name of the builder config. If `None`, `config_name` and/or
+      `partition` need to be specified, because `name` will be constructed from
+      those.
+    version: the version of the dataset with this builder config.
+    release_notes: release notes of the different versions.
+    supported_versions: the versions that are supported to be built with this
+      builder config.
+    description: textual description of this builder config.
+    config_name: if there are multiple partitions to this dataset config, then
+      `config_name` should be the common config name for all of the partitions.
+      If `name` is not specified explicitly, then it will be constructed using
+      `config_name` and `partition`.
+    partition: the partition of the dataset that this builder config refers to.
   """
   # TODO(py3.10): Should update dataclass to be:
   # * Frozen (https://bugs.python.org/issue32953)
   # * Kwargs-only (https://bugs.python.org/issue33129)
 
-  name: str
+  name: Optional[str] = None
   version: Optional[VersionOrStr] = None
   release_notes: Optional[Dict[str, str]] = None
   supported_versions: List[VersionOrStr] = dataclasses.field(
       default_factory=list)
   description: Optional[str] = None
+  config_name: Optional[str] = None
+  partition: Optional[partition_lib.PartitionInfo] = None
+
+  def __post_init__(self):
+    if not self.name:
+      self.name = naming.builder_config_name_for(self.config_name,
+                                                 self.partition)
+    if self.config_name is None:
+      self.config_name = self.name
 
   @classmethod
   def from_dataset_info(
@@ -175,6 +200,10 @@ class DatasetBuilder(registered.RegisteredDataset):
   # `BUILDER_CONFIGS` is used.
   DEFAULT_BUILDER_CONFIG_NAME: Optional[str] = None
 
+  # Specification of how this dataset is partitioned. For example, it could be
+  # partitioned per language and snapshot date.
+  PARTITION_SPEC: Optional[partition_lib.PartitionSpec] = None
+
   # Must be set for datasets that use 'manual_dir' functionality - the ones
   # that require users to do additional steps to download the data
   # (this is usually due to some external regulations / rules).
@@ -220,6 +249,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       data_dir: Optional[epath.PathLike] = None,
       config: Union[None, str, BuilderConfig] = None,
       version: Union[None, str, utils.Version] = None,
+      partition: Union[None, partition_lib.PartitionInfo] = None,
   ):
     """Constructs a DatasetBuilder.
 
@@ -237,6 +267,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         special value "experimental_latest" will use the highest version, even
         if not default. This is not recommended unless you know what you are
         doing, as the version could be broken.
+      partition: optional partition of the dataset to load.
     """
     if data_dir:
       data_dir = os.fspath(data_dir)  # Pathlib -> str
@@ -244,7 +275,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     self._original_state = dict(
         data_dir=data_dir, config=config, version=version)
     # To do the work:
-    self._builder_config = self._create_builder_config(config)
+    if self.PARTITION_SPEC is None and partition is not None:
+      raise ValueError("This dataset has no partitions, "
+                       f"but got asked to build partition {partition}")
+    self._builder_config = self._create_builder_config(
+        builder_config=config, partition=partition)
     # Extract code version (VERSION or config)
     self._version = self._pick_version(version)
     # Compute the base directory (for download) and dataset/version directory.
@@ -838,15 +873,14 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _relative_data_dir(self, with_version: bool = True) -> str:
     """Relative path of this dataset in data_dir."""
-    builder_data_dir = self.name
-    builder_config = self._builder_config
-    if builder_config:
-      builder_data_dir = os.path.join(builder_data_dir, builder_config.name)
-    if not with_version:
-      return builder_data_dir
-
-    version_data_dir = os.path.join(builder_data_dir, str(self._version))
-    return version_data_dir
+    parts = [self.name]
+    if self._builder_config:
+      parts.append(self._builder_config.config_name)
+      if self.partition is not None:
+        parts.append(self.partition.relative_path())
+    if with_version:
+      parts.append(str(self._version))
+    return os.path.join(*parts)
 
   def _build_data_dir(self, given_data_dir: Optional[str]):
     """Return the data directory for the current version.
@@ -1065,7 +1099,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     """`tfds.core.BuilderConfig` for this builder."""
     return self._builder_config
 
-  def _create_builder_config(self, builder_config) -> Optional[BuilderConfig]:
+  def _create_builder_config(
+      self,
+      builder_config: Union[None, str, BuilderConfig],
+      partition: Union[None, partition_lib.PartitionInfo] = None,
+  ) -> Optional[BuilderConfig]:
     """Create and validate BuilderConfig object."""
     if builder_config is None:
       builder_config = self.get_default_builder_config()
@@ -1075,11 +1113,18 @@ class DatasetBuilder(registered.RegisteredDataset):
     if not builder_config:
       return None
     if isinstance(builder_config, str):
-      name = builder_config
-      builder_config = self.builder_configs.get(name)
+      # If this dataset has partitions, then `builder_config` could contain what
+      # partition to load.
+      if self.PARTITION_SPEC is not None and partition is None:
+        builder_config, partition = naming.parse_config_and_partition(
+            builder_config, partition_spec=self.PARTITION_SPEC)
+
+      config_name = naming.builder_config_name_for(
+          config=builder_config, partition=partition)
+      builder_config = self.builder_configs.get(config_name)
       if builder_config is None:
         raise ValueError("BuilderConfig %s not found. Available: %s" %
-                         (name, list(self.builder_configs.keys())))
+                         (config_name, list(self.builder_configs.keys())))
     name = builder_config.name
     if not name:
       raise ValueError("BuilderConfig must have a name, got %s" % name)
@@ -1090,14 +1135,21 @@ class DatasetBuilder(registered.RegisteredDataset):
       if builder_config is not self.builder_configs[name]:
         raise ValueError(
             "Cannot name a custom BuilderConfig the same as an available "
-            "BuilderConfig. Change the name. Available BuilderConfigs: %s" %
-            (list(self.builder_configs.keys())))
+            "BuilderConfig (name is %s). "
+            "Change the name. Available BuilderConfigs: %s" %
+            (builder_config.name, list(self.builder_configs.keys())))
     return builder_config
+
+  @property
+  def partition(self) -> Optional[partition_lib.PartitionInfo]:
+    if self.builder_config is None:
+      return None
+    return self.builder_config.partition
 
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def builder_configs(cls):
+  def builder_configs(cls) -> Mapping[str, Any]:
     """Pre-defined list of configurations for this builder class."""
     config_dict = {config.name: config for config in cls.BUILDER_CONFIGS}
     if len(config_dict) != len(cls.BUILDER_CONFIGS):
@@ -1105,6 +1157,16 @@ class DatasetBuilder(registered.RegisteredDataset):
       raise ValueError(
           "Names in BUILDER_CONFIGS must not be duplicated. Got %s" % names)
     return config_dict
+
+  @utils.classproperty
+  @classmethod
+  @utils.memoize()
+  def available_partitions(cls) -> List[partition_lib.PartitionInfo]:
+    return [
+        config.partition
+        for config in cls.BUILDER_CONFIGS
+        if config.partition is not None
+    ]
 
 
 class FileReaderBuilder(DatasetBuilder):

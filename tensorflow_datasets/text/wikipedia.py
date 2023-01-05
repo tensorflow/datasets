@@ -19,12 +19,14 @@ import bz2
 import codecs
 import json
 import re
+from typing import Optional
 import xml.etree.cElementTree as etree
 
 from absl import flags  # pylint:disable=g-bad-import-order,g-import-not-at-top
 from absl import logging
 import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core import partition as partition_lib
 import tensorflow_datasets.public_api as tfds
 
 FLAGS = flags.FLAGS
@@ -87,25 +89,49 @@ WIKIPEDIA_LANGUAGES = [
 _BASE_URL_TMPL = "https://dumps.wikimedia.your.org/{lang}wiki/{date}/"
 _INFO_FILE = "dumpstatus.json"
 
+_PARTITION_SPEC = partition_lib.PartitionSpec(partitions=[
+    partition_lib.Partitioning(
+        name="snapshot",
+        possible_values=["20190301", "20200301", "20201201", "20220620"]),
+    partition_lib.Partitioning(
+        name="language", possible_values=WIKIPEDIA_LANGUAGES)
+])
+
 
 class WikipediaConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Wikipedia."""
 
-  def __init__(self, *, language=None, date=None, **kwargs):
-    """BuilderConfig for Wikipedia.
+  def __init__(self,
+               language: Optional[str] = None,
+               date: Optional[str] = None,
+               partition_info: Optional[partition_lib.PartitionInfo] = None):
+    """Creates a config for the Wikipedia dataset.
 
-    Args:
-      language: string, the language code for the Wikipedia dump to use.
-      date: string, date of the Wikipedia dump in YYYYMMDD format. A list of
-        available dates can be found at https://dumps.wikimedia.org/enwiki/.
-      **kwargs: keyword arguments forwarded to super.
+    Note that if `partition_info` is given, then the `language` and `date`
+    arguments are ignored. If `partition_info` is `None`, then `language` and
+    `date` must be set.
+
+    Arguments:
+      language: the language to of the config.
+      date: the date on which the snapshot of Wikipedia was taken.
+      partition_info: specification of what partition, i.e. language and
+        snapshot date, this config uses.
     """
-    super(WikipediaConfig, self).__init__(
-        name=f"{date}.{language}",
-        description=f"Wikipedia dataset for {language}, parsed from {date} dump.",
-        **kwargs)
-    self.date = date
-    self.language = language
+    if partition_info is None:
+      if language is None or date is None:
+        raise ValueError("If partition_info is None, "
+                         "then language and date must be set!")
+      partition_info = partition_lib.PartitionInfo(
+          values={
+              "snapshot": date,
+              "language": language
+          }, spec=_PARTITION_SPEC)
+    snapshot = partition_info.values["snapshot"]
+    language = partition_info.values["language"]
+    super().__init__(
+        name=f"{snapshot}.{language}",
+        description=f"Wikipedia dataset for {language}, parsed from {snapshot} dump.",
+        partition=partition_info)
 
 
 class Wikipedia(tfds.core.BeamBasedBuilder):
@@ -115,25 +141,10 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
   RELEASE_NOTES = {
       "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
   }
-
+  PARTITION_SPEC = _PARTITION_SPEC
   BUILDER_CONFIGS = [
-      WikipediaConfig(language=lang, date="20220620")
-      for lang in WIKIPEDIA_LANGUAGES
-  ] + [
-      # Old versions files do not exists anymore but config are kept as
-      # previously generated datasets can still be read.
-      WikipediaConfig(language=lang, date="20201201")
-      for lang in WIKIPEDIA_LANGUAGES
-  ] + [
-      # Old versions files do not exists anymore but config are kept as
-      # previously generated datasets can still be read.
-      WikipediaConfig(language=lang, date="20200301")
-      for lang in WIKIPEDIA_LANGUAGES
-  ] + [
-      # Old versions files do not exists anymore but config are kept as
-      # previously generated datasets can still be read.
-      WikipediaConfig(language=lang, date="20190301")
-      for lang in WIKIPEDIA_LANGUAGES
+      WikipediaConfig(partition_info=partition_info)
+      for partition_info in _PARTITION_SPEC.get_partition_infos()
   ]
 
   def _info(self):
@@ -152,14 +163,14 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    if self.partition is None:
+      raise ValueError("Partition was not set in the dataset builder!")
 
-    def _base_url(lang):
-      return _BASE_URL_TMPL.format(
-          lang=lang.replace("-", "_"), date=self._builder_config.date)
+    lang = self.partition.partition_value("language")
+    snapshot = self.partition.partition_value("snapshot")
+    base_url = _BASE_URL_TMPL.format(lang=lang.replace("-", "_"), date=snapshot)
 
-    lang = self._builder_config.language
-
-    info_url = _base_url(lang) + _INFO_FILE
+    info_url = base_url + _INFO_FILE
     # Use dictionary since testing mock always returns the same result.
     downloaded_files = dl_manager.download_and_extract({"info": info_url})
 
@@ -170,13 +181,13 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     multistream_dump_info = dump_info["jobs"]["articlesmultistreamdump"]
     assert multistream_dump_info["status"] == "done", (
         "Specified dump (%s) multistream status is not 'done': %s" %
-        (_base_url(lang), multistream_dump_info["status"]))
+        (base_url, multistream_dump_info["status"]))
 
     for fname, info in multistream_dump_info["files"].items():
       if ".xml" not in fname:
         continue
       total_bytes += info["size"]
-      xml_urls.append(_base_url(lang) + fname)
+      xml_urls.append(base_url + fname)
 
       # Use dictionary since testing mock always returns the same result.
     downloaded_files = dl_manager.download({"xml": xml_urls})
