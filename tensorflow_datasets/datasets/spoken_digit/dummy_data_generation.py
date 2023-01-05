@@ -36,7 +36,7 @@ _LIST_OF_SPEAKERS = ["MNM", "mj", "queen"]
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, "audio", "spoken_digit", "dummy_data")
+  return os.path.join(FLAGS.tfds_dir, "datasets", "spoken_digit", "dummy_data")
 
 
 def _get_file_name():
