@@ -21,6 +21,7 @@ import builtins
 import contextlib
 import functools
 import glob
+import logging
 import os
 import sys
 import types
@@ -274,6 +275,19 @@ class _MockedHFDatasets(types.ModuleType):
       input: str
       output: str
 
+  class utils(types.ModuleType):
+    """`datasets.utils` module."""
+
+    class logging(types.ModuleType):
+      """`datasets.utils.logging` module."""
+
+      @staticmethod
+      def get_logger(name: Optional[str] = None) -> logging.Logger:
+        """Returns a `Logger` with the supplied name."""
+        if name is None:
+          name, _ = __name__.split('.', maxsplit=1)
+        return logging.getLogger(name)
+
   # pylint: enable=invalid-name
 
 
@@ -282,6 +296,12 @@ for attr in dir(_MockedHFDatasets.features):
   if attr.startswith('_'):
     continue
   setattr(_MockedHFDatasets, attr, getattr(_MockedHFDatasets.features, attr))
+
+# `datasets.utils.Xyz` API can also be accessed as `datasets.Xyz`
+for attr in dir(_MockedHFDatasets.utils):
+  if attr.startswith('_'):
+    continue
+  setattr(_MockedHFDatasets, attr, getattr(_MockedHFDatasets.utils, attr))
 
 # Mock the standard file API to use GFile
 

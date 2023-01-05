@@ -20,6 +20,8 @@ from pathlib import Path  # < Direct import of path should be patched  # pylint:
 import datasets  # pytype: disable=import-error
 import tensorflow_datasets.public_api as tfds
 
+logger = datasets.logging.get_logger(__name__)
+
 
 class HFDataset(datasets.GeneratorBasedBuilder):
   """AdversarialQA. Version 1.0.0."""
@@ -74,6 +76,8 @@ class HFDataset(datasets.GeneratorBasedBuilder):
 
   def _generate_examples(self, num_vals):
     """This function returns the examples in the raw (text) form."""
+    logger.info("some text")
+
     # Path is mocked
     assert isinstance(Path("some_path/"), tfds.core.Path)  # pylint: disable=protected-access
     for i in range(num_vals):
