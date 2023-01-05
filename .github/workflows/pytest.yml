@@ -85,6 +85,8 @@ jobs:
 
     - name: Run Github API tests
       run: pytest --durations=100 -vv -n auto tensorflow_datasets/core/github_api/github_path_test.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   notebooktest-job:
     # For merged PR, activate testing only on the master branch.
