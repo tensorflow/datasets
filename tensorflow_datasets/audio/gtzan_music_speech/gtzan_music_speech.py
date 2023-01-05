@@ -63,6 +63,7 @@ class GTZANMusicSpeech(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract({"music_speech": _DOWNLOAD_URL})
     path = os.path.join(dl_paths["music_speech"], "music_speech")
@@ -72,14 +73,14 @@ class GTZANMusicSpeech(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN, gen_kwargs={"path": path}),
     ]
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, path: str):
     """Yields examples.
 
     Args:
        path: Path of the downloaded and extracted directory
 
     Yields:
-       Next examples
+       key, example: Next example pair
     """
 
     #  The wav files are in directories named "{label}_wav"

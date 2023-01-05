@@ -68,6 +68,7 @@ class YesNo(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract({"waves_yesno": _DOWNLOAD_URL})
     path = os.path.join(dl_paths["waves_yesno"], "waves_yesno")
@@ -77,14 +78,14 @@ class YesNo(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN, gen_kwargs={"path": path}),
     ]
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, path: str):
     """Yields examples.
 
     Args:
        path: Path of the downloaded and extracted directory
 
     Yields:
-       Next examples
+       key, example: Next example pair
     """
     for root, _, file_name in tf.io.gfile.walk(path):
       for fname in file_name:

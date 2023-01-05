@@ -79,6 +79,7 @@ class GTZAN(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract({"genres": _DOWNLOAD_URL})
     path = os.path.join(dl_paths["genres"], "genres")
@@ -88,14 +89,12 @@ class GTZAN(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN, gen_kwargs={"path": path}),
     ]
 
-  def _generate_examples(self, path):
-    """Yields examples.
+  def _generate_examples(self, path: str):
+    #pylint: disable=missing-yield-type-doc, missing-yield-doc
+    """Generate examples.
 
     Args:
        path: Path of the downloaded and extracted directory
-
-    Yields:
-       Next examples
     """
     for root, _, file_name in tf.io.gfile.walk(path):
       for fname in file_name:

@@ -65,6 +65,7 @@ class SpokenDigit(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns Split Generators."""
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     extracted_dir_path = os.path.join(dl_path,
@@ -76,14 +77,14 @@ class SpokenDigit(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN, gen_kwargs={"path": path})
     ]
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, path: str):
     """Yields examples.
 
     Args:
        path: Path of the directory that contains audio files
 
     Yields:
-       Next examples
+       key, example: Next example pair
     """
     for root, _, file_name in tf.io.gfile.walk(path):
       for fname in file_name:
