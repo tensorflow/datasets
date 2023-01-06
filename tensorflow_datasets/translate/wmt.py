@@ -21,11 +21,12 @@ import gzip
 import itertools
 import os
 import re
+from typing import List
 import xml.etree.cElementTree as ElementTree
 
 from absl import logging
+from etils import epath
 from tensorflow_datasets.core.utils import tree_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -677,7 +678,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       manual_paths = []
       for fname in manual_dl_files:
         manual_path = os.path.join(dl_manager.manual_dir, fname)
-        if not tf.io.gfile.exists(manual_path):
+        if not epath.Path(manual_path).exists():
           raise AssertionError(
               "For {0}, you must manually download the following file(s) "
               "from {1} and place them in {2}: {3}".format(
@@ -794,6 +795,16 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         yield key, ex
 
 
+def read_sentences(path: str) -> List[str]:
+  # Read in bytes to avoid mixing carriage returns and in-sentence newlines.
+  file_bytes = epath.Path(path).read_bytes()
+  return [line.decode() for line in file_bytes.split(b"\n")]
+
+
+def glob_str(glob_pattern: str) -> List[str]:
+  return [os.fspath(path) for path in epath.Path().glob(glob_pattern)]
+
+
 def _parse_parallel_sentences(f1, f2):
   """Returns examples from parallel SGML or text files, which may be gzipped."""
 
@@ -803,7 +814,7 @@ def _parse_parallel_sentences(f1, f2):
 
     if split_path[-1] == "gz":
       lang = split_path[-2]
-      with tf.io.gfile.GFile(path, "rb") as f, gzip.GzipFile(fileobj=f) as g:
+      with epath.Path(path).open("rb") as f, gzip.GzipFile(fileobj=f) as g:
         return g.read().decode("utf-8").split("\n"), lang
 
     if split_path[-1] == "txt":
@@ -812,8 +823,8 @@ def _parse_parallel_sentences(f1, f2):
       lang = "zh" if lang in ("ch", "cn") else lang
     else:
       lang = split_path[-1]
-    with tf.io.gfile.GFile(path) as f:
-      return f.read().split("\n"), lang
+    sentences = read_sentences(path)
+    return sentences, lang
 
   def _parse_sgm(path):
     """Returns sentences from a single SGML file."""
@@ -822,7 +833,7 @@ def _parse_parallel_sentences(f1, f2):
     # Note: We can't use the XML parser since some of the files are badly
     # formatted.
     seg_re = re.compile(r"<seg id=\"\d+\">(.*)</seg>")
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for line in f:
         seg_match = re.match(seg_re, line)
         if seg_match:
@@ -834,8 +845,8 @@ def _parse_parallel_sentences(f1, f2):
 
   # Some datasets (e.g., CWMT) contain multiple parallel files specified with
   # a wildcard. We sort both sets to align them and parse them one by one.
-  f1_files = tf.io.gfile.glob(f1)
-  f2_files = tf.io.gfile.glob(f2)
+  f1_files = glob_str(f1)
+  f2_files = glob_str(f2)
 
   assert f1_files and f2_files, "No matching files found: %s, %s." % (f1, f2)
   assert len(f1_files) == len(f2_files), (
@@ -856,10 +867,8 @@ def _parse_parallel_sentences(f1, f2):
 
 
 def _parse_frde_bitext(fr_path, de_path):
-  with tf.io.gfile.GFile(fr_path) as f:
-    fr_sentences = f.read().splitlines()
-  with tf.io.gfile.GFile(de_path) as f:
-    de_sentences = f.read().splitlines()
+  fr_sentences = read_sentences(fr_path)
+  de_sentences = read_sentences(de_path)
   assert len(fr_sentences) == len(de_sentences), (
       "Sizes do not match: %d vs %d for %s vs %s." %
       (len(fr_sentences), len(de_sentences), fr_path, de_path))
@@ -881,7 +890,7 @@ def _parse_tmx(path):
     assert len(segs) == 1, "Invalid number of segments: %d" % len(segs)
     return segs[0].text
 
-  with tf.io.gfile.GFile(path, "rb") as f:
+  with epath.Path(path).open("rb") as f:
     utf_f = codecs.getreader("utf-8")(f)
     for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
       if elem.tag == "tu":
@@ -900,7 +909,7 @@ def _parse_tsv(path, language_pair=None):
     l1, l2 = lang_match.groups()
   else:
     l1, l2 = language_pair
-  with tf.io.gfile.GFile(path) as f:
+  with epath.Path(path).open() as f:
     for j, line in enumerate(f):
       cols = line.split("\t")
       if len(cols) != 2:
@@ -916,7 +925,7 @@ def _parse_wikiheadlines(path):
   lang_match = re.match(r".*\.([a-z][a-z])-([a-z][a-z])$", path)
   assert lang_match is not None, "Invalid Wikiheadlines filename: %s" % path
   l1, l2 = lang_match.groups()
-  with tf.io.gfile.GFile(path) as f:
+  with epath.Path(path).open() as f:
     for line_id, line in enumerate(f):
       s1, s2 = line.split("|||")
       yield line_id, {l1: s1.strip(), l2: s2.strip()}
@@ -927,15 +936,15 @@ def _parse_czeng(*paths, **kwargs):
   filter_path = kwargs.get("filter_path", None)
   if filter_path:
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
-    with tf.io.gfile.GFile(filter_path) as f:
+    with epath.Path(filter_path).open() as f:
       bad_blocks = set(
           re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split())  # pytype: disable=attribute-error
     logging.info("Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
                  len(bad_blocks))
 
   for path in paths:
-    for gz_path in tf.io.gfile.glob(path):
-      with tf.io.gfile.GFile(gz_path, "rb") as g, gzip.GzipFile(fileobj=g) as f:
+    for gz_path in glob_str(path):
+      with epath.Path(gz_path).open("rb") as g, gzip.GzipFile(fileobj=g) as f:
         filename = os.path.basename(gz_path)
         for line_id, line in enumerate(f):
           line = line.decode("utf-8")  # required for py3
@@ -954,7 +963,7 @@ def _parse_czeng(*paths, **kwargs):
 
 
 def _parse_hindencorp(path):
-  with tf.io.gfile.GFile(path) as f:
+  with epath.Path(path).open() as f:
     for line_id, line in enumerate(f):
       split_line = line.split("\t")
       if len(split_line) != 5:
