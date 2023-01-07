@@ -125,7 +125,8 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
         name='ExpandedFileInstructions',
         value=len(file_instructions),
         namespace='ReadFromTFDS')
-  return pipeline | beam.Create(file_instructions) | beam.FlatMap(load_shard)
+  pipeline = pipeline | beam.Create(file_instructions)
+  return pipeline | beam.FlatMap(load_shard)
 
 
 @functools.lru_cache(None)
