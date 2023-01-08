@@ -55,15 +55,6 @@ _CITATION = """
 """
 _VERSION = tfds.core.Version("3.1.0")
 
-# TODO(adarob): Remove supported versions. Starting with 3.0.0, all generated
-# datasets are automatically forward compatible. For example,
-# tfds.load('c4:3.0.0') works even if the code is at 3.0.1.
-_SUPPORTED_VERSIONS = [
-    tfds.core.Version("2.3.1"),
-    tfds.core.Version("2.3.0"),
-    tfds.core.Version("2.2.1"),
-    tfds.core.Version("2.2.0"),
-]
 RELEASE_NOTES = {
     "3.1.0":
         "All: Select newest timestamp when deduping by URL (vs random); escape "
@@ -261,7 +252,6 @@ class C4Config(tfds.core.BuilderConfig):
     super(C4Config, self).__init__(
         name=name,
         version=_VERSION,
-        supported_versions=_SUPPORTED_VERSIONS,
         **kwargs)
 
     if clean and tuple(languages) != ("en",):
