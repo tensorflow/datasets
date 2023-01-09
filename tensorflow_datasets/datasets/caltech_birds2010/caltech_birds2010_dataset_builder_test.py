@@ -13,17 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for caltech_birds2010.
+from tensorflow_datasets.datasets.caltech_birds2010 import caltech_birds2010_dataset_builder
+import tensorflow_datasets.testing as tfds_test
 
-DEPRECATED!
-If you want to use the CaltechBirds2010 dataset builder class, use:
-tfds.builder_cls('caltech_birds2010')
-If you want to use the CaltechBirds2011 dataset builder class, use:
-tfds.builder_cls('caltech_birds2011')
-"""
 
-from tensorflow_datasets.core import lazy_builder_import
+class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
 
-CaltechBirds2010 = lazy_builder_import.LazyBuilderImport('caltech_birds2010')
+  DATASET_CLASS = caltech_birds2010_dataset_builder.Builder
 
-CaltechBirds2011 = lazy_builder_import.LazyBuilderImport('caltech_birds2011')
+  SPLITS = {  # No. of train and test samples
+      'train': 9,
+      'test': 6,
+  }
+
+  DL_EXTRACT_RESULT = ['Lists.tgz', 'Annotations.tgz', 'Images.tar.gz']
+
+
+if __name__ == '__main__':
+  tfds_test.test_main()

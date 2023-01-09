@@ -13,25 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from tensorflow_datasets.image_classification import caltech_birds
+from tensorflow_datasets.datasets.caltech_birds2011 import caltech_birds2011_dataset_builder
 import tensorflow_datasets.testing as tfds_test
-
-
-class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
-
-  DATASET_CLASS = caltech_birds.CaltechBirds2010
-
-  SPLITS = {  # No. of train and test samples
-      'train': 9,
-      'test': 6,
-  }
-
-  DL_EXTRACT_RESULT = ['Lists.tgz', 'Annotations.tgz', 'Images.tar.gz']
 
 
 class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
 
-  DATASET_CLASS = caltech_birds.CaltechBirds2011
+  DATASET_CLASS = caltech_birds2011_dataset_builder.Builder
 
   SPLITS = {  # No. of train and test samples
       'train': 6,
