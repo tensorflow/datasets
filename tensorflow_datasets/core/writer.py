@@ -368,7 +368,7 @@ class BeamWriter(object):
 
   def _write_final_shard(
       self,
-      shardid_examples: Tuple[int, List[type_utils.KeySerializedExample]],
+      shardid_examples: Tuple[int, Iterable[type_utils.KeySerializedExample]],
       non_empty_shard_ids: List[int],
   ) -> _ShardInfo:
     """Write all examples of a shard to disk.
