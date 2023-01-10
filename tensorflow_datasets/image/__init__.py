@@ -38,7 +38,13 @@ from tensorflow_datasets.image.pass_dataset import PASS
 from tensorflow_datasets.image.s3o4d import S3o4d
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
-from tensorflow_datasets.image.symmetric_solids import SymmetricSolids
+from tensorflow_datasets.image.smallnorb import Smallnorb
+from tensorflow_datasets.image.so2sat import So2sat
+from tensorflow_datasets.image.stanford_dogs import StanfordDogs
+from tensorflow_datasets.image.stanford_online_products import StanfordOnlineProducts
+from tensorflow_datasets.image.sun import Sun397
+from tensorflow_datasets.image.svhn import SvhnCropped
+from tensorflow_datasets.image.tiered_imagenet import TieredImagenet
 from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image_classification.beans import Beans
 from tensorflow_datasets.image_classification.bigearthnet import Bigearthnet

@@ -49,12 +49,15 @@ from version import __version__  # pytype: disable=import-error  # pylint: disab
 
 if nightly:
   project_name = 'tfds-nightly'
-  # Version as `X.Y.Z.dev199912312459`
-  datestring = (
-      os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
-      datetime.datetime.now().strftime('%Y%m%d%H%M'))
-  curr_version = pkg_resources.parse_version(__version__)
-  __version__ = f'{curr_version.base_version}.dev{datestring}'
+
+  datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
+                datetime.datetime.now().strftime('%Y%m%d%H%M'))
+  version = '%s-dev%s' % (version, datestring)
+  
+project_name = 'tfds-nightly'
+datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or datetime.datetime.now().strftime('%Y%m%d%H%M'))
+__version__ += 'dev%s' % datestring
+
 
 DOCLINES = __doc__.split('\n')
 
@@ -179,6 +182,7 @@ DATASET_EXTRAS = {
     'robosuite_panda_pick_place_can': ['envlogger'],
     'smartwatch_gestures': ['pandas'],
     'svhn': ['scipy'],
+    'tiered_imagenet': ['opencv-python'],
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],
     'wiki_dialog': ['apache_beam'],
@@ -211,6 +215,31 @@ EXTRAS_REQUIRE = {
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 
 setup(
+  add-tiered-imagenet-dataset
+  name=project_name,
+  version=__version__,
+  description=DOCLINES[0],
+  long_description='\n'.join(DOCLINES[2:]),
+  author='Google Inc.',
+  author_email='packages@tensorflow.org',
+  url='http://github.com/tensorflow/datasets',
+  download_url='https://github.com/tensorflow/datasets/tags',
+  license='Apache 2.0',
+  packages=find_packages(),
+  package_data={
+    'tensorflow_datasets': DATASET_FILES,
+  },
+  scripts=[],
+  install_requires=REQUIRED_PKGS,
+  extras_require=EXTRAS_REQUIRE,
+  classifiers=[
+    'Development Status :: 4 - Beta',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Science/Research',
+    'License :: OSI Approved :: Apache Software License',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+  ],
+  keywords='tensorflow machine learning datasets',
     name=project_name,
     version=__version__,
     description=DOCLINES[0],
