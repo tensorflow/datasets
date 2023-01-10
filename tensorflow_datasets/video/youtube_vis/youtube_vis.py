@@ -24,7 +24,6 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 from etils import epath
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -405,10 +404,10 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
         'video':
             tfds.features.Video(video_shape),  # pytype: disable=wrong-arg-types  # gen-stub-imports
         'metadata': {
-            'height': tf.int32,
-            'width': tf.int32,
-            'num_frames': tf.int32,
-            'video_name': tf.string,
+            'height': np.int32,
+            'width': np.int32,
+            'num_frames': np.int32,
+            'video_name': np.str_,
         },
         'tracks':
             tfds.features.Sequence({
@@ -513,7 +512,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     resized_images = []
     cv2 = tfds.core.lazy_imports.cv2
     for frame in frames_list:
-      with tf.io.gfile.GFile(frame, 'rb') as f:
+      with epath.Path(frame).open('rb') as f:
         image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
         image = np.asarray(image)
       image = cv2.resize(
