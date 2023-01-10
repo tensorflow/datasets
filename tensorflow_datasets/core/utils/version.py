@@ -14,10 +14,11 @@
 # limitations under the License.
 
 """Version utils."""
+from __future__ import annotations
 
 import enum
 import re
-from typing import List, Union
+from typing import List, Tuple, Union
 
 from etils import epath
 
@@ -46,7 +47,7 @@ class Experiment(enum.Enum):
   DUMMY = 1
 
 
-class Version(object):
+class Version:
   """Dataset version MAJOR.MINOR.PATCH."""
 
   _DEFAULT_EXPERIMENTS = {
@@ -55,7 +56,7 @@ class Version(object):
 
   def __init__(
       self,
-      version: Union["Version", str],
+      version: Union[Version, str],
       experiments=None,
       tfds_version_to_prepare=None,
   ):
@@ -135,7 +136,7 @@ class Version(object):
   def __hash__(self) -> int:
     return hash(self.tuple)
 
-  def match(self, other_version):
+  def match(self, other_version) -> bool:
     """Returns True if other_version matches.
 
     Args:
@@ -155,8 +156,14 @@ class Version(object):
       return False
 
 
-def _str_to_version(version_str, allow_wildcard=False):
+def _str_to_version(
+    version_str: str,
+    allow_wildcard=False
+) -> Tuple[Union[int, str], Union[int, str], Union[int, str]]:
   """Return the tuple (major, minor, patch) version extracted from the str."""
+  if not isinstance(version_str, str):
+    raise TypeError("Can only convert strings to versions. "
+                    f"Got: {type(version_str)} with value {version_str}.")
   reg = _VERSION_WILDCARD_REG if allow_wildcard else _VERSION_RESOLVED_REG
   res = reg.match(version_str)
   if not res:
