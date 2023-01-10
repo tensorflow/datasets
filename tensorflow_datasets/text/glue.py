@@ -22,7 +22,6 @@ import textwrap
 from etils import epath
 import numpy as np
 import six
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _GLUE_CITATION = """\
@@ -111,7 +110,7 @@ class GlueConfig(tfds.core.BuilderConfig):
       url: `string`, url for information about the data set
       label_classes: `list[string]`, the list of classes if the label is
         categorical. If not provided, then the label will be of type
-        `tf.float32`.
+        `np.float32`.
       process_label: `Function[string, any]`, function taking in the raw value
         of the label and processing it to the form required by the label feature
       **kwargs: keyword arguments forwarded to super.
@@ -422,8 +421,8 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       features["label"] = tfds.features.ClassLabel(
           names=self.builder_config.label_classes)
     else:
-      features["label"] = tf.float32
-    features["idx"] = tf.int32
+      features["label"] = np.float32
+    features["idx"] = np.int32
     return tfds.core.DatasetInfo(
         builder=self,
         description=_GLUE_DESCRIPTION,
@@ -554,7 +553,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
 
   def _generate_example_mrpc_files(self, mrpc_files, split):
     if split == "test":
-      with tf.io.gfile.GFile(mrpc_files["test"]) as f:
+      with epath.Path(mrpc_files["test"]).open() as f:
         reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
         for n, row in enumerate(reader):
           yield {
@@ -564,10 +563,10 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               "idx": n,
           }
     else:
-      with tf.io.gfile.GFile(mrpc_files["dev_ids"]) as f:
+      with epath.Path(mrpc_files["dev_ids"]).open() as f:
         reader = csv.reader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
         dev_ids = [[row[0], row[1]] for row in reader]
-      with tf.io.gfile.GFile(mrpc_files["train"]) as f:
+      with epath.Path(mrpc_files["train"]).open() as f:
         # The first 3 bytes are the utf-8 BOM \xef\xbb\xbf, which messes with
         # the Quality key.
         f.seek(3)

@@ -23,7 +23,6 @@ import os
 
 from etils import epath
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # General (main) citation for CivilComments and CivilCommentsIdentities.
@@ -302,17 +301,17 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
     }[mode]
     features = {
         'text': tfds.features.Text(),
-        'id': tf.string,
+        'id': np.str_,
         'parent_text': tfds.features.Text(),
-        'parent_id': tf.int32,
-        'article_id': tf.int32,
+        'parent_id': np.int32,
+        'article_id': np.int32,
     }
     if mode == 'spans':
       features['spans'] = tfds.features.Tensor(shape=(None,), dtype=np.int32)
       supervised_value = 'spans'
     else:
       for label in _labels(mode):
-        features[label] = tf.float32
+        features[label] = np.float32
       supervised_value = 'toxicity'
 
     return tfds.core.DatasetInfo(

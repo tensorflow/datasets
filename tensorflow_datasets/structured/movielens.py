@@ -22,7 +22,7 @@ import textwrap
 from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
 from absl import logging
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured import movielens_parsing
 
@@ -332,9 +332,9 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
     """Returns DatasetInfo according to self.builder_config."""
     movie_features_dict = {
         'movie_id':
-            tf.string,
+            np.str_,
         'movie_title':
-            tf.string,
+            np.str_,
         'movie_genres':
             tfds.features.Sequence(
                 tfds.features.ClassLabel(names=[
@@ -362,16 +362,16 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
                 ]),),
     }
     rating_features_dict = {
-        'user_id': tf.string,
-        'user_rating': tf.float32,
+        'user_id': np.str_,
+        'user_rating': np.float32,
         # Using int64 since tfds currently does not support float64.
-        'timestamp': tf.int64,
+        'timestamp': np.int64,
     }
     demographic_features_dict = {
         'user_gender':
-            tf.bool,
+            np.bool_,
         'bucketized_user_age':
-            tf.float32,
+            np.float32,
         'user_occupation_label':
             tfds.features.ClassLabel(names=[
                 'academic/educator',
@@ -398,9 +398,9 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
                 'writer',
             ]),
         'user_occupation_text':
-            tf.string,
+            np.str_,
         'user_zip_code':
-            tf.string,
+            np.str_,
     }
 
     features_dict = {}
@@ -418,7 +418,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
       features_dict.update(movie_features_dict)
       features_dict.update(rating_features_dict)
       features_dict.update(demographic_features_dict)
-      features_dict.update(raw_user_age=tf.float32)
+      features_dict.update(raw_user_age=np.float32)
     else:
       features_dict.update(movie_features_dict)
       features_dict.update(rating_features_dict)

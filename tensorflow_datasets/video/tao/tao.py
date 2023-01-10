@@ -22,8 +22,8 @@ import json
 import os
 from typing import Any, Dict, Optional, Tuple
 
+from etils import epath
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _VIDEO_URL = 'https://motchallenge.net/data/'
@@ -147,7 +147,7 @@ def _get_category_id_map(annotations_root) -> Dict[str, int]:
 def _preprocess_annotations(annotations_file: str,
                             id_map: Dict[int, int]) -> NestedDict:
   """Preprocesses the data to group together some category labels."""
-  with tf.io.gfile.GFile(annotations_file, 'r') as f:
+  with epath.Path(annotations_file).open('r') as f:
     annotations = json.load(f)
   for ann in annotations['annotations'] + annotations['tracks']:
     ann['category_id'] = id_map[ann['category_id']]
@@ -208,7 +208,7 @@ def _create_per_track_annotation(track, track_to_anns: NestedDict,
 
 
 class TaoConfig(tfds.core.BuilderConfig):
-  """"Configuration for Tao video dataset."""
+  """Configuration for Tao video dataset."""
 
   def __init__(self,
                *,
@@ -277,19 +277,19 @@ class Tao(tfds.core.BeamBasedBuilder):
             tfds.features.Video(video_shape),  # pytype: disable=wrong-arg-types  # gen-stub-imports
         'metadata': {
             'height':
-                tf.int32,
+                np.int32,
             'width':
-                tf.int32,
+                np.int32,
             'num_frames':
-                tf.int32,
+                np.int32,
             'video_name':
-                tf.string,
+                np.str_,
             'neg_category_ids':
                 tfds.features.Tensor(shape=(None,), dtype=np.int32),
             'not_exhaustive_category_ids':
                 tfds.features.Tensor(shape=(None,), dtype=np.int32),
             'dataset':
-                tf.string,
+                np.str_,
         },
         'tracks':
             tfds.features.Sequence({
@@ -349,7 +349,7 @@ class Tao(tfds.core.BeamBasedBuilder):
     resized_images = []
     cv2 = tfds.core.lazy_imports.cv2
     for frame in frames_list:
-      with tf.io.gfile.GFile(frame, 'rb') as f:
+      with epath.Path(frame).open('rb') as f:
         image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
         image = np.asarray(image)
       image = cv2.resize(
