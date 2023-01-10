@@ -147,7 +147,7 @@ def convert_to_shape(shape: Any) -> type_utils.Shape:
 def assert_shape_match(
     shape1: type_utils.Shape, shape2: type_utils.Shape
 ) -> None:
-  """Ensure the shape1 matches the pattern given by shape2.
+  """Ensure shape1 matches the pattern given by shape2.
 
   Ex:
     assert_shape_match((64, 64, 3), (None, None, 3))
@@ -156,7 +156,17 @@ def assert_shape_match(
     shape1 (tuple): Static shape
     shape2 (tuple): Dynamic shape (can contain None)
   """
-  assert_tf_shape_match(tf.TensorShape(shape1), tf.TensorShape(shape2))
+  if shape1 is None or shape2 is None:
+    if shape1 != shape2:
+      raise ValueError(f'Shapes {shape1} and {shape2} must have the same rank')
+    return
+  if len(shape1) != len(shape2):
+    raise ValueError(f'Shapes {shape1} and {shape2} must have the same rank')
+  for dimension1, dimension2 in zip(shape1, shape2):
+    if dimension1 is None or dimension2 is None:
+      continue
+    if dimension1 != dimension2:
+      raise ValueError(f'Shapes {shape1} and {shape2} are incompatible')
 
 
 def assert_tf_shape_match(

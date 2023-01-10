@@ -15,7 +15,9 @@
 
 """Tests for tensorflow_datasets.core.features.top_level_feature."""
 
-import tensorflow as tf
+import time
+
+import numpy as np
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core.features import top_level_feature
@@ -28,10 +30,10 @@ class FeaturesManagerTest(testing.TestCase):
         1,
         top_level_feature._get_sequence_rank({
             'a': features_lib.TensorInfo(
-                shape=(None, 3), dtype=tf.int32, sequence_rank=1
+                shape=(None, 3), dtype=np.int32, sequence_rank=1
             ),
             'b': features_lib.TensorInfo(
-                shape=(None,), dtype=tf.int32, sequence_rank=1
+                shape=(None,), dtype=np.int32, sequence_rank=1
             ),
         }),
     )
@@ -40,24 +42,24 @@ class FeaturesManagerTest(testing.TestCase):
         NotImplementedError, 'mixing sequence and context'
     ):
       top_level_feature._get_sequence_rank({
-          'a': features_lib.TensorInfo(shape=(), dtype=tf.int32),
+          'a': features_lib.TensorInfo(shape=(), dtype=np.int32),
           'b': features_lib.TensorInfo(
-              shape=(None,), dtype=tf.int32, sequence_rank=1
+              shape=(None,), dtype=np.int32, sequence_rank=1
           ),
       })
 
   def test_flatten_nested(self):
     f = features_lib.FeaturesDict({
-        'a': tf.int32,
+        'a': np.int32,
         'b': {
             'c': {
-                'd': tf.int32,
-                'e': tf.int32,
+                'd': np.int32,
+                'e': np.int32,
             },
         },
         'f': features_lib.Sequence({
-            'g': features_lib.Sequence(tf.int32),
-            'h': tf.int32,
+            'g': features_lib.Sequence(np.int32),
+            'h': np.int32,
         }),
     })
 
@@ -100,9 +102,9 @@ class FeaturesManagerTest(testing.TestCase):
     )
 
     f = features_lib.FeaturesDict({
-        'a': tf.int32,
+        'a': np.int32,
         'b': {
-            'c': tf.int32,
+            'c': np.int32,
         },
     })
     with self.assertRaisesWithPredicateMatch(ValueError, 'received a non dict'):
@@ -120,9 +122,9 @@ class FeaturesManagerTest(testing.TestCase):
 
   def test_top_level(self):
     f = features_lib.FeaturesDict({
-        'a': tf.int32,
+        'a': np.int32,
         'b': {
-            'c': tf.int32,
+            'c': np.int32,
         },
     })
 
@@ -133,6 +135,40 @@ class FeaturesManagerTest(testing.TestCase):
             'c': 2,
         },
     })
+    f.decode_example_np({
+        'a': 1,
+        'b': {
+            'c': 2,
+        },
+    })
+
+
+def test_benchmark_deserialization_speed():
+  features = features_lib.FeaturesDict({
+      'a': np.int32,
+      'b': {
+          'c': np.int32,
+      },
+  })
+  example = {'a': 1, 'b': {'c': 2}}
+  serialized_example = features.serialize_example(example)
+  number_of_examples = 100
+  assert features.deserialize_example(serialized_example) == example
+  assert features.deserialize_example_np(serialized_example) == example
+
+  start_time = time.time()
+  for _ in range(number_of_examples):
+    features.deserialize_example(serialized_example)
+  tf_time = time.time() - start_time
+
+  start_time = time.time()
+  for _ in range(number_of_examples):
+    features.deserialize_example_np(serialized_example)
+  np_time = time.time() - start_time
+
+  # NumPy deserialization should be faster than TensorFlow deserialization.
+  # If you improved TensorFlow deserialization, please delete this test.
+  assert np_time < tf_time
 
 
 if __name__ == '__main__':
