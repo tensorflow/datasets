@@ -182,12 +182,14 @@ class WikiTableQuestionsTest(tfds.testing.DatasetBuilderTestCase):
         csv,
         'DictReader',
         side_effect=iter([examples_file, csv_203_csv_733, csv_203_csv_733]),
-    ), mock.patch.object(epath, 'Path'):
-      dataset = wiki_table_questions.WikiTableQuestions()
-      examples = list(dataset._generate_examples('', ''))
-      for i, (_, example) in enumerate(examples):
-        self.assertCountEqual(example, expected_examples[i])
-      assert len(examples) == len(expected_examples)
+    ):
+      mock_open = mock.MagicMock()
+      with epath.testing.mock_epath(open=mock_open):
+        dataset = wiki_table_questions.WikiTableQuestions()
+        examples = list(dataset._generate_examples('', ''))
+        for i, (_, example) in enumerate(examples):
+          self.assertCountEqual(example, expected_examples[i])
+        assert len(examples) == len(expected_examples)
 
 
 if __name__ == '__main__':
