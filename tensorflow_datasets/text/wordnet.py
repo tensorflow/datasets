@@ -16,6 +16,7 @@
 """wordnet dataset."""
 
 import os
+import random
 
 from etils import epath
 import tensorflow_datasets.public_api as tfds
@@ -98,6 +99,17 @@ _WN18RR_CITATION = """@inproceedings{dettmers2018conve,
 	Year = {2018},
         pages  = {1811--1818},
   	Month = {February}
+}
+"""
+
+_PENNTREEBANK_CITATION = """@article{article,
+author = {Taylor, Ann and Marcus, Mitchell and Santorini, Beatrice},
+year = {2003},
+month = {01},
+pages = {},
+title = {The Penn Treebank: An overview},
+isbn = {978-1-4020-1335-5},
+doi = {10.1007/978-94-010-0201-1_1}
 }
 """
 
@@ -213,3 +225,31 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
       for i, line in enumerate(f):
         lhs, relation, rhs = line.strip().split('\t')
         yield i, {'lhs': lhs, 'relation': relation, 'rhs': rhs}
+
+  def _sample_word(self, word_types, max_word_length):
+    """Samples a word of type 'word_type' that is no longer than 'max_word_length'.
+
+    Example usage:
+      builder = tfds.builder('wordnet')
+      noun    = builder.sample({"NN", "NNS"}, 5)
+      adj     = builder.sample({"JJ", "JJS"}, 7)
+      verb    = builder.sample({"VB"}, 4)
+        ...
+
+    Args:
+      word_types: set[str], set of Penn Treebank P.O.S. tags
+      max_word_length: uint, maximal number of chars in the word string.
+
+    Returns:
+      String word sampled uniformly at random, if a word of type in word_type
+      was sampled. Otherwise returns None.
+    """
+    n, n_max = 0, 10000000
+    samples = list(self.info.metadata['synsets'].values())
+    while n < n_max:
+      n += 1
+      triplet = random.sample(samples, 1)[0]['name']
+      word, word_type = triplet.split('_')[-3], triplet.split('_')[-2]
+      if word_type in word_types and len(word) <= max_word_length:
+        return word
+    return None

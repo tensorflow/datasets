@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """wordnet dataset."""
+import random
 
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import wordnet
@@ -50,7 +51,9 @@ class WordnetTest(tfds.testing.DatasetBuilderTestCase):
             builder.info.metadata['synsets']['08769179']['definition'],
             'an area in Germany around the upper Elbe river; '
             'the original home of the Saxons')
-
+        random.seed(478)
+        self.assertEqual(builder._sample_word({'NN', 'NNS'}, 8), 'saxony')
+        self.assertEqual(builder._sample_word({'NN', 'NNS'}, 5), 'stool')
 
 if __name__ == '__main__':
   tfds.testing.test_main()
