@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.core.dataset_builders.adhoc_builder import AdhocBuilder
 from tensorflow_datasets.core.dataset_builders.adhoc_builder import store_as_tfds_dataset
+from tensorflow_datasets.core.dataset_builders.adhoc_builder import TfDataBuilder
 from tensorflow_datasets.core.dataset_builders.conll.conll_dataset_builder import ConllBuilderConfig
 from tensorflow_datasets.core.dataset_builders.conll.conll_dataset_builder import ConllDatasetBuilder
 from tensorflow_datasets.core.dataset_builders.conll.conllu_dataset_builder import ConllUBuilderConfig
@@ -33,6 +34,7 @@ __all__ = [
     "ConllUDatasetBuilder",
     "HuggingfaceDatasetBuilder",
     "store_as_tfds_dataset",
+    "TfDataBuilder",
     "ViewBuilder",
     "ViewConfig",
 ]

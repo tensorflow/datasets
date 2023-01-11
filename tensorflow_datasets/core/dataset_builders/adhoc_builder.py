@@ -228,3 +228,21 @@ def store_as_tfds_dataset(
   logging.info("Dataset '%s' was prepared as a TFDS dataset in folder %s", name,
                builder.data_dir)
   return builder
+
+
+class TfDataBuilder(AdhocBuilder, skip_registration=True):
+  """Builds datasets from tf.data.Dataset without defining a class.
+
+  This is kept for backwards-compatibility.
+  """
+
+  def __init__(
+      self,
+      *,
+      split_datasets: Mapping[str, tf.data.Dataset],
+      **kwargs: Any,
+  ):
+    logging.warning(
+        "This class is deprecated. "
+        "Please use tfds.dataset_builders.store_as_tfds_dataset instead.")
+    super().__init__(split_datasets=split_datasets, **kwargs)

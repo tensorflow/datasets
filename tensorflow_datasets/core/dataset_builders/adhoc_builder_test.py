@@ -201,6 +201,42 @@ class TfDataBuilderTest(testing.TestCase):
     train2 = tfds.load(f'{ds_name}/b:1.0.0', split='train', data_dir=data_dir)
     assert list(dataset_utils.as_numpy(train2)) == [{'a': 2}]
 
+  def test_tf_data_builder_class(self):
+    ds_name = 'configless_dataset'
+    data_dir = self.tmp_dir
+
+    builder = adhoc_builder.TfDataBuilder(
+        name=ds_name,
+        version='1.0.0',
+        split_datasets={
+            'train':
+                tf.data.Dataset.from_tensor_slices({
+                    'a': [1, 2],
+                    'b': ['a', 'b'],
+                }),
+            'test':
+                tf.data.Dataset.from_tensor_slices({
+                    'a': [3],
+                    'b': ['c'],
+                }),
+        },
+        features=tfds.features.FeaturesDict({
+            'a': tf.int64,
+            'b': tfds.features.Text(),
+        }),
+        data_dir=data_dir,
+    )
+    builder.download_and_prepare()
+
+    actual_train = tfds.load(
+        f'{ds_name}:1.0.0', split='train', data_dir=data_dir)
+    actual_train_np = list(dataset_utils.as_numpy(actual_train))
+    assert actual_train_np == [{'a': 1, 'b': b'a'}, {'a': 2, 'b': b'b'}]
+
+    actual_test = tfds.load(f'{ds_name}:1.0.0', split='test', data_dir=data_dir)
+    actual_test_np = list(dataset_utils.as_numpy(actual_test))
+    assert actual_test_np == [{'a': 3, 'b': b'c'}]
+
 
 def generate_example(i: int, split: str):
   return i, {
