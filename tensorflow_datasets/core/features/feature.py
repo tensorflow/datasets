@@ -184,8 +184,7 @@ class CatalogFeatureDocumentation:
   tensor_info: Optional[TensorInfo] = None
 
   def replace(self, **kwargs: Any) -> 'CatalogFeatureDocumentation':
-    """Returns a copy of the `CatalogFeatureDocumentation` with updated attributes.
-    """
+    """Returns a copy of the `CatalogFeatureDocumentation` with updated attributes."""
     return dataclasses.replace(self, **kwargs)
 
 
@@ -381,6 +380,9 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
         else:
           raise ValueError(f'Type {type(content)} not supported when parsing '
                            'features serialized as json.')
+      if isinstance(content, dict) and ('dtype' in content and
+                                        isinstance(content['dtype'], str)):
+        content['dtype'] = dtype_from_str(content['dtype'])
       return feature_cls.from_json_content(content)
     else:
       feature_proto = json_format.ParseDict(value, feature_pb2.Feature())
@@ -1032,8 +1034,7 @@ def _make_empty_seq_output(
 
 
 def to_shape_proto(shape: utils.Shape) -> feature_pb2.Shape:
-  """Converts TFDS shape to Shape proto (-1 is used for unspecified dimensions).
-  """
+  """Converts TFDS shape to Shape proto (-1 is used for unspecified dimensions)."""
   dimensions = []
   for dimension in shape:
     if dimension is None or dimension < 0:

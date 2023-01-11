@@ -18,6 +18,7 @@ import numpy as np
 import pytest
 import tensorflow as tf
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.proto import feature_pb2
 
 
@@ -67,10 +68,12 @@ def test_from_shape_proto_unspecified():
 
 def test_dtype_to_str():
   assert feature.dtype_to_str(np.int64) == "int64"
+  assert feature.dtype_to_str(np.uint8) == "uint8"
 
 
 def test_dtype_from_str():
   assert feature.dtype_from_str("int64") == np.int64
+  assert feature.dtype_from_str("uint8") == np.uint8
 
 
 def test_dtype_for_string_types():
@@ -90,9 +93,37 @@ def test_encode_and_dtype_from_str():
       np.int64,
       np.bool_,
       np.object_,
+      np.uint8,
   ]
   for dtype in dtypes:
     assert feature.dtype_from_str(feature.dtype_to_str(dtype)) == dtype
+
+
+@pytest.mark.parametrize(
+    ["json"],
+    [({
+        "type": "tensorflow_datasets.core.features.image_feature.Image",
+        "content": {
+            "shape": [128, 128, 1],
+            "dtype": "uint8",
+            "encoding_format": None,
+            "use_colormap": False,
+        }
+    },),
+     ({
+         "type": "tensorflow_datasets.core.features.labeled_image.LabeledImage",
+         "content": {
+             "shape": [128, 128, 1],
+             "dtype": "uint8",
+             "encoding_format": None,
+             "labels": 2
+         }
+     },)])
+def test_feature_from_json(json):
+  feature_connector = feature.FeatureConnector.from_json(json)
+  assert isinstance(feature_connector, image_feature.Image)
+  assert feature_connector.dtype == np.uint8
+  assert feature_connector.shape == (128, 128, 1)
 
 
 @pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
