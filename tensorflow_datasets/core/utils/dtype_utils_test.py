@@ -25,6 +25,8 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
     (np.float64, np.float64),
     (tf.float64, np.float64),
     (tf.string, np.object_),
+    (np.uint8, np.uint8),
+    (tf.uint8, np.uint8),
 ])
 def test_tree_parallel_map(input_args, expected_output):
   assert dtype_utils.cast_to_numpy(input_args) == expected_output
@@ -37,6 +39,8 @@ def test_tree_parallel_map(input_args, expected_output):
     (dtype_utils.is_integer, tf.int32, True),
     (dtype_utils.is_integer, tf.int64, True),
     (dtype_utils.is_integer, tf.float32, False),
+    (dtype_utils.is_integer, np.uint8, True),
+    (dtype_utils.is_integer, tf.uint8, True),
     (dtype_utils.is_bool, np.bool_, True),
     (dtype_utils.is_bool, np.int32, False),
     (dtype_utils.is_bool, tf.bool, True),
@@ -53,6 +57,8 @@ def test_tree_parallel_map(input_args, expected_output):
     (dtype_utils.is_string, np.int32, False),
     (dtype_utils.is_string, tf.string, True),
     (dtype_utils.is_string, tf.int32, False),
+    (dtype_utils.is_string, np.uint8, False),
+    (dtype_utils.is_string, tf.uint8, False),
 ])
 def test_dtype(fn, dtype, result):
   assert fn(dtype) == result
@@ -64,6 +70,7 @@ def test_is_np_sub_dtype():
   assert dtype_utils.is_np_sub_dtype(float, np.floating)
   assert not dtype_utils.is_np_sub_dtype(np.int64, np.floating)
   assert not dtype_utils.is_np_sub_dtype(float, np.integer)
+  assert dtype_utils.is_np_sub_dtype(np.uint8, np.integer)
 
 
 def test_is_same_dtype_type():

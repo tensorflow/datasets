@@ -68,7 +68,7 @@ def _is_dtype(numpy_dtypes: List[np.dtype], tf_dtype: Any,
     if isinstance(tf_dtype, str):
       return getattr(dtype, tf_dtype)
     return dtype == tf_dtype
-  raise TypeError(f'type {dtype} not recognized')
+  raise TypeError(f'type {dtype} ({type(dtype)}) not recognized')
 
 
 @py_utils.memoize()
