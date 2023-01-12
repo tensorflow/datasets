@@ -16,12 +16,12 @@
 """Tests for squad dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering.squad import squad
+from tensorflow_datasets.datasets.squad import squad_dataset_builder
 
 
 class SquadV1Test(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["v1.1"]
-  DATASET_CLASS = squad.Squad
+  DATASET_CLASS = squad_dataset_builder.Builder
 
   DL_EXTRACT_RESULT = {
       "train": "train-v1.1.json",
@@ -36,7 +36,7 @@ class SquadV1Test(testing.DatasetBuilderTestCase):
 
 class SquadV2Test(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["v2.0"]
-  DATASET_CLASS = squad.Squad
+  DATASET_CLASS = squad_dataset_builder.Builder
 
   DL_EXTRACT_RESULT = {
       "train": "train-v2.0.json",
