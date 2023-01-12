@@ -16,11 +16,11 @@
 """TODO(so2sat): Add a description here."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import so2sat
+from tensorflow_datasets.datasets.so2sat import so2sat_dataset_builder
 
 
 class So2satTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = so2sat.So2sat
+  DATASET_CLASS = so2sat_dataset_builder.Builder
   SPLITS = {
       "train": 5,  # Number of fake train example
       "validation": 3,  # Number of fake validation example
