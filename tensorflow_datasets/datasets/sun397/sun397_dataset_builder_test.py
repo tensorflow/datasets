@@ -18,14 +18,12 @@
 import os
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import sun
+from tensorflow_datasets.datasets.sun397 import sun397_dataset_builder
 
-_EXAMPLE_DIR = os.path.join(
-    os.path.normpath(os.path.dirname(__file__) + '/../'), 'testing',
-    'test_data', 'fake_examples', 'sun397')
+_EXAMPLE_DIR = os.path.join(os.path.dirname(__file__), 'dummy_data')
 
 # Could use functools.partialmethod in Python3
-original_init = sun.Sun397.__init__
+original_init = sun397_dataset_builder.Builder.__init__
 
 
 def new_init(self, tfds_split_files=None, **kwargs):
@@ -42,11 +40,11 @@ def new_init(self, tfds_split_files=None, **kwargs):
 
 # Patch init to add init arguments without changing the class.__name__ and
 # registration reguired to find the checksum file.
-sun.Sun397.__init__ = new_init
+sun397_dataset_builder.Builder.__init__ = new_init
 
 
 class Sun397StandardPartitionTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = sun.Sun397
+  DATASET_CLASS = sun397_dataset_builder.Builder
   EXAMPLE_DIR = _EXAMPLE_DIR
   BUILDER_CONFIG_NAMES_TO_TEST = ['standard-part1-120k']
   SPLITS = {
@@ -56,7 +54,7 @@ class Sun397StandardPartitionTest(testing.DatasetBuilderTestCase):
 
 
 class Sun397TfdsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = sun.Sun397
+  DATASET_CLASS = sun397_dataset_builder.Builder
   EXAMPLE_DIR = _EXAMPLE_DIR
   BUILDER_CONFIG_NAMES_TO_TEST = ['tfds']
   SPLITS = {
