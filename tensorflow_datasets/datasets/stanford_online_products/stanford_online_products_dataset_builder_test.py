@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from tensorflow_datasets.image_classification import stanford_online_products
+from tensorflow_datasets.datasets.stanford_online_products import stanford_online_products_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class StanfordOnlineProductsTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = stanford_online_products.StanfordOnlineProducts
+  DATASET_CLASS = stanford_online_products_dataset_builder.Builder
   SPLITS = {"train": 3, "test": 3}
 
 
