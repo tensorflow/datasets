@@ -55,38 +55,56 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
     # Even sharding
     res = shard_utils.get_file_instructions(0, 12, ['f1', 'f2', 'f3'],
                                             [4, 4, 4])
-    self.assertEqual(res, [
-        shard_utils.FileInstruction(
-            filename='f1', skip=0, take=-1, num_examples=4),
-        shard_utils.FileInstruction(
-            filename='f2', skip=0, take=-1, num_examples=4),
-        shard_utils.FileInstruction(
-            filename='f3', skip=0, take=-1, num_examples=4),
-    ])
+    self.assertEqual(
+        res,
+        [
+            shard_utils.FileInstruction(
+                filename='f1', skip=0, take=-1, examples_in_shard=4
+            ),
+            shard_utils.FileInstruction(
+                filename='f2', skip=0, take=-1, examples_in_shard=4
+            ),
+            shard_utils.FileInstruction(
+                filename='f3', skip=0, take=-1, examples_in_shard=4
+            ),
+        ],
+    )
 
   def test_read_all_empty_shard(self):
     res = shard_utils.get_file_instructions(0, 12, ['f1', 'f2', 'f3', 'f4'],
                                             [4, 4, 0, 4])
-    self.assertEqual(res, [
-        shard_utils.FileInstruction(
-            filename='f1', skip=0, take=-1, num_examples=4),
-        shard_utils.FileInstruction(
-            filename='f2', skip=0, take=-1, num_examples=4),
-        shard_utils.FileInstruction(
-            filename='f4', skip=0, take=-1, num_examples=4),
-    ])
+    self.assertEqual(
+        res,
+        [
+            shard_utils.FileInstruction(
+                filename='f1', skip=0, take=-1, examples_in_shard=4
+            ),
+            shard_utils.FileInstruction(
+                filename='f2', skip=0, take=-1, examples_in_shard=4
+            ),
+            shard_utils.FileInstruction(
+                filename='f4', skip=0, take=-1, examples_in_shard=4
+            ),
+        ],
+    )
 
   def test_from1_to10(self):
     res = shard_utils.get_file_instructions(1, 10, ['f1', 'f2', 'f3', 'f4'],
                                             [4, 4, 0, 4])
-    self.assertEqual(res, [
-        shard_utils.FileInstruction(
-            filename='f1', skip=1, take=-1, num_examples=3),
-        shard_utils.FileInstruction(
-            filename='f2', skip=0, take=-1, num_examples=4),
-        shard_utils.FileInstruction(
-            filename='f4', skip=0, take=2, num_examples=2),
-    ])
+    self.assertEqual(
+        res,
+        [
+            shard_utils.FileInstruction(
+                filename='f1', skip=1, take=3, examples_in_shard=4
+            ),
+            shard_utils.FileInstruction(
+                filename='f2', skip=0, take=4, examples_in_shard=4
+            ),
+            shard_utils.FileInstruction(
+                filename='f4', skip=0, take=2, examples_in_shard=4
+            ),
+        ],
+    )
 
   def test_nothing_to_read(self):
     res = shard_utils.get_file_instructions(0, 0, ['f1', 'f2', 'f3', 'f4'],
@@ -102,29 +120,41 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
   def test_split_file_instruction(self):
     filename = 'data.tfrecord'
     file_instruction = shard_utils.FileInstruction(
-        filename=filename, skip=0, take=-1, num_examples=10)
+        filename=filename, skip=0, take=-1, examples_in_shard=10
+    )
     actual_splits = shard_utils.split_file_instruction(
         file_instruction=file_instruction, num_splits=3)
-    self.assertEqual(actual_splits, [
-        shard_utils.FileInstruction(
-            filename=filename, skip=0, take=4, num_examples=10),
-        shard_utils.FileInstruction(
-            filename=filename, skip=4, take=4, num_examples=10),
-        shard_utils.FileInstruction(
-            filename=filename, skip=8, take=2, num_examples=10)
-    ])
+    self.assertEqual(
+        actual_splits,
+        [
+            shard_utils.FileInstruction(
+                filename=filename, skip=0, take=4, examples_in_shard=10
+            ),
+            shard_utils.FileInstruction(
+                filename=filename, skip=4, take=4, examples_in_shard=10
+            ),
+            shard_utils.FileInstruction(
+                filename=filename, skip=8, take=2, examples_in_shard=10
+            ),
+        ],
+    )
 
   def test_split_file_instruction_one_example_many_splits(self):
     # Test when more splits are requested than there are examples.
     filename = 'data.tfrecord'
     file_instruction = shard_utils.FileInstruction(
-        filename=filename, skip=0, take=-1, num_examples=1)
+        filename=filename, skip=0, take=-1, examples_in_shard=1
+    )
     actual_splits = shard_utils.split_file_instruction(
         file_instruction=file_instruction, num_splits=9999)
-    self.assertEqual(actual_splits, [
-        shard_utils.FileInstruction(
-            filename=filename, skip=0, take=1, num_examples=1),
-    ])
+    self.assertEqual(
+        actual_splits,
+        [
+            shard_utils.FileInstruction(
+                filename=filename, skip=0, take=1, examples_in_shard=1
+            ),
+        ],
+    )
 
   @parameterized.parameters(
       ('/a/b', '/a'),
@@ -145,6 +175,30 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
   def test_file_instruction_basename(self, filename, expected):
     file_instruction = shard_utils.FileInstruction(filename, 0, -1, 1)
     self.assertEqual(file_instruction.basename(), expected)
+
+
+class FileInstructionTest(testing.TestCase, parameterized.TestCase):
+
+  @parameterized.parameters(
+      ('a', 0, 1, 1, shard_utils.FileInstruction('a', 0, 1, 1)),
+      ('a', 0, 1, 2, shard_utils.FileInstruction('a', 0, 1, 2)),
+      ('a', 0, -1, 1, shard_utils.FileInstruction('a', 0, 1, 1)),
+      ('a', 1, -1, 10, shard_utils.FileInstruction('a', 1, 9, 10)),
+  )
+  def test_init(self, filename, skip, take, examples_in_shard, expected):
+    actual = shard_utils.FileInstruction(
+        filename, skip, take, examples_in_shard
+    )
+    self.assertEqual(expected, actual)
+
+  @parameterized.parameters(
+      ('a', 0, 1, -42, 'examples_in_shard should be >= 0!.+'),
+      ('a', -42, 1, 2, 'skip should be between 0 and.+'),
+      ('a', 0, 2, 1, 'skip .+take .+should be <= examples_in_shard.+'),
+  )
+  def test_incorrect_values(self, filename, skip, take, examples_in_shard, msg):
+    with self.assertRaisesRegex(ValueError, expected_regex=msg):
+      shard_utils.FileInstruction(filename, skip, take, examples_in_shard)
 
 
 if __name__ == '__main__':

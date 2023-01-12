@@ -277,7 +277,6 @@ class SubSplitInfo(object):
   ds, info = tfds.load(..., split='train[75%:]', with_info=True)
   info.splits['train[75%:]'].num_examples
   ```
-
   """
 
   def __init__(self, file_instructions: List[shard_utils.FileInstruction]):
@@ -291,7 +290,7 @@ class SubSplitInfo(object):
   @property
   def num_examples(self) -> int:
     """Returns the number of example in the subsplit."""
-    return sum(f.num_examples for f in self._file_instructions)
+    return sum(f.take for f in self._file_instructions)
 
   @property
   def num_shards(self) -> int:
@@ -494,7 +493,6 @@ class AbstractSplit(abc.ABC):
   `tfds.load(..., split=)` or `builder.as_dataset(split=...)`.
 
   See the guide: https://www.tensorflow.org/datasets/splits
-
   """
 
   @classmethod
@@ -558,7 +556,6 @@ class _SplitAdd(AbstractSplit):
 
   `'train+test'` is equivalent to
   `_SplitAdd(ReadInstruction('train'), ReadInstruction('test'))`
-
   """
   left: AbstractSplit
   right: AbstractSplit

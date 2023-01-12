@@ -94,7 +94,7 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
     # to absolute instructions (and check that
     # `splits[abs_split].file_instructions == [file_instruction]` ).
 
-    if file_instruction.skip > 0 or file_instruction.take > 0:
+    if file_instruction.skip > 0 or not file_instruction.takes_all:
       batch_size = as_dataset_kwargs.get('batch_size')
       if batch_size is not None:
         raise NotImplementedError(f'ReadFromTFDS supports skip and take (used '
@@ -103,7 +103,7 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
 
     if file_instruction.skip > 0:
       ds = ds.skip(file_instruction.skip)
-    if file_instruction.take > 0:
+    if not file_instruction.takes_all:
       ds = ds.take(file_instruction.take)
     inc_counter(
         name='LoadedFileInstructions', value=1, namespace='ReadFromTFDS')
