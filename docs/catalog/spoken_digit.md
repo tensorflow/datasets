@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="spoken_digit" />
-  <meta itemprop="description" content="A free audio dataset of spoken digits. Think MNIST for audio.&#10;&#10;A simple audio/speech dataset consisting of recordings of spoken digits in wav files at 8kHz.&#10;The recordings are trimmed so that they have near minimal silence at the beginnings and ends.&#10;&#10;5 speakers&#10;2,500 recordings (50 of each digit per speaker)&#10;English pronunciations&#10;&#10;Files are named in the following format: {digitLabel}_{speakerName}_{index}.wav&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;spoken_digit&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="A free audio dataset of spoken digits. Think MNIST for audio.&#10;&#10;A simple audio/speech dataset consisting of recordings of spoken digits in wav&#10;files at 8kHz.&#10;The recordings are trimmed so that they have near minimal silence at the&#10;beginnings and ends.&#10;&#10;5 speakers\&#10;2,500 recordings (50 of each digit per speaker)\&#10;English pronunciations&#10;&#10;Files are named in the following format: {digitLabel}_{speakerName}_{index}.wav&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;spoken_digit&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/spoken_digit" />
   <meta itemprop="sameAs" content="https://github.com/Jakobovski/free-spoken-digit-dataset" />
   <meta itemprop="citation" content="@ONLINE {Free Spoken Digit Dataset,&#10;    author = &quot;Zohar Jackson&quot;,&#10;    title  = &quot;Spoken_Digit&quot;,&#10;    year   = &quot;2016&quot;,&#10;    url    = &quot;https://github.com/Jakobovski/free-spoken-digit-dataset&quot;&#10;}" />
@@ -20,8 +20,9 @@ A simple audio/speech dataset consisting of recordings of spoken digits in wav
 files at 8kHz. The recordings are trimmed so that they have near minimal silence
 at the beginnings and ends.
 
-5 speakers 2,500 recordings (50 of each digit per speaker) English
-pronunciations
+5 speakers \
+2,500 recordings (50 of each digit per speaker) \
+English pronunciations
 
 Files are named in the following format: {digitLabel}_{speakerName}_{index}.wav
 
@@ -35,7 +36,7 @@ Files are named in the following format: {digitLabel}_{speakerName}_{index}.wav
     [https://github.com/Jakobovski/free-spoken-digit-dataset](https://github.com/Jakobovski/free-spoken-digit-dataset)
 
 *   **Source code**:
-    [`tfds.audio.spoken_digit.SpokenDigit`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/spoken_digit/spoken_digit.py)
+    [`tfds.datasets.spoken_digit.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/spoken_digit/spoken_digit_dataset_builder.py)
 
 *   **Versions**:
 

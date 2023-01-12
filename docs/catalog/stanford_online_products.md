@@ -32,7 +32,7 @@ Stanford Online Products Dataset
     [http://cvgl.stanford.edu/projects/lifted_struct/](http://cvgl.stanford.edu/projects/lifted_struct/)
 
 *   **Source code**:
-    [`tfds.image_classification.StanfordOnlineProducts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/stanford_online_products.py)
+    [`tfds.datasets.stanford_online_products.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/stanford_online_products/stanford_online_products_dataset_builder.py)
 
 *   **Versions**:
 

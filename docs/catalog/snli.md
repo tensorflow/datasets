@@ -29,7 +29,7 @@ inference (NLI), also known as recognizing textual entailment (RTE).
     [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
 
 *   **Source code**:
-    [`tfds.text.Snli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/snli.py)
+    [`tfds.datasets.snli.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/snli/snli_dataset_builder.py)
 
 *   **Versions**:
 

@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="summscreen" />
-  <meta itemprop="description" content="SummScreen Summarization dataset, non-anonymized, non-tokenized version.&#10;&#10;Train/val/test splits and filtering are based on the final tokenized dataset,&#10;but transcripts and recaps provided are based on the untokenized text.&#10;&#10;There are two features:&#10;&#10;  - transcript: Full episode transcripts, each line of dialogue&#10;    separated by newlines&#10;  - recap: Recaps or summaries of episodes&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;summscreen&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="SummScreen Summarization dataset, non-anonymized, non-tokenized version.&#10;&#10;Train/val/test splits and filtering are based on the final tokenized dataset,&#10;but transcripts and recaps provided are based on the untokenized text.&#10;&#10;There are two features:&#10;&#10;-   transcript: Full episode transcripts, each line of dialogue separated by&#10;    newlines&#10;-   recap: Recaps or summaries of episodes&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;summscreen&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/summscreen" />
   <meta itemprop="sameAs" content="https://github.com/mingdachen/SummScreen" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-2104-07091,&#10;  author    = {Mingda Chen and&#10;               Zewei Chu and&#10;               Sam Wiseman and&#10;               Kevin Gimpel},&#10;  title     = {SummScreen: {A} Dataset for Abstractive Screenplay Summarization},&#10;  journal   = {CoRR},&#10;  volume    = {abs/2104.07091},&#10;  year      = {2021},&#10;  url       = {https://arxiv.org/abs/2104.07091},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {2104.07091},&#10;  timestamp = {Mon, 19 Apr 2021 16:45:47 +0200},&#10;  biburl    = {https://dblp.org/rec/journals/corr/abs-2104-07091.bib},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
@@ -29,7 +29,7 @@ There are two features:
     [https://github.com/mingdachen/SummScreen](https://github.com/mingdachen/SummScreen)
 
 *   **Source code**:
-    [`tfds.summarization.summscreen.Summscreen`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/summscreen/summscreen.py)
+    [`tfds.datasets.summscreen.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/summscreen/summscreen_dataset_builder.py)
 
 *   **Versions**:
 
