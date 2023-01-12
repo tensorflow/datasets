@@ -27,14 +27,15 @@ RANGE_TEST = list(range(3000, 3200))
 RANGE_VAL = list(range(6000, 6010))
 
 
-def _filename_template(split: str,
-                       dataset_name: str = 'ds_name',
-                       data_dir: str = '/path'):
+def _filename_template(
+    split: str, dataset_name: str = 'ds_name', data_dir: str = '/path'
+):
   return naming.ShardedFileTemplate(
       dataset_name=dataset_name,
       split=split,
       data_dir=data_dir,
-      filetype_suffix='tfrecord')
+      filetype_suffix='tfrecord',
+  )
 
 
 def test_multi_split_infos():
@@ -44,12 +45,14 @@ def test_multi_split_infos():
           name=split,
           shard_lengths=[10, 10],
           num_bytes=100,
-          filename_template=_filename_template(split=split, data_dir='/abc')),
+          filename_template=_filename_template(split=split, data_dir='/abc'),
+      ),
       tfds.core.SplitInfo(
           name=split,
           shard_lengths=[1],
           num_bytes=20,
-          filename_template=_filename_template(split=split, data_dir='/xyz')),
+          filename_template=_filename_template(split=split, data_dir='/xyz'),
+      ),
   ]
   multi_split_info = splits.MultiSplitInfo(name=split, split_infos=split_infos)
   assert multi_split_info.num_bytes == 120
@@ -61,21 +64,27 @@ def test_multi_split_infos():
           filename='/abc/ds_name-train.tfrecord-00000-of-00002',
           skip=0,
           take=-1,
-          num_examples=10),
+          examples_in_shard=10,
+      ),
       shard_utils.FileInstruction(
           filename='/abc/ds_name-train.tfrecord-00001-of-00002',
           skip=0,
           take=-1,
-          num_examples=10),
+          examples_in_shard=10,
+      ),
       shard_utils.FileInstruction(
           filename='/xyz/ds_name-train.tfrecord-00000-of-00001',
           skip=0,
           take=-1,
-          num_examples=1)
+          examples_in_shard=1,
+      ),
   ]
-  assert str(multi_split_info) == (
-      'MultiSplitInfo(name=\'train\', split_infos=[<SplitInfo num_examples=20, '
-      'num_shards=2>, <SplitInfo num_examples=1, num_shards=1>])')
+  assert (
+      str(multi_split_info)
+      == "MultiSplitInfo(name='train', split_infos=[<SplitInfo"
+      ' num_examples=20, '
+      'num_shards=2>, <SplitInfo num_examples=1, num_shards=1>])'
+  )
 
 
 class SplitDictTest(testing.TestCase):
@@ -87,12 +96,14 @@ class SplitDictTest(testing.TestCase):
             name='train',
             shard_lengths=[10, 10],
             num_bytes=0,
-            filename_template=_filename_template('train')),
+            filename_template=_filename_template('train'),
+        ),
         tfds.core.SplitInfo(
             name='test',
             shard_lengths=[1],
             num_bytes=0,
-            filename_template=_filename_template('test')),
+            filename_template=_filename_template('test'),
+        ),
     ]
     sd = splits.SplitDict(si)
     return sd
@@ -105,12 +116,12 @@ class SplitDictTest(testing.TestCase):
   def test_from_proto(self):
     sd = splits.SplitDict.from_proto(
         filename_template=naming.ShardedFileTemplate(
-            dataset_name='ds_name',
-            data_dir='/path',
-            filetype_suffix='tfrecord'),
+            dataset_name='ds_name', data_dir='/path', filetype_suffix='tfrecord'
+        ),
         repeated_split_infos=[
             proto.SplitInfo(name='validation', shard_lengths=[5], num_bytes=0)
-        ])
+        ],
+    )
     self.assertIn('validation', sd)
     self.assertNotIn('train', sd)
     self.assertNotIn('test', sd)
@@ -134,7 +145,8 @@ class SplitDictTest(testing.TestCase):
             name='train',
             shard_lengths=[5],
             num_bytes=0,
-            filename_template=_filename_template('train'))
+            filename_template=_filename_template('train'),
+        )
     ]
     sd = splits.SplitDict(si)
     self.assertTrue(sd)  # Non-empty split is True
@@ -144,7 +156,8 @@ class SplitDictTest(testing.TestCase):
         name='train',
         shard_lengths=[1, 2, 3],
         num_bytes=0,
-        filename_template=_filename_template(split='train'))
+        filename_template=_filename_template(split='train'),
+    )
     sd = splits.SplitDict([si])
     self.assertEqual(sd['train'].num_shards, 3)
 
@@ -154,41 +167,50 @@ class SplitDictTest(testing.TestCase):
       _ = sd['train']
 
   def test_merge_multiple(self):
-
     def split_info_for(name: str, shard_lengths, template) -> splits.SplitInfo:
       return splits.SplitInfo(
           name=name,
           shard_lengths=shard_lengths,
           num_bytes=0,
-          filename_template=template)
+          filename_template=template,
+      )
 
     template_a = naming.ShardedFileTemplate(
-        dataset_name='ds_name', data_dir='/a', filetype_suffix='tfrecord')
+        dataset_name='ds_name', data_dir='/a', filetype_suffix='tfrecord'
+    )
     split_info_a1 = split_info_for('train', [1, 2, 3], template_a)
     split_info_a2 = split_info_for('test', [1], template_a)
     split_info_a3 = split_info_for('banana', [1], template_a)
     split_dict_1 = splits.SplitDict(
-        [split_info_a1, split_info_a2, split_info_a3])
+        [split_info_a1, split_info_a2, split_info_a3]
+    )
 
     template_b = naming.ShardedFileTemplate(
-        dataset_name='ds_name', data_dir='/b', filetype_suffix='tfrecord')
+        dataset_name='ds_name', data_dir='/b', filetype_suffix='tfrecord'
+    )
     split_info_b1 = split_info_for('train', [4, 5, 6], template_b)
     split_info_b2 = split_info_for('test', [3], template_b)
     split_dict_2 = splits.SplitDict([split_info_b1, split_info_b2])
 
     template_c = naming.ShardedFileTemplate(
-        dataset_name='ds_name', data_dir='/c', filetype_suffix='tfrecord')
+        dataset_name='ds_name', data_dir='/c', filetype_suffix='tfrecord'
+    )
     split_info_c1 = split_info_for('train', [8], template_c)
     split_info_c2 = split_info_for('train', [9], template_c)
     multi_split = splits.MultiSplitInfo(
-        name='train', split_infos=[split_info_c1, split_info_c2])
+        name='train', split_infos=[split_info_c1, split_info_c2]
+    )
     split_dict_3 = splits.SplitDict([multi_split])
 
     merged = splits.SplitDict.merge_multiple(
-        [split_dict_1, split_dict_2, split_dict_3])
+        [split_dict_1, split_dict_2, split_dict_3]
+    )
     assert len(merged.values()) == 3
     assert merged.get('train').split_infos == [
-        split_info_a1, split_info_b1, split_info_c1, split_info_c2
+        split_info_a1,
+        split_info_b1,
+        split_info_c1,
+        split_info_c2,
     ]
     assert merged.get('test').split_infos == [split_info_a2, split_info_b2]
     assert merged.get('banana').split_infos == [split_info_a3]
@@ -223,40 +245,53 @@ class SplitsTest(testing.TestCase):
 
   def test_sub_split_file_instructions(self):
     fi = self._builder.info.splits['train[75%:]'].file_instructions
-    self.assertEqual(fi, [
-        shard_utils.FileInstruction(
-            filename=f'{self._builder.data_dir}/dummy_dataset_shared_generator-train.tfrecord-00000-of-00001',
-            skip=15,
-            take=-1,
-            num_examples=5,
-        )
-    ])
+    self.assertEqual(
+        fi,
+        [
+            shard_utils.FileInstruction(
+                filename=f'{self._builder.data_dir}/dummy_dataset_shared_generator-train.tfrecord-00000-of-00001',
+                skip=15,
+                take=-1,
+                examples_in_shard=20,
+            )
+        ],
+    )
 
   def test_sub_split_num_shards(self):
     self.assertEqual(self._builder.info.splits['train[75%:]'].num_shards, 1)
 
   def test_split_file_instructions(self):
     fi = self._builder.info.splits['train'].file_instructions
-    self.assertEqual(fi, [
-        shard_utils.FileInstruction(
-            filename=f'{self._builder.data_dir}/dummy_dataset_shared_generator-train.tfrecord-00000-of-00001',
-            skip=0,
-            take=-1,
-            num_examples=20,
-        )
-    ])
+    self.assertEqual(
+        fi,
+        [
+            shard_utils.FileInstruction(
+                filename=f'{self._builder.data_dir}/dummy_dataset_shared_generator-train.tfrecord-00000-of-00001',
+                skip=0,
+                take=-1,
+                examples_in_shard=20,
+            )
+        ],
+    )
 
   def test_sub_split_filenames(self):
-    self.assertEqual(self._builder.info.splits['train'].filenames, [
-        'dummy_dataset_shared_generator-train.tfrecord-00000-of-00001',
-    ])
-    self.assertEqual(self._builder.info.splits['train[75%:]'].filenames, [
-        'dummy_dataset_shared_generator-train.tfrecord-00000-of-00001',
-    ])
+    self.assertEqual(
+        self._builder.info.splits['train'].filenames,
+        [
+            'dummy_dataset_shared_generator-train.tfrecord-00000-of-00001',
+        ],
+    )
+    self.assertEqual(
+        self._builder.info.splits['train[75%:]'].filenames,
+        [
+            'dummy_dataset_shared_generator-train.tfrecord-00000-of-00001',
+        ],
+    )
 
   def test_sub_split_wrong_key(self):
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             "Unknown split 'unknown'"):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, "Unknown split 'unknown'"
+    ):
       _ = self._builder.info.splits['unknown']
 
   def test_split_enum(self):
@@ -270,30 +305,30 @@ class ReadInstructionTest(testing.TestCase):
     super(ReadInstructionTest, self).setUp()
 
     self.splits = {
-        'train':
-            splits.SplitInfo(
-                name='train',
-                shard_lengths=[200],
-                num_bytes=0,
-                filename_template=_filename_template('train')),
-        'test':
-            splits.SplitInfo(
-                name='test',
-                shard_lengths=[101],
-                num_bytes=0,
-                filename_template=_filename_template('test')),
-        'validation':
-            splits.SplitInfo(
-                name='validation',
-                shard_lengths=[30],
-                num_bytes=0,
-                filename_template=_filename_template('validation')),
-        'dev-train':
-            splits.SplitInfo(
-                name='dev-train',
-                shard_lengths=[5, 5],
-                num_bytes=0,
-                filename_template=_filename_template('dev-train')),
+        'train': splits.SplitInfo(
+            name='train',
+            shard_lengths=[200],
+            num_bytes=0,
+            filename_template=_filename_template('train'),
+        ),
+        'test': splits.SplitInfo(
+            name='test',
+            shard_lengths=[101],
+            num_bytes=0,
+            filename_template=_filename_template('test'),
+        ),
+        'validation': splits.SplitInfo(
+            name='validation',
+            shard_lengths=[30],
+            num_bytes=0,
+            filename_template=_filename_template('validation'),
+        ),
+        'dev-train': splits.SplitInfo(
+            name='dev-train',
+            shard_lengths=[5, 5],
+            num_bytes=0,
+            filename_template=_filename_template('dev-train'),
+        ),
     }
 
   def check_from_ri(self, ri, expected):
@@ -301,7 +336,8 @@ class ReadInstructionTest(testing.TestCase):
     expected_result = []
     for split_name, from_, to_ in expected:
       expected_result.append(
-          splits._AbsoluteInstruction(split_name, from_, to_))
+          splits._AbsoluteInstruction(split_name, from_, to_)
+      )
     self.assertEqual(res, expected_result)
     return ri
 
@@ -323,10 +359,13 @@ class ReadInstructionTest(testing.TestCase):
     )
     self.check_from_spec('test', [('test', None, None)])
     # Addition of splits:
-    self.check_from_spec('train+test', [
-        ('train', None, None),
-        ('test', None, None),
-    ])
+    self.check_from_spec(
+        'train+test',
+        [
+            ('train', None, None),
+            ('test', None, None),
+        ],
+    )
     # Absolute slicing:
     self.check_from_spec('train[0:0]', [('train', None, 0)])
     self.check_from_spec('train[:10]', [('train', None, 10)])
@@ -342,22 +381,27 @@ class ReadInstructionTest(testing.TestCase):
     self.check_from_spec('train[-1%:]', [('train', 198, None)])
     ri = self.check_from_spec('test[:99%]', [('test', None, 100)])
     self.assertEqual(
-        str(ri), "ReadInstruction('test[:99%]', rounding='closest')")
+        str(ri), "ReadInstruction('test[:99%]', rounding='closest')"
+    )
     # No overlap:
     self.check_from_spec('test[100%:]', [('test', 101, None)])
     # Percent slicing, pct1_dropremainder rounding:
     ri = splits.ReadInstruction(
-        'train', to=20, unit='%', rounding='pct1_dropremainder')
+        'train', to=20, unit='%', rounding='pct1_dropremainder'
+    )
     self.check_from_ri(ri, [('train', None, 40)])
     # test split has 101 examples.
     ri = splits.ReadInstruction(
-        'test', to=100, unit='%', rounding='pct1_dropremainder')
+        'test', to=100, unit='%', rounding='pct1_dropremainder'
+    )
     self.check_from_ri(ri, [('test', None, 100)])
     # No overlap using 'pct1_dropremainder' rounding:
     ri1 = splits.ReadInstruction(
-        'test', to=99, unit='%', rounding='pct1_dropremainder')
+        'test', to=99, unit='%', rounding='pct1_dropremainder'
+    )
     ri2 = splits.ReadInstruction(
-        'test', from_=100, unit='%', rounding='pct1_dropremainder')
+        'test', from_=100, unit='%', rounding='pct1_dropremainder'
+    )
     self.check_from_ri(ri1, [('test', None, 99)])
     self.check_from_ri(ri2, [('test', 100, None)])
     # Empty:
@@ -377,9 +421,11 @@ class ReadInstructionTest(testing.TestCase):
     ri = ri1 + ri2 + ri3
     self.assertEqual(
         str(ri),
-        "ReadInstruction('train[10:20]')"
-        "+ReadInstruction('test[10:20]')"
-        "+ReadInstruction('train[1:5]')",
+        (
+            "ReadInstruction('train[10:20]')"
+            "+ReadInstruction('test[10:20]')"
+            "+ReadInstruction('train[1:5]')"
+        ),
     )
 
   def test_invalid_rounding(self):
@@ -392,27 +438,33 @@ class ReadInstructionTest(testing.TestCase):
 
   def test_invalid_spec(self):
     # Invalid format:
-    self.assertRaises('validation[:250%:2]',
-                      'Unrecognized split format: \'validation[:250%:2]\'')
+    self.assertRaises(
+        'validation[:250%:2]',
+        "Unrecognized split format: 'validation[:250%:2]'",
+    )
     # Unexisting split:
     self.assertRaises('imaginary', "Unknown split 'imaginary'")
     # Invalid boundaries abs:
     self.assertRaises('validation[:31]', 'incompatible with 30 examples')
     # Invalid boundaries %:
-    self.assertRaises('validation[:250%]',
-                      'percent slice boundaries should be in [-100, 100]')
-    self.assertRaises('validation[-101%:]',
-                      'percent slice boundaries should be in [-100, 100]')
+    self.assertRaises(
+        'validation[:250%]', 'percent slice boundaries should be in [-100, 100]'
+    )
+    self.assertRaises(
+        'validation[-101%:]',
+        'percent slice boundaries should be in [-100, 100]',
+    )
     # pct1_dropremainder with < 100 examples
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'with less than 100 elements is forbidden'):
+        ValueError, 'with less than 100 elements is forbidden'
+    ):
       ri = splits.ReadInstruction(
-          'validation', to=99, unit='%', rounding='pct1_dropremainder')
+          'validation', to=99, unit='%', rounding='pct1_dropremainder'
+      )
       ri.to_absolute(self.splits)
 
 
 class GetDatasetFilesTest(testing.TestCase):
-
   PATH_PATTERN = '/path/mnist-train.tfrecord-0000%d-of-00005'
 
   def _get_files(self, instruction):
@@ -422,7 +474,8 @@ class GetDatasetFilesTest(testing.TestCase):
             shard_lengths=[3, 2, 3, 2, 3],  # 13 examples.
             num_bytes=0,
             filename_template=_filename_template(
-                dataset_name='mnist', split='train'),
+                dataset_name='mnist', split='train'
+            ),
         )
     ]
     splits_dict = splits.SplitDict(split_infos=split_infos)
@@ -431,59 +484,117 @@ class GetDatasetFilesTest(testing.TestCase):
   def test_no_skip_no_take(self):
     instruction = splits._AbsoluteInstruction('train', None, None)
     files = self._get_files(instruction)
-    self.assertEqual(files, [
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % i, skip=0, take=-1, num_examples=n)
-        for i, n in enumerate([3, 2, 3, 2, 3])
-    ])
+    expected_files = []
+    for i, n in enumerate([3, 2, 3, 2, 3]):
+      expected_files.append(
+          shard_utils.FileInstruction(
+              filename=self.PATH_PATTERN % i,
+              skip=0,
+              take=-1,
+              examples_in_shard=n,
+          )
+      )
+    self.assertEqual(files, expected_files)
 
   def test_skip(self):
     # One file is not taken, one file is partially taken.
     instruction = splits._AbsoluteInstruction('train', 4, None)
     files = self._get_files(instruction)
-    self.assertEqual(files, [
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 1, skip=1, take=-1, num_examples=1),
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 2, skip=0, take=-1, num_examples=3),
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 3, skip=0, take=-1, num_examples=2),
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 4, skip=0, take=-1, num_examples=3),
-    ])
+    self.assertEqual(
+        files,
+        [
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 1,
+                skip=1,
+                take=-1,
+                examples_in_shard=2,
+            ),
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 2,
+                skip=0,
+                take=-1,
+                examples_in_shard=3,
+            ),
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 3,
+                skip=0,
+                take=-1,
+                examples_in_shard=2,
+            ),
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 4,
+                skip=0,
+                take=-1,
+                examples_in_shard=3,
+            ),
+        ],
+    )
 
   def test_take(self):
     # Two files are not taken, one file is partially taken.
     instruction = splits._AbsoluteInstruction('train', None, 6)
     files = self._get_files(instruction)
-    self.assertEqual(files, [
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 0, skip=0, take=-1, num_examples=3),
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 1, skip=0, take=-1, num_examples=2),
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 2, skip=0, take=1, num_examples=1),
-    ])
+    self.assertEqual(
+        files,
+        [
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 0,
+                skip=0,
+                take=-1,
+                examples_in_shard=3,
+            ),
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 1,
+                skip=0,
+                take=-1,
+                examples_in_shard=2,
+            ),
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 2,
+                skip=0,
+                take=1,
+                examples_in_shard=3,
+            ),
+        ],
+    )
 
   def test_skip_take1(self):
     # A single shard with both skip and take.
     instruction = splits._AbsoluteInstruction('train', 1, 2)
     files = self._get_files(instruction)
-    self.assertEqual(files, [
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 0, skip=1, take=1, num_examples=1),
-    ])
+    self.assertEqual(
+        files,
+        [
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 0,
+                skip=1,
+                take=1,
+                examples_in_shard=3,
+            ),
+        ],
+    )
 
   def test_skip_take2(self):
     # 2 elements in across two shards are taken in middle.
     instruction = splits._AbsoluteInstruction('train', 7, 9)
     files = self._get_files(instruction)
-    self.assertEqual(files, [
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 2, skip=2, take=-1, num_examples=1),
-        shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 3, skip=0, take=1, num_examples=1),
-    ])
+    self.assertEqual(
+        files,
+        [
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 2,
+                skip=2,
+                take=-1,
+                examples_in_shard=3,
+            ),
+            shard_utils.FileInstruction(
+                filename=self.PATH_PATTERN % 3,
+                skip=0,
+                take=1,
+                examples_in_shard=2,
+            ),
+        ],
+    )
 
   def test_touching_boundaries(self):
     # Nothing to read.
@@ -506,13 +617,15 @@ class GetDatasetFilesTest(testing.TestCase):
   def test_missing_shard_lengths(self):
     with self.assertRaisesWithPredicateMatch(ValueError, 'Shard empty.'):
       filename_template = _filename_template(
-          split='train', dataset_name='mnist')
+          split='train', dataset_name='mnist'
+      )
       split_infos = [
           splits.SplitInfo(
               name='train',
               shard_lengths=[],
               num_bytes=0,
-              filename_template=filename_template),
+              filename_template=filename_template,
+          ),
       ]
       splits_dict = splits.SplitDict(split_infos=split_infos)
       _ = splits_dict['train'].file_instructions

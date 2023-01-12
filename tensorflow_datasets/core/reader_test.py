@@ -234,17 +234,23 @@ class ReaderTest(testing.TestCase):
             shard_utils.FileInstruction(
                 filename=os.fspath(
                     filename_template.sharded_filepath(
-                        shard_index=1, num_shards=4)),
+                        shard_index=1, num_shards=4
+                    )
+                ),
                 skip=0,
                 take=-1,
-                num_examples=3),
+                examples_in_shard=3,
+            ),
             shard_utils.FileInstruction(
                 filename=os.fspath(
                     filename_template.sharded_filepath(
-                        shard_index=3, num_shards=4)),
+                        shard_index=3, num_shards=4
+                    )
+                ),
                 skip=1,
                 take=1,
-                num_examples=1),
+                examples_in_shard=3,
+            ),
         ],
         read_config=read_config_lib.ReadConfig(),
         shuffle_files=False,
@@ -298,10 +304,13 @@ class ReaderTest(testing.TestCase):
               shard_utils.FileInstruction(
                   filename=os.fspath(
                       filename_template.sharded_filepath(
-                          shard_index=1, num_shards=4)),
+                          shard_index=1, num_shards=4
+                      )
+                  ),
                   skip=0,
                   take=-1,
-                  num_examples=3),
+                  examples_in_shard=3,
+              ),
           ],
           read_config=read_config_lib.ReadConfig(),
           shuffle_files=True,
@@ -314,11 +323,12 @@ class ReaderTest(testing.TestCase):
     instructions = [
         shard_utils.FileInstruction(
             filename=os.fspath(
-                filename_template.sharded_filepath(shard_index=1,
-                                                   num_shards=4)),
+                filename_template.sharded_filepath(shard_index=1, num_shards=4)
+            ),
             skip=0,
             take=-1,
-            num_examples=3),
+            examples_in_shard=3,
+        ),
     ]
     # In ordered dataset interleave_cycle_length is set to 1 by default
     self.reader.read_files(
@@ -342,10 +352,12 @@ class ReaderTest(testing.TestCase):
     instructions = [
         shard_utils.FileInstruction(
             filename=filename_template.sharded_filepath(
-                shard_index=1, num_shards=4),
+                shard_index=1, num_shards=4
+            ),
             skip=0,
             take=-1,
-            num_examples=3),
+            examples_in_shard=3,
+        ),
     ]
     reported_warnings = []
     with mock.patch('absl.logging.warning', reported_warnings.append):
@@ -393,19 +405,19 @@ def test_shard_api():
           filename='/path/ds_name-train.tfrecord-00000-of-00003',
           skip=0,
           take=-1,
-          num_examples=10,
+          examples_in_shard=10,
       ),
       shard_utils.FileInstruction(
           filename='/path/ds_name-train.tfrecord-00001-of-00003',
           skip=0,
           take=-1,
-          num_examples=20,
+          examples_in_shard=20,
       ),
       shard_utils.FileInstruction(
           filename='/path/ds_name-train.tfrecord-00002-of-00003',
           skip=0,
           take=-1,
-          num_examples=13,
+          examples_in_shard=13,
       ),
   ]
   sd = splits.SplitDict([si])

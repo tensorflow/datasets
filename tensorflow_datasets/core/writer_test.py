@@ -52,37 +52,74 @@ class GetShardSpecsTest(testing.TestCase):
         specs,
         [
             # Shard#, path, from_bucket, examples_number, reading instructions.
-            _ShardSpec(0, '/bar-train.tfrecord-00000-of-00006',
-                       '/bar-train.tfrecord-00000-of-00006_index.json', 1, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=0, take=1, num_examples=1),
-                       ]),
-            _ShardSpec(1, '/bar-train.tfrecord-00001-of-00006',
-                       '/bar-train.tfrecord-00001-of-00006_index.json', 2, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=1, take=2, num_examples=2),
-                       ]),
-            _ShardSpec(2, '/bar-train.tfrecord-00002-of-00006',
-                       '/bar-train.tfrecord-00002-of-00006_index.json', 1, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=3, take=1, num_examples=1),
-                       ]),
-            _ShardSpec(3, '/bar-train.tfrecord-00003-of-00006',
-                       '/bar-train.tfrecord-00003-of-00006_index.json', 1, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=4, take=1, num_examples=1),
-                       ]),
-            _ShardSpec(4, '/bar-train.tfrecord-00004-of-00006',
-                       '/bar-train.tfrecord-00004-of-00006_index.json', 2, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=5, take=2, num_examples=2),
-                       ]),
-            _ShardSpec(5, '/bar-train.tfrecord-00005-of-00006',
-                       '/bar-train.tfrecord-00005-of-00006_index.json', 1, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=7, take=-1, num_examples=1),
-                       ]),
-        ])
+            _ShardSpec(
+                0,
+                '/bar-train.tfrecord-00000-of-00006',
+                '/bar-train.tfrecord-00000-of-00006_index.json',
+                1,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=0, take=1, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                1,
+                '/bar-train.tfrecord-00001-of-00006',
+                '/bar-train.tfrecord-00001-of-00006_index.json',
+                2,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=1, take=2, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                2,
+                '/bar-train.tfrecord-00002-of-00006',
+                '/bar-train.tfrecord-00002-of-00006_index.json',
+                1,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=3, take=1, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                3,
+                '/bar-train.tfrecord-00003-of-00006',
+                '/bar-train.tfrecord-00003-of-00006_index.json',
+                1,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=4, take=1, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                4,
+                '/bar-train.tfrecord-00004-of-00006',
+                '/bar-train.tfrecord-00004-of-00006_index.json',
+                2,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=5, take=2, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                5,
+                '/bar-train.tfrecord-00005-of-00006',
+                '/bar-train.tfrecord-00005-of-00006_index.json',
+                1,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=7, take=1, examples_in_shard=8
+                    ),
+                ],
+            ),
+        ],
+    )
 
   def test_4buckets_2shards(self):
     specs = writer_lib._get_shard_specs(
@@ -99,21 +136,36 @@ class GetShardSpecsTest(testing.TestCase):
         specs,
         [
             # Shard#, path, examples_number, reading instructions.
-            _ShardSpec(0, '/bar-train.tfrecord-00000-of-00002',
-                       '/bar-train.tfrecord-00000-of-00002_index.json', 4, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=0, take=-1, num_examples=2),
-                           shard_utils.FileInstruction(
-                               filename='1', skip=0, take=2, num_examples=2),
-                       ]),
-            _ShardSpec(1, '/bar-train.tfrecord-00001-of-00002',
-                       '/bar-train.tfrecord-00001-of-00002_index.json', 4, [
-                           shard_utils.FileInstruction(
-                               filename='1', skip=2, take=-1, num_examples=1),
-                           shard_utils.FileInstruction(
-                               filename='3', skip=0, take=-1, num_examples=3),
-                       ]),
-        ])
+            _ShardSpec(
+                0,
+                '/bar-train.tfrecord-00000-of-00002',
+                '/bar-train.tfrecord-00000-of-00002_index.json',
+                4,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=0, take=2, examples_in_shard=2
+                    ),
+                    shard_utils.FileInstruction(
+                        filename='1', skip=0, take=2, examples_in_shard=3
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                1,
+                '/bar-train.tfrecord-00001-of-00002',
+                '/bar-train.tfrecord-00001-of-00002_index.json',
+                4,
+                [
+                    shard_utils.FileInstruction(
+                        filename='1', skip=2, take=-1, examples_in_shard=3
+                    ),
+                    shard_utils.FileInstruction(
+                        filename='3', skip=0, take=-1, examples_in_shard=3
+                    ),
+                ],
+            ),
+        ],
+    )
 
 
 def _read_records(path, file_format=file_adapters.DEFAULT_FILE_FORMAT):
@@ -242,8 +294,7 @@ class WriterTest(testing.TestCase):
     self.assertEmpty(all_indices)
 
   def test_write_tfrecord_sorted_by_key(self):
-    """Stores records as tfrecord in a fixed number of shards without shuffling.
-    """
+    """Stores records as tfrecord in a fixed number of shards without shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
     shards_length, total_size = self._write(
         to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
@@ -262,8 +313,7 @@ class WriterTest(testing.TestCase):
     self.assertEmpty(all_indices)
 
   def test_write_tfrecord_sorted_by_key_with_holes(self):
-    """Stores records as tfrecord in a fixed number of shards without shuffling.
-    """
+    """Stores records as tfrecord in a fixed number of shards without shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
     shards_length, total_size = self._write(
         to_write=self.RECORDS_WITH_HOLES, disable_shuffling=True)
@@ -376,8 +426,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     self.assertEmpty(all_indices)
 
   def test_write_tfrecord_sorted_by_key(self):
-    """Stores records as tfrecord in a fixed number of shards without shuffling.
-    """
+    """Stores records as tfrecord in a fixed number of shards without shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
     shards_length, total_size = self._write(
         to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)

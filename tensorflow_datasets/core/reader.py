@@ -183,7 +183,7 @@ def _read_files(
         hasattr(tf.data.experimental, 'assert_cardinality')):
       # TODO(b/154963426): Replace by per-shard cardinality (warning if
       # `experimental_interleave_sort_fn` is set).
-      cardinality = sum(f.num_examples for f in file_instructions)
+      cardinality = sum(f.take for f in file_instructions)
       ds = ds.apply(tf.data.experimental.assert_cardinality(cardinality))
 
     return ds.with_options(read_config.options)  # Additional users options
@@ -207,7 +207,7 @@ def _read_files(
         file_instructions)
 
   do_skip = any(f.skip > 0 for f in file_instructions)
-  do_take = any(f.take > -1 for f in file_instructions)
+  do_take = any(not f.takes_all for f in file_instructions)
 
   tfds_id_prefixes = _get_tfds_id_prefixes(file_instructions)
 

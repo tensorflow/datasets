@@ -20,6 +20,7 @@ This logic is shared between:
  - tfrecord_writer, to read sharded bucket files (temp files), based on final
  sharding needs.
 """
+from __future__ import annotations
 
 import dataclasses
 import math
@@ -44,6 +45,7 @@ class ShardConfig:
       TFRecord overhead. See
       https://github.com/tensorflow/tensorflow/blob/27325fabed898880fa1b33a04d4b125a6ef4bbc8/tensorflow/core/lib/io/record_writer.h#L104
   """
+
   num_shards: Optional[int] = None
   min_shard_size: int = DEFAULT_MIN_SHARD_SIZE
   max_shard_size: int = DEFAULT_MAX_SHARD_SIZE
@@ -104,20 +106,46 @@ class ShardConfig:
 
 
 @dataclasses.dataclass(eq=True, frozen=True)
-class FileInstruction(object):
+class FileInstruction:
   """Instruction to read a single shard/file.
 
   Attributes:
     filename: The filename including the path.
     skip: Indicates which example read in the shard (`ds.skip().take()`). `0` if
       no skipping.
-    take: Indicates how many examples to read (`-1` to read all).
-    num_examples: `int`, The total number of examples.
+    take: Indicates how many examples to read (`-1` to read all). If `-1`, then
+      `take` is overridden with the number of examples to read is calculated.
+    examples_in_shard: The total number of examples in the shard. To get the
+      number of examples to read, use `take`.
+    takes_all: whether all examples after skipping are read.
   """
+
   filename: str
   skip: int
   take: int
-  num_examples: int
+  examples_in_shard: int
+
+  def __post_init__(self):
+    if self.take == -1:
+      object.__setattr__(self, 'take', self.examples_in_shard - self.skip)
+    if self.examples_in_shard < 0:
+      raise ValueError(
+          f'examples_in_shard should be >= 0! Was {self.examples_in_shard}.'
+      )
+    if self.skip < 0 or self.skip > self.examples_in_shard:
+      raise ValueError(
+          f'skip should be between 0 and {self.examples_in_shard}! '
+          f'Was {self.skip}.'
+      )
+    if self.skip + self.take > self.examples_in_shard:
+      raise ValueError(
+          f'skip ({self.skip}) + take ({self.take}) should be '
+          f'<= examples_in_shard ({self.examples_in_shard})!'
+      )
+
+  @property
+  def takes_all(self) -> bool:
+    return self.skip + self.take == self.examples_in_shard
 
   def dirname(self) -> str:
     return os.path.dirname(self.filename)
@@ -125,7 +153,7 @@ class FileInstruction(object):
   def basename(self) -> str:
     return os.path.basename(self.filename)
 
-  def replace(self, **kwargs: Any) -> 'FileInstruction':
+  def replace(self, **kwargs: Any) -> FileInstruction:
     return dataclasses.replace(self, **kwargs)
 
 
@@ -137,26 +165,27 @@ def split_file_instruction(
 
   Note that this function may return fewer splits than `num_splits` in case the
   number of examples cannot be split into that many. For example, if
-  `file_instruction` has `num_examples=1` and `num_splits=2`, then only a single
+  `file_instruction` has `take=1` and `num_splits=2`, then only a single
   file instruction is returned.
 
   Arguments:
     file_instruction: the file instruction that should be split into multiple
-      file instructions.
+      file instructions. It is currently not supported to have `skip>0` or not
+      take all examples in the file.
     num_splits: the number of splits the file instruction should be split into.
 
   Returns:
     list of file instructions into which it is split.
   """
-  if file_instruction.take != -1:
+  if not file_instruction.takes_all or file_instruction.skip > 0:
     raise ValueError('Only file instructions that read all rows are supported!')
-  examples_per_split = math.ceil(file_instruction.num_examples / num_splits)
+  examples_per_split = math.ceil(file_instruction.take / num_splits)
   splits = []
   index = file_instruction.skip
-  while index < file_instruction.num_examples:
+  while index < file_instruction.examples_in_shard:
     # If there are fewer examples left in the file than `examples_per_split`,
     # then only take what's left.
-    take = min(examples_per_split, file_instruction.num_examples - index)
+    take = min(examples_per_split, file_instruction.examples_in_shard - index)
     splits.append(file_instruction.replace(skip=index, take=take))
     index += take
   return splits
@@ -194,10 +223,8 @@ def get_file_instructions(
         continue
       file_instructions.append(
           FileInstruction(
-              filename=filename,
-              skip=skip,
-              take=take,
-              num_examples=length - skip if take == -1 else take,
-          ))
+              filename=filename, skip=skip, take=take, examples_in_shard=length
+          )
+      )
     index_start += length
   return file_instructions
