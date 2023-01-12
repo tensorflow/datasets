@@ -1,0 +1,8 @@
+content.data-type.image
+ml.task.anomaly-detection
+ml.task.fine-grained-image-classification
+ml.task.image-classification
+ml.task.image-clustering
+ml.task.image-compression
+ml.task.image-generation
+ml.task.out-of-distribution-detection
