@@ -13,13 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from tensorflow_datasets.image_classification import stanford_dogs
+from tensorflow_datasets.datasets.stanford_dogs import stanford_dogs_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class StanfordDogsTest(tfds_test.DatasetBuilderTestCase):
 
-  DATASET_CLASS = stanford_dogs.StanfordDogs
+  DATASET_CLASS = stanford_dogs_dataset_builder.Builder
 
   SPLITS = {  # No. of train and test samples
       'train': 8,
