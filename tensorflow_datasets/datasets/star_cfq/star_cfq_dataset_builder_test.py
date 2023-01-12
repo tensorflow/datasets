@@ -16,11 +16,11 @@
 """Tests for CFQ dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text.star_cfq import star_cfq
+from tensorflow_datasets.datasets.star_cfq import star_cfq_dataset_builder
 
 
 class StarCFQRandomSplitTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = star_cfq.StarCFQ
+  DATASET_CLASS = star_cfq_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = [
       "single_pool_10x_b_cfq", "equal_weighting_1x_b_cfq_1x_x_cfq"
   ]
@@ -31,7 +31,7 @@ class StarCFQRandomSplitTest(testing.DatasetBuilderTestCase):
 
 
 class StarCFQCompoundDivergenceSplitTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = star_cfq.StarCFQ
+  DATASET_CLASS = star_cfq_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["u_cfq_compound_divergence_0.333333_0.3_r4"]
   SPLITS = {
       "train": 2,
