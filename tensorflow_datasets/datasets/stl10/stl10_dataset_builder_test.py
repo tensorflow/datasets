@@ -16,11 +16,11 @@
 """Tests for STL10 dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import stl10
+from tensorflow_datasets.datasets.stl10 import stl10_dataset_builder
 
 
 class Stl10Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = stl10.Stl10
+  DATASET_CLASS = stl10_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "test": 1,  # Number of fake test example
