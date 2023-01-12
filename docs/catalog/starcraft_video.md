@@ -6,7 +6,7 @@
   <meta itemprop="description" content="This data set contains videos generated from Starcraft.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;starcraft_video&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/starcraft_video" />
   <meta itemprop="sameAs" content="https://storage.googleapis.com/scv_dataset/README.html" />
-  <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-1812-01717,&#10;  author    = {Thomas Unterthiner and&#10;               Sjoerd van Steenkiste and&#10;               Karol Kurach and&#10;               Rapha{&quot;{e}}l Marinier and&#10;               Marcin Michalski and&#10;               Sylvain Gelly},&#10;  title     = {Towards Accurate Generative Models of Video: {A} New Metric and&#10;               Challenges},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1812.01717},&#10;  year      = {2018},&#10;  url       = {http://arxiv.org/abs/1812.01717},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1812.01717},&#10;  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
+  <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-1812-01717,&#10;  author    = {Thomas Unterthiner and&#10;               Sjoerd van Steenkiste and&#10;               Karol Kurach and&#10;               Rapha{\&quot;{e}}l Marinier and&#10;               Marcin Michalski and&#10;               Sylvain Gelly},&#10;  title     = {Towards Accurate Generative Models of Video: {A} New Metric and&#10;               Challenges},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1812.01717},&#10;  year      = {2018},&#10;  url       = {http://arxiv.org/abs/1812.01717},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1812.01717},&#10;  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
 
 # `starcraft_video`
@@ -20,7 +20,7 @@ This data set contains videos generated from Starcraft.
     [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
 *   **Source code**:
-    [`tfds.video.StarcraftVideo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/starcraft.py)
+    [`tfds.datasets.starcraft_video.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/starcraft_video/starcraft_video_dataset_builder.py)
 
 *   **Versions**:
 
@@ -54,7 +54,7 @@ Split          | Examples
   author    = {Thomas Unterthiner and
                Sjoerd van Steenkiste and
                Karol Kurach and
-               Rapha{"{e}}l Marinier and
+               Rapha{\"{e}}l Marinier and
                Marcin Michalski and
                Sylvain Gelly},
   title     = {Towards Accurate Generative Models of Video: {A} New Metric and

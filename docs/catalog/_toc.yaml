@@ -12,6 +12,8 @@ toc:
     title: aflw2k3d
   - path: /datasets/catalog/smallnorb
     title: smallnorb
+  - path: /datasets/catalog/smartwatch_gestures
+    title: smartwatch_gestures
   title: 3d
 - section:
   - path: /datasets/catalog/aeslc
@@ -40,6 +42,8 @@ toc:
     title: kddcup99
   - path: /datasets/catalog/lost_and_found
     title: lost_and_found
+  - path: /datasets/catalog/stl10
+    title: stl10
   title: Anomaly detection
 - section:
   - path: /datasets/catalog/accentdb
@@ -164,6 +168,12 @@ toc:
     title: oxford_flowers102
   - path: /datasets/catalog/oxford_iiit_pet
     title: oxford_iiit_pet
+  - path: /datasets/catalog/stanford_dogs
+    title: stanford_dogs
+  - path: /datasets/catalog/stl10
+    title: stl10
+  - path: /datasets/catalog/sun397
+    title: sun397
   title: Fine grained image classification
 - section:
   - path: /datasets/catalog/ogbg_molpcba
@@ -298,6 +308,16 @@ toc:
     title: siscore
   - path: /datasets/catalog/smallnorb
     title: smallnorb
+  - path: /datasets/catalog/so2sat
+    title: so2sat
+  - path: /datasets/catalog/stanford_dogs
+    title: stanford_dogs
+  - path: /datasets/catalog/stanford_online_products
+    title: stanford_online_products
+  - path: /datasets/catalog/stl10
+    title: stl10
+  - path: /datasets/catalog/sun397
+    title: sun397
   - path: /datasets/catalog/symmetric_solids
     title: symmetric_solids
   - path: /datasets/catalog/the300w_lp
@@ -346,10 +366,22 @@ toc:
     title: siscore
   - path: /datasets/catalog/smallnorb
     title: smallnorb
+  - path: /datasets/catalog/stanford_dogs
+    title: stanford_dogs
+  - path: /datasets/catalog/stanford_online_products
+    title: stanford_online_products
+  - path: /datasets/catalog/stl10
+    title: stl10
+  - path: /datasets/catalog/sun397
+    title: sun397
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/stanford_dogs
+    title: stanford_dogs
+  - path: /datasets/catalog/stl10
+    title: stl10
   title: Image clustering
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -360,6 +392,8 @@ toc:
     title: oxford_iiit_pet
   - path: /datasets/catalog/patch_camelyon
     title: patch_camelyon
+  - path: /datasets/catalog/stl10
+    title: stl10
   title: Image compression
 - section:
   - path: /datasets/catalog/binarized_mnist
@@ -376,6 +410,10 @@ toc:
     title: imagenet2012 (manual)
   - path: /datasets/catalog/oxford_flowers102
     title: oxford_flowers102
+  - path: /datasets/catalog/stanford_dogs
+    title: stanford_dogs
+  - path: /datasets/catalog/stl10
+    title: stl10
   title: Image generation
 - section:
   - path: /datasets/catalog/celeb_a_hq
@@ -470,16 +508,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/so2sat
-    title: so2sat
-  - path: /datasets/catalog/stanford_dogs
-    title: stanford_dogs
-  - path: /datasets/catalog/stanford_online_products
-    title: stanford_online_products
-  - path: /datasets/catalog/stl10
-    title: stl10
-  - path: /datasets/catalog/sun397
-    title: sun397
   - path: /datasets/catalog/svhn_cropped
     title: svhn_cropped
   - path: /datasets/catalog/tf_flowers
@@ -528,6 +556,10 @@ toc:
     title: reddit
   - path: /datasets/catalog/samsum
     title: samsum (manual)
+  - path: /datasets/catalog/snli
+    title: snli
+  - path: /datasets/catalog/squad
+    title: squad
   title: Language modelling
 - section:
   - path: /datasets/catalog/mlqa
@@ -594,6 +626,16 @@ toc:
     title: scientific_papers
   - path: /datasets/catalog/sentiment140
     title: sentiment140
+  - path: /datasets/catalog/snli
+    title: snli
+  - path: /datasets/catalog/speech_commands
+    title: speech_commands
+  - path: /datasets/catalog/spoken_digit
+    title: spoken_digit
+  - path: /datasets/catalog/squad
+    title: squad
+  - path: /datasets/catalog/story_cloze
+    title: story_cloze (manual)
   title: Monolingual
 - section:
   - path: /datasets/catalog/opinion_abstracts
@@ -614,6 +656,8 @@ toc:
     title: paws_wiki
   - path: /datasets/catalog/sci_tail
     title: sci_tail
+  - path: /datasets/catalog/snli
+    title: snli
   title: Natural language inference
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -664,6 +708,12 @@ toc:
     title: sci_tail
   - path: /datasets/catalog/sentiment140
     title: sentiment140
+  - path: /datasets/catalog/snli
+    title: snli
+  - path: /datasets/catalog/squad
+    title: squad
+  - path: /datasets/catalog/story_cloze
+    title: story_cloze (manual)
   title: Natural language understanding
 - section:
   - path: /datasets/catalog/deep1b
@@ -696,7 +746,13 @@ toc:
 - section:
   - path: /datasets/catalog/natural_questions
     title: natural_questions
+  - path: /datasets/catalog/squad
+    title: squad
   title: Open domain question answering
+- section:
+  - path: /datasets/catalog/stl10
+    title: stl10
+  title: Out of distribution detection
 - section:
   - path: /datasets/catalog/beir
     title: beir
@@ -726,6 +782,10 @@ toc:
     title: quac
   - path: /datasets/catalog/race
     title: race
+  - path: /datasets/catalog/squad
+    title: squad
+  - path: /datasets/catalog/story_cloze
+    title: story_cloze (manual)
   title: Question answering
 - section:
   - path: /datasets/catalog/natural_questions
@@ -736,8 +796,6 @@ toc:
     title: coqa
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa
-  - path: /datasets/catalog/squad
-    title: squad
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
   - path: /datasets/catalog/tydi_qa
@@ -766,6 +824,8 @@ toc:
     title: quac
   - path: /datasets/catalog/race
     title: race
+  - path: /datasets/catalog/squad
+    title: squad
   title: Reading comprehension
 - section:
   - path: /datasets/catalog/criteo
@@ -842,6 +902,8 @@ toc:
     title: ref_coco (manual)
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
+  - path: /datasets/catalog/so2sat
+    title: so2sat
   title: Semantic segmentation
 - section:
   - path: /datasets/catalog/imdb_reviews
@@ -864,18 +926,24 @@ toc:
     title: reddit
   - path: /datasets/catalog/samsum
     title: samsum (manual)
+  - path: /datasets/catalog/snli
+    title: snli
   title: Sequence to sequence language modelling
 - section:
   - path: /datasets/catalog/librispeech
     title: librispeech
   - path: /datasets/catalog/libritts
     title: libritts
+  - path: /datasets/catalog/speech_commands
+    title: speech_commands
   title: Speech
 - section:
   - path: /datasets/catalog/accentdb
     title: accentdb
   - path: /datasets/catalog/librispeech
     title: librispeech
+  - path: /datasets/catalog/speech_commands
+    title: speech_commands
   title: Speech recognition
 - section:
   - path: /datasets/catalog/cherry_blossoms
@@ -930,8 +998,6 @@ toc:
     title: gov_report
   - path: /datasets/catalog/multi_news
     title: multi_news
-  - path: /datasets/catalog/summscreen
-    title: summscreen
   - path: /datasets/catalog/wikihow
     title: wikihow (manual)
   - path: /datasets/catalog/xsum
@@ -1188,12 +1254,22 @@ toc:
     title: smallnorb
   - path: /datasets/catalog/snli
     title: snli
+  - path: /datasets/catalog/spoken_digit
+    title: spoken_digit
+  - path: /datasets/catalog/squad
+    title: squad
   - path: /datasets/catalog/squad_question_generation
     title: squad_question_generation
+  - path: /datasets/catalog/stanford_dogs
+    title: stanford_dogs
   - path: /datasets/catalog/star_cfq
     title: star_cfq
   - path: /datasets/catalog/story_cloze
     title: story_cloze (manual)
+  - path: /datasets/catalog/summscreen
+    title: summscreen
+  - path: /datasets/catalog/sun397
+    title: sun397
   - path: /datasets/catalog/super_glue
     title: super_glue
   - path: /datasets/catalog/tiny_shakespeare
@@ -1293,6 +1369,10 @@ toc:
     title: schema_guided_dialogue
   - path: /datasets/catalog/scientific_papers
     title: scientific_papers
+  - path: /datasets/catalog/squad
+    title: squad
+  - path: /datasets/catalog/story_cloze
+    title: story_cloze (manual)
   title: Text generation
 - section:
   - path: /datasets/catalog/aeslc
@@ -1328,6 +1408,10 @@ toc:
   - path: /datasets/catalog/xtreme_pos
     title: xtreme_pos
   title: Token classification
+- section:
+  - path: /datasets/catalog/smartwatch_gestures
+    title: smartwatch_gestures
+  title: Tracking
 - section:
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
