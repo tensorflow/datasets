@@ -16,11 +16,11 @@
 """spoken digit dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio.spoken_digit import spoken_digit
+from tensorflow_datasets.datasets.spoken_digit import spoken_digit_dataset_builder
 
 
 class SpokenDigitTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = spoken_digit.SpokenDigit
+  DATASET_CLASS = spoken_digit_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train examples
   }
