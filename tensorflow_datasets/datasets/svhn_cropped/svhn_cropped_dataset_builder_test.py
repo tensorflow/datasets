@@ -15,11 +15,11 @@
 
 """Tests for tfds.image.svhn."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import svhn
+from tensorflow_datasets.datasets.svhn_cropped import svhn_cropped_dataset_builder
 
 
 class SvhnTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = svhn.SvhnCropped
+  DATASET_CLASS = svhn_cropped_dataset_builder.Builder
   SPLITS = {  # Number of examples.
       "train": 3,
       "test": 2,
