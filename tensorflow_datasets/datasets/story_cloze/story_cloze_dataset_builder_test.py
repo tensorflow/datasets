@@ -15,13 +15,13 @@
 
 """story_cloze dataset."""
 
+from tensorflow_datasets.datasets.story_cloze import story_cloze_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.story_cloze import story_cloze
 
 
 class StoryClozeTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for story_cloze dataset."""
-  DATASET_CLASS = story_cloze.StoryCloze
+  DATASET_CLASS = story_cloze_dataset_builder.Builder
 
   SPLITS = {
       'validation': 1,  # Number of fake train example
