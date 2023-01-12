@@ -15,15 +15,15 @@
 
 """summscreen dataset."""
 
+from tensorflow_datasets.datasets.summscreen import summscreen_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.summarization.summscreen import summscreen
 
 
 class SummscreenTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for summscreen dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = ["fd", "tms"]
 
-  DATASET_CLASS = summscreen.Summscreen
+  DATASET_CLASS = summscreen_dataset_builder.Builder
   DL_EXTRACT_RESULT = {
       "tokenized": "tokenized",
       "untokenized": "untokenized",
