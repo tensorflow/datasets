@@ -15,13 +15,13 @@
 
 """smartwatch_gestures dataset."""
 
+from tensorflow_datasets.datasets.smartwatch_gestures import smartwatch_gestures_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.time_series.smartwatch_gestures import smartwatch_gestures
 
 
 class SmartwatchGesturesTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for smartwatch_gestures dataset."""
-  DATASET_CLASS = smartwatch_gestures.SmartwatchGestures
+  DATASET_CLASS = smartwatch_gestures_dataset_builder.Builder
   SPLITS = {
       'train': 3,
   }

@@ -13,17 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for smartwatch_gestures.
+"""smartwatch_gestures dataset."""
 
-DEPRECATED!
-If you want to use the SmartwatchGestures dataset builder class, use:
-tfds.builder_cls('smartwatch_gestures')
-"""
+from __future__ import annotations
 
-from tensorflow_datasets.core import lazy_builder_import
+import numpy as np
+import tensorflow_datasets.public_api as tfds
 
 
-class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for smartwatch_gestures dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
@@ -35,37 +33,33 @@ class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     class_label = tfds.features.ClassLabel(
         names_file=tfds.core.tfds_path(
-            'time_series/smartwatch_gestures/class_labels.txt'))
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
+            'datasets/smartwatch_gestures/labels.txt'
+        )
+    )
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'features':
-                tfds.features.Sequence({
-                    'time_millis': np.uint64,
-                    'time_nanos': np.uint64,
-                    'time_event': np.uint64,
-                    'accel_x': np.float64,
-                    'accel_y': np.float64,
-                    'accel_z': np.float64,
-                }),
-            'participant':
-                np.uint8,
-            'attempt':
-                np.uint8,
-            'gesture':
-                class_label
+            'features': tfds.features.Sequence({
+                'time_millis': np.uint64,
+                'time_nanos': np.uint64,
+                'time_event': np.uint64,
+                'accel_x': np.float64,
+                'accel_y': np.float64,
+                'accel_z': np.float64,
+            }),
+            'participant': np.uint8,
+            'attempt': np.uint8,
+            'gesture': class_label,
         }),
         supervised_keys=('features', 'gesture'),
-        homepage='https://tev.fbk.eu/technologies/smartwatch-gestures-dataset',
-        citation=_CITATION,
+        homepage='https://tev.fbk.eu/resources/smartwatch',
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(
         'https://drive.google.com/uc?export=download&'
-        'id=1nEs-JlAQv6xpuSIqahTKK68TgK37GirP')
+        'id=1nEs-JlAQv6xpuSIqahTKK68TgK37GirP'
+    )
 
     # There are no predefined train/val/test split for this dataset.
     # (smartwatch_gestures): Returns the Dict['train', Iterator[Key, Example]].
@@ -79,15 +73,19 @@ class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
     pd = tfds.core.lazy_imports.pandas
 
     for f in path.glob('*/*/*.txt'):
-
       table = pd.read_table(
           f,
           sep=' ',
           header=None,
           names=[
-              'time_millis', 'time_nanos', 'time_event', 'accel_x', 'accel_y',
-              'accel_z'
-          ])
+              'time_millis',
+              'time_nanos',
+              'time_event',
+              'accel_x',
+              'accel_y',
+              'accel_z',
+          ],
+      )
 
       # Create a unique key for each recorded gesture.
       participant_numstr = f.parent.parent.name[1:]  # Drop the "U".
@@ -106,5 +104,5 @@ class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
           },
           'participant': int(participant_numstr),
           'attempt': int(attempt_numstr),
-          'gesture': int(gesture_numstr) - 1
+          'gesture': int(gesture_numstr) - 1,
       }
