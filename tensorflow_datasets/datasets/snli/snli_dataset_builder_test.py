@@ -16,11 +16,11 @@
 """Tests for snli dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import snli
+from tensorflow_datasets.datasets.snli import snli_dataset_builder
 
 
 class SnliTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = snli.Snli
+  DATASET_CLASS = snli_dataset_builder.Builder
 
   SPLITS = {
       "train": 3,
