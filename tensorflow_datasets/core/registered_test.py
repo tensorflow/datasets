@@ -16,6 +16,8 @@
 """Tests for tensorflow_datasets.core.registered."""
 
 import abc
+import re
+
 from unittest import mock
 import pytest
 
@@ -26,6 +28,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
 
 
@@ -278,13 +281,57 @@ def test_name_inferred_from_pkg():
   assert ds_builder.name == "dummy_ds_1"
 
 
+def test_name_inferred_from_pkg_level0_fails():
+  pkg_path = (
+      tfds.core.tfds_path() / "testing/dummy_config_based_datasets/dummy_ds_2"
+  )
+  expected_msg = (
+      "When using `Builder` as class name, the dataset builder name is "
+      'inferred from module name if named "*_dataset_builder" or from '
+      'package name, but there is no package in "dummy_builder".'
+  )
+  with tfds.core.utils.add_sys_path(pkg_path):
+    with pytest.raises(AssertionError, match=re.escape(expected_msg)):
+      tfds.core.community.builder_cls_from_module("dummy_builder")
+
+
+@mock.patch.dict(registered._DATASET_REGISTRY, {})
+def test_name_inferred_from_pkg_level1():
+  pkg_path = tfds.core.tfds_path() / "testing/dummy_config_based_datasets"
+  with tfds.core.utils.add_sys_path(pkg_path):
+    ds_builder = tfds.core.community.builder_cls_from_module(
+        "dummy_ds_2.dummy_builder"
+    )
+  assert ds_builder.name == "dummy_ds_2"
+
+
+@mock.patch.dict(registered._DATASET_REGISTRY, {})
+def test_name_inferred_from_pkg_level2():
+  pkg_path = tfds.core.tfds_path() / "testing"
+  with tfds.core.utils.add_sys_path(pkg_path):
+    ds_builder = tfds.core.community.builder_cls_from_module(
+        "dummy_config_based_datasets.dummy_ds_2.dummy_builder"
+    )
+  assert ds_builder.name == "dummy_ds_2"
+
+
+@mock.patch.dict(registered._DATASET_REGISTRY, {})
+def test_name_inferred_from_pkg_level3():
+  pkg_path = tfds.core.tfds_path()
+  with tfds.core.utils.add_sys_path(pkg_path):
+    ds_builder = tfds.core.community.builder_cls_from_module(
+        "testing.dummy_config_based_datasets.dummy_ds_2.dummy_builder"
+    )
+  assert ds_builder.name == "dummy_ds_2"
+
+
 class ConfigBasedBuildersTest(testing.TestCase):
 
   def test__get_existing_dataset_packages(self):
     ds_packages = registered._get_existing_dataset_packages(
         "testing/dummy_config_based_datasets"
     )
-    self.assertEqual(list(ds_packages.keys()), ["dummy_ds_1"])
+    self.assertEqual(list(ds_packages.keys()), ["dummy_ds_1", "dummy_ds_2"])
     pkg_path, builder_module = ds_packages["dummy_ds_1"]
     self.assertEndsWith(
         str(pkg_path),
