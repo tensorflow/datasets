@@ -318,6 +318,8 @@ toc:
     title: stl10
   - path: /datasets/catalog/sun397
     title: sun397
+  - path: /datasets/catalog/svhn_cropped
+    title: svhn_cropped
   - path: /datasets/catalog/symmetric_solids
     title: symmetric_solids
   - path: /datasets/catalog/the300w_lp
@@ -374,6 +376,8 @@ toc:
     title: stl10
   - path: /datasets/catalog/sun397
     title: sun397
+  - path: /datasets/catalog/svhn_cropped
+    title: svhn_cropped
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -508,8 +512,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/svhn_cropped
-    title: svhn_cropped
   - path: /datasets/catalog/tf_flowers
     title: tf_flowers
   - path: /datasets/catalog/uc_merced
@@ -1272,6 +1274,8 @@ toc:
     title: sun397
   - path: /datasets/catalog/super_glue
     title: super_glue
+  - path: /datasets/catalog/svhn_cropped
+    title: svhn_cropped
   - path: /datasets/catalog/tiny_shakespeare
     title: tiny_shakespeare
   - path: /datasets/catalog/trec
