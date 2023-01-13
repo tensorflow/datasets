@@ -90,11 +90,12 @@ class IstellaConfig(tfds.core.BuilderConfig):
 class Istella(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for istella dataset."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.2.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
       "1.0.1": "Fix serialization to support float64.",
-      "1.1.0": "Bundle features into a single 'float_features' feature."
+      "1.1.0": "Bundle features into a single 'float_features' feature.",
+      "1.2.0": "Add query and document identifiers.",
   }
   # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
@@ -109,14 +110,18 @@ class Istella(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     encoding = tfds.features.Encoding.ZLIB
     features = {
-        "float_features":
-            tfds.features.Tensor(
-                shape=(None, len(_FEATURE_NAMES)),
-                dtype=np.float64,
-                encoding=encoding),
-        _LABEL_NAME:
-            tfds.features.Tensor(
-                shape=(None,), dtype=np.float64, encoding=encoding)
+        "float_features": tfds.features.Tensor(
+            shape=(None, len(_FEATURE_NAMES)),
+            dtype=np.float64,
+            encoding=encoding,
+        ),
+        _LABEL_NAME: tfds.features.Tensor(
+            shape=(None,), dtype=np.float64, encoding=encoding
+        ),
+        "query_id": tfds.features.Text(),
+        "doc_id": tfds.features.Tensor(
+            shape=(None,), dtype=np.int64, encoding=encoding
+        ),
     }
 
     return tfds.core.DatasetInfo(

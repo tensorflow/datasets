@@ -79,18 +79,25 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
   content being parsed does not match LibSVM ranking format.
   """
 
-  def __init__(self,
-               lines: Iterable[str],
-               feature_names: Mapping[int, str],
-               label_feature_name: str = "label",
-               default_feature_value: float = 0.0,
-               combine_features: bool = False):
+  def __init__(
+      self,
+      lines: Iterable[str],
+      feature_names: Mapping[int, str],
+      label_feature_name: str = "label",
+      query_id_feature_name: str = "query_id",
+      doc_id_feature_name: str = "doc_id",
+      default_feature_value: float = 0.0,
+      combine_features: bool = False,
+  ):
     """Initializes the instance.
 
     Args:
       lines: The lines to parse.
       feature_names: A mapping from feature indices to feature names.
       label_feature_name: The name to assign to the label feature.
+      query_id_feature_name: The name to assign to the query identifier feature.
+      doc_id_feature_name: The name to assign to the document identifier
+        feature.
       default_feature_value: The default feature value to use when a feature is
         missing from the input.
       combine_features: Whether to combine the features into a single
@@ -99,6 +106,8 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
     self._lines = lines
     self._feature_names = feature_names
     self._label_feature_name = label_feature_name
+    self._query_id_feature_name = query_id_feature_name
+    self._doc_id_feature_name = doc_id_feature_name
     self._default_feature_value = default_feature_value
     self._current_example = None
     self._available_examples = collections.deque()
@@ -175,6 +184,11 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
     # Add label to feature dict.
     feature_dict[self._label_feature_name] = label
 
+    # Add document identifier. We use the line number as a unique document
+    # identifier since LibSVMRanking files do not have any other way to identify
+    # documents.
+    feature_dict[self._doc_id_feature_name] = line_number
+
     # Add the parsed qid and feature dictionary to the current example.
     self._add_to_current_example(qid, feature_dict)
 
@@ -221,6 +235,9 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
           for idx in sorted(self._feature_names)
       ]
       np_features_dict["float_features"] = np.stack(features, axis=-1)
+
+    # Add query identifier.
+    np_features_dict[self._query_id_feature_name] = qid
 
     self._available_examples.append((qid, np_features_dict))
 
