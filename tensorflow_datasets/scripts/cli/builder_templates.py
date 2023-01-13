@@ -47,19 +47,21 @@ def create_builder_template(info: cli_utils.DatasetInfo):
     return _conllu_template(info)
   else:
     raise ValueError(
-        f'Required format {info.data_format} isn\'t associated with '
-        'a format-specific builder in TFDS.')
+        f"Required format {info.data_format} isn't associated with "
+        'a format-specific builder in TFDS.'
+    )
 
 
 def _standard_template(info: cli_utils.DatasetInfo) -> str:
   """Returns a template for a `tfds.core.GeneratorBasedBuilder`."""
-  content = textwrap.dedent(f'''\
+  content = textwrap.dedent(
+      f'''\
       """{info.name} dataset."""
 
       import {info.tfds_api} as tfds
 
 
-      class {info.cls_name}(tfds.core.GeneratorBasedBuilder):
+      class Builder(tfds.core.GeneratorBasedBuilder):
         """DatasetBuilder for {info.name} dataset."""
 
         VERSION = tfds.core.Version('1.0.0')
@@ -101,14 +103,16 @@ def _standard_template(info: cli_utils.DatasetInfo) -> str:
                 'image': f,
                 'label': 'yes',
             }}
-      ''')
+      '''
+  )
   return content
 
 
 def _conll_template(info: cli_utils.DatasetInfo) -> str:
   """A template for ConllDatasetBuilder."""
 
-  content = textwrap.dedent(f'''\
+  content = textwrap.dedent(
+      f'''\
       """{info.name} dataset."""
 
       from tensorflow_datasets.core.dataset_builders.conll import conll_dataset_builder_utils as conll_lib
@@ -150,14 +154,16 @@ def _conll_template(info: cli_utils.DatasetInfo) -> str:
         #   ):
         #   """Yields (key, example) examples."""
         #   pass
-      ''')
+      '''
+  )
   return content
 
 
 def _conllu_template(info: cli_utils.DatasetInfo) -> str:
   """A template for ConllUDatasetBuilder."""
 
-  content = textwrap.dedent(f'''\
+  content = textwrap.dedent(
+      f'''\
       """{info.name} dataset."""
 
       from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder_utils as conllu_lib
@@ -215,5 +221,6 @@ def _conllu_template(info: cli_utils.DatasetInfo) -> str:
         #   ):
         #   """Yields (key, example) examples."""
         #   pass
-      ''')
+      '''
+  )
   return content

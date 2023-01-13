@@ -58,8 +58,8 @@ def test_new_outside_tfds(tmp_path: pathlib.Path):
       '__init__.py',
       'checksums.tsv',
       'dummy_data',
-      'my_dataset.py',
-      'my_dataset_test.py',
+      'my_dataset_dataset_builder.py',
+      'my_dataset_dataset_builder_test.py',
   ]
 
   # If the dataset already exists, raise an error
@@ -80,6 +80,6 @@ def test_new_in_tfds(tmp_path: pathlib.Path):
       '__init__.py',
       'checksums.tsv',
       'dummy_data',
-      'my_dataset.py',
-      'my_dataset_test.py',
+      'my_dataset_dataset_builder.py',
+      'my_dataset_dataset_builder_test.py',
   ]
