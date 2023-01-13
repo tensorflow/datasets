@@ -61,6 +61,8 @@ class LibSVMRankingParserTest(testing.TestCase):
 
     qid, features = next(results)
     self.assertEqual(qid, "1")
+    self.assertEqual(features["query_id"], "1")
+    self.assertAllEqual(features["doc_id"], [2, 3, 4, 5])
     self.assertAllEqual(features["label"], [3., 1., 0., 0.])
     self.assertAllEqual(features["bm25"], [1., 0., 0., 0.])
     self.assertAllEqual(features["tfidf"], [1., 0., 1., 0.])
@@ -70,6 +72,8 @@ class LibSVMRankingParserTest(testing.TestCase):
 
     qid, features = next(results)
     self.assertEqual(qid, "2")
+    self.assertEqual(features["query_id"], "2")
+    self.assertAllEqual(features["doc_id"], [6, 7, 11, 12, 16, 18])
     self.assertAllEqual(features["label"], [0., 1., 0., 0., 1., 2.])
     self.assertAllEqual(features["bm25"], [0., 1., 0., 0., 0., 1.])
     self.assertAllEqual(features["tfidf"], [0., 0., 0., 0., 0., 1.])
@@ -79,6 +83,8 @@ class LibSVMRankingParserTest(testing.TestCase):
 
     qid, features = next(results)
     self.assertEqual(qid, "3")
+    self.assertEqual(features["query_id"], "3")
+    self.assertAllEqual(features["doc_id"], [19, 20])
     self.assertAllEqual(features["label"], [3., 0.])
     self.assertAllEqual(features["bm25"], [1., 0.])
     self.assertAllEqual(features["tfidf"], [0., 1.])

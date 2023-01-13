@@ -73,9 +73,10 @@ class YahooLTRCConfig(tfds.core.BuilderConfig):
 class YahooLTRC(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for yahoo_ltrc dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.1.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
+      "1.1.0": "Add query and document identifiers.",
   }
   # pytype: disable=wrong-keyword-args
   # pylint: disable=unexpected-keyword-arg
@@ -97,14 +98,18 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     encoding = tfds.features.Encoding.ZLIB
     features = {
-        "float_features":
-            tfds.features.Tensor(
-                shape=(None, self.builder_config.num_features),
-                dtype=np.float64,
-                encoding=encoding),
-        _LABEL_NAME:
-            tfds.features.Tensor(
-                shape=(None,), dtype=np.float64, encoding=encoding)
+        "float_features": tfds.features.Tensor(
+            shape=(None, self.builder_config.num_features),
+            dtype=np.float64,
+            encoding=encoding,
+        ),
+        _LABEL_NAME: tfds.features.Tensor(
+            shape=(None,), dtype=np.float64, encoding=encoding
+        ),
+        "query_id": tfds.features.Text(),
+        "doc_id": tfds.features.Tensor(
+            shape=(None,), dtype=np.int64, encoding=encoding
+        ),
     }
 
     return tfds.core.DatasetInfo(
