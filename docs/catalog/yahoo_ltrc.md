@@ -12,6 +12,11 @@
 # `yahoo_ltrc`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -50,9 +55,14 @@ ds = tfds.load("yahoo_ltrc")
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Add query and document identifiers.
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -61,6 +71,15 @@ ds = tfds.load("yahoo_ltrc")
     https://research.yahoo.com/datasets. Extract the downloaded `dataset.tgz` file
     and place the `ltrc_yahoo.tar.bz2` file in `manual_dir/`.
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -68,6 +87,10 @@ ds = tfds.load("yahoo_ltrc")
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -85,26 +108,14 @@ ds = tfds.load("yahoo_ltrc")
 
 ## yahoo_ltrc/set1 (default config)
 
-*   **Dataset size**: `792.65 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'test'`  | 6,983
-`'train'` | 19,944
-`'vali'`  | 2,994
-
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
+    'doc_id': Tensor(shape=(None,), dtype=int64),
     'float_features': Tensor(shape=(None, 699), dtype=float64),
     'label': Tensor(shape=(None,), dtype=float64),
+    'query_id': Text(shape=(), dtype=string),
 })
 ```
 
@@ -113,68 +124,21 @@ FeaturesDict({
 Feature        | Class        | Shape       | Dtype   | Description
 :------------- | :----------- | :---------- | :------ | :----------
                | FeaturesDict |             |         |
+doc_id         | Tensor       | (None,)     | int64   |
 float_features | Tensor       | (None, 699) | float64 |
 label          | Tensor       | (None,)     | float64 |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/yahoo_ltrc-set1-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+query_id       | Text         |             | string  |
 
 ## yahoo_ltrc/set2
 
-*   **Dataset size**: `194.31 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'test'`  | 3,798
-`'train'` | 1,266
-`'vali'`  | 1,266
-
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
+    'doc_id': Tensor(shape=(None,), dtype=int64),
     'float_features': Tensor(shape=(None, 700), dtype=float64),
     'label': Tensor(shape=(None,), dtype=float64),
+    'query_id': Text(shape=(), dtype=string),
 })
 ```
 
@@ -183,42 +147,7 @@ FeaturesDict({
 Feature        | Class        | Shape       | Dtype   | Description
 :------------- | :----------- | :---------- | :------ | :----------
                | FeaturesDict |             |         |
+doc_id         | Tensor       | (None,)     | int64   |
 float_features | Tensor       | (None, 700) | float64 |
 label          | Tensor       | (None,)     | float64 |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/yahoo_ltrc-set2-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+query_id       | Text         |             | string  |

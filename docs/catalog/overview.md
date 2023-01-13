@@ -218,6 +218,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`stanford_online_products`](stanford_online_products.md)
 *   [`stl10`](stl10.md)
 *   [`sun397`](sun397.md)
+*   [`svhn_cropped`](svhn_cropped.md)
 *   [`symmetric_solids`](symmetric_solids.md)
 *   [`the300w_lp`](the300w_lp.md)
 
@@ -248,6 +249,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`stanford_online_products`](stanford_online_products.md)
 *   [`stl10`](stl10.md)
 *   [`sun397`](sun397.md)
+*   [`svhn_cropped`](svhn_cropped.md)
 
 ### `Image clustering`
 
@@ -327,7 +329,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`mnist`](mnist.md)
 *   [`mnist_corrupted`](mnist_corrupted.md)
 *   [`omniglot`](omniglot.md)
-*   [`svhn_cropped`](svhn_cropped.md)
 *   [`tf_flowers`](tf_flowers.md)
 *   [`uc_merced`](uc_merced.md)
 *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
@@ -779,6 +780,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`summscreen`](summscreen.md)
 *   [`sun397`](sun397.md)
 *   [`super_glue`](super_glue.md)
+*   [`svhn_cropped`](svhn_cropped.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
 *   [`unified_qa`](unified_qa.md)

@@ -3,10 +3,10 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="svhn_cropped" />
-  <meta itemprop="description" content="The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;svhn_cropped&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/svhn_cropped-3.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="The Street View House Numbers (SVHN) Dataset is an image digit recognition&#10;dataset of over 600,000 digit images coming from real world data. Images are&#10;cropped to 32x32.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;svhn_cropped&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/svhn_cropped-3.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/svhn_cropped" />
   <meta itemprop="sameAs" content="http://ufldl.stanford.edu/housenumbers/" />
-  <meta itemprop="citation" content="@article{Netzer2011,&#10;author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},&#10;booktitle = {Advances in Neural Information Processing Systems ({NIPS})},&#10;title = {Reading Digits in Natural Images with Unsupervised Feature Learning},&#10;year = {2011}&#10;}" />
+  <meta itemprop="citation" content="&quot;&quot;&quot;Street View House Numbers (SVHN) Dataset, cropped version.&quot;&quot;&quot;&#10;&#10;@article{Netzer2011,&#10;author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},&#10;booktitle = {Advances in Neural Information Processing Systems ({NIPS})},&#10;title = {Reading Digits in Natural Images with Unsupervised Feature Learning},&#10;year = {2011}&#10;}" />
 </div>
 
 # `svhn_cropped`
@@ -28,7 +28,7 @@ cropped to 32x32.
     [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 
 *   **Source code**:
-    [`tfds.image_classification.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/svhn.py)
+    [`tfds.datasets.svhn_cropped.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/svhn_cropped/svhn_cropped_dataset_builder.py)
 
 *   **Versions**:
 
@@ -117,6 +117,8 @@ dataButton.addEventListener('click', async () => {
 *   **Citation**:
 
 ```
+"""Street View House Numbers (SVHN) Dataset, cropped version."""
+
 @article{Netzer2011,
 author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
 booktitle = {Advances in Neural Information Processing Systems ({NIPS})},

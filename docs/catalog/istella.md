@@ -12,6 +12,11 @@
 # `istella`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The Istella datasets are three large-scale Learning-to-Rank datasets released by
@@ -51,19 +56,32 @@ ds = tfds.load("istella")
 
     *   `1.0.0`: Initial release.
     *   `1.0.1`: Fix serialization to support float64.
-    *   **`1.1.0`** (default): Bundle features into a single 'float_features'
-        feature.
+    *   `1.1.0`: Bundle features into a single 'float_features' feature.
+    *   **`1.2.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Add query and document identifiers.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
+    'doc_id': Tensor(shape=(None,), dtype=int64),
     'float_features': Tensor(shape=(None, 220), dtype=float64),
     'label': Tensor(shape=(None,), dtype=float64),
+    'query_id': Text(shape=(), dtype=string),
 })
 ```
 
@@ -72,8 +90,10 @@ FeaturesDict({
 Feature        | Class        | Shape       | Dtype   | Description
 :------------- | :----------- | :---------- | :------ | :----------
                | FeaturesDict |             |         |
+doc_id         | Tensor       | (None,)     | int64   |
 float_features | Tensor       | (None, 220) | float64 |
 label          | Tensor       | (None,)     | float64 |
+query_id       | Text         |             | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -82,6 +102,10 @@ label          | Tensor       | (None,)     | float64 |
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -106,152 +130,6 @@ label          | Tensor       | (None,)     | float64 |
 
 ## istella/main (default config)
 
-*   **Download size**: `1.20 GiB`
-
-*   **Dataset size**: `1.10 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'test'`  | 9,799
-`'train'` | 23,219
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-main-1.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## istella/s
 
-*   **Download size**: `450.26 MiB`
-
-*   **Dataset size**: `414.69 MiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'test'`  | 6,562
-`'train'` | 19,245
-`'vali'`  | 7,211
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-s-1.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## istella/x
-
-*   **Download size**: `4.42 GiB`
-
-*   **Dataset size**: `2.42 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'test'`  | 2,000
-`'train'` | 6,000
-`'vali'`  | 2,000
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-x-1.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
