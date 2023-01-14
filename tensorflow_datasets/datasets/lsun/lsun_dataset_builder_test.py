@@ -15,11 +15,11 @@
 
 """Tests for tensorflow_datasets.image.lsun."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import lsun
+from tensorflow_datasets.datasets.lsun import lsun_dataset_builder
 
 
 class LsunTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = lsun.Lsun
+  DATASET_CLASS = lsun_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["classroom"]
 
   SPLITS = {
