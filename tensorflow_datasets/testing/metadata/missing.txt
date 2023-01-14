@@ -25,8 +25,21 @@ glue/rte/1.0.1
 glue/sst2/1.0.1
 glue/stsb/1.0.1
 glue/wnli/1.0.1
+istella/main/1.2.0
+istella/s/1.2.0
+istella/x/1.2.0
 laion400m/embeddings/1.0.0
 laion400m/images/1.0.0
+mslr_web/10k_fold1/1.2.0
+mslr_web/10k_fold2/1.2.0
+mslr_web/10k_fold3/1.2.0
+mslr_web/10k_fold4/1.2.0
+mslr_web/10k_fold5/1.2.0
+mslr_web/30k_fold1/1.2.0
+mslr_web/30k_fold2/1.2.0
+mslr_web/30k_fold3/1.2.0
+mslr_web/30k_fold4/1.2.0
+mslr_web/30k_fold5/1.2.0
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 reddit_disentanglement/2.0.0
@@ -36,3 +49,5 @@ so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
 voxforge/1.0.0
 xtreme_s/fleurs.all/2.0.0
+yahoo_ltrc/set1/1.1.0
+yahoo_ltrc/set2/1.1.0
