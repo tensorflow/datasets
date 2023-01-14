@@ -54,18 +54,9 @@ ds = tfds.load("mslr_web")
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Add query and document identifiers.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -119,20 +110,140 @@ query_id       | Text         |             | string  |
 
 ## mslr_web/10k_fold1 (default config)
 
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `310.08 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
+
 ## mslr_web/10k_fold2
+
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `310.08 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
 
 ## mslr_web/10k_fold3
 
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `310.08 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
+
 ## mslr_web/10k_fold4
+
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `310.08 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
 
 ## mslr_web/10k_fold5
 
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `310.08 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
+
 ## mslr_web/30k_fold1
+
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `964.09 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,919
+`'vali'`  | 6,306
 
 ## mslr_web/30k_fold2
 
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `964.09 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,307
+`'train'` | 18,918
+`'vali'`  | 6,306
+
 ## mslr_web/30k_fold3
+
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `964.09 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,918
+`'vali'`  | 6,307
 
 ## mslr_web/30k_fold4
 
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `964.09 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,919
+`'vali'`  | 6,306
+
 ## mslr_web/30k_fold5
+
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `964.09 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,919
+`'vali'`  | 6,306
