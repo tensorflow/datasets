@@ -1039,9 +1039,6 @@ imdb_reviews/subwords32k/1.0.0
 imdb_reviews/subwords8k/1.0.0
 irc_disentanglement/2.0.0
 iris/2.0.0
-istella/main/1.1.0
-istella/s/1.1.0
-istella/x/1.1.0
 kddcup99/1.0.1
 kitti/3.1.0
 kitti/3.2.0
@@ -1212,16 +1209,6 @@ mrqa/search_qa/1.0.0
 mrqa/squad/1.0.0
 mrqa/textbook_qa/1.0.0
 mrqa/trivia_qa/1.0.0
-mslr_web/10k_fold1/1.1.0
-mslr_web/10k_fold2/1.1.0
-mslr_web/10k_fold3/1.1.0
-mslr_web/10k_fold4/1.1.0
-mslr_web/10k_fold5/1.1.0
-mslr_web/30k_fold1/1.1.0
-mslr_web/30k_fold2/1.1.0
-mslr_web/30k_fold3/1.1.0
-mslr_web/30k_fold4/1.1.0
-mslr_web/30k_fold5/1.1.0
 mt_opt/rlds/1.0.0
 mt_opt/sd/1.0.0
 mtnt/en-fr/1.0.0
@@ -5137,8 +5124,6 @@ xtreme_s/fleurs.yo_ng/2.0.0
 xtreme_s/fleurs.yue_hant_hk/2.0.0
 xtreme_s/fleurs.zu_za/2.0.0
 xtreme_xnli/1.1.0
-yahoo_ltrc/set1/1.0.0
-yahoo_ltrc/set2/1.0.0
 yelp_polarity_reviews/0.2.0
 yes_no/1.0.0
 youtube_vis/480_640_full/1.0.0
