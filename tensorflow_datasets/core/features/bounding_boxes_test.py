@@ -24,7 +24,6 @@ from tensorflow_datasets.core import features
 class BBoxFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_feature(self):
-
     self.assertFeature(
         feature=features.BBoxFeature(),
         shape=(4,),

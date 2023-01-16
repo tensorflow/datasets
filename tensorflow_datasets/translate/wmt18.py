@@ -53,18 +53,27 @@ class Wmt18Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-      ) for l1, l2 in _LANGUAGE_PAIRS
+      )
+      for l1, l2 in _LANGUAGE_PAIRS
   ]
 
   @property
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "europarl_v8_18", "paracrawl_v1", "commoncrawl",
-            "newscommentary_v13", "czeng_17", "yandexcorpus",
-            "wikiheadlines_fi", "wikiheadlines_ru", "setimes_2", "uncorpus_v1",
-            "rapid_2016"
+            "europarl_v7",
+            "europarl_v8_18",
+            "paracrawl_v1",
+            "commoncrawl",
+            "newscommentary_v13",
+            "czeng_17",
+            "yandexcorpus",
+            "wikiheadlines_fi",
+            "wikiheadlines_ru",
+            "setimes_2",
+            "uncorpus_v1",
+            "rapid_2016",
         ] + wmt.CWMT_SUBSET_NAMES,
         tfds.Split.VALIDATION: ["newsdev2018", "newstest2017", "newstestB2017"],
-        tfds.Split.TEST: ["newstest2018"]
+        tfds.Split.TEST: ["newstest2018"],
     }

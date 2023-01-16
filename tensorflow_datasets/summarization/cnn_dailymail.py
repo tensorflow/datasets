@@ -62,16 +62,11 @@ _CITATION = """\
 
 _DL_URLS = {
     # pylint: disable=line-too-long
-    'cnn_stories':
-        'https://drive.google.com/uc?export=download&id=0BwmD_VLjROrfTHk4NFg2SndKcjQ',
-    'dm_stories':
-        'https://drive.google.com/uc?export=download&id=0BwmD_VLjROrfM1BxdkxVaTY2bWs',
-    'test_urls':
-        'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_test.txt',
-    'train_urls':
-        'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_train.txt',
-    'val_urls':
-        'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_val.txt',
+    'cnn_stories': 'https://drive.google.com/uc?export=download&id=0BwmD_VLjROrfTHk4NFg2SndKcjQ',
+    'dm_stories': 'https://drive.google.com/uc?export=download&id=0BwmD_VLjROrfM1BxdkxVaTY2bWs',
+    'test_urls': 'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_test.txt',
+    'train_urls': 'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_train.txt',
+    'val_urls': 'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_val.txt',
     # pylint: enable=line-too-long
 }
 
@@ -110,7 +105,7 @@ def _find_files(dl_paths, publisher, url_dict):
   ret_files = []
   for p in files:
     basename = os.path.basename(p)
-    if basename[0:basename.find('.story')] in url_dict:
+    if basename[0 : basename.find('.story')] in url_dict:
       ret_files.append(os.path.join(top_dir, p))
   return ret_files
 
@@ -132,12 +127,20 @@ def _subset_filenames(dl_paths, split):
   return {'cnn': cnn, 'dm': dm}
 
 
-DM_SINGLE_CLOSE_QUOTE = u'\u2019'  # unicode
-DM_DOUBLE_CLOSE_QUOTE = u'\u201d'
+DM_SINGLE_CLOSE_QUOTE = '\u2019'  # unicode
+DM_DOUBLE_CLOSE_QUOTE = '\u201d'
 # acceptable ways to end a sentence
 END_TOKENS = [
-    '.', '!', '?', '...', "'", '`', '"', DM_SINGLE_CLOSE_QUOTE,
-    DM_DOUBLE_CLOSE_QUOTE, ')'
+    '.',
+    '!',
+    '?',
+    '...',
+    "'",
+    '`',
+    '"',
+    DM_SINGLE_CLOSE_QUOTE,
+    DM_DOUBLE_CLOSE_QUOTE,
+    ')',
 ]
 
 
@@ -200,26 +203,19 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('3.4.0')
   RELEASE_NOTES = {
-      '1.0.0':
-          'New split API (https://tensorflow.org/datasets/splits)',
-      '2.0.0':
-          """
+      '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+      '2.0.0': """
       Separate target sentences with newline. (Having the model predict newline
       separators makes it easier to evaluate using summary-level ROUGE.)
       """,
-      '3.0.0':
-          'Using cased version.',
-      '3.1.0':
-          'Removed BuilderConfig',
-      '3.2.0':
-          """
+      '3.0.0': 'Using cased version.',
+      '3.1.0': 'Removed BuilderConfig',
+      '3.2.0': """
       Remove extra space before added sentence period.
       This shouldn't affect ROUGE scores because punctuation is removed.
       """,
-      '3.3.0':
-          'Add publisher feature.',
-      '3.4.0':
-          'Add ID feature.'
+      '3.3.0': 'Add publisher feature.',
+      '3.4.0': 'Add ID feature.',
   }
 
   def _info(self):
@@ -244,16 +240,18 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={'files': _subset_filenames(dl_paths,
-                                                   tfds.Split.TRAIN)}),
+            gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TRAIN)},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'files': _subset_filenames(dl_paths, tfds.Split.VALIDATION)
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TEST)})
+            gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TEST)},
+        ),
     ]
 
   def _generate_examples(self, files: Dict[str, List[str]]):

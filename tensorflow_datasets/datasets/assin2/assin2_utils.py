@@ -34,7 +34,7 @@ class Pair:
 def get_element_text(xml_pair: ET.Element, tag: str) -> str:
   """Returns the text associated with a given tag."""
   element = xml_pair.find(tag)
-  assert element is not None, (f'The tag "{tag}" was not found.')
+  assert element is not None, f'The tag "{tag}" was not found.'
   return element.text
 
 
@@ -65,12 +65,15 @@ def parse_xml_string(xml_str: str) -> List[Pair]:
     # Assert valid fields.
     if entailment not in _VALID_ENTAILMENT:
       raise ValueError(
-          f'Entailment should be in {_VALID_ENTAILMENT}, got {entailment}.')
+          f'Entailment should be in {_VALID_ENTAILMENT}, got {entailment}.'
+      )
     pairs.append(
         Pair(
             text=text,
             hypothesis=hypothesis,
             id=id_,
             entailment=entailment,
-            similarity=similarity))
+            similarity=similarity,
+        )
+    )
   return pairs

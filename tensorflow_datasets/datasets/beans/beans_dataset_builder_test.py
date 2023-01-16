@@ -31,7 +31,9 @@ class BeansTest(tfds_test.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = [
-      'beans_train.zip', 'beans_validation.zip', 'beans_test.zip'
+      'beans_train.zip',
+      'beans_validation.zip',
+      'beans_test.zip',
   ]
 
 

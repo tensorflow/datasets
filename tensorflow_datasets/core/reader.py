@@ -66,7 +66,8 @@ def _get_dataset_from_filename(
 ) -> tf.data.Dataset:
   """Returns a tf.data.Dataset instance from given instructions."""
   ds = file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
-      instruction.filepath)
+      instruction.filepath
+  )
   if do_skip:
     ds = ds.skip(instruction.skip)
   if do_take:
@@ -74,7 +75,8 @@ def _get_dataset_from_filename(
   if add_tfds_id:  # For each example, generate a unique id.
     id_ds = _make_id_dataset(
         filename=instruction.tfds_id_prefix,
-        start_index=instruction.skip if do_skip else 0)
+        start_index=instruction.skip if do_skip else 0,
+    )
     ds = tf.data.Dataset.zip(_IdExample(id=id_ds, example=ds))
   return ds
 
@@ -112,7 +114,8 @@ def _decode_with_id(
   decoded_ex = decode_fn(id_ex.example)
   if not isinstance(decoded_ex, dict):
     raise TypeError(
-        f'Features should be `dict` when `add_tfds_id=True`. Got: {decoded_ex}')
+        f'Features should be `dict` when `add_tfds_id=True`. Got: {decoded_ex}'
+    )
   decoded_ex['tfds_id'] = id_ex.id
   return decoded_ex
 
@@ -144,8 +147,9 @@ def _get_tfds_id_prefixes(
       return instruction.basename()
     # Otherwise, return the relative path starting from the deepest folder that
     # differs.
-    return re.sub(rf'.*\/([^/]+{common_suffix}/[^/]+)', r'\1',
-                  instruction.filename)
+    return re.sub(
+        rf'.*\/([^/]+{common_suffix}/[^/]+)', r'\1', instruction.filename
+    )
 
   return {fi.filename: get_tfds_id(fi) for fi in file_instructions}
 
@@ -178,9 +182,13 @@ def _read_files(
     # If the number of examples read in the tf-record is known, we forward
     # the information to the tf.data.Dataset object.
     # Check the `tf.data.experimental` for backward compatibility with TF <= 2.1
-    if (read_config.assert_cardinality and
-        not read_config.input_context and  # TODO(epot): Restore cardinality
-        hasattr(tf.data.experimental, 'assert_cardinality')):
+    if (
+        read_config.assert_cardinality
+        and not read_config.input_context
+        and hasattr(  # TODO(epot): Restore cardinality
+            tf.data.experimental, 'assert_cardinality'
+        )
+    ):
       # TODO(b/154963426): Replace by per-shard cardinality (warning if
       # `experimental_interleave_sort_fn` is set).
       cardinality = sum(f.take for f in file_instructions)
@@ -189,22 +197,28 @@ def _read_files(
     return ds.with_options(read_config.options)  # Additional users options
 
   def validate_input_context():
-    if read_config.input_context.num_input_pipelines > 1 and len(
-        file_instructions) < read_config.input_context.num_input_pipelines:
+    if (
+        read_config.input_context.num_input_pipelines > 1
+        and len(file_instructions)
+        < read_config.input_context.num_input_pipelines
+    ):
       raise ValueError(
           'Cannot shard the pipeline with given `input_context`.'
           '`num_shards={}` but `num_input_pipelines={}`. This means that some '
-          'workers won\'t read any data. To shard the data, you may want to '
+          "workers won't read any data. To shard the data, you may want to "
           'use the subsplit API instead: '
           'https://www.tensorflow.org/datasets/splits'.format(
               len(file_instructions),
-              read_config.input_context.num_input_pipelines))
+              read_config.input_context.num_input_pipelines,
+          )
+      )
 
   # Eventually apply a transformation to the instruction function.
   # This allow the user to have direct control over the interleave order.
   if read_config.experimental_interleave_sort_fn is not None:
     file_instructions = read_config.experimental_interleave_sort_fn(
-        file_instructions)
+        file_instructions
+    )
 
   do_skip = any(f.skip > 0 for f in file_instructions)
   do_take = any(not f.takes_all for f in file_instructions)
@@ -226,7 +240,8 @@ def _read_files(
 
   if cycle_length == read_config_lib.MISSING:
     cycle_length = _get_default_interleave_cycle_length(
-        disable_shuffling=disable_shuffling)
+        disable_shuffling=disable_shuffling
+    )
 
   if disable_shuffling:
     _verify_read_config_for_ordered_dataset(
@@ -261,8 +276,11 @@ def _read_files(
   # to be non-deterministic. Note that setting the deterministic option in
   # tf.data.Options() sets this option globally. This means that also nested
   # fields will appear in undeterministic order.
-  if (shuffle_files and read_config.shuffle_seed is None and
-      tf_compat.get_option_deterministic(read_config.options) is None):
+  if (
+      shuffle_files
+      and read_config.shuffle_seed is None
+      and tf_compat.get_option_deterministic(read_config.options) is None
+  ):
     deterministic = False
 
   ds = instruction_ds.interleave(
@@ -285,7 +303,8 @@ def _read_files(
 def _get_default_interleave_cycle_length(disable_shuffling: bool) -> int:
   if disable_shuffling:
     logging.info(
-        '`interleave_cycle_length` set to 1 to read examples in order.')
+        '`interleave_cycle_length` set to 1 to read examples in order.'
+    )
     return 1
   else:
     return 16
@@ -308,11 +327,14 @@ def _verify_read_config_for_ordered_dataset(
   error_messages = []
   if shuffle_files:
     error_messages.append(
-        'Dataset is an ordered dataset (\'disable_shuffling=True\'), but examples will not be read in order because `shuffle_files=True`.'
+        "Dataset is an ordered dataset ('disable_shuffling=True'), but examples"
+        ' will not be read in order because `shuffle_files=True`.'
     )
   if interleave_cycle_length != 1:
     error_messages.append(
-        'Dataset is an ordered dataset (\'disable_shuffling=True\'), but examples will not be read in order because `ReadConfig.interleave_cycle_length != 1`.'
+        "Dataset is an ordered dataset ('disable_shuffling=True'), but examples"
+        ' will not be read in order because `ReadConfig.interleave_cycle_length'
+        ' != 1`.'
     )
   if error_messages:
     error_message = '\n'.join(error_messages)
@@ -442,7 +464,8 @@ class Reader(object):
     # Eventually add the `tfds_id` after the decoding
     if read_config and read_config.add_tfds_id:
       parse_and_decode = functools.partial(
-          _decode_with_id, decode_fn=parse_and_decode)
+          _decode_with_id, decode_fn=parse_and_decode
+      )
 
     ds = ds.map(
         parse_and_decode,

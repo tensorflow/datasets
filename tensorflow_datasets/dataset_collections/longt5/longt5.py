@@ -36,11 +36,14 @@ class Longt5(dataset_collection_builder.DatasetCollection):
     )
 
   @property
-  def datasets(self,) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
-    return collections.OrderedDict({
-        "1.0.0":
-            naming.references_for({
+  def datasets(
+      self,
+  ) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
+    return collections.OrderedDict(
+        {
+            "1.0.0": naming.references_for({
                 "natural_questions": "natural_questions/longt5:0.1.0",
                 "media_sum": "media_sum:1.0.0",
             })
-    })
+        }
+    )

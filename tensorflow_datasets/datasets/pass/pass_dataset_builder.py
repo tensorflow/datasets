@@ -23,12 +23,13 @@ _URLS = {
     'train_images': [
         tfds.download.Resource(  # pylint:disable=g-complex-comprehension
             url='https://zenodo.org/record/6615455/files/PASS.%s.tar' % i_,
-            extract_method=tfds.download.ExtractMethod.TAR)
+            extract_method=tfds.download.ExtractMethod.TAR,
+        )
         for i_ in '0123456789'
     ],
-    'meta_data':
-        tfds.download.Resource(
-            url='https://zenodo.org/record/6615455/files/pass_metadata.csv')
+    'meta_data': tfds.download.Resource(
+        url='https://zenodo.org/record/6615455/files/pass_metadata.csv'
+    ),
 }
 
 
@@ -37,13 +38,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('3.0.0')
   RELEASE_NOTES = {
-      '1.0.0':
-          'Initial release.',
-      '2.0.0':
+      '1.0.0': 'Initial release.',
+      '2.0.0': (
           'v2: Removed 472 images from v1 as they contained humans. Also added'
-          ' metadata: datetaken and GPS. ',
-      '3.0.0':
-          'v3: Removed 131 images from v2 as they contained humans/tattos.',
+          ' metadata: datetaken and GPS. '
+      ),
+      '3.0.0': (
+          'v3: Removed 131 images from v2 as they contained humans/tattos.'
+      ),
   }
 
   def _info(self):
@@ -51,17 +53,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(None, None, 3)),  # The image.
-            'image/creator_uname':
-                tfds.features.Text(),  # The photographer/creator.
-            'image/hash':
-                tfds.features.Text(),  # The hash, as computed from YFCC-100M.
+            'image/creator_uname': (
+                tfds.features.Text()
+            ),  # The photographer/creator.
+            'image/hash': (
+                tfds.features.Text()
+            ),  # The hash, as computed from YFCC-100M.
             'image/gps_lon': tfds.features.Tensor(
-                shape=(),
-                dtype=np.float32),  # Longitude of image if existent, otw. NaN.
+                shape=(), dtype=np.float32
+            ),  # Longitude of image if existent, otw. NaN.
             'image/gps_lat': tfds.features.Tensor(
-                shape=(),
-                dtype=np.float32),  # Latitude of image if existent, otw. NaN.
-            'image/date_taken': tfds.features.Text(
+                shape=(), dtype=np.float32
+            ),  # Latitude of image if existent, otw. NaN.
+            'image/date_taken': (
+                tfds.features.Text()
             ),  # Datetime of image if not NaN, else empty string.
         }),
         supervised_keys=None,
@@ -79,7 +84,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs=dict(
-                parts=paths['train_images'], meta=meta, dl_manager=dl_manager),
+                parts=paths['train_images'], meta=meta, dl_manager=dl_manager
+            ),
         )
     ]
 
@@ -93,19 +99,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         img_meta = meta.loc[img_hash]
 
         record = {
-            'image':
-                fobj,
-            'image/creator_uname':
-                img_meta['unickname'],
-            'image/hash':
-                img_hash,
-            'image/gps_lon':
-                img_meta['longitude'] if 'longitude' in img_meta else 0,
-            'image/gps_lat':
-                img_meta['latitude'] if 'latitude' in img_meta else 0,
-            'image/date_taken':
+            'image': fobj,
+            'image/creator_uname': img_meta['unickname'],
+            'image/hash': img_hash,
+            'image/gps_lon': (
+                img_meta['longitude'] if 'longitude' in img_meta else 0
+            ),
+            'image/gps_lat': (
+                img_meta['latitude'] if 'latitude' in img_meta else 0
+            ),
+            'image/date_taken': (
                 img_meta['datetaken']
                 # Filtering out nan values (which are not equal to themselves).
-                if img_meta['datetaken'] == img_meta['datetaken'] else ''
+                if img_meta['datetaken'] == img_meta['datetaken']
+                else ''
+            ),
         }
         yield i, record

@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class FleursTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for FLEURS dataset with af_za."""
+
   DATASET_CLASS = xtreme_s.XtremeS
   BUILDER_CONFIG_NAMES_TO_TEST = ['fleurs.af_za']
   SKIP_CHECKSUMS = True
@@ -47,8 +48,9 @@ class FleursTest(tfds.testing.DatasetBuilderTestCase):
     test_ex = get_sorted_data(builder, tfds.Split.TEST)[0]
     # Check Train
     self.assertEqual(1348, train_ex['id'])
-    self.assertIn(b'dummy_data/fleurs/af_za/audio/train/train_1.wav',
-                  train_ex['path'])
+    self.assertIn(
+        b'dummy_data/fleurs/af_za/audio/train/train_1.wav', train_ex['path']
+    )
     self.assertEqual('Boot ritte.'.encode(), train_ex['raw_transcription'])
     self.assertEqual('boot ritte'.encode(), train_ex['transcription'])
     self.assertEqual(32000, train_ex['num_samples'])
@@ -57,14 +59,26 @@ class FleursTest(tfds.testing.DatasetBuilderTestCase):
     self.assertEqual('Afrikaans'.encode(), train_ex['language'])
     self.assertEqual(3, train_ex['lang_group_id'])
     self.assertEqual((32000,), train_ex['audio'].shape)
-    self.assertCountEqual([
-        'id', 'path', 'audio', 'raw_transcription', 'transcription',
-        'num_samples', 'gender', 'lang_id', 'language', 'lang_group_id'
-    ], train_ex.keys())
+    self.assertCountEqual(
+        [
+            'id',
+            'path',
+            'audio',
+            'raw_transcription',
+            'transcription',
+            'num_samples',
+            'gender',
+            'lang_id',
+            'language',
+            'lang_group_id',
+        ],
+        train_ex.keys(),
+    )
     # Check Dev
     self.assertEqual(305, dev_ex['id'])
-    self.assertIn(b'dummy_data/fleurs/af_za/audio/dev/dev_1.wav',
-                  dev_ex['path'])
+    self.assertIn(
+        b'dummy_data/fleurs/af_za/audio/dev/dev_1.wav', dev_ex['path']
+    )
     self.assertEqual('In die 1960s'.encode(), dev_ex['raw_transcription'])
     self.assertEqual('in die 1960s'.encode(), dev_ex['transcription'])
     self.assertEqual(32000, dev_ex['num_samples'])
@@ -73,14 +87,26 @@ class FleursTest(tfds.testing.DatasetBuilderTestCase):
     self.assertEqual('Afrikaans'.encode(), dev_ex['language'])
     self.assertEqual(3, dev_ex['lang_group_id'])
     self.assertEqual((32000,), dev_ex['audio'].shape)
-    self.assertCountEqual([
-        'id', 'path', 'audio', 'raw_transcription', 'transcription',
-        'num_samples', 'gender', 'lang_id', 'language', 'lang_group_id'
-    ], dev_ex.keys())
+    self.assertCountEqual(
+        [
+            'id',
+            'path',
+            'audio',
+            'raw_transcription',
+            'transcription',
+            'num_samples',
+            'gender',
+            'lang_id',
+            'language',
+            'lang_group_id',
+        ],
+        dev_ex.keys(),
+    )
     # Check Test
     self.assertEqual(5, test_ex['id'])
-    self.assertIn(b'dummy_data/fleurs/af_za/audio/test/test_1.wav',
-                  test_ex['path'])
+    self.assertIn(
+        b'dummy_data/fleurs/af_za/audio/test/test_1.wav', test_ex['path']
+    )
     self.assertEqual('Boot.'.encode(), test_ex['raw_transcription'])
     self.assertEqual('boot'.encode(), test_ex['transcription'])
     self.assertEqual(32000, test_ex['num_samples'])
@@ -89,10 +115,21 @@ class FleursTest(tfds.testing.DatasetBuilderTestCase):
     self.assertEqual('Afrikaans'.encode(), dev_ex['language'])
     self.assertEqual(3, test_ex['lang_group_id'])
     self.assertEqual((32000,), test_ex['audio'].shape)
-    self.assertCountEqual([
-        'id', 'path', 'audio', 'raw_transcription', 'transcription',
-        'num_samples', 'gender', 'lang_id', 'language', 'lang_group_id'
-    ], test_ex.keys())
+    self.assertCountEqual(
+        [
+            'id',
+            'path',
+            'audio',
+            'raw_transcription',
+            'transcription',
+            'num_samples',
+            'gender',
+            'lang_id',
+            'language',
+            'lang_group_id',
+        ],
+        test_ex.keys(),
+    )
 
 
 if __name__ == '__main__':

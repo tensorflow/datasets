@@ -36,7 +36,7 @@ def _create_moving_sequence(image, pad_lefts, total_padding):
   with tf.name_scope("moving_sequence"):
 
     def get_padded_image(args):
-      pad_left, = args
+      (pad_left,) = args
       pad_right = total_padding - pad_left
       padding = tf.stack([pad_left, pad_right], axis=-1)
       z = tf.zeros((1, 2), dtype=pad_left.dtype)
@@ -110,14 +110,17 @@ def _get_random_unit_vector(ndims, dtype):
 
 MovingSequence = collections.namedtuple(
     "_MovingSequence",
-    ["image_sequence", "trajectory", "start_position", "velocity"])
+    ["image_sequence", "trajectory", "start_position", "velocity"],
+)
 
 
-def image_as_moving_sequence(image,
-                             sequence_length=20,
-                             output_size=(64, 64),
-                             velocity=0.1,
-                             start_position=None):
+def image_as_moving_sequence(
+    image,
+    sequence_length=20,
+    output_size=(64, 64),
+    velocity=0.1,
+    start_position=None,
+):
   """Turn simple static images into sequences of the originals bouncing around.
 
   Adapted from Srivastava et al.
@@ -201,8 +204,10 @@ def image_as_moving_sequence(image,
     raise ValueError("image must be rank 3, got %s" % str(image))
   output_size = tf.TensorShape(output_size)
   if len(output_size) != ndims:
-    raise ValueError("output_size must have exactly %d elements, got %s" %
-                     (ndims, output_size))
+    raise ValueError(
+        "output_size must have exactly %d elements, got %s"
+        % (ndims, output_size)
+    )
   image_shape = tf.shape(image)
   if start_position is None:
     start_position = tf.random.uniform((ndims,), dtype=tf.float32)
@@ -225,13 +230,16 @@ def image_as_moving_sequence(image,
       total_padding = tf.identity(total_padding)
 
   sequence_pad_lefts = tf.cast(
-      tf.math.round(trajectory * tf.cast(total_padding, tf.float32)), tf.int32)
+      tf.math.round(trajectory * tf.cast(total_padding, tf.float32)), tf.int32
+  )
 
   sequence = _create_moving_sequence(image, sequence_pad_lefts, total_padding)
-  sequence.set_shape([sequence_length] + output_size.as_list() +
-                     [image.shape[-1]])
+  sequence.set_shape(
+      [sequence_length] + output_size.as_list() + [image.shape[-1]]
+  )
   return MovingSequence(
       image_sequence=sequence,
       trajectory=trajectory,
       start_position=start_position,
-      velocity=velocity)
+      velocity=velocity,
+  )

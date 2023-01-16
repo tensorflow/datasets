@@ -22,6 +22,7 @@ from tensorflow_datasets.structured.wiki_table_text import wiki_table_text
 
 class WikiTableTextTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for wiki_table_text dataset."""
+
   DATASET_CLASS = wiki_table_text.WikiTableText
   SPLITS = {
       'train': 4,
@@ -32,56 +33,71 @@ class WikiTableTextTest(tfds.testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       'train_path': 'MSRA_NLC.Table2Text.train',
       'dev_path': 'MSRA_NLC.Table2Text.dev',
-      'test_path': 'MSRA_NLC.Table2Text.test'
+      'test_path': 'MSRA_NLC.Table2Text.test',
   }
 
   def test_generate_examples(self):
-    expected_examples = [{
-        'input_text': {
-            'table': [{
-                'column_header': 'subj_title_',
-                'row_number': 1,
-                'content': 'central bank of russia',
-            }, {
-                'column_header': 'subj_subtitle',
-                'row_number': 1,
-                'content': 'chairmen',
-            }, {
-                'column_header': 'name',
-                'row_number': 1,
-                'content': 'viktor gerashchenko',
-            }, {
-                'column_header': 'year',
-                'row_number': 1,
-                'content': '1992—1994',
-            }]
+    expected_examples = [
+        {
+            'input_text': {
+                'table': [
+                    {
+                        'column_header': 'subj_title_',
+                        'row_number': 1,
+                        'content': 'central bank of russia',
+                    },
+                    {
+                        'column_header': 'subj_subtitle',
+                        'row_number': 1,
+                        'content': 'chairmen',
+                    },
+                    {
+                        'column_header': 'name',
+                        'row_number': 1,
+                        'content': 'viktor gerashchenko',
+                    },
+                    {
+                        'column_header': 'year',
+                        'row_number': 1,
+                        'content': '1992—1994',
+                    },
+                ]
+            },
+            'target_text': (
+                'viktor gerashchenko is the chairman of central bank of russia '
+                'during 1992 to 1994'
+            ),
         },
-        'target_text':
-            'viktor gerashchenko is the chairman of central bank of russia '
-            'during 1992 to 1994'
-    }, {
-        'input_text': {
-            'table': [{
-                'column_header': 'subj_title_',
-                'row_number': 1,
-                'content': 'ace frehley',
-            }, {
-                'column_header': 'subj_subtitle',
-                'row_number': 1,
-                'content': 'discography',
-            }, {
-                'column_header': 'year',
-                'row_number': 1,
-                'content': '2006',
-            }, {
-                'column_header': 'title',
-                'row_number': 1,
-                'content': 'greatest hits live',
-            }]
+        {
+            'input_text': {
+                'table': [
+                    {
+                        'column_header': 'subj_title_',
+                        'row_number': 1,
+                        'content': 'ace frehley',
+                    },
+                    {
+                        'column_header': 'subj_subtitle',
+                        'row_number': 1,
+                        'content': 'discography',
+                    },
+                    {
+                        'column_header': 'year',
+                        'row_number': 1,
+                        'content': '2006',
+                    },
+                    {
+                        'column_header': 'title',
+                        'row_number': 1,
+                        'content': 'greatest hits live',
+                    },
+                ]
+            },
+            'target_text': (
+                'greatest hits live is a discography of ace frehlely in 2006'
+            ),
         },
-        'target_text':
-            'greatest hits live is a discography of ace frehlely in 2006'
-    }]
+    ]
     dataset = wiki_table_text.WikiTableText()
 
     def mock_open(*_):

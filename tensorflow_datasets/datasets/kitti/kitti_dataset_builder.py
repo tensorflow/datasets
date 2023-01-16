@@ -21,6 +21,7 @@ import os
 
 import numpy as np
 import tensorflow_datasets.public_api as tfds
+
 _HOMEPAGE_URL = "http://www.cvlibs.net/datasets/kitti/"
 _DATA_URL = "https://s3.eu-central-1.amazonaws.com/avg-kitti"
 _IMAGES_FNAME = "data_object_image_2.zip"
@@ -37,7 +38,10 @@ _OBJECT_LABELS = [
     "Misc",
 ]
 _OCCLUDED_LABELS = [
-    "fully visible", "partly occluded", "largely occluded", "unknown"
+    "fully visible",
+    "partly occluded",
+    "largely occluded",
+    "unknown",
 ]
 # The percentage of trainset videos to put into validation and test sets.
 # The released test images do not have labels.
@@ -46,8 +50,9 @@ _TEST_SPLIT_PERCENT_VIDEOS = 10
 
 # Raw Kitti representation of a bounding box. Coordinates are in pixels,
 # measured from the top-left hand corner.
-RawBoundingBox = collections.namedtuple("RawBoundingBox",
-                                        ["top", "bottom", "left", "right"])
+RawBoundingBox = collections.namedtuple(
+    "RawBoundingBox", ["top", "bottom", "left", "right"]
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -66,48 +71,48 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     # Annotation descriptions are in the object development kit.
     annotations = {
-        "type":
-            tfds.features.ClassLabel(
-                names=_OBJECT_LABELS,
-                doc="The type of object, e.g. 'Car' or 'Van'"),
-        "truncated":
-            tfds.features.Tensor(
-                shape=(),
-                dtype=np.float32,
-                doc=(
-                    "Float from 0 (non-truncated) to 1 (truncated), where"
-                    "truncated refers to the object leaving image boundaries")),
-        "occluded":
-            tfds.features.ClassLabel(
-                names=_OCCLUDED_LABELS,
-                doc=("Integer (0,1,2,3) indicating occlusion state: "
-                     "0 = fully visible, 1 = partly occluded"
-                     "2 = largely occluded, 3 = unknown")),
-        "alpha":
-            tfds.features.Tensor(
-                shape=(),
-                dtype=np.float32,
-                doc="Observation angle of object, ranging [-pi..pi]"),
-        "bbox":
-            tfds.features.BBoxFeature(
-                doc="2D bounding box of object in the image"),
-        "dimensions":
-            tfds.features.Tensor(
-                shape=(3,),
-                dtype=np.float32,
-                doc="3D object dimensions: height, width, length (in meters)"),
-        "location":
-            tfds.features.Tensor(
-                shape=(3,),
-                dtype=np.float32,
-                doc="3D object location x,y,z in camera coordinates (in meters)"
+        "type": tfds.features.ClassLabel(
+            names=_OBJECT_LABELS, doc="The type of object, e.g. 'Car' or 'Van'"
+        ),
+        "truncated": tfds.features.Tensor(
+            shape=(),
+            dtype=np.float32,
+            doc=(
+                "Float from 0 (non-truncated) to 1 (truncated), where"
+                "truncated refers to the object leaving image boundaries"
             ),
-        "rotation_y":
-            tfds.features.Tensor(
-                shape=(),
-                dtype=np.float32,
-                doc="Rotation ry around Y-axis in camera coordinates [-pi..pi]"
+        ),
+        "occluded": tfds.features.ClassLabel(
+            names=_OCCLUDED_LABELS,
+            doc=(
+                "Integer (0,1,2,3) indicating occlusion state: "
+                "0 = fully visible, 1 = partly occluded"
+                "2 = largely occluded, 3 = unknown"
             ),
+        ),
+        "alpha": tfds.features.Tensor(
+            shape=(),
+            dtype=np.float32,
+            doc="Observation angle of object, ranging [-pi..pi]",
+        ),
+        "bbox": tfds.features.BBoxFeature(
+            doc="2D bounding box of object in the image"
+        ),
+        "dimensions": tfds.features.Tensor(
+            shape=(3,),
+            dtype=np.float32,
+            doc="3D object dimensions: height, width, length (in meters)",
+        ),
+        "location": tfds.features.Tensor(
+            shape=(3,),
+            dtype=np.float32,
+            doc="3D object location x,y,z in camera coordinates (in meters)",
+        ),
+        "rotation_y": tfds.features.Tensor(
+            shape=(),
+            dtype=np.float32,
+            doc="Rotation ry around Y-axis in camera coordinates [-pi..pi]",
+        ),
     }
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
@@ -126,7 +131,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     }
     files = dl_manager.download(filenames)
     train_images, validation_images, test_images = _build_splits(
-        dl_manager.iter_archive(files["devkit"]))
+        dl_manager.iter_archive(files["devkit"])
+    )
 
     return [
         tfds.core.SplitGenerator(
@@ -136,7 +142,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "annotations": dl_manager.iter_archive(files["annotations"]),
                 "subdir": "training",
                 "image_ids": train_images,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
@@ -144,7 +151,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "annotations": dl_manager.iter_archive(files["annotations"]),
                 "subdir": "training",
                 "image_ids": validation_images,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
@@ -152,7 +160,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "annotations": dl_manager.iter_archive(files["annotations"]),
                 "subdir": "training",
                 "image_ids": test_images,
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, images, annotations, subdir, image_ids):
@@ -192,7 +201,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         continue
       annotations = all_annotations[image_id]
       img = cv2.imdecode(
-          np.frombuffer(fobj.read(), dtype=np.uint8), cv2.IMREAD_COLOR)
+          np.frombuffer(fobj.read(), dtype=np.uint8), cv2.IMREAD_COLOR
+      )
       img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
       height, width, _ = img.shape
       for obj in annotations:
@@ -234,31 +244,40 @@ def _parse_kitti_annotations(annotations_csv):
   """
   annotations = []
   for line in annotations_csv:
-    (obj_type, truncated, occluded, alpha, left, top, right, bottom, height,
-     width, length, x, y, z,
-     rotation_y) = list(csv.reader([line.decode()], delimiter=" "))[0]
+    (
+        obj_type,
+        truncated,
+        occluded,
+        alpha,
+        left,
+        top,
+        right,
+        bottom,
+        height,
+        width,
+        length,
+        x,
+        y,
+        z,
+        rotation_y,
+    ) = list(csv.reader([line.decode()], delimiter=" "))[0]
     # DontCare objects lack annotations, so skip them.
     if obj_type == "DontCare":
       continue
     annotations.append({
-        "type":
-            obj_type,
-        "truncated":
-            float(truncated),
-        "occluded":
-            int(occluded),
-        "alpha":
-            float(alpha),
-        "bbox_raw":
-            RawBoundingBox(
-                top=float(top),
-                bottom=float(bottom),
-                left=float(left),
-                right=float(right)),
+        "type": obj_type,
+        "truncated": float(truncated),
+        "occluded": int(occluded),
+        "alpha": float(alpha),
+        "bbox_raw": RawBoundingBox(
+            top=float(top),
+            bottom=float(bottom),
+            left=float(left),
+            right=float(right),
+        ),
         "dimensions": [float(v) for v in [height, width, length]],
         "location": [float(v) for v in [x, y, z]],
-        "rotation_y":
-            float(rotation_y),
+        "rotation_y": float(rotation_y),
     })
   return annotations
 
@@ -302,19 +321,24 @@ def _build_splits(devkit):
   np.random.seed(seed=123)
 
   # Max 1 for testing.
-  num_test_videos = max(1,
-                        _TEST_SPLIT_PERCENT_VIDEOS * len(video_to_image) // 100)
+  num_test_videos = max(
+      1, _TEST_SPLIT_PERCENT_VIDEOS * len(video_to_image) // 100
+  )
   num_validation_videos = max(
-      1,
-      _VALIDATION_SPLIT_PERCENT_VIDEOS * len(video_to_image) // 100)
+      1, _VALIDATION_SPLIT_PERCENT_VIDEOS * len(video_to_image) // 100
+  )
   test_videos = set(
       np.random.choice(
-          sorted(list(video_to_image.keys())), num_test_videos, replace=False))
+          sorted(list(video_to_image.keys())), num_test_videos, replace=False
+      )
+  )
   validation_videos = set(
       np.random.choice(
           sorted(list(set(video_to_image.keys()) - set(test_videos))),
           num_validation_videos,
-          replace=False))
+          replace=False,
+      )
+  )
   test_images = []
   validation_images = []
   train_images = []

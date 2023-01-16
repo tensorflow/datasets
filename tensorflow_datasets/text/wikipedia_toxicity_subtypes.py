@@ -92,7 +92,11 @@ for more details.
 _DOWNLOAD_URL = 'https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/wikipedia_toxicity_subtypes_v0.3.zip'
 
 TOXICITY_SUBTYPES = [
-    'severe_toxicity', 'obscene', 'threat', 'insult', 'identity_attack'
+    'severe_toxicity',
+    'obscene',
+    'threat',
+    'insult',
+    'identity_attack',
 ]
 
 
@@ -101,7 +105,8 @@ class WikipediaToxicityConfig(tfds.core.BuilderConfig):
 
   def __init__(self, name: str, description: str, multilingual: bool):
     super(WikipediaToxicityConfig, self).__init__(
-        name=name, description=description)
+        name=name, description=description
+    )
     self.multilingual = multilingual
 
 
@@ -119,33 +124,42 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
   data in several non-English languages (tr, it, es, pt, ru, fr). This config
   provides access only to the primary toxicity label for each comment.
   """
+
   BUILDER_CONFIGS = [
       WikipediaToxicityConfig(
           name='EnglishSubtypes',
           description=_SUBTYPES_DESCRIPTION,
-          multilingual=False),
+          multilingual=False,
+      ),
       WikipediaToxicityConfig(
           name='Multilingual',
           description=_MULTILINGUAL_DESCRIPTION,
-          multilingual=True),
+          multilingual=True,
+      ),
   ]
 
   VERSION = tfds.core.Version('0.3.1')
   RELEASE_NOTES = {
-      '0.3.1': ('Added a unique id for each comment. (For the Multilingual '
-                'config, these are only unique within each split.)'),
+      '0.3.1': (
+          'Added a unique id for each comment. (For the Multilingual '
+          'config, these are only unique within each split.)'
+      ),
       '0.3.0': 'Added WikipediaToxicityMultilingual config.',
       '0.2.0': 'Updated features for consistency with CivilComments dataset.',
   }
 
   def _info(self):
     description = _COMMON_DESCRIPTION
-    homepage = _MULTILINGUAL_HOMEPAGE if self.builder_config.multilingual else _SUBTYPES_HOMEPAGE
+    homepage = (
+        _MULTILINGUAL_HOMEPAGE
+        if self.builder_config.multilingual
+        else _SUBTYPES_HOMEPAGE
+    )
 
     features = {
         'text': tfds.features.Text(),
         'id': tfds.features.Text(),
-        'language': tfds.features.Text()
+        'language': tfds.features.Text(),
     }
     labels = ['toxicity']
     if not self.builder_config.multilingual:
@@ -168,7 +182,8 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     file_path_prefix = os.path.join(
         dl_path,
-        'wikidata_' + 'multilingual_' * self.builder_config.multilingual)
+        'wikidata_' + 'multilingual_' * self.builder_config.multilingual,
+    )
 
     split_generators = [
         tfds.core.SplitGenerator(
@@ -185,7 +200,8 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
       # Validation split instead of train for WikipediaToxicityMultilingual.
       split_generators[0] = tfds.core.SplitGenerator(
           name=tfds.Split.VALIDATION,
-          gen_kwargs={'filename': file_path_prefix + 'validation.csv'})
+          gen_kwargs={'filename': file_path_prefix + 'validation.csv'},
+      )
 
     return split_generators
 

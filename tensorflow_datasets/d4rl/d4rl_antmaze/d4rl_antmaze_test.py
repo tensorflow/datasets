@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlUMazeTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_antmaze dataset."""
+
   DATASET_CLASS = d4rl_antmaze.D4rlAntmaze
   SPLITS = {
       'train': 2,  # Number of fake train example

@@ -28,7 +28,8 @@ from tensorflow_datasets.testing import test_utils
 flags.DEFINE_string(
     name="tfds_dir",
     default=py_utils.tfds_dir(),
-    help="Path to tensorflow_datasets directory")
+    help="Path to tensorflow_datasets directory",
+)
 FLAGS = flags.FLAGS
 
 _COMMIT = "0123456789abcdef0123456789abcdef01234567"  # fake commit
@@ -37,8 +38,15 @@ NUM_TASKS = {"training": 10, "evaluation": 5}
 
 
 def examples_dir():
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "arc", _EXTRACT_SUBDIR, "data")
+  return os.path.join(
+      FLAGS.tfds_dir,
+      "testing",
+      "test_data",
+      "fake_examples",
+      "arc",
+      _EXTRACT_SUBDIR,
+      "data",
+  )
 
 
 def arc_dir(name):

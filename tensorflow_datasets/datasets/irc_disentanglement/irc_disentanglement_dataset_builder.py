@@ -21,9 +21,13 @@ from typing import List
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-_DOWNLOAD_URL = "https://github.com/jkkummerfeld/irc-disentanglement/zipball/fd379e9"
+
+_DOWNLOAD_URL = (
+    "https://github.com/jkkummerfeld/irc-disentanglement/zipball/fd379e9"
+)
 _DOWNLOAD_ARCHIVE_SUBDIR = os.path.join(
-    "jkkummerfeld-irc-disentanglement-fd379e9", "data")
+    "jkkummerfeld-irc-disentanglement-fd379e9", "data"
+)
 
 _IRC_DAY_KEY = "day"
 _MESSAGE_ID = "id"
@@ -46,7 +50,7 @@ def _get_day_to_paths(data_dir):
   day_to_paths = collections.defaultdict(dict)
   for filename in tf.io.gfile.listdir(data_dir):
     filepath = os.path.join(data_dir, filename)
-    day_str = filename[:len("YYYY-MM-DD")]  # e.g. 2004-12-25.train-c.raw.txt
+    day_str = filename[: len("YYYY-MM-DD")]  # e.g. 2004-12-25.train-c.raw.txt
 
     if "raw" in filename:
       day_to_paths[day_str]["text"] = filepath
@@ -126,7 +130,7 @@ def _prepare_examples(texts_file_path, annot_file_path, day_str):
         _MESSAGE_ID: _get_msg_id(day_str, line_idx),
         _MESSAGE_TEXT: texts[line_idx],
         _MESSAGE_TIMESTAMP: timestamps[line_idx],
-        _MESSAGE_PARENTS_IDS: parents_ids
+        _MESSAGE_PARENTS_IDS: parents_ids,
     }
 
 
@@ -137,20 +141,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            _IRC_DAY_KEY:
-                tfds.features.Sequence(
+        features=tfds.features.FeaturesDict(
+            {
+                _IRC_DAY_KEY: tfds.features.Sequence(
                     tfds.features.FeaturesDict({
-                        _MESSAGE_ID:
-                            tfds.features.Text(),
-                        _MESSAGE_TEXT:
-                            tfds.features.Text(),
-                        _MESSAGE_TIMESTAMP:
-                            tfds.features.Text(),
-                        _MESSAGE_PARENTS_IDS:
-                            tfds.features.Sequence(tfds.features.Text()),
-                    }))
-        }),
+                        _MESSAGE_ID: tfds.features.Text(),
+                        _MESSAGE_TEXT: tfds.features.Text(),
+                        _MESSAGE_TIMESTAMP: tfds.features.Text(),
+                        _MESSAGE_PARENTS_IDS: tfds.features.Sequence(
+                            tfds.features.Text()
+                        ),
+                    })
+                )
+            }
+        ),
         homepage="https://jkk.name/irc-disentanglement",
     )
 
@@ -165,22 +169,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "day_to_paths":
-                    _get_day_to_paths(os.path.join(data_dir, "train"))
+                "day_to_paths": _get_day_to_paths(
+                    os.path.join(data_dir, "train")
+                )
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "day_to_paths": _get_day_to_paths(
-                    os.path.join(data_dir, "dev"))
+                "day_to_paths": _get_day_to_paths(os.path.join(data_dir, "dev"))
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "day_to_paths":
-                    _get_day_to_paths(os.path.join(data_dir, "test"))
+                "day_to_paths": _get_day_to_paths(
+                    os.path.join(data_dir, "test")
+                )
             },
         ),
     ]
@@ -189,6 +194,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     for day, paths in day_to_paths.items():
       yield day, {
-          _IRC_DAY_KEY:
-              list(_prepare_examples(paths["text"], paths["annot"], day))
+          _IRC_DAY_KEY: list(
+              _prepare_examples(paths["text"], paths["annot"], day)
+          )
       }

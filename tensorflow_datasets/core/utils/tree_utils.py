@@ -50,7 +50,8 @@ def parallel_map(
     The nested structure after `map_fn` has been applied.
   """
   with concurrent.futures.ThreadPoolExecutor(
-      max_workers=max_workers,) as executor:
+      max_workers=max_workers,
+  ) as executor:
     launch_worker = functools.partial(executor.submit, map_fn)
     futures = map_structure(launch_worker, *trees)
 

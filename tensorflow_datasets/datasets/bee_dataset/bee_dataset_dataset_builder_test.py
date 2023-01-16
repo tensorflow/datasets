@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class BeeDatasetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for BeeDataset dataset."""
+
   DATASET_CLASS = bee_dataset_dataset_builder.Builder
   SPLITS = {'train': 3}
 

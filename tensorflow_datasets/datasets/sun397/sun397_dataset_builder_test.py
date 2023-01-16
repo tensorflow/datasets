@@ -35,7 +35,8 @@ def new_init(self, tfds_split_files=None, **kwargs):
           'te': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_te.txt'),
           'va': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_va.txt'),
       },
-      **kwargs)
+      **kwargs,
+  )
 
 
 # Patch init to add init arguments without changing the class.__name__ and

@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class StoryClozeTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for story_cloze dataset."""
+
   DATASET_CLASS = story_cloze_dataset_builder.Builder
 
   SPLITS = {

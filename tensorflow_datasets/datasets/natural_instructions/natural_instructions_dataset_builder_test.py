@@ -21,6 +21,7 @@ from tensorflow_datasets.datasets.natural_instructions import natural_instructio
 
 class NaturalInstructionsTest(testing.DatasetBuilderTestCase):
   """Tests for natural_instructions dataset."""
+
   DATASET_CLASS = natural_instructions_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example

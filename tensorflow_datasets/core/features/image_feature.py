@@ -66,6 +66,7 @@ _VISU_FRAMERATE = 10
 @dataclasses.dataclass
 class _ImageEncoder:
   """Utils which encode/decode images."""
+
   shape: utils.Shape
   dtype: type_utils.TfdsDType
   encoding_format: Optional[str]
@@ -105,8 +106,9 @@ class _ImageEncoder:
     # It has created subtle issues for imagenet_corrupted: images are read as
     # JPEG images to apply some processing, but final image saved as PNG
     # (default) rather than JPEG.
-    return self._runner.run(_ENCODE_FN[self.encoding_format or 'png'](),
-                            np_image)
+    return self._runner.run(
+        _ENCODE_FN[self.encoding_format or 'png'](), np_image
+    )
 
   def decode_image(self, img: tf.Tensor) -> tf.Tensor:
     """Decode the jpeg or png bytes to 3d tensor."""
@@ -133,10 +135,12 @@ class _FloatImageEncoder(_ImageEncoder):
     if shape[-1] != 1:
       raise ValueError(
           'tfds.features.Image only support single-channel for tf.float32. '
-          f'Got shape={shape}')
+          f'Got shape={shape}'
+      )
     if encoding_format and encoding_format != 'png':
       raise ValueError(
-          'tfds.features.Image only support PNG encoding for tf.float32')
+          'tfds.features.Image only support PNG encoding for tf.float32'
+      )
     self._float_shape = shape
     super().__init__(
         shape=shape[:2] + (4,),
@@ -149,7 +153,8 @@ class _FloatImageEncoder(_ImageEncoder):
     if not isinstance(image_or_path_or_fobj, np.ndarray):
       raise ValueError(
           'tfds.features.Image only support `np.ndarray` for tf.float32 '
-          f'images, not paths. Got: {image_or_path_or_fobj!r}')
+          f'images, not paths. Got: {image_or_path_or_fobj!r}'
+      )
     return self._encode_image(image_or_path_or_fobj)
 
   def _encode_image(self, np_image: np.ndarray) -> bytes:
@@ -245,9 +250,9 @@ class Image(feature_lib.FeatureConnector):
     self._encoding_format = get_and_validate_encoding(encoding_format)
     self._shape = get_and_validate_shape(shape, self._encoding_format)
     self._dtype = get_and_validate_dtype(dtype, self._encoding_format)
-    self._use_colormap = _get_and_validate_colormap(use_colormap, self._shape,
-                                                    self._dtype,
-                                                    self._encoding_format)
+    self._use_colormap = _get_and_validate_colormap(
+        use_colormap, self._shape, self._dtype, self._encoding_format
+    )
 
     if self._dtype == np.float32:  # Float images encoded as 4-channels uint8
       self._image_encoder = _FloatImageEncoder(
@@ -308,7 +313,8 @@ class Image(feature_lib.FeatureConnector):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.ImageFeature]) -> 'Image':
+      cls, value: Union[Json, feature_pb2.ImageFeature]
+  ) -> 'Image':
     if isinstance(value, dict):
       # For backwards compatibility
       return cls(
@@ -321,7 +327,8 @@ class Image(feature_lib.FeatureConnector):
         shape=feature_lib.from_shape_proto(value.shape),
         dtype=feature_lib.dtype_from_str(value.dtype),
         encoding_format=value.encoding_format or None,
-        use_colormap=value.use_colormap)
+        use_colormap=value.use_colormap,
+    )
 
   def to_json_content(self) -> feature_pb2.ImageFeature:
     return feature_pb2.ImageFeature(
@@ -394,10 +401,12 @@ def _get_repr_html_ffmpeg(images: List[PilImage]) -> str:
     ffmpeg_args.append(os.fspath(video_path))
     utils.ffmpeg_run(ffmpeg_args)
     video_str = utils.get_base64(video_path.read_bytes())
-  return (f'<video height="{THUMBNAIL_SIZE}" width="175" '
-          'controls loop autoplay muted playsinline>'
-          f'<source src="data:video/mp4;base64,{video_str}"  type="video/mp4" >'
-          '</video>')
+  return (
+      f'<video height="{THUMBNAIL_SIZE}" width="175" '
+      'controls loop autoplay muted playsinline>'
+      f'<source src="data:video/mp4;base64,{video_str}"  type="video/mp4" >'
+      '</video>'
+  )
 
 
 def _get_repr_html_gif(images: List[PilImage]) -> str:
@@ -433,8 +442,10 @@ def get_and_validate_dtype(dtype: np.dtype, encoding_format: Optional[str]):
   """Update the dtype."""
   acceptable_dtypes = _ACCEPTABLE_DTYPES.get(encoding_format)
   if acceptable_dtypes and dtype not in acceptable_dtypes:
-    raise ValueError(f'Acceptable `dtype` for {encoding_format}: '
-                     f'{acceptable_dtypes} (was {dtype})')
+    raise ValueError(
+        f'Acceptable `dtype` for {encoding_format}: '
+        f'{acceptable_dtypes} (was {dtype})'
+    )
   return dtype
 
 
@@ -445,32 +456,40 @@ def get_and_validate_shape(shape, encoding_format):
   channels = shape[-1]
   acceptable_channels = _ACCEPTABLE_CHANNELS.get(encoding_format)
   if acceptable_channels and channels not in acceptable_channels:
-    raise ValueError(f'Acceptable `channels` for {encoding_format}: '
-                     f'{acceptable_channels} (was {channels})')
+    raise ValueError(
+        f'Acceptable `channels` for {encoding_format}: '
+        f'{acceptable_channels} (was {channels})'
+    )
   return tuple(shape)
 
 
-def _get_and_validate_colormap(use_colormap, shape, dtype: np.dtype,
-                               encoding_format):
+def _get_and_validate_colormap(
+    use_colormap, shape, dtype: np.dtype, encoding_format
+):
   """Validate that the given colormap is valid."""
   if use_colormap:
     if encoding_format and encoding_format != 'png':
       raise ValueError(
-          f'Colormap is only available for PNG images. Got: {encoding_format}')
+          f'Colormap is only available for PNG images. Got: {encoding_format}'
+      )
     if shape[-1] != 1:
       raise ValueError(
-          f'Colormap is only available for gray-scale images. Got: {shape}')
+          f'Colormap is only available for gray-scale images. Got: {shape}'
+      )
     if not dtype_utils.is_integer(dtype):
       raise ValueError(
-          f'Colormap is only available for integer images. Got: {dtype}')
+          f'Colormap is only available for integer images. Got: {dtype}'
+      )
 
   return use_colormap
 
 
-def _validate_np_array(np_array: np.ndarray, shape: utils.Shape,
-                       dtype: np.dtype) -> None:
+def _validate_np_array(
+    np_array: np.ndarray, shape: utils.Shape, dtype: np.dtype
+) -> None:
   """Validate the numpy array match the expected shape/dtype."""
   if np_array.dtype != dtype:
-    raise ValueError(f'Image dtype should be {dtype}. '
-                     f'Detected: {np_array.dtype}.')
+    raise ValueError(
+        f'Image dtype should be {dtype}. Detected: {np_array.dtype}.'
+    )
   utils.assert_shape_match(np_array.shape, shape)

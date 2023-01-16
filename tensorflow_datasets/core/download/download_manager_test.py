@@ -57,7 +57,6 @@ class PathDict(collections.UserDict):
   """Like `dict` but normalize path-like objects.
 
   It means `d[Path('/path/')]` and `d['/path/']` are equivalent.
-
   """
 
   def __getitem__(self, key):
@@ -125,7 +124,8 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
       return promise.Promise.resolve(dl_result)
 
     return mock.patch.object(
-        downloader._Downloader, 'download', side_effect=_download)
+        downloader._Downloader, 'download', side_effect=_download
+    )
 
   def _make_extractor_mock(self):
     """`extractor.extract` patch which creates the returns the path."""
@@ -135,11 +135,13 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
       self.fs.add_file(dest, f'Extracted dir from {path}')
       if not os.path.basename(dest).startswith(method.name):
         raise ValueError(
-            f'Destination {dest} do not match extraction method {method}')
+            f'Destination {dest} do not match extraction method {method}'
+        )
       return promise.Promise.resolve(self.extract_results[path])
 
     return mock.patch.object(
-        extractor._Extractor, 'extract', side_effect=_extract).start()
+        extractor._Extractor, 'extract', side_effect=_extract
+    ).start()
 
   def setUp(self):
     super().setUp()
@@ -177,13 +179,15 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     content = json.dumps(info)
     self.fs.add_file(path, content)
 
-  def _get_manager(self,
-                   register_checksums=True,
-                   url_infos=None,
-                   dl_dir='/dl_dir',
-                   extract_dir='/extract_dir',
-                   manual_dir='/manual_dir',
-                   **kwargs):
+  def _get_manager(
+      self,
+      register_checksums=True,
+      url_infos=None,
+      dl_dir='/dl_dir',
+      extract_dir='/extract_dir',
+      manual_dir='/manual_dir',
+      **kwargs,
+  ):
     tf.io.gfile.mkdir('/checksums')
     manager = dm.DownloadManager(
         dataset_name='mnist',
@@ -192,7 +196,8 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
         manual_dir=manual_dir,
         register_checksums=register_checksums,
         register_checksums_path='/checksums/checksums.tsv',
-        **kwargs)
+        **kwargs,
+    )
     if url_infos:
       manager._url_infos = url_infos
     return manager
@@ -210,7 +215,8 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     self.dl_results[b.url] = b.url_info
     self.dl_results[c.url] = c.url_info
     manager = self._get_manager(
-        url_infos={art.url: art.url_info for art in (a, b, c)})
+        url_infos={art.url: art.url_info for art in (a, b, c)}
+    )
     downloads = manager.download({
         'cached': a.url,
         'new': b.url,
@@ -226,7 +232,8 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     # C is re-downloaded as incomplete
     self.assertCountEqual(self.downloaded_urls, {b.url, c.url})
     self.assertEqual(  # Downloaded size include cached downloads
-        manager.downloaded_size, sum([art.url_info.size for art in (a, b, c)]))
+        manager.downloaded_size, sum([art.url_info.size for art in (a, b, c)])
+    )
 
   def test_manually_downloaded(self):
     """One file is manually downloaded, one not."""
@@ -257,7 +264,8 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     cached = resource_lib.Resource(path='/dl_dir/cached', extract_method=ZIP)
     new_ = resource_lib.Resource(path='/dl_dir/new', extract_method=TAR)
     no_extract = resource_lib.Resource(
-        path='/dl_dir/noextract', extract_method=NO_EXTRACT)
+        path='/dl_dir/noextract', extract_method=NO_EXTRACT
+    )
     self.fs.add_file('/extract_dir/ZIP.cached')
     self.extract_results['/dl_dir/new'] = '/extract_dir/TAR.new'
     manager = self._get_manager()
@@ -281,8 +289,9 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     manager = self._get_manager()
     out1 = manager.extract(['/dl_dir/foo.tar', '/dl_dir/foo.tar'])
     out2 = manager.extract('/dl_dir/foo.tar')
-    self.assertEqual(out1,
-                     _as_path(['/extract_dir/TAR.foo', '/extract_dir/TAR.foo']))
+    self.assertEqual(
+        out1, _as_path(['/extract_dir/TAR.foo', '/extract_dir/TAR.foo'])
+    )
     self.assertEqual(out2, _as_path('/extract_dir/TAR.foo'))
     # Result is memoize so extract has only been called once
     self.assertCountEqual(self.extracted_paths, [_as_path('/dl_dir/foo.tar')])
@@ -295,15 +304,20 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     # url_b doesn't need any extraction.
 
     # Result is the same after caching:
-    manager = self._get_manager(url_infos={
-        a.url: a.url_info,
-        b.url: b.url_info,
-    })
+    manager = self._get_manager(
+        url_infos={
+            a.url: a.url_info,
+            b.url: b.url_info,
+        }
+    )
     res = manager.download_and_extract({'a': a.url, 'b': b.url})
-    self.assertEqual(res, {
-        'a': _as_path('/extract_dir/ZIP.%s' % a.file_name),
-        'b': b.file_path,
-    })
+    self.assertEqual(
+        res,
+        {
+            'a': _as_path('/extract_dir/ZIP.%s' % a.file_name),
+            'b': b.file_path,
+        },
+    )
 
   def test_download_and_extract_no_manual_dir(self):
     a, b = Artifact('a.zip'), Artifact('b')
@@ -321,10 +335,13 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
         },
     )
     res = manager.download_and_extract({'a': a.url, 'b': b.url})
-    self.assertEqual(res, {
-        'a': _as_path('/extract_dir/ZIP.%s' % a.file_name),
-        'b': b.file_path,
-    })
+    self.assertEqual(
+        res,
+        {
+            'a': _as_path('/extract_dir/ZIP.%s' % a.file_name),
+            'b': b.file_path,
+        },
+    )
 
   def test_download_and_extract_archive_ext_in_fname(self):
     # Make sure extraction method is properly deduced from original fname, and
@@ -334,13 +351,20 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     self.dl_fnames[a.url] = 'abc.zip'
     self.extract_results[a.file_path] = f'/extract_dir/ZIP.{a.file_name}'
 
-    manager = self._get_manager(url_infos={
-        a.url: a.url_info,
-    })
+    manager = self._get_manager(
+        url_infos={
+            a.url: a.url_info,
+        }
+    )
     res = manager.download_and_extract({'a': a.url})
-    self.assertEqual(res, _as_path({
-        'a': '/extract_dir/ZIP.%s' % a.file_name,
-    }))
+    self.assertEqual(
+        res,
+        _as_path(
+            {
+                'a': '/extract_dir/ZIP.%s' % a.file_name,
+            }
+        ),
+    )
 
 
   def test_download_and_extract_already_downloaded(self):
@@ -349,9 +373,11 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     self.fs.add_file(a.file_path)
     self._write_info(_info_path(a.file_path), {'original_fname': 'a.zip'})
     self.extract_results[a.file_path] = f'/extract_dir/ZIP.{a.file_name}'
-    manager = self._get_manager(url_infos={
-        a.url: a.url_info,
-    })
+    manager = self._get_manager(
+        url_infos={
+            a.url: a.url_info,
+        }
+    )
     res = manager.download_and_extract(a.url)
     self.assertEqual(res, _as_path(f'/extract_dir/ZIP.{a.file_name}'))
     # No url downloaded, but file extracted.
@@ -391,12 +417,11 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     manager = self._get_manager(
         register_checksums=False,
         url_infos={
-            a.url:
-                checksums_lib.UrlInfo(
-                    size=a.url_info.size,
-                    checksum=sha_b,
-                    filename=a.url_info.filename,
-                ),
+            a.url: checksums_lib.UrlInfo(
+                size=a.url_info.size,
+                checksum=sha_b,
+                filename=a.url_info.filename,
+            ),
         },
     )
     with self.assertRaises(dm.NonMatchingChecksumError):
@@ -407,8 +432,9 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     pickle.loads(pickle.dumps(dl_manager))
 
     dl_manager = self._get_manager(register_checksums=True)
-    with self.assertRaisesRegex(NotImplementedError,
-                                '`register_checksums` must be disabled'):
+    with self.assertRaisesRegex(
+        NotImplementedError, '`register_checksums` must be disabled'
+    ):
       pickle.dumps(dl_manager)
 
   def test_force_checksums_validation(self):
@@ -429,13 +455,17 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     self.dl_results[a.url] = a.url_info
 
     # Download the URL
-    dl_manager = self._get_manager(register_checksums=False,)
+    dl_manager = self._get_manager(
+        register_checksums=False,
+    )
     self.assertEqual(dl_manager.download(a.url), a.url_path)
     self.assertCountEqual(self.downloaded_urls, [a.url])
     self.assertContainFiles([a.url_path, _info_path(a.url_path)])
 
     # Reuse downloaded cache
-    dl_manager = self._get_manager(register_checksums=False,)
+    dl_manager = self._get_manager(
+        register_checksums=False,
+    )
     self.assertEqual(dl_manager.download(a.url), a.url_path)
     self.assertCountEqual(self.downloaded_urls, [a.url])
     self.assertContainFiles([a.url_path, _info_path(a.url_path)])
@@ -480,7 +510,9 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     ])
 
     # Checksums unknown, so `file_path` unknown, re-downloading
-    dl_manager = self._get_manager(register_checksums=False,)
+    dl_manager = self._get_manager(
+        register_checksums=False,
+    )
     self.assertEqual(dl_manager.download(a.url), a.url_path)
     self.assertCountEqual(self.downloaded_urls, [a.url, a.url])  # Re-download!!
     self.assertContainFiles([
@@ -497,7 +529,9 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     self.dl_results[a.url] = a.url_info
 
     # url_info unknown: File download in url_path
-    dl_manager = self._get_manager(register_checksums=False,)
+    dl_manager = self._get_manager(
+        register_checksums=False,
+    )
     self.assertEqual(dl_manager.download(a.url), a.url_path)
     self.assertCountEqual(self.downloaded_urls, [a.url])
     self.assertContainFiles([a.url_path, _info_path(a.url_path)])
@@ -576,7 +610,9 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     self.dl_results[old_a.url] = old_a.url_info
 
     # Old file downloaded to it's url path (with old checksums)
-    dl_manager = self._get_manager(register_checksums=False,)
+    dl_manager = self._get_manager(
+        register_checksums=False,
+    )
     self.assertEqual(dl_manager.download(old_a.url), old_a.url_path)
     self.assertCountEqual(self.downloaded_urls, [old_a.url])
     self.assertContainFiles([old_a.url_path, _info_path(old_a.url_path)])
@@ -605,10 +641,13 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
   @parameterized.parameters([(1,), (10,), (50,)])
   def test_max_simultaneous_downloads(self, max_simultaneous_downloads):
     dl_manager = self._get_manager(
-        max_simultaneous_downloads=max_simultaneous_downloads)
+        max_simultaneous_downloads=max_simultaneous_downloads
+    )
 
-    self.assertEqual(max_simultaneous_downloads,
-                     dl_manager._downloader._executor._max_workers)
+    self.assertEqual(
+        max_simultaneous_downloads,
+        dl_manager._downloader._executor._max_workers,
+    )
 
 
 if __name__ == '__main__':

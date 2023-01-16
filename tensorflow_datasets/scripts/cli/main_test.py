@@ -21,7 +21,6 @@ from tensorflow_datasets.scripts.cli import main
 
 
 def test_main():
-
   def _check_exit(status=0, message=None):
     del message
     assert status == 0  # Check argparse exit gracefully

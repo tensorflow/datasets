@@ -28,14 +28,15 @@ TODO = f"{NAME}"
 testdata = [
     (builder_templates.STANDARD, "tfds.core.GeneratorBasedBuilder"),
     (builder_templates.CONLL, "tfds.dataset_builders.ConllDatasetBuilder"),
-    (builder_templates.CONLLU, "tfds.dataset_builders.ConllUDatasetBuilder")
+    (builder_templates.CONLLU, "tfds.dataset_builders.ConllUDatasetBuilder"),
 ]
 
 
 @pytest.mark.parametrize("ds_format,ds_builder", testdata)
 def test_valid_builder_templates(ds_format, ds_builder):
   dataset_info = utils.DatasetInfo(
-      name=NAME, in_tfds=True, path=PATH_DIR, data_format=ds_format)
+      name=NAME, in_tfds=True, path=PATH_DIR, data_format=ds_format
+  )
   template = builder_templates.create_builder_template(dataset_info)
   assert isinstance(template, str)
   assert ds_builder in template
@@ -47,10 +48,12 @@ def test_create_inexistent_builder_template():
       name=NAME,
       in_tfds=True,
       path=PATH_DIR,
-      data_format=nonexistent_data_format)
+      data_format=nonexistent_data_format,
+  )
 
   error_msg = (
-      f"Required format {nonexistent_data_format} isn't associated with a format-specific builder in TFDS."
+      f"Required format {nonexistent_data_format} isn't associated with a"
+      " format-specific builder in TFDS."
   )
   with pytest.raises(ValueError, match=error_msg):
     builder_templates.create_builder_template(nonexistent_dataset_info)

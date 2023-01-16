@@ -52,5 +52,5 @@ class WmtT2tTranslate(wmt.WmtTranslate):
     return {
         tfds.Split.TRAIN: ["europarl_v7", "commoncrawl", "newscommentary_v13"],
         tfds.Split.VALIDATION: ["newstest2013"],
-        tfds.Split.TEST: ["newstest2014"]
+        tfds.Split.TEST: ["newstest2014"],
     }

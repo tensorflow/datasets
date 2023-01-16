@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class Assin2Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for assin2 dataset."""
+
   DATASET_CLASS = assin2_dataset_builder.Builder
   SPLITS = {
       'train': 5,
@@ -30,7 +31,7 @@ class Assin2Test(tfds.testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       'train': 'assin2-train-only.xml',
       'validation': 'assin2-dev.xml',
-      'test': 'assin2-test.xml'
+      'test': 'assin2-test.xml',
   }
 
 

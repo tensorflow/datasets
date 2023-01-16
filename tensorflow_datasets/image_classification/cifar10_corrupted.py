@@ -128,16 +128,20 @@ def _make_builder_configs():
       config_list.append(
           Cifar10CorruptedConfig(
               name=corruption + '_' + str(severity),
-              description='Corruption method: ' + corruption +
-              ', severity level: ' + str(severity),
+              description='Corruption method: '
+              + corruption
+              + ', severity level: '
+              + str(severity),
               corruption_type=corruption,
               severity=severity,
-          ))
+          )
+      )
   return config_list
 
 
 class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
   """Corrupted Cifar10 dataset."""
+
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
@@ -159,7 +163,8 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=('image', 'label'),
         homepage='https://github.com/hendrycks/robustness',
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     """Return the test split of Cifar10.
@@ -174,7 +179,8 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'data_dir': os.path.join(path, _DIRNAME)})
+            gen_kwargs={'data_dir': os.path.join(path, _DIRNAME)},
+        )
     ]
 
   def _generate_examples(self, data_dir):
@@ -205,7 +211,7 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
       images = np.load(f)
 
     # Slice images corresponding to correct severity level
-    images = images[(severity - 1) * num_images:severity * num_images]
+    images = images[(severity - 1) * num_images : severity * num_images]
 
     for i, (image, label) in enumerate(zip(images, labels)):
       yield i, {

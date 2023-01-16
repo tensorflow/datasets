@@ -24,7 +24,7 @@ class BillsumTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 1,  # Number of fake train example
       "test": 1,  # Number of fake test example
-      "ca_test": 1  # Number of fake test example
+      "ca_test": 1,  # Number of fake test example
   }
   DL_EXTRACT_RESULT = ""
 

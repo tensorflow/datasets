@@ -105,27 +105,30 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
             'treatment': np.int64,
             'conversion': np.bool_,
             'visit': np.bool_,
-            'exposure': np.bool_
+            'exposure': np.bool_,
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
         # `as_supervised=True` in `builder.as_dataset`.
-        supervised_keys=({
-            'f0': 'f0',
-            'f1': 'f1',
-            'f2': 'f2',
-            'f3': 'f3',
-            'f4': 'f4',
-            'f5': 'f5',
-            'f6': 'f6',
-            'f7': 'f7',
-            'f8': 'f8',
-            'f9': 'f9',
-            'f10': 'f10',
-            'f11': 'f11',
-            'treatment': 'treatment',
-            'exposure': 'exposure'
-        }, 'visit'),
+        supervised_keys=(
+            {
+                'f0': 'f0',
+                'f1': 'f1',
+                'f2': 'f2',
+                'f3': 'f3',
+                'f4': 'f4',
+                'f5': 'f5',
+                'f6': 'f6',
+                'f7': 'f7',
+                'f8': 'f8',
+                'f9': 'f9',
+                'f10': 'f10',
+                'f11': 'f11',
+                'treatment': 'treatment',
+                'exposure': 'exposure',
+            },
+            'visit',
+        ),
         homepage='https://ailab.criteo.com/criteo-uplift-prediction-dataset/',
         citation=_CITATION,
     )
@@ -133,7 +136,8 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(
-        'http://go.criteo.net/criteo-research-uplift-v2.1.csv.gz')
+        'http://go.criteo.net/criteo-research-uplift-v2.1.csv.gz'
+    )
 
     return {
         'train': self._generate_examples(path),
@@ -161,6 +165,6 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
             'treatment': row['treatment'],
             'conversion': int(row['conversion']),
             'visit': int(row['visit']),
-            'exposure': int(row['exposure'])
+            'exposure': int(row['exposure']),
         }
         index += 1

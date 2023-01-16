@@ -100,7 +100,8 @@ class Gpt3(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "directory": directory,
                 "task": self.builder_config.name,
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, directory, task):

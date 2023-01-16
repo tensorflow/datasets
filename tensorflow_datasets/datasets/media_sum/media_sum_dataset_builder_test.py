@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class MediaSumTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for media_sum dataset."""
+
   DATASET_CLASS = media_sum_dataset_builder.Builder
   SPLITS = {
       'train': 3,

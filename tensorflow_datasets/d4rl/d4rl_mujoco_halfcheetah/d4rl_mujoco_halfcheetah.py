@@ -26,20 +26,19 @@ class D4rlMujocoHalfcheetah(dataset_builder.D4RLDatasetBuilder):
 
   VERSION = tfds.core.Version('1.2.0')
   RELEASE_NOTES = {
-      '1.0.0':
-          'Initial release.',
-      '1.0.1':
-          'Support for episode and step metadata, and unification of the' +
-          ' reward shape across all the configs.',
-      '1.1.0':
-          'Added is_last.',
-      '1.2.0':
-          'Updated to take into account the next observation.'
+      '1.0.0': 'Initial release.',
+      '1.0.1': (
+          'Support for episode and step metadata, and unification of the'
+          + ' reward shape across all the configs.'
+      ),
+      '1.1.0': 'Added is_last.',
+      '1.2.0': 'Updated to take into account the next observation.',
   }
 
   BUILDER_CONFIGS = dataset_builder.MUJOCO_BUILDER_CONFIGS
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(
-        name='halfcheetah', obs_len=17, action_len=6, qpos_len=9, qvel_len=9)
+        name='halfcheetah', obs_len=17, action_len=6, qpos_len=9, qvel_len=9
+    )
     super().__init__(ds_config=config, **kwargs)

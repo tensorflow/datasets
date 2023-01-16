@@ -27,6 +27,7 @@ from typing import Iterator, Type
 
 import pytest
 from tensorflow_datasets import setup_teardown
+
 if typing.TYPE_CHECKING:
   from tensorflow_datasets import testing
   from tensorflow_datasets.core import dataset_builder
@@ -43,9 +44,12 @@ def disable_community_datasets():
   # Kokoro pytest tests are executed without absl.app, so the default
   # visibility isn't automatically set.
   from tensorflow_datasets.core import visibility  # pylint: disable=g-import-not-at-top
-  visibility.set_availables([
-      visibility.DatasetType.TFDS_PUBLIC,
-  ])
+
+  visibility.set_availables(
+      [
+          visibility.DatasetType.TFDS_PUBLIC,
+      ]
+  )
 
 
 # Register all fixtures defined in `setup_teardown` to be automatically
@@ -69,6 +73,7 @@ del global_dict  # Do not modifying global beyond this point
 def mock_fs() -> Iterator[testing.MockFs]:
   """Patch `tf.io.gfile` API into a virtual file system."""
   from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
+
   with testing.MockFs() as fs:
     yield fs
 
@@ -85,15 +90,19 @@ def _make_dataset(
 
 @pytest.fixture(scope='session')
 def dummy_mnist(
-    tmp_path_factory: pytest.TempPathFactory) -> dataset_builder.DatasetBuilder:
+    tmp_path_factory: pytest.TempPathFactory,
+) -> dataset_builder.DatasetBuilder:
   """Dummy mnist dataset builder pre-generated."""
   from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
+
   return _make_dataset(tmp_path_factory, testing.DummyMnist)
 
 
 @pytest.fixture(scope='session')
 def dummy_dataset(
-    tmp_path_factory: pytest.TempPathFactory) -> dataset_builder.DatasetBuilder:
+    tmp_path_factory: pytest.TempPathFactory,
+) -> dataset_builder.DatasetBuilder:
   """Dummy dataset builder pre-generated."""
   from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
+
   return _make_dataset(tmp_path_factory, testing.DummyDataset)

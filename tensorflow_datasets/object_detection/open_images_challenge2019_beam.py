@@ -37,7 +37,8 @@ class ReadZipFn(beam.DoFn):
 
   def process(self, zip_filepath):
     for filename, file in tfds.download.iter_archive(
-        zip_filepath, tfds.download.ExtractMethod.ZIP):
+        zip_filepath, tfds.download.ExtractMethod.ZIP
+    ):
       if filename.endswith(".jpg"):
         yield filename, file.read()
 
@@ -80,8 +81,13 @@ class ProcessImageFn(beam.DoFn):
 class CreateDetectionExampleFn(beam.DoFn):
   """Creates TFDS examples for the Detection track."""
 
-  def __init__(self, image_labels_filepath, box_labels_filepath,
-               hierarchy_filepath, classes_filepath):
+  def __init__(
+      self,
+      image_labels_filepath,
+      box_labels_filepath,
+      hierarchy_filepath,
+      classes_filepath,
+  ):
     self._image_labels_filepath = image_labels_filepath
     self._box_labels_filepath = box_labels_filepath
     self._hierarchy_filepath = hierarchy_filepath

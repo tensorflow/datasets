@@ -36,11 +36,13 @@ _MNIST_TRANSFORMATIONS = [
     transform_lib.apply_fn(
         fn=functools.partial(add_number, increment=10),
         input_feature="label",
-        output_feature="label_plus_10"),
+        output_feature="label_plus_10",
+    ),
     transform_lib.apply_fn(
         fn=functools.partial(add_number, increment=2),
         input_feature="label",
-        output_feature="label_plus_2"),
+        output_feature="label_plus_2",
+    ),
 ]
 
 _TRANSFORMED_MNIST_FEATURES = tfds.features.FeaturesDict({
@@ -56,7 +58,6 @@ def add_number_map_fn(
     input_name: str,
     output_name: str,
 ) -> tf.data.Dataset:
-
   def f(ex):
     ex[output_name] = ex[input_name] + increment
     return ex
@@ -68,7 +69,6 @@ def remove_feature_map_fn(
     dataset: tf.data.Dataset,
     feature_name: str,
 ) -> tf.data.Dataset:
-
   def f(ex):
     del ex[feature_name]
     return ex
@@ -81,12 +81,14 @@ _MNIST_DATASET_TRANSFORMATIONS = [
         add_number_map_fn,
         increment=10,
         input_name="label",
-        output_name="label_plus_10"),
+        output_name="label_plus_10",
+    ),
     functools.partial(
         add_number_map_fn,
         increment=2,
         input_name="label",
-        output_name="label_plus_2"),
+        output_name="label_plus_2",
+    ),
     functools.partial(remove_feature_map_fn, feature_name="image"),
 ]
 
@@ -164,7 +166,8 @@ def test_view_builder_with_configs_load():
     tfds.testing.DummyMnist(data_dir=data_dir).download_and_prepare()
 
     ds_train = tfds.load(
-        "dummy_mnist_view_with_configs", split="train", data_dir=data_dir)
+        "dummy_mnist_view_with_configs", split="train", data_dir=data_dir
+    )
     assert len(list(ds_train)) == 10
     for example in ds_train:
       assert example["label"] + 10 == example["label_plus_10"]
@@ -176,7 +179,8 @@ def test_beam_view_builder_with_configs_load():
     tfds.testing.DummyMnist(data_dir=data_dir).download_and_prepare()
 
     ds_train = tfds.load(
-        "beam_dummy_mnist_view_with_configs", split="train", data_dir=data_dir)
+        "beam_dummy_mnist_view_with_configs", split="train", data_dir=data_dir
+    )
     assert len(list(ds_train)) == 10
     for example in ds_train:
       assert example["label"] + 10 == example["label_plus_10"]
@@ -188,7 +192,8 @@ def test_view_builder_without_configs_load():
     tfds.testing.DummyMnist(data_dir=data_dir).download_and_prepare()
 
     ds_train = tfds.load(
-        "dummy_mnist_view_without_configs", split="train", data_dir=data_dir)
+        "dummy_mnist_view_without_configs", split="train", data_dir=data_dir
+    )
     assert len(list(ds_train)) == 10
     for example in ds_train:
       assert example["label"] + 10 == example["label_plus_10"]
@@ -200,7 +205,8 @@ def test_view_builder_tf_dataset_with_configs_load():
     tfds.testing.DummyMnist(data_dir=data_dir).download_and_prepare()
 
     ds_train = tfds.load(
-        "dummy_mnist_view_dataset_transform", split="train", data_dir=data_dir)
+        "dummy_mnist_view_dataset_transform", split="train", data_dir=data_dir
+    )
     assert len(list(ds_train)) == 20
     for example in ds_train:
       assert example["label"] + 10 == example["label_plus_10"]

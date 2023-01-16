@@ -20,7 +20,9 @@ import os
 from etils import epath
 import tensorflow_datasets.public_api as tfds
 
-_LAMBADA_DATASET_URL = 'https://zenodo.org/record/2630551/files/lambada-dataset.tar.gz?download=1'
+_LAMBADA_DATASET_URL = (
+    'https://zenodo.org/record/2630551/files/lambada-dataset.tar.gz?download=1'
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -34,9 +36,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            'passage': tfds.features.Text(),
-        }),
+        features=tfds.features.FeaturesDict(
+            {
+                'passage': tfds.features.Text(),
+            }
+        ),
         supervised_keys=None,
         homepage='https://zenodo.org/record/2630551#.X4Xzn5NKjUI',
     )
@@ -50,8 +54,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'filepath':
-                    os.path.join(dl_dir, 'lambada_development_plain_text.txt')
+                'filepath': os.path.join(
+                    dl_dir, 'lambada_development_plain_text.txt'
+                )
             },
         ),
         tfds.core.SplitGenerator(

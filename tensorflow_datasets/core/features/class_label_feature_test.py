@@ -52,10 +52,10 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
         test_attributes=dict(
             num_classes=10,
             names=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        ))
+        ),
+    )
 
   def test_labels(self):
-
     self.assertFeature(
         feature=features.ClassLabel(names=['left', 'right']),
         dtype=tf.int64,
@@ -77,7 +77,8 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
         test_attributes=dict(
             num_classes=2,
             names=['left', 'right'],
-        ))
+        ),
+    )
 
   def test_num_classes(self):
     labels = features.ClassLabel(num_classes=10)
@@ -85,7 +86,7 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertEqual(10, len(labels.names))
 
     self.assertEqual(1, labels.str2int('1'))
-    self.assertEqual(u'1', labels.int2str(1))
+    self.assertEqual('1', labels.int2str(1))
 
     with self.assertRaisesWithPredicateMatch(ValueError, 'Invalid'):
       labels.str2int('10')
@@ -105,17 +106,22 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertEqual(-1, labels.encode_example(-1))
 
   def test_str_classes(self):
-    labels = features.ClassLabel(names=[
-        'label3',
-        'label1',
-        'label2',
-    ])
+    labels = features.ClassLabel(
+        names=[
+            'label3',
+            'label1',
+            'label2',
+        ]
+    )
     self.assertEqual(3, labels.num_classes)
-    self.assertEqual(labels.names, [
-        'label3',
-        'label1',
-        'label2',
-    ])
+    self.assertEqual(
+        labels.names,
+        [
+            'label3',
+            'label1',
+            'label2',
+        ],
+    )
 
     self.assertEqual(labels.str2int('label3'), 0)
     self.assertEqual(labels.str2int('label1'), 1)
@@ -133,28 +139,33 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
       labels1.save_metadata(tmp_dir, 'test-labels')
       labels2.load_metadata(tmp_dir, 'test-labels')
       with self.assertRaisesWithPredicateMatch(
-          ValueError, 'number of names do not match the defined num_classes'):
+          ValueError, 'number of names do not match the defined num_classes'
+      ):
         labels3.load_metadata(tmp_dir, 'test-labels')
 
     # labels2 should have been copied from label1
     self.assertEqual(3, labels2.num_classes)
-    self.assertEqual(labels2.names, [
-        'label3',
-        'label1',
-        'label2',
-    ])
+    self.assertEqual(
+        labels2.names,
+        [
+            'label3',
+            'label1',
+            'label2',
+        ],
+    )
 
   def test_names(self):
-
     labels = features.ClassLabel(names=['label3', 'label1', 'label2'])
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'overwrite already defined ClassLabel'):
+        ValueError, 'overwrite already defined ClassLabel'
+    ):
       labels.names = ['other', 'labels']
 
     labels = features.ClassLabel()
     labels.names = ['label3', 'label1', 'label2']
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'overwrite already defined ClassLabel'):
+        ValueError, 'overwrite already defined ClassLabel'
+    ):
       labels.names = ['other', 'labels']
 
     labels = features.ClassLabel(num_classes=3)
@@ -162,25 +173,28 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
 
     labels = features.ClassLabel(num_classes=3)
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'number of names do not match the defined num_classes'):
+        ValueError, 'number of names do not match the defined num_classes'
+    ):
       labels.names = ['label3', 'label1']
 
   def test_duplicate_names(self):
-
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             'label names are duplicated'):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'label names are duplicated'
+    ):
       features.ClassLabel(names=['label1', 'label1', 'label2'])
 
 
 def test_file_path(tmp_path):
   label_file = tmp_path / 'label_names.txt'
   # Empty lines are ignored
-  content = textwrap.dedent("""
+  content = textwrap.dedent(
+      """
       label1
 
 
       label0
-      """)
+      """
+  )
   label_file.write_text(content)
 
   # Both Path and str are supported

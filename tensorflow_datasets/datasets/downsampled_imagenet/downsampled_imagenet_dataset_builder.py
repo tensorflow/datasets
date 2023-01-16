@@ -46,21 +46,26 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       DownsampledImagenetConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
           description=(
-              "A dataset consisting of Train and Validation images of " +
-              config_name + " resolution."),
+              "A dataset consisting of Train and Validation images of "
+              + config_name
+              + " resolution."
+          ),
           version=tfds.core.Version("2.0.0"),
           data=config_name,
           release_notes={
               "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
           },
-      ) for config_name in _DATA_OPTIONS
+      )
+      for config_name in _DATA_OPTIONS
   ]
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(encoding_format="jpeg"),
-        }),
+        features=tfds.features.FeaturesDict(
+            {
+                "image": tfds.features.Image(encoding_format="jpeg"),
+            }
+        ),
         supervised_keys=None,
         homepage="http://image-net.org/small/download.php",
     )
@@ -81,12 +86,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(train_path),
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(valid_path),
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, archive):

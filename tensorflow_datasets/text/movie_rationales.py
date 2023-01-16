@@ -72,21 +72,21 @@ class MovieRationales(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'train.jsonl')
+                'filepath': os.path.join(data_dir, 'train.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'val.jsonl')
+                'filepath': os.path.join(data_dir, 'val.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'test.jsonl')
+                'filepath': os.path.join(data_dir, 'test.jsonl'),
             },
         ),
     ]

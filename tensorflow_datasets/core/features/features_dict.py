@@ -166,13 +166,14 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     # Add indentation
     for key, feature in sorted(list(self._feature_dict.items())):
       feature_repr = tensor_feature.get_inner_feature_repr(feature)
-      all_sub_lines = '\'{}\': {},'.format(key, feature_repr)
+      all_sub_lines = "'{}': {},".format(key, feature_repr)
       lines.extend('    ' + l for l in all_sub_lines.split('\n'))
     lines.append('})')
     return '\n'.join(lines)
 
   def catalog_documentation(
-      self) -> List[feature_lib.CatalogFeatureDocumentation]:
+      self,
+  ) -> List[feature_lib.CatalogFeatureDocumentation]:
     feature_docs = [
         feature_lib.CatalogFeatureDocumentation(
             name='',
@@ -209,11 +210,11 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.FeaturesDict]) -> 'FeaturesDict':
+      cls, value: Union[Json, feature_pb2.FeaturesDict]
+  ) -> 'FeaturesDict':
     if isinstance(value, dict):
       features = {
-          k: feature_lib.FeatureConnector.from_json(v)
-          for k, v in value.items()
+          k: feature_lib.FeatureConnector.from_json(v) for k, v in value.items()
       }
     else:
       features = {
@@ -227,18 +228,21 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
         features={
             feature_key: feature.to_proto()
             for feature_key, feature in self._feature_dict.items()
-        },)
+        },
+    )
 
   def encode_example(self, example_dict):
     """See base class for details."""
     example = {}
-    for k, (feature, example_value) in utils.zip_dict(self._feature_dict,
-                                                      example_dict):
+    for k, (feature, example_value) in utils.zip_dict(
+        self._feature_dict, example_dict
+    ):
       try:
         example[k] = feature.encode_example(example_value)
       except Exception as e:  # pylint: disable=broad-except
         utils.reraise(
-            e, prefix=f'In <{feature.__class__.__name__}> with name "{k}":\n')
+            e, prefix=f'In <{feature.__class__.__name__}> with name "{k}":\n'
+        )
     return example
 
   def _flatten(self, x):
@@ -246,7 +250,8 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     if x and not isinstance(x, (dict, FeaturesDict)):
       raise ValueError(
           'Error while flattening dict: FeaturesDict received a non dict item: '
-          '{}'.format(x))
+          '{}'.format(x)
+      )
 
     dict_counter = _DictGetCounter(x)
     out = []
@@ -259,7 +264,9 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
           'this means that the provided dict structure does not match the '
           '`FeatureDict`. Please check for typos in the key names. '
           'Available keys: {}. Unrecognized keys: {}'.format(
-              list(self.keys()), list(set(x.keys()) - set(self.keys()))))
+              list(self.keys()), list(set(x.keys()) - set(self.keys()))
+          )
+      )
     return out
 
   def _nest(self, list_x):
@@ -268,12 +275,13 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     out = {}
     for k, f in sorted(self.items()):
       offset = len(f._flatten(None))  # pylint: disable=protected-access
-      out[k] = f._nest(list_x[curr_pos:curr_pos + offset])  # pylint: disable=protected-access
+      out[k] = f._nest(list_x[curr_pos : curr_pos + offset])  # pylint: disable=protected-access
       curr_pos += offset
     if curr_pos != len(list_x):
       raise ValueError(
           'Error while nesting: Expected length {} does not match input '
-          'length {} of {}'.format(curr_pos, len(list_x), list_x))
+          'length {} of {}'.format(curr_pos, len(list_x), list_x)
+      )
     return out
 
   def save_metadata(self, data_dir, feature_name=None):
@@ -281,7 +289,8 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     # Recursively save all child features
     for child_name, feature in self._feature_dict.items():
       name_for_file = feature_lib.convert_feature_name_to_filename(
-          feature_name=child_name, parent_name=feature_name)
+          feature_name=child_name, parent_name=feature_name
+      )
       feature.save_metadata(data_dir, feature_name=name_for_file)
 
   def load_metadata(self, data_dir, feature_name=None):
@@ -291,11 +300,13 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     def load_metadata(feature_item):
       child_name, feature = feature_item
       name_for_file = feature_lib.convert_feature_name_to_filename(
-          feature_name=child_name, parent_name=feature_name)
+          feature_name=child_name, parent_name=feature_name
+      )
       feature.load_metadata(data_dir, feature_name=name_for_file)
 
     with concurrent.futures.ThreadPoolExecutor(
-        max_workers=WORKER_COUNT) as executor:
+        max_workers=WORKER_COUNT
+    ) as executor:
       executor.map(load_metadata, self._feature_dict.items())
 
 

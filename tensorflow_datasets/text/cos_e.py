@@ -46,7 +46,9 @@ _COS_E_URL = "https://raw.githubusercontent.com/salesforce/cos-e/master/data/"
 # COS E has explanations for the CQA dataset, which is joined by ID.
 _CQA_URL_TRAIN = "https://s3.amazonaws.com/commensenseqa/train_rand_split.jsonl"
 _CQA_URL_DEV = "https://s3.amazonaws.com/commensenseqa/dev_rand_split.jsonl"
-_CQA_URL_TEST = "https://s3.amazonaws.com/commensenseqa/test_rand_split_no_answers.jsonl"
+_CQA_URL_TEST = (
+    "https://s3.amazonaws.com/commensenseqa/test_rand_split_no_answers.jsonl"
+)
 
 
 def _download_and_index_cqa(dl_manager):
@@ -55,7 +57,7 @@ def _download_and_index_cqa(dl_manager):
   downloaded_files = dl_manager.download_and_extract({
       "cqa_train": _CQA_URL_TRAIN,
       "cqa_dev": _CQA_URL_DEV,
-      "cqa_test": _CQA_URL_TEST
+      "cqa_test": _CQA_URL_TEST,
   })
 
   # NB: "cqa_test" is included in the files, but not in any of the CoS-E splits.
@@ -120,26 +122,21 @@ class CosE(tfds.core.GeneratorBasedBuilder):
             os.path.join(_COS_E_URL, "v1.11/dev/cose_dev_v1.11_processed.jsonl")
         ],
         "train": [
-            os.path.join(_COS_E_URL,
-                         "v1.11/train/cose_train_v1.11_processed.jsonl")
-        ]
+            os.path.join(
+                _COS_E_URL, "v1.11/train/cose_train_v1.11_processed.jsonl"
+            )
+        ],
     })
 
     # We use the CoS-E/CQA dev set as our validation set.
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={
-                "files": files["dev"],
-                "cqa_indexed": cqa_indexed
-            },
+            gen_kwargs={"files": files["dev"], "cqa_indexed": cqa_indexed},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "files": files["train"],
-                "cqa_indexed": cqa_indexed
-            },
+            gen_kwargs={"files": files["train"], "cqa_indexed": cqa_indexed},
         ),
     ]
 

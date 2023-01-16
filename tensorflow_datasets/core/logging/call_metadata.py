@@ -53,6 +53,7 @@ class CallMetadata:
 
   Object must be initialized just before the call, on same thread.
   """
+
   # The start and end times of the event (microseconds since Epoch).
   start_time_micros: Optional[int]
   end_time_micros: Optional[int]
@@ -77,10 +78,10 @@ class CallMetadata:
     self.status = Status.UNKNOWN
     self.thread_id = threading.current_thread().ident
     self.session_id, self.direct_call = _get_session_id(self.thread_id)
-    self.start_time_micros = int(time.time() * 1E6)
+    self.start_time_micros = int(time.time() * 1e6)
 
   def mark_end(self):
-    self.end_time_micros = int(time.time() * 1E6)
+    self.end_time_micros = int(time.time() * 1e6)
     if self.status == Status.UNKNOWN:
       self.status = Status.SUCCESS
     if self.direct_call:

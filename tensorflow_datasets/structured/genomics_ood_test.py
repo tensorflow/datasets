@@ -22,8 +22,13 @@ from tensorflow_datasets.structured import genomics_ood
 
 _FAKE_DATA_FILE = os.path.join(
     os.path.normpath(os.path.dirname(__file__) + '/../../'),
-    'tensorflow_datasets', 'testing', 'test_data', 'fake_examples',
-    'genomics_ood', 'genomics_ood.zip')
+    'tensorflow_datasets',
+    'testing',
+    'test_data',
+    'fake_examples',
+    'genomics_ood',
+    'genomics_ood.zip',
+)
 
 
 class GenomicsOodTest(tfds.testing.DatasetBuilderTestCase):

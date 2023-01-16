@@ -77,7 +77,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         # The values in the csv file do not have quotes
         example = {
             # The class labels start from 1 in this dataset
-            "label": (int(row[0]) - 1),
+            "label": int(row[0]) - 1,
             "title": row[1],
             "description": row[2],
         }

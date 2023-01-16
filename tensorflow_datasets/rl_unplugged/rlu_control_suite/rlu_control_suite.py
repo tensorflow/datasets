@@ -66,36 +66,34 @@ class ControlSuiteBuilderConfig(tfds.core.BuilderConfig):
 _BUILDER_CONFIGS = [
     ControlSuiteBuilderConfig(
         name='cartpole_swingup',
-        observation_size={
-            'position': 3,
-            'velocity': 2
-        },
-        action_size=1),
+        observation_size={'position': 3, 'velocity': 2},
+        action_size=1,
+    ),
     ControlSuiteBuilderConfig(
         name='cheetah_run',
-        observation_size={
-            'position': 8,
-            'velocity': 9
-        },
-        action_size=6),
+        observation_size={'position': 8, 'velocity': 9},
+        action_size=6,
+    ),
     ControlSuiteBuilderConfig(
         name='finger_turn_hard',
         observation_size={
             'position': 4,
             'velocity': 3,
             'target_position': 2,
-            'dist_to_target': 1
+            'dist_to_target': 1,
         },
-        action_size=2),
+        action_size=2,
+    ),
     ControlSuiteBuilderConfig(
         name='fish_swim',
         observation_size={
             'target': 3,
             'velocity': 13,
             'upright': 1,
-            'joint_angles': 7
+            'joint_angles': 7,
         },
-        action_size=5),
+        action_size=5,
+    ),
     ControlSuiteBuilderConfig(
         name='humanoid_run',
         observation_size={
@@ -104,9 +102,10 @@ _BUILDER_CONFIGS = [
             'torso_vertical': 3,
             'extremities': 12,
             'head_height': 1,
-            'joint_angles': 21
+            'joint_angles': 21,
         },
-        action_size=21),
+        action_size=21,
+    ),
     ControlSuiteBuilderConfig(
         name='manipulator_insert_ball',
         observation_size={
@@ -118,7 +117,8 @@ _BUILDER_CONFIGS = [
             'object_vel': 3,
             'target_pos': 4,
         },
-        action_size=5),
+        action_size=5,
+    ),
     ControlSuiteBuilderConfig(
         name='manipulator_insert_peg',
         observation_size={
@@ -130,7 +130,8 @@ _BUILDER_CONFIGS = [
             'object_vel': 3,
             'target_pos': 4,
         },
-        action_size=5),
+        action_size=5,
+    ),
     ControlSuiteBuilderConfig(
         name='walker_stand',
         observation_size={
@@ -138,7 +139,8 @@ _BUILDER_CONFIGS = [
             'velocity': 9,
             'height': 1,
         },
-        action_size=6),
+        action_size=6,
+    ),
     ControlSuiteBuilderConfig(
         name='walker_walk',
         observation_size={
@@ -146,19 +148,22 @@ _BUILDER_CONFIGS = [
             'velocity': 9,
             'height': 1,
         },
-        action_size=6)
+        action_size=6,
+    ),
 ]
 # pytype: enable=wrong-keyword-args
 
 
 def _sequence_feature(
-    size: Optional[int] = None) -> tf.io.FixedLenSequenceFeature:
+    size: Optional[int] = None,
+) -> tf.io.FixedLenSequenceFeature:
   if size:
     shape = [size]
   else:
     shape = []
   return tf.io.FixedLenSequenceFeature(
-      shape, dtype=tf.float32, allow_missing=True)
+      shape, dtype=tf.float32, allow_missing=True
+  )
 
 
 class RluControlSuite(rlu_common.RLUBuilder):
@@ -176,31 +181,22 @@ class RluControlSuite(rlu_common.RLUBuilder):
 
   def get_features_dict(self):
     return tfds.features.FeaturesDict({
-        'steps':
-            tfds.features.Dataset({
-                'observation': {
-                    k: rlu_common.float_tensor_feature(v)
-                    for k, v in self.builder_config.observation_size.items()
-                },
-                'action':
-                    tfds.features.Tensor(
-                        shape=(self.builder_config.action_size,),
-                        dtype=np.float32),
-                'reward':
-                    np.float32,
-                'is_terminal':
-                    np.bool_,
-                'is_first':
-                    np.bool_,
-                'is_last':
-                    np.bool_,
-                'discount':
-                    np.float32,
-            }),
-        'episode_id':
-            np.int64,
-        'timestamp':
-            np.int64
+        'steps': tfds.features.Dataset({
+            'observation': {
+                k: rlu_common.float_tensor_feature(v)
+                for k, v in self.builder_config.observation_size.items()
+            },
+            'action': tfds.features.Tensor(
+                shape=(self.builder_config.action_size,), dtype=np.float32
+            ),
+            'reward': np.float32,
+            'is_terminal': np.bool_,
+            'is_first': np.bool_,
+            'is_last': np.bool_,
+            'discount': np.float32,
+        }),
+        'episode_id': np.int64,
+        'timestamp': np.int64,
     })
 
   def get_description(self):
@@ -223,50 +219,47 @@ class RluControlSuite(rlu_common.RLUBuilder):
     }
     return {
         **obs_features,
-        'action':
-            _sequence_feature(self.builder_config.action_size),
-        'discount':
-            _sequence_feature(),
-        'reward':
-            _sequence_feature(),
-        'step_type':
-            _sequence_feature(),
-        'episode_id':
-            tf.io.FixedLenFeature([], tf.int64),
-        'timestamp':
-            tf.io.FixedLenFeature([], tf.int64),
+        'action': _sequence_feature(self.builder_config.action_size),
+        'discount': _sequence_feature(),
+        'reward': _sequence_feature(),
+        'step_type': _sequence_feature(),
+        'episode_id': tf.io.FixedLenFeature([], tf.int64),
+        'timestamp': tf.io.FixedLenFeature([], tf.int64),
     }
 
-  def tf_example_to_step_ds(self,
-                            tf_example: tf.train.Example) -> Dict[str, Any]:
+  def tf_example_to_step_ds(
+      self, tf_example: tf.train.Example
+  ) -> Dict[str, Any]:
     feature_description = self._get_example_specs()
 
     data = tf.io.parse_single_example(tf_example, feature_description)
     episode_length = tf.size(data['discount'])
-    is_first = tf.concat([[True], [False] * tf.ones(episode_length - 1)],
-                         axis=0)
+    is_first = tf.concat(
+        [[True], [False] * tf.ones(episode_length - 1)], axis=0
+    )
     is_last = tf.concat([[False] * tf.ones(episode_length - 1), [True]], axis=0)
     is_terminal = [False] * tf.ones(episode_length, tf.int64)
 
     # The data is in RSA alignment, we realign it to SAR to comply with the
     # RLDS standard.
     discount = data['discount'][1:]
-    if discount[-1] == 0.:
+    if discount[-1] == 0.0:
       is_terminal = tf.concat(
-          [[False] * tf.ones(episode_length - 1, tf.int64), [True]], axis=0)
+          [[False] * tf.ones(episode_length - 1, tf.int64), [True]], axis=0
+      )
       # If the episode ends in a terminal state, in the last step only the
       # observation has valid information (the terminal state).
-      discount = tf.concat([discount, [0.]], axis=0)
+      discount = tf.concat([discount, [0.0]], axis=0)
     else:
-      discount = tf.concat([discount, [1.]], axis=0)
+      discount = tf.concat([discount, [1.0]], axis=0)
 
-    reward = tf.concat([data['reward'][1:], [0.]], axis=0)
+    reward = tf.concat([data['reward'][1:], [0.0]], axis=0)
 
     obs_prefix = 'observation/'
     obs = {}
     for k in feature_description:
       if k.startswith(obs_prefix):
-        new_k = k[len(obs_prefix):]
+        new_k = k[len(obs_prefix) :]
         obs[new_k] = data[k]
     episode = {
         'steps': {
@@ -276,9 +269,9 @@ class RluControlSuite(rlu_common.RLUBuilder):
             'discount': discount,
             'is_first': is_first,
             'is_last': is_last,
-            'is_terminal': is_terminal
+            'is_terminal': is_terminal,
         },
         'episode_id': data['episode_id'],
-        'timestamp': data['timestamp']
+        'timestamp': data['timestamp'],
     }
     return episode

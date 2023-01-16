@@ -59,53 +59,50 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         "validation": urllib.parse.urljoin(_BASE_URL, _VALID_URL),
     })
     annotation_path = dl_manager.download_and_extract(
-        urllib.parse.urljoin(_BASE_URL, _FILE_ANNOTATION_URL))
+        urllib.parse.urljoin(_BASE_URL, _FILE_ANNOTATION_URL)
+    )
 
     return [
         tfds.core.SplitGenerator(
             name="train",
             gen_kwargs={
-                "archive":
-                    dl_manager.iter_archive(output_archives["train"]),
-                "path_prefix":
-                    "data_256",
-                "annotation_path":
-                    os.path.join(annotation_path,
-                                 "places365_train_standard.txt"),
-                "split_name":
-                    "train",
+                "archive": dl_manager.iter_archive(output_archives["train"]),
+                "path_prefix": "data_256",
+                "annotation_path": os.path.join(
+                    annotation_path, "places365_train_standard.txt"
+                ),
+                "split_name": "train",
             },
         ),
         tfds.core.SplitGenerator(
             name="test",
             gen_kwargs={
-                "archive":
-                    dl_manager.iter_archive(output_archives["test"]),
-                "path_prefix":
-                    "test_256",
-                "annotation_path":
-                    os.path.join(annotation_path, "places365_test.txt"),
-                "split_name":
-                    "test",
+                "archive": dl_manager.iter_archive(output_archives["test"]),
+                "path_prefix": "test_256",
+                "annotation_path": os.path.join(
+                    annotation_path, "places365_test.txt"
+                ),
+                "split_name": "test",
             },
         ),
         tfds.core.SplitGenerator(
             name="validation",
             gen_kwargs={
-                "archive":
-                    dl_manager.iter_archive(output_archives["validation"]),
-                "path_prefix":
-                    "val_256",
-                "annotation_path":
-                    os.path.join(annotation_path, "places365_val.txt"),
-                "split_name":
-                    "validation",
+                "archive": dl_manager.iter_archive(
+                    output_archives["validation"]
+                ),
+                "path_prefix": "val_256",
+                "annotation_path": os.path.join(
+                    annotation_path, "places365_val.txt"
+                ),
+                "split_name": "validation",
             },
         ),
     ]
 
-  def _generate_examples(self, archive, path_prefix, split_name,
-                         annotation_path):
+  def _generate_examples(
+      self, archive, path_prefix, split_name, annotation_path
+  ):
     with epath.Path(annotation_path).open() as f:
       if split_name == "test":
         # test split doesn't have labels assigned.

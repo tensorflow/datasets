@@ -24,8 +24,9 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 FLAGS = flags.FLAGS
 
 
@@ -43,8 +44,9 @@ _TEST_DATA_FILENAME = "binarized_mnist_test.amat"
 
 
 def make_images(num_images):
-  return (np.random.randint(256, size=(28 * 28 * num_images),
-                            dtype=np.uint8).reshape((num_images, -1)))
+  return np.random.randint(
+      256, size=(28 * 28 * num_images), dtype=np.uint8
+  ).reshape((num_images, -1))
 
 
 def write_image_file(filename, num_images):

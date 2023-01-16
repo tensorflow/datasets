@@ -22,37 +22,36 @@ from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
 def test_feature_documentation_section():
   features = tfds.features.FeaturesDict(
       feature_dict={
-          'a':
-              tfds.features.Scalar(
-                  dtype=tf.int64,
-                  doc=tfds.features.Documentation(
-                      desc='a feature', value_range='From 1 to 10')),
-          'b':
-              tfds.features.Text(doc='Some text'),
-          'c':
-              tfds.features.Image(shape=(None, None, 1), encoding_format='png'),
-          'd':
-              tf.int64,
-          'e':
-              tfds.features.Sequence(tf.float32, doc='Floats'),
-          'f':
-              tfds.features.Sequence(tfds.features.Audio(), doc='Audio'),
-          'g':
-              tfds.features.Sequence(
-                  {
-                      'a': tf.float32,
-                      'b': tfds.features.Scalar(dtype=tf.int64, doc='b'),
-                  },
-                  doc='Nested'),
-          'h':
-              tfds.features.Dataset(
-                  {
-                      'a': tf.float32,
-                      'b': tfds.features.Text(doc='Nested text'),
-                  },
-                  doc='Dataset of something'),
+          'a': tfds.features.Scalar(
+              dtype=tf.int64,
+              doc=tfds.features.Documentation(
+                  desc='a feature', value_range='From 1 to 10'
+              ),
+          ),
+          'b': tfds.features.Text(doc='Some text'),
+          'c': tfds.features.Image(
+              shape=(None, None, 1), encoding_format='png'
+          ),
+          'd': tf.int64,
+          'e': tfds.features.Sequence(tf.float32, doc='Floats'),
+          'f': tfds.features.Sequence(tfds.features.Audio(), doc='Audio'),
+          'g': tfds.features.Sequence(
+              {
+                  'a': tf.float32,
+                  'b': tfds.features.Scalar(dtype=tf.int64, doc='b'),
+              },
+              doc='Nested',
+          ),
+          'h': tfds.features.Dataset(
+              {
+                  'a': tf.float32,
+                  'b': tfds.features.Text(doc='Nested text'),
+              },
+              doc='Dataset of something',
+          ),
       },
-      doc='My test features')
+      doc='My test features',
+  )
   section = dataset_markdown_builder.FeatureDocumentationSection()
   assert section._format_block(features.catalog_documentation()) == '\n'.join([
       'Feature | Class | Shape | Dtype | Description | Value range',
@@ -76,14 +75,13 @@ def test_feature_documentation_section():
 def test_feature_documentation_section_missing_value_range():
   features = tfds.features.FeaturesDict(
       feature_dict={
-          'a':
-              tfds.features.Scalar(
-                  dtype=tf.int64,
-                  doc=tfds.features.Documentation(desc='a feature')),
-          'b':
-              tfds.features.Text(doc='Some text'),
+          'a': tfds.features.Scalar(
+              dtype=tf.int64, doc=tfds.features.Documentation(desc='a feature')
+          ),
+          'b': tfds.features.Text(doc='Some text'),
       },
-      doc='My test features')
+      doc='My test features',
+  )
   section = dataset_markdown_builder.FeatureDocumentationSection()
   assert section._format_block(features.catalog_documentation()) == '\n'.join([
       'Feature | Class | Shape | Dtype | Description',
@@ -97,7 +95,8 @@ def test_feature_documentation_section_missing_value_range():
 def test_paperswithcode_section():
   tfds_to_pwc_links = {'dummy_dataset': 'https://paperswithcode/dummy_dataset'}
   pwc_section = dataset_markdown_builder.PapersWithCodeSection(
-      tfds_to_pwc_links=tfds_to_pwc_links)
+      tfds_to_pwc_links=tfds_to_pwc_links
+  )
 
   dummy_builder = tfds.testing.DummyDataset()
   expected_output = f"""

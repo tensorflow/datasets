@@ -49,38 +49,312 @@ _LICENSE = (
     "This work is licensed under the Creative Commons Attribution-ShareAlike "
     "3.0 Unported License. To view a copy of this license, visit "
     "http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to "
-    "Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.")
+    "Creative Commons, PO Box 1866, Mountain View, CA 94042, USA."
+)
 
 # Source: https://en.wikipedia.org/wiki/List_of_Wikipedias (accessed 3/1/2019)
 # Removed because no articles: hz.
 WIKIPEDIA_LANGUAGES = [
-    "aa", "ab", "ace", "ady", "af", "ak", "als", "am", "an", "ang", "ar", "arc",
-    "arz", "as", "ast", "atj", "av", "ay", "az", "azb", "ba", "bar", "bat-smg",
-    "bcl", "be", "be-x-old", "bg", "bh", "bi", "bjn", "bm", "bn", "bo", "bpy",
-    "br", "bs", "bug", "bxr", "ca", "cbk-zam", "cdo", "ce", "ceb", "ch", "cho",
-    "chr", "chy", "ckb", "co", "cr", "crh", "cs", "csb", "cu", "cv", "cy", "da",
-    "de", "din", "diq", "dsb", "dty", "dv", "dz", "ee", "el", "eml", "en", "eo",
-    "es", "et", "eu", "ext", "fa", "ff", "fi", "fiu-vro", "fj", "fo", "fr",
-    "frp", "frr", "fur", "fy", "ga", "gag", "gan", "gd", "gl", "glk", "gn",
-    "gom", "gor", "got", "gu", "gv", "ha", "hak", "haw", "he", "hi", "hif",
-    "ho", "hr", "hsb", "ht", "hu", "hy", "ia", "id", "ie", "ig", "ii", "ik",
-    "ilo", "inh", "io", "is", "it", "iu", "ja", "jam", "jbo", "jv", "ka", "kaa",
-    "kab", "kbd", "kbp", "kg", "ki", "kj", "kk", "kl", "km", "kn", "ko", "koi",
-    "krc", "ks", "ksh", "ku", "kv", "kw", "ky", "la", "lad", "lb", "lbe", "lez",
-    "lfn", "lg", "li", "lij", "lmo", "ln", "lo", "lrc", "lt", "ltg", "lv",
-    "mai", "map-bms", "mdf", "mg", "mh", "mhr", "mi", "min", "mk", "ml", "mn",
-    "mr", "mrj", "ms", "mt", "mus", "mwl", "my", "myv", "mzn", "na", "nah",
-    "nap", "nds", "nds-nl", "ne", "new", "ng", "nl", "nn", "no", "nov", "nrm",
-    "nso", "nv", "ny", "oc", "olo", "om", "or", "os", "pa", "pag", "pam", "pap",
-    "pcd", "pdc", "pfl", "pi", "pih", "pl", "pms", "pnb", "pnt", "ps", "pt",
-    "qu", "rm", "rmy", "rn", "ro", "roa-rup", "roa-tara", "ru", "rue", "rw",
-    "sa", "sah", "sat", "sc", "scn", "sco", "sd", "se", "sg", "sh", "si",
-    "simple", "sk", "sl", "sm", "sn", "so", "sq", "sr", "srn", "ss", "st",
-    "stq", "su", "sv", "sw", "szl", "ta", "tcy", "te", "tet", "tg", "th", "ti",
-    "tk", "tl", "tn", "to", "tpi", "tr", "ts", "tt", "tum", "tw", "ty", "tyv",
-    "udm", "ug", "uk", "ur", "uz", "ve", "vec", "vep", "vi", "vls", "vo", "wa",
-    "war", "wo", "wuu", "xal", "xh", "xmf", "yi", "yo", "za", "zea", "zh",
-    "zh-classical", "zh-min-nan", "zh-yue", "zu"
+    "aa",
+    "ab",
+    "ace",
+    "ady",
+    "af",
+    "ak",
+    "als",
+    "am",
+    "an",
+    "ang",
+    "ar",
+    "arc",
+    "arz",
+    "as",
+    "ast",
+    "atj",
+    "av",
+    "ay",
+    "az",
+    "azb",
+    "ba",
+    "bar",
+    "bat-smg",
+    "bcl",
+    "be",
+    "be-x-old",
+    "bg",
+    "bh",
+    "bi",
+    "bjn",
+    "bm",
+    "bn",
+    "bo",
+    "bpy",
+    "br",
+    "bs",
+    "bug",
+    "bxr",
+    "ca",
+    "cbk-zam",
+    "cdo",
+    "ce",
+    "ceb",
+    "ch",
+    "cho",
+    "chr",
+    "chy",
+    "ckb",
+    "co",
+    "cr",
+    "crh",
+    "cs",
+    "csb",
+    "cu",
+    "cv",
+    "cy",
+    "da",
+    "de",
+    "din",
+    "diq",
+    "dsb",
+    "dty",
+    "dv",
+    "dz",
+    "ee",
+    "el",
+    "eml",
+    "en",
+    "eo",
+    "es",
+    "et",
+    "eu",
+    "ext",
+    "fa",
+    "ff",
+    "fi",
+    "fiu-vro",
+    "fj",
+    "fo",
+    "fr",
+    "frp",
+    "frr",
+    "fur",
+    "fy",
+    "ga",
+    "gag",
+    "gan",
+    "gd",
+    "gl",
+    "glk",
+    "gn",
+    "gom",
+    "gor",
+    "got",
+    "gu",
+    "gv",
+    "ha",
+    "hak",
+    "haw",
+    "he",
+    "hi",
+    "hif",
+    "ho",
+    "hr",
+    "hsb",
+    "ht",
+    "hu",
+    "hy",
+    "ia",
+    "id",
+    "ie",
+    "ig",
+    "ii",
+    "ik",
+    "ilo",
+    "inh",
+    "io",
+    "is",
+    "it",
+    "iu",
+    "ja",
+    "jam",
+    "jbo",
+    "jv",
+    "ka",
+    "kaa",
+    "kab",
+    "kbd",
+    "kbp",
+    "kg",
+    "ki",
+    "kj",
+    "kk",
+    "kl",
+    "km",
+    "kn",
+    "ko",
+    "koi",
+    "krc",
+    "ks",
+    "ksh",
+    "ku",
+    "kv",
+    "kw",
+    "ky",
+    "la",
+    "lad",
+    "lb",
+    "lbe",
+    "lez",
+    "lfn",
+    "lg",
+    "li",
+    "lij",
+    "lmo",
+    "ln",
+    "lo",
+    "lrc",
+    "lt",
+    "ltg",
+    "lv",
+    "mai",
+    "map-bms",
+    "mdf",
+    "mg",
+    "mh",
+    "mhr",
+    "mi",
+    "min",
+    "mk",
+    "ml",
+    "mn",
+    "mr",
+    "mrj",
+    "ms",
+    "mt",
+    "mus",
+    "mwl",
+    "my",
+    "myv",
+    "mzn",
+    "na",
+    "nah",
+    "nap",
+    "nds",
+    "nds-nl",
+    "ne",
+    "new",
+    "ng",
+    "nl",
+    "nn",
+    "no",
+    "nov",
+    "nrm",
+    "nso",
+    "nv",
+    "ny",
+    "oc",
+    "olo",
+    "om",
+    "or",
+    "os",
+    "pa",
+    "pag",
+    "pam",
+    "pap",
+    "pcd",
+    "pdc",
+    "pfl",
+    "pi",
+    "pih",
+    "pl",
+    "pms",
+    "pnb",
+    "pnt",
+    "ps",
+    "pt",
+    "qu",
+    "rm",
+    "rmy",
+    "rn",
+    "ro",
+    "roa-rup",
+    "roa-tara",
+    "ru",
+    "rue",
+    "rw",
+    "sa",
+    "sah",
+    "sat",
+    "sc",
+    "scn",
+    "sco",
+    "sd",
+    "se",
+    "sg",
+    "sh",
+    "si",
+    "simple",
+    "sk",
+    "sl",
+    "sm",
+    "sn",
+    "so",
+    "sq",
+    "sr",
+    "srn",
+    "ss",
+    "st",
+    "stq",
+    "su",
+    "sv",
+    "sw",
+    "szl",
+    "ta",
+    "tcy",
+    "te",
+    "tet",
+    "tg",
+    "th",
+    "ti",
+    "tk",
+    "tl",
+    "tn",
+    "to",
+    "tpi",
+    "tr",
+    "ts",
+    "tt",
+    "tum",
+    "tw",
+    "ty",
+    "tyv",
+    "udm",
+    "ug",
+    "uk",
+    "ur",
+    "uz",
+    "ve",
+    "vec",
+    "vep",
+    "vi",
+    "vls",
+    "vo",
+    "wa",
+    "war",
+    "wo",
+    "wuu",
+    "xal",
+    "xh",
+    "xmf",
+    "yi",
+    "yo",
+    "za",
+    "zea",
+    "zh",
+    "zh-classical",
+    "zh-min-nan",
+    "zh-yue",
+    "zu",
 ]
 
 # Use mirror (your.org) to avoid download caps.
@@ -102,8 +376,11 @@ class WikipediaConfig(tfds.core.BuilderConfig):
     """
     super(WikipediaConfig, self).__init__(
         name=f"{date}.{language}",
-        description=f"Wikipedia dataset for {language}, parsed from {date} dump.",
-        **kwargs)
+        description=(
+            f"Wikipedia dataset for {language}, parsed from {date} dump."
+        ),
+        **kwargs,
+    )
     self.date = date
     self.language = language
 
@@ -116,25 +393,30 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
   }
 
-  BUILDER_CONFIGS = [
-      WikipediaConfig(language=lang, date="20220620")
-      for lang in WIKIPEDIA_LANGUAGES
-  ] + [
-      # Old versions files do not exists anymore but config are kept as
-      # previously generated datasets can still be read.
-      WikipediaConfig(language=lang, date="20201201")
-      for lang in WIKIPEDIA_LANGUAGES
-  ] + [
-      # Old versions files do not exists anymore but config are kept as
-      # previously generated datasets can still be read.
-      WikipediaConfig(language=lang, date="20200301")
-      for lang in WIKIPEDIA_LANGUAGES
-  ] + [
-      # Old versions files do not exists anymore but config are kept as
-      # previously generated datasets can still be read.
-      WikipediaConfig(language=lang, date="20190301")
-      for lang in WIKIPEDIA_LANGUAGES
-  ]
+  BUILDER_CONFIGS = (
+      [
+          WikipediaConfig(language=lang, date="20220620")
+          for lang in WIKIPEDIA_LANGUAGES
+      ]
+      + [
+          # Old versions files do not exists anymore but config are kept as
+          # previously generated datasets can still be read.
+          WikipediaConfig(language=lang, date="20201201")
+          for lang in WIKIPEDIA_LANGUAGES
+      ]
+      + [
+          # Old versions files do not exists anymore but config are kept as
+          # previously generated datasets can still be read.
+          WikipediaConfig(language=lang, date="20200301")
+          for lang in WIKIPEDIA_LANGUAGES
+      ]
+      + [
+          # Old versions files do not exists anymore but config are kept as
+          # previously generated datasets can still be read.
+          WikipediaConfig(language=lang, date="20190301")
+          for lang in WIKIPEDIA_LANGUAGES
+      ]
+  )
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -152,10 +434,10 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
     def _base_url(lang):
       return _BASE_URL_TMPL.format(
-          lang=lang.replace("-", "_"), date=self._builder_config.date)
+          lang=lang.replace("-", "_"), date=self._builder_config.date
+      )
 
     lang = self._builder_config.language
 
@@ -168,9 +450,12 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     with tf.io.gfile.GFile(downloaded_files["info"]) as f:
       dump_info = json.load(f)
     multistream_dump_info = dump_info["jobs"]["articlesmultistreamdump"]
-    assert multistream_dump_info["status"] == "done", (
-        "Specified dump (%s) multistream status is not 'done': %s" %
-        (_base_url(lang), multistream_dump_info["status"]))
+    assert (
+        multistream_dump_info["status"] == "done"
+    ), "Specified dump (%s) multistream status is not 'done': %s" % (
+        _base_url(lang),
+        multistream_dump_info["status"],
+    )
 
     for fname, info in multistream_dump_info["files"].items():
       if ".xml" not in fname:
@@ -220,7 +505,8 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
             continue
 
           raw_content = elem.find(
-              "./{0}revision/{0}text".format(namespace)).text
+              "./{0}revision/{0}text".format(namespace)
+          ).text
           root.clear()
 
           # Filter redirects.
@@ -233,7 +519,8 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
           try:
             text = _parse_and_clean_wikicode(raw_content)
           except (
-              tfds.core.lazy_imports.mwparserfromhell.parser.ParserError) as e:
+              tfds.core.lazy_imports.mwparserfromhell.parser.ParserError
+          ) as e:
             beam.metrics.Metrics.counter(language, "parser-error").inc()
             logging.error("mwparserfromhell ParseError: %s", e)
             return
@@ -246,7 +533,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
           yield id_, {"title": title, "text": text}
 
-    return (beam.Create(filepaths) | beam.FlatMap(_extract_content))
+    return beam.Create(filepaths) | beam.FlatMap(_extract_content)
 
 
 def _parse_and_clean_wikicode(raw_content):
@@ -255,7 +542,8 @@ def _parse_and_clean_wikicode(raw_content):
 
   # Filters for references, tables, and file/image links.
   re_rm_wikilink = re.compile(
-      "^(?:File|Image|Media):", flags=re.IGNORECASE | re.UNICODE)
+      "^(?:File|Image|Media):", flags=re.IGNORECASE | re.UNICODE
+  )
 
   def rm_wikilink(obj):
     return bool(re_rm_wikilink.match(six.text_type(obj.title)))  # pytype: disable=wrong-arg-types
@@ -265,8 +553,12 @@ def _parse_and_clean_wikicode(raw_content):
 
   def rm_template(obj):
     return obj.name.lower() in {
-        "reflist", "notelist", "notelist-ua", "notelist-lr", "notelist-ur",
-        "notelist-lg"
+        "reflist",
+        "notelist",
+        "notelist-ua",
+        "notelist-lr",
+        "notelist-ur",
+        "notelist-lg",
     }
 
   def try_remove_obj(obj, section):
@@ -279,7 +571,8 @@ def _parse_and_clean_wikicode(raw_content):
   section_text = []
   # Filter individual sections to clean.
   for section in wikicode.get_sections(
-      flat=True, include_lead=True, include_headings=True):
+      flat=True, include_lead=True, include_headings=True
+  ):
     for obj in section.ifilter_wikilinks(matches=rm_wikilink, recursive=True):
       try_remove_obj(obj, section)
     for obj in section.ifilter_templates(matches=rm_template, recursive=True):

@@ -45,6 +45,7 @@ class SiscoreConfig(tfds.core.BuilderConfig):
       description: str. A brief description of the config (different from the
         global dataset description).
   """
+
   variant: str = ""
 
 
@@ -64,15 +65,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "image_id":
-                np.int64,
-            "image":
-                tfds.features.Image(),
+            "image_id": np.int64,
+            "image": tfds.features.Image(),
             # ImageNet label space
-            "label":
-                tfds.features.ClassLabel(num_classes=1000),
-            "dataset_label":
-                tfds.features.ClassLabel(names=labels.IMAGENET_LABELS_LIST),
+            "label": tfds.features.ClassLabel(num_classes=1000),
+            "dataset_label": tfds.features.ClassLabel(
+                names=labels.IMAGENET_LABELS_LIST
+            ),
         }),
         supervised_keys=("image", "label"),
         # Homepage of the dataset for documentation

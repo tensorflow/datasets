@@ -37,7 +37,8 @@ class ShowExamplesTest(testing.TestCase):
   def test_show_examples_supervised(self, _):
     with testing.mock_data(num_examples=20):
       ds, ds_info = load.load(
-          'imagenet2012', split='train', with_info=True, as_supervised=True)
+          'imagenet2012', split='train', with_info=True, as_supervised=True
+      )
     visualization.show_examples(ds, ds_info)
 
   @mock.patch('matplotlib.pyplot.figure')
@@ -61,7 +62,7 @@ class ShowExamplesTest(testing.TestCase):
         15: 'P',
         16: 'S',
         17: 'Cl',
-        35: 'Br,'
+        35: 'Br,',
     }
     elements_to_colors = {
         element: f'C{index}'
@@ -99,7 +100,8 @@ class ShowExamplesTest(testing.TestCase):
         ds_info,
         node_color_fn=node_color_fn,
         node_label_fn=node_label_fn,
-        edge_color_fn=edge_color_fn)
+        edge_color_fn=edge_color_fn,
+    )
 
   @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples_missing_sample(self, _):

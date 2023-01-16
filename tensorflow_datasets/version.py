@@ -27,8 +27,11 @@ _MAJOR_VERSION = '4'
 _MINOR_VERSION = '8'
 _PATCH_VERSION = '1'
 
-__version__ = '.'.join([
-    _MAJOR_VERSION,
-    _MINOR_VERSION,
-    _PATCH_VERSION,
-]) + '+nightly'
+__version__ = (
+    '.'.join([
+        _MAJOR_VERSION,
+        _MINOR_VERSION,
+        _PATCH_VERSION,
+    ])
+    + '+nightly'
+)

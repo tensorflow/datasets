@@ -46,9 +46,15 @@ TensorDict = TreeDict[Tensor]
 Dim = Optional[int]
 Shape = TupleOrList[Dim]
 
-JsonValue = Union[str, bool, int, float, None, List['JsonValue'],
-                  Dict[str, 'JsonValue'],  # pytype: disable=not-supported-yet
-                 ]
+JsonValue = Union[
+    str,
+    bool,
+    int,
+    float,
+    None,
+    List['JsonValue'],
+    Dict[str, 'JsonValue'],  # pytype: disable=not-supported-yet
+]
 Json = Dict[str, JsonValue]
 
 # Types for the tfrecord example construction.
@@ -57,5 +63,8 @@ Key = Union[int, str, bytes]
 KeySerializedExample = Tuple[Key, bytes]  # `(key, serialized_proto)`
 
 
-__all__ = sorted(k for k in globals()
-                 if k not in _symbols_to_exclude and not k.startswith('_'))
+__all__ = sorted(
+    k
+    for k in globals()
+    if k not in _symbols_to_exclude and not k.startswith('_')
+)

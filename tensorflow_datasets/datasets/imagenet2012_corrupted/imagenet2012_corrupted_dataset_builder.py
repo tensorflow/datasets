@@ -26,8 +26,9 @@ from tensorflow_datasets.image_classification import corruptions
 import tensorflow_datasets.public_api as tfds
 
 _FROST_FILEBASE = 'https://raw.githubusercontent.com/hendrycks/robustness/master/ImageNet-C/imagenet_c/imagenet_c/frost'
-_FROST_FILENAMES = [f'{_FROST_FILEBASE}/frost{i}.png' for i in range(1, 4)
-                   ] + [f'{_FROST_FILEBASE}/frost{i}.jpg' for i in range(4, 7)]
+_FROST_FILENAMES = [f'{_FROST_FILEBASE}/frost{i}.png' for i in range(1, 4)] + [
+    f'{_FROST_FILEBASE}/frost{i}.jpg' for i in range(4, 7)
+]
 
 BENCHMARK_CORRUPTIONS = [
     'gaussian_noise',
@@ -72,10 +73,10 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
 
 _VERSION = tfds.core.Version('3.1.0')
 _RELEASE_NOTES = {
-    '0.0.1':
-        'Initial dataset',
-    '3.1.0':
-        'Implement missing corruptions. Fix crop/resize ordering, file encoding',
+    '0.0.1': 'Initial dataset',
+    '3.1.0': (
+        'Implement missing corruptions. Fix crop/resize ordering, file encoding'
+    ),
 }
 
 
@@ -102,7 +103,8 @@ def _make_builder_configs():
               description=description_str,
               corruption_type=each_corruption,
               severity=each_severity,
-          ))
+          )
+      )
   return config_list
 
 
@@ -113,18 +115,25 @@ def _decode_and_center_crop(image_bytes):
   image_width = shape[1]
 
   padded_center_crop_size = tf.cast(
-      ((_IMAGE_SIZE / (_IMAGE_SIZE + _CROP_PADDING)) *
-       tf.cast(tf.minimum(image_height, image_width), tf.float32)), tf.int32)
+      (
+          (_IMAGE_SIZE / (_IMAGE_SIZE + _CROP_PADDING))
+          * tf.cast(tf.minimum(image_height, image_width), tf.float32)
+      ),
+      tf.int32,
+  )
 
   offset_height = ((image_height - padded_center_crop_size) + 1) // 2
   offset_width = ((image_width - padded_center_crop_size) + 1) // 2
   crop_window = tf.stack([
-      offset_height, offset_width, padded_center_crop_size,
-      padded_center_crop_size
+      offset_height,
+      offset_width,
+      padded_center_crop_size,
+      padded_center_crop_size,
   ])
   image = tf.image.decode_and_crop_jpeg(image_bytes, crop_window, channels=3)
-  image = tf.image.resize([image], [_IMAGE_SIZE, _IMAGE_SIZE],
-                          method=tf.image.ResizeMethod.BICUBIC)[0]
+  image = tf.image.resize(
+      [image], [_IMAGE_SIZE, _IMAGE_SIZE], method=tf.image.ResizeMethod.BICUBIC
+  )[0]
   image = tf.cast(image, tf.int32)
 
   return image
@@ -132,6 +141,7 @@ def _decode_and_center_crop(image_bytes):
 
 class Builder(imagenet2012_dataset_builder.Builder):
   """Corrupted ImageNet2012 dataset."""
+
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
@@ -143,14 +153,11 @@ class Builder(imagenet2012_dataset_builder.Builder):
     names_file = imagenet_common.label_names_file()
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'image':
-                tfds.features.Image(
-                    shape=(_IMAGE_SIZE, _IMAGE_SIZE, 3),
-                    encoding_format='jpeg'),
-            'label':
-                tfds.features.ClassLabel(names_file=names_file),
-            'file_name':
-                tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
+            'image': tfds.features.Image(
+                shape=(_IMAGE_SIZE, _IMAGE_SIZE, 3), encoding_format='jpeg'
+            ),
+            'label': tfds.features.ClassLabel(names_file=names_file),
+            'file_name': tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
         }),
         supervised_keys=('image', 'label'),
         homepage='https://openreview.net/forum?id=HJz6tiCqYm',
@@ -163,10 +170,9 @@ class Builder(imagenet2012_dataset_builder.Builder):
     corruptions.FROST_FILENAMES = dl_manager.download(_FROST_FILENAMES)
     return [s for s in splits if s.name != tfds.Split.TRAIN]
 
-  def _generate_examples(self,
-                         archive,
-                         validation_labels=None,
-                         labels_exist=None):
+  def _generate_examples(
+      self, archive, validation_labels=None, labels_exist=None
+  ):
     """Generate corrupted imagenet validation data.
 
     Apply corruptions to the raw images according to self.corruption_type.

@@ -24,32 +24,57 @@ import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = ("https://storage.googleapis.com/petfinder_dataset/")
+_URL = "https://storage.googleapis.com/petfinder_dataset/"
 _DATA_OPTIONS = [
-    "test_metadata", "test_images", "test_sentiment", "train_metadata",
-    "train_images", "train_sentiment"
+    "test_metadata",
+    "test_images",
+    "test_sentiment",
+    "train_metadata",
+    "train_images",
+    "train_sentiment",
 ]
 _LABEL_OPTIONS = [
-    "test", "train", "breed_labels", "state_labels", "color_labels"
+    "test",
+    "train",
+    "breed_labels",
+    "state_labels",
+    "color_labels",
 ]
 
 _DL_URLS = {name: _URL + name + ".zip" for name in _DATA_OPTIONS}
 _DL_URLS.update({label: _URL + label + ".csv" for label in _LABEL_OPTIONS})
 
 _INT_FEATS = [
-    "Type", "Age", "Breed1", "Breed2", "Gender", "Color1", "Color2", "Color3",
-    "MaturitySize", "FurLength", "Vaccinated", "Dewormed", "Sterilized",
-    "Health", "Quantity", "Fee", "State", "VideoAmt"
+    "Type",
+    "Age",
+    "Breed1",
+    "Breed2",
+    "Gender",
+    "Color1",
+    "Color2",
+    "Color3",
+    "MaturitySize",
+    "FurLength",
+    "Vaccinated",
+    "Dewormed",
+    "Sterilized",
+    "Health",
+    "Quantity",
+    "Fee",
+    "State",
+    "VideoAmt",
 ]
 _FLOAT_FEATS = ["PhotoAmt"]
 _OBJ_FEATS = ["name", "Type", "PetID", "RescurID"]
-_DESCRIPTION = ((
+_DESCRIPTION = (
     "A large set of images of cats and dogs."
-    "Together with the metadata information of sentiment information."))
+    "Together with the metadata information of sentiment information."
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """Pet Finder."""
+
   VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
@@ -121,6 +146,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           "image/filename": image,
           "PetID": pet_id,
           "attributes": attr_dict[_INT_FEATS].to_dict("records")[0],
-          "label": attr_dict["AdoptionSpeed"].values[0]
+          "label": attr_dict["AdoptionSpeed"].values[0],
       }
       yield image, record

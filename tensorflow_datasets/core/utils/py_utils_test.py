@@ -39,20 +39,26 @@ class PyUtilsTest(testing.TestCase):
     def map_fn(x):
       return x * 10
 
-    result = py_utils.map_nested(map_fn, {
-        'a': 1,
-        'b': {
-            'c': 2,
-            'e': [3, 4, 5],
+    result = py_utils.map_nested(
+        map_fn,
+        {
+            'a': 1,
+            'b': {
+                'c': 2,
+                'e': [3, 4, 5],
+            },
         },
-    })
-    self.assertEqual(result, {
-        'a': 10,
-        'b': {
-            'c': 20,
-            'e': [30, 40, 50],
+    )
+    self.assertEqual(
+        result,
+        {
+            'a': 10,
+            'b': {
+                'c': 20,
+                'e': [30, 40, 50],
+            },
         },
-    })
+    )
 
     result = py_utils.map_nested(map_fn, [1, 2, 3])
     self.assertEqual(result, [10, 20, 30])
@@ -79,19 +85,21 @@ class PyUtilsTest(testing.TestCase):
     }
 
     result = py_utils.zip_nested(arg0, arg1)
-    self.assertEqual(result, {
-        'a': (1, 10),
-        'b': {
-            'c': (2, 20),
-            'e': [(3, 30), (4, 40), (5, 50)],
+    self.assertEqual(
+        result,
+        {
+            'a': (1, 10),
+            'b': {
+                'c': (2, 20),
+                'e': [(3, 30), (4, 40), (5, 50)],
+            },
         },
-    })
+    )
 
     result = py_utils.zip_nested(1, 2)
     self.assertEqual(result, (1, 2))
 
   def test_dict_only(self):
-
     def map_fn(x):
       return x[0] + x[1]
 
@@ -112,33 +120,35 @@ class PyUtilsTest(testing.TestCase):
 
     result = py_utils.zip_nested(arg0, arg1, dict_only=True)
     self.assertEqual(
-        result, {
+        result,
+        {
             'a': ((1, 2), (10, 20)),
             'b': {
                 'c': (2, 20),
                 'e': ([3, 4, 5], [30, 40, 50]),
             },
-        })
+        },
+    )
 
     result = py_utils.map_nested(map_fn, result, dict_only=True)
-    self.assertEqual(result, {
-        'a': (1, 2, 10, 20),
-        'b': {
-            'c': 22,
-            'e': [3, 4, 5, 30, 40, 50],
+    self.assertEqual(
+        result,
+        {
+            'a': (1, 2, 10, 20),
+            'b': {
+                'c': 22,
+                'e': [3, 4, 5, 30, 40, 50],
+            },
         },
-    })
+    )
 
   def test_flatten_nest_dict(self):
-
     nest_d = {
         'a': 1,
         'b/c': 2,
         'b': {
             'e': 3,
-            'f': {
-                'g': 4
-            },
+            'f': {'g': 4},
         },
     }
     flat_d = {
@@ -160,7 +170,8 @@ class PyUtilsTest(testing.TestCase):
               'b/f/g': 4,
               'b/h': 5,  # Extra key
           },
-          nest_d)
+          nest_d,
+      )
 
     with self.assertRaisesWithPredicateMatch(KeyError, 'b/e'):
       py_utils.pack_as_nest_dict(
@@ -175,12 +186,13 @@ class PyUtilsTest(testing.TestCase):
                   'c': 2,
                   'd': 3,
                   'e': 4,  # Extra key
-              }
+              },
           },
       )
 
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             'overwrite existing key:'):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'overwrite existing key:'
+    ):
       py_utils.flatten_nest_dict({
           'a': {
               'b': 1,
@@ -189,7 +201,6 @@ class PyUtilsTest(testing.TestCase):
       })
 
   def test_reraise(self):
-
     class CustomError(Exception):
 
       def __init__(self, *args, **kwargs):  # pylint: disable=super-init-not-called
@@ -228,15 +239,18 @@ class GetClassPathUrlTest(testing.TestCase):
     cls_path = py_utils.get_class_path(py_utils.NonMutableDict)
     self.assertEqual(cls_path, 'tfds.core.utils.py_utils.NonMutableDict')
     cls_path = py_utils.get_class_path(
-        py_utils.NonMutableDict(), use_tfds_prefix=False)
-    self.assertEqual(cls_path,
-                     'tensorflow_datasets.core.utils.py_utils.NonMutableDict')
+        py_utils.NonMutableDict(), use_tfds_prefix=False
+    )
+    self.assertEqual(
+        cls_path, 'tensorflow_datasets.core.utils.py_utils.NonMutableDict'
+    )
 
   def test_get_class_url(self):
     cls_url = py_utils.get_class_url(py_utils.NonMutableDict)
     self.assertEqual(
         cls_url,
-        (constants.SRC_BASE_URL + 'tensorflow_datasets/core/utils/py_utils.py'))
+        (constants.SRC_BASE_URL + 'tensorflow_datasets/core/utils/py_utils.py'),
+    )
 
 
 def test_list_info_files(tmp_path: pathlib.Path):
@@ -263,10 +277,12 @@ def test_flatten_with_path():
   assert _flatten_with_path('value') == [((), 'value')]
   assert _flatten_with_path({'key': 'value'}) == [(('key',), 'value')]
   # Order doesn't matter
-  ordered_dict1 = collections.OrderedDict([('key1', 'value1'),
-                                           ('key2', 'value2')])
-  ordered_dict2 = collections.OrderedDict([('key2', 'value2'),
-                                           ('key1', 'value1')])
+  ordered_dict1 = collections.OrderedDict(
+      [('key1', 'value1'), ('key2', 'value2')]
+  )
+  ordered_dict2 = collections.OrderedDict(
+      [('key2', 'value2'), ('key1', 'value1')]
+  )
   expected_result = [(('key1',), 'value1'), (('key2',), 'value2')]
   assert _flatten_with_path(ordered_dict1) == expected_result
   assert _flatten_with_path(ordered_dict2) == expected_result
@@ -287,20 +303,27 @@ def test_flatten_with_path():
       (('key2',), 'value2'),
       (('nested', 'subkey', 0), 'subvalue0'),
       (('nested', 'subkey', 1), 'subvalue1'),
-      ((
-          'nested',
-          'subnested',
-          'subsubkey1',
-      ), 'subsubvalue1'),
-      ((
-          'nested',
-          'subnested',
-          'subsubkey2',
-      ), 'subsubvalue2'),
+      (
+          (
+              'nested',
+              'subnested',
+              'subsubkey1',
+          ),
+          'subsubvalue1',
+      ),
+      (
+          (
+              'nested',
+              'subnested',
+              'subsubkey2',
+          ),
+          'subsubvalue2',
+      ),
   ]
   # Order is consistent with tf.nest.flatten
-  assert ([v for _, v in _flatten_with_path(complex_dict)
-          ] == tf.nest.flatten(complex_dict))
+  assert [v for _, v in _flatten_with_path(complex_dict)] == tf.nest.flatten(
+      complex_dict
+  )
 
 
 @pytest.mark.parametrize(
@@ -309,9 +332,10 @@ def test_flatten_with_path():
         (
             'http://test.com/appspot.com/tsvsWithoutLabels%2FAX.tsv?'  # pylint: disable=implicit-str-concat
             'Id=firebase&Expires=2498860800',
-            'tsvsWithoutLabels_AX.tsv'  # `%2F` -> `_`
+            'tsvsWithoutLabels_AX.tsv',  # `%2F` -> `_`
         ),
-    ])
+    ],
+)
 def test_basename_from_url(url: str, filename: str):
   assert utils.basename_from_url(url) == filename
 
@@ -326,12 +350,15 @@ def test_incomplete_file(tmp_path: pathlib.Path):
   assert not tmp_filepath.exists()  # Tmp file is deleted
 
 
-@pytest.mark.parametrize(['path', 'is_incomplete'], [
-    ('/a/bcd.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf', True),
-    ('/a/incomplete-dataset.tfrecord-00000-of-00100', False),
-    ('/a/bcd.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf.suffix', False),
-    ('/a/bcd.incomplete.a8c53d7beff74beb3', False),
-])
+@pytest.mark.parametrize(
+    ['path', 'is_incomplete'],
+    [
+        ('/a/bcd.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf', True),
+        ('/a/incomplete-dataset.tfrecord-00000-of-00100', False),
+        ('/a/bcd.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf.suffix', False),
+        ('/a/bcd.incomplete.a8c53d7beff74beb3', False),
+    ],
+)
 def test_is_incomplete_file(path: str, is_incomplete: bool):
   assert py_utils.is_incomplete_file(epath.Path(path)) == is_incomplete
 

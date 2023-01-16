@@ -33,25 +33,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "id":
-                tfds.features.Text(),
-            "question":
-                tfds.features.Text(),
-            "choices":
-                tfds.features.Sequence({
-                    "text": tfds.features.Text(),
-                    "label": tfds.features.Text()
-                }),
-            "answerKey":
-                tfds.features.Text(),
-            "fact1":
-                tfds.features.Text(),
-            "fact2":
-                tfds.features.Text(),
-            "combinedfact":
-                tfds.features.Text(),
-            "formatted_question":
-                tfds.features.Text(),
+            "id": tfds.features.Text(),
+            "question": tfds.features.Text(),
+            "choices": tfds.features.Sequence(
+                {"text": tfds.features.Text(), "label": tfds.features.Text()}
+            ),
+            "answerKey": tfds.features.Text(),
+            "fact1": tfds.features.Text(),
+            "fact2": tfds.features.Text(),
+            "combinedfact": tfds.features.Text(),
+            "formatted_question": tfds.features.Text(),
         }),
         supervised_keys=None,
         # Homepage of the dataset for documentation
@@ -97,10 +88,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "id": id_,
             "answerKey": answerkey,
             "question": question,
-            "choices": {
-                "text": text_choices,
-                "label": label_choices
-            },
+            "choices": {"text": text_choices, "label": label_choices},
             "fact1": fact1,
             "fact2": fact2,
             "combinedfact": combined_fact,

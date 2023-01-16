@@ -174,5 +174,5 @@ class Conll2002(tfds.dataset_builders.ConllDatasetBuilder):
     return {
         "train": self._generate_examples(dl_paths["train"]),
         "dev": self._generate_examples(dl_paths["dev"]),
-        "test": self._generate_examples(dl_paths["test"])
+        "test": self._generate_examples(dl_paths["test"]),
     }

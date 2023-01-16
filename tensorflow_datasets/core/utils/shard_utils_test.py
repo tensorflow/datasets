@@ -30,31 +30,36 @@ class ShardConfigTest(parameterized.TestCase):
       ('xs, 100 MiB, 100K records', 10 << 20, 100 * 10**3, True, 1),
       ('m, 499 MiB, 200K examples', 400 << 20, 200 * 10**3, True, 4),
   )
-  def test_get_number_shards_default_config(self, total_size, num_examples,
-                                            uses_precise_sharding,
-                                            expected_num_shards):
+  def test_get_number_shards_default_config(
+      self, total_size, num_examples, uses_precise_sharding, expected_num_shards
+  ):
     shard_config = shard_utils.ShardConfig()
     self.assertEqual(
         expected_num_shards,
         shard_config.get_number_shards(
             total_size=total_size,
             num_examples=num_examples,
-            uses_precise_sharding=uses_precise_sharding))
+            uses_precise_sharding=uses_precise_sharding,
+        ),
+    )
 
   def test_get_number_shards_if_specified(self):
     shard_config = shard_utils.ShardConfig(num_shards=42)
     self.assertEqual(
         42,
         shard_config.get_number_shards(
-            total_size=100, num_examples=1, uses_precise_sharding=True))
+            total_size=100, num_examples=1, uses_precise_sharding=True
+        ),
+    )
 
 
 class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
 
   def test_read_all_even_sharding(self):
     # Even sharding
-    res = shard_utils.get_file_instructions(0, 12, ['f1', 'f2', 'f3'],
-                                            [4, 4, 4])
+    res = shard_utils.get_file_instructions(
+        0, 12, ['f1', 'f2', 'f3'], [4, 4, 4]
+    )
     self.assertEqual(
         res,
         [
@@ -71,8 +76,9 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
     )
 
   def test_read_all_empty_shard(self):
-    res = shard_utils.get_file_instructions(0, 12, ['f1', 'f2', 'f3', 'f4'],
-                                            [4, 4, 0, 4])
+    res = shard_utils.get_file_instructions(
+        0, 12, ['f1', 'f2', 'f3', 'f4'], [4, 4, 0, 4]
+    )
     self.assertEqual(
         res,
         [
@@ -89,8 +95,9 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
     )
 
   def test_from1_to10(self):
-    res = shard_utils.get_file_instructions(1, 10, ['f1', 'f2', 'f3', 'f4'],
-                                            [4, 4, 0, 4])
+    res = shard_utils.get_file_instructions(
+        1, 10, ['f1', 'f2', 'f3', 'f4'], [4, 4, 0, 4]
+    )
     self.assertEqual(
         res,
         [
@@ -107,14 +114,17 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
     )
 
   def test_nothing_to_read(self):
-    res = shard_utils.get_file_instructions(0, 0, ['f1', 'f2', 'f3', 'f4'],
-                                            [0, 3, 0, 2])
+    res = shard_utils.get_file_instructions(
+        0, 0, ['f1', 'f2', 'f3', 'f4'], [0, 3, 0, 2]
+    )
     self.assertEqual(res, [])
-    res = shard_utils.get_file_instructions(4, 4, ['f1', 'f2', 'f3', 'f4'],
-                                            [0, 3, 0, 2])
+    res = shard_utils.get_file_instructions(
+        4, 4, ['f1', 'f2', 'f3', 'f4'], [0, 3, 0, 2]
+    )
     self.assertEqual(res, [])
-    res = shard_utils.get_file_instructions(5, 5, ['f1', 'f2', 'f3', 'f4'],
-                                            [0, 3, 0, 2])
+    res = shard_utils.get_file_instructions(
+        5, 5, ['f1', 'f2', 'f3', 'f4'], [0, 3, 0, 2]
+    )
     self.assertEqual(res, [])
 
   def test_split_file_instruction(self):
@@ -123,7 +133,8 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
         filename=filename, skip=0, take=-1, examples_in_shard=10
     )
     actual_splits = shard_utils.split_file_instruction(
-        file_instruction=file_instruction, num_splits=3)
+        file_instruction=file_instruction, num_splits=3
+    )
     self.assertEqual(
         actual_splits,
         [
@@ -146,7 +157,8 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
         filename=filename, skip=0, take=-1, examples_in_shard=1
     )
     actual_splits = shard_utils.split_file_instruction(
-        file_instruction=file_instruction, num_splits=9999)
+        file_instruction=file_instruction, num_splits=9999
+    )
     self.assertEqual(
         actual_splits,
         [

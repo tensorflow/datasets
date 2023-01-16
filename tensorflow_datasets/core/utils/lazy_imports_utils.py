@@ -71,7 +71,8 @@ class LazyModule:
           self.success_callback(
               import_time_ms=import_time_ms,
               module=self.module,
-              module_name=self.module_name)
+              module_name=self.module_name,
+          )
       except ImportError as exception:
         if self.error_callback is not None:
           self.error_callback(exception=exception, module_name=self.module_name)
@@ -80,8 +81,10 @@ class LazyModule:
 
 
 @contextlib.contextmanager
-def lazy_imports(error_callback: Optional[Callback] = None,
-                 success_callback: Optional[Callback] = None) -> Iterator[None]:
+def lazy_imports(
+    error_callback: Optional[Callback] = None,
+    success_callback: Optional[Callback] = None,
+) -> Iterator[None]:
   """Context Manager which lazy loads packages.
 
   Their import is not executed immediately, but is postponed to the first
@@ -109,8 +112,8 @@ def lazy_imports(error_callback: Optional[Callback] = None,
       module.
     success_callback: a callback to trigger when an import succeeds. The
       callback is passed kwargs containing: 1) import_time_ms (float): the
-      import time (in milliseconds); 2) module (Any): the imported module;
-      3) module_name (str): the name of the imported module.
+      import time (in milliseconds); 2) module (Any): the imported module; 3)
+      module_name (str): the name of the imported module.
 
   Yields:
     None
@@ -122,7 +125,8 @@ def lazy_imports(error_callback: Optional[Callback] = None,
     builtins.__import__ = functools.partial(
         _lazy_import,
         error_callback=error_callback,
-        success_callback=success_callback)
+        success_callback=success_callback,
+    )
     yield
   finally:
     builtins.__import__ = original_import
@@ -153,23 +157,27 @@ def _lazy_import(
     return LazyModule.from_cache(
         module_name=root_name,
         error_callback=error_callback,
-        success_callback=success_callback)
+        success_callback=success_callback,
+    )
   # from x.y.z import a, b
   return LazyModule.from_cache(
       module_name=name,
       fromlist=fromlist,
       error_callback=error_callback,
-      success_callback=success_callback)
+      success_callback=success_callback,
+  )
 
 
 def tf_error_callback(**kwargs):
   del kwargs
   print("\n\n***************************************************************")
-  print("Failed to import TensorFlow. Please note that TensorFlow is not "
-        "installed by default when you install TFDS. This allows you "
-        "to choose to install either `tf-nightly` or `tensorflow`. "
-        "Please install the most recent version of TensorFlow, by "
-        "following instructions at https://tensorflow.org/install.")
+  print(
+      "Failed to import TensorFlow. Please note that TensorFlow is not "
+      "installed by default when you install TFDS. This allows you "
+      "to choose to install either `tf-nightly` or `tensorflow`. "
+      "Please install the most recent version of TensorFlow, by "
+      "following instructions at https://tensorflow.org/install."
+  )
   print("***************************************************************\n\n")
 
 
@@ -178,7 +186,8 @@ def tf_success_callback(**kwargs):
 
 
 with lazy_imports(
-    error_callback=tf_error_callback, success_callback=tf_success_callback):
+    error_callback=tf_error_callback, success_callback=tf_success_callback
+):
   import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import
 
 tensorflow = tf

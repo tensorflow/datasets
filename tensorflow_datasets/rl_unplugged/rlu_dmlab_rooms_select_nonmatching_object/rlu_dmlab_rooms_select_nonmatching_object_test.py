@@ -20,9 +20,13 @@ from tensorflow_datasets.rl_unplugged.rlu_dmlab_rooms_select_nonmatching_object 
 
 
 class RluDmlabRoomsSelectNonmatchingObjectTest(
-    tfds.testing.DatasetBuilderTestCase):
+    tfds.testing.DatasetBuilderTestCase
+):
   """Tests for rlu_dmlab_explore_object_rewards_many dataset."""
-  DATASET_CLASS = rlu_dmlab_rooms_select_nonmatching_object.RluDmlabRoomsSelectNonmatchingObject
+
+  DATASET_CLASS = (
+      rlu_dmlab_rooms_select_nonmatching_object.RluDmlabRoomsSelectNonmatchingObject
+  )
   SPLITS = {
       'train': 2,  # Number of fake train example
   }

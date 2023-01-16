@@ -25,18 +25,24 @@ class TydiQATest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       "train": "train-v1.1.json",
       "validation": "dev-v1.1.json",
-      "lang-validation": ""
+      "lang-validation": "",
   }
-  DL_EXTRACT_RESULT.update({
-      f"translate-train-{lang}": f"tydiqa.translate.train.en-{lang}.json"
-      for lang in tydi_qa.LANGUAGES
-  })
+  DL_EXTRACT_RESULT.update(
+      {
+          f"translate-train-{lang}": f"tydiqa.translate.train.en-{lang}.json"
+          for lang in tydi_qa.LANGUAGES
+      }
+  )
 
   SPLITS = {"train": 3, "validation": 2}
   SPLITS.update({f"validation-{lang}": 1 for lang in tydi_qa.LANGUAGES})
-  SPLITS.update({
-      f"translate-train-{lang}": 1 for lang in tydi_qa.LANGUAGES if lang != "en"
-  })
+  SPLITS.update(
+      {
+          f"translate-train-{lang}": 1
+          for lang in tydi_qa.LANGUAGES
+          if lang != "en"
+      }
+  )
 
 
 if __name__ == "__main__":

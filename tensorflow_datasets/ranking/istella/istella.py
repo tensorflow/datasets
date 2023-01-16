@@ -73,7 +73,9 @@ _CITATION = """
 _URLS = {
     "main": "http://library.istella.it/dataset/istella-letor.tar.gz",
     "s": "http://library.istella.it/dataset/istella-s-letor.tar.gz",
-    "x": "http://quickrank.isti.cnr.it/istella-datasets-mirror/istella-X.tar.gz"
+    "x": (
+        "http://quickrank.isti.cnr.it/istella-datasets-mirror/istella-X.tar.gz"
+    ),
 }
 
 _FEATURE_NAMES = {n: f"feature_{n}" for n in range(1, 221)}
@@ -101,7 +103,7 @@ class Istella(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       IstellaConfig(name="main", has_vali=False, subdirectory="full"),
       IstellaConfig(name="s", has_vali=True, subdirectory="sample"),
-      IstellaConfig(name="x", has_vali=True, subdirectory=None)
+      IstellaConfig(name="x", has_vali=True, subdirectory=None),
   ]
 
   # pytype: enable=wrong-keyword-args
@@ -142,7 +144,7 @@ class Istella(tfds.core.GeneratorBasedBuilder):
 
     splits = {
         "train": self._generate_examples(path / "train.txt"),
-        "test": self._generate_examples(path / "test.txt")
+        "test": self._generate_examples(path / "test.txt"),
     }
 
     # For some dataset configs, there is an additional validation split.
@@ -158,4 +160,5 @@ class Istella(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(path, "rb") as f:
       lines = map(lambda bytes_line: bytes_line.decode("latin1"), f)
       yield from LibSVMRankingParser(
-          lines, _FEATURE_NAMES, _LABEL_NAME, combine_features=True)
+          lines, _FEATURE_NAMES, _LABEL_NAME, combine_features=True
+      )

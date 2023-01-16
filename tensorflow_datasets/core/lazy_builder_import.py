@@ -25,7 +25,7 @@ from absl import logging
 from tensorflow_datasets.core import registered
 
 
-class LazyBuilderImport():
+class LazyBuilderImport:
   """Lazy load DatasetBuilder from given name from legacy locations."""
 
   def __init__(self, dataset_name: Text):
@@ -37,8 +37,12 @@ class LazyBuilderImport():
     if not cls:
       builder_name = object.__getattribute__(self, "_dataset_name")
       logging.warning(
-          "DEPRECATED! Do not use a DatasetBuilder class directly, but"
-          " call `tfds.builder_cls('%s')`.", builder_name)
+          (
+              "DEPRECATED! Do not use a DatasetBuilder class directly, but"
+              " call `tfds.builder_cls('%s')`."
+          ),
+          builder_name,
+      )
       cls = registered.imported_builder_cls(builder_name)
       object.__setattr__(self, "_dataset_cls", cls)
     return cls

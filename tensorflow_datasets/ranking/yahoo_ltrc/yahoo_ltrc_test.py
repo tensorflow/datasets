@@ -21,6 +21,7 @@ from tensorflow_datasets.ranking.yahoo_ltrc import yahoo_ltrc
 
 class YahooLTRCTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for yahoo_ltrc dataset."""
+
   DATASET_CLASS = yahoo_ltrc.YahooLTRC
   SPLITS = {
       "train": 6,

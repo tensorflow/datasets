@@ -22,7 +22,10 @@ from tensorflow_datasets.d4rl import dataset_builder
 def _mujoco_replay_datasets():
   """Set of Mujoco datasets with replay."""
   return {
-      'v1-medium-replay', 'v1-full-replay', 'v2-medium-replay', 'v2-full-replay'
+      'v1-medium-replay',
+      'v1-full-replay',
+      'v2-medium-replay',
+      'v2-full-replay',
   }
 
 
@@ -51,47 +54,65 @@ class MujocoDatasetTest(tf.test.TestCase):
   def test_builder_config_float_type(self):
     for config in dataset_builder.MUJOCO_BUILDER_CONFIGS:
       if config.dataset_dir != 'gym_mujoco':
-        self.assertTrue(config.step_metadata_keys,
-                        f'Config {config.name} should contain step metadata.')
+        self.assertTrue(
+            config.step_metadata_keys,
+            f'Config {config.name} should contain step metadata.',
+        )
       else:
         self.assertFalse(
             config.step_metadata_keys,
-            f'Config {config.name} should NOT contain step metadata.')
+            f'Config {config.name} should NOT contain step metadata.',
+        )
 
   def test_builder_config_episode_metadata(self):
     for config in dataset_builder.MUJOCO_BUILDER_CONFIGS:
       if config.name in _mujoco_replay_datasets():
         self.assertTrue(
             config.episode_metadata_keys,
-            f'Config {config.name} should contain episode metadata.')
+            f'Config {config.name} should contain episode metadata.',
+        )
         self.assertFalse(
             config.has_policy_metadata,
-            f'Config {config.name} should NOT contain policy metadata.')
+            f'Config {config.name} should NOT contain policy metadata.',
+        )
         self.assertFalse(
             config.has_policy_last_fc_log_std,
-            f'Config {config.name} should NOT contain policy values for last_fc_log_std.'
+            (
+                f'Config {config.name} should NOT contain policy values for'
+                ' last_fc_log_std.'
+            ),
         )
       elif config.name in _mujoco_full_metadata_datasets():
         self.assertTrue(
             config.episode_metadata_keys,
-            f'Config {config.name} should contain episode metadata.')
+            f'Config {config.name} should contain episode metadata.',
+        )
         self.assertTrue(
             config.has_policy_metadata,
-            f'Config {config.name} should contain policy metadata.')
+            f'Config {config.name} should contain policy metadata.',
+        )
         self.assertTrue(
             config.has_policy_last_fc_log_std,
-            f'Config {config.name} should contain policy values for last_fc_log_std.'
+            (
+                f'Config {config.name} should contain policy values for'
+                ' last_fc_log_std.'
+            ),
         )
       else:
         self.assertFalse(
             config.episode_metadata_keys,
-            f'Config {config.name} should NOT contain episode metadata.')
+            f'Config {config.name} should NOT contain episode metadata.',
+        )
         self.assertFalse(
             config.has_policy_metadata,
-            f'Config {config.name} should NOT contain policy metadata.')
+            f'Config {config.name} should NOT contain policy metadata.',
+        )
         self.assertFalse(
             config.has_policy_last_fc_log_std,
-            f'Config {config.name} should NOT contain policy values for last_fc_log_std.'
+            (
+                f'Config {config.name} should NOT contain policy values for'
+                ' last_fc_log_std.'
+            ),
         )
 
 

@@ -51,7 +51,12 @@ builder = tfds.builder("wmt_translate", config=config)
 """
 
 CWMT_SUBSET_NAMES = [
-    "casia2015", "casict2011", "casict2015", "datum2015", "datum2017", "neu2017"
+    "casia2015",
+    "casict2011",
+    "casict2015",
+    "datum2015",
+    "datum2017",
+    "neu2017",
 ]
 
 
@@ -125,16 +130,18 @@ _TRAIN_SUBSETS = [
         target="en",  # fr-de pair in commoncrawl_frde
         sources={"cs", "de", "es", "fr", "ru"},
         url="http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
-        path=("commoncrawl.{src}-en.{src}", "commoncrawl.{src}-en.en")),
+        path=("commoncrawl.{src}-en.{src}", "commoncrawl.{src}-en.en"),
+    ),
     SubDataset(
         name="commoncrawl_frde",
         target="de",
         sources={"fr"},
         url=(
             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.fr.gz",
-            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.de.gz"
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.de.gz",
         ),
-        path=("", "")),
+        path=("", ""),
+    ),
     SubDataset(
         name="czeng_10",
         target="en",
@@ -143,14 +150,16 @@ _TRAIN_SUBSETS = [
         manual_dl_files=["data-plaintext-format.%d.tar" % i for i in range(10)],
         # Each tar contains multiple files, which we process specially in
         # _parse_czeng.
-        path=("data.plaintext-format/??train.gz",) * 10),
+        path=("data.plaintext-format/??train.gz",) * 10,
+    ),
     SubDataset(
         name="czeng_16pre",
         target="en",
         sources={"cs"},
         url="http://ufal.mff.cuni.cz/czeng/czeng16pre",
         manual_dl_files=["czeng16pre.deduped-ignoring-sections.txt.gz"],
-        path=""),
+        path="",
+    ),
     SubDataset(
         name="czeng_16",
         target="en",
@@ -159,7 +168,8 @@ _TRAIN_SUBSETS = [
         manual_dl_files=["data-plaintext-format.%d.tar" % i for i in range(10)],
         # Each tar contains multiple files, which we process specially in
         # _parse_czeng.
-        path=("data.plaintext-format/??train.gz",) * 10),
+        path=("data.plaintext-format/??train.gz",) * 10,
+    ),
     SubDataset(
         # This dataset differs from the above in the filtering that is applied
         # during parsing.
@@ -170,226 +180,288 @@ _TRAIN_SUBSETS = [
         manual_dl_files=["data-plaintext-format.%d.tar" % i for i in range(10)],
         # Each tar contains multiple files, which we process specially in
         # _parse_czeng.
-        path=("data.plaintext-format/??train.gz",) * 10),
+        path=("data.plaintext-format/??train.gz",) * 10,
+    ),
     SubDataset(
         name="dcep_v1",
         target="en",
         sources={"lv"},
         url="http://data.statmt.org/wmt17/translation-task/dcep.lv-en.v1.tgz",
-        path=("dcep.en-lv/dcep.lv", "dcep.en-lv/dcep.en")),
+        path=("dcep.en-lv/dcep.lv", "dcep.en-lv/dcep.en"),
+    ),
     SubDataset(
         name="europarl_v7",
         target="en",
         sources={"cs", "de", "es", "fr"},
         url="http://www.statmt.org/wmt13/training-parallel-europarl-v7.tgz",
-        path=("training/europarl-v7.{src}-en.{src}",
-              "training/europarl-v7.{src}-en.en")),
+        path=(
+            "training/europarl-v7.{src}-en.{src}",
+            "training/europarl-v7.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="europarl_v7_frde",
         target="de",
         sources={"fr"},
         url=(
             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.fr.gz",
-            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.de.gz"
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.de.gz",
         ),
-        path=("", "")),
+        path=("", ""),
+    ),
     SubDataset(
         name="europarl_v8_18",
         target="en",
         sources={"et", "fi"},
         url="http://data.statmt.org/wmt18/translation-task/training-parallel-ep-v8.tgz",
-        path=("training/europarl-v8.{src}-en.{src}",
-              "training/europarl-v8.{src}-en.en")),
+        path=(
+            "training/europarl-v8.{src}-en.{src}",
+            "training/europarl-v8.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="europarl_v8_16",
         target="en",
         sources={"fi", "ro"},
         url="http://data.statmt.org/wmt16/translation-task/training-parallel-ep-v8.tgz",
-        path=("training-parallel-ep-v8/europarl-v8.{src}-en.{src}",
-              "training-parallel-ep-v8/europarl-v8.{src}-en.en")),
+        path=(
+            "training-parallel-ep-v8/europarl-v8.{src}-en.{src}",
+            "training-parallel-ep-v8/europarl-v8.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="europarl_v9",
         target="en",
         sources={"cs", "de", "fi", "lt"},
         url="http://www.statmt.org/europarl/v9/training/europarl-v9.{src}-en.tsv.gz",
-        path=""),
+        path="",
+    ),
     SubDataset(
         name="gigafren",
         target="en",
         sources={"fr"},
         url="http://www.statmt.org/wmt10/training-giga-fren.tar",
-        path=("giga-fren.release2.fixed.fr.gz",
-              "giga-fren.release2.fixed.en.gz")),
+        path=(
+            "giga-fren.release2.fixed.fr.gz",
+            "giga-fren.release2.fixed.en.gz",
+        ),
+    ),
     SubDataset(
         name="hindencorp_01",
         target="en",
         sources={"hi"},
         url="http://ufallab.ms.mff.cuni.cz/~bojar/hindencorp",
         manual_dl_files=["hindencorp0.1.gz"],
-        path=""),
+        path="",
+    ),
     SubDataset(
         name="leta_v1",
         target="en",
         sources={"lv"},
         url="http://data.statmt.org/wmt17/translation-task/leta.v1.tgz",
-        path=("LETA-lv-en/leta.lv", "LETA-lv-en/leta.en")),
+        path=("LETA-lv-en/leta.lv", "LETA-lv-en/leta.en"),
+    ),
     SubDataset(
         name="multiun",
         target="en",
         sources={"es", "fr"},
         url="http://www.statmt.org/wmt13/training-parallel-un.tgz",
-        path=("un/undoc.2000.{src}-en.{src}", "un/undoc.2000.{src}-en.en")),
+        path=("un/undoc.2000.{src}-en.{src}", "un/undoc.2000.{src}-en.en"),
+    ),
     SubDataset(
         name="newscommentary_v8",
         target="en",
         sources={"cs", "de", "fr", "es", "ru"},
         url="http://www.statmt.org/wmt13/training-parallel-nc-v8.tgz",
-        path=("training/news-commentary-v8.{src}-en.{src}",
-              "training/news-commentary-v8.{src}-en.en")),
+        path=(
+            "training/news-commentary-v8.{src}-en.{src}",
+            "training/news-commentary-v8.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="newscommentary_v9",
         target="en",
         sources={"cs", "de", "fr", "ru"},
         url="http://www.statmt.org/wmt14/training-parallel-nc-v9.tgz",
-        path=("training/news-commentary-v9.{src}-en.{src}",
-              "training/news-commentary-v9.{src}-en.en")),
+        path=(
+            "training/news-commentary-v9.{src}-en.{src}",
+            "training/news-commentary-v9.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="newscommentary_v10",
         target="en",
         sources={"cs", "de", "fr", "ru"},
         url="http://www.statmt.org/wmt15/training-parallel-nc-v10.tgz",
-        path=("news-commentary-v10.{src}-en.{src}",
-              "news-commentary-v10.{src}-en.en")),
+        path=(
+            "news-commentary-v10.{src}-en.{src}",
+            "news-commentary-v10.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="newscommentary_v11",
         target="en",
         sources={"cs", "de", "ru"},
         url="http://data.statmt.org/wmt16/translation-task/training-parallel-nc-v11.tgz",
-        path=("training-parallel-nc-v11/news-commentary-v11.{src}-en.{src}",
-              "training-parallel-nc-v11/news-commentary-v11.{src}-en.en")),
+        path=(
+            "training-parallel-nc-v11/news-commentary-v11.{src}-en.{src}",
+            "training-parallel-nc-v11/news-commentary-v11.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="newscommentary_v12",
         target="en",
         sources={"cs", "de", "ru", "zh"},
         url="http://data.statmt.org/wmt17/translation-task/training-parallel-nc-v12.tgz",
-        path=("training/news-commentary-v12.{src}-en.{src}",
-              "training/news-commentary-v12.{src}-en.en")),
+        path=(
+            "training/news-commentary-v12.{src}-en.{src}",
+            "training/news-commentary-v12.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="newscommentary_v13",
         target="en",
         sources={"cs", "de", "ru", "zh"},
         url="http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz",
-        path=("training-parallel-nc-v13/news-commentary-v13.{src}-en.{src}",
-              "training-parallel-nc-v13/news-commentary-v13.{src}-en.en")),
+        path=(
+            "training-parallel-nc-v13/news-commentary-v13.{src}-en.{src}",
+            "training-parallel-nc-v13/news-commentary-v13.{src}-en.en",
+        ),
+    ),
     SubDataset(
         name="newscommentary_v14",
         target="en",  # fr-de pair in newscommentary_v14_frde
         sources={"cs", "de", "kk", "ru", "zh"},
         url="http://data.statmt.org/news-commentary/v14/training/news-commentary-v14.{0}-{1}.tsv.gz",
-        path=""),
+        path="",
+    ),
     SubDataset(
         name="newscommentary_v14_frde",
         target="de",
         sources={"fr"},
         url="http://data.statmt.org/news-commentary/v14/training/news-commentary-v14.de-fr.tsv.gz",
-        path=""),
+        path="",
+    ),
     SubDataset(
         name="onlinebooks_v1",
         target="en",
         sources={"lv"},
         url="http://data.statmt.org/wmt17/translation-task/books.lv-en.v1.tgz",
-        path=("farewell/farewell.lv", "farewell/farewell.en")),
+        path=("farewell/farewell.lv", "farewell/farewell.en"),
+    ),
     SubDataset(
         name="paracrawl_v1",
         target="en",
         sources={"cs", "de", "et", "fi", "ru"},
         url="https://s3.amazonaws.com/web-language-models/paracrawl/release1/paracrawl-release1.en-{src}.zipporah0-dedup-clean.tgz",
-        path=("paracrawl-release1.en-{src}.zipporah0-dedup-clean.{src}",
-              "paracrawl-release1.en-{src}.zipporah0-dedup-clean.en")),
+        path=(
+            "paracrawl-release1.en-{src}.zipporah0-dedup-clean.{src}",
+            "paracrawl-release1.en-{src}.zipporah0-dedup-clean.en",
+        ),
+    ),
     SubDataset(
         name="paracrawl_v1_ru",
         target="en",
         sources={"ru"},
         url="https://s3.amazonaws.com/web-language-models/paracrawl/release1/paracrawl-release1.en-ru.zipporah0-dedup-clean.tgz",
-        path=("paracrawl-release1.en-ru.zipporah0-dedup-clean.ru",
-              "paracrawl-release1.en-ru.zipporah0-dedup-clean.en")),
+        path=(
+            "paracrawl-release1.en-ru.zipporah0-dedup-clean.ru",
+            "paracrawl-release1.en-ru.zipporah0-dedup-clean.en",
+        ),
+    ),
     SubDataset(
         name="paracrawl_v3",
         target="en",  # fr-de pair in paracrawl_v3_frde
         sources={"cs", "de", "fi", "lt"},
         url="https://s3.amazonaws.com/web-language-models/paracrawl/release3/en-{src}.bicleaner07.tmx.gz",
-        path=""),
+        path="",
+    ),
     SubDataset(
         name="paracrawl_v3_frde",
         target="de",
         sources={"fr"},
         url=(
             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.de.gz",
-            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.fr.gz"
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.fr.gz",
         ),
-        path=("", "")),
+        path=("", ""),
+    ),
     SubDataset(
         name="rapid_2016",
         target="en",
         sources={"de", "et", "fi"},
         url="http://data.statmt.org/wmt18/translation-task/rapid2016.tgz",
-        path=("rapid2016.{0}-{1}.{src}", "rapid2016.{0}-{1}.en")),
+        path=("rapid2016.{0}-{1}.{src}", "rapid2016.{0}-{1}.en"),
+    ),
     SubDataset(
         name="rapid_2016_ltfi",
         target="en",
         sources={"fi", "lt"},
         url="https://tilde-model.s3-eu-west-1.amazonaws.com/rapid2016.en-{src}.tmx.zip",
-        path="rapid2016.en-{src}.tmx"),
+        path="rapid2016.en-{src}.tmx",
+    ),
     SubDataset(
         name="rapid_2019",
         target="en",
         sources={"de"},
-        url="https://s3-eu-west-1.amazonaws.com/tilde-model/rapid2019.de-en.zip",
-        path=("rapid2019.de-en.de", "rapid2019.de-en.en")),
+        url=(
+            "https://s3-eu-west-1.amazonaws.com/tilde-model/rapid2019.de-en.zip"
+        ),
+        path=("rapid2019.de-en.de", "rapid2019.de-en.en"),
+    ),
     SubDataset(
         name="setimes_2",
         target="en",
         sources={"ro", "tr"},
         url="http://opus.nlpl.eu/download.php?f=SETIMES/v2/tmx/en-{src}.tmx.gz",
-        path=""),
+        path="",
+    ),
     SubDataset(
         name="uncorpus_v1",
         target="en",
         sources={"ru", "zh"},
         url="https://storage.googleapis.com/tfds-data/downloads/uncorpus/UNv1.0.en-{src}.tar.gz",
-        path=("en-{src}/UNv1.0.en-{src}.{src}", "en-{src}/UNv1.0.en-{src}.en")),
+        path=("en-{src}/UNv1.0.en-{src}.{src}", "en-{src}/UNv1.0.en-{src}.en"),
+    ),
     SubDataset(
         name="wikiheadlines_fi",
         target="en",
         sources={"fi"},
         url="http://www.statmt.org/wmt15/wiki-titles.tgz",
-        path="wiki/fi-en/titles.fi-en"),
+        path="wiki/fi-en/titles.fi-en",
+    ),
     SubDataset(
         name="wikiheadlines_hi",
         target="en",
         sources={"hi"},
         url="http://www.statmt.org/wmt14/wiki-titles.tgz",
-        path="wiki/hi-en/wiki-titles.hi-en"),
+        path="wiki/hi-en/wiki-titles.hi-en",
+    ),
     SubDataset(
         # Verified that wmt13, wmt14 and wmt15 files are identical.
         name="wikiheadlines_ru",
         target="en",
         sources={"ru"},
         url="http://www.statmt.org/wmt15/wiki-titles.tgz",
-        path="wiki/ru-en/wiki.ru-en"),
+        path="wiki/ru-en/wiki.ru-en",
+    ),
     SubDataset(
         name="wikititles_v1",
         target="en",
         sources={"cs", "de", "fi", "gu", "kk", "lt", "ru", "zh"},
-        url="http://data.statmt.org/wikititles/v1/wikititles-v1.{src}-en.tsv.gz",
-        path=""),
+        url=(
+            "http://data.statmt.org/wikititles/v1/wikititles-v1.{src}-en.tsv.gz"
+        ),
+        path="",
+    ),
     SubDataset(
         name="yandexcorpus",
         target="en",
         sources={"ru"},
         url="https://translate.yandex.ru/corpus?lang=en",
         manual_dl_files=["1mcorpus.zip"],
-        path=("corpus.en_ru.1m.ru", "corpus.en_ru.1m.en")),
+        path=("corpus.en_ru.1m.ru", "corpus.en_ru.1m.en"),
+    ),
     # pylint:enable=line-too-long
 ] + [
     SubDataset(  # pylint:disable=g-complex-comprehension
@@ -397,7 +469,8 @@ _TRAIN_SUBSETS = [
         target="en",
         sources={"zh"},
         url="ftp://cwmt-wmt:cwmt-wmt@nlp.nju.edu.cn/parallel/%s.zip" % ss,
-        path=("%s/*_c[hn].txt" % ss, "%s/*_en.txt" % ss))
+        path=("%s/*_c[hn].txt" % ss, "%s/*_en.txt" % ss),
+    )
     for ss in CWMT_SUBSET_NAMES
 ]
 
@@ -407,168 +480,227 @@ _DEV_SUBSETS = [
         target="de",
         sources={"fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/euelections_dev2019.fr-de.src.fr",
-              "dev/euelections_dev2019.fr-de.tgt.de")),
+        path=(
+            "dev/euelections_dev2019.fr-de.src.fr",
+            "dev/euelections_dev2019.fr-de.tgt.de",
+        ),
+    ),
     SubDataset(
         name="newsdev2014",
         target="en",
         sources={"hi"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdev2014.hi", "dev/newsdev2014.en")),
+        path=("dev/newsdev2014.hi", "dev/newsdev2014.en"),
+    ),
     SubDataset(
         name="newsdev2015",
         target="en",
         sources={"fi"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdev2015-fien-src.{src}.sgm",
-              "dev/newsdev2015-fien-ref.en.sgm")),
+        path=(
+            "dev/newsdev2015-fien-src.{src}.sgm",
+            "dev/newsdev2015-fien-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newsdiscussdev2015",
         target="en",
         sources={"ro", "tr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdiscussdev2015-{src}en-src.{src}.sgm",
-              "dev/newsdiscussdev2015-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newsdiscussdev2015-{src}en-src.{src}.sgm",
+            "dev/newsdiscussdev2015-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newsdev2016",
         target="en",
         sources={"ro", "tr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdev2016-{src}en-src.{src}.sgm",
-              "dev/newsdev2016-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newsdev2016-{src}en-src.{src}.sgm",
+            "dev/newsdev2016-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newsdev2017",
         target="en",
         sources={"lv", "zh"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdev2017-{src}en-src.{src}.sgm",
-              "dev/newsdev2017-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newsdev2017-{src}en-src.{src}.sgm",
+            "dev/newsdev2017-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newsdev2018",
         target="en",
         sources={"et"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdev2018-{src}en-src.{src}.sgm",
-              "dev/newsdev2018-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newsdev2018-{src}en-src.{src}.sgm",
+            "dev/newsdev2018-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newsdev2019",
         target="en",
         sources={"gu", "kk", "lt"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdev2019-{src}en-src.{src}.sgm",
-              "dev/newsdev2019-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newsdev2019-{src}en-src.{src}.sgm",
+            "dev/newsdev2019-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newsdiscussdev2015",
         target="en",
         sources={"fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdiscussdev2015-{src}en-src.{src}.sgm",
-              "dev/newsdiscussdev2015-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newsdiscussdev2015-{src}en-src.{src}.sgm",
+            "dev/newsdiscussdev2015-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newsdiscusstest2015",
         target="en",
         sources={"fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdiscusstest2015-{src}en-src.{src}.sgm",
-              "dev/newsdiscusstest2015-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newsdiscusstest2015-{src}en-src.{src}.sgm",
+            "dev/newsdiscusstest2015-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newssyscomb2009",
         target="en",
         sources={"cs", "de", "es", "fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newssyscomb2009.{src}", "dev/newssyscomb2009.en")),
+        path=("dev/newssyscomb2009.{src}", "dev/newssyscomb2009.en"),
+    ),
     SubDataset(
         name="newstest2008",
         target="en",
         sources={"cs", "de", "es", "fr", "hu"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/news-test2008.{src}", "dev/news-test2008.en")),
+        path=("dev/news-test2008.{src}", "dev/news-test2008.en"),
+    ),
     SubDataset(
         name="newstest2009",
         target="en",
         sources={"cs", "de", "es", "fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2009.{src}", "dev/newstest2009.en")),
+        path=("dev/newstest2009.{src}", "dev/newstest2009.en"),
+    ),
     SubDataset(
         name="newstest2010",
         target="en",
         sources={"cs", "de", "es", "fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2010.{src}", "dev/newstest2010.en")),
+        path=("dev/newstest2010.{src}", "dev/newstest2010.en"),
+    ),
     SubDataset(
         name="newstest2011",
         target="en",
         sources={"cs", "de", "es", "fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2011.{src}", "dev/newstest2011.en")),
+        path=("dev/newstest2011.{src}", "dev/newstest2011.en"),
+    ),
     SubDataset(
         name="newstest2012",
         target="en",
         sources={"cs", "de", "es", "fr", "ru"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2012.{src}", "dev/newstest2012.en")),
+        path=("dev/newstest2012.{src}", "dev/newstest2012.en"),
+    ),
     SubDataset(
         name="newstest2013",
         target="en",
         sources={"cs", "de", "es", "fr", "ru"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2013.{src}", "dev/newstest2013.en")),
+        path=("dev/newstest2013.{src}", "dev/newstest2013.en"),
+    ),
     SubDataset(
         name="newstest2014",
         target="en",
         sources={"cs", "de", "es", "fr", "hi", "ru"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2014-{src}en-src.{src}.sgm",
-              "dev/newstest2014-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newstest2014-{src}en-src.{src}.sgm",
+            "dev/newstest2014-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newstest2015",
         target="en",
         sources={"cs", "de", "fi", "ru"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2015-{src}en-src.{src}.sgm",
-              "dev/newstest2015-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newstest2015-{src}en-src.{src}.sgm",
+            "dev/newstest2015-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newsdiscusstest2015",
         target="en",
         sources={"fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newsdiscusstest2015-{src}en-src.{src}.sgm",
-              "dev/newsdiscusstest2015-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newsdiscusstest2015-{src}en-src.{src}.sgm",
+            "dev/newsdiscusstest2015-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newstest2016",
         target="en",
         sources={"cs", "de", "fi", "ro", "ru", "tr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2016-{src}en-src.{src}.sgm",
-              "dev/newstest2016-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newstest2016-{src}en-src.{src}.sgm",
+            "dev/newstest2016-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newstestB2016",
         target="en",
         sources={"fi"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstestB2016-enfi-ref.{src}.sgm",
-              "dev/newstestB2016-enfi-src.en.sgm")),
+        path=(
+            "dev/newstestB2016-enfi-ref.{src}.sgm",
+            "dev/newstestB2016-enfi-src.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newstest2017",
         target="en",
         sources={"cs", "de", "fi", "lv", "ru", "tr", "zh"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2017-{src}en-src.{src}.sgm",
-              "dev/newstest2017-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newstest2017-{src}en-src.{src}.sgm",
+            "dev/newstest2017-{src}en-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newstestB2017",
         target="en",
         sources={"fi"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstestB2017-fien-src.fi.sgm",
-              "dev/newstestB2017-fien-ref.en.sgm")),
+        path=(
+            "dev/newstestB2017-fien-src.fi.sgm",
+            "dev/newstestB2017-fien-ref.en.sgm",
+        ),
+    ),
     SubDataset(
         name="newstest2018",
         target="en",
         sources={"cs", "de", "et", "fi", "ru", "tr", "zh"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newstest2018-{src}en-src.{src}.sgm",
-              "dev/newstest2018-{src}en-ref.en.sgm")),
+        path=(
+            "dev/newstest2018-{src}en-src.{src}.sgm",
+            "dev/newstest2018-{src}en-ref.en.sgm",
+        ),
+    ),
 ]
 
 DATASET_MAP = {ds.name: ds for ds in _TRAIN_SUBSETS + _DEV_SUBSETS}
@@ -578,20 +710,23 @@ _CZENG17_FILTER = SubDataset(
     target="en",
     sources={"cs"},
     url="http://ufal.mff.cuni.cz/czeng/download.php?f=convert_czeng16_to_17.pl.zip",
-    path="convert_czeng16_to_17.pl")
+    path="convert_czeng16_to_17.pl",
+)
 
 
 class WmtConfig(tfds.core.BuilderConfig):
   """BuilderConfig for WMT."""
 
-  def __init__(self,
-               *,
-               url=None,
-               citation=None,
-               description=None,
-               language_pair=(None, None),
-               subsets=None,
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      url=None,
+      citation=None,
+      description=None,
+      language_pair=(None, None),
+      subsets=None,
+      **kwargs,
+  ):
     """BuilderConfig for WMT.
 
     Args:
@@ -609,7 +744,8 @@ class WmtConfig(tfds.core.BuilderConfig):
       name += "." + kwargs.pop("name")
 
     super(WmtConfig, self).__init__(
-        name=name, description=description, **kwargs)
+        name=name, description=description, **kwargs
+    )
 
     self.url = url or "http://www.statmt.org"
     self.citation = citation
@@ -631,7 +767,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       raise ValueError(
           "The raw `wmt_translate` can only be instantiated with the config "
           "kwargs. You may want to use one of the `wmtYY_translate` "
-          "implementation instead to get the WMT dataset for a specific year.")
+          "implementation instead to get the WMT dataset for a specific year."
+      )
     super(WmtTranslate, self).__init__(*args, **kwargs)
 
   @property
@@ -651,7 +788,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         if ds.target != target or source not in ds.sources:
           logging.info(
               "Skipping sub-dataset that does not include language pair: %s",
-              ss_name)
+              ss_name,
+          )
         else:
           filtered_subsets[split].append(ss_name)
     logging.info("Using sub-datasets: %s", filtered_subsets)
@@ -663,7 +801,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair,),
+            languages=self.builder_config.language_pair,
+        ),
         supervised_keys=(src, target),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation,
@@ -682,8 +821,12 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
           raise AssertionError(
               "For {0}, you must manually download the following file(s) "
               "from {1} and place them in {2}: {3}".format(
-                  ds.name, ds.get_url(source), dl_manager.manual_dir,
-                  ", ".join(manual_dl_files)))
+                  ds.name,
+                  ds.get_url(source),
+                  dl_manager.manual_dir,
+                  ", ".join(manual_dl_files),
+              )
+          )
         manual_paths.append(manual_path)
       return manual_paths
 
@@ -728,8 +871,10 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
             name=split,
             gen_kwargs={
                 "split_subsets": split_subsets,
-                "extraction_map": extraction_map
-            }) for split, split_subsets in self.subsets.items()
+                "extraction_map": extraction_map,
+            },
+        )
+        for split, split_subsets in self.subsets.items()
     ]
 
   def _generate_examples(self, split_subsets, extraction_map):
@@ -753,12 +898,15 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       if ss_name.startswith("czeng"):
         if ss_name.endswith("16pre"):
           sub_generator = functools.partial(
-              _parse_tsv, language_pair=("en", "cs"))
+              _parse_tsv, language_pair=("en", "cs")
+          )
         elif ss_name.endswith("17"):
           filter_path = _get_local_paths(
-              _CZENG17_FILTER, extraction_map[_CZENG17_FILTER.name])[0]
+              _CZENG17_FILTER, extraction_map[_CZENG17_FILTER.name]
+          )[0]
           sub_generator = functools.partial(
-              _parse_czeng, filter_path=filter_path)
+              _parse_czeng, filter_path=filter_path
+          )
         else:
           sub_generator = _parse_czeng
       elif ss_name == "hindencorp_01":
@@ -776,7 +924,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
           sub_generator = _parse_tsv
         elif ss_name.startswith("newscommentary_v14"):
           sub_generator = functools.partial(
-              _parse_tsv, language_pair=self.builder_config.language_pair)
+              _parse_tsv, language_pair=self.builder_config.language_pair
+          )
         elif "tmx" in fname:
           sub_generator = _parse_tmx
         elif ss_name.startswith("wikiheadlines"):
@@ -849,17 +998,27 @@ def _parse_parallel_sentences(f1, f2):
   f2_files = glob_str(f2)
 
   assert f1_files and f2_files, "No matching files found: %s, %s." % (f1, f2)
-  assert len(f1_files) == len(f2_files), (
-      "Number of files do not match: %d vs %d for %s vs %s." %
-      (len(f1_files), len(f2_files), f1, f2))
+  assert len(f1_files) == len(
+      f2_files
+  ), "Number of files do not match: %d vs %d for %s vs %s." % (
+      len(f1_files),
+      len(f2_files),
+      f1,
+      f2,
+  )
 
   for f_id, (f1_i, f2_i) in enumerate(zip(sorted(f1_files), sorted(f2_files))):
     l1_sentences, l1 = parse_file(f1_i)
     l2_sentences, l2 = parse_file(f2_i)
 
-    assert len(l1_sentences) == len(l2_sentences), (
-        "Sizes do not match: %d vs %d for %s vs %s." %
-        (len(l1_sentences), len(l2_sentences), f1_i, f2_i))
+    assert len(l1_sentences) == len(
+        l2_sentences
+    ), "Sizes do not match: %d vs %d for %s vs %s." % (
+        len(l1_sentences),
+        len(l2_sentences),
+        f1_i,
+        f2_i,
+    )
 
     for line_id, (s1, s2) in enumerate(zip(l1_sentences, l2_sentences)):
       key = "{}/{}".format(f_id, line_id)
@@ -869,9 +1028,14 @@ def _parse_parallel_sentences(f1, f2):
 def _parse_frde_bitext(fr_path, de_path):
   fr_sentences = read_sentences(fr_path)
   de_sentences = read_sentences(de_path)
-  assert len(fr_sentences) == len(de_sentences), (
-      "Sizes do not match: %d vs %d for %s vs %s." %
-      (len(fr_sentences), len(de_sentences), fr_path, de_path))
+  assert len(fr_sentences) == len(
+      de_sentences
+  ), "Sizes do not match: %d vs %d for %s vs %s." % (
+      len(fr_sentences),
+      len(de_sentences),
+      fr_path,
+      de_path,
+  )
   for line_id, (s1, s2) in enumerate(zip(fr_sentences, de_sentences)):
     yield line_id, {"fr": s1, "de": s2}
 
@@ -913,8 +1077,12 @@ def _parse_tsv(path, language_pair=None):
     for j, line in enumerate(f):
       cols = line.split("\t")
       if len(cols) != 2:
-        logging.warning("Skipping line %d in TSV (%s) with %d != 2 columns.", j,
-                        path, len(cols))
+        logging.warning(
+            "Skipping line %d in TSV (%s) with %d != 2 columns.",
+            j,
+            path,
+            len(cols),
+        )
         continue
       s1, s2 = cols
       yield j, {l1: s1.strip(), l2: s2.strip()}
@@ -938,9 +1106,12 @@ def _parse_czeng(*paths, **kwargs):
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
     with epath.Path(filter_path).open() as f:
       bad_blocks = set(
-          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split())  # pytype: disable=attribute-error
-    logging.info("Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
-                 len(bad_blocks))
+          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split()  # pytype: disable=attribute-error
+      )
+    logging.info(
+        "Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
+        len(bad_blocks),
+    )
 
   for path in paths:
     for gz_path in glob_str(path):

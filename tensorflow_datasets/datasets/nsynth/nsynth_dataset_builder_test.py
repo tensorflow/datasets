@@ -35,7 +35,7 @@ class NsynthFullTest(tfds_test.DatasetBuilderTestCase):
           "test": "test",
           "valid": "valid",
       },
-      "instrument_labels": "nsynth-instrument_labels.txt"
+      "instrument_labels": "nsynth-instrument_labels.txt",
   }
 
 

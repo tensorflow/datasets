@@ -23,4 +23,5 @@ tfds.builder_cls('schema_guided_dialogue')
 from tensorflow_datasets.core import lazy_builder_import
 
 SchemaGuidedDialogue = lazy_builder_import.LazyBuilderImport(
-    'schema_guided_dialogue')
+    'schema_guided_dialogue'
+)

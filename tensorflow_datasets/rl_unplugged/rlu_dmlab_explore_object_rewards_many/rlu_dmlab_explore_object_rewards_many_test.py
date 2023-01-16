@@ -21,7 +21,10 @@ from tensorflow_datasets.rl_unplugged.rlu_dmlab_explore_object_rewards_many impo
 
 class RluDmlabExploreObjectRewardsManyTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_dmlab_explore_object_rewards_many dataset."""
-  DATASET_CLASS = rlu_dmlab_explore_object_rewards_many.RluDmlabExploreObjectRewardsMany
+
+  DATASET_CLASS = (
+      rlu_dmlab_explore_object_rewards_many.RluDmlabExploreObjectRewardsMany
+  )
   SPLITS = {
       'train': 2,  # Number of fake train example
   }

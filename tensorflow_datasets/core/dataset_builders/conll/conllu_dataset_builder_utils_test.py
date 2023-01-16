@@ -24,12 +24,14 @@ def test_get_universal_morphology_config():
   config_1 = conllu_lib.get_universal_morphology_config(
       language=lang_1,
       features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
-      name=f"test_{lang_1}")
+      name=f"test_{lang_1}",
+  )
   config_2 = conllu_lib.get_universal_morphology_config(
       language=lang_2,
       features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
       name=f"test_{lang_2}",
-      description="Config 2 description.")
+      description="Config 2 description.",
+  )
 
   assert config_1.name == f"test_{lang_1}"
   assert config_2.name == f"test_{lang_2}"

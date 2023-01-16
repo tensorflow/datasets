@@ -21,6 +21,7 @@ from tensorflow_datasets.ranking.istella import istella
 
 class IstellaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for istella dataset."""
+
   DATASET_CLASS = istella.Istella
   SPLITS = {
       'train': 2,  # Number of fake train example

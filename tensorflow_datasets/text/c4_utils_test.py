@@ -58,8 +58,9 @@ class C4UtilsTest(testing.TestCase):
 
   def run_clean_page(self, page):
     counters, counter_inc_fn = _get_counters()
-    results = list(c4_utils.get_clean_page_fn()(
-        page=page, counter_inc_fn=counter_inc_fn))
+    results = list(
+        c4_utils.get_clean_page_fn()(page=page, counter_inc_fn=counter_inc_fn)
+    )
     self.assertLessEqual(len(results), 1)
     result = None if not results else results[0]
     return result, counters
@@ -70,7 +71,9 @@ class C4UtilsTest(testing.TestCase):
             text=EN_TEXT,
             content_type=FAKE_CONTENT_TYPE,
             content_length=FAKE_CONTENT_LENGTH,
-            timestamp=FAKE_TIMESTAMP))
+            timestamp=FAKE_TIMESTAMP,
+        )
+    )
     self.assertEqual(EXPECTED_CLEAN_EN, clean_en.text)
     self.assertEqual(
         {
@@ -79,8 +82,10 @@ class C4UtilsTest(testing.TestCase):
             "line-filtered:no_endmark": 2,
             "line-filtered:javascript": 2,
             "line-filtered:policy": 3,
-            "passed": 1
-        }, dict(counters))
+            "passed": 1,
+        },
+        dict(counters),
+    )
 
   def test_clean_page_toofewsentences(self):
     text_with_toofewsentences = """This first line has one sentence.
@@ -90,12 +95,13 @@ This line looks like it has three sentences...but it's actually just 1."""
             text=text_with_toofewsentences,
             content_type=FAKE_CONTENT_TYPE,
             content_length=FAKE_CONTENT_LENGTH,
-            timestamp=FAKE_TIMESTAMP))
+            timestamp=FAKE_TIMESTAMP,
+        )
+    )
     self.assertIsNone(clean_en)
-    self.assertEqual({
-        "line-passed": 2,
-        "filtered:too_few_sentences": 1
-    }, dict(counters))
+    self.assertEqual(
+        {"line-passed": 2, "filtered:too_few_sentences": 1}, dict(counters)
+    )
 
   def test_clean_page_squigglybracket(self):
     text_that_is_actually_code = """This page starts out with some text.
@@ -107,12 +113,13 @@ fn foo(a) { bar = a + 10; }."""
             text=text_that_is_actually_code,
             content_type=FAKE_CONTENT_TYPE,
             content_length=FAKE_CONTENT_LENGTH,
-            timestamp=FAKE_TIMESTAMP))
+            timestamp=FAKE_TIMESTAMP,
+        )
+    )
     self.assertIsNone(clean_en)
-    self.assertEqual({
-        "filtered:squigglybracket": 1,
-        "line-passed": 3
-    }, dict(counters))
+    self.assertEqual(
+        {"filtered:squigglybracket": 1, "line-passed": 3}, dict(counters)
+    )
 
   def test_clean_page_loremipsum(self):
     lorem_ipsum_text = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -124,7 +131,9 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
             text=lorem_ipsum_text,
             content_type=FAKE_CONTENT_TYPE,
             content_length=FAKE_CONTENT_LENGTH,
-            timestamp=FAKE_TIMESTAMP))
+            timestamp=FAKE_TIMESTAMP,
+        )
+    )
     self.assertIsNone(clean_en)
     self.assertEqual({"filtered:loremipsum": 1}, dict(counters))
 
@@ -140,14 +149,16 @@ Or have requested citations. Or the option to edit."""
     expected_counters = {
         "line-passed": 3,
         "line-filtered:no_endmark": 1,
-        "passed": 1
+        "passed": 1,
     }
     out, counters = self.run_clean_page(
         PageFeatures(
             text=text,
             content_type=FAKE_CONTENT_TYPE,
             content_length=FAKE_CONTENT_LENGTH,
-            timestamp=FAKE_TIMESTAMP))
+            timestamp=FAKE_TIMESTAMP,
+        )
+    )
     self.assertEqual(expected_clean_text, out.text)
     self.assertEqual(expected_counters, dict(counters))
 
@@ -165,63 +176,73 @@ This line should be okay."""
     expected_counters = {
         "line-passed": 3,
         "line-filtered:policy": 3,
-        "passed": 1
+        "passed": 1,
     }
     out, counters = self.run_clean_page(
         PageFeatures(
             text=text,
             content_type=FAKE_CONTENT_TYPE,
             content_length=FAKE_CONTENT_LENGTH,
-            timestamp=FAKE_TIMESTAMP))
+            timestamp=FAKE_TIMESTAMP,
+        )
+    )
     self.assertEqual(expected_clean_text, out.text)
     self.assertEqual(expected_counters, dict(counters))
 
   def test_remove_duplicate_text(self):
     import apache_beam.testing.util as beam_testing_util  # pylint:disable=g-import-not-at-top
+
     beam = lazy_imports.apache_beam
     input_pages = [
         PageFeatures(
             url="url/1-0",
-            text="This is a duplicated line.\nThis is a unique line.\n" +
-            "This one comes first and so it stays.\n" +
-            "This is duplicate within the page so the others are removed.\n" +
-            "Here is a sentence between the duplicates.\n" +
-            "This is duplicate within the page so the others are removed.\n" +
-            "this is Duplicate WITHIN the page so the others are removed. "),
+            text="This is a duplicated line.\nThis is a unique line.\n"
+            + "This one comes first and so it stays.\n"
+            + "This is duplicate within the page so the others are removed.\n"
+            + "Here is a sentence between the duplicates.\n"
+            + "This is duplicate within the page so the others are removed.\n"
+            + "this is Duplicate WITHIN the page so the others are removed. ",
+        ),
         PageFeatures(
             url="url/2-1",
-            text="This is 2nd unique line.\nThis one comes second so it is " +
-            "removed even though the capitalizaiton is different.\n" +
-            "this is a Duplicated line. "),
+            text="This is 2nd unique line.\nThis one comes second so it is "
+            + "removed even though the capitalizaiton is different.\n"
+            + "this is a Duplicated line. ",
+        ),
         PageFeatures(
             url="url/3-4",
-            text="This is a 3rd unique line.\nThis is a duplicated line.\n" +
-            "This one comes third and so it is removed. But the page stays " +
-            "because there are still 3 sentences remaining."),
+            text="This is a 3rd unique line.\nThis is a duplicated line.\n"
+            + "This one comes third and so it is removed. But the page stays "
+            + "because there are still 3 sentences remaining.",
+        ),
         PageFeatures(
             url="url/4-4",
-            text="This is a 4th unique line.\nThis is a duplicated line.\n" +
-            "This one comes third and so it is removed, and the page is too " +
-            "since there aren't enough sentences left."),
+            text="This is a 4th unique line.\nThis is a duplicated line.\n"
+            + "This one comes third and so it is removed, and the page is too "
+            + "since there aren't enough sentences left.",
+        ),
     ]
     expected_pages = [
         PageFeatures(
             url="url/1-0",
-            text="This is a duplicated line.\nThis is a unique line.\n" +
-            "This one comes first and so it stays.\n" +
-            "This is duplicate within the page so the others are removed.\n" +
-            "Here is a sentence between the duplicates."),
+            text="This is a duplicated line.\nThis is a unique line.\n"
+            + "This one comes first and so it stays.\n"
+            + "This is duplicate within the page so the others are removed.\n"
+            + "Here is a sentence between the duplicates.",
+        ),
         PageFeatures(
             url="url/3-4",
-            text="This is a 3rd unique line.\n" +
-            "This one comes third and so it is removed. But the page stays " +
-            "because there are still 3 sentences remaining."),
+            text="This is a 3rd unique line.\n"
+            + "This one comes third and so it is removed. But the page stays "
+            + "because there are still 3 sentences remaining.",
+        ),
     ]
     with beam.Pipeline() as pipeline:
       pages = pipeline | beam.Create(input_pages)
       deduped_pages = c4_utils.remove_duplicate_text(pages)
-      beam_testing_util.assert_that(deduped_pages,
-                                    beam_testing_util.equal_to(expected_pages))
+      beam_testing_util.assert_that(
+          deduped_pages, beam_testing_util.equal_to(expected_pages)
+      )
 
   def test_split_wet_file(self):
     if six.PY2:
@@ -230,14 +251,20 @@ This line should be okay."""
     counters, counter_inc_fn = _get_counters()
     list(
         c4_utils.split_wet_file(
-            os.path.join(testing.fake_examples_dir(),
-                         "c4/c4_wet_files/cc_0.warc.wet.gz"),
-            counter_inc_fn=counter_inc_fn))
-    self.assertEqual({
-        "wet-file": 1,
-        "passed": 6,
-        "filtered:no_url": 1,
-    }, dict(counters))
+            os.path.join(
+                testing.fake_examples_dir(), "c4/c4_wet_files/cc_0.warc.wet.gz"
+            ),
+            counter_inc_fn=counter_inc_fn,
+        )
+    )
+    self.assertEqual(
+        {
+            "wet-file": 1,
+            "passed": 6,
+            "filtered:no_url": 1,
+        },
+        dict(counters),
+    )
 
   def test_badwords_filter(self):
     padding_text = """This page starts out with some text.
@@ -252,7 +279,7 @@ But then, all of a sudden, there's a badword... or not?
         # Make sure lowercasing works
         "Ass is one of several species of small, horse-like animals.",
         # Make sure it will still trigger when surrounded by punctuation.
-        "Donkey is one synonym for the word \"ass\".",
+        'Donkey is one synonym for the word "ass".',
         # Make sure it correctly handles different languages.
         "Ass is not a badword in Spanish.",
         "Culo is though.",
@@ -268,41 +295,49 @@ But then, all of a sudden, there's a badword... or not?
         "de",  # doesn't have badwords listed
     ]
     expected_outputs = [True, False, False, False, True, False, True]
-    badwords_filter_fn = c4_utils.get_badwords_filter_fn(badwords={
-        "en": ["ass"],
-        "es": ["culo"]
-    })
+    badwords_filter_fn = c4_utils.get_badwords_filter_fn(
+        badwords={"en": ["ass"], "es": ["culo"]}
+    )
 
     outputs = [
         badwords_filter_fn(  # pylint:disable=g-complex-comprehension
-            PageFeatures(text=padding_text + final_sentence, language=language))
+            PageFeatures(text=padding_text + final_sentence, language=language)
+        )
         for final_sentence, expected_output, language in zip(
-            final_sentences, expected_outputs, languages)
+            final_sentences, expected_outputs, languages
+        )
     ]
 
     self.assertListEqual(expected_outputs, outputs)
 
   def test_soft_badwords_filter(self):
     badwords_filter_fn = c4_utils.get_badwords_filter_fn(
-        badwords={"": ["bad"]}, filter_fraction=0.5)
+        badwords={"": ["bad"]}, filter_fraction=0.5
+    )
 
     self.assertTrue(
         badwords_filter_fn(
             page=PageFeatures(
-                text="good page",
-                normalized_url="filtered.url.com",
-                language="")))
+                text="good page", normalized_url="filtered.url.com", language=""
+            )
+        )
+    )
     self.assertFalse(
         badwords_filter_fn(
             page=PageFeatures(
-                text="bad page", normalized_url="filtered.url.com",
-                language="")))
+                text="bad page", normalized_url="filtered.url.com", language=""
+            )
+        )
+    )
     self.assertTrue(
         badwords_filter_fn(
             page=PageFeatures(
                 text="bad page",
                 normalized_url="unfiltered.url.com",
-                language="")))
+                language="",
+            )
+        )
+    )
 
   def test_paragraph_filter(self):
     text = """This line is long enough to be a paragraph.
@@ -313,12 +348,15 @@ This one is. I promise!
 
     page = PageFeatures(text=text)
     self.assertFalse(
-        c4_utils.paragraph_filter(page, min_paragraphs=2, min_paragraph_len=20))
+        c4_utils.paragraph_filter(page, min_paragraphs=2, min_paragraph_len=20)
+    )
     self.assertFalse(
-        c4_utils.paragraph_filter(page, min_paragraphs=3, min_paragraph_len=20))
+        c4_utils.paragraph_filter(page, min_paragraphs=3, min_paragraph_len=20)
+    )
     page = PageFeatures(text=text + additional_paragraph)
     self.assertTrue(
-        c4_utils.paragraph_filter(page, min_paragraphs=3, min_paragraph_len=20))
+        c4_utils.paragraph_filter(page, min_paragraphs=3, min_paragraph_len=20)
+    )
 
 
 if __name__ == "__main__":

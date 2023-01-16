@@ -42,7 +42,7 @@ class Qa4mreMainTest(testing.DatasetBuilderTestCase):
       "2013.main.ES": "2013.main.ES.xml",
       "2013.main.RO": "2013.main.RO.xml",
       "2013.alzheimers.EN": "2013.alzheimers.EN.xml",
-      "2013.entrance_exam.EN": "2013.entrance_exam.EN.xml"
+      "2013.entrance_exam.EN": "2013.entrance_exam.EN.xml",
   }
 
   SPLITS = {

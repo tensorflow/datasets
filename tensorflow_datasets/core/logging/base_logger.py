@@ -34,15 +34,25 @@ class Logger:
   Exceptions are *NOT* caught.
   """
 
-  def tfds_import(self, *, metadata: call_metadata.CallMetadata,
-                  import_time_ms_tensorflow: int,
-                  import_time_ms_dataset_builders: int):
+  def tfds_import(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      import_time_ms_tensorflow: int,
+      import_time_ms_dataset_builders: int,
+  ):
     """Callback called when user calls `import tensorflow_datasets`."""
     pass
 
-  def builder_init(self, *, metadata: call_metadata.CallMetadata, name: str,
-                   data_dir: Optional[str], config: Optional[str],
-                   version: Optional[str]):
+  def builder_init(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      data_dir: Optional[str],
+      config: Optional[str],
+      version: Optional[str],
+  ):
     """Callback called when user calls `DatasetBuilder(...)`."""
     pass
 

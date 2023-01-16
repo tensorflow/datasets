@@ -100,18 +100,22 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version("3.1.0"),
           release_notes={
               "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
-              "3.1.0":
+              "3.1.0": (
                   "Add builder config for missing `person` object category, "
-                  "and add `id` to the feature dict",
+                  "and add `id` to the feature dict"
+              ),
           },
-      ) for category in (_SCENES_CATEGORIES + _OBJECTS_CATEGORIES)
+      )
+      for category in (_SCENES_CATEGORIES + _OBJECTS_CATEGORIES)
   ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=("Large scale images showing different objects "
-                     "from given categories like bedroom, tower etc."),
+        description=(
+            "Large scale images showing different objects "
+            "from given categories like bedroom, tower etc."
+        ),
         features=tfds.features.FeaturesDict({
             "id": tfds.features.Text(),
             "image": tfds.features.Image(encoding_format="jpeg"),
@@ -124,35 +128,41 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.name in _SCENES_CATEGORIES:
       extracted_dirs = dl_manager.download_and_extract({
           "train": LSUN_SCENE_URL % (self.builder_config.name, "train"),
-          "val": LSUN_SCENE_URL % (self.builder_config.name, "val")
-      })
-      return [
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
-              gen_kwargs={
-                  "extracted_dir":
-                      extracted_dirs["train"],
-                  "file_path":
-                      "%s_%s_lmdb" % (self.builder_config.name, "train")
-              }),
-          tfds.core.SplitGenerator(
-              name=tfds.Split.VALIDATION,
-              gen_kwargs={
-                  "extracted_dir": extracted_dirs["val"],
-                  "file_path": "%s_%s_lmdb" % (self.builder_config.name, "val")
-              }),
-      ]
-    else:
-      extracted_dirs = dl_manager.download_and_extract({
-          "train": LSUN_OBJECT_URL % self.builder_config.name,
+          "val": LSUN_SCENE_URL % (self.builder_config.name, "val"),
       })
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
               gen_kwargs={
                   "extracted_dir": extracted_dirs["train"],
-                  "file_path": self.builder_config.name
-              })
+                  "file_path": "%s_%s_lmdb" % (
+                      self.builder_config.name,
+                      "train",
+                  ),
+              },
+          ),
+          tfds.core.SplitGenerator(
+              name=tfds.Split.VALIDATION,
+              gen_kwargs={
+                  "extracted_dir": extracted_dirs["val"],
+                  "file_path": "%s_%s_lmdb" % (self.builder_config.name, "val"),
+              },
+          ),
+      ]
+    else:
+      extracted_dirs = dl_manager.download_and_extract(
+          {
+              "train": LSUN_OBJECT_URL % self.builder_config.name,
+          }
+      )
+      return [
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TRAIN,
+              gen_kwargs={
+                  "extracted_dir": extracted_dirs["train"],
+                  "file_path": self.builder_config.name,
+              },
+          )
       ]
 
   def _generate_examples(self, extracted_dir, file_path):

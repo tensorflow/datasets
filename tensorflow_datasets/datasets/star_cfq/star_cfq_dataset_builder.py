@@ -75,11 +75,37 @@ _NONBLENDED_TRAIN_SET_SIZES = {
     'default': [0.25, 0.5, 0.75, 1, 3, 10, 30, 80, 100],
     '': [0.1, 0.2, 0.3, 0.5, 1, 2],
     'b': [
-        0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 1, 1.5, 2, 3, 4, 5,
-        6, 8, 10, 11, 12, 13, 15, 30, 35, 80, 85, 100
+        0.1,
+        0.2,
+        0.25,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.75,
+        0.8,
+        1,
+        1.5,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        11,
+        12,
+        13,
+        15,
+        30,
+        35,
+        80,
+        85,
+        100,
     ],
     'o': [0.1, 0.2, 0.3, 0.5, 1, 2],
-    'u': [0.1, 0.2, 0.3, 0.5, 1, 2, 3, 6, 10, 30, 100]
+    'u': [0.1, 0.2, 0.3, 0.5, 1, 2, 3, 6, 10, 30, 100],
 }
 _BLENDING_INITIAL_SIZES = [0, 0.1, 0.2, 0.3, 0.5, 1, 2, 3, 5]
 _BLENDING_SUPPLEMENTARY_SIZES = [0.1, 0.3, 1, 2, 3, 10, 30, 80, 100]
@@ -97,13 +123,15 @@ _QUERY_FIELD = 'sparqlPatternModEntities'
 class StarCFQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for *-CFQ splits."""
 
-  def __init__(self,
-               *,
-               name,
-               split_archive_path,
-               split_path,
-               compound_divergence=False,
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      name,
+      split_archive_path,
+      split_path,
+      compound_divergence=False,
+      **kwargs,
+  ):
     """BuilderConfig for a *-CFQ dataset.
 
     Args:
@@ -115,7 +143,8 @@ class StarCFQConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(StarCFQConfig, self).__init__(
-        name=name, version=tfds.core.Version('1.1.0'), **kwargs)
+        name=name, version=tfds.core.Version('1.1.0'), **kwargs
+    )
     self.split_archive_path = split_archive_path
     self.split_path = split_path
     self.compound_divergence = compound_divergence
@@ -132,8 +161,9 @@ def _generate_compound_divergence_builder_configs():
                 name=f'u_cfq_compound_divergence_{size}_{compound_divergence}_r{seed_idx}',
                 compound_divergence=True,
                 split_archive_path='splits/u-cfq-divergence-splits-1.0.tar.gz',
-                split_path=f'divergence_splits/divergence_split_s{size}_d{compound_divergence}_r{seed}.json'
-            ))
+                split_path=f'divergence_splits/divergence_split_s{size}_d{compound_divergence}_r{seed}.json',
+            )
+        )
 
   return configs
 
@@ -143,14 +173,16 @@ def _generate_single_pool_random_split_builder_configs():
   configs = []
   for pool in _POOLS:
     for size in _NONBLENDED_TRAIN_SET_SIZES.get(
-        pool, _NONBLENDED_TRAIN_SET_SIZES['default']):
+        pool, _NONBLENDED_TRAIN_SET_SIZES['default']
+    ):
       full_pool_name = '_'.join([pool, 'cfq']).lstrip('_')
       configs.append(
           StarCFQConfig(
               name=f'single_pool_{size}x_{full_pool_name}',
               split_archive_path='splits/star-cfq-random-splits-1.0.tar.gz',
-              split_path=f'random_splits/train_{size}x_{full_pool_name}__test_1x_{full_pool_name}.json'
-          ))
+              split_path=f'random_splits/train_{size}x_{full_pool_name}__test_1x_{full_pool_name}.json',
+          )
+      )
   return configs
 
 
@@ -166,7 +198,8 @@ def _generate_ungrounded_on_grounded_builder_configs():
         StarCFQConfig(
             name=f'ungrounded_on_grounded_{size}x',
             split_archive_path='splits/star-cfq-random-splits-1.0.tar.gz',
-            split_path=f'random_splits/train_{size}x_u_cfq__test_1x_o_cfq.json')
+            split_path=f'random_splits/train_{size}x_u_cfq__test_1x_o_cfq.json',
+        )
     )
   return configs
 
@@ -179,23 +212,27 @@ def _generate_blended_split_builder_configs():
     for initial_size in _BLENDING_INITIAL_SIZES:
       for supplementary_size in _BLENDING_SUPPLEMENTARY_SIZES:
         # Some splits with 80x n-CFQ/half-n-CFQ sizes are missing, skip them.
-        if supplementary_size == 80 and (supplementary_pool in ['n', 'half_n']
-                                         or initial_size not in [0, 0.1, 1]):
+        if supplementary_size == 80 and (
+            supplementary_pool in ['n', 'half_n']
+            or initial_size not in [0, 0.1, 1]
+        ):
           continue
         if initial_size != 0:
           configs.append(
               StarCFQConfig(
                   name=f'equal_weighting_{initial_size}x_b_cfq_{supplementary_size}x_{supplementary_pool}_cfq',
                   split_archive_path=split_archive_path,
-                  split_path=f'random_splits/train_{initial_size}x_b_cfq_{supplementary_size}x_{supplementary_pool}_cfq__test_1x_b_cfq.json'
-              ))
+                  split_path=f'random_splits/train_{initial_size}x_b_cfq_{supplementary_size}x_{supplementary_pool}_cfq__test_1x_b_cfq.json',
+              )
+          )
         else:
           configs.append(
               StarCFQConfig(
                   name=f'equal_weighting_0x_b_cfq_{supplementary_size}x_{supplementary_pool}_cfq',
                   split_archive_path=split_archive_path,
-                  split_path=f'random_splits/train_{supplementary_size}x_{supplementary_pool}_cfq__test_1x_b_cfq.json'
-              ))
+                  split_path=f'random_splits/train_{supplementary_size}x_{supplementary_pool}_cfq__test_1x_b_cfq.json',
+              )
+          )
   for unique_initial_size in _UNIQUE_INITIAL_SIZES:
     for supplementary_pool in _SUPPLEMENTARY_POOLS:
       for size in _OVERWEIGHTING_SIZES:
@@ -203,14 +240,19 @@ def _generate_blended_split_builder_configs():
         if size == 80 and supplementary_pool in ['n', 'half_n']:
           continue
         # This split file is missing, skip it in this version.
-        if unique_initial_size == 1 and size == 1 and supplementary_pool == 'half_n':
+        if (
+            unique_initial_size == 1
+            and size == 1
+            and supplementary_pool == 'half_n'
+        ):
           continue
         configs.append(
             StarCFQConfig(
                 name=f'overweighting_{unique_initial_size}x_unique_{size}x_b_cfq_{size}x_{supplementary_pool}_cfq',
                 split_archive_path=split_archive_path,
-                split_path=f'random_splits/train_{unique_initial_size}x_unique_{size}x_b_cfq_{size}x_{supplementary_pool}_cfq__test_1x_b_cfq.json'
-            ))
+                split_path=f'random_splits/train_{unique_initial_size}x_unique_{size}x_b_cfq_{size}x_{supplementary_pool}_cfq__test_1x_b_cfq.json',
+            )
+        )
 
   return configs
 
@@ -239,9 +281,11 @@ def _get_dataset_slices(start, end):
     end_offset = (shard_idx + 1) * _SHARD_SIZE
     if end_offset <= start:
       continue
-    s = Slice(shard_idx,
-              max(start, start_offset) % _SHARD_SIZE,
-              (min(end, end_offset) - 1) % _SHARD_SIZE + 1)
+    s = Slice(
+        shard_idx,
+        max(start, start_offset) % _SHARD_SIZE,
+        (min(end, end_offset) - 1) % _SHARD_SIZE + 1,
+    )
     slices.append(s)
   return slices
 
@@ -249,10 +293,12 @@ def _get_dataset_slices(start, end):
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for a *-CFQ split."""
 
-  BUILDER_CONFIGS = _generate_single_pool_random_split_builder_configs(
-  ) + _generate_blended_split_builder_configs(
-  ) + _generate_ungrounded_on_grounded_builder_configs(
-  ) + _generate_compound_divergence_builder_configs()
+  BUILDER_CONFIGS = (
+      _generate_single_pool_random_split_builder_configs()
+      + _generate_blended_split_builder_configs()
+      + _generate_ungrounded_on_grounded_builder_configs()
+      + _generate_compound_divergence_builder_configs()
+  )
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -268,17 +314,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     split_dir = dl_manager.download_and_extract(
-        '%s/%s' % (_DATA_URL, self.builder_config.split_archive_path))
+        '%s/%s' % (_DATA_URL, self.builder_config.split_archive_path)
+    )
     split_path = os.path.join(split_dir, self.builder_config.split_path)
 
     dataset_paths = {}
     if self.builder_config.compound_divergence:
       extracted_dataset_path = dl_manager.download_and_extract(
-          _DATA_URL +
-          '/datasets/u-cfq-for-divergence-splits-1.0-compact-combined.tar.gz')
+          _DATA_URL
+          + '/datasets/u-cfq-for-divergence-splits-1.0-compact-combined.tar.gz'
+      )
       dataset_paths[_UCFQ_POOL] = os.path.join(
           extracted_dataset_path,
-          'u-cfq-for-divergence-splits-1.0-compact-combined')
+          'u-cfq-for-divergence-splits-1.0-compact-combined',
+      )
 
     else:
       with epath.Path(split_path).open() as file:
@@ -290,22 +339,27 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               continue
             logging.info('Downloading dataset %s...', name)
             extracted_dataset_path = dl_manager.download_and_extract(
-                _DATA_URL + f'/datasets/{name.lower()}-1.0-compact.tar.gz')
-            dataset_paths[name] = os.path.join(extracted_dataset_path,
-                                               f'{name.lower()}-1.0-compact')
+                _DATA_URL + f'/datasets/{name.lower()}-1.0-compact.tar.gz'
+            )
+            dataset_paths[name] = os.path.join(
+                extracted_dataset_path, f'{name.lower()}-1.0-compact'
+            )
 
     if self.builder_config.compound_divergence:
       return {
-          'train':
-              self._generate_examples(dataset_paths, split_path, 'trainIdxs'),
-          'validation':
-              self._generate_examples(dataset_paths, split_path, 'devIdxs'),
-          'test':
-              self._generate_examples(dataset_paths, split_path, 'testIdxs')
+          'train': self._generate_examples(
+              dataset_paths, split_path, 'trainIdxs'
+          ),
+          'validation': self._generate_examples(
+              dataset_paths, split_path, 'devIdxs'
+          ),
+          'test': self._generate_examples(
+              dataset_paths, split_path, 'testIdxs'
+          ),
       }
     return {
         'train': self._generate_examples(dataset_paths, split_path, 'train'),
-        'test': self._generate_examples(dataset_paths, split_path, 'test')
+        'test': self._generate_examples(dataset_paths, split_path, 'test'),
     }
 
   def _generate_examples(self, dataset_paths, split_path, split_id):
@@ -322,7 +376,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             sample = samples[idx]
             yield idx, {
                 _QUESTION: sample[_QUESTION_FIELD],
-                _QUERY: sample[_QUERY_FIELD]
+                _QUERY: sample[_QUERY_FIELD],
             }
     else:
       with epath.Path(split_path).open() as sf:

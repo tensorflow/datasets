@@ -21,10 +21,11 @@ import tensorflow_datasets.public_api as tfds
 
 class Imagenet2012MultilabelTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for imagenet2012_multilabel dataset."""
+
   DATASET_CLASS = imagenet2012_multilabel_dataset_builder.Builder
   SPLITS = {
       'validation': 3,
-      'imagenet_m': 3
+      'imagenet_m': 3,
   }  # Number of fake validation examples
   OVERLAPPING_SPLITS = ['imagenet_m']
   DL_DOWNLOAD_RESULT = 'human_accuracy_fixed.json'

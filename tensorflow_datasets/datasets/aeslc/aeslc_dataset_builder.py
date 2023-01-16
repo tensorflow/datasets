@@ -34,10 +34,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            _DOCUMENT: tfds.features.Text(),
-            _SUMMARY: tfds.features.Text()
-        }),
+        features=tfds.features.FeaturesDict(
+            {_DOCUMENT: tfds.features.Text(), _SUMMARY: tfds.features.Text()}
+        ),
         supervised_keys=(_DOCUMENT, _SUMMARY),
         homepage="https://github.com/ryanzhumich/AESLC",
     )

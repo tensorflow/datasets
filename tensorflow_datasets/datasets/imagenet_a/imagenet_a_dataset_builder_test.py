@@ -21,7 +21,6 @@ import tensorflow_datasets.public_api as tfds
 
 
 class ImagenetATest(tfds.testing.DatasetBuilderTestCase):
-
   DATASET_CLASS = imagenet_a_dataset_builder.Builder
   SPLITS = {
       'test': 10,  # Number of fake test examples.
@@ -45,11 +44,8 @@ class ImagenetATest(tfds.testing.DatasetBuilderTestCase):
     for features in dataset_utils.as_numpy(dataset['test']):
       label_frequncies.update([label_feature.int2str(features['label'])])
     self.assertEqual(
-        dict(label_frequncies), {
-            'n01580077': 2,
-            'n01616318': 3,
-            'n07697313': 5
-        })
+        dict(label_frequncies), {'n01580077': 2, 'n01616318': 3, 'n07697313': 5}
+    )
 
 
 if __name__ == '__main__':

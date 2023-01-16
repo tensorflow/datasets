@@ -32,7 +32,56 @@ DESCRIPTOR = _descriptor.FileDescriptor(
     package='tensorflow_datasets',
     syntax='proto3',
     serialized_options=b'\370\001\001',
-    serialized_pb=b'\n\rfeature.proto\x12\x13tensorflow_datasets\"\xa0\x01\n\x0c\x46\x65\x61turesDict\x12\x41\n\x08\x66\x65\x61tures\x18\x01 \x03(\x0b\x32/.tensorflow_datasets.FeaturesDict.FeaturesEntry\x1aM\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12+\n\x05value\x18\x02 \x01(\x0b\x32\x1c.tensorflow_datasets.Feature:\x02\x38\x01\"\xee\x05\n\x07\x46\x65\x61ture\x12\x19\n\x11python_class_name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x0e \x01(\t\x12\x13\n\x0bvalue_range\x18\x0f \x01(\t\x12\x38\n\x0cjson_feature\x18\x02 \x01(\x0b\x32 .tensorflow_datasets.JsonFeatureH\x00\x12:\n\rfeatures_dict\x18\x03 \x01(\x0b\x32!.tensorflow_datasets.FeaturesDictH\x00\x12\x34\n\x06tensor\x18\x04 \x01(\x0b\x32\".tensorflow_datasets.TensorFeatureH\x00\x12\x36\n\x0b\x63lass_label\x18\x05 \x01(\x0b\x32\x1f.tensorflow_datasets.ClassLabelH\x00\x12\x32\n\x05image\x18\x06 \x01(\x0b\x32!.tensorflow_datasets.ImageFeatureH\x00\x12\x32\n\x05video\x18\x07 \x01(\x0b\x32!.tensorflow_datasets.VideoFeatureH\x00\x12\x32\n\x05\x61udio\x18\x08 \x01(\x0b\x32!.tensorflow_datasets.AudioFeatureH\x00\x12?\n\x0c\x62ounding_box\x18\t \x01(\x0b\x32\'.tensorflow_datasets.BoundingBoxFeatureH\x00\x12\x30\n\x04text\x18\n \x01(\x0b\x32 .tensorflow_datasets.TextFeatureH\x00\x12>\n\x0btranslation\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.TranslationFeatureH\x00\x12\x31\n\x08sequence\x18\x0c \x01(\x0b\x32\x1d.tensorflow_datasets.SequenceH\x00\x12-\n\x06scalar\x18\r \x01(\x0b\x32\x1b.tensorflow_datasets.ScalarH\x00\x42\t\n\x07\x63ontent\"\x1b\n\x0bJsonFeature\x12\x0c\n\x04json\x18\x01 \x01(\t\"\x1b\n\x05Shape\x12\x12\n\ndimensions\x18\x01 \x03(\x03\"\x17\n\x06Scalar\x12\r\n\x05\x64type\x18\x01 \x01(\t\"[\n\rTensorFeature\x12)\n\x05shape\x18\x01 \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02 \x01(\t\x12\x10\n\x08\x65ncoding\x18\x03 \x01(\t\"!\n\nClassLabel\x12\x13\n\x0bnum_classes\x18\x01 \x01(\x03\"\xa7\x01\n\x0cImageFeature\x12)\n\x05shape\x18\x01 \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02 \x01(\t\x12\x17\n\x0f\x65ncoding_format\x18\x03 \x01(\t\x12\x14\n\x0cuse_colormap\x18\x04 \x01(\x08\x12.\n\x05label\x18\x05 \x01(\x0b\x32\x1f.tensorflow_datasets.ClassLabel\"\x92\x01\n\x0cVideoFeature\x12)\n\x05shape\x18\x01 \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02 \x01(\t\x12\x17\n\x0f\x65ncoding_format\x18\x03 \x01(\t\x12\x14\n\x0cuse_colormap\x18\x04 \x01(\x08\x12\x19\n\x11\x66\x66mpeg_extra_args\x18\x05 \x03(\t\"\x84\x01\n\x0c\x41udioFeature\x12)\n\x05shape\x18\x01 \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02 \x01(\t\x12\x13\n\x0b\x66ile_format\x18\x03 \x01(\t\x12\x13\n\x0bsample_rate\x18\x04 \x01(\x03\x12\x10\n\x08\x65ncoding\x18\x05 \x01(\t\"N\n\x12\x42oundingBoxFeature\x12)\n\x05shape\x18\x01 \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02 \x01(\t\"\r\n\x0bTextFeature\"O\n\x12TranslationFeature\x12\x11\n\tlanguages\x18\x01 \x03(\t\x12&\n\x1evariable_languages_per_example\x18\x02 \x01(\x08\"I\n\x08Sequence\x12-\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0b\x32\x1c.tensorflow_datasets.Feature\x12\x0e\n\x06length\x18\x02 \x01(\x03\x42\x03\xf8\x01\x01\x62\x06proto3'
+    serialized_pb=(
+        b'\n\rfeature.proto\x12\x13tensorflow_datasets"\xa0\x01\n\x0c\x46\x65\x61turesDict\x12\x41\n\x08\x66\x65\x61tures\x18\x01'
+        b' \x03(\x0b\x32/.tensorflow_datasets.FeaturesDict.FeaturesEntry\x1aM\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01'
+        b' \x01(\t\x12+\n\x05value\x18\x02'
+        b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature:\x02\x38\x01"\xee\x05\n\x07\x46\x65\x61ture\x12\x19\n\x11python_class_name\x18\x01'
+        b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x0e'
+        b' \x01(\t\x12\x13\n\x0bvalue_range\x18\x0f'
+        b' \x01(\t\x12\x38\n\x0cjson_feature\x18\x02 \x01(\x0b\x32'
+        b' .tensorflow_datasets.JsonFeatureH\x00\x12:\n\rfeatures_dict\x18\x03'
+        b' \x01(\x0b\x32!.tensorflow_datasets.FeaturesDictH\x00\x12\x34\n\x06tensor\x18\x04'
+        b' \x01(\x0b\x32".tensorflow_datasets.TensorFeatureH\x00\x12\x36\n\x0b\x63lass_label\x18\x05'
+        b' \x01(\x0b\x32\x1f.tensorflow_datasets.ClassLabelH\x00\x12\x32\n\x05image\x18\x06'
+        b' \x01(\x0b\x32!.tensorflow_datasets.ImageFeatureH\x00\x12\x32\n\x05video\x18\x07'
+        b' \x01(\x0b\x32!.tensorflow_datasets.VideoFeatureH\x00\x12\x32\n\x05\x61udio\x18\x08'
+        b' \x01(\x0b\x32!.tensorflow_datasets.AudioFeatureH\x00\x12?\n\x0c\x62ounding_box\x18\t'
+        b" \x01(\x0b\x32'.tensorflow_datasets.BoundingBoxFeatureH\x00\x12\x30\n\x04text\x18\n"
+        b' \x01(\x0b\x32'
+        b' .tensorflow_datasets.TextFeatureH\x00\x12>\n\x0btranslation\x18\x0b'
+        b" \x01(\x0b\x32'.tensorflow_datasets.TranslationFeatureH\x00\x12\x31\n\x08sequence\x18\x0c"
+        b' \x01(\x0b\x32\x1d.tensorflow_datasets.SequenceH\x00\x12-\n\x06scalar\x18\r'
+        b' \x01(\x0b\x32\x1b.tensorflow_datasets.ScalarH\x00\x42\t\n\x07\x63ontent"\x1b\n\x0bJsonFeature\x12\x0c\n\x04json\x18\x01'
+        b' \x01(\t"\x1b\n\x05Shape\x12\x12\n\ndimensions\x18\x01'
+        b' \x03(\x03"\x17\n\x06Scalar\x12\r\n\x05\x64type\x18\x01'
+        b' \x01(\t"[\n\rTensorFeature\x12)\n\x05shape\x18\x01'
+        b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
+        b' \x01(\t\x12\x10\n\x08\x65ncoding\x18\x03'
+        b' \x01(\t"!\n\nClassLabel\x12\x13\n\x0bnum_classes\x18\x01'
+        b' \x01(\x03"\xa7\x01\n\x0cImageFeature\x12)\n\x05shape\x18\x01'
+        b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
+        b' \x01(\t\x12\x17\n\x0f\x65ncoding_format\x18\x03'
+        b' \x01(\t\x12\x14\n\x0cuse_colormap\x18\x04'
+        b' \x01(\x08\x12.\n\x05label\x18\x05'
+        b' \x01(\x0b\x32\x1f.tensorflow_datasets.ClassLabel"\x92\x01\n\x0cVideoFeature\x12)\n\x05shape\x18\x01'
+        b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
+        b' \x01(\t\x12\x17\n\x0f\x65ncoding_format\x18\x03'
+        b' \x01(\t\x12\x14\n\x0cuse_colormap\x18\x04'
+        b' \x01(\x08\x12\x19\n\x11\x66\x66mpeg_extra_args\x18\x05'
+        b' \x03(\t"\x84\x01\n\x0c\x41udioFeature\x12)\n\x05shape\x18\x01'
+        b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
+        b' \x01(\t\x12\x13\n\x0b\x66ile_format\x18\x03'
+        b' \x01(\t\x12\x13\n\x0bsample_rate\x18\x04'
+        b' \x01(\x03\x12\x10\n\x08\x65ncoding\x18\x05'
+        b' \x01(\t"N\n\x12\x42oundingBoxFeature\x12)\n\x05shape\x18\x01'
+        b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
+        b' \x01(\t"\r\n\x0bTextFeature"O\n\x12TranslationFeature\x12\x11\n\tlanguages\x18\x01'
+        b' \x03(\t\x12&\n\x1evariable_languages_per_example\x18\x02'
+        b' \x01(\x08"I\n\x08Sequence\x12-\n\x07\x66\x65\x61ture\x18\x01'
+        b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature\x12\x0e\n\x06length\x18\x02'
+        b' \x01(\x03\x42\x03\xf8\x01\x01\x62\x06proto3'
+    ),
 )
 
 _FEATURESDICT_FEATURESENTRY = _descriptor.Descriptor(
@@ -58,7 +107,8 @@ _FEATURESDICT_FEATURESENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='value',
             full_name='tensorflow_datasets.FeaturesDict.FeaturesEntry.value',
@@ -75,7 +125,8 @@ _FEATURESDICT_FEATURESENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -112,7 +163,8 @@ _FEATURESDICT = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[
@@ -151,7 +203,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='description',
             full_name='tensorflow_datasets.Feature.description',
@@ -168,7 +221,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='value_range',
             full_name='tensorflow_datasets.Feature.value_range',
@@ -185,7 +239,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='json_feature',
             full_name='tensorflow_datasets.Feature.json_feature',
@@ -202,7 +257,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='features_dict',
             full_name='tensorflow_datasets.Feature.features_dict',
@@ -219,7 +275,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='tensor',
             full_name='tensorflow_datasets.Feature.tensor',
@@ -236,7 +293,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='class_label',
             full_name='tensorflow_datasets.Feature.class_label',
@@ -253,7 +311,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='image',
             full_name='tensorflow_datasets.Feature.image',
@@ -270,7 +329,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='video',
             full_name='tensorflow_datasets.Feature.video',
@@ -287,7 +347,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='audio',
             full_name='tensorflow_datasets.Feature.audio',
@@ -304,7 +365,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='bounding_box',
             full_name='tensorflow_datasets.Feature.bounding_box',
@@ -321,7 +383,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='text',
             full_name='tensorflow_datasets.Feature.text',
@@ -338,7 +401,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='translation',
             full_name='tensorflow_datasets.Feature.translation',
@@ -355,7 +419,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='sequence',
             full_name='tensorflow_datasets.Feature.sequence',
@@ -372,7 +437,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='scalar',
             full_name='tensorflow_datasets.Feature.scalar',
@@ -389,7 +455,8 @@ _FEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -404,7 +471,8 @@ _FEATURE = _descriptor.Descriptor(
             full_name='tensorflow_datasets.Feature.content',
             index=0,
             containing_type=None,
-            fields=[]),
+            fields=[],
+        ),
     ],
     serialized_start=202,
     serialized_end=952,
@@ -433,7 +501,8 @@ _JSONFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -470,7 +539,8 @@ _SHAPE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -507,7 +577,8 @@ _SCALAR = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -544,7 +615,8 @@ _TENSORFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='dtype',
             full_name='tensorflow_datasets.TensorFeature.dtype',
@@ -561,7 +633,8 @@ _TENSORFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='encoding',
             full_name='tensorflow_datasets.TensorFeature.encoding',
@@ -578,7 +651,8 @@ _TENSORFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -615,7 +689,8 @@ _CLASSLABEL = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -652,7 +727,8 @@ _IMAGEFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='dtype',
             full_name='tensorflow_datasets.ImageFeature.dtype',
@@ -669,7 +745,8 @@ _IMAGEFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='encoding_format',
             full_name='tensorflow_datasets.ImageFeature.encoding_format',
@@ -686,7 +763,8 @@ _IMAGEFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='use_colormap',
             full_name='tensorflow_datasets.ImageFeature.use_colormap',
@@ -703,7 +781,8 @@ _IMAGEFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='label',
             full_name='tensorflow_datasets.ImageFeature.label',
@@ -720,7 +799,8 @@ _IMAGEFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -757,7 +837,8 @@ _VIDEOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='dtype',
             full_name='tensorflow_datasets.VideoFeature.dtype',
@@ -774,7 +855,8 @@ _VIDEOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='encoding_format',
             full_name='tensorflow_datasets.VideoFeature.encoding_format',
@@ -791,7 +873,8 @@ _VIDEOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='use_colormap',
             full_name='tensorflow_datasets.VideoFeature.use_colormap',
@@ -808,7 +891,8 @@ _VIDEOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='ffmpeg_extra_args',
             full_name='tensorflow_datasets.VideoFeature.ffmpeg_extra_args',
@@ -825,7 +909,8 @@ _VIDEOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -862,7 +947,8 @@ _AUDIOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='dtype',
             full_name='tensorflow_datasets.AudioFeature.dtype',
@@ -879,7 +965,8 @@ _AUDIOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='file_format',
             full_name='tensorflow_datasets.AudioFeature.file_format',
@@ -896,7 +983,8 @@ _AUDIOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='sample_rate',
             full_name='tensorflow_datasets.AudioFeature.sample_rate',
@@ -913,7 +1001,8 @@ _AUDIOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='encoding',
             full_name='tensorflow_datasets.AudioFeature.encoding',
@@ -930,7 +1019,8 @@ _AUDIOFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -967,7 +1057,8 @@ _BOUNDINGBOXFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='dtype',
             full_name='tensorflow_datasets.BoundingBoxFeature.dtype',
@@ -984,7 +1075,8 @@ _BOUNDINGBOXFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -1040,7 +1132,8 @@ _TRANSLATIONFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='variable_languages_per_example',
             full_name='tensorflow_datasets.TranslationFeature.variable_languages_per_example',
@@ -1057,7 +1150,8 @@ _TRANSLATIONFEATURE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -1094,7 +1188,8 @@ _SEQUENCE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='length',
             full_name='tensorflow_datasets.Sequence.length',
@@ -1111,7 +1206,8 @@ _SEQUENCE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -1127,8 +1223,9 @@ _SEQUENCE = _descriptor.Descriptor(
 
 _FEATURESDICT_FEATURESENTRY.fields_by_name['value'].message_type = _FEATURE
 _FEATURESDICT_FEATURESENTRY.containing_type = _FEATURESDICT
-_FEATURESDICT.fields_by_name[
-    'features'].message_type = _FEATURESDICT_FEATURESENTRY
+_FEATURESDICT.fields_by_name['features'].message_type = (
+    _FEATURESDICT_FEATURESENTRY
+)
 _FEATURE.fields_by_name['json_feature'].message_type = _JSONFEATURE
 _FEATURE.fields_by_name['features_dict'].message_type = _FEATURESDICT
 _FEATURE.fields_by_name['tensor'].message_type = _TENSORFEATURE
@@ -1142,53 +1239,77 @@ _FEATURE.fields_by_name['translation'].message_type = _TRANSLATIONFEATURE
 _FEATURE.fields_by_name['sequence'].message_type = _SEQUENCE
 _FEATURE.fields_by_name['scalar'].message_type = _SCALAR
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['json_feature'])
-_FEATURE.fields_by_name[
-    'json_feature'].containing_oneof = _FEATURE.oneofs_by_name['content']
+    _FEATURE.fields_by_name['json_feature']
+)
+_FEATURE.fields_by_name['json_feature'].containing_oneof = (
+    _FEATURE.oneofs_by_name['content']
+)
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['features_dict'])
-_FEATURE.fields_by_name[
-    'features_dict'].containing_oneof = _FEATURE.oneofs_by_name['content']
+    _FEATURE.fields_by_name['features_dict']
+)
+_FEATURE.fields_by_name['features_dict'].containing_oneof = (
+    _FEATURE.oneofs_by_name['content']
+)
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['tensor'])
+    _FEATURE.fields_by_name['tensor']
+)
 _FEATURE.fields_by_name['tensor'].containing_oneof = _FEATURE.oneofs_by_name[
-    'content']
+    'content'
+]
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['class_label'])
-_FEATURE.fields_by_name[
-    'class_label'].containing_oneof = _FEATURE.oneofs_by_name['content']
+    _FEATURE.fields_by_name['class_label']
+)
+_FEATURE.fields_by_name['class_label'].containing_oneof = (
+    _FEATURE.oneofs_by_name['content']
+)
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['image'])
+    _FEATURE.fields_by_name['image']
+)
 _FEATURE.fields_by_name['image'].containing_oneof = _FEATURE.oneofs_by_name[
-    'content']
+    'content'
+]
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['video'])
+    _FEATURE.fields_by_name['video']
+)
 _FEATURE.fields_by_name['video'].containing_oneof = _FEATURE.oneofs_by_name[
-    'content']
+    'content'
+]
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['audio'])
+    _FEATURE.fields_by_name['audio']
+)
 _FEATURE.fields_by_name['audio'].containing_oneof = _FEATURE.oneofs_by_name[
-    'content']
+    'content'
+]
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['bounding_box'])
-_FEATURE.fields_by_name[
-    'bounding_box'].containing_oneof = _FEATURE.oneofs_by_name['content']
+    _FEATURE.fields_by_name['bounding_box']
+)
+_FEATURE.fields_by_name['bounding_box'].containing_oneof = (
+    _FEATURE.oneofs_by_name['content']
+)
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['text'])
+    _FEATURE.fields_by_name['text']
+)
 _FEATURE.fields_by_name['text'].containing_oneof = _FEATURE.oneofs_by_name[
-    'content']
+    'content'
+]
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['translation'])
-_FEATURE.fields_by_name[
-    'translation'].containing_oneof = _FEATURE.oneofs_by_name['content']
+    _FEATURE.fields_by_name['translation']
+)
+_FEATURE.fields_by_name['translation'].containing_oneof = (
+    _FEATURE.oneofs_by_name['content']
+)
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['sequence'])
+    _FEATURE.fields_by_name['sequence']
+)
 _FEATURE.fields_by_name['sequence'].containing_oneof = _FEATURE.oneofs_by_name[
-    'content']
+    'content'
+]
 _FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['scalar'])
+    _FEATURE.fields_by_name['scalar']
+)
 _FEATURE.fields_by_name['scalar'].containing_oneof = _FEATURE.oneofs_by_name[
-    'content']
+    'content'
+]
 _TENSORFEATURE.fields_by_name['shape'].message_type = _SHAPE
 _IMAGEFEATURE.fields_by_name['shape'].message_type = _SHAPE
 _IMAGEFEATURE.fields_by_name['label'].message_type = _CLASSLABEL
@@ -1216,21 +1337,20 @@ FeaturesDict = _reflection.GeneratedProtocolMessageType(
     'FeaturesDict',
     (_message.Message,),
     {
-        'FeaturesEntry':
-            _reflection.GeneratedProtocolMessageType(
-                'FeaturesEntry',
-                (_message.Message,),
-                {
-                    'DESCRIPTOR': _FEATURESDICT_FEATURESENTRY,
-                    '__module__': 'feature_pb2'
-                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.FeaturesDict.FeaturesEntry)
-                }),
-        'DESCRIPTOR':
-            _FEATURESDICT,
-        '__module__':
-            'feature_pb2'
+        'FeaturesEntry': _reflection.GeneratedProtocolMessageType(
+            'FeaturesEntry',
+            (_message.Message,),
+            {
+                'DESCRIPTOR': _FEATURESDICT_FEATURESENTRY,
+                '__module__': 'feature_pb2'
+                # @@protoc_insertion_point(class_scope:tensorflow_datasets.FeaturesDict.FeaturesEntry)
+            },
+        ),
+        'DESCRIPTOR': _FEATURESDICT,
+        '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.FeaturesDict)
-    })
+    },
+)
 _sym_db.RegisterMessage(FeaturesDict)
 _sym_db.RegisterMessage(FeaturesDict.FeaturesEntry)
 
@@ -1241,7 +1361,8 @@ Feature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _FEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.Feature)
-    })
+    },
+)
 _sym_db.RegisterMessage(Feature)
 
 JsonFeature = _reflection.GeneratedProtocolMessageType(
@@ -1251,7 +1372,8 @@ JsonFeature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _JSONFEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.JsonFeature)
-    })
+    },
+)
 _sym_db.RegisterMessage(JsonFeature)
 
 Shape = _reflection.GeneratedProtocolMessageType(
@@ -1261,7 +1383,8 @@ Shape = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _SHAPE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.Shape)
-    })
+    },
+)
 _sym_db.RegisterMessage(Shape)
 
 Scalar = _reflection.GeneratedProtocolMessageType(
@@ -1271,7 +1394,8 @@ Scalar = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _SCALAR,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.Scalar)
-    })
+    },
+)
 _sym_db.RegisterMessage(Scalar)
 
 TensorFeature = _reflection.GeneratedProtocolMessageType(
@@ -1281,7 +1405,8 @@ TensorFeature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _TENSORFEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.TensorFeature)
-    })
+    },
+)
 _sym_db.RegisterMessage(TensorFeature)
 
 ClassLabel = _reflection.GeneratedProtocolMessageType(
@@ -1291,7 +1416,8 @@ ClassLabel = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _CLASSLABEL,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.ClassLabel)
-    })
+    },
+)
 _sym_db.RegisterMessage(ClassLabel)
 
 ImageFeature = _reflection.GeneratedProtocolMessageType(
@@ -1301,7 +1427,8 @@ ImageFeature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _IMAGEFEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.ImageFeature)
-    })
+    },
+)
 _sym_db.RegisterMessage(ImageFeature)
 
 VideoFeature = _reflection.GeneratedProtocolMessageType(
@@ -1311,7 +1438,8 @@ VideoFeature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _VIDEOFEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.VideoFeature)
-    })
+    },
+)
 _sym_db.RegisterMessage(VideoFeature)
 
 AudioFeature = _reflection.GeneratedProtocolMessageType(
@@ -1321,7 +1449,8 @@ AudioFeature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _AUDIOFEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.AudioFeature)
-    })
+    },
+)
 _sym_db.RegisterMessage(AudioFeature)
 
 BoundingBoxFeature = _reflection.GeneratedProtocolMessageType(
@@ -1331,7 +1460,8 @@ BoundingBoxFeature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _BOUNDINGBOXFEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.BoundingBoxFeature)
-    })
+    },
+)
 _sym_db.RegisterMessage(BoundingBoxFeature)
 
 TextFeature = _reflection.GeneratedProtocolMessageType(
@@ -1341,7 +1471,8 @@ TextFeature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _TEXTFEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.TextFeature)
-    })
+    },
+)
 _sym_db.RegisterMessage(TextFeature)
 
 TranslationFeature = _reflection.GeneratedProtocolMessageType(
@@ -1351,7 +1482,8 @@ TranslationFeature = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _TRANSLATIONFEATURE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.TranslationFeature)
-    })
+    },
+)
 _sym_db.RegisterMessage(TranslationFeature)
 
 Sequence = _reflection.GeneratedProtocolMessageType(
@@ -1361,7 +1493,8 @@ Sequence = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _SEQUENCE,
         '__module__': 'feature_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.Sequence)
-    })
+    },
+)
 _sym_db.RegisterMessage(Sequence)
 
 DESCRIPTOR._options = None

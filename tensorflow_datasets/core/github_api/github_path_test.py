@@ -36,7 +36,8 @@ non_hermetic_test = pytest.mark.skipif(
 
 _original_query_github = github_path.GithubApi.query
 
-_AUTHOR_EXPECTED_CONTENT = textwrap.dedent("""\
+_AUTHOR_EXPECTED_CONTENT = textwrap.dedent(
+    """\
     # This is the list of TensorFlow Datasets authors for copyright purposes.
     #
     # This does not necessarily list everyone who has contributed code, since in
@@ -44,7 +45,8 @@ _AUTHOR_EXPECTED_CONTENT = textwrap.dedent("""\
     # of contributors, see the revision history in source control.
 
     Google Inc.
-    """)
+    """
+)
 
 # Note: assert_no_api_call is globally applied on all tests (in conftest.py)
 
@@ -52,8 +54,9 @@ _AUTHOR_EXPECTED_CONTENT = textwrap.dedent("""\
 @contextlib.contextmanager
 def enable_api_call():
   """Contextmanager which locally re-enable API calls."""
-  with mock.patch.object(github_path.GithubApi, 'query',
-                         _original_query_github):
+  with mock.patch.object(
+      github_path.GithubApi, 'query', _original_query_github
+  ):
     yield
 
 
@@ -94,12 +97,14 @@ def test_invalid_github_path():
     _ = github_path.GithubPath('github://tensorflow/tree/master/docs/README.md')
 
   # `blob` isn't accepted for consistency between paths.
-  with pytest.raises(ValueError, match='/blob/` isn\'t accepted.'):
+  with pytest.raises(ValueError, match="/blob/` isn't accepted."):
     _ = github_path.GithubPath(
-        'github://tensorflow/datasets/blob/master/docs/README.md')
+        'github://tensorflow/datasets/blob/master/docs/README.md'
+    )
 
   p = github_path.GithubPath(
-      'github://tensorflow/datasets/tree/master/docs/README.md')
+      'github://tensorflow/datasets/tree/master/docs/README.md'
+  )
   p = p.parent  # /docs
   _ = p._metadata
   p = p.parent  # /
@@ -123,7 +128,9 @@ def test_github_path_purepath():
 def test_github_path_as_url():
   p = github_path.GithubPath.from_repo('tensorflow/datasets', 'v3.1.0')
   p /= 'README.md'
-  expected = 'https://raw.githubusercontent.com/tensorflow/datasets/v3.1.0/README.md'
+  expected = (
+      'https://raw.githubusercontent.com/tensorflow/datasets/v3.1.0/README.md'
+  )
   assert p.as_raw_url() == expected
 
 
@@ -276,7 +283,8 @@ def test_get_tree():
 
     def gh_path(file: str) -> github_path.GithubPath:
       return github_path.GithubPath(
-          f'github://tensorflow/datasets/tree/v9.9.9/{file}')
+          f'github://tensorflow/datasets/tree/v9.9.9/{file}'
+      )
 
     def assert_is_file(file):
       assert file.is_file()

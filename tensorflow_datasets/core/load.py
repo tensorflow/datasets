@@ -57,11 +57,13 @@ TreeDict = type_utils.TreeDict
 PredicateFn = Callable[[Type[dataset_builder.DatasetBuilder]], bool]
 
 # Regex matching 'dataset/config/1.3.0'
-_FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
-    ds_name=r'\w+',
-    config_name=r'[\w\-\.]+',
-    version=r'[0-9]+\.[0-9]+\.[0-9]+',
-))
+_FULL_NAME_REG = re.compile(
+    r'^{ds_name}/({config_name}/)?{version}$'.format(
+        ds_name=r'\w+',
+        config_name=r'[\w\-\.]+',
+        version=r'[0-9]+\.[0-9]+\.[0-9]+',
+    )
+)
 
 
 @tfds_logging.list_builders()
@@ -101,7 +103,8 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   if kwargs:
     raise ValueError(
         '`builder_cls` only accept the `dataset_name` without config, '
-        f"version or arguments. Got: name='{name}', kwargs={kwargs}")
+        f"version or arguments. Got: name='{name}', kwargs={kwargs}"
+    )
 
   if ds_name.namespace:
     # `namespace:dataset` are loaded from the community register
@@ -109,7 +112,8 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
       return community.community_register.builder_cls(ds_name)
     else:
       raise ValueError(
-          f'Cannot load {ds_name} when community datasets are disabled')
+          f'Cannot load {ds_name} when community datasets are disabled'
+      )
   else:
     try:
       cls = registered.imported_builder_cls(str(ds_name))
@@ -163,23 +167,26 @@ def builder(
   #     DatasetName('kaggle:my_ds'), {'version': '1.0.0', 'config': 'conf0'}
   # )
   name, builder_kwargs = naming.parse_builder_name_kwargs(
-      name, **builder_kwargs)
+      name, **builder_kwargs
+  )
 
   # `try_gcs` currently only supports non-community datasets
-  if (try_gcs and not name.namespace and
-      gcs_utils.is_dataset_on_gcs(str(name))):
+  if try_gcs and not name.namespace and gcs_utils.is_dataset_on_gcs(str(name)):
     data_dir = builder_kwargs.get('data_dir')
     if data_dir:
       raise ValueError(
           f'Cannot have both `try_gcs=True` and `data_dir={data_dir}` '
-          'explicitly set')
+          'explicitly set'
+      )
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
   if name.namespace:
     if name.namespace == 'huggingface':
       return huggingface_dataset_builder.builder(
           name=name.name, **builder_kwargs)
-    if (visibility.DatasetType.COMMUNITY_PUBLIC.is_available() and
-        community.community_register.has_namespace(name.namespace)):
+    if (
+        visibility.DatasetType.COMMUNITY_PUBLIC.is_available()
+        and community.community_register.has_namespace(name.namespace)
+    ):
       return community.community_register.builder(name=name, **builder_kwargs)
 
   # First check whether we can find the corresponding dataset builder code
@@ -219,9 +226,11 @@ def _try_load_from_files_first(
     return True  # Code does not exist
   elif 'version' in builder_kwargs:
     return True  # Version explicitly given (unlocks backward compatibility)
-  elif ('config' in builder_kwargs and
-        isinstance(builder_kwargs['config'], str) and
-        builder_kwargs['config'] not in cls.builder_configs):
+  elif (
+      'config' in builder_kwargs
+      and isinstance(builder_kwargs['config'], str)
+      and builder_kwargs['config'] not in cls.builder_configs
+  ):
     return True  # Requested config isn't found in the code
   else:
     return False  # Code exists and no version is given, so use code.
@@ -240,6 +249,7 @@ class DatasetCollectionLoader:
       requested dataset collection.
     collection_name: the name of the DatasetCollection to load.
   """
+
   collection: dataset_collection_builder.DatasetCollection
   requested_version: Optional[str] = None
   loader_kwargs: Optional[Dict[str, Any]] = None
@@ -256,7 +266,7 @@ class DatasetCollectionLoader:
     msg = [
         f'Dataset collection: {self.collection.info.name}',
         f'Version: {self.requested_version}',
-        f'Description: {self.collection.info.description}'
+        f'Description: {self.collection.info.description}',
     ]
     if self.collection.info.citation:
       msg.append('Citation:')
@@ -273,7 +283,8 @@ class DatasetCollectionLoader:
     _, info = load(
         dataset_reference.tfds_name(),
         with_info=True,
-        data_dir=dataset_reference.data_dir)
+        data_dir=dataset_reference.data_dir,
+    )
     return info
 
   def set_loader_kwargs(self, loader_kwargs: Dict[str, Any]):
@@ -330,8 +341,10 @@ class DatasetCollectionLoader:
 
     # Add the data dir from the reference to loader_kwargs if it is defined and
     # not overridden in loader_kwargs.
-    if (dataset_reference.data_dir is not None and
-        'data_dir' not in loader_kwargs):
+    if (
+        dataset_reference.data_dir is not None
+        and 'data_dir' not in loader_kwargs
+    ):
       loader_kwargs['data_dir'] = dataset_reference.data_dir
 
     load_output = load(dataset_reference.tfds_name(), **loader_kwargs)
@@ -356,7 +369,8 @@ class DatasetCollectionLoader:
           )
     else:
       raise RuntimeError(
-          f'Unsupported return type {type(load_output)} of `load` function.')
+          f'Unsupported return type {type(load_output)} of `load` function.'
+      )
     return loaded_datasets
 
   def load_datasets(
@@ -385,7 +399,8 @@ class DatasetCollectionLoader:
       raise ValueError('At least one dataset should be specified.')
     return {
         dataset_name: self.load_dataset(
-            dataset_name, split=split, loader_kwargs=loader_kwargs)
+            dataset_name, split=split, loader_kwargs=loader_kwargs
+        )
         for dataset_name in datasets
     }
 
@@ -407,7 +422,8 @@ class DatasetCollectionLoader:
       tf.data.Dataset} for each desired datasets.
     """
     return self.load_datasets(
-        datasets=self.datasets.keys(), split=split, loader_kwargs=loader_kwargs)
+        datasets=self.datasets.keys(), split=split, loader_kwargs=loader_kwargs
+    )
 
 
 @tfds_logging.dataset_collection()
@@ -434,13 +450,15 @@ def dataset_collection(
     available_collections = registered.list_imported_dataset_collections()
     raise registered.DatasetCollectionNotFoundError(
         f'Dataset collection {name} not found. '
-        f'Available dataset collections: {available_collections}')
+        f'Available dataset collections: {available_collections}'
+    )
 
   dataset_collection_cls = registered.imported_dataset_collection_cls(
-      parsed_name.name)
+      parsed_name.name
+  )
   dataset_collection_cls = typing.cast(
-      Type[dataset_collection_builder.DatasetCollection],
-      dataset_collection_cls)
+      Type[dataset_collection_builder.DatasetCollection], dataset_collection_cls
+  )
   collection = dataset_collection_cls()
 
   requested_version = None
@@ -450,7 +468,8 @@ def dataset_collection(
   return DatasetCollectionLoader(
       collection,
       requested_version=requested_version,
-      loader_kwargs=loader_kwargs)
+      loader_kwargs=loader_kwargs,
+  )
 
 
 
@@ -646,7 +665,8 @@ def _iter_single_full_names(
     for v in _get_all_versions(
         builder_cls.VERSION,
         builder_cls.SUPPORTED_VERSIONS,
-        current_version_only=current_version_only):
+        current_version_only=current_version_only,
+    ):
       yield posixpath.join(builder_name, v)
 
 
@@ -684,7 +704,8 @@ def single_full_names(
           builder_name,
           builder_cls(builder_name),
           current_version_only=current_version_only,  # pytype: disable=wrong-arg-types
-      ))
+      )
+  )
 
 
 def is_full_name(full_name: str) -> bool:
@@ -699,20 +720,24 @@ def is_full_name(full_name: str) -> bool:
   return bool(_FULL_NAME_REG.match(full_name))
 
 
-def _add_list_builders_context(name: naming.DatasetName,) -> None:
+def _add_list_builders_context(
+    name: naming.DatasetName,
+) -> None:
   """Adds the list of available builders to the DatasetNotFoundError."""
   # Should optimize to only filter through given namespace
   all_datasets = list_builders(with_community_datasets=False)
   all_datasets_str = '\n\t- '.join([''] + all_datasets)
   error_string = f'Available datasets:{all_datasets_str}\n'
-  error_string += textwrap.dedent("""
+  error_string += textwrap.dedent(
+      """
       Check that:
           - if dataset was added recently, it may only be available
             in `tfds-nightly`
           - the dataset name is spelled correctly
           - dataset class defines all base class abstract methods
           - the module defining the dataset class is imported
-      """)
+      """
+  )
 
   # Add close matches
   close_matches = difflib.get_close_matches(str(name), all_datasets, n=1)

@@ -47,6 +47,7 @@ class DatasetConfig(tfds.core.BuilderConfig):
     supervised_keys: Supervised keys to be used is `as_supervised=True` in
       `builder.as_dataset`. See `tfds.core.DatasetInfo` for details.
   """
+
   description: str = ''
   overall_description: str = ''
   homepage: str = ''
@@ -56,15 +57,17 @@ class DatasetConfig(tfds.core.BuilderConfig):
   reward_info: Optional[tfds.features.FeatureConnector] = None
   discount_info: Optional[tfds.features.FeatureConnector] = None
   step_metadata_info: Optional[Dict[str, tfds.features.FeatureConnector]] = None
-  episode_metadata_info: Optional[Dict[str,
-                                       tfds.features.FeatureConnector]] = None
+  episode_metadata_info: Optional[Dict[str, tfds.features.FeatureConnector]] = (
+      None
+  )
   supervised_keys: Optional[Tuple[Any]] = None
 
 
 def build_info(
     ds_config: DatasetConfig,
     builder: Union[tfds.core.DatasetBuilder, tfds.core.DatasetIdentity],
-    ds_metadata: Optional[Dict[Any, Any]] = None) -> tfds.core.DatasetInfo:
+    ds_metadata: Optional[Dict[Any, Any]] = None,
+) -> tfds.core.DatasetInfo:
   """Returns the dataset metadata."""
   step_metadata = ds_config.step_metadata_info
   if step_metadata is None:
@@ -143,7 +146,8 @@ def generate_beam_examples(path):
 
 
 def _generate_examples_from_log_path(
-    log_path: str) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
+    log_path: str,
+) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
   """Yields examples from a directory containing log files.
 
   Args:

@@ -50,7 +50,9 @@ from each speaker belongs to exactly one split.
 
 _HOMEPAGE = 'https://github.com/CheyneyComputerScience/CREMA-D'
 
-_CHECKSUMS_URL = 'https://storage.googleapis.com/tfds-data/manual_checksums/crema_d.txt'
+_CHECKSUMS_URL = (
+    'https://storage.googleapis.com/tfds-data/manual_checksums/crema_d.txt'
+)
 SUMMARY_TABLE_URL = 'https://raw.githubusercontent.com/CheyneyComputerScience/CREMA-D/master/processedResults/summaryTable.csv'
 WAV_DATA_URL = 'https://media.githubusercontent.com/media/CheyneyComputerScience/CREMA-D/master/AudioWAV/'
 LABELS = ['NEU', 'HAP', 'SAD', 'ANG', 'FEA', 'DIS']
@@ -70,11 +72,14 @@ def _compute_split_boundaries(split_probs, n_items):
     [('train', 0, 60), ('dev', 60, 80), ('test', 80, 100)].
   """
   if len(split_probs) > n_items:
-    raise ValueError('Not enough items for the splits. There are {splits} '
-                     'splits while there are only {items} items'.format(
-                         splits=len(split_probs), items=n_items))
+    raise ValueError(
+        'Not enough items for the splits. There are {splits} '
+        'splits while there are only {items} items'.format(
+            splits=len(split_probs), items=n_items
+        )
+    )
   total_probs = sum(p for name, p in split_probs)
-  if abs(1 - total_probs) > 1E-8:
+  if abs(1 - total_probs) > 1e-8:
     raise ValueError('Probs should sum up to 1. probs={}'.format(split_probs))
   split_boundaries = []
   sum_p = 0.0
@@ -84,8 +89,11 @@ def _compute_split_boundaries(split_probs, n_items):
     split_boundaries.append((name, int(prev * n_items), int(sum_p * n_items)))
 
   # Guard against rounding errors.
-  split_boundaries[-1] = (split_boundaries[-1][0], split_boundaries[-1][1],
-                          n_items)
+  split_boundaries[-1] = (
+      split_boundaries[-1][0],
+      split_boundaries[-1][1],
+      n_items,
+  )
 
   return split_boundaries
 
@@ -136,7 +144,7 @@ class CremaD(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='wav', sample_rate=16000),
             'label': tfds.features.ClassLabel(names=list(LABELS)),
-            'speaker_id': np.str_
+            'speaker_id': np.str_,
         }),
         supervised_keys=('audio', 'label'),
         homepage=_HOMEPAGE,
@@ -152,8 +160,11 @@ class CremaD(tfds.core.GeneratorBasedBuilder):
     wav_names = []
     # These are file names which do do not exist in the github
     bad_files = set([
-        'FileName', '1040_ITH_SAD_XX', '1006_TIE_NEU_XX', '1013_WSI_DIS_XX',
-        '1017_IWW_FEA_XX'
+        'FileName',
+        '1040_ITH_SAD_XX',
+        '1006_TIE_NEU_XX',
+        '1013_WSI_DIS_XX',
+        '1017_IWW_FEA_XX',
     ])
     with tf.io.gfile.GFile(csv_path['summary_table']) as f:
       for line in f:

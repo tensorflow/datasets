@@ -18,7 +18,7 @@
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
-_URL = ("https://storage.googleapis.com/3d-shapes/3dshapes.h5")
+_URL = "https://storage.googleapis.com/3d-shapes/3dshapes.h5"
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -32,32 +32,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=(64, 64, 3)),
-            "label_floor_hue":
-                tfds.features.ClassLabel(num_classes=10),
-            "label_wall_hue":
-                tfds.features.ClassLabel(num_classes=10),
-            "label_object_hue":
-                tfds.features.ClassLabel(num_classes=10),
-            "label_scale":
-                tfds.features.ClassLabel(num_classes=8),
-            "label_shape":
-                tfds.features.ClassLabel(num_classes=4),
-            "label_orientation":
-                tfds.features.ClassLabel(num_classes=15),
-            "value_floor_hue":
-                tfds.features.Tensor(shape=[], dtype=np.float32),
-            "value_wall_hue":
-                tfds.features.Tensor(shape=[], dtype=np.float32),
-            "value_object_hue":
-                tfds.features.Tensor(shape=[], dtype=np.float32),
-            "value_scale":
-                tfds.features.Tensor(shape=[], dtype=np.float32),
-            "value_shape":
-                tfds.features.Tensor(shape=[], dtype=np.float32),
-            "value_orientation":
-                tfds.features.Tensor(shape=[], dtype=np.float32),
+            "image": tfds.features.Image(shape=(64, 64, 3)),
+            "label_floor_hue": tfds.features.ClassLabel(num_classes=10),
+            "label_wall_hue": tfds.features.ClassLabel(num_classes=10),
+            "label_object_hue": tfds.features.ClassLabel(num_classes=10),
+            "label_scale": tfds.features.ClassLabel(num_classes=8),
+            "label_shape": tfds.features.ClassLabel(num_classes=4),
+            "label_orientation": tfds.features.ClassLabel(num_classes=15),
+            "value_floor_hue": tfds.features.Tensor(shape=[], dtype=np.float32),
+            "value_wall_hue": tfds.features.Tensor(shape=[], dtype=np.float32),
+            "value_object_hue": tfds.features.Tensor(
+                shape=[], dtype=np.float32
+            ),
+            "value_scale": tfds.features.Tensor(shape=[], dtype=np.float32),
+            "value_shape": tfds.features.Tensor(shape=[], dtype=np.float32),
+            "value_orientation": tfds.features.Tensor(
+                shape=[], dtype=np.float32
+            ),
         }),
         homepage="https://github.com/deepmind/3d-shapes",
     )
@@ -68,7 +59,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)
+        ),
     ]
 
   def _generate_examples(self, filepath):
@@ -94,8 +86,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     for i in range(values_array.shape[1]):
       labels_array[:, i] = _discretize(values_array[:, i])  # pylint: disable=unsupported-assignment-operation
 
-    for i, (image, labels,
-            values) in enumerate(zip(image_array, labels_array, values_array)):
+    for i, (image, labels, values) in enumerate(
+        zip(image_array, labels_array, values_array)
+    ):
       record = {
           "image": image,
           "label_floor_hue": labels[0],

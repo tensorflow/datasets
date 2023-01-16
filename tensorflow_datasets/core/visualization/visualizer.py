@@ -52,8 +52,12 @@ class Visualizer(object, metaclass=abc.ABCMeta):
     """
 
   @abc.abstractmethod
-  def show(self, ds: tf.data.Dataset, ds_info: dataset_info.DatasetInfo,
-           **options_kwargs: Any):
+  def show(
+      self,
+      ds: tf.data.Dataset,
+      ds_info: dataset_info.DatasetInfo,
+      **options_kwargs: Any,
+  ):
     """Display the dataset.
 
     Args:

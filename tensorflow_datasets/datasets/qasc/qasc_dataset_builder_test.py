@@ -26,7 +26,7 @@ class QascTest(tfds.testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 1,  # Number of fake train example
       "test": 1,  # Number of fake test example
-      "validation": 1  # Number of fake validation example
+      "validation": 1,  # Number of fake validation example
   }
 
   DL_EXTRACT_RESULT = {"QASC_Dataset": ""}

@@ -40,13 +40,16 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
         release_notes={
             "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
         },
-        **kwargs)
+        **kwargs,
+    )
     self.text_encoder_config = (
-        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
+        text_encoder_config or tfds.deprecated.text.TextEncoderConfig()
+    )
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """IMDB movie reviews dataset."""
+
   BUILDER_CONFIGS = [
       IMDBReviewsConfig(
           name="plain_text",
@@ -54,45 +57,54 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       ),
       IMDBReviewsConfig(
           name="bytes",
-          description=("Uses byte-level text encoding with "
-                       "`tfds.deprecated.text.ByteTextEncoder`"),
+          description=(
+              "Uses byte-level text encoding with "
+              "`tfds.deprecated.text.ByteTextEncoder`"
+          ),
           text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder=tfds.deprecated.text.ByteTextEncoder()),
+              encoder=tfds.deprecated.text.ByteTextEncoder()
+          ),
       ),
       IMDBReviewsConfig(
           name="subwords8k",
-          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with 8k "
-                       "vocab size"),
+          description=(
+              "Uses `tfds.deprecated.text.SubwordTextEncoder` with 8k "
+              "vocab size"
+          ),
           text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
               encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-              vocab_size=2**13),
+              vocab_size=2**13,
+          ),
       ),
       IMDBReviewsConfig(
           name="subwords32k",
-          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with "
-                       "32k vocab size"),
+          description=(
+              "Uses `tfds.deprecated.text.SubwordTextEncoder` with "
+              "32k vocab size"
+          ),
           text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
               encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-              vocab_size=2**15),
+              vocab_size=2**15,
+          ),
       ),
   ]
 
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "text":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "label":
-                tfds.features.ClassLabel(names=["neg", "pos"]),
+            "text": tfds.features.Text(
+                encoder_config=self.builder_config.text_encoder_config
+            ),
+            "label": tfds.features.ClassLabel(names=["neg", "pos"]),
         }),
         supervised_keys=("text", "label"),
         homepage="http://ai.stanford.edu/~amaas/data/sentiment/",
     )
 
   def _vocab_text_gen(self, archive):
-    for _, ex in self._generate_examples(archive,
-                                         os.path.join("aclImdb", "train")):
+    for _, ex in self._generate_examples(
+        archive, os.path.join("aclImdb", "train")
+    ):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
@@ -101,28 +113,32 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     # Generate vocabulary from training data if SubwordTextEncoder configured
     self.info.features["text"].maybe_build_from_corpus(
-        self._vocab_text_gen(archive()))
+        self._vocab_text_gen(archive())
+    )
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "archive": archive(),
-                "directory": os.path.join("aclImdb", "train")
-            }),
+                "directory": os.path.join("aclImdb", "train"),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "archive": archive(),
-                "directory": os.path.join("aclImdb", "test")
-            }),
+                "directory": os.path.join("aclImdb", "test"),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split("unsupervised"),
             gen_kwargs={
                 "archive": archive(),
                 "directory": os.path.join("aclImdb", "train"),
-                "labeled": False
-            }),
+                "labeled": False,
+            },
+        ),
     ]
 
   def _generate_examples(self, archive, directory, labeled=True):
@@ -130,7 +146,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # For labeled examples, extract the label from the path.
     reg_path = "(?P<label>neg|pos)" if labeled else "unsup"
     reg = re.compile(
-        os.path.join("^%s" % directory, reg_path, "").replace("\\", "\\\\"))
+        os.path.join("^%s" % directory, reg_path, "").replace("\\", "\\\\")
+    )
     for path, imdb_f in archive:
       res = reg.match(path)
       if not res:

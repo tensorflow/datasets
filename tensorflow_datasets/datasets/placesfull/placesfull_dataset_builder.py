@@ -48,26 +48,29 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    output_archives = dl_manager.download({
-        "train": urllib.parse.urljoin(_BASE_URL, _TRAIN_URL),
-    })
+    output_archives = dl_manager.download(
+        {
+            "train": urllib.parse.urljoin(_BASE_URL, _TRAIN_URL),
+        }
+    )
     annotation_path = dl_manager.download_and_extract(
-        urllib.parse.urljoin(_BASE_URL, _FILE_ANNOTATION_URL))
+        urllib.parse.urljoin(_BASE_URL, _FILE_ANNOTATION_URL)
+    )
 
     return {
-        "train":
-            self._generate_examples(
-                archive=dl_manager.iter_archive(output_archives["train"]),
-                path_prefix="Images256",
-                split_name="train",
-                annotation_path=os.path.join(
-                    annotation_path,
-                    "filelist_placesfull/imagelist_placesfull.txt"),
-            )
+        "train": self._generate_examples(
+            archive=dl_manager.iter_archive(output_archives["train"]),
+            path_prefix="Images256",
+            split_name="train",
+            annotation_path=os.path.join(
+                annotation_path, "filelist_placesfull/imagelist_placesfull.txt"
+            ),
+        )
     }
 
-  def _generate_examples(self, archive, path_prefix, split_name,
-                         annotation_path):
+  def _generate_examples(
+      self, archive, path_prefix, split_name, annotation_path
+  ):
     with epath.Path(annotation_path).open() as f:
       if split_name == "test":
         # Test split doesn't have labels assigned.

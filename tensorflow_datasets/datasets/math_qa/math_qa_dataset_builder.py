@@ -25,8 +25,14 @@ import tensorflow_datasets.public_api as tfds
 _URL = 'https://math-qa.github.io/data/MathQA.zip'
 
 _FEATURES = [
-    'Problem', 'Rationale', 'options', 'correct', 'annotated_formula',
-    'linear_formula', 'category', 'correct_option'
+    'Problem',
+    'Rationale',
+    'options',
+    'correct',
+    'annotated_formula',
+    'linear_formula',
+    'category',
+    'correct_option',
 ]
 
 
@@ -42,7 +48,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(
-            {k: tfds.features.Text() for k in _FEATURES}),
+            {k: tfds.features.Text() for k in _FEATURES}
+        ),
         supervised_keys=None,
         homepage='https://math-qa.github.io/',
     )
@@ -51,12 +58,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_URL)
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(os.path.join(path, 'train.json')),
-        tfds.Split.VALIDATION:
-            self._generate_examples(os.path.join(path, 'dev.json')),
-        tfds.Split.TEST:
-            self._generate_examples(os.path.join(path, 'test.json')),
+        tfds.Split.TRAIN: self._generate_examples(
+            os.path.join(path, 'train.json')
+        ),
+        tfds.Split.VALIDATION: self._generate_examples(
+            os.path.join(path, 'dev.json')
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            os.path.join(path, 'test.json')
+        ),
     }
 
   def _generate_examples(self, filename: str):

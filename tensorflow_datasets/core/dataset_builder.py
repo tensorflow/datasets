@@ -79,6 +79,7 @@ class BuilderConfig:
   DatasetBuilder subclasses with data configuration options should subclass
   `BuilderConfig` and add their own properties.
   """
+
   # TODO(py3.10): Should update dataclass to be:
   # * Frozen (https://bugs.python.org/issue32953)
   # * Kwargs-only (https://bugs.python.org/issue33129)
@@ -87,13 +88,14 @@ class BuilderConfig:
   version: Optional[VersionOrStr] = None
   release_notes: Optional[Dict[str, str]] = None
   supported_versions: List[VersionOrStr] = dataclasses.field(
-      default_factory=list)
+      default_factory=list
+  )
   description: Optional[str] = None
 
   @classmethod
   def from_dataset_info(
-      cls,
-      info_proto: dataset_info_pb2.DatasetInfo) -> Optional["BuilderConfig"]:
+      cls, info_proto: dataset_info_pb2.DatasetInfo
+  ) -> Optional["BuilderConfig"]:
     if not info_proto.config_name:
       return None
     return BuilderConfig(
@@ -242,7 +244,8 @@ class DatasetBuilder(registered.RegisteredDataset):
       data_dir = os.fspath(data_dir)  # Pathlib -> str
     # For pickling:
     self._original_state = dict(
-        data_dir=data_dir, config=config, version=version)
+        data_dir=data_dir, config=config, version=version
+    )
     # To do the work:
     self._builder_config = self._create_builder_config(config)
     # Extract code version (VERSION or config)
@@ -320,7 +323,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     ]
 
   def _pick_version(
-      self, requested_version: Union[str, utils.Version]) -> utils.Version:
+      self, requested_version: Union[str, utils.Version]
+  ) -> utils.Version:
     """Returns utils.Version instance, or raise AssertionError."""
     # Validate that `canonical_version` is correctly defined
     assert self.canonical_version
@@ -336,7 +340,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         return version
     available_versions = [str(v) for v in self.versions]
     msg = "Dataset {} cannot be loaded at version {}, only: {}.".format(
-        self.name, requested_version, ", ".join(available_versions))
+        self.name, requested_version, ", ".join(available_versions)
+    )
     raise AssertionError(msg)
 
   @property
@@ -374,8 +379,10 @@ class DatasetBuilder(registered.RegisteredDataset):
     if (
         # zipfile.Path does not have `.parts`. Additionally, `os.fspath`
         # will extract the file, so use `str`.
-        "tensorflow_datasets" in str(new_path) and legacy_path.exists() and
-        not new_path.exists()):
+        "tensorflow_datasets" in str(new_path)
+        and legacy_path.exists()
+        and not new_path.exists()
+    ):
       return legacy_path
     else:
       return new_path
@@ -411,12 +418,14 @@ class DatasetBuilder(registered.RegisteredDataset):
       raise AssertionError(
           "Info should not been called before version has been defined. "
           "Otherwise, the created .info may not match the info version from "
-          "the restored dataset.")
+          "the restored dataset."
+      )
     info = self._info()
     if not isinstance(info, dataset_info.DatasetInfo):
       raise TypeError(
           "DatasetBuilder._info should returns `tfds.core.DatasetInfo`, not "
-          f" {type(info)}.")
+          f" {type(info)}."
+      )
     return info
 
   @utils.classproperty
@@ -424,7 +433,8 @@ class DatasetBuilder(registered.RegisteredDataset):
   def default_builder_config(cls) -> Optional[BuilderConfig]:
     return _get_default_config(
         builder_configs=cls.BUILDER_CONFIGS,
-        default_config_name=cls.DEFAULT_BUILDER_CONFIG_NAME)
+        default_config_name=cls.DEFAULT_BUILDER_CONFIG_NAME,
+    )
 
   def get_default_builder_config(self) -> Optional[BuilderConfig]:
     """Returns the default builder config if there is one.
@@ -438,7 +448,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     """
     return _get_default_config(
         builder_configs=self.BUILDER_CONFIGS,
-        default_config_name=self.DEFAULT_BUILDER_CONFIG_NAME)
+        default_config_name=self.DEFAULT_BUILDER_CONFIG_NAME,
+    )
 
   def get_reference(
       self,
@@ -467,7 +478,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         namespace=namespace,
         config=config,
         version=self.version,
-        data_dir=epath.Path(self._data_dir_root))
+        data_dir=epath.Path(self._data_dir_root),
+    )
 
   def download_and_prepare(
       self,
@@ -497,22 +509,28 @@ class DatasetBuilder(registered.RegisteredDataset):
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
     elif data_exists and download_config.download_mode == REUSE_CACHE_IF_EXISTS:
-      logging.info("Deleting pre-existing dataset %s (%s)", self.name,
-                   self._data_dir)
+      logging.info(
+          "Deleting pre-existing dataset %s (%s)", self.name, self._data_dir
+      )
       epath.Path(self._data_dir).rmtree()  # Delete pre-existing data.
       data_exists = tf.io.gfile.exists(self._data_dir)
 
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(
-          str(v) for v in self.versions if not v.tfds_version_to_prepare)
+          str(v) for v in self.versions if not v.tfds_version_to_prepare
+      )
       raise AssertionError(
           "The version of the dataset you are trying to use ({}:{}) can only "
           "be generated using TFDS code synced @ {} or earlier. Either sync to "
           "that version of TFDS to first prepare the data or use another "
           "version of the dataset (available for `download_and_prepare`: "
-          "{}).".format(self.name, self.version,
-                        self.version.tfds_version_to_prepare,
-                        available_to_prepare))
+          "{}).".format(
+              self.name,
+              self.version,
+              self.version.tfds_version_to_prepare,
+              available_to_prepare,
+          )
+      )
 
     # Only `cls.VERSION` or `experimental_latest` versions can be generated.
     # Otherwise, users may accidentally generate an old version using the
@@ -521,21 +539,24 @@ class DatasetBuilder(registered.RegisteredDataset):
         str(v) for v in (self.canonical_version, max(self.versions))
     }
     if str(self.version) not in installable_versions:
-      msg = ("The version of the dataset you are trying to use ({}) is too "
-             "old for this version of TFDS so cannot be generated.").format(
-                 self.info.full_name)
+      msg = (
+          "The version of the dataset you are trying to use ({}) is too "
+          "old for this version of TFDS so cannot be generated."
+      ).format(self.info.full_name)
       if self.version.tfds_version_to_prepare:
         msg += (
             "{} can only be generated using TFDS code synced @ {} or earlier "
             "Either sync to that version of TFDS to first prepare the data or "
-            "use another version of the dataset. ").format(
-                self.version, self.version.tfds_version_to_prepare)
+            "use another version of the dataset. "
+        ).format(self.version, self.version.tfds_version_to_prepare)
       else:
         msg += (
             "Either sync to a previous version of TFDS to first prepare the "
-            "data or use another version of the dataset. ")
+            "data or use another version of the dataset. "
+        )
       msg += "Available for `download_and_prepare`: {}".format(
-          list(sorted(installable_versions)))
+          list(sorted(installable_versions))
+      )
       raise ValueError(msg)
 
     # Currently it's not possible to overwrite the data because it would
@@ -545,20 +566,24 @@ class DatasetBuilder(registered.RegisteredDataset):
       raise ValueError(
           "Trying to overwrite an existing dataset {} at {}. A dataset with "
           "the same version {} already exists. If the dataset has changed, "
-          "please update the version number.".format(self.name, self._data_dir,
-                                                     self.version))
+          "please update the version number.".format(
+              self.name, self._data_dir, self.version
+          )
+      )
 
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
         self.info.dataset_size + self.info.download_size,
-        directory=self._data_dir_root):
+        directory=self._data_dir_root,
+    ):
       raise IOError(
           "Not enough disk space. Needed: {} (download: {}, generated: {})"
           .format(
               self.info.dataset_size + self.info.download_size,
               self.info.download_size,
               self.info.dataset_size,
-          ))
+          )
+      )
     self._log_download_bytes()
 
     dl_manager = self._make_download_manager(
@@ -570,8 +595,10 @@ class DatasetBuilder(registered.RegisteredDataset):
     if self.BUILDER_CONFIGS:
       default_builder_config = self.get_default_builder_config()
       if default_builder_config is None:
-        raise RuntimeError("Could not find default builder config while there "
-                           "are builder configs!")
+        raise RuntimeError(
+            "Could not find default builder config while there "
+            "are builder configs!"
+        )
       _save_default_config_name(
           # `data_dir/ds_name/config/version/` -> `data_dir/ds_name/`
           common_dir=self.data_path.parent.parent,
@@ -588,12 +615,13 @@ class DatasetBuilder(registered.RegisteredDataset):
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
-        if (download_config.try_download_gcs and
-            gcs_utils.is_dataset_on_gcs(self.info.full_name)):
+        if download_config.try_download_gcs and gcs_utils.is_dataset_on_gcs(
+            self.info.full_name
+        ):
           logging.info(GCS_HOSTED_MSG, self.name)
           gcs_utils.download_gcs_dataset(
-              dataset_name=self.info.full_name,
-              local_dataset_dir=self._data_dir)
+              dataset_name=self.info.full_name, local_dataset_dir=self._data_dir
+          )
           self.info.read_from_directory(self._data_dir)
         else:
           self._download_and_prepare(
@@ -618,9 +646,11 @@ class DatasetBuilder(registered.RegisteredDataset):
         deleted_incomplete_files.append(os.fspath(f))
         f.unlink()
     if deleted_incomplete_files:
-      logging.info("Deleted %d incomplete files. A small selection: %s",
-                   len(deleted_incomplete_files),
-                   "\n".join(deleted_incomplete_files[:3]))
+      logging.info(
+          "Deleted %d incomplete files. A small selection: %s",
+          len(deleted_incomplete_files),
+          "\n".join(deleted_incomplete_files[:3]),
+      )
 
     self._log_download_done()
 
@@ -714,10 +744,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     # pylint: enable=line-too-long
     if not tf.io.gfile.exists(self._data_dir):
       raise AssertionError(
-          ("Dataset %s: could not find data in %s. Please make sure to call "
-           "dataset_builder.download_and_prepare(), or pass download=True to "
-           "tfds.load() before trying to access the tf.data.Dataset object.") %
-          (self.name, self._data_dir_root))
+          "Dataset %s: could not find data in %s. Please make sure to call "
+          "dataset_builder.download_and_prepare(), or pass download=True to "
+          "tfds.load() before trying to access the tf.data.Dataset object."
+          % (self.name, self._data_dir_root)
+      )
 
     # By default, return all splits
     if split is None:
@@ -760,7 +791,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     )
     # Auto-cache small datasets which are small enough to fit in memory.
     if self._should_cache_ds(
-        split=split, shuffle_files=shuffle_files, read_config=read_config):
+        split=split, shuffle_files=shuffle_files, read_config=read_config
+    ):
       ds = ds.cache()
 
     if batch_size:
@@ -771,7 +803,8 @@ class DatasetBuilder(registered.RegisteredDataset):
       if not self.info.supervised_keys:
         raise ValueError(
             f"as_supervised=True but {self.name} does not support a supervised "
-            "structure.")
+            "structure."
+        )
 
       def lookup_nest(features: Dict[str, Any]) -> Tuple[Any, ...]:
         """Converts `features` to the structure described by `supervised_keys`.
@@ -785,8 +818,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         Returns:
           A tuple with elements structured according to `supervised_keys`
         """
-        return tree_utils.map_structure(lambda key: features[key],
-                                        self.info.supervised_keys)
+        return tree_utils.map_structure(
+            lambda key: features[key], self.info.supervised_keys
+        )
 
       ds = ds.map(lookup_nest)
 
@@ -827,10 +861,13 @@ class DatasetBuilder(registered.RegisteredDataset):
     # An exception is for single shard (as shuffling is a no-op).
     # Another exception is if reshuffle is disabled (shuffling already cached)
     num_shards = len(self.info.splits[split].file_instructions)
-    if (shuffle_files and
+    if (
+        shuffle_files
+        and
         # Shuffling only matter when reshuffle is True or None (default)
-        read_config.shuffle_reshuffle_each_iteration is not False and  # pylint: disable=g-bool-id-comparison
-        num_shards > 1):
+        read_config.shuffle_reshuffle_each_iteration is not False
+        and num_shards > 1  # pylint: disable=g-bool-id-comparison
+    ):
       return False
 
     # If the dataset satisfy all the right conditions, activate autocaching.
@@ -864,9 +901,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     version_dir = self._relative_data_dir(with_version=True)
 
     default_data_dir = file_utils.get_default_data_dir(
-        given_data_dir=given_data_dir)
+        given_data_dir=given_data_dir
+    )
     all_data_dirs = file_utils.list_data_dirs(
-        given_data_dir=given_data_dir, dataset=self.name)
+        given_data_dir=given_data_dir, dataset=self.name
+    )
 
     all_versions = set()
     requested_version_dirs = {}
@@ -877,14 +916,16 @@ class DatasetBuilder(registered.RegisteredDataset):
       # Check for existance of the requested version
       if self.version in data_dir_versions:
         requested_version_dirs[data_dir_root] = os.path.join(
-            data_dir_root, version_dir)
+            data_dir_root, version_dir
+        )
       all_versions.update(data_dir_versions)
 
     if len(requested_version_dirs) > 1:
       raise ValueError(
           "Dataset was found in more than one directory: {}. Please resolve "
           "the ambiguity by explicitly specifying `data_dir=`."
-          "".format(requested_version_dirs.values()))
+          "".format(requested_version_dirs.values())
+      )
     elif len(requested_version_dirs) == 1:  # The dataset is found once
       return next(iter(requested_version_dirs.items()))
 
@@ -892,15 +933,21 @@ class DatasetBuilder(registered.RegisteredDataset):
     data_dir = os.path.join(default_data_dir, version_dir)
     if all_versions:
       logging.warning(
-          "Found a different version of the requested dataset:\n"
-          "%s\n"
-          "Using %s instead.", "\n".join(str(v) for v in sorted(all_versions)),
-          data_dir)
+          (
+              "Found a different version of the requested dataset:\n"
+              "%s\n"
+              "Using %s instead."
+          ),
+          "\n".join(str(v) for v in sorted(all_versions)),
+          data_dir,
+      )
     return default_data_dir, data_dir
 
   def _log_download_done(self) -> None:
-    msg = (f"Dataset {self.name} downloaded and prepared to {self._data_dir}. "
-           "Subsequent calls will reuse this data.")
+    msg = (
+        f"Dataset {self.name} downloaded and prepared to {self._data_dir}. "
+        "Subsequent calls will reuse this data."
+    )
     termcolor.cprint(msg, attrs=["bold"])
 
   def _log_download_bytes(self) -> None:
@@ -908,11 +955,13 @@ class DatasetBuilder(registered.RegisteredDataset):
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
     termcolor.cprint(
-        f"Downloading and preparing dataset {self.info.download_size} "
-        f"(download: {self.info.download_size}, "
-        f"generated: {self.info.dataset_size}, "
-        f"total: {self.info.download_size + self.info.dataset_size}) "
-        f"to {self._data_dir}...",
+        (
+            f"Downloading and preparing dataset {self.info.download_size} "
+            f"(download: {self.info.download_size}, "
+            f"generated: {self.info.dataset_size}, "
+            f"total: {self.info.download_size + self.info.dataset_size}) "
+            f"to {self._data_dir}..."
+        ),
         attrs=["bold"],
     )
 
@@ -1002,12 +1051,15 @@ class DatasetBuilder(registered.RegisteredDataset):
       download_config,
   ) -> download.DownloadManager:
     """Creates a new download manager object."""
-    download_dir = (
-        download_dir or os.path.join(self._data_dir_root, "downloads"))
-    extract_dir = (
-        download_config.extract_dir or os.path.join(download_dir, "extracted"))
-    manual_dir = (
-        download_config.manual_dir or os.path.join(download_dir, "manual"))
+    download_dir = download_dir or os.path.join(
+        self._data_dir_root, "downloads"
+    )
+    extract_dir = download_config.extract_dir or os.path.join(
+        download_dir, "extracted"
+    )
+    manual_dir = download_config.manual_dir or os.path.join(
+        download_dir, "manual"
+    )
 
     if download_config.register_checksums:
       # Note: Error will be raised here if user try to record checksums
@@ -1017,16 +1069,25 @@ class DatasetBuilder(registered.RegisteredDataset):
       register_checksums_path = None
 
     max_simultaneous_downloads = (
-        download_config.override_max_simultaneous_downloads or
-        self.MAX_SIMULTANEOUS_DOWNLOADS)
-    if (max_simultaneous_downloads and self.MAX_SIMULTANEOUS_DOWNLOADS and
-        self.MAX_SIMULTANEOUS_DOWNLOADS < max_simultaneous_downloads):
+        download_config.override_max_simultaneous_downloads
+        or self.MAX_SIMULTANEOUS_DOWNLOADS
+    )
+    if (
+        max_simultaneous_downloads
+        and self.MAX_SIMULTANEOUS_DOWNLOADS
+        and self.MAX_SIMULTANEOUS_DOWNLOADS < max_simultaneous_downloads
+    ):
       logging.warning(
-          "The dataset %r sets `MAX_SIMULTANEOUS_DOWNLOADS`=%s. The download "
-          "config overrides it with value `override_max_simultaneous_downloads`"
-          "=%s. Using the higher value might cause `ConnectionRefusedError`",
-          self.name, self.MAX_SIMULTANEOUS_DOWNLOADS,
-          download_config.override_max_simultaneous_downloads)
+          (
+              "The dataset %r sets `MAX_SIMULTANEOUS_DOWNLOADS`=%s. The"
+              " download config overrides it with value"
+              " `override_max_simultaneous_downloads`=%s. Using the higher"
+              " value might cause `ConnectionRefusedError`"
+          ),
+          self.name,
+          self.MAX_SIMULTANEOUS_DOWNLOADS,
+          download_config.override_max_simultaneous_downloads,
+      )
 
     return download.DownloadManager(
         download_dir=download_dir,
@@ -1055,7 +1116,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     all_cls = {type(b) for b in cls.BUILDER_CONFIGS}
     if len(all_cls) != 1:
       raise ValueError(
-          f"Could not infer the config class for {cls}. Detected: {all_cls}")
+          f"Could not infer the config class for {cls}. Detected: {all_cls}"
+      )
 
     (builder_cls,) = all_cls
     return builder_cls
@@ -1070,16 +1132,21 @@ class DatasetBuilder(registered.RegisteredDataset):
     if builder_config is None:
       builder_config = self.get_default_builder_config()
       if builder_config is not None:
-        logging.info("No config specified, defaulting to config: %s/%s",
-                     self.name, builder_config.name)
+        logging.info(
+            "No config specified, defaulting to config: %s/%s",
+            self.name,
+            builder_config.name,
+        )
     if not builder_config:
       return None
     if isinstance(builder_config, str):
       name = builder_config
       builder_config = self.builder_configs.get(name)
       if builder_config is None:
-        raise ValueError("BuilderConfig %s not found. Available: %s" %
-                         (name, list(self.builder_configs.keys())))
+        raise ValueError(
+            "BuilderConfig %s not found. Available: %s"
+            % (name, list(self.builder_configs.keys()))
+        )
     name = builder_config.name
     if not name:
       raise ValueError("BuilderConfig must have a name, got %s" % name)
@@ -1090,8 +1157,9 @@ class DatasetBuilder(registered.RegisteredDataset):
       if builder_config is not self.builder_configs[name]:
         raise ValueError(
             "Cannot name a custom BuilderConfig the same as an available "
-            "BuilderConfig. Change the name. Available BuilderConfigs: %s" %
-            (list(self.builder_configs.keys())))
+            "BuilderConfig. Change the name. Available BuilderConfigs: %s"
+            % (list(self.builder_configs.keys()))
+        )
     return builder_config
 
   @utils.classproperty
@@ -1103,7 +1171,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     if len(config_dict) != len(cls.BUILDER_CONFIGS):
       names = [config.name for config in cls.BUILDER_CONFIGS]
       raise ValueError(
-          "Names in BUILDER_CONFIGS must not be duplicated. Got %s" % names)
+          "Names in BUILDER_CONFIGS must not be duplicated. Got %s" % names
+      )
     return config_dict
 
 
@@ -1236,8 +1305,9 @@ class GeneratorBasedBuilder(FileReaderBuilder):
   @abc.abstractmethod
   @utils.docs.do_not_doc_in_subclasses
   @utils.docs.doc_private
-  def _generate_examples(self,
-                         **kwargs: Any) -> split_builder_lib.SplitGenerator:
+  def _generate_examples(
+      self, **kwargs: Any
+  ) -> split_builder_lib.SplitGenerator:
     """Default function to generate examples for each split.
 
     The function should return a collection of `(key, examples)`. Examples
@@ -1317,7 +1387,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     raise NotImplementedError()
 
   def _process_pipeline_result(
-      self, pipeline_result: "runner.PipelineResult") -> None:
+      self, pipeline_result: "runner.PipelineResult"
+  ) -> None:
     """Processes the result of the beam pipeline if we used one.
 
     This can be used to (e.g) write beam counters to a file.
@@ -1362,7 +1433,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       else:
         optional_pipeline_kwargs = {}
       split_generators = self._split_generators(  # pylint: disable=unexpected-keyword-arg
-          dl_manager, **optional_pipeline_kwargs)
+          dl_manager, **optional_pipeline_kwargs
+      )
       # TODO(tfds): Could be removed once all datasets are migrated.
       # https://github.com/tensorflow/datasets/issues/2537
       # Legacy mode (eventually convert list[SplitGeneratorLegacy] -> dict)
@@ -1381,7 +1453,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
 
       # Start generating data for all splits
       path_suffix = file_adapters.ADAPTER_FOR_FORMAT[
-          self.info.file_format].FILE_SUFFIX
+          self.info.file_format
+      ].FILE_SUFFIX
 
       split_info_futures = []
       for split_name, generator in utils.tqdm(
@@ -1394,7 +1467,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
             split=split_name,
             dataset_name=self.name,
             data_dir=self.data_path,
-            filetype_suffix=path_suffix)
+            filetype_suffix=path_suffix,
+        )
         future = split_builder.submit_split_generation(
             split_name=split_name,
             generator=generator,
@@ -1422,8 +1496,9 @@ class BeamBasedBuilder(GeneratorBasedBuilder):
   DEPRECATED: Please use `tfds.core.GeneratorBasedBuilder` instead.
   """
 
-  def _generate_examples(self, *args: Any,
-                         **kwargs: Any) -> split_builder_lib.SplitGenerator:
+  def _generate_examples(
+      self, *args: Any, **kwargs: Any
+  ) -> split_builder_lib.SplitGenerator:
     return self._build_pcollection(*args, **kwargs)
 
 
@@ -1431,7 +1506,8 @@ def _check_split_names(split_names: Iterable[str]) -> None:
   """Check that split names are valid."""
   if "all" in set(str(s).lower() for s in split_names):
     raise ValueError(
-        "`all` is a reserved keyword. Split cannot be named like this.")
+        "`all` is a reserved keyword. Split cannot be named like this."
+    )
 
 
 def _get_default_config(
@@ -1461,7 +1537,8 @@ def _get_default_config(
     if builder_config.name == default_config_name:
       return builder_config
   raise RuntimeError(
-      f"Builder config with name `{default_config_name}` not found.")
+      f"Builder config with name `{default_config_name}` not found."
+  )
 
 
 def _save_default_config_name(
@@ -1487,7 +1564,9 @@ def _save_default_config_name(
     tmp_config_path.write_text(json.dumps(data))
 
 
-def load_default_config_name(common_dir: epath.Path,) -> Optional[str]:
+def load_default_config_name(
+    common_dir: epath.Path,
+) -> Optional[str]:
   """Load `builder_cls` metadata (common to all builder configs)."""
   config_path = epath.Path(common_dir) / ".config/metadata.json"
   if not config_path.exists():
@@ -1515,7 +1594,8 @@ def cannonical_version_for_config(
   """
   if instance_or_cls.BUILDER_CONFIGS and config is None:
     raise ValueError(
-        f"Cannot infer version on {instance_or_cls.name}. Unknown config.")
+        f"Cannot infer version on {instance_or_cls.name}. Unknown config."
+    )
 
   if config and config.version:
     return utils.Version(config.version)
@@ -1525,4 +1605,5 @@ def cannonical_version_for_config(
     raise ValueError(
         f"DatasetBuilder {instance_or_cls.name} does not have a defined "
         "version. Please add a `VERSION = tfds.core.Version('x.y.z')` to the "
-        "class.")
+        "class."
+    )

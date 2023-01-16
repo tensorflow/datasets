@@ -26,8 +26,9 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
+flags.DEFINE_string(
+    'tfds_dir', py_utils.tfds_dir(), 'Path to tensorflow_datasets directory'
+)
 FLAGS = flags.FLAGS
 
 _IMAGE_NUMBERS = {'train': 5, 'val': 5, 'test': 5}
@@ -35,8 +36,14 @@ _NUM_OBJECTS = 7
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'clevr', 'CLEVR_v1.0')
+  return os.path.join(
+      FLAGS.tfds_dir,
+      'testing',
+      'test_data',
+      'fake_examples',
+      'clevr',
+      'CLEVR_v1.0',
+  )
 
 
 def _generate_data(split):
@@ -51,7 +58,8 @@ def _generate_data(split):
     tf.io.gfile.copy(
         fake_data_utils.get_random_png(),
         os.path.join(images_dir, image_name),
-        overwrite=True)
+        overwrite=True,
+    )
 
   if split in ['train', 'val']:
     # Generate annotations
@@ -60,21 +68,24 @@ def _generate_data(split):
       tf.io.gfile.makedirs(scenes_dir)
 
     annotations = {
-        'scenes': [{
-            'objects': [{
-                'color': 'red',
-                'shape': 'sphere',
-                'size': 'small',
-                'material': 'rubber',
-                '3d_coords': [0.0, 0.0, 0.0],
-                'pixel_coords': [0.0, 0.0, 0.0],
-                'rotation': 0.0
-            }] * _NUM_OBJECTS
-        }] * _IMAGE_NUMBERS[split]
+        'scenes': [
+            {
+                'objects': [{
+                    'color': 'red',
+                    'shape': 'sphere',
+                    'size': 'small',
+                    'material': 'rubber',
+                    '3d_coords': [0.0, 0.0, 0.0],
+                    'pixel_coords': [0.0, 0.0, 0.0],
+                    'rotation': 0.0,
+                }] * _NUM_OBJECTS
+            }
+        ] * _IMAGE_NUMBERS[split]
     }
 
-    annotations_file = os.path.join(scenes_dir,
-                                    'CLEVR_{}_scenes.json'.format(split))
+    annotations_file = os.path.join(
+        scenes_dir, 'CLEVR_{}_scenes.json'.format(split)
+    )
     with tf.io.gfile.GFile(annotations_file, 'w') as f:
       json.dump(annotations, f)
 

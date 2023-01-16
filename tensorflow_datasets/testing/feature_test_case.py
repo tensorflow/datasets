@@ -58,6 +58,7 @@ class FeatureExpectationItem:
     atol: If provided, compare float values with this precision (use default
       otherwise).
   """
+
   value: Any
   expected: Optional[Any] = None
   expected_serialized: Optional[Any] = None
@@ -165,7 +166,8 @@ class FeatureExpectationsTestCase(SubTestCase):
         serialized_info=serialized_info,
         test_tensor_spec=test_tensor_spec,
         skip_feature_tests=skip_feature_tests,
-        test_attributes=test_attributes)
+        test_attributes=test_attributes,
+    )
 
   def assertFeatureEagerOnly(
       self,
@@ -271,13 +273,9 @@ class FeatureExpectationsTestCase(SubTestCase):
             test_tensor_spec=test_tensor_spec,
         )
 
-  def assertFeatureTest(self,
-                        fdict,
-                        test,
-                        feature,
-                        shape,
-                        dtype,
-                        test_tensor_spec: bool = True):
+  def assertFeatureTest(
+      self, fdict, test, feature, shape, dtype, test_tensor_spec: bool = True
+  ):
     """Test that encode=>decoding of a value works correctly."""
     # test feature.encode_example can be pickled and unpickled for beam.
     dill.loads(dill.dumps(feature.encode_example))
@@ -289,9 +287,12 @@ class FeatureExpectationsTestCase(SubTestCase):
         if not test.raise_msg:
           raise ValueError(
               'test.raise_msg should be set with {} for test {}'.format(
-                  test.raise_cls, type(feature)))
-        with self.assertRaisesWithPredicateMatch(test.raise_cls,
-                                                 test.raise_msg):
+                  test.raise_cls, type(feature)
+              )
+          )
+        with self.assertRaisesWithPredicateMatch(
+            test.raise_cls, test.raise_msg
+        ):
           features_encode_decode(fdict, input_value, decoders=test.decoders)
     else:
       # Test the serialization only
@@ -342,8 +343,9 @@ class FeatureExpectationsTestCase(SubTestCase):
           out_shapes = utils.map_nested(_get_shape, out_tensor)
 
           shapes_tuple = utils.zip_nested(out_shapes, expected_shape)
-          utils.map_nested(lambda x: x[0].assert_is_compatible_with(x[1]),
-                           shapes_tuple)
+          utils.map_nested(
+              lambda x: x[0].assert_is_compatible_with(x[1]), shapes_tuple
+          )
 
         # Assert value
         with self._subTest('out_value'):

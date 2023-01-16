@@ -30,12 +30,11 @@ randint = np.random.randint
 class BaseDecodeTest(testing.FeatureExpectationsTestCase):
 
   def test_image_custom_decode(self):
-
     # Do not uses random here because Jpeg compression has loss, so decoded
     # value isn't the same
     img_shaped = np.ones(shape=(30, 60, 3), dtype=np.uint8)
     x, y, w, h = 4, 7, 10, 13
-    img_cropped = img_shaped[y:y + h, x:x + w, :]
+    img_cropped = img_shaped[y : y + h, x : x + w, :]
 
     class DecodeCrop(decode_lib.Decoder):
       """Simple class on how to customize the decoding."""
@@ -90,7 +89,6 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_video_custom_decode(self):
-
     image_path = os.fspath(utils.tfds_path('testing/test_data/test_image.jpg'))
     with tf.io.gfile.GFile(image_path, 'rb') as f:
       serialized_img = f.read()
@@ -116,10 +114,10 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
     # Test with FeatureDict
     self.assertFeature(
         feature=features_lib.FeaturesDict({
-            'image':
-                features_lib.Image(shape=(30, 60, 3), encoding_format='jpeg'),
-            'label':
-                tf.int64,
+            'image': features_lib.Image(
+                shape=(30, 60, 3), encoding_format='jpeg'
+            ),
+            'label': tf.int64,
         }),
         shape={
             'image': (30, 60, 3),

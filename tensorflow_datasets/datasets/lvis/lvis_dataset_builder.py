@@ -26,18 +26,12 @@ import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _URLS = {
-    'train_annotation':
-        'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_train.json.zip',
-    'train_images':
-        'http://images.cocodataset.org/zips/train2017.zip',
-    'validation_annotation':
-        'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_val.json.zip',
-    'validation_images':
-        'http://images.cocodataset.org/zips/val2017.zip',
-    'test_annotation':
-        'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_image_info_test_dev.json.zip',
-    'test_images':
-        'http://images.cocodataset.org/zips/test2017.zip'
+    'train_annotation': 'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_train.json.zip',
+    'train_images': 'http://images.cocodataset.org/zips/train2017.zip',
+    'validation_annotation': 'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_val.json.zip',
+    'validation_images': 'http://images.cocodataset.org/zips/val2017.zip',
+    'test_annotation': 'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_image_info_test_dev.json.zip',
+    'test_images': 'http://images.cocodataset.org/zips/test2017.zip',
 }
 
 # Annotations with invalid bounding boxes. Will not be used.
@@ -60,7 +54,7 @@ _INVALID_ANNOTATIONS = [
     36668,
     57541,
     33126,
-    10932
+    10932,
 ]
 
 _NUM_CLASSES = 1203
@@ -71,35 +65,31 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.2.0')
   RELEASE_NOTES = {
-      '1.1.0':
-          'Added fields `neg_category_ids` and `not_exhaustive_category_ids`.',
-      '1.2.0':
-          'Added class names.',
+      '1.1.0': (
+          'Added fields `neg_category_ids` and `not_exhaustive_category_ids`.'
+      ),
+      '1.2.0': 'Added class names.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     class_label = tfds.features.ClassLabel(
-        names_file=tfds.core.tfds_path('datasets/lvis/classes.txt'))
+        names_file=tfds.core.tfds_path('datasets/lvis/classes.txt')
+    )
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'image':
-                tfds.features.Image(encoding_format='jpeg'),
-            'image/id':
-                np.int64,
-            'neg_category_ids':
-                tfds.features.Sequence(class_label),
-            'not_exhaustive_category_ids':
-                tfds.features.Sequence(class_label),
-            'objects':
-                tfds.features.Sequence({
-                    # LVIS has unique id for each annotation.
-                    'id': np.int64,
-                    'area': np.int64,
-                    'bbox': tfds.features.BBoxFeature(),
-                    'label': class_label,
-                    'segmentation': tfds.features.Image(shape=(None, None, 1)),
-                }),
+            'image': tfds.features.Image(encoding_format='jpeg'),
+            'image/id': np.int64,
+            'neg_category_ids': tfds.features.Sequence(class_label),
+            'not_exhaustive_category_ids': tfds.features.Sequence(class_label),
+            'objects': tfds.features.Sequence({
+                # LVIS has unique id for each annotation.
+                'id': np.int64,
+                'area': np.int64,
+                'bbox': tfds.features.BBoxFeature(),
+                'label': class_label,
+                'segmentation': tfds.features.Image(shape=(None, None, 1)),
+            }),
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
@@ -117,17 +107,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         paths['test_images'] / 'test2017',
     ]
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(
-                image_dirs, paths['train_annotation'] / 'lvis_v1_train.json'),
-        tfds.Split.VALIDATION:
-            self._generate_examples(
-                image_dirs,
-                paths['validation_annotation'] / 'lvis_v1_val.json'),
-        tfds.Split.TEST:
-            self._generate_examples(
-                image_dirs,
-                paths['test_annotation'] / 'lvis_v1_image_info_test_dev.json'),
+        tfds.Split.TRAIN: self._generate_examples(
+            image_dirs, paths['train_annotation'] / 'lvis_v1_train.json'
+        ),
+        tfds.Split.VALIDATION: self._generate_examples(
+            image_dirs, paths['validation_annotation'] / 'lvis_v1_val.json'
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            image_dirs,
+            paths['test_annotation'] / 'lvis_v1_image_info_test_dev.json',
+        ),
     }
 
   def _generate_examples(self, image_dirs, annotation_file):
@@ -142,7 +131,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       instances = [x for x in instances if x['id'] not in _INVALID_ANNOTATIONS]
       neg_category_ids = image_info.get('neg_category_ids', [])
       not_exhaustive_category_ids = image_info.get(
-          'not_exhaustive_category_ids', [])
+          'not_exhaustive_category_ids', []
+      )
       example = {
           'image': image,
           'image/id': image_info['id'],
@@ -154,16 +144,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       }
       for inst in instances:
         example['objects'].append({
-            'id':
-                inst['id'],
-            'area':
-                inst['area'],
-            'bbox':
-                _build_bbox(image_info, *inst['bbox']),
-            'label':
-                inst['category_id'] - 1,
-            'segmentation':
-                _build_segmentation_mask(image_info, inst['segmentation'])
+            'id': inst['id'],
+            'area': inst['area'],
+            'bbox': _build_bbox(image_info, *inst['bbox']),
+            'label': inst['category_id'] - 1,
+            'segmentation': _build_segmentation_mask(
+                image_info, inst['segmentation']
+            ),
         })
       return image_info['id'], example
 

@@ -21,6 +21,7 @@ from tensorflow_datasets.rlds.locomotion import locomotion
 
 class AntTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for Ant dataset."""
+
   DATASET_CLASS = locomotion.Locomotion
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -36,6 +37,7 @@ class AntTest(tfds.testing.DatasetBuilderTestCase):
 
 class Walker2dTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for Walker2d dataset."""
+
   DATASET_CLASS = locomotion.Locomotion
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -51,6 +53,7 @@ class Walker2dTest(tfds.testing.DatasetBuilderTestCase):
 
 class HopperTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for Hopper dataset."""
+
   DATASET_CLASS = locomotion.Locomotion
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -66,6 +69,7 @@ class HopperTest(tfds.testing.DatasetBuilderTestCase):
 
 class HalfCheetahTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for HalfCheetah dataset."""
+
   DATASET_CLASS = locomotion.Locomotion
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -85,6 +89,7 @@ class HalfCheetahTest(tfds.testing.DatasetBuilderTestCase):
 
 class HumanoidTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for Humanoid dataset."""
+
   DATASET_CLASS = locomotion.Locomotion
   SPLITS = {
       'train': 2,  # Number of fake train example

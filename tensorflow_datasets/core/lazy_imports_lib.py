@@ -30,10 +30,12 @@ def _try_import(module_name):
     mod = importlib.import_module(module_name)
     return mod
   except ImportError as e:
-    err_msg = ("Failed importing {name}. This likely means that the dataset "
-               "requires additional dependencies that have to be "
-               "manually installed (usually with `pip install {name}`). See "
-               "setup.py extras_require.").format(name=module_name)
+    err_msg = (
+        "Failed importing {name}. This likely means that the dataset "
+        "requires additional dependencies that have to be "
+        "manually installed (usually with `pip install {name}`). See "
+        "setup.py extras_require."
+    ).format(name=module_name)
     utils.reraise(e, suffix=err_msg)
 
 

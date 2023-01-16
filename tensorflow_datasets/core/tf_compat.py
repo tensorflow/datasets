@@ -50,18 +50,21 @@ def ensure_tf_version(tf):  # pylint: disable=g-statement-before-imports
     raise ImportError(
         "This version of TensorFlow Datasets requires TensorFlow "
         f"version >= {MIN_TF_VERSION}; Detected an installation of version "
-        f"{tf.__version__}. Please upgrade TensorFlow to proceed.")
+        f"{tf.__version__}. Please upgrade TensorFlow to proceed."
+    )
 
 
 def is_dataset(ds):
   """Whether ds is a Dataset. Compatible across TF versions."""
   import tensorflow as tf  # pylint: disable=import-outside-toplevel
+
   return isinstance(ds, (tf.data.Dataset, tf.compat.v1.data.Dataset))
 
 
 def get_single_element(ds):
   """Calls `tf.data.Dataset.get_single_element`."""
   import tensorflow as tf  # pylint: disable=import-outside-toplevel
+
   if hasattr(ds, "get_single_element"):  # tf 2.6 and above
     return ds.get_single_element()
   else:
@@ -70,6 +73,7 @@ def get_single_element(ds):
 
 def _get_option_deterministic_field() -> str:
   import tensorflow as tf  # pylint: disable=import-outside-toplevel
+
   if hasattr(tf.data.Options(), "deterministic"):
     return "deterministic"
   return "experimental_deterministic"

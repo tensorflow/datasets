@@ -21,6 +21,7 @@ from tensorflow_datasets.text.wikiann import wikiann
 
 class WikiannTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for wikiann dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ["en"]
   DATASET_CLASS = wikiann.Wikiann
   SPLITS = {

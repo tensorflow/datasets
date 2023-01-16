@@ -70,7 +70,8 @@ class ClassLabel(tensor_feature.Tensor):
 
     if sum(a is not None for a in (num_classes, names, names_file)) != 1:
       raise ValueError(
-          "Only a single argument of ClassLabel() should be provided.")
+          "Only a single argument of ClassLabel() should be provided."
+      )
 
     if num_classes is not None:
       self._num_classes = num_classes
@@ -96,14 +97,16 @@ class ClassLabel(tensor_feature.Tensor):
     if self._int2str is not None and self._int2str != int2str:
       raise ValueError(
           "Trying to overwrite already defined ClassLabel names. Previous: {} "
-          ", new: {}".format(self._int2str, int2str))
+          ", new: {}".format(self._int2str, int2str)
+      )
 
     # Set-up [new] names
     self._int2str = int2str
     self._str2int = {name: i for i, name in enumerate(self._int2str)}
     if len(self._int2str) != len(self._str2int):
       raise ValueError(
-          "Some label names are duplicated. Each label name should be unique.")
+          "Some label names are duplicated. Each label name should be unique."
+      )
 
     # If num_classes has been defined, ensure that num_classes and names match
     num_classes = len(self._str2int)
@@ -112,8 +115,10 @@ class ClassLabel(tensor_feature.Tensor):
     elif self._num_classes != num_classes:
       raise ValueError(
           "ClassLabel number of names do not match the defined num_classes. "
-          "Got {} names VS {} num_classes".format(num_classes,
-                                                  self._num_classes))
+          "Got {} names VS {} num_classes".format(
+              num_classes, self._num_classes
+          )
+      )
 
   def str2int(self, str_value):
     """Conversion class name string => integer."""
@@ -148,7 +153,8 @@ class ClassLabel(tensor_feature.Tensor):
     if self._num_classes is None:
       raise ValueError(
           "Trying to use ClassLabel feature with undefined number of class. "
-          "Please set ClassLabel.names or num_classes.")
+          "Please set ClassLabel.names or num_classes."
+      )
 
     # If a string is given, convert to associated integer
     if isinstance(example_data, str):
@@ -160,8 +166,10 @@ class ClassLabel(tensor_feature.Tensor):
 
     # Allowing -1 to mean no label.
     if not -1 <= example_data < self._num_classes:
-      raise ValueError("Class label %d greater than configured num_classes %d" %
-                       (example_data, self._num_classes))
+      raise ValueError(
+          "Class label %d greater than configured num_classes %d"
+          % (example_data, self._num_classes)
+      )
     return example_data
 
   def save_metadata(self, data_dir, feature_name=None):
@@ -192,7 +200,8 @@ class ClassLabel(tensor_feature.Tensor):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.ClassLabel]) -> "ClassLabel":
+      cls, value: Union[Json, feature_pb2.ClassLabel]
+  ) -> "ClassLabel":
     if isinstance(value, dict):
       return cls(**value)
     return cls(num_classes=value.num_classes)

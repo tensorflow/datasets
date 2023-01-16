@@ -22,11 +22,15 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 
-_TRAIN_SUBSET = ('https://drive.google.com/uc?export=download&'
-                 'id=1Sl1cwy6Dei1I1BMS1YKjI35fkaR1UA_7')
+_TRAIN_SUBSET = (
+    'https://drive.google.com/uc?export=download&'
+    'id=1Sl1cwy6Dei1I1BMS1YKjI35fkaR1UA_7'
+)
 
-_VAL_SUBSET = ('https://drive.google.com/uc?export=download&'
-               'id=1AjYczW4khrQrwPIygXUkHF-Qv4QGEsCF')
+_VAL_SUBSET = (
+    'https://drive.google.com/uc?export=download&'
+    'id=1AjYczW4khrQrwPIygXUkHF-Qv4QGEsCF'
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -81,7 +85,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       raise AssertionError(
           'ImageNet-LT requires manual download of the ImageNet2012 data. '
           'Please download the train and val set and place them into:'
-          '{}, {}'.format(train_path, val_path))
+          '{}, {}'.format(train_path, val_path)
+      )
 
     # Download and load subset file.
     downloaded_dirs = dl_manager.download({
@@ -98,18 +103,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     val_subset = self._postprocess_subset_list(val_subset)
 
     return {
-        'train':
-            self._generate_examples(
-                archive=dl_manager.iter_archive(train_path),
-                subset=train_subset),
-        'validation':
-            self._generate_examples(
-                archive=dl_manager.iter_archive(train_path), subset=val_subset),
-        'test':
-            self._generate_examples(
-                archive=dl_manager.iter_archive(val_path),
-                validation_labels=imagenet_common.get_validation_labels(
-                    val_path))
+        'train': self._generate_examples(
+            archive=dl_manager.iter_archive(train_path), subset=train_subset
+        ),
+        'validation': self._generate_examples(
+            archive=dl_manager.iter_archive(train_path), subset=val_subset
+        ),
+        'test': self._generate_examples(
+            archive=dl_manager.iter_archive(val_path),
+            validation_labels=imagenet_common.get_validation_labels(val_path),
+        ),
     }
 
   def _generate_examples(self, archive, subset=None, validation_labels=None):
@@ -117,7 +120,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # Test split in ImageNet-LT is the validation split in the original ImageNet
     if validation_labels:
       for key, example in imagenet_common.generate_examples_validation(
-          archive, validation_labels):
+          archive, validation_labels
+      ):
         yield key, example
 
     # Training and validation split. Main archive contains archives names after
@@ -130,7 +134,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       # alternative, as this loads ~150MB in RAM.
       fobj_mem = io.BytesIO(fobj.read())
       for image_fname, image in tfds.download.iter_archive(
-          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):  # pytype: disable=wrong-arg-types  # gen-stub-imports
+          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM
+      ):  # pytype: disable=wrong-arg-types  # gen-stub-imports
         if subset is None or image_fname in subset:  # filtering using subset.
           record = {
               'file_name': image_fname,

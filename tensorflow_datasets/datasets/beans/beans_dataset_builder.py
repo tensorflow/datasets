@@ -38,7 +38,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(names=_LABELS)
+            "label": tfds.features.ClassLabel(names=_LABELS),
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/AI-Lab-Makerere/ibean/",
@@ -46,7 +46,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     train_path, val_path, test_path = dl_manager.download(
-        [_TRAIN_URL, _VALIDATION_URL, _TEST_URL])
+        [_TRAIN_URL, _VALIDATION_URL, _TEST_URL]
+    )
 
     return [
         tfds.core.SplitGenerator(

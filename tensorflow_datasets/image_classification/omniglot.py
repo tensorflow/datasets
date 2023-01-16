@@ -65,14 +65,12 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=(105, 105, 3), encoding_format="png"),
-            "alphabet":
-                tfds.features.ClassLabel(num_classes=_NUM_ALPHABETS),
-            "alphabet_char_id":
-                np.int64,
-            "label":
-                tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
+            "image": tfds.features.Image(
+                shape=(105, 105, 3), encoding_format="png"
+            ),
+            "alphabet": tfds.features.ClassLabel(num_classes=_NUM_ALPHABETS),
+            "alphabet_char_id": np.int64,
+            "label": tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
         homepage=_BASE_URL,
@@ -92,20 +90,26 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "directory": extracted_dirs["train"],
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "directory": extracted_dirs["eval"],
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
-            name="small1", gen_kwargs={
+            name="small1",
+            gen_kwargs={
                 "directory": extracted_dirs["small1"],
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
-            name="small2", gen_kwargs={
+            name="small2",
+            gen_kwargs={
                 "directory": extracted_dirs["small2"],
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, directory):
@@ -128,7 +132,7 @@ def _walk_omniglot_dir(directory):
     alphabet_dir = os.path.join(directory, alphabet)
     characters = sorted(tf.io.gfile.listdir(alphabet_dir))
     for character in characters:
-      character_id = int(character[len("character"):]) - 1
+      character_id = int(character[len("character") :]) - 1
       character_dir = os.path.join(alphabet_dir, character)
       images = tf.io.gfile.listdir(character_dir)
       for image in images:

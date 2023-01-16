@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class SummscreenTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for summscreen dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ["fd", "tms"]
 
   DATASET_CLASS = summscreen_dataset_builder.Builder

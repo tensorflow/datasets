@@ -34,7 +34,8 @@ class StarcraftVideoConfig(tfds.core.BuilderConfig):
         release_notes={
             "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
         },
-        **kwargs)
+        **kwargs,
+    )
     self.map_name = map_name
     self.resolution = resolution
     self.size_in_gb = size_in_gb
@@ -103,21 +104,29 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-    features = tfds.features.FeaturesDict({
-        "rgb_screen":
-            tfds.features.Video(
-                shape=(None, self.builder_config.resolution,
-                       self.builder_config.resolution, 3)),  # pytype: disable=wrong-arg-types  # gen-stub-imports
-    })
+    features = tfds.features.FeaturesDict(
+        {
+            "rgb_screen": tfds.features.Video(
+                shape=(
+                    None,
+                    self.builder_config.resolution,
+                    self.builder_config.resolution,
+                    3,
+                )
+            ),  # pytype: disable=wrong-arg-types  # gen-stub-imports
+        }
+    )
     return self.dataset_info_from_configs(
         features=features,
         homepage="https://storage.googleapis.com/scv_dataset/README.html",
     )
 
   def _split_generators(self, dl_manager):
-    url = DATA_URL_DIR + "%s_%dx%d_png/" % (self.builder_config.map_name,
-                                            self.builder_config.resolution,
-                                            self.builder_config.resolution)
+    url = DATA_URL_DIR + "%s_%dx%d_png/" % (
+        self.builder_config.map_name,
+        self.builder_config.resolution,
+        self.builder_config.resolution,
+    )
 
     urls_to_download = {
         "train_%d" % i: url + "train-0000%d-of-00010.tfrecords" % i
@@ -133,16 +142,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "files": [
-                    download for name, download in downloaded_urls.items()
+                    download
+                    for name, download in downloaded_urls.items()
                     if "train" in name
                 ]
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"files": [downloaded_urls["test"]]}),
+            gen_kwargs={"files": [downloaded_urls["test"]]},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"files": [downloaded_urls["valid"]]}),
+            gen_kwargs={"files": [downloaded_urls["valid"]]},
+        ),
     ]
 
   def _parse_single_video(self, example_proto):
@@ -168,10 +181,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     _, seq_feat = tf.io.parse_single_sequence_example(
         example_proto,
         context_features=context_features,
-        sequence_features=sequence_features)
+        sequence_features=sequence_features,
+    )
 
     video_frames = tf.map_fn(
-        tf.image.decode_png, seq_feat["rgb_screen"], dtype=tf.uint8)
+        tf.image.decode_png, seq_feat["rgb_screen"], dtype=tf.uint8
+    )
     return video_frames
 
   def _generate_examples(self, files):
@@ -179,7 +194,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       ds = tf.data.TFRecordDataset(sorted(os.fspath(f) for f in files))
       ds = ds.map(
           self._parse_single_video,
-          num_parallel_calls=tf.data.experimental.AUTOTUNE)
+          num_parallel_calls=tf.data.experimental.AUTOTUNE,
+      )
       iterator = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
       with tf.compat.v1.Session() as sess:
         sess.run(tf.compat.v1.global_variables_initializer())

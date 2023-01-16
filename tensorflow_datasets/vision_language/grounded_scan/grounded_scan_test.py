@@ -21,6 +21,7 @@ from tensorflow_datasets.vision_language.grounded_scan import grounded_scan
 
 class GroundedScanTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for grounded_scan dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ["target_length_split"]
   DATASET_CLASS = grounded_scan.GroundedScan
 

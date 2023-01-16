@@ -33,19 +33,24 @@ url    = "https://www.openml.org/d/40945"
 }
 """
 
-_DESCRIPTION = ("Dataset describing the survival status of "
-                "individual passengers on the Titanic. Missing values in "
-                "the original dataset are represented using ?. "
-                "Float and int missing values are replaced with -1, string "
-                "missing values are replaced with 'Unknown'.")
+_DESCRIPTION = (
+    "Dataset describing the survival status of "
+    "individual passengers on the Titanic. Missing values in "
+    "the original dataset are represented using ?. "
+    "Float and int missing values are replaced with -1, string "
+    "missing values are replaced with 'Unknown'."
+)
 
-_EMBARKED_DICT = collections.OrderedDict([("C", "Cherbourg"),
-                                          ("Q", "Queenstown"),
-                                          ("S", "Southampton"),
-                                          ("?", "Unknown")])
+_EMBARKED_DICT = collections.OrderedDict([
+    ("C", "Cherbourg"),
+    ("Q", "Queenstown"),
+    ("S", "Southampton"),
+    ("?", "Unknown"),
+])
 
-_PCLASS_DICT = collections.OrderedDict([("1", "1st_class"), ("2", "2nd_class"),
-                                        ("3", "3rd_class")])
+_PCLASS_DICT = collections.OrderedDict(
+    [("1", "1st_class"), ("2", "2nd_class"), ("3", "3rd_class")]
+)
 
 _SURVIVED_DICT = {"0": "died", "1": "survived"}
 
@@ -72,23 +77,41 @@ def return_same(d):
 
 def _feature_dict():
   return collections.OrderedDict([
-      ("pclass", (tfds.features.ClassLabel(names=_PCLASS_DICT.values()),
-                  lambda d: convert_to_label(d, _PCLASS_DICT))),
-      ("survived", (tfds.features.ClassLabel(names=_SURVIVED_DICT.values()),
-                    lambda d: convert_to_label(d, _SURVIVED_DICT))),
+      (
+          "pclass",
+          (
+              tfds.features.ClassLabel(names=_PCLASS_DICT.values()),
+              lambda d: convert_to_label(d, _PCLASS_DICT),
+          ),
+      ),
+      (
+          "survived",
+          (
+              tfds.features.ClassLabel(names=_SURVIVED_DICT.values()),
+              lambda d: convert_to_label(d, _SURVIVED_DICT),
+          ),
+      ),
       ("name", (tf.string, convert_to_string)),
-      ("sex", (tfds.features.ClassLabel(names=["male", "female"]),
-               return_same)), ("age", (tf.float32, convert_to_float)),
+      (
+          "sex",
+          (tfds.features.ClassLabel(names=["male", "female"]), return_same),
+      ),
+      ("age", (tf.float32, convert_to_float)),
       ("sibsp", (tf.int32, convert_to_int)),
       ("parch", (tf.int32, convert_to_int)),
       ("ticket", (tf.string, convert_to_string)),
       ("fare", (tf.float32, convert_to_float)),
       ("cabin", (tf.string, convert_to_string)),
-      ("embarked", (tfds.features.ClassLabel(names=_EMBARKED_DICT.values()),
-                    lambda d: convert_to_label(d, _EMBARKED_DICT))),
+      (
+          "embarked",
+          (
+              tfds.features.ClassLabel(names=_EMBARKED_DICT.values()),
+              lambda d: convert_to_label(d, _EMBARKED_DICT),
+          ),
+      ),
       ("boat", (tf.string, convert_to_string)),
       ("body", (tf.int32, convert_to_int)),
-      ("home.dest", (tf.string, convert_to_string))
+      ("home.dest", (tf.string, convert_to_string)),
   ])
 
 
@@ -97,13 +120,16 @@ _URL = "https://www.openml.org/data/get_csv/16826755/phpMYEkMl"
 
 class Titanic(tfds.core.GeneratorBasedBuilder):
   """Titanic dataset."""
+
   VERSION = tfds.core.Version("4.0.0")
   SUPPORTED_VERSIONS = [tfds.core.Version("2.0.0")]
   RELEASE_NOTES = {
       "4.0.0": "Fix inverted labels which were inverted in the 3.0.0.",
-      "3.0.0": ("Use a standard flat dictionary of features for the dataset. "
-                "Use `as_supervised=True` to split the dataset into "
-                "a `(features_dict, survived)` tuple."),
+      "3.0.0": (
+          "Use a standard flat dictionary of features for the dataset. "
+          "Use `as_supervised=True` to split the dataset into "
+          "a `(features_dict, survived)` tuple."
+      ),
       "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
   }
 
@@ -112,18 +138,20 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
     survived_feature, unused_func = supervised_features.pop("survived")
 
     if self.version >= "3.0.0":
-      supervised_keys = ({key: key for key in supervised_features.keys()},
-                         "survived")
+      supervised_keys = (
+          {key: key for key in supervised_features.keys()},
+          "survived",
+      )
       features = features = tfds.features.FeaturesDict(
-          {name: dtype for name, (dtype, func) in _feature_dict().items()})
+          {name: dtype for name, (dtype, func) in _feature_dict().items()}
+      )
     else:
       supervised_keys = ("features", "survived")
       features = tfds.features.FeaturesDict({
           "survived": survived_feature,
           "features": {
-              name: dtype
-              for name, (dtype, func) in supervised_features.items()
-          }
+              name: dtype for name, (dtype, func) in supervised_features.items()
+          },
       })
     return tfds.core.DatasetInfo(
         builder=self,
@@ -131,7 +159,8 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
         features=features,
         supervised_keys=supervised_keys,
         homepage="https://www.openml.org/d/40945",
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download(_URL)
@@ -139,7 +168,8 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"file_path": path}),
+            name=tfds.Split.TRAIN, gen_kwargs={"file_path": path}
+        ),
     ]
 
   def _generate_examples(self, file_path):
@@ -167,5 +197,5 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
               "features": {
                   name: _feature_dict()[name][1](value)
                   for name, value in row.items()
-              }
+              },
           }

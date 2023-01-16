@@ -23,4 +23,5 @@ tfds.builder_cls('salient_span_wikipedia')
 from tensorflow_datasets.core import lazy_builder_import
 
 SalientSpanWikipedia = lazy_builder_import.LazyBuilderImport(
-    'salient_span_wikipedia')
+    'salient_span_wikipedia'
+)

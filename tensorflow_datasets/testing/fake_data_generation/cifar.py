@@ -34,19 +34,32 @@ NUMBER_LABELS = 10
 NUMBER_FINE_LABELS = 100
 NUMBER_COARSE_LABELS = 20
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 FLAGS = flags.FLAGS
 
 
 def cifar10_output_dir():
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "cifar10", "cifar-10-batches-bin")
+  return os.path.join(
+      FLAGS.tfds_dir,
+      "testing",
+      "test_data",
+      "fake_examples",
+      "cifar10",
+      "cifar-10-batches-bin",
+  )
 
 
 def cifar100_output_dir():
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "cifar100", "cifar-100-binary")
+  return os.path.join(
+      FLAGS.tfds_dir,
+      "testing",
+      "test_data",
+      "fake_examples",
+      "cifar100",
+      "cifar-100-binary",
+  )
 
 
 def dump(output_dir, fname, images, labels):
@@ -60,20 +73,25 @@ def dump(output_dir, fname, images, labels):
 
 def generate_cifar100_batch(fname, num_examples):
   images = np.random.randint(
-      256, size=(num_examples, HEIGHT * WIDTH * 3), dtype=np.uint8)
+      256, size=(num_examples, HEIGHT * WIDTH * 3), dtype=np.uint8
+  )
   fine_labels = np.random.randint(
-      NUMBER_FINE_LABELS, size=(num_examples), dtype=np.uint8)
+      NUMBER_FINE_LABELS, size=(num_examples), dtype=np.uint8
+  )
   coarse_labels = np.random.randint(
-      NUMBER_COARSE_LABELS, size=(num_examples), dtype=np.uint8)
+      NUMBER_COARSE_LABELS, size=(num_examples), dtype=np.uint8
+  )
   labels = np.vstack((coarse_labels, fine_labels)).T
   dump(cifar100_output_dir(), fname, images, labels)
 
 
 def generate_cifar10_batch(batch_name):
   images = np.random.randint(
-      256, size=(NUMBER_IMAGES_PER_BATCH, HEIGHT * WIDTH * 3), dtype=np.uint8)
+      256, size=(NUMBER_IMAGES_PER_BATCH, HEIGHT * WIDTH * 3), dtype=np.uint8
+  )
   labels = np.random.randint(
-      NUMBER_LABELS, size=(NUMBER_IMAGES_PER_BATCH), dtype=np.uint8)
+      NUMBER_LABELS, size=(NUMBER_IMAGES_PER_BATCH), dtype=np.uint8
+  )
   dump(cifar10_output_dir(), batch_name, images, labels)
 
 

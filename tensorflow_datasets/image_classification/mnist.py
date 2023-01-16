@@ -89,6 +89,7 @@ _EMNIST_CITATION = """\
 
 class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
+
   URL = _MNIST_URL
 
   VERSION = tfds.core.Version("3.0.1")
@@ -96,7 +97,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=("The MNIST database of handwritten digits."),
+        description="The MNIST database of handwritten digits.",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=MNIST_NUM_CLASSES),
@@ -116,7 +117,8 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
         "test_labels": _MNIST_TEST_LABELS_FILENAME,
     }
     mnist_files = dl_manager.download_and_extract(
-        {k: urllib.parse.urljoin(self.URL, v) for k, v in filenames.items()})
+        {k: urllib.parse.urljoin(self.URL, v) for k, v in filenames.items()}
+    )
 
     # MNIST provides TRAIN and TEST splits, not a VALIDATION split, so we only
     # write the TRAIN and TEST splits to disk.
@@ -127,14 +129,16 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
                 num_examples=_TRAIN_EXAMPLES,
                 data_path=mnist_files["train_data"],
                 label_path=mnist_files["train_labels"],
-            )),
+            ),
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs=dict(
                 num_examples=_TEST_EXAMPLES,
                 data_path=mnist_files["test_data"],
                 label_path=mnist_files["test_labels"],
-            )),
+            ),
+        ),
     ]
 
   def _generate_examples(self, num_examples, data_path, label_path):
@@ -165,19 +169,29 @@ class FashionMNIST(MNIST):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=("Fashion-MNIST is a dataset of Zalando's article images "
-                     "consisting of a training set of 60,000 examples and a "
-                     "test set of 10,000 examples. Each example is a 28x28 "
-                     "grayscale image, associated with a label from 10 "
-                     "classes."),
+        description=(
+            "Fashion-MNIST is a dataset of Zalando's article images "
+            "consisting of a training set of 60,000 examples and a "
+            "test set of 10,000 examples. Each example is a 28x28 "
+            "grayscale image, associated with a label from 10 "
+            "classes."
+        ),
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
-            "label":
-                tfds.features.ClassLabel(names=[
-                    "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
-                    "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"
-                ]),
+            "image": tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(
+                names=[
+                    "T-shirt/top",
+                    "Trouser",
+                    "Pullover",
+                    "Dress",
+                    "Coat",
+                    "Sandal",
+                    "Shirt",
+                    "Sneaker",
+                    "Bag",
+                    "Ankle boot",
+                ]
+            ),
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/zalandoresearch/fashion-mnist",
@@ -191,19 +205,30 @@ class KMNIST(MNIST):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=("Kuzushiji-MNIST is a drop-in replacement for the MNIST "
-                     "dataset (28x28 grayscale, 70,000 images), provided in "
-                     "the original MNIST format as well as a NumPy format. "
-                     "Since MNIST restricts us to 10 classes, we chose one "
-                     "character to represent each of the 10 rows of Hiragana "
-                     "when creating Kuzushiji-MNIST."),
+        description=(
+            "Kuzushiji-MNIST is a drop-in replacement for the MNIST "
+            "dataset (28x28 grayscale, 70,000 images), provided in "
+            "the original MNIST format as well as a NumPy format. "
+            "Since MNIST restricts us to 10 classes, we chose one "
+            "character to represent each of the 10 rows of Hiragana "
+            "when creating Kuzushiji-MNIST."
+        ),
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
-            "label":
-                tfds.features.ClassLabel(names=[
-                    "o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"
-                ]),
+            "image": tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(
+                names=[
+                    "o",
+                    "ki",
+                    "su",
+                    "tsu",
+                    "na",
+                    "ha",
+                    "ma",
+                    "ya",
+                    "re",
+                    "wo",
+                ]
+            ),
         }),
         supervised_keys=("image", "label"),
         homepage="http://codh.rois.ac.jp/kmnist/index.html.en",
@@ -232,6 +257,7 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 
 class EMNIST(MNIST):
   """Emnist dataset."""
+
   URL = "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
   VERSION = tfds.core.Version("3.0.0")
   RELEASE_NOTES = {
@@ -293,39 +319,41 @@ class EMNIST(MNIST):
             "Note: Like the original EMNIST data, images provided here are "
             "inverted horizontally and rotated 90 anti-clockwise. You can use "
             "`tf.transpose` within `ds.map` to convert the images to a "
-            "human-friendlier format."),
+            "human-friendlier format."
+        ),
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
-            "label":
-                tfds.features.ClassLabel(
-                    num_classes=self.builder_config.class_number),
+            "image": tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(
+                num_classes=self.builder_config.class_number
+            ),
         }),
         supervised_keys=("image", "label"),
-        homepage=("https://www.nist.gov/itl/products-and-services/"
-                  "emnist-dataset"),
+        homepage=(
+            "https://www.nist.gov/itl/products-and-services/emnist-dataset"
+        ),
         citation=_EMNIST_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     filenames = {
-        "train_data":
-            "emnist-{}-train-images-idx3-ubyte.gz".format(
-                self.builder_config.name),
-        "train_labels":
-            "emnist-{}-train-labels-idx1-ubyte.gz".format(
-                self.builder_config.name),
-        "test_data":
-            "emnist-{}-test-images-idx3-ubyte.gz".format(
-                self.builder_config.name),
-        "test_labels":
-            "emnist-{}-test-labels-idx1-ubyte.gz".format(
-                self.builder_config.name),
+        "train_data": "emnist-{}-train-images-idx3-ubyte.gz".format(
+            self.builder_config.name
+        ),
+        "train_labels": "emnist-{}-train-labels-idx1-ubyte.gz".format(
+            self.builder_config.name
+        ),
+        "test_data": "emnist-{}-test-images-idx3-ubyte.gz".format(
+            self.builder_config.name
+        ),
+        "test_labels": "emnist-{}-test-labels-idx1-ubyte.gz".format(
+            self.builder_config.name
+        ),
     }
 
     dir_name = os.path.join(dl_manager.download_and_extract(self.URL), "gzip")
     extracted = dl_manager.extract(
-        {k: os.path.join(dir_name, fname) for k, fname in filenames.items()})
+        {k: os.path.join(dir_name, fname) for k, fname in filenames.items()}
+    )
 
     return [
         tfds.core.SplitGenerator(
@@ -334,14 +362,16 @@ class EMNIST(MNIST):
                 num_examples=self.builder_config.train_examples,
                 data_path=extracted["train_data"],
                 label_path=extracted["train_labels"],
-            )),
+            ),
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs=dict(
                 num_examples=self.builder_config.test_examples,
                 data_path=extracted["test_data"],
                 label_path=extracted["test_labels"],
-            ))
+            ),
+        ),
     ]
 
 

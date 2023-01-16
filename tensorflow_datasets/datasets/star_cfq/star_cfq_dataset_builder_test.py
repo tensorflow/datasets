@@ -22,7 +22,8 @@ from tensorflow_datasets.datasets.star_cfq import star_cfq_dataset_builder
 class StarCFQRandomSplitTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = star_cfq_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = [
-      "single_pool_10x_b_cfq", "equal_weighting_1x_b_cfq_1x_x_cfq"
+      "single_pool_10x_b_cfq",
+      "equal_weighting_1x_b_cfq_1x_x_cfq",
   ]
   SPLITS = {
       "train": 2,

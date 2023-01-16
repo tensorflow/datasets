@@ -30,6 +30,7 @@ from tensorflow_datasets.robomimic import dataset_utils
 @dataclasses.dataclass
 class BuilderConfig(tfds.core.BuilderConfig):
   """Configuration of the dataset versions."""
+
   task: str = 'lift'
   filename: str = 'demo'
   horizon: int = 100
@@ -65,7 +66,7 @@ _TASKS = {
         'states': 58,
         'horizon': 700,
         'action_size': 7,
-    }
+    },
 }
 
 
@@ -81,19 +82,23 @@ def _builder_configs():
               name=f'{task}_{obs_type}',
               task=task,
               filename=obs_type,
-              horizon=details['horizon']))
+              horizon=details['horizon'],
+          )
+      )
       # pytype: enable=wrong-keyword-args
   return configs
 
 
 def _float_tensor_feature(size: int) -> tfds.features.Tensor:
   return tfds.features.Tensor(
-      shape=(size,), dtype=np.float64, encoding=tfds.features.Encoding.ZLIB)
+      shape=(size,), dtype=np.float64, encoding=tfds.features.Encoding.ZLIB
+  )
 
 
 def _image_feature(size: int) -> tfds.features.Image:
   return tfds.features.Image(
-      shape=(size, size, 3), dtype=np.uint8, encoding_format='png')
+      shape=(size, size, 3), dtype=np.uint8, encoding_format='png'
+  )
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -121,7 +126,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     action_size = _TASKS[self.builder_config.task]['action_size']
 
     observation = {
-        'object': _float_tensor_feature(obs_dim,),
+        'object': _float_tensor_feature(
+            obs_dim,
+        ),
         'robot0_eef_pos': _float_tensor_feature(3),
         'robot0_eef_quat': _float_tensor_feature(4),
         'robot0_eef_vel_ang': _float_tensor_feature(3),
@@ -175,31 +182,29 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       }
 
     features = tfds.features.FeaturesDict({
-        'horizon':
-            np.int32,
-        'episode_id':
-            np.str_,
-        'steps':
-            tfds.features.Dataset({
-                'action': _float_tensor_feature(action_size),
-                'observation': observation,
-                'reward': np.float64,
-                'is_first': np.bool_,
-                'is_last': np.bool_,
-                'is_terminal': np.bool_,
-                'discount': np.int32,
-                'states': _float_tensor_feature(states_dim),
-            }),
+        'horizon': np.int32,
+        'episode_id': np.str_,
+        'steps': tfds.features.Dataset({
+            'action': _float_tensor_feature(action_size),
+            'observation': observation,
+            'reward': np.float64,
+            'is_first': np.bool_,
+            'is_last': np.bool_,
+            'is_terminal': np.bool_,
+            'discount': np.int32,
+            'states': _float_tensor_feature(states_dim),
+        }),
         **episode_metadata,
     })
     return features
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract({
-        'file_path':
-            f'http://downloads.cs.stanford.edu/downloads/rt_benchmark/{self.builder_config.task}/ph/{self.builder_config.filename}.hdf5'
-    })
+    path = dl_manager.download_and_extract(
+        {
+            'file_path': f'http://downloads.cs.stanford.edu/downloads/rt_benchmark/{self.builder_config.task}/ph/{self.builder_config.filename}.hdf5'
+        }
+    )
 
     return {
         'train': self._generate_examples(path),
@@ -224,5 +229,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               'steps': dataset_utils.build_episode(data[key]),
               'horizon': self.builder_config.horizon,
               'episode_id': key,
-              **dataset_utils.episode_metadata(mask, key)
+              **dataset_utils.episode_metadata(mask, key),
           }

@@ -29,7 +29,12 @@ _URL = "https://zenodo.org/record/1043504/files/corpus-webis-tldr-17.zip?downloa
 _DOCUMENT = "content"
 _SUMMARY = "summary"
 _ADDITIONAL_FEATURES = [
-    "author", "body", "normalizedBody", "subreddit", "subreddit_id", "id"
+    "author",
+    "body",
+    "normalizedBody",
+    "subreddit",
+    "subreddit_id",
+    "id",
 ]
 
 
@@ -41,7 +46,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(
-            {k: np.str_ for k in _ADDITIONAL_FEATURES + [_DOCUMENT, _SUMMARY]}),
+            {k: np.str_ for k in _ADDITIONAL_FEATURES + [_DOCUMENT, _SUMMARY]}
+        ),
         supervised_keys=(_DOCUMENT, _SUMMARY),
         homepage="https://github.com/webis-de/webis-tldr-17-corpus",
     )

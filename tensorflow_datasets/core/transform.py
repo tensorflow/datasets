@@ -121,16 +121,19 @@ def _transform_example(
   if len(in_parts) > 1:
     in_rest = in_parts[1:]
     out_rest = out_parts[1:]
-    if (isinstance(example[in_key], np.ndarray) or
-        isinstance(example[in_key], list)):
+    if isinstance(example[in_key], np.ndarray) or isinstance(
+        example[in_key], list
+    ):
       example[out_key] = [
           _transform_example(
-              example=ex, fn=fn, in_parts=in_rest, out_parts=out_rest)
+              example=ex, fn=fn, in_parts=in_rest, out_parts=out_rest
+          )
           for ex in example[in_key]
       ]
     else:
       example[out_key] = _transform_example(
-          example=example[in_key], fn=fn, in_parts=in_rest, out_parts=out_rest)
+          example=example[in_key], fn=fn, in_parts=in_rest, out_parts=out_rest
+      )
   elif len(in_parts) == 1:
     input_data = example[in_key]
     if isinstance(input_data, List):
@@ -164,14 +167,19 @@ def apply_fn(
     output_parts = output_feature.split("/")
   else:
     output_parts = input_parts
-  if (len(input_parts) != len(output_parts) or
-      input_parts[:-1] != output_parts[:-1]):
-    raise ValueError("The out-feature must have the same ancestor as the "
-                     f"in-feature! Got in={input_parts}, out={output_parts}.")
+  if (
+      len(input_parts) != len(output_parts)
+      or input_parts[:-1] != output_parts[:-1]
+  ):
+    raise ValueError(
+        "The out-feature must have the same ancestor as the "
+        f"in-feature! Got in={input_parts}, out={output_parts}."
+    )
 
   def transform(example: Example) -> Iterator[Example]:
     yield _transform_example(
-        example=example, fn=fn, in_parts=input_parts, out_parts=output_parts)
+        example=example, fn=fn, in_parts=input_parts, out_parts=output_parts
+    )
 
   return transform
 
@@ -217,7 +225,9 @@ def _apply_do_fn(
   yield from fn(example)
 
 
-def apply_do_fn(fn: Callable[[Any], Iterator[Any]],) -> ExampleTransformFn:
+def apply_do_fn(
+    fn: Callable[[Any], Iterator[Any]],
+) -> ExampleTransformFn:
   """Applies `fn` that can return any number of examples based on an input.
 
   A do_fn can be used for multiple purposes such as augmentations, but also to
@@ -242,7 +252,8 @@ def _apply_transformations_no_key(
     other_fns = transformations[1:]
     for v in fn(example):
       yield from _apply_transformations_no_key(
-          example=v, transformations=other_fns)
+          example=v, transformations=other_fns
+      )
   else:
     yield example
 
@@ -254,5 +265,7 @@ def apply_transformations(
 ) -> Iterator[KeyExample]:
   for i, transformed_example in enumerate(
       _apply_transformations_no_key(
-          example=example, transformations=transformations)):
+          example=example, transformations=transformations
+      )
+  ):
     yield f"{key}_{i}", transformed_example

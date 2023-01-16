@@ -60,11 +60,13 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image_sequence":
-                tfds.features.Video(
-                    shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,))
-        }),
+        features=tfds.features.FeaturesDict(
+            {
+                "image_sequence": tfds.features.Video(
+                    shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,)
+                )
+            }
+        ),
         homepage=_URL,
         citation=_CITATION,
     )
@@ -77,7 +79,8 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     # function to create training/validation dataset from MNIST.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs=dict(data_path=data_path)),
+            name=tfds.Split.TEST, gen_kwargs=dict(data_path=data_path)
+        ),
     ]
 
   def _generate_examples(self, data_path):

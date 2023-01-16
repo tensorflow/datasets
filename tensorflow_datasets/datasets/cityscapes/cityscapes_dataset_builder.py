@@ -25,21 +25,23 @@ import tensorflow_datasets.public_api as tfds
 class CityscapesConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Cityscapes.
 
-    Args:
-      right_images (bool): Enables right images for stereo image tasks.
-      segmentation_labels (bool): Enables image segmentation labels.
-      disparity_maps (bool): Enables disparity maps.
-      train_extra_split (bool): Enables train_extra split. This automatically
-        enables coarse grain segmentations, if segmentation labels are used.
+  Args:
+    right_images (bool): Enables right images for stereo image tasks.
+    segmentation_labels (bool): Enables image segmentation labels.
+    disparity_maps (bool): Enables disparity maps.
+    train_extra_split (bool): Enables train_extra split. This automatically
+      enables coarse grain segmentations, if segmentation labels are used.
   """
 
-  def __init__(self,
-               *,
-               right_images=False,
-               segmentation_labels=True,
-               disparity_maps=False,
-               train_extra_split=False,
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      right_images=False,
+      segmentation_labels=True,
+      disparity_maps=False,
+      train_extra_split=False,
+      **kwargs,
+  ):
     super(CityscapesConfig, self).__init__(version='1.0.0', **kwargs)
 
     self.right_images = right_images
@@ -51,40 +53,56 @@ class CityscapesConfig(tfds.core.BuilderConfig):
 
     # Setup required zips and their root dir names
     self.zip_root = {}
-    self.zip_root['images_left'] = ('leftImg8bit_trainvaltest.zip',
-                                    'leftImg8bit')
+    self.zip_root['images_left'] = (
+        'leftImg8bit_trainvaltest.zip',
+        'leftImg8bit',
+    )
 
     if self.train_extra_split:
-      self.zip_root['images_left/extra'] = ('leftImg8bit_trainextra.zip',
-                                            'leftImg8bit')
+      self.zip_root['images_left/extra'] = (
+          'leftImg8bit_trainextra.zip',
+          'leftImg8bit',
+      )
 
     if self.right_images:
-      self.zip_root['images_right'] = ('rightImg8bit_trainvaltest.zip',
-                                       'rightImg8bit')
+      self.zip_root['images_right'] = (
+          'rightImg8bit_trainvaltest.zip',
+          'rightImg8bit',
+      )
       if self.train_extra_split:
-        self.zip_root['images_right/extra'] = ('rightImg8bit_trainextra.zip',
-                                               'rightImg8bit')
+        self.zip_root['images_right/extra'] = (
+            'rightImg8bit_trainextra.zip',
+            'rightImg8bit',
+        )
 
     if self.segmentation_labels:
       if not self.train_extra_split:
-        self.zip_root['segmentation_labels'] = ('gtFine_trainvaltest.zip',
-                                                'gtFine')
+        self.zip_root['segmentation_labels'] = (
+            'gtFine_trainvaltest.zip',
+            'gtFine',
+        )
         self.label_suffix = 'gtFine_labelIds'
       else:
         # The 'train extra' split only has coarse labels unlike train and val.
         # Therefore, for consistency across splits, we also enable coarse labels
         # using the train_extra_split flag.
         self.zip_root['segmentation_labels'] = ('gtCoarse.zip', 'gtCoarse')
-        self.zip_root['segmentation_labels/extra'] = ('gtCoarse.zip',
-                                                      'gtCoarse')
+        self.zip_root['segmentation_labels/extra'] = (
+            'gtCoarse.zip',
+            'gtCoarse',
+        )
         self.label_suffix = 'gtCoarse_labelIds'
 
     if self.disparity_maps:
-      self.zip_root['disparity_maps'] = ('disparity_trainvaltest.zip',
-                                         'disparity')
+      self.zip_root['disparity_maps'] = (
+          'disparity_trainvaltest.zip',
+          'disparity',
+      )
       if self.train_extra_split:
-        self.zip_root['disparity_maps/extra'] = ('disparity_trainextra.zip',
-                                                 'disparity')
+        self.zip_root['disparity_maps/extra'] = (
+            'disparity_trainextra.zip',
+            'disparity',
+        )
         # No disparity for this file
         self.ignored_ids.add('troisdorf_000000_000073')
 
@@ -111,7 +129,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       ),
       CityscapesConfig(
           name='semantic_segmentation_extra',
-          description='Cityscapes semantic segmentation dataset with train_extra split and coarse labels.',  # pylint: disable=line-too-long
+          description=(  # pylint: disable=line-too-long
+              'Cityscapes semantic segmentation dataset with train_extra split'
+              ' and coarse labels.'
+          ),
           right_images=False,
           segmentation_labels=True,
           disparity_maps=False,
@@ -127,7 +148,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       ),
       CityscapesConfig(
           name='stereo_disparity_extra',
-          description='Cityscapes stereo image and disparity maps dataset with train_extra split.',  # pylint: disable=line-too-long
+          description=(  # pylint: disable=line-too-long
+              'Cityscapes stereo image and disparity maps dataset with'
+              ' train_extra split.'
+          ),
           right_images=True,
           segmentation_labels=False,
           disparity_maps=True,
@@ -140,19 +164,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     features = {}
     features['image_id'] = tfds.features.Text()
     features['image_left'] = tfds.features.Image(
-        shape=(1024, 2048, 3), encoding_format='png')
+        shape=(1024, 2048, 3), encoding_format='png'
+    )
 
     if self.builder_config.right_images:
       features['image_right'] = tfds.features.Image(
-          shape=(1024, 2048, 3), encoding_format='png')
+          shape=(1024, 2048, 3), encoding_format='png'
+      )
 
     if self.builder_config.segmentation_labels:
       features['segmentation_label'] = tfds.features.Image(
-          shape=(1024, 2048, 1), encoding_format='png', use_colormap=True)
+          shape=(1024, 2048, 1), encoding_format='png', use_colormap=True
+      )
 
     if self.builder_config.disparity_maps:
       features['disparity_map'] = tfds.features.Image(
-          shape=(1024, 2048, 1), encoding_format='png')
+          shape=(1024, 2048, 1), encoding_format='png'
+      )
 
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(features),
@@ -201,18 +229,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                   for feat_dir, path in paths.items()
                   if not feat_dir.endswith('/extra')
               },
-          ))
+          )
+      )
     else:
       splits.append(
           tfds.core.SplitGenerator(
               name='train_extra',
               gen_kwargs={  # pylint: disable=g-complex-comprehension
-                  feat_dir.replace('/extra', ''):
-                  os.path.join(path, 'train_extra')
+                  feat_dir.replace('/extra', ''): os.path.join(
+                      path, 'train_extra'
+                  )
                   for feat_dir, path in paths.items()
                   if feat_dir.endswith('/extra')
               },
-          ))
+          )
+      )
     return splits
 
   def _generate_examples(self, **paths):
@@ -239,17 +270,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         if self.builder_config.right_images:
           features['image_right'] = os.path.join(
               paths_city_root['images_right'],
-              '{}_rightImg8bit.png'.format(image_id))
+              '{}_rightImg8bit.png'.format(image_id),
+          )
 
         if self.builder_config.segmentation_labels:
           features['segmentation_label'] = os.path.join(
               paths_city_root['segmentation_labels'],
-              '{}_{}.png'.format(image_id, self.builder_config.label_suffix))
+              '{}_{}.png'.format(image_id, self.builder_config.label_suffix),
+          )
 
         if self.builder_config.disparity_maps:
           features['disparity_map'] = os.path.join(
               paths_city_root['disparity_maps'],
-              '{}_disparity.png'.format(image_id))
+              '{}_disparity.png'.format(image_id),
+          )
 
         yield image_id, features
 

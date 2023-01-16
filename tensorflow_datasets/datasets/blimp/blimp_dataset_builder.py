@@ -42,7 +42,8 @@ class BlimpConfig(tfds.core.BuilderConfig):
         name=name,
         description=f'This configuration includes the paradigm {name}.',
         version=tfds.core.Version('0.1.0'),
-        **kwargs)
+        **kwargs,
+    )
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -153,7 +154,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={'filepath': downloaded_files[cfg.name]})
+            gen_kwargs={'filepath': downloaded_files[cfg.name]},
+        )
     ]
 
   def _generate_examples(self, filepath):

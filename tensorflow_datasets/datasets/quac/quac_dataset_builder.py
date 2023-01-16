@@ -39,30 +39,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "context":
-                tfds.features.Text(),
-            "followup":
-                tfds.features.Text(),
-            "yesno":
-                tfds.features.Text(),
-            "question":
-                tfds.features.Text(),
-            "answers":
-                tfds.features.Sequence({
-                    "text": tfds.features.Text(),
-                    "answer_start": np.int32,
-                }),
-            "orig_answer":
-                tfds.features.FeaturesDict({
-                    "text": tfds.features.Text(),
-                    "answer_start": np.int32,
-                }),
-            "section_title":
-                tfds.features.Text(),
-            "background":
-                tfds.features.Text(),
-            "title":
-                tfds.features.Text()
+            "context": tfds.features.Text(),
+            "followup": tfds.features.Text(),
+            "yesno": tfds.features.Text(),
+            "question": tfds.features.Text(),
+            "answers": tfds.features.Sequence({
+                "text": tfds.features.Text(),
+                "answer_start": np.int32,
+            }),
+            "orig_answer": tfds.features.FeaturesDict({
+                "text": tfds.features.Text(),
+                "answer_start": np.int32,
+            }),
+            "section_title": tfds.features.Text(),
+            "background": tfds.features.Text(),
+            "title": tfds.features.Text(),
         }),
         homepage="https://quac.ai/",
         supervised_keys=("context", "answers"),
@@ -73,12 +64,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     expected_paths = dl_manager.download_and_extract({
         "train": _DATA_URL + "train_v0.2.json",
-        "val": _DATA_URL + "val_v0.2.json"
+        "val": _DATA_URL + "val_v0.2.json",
     })
 
     return {
         "train": self._generate_examples(expected_paths["train"]),
-        "validation": self._generate_examples(expected_paths["val"])
+        "validation": self._generate_examples(expected_paths["val"]),
     }
 
   def _generate_examples(self, filepath):
@@ -101,5 +92,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "orig_answer": qa["orig_answer"],
                 "section_title": section_title,
                 "background": background,
-                "title": tilte
+                "title": tilte,
             }

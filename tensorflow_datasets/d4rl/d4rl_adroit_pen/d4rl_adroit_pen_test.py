@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlAdroitPenClonedV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
+
   DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
 
   SPLITS = {
@@ -36,6 +37,7 @@ class D4rlAdroitPenClonedV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenExpertV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
+
   DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
 
   SPLITS = {
@@ -51,6 +53,7 @@ class D4rlAdroitPenExpertV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenHumanV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
+
   DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
 
   SPLITS = {
@@ -66,6 +69,7 @@ class D4rlAdroitPenHumanV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenClonedV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
+
   DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
 
   SPLITS = {
@@ -81,6 +85,7 @@ class D4rlAdroitPenClonedV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenExpertV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
+
   DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
 
   SPLITS = {
@@ -96,6 +101,7 @@ class D4rlAdroitPenExpertV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenHumanV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
+
   DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
 
   SPLITS = {

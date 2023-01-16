@@ -18,7 +18,6 @@ import tensorflow_datasets.testing as tfds_test
 
 
 class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
-
   DATASET_CLASS = caltech_birds.CaltechBirds2010
 
   SPLITS = {  # No. of train and test samples
@@ -30,7 +29,6 @@ class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
 
 
 class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
-
   DATASET_CLASS = caltech_birds.CaltechBirds2011
 
   SPLITS = {  # No. of train and test samples
@@ -39,7 +37,8 @@ class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = [
-      'extracted/TAR_GZ.CUB_200_2011.tar.gz', 'extracted/segmentations.tgz'
+      'extracted/TAR_GZ.CUB_200_2011.tar.gz',
+      'extracted/segmentations.tgz',
   ]
 
   DL_DOWNLOAD_RESULT = ['CUB_200_2011.tar.gz']

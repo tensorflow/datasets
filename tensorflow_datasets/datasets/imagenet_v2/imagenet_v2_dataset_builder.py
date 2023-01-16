@@ -36,7 +36,7 @@ _TAR_TOPDIR = {
 
 
 class ImagenetV2Config(tfds.core.BuilderConfig):
-  """"Configuration specifying the variant to use."""
+  """ "Configuration specifying the variant to use."""
 
   def __init__(self, *, variant, **kwargs):
     """The parameters specifying how the dataset will be processed.
@@ -50,8 +50,11 @@ class ImagenetV2Config(tfds.core.BuilderConfig):
     """
     super(ImagenetV2Config, self).__init__(**kwargs)
     if variant not in _IMAGENET_V2_URLS:
-      raise ValueError('Unknown split number {}, must be one of {}'.format(
-          variant, list(_IMAGENET_V2_URLS)))
+      raise ValueError(
+          'Unknown split number {}, must be one of {}'.format(
+              variant, list(_IMAGENET_V2_URLS)
+          )
+      )
     self.variant = variant
 
 
@@ -71,12 +74,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       tfds.core.Version('2.0.0'),
   ]
   RELEASE_NOTES = {
-      '1.0.0':
-          'Initial version.',
-      '2.0.0':
-          'Files updated.',
-      '3.0.0': ('Fix file_name, from absolute path to path relative to '
-                'data directory, ie: "class_id/filename.jpg".'),
+      '1.0.0': 'Initial version.',
+      '2.0.0': 'Files updated.',
+      '3.0.0': (
+          'Fix file_name, from absolute path to path relative to '
+          'data directory, ie: "class_id/filename.jpg".'
+      ),
   }
   BUILDER_CONFIGS = list(_create_builder_configs())
 
@@ -99,7 +102,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     variant_url = _IMAGENET_V2_URLS[self.builder_config.variant]
     imagenet_v2_root = os.path.join(
         dl_manager.download_and_extract(variant_url),
-        _TAR_TOPDIR[self.builder_config.variant])
+        _TAR_TOPDIR[self.builder_config.variant],
+    )
     return [
         tfds.core.SplitGenerator(
             # The dataset provides only a test split.

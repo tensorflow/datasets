@@ -24,9 +24,23 @@ class PlantaeKTest(testing.DatasetBuilderTestCase):
   # See note below about the +1
   SPLITS = {"train": 16 + 1}
   _LABEL_TAGS = [
-      "apple_d", "apple_h", "apricot_d", "apricot_h", "cherry_d", "cherry_h",
-      "cranberry_d", "cranberry_h", "grapes_d", "grapes_h", "peach_d",
-      "peach_h", "pear_d", "pear_h", "walnut_d", "walnut_h", "walnut-h"
+      "apple_d",
+      "apple_h",
+      "apricot_d",
+      "apricot_h",
+      "cherry_d",
+      "cherry_h",
+      "cranberry_d",
+      "cranberry_h",
+      "grapes_d",
+      "grapes_h",
+      "peach_d",
+      "peach_h",
+      "pear_d",
+      "pear_h",
+      "walnut_d",
+      "walnut_h",
+      "walnut-h",
   ]
   # NOTE: Must match file names in the test directory. Due to bug in file naming
   # we have to have both walnut_d and walnut_h for healthy walnut.

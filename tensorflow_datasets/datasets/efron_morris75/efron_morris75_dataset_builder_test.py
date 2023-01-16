@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class EfronMorris75Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for efron_morris_75 dataset."""
+
   DATASET_CLASS = efron_morris75_dataset_builder.Builder
   SPLITS = {'train': 4}
 

@@ -23,4 +23,5 @@ tfds.builder_cls('bair_robot_pushing_small')
 from tensorflow_datasets.core import lazy_builder_import
 
 BairRobotPushingSmall = lazy_builder_import.LazyBuilderImport(
-    'bair_robot_pushing_small')
+    'bair_robot_pushing_small'
+)

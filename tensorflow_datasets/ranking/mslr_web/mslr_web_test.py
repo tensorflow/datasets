@@ -21,6 +21,7 @@ from tensorflow_datasets.ranking.mslr_web import mslr_web
 
 class MslrWebTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for mslr_web dataset."""
+
   DATASET_CLASS = mslr_web.MslrWeb
   SPLITS = {
       "train": 6,

@@ -89,10 +89,9 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Define Splits."""
-    paths = dl_manager.download_and_extract({
-        "image": _URL,
-        "label": _URL_LABELS
-    })
+    paths = dl_manager.download_and_extract(
+        {"image": _URL, "label": _URL_LABELS}
+    )
 
     return [
         tfds.core.SplitGenerator(
@@ -122,5 +121,5 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
     for file_name in tf.io.gfile.listdir(data_dir_path):
       yield file_name, {
           "image": os.path.join(data_dir_path, file_name),
-          "label": filename_to_label[file_name]
+          "label": filename_to_label[file_name],
       }

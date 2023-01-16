@@ -20,9 +20,9 @@ from tensorflow_datasets.rl_unplugged import dmlab_dataset
 from tensorflow_datasets.rl_unplugged.rlu_dmlab_rooms_watermaze import rlu_dmlab_rooms_watermaze
 
 
-class RluDmlabRoomsWatermazeTest(
-    tfds.testing.DatasetBuilderTestCase):
+class RluDmlabRoomsWatermazeTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_dmlab_rooms_watermaze dataset."""
+
   DATASET_CLASS = rlu_dmlab_rooms_watermaze.RluDmlabRoomsWatermaze
   SPLITS = {
       'train': 2,  # Number of fake train example

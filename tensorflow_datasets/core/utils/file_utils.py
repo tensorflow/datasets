@@ -42,7 +42,8 @@ _registered_data_dir = set()
 @docs.deprecated
 def as_path(path: PathLike) -> Path:
   """DEPRECATED. Please use `from etils import epath` with `epath.Path()`."""
-  msg = py_utils.dedent("""
+  msg = py_utils.dedent(
+      """
       `tfds.core.as_path` is deprecated. Pathlib API has been moved to a
       separate module. To migrate, use:
 
@@ -56,8 +57,7 @@ def as_path(path: PathLike) -> Path:
       Installation: `pip install etils[epath]`
 
       """
-
-                       )
+  )
   logging.warning(msg)
   return epath.Path(path)
 
@@ -83,8 +83,10 @@ def add_data_dir(data_dir):
   _registered_data_dir.add(data_dir)
 
 
-def list_data_dirs(given_data_dir: Optional[ListOrElem[PathLike]] = None,
-                   dataset: Optional[str] = None) -> List[PathLike]:
+def list_data_dirs(
+    given_data_dir: Optional[ListOrElem[PathLike]] = None,
+    dataset: Optional[str] = None,
+) -> List[PathLike]:
   """Return the list of all `data_dir` to look-up.
 
   Args:
@@ -104,13 +106,15 @@ def list_data_dirs(given_data_dir: Optional[ListOrElem[PathLike]] = None,
       return [given_data_dir]
   else:
     default_data_dir = get_default_data_dir(
-        given_data_dir=given_data_dir, dataset=dataset)
+        given_data_dir=given_data_dir, dataset=dataset
+    )
     all_data_dirs = _registered_data_dir | {default_data_dir}
     return sorted(os.path.expanduser(d) for d in all_data_dirs)
 
 
-def get_default_data_dir(given_data_dir: Optional[str] = None,
-                         dataset: Optional[str] = None) -> str:
+def get_default_data_dir(
+    given_data_dir: Optional[str] = None, dataset: Optional[str] = None
+) -> str:
   """Returns the default data_dir."""
   if given_data_dir:
     return os.path.expanduser(given_data_dir)
@@ -156,8 +160,9 @@ def is_version_folder(
 
 def _looks_like_a_tfds_file(filename: str) -> bool:
   filename_has_shard_re = re.compile(r'.*\d{5,}-of-\d{5,}.*')
-  return (bool(filename_has_shard_re.match(filename)) or
-          filename.endswith('.json'))
+  return bool(filename_has_shard_re.match(filename)) or filename.endswith(
+      '.json'
+  )
 
 
 def list_dataset_variants(
@@ -183,15 +188,18 @@ def list_dataset_variants(
   dataset_dir = epath.Path(dataset_dir)
   data_dir = dataset_dir.parent
   base_reference = naming.DatasetReference(
-      dataset_name=dataset_name, namespace=namespace, data_dir=data_dir)
+      dataset_name=dataset_name, namespace=namespace, data_dir=data_dir
+  )
 
   is_version_folder_ = functools.partial(
       is_version_folder,
       check_content=include_versions,
-      include_old_tfds_version=include_old_tfds_version)
+      include_old_tfds_version=include_old_tfds_version,
+  )
 
   def get_dataset_references(
-      config_or_version_dir: epath.Path) -> Iterator[naming.DatasetReference]:
+      config_or_version_dir: epath.Path,
+  ) -> Iterator[naming.DatasetReference]:
     if _looks_like_a_tfds_file(config_or_version_dir.name):
       return
     logging.info('Getting configs and versions in %s', config_or_version_dir)
@@ -208,12 +216,15 @@ def list_dataset_variants(
         for version_dir in config_or_version_dir.iterdir():
           if is_version_folder_(version_dir):
             yield base_reference.replace(
-                config=config, version=version_dir.name)
+                config=config, version=version_dir.name
+            )
 
   with concurrent.futures.ThreadPoolExecutor(
-      max_workers=multiprocessing.cpu_count()) as executor:
-    for references in executor.map(get_dataset_references,
-                                   dataset_dir.iterdir()):
+      max_workers=multiprocessing.cpu_count()
+  ) as executor:
+    for references in executor.map(
+        get_dataset_references, dataset_dir.iterdir()
+    ):
       yield from references
 
 
@@ -253,10 +264,12 @@ def list_datasets_in_data_dir(
           dataset_dir=dataset_dir,
           namespace=namespace,
           include_versions=include_versions,
-          include_old_tfds_version=include_old_tfds_version)
+          include_old_tfds_version=include_old_tfds_version,
+      )
     else:
       yield naming.DatasetReference(
-          dataset_name=dataset_dir.name, namespace=namespace, data_dir=data_dir)
+          dataset_name=dataset_dir.name, namespace=namespace, data_dir=data_dir
+      )
 
 
 @functools.lru_cache(maxsize=None)

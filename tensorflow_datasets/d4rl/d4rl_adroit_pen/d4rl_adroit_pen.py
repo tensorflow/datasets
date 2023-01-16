@@ -39,9 +39,11 @@ class D4rlAdroitPen(dataset_builder.D4RLDatasetBuilder):
           env='adroit',
           file_suffix='-expert-v1',
           step_metadata_keys=frozenset([
-              dataset_builder._QPOS, dataset_builder._QVEL,
-              dataset_builder._ADROIT_BODY_POS, dataset_builder._ACTION_MEAN,
-              dataset_builder._ACTION_LOG_STD
+              dataset_builder._QPOS,
+              dataset_builder._QVEL,
+              dataset_builder._ADROIT_BODY_POS,
+              dataset_builder._ACTION_MEAN,
+              dataset_builder._ACTION_LOG_STD,
           ]),
           episode_metadata_keys=frozenset([dataset_builder._ALGORITHM]),
           has_policy_metadata=True,
@@ -55,5 +57,6 @@ class D4rlAdroitPen(dataset_builder.D4RLDatasetBuilder):
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(
-        name='pen', obs_len=45, action_len=24, qpos_len=30, qvel_len=30)
+        name='pen', obs_len=45, action_len=24, qpos_len=30, qvel_len=30
+    )
     super().__init__(ds_config=config, **kwargs)

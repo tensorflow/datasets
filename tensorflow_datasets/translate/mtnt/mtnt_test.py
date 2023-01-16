@@ -21,6 +21,7 @@ from tensorflow_datasets.translate.mtnt import mtnt
 
 class MtntTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for mtnt dataset."""
+
   DATASET_CLASS = mtnt.Mtnt
   BUILDER_CONFIG_NAMES_TO_TEST = ['en-fr']
   SPLITS = {

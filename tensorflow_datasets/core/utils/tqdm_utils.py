@@ -36,7 +36,6 @@ class TqdmStream:
   for _ in tqdm.tqdm(range(10)):
     logger.info('No visual artifacts')
   ```
-
   """
 
   def write(self, x):
@@ -120,7 +119,6 @@ def disable_progress_bar():
   ```
   tfds.disable_progress_bar()
   ```
-
   """
   # Replace tqdm
   global _active
@@ -135,7 +133,6 @@ def enable_progress_bar():
   ```
   tfds.enable_progress_bar()
   ```
-
   """
   # Replace tqdm
   global _active
@@ -170,6 +167,7 @@ def _async_tqdm(*args, **kwargs):
 
 class _TqdmPbarAsync(object):
   """Wrapper around Tqdm pbar which be shared between thread."""
+
   _tqdm_bars = []
 
   def __init__(self, pbar):

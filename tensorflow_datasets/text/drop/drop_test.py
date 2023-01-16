@@ -21,6 +21,7 @@ from tensorflow_datasets.text.drop import drop
 
 class DropTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for drop dataset."""
+
   DATASET_CLASS = drop.Drop
   SPLITS = {
       'train': 20,  # Number of fake train example

@@ -68,9 +68,10 @@ def _get_step_metadata(step: Any) -> Dict[str, Any]:
 def get_episode_dict(
     episode: Sequence[Any],
     episode_metadata: Dict[str, Any],
-    episode_metadata_fn: Callable[[Dict[str, Any]],
-                                  Optional[Dict[str, Any]]] = lambda x: x,
-    step_fn: Callable[[Dict[str, Any]], Dict[str, Any]] = lambda x: x
+    episode_metadata_fn: Callable[
+        [Dict[str, Any]], Optional[Dict[str, Any]]
+    ] = lambda x: x,
+    step_fn: Callable[[Dict[str, Any]], Dict[str, Any]] = lambda x: x,
 ) -> Optional[Dict[str, Any]]:
   """Obtains an RLDS episode from an Envlogger episode.
 
@@ -100,9 +101,10 @@ def get_episode_dict(
 
 def generate_episodes(
     tag_reader: Any,
-    episode_metadata_fn: Callable[[Dict[str, Any]],
-                                  Optional[Dict[str, Any]]] = lambda x: x,
-    step_fn: Callable[[Dict[str, Any]], Dict[str, Any]] = lambda x: x
+    episode_metadata_fn: Callable[
+        [Dict[str, Any]], Optional[Dict[str, Any]]
+    ] = lambda x: x,
+    step_fn: Callable[[Dict[str, Any]], Dict[str, Any]] = lambda x: x,
 ) -> Generator[Dict[str, Any], None, None]:
   """Generates episodes by reading them from the tag_reader.
 
@@ -118,19 +120,21 @@ def generate_episodes(
   """
   for index, episode_metadata in enumerate(tag_reader.episode_metadata()):
     episode = tag_reader.episodes[index]
-    episode_dict = get_episode_dict(episode, episode_metadata,
-                                    episode_metadata_fn, step_fn)
+    episode_dict = get_episode_dict(
+        episode, episode_metadata, episode_metadata_fn, step_fn
+    )
     if episode_dict:
       yield episode_dict
 
 
 def _build_empty_step(
-    step: Any, step_fn: Callable[[Dict[str, Any]],
-                                 Dict[str, Any]]) -> Dict[str, Any]:
+    step: Any, step_fn: Callable[[Dict[str, Any]], Dict[str, Any]]
+) -> Dict[str, Any]:
   """Builds a step with the same shape and dtype of an RLDS step."""
   rlds_step = tree_utils.map_structure(np.zeros_like, _get_step_metadata(step))
-  rlds_step['observation'] = tree_utils.map_structure(np.zeros_like,
-                                                      step.timestep.observation)
+  rlds_step['observation'] = tree_utils.map_structure(
+      np.zeros_like, step.timestep.observation
+  )
   rlds_step['action'] = tree_utils.map_structure(np.zeros_like, step.action)
   rlds_step['reward'] = np.zeros_like(step.timestep.reward)
   rlds_step['discount'] = np.zeros_like(step.timestep.discount)
@@ -142,8 +146,10 @@ def _build_empty_step(
 
 
 def _build_step(
-    prev_step: Any, step: Any,
-    step_fn: Callable[[Dict[str, Any]], Dict[str, Any]]) -> Dict[str, Any]:
+    prev_step: Any,
+    step: Any,
+    step_fn: Callable[[Dict[str, Any]], Dict[str, Any]],
+) -> Dict[str, Any]:
   """Builds an RLDS step from two envlogger steps."""
   rlds_step = _get_step_metadata(prev_step)
   rlds_step['observation'] = prev_step.timestep.observation
@@ -158,23 +164,23 @@ def _build_step(
 
 
 def _build_last_step(
-    prev_step: Any, step_fn: Callable[[Dict[str, Any]],
-                                      Dict[str, Any]]) -> Dict[str, Any]:
+    prev_step: Any, step_fn: Callable[[Dict[str, Any]], Dict[str, Any]]
+) -> Dict[str, Any]:
   """Builds the last RLDS step from an envlogger step."""
   # We append the observation of the final step (action and reward were
   # included in the previous step.
   # The terminal flag is inferred like in termination(), truncation()
   # from dm_env/_environment.py
-  is_terminal = (
-      prev_step.timestep.last() and prev_step.timestep.discount == 0.0)
+  is_terminal = prev_step.timestep.last() and prev_step.timestep.discount == 0.0
   rlds_step = _get_step_metadata(prev_step)
   rlds_step['observation'] = prev_step.timestep.observation
   rlds_step['is_terminal'] = is_terminal
   rlds_step['is_first'] = prev_step.timestep.first()
   rlds_step['is_last'] = True
   # Discount, action and reward are meaningless in the last step
-  rlds_step['action'] = tree_utils.map_structure(np.zeros_like,
-                                                 prev_step.action)
+  rlds_step['action'] = tree_utils.map_structure(
+      np.zeros_like, prev_step.action
+  )
   rlds_step['reward'] = np.zeros_like(prev_step.timestep.reward)
   rlds_step['discount'] = np.zeros_like(prev_step.timestep.discount)
 
@@ -182,8 +188,8 @@ def _build_last_step(
 
 
 def _generate_steps(
-    episode: Sequence[Any],
-    step_fn: Callable[[Dict[str, Any]], Dict[str, Any]]) -> Dict[str, Any]:
+    episode: Sequence[Any], step_fn: Callable[[Dict[str, Any]], Dict[str, Any]]
+) -> Dict[str, Any]:
   """Constructs a dictionary of steps for the given episode.
 
   Args:
@@ -219,8 +225,9 @@ def _generate_steps(
 
 
 def _append_nested(
-    collection: Any, data: Union[np.ndarray, List[Any], Tuple[Any, ...],
-                                 Dict[str, Any]]) -> Any:
+    collection: Any,
+    data: Union[np.ndarray, List[Any], Tuple[Any, ...], Dict[str, Any]],
+) -> Any:
   """Appends data to the more nested dimension of collection.
 
   Args:
@@ -241,7 +248,8 @@ def _append_nested(
   elif isinstance(data, tuple):
     return tuple(
         _append_nested(collection[index], value)
-        for index, value in enumerate(data))
+        for index, value in enumerate(data)
+    )
   else:
     collection.append(data)
     return collection
@@ -249,8 +257,8 @@ def _append_nested(
 
 def _apply_recursive(
     data: Union[np.ndarray, List[Any], Tuple[Any, ...], Dict[str, Any]],
-    fn: Callable[[Any],
-                 Any]) -> Union[List[Any], Tuple[Any, ...], Dict[str, Any]]:
+    fn: Callable[[Any], Any],
+) -> Union[List[Any], Tuple[Any, ...], Dict[str, Any]]:
   """Applies a function recursively to the nested dimensions of the input.
 
   Args:

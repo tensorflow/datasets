@@ -25,22 +25,26 @@ import tensorflow_datasets.public_api as tfds
 
 _FOLDER_PATH = "mock/path"
 
-_VALID_INPUT = textwrap.dedent("""
+_VALID_INPUT = textwrap.dedent(
+    """
 -DOCSTART- -X- -X- O
 Winter NN B-NP O
 is VBZ B-VP O
 
 Air NN I-NP O
 . . O O
-""")
+"""
+)
 
-_INVALID_INPUT = textwrap.dedent("""
+_INVALID_INPUT = textwrap.dedent(
+    """
 Winter NN B-NP
 is VBZ B-VP O
 
 Air NN I-NP O
 . . O O
-""")
+"""
+)
 
 _INPUT_PATH = epath.Path(_FOLDER_PATH, "input_path.txt")
 
@@ -52,7 +56,9 @@ class DummyConllDataset(conll_dataset_builder.ConllDatasetBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    return self.create_dataset_info(description="Dummy CoNLL dataset.",)
+    return self.create_dataset_info(
+        description="Dummy CoNLL dataset.",
+    )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
@@ -72,18 +78,24 @@ def test_generate_example():
     examples = list(dataset._generate_examples(_INPUT_PATH))
 
     expected_examples = [
-        (0, {
-            "tokens": ["Winter", "is"],
-            "pos": ["NN", "VBZ"],
-            "chunks": ["B-NP", "B-VP"],
-            "ner": ["O", "O"]
-        }),
-        (1, {
-            "tokens": ["Air", "."],
-            "pos": ["NN", "."],
-            "chunks": ["I-NP", "O"],
-            "ner": ["O", "O"]
-        }),
+        (
+            0,
+            {
+                "tokens": ["Winter", "is"],
+                "pos": ["NN", "VBZ"],
+                "chunks": ["B-NP", "B-VP"],
+                "ner": ["O", "O"],
+            },
+        ),
+        (
+            1,
+            {
+                "tokens": ["Air", "."],
+                "pos": ["NN", "."],
+                "chunks": ["I-NP", "O"],
+                "ner": ["O", "O"],
+            },
+        ),
     ]
 
     assert examples == expected_examples
@@ -102,7 +114,8 @@ def test_generate_corrupted_example():
   error_line = "Winter NN B-NP"
   error_msg = (
       f"Mismatch in the number of features found in line: {error_line}\n\n"
-      "Should be 4, but found 3")
+      "Should be 4, but found 3"
+  )
   with pytest.raises(ValueError, match=error_msg):
     with tfds.testing.MockFs() as fs:
       fs.add_file(path=_INPUT_PATH, content=_INVALID_INPUT)

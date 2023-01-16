@@ -19,47 +19,53 @@ from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
-@pytest.mark.parametrize('input_args,expected_output', [
-    (np.int64, np.int64),
-    (tf.int64, np.int64),
-    (np.float64, np.float64),
-    (tf.float64, np.float64),
-    (tf.string, np.object_),
-    (np.uint8, np.uint8),
-    (tf.uint8, np.uint8),
-])
+@pytest.mark.parametrize(
+    'input_args,expected_output',
+    [
+        (np.int64, np.int64),
+        (tf.int64, np.int64),
+        (np.float64, np.float64),
+        (tf.float64, np.float64),
+        (tf.string, np.object_),
+        (np.uint8, np.uint8),
+        (tf.uint8, np.uint8),
+    ],
+)
 def test_tree_parallel_map(input_args, expected_output):
   assert dtype_utils.cast_to_numpy(input_args) == expected_output
 
 
-@pytest.mark.parametrize('fn,dtype,result', [
-    (dtype_utils.is_integer, np.int32, True),
-    (dtype_utils.is_integer, np.int64, True),
-    (dtype_utils.is_integer, np.float32, False),
-    (dtype_utils.is_integer, tf.int32, True),
-    (dtype_utils.is_integer, tf.int64, True),
-    (dtype_utils.is_integer, tf.float32, False),
-    (dtype_utils.is_integer, np.uint8, True),
-    (dtype_utils.is_integer, tf.uint8, True),
-    (dtype_utils.is_bool, np.bool_, True),
-    (dtype_utils.is_bool, np.int32, False),
-    (dtype_utils.is_bool, tf.bool, True),
-    (dtype_utils.is_bool, tf.int32, False),
-    (dtype_utils.is_floating, np.float32, True),
-    (dtype_utils.is_floating, np.float64, True),
-    (dtype_utils.is_floating, np.int32, False),
-    (dtype_utils.is_floating, np.int64, False),
-    (dtype_utils.is_floating, tf.float32, True),
-    (dtype_utils.is_floating, tf.float64, True),
-    (dtype_utils.is_floating, tf.int32, False),
-    (dtype_utils.is_floating, tf.int64, False),
-    (dtype_utils.is_string, np.str_, True),
-    (dtype_utils.is_string, np.int32, False),
-    (dtype_utils.is_string, tf.string, True),
-    (dtype_utils.is_string, tf.int32, False),
-    (dtype_utils.is_string, np.uint8, False),
-    (dtype_utils.is_string, tf.uint8, False),
-])
+@pytest.mark.parametrize(
+    'fn,dtype,result',
+    [
+        (dtype_utils.is_integer, np.int32, True),
+        (dtype_utils.is_integer, np.int64, True),
+        (dtype_utils.is_integer, np.float32, False),
+        (dtype_utils.is_integer, tf.int32, True),
+        (dtype_utils.is_integer, tf.int64, True),
+        (dtype_utils.is_integer, tf.float32, False),
+        (dtype_utils.is_integer, np.uint8, True),
+        (dtype_utils.is_integer, tf.uint8, True),
+        (dtype_utils.is_bool, np.bool_, True),
+        (dtype_utils.is_bool, np.int32, False),
+        (dtype_utils.is_bool, tf.bool, True),
+        (dtype_utils.is_bool, tf.int32, False),
+        (dtype_utils.is_floating, np.float32, True),
+        (dtype_utils.is_floating, np.float64, True),
+        (dtype_utils.is_floating, np.int32, False),
+        (dtype_utils.is_floating, np.int64, False),
+        (dtype_utils.is_floating, tf.float32, True),
+        (dtype_utils.is_floating, tf.float64, True),
+        (dtype_utils.is_floating, tf.int32, False),
+        (dtype_utils.is_floating, tf.int64, False),
+        (dtype_utils.is_string, np.str_, True),
+        (dtype_utils.is_string, np.int32, False),
+        (dtype_utils.is_string, tf.string, True),
+        (dtype_utils.is_string, tf.int32, False),
+        (dtype_utils.is_string, np.uint8, False),
+        (dtype_utils.is_string, tf.uint8, False),
+    ],
+)
 def test_dtype(fn, dtype, result):
   assert fn(dtype) == result
 

@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlAdroitHammerClonedV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_hammer dataset."""
+
   DATASET_CLASS = d4rl_adroit_hammer.D4rlAdroitHammer
 
   SPLITS = {
@@ -36,6 +37,7 @@ class D4rlAdroitHammerClonedV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitHammerExpertV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_hammer dataset."""
+
   DATASET_CLASS = d4rl_adroit_hammer.D4rlAdroitHammer
 
   SPLITS = {
@@ -51,6 +53,7 @@ class D4rlAdroitHammerExpertV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitHammerHumanV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_hammer dataset."""
+
   DATASET_CLASS = d4rl_adroit_hammer.D4rlAdroitHammer
 
   SPLITS = {
@@ -66,6 +69,7 @@ class D4rlAdroitHammerHumanV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitHammerClonedV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_hammer dataset."""
+
   DATASET_CLASS = d4rl_adroit_hammer.D4rlAdroitHammer
 
   SPLITS = {
@@ -81,6 +85,7 @@ class D4rlAdroitHammerClonedV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitHammerExpertV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_hammer dataset."""
+
   DATASET_CLASS = d4rl_adroit_hammer.D4rlAdroitHammer
 
   SPLITS = {
@@ -96,6 +101,7 @@ class D4rlAdroitHammerExpertV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitHammerHumanV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_hammer dataset."""
+
   DATASET_CLASS = d4rl_adroit_hammer.D4rlAdroitHammer
 
   SPLITS = {

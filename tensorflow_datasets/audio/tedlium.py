@@ -29,7 +29,8 @@ class TedliumReleaseConfig(tfds.core.BuilderConfig):
 
   def __init__(self, *, url, download_url, split_paths, citation, **kwargs):
     super(TedliumReleaseConfig, self).__init__(
-        version=tfds.core.Version("1.0.1"), **kwargs)
+        version=tfds.core.Version("1.0.1"), **kwargs
+    )
     self.url = url
     self.download_url = download_url
     # List of split, path pairs containing the relative path within the
@@ -61,11 +62,12 @@ def _make_builder_configs():
         """,
       url="https://www.openslr.org/7/",
       download_url="http://www.openslr.org/resources/7/TEDLIUM_release1.tar.gz",
-      split_paths=[(tfds.Split.TRAIN, os.path.join("TEDLIUM_release1",
-                                                   "train")),
-                   (tfds.Split.VALIDATION,
-                    os.path.join("TEDLIUM_release1", "dev")),
-                   (tfds.Split.TEST, os.path.join("TEDLIUM_release1", "test"))])
+      split_paths=[
+          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release1", "train")),
+          (tfds.Split.VALIDATION, os.path.join("TEDLIUM_release1", "dev")),
+          (tfds.Split.TEST, os.path.join("TEDLIUM_release1", "test")),
+      ],
+  )
 
   release2 = TedliumReleaseConfig(
       name="release2",
@@ -93,12 +95,15 @@ def _make_builder_configs():
         }
         """,
       url="https://www.openslr.org/19/",
-      download_url="http://www.openslr.org/resources/19/TEDLIUM_release2.tar.gz",
-      split_paths=[(tfds.Split.TRAIN, os.path.join("TEDLIUM_release2",
-                                                   "train")),
-                   (tfds.Split.VALIDATION,
-                    os.path.join("TEDLIUM_release2", "dev")),
-                   (tfds.Split.TEST, os.path.join("TEDLIUM_release2", "test"))])
+      download_url=(
+          "http://www.openslr.org/resources/19/TEDLIUM_release2.tar.gz"
+      ),
+      split_paths=[
+          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release2", "train")),
+          (tfds.Split.VALIDATION, os.path.join("TEDLIUM_release2", "dev")),
+          (tfds.Split.TEST, os.path.join("TEDLIUM_release2", "test")),
+      ],
+  )
 
   release3 = TedliumReleaseConfig(
       name="release3",
@@ -146,15 +151,20 @@ def _make_builder_configs():
       url="https://www.openslr.org/51/",
       download_url="http://www.openslr.org/resources/51/TEDLIUM_release-3.tgz",
       split_paths=[
-          (tfds.Split.VALIDATION,
-           os.path.join("TEDLIUM_release-3", "legacy", "dev")),
-          (tfds.Split.TEST, os.path.join("TEDLIUM_release-3", "legacy",
-                                         "test")),
+          (
+              tfds.Split.VALIDATION,
+              os.path.join("TEDLIUM_release-3", "legacy", "dev"),
+          ),
+          (
+              tfds.Split.TEST,
+              os.path.join("TEDLIUM_release-3", "legacy", "test"),
+          ),
           # The legacy/train directory contains symlinks to "data",
           # which are skipped by extraction (see above).
           # Work around this by manually dereferencing the links here.
-          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release-3", "data"))
-      ])
+          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release-3", "data")),
+      ],
+  )
 
   return [release1, release2, release3]
 
@@ -172,26 +182,26 @@ class Tedlium(tfds.core.BeamBasedBuilder):
         sampled at 16kHz. It contains about 118 hours of speech.
         """,
         features=tfds.features.FeaturesDict({
-            "speech":
-                tfds.features.Audio(sample_rate=16000),
-            "text":
-                tfds.features.Text(),
-            "speaker_id":
-                np.str_,
-            "gender":
-                tfds.features.ClassLabel(names=["unknown", "female", "male"]),
-            "id":
-                np.str_,
+            "speech": tfds.features.Audio(sample_rate=16000),
+            "text": tfds.features.Text(),
+            "speaker_id": np.str_,
+            "gender": tfds.features.ClassLabel(
+                names=["unknown", "female", "male"]
+            ),
+            "id": np.str_,
         }),
         supervised_keys=("speech", "text"),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation,
-        metadata=tfds.core.MetadataDict(sample_rate=16000,),
+        metadata=tfds.core.MetadataDict(
+            sample_rate=16000,
+        ),
     )
 
   def _split_generators(self, dl_manager):
     extracted_dir = dl_manager.download_and_extract(
-        self.builder_config.download_url)
+        self.builder_config.download_url
+    )
     splits = []
     for split, path in self.builder_config.split_paths:
       kwargs = {"directory": os.path.join(extracted_dir, path)}
@@ -201,9 +211,11 @@ class Tedlium(tfds.core.BeamBasedBuilder):
   def _build_pcollection(self, pipeline, directory):
     beam = tfds.core.lazy_imports.apache_beam
     stm_files = tf.io.gfile.glob(os.path.join(directory, "stm", "*stm"))
-    return (pipeline
-            | beam.Create(stm_files)
-            | beam.FlatMap(_generate_examples_from_stm_file))
+    return (
+        pipeline
+        | beam.Create(stm_files)
+        | beam.FlatMap(_generate_examples_from_stm_file)
+    )
 
 
 def _generate_examples_from_stm_file(stm_path):
@@ -218,8 +230,11 @@ def _generate_examples_from_stm_file(stm_path):
 
       audio_file = "%s.sph" % fn
       samples = _extract_audio_segment(
-          os.path.join(sph_dir, audio_file), int(channel), float(start),
-          float(end))
+          os.path.join(sph_dir, audio_file),
+          int(channel),
+          float(start),
+          float(end),
+      )
 
       key = "-".join([speaker, start, end, label])
       example = {
@@ -263,7 +278,8 @@ def _extract_audio_segment(sph_path, channel, start_sec, end_sec):
   """Extracts segment of audio samples (as an ndarray) from the given path."""
   with tf.io.gfile.GFile(sph_path, "rb") as f:
     segment = tfds.core.lazy_imports.pydub.AudioSegment.from_file(
-        f, format="nistsphere")
+        f, format="nistsphere"
+    )
   # The dataset only contains mono audio.
   assert segment.channels == 1
   assert channel == 1

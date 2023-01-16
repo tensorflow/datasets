@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class Sift1mTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for sift1m dataset."""
+
   DATASET_CLASS = sift1m_dataset_builder.Builder
   SPLITS = {
       'database': 3,  # Number of fake train example

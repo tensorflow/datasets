@@ -40,7 +40,8 @@ archivePrefix = {arXiv},
 }
 """
 _DOWNLOAD_URL_TMPL = (
-    "http://nlp.cs.washington.edu/triviaqa/data/triviaqa-{}.tar.gz")
+    "http://nlp.cs.washington.edu/triviaqa/data/triviaqa-{}.tar.gz"
+)
 _TRAIN_FILE_FORMAT = "*-train.json"
 _VALIDATION_FILE_FORMAT = "*-dev.json"
 _TEST_FILE_FORMAT = "*test-without-answers.json"
@@ -100,7 +101,8 @@ class TriviaQAConfig(tfds.core.BuilderConfig):
         name=name,
         description=description,
         version=tfds.core.Version("1.1.0"),
-        **kwargs)
+        **kwargs,
+    )
     self.unfiltered = unfiltered
     self.exclude_context = exclude_context
 
@@ -124,45 +126,34 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "question":
-                tfds.features.Text(),
-            "question_id":
-                tfds.features.Text(),
-            "question_source":
-                tfds.features.Text(),
-            "entity_pages":
-                tfds.features.Sequence({
-                    "doc_source": tfds.features.Text(),
-                    "filename": tfds.features.Text(),
-                    "title": tfds.features.Text(),
-                    "wiki_context": tfds.features.Text(),
-                }),
-            "search_results":
-                tfds.features.Sequence({
-                    "description": tfds.features.Text(),
-                    "filename": tfds.features.Text(),
-                    "rank": np.int32,
-                    "title": tfds.features.Text(),
-                    "url": tfds.features.Text(),
-                    "search_context": tfds.features.Text(),
-                }),
-            "answer":
-                tfds.features.FeaturesDict({
-                    "aliases":
-                        tfds.features.Sequence(tfds.features.Text()),
-                    "normalized_aliases":
-                        tfds.features.Sequence(tfds.features.Text()),
-                    "matched_wiki_entity_name":
-                        tfds.features.Text(),
-                    "normalized_matched_wiki_entity_name":
-                        tfds.features.Text(),
-                    "normalized_value":
-                        tfds.features.Text(),
-                    "type":
-                        tfds.features.Text(),
-                    "value":
-                        tfds.features.Text(),
-                }),
+            "question": tfds.features.Text(),
+            "question_id": tfds.features.Text(),
+            "question_source": tfds.features.Text(),
+            "entity_pages": tfds.features.Sequence({
+                "doc_source": tfds.features.Text(),
+                "filename": tfds.features.Text(),
+                "title": tfds.features.Text(),
+                "wiki_context": tfds.features.Text(),
+            }),
+            "search_results": tfds.features.Sequence({
+                "description": tfds.features.Text(),
+                "filename": tfds.features.Text(),
+                "rank": np.int32,
+                "title": tfds.features.Text(),
+                "url": tfds.features.Text(),
+                "search_context": tfds.features.Text(),
+            }),
+            "answer": tfds.features.FeaturesDict({
+                "aliases": tfds.features.Sequence(tfds.features.Text()),
+                "normalized_aliases": tfds.features.Sequence(
+                    tfds.features.Text()
+                ),
+                "matched_wiki_entity_name": tfds.features.Text(),
+                "normalized_matched_wiki_entity_name": tfds.features.Text(),
+                "normalized_value": tfds.features.Text(),
+                "type": tfds.features.Text(),
+                "value": tfds.features.Text(),
+            }),
         }),
         supervised_keys=None,
         homepage="http://nlp.cs.washington.edu/triviaqa/",
@@ -181,10 +172,13 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
 
     qa_dir = (
         os.path.join(file_paths["unfiltered"], "triviaqa-unfiltered")
-        if cfg.unfiltered else os.path.join(file_paths["rc"], "qa"))
+        if cfg.unfiltered
+        else os.path.join(file_paths["rc"], "qa")
+    )
     train_files = tf.io.gfile.glob(os.path.join(qa_dir, _TRAIN_FILE_FORMAT))
     valid_files = tf.io.gfile.glob(
-        os.path.join(qa_dir, _VALIDATION_FILE_FORMAT))
+        os.path.join(qa_dir, _VALIDATION_FILE_FORMAT)
+    )
     test_files = tf.io.gfile.glob(os.path.join(qa_dir, _TEST_FILE_FORMAT))
 
     if cfg.exclude_context:
@@ -200,22 +194,25 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "files": train_files,
                 "web_dir": web_evidence_dir,
-                "wiki_dir": wiki_evidence_dir
-            }),
+                "wiki_dir": wiki_evidence_dir,
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "files": valid_files,
                 "web_dir": web_evidence_dir,
-                "wiki_dir": wiki_evidence_dir
-            }),
+                "wiki_dir": wiki_evidence_dir,
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "files": test_files,
                 "web_dir": web_evidence_dir,
-                "wiki_dir": wiki_evidence_dir
-            }),
+                "wiki_dir": wiki_evidence_dir,
+            },
+        ),
     ]
 
   def _generate_examples(self, files, web_dir, wiki_dir):
@@ -230,20 +227,17 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
       if "Answer" in article:
         answer = article["Answer"]
         answer_dict = {
-            "aliases":
-                _strip(answer["Aliases"]),
-            "normalized_aliases":
-                _strip(answer["NormalizedAliases"]),
-            "matched_wiki_entity_name":
-                answer.get("MatchedWikiEntryName", "").strip(),
-            "normalized_matched_wiki_entity_name":
-                answer.get("NormalizedMatchedWikiEntryName", "").strip(),
-            "normalized_value":
-                answer["NormalizedValue"].strip(),
-            "type":
-                answer["Type"].strip(),
-            "value":
-                answer["Value"].strip(),
+            "aliases": _strip(answer["Aliases"]),
+            "normalized_aliases": _strip(answer["NormalizedAliases"]),
+            "matched_wiki_entity_name": answer.get(
+                "MatchedWikiEntryName", ""
+            ).strip(),
+            "normalized_matched_wiki_entity_name": answer.get(
+                "NormalizedMatchedWikiEntryName", ""
+            ).strip(),
+            "normalized_value": answer["NormalizedValue"].strip(),
+            "type": answer["Type"].strip(),
+            "value": answer["Value"].strip(),
         }
       else:
         answer_dict = {
@@ -284,18 +278,23 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
 
       def _transpose_and_strip_dicts(dicts, field_names):
         return {
-            tfds.core.naming.camelcase_to_snakecase(k):
-            [_strip_if_str(d[k]) for d in dicts] for k in field_names
+            tfds.core.naming.camelcase_to_snakecase(k): [
+                _strip_if_str(d[k]) for d in dicts
+            ]
+            for k in field_names
         }
 
       search_results = _transpose_and_strip_dicts(
           _add_context(
-              article.get("SearchResults", []), "SearchContext", web_dir),
-          ["Description", "Filename", "Rank", "Title", "Url", "SearchContext"])
+              article.get("SearchResults", []), "SearchContext", web_dir
+          ),
+          ["Description", "Filename", "Rank", "Title", "Url", "SearchContext"],
+      )
 
       entity_pages = _transpose_and_strip_dicts(
           _add_context(article.get("EntityPages", []), "WikiContext", wiki_dir),
-          ["DocSource", "Filename", "Title", "WikiContext"])
+          ["DocSource", "Filename", "Title", "WikiContext"],
+      )
 
       question = article["Question"].strip()
       question_id = article["QuestionId"]

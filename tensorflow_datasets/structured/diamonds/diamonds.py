@@ -112,5 +112,5 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
     for row in df.itertuples():
       yield row.Index, {
           'features': {k: getattr(row, k) for k in _features().keys()},
-          'price': row.price
+          'price': row.price,
       }

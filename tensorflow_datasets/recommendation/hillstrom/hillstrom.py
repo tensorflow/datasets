@@ -67,21 +67,24 @@ class Hillstrom(tfds.core.GeneratorBasedBuilder):
             'channel': tfds.features.Text(),
             'visit': np.int64,
             'conversion': np.int64,
-            'spend': np.float32
+            'spend': np.float32,
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
         # `as_supervised=True` in `builder.as_dataset`.
-        supervised_keys=({
-            'history': 'history',
-            'zip_code': 'zip_code',
-            'segment': 'segment',
-            'recency': 'recency',
-            'mens': 'mens',
-            'womens': 'womens',
-            'newbie': 'newbie',
-            'channel': 'channel'
-        }, 'visit'),
+        supervised_keys=(
+            {
+                'history': 'history',
+                'zip_code': 'zip_code',
+                'segment': 'segment',
+                'recency': 'recency',
+                'mens': 'mens',
+                'womens': 'womens',
+                'newbie': 'newbie',
+                'channel': 'channel',
+            },
+            'visit',
+        ),
         homepage='https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html',
         citation=_CITATION,
     )
@@ -114,6 +117,6 @@ class Hillstrom(tfds.core.GeneratorBasedBuilder):
             'conversion': row['conversion'],
             'spend': row['spend'],
             'history': row['history'],
-            'zip_code': row['zip_code']
+            'zip_code': row['zip_code'],
         }
         index += 1

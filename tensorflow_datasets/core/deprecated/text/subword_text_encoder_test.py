@@ -37,7 +37,8 @@ class SubwordTextEncoderTest(parameterized.TestCase, testing.TestCase):
     #                  1       2       3      4      5
     self.vocab_list = ['foo_', 'bar_', 'foo', 'bar', '<EOS>']
     self.encoder = subword_text_encoder.SubwordTextEncoder(
-        vocab_list=self.vocab_list)
+        vocab_list=self.vocab_list
+    )
 
   def test_vocab_size(self):
     # Bytes + pad + subwords

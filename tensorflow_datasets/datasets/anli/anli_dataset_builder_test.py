@@ -20,7 +20,6 @@ from tensorflow_datasets.datasets.anli import anli_dataset_builder
 
 
 class AnliTest(testing.DatasetBuilderTestCase):
-
   BUILDER_CONFIG_NAMES_TO_TEST = ["r3"]
 
   DATASET_CLASS = anli_dataset_builder.Builder

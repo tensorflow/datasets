@@ -51,65 +51,72 @@ class INaturalist2018(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "id":
-                tfds.features.Text(),
-            "image":
-                tfds.features.Image(),
-            "label":
-                tfds.features.ClassLabel(
-                    names_file=tfds.core.tfds_path(
-                        os.path.join("image_classification", "i_naturalist2018",
-                                     "inaturalist2018_labels.txt"))),
-            "supercategory":
-                tfds.features.ClassLabel(
-                    names_file=tfds.core.tfds_path(
-                        os.path.join("image_classification", "i_naturalist2018",
-                                     "inaturalist2018_supercategories.txt"))),
+            "id": tfds.features.Text(),
+            "image": tfds.features.Image(),
+            "label": tfds.features.ClassLabel(
+                names_file=tfds.core.tfds_path(
+                    os.path.join(
+                        "image_classification",
+                        "i_naturalist2018",
+                        "inaturalist2018_labels.txt",
+                    )
+                )
+            ),
+            "supercategory": tfds.features.ClassLabel(
+                names_file=tfds.core.tfds_path(
+                    os.path.join(
+                        "image_classification",
+                        "i_naturalist2018",
+                        "inaturalist2018_supercategories.txt",
+                    )
+                )
+            ),
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/visipedia/inat_comp/tree/master/2018",
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     output_files = dl_manager.download_and_extract({
-        "trainval_images":
-            tfds.download.Resource(
-                url=urllib.parse.urljoin(_URL, "train_val2018.tar.gz"),
-                extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
-        "train_annos":
-            urllib.parse.urljoin(_URL, "train2018.json.tar.gz"),
-        "val_annos":
-            urllib.parse.urljoin(_URL, "val2018.json.tar.gz"),
-        "test_images":
-            tfds.download.Resource(
-                url=urllib.parse.urljoin(_URL, "test2018.tar.gz"),
-                extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
-        "categories":
-            urllib.parse.urljoin(_URL, "categories.json.tar.gz"),
+        "trainval_images": tfds.download.Resource(
+            url=urllib.parse.urljoin(_URL, "train_val2018.tar.gz"),
+            extract_method=tfds.download.ExtractMethod.NO_EXTRACT,
+        ),
+        "train_annos": urllib.parse.urljoin(_URL, "train2018.json.tar.gz"),
+        "val_annos": urllib.parse.urljoin(_URL, "val2018.json.tar.gz"),
+        "test_images": tfds.download.Resource(
+            url=urllib.parse.urljoin(_URL, "test2018.tar.gz"),
+            extract_method=tfds.download.ExtractMethod.NO_EXTRACT,
+        ),
+        "categories": urllib.parse.urljoin(_URL, "categories.json.tar.gz"),
     })
     return {
-        "train":
-            self._generate_examples(
-                images_archive=dl_manager.iter_archive(
-                    output_files["trainval_images"]),
-                annon_file=os.path.join(output_files["train_annos"],
-                                        "train2018.json"),
-                category_file=os.path.join(output_files["categories"],
-                                           "categories.json")),
-        "validation":
-            self._generate_examples(
-                images_archive=dl_manager.iter_archive(
-                    output_files["trainval_images"]),
-                annon_file=os.path.join(output_files["val_annos"],
-                                        "val2018.json"),
-                category_file=os.path.join(output_files["categories"],
-                                           "categories.json")),
-        "test":
-            self._generate_examples(
-                images_archive=dl_manager.iter_archive(
-                    output_files["test_images"]),
-                annon_file=None,
-                category_file=None)
+        "train": self._generate_examples(
+            images_archive=dl_manager.iter_archive(
+                output_files["trainval_images"]
+            ),
+            annon_file=os.path.join(
+                output_files["train_annos"], "train2018.json"
+            ),
+            category_file=os.path.join(
+                output_files["categories"], "categories.json"
+            ),
+        ),
+        "validation": self._generate_examples(
+            images_archive=dl_manager.iter_archive(
+                output_files["trainval_images"]
+            ),
+            annon_file=os.path.join(output_files["val_annos"], "val2018.json"),
+            category_file=os.path.join(
+                output_files["categories"], "categories.json"
+            ),
+        ),
+        "test": self._generate_examples(
+            images_archive=dl_manager.iter_archive(output_files["test_images"]),
+            annon_file=None,
+            category_file=None,
+        ),
     }
 
   def _generate_examples(self, images_archive, annon_file, category_file):

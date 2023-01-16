@@ -31,7 +31,8 @@ class ExampleParser(object):
     self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
     self._nested_feature_specs = _build_feature_specs(self._flat_example_specs)
     self.flat_feature_specs = utils.flatten_nest_dict(
-        self._nested_feature_specs)
+        self._nested_feature_specs
+    )
 
   def parse_example(self, serialized_example):
     """Deserialize a single `tf.train.Example` proto.
@@ -68,9 +69,9 @@ class ExampleParser(object):
 
     example = {  # pylint:disable=g-complex-comprehension
         k: _deserialize_single_field(example_data, tensor_info)
-        for k, (
-            example_data,
-            tensor_info) in utils.zip_dict(example, self._flat_example_specs)
+        for k, (example_data, tensor_info) in utils.zip_dict(
+            example, self._flat_example_specs
+        )
     }
     # Reconstruct all nesting
     example = utils.pack_as_nest_dict(example, self._example_specs)
@@ -95,8 +96,9 @@ def _build_feature_specs(flat_example_specs):
   return {k: build_single_spec(k, v) for k, v in flat_example_specs.items()}
 
 
-def _deserialize_single_field(example_data,
-                              tensor_info: feature_lib.TensorInfo):
+def _deserialize_single_field(
+    example_data, tensor_info: feature_lib.TensorInfo
+):
   """Reconstruct the serialized field."""
   # Ragged tensor case:
   if tensor_info.sequence_rank > 1:
@@ -132,8 +134,9 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
   # This create limitation like float64 downsampled to float32, bool converted
   # to int64 which is space ineficient, no support for complexes or quantized
   # It seems quite space inefficient to convert bool to int64
-  if (dtype_utils.is_integer(tensor_info.tf_dtype) or
-      dtype_utils.is_bool(tensor_info.tf_dtype)):
+  if dtype_utils.is_integer(tensor_info.tf_dtype) or dtype_utils.is_bool(
+      tensor_info.tf_dtype
+  ):
     dtype = tf.int64
   elif dtype_utils.is_floating(tensor_info.tf_dtype):
     dtype = tf.float32
@@ -142,7 +145,8 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
   else:
     # TFRecord only support 3 types
     raise NotImplementedError(
-        "Serialization not implemented for dtype {}".format(tensor_info))
+        "Serialization not implemented for dtype {}".format(tensor_info)
+    )
 
   # Convert the shape
 
@@ -171,10 +175,11 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
             shape=(),
             dtype=tf.int64,
             allow_missing=True,
-        ) for k in range(tensor_info.sequence_rank - 1)
+        )
+        for k in range(tensor_info.sequence_rank - 1)
     }
     tf_specs["ragged_flat_values"] = tf.io.FixedLenSequenceFeature(
-        shape=tensor_info.shape[tensor_info.sequence_rank:],
+        shape=tensor_info.shape[tensor_info.sequence_rank :],
         dtype=dtype,
         allow_missing=True,
         default_value=tensor_info.default_value,
@@ -184,4 +189,5 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
     raise NotImplementedError(
         "Multiple unknown dimension not supported.\n"
         "If using `tfds.features.Tensor`, please set "
-        "`Tensor(..., encoding='zlib')` (or 'bytes', or 'gzip')")
+        "`Tensor(..., encoding='zlib')` (or 'bytes', or 'gzip')"
+    )

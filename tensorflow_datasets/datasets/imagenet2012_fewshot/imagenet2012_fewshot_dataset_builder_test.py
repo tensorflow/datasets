@@ -26,12 +26,13 @@ imagenet2012_fewshot_dataset_builder.Builder.CMYK_IMAGES = [
 ]
 
 imagenet2012_fewshot_dataset_builder.SUBSET2FILES = {
-    "1shot":
-        tfds.core.tfds_path("datasets/imagenet2012_fewshot/dummy_data/1shot.txt"
-                           ),
+    "1shot": tfds.core.tfds_path(
+        "datasets/imagenet2012_fewshot/dummy_data/1shot.txt"
+    ),
 }
 imagenet2012_fewshot_dataset_builder.TUNE_FILE = tfds.core.tfds_path(
-    "datasets/imagenet2012_fewshot/dummy_data/tune.txt")
+    "datasets/imagenet2012_fewshot/dummy_data/tune.txt"
+)
 
 
 class Imagenet2012FewshotTest(testing.DatasetBuilderTestCase):

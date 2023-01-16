@@ -32,13 +32,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'premise':
-                tfds.features.Text(),
-            'hypothesis':
-                tfds.features.Text(),
-            'label':
-                tfds.features.ClassLabel(
-                    names=['entailment', 'neutral', 'contradiction']),
+            'premise': tfds.features.Text(),
+            'hypothesis': tfds.features.Text(),
+            'label': tfds.features.ClassLabel(
+                names=['entailment', 'neutral', 'contradiction']
+            ),
         }),
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
@@ -54,16 +52,18 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TEST,
             gen_kwargs={
                 'filepath': os.path.join(data_dir, 'snli_1.0_test.txt')
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={'filepath': os.path.join(data_dir,
-                                                 'snli_1.0_dev.txt')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'snli_1.0_dev.txt')},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'filepath': os.path.join(data_dir, 'snli_1.0_train.txt')
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, filepath):

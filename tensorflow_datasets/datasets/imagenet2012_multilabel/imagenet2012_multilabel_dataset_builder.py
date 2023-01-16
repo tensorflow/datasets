@@ -28,7 +28,8 @@ _MULTI_LABELS_URL = 'https://storage.googleapis.com/brain-car-datasets/imagenet-
 
 
 def _get_multi_labels_and_problematic_images(
-    dl_manager: tfds.download.DownloadManager):
+    dl_manager: tfds.download.DownloadManager,
+):
   """Returns multi-labels and problematic images from download json.
 
   Args:
@@ -52,7 +53,8 @@ def _get_multi_labels_and_problematic_images(
   for image_name in human_accuracy_data['initial_annots'].keys():
     if image_name[:len_prefix] == prefix:
       val_annotated_images[image_name] = human_accuracy_data['initial_annots'][
-          image_name]
+          image_name
+      ]
 
   problematic_images = list(human_accuracy_data['problematic_images'].keys())
   imagenet_m_2022 = human_accuracy_data['imagenet_m']
@@ -80,23 +82,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     names_file = imagenet_common.label_names_file()
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'image':
-                tfds.features.Image(encoding_format='jpeg'),
-            'original_label':
-                tfds.features.ClassLabel(names_file=names_file),
-            'correct_multi_labels':
-                tfds.features.Sequence(
-                    tfds.features.ClassLabel(names_file=names_file)),
-            'wrong_multi_labels':
-                tfds.features.Sequence(
-                    tfds.features.ClassLabel(names_file=names_file)),
-            'unclear_multi_labels':
-                tfds.features.Sequence(
-                    tfds.features.ClassLabel(names_file=names_file)),
-            'is_problematic':
-                tfds.features.Tensor(shape=(), dtype=np.bool_),
-            'file_name':
-                tfds.features.Text(),
+            'image': tfds.features.Image(encoding_format='jpeg'),
+            'original_label': tfds.features.ClassLabel(names_file=names_file),
+            'correct_multi_labels': tfds.features.Sequence(
+                tfds.features.ClassLabel(names_file=names_file)
+            ),
+            'wrong_multi_labels': tfds.features.Sequence(
+                tfds.features.ClassLabel(names_file=names_file)
+            ),
+            'unclear_multi_labels': tfds.features.Sequence(
+                tfds.features.ClassLabel(names_file=names_file)
+            ),
+            'is_problematic': tfds.features.Tensor(shape=(), dtype=np.bool_),
+            'file_name': tfds.features.Text(),
         }),
         supervised_keys=('image', 'correct_multi_labels'),
         homepage='https://github.com/modestyachts/evaluating_machine_accuracy_on_imagenet',
@@ -108,33 +106,37 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     if not tf.io.gfile.exists(val_path):
       raise AssertionError(
           'ImageNet requires manual download of the data. Please download '
-          'the train and val set and place them into: {}'.format(val_path))
+          'the train and val set and place them into: {}'.format(val_path)
+      )
 
     original_labels = imagenet_common.get_validation_labels(val_path)
 
-    (multi_labels, problematic_images, imagenet_m_2022_errors
-    ) = _get_multi_labels_and_problematic_images(dl_manager)
+    (multi_labels, problematic_images, imagenet_m_2022_errors) = (
+        _get_multi_labels_and_problematic_images(dl_manager)
+    )
 
-    imagenet_m_2022 = dict([(k, multi_labels[k]) for k in imagenet_m_2022_errors
-                           ])
+    imagenet_m_2022 = dict(
+        [(k, multi_labels[k]) for k in imagenet_m_2022_errors]
+    )
 
     return {
-        'validation':
-            self._generate_examples(
-                archive=dl_manager.iter_archive(val_path),
-                original_labels=original_labels,
-                multi_labels=multi_labels,
-                problematic_images=problematic_images),
-        'imagenet_m':
-            self._generate_examples(
-                archive=dl_manager.iter_archive(val_path),
-                original_labels=original_labels,
-                multi_labels=imagenet_m_2022,
-                problematic_images=problematic_images),
+        'validation': self._generate_examples(
+            archive=dl_manager.iter_archive(val_path),
+            original_labels=original_labels,
+            multi_labels=multi_labels,
+            problematic_images=problematic_images,
+        ),
+        'imagenet_m': self._generate_examples(
+            archive=dl_manager.iter_archive(val_path),
+            original_labels=original_labels,
+            multi_labels=imagenet_m_2022,
+            problematic_images=problematic_images,
+        ),
     }
 
-  def _generate_examples(self, archive, original_labels, multi_labels,
-                         problematic_images):
+  def _generate_examples(
+      self, archive, original_labels, multi_labels, problematic_images
+  ):
     """Yields (key, example) tuples from the dataset."""
     for fname, fobj in archive:
       if fname not in multi_labels:
@@ -159,6 +161,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           'correct_multi_labels': correct_multi_labels,
           'wrong_multi_labels': wrong_multi_labels,
           'unclear_multi_labels': unclear_multi_labels,
-          'is_problematic': is_problematic
+          'is_problematic': is_problematic,
       }
       yield fname, record

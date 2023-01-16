@@ -25,7 +25,12 @@ import tensorflow_datasets.public_api as tfds
 _DOCUMENT = "text"
 _SUMMARY = "summary"
 _ADDITIONAL_TEXT_FEATURES = [
-    "title", "url", "date", "density_bin", "coverage_bin", "compression_bin"
+    "title",
+    "url",
+    "date",
+    "density_bin",
+    "coverage_bin",
+    "compression_bin",
 ]
 _ADDITIONAL_FLOAT_FEATURES = [
     "density",
@@ -50,10 +55,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         k: tfds.features.Text()
         for k in [_DOCUMENT, _SUMMARY] + _ADDITIONAL_TEXT_FEATURES
     }
-    features.update({
-        k: tfds.features.Tensor(shape=[], dtype=np.float32)
-        for k in _ADDITIONAL_FLOAT_FEATURES
-    })
+    features.update(
+        {
+            k: tfds.features.Tensor(shape=[], dtype=np.float32)
+            for k in _ADDITIONAL_FLOAT_FEATURES
+        }
+    )
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(features),
         supervised_keys=(_DOCUMENT, _SUMMARY),
@@ -92,6 +99,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         #  "compression_bin", "density_bin", "summary", "density",
         #  "compression', "coverage", "coverage_bin",
         yield i, {
-            k: d[k] for k in [_DOCUMENT, _SUMMARY] + _ADDITIONAL_TEXT_FEATURES +
-            _ADDITIONAL_FLOAT_FEATURES
+            k: d[k]
+            for k in [_DOCUMENT, _SUMMARY]
+            + _ADDITIONAL_TEXT_FEATURES
+            + _ADDITIONAL_FLOAT_FEATURES
         }

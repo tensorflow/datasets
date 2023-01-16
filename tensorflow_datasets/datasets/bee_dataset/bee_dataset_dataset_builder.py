@@ -26,9 +26,9 @@ import tensorflow_datasets.public_api as tfds
 class BeeDatasetConfig(tfds.core.BuilderConfig):
   """BuilderConfig for the BeeDataset.
 
-    Args:
-    image_width (int): Desired image width.
-    image_height (int): Desired image heigth.
+  Args:
+  image_width (int): Desired image width.
+  image_height (int): Desired image heigth.
   """
 
   def __init__(self, image_height=300, image_width=150, **kwargs):
@@ -50,28 +50,34 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       description='BeeDataset images with 300 pixel height and 150 pixel width',
       version='1.0.0',
       image_height=300,
-      image_width=150)
+      image_width=150,
+  )
 
   BEE_CFG_200 = BeeDatasetConfig(
       name='bee_dataset_200',
       description='BeeDataset images with 200 pixel height and 100 pixel width',
       version='1.0.0',
       image_height=200,
-      image_width=100)
+      image_width=100,
+  )
 
   BEE_CFG_150 = BeeDatasetConfig(
       name='bee_dataset_150',
       description='BeeDataset images with 200 pixel height and 100 pixel width',
       version='1.0.0',
       image_height=150,
-      image_width=75)
+      image_width=75,
+  )
 
   BUILDER_CONFIGS = [BEE_CFG_300, BEE_CFG_200, BEE_CFG_150]
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    t_shape = (self.builder_config.height, self.builder_config.width,
-               self.builder_config.depth)
+    t_shape = (
+        self.builder_config.height,
+        self.builder_config.width,
+        self.builder_config.depth,
+    )
     features = tfds.features.FeaturesDict({
         'input': tfds.features.Image(shape=t_shape),
         'output': {
@@ -79,7 +85,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'pollen_output': np.float64,
             'wasps_output': np.float64,
             'cooling_output': np.float64,
-        }
+        },
     })
 
     return self.dataset_info_from_configs(
@@ -115,6 +121,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               'varroa_output': labels[0],
               'pollen_output': labels[1],
               'wasps_output': labels[2],
-              'cooling_output': labels[3]
-          }
+              'cooling_output': labels[3],
+          },
       }

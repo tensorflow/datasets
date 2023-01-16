@@ -21,6 +21,7 @@ from tensorflow_datasets.text.unifiedqa import unifiedqa
 
 class UnifiedQAAI2ScienceElementaryTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ai2_science_elementary."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['ai2_science_elementary']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -38,6 +39,7 @@ class UnifiedQAAI2ScienceElementaryTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAAI2ScienceMiddleTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ai2_science_middleai2_science_middle."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['ai2_science_middle']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -55,6 +57,7 @@ class UnifiedQAAI2ScienceMiddleTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAAmbigQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ambigqa."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['ambigqa']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -70,6 +73,7 @@ class UnifiedQAAmbigQATest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAARCEasyTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_easy."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_easy']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -87,6 +91,7 @@ class UnifiedQAARCEasyTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAARCEasyDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_easy_dev."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_easy_dev']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -104,6 +109,7 @@ class UnifiedQAARCEasyDevTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAARCEasyIRTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_easy_with_ir."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_easy_with_ir']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -121,6 +127,7 @@ class UnifiedQAARCEasyIRTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAARCEasyIRDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_easy_with_ir_dev."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_easy_with_ir_dev']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -138,6 +145,7 @@ class UnifiedQAARCEasyIRDevTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAARCHardTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_hard."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_hard']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -155,6 +163,7 @@ class UnifiedQAARCHardTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAARCHardDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_hard_dev."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_hard_dev']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -172,6 +181,7 @@ class UnifiedQAARCHardDevTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAARCHardIRTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_hard_with_ir."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_hard_with_ir']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -189,6 +199,7 @@ class UnifiedQAARCHardIRTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAARCHardIRDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_hard_with_ir_dev."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_hard_with_ir_dev']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -206,6 +217,7 @@ class UnifiedQAARCHardIRDevTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQABoolQTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for boolq."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['boolq']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -221,6 +233,7 @@ class UnifiedQABoolQTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQABoolQNPTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for boolq_np."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['boolq_np']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -236,6 +249,7 @@ class UnifiedQABoolQNPTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQACQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for commonsenseqa."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['commonsenseqa']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -253,6 +267,7 @@ class UnifiedQACQATest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQACQATestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for commonsenseqa_test."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['commonsenseqa_test']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -270,6 +285,7 @@ class UnifiedQACQATestTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAContrastSetsBoolQTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for contrast_sets_boolq."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['contrast_sets_boolq']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -285,6 +301,7 @@ class UnifiedQAContrastSetsBoolQTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAContrastSetsDROPTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for contrast_sets_drop."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['contrast_sets_drop']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -300,6 +317,7 @@ class UnifiedQAContrastSetsDROPTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAContrastSetsQuorefTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for contrast_sets_quoref."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['contrast_sets_quoref']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -315,6 +333,7 @@ class UnifiedQAContrastSetsQuorefTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAContrastSetsROPESTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for contrast_sets_ropes."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['contrast_sets_ropes']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -330,6 +349,7 @@ class UnifiedQAContrastSetsROPESTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQADROPTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for drop."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['drop']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -345,6 +365,7 @@ class UnifiedQADROPTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAMCTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for mctest."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['mctest']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -359,8 +380,10 @@ class UnifiedQAMCTestTest(tfds.testing.DatasetBuilderTestCase):
 
 
 class UnifiedQAMCTestCorrectedTheSeparatorTest(
-    tfds.testing.DatasetBuilderTestCase):
+    tfds.testing.DatasetBuilderTestCase
+):
   """Tests for mctest_corrected_the_separator."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['mctest_corrected_the_separator']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -376,6 +399,7 @@ class UnifiedQAMCTestCorrectedTheSeparatorTest(
 
 class UnifiedQAMultiRCTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for multirc."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['multirc']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -391,6 +415,7 @@ class UnifiedQAMultiRCTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQANarrativeQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for narrativeqa."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['narrativeqa']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -408,6 +433,7 @@ class UnifiedQANarrativeQATest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQANarrativeQADevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for narrativeqa_dev."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['narrativeqa_dev']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -425,6 +451,7 @@ class UnifiedQANarrativeQADevTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQANatQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -440,6 +467,7 @@ class UnifiedQANatQATest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQANatQADirectAnsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions_direct_ans."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions_direct_ans']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -457,6 +485,7 @@ class UnifiedQANatQADirectAnsTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQANatQADirectAnsTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions_direct_ans_test."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions_direct_ans_test']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -474,6 +503,7 @@ class UnifiedQANatQADirectAnsTestTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQANatQADPRParaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions_with_dpr_para."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions_with_dpr_para']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -489,6 +519,7 @@ class UnifiedQANatQADPRParaTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQANatQADPRParaTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions_with_dpr_para_test."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions_with_dpr_para_test']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -504,6 +535,7 @@ class UnifiedQANatQADPRParaTestTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQANewsQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for newsqa."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['newsqa']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -519,6 +551,7 @@ class UnifiedQANewsQATest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAOBQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for openbookqa."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['openbookqa']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -536,6 +569,7 @@ class UnifiedQAOBQATest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAOBQADevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for openbookqa_dev."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['openbookqa_dev']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -553,6 +587,7 @@ class UnifiedQAOBQADevTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAOBQAIRTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for openbookqa_with_ir."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['openbookqa_with_ir']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -570,6 +605,7 @@ class UnifiedQAOBQAIRTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAOBQAIRDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for openbookqa_with_ir_dev."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['openbookqa_with_ir_dev']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -587,6 +623,7 @@ class UnifiedQAOBQAIRDevTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAPIQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for physical_iqa."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['physical_iqa']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -602,6 +639,7 @@ class UnifiedQAPIQATest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAQASCTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['qasc']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -619,6 +657,7 @@ class UnifiedQAQASCTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAQASCTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc_test."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['qasc_test']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -636,6 +675,7 @@ class UnifiedQAQASCTestTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAQASCIRTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc_with_ir."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['qasc_with_ir']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -653,6 +693,7 @@ class UnifiedQAQASCIRTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAQASCIRTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc_with_ir_test."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['qasc_with_ir_test']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -670,6 +711,7 @@ class UnifiedQAQASCIRTestTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAQuorefTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for quoref."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['quoref']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -685,6 +727,7 @@ class UnifiedQAQuorefTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQARACEStringDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for race_string_dev."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['race_string_dev']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -702,6 +745,7 @@ class UnifiedQARACEStringDevTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQARACEStringTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for race_string."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['race_string']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -719,6 +763,7 @@ class UnifiedQARACEStringTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAROPESTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ropes."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['ropes']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -734,6 +779,7 @@ class UnifiedQAROPESTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQASIQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for social_iqa."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['social_iqa']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -749,6 +795,7 @@ class UnifiedQASIQATest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQASQuAD11Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for squad1_1."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['squad1_1']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -764,6 +811,7 @@ class UnifiedQASQuAD11Test(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQASQuAD20Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for squad2."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['squad2']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -779,6 +827,7 @@ class UnifiedQASQuAD20Test(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAWGLTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for winogrande_l."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['winogrande_l']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -794,6 +843,7 @@ class UnifiedQAWGLTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAWGMTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for winogrande_m."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['winogrande_m']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {
@@ -809,6 +859,7 @@ class UnifiedQAWGMTest(tfds.testing.DatasetBuilderTestCase):
 
 class UnifiedQAWGSTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for winogrande_s."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['winogrande_s']
   DATASET_CLASS = unifiedqa.UnifiedQA
   SPLITS = {

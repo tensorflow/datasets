@@ -108,7 +108,8 @@ class Translation(features_dict.FeaturesDict):
             lang: text_feature.Text(enc, enc_conf)
             for lang, enc, enc_conf in zip(languages, encoder, encoder_config)
         },
-        doc=doc)
+        doc=doc,
+    )
 
   @property
   def languages(self):
@@ -117,12 +118,14 @@ class Translation(features_dict.FeaturesDict):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.TranslationFeature]) -> "Translation":
+      cls, value: Union[Json, feature_pb2.TranslationFeature]
+  ) -> "Translation":
     if isinstance(value, dict):
       if "use_encoder" in value:
         raise ValueError(
             "TFDS does not support datasets with Encoder. Please use the plain "
-            "text version with `tensorflow_text`.")
+            "text version with `tensorflow_text`."
+        )
       return cls(**value)
     assert not value.variable_languages_per_example
     return cls(languages=value.languages)
@@ -131,9 +134,11 @@ class Translation(features_dict.FeaturesDict):
     if self._encoder or self._encoder_config:
       raise ValueError(
           "TFDS encoder are deprecated and will be removed soon. "
-          "Please use `tensorflow_text` instead with the plain text dataset.")
+          "Please use `tensorflow_text` instead with the plain text dataset."
+      )
     return feature_pb2.TranslationFeature(
-        languages=self.languages, variable_languages_per_example=False)
+        languages=self.languages, variable_languages_per_example=False
+    )
 
 
 class TranslationVariableLanguages(sequence_feature.Sequence):
@@ -201,7 +206,8 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
             "language": text_feature.Text(),
             "translation": text_feature.Text(),
         },
-        doc=doc)
+        doc=doc,
+    )
 
   @property
   def num_languages(self):
@@ -218,7 +224,9 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
       raise ValueError(
           "Some languages in example ({0}) are not in valid set ({1}).".format(
               ", ".join(sorted(set(translation_dict) - self._languages)),
-              ", ".join(self.languages)))
+              ", ".join(self.languages),
+          )
+      )
 
     # Convert dictionary into tuples, splitting out cases where there are
     # multiple translations for a single language.
@@ -232,10 +240,9 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     # Ensure translations are in ascending order by language code.
     languages, translations = zip(*sorted(translation_tuples))
 
-    return super(TranslationVariableLanguages, self).encode_example({
-        "language": languages,
-        "translation": translations
-    })
+    return super(TranslationVariableLanguages, self).encode_example(
+        {"language": languages, "translation": translations}
+    )
 
   @classmethod
   def from_json_content(
@@ -248,4 +255,5 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
 
   def to_json_content(self) -> feature_pb2.TranslationFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.TranslationFeature(
-        languages=self.languages, variable_languages_per_example=True)
+        languages=self.languages, variable_languages_per_example=True
+    )

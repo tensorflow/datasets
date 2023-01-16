@@ -138,12 +138,14 @@ class Sequence(top_level_feature.TopLevelFeature):
     if self._length is not None and len(sequence_elements) != self._length:
       raise ValueError(
           'Input sequence length do not match the defined one. Got {} != '
-          '{}'.format(len(sequence_elements), self._length))
+          '{}'.format(len(sequence_elements), self._length)
+      )
 
     # Empty sequences return empty arrays
     if not sequence_elements:
-      return tree_utils.map_structure(build_empty_np,
-                                      self.get_serialized_info())
+      return tree_utils.map_structure(
+          build_empty_np, self.get_serialized_info()
+      )
 
     # Encode each individual elements
     sequence_elements = [
@@ -200,11 +202,12 @@ class Sequence(top_level_feature.TopLevelFeature):
     inner_feature_repr = tensor_feature.get_inner_feature_repr(self._feature)
     if inner_feature_repr.startswith('FeaturesDict('):
       # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
-      inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]
+      inner_feature_repr = inner_feature_repr[len('FeaturesDict(') : -len(')')]
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
   def catalog_documentation(
-      self) -> List[feature_lib.CatalogFeatureDocumentation]:
+      self,
+  ) -> List[feature_lib.CatalogFeatureDocumentation]:
     sub_feature_docs = self._feature.catalog_documentation()
 
     # If it's a sequence of a single feature, then we add more details.
@@ -241,10 +244,12 @@ class Sequence(top_level_feature.TopLevelFeature):
       # For backwards compatibility
       return cls(
           feature=feature_lib.FeatureConnector.from_json(value['feature']),
-          length=value['length'])
+          length=value['length'],
+      )
     return cls(
         feature=feature_lib.FeatureConnector.from_proto(value.feature),
-        length=None if value.length == -1 else value.length)
+        length=None if value.length == -1 else value.length,
+    )
 
   def to_json_content(self) -> feature_pb2.Sequence:
     return feature_pb2.Sequence(
@@ -287,7 +292,8 @@ def _np_to_list(elem):
   else:
     raise ValueError(
         'Input elements of a sequence should be either a numpy array, a '
-        'python list or tuple. Got {}'.format(type(elem)))
+        'python list or tuple. Got {}'.format(type(elem))
+    )
 
 
 def transpose_dict_list(dict_list):
@@ -305,7 +311,8 @@ def transpose_dict_list(dict_list):
     elif length['value'] != len(elem):
       raise ValueError(
           'The length of all elements of one sequence should be the same. '
-          'Got {} != {}'.format(length['value'], len(elem)))
+          'Got {} != {}'.format(length['value'], len(elem))
+      )
     return elem
 
   utils.map_nested(update_length, dict_list, dict_only=True)

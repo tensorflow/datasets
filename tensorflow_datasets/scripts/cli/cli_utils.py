@@ -36,6 +36,7 @@ class DatasetInfo:
     data_format: Optional format of the input data used to generate
       format-specific dataset builders.
   """
+
   name: str
   in_tfds: bool
   path: pathlib.Path
@@ -47,15 +48,19 @@ class DatasetInfo:
 
   def __post_init__(self):
     self.cls_name = naming.snake_to_camelcase(self.name)
-    self.tfds_api = ('tensorflow_datasets.public_api'
-                     if self.in_tfds else 'tensorflow_datasets')
+    self.tfds_api = (
+        'tensorflow_datasets.public_api'
+        if self.in_tfds
+        else 'tensorflow_datasets'
+    )
     self.todo = f'TODO({self.name})'
 
     if self.in_tfds:
       # `/path/to/tensorflow_datasets/image/my_dataset`
       # ->`tensorflow_datasets.image.my_dataset`
-      import_parts = itertools.dropwhile(lambda p: p != 'tensorflow_datasets',
-                                         self.path.parts)
+      import_parts = itertools.dropwhile(
+          lambda p: p != 'tensorflow_datasets', self.path.parts
+      )
       ds_import = '.'.join(import_parts)
     else:
       # For external datasets, it's difficult to correctly infer the full

@@ -25,21 +25,24 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 FLAGS = flags.FLAGS
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, "audio", "gtzan_music_speech",
-                      "dummy_data")
+  return os.path.join(
+      FLAGS.tfds_dir, "audio", "gtzan_music_speech", "dummy_data"
+  )
 
 
 def _generate_data():
   """Generate data examples."""
   wav_file = fake_data_utils.get_random_wav_c1(duration=1, sample=22050)
-  filepath = os.path.join(_output_dir(), "music_speech", "speech_wav",
-                          "{}.wav".format("test"))
+  filepath = os.path.join(
+      _output_dir(), "music_speech", "speech_wav", "{}.wav".format("test")
+  )
   dirname = os.path.dirname(filepath)
   if not tf.io.gfile.exists(dirname):
     tf.io.gfile.makedirs(dirname)

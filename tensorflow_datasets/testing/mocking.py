@@ -48,6 +48,7 @@ class MockPolicy(enum.Enum):
       use any generated files. More is more convenient but less safe than
       `USE_FILES`. Not all features might be available (e.g. no split-names).
   """
+
   AUTO = enum.auto()
   USE_CODE = enum.auto()
   USE_FILES = enum.auto()
@@ -193,8 +194,8 @@ def mock_data(
       decoders = decoders  # pylint: disable=self-assigning-variable
 
     has_nested_dataset = any(
-        isinstance(f, features_lib.Dataset)
-        for f in features._flatten(features))  # pylint: disable=protected-access
+        isinstance(f, features_lib.Dataset) for f in features._flatten(features)
+    )  # pylint: disable=protected-access
     if decoders is not None or has_nested_dataset:
       # If a decoder is passed, encode/decode the examples.
       generator_cls = EncodedRandomFakeGenerator
@@ -214,7 +215,8 @@ def mock_data(
             features=features,
             num_examples=num_examples,
             num_sub_examples=num_sub_examples,
-            max_value=max_value),
+            max_value=max_value,
+        ),
         # pylint: enable=g-long-lambda]
         output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
@@ -252,10 +254,12 @@ def mock_data(
     # `DatasetBuilder.__init__` is mocked above to inject the wrong data_dir.
     # So we restore the original `DatasetBuilder.__init__` inside
     # `builder_from_files` calls.
-    with mock.patch(f'{core}.dataset_builder.DatasetBuilder.__init__',
-                    original_init_fn):
+    with mock.patch(
+        f'{core}.dataset_builder.DatasetBuilder.__init__', original_init_fn
+    ):
       return original_builder_from_files(
-          *args, data_dir=mock_data_dir, **kwargs)
+          *args, data_dir=mock_data_dir, **kwargs
+      )
 
   core = 'tensorflow_datasets.core'
   with contextlib.ExitStack() as stack:
@@ -292,12 +296,14 @@ def mock_data(
 class RandomFakeGenerator(object):
   """Generator of fake examples randomly and deterministically generated."""
 
-  def __init__(self,
-               features,
-               num_examples: int,
-               num_sub_examples: int = 1,
-               max_value: Optional[int] = None,
-               seed: int = 0):
+  def __init__(
+      self,
+      features,
+      num_examples: int,
+      num_sub_examples: int = 1,
+      max_value: Optional[int] = None,
+      seed: int = 0,
+  ):
     self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
     self._py_rng = random.Random(seed)
     self._features = features
@@ -311,13 +317,16 @@ class RandomFakeGenerator(object):
     def rand_str():
       return ''.join(
           self._rgn.choice(
-              list(' abcdefghij'), size=(self._py_rng.randint(10, 20))))
+              list(' abcdefghij'), size=(self._py_rng.randint(10, 20))
+          )
+      )
 
     if not shape:
       return rand_str()
 
-    return np.array([rand_str() for _ in range(np.prod(shape, dtype=np.int32))
-                    ]).reshape(shape)
+    return np.array(
+        [rand_str() for _ in range(np.prod(shape, dtype=np.int32))]
+    ).reshape(shape)
 
   def _generate_random_obj(self, feature, tensor_info):
     """Generates a random tensor for a single feature."""
@@ -333,7 +342,8 @@ class RandomFakeGenerator(object):
           feature.feature,
           num_examples=self._num_sub_examples,
           num_sub_examples=1,
-          max_value=self._max_value)
+          max_value=self._max_value,
+      )
       # Returns the list of examples in the nested dataset.
       return list(generator)
 
@@ -357,7 +367,7 @@ class RandomFakeGenerator(object):
     elif dtype_utils.is_floating(dtype):
       return self._rgn.random_sample(shape).astype(dtype)
     elif dtype_utils.is_bool(dtype):
-      return (self._rgn.random_sample(shape) < .5).astype(dtype)
+      return (self._rgn.random_sample(shape) < 0.5).astype(dtype)
     elif dtype_utils.is_string(dtype):
       return self._generate_random_string_array(shape)
     raise ValueError('Fake generation not supported for {}'.format(dtype))

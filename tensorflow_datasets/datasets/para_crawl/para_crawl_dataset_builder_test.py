@@ -20,7 +20,6 @@ import tensorflow_datasets.testing as tfds_test
 
 
 class ParacrawlTest(tfds_test.DatasetBuilderTestCase):
-
   DATASET_CLASS = para_crawl_dataset_builder.Builder
   SPLITS = {
       "train": 5,

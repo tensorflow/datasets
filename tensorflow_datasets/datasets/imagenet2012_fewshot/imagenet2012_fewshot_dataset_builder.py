@@ -26,7 +26,7 @@ import tensorflow_datasets.public_api as tfds
 SUBSET2FILES = {
     '1shot': tfds.core.gcs_path('downloads/imagenet2012_fewshot/1shot.txt'),
     '5shot': tfds.core.gcs_path('downloads/imagenet2012_fewshot/5shot.txt'),
-    '10shot': tfds.core.gcs_path('downloads/imagenet2012_fewshot/10shot.txt')
+    '10shot': tfds.core.gcs_path('downloads/imagenet2012_fewshot/10shot.txt'),
 }
 TUNE_FILE = tfds.core.gcs_path('downloads/imagenet2012_fewshot/tune.txt')
 
@@ -39,7 +39,8 @@ class Builder(imagenet2012_subset_dataset_builder.Builder):
           name=subset_size,
           description='{} of total ImageNet training set.'.format(subset_size),
           version=tfds.core.Version('5.0.1'),
-      ) for subset_size in SUBSET2FILES
+      )
+      for subset_size in SUBSET2FILES
   ]
 
   def _info(self):
@@ -55,7 +56,6 @@ class Builder(imagenet2012_subset_dataset_builder.Builder):
     )
 
   def _split_generators(self, dl_manager):
-
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
 
@@ -63,7 +63,9 @@ class Builder(imagenet2012_subset_dataset_builder.Builder):
       raise AssertionError(
           'ImageNet requires manual download of the data. Please download '
           'the train and val set and place them into: {}, {}'.format(
-              train_path, val_path))
+              train_path, val_path
+          )
+      )
 
     # Download and load subset file.
     subset_file = SUBSET2FILES[self.builder_config.name]
@@ -75,15 +77,14 @@ class Builder(imagenet2012_subset_dataset_builder.Builder):
     tuneset = set(TUNE_FILE.read_text().splitlines())
 
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(
-                archive=dl_manager.iter_archive(train_path), subset=subset),
-        tfds.Split('tune'):
-            self._generate_examples(
-                archive=dl_manager.iter_archive(train_path), subset=tuneset),
-        tfds.Split.VALIDATION:
-            self._generate_examples(
-                archive=dl_manager.iter_archive(val_path),
-                validation_labels=imagenet_common.get_validation_labels(
-                    val_path)),
+        tfds.Split.TRAIN: self._generate_examples(
+            archive=dl_manager.iter_archive(train_path), subset=subset
+        ),
+        tfds.Split('tune'): self._generate_examples(
+            archive=dl_manager.iter_archive(train_path), subset=tuneset
+        ),
+        tfds.Split.VALIDATION: self._generate_examples(
+            archive=dl_manager.iter_archive(val_path),
+            validation_labels=imagenet_common.get_validation_labels(val_path),
+        ),
     }

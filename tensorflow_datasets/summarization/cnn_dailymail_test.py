@@ -45,7 +45,7 @@ class CnnDailymailTest(testing.DatasetBuilderTestCase):
       'dm_stories': '',
       'test_urls': 'all_test.txt',
       'train_urls': 'all_train.txt',
-      'val_urls': 'all_val.txt'
+      'val_urls': 'all_val.txt',
   }
 
   def test_get_art_abs(self):
@@ -55,8 +55,9 @@ class CnnDailymailTest(testing.DatasetBuilderTestCase):
       article, abstract = cnn_dailymail._get_art_abs(f.name)
       self.assertEqual('Some article. This is some article text.', article)
 
-      self.assertEqual('highlight text.\nHighlight two.\nhighlight Three.',
-                       abstract)
+      self.assertEqual(
+          'highlight text.\nHighlight two.\nhighlight Three.', abstract
+      )
 
 
 if __name__ == '__main__':

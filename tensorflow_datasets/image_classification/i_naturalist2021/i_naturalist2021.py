@@ -43,11 +43,11 @@ _CITATION = r"""\
 _URL = 'https://ml-inat-competition-datasets.s3.amazonaws.com/2021'
 _HOMEPAGE = 'https://github.com/visipedia/inat_comp/tree/master/2021'
 _SPLIT_FILENAMES = {
-        'train': 'train',
-        'mini': 'train_mini',
-        'val': 'val',
-        'test': 'public_test'
-    }
+    'train': 'train',
+    'mini': 'train_mini',
+    'val': 'val',
+    'test': 'public_test',
+}
 
 
 class INaturalist2021(tfds.core.GeneratorBasedBuilder):
@@ -64,20 +64,26 @@ class INaturalist2021(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'id':
-                tfds.features.Text(),
-            'image':
-                tfds.features.Image(shape=(None, None, 3)),
-            'label':
-                tfds.features.ClassLabel(
-                    names_file=tfds.core.tfds_path(
-                        os.path.join('image_classification', 'i_naturalist2021',
-                                     'i_naturalist2021_labels.txt'))),
-            'supercategory':
-                tfds.features.ClassLabel(
-                    names_file=tfds.core.tfds_path(
-                        os.path.join('image_classification', 'i_naturalist2021',
-                                     'i_naturalist2021_supercategories.txt'))),
+            'id': tfds.features.Text(),
+            'image': tfds.features.Image(shape=(None, None, 3)),
+            'label': tfds.features.ClassLabel(
+                names_file=tfds.core.tfds_path(
+                    os.path.join(
+                        'image_classification',
+                        'i_naturalist2021',
+                        'i_naturalist2021_labels.txt',
+                    )
+                )
+            ),
+            'supercategory': tfds.features.ClassLabel(
+                names_file=tfds.core.tfds_path(
+                    os.path.join(
+                        'image_classification',
+                        'i_naturalist2021',
+                        'i_naturalist2021_supercategories.txt',
+                    )
+                )
+            ),
         }),
         supervised_keys=('image', 'label'),
         homepage=_HOMEPAGE,
@@ -91,7 +97,8 @@ class INaturalist2021(tfds.core.GeneratorBasedBuilder):
     for split, split_file in _SPLIT_FILENAMES.items():
       split_downloads[f'{split}_img'] = tfds.download.Resource(
           url=f'{_URL}/{split_file}.tar.gz',
-          extract_method=tfds.download.ExtractMethod.NO_EXTRACT)
+          extract_method=tfds.download.ExtractMethod.NO_EXTRACT,
+      )
       split_downloads[f'{split}_json'] = f'{_URL}/{split_file}.json.tar.gz'
 
     output_paths = dl_manager.download_and_extract(split_downloads)
@@ -99,8 +106,10 @@ class INaturalist2021(tfds.core.GeneratorBasedBuilder):
     for split, split_file in _SPLIT_FILENAMES.items():
       generate_dict[split] = self._generate_examples(
           images_archive=dl_manager.iter_archive(output_paths[f'{split}_img']),
-          json_file=os.path.join(output_paths[f'{split}_json'],
-                                 f'{split_file}.json'))
+          json_file=os.path.join(
+              output_paths[f'{split}_json'], f'{split_file}.json'
+          ),
+      )
 
     return generate_dict
 

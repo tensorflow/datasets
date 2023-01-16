@@ -23,9 +23,11 @@ import tensorflow_datasets.public_api as tfds
 
 _BENCHMARK_URL = "https://paracrawl.eu/releases.html"
 
-_BASE_DATA_URL_FORMAT_STR = ("https://s3.amazonaws.com/web-language-models/"
-                             "paracrawl/release4/en-{target_lang}.bicleaner07."
-                             "txt.gz")
+_BASE_DATA_URL_FORMAT_STR = (
+    "https://s3.amazonaws.com/web-language-models/"
+    "paracrawl/release4/en-{target_lang}.bicleaner07."
+    "txt.gz"
+)
 
 
 @utils.memoize()
@@ -81,18 +83,19 @@ class ParaCrawlConfig(tfds.core.BuilderConfig):
 
     # Initialize the base class.
     name = f"en{target_language}"
-    description = ("Translation dataset from English to %s.") % (
-        target_language)
+    description = "Translation dataset from English to %s." % (target_language)
     super(ParaCrawlConfig, self).__init__(
         name=name,
         description=description,
         version=tfds.core.Version("1.2.0"),
-        **kwargs)
+        **kwargs,
+    )
 
     # Store the attributes.
     self.target_language = target_language
     self.data_url = _BASE_DATA_URL_FORMAT_STR.format(
-        target_lang=target_language)
+        target_lang=target_language
+    )
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -105,14 +108,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       # The version below does not refer to the version of the released
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
-          target_language=target_language,)
+          target_language=target_language,
+      )
       for target_language in _target_languages()
   ]
 
   def _info(self):
     target_language = self.builder_config.target_language
     return self.dataset_info_from_configs(
-        features=tfds.features.Translation(languages=("en", target_language),),
+        features=tfds.features.Translation(
+            languages=("en", target_language),
+        ),
         supervised_keys=("en", target_language),
         homepage=_BENCHMARK_URL,
     )
@@ -120,7 +126,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     # Download the data file.
     data_file = dl_manager.download_and_extract(
-        {"data_file": self.builder_config.data_url})
+        {"data_file": self.builder_config.data_url}
+    )
 
     # Return the single split of the data.
     return [
@@ -135,8 +142,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       for idx, line in enumerate(f):
         line_parts = line.strip().split("\t")
         if len(line_parts) != 2:
-          msg = ("Wrong data format in line {}. The line '{}' does "
-                 "not have exactly one delimiter.").format(idx, line)
+          msg = (
+              "Wrong data format in line {}. The line '{}' does "
+              "not have exactly one delimiter."
+          ).format(idx, line)
           raise ValueError(msg)
         source, target = line_parts[0].strip(), line_parts[1].strip()
         yield idx, {"en": source, target_language: target}

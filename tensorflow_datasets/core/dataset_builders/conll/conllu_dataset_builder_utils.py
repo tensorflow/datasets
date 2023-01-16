@@ -28,8 +28,26 @@ from tensorflow_datasets.core.features.sequence_feature import Sequence
 from tensorflow_datasets.core.features.text_feature import Text
 
 # Universal part-of-speech tags.
-UPOS = ("ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
-        "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X", "_")
+UPOS = (
+    "ADJ",
+    "ADP",
+    "ADV",
+    "AUX",
+    "CCONJ",
+    "DET",
+    "INTJ",
+    "NOUN",
+    "NUM",
+    "PART",
+    "PRON",
+    "PROPN",
+    "PUNCT",
+    "SCONJ",
+    "SYM",
+    "VERB",
+    "X",
+    "_",
+)
 
 # Used by universal dependencies datasets.
 UNIVERSAL_DEPENDENCIES_FEATURES = collections.OrderedDict({

@@ -23,4 +23,5 @@ tfds.builder_cls('imagenet2012_subset')
 from tensorflow_datasets.core import lazy_builder_import
 
 Imagenet2012Subset = lazy_builder_import.LazyBuilderImport(
-    'imagenet2012_subset')
+    'imagenet2012_subset'
+)

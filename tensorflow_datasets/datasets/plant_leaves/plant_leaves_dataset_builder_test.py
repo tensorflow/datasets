@@ -24,8 +24,10 @@ class PlantLeavesTest(testing.DatasetBuilderTestCase):
   SPLITS = {"train": 22}
   # NOTE: Must match file names in the test directory.
   DL_EXTRACT_RESULT = {
-      fname: fname for fname in
-      ["{0:04d}_1.JPG".format(label_number) for label_number in range(1, 23)]
+      fname: fname
+      for fname in [
+          "{0:04d}_1.JPG".format(label_number) for label_number in range(1, 23)
+      ]
   }
 
 

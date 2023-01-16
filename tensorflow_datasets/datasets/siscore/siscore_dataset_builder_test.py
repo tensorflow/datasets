@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class SiscoreTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for siscore dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['rotation', 'size', 'location']
 
   DATASET_CLASS = siscore_dataset_builder.Builder

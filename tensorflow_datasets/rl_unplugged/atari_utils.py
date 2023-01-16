@@ -76,6 +76,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
     game: name of the Atari game
     run: name of the game run
   """
+
   game: str = 'Asterix'
   run: int = 1
 
@@ -139,24 +140,25 @@ _SHORT_GAMES = [
 # Note that rewards and episode_return are actually also clipped.
 def _feature_description():
   return {
-      'checkpoint_idx':
-          tf.io.FixedLenFeature([], tf.int64),
-      'episode_idx':
-          tf.io.FixedLenFeature([], tf.int64),
-      'episode_return':
-          tf.io.FixedLenFeature([], tf.float32),
-      'clipped_episode_return':
-          tf.io.FixedLenFeature([], tf.float32),
-      'observations':
-          tf.io.FixedLenSequenceFeature([], tf.string, allow_missing=True),
-      'actions':
-          tf.io.FixedLenSequenceFeature([], tf.int64, allow_missing=True),
-      'unclipped_rewards':
-          tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
-      'clipped_rewards':
-          tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
-      'discounts':
-          tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
+      'checkpoint_idx': tf.io.FixedLenFeature([], tf.int64),
+      'episode_idx': tf.io.FixedLenFeature([], tf.int64),
+      'episode_return': tf.io.FixedLenFeature([], tf.float32),
+      'clipped_episode_return': tf.io.FixedLenFeature([], tf.float32),
+      'observations': tf.io.FixedLenSequenceFeature(
+          [], tf.string, allow_missing=True
+      ),
+      'actions': tf.io.FixedLenSequenceFeature(
+          [], tf.int64, allow_missing=True
+      ),
+      'unclipped_rewards': tf.io.FixedLenSequenceFeature(
+          [], tf.float32, allow_missing=True
+      ),
+      'clipped_rewards': tf.io.FixedLenSequenceFeature(
+          [], tf.float32, allow_missing=True
+      ),
+      'discounts': tf.io.FixedLenSequenceFeature(
+          [], tf.float32, allow_missing=True
+      ),
   }
 
 
@@ -173,7 +175,8 @@ def builder_configs():
     for run in range(1, 6):
       # pytype: disable=wrong-keyword-args
       configs.append(
-          BuilderConfig(name=f'{game}_run_{run}', game=game, run=run))
+          BuilderConfig(name=f'{game}_run_{run}', game=game, run=run)
+      )
       # pytype: enable=wrong-keyword-args
   return configs
 
@@ -195,12 +198,13 @@ def atari_example_to_rlds(tf_example: tf.train.Example) -> Dict[str, Any]:
 
   is_terminal = [False] * tf.ones_like(data['actions'])
   discounts = data['discounts']
-  if discounts[-1] == 0.:
+  if discounts[-1] == 0.0:
     is_terminal = tf.concat(
-        [[False] * tf.ones(episode_length - 1, tf.int64), [True]], axis=0)
+        [[False] * tf.ones(episode_length - 1, tf.int64), [True]], axis=0
+    )
     # If the episode ends in a terminal state, in the last step only the
     # observation has valid information (the terminal state).
-    discounts = tf.concat([discounts[1:], [0.]], axis=0)
+    discounts = tf.concat([discounts[1:], [0.0]], axis=0)
   episode = {
       # Episode Metadata
       'episode_id': data['episode_idx'],
@@ -214,7 +218,7 @@ def atari_example_to_rlds(tf_example: tf.train.Example) -> Dict[str, Any]:
           'is_first': is_first,
           'is_last': is_last,
           'is_terminal': is_terminal,
-      }
+      },
   }
   return episode
 
@@ -225,40 +229,34 @@ def file_prefix(prefix, run, game):
 
 def features_dict():
   return tfds.features.FeaturesDict({
-      'steps':
-          tfds.features.Dataset({
-              'observation':
-                  tfds.features.Image(
-                      shape=(
-                          84,
-                          84,
-                          1,
-                      ), dtype=np.uint8, encoding_format='png'),
-              'action':
-                  np.int64,
-              'reward':
-                  tfds.features.Scalar(
-                      dtype=np.float32,
-                      doc=tfds.features.Documentation(
-                          desc='Clipped reward.', value_range='[-1, 1]')),
-              'is_terminal':
-                  np.bool_,
-              'is_first':
-                  np.bool_,
-              'is_last':
-                  np.bool_,
-              'discount':
-                  np.float32,
-          }),
-      'checkpoint_id':
-          np.int64,
-      'episode_id':
-          np.int64,
-      'episode_return':
-          tfds.features.Scalar(
+      'steps': tfds.features.Dataset({
+          'observation': tfds.features.Image(
+              shape=(
+                  84,
+                  84,
+                  1,
+              ),
+              dtype=np.uint8,
+              encoding_format='png',
+          ),
+          'action': np.int64,
+          'reward': tfds.features.Scalar(
               dtype=np.float32,
               doc=tfds.features.Documentation(
-                  desc='Sum of the clipped rewards.')),
+                  desc='Clipped reward.', value_range='[-1, 1]'
+              ),
+          ),
+          'is_terminal': np.bool_,
+          'is_first': np.bool_,
+          'is_last': np.bool_,
+          'discount': np.float32,
+      }),
+      'checkpoint_id': np.int64,
+      'episode_id': np.int64,
+      'episode_return': tfds.features.Scalar(
+          dtype=np.float32,
+          doc=tfds.features.Documentation(desc='Sum of the clipped rewards.'),
+      ),
   })
 
 

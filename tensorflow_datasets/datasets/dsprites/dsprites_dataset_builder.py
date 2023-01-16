@@ -18,8 +18,10 @@
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
-_URL = ("https://github.com/deepmind/dsprites-dataset/blob/master/"
-        "dsprites_ndarray_co1sh3sc6or40x32y32_64x64.hdf5?raw=true")
+_URL = (
+    "https://github.com/deepmind/dsprites-dataset/blob/master/"
+    "dsprites_ndarray_co1sh3sc6or40x32y32_64x64.hdf5?raw=true"
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -60,7 +62,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)
+        ),
     ]
 
   def _generate_examples(self, filepath):
@@ -80,8 +83,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       class_array = np.array(h5dataset["latents"]["classes"])
       values_array = np.array(h5dataset["latents"]["values"])
 
-    for i, (image, classes,
-            values) in enumerate(zip(image_array, class_array, values_array)):
+    for i, (image, classes, values) in enumerate(
+        zip(image_array, class_array, values_array)
+    ):
       record = dict(
           image=np.expand_dims(image, -1),
           label_shape=classes[1],
@@ -93,7 +97,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           value_scale=values[2],
           value_orientation=values[3],
           value_x_position=values[4],
-          value_y_position=values[5])
+          value_y_position=values[5],
+      )
       if self.version > "2.0.0":
         record["id"] = "{:06d}".format(i)
       yield i, record

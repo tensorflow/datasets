@@ -21,6 +21,7 @@ from tensorflow_datasets.rlds.robosuite_panda_pick_place_can import robosuite_pa
 
 class RobosuitePandaPickPlaceCanHumanTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for robosuite_panda_pick_place_can dataset."""
+
   DATASET_CLASS = robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -35,8 +36,10 @@ class RobosuitePandaPickPlaceCanHumanTest(tfds.testing.DatasetBuilderTestCase):
 
 
 class RobosuitePandaPickPlaceCanHumanImagesTest(
-    tfds.testing.DatasetBuilderTestCase):
+    tfds.testing.DatasetBuilderTestCase
+):
   """Tests for robosuite_panda_pick_place_can dataset."""
+
   DATASET_CLASS = robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -51,8 +54,10 @@ class RobosuitePandaPickPlaceCanHumanImagesTest(
 
 
 class RobosuitePandaPickPlaceCanSyntheticTest(
-    tfds.testing.DatasetBuilderTestCase):
+    tfds.testing.DatasetBuilderTestCase
+):
   """Tests for robosuite_panda_pick_place_can dataset."""
+
   DATASET_CLASS = robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan
   SPLITS = {
       'train': 2,  # Number of fake train example

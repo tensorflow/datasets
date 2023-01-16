@@ -59,6 +59,7 @@ _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00280/HIGGS.cs
 
 class Higgs(tfds.core.GeneratorBasedBuilder):
   """HIGGS Data Set."""
+
   VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
@@ -99,7 +100,7 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
             'm_jlv': np.float64,
             'm_bb': np.float64,
             'm_wbb': np.float64,
-            'm_wwbb': np.float64
+            'm_wwbb': np.float64,
         }),
         supervised_keys=None,
         homepage='https://archive.ics.uci.edu/ml/datasets/HIGGS',
@@ -107,15 +108,16 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
     path = dl_manager.download_and_extract(_URL)
 
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={
+            name=tfds.Split.TRAIN,
+            gen_kwargs={
                 'file_path': path,
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, file_path):
@@ -129,12 +131,35 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
     """
 
     fieldnames = [
-        'class_label', 'lepton_pT', 'lepton_eta', 'lepton_phi',
-        'missing_energy_magnitude', 'missing_energy_phi', 'jet_1_pt',
-        'jet_1_eta', 'jet_1_phi', 'jet_1_b-tag', 'jet_2_pt', 'jet_2_eta',
-        'jet_2_phi', 'jet_2_b-tag', 'jet_3_pt', 'jet_3_eta', 'jet_3_phi',
-        'jet_3_b-tag', 'jet_4_pt', 'jet_4_eta', 'jet_4_phi', 'jet_4_b-tag',
-        'm_jj', 'm_jjj', 'm_lv', 'm_jlv', 'm_bb', 'm_wbb', 'm_wwbb'
+        'class_label',
+        'lepton_pT',
+        'lepton_eta',
+        'lepton_phi',
+        'missing_energy_magnitude',
+        'missing_energy_phi',
+        'jet_1_pt',
+        'jet_1_eta',
+        'jet_1_phi',
+        'jet_1_b-tag',
+        'jet_2_pt',
+        'jet_2_eta',
+        'jet_2_phi',
+        'jet_2_b-tag',
+        'jet_3_pt',
+        'jet_3_eta',
+        'jet_3_phi',
+        'jet_3_b-tag',
+        'jet_4_pt',
+        'jet_4_eta',
+        'jet_4_phi',
+        'jet_4_b-tag',
+        'm_jj',
+        'm_jjj',
+        'm_lv',
+        'm_jlv',
+        'm_bb',
+        'm_wbb',
+        'm_wwbb',
     ]
 
     with epath.Path(file_path).open() as csvfile:

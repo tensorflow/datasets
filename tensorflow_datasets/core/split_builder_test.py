@@ -45,8 +45,9 @@ def fixture_split_builder():
   )
 
 
-def test_beam(tmp_path: pathlib.Path,
-              split_builder: split_builder_lib.SplitBuilder):
+def test_beam(
+    tmp_path: pathlib.Path, split_builder: split_builder_lib.SplitBuilder
+):
   """Test that `maybe_beam_pipeline` behave as `beam.Pipeline()`."""
   path = tmp_path / 'out.txt'
   with split_builder.maybe_beam_pipeline() as pipeline_proxy:
@@ -54,7 +55,8 @@ def test_beam(tmp_path: pathlib.Path,
         beam.Create(range(9))
         | beam.Map(lambda x: x * 10)
         | beam.Map(_inc_placeholder_counter)
-        | beam.io.WriteToText(os.fspath(path), shard_name_template=''))
+        | beam.io.WriteToText(os.fspath(path), shard_name_template='')
+    )
     _ = split_builder.beam_pipeline | ptransform
   result = pipeline_proxy.result
   # counters = metrics.get_metrics(result, 'some_namespace').counters
@@ -66,9 +68,9 @@ def test_beam(tmp_path: pathlib.Path,
   assert path.read_text() == '\n'.join(str(x * 10) for x in range(9)) + '\n'
 
 
-def test_memory_warning(capsys, monkeypatch,
-                        split_builder: split_builder_lib.SplitBuilder):
-
+def test_memory_warning(
+    capsys, monkeypatch, split_builder: split_builder_lib.SplitBuilder
+):
   def mock_psutil_virtual_memory():
     MockData = collections.namedtuple('MockData', ['total'])
     return MockData(total=0)

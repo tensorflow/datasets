@@ -23,10 +23,10 @@ from tensorflow_datasets.testing import dataset_builder_testing
 class DatasetBuilderTesting(tf.test.TestCase):
 
   def test_checksum_string(self):
-
     def _make_hash():
       return dataset_builder_testing.checksum(
-          tf.constant([b'foo', b'bar-obj']).numpy())
+          tf.constant([b'foo', b'bar-obj']).numpy()
+      )
 
     # Ensure determinism by checking the hash is the same across examples
     # Could harcode value instead but hash is different between Py2 and 3.

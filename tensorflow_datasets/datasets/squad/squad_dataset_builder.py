@@ -31,26 +31,19 @@ _HOMEPAGE_URL = "https://rajpurkar.github.io/SQuAD-explorer/"
 
 def _v2_features():
   return tfds.features.FeaturesDict({
-      "id":
-          np.str_,
-      "title":
-          tfds.features.Text(),
-      "context":
-          tfds.features.Text(),
-      "plausible_answers":
-          tfds.features.Sequence({
-              "text": tfds.features.Text(),
-              "answer_start": np.int32,
-          }),
-      "question":
-          tfds.features.Text(),
-      "is_impossible":
-          np.bool_,
-      "answers":
-          tfds.features.Sequence({
-              "text": tfds.features.Text(),
-              "answer_start": np.int32,
-          }),
+      "id": np.str_,
+      "title": tfds.features.Text(),
+      "context": tfds.features.Text(),
+      "plausible_answers": tfds.features.Sequence({
+          "text": tfds.features.Text(),
+          "answer_start": np.int32,
+      }),
+      "question": tfds.features.Text(),
+      "is_impossible": np.bool_,
+      "answers": tfds.features.Sequence({
+          "text": tfds.features.Text(),
+          "answer_start": np.int32,
+      }),
   })
 
 
@@ -105,7 +98,6 @@ class SquadConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SQUAD."""
 
   def __init__(self, *, train_file, dev_file, **kwargs):
-
     super(SquadConfig, self).__init__(**kwargs)
     self.train_file = train_file
     self.dev_file = dev_file
@@ -131,13 +123,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("3.0.0")
   RELEASE_NOTES = {
-      "3.0.0":
+      "3.0.0": (
           "Fixes issue with small number of examples (19) where answer spans "
-          "are misaligned due to context white-space removal.",
+          "are misaligned due to context white-space removal."
+      ),
   }
 
   def _info(self):
-
     if self.builder_config.name == "v1.1":
       features_dict = qa_utils.squadlike_features()
     elif self.builder_config.name == "v2.0":
@@ -157,21 +149,22 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     urls_to_download = {
         "train": os.path.join(_URL, self.builder_config.train_file),
-        "dev": os.path.join(_URL, self.builder_config.dev_file)
+        "dev": os.path.join(_URL, self.builder_config.dev_file),
     }
     downloaded_files = dl_manager.download_and_extract(urls_to_download)
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"filepath": downloaded_files["train"]}),
+            gen_kwargs={"filepath": downloaded_files["train"]},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"filepath": downloaded_files["dev"]}),
+            gen_kwargs={"filepath": downloaded_files["dev"]},
+        ),
     ]
 
   def _generate_examples(self, filepath):
-
     if self.builder_config.name == "v1.1":
       return qa_utils.generate_squadlike_examples(filepath)
     return _generate_v2_examples(filepath)

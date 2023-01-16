@@ -22,7 +22,9 @@ import json
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
-_DATA_URL = "https://github.com/google-research-datasets/dstc8-schema-guided-dialogue"
+_DATA_URL = (
+    "https://github.com/google-research-datasets/dstc8-schema-guided-dialogue"
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -42,12 +44,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             # TODO(arunchaganty): include frame and state annotations
             "first_speaker": tfds.features.ClassLabel(names=["USER", "SYSTEM"]),
             "metadata": {
-                "services":
-                    tfds.features.Sequence({
+                "services": tfds.features.Sequence(
+                    {
                         "name": np.str_,
                         # TODO(arunchaganty): include service definitions
-                    })
-            }
+                    }
+                )
+            },
         }),
         supervised_keys=None,
         homepage=_DATA_URL,
@@ -55,19 +58,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract(_DATA_URL +
-                                           "/archive/refs/heads/master.zip")
+    path = dl_manager.download_and_extract(
+        _DATA_URL + "/archive/refs/heads/master.zip"
+    )
 
     return {
-        "train":
-            self._generate_examples(
-                path / "dstc8-schema-guided-dialogue-master" / "train"),
-        "dev":
-            self._generate_examples(
-                path / "dstc8-schema-guided-dialogue-master" / "dev"),
-        "test":
-            self._generate_examples(
-                path / "dstc8-schema-guided-dialogue-master" / "test"),
+        "train": self._generate_examples(
+            path / "dstc8-schema-guided-dialogue-master" / "train"
+        ),
+        "dev": self._generate_examples(
+            path / "dstc8-schema-guided-dialogue-master" / "dev"
+        ),
+        "test": self._generate_examples(
+            path / "dstc8-schema-guided-dialogue-master" / "test"
+        ),
     }
 
   def _generate_examples(self, path):
@@ -89,8 +93,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             # TODO(arunchaganty): include frame and state annotations
             "metadata": {
                 # TODO(arunchaganty): include schema definitions
-                "services": [{
-                    "name": service,
-                } for service in datum["services"]],
+                "services": [
+                    {
+                        "name": service,
+                    }
+                    for service in datum["services"]
+                ],
             },
         }

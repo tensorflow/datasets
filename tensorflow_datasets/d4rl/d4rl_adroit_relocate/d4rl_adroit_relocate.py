@@ -33,5 +33,6 @@ class D4rlAdroitRelocate(dataset_builder.D4RLDatasetBuilder):
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(
-        name='relocate', obs_len=39, action_len=30, qpos_len=36, qvel_len=36)
+        name='relocate', obs_len=39, action_len=30, qpos_len=36, qvel_len=36
+    )
     super().__init__(ds_config=config, **kwargs)

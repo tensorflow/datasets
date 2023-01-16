@@ -40,7 +40,9 @@ _CITATION = """
 }
 """
 
-_BASE_DOWNLOAD_URL = 'https://storage.googleapis.com/gresearch/dialog-inpainting/'
+_BASE_DOWNLOAD_URL = (
+    'https://storage.googleapis.com/gresearch/dialog-inpainting/'
+)
 
 
 def _parse_json(text: str) -> Tuple[int, Dict[str, Any]]:
@@ -69,6 +71,7 @@ class WikiDialogConfig(tfds.core.BuilderConfig):
 
 class WikiDialog(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for WikiDialog from dialog inpainter."""
+
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
@@ -77,7 +80,10 @@ class WikiDialog(tfds.core.GeneratorBasedBuilder):
       WikiDialogConfig(
           'OQ',
           base_download_url=os.path.join(_BASE_DOWNLOAD_URL, 'WikiDialog_OQ'),
-          description='WikiDialog generated from the dialog inpainter finetuned on OR-QuAC and QReCC. `OQ` stands for OR-QuAC and QReCC.',
+          description=(
+              'WikiDialog generated from the dialog inpainter finetuned on'
+              ' OR-QuAC and QReCC. `OQ` stands for OR-QuAC and QReCC.'
+          ),
       ),
   ]
 
@@ -87,37 +93,37 @@ class WikiDialog(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'title':
-                tfds.features.Text(),
-            'pid':
-                tfds.features.Text(),
-            'passage':
-                tfds.features.Text(),
-            'sentences':
-                tfds.features.Sequence(tfds.features.Text()),
-            'utterances':
-                tfds.features.Sequence(tfds.features.Text()),
-            'author_num':
-                tfds.features.Sequence(
-                    tfds.features.Tensor(shape=[], dtype=np.int32)),
+            'title': tfds.features.Text(),
+            'pid': tfds.features.Text(),
+            'passage': tfds.features.Text(),
+            'sentences': tfds.features.Sequence(tfds.features.Text()),
+            'utterances': tfds.features.Sequence(tfds.features.Text()),
+            'author_num': tfds.features.Sequence(
+                tfds.features.Tensor(shape=[], dtype=np.int32)
+            ),
         }),
         citation=_CITATION,
-        homepage='https://github.com/google-research/dialog-inpainting#wikidialog-oq',
+        homepage=(
+            'https://github.com/google-research/dialog-inpainting#wikidialog-oq'
+        ),
     )
 
   def _generate_examples(self, filepaths: Sequence[str]):
     beam = tfds.core.lazy_imports.apache_beam
-    return (beam.Create([os.fspath(f) for f in filepaths])
-            | beam.io.ReadAllFromText()
-            | beam.Map(_parse_json))
+    return (
+        beam.Create([os.fspath(f) for f in filepaths])
+        | beam.io.ReadAllFromText()
+        | beam.Map(_parse_json)
+    )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     base_download_url = self.builder_config.base_download_url
     download_urls = {
         'train': [
-            os.path.join(base_download_url,
-                         f'data_train.jsonl-{i:05}-of-00099.gz')
+            os.path.join(
+                base_download_url, f'data_train.jsonl-{i:05}-of-00099.gz'
+            )
             for i in range(99)
         ],
         'validation': [

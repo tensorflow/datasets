@@ -29,24 +29,25 @@ import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-DATA_URL_SAMPLE = ('https://drive.google.com/uc?export=download&'
-                   'id=1YX2TgT8IKSn9V4wGCwdzbRnS53yicV2P')
-DATA_URL = ('https://drive.google.com/uc?export=download&'
-            'id=1BkqHzfRkfzgzCfc73NbNnPMK_rg3i1n9')
+DATA_URL_SAMPLE = (
+    'https://drive.google.com/uc?export=download&'
+    'id=1YX2TgT8IKSn9V4wGCwdzbRnS53yicV2P'
+)
+DATA_URL = (
+    'https://drive.google.com/uc?export=download&'
+    'id=1BkqHzfRkfzgzCfc73NbNnPMK_rg3i1n9'
+)
 
 STATES_DIM = 5
 ACTIONS_DIM = 5
 
 
 class RobonetConfig(tfds.core.BuilderConfig):
-  """"Configuration for RoboNet video rescaling."""
+  """ "Configuration for RoboNet video rescaling."""
 
-  def __init__(self,
-               *,
-               sample_dataset=False,
-               width=None,
-               height=None,
-               **kwargs):
+  def __init__(
+      self, *, sample_dataset=False, width=None, height=None, **kwargs
+  ):
     """The parameters specifying how the dataset will be processed.
 
     The dataset comes with three separate splits. You can specify which split
@@ -60,7 +61,8 @@ class RobonetConfig(tfds.core.BuilderConfig):
       **kwargs: Passed on to the constructor of `BuilderConfig`.
     """
     super(RobonetConfig, self).__init__(
-        version=tfds.core.Version('4.0.1'), **kwargs)
+        version=tfds.core.Version('4.0.1'), **kwargs
+    )
     if (width is None) ^ (height is None):
       raise ValueError('Either both dimensions should be set, or none of them')
     self.sample_dataset = sample_dataset
@@ -106,31 +108,39 @@ class Builder(tfds.core.BeamBasedBuilder):
     if self.builder_config.width is not None:
       if self.builder_config.height is None:
         raise ValueError('Provide either both height and width or none.')
-      ffmpeg_extra_args = ('-vf',
-                           'scale={}x{}'.format(self.builder_config.height,
-                                                self.builder_config.width))
+      ffmpeg_extra_args = (
+          '-vf',
+          'scale={}x{}'.format(
+              self.builder_config.height, self.builder_config.width
+          ),
+      )
     else:
       ffmpeg_extra_args = []
 
-    video_shape = (None, self.builder_config.height, self.builder_config.width,
-                   3)
+    video_shape = (
+        None,
+        self.builder_config.height,
+        self.builder_config.width,
+        3,
+    )
 
     features = tfds.features.FeaturesDict({
         # Video frames: uint8 [None, Time, Width, Height, Channels]
-        'video':
-            tfds.features.Video(
-                video_shape,
-                ffmpeg_extra_args=ffmpeg_extra_args,
-                encoding_format='png'),  # pytype: disable=wrong-arg-types  # gen-stub-imports
+        'video': tfds.features.Video(
+            video_shape,
+            ffmpeg_extra_args=ffmpeg_extra_args,
+            encoding_format='png',
+        ),  # pytype: disable=wrong-arg-types  # gen-stub-imports
         # Robot actions: float32, [None, ACTIONS_DIM]
-        'actions':
-            tfds.features.Tensor(shape=(None, ACTIONS_DIM), dtype=np.float32),
+        'actions': tfds.features.Tensor(
+            shape=(None, ACTIONS_DIM), dtype=np.float32
+        ),
         # Robot states: float32, [None, STATE_DIM]
-        'states':
-            tfds.features.Tensor(shape=(None, STATES_DIM), dtype=np.float32),
+        'states': tfds.features.Tensor(
+            shape=(None, STATES_DIM), dtype=np.float32
+        ),
         # Filename: Text
-        'filename':
-            tfds.features.Text()
+        'filename': tfds.features.Text(),
     })
 
     return self.dataset_info_from_configs(
@@ -140,13 +150,15 @@ class Builder(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     files = dl_manager.download_and_extract(
-        DATA_URL_SAMPLE if self.builder_config.sample_dataset else DATA_URL)
+        DATA_URL_SAMPLE if self.builder_config.sample_dataset else DATA_URL
+    )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'filedir': os.path.join(files, 'hdf5'),
-            }),
+            },
+        ),
     ]
 
   def _build_pcollection(self, pipeline, filedir):
@@ -159,11 +171,13 @@ class Builder(tfds.core.BeamBasedBuilder):
       with h5py.File(filename) as hf:
         video_bytes = hf['env']['cam0_video']['frames'][:].tobytes()
         states = hf['env']['state'][:].astype(np.float32)
-        states = np.pad(states, ((0, 0), (0, STATES_DIM - states.shape[1])),
-                        'constant')
+        states = np.pad(
+            states, ((0, 0), (0, STATES_DIM - states.shape[1])), 'constant'
+        )
         actions = hf['policy']['actions'][:].astype(np.float32)
-        actions = np.pad(actions, ((0, 0), (0, ACTIONS_DIM - actions.shape[1])),
-                         'constant')
+        actions = np.pad(
+            actions, ((0, 0), (0, ACTIONS_DIM - actions.shape[1])), 'constant'
+        )
 
       basename = os.path.basename(filename)
       features = {

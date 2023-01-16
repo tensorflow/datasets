@@ -25,7 +25,7 @@ class GeirhosConflictStimuliTest(tfds_test.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = {
       'texture_vs_shape': 'texture_vs_shape',
-      'imagenet_mapping': 'mapping.txt'
+      'imagenet_mapping': 'mapping.txt',
   }
 
 

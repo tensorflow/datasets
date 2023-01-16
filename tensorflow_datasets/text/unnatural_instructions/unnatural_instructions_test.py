@@ -21,6 +21,7 @@ from tensorflow_datasets.text.unnatural_instructions import unnatural_instructio
 
 class UnnaturalInstructionsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for unnatural_instructions dataset."""
+
   DATASET_CLASS = unnatural_instructions.UnnaturalInstructions
   SPLITS = {
       'train': 14,  # Number of fake train example

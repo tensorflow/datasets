@@ -21,6 +21,7 @@ from tensorflow_datasets.text.mrqa import mrqa
 
 class MRQASQuADTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for squad dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['squad']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -36,6 +37,7 @@ class MRQASQuADTest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQANewsQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for news_qa dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['news_qa']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -51,6 +53,7 @@ class MRQANewsQATest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQATriviaQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for trivia_qa dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['trivia_qa']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -66,6 +69,7 @@ class MRQATriviaQATest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQASearchQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for search_qa dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['search_qa']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -81,6 +85,7 @@ class MRQASearchQATest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQAHotpotQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for hotpot_qa dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['hotpot_qa']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -96,6 +101,7 @@ class MRQAHotpotQATest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQANaturalQuestionsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -111,6 +117,7 @@ class MRQANaturalQuestionsTest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQABioASQTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for bio_asq dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['bio_asq']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -124,6 +131,7 @@ class MRQABioASQTest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQADROPTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for drop dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['drop']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -137,6 +145,7 @@ class MRQADROPTest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQADuoRCTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for duo_rc dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['duo_rc']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -150,6 +159,7 @@ class MRQADuoRCTest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQARACETest(tfds.testing.DatasetBuilderTestCase):
   """Tests for race dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['race']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -163,6 +173,7 @@ class MRQARACETest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQARelationExtractionTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for relation_extraction dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['relation_extraction']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {
@@ -176,6 +187,7 @@ class MRQARelationExtractionTest(tfds.testing.DatasetBuilderTestCase):
 
 class MRQATextbookQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for textbook_qa dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['textbook_qa']
   DATASET_CLASS = mrqa.MRQA
   SPLITS = {

@@ -53,9 +53,13 @@ class ConllBuilderConfig(dataset_builder.BuilderConfig):
       type, in the same order as they appear as columns in the input lines.
   """
 
-  def __init__(self, *, separator: str,
-               ordered_features: OrderedDict[str, feature_lib.FeatureConnector],
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      separator: str,
+      ordered_features: OrderedDict[str, feature_lib.FeatureConnector],
+      **kwargs,
+  ):
     """Initializes the builder config for Conll datasets.
 
     Args:
@@ -75,12 +79,14 @@ class ConllBuilderConfig(dataset_builder.BuilderConfig):
 
 
 class ConllDatasetBuilder(
-    dataset_builder.GeneratorBasedBuilder, skip_registration=True):
+    dataset_builder.GeneratorBasedBuilder, skip_registration=True
+):
   """Base class for CoNLL-like formatted datasets.
 
   It provides functionalities to ease the processing of CoNLL-like datasets.
   Users can overwrite `_generate_examples` to customize the pipeline.
   """
+
   BUILDER_CONFIGS: Sequence[ConllBuilderConfig] = []
 
   @property
@@ -149,11 +155,13 @@ class ConllDatasetBuilder(
             splits = line.split(self.builder_config.separator)
             if len(splits) != len(self.builder_config.ordered_features):
               raise ValueError(
-                  (f"Mismatch in the number of features found in line: {line}\n"
-                   f"Should be {len(self.builder_config.ordered_features)}, "
-                   f"but found {len(splits)}"))
+                  f"Mismatch in the number of features found in line: {line}\n"
+                  f"Should be {len(self.builder_config.ordered_features)}, "
+                  f"but found {len(splits)}"
+              )
             for index, feature in enumerate(
-                self.builder_config.ordered_features.keys()):
+                self.builder_config.ordered_features.keys()
+            ):
               input_sequences[feature].append(splits[index].rstrip())
 
       # Last example from file.

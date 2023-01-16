@@ -109,11 +109,13 @@ class TatoebaConfig(tfds.core.BuilderConfig):
 
 class Tatoeba(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for tatoeba dataset."""
+
   BUILDER_CONFIGS = [
       TatoebaConfig(  # pylint: disable=g-complex-comprehension
           name="tatoeba_" + language,
           language=language,
-      ) for language in _LANGS.keys()
+      )
+      for language in _LANGS.keys()
   ]
 
   VERSION = tfds.core.Version("1.0.0")
@@ -142,20 +144,22 @@ class Tatoeba(tfds.core.GeneratorBasedBuilder):
     lang = _LANGS[self.builder_config.language]
 
     tatoeba_source_path = os.path.join(
-        _DATA_URLS, "tatoeba.{lang}-eng.{lang}".format(lang=lang))
-    tatoeba_eng_path = os.path.join(_DATA_URLS,
-                                    "tatoeba.{}-eng.eng".format(lang))
+        _DATA_URLS, "tatoeba.{lang}-eng.{lang}".format(lang=lang)
+    )
+    tatoeba_eng_path = os.path.join(
+        _DATA_URLS, "tatoeba.{}-eng.eng".format(lang)
+    )
 
     archive = dl_manager.download_and_extract({
         "tatoeba_source_data": tatoeba_source_path,
-        "tatoeba_eng_data": tatoeba_eng_path
+        "tatoeba_eng_data": tatoeba_eng_path,
     })
 
     return {
-        "train":
-            self._generate_examples(
-                source_file=archive["tatoeba_source_data"],
-                target_file=archive["tatoeba_eng_data"]),
+        "train": self._generate_examples(
+            source_file=archive["tatoeba_source_data"],
+            target_file=archive["tatoeba_eng_data"],
+        ),
     }
 
   def _generate_examples(self, source_file, target_file):

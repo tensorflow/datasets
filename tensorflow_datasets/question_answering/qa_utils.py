@@ -26,19 +26,14 @@ import tensorflow_datasets.public_api as tfds
 
 def squadlike_features():
   return tfds.features.FeaturesDict({
-      "id":
-          np.str_,
-      "title":
-          tfds.features.Text(),
-      "context":
-          tfds.features.Text(),
-      "question":
-          tfds.features.Text(),
-      "answers":
-          tfds.features.Sequence({
-              "text": tfds.features.Text(),
-              "answer_start": np.int32,
-          }),
+      "id": np.str_,
+      "title": tfds.features.Text(),
+      "context": tfds.features.Text(),
+      "question": tfds.features.Text(),
+      "answers": tfds.features.Sequence({
+          "text": tfds.features.Text(),
+          "answer_start": np.int32,
+      }),
   })
 
 

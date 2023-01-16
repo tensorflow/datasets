@@ -22,9 +22,11 @@ def test_prepare_ud_filepaths():
   expected_output = ["https://a/b"]
 
   filepaths_1 = ud_utils.prepare_ud_filepaths(
-      path_prefix="https://a", filepaths="b")
+      path_prefix="https://a", filepaths="b"
+  )
   filepaths_2 = ud_utils.prepare_ud_filepaths(
-      path_prefix="https://a", filepaths=["b"])
+      path_prefix="https://a", filepaths=["b"]
+  )
 
   assert filepaths_1 == expected_output
   assert filepaths_2 == expected_output

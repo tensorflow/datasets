@@ -28,8 +28,9 @@ from tensorflow_datasets.core import features as features_lib
 randint = np.random.randint
 
 
-class ImageFeatureTest(testing.FeatureExpectationsTestCase,
-                       parameterized.TestCase):
+class ImageFeatureTest(
+    testing.FeatureExpectationsTestCase, parameterized.TestCase
+):
 
   @parameterized.parameters(
       (np.uint8, np.uint8, 3),
@@ -49,7 +50,8 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
     }[channels]
 
     img_file_path = os.path.join(
-        os.path.dirname(__file__), '../../testing/test_data', filename)
+        os.path.dirname(__file__), '../../testing/test_data', filename
+    )
     with tf.io.gfile.GFile(img_file_path, 'rb') as f:
       img_byte_content = f.read()
     img_file_expected_content = np.array(
@@ -57,7 +59,10 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
             [[0, 255, 0, 255], [255, 0, 0, 255], [255, 0, 255, 255]],
             [[0, 0, 255, 255], [255, 255, 0, 255], [126, 127, 128, 255]],
         ],
-        dtype=np_dtype)[:, :, :channels]  # Truncate (h, w, 4) -> (h, w, c)
+        dtype=np_dtype,
+    )[
+        :, :, :channels
+    ]  # Truncate (h, w, 4) -> (h, w, c)
     if dtype == np.uint16 or dtype == tf.uint16:
       img_file_expected_content *= 257  # Scale int16 images
 
@@ -113,10 +118,10 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
         test_attributes=dict(
             _encoding_format=None,
             _use_colormap=False,
-        ))
+        ),
+    )
 
   def test_image_shaped(self):
-
     img_shaped = randint(256, size=(32, 64, 1), dtype=np.uint8)
 
     self.assertFeature(
@@ -143,7 +148,8 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
         test_attributes=dict(
             _encoding_format='png',
             _use_colormap=True,
-        ))
+        ),
+    )
 
   @parameterized.parameters(
       (np.float32,),
@@ -178,7 +184,8 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
         test_attributes=dict(
             _encoding_format=None,
             _use_colormap=False,
-        ))
+        ),
+    )
 
 
 @pytest.mark.parametrize(
@@ -195,4 +202,5 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
 def test_invalid_img(shape, dtype, encoding_format, err_msg):
   with pytest.raises(ValueError, match=err_msg):
     features_lib.Image(
-        shape=shape, dtype=dtype, encoding_format=encoding_format)
+        shape=shape, dtype=dtype, encoding_format=encoding_format
+    )

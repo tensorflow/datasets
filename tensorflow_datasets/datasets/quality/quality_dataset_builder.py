@@ -20,11 +20,22 @@ import json
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
-_DOWNLOAD_URL = 'https://github.com/nyu-mll/quality/raw/main/data/QuALITY.v0.9.zip'
+_DOWNLOAD_URL = (
+    'https://github.com/nyu-mll/quality/raw/main/data/QuALITY.v0.9.zip'
+)
 
 # Fields that are straight text copies from raw example to processed example.
-_ONE2ONE_FIELDS = ('article', 'article_id', 'set_unique_id', 'writer_id',
-                   'source', 'title', 'topic', 'url', 'writer_id')
+_ONE2ONE_FIELDS = (
+    'article',
+    'article_id',
+    'set_unique_id',
+    'writer_id',
+    'source',
+    'title',
+    'topic',
+    'url',
+    'writer_id',
+)
 
 
 @dataclasses.dataclass
@@ -41,33 +52,29 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   }
 
   BUILDER_CONFIGS = [
-      QualityConfig(name='raw', description='Raw with HTML.',
-                    stripped=False),  # default
       QualityConfig(
-          name='stripped', description='Stripped of HTML.', stripped=True),
+          name='raw', description='Raw with HTML.', stripped=False
+      ),  # default
+      QualityConfig(
+          name='stripped', description='Stripped of HTML.', stripped=True
+      ),
   ]
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     # Mirror format of RACE dataset as much as possible.
     features_dict = {
-        'article':
-            tfds.features.Text(),
+        'article': tfds.features.Text(),
         # The sequence lengths of Sequence fields should match.
-        'questions':
-            tfds.features.Sequence(tfds.features.Text()),
-        'question_ids':
-            tfds.features.Sequence(tfds.features.Text()),
+        'questions': tfds.features.Sequence(tfds.features.Text()),
+        'question_ids': tfds.features.Sequence(tfds.features.Text()),
         # 4 options per question, similar to RACE
-        'options':
-            tfds.features.Sequence(
-                tfds.features.Sequence(tfds.features.Text())),
-        'gold_labels':
-            tfds.features.Sequence(np.int32),  # 0, 1, 2, 3
-        'writer_labels':
-            tfds.features.Sequence(np.int32),  # 0, 1, 2, 3
-        'difficults':
-            tfds.features.Sequence(np.bool_)
+        'options': tfds.features.Sequence(
+            tfds.features.Sequence(tfds.features.Text())
+        ),
+        'gold_labels': tfds.features.Sequence(np.int32),  # 0, 1, 2, 3
+        'writer_labels': tfds.features.Sequence(np.int32),  # 0, 1, 2, 3
+        'difficults': tfds.features.Sequence(np.bool_),
     }
     features_dict.update({k: tfds.features.Text() for k in _ONE2ONE_FIELDS})
     return self.dataset_info_from_configs(
@@ -83,24 +90,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     if self.builder_config.stripped:
       return {
-          'train':
-              self._generate_examples(path / 'QuALITY.v0.9.htmlstripped.train',
-                                      'train'),
-          'test':
-              self._generate_examples(path / 'QuALITY.v0.9.htmlstripped.test',
-                                      'test'),
-          'dev':
-              self._generate_examples(path / 'QuALITY.v0.9.htmlstripped.dev',
-                                      'dev'),
+          'train': self._generate_examples(
+              path / 'QuALITY.v0.9.htmlstripped.train', 'train'
+          ),
+          'test': self._generate_examples(
+              path / 'QuALITY.v0.9.htmlstripped.test', 'test'
+          ),
+          'dev': self._generate_examples(
+              path / 'QuALITY.v0.9.htmlstripped.dev', 'dev'
+          ),
       }
     else:
       return {
-          'train':
-              self._generate_examples(path / 'QuALITY.v0.9.train', 'train'),
-          'test':
-              self._generate_examples(path / 'QuALITY.v0.9.test', 'test'),
-          'dev':
-              self._generate_examples(path / 'QuALITY.v0.9.dev', 'dev'),
+          'train': self._generate_examples(
+              path / 'QuALITY.v0.9.train', 'train'
+          ),
+          'test': self._generate_examples(path / 'QuALITY.v0.9.test', 'test'),
+          'dev': self._generate_examples(path / 'QuALITY.v0.9.dev', 'dev'),
       }
 
   def _generate_examples(self, path, split: str):

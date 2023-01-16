@@ -20,6 +20,7 @@ from tensorflow_datasets.rl_unplugged.rlu_atari_checkpoints import rlu_atari_che
 
 class RluAtariCheckpointsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_atari dataset."""
+
   DATASET_CLASS = rlu_atari_checkpoints.RluAtariCheckpoints
   SPLITS = {
       'checkpoint_00': 2,  # Number of fake train example
@@ -32,7 +33,9 @@ class RluAtariCheckpointsTest(tfds.testing.DatasetBuilderTestCase):
 
   @classmethod
   def setUpClass(cls):
-    rlu_atari_checkpoints.RluAtariCheckpoints._INPUT_FILE_PREFIX = cls.dummy_data
+    rlu_atari_checkpoints.RluAtariCheckpoints._INPUT_FILE_PREFIX = (
+        cls.dummy_data
+    )
     rlu_atari_checkpoints.RluAtariCheckpoints._SHARDS = 1
     rlu_atari_checkpoints.RluAtariCheckpoints._SPLITS = 2
     super().setUpClass()

@@ -28,14 +28,10 @@ _LABELED_SWAP = "labeled_swap"
 _UNLABELED_FINAL = "unlabeled_final"
 _RAW_MAPPING = "raw_and_mapping"
 _DOWNLOAD_URLS = {
-    _LABELED_FINAL:
-        "https://storage.googleapis.com/paws/english/paws_wiki_labeled_final.tar.gz",
-    _LABELED_SWAP:
-        "https://storage.googleapis.com/paws/english/paws_wiki_labeled_swap.tar.gz",
-    _UNLABELED_FINAL:
-        "https://storage.googleapis.com/paws/english/paws_wiki_unlabeled_final.tar.gz",
-    _RAW_MAPPING:
-        "https://storage.googleapis.com/paws/english/wiki_raw_and_mapping.tar.gz",
+    _LABELED_FINAL: "https://storage.googleapis.com/paws/english/paws_wiki_labeled_final.tar.gz",
+    _LABELED_SWAP: "https://storage.googleapis.com/paws/english/paws_wiki_labeled_swap.tar.gz",
+    _UNLABELED_FINAL: "https://storage.googleapis.com/paws/english/paws_wiki_unlabeled_final.tar.gz",
+    _RAW_MAPPING: "https://storage.googleapis.com/paws/english/wiki_raw_and_mapping.tar.gz",
 }
 _EXTRACTED_FOLDERS = {
     _LABELED_FINAL: "final",
@@ -63,13 +59,15 @@ class PawsWikiConfig(tfds.core.BuilderConfig):
     super().__init__(
         name=f"{subset}_{'tokenized' if tokenized else 'raw'}",
         description=f"Subset: {subset} tokenized: {tokenized}",
-        **kwargs)
+        **kwargs,
+    )
     self.subset = subset
     self.tokenized = tokenized
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """This is a dataset for paraphrase identification."""
+
   VERSION = tfds.core.Version("1.1.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial version.",
@@ -79,7 +77,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       PawsWikiConfig(  # pylint: disable=g-complex-comprehension
           subset=subset,
           tokenized=tokenized,
-      ) for tokenized, subset in [
+      )
+      for tokenized, subset in [
           (True, _LABELED_FINAL),
           (False, _LABELED_FINAL),
           (True, _LABELED_SWAP),
@@ -109,12 +108,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       mappings_path = ""
       tags2texts = {}
     else:
-      mapping_base_dir = os.path.join(dl_paths[_RAW_MAPPING],
-                                      "wiki_raw_and_mapping")
+      mapping_base_dir = os.path.join(
+          dl_paths[_RAW_MAPPING], "wiki_raw_and_mapping"
+      )
       mappings_path = os.path.join(mapping_base_dir, f"{subset}_mapping")
       swap_path = os.path.join(mapping_base_dir, "input_swap_wiki_50k.tsv")
-      backtransl_path = os.path.join(mapping_base_dir,
-                                     "input_backtransl_wiki_with_swap_id.tsv")
+      backtransl_path = os.path.join(
+          mapping_base_dir, "input_backtransl_wiki_with_swap_id.tsv"
+      )
       tags2texts = {}
       with epath.Path(swap_path).open() as f:
         reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
@@ -137,7 +138,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "mappings_path": os.path.join(mappings_path, f"{split}.tsv"),
                 "tags2texts": tags2texts,
             },
-        ) for split in _SUBSET_SPLITS[subset]
+        )
+        for split in _SUBSET_SPLITS[subset]
     ]
 
   def _generate_examples(
@@ -165,13 +167,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         # tsv file format: id  mapping1  mapping2
         tags = list(csv.DictReader(f, delimiter="\t"))
       if len(labels) != len(tags):
-        raise ValueError("Expect same number of labels and mapping tags. "
-                         f"Got {len(labels)} vs {len(tags)} instead.")
+        raise ValueError(
+            "Expect same number of labels and mapping tags. "
+            f"Got {len(labels)} vs {len(tags)} instead."
+        )
       for label_ex, tag_ex in zip(labels, tags):
         if label_ex["id"] != tag_ex["id"]:
           raise ValueError(
               "Expect matched id as key from labels file and mappings file. "
-              f"Got {label_ex['id']} vs {tag_ex['id']} instead.")
+              f"Got {label_ex['id']} vs {tag_ex['id']} instead."
+          )
         key = label_ex["id"]
         example = {
             "sentence1": tags2texts[tag_ex["mapping1"]],
@@ -186,7 +191,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         # tsv file format: id  sentence1  sentence2 label
         for row in reader:
           key = row["id"]
-          label_str = "noisy_label" if self.builder_config.subset == _UNLABELED_FINAL else "label"
+          label_str = (
+              "noisy_label"
+              if self.builder_config.subset == _UNLABELED_FINAL
+              else "label"
+          )
           example = {
               "sentence1": row["sentence1"],
               "sentence2": row["sentence2"],

@@ -44,10 +44,11 @@ class Encoding(enum.Enum):
     NONE: No compression (default). bools/integers will be upcasted to int64 as
       this is the only integer format supported by the
       [`tf.train.Example`](https://www.tensorflow.org/tutorials/load_data/tfrecord#tftrainexample)
-        protobufs in which examples are saved.
+      protobufs in which examples are saved.
     BYTES: Stored as raw bytes (avoid the upcasting from above).
     ZLIB: The raw bytes are compressed using zlib.
   """
+
   NONE = 'none'
   BYTES = 'bytes'
   ZLIB = 'zlib'
@@ -93,10 +94,12 @@ class Tensor(feature_lib.FeatureConnector):
     super().__init__(doc=doc)
     self._shape = tuple(shape)
     self._dtype = dtype_utils.cast_to_numpy(dtype)
-    self._serialized_dtype = dtype_utils.cast_to_numpy(serialized_dtype or
-                                                       self._dtype)
+    self._serialized_dtype = dtype_utils.cast_to_numpy(
+        serialized_dtype or self._dtype
+    )
     self._serialized_shape = tuple(
-        self._shape if serialized_shape is None else serialized_shape)
+        self._shape if serialized_shape is None else serialized_shape
+    )
     if isinstance(encoding, str):
       encoding = encoding.lower()
     self._encoding = Encoding(encoding)
@@ -107,7 +110,8 @@ class Tensor(feature_lib.FeatureConnector):
     if dtype_utils.is_string(self._dtype) and self._encoded_to_bytes:
       raise NotImplementedError(
           'tfds.features.Tensor() does not support `encoding=` when '
-          'dtype is string. Please open a PR if you need this feature.')
+          'dtype is string. Please open a PR if you need this feature.'
+      )
 
   @py_utils.memoize()
   def get_tensor_info(self) -> feature_lib.TensorInfo:
@@ -129,13 +133,11 @@ class Tensor(feature_lib.FeatureConnector):
     # de-serialization.
     if self._dynamic_shape:
       return {
-          'shape':
-              feature_lib.TensorInfo(
-                  shape=(len(self._shape),),
-                  dtype=np.int32,
-              ),
-          'value':
-              serialized_spec,
+          'shape': feature_lib.TensorInfo(
+              shape=(len(self._shape),),
+              dtype=np.int32,
+          ),
+          'value': serialized_spec,
       }
     return serialized_spec
 
@@ -146,26 +148,31 @@ class Tensor(feature_lib.FeatureConnector):
     # they defined shape=(None, None) even if it wasn't supported.
     # For backward compatibility, the check is moved inside encode example.
     if self._dynamic_shape and not self._encoded_to_bytes:
-      raise ValueError('Multiple unknown dimensions Tensor require to set '
-                       "`Tensor(..., encoding='zlib')` (or 'bytes'). "
-                       f'For {self}')
+      raise ValueError(
+          'Multiple unknown dimensions Tensor require to set '
+          "`Tensor(..., encoding='zlib')` (or 'bytes'). "
+          f'For {self}'
+      )
 
     np_dtype = self._serialized_dtype
     if np_dtype == np.bool_ and isinstance(example_data, str):
       raise TypeError(
           f'Error encoding: {example_data!r}. {example_data!r} is a string, so '
           'converting it to `bool` will always output `True`. Please, fix '
-          '`_generate_examples` with a better parsing.')
+          '`_generate_examples` with a better parsing.'
+      )
     if isinstance(example_data, tf.Tensor):
       raise TypeError(
           f'Error encoding: {example_data!r}. `_generate_examples` should '
-          'yield `np.array` compatible values, not `tf.Tensor`')
+          'yield `np.array` compatible values, not `tf.Tensor`'
+      )
     if not isinstance(example_data, np.ndarray):
       example_data = np.array(example_data, dtype=np_dtype)
     # Ensure the shape and dtype match
     if example_data.dtype != np_dtype:
-      raise ValueError('Dtype {} do not match {}'.format(
-          example_data.dtype, np_dtype))
+      raise ValueError(
+          'Dtype {} do not match {}'.format(example_data.dtype, np_dtype)
+      )
 
     shape = example_data.shape
     if isinstance(shape, tf.TensorShape):
@@ -230,7 +237,8 @@ class Tensor(feature_lib.FeatureConnector):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.TensorFeature]) -> 'Tensor':
+      cls, value: Union[Json, feature_pb2.TensorFeature]
+  ) -> 'Tensor':
     if isinstance(value, dict):
       return cls(
           shape=tuple(value['shape']),
@@ -248,7 +256,8 @@ class Tensor(feature_lib.FeatureConnector):
     return feature_pb2.TensorFeature(
         shape=feature_lib.to_shape_proto(self._shape),
         dtype=feature_lib.dtype_to_str(self._dtype),
-        encoding=self._encoding.value)
+        encoding=self._encoding.value,
+    )
 
 
 def get_inner_feature_repr(feature):

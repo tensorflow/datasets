@@ -101,24 +101,31 @@ def test_encode_and_dtype_from_str():
 
 @pytest.mark.parametrize(
     ["json"],
-    [({
-        "type": "tensorflow_datasets.core.features.image_feature.Image",
-        "content": {
-            "shape": [128, 128, 1],
-            "dtype": "uint8",
-            "encoding_format": None,
-            "use_colormap": False,
-        }
-    },),
-     ({
-         "type": "tensorflow_datasets.core.features.labeled_image.LabeledImage",
-         "content": {
-             "shape": [128, 128, 1],
-             "dtype": "uint8",
-             "encoding_format": None,
-             "labels": 2
-         }
-     },)])
+    [
+        (
+            {
+                "type": "tensorflow_datasets.core.features.image_feature.Image",
+                "content": {
+                    "shape": [128, 128, 1],
+                    "dtype": "uint8",
+                    "encoding_format": None,
+                    "use_colormap": False,
+                },
+            },
+        ),
+        (
+            {
+                "type": "tensorflow_datasets.core.features.labeled_image.LabeledImage",
+                "content": {
+                    "shape": [128, 128, 1],
+                    "dtype": "uint8",
+                    "encoding_format": None,
+                    "labels": 2,
+                },
+            },
+        ),
+    ],
+)
 def test_feature_from_json(json):
   feature_connector = feature.FeatureConnector.from_json(json)
   assert isinstance(feature_connector, image_feature.Image)
@@ -132,7 +139,8 @@ def test_tensor_info_tensor_shape(dtype):
   tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=dtype)
   assert tensor_info.shape == (28, 28, 3)
   assert tensor_info.to_tensor_spec() == tf.TensorSpec(
-      shape=tensor_shape, dtype=np.int64)
+      shape=tensor_shape, dtype=np.int64
+  )
 
 
 @pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
@@ -141,7 +149,8 @@ def test_tensor_info_tensor_shape_with_none(dtype):
   tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=dtype)
   assert tensor_info.shape == (None, None, 3)
   assert tensor_info.to_tensor_spec() == tf.TensorSpec(
-      shape=tensor_shape, dtype=np.int64)
+      shape=tensor_shape, dtype=np.int64
+  )
 
 
 @pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
@@ -156,12 +165,19 @@ def test_tensor_info_list_shape_with_none(dtype):
   assert tensor_info.shape == (None, None, 3)
 
 
-@pytest.mark.parametrize(["feature_name", "parent_name", "expected"], [
-    ("a", None, "a"),
-    ("a/b", None, "a.b"),
-    ("a", "b", "b-a"),
-    ("a/b", "c/d", "c-d-a.b"),
-])
+@pytest.mark.parametrize(
+    ["feature_name", "parent_name", "expected"],
+    [
+        ("a", None, "a"),
+        ("a/b", None, "a.b"),
+        ("a", "b", "b-a"),
+        ("a/b", "c/d", "c-d-a.b"),
+    ],
+)
 def test_convert_feature_name_to_filename(feature_name, parent_name, expected):
-  assert feature.convert_feature_name_to_filename(
-      feature_name=feature_name, parent_name=parent_name) == expected
+  assert (
+      feature.convert_feature_name_to_filename(
+          feature_name=feature_name, parent_name=parent_name
+      )
+      == expected
+  )

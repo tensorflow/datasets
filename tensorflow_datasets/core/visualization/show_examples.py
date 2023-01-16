@@ -35,8 +35,11 @@ _ALL_VISUALIZERS = [
 ]
 
 
-def show_examples(ds: tf.data.Dataset, ds_info: dataset_info.DatasetInfo,
-                  **options_kwargs: Any):
+def show_examples(
+    ds: tf.data.Dataset,
+    ds_info: dataset_info.DatasetInfo,
+    **options_kwargs: Any,
+):
   """Visualize images (and labels) from an image classification dataset.
 
   This function is for interactive use (Colab, Jupyter). It displays and return
@@ -64,10 +67,12 @@ def show_examples(ds: tf.data.Dataset, ds_info: dataset_info.DatasetInfo,
   """
   if not isinstance(ds_info, dataset_info.DatasetInfo):  # Arguments inverted
     # `absl.logging` does not appear on Colab by default, so uses print instead.
-    print('WARNING: For consistency with `tfds.load`, the `tfds.show_examples` '
-          'signature has been modified from (info, ds) to (ds, info).\n'
-          'The old signature is deprecated and will be removed. '
-          'Please change your call to `tfds.show_examples(ds, info)`')
+    print(
+        'WARNING: For consistency with `tfds.load`, the `tfds.show_examples` '
+        'signature has been modified from (info, ds) to (ds, info).\n'
+        'The old signature is deprecated and will be removed. '
+        'Please change your call to `tfds.show_examples(ds, info)`'
+    )
     ds, ds_info = ds_info, ds
 
   # Pack `as_supervised=True` datasets
@@ -77,8 +82,9 @@ def show_examples(ds: tf.data.Dataset, ds_info: dataset_info.DatasetInfo,
     if visualizer.match(ds_info):
       return visualizer.show(ds, ds_info, **options_kwargs)
 
-  raise ValueError('Visualisation not supported for dataset `{}`'.format(
-      ds_info.name))
+  raise ValueError(
+      'Visualisation not supported for dataset `{}`'.format(ds_info.name)
+  )
 
 
 def show_statistics(
@@ -126,8 +132,10 @@ def show_statistics(
 
   if split not in ds_info.splits:
     raise ValueError(
-        'Invalid requested split: \'{}\'. Only {} are availables.'.format(
-            split, list(ds_info.splits)))
+        "Invalid requested split: '{}'. Only {} are availables.".format(
+            split, list(ds_info.splits)
+        )
+    )
 
   # Creates the statistics.
   statistics = statistics_pb2.DatasetFeatureStatisticsList()

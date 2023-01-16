@@ -63,7 +63,8 @@ from tensorflow_datasets.core.utils.file_utils import as_path
 
 def benchmark(*args, **kwargs):
   raise DeprecationWarning(
-      "`tfds.core.benchmark` has been renamed to `tfds.benchmark`")
+      "`tfds.core.benchmark` has been renamed to `tfds.benchmark`"
+  )
 
 
 __all__ = [

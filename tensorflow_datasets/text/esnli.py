@@ -39,7 +39,9 @@ The e-SNLI dataset extends the Stanford Natural Language Inference Dataset to
 include human-annotated natural language explanations of the entailment
 relations.
 """
-_URL = 'https://raw.githubusercontent.com/OanaMariaCamburu/e-SNLI/master/dataset/'
+_URL = (
+    'https://raw.githubusercontent.com/OanaMariaCamburu/e-SNLI/master/dataset/'
+)
 
 
 class Esnli(tfds.core.GeneratorBasedBuilder):
@@ -57,19 +59,14 @@ class Esnli(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'premise':
-                tfds.features.Text(),
-            'hypothesis':
-                tfds.features.Text(),
-            'label':
-                tfds.features.ClassLabel(
-                    names=['entailment', 'neutral', 'contradiction']),
-            'explanation_1':
-                tfds.features.Text(),
-            'explanation_2':
-                tfds.features.Text(),
-            'explanation_3':
-                tfds.features.Text(),
+            'premise': tfds.features.Text(),
+            'hypothesis': tfds.features.Text(),
+            'label': tfds.features.ClassLabel(
+                names=['entailment', 'neutral', 'contradiction']
+            ),
+            'explanation_1': tfds.features.Text(),
+            'explanation_2': tfds.features.Text(),
+            'explanation_3': tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage='https://github.com/OanaMariaCamburu/e-SNLI',
@@ -82,10 +79,10 @@ class Esnli(tfds.core.GeneratorBasedBuilder):
     files = dl_manager.download_and_extract({
         'train': [
             os.path.join(_URL, 'esnli_train_1.csv'),
-            os.path.join(_URL, 'esnli_train_2.csv')
+            os.path.join(_URL, 'esnli_train_2.csv'),
         ],
         'validation': [os.path.join(_URL, 'esnli_dev.csv')],
-        'test': [os.path.join(_URL, 'esnli_test.csv')]
+        'test': [os.path.join(_URL, 'esnli_test.csv')],
     })
 
     return [

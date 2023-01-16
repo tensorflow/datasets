@@ -68,8 +68,8 @@ class PartialDecoding:
       features_subset: A subset of the features
     """
     with utils.try_reraise(
-        'Provided PartialDecoding specs does not match actual features: '):
-
+        'Provided PartialDecoding specs does not match actual features: '
+    ):
       # Convert non-features into features
       expected_feature = _normalize_feature_item(
           feature=features,
@@ -89,7 +89,8 @@ def _normalize_feature_item(
   """Extracts the features matching the expected_feature structure."""
   # If user provide a FeatureConnector, use this
   if (isinstance(expected_feature, features_lib.FeatureConnector)) or (
-      dtype_utils.is_np_or_tf_dtype(expected_feature)):
+      dtype_utils.is_np_or_tf_dtype(expected_feature)
+  ):
     return expected_feature
   # If the user provide a bool, use the matching feature connector
   # Example: {'cameras': True} -> `{'camera': FeatureDict({'image': Image()})}`
@@ -123,7 +124,8 @@ def _normalize_feature_dict(
             expected_key=k,
             expected_value=v,
             fn=_normalize_feature_item,
-        ) for k, v in inner_features.items()
+        )
+        for k, v in inner_features.items()
     }
     # Filter `False` values
     return inner_features
@@ -135,8 +137,8 @@ def _normalize_feature_dict(
     return features_lib.Sequence(inner_features)
   else:
     raise ValueError(
-        f'Unexpected structure {expected_feature!r} does not match '
-        f'{feature!r}')
+        f'Unexpected structure {expected_feature!r} does not match {feature!r}'
+    )
 
 
 def _extract_features(
@@ -152,14 +154,17 @@ def _extract_features(
   # Use `type` rather than `isinstance` to not recurse into inherited classes.
   if type(feature) == features_lib.FeaturesDict:  # pylint: disable=unidiomatic-typecheck
     expected_feature = typing.cast(features_lib.FeaturesDict, expected_feature)
-    return features_lib.FeaturesDict({  # Extract the feature subset  # pylint: disable=g-complex-comprehension
-        k: _extract_feature_item(
-            feature=feature,
-            expected_key=k,
-            expected_value=v,
-            fn=_extract_features,
-        ) for k, v in expected_feature.items()
-    })
+    return features_lib.FeaturesDict(
+        {  # Extract the feature subset  # pylint: disable=g-complex-comprehension
+            k: _extract_feature_item(
+                feature=feature,
+                expected_key=k,
+                expected_value=v,
+                fn=_extract_features,
+            )
+            for k, v in expected_feature.items()
+        }
+    )
   elif type(feature) == features_lib.Sequence:  # pylint: disable=unidiomatic-typecheck
     feature = typing.cast(features_lib.Sequence, feature)
     expected_feature = typing.cast(features_lib.Sequence, expected_feature)
@@ -170,8 +175,12 @@ def _extract_features(
     return features_lib.Sequence(feature_subset, length=feature._length)  # pylint: disable=protected-access
   else:
     # Assert that the specs matches
-    if (feature.dtype != expected_feature.dtype or
-        not utils.shapes_are_compatible(feature.shape, expected_feature.shape)):
+    if (
+        feature.dtype != expected_feature.dtype
+        or not utils.shapes_are_compatible(
+            feature.shape, expected_feature.shape
+        )
+    ):
       raise ValueError(f'Expected: {expected_feature}. Got: {feature}')
     return feature
 

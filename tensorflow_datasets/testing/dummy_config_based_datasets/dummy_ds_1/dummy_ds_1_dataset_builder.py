@@ -28,11 +28,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({'x': np.int64}),)
+        features=tfds.features.FeaturesDict({'x': np.int64}),
+    )
 
   def _split_generators(self, dl_manager):
     return [
-        tfds.core.SplitGenerator(name=tfds.Split.TRAIN,),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+        ),
     ]
 
   def _generate_examples(self):

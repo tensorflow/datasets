@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlAdroitDoorClonedV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
+
   DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
 
   SPLITS = {
@@ -36,6 +37,7 @@ class D4rlAdroitDoorClonedV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorExpertV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
+
   DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
 
   SPLITS = {
@@ -51,6 +53,7 @@ class D4rlAdroitDoorExpertV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorHumanV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
+
   DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
 
   SPLITS = {
@@ -66,6 +69,7 @@ class D4rlAdroitDoorHumanV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorClonedV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
+
   DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
 
   SPLITS = {
@@ -81,6 +85,7 @@ class D4rlAdroitDoorClonedV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorExpertV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
+
   DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
 
   SPLITS = {
@@ -96,6 +101,7 @@ class D4rlAdroitDoorExpertV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorHumanV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
+
   DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
 
   SPLITS = {

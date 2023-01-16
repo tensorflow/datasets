@@ -43,14 +43,19 @@ def test_from_hf_to_tfds():
 def test_from_tfds_to_hf():
   assert huggingface_dataset_builder._from_tfds_to_hf("x") == "x"
   assert huggingface_dataset_builder._from_tfds_to_hf("X") == "x"
-  assert huggingface_dataset_builder._from_tfds_to_hf(
-      "bigscience__p3") == "bigscience/P3"
-  assert huggingface_dataset_builder._from_tfds_to_hf(
-      "fashion_mnist") == "fashion_mnist"
+  assert (
+      huggingface_dataset_builder._from_tfds_to_hf("bigscience__p3")
+      == "bigscience/P3"
+  )
+  assert (
+      huggingface_dataset_builder._from_tfds_to_hf("fashion_mnist")
+      == "fashion_mnist"
+  )
   assert huggingface_dataset_builder._from_tfds_to_hf("x__y_z") == "x/Y-z"
   with pytest.raises(
       registered.DatasetNotFoundError,
-      match="\"z\" is not listed in Hugging Face datasets."):
+      match='"z" is not listed in Hugging Face datasets.',
+  ):
     assert huggingface_dataset_builder._from_tfds_to_hf("z")
 
 
@@ -63,18 +68,24 @@ def test_convert_config_name():
 def test_convert_to_np_dtype():
   assert huggingface_dataset_builder._convert_to_np_dtype("bool_") == np.bool_
   assert huggingface_dataset_builder._convert_to_np_dtype("float") == np.float32
-  assert huggingface_dataset_builder._convert_to_np_dtype(
-      "double") == np.float64
-  assert huggingface_dataset_builder._convert_to_np_dtype(
-      "large_string") == np.object_
-  assert huggingface_dataset_builder._convert_to_np_dtype(
-      "string") == np.object_
+  assert (
+      huggingface_dataset_builder._convert_to_np_dtype("double") == np.float64
+  )
+  assert (
+      huggingface_dataset_builder._convert_to_np_dtype("large_string")
+      == np.object_
+  )
+  assert (
+      huggingface_dataset_builder._convert_to_np_dtype("string") == np.object_
+  )
   assert huggingface_dataset_builder._convert_to_np_dtype("utf8") == np.object_
   assert huggingface_dataset_builder._convert_to_np_dtype("int32") == np.int32
   assert huggingface_dataset_builder._convert_to_np_dtype("int64") == np.int64
   assert huggingface_dataset_builder._convert_to_np_dtype("int64") == tf.int64
-  assert huggingface_dataset_builder._convert_to_np_dtype(
-      "timestamp[s, tz=UTC]") == np.int64
+  assert (
+      huggingface_dataset_builder._convert_to_np_dtype("timestamp[s, tz=UTC]")
+      == np.int64
+  )
   with pytest.raises(ValueError, match="Unrecognized type.+"):
     huggingface_dataset_builder._convert_to_np_dtype("I am no dtype")
 
@@ -83,9 +94,12 @@ def test_convert_value_datetime():
   feature = feature_lib.Scalar(dtype=np.int64)
   epoch_start = datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)
   assert huggingface_dataset_builder._convert_value(epoch_start, feature) == 0
-  assert huggingface_dataset_builder._convert_value(
-      datetime.datetime(1970, 1, 2, tzinfo=datetime.timezone.utc),
-      feature) == 86400
+  assert (
+      huggingface_dataset_builder._convert_value(
+          datetime.datetime(1970, 1, 2, tzinfo=datetime.timezone.utc), feature
+      )
+      == 86400
+  )
 
 
 def test_convert_value_scalar():
@@ -99,8 +113,9 @@ def test_convert_value_scalar():
 
   string_feature = feature_lib.Scalar(dtype=np.object_)
   assert not huggingface_dataset_builder._convert_value(None, string_feature)
-  assert huggingface_dataset_builder._convert_value("abc",
-                                                    string_feature) == "abc"
+  assert (
+      huggingface_dataset_builder._convert_value("abc", string_feature) == "abc"
+  )
 
   bool_feature = feature_lib.Scalar(dtype=np.bool_)
   assert not huggingface_dataset_builder._convert_value(None, bool_feature)
@@ -114,10 +129,12 @@ def test_convert_value_scalar():
 
 def test_convert_value_sequence():
   sequence_feature = feature_lib.Sequence(feature=tf.int64)
-  assert huggingface_dataset_builder._convert_value([42],
-                                                    sequence_feature) == [42]
-  assert huggingface_dataset_builder._convert_value(42,
-                                                    sequence_feature) == [42]
+  assert huggingface_dataset_builder._convert_value([42], sequence_feature) == [
+      42
+  ]
+  assert huggingface_dataset_builder._convert_value(42, sequence_feature) == [
+      42
+  ]
 
 
 def test_convert_value_image():

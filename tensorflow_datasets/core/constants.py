@@ -30,7 +30,8 @@ SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 # If modifying this, should also update `scripts/cli/build.py` `--data_dir`
 DATA_DIR = os.environ.get(
     'TFDS_DATA_DIR',
-    os.path.join(os.path.expanduser('~'), 'tensorflow_datasets'))
+    os.path.join(os.path.expanduser('~'), 'tensorflow_datasets'),
+)
 
 # Suffix of files / directories which aren't finished downloading / extracting.
 INCOMPLETE_SUFFIX = '.incomplete'
@@ -48,5 +49,6 @@ METADATA_FILENAME = 'metadata.json'
 # Filepath for mapping between TFDS datasets and PapersWithCode entries.
 PWC_FILENAME = 'tfds_to_pwc_links.json'
 PWC_LINKS_PATH = (
-    epath.resource_path('tensorflow_datasets') /
-    f'scripts/documentation/{PWC_FILENAME}')
+    epath.resource_path('tensorflow_datasets')
+    / f'scripts/documentation/{PWC_FILENAME}'
+)

@@ -73,21 +73,34 @@ _SORTED_ITEMS = [
 _TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS_SPLIT1)
 
 
-@pytest.mark.parametrize([
-    'num_keys', 'num_buckets', 'max_hkey', 'expected_non_empty_shards',
-    'expected_min_bucket_size', 'expected_max_bucket_size'
-], [
-    (10, 2, 9, 2, 5, 5),
-    (10, 3, 9, 3, 3, 4),
-    (1024, 10, 1023, 10, 102, 103),
-    (10, 2, 99, 1, 0, 10),
-])
-def test_get_bucket_number(num_keys, num_buckets, max_hkey,
-                           expected_non_empty_shards, expected_min_bucket_size,
-                           expected_max_bucket_size):
+@pytest.mark.parametrize(
+    [
+        'num_keys',
+        'num_buckets',
+        'max_hkey',
+        'expected_non_empty_shards',
+        'expected_min_bucket_size',
+        'expected_max_bucket_size',
+    ],
+    [
+        (10, 2, 9, 2, 5, 5),
+        (10, 3, 9, 3, 3, 4),
+        (1024, 10, 1023, 10, 102, 103),
+        (10, 2, 99, 1, 0, 10),
+    ],
+)
+def test_get_bucket_number(
+    num_keys,
+    num_buckets,
+    max_hkey,
+    expected_non_empty_shards,
+    expected_min_bucket_size,
+    expected_max_bucket_size,
+):
   shards = [
       shuffle.get_bucket_number(
-          hkey=k, num_buckets=num_buckets, max_hkey=max_hkey)
+          hkey=k, num_buckets=num_buckets, max_hkey=max_hkey
+      )
       for k in range(num_keys)
   ]
   # Check shard(x) <= shard(y) if x < y.
@@ -107,7 +120,8 @@ def test_get_bucket_number_large_hkey():
   bucket = shuffle.get_bucket_number(
       hkey=314755909755515592000481005244904880883,
       num_buckets=5,
-      max_hkey=314755909755515592000481005244904880883)
+      max_hkey=314755909755515592000481005244904880883,
+  )
   assert bucket == 4
 
 
@@ -144,13 +158,15 @@ class ShuffleTest(testing.TestCase):
   def test_sorted_by_key(self):
     self._test_items(
         'split1',
-        _SORTED_ITEMS, [value for key, value in _SORTED_ITEMS],
-        disable_shuffling=True)
+        _SORTED_ITEMS,
+        [value for key, value in _SORTED_ITEMS],
+        disable_shuffling=True,
+    )
 
   def test_nonbytes(self):
     shuffler = shuffle.Shuffler(self.get_temp_dir(), 'split1')
     with self.assertRaisesWithPredicateMatch(AssertionError, 'Only bytes'):
-      shuffler.add(1, u'a')
+      shuffler.add(1, 'a')
     with self.assertRaisesWithPredicateMatch(AssertionError, 'Only bytes'):
       shuffler.add(1, 123)
 
@@ -161,7 +177,8 @@ class ShuffleTest(testing.TestCase):
     shuffler.add(1, b'c')
     iterator = iter(shuffler)
     self.assertEqual(
-        next(iterator), (86269847664267119453139349052967691808, b'a'))
+        next(iterator), (86269847664267119453139349052967691808, b'a')
+    )
     with self.assertRaises(shuffle.DuplicatedKeysError):
       next(iterator)
 

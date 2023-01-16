@@ -44,12 +44,68 @@ _CITATION = """\
 
 _DATA_URL = 'http://phontron.com/data/ted_talks.tar.gz'
 
-_LANGUAGES = ('en', 'es', 'pt-br', 'fr', 'ru', 'he', 'ar', 'ko', 'zh-cn', 'it',
-              'ja', 'zh-tw', 'nl', 'ro', 'tr', 'de', 'vi', 'pl', 'pt', 'bg',
-              'el', 'fa', 'sr', 'hu', 'hr', 'uk', 'cs', 'id', 'th', 'sv', 'sk',
-              'sq', 'lt', 'da', 'calv', 'my', 'sl', 'mk', 'fr-ca', 'fi', 'hy',
-              'hi', 'nb', 'ka', 'mn', 'et', 'ku', 'gl', 'mr', 'zh', 'ur', 'eo',
-              'ms', 'az', 'ta', 'bn', 'kk', 'be', 'eu', 'bs')
+_LANGUAGES = (
+    'en',
+    'es',
+    'pt-br',
+    'fr',
+    'ru',
+    'he',
+    'ar',
+    'ko',
+    'zh-cn',
+    'it',
+    'ja',
+    'zh-tw',
+    'nl',
+    'ro',
+    'tr',
+    'de',
+    'vi',
+    'pl',
+    'pt',
+    'bg',
+    'el',
+    'fa',
+    'sr',
+    'hu',
+    'hr',
+    'uk',
+    'cs',
+    'id',
+    'th',
+    'sv',
+    'sk',
+    'sq',
+    'lt',
+    'da',
+    'calv',
+    'my',
+    'sl',
+    'mk',
+    'fr-ca',
+    'fi',
+    'hy',
+    'hi',
+    'nb',
+    'ka',
+    'mn',
+    'et',
+    'ku',
+    'gl',
+    'mr',
+    'zh',
+    'ur',
+    'eo',
+    'ms',
+    'az',
+    'ta',
+    'bn',
+    'kk',
+    'be',
+    'eu',
+    'bs',
+)
 
 
 class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
@@ -62,11 +118,10 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'translations':
-                tfds.features.TranslationVariableLanguages(languages=_LANGUAGES
-                                                          ),
-            'talk_name':
-                tfds.features.Text(),
+            'translations': tfds.features.TranslationVariableLanguages(
+                languages=_LANGUAGES
+            ),
+            'talk_name': tfds.features.Text(),
         }),
         homepage='https://github.com/neulab/word-embeddings-for-nmt',
         citation=_CITATION,
@@ -80,16 +135,18 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'data_file': os.path.join(dl_dir, 'all_talks_train.tsv')
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={'data_file': os.path.join(dl_dir,
-                                                  'all_talks_dev.tsv')}),
+            gen_kwargs={'data_file': os.path.join(dl_dir, 'all_talks_dev.tsv')},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'data_file': os.path.join(dl_dir, 'all_talks_test.tsv')
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, data_file):
@@ -106,7 +163,7 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
                 for lang, text in row.items()
                 if lang != 'talk_name' and _is_translation_complete(text)
             },
-            'talk_name': row['talk_name']
+            'talk_name': row['talk_name'],
         }
 
 

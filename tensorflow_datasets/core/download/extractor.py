@@ -56,16 +56,19 @@ class _Extractor(object):
   def __init__(self, max_workers=None):
     max_workers = max_workers or multiprocessing.cpu_count()
     self._executor = concurrent.futures.ThreadPoolExecutor(
-        max_workers=max_workers)
+        max_workers=max_workers
+    )
     self._copy_executor = concurrent.futures.ThreadPoolExecutor(
-        max_workers=max_workers * 4)
+        max_workers=max_workers * 4
+    )
     self._pbar_path = None
 
   @contextlib.contextmanager
   def tqdm(self):
     """Add a progression bar for the current extraction."""
     with utils.async_tqdm(
-        total=0, desc='Extraction completed...', unit=' file') as pbar_path:
+        total=0, desc='Extraction completed...', unit=' file'
+    ) as pbar_path:
       self._pbar_path = pbar_path
       yield
 
@@ -76,7 +79,8 @@ class _Extractor(object):
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
     future = self._copy_executor.submit(
-        self._extract, from_path=path, method=extract_method, to_path=to_path)
+        self._extract, from_path=path, method=extract_method, to_path=to_path
+    )
     return promise.Promise.resolve(future)
 
   def _extract(
@@ -86,8 +90,11 @@ class _Extractor(object):
       to_path: epath.PathLike,
   ) -> epath.Path:
     """Returns `to_path` once resource has been extracted there."""
-    to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
-                               uuid.uuid4().hex)
+    to_path_tmp = '%s%s_%s' % (
+        to_path,
+        constants.INCOMPLETE_SUFFIX,
+        uuid.uuid4().hex,
+    )
     max_length_dst_path = 0
     futures = []
     try:
@@ -138,8 +145,12 @@ def _copy(src_data, dest_path):
 
 def _normpath(path):
   path = os.path.normpath(path)
-  if (path.startswith('.') or os.path.isabs(path) or path.endswith('~') or
-      os.path.basename(path).startswith('.')):
+  if (
+      path.startswith('.')
+      or os.path.isabs(path)
+      or path.endswith('~')
+      or os.path.basename(path).startswith('.')
+  ):
     return None
   return path
 
@@ -252,5 +263,6 @@ def iter_archive(
   """
   if method == resource_lib.ExtractMethod.NO_EXTRACT:
     raise ValueError(
-        f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.')
+        f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.'
+    )
   return _EXTRACT_METHODS[method](path)  # pytype: disable=bad-return-type

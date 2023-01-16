@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class BuccTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for bucc dataset."""
+
   DATASET_CLASS = bucc_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['bucc_fr']
   SPLITS = {
@@ -30,7 +31,7 @@ class BuccTest(tfds.testing.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = {
       'bucc_test_dir': 'test-gold',
-      'bucc_dev_dir': 'training-gold'
+      'bucc_dev_dir': 'training-gold',
   }
 
 

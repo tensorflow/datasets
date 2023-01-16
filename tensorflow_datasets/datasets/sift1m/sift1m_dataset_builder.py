@@ -35,23 +35,24 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'index':
-                tfds.features.Scalar(
-                    dtype=np.int64, doc='Index within the split.'),
-            'embedding':
-                tfds.features.Tensor(shape=(128,), dtype=np.float32),
-            'neighbors':
-                tfds.features.Sequence(
-                    {
-                        'index':
-                            tfds.features.Scalar(
-                                dtype=np.int64, doc='Neighbor index.'),
-                        'distance':
-                            tfds.features.Scalar(
-                                dtype=np.float32, doc='Neighbor distance.'),
-                    },
-                    doc='The computed neighbors, which is only available for the test split.'
-                )
+            'index': tfds.features.Scalar(
+                dtype=np.int64, doc='Index within the split.'
+            ),
+            'embedding': tfds.features.Tensor(shape=(128,), dtype=np.float32),
+            'neighbors': tfds.features.Sequence(
+                {
+                    'index': tfds.features.Scalar(
+                        dtype=np.int64, doc='Neighbor index.'
+                    ),
+                    'distance': tfds.features.Scalar(
+                        dtype=np.float32, doc='Neighbor distance.'
+                    ),
+                },
+                doc=(
+                    'The computed neighbors, which is only available for'
+                    ' the test split.'
+                ),
+            ),
         }),
         homepage='http://corpus-texmex.irisa.fr/',
         disable_shuffling=True,
@@ -74,8 +75,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             yield idx, {'index': idx, 'embedding': val, 'neighbors': []}
         else:
           for idx, (val, n_indices, distances) in enumerate(
-              zip(dataset_file['test'], dataset_file['neighbors'],
-                  dataset_file['distances'])):
+              zip(
+                  dataset_file['test'],
+                  dataset_file['neighbors'],
+                  dataset_file['distances'],
+              )
+          ):
             neighbors = []
             for nn_idx, nn_dist in zip(n_indices, distances):
               neighbors.append({'index': nn_idx, 'distance': nn_dist})

@@ -34,7 +34,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "audio": tfds.features.Audio(file_format="wav", sample_rate=8000),
             "label": tfds.features.ClassLabel(num_classes=10),
-            "audio/filename": tfds.features.Text()
+            "audio/filename": tfds.features.Text(),
         }),
         supervised_keys=("audio", "label"),
         homepage=_HOMEPAGE_URL,
@@ -43,13 +43,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns Split Generators."""
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
-    extracted_dir_path = os.path.join(dl_path,
-                                      "free-spoken-digit-dataset-1.0.9")
+    extracted_dir_path = os.path.join(
+        dl_path, "free-spoken-digit-dataset-1.0.9"
+    )
     path = os.path.join(extracted_dir_path, "recordings")
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"path": path})
+            name=tfds.Split.TRAIN, gen_kwargs={"path": path}
+        )
     ]
 
   def _generate_examples(self, path):

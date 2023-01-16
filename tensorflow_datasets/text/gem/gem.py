@@ -150,42 +150,24 @@ _XSUM_REMOVE_LINES = set([
 ])
 
 _WIKI_LINGUA_LANGS = {
-    "wiki_lingua_arabic_ar":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/arabic.zip",
-    "wiki_lingua_chinese_zh":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/chinese.zip",
-    "wiki_lingua_czech_cs":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/czech.zip",
-    "wiki_lingua_dutch_nl":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/dutch.zip",
-    "wiki_lingua_english_en":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/english.zip",
-    "wiki_lingua_french_fr":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/french.zip",
-    "wiki_lingua_german_de":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/german.zip",
-    "wiki_lingua_hindi_hi":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/hindi.zip",
-    "wiki_lingua_indonesian_id":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/indonesian.zip",
-    "wiki_lingua_italian_it":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/italian.zip",
-    "wiki_lingua_japanese_ja":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/japanese.zip",
-    "wiki_lingua_korean_ko":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/korean.zip",
-    "wiki_lingua_portuguese_pt":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/portuguese.zip",
-    "wiki_lingua_russian_ru":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/russian.zip",
-    "wiki_lingua_spanish_es":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/spanish.zip",
-    "wiki_lingua_thai_th":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/thai.zip",
-    "wiki_lingua_turkish_tr":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/turkish.zip",
-    "wiki_lingua_vietnamese_vi":
-        "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/vietnamese.zip",
+    "wiki_lingua_arabic_ar": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/arabic.zip",
+    "wiki_lingua_chinese_zh": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/chinese.zip",
+    "wiki_lingua_czech_cs": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/czech.zip",
+    "wiki_lingua_dutch_nl": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/dutch.zip",
+    "wiki_lingua_english_en": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/english.zip",
+    "wiki_lingua_french_fr": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/french.zip",
+    "wiki_lingua_german_de": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/german.zip",
+    "wiki_lingua_hindi_hi": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/hindi.zip",
+    "wiki_lingua_indonesian_id": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/indonesian.zip",
+    "wiki_lingua_italian_it": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/italian.zip",
+    "wiki_lingua_japanese_ja": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/japanese.zip",
+    "wiki_lingua_korean_ko": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/korean.zip",
+    "wiki_lingua_portuguese_pt": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/portuguese.zip",
+    "wiki_lingua_russian_ru": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/russian.zip",
+    "wiki_lingua_spanish_es": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/spanish.zip",
+    "wiki_lingua_thai_th": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/thai.zip",
+    "wiki_lingua_turkish_tr": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/turkish.zip",
+    "wiki_lingua_vietnamese_vi": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_wikilingua_full/vietnamese.zip",
 }
 
 
@@ -210,22 +192,25 @@ class GemConfig(tfds.core.BuilderConfig):
 
 class Gem(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for GEM benchmark."""
+
   VERSION = tfds.core.Version("1.1.0")
   RELEASE_NOTES = {
       "1.1.0": "Release of the Challenge Sets",
       "1.0.1": "Update bad links filter for MLSum",
-      "1.0.0": "Initial version"
+      "1.0.0": "Initial version",
   }
   BUILDER_CONFIGS = [
       GemConfig(
           name="common_gen",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
       CommonGen is a constrained text generation task, associated with a
       benchmark dataset, to explicitly test machines for the ability of
       generative commonsense reasoning. Given a set of common concepts;
       the task is to generate a coherent sentence describing an everyday
       scenario using these concepts.
-      """),
+      """
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
@@ -233,15 +218,15 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "concepts": tfds.features.Sequence(np.str_),
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "data":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/common_gen/commongen_data.zip",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/common_gen.zip"
+              "data": "https://storage.googleapis.com/huggingface-nlp/datasets/common_gen/commongen_data.zip",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/common_gen.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
           @inproceedings{lin2020commongen,
             title = "CommonGen: A Constrained Text Generation Challenge for Generative Commonsense Reasoning",
             author = "Lin, Bill Yuchen  and
@@ -258,15 +243,19 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             publisher = "Association for Computational Linguistics",
             url = "https://www.aclweb.org/anthology/2020.findings-emnlp.165",
             pages = "1823--1840",
-          }""")),
+          }"""
+          ),
+      ),
       GemConfig(
           name="cs_restaurants",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
           The task is generating responses in the context of a (hypothetical)
           dialogue system that provides information about restaurants.
           The input is a basic intent/dialogue act type and a list of slots
           (attributes) and their values. The output is a natural language
-          sentence."""),
+          sentence."""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
@@ -275,19 +264,17 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "target_delexicalized": np.str_,
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "train":
-                  "https://raw.githubusercontent.com/UFAL-DSG/cs_restaurant_dataset/master/train.json",
-              "validation":
-                  "https://raw.githubusercontent.com/UFAL-DSG/cs_restaurant_dataset/master/devel.json",
-              "test":
-                  "https://raw.githubusercontent.com/UFAL-DSG/cs_restaurant_dataset/master/test.json",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/cs_restaurants.zip",
+              "train": "https://raw.githubusercontent.com/UFAL-DSG/cs_restaurant_dataset/master/train.json",
+              "validation": "https://raw.githubusercontent.com/UFAL-DSG/cs_restaurant_dataset/master/devel.json",
+              "test": "https://raw.githubusercontent.com/UFAL-DSG/cs_restaurant_dataset/master/test.json",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/cs_restaurants.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
           @inproceedings{cs_restaurants,
             address = {Tokyo, Japan},
             title = {Neural {Generation} for {Czech}: {Data} and {Baselines}},
@@ -299,14 +286,18 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             month = oct,
             year = {2019},
             pages = {563--574}
-          }""")),
+          }"""
+          ),
+      ),
       GemConfig(
           name="dart",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             DART is a large and open-domain structured DAta Record to Text
             generation corpus with high-quality sentence annotations with each
             input being a set of entity-relation triples following a
-            tree-structured ontology."""),
+            tree-structured ontology."""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
@@ -316,49 +307,50 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "target_sources": tfds.features.Sequence(np.str_),
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "train":
-                  "https://raw.githubusercontent.com/Yale-LILY/dart/master/data/v1.1.1/dart-v1.1.1-full-train.json",
-              "validation":
-                  "https://raw.githubusercontent.com/Yale-LILY/dart/master/data/v1.1.1/dart-v1.1.1-full-dev.json",
-              "test":
-                  "https://raw.githubusercontent.com/Yale-LILY/dart/master/data/v1.1.1/dart-v1.1.1-full-test.json",
+              "train": "https://raw.githubusercontent.com/Yale-LILY/dart/master/data/v1.1.1/dart-v1.1.1-full-train.json",
+              "validation": "https://raw.githubusercontent.com/Yale-LILY/dart/master/data/v1.1.1/dart-v1.1.1-full-dev.json",
+              "test": "https://raw.githubusercontent.com/Yale-LILY/dart/master/data/v1.1.1/dart-v1.1.1-full-test.json",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @article{radev2020dart,
               title=Dart: Open-domain structured data record to text generation,
               author={Radev, Dragomir and Zhang, Rui and Rau, Amrit and Sivaprasad, Abhinand and Hsieh, Chiachun and Rajani, Nazneen Fatema and Tang, Xiangru and Vyas, Aadit and Verma, Neha and Krishna, Pranav and others},
               journal={arXiv preprint arXiv:2007.02871},
               year={2020}
             }
-            }""")),
+            }"""
+          ),
+      ),
       GemConfig(
           name="e2e_nlg",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             The E2E dataset is designed for a limited-domain data-to-text task
             -- generation of restaurant descriptions/recommendations based on up
-            to 8 different attributes (name, area, price range etc.)"""),
+            to 8 different attributes (name, area, price range etc.)"""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
               "meaning_representation": np.str_,
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "train":
-                  "https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/train-fixed.no-ol.csv",
-              "validation":
-                  "https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/devel-fixed.no-ol.csv",
-              "test":
-                  "https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/test-fixed.csv",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/e2e_nlg.zip",
+              "train": "https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/train-fixed.no-ol.csv",
+              "validation": "https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/devel-fixed.no-ol.csv",
+              "test": "https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/test-fixed.csv",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/e2e_nlg.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @inproceedings{e2e_cleaned,
               address = {Tokyo, Japan},
               title = {Semantic {Noise} {Matters} for {Neural} {Natural} {Language} {Generation}},
@@ -367,12 +359,16 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               author = {Dušek, Ondřej and Howcroft, David M and Rieser, Verena},
               year = {2019},
               pages = {421--426},
-            }""")),
+            }"""
+          ),
+      ),
       GemConfig(
           name="mlsum_de",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             MLSum is a large-scale multiLingual summarization dataset. It is
-            buillt from online news outlets, this split focusing on German."""),
+            buillt from online news outlets, this split focusing on German."""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
@@ -383,33 +379,34 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "date": np.str_,
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "train":
-                  "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/de_train.zip",
-              "validation":
-                  "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/de_val.zip",
-              "test":
-                  "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/de_test.zip",
-              "bad_ids":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_mlsum_bad_ids_fixed.json",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/mlsum_de.zip",
+              "train": "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/de_train.zip",
+              "validation": "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/de_val.zip",
+              "test": "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/de_test.zip",
+              "bad_ids": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_mlsum_bad_ids_fixed.json",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/mlsum_de.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @inproceedings{scialom-etal-2020-mlsum,
                 title = "{MLSUM}: The Multilingual Summarization Corpus",
                 author = {Scialom, Thomas  and Dray, Paul-Alexis  and Lamprier, Sylvain  and Piwowarski, Benjamin  and Staiano, Jacopo},
                 booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
                 year = {2020}
-            }""")),
+            }"""
+          ),
+      ),
       GemConfig(
           name="mlsum_es",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             MLSum is a large-scale multiLingual summarization dataset. It is
             buillt from online news outlets, this split focusing on
-            Spanish."""),
+            Spanish."""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
@@ -420,146 +417,135 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "date": np.str_,
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "train":
-                  "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/es_train.zip",
-              "validation":
-                  "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/es_val.zip",
-              "test":
-                  "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/es_test.zip",
-              "bad_ids":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_mlsum_bad_ids_fixed.json",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/mlsum_es.zip",
+              "train": "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/es_train.zip",
+              "validation": "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/es_val.zip",
+              "test": "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/es_test.zip",
+              "bad_ids": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_mlsum_bad_ids_fixed.json",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/mlsum_es.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @inproceedings{scialom-etal-2020-mlsum,
                 title = "{MLSUM}: The Multilingual Summarization Corpus",
                 author = {Scialom, Thomas  and Dray, Paul-Alexis  and Lamprier, Sylvain  and Piwowarski, Benjamin  and Staiano, Jacopo},
                 booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
                 year = {2020}
-            }""")),
+            }"""
+          ),
+      ),
       GemConfig(
           name="schema_guided_dialog",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             The Schema-Guided Dialogue (SGD) dataset contains 18K multi-domain
             task-oriented dialogues between a human and a virtual assistant,
             which covers 17 domains ranging from banks and events to media,
-            calendar, travel, and weather."""),
+            calendar, travel, and weather."""
+          ),
           features=tfds.features.FeaturesDict({
-              "gem_id":
-                  np.str_,
-              "gem_parent_id":
-                  np.str_,
-              "dialog_id":
-                  np.str_,
-              "turn_id":
-                  np.int32,
-              "service":
-                  np.str_,
-              "prompt":
-                  np.str_,
-              "context":
-                  tfds.features.Sequence(
-                      np.str_),  # multiple references for validation.
-              "dialog_acts":
-                  tfds.features.Sequence({
-                      "act": tfds.features.ClassLabel(names=_SGD_ACTS),
-                      "slot": np.str_,
-                      "values": tfds.features.Sequence(np.str_),
-                  }),
-              "target":
-                  np.str_,  # single target for train.
-              "references":
-                  tfds.features.Sequence(
-                      np.str_),  # multiple references for validation.
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "dialog_id": np.str_,
+              "turn_id": np.int32,
+              "service": np.str_,
+              "prompt": np.str_,
+              "context": tfds.features.Sequence(
+                  np.str_
+              ),  # multiple references for validation.
+              "dialog_acts": tfds.features.Sequence({
+                  "act": tfds.features.ClassLabel(names=_SGD_ACTS),
+                  "slot": np.str_,
+                  "values": tfds.features.Sequence(np.str_),
+              }),
+              "target": np.str_,  # single target for train.
+              "references": tfds.features.Sequence(
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "data":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_sgd_context.zip",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/schema_guided_dialog.zip",
+              "data": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_sgd_context.zip",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/schema_guided_dialog.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @article{rastogi2019towards,
               title={Towards Scalable Multi-domain Conversational Agents: The Schema-Guided Dialogue Dataset},
               author={Rastogi, Abhinav and Zang, Xiaoxue and Sunkara, Srinivas and Gupta, Raghav and Khaitan, Pranav},
               journal={arXiv preprint arXiv:1909.05855},
               year={2019}
-            }""")),
+            }"""
+          ),
+      ),
       GemConfig(
           name="totto",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             ToTTo is a Table-to-Text NLG task. The task is as follows:
             Given a Wikipedia table with row names, column names and table
             cells, with a subset of cells highlighted, generate a natural
-            language description for the highlighted part of the table."""),
+            language description for the highlighted part of the table."""
+          ),
           features=tfds.features.FeaturesDict({
-              "gem_id":
-                  np.str_,
-              "gem_parent_id":
-                  np.str_,
-              "totto_id":
-                  np.int32,
-              "table_page_title":
-                  np.str_,
-              "table_webpage_url":
-                  np.str_,
-              "table_section_title":
-                  np.str_,
-              "table_section_text":
-                  np.str_,
-              "table":
-                  tfds.features.Sequence(
-                      tfds.features.Sequence({
-                          "column_span": np.int32,
-                          "is_header": np.bool_,
-                          "row_span": np.int32,
-                          "value": np.str_,
-                      })),
-              "highlighted_cells":
-                  tfds.features.Sequence(tfds.features.Sequence(np.int32)),
-              "example_id":
-                  np.str_,
-              "overlap_subset":
-                  np.str_,
-              "sentence_annotations":
+              "gem_id": np.str_,
+              "gem_parent_id": np.str_,
+              "totto_id": np.int32,
+              "table_page_title": np.str_,
+              "table_webpage_url": np.str_,
+              "table_section_title": np.str_,
+              "table_section_text": np.str_,
+              "table": tfds.features.Sequence(
                   tfds.features.Sequence({
-                      "original_sentence": np.str_,
-                      "sentence_after_deletion": np.str_,
-                      "sentence_after_ambiguity": np.str_,
-                      "final_sentence": np.str_,
-                  }),
-              "target":
-                  np.str_,  # single target for train.
-              "references":
-                  tfds.features.Sequence(
-                      np.str_),  # multiple references for validation.
+                      "column_span": np.int32,
+                      "is_header": np.bool_,
+                      "row_span": np.int32,
+                      "value": np.str_,
+                  })
+              ),
+              "highlighted_cells": tfds.features.Sequence(
+                  tfds.features.Sequence(np.int32)
+              ),
+              "example_id": np.str_,
+              "overlap_subset": np.str_,
+              "sentence_annotations": tfds.features.Sequence({
+                  "original_sentence": np.str_,
+                  "sentence_after_deletion": np.str_,
+                  "sentence_after_ambiguity": np.str_,
+                  "final_sentence": np.str_,
+              }),
+              "target": np.str_,  # single target for train.
+              "references": tfds.features.Sequence(
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "data":
-                  "https://storage.googleapis.com/totto/totto_data.zip",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/totto.zip",
+              "data": "https://storage.googleapis.com/totto/totto_data.zip",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/totto.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @inproceedings{parikh2020totto,
               title=ToTTo: A Controlled Table-To-Text Generation Dataset,
               author={Parikh, Ankur and Wang, Xuezhi and Gehrmann, Sebastian and Faruqui, Manaal and Dhingra, Bhuwan and Yang, Diyi and Das, Dipanjan},
               booktitle={Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
               pages={1173--1186},
               year={2020}
-            }""")),
+            }"""
+          ),
+      ),
       GemConfig(
           name="web_nlg_en",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             WebNLG is a bi-lingual dataset (English, Russian) of parallel
             DBpedia triple sets and short texts that cover about 450 different
             DBpedia properties. The WebNLG data was originally created to
             promote the development of RDF verbalisers able to generate short
-            text and to handle micro-planning."""),
+            text and to handle micro-planning."""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
@@ -568,19 +554,17 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "webnlg_id": np.str_,
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "train":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_en_train.json",
-              "validation":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_en_val.json",
-              "test":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_en_test.json",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/web_nlg_en.zip",
+              "train": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_en_train.json",
+              "validation": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_en_val.json",
+              "test": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_en_test.json",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/web_nlg_en.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @inproceedings{gardent2017creating,
               author = "Gardent, Claire
                 and Shimorina, Anastasia
@@ -594,15 +578,19 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               location = "Vancouver, Canada",
               doi = "10.18653/v1/P17-1017",
               url = "http://www.aclweb.org/anthology/P17-1017"
-            }""")),
+            }"""
+          ),
+      ),
       GemConfig(
           name="web_nlg_ru",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             WebNLG is a bi-lingual dataset (English, Russian) of parallel
             DBpedia triple sets and short texts that cover about 450 different
             DBpedia properties. The WebNLG data was originally created to
             promote the development of RDF verbalisers able to generate short
-            text and to handle micro-planning."""),
+            text and to handle micro-planning."""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
@@ -611,19 +599,17 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "webnlg_id": np.str_,
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "train":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_ru_train.json",
-              "validation":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_ru_val.json",
-              "test":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_ru_test.json",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/web_nlg_ru.zip",
+              "train": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_ru_train.json",
+              "validation": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_ru_val.json",
+              "test": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_web_nlg/webnlg_ru_test.json",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/web_nlg_ru.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @inproceedings{gardent2017creating,
               author = "Gardent, Claire
                 and Shimorina, Anastasia
@@ -637,53 +623,45 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               location = "Vancouver, Canada",
               doi = "10.18653/v1/P17-1017",
               url = "http://www.aclweb.org/anthology/P17-1017"
-            }""")),
+            }"""
+          ),
+      ),
       GemConfig(
           name="wiki_auto_asset_turk",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             WikiAuto provides a set of aligned sentences from English Wikipedia
             and Simple English Wikipedia as a resource to train sentence
             simplification systems. ASSET and TURK are high-quality
-            simplification datasets used for testing."""),
+            simplification datasets used for testing."""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
               "source": np.str_,
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "train":
-                  "https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/train.tsv",
-              "validation":
-                  "https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/valid.tsv",
-              "test_turk":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_turk_detokenized.json",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/wiki_auto_asset_turk_train_valid.zip",
-              "test_asset_0":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.0",
-              "test_asset_1":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.1",
-              "test_asset_2":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.2",
-              "test_asset_3":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.3",
-              "test_asset_4":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.4",
-              "test_asset_5":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.5",
-              "test_asset_6":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.6",
-              "test_asset_7":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.7",
-              "test_asset_8":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.8",
-              "test_asset_9":
-                  "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.9",
+              "train": "https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/train.tsv",
+              "validation": "https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/valid.tsv",
+              "test_turk": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_turk_detokenized.json",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/wiki_auto_asset_turk_train_valid.zip",
+              "test_asset_0": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.0",
+              "test_asset_1": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.1",
+              "test_asset_2": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.2",
+              "test_asset_3": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.3",
+              "test_asset_4": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.4",
+              "test_asset_5": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.5",
+              "test_asset_6": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.6",
+              "test_asset_7": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.7",
+              "test_asset_8": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.8",
+              "test_asset_9": "https://github.com/facebookresearch/asset/raw/main/dataset/asset.test.simp.9",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @inproceedings{jiang-etal-2020-neural,
               title = "Neural {CRF} Model for Sentence Alignment in Text Simplification",
               author = "Jiang, Chao  and
@@ -699,13 +677,17 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               url = "https://www.aclweb.org/anthology/2020.acl-main.709",
               doi = "10.18653/v1/2020.acl-main.709",
               pages = "7943--7960",
-          }""")),
+          }"""
+          ),
+      ),
       GemConfig(
           name="xsum",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             The dataset is for the task of abstractive summarization in its
             extreme form, its about summarizing a document in a single
-            sentence."""),
+            sentence."""
+          ),
           features=tfds.features.FeaturesDict({
               "gem_id": np.str_,
               "gem_parent_id": np.str_,
@@ -713,24 +695,25 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "document": np.str_,
               "target": np.str_,  # single target for train.
               "references": tfds.features.Sequence(
-                  np.str_),  # multiple references for validation.
+                  np.str_
+              ),  # multiple references for validation.
           }),
           data_urls={
-              "data":
-                  "http://bollin.inf.ed.ac.uk/public/direct/XSUM-EMNLP18-Summary-Data-Original.tar.gz",
-              "splits":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_xsum_confidence_0.8.json",
-              "challenge_set":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/xsum.zip",
+              "data": "http://bollin.inf.ed.ac.uk/public/direct/XSUM-EMNLP18-Summary-Data-Original.tar.gz",
+              "splits": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_xsum_confidence_0.8.json",
+              "challenge_set": "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_challenge_sets/xsum.zip",
           },
-          citation=textwrap.dedent("""\
+          citation=textwrap.dedent(
+              """\
             @inproceedings{Narayan2018dont,
               author = "Shashi Narayan and Shay B. Cohen and Mirella Lapata",
               title = "Don't Give Me the Details, Just the Summary! {T}opic-Aware Convolutional Neural Networks for Extreme Summarization",
               booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing ",
               year = "2018",
               address = "Brussels, Belgium",
-            }"""))
+            }"""
+          ),
+      ),
   ]
   # Add all the WikiLingua versions.
   for version_name, data_url in _WIKI_LINGUA_LANGS.items():
@@ -738,35 +721,38 @@ class Gem(tfds.core.GeneratorBasedBuilder):
     BUILDER_CONFIGS.append(
         GemConfig(
             name=version_name,
-            description=textwrap.dedent("""\
+            description=textwrap.dedent(
+                """\
                 Wikilingua is a large-scale, multilingual dataset for the evaluation
-                of cross-lingual abstractive summarization systems.."""),
+                of cross-lingual abstractive summarization systems.."""
+            ),
             features=tfds.features.FeaturesDict({
-                "gem_id":
-                    np.str_,
-                "gem_parent_id":
-                    np.str_,
-                "source":
-                    np.str_,
-                "target":
-                    np.str_,  # single target for train.
-                "source_aligned":
-                    tfds.features.Translation(languages=[ln, "en"]
-                                             ),  # parallel in English.
-                "target_aligned":
-                    tfds.features.Translation(languages=[ln, "en"]),
-                "references":
-                    tfds.features.Sequence(
-                        np.str_),  # multiple references for validation.
+                "gem_id": np.str_,
+                "gem_parent_id": np.str_,
+                "source": np.str_,
+                "target": np.str_,  # single target for train.
+                "source_aligned": tfds.features.Translation(
+                    languages=[ln, "en"]
+                ),  # parallel in English.
+                "target_aligned": tfds.features.Translation(
+                    languages=[ln, "en"]
+                ),
+                "references": tfds.features.Sequence(
+                    np.str_
+                ),  # multiple references for validation.
             }),
             data_urls={"data": data_url},
-            citation=textwrap.dedent("""\
+            citation=textwrap.dedent(
+                """\
                 @inproceedings{ladhak-wiki-2020,
                 title=WikiLingua: A New Benchmark Dataset for Multilingual Abstractive Summarization,
                 author={Faisal Ladhak, Esin Durmus, Claire Cardie and Kathleen McKeown},
                 booktitle={Findings of EMNLP, 2020},
                 year={2020}
-                }""")))
+                }"""
+            ),
+        )
+    )
 
   def _info(self) -> tfds.core.DatasetInfo:
     return tfds.core.DatasetInfo(
@@ -783,10 +769,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.name == "common_gen":
       challenge_sets = [
           ("challenge_train_sample", "train_common_gen_RandomSample500.json"),
-          ("challenge_validation_sample",
-           "validation_common_gen_RandomSample500.json"),
-          ("challenge_test_scramble",
-           "test_common_gen_ScrambleInputStructure500.json"),
+          (
+              "challenge_validation_sample",
+              "validation_common_gen_RandomSample500.json",
+          ),
+          (
+              "challenge_test_scramble",
+              "test_common_gen_ScrambleInputStructure500.json",
+          ),
       ]
 
       challenge_splits = []
@@ -795,52 +785,60 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
 
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
               gen_kwargs={
-                  "filepath":
-                      os.path.join(files["data"], "commongen.train.jsonl"),
-                  "set_name":
-                      "train",
+                  "filepath": os.path.join(
+                      files["data"], "commongen.train.jsonl"
+                  ),
+                  "set_name": "train",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,
               gen_kwargs={
-                  "filepath":
-                      os.path.join(files["data"], "commongen.dev.jsonl"),
-                  "set_name":
-                      "validation",
+                  "filepath": os.path.join(
+                      files["data"], "commongen.dev.jsonl"
+                  ),
+                  "set_name": "validation",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,
               gen_kwargs={
-                  "filepath":
-                      os.path.join(files["data"], "commongen.test_noref.jsonl"),
-                  "set_name":
-                      "test",
+                  "filepath": os.path.join(
+                      files["data"], "commongen.test_noref.jsonl"
+                  ),
+                  "set_name": "test",
               },
           ),
       ] + challenge_splits
 
     elif self.builder_config.name == "cs_restaurants":
       challenge_sets = [
-          ("challenge_train_sample",
-           "train_cs_restaurants_RandomSample500.json"),
-          ("challenge_validation_sample",
-           "validation_cs_restaurants_RandomSample500.json"),
-          ("challenge_test_scramble",
-           "test_cs_restaurants_ScrambleInputStructure500.json"),
+          (
+              "challenge_train_sample",
+              "train_cs_restaurants_RandomSample500.json",
+          ),
+          (
+              "challenge_validation_sample",
+              "validation_cs_restaurants_RandomSample500.json",
+          ),
+          (
+              "challenge_test_scramble",
+              "test_cs_restaurants_ScrambleInputStructure500.json",
+          ),
       ]
       challenge_splits = []
       for challenge_split, filename in challenge_sets:
@@ -848,13 +846,15 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
 
       return [
           tfds.core.SplitGenerator(
@@ -906,10 +906,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
     elif self.builder_config.name == "e2e_nlg":
       challenge_sets = [
           ("challenge_train_sample", "train_e2e_nlg_RandomSample500.json"),
-          ("challenge_validation_sample",
-           "validation_e2e_nlg_RandomSample500.json"),
-          ("challenge_test_scramble",
-           "test_e2e_nlg_ScrambleInputStructure500.json"),
+          (
+              "challenge_validation_sample",
+              "validation_e2e_nlg_RandomSample500.json",
+          ),
+          (
+              "challenge_test_scramble",
+              "test_e2e_nlg_ScrambleInputStructure500.json",
+          ),
       ]
       challenge_splits = []
       for challenge_split, filename in challenge_sets:
@@ -917,13 +921,15 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
@@ -951,10 +957,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
       # Can be either _de or _es.
       lang = self.builder_config.name.split("_")[1]
       challenge_sets = [
-          ("challenge_train_sample",
-           f"train_mlsum_{lang}_RandomSample500.json"),
-          ("challenge_validation_sample",
-           f"validation_mlsum_{lang}_RandomSample500.json"),
+          (
+              "challenge_train_sample",
+              f"train_mlsum_{lang}_RandomSample500.json",
+          ),
+          (
+              "challenge_validation_sample",
+              f"validation_mlsum_{lang}_RandomSample500.json",
+          ),
           ("challenge_test_covid", f"{lang}_test_covid19_cleaned.jsonl"),
       ]
       challenge_splits = []
@@ -963,38 +973,36 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
               gen_kwargs={
-                  "filepath":
-                      os.path.join(files["train"], lang + "_train.jsonl"),
-                  "set_name":
-                      "train",
-                  "lang":
-                      lang,
-                  "filepaths":
-                      files["bad_ids"]
+                  "filepath": os.path.join(
+                      files["train"], lang + "_train.jsonl"
+                  ),
+                  "set_name": "train",
+                  "lang": lang,
+                  "filepaths": files["bad_ids"],
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,
               gen_kwargs={
-                  "filepath":
-                      os.path.join(files["validation"], lang + "_val.jsonl"),
-                  "set_name":
-                      "validation",
-                  "lang":
-                      lang,
-                  "filepaths":
-                      files["bad_ids"]
+                  "filepath": os.path.join(
+                      files["validation"], lang + "_val.jsonl"
+                  ),
+                  "set_name": "validation",
+                  "lang": lang,
+                  "filepaths": files["bad_ids"],
               },
           ),
           tfds.core.SplitGenerator(
@@ -1003,18 +1011,24 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                   "filepath": os.path.join(files["test"], lang + "_test.jsonl"),
                   "set_name": "test",
                   "lang": lang,
-                  "filepaths": files["bad_ids"]
+                  "filepaths": files["bad_ids"],
               },
           ),
       ] + challenge_splits
     elif self.builder_config.name == "schema_guided_dialog":
       challenge_sets = [
-          ("challenge_train_sample",
-           "train_schema_guided_dialog_RandomSample500_reformatted.json"),
-          ("challenge_validation_sample",
-           "validation_schema_guided_dialog_RandomSample500_reformatted.json"),
-          ("challenge_test_backtranslation",
-           "test_schema_guided_dialog_BackTranslation500_reformatted.json"),
+          (
+              "challenge_train_sample",
+              "train_schema_guided_dialog_RandomSample500_reformatted.json",
+          ),
+          (
+              "challenge_validation_sample",
+              "validation_schema_guided_dialog_RandomSample500_reformatted.json",
+          ),
+          (
+              "challenge_test_backtranslation",
+              "test_schema_guided_dialog_BackTranslation500_reformatted.json",
+          ),
           (
               "challenge_test_bfp02",
               "test_schema_guided_dialog_ButterFingersPerturbation_p=0.02_500_reformatted.json",
@@ -1023,10 +1037,13 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "challenge_test_bfp05",
               "test_schema_guided_dialog_ButterFingersPerturbation_p=0.05_500_reformatted.json",
           ),
-          ("challenge_test_nopunc",
-           "test_schema_guided_dialog_WithoutPunctuation500_reformatted.json"),
-          ("challenge_test_scramble",
-           "test_schema_guided_dialog_ScrambleInputStructure500_reformatted.json"
+          (
+              "challenge_test_nopunc",
+              "test_schema_guided_dialog_WithoutPunctuation500_reformatted.json",
+          ),
+          (
+              "challenge_test_scramble",
+              "test_schema_guided_dialog_ScrambleInputStructure500_reformatted.json",
           ),
       ]
       challenge_splits = []
@@ -1035,33 +1052,42 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
 
       generators = []
       for tfds_spl, spl in zip(
           [tfds.Split.TRAIN, tfds.Split.VALIDATION, tfds.Split.TEST],
-          ["train", "validation", "test"]):
+          ["train", "validation", "test"],
+      ):
         generators.append(
             tfds.core.SplitGenerator(
                 name=tfds_spl,
                 gen_kwargs={
                     "filepath": os.path.join(files["data"], "gem_sgd.json"),
-                    "set_name": spl
-                }))
+                    "set_name": spl,
+                },
+            )
+        )
       return generators + challenge_splits
     elif self.builder_config.name == "totto":
       challenge_sets = [
           ("challenge_train_sample", "train_totto_RandomSample500.json"),
-          ("challenge_validation_sample",
-           "validation_totto_RandomSample500.json"),
-          ("challenge_test_scramble",
-           "test_totto_ScrambleInputStructure500.json"),
+          (
+              "challenge_validation_sample",
+              "validation_totto_RandomSample500.json",
+          ),
+          (
+              "challenge_test_scramble",
+              "test_totto_ScrambleInputStructure500.json",
+          ),
       ]
       challenge_splits = []
       for challenge_split, filename in challenge_sets:
@@ -1069,44 +1095,43 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
 
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
               gen_kwargs={
-                  "filepath":
-                      os.path.join(files["data"],
-                                   "totto_data/totto_train_data.jsonl"),
-                  "set_name":
-                      "train",
+                  "filepath": os.path.join(
+                      files["data"], "totto_data/totto_train_data.jsonl"
+                  ),
+                  "set_name": "train",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,
               gen_kwargs={
-                  "filepath":
-                      os.path.join(files["data"],
-                                   "totto_data/totto_dev_data.jsonl"),
-                  "set_name":
-                      "validation",
+                  "filepath": os.path.join(
+                      files["data"], "totto_data/totto_dev_data.jsonl"
+                  ),
+                  "set_name": "validation",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,
               gen_kwargs={
-                  "filepath":
-                      os.path.join(
-                          files["data"],
-                          "totto_data/unlabeled_totto_test_data.jsonl"),
-                  "set_name":
-                      "test",
+                  "filepath": os.path.join(
+                      files["data"],
+                      "totto_data/unlabeled_totto_test_data.jsonl",
+                  ),
+                  "set_name": "test",
               },
           ),
       ] + challenge_splits
@@ -1114,60 +1139,70 @@ class Gem(tfds.core.GeneratorBasedBuilder):
       # Can be either _en or _ru.
       ln = self.builder_config.name.split("_")[2]
       challenge_sets = [
-          ("challenge_train_sample",
-           f"train_web_nlg_{ln}_RandomSample500.json"),
-          ("challenge_validation_sample",
-           f"validation_web_nlg_{ln}_RandomSample500.json"),
-          ("challenge_test_scramble",
-           f"test_web_nlg_{ln}_ScrambleInputStructure500.json"),
+          (
+              "challenge_train_sample",
+              f"train_web_nlg_{ln}_RandomSample500.json",
+          ),
+          (
+              "challenge_validation_sample",
+              f"validation_web_nlg_{ln}_RandomSample500.json",
+          ),
+          (
+              "challenge_test_scramble",
+              f"test_web_nlg_{ln}_ScrambleInputStructure500.json",
+          ),
       ]
       if ln == "en":
-        challenge_sets += [("challenge_test_numbers",
-                            f"test_web_nlg_{ln}_replace_numbers_500.json")]
+        challenge_sets += [(
+            "challenge_test_numbers",
+            f"test_web_nlg_{ln}_replace_numbers_500.json",
+        )]
       challenge_splits = []
       for challenge_split, filename in challenge_sets:
         challenge_splits.append(
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
-              gen_kwargs={
-                  "filepath": files["train"],
-                  "set_name": "train"
-              },
+              gen_kwargs={"filepath": files["train"], "set_name": "train"},
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,
               gen_kwargs={
                   "filepath": files["validation"],
-                  "set_name": "validation"
+                  "set_name": "validation",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,
-              gen_kwargs={
-                  "filepath": files["test"],
-                  "set_name": "test"
-              },
+              gen_kwargs={"filepath": files["test"], "set_name": "test"},
           ),
       ] + challenge_splits
     elif self.builder_config.name == "wiki_auto_asset_turk":
       challenge_sets = [
-          ("challenge_train_sample",
-           "train_wiki_auto_asset_turk_RandomSample500.json"),
-          ("challenge_validation_sample",
-           "validation_wiki_auto_asset_turk_RandomSample500.json"),
-          ("challenge_test_asset_backtranslation",
-           "test_asset_wiki_auto_asset_turk_BackTranslation.json"),
+          (
+              "challenge_train_sample",
+              "train_wiki_auto_asset_turk_RandomSample500.json",
+          ),
+          (
+              "challenge_validation_sample",
+              "validation_wiki_auto_asset_turk_RandomSample500.json",
+          ),
+          (
+              "challenge_test_asset_backtranslation",
+              "test_asset_wiki_auto_asset_turk_BackTranslation.json",
+          ),
           (
               "challenge_test_asset_bfp02",
               "test_asset_wiki_auto_asset_turk_ButterFingersPerturbation_p=0.02.json",
@@ -1176,10 +1211,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "challenge_test_asset_bfp05",
               "test_asset_wiki_auto_asset_turk_ButterFingersPerturbation_p=0.05.json",
           ),
-          ("challenge_test_asset_nopunc",
-           "test_asset_wiki_auto_asset_turk_WithoutPunctuation.json"),
-          ("challenge_test_turk_backtranslation",
-           "detok_test_turk_wiki_auto_asset_turk_BackTranslation.json"),
+          (
+              "challenge_test_asset_nopunc",
+              "test_asset_wiki_auto_asset_turk_WithoutPunctuation.json",
+          ),
+          (
+              "challenge_test_turk_backtranslation",
+              "detok_test_turk_wiki_auto_asset_turk_BackTranslation.json",
+          ),
           (
               "challenge_test_turk_bfp02",
               "detok_test_turk_wiki_auto_asset_turk_ButterFingersPerturbation_p=0.02.json",
@@ -1188,8 +1227,10 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "challenge_test_turk_bfp05",
               "detok_test_turk_wiki_auto_asset_turk_ButterFingersPerturbation_p=0.05.json",
           ),
-          ("challenge_test_turk_nopunc",
-           "detok_test_turk_wiki_auto_asset_turk_WithoutPunctuation.json"),
+          (
+              "challenge_test_turk_nopunc",
+              "detok_test_turk_wiki_auto_asset_turk_WithoutPunctuation.json",
+          ),
       ]
       challenge_splits = []
       for challenge_split, filename in challenge_sets:
@@ -1197,13 +1238,15 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
@@ -1222,12 +1265,11 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name="test_asset",
               gen_kwargs={
-                  "filepath":
-                      "",
-                  "set_name":
-                      "test_asset",
-                  "filepaths":
-                      [files["test_asset_" + str(i)] for i in range(10)],
+                  "filepath": "",
+                  "set_name": "test_asset",
+                  "filepaths": [
+                      files["test_asset_" + str(i)] for i in range(10)
+                  ],
               },
           ),
           tfds.core.SplitGenerator(
@@ -1271,14 +1313,22 @@ class Gem(tfds.core.GeneratorBasedBuilder):
     elif self.builder_config.name == "xsum":
       challenge_sets = [
           ("challenge_train_sample", "train_xsum_RandomSample500.json"),
-          ("challenge_validation_sample",
-           "validation_xsum_RandomSample500.json"),
-          ("challenge_test_backtranslation",
-           "test_xsum_BackTranslation500.json"),
-          ("challenge_test_bfp_02",
-           "test_xsum_ButterFingersPerturbation_p=0.02_500.json"),
-          ("challenge_test_bfp_05",
-           "test_xsum_ButterFingersPerturbation_p=0.05_500.json"),
+          (
+              "challenge_validation_sample",
+              "validation_xsum_RandomSample500.json",
+          ),
+          (
+              "challenge_test_backtranslation",
+              "test_xsum_BackTranslation500.json",
+          ),
+          (
+              "challenge_test_bfp_02",
+              "test_xsum_ButterFingersPerturbation_p=0.02_500.json",
+          ),
+          (
+              "challenge_test_bfp_05",
+              "test_xsum_ButterFingersPerturbation_p=0.05_500.json",
+          ),
           ("challenge_test_nopunc", "test_xsum_WithoutPunctuation500.json"),
           ("challenge_test_covid", "en_test_covid19.jsonl"),
       ]
@@ -1288,13 +1338,15 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=challenge_split,
                 gen_kwargs={
-                    "filepath":
-                        os.path.join(files["challenge_set"],
-                                     self.builder_config.name, filename),
-                    "set_name":
-                        challenge_split,
+                    "filepath": os.path.join(
+                        files["challenge_set"],
+                        self.builder_config.name,
+                        filename,
+                    ),
+                    "set_name": challenge_split,
                 },
-            ))
+            )
+        )
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
@@ -1349,31 +1401,25 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               for scene in data["scene"]:
                 id_ += 1
                 yield id_, {
-                    "gem_id":
-                        f"{self.builder_config.name}-{set_name}-{id_}",
-                    "gem_parent_id":
-                        f"{self.builder_config.name}-{set_name}-{id_}",
-                    "concept_set_id":
-                        i,
-                    "concepts":
-                        concepts,
-                    "target":
-                        scene,
+                    "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                    "gem_parent_id": (
+                        f"{self.builder_config.name}-{set_name}-{id_}"
+                    ),
+                    "concept_set_id": i,
+                    "concepts": concepts,
+                    "target": scene,
                     "references": [],
                 }
             else:
               id_ += 1
               yield id_, {
-                  "gem_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "gem_parent_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "concept_set_id":
-                      id_,
-                  "concepts":
-                      concepts,
-                  "target":
-                      "" if set_name == "test" else data["scene"][0],
+                  "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                  "gem_parent_id": (
+                      f"{self.builder_config.name}-{set_name}-{id_}"
+                  ),
+                  "concept_set_id": id_,
+                  "concepts": concepts,
+                  "target": "" if set_name == "test" else data["scene"][0],
                   "references": [] if set_name == "test" else data["scene"],
               }
     elif self.builder_config.name == "cs_restaurants":
@@ -1413,46 +1459,41 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             for annotation in example["annotations"]:
               id_ += 1
               yield id_, {
-                  "gem_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "gem_parent_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "dart_id":
-                      i,
-                  "tripleset":
-                      flat_tripleset,
-                  "subtree_was_extended":
-                      example.get("subtree_was_extended",
-                                  None),  # some are missing.
+                  "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                  "gem_parent_id": (
+                      f"{self.builder_config.name}-{set_name}-{id_}"
+                  ),
+                  "dart_id": i,
+                  "tripleset": flat_tripleset,
+                  "subtree_was_extended": example.get(
+                      "subtree_was_extended", None
+                  ),  # some are missing.
                   "target_sources": [
                       annotation["source"]
                       for annotation in example["annotations"]
                   ],
-                  "target":
-                      annotation["text"],
+                  "target": annotation["text"],
                   "references": [],
               }
           else:
             id_ += 1
             yield id_, {
-                "gem_id":
-                    f"{self.builder_config.name}-{set_name}-{id_}",
-                "gem_parent_id":
-                    f"{self.builder_config.name}-{set_name}-{id_}",
-                "dart_id":
-                    id_,
-                "tripleset":
-                    flat_tripleset,
-                "subtree_was_extended":
-                    example.get("subtree_was_extended",
-                                None),  # some are missing.
+                "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                "gem_parent_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                "dart_id": id_,
+                "tripleset": flat_tripleset,
+                "subtree_was_extended": example.get(
+                    "subtree_was_extended", None
+                ),  # some are missing.
                 "target_sources": [
                     annotation["source"]
                     for annotation in example["annotations"]
                 ],
-                "target":
+                "target": (
                     example["annotations"][0]["text"]
-                    if example["annotations"] else "",
+                    if example["annotations"]
+                    else ""
+                ),
                 "references": [
                     annotation["text"] for annotation in example["annotations"]
                 ],
@@ -1486,8 +1527,10 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           bad_ids = {}
         else:
           bad_ids_dct = json.load(tf.io.gfile.GFile(filepaths))
-          bad_ids = dict((bad_url, True)
-                         for _, bad_url in bad_ids_dct[f"{lang}-{set_name}"])
+          bad_ids = dict(
+              (bad_url, True)
+              for _, bad_url in bad_ids_dct[f"{lang}-{set_name}"]
+          )
         with epath.Path(filepath).open() as f:
           id_ = -1
           for line in f:
@@ -1497,24 +1540,19 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             else:
               id_ += 1
               yield id_, {
-                  "gem_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "gem_parent_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "text":
-                      data["text"],
-                  "target":
-                      data["summary"],
-                  "references": []
-                                if set_name == "train" else [data["summary"]],
-                  "topic":
-                      data["topic"],
-                  "url":
-                      data["url"],
-                  "title":
-                      data["title"],
-                  "date":
-                      data["date"],
+                  "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                  "gem_parent_id": (
+                      f"{self.builder_config.name}-{set_name}-{id_}"
+                  ),
+                  "text": data["text"],
+                  "target": data["summary"],
+                  "references": (
+                      [] if set_name == "train" else [data["summary"]]
+                  ),
+                  "topic": data["topic"],
+                  "url": data["url"],
+                  "title": data["title"],
+                  "date": data["date"],
               }
       else:
         exples = json.load(tf.io.gfile.GFile(filepath))
@@ -1585,32 +1623,22 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             for sentence in result["sentence_annotations"]:
               id_ += 1
               response = {
-                  "gem_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "gem_parent_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "totto_id":
-                      i,
-                  "table_page_title":
-                      result["table_page_title"],
-                  "table_webpage_url":
-                      result["table_webpage_url"],
-                  "table_section_title":
-                      result["table_section_title"],
-                  "table_section_text":
-                      result["table_section_text"],
-                  "table":
-                      result["table"],
-                  "highlighted_cells":
-                      result["highlighted_cells"],
-                  "example_id":
-                      str(result["example_id"]),
-                  "overlap_subset":
-                      "none",
+                  "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                  "gem_parent_id": (
+                      f"{self.builder_config.name}-{set_name}-{id_}"
+                  ),
+                  "totto_id": i,
+                  "table_page_title": result["table_page_title"],
+                  "table_webpage_url": result["table_webpage_url"],
+                  "table_section_title": result["table_section_title"],
+                  "table_section_text": result["table_section_text"],
+                  "table": result["table"],
+                  "highlighted_cells": result["highlighted_cells"],
+                  "example_id": str(result["example_id"]),
+                  "overlap_subset": "none",
                   "sentence_annotations": [sentence],
                   "references": [],
-                  "target":
-                      sentence["final_sentence"],
+                  "target": sentence["final_sentence"],
               }
               yield id_, response
           else:
@@ -1628,9 +1656,9 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 "example_id": str(result["example_id"]),
                 "overlap_subset": str(result["overlap_subset"]),
             }
-            response[
-                "sentence_annotations"] = [] if set_name == "test" else result[
-                    "sentence_annotations"]
+            response["sentence_annotations"] = (
+                [] if set_name == "test" else result["sentence_annotations"]
+            )
             response["references"] = [
                 sentence["final_sentence"]
                 for sentence in response["sentence_annotations"]
@@ -1661,38 +1689,30 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               for target in example["target"]:
                 id_ += 1
                 yield id_, {
-                    "gem_id":
-                        f"{self.builder_config.name}-{set_name}-{id_}",
-                    "gem_parent_id":
-                        f"{self.builder_config.name}-{set_name}-{id_}",
-                    "input":
-                        example["input"],
-                    "target":
-                        target,
-                    "references": []
-                                  if set_name == "train" else example["target"],
-                    "category":
-                        example["category"],
-                    "webnlg_id":
-                        example["webnlg-id"],
+                    "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                    "gem_parent_id": (
+                        f"{self.builder_config.name}-{set_name}-{id_}"
+                    ),
+                    "input": example["input"],
+                    "target": target,
+                    "references": (
+                        [] if set_name == "train" else example["target"]
+                    ),
+                    "category": example["category"],
+                    "webnlg_id": example["webnlg-id"],
                 }
             else:
               id_ += 1
               yield id_, {
-                  "gem_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "gem_parent_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "input":
-                      example["input"],
-                  "target":
-                      example["target"][0] if example["target"] else "",
-                  "references":
-                      example["target"],
-                  "category":
-                      example["category"],
-                  "webnlg_id":
-                      example["webnlg-id"],
+                  "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                  "gem_parent_id": (
+                      f"{self.builder_config.name}-{set_name}-{id_}"
+                  ),
+                  "input": example["input"],
+                  "target": example["target"][0] if example["target"] else "",
+                  "references": example["target"],
+                  "category": example["category"],
+                  "webnlg_id": example["webnlg-id"],
               }
     elif self.builder_config.name == "wiki_auto_asset_turk":
       if set_name in ["train", "validation"]:
@@ -1703,15 +1723,17 @@ class Gem(tfds.core.GeneratorBasedBuilder):
         with epath.Path(filepath).open() as f:
           for id_, line in enumerate(f):
             values = line.strip().split("\t")
-            assert len(
-                values) == 2, f"Not enough fields in ---- {line} --- {values}"
+            assert (
+                len(values) == 2
+            ), f"Not enough fields in ---- {line} --- {values}"
             example = dict([(k, val) for k, val in zip(keys, values)])
             example["gem_id"] = f"{self.builder_config.name}-{set_name}-{id_}"
-            example[
-                "gem_parent_id"] = f"{self.builder_config.name}-{set_name}-{id_}"
-            example["references"] = [] if set_name == "train" else [
-                example["target"]
-            ]
+            example["gem_parent_id"] = (
+                f"{self.builder_config.name}-{set_name}-{id_}"
+            )
+            example["references"] = (
+                [] if set_name == "train" else [example["target"]]
+            )
             yield id_, example
       elif set_name == "test_turk":
         examples = json.load(tf.io.gfile.GFile(filepath))
@@ -1744,35 +1766,39 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               del exple[k]
           yield id_, exple
     elif self.builder_config.name.startswith("wiki_lingua"):
-      with tf.io.gfile.GFile(os.path.join(filepath,
-                                          f"{set_name}.src.{lang}")) as f_in_ln:
-        with tf.io.gfile.GFile(os.path.join(filepath,
-                                            f"{set_name}.src.en")) as f_in_en:
+      with tf.io.gfile.GFile(
+          os.path.join(filepath, f"{set_name}.src.{lang}")
+      ) as f_in_ln:
+        with tf.io.gfile.GFile(
+            os.path.join(filepath, f"{set_name}.src.en")
+        ) as f_in_en:
           with tf.io.gfile.GFile(
-              os.path.join(filepath, f"{set_name}.tgt.{lang}")) as f_out_ln:
+              os.path.join(filepath, f"{set_name}.tgt.{lang}")
+          ) as f_out_ln:
             with tf.io.gfile.GFile(
-                os.path.join(filepath, f"{set_name}.tgt.en")) as f_out_en:
+                os.path.join(filepath, f"{set_name}.tgt.en")
+            ) as f_out_en:
               for id_, (src_ln, src_en, tgt_ln, tgt_en) in enumerate(
-                  zip(f_in_ln, f_in_en, f_out_ln, f_out_en)):
+                  zip(f_in_ln, f_in_en, f_out_ln, f_out_en)
+              ):
                 yield id_, {
-                    "gem_id":
-                        f"{self.builder_config.name}-{set_name}-{id_}",
-                    "gem_parent_id":
-                        f"{self.builder_config.name}-{set_name}-{id_}",
+                    "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                    "gem_parent_id": (
+                        f"{self.builder_config.name}-{set_name}-{id_}"
+                    ),
                     "source_aligned": {
                         lang: src_ln.strip(),
-                        "en": src_en.strip()
+                        "en": src_en.strip(),
                     },
                     "target_aligned": {
                         lang: tgt_ln.strip(),
-                        "en": tgt_en.strip()
+                        "en": tgt_en.strip(),
                     },
-                    "source":
-                        src_ln.strip(),
-                    "target":
-                        tgt_en.strip(),
-                    "references": []
-                                  if set_name == "train" else [tgt_en.strip()],
+                    "source": src_ln.strip(),
+                    "target": tgt_en.strip(),
+                    "references": (
+                        [] if set_name == "train" else [tgt_en.strip()]
+                    ),
                 }
     elif self.builder_config.name == "xsum":
       if "challenge" in set_name:
@@ -1783,18 +1809,16 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               data = json.loads(line)
               id_ += 1
               yield id_, {
-                  "gem_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "gem_parent_id":
-                      f"{self.builder_config.name}-{set_name}-{id_}",
-                  "xsum_id":
-                      data["url"],
-                  "document":
-                      data["text"],
-                  "target":
-                      data["summary"],
-                  "references": []
-                                if set_name == "train" else [data["summary"]],
+                  "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",
+                  "gem_parent_id": (
+                      f"{self.builder_config.name}-{set_name}-{id_}"
+                  ),
+                  "xsum_id": data["url"],
+                  "document": data["text"],
+                  "target": data["summary"],
+                  "references": (
+                      [] if set_name == "train" else [data["summary"]]
+                  ),
               }
         else:
           exples = json.load(tf.io.gfile.GFile(filepath))
@@ -1810,10 +1834,13 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           split_ids = json.load(f)
         for id_, i in enumerate(split_ids[set_name]):
           with tf.io.gfile.GFile(os.path.join(filepaths, i + ".summary")) as f:
-            text = "".join([
-                line for line in f.readlines()
-                if line not in _XSUM_REMOVE_LINES and line.strip()
-            ])
+            text = "".join(
+                [
+                    line
+                    for line in f.readlines()
+                    if line not in _XSUM_REMOVE_LINES and line.strip()
+                ]
+            )
             segs = text.split("[SN]")
             yield id_, {
                 "gem_id": f"{self.builder_config.name}-{set_name}-{id_}",

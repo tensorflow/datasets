@@ -98,11 +98,10 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
           name="red",
           description="Red Wine",
           dl_url=_DOWNLOAD_URL_RED_WINES,
-      )
+      ),
   ]
 
   def _info(self):
-
     features_dict = {
         "fixed acidity": tf.float32,
         "volatile acidity": tf.float32,
@@ -157,6 +156,6 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
         key = index
         example = {
             "quality": row.pop("quality"),
-            "features": {name: value for name, value in row.items()}
+            "features": {name: value for name, value in row.items()},
         }
         yield key, example

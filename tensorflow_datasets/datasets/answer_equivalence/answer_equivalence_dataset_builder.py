@@ -62,7 +62,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         'ae_test': os.path.join(homepage, 'ae_test.jsonl'),
         'dev_xlnet': os.path.join(homepage, 'dev_by_system/dev_xlnet.jsonl'),
         'dev_luke': os.path.join(homepage, 'dev_by_system/dev_luke.jsonl'),
-        'dev_bidaf': os.path.join(homepage, 'dev_by_system/dev_bidaf.jsonl')
+        'dev_bidaf': os.path.join(homepage, 'dev_by_system/dev_bidaf.jsonl'),
     }
 
     paths = dl_manager.download_and_extract(archive)

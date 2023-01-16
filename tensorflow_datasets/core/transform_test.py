@@ -38,7 +38,8 @@ def duplicate(example: transform.Example) -> Iterator[transform.Example]:
 def test_apply_fn_simple():
   add_two = functools.partial(add_number, increment=2)
   apply_fn = transform.apply_fn(
-      fn=add_two, input_feature="a", output_feature="c")
+      fn=add_two, input_feature="a", output_feature="c"
+  )
   example = {"a": 1, "d": "left alone"}
   expected = [{"a": 1, "c": 3, "d": "left alone"}]
   assert list(apply_fn(example)) == expected
@@ -47,7 +48,8 @@ def test_apply_fn_simple():
 def test_apply_fn_nested_dict():
   add_two = functools.partial(add_number, increment=2)
   apply_fn = transform.apply_fn(
-      fn=add_two, input_feature="a/b", output_feature="a/c")
+      fn=add_two, input_feature="a/b", output_feature="a/c"
+  )
   example = {"a": {"b": 1}, "d": "something"}
   expected = [{"a": {"b": 1, "c": 3}, "d": "something"}]
   assert list(apply_fn(example)) == expected
@@ -56,7 +58,8 @@ def test_apply_fn_nested_dict():
 def test_apply_fn_sequence():
   add_two = functools.partial(add_number, increment=2)
   apply_fn = transform.apply_fn(
-      fn=add_two, input_feature="a", output_feature="b")
+      fn=add_two, input_feature="a", output_feature="b"
+  )
   example = {"a": [1, 2, 3]}
   expected = [{"a": [1, 2, 3], "b": [3, 4, 5]}]
   assert list(apply_fn(example)) == expected
@@ -65,7 +68,8 @@ def test_apply_fn_sequence():
 def test_apply_fn_sequence_of_dicts():
   add_two = functools.partial(add_number, increment=2)
   apply_fn = transform.apply_fn(
-      fn=add_two, input_feature="a/b", output_feature="a/c")
+      fn=add_two, input_feature="a/b", output_feature="a/c"
+  )
   example = {"a": [{"b": [1, 2]}, {"b": [2, 3]}]}
   expected = [{"a": [{"b": [1, 2], "c": [3, 4]}, {"b": [2, 3], "c": [4, 5]}]}]
   assert list(apply_fn(example)) == expected
@@ -74,7 +78,8 @@ def test_apply_fn_sequence_of_dicts():
 def test_apply_fn_different_ancestor():
   add_two = functools.partial(add_number, increment=2)
   with pytest.raises(
-      ValueError, match="The out-feature must have the same ancestor"):
+      ValueError, match="The out-feature must have the same ancestor"
+  ):
     transform.apply_fn(fn=add_two, input_feature="a/b", output_feature="c/d")
 
 
@@ -85,7 +90,6 @@ def test_apply_filter_on_feature():
 
 
 def test_apply_filter_on_example():
-
   def a_is_even(example) -> bool:
     return example["a"] % 2 == 0
 

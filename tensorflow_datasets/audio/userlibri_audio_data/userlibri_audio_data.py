@@ -44,7 +44,8 @@ See UserLibriText for the additional text data.
 _URL = "https://www.kaggle.com/datasets/google/userlibri"
 _DL_URL = tfds.download.Resource(
     url="https://www.kaggle.com/datasets/google/userlibri/download",
-    extract_method=tfds.download.ExtractMethod.ZIP)
+    extract_method=tfds.download.ExtractMethod.ZIP,
+)
 
 _KAGGLE_DATASET_ID = "google/userlibri"
 
@@ -59,7 +60,7 @@ def read_metadata_file(path):
       # test-other_speaker-12-book-34.
       metadata[f'{row["Split"]}_{row["User ID"]}'] = {
           "Num Audio Examples": row["Num Audio Examples"],
-          "Average Words Per Example": row["Average Words Per Example"]
+          "Average Words Per Example": row["Average Words Per Example"],
       }
   return metadata
 
@@ -74,36 +75,42 @@ class UserLibriAudio(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "id":
-                tfds.features.Text(doc="The id of this unique utterance"),
-            "user_id":
-                tfds.features.Text(
-                    doc="The user that this utterance belongs to (unique speaker and book)"
+            "id": tfds.features.Text(doc="The id of this unique utterance"),
+            "user_id": tfds.features.Text(
+                doc=(
+                    "The user that this utterance belongs to (unique speaker"
+                    " and book)"
+                )
+            ),
+            "speaker_id": tfds.features.Text(
+                doc="The speaker who read this utterance"
+            ),
+            "book_id": tfds.features.Text(
+                doc="The book that this utterance is read from"
+            ),
+            "audio": tfds.features.Audio(
+                sample_rate=16000,
+                doc=(
+                    "The audio clip containing a snippet from a book read aloud"
                 ),
-            "speaker_id":
-                tfds.features.Text(doc="The speaker who read this utterance"),
-            "book_id":
-                tfds.features.Text(
-                    doc="The book that this utterance is read from"),
-            "audio":
-                tfds.features.Audio(
-                    sample_rate=16000,
-                    doc="The audio clip containing a snippet from a book read aloud"
-                ),
-            "transcript":
-                tfds.features.Text(
-                    doc="The text that the speaker read to produce the audio"),
+            ),
+            "transcript": tfds.features.Text(
+                doc="The text that the speaker read to produce the audio"
+            ),
         }),
         supervised_keys=("audio", "transcript"),
         homepage=_URL,
         citation=_CITATION,
-        metadata=tfds.core.MetadataDict(sample_rate=16000,),
+        metadata=tfds.core.MetadataDict(
+            sample_rate=16000,
+        ),
     )
 
   def _split_generators(self, dl_manager):
     """Generates user splits like 'test-other_speaker-1234-book-5678'."""
     extracted_dir = dl_manager.download_kaggle_data(
-        competition_or_dataset=_KAGGLE_DATASET_ID)
+        competition_or_dataset=_KAGGLE_DATASET_ID
+    )
     audio_dir = extracted_dir / "UserLibri/audio_data"
     # Load metadata file which is the same for both test-clean and test-other.
     metadata_file = audio_dir / "metadata.tsv"
@@ -118,16 +125,20 @@ class UserLibriAudio(tfds.core.BeamBasedBuilder):
                 name=split_and_user,
                 gen_kwargs={
                     "directory": os.path.join(audio_dir, split, user_id)
-                }))
+                },
+            )
+        )
     return splits
 
   def _build_pcollection(self, pipeline, directory):
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
-    return (pipeline
-            | beam.Create([directory])
-            | beam.FlatMap(_generate_userlibri_audio_examples)
-            | beam.Reshuffle())
+    return (
+        pipeline
+        | beam.Create([directory])
+        | beam.FlatMap(_generate_userlibri_audio_examples)
+        | beam.Reshuffle()
+    )
 
 
 def _generate_userlibri_audio_examples(user_directory):
@@ -147,6 +158,6 @@ def _generate_userlibri_audio_examples(user_directory):
             "speaker_id": speaker_id,
             "book_id": book_id,
             "audio": os.path.join(user_directory, audio_file),
-            "transcript": transcript
+            "transcript": transcript,
         }
         yield key, example

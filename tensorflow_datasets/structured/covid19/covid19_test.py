@@ -21,6 +21,7 @@ from tensorflow_datasets.structured.covid19 import covid19
 
 class Covid19Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for covid-19 dataset."""
+
   DATASET_CLASS = covid19.Covid19
   SPLITS = {
       'train': 3,

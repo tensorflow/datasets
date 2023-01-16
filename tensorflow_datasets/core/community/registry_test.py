@@ -62,7 +62,8 @@ def dummy_register():
     for d in (tmp_path / 'mlds').iterdir():
       print(d)
 
-    content = textwrap.dedent(f"""
+    content = textwrap.dedent(
+        f"""
         [Namespaces]
         kaggle=[
             '{os.fspath(tmp_path / 'kaggle')}',
@@ -70,12 +71,14 @@ def dummy_register():
         ]
         mlds='{os.fspath(tmp_path / 'mlds')}'
         other='/tmp/path/to/non-existing-path'
-        """)
+        """
+    )
 
     dummy_path = tmp_path / 'dummy-community-datasets.toml'
     dummy_path.write_text(content)
     yield registry_lib.DatasetRegistry(
-        namespace_config=registry_lib.NamespaceConfig(config_path=dummy_path))
+        namespace_config=registry_lib.NamespaceConfig(config_path=dummy_path)
+    )
 
 
 def test_register_builder(dummy_register):  # pylint: disable=redefined-outer-name
@@ -95,10 +98,12 @@ def test_register_builder(dummy_register):  # pylint: disable=redefined-outer-na
 
   with pytest.raises(ValueError, match='`data_dir` cannot be set for'):
     dummy_register.builder(
-        naming.DatasetName('mlds:ds0'), data_dir='/path/to/data_dir')
+        naming.DatasetName('mlds:ds0'), data_dir='/path/to/data_dir'
+    )
 
   with pytest.raises(
-      registered.DatasetNotFoundError, match='Namespace .* not found.'):
+      registered.DatasetNotFoundError, match='Namespace .* not found.'
+  ):
     dummy_register.builder(naming.DatasetName('non-existing-namespace:ds0'))
 
   with pytest.raises(registered.DatasetNotFoundError):
@@ -116,7 +121,8 @@ def test_register_path_list_builders(dummy_register):  # pylint: disable=redefin
 def test_load_register_for_path_github():
   registers = registry_lib._load_register_for_paths(
       namespace='huggingface',
-      paths=['github://huggingface/datasets/tree/master/datasets'])
+      paths=['github://huggingface/datasets/tree/master/datasets'],
+  )
   assert len(registers) == 1
   assert isinstance(registers[0], register_package.PackageRegister)
   assert registers[0]._path == gcs_utils.GCS_COMMUNITY_INDEX_PATH
@@ -125,7 +131,8 @@ def test_load_register_for_path_github():
 def test_load_register_for_path_gcs():
   registers = registry_lib._load_register_for_paths(
       namespace='my_namespace',
-      paths=['gs://my-bucket/datasets', 'gs://my-bucket2/datasets'])
+      paths=['gs://my-bucket/datasets', 'gs://my-bucket2/datasets'],
+  )
   assert len(registers) == 1
   assert isinstance(registers[0], register_path.DataDirRegister)
 
@@ -137,7 +144,8 @@ def test_load_register_for_path_mixed():
         paths=[
             'github://huggingface/datasets/tree/master/datasets',
             'gs://my-bucket/datasets',
-        ])
+        ],
+    )
 
 
 def test_community_register():

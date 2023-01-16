@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class SimpteTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for simPTE dataset."""
+
   DATASET_CLASS = simpte_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example

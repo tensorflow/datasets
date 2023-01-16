@@ -33,7 +33,8 @@ class ImagenetResizedConfig(tfds.core.BuilderConfig):
 
   def __init__(self, size, **kwargs):
     super(ImagenetResizedConfig, self).__init__(
-        version=tfds.core.Version('0.1.0'), **kwargs)
+        version=tfds.core.Version('0.1.0'), **kwargs
+    )
     self.size = size
 
 
@@ -46,7 +47,8 @@ def _make_builder_configs():
             name='%dx%d' % (size, size),
             size=size,
             description=f'Images resized to {size}x{size}',
-        ),)
+        ),
+    )
   return configs
 
 
@@ -66,7 +68,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(size, size, 3)),
-            'label': tfds.features.ClassLabel(names_file=names_file)
+            'label': tfds.features.ClassLabel(names_file=names_file),
         }),
         supervised_keys=('image', 'label'),
         homepage='https://patrykchrabaszcz.github.io/Imagenet32/',
@@ -78,7 +80,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     if size in [8, 16, 32]:
       train_path, val_path = dl_manager.download([
           '%s/Imagenet%d_train_npz.zip' % (_URL_PREFIX, size),
-          '%s/Imagenet%d_val_npz.zip' % (_URL_PREFIX, size)
+          '%s/Imagenet%d_val_npz.zip' % (_URL_PREFIX, size),
       ])
       train_paths = [train_path]
     elif size == 64:
@@ -96,11 +98,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'archive':
-                    itertools.chain(*[
+                'archive': itertools.chain(
+                    *[
                         dl_manager.iter_archive(train_path)
                         for train_path in train_paths
-                    ]),
+                    ]
+                ),
             },
         ),
         tfds.core.SplitGenerator(

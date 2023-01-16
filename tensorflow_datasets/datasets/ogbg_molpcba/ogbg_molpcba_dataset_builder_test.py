@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class OgbgMolpcbaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ogbg_molpcba dataset."""
+
   # TODO(ameyasd): Add reasonable tests.
   DATASET_CLASS = ogbg_molpcba_dataset_builder.Builder
   SPLITS = {
@@ -28,6 +29,7 @@ class OgbgMolpcbaTest(tfds.testing.DatasetBuilderTestCase):
       'validation': 4,  # Number of fake validation examples.
       'test': 4,  # Number of fake test examples.
   }
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()

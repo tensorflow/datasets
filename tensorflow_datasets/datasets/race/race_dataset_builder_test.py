@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class RaceTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for race dataset."""
+
   DATASET_CLASS = race_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["high"]
   SPLITS = {

@@ -39,11 +39,13 @@ class BuccConfig(tfds.core.BuilderConfig):
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for bucc dataset."""
+
   BUILDER_CONFIGS = [
       BuccConfig(  # pylint: disable=g-complex-comprehension
           name='bucc_' + language,
           language=language,
-      ) for language in _LANGS
+      )
+      for language in _LANGS
   ]
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
@@ -66,26 +68,37 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     bucc_test_path = os.path.join(
-        _DATA_URLS, 'bucc2018-{}-en.training-gold.tar.bz2'.format(
-            self.builder_config.language))
+        _DATA_URLS,
+        'bucc2018-{}-en.training-gold.tar.bz2'.format(
+            self.builder_config.language
+        ),
+    )
     bucc_dev_path = os.path.join(
-        _DATA_URLS, 'bucc2018-{}-en.sample-gold.tar.bz2'.format(
-            self.builder_config.language))
+        _DATA_URLS,
+        'bucc2018-{}-en.sample-gold.tar.bz2'.format(
+            self.builder_config.language
+        ),
+    )
 
-    archive = dl_manager.download_and_extract({
-        'bucc_test_dir': bucc_test_path,
-        'bucc_dev_dir': bucc_dev_path
-    })
+    archive = dl_manager.download_and_extract(
+        {'bucc_test_dir': bucc_test_path, 'bucc_dev_dir': bucc_dev_path}
+    )
 
     return {
-        'validation':
-            self._generate_examples(
-                filepath=os.path.join(archive['bucc_dev_dir'], 'bucc2018',
-                                      self.builder_config.language + '-en')),
-        'test':
-            self._generate_examples(
-                filepath=os.path.join(archive['bucc_test_dir'], 'bucc2018',
-                                      self.builder_config.language + '-en')),
+        'validation': self._generate_examples(
+            filepath=os.path.join(
+                archive['bucc_dev_dir'],
+                'bucc2018',
+                self.builder_config.language + '-en',
+            )
+        ),
+        'test': self._generate_examples(
+            filepath=os.path.join(
+                archive['bucc_test_dir'],
+                'bucc2018',
+                self.builder_config.language + '-en',
+            )
+        ),
     }
 
   def _generate_examples(self, filepath):

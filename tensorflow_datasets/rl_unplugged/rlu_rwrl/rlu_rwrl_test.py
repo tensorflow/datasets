@@ -21,6 +21,7 @@ from tensorflow_datasets.rl_unplugged.rlu_rwrl import rlu_rwrl
 
 class RluRwrlTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_rwrl dataset."""
+
   DATASET_CLASS = rlu_rwrl.RluRwrl
   SPLITS = {
       'train': 1,  # Number of fake train example

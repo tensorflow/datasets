@@ -21,6 +21,7 @@ from tensorflow_datasets.text.wiki_dialog import wiki_dialog
 
 class WikiDialogTest(testing.DatasetBuilderTestCase):
   """Tests for wiki_dialog dataset."""
+
   DATASET_CLASS = wiki_dialog.WikiDialog
   BUILDER_CONFIG_NAMES_TO_TEST = ['OQ']
   DL_EXTRACT_RESULT = {

@@ -46,7 +46,8 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
     line = b'foo1,foo2,foo3'
     expected_line = ['foo1', 'foo2', 'foo3']
     self.assertEqual(
-        open_images_v4_dataset_builder._read_csv_line(line), expected_line)
+        open_images_v4_dataset_builder._read_csv_line(line), expected_line
+    )
 
 
 if __name__ == '__main__':

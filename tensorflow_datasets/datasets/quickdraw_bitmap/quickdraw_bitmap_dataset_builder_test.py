@@ -19,7 +19,6 @@ from tensorflow_datasets.datasets.quickdraw_bitmap import quickdraw_bitmap_datas
 
 
 class QuickdrawTest(testing.DatasetBuilderTestCase):
-
   DATASET_CLASS = quickdraw_bitmap_dataset_builder.Builder
   SPLITS = {
       "train": 9,

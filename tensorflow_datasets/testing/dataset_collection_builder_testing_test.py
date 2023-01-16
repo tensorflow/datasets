@@ -19,7 +19,6 @@ from tensorflow_datasets.testing import dataset_collection_builder_testing as dc
 
 
 def test_dc_test_base():
-
   class TestDummyCollection(dc_testing.DatasetCollectionTestBase):
     DATASET_COLLECTION_CLASS = testing.DummyDatasetCollection
 

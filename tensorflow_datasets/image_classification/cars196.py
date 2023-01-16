@@ -28,7 +28,8 @@ _DESCRIPTION = (
     'is split into 8,144 training images and 8,041 testing images, where each '
     'class has been split roughly in a 50-50 split. Classes are typically at '
     'the level of Make, Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 '
-    'coupe.')
+    'coupe.'
+)
 
 _NAMES = [
     'AM General Hummer SUV 2000',
@@ -271,50 +272,49 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=('image', 'label'),
         homepage='https://ai.stanford.edu/~jkrause/cars/car_dataset.html',
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     """Define the train and test split."""
     output_files = dl_manager.download_and_extract({
-        'train':
-            urllib.parse.urljoin(_URL, 'cars_train.tgz'),
-        'test':
-            urllib.parse.urljoin(_URL, 'cars_test.tgz'),
-        'extra':
-            _EXTRA_URL,
-        'test_annos':
-            urllib.parse.urljoin(_URL, 'cars_test_annos_withlabels.mat'),
+        'train': urllib.parse.urljoin(_URL, 'cars_train.tgz'),
+        'test': urllib.parse.urljoin(_URL, 'cars_test.tgz'),
+        'extra': _EXTRA_URL,
+        'test_annos': urllib.parse.urljoin(
+            _URL, 'cars_test_annos_withlabels.mat'
+        ),
     })
 
     return [
         tfds.core.SplitGenerator(
             name='train',
             gen_kwargs={
-                'split_name':
-                    'train',
-                'data_dir_path':
-                    os.path.join(output_files['train'], 'cars_train'),
-                'data_annotations_path':
-                    os.path.join(output_files['extra'],
-                                 os.path.join('devkit',
-                                              'cars_train_annos.mat')),
+                'split_name': 'train',
+                'data_dir_path': os.path.join(
+                    output_files['train'], 'cars_train'
+                ),
+                'data_annotations_path': os.path.join(
+                    output_files['extra'],
+                    os.path.join('devkit', 'cars_train_annos.mat'),
+                ),
             },
         ),
         tfds.core.SplitGenerator(
             name='test',
             gen_kwargs={
-                'split_name':
-                    'test',
-                'data_dir_path':
-                    os.path.join(output_files['test'], 'cars_test'),
-                'data_annotations_path':
-                    output_files['test_annos'],
+                'split_name': 'test',
+                'data_dir_path': os.path.join(
+                    output_files['test'], 'cars_test'
+                ),
+                'data_annotations_path': output_files['test_annos'],
             },
         ),
     ]
 
-  def _generate_examples(self, split_name, data_dir_path,
-                         data_annotations_path):
+  def _generate_examples(
+      self, split_name, data_dir_path, data_annotations_path
+  ):
     """Generate training and testing samples."""
 
     image_dict = self.returnImageDict(data_dir_path)
@@ -354,6 +354,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
       with tf.io.gfile.GFile(image_dict[image_name], 'rb') as fp:
         img = tfds.core.lazy_imports.PIL_Image.open(fp)
         width, height = img.size
-      bbox_dict[image_name] = tfds.features.BBox(ymin / height, xmin / width,
-                                                 ymax / height, xmax / width)
+      bbox_dict[image_name] = tfds.features.BBox(
+          ymin / height, xmin / width, ymax / height, xmax / width
+      )
     return bbox_dict

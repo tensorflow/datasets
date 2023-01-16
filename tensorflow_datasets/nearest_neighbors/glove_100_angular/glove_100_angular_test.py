@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class Glove100AngularTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for glove_100_angular dataset."""
+
   DATASET_CLASS = glove_100_angular.Glove100Angular
   SPLITS = {
       'database': 3,

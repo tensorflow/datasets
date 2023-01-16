@@ -55,15 +55,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "path":
-                    os.path.join(dl_paths,
-                                 "training.1600000.processed.noemoticon.csv")
-            }),
+                "path": os.path.join(
+                    dl_paths, "training.1600000.processed.noemoticon.csv"
+                )
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "path": os.path.join(dl_paths, "testdata.manual.2009.06.14.csv")
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, path):

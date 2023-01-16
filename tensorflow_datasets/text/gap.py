@@ -83,7 +83,7 @@ class Gap(tfds.core.GeneratorBasedBuilder):
             'B': tfds.features.Text(),
             'B-offset': np.int32,
             'B-coref': np.bool_,
-            'URL': tfds.features.Text()
+            'URL': tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage='https://github.com/google-research-datasets/gap-coreference',
@@ -92,11 +92,9 @@ class Gap(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    directory = dl_manager.download_and_extract({
-        'train': _TRAINURL,
-        'validation': _VALIDATIONURL,
-        'test': _TESTURL
-    })
+    directory = dl_manager.download_and_extract(
+        {'train': _TRAINURL, 'validation': _VALIDATIONURL, 'test': _TESTURL}
+    )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -109,7 +107,7 @@ class Gap(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={'filepath': directory['test']},
-        )
+        ),
     ]
 
   def _generate_examples(self, filepath):

@@ -29,21 +29,31 @@ from etils import epath
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
-IMG_ALIGNED_DATA = ("https://drive.google.com/uc?export=download&"
-                    "id=0B7EVK8r0v71pZjFTYXZWM3FlRnM")
-EVAL_LIST = ("https://drive.google.com/uc?export=download&"
-             "id=0B7EVK8r0v71pY0NSMzRuSXJEVkk")
+IMG_ALIGNED_DATA = (
+    "https://drive.google.com/uc?export=download&"
+    "id=0B7EVK8r0v71pZjFTYXZWM3FlRnM"
+)
+EVAL_LIST = (
+    "https://drive.google.com/uc?export=download&"
+    "id=0B7EVK8r0v71pY0NSMzRuSXJEVkk"
+)
 # Landmark coordinates: left_eye, right_eye etc.
-LANDMARKS_DATA = ("https://drive.google.com/uc?export=download&"
-                  "id=0B7EVK8r0v71pd0FJY3Blby1HUTQ")
+LANDMARKS_DATA = (
+    "https://drive.google.com/uc?export=download&"
+    "id=0B7EVK8r0v71pd0FJY3Blby1HUTQ"
+)
 
 # Attributes in the image (Eyeglasses, Mustache etc).
-ATTR_DATA = ("https://drive.google.com/uc?export=download&"
-             "id=0B7EVK8r0v71pblRyaVFSWGxPY0U")
+ATTR_DATA = (
+    "https://drive.google.com/uc?export=download&"
+    "id=0B7EVK8r0v71pblRyaVFSWGxPY0U"
+)
 
-LANDMARK_HEADINGS = ("lefteye_x lefteye_y righteye_x righteye_y "
-                     "nose_x nose_y leftmouth_x leftmouth_y rightmouth_x "
-                     "rightmouth_y").split()
+LANDMARK_HEADINGS = (
+    "lefteye_x lefteye_y righteye_x righteye_y "
+    "nose_x nose_y leftmouth_x leftmouth_y rightmouth_x "
+    "rightmouth_y"
+).split()
 ATTR_HEADINGS = (
     "5_o_Clock_Shadow Arched_Eyebrows Attractive Bags_Under_Eyes Bald Bangs "
     "Big_Lips Big_Nose Black_Hair Blond_Hair Blurry Brown_Hair "
@@ -69,9 +79,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(
-                    shape=(218, 178, 3), encoding_format="jpeg"),
+            "image": tfds.features.Image(
+                shape=(218, 178, 3), encoding_format="jpeg"
+            ),
             "landmarks": {name: np.int64 for name in LANDMARK_HEADINGS},
             # Attributes could be some special MultiLabel FeatureConnector
             "attributes": {name: np.bool_ for name in ATTR_HEADINGS},
@@ -90,8 +100,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # Load all images in memory (~1 GiB)
     # Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
     all_images = {
-        os.path.split(k)[-1]: img for k, img in dl_manager.iter_archive(
-            downloaded_dirs["img_align_celeba"])
+        os.path.split(k)[-1]: img
+        for k, img in dl_manager.iter_archive(
+            downloaded_dirs["img_align_celeba"]
+        )
     }
 
     return [
@@ -101,21 +113,24 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "file_id": 0,
                 "downloaded_dirs": downloaded_dirs,
                 "downloaded_images": all_images,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "file_id": 1,
                 "downloaded_dirs": downloaded_dirs,
                 "downloaded_images": all_images,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "file_id": 2,
                 "downloaded_dirs": downloaded_dirs,
                 "downloaded_images": all_images,
-            })
+            },
+        ),
     ]
 
   def _process_celeba_config_file(self, file_path):
@@ -170,7 +185,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           },
           "attributes": {
               # atributes value are either 1 or -1, so convert to bool
-              k: v > 0 for k, v in zip(attributes[0], attributes[1][file_name])
+              k: v > 0
+              for k, v in zip(attributes[0], attributes[1][file_name])
           },
       }
       yield file_name, record

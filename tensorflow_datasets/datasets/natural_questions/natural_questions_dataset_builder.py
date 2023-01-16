@@ -36,12 +36,11 @@ _DOWNLOAD_URLS = {
     'validation': [
         '%s/dev/nq-dev-%02d.jsonl.gz' % (_BASE_DOWNLOAD_URL, i)
         for i in range(5)
-    ]
+    ],
 }
 
 _CITATIONS = {
-    'longt5':
-        """@misc{longt5,
+    'longt5': """@misc{longt5,
         title={LongT5: Efficient Text-To-Text Transformer for Long Sequences},
         year={2021},
         }
@@ -51,70 +50,62 @@ _CITATIONS = {
 
 def _features():
   return {
-      'default':
-          tfds.features.FeaturesDict({
-              'id':
-                  np.str_,
-              'document': {
-                  'title':
-                      tfds.features.Text(),
-                  'url':
-                      tfds.features.Text(),
-                  'html':
-                      tfds.features.Text(),
-                  'tokens':
-                      tfds.features.Sequence({
-                          'token': tfds.features.Text(),
-                          'is_html': np.bool_,
-                      })
-              },
-              'question': {
-                  'text': tfds.features.Text(),
-                  'tokens': tfds.features.Sequence(np.str_),
-              },
-              'annotations':
-                  tfds.features.Sequence({
-                      'id':
-                          np.str_,
-                      'long_answer': {
-                          'start_token': np.int64,
-                          'end_token': np.int64,
-                          'start_byte': np.int64,
-                          'end_byte': np.int64,
-                      },
-                      'short_answers':
-                          tfds.features.Sequence({
-                              'start_token': np.int64,
-                              'end_token': np.int64,
-                              'start_byte': np.int64,
-                              'end_byte': np.int64,
-                              'text': tfds.features.Text(),
-                          }),
-                      'yes_no_answer':
-                          tfds.features.ClassLabel(names=['NO', 'YES']
-                                                  )  # Can also be -1 for NONE.
-                  }),
-          }),
-      'longt5':
-          tfds.features.FeaturesDict({
-              'id': tfds.features.Text(),
+      'default': tfds.features.FeaturesDict({
+          'id': np.str_,
+          'document': {
               'title': tfds.features.Text(),
-              'context': tfds.features.Text(),
-              'question': tfds.features.Text(),
-              'answer': tfds.features.Text(),
-              'all_answers': tfds.features.Sequence(tfds.features.Text()),
+              'url': tfds.features.Text(),
+              'html': tfds.features.Text(),
+              'tokens': tfds.features.Sequence({
+                  'token': tfds.features.Text(),
+                  'is_html': np.bool_,
+              }),
+          },
+          'question': {
+              'text': tfds.features.Text(),
+              'tokens': tfds.features.Sequence(np.str_),
+          },
+          'annotations': tfds.features.Sequence({
+              'id': np.str_,
+              'long_answer': {
+                  'start_token': np.int64,
+                  'end_token': np.int64,
+                  'start_byte': np.int64,
+                  'end_byte': np.int64,
+              },
+              'short_answers': tfds.features.Sequence({
+                  'start_token': np.int64,
+                  'end_token': np.int64,
+                  'start_byte': np.int64,
+                  'end_byte': np.int64,
+                  'text': tfds.features.Text(),
+              }),
+              'yes_no_answer': tfds.features.ClassLabel(
+                  names=['NO', 'YES']
+              ),  # Can also be -1 for NONE.
           }),
+      }),
+      'longt5': tfds.features.FeaturesDict({
+          'id': tfds.features.Text(),
+          'title': tfds.features.Text(),
+          'context': tfds.features.Text(),
+          'question': tfds.features.Text(),
+          'answer': tfds.features.Text(),
+          'all_answers': tfds.features.Sequence(tfds.features.Text()),
+      }),
   }
 
 
 class NaturalQuestionsConfig(tfds.core.BuilderConfig):
   """NaturalQuestions for Longt5."""
 
-  def __init__(self,
-               *,
-               citation: Optional[str] = None,
-               features: Optional[tfds.features.FeaturesDict] = None,
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      citation: Optional[str] = None,
+      features: Optional[tfds.features.FeaturesDict] = None,
+      **kwargs,
+  ):
     """BuilderConfig for Longt5.
 
     Args:
@@ -137,13 +128,16 @@ class Builder(tfds.core.BeamBasedBuilder):
       NaturalQuestionsConfig(
           name='default',
           description='Default natural_questions config',
-          features=_features()['default']),
+          features=_features()['default'],
+      ),
       NaturalQuestionsConfig(
           name='longt5',
-          description='natural_questions preprocessed as in the longT5 benchmark',
+          description=(
+              'natural_questions preprocessed as in the longT5 benchmark'
+          ),
           citation=_CITATIONS['longt5'],
           features=_features()['longt5'],
-      )
+      ),
   ]
   DEFAULT_CONFIG_NAME = 'default'
 
@@ -176,7 +170,7 @@ class Builder(tfds.core.BeamBasedBuilder):
 
     def _parse_short_answer_default(html_bytes, short_ans):
       """Extract text of short answer."""
-      ans_bytes = html_bytes[short_ans['start_byte']:short_ans['end_byte']]
+      ans_bytes = html_bytes[short_ans['start_byte'] : short_ans['end_byte']]
       # Remove non-breaking spaces.
       ans_bytes = ans_bytes.replace(b'\xc2\xa0', b' ')
       text = ans_bytes.decode('utf-8')
@@ -188,14 +182,13 @@ class Builder(tfds.core.BeamBasedBuilder):
           'end_token': short_ans['end_token'],
           'start_byte': short_ans['start_byte'],
           'end_byte': short_ans['end_byte'],
-          'text': text
+          'text': text,
       }
 
     def _parse_annotation_default(html_bytes, an_json):
       return {
           # Convert to str since some IDs cannot be represented by np.int64.
-          'id':
-              str(an_json['annotation_id']),
+          'id': str(an_json['annotation_id']),
           'long_answer': {
               'start_token': an_json['long_answer']['start_token'],
               'end_token': an_json['long_answer']['end_token'],
@@ -206,8 +199,11 @@ class Builder(tfds.core.BeamBasedBuilder):
               _parse_short_answer_default(html_bytes, ans)
               for ans in an_json['short_answers']
           ],
-          'yes_no_answer': (-1 if an_json['yes_no_answer'] == 'NONE' else
-                            an_json['yes_no_answer'])
+          'yes_no_answer': (
+              -1
+              if an_json['yes_no_answer'] == 'NONE'
+              else an_json['yes_no_answer']
+          ),
       }
 
     ex_json = json.loads(line)
@@ -216,21 +212,18 @@ class Builder(tfds.core.BeamBasedBuilder):
     # Convert to str since some IDs cannot be represented by np.int64.
     id_ = str(ex_json['example_id'])
     return id_, {
-        'id':
-            id_,
+        'id': id_,
         'document': {
-            'title':
-                ex_json['document_title'],
-            'url':
-                ex_json['document_url'],
-            'html':
-                html_bytes,
+            'title': ex_json['document_title'],
+            'url': ex_json['document_url'],
+            'html': html_bytes,
             'tokens': [
                 {  # pylint: disable=g-complex-comprehension
                     'token': t['token'],
-                    'is_html': t['html_token']
-                } for t in ex_json['document_tokens']
-            ]
+                    'is_html': t['html_token'],
+                }
+                for t in ex_json['document_tokens']
+            ],
         },
         'question': {
             'text': ex_json['question_text'],
@@ -239,7 +232,7 @@ class Builder(tfds.core.BeamBasedBuilder):
         'annotations': [
             _parse_annotation_default(html_bytes, an_json)
             for an_json in ex_json['annotations']
-        ]
+        ],
     }
 
   @staticmethod
@@ -283,7 +276,8 @@ class Builder(tfds.core.BeamBasedBuilder):
           for sa in a['short_answers']:
             for pos in range(sa['start_token'], sa['end_token']):
               answer_tokens.append(
-                  _pad_punctuation(json_dict['document_tokens'][pos]['token']))
+                  _pad_punctuation(json_dict['document_tokens'][pos]['token'])
+              )
             answer = ' '.join(answer_tokens)
             all_answers.append(answer)
         elif _is_yes_no_answer(a):
@@ -320,7 +314,9 @@ class Builder(tfds.core.BeamBasedBuilder):
         'longt5': self._parse_example_longt5,
     }[self.builder_config.name]
 
-    return (pipeline
-            | beam.Create([os.fspath(f) for f in filepaths])
-            | beam.io.ReadAllFromText()
-            | beam.Map(parse_example))
+    return (
+        pipeline
+        | beam.Create([os.fspath(f) for f in filepaths])
+        | beam.io.ReadAllFromText()
+        | beam.Map(parse_example)
+    )

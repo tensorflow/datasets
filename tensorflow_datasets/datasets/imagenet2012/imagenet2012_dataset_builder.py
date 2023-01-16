@@ -63,22 +63,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       tfds.core.Version('5.0.0'),
   ]
   RELEASE_NOTES = {
-      '5.1.0':
-          'Added test split.',
-      '5.0.0':
-          'New split API (https://tensorflow.org/datasets/splits)',
-      '4.0.0':
-          '(unpublished)',
-      '3.0.0':
-          """
+      '5.1.0': 'Added test split.',
+      '5.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+      '4.0.0': '(unpublished)',
+      '3.0.0': """
       Fix colorization on ~12 images (CMYK -> RGB).
       Fix format for consistency (convert the single png image to Jpeg).
       Faster generation reading directly from the archive.
       """,
-      '2.0.1':
-          'Encoding fix. No changes from user point of view.',
-      '2.0.0':
-          'Fix validation labels.',
+      '2.0.1': 'Encoding fix. No changes from user point of view.',
+      '2.0.0': 'Fix validation labels.',
   }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
@@ -132,7 +126,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           f' * train: {train_path}\n'
           f' * test: {test_path}\n'
           f' * validation: {val_path}\n'
-          'At least one of the split should be available.')
+          'At least one of the split should be available.'
+      )
     return splits
 
   def _fix_image(self, image_fname, image):
@@ -145,17 +140,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       image = io.BytesIO(tfds.core.utils.png_to_jpeg(image.read()))
     return image
 
-  def _generate_examples(self,
-                         archive,
-                         validation_labels=None,
-                         labels_exist=True):
+  def _generate_examples(
+      self, archive, validation_labels=None, labels_exist=True
+  ):
     """Yields examples."""
     if not labels_exist:  # Test split
       for key, example in imagenet_common.generate_examples_test(archive):
         yield key, example
     if validation_labels:  # Validation split
       for key, example in imagenet_common.generate_examples_validation(
-          archive, validation_labels):
+          archive, validation_labels
+      ):
         yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
@@ -166,7 +161,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       # alternative, as this loads ~150MB in RAM.
       fobj_mem = io.BytesIO(fobj.read())
       for image_fname, image in tfds.download.iter_archive(
-          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):
+          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM
+      ):
         image = self._fix_image(image_fname, image)
         record = {
             'file_name': image_fname,
@@ -180,9 +176,11 @@ def _add_split_if_exists(split_list, split, split_path, dl_manager, **kwargs):
   """Add split to given list of splits only if the file exists."""
   if not tf.io.gfile.exists(split_path):
     logging.warning(
-        'ImageNet 2012 Challenge %s split not found at %s. '
-        'Proceeding with data generation anyways but the split will be '
-        'missing from the dataset...',
+        (
+            'ImageNet 2012 Challenge %s split not found at %s. '
+            'Proceeding with data generation anyways but the split will be '
+            'missing from the dataset...'
+        ),
         str(split),
         split_path,
     )
@@ -192,6 +190,7 @@ def _add_split_if_exists(split_list, split, split_path, dl_manager, **kwargs):
             name=split,
             gen_kwargs={
                 'archive': dl_manager.iter_archive(split_path),
-                **kwargs
+                **kwargs,
             },
-        ),)
+        ),
+    )

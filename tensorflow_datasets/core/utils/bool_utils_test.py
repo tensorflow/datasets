@@ -35,15 +35,19 @@ from tensorflow_datasets.core.utils import bool_utils
         ('0', False),
         (1, True),
         ('1', True),
-    ])
+    ],
+)
 def test_parse_bool_success(string, result):
   assert bool_utils.parse_bool(string) == result
 
 
-@pytest.mark.parametrize(['string', 'exception'], [
-    ('_true', 'Cannot convert "_true" to bool'),
-    ('2', 'Cannot convert "2" to bool'),
-])
+@pytest.mark.parametrize(
+    ['string', 'exception'],
+    [
+        ('_true', 'Cannot convert "_true" to bool'),
+        ('2', 'Cannot convert "2" to bool'),
+    ],
+)
 def test_parse_bool_exception(string, exception):
   with pytest.raises(Exception, match=exception):
     bool_utils.parse_bool(string)

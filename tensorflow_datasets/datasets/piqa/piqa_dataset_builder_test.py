@@ -20,12 +20,11 @@ from tensorflow_datasets.datasets.piqa import piqa_dataset_builder
 
 
 class PiqaTest(testing.DatasetBuilderTestCase):
-
   DATASET_CLASS = piqa_dataset_builder.Builder
 
   SPLITS = {
       "train": 2,  # Number of fake train example.
-      "validation": 2  # Number of fake validation example.
+      "validation": 2,  # Number of fake validation example.
   }
 
 

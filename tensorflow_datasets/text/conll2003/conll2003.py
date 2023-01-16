@@ -58,10 +58,11 @@ class Conll2003(tfds.dataset_builders.ConllDatasetBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(
-        'https://data.deepai.org/conll2003.zip')
+        'https://data.deepai.org/conll2003.zip'
+    )
 
     return {
         'train': self._generate_examples(path / 'train.txt'),
         'dev': self._generate_examples(path / 'valid.txt'),
-        'test': self._generate_examples(path / 'test.txt')
+        'test': self._generate_examples(path / 'test.txt'),
     }

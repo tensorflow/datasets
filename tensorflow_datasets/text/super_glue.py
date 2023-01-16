@@ -283,14 +283,16 @@ _AXG_CITATION = """\
 class SuperGlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SuperGLUE."""
 
-  def __init__(self,
-               *,
-               features,
-               data_url,
-               citation,
-               url,
-               label_classes=("False", "True"),
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      features,
+      data_url,
+      citation,
+      url,
+      label_classes=("False", "True"),
+      **kwargs,
+  ):
     """BuilderConfig for SuperGLUE.
 
     Args:
@@ -311,7 +313,8 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     # 0.0.2: Initial version.
     super(SuperGlueConfig, self).__init__(
-        version=tfds.core.Version("1.0.2"), **kwargs)
+        version=tfds.core.Version("1.0.2"), **kwargs
+    )
     self.features = features
     self.label_classes = label_classes
     self.data_url = data_url
@@ -321,22 +324,29 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
 
 class SuperGlue(tfds.core.GeneratorBasedBuilder):
   """The SuperGLUE benchmark."""
+
   BUILDER_CONFIGS = [
       SuperGlueConfig(
           name="boolq",
           description=_BOOLQ_DESCRIPTION,
           features=["question", "passage"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/BoolQ.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/BoolQ.zip"
+          ),
           citation=_BOOLQ_CITATION,
-          url="https://github.com/google-research-datasets/boolean-questions"),
+          url="https://github.com/google-research-datasets/boolean-questions",
+      ),
       SuperGlueConfig(
           name="cb",
           description=_CB_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "contradiction", "neutral"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/CB.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/CB.zip"
+          ),
           citation=_CB_CITATION,
-          url="https://github.com/mcdm/CommitmentBank"),
+          url="https://github.com/mcdm/CommitmentBank",
+      ),
       SuperGlueConfig(
           name="copa",
           description=_COPA_DESCRIPTION,
@@ -344,16 +354,20 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           # Note that question will only be the X in the statement "What's
           # the X for this?".
           features=["premise", "choice1", "choice2", "question"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/COPA.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/COPA.zip"
+          ),
           citation=_COPA_CITATION,
-          url="http://people.ict.usc.edu/~gordon/copa.html"),
+          url="http://people.ict.usc.edu/~gordon/copa.html",
+      ),
       SuperGlueConfig(
           name="multirc",
           description=_MULTIRC_DESCRIPTION,
           features=["paragraph", "question", "answer"],
           data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/MultiRC.zip",
           citation=_MULTIRC_CITATION,
-          url="https://cogcomp.org/multirc/"),
+          url="https://cogcomp.org/multirc/",
+      ),
       SuperGlueConfig(
           name="record",
           description=_RECORD_DESCRIPTION,
@@ -361,72 +375,110 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           # will contain @placeholder as a substring, which represents the word
           # to be substituted in.
           features=["passage", "query", "entities", "answers"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/ReCoRD.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/ReCoRD.zip"
+          ),
           citation=_RECORD_CITATION,
-          url="https://sheng-z.github.io/ReCoRD-explorer/"),
+          url="https://sheng-z.github.io/ReCoRD-explorer/",
+      ),
       SuperGlueConfig(
           name="rte",
           description=_RTE_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "not_entailment"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/RTE.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/RTE.zip"
+          ),
           citation=_RTE_CITATION,
-          url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"),
+          url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment",
+      ),
       SuperGlueConfig(
           name="wic",
           description=_WIC_DESCRIPTION,
           # Note that start1, start2, end1, and end2 will be integers stored as
           # tf.int32.
           features=[
-              "word", "sentence1", "sentence2", "start1", "start2", "end1",
-              "end2"
+              "word",
+              "sentence1",
+              "sentence2",
+              "start1",
+              "start2",
+              "end1",
+              "end2",
           ],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WiC.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WiC.zip"
+          ),
           citation=_WIC_CITATION,
-          url="https://pilehvar.github.io/wic/"),
+          url="https://pilehvar.github.io/wic/",
+      ),
       SuperGlueConfig(
           name="wsc",
           description=_WSC_DESCRIPTION,
           # Note that span1_index and span2_index will be integers stored as
           # tf.int32.
           features=[
-              "text", "span1_index", "span2_index", "span1_text", "span2_text"
+              "text",
+              "span1_index",
+              "span2_index",
+              "span1_text",
+              "span2_text",
           ],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WSC.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WSC.zip"
+          ),
           citation=_WSC_CITATION,
-          url="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+          url=(
+              "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+          ),
       ),
       SuperGlueConfig(
           name="wsc.fixed",
           description=(
-              _WSC_DESCRIPTION +
-              "\n\nThis version fixes issues where the spans are not actually "
-              "substrings of the text."),
+              _WSC_DESCRIPTION
+              + "\n\nThis version fixes issues where the spans are not"
+              " actually "
+              "substrings of the text."
+          ),
           # Note that span1_index and span2_index will be integers stored as
           # tf.int32.
           features=[
-              "text", "span1_index", "span2_index", "span1_text", "span2_text"
+              "text",
+              "span1_index",
+              "span2_index",
+              "span1_text",
+              "span2_text",
           ],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WSC.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WSC.zip"
+          ),
           citation=_WSC_CITATION,
-          url="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+          url=(
+              "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+          ),
       ),
       SuperGlueConfig(
           name="axb",
           description=_AXB_DESCRIPTION,
           features=["sentence1", "sentence2"],
           label_classes=["entailment", "not_entailment"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/AX-b.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/AX-b.zip"
+          ),
           citation="",  # The GLUE citation is sufficient.
-          url="https://gluebenchmark.com/diagnostics"),
+          url="https://gluebenchmark.com/diagnostics",
+      ),
       SuperGlueConfig(
           name="axg",
           description=_AXG_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "not_entailment"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/AX-g.zip",
+          data_url=(
+              "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/AX-g.zip"
+          ),
           citation=_AXG_CITATION,
-          url="https://github.com/rudinger/winogender-schemas"),
+          url="https://github.com/rudinger/winogender-schemas",
+      ),
   ]
 
   def _info(self):
@@ -463,7 +515,8 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
       features["answers"] = tfds.features.Sequence(tfds.features.Text())
     else:
       features["label"] = tfds.features.ClassLabel(
-          names=self.builder_config.label_classes)
+          names=self.builder_config.label_classes
+      )
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -482,11 +535,12 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,
               gen_kwargs={
-                  "data_file":
-                      os.path.join(dl_dir, "{}.jsonl".format(task_name)),
-                  "split":
-                      tfds.Split.TEST,
-              }),
+                  "data_file": os.path.join(
+                      dl_dir, "{}.jsonl".format(task_name)
+                  ),
+                  "split": tfds.Split.TEST,
+              },
+          ),
       ]
     return [
         tfds.core.SplitGenerator(
@@ -494,19 +548,22 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "train.jsonl"),
                 "split": tfds.Split.TRAIN,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "val.jsonl"),
                 "split": tfds.Split.VALIDATION,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "test.jsonl"),
                 "split": tfds.Split.TEST,
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, data_file, split):
@@ -528,8 +585,8 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
                   "idx": {
                       "paragraph": row["idx"],
                       "question": question["idx"],
-                      "answer": answer["idx"]
-                  }
+                      "answer": answer["idx"],
+                  },
               }
         elif self.builder_config.name == "record":
           passage = row["passage"]
@@ -539,10 +596,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
                 "query": qa["query"],
                 "entities": _get_record_entities(passage),
                 "answers": _get_record_answers(qa),
-                "idx": {
-                    "passage": row["idx"],
-                    "query": qa["idx"]
-                }
+                "idx": {"passage": row["idx"], "query": qa["idx"]},
             }
         else:
           if self.builder_config.name.startswith("wsc"):
@@ -620,7 +674,7 @@ def _get_record_entities(passage):
   text = passage["text"]
   entities = set()
   for entity in passage["entities"]:
-    entities.add(text[entity["start"]:entity["end"] + 1])
+    entities.add(text[entity["start"] : entity["end"] + 1])
   return sorted(entities)
 
 

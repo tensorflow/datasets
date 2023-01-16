@@ -107,7 +107,8 @@ class DownloaderTest(testing.TestCase):
   def test_http_error(self):
     error = downloader.requests.exceptions.HTTPError('Problem serving file.')
     mock.patch.object(
-        downloader.requests.Session, 'get', side_effect=error).start()
+        downloader.requests.Session, 'get', side_effect=error
+    ).start()
     promise = self.downloader.download(self.url, self.tmp_dir)
     with self.assertRaises(downloader.requests.exceptions.HTTPError):
       promise.get()
@@ -196,12 +197,13 @@ _CONTENT_DISPOSITION_FILENAME_PAIRS = [
     (
         'inline;filename=path/to/dir/f-name.png;filename*=UTF-8',
         'f-name.png',
-    )
+    ),
 ]
 
 
-@pytest.mark.parametrize(('content_disposition', 'filename'),
-                         _CONTENT_DISPOSITION_FILENAME_PAIRS)
+@pytest.mark.parametrize(
+    ('content_disposition', 'filename'), _CONTENT_DISPOSITION_FILENAME_PAIRS
+)
 def test_filename_from_content_disposition(
     content_disposition: str,
     filename: Optional[str],
@@ -216,15 +218,18 @@ def test_filename_from_content_disposition(
         (
             # Filename should be parsed from the ascii name, not UTF-8
             """attachment;filename="hello.zip";filename*=UTF-8''other.zip""",
-            'hello.zip'),
+            'hello.zip',
+        ),
         (
             # If ascii filename can't be parsed, filename parsed from url
             """attachment;filename*=UTF-8''other.zip""",
-            'baz.zip'),
+            'baz.zip',
+        ),
         (
             # No headers, filename parsed from url
             None,
-            'baz.zip'),
+            'baz.zip',
+        ),
     ],
 )
 def test_filename_from_headers(

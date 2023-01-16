@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class ControlledNoisyWebLabelsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for controlled_noisy_web_labels dataset."""
+
   DATASET_CLASS = controlled_noisy_web_labels.ControlledNoisyWebLabels
   SPLITS = {
       'train_00': 3,  # Number of fake train examples
@@ -39,12 +40,20 @@ class ControlledNoisyWebLabelsTest(tfds.testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       'mini_train': 'train.csv',
       'mini_val': 'val.csv',
-      'mini_test': 'test.csv'
+      'mini_test': 'test.csv',
   }
 
   OVERLAPPING_SPLITS = [
-      'train_00', 'train_05', 'train_10', 'train_15', 'train_20', 'train_30',
-      'train_40', 'train_50', 'train_60', 'train_80'
+      'train_00',
+      'train_05',
+      'train_10',
+      'train_15',
+      'train_20',
+      'train_30',
+      'train_40',
+      'train_50',
+      'train_60',
+      'train_80',
   ]
 
   SKIP_CHECKSUMS = True

@@ -35,10 +35,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            'question': np.str_,
-            'answer': tfds.features.Sequence(np.str_)
-        }),
+        features=tfds.features.FeaturesDict(
+            {'question': np.str_, 'answer': tfds.features.Sequence(np.str_)}
+        ),
         supervised_keys=None,
         homepage=_URL,
     )
@@ -52,7 +51,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     })
     return [
         tfds.core.SplitGenerator(
-            name=split, gen_kwargs={'file_path': file_path})
+            name=split, gen_kwargs={'file_path': file_path}
+        )
         for split, file_path in file_paths.items()
     ]
 

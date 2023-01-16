@@ -57,7 +57,9 @@ _CITATION = """
 }
 """
 
-_HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged'
+_HOMEPAGE = (
+    'https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged'
+)
 
 # Env constants
 DOMAIN_NAMES = (
@@ -83,86 +85,46 @@ DATASET_SIZES = (
 )
 SHARDS_MAPPING = {
     # ('combined_challenge','domain','dataset_size'): number of shards.
-    (None, 'cartpole', '1_percent'):
-        3,
-    (None, 'cartpole', '5_percent'):
-        3,
-    (None, 'cartpole', '20_percent'):
-        6,
-    (None, 'cartpole', '40_percent'):
-        6,
-    (None, 'cartpole', '100_percent'):
-        7,
-    (None, 'quadruped', '1_percent'):
-        3,
-    (None, 'quadruped', '5_percent'):
-        3,
-    (None, 'quadruped', '20_percent'):
-        4,
-    (None, 'quadruped', '40_percent'):
-        7,
-    (None, 'quadruped', '100_percent'):
-        10,
-    (None, 'walker', '1_percent'):
-        3,
-    (None, 'walker', '5_percent'):
-        6,
-    (None, 'walker', '20_percent'):
-        14,
-    (None, 'walker', '40_percent'):
-        48,
-    (None, 'walker', '100_percent'):
-        94,
-    (None, 'humanoid', '1_percent'):
-        9,
-    (None, 'humanoid', '5_percent'):
-        123,
-    (None, 'humanoid', '20_percent'):
-        125,
-    (None, 'humanoid', '40_percent'):
-        344,
-    (None, 'humanoid', '100_percent'):
-        391,
-    ('easy', 'cartpole', '1_percent'):
-        2,
-    ('easy', 'cartpole', '5_percent'):
-        3,
-    ('easy', 'cartpole', '20_percent'):
-        8,
-    ('easy', 'cartpole', '40_percent'):
-        8,
-    ('easy', 'cartpole', '100_percent'):
-        14,
-    ('easy', 'quadruped', '1_percent'):
-        3,
-    ('easy', 'quadruped', '5_percent'):
-        3,
-    ('easy', 'quadruped', '20_percent'):
-        9,
-    ('easy', 'quadruped', '40_percent'):
-        10,
-    ('easy', 'quadruped', '100_percent'):
-        15,
-    ('easy', 'walker', '1_percent'):
-        11,
-    ('easy', 'walker', '5_percent'):
-        17,
-    ('easy', 'walker', '20_percent'):
-        78,
-    ('easy', 'walker', '40_percent'):
-        137,
-    ('easy', 'walker', '100_percent'):
-        371,
-    ('easy', 'humanoid', '1_percent'):
-        18,
-    ('easy', 'humanoid', '5_percent'):
-        98,
-    ('easy', 'humanoid', '20_percent'):
-        244,
-    ('easy', 'humanoid', '40_percent'):
-        410,
-    ('easy', 'humanoid', '100_percent'):
-        769,
+    (None, 'cartpole', '1_percent'): 3,
+    (None, 'cartpole', '5_percent'): 3,
+    (None, 'cartpole', '20_percent'): 6,
+    (None, 'cartpole', '40_percent'): 6,
+    (None, 'cartpole', '100_percent'): 7,
+    (None, 'quadruped', '1_percent'): 3,
+    (None, 'quadruped', '5_percent'): 3,
+    (None, 'quadruped', '20_percent'): 4,
+    (None, 'quadruped', '40_percent'): 7,
+    (None, 'quadruped', '100_percent'): 10,
+    (None, 'walker', '1_percent'): 3,
+    (None, 'walker', '5_percent'): 6,
+    (None, 'walker', '20_percent'): 14,
+    (None, 'walker', '40_percent'): 48,
+    (None, 'walker', '100_percent'): 94,
+    (None, 'humanoid', '1_percent'): 9,
+    (None, 'humanoid', '5_percent'): 123,
+    (None, 'humanoid', '20_percent'): 125,
+    (None, 'humanoid', '40_percent'): 344,
+    (None, 'humanoid', '100_percent'): 391,
+    ('easy', 'cartpole', '1_percent'): 2,
+    ('easy', 'cartpole', '5_percent'): 3,
+    ('easy', 'cartpole', '20_percent'): 8,
+    ('easy', 'cartpole', '40_percent'): 8,
+    ('easy', 'cartpole', '100_percent'): 14,
+    ('easy', 'quadruped', '1_percent'): 3,
+    ('easy', 'quadruped', '5_percent'): 3,
+    ('easy', 'quadruped', '20_percent'): 9,
+    ('easy', 'quadruped', '40_percent'): 10,
+    ('easy', 'quadruped', '100_percent'): 15,
+    ('easy', 'walker', '1_percent'): 11,
+    ('easy', 'walker', '5_percent'): 17,
+    ('easy', 'walker', '20_percent'): 78,
+    ('easy', 'walker', '40_percent'): 137,
+    ('easy', 'walker', '100_percent'): 371,
+    ('easy', 'humanoid', '1_percent'): 18,
+    ('easy', 'humanoid', '5_percent'): 98,
+    ('easy', 'humanoid', '20_percent'): 244,
+    ('easy', 'humanoid', '40_percent'): 410,
+    ('easy', 'humanoid', '100_percent'): 769,
 }
 # Control suite tasks have 1000 timesteps per episode. One additional timestep
 # accounts for the very first observation where no action has been taken yet.
@@ -181,6 +143,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
       https://github.com/google-research/realworldrl_suite#rwrl-combined-challenge-benchmarks
     dataset_size: the size of the dataset.
   """
+
   domain: str = 'cartpole'
   task: str = 'swingup'
   combined_challenge: Optional[str] = None
@@ -190,18 +153,22 @@ class BuilderConfig(tfds.core.BuilderConfig):
 def _builder_configs():
   """Creates a list of default builder configs."""
   configs = []
-  for (combined_challenge, domain, dataset_size) in SHARDS_MAPPING:
+  for combined_challenge, domain, dataset_size in SHARDS_MAPPING:
     task = DOMAIN_TO_TASK[domain]
     # pytype: disable=wrong-keyword-args
     configs.append(
         BuilderConfig(
-            name=(f'{domain}_{task}_'
-                  f'combined_challenge_{str(combined_challenge).lower()}_'
-                  f'{dataset_size}'),
+            name=(
+                f'{domain}_{task}_'
+                f'combined_challenge_{str(combined_challenge).lower()}_'
+                f'{dataset_size}'
+            ),
             domain=domain,
             task=task,
             combined_challenge=combined_challenge,
-            dataset_size=dataset_size))
+            dataset_size=dataset_size,
+        )
+    )
     # pytype: enable=wrong-keyword-args
   return configs
 
@@ -210,13 +177,15 @@ def _decombine_key(k: str, delimiter: str = _DELIMITER) -> Sequence[str]:
   return k.split(delimiter)
 
 
-def tf_example_to_feature_description(example: Union[tf.Tensor, bytes],
-                                      num_timesteps=DEFAULT_NUM_TIMESTEPS):
+def tf_example_to_feature_description(
+    example: Union[tf.Tensor, bytes], num_timesteps=DEFAULT_NUM_TIMESTEPS
+):
   """Takes a string tensor encoding an tf example and returns its features."""
   if isinstance(example, tf.Tensor):
     if not tf.executing_eagerly():
       raise AssertionError(
-          'tf_example_to_feature_description() only works under eager mode.')
+          'tf_example_to_feature_description() only works under eager mode.'
+      )
     example = example.numpy()  # pytype: disable=attribute-error
   example = tf.train.Example.FromString(example)
 
@@ -224,15 +193,18 @@ def tf_example_to_feature_description(example: Union[tf.Tensor, bytes],
   for k, v in example.features.feature.items():
     l = len(v.float_list.value)
     if l % num_timesteps:
-      raise ValueError('Unexpected feature length %d. It should be divisible '
-                       'by num_timesteps: %d' % (l, num_timesteps))
+      raise ValueError(
+          'Unexpected feature length %d. It should be divisible '
+          'by num_timesteps: %d' % (l, num_timesteps)
+      )
     size = l // num_timesteps
     ret[k] = tf.io.FixedLenFeature([num_timesteps, size], tf.float32)
   return ret
 
 
 def tree_deflatten_with_delimiter(
-    flat_dict: Dict[str, Any], delimiter: str = _DELIMITER) -> Dict[str, Any]:
+    flat_dict: Dict[str, Any], delimiter: str = _DELIMITER
+) -> Dict[str, Any]:
   """De-flattens a dict to its originally nested structure.
 
   Does the opposite of {combine_nested_keys(k) :v
@@ -255,8 +227,9 @@ def tree_deflatten_with_delimiter(
   return dict(root)
 
 
-def tf_feature_to_tfds_feature(nested: Union[tf.io.FixedLenFeature, Dict[Text,
-                                                                         Any]]):
+def tf_feature_to_tfds_feature(
+    nested: Union[tf.io.FixedLenFeature, Dict[Text, Any]]
+):
   """Converts potentially nested tf features into tfds features."""
   if isinstance(nested, tf.io.FixedLenFeature):
     # For some reason the dicts are transposed within the tfds features.
@@ -278,8 +251,10 @@ class RluRwrl(rlu_common.RLUBuilder):
   VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
-      '1.0.1': 'Fixes a bug in RLU RWRL dataset where there are duplicated '
-               'episode ids in one of the humanoid datasets.',
+      '1.0.1': (
+          'Fixes a bug in RLU RWRL dataset where there are duplicated '
+          'episode ids in one of the humanoid datasets.'
+      ),
   }
   _INPUT_FILE_PREFIX = 'gs://rl_unplugged/rwrl/'
 
@@ -288,7 +263,8 @@ class RluRwrl(rlu_common.RLUBuilder):
   def get_features_dict(self):
     # Loads the features dynamically.
     file_paths = rlu_common.get_files(
-        prefix=self.get_file_prefix(), num_shards=self.num_shards())
+        prefix=self.get_file_prefix(), num_shards=self.num_shards()
+    )
 
     # Take one item to get the output types and shapes.
     example_item = None
@@ -301,26 +277,20 @@ class RluRwrl(rlu_common.RLUBuilder):
     feature_description = tf_example_to_feature_description(example_item)
     feature_description = tree_deflatten_with_delimiter(feature_description)
     return tfds.features.FeaturesDict({
-        'steps':
-            tfds.features.Dataset({
-                'observation':
-                    tf_feature_to_tfds_feature(
-                        feature_description['observation']),
-                'action':
-                    tf_feature_to_tfds_feature(feature_description['action']),
-                'reward':
-                    tf_feature_to_tfds_feature(feature_description['reward']),
-                'is_terminal':
-                    np.bool_,
-                'is_first':
-                    np.bool_,
-                'is_last':
-                    np.bool_,
-                'discount':
-                    tf_feature_to_tfds_feature(feature_description['discount']),
-            }),
-        'episode_return':
-            np.float32,
+        'steps': tfds.features.Dataset({
+            'observation': tf_feature_to_tfds_feature(
+                feature_description['observation']
+            ),
+            'action': tf_feature_to_tfds_feature(feature_description['action']),
+            'reward': tf_feature_to_tfds_feature(feature_description['reward']),
+            'is_terminal': np.bool_,
+            'is_first': np.bool_,
+            'is_last': np.bool_,
+            'discount': tf_feature_to_tfds_feature(
+                feature_description['discount']
+            ),
+        }),
+        'episode_return': np.float32,
     })
 
   def get_description(self):
@@ -334,9 +304,11 @@ class RluRwrl(rlu_common.RLUBuilder):
     task = self.builder_config.task
     combined_challenge = self.builder_config.combined_challenge
     dataset_size = self.builder_config.dataset_size
-    return (f'{self._INPUT_FILE_PREFIX}/'
-            f'combined_challenge_{str(combined_challenge).lower()}/'
-            f'{domain}/{task}/{dataset_size}/episodes.tfrecord')
+    return (
+        f'{self._INPUT_FILE_PREFIX}/'
+        f'combined_challenge_{str(combined_challenge).lower()}/'
+        f'{domain}/{task}/{dataset_size}/episodes.tfrecord'
+    )
 
   def num_shards(self):
     try:
@@ -348,8 +320,9 @@ class RluRwrl(rlu_common.RLUBuilder):
     dataset_size = self.builder_config.dataset_size
     return SHARDS_MAPPING[(combined_challenge, domain, dataset_size)]
 
-  def tf_example_to_step_ds(self, tf_example: tf.Tensor,
-                            feature_description) -> Dict[str, Any]:
+  def tf_example_to_step_ds(
+      self, tf_example: tf.Tensor, feature_description
+  ) -> Dict[str, Any]:
     data = tf.io.parse_single_example(tf_example, feature_description)
     data = tree_deflatten_with_delimiter(data)
 
@@ -358,11 +331,13 @@ class RluRwrl(rlu_common.RLUBuilder):
     action = tf.concat((data['action'][1:], data['action'][:1]), axis=0)
     reward = tf.concat((data['reward'][1:], data['reward'][:1]), axis=0)
     discount = tf.concat((data['discount'][1:], data['discount'][:1]), axis=0)
-    is_first = tf.concat([[True], [False] * tf.ones(DEFAULT_NUM_TIMESTEPS - 1)],
-                         axis=0)
-    is_last = tf.concat([[False] * tf.ones(DEFAULT_NUM_TIMESTEPS - 1), [True]],
-                        axis=0)
-    is_terminal = tf.squeeze(discount == 0., axis=-1)
+    is_first = tf.concat(
+        [[True], [False] * tf.ones(DEFAULT_NUM_TIMESTEPS - 1)], axis=0
+    )
+    is_last = tf.concat(
+        [[False] * tf.ones(DEFAULT_NUM_TIMESTEPS - 1), [True]], axis=0
+    )
+    is_terminal = tf.squeeze(discount == 0.0, axis=-1)
     episode_return = tf.reduce_sum(reward)
     episode = {
         # Episode Metadata
@@ -375,7 +350,7 @@ class RluRwrl(rlu_common.RLUBuilder):
             'is_first': is_first,
             'is_last': is_last,
             'is_terminal': is_terminal,
-        }
+        },
     }
     return episode
 
@@ -394,7 +369,8 @@ class RluRwrl(rlu_common.RLUBuilder):
     feature_description = tf_example_to_feature_description(example_item)
 
     def _generate_examples_one_file(
-        path) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
+        path,
+    ) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
       """Yields examples from one file."""
       counter = 0
       key_prefix = os.path.basename(path)
@@ -404,8 +380,10 @@ class RluRwrl(rlu_common.RLUBuilder):
       episode_ds = example_ds.map(
           functools.partial(
               self.tf_example_to_step_ds,
-              feature_description=feature_description),
-          num_parallel_calls=tf.data.experimental.AUTOTUNE)
+              feature_description=feature_description,
+          ),
+          num_parallel_calls=tf.data.experimental.AUTOTUNE,
+      )
       episode_ds = tfds.as_numpy(episode_ds)
       for e in episode_ds:
         episode_id = counter

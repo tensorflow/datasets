@@ -84,24 +84,36 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "filepath":
-                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
-                                 self._builder_config.round_dir, "test.jsonl")
-            }),
+                "filepath": os.path.join(
+                    dl_dir,
+                    EXTRACT_PATH_TOKEN,
+                    self._builder_config.round_dir,
+                    "test.jsonl",
+                )
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "filepath":
-                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
-                                 self._builder_config.round_dir, "dev.jsonl")
-            }),
+                "filepath": os.path.join(
+                    dl_dir,
+                    EXTRACT_PATH_TOKEN,
+                    self._builder_config.round_dir,
+                    "dev.jsonl",
+                )
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "filepath":
-                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
-                                 self._builder_config.round_dir, "train.jsonl")
-            })
+                "filepath": os.path.join(
+                    dl_dir,
+                    EXTRACT_PATH_TOKEN,
+                    self._builder_config.round_dir,
+                    "train.jsonl",
+                )
+            },
+        ),
     ]
 
   def _generate_examples(self, filepath):

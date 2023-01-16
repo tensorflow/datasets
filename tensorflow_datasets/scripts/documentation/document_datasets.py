@@ -46,6 +46,7 @@ _BUILDER_BLACKLIST = [
 @dataclasses.dataclass(eq=False, frozen=True)
 class BuilderToDocument:
   """Structure containing metadata."""
+
   sections: List[Text]
   namespace: Optional[str]
   builder: tfds.core.DatasetBuilder
@@ -66,6 +67,7 @@ class BuilderDocumentation:
     is_manual: Whether the dataset require manual download
     is_nightly: Whether the dataset was recently added in `tfds-nightly`
   """
+
   name: str
   filestem: str
   content: str
@@ -83,12 +85,15 @@ class CollectionDocumentation:
     content: Documentation content
     is_nightly: Whether the dataset was recently added in `tfds-nightly`
   """
+
   name: str
   content: str
   is_nightly: bool
 
 
-def _load_builder(name: str,) -> Optional[BuilderToDocument]:
+def _load_builder(
+    name: str,
+) -> Optional[BuilderToDocument]:
   """Load the builder to document.
 
   Args:
@@ -121,7 +126,8 @@ def _load_builder_from_location(
     logging.info(
         'Dataset %s not found, will now try to load from sub-folder',
         dataset_name,
-        exc_info=e)
+        exc_info=e,
+    )
     # If tfds.core.DatasetNotFoundError, it might be the default
     # config isn't found. Should try to load a sub-folder (to check).
     builder = _maybe_load_config(name)
@@ -185,7 +191,9 @@ def _load_all_configs(
   return [builder] + config_builders
 
 
-def _load_builder_from_code(name: str,) -> BuilderToDocument:
+def _load_builder_from_code(
+    name: str,
+) -> BuilderToDocument:
   """Load the builder, config,... to document."""
   builder_cls = tfds.builder_cls(name)
   sections = _get_sections(builder_cls)
@@ -197,7 +205,8 @@ def _load_builder_from_code(name: str,) -> BuilderToDocument:
 
     with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_CONFIGS) as tpool:
       config_builders = list(
-          tpool.map(get_config_builder, builder_cls.BUILDER_CONFIGS),)
+          tpool.map(get_config_builder, builder_cls.BUILDER_CONFIGS),
+      )
     return BuilderToDocument(
         sections=sections,
         namespace=None,
@@ -237,12 +246,15 @@ def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> List[Text]:
   return ['uncategorized']
 
 
-def _document_single_collection(name: str,) -> CollectionDocumentation:
+def _document_single_collection(
+    name: str,
+) -> CollectionDocumentation:
   """Returns the documentation for a single dataset collection."""
   logging.info('Documenting dataset collection %s', name)
   collection = tfds.dataset_collection(name=name)
   out_str = collection_markdown_builder.get_collection_markdown_string(
-      collection=collection)
+      collection=collection
+  )
   return CollectionDocumentation(
       name=name,
       content=out_str,
@@ -269,8 +281,9 @@ def _document_single_builder_inner(
   tqdm.tqdm.write(f'Document builder {name}...')
   doc_info = _load_builder(name)
   if doc_info is None:
-    logging.warning('No doc info was found for document builder %s. Skipping.',
-                    name)
+    logging.warning(
+        'No doc info was found for document builder %s. Skipping.', name
+    )
     return None
 
   out_str = dataset_markdown_builder.get_markdown_string(
@@ -278,9 +291,11 @@ def _document_single_builder_inner(
       builder=doc_info.builder,
       config_builders=doc_info.config_builders,
       nightly_doc_util=nightly_doc_util,
-      **kwargs)
+      **kwargs,
+  )
   is_nightly = bool(
-      nightly_doc_util and nightly_doc_util.is_builder_nightly(name))
+      nightly_doc_util and nightly_doc_util.is_builder_nightly(name)
+  )
   return BuilderDocumentation(
       name=name,
       filestem=name.replace(':', '_'),
@@ -352,7 +367,8 @@ def iter_documentation_builders(
 
   if doc_util_paths.fig_base_path:
     nightly_doc_util = doc_utils.NightlyDocUtil(
-        path=doc_util_paths.nightly_path,)
+        path=doc_util_paths.nightly_path,
+    )
   else:
     nightly_doc_util = None
   # pytype: enable=attribute-error
@@ -380,8 +396,9 @@ def iter_documentation_builders(
   print('All builder documentations generated!')
 
 
-def make_category_to_builders_dict(
-) -> Dict[str, List[tfds.core.DatasetBuilder]]:
+def make_category_to_builders_dict() -> (
+    Dict[str, List[tfds.core.DatasetBuilder]]
+):
   """Loads all builders with their associated category."""
   datasets = _all_tfds_datasets()
   print(f'Creating the vanilla builders for {len(datasets)} datasets...')

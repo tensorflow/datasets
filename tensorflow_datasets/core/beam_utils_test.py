@@ -25,13 +25,16 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
 
 
-@pytest.mark.parametrize('split, workers_per_shard, expected_result', [
-    ('train', 1, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
-    ('train', 2, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
-    ('train', 100, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
-    ('train[:2]', 1, "{'id': 0}\n{'id': 1}\n"),
-    ('train[1:]', 1, "{'id': 1}\n{'id': 2}\n"),
-])
+@pytest.mark.parametrize(
+    'split, workers_per_shard, expected_result',
+    [
+        ('train', 1, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
+        ('train', 2, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
+        ('train', 100, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
+        ('train[:2]', 1, "{'id': 0}\n{'id': 1}\n"),
+        ('train[1:]', 1, "{'id': 1}\n{'id': 2}\n"),
+    ],
+)
 def test_read_from_tfds(
     dummy_dataset: dataset_builder.DatasetBuilder,
     tmp_path: pathlib.Path,
@@ -45,18 +48,23 @@ def test_read_from_tfds(
     _ = (
         pipeline
         | beam_utils.ReadFromTFDS(
-            dummy_dataset, split=split, workers_per_shard=workers_per_shard)
+            dummy_dataset, split=split, workers_per_shard=workers_per_shard
+        )
         | beam.Map(dataset_utils.as_numpy)
-        | beam.io.WriteToText(os.fspath(tmp_path / 'out.txt')))
+        | beam.io.WriteToText(os.fspath(tmp_path / 'out.txt'))
+    )
 
   assert (tmp_path / 'out.txt-00000-of-00001').read_text() == expected_result
 
 
-@pytest.mark.parametrize('split, expected_implemented_with_batchsize', [
-    ('train', True),
-    ('train[:2]', False),
-    ('train[1:]', False),
-])
+@pytest.mark.parametrize(
+    'split, expected_implemented_with_batchsize',
+    [
+        ('train', True),
+        ('train[:2]', False),
+        ('train[1:]', False),
+    ],
+)
 def test_subsplit_failure_with_batch_size(
     dummy_dataset: dataset_builder.DatasetBuilder,
     tmp_path: pathlib.Path,
@@ -72,7 +80,8 @@ def test_subsplit_failure_with_batch_size(
           pipeline
           | beam_utils.ReadFromTFDS(dummy_dataset, split=split, batch_size=2)
           | beam.Map(dataset_utils.as_numpy)
-          | beam.io.WriteToText(os.fspath(tmp_path / 'out.txt')))
+          | beam.io.WriteToText(os.fspath(tmp_path / 'out.txt'))
+      )
 
   except NotImplementedError:
     implemented_with_batchsize = False

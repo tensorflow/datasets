@@ -21,6 +21,7 @@ from tensorflow_datasets.vision_language.laion400m import laion400m
 
 class Laion400MImagesTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for LAION-400M image dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = [laion400m.LAION400M_IMAGES_CONFIG.name]
   DATASET_CLASS = laion400m.Laion400m
   SPLITS = {
@@ -35,6 +36,7 @@ class Laion400MImagesTest(tfds.testing.DatasetBuilderTestCase):
 
 class Laion400MEmbeddingsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for LAION-400M image dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = [laion400m.LAION400M_EMBEDDINGS_CONFIG.name]
   DATASET_CLASS = laion400m.Laion400m
   SPLITS = {

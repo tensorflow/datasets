@@ -46,22 +46,32 @@ class Wmt15Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-      ) for l1, l2 in _LANGUAGE_PAIRS
+      )
+      for l1, l2 in _LANGUAGE_PAIRS
   ]
 
   @property
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "europarl_v8_16", "commoncrawl", "multiun",
-            "newscommentary_v10", "gigafren", "czeng_10", "yandexcorpus",
-            "wikiheadlines_fi", "wikiheadlines_ru"
+            "europarl_v7",
+            "europarl_v8_16",
+            "commoncrawl",
+            "multiun",
+            "newscommentary_v10",
+            "gigafren",
+            "czeng_10",
+            "yandexcorpus",
+            "wikiheadlines_fi",
+            "wikiheadlines_ru",
         ],
         tfds.Split.VALIDATION: [
-            "newsdev2015", "newsdiscussdev2015", "newstest2014"
+            "newsdev2015",
+            "newsdiscussdev2015",
+            "newstest2014",
         ],
         tfds.Split.TEST: [
             "newstest2015",
             "newsdiscusstest2015",
-        ]
+        ],
     }

@@ -19,7 +19,6 @@ from tensorflow_datasets.datasets.caltech101 import caltech101_dataset_builder
 
 
 class Caltech101Test(testing.DatasetBuilderTestCase):
-
   DATASET_CLASS = caltech101_dataset_builder.Builder
 
   SPLITS = {

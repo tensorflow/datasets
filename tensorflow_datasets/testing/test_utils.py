@@ -75,6 +75,7 @@ def fake_examples_dir():
 @dataclasses.dataclass
 class _PathState:
   """Track the metadata associated with the path."""
+
   is_gcs: bool
   is_abs: bool
 
@@ -106,7 +107,6 @@ class MockFs(object):
 
   * `/absolute/path` -> `/tmp/mocked_file_system/absolute/path`
   * `gs://path` -> `/tmp/mocked_file_system/gs/path`
-
   """
 
   def __init__(self):
@@ -165,13 +165,13 @@ class MockFs(object):
     """Normalize the output to strip the `tmp_path`."""
     tmp_path = os.fspath(self._tmp_dir)
     assert p.startswith(tmp_path)
-    p = p[len(tmp_path):]  # Strip the tmp path
+    p = p[len(tmp_path) :]  # Strip the tmp path
     if state.is_gcs:
       assert p.startswith('/big' + 'store/')
       p = p.replace('/big' + 'store/', 'gs://', 1)
     elif not state.is_abs:
       assert p.startswith('/')
-      p = p[len('/'):]
+      p = p[len('/') :]
     return p
 
   def _validate_out(self, out):
@@ -180,7 +180,8 @@ class MockFs(object):
       assert not any(elem.startswith('/') for elem in out)
     elif not isinstance(out, (bool, type(None))):
       raise TypeError(
-          f'Unexpected return type {out!r} for MockFs, please open an issue')
+          f'Unexpected return type {out!r} for MockFs, please open an issue'
+      )
     return out
 
   def add_file(self, path, content=None) -> None:
@@ -206,7 +207,8 @@ class MockFs(object):
             self._to_tmp(p),
             self._to_tmp(p2),
             **kwargs,
-        ))
+        )
+    )
 
   def _mock_glob(self, original_fn, p):
     p, state = self._to_tmp(p, with_state=True)
@@ -215,11 +217,10 @@ class MockFs(object):
 
   def _mock_walk(self, original_fn, p):
     p, state = self._to_tmp(p, with_state=True)
-    for (root, subdirs, filenames) in original_fn(p):
+    for root, subdirs, filenames in original_fn(p):
       yield (self._to_abs(root, state=state), subdirs, filenames)
 
   def _mock(self):
-
     return mock_gfile(
         exists=self._mock_fn,
         listdir=self._mock_fn,
@@ -331,11 +332,13 @@ def mock_tf(symbol_name: str, *args: Any, **kwargs: Any) -> Iterator[None]:
       assert not args
       for k, v in kwargs.items():
         stack.enter_context(
-            mock.patch.object(getattr(module, symbol_name), k, v))
+            mock.patch.object(getattr(module, symbol_name), k, v)
+        )
     else:
       # Patch the module/object
       stack.enter_context(
-          mock.patch.object(module, symbol_name, *args, **kwargs))
+          mock.patch.object(module, symbol_name, *args, **kwargs)
+      )
     yield
 
 
@@ -391,8 +394,10 @@ def run_in_graph_and_eager_modes(func=None, config=None, use_gpu=True):
     def decorated(self, *args, **kwargs):
       """Run the decorated test method."""
       if not tf.executing_eagerly():
-        raise ValueError('Must be executing eagerly when using the '
-                         'run_in_graph_and_eager_modes decorator.')
+        raise ValueError(
+            'Must be executing eagerly when using the '
+            'run_in_graph_and_eager_modes decorator.'
+        )
 
       with self.subTest('eager_mode'):
         f(self, *args, **kwargs)
@@ -418,7 +423,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   VERSION = utils.Version('1.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Release notes 1.0.0',
-      '2.0.0': 'Release notes 2.0.0'
+      '2.0.0': 'Release notes 2.0.0',
   }
   SUPPORTED_VERSIONS = [
       '2.0.0',
@@ -488,9 +493,11 @@ class DummyDataset(
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict({
-            'id': tf.int64,
-        }),
+        features=features.FeaturesDict(
+            {
+                'id': tf.int64,
+            }
+        ),
         supervised_keys=('id', 'id'),
         description='Minimal DatasetBuilder.',
     )
@@ -609,7 +616,7 @@ class DummyDatasetCollection(dataset_collection_builder.DatasetCollection):
         release_notes={
             '1.0.0': 'notes 1.0.0',
             '1.1.0': 'notes 1.1.0',
-            '2.0.0': 'notes 2.0.0'
+            '2.0.0': 'notes 2.0.0',
         },
         citation="""
         @misc{citekey,
@@ -623,20 +630,17 @@ class DummyDatasetCollection(dataset_collection_builder.DatasetCollection):
   @property
   def datasets(self) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
     return {
-        '1.0.0':
-            naming.references_for({
-                'a': 'a/c:1.2.3',
-                'b': 'b/d:2.3.4',
-            }),
-        '1.1.0':
-            naming.references_for({
-                'a': 'a/c:1.2.3',
-                'c': 'c/e:3.5.7',
-            }),
-        '2.0.0':
-            naming.references_for({
-                'a': 'a/c:1.3.5',
-                'b': 'b/d:2.4.8',
-                'c': 'c/e:3.5.7',
-            }),
+        '1.0.0': naming.references_for({
+            'a': 'a/c:1.2.3',
+            'b': 'b/d:2.3.4',
+        }),
+        '1.1.0': naming.references_for({
+            'a': 'a/c:1.2.3',
+            'c': 'c/e:3.5.7',
+        }),
+        '2.0.0': naming.references_for({
+            'a': 'a/c:1.3.5',
+            'b': 'b/d:2.4.8',
+            'c': 'c/e:3.5.7',
+        }),
     }

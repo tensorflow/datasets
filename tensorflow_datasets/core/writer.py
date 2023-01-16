@@ -55,6 +55,7 @@ class _ShardSpec:
     examples_number: Number of examples in shard.
     file_instructions: Reading instructions.
   """
+
   shard_index: int
   path: str
   index_path: str
@@ -114,9 +115,11 @@ def _get_shard_specs(
   for shard_index, to in enumerate(shard_boundaries):
     # Read the bucket indexes
     file_instructions = shard_utils.get_file_instructions(
-        from_, to, bucket_indexes, bucket_lengths)
+        from_, to, bucket_indexes, bucket_lengths
+    )
     shard_path = filename_template.sharded_filepath(
-        shard_index=shard_index, num_shards=num_shards)
+        shard_index=shard_index, num_shards=num_shards
+    )
     index_path = _get_index_path(os.fspath(shard_path))
     shard_specs.append(
         _ShardSpec(
@@ -125,7 +128,8 @@ def _get_shard_specs(
             index_path=index_path,
             examples_number=to - from_,
             file_instructions=file_instructions,
-        ))
+        )
+    )
     from_ = to
   return shard_specs
 
@@ -137,8 +141,11 @@ def _get_shard_boundaries(
   if num_examples == 0:
     raise AssertionError("No examples were yielded.")
   if num_examples < number_of_shards:
-    raise AssertionError("num_examples ({}) < number_of_shards ({})".format(
-        num_examples, number_of_shards))
+    raise AssertionError(
+        "num_examples ({}) < number_of_shards ({})".format(
+            num_examples, number_of_shards
+        )
+    )
   return [
       int(round(num_examples * (float(i) / number_of_shards)))
       for i in range(1, number_of_shards + 1)
@@ -148,15 +155,17 @@ def _get_shard_boundaries(
 def _write_examples(
     path: epath.PathLike,
     iterator: Iterable[type_utils.KeySerializedExample],
-    file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT
+    file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
 ) -> Optional[file_adapters.ExamplePositions]:
   """Write examples from iterator in the given `file_format`."""
   return file_adapters.ADAPTER_FOR_FORMAT[file_format].write_examples(
-      path, iterator)
+      path, iterator
+  )
 
 
-def _write_index_file(sharded_index_path: epath.PathLike,
-                      record_keys: List[Any]):
+def _write_index_file(
+    sharded_index_path: epath.PathLike, record_keys: List[Any]
+):
   """Writes index file for records of a shard at given `sharded_index_path`.
 
   NOTE: Each record position (i.e shard_key in shard_keys) is stored as a
@@ -206,7 +215,8 @@ class Writer(object):
     self._shuffler = shuffle.Shuffler(
         dirpath=filename_template.data_dir,
         hash_salt=hash_salt,
-        disable_shuffling=disable_shuffling)
+        disable_shuffling=disable_shuffling,
+    )
     self._num_examples = 0
     self._filename_template = filename_template
     self._file_format = file_format
@@ -230,9 +240,13 @@ class Writer(object):
   def finalize(self):
     """Effectively writes examples to the tfrecord files."""
     filename = self._filename_template.sharded_filepaths_pattern()
-    shard_specs = _get_shard_specs(self._num_examples, self._shuffler.size,
-                                   self._shuffler.bucket_lengths,
-                                   self._filename_template, self._shard_config)
+    shard_specs = _get_shard_specs(
+        self._num_examples,
+        self._shuffler.size,
+        self._shuffler.bucket_lengths,
+        self._filename_template,
+        self._shard_config,
+    )
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
     # parallelize, but one would need to be careful not to sort buckets twice.
@@ -243,13 +257,16 @@ class Writer(object):
             total=self._num_examples,
             unit=" examples",
             leave=False,
-        ))
+        )
+    )
     try:
       for shard_spec in shard_specs:
-        iterator = itertools.islice(examples_generator, 0,
-                                    shard_spec.examples_number)
-        record_keys = _write_examples(shard_spec.path, iterator,
-                                      self._file_format)
+        iterator = itertools.islice(
+            examples_generator, 0, shard_spec.examples_number
+        )
+        record_keys = _write_examples(
+            shard_spec.path, iterator, self._file_format
+        )
 
         # No shard keys returned (e.g: TFRecord format), index cannot be
         # created.
@@ -261,12 +278,14 @@ class Writer(object):
         if len(record_keys) != int(shard_spec.examples_number):
           raise RuntimeError(
               f"Length of example `keys` ({len(record_keys)}) does not match "
-              f"`shard_spec.examples_number: (`{shard_spec.examples_number})")
+              f"`shard_spec.examples_number: (`{shard_spec.examples_number})"
+          )
         _write_index_file(shard_spec.index_path, record_keys)
 
     except shuffle.DuplicatedKeysError as err:
-      _raise_error_for_duplicated_keys(err.item1, err.item2,
-                                       self._serializer.example_specs)
+      _raise_error_for_duplicated_keys(
+          err.item1, err.item2, self._serializer.example_specs
+      )
 
     # Finalize the iterator to clear-up TQDM
     try:
@@ -275,11 +294,16 @@ class Writer(object):
       pass
     else:
       raise ValueError(
-          f"Shuffling more elements than expected. Additional element: {val}")
+          f"Shuffling more elements than expected. Additional element: {val}"
+      )
 
     shard_lengths = [int(spec.examples_number) for spec in shard_specs]
-    logging.info("Done writing %s. Number of examples: %s (shards: %s)",
-                 filename, sum(shard_lengths), shard_lengths)
+    logging.info(
+        "Done writing %s. Number of examples: %s (shards: %s)",
+        filename,
+        sum(shard_lengths),
+        shard_lengths,
+    )
     return shard_lengths, self._shuffler.size
 
 
@@ -296,6 +320,7 @@ class BeamWriter(object):
   The given examples are not directly writen to the final tfrecord file, but to
   temporary files.
   """
+
   _OUTPUT_TAG_BUCKETS_LEN_SIZE = "tag_buckets_len_size"
 
   def __init__(
@@ -328,9 +353,12 @@ class BeamWriter(object):
         hash_salt=hash_salt,
         disable_shuffling=disable_shuffling,
         file_format=file_format,
-        shard_config=shard_config)
+        shard_config=shard_config,
+    )
     self._filename_template = filename_template
-    self._split_info_path = f"{filename_template.filepath_prefix()}.split_info.json"
+    self._split_info_path = (
+        f"{filename_template.filepath_prefix()}.split_info.json"
+    )
     self._serializer = serializer
     self._hasher = hashing.Hasher(hash_salt)
     self._split_info = None
@@ -391,13 +419,16 @@ class BeamWriter(object):
     # Compare continuous examples
     for ex0, ex1 in zip(examples[:-1], examples[1:]):
       if ex0[0] == ex1[0]:  # Different keys
-        _raise_error_for_duplicated_keys(ex0[1], ex1[1],
-                                         self._serializer.example_specs)
+        _raise_error_for_duplicated_keys(
+            ex0[1], ex1[1], self._serializer.example_specs
+        )
     shard_path = self._filename_template.sharded_filepath(
-        shard_index=shard_id, num_shards=len(non_empty_shard_ids))
+        shard_index=shard_id, num_shards=len(non_empty_shard_ids)
+    )
     with utils.incomplete_file(epath.Path(shard_path)) as tmp_path:
-      logging.info("Writing %d examples to %s.", len(examples),
-                   os.fspath(tmp_path))
+      logging.info(
+          "Writing %d examples to %s.", len(examples), os.fspath(tmp_path)
+      )
       record_keys = _write_examples(tmp_path, examples, self._file_format)
     self.inc_counter(name="written_shards")
     # If there are record_keys, create index files.
@@ -412,7 +443,8 @@ class BeamWriter(object):
     num_shards = self._shard_config.get_number_shards(
         total_size=total_size,
         num_examples=num_examples,
-        uses_precise_sharding=False)
+        uses_precise_sharding=False,
+    )
     self.inc_counter(name="NumberOfShards", value=num_shards)
     return num_shards
 
@@ -426,7 +458,8 @@ class BeamWriter(object):
     key, _ = key_serialized_example
     largest_key = largest_key[0]
     shard_number = shuffle.get_bucket_number(
-        hkey=key, num_buckets=num_shards, max_hkey=largest_key)
+        hkey=key, num_buckets=num_shards, max_hkey=largest_key
+    )
     return (shard_number, key_serialized_example)
 
   def _store_split_info(
@@ -439,18 +472,19 @@ class BeamWriter(object):
     shard_lengths = [info.num_examples for info in shard_infos]
     with utils.incomplete_file(epath.Path(self._split_info_path)) as tmp_path:
       tmp_path.write_text(
-          json.dumps({
-              "total_size": total_size,
-              "shard_lengths": shard_lengths
-          }))
+          json.dumps({"total_size": total_size, "shard_lengths": shard_lengths})
+      )
 
-  def _sort_shard_ids(self, shard_ids: List[int],
-                      ideal_num_shards: int) -> List[int]:
+  def _sort_shard_ids(
+      self, shard_ids: List[int], ideal_num_shards: int
+  ) -> List[int]:
     """Returns the sorted shard ids and logs information."""
     if len(shard_ids) != ideal_num_shards:
       logging.info(
           "Ideally there would be %d shards, but got %d non-empty shards.",
-          ideal_num_shards, len(shard_ids))
+          ideal_num_shards,
+          len(shard_ids),
+      )
     return sorted(shard_ids)
 
   def write_from_pcollection(self, examples_pcollection):
@@ -465,25 +499,31 @@ class BeamWriter(object):
     largest_key = (
         serialized_examples
         | beam.Keys()
-        | "LargestKey" >> beam.combiners.Top.Largest(1))
+        | "LargestKey" >> beam.combiners.Top.Largest(1)
+    )
     num_examples = (
-        serialized_examples
-        | "CountExamples" >> beam.combiners.Count.Globally())
+        serialized_examples | "CountExamples" >> beam.combiners.Count.Globally()
+    )
     total_size = beam.pvalue.AsSingleton(
         serialized_examples
         | beam.Values()
         | beam.Map(len)
-        | "TotalSize" >> beam.CombineGlobally(sum))
+        | "TotalSize" >> beam.CombineGlobally(sum)
+    )
     ideal_num_shards = beam.pvalue.AsSingleton(
-        num_examples | "NumberOfShards" >> beam.Map(
-            self._number_of_shards, total_size=total_size))
+        num_examples
+        | "NumberOfShards"
+        >> beam.Map(self._number_of_shards, total_size=total_size)
+    )
 
     examples_per_shard = (
         serialized_examples
-        | "AssignShard" >> beam.Map(
+        | "AssignShard"
+        >> beam.Map(
             self._assign_shard,
             largest_key=beam.pvalue.AsSingleton(largest_key),
-            num_shards=ideal_num_shards)
+            num_shards=ideal_num_shards,
+        )
         # (shard_id, serialized_example)
         | "GroupShards" >> beam.GroupByKey()
         # (shard_id, [serialized_example])
@@ -495,19 +535,23 @@ class BeamWriter(object):
         examples_per_shard
         | "GetIdsOfNonEmptyShards" >> beam.Keys()
         | "CollectIdsOfNonEmptyShards" >> beam.transforms.combiners.ToList()
-        | "SortIdsOfNonEmptyShards" >> beam.Map(
-            self._sort_shard_ids, ideal_num_shards=ideal_num_shards))
+        | "SortIdsOfNonEmptyShards"
+        >> beam.Map(self._sort_shard_ids, ideal_num_shards=ideal_num_shards)
+    )
 
     return (
         examples_per_shard
         # (shard_id, [serialized_example])
-        | "WriteFinalShards" >> beam.Map(
-            self._write_final_shard, non_empty_shard_ids=non_empty_shard_ids)
+        | "WriteFinalShards"
+        >> beam.Map(
+            self._write_final_shard, non_empty_shard_ids=non_empty_shard_ids
+        )
         # (_ShardInfo)
         | "CollectShardInfo" >> beam.transforms.combiners.ToList()
         # [_ShardInfo]
-        | "CalculateSplitInfo" >> beam.ParDo(
-            self._store_split_info, total_size=total_size))
+        | "CalculateSplitInfo"
+        >> beam.ParDo(self._store_split_info, total_size=total_size)
+    )
 
   def finalize(self):
     """Deletes tmp directory and returns shard_lengths and total_size."""

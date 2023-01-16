@@ -48,35 +48,49 @@ _CAND_XML_STR = """\
 # Same data from ./dummy_data/assin2-train-only.xml
 _EXPECTED_PAIRS = [
     Pair(
-        text='Uma criança risonha está segurando uma pistola de água e sendo espirrada com água',
+        text=(
+            'Uma criança risonha está segurando uma pistola de água e sendo'
+            ' espirrada com água'
+        ),
         hypothesis='Uma criança está segurando uma pistola de água',
         id=1,
         entailment='Entailment',
-        similarity=4.5),
+        similarity=4.5,
+    ),
     Pair(
-        text='Os homens estão cuidadosamente colocando as malas no porta-malas de um carro',
-        hypothesis='Os homens estão colocando bagagens dentro do porta-malas de um carro',
+        text=(
+            'Os homens estão cuidadosamente colocando as malas no porta-malas'
+            ' de um carro'
+        ),
+        hypothesis=(
+            'Os homens estão colocando bagagens dentro do porta-malas de um'
+            ' carro'
+        ),
         id=2,
         entailment='Entailment',
-        similarity=4.5),
+        similarity=4.5,
+    ),
     Pair(
         text='Uma pessoa tem cabelo loiro e esvoaçante e está tocando violão',
         hypothesis='Um guitarrista tem cabelo loiro e esvoaçante',
         id=3,
         entailment='Entailment',
-        similarity=4.7),
+        similarity=4.7,
+    ),
     Pair(
         text='Batatas estão sendo fatiadas por um homem',
         hypothesis='O homem está fatiando a batata',
         id=4,
         entailment='Entailment',
-        similarity=4.7),
+        similarity=4.7,
+    ),
     Pair(
         text='Um caminhão está descendo rapidamente um morro',
         hypothesis='Um caminhão está rapidamente descendo o morro',
         id=5,
         entailment='Entailment',
-        similarity=4.9),
+        similarity=4.9,
+    ),
 ]
 
 

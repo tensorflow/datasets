@@ -89,7 +89,6 @@ class Video(sequence_feature.Sequence):
         'video': tf.io.gfile.GFile('/complex/path/video.avi'),
     }
     ```
-
   """
 
   def __init__(
@@ -110,7 +109,7 @@ class Video(sequence_feature.Sequence):
         can use any encoding format supported by image_feature.Feature.
       ffmpeg_extra_args: A sequence of additional args to be passed to the
         ffmpeg binary. Specifically, ffmpeg will be called as: `` ffmpeg -i
-          <input_file> <ffmpeg_extra_args> %010d.<encoding_format> ``
+        <input_file> <ffmpeg_extra_args> %010d.<encoding_format> ``
       use_colormap: Forwarded to `tfds.features.Image`. If `True`,
         `tfds.as_dataframe` will display each value in the image with a
         different color.
@@ -163,7 +162,8 @@ class Video(sequence_feature.Sequence):
         _, video_temp_path = tempfile.mkstemp()
         try:
           tf.io.gfile.copy(
-              video_or_path_or_fobj, video_temp_path, overwrite=True)
+              video_or_path_or_fobj, video_temp_path, overwrite=True
+          )
           encoded_video = self._ffmpeg_decode(video_temp_path)
         finally:
           os.unlink(video_temp_path)
@@ -183,7 +183,8 @@ class Video(sequence_feature.Sequence):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.VideoFeature]) -> 'Video':
+      cls, value: Union[Json, feature_pb2.VideoFeature]
+  ) -> 'Video':
     if isinstance(value, dict):
       # For backwards compatibility
       shape = tuple(value['shape'])
@@ -214,6 +215,5 @@ class Video(sequence_feature.Sequence):
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as `<video>`."""
     return image_feature.make_video_repr_html(
-        ex,
-        use_colormap=self.feature._use_colormap  # pylint: disable=protected-access  # pytype: disable=attribute-error
+        ex, use_colormap=self.feature._use_colormap  # pylint: disable=protected-access  # pytype: disable=attribute-error
     )

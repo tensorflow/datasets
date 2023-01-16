@@ -86,7 +86,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'activity': np.float32,
             'features': {
                 name: dtype for name, (dtype, _) in features().items()
-            }
+            },
         }),
         supervised_keys=('features', 'activity'),
         homepage='http://www.stat.columbia.edu/~gelman/arm/examples/radon/',
@@ -96,7 +96,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     paths = dl_manager.download({
         'file_path_srrs2': urllib.parse.urljoin(BASE_URL, 'srrs2.dat'),
-        'file_path_cty': urllib.parse.urljoin(BASE_URL, 'cty.dat')
+        'file_path_cty': urllib.parse.urljoin(BASE_URL, 'cty.dat'),
     })
     return [
         tfds.core.SplitGenerator(
@@ -137,5 +137,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           'activity': float(radon_val),
           'features': {
               name: features()[name][1](value) for name, value in row.items()
-          }
+          },
       }

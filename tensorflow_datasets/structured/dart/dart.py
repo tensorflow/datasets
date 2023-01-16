@@ -65,13 +65,12 @@ class Dart(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             'input_text': {
-                'table':  # Each row will be one triple fact.
-                    tfds.features.Sequence({
-                        # we'll only have subject/predicate/object headers
-                        'column_header': np.str_,
-                        'row_number': np.int16,
-                        'content': np.str_,
-                    }),
+                'table': tfds.features.Sequence({  # Each row will be one triple fact.
+                    # we'll only have subject/predicate/object headers
+                    'column_header': np.str_,
+                    'row_number': np.int16,
+                    'content': np.str_,
+                }),
             },
             'target_text': np.str_,
         }),
@@ -84,20 +83,20 @@ class Dart(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     extracted_path = os.path.join(
-        dl_manager.download_and_extract(_URL), 'dart-master', 'data', 'v1.1.1')
+        dl_manager.download_and_extract(_URL), 'dart-master', 'data', 'v1.1.1'
+    )
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(
-                json_file=os.path.join(extracted_path,
-                                       'dart-v1.1.1-full-train.json')),
-        tfds.Split.VALIDATION:
-            self._generate_examples(
-                json_file=os.path.join(extracted_path,
-                                       'dart-v1.1.1-full-dev.json')),
-        tfds.Split.TEST:
-            self._generate_examples(
-                json_file=os.path.join(extracted_path,
-                                       'dart-v1.1.1-full-test.json')),
+        tfds.Split.TRAIN: self._generate_examples(
+            json_file=os.path.join(
+                extracted_path, 'dart-v1.1.1-full-train.json'
+            )
+        ),
+        tfds.Split.VALIDATION: self._generate_examples(
+            json_file=os.path.join(extracted_path, 'dart-v1.1.1-full-dev.json')
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            json_file=os.path.join(extracted_path, 'dart-v1.1.1-full-test.json')
+        ),
     }
 
   def _generate_examples(self, json_file):
@@ -107,8 +106,9 @@ class Dart(tfds.core.GeneratorBasedBuilder):
       for entry_count, entry in enumerate(data):
         table = []
         for i, triple_set in enumerate(entry['tripleset']):
-          for header, content in zip(['subject', 'predicate', 'object'],
-                                     triple_set):
+          for header, content in zip(
+              ['subject', 'predicate', 'object'], triple_set
+          ):
             table.append({
                 'column_header': header,
                 'row_number': i,
@@ -119,5 +119,5 @@ class Dart(tfds.core.GeneratorBasedBuilder):
               'input_text': {
                   'table': table,
               },
-              'target_text': annotation['text']
+              'target_text': annotation['text'],
           }

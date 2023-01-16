@@ -24,7 +24,8 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.question_answering import qa_utils
 
-_CITATION_DU_ET_AL = textwrap.dedent("""\
+_CITATION_DU_ET_AL = textwrap.dedent(
+    """\
 @inproceedings{du-etal-2017-learning,
     title = "Learning to Ask: Neural Question Generation for Reading Comprehension",
     author = "Du, Xinya  and Shao, Junru  and Cardie, Claire",
@@ -37,20 +38,21 @@ _CITATION_DU_ET_AL = textwrap.dedent("""\
     doi = "10.18653/v1/P17-1123",
     pages = "1342--1352",
 }
-""")
+"""
+)
 
 _DATA_URLS_DU_ET_AL = {
-    "train":
-        "https://raw.githubusercontent.com/xinyadu/nqg/master/data/raw/train.json",
-    "dev":
-        "https://raw.githubusercontent.com/xinyadu/nqg/master/data/raw/dev.json",
-    "test":
-        "https://raw.githubusercontent.com/xinyadu/nqg/master/data/raw/test.json"
+    "train": "https://raw.githubusercontent.com/xinyadu/nqg/master/data/raw/train.json",
+    "dev": (
+        "https://raw.githubusercontent.com/xinyadu/nqg/master/data/raw/dev.json"
+    ),
+    "test": "https://raw.githubusercontent.com/xinyadu/nqg/master/data/raw/test.json",
 }
 
 _HOMEPAGE_URL_DU_ET_AL = "https://github.com/xinyadu/nqg"
 
-_CITATION_ZHOU_ET_AL = textwrap.dedent("""\
+_CITATION_ZHOU_ET_AL = textwrap.dedent(
+    """\
 @inproceedings{du-etal-2017-learning,
     title = "Learning to Ask: Neural Question Generation for Reading Comprehension",
     author = "Du, Xinya  and Shao, Junru  and Cardie, Claire",
@@ -63,22 +65,22 @@ _CITATION_ZHOU_ET_AL = textwrap.dedent("""\
     doi = "10.18653/v1/P17-1123",
     pages = "1342--1352",
 }
-""")
+"""
+)
 
 _DATA_URLS_ZHOU_ET_AL = {
-    "train":
-        "https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json",
-    "dev":
-        "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json",
-    "mapping":
-        "https://res.qyzhou.me/qas_id_in_squad.zip",
-    "redistribute":
-        "https://res.qyzhou.me/redistribute.zip",
+    "train": (
+        "https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json"
+    ),
+    "dev": "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json",
+    "mapping": "https://res.qyzhou.me/qas_id_in_squad.zip",
+    "redistribute": "https://res.qyzhou.me/redistribute.zip",
 }
 
 _HOMEPAGE_URL_ZHOU_ET_AL = "https://github.com/magic282/NQG"
 
-_CITATION_SQUAD = textwrap.dedent("""\
+_CITATION_SQUAD = textwrap.dedent(
+    """\
 @inproceedings{rajpurkar-etal-2016-squad,
     title = "{SQ}u{AD}: 100,000+ Questions for Machine Comprehension of Text",
     author = "Rajpurkar, Pranav  and Zhang, Jian  and Lopyrev, Konstantin  and Liang, Percy",
@@ -91,7 +93,8 @@ _CITATION_SQUAD = textwrap.dedent("""\
     doi = "10.18653/v1/D16-1264",
     pages = "2383--2392",
 }
-""")
+"""
+)
 
 _DESCRIPTION = """\
 Question generation using squad dataset using data splits described in 'Neural
@@ -127,44 +130,47 @@ class SquadQuestionGenerationConfig(tfds.core.BuilderConfig):
 
 class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for squad_question_generation dataset."""
+
   VERSION = tfds.core.Version("3.0.0")
   RELEASE_NOTES = {
-      "1.0.0":
-          """
+      "1.0.0": """
           Initial build with unique SQuAD QAS ids in each split, using
           passage-level context (Zhou et al, 2017).
           """,
-      "2.0.0":
-          """
+      "2.0.0": """
           Matches the original split of (Zhou et al, 2017), allows both
           sentence- and passage-level contexts, and uses answers from
           (Zhou et al, 2017).
           """,
-      "3.0.0":
-          """
+      "3.0.0": """
           Added the split of (Du et al, 2017) also.
           """,
   }
   BUILDER_CONFIGS = [
       SquadQuestionGenerationConfig(
           name="split_du",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
           Answer independent question generation from passage-level contexts
           (Du et al, 2017).
-          """),
+          """
+          ),
           features=tfds.features.FeaturesDict({
               _CONTEXT_PASSAGE: tfds.features.Text(),
               _ANSWER: tfds.features.Text(),
               _QUESTION: tfds.features.Text(),
           }),
           data_urls=_DATA_URLS_DU_ET_AL,
-          citation=_CITATION_DU_ET_AL),
+          citation=_CITATION_DU_ET_AL,
+      ),
       SquadQuestionGenerationConfig(
           name="split_zhou",
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
           Answer-span dependent question generation from sentence- and
           passage-level contexts (Zhou et al, 2017).
-          """),
+          """
+          ),
           features=tfds.features.FeaturesDict({
               _CONTEXT_SENTENCE: tfds.features.Text(),
               _CONTEXT_PASSAGE: tfds.features.Text(),
@@ -172,7 +178,8 @@ class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
               _QUESTION: tfds.features.Text(),
           }),
           data_urls=_DATA_URLS_ZHOU_ET_AL,
-          citation=_CITATION_ZHOU_ET_AL)
+          citation=_CITATION_ZHOU_ET_AL,
+      ),
   ]
 
   def _info(self):
@@ -198,29 +205,30 @@ class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
       }
     elif self.builder_config.name == "split_zhou":
       mapping_dir = os.path.join(dl_paths["mapping"], "qas_id_in_squad")
-      redistribute_raw_dir = os.path.join(dl_paths["redistribute"],
-                                          "redistribute/raw")
+      redistribute_raw_dir = os.path.join(
+          dl_paths["redistribute"], "redistribute/raw"
+      )
       return {
-          tfds.Split.TRAIN:
-              self._generate_examples(
-                  dl_paths["train"], os.path.join(mapping_dir, "train.txt.id"),
-                  os.path.join(redistribute_raw_dir, "train.txt")),
-          tfds.Split.VALIDATION:
-              self._generate_examples(
-                  dl_paths["dev"],
-                  os.path.join(mapping_dir, "dev.txt.shuffle.dev.id"),
-                  os.path.join(redistribute_raw_dir, "dev.txt.shuffle.dev")),
-          tfds.Split.TEST:
-              self._generate_examples(
-                  dl_paths["dev"],
-                  os.path.join(mapping_dir, "dev.txt.shuffle.test.id"),
-                  os.path.join(redistribute_raw_dir, "dev.txt.shuffle.test")),
+          tfds.Split.TRAIN: self._generate_examples(
+              dl_paths["train"],
+              os.path.join(mapping_dir, "train.txt.id"),
+              os.path.join(redistribute_raw_dir, "train.txt"),
+          ),
+          tfds.Split.VALIDATION: self._generate_examples(
+              dl_paths["dev"],
+              os.path.join(mapping_dir, "dev.txt.shuffle.dev.id"),
+              os.path.join(redistribute_raw_dir, "dev.txt.shuffle.dev"),
+          ),
+          tfds.Split.TEST: self._generate_examples(
+              dl_paths["dev"],
+              os.path.join(mapping_dir, "dev.txt.shuffle.test.id"),
+              os.path.join(redistribute_raw_dir, "dev.txt.shuffle.test"),
+          ),
       }
 
-  def _generate_examples(self,
-                         squad_data_path,
-                         mapping_path=None,
-                         qgen_data_path=None):
+  def _generate_examples(
+      self, squad_data_path, mapping_path=None, qgen_data_path=None
+  ):
     r"""Yields question generation examples.
 
     Args:
@@ -247,7 +255,7 @@ class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
               yield qa["id"], {
                   _CONTEXT_PASSAGE: context,
                   _ANSWER: qa["answers"][0]["text"],
-                  _QUESTION: qa["question"]
+                  _QUESTION: qa["question"],
               }
     elif self.builder_config.name == "split_zhou":
       squad_data = {}
@@ -255,15 +263,19 @@ class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
         squad_data[k] = ex
       with tf.io.gfile.GFile(mapping_path, "r") as mapping_file:
         with tf.io.gfile.GFile(qgen_data_path, "r") as qgen_data_file:
-          for (ex_id, (squad_id, qgen_data)) in enumerate(
-              zip(mapping_file.read().splitlines(),
-                  qgen_data_file.read().splitlines())):
-            (_, _, _, _, _, _, context_sentence, _, answer,
-             question) = qgen_data.split("\t")
+          for ex_id, (squad_id, qgen_data) in enumerate(
+              zip(
+                  mapping_file.read().splitlines(),
+                  qgen_data_file.read().splitlines(),
+              )
+          ):
+            (_, _, _, _, _, _, context_sentence, _, answer, question) = (
+                qgen_data.split("\t")
+            )
             context_passage = squad_data[squad_id]["context"]
             yield str(ex_id).zfill(7), {
                 _CONTEXT_SENTENCE: context_sentence,
                 _CONTEXT_PASSAGE: context_passage,
                 _ANSWER: answer,
-                _QUESTION: question
+                _QUESTION: question,
             }

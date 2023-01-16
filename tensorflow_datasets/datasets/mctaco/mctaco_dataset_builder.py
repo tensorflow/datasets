@@ -25,10 +25,8 @@ from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _SPLIT_DOWNLOAD_URL = {
-    'validation':
-        'https://raw.githubusercontent.com/CogComp/MCTACO/master/dataset/dev_3783.tsv',
-    'test':
-        'https://raw.githubusercontent.com/CogComp/MCTACO/master/dataset/test_9442.tsv',
+    'validation': 'https://raw.githubusercontent.com/CogComp/MCTACO/master/dataset/dev_3783.tsv',
+    'test': 'https://raw.githubusercontent.com/CogComp/MCTACO/master/dataset/test_9442.tsv',
 }
 
 
@@ -40,19 +38,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'sentence':
-                tfds.features.Text(),
-            'question':
-                tfds.features.Text(),
-            'answer':
-                tfds.features.Text(),
-            'label':
-                tfds.features.ClassLabel(names=['no', 'yes']),
-            'category':
-                tfds.features.ClassLabel(names=[
-                    'Event Ordering', 'Event Duration', 'Frequency',
-                    'Stationarity', 'Typical Time'
-                ])
+            'sentence': tfds.features.Text(),
+            'question': tfds.features.Text(),
+            'answer': tfds.features.Text(),
+            'label': tfds.features.ClassLabel(names=['no', 'yes']),
+            'category': tfds.features.ClassLabel(
+                names=[
+                    'Event Ordering',
+                    'Event Duration',
+                    'Frequency',
+                    'Stationarity',
+                    'Typical Time',
+                ]
+            ),
         }),
         # No default supervised_keys (as we have to pass both the sentence,
         # question and possible answer as input.
@@ -66,7 +64,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=split, gen_kwargs={'file_path': file_path})
+            name=split, gen_kwargs={'file_path': file_path}
+        )
         for split, file_path in file_paths.items()
     ]
 
@@ -76,7 +75,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       reader = csv.DictReader(
           f,
           delimiter='\t',
-          fieldnames=['sentence', 'question', 'answer', 'label', 'category'])
+          fieldnames=['sentence', 'question', 'answer', 'label', 'category'],
+      )
       for i, row in enumerate(reader):
         yield i, {
             'sentence': row['sentence'],

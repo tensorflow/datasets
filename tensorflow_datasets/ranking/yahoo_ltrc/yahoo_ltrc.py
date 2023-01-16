@@ -133,14 +133,15 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
     }
 
     splits = {
-        "train":
-            self._generate_examples(path / f"{prefix}.train.txt",
-                                    feature_names),
-        "vali":
-            self._generate_examples(path / f"{prefix}.valid.txt",
-                                    feature_names),
-        "test":
-            self._generate_examples(path / f"{prefix}.test.txt", feature_names)
+        "train": self._generate_examples(
+            path / f"{prefix}.train.txt", feature_names
+        ),
+        "vali": self._generate_examples(
+            path / f"{prefix}.valid.txt", feature_names
+        ),
+        "test": self._generate_examples(
+            path / f"{prefix}.test.txt", feature_names
+        ),
     }
 
     return splits
@@ -149,4 +150,5 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     with tf.io.gfile.GFile(path, "r") as f:
       yield from LibSVMRankingParser(
-          f, feature_names, _LABEL_NAME, combine_features=True)
+          f, feature_names, _LABEL_NAME, combine_features=True
+      )

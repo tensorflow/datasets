@@ -30,7 +30,7 @@ def main():
   for dataset, split_bys in [
       ('refcoco', ['google', 'unc']),
       ('refcoco+', ['unc']),
-      ('refcocog', ['google', 'umd'])
+      ('refcocog', ['google', 'umd']),
   ]:
     for split_by in split_bys:
       refer = REFER(ref_data_root, dataset, split_by)
@@ -45,9 +45,10 @@ def main():
   coco_annotations_file = '<path/to/instances_train2014.json>'
   coco = COCO(coco_annotations_file)
   ref_image_ids = set(x['image_id'] for x in all_refs)
-  coco_anns = {image_id: {'info': coco.imgs[image_id],
-                          'anns': coco.imgToAnns[image_id]}
-               for image_id in ref_image_ids}
+  coco_anns = {
+      image_id: {'info': coco.imgs[image_id], 'anns': coco.imgToAnns[image_id]}
+      for image_id in ref_image_ids
+  }
 
   out_file = '<path/to/refcoco.json>'
   with open(out_file, 'w') as f:

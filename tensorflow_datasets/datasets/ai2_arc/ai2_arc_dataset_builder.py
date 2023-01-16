@@ -35,7 +35,8 @@ class Ai2ArcConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(Ai2ArcConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"), **kwargs)
+        version=tfds.core.Version("1.0.0"), **kwargs
+    )
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -61,17 +62,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     options = ["A", "B", "C", "D", "E"]
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "id":
-                tfds.features.Text(),
-            "question":
-                tfds.features.Text(),
-            "choices":
-                tfds.features.Sequence({
-                    "text": tfds.features.Text(),
-                    "label": tfds.features.ClassLabel(names=options)
-                }),
-            "answerKey":
-                tfds.features.ClassLabel(names=options),
+            "id": tfds.features.Text(),
+            "question": tfds.features.Text(),
+            "choices": tfds.features.Sequence({
+                "text": tfds.features.Text(),
+                "label": tfds.features.ClassLabel(names=options),
+            }),
+            "answerKey": tfds.features.ClassLabel(names=options),
         }),
         supervised_keys=None,
         homepage=_HOMEPAGE,
@@ -86,25 +83,25 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "filepath":
-                    os.path.join(base_path,
-                                 self.builder_config.name + "-Train.jsonl")
+                "filepath": os.path.join(
+                    base_path, self.builder_config.name + "-Train.jsonl"
+                )
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "filepath":
-                    os.path.join(base_path,
-                                 self.builder_config.name + "-Dev.jsonl")
+                "filepath": os.path.join(
+                    base_path, self.builder_config.name + "-Dev.jsonl"
+                )
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "filepath":
-                    os.path.join(base_path,
-                                 self.builder_config.name + "-Test.jsonl")
+                "filepath": os.path.join(
+                    base_path, self.builder_config.name + "-Test.jsonl"
+                )
             },
         ),
     ]
@@ -130,8 +127,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "id": id_,
             "answerKey": answerkey,
             "question": question,
-            "choices": {
-                "text": text_choices,
-                "label": label_choices
-            },
+            "choices": {"text": text_choices, "label": label_choices},
         }

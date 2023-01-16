@@ -215,8 +215,7 @@ def zip_nested(arg0, *args, **kwargs):
   # Could add support for more exotic data_struct, like OrderedDict
   if isinstance(arg0, dict):
     return {
-        k: zip_nested(*a, dict_only=dict_only)
-        for k, a in zip_dict(arg0, *args)
+        k: zip_nested(*a, dict_only=dict_only) for k, a in zip_dict(arg0, *args)
     }
   elif not dict_only:
     if isinstance(arg0, list):
@@ -232,7 +231,8 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> Dict[str, T]:
   for k, v in d.items():
     if isinstance(v, dict):
       flat_dict.update(
-          {f'{k}/{k2}': v2 for k2, v2 in flatten_nest_dict(v).items()})
+          {f'{k}/{k2}': v2 for k2, v2 in flatten_nest_dict(v).items()}
+      )
     else:
       flat_dict[k] = v
   return flat_dict
@@ -298,7 +298,8 @@ def pack_as_nest_dict(flat_d, nest_d):
   if flat_d:  # At the end, flat_d should be empty
     raise ValueError(
         'Flat dict strucure do not match the nested dict. Extra keys: '
-        '{}'.format(list(flat_d.keys())))
+        '{}'.format(list(flat_d.keys()))
+    )
   return nest_out_d
 
 
@@ -311,7 +312,8 @@ def nullcontext(enter_result: T = None) -> Iterator[T]:
 def _get_incomplete_path(filename):
   """Returns a temporary filename based on filename."""
   random_suffix = ''.join(
-      random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
+      random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
+  )
   return filename + constants.INCOMPLETE_SUFFIX + random_suffix
 
 
@@ -330,9 +332,14 @@ def incomplete_dir(dirname: epath.PathLike) -> Iterator[str]:
 
 
 @contextlib.contextmanager
-def incomplete_file(path: epath.Path,) -> Iterator[epath.Path]:
+def incomplete_file(
+    path: epath.Path,
+) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = path.parent / f'{path.name}{constants.INCOMPLETE_SUFFIX}.{uuid.uuid4().hex}'
+  tmp_path = (
+      path.parent
+      / f'{path.name}{constants.INCOMPLETE_SUFFIX}.{uuid.uuid4().hex}'
+  )
   try:
     yield tmp_path
     tmp_path.replace(path)
@@ -346,7 +353,9 @@ def is_incomplete_file(path: epath.Path) -> bool:
   return bool(
       re.search(
           rf'^.+{re.escape(constants.INCOMPLETE_SUFFIX)}\.[0-9a-fA-F]{{32}}$',
-          path.name))
+          path.name,
+      )
+  )
 
 
 @contextlib.contextmanager
@@ -374,7 +383,9 @@ def reraise(
       type(e).__str__ is not BaseException.__str__
       # This should never happens unless the user plays with Exception
       # internals
-      or not hasattr(e, 'args') or not isinstance(e.args, tuple)):
+      or not hasattr(e, 'args')
+      or not isinstance(e.args, tuple)
+  ):
     msg = f'{prefix}{e}{suffix}'
     # Could try to dynamically create a
     # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
@@ -396,8 +407,8 @@ def reraise(
   # If there is more than 1 args, concatenate the message with other args
   else:
     e.args = tuple(
-        p for p in (prefix,) + e.args + (suffix,)
-        if not isinstance(p, str) or p)
+        p for p in (prefix,) + e.args + (suffix,) if not isinstance(p, str) or p
+    )
     raise  # pylint: disable=misplaced-bare-raise
 
 
@@ -446,7 +457,7 @@ def get_class_path(cls, use_tfds_prefix=True):
     cls = cls.__class__
   module_path = cls.__module__
   if use_tfds_prefix and module_path.startswith('tensorflow_datasets'):
-    module_path = 'tfds' + module_path[len('tensorflow_datasets'):]
+    module_path = 'tfds' + module_path[len('tensorflow_datasets') :]
   return '.'.join([module_path, cls.__name__])
 
 
@@ -479,7 +490,6 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
   lock = threading.Lock()
 
   def lock_decorator(fn: Fn) -> Fn:
-
     @functools.wraps(fn)
     def lock_decorated(*args, **kwargs):
       with lock:
@@ -503,15 +513,19 @@ def basename_from_url(url: str) -> str:
 def list_info_files(dir_path: epath.PathLike) -> List[str]:
   """Returns name of info files within dir_path."""
   from tensorflow_datasets.core import file_adapters  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
+
   path = os.fspath(dir_path)
   return [
-      fname for fname in tf.io.gfile.listdir(path)
-      if not tf.io.gfile.isdir(os.path.join(path, fname)) and
-      not file_adapters.is_example_file(fname)
+      fname
+      for fname in tf.io.gfile.listdir(path)
+      if not tf.io.gfile.isdir(os.path.join(path, fname))
+      and not file_adapters.is_example_file(fname)
   ]
 
 
-def get_base64(write_fn: Union[bytes, Callable[[io.BytesIO], None]],) -> str:
+def get_base64(
+    write_fn: Union[bytes, Callable[[io.BytesIO], None]],
+) -> str:
   """Extracts the base64 string of an object by writing into a tmp buffer."""
   if isinstance(write_fn, bytes):  # Value already encoded
     bytes_value = write_fn

@@ -21,10 +21,9 @@ from tensorflow_datasets.recommendation.hillstrom import hillstrom
 
 class HillstromTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for Kevin Hillstrom Dataset."""
+
   DATASET_CLASS = hillstrom.Hillstrom
-  SPLITS = {
-      'train': 4  # Number of fake train example
-  }
+  SPLITS = {'train': 4}  # Number of fake train example
 
   # If you are calling `download/download_and_extract` with a dict, like:
   #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})

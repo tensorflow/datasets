@@ -60,11 +60,14 @@ def _compute_split_boundaries(split_probs, n_items):
     [('train', 0, 60), ('dev', 60, 80), ('test', 80, 100)].
   """
   if len(split_probs) > n_items:
-    raise ValueError('Not enough items for the splits. There are {splits} '
-                     'splits while there are only {items} items'.format(
-                         splits=len(split_probs), items=n_items))
+    raise ValueError(
+        'Not enough items for the splits. There are {splits} '
+        'splits while there are only {items} items'.format(
+            splits=len(split_probs), items=n_items
+        )
+    )
   total_probs = sum(p for name, p in split_probs)
-  if abs(1 - total_probs) > 1E-8:
+  if abs(1 - total_probs) > 1e-8:
     raise ValueError('Probs should sum up to 1. probs={}'.format(split_probs))
   split_boundaries = []
   sum_p = 0.0
@@ -74,8 +77,11 @@ def _compute_split_boundaries(split_probs, n_items):
     split_boundaries.append((name, int(prev * n_items), int(sum_p * n_items)))
 
   # Guard against rounding errors.
-  split_boundaries[-1] = (split_boundaries[-1][0], split_boundaries[-1][1],
-                          n_items)
+  split_boundaries[-1] = (
+      split_boundaries[-1][0],
+      split_boundaries[-1][1],
+      n_items,
+  )
 
   return split_boundaries
 
@@ -118,7 +124,8 @@ class Dementiabank(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
 
-  MANUAL_DOWNLOAD_INSTRUCTIONS = textwrap.dedent("""
+  MANUAL_DOWNLOAD_INSTRUCTIONS = textwrap.dedent(
+      """
   manual dir should contain 2 folders with mp3 files:
 
   * {}
@@ -126,7 +133,10 @@ class Dementiabank(tfds.core.GeneratorBasedBuilder):
 
   Which were downloaded from https://media.talkbank.org/dementia/English/Pitt/
   This dataset requires registration for downloading.
-  """.format(_CONTROL_FOLDER, _DEMENTIA_FOLDER))
+  """.format(
+          _CONTROL_FOLDER, _DEMENTIA_FOLDER
+      )
+  )
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -159,8 +169,9 @@ class Dementiabank(tfds.core.GeneratorBasedBuilder):
       example = {'audio': fname, 'label': 'dementia', 'speaker_id': speaker_id}
       examples_and_speaker_ids.append((example, speaker_id))
     split_probs = [('train', 0.7), ('validation', 0.1), ('test', 0.2)]
-    splits = _get_inter_splits_by_group(examples_and_speaker_ids, split_probs,
-                                        0)
+    splits = _get_inter_splits_by_group(
+        examples_and_speaker_ids, split_probs, 0
+    )
 
     return [
         tfds.core.SplitGenerator(

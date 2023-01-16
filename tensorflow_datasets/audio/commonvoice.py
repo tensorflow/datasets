@@ -105,8 +105,10 @@ _BEAM_NAMESPACE = "TFDS_COMMON_VOICE"
 
 
 def _download_url(language: str) -> str:
-  return ("https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4."
-          f"s3.amazonaws.com/cv-corpus-6.1-2020-12-11/{language}.tar.gz")
+  return (
+      "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4."
+      f"s3.amazonaws.com/cv-corpus-6.1-2020-12-11/{language}.tar.gz"
+  )
 
 
 class CommonVoiceConfig(tfds.core.BuilderConfig):
@@ -120,8 +122,9 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
      **kwargs: keywords arguments forwarded to super
     """
     if language not in _LANGUAGES:
-      raise ValueError((f"language {language} must be one of "
-                        f"{', '.join(_LANGUAGES)}"))
+      raise ValueError(
+          f"language {language} must be one of {', '.join(_LANGUAGES)}"
+      )
     self.language = language
 
     super().__init__(
@@ -163,7 +166,8 @@ def _parse_examples(examples_file_content: str) -> Sequence[_IndexedExample]:
           "segment": row["segment"],
       }
       examples.append(
-          _IndexedExample(index=i, example=example, clip_filename=path))
+          _IndexedExample(index=i, example=example, clip_filename=path)
+      )
     except KeyError as e:
       raise ValueError(f"Could not parse row: {row}") from e
   return examples
@@ -171,44 +175,49 @@ def _parse_examples(examples_file_content: str) -> Sequence[_IndexedExample]:
 
 class CommonVoice(tfds.core.GeneratorBasedBuilder):
   """Mozilla Common Voice Dataset."""
+
   BUILDER_CONFIGS = tuple(CommonVoiceConfig(language=l) for l in _LANGUAGES)
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=("Mozilla Common Voice Dataset"),
+        description="Mozilla Common Voice Dataset",
         features=tfds.features.FeaturesDict({
-            "client_id":
-                tfds.features.Text(doc="Hashed UUID of a given user"),
-            "upvotes":
-                tfds.features.Scalar(
-                    np.int32,
-                    doc="Number of people who said audio matches the text"),
-            "downvotes":
-                tfds.features.Scalar(
-                    np.int32,
-                    doc="Number of people who said audio does not match text"),
-            "age":
-                tfds.features.Text(
-                    doc=("Age bucket of the speaker (e.g. teens, or fourties), "
-                         f"see {_DEMOGRAPHICS_URL}")),
-            "gender":
-                tfds.features.ClassLabel(
-                    names=_GENDER_CLASSES, doc="Gender of the speaker"),
-            "accent":
-                tfds.features.Text(
-                    doc=f"Accent of the speaker, see {_DEMOGRAPHICS_URL}"),
-            "segment":
-                tfds.features.Text(
-                    doc=("If sentence belongs to a custom dataset segment, "
-                         "it will be listed here")),
-            "sentence":
-                tfds.features.Text(doc="Supposed transcription of the audio"),
-            "voice":
-                tfds.features.Audio(),
+            "client_id": tfds.features.Text(doc="Hashed UUID of a given user"),
+            "upvotes": tfds.features.Scalar(
+                np.int32, doc="Number of people who said audio matches the text"
+            ),
+            "downvotes": tfds.features.Scalar(
+                np.int32,
+                doc="Number of people who said audio does not match text",
+            ),
+            "age": tfds.features.Text(
+                doc=(
+                    "Age bucket of the speaker (e.g. teens, or fourties), "
+                    f"see {_DEMOGRAPHICS_URL}"
+                )
+            ),
+            "gender": tfds.features.ClassLabel(
+                names=_GENDER_CLASSES, doc="Gender of the speaker"
+            ),
+            "accent": tfds.features.Text(
+                doc=f"Accent of the speaker, see {_DEMOGRAPHICS_URL}"
+            ),
+            "segment": tfds.features.Text(
+                doc=(
+                    "If sentence belongs to a custom dataset segment, "
+                    "it will be listed here"
+                )
+            ),
+            "sentence": tfds.features.Text(
+                doc="Supposed transcription of the audio"
+            ),
+            "voice": tfds.features.Audio(),
         }),
         homepage="https://voice.mozilla.org/en/datasets",
-        license="https://github.com/common-voice/common-voice/blob/main/LICENSE",
+        license=(
+            "https://github.com/common-voice/common-voice/blob/main/LICENSE"
+        ),
     )
 
   def _split_generators(self, dl_manager, pipeline):
@@ -223,10 +232,12 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
       if not path_within_archive.endswith(".tsv"):
         continue
       examples_per_file[path_within_archive] = _parse_examples(
-          file_obj.read().decode("utf-8"))
+          file_obj.read().decode("utf-8")
+      )
 
     clips_pipeline = self._clips_pipeline(
-        pipeline=pipeline, name="clips", dl_manager=dl_manager, dl_path=dl_path)
+        pipeline=pipeline, name="clips", dl_manager=dl_manager, dl_path=dl_path
+    )
 
     generators = {}
     generate_examples = beam.ptransform_fn(self._generate_examples)
@@ -236,7 +247,8 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
       if not examples:
         continue
       generators[split] = pipeline | f"{split}-{language}" >> generate_examples(
-          clips_pipeline=clips_pipeline, examples=examples)
+          clips_pipeline=clips_pipeline, examples=examples
+      )
     return generators
 
   def _clips_pipeline(self, pipeline, name, dl_manager, dl_path):
@@ -259,9 +271,11 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
         counter("clips_pipeline_clips").inc()
         yield clip_filename, io.BytesIO(fobj.read())
 
-    return (pipeline
-            | f"{name} - Collection of clips" >> beam.Create([dl_path])
-            | f"{name} - Read clips" >> beam.FlatMap(_read_clips))
+    return (
+        pipeline
+        | f"{name} - Collection of clips" >> beam.Create([dl_path])
+        | f"{name} - Read clips" >> beam.FlatMap(_read_clips)
+    )
 
   def _generate_examples(
       self,
@@ -305,15 +319,13 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
       example["voice"] = clip
       yield indexed_example.index, example
 
-    examples_pipeline = (
-        pipeline
-        | "Collection of examples" >> beam.Create([[ex.clip_filename, ex]
-                                                   for ex in examples]))
+    examples_pipeline = pipeline | "Collection of examples" >> beam.Create(
+        [[ex.clip_filename, ex] for ex in examples]
+    )
 
-    return ({
-        "examples": examples_pipeline,
-        "clips": clips_pipeline
-    }
-            | "Group by clip path" >> beam.CoGroupByKey()
-            | "Reshuffle" >> beam.Reshuffle()
-            | "Process and yield examples" >> beam.FlatMap(_process_join))
+    return (
+        {"examples": examples_pipeline, "clips": clips_pipeline}
+        | "Group by clip path" >> beam.CoGroupByKey()
+        | "Reshuffle" >> beam.Reshuffle()
+        | "Process and yield examples" >> beam.FlatMap(_process_join)
+    )

@@ -21,6 +21,7 @@ from tensorflow_datasets.structured.cherry_blossoms import cherry_blossoms
 
 class CherryBlossomsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for cherry_blossoms dataset."""
+
   DATASET_CLASS = cherry_blossoms.CherryBlossoms
   SPLITS = {'train': 4}
 

@@ -34,7 +34,8 @@ def test_raise_with_context():
 
 def test_raise_with_multiple_contexts():
   with pytest.raises(
-      ValueError, match='\n'.join(['Adding context', 'Adding context 2'])):
+      ValueError, match='\n'.join(['Adding context', 'Adding context 2'])
+  ):
     with error_utils.reraise_with_context(ValueError):
       error_utils.add_context('Adding context')
       error_utils.add_context('Adding context 2')
@@ -43,7 +44,8 @@ def test_raise_with_multiple_contexts():
 
 def test_do_not_raise_error_if_nested_reraise_with_context():
   with pytest.raises(
-      ValueError, match='\n'.join(['Adding context', 'Adding context 2'])):
+      ValueError, match='\n'.join(['Adding context', 'Adding context 2'])
+  ):
     with error_utils.reraise_with_context(ValueError):
       error_utils.add_context('Adding context')
       with error_utils.reraise_with_context(ValueError):
@@ -54,6 +56,8 @@ def test_do_not_raise_error_if_nested_reraise_with_context():
 def test_add_context_outside_contextmanager():
   with pytest.raises(
       AttributeError,
-      match='add_context called outside of reraise_with_context contextmanager.'
+      match=(
+          'add_context called outside of reraise_with_context contextmanager.'
+      ),
   ):
     error_utils.add_context('Adding context')

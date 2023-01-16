@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class SchemaGuidedDialogueTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for schema_guided_dialogue dataset."""
+
   DATASET_CLASS = schema_guided_dialogue_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example

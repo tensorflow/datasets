@@ -49,8 +49,23 @@ labels).
 
 _DATA_URL = 'https://cims.nyu.edu/~sbowman/xnli/XNLI-1.0.zip'
 
-_LANGUAGES = ('ar', 'bg', 'de', 'el', 'en', 'es', 'fr', 'hi', 'ru', 'sw', 'th',
-              'tr', 'ur', 'vi', 'zh')
+_LANGUAGES = (
+    'ar',
+    'bg',
+    'de',
+    'el',
+    'en',
+    'es',
+    'fr',
+    'hi',
+    'ru',
+    'sw',
+    'th',
+    'tr',
+    'ur',
+    'vi',
+    'zh',
+)
 
 
 class Xnli(tfds.core.GeneratorBasedBuilder):
@@ -63,14 +78,15 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'premise':
-                tfds.features.Translation(languages=_LANGUAGES,),
-            'hypothesis':
-                tfds.features.TranslationVariableLanguages(
-                    languages=_LANGUAGES,),
-            'label':
-                tfds.features.ClassLabel(
-                    names=['entailment', 'neutral', 'contradiction']),
+            'premise': tfds.features.Translation(
+                languages=_LANGUAGES,
+            ),
+            'hypothesis': tfds.features.TranslationVariableLanguages(
+                languages=_LANGUAGES,
+            ),
+            'label': tfds.features.ClassLabel(
+                names=['entailment', 'neutral', 'contradiction']
+            ),
         }),
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
@@ -85,10 +101,12 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.test.tsv')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.test.tsv')},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.dev.tsv')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.dev.tsv')},
+        ),
     ]
 
   def _generate_examples(self, filepath):

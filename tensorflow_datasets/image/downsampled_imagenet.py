@@ -23,4 +23,5 @@ tfds.builder_cls('downsampled_imagenet')
 from tensorflow_datasets.core import lazy_builder_import
 
 DownsampledImagenet = lazy_builder_import.LazyBuilderImport(
-    'downsampled_imagenet')
+    'downsampled_imagenet'
+)

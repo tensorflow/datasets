@@ -43,8 +43,8 @@ class TopLevelFeature(feature_lib.FeatureConnector):
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
         customized feature keys need to be present. See [the
-          guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
-            for more info.
+        guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
+        for more info.
 
     Returns:
       example: Nested `dict` containing the decoded nested examples.
@@ -62,13 +62,15 @@ class TopLevelFeature(feature_lib.FeatureConnector):
             example=example,
             serialized_info=serialized_info,
             decoder=decoder,
-        ) for (
+        )
+        for (
             feature,
             example,
             serialized_info,
             decoder,
-        ) in zip(flat_features, flat_example, flat_serialized_info,
-                 flat_decoders)
+        ) in zip(
+            flat_features, flat_example, flat_serialized_info, flat_decoders
+        )
     ]
 
     # Step 3: Restore nesting [] => {}
@@ -123,12 +125,14 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   @utils.memoized_property
   def _example_parser(self):
     from tensorflow_datasets.core import example_parser  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+
     example_specs = self.get_serialized_info()
     return example_parser.ExampleParser(example_specs)
 
   @utils.memoized_property
   def _example_serializer(self):
     from tensorflow_datasets.core import example_serializer  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+
     example_specs = self.get_serialized_info()
     return example_serializer.ExampleSerializer(example_specs)
 
@@ -180,5 +184,6 @@ def _get_sequence_rank(serialized_info):
     raise NotImplementedError(
         'Decoding do not support mixing sequence and context features within a '
         'single FeatureConnector. Received inputs of different sequence_rank: '
-        '{}'.format(sequence_ranks))
+        '{}'.format(sequence_ranks)
+    )
   return next(iter(sequence_ranks))

@@ -29,18 +29,14 @@ class OpenImagesChallenge2019DetectionTest(testing.DatasetBuilderTestCase):
       "train_images": ["train_%02d.zip" % i for i in range(9)],
       "test_images": ["test.zip"],
       "validation_images": ["validation.zip"],
-      "train_image_label":
-          "challenge-2019-train-detection-human-imagelabels.csv",
-      "train_boxes":
-          "challenge-2019-train-detection-bbox.csv",
-      "validation_image_label":
-          "validation-detection-human-imagelabels.csv",
-      "validation_boxes":
-          "validation-detection-bbox.csv",
-      "classes":
-          "challenge-2019-classes-description-500.csv",
-      "hierarchy":
-          "challenge-2019-label500-hierarchy.json",
+      "train_image_label": (
+          "challenge-2019-train-detection-human-imagelabels.csv"
+      ),
+      "train_boxes": "challenge-2019-train-detection-bbox.csv",
+      "validation_image_label": "validation-detection-human-imagelabels.csv",
+      "validation_boxes": "validation-detection-bbox.csv",
+      "classes": "challenge-2019-classes-description-500.csv",
+      "hierarchy": "challenge-2019-label500-hierarchy.json",
   }
 
   SPLITS = {  # Expected number of examples on each split.

@@ -23,9 +23,9 @@ import tensorflow_datasets.public_api as tfds
 
 _URL = "https://data.lhncbc.nlm.nih.gov/public/Malaria/cell_images.zip"
 
-_DESCRIPTION = ("""The Malaria dataset contains a total of 27,558 cell images
+_DESCRIPTION = """The Malaria dataset contains a total of 27,558 cell images
 with equal instances of parasitized and uninfected cells from the thin blood
-smear slide images of segmented cells.""")
+smear slide images of segmented cells."""
 
 _NAMES = ["parasitized", "uninfected"]
 

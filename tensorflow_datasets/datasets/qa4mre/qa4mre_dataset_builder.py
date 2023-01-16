@@ -28,34 +28,33 @@ _BASE_URL = 'http://nlp.uned.es/clef-qa/repository/js/scripts/downloadFile.php?f
 
 PATHS = {
     '2011': {
-        '_TRACKS': ('main'),
-        '_PATH_TMPL_MAIN_GS':
-            '2011/Training_Data/Goldstandard/QA4MRE-2011-{}_GS.xml',
+        '_TRACKS': 'main',
+        '_PATH_TMPL_MAIN_GS': (
+            '2011/Training_Data/Goldstandard/QA4MRE-2011-{}_GS.xml'
+        ),
         '_LANGUAGES_MAIN': ('DE', 'EN', 'ES', 'IT', 'RO'),
     },
     '2012': {
         '_TRACKS': ('main', 'alzheimers'),
-        '_PATH_TMPL_MAIN_GS':
-            '2012/Main_Task/Training_Data/Goldstandard/Used_in_Evaluation/QA4MRE-2012-{}_GS.xml',
+        '_PATH_TMPL_MAIN_GS': '2012/Main_Task/Training_Data/Goldstandard/Used_in_Evaluation/QA4MRE-2012-{}_GS.xml',
         '_LANGUAGES_MAIN': ('AR', 'BG', 'DE', 'EN', 'ES', 'IT', 'RO'),
-        '_PATH_ALZHEIMER':
-            '2012/Pilot_Tasks/Biomedical_About_Alzheimer/Training_Data/Goldstandard/QA4MRE-2012_BIOMEDICAL_GS.xml',
+        '_PATH_ALZHEIMER': '2012/Pilot_Tasks/Biomedical_About_Alzheimer/Training_Data/Goldstandard/QA4MRE-2012_BIOMEDICAL_GS.xml',
     },
     '2013': {
         '_TRACKS': ('main', 'alzheimers', 'entrance_exam'),
-        '_PATH_TMPL_MAIN_GS':
-            '2013/Main_Task/Training_Data/Goldstandard/QA4MRE-2013-{}_GS.xml',
+        '_PATH_TMPL_MAIN_GS': (
+            '2013/Main_Task/Training_Data/Goldstandard/QA4MRE-2013-{}_GS.xml'
+        ),
         '_LANGUAGES_MAIN': ('AR', 'BG', 'EN', 'ES', 'RO'),
-        '_PATH_ALZHEIMER':
-            '2013/Biomedical_About_Alzheimer/Training_Data/Goldstandard/QA4MRE-2013_BIO_GS-RUN.xml',
-        '_PATH_ENTRANCE_EXAM':
-            '2013/Entrance_Exams/Training_Data/Goldstandard/qa4mre-exam-test-withanswer.xml',
-    }
+        '_PATH_ALZHEIMER': '2013/Biomedical_About_Alzheimer/Training_Data/Goldstandard/QA4MRE-2013_BIO_GS-RUN.xml',
+        '_PATH_ENTRANCE_EXAM': '2013/Entrance_Exams/Training_Data/Goldstandard/qa4mre-exam-test-withanswer.xml',
+    },
 }
 
 
-def _get_question(topic_id, topic_name, test_id, document_id, document_str,
-                  question):
+def _get_question(
+    topic_id, topic_name, test_id, document_id, document_str, question
+):
   """Gets instance ID and features for every question.
 
   Args:
@@ -117,18 +116,24 @@ class Qa4mreConfig(tfds.core.BuilderConfig):
     if track.lower() not in PATHS[year]['_TRACKS']:
       raise ValueError(
           'Incorrect track. Track should be one of the following: ',
-          PATHS[year]['_TRACKS'])
+          PATHS[year]['_TRACKS'],
+      )
 
     if track.lower() != 'main' and language.upper() != 'EN':
-      logging.warning('Only English documents available for pilot '
-                      'tracks. Setting English by default.')
+      logging.warning(
+          'Only English documents available for pilot '
+          'tracks. Setting English by default.'
+      )
       language = 'EN'
 
-    if track.lower() == 'main' and language.upper(
-    ) not in PATHS[year]['_LANGUAGES_MAIN']:
+    if (
+        track.lower() == 'main'
+        and language.upper() not in PATHS[year]['_LANGUAGES_MAIN']
+    ):
       raise ValueError(
           'Incorrect language for the main track. Correct options: ',
-          PATHS[year]['_LANGUAGES_MAIN'])
+          PATHS[year]['_LANGUAGES_MAIN'],
+      )
 
     self.year = year
     self.track = track.lower()
@@ -136,90 +141,101 @@ class Qa4mreConfig(tfds.core.BuilderConfig):
 
     name = self.year + '.' + self.track + '.' + self.lang
 
-    description = ('This configuration includes the {} track for {} language '
-                   'in {} year.').format(self.track, self.lang, self.year)
+    description = (
+        'This configuration includes the {} track for {} language in {} year.'
+    ).format(self.track, self.lang, self.year)
 
     super(Qa4mreConfig, self).__init__(
         name=name,
         description=description,
         version=tfds.core.Version('0.1.0'),
-        **kwargs)
+        **kwargs,
+    )
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """QA4MRE dataset from CLEF shared tasks 2011, 2012, 2013."""
 
   BUILDER_CONFIGS = [
-      Qa4mreConfig(year='2011', track='main',
-                   language='DE'),  # 2011 Main track German (2011.main.DE)
-      Qa4mreConfig(year='2011', track='main',
-                   language='EN'),  # 2011 Main track English (2011.main.EN)
-      Qa4mreConfig(year='2011', track='main',
-                   language='ES'),  # 2011 Main track Spanish (2011.main.ES)
-      Qa4mreConfig(year='2011', track='main',
-                   language='IT'),  # 2011 Main track Italian (2011.main.IT)
-      Qa4mreConfig(year='2011', track='main',
-                   language='RO'),  # 2011 Main track Romanian (2011.main.RO)
-      Qa4mreConfig(year='2012', track='main',
-                   language='AR'),  # 2012 Main track Arabic (2012.main.AR)
-      Qa4mreConfig(year='2012', track='main',
-                   language='BG'),  # 2012 Main track Bulgarian (2012.main.BG)
-      Qa4mreConfig(year='2012', track='main',
-                   language='DE'),  # 2012 Main track German (2012.main.DE)
-      Qa4mreConfig(year='2012', track='main',
-                   language='EN'),  # 2012 Main track English (2012.main.EN)
-      Qa4mreConfig(year='2012', track='main',
-                   language='ES'),  # 2012 Main track Spanish (2012.main.ES)
-      Qa4mreConfig(year='2012', track='main',
-                   language='IT'),  # 2012 Main track Italian (2012.main.IT)
-      Qa4mreConfig(year='2012', track='main',
-                   language='RO'),  # 2012 Main track Romanian (2012.main.RO)
-      Qa4mreConfig(year='2012', track='alzheimers',
-                   language='EN'),  # (2012.alzheimers.EN)
-      Qa4mreConfig(year='2013', track='main',
-                   language='AR'),  # 2013 Main track Arabic (2013.main.AR)
-      Qa4mreConfig(year='2013', track='main',
-                   language='BG'),  # 2013 Main track Bulgarian (2013.main.BG)
-      Qa4mreConfig(year='2013', track='main',
-                   language='EN'),  # 2013 Main track English (2013.main.EN)
-      Qa4mreConfig(year='2013', track='main',
-                   language='ES'),  # 2013 Main track Spanish (2013.main.ES)
-      Qa4mreConfig(year='2013', track='main',
-                   language='RO'),  # 2013 Main track Romanian (2013.main.RO)
-      Qa4mreConfig(year='2013', track='alzheimers',
-                   language='EN'),  # (2013.alzheimers.EN)
-      Qa4mreConfig(year='2013', track='entrance_exam',
-                   language='EN'),  # (2013.entrance_exam.EN)
+      Qa4mreConfig(
+          year='2011', track='main', language='DE'
+      ),  # 2011 Main track German (2011.main.DE)
+      Qa4mreConfig(
+          year='2011', track='main', language='EN'
+      ),  # 2011 Main track English (2011.main.EN)
+      Qa4mreConfig(
+          year='2011', track='main', language='ES'
+      ),  # 2011 Main track Spanish (2011.main.ES)
+      Qa4mreConfig(
+          year='2011', track='main', language='IT'
+      ),  # 2011 Main track Italian (2011.main.IT)
+      Qa4mreConfig(
+          year='2011', track='main', language='RO'
+      ),  # 2011 Main track Romanian (2011.main.RO)
+      Qa4mreConfig(
+          year='2012', track='main', language='AR'
+      ),  # 2012 Main track Arabic (2012.main.AR)
+      Qa4mreConfig(
+          year='2012', track='main', language='BG'
+      ),  # 2012 Main track Bulgarian (2012.main.BG)
+      Qa4mreConfig(
+          year='2012', track='main', language='DE'
+      ),  # 2012 Main track German (2012.main.DE)
+      Qa4mreConfig(
+          year='2012', track='main', language='EN'
+      ),  # 2012 Main track English (2012.main.EN)
+      Qa4mreConfig(
+          year='2012', track='main', language='ES'
+      ),  # 2012 Main track Spanish (2012.main.ES)
+      Qa4mreConfig(
+          year='2012', track='main', language='IT'
+      ),  # 2012 Main track Italian (2012.main.IT)
+      Qa4mreConfig(
+          year='2012', track='main', language='RO'
+      ),  # 2012 Main track Romanian (2012.main.RO)
+      Qa4mreConfig(
+          year='2012', track='alzheimers', language='EN'
+      ),  # (2012.alzheimers.EN)
+      Qa4mreConfig(
+          year='2013', track='main', language='AR'
+      ),  # 2013 Main track Arabic (2013.main.AR)
+      Qa4mreConfig(
+          year='2013', track='main', language='BG'
+      ),  # 2013 Main track Bulgarian (2013.main.BG)
+      Qa4mreConfig(
+          year='2013', track='main', language='EN'
+      ),  # 2013 Main track English (2013.main.EN)
+      Qa4mreConfig(
+          year='2013', track='main', language='ES'
+      ),  # 2013 Main track Spanish (2013.main.ES)
+      Qa4mreConfig(
+          year='2013', track='main', language='RO'
+      ),  # 2013 Main track Romanian (2013.main.RO)
+      Qa4mreConfig(
+          year='2013', track='alzheimers', language='EN'
+      ),  # (2013.alzheimers.EN)
+      Qa4mreConfig(
+          year='2013', track='entrance_exam', language='EN'
+      ),  # (2013.entrance_exam.EN)
   ]
 
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'topic_id':
-                tfds.features.Text(),
-            'topic_name':
-                tfds.features.Text(),
-            'test_id':
-                tfds.features.Text(),
-            'document_id':
-                tfds.features.Text(),
-            'document_str':
-                tfds.features.Text(),
-            'question_id':
-                tfds.features.Text(),
-            'question_str':
-                tfds.features.Text(),
-            'answer_options':
-                tfds.features.Sequence({
-                    'answer_id': tfds.features.Text(),
-                    'answer_str': tfds.features.Text()
-                }),
-            'correct_answer_id':
-                tfds.features.Text(),
-            'correct_answer_str':
-                tfds.features.Text(),
+            'topic_id': tfds.features.Text(),
+            'topic_name': tfds.features.Text(),
+            'test_id': tfds.features.Text(),
+            'document_id': tfds.features.Text(),
+            'document_str': tfds.features.Text(),
+            'question_id': tfds.features.Text(),
+            'question_str': tfds.features.Text(),
+            'answer_options': tfds.features.Sequence({
+                'answer_id': tfds.features.Text(),
+                'answer_str': tfds.features.Text(),
+            }),
+            'correct_answer_id': tfds.features.Text(),
+            'correct_answer_str': tfds.features.Text(),
         }),
-
         # No default supervised keys because both passage and question are used
         # to determine the correct answer.
         supervised_keys=None,
@@ -233,15 +249,18 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     if cfg.track == 'main':
       download_urls['{}.main.{}'.format(cfg.year, cfg.lang)] = os.path.join(
-          _BASE_URL, PATHS[cfg.year]['_PATH_TMPL_MAIN_GS'].format(cfg.lang))  # pytype: disable=attribute-error
+          _BASE_URL, PATHS[cfg.year]['_PATH_TMPL_MAIN_GS'].format(cfg.lang)
+      )  # pytype: disable=attribute-error
 
     if cfg.year in ['2012', '2013'] and cfg.track == 'alzheimers':
       download_urls['{}.alzheimers.EN'.format(cfg.year)] = os.path.join(
-          _BASE_URL, PATHS[cfg.year]['_PATH_ALZHEIMER'])
+          _BASE_URL, PATHS[cfg.year]['_PATH_ALZHEIMER']
+      )
 
     if cfg.year == '2013' and cfg.track == 'entrance_exam':
       download_urls['2013.entrance_exam.EN'] = os.path.join(
-          _BASE_URL, PATHS[cfg.year]['_PATH_ENTRANCE_EXAM'])
+          _BASE_URL, PATHS[cfg.year]['_PATH_ENTRANCE_EXAM']
+      )
 
     downloaded_files = dl_manager.download_and_extract(download_urls)
 
@@ -249,10 +268,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'filepath':
-                    downloaded_files['{}.{}.{}'.format(cfg.year, cfg.track,
-                                                       cfg.lang)]
-            })
+                'filepath': downloaded_files[
+                    '{}.{}.{}'.format(cfg.year, cfg.track, cfg.lang)
+                ]
+            },
+        )
     ]
 
   def _generate_examples(self, filepath):
@@ -269,5 +289,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             document_id = document.attrib['d_id']
             document_str = document.text
           for question in test.iter('q'):
-            yield _get_question(topic_id, topic_name, test_id, document_id,
-                                document_str, question)
+            yield _get_question(
+                topic_id,
+                topic_name,
+                test_id,
+                document_id,
+                document_str,
+                question,
+            )

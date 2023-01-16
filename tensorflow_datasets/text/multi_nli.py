@@ -60,13 +60,11 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "premise":
-                tfds.features.Text(),
-            "hypothesis":
-                tfds.features.Text(),
-            "label":
-                tfds.features.ClassLabel(
-                    names=["entailment", "neutral", "contradiction"]),
+            "premise": tfds.features.Text(),
+            "hypothesis": tfds.features.Text(),
+            "label": tfds.features.ClassLabel(
+                names=["entailment", "neutral", "contradiction"]
+            ),
         }),
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
@@ -76,25 +74,30 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
     downloaded_dir = dl_manager.download_and_extract(
-        "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip")
+        "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip"
+    )
     mnli_path = os.path.join(downloaded_dir, "multinli_1.0")
     train_path = os.path.join(mnli_path, "multinli_1.0_train.txt")
-    matched_validation_path = os.path.join(mnli_path,
-                                           "multinli_1.0_dev_matched.txt")
+    matched_validation_path = os.path.join(
+        mnli_path, "multinli_1.0_dev_matched.txt"
+    )
     mismatched_validation_path = os.path.join(
-        mnli_path, "multinli_1.0_dev_mismatched.txt")
+        mnli_path, "multinli_1.0_dev_mismatched.txt"
+    )
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_path}),
+            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_path}
+        ),
         tfds.core.SplitGenerator(
             name="validation_matched",
-            gen_kwargs={"filepath": matched_validation_path}),
+            gen_kwargs={"filepath": matched_validation_path},
+        ),
         tfds.core.SplitGenerator(
             name="validation_mismatched",
-            gen_kwargs={"filepath": mismatched_validation_path}),
+            gen_kwargs={"filepath": mismatched_validation_path},
+        ),
     ]
 
   def _generate_examples(self, filepath):
@@ -119,5 +122,5 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
       yield idx, {
           "premise": split_line[5],
           "hypothesis": split_line[6],
-          "label": split_line[0]
+          "label": split_line[0],
       }

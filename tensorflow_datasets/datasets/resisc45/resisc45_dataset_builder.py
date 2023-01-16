@@ -21,16 +21,51 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _LABELS = [
-    'airplane', 'airport', 'baseball_diamond', 'basketball_court', 'beach',
-    'bridge', 'chaparral', 'church', 'circular_farmland', 'cloud',
-    'commercial_area', 'dense_residential', 'desert', 'forest', 'freeway',
-    'golf_course', 'ground_track_field', 'harbor', 'industrial_area',
-    'intersection', 'island', 'lake', 'meadow', 'medium_residential',
-    'mobile_home_park', 'mountain', 'overpass', 'palace', 'parking_lot',
-    'railway', 'railway_station', 'rectangular_farmland', 'river', 'roundabout',
-    'runway', 'sea_ice', 'ship', 'snowberg', 'sparse_residential', 'stadium',
-    'storage_tank', 'tennis_court', 'terrace', 'thermal_power_station',
-    'wetland'
+    'airplane',
+    'airport',
+    'baseball_diamond',
+    'basketball_court',
+    'beach',
+    'bridge',
+    'chaparral',
+    'church',
+    'circular_farmland',
+    'cloud',
+    'commercial_area',
+    'dense_residential',
+    'desert',
+    'forest',
+    'freeway',
+    'golf_course',
+    'ground_track_field',
+    'harbor',
+    'industrial_area',
+    'intersection',
+    'island',
+    'lake',
+    'meadow',
+    'medium_residential',
+    'mobile_home_park',
+    'mountain',
+    'overpass',
+    'palace',
+    'parking_lot',
+    'railway',
+    'railway_station',
+    'rectangular_farmland',
+    'river',
+    'roundabout',
+    'runway',
+    'sea_ice',
+    'ship',
+    'snowberg',
+    'sparse_residential',
+    'stadium',
+    'storage_tank',
+    'tennis_court',
+    'terrace',
+    'thermal_power_station',
+    'wetland',
 ]
 
 _URL = 'http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html'
@@ -62,9 +97,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = os.path.join(dl_manager.manual_dir, 'NWPU-RESISC45')
     if not tf.io.gfile.exists(path):
-      raise AssertionError('You must download the dataset manually from {}, '
-                           'extract it, and place it in {}.'.format(
-                               _URL, dl_manager.manual_dir))
+      raise AssertionError(
+          'You must download the dataset manually from {}, '
+          'extract it, and place it in {}.'.format(_URL, dl_manager.manual_dir)
+      )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -79,6 +115,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         example = {
             'image': filename,
             'label': label,
-            'filename': os.path.basename(filename)
+            'filename': os.path.basename(filename),
         }
         yield f'{label}_{os.path.basename(filename)}', example

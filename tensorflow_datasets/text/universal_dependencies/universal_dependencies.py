@@ -23,4 +23,5 @@ tfds.builder_cls('universal_dependencies')
 from tensorflow_datasets.core import lazy_builder_import
 
 UniversalDependencies = lazy_builder_import.LazyBuilderImport(
-    'universal_dependencies')
+    'universal_dependencies'
+)

@@ -58,12 +58,16 @@ def _deduplicate(data):
           row for row in same_id_data if row["author"] != "[deleted]"
       ]
       if len(non_deleted_same_id_data) != 1:
-        raise ValueError("Found several message with id {} in the original"
-                         " data".format(non_deleted_same_id_data[0]["id"]))
+        raise ValueError(
+            "Found several message with id {} in the original data".format(
+                non_deleted_same_id_data[0]["id"]
+            )
+        )
       unique_data.append(non_deleted_same_id_data[0])
 
   return sorted(
-      unique_data, key=lambda row: (row["link_id"], row["created_utc"]))
+      unique_data, key=lambda row: (row["link_id"], row["created_utc"])
+  )
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -79,18 +83,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            _THREAD_KEY:
-                tfds.features.Sequence(
+        features=tfds.features.FeaturesDict(
+            {
+                _THREAD_KEY: tfds.features.Sequence(
                     tfds.features.FeaturesDict({
                         _MESSAGE_ID: tfds.features.Text(),
                         _MESSAGE_TEXT: tfds.features.Text(),
                         _MESSAGE_TIMESTAMP: tfds.features.Text(),
                         _MESSAGE_AUTHOR: tfds.features.Text(),
                         _MESSAGE_LINK_ID: tfds.features.Text(),
-                        _MESSAGE_PARENT_ID: tfds.features.Text()
-                    }))
-        }),
+                        _MESSAGE_PARENT_ID: tfds.features.Text(),
+                    })
+                )
+            }
+        ),
         homepage="https://github.com/henghuiz/MaskedHierarchicalTransformer",
     )
 
@@ -120,7 +126,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     data = list(_read_csv(path))
     data = _deduplicate(data)
     for link_id, one_topic_data in itertools.groupby(
-        data, lambda row: row["link_id"]):
+        data, lambda row: row["link_id"]
+    ):
       one_topic_data = list(one_topic_data)
       for row in one_topic_data:
         row["text"] = row.pop("body")

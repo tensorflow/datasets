@@ -53,28 +53,28 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "path":
-                    os.path.join(dl_path, "us_train_data_final_OFFICIAL.jsonl"),
-                "key":
-                    "bill_id"
+                "path": os.path.join(
+                    dl_path, "us_train_data_final_OFFICIAL.jsonl"
+                ),
+                "key": "bill_id",
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "path":
-                    os.path.join(dl_path, "us_test_data_final_OFFICIAL.jsonl"),
-                "key":
-                    "bill_id"
+                "path": os.path.join(
+                    dl_path, "us_test_data_final_OFFICIAL.jsonl"
+                ),
+                "key": "bill_id",
             },
         ),
         tfds.core.SplitGenerator(
             name="ca_test",
             gen_kwargs={
-                "path":
-                    os.path.join(dl_path, "ca_test_data_final_OFFICIAL.jsonl"),
-                "key":
-                    "external_id"
+                "path": os.path.join(
+                    dl_path, "ca_test_data_final_OFFICIAL.jsonl"
+                ),
+                "key": "external_id",
             },
         ),
     ]

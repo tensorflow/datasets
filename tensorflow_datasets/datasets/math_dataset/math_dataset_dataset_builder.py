@@ -37,7 +37,6 @@ _INTERPOLATE_CATEGORY = [
 _MODULES = [
     # extrapolate
     "measurement__conversion",
-
     # interpolate
     "algebra__linear_1d",
     "algebra__linear_1d_composed",
@@ -95,7 +94,6 @@ _MODULES = [
     "polynomials__simplify_power",
     "probability__swr_p_level_set",
     "probability__swr_p_sequence",
-
     # train-easy train-medium train-hard
     "algebra__linear_1d",
     "algebra__linear_1d_composed",
@@ -169,7 +167,8 @@ def _generate_builder_configs():
         tfds.core.BuilderConfig(
             name=module,
             version=tfds.core.Version("1.0.0"),
-        ))
+        )
+    )
 
   return configs
 
@@ -218,14 +217,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "directory": directory,
                 "config": config,
                 "categories": _TRAIN_CATEGORY,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "directory": directory,
                 "config": config,
                 "categories": _INTERPOLATE_CATEGORY,
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, directory, config, categories):
@@ -237,8 +238,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     answers = lines[1::2]
 
     assert len(answers) == len(
-        questions), "answers: %d do not match questions: %d" % (len(answers),
-                                                                len(questions))
+        questions
+    ), "answers: %d do not match questions: %d" % (len(answers), len(questions))
 
     for idx, (q, a) in enumerate(zip(questions, answers)):
       result = {_QUESTION: q, _ANSWER: a}

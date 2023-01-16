@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class LambadaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for lambada dataset."""
+
   DATASET_CLASS = lambada_dataset_builder.Builder
   SPLITS = {
       'train': 2,  # Number of fake train example

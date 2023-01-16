@@ -21,6 +21,7 @@ from tensorflow_datasets.text.conll2003 import conll2003
 
 class Conll2003Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for conll2003 dataset."""
+
   DATASET_CLASS = conll2003.Conll2003
   SPLITS = {
       'train': 3,

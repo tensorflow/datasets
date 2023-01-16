@@ -24,8 +24,13 @@ NUMBER_OF_EXAMPLES = 3
 
 
 def _output_dir():
-  return tfds.core.tfds_path(
-  ) / 'time_series' / 'smartwatch_gestures' / 'dummy_data' / 'gestures-dataset'
+  return (
+      tfds.core.tfds_path()
+      / 'time_series'
+      / 'smartwatch_gestures'
+      / 'dummy_data'
+      / 'gestures-dataset'
+  )
 
 
 def _dummy_file(participant: int, gesture: int, attempt: int) -> epath.Path:
@@ -74,8 +79,10 @@ def _generate_data():
     accel_z = _init_accel()
 
     with fpath.open('w') as f:
-      f.write(f'{t_milli:013} {t_nanos:014} {t_event:013}'
-              f' {accel_x:.6f} {accel_y:.6f} {accel_z:.6f}\n')
+      f.write(
+          f'{t_milli:013} {t_nanos:014} {t_event:013}'
+          f' {accel_x:.6f} {accel_y:.6f} {accel_z:.6f}\n'
+      )
 
       for _ in range(random.randint(11, 51)):
         t_milli = _inc_time(t_milli, 'milli')
@@ -85,8 +92,10 @@ def _generate_data():
         accel_y = _inc_accel(accel_y)
         accel_z = _inc_accel(accel_z)
 
-        f.write(f'{t_milli:013} {t_nanos:014} {t_event:013}'
-                f' {accel_x:.6f} {accel_y:.6f} {accel_z:.6f}\n')
+        f.write(
+            f'{t_milli:013} {t_nanos:014} {t_event:013}'
+            f' {accel_x:.6f} {accel_y:.6f} {accel_z:.6f}\n'
+        )
 
 
 def main(argv):

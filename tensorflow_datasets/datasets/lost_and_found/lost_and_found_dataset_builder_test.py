@@ -32,7 +32,7 @@ class LostAndFoundTest(testing.DatasetBuilderTestCase):
       'image_right': 'rightImg8bit.zip',
       'disparity_map': 'disparity.zip',
       'segmentation_label': 'gtCoarse.zip',
-      'instance_id': 'gtCoarse.zip'
+      'instance_id': 'gtCoarse.zip',
   }
 
 

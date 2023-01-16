@@ -21,10 +21,12 @@ import tensorflow_datasets.public_api as tfds
 
 _TRAINING_URL_TEMPLATE = (
     "https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/"
-    "smallnorb-5x46789x9x18x6x2x96x96-training-{type}.mat.gz")
+    "smallnorb-5x46789x9x18x6x2x96x96-training-{type}.mat.gz"
+)
 _TESTING_URL_TEMPLATE = (
     "https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/"
-    "smallnorb-5x01235x9x18x6x2x96x96-testing-{type}.mat.gz")
+    "smallnorb-5x01235x9x18x6x2x96x96-testing-{type}.mat.gz"
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -40,26 +42,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     features_dict = {
-        "image":
-            tfds.features.Image(shape=(96, 96, 1)),
-        "image2":
-            tfds.features.Image(shape=(96, 96, 1)),
-        "label_category":
-            tfds.features.ClassLabel(names=[
+        "image": tfds.features.Image(shape=(96, 96, 1)),
+        "image2": tfds.features.Image(shape=(96, 96, 1)),
+        "label_category": tfds.features.ClassLabel(
+            names=[
                 "four-legged animals",
                 "human figures",
                 "airplanes",
                 "trucks",
                 "cars",
-            ]),
-        "instance":
-            tfds.features.ClassLabel(num_classes=10),
-        "label_elevation":
-            tfds.features.ClassLabel(num_classes=9),
-        "label_azimuth":
-            tfds.features.ClassLabel(num_classes=18),
-        "label_lighting":
-            tfds.features.ClassLabel(num_classes=6),
+            ]
+        ),
+        "instance": tfds.features.ClassLabel(num_classes=10),
+        "label_elevation": tfds.features.ClassLabel(num_classes=9),
+        "label_azimuth": tfds.features.ClassLabel(num_classes=18),
+        "label_lighting": tfds.features.ClassLabel(num_classes=6),
     }
     if self.version > "2.0.0":
       features_dict["id"] = tfds.features.Text()
@@ -89,14 +86,18 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 split_prefix="train_",
                 dat_path=files["training_dat"],
                 cat_path=files["training_cat"],
-                info_path=files["training_info"])),
+                info_path=files["training_info"],
+            ),
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs=dict(
                 split_prefix="test_",
                 dat_path=files["testing_dat"],
                 cat_path=files["testing_cat"],
-                info_path=files["testing_info"])),
+                info_path=files["testing_info"],
+            ),
+        ),
     ]
 
   def _generate_examples(self, split_prefix, dat_path, cat_path, info_path):
@@ -113,8 +114,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """
     dat_arr, cat_arr, info_arr = _load_chunk(dat_path, cat_path, info_path)
 
-    for i, (image, category,
-            info_vec) in enumerate(zip(dat_arr, cat_arr, info_arr)):
+    for i, (image, category, info_vec) in enumerate(
+        zip(dat_arr, cat_arr, info_arr)
+    ):
       record = {
           "image": image[0],
           "image2": image[1],
@@ -196,5 +198,6 @@ def read_binary_matrix(filename):
 
     # The remaining bytes are the array.
     data = np.frombuffer(
-        s, dtype=data_dtype, offset=8 + bytes_used_for_shape_info)
+        s, dtype=data_dtype, offset=8 + bytes_used_for_shape_info
+    )
   return data.reshape(tuple(dims))
