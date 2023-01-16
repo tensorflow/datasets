@@ -481,6 +481,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         data_dir=epath.Path(self._data_dir_root),
     )
 
+  @tfds_logging.download_and_prepare()
   def download_and_prepare(
       self,
       *,

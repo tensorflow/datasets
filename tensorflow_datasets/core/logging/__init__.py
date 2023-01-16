@@ -14,10 +14,12 @@
 # limitations under the License.
 
 """TFDS logging module."""
+import abc
 import atexit
+import collections
 import functools
 import threading
-from typing import Callable, Dict, List, Optional, Tuple, TypeVar
+from typing import Any, Callable, Dict, List, Optional, Tuple, TypeVar
 
 from absl import flags
 from tensorflow_datasets.core.logging import base_logger
@@ -28,13 +30,15 @@ import wrapt
 
 
 _T = TypeVar("_T")
+_Decorator = Callable[[_T], _T]
+_LoggerMethod = Callable[..., None]
 
 _registered_loggers: Optional[List[base_logger.Logger]] = None
 
 _import_operations: List[Tuple[call_metadata.CallMetadata, int, int]] = []
 _import_operations_lock = threading.Lock()
 
-_thread_ids_running_builder_init = set()
+_thread_id_to_builder_init_count = collections.Counter()
 
 
 def _check_init_registered_loggers() -> None:
@@ -73,6 +77,165 @@ def _get_registered_loggers() -> List[base_logger.Logger]:
   _check_init_registered_loggers()
   _log_import_operation()
   return _registered_loggers
+
+
+class _FunctionDecorator(abc.ABC):
+  """Base class for a TFDS function decorator.
+
+  When a decorated function is called, the method with the same name as this
+  class is called on the registered loggers.
+  """
+
+  def _start_call(self) -> call_metadata.CallMetadata:
+    """Initializes call metadata."""
+    return call_metadata.CallMetadata()
+
+  def _fill_logger_method_kwargs(
+      self,
+      logger_method: _LoggerMethod,
+      metadata: call_metadata.CallMetadata,
+      instance: Any,
+      args: Any,
+      kwargs: Any,
+  ) -> _LoggerMethod:
+    """Fills kwargs for the corresponding logger method.
+
+    Args:
+      logger_method: logger method with the same name as this class.
+      metadata: call metadata.
+      instance: the object to which the wrapped function was bound when it was
+        called.
+      args: args captured during the function call.
+      kwargs: kwargs captured during the function call.
+
+    Returns:
+      partial logger method with filled kwargs.
+    """
+    del instance, args, kwargs
+    return functools.partial(logger_method, metadata=metadata)
+
+  @abc.abstractmethod
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    """Calls the logger method with appropriate `args` and `kwargs`.
+
+    Child classes need to implement how `args` and `kwargs` are passed from the
+    function to the corresponding logger method.
+
+    Args:
+      logger_method: logger method with the same name as this class.
+      args: args captured during the function call.
+      kwargs: kwargs captured during the function call.
+    """
+    pass
+
+  def _finish_call(
+      self,
+      metadata: call_metadata.CallMetadata,
+      instance: Any,
+      args: Any,
+      kwargs: Any,
+  ):
+    """Completes wrapped function call.
+
+    Metadata marks the end and the corresponding method is called on the
+    registered loggers.
+
+    Args:
+      metadata: call metadata.
+      instance: the object to which the wrapped function was bound when it was
+        called.
+      args: args captured during the function call.
+      kwargs: kwargs captured during the function call.
+    """
+    metadata.mark_end()
+    for logger in _get_registered_loggers():
+      method_name = self.__class__.__name__
+      logger_method = getattr(logger, method_name)
+      logger_method = self._fill_logger_method_kwargs(
+          logger_method, metadata, instance, args, kwargs
+      )
+      self._call_logger_method(logger_method, args, kwargs)
+
+  @wrapt.decorator
+  def __call__(self, function, instance, args, kwargs):
+    """Decorator to call the corresponding method on registered loggers."""
+    metadata = self._start_call()
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      self._finish_call(metadata, instance, args, kwargs)
+
+
+class _DsbuilderMethodDecorator(_FunctionDecorator):
+  """Base class for a dataset builder method decorator."""
+
+  # Flag. If `True` then the wrapped dsbuilder method is a property.
+  IS_PROPERTY: bool = False
+
+  @staticmethod
+  def _get_info(dsbuilder: Any) -> Tuple[str, str, str, str]:
+    """Gets information about the builder.
+
+    Args:
+      dsbuilder: the builder instance to which the wrapped function was bound
+        when it was called.
+
+    Returns:
+      builder_name: name of the builder.
+      config: name of the builder config.
+      version: version of the builder.
+      data_path: path to the builder data directory.
+    """
+    config_name = (
+        dsbuilder.builder_config.name if dsbuilder.builder_config else ""
+    )
+    data_path = dsbuilder.data_dir
+    return dsbuilder.name, config_name, str(dsbuilder.version), data_path
+
+  def _fill_logger_method_kwargs(
+      self,
+      logger_method: _LoggerMethod,
+      metadata: call_metadata.CallMetadata,
+      instance: Any,
+      args: Any,
+      kwargs: Any,
+  ) -> _LoggerMethod:
+    """Fills kwargs for the corresponding logger method.
+
+    Args:
+      logger_method: logger method with the same name as this class.
+      metadata: call metadata.
+      instance: the object to which the wrapped function was bound when it was
+        called.
+      args: args captured during the function call.
+      kwargs: kwargs captured during the function call.
+
+    Returns:
+      partial logger method with filled kwargs.
+    """
+    del kwargs
+    if self.IS_PROPERTY:
+      dsbuilder = args[0]  # Because property decorator applied first.
+    else:
+      dsbuilder = instance
+    name, config_name, version, data_path = self._get_info(dsbuilder)
+
+    return functools.partial(
+        logger_method,
+        metadata=metadata,
+        name=name,
+        config_name=config_name,
+        version=version,
+        data_path=data_path,
+    )
 
 
 def register(logger: base_logger.Logger) -> None:
@@ -114,26 +277,21 @@ def tfds_import(
     )
 
 
-def builder_init() -> Callable[[_T], _T]:
+def builder_init() -> _Decorator:
   """Decorator to call `builder_init` method on registered loggers."""
 
   @wrapt.decorator
   def decorator(function, dsbuilder, args, kwargs):
     metadata = call_metadata.CallMetadata()
-    first_builder_init_in_stack = (
-        metadata.thread_id not in _thread_ids_running_builder_init
-    )
-    if first_builder_init_in_stack:
-      _thread_ids_running_builder_init.add(metadata.thread_id)
+    _thread_id_to_builder_init_count[metadata.thread_id] += 1
     try:
       return function(*args, **kwargs)
     except Exception:
       metadata.mark_error()
       raise
     finally:
-      if first_builder_init_in_stack:
+      if _thread_id_to_builder_init_count[metadata.thread_id] == 1:
         metadata.mark_end()
-        _thread_ids_running_builder_init.remove(metadata.thread_id)
         data_dir = kwargs.get("data_dir")
         config = kwargs.get("config")
         if config is not None:
@@ -149,87 +307,63 @@ def builder_init() -> Callable[[_T], _T]:
               config=config,
               version=version,
           )
+      _thread_id_to_builder_init_count[metadata.thread_id] -= 1
 
   return decorator
 
 
-def _get_name_config_version_datadir(dsbuilder):
-  """Returns (builder_name, config, version, data_dir).
-
-  Args:
-    dsbuilder: the builder instance to get info for.
-  """
-  config_name = (
-      dsbuilder.builder_config.name if dsbuilder.builder_config else ""
-  )
-  data_path = dsbuilder.data_dir
-  return dsbuilder.name, config_name, str(dsbuilder.version), data_path
-
-
-def builder_info() -> Callable[[_T], _T]:
+class builder_info(_DsbuilderMethodDecorator):  # pylint: disable=invalid-name
   """Decorator to call `builder_info` method on registered loggers."""
 
-  @wrapt.decorator
-  def decorator(function, dsbuilder, args, kwargs):
-    dsbuilder = args[0]  # Because property decorator applied first.
-    name, config_name, version, data_path = _get_name_config_version_datadir(
-        dsbuilder
-    )
-    metadata = call_metadata.CallMetadata()
-    try:
-      return function(*args, **kwargs)
-    except Exception:
-      metadata.mark_error()
-      raise
-    finally:
-      metadata.mark_end()
-      for logger in _get_registered_loggers():
-        logger.builder_info(
-            metadata=metadata,
-            name=name,
-            config_name=config_name,
-            version=version,
-            data_path=data_path,
-        )
+  IS_PROPERTY = True
 
-  return decorator
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    del args, kwargs
+    logger_method()
 
 
-def as_dataset() -> Callable[[_T], _T]:
+class as_dataset(_DsbuilderMethodDecorator):  # pylint: disable=invalid-name
   """Decorator to call `as_dataset` method on registered loggers."""
 
-  @wrapt.decorator
-  def decorator(function, dsbuilder, args, kwargs):
-    name, config_name, version, data_path = _get_name_config_version_datadir(
-        dsbuilder
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    logger_method(
+        split=args and args[0] or kwargs.get("split"),
+        batch_size=kwargs.get("batch_size"),
+        shuffle_files=kwargs.get("shuffle_files"),
+        read_config=kwargs.get("read_config"),
+        as_supervised=kwargs.get("as_supervised"),
+        decoders=kwargs.get("decoders"),
     )
-    metadata = call_metadata.CallMetadata()
-    try:
-      return function(*args, **kwargs)
-    except Exception:
-      metadata.mark_error()
-      raise
-    finally:
-      metadata.mark_end()
-      for logger in _get_registered_loggers():
-        logger.as_dataset(
-            metadata=metadata,
-            name=name,
-            config_name=config_name,
-            version=version,
-            data_path=data_path,
-            split=args and args[0] or kwargs.get("split"),
-            batch_size=kwargs.get("batch_size"),
-            shuffle_files=kwargs.get("shuffle_files"),
-            read_config=kwargs.get("read_config"),
-            as_supervised=kwargs.get("as_supervised"),
-            decoders=kwargs.get("decoders"),
-        )
-
-  return decorator
 
 
-def as_numpy(function: Callable[[_T], _T]) -> Callable[[_T], _T]:
+class download_and_prepare(_DsbuilderMethodDecorator):  # pylint: disable=invalid-name
+  """Decorator to call `download_and_prepare` method on registered loggers."""
+
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    del args
+    logger_method(
+        download_dir=kwargs.get("download_dir"),
+        download_config=kwargs.get("download_config"),
+        file_format=kwargs.get("file_format"),
+    )
+
+
+def as_numpy(function: _Decorator) -> _Decorator:
   """Decorator to call `as_numpy` method on registered loggers."""
 
   # Here we use `functools.wraps` as `wrapt.decorator` is not serializable.
@@ -251,104 +385,68 @@ def as_numpy(function: Callable[[_T], _T]) -> Callable[[_T], _T]:
   return decorator
 
 
-def list_builders() -> Callable[[_T], _T]:
+class list_builders(_FunctionDecorator):  # pylint: disable=invalid-name
   """Decorator to call `list_builders` method on registered loggers."""
 
-  @wrapt.decorator
-  def decorator(function, unused_none_instance, args, kwargs):
-    metadata = call_metadata.CallMetadata()
-    try:
-      return function(*args, **kwargs)
-    except Exception:
-      metadata.mark_error()
-      raise
-    finally:
-      metadata.mark_end()
-      for logger in _get_registered_loggers():
-        logger.list_builders(
-            metadata=metadata,
-            with_community_datasets=kwargs.get("with_community_datasets"),
-        )
-
-  return decorator
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    del args
+    logger_method(with_community_datasets=kwargs.get("with_community_datasets"))
 
 
-def load() -> Callable[[_T], _T]:
+class load(_FunctionDecorator):  # pylint: disable=invalid-name
   """Decorator to call `load` method on registered loggers."""
 
-  @wrapt.decorator
-  def decorator(function, unused_none_instance, args, kwargs):
-    metadata = call_metadata.CallMetadata()
-    name = args[0] if args else kwargs["name"]
-    try:
-      return function(*args, **kwargs)
-    except Exception:
-      metadata.mark_error()
-      raise
-    finally:
-      metadata.mark_end()
-      for logger in _get_registered_loggers():
-        logger.load(
-            metadata=metadata,
-            name=name,
-            split=kwargs.get("split"),
-            data_dir=kwargs.get("data_dir"),
-            batch_size=kwargs.get("batch_size"),
-            shuffle_files=kwargs.get("shuffle_files"),
-            download=kwargs.get("download"),
-            as_supervised=kwargs.get("as_supervised"),
-            decoders=kwargs.get("decoders"),
-            read_config=kwargs.get("read_config"),
-            with_info=kwargs.get("with_info"),
-            try_gcs=kwargs.get("try_gcs"),
-        )
-
-  return decorator
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    logger_method(
+        name=args[0] if args else kwargs["name"],
+        split=kwargs.get("split"),
+        data_dir=kwargs.get("data_dir"),
+        batch_size=kwargs.get("batch_size"),
+        shuffle_files=kwargs.get("shuffle_files"),
+        download=kwargs.get("download"),
+        as_supervised=kwargs.get("as_supervised"),
+        decoders=kwargs.get("decoders"),
+        read_config=kwargs.get("read_config"),
+        with_info=kwargs.get("with_info"),
+        try_gcs=kwargs.get("try_gcs"),
+    )
 
 
-def builder() -> Callable[[_T], _T]:
+class builder(_FunctionDecorator):  # pylint: disable=invalid-name
   """Decorator to call `builder` method on registered loggers."""
 
-  @wrapt.decorator
-  def decorator(function, unused_none_instance, args, kwargs):
-    metadata = call_metadata.CallMetadata()
-    name = args[0] if args else kwargs["name"]
-    try:
-      return function(*args, **kwargs)
-    except Exception:
-      metadata.mark_error()
-      raise
-    finally:
-      metadata.mark_end()
-      for logger in _get_registered_loggers():
-        logger.builder(
-            metadata=metadata,
-            name=name,
-            try_gcs=kwargs.get("try_gcs"),
-        )
-
-  return decorator
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    logger_method(
+        name=args[0] if args else kwargs["name"],
+        try_gcs=kwargs.get("try_gcs"),
+    )
 
 
-def dataset_collection() -> Callable[[_T], _T]:
+class dataset_collection(_FunctionDecorator):  # pylint: disable=invalid-name
   """Decorator to call `dataset_collection` method on registered loggers."""
 
-  @wrapt.decorator
-  def decorator(function, unused_none_instance, args, kwargs):
-    metadata = call_metadata.CallMetadata()
-    name = args[0] if args else kwargs["name"]
-    try:
-      return function(*args, **kwargs)
-    except Exception:
-      metadata.mark_error()
-      raise
-    finally:
-      metadata.mark_end()
-      for logger in _get_registered_loggers():
-        logger.dataset_collection(
-            metadata=metadata,
-            name=name,
-            loader_kwargs=kwargs.get("loader_kwargs"),
-        )
-
-  return decorator
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    logger_method(
+        name=args[0] if args else kwargs["name"],
+        loader_kwargs=kwargs.get("loader_kwargs"),
+    )

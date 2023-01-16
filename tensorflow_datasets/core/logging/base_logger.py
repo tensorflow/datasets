@@ -15,10 +15,12 @@
 
 """This module defines the methods a logger implementation should define."""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 from tensorflow_datasets.core import decode
+from tensorflow_datasets.core import download as download_lib
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.file_adapters import FileFormat
 from tensorflow_datasets.core.logging import call_metadata
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
@@ -103,6 +105,21 @@ class Logger:
       decoders: flatten dict of decoders dict given to `as_dataset`, with the
         values being `{module_name}.{class_name}` instad of a
     """
+    pass
+
+  def download_and_prepare(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      config_name: Optional[str],
+      version: str,
+      data_path: str,
+      download_dir: Optional[str],
+      download_config: Optional[download_lib.DownloadConfig],
+      file_format: Union[None, str, FileFormat],
+  ):
+    """Callback called when user calls `dataset_builder.download_and_prepare`."""
     pass
 
   def as_numpy(self, *, metadata: call_metadata.CallMetadata, dataset: Any):
