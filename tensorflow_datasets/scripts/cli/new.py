@@ -197,21 +197,7 @@ def _create_dataset_tags(info: utils.DatasetInfo) -> None:
 def _create_init(info: utils.DatasetInfo) -> None:
   """Adds the `__init__.py` file."""
   file_path = info.path / '__init__.py'
-  if info.in_tfds:
-    # from tensorflow_datasets.image.my_dataset.my_dataset import MyDataset
-    ds_import = f'{info.ds_import}.{info.name}'
-  else:
-    # from .my_dataset import MyDataset
-    ds_import = f'{info.ds_import}{info.name}'
-  # Could also import the BuilderConfig if it exists.
-  content = textwrap.dedent(
-      f'''\
-      """{info.name} dataset."""
-
-      from {ds_import} import {info.cls_name}
-      '''
-  )
-  file_path.write_text(content)
+  file_path.write_text('')
 
 
 def _create_dummy_data(info: utils.DatasetInfo) -> None:
