@@ -114,7 +114,9 @@ jobs:
         ipython kernel install --user --name tfds-notebook
         for notebook in docs/*ipynb
           do
-            if [$notebook != "docs/determinism.ipynb"]
+            # These notebooks time out because they rely on loading huge datasets.
+            if [[ "$notebook" != "docs/determinism.ipynb" ]] && \
+               [[ "$notebook" != "docs/dataset_collections.ipynb" ]]
             then
               jupyter nbconvert \
                 --ExecutePreprocessor.timeout=600 \
