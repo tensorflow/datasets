@@ -45,7 +45,6 @@ def _write_dataset_files(
 
 
 def test_export_community_datasets(tmp_path):
-
   # Create the community dataset repositories
   tfg_path = _write_dataset_files(
       tmp_path,
@@ -68,11 +67,14 @@ def test_export_community_datasets(tmp_path):
   # Write a dummy `community-datasets.toml`
   in_path = tmp_path / 'config.toml'
   in_path.write_text(
-      textwrap.dedent(f"""\
+      textwrap.dedent(
+          f"""\
           [Namespaces]
           tensorflow_graphics = '{tfg_path}'
           nlp = '{nlp_path}'
-          """))
+          """
+      )
+  )
 
   # Load registered dataset and export the list.
   # We patch `GithubPath` with `pathlib.Path` as the two have the same API.
@@ -80,11 +82,13 @@ def test_export_community_datasets(tmp_path):
   export_community_datasets.export_community_datasets(in_path, out_path)
 
   # Ensure datasets where correctly exported
-  expected_output = textwrap.dedent("""\
+  expected_output = textwrap.dedent(
+      """\
       {"name": "nlp:mnist", "source": "${nlp_path}/mnist/mnist.py"}
       {"name": "nlp:robotnet", "source": {"root_path": "${nlp_path}/robotnet", "filenames": ["checksums.tsv", "label.txt", "robotnet.py"]}}
       {"name": "tensorflow_graphics:cifar", "source": "${tfg_path}/cifar/cifar.py"}
-      """)
+      """
+  )
   expected_output = string.Template(expected_output).substitute(
       tfg_path=tfg_path,
       nlp_path=nlp_path,

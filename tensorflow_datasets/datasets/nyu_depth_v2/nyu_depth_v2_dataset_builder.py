@@ -67,5 +67,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         with h5py.File(os.path.join(root_dir, directory, file_name), 'r') as f:
           yield directory + '_' + file_name, {
               'image': np.transpose(f['rgb'], (1, 2, 0)),
-              'depth': f['depth'][:].astype('float16')
+              'depth': f['depth'][:].astype('float16'),
           }

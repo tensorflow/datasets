@@ -32,14 +32,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.1')
 
   def _info(self):
-
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'book_text': tfds.features.Text(),
             'book_id': np.int32,
             'book_title': np.str_,
             'publication_date': np.str_,
-            'book_link': np.str_
+            'book_link': np.str_,
         }),
         supervised_keys=None,
         homepage='https://github.com/deepmind/pg19',
@@ -63,21 +62,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'train')
+                'filepath': os.path.join(_DATA_DIR, 'train'),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'validation')
+                'filepath': os.path.join(_DATA_DIR, 'validation'),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'test')
+                'filepath': os.path.join(_DATA_DIR, 'test'),
             },
         ),
     ]

@@ -26,13 +26,14 @@ Message = Union[str, Callable[[], str]]
 
 
 @dataclasses.dataclass
-class ErrorContext():
+class ErrorContext:
   """Stack container for error context.
 
   This stack keeps track of the error messages which are raised when loading a
   dataset. These error messages are used to provide better context for the users
   in case of DatasetNotFound errors are raised.
   """
+
   messages: List[Message] = dataclasses.field(default_factory=list)
 
 
@@ -80,5 +81,6 @@ def add_context(msg: str) -> None:
   """
   if not hasattr(context_holder, 'current_context_msg'):
     raise AttributeError(
-        'add_context called outside of reraise_with_context contextmanager.')
+        'add_context called outside of reraise_with_context contextmanager.'
+    )
   context_holder.current_context_msg.messages.append(msg)

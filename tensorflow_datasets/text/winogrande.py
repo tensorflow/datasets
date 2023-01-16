@@ -78,16 +78,21 @@ class Winogrande(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split('train_{}'.format(size)),
               gen_kwargs={
-                  'filepath':
-                      os.path.join(data_dir, 'train_{}.jsonl'.format(size))
-              }))
+                  'filepath': os.path.join(
+                      data_dir, 'train_{}.jsonl'.format(size)
+                  )
+              },
+          )
+      )
     return train_splits + [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'filepath': os.path.join(data_dir, 'test.jsonl')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'test.jsonl')},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={'filepath': os.path.join(data_dir, 'dev.jsonl')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'dev.jsonl')},
+        ),
     ]
 
   def _generate_examples(self, filepath):

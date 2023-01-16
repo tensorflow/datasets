@@ -77,7 +77,6 @@ class CollectionSection(abc.ABC):
 
 
 class CollectionHomepageSection(CollectionSection):
-
   NAME = 'Homepage'
 
   def get_key(self, loader: tfds.core.DatasetCollectionLoader):
@@ -93,7 +92,6 @@ class CollectionHomepageSection(CollectionSection):
 
 
 class CollectionDescriptionSection(CollectionSection):
-
   NAME = 'Description'
 
   def get_key(self, loader: tfds.core.DatasetCollectionLoader):
@@ -113,7 +111,8 @@ class CollectionVersionSection(CollectionSection):
     # Default version is the latest.
     default_version = loader.collection.get_latest_version()
     all_versions = [
-        *loader.collection.info.release_notes, *loader.collection.datasets
+        *loader.collection.info.release_notes,
+        *loader.collection.datasets,
     ]
 
     all_versions_and_notes = loader.collection.info.release_notes
@@ -130,7 +129,8 @@ class CollectionVersionSection(CollectionSection):
 
   def get_key(self, loader: tfds.core.DatasetCollectionLoader):
     release_key = tuple(
-        (k, v) for k, v in loader.collection.info.release_notes.items())
+        (k, v) for k, v in loader.collection.info.release_notes.items()
+    )
     return (tuple(loader.collection.all_versions), release_key)
 
   def content(self, loader: tfds.core.DatasetCollectionLoader):
@@ -138,7 +138,6 @@ class CollectionVersionSection(CollectionSection):
 
 
 class CollectionDatasetsSection(CollectionSection):
-
   NAME = 'Datasets in the default version'
 
   def get_key(self, loader: tfds.core.DatasetCollectionLoader):
@@ -154,8 +153,9 @@ class CollectionDatasetsSection(CollectionSection):
       ds_link += f'#{reference.config}'
     return ds_link
 
-  def _list_datasets(self,
-                     collection_loader: tfds.core.DatasetCollectionLoader):
+  def _list_datasets(
+      self, collection_loader: tfds.core.DatasetCollectionLoader
+  ):
     """List datasets for the latest version."""
     # get_collection retrieves the datasets in the default (= latest) version.
     datasets = collection_loader.collection.get_collection()
@@ -168,7 +168,6 @@ class CollectionDatasetsSection(CollectionSection):
 
 
 class CollectionCitationSection(CollectionSection):
-
   NAME = 'Citation'
 
   def get_key(self, loader: tfds.core.DatasetCollectionLoader):
@@ -178,18 +177,22 @@ class CollectionCitationSection(CollectionSection):
     if not loader.collection.info.citation:
       return ''
     return dmb.Block(
-        textwrap.dedent(f"""
+        textwrap.dedent(
+            f"""
             ```
             {tfds.core.utils.indent(loader.collection.info.citation, '            ')}
             ```
-            """))
+            """
+        )
+    )
 
 
 # --------------------------- Main page ---------------------------
 
 
 def _display_collection_heading(
-    collection: tfds.core.DatasetCollectionLoader) -> str:
+    collection: tfds.core.DatasetCollectionLoader,
+) -> str:
   return f"""
       # `{collection.collection_name}`
 
@@ -219,6 +222,7 @@ def get_collection_markdown_string(
   doc_str = [
       _display_collection_heading(collection),
       _display_collection_sections(
-          loader=collection, all_sections=all_sections),
+          loader=collection, all_sections=all_sections
+      ),
   ]
   return '\n\n'.join([tfds.core.utils.dedent(s) for s in doc_str if s])

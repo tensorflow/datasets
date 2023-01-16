@@ -52,20 +52,12 @@ class TfUtilsTest(testing.TestCase):
 
 def test_shapes_are_compatible():
   assert tf_utils.shapes_are_compatible(
-      {'a': {
-          'b': (28, 28, 3)
-      }},
-      {'a': {
-          'b': (None, None, 3)
-      }},
+      {'a': {'b': (28, 28, 3)}},
+      {'a': {'b': (None, None, 3)}},
   )
   assert not tf_utils.shapes_are_compatible(
-      {'a': {
-          'b': (28, 28, 3)
-      }},
-      {'a': {
-          'b': (None, 27, 3)
-      }},
+      {'a': {'b': (28, 28, 3)}},
+      {'a': {'b': (None, 27, 3)}},
   )
 
 

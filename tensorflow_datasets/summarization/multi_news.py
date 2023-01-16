@@ -57,10 +57,9 @@ class MultiNews(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            _DOCUMENT: tfds.features.Text(),
-            _SUMMARY: tfds.features.Text()
-        }),
+        features=tfds.features.FeaturesDict(
+            {_DOCUMENT: tfds.features.Text(), _SUMMARY: tfds.features.Text()}
+        ),
         supervised_keys=(_DOCUMENT, _SUMMARY),
         homepage="https://github.com/Alex-Fabbri/Multi-News",
         citation=_CITATION,
@@ -69,7 +68,8 @@ class MultiNews(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     extract_path = os.path.join(
-        dl_manager.download_and_extract(_URL), "multi-news-original")
+        dl_manager.download_and_extract(_URL), "multi-news-original"
+    )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -88,8 +88,8 @@ class MultiNews(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, path=None):
     """Yields examples."""
     with tf.io.gfile.GFile(
-        os.path.join(path + ".src")) as src_f, tf.io.gfile.GFile(
-            os.path.join(path + ".tgt")) as tgt_f:
+        os.path.join(path + ".src")
+    ) as src_f, tf.io.gfile.GFile(os.path.join(path + ".tgt")) as tgt_f:
       for i, (src_line, tgt_line) in enumerate(zip(src_f, tgt_f)):
         yield i, {
             # In original file, each line has one example and natural newline
@@ -97,5 +97,5 @@ class MultiNews(tfds.core.GeneratorBasedBuilder):
             # the natural newline token to avoid special vocab "NEWLINE_CHAR".
             _DOCUMENT: src_line.strip().replace("NEWLINE_CHAR", "\n"),
             # Remove the starting token "- " for every target sequence.
-            _SUMMARY: tgt_line.strip().lstrip("- ")
+            _SUMMARY: tgt_line.strip().lstrip("- "),
         }

@@ -52,9 +52,16 @@ _DL_URLS = {
 }
 
 _DATA_OPTIONS = [
-    "bicubic_x2", "bicubic_x3", "bicubic_x4", "bicubic_x8", "unknown_x2",
-    "unknown_x3", "unknown_x4", "realistic_mild_x4", "realistic_difficult_x4",
-    "realistic_wild_x4"
+    "bicubic_x2",
+    "bicubic_x3",
+    "bicubic_x4",
+    "bicubic_x8",
+    "unknown_x2",
+    "unknown_x3",
+    "unknown_x4",
+    "realistic_mild_x4",
+    "realistic_difficult_x4",
+    "realistic_wild_x4",
 ]
 
 
@@ -105,27 +112,28 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     print("EXTRACTING", self.builder_config.download_urls)
     extracted_paths = dl_manager.download_and_extract(
-        self.builder_config.download_urls)
+        self.builder_config.download_urls
+    )
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "lr_path":
-                    extracted_paths["train_lr_url"],
-                "hr_path":
-                    os.path.join(extracted_paths["train_hr_url"],
-                                 "DIV2K_train_HR"),
-            }),
+                "lr_path": extracted_paths["train_lr_url"],
+                "hr_path": os.path.join(
+                    extracted_paths["train_hr_url"], "DIV2K_train_HR"
+                ),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "lr_path":
-                    extracted_paths["valid_lr_url"],
-                "hr_path":
-                    os.path.join(extracted_paths["valid_hr_url"],
-                                 "DIV2K_valid_HR"),
-            }),
+                "lr_path": extracted_paths["valid_lr_url"],
+                "hr_path": os.path.join(
+                    extracted_paths["valid_hr_url"], "DIV2K_valid_HR"
+                ),
+            },
+        ),
     ]
 
   def _generate_examples(self, lr_path, hr_path):
@@ -137,5 +145,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           yield file_path, {
               "lr": os.path.join(root, file_path),
               # Extract the image id from the filename: "0001x2.png"
-              "hr": os.path.join(hr_path, file_path[:4] + ".png")
+              "hr": os.path.join(hr_path, file_path[:4] + ".png"),
           }

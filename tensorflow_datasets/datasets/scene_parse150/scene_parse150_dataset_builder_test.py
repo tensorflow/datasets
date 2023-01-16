@@ -20,7 +20,6 @@ from tensorflow_datasets.datasets.scene_parse150 import scene_parse150_dataset_b
 
 
 class SceneParse150Test(testing.DatasetBuilderTestCase):
-
   DATASET_CLASS = scene_parse150_dataset_builder.Builder
 
   SPLITS = {

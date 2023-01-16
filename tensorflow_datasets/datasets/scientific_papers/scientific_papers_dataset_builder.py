@@ -25,10 +25,8 @@ _DOCUMENT = "article"
 _SUMMARY = "abstract"
 
 _URLS = {
-    "arxiv":
-        "https://drive.google.com/uc?id=1b3rmCSIoh6VhD4HKWjI4HOW-cSwcwbeC&export=download",
-    "pubmed":
-        "https://drive.google.com/uc?id=1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja&export=download",
+    "arxiv": "https://drive.google.com/uc?id=1b3rmCSIoh6VhD4HKWjI4HOW-cSwcwbeC&export=download",
+    "pubmed": "https://drive.google.com/uc?id=1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja&export=download",
 }
 
 
@@ -46,7 +44,8 @@ class ScientificPapersConfig(tfds.core.BuilderConfig):
     super(ScientificPapersConfig, self).__init__(
         version=tfds.core.Version("1.1.1"),
         supported_versions=[tfds.core.Version("1.1.0")],
-        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
+        **kwargs,
+    )  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.filename = filename
 
 
@@ -55,9 +54,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       ScientificPapersConfig(
-          name="arxiv", description="Documents from ArXiv repository."),
+          name="arxiv", description="Documents from ArXiv repository."
+      ),
       ScientificPapersConfig(
-          name="pubmed", description="Documents from PubMed repository.")
+          name="pubmed", description="Documents from PubMed repository."
+      ),
   ]
 
   def _info(self):
@@ -74,8 +75,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract(_URLS)
-    path = os.path.join(dl_paths[self.builder_config.name],
-                        self.builder_config.name + "-dataset")
+    path = os.path.join(
+        dl_paths[self.builder_config.name],
+        self.builder_config.name + "-dataset",
+    )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -110,5 +113,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         yield d["article_id"], {
             _DOCUMENT: "\n".join(d["article_text"]),
             _SUMMARY: summary,
-            "section_names": "\n".join(d["section_names"])
+            "section_names": "\n".join(d["section_names"]),
         }

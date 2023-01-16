@@ -46,7 +46,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns a SplitGenerator for the test set."""
     imagenet_a_root = os.path.join(
-        dl_manager.download_and_extract(_IMAGENET_A_URL), 'imagenet-a')
+        dl_manager.download_and_extract(_IMAGENET_A_URL), 'imagenet-a'
+    )
     return [
         tfds.core.SplitGenerator(
             # The dataset provides only a test split.

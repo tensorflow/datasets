@@ -24,17 +24,19 @@ from typing import List, Union
 from etils import epath
 
 DESCRIPTIONS = {
-    "af_afribooms":
+    "af_afribooms": (
         "UD Afrikaans-AfriBooms is a conversion of the AfriBooms Dependency "
         "Treebank, originally annotated with a simplified PoS set and "
         "dependency relations according to a subset of the Stanford tag set. "
         "The corpus consists of public government documents. The dataset was "
         "proposed in 'AfriBooms: An Online Treebank for Afrikaans' by "
         "Augustinus et al. (2016); "
-        "https://www.aclweb.org/anthology/L16-1107.pdf.",
-    "akk_pisandub":
-        "A small set of sentences from Babylonian royal inscriptions.",
-    "akk_riao":
+        "https://www.aclweb.org/anthology/L16-1107.pdf."
+    ),
+    "akk_pisandub": (
+        "A small set of sentences from Babylonian royal inscriptions."
+    ),
+    "akk_riao": (
         "UD_Akkadian-RIAO is a small treebank which consists of 22 277 words "
         "and 1845 sentences. This represents an intact subset of a total of "
         "2211 sentences from the early Neo-Assyrian royal inscriptions  of the"
@@ -45,13 +47,15 @@ DESCRIPTIONS = {
         " is Standard Babylonian, with occasional Assyrianisms, whereas "
         "“Akkadian” is the umbrella term for both Assyrian and Babylonian. The"
         " treebank was manually annotated following the UD annotation "
-        "guidelines.",
-    "aqz_tudet":
+        "guidelines."
+    ),
+    "aqz_tudet": (
         "UD_Akuntsu-TuDeT is a collection of annotated texts in Akuntsú. "
         "Together with UD_Tupinamba-TuDeT and UD_Munduruku-TuDeT, "
         "UD_Akuntsu-TuDeT is part of the TuLaR project.  The sentences are "
-        "being annotated by Carolina Aragon and Fabrício Ferraz Gerardi.",
-    "sq_tsa":
+        "being annotated by Carolina Aragon and Fabrício Ferraz Gerardi."
+    ),
+    "sq_tsa": (
         "The UD Treebank for Standard Albanian (TSA) is a small treebank that "
         "consists of 60 sentences corresponding to 922 tokens. The data was "
         "collected from different Wikipedia entries. This treebank was created"
@@ -63,17 +67,20 @@ DESCRIPTIONS = {
         "Analysis were semi-automated through python scripts and corrected "
         "manually, whereas Dependency relations were assigned fully manually. "
         "We encourage any initiatives to increase the size and/or improve the "
-        "overall quality of the Treebank.",
-    "am_att":
+        "overall quality of the Treebank."
+    ),
+    "am_att": (
         "UD_Amharic-ATT is a manually annotated Treebanks. It is annotated for"
         " POS tag, morphological information and dependency relations. Since "
         "Amharic is a morphologically-rich, pro-drop, and languages having a "
-        "feature of clitic doubling, clitics have been segmented manually.",
-    "grc_perseus":
+        "feature of clitic doubling, clitics have been segmented manually."
+    ),
+    "grc_perseus": (
         "This Universal Dependencies Ancient Greek Treebank consists of an "
         "automatic conversion of a selection of passages from the Ancient "
-        "Greek and Latin Dependency Treebank 2.1",
-    "grc_proiel":
+        "Greek and Latin Dependency Treebank 2.1"
+    ),
+    "grc_proiel": (
         "The Ancient Greek PROIEL treebank is based on the Ancient Greek data "
         "from the PROIEL treebank, which is maintained at the Department of "
         "Philosophy, Classics, History of Arts and Ideas at the University of "
@@ -82,56 +89,68 @@ DESCRIPTIONS = {
         "https://github.com/proiel/proiel-treebank/releases. The original "
         "annotators are acknowledged in the files available there. The "
         "conversion code is available in the Rubygem proiel-cli, "
-        "https://github.com/proiel/proiel-cli.",
-    "apu_ufpa":
+        "https://github.com/proiel/proiel-cli."
+    ),
+    "apu_ufpa": (
         "The initial release contains 70 annotated sentences. This is the "
         "first treebank in a language from the Arawak family. The original "
         "interlinear glosses are included in the tree bank, and their "
         "conversion into a full UD annotation is an ongoing process. The "
         "sent_id values (e.g.: FernandaM2017:Texto-6-19) are representative of"
         " the collector, year of publication, text identifier and the number "
-        "of the sentence in order from the original text.",
-    "hbo_ptnk":
+        "of the sentence in order from the original text."
+    ),
+    "hbo_ptnk": (
         "UD Ancient Hebrew PTNK contains portions of the Biblia Hebraic "
-        "Stuttgartensia with morphological annotations from ETCBC.",
-    "ar_nyuad":
+        "Stuttgartensia with morphological annotations from ETCBC."
+    ),
+    "ar_nyuad": (
         "The treebank consists of 19,738 sentences (738889 tokens), and its "
         "domain is mainly newswire. The annotation is licensed under the terms"
         " of CC BY-SA 4.0, and the original PATB can be obtained from the "
-        "LDC’s official website.",
-    "ar_padt":
+        "LDC’s official website."
+    ),
+    "ar_padt": (
         "The Arabic-PADT UD treebank is based on the Prague Arabic Dependency "
-        "Treebank (PADT), created at the Charles University in Prague.",
-    "ar_pud":
+        "Treebank (PADT), created at the Charles University in Prague."
+    ),
+    "ar_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "aii_as":
+        "Raw Text to Universal Dependencies."
+    ),
+    "aii_as": (
         "The Uppsala Assyrian Treebank is a small treebank for Modern Standard"
         " Assyrian. The corpus is collected and annotated manually. The data "
         "was randomly collected from different textbooks and a short "
-        "translation of The Merchant of Venice.",
-    "bm_crb":
+        "translation of The Merchant of Venice."
+    ),
+    "bm_crb": (
         "The UD Bambara treebank is a section of the Corpus Référence du "
-        "Bambara annotated natively with Universal Dependencies.",
-    "eu_bdt":
+        "Bambara annotated natively with Universal Dependencies."
+    ),
+    "eu_bdt": (
         "The Basque UD treebank is based on a automatic conversion from part "
         "of the Basque Dependency Treebank (BDT), created at the University of"
         " of the Basque Country by the IXA NLP research group. The treebank "
         "consists of 8.993 sentences (121.443 tokens) and covers mainly "
-        "literary and journalistic texts.",
-    "bej_nsc":
+        "literary and journalistic texts."
+    ),
+    "bej_nsc": (
         "A Universal Dependencies corpus for Beja, North-Cushitic branch of "
-        "the Afro-Asiatic phylum mainly spoken in Sudan, Egypt and Eritrea.",
-    "be_hse":
+        "the Afro-Asiatic phylum mainly spoken in Sudan, Egypt and Eritrea."
+    ),
+    "be_hse": (
         "The Belarusian UD treebank is based on a sample of the news texts "
         "included in the Belarusian-Russian parallel subcorpus of the Russian "
         "National Corpus, online search available at: "
-        "http://ruscorpora.ru/search-para-be.html.",
-    "bn_bru":
+        "http://ruscorpora.ru/search-para-be.html."
+    ),
+    "bn_bru": (
         "The BRU Bengali treebank has been created at Begum Rokeya University,"
-        " Rangpur, by the members of Semantics Lab.",
-    "bho_bhtb":
+        " Rangpur, by the members of Semantics Lab."
+    ),
+    "bho_bhtb": (
         "The Bhojpuri UD Treebank (BHTB) v2.6 consists of 6,664 tokens(357 "
         "sentences). This Treebank is a part of the Universal Dependency "
         "treebank project. Initially, it was initiated by me (Atul) at "
@@ -139,826 +158,1009 @@ DESCRIPTIONS = {
         "work. BHTB data contains syntactic annotation according to "
         "dependency-constituency schema, as well as morphological tags and "
         "lemmas. In this data, XPOS is annotated  according to Bureau of "
-        "Indian Standards (BIS) Part Of Speech (POS) tagset.",
-    "br_keb":
+        "Indian Standards (BIS) Part Of Speech (POS) tagset."
+    ),
+    "br_keb": (
         "UD Breton-KEB is a treebank of Breton that has been manually "
         "annotated according to the Universal Dependencies guidelines. The "
         "tokenisation guidelines and morphological annotation comes from a "
         "finite-state morphological analyser of Breton released as part of the"
-        " Apertium project.",
-    "bg_btb":
+        " Apertium project."
+    ),
+    "bg_btb": (
         "UD_Bulgarian-BTB is based on the HPSG-based BulTreeBank, created at "
         "the Institute of Information and Communication Technologies, "
         "Bulgarian Academy of Sciences. The original consists of 215,000 "
-        "tokens (over 15,000 sentences).",
-    "bxr_bdt":
+        "tokens (over 15,000 sentences)."
+    ),
+    "bxr_bdt": (
         "The UD Buryat treebank was annotated manually natively in UD and "
-        "contains grammar book sentences, along with news and some fiction.",
-    "yue_hk":
+        "contains grammar book sentences, along with news and some fiction."
+    ),
+    "yue_hk": (
         "A Cantonese treebank (in Traditional Chinese characters) of film "
         "subtitles and of legislative proceedings of Hong Kong, parallel with "
-        "the Chinese-HK treebank.",
-    "ca_ancora":
-        "Catalan data from the AnCora corpus.",
-    "ceb_gja":
+        "the Chinese-HK treebank."
+    ),
+    "ca_ancora": "Catalan data from the AnCora corpus.",
+    "ceb_gja": (
         "UD_Cebuano_GJA is a collection of annotated Cebuano sample sentences "
         "randomly taken from three different sources: community-contributed "
         "samples from the website Tatoeba, a Cebuano grammar book by Bunye & "
         "Yap (1971) and Tanangkinsing's reference grammar on Cebuano (2011). "
-        "This project is currently work in progress.",
-    "zh_cfl":
+        "This project is currently work in progress."
+    ),
+    "zh_cfl": (
         "The Chinese-CFL UD treebank is manually annotated by Keying Li with "
         "minor manual revisions by Herman Leung and John Lee at City "
         "University of Hong Kong, based on essays written by learners of "
         "Mandarin Chinese as a foreign language. The data is in Simplified "
-        "Chinese.",
-    "zh_gsd":
+        "Chinese."
+    ),
+    "zh_gsd": (
         "Traditional Chinese Universal Dependencies Treebank annotated and "
-        "converted by Google.",
-    "zh_gsdsimp":
+        "converted by Google."
+    ),
+    "zh_gsdsimp": (
         "Simplified Chinese Universal Dependencies dataset converted from the "
-        "GSD (traditional) dataset with manual corrections.",
-    "zh_hk":
+        "GSD (traditional) dataset with manual corrections."
+    ),
+    "zh_hk": (
         "A Traditional Chinese treebank of film subtitles and of legislative "
-        "proceedings of Hong Kong, parallel with the Cantonese-HK treebank.",
-    "zh_pud":
+        "proceedings of Hong Kong, parallel with the Cantonese-HK treebank."
+    ),
+    "zh_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "ckt_hse":
+        "Raw Text to Universal Dependencies."
+    ),
+    "ckt_hse": (
         "This data is a manual annotation of the corpus from multimedia "
         "annotated corpus of the Chuklang project, a dialectal corpus of the "
-        "Amguema variant of Chukchi.",
-    "lzh_kyoto":
+        "Amguema variant of Chukchi."
+    ),
+    "lzh_kyoto": (
         "Classical Chinese Universal Dependencies Treebank annotated and "
-        "converted by Institute for Research in Humanities, Kyoto University.",
-    "cop_scriptorium":
+        "converted by Institute for Research in Humanities, Kyoto University."
+    ),
+    "cop_scriptorium": (
         "UD Coptic contains manually annotated Sahidic Coptic texts, including"
-        " Biblical texts, sermons, letters, and hagiography.",
-    "hr_set":
+        " Biblical texts, sermons, letters, and hagiography."
+    ),
+    "hr_set": (
         "The Croatian UD treebank is based on the extension of the SETimes-HR "
-        "corpus, the hr500k corpus.",
-    "cs_cac":
+        "corpus, the hr500k corpus."
+    ),
+    "cs_cac": (
         "The UD_Czech-CAC treebank is based on the Czech Academic Corpus 2.0 "
         "(CAC; Český akademický korpus; ČAK), created at Charles University in"
-        " Prague.",
-    "cs_cltt":
+        " Prague."
+    ),
+    "cs_cltt": (
         "The UD_Czech-CLTT treebank is based on the Czech Legal Text Treebank "
-        "1.0, created at Charles University in Prague.",
-    "cs_fictree":
+        "1.0, created at Charles University in Prague."
+    ),
+    "cs_fictree": (
         "FicTree is a treebank of Czech fiction, automatically converted into "
         "the UD format. The treebank was built at Charles University in "
-        "Prague.",
-    "cs_pdt":
+        "Prague."
+    ),
+    "cs_pdt": (
         "The Czech-PDT UD treebank is based on the Prague Dependency Treebank "
-        "3.0 (PDT), created at the Charles University in Prague.",
-    "cs_pud":
+        "3.0 (PDT), created at the Charles University in Prague."
+    ),
+    "cs_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "da_ddt":
+        "Raw Text to Universal Dependencies."
+    ),
+    "da_ddt": (
         "The Danish UD treebank is a conversion of the Danish Dependency "
-        "Treebank.",
-    "nl_alpino":
+        "Treebank."
+    ),
+    "nl_alpino": (
         "This corpus consists of samples from various treebanks annotated at "
         "the University of Groningen using the Alpino annotation tools and "
-        "guidelines.",
-    "nl_lassysmall":
+        "guidelines."
+    ),
+    "nl_lassysmall": (
         "This corpus contains sentences from the Wikipedia section of the "
         "Lassy Small Treebank. Universal Dependency annotation was generated "
-        "automatically from the original annotation in Lassy.",
-    "en_esl":
+        "automatically from the original annotation in Lassy."
+    ),
+    "en_esl": (
         "UD English-ESL / Treebank of Learner English (TLE) contains manual "
         "POS tag and dependency annotations for 5,124 English as a Second "
         "Language (ESL) sentences drawn from the Cambridge Learner Corpus "
-        "First Certificate in English (FCE) dataset.",
-    "en_ewt":
+        "First Certificate in English (FCE) dataset."
+    ),
+    "en_ewt": (
         "A Gold Standard Universal Dependencies Corpus for English, built over"
         " the source material of the English Web Treebank LDC2012T13 "
-        "(https://catalog.ldc.upenn.edu/LDC2012T13).",
-    "en_gum":
+        "(https://catalog.ldc.upenn.edu/LDC2012T13)."
+    ),
+    "en_gum": (
         "Universal Dependencies syntax annotations from the GUM corpus "
-        "(https://corpling.uis.georgetown.edu/gum/).",
-    "en_gumreddit":
+        "(https://corpling.uis.georgetown.edu/gum/)."
+    ),
+    "en_gumreddit": (
         "Universal Dependencies syntax annotations from the Reddit portion of "
-        "the GUM corpus (https://corpling.uis.georgetown.edu/gum/) ",
-    "en_lines":
+        "the GUM corpus (https://corpling.uis.georgetown.edu/gum/) "
+    ),
+    "en_lines": (
         "UD English_LinES is the English half of the LinES Parallel Treebank "
         "with the original dependency annotation first automatically converted"
         " into Universal Dependencies and then partially reviewed. Its "
-        "contents cover literature, an online manual and Europarl data.",
-    "en_atis":
+        "contents cover literature, an online manual and Europarl data."
+    ),
+    "en_atis": (
         "UD Atis Treebank is a manually annotated treebank consisting of the "
         "sentences in the Atis (Airline Travel Informations) dataset which "
         "includes the human speech transcriptions of people asking for flight "
-        "information on the automated inquiry systems.",
-    "en_partut":
+        "information on the automated inquiry systems."
+    ),
+    "en_partut": (
         "UD_English-ParTUT is a conversion of a multilingual parallel treebank"
         " developed at the University of Turin, and consisting of a variety of"
         " text genres, including talks, legal texts and Wikipedia articles, "
-        "among others.",
-    "en_pronouns":
+        "among others."
+    ),
+    "en_pronouns": (
         "UD English-Pronouns is dataset created to make pronoun identification"
         " more accurate and with a more balanced distribution across genders. "
         "The dataset is initially targeting the Independent Genitive pronouns,"
         " 'hers', (independent) 'his', (singular) 'theirs', 'mine', and "
-        "(singular) 'yours'.",
-    "en_pud":
+        "(singular) 'yours'."
+    ),
+    "en_pud": (
         "This is the English portion of the Parallel Universal Dependencies "
         "(PUD) treebanks created for the CoNLL 2017 shared task on "
         "Multilingual Parsing from Raw Text to Universal Dependencies "
-        "(http://universaldependencies.org/conll17/).",
-    "myv_jr":
+        "(http://universaldependencies.org/conll17/)."
+    ),
+    "myv_jr": (
         "UD Erzya is the original annotation (CoNLL-U) for texts in the Erzya "
         "language, it originally consists of a sample from a number of fiction"
-        " authors writing originals in Erzya.",
-    "et_edt":
+        " authors writing originals in Erzya."
+    ),
+    "et_edt": (
         "UD Estonian is a converted version of the Estonian Dependency "
         "Treebank (EDT), originally annotated in the Constraint Grammar (CG) "
         "annotation scheme, and consisting of genres of fiction, newspaper "
         "texts and scientific texts. The treebank contains 30,972 trees, "
-        "437,769 tokens.",
-    "et_ewt":
+        "437,769 tokens."
+    ),
+    "et_ewt": (
         "UD EWT treebank consists of different genres of new media. The "
-        "treebank contains 4,493 trees, 56,399 tokens.",
-    "fo_farpahc":
+        "treebank contains 4,493 trees, 56,399 tokens."
+    ),
+    "fo_farpahc": (
         "UD_Icelandic-FarPaHC is a conversion of the Faroese Parsed Historical"
         " Corpus (FarPaHC) to the Universal Dependencies scheme. The "
-        "conversion was done using UDConverter.",
-    "fo_oft":
-        "This is a treebank of Faroese based on the Faroese Wikipedia.",
-    "fi_ftb":
+        "conversion was done using UDConverter."
+    ),
+    "fo_oft": "This is a treebank of Faroese based on the Faroese Wikipedia.",
+    "fi_ftb": (
         "FinnTreeBank 1 consists of manually annotated grammatical examples "
         "from VISK. The UD version of FinnTreeBank 1 was converted from a "
-        "native annotation model with a script and later manually revised.",
-    "fi_ood":
+        "native annotation model with a script and later manually revised."
+    ),
+    "fi_ood": (
         "Finnish-OOD is an external out-of-domain test set for Finnish-TDT "
-        "annotated natively into UD scheme.",
-    "fi_pud":
+        "annotated natively into UD scheme."
+    ),
+    "fi_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "fi_tdt":
+        "Raw Text to Universal Dependencies."
+    ),
+    "fi_tdt": (
         "UD_Finnish-TDT is based on the Turku Dependency Treebank (TDT), a "
         "broad-coverage dependency treebank of general Finnish covering "
         "numerous genres. The conversion to UD was followed by extensive "
         "manual checks and corrections, and the treebank closely adheres to "
-        "the UD guidelines.",
-    "fr_fqb":
+        "the UD guidelines."
+    ),
+    "fr_fqb": (
         "The corpus **UD_French-FQB** is an automatic conversion of the French"
-        " QuestionBank v1, a corpus entirely made of questions.",
-    "fr_ftb":
+        " QuestionBank v1, a corpus entirely made of questions."
+    ),
+    "fr_ftb": (
         "The Universal Dependency version of the French Treebank (Abeillé et "
         "al., 2003), hereafter UD_French-FTB, is a treebank of sentences from "
         "the newspaper Le Monde, initially manually annotated with "
         "morphological information and phrase-structure and then converted to "
-        "the Universal Dependencies annotation scheme.",
-    "fr_gsd":
+        "the Universal Dependencies annotation scheme."
+    ),
+    "fr_gsd": (
         "The **UD_French-GSD** was converted in 2015 from the content head "
         "version of the universal dependency treebank v2.0 "
         "(https://github.com/ryanmcd/uni-dep-tb). It is updated since 2015 "
-        "independently from the previous source.",
-    "fr_partut":
+        "independently from the previous source."
+    ),
+    "fr_partut": (
         "UD_French-ParTUT is a conversion of a multilingual parallel treebank "
         "developed at the University of Turin, and consisting of a variety of "
         "text genres, including talks, legal texts and Wikipedia articles, "
-        "among others.",
-    "fr_rhapsodie":
-        "A Universal Dependencies corpus for spoken French.",
-    "fr_parisstories":
+        "among others."
+    ),
+    "fr_rhapsodie": "A Universal Dependencies corpus for spoken French.",
+    "fr_parisstories": (
         "Paris Stories is a corpus of oral French collected and transcribed by"
         " Linguistics students from Sorbonne Nouvelle and corrected by "
         "students from the Plurital Master's Degree of Computational "
         "Linguistics ( Inalco, Paris Nanterre, Sorbonne Nouvelle) between 2017"
         " and 2021. It contains monologues and dialogues from speakers living "
-        "in the Parisian region.",
-    "fr_pud":
+        "in the Parisian region."
+    ),
+    "fr_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "fr_sequoia":
+        "Raw Text to Universal Dependencies."
+    ),
+    "fr_sequoia": (
         "UD_French-Sequoia is an automatic conversion of the Sequoia Treebank "
-        "corpus French Sequoia corpus.",
-    "gl_ctg":
+        "corpus French Sequoia corpus."
+    ),
+    "gl_ctg": (
         "The Galician UD treebank is based on the automatic parsing of the "
         "Galician Technical Corpus (http://sli.uvigo.gal/CTG) created at the "
-        "University of Vigo by the the TALG NLP research group.",
-    "gl_treegal":
+        "University of Vigo by the the TALG NLP research group."
+    ),
+    "gl_treegal": (
         "The Galician-TreeGal is a treebank for Galician developed at LyS "
-        "Group (Universidade da Coruña).",
-    "de_gsd":
+        "Group (Universidade da Coruña)."
+    ),
+    "de_gsd": (
         "The German UD is converted from the content head version of the "
-        "universal dependency treebank v2.0 (legacy).",
-    "de_hdt":
+        "universal dependency treebank v2.0 (legacy)."
+    ),
+    "de_hdt": (
         "UD German-HDT is a conversion of the Hamburg Dependency Treebank, "
         "created at the University of Hamburg through manual annotation in "
         "conjunction with a standard for morphologically and syntactically "
-        "annotating sentences as well as a constraint-based parser.",
-    "de_lit":
+        "annotating sentences as well as a constraint-based parser."
+    ),
+    "de_lit": (
         "This treebank aims at gathering texts of the German literary history."
         " Currently, it hosts Fragments of the early Romanticism, i.e. "
         "aphorism-like texts mainly dealing with philosophical issues "
-        "concerning art, beauty and related topics.",
-    "de_pud":
+        "concerning art, beauty and related topics."
+    ),
+    "de_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "got_proiel":
+        "Raw Text to Universal Dependencies."
+    ),
+    "got_proiel": (
         "The UD Gothic treebank is based on the Gothic data from the PROIEL "
-        "treebank, and consists of Wulfila's Bible translation.",
-    "el_gdt":
+        "treebank, and consists of Wulfila's Bible translation."
+    ),
+    "el_gdt": (
         "The Greek UD treebank (UD_Greek-GDT) is derived from the Greek "
         "Dependency Treebank (http://gdt.ilsp.gr), a resource developed and "
         "maintained by researchers at the Institute for Language and Speech "
-        "Processing/Athena R.C. (http://www.ilsp.gr).",
-    "gub_tudet":
+        "Processing/Athena R.C. (http://www.ilsp.gr)."
+    ),
+    "gub_tudet": (
         "UD_Guajajara-TuDeT is a collection of annotated sentences in "
         "Guajajara. Sentences stem from multiple sources such as descriptions "
         "of the language, short stories, dictionaries and translations from "
         "the New Testament. Sentence annotation and documentation by Lorena "
-        "Martín Rodríguez and Fabrício Ferraz Gerardi.",
-    "gn_oldtudet":
+        "Martín Rodríguez and Fabrício Ferraz Gerardi."
+    ),
+    "gn_oldtudet": (
         "UD_Guarani-OldTuDeT is a collection of annotated texts in Old "
         "Guaraní. All known sources in this language are being annotated: "
         "cathesisms, grammars (seventeenth and eighteenth century), sentences "
         "from dictionaries, and other texts. Sentence annotation and "
-        "documentation by Fabrício Ferraz Gerardi and Lorena Martín Rodríguez.",
-    "he_htb":
-        "A Universal Dependencies Corpus for Hebrew.",
-    "he_iahltwiki":
+        "documentation by Fabrício Ferraz Gerardi and Lorena Martín Rodríguez."
+    ),
+    "he_htb": "A Universal Dependencies Corpus for Hebrew.",
+    "he_iahltwiki": (
         "Publicly available subset of the IAHLT UD Hebrew Treebank's Wikipedia"
-        " section (https://www.iahlt.org/)",
-    "qfn_fame":
+        " section (https://www.iahlt.org/)"
+    ),
+    "qfn_fame": (
         "UD_Frisian_Dutch-Fame is a selection of 400 sentences from the FAME! "
         "speech corpus by Yilmaz et al. (2016a, 2016b). The treebank is "
-        "manually annotated using the UD scheme.",
-    "qhe_hiencs":
+        "manually annotated using the UD scheme."
+    ),
+    "qhe_hiencs": (
         "The Hindi-English Code-switching treebank is based on code-switching "
         "tweets of Hindi and English multilingual speakers (mostly Indian) on "
         "Twitter. The treebank is manually annotated using UD sceheme. The "
         "training and evaluations sets were seperately annotated by different "
         "annotators using UD v2 and v1 guidelines respectively. The evaluation"
-        " sets are automatically converted from UD v1 to v2.",
-    "hi_hdtb":
+        " sets are automatically converted from UD v1 to v2."
+    ),
+    "hi_hdtb": (
         "The Hindi UD treebank is based on the Hindi Dependency Treebank "
-        "(HDTB), created at IIIT Hyderabad, India.",
-    "hi_pud":
+        "(HDTB), created at IIIT Hyderabad, India."
+    ),
+    "hi_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "hu_szeged":
+        "Raw Text to Universal Dependencies."
+    ),
+    "hu_szeged": (
         "The Hungarian UD treebank is derived from the Szeged Dependency "
-        "Treebank (Vincze et al. 2010).",
-    "is_modern":
+        "Treebank (Vincze et al. 2010)."
+    ),
+    "is_modern": (
         "UD_Icelandic-Modern is a conversion of the modern additions to the "
         "Icelandic Parsed Historical Corpus (IcePaHC) to the Universal "
-        "Dependencies scheme.",
-    "is_icepahc":
+        "Dependencies scheme."
+    ),
+    "is_icepahc": (
         "UD_Icelandic-IcePaHC is a conversion of the Icelandic Parsed "
         "Historical Corpus (IcePaHC) to the Universal Dependencies scheme. The"
-        " conversion was done using UDConverter.",
-    "is_pud":
+        " conversion was done using UDConverter."
+    ),
+    "is_pud": (
         "Icelandic-PUD is the Icelandic part of the Parallel Universal "
-        "Dependencies (PUD) treebanks.",
-    "id_csui":
+        "Dependencies (PUD) treebanks."
+    ),
+    "id_csui": (
         "UD Indonesian-CSUI is a conversion from an Indonesian constituency "
         "treebank in the Penn Treebank format named Kethu that was also a "
         "conversion from a constituency treebank built by Dinakaramani et al. "
         "(2015). We named this treebank Indonesian-CSUI, since all the three "
         "versions of the treebanks were built at Faculty of Computer Science, "
-        "Universitas Indonesia.",
-    "id_gsd":
+        "Universitas Indonesia."
+    ),
+    "id_gsd": (
         "The Indonesian UD is converted from the content head version of the "
-        "universal dependency treebank v2.0 (legacy).",
-    "id_pud":
+        "universal dependency treebank v2.0 (legacy)."
+    ),
+    "id_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "ga_idt":
-        "A Universal Dependencies 4910-sentence treebank for modern Irish.",
-    "ga_twittirish":
-        "A Universal Dependencies treebank of 866 tweets in modern Irish.",
-    "it_isdt":
+        "Raw Text to Universal Dependencies."
+    ),
+    "ga_idt": (
+        "A Universal Dependencies 4910-sentence treebank for modern Irish."
+    ),
+    "ga_twittirish": (
+        "A Universal Dependencies treebank of 866 tweets in modern Irish."
+    ),
+    "it_isdt": (
         "The Italian corpus annotated according to the UD annotation scheme "
         "was obtained by conversion from ISDT (Italian Stanford Dependency "
         "Treebank), released for the dependency parsing shared task of "
-        "Evalita-2014 (Bosco et al. 2014).",
-    "it_partut":
+        "Evalita-2014 (Bosco et al. 2014)."
+    ),
+    "it_partut": (
         "UD_Italian-ParTUT is a conversion of a multilingual parallel treebank"
         " developed at the University of Turin, and consisting of a variety of"
         " text genres, including talks, legal texts and Wikipedia articles, "
-        "among others.",
-    "it_postwita":
+        "among others."
+    ),
+    "it_postwita": (
         "PoSTWITA-UD is a collection of Italian tweets annotated in Universal "
         "Dependencies that can be exploited for the training of NLP systems to"
-        " enhance their performance on social media texts.",
-    "it_markit":
+        " enhance their performance on social media texts."
+    ),
+    "it_markit": (
         "It is MarkIT That is New: An Italian Treebank of Marked "
         "Constructions. Teresa Paccosi, Alessio Palmero Aprosio and Sara "
         "Tonelli, To appear in Proceedings of the Eighth Italian Conference on"
-        " Computational Linguistics 2022 (CLIC-it 2021)",
-    "it_valico":
+        " Computational Linguistics 2022 (CLIC-it 2021)"
+    ),
+    "it_valico": (
         "Manually corrected Treebank of Learner Italian drawn from the Valico "
-        "corpus and correspondent corrected sentences.",
-    "it_pud":
+        "corpus and correspondent corrected sentences."
+    ),
+    "it_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "it_twittiro":
+        "Raw Text to Universal Dependencies."
+    ),
+    "it_twittiro": (
         "TWITTIRÒ-UD is a collection of ironic Italian tweets annotated in "
         "Universal Dependencies. The treebank can be exploited for the "
         "training of NLP systems to enhance their performance on social media "
-        "texts, and in particular, for irony detection purposes.",
-    "it_vit":
+        "texts, and in particular, for irony detection purposes."
+    ),
+    "it_vit": (
         "The UD_Italian-VIT corpus was obtained by conversion from VIT (Venice"
         " Italian Treebank), developed at the Laboratory of Computational "
         "Linguistics of the Università Ca' Foscari in Venice (Delmonte et al. "
         "2007; Delmonte 2009; "
-        "http://rondelmo.it/resource/VIT/Browser-VIT/index.htm).",
-    "ja_pudluw":
+        "http://rondelmo.it/resource/VIT/Browser-VIT/index.htm)."
+    ),
+    "ja_pudluw": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "ja_bccwjluw":
+        "Raw Text to Universal Dependencies."
+    ),
+    "ja_bccwjluw": (
         "This Universal Dependencies (UD) Japanese treebank is based on the "
         "definition of UD Japanese convention described in the UD "
         "documentation. The original sentences are from `Balanced Corpus of "
-        "Contemporary Written Japanese'(BCCWJ).",
-    "ja_gsdluw":
+        "Contemporary Written Japanese'(BCCWJ)."
+    ),
+    "ja_gsdluw": (
         "This Universal Dependencies (UD) Japanese treebank is based on the "
         "definition of UD Japanese convention described in the UD "
-        "documentation. The original sentences are from Google UDT 2.0.",
-    "ja_bccwj":
+        "documentation. The original sentences are from Google UDT 2.0."
+    ),
+    "ja_bccwj": (
         "This Universal Dependencies (UD) Japanese treebank is based on the "
         "definition of UD Japanese convention described in the UD "
         "documentation. The original sentences are from `Balanced Corpus of "
-        "Contemporary Written Japanese'(BCCWJ).",
-    "ja_gsd":
+        "Contemporary Written Japanese'(BCCWJ)."
+    ),
+    "ja_gsd": (
         "This Universal Dependencies (UD) Japanese treebank is based on the "
         "definition of UD Japanese convention described in the UD "
-        "documentation.  The original sentences are from Google UDT 2.0.",
-    "ja_modern":
+        "documentation.  The original sentences are from Google UDT 2.0."
+    ),
+    "ja_modern": (
         "This Universal Dependencies (UD) Japanese treebank is based on the "
         "definition of UD Japanese convention described in the UD "
         "documentation. The original sentences are from `Corpus of Historical "
-        "Japanese' (CHJ).",
-    "ja_pud":
+        "Japanese' (CHJ)."
+    ),
+    "ja_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the [CoNLL 2017 shared task on Multilingual Parsing from"
         " Raw Text to Universal "
-        "Dependencies](http://universaldependencies.org/conll17/).",
-    "jv_csui":
+        "Dependencies](http://universaldependencies.org/conll17/)."
+    ),
+    "jv_csui": (
         "UD Javanese-CSUI is a dependency treebank in Javanese, a regional "
         "language in Indonesia with more than 60 million users. The original "
         "sentences were taken from OPUS, especially from the WikiMatrix v1 "
         "corpus. We revised the sentences that contained more Indonesian words"
-        " than Javanese words and manually annotated them.",
-    "urb_tudet":
+        " than Javanese words and manually annotated them."
+    ),
+    "urb_tudet": (
         "UD_Kaapor-TuDeT is a collection of annotated sentences in Ka'apor. "
         "The project is a work in progress and the treebank is being updated "
-        "on a regular basis.",
-    "xnr_kdtb":
+        "on a regular basis."
+    ),
+    "xnr_kdtb": (
         "The Kangri UD Treebank (KDTB) is a part of the Universal Dependency "
-        "treebank project.",
-    "krl_kkpp":
+        "treebank project."
+    ),
+    "krl_kkpp": (
         "UD Karelian-KKPP is a manually annotated new corpus of Karelian made "
         "in Universal dependencies annotation scheme. The data is collected "
         "from VepKar corpora and consists of mostly modern news texts but also"
-        " some stories and educational texts.",
-    "kk_ktb":
+        " some stories and educational texts."
+    ),
+    "kk_ktb": (
         "The UD Kazakh treebank is a combination of text from various sources "
         "including Wikipedia, some folk tales, sentences from the UDHR, news "
         "and phrasebook sentences. Sentences IDs include partial document "
-        "identifiers.",
-    "arr_tudet":
+        "identifiers."
+    ),
+    "arr_tudet": (
         "UD_Karo-TuDeT is a collection of annotated sentences in Karo. The "
         "sentences stem from the only grammatical description of the language "
         "(Gabas, 1999) and from the sentences in the dictionary by the same "
         "author (Gabas, 2007). Sentence annotation and documentation by "
-        "Fabrício Ferraz Gerardi.",
-    "kfm_aha":
+        "Fabrício Ferraz Gerardi."
+    ),
+    "kfm_aha": (
         "The AHA Khunsari Treebank is a small treebank for contemporary "
         "Khunsari. Its corpus is collected and annotated manually. We have "
-        "prepared this treebank based on interviews with Khunsari speakers.",
-    "quc_iu":
+        "prepared this treebank based on interviews with Khunsari speakers."
+    ),
+    "quc_iu": (
         "UD Kʼicheʼ-IU is a treebank consisting of sentences from a variety of"
         " text domains but principally dictionary example sentences and "
-        "linguistic examples.",
-    "koi_uh":
+        "linguistic examples."
+    ),
+    "koi_uh": (
         "This is a Komi-Permyak literary language treebank consisting of "
-        "original and translated texts.",
-    "kpv_ikdp":
+        "original and translated texts."
+    ),
+    "kpv_ikdp": (
         "This treebank consists of dialectal transcriptions of spoken "
         "Komi-Zyrian. The current texts are short recorded segments from "
-        "different areas where the Iźva dialect of Komi language is spoken.",
-    "kpv_lattice":
-        "UD Komi-Zyrian Lattice is a treebank of written standard Komi-Zyrian.",
-    "ko_gsd":
+        "different areas where the Iźva dialect of Komi language is spoken."
+    ),
+    "kpv_lattice": (
+        "UD Komi-Zyrian Lattice is a treebank of written standard Komi-Zyrian."
+    ),
+    "ko_gsd": (
         "The Google Korean Universal Dependency Treebank is first converted "
         "from the Universal Dependency Treebank v2.0 (legacy), and then "
-        "enhanced by Chun et al., 2018.",
-    "ko_kaist":
+        "enhanced by Chun et al., 2018."
+    ),
+    "ko_kaist": (
         "The KAIST Korean Universal Dependency Treebank is generated by Chun "
         "et al., 2018 from the constituency trees in the KAIST Tree-Tagging "
-        "Corpus.",
-    "ko_pud":
+        "Corpus."
+    ),
+    "ko_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "kmr_mg":
+        "Raw Text to Universal Dependencies."
+    ),
+    "kmr_mg": (
         "The UD Kurmanji corpus is a corpus of Kurmanji Kurdish. It contains "
         "fiction and encyclopaedic texts in roughly equal measure. It has been"
-        " annotated natively in accordance with the UD annotation scheme.",
-    "la_ittb":
+        " annotated natively in accordance with the UD annotation scheme."
+    ),
+    "la_ittb": (
         "Latin data from the _Index Thomisticus_ Treebank. Data are taken from"
         " the _Index Thomisticus_ corpus by Roberto Busa SJ, which contains "
         "the complete work by Thomas Aquinas (1225–1274; Medieval Latin) and "
-        "by 61 other authors related to Thomas.",
-    "la_udante":
+        "by 61 other authors related to Thomas."
+    ),
+    "la_udante": (
         "The UDante treebank is based on the Latin texts of Dante Alighieri, "
         "taken from the DanteSearch corpus, originally created at the "
         "University of Pisa, Italy. It is a treebank of Latin language, more "
-        "precisely of literary Medieval Latin (XIVth century).",
-    "la_llct":
+        "precisely of literary Medieval Latin (XIVth century)."
+    ),
+    "la_llct": (
         "This Universal Dependencies version of the LLCT (Late Latin Charter "
         "Treebank) consists of an automated conversion of the LLCT2 treebank "
         "from the Latin Dependency Treebank (LDT) format into the Universal "
-        "Dependencies standard.",
-    "la_perseus":
+        "Dependencies standard."
+    ),
+    "la_perseus": (
         "This Universal Dependencies Latin Treebank consists of an automatic "
         "conversion of a selection of passages from the Ancient Greek and "
-        "Latin Dependency Treebank 2.1",
-    "la_proiel":
+        "Latin Dependency Treebank 2.1"
+    ),
+    "la_proiel": (
         "The Latin PROIEL treebank is based on the Latin data from the PROIEL "
         "treebank, and contains most of the Vulgate New Testament translations"
         " plus selections from Caesar's Gallic War, Cicero's Letters to "
         "Atticus, Palladius' Opus Agriculturae and the first book of Cicero's "
-        "De officiis.",
-    "lv_lvtb":
+        "De officiis."
+    ),
+    "lv_lvtb": (
         "Latvian UD Treebank is based on Latvian Treebank (LVTB), being "
         "created at University of Latvia, Institute of Mathematics and "
-        "Computer Science, Artificial Intelligence Laboratory.",
-    "lij_glt":
+        "Computer Science, Artificial Intelligence Laboratory."
+    ),
+    "lij_glt": (
         "The Genoese Ligurian Treebank is a small, manually annotated "
         "collection of contemporary Ligurian prose. The focus of the treebank "
         "is written Genoese, the koiné variety of Ligurian which is associated"
-        " with today's literary, journalistic and academic ligurophone sphere.",
-    "lt_alksnis":
+        " with today's literary, journalistic and academic ligurophone sphere."
+    ),
+    "lt_alksnis": (
         "The Lithuanian dependency treebank ALKSNIS v3.0 (Vytautas Magnus "
-        "University).",
-    "lt_hse":
+        "University)."
+    ),
+    "lt_hse": (
         "Lithuanian treebank annotated manually (dependencies) using the "
         "Morphological Annotator by CCL, Vytautas Magnus University "
         "(http://tekstynas.vdu.lt/) and manual disambiguation. A pilot version"
         " which includes news and an essay by Tomas Venclova is available "
-        "here.",
-    "olo_kkpp":
+        "here."
+    ),
+    "olo_kkpp": (
         "UD Livvi-KKPP is a manually annotated new corpus of Livvi-Karelian "
         "made directly in the Universal dependencies annotation scheme. The "
         "data is collected from VepKar corpora and consists of mostly modern "
-        "news texts but also some stories and educational texts.",
-    "nds_lsdc":
+        "news texts but also some stories and educational texts."
+    ),
+    "nds_lsdc": (
         "The UD Low Saxon LSDC dataset consists of sentences in 18 Low Saxon "
         "dialects from both Germany and the Netherlands. These sentences are "
         "(or are to become) part of the LSDC dataset and represent the "
         "language from the 19th and early 20th century in genres such as short"
-        " stories, novels, speeches, letters and fairytales.",
-    "mt_mudt":
+        " stories, novels, speeches, letters and fairytales."
+    ),
+    "mt_mudt": (
         "MUDT (Maltese Universal Dependencies Treebank) is a manually "
         "annotated treebank of Maltese, a Semitic language of Malta descended "
         "from North African Arabic with a significant amount of Italo-Romance "
         "influence. MUDT was designed as a balanced corpus with four major "
-        "genres (see Splitting below) represented roughly equally.",
-    "gv_cadhan":
+        "genres (see Splitting below) represented roughly equally."
+    ),
+    "gv_cadhan": (
         "This is the Cadhan Aonair UD treebank for Manx Gaelic, created by "
-        "Kevin Scannell.",
-    "mr_ufal":
+        "Kevin Scannell."
+    ),
+    "mr_ufal": (
         "UD Marathi is a manually annotated treebank consisting primarily of "
-        "stories from Wikisource, and parts of an article on Wikipedia.",
-    "gun_dooley":
+        "stories from Wikisource, and parts of an article on Wikipedia."
+    ),
+    "gun_dooley": (
         "UD Mbya_Guarani-Dooley is a corpus of narratives written in Mbyá "
         "Guaraní (Tupian) in Brazil, and collected by Robert Dooley. Due to "
         "copyright restrictions, the corpus that is distributed as part of UD "
         "only contains the annotation (tags, features, relations) while the "
-        "FORM and LEMMA columns are empty.",
-    "gun_thomas":
+        "FORM and LEMMA columns are empty."
+    ),
+    "gun_thomas": (
         "UD Mbya_Guarani-Thomas is a corpus of Mbyá Guaraní (Tupian) texts "
         "collected by Guillaume Thomas. The current version of the corpus "
         "consists of three speeches by Paulina Kerechu Núñez Romero, a Mbyá "
-        "Guaraní speaker from Ytu, Caazapá Department, Paraguay.",
-    "mdf_jr":
+        "Guaraní speaker from Ytu, Caazapá Department, Paraguay."
+    ),
+    "mdf_jr": (
         "Erme Universal Dependencies annotated texts Moksha are the origin of "
         "UD_Moksha-JR with annotation (CoNLL-U) for texts in the Moksha "
         "language, it originally consists of a sample from a number of fiction"
-        " authors writing originals in Moksha.",
-    "myu_tudet":
+        " authors writing originals in Moksha."
+    ),
+    "myu_tudet": (
         "UD_Munduruku-TuDeT is a collection of annotated sentences in "
         "Mundurukú. Together with UD_Akuntsu-TuDeT and UD_Tupinamba-TuDeT, "
-        "UD_Munduruku-TuDeT is part of the TuLaR project.",
-    "pcm_nsc":
-        "A Universal Dependencies corpus for spoken Naija (Nigerian Pidgin).",
-    "nyq_aha":
+        "UD_Munduruku-TuDeT is part of the TuLaR project."
+    ),
+    "pcm_nsc": (
+        "A Universal Dependencies corpus for spoken Naija (Nigerian Pidgin)."
+    ),
+    "nyq_aha": (
         "The AHA Nayini Treebank is a small treebank for contemporary Nayini. "
         "Its corpus is collected and annotated manually. We have prepared this"
-        " treebank based on interviews with Nayini speakers.",
-    "sme_giella":
+        " treebank based on interviews with Nayini speakers."
+    ),
+    "sme_giella": (
         "This is a North Sámi treebank based on a manually disambiguated and "
         "function-labelled gold-standard corpus of North Sámi produced by the "
-        "Giellatekno team at UiT Norgga árktalaš universitehta.",
-    "no_bokmaal":
+        "Giellatekno team at UiT Norgga árktalaš universitehta."
+    ),
+    "no_bokmaal": (
         "The Norwegian UD treebank is based on the Bokmål section of the "
         "Norwegian Dependency Treebank (NDT), which is a syntactic treebank of"
         " Norwegian. NDT has been automatically converted to the UD scheme by "
-        "Lilja Øvrelid at the University of Oslo.",
-    "no_nynorsk":
+        "Lilja Øvrelid at the University of Oslo."
+    ),
+    "no_nynorsk": (
         "The Norwegian UD treebank is based on the Nynorsk section of the "
         "Norwegian Dependency Treebank (NDT), which is a syntactic treebank of"
         " Norwegian.  NDT has been automatically converted to the UD scheme by"
-        " Lilja Øvrelid at the University of Oslo.",
-    "no_nynorsklia":
+        " Lilja Øvrelid at the University of Oslo."
+    ),
+    "no_nynorsklia": (
         "This Norwegian treebank is based on the LIA treebank of transcribed "
         "spoken Norwegian dialects. The treebank has been automatically "
         "converted to the UD scheme by Lilja Øvrelid at the University of "
-        "Oslo.",
-    "cu_proiel":
+        "Oslo."
+    ),
+    "cu_proiel": (
         "The Old Church Slavonic (OCS) UD treebank is based on the Old Church "
         "Slavonic data from the PROIEL treebank and contains the text of the "
-        "Codex Marianus New Testament translation.",
-    "fro_srcmf":
+        "Codex Marianus New Testament translation."
+    ),
+    "fro_srcmf": (
         "UD_Old_French-SRCMF is a conversion of (part of) the SRCMF corpus "
-        "(Syntactic Reference Corpus of Medieval French srcmf.org).",
-    "orv_birchbark":
+        "(Syntactic Reference Corpus of Medieval French srcmf.org)."
+    ),
+    "orv_birchbark": (
         "UD Old_East_Slavic-Birchbark is based on the RNC Corpus of Birchbark "
         "Letters and includes documents written in 1025-1500 in an East Slavic"
         " vernacular (letters, household and business records, records for "
         "church services, spell against diseases, and other short "
         "inscriptions). The treebank is manually syntactically annotated in "
         "the UD 2.0 scheme, morphological and lexical annotation is a "
-        "conversion of the original RNC annotation.",
-    "orv_rnc":
+        "conversion of the original RNC annotation."
+    ),
+    "orv_rnc": (
         "`UD_Old_Russian-RNC` is a sample of the Middle Russian corpus "
         "(1300-1700), a part of the Russian National Corpus. The data were "
         "originally annotated according to the RNC and extended UD-Russian "
-        "morphological schemas and UD 2.4 dependency schema.",
-    "orv_torot":
+        "morphological schemas and UD 2.4 dependency schema."
+    ),
+    "orv_torot": (
         "UD_Old_Russian-TOROT is a conversion of a selection of the Old East "
         "Slavonic and Middle Russian data in the Tromsø Old Russian and OCS "
         "Treebank (TOROT), which was originally annotated in PROIEL dependency"
-        " format.",
-    "otk_tonqq":
+        " format."
+    ),
+    "otk_tonqq": (
         "`UD_Old_Turkish-Tonqq` is an Old Turkish treebank built upon Turkic "
-        "script texts or sentences that are trivially convertible.",
-    "fa_perdt":
+        "script texts or sentences that are trivially convertible."
+    ),
+    "fa_perdt": (
         "The Persian Universal Dependency Treebank (PerUDT) is the result of "
         "automatic coversion of Persian Dependency Treebank (PerDT) with "
         "extensive manual corrections. Please refer to the follwoing work, if "
         "you use this data: Mohammad Sadegh Rasooli, Pegah Safari, Amirsaeid "
         "Moloodi, and Alireza Nourian. 'The Persian Dependency Treebank Made "
-        "Universal'. 2020 (to appear).",
-    "fa_seraji":
+        "Universal'. 2020 (to appear)."
+    ),
+    "fa_seraji": (
         "The Persian Universal Dependency Treebank (Persian UD) is based on "
         "Uppsala Persian Dependency Treebank (UPDT). The conversion of the "
         "UPDT to the Universal Dependencies was performed semi-automatically "
-        "with extensive manual checks and corrections.",
-    "pl_lfg":
+        "with extensive manual checks and corrections."
+    ),
+    "pl_lfg": (
         "The LFG Enhanced UD treebank of Polish is based on a corpus of LFG "
         "(Lexical Functional Grammar) syntactic structures generated by an LFG"
         " grammar of Polish, POLFIE, and manually disambiguated by human "
-        "annotators.",
-    "pl_pdb":
+        "annotators."
+    ),
+    "pl_pdb": (
         "The Polish PDB-UD treebank is based on the Polish Dependency Bank 2.0"
         " (PDB 2.0), created at the Institute of Computer Science, Polish "
         "Academy of Sciences in Warsaw. The PDB-UD treebank is an extended and"
         " corrected version of the Polish SZ-UD treebank (the release 1.2 to "
-        "2.3).",
-    "pl_pud":
+        "2.3)."
+    ),
+    "pl_pud": (
         "This is the Polish portion of the Parallel Universal Dependencies "
         "(PUD) treebanks, created at the Institute of Computer Science, Polish"
-        " Academy of Sciences in Warsaw.Re",
-    "pt_bosque":
+        " Academy of Sciences in Warsaw.Re"
+    ),
+    "pt_bosque": (
         "This Universal Dependencies (UD) Portuguese treebank is based on the "
         "Constraint Grammar converted version of the Bosque, which is part of "
         "the Floresta Sintá(c)tica treebank. It contains both European "
-        "(CETEMPúblico) and Brazilian (CETENFolha) variants.",
-    "pt_gsd":
+        "(CETEMPúblico) and Brazilian (CETENFolha) variants."
+    ),
+    "pt_gsd": (
         "The Brazilian Portuguese UD is converted from the Google Universal "
-        "Dependency Treebank v2.0 (legacy).",
-    "pt_pud":
+        "Dependency Treebank v2.0 (legacy)."
+    ),
+    "pt_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "ro_art":
+        "Raw Text to Universal Dependencies."
+    ),
+    "ro_art": (
         "The UD treebank ArT is a treebank of the Aromanian dialect of the "
-        "Romanian language in UD format.",
-    "ro_nonstandard":
+        "Romanian language in UD format."
+    ),
+    "ro_nonstandard": (
         "The Romanian Non-standard UD treebank (called UAIC-RoDia) is based on"
-        " UAIC-RoDia Treebank. UAIC-RoDia = ISLRN 156-635-615-024-0",
-    "ro_rrt":
+        " UAIC-RoDia Treebank. UAIC-RoDia = ISLRN 156-635-615-024-0"
+    ),
+    "ro_rrt": (
         "The Romanian UD treebank (called RoRefTrees) (Barbu Mititelu et al., "
-        "2016) is the reference treebank in UD format for standard Romanian.",
-    "ro_simonero":
-        "SiMoNERo is a medical corpus of contemporary Romanian.",
-    "ru_gsd":
+        "2016) is the reference treebank in UD format for standard Romanian."
+    ),
+    "ro_simonero": "SiMoNERo is a medical corpus of contemporary Romanian.",
+    "ru_gsd": (
         "Russian Universal Dependencies Treebank annotated and converted by "
-        "Google.",
-    "ru_pud":
+        "Google."
+    ),
+    "ru_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "ru_syntagrus":
-        "Russian data from the SynTagRus corpus.",
-    "ru_taiga":
+        "Raw Text to Universal Dependencies."
+    ),
+    "ru_syntagrus": "Russian data from the SynTagRus corpus.",
+    "ru_taiga": (
         "Universal Dependencies treebank is based on data samples extracted "
         "from Taiga Corpus and MorphoRuEval-2017 and GramEval-2020 shared "
-        "tasks collections.",
-    "sa_ufal":
+        "tasks collections."
+    ),
+    "sa_ufal": (
         "A small Sanskrit treebank of sentences from Pañcatantra, an ancient "
-        "Indian collection of interrelated fables by Vishnu Sharma.",
-    "sa_vedic":
+        "Indian collection of interrelated fables by Vishnu Sharma."
+    ),
+    "sa_vedic": (
         "The Treebank of Vedic Sanskrit contains 4,000 sentences with 27,000 "
         "words chosen from metrical and prose passages of the Ṛgveda (RV), the"
         " Śaunaka recension of the Atharvaveda (ŚS), the Maitrāyaṇīsaṃhitā "
         "(MS), and the Aitareya- (AB) and Śatapatha-Brāhmaṇas (ŚB). Lexical "
         "and morpho-syntactic information has been generated using a tagging "
         "software and manually validated. POS tags have been induced "
-        "automatically from the morpho-sytactic information of each word.",
-    "gd_arcosg":
+        "automatically from the morpho-sytactic information of each word."
+    ),
+    "gd_arcosg": (
         "A treebank of Scottish Gaelic based on the Annotated Reference Corpus"
-        " Of Scottish Gaelic (ARCOSG).",
-    "sr_set":
+        " Of Scottish Gaelic (ARCOSG)."
+    ),
+    "sr_set": (
         "The Serbian UD treebank is based on the "
         "[SETimes-SR](http://hdl.handle.net/11356/1200) corpus and additional "
-        "news documents from the Serbian web.",
-    "sms_giellagas":
+        "news documents from the Serbian web."
+    ),
+    "sms_giellagas": (
         "The UD Skolt Sami Giellagas treebank is based almost entirely on "
-        "spoken Skolt Sami corpora.",
-    "sk_snk":
+        "spoken Skolt Sami corpora."
+    ),
+    "sk_snk": (
         "The Slovak UD treebank is based on data originally annotated as part "
         "of the Slovak National Corpus, following the annotation style of the "
-        "Prague Dependency Treebank.",
-    "sl_ssj":
+        "Prague Dependency Treebank."
+    ),
+    "sl_ssj": (
         "The Slovenian UD Treebank is a rule-based conversion of the ssj500k "
         "treebank, the largest collection of manually syntactically annotated "
-        "data in Slovenian, originally annotated in the JOS annotation scheme.",
-    "sl_sst":
+        "data in Slovenian, originally annotated in the JOS annotation scheme."
+    ),
+    "sl_sst": (
         "The Spoken Slovenian UD Treebank (SST) is the first syntactically "
         "annotated corpus of spoken Slovenian, based on a sample of the "
         "reference GOS corpus, a collection of transcribed audio recordings of"
         " monologic, dialogic and multi-party spontaneous speech in different "
-        "everyday situations.",
-    "soj_aha":
+        "everyday situations."
+    ),
+    "soj_aha": (
         "The AHA Soi Treebank is a small treebank for contemporary Soi. Its "
         "corpus is collected and annotated manually. We have prepared this "
-        "treebank based on interviews with Soi speakers.",
-    "ajp_madar":
+        "treebank based on interviews with Soi speakers."
+    ),
+    "ajp_madar": (
         "The South_Levantine_Arabic-MADAR treebank consists of 100 "
         "manually-annotated sentences taken from the "
         "[MADAR](https://camel.abudhabi.nyu.edu/madar/) (Multi-Arabic Dialect "
-        "Applications and Resources) project. ",
-    "es_ancora":
-        "Spanish data from the AnCora corpus.",
-    "es_gsd":
+        "Applications and Resources) project. "
+    ),
+    "es_ancora": "Spanish data from the AnCora corpus.",
+    "es_gsd": (
         "The Spanish UD is converted from the content head version of the "
-        "universal dependency treebank v2.0 (legacy).",
-    "es_pud":
+        "universal dependency treebank v2.0 (legacy)."
+    ),
+    "es_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the [CoNLL 2017 shared task on Multilingual Parsing from"
         " Raw Text to Universal "
-        "Dependencies](http://universaldependencies.org/conll17/).",
-    "swl_sslc":
+        "Dependencies](http://universaldependencies.org/conll17/)."
+    ),
+    "swl_sslc": (
         "The Universal Dependencies treebank for Swedish Sign Language (ISO "
         "639-3: swl) is derived from the Swedish Sign Language Corpus (SSLC) "
-        "from the department of linguistics, Stockholm University.",
-    "sv_lines":
+        "from the department of linguistics, Stockholm University."
+    ),
+    "sv_lines": (
         "UD Swedish_LinES is the Swedish half of the LinES Parallel Treebank "
         "with UD annotations. All segments are translations from English and "
-        "the sources cover literary genres, online manuals and Europarl data.",
-    "sv_pud":
+        "the sources cover literary genres, online manuals and Europarl data."
+    ),
+    "sv_pud": (
         "Swedish-PUD is the Swedish part of the Parallel Universal "
-        "Dependencies (PUD) treebanks.",
-    "sv_talbanken":
+        "Dependencies (PUD) treebanks."
+    ),
+    "sv_talbanken": (
         "The Swedish-Talbanken treebank is based on Talbanken, a treebank "
-        "developed at Lund University in the 1970s.",
-    "gsw_uzh":
+        "developed at Lund University in the 1970s."
+    ),
+    "gsw_uzh": (
         "_UD_Swiss_German-UZH_ is a tiny manually annotated treebank of 100 "
         "sentences in different Swiss German dialects and a variety of text "
-        "genres.",
-    "tl_trg":
+        "genres."
+    ),
+    "tl_trg": (
         "UD_Tagalog-TRG is a UD treebank manually annotated using sentences "
-        "from a grammar book.",
-    "tl_ugnayan":
+        "from a grammar book."
+    ),
+    "tl_ugnayan": (
         "Ugnayan is a manually annotated Tagalog treebank currently composed "
         "of educational fiction and nonfiction text. The treebank is under "
-        "development at the University of the Philippines.",
-    "ta_mwtt":
+        "development at the University of the Philippines."
+    ),
+    "ta_mwtt": (
         "MWTT - Modern Written Tamil Treebank has sentences taken primarily "
         "from a text called 'A Grammar of Modern Tamil' by Thomas Lehmann "
         "(1993). This initial release has 536 sentences of various lengths, "
-        "and all of these are added as the test set.",
-    "ta_ttb":
+        "and all of these are added as the test set."
+    ),
+    "ta_ttb": (
         "The UD Tamil treebank is based on the Tamil Dependency Treebank "
-        "created at the Charles University in Prague by Loganathan Ramasamy.",
-    "te_mtg":
+        "created at the Charles University in Prague by Loganathan Ramasamy."
+    ),
+    "te_mtg": (
         "The Telugu UD treebank is created in UD based on manual annotations "
-        "of sentences from a grammar book.",
-    "th_pud":
+        "of sentences from a grammar book."
+    ),
+    "th_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "tpn_tudet":
+        "Raw Text to Universal Dependencies."
+    ),
+    "tpn_tudet": (
         "UD_Tupinamba-TuDeT is a collection of annotated texts in Tupi(nambá)."
         " Together with UD_Akuntsu-TuDeT and UD_Munduruku-TuDeT, "
         "UD_Tupinamba-TuDeT is part of the TuLaR. The treebank is ongoing work"
-        " and is constantly being updated.",
-    "qtd_sagt":
+        " and is constantly being updated."
+    ),
+    "qtd_sagt": (
         "UD Turkish-German SAGT is a Turkish-German code-switching treebank "
-        "that is developed as part of the SAGT project.",
-    "tr_atis":
+        "that is developed as part of the SAGT project."
+    ),
+    "tr_atis": (
         "This treebank is a translation of English ATIS (Airline Travel "
         "Information System) corpus (see References). It consists of 5432 "
-        "sentences.",
-    "tr_tourism":
+        "sentences."
+    ),
+    "tr_tourism": (
         "Turkish Tourism is a domain specific treebank consisting of 19,750 "
         "manually annotated sentences and 92,200 tokens. These sentences were "
-        "taken from the original customer reviews of a tourism company.",
-    "tr_kenet":
+        "taken from the original customer reviews of a tourism company."
+    ),
+    "tr_kenet": (
         "Turkish-Kenet UD Treebank is the biggest treebank of Turkish. It "
         "consists of 18,700 manually annotated sentences and 178,700 tokens. "
-        "Its corpus consists of dictionary examples.",
-    "tr_penn":
+        "Its corpus consists of dictionary examples."
+    ),
+    "tr_penn": (
         "Turkish version of the Penn Treebank. It consists of a total of 9,560"
         " manually annotated sentences and 87,367 tokens. (It only includes "
-        "sentences up to 15 words long.)",
-    "tr_framenet":
+        "sentences up to 15 words long.)"
+    ),
+    "tr_framenet": (
         "Turkish FrameNet consists of 2,700 manually annotated example "
         "sentences and 19,221 tokens. Its data consists of the sentences taken"
         " from the Turkish FrameNet Project. The annotated sentences can be "
         "filtered according to the semantic frame category of the root of the "
-        "sentence.",
-    "tr_boun":
+        "sentence."
+    ),
+    "tr_boun": (
         "The largest Turkish dependency treebank annotated in UD style. "
         "Created by the members of "
         "[TABILAB](http://http://tabilab.cmpe.boun.edu.tr/) from Boğaziçi "
-        "University.",
-    "tr_gb":
+        "University."
+    ),
+    "tr_gb": (
         "This is a treebank annotating example sentences from a comprehensive "
-        "grammar book of Turkish.",
-    "tr_imst":
+        "grammar book of Turkish."
+    ),
+    "tr_imst": (
         "The UD Turkish Treebank, also called the IMST-UD Treebank, is a "
         "semi-automatic conversion of the IMST Treebank (Sulubacak et al., "
-        "2016).",
-    "tr_pud":
+        "2016)."
+    ),
+    "tr_pud": (
         "This is a part of the Parallel Universal Dependencies (PUD) treebanks"
         " created for the CoNLL 2017 shared task on Multilingual Parsing from "
-        "Raw Text to Universal Dependencies.",
-    "uk_iu":
+        "Raw Text to Universal Dependencies."
+    ),
+    "uk_iu": (
         "Gold standard Universal Dependencies corpus for Ukrainian, developed "
-        "for UD originally, by Institute for Ukrainian, NGO. [українською]",
-    "hsb_ufal":
-        "A small treebank of Upper Sorbian based mostly on Wikipedia.",
-    "ur_udtb":
+        "for UD originally, by Institute for Ukrainian, NGO. [українською]"
+    ),
+    "hsb_ufal": "A small treebank of Upper Sorbian based mostly on Wikipedia.",
+    "ur_udtb": (
         "The Urdu Universal Dependency Treebank was automatically converted "
         "from Urdu Dependency Treebank (UDTB) which is part of an ongoing "
-        "effort of creating multi-layered treebanks for Hindi and Urdu.",
-    "ug_udt":
+        "effort of creating multi-layered treebanks for Hindi and Urdu."
+    ),
+    "ug_udt": (
         "The Uyghur UD treebank is based on the Uyghur Dependency Treebank "
-        "(UDT), created at the Xinjiang University in Ürümqi, China.",
-    "vi_vtb":
+        "(UDT), created at the Xinjiang University in Ürümqi, China."
+    ),
+    "vi_vtb": (
         "The Vietnamese UD treebank is a conversion of the constituent "
-        "treebank created in the VLSP project (https://vlsp.hpda.vn/).",
-    "wbp_ufal":
+        "treebank created in the VLSP project (https://vlsp.hpda.vn/)."
+    ),
+    "wbp_ufal": (
         "A small treebank of grammatical examples in Warlpiri, taken from "
-        "linguistic literature.",
-    "cy_ccg":
+        "linguistic literature."
+    ),
+    "cy_ccg": (
         "UD Welsh-CCG (Corpws Cystrawennol y Gymraeg) is a treebank of Welsh, "
-        "annotated according to the Universal Dependencies guidelines.",
-    "hy_armtdp":
+        "annotated according to the Universal Dependencies guidelines."
+    ),
+    "hy_armtdp": (
         "A Universal Dependencies treebank for Eastern Armenian developed for "
         "UD originally by the ArmTDP team led by Marat M. Yavrumyan at the "
-        "Yerevan State University.",
-    "wo_wtb":
+        "Yerevan State University."
+    ),
+    "wo_wtb": (
         "UD_Wolof-WTB is a natively manual developed treebank for Wolof. "
         "Sentences were collected from encyclopedic, fictional, biographical, "
-        "religious texts and news.",
-    "sjo_xdt":
+        "religious texts and news."
+    ),
+    "sjo_xdt": (
         "The UD Xibe Treebank is a corpus of the Xibe language (ISO "
         "639-3: sjo) containing manually annotated syntactic trees under the "
         "Universal Dependencies. Sentences come from three sources: grammar "
-        "book examples, newspaper (Cabcal News) and Xibe textbooks.",
-    "sah_yktdt":
+        "book examples, newspaper (Cabcal News) and Xibe textbooks."
+    ),
+    "sah_yktdt": (
         "UD_Yakut-YKTDT is a collection Yakut ([Sakha]) sentences "
         "(https://glottolog.org/resource/languoid/id/yaku1245). The project is "
-        "work-in-progress and the treebank is being updated on a regular basis",
-    "yo_ytb":
+        "work-in-progress and the treebank is being updated on a regular basis"
+    ),
+    "yo_ytb": (
         "Parts of the Yoruba Bible and of the Yoruba edition of Wikipedia, "
-        "hand-annotated natively in Universal Dependencies.",
-    "ess_sli":
+        "hand-annotated natively in Universal Dependencies."
+    ),
+    "ess_sli": (
         "UD_Yupik-SLI is a treebank of St. Lawrence Island Yupik (ISO 639-3: "
         "ess) that has been manually annotated at the morpheme level, based on "
         "a finite-state morphological analyzer by Chen et al., 2020. The "
         "word-level annotation, merging multiword expressions, is provided in "
         "not-to-release/ess_sli-ud-test.merged.conllu. More information about "
-        "the treebank can be found in our publication (AmericasNLP, 2021).",
+        "the treebank can be found in our publication (AmericasNLP, 2021)."
+    ),
 }
 
 UD_FILEPATHS = {
@@ -1592,12 +1794,11 @@ UD_FILEPATHS = {
         "test": "UD_Norwegian-NynorskLIA/r2.10/no_nynorsklia-ud-test.conllu",
     },
     "cu_proiel": {
-        "train":
-            "UD_Old_Church_Slavonic-PROIEL/r2.10/cu_proiel-ud-train.conllu",
-        "dev":
-            "UD_Old_Church_Slavonic-PROIEL/r2.10/cu_proiel-ud-dev.conllu",
-        "test":
-            "UD_Old_Church_Slavonic-PROIEL/r2.10/cu_proiel-ud-test.conllu",
+        "train": (
+            "UD_Old_Church_Slavonic-PROIEL/r2.10/cu_proiel-ud-train.conllu"
+        ),
+        "dev": "UD_Old_Church_Slavonic-PROIEL/r2.10/cu_proiel-ud-dev.conllu",
+        "test": "UD_Old_Church_Slavonic-PROIEL/r2.10/cu_proiel-ud-test.conllu",
     },
     "fro_srcmf": {
         "train": "UD_Old_French-SRCMF/r2.10/fro_srcmf-ud-train.conllu",
@@ -1605,12 +1806,13 @@ UD_FILEPATHS = {
         "test": "UD_Old_French-SRCMF/r2.10/fro_srcmf-ud-test.conllu",
     },
     "orv_birchbark": {
-        "train":
-            "UD_Old_East_Slavic-Birchbark/r2.10/orv_birchbark-ud-train.conllu",
-        "dev":
-            "UD_Old_East_Slavic-Birchbark/r2.10/orv_birchbark-ud-dev.conllu",
-        "test":
-            "UD_Old_East_Slavic-Birchbark/r2.10/orv_birchbark-ud-test.conllu",
+        "train": (
+            "UD_Old_East_Slavic-Birchbark/r2.10/orv_birchbark-ud-train.conllu"
+        ),
+        "dev": "UD_Old_East_Slavic-Birchbark/r2.10/orv_birchbark-ud-dev.conllu",
+        "test": (
+            "UD_Old_East_Slavic-Birchbark/r2.10/orv_birchbark-ud-test.conllu"
+        ),
     },
     "orv_rnc": {
         "train": "UD_Old_Russian-RNC/r2.10/orv_rnc-ud-train.conllu",
@@ -1734,8 +1936,9 @@ UD_FILEPATHS = {
         "test": "UD_Soi-AHA/r2.10/soj_aha-ud-test.conllu",
     },
     "ajp_madar": {
-        "test":
-            "UD_South_Levantine_Arabic-MADAR/r2.10/ajp_madar-ud-test.conllu",
+        "test": (
+            "UD_South_Levantine_Arabic-MADAR/r2.10/ajp_madar-ud-test.conllu"
+        ),
     },
     "es_ancora": {
         "train": "UD_Spanish-AnCora/r2.10/es_ancora-ud-train.conllu",
@@ -1898,8 +2101,8 @@ LANGS = DESCRIPTIONS.keys()
 
 def prepare_ud_filepaths(
     path_prefix: epath.PathLike,
-    filepaths: Union[epath.PathLike,
-                     List[epath.PathLike]]) -> List[epath.PathLike]:
+    filepaths: Union[epath.PathLike, List[epath.PathLike]],
+) -> List[epath.PathLike]:
   """Prepends a path prefix to a (list of) filepaths.
 
   Args:

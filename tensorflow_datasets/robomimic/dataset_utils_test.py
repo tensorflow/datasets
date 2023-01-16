@@ -43,8 +43,9 @@ class DatasetUtilsTest(absltest.TestCase):
   def setUp(self):
     super().setUp()
     basedir = epath.Path(inspect.getfile(inspect.getmodule(self))).parent
-    self.dataset_dir = os.path.join(basedir, 'dummy_data',
-                                    'robomimic_test.hdf5')
+    self.dataset_dir = os.path.join(
+        basedir, 'dummy_data', 'robomimic_test.hdf5'
+    )
 
   def test_last_transition_corresponds_to_source_dataset(self):
     dataset = _build_dataset(self.dataset_dir)
@@ -65,8 +66,11 @@ class DatasetUtilsTest(absltest.TestCase):
     # have a complaint about truth value of an array.
     equality = np.array(
         tree.flatten(
-            tree.map_structure(lambda a, b: (a == b).all(), ds_last_obs,
-                               raw_last_obs))).all()
+            tree.map_structure(
+                lambda a, b: (a == b).all(), ds_last_obs, raw_last_obs
+            )
+        )
+    ).all()
     self.assertTrue(equality)
 
   def test_episode_boundaries_are_coherent(self):
@@ -83,12 +87,12 @@ class DatasetUtilsTest(absltest.TestCase):
           self.assertEqual(steps['is_terminal'][i], False)
           self.assertEqual(steps['discount'][i], 1.0)
         # Test middle steps:
-        if i > 0 and i < num_steps-1:
+        if i > 0 and i < num_steps - 1:
           self.assertEqual(steps['is_first'][i], False)
           self.assertEqual(steps['is_last'][i], False)
           self.assertEqual(steps['discount'][i], 1.0)
         # Test final steps:
-        if i == num_steps-1:
+        if i == num_steps - 1:
           self.assertEqual(steps['is_first'][i], False)
           self.assertEqual(steps['is_last'][i], True)
           self.assertEqual(steps['is_terminal'][i], True)
@@ -103,6 +107,7 @@ class DatasetUtilsTest(absltest.TestCase):
     metadata = dataset_utils.episode_metadata(mask, 'episode1')
     expected_metadata = {'flag0': False, 'flag1': True}
     self.assertDictEqual(metadata, expected_metadata)
+
 
 if __name__ == '__main__':
   absltest.main()

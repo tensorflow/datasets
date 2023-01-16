@@ -22,7 +22,7 @@ import numpy as np
 import six
 import tensorflow_datasets.public_api as tfds
 
-_URL = ("https://github.com/deepmind/abstract-reasoning-matrices")
+_URL = "https://github.com/deepmind/abstract-reasoning-matrices"
 
 _DESCRIPTION_NEUTRAL = r"""The structures encoding the matrices in both the \
 training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \
@@ -95,6 +95,7 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
 
 class Builder(tfds.core.BeamBasedBuilder):
   """Abstract reasoning dataset."""
+
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Data can be downloaded from
   https://console.cloud.google.com/storage/browser/ravens-matrices
@@ -146,18 +147,14 @@ class Builder(tfds.core.BeamBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "context":
-                tfds.features.Video(shape=(8, 160, 160, 1)),
-            "answers":
-                tfds.features.Video(shape=(8, 160, 160, 1)),
-            "target":
-                tfds.features.ClassLabel(num_classes=8),
-            "meta_target":
-                tfds.features.Tensor(shape=[12], dtype=np.int64),
-            "relation_structure_encoded":
-                tfds.features.Tensor(shape=[4, 12], dtype=np.int64),
-            "filename":
-                tfds.features.Text(),
+            "context": tfds.features.Video(shape=(8, 160, 160, 1)),
+            "answers": tfds.features.Video(shape=(8, 160, 160, 1)),
+            "target": tfds.features.ClassLabel(num_classes=8),
+            "meta_target": tfds.features.Tensor(shape=[12], dtype=np.int64),
+            "relation_structure_encoded": tfds.features.Tensor(
+                shape=[4, 12], dtype=np.int64
+            ),
+            "filename": tfds.features.Text(),
         }),
         homepage=_URL,
     )
@@ -170,18 +167,22 @@ class Builder(tfds.core.BeamBasedBuilder):
             gen_kwargs={
                 "folder": path,
                 "split": "train",
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "folder": path,
                 "split": "val",
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs={
+            name=tfds.Split.TEST,
+            gen_kwargs={
                 "folder": path,
                 "split": "test",
-            }),
+            },
+        ),
     ]
 
   def _build_pcollection(self, pipeline, folder, split):
@@ -195,7 +196,8 @@ class Builder(tfds.core.BeamBasedBuilder):
       """Extracts files from the tar archives."""
       filename, split = inputs
       for name, fobj in tfds.download.iter_archive(
-          filename, tfds.download.ExtractMethod.TAR_STREAM):
+          filename, tfds.download.ExtractMethod.TAR_STREAM
+      ):
         split_name = name.split("_")
         if len(split_name) > 2 and split_name[2] == split:
           yield [name, fobj.read()]
@@ -229,10 +231,12 @@ class Builder(tfds.core.BeamBasedBuilder):
       for row in rows:
         yield row
 
-    return (pipeline
-            | beam.Create([(filename, split)])
-            | beam.FlatMap(_extract_data)
-            | beam.Map(_add_random_keys)
-            | beam.GroupByKey()
-            | beam.FlatMap(_remove_keys)
-            | beam.Map(_process_example))
+    return (
+        pipeline
+        | beam.Create([(filename, split)])
+        | beam.FlatMap(_extract_data)
+        | beam.Map(_add_random_keys)
+        | beam.GroupByKey()
+        | beam.FlatMap(_remove_keys)
+        | beam.Map(_process_example)
+    )

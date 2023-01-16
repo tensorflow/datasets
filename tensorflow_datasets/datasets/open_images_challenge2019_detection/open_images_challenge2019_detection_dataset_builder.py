@@ -28,15 +28,18 @@ import tensorflow_datasets.public_api as tfds
 _URL = "https://storage.googleapis.com/openimages/web/challenge2019.html"
 
 _GOOGLE_URL_PREFIX = (
-    "https://storage.googleapis.com/openimages/challenge_2019/challenge-2019-")
+    "https://storage.googleapis.com/openimages/challenge_2019/challenge-2019-"
+)
 _FIGURE_EIGHT_BASE_URL = (
-    "https://datasets.figure-eight.com/figure_eight_datasets/open-images/")
+    "https://datasets.figure-eight.com/figure_eight_datasets/open-images/"
+)
 _TRAIN_IMAGES_URLS = [
     "{}zip_files_copy/train_{:02d}.zip".format(_FIGURE_EIGHT_BASE_URL, n)
     for n in range(9)
 ]
 _VALIDATION_IMAGES_URL = (
-    _FIGURE_EIGHT_BASE_URL + "zip_files_copy/validation.zip")
+    _FIGURE_EIGHT_BASE_URL + "zip_files_copy/validation.zip"
+)
 _TEST_IMAGES_URL = _FIGURE_EIGHT_BASE_URL + "test_challenge.zip"
 _NUM_CLASSES = 500
 
@@ -61,11 +64,13 @@ class _OpenImagesChallenge2019(tfds.core.BeamBasedBuilder):  # pytype: disable=i
       OpenImagesChallenge2019Config(
           name="200k",
           description="Images have at most 200,000 pixels, at 72 JPEG quality.",
-          target_pixels=200000),
+          target_pixels=200000,
+      ),
       OpenImagesChallenge2019Config(
           name="300k",
           description="Images have at most 300,000 pixels, at 72 JPEG quality.",
-          target_pixels=300000),
+          target_pixels=300000,
+      ),
   ]
 
   @property
@@ -86,7 +91,7 @@ class _OpenImagesChallenge2019(tfds.core.BeamBasedBuilder):  # pytype: disable=i
     urls = {
         "train_images": _TRAIN_IMAGES_URLS,
         "test_images": [_TEST_IMAGES_URL],
-        "validation_images": [_VALIDATION_IMAGES_URL]
+        "validation_images": [_VALIDATION_IMAGES_URL],
     }
     urls.update(self.annotation_urls)  # pytype: disable=wrong-arg-types
     paths = dl_manager.download(urls)
@@ -112,45 +117,41 @@ class Builder(_OpenImagesChallenge2019):
   @property
   def annotation_urls(self):
     return {
-        "train_image_label":
-            _GOOGLE_URL_PREFIX + "train-detection-human-imagelabels.csv",
-        "train_boxes":
-            _GOOGLE_URL_PREFIX + "train-detection-bbox.csv",
-        "validation_image_label":
-            _GOOGLE_URL_PREFIX + "validation-detection-human-imagelabels.csv",
-        "validation_boxes":
-            _GOOGLE_URL_PREFIX + "validation-detection-bbox.csv",
-        "classes":
-            _GOOGLE_URL_PREFIX + "classes-description-500.csv",
-        "hierarchy":
-            _GOOGLE_URL_PREFIX + "label500-hierarchy.json",
+        "train_image_label": (
+            _GOOGLE_URL_PREFIX + "train-detection-human-imagelabels.csv"
+        ),
+        "train_boxes": _GOOGLE_URL_PREFIX + "train-detection-bbox.csv",
+        "validation_image_label": (
+            _GOOGLE_URL_PREFIX + "validation-detection-human-imagelabels.csv"
+        ),
+        "validation_boxes": (
+            _GOOGLE_URL_PREFIX + "validation-detection-bbox.csv"
+        ),
+        "classes": _GOOGLE_URL_PREFIX + "classes-description-500.csv",
+        "hierarchy": _GOOGLE_URL_PREFIX + "label500-hierarchy.json",
     }
 
   def _info(self):
     label = tfds.features.ClassLabel(num_classes=_NUM_CLASSES)
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "id":
-                tfds.features.Text(),
-            "image":
-                tfds.features.Image(),
+            "id": tfds.features.Text(),
+            "image": tfds.features.Image(),
             # A sequence of image-level labels.
-            "objects":
-                tfds.features.Sequence({
-                    "label": label,
-                    # All labels have been verified by humans.
-                    #  - If confidence is 1.0, the object IS in the image.
-                    #  - If confidence is 0.0, the object is NOT in the image.
-                    "confidence": np.float32,
-                    "source": tfds.features.Text(),
-                }),
+            "objects": tfds.features.Sequence({
+                "label": label,
+                # All labels have been verified by humans.
+                #  - If confidence is 1.0, the object IS in the image.
+                #  - If confidence is 0.0, the object is NOT in the image.
+                "confidence": np.float32,
+                "source": tfds.features.Text(),
+            }),
             # A sequence of bounding boxes.
-            "bobjects":
-                tfds.features.Sequence({
-                    "label": label,
-                    "bbox": tfds.features.BBoxFeature(),
-                    "is_group_of": np.bool_,
-                }),
+            "bobjects": tfds.features.Sequence({
+                "label": label,
+                "bbox": tfds.features.BBoxFeature(),
+                "is_group_of": np.bool_,
+            }),
         }),
         homepage=_URL,
     )
@@ -180,11 +181,18 @@ class Builder(_OpenImagesChallenge2019):
       )
     # Fill class names after the data has been downloaded.
     oi_beam.fill_class_names_in_tfds_info(paths["classes"], self.info.features)
-    return (pipeline | beam.Create(paths["{}_images".format(split)])
-            | "ReadImages" >> beam.ParDo(oi_beam.ReadZipFn())
-            | "ProcessImages" >> beam.ParDo(
-                oi_beam.ProcessImageFn(
-                    target_pixels=self.builder_config.target_pixels,
-                    jpeg_quality=72))
-            | "GenerateExamples" >> beam.ParDo(
-                oi_beam.CreateDetectionExampleFn(**generate_examples_kwargs)))
+    return (
+        pipeline
+        | beam.Create(paths["{}_images".format(split)])
+        | "ReadImages" >> beam.ParDo(oi_beam.ReadZipFn())
+        | "ProcessImages"
+        >> beam.ParDo(
+            oi_beam.ProcessImageFn(
+                target_pixels=self.builder_config.target_pixels, jpeg_quality=72
+            )
+        )
+        | "GenerateExamples"
+        >> beam.ParDo(
+            oi_beam.CreateDetectionExampleFn(**generate_examples_kwargs)
+        )
+    )

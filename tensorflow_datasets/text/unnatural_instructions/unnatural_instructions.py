@@ -40,13 +40,16 @@ _CITATION = """
 
 class UnnaturalInstructions(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for unnatural_instructions dataset."""
+
   __count__ = 0
 
   VERSION = tfds.core.Version('0.0.1')
   RELEASE_NOTES = {
-      '0.0.1': 'Initial release. Omit instructions / inputs, as they require '
-               'additional processing to be used. Instruction_with_inputs and '
-               'reformulations contain instructions and contexts.',
+      '0.0.1': (
+          'Initial release. Omit instructions / inputs, as they require '
+          'additional processing to be used. Instruction_with_inputs and '
+          'reformulations contain instructions and contexts.'
+      ),
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -56,42 +59,44 @@ class UnnaturalInstructions(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # Per author's recommendation, we discard the ans_simple field.
         features=tfds.features.FeaturesDict({
-            'id':
-                tfds.features.Text(doc='Unique identifier for example.'),
-            'instruction':
-                tfds.features.Text(
-                    doc='Instruction with placeholder for inputs.'),
-            'instances':
-                tfds.features.Sequence({
-                    'input':
-                        tfds.features.Text(
-                            doc='Input to be fed into placeholders for given instruction.'
-                        ),
-                    'constraints':
-                        tfds.features.Text(doc='Task-specific constraints.'),
-                    'instruction_with_input':
-                        tfds.features.Text(
-                            doc='Instructions with inputs supplied to placeholders.'
-                        ),
-                    'output':
-                        tfds.features.Text(doc='Target output for given task.'),
-                }),
-            'reformulations':
-                tfds.features.Sequence({
-                    'input':
-                        tfds.features.Text(
-                            doc='Input to be fed into placeholders for given instruction.'
-                        ),
-                    'instruction':
-                        tfds.features.Text(
-                            doc='Instruction with placeholder for inputs.'),
-                    'instruction_with_input':
-                        tfds.features.Text(
-                            doc='Instructions with inputs supplied to placeholders.'
-                        ),
-                    'output':
-                        tfds.features.Text(doc='Target output for given task.'),
-                })
+            'id': tfds.features.Text(doc='Unique identifier for example.'),
+            'instruction': tfds.features.Text(
+                doc='Instruction with placeholder for inputs.'
+            ),
+            'instances': tfds.features.Sequence({
+                'input': tfds.features.Text(
+                    doc=(
+                        'Input to be fed into placeholders for given'
+                        ' instruction.'
+                    )
+                ),
+                'constraints': tfds.features.Text(
+                    doc='Task-specific constraints.'
+                ),
+                'instruction_with_input': tfds.features.Text(
+                    doc='Instructions with inputs supplied to placeholders.'
+                ),
+                'output': tfds.features.Text(
+                    doc='Target output for given task.'
+                ),
+            }),
+            'reformulations': tfds.features.Sequence({
+                'input': tfds.features.Text(
+                    doc=(
+                        'Input to be fed into placeholders for given'
+                        ' instruction.'
+                    )
+                ),
+                'instruction': tfds.features.Text(
+                    doc='Instruction with placeholder for inputs.'
+                ),
+                'instruction_with_input': tfds.features.Text(
+                    doc='Instructions with inputs supplied to placeholders.'
+                ),
+                'output': tfds.features.Text(
+                    doc='Target output for given task.'
+                ),
+            }),
         }),
         homepage='https://github.com/orhonovich/unnatural-instructions',
         citation=_CITATION,

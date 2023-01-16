@@ -41,9 +41,15 @@ import yaml
 
 DatasetPackage = register_package.DatasetPackage
 
-_INDEX_TEMPLATE_PATH = 'scripts/documentation/templates/community_catalog_overview.md'
-_DATASET_DETAILS_TEMPLATE_PATH = 'scripts/documentation/templates/community_namespace_dataset.md'
-_NAMESPACE_TOC_TEMPLATE_PATH = 'scripts/documentation/templates/community_namespace_toc.md'
+_INDEX_TEMPLATE_PATH = (
+    'scripts/documentation/templates/community_catalog_overview.md'
+)
+_DATASET_DETAILS_TEMPLATE_PATH = (
+    'scripts/documentation/templates/community_namespace_dataset.md'
+)
+_NAMESPACE_TOC_TEMPLATE_PATH = (
+    'scripts/documentation/templates/community_namespace_toc.md'
+)
 
 
 @dataclasses.dataclass()
@@ -64,8 +70,11 @@ def _parse_flags(_: List[str]) -> argparse.Namespace:
   )
   parser.add_argument(
       '--local_cache',
-      help=('If specified, where to store temporarily downloaded files so that '
-            'they can be reused when running multiple times.'))
+      help=(
+          'If specified, where to store temporarily downloaded files so that '
+          'they can be reused when running multiple times.'
+      ),
+  )
   return parser.parse_args()
 
 
@@ -94,7 +103,9 @@ def _get_huggingface_features(config: Mapping[str, Any]) -> feature_pb2.Feature:
   """Parses a huggingface config to a Feature proto."""
   return feature_pb2.Feature(
       json_feature=feature_pb2.JsonFeature(
-          json=json.dumps(config['features'], indent=4)))
+          json=json.dumps(config['features'], indent=4)
+      )
+  )
 
 
 def _get_cached_copy(file_path: epath.Path, max_age_days: int) -> Optional[str]:
@@ -102,7 +113,8 @@ def _get_cached_copy(file_path: epath.Path, max_age_days: int) -> Optional[str]:
     stats = os.stat(file_path)
     modified_time = datetime.datetime.fromtimestamp(stats.st_mtime)
     if modified_time > datetime.datetime.now() - datetime.timedelta(
-        days=max_age_days):
+        days=max_age_days
+    ):
       return file_path.read_text()
   return None
 
@@ -125,6 +137,7 @@ class DocumentationTemplates:
 @dataclasses.dataclass()
 class DatasetDocumentation:
   """Functionality to generate documentation for a community dataset."""
+
   dataset: DatasetPackage
   templates: DocumentationTemplates
   options: _Options
@@ -154,7 +167,7 @@ class DatasetDocumentation:
     )
 
   def to_details_markdown(self) -> str:
-    """"Markdown to be shown on the details page for the namespace."""
+    """ "Markdown to be shown on the details page for the namespace."""
     extra_links = self.format_extra_links(prefix='*   ', infix='\n')
     details = self.templates.dataset_details_template.format(
         name=self.name,
@@ -174,7 +187,8 @@ class DatasetDocumentation:
     )
 
   def dataset_info_per_config(
-      self) -> Mapping[str, dataset_info_pb2.DatasetInfo]:
+      self,
+  ) -> Mapping[str, dataset_info_pb2.DatasetInfo]:
     return {}
 
   def documentation(self, keep_short: bool = False) -> str:
@@ -183,7 +197,8 @@ class DatasetDocumentation:
     # messes up the page. Try escaping backticks or using code blocks.
     # TODO(weide): how to format citation?
     header_template = '## {config_name}'
-    template = textwrap.dedent("""
+    template = textwrap.dedent(
+        """
       Use the following command to load this dataset in TFDS:
 
       ```python
@@ -202,29 +217,37 @@ class DatasetDocumentation:
       {splits}
       *   **Features**:
       {features}
-    """)
+    """
+    )
 
     #       *   **Citation**: `{citation}`
 
     def format_splits(split_infos: Sequence[dataset_info_pb2.SplitInfo]) -> str:
       splits_str = ('\n').join(
-          sorted([
-              f'`\'{split.name}\'` | {sum(split.shard_lengths)}'
-              for split in split_infos
-          ]))
-      return textwrap.dedent(f"""
+          sorted(
+              [
+                  f"`'{split.name}'` | {sum(split.shard_lengths)}"
+                  for split in split_infos
+              ]
+          )
+      )
+      return textwrap.dedent(
+          f"""
             Split  | Examples
             :----- | -------:
             {py_utils.indent(splits_str, '            ')}
-            """)
+            """
+      )
 
     def format_feature(feature: feature_pb2.Feature) -> str:
       if feature.HasField('json_feature'):
-        return textwrap.dedent(f"""
+        return textwrap.dedent(
+            f"""
 ```json
 {feature.json_feature.json}
 ```
-                               """)
+                               """
+        )
       if feature.HasField('features_dict'):
         descriptions = [
             f'    *   `{name}`'
@@ -233,8 +256,9 @@ class DatasetDocumentation:
         return '\n'.join(descriptions)
       return ''
 
-    def format_template(config_name: str,
-                        info: dataset_info_pb2.DatasetInfo) -> str:
+    def format_template(
+        config_name: str, info: dataset_info_pb2.DatasetInfo
+    ) -> str:
       if config_name == 'default':
         tfds_id = self.tfds_id
       else:
@@ -256,7 +280,8 @@ class DatasetDocumentation:
         return content
       return '{header}\n\n{content}'.format(
           header=header_template.format(config_name=config_name),
-          content=content)
+          content=content,
+      )
 
     # homepage=default_dataset['homepage'],
     config_descriptions = [
@@ -325,8 +350,8 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
     return [self.code_url(), self.huggingface_link()]
 
   def _parse_dataset_info_proto(
-      self, config_name: str,
-      config: Mapping[str, Any]) -> dataset_info_pb2.DatasetInfo:
+      self, config_name: str, config: Mapping[str, Any]
+  ) -> dataset_info_pb2.DatasetInfo:
     """Parses a DatasetInfo proto from the given Json."""
 
     splits = []
@@ -336,7 +361,9 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
               name=name,
               num_shards=1,
               shard_lengths=[details['num_examples']],
-              num_bytes=details['num_bytes']))
+              num_bytes=details['num_bytes'],
+          )
+      )
 
     if isinstance(config['version'], dict):
       version = config['version']['version_str']
@@ -349,13 +376,15 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
         version=version,
         citation=config['citation'],
         redistribution_info=dataset_info_pb2.RedistributionInfo(
-            license=config['license']),
+            license=config['license']
+        ),
         splits=splits,
         features=_get_huggingface_features(config),
     )
 
   def dataset_info_per_config(
-      self) -> Mapping[str, dataset_info_pb2.DatasetInfo]:
+      self,
+  ) -> Mapping[str, dataset_info_pb2.DatasetInfo]:
     if not isinstance(self.dataset_infos, dict):
       return {}
     return {
@@ -367,6 +396,7 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
 @dataclasses.dataclass()
 class NamespaceFormatter:
   """A documentation formatter for a namespace and all its datasets."""
+
   namespace: str
   datasets: Sequence[DatasetPackage]
   templates: DocumentationTemplates
@@ -383,35 +413,42 @@ class NamespaceFormatter:
   def sections(self) -> Sequence[DatasetDocumentation]:
     return [
         DatasetDocumentation(
-            dataset=ds, templates=self.templates, options=self.options)
+            dataset=ds, templates=self.templates, options=self.options
+        )
         for ds in self.datasets
     ]
 
   def to_namespace_overview(self) -> str:
     """Markdown with dataset details for the namespace dataset overview."""
     sections = '\n'.join(
-        [section.to_namespace_overview() for section in self.sections()])
-    template = textwrap.dedent("""
+        [section.to_namespace_overview() for section in self.sections()]
+    )
+    template = textwrap.dedent(
+        """
       # {self.name} datasets
 
 
       {sections}
-      """)
+      """
+    )
     return template.format(sections=sections)
 
   def to_toc_markdown(self) -> str:
     datasets_for_toc = '\n'.join(
-        [f'*   {section.to_toc_markdown()}' for section in self.sections()])
+        [f'*   {section.to_toc_markdown()}' for section in self.sections()]
+    )
     return self.templates.namespace_toc_template.format(
         name=self.name,
         namespace=self.namespace,
         overview_page=self.overview_page,
         num_datasets=len(self.datasets),
-        datasets_for_toc=datasets_for_toc)
+        datasets_for_toc=datasets_for_toc,
+    )
 
   def to_toc_yaml(self, toc_relative_path: str):
     return _to_toc_yaml(
-        title=self.name, relative_path=toc_relative_path, page=self.namespace)
+        title=self.name, relative_path=toc_relative_path, page=self.namespace
+    )
 
 
 @dataclasses.dataclass()
@@ -421,7 +458,8 @@ class HuggingfaceFormatter(NamespaceFormatter):
   def sections(self) -> Sequence[DatasetDocumentation]:
     return [
         HuggingfaceDatasetDocumentation(
-            dataset=ds, templates=self.templates, options=self.options)
+            dataset=ds, templates=self.templates, options=self.options
+        )
         for ds in self.datasets
     ]
 
@@ -429,8 +467,10 @@ class HuggingfaceFormatter(NamespaceFormatter):
     for section in self.sections():
       section.documentation()
     sections = '\n'.join(
-        [section.to_namespace_overview() for section in self.sections()])
-    template = textwrap.dedent("""\
+        [section.to_namespace_overview() for section in self.sections()]
+    )
+    template = textwrap.dedent(
+        """\
       # Huggingface datasets
 
       Huggingface has forked TFDS and provides a lot of text datasets. See
@@ -439,29 +479,37 @@ class HuggingfaceFormatter(NamespaceFormatter):
 
 
       {sections}
-      """)
+      """
+    )
     return template.format(sections=sections)
 
 
-def formatter_for(namespace: str, datasets: Sequence[DatasetPackage],
-                  templates: DocumentationTemplates,
-                  options: _Options) -> NamespaceFormatter:
+def formatter_for(
+    namespace: str,
+    datasets: Sequence[DatasetPackage],
+    templates: DocumentationTemplates,
+    options: _Options,
+) -> NamespaceFormatter:
   """Returns the formatter for the given namespace and datasets."""
   if namespace == 'huggingface':
     return HuggingfaceFormatter(
         namespace=namespace,
         datasets=datasets,
         templates=templates,
-        options=options)
+        options=options,
+    )
   return NamespaceFormatter(
       namespace=namespace,
       datasets=datasets,
       templates=templates,
-      options=options)
+      options=options,
+  )
 
 
-def build_overview(formatter_per_namespace: Mapping[str, NamespaceFormatter],
-                   templates: DocumentationTemplates) -> str:
+def build_overview(
+    formatter_per_namespace: Mapping[str, NamespaceFormatter],
+    templates: DocumentationTemplates,
+) -> str:
   """Builds and saves the overview page."""
   toc_elements = [
       formatter.to_toc_markdown()
@@ -481,20 +529,22 @@ def build_namespace_details(
 
 
 def build_namespace_dataset_details(
-    formatter: NamespaceFormatter) -> Iterator[Tuple[str, str]]:
+    formatter: NamespaceFormatter,
+) -> Iterator[Tuple[str, str]]:
   """Generates all the detail pages for all namespaces and datasets."""
   for section in formatter.sections():
     yield section.name, section.to_details_markdown()
 
 
 def build_toc_yaml(
-    formatter_per_namespace: Mapping[str,
-                                     NamespaceFormatter]) -> Mapping[str, Any]:
+    formatter_per_namespace: Mapping[str, NamespaceFormatter]
+) -> Mapping[str, Any]:
   """Returns a mapping representing the TOC (to be converted into Yaml)."""
   toc_relative_path = '/datasets/community_catalog'
   sections = [
       _to_toc_yaml(
-          title='Overview', relative_path=toc_relative_path, page='overview')
+          title='Overview', relative_path=toc_relative_path, page='overview'
+      )
   ]
   for _, formatter in sorted(formatter_per_namespace.items()):
     sections.append(formatter.to_toc_yaml(toc_relative_path))
@@ -505,7 +555,8 @@ def build_and_save_community_catalog(options: _Options) -> None:
   """Builds and saves the catalog of community datasets."""
   templates = DocumentationTemplates.load()
   formatter_per_namespace = _get_formatter_per_namespace(
-      templates=templates, options=options)
+      templates=templates, options=options
+  )
 
   overview = build_overview(formatter_per_namespace, templates)
   options.catalog_dir.joinpath('overview.md').write_text(overview)
@@ -538,7 +589,8 @@ def _get_formatter_per_namespace(
         namespace=namespace,
         datasets=datasets,
         templates=templates,
-        options=options)
+        options=options,
+    )
   return formatters
 
 
@@ -566,7 +618,8 @@ def main(args: argparse.Namespace):
   )
 
   options = _Options(
-      catalog_dir=epath.Path(catalog_dir), local_cache=args.local_cache or None)
+      catalog_dir=epath.Path(catalog_dir), local_cache=args.local_cache or None
+  )
   build_and_save_community_catalog(options=options)
 
 

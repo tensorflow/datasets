@@ -34,10 +34,13 @@ class RluDmlabRoomsSelectNonmatchingObject(dmlab_dataset.DMLabDatasetBuilder):
   # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
       dmlab_dataset.BuilderConfig(
-          name='training_0', task=_TASK, episode_length=_EPISODE_LENGTH),
+          name='training_0', task=_TASK, episode_length=_EPISODE_LENGTH
+      ),
       dmlab_dataset.BuilderConfig(
-          name='training_1', task=_TASK, episode_length=_EPISODE_LENGTH),
+          name='training_1', task=_TASK, episode_length=_EPISODE_LENGTH
+      ),
       dmlab_dataset.BuilderConfig(
-          name='training_2', task=_TASK, episode_length=_EPISODE_LENGTH)
+          name='training_2', task=_TASK, episode_length=_EPISODE_LENGTH
+      ),
   ]
   # pytype: enable=wrong-keyword-args

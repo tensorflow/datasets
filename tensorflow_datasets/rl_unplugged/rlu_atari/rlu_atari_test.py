@@ -20,6 +20,7 @@ from tensorflow_datasets.rl_unplugged.rlu_atari import rlu_atari
 
 class RluAtariTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_atari dataset."""
+
   DATASET_CLASS = rlu_atari.RluAtari
   SPLITS = {
       'train': 1,  # Number of fake train example

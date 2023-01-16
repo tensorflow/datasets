@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class XtremePosTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for xtreme_pos dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['xtreme_pos_th']
   DATASET_CLASS = xtreme_pos_dataset_builder.Builder
   SPLITS = {

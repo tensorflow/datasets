@@ -27,8 +27,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   name = "natural_instructions"
   VERSION = tfds.core.Version("1.0.1")
   RELEASE_NOTES = {
-      "1.0.1": "Added task name field, and fixed ID used for shuffling to use "
-               "stable IDs.",
+      "1.0.1": (
+          "Added task name field, and fixed ID used for shuffling to use "
+          "stable IDs."
+      ),
       "1.0.0": "Initial release.",
   }
 

@@ -54,7 +54,7 @@ _LANGS = {
     "ur": "Urdu",
     "vi": "Vietnamese",
     "yo": "Yoruba",
-    "zh": "Chinese"
+    "zh": "Chinese",
 }
 
 _DATA_URLS = "https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/1-3105/ud-treebanks-v2.5.tgz"
@@ -69,7 +69,9 @@ class Builder(tfds.dataset_builders.ConllUDatasetBuilder):
         conllu_lib.get_universal_morphology_config(
             language=language,
             features=conllu_lib.XTREME_POS_FEATURES,
-            name=f"xtreme_pos_{language}"))
+            name=f"xtreme_pos_{language}",
+        )
+    )
 
   VERSION = tfds.core.Version("1.0.0")
   RELEASE_NOTES = {
@@ -79,7 +81,8 @@ class Builder(tfds.dataset_builders.ConllUDatasetBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     return self.create_dataset_info(
-        homepage="https://universaldependencies.org/")
+        homepage="https://universaldependencies.org/"
+    )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
@@ -110,13 +113,17 @@ class Builder(tfds.dataset_builders.ConllUDatasetBuilder):
         # We exclude Arabic-NYUAD which does not contains any words, only `_`.
         for folder in folders:
           for file in sorted(tf.io.gfile.listdir(folder)):
-            if split in file and file.endswith(
-                ".conllu") and "NYUAD" not in folder:
+            if (
+                split in file
+                and file.endswith(".conllu")
+                and "NYUAD" not in folder
+            ):
               paths[split].append(os.path.join(folder, file))
 
     return {  # pylint:disable=g-complex-comprehension
         split: self._generate_examples(
             filepaths=split_files,
-            process_example_fn=conllu_dataset_builder.get_xtreme_pos_example)
+            process_example_fn=conllu_dataset_builder.get_xtreme_pos_example,
+        )
         for split, split_files in paths.items()
     }

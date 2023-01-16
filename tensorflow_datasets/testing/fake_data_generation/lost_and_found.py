@@ -18,30 +18,38 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import cityscapes
 
 if __name__ == '__main__':
-  example_dir = ('tensorflow_datasets/testing/test_data/fake_examples/'
-                 'lost_and_found')
+  example_dir = (
+      'tensorflow_datasets/testing/test_data/fake_examples/lost_and_found'
+  )
   base_path = example_dir + '/{}.zip'
   # generate image ids matching between zipfiles
   train_ids = list(cityscapes.generate_ids('01_Turmstr_17')) + list(
-      cityscapes.generate_ids('02_Goethe_Str_6'))
+      cityscapes.generate_ids('02_Goethe_Str_6')
+  )
   test_ids = list(cityscapes.generate_ids('03_Schlossallee_1'))
   splits = {'train': train_ids, 'test': test_ids}
   with tf.Graph().as_default():
     cityscapes.create_zipfile(
         base_path.format('leftImg8bit'),
         splits_with_ids=splits,
-        suffixes=['leftImg8bit'])
+        suffixes=['leftImg8bit'],
+    )
     cityscapes.create_zipfile(
         base_path.format('gtCoarse'),
         splits_with_ids=splits,
         suffixes=[
-            'gtCoarse_instanceIds', 'gtCoarse_labelIds', 'gtCoarse_color'
-        ])
+            'gtCoarse_instanceIds',
+            'gtCoarse_labelIds',
+            'gtCoarse_color',
+        ],
+    )
     cityscapes.create_zipfile(
         base_path.format('rightImg8bit'),
         splits_with_ids=splits,
-        suffixes=['rightImg8bit'])
+        suffixes=['rightImg8bit'],
+    )
     cityscapes.create_zipfile(
         base_path.format('disparity'),
         splits_with_ids=splits,
-        suffixes=['disparity'])
+        suffixes=['disparity'],
+    )

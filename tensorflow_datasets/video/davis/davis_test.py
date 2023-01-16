@@ -23,6 +23,7 @@ from tensorflow_datasets.video.davis import davis
 
 class DavisTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for davis dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['480p', 'full_resolution']
   DATASET_CLASS = davis.Davis
   SPLITS = {
@@ -42,9 +43,11 @@ class DavisTest(tfds.testing.DatasetBuilderTestCase):
       val_ex = list(splits[tfds.Split.VALIDATION])[0]
       # Check that the dataset examples contain the correct number of classes.
       self.assertSetEqual(
-          set(np.unique(train_ex['video']['segmentations'].numpy())), {0, 1})
+          set(np.unique(train_ex['video']['segmentations'].numpy())), {0, 1}
+      )
       self.assertSetEqual(
-          set(np.unique(val_ex['video']['segmentations'].numpy())), {0, 1, 2})
+          set(np.unique(val_ex['video']['segmentations'].numpy())), {0, 1, 2}
+      )
 
     with self.subTest('dataset_shapes'):
       splits = builder.as_dataset()
@@ -56,15 +59,20 @@ class DavisTest(tfds.testing.DatasetBuilderTestCase):
       self.assertEqual(train_num_frames, 4)
       self.assertEqual(val_num_frames, 4)
       _, height, width, _ = train_ex['video']['frames'].numpy().shape
-      self.assertEqual(train_ex['video']['frames'].numpy().shape,
-                       (4, height, width, 3))
-      self.assertEqual(train_ex['video']['segmentations'].numpy().shape,
-                       (4, height, width, 1))
+      self.assertEqual(
+          train_ex['video']['frames'].numpy().shape, (4, height, width, 3)
+      )
+      self.assertEqual(
+          train_ex['video']['segmentations'].numpy().shape,
+          (4, height, width, 1),
+      )
       _, height, width, _ = val_ex['video']['frames'].numpy().shape
-      self.assertEqual(val_ex['video']['frames'].numpy().shape,
-                       (4, height, width, 3))
-      self.assertEqual(val_ex['video']['segmentations'].numpy().shape,
-                       (4, height, width, 1))
+      self.assertEqual(
+          val_ex['video']['frames'].numpy().shape, (4, height, width, 3)
+      )
+      self.assertEqual(
+          val_ex['video']['segmentations'].numpy().shape, (4, height, width, 1)
+      )
 
 
 if __name__ == '__main__':

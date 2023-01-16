@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlAdroitRelocateClonedV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
+
   DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
 
   SPLITS = {
@@ -36,6 +37,7 @@ class D4rlAdroitRelocateClonedV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateExpertV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
+
   DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
 
   SPLITS = {
@@ -51,6 +53,7 @@ class D4rlAdroitRelocateExpertV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateHumanV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
+
   DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
 
   SPLITS = {
@@ -66,6 +69,7 @@ class D4rlAdroitRelocateHumanV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateClonedV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
+
   DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
 
   SPLITS = {
@@ -81,6 +85,7 @@ class D4rlAdroitRelocateClonedV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateExpertV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
+
   DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
 
   SPLITS = {
@@ -96,6 +101,7 @@ class D4rlAdroitRelocateExpertV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateHumanV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
+
   DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
 
   SPLITS = {

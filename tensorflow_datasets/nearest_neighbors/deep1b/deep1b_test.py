@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class Deep1bTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for deep1b dataset."""
+
   DATASET_CLASS = deep1b.Deep1b
   SPLITS = {
       'database': 3,  # Number of fake train example

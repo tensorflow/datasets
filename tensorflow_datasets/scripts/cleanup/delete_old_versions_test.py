@@ -44,12 +44,11 @@ def test_split_full_names():
           'other_config': {
               '1.3.0': {},
           },
-      }
+      },
   }
 
 
 def test_delete_script(tmp_path: pathlib.PurePath):
-
   # Create paths
   for dataset_dir in [
       'extracted',  # DownloadManager directories should be preserved.
@@ -84,23 +83,29 @@ def test_delete_script(tmp_path: pathlib.PurePath):
           'another_dataset/other_config/1.1.0',
       ],
   )
-  assert dirs_to_keep == _norm_path(tmp_path, [
-      'dataset/config/1.0.0',
-      'my_dataset/1.2.0',
-      'my_dataset/1.3.0',
-      'my_other_dataset/config/1.3.0',
-      'my_other_dataset/other_config/1.3.0',
-  ])
-  assert dirs_to_delete == _norm_path(tmp_path, [
-      'my_dataset/1.0.0',
-      'my_dataset/1.1.0',
-      'my_dataset/other_dir',
-      'my_other_dataset/config/1.2.0',
-      'my_other_dataset/config_deprecated',
-      'my_other_dataset/other_config/1.2.0',
-      'my_other_dataset/yet_other_config',
-      'old_dataset',
-  ])
+  assert dirs_to_keep == _norm_path(
+      tmp_path,
+      [
+          'dataset/config/1.0.0',
+          'my_dataset/1.2.0',
+          'my_dataset/1.3.0',
+          'my_other_dataset/config/1.3.0',
+          'my_other_dataset/other_config/1.3.0',
+      ],
+  )
+  assert dirs_to_delete == _norm_path(
+      tmp_path,
+      [
+          'my_dataset/1.0.0',
+          'my_dataset/1.1.0',
+          'my_dataset/other_dir',
+          'my_other_dataset/config/1.2.0',
+          'my_other_dataset/config_deprecated',
+          'my_other_dataset/other_config/1.2.0',
+          'my_other_dataset/yet_other_config',
+          'old_dataset',
+      ],
+  )
 
 
 def _norm_path(root_path: pathlib.Path, paths: List[str]) -> List[pathlib.Path]:

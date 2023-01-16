@@ -44,6 +44,7 @@ def _decode_hex(hexstr):
 
 class ExtractMethod(enum.Enum):
   """The extraction method to use to pre-process a downloaded file."""
+
   NO_EXTRACT = 1
   TAR = 2
   TAR_GZ = 3  # Deprecated: use TAR.
@@ -64,7 +65,9 @@ _EXTRACTION_METHOD_TO_EXTS = [
 
 _KNOWN_EXTENSIONS = list(
     itertools.chain(  # pylint: disable=g-complex-comprehension
-        *[extensions_ for _, extensions_ in _EXTRACTION_METHOD_TO_EXTS]))
+        *[extensions_ for _, extensions_ in _EXTRACTION_METHOD_TO_EXTS]
+    )
+)
 
 _NETLOC_COMMON_PREFIXES = [
     'www.',
@@ -134,16 +137,16 @@ def _sanitize_url(url, max_length):
   netloc = url.netloc
   for prefix in _NETLOC_COMMON_PREFIXES:
     if netloc.startswith(prefix):
-      netloc = netloc[len(prefix):]
+      netloc = netloc[len(prefix) :]
   for suffix in _NETLOC_COMMON_SUFFIXES:
     if netloc.endswith(suffix):
-      netloc = netloc[:-len(suffix)]
+      netloc = netloc[: -len(suffix)]
   url = '%s%s%s%s' % (netloc, url.path, url.params, url.query)
   # Get the extension:
   for ext in _KNOWN_EXTENSIONS:
     if url.endswith(ext):
       extension = ext
-      url = url[:-len(extension)]
+      url = url[: -len(extension)]
       break
   else:
     url, extension = os.path.splitext(url)
@@ -217,7 +220,8 @@ def rename_info_file(
     overwrite: bool = False,
 ) -> None:
   tf.io.gfile.rename(
-      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite)
+      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite
+  )
 
 
 @synchronize_decorator
@@ -256,12 +260,16 @@ def write_info_file(
   if info.get('original_fname', original_fname) != original_fname:
     raise ValueError(
         '`original_fname` "{}" stored in {} does NOT match "{}".'.format(
-            info['original_fname'], info_path, original_fname))
+            info['original_fname'], info_path, original_fname
+        )
+    )
   if info.get('url_info', url_info_dict) != url_info_dict:
     raise ValueError(
         'File info {} contains a different checksum that the downloaded one: '
-        'Stored: {}; Expected: {}'.format(info_path, info['url_info'],
-                                          url_info_dict))
+        'Stored: {}; Expected: {}'.format(
+            info_path, info['url_info'], url_info_dict
+        )
+    )
   info = dict(
       urls=list(urls),
       dataset_names=list(set(dataset_names)),

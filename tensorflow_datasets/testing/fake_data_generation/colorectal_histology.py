@@ -25,11 +25,13 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.image_classification import colorectal_histology
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 # --compression=raw may be more portable, but results in massive files (>100mb)
-flags.DEFINE_string("compression", "tiff_lzw",
-                    "Used by PIL to compress fake images")
+flags.DEFINE_string(
+    "compression", "tiff_lzw", "Used by PIL to compress fake images"
+)
 FLAGS = flags.FLAGS
 
 # pylint: disable=protected-access
@@ -56,28 +58,34 @@ def make_images(num_images, size):
 
 def write_image(filename, data):
   lazy_imports_lib.lazy_imports.PIL_Image.fromarray(data).save(
-      filename, compression=FLAGS.compression)
+      filename, compression=FLAGS.compression
+  )
 
 
 def main(_):
   base_dir = os.path.join(
-      histology_dir(False), colorectal_histology._TILES_SUBDIR)
+      histology_dir(False), colorectal_histology._TILES_SUBDIR
+  )
   for ci, class_name in enumerate(colorectal_histology._CLASS_NAMES):
-    subdir = os.path.join(base_dir,
-                          colorectal_histology._class_subdir(ci, class_name))
+    subdir = os.path.join(
+        base_dir, colorectal_histology._class_subdir(ci, class_name)
+    )
     tf.io.gfile.makedirs(subdir)
 
     for i, image_data in enumerate(
-        make_images(2, colorectal_histology._TILES_SIZE)):
+        make_images(2, colorectal_histology._TILES_SIZE)
+    ):
       fn = "image%d.tif" % i
       write_image(os.path.join(subdir, fn), image_data)
 
   base_dir = os.path.join(
-      histology_dir(True), colorectal_histology._LARGE_SUBDIR)
+      histology_dir(True), colorectal_histology._LARGE_SUBDIR
+  )
   tf.io.gfile.makedirs(base_dir)
   write_image(
       os.path.join(base_dir, "large_image.tif"),
-      make_images(1, colorectal_histology._LARGE_SIZE)[0])
+      make_images(1, colorectal_histology._LARGE_SIZE)[0],
+  )
 
 
 if __name__ == "__main__":

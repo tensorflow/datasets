@@ -65,29 +65,32 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
         # `as_supervised=True` in `builder.as_dataset`.
-        supervised_keys=({
-            'X1': 'X1',
-            'X2': 'X2',
-            'X3': 'X3',
-            'X4': 'X4',
-            'X5': 'X5',
-            'X6': 'X6',
-            'X7': 'X7',
-            'X8': 'X8',
-            'X9': 'X9',
-            'X10': 'X10',
-            'X11': 'X11',
-            'X12': 'X12',
-            'X13': 'X13',
-            'X14': 'X14',
-            'X15': 'X15',
-            'X16': 'X16',
-            'X17': 'X17',
-            'X18': 'X18',
-            'X19': 'X19',
-            'X20': 'X20',
-            'treat': 'treat',
-        }, 'y'),
+        supervised_keys=(
+            {
+                'X1': 'X1',
+                'X2': 'X2',
+                'X3': 'X3',
+                'X4': 'X4',
+                'X5': 'X5',
+                'X6': 'X6',
+                'X7': 'X7',
+                'X8': 'X8',
+                'X9': 'X9',
+                'X10': 'X10',
+                'X11': 'X11',
+                'X12': 'X12',
+                'X13': 'X13',
+                'X14': 'X14',
+                'X15': 'X15',
+                'X16': 'X16',
+                'X17': 'X17',
+                'X18': 'X18',
+                'X19': 'X19',
+                'X20': 'X20',
+                'treat': 'treat',
+            },
+            'y',
+        ),
         homepage='https://rdrr.io/cran/uplift/man/sim_pte.html',
     )
 
@@ -98,7 +101,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return {
         'train': self._generate_examples(train_path),
-        'test': self._generate_examples(test_path)
+        'test': self._generate_examples(test_path),
     }
 
   def _generate_examples(self, path):
@@ -129,6 +132,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'X19': row['X19'],
             'X20': row['X20'],
             'treat': row['treat'],
-            'y': row['y']
+            'y': row['y'],
         }
         index += 1

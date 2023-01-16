@@ -66,10 +66,12 @@ _CITATION = """
 """
 
 _HOMEPAGE = 'https://laion.ai/blog/laion-400-open-dataset/'
-_EMBEDDINGS_URL = 'https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/embeddings/'
+_EMBEDDINGS_URL = (
+    'https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/embeddings/'
+)
 
 _CLIP_EMBEDDING_SHAPE = (512,)
-_MISSING_SIMILARITY_VALUE = -1.
+_MISSING_SIMILARITY_VALUE = -1.0
 _NSFW_MISSING_TAG = 'UNTAGGED'
 _NSFW_TAGS = ('UNLIKELY', 'UNSURE', 'NSFW', _NSFW_MISSING_TAG)
 
@@ -115,17 +117,18 @@ class Laion400mConfig(tfds.core.BuilderConfig):
 
 LAION400M_IMAGES_CONFIG = Laion400mConfig(
     name='images',
-    num_shards=41455  # total number of image tar files and metadata files
+    num_shards=41455,  # total number of image tar files and metadata files
 )
 
 LAION400M_EMBEDDINGS_CONFIG = Laion400mConfig(
     name='embeddings',
-    num_shards=410  # total number of embeddings and metadata files
+    num_shards=410,  # total number of embeddings and metadata files
 )
 
 
 class Laion400m(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for LAION-400M dataset."""
+
   BUILDER_CONFIGS = [LAION400M_IMAGES_CONFIG, LAION400M_EMBEDDINGS_CONFIG]
 
   VERSION = tfds.core.Version('1.0.0')
@@ -139,50 +142,55 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     features = {
-        'caption':
-            tfds.features.Text(doc='HTML alt-text attribute'),
-        'nsfw':
-            tfds.features.ClassLabel(
-                names=_NSFW_TAGS,
-                doc='NSFW tag (detected with CLIP). Incohesive and missing tags'
-                f' are replaced with {_NSFW_MISSING_TAG}'),
-        'similarity':
-            tfds.features.Scalar(
-                tf.float64,
-                doc=tfds.features.Documentation(
-                    desc='cosine similarity score between the text and image '
-                    'embedding. Missing values default to '
-                    f'{_MISSING_SIMILARITY_VALUE}',
-                    value_range='[0.0, 1.0]',
-                ),
+        'caption': tfds.features.Text(doc='HTML alt-text attribute'),
+        'nsfw': tfds.features.ClassLabel(
+            names=_NSFW_TAGS,
+            doc=(
+                'NSFW tag (detected with CLIP). Incohesive and missing tags'
+                f' are replaced with {_NSFW_MISSING_TAG}'
             ),
-        'license':
-            tfds.features.Text(
-                doc='type of Creative Commons license (if applicable)'),
-        'url':
-            tfds.features.Text(doc='image URL'),
-        'original_width':
-            tfds.features.Scalar(tf.int32, doc='original width of the image'),
-        'original_height':
-            tfds.features.Scalar(tf.int32, doc='original height of the image'),
+        ),
+        'similarity': tfds.features.Scalar(
+            tf.float64,
+            doc=tfds.features.Documentation(
+                desc=(
+                    'cosine similarity score between the text and image '
+                    'embedding. Missing values default to '
+                    f'{_MISSING_SIMILARITY_VALUE}'
+                ),
+                value_range='[0.0, 1.0]',
+            ),
+        ),
+        'license': tfds.features.Text(
+            doc='type of Creative Commons license (if applicable)'
+        ),
+        'url': tfds.features.Text(doc='image URL'),
+        'original_width': tfds.features.Scalar(
+            tf.int32, doc='original width of the image'
+        ),
+        'original_height': tfds.features.Scalar(
+            tf.int32, doc='original height of the image'
+        ),
     }
 
     if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:
-      features.update({
-          'image': tfds.features.Image(doc='image'),
-      })
+      features.update(
+          {
+              'image': tfds.features.Image(doc='image'),
+          }
+      )
     else:
       features.update({
-          'image_embedding':
-              tfds.features.Tensor(
-                  shape=_CLIP_EMBEDDING_SHAPE,
-                  dtype=tf.float16,
-                  doc='CLIP image embedding'),
-          'text_embedding':
-              tfds.features.Tensor(
-                  shape=_CLIP_EMBEDDING_SHAPE,
-                  dtype=tf.float16,
-                  doc='CLIP text embedding'),
+          'image_embedding': tfds.features.Tensor(
+              shape=_CLIP_EMBEDDING_SHAPE,
+              dtype=tf.float16,
+              doc='CLIP image embedding',
+          ),
+          'text_embedding': tfds.features.Tensor(
+              shape=_CLIP_EMBEDDING_SHAPE,
+              dtype=tf.float16,
+              doc='CLIP text embedding',
+          ),
       })
 
     return tfds.core.DatasetInfo(
@@ -195,26 +203,32 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
     )
 
   def _download_data(
-      self, dl_manager: tfds.download.DownloadManager) -> Dict[str, epath.Path]:
+      self, dl_manager: tfds.download.DownloadManager
+  ) -> Dict[str, epath.Path]:
     """Downloads data."""
     if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:
       if not dl_manager.manual_dir.exists():
         raise AssertionError(
             'LAION-400M requires manual download of the images. Please download'
-            f' the images and place them into: {dl_manager.manual_dir}')
+            f' the images and place them into: {dl_manager.manual_dir}'
+        )
 
       return {}
     else:
       file_name_to_url = {}
       for shard_idx in range(self.builder_config.num_shards):
-        img_emb_file_name, text_emb_file_name, metadata_file_name = _get_embeddings_file_names(
-            shard_idx)
-        file_name_to_url[
-            img_emb_file_name] = f'{_EMBEDDINGS_URL}img_emb/{img_emb_file_name}'
-        file_name_to_url[
-            text_emb_file_name] = f'{_EMBEDDINGS_URL}text_emb/{text_emb_file_name}'
-        file_name_to_url[
-            metadata_file_name] = f'{_EMBEDDINGS_URL}metadata/{metadata_file_name}'
+        img_emb_file_name, text_emb_file_name, metadata_file_name = (
+            _get_embeddings_file_names(shard_idx)
+        )
+        file_name_to_url[img_emb_file_name] = (
+            f'{_EMBEDDINGS_URL}img_emb/{img_emb_file_name}'
+        )
+        file_name_to_url[text_emb_file_name] = (
+            f'{_EMBEDDINGS_URL}text_emb/{text_emb_file_name}'
+        )
+        file_name_to_url[metadata_file_name] = (
+            f'{_EMBEDDINGS_URL}metadata/{metadata_file_name}'
+        )
 
       file_name_to_dl_path = dl_manager.download(file_name_to_url)
 
@@ -228,25 +242,36 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
         'train': self._generate_examples(dl_manager, file_name_to_dl_path),
     }
 
-  def _generate_examples(self, dl_manager: tfds.download.DownloadManager,
-                         file_name_to_dl_path: Dict[str, epath.Path]):
+  def _generate_examples(
+      self,
+      dl_manager: tfds.download.DownloadManager,
+      file_name_to_dl_path: Dict[str, epath.Path],
+  ):
     beam = tfds.core.lazy_imports.apache_beam
 
     return (
-        'Generate shard indices' >> beam.Create(
-            list(range(self.builder_config.num_shards)))
-        | 'Generate examples from a single shard' >> beam.FlatMap(
-            functools.partial(self._generate_examples_one_shard, dl_manager,
-                              file_name_to_dl_path))
+        'Generate shard indices'
+        >> beam.Create(list(range(self.builder_config.num_shards)))
+        | 'Generate examples from a single shard'
+        >> beam.FlatMap(
+            functools.partial(
+                self._generate_examples_one_shard,
+                dl_manager,
+                file_name_to_dl_path,
+            )
+        )
         # `self._generate_examples_one_shard` produces a large number of
         # outputs, so we want to make sure that the next transforms will be
         # run in parallel independently of this step
-        | 'Prevent fusion of transforms' >> beam.Reshuffle())
+        | 'Prevent fusion of transforms' >> beam.Reshuffle()
+    )
 
-  def _generate_examples_one_shard(self,
-                                   dl_manager: tfds.download.DownloadManager,
-                                   file_name_to_dl_path: Dict[str, epath.Path],
-                                   shard_idx: int):
+  def _generate_examples_one_shard(
+      self,
+      dl_manager: tfds.download.DownloadManager,
+      file_name_to_dl_path: Dict[str, epath.Path],
+      shard_idx: int,
+  ):
     """Yields examples from a single shard."""
     pd = tfds.core.lazy_imports.pandas
 
@@ -267,12 +292,13 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
         key = f'{shard_idx}_{row_idx}'
         example = {
             'image': file_obj.read(),
-            **_get_example_metadata(metadata_df.iloc[row_idx])
+            **_get_example_metadata(metadata_df.iloc[row_idx]),
         }
         yield (key, example)
     else:
-      img_emb_file_name, text_emb_file_name, metadata_file_name = _get_embeddings_file_names(
-          shard_idx)
+      img_emb_file_name, text_emb_file_name, metadata_file_name = (
+          _get_embeddings_file_names(shard_idx)
+      )
 
       with file_name_to_dl_path[img_emb_file_name].open('rb') as f:
         img_emb_arr = np.load(f)
@@ -288,6 +314,6 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
         example = {
             'image_embedding': img_emb_arr[row_idx],
             'text_embedding': text_emb_arr[row_idx],
-            **_get_example_metadata(row)
+            **_get_example_metadata(row),
         }
         yield (key, example)

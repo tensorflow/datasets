@@ -32,8 +32,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       tfds.core.Version('0.1.0'),
   ]
   RELEASE_NOTES = {
-      '0.2.0': ('Fix file_name, from absolute path to path relative to '
-                'imagenet-r directory, ie: "imagenet_synset_id/filename.jpg".')
+      '0.2.0': (
+          'Fix file_name, from absolute path to path relative to '
+          'imagenet-r directory, ie: "imagenet_synset_id/filename.jpg".'
+      )
   }
 
   def _info(self):
@@ -53,7 +55,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns a SplitGenerator for the test set."""
     imagenet_r_root = os.path.join(
-        dl_manager.download_and_extract(_IMAGENET_R_URL), 'imagenet-r')
+        dl_manager.download_and_extract(_IMAGENET_R_URL), 'imagenet-r'
+    )
     return [
         tfds.core.SplitGenerator(
             # The dataset provides only a test split.

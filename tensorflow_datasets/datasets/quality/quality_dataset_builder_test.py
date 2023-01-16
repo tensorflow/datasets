@@ -20,6 +20,7 @@ import tensorflow_datasets.public_api as tfds
 
 class QualityTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for quality dataset."""
+
   DATASET_CLASS = quality_dataset_builder.Builder
   SPLITS = {
       # Number of fake examples in dummy_data

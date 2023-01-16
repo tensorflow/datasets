@@ -138,8 +138,9 @@ class DecoderFn(Decoder):
 
   def decode_example(self, serialized_example):
     """Decode the example using the function."""
-    return self._fn(serialized_example, self.feature, *self._args,
-                    **self._kwargs)
+    return self._fn(
+        serialized_example, self.feature, *self._args, **self._kwargs
+    )
 
 
 def make_decoder(output_dtype=None):
@@ -175,7 +176,6 @@ def make_decoder(output_dtype=None):
   """  # pylint: disable=g-docstring-has-escape
 
   def decorator(fn):
-
     @functools.wraps(fn)
     def decorated(*args, **kwargs):
       return DecoderFn(fn, output_dtype, *args, **kwargs)

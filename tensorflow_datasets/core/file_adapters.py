@@ -34,6 +34,7 @@ class FileFormat(enum.Enum):
 
   The values of the enumeration are used as filename endings/suffix.
   """
+
   TFRECORD = 'tfrecord'
   RIEGELI = 'riegeli'
 
@@ -47,8 +48,10 @@ class FileFormat(enum.Enum):
       return cls(file_format)
     except ValueError as e:
       all_values = [f.value for f in cls]
-      raise ValueError(f'{file_format} is not a valid FileFormat! '
-                       f'Valid file formats: {all_values}') from e
+      raise ValueError(
+          f'{file_format} is not a valid FileFormat! '
+          f'Valid file formats: {all_values}'
+      ) from e
 
 
 DEFAULT_FILE_FORMAT = FileFormat.TFRECORD
@@ -139,6 +142,7 @@ class RiegeliFileAdapter(FileAdapter):
   ) -> tf.data.Dataset:
     buffer_size = buffer_size or cls.BUFFER_SIZE
     from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top
+
     return riegeli_tf.RiegeliDataset(filename, buffer_size=buffer_size)
 
   @classmethod
@@ -158,6 +162,7 @@ class RiegeliFileAdapter(FileAdapter):
     """
     positions = []
     import riegeli  # pylint: disable=g-import-not-at-top
+
     with tf.io.gfile.GFile(os.fspath(path), 'wb') as f:
       with riegeli.RecordWriter(f, options='transpose') as writer:
         for _, record in iterator:
@@ -193,12 +198,16 @@ _FILE_SUFFIX_TO_FORMAT = {
 def file_format_from_suffix(file_suffix: str) -> FileFormat:
   """Returns the file format associated with the file extension (`tfrecord`)."""
   if file_suffix not in _FILE_SUFFIX_TO_FORMAT:
-    raise ValueError('Unrecognized file extension: Should be one of '
-                     f'{list(_FILE_SUFFIX_TO_FORMAT.values())}')
+    raise ValueError(
+        'Unrecognized file extension: Should be one of '
+        f'{list(_FILE_SUFFIX_TO_FORMAT.values())}'
+    )
   return _FILE_SUFFIX_TO_FORMAT[file_suffix]
 
 
 def is_example_file(filename: str) -> bool:
   """Whether the given filename is a record file."""
-  return any(f'.{adapter.FILE_SUFFIX}' in filename
-             for adapter in ADAPTER_FOR_FORMAT.values())
+  return any(
+      f'.{adapter.FILE_SUFFIX}' in filename
+      for adapter in ADAPTER_FOR_FORMAT.values()
+  )

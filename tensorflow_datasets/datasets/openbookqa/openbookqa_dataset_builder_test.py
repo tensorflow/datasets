@@ -27,7 +27,7 @@ class OpenbookqaTest(tfds.testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 3,  # Number of fake train example
       "test": 1,  # Number of fake test example
-      "validation": 1
+      "validation": 1,
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:

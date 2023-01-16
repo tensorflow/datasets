@@ -24,7 +24,7 @@ class RedditDisentanglementTest(tfds.testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 2,  # Number of fake train example
       "validation": 1,  # Number of fake validation example
-      "test": 1  # Number of fake test example
+      "test": 1,  # Number of fake test example
   }
 
 

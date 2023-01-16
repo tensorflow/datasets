@@ -29,8 +29,9 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features.features_dict import FeaturesDict
 
 
-def get_conllu_example(sentence, example_id,
-                       features) -> Mapping[str, Union[str, Sequence[str]]]:
+def get_conllu_example(
+    sentence, example_id, features
+) -> Mapping[str, Union[str, Sequence[str]]]:
   """Processes a conllu-annotated sentence into an example to be serialized.
 
   Args:
@@ -45,7 +46,6 @@ def get_conllu_example(sentence, example_id,
   example = {}
 
   for feature in features:
-
     # Use the idx parsed from the data, example_id if not available.
     if feature == "idx":
       idx = sentence.metadata.get("sent_id", example_id)
@@ -82,8 +82,9 @@ def get_conllu_example(sentence, example_id,
   return example
 
 
-def get_xtreme_pos_example(sentence, example_id,
-                           features) -> Mapping[str, Union[str, Sequence[str]]]:
+def get_xtreme_pos_example(
+    sentence, example_id, features
+) -> Mapping[str, Union[str, Sequence[str]]]:
   """Processes an annotated sentence into an example for the xtreme_pos dataset.
 
   This function adds a further check ensuring that, at a given position in a
@@ -119,9 +120,13 @@ class ConllUBuilderConfig(dataset_builder.BuilderConfig):
     language: The language of the data used to generate the ConllUBuilderConfig.
   """
 
-  def __init__(self, *, features: OrderedDict[str,
-                                              feature_lib.FeatureConnector],
-               language: str, **kwargs):
+  def __init__(
+      self,
+      *,
+      features: OrderedDict[str, feature_lib.FeatureConnector],
+      language: str,
+      **kwargs,
+  ):
     """Initializes the builder config for Conll-U formatted datasets.
 
     Args:
@@ -140,12 +145,14 @@ class ConllUBuilderConfig(dataset_builder.BuilderConfig):
 
 
 class ConllUDatasetBuilder(
-    dataset_builder.GeneratorBasedBuilder, skip_registration=True):
+    dataset_builder.GeneratorBasedBuilder, skip_registration=True
+):
   """Base class for CoNLL-like formatted datasets.
 
   It provides functionalities to ease the processing of CoNLL-like datasets.
   Users can overwrite `_generate_examples` to customize the pipeline.
   """
+
   BUILDER_CONFIGS: Sequence[ConllUBuilderConfig] = []
 
   @property
@@ -187,8 +194,9 @@ class ConllUDatasetBuilder(
   def _generate_examples(
       self,
       filepaths: Union[epath.PathLike, List[epath.PathLike]],
-      process_example_fn: Callable[..., Mapping[str, Union[
-          str, Sequence[str]]]] = get_conllu_example,
+      process_example_fn: Callable[
+          ..., Mapping[str, Union[str, Sequence[str]]]
+      ] = get_conllu_example,
   ) -> split_builder_lib.SplitGenerator:
     """Processes CoNLL-U formatted datasets and generate examples.
 
@@ -213,7 +221,8 @@ class ConllUDatasetBuilder(
           example = process_example_fn(
               sentence=sentence,
               example_id=example_id,
-              features=self.builder_config.features)
+              features=self.builder_config.features,
+          )
           yield example_id, example
 
           example_id += 1

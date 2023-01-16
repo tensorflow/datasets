@@ -25,18 +25,22 @@ from typing import Mapping
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
-_BASE_DOWNLOAD_URL = 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets'
+_BASE_DOWNLOAD_URL = (
+    'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets'
+)
 
 
 class BeirConfig(tfds.core.BuilderConfig):
   """BuilderConfig for BEIR datasets."""
 
-  def __init__(self,
-               name: str,
-               download_url: str,
-               qrel_splits: Mapping[str, str],
-               subdir=None,
-               **kwargs):
+  def __init__(
+      self,
+      name: str,
+      download_url: str,
+      qrel_splits: Mapping[str, str],
+      subdir=None,
+      **kwargs,
+  ):
     """BuilderConfig for Beir.
 
     Args:
@@ -69,145 +73,162 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           qrel_splits={
               'train': 'train.tsv',
               'validation': 'dev.tsv',
-              'test': 'test.tsv'
-          }),
+              'test': 'test.tsv',
+          },
+      ),
       BeirConfig(
           'trec_covid',
           download_url=f'{_BASE_DOWNLOAD_URL}/trec-covid.zip',
-          qrel_splits={'test': 'test.tsv'}),
+          qrel_splits={'test': 'test.tsv'},
+      ),
       BeirConfig(
           'nfcorpus',
           download_url=f'{_BASE_DOWNLOAD_URL}/nfcorpus.zip',
           qrel_splits={
               'train': 'train.tsv',
               'validation': 'dev.tsv',
-              'test': 'test.tsv'
-          }),
+              'test': 'test.tsv',
+          },
+      ),
       BeirConfig(
           'nq',
           download_url=f'{_BASE_DOWNLOAD_URL}/nq.zip',
-          qrel_splits={'test': 'test.tsv'}),
+          qrel_splits={'test': 'test.tsv'},
+      ),
       BeirConfig(
           'hotpotqa',
           download_url=f'{_BASE_DOWNLOAD_URL}/hotpotqa.zip',
           qrel_splits={
               'train': 'train.tsv',
               'validation': 'dev.tsv',
-              'test': 'test.tsv'
-          }),
+              'test': 'test.tsv',
+          },
+      ),
       BeirConfig(
           'fiqa',
           download_url=f'{_BASE_DOWNLOAD_URL}/fiqa.zip',
           qrel_splits={
               'train': 'train.tsv',
               'validation': 'dev.tsv',
-              'test': 'test.tsv'
-          }),
+              'test': 'test.tsv',
+          },
+      ),
       BeirConfig(
           'arguana',
           download_url=f'{_BASE_DOWNLOAD_URL}/arguana.zip',
-          qrel_splits={'test': 'test.tsv'}),
+          qrel_splits={'test': 'test.tsv'},
+      ),
       BeirConfig(
           'webis_touche2020',
           download_url=f'{_BASE_DOWNLOAD_URL}/webis-touche2020.zip',
-          qrel_splits={'test': 'test.tsv'}),
+          qrel_splits={'test': 'test.tsv'},
+      ),
       BeirConfig(
           'cqadupstack.android',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='android'),
+          subdir='android',
+      ),
       BeirConfig(
           'cqadupstack.english',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='english'),
+          subdir='english',
+      ),
       BeirConfig(
           'cqadupstack.gaming',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='gaming'),
+          subdir='gaming',
+      ),
       BeirConfig(
           'cqadupstack.gis',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='gis'),
+          subdir='gis',
+      ),
       BeirConfig(
           'cqadupstack.mathematica',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='mathematica'),
+          subdir='mathematica',
+      ),
       BeirConfig(
           'cqadupstack.physics',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='physics'),
+          subdir='physics',
+      ),
       BeirConfig(
           'cqadupstack.programmers',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='programmers'),
+          subdir='programmers',
+      ),
       BeirConfig(
           'cqadupstack.stats',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='stats'),
+          subdir='stats',
+      ),
       BeirConfig(
           'cqadupstack.tex',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='tex'),
+          subdir='tex',
+      ),
       BeirConfig(
           'cqadupstack.unix',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='unix'),
+          subdir='unix',
+      ),
       BeirConfig(
           'cqadupstack.webmasters',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='webmasters'),
+          subdir='webmasters',
+      ),
       BeirConfig(
           'cqadupstack.wordpress',
           download_url=f'{_BASE_DOWNLOAD_URL}/cqadupstack.zip',
           qrel_splits={'test': 'test.tsv'},
-          subdir='wordpress'),
+          subdir='wordpress',
+      ),
       BeirConfig(
           'quora',
           download_url=f'{_BASE_DOWNLOAD_URL}/quora.zip',
-          qrel_splits={
-              'validation': 'dev.tsv',
-              'test': 'test.tsv'
-          }),
+          qrel_splits={'validation': 'dev.tsv', 'test': 'test.tsv'},
+      ),
       BeirConfig(
           'dbpedia_entity',
           download_url=f'{_BASE_DOWNLOAD_URL}/dbpedia-entity.zip',
-          qrel_splits={
-              'validation': 'dev.tsv',
-              'test': 'test.tsv'
-          }),
+          qrel_splits={'validation': 'dev.tsv', 'test': 'test.tsv'},
+      ),
       BeirConfig(
           'scidocs',
           download_url=f'{_BASE_DOWNLOAD_URL}/scidocs.zip',
-          qrel_splits={'test': 'test.tsv'}),
+          qrel_splits={'test': 'test.tsv'},
+      ),
       BeirConfig(
           'fever',
           download_url=f'{_BASE_DOWNLOAD_URL}/fever.zip',
           qrel_splits={
               'train': 'train.tsv',
               'validation': 'dev.tsv',
-              'test': 'test.tsv'
-          }),
+              'test': 'test.tsv',
+          },
+      ),
       BeirConfig(
           'climate_fever',
           download_url=f'{_BASE_DOWNLOAD_URL}/climate-fever.zip',
-          qrel_splits={'test': 'test.tsv'}),
+          qrel_splits={'test': 'test.tsv'},
+      ),
       BeirConfig(
           'scifact',
           download_url=f'{_BASE_DOWNLOAD_URL}/scifact.zip',
-          qrel_splits={
-              'train': 'train.tsv',
-              'test': 'test.tsv'
-          }),
+          qrel_splits={'train': 'train.tsv', 'test': 'test.tsv'},
+      ),
   ]
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -226,8 +247,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         homepage='https://github.com/beir-cellar/beir',
     )
 
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager,
-                        pipeline):
+  def _split_generators(
+      self, dl_manager: tfds.download.DownloadManager, pipeline
+  ):
     """Returns SplitGenerators."""
     beam = tfds.core.lazy_imports.apache_beam
     # Downloads the data and defines the splits.
@@ -240,73 +262,94 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     query_pipeline = (
         pipeline
-        | 'ReadQueryData' >> beam.io.textio.ReadFromText(
-            os.path.join(data_dir, 'queries.jsonl'))
-        | 'ParseQueryJson' >> beam.Map(_parse_query_json))
+        | 'ReadQueryData'
+        >> beam.io.textio.ReadFromText(os.path.join(data_dir, 'queries.jsonl'))
+        | 'ParseQueryJson' >> beam.Map(_parse_query_json)
+    )
 
     passage_pipeline = (
         pipeline
-        | 'ReadPassageData' >> beam.io.textio.ReadFromText(
-            os.path.join(data_dir, 'corpus.jsonl'))
-        | 'ParsePassageJson' >> beam.Map(_parse_passage_json))
+        | 'ReadPassageData'
+        >> beam.io.textio.ReadFromText(os.path.join(data_dir, 'corpus.jsonl'))
+        | 'ParsePassageJson' >> beam.Map(_parse_passage_json)
+    )
 
     splits = {
-        'query':
+        'query': (
             query_pipeline
-            | 'Query' >> beam.ptransform_fn(self._generate_query_examples)(),
-        'passage':
-            passage_pipeline |
-            'Passage' >> beam.ptransform_fn(self._generate_passage_examples)(),
+            | 'Query' >> beam.ptransform_fn(self._generate_query_examples)()
+        ),
+        'passage': (
+            passage_pipeline
+            | 'Passage' >> beam.ptransform_fn(self._generate_passage_examples)()
+        ),
     }
 
     # Creates splits for (query, document) pairs.
     for qrel_split, tsv_file in builder_config.qrel_splits.items():
-      splits[qrel_split] = pipeline | qrel_split.capitalize(
-      ) >> beam.ptransform_fn(self._generate_qrel_examples)(
+      splits[
+          qrel_split
+      ] = pipeline | qrel_split.capitalize() >> beam.ptransform_fn(
+          self._generate_qrel_examples
+      )(
           qrel_path=os.path.join(data_dir, 'qrels', tsv_file),
           query_pipeline=query_pipeline,
-          passage_pipeline=passage_pipeline)
+          passage_pipeline=passage_pipeline,
+      )
 
     return splits
 
   def _generate_query_examples(self, pipeline):
     """Generates examples for query split."""
     beam = tfds.core.lazy_imports.apache_beam
-    return (pipeline
-            | 'AddEmptyFeatures' >> beam.Map(
-                functools.partial(
-                    _append_constant_features,
-                    mapping={
-                        'passage_id': '',
-                        'passage': '',
-                        'passage_metadata': '{}',
-                        'score': -1,
-                    }))
-            | 'GetHashKey' >> beam.Map(lambda x: (_get_hash(x), x)))
+    return (
+        pipeline
+        | 'AddEmptyFeatures'
+        >> beam.Map(
+            functools.partial(
+                _append_constant_features,
+                mapping={
+                    'passage_id': '',
+                    'passage': '',
+                    'passage_metadata': '{}',
+                    'score': -1,
+                },
+            )
+        )
+        | 'GetHashKey' >> beam.Map(lambda x: (_get_hash(x), x))
+    )
 
   def _generate_passage_examples(self, pipeline):
     """Generates examples for passage split."""
     beam = tfds.core.lazy_imports.apache_beam
-    return (pipeline
-            | 'AddEmptyFeatures' >> beam.Map(
-                functools.partial(
-                    _append_constant_features,
-                    mapping={
-                        'query_id': '',
-                        'query': '',
-                        'query_metadata': '{}',
-                        'score': -1,
-                    }))
-            | 'GetHashKey' >> beam.Map(lambda x: (_get_hash(x), x)))
+    return (
+        pipeline
+        | 'AddEmptyFeatures'
+        >> beam.Map(
+            functools.partial(
+                _append_constant_features,
+                mapping={
+                    'query_id': '',
+                    'query': '',
+                    'query_metadata': '{}',
+                    'score': -1,
+                },
+            )
+        )
+        | 'GetHashKey' >> beam.Map(lambda x: (_get_hash(x), x))
+    )
 
-  def _generate_qrel_examples(self, pipeline, qrel_path, query_pipeline,
-                              passage_pipeline):
+  def _generate_qrel_examples(
+      self, pipeline, qrel_path, query_pipeline, passage_pipeline
+  ):
     """Generates (query, passage) pair examples."""
     beam = tfds.core.lazy_imports.apache_beam
-    qid_query = query_pipeline | 'QidAsKey' >> beam.Map(lambda x:  # pylint: disable=g-long-lambda
-                                                        (x['query_id'], x))
+    qid_query = query_pipeline | 'QidAsKey' >> beam.Map(
+        lambda x: (x['query_id'], x)  # pylint: disable=g-long-lambda
+    )
     docid_passage = passage_pipeline | 'DocidAsKey' >> beam.Map(
-        lambda x: (x['passage_id'], x))
+        lambda x: (x['passage_id'], x)
+    )
 
     # PCollection[qid, Tuple(docid, score)]
     qid_docid = (
@@ -314,7 +357,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         | beam.io.ReadFromText(qrel_path)
         | 'Split' >> beam.Map(lambda x: x.strip().split('\t')[:3])
         | 'FilterFirstLine' >> beam.Filter(lambda x: x[0] != 'query-id')
-        | 'QidAsKeyAndDocid' >> beam.Map(lambda x: (x[0], (x[1], float(x[2])))))
+        | 'QidAsKeyAndDocid' >> beam.Map(lambda x: (x[0], (x[1], float(x[2]))))
+    )
 
     def to_docid_query_fn(ex):
       rst = []
@@ -322,8 +366,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         rst.append((
             docid,
             {  # pylint: disable=g-complex-comprehension
-                **ex['query'][0], 'score': score
-            }))
+                **ex['query'][0],
+                'score': score,
+            },
+        ))
       return rst
 
     # PCollection[docid, Dict].
@@ -336,7 +382,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         | 'GroupByQid' >> beam.CoGroupByKey()
         | 'DropQid' >> beam.Values()
         | 'FilterEmptyQid' >> beam.Filter(lambda x: x['query'] and x['docids'])
-        | 'SetKeyDocid' >> beam.FlatMap(to_docid_query_fn))
+        | 'SetKeyDocid' >> beam.FlatMap(to_docid_query_fn)
+    )
 
     return (
         ({
@@ -345,13 +392,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         })
         | 'GroupByDocid' >> beam.CoGroupByKey()
         | 'DropDocid' >> beam.Values()
-        |
-        'FilterEmptyDocid' >> beam.Filter(lambda x: x['query'] and x['passage'])
-        | 'MergeQueryAndPassage' >> beam.Map(lambda x: {  # pylint: disable=g-long-lambda
-            **x['query'][0],
-            **x['passage'][0],
-        })
-        | 'GetHashKey' >> beam.Map(lambda x: (_get_hash(x), x)))
+        | 'FilterEmptyDocid'
+        >> beam.Filter(lambda x: x['query'] and x['passage'])
+        | 'MergeQueryAndPassage'
+        >> beam.Map(
+            lambda x: {  # pylint: disable=g-long-lambda
+                **x['query'][0],
+                **x['passage'][0],
+            }
+        )
+        | 'GetHashKey' >> beam.Map(lambda x: (_get_hash(x), x))
+    )
 
   def _generate_examples(self, pipeline):
     """Yields examples."""

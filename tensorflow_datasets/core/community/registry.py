@@ -57,19 +57,24 @@ def _load_register_for_paths(
       data_paths.append(path)
 
   if code_paths and data_paths:
-    raise RuntimeError(f'Both a path containing code ({code_paths}) and '
-                       f'a path containing data ({data_paths} are specified. '
-                       'This is not supported')
+    raise RuntimeError(
+        f'Both a path containing code ({code_paths}) and '
+        f'a path containing data ({data_paths} are specified. '
+        'This is not supported'
+    )
 
   registers = []
   if data_paths:
     register = register_path.DataDirRegister(
-        namespace_to_data_dirs={namespace: data_paths})
+        namespace_to_data_dirs={namespace: data_paths}
+    )
     registers.append(register)
   if code_paths:
     registers.append(
         register_package.PackageRegister(
-            path=gcs_utils.GCS_COMMUNITY_INDEX_PATH))
+            path=gcs_utils.GCS_COMMUNITY_INDEX_PATH
+        )
+    )
   return registers
 
 
@@ -86,11 +91,13 @@ class NamespaceConfig:
   tensorflow_graphics='gs://tensorflow-graphics/datasets'
   ```
   """
+
   config_path: epath.Path
 
   @functools.lru_cache()
   def registers_per_namespace(
-      self) -> Mapping[str, List[register_base.BaseRegister]]:
+      self,
+  ) -> Mapping[str, List[register_base.BaseRegister]]:
     """Returns the registry containing all repositories in the given config.
 
     Raises:
@@ -101,10 +108,12 @@ class NamespaceConfig:
     for namespace, path_or_paths in config['Namespaces'].items():
       if namespace in registers_per_namespace:
         raise RuntimeError(
-            f'Namespace {namespace} is defined twice in config {self.config_path}'
+            f'Namespace {namespace} is defined twice in config'
+            f' {self.config_path}'
         )
       registers_per_namespace[namespace] = _load_register_for_paths(
-          namespace=namespace, paths=_as_path_list(path_or_paths))
+          namespace=namespace, paths=_as_path_list(path_or_paths)
+      )
     return registers_per_namespace
 
 
@@ -119,11 +128,13 @@ class DatasetRegistry(register_base.BaseRegister):
     namespace_config: config where to find the datasets of a namespace.
     registers_per_namespace: per namespace a list of registers it consists of.
   """
+
   namespace_config: NamespaceConfig
 
   @property
   def registers_per_namespace(
-      self) -> Mapping[str, List[register_base.BaseRegister]]:
+      self,
+  ) -> Mapping[str, List[register_base.BaseRegister]]:
     return self.namespace_config.registers_per_namespace()
 
   def has_namespace(self, namespace: str) -> bool:
@@ -149,7 +160,8 @@ class DatasetRegistry(register_base.BaseRegister):
         except Exception:  # pylint: disable=broad-except
           logging.exception(
               'Exception while getting dataset references from register %s',
-              register)
+              register,
+          )
 
   def list_builders_per_namespace(self, namespace: str) -> List[str]:
     """Lists the builders available for a specific namespace."""
@@ -164,7 +176,9 @@ class DatasetRegistry(register_base.BaseRegister):
     # Add list of available datasets to error context.
     all_datasets = self.list_builders_per_namespace(name.namespace)
     all_datasets_str = '\n\t- '.join([''] + all_datasets)
-    error_msg = f'Available datasets under the same namespace:{all_datasets_str}\n'
+    error_msg = (
+        f'Available datasets under the same namespace:{all_datasets_str}\n'
+    )
     # Add closest match to error context.
     close_matches = difflib.get_close_matches(str(name), all_datasets, n=1)
     if close_matches:
@@ -172,7 +186,8 @@ class DatasetRegistry(register_base.BaseRegister):
     return error_msg
 
   def _get_registers(
-      self, name: naming.DatasetName) -> List[register_base.BaseRegister]:
+      self, name: naming.DatasetName
+  ) -> List[register_base.BaseRegister]:
     """Returns all available registers for a given namespace, if any.
 
     Args:
@@ -182,11 +197,14 @@ class DatasetRegistry(register_base.BaseRegister):
       DatasetNotFound error if the namespace is not found.
     """
     if not self.has_namespace(name.namespace):
-      error_msg = (f'\nNamespace {name.namespace} not found. ')
-      error_msg += (f'Note that the namespace should be one of: '
-                    f'{sorted(self.registers_per_namespace.keys())}.\n')
+      error_msg = f'\nNamespace {name.namespace} not found. '
+      error_msg += (
+          'Note that the namespace should be one of: '
+          f'{sorted(self.registers_per_namespace.keys())}.\n'
+      )
       close_matches = difflib.get_close_matches(
-          name.namespace, self.registers_per_namespace, n=1)
+          name.namespace, self.registers_per_namespace, n=1
+      )
       if close_matches:
         error_msg += f'Did you mean: {name.namespace} -> {close_matches[0]} ?\n'
       raise registered.DatasetNotFoundError(error_msg)
@@ -221,7 +239,8 @@ class DatasetRegistry(register_base.BaseRegister):
     raise registered.DatasetNotFoundError(
         f'Namespace {name.namespace} found, '
         f'but could not load dataset {name.name}.'
-        f'{self._get_list_builders_context(name)}')
+        f'{self._get_list_builders_context(name)}'
+    )
 
   def builder(
       self,
@@ -237,12 +256,15 @@ class DatasetRegistry(register_base.BaseRegister):
       return registers[0].builder(name, **builder_kwargs)
 
     if len(registers) > 1:
-      raise ValueError(f'Namespace {name.namespace} has multiple registers! '
-                       f'This should not happen! Registers: {registers}')
+      raise ValueError(
+          f'Namespace {name.namespace} has multiple registers! '
+          f'This should not happen! Registers: {registers}'
+      )
 
     raise registered.DatasetNotFoundError(
         f'Namespace {name.namespace} found with {len(registers)} registers, '
-        f'but could not load dataset {name.name}.')
+        f'but could not load dataset {name.name}.'
+    )
 
   def get_builder_root_dirs(self, name: naming.DatasetName) -> List[epath.Path]:
     """Returns root dir of the generated builder (without version/config)."""
@@ -261,4 +283,5 @@ def registry_for_config(config_path: epath.PathLike) -> DatasetRegistry:
 
 
 community_register = registry_for_config(
-    config_path=(utils.tfds_path() / 'community-datasets.toml'))
+    config_path=(utils.tfds_path() / 'community-datasets.toml')
+)

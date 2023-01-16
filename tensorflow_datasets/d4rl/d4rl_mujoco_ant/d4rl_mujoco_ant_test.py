@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlMujocoAntTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ant datasets."""
+
   DATASET_CLASS = d4rl_mujoco_ant.D4rlMujocoAnt
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -35,6 +36,7 @@ class D4rlMujocoAntTest(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlMujocoAntInfosTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ant datasets with step metadata."""
+
   DATASET_CLASS = d4rl_mujoco_ant.D4rlMujocoAnt
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -55,8 +57,8 @@ class D4rlMujocoAntReplayTest(tfds.testing.DatasetBuilderTestCase):
     * Contain two fields of episode metadata.
     * Use float64 types (instead of float32)
     * Rewards are stored with shape (1,) instead of scalar
-
   """
+
   DATASET_CLASS = d4rl_mujoco_ant.D4rlMujocoAnt
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -71,6 +73,7 @@ class D4rlMujocoAntReplayTest(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlMujocoAntMetadataTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ant datasets with all the metadata fields."""
+
   DATASET_CLASS = d4rl_mujoco_ant.D4rlMujocoAnt
   SPLITS = {
       'train': 2,  # Number of fake train example

@@ -57,9 +57,11 @@ def test_extract_features():
           'metadata': {
               'other': tf.string,
           },
-          'sequence': features_lib.Sequence({
-              'x': tf.int64,
-          }),
+          'sequence': features_lib.Sequence(
+              {
+                  'x': tf.int64,
+              }
+          ),
       },
   )
   testing.assert_features_equal(
@@ -69,9 +71,11 @@ def test_extract_features():
           'metadata': {
               'other': tf.string,
           },
-          'sequence': features_lib.Sequence({
-              'x': tf.int64,
-          }),
+          'sequence': features_lib.Sequence(
+              {
+                  'x': tf.int64,
+              }
+          ),
       }),
   )
 
@@ -85,9 +89,11 @@ def test_extract_features():
     _extract_features(
         feature=features,
         expected_feature={
-            'sequence': features_lib.Sequence({
-                'unknown': tf.bool,
-            })
+            'sequence': features_lib.Sequence(
+                {
+                    'unknown': tf.bool,
+                }
+            )
         },
     )
 
@@ -157,9 +163,11 @@ def test_extract_features_values():
           'metadata': {
               'label': features_lib.ClassLabel(num_classes=4),
           },
-          'sequence': features_lib.Sequence({
-              'y': tf.int64,
-          }),
+          'sequence': features_lib.Sequence(
+              {
+                  'y': tf.int64,
+              }
+          ),
           'sequence_flat': features_lib.Sequence(tf.int64),
       }),
   )
@@ -197,9 +205,11 @@ def test_extract_features_values():
       result,
       features_lib.FeaturesDict({
           'img': features_lib.Image(shape=(256, 256, 3)),
-          'sequence': features_lib.Sequence({
-              'x': tf.int64,
-          }),
+          'sequence': features_lib.Sequence(
+              {
+                  'x': tf.int64,
+              }
+          ),
       }),
   )
 
@@ -207,9 +217,11 @@ def test_extract_features_values():
 def test_partial_decode(dummy_mnist: testing.DummyMnist):
   ds = dummy_mnist.as_dataset(
       split='train',
-      decoders=decode.PartialDecoding({
-          'image': features_lib.Image(shape=(None, None, 1)),
-      }),
+      decoders=decode.PartialDecoding(
+          {
+              'image': features_lib.Image(shape=(None, None, 1)),
+          }
+      ),
   )
   assert ds.element_spec == {
       'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8)

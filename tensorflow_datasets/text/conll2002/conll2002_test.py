@@ -21,6 +21,7 @@ from tensorflow_datasets.text.conll2002 import conll2002
 
 class Conll2002EspTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for conll2002 dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = [conll2002.ES_CONFIG.name]
   DATASET_CLASS = conll2002.Conll2002
   SPLITS = {
@@ -32,12 +33,13 @@ class Conll2002EspTest(tfds.testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       'train': 'esp.train',
       'dev': 'esp.testa',
-      'test': 'esp.testb'
+      'test': 'esp.testb',
   }
 
 
 class Conll2002NedTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for conll2002 dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = [conll2002.NL_CONFIG.name]
   DATASET_CLASS = conll2002.Conll2002
   SPLITS = {
@@ -49,7 +51,7 @@ class Conll2002NedTest(tfds.testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       'train': 'ned.train',
       'dev': 'ned.testa',
-      'test': 'ned.testb'
+      'test': 'ned.testb',
   }
 
 

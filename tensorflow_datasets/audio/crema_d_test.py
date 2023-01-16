@@ -28,14 +28,13 @@ class CremaDTest(testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = {
-      'summary_table':
-          'summary_table.csv',
+      'summary_table': 'summary_table.csv',
       'all_files': [
           '1000_AA_HAP_XX.wav',
           '1001_AA_HAP_XX.wav',
           '1002_AA_ANG_XX.wav',
           '1003_AA_FEA_XX.wav',
-      ]
+      ],
   }
 
 

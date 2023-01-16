@@ -47,25 +47,24 @@ class Builder(tfds.core.BeamBasedBuilder):
       SalientSpanWikipediaConfig(
           name="sentences",
           split_sentences=True,
-          description="Examples are individual sentences containing entities."),
+          description="Examples are individual sentences containing entities.",
+      ),
       SalientSpanWikipediaConfig(
           name="documents",
           split_sentences=False,
-          description="Examples re full documents."),
+          description="Examples re full documents.",
+      ),
   ]
 
   def _info(self):
     feature_dict = {
-        "title":
-            tfds.features.Text(),
-        "text":
-            tfds.features.Text(),
-        "spans":
-            tfds.features.Sequence({
-                "start": np.int32,
-                "limit": np.int32,
-                "type": np.str_,
-            }),
+        "title": tfds.features.Text(),
+        "text": tfds.features.Text(),
+        "spans": tfds.features.Sequence({
+            "start": np.int32,
+            "limit": np.int32,
+            "type": np.str_,
+        }),
     }
     if not self.builder_config.split_sentences:
       feature_dict["sentences"] = tfds.features.Sequence({
@@ -74,14 +73,15 @@ class Builder(tfds.core.BeamBasedBuilder):
       })
 
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict(feature_dict),)
+        features=tfds.features.FeaturesDict(feature_dict),
+    )
 
   def _split_generators(self, dl_manager):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"split_sentences": self.builder_config.split_sentences
-                       }),
+            gen_kwargs={"split_sentences": self.builder_config.split_sentences},
+        ),
     ]
 
   def _build_pcollection(self, pipeline, split_sentences):
@@ -119,17 +119,15 @@ class Builder(tfds.core.BeamBasedBuilder):
                 "limit": span_limit,
                 "type": span_type,
             },
-            "sentences": {
-                "start": sent_start,
-                "limit": sent_limit
-            }
+            "sentences": {"start": sent_start, "limit": sent_limit},
         }
       else:
         span_i = 0
-        for sent_i, (sent_start,
-                     sent_limit) in enumerate(zip(sent_start, sent_limit)):
+        for sent_i, (sent_start, sent_limit) in enumerate(
+            zip(sent_start, sent_limit)
+        ):
           span_indices = []
-          while (span_i < len(span_start) and span_start[span_i] < sent_limit):
+          while span_i < len(span_start) and span_start[span_i] < sent_limit:
             if span_limit[span_i] <= sent_limit:
               span_indices.append(span_i)
             else:
@@ -149,11 +147,13 @@ class Builder(tfds.core.BeamBasedBuilder):
                   "start": span_start[span_indices] - sent_start,
                   "limit": span_limit[span_indices] - sent_start,
                   "type": span_type[span_indices],
-              }
+              },
           }
 
-    return (pipeline
-            | beam.io.ReadFromTFRecord(
-                _INPUT_FILE_PATTERN,
-                coder=beam.coders.ProtoCoder(tf.train.Example))
-            | beam.FlatMap(_emit_example))
+    return (
+        pipeline
+        | beam.io.ReadFromTFRecord(
+            _INPUT_FILE_PATTERN, coder=beam.coders.ProtoCoder(tf.train.Example)
+        )
+        | beam.FlatMap(_emit_example)
+    )

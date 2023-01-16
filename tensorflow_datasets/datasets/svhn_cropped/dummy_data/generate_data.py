@@ -26,7 +26,10 @@ for split_name, num_examples in [
     ('extra', 1),
 ]:
   img_shape = (32, 32, 3, num_examples)
-  scipy.io.savemat('{}_32x32.mat'.format(split_name), {
-      'X': np.random.randint(255, size=img_shape, dtype=np.uint8),
-      'y': np.random.randint(1, 10, size=(num_examples, 1)),
-  })
+  scipy.io.savemat(
+      '{}_32x32.mat'.format(split_name),
+      {
+          'X': np.random.randint(255, size=img_shape, dtype=np.uint8),
+          'y': np.random.randint(1, 10, size=(num_examples, 1)),
+      },
+  )

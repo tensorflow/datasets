@@ -32,6 +32,7 @@ class DatasetSource:
       `gs://.../my_dataset/`, `github://.../my_dataset/`)
     filenames: Content of the dataset package
   """
+
   root_path: epath.Path
   filenames: List[str]
 
@@ -56,7 +57,7 @@ class DatasetSource:
     else:
       return {
           'root_path': os.fspath(self.root_path),
-          'filenames': self.filenames
+          'filenames': self.filenames,
       }
 
 

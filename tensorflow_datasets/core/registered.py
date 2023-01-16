@@ -111,10 +111,12 @@ class RegisteredDatasetCollection(abc.ABC):
       pass
     elif cls.name in _DATASET_COLLECTION_REGISTRY:
       raise ValueError(
-          f'DatasetCollection with name {cls.name} already registered.')
+          f'DatasetCollection with name {cls.name} already registered.'
+      )
     elif cls.name in _ABSTRACT_DATASET_COLLECTION_REGISTRY:
       raise ValueError(
-          f'DatasetCollection with name {cls.name} already registered as abstract.'
+          f'DatasetCollection with name {cls.name} already registered as'
+          ' abstract.'
       )
 
     # Add the dataset_collection to the registers
@@ -127,8 +129,8 @@ class RegisteredDatasetCollection(abc.ABC):
 def list_imported_dataset_collections() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetCollection`s."""
   all_dataset_collections = [
-      dataset_collection_name for dataset_collection_name,
-      dataset_collection_cls in _DATASET_COLLECTION_REGISTRY.items()
+      dataset_collection_name
+      for dataset_collection_name, dataset_collection_cls in _DATASET_COLLECTION_REGISTRY.items()
   ]
   return sorted(all_dataset_collections)
 
@@ -138,7 +140,8 @@ def is_dataset_collection(name: str) -> bool:
 
 
 def imported_dataset_collection_cls(
-    name: str) -> Type[RegisteredDatasetCollection]:
+    name: str,
+) -> Type[RegisteredDatasetCollection]:
   """Returns the Registered dataset class."""
   if name in _ABSTRACT_DATASET_COLLECTION_REGISTRY:
     raise AssertionError(f'DatasetCollection {name} is an abstract class.')
@@ -196,7 +199,8 @@ class RegisteredDataset(abc.ABC):
       raise ValueError(f'Dataset with name {cls.name} already registered.')
     elif cls.name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
-          f'Dataset with name {cls.name} already registered as abstract.')
+          f'Dataset with name {cls.name} already registered as abstract.'
+      )
 
     # Add the dataset to the registers
     if is_abstract:
@@ -213,7 +217,8 @@ def _is_builder_available(builder_cls: Type[RegisteredDataset]) -> bool:
 def list_imported_builders() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   all_builders = [
-      builder_name for builder_name, builder_cls in _DATASET_REGISTRY.items()
+      builder_name
+      for builder_name, builder_cls in _DATASET_REGISTRY.items()
       if _is_builder_available(builder_cls)
   ] + list(_get_existing_dataset_packages(constants.DATASETS_TFDS_SRC_DIR))
   return sorted(all_builders)
@@ -221,7 +226,8 @@ def list_imported_builders() -> List[str]:
 
 @functools.lru_cache(maxsize=None)
 def _get_existing_dataset_packages(
-    datasets_dir: Text) -> Dict[Text, Tuple[epath.Path, Text]]:
+    datasets_dir: Text,
+) -> Dict[Text, Tuple[epath.Path, Text]]:
   """Returns existing datasets.
 
   Args:
@@ -243,8 +249,9 @@ def _get_existing_dataset_packages(
     return datasets
   if not datasets_dir_path.exists():
     return datasets
-  ds_dir_pkg = '.'.join(['tensorflow_datasets'] +
-                        datasets_dir.split(os.path.sep))
+  ds_dir_pkg = '.'.join(
+      ['tensorflow_datasets'] + datasets_dir.split(os.path.sep)
+  )
   for child in datasets_dir_path.iterdir():
     # Except for a few exceptions, all children of datasets/ directory are
     # packages of datasets, no needs to check child is a directory and contains
@@ -262,7 +269,8 @@ def _get_existing_dataset_packages(
 def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
   """Returns the Registered dataset class."""
   existing_ds_pkgs = _get_existing_dataset_packages(
-      constants.DATASETS_TFDS_SRC_DIR)
+      constants.DATASETS_TFDS_SRC_DIR
+  )
   if name in existing_ds_pkgs:
     pkg_dir_path, builder_module = existing_ds_pkgs[name]
     cls = importlib.import_module(builder_module).Builder

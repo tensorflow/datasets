@@ -50,7 +50,9 @@ SplitGenerator = Union[
     Iterable[KeyExample],
     # Ideally we should add input/output type annotations
     # `beam.PTransform[[], KeyExample]`, similar to `Callable[[], KeyExample]`
-    'beam.PTransform', 'beam.PCollection[KeyExample]',]
+    'beam.PTransform',
+    'beam.PCollection[KeyExample]',
+]
 
 
 @utils.docs.deprecated
@@ -68,6 +70,7 @@ class SplitGeneratorLegacy:
     gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method of
       the builder.
   """
+
   name: str
   gen_kwargs: Optional[Dict[str, Any]] = dataclasses.field(default_factory=dict)
 
@@ -189,8 +192,9 @@ class SplitBuilder:
       yield pipeline_proxy
     except Exception:  # pylint: disable=broad-except
       # Close and forward the exception
-      if (not self._beam_pipeline or
-          not self._beam_pipeline.__exit__(*sys.exc_info())):
+      if not self._beam_pipeline or not self._beam_pipeline.__exit__(
+          *sys.exc_info()
+      ):
         raise  # Forward the exception
     else:
       # If the Beam pipeline was used, then exit it.
@@ -212,14 +216,16 @@ class SplitBuilder:
     if not self._in_contextmanager:
       raise AssertionError(
           'beam_pipeline has to be created from within `SplitBuilder` '
-          'contextmanager.')
+          'contextmanager.'
+      )
 
     beam = lazy_imports_lib.lazy_imports.apache_beam
 
     # On Colab, stderr isn't displayed by default, so using `print`.
     print_fn = print if utils.is_notebook() else logging.warning
     if not self._beam_runner and not self._beam_options:
-      msg = utils.dedent("""
+      msg = utils.dedent(
+          """
           **************************** WARNING *********************************
           Warning: The dataset you're trying to generate is using Apache Beam,
           yet no `beam_runner` nor `beam_options` was explicitly provided.
@@ -230,24 +236,30 @@ class SplitBuilder:
 
           https://www.tensorflow.org/datasets/beam_datasets#generating_a_beam_dataset
           **********************************************************************
-          """)
+          """
+      )
       print_fn(msg)
 
       total_memory = psutil.virtual_memory().total
       if self._dataset_size >= total_memory:
         if not click.confirm(
-            f'The dataset is {self._dataset_size} in size, but your machine has'
-            f' only {utils.Size(total_memory)} of memory. Continue?',
-            default=True):
+            (
+                f'The dataset is {self._dataset_size} in size, but your machine'
+                f' has only {utils.Size(total_memory)} of memory. Continue?'
+            ),
+            default=True,
+        ):
           sys.exit(1)
 
     beam_options = (
-        self._beam_options or beam.options.pipeline_options.PipelineOptions())
+        self._beam_options or beam.options.pipeline_options.PipelineOptions()
+    )
     # Beam type checking assumes transforms multiple outputs are of same type,
     # which is not our case. Plus it doesn't handle correctly all types, so we
     # are better without it.
     beam_options.view_as(
-        beam.options.pipeline_options.TypeOptions).pipeline_type_check = False
+        beam.options.pipeline_options.TypeOptions
+    ).pipeline_type_check = False
     # Create the global pipeline object common for all splits
     pipeline = beam.Pipeline(runner=self._beam_runner, options=beam_options)
     self._beam_pipeline = pipeline.__enter__()
@@ -255,8 +267,9 @@ class SplitBuilder:
 
   def normalize_legacy_split_generators(
       self,
-      split_generators: Union[Dict[str, SplitGenerator],
-                              List[SplitGeneratorLegacy]],
+      split_generators: Union[
+          Dict[str, SplitGenerator], List[SplitGeneratorLegacy]
+      ],
       generator_fn: Callable[..., Any],
       is_beam: bool,
   ) -> Dict[str, SplitGenerator]:
@@ -292,7 +305,8 @@ class SplitBuilder:
         }
     else:
       raise TypeError(
-          f'Invalid `_split_generators` returned value: {split_generators}')
+          f'Invalid `_split_generators` returned value: {split_generators}'
+      )
 
   def submit_split_generation(
       self,
@@ -328,7 +342,8 @@ class SplitBuilder:
       unknown_generator_type = TypeError(
           f'Invalid split generator value for split `{split_name}`. '
           'Expected generator or apache_beam object. Got: '
-          f'{type(generator)}')
+          f'{type(generator)}'
+      )
       try:
         import apache_beam as beam  # pylint: disable=g-import-not-at-top
       except ImportError:
@@ -363,8 +378,9 @@ class SplitBuilder:
       future: The future containing the `tfds.core.SplitInfo`.
     """
     if self._max_examples_per_split is not None:
-      logging.warning('Splits capped at %s examples max.',
-                      self._max_examples_per_split)
+      logging.warning(
+          'Splits capped at %s examples max.', self._max_examples_per_split
+      )
       generator = itertools.islice(generator, self._max_examples_per_split)
       total_num_examples = self._max_examples_per_split
     else:
@@ -378,7 +394,8 @@ class SplitBuilder:
 
     writer = writer_lib.Writer(
         serializer=example_serializer.ExampleSerializer(
-            self._features.get_serialized_info()),
+            self._features.get_serialized_info()
+        ),
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
@@ -421,7 +438,8 @@ class SplitBuilder:
 
     beam_writer = writer_lib.BeamWriter(
         serializer=example_serializer.ExampleSerializer(
-            self._features.get_serialized_info()),
+            self._features.get_serialized_info()
+        ),
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
@@ -447,8 +465,10 @@ class SplitBuilder:
 
     def _resolve_future():
       if self._in_contextmanager:
-        raise AssertionError('`future.result()` should be called after the '
-                             '`maybe_beam_pipeline` contextmanager.')
+        raise AssertionError(
+            '`future.result()` should be called after the '
+            '`maybe_beam_pipeline` contextmanager.'
+        )
       logging.info('Retrieving split info for %s...', split_name)
       shard_lengths, total_size = beam_writer.finalize()
       return splits_lib.SplitInfo(

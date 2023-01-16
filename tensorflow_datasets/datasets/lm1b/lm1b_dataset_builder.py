@@ -21,15 +21,19 @@ from etils import epath
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_DOWNLOAD_URL = ("http://www.statmt.org/lm-benchmark/"
-                 "1-billion-word-language-modeling-benchmark-r13output.tar.gz")
+_DOWNLOAD_URL = (
+    "http://www.statmt.org/lm-benchmark/"
+    "1-billion-word-language-modeling-benchmark-r13output.tar.gz"
+)
 _TOP_LEVEL_DIR = "1-billion-word-language-modeling-benchmark-r13output"
-_TRAIN_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
-                                  "training-monolingual.tokenized.shuffled",
-                                  "news.en-*")
-_HELDOUT_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
-                                    "heldout-monolingual.tokenized.shuffled",
-                                    "news.en.heldout-*")
+_TRAIN_FILE_FORMAT = os.path.join(
+    _TOP_LEVEL_DIR, "training-monolingual.tokenized.shuffled", "news.en-*"
+)
+_HELDOUT_FILE_FORMAT = os.path.join(
+    _TOP_LEVEL_DIR,
+    "heldout-monolingual.tokenized.shuffled",
+    "news.en.heldout-*",
+)
 
 
 def _train_data_filenames(tmp_dir):
@@ -47,9 +51,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            "text": tfds.features.Text(),
-        }),
+        features=tfds.features.FeaturesDict(
+            {
+                "text": tfds.features.Text(),
+            }
+        ),
         supervised_keys=("text", "text"),
         homepage="http://www.statmt.org/lm-benchmark/",
     )
@@ -61,16 +67,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     test_files = _test_data_filenames(lm1b_path)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"files": train_files}),
+            name=tfds.Split.TRAIN, gen_kwargs={"files": train_files}
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs={"files": test_files}),
+            name=tfds.Split.TEST, gen_kwargs={"files": test_files}
+        ),
     ]
 
   def _generate_examples(self, files):
     for filepath in files:
       logging.info("generating examples from = %s", filepath)
       with epath.Path(filepath).open() as f:
-
         for idx, line in enumerate(f):
           yield "%s_%d" % (os.path.basename(filepath), idx), {
               "text": line.strip(),

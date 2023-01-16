@@ -23,4 +23,5 @@ tfds.builder_cls('reddit_disentanglement')
 from tensorflow_datasets.core import lazy_builder_import
 
 RedditDisentanglement = lazy_builder_import.LazyBuilderImport(
-    'reddit_disentanglement')
+    'reddit_disentanglement'
+)

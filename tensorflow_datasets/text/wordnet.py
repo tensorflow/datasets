@@ -132,7 +132,8 @@ class WordnetConfig(tfds.core.BuilderConfig):
     self._citation = citation
     self._path_prefix = path_prefix
     super(WordnetConfig, self).__init__(
-        name=name, description=description, version=version)
+        name=name, description=description, version=version
+    )
 
   @property
   def citation(self):
@@ -140,9 +141,11 @@ class WordnetConfig(tfds.core.BuilderConfig):
 
   def get_paths(self, dl_paths):
     root_dir = dl_paths[self.name]
-    return (os.path.join(root_dir, self._path_prefix + 'train.txt'),
-            os.path.join(root_dir, self._path_prefix + 'valid.txt'),
-            os.path.join(root_dir, self._path_prefix + 'test.txt'))
+    return (
+        os.path.join(root_dir, self._path_prefix + 'train.txt'),
+        os.path.join(root_dir, self._path_prefix + 'valid.txt'),
+        os.path.join(root_dir, self._path_prefix + 'test.txt'),
+    )
 
 
 class Wordnet(tfds.core.GeneratorBasedBuilder):
@@ -154,13 +157,15 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
           path_prefix=os.path.join('wordnet-mlj12', 'wordnet-mlj12-'),
           description=_WN18_DESCRIPTION,
           citation=_WN18_CITATION,
-          version=tfds.core.Version('0.1.0')),
+          version=tfds.core.Version('0.1.0'),
+      ),
       WordnetConfig(
           name='WN18RR',
           path_prefix='',
           description=_WN18RR_DESCRIPTION,
           citation=_WN18RR_CITATION,
-          version=tfds.core.Version('0.1.0')),
+          version=tfds.core.Version('0.1.0'),
+      ),
   ]
 
   def _info(self):
@@ -181,14 +186,15 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract({
-        'WN18':
-            'https://everest.hds.utc.fr/lib/exe/fetch.php?media=en:wordnet-mlj12.tar.gz',
-        'WN18RR':
-            'https://github.com/TimDettmers/ConvE/raw/master/WN18RR.tar.gz',
+        'WN18': 'https://everest.hds.utc.fr/lib/exe/fetch.php?media=en:wordnet-mlj12.tar.gz',
+        'WN18RR': (
+            'https://github.com/TimDettmers/ConvE/raw/master/WN18RR.tar.gz'
+        ),
     })
     # Metadata is at the configuration level and is the same for all splits.
-    synset_definitions_path = os.path.join(dl_paths['WN18'], 'wordnet-mlj12',
-                                           'wordnet-mlj12-definitions.txt')
+    synset_definitions_path = os.path.join(
+        dl_paths['WN18'], 'wordnet-mlj12', 'wordnet-mlj12-definitions.txt'
+    )
     self.info.metadata.update(_make_wn18_metadata(synset_definitions_path))
     # Locate and output splits.
     train_path, val_path, test_path = self.builder_config.get_paths(dl_paths)

@@ -105,24 +105,24 @@ class Cardiotox(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     features = {
-        _LABEL_NAME:
-            tfds.features.Tensor(shape=[_NUM_CLASSES], dtype=np.int64),
-        _NODES_FEATURE_NAME:
-            tfds.features.Tensor(
-                shape=[_MAX_NODES, _NODE_FEATURE_LENGTH], dtype=np.float32),
-        _EDGES_FEATURE_NAME:
-            tfds.features.Tensor(
-                shape=[_MAX_NODES, _MAX_NODES, _EDGE_FEATURE_LENGTH],
-                dtype=np.float32),
-        _NODE_MASK_FEATURE_NAME:
-            tfds.features.Tensor(shape=[_MAX_NODES], dtype=np.float32),
-        _EDGE_MASK_FEATURE_NAME:
-            tfds.features.Tensor(
-                shape=[_MAX_NODES, _MAX_NODES], dtype=np.float32),
-        _DISTANCE_TO_TRAIN_NAME:
-            tfds.features.Tensor(shape=[1], dtype=np.float32),
-        _EXAMPLE_NAME:
-            tfds.features.Tensor(shape=[], dtype=np.str_),
+        _LABEL_NAME: tfds.features.Tensor(shape=[_NUM_CLASSES], dtype=np.int64),
+        _NODES_FEATURE_NAME: tfds.features.Tensor(
+            shape=[_MAX_NODES, _NODE_FEATURE_LENGTH], dtype=np.float32
+        ),
+        _EDGES_FEATURE_NAME: tfds.features.Tensor(
+            shape=[_MAX_NODES, _MAX_NODES, _EDGE_FEATURE_LENGTH],
+            dtype=np.float32,
+        ),
+        _NODE_MASK_FEATURE_NAME: tfds.features.Tensor(
+            shape=[_MAX_NODES], dtype=np.float32
+        ),
+        _EDGE_MASK_FEATURE_NAME: tfds.features.Tensor(
+            shape=[_MAX_NODES, _MAX_NODES], dtype=np.float32
+        ),
+        _DISTANCE_TO_TRAIN_NAME: tfds.features.Tensor(
+            shape=[1], dtype=np.float32
+        ),
+        _EXAMPLE_NAME: tfds.features.Tensor(shape=[], dtype=np.str_),
     }
     return tfds.core.DatasetInfo(
         builder=self,
@@ -134,24 +134,26 @@ class Cardiotox(tfds.core.GeneratorBasedBuilder):
         metadata=tfds.core.MetadataDict(
             max_nodes=_MAX_NODES,
             node_features=_NODE_FEATURE_LENGTH,
-            edge_features=_EDGE_FEATURE_LENGTH))
+            edge_features=_EDGE_FEATURE_LENGTH,
+        ),
+    )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
 
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(
-                os.path.join(_DATA_URL, _FILENAME_TRAIN), is_training=True),
-        tfds.Split.VALIDATION:
-            self._generate_examples(
-                os.path.join(_DATA_URL, _FILENAME_VAL), is_training=False),
-        tfds.Split.TEST:
-            self._generate_examples(
-                os.path.join(_DATA_URL, _FILENAME_TEST), is_training=False),
-        tfds.Split('test2'):
-            self._generate_examples(
-                os.path.join(_DATA_URL, _FILENAME_TEST2), is_training=False),
+        tfds.Split.TRAIN: self._generate_examples(
+            os.path.join(_DATA_URL, _FILENAME_TRAIN), is_training=True
+        ),
+        tfds.Split.VALIDATION: self._generate_examples(
+            os.path.join(_DATA_URL, _FILENAME_VAL), is_training=False
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            os.path.join(_DATA_URL, _FILENAME_TEST), is_training=False
+        ),
+        tfds.Split('test2'): self._generate_examples(
+            os.path.join(_DATA_URL, _FILENAME_TEST2), is_training=False
+        ),
     }
 
   def _generate_examples(self, path, is_training):
@@ -159,10 +161,12 @@ class Cardiotox(tfds.core.GeneratorBasedBuilder):
     cycle_len = 10 if is_training else 1
     dataset = tf.data.Dataset.list_files(path)
     dataset = dataset.interleave(
-        tf.data.TFRecordDataset, cycle_length=cycle_len)
+        tf.data.TFRecordDataset, cycle_length=cycle_len
+    )
     dataset = dataset.map(
         self.info.features.deserialize_example,
-        num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        num_parallel_calls=tf.data.experimental.AUTOTUNE,
+    )
 
     dataset = tfds.as_numpy(dataset)
     for example in dataset:

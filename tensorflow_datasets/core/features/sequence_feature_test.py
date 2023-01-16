@@ -24,7 +24,6 @@ from tensorflow_datasets.core import features as feature_lib
 class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_int(self):
-
     self.assertFeature(
         feature=feature_lib.Sequence({'int': tf.int32}, length=3),
         shape={'int': (3,)},
@@ -46,15 +45,9 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
             # Array of dict
             testing.FeatureExpectationItem(
                 value=[
-                    {
-                        'int': 1
-                    },
-                    {
-                        'int': 10
-                    },
-                    {
-                        'int': 100
-                    },
+                    {'int': 1},
+                    {'int': 10},
+                    {'int': 100},
                 ],
                 expected={'int': [1, 10, 100]},
             ),
@@ -65,16 +58,17 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                 raise_msg='Input sequence length do not match',
             ),
         ],
-        test_attributes=dict(_length=3))
+        test_attributes=dict(_length=3),
+    )
 
   def test_label(self):
-
     self.assertFeature(
         feature=feature_lib.Sequence(
             {
                 'label': feature_lib.ClassLabel(names=['left', 'right']),
             },
-            length=None),
+            length=None,
+        ),
         shape={'label': (None,)},
         dtype={'label': tf.int64},
         serialized_info={
@@ -96,31 +90,34 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                 expected={'label': []},
             ),
         ],
-        test_attributes=dict(_length=None))
+        test_attributes=dict(_length=None),
+    )
 
   def test_nested(self):
-
     self.assertFeature(
-        feature=feature_lib.Sequence({
-            'a': tf.string,
-            'b': {
-                'c': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
-                'd': tf.uint8,
-            }
-        }, length=None),
+        feature=feature_lib.Sequence(
+            {
+                'a': tf.string,
+                'b': {
+                    'c': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
+                    'd': tf.uint8,
+                },
+            },
+            length=None,
+        ),
         shape={
             'a': (None,),
             'b': {
                 'c': (None, 4, 2),
                 'd': (None,),
-            }
+            },
         },
         dtype={
             'a': tf.string,
             'b': {
                 'c': tf.int32,
                 'd': tf.uint8,
-            }
+            },
         },
         tests=[
             testing.FeatureExpectationItem(
@@ -129,32 +126,33 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     'b': {
                         'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
                         'd': [1, 2, 3],
-                    }
+                    },
                 },
                 expected={
-                    'a': [
-                        tf.compat.as_bytes(t) for t in ('aa', 'b', 'ccc')
-                    ],
+                    'a': [tf.compat.as_bytes(t) for t in ('aa', 'b', 'ccc')],
                     'b': {
                         'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
                         'd': [1, 2, 3],
-                    }
+                    },
                 },
             ),
             testing.FeatureExpectationItem(
                 value={
                     'a': [str(i) for i in range(100)],
-                    'b': [{   # pylint: disable=g-complex-comprehension
-                        'c': np.ones(shape=(4, 2), dtype=np.int32),
-                        'd': 5,
-                    } for _ in range(100)]
+                    'b': [
+                        {  # pylint: disable=g-complex-comprehension
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 5,
+                        }
+                        for _ in range(100)
+                    ],
                 },
                 expected={
                     'a': [tf.compat.as_bytes(str(i)) for i in range(100)],
                     'b': {
                         'c': np.ones(shape=(100, 4, 2), dtype=np.int32),
                         'd': [5] * 100,
-                    }
+                    },
                 },
             ),
             # Test inputs not same sequence length
@@ -164,7 +162,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     'b': {
                         'c': np.ones(shape=(4, 4, 2), dtype=np.int32),
                         'd': [1, 2, 3],
-                    }
+                    },
                 },
                 raise_cls=ValueError,
                 raise_msg='length of all elements of one sequence should',
@@ -173,7 +171,6 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_encoding(self):
-
     f = feature_lib.Sequence({
         'a': feature_lib.Sequence({'c': tf.int64}),
         'b': tf.int64,
@@ -182,74 +179,28 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     # Different combinaison of list of dict/dict of list to encode the same
     # nested sequence
     ex1 = f.encode_example([
-        {
-            'a': {
-                'c': [1, 1, 1]
-            },
-            'b': 1
-        },
-        {
-            'a': {
-                'c': []
-            },
-            'b': 2
-        },
-        {
-            'a': {
-                'c': [3, 3]
-            },
-            'b': 3
-        },
+        {'a': {'c': [1, 1, 1]}, 'b': 1},
+        {'a': {'c': []}, 'b': 2},
+        {'a': {'c': [3, 3]}, 'b': 3},
     ])
 
     ex2 = f.encode_example([
-        {
-            'a': [{
-                'c': 1
-            }, {
-                'c': 1
-            }, {
-                'c': 1
-            }],
-            'b': 1
-        },
-        {
-            'a': [],
-            'b': 2
-        },
-        {
-            'a': [{
-                'c': 3
-            }, {
-                'c': 3
-            }],
-            'b': 3
-        },
+        {'a': [{'c': 1}, {'c': 1}, {'c': 1}], 'b': 1},
+        {'a': [], 'b': 2},
+        {'a': [{'c': 3}, {'c': 3}], 'b': 3},
     ])
 
     ex3 = f.encode_example({
         'a': [
-            [{
-                'c': 1
-            }, {
-                'c': 1
-            }, {
-                'c': 1
-            }],
+            [{'c': 1}, {'c': 1}, {'c': 1}],
             [],
-            [{
-                'c': 3
-            }, {
-                'c': 3
-            }],
+            [{'c': 3}, {'c': 3}],
         ],
         'b': [1, 2, 3],
     })
 
     ex4 = f.encode_example({
-        'a': {
-            'c': [[1, 1, 1], [], [3, 3]]
-        },
+        'a': {'c': [[1, 1, 1], [], [3, 3]]},
         'b': [1, 2, 3],
     })
 
@@ -274,23 +225,23 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertAllEqualNested(to_ragged(ex4), out)
 
     # Should raise error if two sequences do not have the same length.
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             'length of all elements'):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'length of all elements'
+    ):
       f.encode_example({
-          'a': {
-              'c': [[1, 1, 1], []]
-          },
+          'a': {'c': [[1, 1, 1], []]},
           'b': [1, 2, 3],
       })
 
     # Empty sequence should create the correct number of dimension
     ex2 = f.encode_example([])
-    self.assertAllEqualNested(ex2, {
-        'a': {
-            'c': np.zeros((0, 0), np.int64)
+    self.assertAllEqualNested(
+        ex2,
+        {
+            'a': {'c': np.zeros((0, 0), np.int64)},
+            'b': np.zeros((0,), np.int64),
         },
-        'b': np.zeros((0,), np.int64),
-    })
+    )
 
   def test_2lvl_sequences_mixed(self):
     # Mix of sequence and non-sequence
@@ -322,11 +273,12 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_2lvl_sequences(self):
-
     self.assertFeature(
         feature=feature_lib.Sequence(
             feature_lib.Sequence(
-                feature_lib.Tensor(shape=(2,), dtype=tf.int32),),),
+                feature_lib.Tensor(shape=(2,), dtype=tf.int32),
+            ),
+        ),
         shape=(None, None, 2),
         dtype=tf.int32,
         test_tensor_spec=False,  # TODO(b/227584124): doesn't work
@@ -337,12 +289,14 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     [],
                     [[4, 5]],
                 ],
-                expected=testing.RaggedConstant([
-                    [[0, 1], [2, 3]],
-                    [],
-                    [[4, 5]],
-                ],
-                                                inner_shape=(2,)),
+                expected=testing.RaggedConstant(
+                    [
+                        [[0, 1], [2, 3]],
+                        [],
+                        [[4, 5]],
+                    ],
+                    inner_shape=(2,),
+                ),
             ),
             # Empty
             testing.FeatureExpectationItem(
@@ -389,9 +343,10 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_2lvl_sequences_string(self):
-
     self.assertFeature(
-        feature=feature_lib.Sequence(feature_lib.Sequence(tf.string),),
+        feature=feature_lib.Sequence(
+            feature_lib.Sequence(tf.string),
+        ),
         shape=(
             None,
             None,
@@ -433,13 +388,13 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_3lvl_sequence(self):
-
     self.assertFeature(
         feature=feature_lib.Sequence(
             feature_lib.Sequence(
                 feature_lib.Sequence(tf.int32),
                 length=3,
-            ),),
+            ),
+        ),
         shape=(None, 3, None),
         dtype=tf.int32,
         test_tensor_spec=False,  # TODO(b/227584124): doesn't work
@@ -466,7 +421,6 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_image(self):
-
     imgs = [
         np.random.randint(256, size=(128, 100, 3), dtype=np.uint8),
         np.random.randint(256, size=(128, 100, 3), dtype=np.uint8),
@@ -479,14 +433,14 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
         feature=feature_lib.Sequence(
             {
                 'image': feature_lib.Image(shape=(128, 100, 3)),
-            }, length=None),
+            },
+            length=None,
+        ),
         shape={'image': (None, 128, 100, 3)},
         dtype={'image': tf.uint8},
         tests=[
             testing.FeatureExpectationItem(
-                value=[{
-                    'image': img
-                } for img in imgs],
+                value=[{'image': img} for img in imgs],
                 expected={'image': imgs_stacked},
             ),
             testing.FeatureExpectationItem(
@@ -514,7 +468,6 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
 class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_int(self):
-
     self.assertFeature(
         feature=feature_lib.Sequence(tf.int32, length=3),
         shape=(3,),
@@ -540,10 +493,10 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_label(self):
-
     self.assertFeature(
         feature=feature_lib.Sequence(
-            feature_lib.ClassLabel(names=['left', 'right']),),
+            feature_lib.ClassLabel(names=['left', 'right']),
+        ),
         shape=(None,),
         dtype=tf.int64,
         tests=[
@@ -565,7 +518,6 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_image_unknown_len(self):
-
     imgs = [
         np.random.randint(256, size=(28, 28, 3), dtype=np.uint8),
         np.random.randint(256, size=(28, 28, 3), dtype=np.uint8),
@@ -634,12 +586,15 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_getattr(self):
     feature = feature_lib.Sequence(
-        feature_lib.ClassLabel(names=['left', 'right']),)
+        feature_lib.ClassLabel(names=['left', 'right']),
+    )
     self.assertEqual(feature.names, ['left', 'right'])
 
-    feature = feature_lib.Sequence({
-        'label': feature_lib.ClassLabel(names=['left', 'right']),
-    })
+    feature = feature_lib.Sequence(
+        {
+            'label': feature_lib.ClassLabel(names=['left', 'right']),
+        }
+    )
     self.assertEqual(feature['label'].names, ['left', 'right'])
 
   def test_metadata(self):

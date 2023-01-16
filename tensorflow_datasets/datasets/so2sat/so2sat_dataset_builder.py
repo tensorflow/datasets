@@ -19,11 +19,23 @@ import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _LABELS = [
-    'Compact high-rise', 'Compact mid-rise', 'Compact low-rise',
-    'Open high-rise', 'Open mid-rise', 'Open low-rise', 'Lightweight low-rise',
-    'Large low-rise', 'Sparsely built', 'Heavy industry', 'Dense trees',
-    'Scattered trees', 'Bush or scrub', 'Low plants', 'Bare rock or paved',
-    'Bare soil or sand', 'Water'
+    'Compact high-rise',
+    'Compact mid-rise',
+    'Compact low-rise',
+    'Open high-rise',
+    'Open mid-rise',
+    'Open low-rise',
+    'Lightweight low-rise',
+    'Large low-rise',
+    'Sparsely built',
+    'Heavy industry',
+    'Dense trees',
+    'Scattered trees',
+    'Bush or scrub',
+    'Low plants',
+    'Bare rock or paved',
+    'Bare soil or sand',
+    'Water',
 ]
 
 _DATA_OPTIONS = ['rgb', 'all']
@@ -65,11 +77,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       So2satConfig(
-          selection='rgb', name='rgb', description='Sentinel-2 RGB channels'),
+          selection='rgb', name='rgb', description='Sentinel-2 RGB channels'
+      ),
       So2satConfig(
           selection='all',
           name='all',
-          description='8 Sentinel-1 and 10 Sentinel-2 channels'),
+          description='8 Sentinel-1 and 10 Sentinel-2 channels',
+      ),
   ]
 
   def _info(self):
@@ -82,14 +96,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       supervised_keys = ('image', 'label')
     elif self.builder_config.selection == 'all':
       features = tfds.features.FeaturesDict({
-          'sentinel1':
-              tfds.features.Tensor(shape=[32, 32, 8], dtype=np.float32),
-          'sentinel2':
-              tfds.features.Tensor(shape=[32, 32, 10], dtype=np.float32),
-          'label':
-              tfds.features.ClassLabel(names=_LABELS),
-          'sample_id':
-              tfds.features.Tensor(shape=(), dtype=np.int64),
+          'sentinel1': tfds.features.Tensor(
+              shape=[32, 32, 8], dtype=np.float32
+          ),
+          'sentinel2': tfds.features.Tensor(
+              shape=[32, 32, 10], dtype=np.float32
+          ),
+          'label': tfds.features.ClassLabel(names=_LABELS),
+          'sample_id': tfds.features.Tensor(shape=(), dtype=np.int64),
       })
       supervised_keys = None
     return self.dataset_info_from_configs(
@@ -102,7 +116,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     paths = dl_manager.download({
         'train': 'ftp://m1454690:m1454690@dataserv.ub.tum.de/training.h5',
-        'val': 'ftp://m1454690:m1454690@dataserv.ub.tum.de/validation.h5'
+        'val': 'ftp://m1454690:m1454690@dataserv.ub.tum.de/validation.h5',
     })
     return [
         tfds.core.SplitGenerator(
@@ -145,5 +159,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
 
 def _create_rgb(sen2_bands):
-  return np.clip(sen2_bands[..., [2, 1, 0]] * _OPTICAL_CALIBRATION_FACTOR, 0,
-                 255).astype(np.uint8)
+  return np.clip(
+      sen2_bands[..., [2, 1, 0]] * _OPTICAL_CALIBRATION_FACTOR, 0, 255
+  ).astype(np.uint8)

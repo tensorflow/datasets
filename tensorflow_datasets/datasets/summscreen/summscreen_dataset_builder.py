@@ -24,10 +24,8 @@ import tensorflow_datasets.public_api as tfds
 
 _DL_URLS = {
     # pylint: disable=line-too-long
-    'tokenized':
-        'https://drive.google.com/uc?export=download&id=1BvdIllGBo9d2-bzXQRzWuJXB04XPVmfF',
-    'untokenized':
-        'https://drive.google.com/uc?export=download&id=1tFpt32USOO2i1FWhtFTsyYyFzuRm2k36',
+    'tokenized': 'https://drive.google.com/uc?export=download&id=1BvdIllGBo9d2-bzXQRzWuJXB04XPVmfF',
+    'untokenized': 'https://drive.google.com/uc?export=download&id=1tFpt32USOO2i1FWhtFTsyYyFzuRm2k36',
     # pylint: enable=line-too-long
 }
 
@@ -58,9 +56,13 @@ def _get_filenames_dict(tokenized_path, recap_source: str):
   filenames_dict = {}
   for split in _SPLITS:
     tokenized_data = _load_jsonl(
-        os.path.join(tokenized_path, 'SummScreen',
-                     _RECAP_SOURCE_FULL_NAMES[recap_source],
-                     f'{recap_source}_{split}.json'))
+        os.path.join(
+            tokenized_path,
+            'SummScreen',
+            _RECAP_SOURCE_FULL_NAMES[recap_source],
+            f'{recap_source}_{split}.json',
+        )
+    )
     filenames_dict[split] = [row['filename'] for row in tokenized_data]
   return filenames_dict
 
@@ -124,22 +126,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       })
     elif self._builder_config.recap_source == 'tms':
       features = tfds.features.FeaturesDict({
-          _TRANSCRIPT:
-              tfds.features.Text(),
-          _RECAP:
-              tfds.features.Text(),
-          'episode_summary':
-              tfds.features.Text(),
-          'show_title':
-              tfds.features.Text(),
-          'transcript_author':
-              tfds.features.Tensor(shape=(None,), dtype=np.str_),
-          'recap_author':
-              tfds.features.Text(),
+          _TRANSCRIPT: tfds.features.Text(),
+          _RECAP: tfds.features.Text(),
+          'episode_summary': tfds.features.Text(),
+          'show_title': tfds.features.Text(),
+          'transcript_author': tfds.features.Tensor(
+              shape=(None,), dtype=np.str_
+          ),
+          'recap_author': tfds.features.Text(),
       })
     else:
       raise KeyError(
-          f'Unknown recap_source {self._builder_config.recap_source}')
+          f'Unknown recap_source {self._builder_config.recap_source}'
+      )
 
     return self.dataset_info_from_configs(
         features=features,
@@ -188,4 +187,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         }
       else:
         raise KeyError(
-            f'Unknown recap_source {self._builder_config.recap_source}')
+            f'Unknown recap_source {self._builder_config.recap_source}'
+        )

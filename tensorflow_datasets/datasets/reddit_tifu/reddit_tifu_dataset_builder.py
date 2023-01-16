@@ -42,7 +42,8 @@ class RedditTifuConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(RedditTifuConfig, self).__init__(
-        version=tfds.core.Version("1.1.2"), **kwargs)
+        version=tfds.core.Version("1.1.2"), **kwargs
+    )
     self.summary_key = summary_key
 
 
@@ -51,14 +52,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   RELEASE_NOTES = {
       "1.1.0": "Remove empty document and summary strings.",
-      "1.1.1":
+      "1.1.1": (
           "Add train, dev and test (80/10/10) splits which are used in "
           "PEGASUS (https://arxiv.org/abs/1912.08777) in a separate config. "
           "These were created randomly using the tfds split function and are "
           "being released to ensure that results on Reddit Tifu Long are "
           "reproducible and comparable."
-          "Also add `id` to the datapoints.",
-      "1.1.2": "Corrected splits uploaded."
+          "Also add `id` to the datapoints."
+      ),
+      "1.1.2": "Corrected splits uploaded.",
   }
   BUILDER_CONFIGS = [
       RedditTifuConfig(
@@ -75,7 +77,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           name="long_split",
           summary_key=_TLDR,
           description="Using TLDR as summary and return train/test/dev splits.",
-      )
+      ),
   ]
 
   def _info(self):
@@ -84,7 +86,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         for k in _ADDITIONAL_FEATURES
     }
     features.update(
-        {k: tfds.features.Text() for k in [_DOCUMENT, _TLDR, _TITLE, _ID]})
+        {k: tfds.features.Text() for k in [_DOCUMENT, _TLDR, _TITLE, _ID]}
+    )
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(features),
         supervised_keys=(_DOCUMENT, self.builder_config.summary_key),
@@ -94,10 +97,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     if self.builder_config.name == "long_split":
-      paths = dl_manager.download_and_extract({
-          "data": _URL,
-          "split": _LONG_SPLIT
-      })
+      paths = dl_manager.download_and_extract(
+          {"data": _URL, "split": _LONG_SPLIT}
+      )
       dl_path = paths["data"]
       split_path = paths["split"]
       return [
@@ -106,7 +108,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               gen_kwargs={
                   "path": dl_path,
                   "split_path": split_path,
-                  "split": "train"
+                  "split": "train",
               },
           ),
           tfds.core.SplitGenerator(
@@ -114,7 +116,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               gen_kwargs={
                   "path": dl_path,
                   "split_path": split_path,
-                  "split": "test"
+                  "split": "test",
               },
           ),
           tfds.core.SplitGenerator(
@@ -122,9 +124,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               gen_kwargs={
                   "path": dl_path,
                   "split_path": split_path,
-                  "split": "validation"
+                  "split": "validation",
               },
-          )
+          ),
       ]
     else:
       dl_path = dl_manager.download_and_extract(_URL)

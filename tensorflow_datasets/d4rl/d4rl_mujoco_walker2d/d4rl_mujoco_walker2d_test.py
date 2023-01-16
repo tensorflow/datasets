@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlMujocoWalker2dTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for walker2d datasets."""
+
   DATASET_CLASS = d4rl_mujoco_walker2d.D4rlMujocoWalker2d
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -35,6 +36,7 @@ class D4rlMujocoWalker2dTest(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlMujocoWalker2dInfosTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for walker2d datasets with step metadata."""
+
   DATASET_CLASS = d4rl_mujoco_walker2d.D4rlMujocoWalker2d
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -55,8 +57,8 @@ class D4rlMujocoWalker2dReplayTest(tfds.testing.DatasetBuilderTestCase):
     * Contain two fields of episode metadata.
     * Use float64 types (instead of float32)
     * Rewards are stored with shape (1,) instead of scalar
-
   """
+
   DATASET_CLASS = d4rl_mujoco_walker2d.D4rlMujocoWalker2d
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -71,6 +73,7 @@ class D4rlMujocoWalker2dReplayTest(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlMujocoWalker2dMetadataTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for walker2d datasets with all the metadata fields."""
+
   DATASET_CLASS = d4rl_mujoco_walker2d.D4rlMujocoWalker2d
   SPLITS = {
       'train': 2,  # Number of fake train example

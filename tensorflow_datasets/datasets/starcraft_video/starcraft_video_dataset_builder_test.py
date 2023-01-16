@@ -27,7 +27,7 @@ class StarcraftVideoDatasetTest(testing.DatasetBuilderTestCase):
       "valid": "valid.tfrecords",
       "test": "test.tfrecords",
       "train_0": "train_0.tfrecords",
-      "train_1": "train_1.tfrecords"
+      "train_1": "train_1.tfrecords",
   }
 
   SPLITS = {
@@ -39,6 +39,7 @@ class StarcraftVideoDatasetTest(testing.DatasetBuilderTestCase):
 
 class StarcraftVideoDataset128Test(testing.DatasetBuilderTestCase):
   """Separate test to cover the 128x128 resolution videos."""
+
   DATASET_CLASS = starcraft_video_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["brawl_128"]
 
@@ -46,7 +47,7 @@ class StarcraftVideoDataset128Test(testing.DatasetBuilderTestCase):
       "valid": "128_valid.tfrecords",
       "test": "128_test.tfrecords",
       "train_0": "128_train_0.tfrecords",
-      "train_1": "128_train_1.tfrecords"
+      "train_1": "128_train_1.tfrecords",
   }
 
   SPLITS = {

@@ -63,130 +63,138 @@ class WebNlgTest(tfds.testing.DatasetBuilderTestCase):
       </entries>
     </benchmark>
     """
-    expected_examples = [{
-        'input_text': {
-            'table': [
-                {
-                    'column_header': 'subject',
-                    'row_number': 0,
-                    'content': '103_Colmore_Row',
-                },
-                {
-                    'column_header': 'predicate',
-                    'row_number': 0,
-                    'content': 'architect',
-                },
-                {
-                    'column_header': 'object',
-                    'row_number': 0,
-                    'content': 'John_Madin',
-                },
-                {
-                    'column_header': 'subject',
-                    'row_number': 1,
-                    'content': '103_Colmore_Row',
-                },
-                {
-                    'column_header': 'predicate',
-                    'row_number': 1,
-                    'content': 'location',
-                },
-                {
-                    'column_header': 'object',
-                    'row_number': 1,
-                    'content': '"Colmore Row, Birmingham, England"',
-                },
-            ],
-            'context': 'Building'
+    expected_examples = [
+        {
+            'input_text': {
+                'table': [
+                    {
+                        'column_header': 'subject',
+                        'row_number': 0,
+                        'content': '103_Colmore_Row',
+                    },
+                    {
+                        'column_header': 'predicate',
+                        'row_number': 0,
+                        'content': 'architect',
+                    },
+                    {
+                        'column_header': 'object',
+                        'row_number': 0,
+                        'content': 'John_Madin',
+                    },
+                    {
+                        'column_header': 'subject',
+                        'row_number': 1,
+                        'content': '103_Colmore_Row',
+                    },
+                    {
+                        'column_header': 'predicate',
+                        'row_number': 1,
+                        'content': 'location',
+                    },
+                    {
+                        'column_header': 'object',
+                        'row_number': 1,
+                        'content': '"Colmore Row, Birmingham, England"',
+                    },
+                ],
+                'context': 'Building',
+            },
+            'target_text': (
+                'Architect John Madin, designed 103 Colmore Row, located on '
+                'Colmore Row, in Birmingham, England.'
+            ),
         },
-        'target_text':
-            'Architect John Madin, designed 103 Colmore Row, located on '
-            'Colmore Row, in Birmingham, England.'
-    }, {
-        'input_text': {
-            'table': [
-                {
-                    'column_header': 'subject',
-                    'row_number': 0,
-                    'content': '103_Colmore_Row',
-                },
-                {
-                    'column_header': 'predicate',
-                    'row_number': 0,
-                    'content': 'architect',
-                },
-                {
-                    'column_header': 'object',
-                    'row_number': 0,
-                    'content': 'John_Madin',
-                },
-                {
-                    'column_header': 'subject',
-                    'row_number': 1,
-                    'content': '103_Colmore_Row',
-                },
-                {
-                    'column_header': 'predicate',
-                    'row_number': 1,
-                    'content': 'location',
-                },
-                {
-                    'column_header': 'object',
-                    'row_number': 1,
-                    'content': '"Colmore Row, Birmingham, England"',
-                },
-            ],
-            'context': 'Building'
+        {
+            'input_text': {
+                'table': [
+                    {
+                        'column_header': 'subject',
+                        'row_number': 0,
+                        'content': '103_Colmore_Row',
+                    },
+                    {
+                        'column_header': 'predicate',
+                        'row_number': 0,
+                        'content': 'architect',
+                    },
+                    {
+                        'column_header': 'object',
+                        'row_number': 0,
+                        'content': 'John_Madin',
+                    },
+                    {
+                        'column_header': 'subject',
+                        'row_number': 1,
+                        'content': '103_Colmore_Row',
+                    },
+                    {
+                        'column_header': 'predicate',
+                        'row_number': 1,
+                        'content': 'location',
+                    },
+                    {
+                        'column_header': 'object',
+                        'row_number': 1,
+                        'content': '"Colmore Row, Birmingham, England"',
+                    },
+                ],
+                'context': 'Building',
+            },
+            'target_text': (
+                'John Madin designed 103 Colmore Row, Birmingham, England.'
+            ),
         },
-        'target_text':
-            'John Madin designed 103 Colmore Row, Birmingham, England.'
-    }, {
-        'input_text': {
-            'table': [
-                {
-                    'column_header': 'subject',
-                    'row_number': 0,
-                    'content': '103_Colmore_Row',
-                },
-                {
-                    'column_header': 'predicate',
-                    'row_number': 0,
-                    'content': 'architect',
-                },
-                {
-                    'column_header': 'object',
-                    'row_number': 0,
-                    'content': 'John_Madin',
-                },
-                {
-                    'column_header': 'subject',
-                    'row_number': 1,
-                    'content': '103_Colmore_Row',
-                },
-                {
-                    'column_header': 'predicate',
-                    'row_number': 1,
-                    'content': 'location',
-                },
-                {
-                    'column_header': 'object',
-                    'row_number': 1,
-                    'content': 'Colmore_Row',
-                },
-            ],
-            'context': 'Building'
+        {
+            'input_text': {
+                'table': [
+                    {
+                        'column_header': 'subject',
+                        'row_number': 0,
+                        'content': '103_Colmore_Row',
+                    },
+                    {
+                        'column_header': 'predicate',
+                        'row_number': 0,
+                        'content': 'architect',
+                    },
+                    {
+                        'column_header': 'object',
+                        'row_number': 0,
+                        'content': 'John_Madin',
+                    },
+                    {
+                        'column_header': 'subject',
+                        'row_number': 1,
+                        'content': '103_Colmore_Row',
+                    },
+                    {
+                        'column_header': 'predicate',
+                        'row_number': 1,
+                        'content': 'location',
+                    },
+                    {
+                        'column_header': 'object',
+                        'row_number': 1,
+                        'content': 'Colmore_Row',
+                    },
+                ],
+                'context': 'Building',
+            },
+            'target_text': (
+                '103 Colmore Row, located at Colmore Row, was designed by the '
+                'architect, John Madin.'
+            ),
         },
-        'target_text':
-            '103 Colmore Row, located at Colmore Row, was designed by the '
-            'architect, John Madin.'
-    }]
+    ]
     return_mock = mock.Mock()
     parse_mock.return_value = return_mock
     return_mock.getroot.return_value = etree.fromstring(xml_str)
     dataset = web_nlg.WebNlg()
     with mock.patch.object(tf, 'io'):
-      for i, (_,
-              example) in enumerate(dataset._generate_examples([''], 'train')):
+      for i, (_, example) in enumerate(
+          dataset._generate_examples([''], 'train')
+      ):
         self.assertCountEqual(example, expected_examples[i])
 
 

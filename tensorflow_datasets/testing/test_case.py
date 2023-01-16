@@ -88,8 +88,9 @@ class TestCase(tf.test.TestCase):
       predicate_fct = lambda err: predicate in str(err)
     else:
       predicate_fct = predicate
-    return super(TestCase,
-                 self).assertRaisesWithPredicateMatch(err_type, predicate_fct)
+    return super(TestCase, self).assertRaisesWithPredicateMatch(
+        err_type, predicate_fct
+    )
 
   @contextlib.contextmanager
   def assertLogs(self, text, level="info"):

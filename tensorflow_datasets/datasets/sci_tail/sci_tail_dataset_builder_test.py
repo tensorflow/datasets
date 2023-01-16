@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class SciTailTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for scitail dataset."""
+
   DATASET_CLASS = sci_tail_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example

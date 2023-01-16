@@ -29,8 +29,10 @@ class D4rlAntmaze(dataset_builder.D4RLDatasetBuilder):
       '1.0.0': 'Initial release.',
   }
 
-  _TASK_REFERENCE = ('See more details about the task and its versions in '
-                     'https://github.com/rail-berkeley/d4rl/wiki/Tasks#antmaze')
+  _TASK_REFERENCE = (
+      'See more details about the task and its versions in '
+      'https://github.com/rail-berkeley/d4rl/wiki/Tasks#antmaze'
+  )
 
   # pylint: disable=protected-access
   # Step metadata fields.
@@ -44,44 +46,58 @@ class D4rlAntmaze(dataset_builder.D4RLDatasetBuilder):
           name='umaze-v0',
           dataset_dir='ant_maze_new',
           env='mujoco',
-          file_suffix='Ant_maze_u-maze_noisy_multistart_False_multigoal_False_sparse',
+          file_suffix=(
+              'Ant_maze_u-maze_noisy_multistart_False_multigoal_False_sparse'
+          ),
           step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
-          description=_TASK_REFERENCE),
+          description=_TASK_REFERENCE,
+      ),
       dataset_builder.BuilderConfig(
           name='umaze-diverse-v0',
           dataset_dir='ant_maze_new',
           env='mujoco',
-          file_suffix='Ant_maze_u-maze_noisy_multistart_True_multigoal_True_sparse',
+          file_suffix=(
+              'Ant_maze_u-maze_noisy_multistart_True_multigoal_True_sparse'
+          ),
           step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
-          description=_TASK_REFERENCE),
+          description=_TASK_REFERENCE,
+      ),
       dataset_builder.BuilderConfig(
           name='medium-play-v0',
           dataset_dir='ant_maze_new',
           env='mujoco',
-          file_suffix='Ant_maze_big-maze_noisy_multistart_True_multigoal_False_sparse',
+          file_suffix=(
+              'Ant_maze_big-maze_noisy_multistart_True_multigoal_False_sparse'
+          ),
           step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
-          description=_TASK_REFERENCE),
+          description=_TASK_REFERENCE,
+      ),
       dataset_builder.BuilderConfig(
           name='medium-diverse-v0',
           dataset_dir='ant_maze_new',
           env='mujoco',
-          file_suffix='Ant_maze_big-maze_noisy_multistart_True_multigoal_True_sparse',
+          file_suffix=(
+              'Ant_maze_big-maze_noisy_multistart_True_multigoal_True_sparse'
+          ),
           step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
-          description=_TASK_REFERENCE),
+          description=_TASK_REFERENCE,
+      ),
       dataset_builder.BuilderConfig(
           name='large-diverse-v0',
           dataset_dir='ant_maze_new',
           env='mujoco',
           file_suffix='Ant_maze_hardest-maze_noisy_multistart_True_multigoal_True_sparse',
           step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
-          description=_TASK_REFERENCE),
+          description=_TASK_REFERENCE,
+      ),
       dataset_builder.BuilderConfig(
           name='large-play-v0',
           dataset_dir='ant_maze_new',
           env='mujoco',
           file_suffix='Ant_maze_hardest-maze_noisy_multistart_True_multigoal_False_sparse',
           step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
-          description=_TASK_REFERENCE),
+          description=_TASK_REFERENCE,
+      ),
   ]
 
   def __init__(self, **kwargs: Any):
@@ -91,18 +107,24 @@ class D4rlAntmaze(dataset_builder.D4RLDatasetBuilder):
         action_len=8,
         qpos_len=15,
         qvel_len=14,
-        goal_len=2)
+        goal_len=2,
+    )
     super().__init__(ds_config=config, **kwargs)
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     ds_dir = self.builder_config.dataset_dir
     ds_name = self.builder_config.file_suffix + '.hdf5'
-    path = dl_manager.download_and_extract({
-        'file_path':
-            'http://rail.eecs.berkeley.edu/datasets/offline_rl/' + ds_dir +
-            '/' + ds_name
-    })
+    path = dl_manager.download_and_extract(
+        {
+            'file_path': (
+                'http://rail.eecs.berkeley.edu/datasets/offline_rl/'
+                + ds_dir
+                + '/'
+                + ds_name
+            )
+        }
+    )
     return {
         'train': self._generate_examples(path),
     }

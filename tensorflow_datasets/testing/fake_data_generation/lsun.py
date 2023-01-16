@@ -35,8 +35,11 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_files", None,
-                    "Comma separated list of files to put into the database.")
+flags.DEFINE_string(
+    "input_files",
+    None,
+    "Comma separated list of files to put into the database.",
+)
 flags.DEFINE_string("output_file", None, "Path to the output file.")
 
 

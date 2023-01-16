@@ -37,6 +37,7 @@ _METADATA_FILES = [
 @dataclasses.dataclass(frozen=True)
 class DatasetMetadata:
   """Contains Dataset metadata read from configs."""
+
   description: Text
   citation: Text
   tags: List[Text]
@@ -65,10 +66,13 @@ def valid_tags() -> List[Text]:
 
 def valid_tags_with_comments() -> Text:
   """Returns valid tags (one per line) with comments."""
-  return "\n".join([
-      line for line in _get_valid_tags_text().split("\n")
-      if not line.startswith("#")
-  ])
+  return "\n".join(
+      [
+          line
+          for line in _get_valid_tags_text().split("\n")
+          if not line.startswith("#")
+      ]
+  )
 
 
 @functools.lru_cache(maxsize=256)

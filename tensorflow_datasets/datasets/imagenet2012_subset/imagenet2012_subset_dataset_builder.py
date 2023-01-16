@@ -26,10 +26,8 @@ import tensorflow_datasets.public_api as tfds
 
 # pylint: disable=line-too-long
 SUBSET2FILES = {
-    '1pct':
-        'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/1percent.txt',
-    '10pct':
-        'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/10percent.txt'
+    '1pct': 'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/1percent.txt',
+    '10pct': 'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/10percent.txt',
 }
 
 
@@ -41,7 +39,8 @@ class Builder(imagenet2012_dataset_builder.Builder):
           name=subset_size,
           description='{} of total ImageNet training set.'.format(subset_size),
           version=tfds.core.Version('5.0.0'),
-      ) for subset_size in SUBSET2FILES
+      )
+      for subset_size in SUBSET2FILES
   ]
 
   def _info(self):
@@ -57,7 +56,6 @@ class Builder(imagenet2012_dataset_builder.Builder):
     )
 
   def _split_generators(self, dl_manager):
-
     # Import ImageNet here to avoid circular dependencies
 
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
@@ -69,7 +67,9 @@ class Builder(imagenet2012_dataset_builder.Builder):
       raise AssertionError(
           'ImageNet requires manual download of the data. Please download '
           'the train and val set and place them into: {}, {}'.format(
-              train_path, val_path))
+              train_path, val_path
+          )
+      )
 
     # Download and load subset file.
     subset_file = dl_manager.download(SUBSET2FILES[self.builder_config.name])
@@ -89,10 +89,10 @@ class Builder(imagenet2012_dataset_builder.Builder):
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                'archive':
-                    dl_manager.iter_archive(val_path),
-                'validation_labels':
-                    imagenet_common.get_validation_labels(val_path),
+                'archive': dl_manager.iter_archive(val_path),
+                'validation_labels': imagenet_common.get_validation_labels(
+                    val_path
+                ),
             },
         ),
     ]
@@ -101,7 +101,8 @@ class Builder(imagenet2012_dataset_builder.Builder):
     """Yields examples."""
     if validation_labels:  # Validation split
       for key, example in imagenet_common.generate_examples_validation(
-          archive, validation_labels):
+          archive, validation_labels
+      ):
         yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
@@ -112,7 +113,8 @@ class Builder(imagenet2012_dataset_builder.Builder):
       # alternative, as this loads ~150MB in RAM.
       fobj_mem = io.BytesIO(fobj.read())
       for image_fname, image in tfds.download.iter_archive(
-          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):  # pytype: disable=wrong-arg-types  # gen-stub-imports
+          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM
+      ):  # pytype: disable=wrong-arg-types  # gen-stub-imports
         image = self._fix_image(image_fname, image)
         if subset is None or image_fname in subset:  # filtering using subset.
           record = {

@@ -23,16 +23,49 @@ import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DATA_OPTIONS_V1_00 = [
-    "Wireless", "Watches", "Video_Games", "Video_DVD", "Video", "Toys", "Tools",
-    "Sports", "Software", "Shoes", "Pet_Products", "Personal_Care_Appliances",
-    "PC", "Outdoors", "Office_Products", "Musical_Instruments", "Music",
-    "Mobile_Electronics", "Mobile_Apps", "Major_Appliances", "Luggage",
-    "Lawn_and_Garden", "Kitchen", "Jewelry", "Home_Improvement",
-    "Home_Entertainment", "Home", "Health_Personal_Care", "Grocery",
-    "Gift_Card", "Furniture", "Electronics", "Digital_Video_Games",
-    "Digital_Video_Download", "Digital_Software", "Digital_Music_Purchase",
-    "Digital_Ebook_Purchase", "Camera", "Books", "Beauty", "Baby", "Automotive",
-    "Apparel"
+    "Wireless",
+    "Watches",
+    "Video_Games",
+    "Video_DVD",
+    "Video",
+    "Toys",
+    "Tools",
+    "Sports",
+    "Software",
+    "Shoes",
+    "Pet_Products",
+    "Personal_Care_Appliances",
+    "PC",
+    "Outdoors",
+    "Office_Products",
+    "Musical_Instruments",
+    "Music",
+    "Mobile_Electronics",
+    "Mobile_Apps",
+    "Major_Appliances",
+    "Luggage",
+    "Lawn_and_Garden",
+    "Kitchen",
+    "Jewelry",
+    "Home_Improvement",
+    "Home_Entertainment",
+    "Home",
+    "Health_Personal_Care",
+    "Grocery",
+    "Gift_Card",
+    "Furniture",
+    "Electronics",
+    "Digital_Video_Games",
+    "Digital_Video_Download",
+    "Digital_Software",
+    "Digital_Music_Purchase",
+    "Digital_Ebook_Purchase",
+    "Camera",
+    "Books",
+    "Beauty",
+    "Baby",
+    "Automotive",
+    "Apparel",
 ]
 
 _DATA_OPTIONS_V1_01 = ["Digital_Ebook_Purchase", "Books"]
@@ -51,8 +84,7 @@ for entry in _DATA_OPTIONS_V1_02:
   _DATA_OPTIONS.append(entry + "_v1_02")
 
 _DL_URLS = {
-    name:
-    f"https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_us_{name}.tsv.gz"
+    name: f"https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_us_{name}.tsv.gz"
     for name in _DATA_OPTIONS
 }
 
@@ -80,31 +112,42 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       AmazonUSReviewsConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
-          description="A dataset consisting of reviews of Amazon " +
-          config_name +
-          " products in US marketplace. Each product has its own version as specified with it.",
+          description="A dataset consisting of reviews of Amazon "
+          + config_name
+          + " products in US marketplace. Each product has its own version as"
+          " specified with it.",
           version="0.1.0",
           data=config_name,
-      ) for config_name in _DATA_OPTIONS
+      )
+      for config_name in _DATA_OPTIONS
   ]
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            "data":
-                collections.OrderedDict([
-                    ("marketplace", np.str_), ("customer_id", np.str_),
-                    ("review_id", np.str_), ("product_id", np.str_),
-                    ("product_parent", np.str_), ("product_title", np.str_),
-                    ("product_category", np.str_), ("star_rating", np.int32),
-                    ("helpful_votes", np.int32), ("total_votes", np.int32),
+        features=tfds.features.FeaturesDict(
+            {
+                "data": collections.OrderedDict([
+                    ("marketplace", np.str_),
+                    ("customer_id", np.str_),
+                    ("review_id", np.str_),
+                    ("product_id", np.str_),
+                    ("product_parent", np.str_),
+                    ("product_title", np.str_),
+                    ("product_category", np.str_),
+                    ("star_rating", np.int32),
+                    ("helpful_votes", np.int32),
+                    ("total_votes", np.int32),
                     ("vine", tfds.features.ClassLabel(names=["Y", "N"])),
-                    ("verified_purchase",
-                     tfds.features.ClassLabel(names=["Y", "N"])),
-                    ("review_headline", np.str_), ("review_body", np.str_),
-                    ("review_date", np.str_)
+                    (
+                        "verified_purchase",
+                        tfds.features.ClassLabel(names=["Y", "N"]),
+                    ),
+                    ("review_headline", np.str_),
+                    ("review_body", np.str_),
+                    ("review_date", np.str_),
                 ])
-        }),
+            }
+        ),
         supervised_keys=None,
         homepage="https://s3.amazonaws.com/amazon-reviews-pds/readme.html",
     )
@@ -115,9 +158,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     # There is no predefined train/val/test split for this dataset.
     return [
-        tfds.core.SplitGenerator(name="train", gen_kwargs={
-            "file_path": path,
-        }),
+        tfds.core.SplitGenerator(
+            name="train",
+            gen_kwargs={
+                "file_path": path,
+            },
+        ),
     ]
 
   def _generate_examples(self, file_path):
@@ -133,7 +179,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     with epath.Path(file_path).open() as tsvfile:
       # Need to disable quoting - as dataset contains invalid double quotes.
       reader = csv.DictReader(
-          tsvfile, dialect="excel-tab", quoting=csv.QUOTE_NONE)
+          tsvfile, dialect="excel-tab", quoting=csv.QUOTE_NONE
+      )
       for i, row in enumerate(reader):
         yield i, {
             "data": row,

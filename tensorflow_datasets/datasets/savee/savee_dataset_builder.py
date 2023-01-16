@@ -52,11 +52,14 @@ def _compute_split_boundaries(split_probs, n_items):
     [('train', 0, 60), ('dev', 60, 80), ('test', 80, 100)].
   """
   if len(split_probs) > n_items:
-    raise ValueError('Not enough items for the splits. There are {splits} '
-                     'splits while there are only {items} items'.format(
-                         splits=len(split_probs), items=n_items))
+    raise ValueError(
+        'Not enough items for the splits. There are {splits} '
+        'splits while there are only {items} items'.format(
+            splits=len(split_probs), items=n_items
+        )
+    )
   total_probs = sum(p for name, p in split_probs)
-  if abs(1 - total_probs) > 1E-8:
+  if abs(1 - total_probs) > 1e-8:
     raise ValueError('Probs should sum up to 1. probs={}'.format(split_probs))
   split_boundaries = []
   sum_p = 0.0
@@ -66,8 +69,11 @@ def _compute_split_boundaries(split_probs, n_items):
     split_boundaries.append((name, int(prev * n_items), int(sum_p * n_items)))
 
   # Guard against rounding errors.
-  split_boundaries[-1] = (split_boundaries[-1][0], split_boundaries[-1][1],
-                          n_items)
+  split_boundaries[-1] = (
+      split_boundaries[-1][0],
+      split_boundaries[-1][1],
+      n_items,
+  )
 
   return split_boundaries
 
@@ -123,7 +129,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='wav', sample_rate=44100),
             'label': tfds.features.ClassLabel(names=list(LABEL_MAP.values())),
-            'speaker_id': np.str_
+            'speaker_id': np.str_,
         }),
         supervised_keys=('audio', 'label'),
         homepage='http://kahlan.eps.surrey.ac.uk/savee/',
@@ -135,7 +141,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     if not tf.io.gfile.exists(zip_path):
       raise AssertionError(
           'SAVEE requires manual download of the data. Please download '
-          'the audio data and place it into: {}'.format(zip_path))
+          'the audio data and place it into: {}'.format(zip_path)
+      )
     # Need to extract instead of reading directly from archive since reading
     # audio files from zip archive is not supported.
     extract_path = dl_manager.extract(zip_path)

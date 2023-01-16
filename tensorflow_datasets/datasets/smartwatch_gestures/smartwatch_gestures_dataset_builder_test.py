@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class SmartwatchGesturesTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for smartwatch_gestures dataset."""
+
   DATASET_CLASS = smartwatch_gestures_dataset_builder.Builder
   SPLITS = {
       'train': 3,

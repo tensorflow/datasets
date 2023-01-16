@@ -26,6 +26,7 @@ from tensorflow_datasets.scripts.documentation import document_datasets
 
 class DummyDatasetConfigs(tfds.testing.DummyDataset):
   """Builder with config and manual instructions."""
+
   MANUAL_DOWNLOAD_INSTRUCTIONS = """Some manual instructions."""
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
@@ -38,6 +39,7 @@ class DummyDatasetConfigs(tfds.testing.DummyDataset):
 
 class DummyDatasetConfigsSharedVersion(tfds.testing.DummyDataset):
   """Builder with config ."""
+
   # No BuilderConfig description, and version shared across configs.
   VERSION = tfds.core.Version('1.0.0')
   BUILDER_CONFIGS = [
@@ -71,14 +73,17 @@ def test_document_datasets():
               df_base_path=None,
               nightly_path=None,
           ),
-      ))
+      )
+  )
   assert {d.name for d in all_docs} == {'mnist', 'coco', 'pass'}
 
 
 def test_document_collection():
   all_docs = list(
       document_datasets.iter_collections_documentation(
-          collection_names=['xtreme', 'longt5']))
+          collection_names=['xtreme', 'longt5']
+      )
+  )
   assert {d.name for d in all_docs} == {'xtreme', 'longt5'}
 
 
@@ -92,7 +97,9 @@ def test_with_config(document_single_builder_fn):  # pylint: disable=redefined-o
   assert (
       '<meta itemprop="url" content="'
       f'https://www.tensorflow.org/datasets/catalog/{DummyDatasetConfigs.name}"'
-      ' />') in doc.content
+      ' />'
+      in doc.content
+  )
 
 
 def test_with_config_shared_version(document_single_builder_fn):  # pylint: disable=redefined-outer-name

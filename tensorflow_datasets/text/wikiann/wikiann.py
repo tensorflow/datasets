@@ -49,22 +49,182 @@ _CITATION = """
 URL = "https://www.dropbox.com/s/12h3qqog6q4bjve/panx_dataset.tar?dl=1"
 
 LANGS = [
-    "ace", "af", "als", "am", "ang", "an", "arc", "ar", "arz", "as", "ast",
-    "ay", "az", "bar", "ba", "bat-smg", "be", "be-x-old", "bg", "bh", "bn",
-    "bo", "br", "bs", "ca", "cbk-zam", "cdo", "ceb", "ce", "ckb", "co", "crh",
-    "csb", "cs", "cv", "cy", "da", "de", "diq", "dv", "el", "eml", "en", "eo",
-    "es", "et", "eu", "ext", "fa", "fi", "fiu-vro", "fo", "frr", "fr", "fur",
-    "fy", "gan", "ga", "gd", "gl", "gn", "gu", "hak", "he", "hi", "hr", "hsb",
-    "hu", "hy", "ia", "id", "ig", "ilo", "io", "is", "it", "ja", "jbo", "jv",
-    "ka", "kk", "km", "kn", "ko", "ksh", "ku", "ky", "la", "lb", "lij", "li",
-    "lmo", "ln", "lt", "lv", "map-bms", "mg", "mhr", "min", "mi", "mk", "ml",
-    "mn", "mr", "ms", "mt", "mwl", "my", "mzn", "nap", "nds", "ne", "nl", "nn",
-    "no", "nov", "oc", "or", "os", "pa", "pdc", "pl", "pms", "pnb", "ps", "pt",
-    "qu", "rm", "ro", "ru", "rw", "sah", "sa", "scn", "sco", "sd", "sh",
-    "simple", "si", "sk", "sl", "so", "sq", "sr", "su", "sv", "sw", "szl", "ta",
-    "te", "tg", "th", "tk", "tl", "tr", "tt", "ug", "uk", "ur", "uz", "vec",
-    "vep", "vi", "vls", "vo", "war", "wa", "wuu", "xmf", "yi", "yo", "zea",
-    "zh-classical", "zh-min-nan", "zh", "zh-yue"
+    "ace",
+    "af",
+    "als",
+    "am",
+    "ang",
+    "an",
+    "arc",
+    "ar",
+    "arz",
+    "as",
+    "ast",
+    "ay",
+    "az",
+    "bar",
+    "ba",
+    "bat-smg",
+    "be",
+    "be-x-old",
+    "bg",
+    "bh",
+    "bn",
+    "bo",
+    "br",
+    "bs",
+    "ca",
+    "cbk-zam",
+    "cdo",
+    "ceb",
+    "ce",
+    "ckb",
+    "co",
+    "crh",
+    "csb",
+    "cs",
+    "cv",
+    "cy",
+    "da",
+    "de",
+    "diq",
+    "dv",
+    "el",
+    "eml",
+    "en",
+    "eo",
+    "es",
+    "et",
+    "eu",
+    "ext",
+    "fa",
+    "fi",
+    "fiu-vro",
+    "fo",
+    "frr",
+    "fr",
+    "fur",
+    "fy",
+    "gan",
+    "ga",
+    "gd",
+    "gl",
+    "gn",
+    "gu",
+    "hak",
+    "he",
+    "hi",
+    "hr",
+    "hsb",
+    "hu",
+    "hy",
+    "ia",
+    "id",
+    "ig",
+    "ilo",
+    "io",
+    "is",
+    "it",
+    "ja",
+    "jbo",
+    "jv",
+    "ka",
+    "kk",
+    "km",
+    "kn",
+    "ko",
+    "ksh",
+    "ku",
+    "ky",
+    "la",
+    "lb",
+    "lij",
+    "li",
+    "lmo",
+    "ln",
+    "lt",
+    "lv",
+    "map-bms",
+    "mg",
+    "mhr",
+    "min",
+    "mi",
+    "mk",
+    "ml",
+    "mn",
+    "mr",
+    "ms",
+    "mt",
+    "mwl",
+    "my",
+    "mzn",
+    "nap",
+    "nds",
+    "ne",
+    "nl",
+    "nn",
+    "no",
+    "nov",
+    "oc",
+    "or",
+    "os",
+    "pa",
+    "pdc",
+    "pl",
+    "pms",
+    "pnb",
+    "ps",
+    "pt",
+    "qu",
+    "rm",
+    "ro",
+    "ru",
+    "rw",
+    "sah",
+    "sa",
+    "scn",
+    "sco",
+    "sd",
+    "sh",
+    "simple",
+    "si",
+    "sk",
+    "sl",
+    "so",
+    "sq",
+    "sr",
+    "su",
+    "sv",
+    "sw",
+    "szl",
+    "ta",
+    "te",
+    "tg",
+    "th",
+    "tk",
+    "tl",
+    "tr",
+    "tt",
+    "ug",
+    "uk",
+    "ur",
+    "uz",
+    "vec",
+    "vep",
+    "vi",
+    "vls",
+    "vo",
+    "war",
+    "wa",
+    "wuu",
+    "xmf",
+    "yi",
+    "yo",
+    "zea",
+    "zh-classical",
+    "zh-min-nan",
+    "zh",
+    "zh-yue",
 ]
 
 
@@ -131,8 +291,7 @@ def get_spans(tokens, tags):
   """Convert tags to textspans."""
   spans = tags_to_spans(tags)
   text_spans = [
-      x[0] + ": " + " ".join([tokens[i]
-                              for i in range(x[1][0], x[1][1] + 1)])
+      x[0] + ": " + " ".join([tokens[i] for i in range(x[1][0], x[1][1] + 1)])
       for x in spans
   ]
   if not text_spans:
@@ -146,10 +305,11 @@ class Wikiann(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       WikiannConfig(  # pylint: disable=g-complex-comprehension
           name=language,
-          description=("Wikiann {} train/dev/test splits".format(language)),
+          description="Wikiann {} train/dev/test splits".format(language),
           version="1.0.0",
           language=language,
-      ) for language in LANGS
+      )
+      for language in LANGS
   ]
 
   VERSION = tfds.core.Version("1.0.0")
@@ -160,11 +320,10 @@ class Wikiann(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     features = tfds.features.FeaturesDict({
-        "tokens":
-            tfds.features.Sequence(tfds.features.Text()),
-        "tags":
-            tfds.features.Sequence(
-                tfds.features.ClassLabel(names=[
+        "tokens": tfds.features.Sequence(tfds.features.Text()),
+        "tags": tfds.features.Sequence(
+            tfds.features.ClassLabel(
+                names=[
                     "O",
                     "B-PER",
                     "I-PER",
@@ -172,11 +331,11 @@ class Wikiann(tfds.core.GeneratorBasedBuilder):
                     "I-ORG",
                     "B-LOC",
                     "I-LOC",
-                ])),
-        "langs":
-            tfds.features.Sequence(tfds.features.Text()),
-        "spans":
-            tfds.features.Sequence(tfds.features.Text()),
+                ]
+            )
+        ),
+        "langs": tfds.features.Sequence(tfds.features.Text()),
+        "spans": tfds.features.Sequence(tfds.features.Text()),
     })
     return tfds.core.DatasetInfo(
         builder=self,
@@ -191,7 +350,8 @@ class Wikiann(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(URL)
     subpath = dl_manager.extract(
-        os.path.join(path, self.builder_config.language + ".tar.gz"))
+        os.path.join(path, self.builder_config.language + ".tar.gz")
+    )
 
     return [
         tfds.core.SplitGenerator(
@@ -234,7 +394,6 @@ class Wikiann(tfds.core.GeneratorBasedBuilder):
 
     Yields:
       Examples with the format listed above.
-
     """
 
     key = 1
@@ -252,7 +411,7 @@ class Wikiann(tfds.core.GeneratorBasedBuilder):
                 "tokens": tokens,
                 "tags": tags,
                 "langs": langs,
-                "spans": spans
+                "spans": spans,
             }
             key += 1
             tokens = []
@@ -275,5 +434,5 @@ class Wikiann(tfds.core.GeneratorBasedBuilder):
             "tokens": tokens,
             "tags": tags,
             "langs": langs,
-            "spans": spans
+            "spans": spans,
         }

@@ -21,6 +21,7 @@ from tensorflow_datasets.rl_unplugged.rlu_locomotion import rlu_locomotion
 
 class RluLocomotionTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_locomotion dataset."""
+
   DATASET_CLASS = rlu_locomotion.RluLocomotion
   SPLITS = {
       'train': 2,  # Number of fake train example

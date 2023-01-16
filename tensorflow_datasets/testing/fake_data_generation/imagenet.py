@@ -32,8 +32,9 @@ from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
+flags.DEFINE_string(
+    'tfds_dir', py_utils.tfds_dir(), 'Path to tensorflow_datasets directory'
+)
 flags.DEFINE_boolean('real', False, 'Generate data for Imagenet2012Real.')
 FLAGS = flags.FLAGS
 
@@ -52,8 +53,9 @@ def _get_synset(synset_name):
     if synset_name == 'n01440764' and i == 1:
       path = fake_data_utils.get_random_png()
     elif synset_name == 'n01440764' and i in [2, 3]:
-      path = os.path.join(FLAGS.tfds_dir, 'testing', 'test_data',
-                          '6pixels_cmyk.jpeg')
+      path = os.path.join(
+          FLAGS.tfds_dir, 'testing', 'test_data', '6pixels_cmyk.jpeg'
+      )
     else:
       path = fake_data_utils.get_random_jpeg()
     tar.add(path, arcname=fname)
@@ -62,14 +64,20 @@ def _get_synset(synset_name):
 
 
 def _ilsvrc2012_output_dir():
-  return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'imagenet2012' + ('_real' if FLAGS.real else ''))
+  return os.path.join(
+      FLAGS.tfds_dir,
+      'testing',
+      'test_data',
+      'fake_examples',
+      'imagenet2012' + ('_real' if FLAGS.real else ''),
+  )
 
 
 def _generate_train_archive():
   """Generate train archive."""
-  output_path = os.path.join(_ilsvrc2012_output_dir(),
-                             'ILSVRC2012_img_train.tar')
+  output_path = os.path.join(
+      _ilsvrc2012_output_dir(), 'ILSVRC2012_img_train.tar'
+  )
   tar = tarfile.open(output_path, mode='w')
   names_file = imagenet_common.label_names_file()
   label_names = tfds.features.ClassLabel(names_file=names_file).names

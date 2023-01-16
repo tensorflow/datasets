@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class PenguinsSimpleTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for penguins dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['simple']
   DATASET_CLASS = penguins_dataset_builder.Builder
   SPLITS = {'train': 4}
@@ -29,6 +30,7 @@ class PenguinsSimpleTest(tfds.testing.DatasetBuilderTestCase):
 
 class PenguinsRawTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for penguins/raw dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['raw']
   DATASET_CLASS = penguins_dataset_builder.Builder
   SPLITS = {'train': 6}
@@ -37,6 +39,7 @@ class PenguinsRawTest(tfds.testing.DatasetBuilderTestCase):
 
 class PenguinsProcessedTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for penguins/raw dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['processed']
   DATASET_CLASS = penguins_dataset_builder.Builder
   SPLITS = {'train': 3}

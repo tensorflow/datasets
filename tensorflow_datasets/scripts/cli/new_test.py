@@ -38,7 +38,8 @@ def test_new_without_args(capsys):
 def test_new_invalid_name():
   # Dataset name is required argument
   error_message = (
-      'Invalid dataset name. It should be a valid Python class name.')
+      'Invalid dataset name. It should be a valid Python class name.'
+  )
   invalid_names = ['foo-15', '15foo']
   for invalid_name in invalid_names:
     with pytest.raises(ValueError) as execution_info:

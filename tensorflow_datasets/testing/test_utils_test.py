@@ -43,12 +43,14 @@ class RunInGraphAndEagerTest(test_case.TestCase):
 
     self.assertEqual(len(l), 4)
     self.assertEqual(
-        set(l), {
+        set(l),
+        {
             ('with_brackets', 'graph'),
             ('with_brackets', 'eager'),
             ('without_brackets', 'graph'),
             ('without_brackets', 'eager'),
-        })
+        },
+    )
 
   def test_run_in_graph_and_eager_modes_setup_in_same_mode(self):
     modes = []
@@ -75,14 +77,17 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     e.setUp()
     e.testBody()
 
-    self.assertEqual(modes, [
-        'setup_eager',
-        'subtest_eager_mode',
-        'run_eager',
-        'subtest_graph_mode',
-        'setup_graph',
-        'run_graph',
-    ])
+    self.assertEqual(
+        modes,
+        [
+            'setup_eager',
+            'subtest_eager_mode',
+            'run_eager',
+            'subtest_graph_mode',
+            'setup_graph',
+            'run_graph',
+        ],
+    )
 
   def test_mock_tf(self):
     # pylint: disable=g-import-not-at-top,reimported
@@ -122,8 +127,7 @@ class RunInGraphAndEagerTest(test_case.TestCase):
 
 
 @pytest.mark.parametrize(
-    'as_path_fn',
-    [pathlib.Path, str]  # Test both PathLike and str
+    'as_path_fn', [pathlib.Path, str]  # Test both PathLike and str
 )
 def test_mock_fs(as_path_fn):
   _p = as_path_fn  # pylint: disable=invalid-name
@@ -165,8 +169,9 @@ def test_mock_fs(as_path_fn):
     assert fs.read_file('/path/to/file1_moved') == 'Content of file 1'
 
     # Test `tf.io.gfile.listdir`
-    assert (set(tf.io.gfile.listdir(_p('/path/to'))) == set(
-        tf.io.gfile.listdir(_p('/path/to/'))))
+    assert set(tf.io.gfile.listdir(_p('/path/to'))) == set(
+        tf.io.gfile.listdir(_p('/path/to/'))
+    )
     assert set(tf.io.gfile.listdir(_p('/path/to'))) == {'file1_moved', 'file2'}
     assert set(tf.io.gfile.listdir(_p('/path'))) == {'file.txt', 'to'}
 

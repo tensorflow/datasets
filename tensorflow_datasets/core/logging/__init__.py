@@ -89,9 +89,12 @@ def register(logger: base_logger.Logger) -> None:
   _registered_loggers.append(logger)
 
 
-def tfds_import(*, metadata: call_metadata.CallMetadata,
-                import_time_ms_tensorflow: int,
-                import_time_ms_dataset_builders: int):
+def tfds_import(
+    *,
+    metadata: call_metadata.CallMetadata,
+    import_time_ms_tensorflow: int,
+    import_time_ms_dataset_builders: int,
+):
   """Call `tfds_import` on registered loggers.
 
   Given the number of operations which can be done at import time should be
@@ -107,7 +110,8 @@ def tfds_import(*, metadata: call_metadata.CallMetadata,
   """
   with _import_operations_lock:
     _import_operations.append(
-        (metadata, import_time_ms_tensorflow, import_time_ms_dataset_builders))
+        (metadata, import_time_ms_tensorflow, import_time_ms_dataset_builders)
+    )
 
 
 def builder_init() -> Callable[[_T], _T]:
@@ -117,7 +121,8 @@ def builder_init() -> Callable[[_T], _T]:
   def decorator(function, dsbuilder, args, kwargs):
     metadata = call_metadata.CallMetadata()
     first_builder_init_in_stack = (
-        metadata.thread_id not in _thread_ids_running_builder_init)
+        metadata.thread_id not in _thread_ids_running_builder_init
+    )
     if first_builder_init_in_stack:
       _thread_ids_running_builder_init.add(metadata.thread_id)
     try:
@@ -142,7 +147,8 @@ def builder_init() -> Callable[[_T], _T]:
               name=dsbuilder.name,
               data_dir=data_dir,
               config=config,
-              version=version)
+              version=version,
+          )
 
   return decorator
 
@@ -153,7 +159,9 @@ def _get_name_config_version_datadir(dsbuilder):
   Args:
     dsbuilder: the builder instance to get info for.
   """
-  config_name = dsbuilder.builder_config.name if dsbuilder.builder_config else ""
+  config_name = (
+      dsbuilder.builder_config.name if dsbuilder.builder_config else ""
+  )
   data_path = dsbuilder.data_dir
   return dsbuilder.name, config_name, str(dsbuilder.version), data_path
 
@@ -164,8 +172,9 @@ def builder_info() -> Callable[[_T], _T]:
   @wrapt.decorator
   def decorator(function, dsbuilder, args, kwargs):
     dsbuilder = args[0]  # Because property decorator applied first.
-    name, config_name, version, data_path = (
-        _get_name_config_version_datadir(dsbuilder))
+    name, config_name, version, data_path = _get_name_config_version_datadir(
+        dsbuilder
+    )
     metadata = call_metadata.CallMetadata()
     try:
       return function(*args, **kwargs)
@@ -191,8 +200,9 @@ def as_dataset() -> Callable[[_T], _T]:
 
   @wrapt.decorator
   def decorator(function, dsbuilder, args, kwargs):
-    name, config_name, version, data_path = (
-        _get_name_config_version_datadir(dsbuilder))
+    name, config_name, version, data_path = _get_name_config_version_datadir(
+        dsbuilder
+    )
     metadata = call_metadata.CallMetadata()
     try:
       return function(*args, **kwargs)
@@ -257,7 +267,8 @@ def list_builders() -> Callable[[_T], _T]:
       for logger in _get_registered_loggers():
         logger.list_builders(
             metadata=metadata,
-            with_community_datasets=kwargs.get("with_community_datasets"))
+            with_community_datasets=kwargs.get("with_community_datasets"),
+        )
 
   return decorator
 

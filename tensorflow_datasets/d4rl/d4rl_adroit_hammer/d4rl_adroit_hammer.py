@@ -33,5 +33,6 @@ class D4rlAdroitHammer(dataset_builder.D4RLDatasetBuilder):
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(
-        name='hammer', obs_len=46, action_len=26, qpos_len=33, qvel_len=33)
+        name='hammer', obs_len=46, action_len=26, qpos_len=33, qvel_len=33
+    )
     super().__init__(ds_config=config, **kwargs)

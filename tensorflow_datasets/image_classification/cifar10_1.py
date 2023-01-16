@@ -76,23 +76,28 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):  # pylint: disable=invalid-nam
   BUILDER_CONFIGS = [
       Cifar10_1Config(
           description=(
-              "It is the first version of our dataset on which we tested any classifier. As mentioned above, this "
-              "makes the v4 dataset independent of the classifiers we evaluate. The numbers reported in the main "
-              "sections of our paper use this version of the dataset. It was built from the top 25 TinyImages "
-              "keywords for each class, which led to a slight class imbalance. The largest difference is that ships "
-              "make up only 8% of the test set instead of 10%. v4 contains 2,021 images."
+              "It is the first version of our dataset on which we tested any"
+              " classifier. As mentioned above, this makes the v4 dataset"
+              " independent of the classifiers we evaluate. The numbers"
+              " reported in the main sections of our paper use this version of"
+              " the dataset. It was built from the top 25 TinyImages keywords"
+              " for each class, which led to a slight class imbalance. The"
+              " largest difference is that ships make up only 8% of the test"
+              " set instead of 10%. v4 contains 2,021 images."
           ),
           version=tfds.core.Version("1.1.0"),
           data="v4",
       ),
       Cifar10_1Config(
           description=(
-              "It is derived from a slightly improved keyword allocation that is exactly class balanced. This version "
-              "of the dataset corresponds to the results in Appendix D of our paper. v6 contains 2,000 images."
+              "It is derived from a slightly improved keyword allocation that"
+              " is exactly class balanced. This version of the dataset"
+              " corresponds to the results in Appendix D of our paper. v6"
+              " contains 2,000 images."
           ),
           version=tfds.core.Version("1.1.0"),
           data="v6",
-      )
+      ),
   ]
 
   def _info(self):
@@ -125,7 +130,8 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):  # pylint: disable=invalid-nam
             gen_kwargs={
                 "image_path": image_path,
                 "label_path": label_path,
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, image_path, label_path):

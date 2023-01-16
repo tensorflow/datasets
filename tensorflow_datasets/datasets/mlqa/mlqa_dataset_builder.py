@@ -35,7 +35,8 @@ class MlqaConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(MlqaConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"), **kwargs)
+        version=tfds.core.Version("1.0.0"), **kwargs
+    )
     self.language = language
 
 
@@ -47,7 +48,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           name=lang,
           language=lang,
           description=("MLQA '{}' dev and test splits.").format(lang),
-      ) for lang in LANGUAGES
+      )
+      for lang in LANGUAGES
   ]
 
   def _info(self):
@@ -66,15 +68,22 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         "validation": _DOWNLOAD_URL,
     })
     filepaths["test"] = os.path.join(
-        filepaths["test"], "MLQA_V1", "test",
-        "test-context-{0}-question-{0}.json".format(lang))
+        filepaths["test"],
+        "MLQA_V1",
+        "test",
+        "test-context-{0}-question-{0}.json".format(lang),
+    )
     filepaths["validation"] = os.path.join(
-        filepaths["validation"], "MLQA_V1", "dev",
-        "dev-context-{0}-question-{0}.json".format(lang))
+        filepaths["validation"],
+        "MLQA_V1",
+        "dev",
+        "dev-context-{0}-question-{0}.json".format(lang),
+    )
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
-            name=split,
-            gen_kwargs={"filepath": path}) for split, path in filepaths.items()
+            name=split, gen_kwargs={"filepath": path}
+        )
+        for split, path in filepaths.items()
     ]
 
   def _generate_examples(self, filepath):

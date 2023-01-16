@@ -43,8 +43,10 @@ _CITATION = """
 """
 
 # DocNLI url
-_DOCNLI_URL = ('https://drive.google.com/uc?export=download&id='
-               '16TZBTZcb9laNKxIvgbs5nOBgq3MhND5s')
+_DOCNLI_URL = (
+    'https://drive.google.com/uc?export=download&id='
+    '16TZBTZcb9laNKxIvgbs5nOBgq3MhND5s'
+)
 
 _EXTRACT_PATH_TOKEN = 'DocNLI_dataset'
 
@@ -64,15 +66,13 @@ class DocNLI(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'premise':
-                tfds.features.Text(),
-            'hypothesis':
-                tfds.features.Text(),
+            'premise': tfds.features.Text(),
+            'hypothesis': tfds.features.Text(),
             # Label indicates whether the premise entails or implies the
             # hypothesis.
-            'label':
-                tfds.features.ClassLabel(names=['not_entailment', 'entailment']
-                                        ),
+            'label': tfds.features.ClassLabel(
+                names=['not_entailment', 'entailment']
+            ),
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
@@ -89,15 +89,15 @@ class DocNLI(tfds.core.GeneratorBasedBuilder):
 
     # Returns the Dict[split names, Iterator[Key, Example]]
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(path=data_dir / _EXTRACT_PATH_TOKEN /
-                                    'train.json'),
-        tfds.Split.VALIDATION:
-            self._generate_examples(path=data_dir / _EXTRACT_PATH_TOKEN /
-                                    'dev.json'),
-        tfds.Split.TEST:
-            self._generate_examples(path=data_dir / _EXTRACT_PATH_TOKEN /
-                                    'test.json'),
+        tfds.Split.TRAIN: self._generate_examples(
+            path=data_dir / _EXTRACT_PATH_TOKEN / 'train.json'
+        ),
+        tfds.Split.VALIDATION: self._generate_examples(
+            path=data_dir / _EXTRACT_PATH_TOKEN / 'dev.json'
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            path=data_dir / _EXTRACT_PATH_TOKEN / 'test.json'
+        ),
     }
 
   def _generate_examples(self, path):

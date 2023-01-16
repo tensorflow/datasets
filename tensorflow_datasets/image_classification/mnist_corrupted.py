@@ -102,12 +102,14 @@ def _make_builder_configs():
             },
             description='Corruption method: ' + corruption,
             corruption_type=corruption,
-        ))
+        )
+    )
   return config_list
 
 
 class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
   """Corrupted MNIST dataset."""
+
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
@@ -120,14 +122,15 @@ class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image':
-                tfds.features.Image(shape=mnist.MNIST_IMAGE_SHAPE),
-            'label':
-                tfds.features.ClassLabel(num_classes=mnist.MNIST_NUM_CLASSES),
+            'image': tfds.features.Image(shape=mnist.MNIST_IMAGE_SHAPE),
+            'label': tfds.features.ClassLabel(
+                num_classes=mnist.MNIST_NUM_CLASSES
+            ),
         }),
         supervised_keys=('image', 'label'),
         homepage='https://github.com/google-research/mnist-c',
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     """Return the train, test split of MNIST-C.
@@ -144,14 +147,16 @@ class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'data_dir': os.path.join(path, _DIRNAME),
-                'is_train': True
-            }),
+                'is_train': True,
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'data_dir': os.path.join(path, _DIRNAME),
-                'is_train': False
-            }),
+                'is_train': False,
+            },
+        ),
     ]
 
   def _generate_examples(self, data_dir, is_train):

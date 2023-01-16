@@ -21,10 +21,17 @@ from tensorflow_datasets.rl_unplugged import dmlab_dataset
 
 _TASK = 'seekavoid_arena_01'
 _EPISODE_LENGTH = 301
-_CONFIG_NAMES = ['training_0', 'training_1', 'training_2',
-                 'snapshot_0_eps_0.0', 'snapshot_1_eps_0.0',
-                 'snapshot_0_eps_0.01', 'snapshot_1_eps_0.01',
-                 'snapshot_0_eps_0.25', 'snapshot_1_eps_0.25']
+_CONFIG_NAMES = [
+    'training_0',
+    'training_1',
+    'training_2',
+    'snapshot_0_eps_0.0',
+    'snapshot_1_eps_0.0',
+    'snapshot_0_eps_0.01',
+    'snapshot_1_eps_0.01',
+    'snapshot_0_eps_0.25',
+    'snapshot_1_eps_0.25',
+]
 
 
 class RluDmlabSeekavoidArena01(dmlab_dataset.DMLabDatasetBuilder):
@@ -40,7 +47,8 @@ class RluDmlabSeekavoidArena01(dmlab_dataset.DMLabDatasetBuilder):
   # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
       dmlab_dataset.BuilderConfig(
-          name=name, task=_TASK, episode_length=_EPISODE_LENGTH)
+          name=name, task=_TASK, episode_length=_EPISODE_LENGTH
+      )
       for name in _CONFIG_NAMES
   ]
   # pytype: enable=wrong-keyword-args

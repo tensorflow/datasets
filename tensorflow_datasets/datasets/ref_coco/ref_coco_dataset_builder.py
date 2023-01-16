@@ -63,8 +63,11 @@ def _generate_examples(refcoco_json, dataset, dataset_partition, split):
   # Collect all referring expressions for a given image.
   imageid2annref = collections.defaultdict(list)
   for r in refcoco_anns:
-    if r['dataset'] == dataset and r[
-        'dataset_partition'] == dataset_partition and r['split'] == split:
+    if (
+        r['dataset'] == dataset
+        and r['dataset_partition'] == dataset_partition
+        and r['split'] == split
+    ):
       imageid2annref[r['image_id']].append(r)
 
   # Process all the referring expressions and ground truth annotations for
@@ -84,8 +87,9 @@ def _generate_examples(refcoco_json, dataset, dataset_partition, split):
       example['coco_annotations'].append(_extract_annotation(ann, image_info))
 
     # Collect referring expressions.
-    for r in sorted(imageid2annref[image_id],
-                    key=operator.itemgetter('ref_id')):
+    for r in sorted(
+        imageid2annref[image_id], key=operator.itemgetter('ref_id')
+    ):
       obj = _extract_annotation(r['ann'], image_info)
 
       refexp = []
@@ -98,7 +102,8 @@ def _generate_examples(refcoco_json, dataset, dataset_partition, split):
       # Match the referring expression to its corresponding bbox in the ground
       # truth list.
       gt_box_index = [
-          i for i, v in enumerate(example['coco_annotations'])
+          i
+          for i, v in enumerate(example['coco_annotations'])
           if v['id'] == r['ann']['id']
       ]
       if len(gt_box_index) != 1:
@@ -167,35 +172,25 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         homepage='https://github.com/lichengunc/refer',
         features=tfds.features.FeaturesDict({
-            'image':
-                tfds.features.Image(encoding_format='jpeg'),
-            'image/id':
-                np.int64,
-            'objects':
-                tfds.features.Sequence({
-                    'id':
-                        np.int64,
-                    'area':
-                        np.int64,
-                    'bbox':
-                        tfds.features.BBoxFeature(),
-                    'label':
-                        np.int64,
-                    'gt_box_index':
-                        np.int64,
-                    'refexp':
-                        tfds.features.Sequence({
-                            'refexp_id': np.int64,
-                            'raw': tfds.features.Text(),
-                        }),
+            'image': tfds.features.Image(encoding_format='jpeg'),
+            'image/id': np.int64,
+            'objects': tfds.features.Sequence({
+                'id': np.int64,
+                'area': np.int64,
+                'bbox': tfds.features.BBoxFeature(),
+                'label': np.int64,
+                'gt_box_index': np.int64,
+                'refexp': tfds.features.Sequence({
+                    'refexp_id': np.int64,
+                    'raw': tfds.features.Text(),
                 }),
-            'coco_annotations':
-                tfds.features.Sequence({
-                    'id': np.int64,
-                    'area': np.int64,
-                    'bbox': tfds.features.BBoxFeature(),
-                    'label': np.int64,
-                }),
+            }),
+            'coco_annotations': tfds.features.Sequence({
+                'id': np.int64,
+                'area': np.int64,
+                'bbox': tfds.features.BBoxFeature(),
+                'label': np.int64,
+            }),
         }),
         supervised_keys=None,
     )
@@ -203,28 +198,43 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     allowed_splits = {
         ('refcoco', 'google'): [
-            tfds.Split.TRAIN, tfds.Split.VALIDATION, tfds.Split.TEST],
+            tfds.Split.TRAIN,
+            tfds.Split.VALIDATION,
+            tfds.Split.TEST,
+        ],
         ('refcoco', 'unc'): [
-            tfds.Split.TRAIN, tfds.Split.VALIDATION, 'testA', 'testB'],
+            tfds.Split.TRAIN,
+            tfds.Split.VALIDATION,
+            'testA',
+            'testB',
+        ],
         ('refcocoplus', 'unc'): [
-            tfds.Split.TRAIN, tfds.Split.VALIDATION, 'testA', 'testB'],
-        ('refcocog', 'google'): [
-            tfds.Split.TRAIN, tfds.Split.VALIDATION],
+            tfds.Split.TRAIN,
+            tfds.Split.VALIDATION,
+            'testA',
+            'testB',
+        ],
+        ('refcocog', 'google'): [tfds.Split.TRAIN, tfds.Split.VALIDATION],
         ('refcocog', 'umd'): [
-            tfds.Split.TRAIN, tfds.Split.VALIDATION, tfds.Split.TEST],
+            tfds.Split.TRAIN,
+            tfds.Split.VALIDATION,
+            tfds.Split.TEST,
+        ],
     }
     bc = self.builder_config
     splits = allowed_splits[(bc.dataset, bc.dataset_partition)]
 
     return {
         split: self._generate_examples(
-            bc.dataset, bc.dataset_partition, split, dl_manager)
+            bc.dataset, bc.dataset_partition, split, dl_manager
+        )
         for split in splits
     }
 
   def _generate_examples(self, dataset, dataset_partition, split, dl_manager):
     refcoco_json = json.loads(
-        (dl_manager.manual_dir / 'refcoco.json').read_text())
+        (dl_manager.manual_dir / 'refcoco.json').read_text()
+    )
     coco_dir = dl_manager.manual_dir / 'coco_train2014'
 
     if dataset == 'refcocoplus':
@@ -232,8 +242,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     if split == tfds.Split.VALIDATION:
       split = 'val'
 
-    for image_id, example in _generate_examples(refcoco_json, dataset,
-                                                dataset_partition, split):
+    for image_id, example in _generate_examples(
+        refcoco_json, dataset, dataset_partition, split
+    ):
       example['image'] = coco_dir / example['image_filename']
       del example['image_filename']
       yield image_id, example

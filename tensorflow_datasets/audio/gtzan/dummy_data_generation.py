@@ -28,8 +28,9 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 FLAGS = flags.FLAGS
 
 
@@ -47,8 +48,9 @@ def _generate_data():
   label = random.choice(labels)
   random_number_for_filename = random.randint(0, 99)
   filename = "{}.{:05d}".format(label, random_number_for_filename)
-  filepath = os.path.join(_output_dir(), "genres", label,
-                          "{}.wav".format(filename))
+  filepath = os.path.join(
+      _output_dir(), "genres", label, "{}.wav".format(filename)
+  )
   dirname = os.path.dirname(filepath)
   if not tf.io.gfile.exists(dirname):
     tf.io.gfile.makedirs(dirname)

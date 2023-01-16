@@ -29,9 +29,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            'text': tfds.features.Text(),
-        }),
+        features=tfds.features.FeaturesDict(
+            {
+                'text': tfds.features.Text(),
+            }
+        ),
         supervised_keys=('text', 'text'),
         homepage=_URL,
     )

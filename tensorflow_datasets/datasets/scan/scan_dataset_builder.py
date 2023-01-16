@@ -23,7 +23,8 @@ import tensorflow_datasets.public_api as tfds
 
 _DATA_URL = 'https://github.com/brendenlake/SCAN/archive/master.zip'
 _MCD_SPLITS_URL = (
-    'https://storage.googleapis.com/cfq_dataset/scan-splits.tar.gz')
+    'https://storage.googleapis.com/cfq_dataset/scan-splits.tar.gz'
+)
 
 
 class ScanConfig(tfds.core.BuilderConfig):
@@ -49,7 +50,8 @@ class ScanConfig(tfds.core.BuilderConfig):
     """
     # Version history:
     super(ScanConfig, self).__init__(
-        name=name, version=tfds.core.Version('1.1.1'), **kwargs)
+        name=name, version=tfds.core.Version('1.1.1'), **kwargs
+    )
     self.splitfile = splitfile
     if 'mcd' in name:
       self.splitfile = name + '.json'
@@ -99,8 +101,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     data_dir = dl_manager.download_and_extract(_DATA_URL)
-    data_dir = os.path.join(data_dir, 'SCAN-master',
-                            self.builder_config.directory)
+    data_dir = os.path.join(
+        data_dir, 'SCAN-master', self.builder_config.directory
+    )
     split = self.builder_config.name
     splitfile = self.builder_config.splitfile
     if 'mcd' in split:
@@ -110,7 +113,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     if splitfile:
       kwargs = {
           'datapath': os.path.join(data_dir, 'tasks.txt'),
-          'splitpath': splitfile
+          'splitpath': splitfile,
       }
       train_kwargs = kwargs.copy()
       train_kwargs['splitname'] = 'train'
@@ -125,8 +128,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       }
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs=train_kwargs),
-        tfds.core.SplitGenerator(name=tfds.Split.TEST, gen_kwargs=test_kwargs)
+            name=tfds.Split.TRAIN, gen_kwargs=train_kwargs
+        ),
+        tfds.core.SplitGenerator(name=tfds.Split.TEST, gen_kwargs=test_kwargs),
     ]
 
   def _read_examples(self, datapath):
@@ -135,7 +139,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         if not line.startswith('IN: '):
           continue
         # Chop the prefix and split string between input and output
-        commands, actions = line[len('IN: '):].strip().split(' OUT: ', 1)
+        commands, actions = line[len('IN: ') :].strip().split(' OUT: ', 1)
         yield i, {_COMMANDS: commands, _ACTIONS: actions}
 
   def _generate_examples(self, datapath, splitpath=None, splitname=None):

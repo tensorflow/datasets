@@ -21,11 +21,25 @@ from tensorflow_datasets.datasets.imagenet2012_corrupted import imagenet2012_cor
 
 class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = [  # pylint: disable=g-long-ternary
-      "gaussian_noise_1", "shot_noise_2", "impulse_noise_3", "defocus_blur_4",
-      "glass_blur_5", "motion_blur_1", "zoom_blur_2", "snow_3", "frost_4",
-      "fog_5", "brightness_1", "contrast_2", "elastic_transform_3",
-      "pixelate_4", "jpeg_compression_5", "gaussian_blur_1", "saturate_2",
-      "spatter_3", "speckle_noise_4"
+      "gaussian_noise_1",
+      "shot_noise_2",
+      "impulse_noise_3",
+      "defocus_blur_4",
+      "glass_blur_5",
+      "motion_blur_1",
+      "zoom_blur_2",
+      "snow_3",
+      "frost_4",
+      "fog_5",
+      "brightness_1",
+      "contrast_2",
+      "elastic_transform_3",
+      "pixelate_4",
+      "jpeg_compression_5",
+      "gaussian_blur_1",
+      "saturate_2",
+      "spatter_3",
+      "speckle_noise_4",
   ]
 
   DATASET_CLASS = imagenet2012_corrupted_dataset_builder.Builder
@@ -37,8 +51,12 @@ class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
       "ILSVRC2012_img_val.tar",
   ]
   DL_DOWNLOAD_RESULT = [
-      "frost1.png", "frost2.png", "frost3.png", "frost4.jpg", "frost5.jpg",
-      "frost6.jpg"
+      "frost1.png",
+      "frost2.png",
+      "frost3.png",
+      "frost4.jpg",
+      "frost5.jpg",
+      "frost6.jpg",
   ]
 
 

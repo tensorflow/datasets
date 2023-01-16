@@ -37,18 +37,9 @@ def test_add_tfds_id(dummy_dataset: dataset_builder.DatasetBuilder):
       'tfds_id': tf.TensorSpec(shape=(), dtype=tf.string),
   }
   assert list(dataset_utils.as_numpy(ds)) == [
-      {
-          'id': 0,
-          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__0'
-      },
-      {
-          'id': 1,
-          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__1'
-      },
-      {
-          'id': 2,
-          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__2'
-      },
+      {'id': 0, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__0'},
+      {'id': 1, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__1'},
+      {'id': 2, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__2'},
   ]
 
   # Subsplit API works too
@@ -58,19 +49,14 @@ def test_add_tfds_id(dummy_dataset: dataset_builder.DatasetBuilder):
       'tfds_id': tf.TensorSpec(shape=(), dtype=tf.string),
   }
   assert list(dataset_utils.as_numpy(ds)) == [
-      {
-          'id': 1,
-          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__1'
-      },
-      {
-          'id': 2,
-          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__2'
-      },
+      {'id': 1, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__1'},
+      {'id': 2, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__2'},
   ]
 
 
 def test_add_tfds_id_as_supervised(
-    dummy_dataset: dataset_builder.DatasetBuilder):
+    dummy_dataset: dataset_builder.DatasetBuilder,
+):
   """Tests `add_tfds_id=True` with `as_supervised=True`."""
   read_config = read_config_lib.ReadConfig(add_tfds_id=True)
   ds = dummy_dataset.as_dataset(
@@ -86,7 +72,8 @@ def test_add_tfds_id_as_supervised(
 
 
 def test_registered_logger_is_called(
-    dummy_dataset: dataset_builder.DatasetBuilder):
+    dummy_dataset: dataset_builder.DatasetBuilder,
+):
   logger = mock.MagicMock()
   tfds_logging.register(logger)
 

@@ -21,6 +21,7 @@ from tensorflow_datasets.text.squad_question_generation import squad_question_ge
 
 class SquadQuestionGenerationSplitDuTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for squad_question_generation (split_du) dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ["split_du"]
   DATASET_CLASS = squad_question_generation.SquadQuestionGeneration
   SPLITS = {
@@ -37,6 +38,7 @@ class SquadQuestionGenerationSplitDuTest(tfds.testing.DatasetBuilderTestCase):
 
 class SquadQuestionGenerationSplitZhouTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for squad_question_generation (split_zhou) dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ["split_zhou"]
   DATASET_CLASS = squad_question_generation.SquadQuestionGeneration
   SPLITS = {

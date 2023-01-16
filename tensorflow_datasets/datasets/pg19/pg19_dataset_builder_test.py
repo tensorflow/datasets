@@ -27,13 +27,14 @@ class Pg19Test(tfds.testing.DatasetBuilderTestCase):
   def setUpClass(cls):
     super(Pg19Test, cls).setUpClass()
     pg19_dataset_builder._DATA_DIR = os.path.normpath(
-        os.path.dirname(__file__) + "/dummy_data")
+        os.path.dirname(__file__) + "/dummy_data"
+    )
 
   DATASET_CLASS = pg19_dataset_builder.Builder
   SPLITS = {
       "train": 3,  # Number of fake train example
       "test": 1,  # Number of fake test example
-      "validation": 1  # Number of fake validation example
+      "validation": 1,  # Number of fake validation example
   }
 
 

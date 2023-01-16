@@ -28,8 +28,9 @@ from tensorflow_datasets.datasets.bccd import bccd_dataset_builder
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 FLAGS = flags.FLAGS
 
 MIN_OBJECT_HEIGHT_WIDTH = 100
@@ -57,7 +58,9 @@ def _generate_jpeg(example_id, height, width):
   filepath = os.path.join(
       _output_dir(),
       "BCCD_Dataset-1.0/BCCD/JPEGImages/BloodImage_{:05d}.jpg".format(
-          example_id))
+          example_id
+      ),
+  )
   dirname = os.path.dirname(filepath)
   if not tf.io.gfile.exists(dirname):
     tf.io.gfile.makedirs(dirname)
@@ -68,12 +71,15 @@ def _generate_annotation(example_id, height, width):
   """Generate a fake annotation XML for the given example id."""
   # pylint: disable=protected-access
   label_names = tfds.features.ClassLabel(
-      names=bccd_dataset_builder._CLASS_LABELS).names  # pytype: disable=module-attr
+      names=bccd_dataset_builder._CLASS_LABELS
+  ).names  # pytype: disable=module-attr
   # pylint: enable=protected-access
   annotation = "<annotation>\n"
   annotation += "<folder>JPEGImages</folder>\n"
   annotation += "<filename>%d.jpg</filename>\n" % example_id
-  annotation += "<path>/home/pi/detection_dataset/JPEGImages/%d.jpg</path>" % example_id
+  annotation += (
+      "<path>/home/pi/detection_dataset/JPEGImages/%d.jpg</path>" % example_id
+  )
   annotation += "<source>\n"
   annotation += "<database>Unknown</database>\n"
   annotation += "</source>"
@@ -106,7 +112,9 @@ def _generate_annotation(example_id, height, width):
   filepath = os.path.join(
       _output_dir(),
       "BCCD_Dataset-1.0/BCCD/Annotations/BloodImage_{:05d}.xml".format(
-          example_id))
+          example_id
+      ),
+  )
   _write_text_file(filepath, annotation)
 
 
@@ -118,12 +126,19 @@ def _generate_data_for_set(set_name, example_start, num_examples):
     _generate_annotation(example_id, 480, 640)
   # Add all example ids to the TXT file with all examples in the set.
   filepath = os.path.join(
-      _output_dir(), "BCCD_Dataset-1.0/BCCD/ImageSets/Main/%s.txt" % set_name)
+      _output_dir(), "BCCD_Dataset-1.0/BCCD/ImageSets/Main/%s.txt" % set_name
+  )
   _write_text_file(
-      filepath, "".join([
-          "BloodImage_{:05d}\n".format(example_id)
-          for example_id in range(example_start, example_start + num_examples)
-      ]))
+      filepath,
+      "".join(
+          [
+              "BloodImage_{:05d}\n".format(example_id)
+              for example_id in range(
+                  example_start, example_start + num_examples
+              )
+          ]
+      ),
+  )
 
 
 def _generate_trainval_archive():

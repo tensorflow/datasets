@@ -20,15 +20,19 @@ import tensorflow_datasets.public_api as tfds
 
 class PASSTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for pass dataset."""
-  DATASET_CLASS = (importlib.import_module(
-      'tensorflow_datasets.datasets.pass.pass_dataset_builder')).Builder
+
+  DATASET_CLASS = (
+      importlib.import_module(
+          'tensorflow_datasets.datasets.pass.pass_dataset_builder'
+      )
+  ).Builder
   SPLITS = {
       'train': 5,  # Number of fake train examples
   }
 
   DL_EXTRACT_RESULT = {
       'train_images': ['pass_dataset/dummy.0.tar', 'pass_dataset/dummy.1.tar'],
-      'meta_data': 'dummy_meta.csv'
+      'meta_data': 'dummy_meta.csv',
   }
 
 

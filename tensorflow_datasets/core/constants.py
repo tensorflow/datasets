@@ -47,5 +47,6 @@ METADATA_FILENAME = 'metadata.json'
 # Filepath for mapping between TFDS datasets and PapersWithCode entries.
 PWC_FILENAME = 'tfds_to_pwc_links.json'
 PWC_LINKS_PATH = (
-    epath.resource_path('tensorflow_datasets') /
-    f'scripts/documentation/{PWC_FILENAME}')
+    epath.resource_path('tensorflow_datasets')
+    / f'scripts/documentation/{PWC_FILENAME}'
+)

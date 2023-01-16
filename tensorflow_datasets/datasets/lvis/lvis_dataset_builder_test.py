@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class LvisTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for LVIS dataset."""
+
   DATASET_CLASS = lvis_dataset_builder.Builder
   SPLITS = {
       'train': 2,

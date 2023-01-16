@@ -21,8 +21,12 @@ import numpy as np
 from tensorflow_datasets.core import lazy_imports_lib
 import tensorflow_datasets.public_api as tfds
 
-_DOWNLOAD_PATH = 'http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz'
-_TEST_DOWNLOAD_PATH_ = 'http://download.tensorflow.org/data/speech_commands_test_set_v0.02.tar.gz'
+_DOWNLOAD_PATH = (
+    'http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz'
+)
+_TEST_DOWNLOAD_PATH_ = (
+    'http://download.tensorflow.org/data/speech_commands_test_set_v0.02.tar.gz'
+)
 
 _SPLITS = ['train', 'valid', 'test']
 
@@ -44,11 +48,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'audio':
-                tfds.features.Audio(
-                    file_format='wav', sample_rate=SAMPLE_RATE, dtype=np.int16),
-            'label':
-                tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN])
+            'audio': tfds.features.Audio(
+                file_format='wav', sample_rate=SAMPLE_RATE, dtype=np.int16
+            ),
+            'label': tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN]),
         }),
         supervised_keys=('audio', 'label'),
         # Homepage of the dataset for documentation
@@ -59,31 +62,33 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
 
     dl_path, dl_test_path = dl_manager.download(
-        [_DOWNLOAD_PATH, _TEST_DOWNLOAD_PATH_])
+        [_DOWNLOAD_PATH, _TEST_DOWNLOAD_PATH_]
+    )
 
     train_paths, validation_paths = self._split_archive(
-        dl_manager.iter_archive(dl_path))
+        dl_manager.iter_archive(dl_path)
+    )
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'archive': dl_manager.iter_archive(dl_path),
-                'file_list': train_paths
+                'file_list': train_paths,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'archive': dl_manager.iter_archive(dl_path),
-                'file_list': validation_paths
+                'file_list': validation_paths,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'archive': dl_manager.iter_archive(dl_test_path),
-                'file_list': None
+                'file_list': None,
             },
         ),
     ]
@@ -115,27 +120,31 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         # many small files with 1 seconds length, and transform it to silence.
         audio_samples = np.array(
             lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
-                file_obj, format='wav').get_array_of_samples())
+                file_obj, format='wav'
+            ).get_array_of_samples()
+        )
 
-        for start in range(0,
-                           len(audio_samples) - SAMPLE_RATE, SAMPLE_RATE // 2):
-          audio_segment = audio_samples[start:start + SAMPLE_RATE]
+        for start in range(
+            0, len(audio_samples) - SAMPLE_RATE, SAMPLE_RATE // 2
+        ):
+          audio_segment = audio_samples[start : start + SAMPLE_RATE]
           cur_id = '{}_{}'.format(example_id, start)
           example = {'audio': audio_segment, 'label': label}
           yield cur_id, example
       else:
         try:
           example = {
-              'audio':
-                  np.array(
-                      lazy_imports_lib.lazy_imports.pydub.AudioSegment
-                      .from_file(file_obj,
-                                 format='wav').get_array_of_samples()),
-              'label':
-                  label,
+              'audio': np.array(
+                  lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
+                      file_obj, format='wav'
+                  ).get_array_of_samples()
+              ),
+              'label': label,
           }
           yield example_id, example
-        except lazy_imports_lib.lazy_imports.pydub.exceptions.CouldntDecodeError:
+        except (
+            lazy_imports_lib.lazy_imports.pydub.exceptions.CouldntDecodeError
+        ):
           pass
 
   def _split_archive(self, train_archive):
@@ -156,6 +165,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # The paths for the train set is just whichever paths that do not exist in
     # either the test or validation splits.
     train_paths = (
-        set(train_paths) - set(validation_paths) - set(train_test_paths))
+        set(train_paths) - set(validation_paths) - set(train_test_paths)
+    )
 
     return train_paths, validation_paths

@@ -35,7 +35,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             _REVIEW_SENTS: tfds.features.Text(),
-            _SUMMARIES: tfds.features.Sequence(tfds.features.Text())
+            _SUMMARIES: tfds.features.Sequence(tfds.features.Text()),
         }),
         supervised_keys=(_REVIEW_SENTS, _SUMMARIES),
         homepage="http://kavita-ganesan.com/opinosis/",

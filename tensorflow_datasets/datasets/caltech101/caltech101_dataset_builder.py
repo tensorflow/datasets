@@ -59,13 +59,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "images_dir_path": path,
                 "is_train_split": True,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "images_dir_path": path,
                 "is_train_split": False,
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, images_dir_path, is_train_split):
@@ -99,14 +101,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       # Each directory contains all the images from a single class.
       if tf.io.gfile.isdir(os.path.join(walk_dir, d)):
         for full_path, _, fnames in tf.io.gfile.walk(os.path.join(walk_dir, d)):
-
           # _TRAIN_POINTS_PER_CLASS datapoints are sampled for the train split,
           # the others constitute the test split.
           if _TRAIN_POINTS_PER_CLASS > len(fnames):
-            raise ValueError("Fewer than {} ({}) points in class {}".format(
-                _TRAIN_POINTS_PER_CLASS, len(fnames), d))
+            raise ValueError(
+                "Fewer than {} ({}) points in class {}".format(
+                    _TRAIN_POINTS_PER_CLASS, len(fnames), d
+                )
+            )
           train_fnames = np.random.choice(
-              fnames, _TRAIN_POINTS_PER_CLASS, replace=False)
+              fnames, _TRAIN_POINTS_PER_CLASS, replace=False
+          )
           test_fnames = set(fnames).difference(train_fnames)
           fnames_to_emit = train_fnames if is_train_split else test_fnames
 

@@ -41,11 +41,15 @@ _METADATA_PREFIXES = ("WARC", "CONTENT-", "Content-")
 _MIN_WORDS_PER_LINE = 5
 _MIN_NUM_SENTENCES = 3
 _MAX_WORD_LENGTH = 1000
-_END_MARKS = (".", "?", "!", "\"")
+_END_MARKS = (".", "?", "!", '"')
 _ELLIPSIS = "..."
 _POLICY_SUBSTRINGS = [
-    "terms of use", "privacy policy", "cookie policy", "uses cookies",
-    "use of cookies", "use cookies"
+    "terms of use",
+    "privacy policy",
+    "cookie policy",
+    "uses cookies",
+    "use of cookies",
+    "use cookies",
 ]
 
 # Memoized sentence tokenizer.
@@ -66,20 +70,20 @@ class PageFeatures:
 
 
 def get_counter_inc_fn(namespace):
-
   def counter_inc_fn(counter, amt=1):
     tfds.core.lazy_imports.apache_beam.metrics.Metrics.counter(
-        namespace, counter).inc(amt)
+        namespace, counter
+    ).inc(amt)
 
   return counter_inc_fn
 
 
 def get_hashed_url_filter_fn(predicate_fn):
-
   def filter_fn(page):
     url = page.normalized_url
     val = int(
-        hashlib.md5(tf.compat.as_text(url).encode("utf-8")).hexdigest(), 16)
+        hashlib.md5(tf.compat.as_text(url).encode("utf-8")).hexdigest(), 16
+    )
     return predicate_fn(val)
 
   return filter_fn
@@ -155,12 +159,12 @@ def detect_languages(pages, valid_languages):
       self._min_probability = min_probability
 
     def start_bundle(self):
-
       with langdetect_lock:
         self._detector = tfds.core.lazy_imports.gcld3.NNetLanguageIdentifier(
             # CLD3 is not expected to work well on very short documents.
             min_num_bytes=100,
-            max_num_bytes=10000)
+            max_num_bytes=10000,
+        )
 
     def process(self, page: PageFeatures):
       with langdetect_lock:
@@ -190,12 +194,14 @@ def get_clean_page_fn():
   return functools.partial(clean_page, citation_regex=citation_regex)
 
 
-def clean_page(page: PageFeatures,
-               citation_regex,
-               counter_inc_fn=None,
-               min_words_per_line=_MIN_WORDS_PER_LINE,
-               min_num_sentences=_MIN_NUM_SENTENCES,
-               max_word_length=_MAX_WORD_LENGTH) -> Iterable[PageFeatures]:
+def clean_page(
+    page: PageFeatures,
+    citation_regex,
+    counter_inc_fn=None,
+    min_words_per_line=_MIN_WORDS_PER_LINE,
+    min_num_sentences=_MIN_NUM_SENTENCES,
+    max_word_length=_MAX_WORD_LENGTH,
+) -> Iterable[PageFeatures]:
   """Cleans a CommonCrawl page, yielding nothing if it should be skipped.
 
   Cleaning removes lines with no end marks or with too few words. After line
@@ -283,8 +289,9 @@ def _emit_url_to_lines(page: PageFeatures) -> Iterable[Tuple[str, str]]:
     yield _hash_text(line.strip().lower()), page.url
 
 
-def _remove_lines_from_text(el, counter_inc_fn,
-                            min_num_sentences) -> Iterable[PageFeatures]:
+def _remove_lines_from_text(
+    el, counter_inc_fn, min_num_sentences
+) -> Iterable[PageFeatures]:
   """Removes all lines from the page that do not match the given set of hashes.
 
   Process the result of a join containing a single value for 'features' and zero
@@ -343,20 +350,21 @@ def remove_duplicate_text(pages, min_num_sentences=_MIN_NUM_SENTENCES):
   line_to_selected_url = (
       pages
       | beam.FlatMap(_emit_url_to_lines)
-      | beam.combiners.Top.PerKey(1, key=_hash_text, reverse=True))
+      | beam.combiners.Top.PerKey(1, key=_hash_text, reverse=True)
+  )
   # url, line
   lines_to_keep = line_to_selected_url | beam.Map(lambda x: (x[1][0], x[0]))
 
   # Output: url, text
-  final_docs = ({
-      "pages": pages | beam.Map(lambda p: (p.url, p)),
-      "lines": lines_to_keep
-  }
-                | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
-                | beam.FlatMap(
-                    _remove_lines_from_text,
-                    counter_inc_fn=get_counter_inc_fn("dedupe-lines"),
-                    min_num_sentences=min_num_sentences))
+  final_docs = (
+      {"pages": pages | beam.Map(lambda p: (p.url, p)), "lines": lines_to_keep}
+      | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
+      | beam.FlatMap(
+          _remove_lines_from_text,
+          counter_inc_fn=get_counter_inc_fn("dedupe-lines"),
+          min_num_sentences=min_num_sentences,
+      )
+  )
 
   return final_docs
 
@@ -381,8 +389,9 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
       return True
     return False
 
-  with tf.io.gfile.GFile(wet_file_path,
-                         "rb") as f, gzip.GzipFile(fileobj=f) as g:
+  with tf.io.gfile.GFile(wet_file_path, "rb") as f, gzip.GzipFile(
+      fileobj=f
+  ) as g:
     page = PageFeatures()
     for i, line in enumerate(io.TextIOWrapper(g, encoding="utf-8")):  # pytype: disable=wrong-arg-types
       line = line.strip()
@@ -394,17 +403,17 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
         page = PageFeatures()
 
       if line.startswith(_URL_KEY):
-        page.url = line[len(_URL_KEY):].strip()
-        page.normalized_url = normalize_url(line[len(_URL_KEY):].strip())
+        page.url = line[len(_URL_KEY) :].strip()
+        page.normalized_url = normalize_url(line[len(_URL_KEY) :].strip())
 
       if line.startswith(_URL_DATE):
-        page.timestamp = line[len(_URL_DATE):].strip()
+        page.timestamp = line[len(_URL_DATE) :].strip()
 
       if line.startswith(_CONTENT_TYPE):
-        page.content_type = line[len(_CONTENT_TYPE):].strip()
+        page.content_type = line[len(_CONTENT_TYPE) :].strip()
 
       if line.startswith(_CONTENT_LEN):
-        page.content_length = line[len(_CONTENT_LEN):].strip()
+        page.content_length = line[len(_CONTENT_LEN) :].strip()
 
       if line.startswith(_METADATA_PREFIXES):
         continue
@@ -442,8 +451,9 @@ def is_valid_length(page: PageFeatures, max_length=1.9e5):
   return True
 
 
-def is_realnews_domain(page: PageFeatures,
-                       realnews_domains: Mapping[str, Collection[str]]):
+def is_realnews_domain(
+    page: PageFeatures, realnews_domains: Mapping[str, Collection[str]]
+):
   """Returns False iff page's (sub)domain is not allowed."""
   counter_inc_fn = get_counter_inc_fn("realnews-domain-filter")
   url = page.normalized_url
@@ -453,8 +463,10 @@ def is_realnews_domain(page: PageFeatures,
     counter_inc_fn("filtered:bad_domain")
     return False
   allowed_subdomains = realnews_domains[main_domain]
-  if (isinstance(allowed_subdomains, list) and
-      ext.subdomain not in allowed_subdomains):
+  if (
+      isinstance(allowed_subdomains, list)
+      and ext.subdomain not in allowed_subdomains
+  ):
     counter_inc_fn("filtered:bad_subdomain")
     return False
   counter_inc_fn("passed")
@@ -486,21 +498,25 @@ def normalize_url(url):
   return url
 
 
-def get_badwords_filter_fn(badwords: Mapping[str, Sequence[str]],
-                           filter_fraction: float = 1.0):
+def get_badwords_filter_fn(
+    badwords: Mapping[str, Sequence[str]], filter_fraction: float = 1.0
+):
   """Filters pages at given rate that contain language-specific bad word(s)."""
   badwords_regex = {}
   for lang, words in badwords.items():
     words = [re.escape(w) for w in words]
     badwords_regex[lang] = (
         # For Japanese, Thai, and Chinese, do not require word separations.
-        re.compile("|".join(words)) if lang in ("ja", "th", "zh")
+        re.compile("|".join(words))
+        if lang in ("ja", "th", "zh")
         # For other languages, match only when flanked by non-word chars.
-        else re.compile(r"(?:\W|^)({})(?:\W|$)".format("|".join(words))))
+        else re.compile(r"(?:\W|^)({})(?:\W|$)".format("|".join(words)))
+    )
 
   filter_ratio = float.as_integer_ratio(filter_fraction)
   keep_badword_page = get_hashed_url_filter_fn(
-      lambda x: x % filter_ratio[1] >= filter_ratio[0])
+      lambda x: x % filter_ratio[1] >= filter_ratio[0]
+  )
 
   def badwords_filter(page):
     lang = page.language.split("-")[0]  # remove suffix if present
@@ -529,8 +545,10 @@ def paragraph_filter(page, min_paragraphs=3, min_paragraph_len=200):
   lines = page.text.split("\n")
   # Filter out docs that don't have at least three "paragraphs"
   # (lines >= `min_paragraph_len` chars).
-  if (len(lines) < min_paragraphs or
-      min(heapq.nlargest(3, [len(l) for l in lines])) < min_paragraph_len):
+  if (
+      len(lines) < min_paragraphs
+      or min(heapq.nlargest(3, [len(l) for l in lines])) < min_paragraph_len
+  ):
     get_counter_inc_fn("paragraph-filter")("filtered")
     return False
   get_counter_inc_fn("paragraph-filter")("passed")

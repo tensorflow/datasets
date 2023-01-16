@@ -38,8 +38,9 @@ import PIL.Image
 
 FLAGS = absl.flags.FLAGS
 
-absl.flags.DEFINE_string('fake_dir', None,
-                         'path to the directory which contains files')
+absl.flags.DEFINE_string(
+    'fake_dir', None, 'path to the directory which contains files'
+)
 
 # Some dataset generation rely on the image content, so we cannot compress
 # those.
@@ -60,7 +61,7 @@ def rewrite_image(filepath):
 
   # The color is a deterministic function of the relative filepath.
   assert filepath.startswith(FLAGS.fake_dir)
-  relative_filepath = filepath[len(FLAGS.fake_dir):]
+  relative_filepath = filepath[len(FLAGS.fake_dir) :]
   color = int(hashlib.md5(relative_filepath.encode('utf-8')).hexdigest(), 16)
   color %= 255
 
@@ -95,7 +96,8 @@ def rewrite_zip(root_dir, zip_filepath):
         for file in files:
           file_path = os.path.join(file_dir, file)
           zip_file.write(
-              file_path, arcname=os.path.relpath(file_path, temp_dir))
+              file_path, arcname=os.path.relpath(file_path, temp_dir)
+          )
 
 
 def rewrite_tar(root_dir, tar_filepath):

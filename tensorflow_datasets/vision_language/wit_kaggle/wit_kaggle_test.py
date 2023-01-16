@@ -21,6 +21,7 @@ from tensorflow_datasets.vision_language.wit_kaggle import wit_kaggle
 
 class WitKaggleTestTrain(tfds.testing.DatasetBuilderTestCase):
   """Tests for wit_kaggle dataset train split."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['train_with_extended_features']
   DATASET_CLASS = wit_kaggle.WitKaggle
   SKIP_CHECKSUMS = True  # All data is manually downloaded.
@@ -34,6 +35,7 @@ class WitKaggleTestTrain(tfds.testing.DatasetBuilderTestCase):
 
 class WitKaggleTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for wit_kaggle dataset test split."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['test_without_gold']
   DATASET_CLASS = wit_kaggle.WitKaggle
   SKIP_CHECKSUMS = True  # All data is manually downloaded.

@@ -21,6 +21,7 @@ from tensorflow_datasets.image_classification.cifar10_n import cifar10_n
 
 class Cifar10NTest(testing.DatasetBuilderTestCase):
   """Tests for cifar10_n dataset."""
+
   DATASET_CLASS = cifar10_n.Cifar10N
   SPLITS = {
       'train': 10,  # Number of fake train example

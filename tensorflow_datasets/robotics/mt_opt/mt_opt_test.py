@@ -21,6 +21,7 @@ from tensorflow_datasets.robotics.mt_opt import mt_opt
 
 class MtOptTestRlds(tfds.testing.DatasetBuilderTestCase):
   """Tests for mt_opt dataset."""
+
   DATASET_CLASS = mt_opt.MtOpt
   SPLITS = {'train': 2}
 
@@ -37,6 +38,7 @@ class MtOptTestRlds(tfds.testing.DatasetBuilderTestCase):
 
 class MtOptTestSd(tfds.testing.DatasetBuilderTestCase):
   """Tests for mt_opt dataset."""
+
   DATASET_CLASS = mt_opt.MtOpt
   SPLITS = {'train': 2, 'test': 2}
 

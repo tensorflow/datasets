@@ -61,10 +61,8 @@ _CITATION = """
 """
 
 _URLS = {
-    "10k":
-        "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbOIoJ6Ks0bEMp78/root/content",
-    "30k":
-        "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbXGPBlwD1rnFdBY/root/content"
+    "10k": "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbOIoJ6Ks0bEMp78/root/content",
+    "30k": "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbXGPBlwD1rnFdBY/root/content",
 }
 
 _FEATURE_NAMES = {
@@ -249,12 +247,14 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
             shape=(None,), dtype=np.int64, encoding=encoding
         ),
     }
-    metadata = tfds.core.MetadataDict({
-        "float_features_names": {
-            idx: _FEATURE_NAMES[key]
-            for idx, key in enumerate(sorted(_FEATURE_NAMES))
+    metadata = tfds.core.MetadataDict(
+        {
+            "float_features_names": {
+                idx: _FEATURE_NAMES[key]
+                for idx, key in enumerate(sorted(_FEATURE_NAMES))
+            }
         }
-    })
+    )
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -262,7 +262,8 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(features),
         homepage="https://www.microsoft.com/en-us/research/project/mslr/",
         citation=_CITATION,
-        metadata=metadata)
+        metadata=metadata,
+    )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
@@ -279,4 +280,5 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     with tf.io.gfile.GFile(path, "r") as f:
       yield from LibSVMRankingParser(
-          f, _FEATURE_NAMES, _LABEL_NAME, combine_features=True)
+          f, _FEATURE_NAMES, _LABEL_NAME, combine_features=True
+      )

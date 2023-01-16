@@ -48,11 +48,11 @@ class DummyDatasetNoGenerate(tfds.testing.DummyDataset):
   @classmethod
   def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
     return {
-        'http://data.org/file1.zip':
-            download.checksums.UrlInfo(
-                size=42,
-                checksum='d45899d9a6a0e48afb250aac7ee3dc50e73e263687f15761d754515cd8284e0a',
-                filename='file1.zip'),
+        'http://data.org/file1.zip': download.checksums.UrlInfo(
+            size=42,
+            checksum='d45899d9a6a0e48afb250aac7ee3dc50e73e263687f15761d754515cd8284e0a',
+            filename='file1.zip',
+        ),
     }
 
 
@@ -104,7 +104,8 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
 
   with mock.patch(
       'tensorflow_datasets.core.DatasetBuilder.download_and_prepare',
-      _download_and_prepare):
+      _download_and_prepare,
+  ):
     main.main(args)
   return generated_ds_names
 
@@ -187,7 +188,7 @@ def test_exclude_datasets():
       'mnist',
   ]
 
-  with pytest.raises(ValueError, match='--exclude_datasets can\'t be used'):
+  with pytest.raises(ValueError, match="--exclude_datasets can't be used"):
     _build('mnist --exclude_datasets cifar10')
 
 
@@ -195,7 +196,8 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
   data_dir = mock_default_data_dir / 'mnist/3.0.1'
   data_dir.mkdir(parents=True)
   metadata_path = tfds.core.tfds_path(
-      'testing/test_data/dataset_info/mnist/3.0.1')
+      'testing/test_data/dataset_info/mnist/3.0.1'
+  )
 
   for f in metadata_path.iterdir():  # Copy metadata files.
     data_dir.joinpath(f.name).write_text(f.read_text())
@@ -273,7 +275,8 @@ def test_publish_data_dir(mock_fs: testing.MockFs):
   del mock_fs
   builder = testing.DummyMnist(data_dir='/tmp')
   actual = build_lib._publish_data_dir(
-      publish_dir=epath.Path('/a/b'), builder=builder)
+      publish_dir=epath.Path('/a/b'), builder=builder
+  )
   assert actual == epath.Path('/a/b/dummy_mnist/3.0.1')
   assert build_lib._publish_data_dir(publish_dir=None, builder=builder) is None
 
@@ -291,6 +294,7 @@ def test_publish_data(mock_fs: testing.MockFs):
 
 def test_download_only():
   with mock.patch(
-      'tensorflow_datasets.download.DownloadManager.download') as mock_download:
+      'tensorflow_datasets.download.DownloadManager.download'
+  ) as mock_download:
     assert not _build('dummy_dataset_no_generate --download_only')
     mock_download.assert_called_with({'file0': 'http://data.org/file1.zip'})

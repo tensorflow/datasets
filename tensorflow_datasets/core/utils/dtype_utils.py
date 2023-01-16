@@ -41,9 +41,14 @@ def cast_to_numpy(dtype: type_utils.TfdsDType) -> np.dtype:
   if tf_already_loaded and isinstance(dtype, tf.dtypes.DType):
     np_dtype = np.dtype(dtype.as_numpy_dtype)
     logging.log_first_n(
-        logging.WARNING, f'You use TensorFlow DType {dtype} in tfds.features '
-        'This will soon be deprecated in favor of NumPy DTypes. '
-        f'In the meantime it was converted to {np_dtype}.', 10)
+        logging.WARNING,
+        (
+            f'You use TensorFlow DType {dtype} in tfds.features '
+            'This will soon be deprecated in favor of NumPy DTypes. '
+            f'In the meantime it was converted to {np_dtype}.'
+        ),
+        10,
+    )
     return np_dtype
   # Strings are managed as np.object_ (rather than np.str_) in order to
   # optimize for memory and for consistency with tf.string:
@@ -59,11 +64,13 @@ def is_np_or_tf_dtype(value: Any) -> bool:
   return enp.lazy.is_np_dtype(value) or enp.lazy.is_tf_dtype(value)
 
 
-def _is_dtype(numpy_dtypes: List[np.dtype], tf_dtype: Any,
-              dtype: TfdsDType) -> bool:
+def _is_dtype(
+    numpy_dtypes: List[np.dtype], tf_dtype: Any, dtype: TfdsDType
+) -> bool:
   if enp.lazy.is_np_dtype(dtype):
     return any(
-        [is_np_sub_dtype(dtype, numpy_dtype) for numpy_dtype in numpy_dtypes])
+        [is_np_sub_dtype(dtype, numpy_dtype) for numpy_dtype in numpy_dtypes]
+    )
   if enp.lazy.has_tf and isinstance(dtype, tf.dtypes.DType):
     if isinstance(tf_dtype, str):
       return getattr(dtype, tf_dtype)

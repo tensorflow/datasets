@@ -21,6 +21,7 @@ from tensorflow_datasets.text import wordnet
 
 class WordnetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for Wordnet dataset."""
+
   DATASET_CLASS = wordnet.Wordnet
   SPLITS = {
       'train': 3,
@@ -44,12 +45,17 @@ class WordnetTest(tfds.testing.DatasetBuilderTestCase):
       with self._subTest(config.name):
         builder = self._make_builder(config=config)
         self._download_and_prepare_as_dataset(builder)
-        self.assertEqual(builder.info.metadata['synsets']['07491708']['name'],
-                         '__enjoyment_NN_1')
+        self.assertEqual(
+            builder.info.metadata['synsets']['07491708']['name'],
+            '__enjoyment_NN_1',
+        )
         self.assertEqual(
             builder.info.metadata['synsets']['08769179']['definition'],
-            'an area in Germany around the upper Elbe river; '
-            'the original home of the Saxons')
+            (
+                'an area in Germany around the upper Elbe river; '
+                'the original home of the Saxons'
+            ),
+        )
 
 
 if __name__ == '__main__':

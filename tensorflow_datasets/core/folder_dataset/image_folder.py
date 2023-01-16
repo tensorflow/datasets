@@ -69,7 +69,6 @@ class ImageFolder(dataset_builder.DatasetBuilder):
   ds = builder.as_dataset(split='train', shuffle_files=True)
   tfds.show_examples(ds, builder.info)
   ```
-
   """
 
   VERSION = version.Version('1.0.0')
@@ -106,7 +105,8 @@ class ImageFolder(dataset_builder.DatasetBuilder):
             name=split_name,
             shard_lengths=[len(examples)],
             num_bytes=0,
-        ) for split_name, examples in self._split_examples.items()
+        )
+        for split_name, examples in self._split_examples.items()
     ]
     split_dict = split_lib.SplitDict(split_infos)
     self.info.set_splits(split_dict)
@@ -116,15 +116,12 @@ class ImageFolder(dataset_builder.DatasetBuilder):
         builder=self,
         description='Generic image classification dataset.',
         features=features_lib.FeaturesDict({
-            'image':
-                features_lib.Image(
-                    shape=self._image_shape,
-                    dtype=self._image_dtype,
-                ),
-            'label':
-                features_lib.ClassLabel(),
-            'image/filename':
-                features_lib.Text(),
+            'image': features_lib.Image(
+                shape=self._image_shape,
+                dtype=self._image_dtype,
+            ),
+            'label': features_lib.ClassLabel(),
+            'image/filename': features_lib.Text(),
         }),
         supervised_keys=('image', 'label'),
     )
@@ -132,16 +129,20 @@ class ImageFolder(dataset_builder.DatasetBuilder):
   def _download_and_prepare(self, **kwargs) -> NoReturn:
     raise NotImplementedError(
         'No need to call download_and_prepare function for {}.'.format(
-            type(self).__name__))
+            type(self).__name__
+        )
+    )
 
   def download_and_prepare(self, **kwargs):  # -> NoReturn:
     return self._download_and_prepare()
 
-  def _as_dataset(self,
-                  split: str,
-                  shuffle_files: bool = False,
-                  decoders: Optional[Dict[str, decode.Decoder]] = None,
-                  read_config=None) -> tf.data.Dataset:
+  def _as_dataset(
+      self,
+      split: str,
+      shuffle_files: bool = False,
+      decoders: Optional[Dict[str, decode.Decoder]] = None,
+      read_config=None,
+  ) -> tf.data.Dataset:
     """Generate dataset for given split."""
     del read_config  # Unused (automatically created in `DatasetBuilder`)
 
@@ -149,8 +150,9 @@ class ImageFolder(dataset_builder.DatasetBuilder):
       raise ValueError(
           'Unrecognized split {}. Subsplit API not yet supported for {}. '
           'Split name should be one of {}.'.format(
-              split,
-              type(self).__name__, list(self.info.splits.keys())))
+              split, type(self).__name__, list(self.info.splits.keys())
+          )
+      )
 
     # Extract all labels/images
     image_paths = []
@@ -171,7 +173,8 @@ class ImageFolder(dataset_builder.DatasetBuilder):
       return self.info.features.decode_example(ex, decoders=decoders)
 
     ds = ds.map(
-        _load_and_decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        _load_and_decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE
+    )
     return ds
 
 
@@ -188,7 +191,8 @@ def _load_example(
 
 
 def _get_split_label_images(
-    root_dir: str,) -> Tuple[SplitExampleDict, List[str]]:
+    root_dir: str,
+) -> Tuple[SplitExampleDict, List[str]]:
   """Extract all label names and associated images.
 
   This function guarantee that examples are deterministically shuffled
@@ -207,11 +211,14 @@ def _get_split_label_images(
     split_dir = os.path.join(root_dir, split_name)
     for label_name in sorted(_list_folders(split_dir)):
       labels.add(label_name)
-      split_examples[split_name].extend([
-          _Example(image_path=image_path, label=label_name)
-          for image_path in sorted(
-              _list_img_paths(os.path.join(split_dir, label_name)))
-      ])
+      split_examples[split_name].extend(
+          [
+              _Example(image_path=image_path, label=label_name)
+              for image_path in sorted(
+                  _list_img_paths(os.path.join(split_dir, label_name))
+              )
+          ]
+      )
 
   # Shuffle the images deterministically
   for split_name, examples in split_examples.items():
@@ -222,7 +229,8 @@ def _get_split_label_images(
 
 def _list_folders(root_dir: str) -> List[str]:
   return [
-      f for f in tf.io.gfile.listdir(root_dir)
+      f
+      for f in tf.io.gfile.listdir(root_dir)
       if tf.io.gfile.isdir(os.path.join(root_dir, f))
   ]
 

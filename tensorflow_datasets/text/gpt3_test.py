@@ -22,7 +22,9 @@ from tensorflow_datasets.text import gpt3
 class Gpt3Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = gpt3.Gpt3
   BUILDER_CONFIG_NAMES_TO_TEST = [
-      "cycle_letters_in_word", "sum_of_digits", "two_digit_addition"
+      "cycle_letters_in_word",
+      "sum_of_digits",
+      "two_digit_addition",
   ]
   SPLITS = {
       "test": 2,  # Number of fake test example

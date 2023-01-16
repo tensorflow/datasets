@@ -41,31 +41,30 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     features = {
-        "image":
-            tfds.features.Image(),
-        "file_name":
-            tfds.features.Text(),
-        "objects":
-            tfds.features.Sequence({
-                "color":
-                    tfds.features.ClassLabel(names=[
-                        "gray", "blue", "brown", "yellow", "red", "green",
-                        "purple", "cyan"
-                    ]),
-                "material":
-                    tfds.features.ClassLabel(names=["rubber", "metal"]),
-                "shape":
-                    tfds.features.ClassLabel(
-                        names=["cube", "sphere", "cylinder"]),
-                "size":
-                    tfds.features.ClassLabel(names=["small", "large"]),
-                "rotation":
-                    tfds.features.Tensor(shape=(), dtype=np.float32),
-                "3d_coords":
-                    tfds.features.Tensor(shape=(3,), dtype=np.float32),
-                "pixel_coords":
-                    tfds.features.Tensor(shape=(3,), dtype=np.float32),
-            })
+        "image": tfds.features.Image(),
+        "file_name": tfds.features.Text(),
+        "objects": tfds.features.Sequence({
+            "color": tfds.features.ClassLabel(
+                names=[
+                    "gray",
+                    "blue",
+                    "brown",
+                    "yellow",
+                    "red",
+                    "green",
+                    "purple",
+                    "cyan",
+                ]
+            ),
+            "material": tfds.features.ClassLabel(names=["rubber", "metal"]),
+            "shape": tfds.features.ClassLabel(
+                names=["cube", "sphere", "cylinder"]
+            ),
+            "size": tfds.features.ClassLabel(names=["small", "large"]),
+            "rotation": tfds.features.Tensor(shape=(), dtype=np.float32),
+            "3d_coords": tfds.features.Tensor(shape=(3,), dtype=np.float32),
+            "pixel_coords": tfds.features.Tensor(shape=(3,), dtype=np.float32),
+        }),
     }
     if self.version > "3.0.0":
       features["question_answer"] = tfds.features.Sequence({
@@ -96,26 +95,29 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=name_map[split_name],
               gen_kwargs={
-                  "images_dir_path":
-                      os.path.join(images_path_dir, split_name),
-                  "question_file":
-                      os.path.join(
-                          questions_path_dir,
-                          "CLEVR_{}_questions.json".format(split_name)),
-                  "scenes_description_file":
-                      os.path.join(scenes_path_dir,
-                                   "CLEVR_{}_scenes.json".format(split_name)),
+                  "images_dir_path": os.path.join(images_path_dir, split_name),
+                  "question_file": os.path.join(
+                      questions_path_dir,
+                      "CLEVR_{}_questions.json".format(split_name),
+                  ),
+                  "scenes_description_file": os.path.join(
+                      scenes_path_dir, "CLEVR_{}_scenes.json".format(split_name)
+                  ),
               },
-          ))
+          )
+      )
 
     return splits
 
-  def _generate_examples(self, images_dir_path, question_file,
-                         scenes_description_file):
-    image_paths = sorted([
-        os.path.join(images_dir_path, filename)
-        for filename in tf.io.gfile.listdir(images_dir_path)
-    ])
+  def _generate_examples(
+      self, images_dir_path, question_file, scenes_description_file
+  ):
+    image_paths = sorted(
+        [
+            os.path.join(images_dir_path, filename)
+            for filename in tf.io.gfile.listdir(images_dir_path)
+        ]
+    )
 
     with epath.Path(question_file).open() as f:
       questions_json = json.load(f)
@@ -134,8 +136,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       scenes_json = {"scenes": [{"objects": []}] * len(image_paths)}
 
     attrs = [
-        "color", "material", "shape", "size", "rotation", "pixel_coords",
-        "3d_coords"
+        "color",
+        "material",
+        "shape",
+        "size",
+        "rotation",
+        "pixel_coords",
+        "3d_coords",
     ]
     for image_path, scene in zip(image_paths, scenes_json["scenes"]):
       objects = scene["objects"]
@@ -144,6 +151,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           "image": image_path,
           "file_name": fname,
           "question_answer": questions[fname],
-          "objects": [{attr: obj[attr] for attr in attrs} for obj in objects]  # pylint: disable=g-complex-comprehension
+          "objects": [{attr: obj[attr] for attr in attrs} for obj in objects],  # pylint: disable=g-complex-comprehension
       }
       yield fname, record

@@ -58,6 +58,7 @@ _REPORT = r"""
 
 class GovReportTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for gov_report dataset."""
+
   DATASET_CLASS = gov_report.GovReport
   SPLITS = {
       tfds.Split.TRAIN: 1,
@@ -68,12 +69,13 @@ class GovReportTest(tfds.testing.DatasetBuilderTestCase):
   def test_flatten_structures_whitespace(self):
     self.assertEqual(
         gov_report._flatten_structure(json.loads(_REPORT), " ", 1, False),
-        " Introduction p1 p2 Background p3 Conclusion p6")
+        " Introduction p1 p2 Background p3 Conclusion p6",
+    )
 
   def test_flatten_structures_html(self):
     self.assertEqual(
         gov_report._flatten_structure(json.loads(_REPORT), "\n", 1, True),
-        "<h1></h1>\n<h2>Introduction</h2>\np1\np2\n<h3>Background</h3>\np3\n<h2>Conclusion</h2>\np6"
+        "<h1></h1>\n<h2>Introduction</h2>\np1\np2\n<h3>Background</h3>\np3\n<h2>Conclusion</h2>\np6",
     )
 
 

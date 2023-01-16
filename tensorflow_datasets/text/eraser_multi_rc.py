@@ -60,7 +60,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             'passage': tfds.features.Text(),
             'query_and_answer': tfds.features.Text(),
             'label': tfds.features.ClassLabel(names=['False', 'True']),
-            'evidences': tfds.features.Sequence(tfds.features.Text())
+            'evidences': tfds.features.Sequence(tfds.features.Text()),
         }),
         supervised_keys=None,
         homepage='https://cogcomp.seas.upenn.edu/multirc/',
@@ -78,7 +78,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'train.jsonl')
+                'filepath': os.path.join(data_dir, 'train.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
@@ -86,7 +86,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'val.jsonl')
+                'filepath': os.path.join(data_dir, 'val.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
@@ -94,7 +94,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'test.jsonl')
+                'filepath': os.path.join(data_dir, 'test.jsonl'),
             },
         ),
     ]
@@ -120,5 +120,5 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             'passage': passage_text,
             'query_and_answer': row['query'],
             'label': row['classification'],
-            'evidences': evidences
+            'evidences': evidences,
         }

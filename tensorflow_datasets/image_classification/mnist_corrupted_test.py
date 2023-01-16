@@ -20,7 +20,6 @@ from tensorflow_datasets.image_classification import mnist_corrupted
 
 
 class MNISTCorruptedTest(testing.DatasetBuilderTestCase):
-
   BUILDER_CONFIG_NAMES_TO_TEST = ["dotted_line"]
 
   DATASET_CLASS = mnist_corrupted.MNISTCorrupted

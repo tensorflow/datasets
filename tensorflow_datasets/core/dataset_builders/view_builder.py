@@ -49,10 +49,12 @@ class ViewConfig(dataset_builder.BuilderConfig):
       *,
       name: str,
       input_dataset: Union[None, str, naming.DatasetReference] = None,
-      ex_transformations: Optional[List[
-          transform_lib.ExampleTransformFn]] = None,
-      ds_transformations: Optional[List[Callable[[tf.data.Dataset],
-                                                 tf.data.Dataset]]] = None,
+      ex_transformations: Optional[
+          List[transform_lib.ExampleTransformFn]
+      ] = None,
+      ds_transformations: Optional[
+          List[Callable[[tf.data.Dataset], tf.data.Dataset]]
+      ] = None,
       **kwargs,
   ):
     """Initialize a ViewConfig.
@@ -75,8 +77,9 @@ class ViewConfig(dataset_builder.BuilderConfig):
       input_dataset = naming.DatasetReference.from_tfds_name(input_dataset)
     self.input_dataset = input_dataset
     if ex_transformations and ds_transformations:
-      raise ValueError("It is not supported to use both TF data "
-                       "and example transformations!")
+      raise ValueError(
+          "It is not supported to use both TF data and example transformations!"
+      )
     self.ex_transformations = ex_transformations
     self.ds_transformations = ds_transformations
     super().__init__(name=name, **kwargs)
@@ -113,7 +116,8 @@ def _transform_per_example(
     for example in dataset_utils.as_numpy(ds):
       key = example.pop("tfds_id")
       yield from transform_lib.apply_transformations(
-          key=key, example=example, transformations=transformations)
+          key=key, example=example, transformations=transformations
+      )
 
 
 def _transform_example(
@@ -121,7 +125,8 @@ def _transform_example(
 ) -> Iterator[KeyExample]:
   key = example.pop("tfds_id")
   yield from transform_lib.apply_transformations(
-      key=key, example=example, transformations=transformations)
+      key=key, example=example, transformations=transformations
+  )
 
 
 def _transform_per_example_beam(
@@ -133,14 +138,18 @@ def _transform_per_example_beam(
   beam = lazy_imports_lib.lazy_imports.apache_beam
   split = split_info.name
   read_config = read_config_lib.ReadConfig(add_tfds_id=True)
-  return (f"read_tfds_dataset@{split}" >> beam_utils.ReadFromTFDS(
-      builder=builder,
-      split=split,
-      read_config=read_config,
-      workers_per_shard=workers_per_shard)
-          | f"convert_to_numpy@{split}" >> beam.Map(dataset_utils.as_numpy)
-          | f"transform_examples@{split}" >> beam.ParDo(
-              _transform_example, transformations=transformations))
+  return (
+      f"read_tfds_dataset@{split}"
+      >> beam_utils.ReadFromTFDS(
+          builder=builder,
+          split=split,
+          read_config=read_config,
+          workers_per_shard=workers_per_shard,
+      )
+      | f"convert_to_numpy@{split}" >> beam.Map(dataset_utils.as_numpy)
+      | f"transform_examples@{split}"
+      >> beam.ParDo(_transform_example, transformations=transformations)
+  )
 
 
 def _transform_dataset(
@@ -168,7 +177,8 @@ def _transform_dataset(
 
 
 class ViewBuilder(
-    dataset_builder.GeneratorBasedBuilder, skip_registration=True):
+    dataset_builder.GeneratorBasedBuilder, skip_registration=True
+):
   """[Experimental] Base builder for views.
 
   Note that this is an experimental new feature, so the API may change.
@@ -176,6 +186,7 @@ class ViewBuilder(
   `ViewBuilder` can be used to define a new dataset as the transformation of an
   existing dataset.
   """
+
   # The dataset that this view transforms. The `input_dataset` in `ViewConfig`
   # takes precedence if specified.
   INPUT_DATASET: Union[None, str, naming.DatasetReference] = None
@@ -223,7 +234,8 @@ class ViewBuilder(
     return self.EX_TRANSFORMATIONS
 
   def _data_transformations(
-      self) -> List[Callable[[tf.data.Dataset], tf.data.Dataset]]:
+      self,
+  ) -> List[Callable[[tf.data.Dataset], tf.data.Dataset]]:
     if self.view_config and self.view_config.ds_transformations:
       return self.view_config.ds_transformations
     return self.DS_TRANSFORMATIONS
@@ -239,7 +251,8 @@ class ViewBuilder(
           builder=builder,
           split_info=split_info,
           ex_transformations=self._example_transformations(),
-          ds_transformations=self._data_transformations())
+          ds_transformations=self._data_transformations(),
+      )
     return split_generators
 
   def _generate_examples(
@@ -250,27 +263,34 @@ class ViewBuilder(
       ds_transformations: List[Callable[[tf.data.Dataset], tf.data.Dataset]],
   ) -> split_builder_lib.SplitGenerator:
     if ex_transformations and ds_transformations:
-      raise ValueError("It is not supported to have toth example and dataset "
-                       "transformations!")
+      raise ValueError(
+          "It is not supported to have toth example and dataset "
+          "transformations!"
+      )
     if ex_transformations:
       if self.USE_BEAM:
         return _transform_per_example_beam(
             builder=builder,
             split_info=split_info,
             transformations=ex_transformations,
-            workers_per_shard=self.BEAM_WORKERS_PER_SHARD)
+            workers_per_shard=self.BEAM_WORKERS_PER_SHARD,
+        )
       else:
         return _transform_per_example(
             builder=builder,
             split_info=split_info,
-            transformations=ex_transformations)
+            transformations=ex_transformations,
+        )
     elif ds_transformations:
       if self.USE_BEAM:
         # TODO(weide): add support for using Beam with tf.data transformations.
-        raise ValueError("Using Apache Beam in combination with tf.data "
-                         "transformations is not yet supported!")
+        raise ValueError(
+            "Using Apache Beam in combination with tf.data "
+            "transformations is not yet supported!"
+        )
       return _transform_dataset(
           builder=builder,
           split_info=split_info,
-          transformations=ds_transformations)
+          transformations=ds_transformations,
+      )
     raise ValueError("No transformations were specified!")

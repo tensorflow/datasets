@@ -25,7 +25,7 @@ class Cars196Test(tfds_test.DatasetBuilderTestCase):
       'train': 'train',
       'test': 'test',
       'extra': 'extra',
-      'test_annos': 'cars_test_annos_withlabels.mat'
+      'test_annos': 'cars_test_annos_withlabels.mat',
   }
 
 

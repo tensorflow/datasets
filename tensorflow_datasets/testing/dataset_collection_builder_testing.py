@@ -48,6 +48,7 @@ class DatasetCollectionTestBase:
     registered in tfds. If DATASETS_TO_TEST is not specified, all datasets in
     the collection will be checked.
   """
+
   DATASET_COLLECTION_CLASS = None
   VERSION: Optional[str] = None
   DATASETS_TO_TEST: List[str] = []
@@ -56,10 +57,12 @@ class DatasetCollectionTestBase:
   @pytest.fixture(autouse=True)
   def dataset_collection(self):
     dataset_collection_cls = registered.imported_dataset_collection_cls(
-        self.DATASET_COLLECTION_CLASS.name)
+        self.DATASET_COLLECTION_CLASS.name
+    )
     dataset_collection_cls = typing.cast(
         Type[dataset_collection_builder.DatasetCollection],
-        dataset_collection_cls)
+        dataset_collection_cls,
+    )
     yield dataset_collection_cls()
 
   @pytest.fixture(autouse=True)
@@ -72,16 +75,17 @@ class DatasetCollectionTestBase:
 
   def test_dataset_collection_info(self, dataset_collection):
     """Checks that the collection's info is of type `DatasetCollectionInfo`."""
-    assert isinstance(dataset_collection.info,
-                      dataset_collection_builder.DatasetCollectionInfo)
+    assert isinstance(
+        dataset_collection.info,
+        dataset_collection_builder.DatasetCollectionInfo,
+    )
     assert dataset_collection.info.name
     assert dataset_collection.info.description
     assert dataset_collection.info.release_notes
 
   def _get_dataset_builder(
-      self,
-      ds_reference: naming.DatasetReference,
-      check_ds_version: bool = True) -> dataset_builder.DatasetBuilder:
+      self, ds_reference: naming.DatasetReference, check_ds_version: bool = True
+  ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder for the requested dataset.
 
     Args:
@@ -109,5 +113,6 @@ class DatasetCollectionTestBase:
 
     for ds, ds_reference in datasets_to_test.items():
       ds_builder = self._get_dataset_builder(
-          ds_reference, check_ds_version=self.CHECK_DATASETS_VERSION)
+          ds_reference, check_ds_version=self.CHECK_DATASETS_VERSION
+      )
       assert isinstance(ds_builder, dataset_builder.DatasetBuilder)

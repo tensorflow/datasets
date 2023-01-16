@@ -29,7 +29,7 @@ class WikihowTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       "train": "all_train.txt",
       "test": "all_test.txt",
-      "validation": "all_validation.txt"
+      "validation": "all_validation.txt",
   }
 
 

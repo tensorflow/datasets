@@ -45,19 +45,28 @@ TO_CONVERT = [
     (r"from\s__future__\simport\sdivision.*", r""),
     (r"from\s__future__\simport\sprint_function.*", r""),
     (r"import\slogging", r"from absl import logging\n"),
-    (r"import\snlp",
-     r"from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf\nimport tensorflow_datasets.public_api as tfds\n"
+    (
+        r"import\snlp",
+        (
+            r"from tensorflow_datasets.core.utils.lazy_imports_utils import"
+            r" tensorflow as tf\nimport tensorflow_datasets.public_api as"
+            r" tfds\n"
+        ),
     ),
     (r"with\sopen", r"with tf.io.gfile.GFile"),
     (r"encoding=\"utf-8\"", r"'r'"),
-    (r"return\snlp\.DatasetInfo\(",
-     r"    return tfds.core.DatasetInfo(\n        builder=self,\n"),
+    (
+        r"return\snlp\.DatasetInfo\(",
+        r"    return tfds.core.DatasetInfo(\n        builder=self,\n",
+    ),
     (r"nlp\.ClassLabel", r"tfds.features.ClassLabel"),
     (r"nlp\.Value\(\"string\"\)", r"tfds.features.Text()"),
     (r"nlp\.Value\(\"([\w\d]+)\"\)", r"tf.\1"),
     (r"nlp\.features", "tfds.features"),
-    (r"features\s*=\s*nlp\.Features\(",
-     r"features=tfds.features.FeaturesDict("),
+    (
+        r"features\s*=\s*nlp\.Features\(",
+        r"features=tfds.features.FeaturesDict(",
+    ),
     (r"dict\(", r"tfds.features.FeaturesDict("),
     (r"nlp.SplitGenerator", r"tfds.core.SplitGenerator"),
     (r"self\.config\.data_dir", r"dl_manager.manual_dir"),
@@ -74,7 +83,8 @@ def _parse_flags(_) -> argparse.Namespace:
       description="Tool to add hugging face datasets",
   )
   parser.add_argument(
-      "--nlp_path", type=pathlib.Path, help="Path of the nlp directory")
+      "--nlp_path", type=pathlib.Path, help="Path of the nlp directory"
+  )
   parser.add_argument(
       "--dataset_name",
       type=str,
@@ -89,7 +99,6 @@ def _parse_flags(_) -> argparse.Namespace:
 
 
 def main(args: argparse.Namespace):
-
   create_dataset_files(
       nlp_path=args.nlp_path,
       dataset_name=args.dataset_name,

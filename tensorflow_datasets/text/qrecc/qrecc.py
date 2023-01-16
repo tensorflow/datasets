@@ -50,28 +50,24 @@ class QReCC(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "context":
-                tfds.features.Sequence(tfds.features.Text()),
-            "question":
-                tfds.features.Text(),
-            "question_rewrite":
-                tfds.features.Text(),
-            "answer":
-                tfds.features.Text(),
-            "answer_url":
-                tfds.features.Text(),
-            "conversation_id":
-                tfds.features.Scalar(
-                    np.int32, doc="The id of the conversation."),
-            "turn_id":
-                tfds.features.Scalar(
-                    np.int32,
-                    doc="The id of the conversation turn, within a conversation."
-                ),
-            "source":
-                tfds.features.Text(
-                    doc="The original source of the data -- either QuAC, CAsT or Natural Questions"
-                ),
+            "context": tfds.features.Sequence(tfds.features.Text()),
+            "question": tfds.features.Text(),
+            "question_rewrite": tfds.features.Text(),
+            "answer": tfds.features.Text(),
+            "answer_url": tfds.features.Text(),
+            "conversation_id": tfds.features.Scalar(
+                np.int32, doc="The id of the conversation."
+            ),
+            "turn_id": tfds.features.Scalar(
+                np.int32,
+                doc="The id of the conversation turn, within a conversation.",
+            ),
+            "source": tfds.features.Text(
+                doc=(
+                    "The original source of the data -- either QuAC, CAsT or"
+                    " Natural Questions"
+                )
+            ),
         }),
         supervised_keys=None,
         homepage="https://github.com/apple/ml-qrecc",
@@ -85,10 +81,12 @@ class QReCC(tfds.core.GeneratorBasedBuilder):
 
     # Returns the Dict[split names, Iterator[Key, Example]]
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(path=data_dir / "qrecc_train.json"),
-        tfds.Split.TEST:
-            self._generate_examples(path=data_dir / "qrecc_test.json"),
+        tfds.Split.TRAIN: self._generate_examples(
+            path=data_dir / "qrecc_train.json"
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            path=data_dir / "qrecc_test.json"
+        ),
     }
 
   def _generate_examples(self, path):

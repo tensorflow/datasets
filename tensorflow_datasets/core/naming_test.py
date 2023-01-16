@@ -29,15 +29,18 @@ _FILENAME_TEMPLATE_MNIST_DEFAULT = naming.ShardedFileTemplate(
     data_dir='/path',
     dataset_name='mnist',
     split='train',
-    filetype_suffix='tfrecord')
+    filetype_suffix='tfrecord',
+)
 _FILENAME_TEMPLATE_CUSTOM_NO_EXTRA = naming.ShardedFileTemplate(
-    data_dir='/path', template='{SPLIT}.{SHARD_INDEX}')
+    data_dir='/path', template='{SPLIT}.{SHARD_INDEX}'
+)
 _FILENAME_TEMPLATE_CUSTOM_FULL = naming.ShardedFileTemplate(
     data_dir='/path',
     template='{SPLIT}.{SHARD_INDEX}',
     dataset_name='mnist',
     split='train',
-    filetype_suffix='tfrecord')
+    filetype_suffix='tfrecord',
+)
 
 
 class NamingTest(parameterized.TestCase, testing.TestCase):
@@ -68,19 +71,26 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
       (12345, '00000-of-12345', '12344-of-12345'),
       (654321, '000000-of-654321', '654320-of-654321'),
   )
-  def test_sharded_filepaths(self, num_shards: int, expected_first_suffix: str,
-                             expected_last_suffix: str):
+  def test_sharded_filepaths(
+      self,
+      num_shards: int,
+      expected_first_suffix: str,
+      expected_last_suffix: str,
+  ):
     template = naming.ShardedFileTemplate(
         split='train',
         dataset_name='ds',
         data_dir='/path',
-        filetype_suffix='tfrecord')
+        filetype_suffix='tfrecord',
+    )
     names = template.sharded_filepaths(num_shards)
     path_template = '/path/ds-train.tfrecord-%s'
     self.assertEqual(
-        os.fspath(names[0]), path_template % (expected_first_suffix))
+        os.fspath(names[0]), path_template % (expected_first_suffix)
+    )
     self.assertEqual(
-        os.fspath(names[-1]), path_template % (expected_last_suffix))
+        os.fspath(names[-1]), path_template % (expected_last_suffix)
+    )
 
   @parameterized.parameters(
       ('foo', 'foo-train'),
@@ -97,10 +107,11 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
         split=splits.Split.TRAIN,
         num_shards=2,
         filetype_suffix='bar',
-        data_dir='/path')
+        data_dir='/path',
+    )
     self.assertEqual(
-        actual,
-        ['foo-train.bar-00000-of-00002', 'foo-train.bar-00001-of-00002'])
+        actual, ['foo-train.bar-00000-of-00002', 'foo-train.bar-00001-of-00002']
+    )
 
   def test_filepaths_for_dataset_split(self):
     actual = naming.filepaths_for_dataset_split(
@@ -108,11 +119,15 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
         split=splits.Split.TRAIN,
         num_shards=2,
         data_dir='/tmp/bar/',
-        filetype_suffix='bar')
-    self.assertEqual(actual, [
-        '/tmp/bar/foo-train.bar-00000-of-00002',
-        '/tmp/bar/foo-train.bar-00001-of-00002'
-    ])
+        filetype_suffix='bar',
+    )
+    self.assertEqual(
+        actual,
+        [
+            '/tmp/bar/foo-train.bar-00000-of-00002',
+            '/tmp/bar/foo-train.bar-00001-of-00002',
+        ],
+    )
 
   def test_filepattern_for_dataset_split(self):
     self.assertEqual(
@@ -121,43 +136,38 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
             dataset_name='foo',
             split=splits.Split.TEST,
             data_dir='/tmp/bar/',
-            filetype_suffix='bar'))
+            filetype_suffix='bar',
+        ),
+    )
 
 
 def test_dataset_name_and_kwargs_from_name_str():
   assert naming._dataset_name_and_kwargs_from_name_str('ds1') == ('ds1', {})
   assert naming._dataset_name_and_kwargs_from_name_str('ds1:1.2.*') == (
       'ds1',
-      {
-          'version': '1.2.*'
-      },
+      {'version': '1.2.*'},
   )
   assert naming._dataset_name_and_kwargs_from_name_str('ds1/config1') == (
-      'ds1', {
-          'config': 'config1'
-      })
+      'ds1',
+      {'config': 'config1'},
+  )
   assert naming._dataset_name_and_kwargs_from_name_str('ds1/config1:1.*.*') == (
-      'ds1', {
-          'config': 'config1',
-          'version': '1.*.*'
-      })
+      'ds1',
+      {'config': 'config1', 'version': '1.*.*'},
+  )
   assert naming._dataset_name_and_kwargs_from_name_str(
-      'ds1/config1/arg1=val1,arg2=val2') == ('ds1', {
-          'config': 'config1',
-          'arg1': 'val1',
-          'arg2': 'val2'
-      })
+      'ds1/config1/arg1=val1,arg2=val2'
+  ) == ('ds1', {'config': 'config1', 'arg1': 'val1', 'arg2': 'val2'})
   assert naming._dataset_name_and_kwargs_from_name_str(
-      'ds1/config1:1.2.3/arg1=val1,arg2=val2') == ('ds1', {
-          'config': 'config1',
-          'version': '1.2.3',
-          'arg1': 'val1',
-          'arg2': 'val2'
-      })
+      'ds1/config1:1.2.3/arg1=val1,arg2=val2'
+  ) == (
+      'ds1',
+      {'config': 'config1', 'version': '1.2.3', 'arg1': 'val1', 'arg2': 'val2'},
+  )
   assert naming._dataset_name_and_kwargs_from_name_str('ds1/arg1=val1') == (
-      'ds1', {
-          'arg1': 'val1'
-      })
+      'ds1',
+      {'arg1': 'val1'},
+  )
 
 
 def test_dataset_name():
@@ -193,33 +203,49 @@ def test_dataset_name():
     ['name', 'result'],
     [
         ('ds1', (naming.DatasetName('ds1'), {})),
-        ('ds1:1.0.0', (naming.DatasetName('ds1'), {
-            'version': '1.0.0'
-        })),
+        ('ds1:1.0.0', (naming.DatasetName('ds1'), {'version': '1.0.0'})),
         ('ns1:ds1', (naming.DatasetName('ns1:ds1'), {})),
-        ('hugging_face:abc',
-         (naming.DatasetName(namespace='hugging_face', name='abc'), {})),
-        ('ns_1-b:ds1',
-         (naming.DatasetName(namespace='ns_1-b', name='ds1'), {})),
+        (
+            'hugging_face:abc',
+            (naming.DatasetName(namespace='hugging_face', name='abc'), {}),
+        ),
+        (
+            'ns_1-b:ds1',
+            (naming.DatasetName(namespace='ns_1-b', name='ds1'), {}),
+        ),
         (
             'ns1:ds1:1.0.0',
-            (naming.DatasetName('ns1:ds1'), {
-                'version': '1.0.0'
-            }),
+            (naming.DatasetName('ns1:ds1'), {'version': '1.0.0'}),
         ),
-        ('ns1:ds1/conf:1.0.0', (naming.DatasetName('ns1:ds1'), {
-            'version': '1.0.0',
-            'config': 'conf',
-        })),
-        ('grand-vision:katr/128x128:1.0.0',
-         (naming.DatasetName('grand-vision:katr'), {
-             'version': '1.0.0',
-             'config': '128x128',
-         })),
-        ('huggingface:swiss_judgment_prediction/all+mt',
-         (naming.DatasetName('huggingface:swiss_judgment_prediction'), {
-             'config': 'all+mt',
-         })),
+        (
+            'ns1:ds1/conf:1.0.0',
+            (
+                naming.DatasetName('ns1:ds1'),
+                {
+                    'version': '1.0.0',
+                    'config': 'conf',
+                },
+            ),
+        ),
+        (
+            'grand-vision:katr/128x128:1.0.0',
+            (
+                naming.DatasetName('grand-vision:katr'),
+                {
+                    'version': '1.0.0',
+                    'config': '128x128',
+                },
+            ),
+        ),
+        (
+            'huggingface:swiss_judgment_prediction/all+mt',
+            (
+                naming.DatasetName('huggingface:swiss_judgment_prediction'),
+                {
+                    'config': 'all+mt',
+                },
+            ),
+        ),
     ],
 )
 def test_parse_builder_name_kwargs(name, result):
@@ -229,10 +255,10 @@ def test_parse_builder_name_kwargs(name, result):
 def test_parse_builder_name_kwargs_with_kwargs():
   parse = naming.parse_builder_name_kwargs
 
-  assert parse(
-      'ds1', data_dir='/abc') == (naming.DatasetName('ds1'), {
-          'data_dir': '/abc'
-      })
+  assert parse('ds1', data_dir='/abc') == (
+      naming.DatasetName('ds1'),
+      {'data_dir': '/abc'},
+  )
 
   with pytest.raises(TypeError, match='got multiple values for keyword arg'):
     parse('ds1:1.0.0', version='1.0.0')  # Version defined twice
@@ -300,7 +326,8 @@ def test_filename_info_with_custom_template():
   # This is not valid because the template is for the train split
   assert not naming.FilenameInfo.is_valid(filename, filename_template=template)
   assert naming.FilenameInfo.is_valid(
-      filename, filename_template=template.replace(split='test'))
+      filename, filename_template=template.replace(split='test')
+  )
 
 
 def test_filename_info_with_custom_template_missing_fields():
@@ -338,58 +365,69 @@ def test_filename_info_invalid():
 
 def test_filename_info_with_path():
   filename_info = naming.FilenameInfo.from_str(
-      '/path/mnist-train.tfrecord-00032-of-01024')
+      '/path/mnist-train.tfrecord-00032-of-01024'
+  )
   assert filename_info == naming.FilenameInfo(
       dataset_name='mnist',
       split='train',
       filetype_suffix='tfrecord',
       shard_index=32,
       num_shards=1024,
-      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'))
+      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'),
+  )
 
 
 def test_filename_info_with_path_and_dash_in_split():
   filename_info = naming.FilenameInfo.from_str(
-      '/path/c4-af-validation.tfrecord-00032-of-01024')
+      '/path/c4-af-validation.tfrecord-00032-of-01024'
+  )
   assert filename_info == naming.FilenameInfo(
       dataset_name='c4',
       split='af-validation',
       filetype_suffix='tfrecord',
       shard_index=32,
       num_shards=1024,
-      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'))
+      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'),
+  )
 
 
 def test_filename_info_with_path_and_two_dashes_in_split():
   filename_info = naming.FilenameInfo.from_str(
-      '/path/c4-bg-Latn-validation.tfrecord-00032-of-01024')
+      '/path/c4-bg-Latn-validation.tfrecord-00032-of-01024'
+  )
   assert filename_info == naming.FilenameInfo(
       dataset_name='c4',
       split='bg-Latn-validation',
       filetype_suffix='tfrecord',
       shard_index=32,
       num_shards=1024,
-      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'))
+      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'),
+  )
 
 
 def test_sharded_file_template_sharded_filepath():
   template = _FILENAME_TEMPLATE_MNIST_DEFAULT
-  assert os.fspath(template.sharded_filepath(
-      shard_index=0,
-      num_shards=1)) == '/path/mnist-train.tfrecord-00000-of-00001'
-  assert os.fspath(template.sharded_filepath(
-      shard_index=0,
-      num_shards=25)) == '/path/mnist-train.tfrecord-00000-of-00025'
-  assert os.fspath(template.sharded_filepath(
-      shard_index=10,
-      num_shards=25)) == '/path/mnist-train.tfrecord-00010-of-00025'
+  assert (
+      os.fspath(template.sharded_filepath(shard_index=0, num_shards=1))
+      == '/path/mnist-train.tfrecord-00000-of-00001'
+  )
+  assert (
+      os.fspath(template.sharded_filepath(shard_index=0, num_shards=25))
+      == '/path/mnist-train.tfrecord-00000-of-00025'
+  )
+  assert (
+      os.fspath(template.sharded_filepath(shard_index=10, num_shards=25))
+      == '/path/mnist-train.tfrecord-00010-of-00025'
+  )
 
 
 def test_sharded_file_template_empty_filetype_suffix():
   with pytest.raises(
-      ValueError, match='Filetype suffix must be a non-empty string: .+'):
+      ValueError, match='Filetype suffix must be a non-empty string: .+'
+  ):
     naming.ShardedFileTemplate(
-        data_dir='/path', dataset_name='mnist', filetype_suffix='')
+        data_dir='/path', dataset_name='mnist', filetype_suffix=''
+    )
 
 
 def test_sharded_file_template_empty_split():
@@ -398,36 +436,49 @@ def test_sharded_file_template_empty_split():
         data_dir='/path',
         dataset_name='mnist',
         filetype_suffix='tfrecord',
-        split='')
+        split='',
+    )
 
 
 def test_sharded_file_template_shard_index():
   builder_dir = epath.Path('/my/path')
   template = naming.ShardedFileTemplate(
-      template='data/mnist-train.tfrecord-{SHARD_INDEX}', data_dir=builder_dir)
-  assert os.fspath(template.sharded_filepath(
-      shard_index=12,
-      num_shards=100)) == '/my/path/data/mnist-train.tfrecord-00012'
-  assert os.fspath(template.sharded_filepaths_pattern()
-                  ) == '/my/path/data/mnist-train.tfrecord*'
-  assert os.fspath(template.sharded_filepaths_pattern(
-      num_shards=100)) == '/my/path/data/mnist-train.tfrecord@100'
+      template='data/mnist-train.tfrecord-{SHARD_INDEX}', data_dir=builder_dir
+  )
+  assert (
+      os.fspath(template.sharded_filepath(shard_index=12, num_shards=100))
+      == '/my/path/data/mnist-train.tfrecord-00012'
+  )
+  assert (
+      os.fspath(template.sharded_filepaths_pattern())
+      == '/my/path/data/mnist-train.tfrecord*'
+  )
+  assert (
+      os.fspath(template.sharded_filepaths_pattern(num_shards=100))
+      == '/my/path/data/mnist-train.tfrecord@100'
+  )
 
 
 def test_sharded_file_template_sharded_filepath_shard_x_of_y():
   builder_dir = epath.Path('/my/path')
   template_explicit = naming.ShardedFileTemplate(
       template='data/mnist-train.tfrecord-{SHARD_INDEX}-of-{NUM_SHARDS}',
-      data_dir=builder_dir)
-  assert os.fspath(
-      template_explicit.sharded_filepath(shard_index=12, num_shards=100)
-  ) == '/my/path/data/mnist-train.tfrecord-00012-of-00100'
+      data_dir=builder_dir,
+  )
+  assert (
+      os.fspath(
+          template_explicit.sharded_filepath(shard_index=12, num_shards=100)
+      )
+      == '/my/path/data/mnist-train.tfrecord-00012-of-00100'
+  )
 
   template = naming.ShardedFileTemplate(
-      template='data/mnist-train.tfrecord-{SHARD_X_OF_Y}', data_dir=builder_dir)
-  assert os.fspath(template.sharded_filepath(
-      shard_index=12,
-      num_shards=100)) == '/my/path/data/mnist-train.tfrecord-00012-of-00100'
+      template='data/mnist-train.tfrecord-{SHARD_X_OF_Y}', data_dir=builder_dir
+  )
+  assert (
+      os.fspath(template.sharded_filepath(shard_index=12, num_shards=100))
+      == '/my/path/data/mnist-train.tfrecord-00012-of-00100'
+  )
 
 
 def test_sharded_file_template_sharded_filepath_shard_x_of_y_more_digits():
@@ -439,9 +490,10 @@ def test_sharded_file_template_sharded_filepath_shard_x_of_y_more_digits():
       filetype_suffix='tfrecord',
       split='train',
   )
-  assert os.fspath(
-      template.sharded_filepath(shard_index=12, num_shards=1234567)
-  ) == '/my/path/data/mnist-train.tfrecord-0000012-of-1234567'
+  assert (
+      os.fspath(template.sharded_filepath(shard_index=12, num_shards=1234567))
+      == '/my/path/data/mnist-train.tfrecord-0000012-of-1234567'
+  )
 
 
 def test_sharded_file_template_no_template():
@@ -450,16 +502,19 @@ def test_sharded_file_template_no_template():
       data_dir=builder_dir,
       dataset_name='imagenet',
       filetype_suffix='riegeli',
-      split='test')
-  assert os.fspath(template.sharded_filepath(
-      shard_index=12,
-      num_shards=100)) == '/my/path/imagenet-test.riegeli-00012-of-00100'
+      split='test',
+  )
+  assert (
+      os.fspath(template.sharded_filepath(shard_index=12, num_shards=100))
+      == '/my/path/imagenet-test.riegeli-00012-of-00100'
+  )
 
 
 def test_sharded_file_template_no_template_incomplete():
   builder_dir = epath.Path('/my/path')
   template_without_split = naming.ShardedFileTemplate(
-      data_dir=builder_dir, dataset_name='imagenet', filetype_suffix='riegeli')
+      data_dir=builder_dir, dataset_name='imagenet', filetype_suffix='riegeli'
+  )
   with pytest.raises(KeyError):
     template_without_split.sharded_filepath(shard_index=12, num_shards=100)
 
@@ -472,27 +527,43 @@ def test_sharded_file_template_template_and_properties():
       # dataset_name is ignored because the template doesn't have {DATASET}
       dataset_name='imagenet',
       filetype_suffix='riegeli',
-      split='test')
-  assert os.fspath(template.sharded_filepath(
-      shard_index=12,
-      num_shards=100)) == '/my/path/data/mnist-test.riegeli-00012'
+      split='test',
+  )
+  assert (
+      os.fspath(template.sharded_filepath(shard_index=12, num_shards=100))
+      == '/my/path/data/mnist-test.riegeli-00012'
+  )
 
 
 def test_replace_shard_suffix():
-  assert naming._replace_shard_suffix(
-      filepath='/path/file-00001-of-01234',
-      replacement='repl') == '/path/filerepl'
-  assert naming._replace_shard_suffix(
-      filepath='/path/file00001-of-01234',
-      replacement='repl') == '/path/filerepl'
-  assert naming._replace_shard_suffix(
-      filepath='/path/file-00001', replacement='repl') == '/path/filerepl'
+  assert (
+      naming._replace_shard_suffix(
+          filepath='/path/file-00001-of-01234', replacement='repl'
+      )
+      == '/path/filerepl'
+  )
+  assert (
+      naming._replace_shard_suffix(
+          filepath='/path/file00001-of-01234', replacement='repl'
+      )
+      == '/path/filerepl'
+  )
+  assert (
+      naming._replace_shard_suffix(
+          filepath='/path/file-00001', replacement='repl'
+      )
+      == '/path/filerepl'
+  )
 
 
 def test_replace_shard_suffix_folder_similar_to_shard():
-  assert naming._replace_shard_suffix(
-      filepath='/path/i-look-like-a-shard-000001/file-00001-of-01234',
-      replacement='repl') == '/path/i-look-like-a-shard-000001/filerepl'
+  assert (
+      naming._replace_shard_suffix(
+          filepath='/path/i-look-like-a-shard-000001/file-00001-of-01234',
+          replacement='repl',
+      )
+      == '/path/i-look-like-a-shard-000001/filerepl'
+  )
 
 
 def test_replace_shard_suffix_no_suffix_found():
@@ -501,14 +572,18 @@ def test_replace_shard_suffix_no_suffix_found():
 
 
 def test_filename_template_to_regex():
+  assert (
+      naming._filename_template_to_regex('{DATASET}')
+      == r'(?P<dataset_name>[a-zA-Z][\w]*)'
+  )
   assert naming._filename_template_to_regex(
-      '{DATASET}') == r'(?P<dataset_name>[a-zA-Z][\w]*)'
-  assert naming._filename_template_to_regex(
-      naming.DEFAULT_FILENAME_TEMPLATE) == (
-          r'(?P<dataset_name>[a-zA-Z][\w]*)'
-          r'-(?P<split>(\w|-)+)'
-          r'\.(?P<filetype_suffix>\w+)'
-          r'-(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})')
+      naming.DEFAULT_FILENAME_TEMPLATE
+  ) == (
+      r'(?P<dataset_name>[a-zA-Z][\w]*)'
+      r'-(?P<split>(\w|-)+)'
+      r'\.(?P<filetype_suffix>\w+)'
+      r'-(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})'
+  )
 
 
 def test_filename_template_to_regex_unknown_variables():
@@ -516,110 +591,147 @@ def test_filename_template_to_regex_unknown_variables():
     naming._filename_template_to_regex('{XYZ}')
 
 
-@pytest.mark.parametrize(['name', 'result'], [
-    ('mnist-train.tfrecord-00000-of-00001', True),
-    ('xyz-train.tfrecord-00000-of-00001', False),
-    ('mnist-xyz.tfrecord-00000-of-00001', False),
-    ('mnist-train.xyz-00000-of-00001', False),
-    ('mnist-train.tfrecord-a-of-b', False),
-])
+@pytest.mark.parametrize(
+    ['name', 'result'],
+    [
+        ('mnist-train.tfrecord-00000-of-00001', True),
+        ('xyz-train.tfrecord-00000-of-00001', False),
+        ('mnist-xyz.tfrecord-00000-of-00001', False),
+        ('mnist-train.xyz-00000-of-00001', False),
+        ('mnist-train.tfrecord-a-of-b', False),
+    ],
+)
 def test_sharded_file_template_is_valid_default_template(name, result):
   template = _FILENAME_TEMPLATE_MNIST_DEFAULT
   assert template.is_valid(name) == result
 
 
-@pytest.mark.parametrize(['name', 'result'], [
-    ('train.1', False),
-    ('train.00001', True),
-    ('train-00001', False),
-    ('train.tfrecord.00001', False),
-    ('mnist-train.tfrecord-00000-of-00001', False),
-])
+@pytest.mark.parametrize(
+    ['name', 'result'],
+    [
+        ('train.1', False),
+        ('train.00001', True),
+        ('train-00001', False),
+        ('train.tfrecord.00001', False),
+        ('mnist-train.tfrecord-00000-of-00001', False),
+    ],
+)
 def test_sharded_file_template_is_valid_custom_template(name, result):
   template = _FILENAME_TEMPLATE_CUSTOM_FULL
   assert template.is_valid(name) == result
 
 
-@pytest.mark.parametrize(['name', 'result'], [
-    ('mnist-train.tfrecord-00000-of-00001',
-     naming.FilenameInfo(
-         dataset_name='mnist',
-         split='train',
-         filetype_suffix='tfrecord',
-         shard_index=0,
-         num_shards=1,
-         filename_template=_FILENAME_TEMPLATE_MNIST_DEFAULT)),
-    ('mnist-train.tfrecord-00123-of-00456',
-     naming.FilenameInfo(
-         dataset_name='mnist',
-         split='train',
-         filetype_suffix='tfrecord',
-         shard_index=123,
-         num_shards=456,
-         filename_template=_FILENAME_TEMPLATE_MNIST_DEFAULT)),
-    ('train1', None),
-])
+@pytest.mark.parametrize(
+    ['name', 'result'],
+    [
+        (
+            'mnist-train.tfrecord-00000-of-00001',
+            naming.FilenameInfo(
+                dataset_name='mnist',
+                split='train',
+                filetype_suffix='tfrecord',
+                shard_index=0,
+                num_shards=1,
+                filename_template=_FILENAME_TEMPLATE_MNIST_DEFAULT,
+            ),
+        ),
+        (
+            'mnist-train.tfrecord-00123-of-00456',
+            naming.FilenameInfo(
+                dataset_name='mnist',
+                split='train',
+                filetype_suffix='tfrecord',
+                shard_index=123,
+                num_shards=456,
+                filename_template=_FILENAME_TEMPLATE_MNIST_DEFAULT,
+            ),
+        ),
+        ('train1', None),
+    ],
+)
 def test_sharded_file_template_parse_filename_info(name, result):
   template = _FILENAME_TEMPLATE_MNIST_DEFAULT
   assert template.parse_filename_info(name) == result
 
 
-@pytest.mark.parametrize(['name', 'result'], [
-    ('train.00123',
-     naming.FilenameInfo(
-         dataset_name=None,
-         split='train',
-         filetype_suffix=None,
-         shard_index=123,
-         num_shards=None,
-         filename_template=_FILENAME_TEMPLATE_CUSTOM_NO_EXTRA)),
-    ('mnist-train.tfrecord-00000-of-00001', None),
-    ('train1', None),
-])
+@pytest.mark.parametrize(
+    ['name', 'result'],
+    [
+        (
+            'train.00123',
+            naming.FilenameInfo(
+                dataset_name=None,
+                split='train',
+                filetype_suffix=None,
+                shard_index=123,
+                num_shards=None,
+                filename_template=_FILENAME_TEMPLATE_CUSTOM_NO_EXTRA,
+            ),
+        ),
+        ('mnist-train.tfrecord-00000-of-00001', None),
+        ('train1', None),
+    ],
+)
 def test_sharded_file_template_parse_filename_info_custom_template(
-    name, result):
+    name, result
+):
   template = _FILENAME_TEMPLATE_CUSTOM_NO_EXTRA
   assert template.parse_filename_info(name) == result
 
 
-@pytest.mark.parametrize(['name', 'result'], [
-    ('train.00123',
-     naming.FilenameInfo(
-         dataset_name='mnist',
-         split='train',
-         filetype_suffix='tfrecord',
-         shard_index=123,
-         num_shards=None,
-         filename_template=_FILENAME_TEMPLATE_CUSTOM_FULL)),
-    ('test.00042',
-     naming.FilenameInfo(
-         dataset_name='mnist',
-         split='test',
-         filetype_suffix='tfrecord',
-         shard_index=42,
-         num_shards=None,
-         filename_template=_FILENAME_TEMPLATE_CUSTOM_FULL)),
-    ('mnist-train.tfrecord-00000-of-00001', None),
-    ('train1', None),
-])
+@pytest.mark.parametrize(
+    ['name', 'result'],
+    [
+        (
+            'train.00123',
+            naming.FilenameInfo(
+                dataset_name='mnist',
+                split='train',
+                filetype_suffix='tfrecord',
+                shard_index=123,
+                num_shards=None,
+                filename_template=_FILENAME_TEMPLATE_CUSTOM_FULL,
+            ),
+        ),
+        (
+            'test.00042',
+            naming.FilenameInfo(
+                dataset_name='mnist',
+                split='test',
+                filetype_suffix='tfrecord',
+                shard_index=42,
+                num_shards=None,
+                filename_template=_FILENAME_TEMPLATE_CUSTOM_FULL,
+            ),
+        ),
+        ('mnist-train.tfrecord-00000-of-00001', None),
+        ('train1', None),
+    ],
+)
 def test_sharded_file_template_parse_filename_info_custom_template_add_missing(
-    name, result):
+    name, result
+):
   template = _FILENAME_TEMPLATE_CUSTOM_FULL
   assert template.parse_filename_info(name) == result
 
 
 @pytest.mark.parametrize(
-    ('tfds_name', 'namespace', 'split_mapping', 'data_dir', 'ds_name',
-     'version', 'config'),
+    (
+        'tfds_name',
+        'namespace',
+        'split_mapping',
+        'data_dir',
+        'ds_name',
+        'version',
+        'config',
+    ),
     [
         # Dataset with a config and a version.
         ('ds/config:1.2.3', None, None, None, 'ds', '1.2.3', 'config'),
         # Dataset with a config and a version and a data_dir.
         ('ds/config:1.2.3', None, None, '/a/b', 'ds', '1.2.3', 'config'),
         # Test having a split mapping.
-        ('ds/config:1.2.3', None, {
-            'x': 'y'
-        }, None, 'ds', '1.2.3', 'config'),
+        ('ds/config:1.2.3', None, {'x': 'y'}, None, 'ds', '1.2.3', 'config'),
         # Dataset without a config but with a version.
         ('ds:1.2.3', None, None, None, 'ds', '1.2.3', None),
         # Dataset with a config but without a version.
@@ -628,59 +740,74 @@ def test_sharded_file_template_parse_filename_info_custom_template_add_missing(
         ('ds', None, None, None, 'ds', None, None),
         # Dataset with a namespace.
         ('ns:ds/config:1.2.3', 'ns', None, '/a/b', 'ds', '1.2.3', 'config'),
-    ])
-def test_dataset_reference_from_tfds_name(tfds_name, namespace, split_mapping,
-                                          data_dir, ds_name, version, config):
+    ],
+)
+def test_dataset_reference_from_tfds_name(
+    tfds_name, namespace, split_mapping, data_dir, ds_name, version, config
+):
   actual = naming.DatasetReference.from_tfds_name(
-      tfds_name=tfds_name, split_mapping=split_mapping, data_dir=data_dir)
+      tfds_name=tfds_name, split_mapping=split_mapping, data_dir=data_dir
+  )
   assert actual == naming.DatasetReference(
       dataset_name=ds_name,
       namespace=namespace,
       version=version,
       config=config,
       split_mapping=split_mapping,
-      data_dir=data_dir)
+      data_dir=data_dir,
+  )
 
 
 @pytest.mark.parametrize(
-    ('ds_name', 'namespace', 'version', 'config', 'tfds_name'), [
+    ('ds_name', 'namespace', 'version', 'config', 'tfds_name'),
+    [
         ('ds', 'ns', '1.2.3', 'config', 'ns:ds/config:1.2.3'),
         ('ds', None, '1.2.3', 'config', 'ds/config:1.2.3'),
         ('ds', None, '1.2.3', None, 'ds:1.2.3'),
         ('ds', None, None, None, 'ds'),
-    ])
-def test_dataset_reference_tfds_name(ds_name, namespace, version, config,
-                                     tfds_name):
+    ],
+)
+def test_dataset_reference_tfds_name(
+    ds_name, namespace, version, config, tfds_name
+):
   reference = naming.DatasetReference(
-      dataset_name=ds_name, namespace=namespace, version=version, config=config)
+      dataset_name=ds_name, namespace=namespace, version=version, config=config
+  )
   assert reference.tfds_name() == tfds_name
 
 
 def test_dataset_reference_tfds_name_without_version():
   reference = naming.DatasetReference(
-      dataset_name='ds', version='1.2.3', config='config')
+      dataset_name='ds', version='1.2.3', config='config'
+  )
   assert reference.tfds_name(include_version=False) == 'ds/config'
 
 
-@pytest.mark.parametrize(('tfds_name', 'data_dir', 'dataset_dir'), [
-    ('ns:ds/config:1.2.3', '/a/b', '/a/b/ds/config/1.2.3'),
-    ('ds/config:1.2.3', '/a/b', '/a/b/ds/config/1.2.3'),
-    ('ds:1.2.3', '/a/b', '/a/b/ds/1.2.3'),
-])
+@pytest.mark.parametrize(
+    ('tfds_name', 'data_dir', 'dataset_dir'),
+    [
+        ('ns:ds/config:1.2.3', '/a/b', '/a/b/ds/config/1.2.3'),
+        ('ds/config:1.2.3', '/a/b', '/a/b/ds/config/1.2.3'),
+        ('ds:1.2.3', '/a/b', '/a/b/ds/1.2.3'),
+    ],
+)
 def test_dataset_reference_dataset_dir(tfds_name, data_dir, dataset_dir):
   reference = naming.DatasetReference.from_tfds_name(
-      tfds_name=tfds_name, data_dir=data_dir)
+      tfds_name=tfds_name, data_dir=data_dir
+  )
   assert os.fspath(reference.dataset_dir()) == dataset_dir
 
   # Also test passing the data_dir to `.dataset_dir`
   reference = naming.DatasetReference.from_tfds_name(
-      tfds_name=tfds_name, data_dir='/something/else')
+      tfds_name=tfds_name, data_dir='/something/else'
+  )
   assert os.fspath(reference.dataset_dir(data_dir=data_dir)) == dataset_dir
 
 
 def test_dataset_reference_get_split():
   reference = naming.DatasetReference.from_tfds_name(
-      'ds/config:1.2.3', split_mapping={'x': 'y'})
+      'ds/config:1.2.3', split_mapping={'x': 'y'}
+  )
   assert reference.get_split('x') == 'y'
   assert reference.get_split('y') == 'y'
   assert reference.get_split('z') == 'z'
@@ -688,19 +815,19 @@ def test_dataset_reference_get_split():
 
 def test_references_for():
   expected = {
-      'one':
-          naming.DatasetReference(
-              dataset_name='ds1', version='1.2.3', config='config'),
-      'two':
-          naming.DatasetReference(dataset_name='ds2', version='1.0.0')
+      'one': naming.DatasetReference(
+          dataset_name='ds1', version='1.2.3', config='config'
+      ),
+      'two': naming.DatasetReference(dataset_name='ds2', version='1.0.0'),
   }
-  assert naming.references_for({
-      'one': 'ds1/config:1.2.3',
-      'two': 'ds2:1.0.0'
-  }) == expected
+  assert (
+      naming.references_for({'one': 'ds1/config:1.2.3', 'two': 'ds2:1.0.0'})
+      == expected
+  )
 
 
 def test_reference_for():
   expected = naming.DatasetReference(
-      dataset_name='ds', version='1.2.3', config='config')
+      dataset_name='ds', version='1.2.3', config='config'
+  )
   assert naming.reference_for('ds/config:1.2.3') == expected

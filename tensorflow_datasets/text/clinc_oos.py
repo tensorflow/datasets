@@ -84,7 +84,7 @@ class ClincOOS(tfds.core.GeneratorBasedBuilder):
             'intent': np.int32,
             'domain': np.int32,
             'intent_name': tfds.features.Text(),
-            'domain_name': tfds.features.Text()
+            'domain_name': tfds.features.Text(),
         }),
         supervised_keys=('text', 'intent'),
         homepage='https://github.com/clinc/oos-eval/',

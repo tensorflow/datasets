@@ -37,7 +37,7 @@ _CPC_DESCRIPTION = {
     "f": "Mechanical Engineering; Lightning; Heating; Weapons; Blasting",
     "g": "Physics",
     "h": "Electricity",
-    "y": "General tagging of new or cross-sectional technology"
+    "y": "General tagging of new or cross-sectional technology",
 }
 
 
@@ -58,14 +58,15 @@ class BigPatentConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version("2.1.2"),
         supported_versions=[
             tfds.core.Version("1.0.0"),
-            tfds.core.Version("2.0.0")
+            tfds.core.Version("2.0.0"),
         ],
         release_notes={
             "2.1.2": "Fix update to cased raw strings.",
             "2.0.0": "Update to use cased raw strings",
             "1.0.0": "lower cased tokenized words",
         },
-        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
+        **kwargs,
+    )  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.cpc_codes = cpc_codes
 
 
@@ -74,24 +75,25 @@ class Builder(tfds.core.BeamBasedBuilder):
 
   BUILDER_CONFIGS = [
       BigPatentConfig(
-          cpc_codes="*",
-          name="all",
-          description="Patents under all categories."),
+          cpc_codes="*", name="all", description="Patents under all categories."
+      ),
   ] + [
       BigPatentConfig(  # pylint:disable=g-complex-comprehension
           cpc_codes=k,
           name=k,
-          description=("Patents under Cooperative Patent Classification (CPC)"
-                       "{0}: {1}".format(k, v)),
-      ) for k, v in sorted(_CPC_DESCRIPTION.items())
+          description=(
+              "Patents under Cooperative Patent Classification (CPC)"
+              "{0}: {1}".format(k, v)
+          ),
+      )
+      for k, v in sorted(_CPC_DESCRIPTION.items())
   ]
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            _DOCUMENT: tfds.features.Text(),
-            _SUMMARY: tfds.features.Text()
-        }),
+        features=tfds.features.FeaturesDict(
+            {_DOCUMENT: tfds.features.Text(), _SUMMARY: tfds.features.Text()}
+        ),
         supervised_keys=(_DOCUMENT, _SUMMARY),
         homepage="https://evasharma.github.io/bigpatent/",
     )
@@ -100,10 +102,12 @@ class Builder(tfds.core.BeamBasedBuilder):
     """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(_URL)
     split_types = ["train", "val", "test"]
-    extract_paths = dl_manager.extract({
-        k: os.path.join(dl_path, "bigPatentDataNonTokenized", k + ".tar.gz")
-        for k in split_types
-    })
+    extract_paths = dl_manager.extract(
+        {
+            k: os.path.join(dl_path, "bigPatentDataNonTokenized", k + ".tar.gz")
+            for k in split_types
+        }
+    )
     extract_paths = {k: os.path.join(extract_paths[k], k) for k in split_types}
 
     return [
@@ -129,13 +133,15 @@ class Builder(tfds.core.BeamBasedBuilder):
       json_obj = json.loads(row)
       yield json_obj["publication_number"], {
           _DOCUMENT: _bigpatent_clean_description(json_obj[_DOCUMENT]),
-          _SUMMARY: _bigpatent_clean_abstract(json_obj[_SUMMARY])
+          _SUMMARY: _bigpatent_clean_abstract(json_obj[_SUMMARY]),
       }
 
     file_pattern = os.path.join(path, self.builder_config.cpc_codes, "*")
-    return (pipeline
-            | "ReadTextIO" >> beam.io.textio.ReadFromText(file_pattern)
-            | beam.FlatMap(_process_example))
+    return (
+        pipeline
+        | "ReadTextIO" >> beam.io.textio.ReadFromText(file_pattern)
+        | beam.FlatMap(_process_example)
+    )
 
 
 # The preprocessing functions below are kindly provided by

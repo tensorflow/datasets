@@ -39,11 +39,18 @@ The original source is the Common Crawl dataset: https://commoncrawl.org
 class C4WSRSConfig(tfds.core.BuilderConfig):
   """BuilderConfig for C4-WSRS dataset."""
 
-  def __init__(self, name: str, max_sentences_per_snippet: int,
-               max_snippet_char_len: int, alpha_keep_no_rs: float,
-               alpha_keep_rs: float, subsitution_rate: float,
-               min_snippet_token_len: int, num_snippets_per_substitution: int,
-               **kwargs):
+  def __init__(
+      self,
+      name: str,
+      max_sentences_per_snippet: int,
+      max_snippet_char_len: int,
+      alpha_keep_no_rs: float,
+      alpha_keep_rs: float,
+      subsitution_rate: float,
+      min_snippet_token_len: int,
+      num_snippets_per_substitution: int,
+      **kwargs,
+  ):
     """Initializes the BuilderConfig for C4-WSRS.
 
     Args:
@@ -95,11 +102,12 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
           max_sentences_per_snippet=3,
           max_snippet_char_len=1024,
           alpha_keep_no_rs=1.5,
-          alpha_keep_rs=1.,
+          alpha_keep_rs=1.0,
           subsitution_rate=0.95,
           min_snippet_token_len=3,
           num_snippets_per_substitution=4000,
-          description='Default C4-WSRS dataset.'),
+          description='Default C4-WSRS dataset.',
+      ),
   ]
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -118,7 +126,8 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     abbreviation_expansions_dict_file = dl_manager.download(
-        _ABBREV_EXPANSION_DICT_URI)
+        _ABBREV_EXPANSION_DICT_URI
+    )
     abbreviations_by_expansion = collections.defaultdict(list)
     with tf.io.gfile.GFile(abbreviation_expansions_dict_file) as f:
       reader = csv.reader(f)
@@ -126,15 +135,15 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
         abbrev, exp = row
         abbreviations_by_expansion[exp].append(abbrev)
     return {
-        'train':
-            self._generate_examples('train', abbreviations_by_expansion),
-        'validation':
-            self._generate_examples('validation', abbreviations_by_expansion),
+        'train': self._generate_examples('train', abbreviations_by_expansion),
+        'validation': self._generate_examples(
+            'validation', abbreviations_by_expansion
+        ),
     }
 
-  def _generate_examples(self, split: str,
-                         abbreviations_by_expansion: Mapping[str,
-                                                             Sequence[str]]):
+  def _generate_examples(
+      self, split: str, abbreviations_by_expansion: Mapping[str, Sequence[str]]
+  ):
     """Yields examples."""
 
     def _process_example(element: tuple[str, WSRSFeatures]):
@@ -145,28 +154,38 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
       }
 
     expansion_re = c4_wsrs_utils.create_word_finder_regex(
-        sorted(abbreviations_by_expansion.keys(), key=len, reverse=True))
+        sorted(abbreviations_by_expansion.keys(), key=len, reverse=True)
+    )
 
     beam = tfds.core.lazy_imports.apache_beam
 
     builder = tfds.builder('c4', config='en', version='3.1.0')
-    return (tfds.beam.ReadFromTFDS(builder, split=split, workers_per_shard=10)
-            | 'AsNumpy' >> beam.Map(tfds.as_numpy)
-            | 'ExtractSnippets' >> beam.FlatMap(
-                c4_wsrs_utils.extract_snippets,
-                self.builder_config.max_sentences_per_snippet,
-                abbreviations_by_expansion, expansion_re,
-                self.builder_config.max_snippet_char_len,
-                self.builder_config.alpha_keep_no_rs,
-                self.builder_config.alpha_keep_rs)
-            | 'ReshuffleSnippets1' >> beam.Reshuffle()
-            | 'ReverseSubstitution' >> beam.FlatMap(
-                c4_wsrs_utils.reverse_substitution,
-                self.builder_config.subsitution_rate,
-                self.builder_config.min_snippet_token_len)
-            | 'GroupByRarestSubstitution' >> beam.GroupByKey()
-            | 'SampleSnippetsByRarestSubstitution' >> beam.FlatMap(
-                c4_wsrs_utils.sample_snippets_by_substitution,
-                self.builder_config.num_snippets_per_substitution)
-            | 'ReshuffleSnippets2' >> beam.Reshuffle()
-            | 'ProcessExamples' >> beam.Map(_process_example))
+    return (
+        tfds.beam.ReadFromTFDS(builder, split=split, workers_per_shard=10)
+        | 'AsNumpy' >> beam.Map(tfds.as_numpy)
+        | 'ExtractSnippets'
+        >> beam.FlatMap(
+            c4_wsrs_utils.extract_snippets,
+            self.builder_config.max_sentences_per_snippet,
+            abbreviations_by_expansion,
+            expansion_re,
+            self.builder_config.max_snippet_char_len,
+            self.builder_config.alpha_keep_no_rs,
+            self.builder_config.alpha_keep_rs,
+        )
+        | 'ReshuffleSnippets1' >> beam.Reshuffle()
+        | 'ReverseSubstitution'
+        >> beam.FlatMap(
+            c4_wsrs_utils.reverse_substitution,
+            self.builder_config.subsitution_rate,
+            self.builder_config.min_snippet_token_len,
+        )
+        | 'GroupByRarestSubstitution' >> beam.GroupByKey()
+        | 'SampleSnippetsByRarestSubstitution'
+        >> beam.FlatMap(
+            c4_wsrs_utils.sample_snippets_by_substitution,
+            self.builder_config.num_snippets_per_substitution,
+        )
+        | 'ReshuffleSnippets2' >> beam.Reshuffle()
+        | 'ProcessExamples' >> beam.Map(_process_example)
+    )

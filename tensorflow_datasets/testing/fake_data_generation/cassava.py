@@ -26,15 +26,17 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
+flags.DEFINE_string(
+    'tfds_dir', py_utils.tfds_dir(), 'Path to tensorflow_datasets directory'
+)
 
 FLAGS = flags.FLAGS
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'cassava')
+  return os.path.join(
+      FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples', 'cassava'
+  )
 
 
 def _save_images(jpg, imgpaths):
@@ -65,7 +67,8 @@ def main(argv):
     example_imgs = []
     for category in ['train', 'test', 'validation']:
       example = '{cat}/{label}/{cat}-{label}-{id}.jpg'.format(
-          label=label, id=idx, cat=category)
+          label=label, id=idx, cat=category
+      )
       example_imgs.append(os.path.join(out_path, example))
     _save_images(jpg, example_imgs)
 

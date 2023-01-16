@@ -49,23 +49,18 @@ class Coqa(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
-
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "source":
-                tfds.features.Text(),
-            "story":
-                tfds.features.Text(),
-            "questions":
-                tfds.features.Sequence(tfds.features.Text()),
-            "answers":
-                tfds.features.Sequence({
-                    "input_text": tfds.features.Text(),
-                    "answer_start": np.int32,
-                    "answer_end": np.int32,
-                }),
+            "source": tfds.features.Text(),
+            "story": tfds.features.Text(),
+            "questions": tfds.features.Sequence(tfds.features.Text()),
+            "answers": tfds.features.Sequence({
+                "input_text": tfds.features.Text(),
+                "answer_start": np.int32,
+                "answer_end": np.int32,
+            }),
         }),
         supervised_keys=None,
         homepage=_HOMEPAGE_URL,
@@ -82,12 +77,14 @@ class Coqa(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "filepath": downloaded_files["train"],
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "filepath": downloaded_files["test"],
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, filepath):
@@ -109,6 +106,6 @@ class Coqa(tfds.core.GeneratorBasedBuilder):
             "answers": {
                 "input_text": answers,
                 "answer_start": answers_start,
-                "answer_end": answers_end
+                "answer_end": answers_end,
             },
         }

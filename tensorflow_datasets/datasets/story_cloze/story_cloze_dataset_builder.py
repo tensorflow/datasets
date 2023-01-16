@@ -34,7 +34,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   }
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(name='2016', description='2018 year'),
-      tfds.core.BuilderConfig(name='2018', description='2018 year')
+      tfds.core.BuilderConfig(name='2018', description='2018 year'),
   ]
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Visit https://www.cs.rochester.edu/nlp/rocstories/ and fill out the google
@@ -90,11 +90,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       reader = csv.DictReader(f)
       for row in reader:
         context = ' '.join([
-            row['InputSentence1'], row['InputSentence2'], row['InputSentence3'],
-            row['InputSentence4']
+            row['InputSentence1'],
+            row['InputSentence2'],
+            row['InputSentence3'],
+            row['InputSentence4'],
         ])
         endings = [
-            row['RandomFifthSentenceQuiz1'], row['RandomFifthSentenceQuiz2']
+            row['RandomFifthSentenceQuiz1'],
+            row['RandomFifthSentenceQuiz2'],
         ]
 
         yield row['InputStoryid'], {

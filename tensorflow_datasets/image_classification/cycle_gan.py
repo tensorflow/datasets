@@ -45,9 +45,17 @@ _DL_URL = "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
 
 # "ae_photos" : Not added because trainA and trainB are missing.
 _DATA_OPTIONS = [
-    "apple2orange", "summer2winter_yosemite", "horse2zebra", "monet2photo",
-    "cezanne2photo", "ukiyoe2photo", "vangogh2photo", "maps", "cityscapes",
-    "facades", "iphone2dslr_flower"
+    "apple2orange",
+    "summer2winter_yosemite",
+    "horse2zebra",
+    "monet2photo",
+    "cezanne2photo",
+    "ukiyoe2photo",
+    "vangogh2photo",
+    "maps",
+    "cityscapes",
+    "facades",
+    "iphone2dslr_flower",
 ]
 
 _DL_URLS = {name: _DL_URL + name + ".zip" for name in _DATA_OPTIONS}
@@ -81,20 +89,25 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
               "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
           },
           data=config_name,
-      ) for config_name in _DATA_OPTIONS
+      )
+      for config_name in _DATA_OPTIONS
   ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description="A dataset consisting of images from two classes A and "
-        "B (For example: horses/zebras, apple/orange,...)",
+        description=(
+            "A dataset consisting of images from two classes A and "
+            "B (For example: horses/zebras, apple/orange,...)"
+        ),
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names=["A", "B"]),
         }),
         supervised_keys=("image", "label"),
-        homepage="https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/",
+        homepage=(
+            "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
+        ),
         citation=_CITATION,
     )
 
@@ -112,25 +125,33 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name="trainA", gen_kwargs={
+            name="trainA",
+            gen_kwargs={
                 "path": train_a_path,
                 "label": "A",
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
-            name="trainB", gen_kwargs={
+            name="trainB",
+            gen_kwargs={
                 "path": train_b_path,
                 "label": "B",
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
-            name="testA", gen_kwargs={
+            name="testA",
+            gen_kwargs={
                 "path": test_a_path,
                 "label": "A",
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
-            name="testB", gen_kwargs={
+            name="testB",
+            gen_kwargs={
                 "path": test_b_path,
                 "label": "B",
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, path, label):

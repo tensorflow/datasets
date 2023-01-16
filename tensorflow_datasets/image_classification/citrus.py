@@ -67,7 +67,7 @@ class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(names=_LEAVES_LABELS)
+            "label": tfds.features.ClassLabel(names=_LEAVES_LABELS),
         }),
         supervised_keys=("image", "label"),
         homepage="https://data.mendeley.com/datasets/3f83gxmv57/2",
@@ -79,7 +79,8 @@ class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"datapath": path})
+            name=tfds.Split.TRAIN, gen_kwargs={"datapath": path}
+        )
     ]
 
   def _generate_examples(self, datapath):

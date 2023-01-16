@@ -20,6 +20,7 @@ import tensorflow_datasets.public_api as tfds
 
 class BooksumTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for booksum dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ["book", "chapter"]
 
   DATASET_CLASS = booksum_dataset_builder.Builder

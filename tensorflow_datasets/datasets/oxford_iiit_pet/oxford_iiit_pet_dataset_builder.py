@@ -23,15 +23,43 @@ import tensorflow_datasets.public_api as tfds
 _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 
 _LABEL_CLASSES = [
-    "Abyssinian", "american_bulldog", "american_pit_bull_terrier",
-    "basset_hound", "beagle", "Bengal", "Birman", "Bombay", "boxer",
-    "British_Shorthair", "chihuahua", "Egyptian_Mau", "english_cocker_spaniel",
-    "english_setter", "german_shorthaired", "great_pyrenees", "havanese",
-    "japanese_chin", "keeshond", "leonberger", "Maine_Coon",
-    "miniature_pinscher", "newfoundland", "Persian", "pomeranian", "pug",
-    "Ragdoll", "Russian_Blue", "saint_bernard", "samoyed", "scottish_terrier",
-    "shiba_inu", "Siamese", "Sphynx", "staffordshire_bull_terrier",
-    "wheaten_terrier", "yorkshire_terrier"
+    "Abyssinian",
+    "american_bulldog",
+    "american_pit_bull_terrier",
+    "basset_hound",
+    "beagle",
+    "Bengal",
+    "Birman",
+    "Bombay",
+    "boxer",
+    "British_Shorthair",
+    "chihuahua",
+    "Egyptian_Mau",
+    "english_cocker_spaniel",
+    "english_setter",
+    "german_shorthaired",
+    "great_pyrenees",
+    "havanese",
+    "japanese_chin",
+    "keeshond",
+    "leonberger",
+    "Maine_Coon",
+    "miniature_pinscher",
+    "newfoundland",
+    "Persian",
+    "pomeranian",
+    "pug",
+    "Ragdoll",
+    "Russian_Blue",
+    "saint_bernard",
+    "samoyed",
+    "scottish_terrier",
+    "shiba_inu",
+    "Siamese",
+    "Sphynx",
+    "staffordshire_bull_terrier",
+    "wheaten_terrier",
+    "yorkshire_terrier",
 ]
 _SPECIES_CLASSES = ["Cat", "Dog"]
 
@@ -44,16 +72,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(),
-            "label":
-                tfds.features.ClassLabel(names=_LABEL_CLASSES),
-            "species":
-                tfds.features.ClassLabel(names=_SPECIES_CLASSES),
-            "file_name":
-                tfds.features.Text(),
-            "segmentation_mask":
-                tfds.features.Image(shape=(None, None, 1), use_colormap=True)
+            "image": tfds.features.Image(),
+            "label": tfds.features.ClassLabel(names=_LABEL_CLASSES),
+            "species": tfds.features.ClassLabel(names=_SPECIES_CLASSES),
+            "file_name": tfds.features.Text(),
+            "segmentation_mask": tfds.features.Image(
+                shape=(None, None, 1), use_colormap=True
+            ),
         }),
         supervised_keys=("image", "label"),
         homepage="http://www.robots.ox.ac.uk/~vgg/data/pets/",
@@ -76,12 +101,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     train_split = tfds.core.SplitGenerator(
         name="train",
         gen_kwargs={
-            "images_dir_path":
-                images_path_dir,
-            "annotations_dir_path":
-                annotations_path_dir,
-            "images_list_file":
-                os.path.join(annotations_path_dir, "trainval.txt"),
+            "images_dir_path": images_path_dir,
+            "annotations_dir_path": annotations_path_dir,
+            "images_list_file": os.path.join(
+                annotations_path_dir, "trainval.txt"
+            ),
         },
     )
     test_split = tfds.core.SplitGenerator(
@@ -89,14 +113,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         gen_kwargs={
             "images_dir_path": images_path_dir,
             "annotations_dir_path": annotations_path_dir,
-            "images_list_file": os.path.join(annotations_path_dir, "test.txt")
+            "images_list_file": os.path.join(annotations_path_dir, "test.txt"),
         },
     )
 
     return [train_split, test_split]
 
-  def _generate_examples(self, images_dir_path, annotations_dir_path,
-                         images_list_file):
+  def _generate_examples(
+      self, images_dir_path, annotations_dir_path, images_list_file
+  ):
     with tf.io.gfile.GFile(images_list_file, "r") as images_list:
       for line in images_list:
         image_name, label, species, _ = line.strip().split(" ")
@@ -113,6 +138,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "label": int(label),
             "species": species,
             "file_name": image_name,
-            "segmentation_mask": os.path.join(trimaps_dir_path, trimap_name)
+            "segmentation_mask": os.path.join(trimaps_dir_path, trimap_name),
         }
         yield image_name, record

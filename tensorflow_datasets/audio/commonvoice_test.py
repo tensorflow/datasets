@@ -21,6 +21,7 @@ import tensorflow_datasets.testing as tfds_test
 
 class CommonVoiceTest(tfds_test.DatasetBuilderTestCase):
   """CommonVoice Tester Class."""
+
   # Don't test all configs to avoid timeout
   BUILDER_CONFIG_NAMES_TO_TEST = ["fy-NL"]
   DL_DOWNLOAD_RESULT = "fy-NL.tar.gz"

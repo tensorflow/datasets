@@ -20,6 +20,7 @@ import tensorflow_datasets.public_api as tfds
 
 class CardiotoxTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for cardiotox dataset."""
+
   DATASET_CLASS = cardiotox.Cardiotox
   SPLITS = {
       'train': 4,  # Number of fake train example

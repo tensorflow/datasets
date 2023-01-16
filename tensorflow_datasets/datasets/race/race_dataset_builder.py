@@ -45,17 +45,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "article":
-                tfds.features.Text(),
-            "questions":
-                tfds.features.Sequence(tfds.features.Text()),
-            "answers":
-                tfds.features.Sequence(tfds.features.Text()),
-            "options":
-                tfds.features.Sequence(
-                    tfds.features.Sequence(tfds.features.Text())),
-            "example_id":
-                tfds.features.Text()
+            "article": tfds.features.Text(),
+            "questions": tfds.features.Sequence(tfds.features.Text()),
+            "answers": tfds.features.Sequence(tfds.features.Text()),
+            "options": tfds.features.Sequence(
+                tfds.features.Sequence(tfds.features.Text())
+            ),
+            "example_id": tfds.features.Text(),
         }),
         supervised_keys=None,  # Set to `None` to disable
         homepage="https://www.cs.cmu.edu/~glai1/data/race/",
@@ -64,7 +60,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(
-        "http://www.cs.cmu.edu/~glai1/data/race/RACE.tar.gz")
+        "http://www.cs.cmu.edu/~glai1/data/race/RACE.tar.gz"
+    )
 
     path = path / "RACE"
     task = self.builder_config.name
@@ -86,5 +83,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           "questions": row["questions"],
           "answers": row["answers"],
           "options": row["options"],
-          "example_id": row["id"]
+          "example_id": row["id"],
       }

@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlMujocoHalfcheetahTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for halfcheetah datasets."""
+
   DATASET_CLASS = d4rl_mujoco_halfcheetah.D4rlMujocoHalfcheetah
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -35,6 +36,7 @@ class D4rlMujocoHalfcheetahTest(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlMujocoHalfcheetahInfosTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for halfcheetah datasets with step metadata."""
+
   DATASET_CLASS = d4rl_mujoco_halfcheetah.D4rlMujocoHalfcheetah
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -55,8 +57,8 @@ class D4rlMujocoHalfcheetahReplayTest(tfds.testing.DatasetBuilderTestCase):
     * Contain two fields of episode metadata.
     * Use float64 types (instead of float32)
     * Rewards are stored with shape (1,) instead of scalar
-
   """
+
   DATASET_CLASS = d4rl_mujoco_halfcheetah.D4rlMujocoHalfcheetah
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -71,6 +73,7 @@ class D4rlMujocoHalfcheetahReplayTest(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlMujocoHalfcheetahMetadataTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for halfcheetah datasets with all the metadata fields."""
+
   DATASET_CLASS = d4rl_mujoco_halfcheetah.D4rlMujocoHalfcheetah
   SPLITS = {
       'train': 2,  # Number of fake train example

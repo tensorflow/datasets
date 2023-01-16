@@ -35,18 +35,17 @@ ALL_REGEX = _re_compile(r"(\W+)")
 
 
 
-class TextEncoderConfig():
+class TextEncoderConfig:
   """Configuration for `tfds.features.Text`."""
 
-  def __init__(self,
-               encoder=None,
-               encoder_cls=None,
-               vocab_size=None,
-               name=None):
+  def __init__(
+      self, encoder=None, encoder_cls=None, vocab_size=None, name=None
+  ):
     if encoder:
-      if (encoder_cls or vocab_size):
-        raise ValueError("If encoder is provided, encoder_cls and "
-                         "vocab_size must be None")
+      if encoder_cls or vocab_size:
+        raise ValueError(
+            "If encoder is provided, encoder_cls and vocab_size must be None"
+        )
       encoder_cls = type(encoder)
       vocab_size = encoder.vocab_size
     else:
@@ -126,11 +125,13 @@ class ByteTextEncoder(TextEncoder):
         like "end-of-string" tokens (e.g. "<EOS>").
     """
     self._additional_tokens, self._additional_tokens_re = (
-        _prepare_reserved_tokens(additional_tokens))
+        _prepare_reserved_tokens(additional_tokens)
+    )
     # Note that internally everything is 0-indexed. Padding is dealt with at the
     # end of encode and the beginning of decode.
     self._additional_token_to_id = dict(
-        zip(self._additional_tokens, range(len(self._additional_tokens))))
+        zip(self._additional_tokens, range(len(self._additional_tokens)))
+    )
 
   def encode(self, s):
     if not self.additional_tokens:
@@ -207,7 +208,8 @@ class ByteTextEncoder(TextEncoder):
 
   def save_to_file(self, filename_prefix):
     self._write_lines_to_file(
-        self._filename(filename_prefix), self.additional_tokens)
+        self._filename(filename_prefix), self.additional_tokens
+    )
 
   @classmethod
   def load_from_file(cls, filename_prefix):
@@ -222,14 +224,16 @@ class TokenTextEncoder(TextEncoder):
   regex "\W+".
   """
 
-  def __init__(self,
-               vocab_list,
-               oov_buckets=1,
-               oov_token="UNK",
-               lowercase=False,
-               tokenizer=None,
-               strip_vocab=True,
-               decode_token_separator=" "):
+  def __init__(
+      self,
+      vocab_list,
+      oov_buckets=1,
+      oov_token="UNK",
+      lowercase=False,
+      tokenizer=None,
+      strip_vocab=True,
+      decode_token_separator=" ",
+  ):
     """Constructs a TokenTextEncoder.
 
     To load from a file saved with `TokenTextEncoder.save_to_file`, use
@@ -257,13 +261,14 @@ class TokenTextEncoder(TextEncoder):
     # Note that internally everything is 0-indexed. Padding is dealt with at the
     # end of encode and the beginning of decode.
     self._token_to_id = dict(
-        zip(self._vocab_list, range(len(self._vocab_list))))
+        zip(self._vocab_list, range(len(self._vocab_list)))
+    )
     self._oov_buckets = oov_buckets
     self._oov_token = tf.compat.as_text(oov_token)
 
     # Reserved tokens are all tokens that are mixed alphanum and non-alphanum.
     reserved_tokens = [t for t in self._vocab_list if is_mixed_alphanum(t)]
-    self._tokenizer = (tokenizer or Tokenizer(reserved_tokens=reserved_tokens))
+    self._tokenizer = tokenizer or Tokenizer(reserved_tokens=reserved_tokens)
     self._user_defined_tokenizer = tokenizer
 
     self._decode_token_separator = decode_token_separator
@@ -370,7 +375,8 @@ class Tokenizer(object):
     """
     self._alphanum_only = alphanum_only
     reserved_tokens, self._reserved_tokens_re = _prepare_reserved_tokens(
-        reserved_tokens)
+        reserved_tokens
+    )
     self._reserved_tokens = set(reserved_tokens)
 
   @property
@@ -420,7 +426,7 @@ class Tokenizer(object):
     filename = self._filename(filename_prefix)
     kwargs = {
         "reserved_tokens": list(self._reserved_tokens),
-        "alphanum_only": self._alphanum_only
+        "alphanum_only": self._alphanum_only,
     }
     write_lines_to_file(type(self).__name__, filename, [], kwargs)
 
@@ -443,7 +449,7 @@ def pad_decr(ids):
   if idx == -1:
     ids = ids  # pylint: disable=self-assigning-variable
   else:
-    ids = ids[:idx + 1]
+    ids = ids[: idx + 1]
   return [i - 1 for i in ids]
 
 
@@ -501,8 +507,10 @@ def write_lines_to_file(cls_name, filename, lines, metadata_dict):
   """Writes lines to file prepended by header and metadata."""
   metadata_dict = metadata_dict or {}
   header_line = "%s%s" % (_HEADER_PREFIX, cls_name)
-  metadata_line = "%s%s" % (_METADATA_PREFIX,
-                            json.dumps(metadata_dict, sort_keys=True))
+  metadata_line = "%s%s" % (
+      _METADATA_PREFIX,
+      json.dumps(metadata_dict, sort_keys=True),
+  )
   with tf.io.gfile.GFile(filename, "wb") as f:
     for line in [header_line, metadata_line]:
       f.write(tf.compat.as_bytes(line))
@@ -518,8 +526,9 @@ def read_lines_from_file(cls_name, filename):
     lines = [tf.compat.as_text(line)[:-1] for line in f]
   header_line = "%s%s" % (_HEADER_PREFIX, cls_name)
   if lines[0] != header_line:
-    raise ValueError("File {fname} does not seem to have been created from "
-                     "{name}.save_to_file.".format(
-                         fname=filename, name=cls_name))
-  metadata_dict = json.loads(lines[1][len(_METADATA_PREFIX):])
+    raise ValueError(
+        "File {fname} does not seem to have been created from "
+        "{name}.save_to_file.".format(fname=filename, name=cls_name)
+    )
+  metadata_dict = json.loads(lines[1][len(_METADATA_PREFIX) :])
   return lines[2:], metadata_dict

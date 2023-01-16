@@ -36,10 +36,12 @@ class Xtreme(dataset_collection_builder.DatasetCollection):
     )
 
   @property
-  def datasets(self,) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
-    return collections.OrderedDict({
-        "1.0.0":
-            naming.references_for({
+  def datasets(
+      self,
+  ) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
+    return collections.OrderedDict(
+        {
+            "1.0.0": naming.references_for({
                 "xnli": "xtreme_xnli:1.1.0",
                 "pawsx": "xtreme_pawsx:1.0.0",
                 "pos": "xtreme_pos:1.0.0",
@@ -50,4 +52,5 @@ class Xtreme(dataset_collection_builder.DatasetCollection):
                 "bucc": "bucc:1.0.0",
                 "tatoeba": "tatoeba:1.0.0",
             })
-    })
+        }
+    )

@@ -47,16 +47,12 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
         label_name = label_feature.int2str(features['label'])
         label_frequncies[split_name][label_name] += 1
     self.assertEqual(
-        dict(label_frequncies), {
-            'test': {
-                'Archery': 1,
-                'Nunchucks': 1
-            },
-            'train': {
-                'Archery': 1,
-                'Nunchucks': 2
-            }
-        })
+        dict(label_frequncies),
+        {
+            'test': {'Archery': 1, 'Nunchucks': 1},
+            'train': {'Archery': 1, 'Nunchucks': 2},
+        },
+    )
 
 
 if __name__ == '__main__':

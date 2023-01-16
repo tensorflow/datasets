@@ -53,7 +53,8 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
   parser.add_argument(
       '--version',
       action='version',
-      version='TensorFlow Datasets: ' + tfds.__version__)
+      version='TensorFlow Datasets: ' + tfds.__version__,
+  )
   parser.set_defaults(subparser_fn=lambda _: parser.print_help())
   # Register sub-commands
   subparser = parser.add_subparsers(title='command')
@@ -65,10 +66,12 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
 def main(args: argparse.Namespace) -> None:
 
   # From the CLI, all datasets are visible
-  tfds.core.visibility.set_availables([
-      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
-      tfds.core.visibility.DatasetType.COMMUNITY_PUBLIC,
-  ])
+  tfds.core.visibility.set_availables(
+      [
+          tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+          tfds.core.visibility.DatasetType.COMMUNITY_PUBLIC,
+      ]
+  )
 
   # By default, ABSL won't display any `logging.info` unless the
   # user explicitly set `--logtostderr`.
@@ -78,11 +81,13 @@ def main(args: argparse.Namespace) -> None:
   # `absl.run` (e.g. open source `pytest` tests)
   if not FLAGS.is_parsed() or (
       # If user explicitly request logs, keep C++ logger
-      not FLAGS.logtostderr and not FLAGS.alsologtostderr
+      not FLAGS.logtostderr
+      and not FLAGS.alsologtostderr
   ):
     # Using cleaner, less verbose logger
     formatter = python_logging.Formatter(
-        '{levelname}[{filename}]: {message}', style='{')
+        '{levelname}[{filename}]: {message}', style='{'
+    )
     logging.use_python_logging(quiet=True)
     logging.set_verbosity(logging.INFO)
     python_handler = logging.get_absl_handler().python_handler

@@ -27,14 +27,16 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 FLAGS = flags.FLAGS
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "dtd")
+  return os.path.join(
+      FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "dtd"
+  )
 
 
 def _makedir_if_not_exists(dirname):
@@ -45,7 +47,8 @@ def _makedir_if_not_exists(dirname):
 def _generate_data(split_name, num_examples):
   """Generate test data."""
   names_file = tfds.core.tfds_path(
-      os.path.join("image", "dtd_key_attributes.txt"))
+      os.path.join("image", "dtd_key_attributes.txt")
+  )
   label_names = tfds.features.ClassLabel(names_file=names_file).names
 
   # Generate images.

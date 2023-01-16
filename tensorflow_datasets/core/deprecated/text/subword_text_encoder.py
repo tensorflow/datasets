@@ -168,8 +168,10 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
   def _id_to_subword(self, subword_id):
     """Converts a subword integer ID to a subword string."""
     if subword_id < 0 or subword_id >= (self.vocab_size - 1):
-      raise ValueError("Received id %d which is invalid. Ids must be within "
-                       "[0, %d)." % (subword_id + 1, self.vocab_size))
+      raise ValueError(
+          "Received id %d which is invalid. Ids must be within [0, %d)."
+          % (subword_id + 1, self.vocab_size)
+      )
 
     if 0 <= subword_id < len(self._subwords):
       # Subword
@@ -189,10 +191,13 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     while start < len(token):
       subword = None
       for end in range(
-          min(len(token), start + self._max_subword_len), start, -1):
+          min(len(token), start + self._max_subword_len), start, -1
+      ):
         candidate = token[start:end]
-        if (candidate in self._subword_to_id or
-            candidate == _UNDERSCORE_REPLACEMENT):
+        if (
+            candidate in self._subword_to_id
+            or candidate == _UNDERSCORE_REPLACEMENT
+        ):
           subword = candidate
           subwords.append(subword)
           start = end
@@ -215,7 +220,8 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     # We remember the maximum length of any subword to avoid having to
     # check arbitrarily long strings.
     self._max_subword_len = max(
-        len(_UNDERSCORE_REPLACEMENT), max([len(s) for s in subwords] or [1]))
+        len(_UNDERSCORE_REPLACEMENT), max([len(s) for s in subwords] or [1])
+    )
 
     # Initialize the cache
     self._cache_size = 2**20
@@ -228,7 +234,8 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
       if text_encoder.is_mixed_alphanum(t):
         reserved_tokens.add(t)
     self._tokenizer = text_encoder.Tokenizer(
-        alphanum_only=False, reserved_tokens=reserved_tokens)
+        alphanum_only=False, reserved_tokens=reserved_tokens
+    )
 
   @classmethod
   def _filename(cls, filename_prefix):
@@ -252,12 +259,14 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     return cls(vocab_list=vocab_list)
 
   @classmethod
-  def build_from_corpus(cls,
-                        corpus_generator,
-                        target_vocab_size,
-                        max_subword_length=20,
-                        max_corpus_chars=None,
-                        reserved_tokens=None):
+  def build_from_corpus(
+      cls,
+      corpus_generator,
+      target_vocab_size,
+      max_subword_length=20,
+      max_corpus_chars=None,
+      reserved_tokens=None,
+  ):
     """Builds a `SubwordTextEncoder` based on the `corpus_generator`.
 
     Args:
@@ -280,32 +289,40 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     _validate_build_arguments(
         max_subword_length=max_subword_length,
         reserved_tokens=reserved_tokens,
-        target_vocab_size=target_vocab_size)
+        target_vocab_size=target_vocab_size,
+    )
     token_counts = _token_counts_from_generator(
         generator=corpus_generator,
         max_chars=max_corpus_chars,
-        reserved_tokens=reserved_tokens)
+        reserved_tokens=reserved_tokens,
+    )
 
     # Binary search on the minimum token count to build a vocabulary with
     # approximately the right size
     def _binary_search(min_token_count, max_token_count):
       """Binary search min_token_count to build SubwordTextEncoder vocab."""
       candidate_min = (min_token_count + max_token_count) // 2
-      logging.info("SubwordTextEncoder build: trying min_token_count %d",
-                   candidate_min)
+      logging.info(
+          "SubwordTextEncoder build: trying min_token_count %d", candidate_min
+      )
       encoder = cls._build_from_token_counts(
           token_counts=token_counts,
           min_token_count=candidate_min,
           reserved_tokens=reserved_tokens,
           num_iterations=4,
-          max_subword_length=max_subword_length)
+          max_subword_length=max_subword_length,
+      )
       vocab_size = encoder.vocab_size
 
       # Being within 1% of the target vocab size is ok
       target_achieved = (
-          abs(vocab_size - target_vocab_size) * 100 < target_vocab_size)
-      if (target_achieved or min_token_count >= max_token_count or
-          candidate_min <= 1):
+          abs(vocab_size - target_vocab_size) * 100 < target_vocab_size
+      )
+      if (
+          target_achieved
+          or min_token_count >= max_token_count
+          or candidate_min <= 1
+      ):
         # Search complete
         return encoder
 
@@ -316,8 +333,9 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
         next_encoder = _binary_search(min_token_count, candidate_min - 1)
 
       # Return the one that's closest to the target_vocab_size
-      if (abs(vocab_size - target_vocab_size) <
-          abs(next_encoder.vocab_size - target_vocab_size)):
+      if abs(vocab_size - target_vocab_size) < abs(
+          next_encoder.vocab_size - target_vocab_size
+      ):
         return encoder
       else:
         return next_encoder
@@ -330,9 +348,14 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     return _binary_search(min_token_count, max_token_count)
 
   @classmethod
-  def _build_from_token_counts(cls, token_counts, min_token_count,
-                               reserved_tokens, num_iterations,
-                               max_subword_length):
+  def _build_from_token_counts(
+      cls,
+      token_counts,
+      min_token_count,
+      reserved_tokens,
+      num_iterations,
+      max_subword_length,
+  ):
     # Start with subwords initialized to only reserved_tokens
     subwords = list(reserved_tokens)
 
@@ -383,13 +406,14 @@ def _token_counts_from_generator(generator, max_chars, reserved_tokens):
   """Builds token counts from generator."""
   reserved_tokens = list(reserved_tokens) + [_UNDERSCORE_REPLACEMENT]
   tokenizer = text_encoder.Tokenizer(
-      alphanum_only=False, reserved_tokens=reserved_tokens)
+      alphanum_only=False, reserved_tokens=reserved_tokens
+  )
   num_chars = 0
   token_counts = collections.defaultdict(int)
   for s in generator:
     s = tf.compat.as_text(s)
     if max_chars and (num_chars + len(s)) >= max_chars:
-      s = s[:(max_chars - num_chars)]
+      s = s[: (max_chars - num_chars)]
     tokens = tokenizer.tokenize(s)
     tokens = _prepare_tokens_for_encode(tokens)
     for t in tokens:
@@ -401,25 +425,30 @@ def _token_counts_from_generator(generator, max_chars, reserved_tokens):
   return token_counts
 
 
-def _validate_build_arguments(max_subword_length, reserved_tokens,
-                              target_vocab_size):
+def _validate_build_arguments(
+    max_subword_length, reserved_tokens, target_vocab_size
+):
   """Validate arguments for SubwordTextEncoder.build_from_corpus."""
   if max_subword_length <= 0:
     raise ValueError(
         "max_subword_length must be > 0. Note that memory and compute for "
         "building the vocabulary scale quadratically in the length of the "
-        "longest token.")
+        "longest token."
+    )
   for t in reserved_tokens:
     if t.endswith("_") or not text_encoder.is_mixed_alphanum(t):
       raise ValueError(
           "Reserved tokens must not end with _ and they must contain a mix "
           "of alphanumeric and non-alphanumeric characters. For example, "
-          "'<EOS>'.")
+          "'<EOS>'."
+      )
   # Minimum vocab size = bytes + pad + 1
   minimum_vocab_size = text_encoder.NUM_BYTES + 1 + 1
   if target_vocab_size < minimum_vocab_size:
-    raise ValueError("target_vocab_size must be >= %d. Got %d" %
-                     (minimum_vocab_size, target_vocab_size))
+    raise ValueError(
+        "target_vocab_size must be >= %d. Got %d"
+        % (minimum_vocab_size, target_vocab_size)
+    )
 
 
 def _trim_underscore(token):

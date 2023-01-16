@@ -66,7 +66,8 @@ class DatasetAsNumPyTest(testing.TestCase):
       self.assertEqual(len(np_ds), 10)
     else:
       with self.assertRaisesWithPredicateMatch(
-          TypeError, "__len__() is not supported for `tfds.as_numpy`"):
+          TypeError, "__len__() is not supported for `tfds.as_numpy`"
+      ):
         _ = len(np_ds)
 
   def test_with_graph(self):
@@ -152,15 +153,17 @@ class DatasetAsNumPyTest(testing.TestCase):
     else:
       self.assertIsInstance(rt, tf.RaggedTensor)
 
-    self.assertAllEqual(rt, tf.ragged.constant([
-        [1, 2, 3],
-        [],
-        [4, 5],
-    ]))
+    self.assertAllEqual(
+        rt,
+        tf.ragged.constant([
+            [1, 2, 3],
+            [],
+            [4, 5],
+        ]),
+    )
 
   @testing.run_in_graph_and_eager_modes()
   def test_ragged_tensors_ds(self):
-
     def _gen_ragged_tensors():
       # Yield the (flat_values, rowids)
       yield ([0, 1, 2, 3], [0, 0, 0, 2])  # ex0
@@ -170,17 +173,21 @@ class DatasetAsNumPyTest(testing.TestCase):
     ds = tf.data.Dataset.from_generator(
         _gen_ragged_tensors,
         output_types=(tf.int64, tf.int64),
-        output_shapes=((None,), (None,)))
+        output_shapes=((None,), (None,)),
+    )
     ds = ds.map(tf.RaggedTensor.from_value_rowids)
 
     rt0, rt1, rt2 = list(dataset_utils.as_numpy(ds))
-    self.assertAllEqual(rt0, [
-        [0, 1, 2],
-        [],
+    self.assertAllEqual(
+        rt0,
         [
-            3,
+            [0, 1, 2],
+            [],
+            [
+                3,
+            ],
         ],
-    ])
+    )
     self.assertAllEqual(rt1, [])
     self.assertAllEqual(rt2, [[4], [5, 6]])
 

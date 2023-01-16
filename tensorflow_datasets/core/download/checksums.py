@@ -39,6 +39,7 @@ class UrlInfo:
     checksum: Checksum of the file
     filename: Name of the file
   """
+
   size: utils.Size
   checksum: str
   # We exclude the filename from `__eq__` for backward compatibility
@@ -104,7 +105,8 @@ def add_checksums_dir(checksums_dir: str) -> None:
       'self-contained folders (`my_dataset/` folder containing '
       'my_dataset.py, my_dataset_test.py, dummy_data/, checksums.tsv). '
       'The checksum file will be automatically detected. More info at: '
-      'https://www.tensorflow.org/datasets/add_dataset')
+      'https://www.tensorflow.org/datasets/add_dataset'
+  )
   if checksums_dir in _CHECKSUM_DIRS:  # Avoid duplicate
     return
   _CHECKSUM_DIRS.append(checksums_dir)
@@ -122,7 +124,7 @@ def _checksum_paths() -> Dict[str, epath.Path]:
     for file_path in dir_path.iterdir():
       if not file_path.name.endswith(_CHECKSUM_SUFFIX):
         continue
-      dataset_name = file_path.name[:-len(_CHECKSUM_SUFFIX)]
+      dataset_name = file_path.name[: -len(_CHECKSUM_SUFFIX)]
       dataset2path[dataset_name] = file_path
   return dataset2path
 
@@ -163,7 +165,8 @@ def get_all_url_infos() -> Dict[str, UrlInfo]:
       if url_infos.get(url, url_info) != url_info:
         raise AssertionError(
             'URL {} is registered with 2+ distinct size/checksum tuples. '
-            '{} vs {}'.format(url, url_info, url_infos[url]))
+            '{} vs {}'.format(url, url_info, url_infos[url])
+        )
     url_infos.update(dataset_url_infos)
   return url_infos
 
@@ -213,4 +216,5 @@ def _filenames_equal(
 ) -> bool:
   """Compare filenames."""
   return all(
-      l.filename == r.filename for _, (l, r) in utils.zip_dict(left, right))
+      l.filename == r.filename for _, (l, r) in utils.zip_dict(left, right)
+  )

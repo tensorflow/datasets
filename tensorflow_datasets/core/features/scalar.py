@@ -29,7 +29,6 @@ class Scalar(tensor_feature.Tensor):
   np.int64 or np.float).
 
   Equivalent to `tfds.features.Tensor(shape=(), dtype=dtype)`.
-
   """
 
   def __init__(

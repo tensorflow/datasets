@@ -36,13 +36,17 @@ class ImagenetteConfig(tfds.core.BuilderConfig):
         # `320px-v2`,...
         name=size + ("-v2" if base == "imagenette2" else ""),
         description="{} variant.".format(size),
-        **kwargs)
+        **kwargs,
+    )
     # e.g. `imagenette2-320.tgz`
-    self.dirname = base + {
-        "full-size": "",
-        "320px": "-320",
-        "160px": "-160",
-    }[size]
+    self.dirname = (
+        base
+        + {
+            "full-size": "",
+            "320px": "-320",
+            "160px": "-160",
+        }[size]
+    )
 
 
 def _make_builder_configs():
@@ -65,7 +69,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format="jpeg"),
-            "label": tfds.features.ClassLabel(names_file=names_file)
+            "label": tfds.features.ClassLabel(names_file=names_file),
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/fastai/imagenette",

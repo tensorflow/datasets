@@ -23,4 +23,5 @@ tfds.builder_cls('natural_questions_open')
 from tensorflow_datasets.core import lazy_builder_import
 
 NaturalQuestionsOpen = lazy_builder_import.LazyBuilderImport(
-    'natural_questions_open')
+    'natural_questions_open'
+)

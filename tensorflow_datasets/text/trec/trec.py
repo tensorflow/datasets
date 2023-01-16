@@ -109,7 +109,6 @@ class Trec(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
-
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -152,8 +151,9 @@ class Trec(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(filepath, "rb") as f:
       for id_, row in enumerate(f):
         # One non-ASCII byte: sisterBADBYTEcity. We replace it with a space
-        label, _, text = row.replace(b"\xf0",
-                                     b" ").strip().decode().partition(" ")
+        label, _, text = (
+            row.replace(b"\xf0", b" ").strip().decode().partition(" ")
+        )
         coarse_label, _, fine_label = label.partition(":")
         yield id_, {
             "label-coarse": coarse_label,

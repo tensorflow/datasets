@@ -21,10 +21,10 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _TRAIN_URL = {
-    "images":
-        "http://sceneparsing.csail.mit.edu/data/ChallengeData2017/images.tar",
-    "annotations":
-        "http://sceneparsing.csail.mit.edu/data/ChallengeData2017/annotations_instance.tar"
+    "images": (
+        "http://sceneparsing.csail.mit.edu/data/ChallengeData2017/images.tar"
+    ),
+    "annotations": "http://sceneparsing.csail.mit.edu/data/ChallengeData2017/annotations_instance.tar",
 }
 
 
@@ -34,11 +34,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
-
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format="jpeg"),
-            "annotation": tfds.features.Image(encoding_format="png")
+            "annotation": tfds.features.Image(encoding_format="png"),
         }),
         supervised_keys=("image", "annotation"),
         homepage="http://sceneparsing.csail.mit.edu/",
@@ -54,21 +53,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "images_dir_path":
-                    os.path.join(dl_paths["images"], "images/training"),
-                "annotations_dir_path":
-                    os.path.join(dl_paths["annotations"],
-                                 "annotations_instance/training")
+                "images_dir_path": os.path.join(
+                    dl_paths["images"], "images/training"
+                ),
+                "annotations_dir_path": os.path.join(
+                    dl_paths["annotations"], "annotations_instance/training"
+                ),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "images_dir_path":
-                    os.path.join(dl_paths["images"], "images/validation"),
-                "annotations_dir_path":
-                    os.path.join(dl_paths["annotations"],
-                                 "annotations_instance/validation")
+                "images_dir_path": os.path.join(
+                    dl_paths["images"], "images/validation"
+                ),
+                "annotations_dir_path": os.path.join(
+                    dl_paths["annotations"], "annotations_instance/validation"
+                ),
             },
         ),
     ]
@@ -78,8 +79,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       # get the filename
       image_id = os.path.split(image_file)[1].split(".")[0]
       yield image_id, {
-          "image":
-              os.path.join(images_dir_path, "{}.jpg".format(image_id)),
-          "annotation":
-              os.path.join(annotations_dir_path, "{}.png".format(image_id))
+          "image": os.path.join(images_dir_path, "{}.jpg".format(image_id)),
+          "annotation": os.path.join(
+              annotations_dir_path, "{}.png".format(image_id)
+          ),
       }

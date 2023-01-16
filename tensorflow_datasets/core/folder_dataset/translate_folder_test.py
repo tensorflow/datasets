@@ -20,8 +20,9 @@ from unittest import mock
 from tensorflow_datasets.core.folder_dataset import translate_folder
 import tensorflow_datasets.public_api as tfds
 
-_EXAMPLE_DIR = os.path.join(tfds.testing.test_utils.fake_examples_dir(),
-                            'translate_folder')
+_EXAMPLE_DIR = os.path.join(
+    tfds.testing.test_utils.fake_examples_dir(), 'translate_folder'
+)
 
 original_init = tfds.TranslateFolder.__init__
 original_download_and_prepare = tfds.TranslateFolder.download_and_prepare
@@ -35,6 +36,7 @@ def new_init(self, root_dir=None, **kwargs):
 
 class TranslateFolderTests(tfds.testing.DatasetBuilderTestCase):
   """Translate dataset tests."""
+
   DATASET_CLASS = tfds.TranslateFolder
   SPLITS = {
       'train': 4,
@@ -80,11 +82,13 @@ class TranslateFolderFunctionTest(tfds.testing.TestCase):
         fs.add_file(file, file_contents[file])
 
       split_examples, langs = translate_folder._get_split_language_examples(
-          'root_dir')
+          'root_dir'
+      )
       builder = tfds.TranslateFolder(root_dir='root_dir')
 
       self.assertEqual(
-          split_examples, {
+          split_examples,
+          {
               'train': {
                   'lang1': ['line1', 'lang1'],
                   'lang2': ['line1', 'lang2'],
@@ -99,7 +103,8 @@ class TranslateFolderFunctionTest(tfds.testing.TestCase):
                   'lang1': ['line1'],
                   'lang2': ['line1'],
               },
-          })
+          },
+      )
 
       self.assertEqual(builder.info.splits['train'].num_examples, 2)
       self.assertEqual(builder.info.splits['val'].num_examples, 4)

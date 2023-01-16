@@ -54,23 +54,15 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
         'ds2/2.0.0',
     ])
     self.assertEqual(
-        full_names_dict, {
+        full_names_dict,
+        {
             'ds1': {
-                'c1': {
-                    '1.0.0': None,
-                    '2.0.0': None
-                },
-                'c2': {
-                    '2.0.0': None
-                },
+                'c1': {'1.0.0': None, '2.0.0': None},
+                'c2': {'2.0.0': None},
             },
-            'ds2': {
-                '': {
-                    '1.0.0': None,
-                    '2.0.0': None
-                }
-            }
-        })
+            'ds2': {'': {'1.0.0': None, '2.0.0': None}},
+        },
+    )
 
   def test_build_nightly_dict(self):
     nightly_dict = doc_utils._build_nightly_dict(
@@ -99,7 +91,8 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
     )
     # Check that the added datasets, config, versions are marked as nightly
     self.assertEqual(
-        nightly_dict, {
+        nightly_dict,
+        {
             'ds_with_config': {
                 'config_new': True,
                 'config_same': {
@@ -114,25 +107,16 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
                     '1.0.0': False,
                 },
             },
-            'ds_same': {
-                'config': {
-                    '1.0.0': False
-                }
-            },
-            'ds_type': {
-                'config': True
-            },
-        })
+            'ds_same': {'config': {'1.0.0': False}},
+            'ds_type': {'config': True},
+        },
+    )
 
   def test_nightly_doc_util(self):
     data_dir = '/tmp/dummy_dir'
 
     nightly_dict = {
-        'dummy_dataset': {
-            '': {
-                '1.0.0': False
-            }
-        },
+        'dummy_dataset': {'': {'1.0.0': False}},
         'dummy_new_ds': True,
         'dummy_new_config': {
             'new_config': True,
@@ -143,7 +127,8 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
         },
     }
     with mock.patch.object(
-        doc_utils, '_load_nightly_dict', return_value=nightly_dict):
+        doc_utils, '_load_nightly_dict', return_value=nightly_dict
+    ):
       ndu = doc_utils.NightlyDocUtil(path='/tmp/some/patched/path')
 
     dummy_dataset = tfds.testing.DummyDataset(data_dir=data_dir)

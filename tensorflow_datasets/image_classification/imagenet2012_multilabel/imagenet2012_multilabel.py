@@ -23,4 +23,5 @@ tfds.builder_cls('imagenet2012_multilabel')
 from tensorflow_datasets.core import lazy_builder_import
 
 Imagenet2012Multilabel = lazy_builder_import.LazyBuilderImport(
-    'imagenet2012_multilabel')
+    'imagenet2012_multilabel'
+)

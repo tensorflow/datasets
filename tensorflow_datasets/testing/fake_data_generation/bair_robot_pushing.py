@@ -42,13 +42,17 @@ def main(argv):
 
   for frame in range(30):
     feature["%d/action" % frame] = tf.train.Feature(
-        float_list=tf.train.FloatList(value=np.random.uniform(size=(4))))
+        float_list=tf.train.FloatList(value=np.random.uniform(size=(4)))
+    )
     feature["%d/endeffector_pos" % frame] = tf.train.Feature(
-        float_list=tf.train.FloatList(value=np.random.uniform(size=(3))))
+        float_list=tf.train.FloatList(value=np.random.uniform(size=(3)))
+    )
     feature["%d/image_aux1/encoded" % frame] = tf.train.Feature(
-        bytes_list=tf.train.BytesList(value=["\x00\xff\x00" * 64 * 64]))
+        bytes_list=tf.train.BytesList(value=["\x00\xff\x00" * 64 * 64])
+    )
     feature["%d/image_main/encoded" % frame] = tf.train.Feature(
-        bytes_list=tf.train.BytesList(value=["\x00\x00\xff" * 64 * 64]))
+        bytes_list=tf.train.BytesList(value=["\x00\x00\xff" * 64 * 64])
+    )
   example = tf.train.Example(features=tf.train.Features(feature=feature))
   writer.write(example.SerializeToString())
   writer.close()

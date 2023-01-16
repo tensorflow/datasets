@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class AsqaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for asqa dataset."""
+
   DATASET_CLASS = asqa_dataset_builder.Builder
   SPLITS = {
       'train': 2,

@@ -23,8 +23,13 @@ import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _SOURCE_NAMES = [
-    "properNoun", "andPhrase", "acronym", "etAlPhrase", "explicit",
-    "acronymParen", "nan"
+    "properNoun",
+    "andPhrase",
+    "acronym",
+    "etAlPhrase",
+    "explicit",
+    "acronymParen",
+    "nan",
 ]
 
 
@@ -36,37 +41,24 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "string":
-                tfds.features.Text(),
-            "sectionName":
-                tfds.features.Text(),
-            "label":
-                tfds.features.ClassLabel(
-                    names=["method", "background", "result"]),
-            "citingPaperId":
-                tfds.features.Text(),
-            "citedPaperId":
-                tfds.features.Text(),
-            "excerpt_index":
-                np.int32,
-            "isKeyCitation":
-                np.bool_,
-            "label2":
-                tfds.features.ClassLabel(names=[
-                    "supportive", "not_supportive", "cant_determine", "none"
-                ]),
-            "citeEnd":
-                np.int64,
-            "citeStart":
-                np.int64,
-            "source":
-                tfds.features.ClassLabel(names=_SOURCE_NAMES),
-            "label_confidence":
-                np.float32,
-            "label2_confidence":
-                np.float32,
-            "id":
-                tfds.features.Text(),
+            "string": tfds.features.Text(),
+            "sectionName": tfds.features.Text(),
+            "label": tfds.features.ClassLabel(
+                names=["method", "background", "result"]
+            ),
+            "citingPaperId": tfds.features.Text(),
+            "citedPaperId": tfds.features.Text(),
+            "excerpt_index": np.int32,
+            "isKeyCitation": np.bool_,
+            "label2": tfds.features.ClassLabel(
+                names=["supportive", "not_supportive", "cant_determine", "none"]
+            ),
+            "citeEnd": np.int64,
+            "citeStart": np.int64,
+            "source": tfds.features.ClassLabel(names=_SOURCE_NAMES),
+            "label_confidence": np.float32,
+            "label2_confidence": np.float32,
+            "id": tfds.features.Text(),
         }),
         # If there's a common (input, target) tuple from the features,
         # specify them here. They'll be used if as_supervised=True in
@@ -78,10 +70,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    dl_paths = dl_manager.download_and_extract({
-        "scicite":
-            "https://s3-us-west-2.amazonaws.com/ai2-s2-research/scicite/scicite.tar.gz",
-    })
+    dl_paths = dl_manager.download_and_extract(
+        {
+            "scicite": "https://s3-us-west-2.amazonaws.com/ai2-s2-research/scicite/scicite.tar.gz",
+        }
+    )
     path = os.path.join(dl_paths["scicite"], "scicite")
     return [
         tfds.core.SplitGenerator(
@@ -120,8 +113,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "citeEnd": _safe_int(d["citeEnd"]),
             "citeStart": _safe_int(d["citeStart"]),
             "source": str(d["source"]),
-            "label_confidence": float(d.get("label_confidence", 0.)),
-            "label2_confidence": float(d.get("label2_confidence", 0.)),
+            "label_confidence": float(d.get("label_confidence", 0.0)),
+            "label2_confidence": float(d.get("label2_confidence", 0.0)),
             "id": str(d["id"]),
         }
 

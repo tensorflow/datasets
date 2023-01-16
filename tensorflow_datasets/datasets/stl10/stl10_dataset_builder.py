@@ -62,13 +62,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     splits = [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"filepaths": gen_filenames(train_files)}),
+            gen_kwargs={"filepaths": gen_filenames(train_files)},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"filepaths": gen_filenames(test_files)}),
+            gen_kwargs={"filepaths": gen_filenames(test_files)},
+        ),
         tfds.core.SplitGenerator(
             name=UNLABELLED,
-            gen_kwargs={"filepaths": gen_filenames(unlabeled_files)}),
+            gen_kwargs={"filepaths": gen_filenames(unlabeled_files)},
+        ),
     ]
 
     return splits

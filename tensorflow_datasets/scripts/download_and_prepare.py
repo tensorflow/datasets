@@ -27,8 +27,9 @@ from tensorflow_datasets.scripts.cli import main as main_cli
 module_import = flags.DEFINE_string('module_import', None, '`--imports` flag.')
 dataset = flags.DEFINE_string('dataset', None, 'singleton `--datasets` flag.')
 
-builder_config_id = flags.DEFINE_integer('builder_config_id', None,
-                                         '`--config_idx` flag')
+builder_config_id = flags.DEFINE_integer(
+    'builder_config_id', None, '`--config_idx` flag'
+)
 
 
 
@@ -43,7 +44,8 @@ _display_warning = True
 def main(args: argparse.Namespace) -> None:
   if _display_warning:
     logging.warning(
-        '***`tfds build` should be used instead of `download_and_prepare`.***')
+        '***`tfds build` should be used instead of `download_and_prepare`.***'
+    )
   if module_import.value:
     args.imports = module_import.value
   if dataset.value:

@@ -60,12 +60,11 @@ class WikiTableText(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'input_text': {
-                'table':
-                    tfds.features.Sequence({
-                        'column_header': np.str_,
-                        'row_number': np.int16,
-                        'content': np.str_,
-                    }),
+                'table': tfds.features.Sequence({
+                    'column_header': np.str_,
+                    'row_number': np.int16,
+                    'content': np.str_,
+                }),
             },
             'target_text': np.str_,
         }),
@@ -76,18 +75,15 @@ class WikiTableText(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    extracted_path = dl_manager.download_and_extract({
-        'train_path': _TRAIN_URL,
-        'dev_path': _DEV_URL,
-        'test_path': _TEST_URL
-    })
+    extracted_path = dl_manager.download_and_extract(
+        {'train_path': _TRAIN_URL, 'dev_path': _DEV_URL, 'test_path': _TEST_URL}
+    )
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(extracted_path['train_path']),
-        tfds.Split.VALIDATION:
-            self._generate_examples(extracted_path['dev_path']),
-        tfds.Split.TEST:
-            self._generate_examples(extracted_path['test_path']),
+        tfds.Split.TRAIN: self._generate_examples(extracted_path['train_path']),
+        tfds.Split.VALIDATION: self._generate_examples(
+            extracted_path['dev_path']
+        ),
+        tfds.Split.TEST: self._generate_examples(extracted_path['test_path']),
     }
 
   def _generate_examples(self, path):
@@ -100,11 +96,9 @@ class WikiTableText(tfds.core.GeneratorBasedBuilder):
         # The tables only have one row and we specify it because the dataset
         # follows a standarized table format.
         table = []
-        for (header_i, value_i) in zip(headers, values):
-          table.append({
-              'column_header': header_i,
-              'row_number': 1,
-              'content': value_i
-          })
+        for header_i, value_i in zip(headers, values):
+          table.append(
+              {'column_header': header_i, 'row_number': 1, 'content': value_i}
+          )
         text = text.replace('_$$_', ' ').replace(' .', '')
         yield i, {'input_text': {'table': table}, 'target_text': text}

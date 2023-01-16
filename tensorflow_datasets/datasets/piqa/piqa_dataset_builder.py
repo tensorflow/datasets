@@ -60,23 +60,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "data_path":
-                    os.path.join(extracted_path,
-                                 "physicaliqa-train-dev/train.jsonl"),
-                "label_path":
-                    os.path.join(extracted_path,
-                                 "physicaliqa-train-dev/train-labels.lst"),
+                "data_path": os.path.join(
+                    extracted_path, "physicaliqa-train-dev/train.jsonl"
+                ),
+                "label_path": os.path.join(
+                    extracted_path, "physicaliqa-train-dev/train-labels.lst"
+                ),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "data_path":
-                    os.path.join(extracted_path,
-                                 "physicaliqa-train-dev/dev.jsonl"),
-                "label_path":
-                    os.path.join(extracted_path,
-                                 "physicaliqa-train-dev/dev-labels.lst"),
+                "data_path": os.path.join(
+                    extracted_path, "physicaliqa-train-dev/dev.jsonl"
+                ),
+                "label_path": os.path.join(
+                    extracted_path, "physicaliqa-train-dev/dev-labels.lst"
+                ),
             },
         ),
     ]

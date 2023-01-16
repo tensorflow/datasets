@@ -23,11 +23,13 @@ import xml.etree.ElementTree as ET
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = ("http://vision.stanford.edu/aditya86/ImageNetDogs/main.html")
+_URL = "http://vision.stanford.edu/aditya86/ImageNetDogs/main.html"
 
 _IMAGES_URL = "http://vision.stanford.edu/aditya86/ImageNetDogs/images.tar"
 _SPLIT_URL = "http://vision.stanford.edu/aditya86/ImageNetDogs/lists.tar"
-_ANNOTATIONS_URL = "http://vision.stanford.edu/aditya86/ImageNetDogs/annotation.tar"
+_ANNOTATIONS_URL = (
+    "http://vision.stanford.edu/aditya86/ImageNetDogs/annotation.tar"
+)
 _NAME_RE = re.compile(r"([\w-]*[/\\])*([\w]*.jpg)$")
 
 
@@ -38,31 +40,28 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.2.0")
 
   def _info(self):
-
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             # Images are of varying size
-            "image":
-                tfds.features.Image(),
-            "image/filename":
-                tfds.features.Text(),
-            "label":
-                tfds.features.ClassLabel(num_classes=120),
+            "image": tfds.features.Image(),
+            "image/filename": tfds.features.Text(),
+            "label": tfds.features.ClassLabel(num_classes=120),
             # Multiple bounding box per image
-            "objects":
-                tfds.features.Sequence({
+            "objects": tfds.features.Sequence(
+                {
                     "bbox": tfds.features.BBoxFeature(),
-                }),
+                }
+            ),
         }),
         supervised_keys=("image", "label"),
         homepage=_URL,
     )
 
   def _split_generators(self, dl_manager):
-
     images_path = dl_manager.download(_IMAGES_URL)
     split_path, annotation_path = dl_manager.download_and_extract(
-        [_SPLIT_URL, _ANNOTATIONS_URL])
+        [_SPLIT_URL, _ANNOTATIONS_URL]
+    )
     xml_file_list = collections.defaultdict(str)
 
     # Parsing the mat file which contains the list of train/test images
@@ -83,10 +82,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
       if "train" in fname:
         train_list, train_mat_arr = parse_mat_file(full_file_name)
-        label_names = set([  # Set to remove duplicates
-            os.path.split(element)[-2].lower()  # Extract path/label/img.jpg
-            for element in train_mat_arr["file_list"]
-        ])
+        label_names = set(
+            [  # Set to remove duplicates
+                os.path.split(element)[-2].lower()  # Extract path/label/img.jpg
+                for element in train_mat_arr["file_list"]
+            ]
+        )
       elif "test" in fname:
         test_list, _ = parse_mat_file(full_file_name)
 
@@ -106,23 +107,25 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "archive": dl_manager.iter_archive(images_path),
                 "file_names": train_list,
                 "annotation_files": xml_file_list,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(images_path),
                 "file_names": test_list,
                 "annotation_files": xml_file_list,
-            })
+            },
+        ),
     ]
 
   def _generate_examples(self, archive, file_names, annotation_files):
     """Generate dog images, labels, bbox attributes given the directory path.
 
     Args:
-      archive: object that iterates over the zip
-      file_names : list of train/test image file names obtained from mat file
-      annotation_files : dict of image file names and their xml object
+      archive: object that iterates over the zip file_names : list of train/test
+        image file names obtained from mat file annotation_files : dict of image
+        file names and their xml object
 
     Yields:
       Image path, Image file name, its corresponding label and
@@ -156,13 +159,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         )
 
       yield fname, {
-          "image":
-              fobj,
-          "image/filename":
-              fname,
-          "label":
-              label,
-          "objects": [{
-              "bbox": build_box(attributes, n)
-          } for n in range(len(attributes["xmin"]))]
+          "image": fobj,
+          "image/filename": fname,
+          "label": label,
+          "objects": [
+              {"bbox": build_box(attributes, n)}
+              for n in range(len(attributes["xmin"]))
+          ],
       }

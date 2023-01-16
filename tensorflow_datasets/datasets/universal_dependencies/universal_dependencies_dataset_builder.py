@@ -24,20 +24,23 @@ _DATA_URL = "https://raw.githubusercontent.com/UniversalDependencies/"
 
 class Builder(tfds.dataset_builders.ConllUDatasetBuilder):
   """DatasetBuilder for universal_dependencies dataset."""
+
   BUILDER_CONFIGS = []
   for language in ud_utils.LANGS:
     BUILDER_CONFIGS.append(
         conllu_lib.get_universal_morphology_config(
             language=language,
             description=ud_utils.DESCRIPTIONS[language],
-            features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES))
+            features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
+        )
+    )
 
   VERSION = tfds.core.Version("1.0.1")
   RELEASE_NOTES = {
-      "1.0.1":
-          "Updated config names.",
-      "1.0.0":
-          "Initial release, which corresponds to Universal Dependencies 2.10.",
+      "1.0.1": "Updated config names.",
+      "1.0.0": (
+          "Initial release, which corresponds to Universal Dependencies 2.10."
+      ),
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -50,9 +53,11 @@ class Builder(tfds.dataset_builders.ConllUDatasetBuilder):
     """Returns SplitGenerators."""
     paths = {}
     for split, split_paths in ud_utils.UD_FILEPATHS[
-        self.builder_config.language].items():
+        self.builder_config.language
+    ].items():
       paths[split] = ud_utils.prepare_ud_filepaths(
-          path_prefix=_DATA_URL, filepaths=split_paths)
+          path_prefix=_DATA_URL, filepaths=split_paths
+      )
 
     paths_per_split = dl_manager.download_and_extract(paths)
 

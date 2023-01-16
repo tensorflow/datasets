@@ -118,7 +118,8 @@ class FeatureTensorTest(
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
             ),
-        ])
+        ],
+    )
 
   @parameterized.parameters([
       (np.int32, features_lib.Encoding.NONE),
@@ -128,8 +129,9 @@ class FeatureTensorTest(
       (np.int32, features_lib.Encoding.BYTES),
       (tf.int32, features_lib.Encoding.BYTES),
   ])
-  def test_shape_dynamic_none_second(self, dtype,
-                                     encoding: features_lib.Encoding):
+  def test_shape_dynamic_none_second(
+      self, dtype, encoding: features_lib.Encoding
+  ):
     np_input_dynamic_1 = np.random.randint(256, size=(3, 2, 2), dtype=np.int32)
     np_input_dynamic_2 = np.random.randint(256, size=(3, 5, 2), dtype=np.int32)
 
@@ -156,7 +158,8 @@ class FeatureTensorTest(
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
             ),
-        ])
+        ],
+    )
 
   @parameterized.parameters([
       # (features_lib.Encoding.NONE,),  # Multiple unknown dims requires bytes
@@ -165,8 +168,9 @@ class FeatureTensorTest(
       (np.uint8, features_lib.Encoding.BYTES),
       (tf.uint8, features_lib.Encoding.BYTES),
   ])
-  def test_features_shape_dynamic_multi_none(self, dtype,
-                                             encoding: features_lib.Encoding):
+  def test_features_shape_dynamic_multi_none(
+      self, dtype, encoding: features_lib.Encoding
+  ):
     x = np.random.randint(256, size=(2, 3, 1), dtype=np.uint8)
     x_other_shape = np.random.randint(256, size=(4, 4, 1), dtype=np.uint8)
     wrong_shape = np.random.randint(256, size=(2, 3, 2), dtype=np.uint8)
@@ -220,7 +224,8 @@ class FeatureTensorTest(
                 shape=shape,
                 dtype=dtype,
                 encoding=encoding,
-            ),),
+            ),
+        ),
         shape=(None,) + shape,
         dtype=dtype,
         tests=[
@@ -283,7 +288,8 @@ class FeatureTensorTest(
                 value=0,
                 expected=False,
             ),
-        ])
+        ],
+    )
 
   @parameterized.parameters([
       (np.bool_, features_lib.Encoding.NONE),
@@ -311,17 +317,20 @@ class FeatureTensorTest(
                 value=[True, False, True],
                 expected=[True, False, True],
             ),
-        ])
+        ],
+    )
 
-  @parameterized.parameters([
-      (np.str_, features_lib.Encoding.NONE),
-      (np.object_, features_lib.Encoding.NONE),
-      (tf.string, features_lib.Encoding.NONE),
-      # Bytes encoding not supported for tf.string
-  ])
+  @parameterized.parameters(
+      [
+          (np.str_, features_lib.Encoding.NONE),
+          (np.object_, features_lib.Encoding.NONE),
+          (tf.string, features_lib.Encoding.NONE),
+          # Bytes encoding not supported for tf.string
+      ]
+  )
   def test_string(self, dtype, encoding: features_lib.Encoding):
     nonunicode_text = 'hello world'
-    unicode_text = u'你好'
+    unicode_text = '你好'
 
     self.assertFeature(
         feature=features_lib.Tensor(
@@ -400,7 +409,8 @@ def test_invalid_input():
 
   with pytest.raises(
       NotImplementedError,
-      match='does not support `encoding=` when dtype is string'):
+      match='does not support `encoding=` when dtype is string',
+  ):
     features_lib.Tensor(
         shape=(2, 1),
         dtype=np.str_,
@@ -409,7 +419,8 @@ def test_invalid_input():
 
   with pytest.raises(
       NotImplementedError,
-      match='does not support `encoding=` when dtype is string'):
+      match='does not support `encoding=` when dtype is string',
+  ):
     features_lib.Tensor(
         shape=(2, 1),
         dtype=tf.string,
@@ -417,7 +428,8 @@ def test_invalid_input():
     )
 
   with pytest.raises(
-      TypeError, match='converting it to `bool` will always output `True`'):
+      TypeError, match='converting it to `bool` will always output `True`'
+  ):
     features_lib.Tensor(
         shape=(),
         dtype=np.bool_,
@@ -425,7 +437,8 @@ def test_invalid_input():
     ).encode_example('0')
 
   with pytest.raises(
-      TypeError, match='converting it to `bool` will always output `True`'):
+      TypeError, match='converting it to `bool` will always output `True`'
+  ):
     features_lib.Tensor(
         shape=(),
         dtype=np.bool_,
@@ -434,11 +447,14 @@ def test_invalid_input():
 
 
 def test_jax_bfloat16():
-  features = features_lib.FeaturesDict({
-      'data':
-          features_lib.Tensor(shape=(1,), dtype=tf.bfloat16, encoding='bytes')
-  })
+  features = features_lib.FeaturesDict(
+      {
+          'data': features_lib.Tensor(
+              shape=(1,), dtype=tf.bfloat16, encoding='bytes'
+          )
+      }
+  )
   data = {
-      'data': jnp.array([6.], dtype=jnp.bfloat16),
+      'data': jnp.array([6.0], dtype=jnp.bfloat16),
   }
   features.encode_example(data)

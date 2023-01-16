@@ -23,56 +23,57 @@ import tensorflow_datasets.public_api as tfds
 
 def _features():
   return tfds.features.FeaturesDict({
-      'sample_id':
-          np.int32,
-      'ambiguous_question':
-          tfds.features.Text(doc='Disambiguated question from AmbigQA.'),
-      'qa_pairs':
-          tfds.features.Sequence(
-              tfds.features.FeaturesDict({
-                  'question':
-                      tfds.features.Text(),
-                  'short_answers':
-                      tfds.features.Sequence(
-                          tfds.features.Text(),
-                          doc='List of short answers from AmbigQA.'),
-                  'context':
-                      tfds.features.Text(doc='Additional context provided.'),
-                  'wikipage':
-                      tfds.features.Text(
-                          doc='Title of the Wikipedia page the additional context was taken from.'
+      'sample_id': np.int32,
+      'ambiguous_question': tfds.features.Text(
+          doc='Disambiguated question from AmbigQA.'
+      ),
+      'qa_pairs': tfds.features.Sequence(
+          tfds.features.FeaturesDict({
+              'question': tfds.features.Text(),
+              'short_answers': tfds.features.Sequence(
+                  tfds.features.Text(),
+                  doc='List of short answers from AmbigQA.',
+              ),
+              'context': tfds.features.Text(doc='Additional context provided.'),
+              'wikipage': tfds.features.Text(
+                  doc=(
+                      'Title of the Wikipedia page the additional context was'
+                      ' taken from.'
+                  )
+              ),
+          }),
+          doc='Q&A pairs from AmbigQA which are used for disambiguation.',
+      ),
+      'wikipages': tfds.features.Sequence(
+          tfds.features.FeaturesDict({
+              'title': tfds.features.Text(doc='Title of the Wikipedia page.'),
+              'url': tfds.features.Text(doc='Link to the Wikipedia page.'),
+          }),
+          doc='List of Wikipedia pages visited by AmbigQA annotators.',
+      ),
+      'annotations': tfds.features.Sequence(
+          tfds.features.FeaturesDict({
+              'long_answer': tfds.features.Text(doc='Annotation.'),
+              'knowledge': tfds.features.Sequence(
+                  tfds.features.FeaturesDict({
+                      'content': tfds.features.Text(
+                          doc='A passage from Wikipedia.'
                       ),
-              }),
-              doc='Q&A pairs from AmbigQA which are used for disambiguation.'),
-      'wikipages':
-          tfds.features.Sequence(
-              tfds.features.FeaturesDict({
-                  'title':
-                      tfds.features.Text(doc='Title of the Wikipedia page.'),
-                  'url':
-                      tfds.features.Text(doc='Link to the Wikipedia page.'),
-              }),
-              doc='List of Wikipedia pages visited by AmbigQA annotators.'),
-      'annotations':
-          tfds.features.Sequence(
-              tfds.features.FeaturesDict({
-                  'long_answer':
-                      tfds.features.Text(doc='Annotation.'),
-                  'knowledge':
-                      tfds.features.Sequence(
-                          tfds.features.FeaturesDict({
-                              'content':
-                                  tfds.features.Text(
-                                      doc='A passage from Wikipedia.'),
-                              'wikipage':
-                                  tfds.features.Text(
-                                      doc='Title of the Wikipedia page the passage was taken from.'
-                                  ),
-                          }),
-                          doc='List of additional knowledge pieces.'),
-              }),
-              doc='Long-form answers to the ambiguous question constructed by ASQA annotators.'
+                      'wikipage': tfds.features.Text(
+                          doc=(
+                              'Title of the Wikipedia page the passage was'
+                              ' taken from.'
+                          )
+                      ),
+                  }),
+                  doc='List of additional knowledge pieces.',
+              ),
+          }),
+          doc=(
+              'Long-form answers to the ambiguous question constructed by ASQA'
+              ' annotators.'
           ),
+      ),
   })
 
 
@@ -95,7 +96,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     file_path = dl_manager.download(
-        'https://storage.googleapis.com/gresearch/ASQA/ASQA.json')
+        'https://storage.googleapis.com/gresearch/ASQA/ASQA.json'
+    )
 
     with tf.io.gfile.GFile(file_path, 'r') as f:
       samples = json.load(f)
@@ -112,8 +114,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       value = split_sample[key] if split_sample[key] else ''
       tfds_sample[key] = value
 
-    def _iterate_and_add_features_in_dict(raw_sample_element,
-                                          tfds_sample_element, feature_list):
+    def _iterate_and_add_features_in_dict(
+        raw_sample_element, tfds_sample_element, feature_list
+    ):
       for element in raw_sample_element:
         tfds_dict = {}
         for feature in feature_list:
@@ -133,7 +136,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       _iterate_and_add_features_in_dict(
           raw_sample_element=split_sample['qa_pairs'],
           tfds_sample_element=tfds_sample['qa_pairs'],
-          feature_list=['question', 'short_answers', 'context', 'wikipage'])
+          feature_list=['question', 'short_answers', 'context', 'wikipage'],
+      )
 
       # Add Wikipages.
       for _, wikipage_info in split_sample['wikipages'].items():
@@ -150,7 +154,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         _iterate_and_add_features_in_dict(
             raw_sample_element=annotation['knowledge'],
             tfds_sample_element=tfds_annotation['knowledge'],
-            feature_list=['content', 'wikipage'])
+            feature_list=['content', 'wikipage'],
+        )
         tfds_sample['annotations'].append(tfds_annotation)
 
       yield sample_id, tfds_sample

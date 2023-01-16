@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class INaturalist2021Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for i_naturalist2021 dataset."""
+
   DATASET_CLASS = i_naturalist2021.INaturalist2021
   SPLITS = {
       "mini": 2,  # Number of fake mini examples

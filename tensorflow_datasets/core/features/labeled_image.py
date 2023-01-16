@@ -84,7 +84,8 @@ class LabeledImage(image_feature.Image):
     )
     if self.shape[-1] != 1:
       raise ValueError(
-          f'LabeledImage shape should have a single channel. Got: {shape}')
+          f'LabeledImage shape should have a single channel. Got: {shape}'
+      )
     label_kwargs = _labels_to_kwarg(labels)
     self._class_label = class_label_feature.ClassLabel(**label_kwargs)
 
@@ -99,19 +100,22 @@ class LabeledImage(image_feature.Image):
   def save_metadata(self, data_dir, feature_name=None) -> None:
     super().save_metadata(data_dir=data_dir, feature_name=feature_name)
     self._class_label.save_metadata(
-        data_dir=data_dir, feature_name=feature_name)
+        data_dir=data_dir, feature_name=feature_name
+    )
 
   def load_metadata(self, data_dir, feature_name=None) -> None:
     super().load_metadata(data_dir=data_dir, feature_name=feature_name)
     self._class_label.load_metadata(
-        data_dir=data_dir, feature_name=feature_name)
+        data_dir=data_dir, feature_name=feature_name
+    )
 
   def _additional_repr_info(self):
     return {'num_classes': self.num_classes}
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.ImageFeature]) -> 'LabeledImage':
+      cls, value: Union[Json, feature_pb2.ImageFeature]
+  ) -> 'LabeledImage':
     if isinstance(value, dict):
       # For backwards compatibility
       return cls(**value)
@@ -139,6 +143,8 @@ def _labels_to_kwarg(labels: _LabelArg) -> Dict[str, _LabelArg]:
   elif isinstance(labels, list):
     kwarg_name = 'names'
   else:
-    raise TypeError(f'Invalid `labels` type: {type(labels)}. Should be one of '
-                    'list[labels], path, num_labels')
+    raise TypeError(
+        f'Invalid `labels` type: {type(labels)}. Should be one of '
+        'list[labels], path, num_labels'
+    )
   return {kwarg_name: labels}

@@ -26,7 +26,7 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_text(self):
     nonunicode_text = 'hello world'
-    unicode_text = u'你好'
+    unicode_text = '你好'
 
     self.assertFeature(
         feature=features.Text(),
@@ -52,7 +52,7 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_text_encoded(self):
-    unicode_text = u'你好'
+    unicode_text = '你好'
 
     # Unicode integer-encoded by byte
     self.assertFeature(
@@ -70,17 +70,19 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=[],
             ),
         ],
-        skip_feature_tests=True)
+        skip_feature_tests=True,
+    )
 
   def test_text_conversion(self):
     text_f = features.Text(encoder=text_encoder.ByteTextEncoder())
-    text = u'你好'
+    text = '你好'
     self.assertEqual(text, text_f.ints2str(text_f.str2ints(text)))
 
   def test_save_load_metadata(self):
     text_f = features.Text(
-        encoder=text_encoder.ByteTextEncoder(additional_tokens=['HI']))
-    text = u'HI 你好'
+        encoder=text_encoder.ByteTextEncoder(additional_tokens=['HI'])
+    )
+    text = 'HI 你好'
     ids = text_f.str2ints(text)
     self.assertEqual(1, ids[0])
 

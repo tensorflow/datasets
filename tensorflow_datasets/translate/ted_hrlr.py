@@ -80,15 +80,18 @@ class TedHrlrConfig(tfds.core.BuilderConfig):
     """
     name = "%s_to_%s" % (language_pair[0].replace("_", ""), language_pair[1])
 
-    description = ("Translation dataset from %s to %s in plain text.") % (
-        language_pair[0], language_pair[1])
+    description = "Translation dataset from %s to %s in plain text." % (
+        language_pair[0],
+        language_pair[1],
+    )
     super(TedHrlrConfig, self).__init__(
-        name=name, description=description, **kwargs)
+        name=name, description=description, **kwargs
+    )
 
     # Validate language pair.
     assert language_pair in _VALID_LANGUAGE_PAIRS, (
-        "Config language pair (%s, "
-        "%s) not supported") % language_pair
+        "Config language pair (%s, %s) not supported" % language_pair
+    )
 
     self.language_pair = language_pair
 
@@ -103,7 +106,8 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
           release_notes={
               "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
           },
-      ) for pair in _VALID_LANGUAGE_PAIRS
+      )
+      for pair in _VALID_LANGUAGE_PAIRS
   ]
 
   def _info(self):
@@ -111,7 +115,8 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair),
+            languages=self.builder_config.language_pair
+        ),
         homepage="https://github.com/neulab/word-embeddings-for-nmt",
         supervised_keys=self.builder_config.language_pair,
         citation=_CITATION,
@@ -127,30 +132,32 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "source_file":
-                    os.path.join(data_dir,
-                                 "{}.train".format(source.replace("_", "-"))),
-                "target_file":
-                    os.path.join(data_dir, "{}.train".format(target))
-            }),
+                "source_file": os.path.join(
+                    data_dir, "{}.train".format(source.replace("_", "-"))
+                ),
+                "target_file": os.path.join(
+                    data_dir, "{}.train".format(target)
+                ),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "source_file":
-                    os.path.join(data_dir,
-                                 "{}.dev".format(source.split("_")[0])),
-                "target_file":
-                    os.path.join(data_dir, "{}.dev".format(target))
-            }),
+                "source_file": os.path.join(
+                    data_dir, "{}.dev".format(source.split("_")[0])
+                ),
+                "target_file": os.path.join(data_dir, "{}.dev".format(target)),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "source_file":
-                    os.path.join(data_dir,
-                                 "{}.test".format(source.split("_")[0])),
-                "target_file":
-                    os.path.join(data_dir, "{}.test".format(target))
-            }),
+                "source_file": os.path.join(
+                    data_dir, "{}.test".format(source.split("_")[0])
+                ),
+                "target_file": os.path.join(data_dir, "{}.test".format(target)),
+            },
+        ),
     ]
 
   def _generate_examples(self, source_file, target_file):
@@ -161,8 +168,13 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
       target_sentences = f.read().split("\n")
 
     assert len(target_sentences) == len(
-        source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (len(
-            source_sentences), len(target_sentences), source_file, target_file)
+        source_sentences
+    ), "Sizes do not match: %d vs %d for %s vs %s." % (
+        len(source_sentences),
+        len(target_sentences),
+        source_file,
+        target_file,
+    )
 
     source, target = self.builder_config.language_pair
     for idx, (l1, l2) in enumerate(zip(source_sentences, target_sentences)):

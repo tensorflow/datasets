@@ -27,7 +27,9 @@ import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-DATA_URL = "http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0.tar"
+DATA_URL = (
+    "http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0.tar"
+)
 
 # There are exactly 30 frames in each video.
 FRAMES_PER_VIDEO = 30
@@ -47,16 +49,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # metadata (action and position)
     features = tfds.features.Sequence(
         {
-            "image_main":
-                tfds.features.Image(shape=IMG_SHAPE),
-            "image_aux1":
-                tfds.features.Image(shape=IMG_SHAPE),
-            "action":
-                tfds.features.Tensor(shape=(4,), dtype=np.float32),
-            "endeffector_pos":
-                tfds.features.Tensor(shape=(3,), dtype=np.float32),
+            "image_main": tfds.features.Image(shape=IMG_SHAPE),
+            "image_aux1": tfds.features.Image(shape=IMG_SHAPE),
+            "action": tfds.features.Tensor(shape=(4,), dtype=np.float32),
+            "endeffector_pos": tfds.features.Tensor(
+                shape=(3,), dtype=np.float32
+            ),
         },
-        length=FRAMES_PER_VIDEO)
+        length=FRAMES_PER_VIDEO,
+    )
 
     return self.dataset_info_from_configs(
         features=features,
@@ -70,12 +71,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "filedir": os.path.join(files, "softmotion30_44k", "train"),
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "filedir": os.path.join(files, "softmotion30_44k", "test"),
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, filedir):
@@ -89,7 +92,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
       # For each video inside the file
       for video_id, example_str in enumerate(
-          tf.compat.v1.io.tf_record_iterator(filepath)):
+          tf.compat.v1.io.tf_record_iterator(filepath)
+      ):
         example = tf.train.SequenceExample.FromString(example_str)
 
         # Merge all frames together

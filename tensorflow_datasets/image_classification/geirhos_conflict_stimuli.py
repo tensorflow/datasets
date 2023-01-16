@@ -51,8 +51,22 @@ _IMAGENET_MAPPING_URL = "https://raw.githubusercontent.com/rgeirhos/generalisati
 _DATA_DIR_PATH = "texture-vs-shape-1b69c6a445c3348927139edb30a5134521fd4b03/stimuli/style-transfer-preprocessed-512"
 
 _CLASSES = [
-    "airplane", "bear", "bicycle", "bird", "boat", "bottle", "car", "cat",
-    "chair", "clock", "dog", "elephant", "keyboard", "knife", "oven", "truck"
+    "airplane",
+    "bear",
+    "bicycle",
+    "bird",
+    "boat",
+    "bottle",
+    "car",
+    "cat",
+    "chair",
+    "clock",
+    "dog",
+    "elephant",
+    "keyboard",
+    "knife",
+    "oven",
+    "truck",
 ]
 
 
@@ -69,41 +83,38 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(),
-            "shape_label":
-                tfds.features.ClassLabel(names=_CLASSES),
-            "shape_imagenet_labels":
-                tfds.features.Sequence(
-                    tfds.features.ClassLabel(names_file=imagenet_names_file)),
-            "texture_label":
-                tfds.features.ClassLabel(names=_CLASSES),
-            "texture_imagenet_labels":
-                tfds.features.Sequence(
-                    tfds.features.ClassLabel(names_file=imagenet_names_file)),
-            "file_name":
-                tfds.features.Text(),
+            "image": tfds.features.Image(),
+            "shape_label": tfds.features.ClassLabel(names=_CLASSES),
+            "shape_imagenet_labels": tfds.features.Sequence(
+                tfds.features.ClassLabel(names_file=imagenet_names_file)
+            ),
+            "texture_label": tfds.features.ClassLabel(names=_CLASSES),
+            "texture_imagenet_labels": tfds.features.Sequence(
+                tfds.features.ClassLabel(names_file=imagenet_names_file)
+            ),
+            "file_name": tfds.features.Text(),
         }),
         supervised_keys=("image", "shape_label"),
         homepage=_BASE_URL,
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     """Define splits."""
 
     dl_paths = dl_manager.download_and_extract({
         "texture_vs_shape": _DOWNLOAD_URL,
-        "imagenet_mapping": _IMAGENET_MAPPING_URL
+        "imagenet_mapping": _IMAGENET_MAPPING_URL,
     })
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "data_dir_path":
-                    os.path.join(dl_paths["texture_vs_shape"], _DATA_DIR_PATH),
-                "imagenet_mapping_path":
-                    dl_paths["imagenet_mapping"]
+                "data_dir_path": os.path.join(
+                    dl_paths["texture_vs_shape"], _DATA_DIR_PATH
+                ),
+                "imagenet_mapping_path": dl_paths["imagenet_mapping"],
             },
         ),
     ]
@@ -120,7 +131,10 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
       mapping[match.group(1)] = list(
           sorted(
               imagenet_names.intersection(
-                  re.sub(r"\s", "", match.group(2)).split(","))))
+                  re.sub(r"\s", "", match.group(2)).split(",")
+              )
+          )
+      )
 
     # Process images.
     for shape_class_name in tf.io.gfile.listdir(data_dir_path):
@@ -134,5 +148,5 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
             "shape_label": shape_class_name,
             "shape_imagenet_labels": mapping[shape_class_name],
             "texture_label": texture_class_name,
-            "texture_imagenet_labels": mapping[texture_class_name]
+            "texture_imagenet_labels": mapping[texture_class_name],
         }

@@ -28,9 +28,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            "password": tfds.features.Text(),
-        }),
+        features=tfds.features.FeaturesDict(
+            {
+                "password": tfds.features.Text(),
+            }
+        ),
         supervised_keys=None,
         homepage="https://wiki.skullsecurity.org/Passwords",
     )
@@ -47,7 +49,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, path):
-
     with tf.io.gfile.GFile(path, "rb") as f:
       blines = f.readlines()
 

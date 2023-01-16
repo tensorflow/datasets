@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class SymmetricSolidsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for symmetric_solids dataset."""
+
   DATASET_CLASS = symmetric_solids_dataset_builder.Builder
   SPLITS = {
       'train': 6,  # Number of fake train examples

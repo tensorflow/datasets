@@ -30,7 +30,8 @@ def test_get_file_content_from_dataset_folder(mock_get_path):
   mock_path.read_text.return_value = expected
   mock_get_path.return_value = mock_path
   actual = dcb.get_file_content_from_dataset_folder(
-      dataset_class=None, file_name='anything')
+      dataset_class=None, file_name='anything'
+  )
   mock_get_path.assert_called_once_with(None, 'anything')
   assert actual == expected
 
@@ -40,19 +41,20 @@ def test_get_file_content_from_dataset_folder_raise_exception(mock_get_path):
   with pytest.raises(AttributeError):
     mock_get_path.return_value = FileNotFoundError
     dcb.get_file_content_from_dataset_folder(
-        dataset_class=None, file_name=None, raise_error_if_fails=True)
+        dataset_class=None, file_name=None, raise_error_if_fails=True
+    )
 
 
 @mock.patch.object(dcb, 'get_filepath_in_dataset_folder', autospec=True)
 def test_get_file_content_from_dataset_folder_return_none(mock_get_path):
   mock_get_path.return_value = FileNotFoundError
   actual = dcb.get_file_content_from_dataset_folder(
-      dataset_class=None, file_name=None)
+      dataset_class=None, file_name=None
+  )
   assert actual is None
 
 
 def test_dataset_collection_info_from_cls():
-
   expected_description = 'description'
   dummy_dc_info = dcb.DatasetCollectionInfo.from_cls(
       dataset_collection_class=testing.DummyDatasetCollection,
@@ -77,7 +79,7 @@ def test_all_versions(dummy_dc):
   assert set(dummy_dc.all_versions) == {
       version_lib.Version('1.0.0'),
       version_lib.Version('1.1.0'),
-      version_lib.Version('2.0.0')
+      version_lib.Version('2.0.0'),
   }
 
 
@@ -87,8 +89,11 @@ def test_get_latest_version(dummy_dc):
 
 def test_get_collection(dummy_dc):
   assert sorted(dummy_dc.get_collection().keys()) == ['a', 'b', 'c']
-  assert sorted(
-      dummy_dc.get_collection(version='2.0.0').keys()) == ['a', 'b', 'c']
+  assert sorted(dummy_dc.get_collection(version='2.0.0').keys()) == [
+      'a',
+      'b',
+      'c',
+  ]
   assert sorted(dummy_dc.get_collection(version='1.0.0').keys()) == ['a', 'b']
 
 

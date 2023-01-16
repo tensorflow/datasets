@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class RobomimicPhLiftLowDimTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for robomimic_ph dataset."""
+
   DATASET_CLASS = robomimic_ph_dataset_builder.Builder
   SPLITS = {'train': 2}
   SKIP_TF1_GRAPH_MODE = True

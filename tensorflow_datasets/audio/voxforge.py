@@ -48,7 +48,9 @@ Since the website is constantly updated, and for the sake of reproducibility,
 this release contains only recordings submitted prior to {}.
 The samples are splitted between train, validation and testing so that samples
 from each speaker belongs to exactly one split.
-""".format(_LAST_DATE.isoformat())
+""".format(
+    _LAST_DATE.isoformat()
+)
 
 _HOMEPAGE = 'http://www.voxforge.org/'
 
@@ -73,11 +75,14 @@ def _compute_split_boundaries(split_probs, n_items):
     [('train', 0, 60), ('dev', 60, 80), ('test', 80, 100)].
   """
   if len(split_probs) > n_items:
-    raise ValueError('Not enough items for the splits. There are {splits} '
-                     'splits while there are only {items} items'.format(
-                         splits=len(split_probs), items=n_items))
+    raise ValueError(
+        'Not enough items for the splits. There are {splits} '
+        'splits while there are only {items} items'.format(
+            splits=len(split_probs), items=n_items
+        )
+    )
   total_probs = sum(p for name, p in split_probs)
-  if abs(1 - total_probs) > 1E-8:
+  if abs(1 - total_probs) > 1e-8:
     raise ValueError('Probs should sum up to 1. probs={}'.format(split_probs))
   split_boundaries = []
   sum_p = 0.0
@@ -87,8 +92,11 @@ def _compute_split_boundaries(split_probs, n_items):
     split_boundaries.append((name, int(prev * n_items), int(sum_p * n_items)))
 
   # Guard against rounding errors.
-  split_boundaries[-1] = (split_boundaries[-1][0], split_boundaries[-1][1],
-                          n_items)
+  split_boundaries[-1] = (
+      split_boundaries[-1][0],
+      split_boundaries[-1][1],
+      n_items,
+  )
 
   return split_boundaries
 
@@ -96,7 +104,8 @@ def _compute_split_boundaries(split_probs, n_items):
 def _wav_obj_to_samples(wav_obj):
   """Read a `tarfile.ExFileObject`."""
   sample_rate, samples = tfds.core.lazy_imports.scipy.io.wavfile.read(
-      io.BytesIO(wav_obj.read()))
+      io.BytesIO(wav_obj.read())
+  )
   return samples, sample_rate
 
 
@@ -139,26 +148,28 @@ class Voxforge(tfds.core.BeamBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
 
-  MANUAL_DOWNLOAD_INSTRUCTIONS = textwrap.dedent("""
+  MANUAL_DOWNLOAD_INSTRUCTIONS = textwrap.dedent(
+      """
   VoxForge requires manual download of the audio archives. The complete list of
   archives can be found in {}. It can be downloaded using the following command:
   wget -i voxforge_urls.txt -x
   Note that downloading and building the dataset locally requires ~100GB disk
   space (but only ~60GB will be used permanently).
-  """.format(_URLS_LIST_FILE))
+  """.format(
+          _URLS_LIST_FILE
+      )
+  )
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'audio':
-                tfds.features.Audio(
-                    file_format='wav', sample_rate=_SAMPLE_RATE),
-            'label':
-                tfds.features.ClassLabel(names=LABELS),
-            'speaker_id':
-                np.str_
+            'audio': tfds.features.Audio(
+                file_format='wav', sample_rate=_SAMPLE_RATE
+            ),
+            'label': tfds.features.ClassLabel(names=LABELS),
+            'speaker_id': np.str_,
         }),
         supervised_keys=('audio', 'label'),
         homepage=_HOMEPAGE,
@@ -171,12 +182,14 @@ class Voxforge(tfds.core.BeamBasedBuilder):
     archive_urls = []
     with tf.io.gfile.GFile(urls_list['urls_list']) as f:
       for line in f:
-        archive_url = line.strip().replace('"', '').replace('\'', '')
+        archive_url = line.strip().replace('"', '').replace("'", '')
         archive_path = os.path.join(dl_manager.manual_dir, archive_url)
         if not tf.io.gfile.exists(archive_path):
           raise AssertionError(
               'VoxForge requires manual download. Path {} is missing'.format(
-                  archive_path))
+                  archive_path
+              )
+          )
         archive_urls.append(archive_path)
 
     archives_and_speaker_ids = []
@@ -186,39 +199,39 @@ class Voxforge(tfds.core.BeamBasedBuilder):
       archives_and_speaker_ids.append((archive_url, speaker_id))
 
     split_probs = [('train', 0.7), ('validation', 0.1), ('test', 0.2)]
-    splits = _get_inter_splits_by_group(archives_and_speaker_ids, split_probs,
-                                        0)
+    splits = _get_inter_splits_by_group(
+        archives_and_speaker_ids, split_probs, 0
+    )
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'file_names': splits['train'],
-                'dl_manager': dl_manager
+                'dl_manager': dl_manager,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'file_names': splits['validation'],
-                'dl_manager': dl_manager
+                'dl_manager': dl_manager,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={
-                'file_names': splits['test'],
-                'dl_manager': dl_manager
-            },
+            gen_kwargs={'file_names': splits['test'], 'dl_manager': dl_manager},
         ),
     ]
 
   def _build_pcollection(self, pipeline, file_names, dl_manager):
     """Build Pcollection of examples."""
     beam = tfds.core.lazy_imports.apache_beam
-    return (pipeline
-            | beam.Create(file_names)
-            | beam.FlatMap(_generate_examples, dl_manager=dl_manager))
+    return (
+        pipeline
+        | beam.Create(file_names)
+        | beam.FlatMap(_generate_examples, dl_manager=dl_manager)
+    )
 
 
 def _generate_examples(fname, dl_manager):
@@ -226,15 +239,16 @@ def _generate_examples(fname, dl_manager):
   folder, archive_name = os.path.split(fname)
   speaker_id = archive_name.split('-')[0]
   label_idx = folder.index('/Trunk') - 2
-  label = folder[label_idx:label_idx + 2]
+  label = folder[label_idx : label_idx + 2]
   iter_archive = dl_manager.iter_archive(fname)
   for wav_path, wav_obj in iter_archive:
     if not wav_path.endswith('.wav'):
       continue
     _, wav_name = os.path.split(wav_path)
-    key = '{}_{}_{}'.format(label, archive_name, wav_name[:-len('.wav')])
+    key = '{}_{}_{}'.format(label, archive_name, wav_name[: -len('.wav')])
     samples, sample_rate = _wav_obj_to_samples(wav_obj)
     if sample_rate != _SAMPLE_RATE:
       raise ValueError(
-          f'Data sample rate was {sample_rate}, but must be {_SAMPLE_RATE}')
+          f'Data sample rate was {sample_rate}, but must be {_SAMPLE_RATE}'
+      )
     yield key, {'audio': samples, 'label': label, 'speaker_id': speaker_id}

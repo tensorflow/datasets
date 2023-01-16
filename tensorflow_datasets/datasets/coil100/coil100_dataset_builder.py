@@ -25,12 +25,12 @@ import tensorflow_datasets.public_api as tfds
 
 _URL = "http://www.cs.columbia.edu/CAVE/databases/SLAM_coil-20_coil-100/coil-100/coil-100.zip"
 
-_DESCRIPTION = ("""The dataset contains 7200 color images of 100 objects
+_DESCRIPTION = """The dataset contains 7200 color images of 100 objects
 (72 images per object). The objects have a wide variety of complex geometric and reflectance characteristics.
 The objects were placed on a motorized turntable against a black background.
 The turntable was rotated through 360 degrees to vary object pose with respect to a fxed color camera.
 Images of the objects were taken at pose intervals of	5 degrees.This corresponds to
-72 poses per object""")
+72 poses per object"""
 
 _ANGLE_LABELS = [str(x) for x in range(0, 360, 5)]
 _OBJECT_IDS = [f"obj{str(x)}" for x in range(1, 101)]
@@ -43,8 +43,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("2.0.0")
   RELEASE_NOTES = {
-      "2.0.0": "Change features (`object_id` is now `ClassLabel`, rename "
-               "`label` -> `angle_label`, add `angle`)",
+      "2.0.0": (
+          "Change features (`object_id` is now `ClassLabel`, rename "
+          "`label` -> `angle_label`, add `angle`)"
+      ),
       "1.0.0": "Initial release",
   }
 
@@ -59,7 +61,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "angle": np.int64,
         }),
         supervised_keys=("image", "angle_label"),
-        homepage="http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php",
+        homepage=(
+            "http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php"
+        ),
     )
 
   def _split_generators(self, dl_manager):

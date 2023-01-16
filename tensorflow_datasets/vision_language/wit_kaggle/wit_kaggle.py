@@ -75,7 +75,8 @@ class WitKaggleConfig(tfds.core.BuilderConfig):
       image_folder: Optional[str] = None,
       split_specific_features: Optional[tfds.features.FeaturesDict] = None,
       resnet_embedding_shape: int = 2048,
-      **kwargs):
+      **kwargs,
+  ):
     """BuilderConfig for WitKaggle.
 
     Args:
@@ -92,26 +93,23 @@ class WitKaggleConfig(tfds.core.BuilderConfig):
 
     # Features common to all configs.
     common_features = tfds.features.FeaturesDict({
-        "caption_title_and_reference_description":
-            tfds.features.Text(
-            ),  # Caption for the image_url (if existent, else '').
-        "image_url":
-            tfds.features.Text(),
-        "image":
-            tfds.features.Image(
-            ),  # Base64 encoded image bytes (if existent, else a blank image).
-        "metadata_url":
-            tfds.features.Text(
-            ),  # Url to the image's commons page (if existent, else '').
-        "embedding":
-            tfds.features.Tensor(
-                shape=(resnet_embedding_shape,), dtype=np.float32
-            ),  # A tensor of 2048 floats (if existent, else zeros).
+        "caption_title_and_reference_description": (
+            tfds.features.Text()
+        ),  # Caption for the image_url (if existent, else '').
+        "image_url": tfds.features.Text(),
+        "image": (
+            tfds.features.Image()
+        ),  # Base64 encoded image bytes (if existent, else a blank image).
+        "metadata_url": (
+            tfds.features.Text()
+        ),  # Url to the image's commons page (if existent, else '').
+        "embedding": tfds.features.Tensor(
+            shape=(resnet_embedding_shape,), dtype=np.float32
+        ),  # A tensor of 2048 floats (if existent, else zeros).
     })
-    self.features = tfds.features.FeaturesDict({
-        **common_features,
-        **split_specific_features
-    })
+    self.features = tfds.features.FeaturesDict(
+        {**common_features, **split_specific_features}
+    )
     self.split_specific_features = split_specific_features
     self.resnet_embedding_shape = resnet_embedding_shape
     # For missing images, we use a zeroed vector of dimensionality (2048,) as
@@ -124,13 +122,12 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("1.0.2")
   RELEASE_NOTES = {
-      "1.0.2":
-          "Fixes parsing of boolean fields.",
-      "1.0.1":
+      "1.0.2": "Fixes parsing of boolean fields.",
+      "1.0.1": (
           "Optimize Beam pipeline to avoid strugglers, ignoring rows without "
-          "an image URL. Also added more Beam counters.",
-      "1.0.0":
-          """Initial release. It provides the train and test datasets from the
+          "an image URL. Also added more Beam counters."
+      ),
+      "1.0.0": """Initial release. It provides the train and test datasets from the
       Wikipedia - Image/Caption Matching Kaggle competition
       (https://www.kaggle.com/c/wikipedia-image-caption/data).
 
@@ -164,7 +161,10 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       WitKaggleConfig(
           name="train_with_extended_features",
-          description="Training samples for the Wikipedia-Image/Caption Matching competition.",
+          description=(
+              "Training samples for the Wikipedia-Image/Caption Matching"
+              " competition."
+          ),
           sample_files=[
               f"train/train-0000{i}-of-00005.tsv.zip" for i in range(5)
           ],
@@ -188,16 +188,21 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
               "context_page_description": tfds.features.Text(),
               "context_section_description": tfds.features.Text(),
               "caption_title_and_reference_description": tfds.features.Text(),
-          })),
+          }),
+      ),
       WitKaggleConfig(
           name="test_without_gold",
-          description="Test samples (without gold answers) for the Wikipedia-Image/Caption Matching competition.",
+          description=(
+              "Test samples (without gold answers) for the"
+              " Wikipedia-Image/Caption Matching competition."
+          ),
           sample_files=["test/test.tsv.zip"],
           image_folder="test/image_data_test",
           split_specific_features=tfds.features.FeaturesDict({
               "id": tfds.features.Text(),
               "image_url": tfds.features.Text(),
-          })),
+          }),
+      ),
   ]
   # pytype: enable=wrong-keyword-args
 
@@ -229,8 +234,10 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=self.builder_config.features,
-        supervised_keys=("image_url",
-                         "caption_title_and_reference_description"),
+        supervised_keys=(
+            "image_url",
+            "caption_title_and_reference_description",
+        ),
         homepage="https://www.kaggle.com/c/wikipedia-image-caption/code",
         citation=_CITATION,
     )
@@ -241,28 +248,29 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
         "samples": [
             tfds.download.Resource(  # pylint:disable=g-complex-comprehension
                 path=dl_manager.manual_dir / filename,
-                extract_method=tfds.download.ExtractMethod.ZIP)
+                extract_method=tfds.download.ExtractMethod.ZIP,
+            )
             for filename in self.builder_config.sample_files
         ],
-        "images":
-            tfds.download.Resource(path=dl_manager.manual_dir /
-                                   self.builder_config.image_folder),
+        "images": tfds.download.Resource(
+            path=dl_manager.manual_dir / self.builder_config.image_folder
+        ),
     }
 
     extracted_paths = dl_manager.extract(archive_path)
 
     return {
-        self.builder_config.name:
-            self._generate_examples(
-                pipeline=pipeline,
-                samples_path=extracted_paths["samples"],
-                image_pixels_path=extracted_paths["images"] / "image_pixels",
-                image_resnet_path=extracted_paths["images"] /
-                "resnet_embeddings")
+        self.builder_config.name: self._generate_examples(
+            pipeline=pipeline,
+            samples_path=extracted_paths["samples"],
+            image_pixels_path=extracted_paths["images"] / "image_pixels",
+            image_resnet_path=extracted_paths["images"] / "resnet_embeddings",
+        )
     }
 
-  def _generate_examples(self, pipeline, samples_path, image_pixels_path,
-                         image_resnet_path):
+  def _generate_examples(
+      self, pipeline, samples_path, image_pixels_path, image_resnet_path
+  ):
     """Processes the dataset and yields examples.
 
     Args:
@@ -322,8 +330,8 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
         for row in csv_reader:
           counter("samples_rows").inc()
           sample = {
-              feature_key: row[feature_key] for feature_key in
-              self.builder_config.split_specific_features.keys()
+              feature_key: row[feature_key]
+              for feature_key in self.builder_config.split_specific_features.keys()
           }
           image_url = row["image_url"]
           if image_url:
@@ -340,8 +348,10 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
         sample = {"image_url": sample_url}
         for feature_key in self.builder_config.split_specific_features.keys():
           sample[feature_key] = sample_info[feature_key]
-          is_boolean_feature = self.builder_config.split_specific_features[
-              feature_key].np_dtype == np.bool_
+          is_boolean_feature = (
+              self.builder_config.split_specific_features[feature_key].np_dtype
+              == np.bool_
+          )
           if is_boolean_feature:
             sample[feature_key] = bool_utils.parse_bool(sample[feature_key])
         # Test samples don't have gold captions.
@@ -387,7 +397,8 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
     resnet_collection = (
         pipeline
         | "Collection from resnet files" >> beam.Create(image_resnet_files)
-        | "Get embeddings per image" >> beam.FlatMap(_read_resnet_rows))
+        | "Get embeddings per image" >> beam.FlatMap(_read_resnet_rows)
+    )
 
     image_pixel_files = [
         image_pixels_path / f for f in tf.io.gfile.listdir(image_pixels_path)
@@ -395,20 +406,24 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
     pixel_collection = (
         pipeline
         | "Collection from pixel files" >> beam.Create(image_pixel_files)
-        | "Get pixels per image" >> beam.FlatMap(_read_pixel_rows))
+        | "Get pixels per image" >> beam.FlatMap(_read_pixel_rows)
+    )
 
     # Read samples from tsv files.
     sample_collection = (
         pipeline
         | "Collection from sample files" >> beam.Create(samples_path)
-        | "Get samples" >> beam.FlatMap(_read_samples_rows))
+        | "Get samples" >> beam.FlatMap(_read_samples_rows)
+    )
 
     # Combine the features and yield examples.
-    return ({
-        "sample_info": sample_collection,
-        "image_pixels": pixel_collection,
-        "image_resnet": resnet_collection,
-    }
-            | "Group by image_url" >> beam.CoGroupByKey()
-            | "Reshuffle" >> beam.Reshuffle()
-            | "Process and yield examples" >> beam.FlatMap(_process_examples))
+    return (
+        {
+            "sample_info": sample_collection,
+            "image_pixels": pixel_collection,
+            "image_resnet": resnet_collection,
+        }
+        | "Group by image_url" >> beam.CoGroupByKey()
+        | "Reshuffle" >> beam.Reshuffle()
+        | "Process and yield examples" >> beam.FlatMap(_process_examples)
+    )

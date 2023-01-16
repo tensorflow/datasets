@@ -36,12 +36,56 @@ DESCRIPTOR = _descriptor.FileDescriptor(
     package='tensorflow_datasets',
     syntax='proto3',
     serialized_options=b'\370\001\001',
-    serialized_pb=b'\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a\rfeature.proto\x1a)tensorflow_metadata/proto/v0/schema.proto\x1a-tensorflow_metadata/proto/v0/statistics.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"\xb8\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x15\n\rshard_lengths\x18\x04 \x03(\x03\x12\x11\n\tnum_bytes\x18\x05 \x01(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\x12\x19\n\x11\x66ilepath_template\x18\x06 \x01(\t\"\xf3\x03\n\x0eSupervisedKeys\x12\x11\n\x05input\x18\x01 \x01(\tB\x02\x18\x01\x12\x12\n\x06output\x18\x02 \x01(\tB\x02\x18\x01\x12\x38\n\x05tuple\x18\x03 \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.Tuple\x1a@\n\x05Tuple\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest\x1a\x9f\x01\n\x04\x44ict\x12@\n\x04\x64ict\x18\x01 \x03(\x0b\x32\x32.tensorflow_datasets.SupervisedKeys.Dict.DictEntry\x1aU\n\tDictEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x37\n\x05value\x18\x02 \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest:\x02\x38\x01\x1a\x9b\x01\n\x04Nest\x12\x15\n\x0b\x66\x65\x61ture_key\x18\x01 \x01(\tH\x00\x12:\n\x05tuple\x18\x02 \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.TupleH\x00\x12\x38\n\x04\x64ict\x18\x03 \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.DictH\x00\x42\x06\n\x04nest\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\xda\x06\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12I\n\rrelease_notes\x18\x12 \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e \x01(\t\x12.\n\x08\x66\x65\x61tures\x18\x13 \x01(\x0b\x32\x1c.tensorflow_datasets.Feature\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04 \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10 \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3',
+    serialized_pb=(
+        b'\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a\rfeature.proto\x1a)tensorflow_metadata/proto/v0/schema.proto\x1a-tensorflow_metadata/proto/v0/statistics.proto"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01'
+        b' \x03(\t"\xb8\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01'
+        b' \x01(\t\x12\x12\n\nnum_shards\x18\x02'
+        b' \x01(\x03\x12\x15\n\rshard_lengths\x18\x04'
+        b' \x03(\x03\x12\x11\n\tnum_bytes\x18\x05'
+        b' \x01(\x03\x12\x44\n\nstatistics\x18\x03'
+        b' \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\x12\x19\n\x11\x66ilepath_template\x18\x06'
+        b' \x01(\t"\xf3\x03\n\x0eSupervisedKeys\x12\x11\n\x05input\x18\x01'
+        b' \x01(\tB\x02\x18\x01\x12\x12\n\x06output\x18\x02'
+        b' \x01(\tB\x02\x18\x01\x12\x38\n\x05tuple\x18\x03'
+        b' \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.Tuple\x1a@\n\x05Tuple\x12\x37\n\x05items\x18\x01'
+        b' \x03(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest\x1a\x9f\x01\n\x04\x44ict\x12@\n\x04\x64ict\x18\x01'
+        b' \x03(\x0b\x32\x32.tensorflow_datasets.SupervisedKeys.Dict.DictEntry\x1aU\n\tDictEntry\x12\x0b\n\x03key\x18\x01'
+        b' \x01(\t\x12\x37\n\x05value\x18\x02'
+        b' \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest:\x02\x38\x01\x1a\x9b\x01\n\x04Nest\x12\x15\n\x0b\x66\x65\x61ture_key\x18\x01'
+        b' \x01(\tH\x00\x12:\n\x05tuple\x18\x02'
+        b' \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.TupleH\x00\x12\x38\n\x04\x64ict\x18\x03'
+        b' \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.DictH\x00\x42\x06\n\x04nest"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01'
+        b' \x01(\t"\xda\x06\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
+        b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02'
+        b' \x01(\t\x12\x0f\n\x07version\x18\t'
+        b' \x01(\t\x12I\n\rrelease_notes\x18\x12'
+        b' \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r'
+        b' \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e'
+        b' \x01(\t\x12.\n\x08\x66\x65\x61tures\x18\x13'
+        b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature\x12\x10\n\x08\x63itation\x18\x03'
+        b' \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04'
+        b' \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c'
+        b' \x01(\x03\x12\x36\n\x08location\x18\x05'
+        b' \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n'
+        b' \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06'
+        b' \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07'
+        b' \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08'
+        b' \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b'
+        b" \x01(\x0b\x32'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f"
+        b' \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10'
+        b' \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11'
+        b' \x01(\t\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
+        b' \x01(\t\x12\r\n\x05value\x18\x02'
+        b' \x01(\t:\x02\x38\x01\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01'
+        b' \x01(\t\x12\r\n\x05value\x18\x02'
+        b' \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3'
+    ),
     dependencies=[
         feature__pb2.DESCRIPTOR,
         tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2.DESCRIPTOR,
         tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2.DESCRIPTOR,
-    ])
+    ],
+)
 
 _DATASETLOCATION = _descriptor.Descriptor(
     name='DatasetLocation',
@@ -66,7 +110,8 @@ _DATASETLOCATION = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -103,7 +148,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='num_shards',
             full_name='tensorflow_datasets.SplitInfo.num_shards',
@@ -120,7 +166,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='shard_lengths',
             full_name='tensorflow_datasets.SplitInfo.shard_lengths',
@@ -137,7 +184,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='num_bytes',
             full_name='tensorflow_datasets.SplitInfo.num_bytes',
@@ -154,7 +202,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='statistics',
             full_name='tensorflow_datasets.SplitInfo.statistics',
@@ -171,7 +220,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='filepath_template',
             full_name='tensorflow_datasets.SplitInfo.filepath_template',
@@ -188,7 +238,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -225,7 +276,8 @@ _SUPERVISEDKEYS_TUPLE = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -262,7 +314,8 @@ _SUPERVISEDKEYS_DICT_DICTENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='value',
             full_name='tensorflow_datasets.SupervisedKeys.Dict.DictEntry.value',
@@ -279,7 +332,8 @@ _SUPERVISEDKEYS_DICT_DICTENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -316,7 +370,8 @@ _SUPERVISEDKEYS_DICT = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[
@@ -355,7 +410,8 @@ _SUPERVISEDKEYS_NEST = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='tuple',
             full_name='tensorflow_datasets.SupervisedKeys.Nest.tuple',
@@ -372,7 +428,8 @@ _SUPERVISEDKEYS_NEST = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='dict',
             full_name='tensorflow_datasets.SupervisedKeys.Nest.dict',
@@ -389,7 +446,8 @@ _SUPERVISEDKEYS_NEST = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -404,7 +462,8 @@ _SUPERVISEDKEYS_NEST = _descriptor.Descriptor(
             full_name='tensorflow_datasets.SupervisedKeys.Nest.nest',
             index=0,
             containing_type=None,
-            fields=[]),
+            fields=[],
+        ),
     ],
     serialized_start=713,
     serialized_end=868,
@@ -433,7 +492,8 @@ _SUPERVISEDKEYS = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=b'\030\001',
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='output',
             full_name='tensorflow_datasets.SupervisedKeys.output',
@@ -450,7 +510,8 @@ _SUPERVISEDKEYS = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=b'\030\001',
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='tuple',
             full_name='tensorflow_datasets.SupervisedKeys.tuple',
@@ -467,7 +528,8 @@ _SUPERVISEDKEYS = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[
@@ -508,7 +570,8 @@ _REDISTRIBUTIONINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -545,7 +608,8 @@ _DATASETINFO_RELEASENOTESENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='value',
             full_name='tensorflow_datasets.DatasetInfo.ReleaseNotesEntry.value',
@@ -562,7 +626,8 @@ _DATASETINFO_RELEASENOTESENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -585,7 +650,9 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
     fields=[
         _descriptor.FieldDescriptor(
             name='key',
-            full_name='tensorflow_datasets.DatasetInfo.DownloadChecksumsEntry.key',
+            full_name=(
+                'tensorflow_datasets.DatasetInfo.DownloadChecksumsEntry.key'
+            ),
             index=0,
             number=1,
             type=9,
@@ -599,10 +666,13 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='value',
-            full_name='tensorflow_datasets.DatasetInfo.DownloadChecksumsEntry.value',
+            full_name=(
+                'tensorflow_datasets.DatasetInfo.DownloadChecksumsEntry.value'
+            ),
             index=1,
             number=2,
             type=9,
@@ -616,7 +686,8 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -653,7 +724,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='description',
             full_name='tensorflow_datasets.DatasetInfo.description',
@@ -670,7 +742,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='version',
             full_name='tensorflow_datasets.DatasetInfo.version',
@@ -687,7 +760,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='release_notes',
             full_name='tensorflow_datasets.DatasetInfo.release_notes',
@@ -704,7 +778,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='config_name',
             full_name='tensorflow_datasets.DatasetInfo.config_name',
@@ -721,7 +796,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='config_description',
             full_name='tensorflow_datasets.DatasetInfo.config_description',
@@ -738,7 +814,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='features',
             full_name='tensorflow_datasets.DatasetInfo.features',
@@ -755,7 +832,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='citation',
             full_name='tensorflow_datasets.DatasetInfo.citation',
@@ -772,7 +850,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='size_in_bytes',
             full_name='tensorflow_datasets.DatasetInfo.size_in_bytes',
@@ -789,7 +868,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=b'\030\001',
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='download_size',
             full_name='tensorflow_datasets.DatasetInfo.download_size',
@@ -806,7 +886,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='location',
             full_name='tensorflow_datasets.DatasetInfo.location',
@@ -823,7 +904,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='download_checksums',
             full_name='tensorflow_datasets.DatasetInfo.download_checksums',
@@ -840,7 +922,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=b'\030\001',
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='schema',
             full_name='tensorflow_datasets.DatasetInfo.schema',
@@ -857,7 +940,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='splits',
             full_name='tensorflow_datasets.DatasetInfo.splits',
@@ -874,7 +958,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='supervised_keys',
             full_name='tensorflow_datasets.DatasetInfo.supervised_keys',
@@ -891,7 +976,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='redistribution_info',
             full_name='tensorflow_datasets.DatasetInfo.redistribution_info',
@@ -908,7 +994,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='module_name',
             full_name='tensorflow_datasets.DatasetInfo.module_name',
@@ -925,7 +1012,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='disable_shuffling',
             full_name='tensorflow_datasets.DatasetInfo.disable_shuffling',
@@ -942,7 +1030,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
         _descriptor.FieldDescriptor(
             name='file_format',
             full_name='tensorflow_datasets.DatasetInfo.file_format',
@@ -959,7 +1048,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[
@@ -976,49 +1066,63 @@ _DATASETINFO = _descriptor.Descriptor(
     serialized_end=1768,
 )
 
-_SPLITINFO.fields_by_name[
-    'statistics'].message_type = tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2._DATASETFEATURESTATISTICS
-_SUPERVISEDKEYS_TUPLE.fields_by_name[
-    'items'].message_type = _SUPERVISEDKEYS_NEST
+_SPLITINFO.fields_by_name['statistics'].message_type = (
+    tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2._DATASETFEATURESTATISTICS
+)
+_SUPERVISEDKEYS_TUPLE.fields_by_name['items'].message_type = (
+    _SUPERVISEDKEYS_NEST
+)
 _SUPERVISEDKEYS_TUPLE.containing_type = _SUPERVISEDKEYS
-_SUPERVISEDKEYS_DICT_DICTENTRY.fields_by_name[
-    'value'].message_type = _SUPERVISEDKEYS_NEST
+_SUPERVISEDKEYS_DICT_DICTENTRY.fields_by_name['value'].message_type = (
+    _SUPERVISEDKEYS_NEST
+)
 _SUPERVISEDKEYS_DICT_DICTENTRY.containing_type = _SUPERVISEDKEYS_DICT
-_SUPERVISEDKEYS_DICT.fields_by_name[
-    'dict'].message_type = _SUPERVISEDKEYS_DICT_DICTENTRY
+_SUPERVISEDKEYS_DICT.fields_by_name['dict'].message_type = (
+    _SUPERVISEDKEYS_DICT_DICTENTRY
+)
 _SUPERVISEDKEYS_DICT.containing_type = _SUPERVISEDKEYS
-_SUPERVISEDKEYS_NEST.fields_by_name[
-    'tuple'].message_type = _SUPERVISEDKEYS_TUPLE
+_SUPERVISEDKEYS_NEST.fields_by_name['tuple'].message_type = (
+    _SUPERVISEDKEYS_TUPLE
+)
 _SUPERVISEDKEYS_NEST.fields_by_name['dict'].message_type = _SUPERVISEDKEYS_DICT
 _SUPERVISEDKEYS_NEST.containing_type = _SUPERVISEDKEYS
 _SUPERVISEDKEYS_NEST.oneofs_by_name['nest'].fields.append(
-    _SUPERVISEDKEYS_NEST.fields_by_name['feature_key'])
-_SUPERVISEDKEYS_NEST.fields_by_name[
-    'feature_key'].containing_oneof = _SUPERVISEDKEYS_NEST.oneofs_by_name[
-        'nest']
+    _SUPERVISEDKEYS_NEST.fields_by_name['feature_key']
+)
+_SUPERVISEDKEYS_NEST.fields_by_name['feature_key'].containing_oneof = (
+    _SUPERVISEDKEYS_NEST.oneofs_by_name['nest']
+)
 _SUPERVISEDKEYS_NEST.oneofs_by_name['nest'].fields.append(
-    _SUPERVISEDKEYS_NEST.fields_by_name['tuple'])
-_SUPERVISEDKEYS_NEST.fields_by_name[
-    'tuple'].containing_oneof = _SUPERVISEDKEYS_NEST.oneofs_by_name['nest']
+    _SUPERVISEDKEYS_NEST.fields_by_name['tuple']
+)
+_SUPERVISEDKEYS_NEST.fields_by_name['tuple'].containing_oneof = (
+    _SUPERVISEDKEYS_NEST.oneofs_by_name['nest']
+)
 _SUPERVISEDKEYS_NEST.oneofs_by_name['nest'].fields.append(
-    _SUPERVISEDKEYS_NEST.fields_by_name['dict'])
-_SUPERVISEDKEYS_NEST.fields_by_name[
-    'dict'].containing_oneof = _SUPERVISEDKEYS_NEST.oneofs_by_name['nest']
+    _SUPERVISEDKEYS_NEST.fields_by_name['dict']
+)
+_SUPERVISEDKEYS_NEST.fields_by_name['dict'].containing_oneof = (
+    _SUPERVISEDKEYS_NEST.oneofs_by_name['nest']
+)
 _SUPERVISEDKEYS.fields_by_name['tuple'].message_type = _SUPERVISEDKEYS_TUPLE
 _DATASETINFO_RELEASENOTESENTRY.containing_type = _DATASETINFO
 _DATASETINFO_DOWNLOADCHECKSUMSENTRY.containing_type = _DATASETINFO
-_DATASETINFO.fields_by_name[
-    'release_notes'].message_type = _DATASETINFO_RELEASENOTESENTRY
+_DATASETINFO.fields_by_name['release_notes'].message_type = (
+    _DATASETINFO_RELEASENOTESENTRY
+)
 _DATASETINFO.fields_by_name['features'].message_type = feature__pb2._FEATURE
 _DATASETINFO.fields_by_name['location'].message_type = _DATASETLOCATION
-_DATASETINFO.fields_by_name[
-    'download_checksums'].message_type = _DATASETINFO_DOWNLOADCHECKSUMSENTRY
-_DATASETINFO.fields_by_name[
-    'schema'].message_type = tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2._SCHEMA
+_DATASETINFO.fields_by_name['download_checksums'].message_type = (
+    _DATASETINFO_DOWNLOADCHECKSUMSENTRY
+)
+_DATASETINFO.fields_by_name['schema'].message_type = (
+    tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2._SCHEMA
+)
 _DATASETINFO.fields_by_name['splits'].message_type = _SPLITINFO
 _DATASETINFO.fields_by_name['supervised_keys'].message_type = _SUPERVISEDKEYS
-_DATASETINFO.fields_by_name[
-    'redistribution_info'].message_type = _REDISTRIBUTIONINFO
+_DATASETINFO.fields_by_name['redistribution_info'].message_type = (
+    _REDISTRIBUTIONINFO
+)
 DESCRIPTOR.message_types_by_name['DatasetLocation'] = _DATASETLOCATION
 DESCRIPTOR.message_types_by_name['SplitInfo'] = _SPLITINFO
 DESCRIPTOR.message_types_by_name['SupervisedKeys'] = _SUPERVISEDKEYS
@@ -1033,7 +1137,8 @@ DatasetLocation = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _DATASETLOCATION,
         '__module__': 'dataset_info_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetLocation)
-    })
+    },
+)
 _sym_db.RegisterMessage(DatasetLocation)
 
 SplitInfo = _reflection.GeneratedProtocolMessageType(
@@ -1043,57 +1148,55 @@ SplitInfo = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _SPLITINFO,
         '__module__': 'dataset_info_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.SplitInfo)
-    })
+    },
+)
 _sym_db.RegisterMessage(SplitInfo)
 
 SupervisedKeys = _reflection.GeneratedProtocolMessageType(
     'SupervisedKeys',
     (_message.Message,),
     {
-        'Tuple':
-            _reflection.GeneratedProtocolMessageType(
-                'Tuple',
-                (_message.Message,),
-                {
-                    'DESCRIPTOR': _SUPERVISEDKEYS_TUPLE,
-                    '__module__': 'dataset_info_pb2'
-                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Tuple)
-                }),
-        'Dict':
-            _reflection.GeneratedProtocolMessageType(
-                'Dict',
-                (_message.Message,),
-                {
-                    'DictEntry':
-                        _reflection.GeneratedProtocolMessageType(
-                            'DictEntry',
-                            (_message.Message,),
-                            {
-                                'DESCRIPTOR': _SUPERVISEDKEYS_DICT_DICTENTRY,
-                                '__module__': 'dataset_info_pb2'
-                                # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Dict.DictEntry)
-                            }),
-                    'DESCRIPTOR':
-                        _SUPERVISEDKEYS_DICT,
-                    '__module__':
-                        'dataset_info_pb2'
-                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Dict)
-                }),
-        'Nest':
-            _reflection.GeneratedProtocolMessageType(
-                'Nest',
-                (_message.Message,),
-                {
-                    'DESCRIPTOR': _SUPERVISEDKEYS_NEST,
-                    '__module__': 'dataset_info_pb2'
-                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Nest)
-                }),
-        'DESCRIPTOR':
-            _SUPERVISEDKEYS,
-        '__module__':
-            'dataset_info_pb2'
+        'Tuple': _reflection.GeneratedProtocolMessageType(
+            'Tuple',
+            (_message.Message,),
+            {
+                'DESCRIPTOR': _SUPERVISEDKEYS_TUPLE,
+                '__module__': 'dataset_info_pb2'
+                # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Tuple)
+            },
+        ),
+        'Dict': _reflection.GeneratedProtocolMessageType(
+            'Dict',
+            (_message.Message,),
+            {
+                'DictEntry': _reflection.GeneratedProtocolMessageType(
+                    'DictEntry',
+                    (_message.Message,),
+                    {
+                        'DESCRIPTOR': _SUPERVISEDKEYS_DICT_DICTENTRY,
+                        '__module__': 'dataset_info_pb2'
+                        # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Dict.DictEntry)
+                    },
+                ),
+                'DESCRIPTOR': _SUPERVISEDKEYS_DICT,
+                '__module__': 'dataset_info_pb2'
+                # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Dict)
+            },
+        ),
+        'Nest': _reflection.GeneratedProtocolMessageType(
+            'Nest',
+            (_message.Message,),
+            {
+                'DESCRIPTOR': _SUPERVISEDKEYS_NEST,
+                '__module__': 'dataset_info_pb2'
+                # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Nest)
+            },
+        ),
+        'DESCRIPTOR': _SUPERVISEDKEYS,
+        '__module__': 'dataset_info_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys)
-    })
+    },
+)
 _sym_db.RegisterMessage(SupervisedKeys)
 _sym_db.RegisterMessage(SupervisedKeys.Tuple)
 _sym_db.RegisterMessage(SupervisedKeys.Dict)
@@ -1107,37 +1210,37 @@ RedistributionInfo = _reflection.GeneratedProtocolMessageType(
         'DESCRIPTOR': _REDISTRIBUTIONINFO,
         '__module__': 'dataset_info_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.RedistributionInfo)
-    })
+    },
+)
 _sym_db.RegisterMessage(RedistributionInfo)
 
 DatasetInfo = _reflection.GeneratedProtocolMessageType(
     'DatasetInfo',
     (_message.Message,),
     {
-        'ReleaseNotesEntry':
-            _reflection.GeneratedProtocolMessageType(
-                'ReleaseNotesEntry',
-                (_message.Message,),
-                {
-                    'DESCRIPTOR': _DATASETINFO_RELEASENOTESENTRY,
-                    '__module__': 'dataset_info_pb2'
-                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetInfo.ReleaseNotesEntry)
-                }),
-        'DownloadChecksumsEntry':
-            _reflection.GeneratedProtocolMessageType(
-                'DownloadChecksumsEntry',
-                (_message.Message,),
-                {
-                    'DESCRIPTOR': _DATASETINFO_DOWNLOADCHECKSUMSENTRY,
-                    '__module__': 'dataset_info_pb2'
-                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetInfo.DownloadChecksumsEntry)
-                }),
-        'DESCRIPTOR':
-            _DATASETINFO,
-        '__module__':
-            'dataset_info_pb2'
+        'ReleaseNotesEntry': _reflection.GeneratedProtocolMessageType(
+            'ReleaseNotesEntry',
+            (_message.Message,),
+            {
+                'DESCRIPTOR': _DATASETINFO_RELEASENOTESENTRY,
+                '__module__': 'dataset_info_pb2'
+                # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetInfo.ReleaseNotesEntry)
+            },
+        ),
+        'DownloadChecksumsEntry': _reflection.GeneratedProtocolMessageType(
+            'DownloadChecksumsEntry',
+            (_message.Message,),
+            {
+                'DESCRIPTOR': _DATASETINFO_DOWNLOADCHECKSUMSENTRY,
+                '__module__': 'dataset_info_pb2'
+                # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetInfo.DownloadChecksumsEntry)
+            },
+        ),
+        'DESCRIPTOR': _DATASETINFO,
+        '__module__': 'dataset_info_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetInfo)
-    })
+    },
+)
 _sym_db.RegisterMessage(DatasetInfo)
 _sym_db.RegisterMessage(DatasetInfo.ReleaseNotesEntry)
 _sym_db.RegisterMessage(DatasetInfo.DownloadChecksumsEntry)

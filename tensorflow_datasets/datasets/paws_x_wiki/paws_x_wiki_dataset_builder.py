@@ -21,7 +21,9 @@ import os
 from etils import epath
 import tensorflow_datasets.public_api as tfds
 
-_HOMEPAGE_URL = "https://github.com/google-research-datasets/paws/tree/master/pawsx"
+_HOMEPAGE_URL = (
+    "https://github.com/google-research-datasets/paws/tree/master/pawsx"
+)
 _DOWNLOAD_URL = "https://storage.googleapis.com/paws/pawsx/x-final.tar.gz"
 
 _CLASS_LABELS = ["different_meaning", "paraphrase"]
@@ -42,13 +44,15 @@ class PawsXWikiConfig(tfds.core.BuilderConfig):
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """This is a dataset for multilingual paraphrase identification."""
+
   BUILDER_CONFIGS = [
       PawsXWikiConfig(  # pylint: disable=g-complex-comprehension
           name=l,
           description="Translated to " + l,
           version="1.0.0",
           language=l,
-      ) for l in _LANGUAGES
+      )
+      for l in _LANGUAGES
   ]
 
   VERSION = tfds.core.Version("1.0.0")
@@ -72,11 +76,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     # Name of file for training for 'en' is different from other languages
     if self.builder_config.language == "en":
-      training_path = os.path.join(base_path, self.builder_config.language,
-                                   "train.tsv")
+      training_path = os.path.join(
+          base_path, self.builder_config.language, "train.tsv"
+      )
     else:
-      training_path = os.path.join(base_path, self.builder_config.language,
-                                   "translated_train.tsv")
+      training_path = os.path.join(
+          base_path, self.builder_config.language, "translated_train.tsv"
+      )
 
     return [
         tfds.core.SplitGenerator(
@@ -86,17 +92,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "path":
-                    os.path.join(base_path, self.builder_config.language,
-                                 "test_2k.tsv")
+                "path": os.path.join(
+                    base_path, self.builder_config.language, "test_2k.tsv"
+                )
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "path":
-                    os.path.join(base_path, self.builder_config.language,
-                                 "dev_2k.tsv")
+                "path": os.path.join(
+                    base_path, self.builder_config.language, "dev_2k.tsv"
+                )
             },
         ),
     ]

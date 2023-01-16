@@ -18,7 +18,6 @@ import tensorflow_datasets.testing as tfds_test
 
 
 class StanfordDogsTest(tfds_test.DatasetBuilderTestCase):
-
   DATASET_CLASS = stanford_dogs_dataset_builder.Builder
 
   SPLITS = {  # No. of train and test samples

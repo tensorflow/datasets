@@ -18,14 +18,17 @@
 import re
 import tensorflow_datasets.public_api as tfds
 
-_TRAIN_URL = "https://storage.googleapis.com/download.tensorflow.org/data/rps.zip"
+_TRAIN_URL = (
+    "https://storage.googleapis.com/download.tensorflow.org/data/rps.zip"
+)
 _TEST_URL = "https://storage.googleapis.com/download.tensorflow.org/data/rps-test-set.zip"
 
 _IMAGE_SIZE = 300
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
 
 _NAME_RE = re.compile(
-    r"^(rps|rps-test-set)(?:/|\\)(rock|paper|scissors)(?:/|\\)[\w-]*\.png$")
+    r"^(rps|rps-test-set)(?:/|\\)(rock|paper|scissors)(?:/|\\)[\w-]*\.png$"
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -39,10 +42,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label":
-                tfds.features.ClassLabel(names=["rock", "paper", "scissors"]),
+            "image": tfds.features.Image(shape=_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(
+                names=["rock", "paper", "scissors"]
+            ),
         }),
         supervised_keys=("image", "label"),
         homepage="http://laurencemoroney.com/rock-paper-scissors-dataset",
@@ -56,12 +59,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(train_path),
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(test_path),
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, archive):

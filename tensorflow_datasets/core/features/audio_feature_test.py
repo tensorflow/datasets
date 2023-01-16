@@ -27,8 +27,9 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 
 
-class AudioFeatureTest(testing.FeatureExpectationsTestCase,
-                       parameterized.TestCase):
+class AudioFeatureTest(
+    testing.FeatureExpectationsTestCase, parameterized.TestCase
+):
 
   @parameterized.product(dtype=[np.int64, tf.int64], num_channels=[1, 2, 8])
   def test_numpy_array(self, dtype, num_channels):
@@ -36,7 +37,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
 
     self.assertFeature(
         feature=features.Audio(
-            sample_rate=1000, shape=_shape_for_channels(num_channels)),
+            sample_rate=1000, shape=_shape_for_channels(num_channels)
+        ),
         shape=_shape_for_channels(num_channels),
         dtype=dtype,
         tests=[
@@ -48,7 +50,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
         test_attributes=dict(
             _file_format=None,
             sample_rate=1000,
-        ))
+        ),
+    )
 
   @parameterized.product(dtype=[np.float32, tf.float32], num_channels=[1, 2, 8])
   def test_numpy_array_float(self, dtype, num_channels):
@@ -56,7 +59,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
 
     self.assertFeature(
         feature=features.Audio(
-            dtype=dtype, shape=_shape_for_channels(num_channels)),
+            dtype=dtype, shape=_shape_for_channels(num_channels)
+        ),
         shape=_shape_for_channels(num_channels),
         dtype=np.float32,
         tests=[
@@ -84,7 +88,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
             file_format=file_format,
             shape=_shape_for_channels(num_channels),
             dtype=dtype,
-            lazy_decode=lazy_decode),
+            lazy_decode=lazy_decode,
+        ),
         shape=_shape_for_channels(num_channels),
         dtype=dtype,
         tests=[
@@ -97,7 +102,10 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
                 expected=np_audio,
             ),
         ],
-        test_attributes=dict(_file_format=file_format,))
+        test_attributes=dict(
+            _file_format=file_format,
+        ),
+    )
 
   @parameterized.product(lazy_decode=[True, False], num_channels=[1, 2, 8])
   def test_flac_file(self, lazy_decode, num_channels):
@@ -117,7 +125,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
             file_format=file_format,
             shape=_shape_for_channels(num_channels),
             dtype=dtype,
-            lazy_decode=lazy_decode),
+            lazy_decode=lazy_decode,
+        ),
         shape=_shape_for_channels(num_channels),
         dtype=dtype,
         tests=[
@@ -130,12 +139,16 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
                 expected=np_audio,
             ),
         ],
-        test_attributes=dict(_file_format=file_format,))
+        test_attributes=dict(
+            _file_format=file_format,
+        ),
+    )
 
   @parameterized.product(
       dtype=[np.int16, np.int32],
       lazy_decode=[True, False],
-      num_channels=[1, 2, 8])
+      num_channels=[1, 2, 8],
+  )
   def test_file_object(self, dtype, lazy_decode, num_channels):
     file_format = 'wav'
 
@@ -161,7 +174,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
               file_format=file_format,
               shape=_shape_for_channels(num_channels),
               dtype=dtype,
-              lazy_decode=lazy_decode),
+              lazy_decode=lazy_decode,
+          ),
           shape=_shape_for_channels(num_channels),
           dtype=dtype,
           tests=[
@@ -177,7 +191,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
 
   def test_lazy_decode_error_file(self):
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'Acceptable `dtype` for lazy loading'):
+        ValueError, 'Acceptable `dtype` for lazy loading'
+    ):
       features.Audio(file_format='flac', lazy_decode=True)
 
 
@@ -194,9 +209,10 @@ def _create_np_audio(num_channels: int, dtype: np.dtype) -> np.ndarray:
     dtype_info = np.finfo(dtype)
 
   np_audio = np.random.randint(
-      max(-2**10, int(dtype_info.min)),
+      max(-(2**10), int(dtype_info.min)),
       min(2**10, int(dtype_info.max)),
-      size=_shape_for_channels(num_channels, length=10))
+      size=_shape_for_channels(num_channels, length=10),
+  )
 
   return np_audio.astype(dtype)
 
@@ -205,12 +221,13 @@ def _write_audio_file(np_audio, path, file_format):
   """Creates a random audio file with the given file format."""
   dtype = np_audio.dtype
 
-  if (file_format == 'flac' and
-      dtype not in [np.int16]) or (file_format == 'wav' and
-                                   dtype not in [np.int16, np.int32]):
+  if (file_format == 'flac' and dtype not in [np.int16]) or (
+      file_format == 'wav' and dtype not in [np.int16, np.int32]
+  ):
     raise ValueError(
         f'Can\'t save audio in "{file_format.upper()}" format with dtype '
-        f'`{np_audio.dtype}`.')
+        f'`{np_audio.dtype}`.'
+    )
 
   data = array.array(np.sctype2char(dtype), np_audio.reshape((-1,)))
   sample_width = np.dtype(dtype).alignment
@@ -221,5 +238,4 @@ def _write_audio_file(np_audio, path, file_format):
       sample_width=sample_width,
       channels=num_channels,
       frame_rate=1,
-  ).export(
-      path, format=file_format)
+  ).export(path, format=file_format)

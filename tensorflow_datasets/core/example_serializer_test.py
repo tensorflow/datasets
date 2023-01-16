@@ -43,15 +43,14 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
         'input': [[1, 2, 3], [], [4, 5]],
     }
     tensor_info = {
-        'input':
-            feature_lib.TensorInfo(
-                shape=(
-                    None,
-                    None,
-                ),
-                dtype=dtype,
-                sequence_rank=2,
+        'input': feature_lib.TensorInfo(
+            shape=(
+                None,
+                None,
             ),
+            dtype=dtype,
+            sequence_rank=2,
+        ),
     }
     ex_proto = example_serializer._dict_to_tf_example(example_data, tensor_info)
     feature = ex_proto.features.feature
@@ -70,15 +69,14 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
         'input': [],
     }
     tensor_info = {
-        'input':
-            feature_lib.TensorInfo(
-                shape=(
-                    None,
-                    None,
-                ),
-                dtype=dtype,
-                sequence_rank=2,
+        'input': feature_lib.TensorInfo(
+            shape=(
+                None,
+                None,
             ),
+            dtype=dtype,
+            sequence_rank=2,
+        ),
     }
     ex_proto = example_serializer._dict_to_tf_example(example_data, tensor_info)
     feature = ex_proto.features.feature
@@ -103,10 +101,14 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
         shape=(
             None,
             None,
-        ), dtype=dtype, sequence_rank=2)
+        ),
+        dtype=dtype,
+        sequence_rank=2,
+    )
     out = example_serializer._add_ragged_fields(example_data, tensor_info)
     self.assertRaggedFieldEqual(
-        out, {
+        out,
+        {
             'ragged_flat_values': (
                 np.array([1, 2, 3, 4, 5]),
                 feature_lib.TensorInfo(shape=(None,), dtype=np.int64),
@@ -115,7 +117,8 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
                 [3, 0, 2],
                 feature_lib.TensorInfo(shape=(None,), dtype=np.int64),
             ),
-        })
+        },
+    )
 
   @parameterized.parameters((np.int64), (tf.int64))
   def test_add_ragged_fields_np(self, dtype):
@@ -129,10 +132,14 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
         shape=(
             None,
             None,
-        ), dtype=dtype, sequence_rank=2)
+        ),
+        dtype=dtype,
+        sequence_rank=2,
+    )
     out = example_serializer._add_ragged_fields(example_data, tensor_info)
     self.assertRaggedFieldEqual(
-        out, {
+        out,
+        {
             'ragged_flat_values': (
                 np.array([1, 2, 3, 4, 5]),
                 feature_lib.TensorInfo(shape=(None,), dtype=np.int64),
@@ -141,7 +148,8 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
                 [3, 0, 2],
                 feature_lib.TensorInfo(shape=(None,), dtype=np.int64),
             ),
-        })
+        },
+    )
 
   @parameterized.parameters((np.int64), (tf.int64))
   def test_add_ragged_fields_empty_np(self, dtype):
@@ -154,10 +162,14 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
         shape=(
             None,
             None,
-        ), dtype=dtype, sequence_rank=2)
+        ),
+        dtype=dtype,
+        sequence_rank=2,
+    )
     out = example_serializer._add_ragged_fields(example_data, tensor_info)
     self.assertRaggedFieldEqual(
-        out, {
+        out,
+        {
             'ragged_flat_values': (
                 np.zeros(shape=(0,), dtype=np.int64),
                 feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
@@ -166,7 +178,8 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
                 [0, 0],
                 feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
             ),
-        })
+        },
+    )
 
   @parameterized.parameters((np.int64), (tf.int64))
   def test_add_ragged_fields_empty(self, dtype):
@@ -176,10 +189,14 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
         shape=(
             None,
             None,
-        ), dtype=dtype, sequence_rank=2)
+        ),
+        dtype=dtype,
+        sequence_rank=2,
+    )
     out = example_serializer._add_ragged_fields(example_data, tensor_info)
     self.assertRaggedFieldEqual(
-        out, {
+        out,
+        {
             'ragged_flat_values': (
                 np.zeros(shape=(0,), dtype=np.int64),
                 feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
@@ -188,7 +205,8 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
                 [0, 0, 0],
                 feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
             ),
-        })
+        },
+    )
 
   @parameterized.parameters((np.int64), (tf.int64))
   def test_add_ragged_fields_all_empty(self, dtype):
@@ -198,10 +216,14 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
         shape=(
             None,
             None,
-        ), dtype=dtype, sequence_rank=2)
+        ),
+        dtype=dtype,
+        sequence_rank=2,
+    )
     out = example_serializer._add_ragged_fields(example_data, tensor_info)
     self.assertRaggedFieldEqual(
-        out, {
+        out,
+        {
             'ragged_flat_values': (
                 np.zeros(shape=(0,), dtype=np.int64),
                 feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
@@ -210,7 +232,8 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
                 np.zeros(shape=(0,), dtype=np.int64),
                 feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
             ),
-        })
+        },
+    )
 
   @parameterized.parameters((np.int64), (tf.int64))
   def test_add_ragged_fields_single_level_sequence(self, dtype):
@@ -224,13 +247,19 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
         shape=(
             None,
             2,
-        ), dtype=dtype, sequence_rank=1)
+        ),
+        dtype=dtype,
+        sequence_rank=1,
+    )
     out = example_serializer._add_ragged_fields(example_data, tensor_info)
-    self.assertAllEqual(out[0], [
-        [1, 2],
-        [2, 3],
-        [4, 5],
-    ])
+    self.assertAllEqual(
+        out[0],
+        [
+            [1, 2],
+            [2, 3],
+            [4, 5],
+        ],
+    )
     self.assertEqual(out[1], tensor_info)
 
   @parameterized.parameters((np.int64), (tf.int64))
@@ -262,8 +291,9 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
             dtype=dtype,
         ),
     }
-    with self.assertRaisesRegex(ValueError,
-                                'Error while serializing feature `input`:'):
+    with self.assertRaisesRegex(
+        ValueError, 'Error while serializing feature `input`:'
+    ):
       example_serializer._dict_to_tf_example(example_data, tensor_info)
 
 

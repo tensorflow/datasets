@@ -48,9 +48,11 @@ class Wit(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("1.1.0")
   RELEASE_NOTES = {
-      "1.0.0": "Initial release. It loads the WIT dataset from "
-               "https://storage.googleapis.com/gresearch/wit/",
-      "1.1.0": "Added `val` and `test` splits."
+      "1.0.0": (
+          "Initial release. It loads the WIT dataset from "
+          "https://storage.googleapis.com/gresearch/wit/"
+      ),
+      "1.1.0": "Added `val` and `test` splits.",
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -101,7 +103,7 @@ class Wit(tfds.core.GeneratorBasedBuilder):
     paths_per_split = dl_manager.download_and_extract({
         "train": wit_train_urls_to_download,
         "val": wit_val_urls_to_download,
-        "test": wit_test_urls_to_download
+        "test": wit_test_urls_to_download,
     })
 
     return {
@@ -120,40 +122,27 @@ class Wit(tfds.core.GeneratorBasedBuilder):
       image_url = row["image_url"]
       example_key = f"{filename}_{row_number}_{image_url}"
       return example_key, {
-          "language":
-              row["language"],
-          "page_url":
-              row["page_url"],
-          "image_url":
-              row["image_url"],
-          "page_title":
-              row["page_title"],
-          "section_title":
-              row["section_title"],
-          "hierarchical_section_title":
-              row["hierarchical_section_title"],
-          "caption_reference_description":
-              row["caption_reference_description"],
-          "caption_attribution_description":
-              row["caption_attribution_description"],
-          "caption_alt_text_description":
-              row["caption_alt_text_description"],
-          "mime_type":
-              row["mime_type"],
-          "original_height":
-              int(row["original_height"]),
-          "original_width":
-              int(row["original_width"]),
-          "is_main_image":
-              bool(row["is_main_image"]),
-          "attribution_passes_lang_id":
-              bool(row["attribution_passes_lang_id"]),
-          "page_changed_recently":
-              bool(row["page_changed_recently"]),
-          "context_page_description":
-              row["context_page_description"],
-          "context_section_description":
-              row["context_section_description"] or "",
+          "language": row["language"],
+          "page_url": row["page_url"],
+          "image_url": row["image_url"],
+          "page_title": row["page_title"],
+          "section_title": row["section_title"],
+          "hierarchical_section_title": row["hierarchical_section_title"],
+          "caption_reference_description": row["caption_reference_description"],
+          "caption_attribution_description": row[
+              "caption_attribution_description"
+          ],
+          "caption_alt_text_description": row["caption_alt_text_description"],
+          "mime_type": row["mime_type"],
+          "original_height": int(row["original_height"]),
+          "original_width": int(row["original_width"]),
+          "is_main_image": bool(row["is_main_image"]),
+          "attribution_passes_lang_id": bool(row["attribution_passes_lang_id"]),
+          "page_changed_recently": bool(row["page_changed_recently"]),
+          "context_page_description": row["context_page_description"],
+          "context_section_description": (
+              row["context_section_description"] or ""
+          ),
       }
 
     def _read_rows(filename):
@@ -161,10 +150,13 @@ class Wit(tfds.core.GeneratorBasedBuilder):
       csv.field_size_limit(sys.maxsize)
       with epath.Path(filename).open() as f:
         csv_reader = csv.DictReader(
-            f, delimiter="\t", quoting=csv.QUOTE_MINIMAL)
+            f, delimiter="\t", quoting=csv.QUOTE_MINIMAL
+        )
         for i, row in enumerate(csv_reader):
           yield filename, i, row
 
-    return (beam.Create(filepaths)
-            | beam.FlatMap(_read_rows)
-            | beam.Map(_process_example))
+    return (
+        beam.Create(filepaths)
+        | beam.FlatMap(_read_rows)
+        | beam.Map(_process_example)
+    )

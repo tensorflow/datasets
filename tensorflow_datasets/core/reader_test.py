@@ -34,14 +34,18 @@ from tensorflow_datasets.core.utils import shard_utils
 # Skip the cardinality test for backward compatibility with TF <= 2.1.
 _SKIP_CARDINALITY_TEST = not hasattr(tf.data.experimental, 'assert_cardinality')
 
-_SHUFFLE_FILES_ERROR_MESSAGE = ('Dataset is an ordered dataset '
-                                '(\'disable_shuffling=True\'), but examples '
-                                'will not be read in order because '
-                                '`shuffle_files=True`.')
-_CYCLE_LENGTH_ERROR_MESSAGE = ('Dataset is an ordered dataset '
-                               '(\'disable_shuffling=True\'), but examples will'
-                               ' not be read in order because '
-                               '`ReadConfig.interleave_cycle_length != 1`.')
+_SHUFFLE_FILES_ERROR_MESSAGE = (
+    'Dataset is an ordered dataset '
+    "('disable_shuffling=True'), but examples "
+    'will not be read in order because '
+    '`shuffle_files=True`.'
+)
+_CYCLE_LENGTH_ERROR_MESSAGE = (
+    'Dataset is an ordered dataset '
+    "('disable_shuffling=True'), but examples will"
+    ' not be read in order because '
+    '`ReadConfig.interleave_cycle_length != 1`.'
+)
 
 
 def _write_tfrecord_from_shard_spec(shard_spec, get):
@@ -65,8 +69,9 @@ class ReaderTest(testing.TestCase):
 
   def setUp(self):
     super(ReaderTest, self).setUp()
-    with mock.patch.object(example_parser, 'ExampleParser',
-                           testing.DummyParser):
+    with mock.patch.object(
+        example_parser, 'ExampleParser', testing.DummyParser
+    ):
       self.reader = reader_lib.Reader(self.tmp_dir, 'some_spec')
       self.reader.read = functools.partial(
           self.reader.read,
@@ -79,7 +84,8 @@ class ReaderTest(testing.TestCase):
         dataset_name='mnist',
         split=split,
         filetype_suffix='tfrecord',
-        data_dir=self.tmp_dir)
+        data_dir=self.tmp_dir,
+    )
 
   def _write_tfrecord(self, split_name, shards_number, records):
     filename_template = self._filename_template(split=split_name)
@@ -89,23 +95,27 @@ class ReaderTest(testing.TestCase):
         total_size=0,
         bucket_lengths=[num_examples],
         filename_template=filename_template,
-        shard_config=shard_utils.ShardConfig(num_shards=shards_number))
+        shard_config=shard_utils.ShardConfig(num_shards=shards_number),
+    )
     serialized_records = [
         (key, bytes(rec, encoding='utf-8')) for key, rec in enumerate(records)
     ]
     for shard_spec in shard_specs:
-      _write_tfrecord_from_shard_spec(shard_spec,
-                                      lambda unused_i: iter(serialized_records))
+      _write_tfrecord_from_shard_spec(
+          shard_spec, lambda unused_i: iter(serialized_records)
+      )
     return splits.SplitInfo(
         name=split_name,
         shard_lengths=[int(s.examples_number) for s in shard_specs],
         num_bytes=0,
-        filename_template=filename_template)
+        filename_template=filename_template,
+    )
 
   def test_nodata_instruction(self):
     # Given instruction corresponds to no data.
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             'corresponds to no data!'):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'corresponds to no data!'
+    ):
       train_info = splits.SplitInfo(
           name='train',
           shard_lengths=[2, 3, 2, 3, 2],
@@ -124,8 +134,9 @@ class ReaderTest(testing.TestCase):
         split_infos=[train_info],
     )
     read_data = list(tfds.as_numpy(ds))
-    self.assertEqual(read_data,
-                     [bytes(l, encoding='utf-8') for l in 'abcdefghijkl'])
+    self.assertEqual(
+        read_data, [bytes(l, encoding='utf-8') for l in 'abcdefghijkl']
+    )
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
@@ -138,8 +149,9 @@ class ReaderTest(testing.TestCase):
         split_infos=[train_info],
     )
     read_data = list(tfds.as_numpy(ds))
-    self.assertEqual(read_data,
-                     [bytes(l, encoding='utf-8') for l in 'abcdefghijklab'])
+    self.assertEqual(
+        read_data, [bytes(l, encoding='utf-8') for l in 'abcdefghijklab']
+    )
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
@@ -158,8 +170,9 @@ class ReaderTest(testing.TestCase):
         split_infos=split_info,
     )
     read_data = list(tfds.as_numpy(ds))
-    self.assertEqual(read_data,
-                     [bytes(l, encoding='utf-8') for l in 'bcdefghijkmno'])
+    self.assertEqual(
+        read_data, [bytes(l, encoding='utf-8') for l in 'bcdefghijkmno']
+    )
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
@@ -185,7 +198,9 @@ class ReaderTest(testing.TestCase):
 
   def test_shuffle_deterministic(self):
     split_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
-    read_config = read_config_lib.ReadConfig(shuffle_seed=123,)
+    read_config = read_config_lib.ReadConfig(
+        shuffle_seed=123,
+    )
     ds = self.reader.read(
         instructions='train',
         split_infos=[split_info],
@@ -195,9 +210,23 @@ class ReaderTest(testing.TestCase):
     ds_values = list(tfds.as_numpy(ds))
 
     # Check that shuffle=True with a seed provides deterministic results.
-    self.assertEqual(ds_values, [
-        b'a', b'b', b'k', b'l', b'h', b'i', b'j', b'c', b'd', b'e', b'f', b'g'
-    ])
+    self.assertEqual(
+        ds_values,
+        [
+            b'a',
+            b'b',
+            b'k',
+            b'l',
+            b'h',
+            b'i',
+            b'j',
+            b'c',
+            b'd',
+            b'e',
+            b'f',
+            b'g',
+        ],
+    )
 
   def test_4fold(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
@@ -209,22 +238,37 @@ class ReaderTest(testing.TestCase):
         instructions=instructions,
         split_infos=[train_info],
     )
-    instructions = [(splits.ReadInstruction('train', to=k, unit='%') +
-                     splits.ReadInstruction('train', from_=k + 25, unit='%'))
-                    for k in range(0, 100, 25)]
+    instructions = [
+        (
+            splits.ReadInstruction('train', to=k, unit='%')
+            + splits.ReadInstruction('train', from_=k + 25, unit='%')
+        )
+        for k in range(0, 100, 25)
+    ]
     trains = self.reader.read(
         instructions=instructions,
         split_infos=[train_info],
     )
     read_tests = [list(r) for r in tfds.as_numpy(tests)]
     read_trains = [list(r) for r in tfds.as_numpy(trains)]
-    self.assertEqual(read_tests, [[b'a', b'b', b'c'], [b'd', b'e', b'f'],
-                                  [b'g', b'h', b'i'], [b'j', b'k', b'l']])
-    self.assertEqual(read_trains,
-                     [[b'd', b'e', b'f', b'g', b'h', b'i', b'j', b'k', b'l'],
-                      [b'a', b'b', b'c', b'g', b'h', b'i', b'j', b'k', b'l'],
-                      [b'a', b'b', b'c', b'd', b'e', b'f', b'j', b'k', b'l'],
-                      [b'a', b'b', b'c', b'd', b'e', b'f', b'g', b'h', b'i']])
+    self.assertEqual(
+        read_tests,
+        [
+            [b'a', b'b', b'c'],
+            [b'd', b'e', b'f'],
+            [b'g', b'h', b'i'],
+            [b'j', b'k', b'l'],
+        ],
+    )
+    self.assertEqual(
+        read_trains,
+        [
+            [b'd', b'e', b'f', b'g', b'h', b'i', b'j', b'k', b'l'],
+            [b'a', b'b', b'c', b'g', b'h', b'i', b'j', b'k', b'l'],
+            [b'a', b'b', b'c', b'd', b'e', b'f', b'j', b'k', b'l'],
+            [b'a', b'b', b'c', b'd', b'e', b'f', b'g', b'h', b'i'],
+        ],
+    )
 
   def test_read_files(self):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
@@ -272,11 +316,14 @@ class ReaderTest(testing.TestCase):
                       input_context=tf.distribute.InputContext(
                           num_input_pipelines=num_workers,
                           input_pipeline_id=index,
-                      ),),
+                      ),
+                  ),
                   # Workers should read a deterministic subset of the examples,
                   # even if examples within one worker may be shuffled.
                   shuffle_files=True,
-              )))
+              )
+          )
+      )
 
     def _b(bytes_str):
       # Convert to List[bytes] (rather than List[int])
@@ -297,8 +344,9 @@ class ReaderTest(testing.TestCase):
   def test_shuffle_files_should_be_disabled(self):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
     filename_template = self._filename_template(split='train')
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             _SHUFFLE_FILES_ERROR_MESSAGE):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, _SHUFFLE_FILES_ERROR_MESSAGE
+    ):
       self.reader.read_files(
           [
               shard_utils.FileInstruction(
@@ -337,8 +385,9 @@ class ReaderTest(testing.TestCase):
         shuffle_files=False,
         disable_shuffling=True,
     )
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             _CYCLE_LENGTH_ERROR_MESSAGE):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, _CYCLE_LENGTH_ERROR_MESSAGE
+    ):
       self.reader.read_files(
           instructions,
           read_config=read_config_lib.ReadConfig(interleave_cycle_length=16),
@@ -364,16 +413,20 @@ class ReaderTest(testing.TestCase):
       self.reader.read_files(
           instructions,
           read_config=read_config_lib.ReadConfig(
-              interleave_cycle_length=16, enable_ordering_guard=False),
+              interleave_cycle_length=16, enable_ordering_guard=False
+          ),
           shuffle_files=True,
           disable_shuffling=True,
       )
-      expected_warning = _SHUFFLE_FILES_ERROR_MESSAGE + '\n' + _CYCLE_LENGTH_ERROR_MESSAGE
+      expected_warning = (
+          _SHUFFLE_FILES_ERROR_MESSAGE + '\n' + _CYCLE_LENGTH_ERROR_MESSAGE
+      )
       self.assertIn(expected_warning, reported_warnings)
 
   @mock.patch(
       'tensorflow.data.experimental.assert_cardinality',
-      wraps=tf.data.experimental.assert_cardinality)
+      wraps=tf.data.experimental.assert_cardinality,
+  )
   def test_assert_cardinality_is_on_by_default(self, assert_cardinality):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     self.reader.read(instructions='train', split_infos=[train_info])
@@ -381,12 +434,14 @@ class ReaderTest(testing.TestCase):
 
   @mock.patch('tensorflow.data.experimental.assert_cardinality')
   def test_assert_cardinality_can_be_disabled_through_readconfig(
-      self, assert_cardinality):
+      self, assert_cardinality
+  ):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     self.reader.read(
         instructions='train',
         split_infos=[train_info],
-        read_config=read_config_lib.ReadConfig(assert_cardinality=False))
+        read_config=read_config_lib.ReadConfig(assert_cardinality=False),
+    )
     assert not assert_cardinality.called
 
 
@@ -399,7 +454,9 @@ def test_shard_api():
           dataset_name='ds_name',
           split='train',
           filetype_suffix='tfrecord',
-          data_dir='/path'))
+          data_dir='/path',
+      ),
+  )
   fi = [
       shard_utils.FileInstruction(
           filename='/path/ds_name-train.tfrecord-00000-of-00003',

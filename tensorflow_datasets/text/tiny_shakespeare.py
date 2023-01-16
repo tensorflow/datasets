@@ -92,24 +92,18 @@ class TinyShakespeare(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             # These kwargs will be passed to _generate_examples
-            gen_kwargs={
-                'split_key': 'train',
-                'split_text': train_text
-            },
+            gen_kwargs={'split_key': 'train', 'split_text': train_text},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'split_key': 'validation',
-                'split_text': validation_text
+                'split_text': validation_text,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={
-                'split_key': 'test',
-                'split_text': test_text
-            },
+            gen_kwargs={'split_key': 'test', 'split_text': test_text},
         ),
     ]
 

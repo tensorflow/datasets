@@ -29,14 +29,21 @@ from tensorflow_datasets.testing import test_utils
 HEIGHT, WIDTH = (96, 96)
 NUMBER_LABELS = 10
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 FLAGS = flags.FLAGS
 
 
 def stl_output_dir():
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "stl10", "stl10_binary")
+  return os.path.join(
+      FLAGS.tfds_dir,
+      "testing",
+      "test_data",
+      "fake_examples",
+      "stl10",
+      "stl10_binary",
+  )
 
 
 def dump(output_dir, fname, data):
@@ -56,11 +63,20 @@ def _generate_stl10_data():
 
   for fname in ["train_X.bin", "test_X.bin", "unlabeled_X.bin"]:
     images = np.random.randint(
-        256, size=(1, HEIGHT * WIDTH * 3), dtype=np.uint8)
+        256, size=(1, HEIGHT * WIDTH * 3), dtype=np.uint8
+    )
     dump(stl_output_dir(), fname, images)
   label_names = [
-      "airplane", "bird", "car", "cat", "deer", "dog", "horse", "monkey",
-      "ship", "truck"
+      "airplane",
+      "bird",
+      "car",
+      "cat",
+      "deer",
+      "dog",
+      "horse",
+      "monkey",
+      "ship",
+      "truck",
   ]
   with open(os.path.join(output_dir, "class_names.txt"), "w") as f:
     f.write("\n".join(label_names))

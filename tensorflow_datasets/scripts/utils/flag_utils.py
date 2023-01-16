@@ -35,10 +35,10 @@ def normalize_flags(argv: List[str]) -> List[str]:
     if not bolean_flag_patern.match(arg):
       return arg
     if arg.endswith('=true'):
-      return arg[:-len('=true')]  # `--flag=true` -> `--flag`
+      return arg[: -len('=true')]  # `--flag=true` -> `--flag`
     elif arg.endswith('=false'):
       # `--flag=false` -> `--noflag`
-      return '--no' + arg[len('--'):-len('=false')]
+      return '--no' + arg[len('--') : -len('=false')]
     else:
       raise AssertionError(f'Unrecognized arg: {arg}')
 

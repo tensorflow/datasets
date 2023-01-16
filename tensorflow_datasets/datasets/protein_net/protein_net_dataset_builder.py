@@ -64,9 +64,14 @@ def _read_entry(fin: tf.io.gfile.GFile) -> Optional[Tuple[str, _Example]]:
     return None
 
   # Check structure.
-  if (lines[0] != '[ID]' or lines[2] != '[PRIMARY]' or
-      lines[4] != '[EVOLUTIONARY]' or lines[26] != '[TERTIARY]' or
-      lines[30] != '[MASK]' or lines[32]):
+  if (
+      lines[0] != '[ID]'
+      or lines[2] != '[PRIMARY]'
+      or lines[4] != '[EVOLUTIONARY]'
+      or lines[26] != '[TERTIARY]'
+      or lines[30] != '[MASK]'
+      or lines[32]
+  ):
     raise ValueError('Incorrect data formatting.')
   lines = lines[:-1]  # Discard last empty (spacer) line.
 
@@ -79,7 +84,7 @@ def _read_entry(fin: tf.io.gfile.GFile) -> Optional[Tuple[str, _Example]]:
       'evolutionary': _parse_array(lines[5:26]).transpose(),
       'tertiary': _parse_array(lines[27:30]).transpose(),
       'mask': _parse_mask(lines[31]),
-      'length': len(lines[3])
+      'length': len(lines[3]),
   }
   return key, example
 
@@ -87,8 +92,10 @@ def _read_entry(fin: tf.io.gfile.GFile) -> Optional[Tuple[str, _Example]]:
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for the ProteinNet dataset."""
 
-  URL = ('https://sharehost.hms.harvard.edu/sysbio/alquraishi/proteinnet'
-         '/human_readable/')
+  URL = (
+      'https://sharehost.hms.harvard.edu/sysbio/alquraishi/proteinnet'
+      '/human_readable/'
+  )
   FILES = {
       'casp7': 'casp7.tar.gz',
       'casp8': 'casp8.tar.gz',
@@ -99,8 +106,26 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   }
   THRESHOLDS = [30, 50, 70, 90, 95, 100]
   AMINOACIDS = [
-      'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R',
-      'S', 'T', 'V', 'W', 'Y'
+      'A',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'K',
+      'L',
+      'M',
+      'N',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'V',
+      'W',
+      'Y',
   ]
 
   BUILDER_CONFIGS = [
@@ -121,19 +146,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'id':
-                tfds.features.Text(),
-            'primary':
-                tfds.features.Sequence(
-                    tfds.features.ClassLabel(names=self.AMINOACIDS)),
-            'evolutionary':
-                tfds.features.Tensor(shape=(None, 21), dtype=np.float32),
-            'tertiary':
-                tfds.features.Tensor(shape=(None, 3), dtype=np.float32),
-            'mask':
-                tfds.features.Tensor(shape=(None,), dtype=np.bool_),
-            'length':
-                tfds.features.Tensor(shape=(), dtype=np.int32),
+            'id': tfds.features.Text(),
+            'primary': tfds.features.Sequence(
+                tfds.features.ClassLabel(names=self.AMINOACIDS)
+            ),
+            'evolutionary': tfds.features.Tensor(
+                shape=(None, 21), dtype=np.float32
+            ),
+            'tertiary': tfds.features.Tensor(shape=(None, 3), dtype=np.float32),
+            'mask': tfds.features.Tensor(shape=(None,), dtype=np.bool_),
+            'length': tfds.features.Tensor(shape=(), dtype=np.int32),
         }),
         supervised_keys=('primary', 'tertiary'),
         homepage=_PROTEINNET_HOMEPAGE,
@@ -145,13 +167,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     name = self.builder_config.name  # Configurable dataset (config) name.
     path = dl_manager.download_and_extract(
-        urllib.parse.urljoin(self.URL, self.FILES[name]))
+        urllib.parse.urljoin(self.URL, self.FILES[name])
+    )
 
     splits = {
-        tfds.Split.VALIDATION:
-            self._generate_examples(os.path.join(path, name, 'validation')),
-        tfds.Split.TEST:
-            self._generate_examples(os.path.join(path, name, 'testing'))
+        tfds.Split.VALIDATION: self._generate_examples(
+            os.path.join(path, name, 'validation')
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            os.path.join(path, name, 'testing')
+        ),
     }
     for threshold in self.THRESHOLDS:  # Train splits.
       split_path = os.path.join(path, name, f'training_{threshold}')

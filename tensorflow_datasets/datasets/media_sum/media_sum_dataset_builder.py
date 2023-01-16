@@ -69,15 +69,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     raw_samples = self._load_json_file(archive['samples'])
 
     return {
-        'train':
-            self._generate_examples(
-                split_ids=splits_ids['train'], raw_samples=raw_samples),
-        'val':
-            self._generate_examples(
-                split_ids=splits_ids['val'], raw_samples=raw_samples),
-        'test':
-            self._generate_examples(
-                split_ids=splits_ids['test'], raw_samples=raw_samples),
+        'train': self._generate_examples(
+            split_ids=splits_ids['train'], raw_samples=raw_samples
+        ),
+        'val': self._generate_examples(
+            split_ids=splits_ids['val'], raw_samples=raw_samples
+        ),
+        'test': self._generate_examples(
+            split_ids=splits_ids['test'], raw_samples=raw_samples
+        ),
     }
 
   def _load_json_file(self, json_path: epath.Path):
@@ -99,7 +99,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           example[k] = ''
       return example['id'], example
 
-    return (beam.Create(raw_samples)
-            | 'Select raw samples with the correct split id' >>
-            beam.Filter(lambda x: x['id'] in split_ids)
-            | 'Process and yield examples' >> beam.Map(_process_example))
+    return (
+        beam.Create(raw_samples)
+        | 'Select raw samples with the correct split id'
+        >> beam.Filter(lambda x: x['id'] in split_ids)
+        | 'Process and yield examples' >> beam.Map(_process_example)
+    )

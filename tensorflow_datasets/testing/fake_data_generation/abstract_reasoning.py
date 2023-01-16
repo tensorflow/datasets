@@ -58,8 +58,9 @@ SPLIT_TYPES = [
     "attrs.line.type",
 ]
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+)
 FLAGS = flags.FLAGS
 
 
@@ -70,9 +71,11 @@ def _random_content(random_state):
   # Randomly sample the relations.
   relation_structure = []
   for _ in range(num_relations):
-    relation_structure.append(
-        (random_state.choice(OBJECTS), random_state.choice(ATTRIBUTES),
-         random_state.choice(RELATIONS)))
+    relation_structure.append((
+        random_state.choice(OBJECTS),
+        random_state.choice(ATTRIBUTES),
+        random_state.choice(RELATIONS),
+    ))
   # Encode the relations.
   relation_structure_encoded = np.zeros((4, 12), dtype=np.int64)
   for i, relation in enumerate(relation_structure):
@@ -106,7 +109,8 @@ def _create_fake_file(folder, split_type, random_state):
           buf.seek(0)
           # Create tarinfo for the file.
           filename = "{split_type}/PGM_{split_type}_{split}_{id}.npz".format(
-              split_type=split_type, split=split, id=i)
+              split_type=split_type, split=split, id=i
+          )
           tarinfo = tarfile.TarInfo(filename)
           tarinfo.size = len(buf.getvalue())
           # Add the file to the archive.
@@ -115,8 +119,13 @@ def _create_fake_file(folder, split_type, random_state):
 
 def _generate():
   """Generates a fake data set and writes it to the fake_examples directory."""
-  output_dir = os.path.join(FLAGS.tfds_dir, "testing", "test_data",
-                            "fake_examples", "abstract_reasoning")
+  output_dir = os.path.join(
+      FLAGS.tfds_dir,
+      "testing",
+      "test_data",
+      "fake_examples",
+      "abstract_reasoning",
+  )
   test_utils.remake_dir(output_dir)
   random_state = np.random.RandomState(0)
   for split_type in SPLIT_TYPES:

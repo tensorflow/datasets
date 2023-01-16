@@ -23,15 +23,22 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
+flags.DEFINE_string(
+    'tfds_dir', py_utils.tfds_dir(), 'Path to tensorflow_datasets directory'
+)
 
 FLAGS = flags.FLAGS
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'malaria', 'cell_images')
+  return os.path.join(
+      FLAGS.tfds_dir,
+      'testing',
+      'test_data',
+      'fake_examples',
+      'malaria',
+      'cell_images',
+  )
 
 
 def create_folder(fname):
@@ -43,7 +50,8 @@ def create_folder(fname):
     tf.io.gfile.copy(
         fake_data_utils.get_random_png(300, 300),
         os.path.join(images_dir, image_name),
-        overwrite=True)
+        overwrite=True,
+    )
 
 
 def main(argv):

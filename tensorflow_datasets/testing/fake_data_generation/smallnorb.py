@@ -51,7 +51,6 @@ def write_binary_matrix(filename, array):
     array: Numpy array that should be written to the file.
   """
   with tf.io.gfile.GFile(filename, "wb") as f:
-
     # All data is stored in little-endian byte order.
     int32_dtype = np.dtype("int32").newbyteorder("<")
 
@@ -101,8 +100,9 @@ def _create_chunk(prefix, random_state):
 def _generate():
   """Generates a fake data set and writes it to the fake_examples directory."""
   tfds_dir = FLAGS.tfds_dir or str(utils.tfds_write_path())
-  output_dir = os.path.join(tfds_dir, "testing", "test_data", "fake_examples",
-                            "smallnorb")
+  output_dir = os.path.join(
+      tfds_dir, "testing", "test_data", "fake_examples", "smallnorb"
+  )
   test_utils.remake_dir(output_dir)
   random_state = np.random.RandomState(0)
   _create_chunk(os.path.join(output_dir, TRAINING_OUTPUT_NAME), random_state)

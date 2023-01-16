@@ -58,7 +58,8 @@ class Gsm8k(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(
-            {k: tfds.features.Text() for k in _FEATURES}),
+            {k: tfds.features.Text() for k in _FEATURES}
+        ),
         supervised_keys=None,
         homepage='https://github.com/openai/grade-school-math',
         citation=_CITATION,

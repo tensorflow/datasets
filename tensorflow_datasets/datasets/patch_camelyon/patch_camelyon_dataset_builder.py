@@ -16,6 +16,7 @@
 """PatchCamelyon images dataset."""
 
 import tensorflow_datasets.public_api as tfds
+
 _URL = 'https://patchcamelyon.grand-challenge.org/'
 
 
@@ -30,12 +31,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'id':
-                tfds.features.Text(),
-            'image':
-                tfds.features.Image(shape=(96, 96, 3), encoding_format='png'),
-            'label':
-                tfds.features.ClassLabel(num_classes=2),
+            'id': tfds.features.Text(),
+            'image': tfds.features.Image(
+                shape=(96, 96, 3), encoding_format='png'
+            ),
+            'label': tfds.features.ClassLabel(num_classes=2),
         }),
         supervised_keys=('image', 'label'),
         homepage=_URL,
@@ -54,12 +54,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     paths = dl_manager.download_and_extract(resources)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs=dict(split='test', paths=paths)),
+            name=tfds.Split.TEST, gen_kwargs=dict(split='test', paths=paths)
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs=dict(split='train', paths=paths)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(split='train', paths=paths)
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs=dict(split='valid', paths=paths)),
+            gen_kwargs=dict(split='valid', paths=paths),
+        ),
     ]
 
   def _generate_examples(self, split, paths):

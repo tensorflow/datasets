@@ -27,8 +27,10 @@ import numpy as np
 import tensorflow_datasets.core.utils as type_utils
 import tensorflow_datasets.public_api as tfds
 
-_PENGUINS_PATH = ('https://storage.googleapis.com/download.tensorflow.org/'
-                  'data/palmer_penguins/')
+_PENGUINS_PATH = (
+    'https://storage.googleapis.com/download.tensorflow.org/'
+    'data/palmer_penguins/'
+)
 
 if typing.TYPE_CHECKING:
   FeatureType = Union[type_utils.TfdsDType, tfds.core.features.FeatureConnector]
@@ -39,6 +41,7 @@ else:
 @dataclasses.dataclass
 class PenguinConfig(tfds.core.BuilderConfig):
   """Palmer Penguins dataset builder config."""
+
   # Basename of the file hosting the data.
   file_name: str = ''
   # FeatureDict fields.
@@ -69,38 +72,38 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               'flipper_length_mm': np.float32,
               'body_mass_g': np.float32,
           },
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             `penguins/processed` is a drop-in replacement for the `iris`
             dataset. It contains 4 normalised numerical features presented as a
             single tensor, no missing values and the class label (species) is
             presented as an integer (n = 334).
-          """),
-          label='species'),
+          """
+          ),
+          label='species',
+      ),
       PenguinConfig(
           name='simple',
           file_name='penguins_size.csv',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             `penguins/simple` has been processed from the raw dataset, with
             simplified class labels derived from text fields, missing values
             marked as NaN/NA and retains only 7 significant features (n = 344).
-          """),
+          """
+          ),
           features={
-              'species':
-                  tfds.features.ClassLabel(
-                      names=['Adelie', 'Chinstrap', 'Gentoo']),
-              'island':
-                  tfds.features.ClassLabel(
-                      names=['Biscoe', 'Dream', 'Torgersen']),
-              'culmen_length_mm':
-                  np.float32,
-              'culmen_depth_mm':
-                  np.float32,
-              'flipper_length_mm':
-                  np.float32,
-              'body_mass_g':
-                  np.float32,
-              'sex':
-                  tfds.features.ClassLabel(names=['FEMALE', 'MALE', 'NA']),
+              'species': tfds.features.ClassLabel(
+                  names=['Adelie', 'Chinstrap', 'Gentoo']
+              ),
+              'island': tfds.features.ClassLabel(
+                  names=['Biscoe', 'Dream', 'Torgersen']
+              ),
+              'culmen_length_mm': np.float32,
+              'culmen_depth_mm': np.float32,
+              'flipper_length_mm': np.float32,
+              'body_mass_g': np.float32,
+              'sex': tfds.features.ClassLabel(names=['FEMALE', 'MALE', 'NA']),
           },
           label='species',
           cleanup={
@@ -109,15 +112,18 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               'flipper_length_mm': 'NaN',
               'body_mass_g': 'NaN',
               'sex': 'NA',
-          }),
+          },
+      ),
       PenguinConfig(
           name='raw',
           file_name='penguins_lter.csv',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
             `penguins/raw` is the original, unprocessed copy from @allisonhorst,
             containing all 17 features, presented either as numeric types or as
             raw text (n = 344).
-          """),
+          """
+          ),
           features={
               'studyName': tfds.features.Text(),
               'Sample Number': np.int32,
@@ -145,7 +151,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               'Body Mass (g)': 'NaN',
               'Delta 15 N (o/oo)': 'NaN',
               'Delta 13 C (o/oo)': 'NaN',
-          }),
+          },
+      ),
       # pytype: enable=wrong-keyword-args
   ]
 
@@ -160,12 +167,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       label_feature = supervised_features.pop(label_name, None)
       supervised_keys = ('features', label_name)
       features = {
-          label_name:
-              label_feature,
-          'features':
-              tfds.features.Tensor(
-                  shape=(len(supervised_features),),
-                  dtype=next(iter(supervised_features.values())))
+          label_name: label_feature,
+          'features': tfds.features.Tensor(
+              shape=(len(supervised_features),),
+              dtype=next(iter(supervised_features.values())),
+          ),
       }
     elif self.builder_config.name == 'simple':
       supervised_feature_names = {

@@ -53,7 +53,8 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
 
 
 def _filename_from_content_disposition(
-    content_disposition: str,) -> Optional[str]:
+    content_disposition: str,
+) -> Optional[str]:
   """Extract the filename from the content disposition.
 
   Parse the content_definition as defined in:
@@ -89,7 +90,8 @@ def _filename_from_content_disposition(
   elif len(match) != 1:
     raise ValueError(
         f'Error while parsing filename for: {content_disposition}\n'
-        f'Multiple filename detected: {list(match)}')
+        f'Multiple filename detected: {list(match)}'
+    )
   return os.path.basename(match[0].rstrip())
 
 
@@ -112,12 +114,16 @@ class _Downloader(object):
 
   Do not instantiate this class directly. Instead, call `get_downloader()`.
   """
+
   _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS = 50
 
-  def __init__(self,
-               max_simultaneous_downloads: Optional[
-                   int] = _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS,
-               checksumer=None):
+  def __init__(
+      self,
+      max_simultaneous_downloads: Optional[
+          int
+      ] = _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS,
+      checksumer=None,
+  ):
     """Init _Downloader instance.
 
     Args:
@@ -127,8 +133,9 @@ class _Downloader(object):
       checksumer: `hashlib.HASH`. Defaults to `hashlib.sha256`.
     """
     self._executor = concurrent.futures.ThreadPoolExecutor(
-        max_workers=max_simultaneous_downloads or
-        self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS)
+        max_workers=max_simultaneous_downloads
+        or self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS
+    )
     self._checksumer_cls = checksumer or hashlib.sha256
     self._pbar_url = None
     self._pbar_dl_size = None
@@ -152,10 +159,7 @@ class _Downloader(object):
       self._pbar_dl_size.update(dl_result.url_info.size)
 
   def download(
-      self,
-      url: str,
-      destination_path: str,
-      verify: bool = True
+      self, url: str, destination_path: str, verify: bool = True
   ) -> 'promise.Promise[concurrent.futures.Future[DownloadResult]]':
     """Download url to given path.
 
@@ -171,8 +175,9 @@ class _Downloader(object):
     """
     destination_path = os.fspath(destination_path)
     self._pbar_url.update_total(1)
-    future = self._executor.submit(self._sync_download, url, destination_path,
-                                   verify)
+    future = self._executor.submit(
+        self._sync_download, url, destination_path, verify
+    )
     return promise.Promise.resolve(future)
 
   def _sync_file_copy(
@@ -185,16 +190,16 @@ class _Downloader(object):
     out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
     url_info = checksums_lib.compute_url_info(
-        out_path, checksum_cls=self._checksumer_cls)
+        out_path, checksum_cls=self._checksumer_cls
+    )
     self._pbar_dl_size.update_total(url_info.size)
     self._pbar_dl_size.update(url_info.size)
     self._pbar_url.update(1)
     return DownloadResult(path=epath.Path(out_path), url_info=url_info)
 
-  def _sync_download(self,
-                     url: str,
-                     destination_path: str,
-                     verify: bool = True) -> DownloadResult:
+  def _sync_download(
+      self, url: str, destination_path: str, verify: bool = True
+  ) -> DownloadResult:
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,
@@ -285,10 +290,12 @@ def _open_with_requests(
         backoff_factor=0.2,
         status_forcelist=[500, 502, 503, 504],
         raise_on_redirect=True,
-        raise_on_status=True)
+        raise_on_status=True,
+    )
     session.mount('http://', requests.adapters.HTTPAdapter(max_retries=retries))
-    session.mount('https://',
-                  requests.adapters.HTTPAdapter(max_retries=retries))
+    session.mount(
+        'https://', requests.adapters.HTTPAdapter(max_retries=retries)
+    )
     if _DRIVE_URL.match(url):
       url = _normalize_drive_url(url)
     with session.get(url, stream=True, **kwargs) as response:
@@ -319,5 +326,8 @@ def _normalize_drive_url(url: str) -> str:
 def _assert_status(response: requests.Response) -> None:
   """Ensure the URL response is 200."""
   if response.status_code != 200:
-    raise DownloadError('Failed to get url {}. HTTP code: {}.'.format(
-        response.url, response.status_code))
+    raise DownloadError(
+        'Failed to get url {}. HTTP code: {}.'.format(
+            response.url, response.status_code
+        )
+    )

@@ -32,6 +32,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 try:
   import pandas  # pylint: disable=g-import-not-at-top
+
   DataFrame = pandas.DataFrame
 except ImportError:
   DataFrame = object
@@ -51,6 +52,7 @@ class ColumnInfo:
     format_fn: Function applied to each column items, which returns the
       displayed string object (eventually HTML)
   """
+
   name: str
   format_fn: Optional[Callable[[np.ndarray], str]] = None
   # Should also add a `style.apply` function
@@ -84,9 +86,11 @@ class ColumnInfo:
       try:
         return repr_fn(val)
       except Exception as e:  # pylint: disable=broad-except
-        err_msg = (f'HTML formatting of column {name} failed:\n'
-                   f' * feature: {feature}\n'
-                   f' * input: {val!r}\n')
+        err_msg = (
+            f'HTML formatting of column {name} failed:\n'
+            f' * feature: {feature}\n'
+            f' * input: {val!r}\n'
+        )
         py_utils.reraise(e, prefix=err_msg)
 
     return ColumnInfo(
@@ -135,7 +139,6 @@ class StyledDataFrame(DataFrame):
   df.current_style.apply(...)  # Configure the style
   df  # The data-frame is displayed using ` pandas.io.formats.style.Styler`
   ```
-
   """
 
   # StyledDataFrame could be improved such as the style is forwarded when

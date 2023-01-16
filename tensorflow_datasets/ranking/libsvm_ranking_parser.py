@@ -40,6 +40,7 @@ class RankingExample:
     qid: The query identifier.
     features: A mapping of feature name to feature values.
   """
+
   qid: str
   features: Mapping[str, List[float]]
 
@@ -140,21 +141,24 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
       label, qid, *features = re.split(r"\s+", line_clean)
     except ValueError as value_error:
       raise ParserError(
-          line_number, line,
-          "could not extract label, qid and features") from value_error
+          line_number, line, "could not extract label, qid and features"
+      ) from value_error
 
     # Convert relevance label to float.
     try:
       label = float(label)
     except ValueError as value_error:
       raise ParserError(
-          line_number, line,
-          f"label '{label}' could not be converted to a float") from value_error
+          line_number,
+          line,
+          f"label '{label}' could not be converted to a float",
+      ) from value_error
 
     # Extract qid.
     if qid[:4] != "qid:":
-      raise ParserError(line_number, line,
-                        "line must contain a qid after the relevance label")
+      raise ParserError(
+          line_number, line, "line must contain a qid after the relevance label"
+      )
     qid = qid[4:]
     if not qid:
       raise ParserError(line_number, line, "qid can not be empty")
@@ -177,8 +181,9 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
           feature_dict[self._feature_names[index]] = value
       except ValueError as value_error:
         raise ParserError(
-            line_number, line,
-            f"failed to extract feature index and value from '{feature}'"
+            line_number,
+            line,
+            f"failed to extract feature index and value from '{feature}'",
         ) from value_error
 
     # Add label to feature dict.

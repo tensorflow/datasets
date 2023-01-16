@@ -98,19 +98,29 @@ KeyExample = split_builder_lib.KeyExample
 if typing.TYPE_CHECKING:
   import tensorflow as tf
   import apache_beam as beam  # pytype: disable=import-error
+
   BeamInput = Union[beam.PTransform, beam.PCollection[KeyExample]]
-  InputData = Union[tf.data.Dataset, beam.PTransform,
-                    beam.PCollection[KeyExample], Iterator[KeyExample]]
+  InputData = Union[
+      tf.data.Dataset,
+      beam.PTransform,
+      beam.PCollection[KeyExample],
+      Iterator[KeyExample],
+  ]
 else:
-  BeamInput = Union["beam.PTransform",
-                    "beam.PCollection[split_builder_lib.KeyExample]"]
-  InputData = Union["tf.data.Dataset", "beam.PTransform",
-                    "beam.PCollection[split_builder_lib.KeyExample]",
-                    "Iterator[KeyExample]"]
+  BeamInput = Union[
+      "beam.PTransform", "beam.PCollection[split_builder_lib.KeyExample]"
+  ]
+  InputData = Union[
+      "tf.data.Dataset",
+      "beam.PTransform",
+      "beam.PCollection[split_builder_lib.KeyExample]",
+      "Iterator[KeyExample]",
+  ]
 
 
 class AdhocBuilder(
-    dataset_builder.GeneratorBasedBuilder, skip_registration=True):
+    dataset_builder.GeneratorBasedBuilder, skip_registration=True
+):
   """Dataset builder that allows building a dataset without defining a class."""
 
   def __init__(
@@ -134,19 +144,22 @@ class AdhocBuilder(
     if config:
       if isinstance(config, str):
         config = dataset_builder.BuilderConfig(
-            name=config, version=version, release_notes=release_notes)
+            name=config, version=version, release_notes=release_notes
+        )
       self.BUILDER_CONFIGS = [config]  # pylint: disable=invalid-name
     self._split_datasets = split_datasets
     self._feature_spec = features
     self._description = (
-        description or "Dataset built without a DatasetBuilder class.")
+        description or "Dataset built without a DatasetBuilder class."
+    )
     self._homepage = homepage
     super().__init__(
         data_dir=data_dir,
         config=config,
         version=version,
         file_format=file_format,
-        **kwargs)
+        **kwargs,
+    )
 
   def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(
@@ -167,15 +180,18 @@ class AdhocBuilder(
         split_generators[split_name] = self._generate_examples_tf_data(dataset)
       elif isinstance(dataset, Iterator):
         split_generators[split_name] = self._generate_examples_iterator(dataset)
-      elif (beam and (isinstance(dataset, beam.PTransform) or
-                      isinstance(dataset, beam.PCollection))):
+      elif beam and (
+          isinstance(dataset, beam.PTransform)
+          or isinstance(dataset, beam.PCollection)
+      ):
         split_generators[split_name] = dataset
       else:
         raise ValueError(f"Dataset type {type(dataset)} not supported.")
     return split_generators
 
   def _generate_examples_tf_data(
-      self, ds: tf.data.Dataset) -> split_builder_lib.SplitGenerator:
+      self, ds: tf.data.Dataset
+  ) -> split_builder_lib.SplitGenerator:
     for i, example in enumerate(dataset_utils.as_numpy(ds)):
       yield i, example
 
@@ -185,8 +201,9 @@ class AdhocBuilder(
   ) -> split_builder_lib.SplitGenerator:
     yield from ds
 
-  def _generate_examples(self,
-                         **kwargs: Any) -> split_builder_lib.SplitGenerator:
+  def _generate_examples(
+      self, **kwargs: Any
+  ) -> split_builder_lib.SplitGenerator:
     raise NotImplementedError()
 
 
@@ -208,8 +225,9 @@ def store_as_tfds_dataset(
     raise ValueError("No splits with datasets were given.")
   ds_types = {type(ds) for ds in split_datasets.values()}
   if len(ds_types) > 1:
-    raise TypeError("All split datasets should have the same type. "
-                    f"Got: {ds_types}")
+    raise TypeError(
+        f"All split datasets should have the same type. Got: {ds_types}"
+    )
 
   builder = AdhocBuilder(
       name=name,
@@ -224,9 +242,13 @@ def store_as_tfds_dataset(
       file_format=file_format,
   )
   builder.download_and_prepare(
-      download_config=download_config, file_format=file_format)
-  logging.info("Dataset '%s' was prepared as a TFDS dataset in folder %s", name,
-               builder.data_dir)
+      download_config=download_config, file_format=file_format
+  )
+  logging.info(
+      "Dataset '%s' was prepared as a TFDS dataset in folder %s",
+      name,
+      builder.data_dir,
+  )
   return builder
 
 
@@ -244,5 +266,6 @@ class TfDataBuilder(AdhocBuilder, skip_registration=True):
   ):
     logging.warning(
         "This class is deprecated. "
-        "Please use tfds.dataset_builders.store_as_tfds_dataset instead.")
+        "Please use tfds.dataset_builders.store_as_tfds_dataset instead."
+    )
     super().__init__(split_datasets=split_datasets, **kwargs)

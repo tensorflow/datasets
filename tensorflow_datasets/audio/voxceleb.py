@@ -39,7 +39,9 @@ This release contains the audio part of the voxceleb1.1 dataset.
 
 _HOMEPAGE = 'http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html'
 
-IDEN_SPLITS_URL = 'http://www.robots.ox.ac.uk/~vgg/data/voxceleb/meta/iden_split.txt'
+IDEN_SPLITS_URL = (
+    'http://www.robots.ox.ac.uk/~vgg/data/voxceleb/meta/iden_split.txt'
+)
 NUM_CLASSES = 1252
 
 
@@ -53,7 +55,9 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   manual_dir should contain the file vox_dev_wav.zip. The instructions for
   downloading this file are found in {}. This dataset requires registration.
-  """.format(_HOMEPAGE)
+  """.format(
+      _HOMEPAGE
+  )
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -75,7 +79,8 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
     if not tf.io.gfile.exists(zip_path):
       raise AssertionError(
           'VoxCeleb requires manual download of the data. Please download '
-          'the audio data and place it into: {}'.format(zip_path))
+          'the audio data and place it into: {}'.format(zip_path)
+      )
     # Need to extract instead of reading directly from archive since reading
     # audio files from zip archive is not supported.
     extract_path = dl_manager.extract(zip_path)
@@ -89,21 +94,21 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'extract_path': extract_path,
-                'file_names': iden_splits['train']
+                'file_names': iden_splits['train'],
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'extract_path': extract_path,
-                'file_names': iden_splits['validation']
+                'file_names': iden_splits['validation'],
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'extract_path': extract_path,
-                'file_names': iden_splits['test']
+                'file_names': iden_splits['test'],
             },
         ),
     ]
@@ -114,7 +119,7 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
       full_name = os.path.join(extract_path, 'wav', file_name)
       if not tf.io.gfile.exists(full_name):
         continue
-      speaker, ytid, _ = file_name[:-len('.wav')].split('/')
+      speaker, ytid, _ = file_name[: -len('.wav')].split('/')
       speaker_id = int(speaker[3:])
       example = {'audio': full_name, 'label': speaker_id, 'youtube_id': ytid}
       yield file_name, example

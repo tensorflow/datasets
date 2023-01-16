@@ -49,7 +49,6 @@ class ComputeStatsMode(enum.Enum):
     already present
   * SKIP: Ignore the dataset dynamic field computation (whether they already
     exist or not)
-
   """
 
   AUTO = 'auto'

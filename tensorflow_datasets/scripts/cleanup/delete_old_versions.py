@@ -40,10 +40,12 @@ import termcolor
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('data_dir', tfds.core.constants.DATA_DIR,
-                    'Path to the data directory.')
-flags.DEFINE_boolean('skip_confirmation', False,
-                     'Whether to skip user confirmation or not.')
+flags.DEFINE_string(
+    'data_dir', tfds.core.constants.DATA_DIR, 'Path to the data directory.'
+)
+flags.DEFINE_boolean(
+    'skip_confirmation', False, 'Whether to skip user confirmation or not.'
+)
 
 # Nested dict representing the file structure.
 TreeDict = Dict[str, 'TreeDict']  # pytype: disable=not-supported-yet
@@ -76,6 +78,7 @@ class TaskResult:
     to_delete: List of directories to delete
     sub_tasks: Childs tasks
   """
+
   to_keep: Iterable[pathlib.Path]
   to_delete: Iterable[pathlib.Path]
   sub_tasks: Iterable[concurrent.futures.Future]
@@ -122,7 +125,8 @@ def _extract_dirs_to_delete(
           executor=executor,
           curr_dir=curr_dir / dir_name,
           curr_tree=curr_tree[dir_name],
-      ) for dir_name in dirs_to_maybe_keep
+      )
+      for dir_name in dirs_to_maybe_keep
   ]
   return TaskResult(
       to_keep=[],
@@ -154,9 +158,8 @@ def _get_extra_dirs(
 ) -> Tuple[List[pathlib.Path], List[pathlib.Path]]:
   """Returns a tuple of installed datasets and extra dirs to delete.
 
-  Args:
-      data_dir : The path to the data directory
-      current_full_names : Names of the latest datasets supported in TFDS
+  Args: data_dir : The path to the data directory current_full_names : Names of
+  the latest datasets supported in TFDS
 
   Returns:
     dirs_to_keep: List of directory to keep (existing supported versions)
@@ -179,7 +182,8 @@ def _get_extra_dirs(
     dirs_to_keep = []
     dirs_to_delete = []
     _extract_dirs_from_future(
-        dirs_to_keep=dirs_to_keep, dirs_to_delete=dirs_to_delete, future=future)
+        dirs_to_keep=dirs_to_keep, dirs_to_delete=dirs_to_delete, future=future
+    )
   return sorted(dirs_to_keep), sorted(dirs_to_delete)
 
 
@@ -208,8 +212,10 @@ def _display_dirs(
   print('Path indicated in bold (*) will be kept, the other will be deleted.\n')
   print('\n'.join(all_dirs))
   print()
-  print(f'{len(dirs_to_delete)} datasets to delete, {len(dirs_to_keep)} to '
-        'keep.\n')
+  print(
+      f'{len(dirs_to_delete)} datasets to delete, {len(dirs_to_keep)} to '
+      'keep.\n'
+  )
 
 
 def delete_old_versions(

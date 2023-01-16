@@ -102,30 +102,34 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     granularity = self._builder_config.granularity
     alignments_base_path = os.path.join(
-        dl_manager.manual_dir, "booksum", "alignments",
-        f"{granularity}-level-summary-alignments")
+        dl_manager.manual_dir,
+        "booksum",
+        "alignments",
+        f"{granularity}-level-summary-alignments",
+    )
     return {
-        "train":
-            self._generate_examples(
-                alignments_path=os.path.join(
-                    alignments_base_path,
-                    _SPLIT_FILENAMES[granularity]["train"]),
-                base_path=dl_manager.manual_dir,
-                granularity=granularity),
-        "validation":
-            self._generate_examples(
-                alignments_path=os.path.join(
-                    alignments_base_path,
-                    _SPLIT_FILENAMES[granularity]["validation"]),
-                base_path=dl_manager.manual_dir,
-                granularity=granularity),
-        "test":
-            self._generate_examples(
-                alignments_path=os.path.join(
-                    alignments_base_path,
-                    _SPLIT_FILENAMES[granularity]["test"]),
-                base_path=dl_manager.manual_dir,
-                granularity=granularity),
+        "train": self._generate_examples(
+            alignments_path=os.path.join(
+                alignments_base_path, _SPLIT_FILENAMES[granularity]["train"]
+            ),
+            base_path=dl_manager.manual_dir,
+            granularity=granularity,
+        ),
+        "validation": self._generate_examples(
+            alignments_path=os.path.join(
+                alignments_base_path,
+                _SPLIT_FILENAMES[granularity]["validation"],
+            ),
+            base_path=dl_manager.manual_dir,
+            granularity=granularity,
+        ),
+        "test": self._generate_examples(
+            alignments_path=os.path.join(
+                alignments_base_path, _SPLIT_FILENAMES[granularity]["test"]
+            ),
+            base_path=dl_manager.manual_dir,
+            granularity=granularity,
+        ),
     }
 
   def _generate_examples(
@@ -138,10 +142,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(alignments_path, "r") as f:
       for i, line in enumerate(f.read().strip().splitlines()):
         example_data = json.loads(line)
-        input_path = os.path.join(base_path,
-                                  example_data[f"{granularity}_path"])
-        summary_path = os.path.join(base_path, "booksum", "scripts",
-                                    example_data["summary_path"])
+        input_path = os.path.join(
+            base_path, example_data[f"{granularity}_path"]
+        )
+        summary_path = os.path.join(
+            base_path, "booksum", "scripts", example_data["summary_path"]
+        )
         if not tf.io.gfile.exists(input_path):
           logging.info("Skipping missing input: %s", input_path)
           continue

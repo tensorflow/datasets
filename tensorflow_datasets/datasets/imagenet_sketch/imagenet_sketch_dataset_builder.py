@@ -59,5 +59,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Generate images and labels for splits."""
     for fname, fobj in archive:
       assert fname.startswith('sketch/') and fname.endswith('.JPEG')
-      fname = fname[len('sketch/'):]
+      fname = fname[len('sketch/') :]
       yield fname, {'image': fobj, 'file_name': fname, 'label': fname[:9]}

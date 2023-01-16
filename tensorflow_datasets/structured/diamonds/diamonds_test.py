@@ -21,6 +21,7 @@ from tensorflow_datasets.structured.diamonds import diamonds
 
 class DiamondsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for diamonds dataset."""
+
   DATASET_CLASS = diamonds.Diamonds
   SPLITS = {
       "train": 3,

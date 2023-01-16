@@ -73,6 +73,7 @@ _LABELS = collections.OrderedDict({
 class Chexpert(tfds.core.GeneratorBasedBuilder):
   """CheXpert 2019."""
 
+
   VERSION = tfds.core.Version("3.1.0")
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
@@ -88,19 +89,19 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "name":
-                tfds.features.Text(),  # patient info
-            "image":
-                tfds.features.Image(),
-            "label":
-                tfds.features.Sequence(
-                    tfds.features.ClassLabel(names=_LABELS.values())),
-            "image_view":
-                tfds.features.ClassLabel(names=["frontal", "lateral"]),
+            "name": tfds.features.Text(),  # patient info
+            "image": tfds.features.Image(),
+            "label": tfds.features.Sequence(
+                tfds.features.ClassLabel(names=_LABELS.values())
+            ),
+            "image_view": tfds.features.ClassLabel(
+                names=["frontal", "lateral"]
+            ),
         }),
         supervised_keys=("image", "label"),
         homepage="https://stanfordmlgroup.github.io/competitions/chexpert/",
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
@@ -109,8 +110,10 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
     val_path = os.path.join(path, _VALIDATION_DIR)
 
     if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
-      msg = ("You must download the dataset folder from CheXpert"
-             "website manually and place it into %s." % path)
+      msg = (
+          "You must download the dataset folder from CheXpert"
+          "website manually and place it into %s." % path
+      )
       raise AssertionError(msg)
 
     return [
@@ -118,14 +121,14 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "imgs_path": path,  # Relative img path is provided in csv
-                "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME)
+                "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "imgs_path": path,
-                "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME)
+                "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME),
             },
         ),
     ]

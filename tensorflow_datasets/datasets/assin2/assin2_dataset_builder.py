@@ -65,12 +65,9 @@ PS.: Description is extracted from [official homepage]({_HOMEPAGE}).
 # pylint: disable=line-too-longm anomalous-backslash-in-string
 
 _DOWNLOAD_URLS = {
-    'train':
-        'https://drive.google.com/u/0/uc?id=1Q9j1a83CuKzsHCGaNulSkNxBm7Dkn7Ln&export=download',
-    'validation':
-        'https://drive.google.com/u/0/uc?id=1kb7xq6Mb3eaqe9cOAo70BaG9ypwkIqEU&export=download',
-    'test':
-        'https://drive.google.com/u/0/uc?id=1J3FpQaHxpM-FDfBUyooh-sZF-B-bM_lU&export=download',
+    'train': 'https://drive.google.com/u/0/uc?id=1Q9j1a83CuKzsHCGaNulSkNxBm7Dkn7Ln&export=download',
+    'validation': 'https://drive.google.com/u/0/uc?id=1kb7xq6Mb3eaqe9cOAo70BaG9ypwkIqEU&export=download',
+    'test': 'https://drive.google.com/u/0/uc?id=1J3FpQaHxpM-FDfBUyooh-sZF-B-bM_lU&export=download',
 }
 
 
@@ -86,16 +83,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'text':
-                tfds.features.Text(),
-            'hypothesis':
-                tfds.features.Text(),
-            'id':
-                np.int32,
-            'entailment':
-                tfds.features.ClassLabel(names=['None', 'Entailment']),
-            'similarity':
-                np.float32
+            'text': tfds.features.Text(),
+            'hypothesis': tfds.features.Text(),
+            'id': np.int32,
+            'entailment': tfds.features.ClassLabel(
+                names=['None', 'Entailment']
+            ),
+            'similarity': np.float32,
         }),
         supervised_keys=None,
         homepage=_HOMEPAGE,
@@ -107,7 +101,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return {
         'train': self._generate_examples(path['train']),
         'validation': self._generate_examples(path['validation']),
-        'test': self._generate_examples(path['test'])
+        'test': self._generate_examples(path['test']),
     }
 
   def _generate_examples(self, path):
@@ -121,5 +115,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           'hypothesis': pair.hypothesis,
           'id': pair.id,
           'entailment': pair.entailment,
-          'similarity': pair.similarity
+          'similarity': pair.similarity,
       }

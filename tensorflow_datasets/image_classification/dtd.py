@@ -38,7 +38,9 @@ The official release of the dataset defines a 10-fold cross-validation
 partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 """
 _URL = "https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html"
-_DATA_URL = "https://www.robots.ox.ac.uk/~vgg/data/dtd/download/dtd-r1.0.1.tar.gz"
+_DATA_URL = (
+    "https://www.robots.ox.ac.uk/~vgg/data/dtd/download/dtd-r1.0.1.tar.gz"
+)
 
 
 class Dtd(tfds.core.GeneratorBasedBuilder):
@@ -48,7 +50,8 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     names_file = tfds.core.tfds_path(
-        os.path.join("image_classification", "dtd_key_attributes.txt"))
+        os.path.join("image_classification", "dtd_key_attributes.txt")
+    )
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -58,7 +61,8 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names_file=names_file),
         }),
         homepage=_URL,
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     # Note: The file extension is .tar.gz, but it is actually a .tar file.
@@ -69,19 +73,22 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs=dict(data_path=data_path, split_name="train1")),
+            gen_kwargs=dict(data_path=data_path, split_name="train1"),
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs=dict(data_path=data_path, split_name="test1")),
+            gen_kwargs=dict(data_path=data_path, split_name="test1"),
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs=dict(data_path=data_path, split_name="val1")),
+            gen_kwargs=dict(data_path=data_path, split_name="val1"),
+        ),
     ]
 
   def _generate_examples(self, data_path, split_name):
     with tf.io.gfile.GFile(
-        os.path.join(data_path, "dtd", "labels", split_name + ".txt"),
-        "r") as split_file:
+        os.path.join(data_path, "dtd", "labels", split_name + ".txt"), "r"
+    ) as split_file:
       for line in split_file:
         fname = line.strip()
         label = os.path.split(fname)[0]

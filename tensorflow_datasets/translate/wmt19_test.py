@@ -33,10 +33,12 @@ class TranslateDeEnWmt19Test(testing.DatasetBuilderTestCase):
   }
 
   SEQUENTUAL_DL_EXTRACT_RESULT = {
-      "http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz":
-          "commoncrawl",
-      "http://www.statmt.org/europarl/v9/training/europarl-v9.de-en.tsv.gz":
-          "sentences.de-en.tsv",
+      "http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz": (
+          "commoncrawl"
+      ),
+      "http://www.statmt.org/europarl/v9/training/europarl-v9.de-en.tsv.gz": (
+          "sentences.de-en.tsv"
+      ),
   }
 
   def _get_dl_extract_result(self, url):
@@ -66,10 +68,12 @@ class TranslateCsEnWmt19Test(testing.DatasetBuilderTestCase):
   }
 
   SEQUENTUAL_DL_EXTRACT_RESULT = {
-      "http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz":
-          "commoncrawl",
-      "http://www.statmt.org/europarl/v9/training/europarl-v9.cs-en.tsv.gz":
-          "sentences.cs-en.tsv",
+      "http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz": (
+          "commoncrawl"
+      ),
+      "http://www.statmt.org/europarl/v9/training/europarl-v9.cs-en.tsv.gz": (
+          "sentences.cs-en.tsv"
+      ),
   }
 
   def _get_dl_extract_result(self, url):

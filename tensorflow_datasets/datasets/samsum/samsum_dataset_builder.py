@@ -72,9 +72,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         ),
     ]
 
-  def _generate_examples(self,
-                         path: Optional[Text] = None
-                        ) -> Iterator[Tuple[Text, Dict[Text, Text]]]:
+  def _generate_examples(
+      self, path: Optional[Text] = None
+  ) -> Iterator[Tuple[Text, Dict[Text, Text]]]:
     """Yields examples."""
     with tf.io.gfile.GFile(path, "rb") as f:
       for example in json.load(f):

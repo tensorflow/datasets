@@ -33,5 +33,6 @@ class D4rlAdroitDoor(dataset_builder.D4RLDatasetBuilder):
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(
-        name='door', obs_len=39, action_len=28, qpos_len=30, qvel_len=30)
+        name='door', obs_len=39, action_len=28, qpos_len=30, qvel_len=30
+    )
     super().__init__(ds_config=config, **kwargs)

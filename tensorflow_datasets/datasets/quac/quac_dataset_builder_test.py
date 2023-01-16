@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class QuacTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for quac dataset."""
+
   DATASET_CLASS = quac_dataset_builder.Builder
   DL_EXTRACT_RESULT = {
       "train": "train_v0.2.json",

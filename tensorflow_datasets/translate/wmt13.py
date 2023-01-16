@@ -49,19 +49,30 @@ class Wmt13Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-      ) for l1, l2 in _LANGUAGE_PAIRS
+      )
+      for l1, l2 in _LANGUAGE_PAIRS
   ]
 
   @property
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "commoncrawl", "multiun", "newscommentary_v8",
-            "gigafren", "wikiheadlines_ru", "yandexcorpus", "czeng_10"
+            "europarl_v7",
+            "commoncrawl",
+            "multiun",
+            "newscommentary_v8",
+            "gigafren",
+            "wikiheadlines_ru",
+            "yandexcorpus",
+            "czeng_10",
         ],
         tfds.Split.VALIDATION: [
-            "newstest2012", "newstest2011", "newstest2010", "newstest2009",
-            "newstest2008", "newssyscomb2009"
+            "newstest2012",
+            "newstest2011",
+            "newstest2010",
+            "newstest2009",
+            "newstest2008",
+            "newssyscomb2009",
         ],
-        tfds.Split.TEST: ["newstest2013"]
+        tfds.Split.TEST: ["newstest2013"],
     }

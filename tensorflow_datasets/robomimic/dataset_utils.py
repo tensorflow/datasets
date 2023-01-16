@@ -25,13 +25,14 @@ def _concat_obs(base_obs, extra_obs):
   return np.append(base_obs, np.expand_dims(extra_obs, 0), axis=0)
 
 
-def episode_metadata(mask: Mapping[str, List[str]],
-                     episode_key: str) -> Dict[str, bool]:
+def episode_metadata(
+    mask: Mapping[str, List[str]], episode_key: str
+) -> Dict[str, bool]:
   """Builds the metadata of an episode.
 
   Args:
-    mask: A dict that maps flags to the list of episodes for which this
-      flag is true.
+    mask: A dict that maps flags to the list of episodes for which this flag is
+      true.
     episode_key: The key of an episode.
 
   Returns:
@@ -64,15 +65,17 @@ def build_episode(steps: Mapping[str, Any]) -> Dict[str, Any]:
   # The standard 'obs' needs to be extended with the last element from
   # 'next_obs' to reconstruct the full sequence.
   obs = tree_utils.map_structure(np.array, dict(steps['obs']))
-  last_obs = tree_utils.map_structure(lambda el: el[-1],
-                                      dict(steps['next_obs']))
+  last_obs = tree_utils.map_structure(
+      lambda el: el[-1], dict(steps['next_obs'])
+  )
   concat_obs = tree_utils.map_structure(_concat_obs, obs, last_obs)
 
   actions = steps['actions'][:]
   dones = steps['dones'][:]
   episode['observation'] = concat_obs
   episode['action'] = np.append(
-      actions, np.expand_dims(np.zeros(actions[0].shape), 0), axis=0)
+      actions, np.expand_dims(np.zeros(actions[0].shape), 0), axis=0
+  )
   episode['reward'] = np.append(steps['rewards'][:], 0)
   episode['discount'] = np.append(np.ones(ep_length), 0)
   # Offset `dones` by one as it corresponds to the `next_obs`:
@@ -84,6 +87,7 @@ def build_episode(steps: Mapping[str, Any]) -> Dict[str, Any]:
   episode['is_last'] = np.append(np.zeros(ep_length, dtype=bool), True)
   states = steps['states'][:]
   episode['states'] = np.append(
-      states, np.expand_dims(np.zeros(states[0].shape), 0), axis=0)
+      states, np.expand_dims(np.zeros(states[0].shape), 0), axis=0
+  )
 
   return episode

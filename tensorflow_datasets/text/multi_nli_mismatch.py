@@ -74,7 +74,6 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
     downloaded_dir = dl_manager.download_and_extract(ROOT_URL)
     mnli_path = os.path.join(downloaded_dir, "multinli_1.0")
     train_path = os.path.join(mnli_path, "multinli_1.0_train.txt")
@@ -83,10 +82,11 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_path}),
+            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_path}
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs={"filepath": validation_path}),
+            name=tfds.Split.VALIDATION, gen_kwargs={"filepath": validation_path}
+        ),
     ]
 
   def _generate_examples(self, filepath):
@@ -106,5 +106,5 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
       yield idx, {
           "premise": split_line[5],
           "hypothesis": split_line[6],
-          "label": split_line[0]
+          "label": split_line[0],
       }

@@ -47,9 +47,11 @@ def mock_cache_path(new_cache_dir: epath.PathLike) -> Iterator[None]:
   # `functools.lru_cache`
   new_cache_path = utils.memoize()(cache.cache_path.__wrapped__)
   new_module_path = utils.memoize()(cache.module_path.__wrapped__)
-  with mock.patch.object(cache, '_default_cache_dir', return_value=new_dir), \
-       mock.patch.object(cache, 'cache_path', new_cache_path), \
-       mock.patch.object(cache, 'module_path', new_module_path):
+  with mock.patch.object(
+      cache, '_default_cache_dir', return_value=new_dir
+  ), mock.patch.object(cache, 'cache_path', new_cache_path), mock.patch.object(
+      cache, 'module_path', new_module_path
+  ):
     yield
 
 
@@ -74,11 +76,13 @@ def dummy_register():
 
     # Create the remote index content
     # Note the absence of `"` for the `src_multi_json` as it is parsed as `dict`
-    content = textwrap.dedent(f"""\
+    content = textwrap.dedent(
+        f"""\
         {{"name": "kaggle:dummy_dataset", "source": "{src_single.to_json()}"}}
         {{"name": "kaggle:ds1", "source": "{src_single.to_json()}"}}
         {{"name": "mlds:dummy_dataset", "source": {src_multi_json}}}
-        """)
+        """
+    )
     dummy_path = tmp_path / 'dummy-community-datasets.toml'
     dummy_path.write_text(content)
 
@@ -95,7 +99,6 @@ def test_list_dataset_references(dummy_register):  # pylint: disable=redefined-o
 
 
 def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
-
   # The dataset will be installed in the cache
   installed_path = cache.cache_path()
   installed_path /= 'modules/tfds_community/kaggle/dummy_dataset'
@@ -119,7 +122,8 @@ def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
   with mock.patch.object(
       register_package,
       '_download_and_cache',
-      side_effect=ValueError('Dataset should have been cached already')):
+      side_effect=ValueError('Dataset should have been cached already'),
+  ):
     ds_name = naming.DatasetName('kaggle:dummy_dataset')
     builder_cls2 = dummy_register.builder_cls(ds_name)
   assert builder_cls is builder_cls2
@@ -149,7 +153,8 @@ def test_dataset_package():
   pkg = register_package.DatasetPackage(
       name=naming.DatasetName('ns:ds'),
       source=dataset_sources.DatasetSource.from_json(
-          'github://<owner>/<name>/tree/<branch>/my_ds/ds.py',),
+          'github://<owner>/<name>/tree/<branch>/my_ds/ds.py',
+      ),
   )
   assert register_package.DatasetPackage.from_json(pkg.to_json()) == pkg
 

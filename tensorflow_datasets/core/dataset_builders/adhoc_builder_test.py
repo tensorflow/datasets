@@ -36,16 +36,14 @@ class TfDataBuilderTest(testing.TestCase):
         name=ds_name,
         version='1.0.0',
         split_datasets={
-            'train':
-                tf.data.Dataset.from_tensor_slices({
-                    'a': [1, 2],
-                    'b': ['a', 'b'],
-                }),
-            'test':
-                tf.data.Dataset.from_tensor_slices({
-                    'a': [3],
-                    'b': ['c'],
-                }),
+            'train': tf.data.Dataset.from_tensor_slices({
+                'a': [1, 2],
+                'b': ['a', 'b'],
+            }),
+            'test': tf.data.Dataset.from_tensor_slices({
+                'a': [3],
+                'b': ['c'],
+            }),
         },
         features=tfds.features.FeaturesDict({
             'a': tf.int64,
@@ -58,7 +56,8 @@ class TfDataBuilderTest(testing.TestCase):
     assert set(builder.info.splits.keys()) == {'train', 'test'}
 
     actual_train = tfds.load(
-        f'{ds_name}:1.0.0', split='train', data_dir=data_dir)
+        f'{ds_name}:1.0.0', split='train', data_dir=data_dir
+    )
     actual_train_np = list(dataset_utils.as_numpy(actual_train))
     assert actual_train_np == [{'a': 1, 'b': b'a'}, {'a': 2, 'b': b'b'}]
 
@@ -67,17 +66,16 @@ class TfDataBuilderTest(testing.TestCase):
     assert actual_test_np == [{'a': 3, 'b': b'c'}]
 
     builder_from_dir = tfds.builder_from_directory(
-        builder_dir=os.path.join(data_dir, ds_name, '1.0.0'))
+        builder_dir=os.path.join(data_dir, ds_name, '1.0.0')
+    )
     actual_train_from_dir = builder_from_dir.as_dataset(split='train')
     actual_train_from_dir_np = list(
-        dataset_utils.as_numpy(actual_train_from_dir))
-    assert actual_train_from_dir_np == [{
-        'a': 1,
-        'b': b'a'
-    }, {
-        'a': 2,
-        'b': b'b'
-    }]
+        dataset_utils.as_numpy(actual_train_from_dir)
+    )
+    assert actual_train_from_dir_np == [
+        {'a': 1, 'b': b'a'},
+        {'a': 2, 'b': b'b'},
+    ]
 
   def test_tf_data_builder_with_config(self):
     ds_name = 'my_dataset'
@@ -87,16 +85,14 @@ class TfDataBuilderTest(testing.TestCase):
         name=ds_name,
         version='1.0.0',
         split_datasets={
-            'train':
-                tf.data.Dataset.from_tensor_slices({
-                    'a': [1, 2],
-                    'b': ['a', 'b'],
-                }),
-            'test':
-                tf.data.Dataset.from_tensor_slices({
-                    'a': [3],
-                    'b': ['c'],
-                }),
+            'train': tf.data.Dataset.from_tensor_slices({
+                'a': [1, 2],
+                'b': ['a', 'b'],
+            }),
+            'test': tf.data.Dataset.from_tensor_slices({
+                'a': [3],
+                'b': ['c'],
+            }),
         },
         features=tfds.features.FeaturesDict({
             'a': tf.int64,
@@ -106,32 +102,34 @@ class TfDataBuilderTest(testing.TestCase):
         data_dir=data_dir,
     )
 
-    assert builder.data_dir == os.path.join(self.tmp_dir, ds_name,
-                                            'some_config', '1.0.0')
+    assert builder.data_dir == os.path.join(
+        self.tmp_dir, ds_name, 'some_config', '1.0.0'
+    )
     assert set(builder.info.splits.keys()) == {'train', 'test'}
 
     actual_train = tfds.load(
-        f'{ds_name}/some_config:1.0.0', split='train', data_dir=data_dir)
+        f'{ds_name}/some_config:1.0.0', split='train', data_dir=data_dir
+    )
     actual_train_np = list(dataset_utils.as_numpy(actual_train))
     assert actual_train_np == [{'a': 1, 'b': b'a'}, {'a': 2, 'b': b'b'}]
 
     actual_test = tfds.load(
-        f'{ds_name}/some_config:1.0.0', split='test', data_dir=data_dir)
+        f'{ds_name}/some_config:1.0.0', split='test', data_dir=data_dir
+    )
     actual_test_np = list(dataset_utils.as_numpy(actual_test))
     assert actual_test_np == [{'a': 3, 'b': b'c'}]
 
     builder_from_dir = tfds.builder_from_directory(
-        builder_dir=os.path.join(data_dir, ds_name, 'some_config', '1.0.0'))
+        builder_dir=os.path.join(data_dir, ds_name, 'some_config', '1.0.0')
+    )
     actual_train_from_dir = builder_from_dir.as_dataset(split='train')
     actual_train_from_dir_np = list(
-        dataset_utils.as_numpy(actual_train_from_dir))
-    assert actual_train_from_dir_np == [{
-        'a': 1,
-        'b': b'a'
-    }, {
-        'a': 2,
-        'b': b'b'
-    }]
+        dataset_utils.as_numpy(actual_train_from_dir)
+    )
+    assert actual_train_from_dir_np == [
+        {'a': 1, 'b': b'a'},
+        {'a': 2, 'b': b'b'},
+    ]
 
   def test_tf_data_builder_multiple_versions(self):
     ds_name = 'my_dataset'
@@ -190,10 +188,12 @@ class TfDataBuilderTest(testing.TestCase):
         data_dir=data_dir,
     )
 
-    assert builder_a.data_dir == os.path.join(self.tmp_dir, ds_name, 'a',
-                                              '1.0.0')
-    assert builder_b.data_dir == os.path.join(self.tmp_dir, ds_name, 'b',
-                                              '1.0.0')
+    assert builder_a.data_dir == os.path.join(
+        self.tmp_dir, ds_name, 'a', '1.0.0'
+    )
+    assert builder_b.data_dir == os.path.join(
+        self.tmp_dir, ds_name, 'b', '1.0.0'
+    )
 
     train1 = tfds.load(f'{ds_name}/a:1.0.0', split='train', data_dir=data_dir)
     assert list(dataset_utils.as_numpy(train1)) == [{'a': 1}]
@@ -209,16 +209,14 @@ class TfDataBuilderTest(testing.TestCase):
         name=ds_name,
         version='1.0.0',
         split_datasets={
-            'train':
-                tf.data.Dataset.from_tensor_slices({
-                    'a': [1, 2],
-                    'b': ['a', 'b'],
-                }),
-            'test':
-                tf.data.Dataset.from_tensor_slices({
-                    'a': [3],
-                    'b': ['c'],
-                }),
+            'train': tf.data.Dataset.from_tensor_slices({
+                'a': [1, 2],
+                'b': ['a', 'b'],
+            }),
+            'test': tf.data.Dataset.from_tensor_slices({
+                'a': [3],
+                'b': ['c'],
+            }),
         },
         features=tfds.features.FeaturesDict({
             'a': tf.int64,
@@ -229,7 +227,8 @@ class TfDataBuilderTest(testing.TestCase):
     builder.download_and_prepare()
 
     actual_train = tfds.load(
-        f'{ds_name}:1.0.0', split='train', data_dir=data_dir)
+        f'{ds_name}:1.0.0', split='train', data_dir=data_dir
+    )
     actual_train_np = list(dataset_utils.as_numpy(actual_train))
     assert actual_train_np == [{'a': 1, 'b': b'a'}, {'a': 2, 'b': b'b'}]
 
@@ -252,7 +251,7 @@ def sort_ds_by_id(ds):
 class BeamBuilderTest(testing.TestCase):
   _DEFAULT_FEATURES = tfds.features.FeaturesDict({
       'id': tfds.features.Scalar(dtype=np.int64),
-      'id_str': tfds.features.Text()
+      'id_str': tfds.features.Text(),
   })
 
   def test_no_config(self):
@@ -262,41 +261,30 @@ class BeamBuilderTest(testing.TestCase):
         data_dir=self.tmp_dir,
         features=self._DEFAULT_FEATURES,
         split_datasets={
-            'train': (beam.Create(range(3))
-                      | beam.Map(generate_example, split='train')),
-            'test': (beam.Create(range(2))
-                     | beam.Map(generate_example, split='test'))
-        })
+            'train': beam.Create(range(3)) | beam.Map(
+                generate_example, split='train'
+            ),
+            'test': beam.Create(range(2)) | beam.Map(
+                generate_example, split='test'
+            ),
+        },
+    )
 
     assert builder.data_dir == os.path.join(self.tmp_dir, 'adhoc', '1.2.3')
 
     actual_train = tfds.load(
-        'adhoc:1.2.3', split='train', data_dir=self.tmp_dir)
+        'adhoc:1.2.3', split='train', data_dir=self.tmp_dir
+    )
     assert sort_ds_by_id(actual_train) == [
-        {
-            'id': 0,
-            'id_str': b'split=train id=0'
-        },
-        {
-            'id': 1,
-            'id_str': b'split=train id=1'
-        },
-        {
-            'id': 2,
-            'id_str': b'split=train id=2'
-        },
+        {'id': 0, 'id_str': b'split=train id=0'},
+        {'id': 1, 'id_str': b'split=train id=1'},
+        {'id': 2, 'id_str': b'split=train id=2'},
     ]
 
     actual_test = tfds.load('adhoc:1.2.3', split='test', data_dir=self.tmp_dir)
     assert sort_ds_by_id(actual_test) == [
-        {
-            'id': 0,
-            'id_str': b'split=test id=0'
-        },
-        {
-            'id': 1,
-            'id_str': b'split=test id=1'
-        },
+        {'id': 0, 'id_str': b'split=test id=0'},
+        {'id': 1, 'id_str': b'split=test id=1'},
     ]
 
   def test_config(self):
@@ -307,10 +295,11 @@ class BeamBuilderTest(testing.TestCase):
         data_dir=self.tmp_dir,
         features=self._DEFAULT_FEATURES,
         split_datasets={
-            'train':
-                beam.Create(range(3))
-                | beam.Map(generate_example, split='train')
-        })
+            'train': beam.Create(range(3)) | beam.Map(
+                generate_example, split='train'
+            )
+        },
+    )
 
     builder_b = adhoc_builder.store_as_tfds_dataset(
         name='adhoc',
@@ -319,53 +308,40 @@ class BeamBuilderTest(testing.TestCase):
         data_dir=self.tmp_dir,
         features=self._DEFAULT_FEATURES,
         split_datasets={
-            'train':
-                beam.Create(range(2))
-                | beam.Map(generate_example, split='train')
-        })
+            'train': beam.Create(range(2)) | beam.Map(
+                generate_example, split='train'
+            )
+        },
+    )
 
-    assert builder_a.data_dir == os.path.join(self.tmp_dir, 'adhoc', 'a',
-                                              '1.2.3')
-    assert builder_b.data_dir == os.path.join(self.tmp_dir, 'adhoc', 'b',
-                                              '1.2.3')
+    assert builder_a.data_dir == os.path.join(
+        self.tmp_dir, 'adhoc', 'a', '1.2.3'
+    )
+    assert builder_b.data_dir == os.path.join(
+        self.tmp_dir, 'adhoc', 'b', '1.2.3'
+    )
 
     actual_a = tfds.load('adhoc/a:1.2.3', split='train', data_dir=self.tmp_dir)
     assert sort_ds_by_id(actual_a) == [
-        {
-            'id': 0,
-            'id_str': b'split=train id=0'
-        },
-        {
-            'id': 1,
-            'id_str': b'split=train id=1'
-        },
-        {
-            'id': 2,
-            'id_str': b'split=train id=2'
-        },
+        {'id': 0, 'id_str': b'split=train id=0'},
+        {'id': 1, 'id_str': b'split=train id=1'},
+        {'id': 2, 'id_str': b'split=train id=2'},
     ]
 
     actual_b = tfds.load('adhoc/b:1.2.3', split='train', data_dir=self.tmp_dir)
     assert sort_ds_by_id(actual_b) == [
-        {
-            'id': 0,
-            'id_str': b'split=train id=0'
-        },
-        {
-            'id': 1,
-            'id_str': b'split=train id=1'
-        },
+        {'id': 0, 'id_str': b'split=train id=0'},
+        {'id': 1, 'id_str': b'split=train id=1'},
     ]
 
 
 class IteratorBuilderTest(testing.TestCase):
   _DEFAULT_FEATURES = tfds.features.FeaturesDict({
       'id': tfds.features.Scalar(dtype=np.int64),
-      'id_str': tfds.features.Text()
+      'id_str': tfds.features.Text(),
   })
 
   def test_no_config(self):
-
     def my_iterator(max_i: int, split: str):
       for i in range(max_i):
         yield generate_example(i, split)
@@ -378,36 +354,23 @@ class IteratorBuilderTest(testing.TestCase):
         split_datasets={
             'train': my_iterator(max_i=3, split='train'),
             'test': my_iterator(max_i=2, split='test'),
-        })
+        },
+    )
 
     assert builder.data_dir == os.path.join(self.tmp_dir, 'adhoc', '1.2.3')
     assert set(builder.info.splits.keys()) == {'train', 'test'}
 
     actual_train = tfds.load(
-        'adhoc:1.2.3', split='train', data_dir=self.tmp_dir)
+        'adhoc:1.2.3', split='train', data_dir=self.tmp_dir
+    )
     assert sort_ds_by_id(actual_train) == [
-        {
-            'id': 0,
-            'id_str': b'split=train id=0'
-        },
-        {
-            'id': 1,
-            'id_str': b'split=train id=1'
-        },
-        {
-            'id': 2,
-            'id_str': b'split=train id=2'
-        },
+        {'id': 0, 'id_str': b'split=train id=0'},
+        {'id': 1, 'id_str': b'split=train id=1'},
+        {'id': 2, 'id_str': b'split=train id=2'},
     ]
 
     actual_test = tfds.load('adhoc:1.2.3', split='test', data_dir=self.tmp_dir)
     assert sort_ds_by_id(actual_test) == [
-        {
-            'id': 0,
-            'id_str': b'split=test id=0'
-        },
-        {
-            'id': 1,
-            'id_str': b'split=test id=1'
-        },
+        {'id': 0, 'id_str': b'split=test id=0'},
+        {'id': 1, 'id_str': b'split=test id=1'},
     ]

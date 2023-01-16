@@ -39,7 +39,8 @@ class BuildDocsTest(absltest.TestCase):
         output_dir=self.workdir,
         code_url_prefix="",
         search_hints=True,
-        site_path="datasets/api_docs/python")
+        site_path="datasets/api_docs/python",
+    )
 
     # Check that the "defined in" section is working
     with open(os.path.join(self.workdir, "tfds.md")) as f:
@@ -50,8 +51,9 @@ class BuildDocsTest(absltest.TestCase):
     self.assertEqual(docs.deprecated.__name__, "set_deprecated")
     self.assertEqual(docs.doc_private.__name__, "doc_private")
     self.assertEqual(docs.do_not_doc.__name__, "do_not_generate_docs")
-    self.assertEqual(docs.do_not_doc_inheritable.__name__,
-                     "do_not_doc_inheritable")
+    self.assertEqual(
+        docs.do_not_doc_inheritable.__name__, "do_not_doc_inheritable"
+    )
 
 
 if __name__ == "__main__":

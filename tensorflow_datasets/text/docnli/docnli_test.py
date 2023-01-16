@@ -21,6 +21,7 @@ from tensorflow_datasets.text.docnli import docnli
 
 class DocNLITest(tfds.testing.DatasetBuilderTestCase):
   """Tests for DocNLI dataset."""
+
   DATASET_CLASS = docnli.DocNLI
   SPLITS = {
       'train': 5,  # Number of fake train example

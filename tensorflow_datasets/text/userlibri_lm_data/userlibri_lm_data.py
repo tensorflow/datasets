@@ -44,7 +44,8 @@ See UserLibriText for the additional text data.
 _URL = "https://www.kaggle.com/datasets/google/userlibri"
 _DL_URL = tfds.download.Resource(
     url="https://www.kaggle.com/datasets/google/userlibri/download",
-    extract_method=tfds.download.ExtractMethod.ZIP)
+    extract_method=tfds.download.ExtractMethod.ZIP,
+)
 
 _KAGGLE_DATASET_ID = "google/userlibri"
 
@@ -58,7 +59,7 @@ def read_metadata_file(path):
       # Collect metadata for each book ID.
       metadata[row["Book ID"]] = {
           "Num Text Examples": row["Num Text Examples"],
-          "Average Words Per Example": row["Average Words Per Example"]
+          "Average Words Per Example": row["Average Words Per Example"],
       }
   return metadata
 
@@ -73,22 +74,24 @@ class UserLibriText(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "text":
-                tfds.features.Text(
-                    doc="A sentence of text extracted from a book"),
-            "book_id":
-                tfds.features.Text(doc="The book that this text was pulled from"
-                                  ),
+            "text": tfds.features.Text(
+                doc="A sentence of text extracted from a book"
+            ),
+            "book_id": tfds.features.Text(
+                doc="The book that this text was pulled from"
+            ),
         }),
         supervised_keys=("text", "text"),
         homepage=_URL,
         citation=_CITATION,
-        metadata=tfds.core.MetadataDict())
+        metadata=tfds.core.MetadataDict(),
+    )
 
   def _split_generators(self, dl_manager):
     """Generates splits based on book_id, like '1234'."""
     extracted_dir = dl_manager.download_kaggle_data(
-        competition_or_dataset=_KAGGLE_DATASET_ID)
+        competition_or_dataset=_KAGGLE_DATASET_ID
+    )
     lm_dir = extracted_dir / "UserLibri/lm_data"
     # Load metadata file which is the same for both test-clean and test-other.
     metadata_file = lm_dir / "metadata.tsv"
@@ -101,16 +104,20 @@ class UserLibriText(tfds.core.BeamBasedBuilder):
       splits.append(
           tfds.core.SplitGenerator(
               name=book_id,
-              gen_kwargs={"book_train_file": os.path.join(lm_dir, book_txt)}))
+              gen_kwargs={"book_train_file": os.path.join(lm_dir, book_txt)},
+          )
+      )
     return splits
 
   def _build_pcollection(self, pipeline, book_train_file):
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
-    return (pipeline
-            | beam.Create([book_train_file])
-            | beam.FlatMap(_generate_examples)
-            | beam.Reshuffle())
+    return (
+        pipeline
+        | beam.Create([book_train_file])
+        | beam.FlatMap(_generate_examples)
+        | beam.Reshuffle()
+    )
 
 
 def _generate_examples(book_train_file):

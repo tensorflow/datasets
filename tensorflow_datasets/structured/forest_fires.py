@@ -93,8 +93,18 @@ sense to model with the logarithm transform).
 """
 
 _MONTHS = [
-    'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov',
-    'dec'
+    'jan',
+    'feb',
+    'mar',
+    'apr',
+    'may',
+    'jun',
+    'jul',
+    'aug',
+    'sep',
+    'oct',
+    'nov',
+    'dec',
 ]
 
 _DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
@@ -130,7 +140,7 @@ class ForestFires(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'area': np.float32,
-            'features': {name: dtype for name, dtype in features().items()}
+            'features': {name: dtype for name, dtype in features().items()},
         }),
         supervised_keys=('area', 'features'),
         homepage='https://archive.ics.uci.edu/ml/datasets/Forest+Fires',

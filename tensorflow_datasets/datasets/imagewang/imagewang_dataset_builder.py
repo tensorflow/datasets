@@ -32,7 +32,7 @@ _SIZES = ["full-size", "320px", "160px"]
 _SIZE_TO_DIRNAME = {
     "full-size": "imagewang",
     "320px": "imagewang-320",
-    "160px": "imagewang-160"
+    "160px": "imagewang-160",
 }
 
 
@@ -41,7 +41,8 @@ class ImagewangConfig(tfds.core.BuilderConfig):
 
   def __init__(self, size, **kwargs):
     super(ImagewangConfig, self).__init__(
-        version=tfds.core.Version("2.0.0"), **kwargs)
+        version=tfds.core.Version("2.0.0"), **kwargs
+    )
     self.size = size
 
 
@@ -49,7 +50,8 @@ def _make_builder_configs():
   configs = []
   for size in _SIZES:
     configs.append(
-        ImagewangConfig(name=size, size=size, description=_DESCRIPTION_SHORT))
+        ImagewangConfig(name=size, size=size, description=_DESCRIPTION_SHORT)
+    )
   return configs
 
 
@@ -63,7 +65,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(names_file=names_file)
+            "label": tfds.features.ClassLabel(names_file=names_file),
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/fastai/imagenette",

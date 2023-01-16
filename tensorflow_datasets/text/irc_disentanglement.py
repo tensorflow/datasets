@@ -23,4 +23,5 @@ tfds.builder_cls('irc_disentanglement')
 from tensorflow_datasets.core import lazy_builder_import
 
 IrcDisentanglement = lazy_builder_import.LazyBuilderImport(
-    'irc_disentanglement')
+    'irc_disentanglement'
+)

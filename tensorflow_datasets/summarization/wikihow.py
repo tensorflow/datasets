@@ -58,12 +58,9 @@ _DOCUMENT = "text"
 _SUMMARY = "headline"
 
 _URLS = {
-    "train":
-        "https://raw.githubusercontent.com/mahnazkoupaee/WikiHow-Dataset/master/all_train.txt",
-    "validation":
-        "https://raw.githubusercontent.com/mahnazkoupaee/WikiHow-Dataset/master/all_val.txt",
-    "test":
-        "https://raw.githubusercontent.com/mahnazkoupaee/WikiHow-Dataset/master/all_test.txt"
+    "train": "https://raw.githubusercontent.com/mahnazkoupaee/WikiHow-Dataset/master/all_train.txt",
+    "validation": "https://raw.githubusercontent.com/mahnazkoupaee/WikiHow-Dataset/master/all_val.txt",
+    "test": "https://raw.githubusercontent.com/mahnazkoupaee/WikiHow-Dataset/master/all_test.txt",
 }
 
 
@@ -80,7 +77,8 @@ class WikihowConfig(tfds.core.BuilderConfig):
     # Version 1.1.0 remove empty document and summary strings.
     # Version 1.2.0 add train validation test split, add cleaning & filtering.
     super(WikihowConfig, self).__init__(
-        version=tfds.core.Version("1.2.0"), **kwargs)
+        version=tfds.core.Version("1.2.0"), **kwargs
+    )
     self.filename = filename
 
 
@@ -96,12 +94,16 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
       WikihowConfig(
           name="all",
           filename="wikihowAll.csv",
-          description="Use the concatenation of all paragraphs as the articles"
-          " and the bold lines as the reference summaries"),
+          description=(
+              "Use the concatenation of all paragraphs as the articles"
+              " and the bold lines as the reference summaries"
+          ),
+      ),
       WikihowConfig(
           name="sep",
           filename="wikihowSep.csv",
-          description="use each paragraph and its summary.")
+          description="use each paragraph and its summary.",
+      ),
   ]
 
   def _info(self):
@@ -112,7 +114,8 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(
-            {k: tfds.features.Text() for k in feature_names}),
+            {k: tfds.features.Text() for k in feature_names}
+        ),
         supervised_keys=(_DOCUMENT, _SUMMARY),
         homepage="https://github.com/mahnazkoupaee/WikiHow-Dataset",
         citation=_CITATION,
@@ -131,33 +134,30 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "path":
-                    os.path.join(dl_manager.manual_dir,
-                                 self.builder_config.filename),
-                "title_set":
-                    titles["train"],
+                "path": os.path.join(
+                    dl_manager.manual_dir, self.builder_config.filename
+                ),
+                "title_set": titles["train"],
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "path":
-                    os.path.join(dl_manager.manual_dir,
-                                 self.builder_config.filename),
-                "title_set":
-                    titles["validation"],
+                "path": os.path.join(
+                    dl_manager.manual_dir, self.builder_config.filename
+                ),
+                "title_set": titles["validation"],
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "path":
-                    os.path.join(dl_manager.manual_dir,
-                                 self.builder_config.filename),
-                "title_set":
-                    titles["test"],
+                "path": os.path.join(
+                    dl_manager.manual_dir, self.builder_config.filename
+                ),
+                "title_set": titles["test"],
             },
-        )
+        ),
     ]
 
   def _generate_examples(self, path=None, title_set=None):
@@ -166,11 +166,17 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
       reader = csv.reader(f)
       headers = next(reader)
       if self.builder_config.name == "all" and headers != [
-          "headline", "title", "text"
+          "headline",
+          "title",
+          "text",
       ]:
         raise ValueError("Mismatched header in WikiAll.txt")
       if self.builder_config.name == "sep" and headers != [
-          "overview", "headline", "text", "sectionLabel", "title"
+          "overview",
+          "headline",
+          "text",
+          "sectionLabel",
+          "title",
       ]:
         raise ValueError("Mismatched header in WikiSep.txt")
       key2id = {key: i for i, key in enumerate(headers)}

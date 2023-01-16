@@ -21,8 +21,10 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.text import super_glue
 
 _BASE_DIR = os.path.join(
-    os.path.dirname(__file__), "../",
-    "testing/test_data/fake_examples/super_glue")
+    os.path.dirname(__file__),
+    "../",
+    "testing/test_data/fake_examples/super_glue",
+)
 
 
 class SuperGlueBoolQTest(testing.DatasetBuilderTestCase):

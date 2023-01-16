@@ -21,6 +21,7 @@ from tensorflow_datasets.structured.web_graph import web_graph
 
 class WebGraphTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for web_graph dataset."""
+
   DATASET_CLASS = web_graph.WebGraph
   SPLITS = {
       'train': 10,  # Number of fake train example

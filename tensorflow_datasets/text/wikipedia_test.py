@@ -21,6 +21,7 @@ from tensorflow_datasets.text import wikipedia
 
 class WikipediaTest(testing.DatasetBuilderTestCase):
   """Test Wikipedia Dataset generation on fake dataset."""
+
   DATASET_CLASS = wikipedia.Wikipedia
   BUILDER_CONFIG_NAMES_TO_TEST = ["20220620.en"]
 
@@ -28,7 +29,7 @@ class WikipediaTest(testing.DatasetBuilderTestCase):
   # Modify dumpstatus.json if `date` is not `20200301`
   DL_EXTRACT_RESULT = {
       "info": "dumpstatus.json",
-      "xml": ["enwiki_fake.xml.bz2", "enwiki_fake2.xml.bz2"]
+      "xml": ["enwiki_fake.xml.bz2", "enwiki_fake2.xml.bz2"],
   }
 
   SPLITS = {

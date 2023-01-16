@@ -75,13 +75,15 @@ class XtremePawsxConfig(tfds.core.BuilderConfig):
 
 class XtremePawsx(tfds.core.GeneratorBasedBuilder):
   """This is a dataset for multilingual paraphrase identification."""
+
   BUILDER_CONFIGS = [
       XtremePawsxConfig(  # pylint: disable=g-complex-comprehension
           name=l,
           description="Translated to " + l,
           version="1.0.0",
           language=l,
-      ) for l in _LANGUAGES
+      )
+      for l in _LANGUAGES
   ]
 
   VERSION = tfds.core.Version("1.0.0")
@@ -103,7 +105,8 @@ class XtremePawsx(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(
-        _XTREME_TRANSLATIONS_FORMAT.format(self.builder_config.language))
+        _XTREME_TRANSLATIONS_FORMAT.format(self.builder_config.language)
+    )
     return {"train": self._generate_examples(dl_path)}
 
   def _generate_examples(self, path):
@@ -121,8 +124,13 @@ class XtremePawsx(tfds.core.GeneratorBasedBuilder):
           f,
           delimiter="\t",
           fieldnames=[
-              "en_sentence1", "en_sentence2", "sentence1", "sentence2", "label"
-          ])
+              "en_sentence1",
+              "en_sentence2",
+              "sentence1",
+              "sentence2",
+              "label",
+          ],
+      )
 
       # tsv file format: id  sentence1  sentence2 label
       for row in reader:

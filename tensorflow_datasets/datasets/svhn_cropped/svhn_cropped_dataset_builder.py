@@ -45,14 +45,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         description=(
             "The Street View House Numbers (SVHN) Dataset is an image digit "
             "recognition dataset of over 600,000 digit images coming from "
-            "real world data. Images are cropped to 32x32."),
+            "real world data. Images are cropped to 32x32."
+        ),
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=("image", "label"),
         homepage=URL,
     )
 
   def _split_generators(self, dl_manager):
-
     output_files = dl_manager.download({
         "train": urllib.parse.urljoin(URL, "train_32x32.mat"),
         "test": urllib.parse.urljoin(URL, "test_32x32.mat"),
@@ -65,19 +65,22 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             gen_kwargs=dict(
                 split_prefix="train_",
                 filepath=output_files["train"],
-            )),
+            ),
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs=dict(
                 split_prefix="test_",
                 filepath=output_files["test"],
-            )),
+            ),
+        ),
         tfds.core.SplitGenerator(
             name="extra",
             gen_kwargs=dict(
                 split_prefix="extra_",
                 filepath=output_files["extra"],
-            )),
+            ),
+        ),
     ]
 
   def _generate_examples(self, split_prefix, filepath):
@@ -98,8 +101,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     assert np.max(data["y"]) <= 10  # Sanity check
     assert np.min(data["y"]) > 0
 
-    for i, (image,
-            label) in enumerate(zip(np.rollaxis(data["X"], -1), data["y"])):
+    for i, (image, label) in enumerate(
+        zip(np.rollaxis(data["X"], -1), data["y"])
+    ):
       label = label.reshape(())
       record = {
           "image": image,

@@ -78,14 +78,17 @@ def ffmpeg_run(
         stderr=subprocess.PIPE,
     )
   except subprocess.CalledProcessError as e:
-    raise ValueError(f'Command {e.cmd} returned error code {e.returncode}:\n'
-                     f'stdout={e.stdout.decode("utf-8")}\n'
-                     f'stderr={e.stderr.decode("utf-8")}\n')
+    raise ValueError(
+        f'Command {e.cmd} returned error code {e.returncode}:\n'
+        f'stdout={e.stdout.decode("utf-8")}\n'
+        f'stderr={e.stderr.decode("utf-8")}\n'
+    )
   except FileNotFoundError as e:
     raise FileNotFoundError(
         'It seems that ffmpeg is not installed on the system. Please follow '
         'the instrutions at https://ffmpeg.org/. '
-        f'Original exception: {e}')
+        f'Original exception: {e}'
+    )
 
 
 @py_utils.memoize()
@@ -134,10 +137,9 @@ def _postprocess_convert_rgb(img: PilImage) -> PilImage:
   return img.convert('RGB')
 
 
-def create_thumbnail(ex: np.ndarray,
-                     *,
-                     use_colormap: bool,
-                     default_dimensions: bool = True) -> PilImage:
+def create_thumbnail(
+    ex: np.ndarray, *, use_colormap: bool, default_dimensions: bool = True
+) -> PilImage:
   """Creates the image from the np.array input."""
   PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
 

@@ -21,6 +21,7 @@ from tensorflow_datasets.text.dolphin_number_word import dolphin_number_word
 
 class DolphinNumberWordTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for dolphin_number_word dataset."""
+
   DATASET_CLASS = dolphin_number_word.DolphinNumberWord
   SPLITS = {
       'train': 3,  # Number of fake train example

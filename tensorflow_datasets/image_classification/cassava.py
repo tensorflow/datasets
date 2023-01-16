@@ -57,7 +57,7 @@ class Cassava(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),  # test-cbb-0.jpg
-            "label": tfds.features.ClassLabel(names=_LABELS)
+            "label": tfds.features.ClassLabel(names=_LABELS),
         }),
         supervised_keys=("image", "label"),
         homepage="https://www.kaggle.com/c/cassava-disease/overview",

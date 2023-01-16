@@ -25,21 +25,23 @@ import tensorflow_datasets.public_api as tfds
 class LostAndFoundConfig(tfds.core.BuilderConfig):
   """BuilderConfig for 'Lost and Found'.
 
-    Args:
-      right_images (bool): Enables right images for stereo image tasks.
-      segmentation_labels (bool): Enables image segmentation labels.
-      instance_ids (bool): Enables instance-id labels.
-      disparity_maps (bool): Enables disparity maps.
-      use_16bit (bool): Loads 16 bit (rgb) images instead of 8bit.
+  Args:
+    right_images (bool): Enables right images for stereo image tasks.
+    segmentation_labels (bool): Enables image segmentation labels.
+    instance_ids (bool): Enables instance-id labels.
+    disparity_maps (bool): Enables disparity maps.
+    use_16bit (bool): Loads 16 bit (rgb) images instead of 8bit.
   """
 
-  def __init__(self,
-               right_images=False,
-               segmentation_labels=False,
-               instance_ids=False,
-               disparity_maps=False,
-               use_16bit=False,
-               **kwargs):
+  def __init__(
+      self,
+      right_images=False,
+      segmentation_labels=False,
+      instance_ids=False,
+      disparity_maps=False,
+      use_16bit=False,
+      **kwargs,
+  ):
     super(LostAndFoundConfig, self).__init__(**kwargs)
 
     self.features = ['image_left']
@@ -101,25 +103,26 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           instance_ids=True,
           disparity_maps=True,
           use_16bit=True,
-      )
+      ),
   ]
 
   def _info(self):
     possible_features = {
-        'image_left':
-            tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png'),
-        'image_right':
-            tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png'),
-        'segmentation_label':
-            tfds.features.Image(
-                shape=(1024, 2048, 1), encoding_format='png',
-                use_colormap=True),
-        'instance_id':
-            tfds.features.Image(
-                shape=(1024, 2048, 1), encoding_format='png',
-                use_colormap=True),
-        'disparity_map':
-            tfds.features.Image(shape=(1024, 2048, 1), encoding_format='png')
+        'image_left': tfds.features.Image(
+            shape=(1024, 2048, 3), encoding_format='png'
+        ),
+        'image_right': tfds.features.Image(
+            shape=(1024, 2048, 3), encoding_format='png'
+        ),
+        'segmentation_label': tfds.features.Image(
+            shape=(1024, 2048, 1), encoding_format='png', use_colormap=True
+        ),
+        'instance_id': tfds.features.Image(
+            shape=(1024, 2048, 1), encoding_format='png', use_colormap=True
+        ),
+        'disparity_map': tfds.features.Image(
+            shape=(1024, 2048, 1), encoding_format='png'
+        ),
     }
     features = {
         feat: possible_features[feat] for feat in self.builder_config.features
@@ -135,7 +138,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    base_url = 'http://www.dhbw-stuttgart.de/~sgehrig/lostAndFoundDataset/{}.zip'
+    base_url = (
+        'http://www.dhbw-stuttgart.de/~sgehrig/lostAndFoundDataset/{}.zip'
+    )
 
     # For each feature, this is the name of the zipfile and
     # root-directory in the archive
@@ -144,7 +149,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         'image_right': self.builder_config.right_image_string,
         'segmentation_label': 'gtCoarse',
         'instance_id': 'gtCoarse',
-        'disparity_map': 'disparity'
+        'disparity_map': 'disparity',
     }
 
     download_urls = {
@@ -172,7 +177,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 feat: path.join(dl_paths[feat], zip_file_names[feat], 'test')
                 for feat in self.builder_config.features
             },
-        )
+        ),
     ]
 
   def _generate_examples(self, **paths):
@@ -183,7 +188,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         'image_right': self.builder_config.right_image_string,
         'segmentation_label': 'gtCoarse_labelIds',
         'instance_id': 'gtCoarse_instanceIds',
-        'disparity_map': 'disparity'
+        'disparity_map': 'disparity',
     }
 
     for scene_id in tf.io.gfile.listdir(paths['image_left']):
@@ -197,8 +202,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         image_id = _get_id_from_left_image(left_img)
 
         features = {
-            feat: path.join(paths_city_root[feat],
-                            '{}_{}.png'.format(image_id, file_suffix[feat]))
+            feat: path.join(
+                paths_city_root[feat],
+                '{}_{}.png'.format(image_id, file_suffix[feat]),
+            )
             for feat in paths
         }
         features['image_id'] = image_id

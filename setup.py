@@ -50,9 +50,9 @@ from version import __version__  # pytype: disable=import-error  # pylint: disab
 if nightly:
   project_name = 'tfds-nightly'
   # Version as `X.Y.Z.dev199912312459`
-  datestring = (
-      os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
-      datetime.datetime.now().strftime('%Y%m%d%H%M'))
+  datestring = os.environ.get(
+      'TFDS_NIGHTLY_TIMESTAMP'
+  ) or datetime.datetime.now().strftime('%Y%m%d%H%M')
   curr_version = pkg_resources.parse_version(__version__)
   __version__ = f'{curr_version.base_version}.dev{datestring}'
 
@@ -165,7 +165,7 @@ DATASET_EXTRAS = {
         # route to install OpenCV
         'opencv-python',
         'scikit-image',
-        'scipy'
+        'scipy',
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'lsun': ['tensorflow-io'],
@@ -195,14 +195,16 @@ ISOLATED_DATASETS = ('nsynth', 'lsun')
 # Extra dataset deps are required for the tests
 all_dataset_extras = list(
     itertools.chain.from_iterable(
-        deps for ds_name, deps in DATASET_EXTRAS.items()
-        if ds_name not in ISOLATED_DATASETS))
+        deps
+        for ds_name, deps in DATASET_EXTRAS.items()
+        if ds_name not in ISOLATED_DATASETS
+    )
+)
 
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=2.1'],
     'tensorflow-data-validation': ['tensorflow-data-validation'],
-
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
     # and run in ./oss_scripts/oss_tests.sh
     'tests-all': TESTS_REQUIRE + all_dataset_extras,
@@ -236,7 +238,9 @@ setup(
             ],
     },
     exclude_package_data={
-        'tensorflow_datasets': ['dummy_data/*',],
+        'tensorflow_datasets': [
+            'dummy_data/*',
+        ],
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

@@ -17,7 +17,10 @@
 
 import numpy as np
 import tensorflow_datasets.public_api as tfds
-_DATA_PATH = 'https://storage.googleapis.com/gresearch/implicit-pdf/symsol_dataset.zip'
+
+_DATA_PATH = (
+    'https://storage.googleapis.com/gresearch/implicit-pdf/symsol_dataset.zip'
+)
 _IMAGE_DIMENSIONS = (224, 224, 3)
 _SHAPE_NAMES = [
     'tet',
@@ -43,14 +46,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'image':
-                tfds.features.Image(shape=_IMAGE_DIMENSIONS, dtype=np.uint8),
-            'label_shape':
-                tfds.features.ClassLabel(names=_SHAPE_NAMES),
-            'rotation':
-                tfds.features.Tensor(shape=(3, 3), dtype=np.float32),
-            'rotations_equivalent':
-                tfds.features.Tensor(shape=(None, 3, 3), dtype=np.float32),
+            'image': tfds.features.Image(
+                shape=_IMAGE_DIMENSIONS, dtype=np.uint8
+            ),
+            'label_shape': tfds.features.ClassLabel(names=_SHAPE_NAMES),
+            'rotation': tfds.features.Tensor(shape=(3, 3), dtype=np.float32),
+            'rotations_equivalent': tfds.features.Tensor(
+                shape=(None, 3, 3), dtype=np.float32
+            ),
         }),
         # These are returned if `as_supervised=True` in `builder.as_dataset`.
         supervised_keys=('image', 'rotation'),
@@ -61,14 +64,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     extracted_paths = dl_manager.download_and_extract(_DATA_PATH)
     return {
-        'train':
-            self._generate_examples(
-                images_path=extracted_paths / 'train/images',
-                rotations_path=extracted_paths / 'train/rotations.npz'),
-        'test':
-            self._generate_examples(
-                images_path=extracted_paths / 'test/images',
-                rotations_path=extracted_paths / 'test/rotations.npz'),
+        'train': self._generate_examples(
+            images_path=extracted_paths / 'train/images',
+            rotations_path=extracted_paths / 'train/rotations.npz',
+        ),
+        'test': self._generate_examples(
+            images_path=extracted_paths / 'test/images',
+            rotations_path=extracted_paths / 'test/rotations.npz',
+        ),
     }
 
   def _generate_examples(self, images_path, rotations_path):

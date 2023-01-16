@@ -46,5 +46,9 @@ class LoggingLogger(base_logger.Logger):
       as_supervised: bool,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
   ):
-    logging.info("Constructing tf.data.Dataset %s for split %s, from %s", name,
-                 str(split), data_path)
+    logging.info(
+        "Constructing tf.data.Dataset %s for split %s, from %s",
+        name,
+        str(split),
+        data_path,
+    )

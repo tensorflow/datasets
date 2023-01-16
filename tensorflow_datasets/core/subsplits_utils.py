@@ -28,6 +28,7 @@ from tensorflow_datasets.core import splits as splits_lib
 @dataclasses.dataclass(frozen=True)
 class _EvenSplit(splits_lib.AbstractSplit):
   """Split matching a subsplit of the given split."""
+
   split: splits_lib.SplitArg
   index: int
   count: int
@@ -72,8 +73,12 @@ class _EvenSplit(splits_lib.AbstractSplit):
     assert num_unused_examples < self.count, num_unused_examples
     if num_unused_examples > 0:
       if self.drop_remainder:
-        logging.warning('Dropping %d examples of %d examples (host count: %d).',
-                        num_unused_examples, num_examples, self.count)
+        logging.warning(
+            'Dropping %d examples of %d examples (host count: %d).',
+            num_unused_examples,
+            num_examples,
+            self.count,
+        )
       else:
         split_start += min(self.index, num_unused_examples)
         split_end += min(self.index + 1, num_unused_examples)

@@ -26,7 +26,8 @@ def _filename_template(split: str) -> naming.ShardedFileTemplate:
       dataset_name='mnist',
       split=split,
       filetype_suffix='tfrecord',
-      data_dir='/path')
+      data_dir='/path',
+  )
 
 
 @pytest.mark.parametrize(
@@ -47,17 +48,20 @@ def _filename_template(split: str) -> naming.ShardedFileTemplate:
     ],
 )
 def test_even_splits(num_examples, n, drop_remainder, expected):
-  split_infos = splits_lib.SplitDict(split_infos=[
-      splits_lib.SplitInfo(
-          name='train',
-          shard_lengths=[num_examples],
-          num_bytes=0,
-          filename_template=_filename_template('train'),
-      ),
-  ])
+  split_infos = splits_lib.SplitDict(
+      split_infos=[
+          splits_lib.SplitInfo(
+              name='train',
+              shard_lengths=[num_examples],
+              num_bytes=0,
+              filename_template=_filename_template('train'),
+          ),
+      ]
+  )
 
   subsplits = subsplits_utils.even_splits(
-      'train', n, drop_remainder=drop_remainder)
+      'train', n, drop_remainder=drop_remainder
+  )
 
   file_instructions = [split_infos[s].file_instructions for s in subsplits]
   expected_file_instructions = [
@@ -67,20 +71,22 @@ def test_even_splits(num_examples, n, drop_remainder, expected):
 
 
 def test_even_splits_subsplit():
-  split_infos = splits_lib.SplitDict(split_infos=[
-      splits_lib.SplitInfo(
-          name='train',
-          shard_lengths=[2, 3, 2, 3],  # 10
-          num_bytes=0,
-          filename_template=_filename_template('train'),
-      ),
-      splits_lib.SplitInfo(
-          name='test',
-          shard_lengths=[8],
-          num_bytes=0,
-          filename_template=_filename_template('test'),
-      ),
-  ])
+  split_infos = splits_lib.SplitDict(
+      split_infos=[
+          splits_lib.SplitInfo(
+              name='train',
+              shard_lengths=[2, 3, 2, 3],  # 10
+              num_bytes=0,
+              filename_template=_filename_template('train'),
+          ),
+          splits_lib.SplitInfo(
+              name='test',
+              shard_lengths=[8],
+              num_bytes=0,
+              filename_template=_filename_template('test'),
+          ),
+      ]
+  )
 
   # Test to split multiple splits
   subsplits = subsplits_utils.even_splits('train+test[50%:]', 3)
@@ -101,26 +107,28 @@ def test_even_splits_subsplit():
 def test_even_splits_add():
   # Compatibility of even_splits with other splits
 
-  split_infos = splits_lib.SplitDict(split_infos=[
-      splits_lib.SplitInfo(
-          name='train',
-          shard_lengths=[2, 3, 2, 3],  # 10
-          num_bytes=0,
-          filename_template=_filename_template('train'),
-      ),
-      splits_lib.SplitInfo(
-          name='test',
-          shard_lengths=[8],
-          num_bytes=0,
-          filename_template=_filename_template('test'),
-      ),
-      splits_lib.SplitInfo(
-          name='validation',
-          shard_lengths=[8],
-          filename_template=_filename_template('validation'),
-          num_bytes=0,
-      ),
-  ])
+  split_infos = splits_lib.SplitDict(
+      split_infos=[
+          splits_lib.SplitInfo(
+              name='train',
+              shard_lengths=[2, 3, 2, 3],  # 10
+              num_bytes=0,
+              filename_template=_filename_template('train'),
+          ),
+          splits_lib.SplitInfo(
+              name='test',
+              shard_lengths=[8],
+              num_bytes=0,
+              filename_template=_filename_template('test'),
+          ),
+          splits_lib.SplitInfo(
+              name='validation',
+              shard_lengths=[8],
+              filename_template=_filename_template('validation'),
+              num_bytes=0,
+          ),
+      ]
+  )
 
   # Test to split multiple splits
   split = subsplits_utils.even_splits('train', 3, drop_remainder=True)[0]
@@ -129,16 +137,20 @@ def test_even_splits_add():
   expected = 'train[:3]+test'
 
   file_instructions = split_infos[split].file_instructions
-  expected_file_instructions = (split_infos[expected].file_instructions)
+  expected_file_instructions = split_infos[expected].file_instructions
   assert file_instructions == expected_file_instructions
 
   # Test nested `even_splits`
   splits = subsplits_utils.even_splits('validation', n=2)
   splits = subsplits_utils.even_splits(splits[1], n=2)
-  assert (split_infos[splits[0]].file_instructions ==
-          split_infos['validation[4:6]'].file_instructions)
-  assert (split_infos[splits[1]].file_instructions ==
-          split_infos['validation[6:8]'].file_instructions)
+  assert (
+      split_infos[splits[0]].file_instructions
+      == split_infos['validation[4:6]'].file_instructions
+  )
+  assert (
+      split_infos[splits[1]].file_instructions
+      == split_infos['validation[6:8]'].file_instructions
+  )
 
 
 def test_split_for_jax_process():

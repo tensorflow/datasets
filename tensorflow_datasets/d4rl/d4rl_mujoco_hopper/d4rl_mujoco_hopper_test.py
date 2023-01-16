@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class D4rlMujocoHopperTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for hopper datasets."""
+
   DATASET_CLASS = d4rl_mujoco_hopper.D4rlMujocoHopper
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -35,6 +36,7 @@ class D4rlMujocoHopperTest(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlMujocoHopperInfosTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for hopper datasets with step metadata."""
+
   DATASET_CLASS = d4rl_mujoco_hopper.D4rlMujocoHopper
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -55,8 +57,8 @@ class D4rlMujocoHopperReplayTest(tfds.testing.DatasetBuilderTestCase):
     * Contain two fields of episode metadata.
     * Use float64 types (instead of float32)
     * Rewards are stored with shape (1,) instead of scalar
-
   """
+
   DATASET_CLASS = d4rl_mujoco_hopper.D4rlMujocoHopper
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -71,6 +73,7 @@ class D4rlMujocoHopperReplayTest(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlMujocoHopperMetadataTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for hopper datasets with all the metadata fields."""
+
   DATASET_CLASS = d4rl_mujoco_hopper.D4rlMujocoHopper
   SPLITS = {
       'train': 2,  # Number of fake train example

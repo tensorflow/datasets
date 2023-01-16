@@ -64,7 +64,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "file_path": file_paths["validation"],
             },
-        )
+        ),
     ]
 
   def _generate_examples(self, file_path):

@@ -38,9 +38,13 @@ The schema takes its name from a well-known example by Terry Winograd: ``The cit
 If the word is ``feared'', then ``they'' presumably refers to the city council; if it is ``advocated'' then ``they'' presumably refers to the demonstrators.
 """
 
-_HOMEPAGE_URL = "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+_HOMEPAGE_URL = (
+    "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+)
 
-_DOWNLOAD_URL = "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WSCollection.xml"
+_DOWNLOAD_URL = (
+    "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WSCollection.xml"
+)
 
 
 class Wsc273(tfds.core.GeneratorBasedBuilder):
@@ -98,8 +102,15 @@ def normalize_text(text):
 
 def normalize_cap(option, pron):
   """Normalize the capitalization of the option according to the pronoun."""
-  cap_tuples = [("The", "the"), ("His", "his"), ("My", "my"), ("Her", "her"),
-                ("Their", "their"), ("An", "an"), ("A", "a")]
+  cap_tuples = [
+      ("The", "the"),
+      ("His", "his"),
+      ("My", "my"),
+      ("Her", "her"),
+      ("Their", "their"),
+      ("An", "an"),
+      ("A", "a"),
+  ]
   uncap_dict = dict(cap_tuples)
   cap_dict = dict([(t[1], t[0]) for t in cap_tuples])
   words = option.split(" ")
@@ -149,6 +160,7 @@ def parse_wsc273_xml(xml_data):
         option1_normalized=normalized_answers[0],
         option2_normalized=normalized_answers[1],
         label=label,
-        idx=i)
+        idx=i,
+    )
     assert text[pronoun_start:pronoun_end] == pronoun_text
     yield example

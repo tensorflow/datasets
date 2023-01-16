@@ -72,10 +72,9 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            _DOCUMENT: tfds.features.Text(),
-            _SUMMARY: tfds.features.Text()
-        }),
+        features=tfds.features.FeaturesDict(
+            {_DOCUMENT: tfds.features.Text(), _SUMMARY: tfds.features.Text()}
+        ),
         supervised_keys=(_DOCUMENT, _SUMMARY),
         homepage="https://github.com/harvardnlp/sent-summary",
         citation=_CITATION,
@@ -119,7 +118,7 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
         if replace_unk:
           yield i, {
               _DOCUMENT: doc_text.strip().replace("<unk>", "UNK"),
-              _SUMMARY: sum_text.strip().replace("<unk>", "UNK")
+              _SUMMARY: sum_text.strip().replace("<unk>", "UNK"),
           }
         else:
           yield i, {_DOCUMENT: doc_text.strip(), _SUMMARY: sum_text.strip()}

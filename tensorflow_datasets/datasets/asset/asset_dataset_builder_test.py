@@ -53,7 +53,9 @@ class AssetTestSimplification(tfds.testing.DatasetBuilderTestCase):
       (  # pylint:disable=g-complex-comprehension
           f'asset.{spl}.simp.{i}',
           f'simplification/1.0.0/asset.{spl}.simp.{i}',
-      ) for spl in ['valid', 'test'] for i in range(10)
+      )
+      for spl in ['valid', 'test']
+      for i in range(10)
   ]
   DL_EXTRACT_RESULT = dict(_URL_LIST)
 

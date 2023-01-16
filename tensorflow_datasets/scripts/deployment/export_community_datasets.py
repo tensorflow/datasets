@@ -56,7 +56,8 @@ def export_community_datasets(
 
 
 def _find_community_ds_packages(
-    config_path: tfds.core.Path,) -> List[DatasetPackage]:
+    config_path: tfds.core.Path,
+) -> List[DatasetPackage]:
   """Find all namepaces/dataset from the config.
 
   Config should contain the instructions in the following format:
@@ -78,16 +79,20 @@ def _find_community_ds_packages(
   all_packages = []
   for namespace, src_code_path in tqdm.tqdm(config['Namespaces'].items()):
     tqdm.tqdm.write(f'Searching datasets for {namespace}: {src_code_path}')
-    for pkg in tfds.core.community.register_package.list_ds_packages_for_namespace(
-        namespace=namespace, path=tfds.core.Path(src_code_path)):
+    for (
+        pkg
+    ) in tfds.core.community.register_package.list_ds_packages_for_namespace(
+        namespace=namespace, path=tfds.core.Path(src_code_path)
+    ):
       tqdm.tqdm.write(str(pkg.name))
       all_packages.append(pkg)
 
   return sorted(all_packages, key=lambda package: package.name)
 
 
-def _save_community_ds_packages(file_path: tfds.core.Path,
-                                ds_packages: List[DatasetPackage]) -> None:
+def _save_community_ds_packages(
+    file_path: tfds.core.Path, ds_packages: List[DatasetPackage]
+) -> None:
   """Save all loaded datasets in the package index.
 
   Saved file will have the following `.jsonl` format:

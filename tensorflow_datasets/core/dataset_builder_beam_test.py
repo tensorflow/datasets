@@ -32,7 +32,6 @@ from tensorflow_datasets.core import utils
 
 
 class DummyBeamDataset(dataset_builder.GeneratorBasedBuilder):
-
   VERSION = utils.Version('1.0.0')
 
   EXPECTED_METADATA = {
@@ -61,18 +60,18 @@ class DummyBeamDataset(dataset_builder.GeneratorBasedBuilder):
 
   def _generate_examples(self, num_examples):
     """Generate examples as dicts."""
-    examples = (beam.Create(range(num_examples)) | beam.Map(_gen_example))
+    examples = beam.Create(range(num_examples)) | beam.Map(_gen_example)
 
     # Can save int, str,... metadata but not `beam.PTransform`
     self.info.metadata[f'valid_{num_examples}'] = num_examples
     with pytest.raises(
-        NotImplementedError, match='can\'t be used on `beam.PTransform`'):
+        NotImplementedError, match="can't be used on `beam.PTransform`"
+    ):
       self.info.metadata[f'invalid_{num_examples}'] = _compute_sum(examples)
     return examples
 
 
 class CommonPipelineDummyBeamDataset(DummyBeamDataset):
-
   EXPECTED_METADATA = {
       'label_sum_1000': 500,
       'id_mean_1000': 499.5,
@@ -83,7 +82,7 @@ class CommonPipelineDummyBeamDataset(DummyBeamDataset):
   def _split_generators(self, dl_manager, pipeline):
     del dl_manager
 
-    examples = (pipeline | beam.Create(range(1000)) | beam.Map(_gen_example))
+    examples = pipeline | beam.Create(range(1000)) | beam.Map(_gen_example)
 
     # Wrap the pipeline inside a ptransform_fn to add `'label' >> ` to avoid
     # duplicated PTransform nodes names.
@@ -103,36 +102,43 @@ class CommonPipelineDummyBeamDataset(DummyBeamDataset):
 
 
 def _gen_example(x):
-  return (x, {
-      'image': (np.ones((16, 16, 1)) * x % 255).astype(np.uint8),
-      'label': x % 2,
-      'id': x,
-  })
+  return (
+      x,
+      {
+          'image': (np.ones((16, 16, 1)) * x % 255).astype(np.uint8),
+          'label': x % 2,
+          'id': x,
+      },
+  )
 
 
 def _compute_sum(examples):
-  return (examples
-          | beam.Map(lambda x: x[1]['label'])
-          | beam.CombineGlobally(sum))
+  return (
+      examples | beam.Map(lambda x: x[1]['label']) | beam.CombineGlobally(sum)
+  )
 
 
 def _compute_mean(examples):
-  return (examples
-          | beam.Map(lambda x: x[1]['id'])
-          | beam.CombineGlobally(beam.combiners.MeanCombineFn()))
+  return (
+      examples
+      | beam.Map(lambda x: x[1]['id'])
+      | beam.CombineGlobally(beam.combiners.MeanCombineFn())
+  )
 
 
 def make_default_config():
   return download.DownloadConfig()
 
 
-@pytest.mark.parametrize('dataset_cls',
-                         [DummyBeamDataset, CommonPipelineDummyBeamDataset])
+@pytest.mark.parametrize(
+    'dataset_cls', [DummyBeamDataset, CommonPipelineDummyBeamDataset]
+)
 @pytest.mark.parametrize(
     'make_dl_config',
     [
         make_default_config,
-    ])
+    ],
+)
 def test_beam_datasets(
     tmp_path: pathlib.Path,
     dataset_cls: dataset_builder.GeneratorBasedBuilder,

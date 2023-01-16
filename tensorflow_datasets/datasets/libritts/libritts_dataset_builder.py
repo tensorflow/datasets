@@ -56,7 +56,9 @@ class Builder(tfds.core.BeamBasedBuilder):
         }),
         supervised_keys=("text_normalized", "speech"),
         homepage=_URL,
-        metadata=tfds.core.MetadataDict(sample_rate=24000,),
+        metadata=tfds.core.MetadataDict(
+            sample_rate=24000,
+        ),
     )
 
   def _populate_metadata(self, archive_paths):
@@ -95,11 +97,13 @@ class Builder(tfds.core.BeamBasedBuilder):
   def _build_pcollection(self, pipeline, archive_path):
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
-    return (pipeline
-            | beam.Create([archive_path])
-            | beam.FlatMap(_extract_libritts_data)
-            | beam.Reshuffle()
-            | "merge_transcripts_and_audio" >> beam.CombinePerKey(_merge_dicts))
+    return (
+        pipeline
+        | beam.Create([archive_path])
+        | beam.FlatMap(_extract_libritts_data)
+        | beam.Reshuffle()
+        | "merge_transcripts_and_audio" >> beam.CombinePerKey(_merge_dicts)
+    )
 
 
 def _generate_transcripts(transcript_csv_file):

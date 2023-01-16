@@ -20,12 +20,24 @@ import os
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-CLIC_MOBILE_TRAIN = 'https://data.vision.ee.ethz.ch/cvl/clic/mobile_train_2020.zip'
-CLIC_PROFESSIONAL_TRAIN = 'https://data.vision.ee.ethz.ch/cvl/clic/professional_train_2020.zip'
-CLIC_MOBILE_VALIDATION = 'https://data.vision.ee.ethz.ch/cvl/clic/mobile_valid_2020.zip'
-CLIC_PROFESSIONAL_VALIDATION = 'https://data.vision.ee.ethz.ch/cvl/clic/professional_valid_2020.zip'
-CLIC_MOBILE_TEST = 'https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Mobile_test.zip'
-CLIC_PROFESSIONAL_TEST = 'https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Professional_test.zip'
+CLIC_MOBILE_TRAIN = (
+    'https://data.vision.ee.ethz.ch/cvl/clic/mobile_train_2020.zip'
+)
+CLIC_PROFESSIONAL_TRAIN = (
+    'https://data.vision.ee.ethz.ch/cvl/clic/professional_train_2020.zip'
+)
+CLIC_MOBILE_VALIDATION = (
+    'https://data.vision.ee.ethz.ch/cvl/clic/mobile_valid_2020.zip'
+)
+CLIC_PROFESSIONAL_VALIDATION = (
+    'https://data.vision.ee.ethz.ch/cvl/clic/professional_valid_2020.zip'
+)
+CLIC_MOBILE_TEST = (
+    'https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Mobile_test.zip'
+)
+CLIC_PROFESSIONAL_TEST = (
+    'https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Professional_test.zip'
+)
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -37,9 +49,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            'image': tfds.features.Image(),
-        }),
+        features=tfds.features.FeaturesDict(
+            {
+                'image': tfds.features.Image(),
+            }
+        ),
         homepage='https://www.compression.cc/',
     )
 
@@ -59,17 +73,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     test_dirs = {k: v for k, v in downloaded_dirs.items() if 'test' in k}
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={
+            name=tfds.Split.TRAIN,
+            gen_kwargs={
                 'download_path': train_dirs,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION, gen_kwargs={
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
                 'download_path': val_dirs,
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs={
+            name=tfds.Split.TEST,
+            gen_kwargs={
                 'download_path': test_dirs,
-            })
+            },
+        ),
     ]
 
   def _generate_examples(self, download_path):

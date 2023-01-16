@@ -59,35 +59,35 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       LibrispeechConfig(
           name="default",
           description="Default dataset.",
-          version=tfds.core.Version("2.1.1")),
+          version=tfds.core.Version("2.1.1"),
+      ),
       LibrispeechConfig(
           name="lazy_decode",
           description="Raw audio dataset.",
           lazy_decode=True,
-          version=tfds.core.Version("2.1.2")),
+          version=tfds.core.Version("2.1.2"),
+      ),
   ]
 
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "speech":
-                tfds.features.Audio(
-                    sample_rate=16000,
-                    dtype=np.int16,
-                    lazy_decode=self.builder_config.lazy_decode,
-                    file_format="flac"),
-            "text":
-                tfds.features.Text(),
-            "speaker_id":
-                np.int64,
-            "chapter_id":
-                np.int64,
-            "id":
-                np.str_,
+            "speech": tfds.features.Audio(
+                sample_rate=16000,
+                dtype=np.int16,
+                lazy_decode=self.builder_config.lazy_decode,
+                file_format="flac",
+            ),
+            "text": tfds.features.Text(),
+            "speaker_id": np.int64,
+            "chapter_id": np.int64,
+            "id": np.str_,
         }),
         supervised_keys=("speech", "text"),
         homepage=_URL,
-        metadata=tfds.core.MetadataDict(sample_rate=16000,),
+        metadata=tfds.core.MetadataDict(
+            sample_rate=16000,
+        ),
     )
 
   def _populate_metadata(self, dirs: Iterable[epath.Path]):
@@ -95,12 +95,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     directory = list(dirs)[0]
     self.info.metadata["speakers"] = self._read_metadata_file(
         directory / "LibriSpeech/SPEAKERS.TXT",
-        ["speaker_id", "gender", "subset", "minutes", "name"])
+        ["speaker_id", "gender", "subset", "minutes", "name"],
+    )
     self.info.metadata["chapters"] = self._read_metadata_file(
-        directory / "LibriSpeech/CHAPTERS.TXT", [
-            "chapter_id", "speaker_id", "minutes", "subset", "project_id",
-            "book_id", "chapter_title", "project_title"
-        ])
+        directory / "LibriSpeech/CHAPTERS.TXT",
+        [
+            "chapter_id",
+            "speaker_id",
+            "minutes",
+            "subset",
+            "project_id",
+            "book_id",
+            "chapter_title",
+            "project_title",
+        ],
+    )
 
   def _read_metadata_file(self, path: epath.Path, field_names: List[str]):
     metadata = {}
@@ -146,6 +155,6 @@ def _generate_librispeech_examples(transcript_file: str):
           "speaker_id": speaker_id,
           "chapter_id": chapter_id,
           "speech": os.path.join(audio_dir, audio_file),
-          "text": transcript
+          "text": transcript,
       }
       yield key, example

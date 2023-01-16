@@ -27,7 +27,7 @@ class RadonTest(tfds.testing.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = {
       "file_path_srrs2": "srrs2.dat",
-      "file_path_cty": "cty.dat"
+      "file_path_cty": "cty.dat",
   }
 
 

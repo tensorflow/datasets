@@ -28,6 +28,7 @@ class DummyDatasetTest(tfds.testing.DatasetBuilderTestCase):
     # registering the dataset for all tests.
     # To avoid this, we move the import registration inside the test.
     from tensorflow_datasets.testing.dummy_dataset import dummy_dataset  # pylint: disable=g-import-not-at-top
+
     cls.DATASET_CLASS = dummy_dataset.DummyDataset
     super().setUpClass()
 

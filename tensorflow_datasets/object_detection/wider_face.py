@@ -26,17 +26,25 @@ import tensorflow_datasets.public_api as tfds
 
 _PROJECT_URL = 'http://shuoyang1213.me/WIDERFACE/'
 
-_WIDER_TRAIN_URL = ('https://drive.google.com/uc?export=download&'
-                    'id=15hGDLhsx8bLgLcIRD5DhYt5iBxnjNF1M')
+_WIDER_TRAIN_URL = (
+    'https://drive.google.com/uc?export=download&'
+    'id=15hGDLhsx8bLgLcIRD5DhYt5iBxnjNF1M'
+)
 
-_WIDER_VAL_URL = ('https://drive.google.com/uc?export=download&'
-                  'id=1GUCogbp16PMGa39thoMMeWxp7Rp5oM8Q')
+_WIDER_VAL_URL = (
+    'https://drive.google.com/uc?export=download&'
+    'id=1GUCogbp16PMGa39thoMMeWxp7Rp5oM8Q'
+)
 
-_WIDER_TEST_URL = ('https://drive.google.com/uc?export=download&'
-                   'id=1HIfDbVEWKmsYKJZm4lchTBDLW5N7dY5T')
+_WIDER_TEST_URL = (
+    'https://drive.google.com/uc?export=download&'
+    'id=1HIfDbVEWKmsYKJZm4lchTBDLW5N7dY5T'
+)
 
-_WIDER_ANNOT_URL = ('https://drive.google.com/uc?export=download&'
-                    'id=1sAl2oml7hK6aZRdgRjqQJsjV5CEr7nl4')
+_WIDER_ANNOT_URL = (
+    'https://drive.google.com/uc?export=download&'
+    'id=1sAl2oml7hK6aZRdgRjqQJsjV5CEr7nl4'
+)
 
 _CITATION = """
 @inproceedings{yang2016wider,
@@ -66,20 +74,17 @@ class WiderFace(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     features = {
-        'image':
-            tfds.features.Image(encoding_format='jpeg'),
-        'image/filename':
-            tfds.features.Text(),
-        'faces':
-            tfds.features.Sequence({
-                'bbox': tfds.features.BBoxFeature(),
-                'blur': np.uint8,
-                'expression': np.bool_,
-                'illumination': np.bool_,
-                'occlusion': np.uint8,
-                'pose': np.bool_,
-                'invalid': np.bool_,
-            }),
+        'image': tfds.features.Image(encoding_format='jpeg'),
+        'image/filename': tfds.features.Text(),
+        'faces': tfds.features.Sequence({
+            'bbox': tfds.features.BBoxFeature(),
+            'blur': np.uint8,
+            'expression': np.bool_,
+            'illumination': np.bool_,
+            'occlusion': np.uint8,
+            'pose': np.bool_,
+            'invalid': np.bool_,
+        }),
     }
     return tfds.core.DatasetInfo(
         builder=self,
@@ -100,35 +105,34 @@ class WiderFace(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'split': 'train',
-                'extracted_dirs': extracted_dirs
-            }),
+            gen_kwargs={'split': 'train', 'extracted_dirs': extracted_dirs},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={
-                'split': 'val',
-                'extracted_dirs': extracted_dirs
-            }),
+            gen_kwargs={'split': 'val', 'extracted_dirs': extracted_dirs},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={
-                'split': 'test',
-                'extracted_dirs': extracted_dirs
-            })
+            gen_kwargs={'split': 'test', 'extracted_dirs': extracted_dirs},
+        ),
     ]
 
   def _generate_examples(self, split, extracted_dirs):
     """Yields examples."""
     pattern_fname = re.compile(r'(.*.jpg)\n')
-    pattern_annot = re.compile(r'(\d+) (\d+) (\d+) (\d+) (\d+) '
-                               r'(\d+) (\d+) (\d+) (\d+) (\d+) \n')
+    pattern_annot = re.compile(
+        r'(\d+) (\d+) (\d+) (\d+) (\d+) ' r'(\d+) (\d+) (\d+) (\d+) (\d+) \n'
+    )
     annot_dir = 'wider_face_split'
-    annot_fname = ('wider_face_test_filelist.txt' if split == 'test' else
-                   'wider_face_' + split + '_bbx_gt.txt')
+    annot_fname = (
+        'wider_face_test_filelist.txt'
+        if split == 'test'
+        else 'wider_face_' + split + '_bbx_gt.txt'
+    )
     annot_file = os.path.join(annot_dir, annot_fname)
-    image_dir = os.path.join(extracted_dirs['wider_' + split], 'WIDER_' + split,
-                             'images')
+    image_dir = os.path.join(
+        extracted_dirs['wider_' + split], 'WIDER_' + split, 'images'
+    )
     annot_dir = extracted_dirs['wider_annot']
     annot_path = os.path.join(annot_dir, annot_file)
     with tf.io.gfile.GFile(annot_path, 'r') as f:
@@ -159,35 +163,39 @@ class WiderFace(tfds.core.GeneratorBasedBuilder):
               match = pattern_annot.match(line)
               if not match:
                 raise ValueError('Cannot parse: %s' % image_fullpath)
-              (xmin, ymin, wbox, hbox, blur, expression, illumination, invalid,
-               occlusion, pose) = map(int, match.groups())
+              (
+                  xmin,
+                  ymin,
+                  wbox,
+                  hbox,
+                  blur,
+                  expression,
+                  illumination,
+                  invalid,
+                  occlusion,
+                  pose,
+              ) = map(int, match.groups())
               ymax = np.clip(ymin + hbox, a_min=0, a_max=height)
               xmax = np.clip(xmin + wbox, a_min=0, a_max=width)
               ymin = np.clip(ymin, a_min=0, a_max=height)
               xmin = np.clip(xmin, a_min=0, a_max=width)
               faces.append({
-                  'bbox':
-                      tfds.features.BBox(
-                          ymin=ymin / height,
-                          xmin=xmin / width,
-                          ymax=ymax / height,
-                          xmax=xmax / width),
-                  'blur':
-                      blur,
-                  'expression':
-                      expression,
-                  'illumination':
-                      illumination,
-                  'occlusion':
-                      occlusion,
-                  'pose':
-                      pose,
-                  'invalid':
-                      invalid,
+                  'bbox': tfds.features.BBox(
+                      ymin=ymin / height,
+                      xmin=xmin / width,
+                      ymax=ymax / height,
+                      xmax=xmax / width,
+                  ),
+                  'blur': blur,
+                  'expression': expression,
+                  'illumination': illumination,
+                  'occlusion': occlusion,
+                  'pose': pose,
+                  'invalid': invalid,
               })
         record = {
             'image': image_fullpath,
             'image/filename': fname,
-            'faces': faces
+            'faces': faces,
         }
         yield fname, record

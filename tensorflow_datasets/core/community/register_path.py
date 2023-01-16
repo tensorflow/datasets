@@ -32,8 +32,9 @@ from tensorflow_datasets.core.community import register_base
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
-TFDS_DEBUG_VERBOSE = flags.DEFINE_boolean('tfds_debug_list_dir', False,
-                                          'Debug the catalog generation')
+TFDS_DEBUG_VERBOSE = flags.DEFINE_boolean(
+    'tfds_debug_list_dir', False, 'Debug the catalog generation'
+)
 
 # pylint: disable=logging-fstring-interpolation
 
@@ -80,7 +81,8 @@ class DataDirRegister(register_base.BaseRegister):
             data_dir=data_dir,
             namespace=namespace,
             include_configs=False,
-            include_versions=False)
+            include_versions=False,
+        )
 
   def builder_cls(
       self,
@@ -89,11 +91,14 @@ class DataDirRegister(register_base.BaseRegister):
     """Returns the builder classes."""
     if name.namespace not in self.namespaces:  # pylint: disable=unsupported-membership-test
       error_msg = f'\nNamespace {name.namespace} not found.'
-      error_msg += f'Note that namespace should be one of: {sorted(self.namespaces)}'
+      error_msg += (
+          f'Note that namespace should be one of: {sorted(self.namespaces)}'
+      )
       raise registered.DatasetNotFoundError(error_msg)
     raise NotImplementedError(
         'builder_cls does not support data_dir-based community datasets. Got: '
-        f'{name}')
+        f'{name}'
+    )
 
   def builder(
       self,
@@ -105,15 +110,19 @@ class DataDirRegister(register_base.BaseRegister):
     if data_dir:
       raise ValueError(
           '`data_dir` cannot be set for data_dir-based community datasets. '
-          f'Dataset should already be generated. Got: {data_dir}')
+          f'Dataset should already be generated. Got: {data_dir}'
+      )
     if name.namespace is None:
       raise AssertionError(f'No namespace found: {name}')
     if name.namespace not in self._ns2data_dir:  # pylint: disable=unsupported-membership-test
       close_matches = difflib.get_close_matches(
-          name.namespace, self._ns2data_dir, n=1)
+          name.namespace, self._ns2data_dir, n=1
+      )
       hint = f'\nDid you mean: {close_matches[0]}' if close_matches else ''
-      error_msg = (f'Namespace `{name.namespace}` for `{name}` not found. '
-                   f'Should be one of {sorted(self._ns2data_dir)}{hint}')
+      error_msg = (
+          f'Namespace `{name.namespace}` for `{name}` not found. '
+          f'Should be one of {sorted(self._ns2data_dir)}{hint}'
+      )
       raise KeyError(error_msg)
     return read_only_builder.builder_from_files(
         name.name,
@@ -146,13 +155,16 @@ def _maybe_iterdir(path: epath.Path) -> Iterator[epath.Path]:
 
 
 def _iter_builder_names(
-    ns2data_dir: Dict[str, List[epath.Path]],) -> Iterator[str]:
+    ns2data_dir: Dict[str, List[epath.Path]],
+) -> Iterator[str]:
   """Yields the `ns:name` dataset names."""
   FILTERED_DIRNAME = frozenset(('downloads',))  # pylint: disable=invalid-name
 
   def _is_valid_dataset_name(dataset_name: str) -> bool:
-    return (dataset_name not in FILTERED_DIRNAME and
-            naming.is_valid_dataset_name(dataset_name))
+    return (
+        dataset_name not in FILTERED_DIRNAME
+        and naming.is_valid_dataset_name(dataset_name)
+    )
 
   # For better performance, load all namespaces asynchronously
   def _get_builder_names_single_namespace(

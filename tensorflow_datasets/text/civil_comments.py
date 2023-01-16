@@ -167,20 +167,44 @@ a contextual_toxicity feature.
 _DOWNLOAD_URL = 'https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/civil_comments_v1.2.zip'
 
 IDENTITY_LABELS = [
-    'male', 'female', 'transgender', 'other_gender', 'heterosexual',
-    'homosexual_gay_or_lesbian', 'bisexual', 'other_sexual_orientation',
-    'christian', 'jewish', 'muslim', 'hindu', 'buddhist', 'atheist',
-    'other_religion', 'black', 'white', 'asian', 'latino',
-    'other_race_or_ethnicity', 'physical_disability',
-    'intellectual_or_learning_disability', 'psychiatric_or_mental_illness',
-    'other_disability'
+    'male',
+    'female',
+    'transgender',
+    'other_gender',
+    'heterosexual',
+    'homosexual_gay_or_lesbian',
+    'bisexual',
+    'other_sexual_orientation',
+    'christian',
+    'jewish',
+    'muslim',
+    'hindu',
+    'buddhist',
+    'atheist',
+    'other_religion',
+    'black',
+    'white',
+    'asian',
+    'latino',
+    'other_race_or_ethnicity',
+    'physical_disability',
+    'intellectual_or_learning_disability',
+    'psychiatric_or_mental_illness',
+    'other_disability',
 ]
 
 COVERT_LABELS = [
-    'explicitly_offensive', 'implicitly_offensive', 'not_sure_offensive',
-    'not_offensive', 'covert_humor', 'covert_obfuscation',
-    'covert_emoticons_emojis', 'covert_sarcasm', 'covert_microaggression',
-    'covert_masked_harm', 'covert_political'
+    'explicitly_offensive',
+    'implicitly_offensive',
+    'not_sure_offensive',
+    'not_offensive',
+    'covert_humor',
+    'covert_obfuscation',
+    'covert_emoticons_emojis',
+    'covert_sarcasm',
+    'covert_microaggression',
+    'covert_masked_harm',
+    'covert_political',
 ]
 
 
@@ -189,8 +213,13 @@ def _labels(mode):
   if mode == 'spans':
     return ['spans']
   labels = [
-      'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
-      'identity_attack', 'sexual_explicit'
+      'toxicity',
+      'severe_toxicity',
+      'obscene',
+      'threat',
+      'insult',
+      'identity_attack',
+      'sexual_explicit',
   ]
   if mode in ['identity', 'covert']:
     labels += IDENTITY_LABELS
@@ -235,7 +264,8 @@ class CivilCommentsConfig(tfds.core.BuilderConfig):
 
   def __init__(self, name, description, mode):
     super(CivilCommentsConfig, self).__init__(
-        name=name, description=description)
+        name=name, description=description
+    )
     self.mode = mode
 
 
@@ -257,23 +287,28 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       CivilCommentsConfig(
-          name='CivilComments', description=_CC_DESCRIPTION, mode='base'),
+          name='CivilComments', description=_CC_DESCRIPTION, mode='base'
+      ),
       CivilCommentsConfig(
           name='CivilCommentsIdentities',
           description=_CC_IDENTITIES_DESCRIPTION,
-          mode='identity'),
+          mode='identity',
+      ),
       CivilCommentsConfig(
           name='CivilCommentsCovert',
           description=_CC_COVERT_DESCRIPTION,
-          mode='covert'),
+          mode='covert',
+      ),
       CivilCommentsConfig(
           name='CivilCommentsToxicSpans',
           description=_CC_SPANS_DESCRIPTION,
-          mode='spans'),
+          mode='spans',
+      ),
       CivilCommentsConfig(
           name='CivilCommentsInContext',
           description=_CC_CONTEXT_DESCRIPTION,
-          mode='context'),
+          mode='context',
+      ),
   ]
 
   VERSION = tfds.core.Version('1.2.3')
@@ -297,7 +332,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
         'identity': _CITATION,
         'covert': _COVERT_CITATION,
         'spans': _SPANS_CITATION,
-        'context': _CONTEXT_CITATION
+        'context': _CONTEXT_CITATION,
     }[mode]
     features = {
         'text': tfds.features.Text(),

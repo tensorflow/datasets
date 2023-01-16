@@ -59,8 +59,9 @@ class VersionTest(testing.TestCase):
     v = version.Version('1.3.534')
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       unused_ = v < 'abc'
-    with self.assertRaisesWithPredicateMatch(AssertionError,
-                                             'cannot be compared to version'):
+    with self.assertRaisesWithPredicateMatch(
+        AssertionError, 'cannot be compared to version'
+    ):
       unused_ = v > 123
 
   def test_match(self):
@@ -130,13 +131,13 @@ class VersionTest(testing.TestCase):
   def test_hash(self):
     self.assertIn(
         version.Version('1.2.3'),
-        {version.Version('1.2.3'),
-         version.Version('1.4.3')})
+        {version.Version('1.2.3'), version.Version('1.4.3')},
+    )
 
     self.assertNotIn(
         version.Version('1.2.3'),
-        {version.Version('1.1.3'),
-         version.Version('1.4.3')})
+        {version.Version('1.1.3'), version.Version('1.4.3')},
+    )
 
 
 def test_str_to_version():

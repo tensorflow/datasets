@@ -224,8 +224,9 @@ class Shuffler(object):
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
     if not isinstance(data, six.binary_type):
-      raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' %
-                           (type(data)))
+      raise AssertionError(
+          'Only bytes (not %s) can be stored in Shuffler!' % (type(data))
+      )
     if self._disable_shuffling:
       hkey = key
     else:

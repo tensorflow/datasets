@@ -24,4 +24,5 @@ tfds.builder_cls('open_images_challenge2019_detection')
 from tensorflow_datasets.core import lazy_builder_import
 
 OpenImagesChallenge2019Detection = lazy_builder_import.LazyBuilderImport(
-    'open_images_challenge2019_detection')
+    'open_images_challenge2019_detection'
+)

@@ -63,9 +63,9 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
       height = np.random.randint(5, high=10)
       width = np.random.randint(5, high=10)
       yield i, {
-          "im":
-              np.random.randint(
-                  0, 255, size=(height, width, 3), dtype=np.uint8)
+          "im": np.random.randint(
+              0, 255, size=(height, width, 3), dtype=np.uint8
+          )
       }
 
 
@@ -85,7 +85,8 @@ class DatasetInfoTest(testing.TestCase):
   def test_non_existent_dir(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
     with self.assertRaisesWithPredicateMatch(
-        FileNotFoundError, "from a directory which does not exist"):
+        FileNotFoundError, "from a directory which does not exist"
+    ):
       info.read_from_directory(_NON_EXISTENT_DIR)
 
   def test_reading_different_version(self):
@@ -93,7 +94,10 @@ class DatasetInfoTest(testing.TestCase):
     info._identity.version = utils.Version("2.0.0")
     with pytest.raises(
         AssertionError,
-        match="The constructed DatasetInfo instance and the restored proto version do not match"
+        match=(
+            "The constructed DatasetInfo instance and the restored proto"
+            " version do not match"
+        ),
     ):
       # The dataset in _INFO_DIR has version 3.0.1 whereas the builder is 2.0.0
       info.read_from_directory(_INFO_DIR)
@@ -123,8 +127,9 @@ class DatasetInfoTest(testing.TestCase):
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
-    self.assertEqual(info.module_name,
-                     "tensorflow_datasets.image_classification.mnist")
+    self.assertEqual(
+        info.module_name, "tensorflow_datasets.image_classification.mnist"
+    )
     self.assertEqual(False, info.disable_shuffling)
 
     self.assertEqual(info.version, utils.Version("3.0.1"))
@@ -132,7 +137,8 @@ class DatasetInfoTest(testing.TestCase):
 
   def test_disable_shuffling(self):
     info = dataset_info.DatasetInfo(
-        builder=self._builder, disable_shuffling=True)
+        builder=self._builder, disable_shuffling=True
+    )
     info.read_from_directory(_INFO_DIR)
 
     self.assertEqual(True, info.disable_shuffling)
@@ -149,7 +155,8 @@ class DatasetInfoTest(testing.TestCase):
     mnist_builder = mnist.MNIST(data_dir=_DATA_DIR)
 
     info = dataset_info.DatasetInfo(
-        builder=mnist_builder, features=mnist_builder.info.features)
+        builder=mnist_builder, features=mnist_builder.info.features
+    )
     info.read_from_directory(_INFO_DIR)
 
     # Read the json file into a string.
@@ -191,9 +198,11 @@ class DatasetInfoTest(testing.TestCase):
     info.download_size = 456
     filepath_template = "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
     info.as_proto.splits.add(
-        name="train", num_bytes=512, filepath_template=filepath_template)
+        name="train", num_bytes=512, filepath_template=filepath_template
+    )
     info.as_proto.splits.add(
-        name="validation", num_bytes=64, filepath_template=filepath_template)
+        name="validation", num_bytes=64, filepath_template=filepath_template
+    )
     info.as_proto.schema.feature.add()
     info.as_proto.schema.feature.add()  # Add dynamic statistics
     info.download_checksums = {
@@ -220,7 +229,8 @@ class DatasetInfoTest(testing.TestCase):
           supervised_keys=("input (new)", "output (new)"),
           homepage="http://some-location-new",
           citation="some citation (new)",
-          redistribution_info={"license": "some license (new)"})
+          redistribution_info={"license": "some license (new)"},
+      )
       restored_info.download_size = 789
       restored_info.as_proto.splits.add(name="validation", num_bytes=288)
       restored_info.as_proto.schema.feature.add()
@@ -239,26 +249,32 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(restored_info.description, "A description")
       self.assertEqual(restored_info.version, utils.Version("3.0.1"))
       self.assertEqual(restored_info.release_notes, {})
-      self.assertEqual(restored_info.supervised_keys,
-                       ("input (new)", "output (new)"))
+      self.assertEqual(
+          restored_info.supervised_keys, ("input (new)", "output (new)")
+      )
       self.assertEqual(restored_info.homepage, "http://some-location-new")
       self.assertEqual(restored_info.citation, "some citation (new)")
-      self.assertEqual(restored_info.redistribution_info.license,
-                       "some license (new)")
+      self.assertEqual(
+          restored_info.redistribution_info.license, "some license (new)"
+      )
       self.assertEqual(restored_info.download_size, 789)
       self.assertEqual(restored_info.dataset_size, 576)
       self.assertEqual(len(restored_info.as_proto.schema.feature), 4)
-      self.assertEqual(restored_info.download_checksums, {
-          "url2": "some other checksum (new)",
-          "url3": "some checksum (new)",
-      })
+      self.assertEqual(
+          restored_info.download_checksums,
+          {
+              "url2": "some other checksum (new)",
+              "url3": "some checksum (new)",
+          },
+      )
 
   def test_reading_from_gcs_bucket(self):
     # The base TestCase prevents GCS access, so we explicitly ask it to restore
     # access here.
     with self.gcs_access():
       mnist_builder = mnist.MNIST(
-          data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
+          data_dir=tempfile.mkdtemp(dir=self.get_temp_dir())
+      )
       info = dataset_info.DatasetInfo(builder=mnist_builder)
       info = mnist_builder.info
 
@@ -290,9 +306,9 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(builder3.info.metadata, {"some_key": 123})
 
   def test_updates_on_bucket_info(self):
-
     info = dataset_info.DatasetInfo(
-        builder=self._builder, description="won't be updated")
+        builder=self._builder, description="won't be updated"
+    )
     # No statistics in the above.
     self.assertEqual(0, info.splits.total_num_examples)
     self.assertEqual(0, len(info.as_proto.schema.feature))
@@ -311,16 +327,18 @@ class DatasetInfoTest(testing.TestCase):
   def test_set_splits_normal(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
     split_info1 = splits_lib.SplitInfo(
-        name="train", shard_lengths=[1, 2], num_bytes=0)
+        name="train", shard_lengths=[1, 2], num_bytes=0
+    )
     split_info2 = splits_lib.SplitInfo(
-        name="test", shard_lengths=[1], num_bytes=0)
+        name="test", shard_lengths=[1], num_bytes=0
+    )
     split_dict = splits_lib.SplitDict(split_infos=[split_info1, split_info2])
     info.set_splits(split_dict)
     self.assertEqual(str(info.splits), str(split_dict))
     self.assertEqual(
         str(info.as_proto.splits),
-        str([split_info1.to_proto(),
-             split_info2.to_proto()]))
+        str([split_info1.to_proto(), split_info2.to_proto()]),
+    )
 
   def test_set_splits_incorrect_dataset_name(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
@@ -332,30 +350,38 @@ class DatasetInfoTest(testing.TestCase):
             dataset_name="some_other_dataset",
             split="train",
             data_dir=info.data_dir,
-            filetype_suffix="tfrecord"))
+            filetype_suffix="tfrecord",
+        ),
+    )
     split_dict = splits_lib.SplitDict(split_infos=[split_info1])
     with pytest.raises(
-        AssertionError, match="SplitDict contains SplitInfo for split"):
+        AssertionError, match="SplitDict contains SplitInfo for split"
+    ):
       info.set_splits(split_dict)
 
   def test_set_splits_multi_split_info(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
     split_info1 = splits_lib.SplitInfo(
-        name="train", shard_lengths=[1, 2], num_bytes=0)
+        name="train", shard_lengths=[1, 2], num_bytes=0
+    )
     split_info2 = splits_lib.SplitInfo(
-        name="test", shard_lengths=[1], num_bytes=0)
+        name="test", shard_lengths=[1], num_bytes=0
+    )
     multi_split_info1 = splits_lib.MultiSplitInfo(
-        name="train", split_infos=[split_info1])
+        name="train", split_infos=[split_info1]
+    )
     multi_split_info2 = splits_lib.MultiSplitInfo(
-        name="test", split_infos=[split_info2])
+        name="test", split_infos=[split_info2]
+    )
     split_dict = splits_lib.SplitDict(
-        split_infos=[multi_split_info1, multi_split_info2])
+        split_infos=[multi_split_info1, multi_split_info2]
+    )
     info.set_splits(split_dict)
     self.assertEqual(str(info.splits), str(split_dict))
     self.assertEqual(
         str(info.as_proto.splits),
-        str([split_info1.to_proto(),
-             split_info2.to_proto()]))
+        str([split_info1.to_proto(), split_info2.to_proto()]),
+    )
 
   def test_set_file_format_override_fails(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
@@ -363,7 +389,10 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual(info.file_format, file_adapters.FileFormat.TFRECORD)
     with pytest.raises(
         ValueError,
-        match="File format is already set to FileFormat.TFRECORD. Got FileFormat.RIEGELI"
+        match=(
+            "File format is already set to FileFormat.TFRECORD. Got"
+            " FileFormat.RIEGELI"
+        ),
     ):
       info.set_file_format(file_adapters.FileFormat.RIEGELI)
 
@@ -379,7 +408,8 @@ class DatasetInfoTest(testing.TestCase):
     "file_format",
     [
         file_adapters.FileFormat.TFRECORD,
-    ])
+    ],
+)
 def test_file_format_save_restore(
     tmp_path: pathlib.Path,
     file_format: file_adapters.FileFormat,
@@ -420,7 +450,8 @@ def test_file_format_values(tmp_path: pathlib.Path):
 
   # file_adapters.FileFormat accepted
   builder = testing.DummyDataset(
-      data_dir=tmp_path, file_format=file_adapters.FileFormat.RIEGELI)
+      data_dir=tmp_path, file_format=file_adapters.FileFormat.RIEGELI
+  )
   assert builder.info.file_format == file_adapters.FileFormat.RIEGELI
 
   # Unknown value
@@ -431,20 +462,28 @@ def test_file_format_values(tmp_path: pathlib.Path):
 def test_dataset_info_from_proto():
   builder = RandomShapedImageGenerator(data_dir=testing.make_tmp_dir())
   train = dataset_info_pb2.SplitInfo(
-      name="train", num_shards=2, shard_lengths=[4, 5])
+      name="train", num_shards=2, shard_lengths=[4, 5]
+  )
   test = dataset_info_pb2.SplitInfo(
-      name="test", num_shards=3, shard_lengths=[1, 2, 3])
+      name="test", num_shards=3, shard_lengths=[1, 2, 3]
+  )
   text_feature = feature_pb2.Feature(
       python_class_name="tensorflow_datasets.core.features.text_feature.Text",
-      text=feature_pb2.TextFeature())
+      text=feature_pb2.TextFeature(),
+  )
   proto = dataset_info_pb2.DatasetInfo(
       name="random_shaped_image_generator",
       version=str(builder.version),
       features=feature_pb2.Feature(
-          python_class_name="tensorflow_datasets.core.features.features_dict.FeaturesDict",
+          python_class_name=(
+              "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+          ),
           features_dict=feature_pb2.FeaturesDict(
-              features={"text": text_feature})),
-      splits=[train, test])
+              features={"text": text_feature}
+          ),
+      ),
+      splits=[train, test],
+  )
   result = dataset_info.DatasetInfo.from_proto(builder=builder, proto=proto)
   assert result.splits["test"].shard_lengths == test.shard_lengths
   assert result.splits["train"].shard_lengths == train.shard_lengths
@@ -475,7 +514,8 @@ def test_supervised_keys_from_proto():
       ]
     }
   """,
-      message=dataset_info_pb2.SupervisedKeys())
+      message=dataset_info_pb2.SupervisedKeys(),
+  )
   supervised_keys = dataset_info._supervised_keys_from_proto(proto=proto)
   assert str(supervised_keys) == "({'f1': 'f1', 'f2': 'f2'}, 'target')"
 
@@ -507,7 +547,8 @@ def test_supervised_keys_from_proto_different_ordering():
       ]
     }
   """,
-      message=dataset_info_pb2.SupervisedKeys())
+      message=dataset_info_pb2.SupervisedKeys(),
+  )
   proto2 = text_format.Parse(
       text="""
   tuple: {
@@ -534,7 +575,8 @@ def test_supervised_keys_from_proto_different_ordering():
       ]
     }
   """,
-      message=dataset_info_pb2.SupervisedKeys())
+      message=dataset_info_pb2.SupervisedKeys(),
+  )
   supervised_keys1 = dataset_info._supervised_keys_from_proto(proto=proto1)
   supervised_keys2 = dataset_info._supervised_keys_from_proto(proto=proto2)
   assert str(supervised_keys1) == str(supervised_keys2)

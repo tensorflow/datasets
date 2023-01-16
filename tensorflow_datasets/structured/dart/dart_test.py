@@ -92,13 +92,14 @@ class DartTest(tfds.testing.DatasetBuilderTestCase):
                 },
             ]
         },
-        'target_text':
+        'target_text': (
             'A school from Mars Hill, North Carolina, joined in 1973.'
+        ),
     }]
     dart_dataset = dart.Dart()
     with mock.patch.object(
-        json, 'load',
-        return_value=json.loads(json_str)), mock.patch.object(epath, 'Path'):
+        json, 'load', return_value=json.loads(json_str)
+    ), mock.patch.object(epath, 'Path'):
       examples = list(dart_dataset._generate_examples(''))
       for i, (_, example) in enumerate(examples):
         self.assertCountEqual(example, expected_examples[i])

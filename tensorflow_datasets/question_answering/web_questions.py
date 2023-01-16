@@ -38,10 +38,8 @@ _CITATION = """
 }
 """
 _SPLIT_DOWNLOAD_URL = {
-    'train':
-        'https://worksheets.codalab.org/rest/bundles/0x4a763f8cde224c2da592b75f29e2f5c2/contents/blob/',
-    'test':
-        'https://worksheets.codalab.org/rest/bundles/0xe7bac352fce7448c9ef238fb0a297ec2/contents/blob/',
+    'train': 'https://worksheets.codalab.org/rest/bundles/0x4a763f8cde224c2da592b75f29e2f5c2/contents/blob/',
+    'test': 'https://worksheets.codalab.org/rest/bundles/0xe7bac352fce7448c9ef238fb0a297ec2/contents/blob/',
 }
 
 _DESCRIPTION = """\
@@ -77,7 +75,8 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=split, gen_kwargs={'file_path': file_path})
+            name=split, gen_kwargs={'file_path': file_path}
+        )
         for split, file_path in file_paths.items()
     ]
 
@@ -87,8 +86,10 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
     def _target_to_answers(target):
       target = re.sub(r'^\(list |\)$', '', target)
       return [
-          ''.join(ans) for ans in re.findall(
-              r'\(description (?:"([^"]+?)"|([^)]+?))\)\w*', target)
+          ''.join(ans)
+          for ans in re.findall(
+              r'\(description (?:"([^"]+?)"|([^)]+?))\)\w*', target
+          )
       ]
 
     with epath.Path(file_path).open() as f:

@@ -20,7 +20,6 @@ from tensorflow_datasets.datasets.patch_camelyon import patch_camelyon_dataset_b
 
 
 class PatchCamelyonTest(testing.DatasetBuilderTestCase):
-
   DATASET_CLASS = patch_camelyon_dataset_builder.Builder
 
   SPLITS = {

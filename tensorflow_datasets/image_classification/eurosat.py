@@ -46,8 +46,16 @@ URL: https://github.com/phelber/eurosat
 """
 
 _LABELS = [
-    'AnnualCrop', 'Forest', 'HerbaceousVegetation', 'Highway', 'Industrial',
-    'Pasture', 'PermanentCrop', 'Residential', 'River', 'SeaLake'
+    'AnnualCrop',
+    'Forest',
+    'HerbaceousVegetation',
+    'Highway',
+    'Industrial',
+    'Pasture',
+    'PermanentCrop',
+    'Residential',
+    'River',
+    'SeaLake',
 ]
 
 _URL = 'https://github.com/phelber/eurosat'
@@ -71,7 +79,8 @@ class EurosatConfig(tfds.core.BuilderConfig):
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
     super(EurosatConfig, self).__init__(
-        version=tfds.core.Version('2.0.0'), **kwargs)
+        version=tfds.core.Version('2.0.0'), **kwargs
+    )
     self.selection = selection
     self.download_url = download_url
     self.subdir = subdir
@@ -86,13 +95,15 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
           name='rgb',
           download_url='http://madm.dfki.de/files/sentinel/EuroSAT.zip',
           subdir='2750',
-          description='Sentinel-2 RGB channels'),
+          description='Sentinel-2 RGB channels',
+      ),
       EurosatConfig(
           selection='all',
           name='all',
           download_url='http://madm.dfki.de/files/sentinel/EuroSATallBands.zip',
           subdir='ds/images/remote_sensing/otherDatasets/sentinel_2/tif',
-          description='13 Sentinel-2 channels'),
+          description='13 Sentinel-2 channels',
+      ),
   ]
 
   def _info(self):
@@ -105,12 +116,11 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
       supervised_keys = ('image', 'label')
     elif self.builder_config.selection == 'all':
       features = tfds.features.FeaturesDict({
-          'sentinel2':
-              tfds.features.Tensor(shape=[64, 64, 13], dtype=np.float32),
-          'label':
-              tfds.features.ClassLabel(names=_LABELS),
-          'filename':
-              tfds.features.Text(),
+          'sentinel2': tfds.features.Tensor(
+              shape=[64, 64, 13], dtype=np.float32
+          ),
+          'label': tfds.features.ClassLabel(names=_LABELS),
+          'filename': tfds.features.Text(),
       })
       supervised_keys = ('sentinel2', 'label')
 
@@ -132,7 +142,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'path': path,
-                'selection': self.builder_config.selection
+                'selection': self.builder_config.selection,
             },
         ),
     ]
@@ -145,13 +155,13 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
         record = {
             'image': filename,
             'label': label,
-            'filename': os.path.basename(filename)
+            'filename': os.path.basename(filename),
         }
       else:
         record = {
             'sentinel2': _extract_channels(filename),
             'label': label,
-            'filename': os.path.basename(filename)
+            'filename': os.path.basename(filename),
         }
       yield f'{label}_{os.path.basename(filename)}', record
 

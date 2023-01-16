@@ -39,7 +39,8 @@ class BLEWindFieldTest(tfds.testing.DatasetBuilderTestCase):
         mock.patch(f'{module_name}.{class_name}.GCS_FILENAME', 'array.zarr'),
         mock.patch(
             'tensorflow_datasets.public_api.core.lazy_imports.gcsfs_store',
-            lambda s: s),
+            lambda s: s,
+        ),
     ]
     for patcher in patchers:
       patcher.start()

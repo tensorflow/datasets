@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class UniversalDependenciesTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for universal_dependencies dataset."""
+
   BUILDER_CONFIG_NAMES_TO_TEST = ['it_vit']
   DATASET_CLASS = universal_dependencies_dataset_builder.Builder
   SPLITS = {

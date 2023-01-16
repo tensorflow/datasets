@@ -28,18 +28,21 @@ def test_compute_split_info(tmp_path):
   filename_template = naming.ShardedFileTemplate(
       dataset_name=builder.name,
       data_dir=builder.data_dir,
-      filetype_suffix=builder.info.file_format.file_suffix)
+      filetype_suffix=builder.info.file_format.file_suffix,
+  )
   split_infos = compute_split_utils.compute_split_info(
       out_dir=tmp_path,
       filename_template=filename_template,
   )
 
-  assert [s.to_proto() for s in split_infos
-         ] == [s.to_proto() for s in builder.info.splits.values()]
+  assert [s.to_proto() for s in split_infos] == [
+      s.to_proto() for s in builder.info.splits.values()
+  ]
 
   # Split info are correctly saved
   filename_template = filename_template.replace(
-      data_dir=tmp_path, split='train')
+      data_dir=tmp_path, split='train'
+  )
   split_info = compute_split_utils._split_info_from_path(filename_template)
   assert builder.info.splits['train'].to_proto() == split_info.to_proto()
 
@@ -53,11 +56,13 @@ def test_enrich_filename_template():
               filetype_suffix='tfrecord',
               split=None,
               shard_index=None,
-              num_shards=None)
+              num_shards=None,
+          )
       ],
   }
   actual = compute_split_utils._enrich_filename_template(
-      filename_template=template, files_per_split=files_per_split)
+      filename_template=template, files_per_split=files_per_split
+  )
   assert actual.dataset_name == 'mnist'
   assert actual.filetype_suffix == 'tfrecord'
 
@@ -71,18 +76,21 @@ def test_enrich_filename_template_multiple_dataset_names():
               filetype_suffix='tfrecord',
               split=None,
               shard_index=None,
-              num_shards=None),
+              num_shards=None,
+          ),
           naming.FilenameInfo(
               dataset_name='b',
               filetype_suffix='tfrecord',
               split=None,
               shard_index=None,
-              num_shards=None),
+              num_shards=None,
+          ),
       ],
   }
   with pytest.raises(ValueError, match='Found multiple dataset names'):
     compute_split_utils._enrich_filename_template(
-        filename_template=template, files_per_split=files_per_split)
+        filename_template=template, files_per_split=files_per_split
+    )
 
 
 def test_enrich_filename_template_multiple_filetype_suffixes():
@@ -94,15 +102,18 @@ def test_enrich_filename_template_multiple_filetype_suffixes():
               filetype_suffix='a',
               split=None,
               shard_index=None,
-              num_shards=None),
+              num_shards=None,
+          ),
           naming.FilenameInfo(
               dataset_name='mnist',
               filetype_suffix='b',
               split=None,
               shard_index=None,
-              num_shards=None),
+              num_shards=None,
+          ),
       ],
   }
   with pytest.raises(ValueError, match='Found multiple filetype suffixes'):
     compute_split_utils._enrich_filename_template(
-        filename_template=template, files_per_split=files_per_split)
+        filename_template=template, files_per_split=files_per_split
+    )

@@ -65,7 +65,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(names=labels)
+            "label": tfds.features.ClassLabel(names=labels),
         }),
         supervised_keys=("image", "label"),
         homepage="https://data.mendeley.com/datasets/hb74ynkjcn/1",
@@ -91,10 +91,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           retry_count += 1
           if retry_count == _MAX_DOWNLOAD_RETRY:
             raise DownloadRetryLimitReachedError(
-                "Retry limit reached. Try downloading the dataset again.")
+                "Retry limit reached. Try downloading the dataset again."
+            )
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files})
+              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files}
+          )
       ]
 
   def _generate_examples(self, image_files):

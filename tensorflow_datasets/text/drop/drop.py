@@ -38,15 +38,19 @@ _CITATION = """
 }
 """
 
-_DATA_LINK = "https://s3-us-west-2.amazonaws.com/allennlp/datasets/drop/drop_dataset.zip"
+_DATA_LINK = (
+    "https://s3-us-west-2.amazonaws.com/allennlp/datasets/drop/drop_dataset.zip"
+)
 
 
 def _get_answer(answer_dict):
   if answer_dict.get("number", ""):
     return answer_dict["number"]
   elif answer_dict.get("date", {}).get("day", ""):
-    return (f'{answer_dict["date"]["year"]}-'
-            f'{answer_dict["date"]["month"]}-{answer_dict["date"]["day"]}')
+    return (
+        f'{answer_dict["date"]["year"]}-'
+        f'{answer_dict["date"]["month"]}-{answer_dict["date"]["day"]}'
+    )
   elif answer_dict.get("spans", []):
     return answer_dict["spans"][0]
   else:

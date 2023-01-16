@@ -44,15 +44,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     names_file = imagenet_common.label_names_file()
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            'image':
-                tfds.features.Image(encoding_format='jpeg'),
-            'original_label':
-                tfds.features.ClassLabel(names_file=names_file),
-            'real_label':
-                tfds.features.Sequence(
-                    tfds.features.ClassLabel(names_file=names_file)),
-            'file_name':
-                tfds.features.Text(),
+            'image': tfds.features.Image(encoding_format='jpeg'),
+            'original_label': tfds.features.ClassLabel(names_file=names_file),
+            'real_label': tfds.features.Sequence(
+                tfds.features.ClassLabel(names_file=names_file)
+            ),
+            'file_name': tfds.features.Text(),
         }),
         supervised_keys=('image', 'real_label'),
         homepage='https://github.com/google-research/reassessed-imagenet',
@@ -71,17 +68,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     if not tf.io.gfile.exists(val_path):
       raise AssertionError(
           'ImageNet requires manual download of the data. Please download '
-          'the train and val set and place them into: {}'.format(val_path))
+          'the train and val set and place them into: {}'.format(val_path)
+      )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                'archive':
-                    dl_manager.iter_archive(val_path),
-                'original_labels':
-                    imagenet_common.get_validation_labels(val_path),
-                'real_labels':
-                    self._get_real_labels(dl_manager),
+                'archive': dl_manager.iter_archive(val_path),
+                'original_labels': imagenet_common.get_validation_labels(
+                    val_path
+                ),
+                'real_labels': self._get_real_labels(dl_manager),
             },
         ),
     ]

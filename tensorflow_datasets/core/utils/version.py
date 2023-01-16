@@ -22,7 +22,7 @@ from typing import List, Tuple, Union
 
 from etils import epath
 
-_VERSION_TMPL = (r"^(?P<major>{v})" r"\.(?P<minor>{v})" r"\.(?P<patch>{v})$")
+_VERSION_TMPL = r"^(?P<major>{v})" r"\.(?P<minor>{v})" r"\.(?P<patch>{v})$"
 _VERSION_WILDCARD_REG = re.compile(_VERSION_TMPL.format(v=r"\d+|\*"))
 _VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=r"\d+"))
 
@@ -43,6 +43,7 @@ class Experiment(enum.Enum):
         tfds.core.Experiment.EXP_A: True,
         })
   """
+
   # A Dummy experiment, which should NOT be used, except for testing.
   DUMMY = 1
 
@@ -74,7 +75,8 @@ class Version:
       version_str = str(version)
       experiments = experiments or version._experiments
       tfds_version_to_prepare = (
-          tfds_version_to_prepare or version.tfds_version_to_prepare)
+          tfds_version_to_prepare or version.tfds_version_to_prepare
+      )
     else:
       version_str = version
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
@@ -83,7 +85,8 @@ class Version:
       if isinstance(experiments, str):
         raise ValueError(
             f"Invalid Version('{version}', '{experiments}'). Description is "
-            "deprecated. RELEASE_NOTES should be used instead.")
+            "deprecated. RELEASE_NOTES should be used instead."
+        )
       self._experiments.update(experiments)
     self.major, self.minor, self.patch = _str_to_version(version_str)
 
@@ -95,7 +98,7 @@ class Version:
     return "{}.{}.{}".format(*self.tuple)
 
   def __repr__(self) -> str:
-    return f"{type(self).__name__}(\'{str(self)}\')"
+    return f"{type(self).__name__}('{str(self)}')"
 
   @property
   def tuple(self):
@@ -106,8 +109,9 @@ class Version:
       return Version(other)
     elif isinstance(other, Version):
       return other
-    raise AssertionError("{} (type {}) cannot be compared to version.".format(
-        other, type(other)))
+    raise AssertionError(
+        "{} (type {}) cannot be compared to version.".format(other, type(other))
+    )
 
   def __eq__(self, other):
     other = self._validate_operand(other)
@@ -144,8 +148,11 @@ class Version:
         number or a wildcard.
     """
     major, minor, patch = _str_to_version(other_version, allow_wildcard=True)
-    return (major in [self.major, "*"] and minor in [self.minor, "*"] and
-            patch in [self.patch, "*"])
+    return (
+        major in [self.major, "*"]
+        and minor in [self.minor, "*"]
+        and patch in [self.patch, "*"]
+    )
 
   @classmethod
   def is_valid(cls, version: str) -> bool:
@@ -157,13 +164,14 @@ class Version:
 
 
 def _str_to_version(
-    version_str: str,
-    allow_wildcard=False
+    version_str: str, allow_wildcard=False
 ) -> Tuple[Union[int, str], Union[int, str], Union[int, str]]:
   """Return the tuple (major, minor, patch) version extracted from the str."""
   if not isinstance(version_str, str):
-    raise TypeError("Can only convert strings to versions. "
-                    f"Got: {type(version_str)} with value {version_str}.")
+    raise TypeError(
+        "Can only convert strings to versions. "
+        f"Got: {type(version_str)} with value {version_str}."
+    )
   reg = _VERSION_WILDCARD_REG if allow_wildcard else _VERSION_RESOLVED_REG
   res = reg.match(version_str)
   if not res:
@@ -175,9 +183,8 @@ def _str_to_version(
     raise ValueError(msg)
   return tuple(
       v if v == "*" else int(v)  # pylint:disable=g-complex-comprehension
-      for v in [res.group("major"),
-                res.group("minor"),
-                res.group("patch")])
+      for v in [res.group("major"), res.group("minor"), res.group("patch")]
+  )
 
 
 def list_all_versions(root_dir: epath.PathLike) -> List[Version]:

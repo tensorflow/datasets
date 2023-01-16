@@ -55,7 +55,8 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         homepage="http://laurencemoroney.com/horses-or-humans-dataset",
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     train_path, test_path = dl_manager.download([_TRAIN_URL, _TEST_URL])
@@ -63,10 +64,12 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"archive": dl_manager.iter_archive(train_path)}),
+            gen_kwargs={"archive": dl_manager.iter_archive(train_path)},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"archive": dl_manager.iter_archive(test_path)}),
+            gen_kwargs={"archive": dl_manager.iter_archive(test_path)},
+        ),
     ]
 
   def _generate_examples(self, archive):

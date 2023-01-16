@@ -27,7 +27,9 @@ Path = epath.Path
 
 # URL.
 _OGB_URL = 'https://ogb.stanford.edu/docs/graphprop'
-_DOWNLOAD_URL = 'https://snap.stanford.edu/ogb/data/graphproppred/csv_mol_download/pcba.zip'
+_DOWNLOAD_URL = (
+    'https://snap.stanford.edu/ogb/data/graphproppred/csv_mol_download/pcba.zip'
+)
 
 # File containing the names of individual tasks.
 _TASKS_FNAME = 'datasets/ogbg_molpcba/tasks.txt'
@@ -54,27 +56,24 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         # We mimic the features of the OGB platform-agnostic DataLoader.
         features=tfds.features.FeaturesDict({
-            'num_nodes':
-                tfds.features.Tensor(shape=(None,), dtype=np.int64),
-            'node_feat':
-                tfds.features.Tensor(shape=(None, 9), dtype=np.float32),
-            'num_edges':
-                tfds.features.Tensor(shape=(None,), dtype=np.int64),
-            'edge_feat':
-                tfds.features.Tensor(shape=(None, 3), dtype=np.float32),
-            'edge_index':
-                tfds.features.Tensor(shape=(None, 2), dtype=np.int64),
-            'labels':
-                tfds.features.Tensor(shape=(128,), dtype=np.float32),
+            'num_nodes': tfds.features.Tensor(shape=(None,), dtype=np.int64),
+            'node_feat': tfds.features.Tensor(
+                shape=(None, 9), dtype=np.float32
+            ),
+            'num_edges': tfds.features.Tensor(shape=(None,), dtype=np.int64),
+            'edge_feat': tfds.features.Tensor(
+                shape=(None, 3), dtype=np.float32
+            ),
+            'edge_index': tfds.features.Tensor(shape=(None, 2), dtype=np.int64),
+            'labels': tfds.features.Tensor(shape=(128,), dtype=np.float32),
         }),
         supervised_keys=None,
         homepage=_OGB_URL,
         metadata=tfds.core.MetadataDict({
-            'tasks':
-                tasks,
-            'graph_visualizer':
-                tfds.visualization.GraphVisualizerMetadataDict(
-                    edgelist_feature_name='edge_index')
+            'tasks': tasks,
+            'graph_visualizer': tfds.visualization.GraphVisualizerMetadataDict(
+                edgelist_feature_name='edge_index'
+            ),
         }),
     )
 
@@ -84,18 +83,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(_DOWNLOAD_URL)
 
     # Read the extracted data.
-    data_path = (path / 'pcba/raw')
-    split_path = (path / 'pcba/split/scaffold')
+    data_path = path / 'pcba/raw'
+    split_path = path / 'pcba/split/scaffold'
     all_data, split_indices = _read_extracted_data(data_path, split_path)
 
     # Return a list of the train/validation/test split generators.
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(all_data, split_indices['train']),
-        tfds.Split.VALIDATION:
-            self._generate_examples(all_data, split_indices['valid']),
-        tfds.Split.TEST:
-            self._generate_examples(all_data, split_indices['test']),
+        tfds.Split.TRAIN: self._generate_examples(
+            all_data, split_indices['train']
+        ),
+        tfds.Split.VALIDATION: self._generate_examples(
+            all_data, split_indices['valid']
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            all_data, split_indices['test']
+        ),
     }
 
   def _generate_examples(self, all_data: ArrayDict, split_indices: np.ndarray):
@@ -103,14 +105,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # Precompute for later.
     num_total_graphs = len(all_data['labels'])
     split_indices = set(split_indices)
-    accumulated_num_nodes = np.concatenate([np.array([0]),
-                                            np.cumsum(all_data['num_nodes'])])
-    accumulated_num_edges = np.concatenate([np.array([0]),
-                                            np.cumsum(all_data['num_edges'])])
+    accumulated_num_nodes = np.concatenate(
+        [np.array([0]), np.cumsum(all_data['num_nodes'])]
+    )
+    accumulated_num_edges = np.concatenate(
+        [np.array([0]), np.cumsum(all_data['num_edges'])]
+    )
 
     # Loop over the training set.
     for idx in range(num_total_graphs):
-
       # Check if this example is part of the split.
       if idx not in split_indices:
         continue
@@ -141,8 +144,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       yield idx, record
 
 
-def _read_extracted_data(data_path: Path,
-                         split_path: Path) -> Tuple[ArrayDict, ArrayDict]:
+def _read_extracted_data(
+    data_path: Path, split_path: Path
+) -> Tuple[ArrayDict, ArrayDict]:
   """Reads and processes the extracted graph data and splits."""
   pd = tfds.core.lazy_imports.pandas
 

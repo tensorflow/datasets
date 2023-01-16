@@ -25,7 +25,8 @@ class SalientSpanWikipediaSentencesTest(testing.DatasetBuilderTestCase):
   def setUpClass(cls):
     super().setUpClass()
     salient_span_wikipedia_dataset_builder._INPUT_FILE_PATTERN = str(
-        cls.dummy_data / 'test_examples.tfrecord.gz')
+        cls.dummy_data / 'test_examples.tfrecord.gz'
+    )
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['sentences']
   SPLITS = {'train': 4}

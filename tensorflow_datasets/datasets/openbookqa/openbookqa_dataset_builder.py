@@ -42,7 +42,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'humanScore': tfds.features.Tensor(shape=(), dtype=np.float32),
             'clarity': tfds.features.Tensor(shape=(), dtype=np.float32),
             'turkIdAnonymized': tfds.features.Text(),
-            'answerKey': tfds.features.ClassLabel(names=['A', 'B', 'C', 'D'])
+            'answerKey': tfds.features.ClassLabel(names=['A', 'B', 'C', 'D']),
         }),
         # If there's a common (input, target) tuple from the features,
         # specify them here. They'll be used if as_supervised=True in
@@ -64,7 +64,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'train_complete.jsonl')
+                'filepath': os.path.join(data_dir, 'train_complete.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
@@ -72,7 +72,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'dev_complete.jsonl')
+                'filepath': os.path.join(data_dir, 'dev_complete.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
@@ -80,7 +80,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'test_complete.jsonl')
+                'filepath': os.path.join(data_dir, 'test_complete.jsonl'),
             },
         ),
     ]
@@ -105,5 +105,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'humanScore': row['humanScore'],
             'clarity': row['clarity'],
             'turkIdAnonymized': row['turkIdAnonymized'],
-            'answerKey': row['answerKey']
+            'answerKey': row['answerKey'],
         }

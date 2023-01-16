@@ -46,6 +46,7 @@ class _TfioFileFormat(enum.Enum):
   Attributes:
     FLAC: Free Lossless Audio Codec
   """
+
   FLAC = 'flac'
 
 
@@ -68,8 +69,9 @@ def _tfio_acceptable_dtypes():
 class _AudioDecoder(abc.ABC):
   """Utils which encode/decode audios."""
 
-  def __init__(self, file_format: Optional[str], np_dtype: np.dtype,
-               shape: utils.Shape):
+  def __init__(
+      self, file_format: Optional[str], np_dtype: np.dtype, shape: utils.Shape
+  ):
     """Constructs the lazy audio decoder.
 
     Args:
@@ -84,8 +86,9 @@ class _AudioDecoder(abc.ABC):
     self._shape = shape
 
   @abc.abstractmethod
-  def encode_audio(self, fobj: BinaryIO,
-                   file_format: Optional[str]) -> np.ndarray:
+  def encode_audio(
+      self, fobj: BinaryIO, file_format: Optional[str]
+  ) -> np.ndarray:
     """Encode audio into numpy array for storing as a tf-example."""
     raise NotImplementedError
 
@@ -109,8 +112,8 @@ def _pydub_load_audio(fobj: BinaryIO, file_format: Optional[str]) -> np.ndarray:
 
 
 def _pydub_decode_audio(
-    audio_tensor: tf.Tensor,
-    file_format_tensor: tf.experimental.Optional) -> np.ndarray:
+    audio_tensor: tf.Tensor, file_format_tensor: tf.experimental.Optional
+) -> np.ndarray:
   """Decode audio from tf.Tensor using pydub library."""
   fobj = io.BytesIO(audio_tensor.numpy())
   if file_format_tensor.has_value():
@@ -131,39 +134,49 @@ class _LazyDecoder(_AudioDecoder):
     except ValueError:
       self._tfio_file_format = None
       logging.warning(
-          'Using lazy encoding with `file_format=%s` might be very slow when '
-          'reading prepared dataset. Consider using one of these file formats: '
-          '%s', self._file_format, [item.value for item in _TfioFileFormat])
+          (
+              'Using lazy encoding with `file_format=%s` might be very slow'
+              ' when reading prepared dataset. Consider using one of these file'
+              ' formats: %s'
+          ),
+          self._file_format,
+          [item.value for item in _TfioFileFormat],
+      )
 
     if self._tfio_file_format:
       acceptable_dtypes = _tfio_acceptable_dtypes()[self._tfio_file_format]
       if self._dtype not in acceptable_dtypes:
         raise ValueError(
             f'Acceptable `dtype` for lazy loading {self._file_format}: '
-            f'{acceptable_dtypes} (was {self._dtype})')
+            f'{acceptable_dtypes} (was {self._dtype})'
+        )
 
-  def encode_audio(self, fobj: BinaryIO,
-                   file_format: Optional[str]) -> np.ndarray:
+  def encode_audio(
+      self, fobj: BinaryIO, file_format: Optional[str]
+  ) -> np.ndarray:
     return np.array(fobj.read(), dtype=tf.string.as_numpy_dtype)
 
   def decode_audio(self, audio_tensor: tf.Tensor) -> tf.Tensor:
     if self._tfio_file_format:
       decoded_audio_tensor = _tfio_decode_fn()[self._tfio_file_format](
-          audio_tensor, dtype=self._dtype)
+          audio_tensor, dtype=self._dtype
+      )
       decoded_audio_tensor = tf.squeeze(decoded_audio_tensor)
     else:
       if self._file_format:
         file_format_tensor = tf.experimental.Optional.from_value(
-            self._file_format)
+            self._file_format
+        )
       else:
         file_format_tensor = tf.experimental.Optional.empty(
-            tf.TensorSpec(shape=(), dtype=tf.string))
+            tf.TensorSpec(shape=(), dtype=tf.string)
+        )
 
       # pydub.AudioSegment.get_array_of_samples returns an array with type code
       # `b`, `h` or `i` which can be all converted to `tf.int32`
-      decoded_audio_tensor = tf.py_function(_pydub_decode_audio,
-                                            [audio_tensor, file_format_tensor],
-                                            tf.int32)
+      decoded_audio_tensor = tf.py_function(
+          _pydub_decode_audio, [audio_tensor, file_format_tensor], tf.int32
+      )
 
     decoded_audio_tensor.set_shape(self._shape)
 
@@ -173,8 +186,9 @@ class _LazyDecoder(_AudioDecoder):
 class _EagerDecoder(_AudioDecoder):
   """Read audio during encoding."""
 
-  def encode_audio(self, fobj: BinaryIO,
-                   file_format: Optional[str]) -> np.ndarray:
+  def encode_audio(
+      self, fobj: BinaryIO, file_format: Optional[str]
+  ) -> np.ndarray:
     audio = _pydub_load_audio(fobj, file_format)
     return audio.astype(self._np_dtype)
 
@@ -226,8 +240,10 @@ class Audio(tensor_feature.Tensor):
     self._file_format = file_format
     self._sample_rate = sample_rate
     if len(shape) > 2:
-      raise ValueError('Audio shape should be either (length,) or '
-                       f'(length, num_channels), got {shape}.')
+      raise ValueError(
+          'Audio shape should be either (length,) or '
+          f'(length, num_channels), got {shape}.'
+      )
 
     if lazy_decode:
       serialized_dtype = tf.string
@@ -244,10 +260,12 @@ class Audio(tensor_feature.Tensor):
         encoding=encoding,
         doc=doc,
         serialized_dtype=serialized_dtype,
-        serialized_shape=serialized_shape)
+        serialized_shape=serialized_shape,
+    )
 
     self._audio_decoder = _Decoder(
-        file_format=self._file_format, np_dtype=self._dtype, shape=self._shape)
+        file_format=self._file_format, np_dtype=self._dtype, shape=self._shape
+    )
 
   def encode_example(self, audio_or_path_or_fobj):
     """Convert the given audio into a dict convertible to tf example."""
@@ -262,8 +280,9 @@ class Audio(tensor_feature.Tensor):
         except Exception as e:  # pylint: disable=broad-except
           utils.reraise(e, prefix=f'Error for {filename}: ')
     else:
-      audio = self._audio_decoder.encode_audio(audio_or_path_or_fobj,
-                                               self._file_format)
+      audio = self._audio_decoder.encode_audio(
+          audio_or_path_or_fobj, self._file_format
+      )
 
     return super().encode_example(audio)
 
@@ -291,12 +310,15 @@ class Audio(tensor_feature.Tensor):
       rate = 16000
 
     audio_str = utils.get_base64(lambda buff: _save_wav(buff, ex, rate))
-    return (f'<audio controls src="data:audio/ogg;base64,{audio_str}" '
-            ' controlsList="nodownload" />')
+    return (
+        f'<audio controls src="data:audio/ogg;base64,{audio_str}" '
+        ' controlsList="nodownload" />'
+    )
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.AudioFeature]) -> 'Audio':
+      cls, value: Union[Json, feature_pb2.AudioFeature]
+  ) -> 'Audio':
     if isinstance(value, dict):
       # For backwards compatibility
       return cls(
@@ -310,7 +332,8 @@ class Audio(tensor_feature.Tensor):
         dtype=feature_lib.dtype_from_str(value.dtype),
         file_format=value.file_format or None,
         sample_rate=value.sample_rate,
-        encoding=value.encoding)
+        encoding=value.encoding,
+    )
 
   def to_json_content(self) -> feature_pb2.AudioFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.AudioFeature(
@@ -328,7 +351,7 @@ def _save_wav(buff, data, rate) -> None:
   data = np.array(data, dtype=float)
 
   bit_depth = 16
-  max_sample_value = int(2**(bit_depth - 1)) - 1
+  max_sample_value = int(2 ** (bit_depth - 1)) - 1
 
   num_channels = data.shape[1] if len(data.shape) > 1 else 1
   scaled = np.int16(data / np.max(np.abs(data)) * max_sample_value)

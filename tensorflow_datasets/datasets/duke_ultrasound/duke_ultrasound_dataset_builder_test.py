@@ -33,7 +33,7 @@ class DukeUltrasoundTest(testing.DatasetBuilderTestCase):
       "validation": "validation.csv",
       "A": "train.csv",
       "B": "train.csv",
-      "MARK": "mark.csv"
+      "MARK": "mark.csv",
   }
 
 

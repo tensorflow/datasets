@@ -69,18 +69,22 @@ def _convert_to_np_dtype(dtype: str) -> np.dtype:
   else:
     raise ValueError(
         f"Unrecognized type {dtype}. Please open an issue if you think "
-        "this is a bug.")
+        "this is a bug."
+    )
 
 
 def extract_features(hf_features) -> feature_lib.FeatureConnector:
   """Converts Huggingface feature spec to TFDS feature spec."""
   hf_datasets = lazy_imports_lib.lazy_imports.datasets
-  if (isinstance(hf_features, hf_datasets.Features) or
-      isinstance(hf_features, dict)):
-    return feature_lib.FeaturesDict({
-        name: extract_features(hf_inner_feature)
-        for name, hf_inner_feature in hf_features.items()
-    })
+  if isinstance(hf_features, hf_datasets.Features) or isinstance(
+      hf_features, dict
+  ):
+    return feature_lib.FeaturesDict(
+        {
+            name: extract_features(hf_inner_feature)
+            for name, hf_inner_feature in hf_features.items()
+        }
+    )
   if isinstance(hf_features, hf_datasets.Sequence):
     return feature_lib.Sequence(feature=extract_features(hf_features.feature))
   if isinstance(hf_features, list):
@@ -97,10 +101,13 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
     if hf_features.num_classes:
       return feature_lib.ClassLabel(num_classes=hf_features.num_classes)
   if isinstance(hf_features, hf_datasets.Translation):
-    return feature_lib.Translation(languages=hf_features.languages,)
+    return feature_lib.Translation(
+        languages=hf_features.languages,
+    )
   if isinstance(hf_features, hf_datasets.TranslationVariableLanguages):
     return feature_lib.TranslationVariableLanguages(
-        languages=hf_features.languages,)
+        languages=hf_features.languages,
+    )
   if isinstance(hf_features, hf_datasets.Image):
     return feature_lib.Image(encoding_format=_IMAGE_ENCODING_FORMAT)
   if isinstance(hf_features, hf_datasets.Audio):
@@ -148,7 +155,8 @@ def _from_tfds_to_hf(tfds_name: str) -> str:
     if _from_hf_to_tfds(hf_name) == tfds_name.lower():
       return hf_name
   raise registered.DatasetNotFoundError(
-      f"\"{tfds_name}\" is not listed in Hugging Face datasets.")
+      f'"{tfds_name}" is not listed in Hugging Face datasets.'
+  )
 
 
 def _convert_config_name(hf_config: Optional[str]) -> Optional[str]:
@@ -176,7 +184,8 @@ def _convert_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
     if isinstance(value, dict):
       return value
     raise ValueError(
-        f"Feature is FeaturesDict, but did not get a dict but a: {value}")
+        f"Feature is FeaturesDict, but did not get a dict but a: {value}"
+    )
   elif isinstance(feature, feature_lib.Scalar):
     if value is not None:
       return value
@@ -189,8 +198,10 @@ def _convert_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
     elif dtype_utils.is_floating(feature.np_dtype):
       return 0.0
     raise ValueError(f"Could not get default value for {feature}")
-  raise ValueError(f"Type {type(value)} of value {value} "
-                   f"for feature {type(feature)} is not supported.")
+  raise ValueError(
+      f"Type {type(value)} of value {value} "
+      f"for feature {type(feature)} is not supported."
+  )
 
 
 def _convert_example(
@@ -215,7 +226,8 @@ def _extract_supervised_keys(hf_info):
 
 
 class HuggingfaceDatasetBuilder(
-    dataset_builder.GeneratorBasedBuilder, skip_registration=True):
+    dataset_builder.GeneratorBasedBuilder, skip_registration=True
+):
   """A TFDS builder for Huggingface datasets.
 
   If a Huggingface config name is given to this builder, it will construct a
@@ -242,9 +254,9 @@ class HuggingfaceDatasetBuilder(
     self.config_kwargs = config_kwargs
     tfds_config = _convert_config_name(hf_config)
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
-    self._hf_builder = hf_datasets.load_dataset_builder(self._hf_repo_id,
-                                                        self._hf_config,
-                                                        **self.config_kwargs)
+    self._hf_builder = hf_datasets.load_dataset_builder(
+        self._hf_repo_id, self._hf_config, **self.config_kwargs
+    )
     self._hf_info = self._hf_builder.info
     version = str(self._hf_info.version or self._hf_builder.VERSION or "1.0.0")
     self.VERSION = utils.Version(version)  # pylint: disable=invalid-name
@@ -252,12 +264,14 @@ class HuggingfaceDatasetBuilder(
       self._converted_builder_config = dataset_builder.BuilderConfig(
           name=tfds_config,
           version=self.VERSION,
-          description=self._hf_info.description)
+          description=self._hf_info.description,
+      )
     else:
       self._converted_builder_config = None
     self.name = _from_hf_to_tfds(hf_repo_id)
     super().__init__(
-        file_format=file_format, config=tfds_config, data_dir=data_dir)
+        file_format=file_format, config=tfds_config, data_dir=data_dir
+    )
     if self._hf_config:
       self._builder_config = self._converted_builder_config
 
@@ -266,7 +280,8 @@ class HuggingfaceDatasetBuilder(
     return self._converted_builder_config
 
   def _create_builder_config(
-      self, builder_config) -> Optional[dataset_builder.BuilderConfig]:
+      self, builder_config
+  ) -> Optional[dataset_builder.BuilderConfig]:
     return self._converted_builder_config
 
   def _info(self) -> dataset_info_lib.DatasetInfo:
@@ -288,7 +303,8 @@ class HuggingfaceDatasetBuilder(
         self._hf_repo_id,
         self._hf_config,
         ignore_verifications=self._ignore_verifications,
-        **self.config_kwargs)
+        **self.config_kwargs,
+    )
     return {
         split: self._generate_examples(data)
         for split, data in hf_dataset_dict.items()
@@ -300,9 +316,10 @@ class HuggingfaceDatasetBuilder(
       yield i, _convert_example(example, dataset_info)
 
 
-def builder(name: str,
-            config: Optional[str] = None,
-            **builder_kwargs) -> HuggingfaceDatasetBuilder:
+def builder(
+    name: str, config: Optional[str] = None, **builder_kwargs
+) -> HuggingfaceDatasetBuilder:
   hf_repo_id = _from_tfds_to_hf(name)
   return HuggingfaceDatasetBuilder(
-      hf_repo_id=hf_repo_id, hf_config=config, **builder_kwargs)
+      hf_repo_id=hf_repo_id, hf_config=config, **builder_kwargs
+  )

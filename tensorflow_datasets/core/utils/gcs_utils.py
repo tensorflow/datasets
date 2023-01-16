@@ -88,8 +88,7 @@ def gcs_listdir(dir_name: str) -> Optional[List[str]]:
 
 
 def gcs_dataset_info_files(dataset_name: str) -> Optional[List[epath.Path]]:
-  """Return paths to the dataset info files of the given dataset in gs://tfds-data.
-  """
+  """Return paths to the dataset info files of the given dataset in gs://tfds-data."""
   path = gcs_path(posixpath.join(GCS_DATASET_INFO_DIR, dataset_name))
   if _is_gcs_disabled or not exists(path):
     return None
@@ -115,7 +114,8 @@ def download_gcs_folder(
   paths_to_dl = [p for p in gcs_folder.iterdir() if p.name != 'diffs']
 
   with tqdm_utils.async_tqdm(
-      total=len(paths_to_dl), desc='Dl Completed...', unit=' file') as pbar:
+      total=len(paths_to_dl), desc='Dl Completed...', unit=' file'
+  ) as pbar:
 
     def _copy(gcs_path_: epath.Path):
       # Copy 'gs://tfds-data/datasets/ds/1.0.0/file' -> `local_dir/file`
@@ -126,16 +126,19 @@ def download_gcs_folder(
       pbar.update(1)
 
     with concurrent.futures.ThreadPoolExecutor(
-        max_workers=max_simultaneous_downloads) as executor:
+        max_workers=max_simultaneous_downloads
+    ) as executor:
       futures = [executor.submit(_copy, path) for path in paths_to_dl]
       for future in concurrent.futures.as_completed(futures):
         future.result()
 
 
-def download_gcs_dataset(dataset_name: epath.PathLike,
-                         local_dataset_dir: epath.PathLike,
-                         max_simultaneous_downloads: int = 25,
-                         root_dir: Optional[str] = None):
+def download_gcs_dataset(
+    dataset_name: epath.PathLike,
+    local_dataset_dir: epath.PathLike,
+    max_simultaneous_downloads: int = 25,
+    root_dir: Optional[str] = None,
+):
   """Downloads prepared GCS dataset to local dataset directory."""
   if root_dir:
     gcs_folder = epath.Path(root_dir) / dataset_name
@@ -145,4 +148,5 @@ def download_gcs_dataset(dataset_name: epath.PathLike,
   download_gcs_folder(
       gcs_folder=gcs_folder,
       local_folder=local_dataset_dir,
-      max_simultaneous_downloads=max_simultaneous_downloads)
+      max_simultaneous_downloads=max_simultaneous_downloads,
+  )

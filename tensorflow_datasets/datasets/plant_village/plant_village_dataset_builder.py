@@ -73,7 +73,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(names=_LABELS)
+            "label": tfds.features.ClassLabel(names=_LABELS),
         }),
         supervised_keys=("image", "label"),
         homepage="https://arxiv.org/abs/1511.08060",
@@ -84,7 +84,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"datapath": path})
+            name=tfds.Split.TRAIN, gen_kwargs={"datapath": path}
+        )
     ]
 
   def _generate_examples(self, datapath):
@@ -96,8 +97,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       # whether it's an underscore or that character.
       fuzzy_label = label.replace(" ", "[_ ]").replace(",", "[_,]")
       glob_path = os.path.join(
-          datapath, "Plant_leave_diseases_dataset_without_augmentation",
-          fuzzy_label, "*.[jJ][pP][gG]")
+          datapath,
+          "Plant_leave_diseases_dataset_without_augmentation",
+          fuzzy_label,
+          "*.[jJ][pP][gG]",
+      )
       for fpath in tf.io.gfile.glob(glob_path):
         fname = os.path.basename(fpath)
         record = {

@@ -21,6 +21,7 @@ from tensorflow_datasets.text.scrolls import scrolls
 
 class ScrollsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for scrolls dataset."""
+
   DATASET_CLASS = scrolls.Scrolls
   SPLITS = {
       'train': 1,  # Number of fake train examples

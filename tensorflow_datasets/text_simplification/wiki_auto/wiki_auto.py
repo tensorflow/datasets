@@ -56,34 +56,24 @@ with an English counterpart to create a larger corpus of aligned sentences
 
 _URLs = {
     'manual': {
-        'dev':
-            'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-manual/dev.tsv',
-        'test':
-            'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-manual/test.tsv',
+        'dev': 'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-manual/dev.tsv',
+        'test': 'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-manual/test.tsv',
     },
     'auto_acl': {
-        'normal':
-            'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/ACL2020/train.src',
-        'simple':
-            'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/ACL2020/train.dst',
+        'normal': 'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/ACL2020/train.src',
+        'simple': 'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/ACL2020/train.dst',
     },
     'auto_full_no_split': {
-        'normal':
-            'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_no_split/train.src',
-        'simple':
-            'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_no_split/train.dst',
+        'normal': 'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_no_split/train.src',
+        'simple': 'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_no_split/train.dst',
     },
     'auto_full_with_split': {
-        'normal':
-            'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/train.src',
-        'simple':
-            'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/train.dst',
+        'normal': 'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/train.src',
+        'simple': 'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/train.dst',
     },
     'auto': {
-        'part_1':
-            'https://dl.dropboxusercontent.com/sh/ohqaw41v48c7e5p/AAATBDhU1zpdcT5x5WgO8DMaa/wiki-auto-all-data/wiki-auto-part-1-data.json',
-        'part_2':
-            'https://dl.dropboxusercontent.com/sh/ohqaw41v48c7e5p/AAATgPkjo_tPt9z12vZxJ3MRa/wiki-auto-all-data/wiki-auto-part-2-data.json',
+        'part_1': 'https://dl.dropboxusercontent.com/sh/ohqaw41v48c7e5p/AAATBDhU1zpdcT5x5WgO8DMaa/wiki-auto-all-data/wiki-auto-part-1-data.json',
+        'part_2': 'https://dl.dropboxusercontent.com/sh/ohqaw41v48c7e5p/AAATgPkjo_tPt9z12vZxJ3MRa/wiki-auto-all-data/wiki-auto-part-2-data.json',
     },
 }
 
@@ -98,22 +88,32 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='manual',
-          description='A set of 10K Wikipedia sentence pairs aligned by crowd workers.'
+          description=(
+              'A set of 10K Wikipedia sentence pairs aligned by crowd workers.'
+          ),
       ),
       tfds.core.BuilderConfig(
           name='auto_acl',
-          description='Sentence pairs aligned to train the ACL2020 system.'),
+          description='Sentence pairs aligned to train the ACL2020 system.',
+      ),
       tfds.core.BuilderConfig(
           name='auto_full_no_split',
-          description='All automatically aligned sentence pairs without sentence splitting.'
+          description=(
+              'All automatically aligned sentence pairs without sentence'
+              ' splitting.'
+          ),
       ),
       tfds.core.BuilderConfig(
           name='auto_full_with_split',
-          description='All automatically aligned sentence pairs with sentence splitting.'
+          description=(
+              'All automatically aligned sentence pairs with sentence'
+              ' splitting.'
+          ),
       ),
       tfds.core.BuilderConfig(
           name='auto',
-          description='A large set of automatically aligned sentence pairs.')
+          description='A large set of automatically aligned sentence pairs.',
+      ),
   ]
   DEFAULT_CONFIG_NAME = 'auto'
 
@@ -122,67 +122,53 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
 
     if self.builder_config.name == 'manual':
       features = tfds.features.FeaturesDict({
-          'alignment_label':
-              tfds.features.ClassLabel(
-                  names=['notAligned', 'aligned', 'partialAligned']),
-          'normal_sentence_id':
-              tfds.features.Text(),
-          'simple_sentence_id':
-              tfds.features.Text(),
-          'normal_sentence':
-              tfds.features.Text(),
-          'simple_sentence':
-              tfds.features.Text(),
-          'GLEU-score':
-              np.float64,
+          'alignment_label': tfds.features.ClassLabel(
+              names=['notAligned', 'aligned', 'partialAligned']
+          ),
+          'normal_sentence_id': tfds.features.Text(),
+          'simple_sentence_id': tfds.features.Text(),
+          'normal_sentence': tfds.features.Text(),
+          'simple_sentence': tfds.features.Text(),
+          'GLEU-score': np.float64,
       })
-    elif (self.builder_config.name == 'auto_acl' or
-          self.builder_config.name == 'auto_full_no_split' or
-          self.builder_config.name == 'auto_full_with_split'):
+    elif (
+        self.builder_config.name == 'auto_acl'
+        or self.builder_config.name == 'auto_full_no_split'
+        or self.builder_config.name == 'auto_full_with_split'
+    ):
       features = tfds.features.FeaturesDict({
           'normal_sentence': tfds.features.Text(),
           'simple_sentence': tfds.features.Text(),
       })
     else:
       features = tfds.features.FeaturesDict({
-          'example_id':
-              tfds.features.Text(),
+          'example_id': tfds.features.Text(),
           'normal': {
-              'normal_article_id':
-                  np.int32,
-              'normal_article_title':
-                  tfds.features.Text(),
-              'normal_article_url':
-                  tfds.features.Text(),
-              'normal_article_content':
-                  tfds.features.Sequence({
-                      'normal_sentence_id': tfds.features.Text(),
-                      'normal_sentence': tfds.features.Text(),
-                  }),
+              'normal_article_id': np.int32,
+              'normal_article_title': tfds.features.Text(),
+              'normal_article_url': tfds.features.Text(),
+              'normal_article_content': tfds.features.Sequence({
+                  'normal_sentence_id': tfds.features.Text(),
+                  'normal_sentence': tfds.features.Text(),
+              }),
           },
           'simple': {
-              'simple_article_id':
-                  np.int32,
-              'simple_article_title':
-                  tfds.features.Text(),
-              'simple_article_url':
-                  tfds.features.Text(),
-              'simple_article_content':
-                  tfds.features.Sequence({
-                      'simple_sentence_id': tfds.features.Text(),
-                      'simple_sentence': tfds.features.Text(),
-                  }),
-          },
-          'paragraph_alignment':
-              tfds.features.Sequence({
-                  'normal_paragraph_id': tfds.features.Text(),
-                  'simple_paragraph_id': tfds.features.Text(),
-              }),
-          'sentence_alignment':
-              tfds.features.Sequence({
-                  'normal_sentence_id': tfds.features.Text(),
+              'simple_article_id': np.int32,
+              'simple_article_title': tfds.features.Text(),
+              'simple_article_url': tfds.features.Text(),
+              'simple_article_content': tfds.features.Sequence({
                   'simple_sentence_id': tfds.features.Text(),
+                  'simple_sentence': tfds.features.Text(),
               }),
+          },
+          'paragraph_alignment': tfds.features.Sequence({
+              'normal_paragraph_id': tfds.features.Text(),
+              'simple_paragraph_id': tfds.features.Text(),
+          }),
+          'sentence_alignment': tfds.features.Sequence({
+              'normal_sentence_id': tfds.features.Text(),
+              'simple_sentence_id': tfds.features.Text(),
+          }),
       })
     return tfds.core.DatasetInfo(
         builder=self,
@@ -211,8 +197,12 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
 
     if self.builder_config.name == 'manual':
       keys = [
-          'alignment_label', 'simple_sentence_id', 'normal_sentence_id',
-          'simple_sentence', 'normal_sentence', 'GLEU-score'
+          'alignment_label',
+          'simple_sentence_id',
+          'normal_sentence_id',
+          'simple_sentence',
+          'normal_sentence',
+          'GLEU-score',
       ]
 
       with tf.io.gfile.GFile(filepaths[split]) as f:
@@ -223,9 +213,11 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
             dict_[k] = v
           yield id_, dict_
 
-    elif (self.builder_config.name == 'auto_acl' or
-          self.builder_config.name == 'auto_full_no_split' or
-          self.builder_config.name == 'auto_full_with_split'):
+    elif (
+        self.builder_config.name == 'auto_acl'
+        or self.builder_config.name == 'auto_full_no_split'
+        or self.builder_config.name == 'auto_full_with_split'
+    ):
       with tf.io.gfile.GFile(filepaths['normal']) as fi:
         with tf.io.gfile.GFile(filepaths['simple']) as fo:
           for id_, (norm_se, simp_se) in enumerate(zip(fi, fo)):
@@ -244,12 +236,16 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
                 'normal_article_url': example_dict['normal']['url'],
                 'normal_article_content': {
                     'normal_sentence_id': [
-                        sen_id for sen_id, sen_txt in example_dict['normal']
-                        ['content'].items()
+                        sen_id
+                        for sen_id, sen_txt in example_dict['normal'][
+                            'content'
+                        ].items()
                     ],
                     'normal_sentence': [
-                        sen_txt for sen_id, sen_txt in example_dict['normal']
-                        ['content'].items()
+                        sen_txt
+                        for sen_id, sen_txt in example_dict['normal'][
+                            'content'
+                        ].items()
                     ],
                 },
             },
@@ -259,33 +255,45 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
                 'simple_article_url': example_dict['simple']['url'],
                 'simple_article_content': {
                     'simple_sentence_id': [
-                        sen_id for sen_id, sen_txt in example_dict['simple']
-                        ['content'].items()
+                        sen_id
+                        for sen_id, sen_txt in example_dict['simple'][
+                            'content'
+                        ].items()
                     ],
                     'simple_sentence': [
-                        sen_txt for sen_id, sen_txt in example_dict['simple']
-                        ['content'].items()
+                        sen_txt
+                        for sen_id, sen_txt in example_dict['simple'][
+                            'content'
+                        ].items()
                     ],
                 },
             },
             'paragraph_alignment': {
                 'normal_paragraph_id': [
-                    norm_id for simp_id, norm_id in example_dict.get(
-                        'paragraph_alignment', [])
+                    norm_id
+                    for simp_id, norm_id in example_dict.get(
+                        'paragraph_alignment', []
+                    )
                 ],
                 'simple_paragraph_id': [
-                    simp_id for simp_id, norm_id in example_dict.get(
-                        'paragraph_alignment', [])
+                    simp_id
+                    for simp_id, norm_id in example_dict.get(
+                        'paragraph_alignment', []
+                    )
                 ],
             },
             'sentence_alignment': {
                 'normal_sentence_id': [
-                    norm_id for simp_id, norm_id in example_dict.get(
-                        'sentence_alignment', [])
+                    norm_id
+                    for simp_id, norm_id in example_dict.get(
+                        'sentence_alignment', []
+                    )
                 ],
                 'simple_sentence_id': [
-                    simp_id for simp_id, norm_id in example_dict.get(
-                        'sentence_alignment', [])
+                    simp_id
+                    for simp_id, norm_id in example_dict.get(
+                        'sentence_alignment', []
+                    )
                 ],
             },
         }

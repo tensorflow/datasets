@@ -24,18 +24,22 @@ class DatasetMetadataTest(testing.TestCase):
 
   def test_load(self):
     datadir_path = resource_utils.tfds_path(
-        "testing/dummy_config_based_datasets/dummy_ds_1")
+        "testing/dummy_config_based_datasets/dummy_ds_1"
+    )
     metadata = dataset_metadata.load(datadir_path)
     self.assertEqual(
         metadata.description,
-        "Description of `dummy_ds_1` dummy config-based dataset.\n")
+        "Description of `dummy_ds_1` dummy config-based dataset.\n",
+    )
     self.assertEqual(
-        metadata.citation, """@Article{google22tfds,
+        metadata.citation,
+        """@Article{google22tfds,
 author = "The TFDS team",
 title = "TFDS: a collection of ready-to-use datasets for use with TensorFlow, Jax, and other Machine Learning frameworks.",
 journal = "ML gazette",
 year = "2022"
-}""")
+}""",
+    )
     self.assertEqual(metadata.tags, ["content.data-type.image"])
 
   def test_valid_tags(self):

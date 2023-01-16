@@ -28,8 +28,9 @@ from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Struct containing a graph for the TFGraphRunner
-GraphRun = collections.namedtuple('GraphRun',
-                                  'graph, session, placeholder, output')
+GraphRun = collections.namedtuple(
+    'GraphRun', 'graph, session, placeholder, output'
+)
 
 # Struct containing the run args, kwargs
 RunArgs = collections.namedtuple('RunArgs', 'fct, input')
@@ -109,7 +110,8 @@ class TFGraphRunner(object):
       # Create placeholder
       input_ = run_args.input
       placeholder = tf.compat.v1.placeholder(
-          dtype=input_.dtype, shape=input_.shape)
+          dtype=input_.dtype, shape=input_.shape
+      )
       output = run_args.fct(placeholder)
     return GraphRun(
         session=raw_nogpu_session(g),
@@ -137,12 +139,14 @@ def convert_to_shape(shape: Any) -> type_utils.Shape:
   if isinstance(shape, list):
     return tuple(shape)
   raise ValueError(
-      f'Shape of type {type(shape)} with content {shape} is not supported!')
+      f'Shape of type {type(shape)} with content {shape} is not supported!'
+  )
 
 
 @py_utils.memoize(maxsize=1000)
-def assert_shape_match(shape1: type_utils.Shape,
-                       shape2: type_utils.Shape) -> None:
+def assert_shape_match(
+    shape1: type_utils.Shape, shape2: type_utils.Shape
+) -> None:
   """Ensure the shape1 matches the pattern given by shape2.
 
   Ex:
@@ -155,11 +159,14 @@ def assert_shape_match(shape1: type_utils.Shape,
   assert_tf_shape_match(tf.TensorShape(shape1), tf.TensorShape(shape2))
 
 
-def assert_tf_shape_match(shape1: tf.TensorShape,
-                          shape2: tf.TensorShape) -> None:
+def assert_tf_shape_match(
+    shape1: tf.TensorShape, shape2: tf.TensorShape
+) -> None:
   if shape1.ndims is None or shape2.ndims is None:
-    raise ValueError('Shapes must have known rank. Got %s and %s.' %
-                     (shape1.ndims, shape2.ndims))
+    raise ValueError(
+        'Shapes must have known rank. Got %s and %s.'
+        % (shape1.ndims, shape2.ndims)
+    )
   shape1.assert_same_rank(shape2)
   shape1.assert_is_compatible_with(shape2)
 
@@ -182,7 +189,8 @@ def shapes_are_compatible(
 
 
 def normalize_shape(
-    shape: Union[type_utils.Shape, tf.TensorShape]) -> type_utils.Shape:
+    shape: Union[type_utils.Shape, tf.TensorShape]
+) -> type_utils.Shape:
   """Normalize `tf.TensorShape` to tuple of int/None."""
   if isinstance(shape, tf.TensorShape):
     return tuple(shape.as_list())  # pytype: disable=attribute-error
@@ -214,7 +222,8 @@ def merge_shape(tf_shape: tf.Tensor, np_shape: type_utils.Shape):
   """
   assert_tf_shape_match(tf_shape.shape, tf.TensorShape((len(np_shape),)))
   return tuple(
-      tf_shape[i] if dim is None else dim for i, dim in enumerate(np_shape))
+      tf_shape[i] if dim is None else dim for i, dim in enumerate(np_shape)
+  )
 
 
 @contextlib.contextmanager

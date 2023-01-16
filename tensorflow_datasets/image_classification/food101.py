@@ -29,7 +29,8 @@ _DESCRIPTION = (
     " training images. On purpose, the training images were not cleaned, and "
     "thus still contain some amount of noise. This comes mostly in the form of"
     " intense colors and sometimes wrong labels. All images were rescaled to "
-    "have a maximum side length of 512 pixels.")
+    "have a maximum side length of 512 pixels."
+)
 
 _LABELS_FNAME = "image_classification/food-101_classes.txt"
 
@@ -50,7 +51,8 @@ class Food101(tfds.core.GeneratorBasedBuilder):
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
           "1.0.0",
-          tfds_version_to_prepare="8cea22f06d74d5848608fe7ac6d6faac7bc05b55"),
+          tfds_version_to_prepare="8cea22f06d74d5848608fe7ac6d6faac7bc05b55",
+      ),
       tfds.core.Version("2.1.0"),
   ]
 
@@ -70,7 +72,8 @@ class Food101(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=("image", "label"),
         homepage="https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/",
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     """Define Splits."""
@@ -84,14 +87,14 @@ class Food101(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "json_file_path": os.path.join(meta_path, "train.json"),
-                "image_dir_path": image_dir_path
+                "image_dir_path": image_dir_path,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "json_file_path": os.path.join(meta_path, "test.json"),
-                "image_dir_path": image_dir_path
+                "image_dir_path": image_dir_path,
             },
         ),
     ]

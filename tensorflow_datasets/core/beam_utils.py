@@ -78,8 +78,9 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
 
   if not builder.info.splits.total_num_examples:
     raise ValueError(
-        f'No examples found in {builder.name!r} in data dir {builder.data_dir}. '
-        'Was the dataset generated?')
+        f'No examples found in {builder.name!r} in data dir {builder.data_dir}.'
+        ' Was the dataset generated?'
+    )
 
   def load_shard(file_instruction: shard_utils.FileInstruction):  # pylint: disable=invalid-name
     """Loads a single shard."""
@@ -97,34 +98,41 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
     if file_instruction.skip > 0 or not file_instruction.takes_all:
       batch_size = as_dataset_kwargs.get('batch_size')
       if batch_size is not None:
-        raise NotImplementedError(f'ReadFromTFDS supports skip and take (used '
-                                  f'in split={split!r}) only when batch_size='
-                                  f'None. Got batch_size={batch_size!r}.')
+        raise NotImplementedError(
+            'ReadFromTFDS supports skip and take (used '
+            f'in split={split!r}) only when batch_size='
+            f'None. Got batch_size={batch_size!r}.'
+        )
 
     if file_instruction.skip > 0:
       ds = ds.skip(file_instruction.skip)
     if not file_instruction.takes_all:
       ds = ds.take(file_instruction.take)
     inc_counter(
-        name='LoadedFileInstructions', value=1, namespace='ReadFromTFDS')
+        name='LoadedFileInstructions', value=1, namespace='ReadFromTFDS'
+    )
     return ds
 
   file_instructions = builder.info.splits[split].file_instructions
   inc_counter(
       name='FileInstructions',
       value=len(file_instructions),
-      namespace='ReadFromTFDS')
+      namespace='ReadFromTFDS',
+  )
   if workers_per_shard > 1:
     expanded_file_instructions = []
     for file_instruction in file_instructions:
       expanded_file_instructions.extend(
           shard_utils.split_file_instruction(
-              file_instruction=file_instruction, num_splits=workers_per_shard))
+              file_instruction=file_instruction, num_splits=workers_per_shard
+          )
+      )
     file_instructions = expanded_file_instructions
     inc_counter(
         name='ExpandedFileInstructions',
         value=len(file_instructions),
-        namespace='ReadFromTFDS')
+        namespace='ReadFromTFDS',
+    )
   return pipeline | beam.Create(file_instructions) | beam.FlatMap(load_shard)
 
 

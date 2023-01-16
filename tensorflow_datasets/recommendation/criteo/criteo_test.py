@@ -21,10 +21,9 @@ from tensorflow_datasets.recommendation.criteo import criteo
 
 class CriteoTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for criteo dataset."""
+
   DATASET_CLASS = criteo.Criteo
-  SPLITS = {
-      'train': 5  # Number of fake train example
-  }
+  SPLITS = {'train': 5}  # Number of fake train example
 
   # If you are calling `download/download_and_extract` with a dict, like:
   #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})

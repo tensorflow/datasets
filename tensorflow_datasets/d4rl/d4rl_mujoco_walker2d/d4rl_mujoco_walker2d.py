@@ -28,12 +28,13 @@ class D4rlMujocoWalker2d(dataset_builder.D4RLDatasetBuilder):
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '1.1.0': 'Added is_last.',
-      '1.2.0': 'Updated to take into account the next observation.'
+      '1.2.0': 'Updated to take into account the next observation.',
   }
 
   BUILDER_CONFIGS = dataset_builder.MUJOCO_BUILDER_CONFIGS
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(
-        name='walker2d', obs_len=17, action_len=6, qpos_len=9, qvel_len=9)
+        name='walker2d', obs_len=17, action_len=6, qpos_len=9, qvel_len=9
+    )
     super().__init__(ds_config=config, **kwargs)

@@ -100,6 +100,7 @@ class DownloadConfig:
     max_shard_size: optional maximum shard size in bytes. If `None`, 1 GiB is
       used.
   """
+
   extract_dir: Optional[epath.PathLike] = None
   manual_dir: Optional[epath.PathLike] = None
   download_mode: util.GenerateMode = util.GenerateMode.REUSE_DATASET_IF_EXISTS
@@ -120,7 +121,8 @@ class DownloadConfig:
     return shard_utils.ShardConfig(
         num_shards=self.num_shards,
         min_shard_size=self.min_shard_size,
-        max_shard_size=self.max_shard_size)
+        max_shard_size=self.max_shard_size,
+    )
 
   def replace(self, **kwargs: Any) -> DownloadConfig:
     """Returns a copy with updated attributes."""
@@ -222,7 +224,8 @@ class DownloadManager(object):
     if register_checksums:
       if not register_checksums_path:
         raise ValueError(
-            'When register_checksums=True, register_checksums_path should be set.'
+            'When register_checksums=True, register_checksums_path should be'
+            ' set.'
         )
       register_checksums_path = epath.Path(register_checksums_path)
       if not register_checksums_path.exists():
@@ -244,7 +247,9 @@ class DownloadManager(object):
 
     self._download_dir: epath.Path = download_dir
     self._extract_dir: epath.Path = extract_dir
-    self._manual_dir: Optional[epath.Path] = manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
+    self._manual_dir: Optional[epath.Path] = (
+        manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
+    )
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     self._download_dir.mkdir(parents=True, exist_ok=True)
     self._extract_dir.mkdir(parents=True, exist_ok=True)
@@ -283,7 +288,8 @@ class DownloadManager(object):
       # Currently, checksums registration from Beam not supported.
       raise NotImplementedError(
           '`register_checksums` must be disabled in a parallelized '
-          'DownloadManager. Please open a PR if you would like this feature.')
+          'DownloadManager. Please open a PR if you would like this feature.'
+      )
     state = self.__dict__.copy()
     state['_DownloadManager__downloader'] = None
     state['_DownloadManager__extractor'] = None
@@ -294,7 +300,8 @@ class DownloadManager(object):
   def _downloader(self):
     if not self.__downloader:
       self.__downloader = downloader.get_downloader(
-          max_simultaneous_downloads=self._max_simultaneous_downloads)
+          max_simultaneous_downloads=self._max_simultaneous_downloads
+      )
     return self.__downloader
 
   @property
@@ -329,9 +336,8 @@ class DownloadManager(object):
   @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download(
-      self,
-      resource: Union[str,
-                      resource_lib.Resource]) -> promise.Promise[epath.Path]:
+      self, resource: Union[str, resource_lib.Resource]
+  ) -> promise.Promise[epath.Path]:
     """Download resource, returns Promise->path to downloaded file.
 
     This function:
@@ -362,9 +368,13 @@ class DownloadManager(object):
         expected_url_info=expected_url_info,
     )
     url_path = self._get_dl_path(
-        url, sha256=hashlib.sha256(url.encode('utf-8')).hexdigest())
-    checksum_path = self._get_dl_path(
-        url, sha256=expected_url_info.checksum) if expected_url_info else None
+        url, sha256=hashlib.sha256(url.encode('utf-8')).hexdigest()
+    )
+    checksum_path = (
+        self._get_dl_path(url, sha256=expected_url_info.checksum)
+        if expected_url_info
+        else None
+    )
 
     # Get the cached path and url_info (if they exists)
     dl_result = _get_cached_path(
@@ -375,7 +385,8 @@ class DownloadManager(object):
     )
     if dl_result.path and not self._force_download:  # Download was cached
       logging.info(
-          f'Skipping download of {url}: File cached in {dl_result.path}')
+          f'Skipping download of {url}: File cached in {dl_result.path}'
+      )
       # Still update the progression bar to indicate the file was downloaded
       self._downloader.increase_tqdm(dl_result)
       future = promise.Promise.resolve(dl_result)
@@ -387,17 +398,20 @@ class DownloadManager(object):
       download_tmp_dir.mkdir()
       logging.info(f'Downloading {url} into {download_tmp_dir}...')
       future = self._downloader.download(
-          url, download_tmp_dir, verify=self._verify_ssl)
+          url, download_tmp_dir, verify=self._verify_ssl
+      )
 
     # Post-process the result
-    return future.then(lambda dl_result: self._register_or_validate_checksums(  # pylint: disable=g-long-lambda
-        url=url,
-        path=dl_result.path,
-        computed_url_info=dl_result.url_info,
-        expected_url_info=expected_url_info,
-        checksum_path=checksum_path,
-        url_path=url_path,
-    ))
+    return future.then(
+        lambda dl_result: self._register_or_validate_checksums(  # pylint: disable=g-long-lambda
+            url=url,
+            path=dl_result.path,
+            computed_url_info=dl_result.url_info,
+            expected_url_info=expected_url_info,
+            checksum_path=checksum_path,
+            url_path=url_path,
+        )
+    )
 
   def _register_or_validate_checksums(
       self,
@@ -423,7 +437,8 @@ class DownloadManager(object):
       if not computed_url_info:
         raise ValueError(
             f'Cannot register checksums for {url}: no computed chechsum. '
-            '--register_checksums with manually downloaded data not supported.')
+            '--register_checksums with manually downloaded data not supported.'
+        )
       # Note:
       # * We save even if `expected_url_info == computed_url_info` as
       #   `expected_url_info` might have been loaded from another dataset.
@@ -552,8 +567,9 @@ class DownloadManager(object):
     Returns:
       The path to the downloaded files.
     """
-    return kaggle.download_kaggle_data(competition_or_dataset,
-                                       self._download_dir)
+    return kaggle.download_kaggle_data(
+        competition_or_dataset, self._download_dir
+    )
 
   @typing.overload
   def download(self, url_or_urls: Url) -> epath.Path:
@@ -606,8 +622,9 @@ class DownloadManager(object):
     ...
 
   @typing.overload
-  def extract(self, path_or_paths: Dict[str,
-                                        ExtractPath]) -> Dict[str, epath.Path]:
+  def extract(
+      self, path_or_paths: Dict[str, ExtractPath]
+  ) -> Dict[str, epath.Path]:
     ...
 
   @typing.overload
@@ -637,7 +654,8 @@ class DownloadManager(object):
 
   @typing.overload
   def download_and_extract(
-      self, url_or_urls: Dict[str, Url]) -> Dict[str, epath.Path]:
+      self, url_or_urls: Dict[str, Url]
+  ) -> Dict[str, epath.Path]:
     ...
 
   @typing.overload
@@ -677,13 +695,16 @@ class DownloadManager(object):
     if not self._manual_dir:
       raise AssertionError('Manual directory not enabled.')
     if not self._manual_dir_instructions:
-      raise ValueError('To access `dl_manager.manual_dir`, please set '
-                       '`MANUAL_DOWNLOAD_INSTRUCTIONS` in your dataset.')
+      raise ValueError(
+          'To access `dl_manager.manual_dir`, please set '
+          '`MANUAL_DOWNLOAD_INSTRUCTIONS` in your dataset.'
+      )
     if not self._manual_dir.exists() or not list(self._manual_dir.iterdir()):
       raise AssertionError(
           f'Manual directory {self._manual_dir} does not exist or is empty. '
           'Create it and download/extract dataset artifacts in there using '
-          f'instructions:\n{self._manual_dir_instructions}')
+          f'instructions:\n{self._manual_dir_instructions}'
+      )
     return self._manual_dir
 
 
@@ -765,12 +786,17 @@ def _validate_checksums(
       computed_url_info = checksums.compute_url_info(path)
     # Checksums have not been registered
     if not expected_url_info:
-      raise ValueError(f'Missing checksums url: {url}, yet '
-                       '`force_checksums_validation=True`. '
-                       'Did you forget to register checksums?')
+      raise ValueError(
+          f'Missing checksums url: {url}, yet '
+          '`force_checksums_validation=True`. '
+          'Did you forget to register checksums?'
+      )
 
-  if (expected_url_info and computed_url_info and
-      expected_url_info != computed_url_info):
+  if (
+      expected_url_info
+      and computed_url_info
+      and expected_url_info != computed_url_info
+  ):
     msg = (
         f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
         f'* Expected: {expected_url_info}\n'
@@ -797,8 +823,10 @@ def _read_url_info(url_path: epath.PathLike) -> checksums.UrlInfo:
 
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
-  all_promises = tree_utils.map_structure(map_fn,
-                                          all_inputs)  # Apply the function
-  res = tree_utils.map_structure(lambda p: p.get(),
-                                 all_promises)  # Wait promises
+  all_promises = tree_utils.map_structure(
+      map_fn, all_inputs
+  )  # Apply the function
+  res = tree_utils.map_structure(
+      lambda p: p.get(), all_promises
+  )  # Wait promises
   return res

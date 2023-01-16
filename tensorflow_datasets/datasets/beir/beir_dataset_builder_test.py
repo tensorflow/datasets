@@ -21,6 +21,7 @@ from tensorflow_datasets.datasets.beir import beir_dataset_builder
 
 class BeirTest(testing.DatasetBuilderTestCase):
   """Tests for beir dataset."""
+
   DATASET_CLASS = beir_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['msmarco']
   SPLITS = {

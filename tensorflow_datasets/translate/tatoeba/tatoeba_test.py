@@ -21,6 +21,7 @@ from tensorflow_datasets.translate.tatoeba import tatoeba
 
 class TatoebaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for tatoeba dataset."""
+
   DATASET_CLASS = tatoeba.Tatoeba
   BUILDER_CONFIG_NAMES_TO_TEST = ['tatoeba_af']
   SPLITS = {
@@ -29,7 +30,7 @@ class TatoebaTest(tfds.testing.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = {
       'tatoeba_source_data': 'tatoeba.afr-eng.afr',
-      'tatoeba_eng_data': 'tatoeba.afr-eng.eng'
+      'tatoeba_eng_data': 'tatoeba.afr-eng.eng',
   }
 
 

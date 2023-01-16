@@ -38,12 +38,15 @@ to represent steps and episodes.
 """
 
 
-_HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged'
+_HOMEPAGE = (
+    'https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged'
+)
 
 
 def filename(prefix: str, num_shards: int, shard_id: int):
   return os.fspath(
-      tfds.core.Path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}'))
+      tfds.core.Path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}')
+  )
 
 
 def get_files(prefix: str, num_shards: int) -> List[str]:
@@ -52,7 +55,8 @@ def get_files(prefix: str, num_shards: int) -> List[str]:
 
 def float_tensor_feature(size: int) -> tfds.features.Tensor:
   return tfds.features.Tensor(
-      shape=(size,), dtype=np.float32, encoding=tfds.features.Encoding.ZLIB)
+      shape=(size,), dtype=np.float32, encoding=tfds.features.Encoding.ZLIB
+  )
 
 
 class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
@@ -90,16 +94,17 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     # supported as key.
     return str(episode['episode_id'])
 
-  def tf_example_to_step_ds(self,
-                            tf_example: tf.train.Example) -> Dict[str, Any]:
+  def tf_example_to_step_ds(
+      self, tf_example: tf.train.Example
+  ) -> Dict[str, Any]:
     """Create an episode from a TF example."""
     raise NotImplementedError()
 
   def get_splits(self):
     paths = {
-        'file_paths':
-            get_files(
-                prefix=self.get_file_prefix(), num_shards=self.num_shards()),
+        'file_paths': get_files(
+            prefix=self.get_file_prefix(), num_shards=self.num_shards()
+        ),
     }
     return {
         'train': self._generate_examples(paths),
@@ -112,15 +117,18 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     return self.get_splits()
 
   def generate_examples_one_file(
-      self, path) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
+      self, path
+  ) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
     """Yields examples from one file."""
     # Dataset of tf.Examples containing full episodes.
     example_ds = tf.data.TFRecordDataset(
-        filenames=str(path), compression_type='GZIP')
+        filenames=str(path), compression_type='GZIP'
+    )
     # Dataset of episodes, each represented as a dataset of steps.
     episode_ds = example_ds.map(
         self.tf_example_to_step_ds,
-        num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        num_parallel_calls=tf.data.experimental.AUTOTUNE,
+    )
     episode_ds = tfds.as_numpy(episode_ds)
     for e in episode_ds:
       yield self.get_episode_id(e), e
@@ -131,4 +139,5 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     file_paths = paths['file_paths']
 
     return beam.Create(file_paths) | beam.FlatMap(
-        self.generate_examples_one_file)
+        self.generate_examples_one_file
+    )
