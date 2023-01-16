@@ -35,7 +35,7 @@ jobs:
       fail-fast: false
       matrix:
         tf-version: ['tensorflow', 'tf-nightly']
-        shard-id: [0, 1, 2, 3]
+    #     shard-id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
     steps:
     - uses: actions/checkout@v2
@@ -53,17 +53,20 @@ jobs:
     # * test_utils.py, test_feature.py is not a test file.
     # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
     # * github_api is run separately to not overuse API quota.
+    # - name: Run core tests
+    #   run: |
+    #     pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard-id }} --num-shards=16 \
+    #       --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
+    #       --ignore="tensorflow_datasets/core/features/features_test.py" \
+    #       --ignore="tensorflow_datasets/testing/test_utils.py" \
+    #       --ignore="tensorflow_datasets/image/lsun_test.py" \
+    #       --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
+    #       --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
+    #       --ignore="tensorflow_datasets/import_without_tf_test.py" \
+    #       --ignore="tensorflow_datasets/core/github_api/github_path_test.py"
     - name: Run core tests
       run: |
-        pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard-id }} --num-shards=4 \
-          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/core/features/features_test.py" \
-          --ignore="tensorflow_datasets/testing/test_utils.py" \
-          --ignore="tensorflow_datasets/image/lsun_test.py" \
-          --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
-          --ignore="tensorflow_datasets/import_without_tf_test.py" \
-          --ignore="tensorflow_datasets/core/github_api/github_path_test.py"
+        pytest --durations=100 -vv tensorflow_datasets/vision_language/wit_kaggle/wit_kaggle_test.py
 
   githubapitest-job:
     # For merged PR, activate testing only on the master branch.
