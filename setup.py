@@ -73,6 +73,7 @@ REQUIRED_PKGS = [
     'termcolor',
     'toml',
     'tqdm',
+    'wrapt',
     # Standard library backports
     'dataclasses;python_version<"3.7"',
     'typing_extensions;python_version<"3.8"',
