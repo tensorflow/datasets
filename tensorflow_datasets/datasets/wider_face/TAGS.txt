@@ -1,0 +1,4 @@
+content.data-type.image
+content.data-type.text
+content.language.id
+content.monolingual
