@@ -1,0 +1,5 @@
+content.data-type.image
+content.data-type.text
+ml.task.image-classification
+ml.task.object-detection
+ml.task.semantic-segmentation
