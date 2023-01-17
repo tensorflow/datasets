@@ -13,26 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""tatoeba dataset."""
+"""Tests for the bilingual translate TED Talk module."""
 
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.translate.tatoeba import tatoeba
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.ted_hrlr_translate import ted_hrlr_translate_dataset_builder
 
 
-class TatoebaTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for tatoeba dataset."""
-
-  DATASET_CLASS = tatoeba.Tatoeba
-  BUILDER_CONFIG_NAMES_TO_TEST = ['tatoeba_af']
+class TedHrlrTranslateTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = ted_hrlr_translate_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ["az_to_en", "aztr_to_en"]
   SPLITS = {
-      'train': 5,  # Number of fake train example
-  }
-
-  DL_EXTRACT_RESULT = {
-      'tatoeba_source_data': 'tatoeba.afr-eng.afr',
-      'tatoeba_eng_data': 'tatoeba.afr-eng.eng',
+      "train": 4,
+      "validation": 4,
+      "test": 4,
   }
 
 
-if __name__ == '__main__':
-  tfds.testing.test_main()
+if __name__ == "__main__":
+  testing.test_main()

@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for ted_hrlr_translate.
-
-DEPRECATED!
-If you want to use the TedHrlrTranslate dataset builder class, use:
-tfds.builder_cls('ted_hrlr_translate')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-TedHrlrTranslate = lazy_builder_import.LazyBuilderImport('ted_hrlr_translate')
