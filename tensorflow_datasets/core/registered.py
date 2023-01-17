@@ -54,6 +54,9 @@ _ABSTRACT_DATASET_COLLECTION_REGISTRY = {}
 # Keep track of Dict[str (module name), List[DatasetCollectionBuilder]]
 _MODULE_TO_DATASET_COLLECTIONS = collections.defaultdict(list)
 
+# eg for dataset "foo": "tensorflow_datasets.datasets.foo.foo_dataset_builder".
+_BUILDER_MODULE_SUFFIX = '_dataset_builder'
+
 
 class DatasetNotFoundError(ValueError):
   """Exception raised when the dataset cannot be found."""
@@ -169,12 +172,19 @@ class RegisteredDataset(abc.ABC):
     if not cls.__dict__.get('name'):
       if cls.__name__ == 'Builder':
         # Config-based builders should be defined with a class named "Builder".
-        # In such a case, the builder name is extracted from the package name:
-        # 1 package = 1 dataset!.
-        module_path_components = cls.__module__.rsplit('.', 2)
-        if len(module_path_components) != 3:
-          raise AssertionError(f'module path is too short: {cls.__module__}')
-        cls.name = module_path_components[1]
+        # In such a case, the builder name is extracted from the module if it
+        # follows conventions:
+        module_name = cls.__module__.rsplit('.', 1)[-1]
+        if module_name.endswith(_BUILDER_MODULE_SUFFIX):
+          cls.name = module_name[: -len(_BUILDER_MODULE_SUFFIX)]
+        elif '.' in cls.__module__:  # Extract dataset name from package name.
+          cls.name = cls.__module__.rsplit('.', 2)[-2]
+        else:
+          raise AssertionError(
+              'When using `Builder` as class name, the dataset builder name is '
+              'inferred from module name if named "*_dataset_builder" or from '
+              f'package name, but there is no package in "{cls.__module__}".'
+          )
       else:  # Legacy builders.
         cls.name = naming.camelcase_to_snakecase(cls.__name__)
 
@@ -261,7 +271,9 @@ def _get_existing_dataset_packages(
     ]
     if child.name not in exceptions:
       pkg_path = epath.Path(datasets_dir_path) / child.name
-      builder_module = f'{ds_dir_pkg}.{child.name}.{child.name}_dataset_builder'
+      builder_module = (
+          f'{ds_dir_pkg}.{child.name}.{child.name}{_BUILDER_MODULE_SUFFIX}'
+      )
       datasets[child.name] = (pkg_path, builder_module)
   return datasets
 
