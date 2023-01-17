@@ -13,24 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for librispeech dataset module."""
+"""Tests for vctk dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio.userlibri_audio_data import userlibri_audio_data
+from tensorflow_datasets.datasets.vctk import vctk_dataset_builder
 
 
-class UserLibriAudioTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = userlibri_audio_data.UserLibriAudio
+class VctkTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = vctk_dataset_builder.Builder
   SPLITS = {
-      # List number of fake train examples.
-      "test-clean_speaker-121-book-1041": 2,
-      "test-clean_speaker-121-book-1989": 2,
-      "test-other_speaker-3005-book-76": 2,
-      "test-other_speaker-8461-book-6328": 1,
-      "test-other_speaker-8461-book-9189": 1,
+      "train": 1,
   }
-  DL_DOWNLOAD_RESULT = ""
-  SKIP_CHECKSUMS = True
 
 
 if __name__ == "__main__":

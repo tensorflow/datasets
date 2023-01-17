@@ -16,11 +16,11 @@
 """Tests for Visual Domain Decathlon datasets."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import visual_domain_decathlon
+from tensorflow_datasets.datasets.visual_domain_decathlon import visual_domain_decathlon_dataset_builder
 
 
 class VisualDomainDecathlonGenericTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = visual_domain_decathlon.VisualDomainDecathlon
+  DATASET_CLASS = visual_domain_decathlon_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['aircraft']
   SPLITS = {
       'train': 2,
@@ -31,7 +31,7 @@ class VisualDomainDecathlonGenericTest(testing.DatasetBuilderTestCase):
 
 
 class VisualDomainDecathlonImagenetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = visual_domain_decathlon.VisualDomainDecathlon
+  DATASET_CLASS = visual_domain_decathlon_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['imagenet12']
   SPLITS = {
       'train': 3,
