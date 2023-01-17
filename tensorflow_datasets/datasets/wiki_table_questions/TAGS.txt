@@ -1,0 +1,4 @@
+content.data-type.tabular
+content.data-type.text
+content.language.en
+content.monolingual
