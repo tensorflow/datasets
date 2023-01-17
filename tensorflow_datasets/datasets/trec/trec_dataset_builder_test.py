@@ -13,19 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for titanic data loading."""
+"""trec dataset."""
 
-from tensorflow_datasets.structured import titanic
-import tensorflow_datasets.testing as tfds_test
-
-
-class TitanicTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = titanic.Titanic
-
-  SPLITS = {'train': 5}
-
-  DL_EXTRACT_RESULT = 'test.csv'
+from tensorflow_datasets.datasets.trec import trec_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
 
-if __name__ == '__main__':
-  tfds_test.test_main()
+class TrecTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for trec dataset."""
+
+  DATASET_CLASS = trec_dataset_builder.Builder
+  SPLITS = {
+      "train": 3,  # Number of fake train example
+      "test": 1,  # Number of fake test example
+  }
+
+  DL_EXTRACT_RESULT = {
+      "train": "train_5500.label",
+      "test": "TREC_10.label",
+  }
+
+
+if __name__ == "__main__":
+  tfds.testing.test_main()
