@@ -13,20 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for unnatural_instructions dataset."""
-
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.unnatural_instructions import unnatural_instructions
-
-
-class UnnaturalInstructionsTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for unnatural_instructions dataset."""
-
-  DATASET_CLASS = unnatural_instructions.UnnaturalInstructions
-  SPLITS = {
-      'train': 14,  # Number of fake train example
-  }
-
-
-if __name__ == '__main__':
-  tfds.testing.test_main()
