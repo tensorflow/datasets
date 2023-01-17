@@ -13,20 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for unnatural_instructions dataset."""
+"""Tests for UserLibriText dataset builder."""
 
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.unnatural_instructions import unnatural_instructions
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.user_libri_text import user_libri_text_dataset_builder
 
 
-class UnnaturalInstructionsTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for unnatural_instructions dataset."""
-
-  DATASET_CLASS = unnatural_instructions.UnnaturalInstructions
+class UserLibriTextTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = user_libri_text_dataset_builder.Builder
   SPLITS = {
-      'train': 14,  # Number of fake train example
+      # Number of fake train examples per book.
+      "12345": 4,
+      "6789": 3,
   }
+  DL_DOWNLOAD_RESULT = ""
+  SKIP_CHECKSUMS = True
 
 
-if __name__ == '__main__':
-  tfds.testing.test_main()
+if __name__ == "__main__":
+  testing.test_main()
