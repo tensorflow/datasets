@@ -339,6 +339,19 @@ def _get_builder_cls(
     if path is not None:
       logging.info(f'Loading dataset {ds_to_build} from path: {path}')
       # Dynamically load user dataset script
+      # When possible, load from the parent's parent, so module is named
+      # "foo.foo_dataset_builder".
+      try:
+        with tfds.core.utils.add_sys_path(path.parent.parent):
+          builder_cls = tfds.core.community.builder_cls_from_module(
+              f'{path.parent.stem}.{path.stem}'
+          )
+        return builder_cls, {}
+      except ImportError:
+        pass
+      # There might be cases where user imports from a legacy builder module,
+      # in which case the above wouldn't necessarily work, so we fall back to
+      # importing the module directly.
       with tfds.core.utils.add_sys_path(path.parent):
         builder_cls = tfds.core.community.builder_cls_from_module(path.stem)
       return builder_cls, {}
