@@ -17,11 +17,11 @@ import collections
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.video import ucf101
+from tensorflow_datasets.datasets.ucf101 import ucf101_dataset_builder
 
 
 class Ucf101Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ucf101.Ucf101
+  DATASET_CLASS = ucf101_dataset_builder.Builder
 
   SPLITS = {
       'train': 3,
