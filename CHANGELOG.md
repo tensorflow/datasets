@@ -14,12 +14,25 @@ and this project adheres to
 
 ### Deprecated
 
--   Python 3.7 support: this is the last version of TFDS supporting Python 3.7.
-    Future versions will use Python 3.8.
-
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [4.8.2] - 2023-01-17
+
+### Deprecated
+
+-   Python 3.7 support: this is the last version of TFDS supporting Python 3.7.
+    Future versions will use Python 3.8.
+
+### Fixed
+
+-   `tfds new` and `tfds build` better support the new recommended datasets
+    organization, where individual datasets have their own package under
+    `datasets/`, builder class is called `Builder` and is defined within module
+    `${dsname}_dataset_builder.py`.
 
 ### Security
 
