@@ -16,11 +16,11 @@
 """Tests for tydi_qa dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import tydi_qa
+from tensorflow_datasets.datasets.tydi_qa import tydi_qa_dataset_builder
 
 
 class TydiQATest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = tydi_qa.TydiQA
+  DATASET_CLASS = tydi_qa_dataset_builder.Builder
 
   DL_EXTRACT_RESULT = {
       "train": "train-v1.1.json",
@@ -30,16 +30,18 @@ class TydiQATest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT.update(
       {
           f"translate-train-{lang}": f"tydiqa.translate.train.en-{lang}.json"
-          for lang in tydi_qa.LANGUAGES
+          for lang in tydi_qa_dataset_builder.LANGUAGES
       }
   )
 
   SPLITS = {"train": 3, "validation": 2}
-  SPLITS.update({f"validation-{lang}": 1 for lang in tydi_qa.LANGUAGES})
+  SPLITS.update(
+      {f"validation-{lang}": 1 for lang in tydi_qa_dataset_builder.LANGUAGES}
+  )
   SPLITS.update(
       {
           f"translate-train-{lang}": 1
-          for lang in tydi_qa.LANGUAGES
+          for lang in tydi_qa_dataset_builder.LANGUAGES
           if lang != "en"
       }
   )
