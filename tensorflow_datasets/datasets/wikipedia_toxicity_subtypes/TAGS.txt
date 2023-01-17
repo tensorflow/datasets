@@ -1,0 +1,11 @@
+content.data-type.text
+content.language.en
+content.language.es
+content.language.fr
+content.language.it
+content.language.pt
+content.language.ru
+content.language.tr
+content.multilingual
+ml.task.text-classification
+ml.task.text-classification-toxicity-prediction
