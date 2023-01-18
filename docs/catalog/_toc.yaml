@@ -1285,7 +1285,6 @@ toc:
   - path: /datasets/catalog/universal_dependencies
     title: universal_dependencies
   - path: /datasets/catalog/unnatural_instructions
-    status: nightly
     title: unnatural_instructions
   - path: /datasets/catalog/user_libri_text
     title: user_libri_text
