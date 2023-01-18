@@ -102,14 +102,12 @@ class CommonPipelineDummyBeamDataset(DummyBeamDataset):
 
 
 def _gen_example(x):
-  return (
-      x,
-      {
-          'image': (np.ones((16, 16, 1)) * x % 255).astype(np.uint8),
-          'label': x % 2,
-          'id': x,
-      },
-  )
+  example = {
+      'image': (np.ones((16, 16, 1)) * x % 255).astype(np.uint8),
+      'label': x % 2,
+      'id': x,
+  }
+  return x, example
 
 
 def _compute_sum(examples):

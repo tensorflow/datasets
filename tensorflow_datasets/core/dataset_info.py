@@ -962,6 +962,7 @@ class BeamMetadataDict(MetadataDict):
   def __init__(self, *args, **kwargs):
     super(BeamMetadataDict, self).__init__(*args, **kwargs)
     self._tempdir = epath.Path(tempfile.mkdtemp("tfds_beam_metadata"))
+    assert self._tempdir.exists()
 
   def _temp_filepath(self, key) -> epath.Path:
     return self._tempdir / f"{key}.json"

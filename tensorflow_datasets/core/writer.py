@@ -18,12 +18,13 @@
 import dataclasses
 import functools
 import itertools
-import json
 import os
+import typing
 from typing import Any, Iterable, List, Optional, Tuple
 
 from absl import logging
 from etils import epath
+from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import file_adapters
@@ -31,14 +32,18 @@ from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import shuffle
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import type_utils
 
-# TODO(tfds): Should be `TreeDict[FeatureValue]`
-Example = Any
+if typing.TYPE_CHECKING:
+  import apache_beam as beam  # pytype: disable=import-error
 
-_INDEX_PATH_SUFFIX = "_index.json"
+Key = type_utils.Key
+Example = type_utils.Example
+KeyExample = type_utils.KeyExample
+SplitInfo = splits_lib.SplitInfo
 
 
 @dataclasses.dataclass(frozen=True)
@@ -48,17 +53,12 @@ class _ShardSpec:
   Attributes:
     shard_index: Index of the shard.
     path: The path where to write the shard.
-    index_path: The path where to write index of the records in the
-      corresponding shard. NOTE: Value for this attribute is always set, but
-      usage depends on whether `write_examples` returned a list of record
-      positions for each example.
     examples_number: Number of examples in shard.
     file_instructions: Reading instructions.
   """
 
   shard_index: int
   path: str
-  index_path: str
   examples_number: int
   file_instructions: List[shard_utils.FileInstruction]
 
@@ -73,22 +73,6 @@ def _raise_error_for_duplicated_keys(example1, example2, example_specs):
   logging.error("1st example: %s", ex1)
   logging.error("2nd example: %s", ex2)
   raise AssertionError(msg + " See logs above to view the examples.")
-
-
-def _get_index_path(path: str) -> epath.PathLike:
-  """Returns path to the index file of the records stored at the given path.
-
-  E.g: Say the path to a shard of records (of a particular split) are stored at
-  `your/path/to/records/foo.riegeli-00001-of-00005`, it is transformed into
-  `your/path/to/records/foo.riegeli-00001-of-00005_index.json`.
-
-  Args:
-    path: Path to the record file.
-
-  Returns:
-    Path of the index file of a shard of records stored at given path.
-  """
-  return path + _INDEX_PATH_SUFFIX
 
 
 def _get_shard_specs(
@@ -120,12 +104,10 @@ def _get_shard_specs(
     shard_path = filename_template.sharded_filepath(
         shard_index=shard_index, num_shards=num_shards
     )
-    index_path = _get_index_path(os.fspath(shard_path))
     shard_specs.append(
         _ShardSpec(
             shard_index=shard_index,
             path=os.fspath(shard_path),
-            index_path=index_path,
             examples_number=to - from_,
             file_instructions=file_instructions,
         )
@@ -138,6 +120,7 @@ def _get_shard_boundaries(
     num_examples: int,
     number_of_shards: int,
 ) -> List[int]:
+  """Returns the boundaries for the given number of shards and examples."""
   if num_examples == 0:
     raise AssertionError("No examples were yielded.")
   if num_examples < number_of_shards:
@@ -163,30 +146,8 @@ def _write_examples(
   )
 
 
-def _write_index_file(
-    sharded_index_path: epath.PathLike, record_keys: List[Any]
-):
-  """Writes index file for records of a shard at given `sharded_index_path`.
-
-  NOTE: Each record position (i.e shard_key in shard_keys) is stored as a
-  string for better readability of the index files. The reader should parse the
-  position from string using `RecordPosition.from_str()` method.
-
-  Args:
-    sharded_index_path: Path to the sharded index path.
-    record_keys: List of keys/indices of the records in the shard.
-  """
-  # Store string representation of each record position.
-  #
-  # NOTE: This makes the index file more readable. Although the reader should
-  # parse the record position from a string.
-  index_info = {"index": [str(record_key) for record_key in record_keys]}
-  epath.Path(sharded_index_path).write_text(json.dumps(index_info))
-  logging.info("Wrote index file to %s", os.fspath(sharded_index_path))
-
-
-class Writer(object):
-  """Shuffles and writes Examples to sharded TFRecord files.
+class Writer:
+  """Shuffles and writes Examples to sharded files.
 
   The number of shards is computed automatically.
   """
@@ -225,20 +186,20 @@ class Writer(object):
   def write(self, key, example):
     """Writes given Example.
 
-    The given example is not directly written to the tfrecord file, but to a
-    temporary file (or memory). The finalize() method does write the tfrecord
+    The given example is not directly written to the file, but to a
+    temporary file (or memory). The finalize() method does write the final
     files.
 
     Args:
       key (int|bytes): the key associated with the example. Used for shuffling.
-      example: the Example to write to the tfrecord file.
+      example: the Example to write to the file.
     """
     serialized_example = self._serializer.serialize_example(example=example)
     self._shuffler.add(key, serialized_example)
     self._num_examples += 1
 
   def finalize(self):
-    """Effectively writes examples to the tfrecord files."""
+    """Effectively writes examples to the sharded files."""
     filename = self._filename_template.sharded_filepaths_pattern()
     shard_specs = _get_shard_specs(
         self._num_examples,
@@ -280,7 +241,6 @@ class Writer(object):
               f"Length of example `keys` ({len(record_keys)}) does not match "
               f"`shard_spec.examples_number: (`{shard_spec.examples_number})"
           )
-        _write_index_file(shard_spec.index_path, record_keys)
 
     except shuffle.DuplicatedKeysError as err:
       _raise_error_for_duplicated_keys(
@@ -314,14 +274,48 @@ class _ShardInfo:
   size: int
 
 
-class BeamWriter(object):
-  """Shuffles / writes Examples beam collection to sharded TFRecord files.
+class DatasetInfoBeamWriter:
+  """Class to write a DatasetInfo with information about split infos."""
 
-  The given examples are not directly writen to the final tfrecord file, but to
+  def __init__(
+      self,
+      dataset_info: dataset_info_lib.DatasetInfo,
+      filename_template: naming.ShardedFileTemplate,
+  ):
+    self._dataset_info = dataset_info
+    self._filename_template = filename_template
+    self._original_state = dict(
+        dataset_info=dataset_info, filename_template=filename_template
+    )
+
+  def __getstate__(self):
+    return self._original_state
+
+  def __setstate__(self, state):
+    self.__init__(**state)
+
+  def _store_to_data_dir(self, split_infos: List[SplitInfo]):
+    split_dict = splits_lib.SplitDict(split_infos)
+    self._dataset_info.set_splits(split_dict)
+    self._dataset_info.write_to_directory(self._filename_template.data_dir)
+
+  def write_dataset_info(
+      self, split_infos: "beam.PCollection[SplitInfo]"
+  ) -> None:
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    _ = (
+        split_infos
+        | "CollectSplitInfos" >> beam.transforms.combiners.ToList()
+        | "WriteDatasetInfo" >> beam.Map(self._store_to_data_dir)
+    )
+
+
+class BeamWriter:
+  """Shuffles / writes Examples beam collection to sharded files.
+
+  The given examples are not directly writen to the final files, but to
   temporary files.
   """
-
-  _OUTPUT_TAG_BUCKETS_LEN_SIZE = "tag_buckets_len_size"
 
   def __init__(
       self,
@@ -429,12 +423,8 @@ class BeamWriter(object):
       logging.info(
           "Writing %d examples to %s.", len(examples), os.fspath(tmp_path)
       )
-      record_keys = _write_examples(tmp_path, examples, self._file_format)
+      _write_examples(tmp_path, examples, self._file_format)
     self.inc_counter(name="written_shards")
-    # If there are record_keys, create index files.
-    if record_keys:
-      index_path = _get_index_path(os.fspath(shard_path))
-      _write_index_file(index_path, list(record_keys))
     shard_size = sum(map(len, examples))
     return _ShardInfo(id=shard_id, num_examples=len(examples), size=shard_size)
 
@@ -462,18 +452,21 @@ class BeamWriter(object):
     )
     return (shard_number, key_serialized_example)
 
-  def _store_split_info(
+  def _calculate_split_info(
       self,
       shard_infos: List[_ShardInfo],
       total_size: int,
-  ) -> None:
+      split_name: str,
+  ) -> SplitInfo:
     """Stores the split info to disk."""
     shard_infos = sorted(shard_infos, key=lambda x: x.id)
     shard_lengths = [info.num_examples for info in shard_infos]
-    with utils.incomplete_file(epath.Path(self._split_info_path)) as tmp_path:
-      tmp_path.write_text(
-          json.dumps({"total_size": total_size, "shard_lengths": shard_lengths})
-      )
+    return SplitInfo(
+        name=split_name,
+        num_bytes=total_size,
+        shard_lengths=shard_lengths,
+        filename_template=self._filename_template,
+    )
 
   def _sort_shard_ids(
       self, shard_ids: List[int], ideal_num_shards: int
@@ -487,8 +480,12 @@ class BeamWriter(object):
       )
     return sorted(shard_ids)
 
-  def write_from_pcollection(self, examples_pcollection):
-    """Returns PTransform to write (key, example) PCollection to tfrecords."""
+  def write_from_pcollection(
+      self,
+      examples_pcollection: "beam.PCollection[KeyExample]",
+      split_name: str,
+  ) -> "beam.PCollection[SplitInfo]":
+    """Returns PTransform to write (key, example) PCollection to disk."""
     beam = lazy_imports_lib.lazy_imports.apache_beam
     serialized_examples = (
         examples_pcollection
@@ -550,13 +547,9 @@ class BeamWriter(object):
         | "CollectShardInfo" >> beam.transforms.combiners.ToList()
         # [_ShardInfo]
         | "CalculateSplitInfo"
-        >> beam.ParDo(self._store_split_info, total_size=total_size)
+        >> beam.Map(
+            self._calculate_split_info,
+            total_size=total_size,
+            split_name=split_name,
+        )
     )
-
-  def finalize(self):
-    """Deletes tmp directory and returns shard_lengths and total_size."""
-    if self._split_info is None:
-      split_info_path = epath.Path(self._split_info_path)
-      self._split_info = json.loads(split_info_path.read_bytes())
-      split_info_path.unlink()
-    return self._split_info["shard_lengths"], self._split_info["total_size"]

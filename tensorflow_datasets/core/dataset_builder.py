@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import abc
+import collections.abc
 import dataclasses
 import functools
 import inspect
@@ -650,7 +651,7 @@ class DatasetBuilder(registered.RegisteredDataset):
           # when reading from package data.
           self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
-          self.info.write_to_directory(self._data_dir)
+          # self.info.write_to_directory(self._data_dir)
       # The generated DatasetInfo contains references to `tmp_data_dir`
       self.info.update_data_dir(self._data_dir)
 
@@ -1418,6 +1419,10 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       download_config: download.DownloadConfig,
   ) -> None:
     """Generate all splits and returns the computed split infos."""
+    # Writer fails if no examples are yielded, so we return here.
+    if download_config.max_examples_per_split == 0:
+      return
+
     split_builder = split_builder_lib.SplitBuilder(
         split_dict=self.info.splits,
         features=self.info.features,
@@ -1428,6 +1433,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         file_format=self.info.file_format,
         shard_config=download_config.get_shard_config(),
     )
+
     # Wrap the generation inside a context manager.
     # If `beam` is used during generation (when a pipeline gets created),
     # the context manager is equivalent to `with beam.Pipeline()`.
@@ -1462,46 +1468,36 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       # Ensure `all` isn't used as key.
       _check_split_names(split_generators.keys())
 
-      # Writer fail if the number of example yield is `0`, so we return here.
-      if download_config.max_examples_per_split == 0:
-        return
-
-      # Start generating data for all splits
-      path_suffix = file_adapters.ADAPTER_FOR_FORMAT[
+      filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[
           self.info.file_format
       ].FILE_SUFFIX
+      filename_template = naming.ShardedFileTemplate(
+          dataset_name=self.name,
+          data_dir=self.data_path,
+          filetype_suffix=filetype_suffix,
+      )
 
-      split_info_futures = []
-      for split_name, generator in utils.tqdm(
-          split_generators.items(),
-          desc="Generating splits...",
-          unit=" splits",
-          leave=False,
+      if all(
+          isinstance(generator, collections.abc.Iterable)
+          for generator in split_generators.values()
       ):
-        filename_template = naming.ShardedFileTemplate(
-            split=split_name,
-            dataset_name=self.name,
-            data_dir=self.data_path,
-            filetype_suffix=path_suffix,
-        )
-        future = split_builder.submit_split_generation(
-            split_name=split_name,
-            generator=generator,
+        split_builder.generate_splits_from_iterables(
+            generator_per_split=split_generators,
             filename_template=filename_template,
             disable_shuffling=self.info.disable_shuffling,
+            dataset_info=self.info,
         )
-        split_info_futures.append(future)
+      else:
+        split_builder.generate_splits_beam(
+            generator_per_split=split_generators,
+            filename_template=filename_template,
+            disable_shuffling=self.info.disable_shuffling,
+            dataset_info=self.info,
+        )
 
     # Process the result of the beam pipeline.
-    if maybe_pipeline_proxy._beam_pipeline:  # pylint:disable=protected-access
+    if maybe_pipeline_proxy.uses_beam:
       self._process_pipeline_result(pipeline_result=maybe_pipeline_proxy.result)
-
-    # Finalize the splits (after apache beam completed, if it was used)
-    split_infos = [future.result() for future in split_info_futures]
-
-    # Update the info object with the splits.
-    split_dict = splits_lib.SplitDict(split_infos)
-    self.info.set_splits(split_dict)
 
 
 @utils.docs.deprecated

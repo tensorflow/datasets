@@ -61,6 +61,8 @@ Json = Dict[str, JsonValue]
 # Types for the tfrecord example construction.
 
 Key = Union[int, str, bytes]
+Example = Dict[str, Any]
+KeyExample = Tuple[Key, Example]
 KeySerializedExample = Tuple[Key, bytes]  # `(key, serialized_proto)`
 
 
