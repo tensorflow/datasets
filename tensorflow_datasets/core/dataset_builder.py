@@ -485,7 +485,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   def download_and_prepare(
       self,
       *,
-      download_dir: Optional[str] = None,
+      download_dir: Optional[Union[str, epath.Path]] = None,
       download_config: Optional[download.DownloadConfig] = None,
       file_format: Union[None, str, file_adapters.FileFormat] = None,
   ) -> None:
