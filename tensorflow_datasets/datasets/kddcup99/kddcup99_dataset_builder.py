@@ -245,5 +245,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           row['root_shell'] = bool_utils.parse_bool(row['root_shell'])
           row['is_hot_login'] = bool_utils.parse_bool(row['is_hot_login'])
           row['is_guest_login'] = bool_utils.parse_bool(row['is_guest_login'])
-          row['label'] = row['label'].rstrip('.')
+          row['label'] = row['label'].rstrip('.')  # pytype: disable=attribute-error
           yield index, row
