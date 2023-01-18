@@ -375,14 +375,14 @@ class DatasetCollectionLoader:
 
   def load_datasets(
       self,
-      datasets: List[str],
+      datasets: Iterable[str],
       split: Optional[Tree[splits_lib.SplitArg]] = None,
       loader_kwargs: Optional[Dict[str, Any]] = None,
   ) -> Mapping[str, Mapping[str, tf.data.Dataset]]:
     """Loads a number of datasets from the dataset collection.
 
     Args:
-      datasets: list of dataset names to load.
+      datasets: dataset names to load.
       split: which split(s) of the datasets to load.
       loader_kwargs: keyword arguments to be passed to the `tfds.load` function.
         Refer to `tfds.load` documentation for a comperehensive overview of the
