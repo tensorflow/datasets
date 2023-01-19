@@ -101,4 +101,6 @@ def _read_files(path: epath.Path) -> Dict[Text, Text]:
   for inode in path.iterdir():
     if inode.name in _METADATA_FILES:
       name2path[inode.name] = path.joinpath(inode.name)
-  return utils.tree.parallel_map(lambda f: f.read_text("utf-8"), name2path)
+  return utils.tree.parallel_map(
+      lambda f: f.read_text(encoding="utf-8"), name2path
+  )
