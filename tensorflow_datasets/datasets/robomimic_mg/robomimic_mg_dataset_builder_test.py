@@ -13,20 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""robomimic_ph dataset."""
+"""Tests for robomimic_mg dataset."""
 
-from tensorflow_datasets.datasets.robomimic_ph import robomimic_ph_dataset_builder
+from tensorflow_datasets.datasets.robomimic_mg import robomimic_mg_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
-class RobomimicPhTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for robomimic_ph dataset."""
+class RobomimicMgTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for robomimic_mg dataset."""
 
-  DATASET_CLASS = robomimic_ph_dataset_builder.Builder
+  DATASET_CLASS = robomimic_mg_dataset_builder.Builder
   SPLITS = {'train': 2}
   SKIP_TF1_GRAPH_MODE = True
 
-  DL_EXTRACT_RESULT = {'file_path': 'lift_low_dim.hdf5'}
-  DL_DOWNLOAD_RESULT = {'file_path': 'lift_low_dim.hdf5'}
+  DL_EXTRACT_RESULT = {'file_path': 'can_low_dim.hdf5'}
+  DL_DOWNLOAD_RESULT = {'file_path': 'mg/can_low_dim.hdf5'}
 
-  BUILDER_CONFIG_NAMES_TO_TEST = ['lift_ph_low_dim']
+  BUILDER_CONFIG_NAMES_TO_TEST = ['can_mg_low_dim']
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()
