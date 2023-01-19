@@ -110,8 +110,8 @@ were created from 2015 - 2017 and appeared on approximately 50 English-language
 news sites across the world. When Civil Comments shut down in 2017, they chose
 to make the public comments available in a lasting open archive to enable future
 research. The original data, published on figshare, includes the public comment
-text, some associated metadata such as article IDs, timestamps and
-commenter-generated "civility" labels, but does not include user ids. Jigsaw
+text, some associated metadata such as article IDs, publication IDs, timestamps
+and commenter-generated "civility" labels, but does not include user ids. Jigsaw
 extended this dataset by adding additional labels for toxicity, identity
 mentions, as well as covert offensiveness. This data set is an exact replica of
 the data released for the Jigsaw Unintended Bias in Toxicity Classification
@@ -236,6 +236,8 @@ def _parse_common(row):
   example['id'] = row['id']
   example['text'] = row['comment_text']
   example['parent_text'] = row['parent_text']
+  example['publication_id'] = row['publication_id']
+  example['created_date'] = row['created_date']
   parent_id = row['parent_id'] or 0
   example['parent_id'] = int(float(parent_id))
   example['article_id'] = int(row['article_id'])
@@ -311,8 +313,9 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
       ),
   ]
 
-  VERSION = tfds.core.Version('1.2.3')
+  VERSION = tfds.core.Version('1.2.4')
   RELEASE_NOTES = {
+      '1.2.4': 'Add publication IDs and comment timestamps.',
       '1.2.3': 'Add warning to CivilCommentsCovert as we fix a data issue.',
       '1.2.2': 'Update to reflect context only having a train split.',
       '1.2.1': 'Fix incorrect formatting in context splits.',
@@ -340,6 +343,8 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
         'parent_text': tfds.features.Text(),
         'parent_id': np.int32,
         'article_id': np.int32,
+        'publication_id': np.str_,
+        'created_date': np.str_,
     }
     if mode == 'spans':
       features['spans'] = tfds.features.Tensor(shape=(None,), dtype=np.int32)
