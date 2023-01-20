@@ -435,11 +435,6 @@ cityscapes/semantic_segmentation/1.0.0
 cityscapes/semantic_segmentation_extra/1.0.0
 cityscapes/stereo_disparity/1.0.0
 cityscapes/stereo_disparity_extra/1.0.0
-civil_comments/CivilComments/1.2.3
-civil_comments/CivilCommentsCovert/1.2.3
-civil_comments/CivilCommentsIdentities/1.2.3
-civil_comments/CivilCommentsInContext/1.2.3
-civil_comments/CivilCommentsToxicSpans/1.2.3
 clevr/3.0.0
 clevr/3.1.0
 clic/1.0.0
