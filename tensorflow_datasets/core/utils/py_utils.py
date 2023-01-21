@@ -321,14 +321,13 @@ def _get_incomplete_path(filename):
 def incomplete_dir(dirname: epath.PathLike) -> Iterator[str]:
   """Create temporary dir for dirname and rename on exit."""
   dirname = os.fspath(dirname)
-  tmp_dir = _get_incomplete_path(dirname)
-  tf.io.gfile.makedirs(tmp_dir)
+  tmp_dir = epath.Path(_get_incomplete_path(dirname))
+  tmp_dir.mkdir(parents=True)
   try:
-    yield tmp_dir
-    tf.io.gfile.rename(tmp_dir, dirname)
+    yield os.fspath(tmp_dir)
+    tmp_dir.rename(dirname)
   finally:
-    if tf.io.gfile.exists(tmp_dir):
-      tf.io.gfile.rmtree(tmp_dir)
+    tmp_dir.unlink(missing_ok=True)
 
 
 @contextlib.contextmanager

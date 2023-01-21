@@ -248,11 +248,9 @@ class DownloadManager(object):
     self._download_dir: epath.Path = download_dir
     self._extract_dir: epath.Path = extract_dir
     self._manual_dir: Optional[epath.Path] = (
-        manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
+        epath.Path(manual_dir) if manual_dir else None
     )
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
-    self._download_dir.mkdir(parents=True, exist_ok=True)
-    self._extract_dir.mkdir(parents=True, exist_ok=True)
 
     self._force_download = force_download
     self._force_extraction = force_extraction
@@ -297,6 +295,14 @@ class DownloadManager(object):
     return state
 
   @property
+  def download_dir(self) -> epath.Path:
+    return self._download_dir
+
+  @property
+  def extract_dir(self) -> epath.Path:
+    return self._extract_dir
+
+  @property
   def _downloader(self):
     if not self.__downloader:
       self.__downloader = downloader.get_downloader(
@@ -316,7 +322,7 @@ class DownloadManager(object):
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
   def _get_dl_path(self, url: str, sha256: str) -> epath.Path:
-    return self._download_dir / resource_lib.get_dl_fname(url, sha256)
+    return self.download_dir / resource_lib.get_dl_fname(url, sha256)
 
   @property
   def register_checksums(self):
@@ -394,8 +400,8 @@ class DownloadManager(object):
       # Download in an empty tmp directory (to avoid name collisions)
       # `download_tmp_dir` is cleaned-up in `_rename_and_get_final_dl_path`
       dirname = f'{resource_lib.get_dl_dirname(url)}.tmp.{uuid.uuid4().hex}'
-      download_tmp_dir = self._download_dir / dirname
-      download_tmp_dir.mkdir()
+      download_tmp_dir = self.download_dir / dirname
+      download_tmp_dir.mkdir(parents=True)
       logging.info(f'Downloading {url} into {download_tmp_dir}...')
       future = self._downloader.download(
           url, download_tmp_dir, verify=self._verify_ssl
@@ -530,7 +536,7 @@ class DownloadManager(object):
       logging.info('Skipping extraction for %s (method=NO_EXTRACT).', path)
       return promise.Promise.resolve(path)
     method_name = resource_lib.ExtractMethod(extract_method).name
-    extract_path = self._extract_dir / f'{method_name}.{path.name}'
+    extract_path = self.extract_dir / f'{method_name}.{path.name}'
     if not self._force_extraction and extract_path.exists():
       logging.info('Reusing extraction of %s at %s.', path, extract_path)
       return promise.Promise.resolve(extract_path)
@@ -568,7 +574,7 @@ class DownloadManager(object):
       The path to the downloaded files.
     """
     return kaggle.download_kaggle_data(
-        competition_or_dataset, self._download_dir
+        competition_or_dataset, self.download_dir
     )
 
   @typing.overload
@@ -684,10 +690,6 @@ class DownloadManager(object):
     with self._downloader.tqdm():
       with self._extractor.tqdm():
         return _map_promise(self._download_extract, url_or_urls)
-
-  @property
-  def download_dir(self) -> epath.Path:
-    return self._download_dir
 
   @utils.memoized_property
   def manual_dir(self) -> epath.Path:
