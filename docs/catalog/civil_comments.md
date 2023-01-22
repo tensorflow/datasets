@@ -73,18 +73,7 @@ when making the labels.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Add publication IDs and comment timestamps.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+*   **Download size**: `427.41 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -100,6 +89,20 @@ Split | Examples
 *   **Config description**: The CivilComments set here includes all the data,
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
     insult, identity_attack, and sexual_explicit).
+
+*   **Dataset size**: `1.54 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 97,320
+`'train'`      | 1,804,874
+`'validation'` | 97,320
 
 *   **Feature structure**:
 
@@ -175,6 +178,20 @@ toxicity        | Tensor       |       | float32 |
     extended set of identity labels in addition to the basic seven labels.
     However, it only includes the subset (roughly a quarter) of the data with
     all these features.
+
+*   **Dataset size**: `654.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 21,577
+`'train'`      | 405,130
+`'validation'` | 21,293
 
 *   **Feature structure**:
 
@@ -305,6 +322,19 @@ comments as one of explicitly, implicitly, not, or not sure if offensive, as
 well as whether it contained different types of covert offensiveness. The full
 annotation procedure is detailed in a forthcoming paper at
 https://sites.google.com/corp/view/hciandnlp/accepted-papers.
+
+*   **Dataset size**: `97.83 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,455
+`'train'` | 48,074
 
 *   **Feature structure**:
 
@@ -448,6 +478,20 @@ white                               | Tensor       |       | float32 |
     character (unicode codepoints) boundaries that were tagged as toxic by a
     majority of the annotators is returned in a 'spans' feature.
 
+*   **Dataset size**: `5.81 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,000
+`'train'`      | 7,939
+`'validation'` | 682
+
 *   **Feature structure**:
 
 ```python
@@ -503,6 +547,18 @@ text           | Text         |         | string |
 *   **Config description**: The CivilComments in Context is a subset of
     CivilComments that was labeled by making available to the labelers the
     parent_text. It includes a contextual_toxicity feature.
+
+*   **Dataset size**: `9.63 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,969
 
 *   **Feature structure**:
 
