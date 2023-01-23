@@ -12,11 +12,6 @@ c4/webtextlike/2.2.0
 c4/webtextlike/2.2.1
 c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
-civil_comments/CivilComments/1.2.4
-civil_comments/CivilCommentsCovert/1.2.4
-civil_comments/CivilCommentsIdentities/1.2.4
-civil_comments/CivilCommentsInContext/1.2.4
-civil_comments/CivilCommentsToxicSpans/1.2.4
 covid19sum/1.0.0
 glue/ax/1.0.1
 glue/cola/1.0.1
