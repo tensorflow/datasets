@@ -50,22 +50,27 @@ jobs:
     #   is linked to static libraries compiled again specific TF version, which
     #   makes test fails with linking error (libtensorflow_io_golang.so).
     # * imagenet2012_corrupted requires imagemagick binary.
-    # * test_utils.py, test_feature.py is not a test file.
+    # * test_utils.py, features_test.py is not a test file.
     # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
     # * github_api is run separately to not overuse API quota.
     - name: Run core tests
-      run: |
-        pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard-id }} --num-shards=4 \
-          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/core/features/features_test.py" \
-          --ignore="tensorflow_datasets/testing/test_utils.py" \
-          --ignore="tensorflow_datasets/image/lsun_test.py" \
-          --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
-          --ignore="tensorflow_datasets/import_without_tf_test.py" \
-          --ignore="tensorflow_datasets/core/github_api/github_path_test.py"
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 5
+        max_attempts: 2
+        retry_on: timeout
+        command: |
+          pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard-id }} --num-shards=4 -o faulthandler_timeout=30 \
+            --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
+            --ignore="tensorflow_datasets/core/features/features_test.py" \
+            --ignore="tensorflow_datasets/testing/test_utils.py" \
+            --ignore="tensorflow_datasets/image/lsun_test.py" \
+            --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
+            --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
+            --ignore="tensorflow_datasets/import_without_tf_test.py" \
+            --ignore="tensorflow_datasets/core/github_api/github_path_test.py"
 
-  githubapitest-job:
+  githubapi-pytest-job:
     # For merged PR, activate testing only on the master branch.
     if: |
       github.ref == 'refs/heads/master'
@@ -78,7 +83,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ./.github/actions/setup
       with:
         tf-version: tensorflow
@@ -88,7 +93,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  notebooktest-job:
+  notebook-test-job:
     # For merged PR, activate testing only on the master branch.
     if: |
       github.ref == 'refs/heads/master'
@@ -101,7 +106,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ./.github/actions/setup
       with:
         tf-version: tf-nightly
