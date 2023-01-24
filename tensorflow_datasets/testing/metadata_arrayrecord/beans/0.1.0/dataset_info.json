@@ -1,0 +1,53 @@
+{
+  "citation": "@ONLINE {beansdata,\n    author=\"Makerere AI Lab\",\n    title=\"Bean disease dataset\",\n    month=\"January\",\n    year=\"2020\",\n    url=\"https://github.com/AI-Lab-Makerere/ibean/\"\n}",
+  "description": "Beans is a dataset of images of beans taken in the field using smartphone\ncameras. It consists of 3 classes: 2 disease classes and the healthy class.\nDiseases depicted include Angular Leaf Spot and Bean Rust. Data was annotated\nby experts from the National Crops Resources Research Institute (NaCRRI) in\nUganda and collected by the Makerere AI research lab.",
+  "downloadSize": "180024906",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/AI-Lab-Makerere/ibean/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.beans",
+  "name": "beans",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "143765500",
+      "shardLengths": [
+        "517",
+        "517"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "18496392",
+      "shardLengths": [
+        "133"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "17702522",
+      "shardLengths": [
+        "128"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "0.1.0"
+}

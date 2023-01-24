@@ -1,0 +1,40 @@
+{
+  "citation": "@article{kather2016multi,\n  title={Multi-class texture analysis in colorectal cancer histology},\n  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{\"o}llner, Frank Gerrit},\n  journal={Scientific reports},\n  volume={6},\n  pages={27988},\n  year={2016},\n  publisher={Nature Publishing Group}\n}",
+  "description": "Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes.",
+  "downloadSize": "258098431",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://zenodo.org/record/53169#.XGZemKwzbmG"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.colorectal_histology",
+  "name": "colorectal_histology",
+  "releaseNotes": {
+    "2.0.0": "New split API (https://tensorflow.org/datasets/splits)"
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "187937237",
+      "shardLengths": [
+        "2500",
+        "2500"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,42 @@
+{
+  "citation": "@inproceedings{Nie2019AdversarialNA,\n    title = \"Adversarial NLI: A New Benchmark for Natural Language Understanding\",\n    author = \"Nie, Yixin and\n      Williams, Adina and\n      Dinan, Emily  and\n      Bansal, Mohit and\n      Weston, Jason and\n      Kiela, Douwe\",\n      year=\"2019\",\n    url =\"https://arxiv.org/abs/1910.14599\"\n}",
+  "configDescription": "Round Two",
+  "configName": "r2",
+  "description": "Adversarial NLI (ANLI) is a large-scale NLI benchmark dataset, collected via an\niterative, adversarial human-and-model-in-the-loop procedure.",
+  "downloadSize": "18621352",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/facebookresearch/anli"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.anli",
+  "name": "anli",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "498400",
+      "shardLengths": [
+        "1000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "494754",
+      "shardLengths": [
+        "1000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "22482436",
+      "shardLengths": [
+        "45460"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

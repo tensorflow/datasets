@@ -1,0 +1,53 @@
+{
+  "citation": "@inproceedings{Keysers2020,\n  title={Measuring Compositional Generalization: A Comprehensive Method on\n         Realistic Data},\n  author={Daniel Keysers and Nathanael Sch\"{a}rli and Nathan Scales and\n          Hylke Buisman and Daniel Furrer and Sergii Kashubin and\n          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and\n          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and\n          Olivier Bousquet},\n  booktitle={ICLR},\n  year={2020},\n  url={https://arxiv.org/abs/1912.09713.pdf},\n}",
+  "configName": "cd0_r2",
+  "description": "The CFQ dataset (and it's splits) for measuring compositional generalization.\n\nSee https://arxiv.org/abs/1912.09713.pdf for background.\n\nA note about the validation set: Since it has the same distribution as the test\nset and we are interested in measuring the compositional generalization of a\n*model* with respect to an *unknown* test distribution we suggest that any\ntuning should be done on a subset of the train set only (see section 5.1 of the\npaper).\n\nExample usage:\n\n```\ndata = tfds.load('cfq/mcd1')\n```",
+  "downloadSize": "267599061",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/google-research/tree/master/cfq"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.cfq",
+  "name": "cfq",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "41474610",
+      "shardLengths": [
+        "95743"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "5184308",
+      "shardLengths": [
+        "11968"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "5189055",
+      "shardLengths": [
+        "11968"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "question"
+        },
+        {
+          "featureKey": "query"
+        }
+      ]
+    }
+  },
+  "version": "1.2.0"
+}

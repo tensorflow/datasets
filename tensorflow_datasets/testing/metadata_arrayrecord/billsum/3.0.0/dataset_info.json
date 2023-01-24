@@ -1,0 +1,53 @@
+{
+  "citation": "@misc{kornilova2019billsum,\n    title={BillSum: A Corpus for Automatic Summarization of US Legislation},\n    author={Anastassia Kornilova and Vlad Eidelman},\n    year={2019},\n    eprint={1910.00523},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "description": "BillSum, summarization of US Congressional and California state bills.\n\nThere are several features:\n  - text: bill text.\n  - summary: summary of the bills.\n  - title: title of the bills.\nfeatures for us bills. ca bills does not have.\n  - text_len: number of chars in text.\n  - sum_len: number of chars in summary.",
+  "downloadSize": "67260676",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/FiscalNote/BillSum"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.summarization.billsum",
+  "name": "billsum",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "220490695",
+      "shardLengths": [
+        "9474",
+        "9475"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "38020572",
+      "shardLengths": [
+        "3269"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "ca_test",
+      "numBytes": "15004110",
+      "shardLengths": [
+        "1237"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "text"
+        },
+        {
+          "featureKey": "summary"
+        }
+      ]
+    }
+  },
+  "version": "3.0.0"
+}

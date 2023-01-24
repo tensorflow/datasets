@@ -1,0 +1,26 @@
+{
+  "citation": "@article{warstadt2019blimp,\n  title={BLiMP: A Benchmark of Linguistic Minimal Pairs for English},\n  author={Warstadt, Alex and Parrish, Alicia and Liu, Haokun and Mohananey, Anhad and Peng, Wei, and Wang, Sheng-Fu and Bowman, Samuel R},\n  journal={arXiv preprint arXiv:1912.00582},\n  year={2019}\n}",
+  "configDescription": "This configuration includes the paradigm superlative_quantifiers_2.",
+  "configName": "superlative_quantifiers_2",
+  "description": "BLiMP is a challenge set for evaluating what language models (LMs) know about\nmajor grammatical phenomena in English. BLiMP consists of 67 sub-datasets, each\ncontaining 1000 minimal pairs isolating specific contrasts in syntax,\nmorphology, or semantics. The data is automatically generated according to\nexpert-crafted grammars.",
+  "downloadSize": "516120",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/alexwarstadt/blimp/tree/master/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.blimp",
+  "name": "blimp",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "368712",
+      "shardLengths": [
+        "1000"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

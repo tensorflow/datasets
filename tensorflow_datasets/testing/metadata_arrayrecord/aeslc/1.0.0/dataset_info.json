@@ -1,0 +1,52 @@
+{
+  "citation": "@misc{zhang2019email,\n    title={This Email Could Save Your Life: Introducing the Task of Email Subject Line Generation},\n    author={Rui Zhang and Joel Tetreault},\n    year={2019},\n    eprint={1906.03497},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "description": "A collection of email messages of employees in the Enron Corporation.\n\nThere are two features:\n  - email_body: email body text.\n  - subject_line: email subject text.",
+  "downloadSize": "11643743",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/ryanzhumich/AESLC"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.summarization.aeslc",
+  "name": "aeslc",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "12489248",
+      "shardLengths": [
+        "14436"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "1740363",
+      "shardLengths": [
+        "1960"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1461583",
+      "shardLengths": [
+        "1906"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "email_body"
+        },
+        {
+          "featureKey": "subject_line"
+        }
+      ]
+    }
+  },
+  "version": "1.0.0"
+}

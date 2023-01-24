@@ -1,0 +1,44 @@
+{
+  "citation": "@TECHREPORT{Krizhevsky09learningmultiple,\n    author = {Alex Krizhevsky},\n    title = {Learning multiple layers of features from tiny images},\n    institution = {},\n    year = {2009}\n}",
+  "description": "The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.",
+  "downloadSize": "170052171",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://www.cs.toronto.edu/~kriz/cifar.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.cifar",
+  "name": "cifar10",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "115700776",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "23132469",
+      "shardLengths": [
+        "10000"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "3.0.2"
+}
