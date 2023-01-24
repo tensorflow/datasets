@@ -24,16 +24,16 @@ import tempfile
 
 from absl import app
 from absl import flags
-
 import tensorflow.compat.v1 as tf
-
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.datasets.imagenet2012 import imagenet_common
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
 flags.DEFINE_string(
-    'tfds_dir', py_utils.tfds_dir(), 'Path to tensorflow_datasets directory'
+    'tfds_dir',
+    os.fspath(utils.tfds_write_path()),
+    'Path to tensorflow_datasets directory',
 )
 flags.DEFINE_boolean('real', False, 'Generate data for Imagenet2012Real.')
 FLAGS = flags.FLAGS

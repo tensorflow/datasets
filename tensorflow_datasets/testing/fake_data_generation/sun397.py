@@ -26,13 +26,14 @@ import tempfile
 from absl import app
 from absl import flags
 import md5  # pytype: disable=import-error
-
 import numpy as np
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
 flags.DEFINE_string(
-    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
 )
 FLAGS = flags.FLAGS
 

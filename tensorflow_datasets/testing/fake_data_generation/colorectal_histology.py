@@ -21,12 +21,14 @@ from absl import app
 from absl import flags
 import numpy as np
 from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.image_classification import colorectal_histology
 
 flags.DEFINE_string(
-    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
 )
 # --compression=raw may be more portable, but results in massive files (>100mb)
 flags.DEFINE_string(

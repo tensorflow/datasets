@@ -23,8 +23,7 @@ from absl import app
 from absl import flags
 import h5py
 import numpy as np
-
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.testing import test_utils
 
 NUM_IMAGES = 5
@@ -147,7 +146,9 @@ FACTOR_VALUES = [
 OUTPUT_NAME = "dsprites_ndarray_co1sh3sc6or40x32y32_64x64.hdf5"
 
 flags.DEFINE_string(
-    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
 )
 FLAGS = flags.FLAGS
 
