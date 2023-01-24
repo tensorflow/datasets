@@ -24,13 +24,15 @@ import tarfile
 from absl import app
 from absl import flags
 
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import ClassLabel
-from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.object_detection import open_images
 from tensorflow_datasets.testing import fake_data_utils
 
 flags.DEFINE_string(
-    'tfds_dir', py_utils.tfds_dir(), 'Path to tensorflow_datasets directory'
+    'tfds_dir',
+    os.fspath(utils.tfds_write_path()),
+    'Path to tensorflow_datasets directory',
 )
 FLAGS = flags.FLAGS
 
@@ -73,12 +75,12 @@ def _write_image_level_labels(fname, image_ids, machine=False):
   """Writes CSV with 0-10 labels per image."""
   lines = ['ImageID,Source,LabelName,Condidence']
   all_class_label = ClassLabel(
-      names_file=py_utils.tfds_path(
+      names_file=utils.tfds_write_path(
           os.path.join('object_detection', 'open_images_classes_all.txt')
       )
   )
   trainable_class_label = ClassLabel(
-      names_file=py_utils.tfds_path(
+      names_file=utils.tfds_write_path(
           os.path.join('object_detection', 'open_images_classes_trainable.txt')
       )
   )
@@ -108,7 +110,7 @@ def _write_bbox_labels(fname, image_ids):
       'IsTruncated,IsGroupOf,IsDepiction,IsInside'
   ]
   boxable_class_label = ClassLabel(
-      names_file=py_utils.tfds_path(
+      names_file=utils.tfds_write_path(
           os.path.join('object_detection', 'open_images_classes_boxable.txt')
       )
   )

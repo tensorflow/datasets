@@ -22,15 +22,16 @@ import os
 from absl import app
 from absl import flags
 import numpy as np
-
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.testing import test_utils
 
 HEIGHT, WIDTH = (96, 96)
 NUMBER_LABELS = 10
 
 flags.DEFINE_string(
-    "tfds_dir", py_utils.tfds_dir(), "Path to tensorflow_datasets directory"
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
 )
 FLAGS = flags.FLAGS
 

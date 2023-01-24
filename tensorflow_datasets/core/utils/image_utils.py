@@ -82,13 +82,13 @@ def ffmpeg_run(
         f'Command {e.cmd} returned error code {e.returncode}:\n'
         f'stdout={e.stdout.decode("utf-8")}\n'
         f'stderr={e.stderr.decode("utf-8")}\n'
-    )
+    ) from e
   except FileNotFoundError as e:
     raise FileNotFoundError(
         'It seems that ffmpeg is not installed on the system. Please follow '
         'the instrutions at https://ffmpeg.org/. '
         f'Original exception: {e}'
-    )
+    ) from e
 
 
 @py_utils.memoize()

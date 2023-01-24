@@ -21,13 +21,13 @@ import os
 from absl import app
 from absl import flags
 import numpy as np
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import tfds_write_path
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_utils
 
 flags.DEFINE_string(
     name="tfds_dir",
-    default=py_utils.tfds_dir(),
+    default=tfds_write_path(),
     help="Path to tensorflow_datasets directory",
 )
 FLAGS = flags.FLAGS
