@@ -1,0 +1,4 @@
+content.data-type.audio
+content.data-type.text
+content.language.en
+content.monolingual
