@@ -21,13 +21,13 @@ import textwrap
 from typing import Union
 
 from absl import logging
+from etils import epath
 import numpy as np
 from tensorflow_datasets.core.deprecated import text as text_lib
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Json = type_utils.Json
 
@@ -139,7 +139,9 @@ class Text(tensor_feature.Tensor):
 
     # Error checking: ensure there are no metadata files
     feature_files = [
-        f for f in tf.io.gfile.listdir(data_dir) if f.startswith(fname_prefix)
+        f.name
+        for f in epath.Path(data_dir).iterdir()
+        if f.name.startswith(fname_prefix)
     ]
     if feature_files:
       raise ValueError(

@@ -21,6 +21,7 @@ import enum
 from typing import Optional, Union
 import zlib
 
+from etils import enp
 import numpy as np
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -161,7 +162,7 @@ class Tensor(feature_lib.FeatureConnector):
           'converting it to `bool` will always output `True`. Please, fix '
           '`_generate_examples` with a better parsing.'
       )
-    if isinstance(example_data, tf.Tensor):
+    if enp.lazy.has_tf and isinstance(example_data, tf.Tensor):
       raise TypeError(
           f'Error encoding: {example_data!r}. `_generate_examples` should '
           'yield `np.array` compatible values, not `tf.Tensor`'
@@ -175,8 +176,7 @@ class Tensor(feature_lib.FeatureConnector):
       )
 
     shape = example_data.shape
-    if isinstance(shape, tf.TensorShape):
-      shape = tuple(shape.as_list())
+
     utils.assert_shape_match(shape, self._serialized_shape)
 
     # Eventually encode the data

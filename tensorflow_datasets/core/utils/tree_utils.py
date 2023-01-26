@@ -21,7 +21,6 @@ from typing import Callable, TypeVar
 
 from tensorflow_datasets.core.utils import tqdm_utils as tqdm
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tree
 
 Tree = type_utils.Tree
@@ -55,7 +54,7 @@ def parallel_map(
     launch_worker = functools.partial(executor.submit, map_fn)
     futures = map_structure(launch_worker, *trees)
 
-    leaves = tf.nest.flatten(futures)
+    leaves = tree.flatten(futures)
 
     itr = concurrent.futures.as_completed(leaves)
     if report_progress:
