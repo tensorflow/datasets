@@ -22,7 +22,6 @@ from unittest import mock
 
 from absl import flags
 from absl.testing import parameterized
-
 import dill
 from etils import epath
 import numpy as np
@@ -34,6 +33,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
@@ -140,7 +140,7 @@ year = "2022"
     )
 
 
-class DatasetBuilderTest(testing.TestCase):
+class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
@@ -160,7 +160,7 @@ class DatasetBuilderTest(testing.TestCase):
           split=splits_lib.Split.TRAIN,
       )
       data = list(dataset_utils.as_numpy(dataset))
-      self.assertEqual(20, len(data))
+      self.assertLen(data, 20)
       self.assertLess(data[0]["x"], 30)
 
   # Disable test until dependency on Riegeli is fixed.
@@ -249,10 +249,10 @@ class DatasetBuilderTest(testing.TestCase):
     )
 
     data = list(dataset_utils.as_numpy(ds_train))
-    self.assertEqual(20, len(data))
+    self.assertLen(data, 20)
 
     data = list(dataset_utils.as_numpy(ds_test))
-    self.assertEqual(10, len(data))
+    self.assertLen(data, 10)
 
   def test_build_data_dir(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
@@ -334,8 +334,8 @@ class DatasetBuilderTest(testing.TestCase):
             for split in splits_list
         ]
 
-        self.assertEqual(20, len(train_data))
-        self.assertEqual(10, len(test_data))
+        self.assertLen(train_data, 20)
+        self.assertLen(test_data, 10)
         self.assertCountEqual(
             [incr + el for el in range(30)], train_data + test_data
         )

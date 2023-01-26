@@ -30,8 +30,9 @@ T = TypeVar('T')
 TupleOrList = Union[Tuple[T, ...], List[T]]
 ListOrElem = Union[T, List[T]]
 
-TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
+TreeDict = Union[T, Dict[str, 'TreeDict']]
 Tree = Union[T, Any]
+ListOrTreeOrElem = Union[T, TreeDict[T], List[T]]
 
 if typing.TYPE_CHECKING:
   Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]

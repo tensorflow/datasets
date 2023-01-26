@@ -20,6 +20,38 @@ from unittest import mock
 
 from absl import logging
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import features
+from tensorflow_datasets.core import file_adapters
+
+
+class DummyDataset(dataset_builder.GeneratorBasedBuilder):
+  """Test DatasetBuilder."""
+
+  VERSION = tfds.core.Version('1.0.0')
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict(
+            {
+                'text': features.Text(),
+            }
+        ),
+    )
+
+  def _split_generators(self, dl_manager):
+    return {
+        'train': self._generate_examples(),
+        'test': self._generate_examples(),
+    }
+
+  def _generate_examples(self):
+    for i in range(20):
+      yield i, {
+          'text': 'test_text',
+      }
 
 
 def test_import_tfds_without_loading_tf():
@@ -27,8 +59,10 @@ def test_import_tfds_without_loading_tf():
     assert 'tensorflow' not in sys.modules
 
     with tfds.testing.tmp_dir() as data_dir:
-      tfds.testing.DummyMnist(data_dir=data_dir).download_and_prepare()
-      tfds.load('dummy_mnist', split='train', data_dir=data_dir)
+      builder = DummyDataset(data_dir=data_dir)
+      builder.download_and_prepare(
+          file_format=file_adapters.FileFormat.ARRAY_RECORD
+      )
 
     # No warning concerning TensorFlow DTypes was dispatched while loading
     assert not log_first_n.called
