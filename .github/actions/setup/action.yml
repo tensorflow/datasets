@@ -19,7 +19,7 @@ runs:
     # https://stackoverflow.com/questions/74119692/github-actions-setup-python-not-caching-pip-dependencies
     - uses: actions/setup-python@v4
       with:
-        python-version: 3.7
+        python-version: 3.8
 
     # The cache is refreshed everyday to pull updated dependencies.
     - uses: actions/cache@v3

@@ -75,8 +75,6 @@ REQUIRED_PKGS = [
     'tqdm',
     'wrapt',
     # Standard library backports
-    'dataclasses;python_version<"3.7"',
-    'typing_extensions;python_version<"3.8"',
     'importlib_resources;python_version<"3.9"',
 ]
 
@@ -245,7 +243,7 @@ setup(
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
-    python_requires='>=3.7',
+    python_requires='>=3.8',
     extras_require=EXTRAS_REQUIRE,
     classifiers=[
         'Development Status :: 4 - Beta',

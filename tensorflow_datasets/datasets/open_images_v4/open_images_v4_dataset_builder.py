@@ -306,7 +306,7 @@ def _resize_image_if_necessary(image_fobj, target_pixels=None):
 
 
 def _read_csv_line(line: bytes) -> List[str]:
-  # In Python 3.7, using `f.tell()` and csv.reader causes: `OsError: telling
+  # In Python 3.8, using `f.tell()` and csv.reader causes: `OsError: telling
   # position disabled by next() call`. So we read every line separately.
   csv_line = csv.reader([line.decode()])
   return next(csv_line)
