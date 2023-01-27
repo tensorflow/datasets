@@ -498,15 +498,15 @@ class DatasetBuilder(registered.RegisteredDataset):
   def download_and_prepare(
       self,
       *,
-      download_dir: Optional[Union[str, epath.Path]] = None,
+      download_dir: Optional[epath.PathLike] = None,
       download_config: Optional[download.DownloadConfig] = None,
       file_format: Union[None, str, file_adapters.FileFormat] = None,
   ) -> None:
     """Downloads and prepares dataset for reading.
 
     Args:
-      download_dir: `str`, directory where downloaded files are stored. Defaults
-        to "~/tensorflow-datasets/downloads".
+      download_dir: directory where downloaded files are stored. Defaults to
+        "~/tensorflow-datasets/downloads".
       download_config: `tfds.download.DownloadConfig`, further configuration for
         downloading and preparing dataset.
       file_format: optional `str` or `file_adapters.FileFormat`, format of the
