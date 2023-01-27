@@ -78,7 +78,7 @@ from __future__ import annotations
 
 import sys
 import typing
-from typing import Any, Dict, Iterator, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, Mapping, Optional, Union
 
 from absl import logging
 from etils import epath
@@ -104,7 +104,7 @@ if typing.TYPE_CHECKING:
       tf.data.Dataset,
       beam.PTransform,
       beam.PCollection[KeyExample],
-      Iterator[KeyExample],
+      Iterable[KeyExample],
   ]
 else:
   BeamInput = Union[
@@ -114,7 +114,7 @@ else:
       "tf.data.Dataset",
       "beam.PTransform",
       "beam.PCollection[split_builder_lib.KeyExample]",
-      "Iterator[KeyExample]",
+      "Iterable[KeyExample]",
   ]
 
 
@@ -136,6 +136,7 @@ class AdhocBuilder(
       release_notes: Optional[Mapping[str, str]] = None,
       homepage: Optional[str] = None,
       file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
+      disable_shuffling: Optional[bool] = False,
       **kwargs: Any,
   ):
     self.name = name
@@ -153,6 +154,7 @@ class AdhocBuilder(
         description or "Dataset built without a DatasetBuilder class."
     )
     self._homepage = homepage
+    self._disable_shuffling = disable_shuffling
     super().__init__(
         data_dir=data_dir,
         config=config,
@@ -167,6 +169,7 @@ class AdhocBuilder(
         description=self._description,
         features=self._feature_spec,
         homepage=self._homepage,
+        disable_shuffling=self._disable_shuffling,
     )
 
   def _split_generators(
@@ -178,7 +181,7 @@ class AdhocBuilder(
     for split_name, dataset in self._split_datasets.items():
       if isinstance(dataset, tf.data.Dataset):
         split_generators[split_name] = self._generate_examples_tf_data(dataset)
-      elif isinstance(dataset, Iterator):
+      elif isinstance(dataset, Iterable):
         split_generators[split_name] = self._generate_examples_iterator(dataset)
       elif beam and (
           isinstance(dataset, beam.PTransform)
@@ -197,7 +200,7 @@ class AdhocBuilder(
 
   def _generate_examples_iterator(
       self,
-      ds: Iterator[KeyExample],
+      ds: Iterable[KeyExample],
   ) -> split_builder_lib.SplitGenerator:
     yield from ds
 
@@ -219,6 +222,7 @@ def store_as_tfds_dataset(
     homepage: Optional[str] = None,
     file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
     download_config: Optional[download.DownloadConfig] = None,
+    disable_shuffling: Optional[bool] = False,
 ) -> AdhocBuilder:
   """Store a dataset as a TFDS dataset."""
   if not split_datasets:
@@ -240,6 +244,7 @@ def store_as_tfds_dataset(
       release_notes=release_notes,
       homepage=homepage,
       file_format=file_format,
+      disable_shuffling=disable_shuffling,
   )
   builder.download_and_prepare(
       download_config=download_config, file_format=file_format
