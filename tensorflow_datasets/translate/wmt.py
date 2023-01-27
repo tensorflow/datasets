@@ -951,7 +951,10 @@ def read_sentences(path: str) -> List[str]:
 
 
 def glob_str(glob_pattern: str) -> List[str]:
-  return [os.fspath(path) for path in epath.Path().glob(glob_pattern)]
+  # Split glob into parent_dir and target file to handle local and object store paths
+  glob_target = glob_pattern.split('/')[-1]
+  glob_parent = gcs_glob_pattern.split(glob_target)[0]
+  return [os.fspath(path) for path in epath.Path(glob_parent).glob(glob_targett)]
 
 
 def _parse_parallel_sentences(f1, f2):
