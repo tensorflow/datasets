@@ -30,6 +30,7 @@ import os
 import tarfile
 import tempfile
 import zipfile
+import zlib
 
 import absl.app
 import absl.flags
@@ -90,7 +91,7 @@ def rewrite_zip(root_dir, zip_filepath):
         zip_filepath,
         'w',
         compression=zipfile.ZIP_DEFLATED,
-        # TODO(tfds): Python 3.7 Add `compresslevel=zlib.Z_BEST_COMPRESSION,`
+        compresslevel=zlib.Z_BEST_COMPRESSION,
     ) as zip_file:
       for file_dir, _, files in os.walk(temp_dir):
         for file in files:

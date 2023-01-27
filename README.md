@@ -4,6 +4,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 
 [![Unittests](https://github.com/tensorflow/datasets/actions/workflows/pytest.yml/badge.svg)](https://github.com/tensorflow/datasets/actions/workflows/pytest.yml)
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Tutorial](https://img.shields.io/badge/doc-tutorial-blue.svg)](https://www.tensorflow.org/datasets/overview)
 [![API](https://img.shields.io/badge/doc-api-blue.svg)](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 [![Catalog](https://img.shields.io/badge/doc-datasets-blue.svg)](https://www.tensorflow.org/datasets/catalog/overview#all_datasets)

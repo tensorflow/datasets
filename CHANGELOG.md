@@ -14,6 +14,8 @@ and this project adheres to
 
 ### Deprecated
 
+-   Python 3.7 support: this version and future version use Python 3.8.
+
 ### Removed
 
 ### Fixed
