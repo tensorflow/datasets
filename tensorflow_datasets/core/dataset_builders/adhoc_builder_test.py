@@ -14,8 +14,10 @@
 # limitations under the License.
 
 import os
+from typing import Iterable
 
 import apache_beam as beam
+from apache_beam.testing.test_pipeline import TestPipeline
 import numpy as np
 import tensorflow as tf
 
@@ -50,10 +52,12 @@ class TfDataBuilderTest(testing.TestCase):
             'b': tfds.features.Text(),
         }),
         data_dir=data_dir,
+        disable_shuffling=True,
     )
 
     assert builder.data_dir == os.path.join(self.tmp_dir, ds_name, '1.0.0')
     assert set(builder.info.splits.keys()) == {'train', 'test'}
+    assert builder.info.disable_shuffling
 
     actual_train = tfds.load(
         f'{ds_name}:1.0.0', split='train', data_dir=data_dir
@@ -254,6 +258,14 @@ class BeamBuilderTest(testing.TestCase):
       'id_str': tfds.features.Text(),
   })
 
+  def test_pcollection_is_not_iterable(self):
+    with TestPipeline() as pipeline:
+      d = pipeline | beam.Create(range(3))
+      assert isinstance(d, beam.PCollection) or isinstance(
+          d, beam.pvalue.PCollection
+      )
+      assert not isinstance(d, Iterable)
+
   def test_no_config(self):
     builder = adhoc_builder.store_as_tfds_dataset(
         name='adhoc',
@@ -335,6 +347,11 @@ class BeamBuilderTest(testing.TestCase):
     ]
 
 
+def my_iterator(max_i: int, split: str):
+  for i in range(max_i):
+    yield generate_example(i, split)
+
+
 class IteratorBuilderTest(testing.TestCase):
   _DEFAULT_FEATURES = tfds.features.FeaturesDict({
       'id': tfds.features.Scalar(dtype=np.int64),
@@ -342,10 +359,6 @@ class IteratorBuilderTest(testing.TestCase):
   })
 
   def test_no_config(self):
-    def my_iterator(max_i: int, split: str):
-      for i in range(max_i):
-        yield generate_example(i, split)
-
     builder = adhoc_builder.store_as_tfds_dataset(
         name='adhoc',
         version='1.2.3',
@@ -373,4 +386,22 @@ class IteratorBuilderTest(testing.TestCase):
     assert sort_ds_by_id(actual_test) == [
         {'id': 0, 'id_str': b'split=test id=0'},
         {'id': 1, 'id_str': b'split=test id=1'},
+    ]
+
+  def test_list(self):
+    adhoc_builder.store_as_tfds_dataset(
+        name='adhoc',
+        version='1.2.3',
+        data_dir=self.tmp_dir,
+        features=self._DEFAULT_FEATURES,
+        split_datasets={
+            'train': list(my_iterator(max_i=1, split='train')),
+        },
+    )
+
+    actual_train = tfds.load(
+        'adhoc:1.2.3', split='train', data_dir=self.tmp_dir
+    )
+    assert sort_ds_by_id(actual_train) == [
+        {'id': 0, 'id_str': b'split=train id=0'},
     ]
