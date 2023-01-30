@@ -83,6 +83,7 @@ class TensorInfo(object):
       'sequence_rank',
       'dataset_lvl',
       'np_dtype',
+      '_tf_dtype',
   ]
 
   def __init__(
@@ -108,12 +109,13 @@ class TensorInfo(object):
     self.np_dtype: np.dtype = dtype_utils.cast_to_numpy(dtype)
     # For backwards compatibility: now it is named np_dtype.
     self.numpy_dtype = self.np_dtype
+    self._tf_dtype = None
     self.default_value = default_value
     self.sequence_rank = sequence_rank or 0
     self.dataset_lvl = dataset_lvl
 
   @classmethod
-  def copy_from(cls, tensor_info: 'TensorInfo') -> 'TensorInfo':
+  def copy_from(cls, tensor_info: TensorInfo) -> TensorInfo:
     """Copy constructor."""
     return cls(
         shape=tensor_info.shape,
@@ -124,7 +126,7 @@ class TensorInfo(object):
     )
 
   @classmethod
-  def from_tensor_spec(cls, tensor_spec: tf.TensorSpec) -> 'TensorInfo':
+  def from_tensor_spec(cls, tensor_spec: tf.TensorSpec) -> TensorInfo:
     return cls(
         shape=tf_utils.convert_to_shape(tensor_spec.shape),
         dtype=tensor_spec.dtype,
@@ -153,7 +155,9 @@ class TensorInfo(object):
 
   @property
   def tf_dtype(self) -> TreeDict[tf.dtypes.DType]:
-    return tf.dtypes.as_dtype(self.np_dtype)
+    if self._tf_dtype is None:
+      self._tf_dtype = tf.dtypes.as_dtype(self.np_dtype)
+    return self._tf_dtype
 
   def __eq__(self, other):
     """Equality."""
@@ -185,7 +189,7 @@ class Documentation:
   value_range: Optional[str] = None
 
   @classmethod
-  def from_proto(cls, feature: feature_pb2.Feature) -> 'Documentation':
+  def from_proto(cls, feature: feature_pb2.Feature) -> Documentation:
     return cls(desc=feature.description, value_range=feature.value_range)
 
 
@@ -202,7 +206,7 @@ class CatalogFeatureDocumentation:
   value_range: str
   tensor_info: Optional[TensorInfo] = None
 
-  def replace(self, **kwargs: Any) -> 'CatalogFeatureDocumentation':
+  def replace(self, **kwargs: Any) -> CatalogFeatureDocumentation:
     """Returns a copy of the `CatalogFeatureDocumentation` with updated attributes."""
     return dataclasses.replace(self, **kwargs)
 
@@ -367,7 +371,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     return f'{type(self).__module__}.{type(self).__name__}'
 
   @classmethod
-  def from_json(cls, value: Json) -> 'FeatureConnector':
+  def from_json(cls, value: Json) -> FeatureConnector:
     """FeatureConnector factory.
 
     This function should be called from the `tfds.features.FeatureConnector`
@@ -577,7 +581,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     self.save_metadata(root_dir, feature_name=None)
 
   @classmethod
-  def from_config(cls, root_dir: str) -> 'FeatureConnector':
+  def from_config(cls, root_dir: str) -> FeatureConnector:
     """Reconstructs the FeatureConnector from the config file.
 
     Usage:
@@ -792,7 +796,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     """Returns the HTML str representation of the object (Nested sequence)."""
     return _repr_html(ex)
 
-  def _flatten(self, x):
+  def _flatten(self, x: Any) -> List[Any]:
     """Flatten the input dict into a list of values.
 
     For instance, the following feature:
