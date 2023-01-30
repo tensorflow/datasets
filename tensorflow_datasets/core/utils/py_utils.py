@@ -230,9 +230,8 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> Dict[str, T]:
   flat_dict = NonMutableDict()
   for k, v in d.items():
     if isinstance(v, dict):
-      flat_dict.update(
-          {f'{k}/{k2}': v2 for k2, v2 in flatten_nest_dict(v).items()}
-      )
+      for k2, v2 in flatten_nest_dict(v).items():
+        flat_dict[f'{k}/{k2}'] = v2
     else:
       flat_dict[k] = v
   return flat_dict

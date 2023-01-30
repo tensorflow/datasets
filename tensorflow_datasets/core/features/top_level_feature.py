@@ -17,7 +17,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Union
+from typing import Any, List, Union
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -33,6 +33,18 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   `TopLevelFeature` allows better control over the decoding, and
   eventually better support for augmentations.
   """
+
+  @utils.memoized_property
+  def flat_features(self) -> List[Any]:
+    return self._flatten(self)
+
+  @utils.memoized_property
+  def flat_serialized_info(self) -> List[Any]:
+    return self._flatten(self.get_serialized_info())
+
+  @utils.memoized_property
+  def flat_sequence_ranks(self) -> List[int]:
+    return [_get_sequence_rank(s) for s in self.flat_serialized_info]  # pylint: disable=not-an-iterable
 
   def decode_example(self, serialized_example, *, decoders=None):
     # pylint: disable=line-too-long
@@ -51,8 +63,6 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     """
     # Step 1: Flatten the nested dict => []
     flat_example = self._flatten(serialized_example)
-    flat_features = self._flatten(self)
-    flat_serialized_info = self._flatten(self.get_serialized_info())
     flat_decoders = self._flatten(decoders)
 
     # Step 2: Apply the decoding
@@ -60,16 +70,19 @@ class TopLevelFeature(feature_lib.FeatureConnector):
         _decode_feature(  # pylint: disable=g-complex-comprehension
             feature=feature,
             example=example,
-            serialized_info=serialized_info,
             decoder=decoder,
+            sequence_rank=sequence_rank,
         )
         for (
             feature,
             example,
-            serialized_info,
             decoder,
+            sequence_rank,
         ) in zip(
-            flat_features, flat_example, flat_serialized_info, flat_decoders
+            self.flat_features,
+            flat_example,
+            flat_decoders,
+            self.flat_sequence_ranks,
         )
     ]
 
@@ -137,7 +150,7 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     return example_serializer.ExampleSerializer(example_specs)
 
 
-def _decode_feature(feature, example, serialized_info, decoder):
+def _decode_feature(feature, example, decoder, sequence_rank: int):
   """Decode a single feature."""
   if decoder is not None:
     # If the decoder is still a dict, it means that the feature is a Dataset
@@ -153,7 +166,6 @@ def _decode_feature(feature, example, serialized_info, decoder):
     decode_kwargs = {}
     decoder = feature
 
-  sequence_rank = _get_sequence_rank(serialized_info)
   if sequence_rank == 0:
     return decoder.decode_example(example, **decode_kwargs)
   elif sequence_rank == 1:
@@ -164,7 +176,7 @@ def _decode_feature(feature, example, serialized_info, decoder):
     return decoder.decode_ragged_example(example, **decode_kwargs)
 
 
-def _get_sequence_rank(serialized_info):
+def _get_sequence_rank(serialized_info) -> int:
   """Return the number of sequence dimensions of the feature."""
 
   if isinstance(serialized_info, dict):
