@@ -206,7 +206,7 @@ def test_mock_data_use_files(tmp_path):
   with tfds.testing.mock_data(policy=tfds.testing.MockPolicy.USE_FILES):
     builder = tfds.builder('mnist')
     # Metadata should have been restored correctly.
-    assert list(builder.info.splits.keys()) == ['test', 'train']
+    assert builder.info.splits.keys() == {'test', 'train'}
 
     # Unknown split should raise error
     # Currently, this error is accidentally triggered by
