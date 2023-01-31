@@ -119,7 +119,7 @@ def _normalize_feature_dict(
         k: v for k, v in expected_feature.items() if v is not False  # pylint: disable=g-bool-id-comparison
     }
     inner_features = {  # Extract the feature subset  # pylint: disable=g-complex-comprehension
-        k: _extract_feature_item(
+        k: _extract_feature_item(  # pytype: disable=wrong-arg-types  # always-use-return-annotations
             feature=feature,
             expected_key=k,
             expected_value=v,
@@ -156,7 +156,7 @@ def _extract_features(
     expected_feature = typing.cast(features_lib.FeaturesDict, expected_feature)
     return features_lib.FeaturesDict(
         {  # Extract the feature subset  # pylint: disable=g-complex-comprehension
-            k: _extract_feature_item(
+            k: _extract_feature_item(  # pytype: disable=wrong-arg-types  # always-use-return-annotations
                 feature=feature,
                 expected_key=k,
                 expected_value=v,

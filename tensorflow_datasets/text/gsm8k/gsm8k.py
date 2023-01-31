@@ -68,7 +68,7 @@ class Gsm8k(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     extracted = dl_manager.download_and_extract(_URLS)
-    return {k: self._generate_examples(v) for k, v in extracted.items()}
+    return {k: self._generate_examples(v) for k, v in extracted.items()}  # pytype: disable=wrong-arg-types  # always-use-return-annotations
 
   def _generate_examples(self, path: str):
     """Yields examples."""
