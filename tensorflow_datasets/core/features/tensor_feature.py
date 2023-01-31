@@ -213,6 +213,13 @@ class Tensor(feature_lib.FeatureConnector):
 
     return value
 
+  def decode_example_np(self, example_data):
+    if not self._encoded_to_bytes:
+      return example_data
+    if self._encoding == Encoding.ZLIB:
+      example_data = zlib.decompress(example_data)
+    return np.frombuffer(example_data, dtype=self._dtype).reshape(self._shape)
+
   def decode_batch_example(self, example_data):
     """See base class for details."""
     if self._dynamic_shape or self._encoded_to_bytes:
