@@ -392,10 +392,9 @@ class SplitBuilder:
       else:
         total_num_examples = None
 
+    serialized_info = self._features.get_serialized_info()
     writer = writer_lib.Writer(
-        serializer=example_serializer.ExampleSerializer(
-            self._features.get_serialized_info()
-        ),
+        serializer=example_serializer.ExampleSerializer(serialized_info),
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,

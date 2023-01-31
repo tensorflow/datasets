@@ -500,7 +500,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       *,
       download_dir: Optional[epath.PathLike] = None,
       download_config: Optional[download.DownloadConfig] = None,
-      file_format: Union[None, str, file_adapters.FileFormat] = None,
+      file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
   ) -> None:
     """Downloads and prepares dataset for reading.
 

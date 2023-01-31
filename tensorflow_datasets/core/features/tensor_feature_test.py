@@ -58,23 +58,27 @@ class FeatureTensorTest(
             testing.FeatureExpectationItem(
                 value=np_input,
                 expected=np_input,
+                expected_np=np_input,
             ),
             # Python array
             testing.FeatureExpectationItem(
                 value=array_input,
                 expected=array_input,
+                expected_np=array_input,
             ),
             # Invalid dtype
             testing.FeatureExpectationItem(
                 # On Windows, np default dtype is `int32`
                 value=np.random.randint(256, size=(2, 3), dtype=np.int64),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='int64 do not match',
             ),
             # Invalid shape
             testing.FeatureExpectationItem(
                 value=np.random.rand(2, 4).astype(np.float32),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='are incompatible',
             ),
         ],
@@ -116,6 +120,7 @@ class FeatureTensorTest(
             testing.FeatureExpectationItem(
                 value=np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='are incompatible',
             ),
         ],
@@ -156,6 +161,7 @@ class FeatureTensorTest(
             testing.FeatureExpectationItem(
                 value=np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='are incompatible',
             ),
         ],
@@ -195,6 +201,7 @@ class FeatureTensorTest(
             testing.FeatureExpectationItem(
                 value=wrong_shape,  # Wrong shape
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='are incompatible',
             ),
         ],
@@ -237,6 +244,16 @@ class FeatureTensorTest(
                 value=x_other_shape,
                 expected=x_other_shape,
             ),
+            testing.FeatureExpectationItem(
+                value=x,
+                raise_cls_np=ValueError,
+                raise_msg='including None are not supported',
+            ),
+            testing.FeatureExpectationItem(
+                value=x_other_shape,
+                raise_cls_np=ValueError,
+                raise_msg='including None are not supported',
+            ),
             # TODO(epot): Is there a way to catch if the user try to encode
             # tensors with different shapes ?
         ],
@@ -263,30 +280,37 @@ class FeatureTensorTest(
             testing.FeatureExpectationItem(
                 value=np.array(True),
                 expected=True,
+                expected_np=True,
             ),
             testing.FeatureExpectationItem(
                 value=np.array(False),
                 expected=False,
+                expected_np=False,
             ),
             testing.FeatureExpectationItem(
                 value=True,
                 expected=True,
+                expected_np=True,
             ),
             testing.FeatureExpectationItem(
                 value=False,
                 expected=False,
+                expected_np=False,
             ),
             testing.FeatureExpectationItem(
                 value=1,
                 expected=True,
+                expected_np=True,
             ),
             testing.FeatureExpectationItem(
                 value=2,
                 expected=True,
+                expected_np=True,
             ),
             testing.FeatureExpectationItem(
                 value=0,
                 expected=False,
+                expected_np=False,
             ),
         ],
     )
@@ -312,10 +336,12 @@ class FeatureTensorTest(
             testing.FeatureExpectationItem(
                 value=np.array([True, True, False]),
                 expected=[True, True, False],
+                expected_np=[True, True, False],
             ),
             testing.FeatureExpectationItem(
                 value=[True, False, True],
                 expected=[True, False, True],
+                expected_np=[True, False, True],
             ),
         ],
     )
@@ -345,21 +371,25 @@ class FeatureTensorTest(
             testing.FeatureExpectationItem(
                 value=nonunicode_text,
                 expected=tf.compat.as_bytes(nonunicode_text),
+                expected_np=tf.compat.as_bytes(nonunicode_text),
             ),
             # Unicode
             testing.FeatureExpectationItem(
                 value=unicode_text,
                 expected=tf.compat.as_bytes(unicode_text),
+                expected_np=tf.compat.as_bytes(unicode_text),
             ),
             # Empty string
             testing.FeatureExpectationItem(
                 value='',
                 expected=b'',
+                expected_np=b'',
             ),
             # Trailing zeros
             testing.FeatureExpectationItem(
                 value=b'abc\x00\x00',
                 expected=b'abc\x00\x00',
+                expected_np=b'abc\x00\x00',
             ),
         ],
     )
@@ -379,15 +409,21 @@ class FeatureTensorTest(
                     [tf.compat.as_bytes(nonunicode_text)],
                     [tf.compat.as_bytes(unicode_text)],
                 ],
+                expected_np=[
+                    [tf.compat.as_bytes(nonunicode_text)],
+                    [tf.compat.as_bytes(unicode_text)],
+                ],
             ),
             testing.FeatureExpectationItem(
                 value=[nonunicode_text, unicode_text],  # Wrong shape
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='(2,) and (2, 1) must have the same rank',
             ),
             testing.FeatureExpectationItem(
                 value=[['some text'], [123]],  # Wrong dtype
                 raise_cls=TypeError,
+                raise_cls_np=TypeError,
                 raise_msg='Expected binary or unicode string, got 123',
             ),
         ],

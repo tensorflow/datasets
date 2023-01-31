@@ -20,13 +20,17 @@ from __future__ import annotations
 import abc
 import collections
 import dataclasses
-from typing import Any, Mapping
+from typing import Any, Mapping, Union
 
 import numpy as np
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+import tensorflow as tf
+example_pb2 = tf.train
+feature_pb2 = tf.train
 
 TensorInfo = feature_lib.TensorInfo
 TreeDict = utils.TreeDict
@@ -55,7 +59,7 @@ class Serializer(abc.ABC):
 
 
 class ExampleSerializer(Serializer):
-  """To serialize examples."""
+  """To serialize examples as tf.Example."""
 
   def __init__(self, example_specs: TreeDict[TensorInfo]):
     """Constructor.
@@ -99,7 +103,7 @@ class ExampleSerializer(Serializer):
 def _dict_to_tf_example(
     example_dict: Mapping[str, Any],
     tensor_info_dict: Mapping[str, feature_lib.TensorInfo],
-) -> tf.train.Example:
+) -> example_pb2.Example:
   """Builds tf.train.Example from (string -> int/float/str list) dictionary.
 
   Args:
@@ -140,7 +144,7 @@ def _dict_to_tf_example(
       k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
       for k, (item, tensor_info) in features.items()
   }
-  return tf.train.Example(features=tf.train.Features(feature=features))
+  return example_pb2.Example(features=feature_pb2.Features(feature=features))
 
 
 def _is_string(item) -> bool:
@@ -183,18 +187,43 @@ def _item_to_tf_feature(
 
   vals = v.flat  # Convert v into a 1-d array (without extra copy)
   if dtype_utils.is_integer(v.dtype):
-    return tf.train.Feature(int64_list=tf.train.Int64List(value=vals))
+    return feature_pb2.Feature(int64_list=feature_pb2.Int64List(value=vals))
   elif dtype_utils.is_floating(v.dtype):
-    return tf.train.Feature(float_list=tf.train.FloatList(value=vals))
+    return feature_pb2.Feature(float_list=feature_pb2.FloatList(value=vals))
   elif dtype_utils.is_string(tensor_info.np_dtype):
-    vals = [tf.compat.as_bytes(x) for x in vals]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=vals))
+    vals = [_as_bytes(x) for x in vals]
+    return feature_pb2.Feature(bytes_list=feature_pb2.BytesList(value=vals))
   else:
     raise ValueError(
         "Unsupported value: {}.\n"
-        "tf.train.Feature does not support type {}. "
+        "feature_pb2.Feature does not support type {}. "
         "This may indicate that one of the FeatureConnectors received an "
         "unsupported value as input.".format(repr(v), repr(type(v)))
+    )
+
+
+def _as_bytes(bytes_or_text: Union[bytearray, bytes, str]) -> bytes:
+  """Converts `bytearray`, `bytes`, or unicode python input types to `bytes`.
+
+  Uses utf-8 encoding for text by default.
+
+  Args:
+    bytes_or_text: A `bytearray`, `bytes`, `str`, or `unicode` object.
+
+  Returns:
+    A `bytes` object.
+
+  Raises:
+    TypeError: If `bytes_or_text` is not a binary or unicode string.
+  """
+  # Validate encoding, a LookupError will be raised if invalid.
+  if isinstance(bytes_or_text, (bytearray, bytes)):
+    return bytes_or_text
+  elif isinstance(bytes_or_text, str):
+    return bytes_or_text.encode(encoding="utf-8")
+  else:
+    raise TypeError(
+        "Expected binary or unicode string, got %r" % (bytes_or_text,)
     )
 
 

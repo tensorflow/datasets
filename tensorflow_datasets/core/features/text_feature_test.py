@@ -16,6 +16,7 @@
 # coding=utf-8
 """Tests for tensorflow_datasets.core.deprecated.text_feature."""
 
+import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
@@ -31,22 +32,25 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=features.Text(),
         shape=(),
-        dtype=tf.string,
+        dtype=np.str_,
         tests=[
             # Non-unicode
             testing.FeatureExpectationItem(
                 value=nonunicode_text,
                 expected=tf.compat.as_bytes(nonunicode_text),
+                expected_np=b'hello world',
             ),
             # Unicode
             testing.FeatureExpectationItem(
                 value=unicode_text,
                 expected=tf.compat.as_bytes(unicode_text),
+                expected_np=b'hello world',
             ),
             # Empty string
             testing.FeatureExpectationItem(
                 value='',
                 expected=tf.compat.as_bytes(''),
+                expected_np=b'',
             ),
         ],
     )
@@ -58,7 +62,7 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=features.Text(encoder=text_encoder.ByteTextEncoder()),
         shape=(None,),
-        dtype=tf.int64,
+        dtype=np.int64,
         tests=[
             testing.FeatureExpectationItem(
                 value=unicode_text,

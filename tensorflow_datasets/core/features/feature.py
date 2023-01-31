@@ -700,6 +700,20 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     """
     return tfexample_data
 
+  def decode_example_np(
+      self, example_data: type_utils.NpArrayOrScalarDict
+  ) -> type_utils.NpArrayOrScalarDict:
+    """Encode the feature dict into NumPy-compatible input.
+
+    Args:
+      example_data: Value to convert to NumPy.
+
+    Returns:
+      np_data: Data as NumPy-compatible type: either a Python primitive (bytes,
+      int, etc) or a NumPy array.
+    """
+    raise NotImplementedError
+
   def decode_batch_example(self, tfexample_data):
     """Decode multiple features batched in a single tf.Tensor.
 

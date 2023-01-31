@@ -15,6 +15,7 @@
 
 """Tests for tensorflow_datasets.core.utils.tf_utils."""
 
+import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import tf_utils
@@ -66,6 +67,58 @@ def test_merge_shape():
   np_shape = (None, None, 3)
   actual = tf_utils.merge_shape(tensor, np_shape)
   assert actual == (tf.constant(28), tf.constant(28), 3)
+
+
+@pytest.mark.parametrize(
+    ['shape1', 'shape2'],
+    [
+        (None, None),
+        ((None,), (None,)),
+        ((1,), (1,)),
+        ((None,), (1,)),
+        ((1,), (None,)),
+        ((1, 2), (1, 2)),
+        ((1, 2), (None, None)),
+        ((1, None), (None, None)),
+        ((None, 2), (None, None)),
+        ((None, None), (1, 2)),
+        ((None, None), (1, None)),
+        ((None, None), (None, 2)),
+    ],
+)
+def test_assert_shapes_match(shape1, shape2):
+  try:
+    tf_utils.assert_shape_match(shape1, shape2)
+  except ValueError as exception:
+    raise Exception(f'test should fail for {shape1}/{shape2}') from exception
+
+
+@pytest.mark.parametrize(
+    ['shape1', 'shape2'],
+    [
+        ((1, 2), (3, 2)),
+        ((1, 2), (1, 3)),
+    ],
+)
+def test_assert_must_have_the_same_dimension(shape1, shape2):
+  with pytest.raises(ValueError, match='are incompatible'):
+    tf_utils.assert_shape_match(shape1, shape2)
+
+
+@pytest.mark.parametrize(
+    ['shape1', 'shape2'],
+    [
+        (None, (1,)),
+        (None, (1, 2)),
+        ((1,), None),
+        ((1, 2), None),
+        ((1,), (1, 2)),
+        ((1, 2), (1,)),
+    ],
+)
+def test_assert_must_have_the_same_rank(shape1, shape2):
+  with pytest.raises(ValueError, match='must have the same rank'):
+    tf_utils.assert_shape_match(shape1, shape2)
 
 
 if __name__ == '__main__':

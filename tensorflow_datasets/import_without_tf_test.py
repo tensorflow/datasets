@@ -19,6 +19,7 @@ import sys
 from unittest import mock
 
 from absl import logging
+import numpy as np
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -34,11 +35,11 @@ class DummyDataset(dataset_builder.GeneratorBasedBuilder):
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict(
-            {
-                'text': features.Text(),
-            }
-        ),
+        features=features.FeaturesDict({
+            'integer': np.int32,
+            'nested': features.FeaturesDict({'text': features.Text()}),
+            'text': features.Text(),
+        }),
     )
 
   def _split_generators(self, dl_manager):
@@ -50,7 +51,9 @@ class DummyDataset(dataset_builder.GeneratorBasedBuilder):
   def _generate_examples(self):
     for i in range(20):
       yield i, {
-          'text': 'test_text',
+          'integer': i,
+          'nested': {'text': 'nested_text'},
+          'text': f'test_{i}',
       }
 
 
@@ -58,11 +61,12 @@ def test_import_tfds_without_loading_tf():
   with mock.patch.object(logging, 'log_first_n') as log_first_n:
     assert 'tensorflow' not in sys.modules
 
-    with tfds.testing.tmp_dir() as data_dir:
-      builder = DummyDataset(data_dir=data_dir)
-      builder.download_and_prepare(
-          file_format=file_adapters.FileFormat.ARRAY_RECORD
-      )
+    data_dir = '/tmp/import_without_tf'
+    builder = DummyDataset(data_dir=data_dir)
+    builder.download_and_prepare(
+        file_format=file_adapters.FileFormat.ARRAY_RECORD,
+    )
 
     # No warning concerning TensorFlow DTypes was dispatched while loading
     assert not log_first_n.called
+    assert 'tensorflow' not in sys.modules

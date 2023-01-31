@@ -33,6 +33,7 @@ ListOrElem = Union[T, List[T]]
 TreeDict = Union[T, Dict[str, 'TreeDict']]
 Tree = Union[T, Any]
 ListOrTreeOrElem = Union[T, TreeDict[T], List[T]]
+NpArrayOrScalar = Union[bytes, float, int, np.ndarray, str]
 
 if typing.TYPE_CHECKING:
   Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
@@ -43,6 +44,7 @@ else:
 
 # Nested dict of tensor
 TensorDict = TreeDict[Tensor]
+NpArrayOrScalarDict = TreeDict[NpArrayOrScalar]
 
 Dim = Optional[int]
 Shape = TupleOrList[Dim]

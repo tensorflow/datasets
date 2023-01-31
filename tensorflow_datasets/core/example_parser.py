@@ -17,13 +17,29 @@
 
 from __future__ import annotations
 
+import abc
+import dataclasses
+from typing import Mapping, Union
+
+import numpy as np
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
+example_pb2 = tf.train
+feature_pb2 = tf.train
 
-class ExampleParser(object):
+
+class Parser(abc.ABC):
+
+  @abc.abstractmethod
+  def parse_example(self, serialized_example: bytes):
+    raise NotImplementedError
+
+
+class ExampleParser(Parser):
   """To parse Examples."""
 
   def __init__(self, example_specs):
@@ -76,6 +92,100 @@ class ExampleParser(object):
     # Reconstruct all nesting
     example = utils.pack_as_nest_dict(example, self._example_specs)
     return example
+
+
+@dataclasses.dataclass
+class ExampleParserNp(Parser):
+  """Parse Examples with NumPy (without any usage of TensorFlow)."""
+
+  example_specs: Union[
+      feature_lib.TensorInfo, Mapping[str, feature_lib.TensorInfo]
+  ]
+
+  def __post_init__(self):
+    self._flat_example_specs = utils.flatten_nest_dict(self.example_specs)
+
+  def parse_example(
+      self, serialized_example: bytes
+  ) -> type_utils.NpArrayOrScalarDict:
+    example = example_pb2.Example.FromString(serialized_example)
+    with utils.try_reraise(f"Error wile parsing example {example}: "):
+      np_example = _features_to_numpy(
+          example.features, self._flat_example_specs
+      )
+      return utils.pack_as_nest_dict(np_example, self.example_specs)
+
+
+def _features_to_numpy(
+    features: feature_pb2.Features,
+    flat_example_specs: Mapping[str, feature_lib.TensorInfo],
+) -> type_utils.NpArrayOrScalarDict:
+  """Parses features to NumPy type.
+
+  Args:
+    features: TensorFlow Features.
+    flat_example_specs: All tensor infos in a flat dictionary.
+
+  Returns:
+    The parsed NumPy object of type: np.ndarray or np.dtype.
+
+  Raises:
+    KeyError: if `flat_example_specs` is malformed.
+  """
+  parsed_example = {}
+  feature_map = features.feature
+  for key in feature_map:
+    if key not in flat_example_specs:
+      raise KeyError(
+          f"Malformed input: {key} is found in the feature, but not in"
+          f" {flat_example_specs}"
+      )
+    parsed_example[key] = _feature_to_numpy(
+        feature_map[key], flat_example_specs[key], key
+    )
+  return parsed_example
+
+
+def _feature_to_numpy(
+    feature: feature_pb2.Feature,
+    tensor_info: feature_lib.TensorInfo,
+    feature_name: str,
+) -> type_utils.NpArrayOrScalar:
+  """Parses a single feature to NumPy type.
+
+  Args:
+    feature: TensorFlow Feature.
+    tensor_info: Tensor info for the current feature.
+    feature_name: name of the feature to convert to NumPy.
+
+  Returns:
+    The parsed NumPy object of type: np.ndarray or np.dtype.
+
+  Raises:
+    AttributeError: if the parsed feature is malformed.
+    ValueError: if a scalar feature is represented by an array.
+  """
+  dtype = tensor_info.np_dtype
+  shape = tensor_info.shape
+  if None in shape:
+    raise ValueError(
+        f"tensors with shape ({shape}) including None are not supported when"
+        " decoding with NumPy."
+    )
+  if feature.HasField("int64_list"):
+    value_array = feature.int64_list.value
+  elif feature.HasField("float_list"):
+    value_array = feature.float_list.value
+  elif feature.HasField("bytes_list"):
+    value_array = feature.bytes_list.value
+  else:
+    raise AttributeError(f"cannot convert '{feature_name}' from proto to NumPy")
+  array = np.array(value_array, dtype=dtype).reshape(shape)
+  if not shape:
+    if array.size != 1:
+      raise ValueError(f"scalar feature '{feature_name}' should have length 1")
+    return array.item()
+  return array
 
 
 def _build_feature_specs(flat_example_specs):

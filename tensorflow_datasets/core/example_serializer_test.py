@@ -297,5 +297,16 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
       example_serializer._dict_to_tf_example(example_data, tensor_info)
 
 
+class AsBytesTest(parameterized.TestCase):
+
+  @parameterized.parameters(
+      (b'thisisbytes', b'thisisbytes'),
+      ('thisisbytes', b'thisisbytes'),
+      (bytearray([1, 2, 3]), b'\x01\x02\x03'),
+  )
+  def test_as_bytes(self, input_args, expected_output):
+    self.assertEqual(example_serializer._as_bytes(input_args), expected_output)
+
+
 if __name__ == '__main__':
   testing.test_main()

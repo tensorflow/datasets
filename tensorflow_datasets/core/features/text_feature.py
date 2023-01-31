@@ -124,6 +124,9 @@ class Text(tensor_feature.Tensor):
       example_data = self.encoder.encode(example_data)
     return super(Text, self).encode_example(example_data)
 
+  def decode_example_np(self, example_data):
+    return example_data
+
   def save_metadata(self, data_dir, feature_name):
     fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
     if not self.encoder:
