@@ -26,7 +26,7 @@ Since MNIST restricts us to 10 classes, we chose one character to represent each
 of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
 
 *   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/kuzushiji-mnist">
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/kmnist">
     Explore on Papers With Code
     <span class="material-icons icon-after" aria-hidden="true"> north_east
     </span> </a>
