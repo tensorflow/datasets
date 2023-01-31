@@ -93,7 +93,7 @@
   "iris": "https://paperswithcode.com/dataset/iris-1",
   "kddcup99": "https://paperswithcode.com/dataset/kdd-cup-1999-data-data-set",
   "kitti": "https://paperswithcode.com/dataset/kitti",
-  "kmnist": "https://paperswithcode.com/dataset/kuzushiji-mnist",
+  "kmnist": "https://paperswithcode.com/dataset/kmnist",
   "lambada": "https://paperswithcode.com/dataset/lambada",
   "lfw": "https://paperswithcode.com/dataset/lfw",
   "librispeech": "https://paperswithcode.com/dataset/librispeech",
