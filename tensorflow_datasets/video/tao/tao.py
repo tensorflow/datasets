@@ -395,7 +395,7 @@ class Tao(tfds.core.BeamBasedBuilder):
   ):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
-    annotations = _preprocess_annotations(annotations_path, id_map)
+    annotations = _preprocess_annotations(annotations_path, id_map)  # pytype: disable=wrong-arg-types  # always-use-return-annotations
     outs = _build_annotations_index(annotations)
     vids, ann_to_images, track_to_anns, vid_to_tracks = outs
 
