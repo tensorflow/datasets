@@ -21,6 +21,7 @@ from tensorflow_datasets.text.assin2 import Assin2
 from tensorflow_datasets.text.beir import Beir
 from tensorflow_datasets.text.blimp import Blimp
 from tensorflow_datasets.text.bool_q import BoolQ
+from tensorflow_datasets.text.brwac import Brwac
 from tensorflow_datasets.text.c4 import C4
 from tensorflow_datasets.text.c4_wsrs import C4WSRS
 from tensorflow_datasets.text.cfq import CFQ

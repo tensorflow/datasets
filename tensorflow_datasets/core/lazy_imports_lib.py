@@ -79,6 +79,9 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def ftfy(cls):
+    return _try_import("ftfy")
+
   def gcsfs_store(cls):
     return _try_import("gcsfs").GCSFileSystem(token='anon').get_mapper
 

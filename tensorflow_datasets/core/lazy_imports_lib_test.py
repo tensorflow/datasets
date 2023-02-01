@@ -29,6 +29,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   @parameterized.parameters(
       "bs4",
       "cv2",
+      "ftfy",
       "gcld3",
       "gcsfs_store",
       "langdetect",
