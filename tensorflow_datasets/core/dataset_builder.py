@@ -378,7 +378,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       parts = []
       try:
         path = cls.code_path.parent
-        while path is not None:
+        while path is not None and path != path.parent:
           parts.append(path.name)
           path = path.parent
       except TypeError:
