@@ -15,17 +15,17 @@
 
 """Dataset generator code."""
 
-import collections.abc
 import contextlib
 import dataclasses
 import itertools
 import sys
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Union
 
 from absl import logging
 import click
 import psutil
+from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
@@ -35,15 +35,16 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_datasets.core.utils import type_utils
 
 if typing.TYPE_CHECKING:
   import apache_beam as beam  # pytype: disable=import-error
 
 # Example key used for shuffling
-Key = Union[str, int]
+Key = type_utils.Key
 # The nested example dict passed to `features.encode_example`
-Example = Dict[str, Any]
-KeyExample = Tuple[Key, Example]
+Example = type_utils.Example
+KeyExample = type_utils.KeyExample
 
 # Possible values returned by `GeneratorBasedBuilder._split_generators`
 SplitGenerator = Union[
@@ -53,6 +54,7 @@ SplitGenerator = Union[
     'beam.PTransform',
     'beam.PCollection[KeyExample]',
 ]
+SplitInfo = splits_lib.SplitInfo
 
 
 @utils.docs.deprecated
@@ -75,16 +77,6 @@ class SplitGeneratorLegacy:
   gen_kwargs: Optional[Dict[str, Any]] = dataclasses.field(default_factory=dict)
 
 
-class _SplitInfoFuture:
-  """Future containing the `tfds.core.SplitInfo` result."""
-
-  def __init__(self, callback: Callable[[], splits_lib.SplitInfo]):
-    self._callback = callback
-
-  def result(self) -> splits_lib.SplitInfo:
-    return self._callback()
-
-
 @dataclasses.dataclass
 class PipelineProxy:
   """Proxy which allows access to beam.Pipeline result after completion.
@@ -94,6 +86,9 @@ class PipelineProxy:
   """
 
   _beam_pipeline: Optional['beam.Pipeline']
+
+  def uses_beam(self) -> bool:
+    return self._beam_pipeline is not None
 
   @property
   def result(self):
@@ -206,7 +201,7 @@ class SplitBuilder:
 
   @utils.memoized_property
   def beam_pipeline(self) -> 'beam.Pipeline':
-    """Instanciates and returns Apache Beam pipeline.
+    """Instantiates and returns an Apache Beam pipeline.
 
     Calling this function starts the Apache Beam mode.
 
@@ -308,56 +303,68 @@ class SplitBuilder:
           f'Invalid `_split_generators` returned value: {split_generators}'
       )
 
-  def submit_split_generation(
+  def generate_splits_from_iterables(
       self,
-      split_name: str,
-      generator: SplitGenerator,
+      generator_per_split: Dict[str, Iterable[KeyExample]],
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
-  ) -> _SplitInfoFuture:
-    """Start the split generation.
-
-    Args:
-      split_name: Name of the split to generate
-      generator: Generator, beam.PTransform,... yielding the examples
-      filename_template: Template to format the filename for a shard.
-      disable_shuffling: Specifies whether to shuffle the examples
-
-    Returns:
-      split_info_future: Future containing the `split_info`, once generation
-        is complete. The `tfds.core.SplitInfo` can be accessed through
-        `split_info_future.result()`
-    """
-    build_kwargs = dict(
-        split_name=split_name,
-        generator=generator,
-        filename_template=filename_template,
-        disable_shuffling=disable_shuffling,
-    )
-    # Depending on the type of generator, we use the corresponding
-    # `_build_from_xyz` method.
-    if isinstance(generator, collections.abc.Iterable):
-      return self._build_from_generator(**build_kwargs)
-    else:  # Otherwise, beam required
-      unknown_generator_type = TypeError(
-          f'Invalid split generator value for split `{split_name}`. '
-          'Expected generator or apache_beam object. Got: '
-          f'{type(generator)}'
+      dataset_info: dataset_info_lib.DatasetInfo,
+  ) -> dataset_info_lib.DatasetInfo:
+    split_infos = []
+    for split, generator in generator_per_split.items():
+      split_info = self._build_from_generator(
+          split_name=split,
+          generator=generator,
+          filename_template=filename_template.replace(split=split),
+          disable_shuffling=disable_shuffling,
       )
-      try:
-        import apache_beam as beam  # pylint: disable=g-import-not-at-top
-      except ImportError:
-        # Beam can't be imported, what was the object returned by the user ?
-        raise unknown_generator_type  # pylint: disable=raise-missing-from
+      split_infos.append(split_info)
+    split_dict = splits_lib.SplitDict(split_infos)
+    dataset_info.set_splits(split_dict)
+    dataset_info.write_to_directory(filename_template.data_dir)
+    return dataset_info
+
+  def generate_splits_beam(
+      self,
+      generator_per_split: Dict[
+          str, Union['beam.PTransform', 'beam.PCollection[KeyExample]']
+      ],
+      filename_template: naming.ShardedFileTemplate,
+      disable_shuffling: bool,
+      dataset_info: dataset_info_lib.DatasetInfo,
+  ) -> dataset_info_lib.DatasetInfo:
+    import apache_beam as beam  # pylint: disable=g-import-not-at-top
+
+    split_pcollections = []
+    for split, generator in generator_per_split.items():
+      build_kwargs = dict(
+          split_name=split,
+          generator=generator,
+          filename_template=filename_template.replace(split=split),
+          disable_shuffling=disable_shuffling,
+      )
       if isinstance(generator, beam.PTransform):
-        # Generate the beam.PCollection
-        pcollection = self.beam_pipeline | split_name >> generator
+        pcollection = self.beam_pipeline | split >> generator
         build_kwargs['generator'] = pcollection
-        return self._build_from_pcollection(**build_kwargs)
       elif isinstance(generator, beam.PCollection):
-        return self._build_from_pcollection(**build_kwargs)
+        build_kwargs['generator'] = generator
       else:
-        raise unknown_generator_type
+        raise TypeError(
+            f'Invalid split generator value for split `{split}`. '
+            f'Expected generator or apache_beam object. Got: {type(generator)}'
+        )
+      split_pcollections.append(self._build_from_pcollection(**build_kwargs))
+    dataset_info_writer = writer_lib.DatasetInfoBeamWriter(
+        dataset_info=dataset_info, filename_template=filename_template
+    )
+    split_infos = split_pcollections | 'Flatten' >> beam.Flatten()
+    dataset_info_writer.write_dataset_info(split_infos)
+    # dataset_info_proto = dataset_info_lib.read_proto_from_builder_dir(
+    #     filename_template.data_dir
+    # )
+    # dataset_info.set_splits(dataset_info_proto.splits)
+    # return dataset_info_lib.DatasetInfo.from_proto(dataset_info_proto)
+    return dataset_info  # TODO(weide) DO NOT SUBMIT
 
   def _build_from_generator(
       self,
@@ -365,17 +372,17 @@ class SplitBuilder:
       generator: Iterable[KeyExample],
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
-  ) -> _SplitInfoFuture:
+  ) -> SplitInfo:
     """Split generator for example generators.
 
     Args:
       split_name: str,
       generator: Iterable[KeyExample],
       filename_template: Template to format the filename for a shard.
-      disable_shuffling: Specifies whether to shuffle the examples,
+      disable_shuffling: Specifies whether to shuffle the examples.
 
     Returns:
-      future: The future containing the `tfds.core.SplitInfo`.
+      the `SplitInfo` for this split.
     """
     if self._max_examples_per_split is not None:
       logging.warning(
@@ -416,13 +423,12 @@ class SplitBuilder:
       writer.write(key, example)
     shard_lengths, total_size = writer.finalize()
 
-    split_info = splits_lib.SplitInfo(
+    return SplitInfo(
         name=split_name,
         shard_lengths=shard_lengths,
         num_bytes=total_size,
         filename_template=filename_template,
     )
-    return _SplitInfoFuture(lambda: split_info)
 
   def _build_from_pcollection(
       self,
@@ -430,7 +436,7 @@ class SplitBuilder:
       generator: 'beam.PCollection[KeyExample]',
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
-  ) -> _SplitInfoFuture:
+  ) -> 'beam.PCollection[SplitInfo]':
     """Split generator for `beam.PCollection`."""
     # TODO(tfds): Should try to add support to `max_examples_per_split`
     beam = lazy_imports_lib.lazy_imports.apache_beam
@@ -457,24 +463,8 @@ class SplitBuilder:
     def _encode_pcollection(pipeline):
       """PTransformation which build a single split."""
       pcoll_examples = pipeline | 'Encode' >> beam.Map(_encode_example)
-      return beam_writer.write_from_pcollection(pcoll_examples)
-
-    # Add the PCollection to the pipeline
-    _ = generator | f'{split_name}_write' >> _encode_pcollection()  # pylint: disable=no-value-for-parameter
-
-    def _resolve_future():
-      if self._in_contextmanager:
-        raise AssertionError(
-            '`future.result()` should be called after the '
-            '`maybe_beam_pipeline` contextmanager.'
-        )
-      logging.info('Retrieving split info for %s...', split_name)
-      shard_lengths, total_size = beam_writer.finalize()
-      return splits_lib.SplitInfo(
-          name=split_name,
-          shard_lengths=shard_lengths,
-          num_bytes=total_size,
-          filename_template=filename_template,
+      return beam_writer.write_from_pcollection(
+          pcoll_examples, split_name=split_name
       )
 
-    return _SplitInfoFuture(_resolve_future)
+    return generator | f'{split_name}_write' >> _encode_pcollection()  # pylint: disable=no-value-for-parameter
