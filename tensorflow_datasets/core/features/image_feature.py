@@ -18,12 +18,14 @@
 from __future__ import annotations
 
 import dataclasses
+import io
 import os
 import tempfile
 from typing import Any, List, Optional, Union
 
 from etils import epath
 import numpy as np
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
@@ -289,8 +291,46 @@ class Image(feature_lib.FeatureConnector):
     return self._image_encoder.encode_image_or_path(image_or_path_or_fobj)
 
   def decode_example(self, example):
-    """Reconstruct the image from the tf example."""
+    """Reconstruct the image with TensorFlow from the tf example."""
     return self._image_encoder.decode_image(example)
+
+  def decode_example_np(self, example: bytes) -> np.ndarray:
+    """Reconstruct the image with PIL from bytes."""
+    if self._dtype == np.uint16:
+      # PIL does not handle multi-channel 16-bit images, so we use OpenCV.
+      return self.decode_example_np_with_opencv(example)
+    else:
+      return self.decode_example_np_with_pil(example)
+
+  def decode_example_np_with_opencv(self, example: bytes) -> np.ndarray:
+    try:
+      cv2 = lazy_imports_lib.lazy_imports.cv2
+    except ImportError as e:
+      raise Exception(
+          'Decoding 16-bit images with NumPy requires OpenCV.'
+      ) from e
+    buffer = np.frombuffer(example, dtype=np.uint8)
+    image_cv2 = cv2.imdecode(buffer, cv2.IMREAD_UNCHANGED)
+    return image_cv2[:, :, _opencv_to_tfds_channels(self._shape)]
+
+  def decode_example_np_with_pil(self, example: bytes) -> np.ndarray:
+    try:
+      PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+    except ImportError as e:
+      raise Exception('Decoding images with NumPy requires PIL.') from e
+    bytes_io = io.BytesIO(example)
+    with PIL_Image.open(bytes_io) as image:
+      dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
+      np_array = np.asarray(image, dtype=dtype)
+      # Reshape the array if needed
+      if np_array.ndim == 2:  # (h, w)
+        np_array = np_array[..., None]  # (h, w, 1)
+      if self.np_dtype == np.uint8:
+        return np_array
+      # Bitcast 4 channels uint8 -> 1 channel float32.
+      if self.np_dtype == np.float32:
+        return np_array.view(np.float32)
+      raise ValueError(f'decode_example_np does not handle {self.np_dtype}')
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
@@ -493,3 +533,17 @@ def _validate_np_array(
         f'Image dtype should be {dtype}. Detected: {np_array.dtype}.'
     )
   utils.assert_shape_match(np_array.shape, shape)
+
+
+@py_utils.memoize()
+def _opencv_to_tfds_channels(shape: utils.Shape) -> Union[int, List[int]]:
+  """Restore channel in the expected order: OpenCV uses BGR rather than RGB."""
+  num_channels = shape[-1]
+  if num_channels == 1:
+    return 0
+  elif num_channels == 3:
+    return [2, 1, 0]  # BGR -> RGB
+  elif num_channels == 4:
+    return [2, 1, 0, 3]  # BGRa -> RGBa
+  else:
+    raise ValueError(f'Unsupported number of channels: {num_channels}')
