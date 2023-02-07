@@ -34,6 +34,10 @@ if typing.TYPE_CHECKING:
 
 # Global setup/teardown
 
+# Ignore tests and non-test files
+# https://docs.pytest.org/en/latest/reference/reference.html#globalvar-collect_ignore
+collect_ignore = ['testing/test_utils.py', 'core/features/features_test.py']
+
 # Register fixtures which are automatically applied once when tests start.
 
 

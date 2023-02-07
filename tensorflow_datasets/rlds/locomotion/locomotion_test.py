@@ -14,9 +14,20 @@
 # limitations under the License.
 
 """locomotion dataset."""
+import sys
 
+import pytest
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rlds.locomotion import locomotion
+
+
+pytest.importorskip(
+    'envlogger',
+    reason=(
+        f'`envlogger` library might not be available for Python {sys.version};'
+        'see https://pypi.org/project/envlogger/#files'
+    ),
+)
 
 
 class AntTest(tfds.testing.DatasetBuilderTestCase):

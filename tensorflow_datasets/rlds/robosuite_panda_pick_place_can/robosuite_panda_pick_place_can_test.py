@@ -14,9 +14,20 @@
 # limitations under the License.
 
 """robosuite_panda_pick_place_can dataset."""
+import sys
 
+import pytest
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rlds.robosuite_panda_pick_place_can import robosuite_panda_pick_place_can
+
+
+pytest.importorskip(
+    'envlogger',
+    reason=(
+        f'`envlogger` library might not be available for Python {sys.version};'
+        'see https://pypi.org/project/envlogger/#files'
+    ),
+)
 
 
 class RobosuitePandaPickPlaceCanHumanTest(tfds.testing.DatasetBuilderTestCase):

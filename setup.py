@@ -61,7 +61,6 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'click',
-    'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'dm-tree',
     'etils[enp,epath]>=0.9.0',
     'numpy',
@@ -78,7 +77,8 @@ REQUIRED_PKGS = [
     'importlib_resources;python_version<"3.9"',
 ]
 
-TESTS_REQUIRE = [
+TESTS_DEPENDENCIES = [
+    'dill',
     'jax[cpu]',
     'jupyter',
     'pytest',
@@ -87,18 +87,21 @@ TESTS_REQUIRE = [
     # Lazy-deps required by core
     'pandas',
     'pydub',
-    'apache_beam',
+    'apache-beam',
     'conllu',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
     'pyyaml',
     'tensorflow-io',
-    'datasets',
+    # `datasets` needs to be installed separately in Python >= 3.10 due to
+    # conflicts between `multiprocess` and `apache-beam` libraries. See
+    # https://github.com/uqfoundation/multiprocess/issues/125
+    'datasets;python_version<"3.10"',
 ]
 
 # Additional deps for formatting
-DEV_REQUIRE = [
+DEV_DEPENDENCIES = [
     'pylint>=2.6.0',
     'yapf',
 ]
@@ -148,10 +151,10 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
-    'beir': ['apache_beam'],
+    'beir': ['apache-beam'],
     'ble_wind_field': ['gcsfs', 'zarr'],
-    'c4': ['apache_beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
-    'c4_wsrs': ['apache_beam'],
+    'c4': ['apache-beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
+    'c4_wsrs': ['apache-beam'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
@@ -175,24 +178,27 @@ DATASET_EXTRAS = {
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
-    'robosuite_panda_pick_place_can': ['envlogger'],
+    # envlogger is not available for Python versions >= 3.10
+    # https://pypi.org/project/envlogger/#files
+    # tests are disabled in `tensorflow_datasets/conftest.py`
+    'locomotion': ['envlogger;python_version<"3.10"'],
+    'robosuite_panda_pick_place_can': ['envlogger;python_version<"3.10"'],
     'smartwatch_gestures': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],
-    'wiki_dialog': ['apache_beam'],
-    'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'wiki_dialog': ['apache-beam'],
+    'wikipedia': ['mwparserfromhell', 'apache-beam'],
     'wsc273': ['bs4', 'lxml'],
     'youtube_vis': ['pycocotools'],
 }
 
 # Those datasets have dependencies which conflict with the rest of TFDS, so
 # running them in an isolated environments.
-# See `./oss_scripts/oss_tests.sh` for the isolated test.
 ISOLATED_DATASETS = ('nsynth', 'lsun')
 
 # Extra dataset deps are required for the tests
-all_dataset_extras = list(
+all_dataset_dependencies = list(
     itertools.chain.from_iterable(
         deps
         for ds_name, deps in DATASET_EXTRAS.items()
@@ -200,16 +206,22 @@ all_dataset_extras = list(
     )
 )
 
-EXTRAS_REQUIRE = {
+TESTS_ALL_DEPENDENCIES = TESTS_DEPENDENCIES + all_dataset_dependencies
+HUGGINGFACE_ALL_DEPENDENCIES = [
+    dep
+    for dep in TESTS_ALL_DEPENDENCIES
+    if not dep.startswith('apache-beam') and not dep.startswith('datasets')
+] + ['datasets']
+
+EXTRAS = {
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=2.1'],
     'tensorflow-data-validation': ['tensorflow-data-validation'],
-    # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
-    # and run in ./oss_scripts/oss_tests.sh
-    'tests-all': TESTS_REQUIRE + all_dataset_extras,
-    'dev': TESTS_REQUIRE + DEV_REQUIRE,
+    'tests-all': TESTS_ALL_DEPENDENCIES,
+    'dev': TESTS_DEPENDENCIES + DEV_DEPENDENCIES,
+    'huggingface': HUGGINGFACE_ALL_DEPENDENCIES,
 }
-EXTRAS_REQUIRE.update(DATASET_EXTRAS)
+EXTRAS.update(DATASET_EXTRAS)
 
 setup(
     name=project_name,
@@ -244,7 +256,7 @@ setup(
     scripts=[],
     install_requires=REQUIRED_PKGS,
     python_requires='>=3.8',
-    extras_require=EXTRAS_REQUIRE,
+    extras_require=EXTRAS,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
