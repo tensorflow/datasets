@@ -396,3 +396,12 @@ class EncodedRandomFakeGenerator(RandomFakeGenerator):
     """Yields all fake examples."""
     for ex in super(EncodedRandomFakeGenerator, self).__iter__():
       yield self._features.encode_example(ex)
+
+
+class SerializedRandomFakeGenerator(RandomFakeGenerator):
+  """Generator of fake serialized examples."""
+
+  def __iter__(self):
+    """Yields all fake examples."""
+    for ex in super(SerializedRandomFakeGenerator, self).__iter__():
+      yield self._features.serialize_example(ex)
