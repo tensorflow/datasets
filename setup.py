@@ -182,7 +182,7 @@ DATASET_EXTRAS = {
     'wider_face': ['Pillow'],
     'wiki_dialog': ['apache_beam'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
-    'wsc273': ['bs4', 'lxml'],
+    'wsc273': ['beautifulsoup4', 'lxml'],
     'youtube_vis': ['pycocotools'],
 }
 
