@@ -2,25 +2,32 @@
   "citation": "@inproceedings{paperno-etal-2016-lambada,\n    title = \"The {LAMBADA} dataset: Word prediction requiring a broad discourse context\",\n    author = \"Paperno, Denis  and\n      Kruszewski, Germ{'a}n  and\n      Lazaridou, Angeliki  and\n      Pham, Ngoc Quan  and\n      Bernardi, Raffaella  and\n      Pezzelle, Sandro  and\n      Baroni, Marco  and\n      Boleda, Gemma  and\n      Fern{'a}ndez, Raquel\",\n    booktitle = \"Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)\",\n    month = aug,\n    year = \"2016\",\n    address = \"Berlin, Germany\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/P16-1144\",\n    doi = \"10.18653/v1/P16-1144\",\n    pages = \"1525--1534\",\n}",
   "description": "The LAMBADA dataset evaluates the capabilities of computational\nmodels for text understanding by means of a word prediction task. LAMBADA is a\ncollection of narrative passages sharing the characteristic that human subjects\nare able to guess their last word if they are exposed to the whole passage, but\nnot if they only see the last sentence preceding the target word",
   "downloadSize": "334527694",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://zenodo.org/record/2630551#.X4Xzn5NKjUI"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.lambada.lambada",
   "name": "lambada",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "1878779",
-      "shardLengths": [
-        "5153"
-      ]
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "1785646",
       "shardLengths": [
         "4869"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1878779",
+      "shardLengths": [
+        "5153"
       ]
     }
   ],

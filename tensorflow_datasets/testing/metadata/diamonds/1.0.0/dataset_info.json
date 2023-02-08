@@ -2,7 +2,7 @@
   "citation": "@Book{,\n  author = {Hadley Wickham},\n  title = {ggplot2: Elegant Graphics for Data Analysis},\n  publisher = {Springer-Verlag New York},\n  year = {2016},\n  isbn = {978-3-319-24277-4},\n  url = {https://ggplot2.tidyverse.org},\n}",
   "description": "This classic dataset contains physical attributes and prices of 53940 diamonds.\n\nAttributes:\n\n  * price: Price in US dollars.\n  * carat: Weight of the diamond.\n  * cut: Cut quality (ordered worst to best).\n  * color: Color of the diamond (ordered best to worst).\n  * clarity: Clarity of the diamond (ordered worst to best).\n  * x: Length in mm.\n  * y: Width in mm.\n  * z: Depth in mm.\n  * depth: Total depth percentage: 100 * z / mean(x, y)\n  * table: Width of the top of the diamond relative to the widest point.",
   "downloadSize": "2772143",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://ggplot2.tidyverse.org/reference/diamonds.html"
@@ -15,6 +15,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "13646820",
       "shardLengths": [

@@ -2,6 +2,47 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
+            "sentence": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Supposed transcription of the audio"
+            },
+            "age": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Age bucket of the speaker (e.g. teens, or fourties), see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
+            },
+            "voice": {
+                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
+                "audio": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "NONE"
+                }
+            },
+            "segment": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "If sentence belongs to a custom dataset segment, it will be listed here"
+            },
+            "client_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Hashed UUID of a given user"
+            },
+            "upvotes": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "Number of people who said audio matches the text"
+            },
             "gender": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
@@ -22,47 +63,6 @@
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
                 "description": "Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
-            },
-            "segment": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "If sentence belongs to a custom dataset segment, it will be listed here"
-            },
-            "voice": {
-                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
-                "audio": {
-                    "shape": {
-                        "dimensions": [
-                            "-1"
-                        ]
-                    },
-                    "dtype": "int64",
-                    "encoding": "NONE"
-                }
-            },
-            "sentence": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Supposed transcription of the audio"
-            },
-            "upvotes": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
-                },
-                "description": "Number of people who said audio matches the text"
-            },
-            "client_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Hashed UUID of a given user"
-            },
-            "age": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Age bucket of the speaker (e.g. teens, or fourties), see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
             }
         }
     }

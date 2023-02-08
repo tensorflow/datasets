@@ -1,0 +1,53 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "image_left": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "1024",
+                            "2048",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png"
+                }
+            },
+            "image_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "disparity_map": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "1024",
+                            "2048",
+                            "1"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png"
+                }
+            },
+            "image_right": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "1024",
+                            "2048",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png"
+                }
+            }
+        }
+    }
+}

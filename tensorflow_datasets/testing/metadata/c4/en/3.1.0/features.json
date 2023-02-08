@@ -2,7 +2,11 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "content-length": {
+            "timestamp": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "content-type": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
@@ -10,15 +14,11 @@
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
+            "content-length": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
             "url": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
-            "timestamp": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
-            "content-type": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             }

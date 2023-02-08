@@ -3,6 +3,7 @@
   "configName": "threshold-0.7",
   "description": "ImageNet-v2 is an ImageNet test set (10 per class) collected by closely\nfollowing the original labelling protocol. Each image has been labelled by\nat least 10 MTurk workers, possibly more, and depending on the strategy used to\nselect which images to include among the 10 chosen for the given class there are\nthree different versions of the dataset. Please refer to section four of the\npaper for more details on how the different variants were compiled.\n\nThe label space is the same as that of ImageNet2012. Each example is\nrepresented as a dictionary with the following keys:\n\n* 'image': The image, a (H, W, 3)-tensor.\n* 'label': An integer in the range [0, 1000).\n* 'file_name': A unique sting identifying the example within the dataset.",
   "downloadSize": "1249906176",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/modestyachts/ImageNetV2"
@@ -10,8 +11,14 @@
   },
   "moduleName": "tensorflow_datasets.image_classification.imagenet_v2",
   "name": "imagenet_v2",
+  "releaseNotes": {
+    "1.0.0": "Initial version.",
+    "2.0.0": "Files updated.",
+    "3.0.0": "Fix file_name, from absolute path to path relative to data directory, ie: \"class_id/filename.jpg\"."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "1231602129",
       "shardLengths": [
@@ -35,8 +42,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "3.0.0"
 }

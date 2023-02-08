@@ -1,0 +1,25 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "features": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "4"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "label": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "3"
+                }
+            }
+        }
+    }
+}

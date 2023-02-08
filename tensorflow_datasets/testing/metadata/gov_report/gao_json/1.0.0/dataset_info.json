@@ -4,7 +4,7 @@
   "configName": "gao_json",
   "description": "Government report dataset consists of reports written by government research\n agencies including Congressional Research Service and U.S. Government\n Accountability Office.",
   "downloadSize": "336166706",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://gov-report-data.github.io/"
@@ -12,8 +12,12 @@
   },
   "moduleName": "tensorflow_datasets.summarization.gov_report.gov_report",
   "name": "gov_report",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "670940761",
       "shardLengths": [
@@ -28,6 +32,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "39023518",
       "shardLengths": [
@@ -35,6 +40,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "37479146",
       "shardLengths": [

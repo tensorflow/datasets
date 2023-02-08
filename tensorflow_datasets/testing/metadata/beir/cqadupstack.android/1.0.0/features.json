@@ -18,11 +18,11 @@
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "passage_metadata": {
+            "passage": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "passage": {
+            "passage_metadata": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },

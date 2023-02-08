@@ -1,0 +1,30 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "filename": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "label": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "8"
+                }
+            },
+            "image": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "150",
+                            "150",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8"
+                }
+            }
+        }
+    }
+}

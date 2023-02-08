@@ -4,7 +4,7 @@
   "configName": "realnewslike",
   "description": "A colossal, cleaned version of Common Crawl's web crawl corpus.\n\nBased on Common Crawl dataset: https://commoncrawl.org\n\nTo generate this dataset, please follow\n[the instructions from t5](https://github.com/google-research/text-to-text-transfer-transformer#c4).\n\nDue to the overhead of cleaning the dataset, it is recommend you prepare it with\na distributed service like Cloud Dataflow. More info at\nhttps://www.tensorflow.org/datasets/beam_datasets.",
   "downloadSize": "348455",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research/text-to-text-transfer-transformer#datasets"
@@ -16,7 +16,7 @@
     {
       "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numBytes": "39589668211",
+      "numBytes": "39589668206",
       "shardLengths": [
         "26963",
         "26962",

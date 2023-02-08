@@ -1,8 +1,8 @@
 {
-  "citation": "@inproceedings{DBLP:conf/propor/RealFO20,\n  author    = {Livy Real and\n               Erick Fonseca and\n               Hugo Gon{\\c{c}}alo Oliveira},\n  editor    = {Paulo Quaresma and\n               Renata Vieira and\n               Sandra M. Alu{'{\\i}}sio and\n               Helena Moniz and\n               Fernando Batista and\n               Teresa Gon{\\c{c}}alves},\n  title     = {The {ASSIN} 2 Shared Task: {A} Quick Overview},\n  booktitle = {Computational Processing of the Portuguese Language - 14th International\n               Conference, {PROPOR} 2020, Evora, Portugal, March 2-4, 2020, Proceedings},\n  series    = {Lecture Notes in Computer Science},\n  volume    = {12037},\n  pages     = {406--412},\n  publisher = {Springer},\n  year      = {2020},\n  url       = {https://doi.org/10.1007/978-3-030-41505-1\\_39},\n  doi       = {10.1007/978-3-030-41505-1\\_39},\n  timestamp = {Tue, 03 Mar 2020 09:40:18 +0100},\n  biburl    = {https://dblp.org/rec/conf/propor/RealFO20.bib},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "citation": "@inproceedings{DBLP:conf/propor/RealFO20,\n  author    = {Livy Real and\n               Erick Fonseca and\n               Hugo Gon{\\c{c}}alo Oliveira},\n  editor    = {Paulo Quaresma and\n               Renata Vieira and\n               Sandra M. Alu{\\'{\\i}}sio and\n               Helena Moniz and\n               Fernando Batista and\n               Teresa Gon{\\c{c}}alves},\n  title     = {The {ASSIN} 2 Shared Task: {A} Quick Overview},\n  booktitle = {Computational Processing of the Portuguese Language - 14th International\n               Conference, {PROPOR} 2020, Evora, Portugal, March 2-4, 2020, Proceedings},\n  series    = {Lecture Notes in Computer Science},\n  volume    = {12037},\n  pages     = {406--412},\n  publisher = {Springer},\n  year      = {2020},\n  url       = {https://doi.org/10.1007/978-3-030-41505-1_39},\n  doi       = {10.1007/978-3-030-41505-1_39},\n  timestamp = {Tue, 03 Mar 2020 09:40:18 +0100},\n  biburl    = {https://dblp.org/rec/conf/propor/RealFO20.bib},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
   "description": "## Contextualization\nASSIN 2 is the second edition of the Avalia\u00e7\u00e3o de Similaridade Sem\u00e2ntica e\nInfer\u00eancia Textual (Evaluating Semantic Similarity and Textual Entailment),\nand was a workshop collocated with [STIL 2019](http://www.google.com/url?q=http%3A%2F%2Fcomissoes.sbc.org.br%2Fce-pln%2Fstil2019%2F&sa=D&sntz=1&usg=AFQjCNHN8DosAsJ-gd48TfkXFX5YD6xM7g). It follows the [first edition of ASSIN](http://www.google.com/url?q=http%3A%2F%2Fpropor2016.di.fc.ul.pt%2F%3Fpage_id%3D381&sa=D&sntz=1&usg=AFQjCNHV7ySeNzH4k6MWKBLqO9yUkqiUqw),\nproposing a new shared task with new data.\n\nThe workshop evaluated systems that assess two types of relations between\ntwo sentences: Semantic Textual Similarity and Textual Entailment.\n\nSemantic Textual Similarity consists of quantifying the level of semantic\nequivalence between sentences, while Textual Entailment Recognition consists of\nclassifying whether the first sentence entails the second.\n\n## Data\nThe corpus used in ASSIN 2 is composed of rather simple sentences. Following\nthe procedures of SemEval 2014 Task 1, we tried to remove from the corpus named\nentities and indirect speech, and tried to have all verbs in the present tense.\nThe [annotation instructions](https://drive.google.com/open?id=1aUPhywEHD0r_pxPiTqZwS0fRj-1Xda2w)\ngiven to annotators are available (in Portuguese).\n\nThe training and validation data are composed, respectively, of 6,500 and 500\nsentence pairs in Brazilian Portuguese, annotated for entailment and\nsemantic similarity. Semantic similarity values range from 1 to 5, and text\nentailment classes are either entailment or none. The test data are composed of\napproximately 3,000 sentence pairs with the same annotation. All data were\nmanually annotated.\n\n## Evaluation\nEvaluation\nThe evaluation of submissions to ASSIN 2 was with the same metrics as the first\nASSIN, with the F1 of precision and recall as the main metric for text\nentailment and Pearson correlation for semantic similarity.\nThe [evaluation scripts](https://github.com/erickrf/assin) are the same as in\nthe last edition.\n\nPS.: Description is extracted from [official homepage](https://sites.google.com/view/assin2/english).",
   "downloadSize": "2113646",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://sites.google.com/view/assin2/english"
@@ -15,6 +15,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "1306105",
       "shardLengths": [
@@ -22,6 +23,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "100723",
       "shardLengths": [
@@ -29,6 +31,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "505789",
       "shardLengths": [

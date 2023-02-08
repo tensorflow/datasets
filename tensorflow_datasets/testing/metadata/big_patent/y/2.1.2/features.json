@@ -1,0 +1,15 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "description": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "abstract": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
+        }
+    }
+}

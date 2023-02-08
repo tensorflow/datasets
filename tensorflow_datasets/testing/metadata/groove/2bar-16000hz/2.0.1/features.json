@@ -1,0 +1,83 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "drummer": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "10"
+                }
+            },
+            "bpm": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "audio": {
+                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
+                "audio": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "sampleRate": "16000",
+                    "encoding": "NONE"
+                }
+            },
+            "time_signature": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "5"
+                }
+            },
+            "style": {
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                "featuresDict": {
+                    "features": {
+                        "secondary": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "string",
+                                "encoding": "none"
+                            }
+                        },
+                        "primary": {
+                            "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "classLabel": {
+                                "numClasses": "18"
+                            }
+                        }
+                    }
+                }
+            },
+            "midi": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "type": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "2"
+                }
+            }
+        }
+    }
+}

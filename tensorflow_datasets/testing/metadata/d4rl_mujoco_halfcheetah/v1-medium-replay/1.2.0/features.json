@@ -2,6 +2,14 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
+            "algorithm": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
             "steps": {
                 "pythonClassName": "tensorflow_datasets.core.features.dataset_feature.Dataset",
                 "sequence": {
@@ -9,39 +17,15 @@
                         "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                         "featuresDict": {
                             "features": {
-                                "reward": {
+                                "is_terminal": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
-                                        "dtype": "float64",
+                                        "dtype": "bool",
                                         "encoding": "none"
                                     }
                                 },
-                                "action": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {
-                                            "dimensions": [
-                                                "6"
-                                            ]
-                                        },
-                                        "dtype": "float64",
-                                        "encoding": "none"
-                                    }
-                                },
-                                "observation": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {
-                                            "dimensions": [
-                                                "17"
-                                            ]
-                                        },
-                                        "dtype": "float64",
-                                        "encoding": "none"
-                                    }
-                                },
-                                "is_last": {
+                                "is_first": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
@@ -88,7 +72,39 @@
                                         }
                                     }
                                 },
-                                "discount": {
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "17"
+                                            ]
+                                        },
+                                        "dtype": "float64",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "action": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "6"
+                                            ]
+                                        },
+                                        "dtype": "float64",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "is_last": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "reward": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
@@ -96,19 +112,11 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "is_terminal": {
+                                "discount": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
-                                        "dtype": "bool",
-                                        "encoding": "none"
-                                    }
-                                },
-                                "is_first": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "bool",
+                                        "dtype": "float64",
                                         "encoding": "none"
                                     }
                                 }
@@ -116,14 +124,6 @@
                         }
                     },
                     "length": "-1"
-                }
-            },
-            "algorithm": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
                 }
             },
             "iteration": {

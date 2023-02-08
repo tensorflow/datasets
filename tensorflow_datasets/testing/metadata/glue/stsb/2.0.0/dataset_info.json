@@ -1,9 +1,10 @@
 {
   "citation": "@article{cer2017semeval,\n  title={Semeval-2017 task 1: Semantic textual similarity-multilingual and cross-lingual focused evaluation},\n  author={Cer, Daniel and Diab, Mona and Agirre, Eneko and Lopez-Gazpio, Inigo and Specia, Lucia},\n  journal={arXiv preprint arXiv:1708.00055},\n  year={2017}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
-  "configDescription": "The Semantic Textual Similarity Benchmark (Cer et al., 2017) is a collection of\nsentence pairs drawn from news headlines, video and image captions, and natural\nlanguage inference data. Each pair is human-annotated with a similarity score\nfrom 1 to 5.",
+  "configDescription": "The Semantic Textual Similarity Benchmark (Cer et al., 2017) is a collection of\nsentence pairs drawn from news headlines, video and image captions, and natural\nlanguage inference data. Each pair is human-annotated with a similarity score\nfrom 0 to 5.",
   "configName": "stsb",
   "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
   "downloadSize": "802872",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark"
@@ -11,8 +12,14 @@
   },
   "moduleName": "tensorflow_datasets.text.glue",
   "name": "glue",
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    "1.0.1": "Update dead URL links.",
+    "2.0.0": "Update data source for glue/qqp."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "1096733",
       "shardLengths": [
@@ -20,6 +27,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "305125",
       "shardLengths": [
@@ -27,6 +35,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "251676",
       "shardLengths": [

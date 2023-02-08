@@ -2,7 +2,7 @@
   "citation": "@misc{https://doi.org/10.48550/arxiv.2204.06092,\ndoi = {10.48550/ARXIV.2204.06092},\nurl = {https://arxiv.org/abs/2204.06092},\nauthor = {Stelmakh, Ivan and Luan, Yi and Dhingra, Bhuwan and Chang, Ming-Wei},\nkeywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},\ntitle = {ASQA: Factoid Questions Meet Long-Form Answers},\npublisher = {arXiv},\nyear = {2022},\ncopyright = {arXiv.org perpetual, non-exclusive license}\n}",
   "description": "ASQA is the first long-form question answering dataset that focuses on ambiguous\nfactoid questions. Different from previous long-form answers datasets, each\nquestion is annotated with both long-form answers and extractive question-answer\npairs, which should be answerable by the generated passage. A generated\nlong-form answer will be evaluated using both ROUGE and QA accuracy. We showed\nthat these evaluation metrics correlated with human judgment well. In this\nrepostory we release the ASQA dataset, together with the evaluation code:\n`https://github.com/google-research/language/tree/master/language/asqa`",
   "downloadSize": "18732616",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research/language/tree/master/language/asqa"

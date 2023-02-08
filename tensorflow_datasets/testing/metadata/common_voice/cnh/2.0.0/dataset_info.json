@@ -3,7 +3,7 @@
   "configName": "cnh",
   "description": "Mozilla Common Voice Dataset",
   "downloadSize": "161331331",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://voice.mozilla.org/en/datasets"

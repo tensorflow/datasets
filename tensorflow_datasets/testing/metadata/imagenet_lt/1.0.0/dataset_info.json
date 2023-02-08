@@ -2,7 +2,7 @@
   "citation": "\\\n@inproceedings{openlongtailrecognition,\n  title={Large-Scale Long-Tailed Recognition in an Open World},\n  author={Liu, Ziwei and Miao, Zhongqi and Zhan, Xiaohang and Wang, Jiayun and Gong, Boqing and Yu, Stella X.},\n  booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},\n  year={2019},\n  url={https://github.com/zhmiao/OpenLongTailRecognition-OLTR}\n}",
   "description": "ImageNet-LT is a subset of original ImageNet ILSVRC 2012 dataset.\nThe training set is subsampled such that the number of images per class\nfollows a long-tailed distribution. The class with the maximum number of images\ncontains 1,280 examples, whereas the class with the minumum number of images\ncontains only 5 examples. The dataset also has a balanced validation set,\nwhich is also a subset of the ImageNet ILSVRC 2012 training set and contains\n20 images per class. The test set of this dataset is the same as the validation\nset of the original ImageNet ILSVRC 2012 dataset.\n\nThe original ImageNet ILSVRC 2012 dataset must be downloaded manually, and\nits path should be set with --manual_dir in order to generate this dataset.",
   "downloadSize": "5462846",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/zhmiao/OpenLongTailRecognition-OLTR"
@@ -15,6 +15,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "13464801478",
       "shardLengths": [
@@ -149,6 +150,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "2284683694",
       "shardLengths": [
@@ -187,6 +189,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "6711099535",
       "shardLengths": [

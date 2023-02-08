@@ -3,7 +3,7 @@
   "configName": "pa-IN",
   "description": "Mozilla Common Voice Dataset",
   "downloadSize": "69748265",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://voice.mozilla.org/en/datasets"

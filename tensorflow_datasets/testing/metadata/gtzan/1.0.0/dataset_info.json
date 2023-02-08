@@ -2,14 +2,17 @@
   "citation": "@misc{tzanetakis_essl_cook_2001,\nauthor    = \"Tzanetakis, George and Essl, Georg and Cook, Perry\",\ntitle     = \"Automatic Musical Genre Classification Of Audio Signals\",\nurl       = \"http://ismir2001.ismir.net/pdf/tzanetakis.pdf\",\npublisher = \"The International Society for Music Information Retrieval\",\nyear      = \"2001\"\n}",
   "description": "The dataset consists of 1000 audio tracks each 30 seconds long.\nIt contains 10 genres, each represented by 100 tracks.\nThe tracks are all 22050Hz Mono 16-bit audio files in .wav format.\n\nThe genres are:\n\n* blues\n* classical\n* country\n* disco\n* hiphop\n* jazz\n* metal\n* pop\n* reggae\n* rock",
   "downloadSize": "1225571541",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://marsyas.info/index.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.audio.gtzan.gtzan",
   "name": "gtzan",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "3979757904",
       "shardLengths": [
@@ -49,8 +52,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "audio",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "audio"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

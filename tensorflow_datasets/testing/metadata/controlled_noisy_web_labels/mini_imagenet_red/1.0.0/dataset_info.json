@@ -3,7 +3,7 @@
   "configName": "mini_imagenet_red",
   "description": "Controlled Noisy Web Labels is a collection of ~212,000 URLs to images in which\nevery image is carefully annotated by 3-5 labeling professionals by Google Cloud\nData Labeling Service. Using these annotations, it establishes the first\nbenchmark of controlled real-world label noise from the web.\n\nWe provide the Red Mini-ImageNet (real-world web noise) and Blue Mini-ImageNet\nconfigs:\n  - controlled_noisy_web_labels/mini_imagenet_red\n  - controlled_noisy_web_labels/mini_imagenet_blue\n\nEach config contains ten variants with ten noise-levels p from 0% to 80%. The\nvalidation set has clean labels and is shared across all noisy training sets.\nTherefore, each config has the following splits:\n\n  - train_00\n  - train_05\n  - train_10\n  - train_15\n  - train_20\n  - train_30\n  - train_40\n  - train_50\n  - train_60\n  - train_80\n  - validation\n\nThe details for dataset construction and analysis can be found in the paper.\nAll images are resized to 84x84 resolution.",
   "downloadSize": "1920045",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://google.github.io/controlled-noisy-web-labels/index.html"

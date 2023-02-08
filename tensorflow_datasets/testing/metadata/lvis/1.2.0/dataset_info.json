@@ -2,6 +2,7 @@
   "citation": "@inproceedings{gupta2019lvis,\n  title={{LVIS}: A Dataset for Large Vocabulary Instance Segmentation},\n  author={Gupta, Agrim and Dollar, Piotr and Girshick, Ross},\n  booktitle={Proceedings of the {IEEE} Conference on Computer Vision and Pattern Recognition},\n  year={2019}\n}",
   "description": "LVIS: A dataset for large vocabulary instance segmentation.",
   "downloadSize": "27214093950",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.lvisdataset.org/"
@@ -9,8 +10,13 @@
   },
   "moduleName": "tensorflow_datasets.object_detection.lvis.lvis",
   "name": "lvis",
+  "releaseNotes": {
+    "1.1.0": "Added fields `neg_category_ids` and `not_exhaustive_category_ids`.",
+    "1.2.0": "Added class names."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "17275746061",
       "shardLengths": [
@@ -273,6 +279,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "3419546126",
       "shardLengths": [
@@ -311,6 +318,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "3243341921",
       "shardLengths": [

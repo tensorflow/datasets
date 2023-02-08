@@ -3,7 +3,7 @@
   "configName": "scifact",
   "description": "BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides\na common and easy framework for evaluation of your NLP-based retrieval models\nwithin the benchmark.",
   "downloadSize": "2816079",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/beir-cellar/beir"

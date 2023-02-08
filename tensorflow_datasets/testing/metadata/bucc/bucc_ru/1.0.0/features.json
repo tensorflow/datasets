@@ -2,11 +2,11 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "target_sentence": {
+            "target_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "target_id": {
+            "target_sentence": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },

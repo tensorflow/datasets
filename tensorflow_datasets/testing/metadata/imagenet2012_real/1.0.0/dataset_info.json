@@ -1,15 +1,21 @@
 {
   "citation": "@article{beyer2020imagenet,\n  title={Are we done with ImageNet?},\n  author={Lucas Beyer and Olivier J. Henaff and Alexander Kolesnikov and Xiaohua Zhai and Aaron van den Oord},\n  journal={arXiv preprint arXiv:2002.05709},\n  year={2020}\n}\n@article{ILSVRC15,\n  Author={Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},\n  Title={{ImageNet Large Scale Visual Recognition Challenge}},\n  Year={2015},\n  journal={International Journal of Computer Vision (IJCV)},\n  doi={10.1007/s11263-015-0816-y},\n  volume={115},\n  number={3},\n  pages={211-252}\n}",
-  "description": "This dataset contains ILSVRC-2012 (ImageNet) validation images augmented with a\nnew set of \"Re-Assessed\" (ReaL) labels from the \"Are we done with ImageNet\"\npaper, see https://arxiv.org/abs/2006.07159. These labels are collected using\nthe enhanced protocol, resulting in multi-label and more accurate annotations.",
+  "description": "This dataset contains ILSVRC-2012 (ImageNet) validation images augmented with a\nnew set of \"Re-Assessed\" (ReaL) labels from the \"Are we done with ImageNet\"\npaper, see https://arxiv.org/abs/2006.07159. These labels are collected using\nthe enhanced protocol, resulting in multi-label and more accurate annotations.\n\nImportant note: about 3500 examples contain no label, these should be [excluded\nfrom the averaging when computing the accuracy](https://github.com/google-research/reassessed-imagenet#numpy).\nOne possible way of doing this is with the following NumPy code:\n\n```python\nis_correct = [pred in real_labels[i] for i, pred in enumerate(predictions) if real_labels[i]]\nreal_accuracy = np.mean(is_correct)\n```",
   "downloadSize": "388478",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research/reassessed-imagenet"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.imagenet2012_real",
   "name": "imagenet2012_real",
+  "releaseNotes": {
+    "1.0.0": "Initial release"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "6712651903",
       "shardLengths": [
@@ -81,8 +87,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "real_label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "real_label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

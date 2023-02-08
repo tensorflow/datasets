@@ -4,6 +4,7 @@
   "configName": "mnli_mismatched",
   "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
   "downloadSize": "312783507",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.nyu.edu/projects/bowman/multinli/"
@@ -11,8 +12,14 @@
   },
   "moduleName": "tensorflow_datasets.text.glue",
   "name": "glue",
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    "1.0.1": "Update dead URL links.",
+    "2.0.0": "Update data source for glue/qqp."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "2466430",
       "shardLengths": [
@@ -20,6 +27,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "2557769",
       "shardLengths": [

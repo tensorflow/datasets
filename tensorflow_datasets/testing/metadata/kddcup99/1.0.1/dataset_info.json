@@ -2,7 +2,7 @@
   "citation": "@misc{Dua:2019 ,\n  author = \"Dua, Dheeru and Graff, Casey\",\n  year = 2017,\n  title = \"{UCI} Machine Learning Repository\",\n  url = \"http://archive.ics.uci.edu/ml\",\n  institution = \"University of California, Irvine, School of Information and\nComputer Sciences\"\n}",
   "description": "This is the data set used for The Third International Knowledge Discovery and\nData Mining Tools Competition, which was held in conjunction with KDD-99 The\nFifth International Conference on Knowledge Discovery and Data Mining. The\ncompetition task was to build a network intrusion detector, a predictive model\ncapable of distinguishing between 'bad' connections, called intrusions or\nattacks, and 'good' normal connections. This database contains a standard set of\ndata to be audited, which includes a wide variety of intrusions simulated in a\nmilitary network environment.",
   "downloadSize": "19524937",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html"

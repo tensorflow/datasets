@@ -3,7 +3,7 @@
   "description": "Pre-trained Global Vectors for Word Representation (GloVe) embeddings for\napproximate nearest neighbor search. This dataset consists of two splits:\n\n  1. 'database': consists of 1,183,514 data points, each has features:\n    'embedding' (100 floats), 'index' (int64), 'neighbors' (empty list).\n  2. 'test': consists of 10,000 data points, each has features: 'embedding' (100\n    floats), 'index' (int64), 'neighbors' (list of 'index' and 'distance'\n    of the nearest neighbors in the database.)",
   "disableShuffling": true,
   "downloadSize": "485413888",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://nlp.stanford.edu/projects/glove/"

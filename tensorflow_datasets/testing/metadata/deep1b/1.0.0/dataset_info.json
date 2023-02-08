@@ -3,7 +3,7 @@
   "description": "Pre-trained embeddings for approximate nearest neighbor search using the\ncosine distance. This dataset consists of two splits:\n\n  1. 'database': consists of 9,990,000 data points, each has features:\n    'embedding' (96 floats), 'index' (int64), 'neighbors' (empty list).\n  2. 'test': consists of 10,000 data points, each has features: 'embedding' (96\n    floats), 'index' (int64), 'neighbors' (list of 'index' and 'distance'\n    of the nearest neighbors in the database.)",
   "disableShuffling": true,
   "downloadSize": "3848008288",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://sites.skoltech.ru/compvision/noimi/"

@@ -1,5 +1,37 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": "{\n  \"features\": {\n    \"text\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"text\": {}\n    },\n    \"entailment\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.class_label_feature.ClassLabel\",\n      \"classLabel\": {\n        \"numClasses\": \"2\"\n      }\n    },\n    \"id\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n      \"tensor\": {\n        \"shape\": {},\n        \"dtype\": \"int32\",\n        \"encoding\": \"none\"\n      }\n    },\n    \"similarity\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n      \"tensor\": {\n        \"shape\": {},\n        \"dtype\": \"float32\",\n        \"encoding\": \"none\"\n      }\n    },\n    \"hypothesis\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"text\": {}\n    }\n  }\n}",
-    "proto_cls": "tensorflow_datasets.FeaturesDict"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "text": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "entailment": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "2"
+                }
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "similarity": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "hypothesis": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
+        }
+    }
 }

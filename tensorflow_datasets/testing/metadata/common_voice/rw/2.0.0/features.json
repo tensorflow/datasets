@@ -2,14 +2,17 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "upvotes": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
+            "client_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Hashed UUID of a given user"
+            },
+            "gender": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "3"
                 },
-                "description": "Number of people who said audio matches the text"
+                "description": "Gender of the speaker"
             },
             "voice": {
                 "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
@@ -23,15 +26,33 @@
                     "encoding": "NONE"
                 }
             },
+            "downvotes": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "Number of people who said audio does not match text"
+            },
             "age": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
                 "description": "Age bucket of the speaker (e.g. teens, or fourties), see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
             },
-            "client_id": {
+            "accent": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
-                "description": "Hashed UUID of a given user"
+                "description": "Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
+            },
+            "upvotes": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "Number of people who said audio matches the text"
             },
             "segment": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
@@ -42,27 +63,6 @@
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
                 "description": "Supposed transcription of the audio"
-            },
-            "accent": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
-            },
-            "downvotes": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
-                },
-                "description": "Number of people who said audio does not match text"
-            },
-            "gender": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "3"
-                },
-                "description": "Gender of the speaker"
             }
         }
     }

@@ -2,21 +2,17 @@
   "citation": "@InProceedings{acl19disentangle,\n  author    = {Jonathan K. Kummerfeld and Sai R. Gouravajhala and Joseph Peper and Vignesh Athreya and Chulaka Gunasekara and Jatin Ganhotra and Siva Sankalp Patel and Lazaros Polymenakos and Walter S. Lasecki},\n  title     = {A Large-Scale Corpus for Conversation Disentanglement},\n  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},\n  location  = {Florence, Italy},\n  month     = {July},\n  year      = {2019},\n  doi       = {10.18653/v1/P19-1374},\n  pages     = {3846--3856},\n  url       = {https://aclweb.org/anthology/papers/P/P19/P19-1374/},\n  arxiv     = {https://arxiv.org/abs/1810.11118},\n  software  = {https://jkk.name/irc-disentanglement},\n  data      = {https://jkk.name/irc-disentanglement},\n}",
   "description": "IRC Disentanglement dataset contains over 77,563 messages from Ubuntu IRC\nchannel.\n\nFeatures include message id, message text and timestamp.\nTarget is list of messages that current message replies to.\nEach record contains a list of messages from one day of IRC chat.",
   "downloadSize": "119047410",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://jkk.name/irc-disentanglement"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.irc_disentanglement",
   "name": "irc_disentanglement",
   "splits": [
     {
-      "name": "test",
-      "numBytes": "1732680",
-      "shardLengths": [
-        "10"
-      ]
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "24795628",
       "shardLengths": [
@@ -24,8 +20,17 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "1355085",
+      "shardLengths": [
+        "10"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1732680",
       "shardLengths": [
         "10"
       ]

@@ -4,6 +4,7 @@
   "configName": "wiki_auto_asset_turk",
   "description": "**GEM** is a benchmark environment for Natural Language Generation with a focus\non its Evaluation, both through human annotations and automated Metrics.\n\nGEM aims to: (1) measure NLG progress across 13 datasets spanning many NLG\ntasks and languages. (2) provide an in-depth analysis of data and models\npresented via data statements and challenge sets. (3) develop standards for\nevaluation of generated text using both automated and human metrics.\n\nMore information can be found at\n[https://gem-benchmark.com](https://gem-benchmark.com).",
   "downloadSize": "126883782",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://gem-benchmark.com"
@@ -11,8 +12,14 @@
   },
   "moduleName": "tensorflow_datasets.text.gem.gem",
   "name": "gem",
+  "releaseNotes": {
+    "1.0.0": "Initial version",
+    "1.0.1": "Update bad links filter for MLSum",
+    "1.1.0": "Release of the Challenge Sets"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "197584148",
       "shardLengths": [
@@ -21,6 +28,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "9682959",
       "shardLengths": [
@@ -28,6 +36,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_asset",
       "numBytes": "450940",
       "shardLengths": [
@@ -35,6 +44,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_turk",
       "numBytes": "430628",
       "shardLengths": [
@@ -42,6 +52,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_train_sample",
       "numBytes": "256456",
       "shardLengths": [
@@ -49,6 +60,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_validation_sample",
       "numBytes": "249828",
       "shardLengths": [
@@ -56,6 +68,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_asset_backtranslation",
       "numBytes": "458628",
       "shardLengths": [
@@ -63,6 +76,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_asset_bfp02",
       "numBytes": "454530",
       "shardLengths": [
@@ -70,6 +84,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_asset_bfp05",
       "numBytes": "454530",
       "shardLengths": [
@@ -77,6 +92,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_asset_nopunc",
       "numBytes": "454516",
       "shardLengths": [
@@ -84,6 +100,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_turk_backtranslation",
       "numBytes": "440951",
       "shardLengths": [
@@ -91,6 +108,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_turk_bfp02",
       "numBytes": "438167",
       "shardLengths": [
@@ -98,6 +116,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_turk_bfp05",
       "numBytes": "438169",
       "shardLengths": [
@@ -105,6 +124,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_turk_nopunc",
       "numBytes": "438166",
       "shardLengths": [

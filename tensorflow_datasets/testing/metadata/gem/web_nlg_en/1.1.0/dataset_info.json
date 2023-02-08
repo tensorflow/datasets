@@ -1,9 +1,10 @@
 {
-  "citation": "@inproceedings{gardent2017creating,\n  author = \t\"Gardent, Claire\n    and Shimorina, Anastasia\n    and Narayan, Shashi\n    and Perez-Beltrachini, Laura\",\n  title = \t\"Creating Training Corpora for NLG Micro-Planners\",\n  booktitle = \t\"Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)\",\n  year = \t\"2017\",\n  publisher = \t\"Association for Computational Linguistics\",\n  pages = \t\"179--188\",\n  location = \t\"Vancouver, Canada\",\n  doi = \t\"10.18653/v1/P17-1017\",\n  url = \t\"http://www.aclweb.org/anthology/P17-1017\"\n}\n@article{gehrmann2021gem,\n  author    = {Sebastian Gehrmann and\n               Tosin P. Adewumi and\n               Karmanya Aggarwal and\n               Pawan Sasanka Ammanamanchi and\n               Aremu Anuoluwapo and\n               Antoine Bosselut and\n               Khyathi Raghavi Chandu and\n               Miruna{-}Adriana Clinciu and\n               Dipanjan Das and\n               Kaustubh D. Dhole and\n               Wanyu Du and\n               Esin Durmus and\n               Ondrej Dusek and\n               Chris Emezue and\n               Varun Gangal and\n               Cristina Garbacea and\n               Tatsunori Hashimoto and\n               Yufang Hou and\n               Yacine Jernite and\n               Harsh Jhamtani and\n               Yangfeng Ji and\n               Shailza Jolly and\n               Dhruv Kumar and\n               Faisal Ladhak and\n               Aman Madaan and\n               Mounica Maddela and\n               Khyati Mahajan and\n               Saad Mahamood and\n               Bodhisattwa Prasad Majumder and\n               Pedro Henrique Martins and\n               Angelina McMillan{-}Major and\n               Simon Mille and\n               Emiel van Miltenburg and\n               Moin Nadeem and\n               Shashi Narayan and\n               Vitaly Nikolaev and\n               Rubungo Andre Niyongabo and\n               Salomey Osei and\n               Ankur P. Parikh and\n               Laura Perez{-}Beltrachini and\n               Niranjan Ramesh Rao and\n               Vikas Raunak and\n               Juan Diego Rodriguez and\n               Sashank Santhanam and\n               Jo{\\~{a}}o Sedoc and\n               Thibault Sellam and\n               Samira Shaikh and\n               Anastasia Shimorina and\n               Marco Antonio Sobrevilla Cabezudo and\n               Hendrik Strobelt and\n               Nishant Subramani and\n               Wei Xu and\n               Diyi Yang and\n               Akhila Yerukola and\n               Jiawei Zhou},\n  title     = {The {GEM} Benchmark: Natural Language Generation, its Evaluation and\n               Metrics},\n  journal   = {CoRR},\n  volume    = {abs/2102.01672},\n  year      = {2021},\n  url       = {https://arxiv.org/abs/2102.01672},\n  archivePrefix = {arXiv},\n  eprint    = {2102.01672}\n}\n\nNote that each GEM dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.\"",
+  "citation": "@inproceedings{gardent2017creating,\n  author = \"Gardent, Claire\n    and Shimorina, Anastasia\n    and Narayan, Shashi\n    and Perez-Beltrachini, Laura\",\n  title = \"Creating Training Corpora for NLG Micro-Planners\",\n  booktitle = \"Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)\",\n  year = \"2017\",\n  publisher = \"Association for Computational Linguistics\",\n  pages = \"179--188\",\n  location = \"Vancouver, Canada\",\n  doi = \"10.18653/v1/P17-1017\",\n  url = \"http://www.aclweb.org/anthology/P17-1017\"\n}\n@article{gehrmann2021gem,\n  author    = {Sebastian Gehrmann and\n               Tosin P. Adewumi and\n               Karmanya Aggarwal and\n               Pawan Sasanka Ammanamanchi and\n               Aremu Anuoluwapo and\n               Antoine Bosselut and\n               Khyathi Raghavi Chandu and\n               Miruna{-}Adriana Clinciu and\n               Dipanjan Das and\n               Kaustubh D. Dhole and\n               Wanyu Du and\n               Esin Durmus and\n               Ondrej Dusek and\n               Chris Emezue and\n               Varun Gangal and\n               Cristina Garbacea and\n               Tatsunori Hashimoto and\n               Yufang Hou and\n               Yacine Jernite and\n               Harsh Jhamtani and\n               Yangfeng Ji and\n               Shailza Jolly and\n               Dhruv Kumar and\n               Faisal Ladhak and\n               Aman Madaan and\n               Mounica Maddela and\n               Khyati Mahajan and\n               Saad Mahamood and\n               Bodhisattwa Prasad Majumder and\n               Pedro Henrique Martins and\n               Angelina McMillan{-}Major and\n               Simon Mille and\n               Emiel van Miltenburg and\n               Moin Nadeem and\n               Shashi Narayan and\n               Vitaly Nikolaev and\n               Rubungo Andre Niyongabo and\n               Salomey Osei and\n               Ankur P. Parikh and\n               Laura Perez{-}Beltrachini and\n               Niranjan Ramesh Rao and\n               Vikas Raunak and\n               Juan Diego Rodriguez and\n               Sashank Santhanam and\n               Jo{\\~{a}}o Sedoc and\n               Thibault Sellam and\n               Samira Shaikh and\n               Anastasia Shimorina and\n               Marco Antonio Sobrevilla Cabezudo and\n               Hendrik Strobelt and\n               Nishant Subramani and\n               Wei Xu and\n               Diyi Yang and\n               Akhila Yerukola and\n               Jiawei Zhou},\n  title     = {The {GEM} Benchmark: Natural Language Generation, its Evaluation and\n               Metrics},\n  journal   = {CoRR},\n  volume    = {abs/2102.01672},\n  year      = {2021},\n  url       = {https://arxiv.org/abs/2102.01672},\n  archivePrefix = {arXiv},\n  eprint    = {2102.01672}\n}\n\nNote that each GEM dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.\"",
   "configDescription": "WebNLG is a bi-lingual dataset (English, Russian) of parallel\nDBpedia triple sets and short texts that cover about 450 different\nDBpedia properties. The WebNLG data was originally created to\npromote the development of RDF verbalisers able to generate short\ntext and to handle micro-planning.",
   "configName": "web_nlg_en",
   "description": "**GEM** is a benchmark environment for Natural Language Generation with a focus\non its Evaluation, both through human annotations and automated Metrics.\n\nGEM aims to: (1) measure NLG progress across 13 datasets spanning many NLG\ntasks and languages. (2) provide an in-depth analysis of data and models\npresented via data statements and challenge sets. (3) develop standards for\nevaluation of generated text using both automated and human metrics.\n\nMore information can be found at\n[https://gem-benchmark.com](https://gem-benchmark.com).",
   "downloadSize": "13181969",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://gem-benchmark.com"
@@ -11,8 +12,14 @@
   },
   "moduleName": "tensorflow_datasets.text.gem.gem",
   "name": "gem",
+  "releaseNotes": {
+    "1.0.0": "Initial version",
+    "1.0.1": "Update bad links filter for MLSum",
+    "1.1.0": "Release of the Challenge Sets"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "16447494",
       "shardLengths": [
@@ -20,6 +27,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "1310234",
       "shardLengths": [
@@ -27,6 +35,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "1570097",
       "shardLengths": [
@@ -34,6 +43,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_train_sample",
       "numBytes": "241067",
       "shardLengths": [
@@ -41,6 +51,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_validation_sample",
       "numBytes": "406570",
       "shardLengths": [
@@ -48,6 +59,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_scramble",
       "numBytes": "449194",
       "shardLengths": [
@@ -55,6 +67,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_numbers",
       "numBytes": "456061",
       "shardLengths": [

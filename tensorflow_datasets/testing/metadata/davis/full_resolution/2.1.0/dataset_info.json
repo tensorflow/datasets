@@ -4,6 +4,7 @@
   "configName": "full_resolution",
   "description": "The DAVIS 2017 video object segmentation dataset.",
   "downloadSize": "2956935323",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://davischallenge.org/"
@@ -11,8 +12,14 @@
   },
   "moduleName": "tensorflow_datasets.video.davis.davis",
   "name": "davis",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Change instance ids to be 0, 1, 2, ...",
+    "2.1.0": "Fix instance ids order."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "2045793573",
       "shardLengths": [
@@ -35,6 +42,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "934045623",
       "shardLengths": [

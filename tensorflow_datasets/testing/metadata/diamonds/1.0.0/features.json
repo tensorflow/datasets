@@ -1,5 +1,88 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": "{\n  \"features\": {\n    \"price\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n      \"tensor\": {\n        \"shape\": {},\n        \"dtype\": \"float32\",\n        \"encoding\": \"none\"\n      }\n    },\n    \"features\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.features_dict.FeaturesDict\",\n      \"featuresDict\": {\n        \"features\": {\n          \"z\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n            \"tensor\": {\n              \"shape\": {},\n              \"dtype\": \"float32\",\n              \"encoding\": \"none\"\n            }\n          },\n          \"table\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n            \"tensor\": {\n              \"shape\": {},\n              \"dtype\": \"float32\",\n              \"encoding\": \"none\"\n            }\n          },\n          \"clarity\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.class_label_feature.ClassLabel\",\n            \"classLabel\": {\n              \"numClasses\": \"8\"\n            }\n          },\n          \"cut\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.class_label_feature.ClassLabel\",\n            \"classLabel\": {\n              \"numClasses\": \"5\"\n            }\n          },\n          \"carat\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n            \"tensor\": {\n              \"shape\": {},\n              \"dtype\": \"float32\",\n              \"encoding\": \"none\"\n            }\n          },\n          \"x\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n            \"tensor\": {\n              \"shape\": {},\n              \"dtype\": \"float32\",\n              \"encoding\": \"none\"\n            }\n          },\n          \"color\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.class_label_feature.ClassLabel\",\n            \"classLabel\": {\n              \"numClasses\": \"7\"\n            }\n          },\n          \"depth\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n            \"tensor\": {\n              \"shape\": {},\n              \"dtype\": \"float32\",\n              \"encoding\": \"none\"\n            }\n          },\n          \"y\": {\n            \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n            \"tensor\": {\n              \"shape\": {},\n              \"dtype\": \"float32\",\n              \"encoding\": \"none\"\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-    "proto_cls": "tensorflow_datasets.FeaturesDict"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "price": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "features": {
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                "featuresDict": {
+                    "features": {
+                        "depth": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        },
+                        "table": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        },
+                        "z": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        },
+                        "carat": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        },
+                        "cut": {
+                            "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "classLabel": {
+                                "numClasses": "5"
+                            }
+                        },
+                        "y": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        },
+                        "x": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        },
+                        "color": {
+                            "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "classLabel": {
+                                "numClasses": "7"
+                            }
+                        },
+                        "clarity": {
+                            "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "classLabel": {
+                                "numClasses": "8"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -2,14 +2,17 @@
   "citation": "@article{radev2020dart,\n  title={DART: Open-Domain Structured Data Record to Text Generation},\n  author={Dragomir Radev and Rui Zhang and Amrit Rau and Abhinand Sivaprasad and Chiachun Hsieh and Nazneen Fatema Rajani and Xiangru Tang and Aadit Vyas and Neha Verma and Pranav Krishna and Yangxiaokang Liu and Nadia Irwanto and Jessica Pan and Faiaz Rahman and Ahmad Zaidi and Murori Mutuma and Yasin Tarabar and Ankit Gupta and Tao Yu and Yi Chern Tan and Xi Victoria Lin and Caiming Xiong and Richard Socher},\n  journal={arXiv preprint arXiv:2007.02871},\n  year={2020}",
   "description": "DART (DAta Record to Text generation) contains RDF entity-relation annotated\nwith sentence descriptions that cover all facts in the triple set. DART was\nconstructed using existing datasets such as: WikiTableQuestions, WikiSQL, WebNLG\nand Cleaned E2E. The tables from WikiTableQuestions and WikiSQL were transformed\nto subject-predicate-object triples, and its text annotations were mainly\ncollected from MTurk. The meaningful representations in E2E were also\ntransformed to triples and its descriptions were used, some that couldn't be\ntransformed were dropped.\n\nThe dataset splits of E2E and WebNLG are kept, and for the WikiTableQuestions\nand WikiSQL the Jaccard similarity is used to keep similar tables in the same\nset (train/dev/tes).\n\nThis dataset is constructed following a standarized table format.",
   "downloadSize": "261838105",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/Yale-LILY/dart"
     ]
   },
+  "moduleName": "tensorflow_datasets.structured.dart.dart",
   "name": "dart",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "30499450",
       "shardLengths": [
@@ -17,6 +20,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "3669783",
       "shardLengths": [
@@ -24,6 +28,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "6545399",
       "shardLengths": [
@@ -32,8 +37,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "input_text",
-    "output": "target_text"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "input_text"
+        },
+        {
+          "featureKey": "target_text"
+        }
+      ]
+    }
   },
   "version": "0.1.0"
 }

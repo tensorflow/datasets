@@ -2,11 +2,7 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "query_metadata": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
-            "passage_metadata": {
+            "query": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
@@ -14,15 +10,11 @@
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "score": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "float32",
-                    "encoding": "none"
-                }
+            "query_metadata": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             },
-            "query": {
+            "passage_metadata": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
@@ -33,6 +25,14 @@
             "query_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
+            },
+            "score": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
             }
         }
     }

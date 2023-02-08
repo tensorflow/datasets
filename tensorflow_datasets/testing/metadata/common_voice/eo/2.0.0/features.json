@@ -7,24 +7,17 @@
                 "text": {},
                 "description": "Hashed UUID of a given user"
             },
-            "upvotes": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
+            "gender": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "3"
                 },
-                "description": "Number of people who said audio matches the text"
+                "description": "Gender of the speaker"
             },
             "sentence": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
                 "description": "Supposed transcription of the audio"
-            },
-            "accent": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
             },
             "age": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
@@ -40,6 +33,16 @@
                 },
                 "description": "Number of people who said audio does not match text"
             },
+            "accent": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
+            },
+            "segment": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "If sentence belongs to a custom dataset segment, it will be listed here"
+            },
             "voice": {
                 "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
                 "audio": {
@@ -52,17 +55,14 @@
                     "encoding": "NONE"
                 }
             },
-            "segment": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "If sentence belongs to a custom dataset segment, it will be listed here"
-            },
-            "gender": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "3"
+            "upvotes": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
                 },
-                "description": "Gender of the speaker"
+                "description": "Number of people who said audio matches the text"
             }
         }
     }

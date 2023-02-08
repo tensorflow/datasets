@@ -1,85 +1,20 @@
 {
-  "citation": "\n@article{cao2014crema,\n  title={{CREMA-D}: Crowd-sourced emotional multimodal actors dataset},\n  author={Cao, Houwei and Cooper, David G and Keutmann, Michael K and Gur, Ruben C and Nenkova, Ani and Verma, Ragini},\n  journal={IEEE transactions on affective computing},\n  volume={5},\n  number={4},\n  pages={377--390},\n  year={2014},\n  publisher={IEEE}\n}\n",
-  "description": "\nCREMA-D is an audio-visual data set for emotion recognition. The data set\nconsists of facial and vocal emotional expressions in sentences spoken in a\nrange of basic emotional states (happy, sad, anger, fear, disgust, and neutral).\n7,442 clips of 91 actors with diverse ethnic backgrounds were collected.\nThis release contains only the audio stream from the original audio-visual\nrecording.\nThe samples are splitted between train, validation and testing so that samples \nfrom each speaker belongs to exactly one split.\n",
+  "citation": "@article{cao2014crema,\n  title={{CREMA-D}: Crowd-sourced emotional multimodal actors dataset},\n  author={Cao, Houwei and Cooper, David G and Keutmann, Michael K and Gur, Ruben C and Nenkova, Ani and Verma, Ragini},\n  journal={IEEE transactions on affective computing},\n  volume={5},\n  number={4},\n  pages={377--390},\n  year={2014},\n  publisher={IEEE}\n}",
+  "description": "CREMA-D is an audio-visual data set for emotion recognition. The data set\nconsists of facial and vocal emotional expressions in sentences spoken in a\nrange of basic emotional states (happy, sad, anger, fear, disgust, and neutral).\n7,442 clips of 91 actors with diverse ethnic backgrounds were collected.\nThis release contains only the audio stream from the original audio-visual\nrecording.\nThe samples are splitted between train, validation and testing so that samples \nfrom each speaker belongs to exactly one split.",
   "downloadSize": "607387613",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/CheyneyComputerScience/CREMA-D"
     ]
   },
+  "moduleName": "tensorflow_datasets.audio.crema_d",
   "name": "crema_d",
-  "schema": {
-    "feature": [
-      {
-        "name": "audio",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      },
-      {
-        "name": "speaker_id",
-        "type": "BYTES"
-      }
-    ]
-  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "365486261",
-      "numShards": "1",
-      "shardLengths": [
-        "389",
-        "389",
-        "389",
-        "389"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "audio",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1556"
-              },
-              "max": 32767.0,
-              "min": -32768.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1556"
-              },
-              "max": 5.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1556"
-              }
-            },
-            "name": "speaker_id",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "1556"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "1223332734",
-      "numShards": "1",
       "shardLengths": [
         "322",
         "321",
@@ -97,87 +32,40 @@
         "321",
         "321",
         "322"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "audio",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "5144"
-              },
-              "max": 32767.0,
-              "min": -32768.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "5144"
-              },
-              "max": 5.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "5144"
-              }
-            },
-            "name": "speaker_id",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "5144"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "181972381",
-      "numShards": "1",
       "shardLengths": [
         "369",
         "369"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "audio",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "738"
-              },
-              "max": 32767.0,
-              "min": -32768.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "738"
-              },
-              "max": 5.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "738"
-              }
-            },
-            "name": "speaker_id",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "738"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "365486261",
+      "shardLengths": [
+        "389",
+        "389",
+        "389",
+        "389"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "audio",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "audio"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

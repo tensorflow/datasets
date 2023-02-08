@@ -2,7 +2,7 @@
   "citation": "\\\n@misc{inaturalist21,\n    Howpublished = {~\\url{https://github.com/visipedia/inat_comp/tree/master/2021}},\n    Title = {{iNaturalist} 2021 competition dataset.},\n    Year = {2021},\n    key = {{iNaturalist} 2021 competition dataset},\n    }",
   "description": "The iNaturalist dataset 2021 contains a total of 10,000 species. \nThe full training dataset contains nearly 2.7M images. \nTo make the dataset more accessible we have also created a \"mini\" training \ndataset with 50 examples per species for a total of 500K images. The full \ntraining `train` split overlaps with the `mini` split. The val set contains for\neach species 10 validation images (100K in total). There are a total of 500,000 \ntest images in the `public_test` split (without ground-truth labels).",
   "downloadSize": "339877571251",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/visipedia/inat_comp/tree/master/2021"

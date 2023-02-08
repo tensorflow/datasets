@@ -2,6 +2,12 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
+            "label": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "1000"
+                }
+            },
             "file_name": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
@@ -17,12 +23,6 @@
                         ]
                     },
                     "dtype": "uint8"
-                }
-            },
-            "label": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "1000"
                 }
             }
         }

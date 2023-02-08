@@ -15,9 +15,17 @@
                     "encoding": "zlib"
                 }
             },
-            "query_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
+            "doc_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "zlib"
+                }
             },
             "label": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
@@ -31,17 +39,9 @@
                     "encoding": "zlib"
                 }
             },
-            "doc_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {
-                        "dimensions": [
-                            "-1"
-                        ]
-                    },
-                    "dtype": "int64",
-                    "encoding": "zlib"
-                }
+            "query_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             }
         }
     }

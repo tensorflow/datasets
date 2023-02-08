@@ -2,7 +2,7 @@
   "citation": "\\\n@misc{inaturalist18,\n    Howpublished = {~\\url{https://github.com/visipedia/inat_comp/tree/master/2018}},\n    Title = {{iNaturalist} 2018 competition dataset.},\n    Year = {2018},\n    key = {{iNaturalist} 2018 competition dataset},\n    }",
   "description": "There are a total of 8,142 species in the dataset, with 437,513 training images,\nand 24,426 validation images. Each image has one ground truth label.",
   "downloadSize": "170061815447",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/visipedia/inat_comp/tree/master/2018"
@@ -15,6 +15,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "121593312554",
       "shardLengths": [
@@ -1045,6 +1046,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "6818717664",
       "shardLengths": [
@@ -1115,6 +1117,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "42197780094",
       "shardLengths": [

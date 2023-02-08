@@ -3,7 +3,7 @@
   "configName": "cv",
   "description": "Mozilla Common Voice Dataset",
   "downloadSize": "439329081",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://voice.mozilla.org/en/datasets"

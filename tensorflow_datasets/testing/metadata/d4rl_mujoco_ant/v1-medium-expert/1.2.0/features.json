@@ -9,22 +9,22 @@
                         "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                         "featuresDict": {
                             "features": {
+                                "action": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "8"
+                                            ]
+                                        },
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
                                 "infos": {
                                     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                                     "featuresDict": {
                                         "features": {
-                                            "qvel": {
-                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                                "tensor": {
-                                                    "shape": {
-                                                        "dimensions": [
-                                                            "14"
-                                                        ]
-                                                    },
-                                                    "dtype": "float32",
-                                                    "encoding": "none"
-                                                }
-                                            },
                                             "qpos": {
                                                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                                 "tensor": {
@@ -44,20 +44,20 @@
                                                     "dtype": "float32",
                                                     "encoding": "none"
                                                 }
+                                            },
+                                            "qvel": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "14"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                }
                                             }
                                         }
-                                    }
-                                },
-                                "action": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {
-                                            "dimensions": [
-                                                "8"
-                                            ]
-                                        },
-                                        "dtype": "float32",
-                                        "encoding": "none"
                                     }
                                 },
                                 "discount": {
@@ -68,7 +68,7 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "is_last": {
+                                "is_terminal": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
@@ -77,14 +77,6 @@
                                     }
                                 },
                                 "is_first": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "bool",
-                                        "encoding": "none"
-                                    }
-                                },
-                                "is_terminal": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
@@ -109,6 +101,14 @@
                                     "tensor": {
                                         "shape": {},
                                         "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "is_last": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
                                         "encoding": "none"
                                     }
                                 }

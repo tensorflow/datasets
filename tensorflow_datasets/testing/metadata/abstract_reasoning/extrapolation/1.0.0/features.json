@@ -1,0 +1,72 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "meta_target": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "12"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "context": {
+                "pythonClassName": "tensorflow_datasets.core.features.video_feature.Video",
+                "video": {
+                    "shape": {
+                        "dimensions": [
+                            "8",
+                            "160",
+                            "160",
+                            "1"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png"
+                }
+            },
+            "filename": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "target": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "8"
+                }
+            },
+            "relation_structure_encoded": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "4",
+                            "12"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "answers": {
+                "pythonClassName": "tensorflow_datasets.core.features.video_feature.Video",
+                "video": {
+                    "shape": {
+                        "dimensions": [
+                            "8",
+                            "160",
+                            "160",
+                            "1"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png"
+                }
+            }
+        }
+    }
+}

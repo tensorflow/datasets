@@ -4,7 +4,7 @@
   "configName": "v2-medium-expert",
   "description": "D4RL is an open-source benchmark for offline reinforcement learning. It provides\nstandardized environments and datasets for training and benchmarking algorithms.\n\nThe datasets follow the [RLDS format](https://github.com/google-research/rlds)\nto represent steps and episodes.",
   "downloadSize": "304537315",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://sites.google.com/view/d4rl/home"

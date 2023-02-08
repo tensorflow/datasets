@@ -1,76 +1,90 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "active": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    2
-                ],
-                "dtype": "int64",
-                "encoding": "none"
-            }
-        },
-        "atoms": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    60,
-                    27
-                ],
-                "dtype": "float32",
-                "encoding": "none"
-            }
-        },
-        "pairs": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    60,
-                    60,
-                    12
-                ],
-                "dtype": "float32",
-                "encoding": "none"
-            }
-        },
-        "atom_mask": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    60
-                ],
-                "dtype": "float32",
-                "encoding": "none"
-            }
-        },
-        "pair_mask": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    60,
-                    60
-                ],
-                "dtype": "float32",
-                "encoding": "none"
-            }
-        },
-        "dist2topk_nbs": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    1
-                ],
-                "dtype": "float32",
-                "encoding": "none"
-            }
-        },
-        "molecule_id": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "string",
-                "encoding": "none"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "atom_mask": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "60"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "molecule_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "atoms": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "60",
+                            "27"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "dist2topk_nbs": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "1"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "pair_mask": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "60",
+                            "60"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "pairs": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "60",
+                            "60",
+                            "12"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "active": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "2"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
             }
         }
     }

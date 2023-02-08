@@ -1,0 +1,47 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "landmarks_68_3d_xy_normalized": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "68",
+                            "2"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "landmarks_68_3d_z": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "68",
+                            "1"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "image": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "450",
+                            "450",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "jpeg"
+                }
+            }
+        }
+    }
+}

@@ -9,15 +9,11 @@
                         "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                         "featuresDict": {
                             "features": {
-                                "observation": {
+                                "is_last": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
-                                        "shape": {
-                                            "dimensions": [
-                                                "17"
-                                            ]
-                                        },
-                                        "dtype": "float32",
+                                        "shape": {},
+                                        "dtype": "bool",
                                         "encoding": "none"
                                     }
                                 },
@@ -27,6 +23,18 @@
                                         "shape": {
                                             "dimensions": [
                                                 "6"
+                                            ]
+                                        },
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "17"
                                             ]
                                         },
                                         "dtype": "float32",
@@ -62,14 +70,6 @@
                                     "tensor": {
                                         "shape": {},
                                         "dtype": "float32",
-                                        "encoding": "none"
-                                    }
-                                },
-                                "is_last": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "bool",
                                         "encoding": "none"
                                     }
                                 }

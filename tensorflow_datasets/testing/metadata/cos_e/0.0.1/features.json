@@ -1,0 +1,37 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "choices": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "extractive_explanation": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "abstractive_explanation": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "question": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "answer": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
+        }
+    }
+}

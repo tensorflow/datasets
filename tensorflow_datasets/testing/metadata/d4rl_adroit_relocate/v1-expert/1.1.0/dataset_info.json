@@ -1,9 +1,10 @@
 {
   "citation": "@misc{fu2020d4rl,\n    title={D4RL: Datasets for Deep Data-Driven Reinforcement Learning},\n    author={Justin Fu and Aviral Kumar and Ofir Nachum and George Tucker and Sergey Levine},\n    year={2020},\n    eprint={2004.07219},\n    archivePrefix={arXiv},\n    primaryClass={cs.LG}\n}",
+  "configDescription": "See more details about the task and its versions in https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit",
   "configName": "v1-expert",
-  "description": "D4RL is an open-source benchmark for offline reinforcement learning. It provides\nstandardized environments and datasets for training and benchmarking algorithms.",
+  "description": "D4RL is an open-source benchmark for offline reinforcement learning. It provides\nstandardized environments and datasets for training and benchmarking algorithms.\n\nThe datasets follow the [RLDS format](https://github.com/google-research/rlds)\nto represent steps and episodes.",
   "downloadSize": "715618341",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://sites.google.com/view/d4rl/home"
@@ -11,8 +12,13 @@
   },
   "moduleName": "tensorflow_datasets.d4rl.d4rl_adroit_relocate.d4rl_adroit_relocate",
   "name": "d4rl_adroit_relocate",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "1.1.0": "Added is_last."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "1061670000",
       "shardLengths": [

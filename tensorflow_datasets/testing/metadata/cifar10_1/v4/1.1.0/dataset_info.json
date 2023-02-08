@@ -1,15 +1,20 @@
 {
   "citation": "@article{recht2018cifar10.1,\n  author = {Benjamin Recht and Rebecca Roelofs and Ludwig Schmidt and Vaishaal Shankar},\n  title = {Do CIFAR-10 Classifiers Generalize to CIFAR-10?},\n  year = {2018},\n  note = {\\url{https://arxiv.org/abs/1806.00451}},\n}\n\n@article{torralba2008tinyimages, \n  author = {Antonio Torralba and Rob Fergus and William T. Freeman}, \n  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence}, \n  title = {80 Million Tiny Images: A Large Data Set for Nonparametric Object and Scene Recognition}, \n  year = {2008}, \n  volume = {30}, \n  number = {11}, \n  pages = {1958-1970}\n}",
+  "configDescription": "It is the first version of our dataset on which we tested any classifier. As mentioned above, this makes the v4 dataset independent of the classifiers we evaluate. The numbers reported in the main sections of our paper use this version of the dataset. It was built from the top 25 TinyImages keywords for each class, which led to a slight class imbalance. The largest difference is that ships make up only 8% of the test set instead of 10%. v4 contains 2,021 images.",
+  "configName": "v4",
   "description": "The CIFAR-10.1 dataset is a new test set for CIFAR-10. CIFAR-10.1 contains roughly 2,000 new test images \nthat were sampled after multiple years of research on the original CIFAR-10 dataset. The data collection \nfor CIFAR-10.1 was designed to minimize distribution shift relative to the original dataset. We describe \nthe creation of CIFAR-10.1 in the paper \"Do CIFAR-10 Classifiers Generalize to CIFAR-10?\". \nThe images in CIFAR-10.1 are a subset of the TinyImages dataset. \nThere are currently two versions of the CIFAR-10.1 dataset: v4 and v6.",
   "downloadSize": "6216852",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/modestyachts/CIFAR-10.1"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.cifar10_1",
   "name": "cifar10_1",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "4675447",
       "shardLengths": [
@@ -18,8 +23,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.1.0"
 }

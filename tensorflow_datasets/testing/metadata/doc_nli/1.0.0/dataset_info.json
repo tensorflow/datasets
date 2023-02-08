@@ -2,7 +2,7 @@
   "citation": "@inproceedings{yin-etal-2021-docnli,\n    title={DocNLI: A Large-scale Dataset for Document-level Natural Language Inference},\n    author={Wenpeng Yin and Dragomir Radev and Caiming Xiong},\n    booktitle = \"Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021\",\n    month = aug,\n    year = \"2021\",\n    address = \"Bangkok, Thailand\",\n    publisher = \"Association for Computational Linguistics\",\n}",
   "description": "DocNLI is a large-scale dataset for document-level natural language inference\n(NLI). DocNLI is transformed from a broad range of NLP problems and covers\nmultiple genres of text. The premises always stay in the document granularity,\nwhereas the hypotheses vary in length from single sentences to passages with\nhundreds of words. In contrast to some existing sentence-level NLI datasets,\nDocNLI has pretty limited artifacts.",
   "downloadSize": "329140677",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/salesforce/DocNLI/"
@@ -10,8 +10,12 @@
   },
   "moduleName": "tensorflow_datasets.text.docnli.docnli",
   "name": "doc_nli",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "1960357928",
       "shardLengths": [
@@ -34,6 +38,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "624858129",
       "shardLengths": [
@@ -48,6 +53,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "709823917",
       "shardLengths": [

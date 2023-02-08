@@ -1,143 +1,37 @@
 {
-  "citation": "@inproceedings{\n  geirhos2018imagenettrained,\n  title={ImageNet-trained {CNN}s are biased towards texture; increasing shape\n         bias improves accuracy and robustness.},\n  author={Robert Geirhos and Patricia Rubisch and Claudio Michaelis and\n          Matthias Bethge and Felix A. Wichmann and Wieland Brendel},\n  booktitle={International Conference on Learning Representations},\n  year={2019},\n  url={https://openreview.net/forum?id=Bygh9j09KX},\n}\n",
-  "description": "Shape/texture conflict stimuli from \"ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness.\"\n\nNote that, although the dataset source contains images with matching shape and\ntexture and we include them here, they are ignored for most evaluations in the\noriginal paper.\n",
+  "citation": "@inproceedings{\n  geirhos2018imagenettrained,\n  title={ImageNet-trained {CNN}s are biased towards texture; increasing shape\n         bias improves accuracy and robustness.},\n  author={Robert Geirhos and Patricia Rubisch and Claudio Michaelis and\n          Matthias Bethge and Felix A. Wichmann and Wieland Brendel},\n  booktitle={International Conference on Learning Representations},\n  year={2019},\n  url={https://openreview.net/forum?id=Bygh9j09KX},\n}",
+  "description": "Shape/texture conflict stimuli from \"ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness.\"\n\nNote that, although the dataset source contains images with matching shape and\ntexture and we include them here, they are ignored for most evaluations in the\noriginal paper.",
   "downloadSize": "161437859",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/rgeirhos/texture-vs-shape"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.geirhos_conflict_stimuli",
   "name": "geirhos_conflict_stimuli",
-  "schema": {
-    "feature": [
-      {
-        "name": "file_name",
-        "type": "BYTES"
-      },
-      {
-        "name": "image",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            },
-            {
-              "size": "-1"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "shape_imagenet_labels",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "shape_label",
-        "type": "INT"
-      },
-      {
-        "name": "texture_imagenet_labels",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "texture_label",
-        "type": "INT"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "136773186",
-      "numShards": "1",
       "shardLengths": [
         "640",
         "640"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1280"
-              }
-            },
-            "name": "file_name",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1280"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "shape_imagenet_labels",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1280"
-              },
-              "max": 914.0,
-              "min": 8.0
-            }
-          },
-          {
-            "name": "shape_label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1280"
-              },
-              "max": 15.0
-            }
-          },
-          {
-            "name": "texture_imagenet_labels",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1280"
-              },
-              "max": 914.0,
-              "min": 8.0
-            }
-          },
-          {
-            "name": "texture_label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1280"
-              },
-              "max": 15.0
-            }
-          }
-        ],
-        "numExamples": "1280"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "shape_label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "shape_label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

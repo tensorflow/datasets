@@ -1,47 +1,30 @@
 {
-  "citation": "@article{chen2020simple,\n  title={A Simple Framework for Contrastive Learning of Visual Representations},\n  author={Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey},\n  journal={arXiv preprint arXiv:2002.05709},\n  year={2020}\n}\n@article{ILSVRC15,\n  Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},\n  Title = {{ImageNet Large Scale Visual Recognition Challenge}},\n  Year = {2015},\n  journal   = {International Journal of Computer Vision (IJCV)},\n  doi = {10.1007/s11263-015-0816-y},\n  volume={115},\n  number={3},\n  pages={211-252}\n}\n",
-  "description": "Imagenet2012Subset is a subset of original ImageNet ILSVRC 2012 dataset.\nThe dataset share the *same* validation set as the original ImageNet ILSVRC 2012\ndataset. However, the training set is subsampled in a label balanced fashion.\nIn `1pct` configuration, 1%, or 12811, images are sampled, most classes have\nthe same number of images (average 12.8), some classes randomly have 1 more\nexample than others; and in `10pct` configuration, ~10%, or 128116, most classes\nhave the same number of images (average 128), and some classes randomly have 1\nmore example than others.\n\nThis is supposed to be used as a benchmark for semi-supervised learning, and\nhas been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).\n",
+  "citation": "@article{chen2020simple,\n  title={A Simple Framework for Contrastive Learning of Visual Representations},\n  author={Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey},\n  journal={arXiv preprint arXiv:2002.05709},\n  year={2020}\n}\n@article{ILSVRC15,\n  Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},\n  Title = {{ImageNet Large Scale Visual Recognition Challenge}},\n  Year = {2015},\n  journal   = {International Journal of Computer Vision (IJCV)},\n  doi = {10.1007/s11263-015-0816-y},\n  volume={115},\n  number={3},\n  pages={211-252}\n}",
+  "configDescription": "10pct of total ImageNet training set.",
+  "configName": "10pct",
+  "description": "Imagenet2012Subset is a subset of original ImageNet ILSVRC 2012 dataset.\nThe dataset share the *same* validation set as the original ImageNet ILSVRC 2012\ndataset. However, the training set is subsampled in a label balanced fashion.\nIn `1pct` configuration, 1%, or 12811, images are sampled, most classes have\nthe same number of images (average 12.8), some classes randomly have 1 more\nexample than others; and in `10pct` configuration, ~10%, or 128116, most classes\nhave the same number of images (average 128), and some classes randomly have 1\nmore example than others.\n\nThis is supposed to be used as a benchmark for semi-supervised learning, and\nhas been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).",
   "downloadSize": "2603168",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://image-net.org/"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.imagenet2012_subset",
   "name": "imagenet2012_subset",
-  "schema": {
-    "feature": [
-      {
-        "name": "file_name",
-        "type": "BYTES"
-      },
-      {
-        "name": "image",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            },
-            {
-              "size": "-1"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      }
-    ]
+  "releaseNotes": {
+    "2.0.0": "Fix validation labels.",
+    "2.0.1": "Encoding fix. No changes from user point of view.",
+    "3.0.0": "\n      Fix colorization on ~12 images (CMYK -> RGB).\n      Fix format for consistency (convert the single png image to Jpeg).\n      Faster generation reading directly from the archive.\n      ",
+    "4.0.0": "(unpublished)",
+    "5.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    "5.1.0": "Added test split."
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "14666094881",
-      "numShards": "1",
       "shardLengths": [
         "1001",
         "1001",
@@ -171,44 +154,12 @@
         "1001",
         "1001",
         "1001"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "128116"
-              }
-            },
-            "name": "file_name",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "128116"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "128116"
-              },
-              "max": 999.0
-            }
-          }
-        ],
-        "numExamples": "128116"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "6711099535",
-      "numShards": "1",
       "shardLengths": [
         "781",
         "781",
@@ -274,44 +225,20 @@
         "782",
         "781",
         "781"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "50000"
-              }
-            },
-            "name": "file_name",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "50000"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "50000"
-              },
-              "max": 999.0
-            }
-          }
-        ],
-        "numExamples": "50000"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "5.0.0"
 }

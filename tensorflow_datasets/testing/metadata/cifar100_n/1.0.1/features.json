@@ -2,13 +2,23 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "worker_time": {
+            "worker_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
-                    "dtype": "float32",
+                    "dtype": "int64",
                     "encoding": "none"
                 }
+            },
+            "noise_label": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "100"
+                }
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             },
             "image": {
                 "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
@@ -23,21 +33,11 @@
                     "dtype": "uint8"
                 }
             },
-            "coarse_label": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "20"
-                }
-            },
-            "id": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
-            "worker_id": {
+            "worker_time": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
-                    "dtype": "int64",
+                    "dtype": "float32",
                     "encoding": "none"
                 }
             },
@@ -47,10 +47,10 @@
                     "numClasses": "100"
                 }
             },
-            "noise_label": {
+            "coarse_label": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
-                    "numClasses": "100"
+                    "numClasses": "20"
                 }
             }
         }

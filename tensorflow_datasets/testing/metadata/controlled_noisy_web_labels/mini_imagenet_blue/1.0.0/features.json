@@ -2,18 +2,6 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "is_clean": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "bool",
-                    "encoding": "none"
-                }
-            },
-            "id": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
             "label": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
@@ -32,6 +20,18 @@
                     },
                     "dtype": "uint8"
                 }
+            },
+            "is_clean": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "bool",
+                    "encoding": "none"
+                }
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             }
         }
     }

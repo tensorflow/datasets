@@ -4,7 +4,7 @@
   "configName": "compositional_splits",
   "description": "Grounded SCAN (gSCAN) is a synthetic dataset for evaluating compositional\ngeneralization in situated language understanding. gSCAN pairs natural language\ninstructions with action sequences, and requires the agent to interpret\ninstructions within the context of a grid-based visual navigation environment.\n\nMore information can be found at:\n\n* For the `compositional_splits` and the `target_length_split`:\nhttps://github.com/LauraRuis/groundedSCAN\n\n* For the `spatial_relation_splits`:\nhttps://github.com/google-research/language/tree/master/language/gscan/data",
   "downloadSize": "86085779",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/LauraRuis/groundedSCAN"

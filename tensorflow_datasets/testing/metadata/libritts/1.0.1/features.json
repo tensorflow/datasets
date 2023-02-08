@@ -1,0 +1,53 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "text_normalized": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "text_original": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "chapter_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "speech": {
+                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
+                "audio": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "fileFormat": "wav",
+                    "sampleRate": "24000",
+                    "encoding": "NONE"
+                }
+            },
+            "speaker_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            }
+        }
+    }
+}

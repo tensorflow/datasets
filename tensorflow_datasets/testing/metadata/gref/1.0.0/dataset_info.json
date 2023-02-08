@@ -1,6 +1,7 @@
 {
   "citation": "@inproceedings{mao2016generation,\n  title={Generation and Comprehension of Unambiguous Object Descriptions},\n  author={Mao, Junhua and Huang, Jonathan and Toshev, Alexander and Camburu, Oana and Yuille, Alan and Murphy, Kevin},\n  booktitle={CVPR},\n  year={2016}\n}",
   "description": "The Google RefExp dataset is a collection of text descriptions of objects in\nimages which builds on the publicly available MS-COCO dataset. Whereas the\nimage captions in MS-COCO apply to the entire image, this dataset focuses on\ntext descriptions that allow one to uniquely identify a single object or region\nwithin an image. See more details in this paper: Generation and Comprehension\nof Unambiguous Object Descriptions.",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/mjhucla/Google_Refexp_toolbox"
@@ -8,8 +9,12 @@
   },
   "moduleName": "tensorflow_datasets.vision_language.gref.gref",
   "name": "gref",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "4150115304",
       "shardLengths": [
@@ -48,6 +53,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "785392052",
       "shardLengths": [

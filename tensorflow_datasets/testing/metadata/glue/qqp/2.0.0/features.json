@@ -1,25 +1,28 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "question1": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "question2": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "label": {
-            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-            "content": {
-                "num_classes": 2
-            }
-        },
-        "idx": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "question1": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "idx": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "label": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "2"
+                }
+            },
+            "question2": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             }
         }
     }

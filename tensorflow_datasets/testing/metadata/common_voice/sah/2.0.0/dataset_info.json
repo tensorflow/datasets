@@ -3,7 +3,7 @@
   "configName": "sah",
   "description": "Mozilla Common Voice Dataset",
   "downloadSize": "181245626",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://voice.mozilla.org/en/datasets"

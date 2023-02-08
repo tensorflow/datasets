@@ -2,7 +2,7 @@
   "citation": "@inproceedings{zellers2019hellaswag,\n    title={HellaSwag: Can a Machine Really Finish Your Sentence?},\n    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},\n    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},\n    year={2019}\n}",
   "description": "The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context\nand some endings which complete the context.",
   "downloadSize": "71494896",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://rowanzellers.com/hellaswag/"
@@ -16,6 +16,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "37278253",
       "shardLengths": [
@@ -23,6 +24,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_activitynet",
       "numBytes": "7915422",
       "shardLengths": [
@@ -30,6 +32,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_wikihow",
       "numBytes": "29362831",
       "shardLengths": [
@@ -37,6 +40,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "9639376",
       "shardLengths": [
@@ -44,6 +48,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "9418493",
       "shardLengths": [
@@ -51,6 +56,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation_ind_activitynet",
       "numBytes": "966337",
       "shardLengths": [
@@ -58,6 +64,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation_ood_activitynet",
       "numBytes": "771158",
       "shardLengths": [
@@ -65,6 +72,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_ind_activitynet",
       "numBytes": "1023664",
       "shardLengths": [
@@ -72,6 +80,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_ood_activitynet",
       "numBytes": "902335",
       "shardLengths": [
@@ -79,6 +88,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation_ind_wikihow",
       "numBytes": "3715495",
       "shardLengths": [
@@ -86,6 +96,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation_ood_wikihow",
       "numBytes": "4186386",
       "shardLengths": [
@@ -93,6 +104,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_ind_wikihow",
       "numBytes": "3690030",
       "shardLengths": [
@@ -100,6 +112,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_ood_wikihow",
       "numBytes": "3802464",
       "shardLengths": [

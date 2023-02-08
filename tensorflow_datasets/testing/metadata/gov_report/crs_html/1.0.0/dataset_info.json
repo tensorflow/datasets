@@ -1,10 +1,10 @@
 {
   "citation": "@inproceedings{\nanonymous2022efficiently,\ntitle={Efficiently Modeling Long Sequences with Structured State Spaces},\nauthor={Anonymous},\nbooktitle={Submitted to The Tenth International Conference on Learning Representations },\nyear={2022},\nurl={https://openreview.net/forum?id=uYLFoz1vlAC},\nnote={under review}\n}",
-  "configDescription": "CRS report with summary.\nStructures flattened and joined by newline while add html tags. Tags are only added for secition_title in a format like <h2>xxx<h2>.",
+  "configDescription": "CRS report with summary.\nStructures flattened and joined by newline while add html tags. Tags are only added for secition_title in a format like `<h2>xxx<h2>`.",
   "configName": "crs_html",
   "description": "Government report dataset consists of reports written by government research\n agencies including Congressional Research Service and U.S. Government\n Accountability Office.",
   "downloadSize": "336166706",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://gov-report-data.github.io/"
@@ -12,8 +12,12 @@
   },
   "moduleName": "tensorflow_datasets.summarization.gov_report.gov_report",
   "name": "gov_report",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "329941081",
       "shardLengths": [
@@ -24,6 +28,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "20592961",
       "shardLengths": [
@@ -31,6 +36,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "17775637",
       "shardLengths": [

@@ -2,9 +2,9 @@
   "citation": "@inproceedings{alva-manchego-etal-2020-asset,\n    title = \"{ASSET}: {A} Dataset for Tuning and Evaluation of Sentence Simplification Models with Multiple Rewriting Transformations\",\n    author = \"Alva-Manchego, Fernando  and\n      Martin, Louis  and\n      Bordes, Antoine  and\n      Scarton, Carolina  and\n      Sagot, Benoit  and\n      Specia, Lucia\",\n    booktitle = \"Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics\",\n    month = jul,\n    year = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/2020.acl-main.424\",\n    pages = \"4668--4679\",\n}",
   "configDescription": "Human ratings of automatically produced text simplification.",
   "configName": "ratings",
-  "description": "ASSET is a dataset for evaluating Sentence Simplification systems with multiple rewriting transformations, as described in \"ASSET: A Dataset for Tuning and Evaluation of Sentence Simplification Models with Multiple Rewriting Transformations.\" The corpus is composed of 2000 validation and 359 test original sentences that were each simplified 10 times by different annotators. The corpus also contains human judgments of meaning preservation, fluency and simplicity for the outputs of several automatic text simplification systems.",
+  "description": "ASSET is a dataset for evaluating Sentence Simplification systems with\nmultiple rewriting transformations, as described in \"ASSET: A Dataset for\nTuning and Evaluation of Sentence Simplification Models with Multiple\nRewriting Transformations.\" The corpus is composed of 2000 validation\nand 359 test original sentences that were each simplified 10 times by\ndifferent annotators. The corpus also contains human judgments of meaning\npreservation, fluency and simplicity for the outputs of several automatic\ntext simplification systems.",
   "downloadSize": "3639353",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/facebookresearch/asset"
@@ -17,6 +17,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "full",
       "numBytes": "1510560",
       "shardLengths": [

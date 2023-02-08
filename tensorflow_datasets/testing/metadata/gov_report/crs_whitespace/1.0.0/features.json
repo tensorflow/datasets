@@ -1,25 +1,27 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "reports": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "summary": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "title": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "released_date": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "id": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "title": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "summary": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "released_date": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "reports": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
         }
     }
 }

@@ -4,6 +4,7 @@
   "configName": "wiki_lingua_english_en",
   "description": "**GEM** is a benchmark environment for Natural Language Generation with a focus\non its Evaluation, both through human annotations and automated Metrics.\n\nGEM aims to: (1) measure NLG progress across 13 datasets spanning many NLG\ntasks and languages. (2) provide an in-depth analysis of data and models\npresented via data statements and challenge sets. (3) develop standards for\nevaluation of generated text using both automated and human metrics.\n\nMore information can be found at\n[https://gem-benchmark.com](https://gem-benchmark.com).",
   "downloadSize": "118031903",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://gem-benchmark.com"
@@ -11,8 +12,14 @@
   },
   "moduleName": "tensorflow_datasets.text.gem.gem",
   "name": "gem",
+  "releaseNotes": {
+    "1.0.0": "Initial version",
+    "1.0.1": "Update bad links filter for MLSum",
+    "1.1.0": "Release of the Challenge Sets"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "477218327",
       "shardLengths": [
@@ -23,6 +30,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "69486132",
       "shardLengths": [
@@ -30,6 +38,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "142741173",
       "shardLengths": [

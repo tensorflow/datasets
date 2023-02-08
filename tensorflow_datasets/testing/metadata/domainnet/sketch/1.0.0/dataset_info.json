@@ -3,7 +3,7 @@
   "configName": "sketch",
   "description": "The DomainNet dataset consists of images from six distinct domains, including\nphotos (real), painting, clipart, quickdraw, infograph and sketch. Per domain\nthere are 48K - 172K images (600K in total) categorized into 345 classes.\n\nIn this TFDS version of DomainNet the cleaned version is used.",
   "downloadSize": "2636803729",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://ai.bu.edu/DomainNet/"
@@ -11,8 +11,12 @@
   },
   "moduleName": "tensorflow_datasets.image_classification.domainnet.domainnet",
   "name": "domainnet",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "1908936629",
       "shardLengths": [
@@ -35,6 +39,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "825042930",
       "shardLengths": [

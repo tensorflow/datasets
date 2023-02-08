@@ -2,22 +2,6 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "conversion": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int64",
-                    "encoding": "none"
-                }
-            },
-            "zip_code": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
-            "history_segment": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
             "newbie": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
@@ -26,7 +10,7 @@
                     "encoding": "none"
                 }
             },
-            "recency": {
+            "visit": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
@@ -42,27 +26,11 @@
                     "encoding": "none"
                 }
             },
-            "mens": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int64",
-                    "encoding": "none"
-                }
-            },
             "segment": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "history": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "float32",
-                    "encoding": "none"
-                }
-            },
-            "visit": {
+            "conversion": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
@@ -70,7 +38,19 @@
                     "encoding": "none"
                 }
             },
-            "channel": {
+            "zip_code": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "recency": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "history_segment": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
@@ -81,6 +61,26 @@
                     "dtype": "float32",
                     "encoding": "none"
                 }
+            },
+            "history": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "mens": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "channel": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             }
         }
     }

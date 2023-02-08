@@ -2,7 +2,7 @@
   "citation": "@ONLINE {BCCD_Dataset,\n    author = \"Shenggan\",\n    title  = \"BCCD Dataset\",\n    year   = \"2017\",\n    url    = \"https://github.com/Shenggan/BCCD_Dataset\"\n}",
   "description": "BCCD Dataset is a small-scale dataset for blood cells detection.\n\nThanks the original data and annotations from cosmicad and akshaylamba.\nThe original dataset is re-organized into VOC format.\nBCCD Dataset is under MIT licence.\n\nData preparation is important to use machine learning.\nIn this project, the Faster R-CNN algorithm from keras-frcnn for Object Detection is used.\nFrom this dataset, nicolaschen1 developed two Python scripts to make\npreparation data (CSV file and images) for recognition of abnormalities\nin blood cells on medical images.\n\nexport.py: it creates the file \"test.csv\" with all data needed: filename, class_name, x1,y1,x2,y2.\nplot.py: it plots the boxes for each image and save it in a new directory.\n\nImage Type : jpeg(JPEG)\nWidth x Height : 640 x 480",
   "downloadSize": "7875205",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/Shenggan/BCCD_Dataset"

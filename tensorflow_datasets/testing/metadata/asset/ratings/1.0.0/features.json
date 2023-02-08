@@ -1,5 +1,45 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": "{\n  \"features\": {\n    \"rating\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n      \"jsonFeature\": {\n        \"json\": \"{\\\"shape\\\": [], \\\"dtype\\\": \\\"int32\\\", \\\"encoding\\\": \\\"none\\\"}\"\n      }\n    },\n    \"original\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"jsonFeature\": {\n        \"json\": \"{}\"\n      }\n    },\n    \"worker_id\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n      \"jsonFeature\": {\n        \"json\": \"{\\\"shape\\\": [], \\\"dtype\\\": \\\"int32\\\", \\\"encoding\\\": \\\"none\\\"}\"\n      }\n    },\n    \"simplification\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"jsonFeature\": {\n        \"json\": \"{}\"\n      }\n    },\n    \"original_sentence_id\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n      \"jsonFeature\": {\n        \"json\": \"{\\\"shape\\\": [], \\\"dtype\\\": \\\"int32\\\", \\\"encoding\\\": \\\"none\\\"}\"\n      }\n    },\n    \"aspect\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.class_label_feature.ClassLabel\",\n      \"jsonFeature\": {\n        \"json\": \"{\\\"num_classes\\\": 3}\"\n      }\n    }\n  }\n}",
-    "proto_cls": "tensorflow_datasets.FeaturesDict"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "worker_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "simplification": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "aspect": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "3"
+                }
+            },
+            "original": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "rating": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "original_sentence_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            }
+        }
+    }
 }

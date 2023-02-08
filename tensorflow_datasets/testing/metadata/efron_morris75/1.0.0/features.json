@@ -1,74 +1,86 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "FirstName": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "string"
-            }
-        },
-        "LastName": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "string"
-            }
-        },
-        "At-Bats": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "Hits": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "BattingAverage": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "float32"
-            }
-        },
-        "RemainingAt-Bats": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "RemainingAverage": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "float32"
-            }
-        },
-        "SeasonAt-Bats": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "SeasonHits": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "SeasonAverage": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "float32"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "Hits": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "BattingAverage": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "SeasonHits": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "LastName": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "FirstName": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "RemainingAverage": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "RemainingAt-Bats": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "SeasonAt-Bats": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "At-Bats": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "SeasonAverage": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
             }
         }
     }

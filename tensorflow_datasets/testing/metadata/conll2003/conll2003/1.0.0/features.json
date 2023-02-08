@@ -2,24 +2,14 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "chunks": {
+            "pos": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
                         "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                         "classLabel": {
-                            "numClasses": "23"
+                            "numClasses": "47"
                         }
-                    },
-                    "length": "-1"
-                }
-            },
-            "tokens": {
-                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-                "sequence": {
-                    "feature": {
-                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                        "text": {}
                     },
                     "length": "-1"
                 }
@@ -36,13 +26,23 @@
                     "length": "-1"
                 }
             },
-            "pos": {
+            "tokens": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "chunks": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
                         "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                         "classLabel": {
-                            "numClasses": "47"
+                            "numClasses": "23"
                         }
                     },
                     "length": "-1"

@@ -1,160 +1,25 @@
 {
-  "citation": "\n@article{warstadt2019blimp,\n  title={BLiMP: A Benchmark of Linguistic Minimal Pairs for English},\n  author={Warstadt, Alex and Parrish, Alicia and Liu, Haokun and Mohananey, Anhad and Peng, Wei, and Wang, Sheng-Fu and Bowman, Samuel R},\n  journal={arXiv preprint arXiv:1912.00582},\n  year={2019}\n}\n",
-  "description": "\nBLiMP is a challenge set for evaluating what language models (LMs) know about\nmajor grammatical phenomena in English. BLiMP consists of 67 sub-datasets, each\ncontaining 1000 minimal pairs isolating specific contrasts in syntax,\nmorphology, or semantics. The data is automatically generated according to\nexpert-crafted grammars.\n",
+  "citation": "@article{warstadt2019blimp,\n  title={BLiMP: A Benchmark of Linguistic Minimal Pairs for English},\n  author={Warstadt, Alex and Parrish, Alicia and Liu, Haokun and Mohananey, Anhad and Peng, Wei, and Wang, Sheng-Fu and Bowman, Samuel R},\n  journal={arXiv preprint arXiv:1912.00582},\n  year={2019}\n}",
+  "configDescription": "This configuration includes the paradigm matrix_question_npi_licensor_present.",
+  "configName": "matrix_question_npi_licensor_present",
+  "description": "BLiMP is a challenge set for evaluating what language models (LMs) know about\nmajor grammatical phenomena in English. BLiMP consists of 67 sub-datasets, each\ncontaining 1000 minimal pairs isolating specific contrasts in syntax,\nmorphology, or semantics. The data is automatically generated according to\nexpert-crafted grammars.",
   "downloadSize": "457806",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/alexwarstadt/blimp/tree/master/"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.blimp",
   "name": "blimp",
-  "schema": {
-    "feature": [
-      {
-        "name": "UID",
-        "type": "BYTES"
-      },
-      {
-        "name": "field",
-        "type": "BYTES"
-      },
-      {
-        "name": "lexically_identical",
-        "type": "BYTES"
-      },
-      {
-        "name": "linguistics_term",
-        "type": "BYTES"
-      },
-      {
-        "name": "one_prefix_method",
-        "type": "BYTES"
-      },
-      {
-        "name": "pair_id",
-        "type": "INT"
-      },
-      {
-        "name": "sentence_bad",
-        "type": "BYTES"
-      },
-      {
-        "name": "sentence_good",
-        "type": "BYTES"
-      },
-      {
-        "name": "simple_LM_method",
-        "type": "BYTES"
-      },
-      {
-        "name": "two_prefix_method",
-        "type": "BYTES"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "362636",
-      "numShards": "1",
       "shardLengths": [
         "1000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "UID",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "field",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "lexically_identical",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "linguistics_term",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "one_prefix_method",
-            "type": "BYTES"
-          },
-          {
-            "name": "pair_id",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              },
-              "max": 999.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "sentence_bad",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "sentence_good",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "simple_LM_method",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              }
-            },
-            "name": "two_prefix_method",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "1000"
-      }
+      ]
     }
   ],
   "version": "0.1.0"

@@ -3,7 +3,7 @@
   "configName": "es",
   "description": "The shared task of CoNLL-2002 concerns language-independent named entity\nrecognition. The types of named entities include: persons, locations,\norganizations and names of miscellaneous entities that do not belong to the\nprevious three groups. The participants of the shared task were offered training\nand test data for at least two languages. Information sources other than the\ntraining data might have been used in this shared task.",
   "downloadSize": "4140690",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://aclanthology.org/W02-2024/"
