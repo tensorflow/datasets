@@ -1,47 +1,20 @@
 {
-  "citation": " @inproceedings{bossard14,\n  title = {Food-101 -- Mining Discriminative Components with Random Forests},\n  author = {Bossard, Lukas and Guillaumin, Matthieu and Van Gool, Luc},\n  booktitle = {European Conference on Computer Vision},\n  year = {2014}\n}\n",
+  "citation": "@inproceedings{bossard14,\n  title = {Food-101 -- Mining Discriminative Components with Random Forests},\n  author = {Bossard, Lukas and Guillaumin, Matthieu and Van Gool, Luc},\n  booktitle = {European Conference on Computer Vision},\n  year = {2014}\n}",
   "description": "This dataset consists of 101 food categories, with 101'000 images. For each class, 250 manually reviewed test images are provided as well as 750 training images. On purpose, the training images were not cleaned, and thus still contain some amount of noise. This comes mostly in the form of intense colors and sometimes wrong labels. All images were rescaled to have a maximum side length of 512 pixels.",
   "downloadSize": "4996278331",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
-      "https://www.vision.ee.ethz.ch/datasets_extra/food-101/"
+      "https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.food101",
   "name": "food101",
-  "schema": {
-    "feature": [
-      {
-        "name": "id",
-        "type": "BYTES"
-      },
-      {
-        "name": "image",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            },
-            {
-              "size": "-1"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "3847304306",
-      "numShards": "1",
       "shardLengths": [
         "2367",
         "2367",
@@ -75,44 +48,12 @@
         "2368",
         "2367",
         "2367"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "75750"
-              }
-            },
-            "name": "id",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "75750"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "75750"
-              },
-              "max": 100.0
-            }
-          }
-        ],
-        "numExamples": "75750"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "1276729641",
-      "numShards": "1",
       "shardLengths": [
         "1578",
         "1578",
@@ -130,44 +71,20 @@
         "1578",
         "1578",
         "1578"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "25250"
-              }
-            },
-            "name": "id",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "25250"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "25250"
-              },
-              "max": 100.0
-            }
-          }
-        ],
-        "numExamples": "25250"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "2.1.0"
 }

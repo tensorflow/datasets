@@ -3,7 +3,7 @@
   "configDescription": "chapter-level summarization",
   "configName": "chapter",
   "description": "BookSum: A Collection of Datasets for Long-form Narrative Summarization\n\nThis implementation currently only supports book and chapter summaries.\n\nGitHub: https://github.com/salesforce/booksum",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/salesforce/booksum"
@@ -11,8 +11,12 @@
   },
   "moduleName": "tensorflow_datasets.summarization.booksum.booksum",
   "name": "booksum",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "175941930",
       "shardLengths": [
@@ -21,6 +25,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "21344843",
       "shardLengths": [
@@ -28,6 +33,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "29950649",
       "shardLengths": [

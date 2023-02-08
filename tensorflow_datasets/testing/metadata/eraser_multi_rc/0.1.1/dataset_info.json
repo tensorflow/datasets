@@ -1,184 +1,39 @@
 {
-  "citation": "\n@unpublished{eraser2019,\n    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},\n    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}\n}\n@inproceedings{MultiRC2018,\n    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},\n    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},\n    booktitle = {NAACL},\n    year = {2018}\n}\n",
-  "description": "\nEraser Multi RC is a dataset for queries over multi-line passages, along with\nanswers and a rationalte. Each example in this dataset has the following 5 parts\n1. A Mutli-line Passage\n2. A Query about the passage\n3. An Answer to the query\n4. A Classification as to whether the answer is right or wrong\n5. An Explanation justifying the classification\n",
+  "citation": "@unpublished{eraser2019,\n    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},\n    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}\n}\n@inproceedings{MultiRC2018,\n    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},\n    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},\n    booktitle = {NAACL},\n    year = {2018}\n}",
+  "description": "Eraser Multi RC is a dataset for queries over multi-line passages, along with\nanswers and a rationalte. Each example in this dataset has the following 5 parts\n1. A Mutli-line Passage\n2. A Query about the passage\n3. An Answer to the query\n4. A Classification as to whether the answer is right or wrong\n5. An Explanation justifying the classification",
+  "downloadSize": "1667550",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://cogcomp.seas.upenn.edu/multirc/"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.eraser_multi_rc",
   "name": "eraser_multi_rc",
-  "schema": {
-    "feature": [
-      {
-        "name": "evidences",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "BYTES"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      },
-      {
-        "name": "passage",
-        "type": "BYTES"
-      },
-      {
-        "name": "query_and_answer",
-        "type": "BYTES"
-      }
-    ]
-  },
-  "sizeInBytes": "1667550",
   "splits": [
     {
-      "name": "test",
-      "numShards": "1",
-      "shardLengths": [
-        "4848"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "4848"
-              }
-            },
-            "name": "evidences",
-            "type": "BYTES"
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "4848"
-              },
-              "max": 1.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "4848"
-              }
-            },
-            "name": "passage",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "4848"
-              }
-            },
-            "name": "query_and_answer",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "4848"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "1",
+      "numBytes": "49405346",
       "shardLengths": [
         "24029"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "24029"
-              }
-            },
-            "name": "evidences",
-            "type": "BYTES"
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "24029"
-              },
-              "max": 1.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "24029"
-              }
-            },
-            "name": "passage",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "24029"
-              }
-            },
-            "name": "query_and_answer",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "24029"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
-      "numShards": "1",
+      "numBytes": "6728134",
       "shardLengths": [
         "3214"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3214"
-              }
-            },
-            "name": "evidences",
-            "type": "BYTES"
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3214"
-              },
-              "max": 1.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3214"
-              }
-            },
-            "name": "passage",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3214"
-              }
-            },
-            "name": "query_and_answer",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "3214"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "9493562",
+      "shardLengths": [
+        "4848"
+      ]
     }
   ],
   "version": "0.1.1"

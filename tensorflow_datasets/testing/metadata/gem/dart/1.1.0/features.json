@@ -1,78 +1,88 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "gem_id": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "string"
-            }
-        },
-        "gem_parent_id": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "string"
-            }
-        },
-        "dart_id": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "tripleset": {
-            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-            "content": {
-                "feature": {
-                    "type": "tensorflow_datasets.core.features.feature.Tensor",
-                    "content": {
-                        "shape": [],
-                        "dtype": "string"
-                    }
-                },
-                "length": null
-            }
-        },
-        "subtree_was_extended": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "bool"
-            }
-        },
-        "target_sources": {
-            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-            "content": {
-                "feature": {
-                    "type": "tensorflow_datasets.core.features.feature.Tensor",
-                    "content": {
-                        "shape": [],
-                        "dtype": "string"
-                    }
-                },
-                "length": null
-            }
-        },
-        "target": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "string"
-            }
-        },
-        "references": {
-            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-            "content": {
-                "feature": {
-                    "type": "tensorflow_datasets.core.features.feature.Tensor",
-                    "content": {
-                        "shape": [],
-                        "dtype": "string"
-                    }
-                },
-                "length": null
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "subtree_was_extended": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "bool",
+                    "encoding": "none"
+                }
+            },
+            "tripleset": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                        "tensor": {
+                            "shape": {},
+                            "dtype": "string",
+                            "encoding": "none"
+                        }
+                    },
+                    "length": "-1"
+                }
+            },
+            "target_sources": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                        "tensor": {
+                            "shape": {},
+                            "dtype": "string",
+                            "encoding": "none"
+                        }
+                    },
+                    "length": "-1"
+                }
+            },
+            "target": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "gem_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "references": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                        "tensor": {
+                            "shape": {},
+                            "dtype": "string",
+                            "encoding": "none"
+                        }
+                    },
+                    "length": "-1"
+                }
+            },
+            "dart_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "gem_parent_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
             }
         }
     }

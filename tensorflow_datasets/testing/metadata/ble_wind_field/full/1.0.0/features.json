@@ -1,5 +1,23 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": "{\n  \"features\": {\n    \"field\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.tensor_feature.Tensor\",\n      \"tensor\": {\n        \"shape\": {\n          \"dimensions\": [\n            \"21\",\n            \"21\",\n            \"10\",\n            \"9\",\n            \"2\"\n          ]\n        },\n        \"dtype\": \"float32\",\n        \"encoding\": \"zlib\"\n      }\n    }\n  }\n}",
-    "proto_cls": "tensorflow_datasets.FeaturesDict"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "field": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "21",
+                            "21",
+                            "10",
+                            "9",
+                            "2"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "zlib"
+                }
+            }
+        }
+    }
 }

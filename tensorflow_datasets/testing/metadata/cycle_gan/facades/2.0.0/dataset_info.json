@@ -1,162 +1,64 @@
 {
-  "description": "Dataset with images from 2 classes (see config name for information on the specific class)", 
+  "citation": "@article{DBLP:journals/corr/ZhuPIE17,\n  author    = {Jun{-}Yan Zhu and\n               Taesung Park and\n               Phillip Isola and\n               Alexei A. Efros},\n  title     = {Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial\n               Networks},\n  journal   = {CoRR},\n  volume    = {abs/1703.10593},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1703.10593},\n  archivePrefix = {arXiv},\n  eprint    = {1703.10593},\n  timestamp = {Mon, 13 Aug 2018 16:48:06 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuPIE17},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "configName": "facades",
+  "description": "A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)",
+  "downloadSize": "35135868",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
     ]
-  }, 
-  "name": "cycle_gan", 
-  "schema": {
-    "feature": [
-      {
-        "name": "image", 
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }, 
-            {
-              "size": "-1"
-            }, 
-            {
-              "size": "3"
-            }
-          ]
-        }, 
-        "type": "INT"
-      }, 
-      {
-        "name": "label", 
-        "type": "INT"
-      }
-    ]
-  }, 
-  "sizeInBytes": "35135868", 
+  },
+  "moduleName": "tensorflow_datasets.image_classification.cycle_gan",
+  "name": "cycle_gan",
+  "releaseNotes": {
+    "2.0.0": "New split API (https://tensorflow.org/datasets/splits)"
+  },
   "splits": [
     {
-      "name": "testA", 
-      "numShards": "1", 
-      "shardLengths": [
-        "106"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "name": "image", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "106"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
-            "name": "label", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "106"
-              }
-            }
-          }
-        ], 
-        "numExamples": "106"
-      }
-    }, 
-    {
-      "name": "testB", 
-      "numShards": "1", 
-      "shardLengths": [
-        "106"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "name": "image", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "106"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
-            "name": "label", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "106"
-              }, 
-              "max": 1.0, 
-              "min": 1.0
-            }
-          }
-        ], 
-        "numExamples": "106"
-      }
-    }, 
-    {
-      "name": "trainA", 
-      "numShards": "10", 
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "trainA",
+      "numBytes": "20103380",
       "shardLengths": [
         "400"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "name": "image", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "400"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
-            "name": "label", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "400"
-              }
-            }
-          }
-        ], 
-        "numExamples": "400"
-      }
-    }, 
+      ]
+    },
     {
-      "name": "trainB", 
-      "numShards": "10", 
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "trainB",
+      "numBytes": "13807648",
       "shardLengths": [
         "400"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "name": "image", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "400"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
-            "name": "label", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "400"
-              }, 
-              "max": 1.0, 
-              "min": 1.0
-            }
-          }
-        ], 
-        "numExamples": "400"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "testA",
+      "numBytes": "1477670",
+      "shardLengths": [
+        "106"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "testB",
+      "numBytes": "1138258",
+      "shardLengths": [
+        "106"
+      ]
     }
-  ], 
+  ],
   "supervisedKeys": {
-    "input": "image", 
-    "output": "label"
-  }, 
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
   "version": "2.0.0"
 }

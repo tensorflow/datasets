@@ -2,14 +2,21 @@
   "citation": "@article{DeepWeeds2019,\n  author = {Alex Olsen and\n    Dmitry A. Konovalov and\n    Bronson Philippa and\n    Peter Ridd and\n    Jake C. Wood and\n    Jamie Johns and\n    Wesley Banks and\n    Benjamin Girgenti and\n    Owen Kenny and\n    James Whinney and\n    Brendan Calvert and\n    Mostafa {Rahimi Azghadi} and\n    Ronald D. White},\n  title = {{DeepWeeds: A Multiclass Weed Species Image Dataset for Deep Learning}},\n  journal = {Scientific Reports},\n  year = 2019,\n  number = 2058,\n  month = 2,\n  volume = 9,\n  issue = 1,\n  day = 14,\n  url = \"https://doi.org/10.1038/s41598-018-38343-3\",\n  doi = \"10.1038/s41598-018-38343-3\"\n}",
   "description": "The DeepWeeds dataset consists of 17,509 images capturing eight different weed species native to Australia in situ with neighbouring flora.The selected weed species are local to pastoral grasslands across the state of Queensland.The images were collected from weed infestations at the following sites across Queensland: \"Black River\", \"Charters Towers\",  \"Cluden\", \"Douglas\", \"Hervey Range\", \"Kelso\", \"McKinlay\" and \"Paluma\".",
   "downloadSize": "492114945",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/AlexOlsen/DeepWeeds"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.deep_weeds",
   "name": "deep_weeds",
+  "releaseNotes": {
+    "2.0.0": "Fixes wrong labels in V1.",
+    "3.0.0": "Update download URL."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "492819348",
       "shardLengths": [
@@ -21,8 +28,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "3.0.0"
 }

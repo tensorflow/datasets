@@ -37,6 +37,7 @@ class FileFormat(enum.Enum):
 
   TFRECORD = 'tfrecord'
   RIEGELI = 'riegeli'
+  ARRAY_RECORD = 'array_record'
 
   @property
   def file_suffix(self) -> str:

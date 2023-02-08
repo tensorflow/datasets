@@ -3,7 +3,7 @@
   "configName": "conll2003",
   "description": "The shared task of CoNLL-2003 concerns language-independent named entity\nrecognition and concentrates on four types of named entities: persons,\nlocations, organizations and names of miscellaneous entities that do not belong\nto the previous three groups.",
   "downloadSize": "982975",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.aclweb.org/anthology/W03-0419/"

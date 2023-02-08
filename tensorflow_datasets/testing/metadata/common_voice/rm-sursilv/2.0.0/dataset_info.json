@@ -3,7 +3,7 @@
   "configName": "rm-sursilv",
   "description": "Mozilla Common Voice Dataset",
   "downloadSize": "275950479",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://voice.mozilla.org/en/datasets"

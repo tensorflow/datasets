@@ -3,7 +3,7 @@
   "configDescription": "The entire historical wind field dataset.",
   "configName": "full",
   "description": "Historical wind field dataset for the Balloon Learning Environment.\n\n4D wind fields, where the dimensions are latitude, longitude, altitude, and\ntime. Each entry contains two float values (_u_ and _v_) which indicate the wind\ndirection and magnitude at the specified location, altitude, and time.\n\nAcknowledgements:\n\nHersbach, H., Bell, B., Berrisford, P., Hirahara, S., Hor\u00e1nyi, A.,\nMu\u00f1oz\u2010Sabater, J., Nicolas, J., Peubey, C., Radu, R., Schepers, D., Simmons, A.,\nSoci, C., Abdalla, S., Abellan, X., Balsamo, G., Bechtold, P., Biavati, G.,\nBidlot, J., Bonavita, M., De Chiara, G., Dahlgren, P., Dee, D., Diamantakis, M.,\nDragani, R., Flemming, J., Forbes, R., Fuentes, M., Geer, A., Haimberger, L.,\nHealy, S., Hogan, R.J., H\u00f3lm, E., Janiskov\u00e1, M., Keeley, S., Laloyaux, P.,\nLopez, P., Lupu, C., Radnoti, G., de Rosnay, P., Rozum, I., Vamborg, F.,\nVillaume, S., Th\u00e9paut, J-N. (2017): Complete ERA5: Fifth generation of ECMWF\natmospheric reanalyses of the global climate. Copernicus Climate Change Service\n(C3S) Data Store (CDS). (Accessed on 01-04-2021)",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google/balloon-learning-environment"

@@ -1,105 +1,46 @@
 {
-  "citation": "\n@misc{imagewang,\n  author    = \"Jeremy Howard\",\n  title     = \"Imagewang\",\n  url       = \"https://github.com/fastai/imagenette/\"\n}\n",
-  "description": "Imagewang contains Imagenette and Imagewoof combined\nImage\u7f51 (pronounced \"Imagewang\"; \u7f51 means \"net\" in Chinese) contains Imagenette\nand Imagewoof combined, but with some twists that make it into a tricky\nsemi-supervised unbalanced classification problem:\n\n* The validation set is the same as Imagewoof (i.e. 30% of Imagewoof images);\n  there are no Imagenette images in the validation set (they're all in the\n  training set)\n* Only 10% of Imagewoof images are in the training set!\n* The remaining are in the unsup (\"unsupervised\") directory, and you can not\n  use their labels in training!\n* It's even hard to type and hard to say!\n\nThe dataset comes in three variants:\n  * Full size\n  * 320 px\n  * 160 px\nThis dataset consists of the Imagenette dataset {size} variant.\n",
+  "citation": "@misc{imagewang,\n  author    = \"Jeremy Howard\",\n  title     = \"Imagewang\",\n  url       = \"https://github.com/fastai/imagenette/\"\n}",
+  "configDescription": "Imagewang contains Imagenette and Imagewoof combined.\n",
+  "configName": "160px",
+  "description": "Imagewang contains Imagenette and Imagewoof combined\nImage\u7f51 (pronounced \"Imagewang\"; \u7f51 means \"net\" in Chinese) contains Imagenette\nand Imagewoof combined, but with some twists that make it into a tricky\nsemi-supervised unbalanced classification problem:\n\n* The validation set is the same as Imagewoof (i.e. 30% of Imagewoof images);\n  there are no Imagenette images in the validation set (they're all in the\n  training set)\n* Only 10% of Imagewoof images are in the training set!\n* The remaining are in the unsup (\"unsupervised\") directory, and you can not\n  use their labels in training!\n* It's even hard to type and hard to say!\n\nThe dataset comes in three variants:\n\n  * Full size\n  * 320 px\n  * 160 px\n\nThis dataset consists of the Imagenette dataset {size} variant.",
+  "downloadSize": "191498213",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/fastai/imagenette"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.imagewang",
   "name": "imagewang",
-  "schema": {
-    "feature": [
-      {
-        "name": "image",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            },
-            {
-              "size": "-1"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "116870699",
-      "numShards": "1",
       "shardLengths": [
         "14669"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "14669"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "14669"
-              },
-              "max": 19.0
-            }
-          }
-        ],
-        "numExamples": "14669"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "30345638",
-      "numShards": "1",
       "shardLengths": [
         "3929"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3929"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3929"
-              },
-              "max": 18.0,
-              "min": 2.0
-            }
-          }
-        ],
-        "numExamples": "3929"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "2.0.0"
 }

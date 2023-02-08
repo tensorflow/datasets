@@ -2,14 +2,21 @@
   "citation": "@article{nene1996columbia,\n  title={Columbia object image library (coil-20)},\n  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},\n  year={1996},\n  publisher={Technical report CUCS-005-96}\n}",
   "description": "The dataset contains 7200 color images of 100 objects\n(72 images per object). The objects have a wide variety of complex geometric and reflectance characteristics.\nThe objects were placed on a motorized turntable against a black background.\nThe turntable was rotated through 360 degrees to vary object pose with respect to a fxed color camera.\nImages of the objects were taken at pose intervals of\t5 degrees.This corresponds to\n72 poses per object",
   "downloadSize": "130688843",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php"
     ]
   },
+  "moduleName": "tensorflow_datasets.image.coil100",
   "name": "coil100",
+  "releaseNotes": {
+    "1.0.0": "Initial release",
+    "2.0.0": "Change features (`object_id` is now `ClassLabel`, rename `label` -> `angle_label`, add `angle`)"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "130794797",
       "shardLengths": [
@@ -18,8 +25,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "angle_label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "angle_label"
+        }
+      ]
+    }
   },
   "version": "2.0.0"
 }

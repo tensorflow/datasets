@@ -3,7 +3,7 @@
   "configDescription": "1shot of total ImageNet training set.",
   "configName": "1shot",
   "description": "Imagenet2012Fewshot is a subset of original ImageNet ILSVRC 2012 dataset.\nThe dataset share the *same* validation set as the original ImageNet ILSVRC 2012\ndataset. However, the training set is subsampled in a label balanced fashion.\nIn `5shot` configuration, 5 images per label, or 5000 images are sampled; and\nin `10shot` configuration, 10 images per label, or 10000 images are sampled.",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://image-net.org/"

@@ -2,7 +2,7 @@
   "citation": "@article{DBLP:journals/corr/abs-1810-05201,\n  author    = {Kellie Webster and\n               Marta Recasens and\n               Vera Axelrod and\n               Jason Baldridge},\n  title     = {Mind the {GAP:} {A} Balanced Corpus of Gendered Ambiguous Pronouns},\n  journal   = {CoRR},\n  volume    = {abs/1810.05201},\n  year      = {2018},\n  url       = {http://arxiv.org/abs/1810.05201},\n  archivePrefix = {arXiv},\n  eprint    = {1810.05201},\n  timestamp = {Tue, 30 Oct 2018 20:39:56 +0100},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1810-05201},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
   "description": "GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of \n(ambiguous pronoun, antecedent name), sampled from Wikipedia and released by \nGoogle AI Language for the evaluation of coreference resolution in practical \napplications.",
   "downloadSize": "2401971",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research-datasets/gap-coreference"

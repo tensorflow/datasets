@@ -1,7 +1,7 @@
 {
   "citation": "@ARTICLE{Han2021-tu,\n  title         = \"Reliable Graph Neural Networks for Drug Discovery Under\n                   Distributional Shift\",\n  author        = \"Han, Kehang and Lakshminarayanan, Balaji and Liu, Jeremiah\",\n  month         =  nov,\n  year          =  2021,\n  archivePrefix = \"arXiv\",\n  primaryClass  = \"cs.LG\",\n  eprint        = \"2111.12951\"\n}",
   "description": "Drug Cardiotoxicity dataset [1-2] is a molecule classification task to detect\ncardiotoxicity caused by binding hERG target, a protein associated with heart\nbeat rhythm. The data covers over 9000 molecules with hERG activity.\n\nNote:\n\n1. The data is split into four splits: train, test-iid, test-ood1, test-ood2.\n\n2. Each molecule in the dataset has 2D graph annotations which is designed to\nfacilitate graph neural network modeling. Nodes are the atoms of the molecule\nand edges are the bonds. Each atom is represented as a vector encoding basic\natom information such as atom type. Similar logic applies to bonds.\n\n3. We include Tanimoto fingerprint distance (to training data) for each molecule\nin the test sets to facilitate research on distributional shift in graph domain.\n\nFor each example, the features include:\n  atoms: a 2D tensor with shape (60, 27) storing node features. Molecules with\n    less than 60 atoms are padded with zeros. Each atom has 27 atom features.\n  pairs: a 3D tensor with shape (60, 60, 12) storing edge features. Each edge\n    has 12 edge features.\n  atom_mask: a 1D tensor with shape (60, ) storing node masks. 1 indicates the\n    corresponding atom is real, othewise a padded one.\n  pair_mask: a 2D tensor with shape (60, 60) storing edge masks. 1 indicates the\n    corresponding edge is real, othewise a padded one.\n  active: a one-hot vector indicating if the molecule is toxic or not. [0, 1]\n    indicates it's toxic, otherwise [1, 0] non-toxic.\n\n\n## References\n[1]: V. B. Siramshetty et al. Critical Assessment of Artificial Intelligence\nMethods for Prediction of hERG Channel Inhibition in the Big Data Era.\n    JCIM, 2020. https://pubs.acs.org/doi/10.1021/acs.jcim.0c00884\n\n[2]: K. Han et al. Reliable Graph Neural Networks for Drug Discovery Under\nDistributional Shift.\n    NeurIPS DistShift Workshop 2021. https://arxiv.org/abs/2111.12951",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google/uncertainty-baselines/tree/main/baselines/drug_cardiotoxicity"
@@ -14,6 +14,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "1266286850",
       "shardLengths": [
@@ -36,6 +37,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "316618244",
       "shardLengths": [
@@ -46,6 +48,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "162879097",
       "shardLengths": [
@@ -54,6 +57,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test2",
       "numBytes": "34353881",
       "shardLengths": [
