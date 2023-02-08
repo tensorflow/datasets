@@ -2,14 +2,20 @@
   "citation": "@article{choi2018quac,\n  title={Quac: Question answering in context},\n  author={Choi, Eunsol and He, He and Iyyer, Mohit and Yatskar, Mark and Yih, Wen-tau and Choi, Yejin and Liang, Percy and Zettlemoyer, Luke},\n  journal={arXiv preprint arXiv:1808.07036},\n  year={2018}\n}",
   "description": "Question Answering in Context is a dataset for modeling, understanding,\nand participating in information seeking dialog. Data instances consist\nof an interactive dialog between two crowd workers: (1) a student who poses\na sequence of freeform questions to learn as much as possible about a hidden\nWikipedia text, and (2) a teacher who answers the questions by providing\nshort excerpts (spans) from the text. QuAC introduces challenges not found\nin existing machine comprehension datasets: its questions are often more\nopen-ended, unanswerable, or only meaningful within the dialog context.",
   "downloadSize": "77043986",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://quac.ai/"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.quac.quac",
   "name": "quac",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "283625162",
       "shardLengths": [
@@ -20,6 +26,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "28893010",
       "shardLengths": [
@@ -28,8 +35,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "context",
-    "output": "answers"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "context"
+        },
+        {
+          "featureKey": "answers"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

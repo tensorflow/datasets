@@ -2,7 +2,7 @@
   "citation": "@misc{honovich2022unnatural,\n      title = {Unnatural Instructions: Tuning Language Models with (Almost) No Human Labor},\n      author = {Honovich, Or and Scialom, Thomas and Levy, Omer and Schick, Timo},\n      url = {https://arxiv.org/abs/2212.09689},\n      publisher = {arXiv},\n      year={2022}\n}",
   "description": "Dataset described in the paper: Unnatural Instructions: Tuning Language Models with (Almost) No Human Labor (2022).\nContains sets of natural-language instructions, with optional constraints / LLM-generated reformulations.",
   "downloadSize": "18328014",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/orhonovich/unnatural-instructions"

@@ -1,6 +1,6 @@
 {
   "downloadSize": "3303849111",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/allenai/natural-instructions"

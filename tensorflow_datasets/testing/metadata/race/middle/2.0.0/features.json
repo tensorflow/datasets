@@ -1,49 +1,51 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "article": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "questions": {
-            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-            "content": {
-                "feature": {
-                    "type": "tensorflow_datasets.core.features.text_feature.Text",
-                    "content": {}
-                },
-                "length": null
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "article": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "answers": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "questions": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "example_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "options": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                        "sequence": {
+                            "feature": {
+                                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                "text": {}
+                            },
+                            "length": "-1"
+                        }
+                    },
+                    "length": "-1"
+                }
             }
-        },
-        "answers": {
-            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-            "content": {
-                "feature": {
-                    "type": "tensorflow_datasets.core.features.text_feature.Text",
-                    "content": {}
-                },
-                "length": null
-            }
-        },
-        "options": {
-            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-            "content": {
-                "feature": {
-                    "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-                    "content": {
-                        "feature": {
-                            "type": "tensorflow_datasets.core.features.text_feature.Text",
-                            "content": {}
-                        },
-                        "length": null
-                    }
-                },
-                "length": null
-            }
-        },
-        "example_id": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
         }
     }
 }

@@ -2,20 +2,17 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "transcription": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Normalized transcription."
-            },
-            "language": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag."
-            },
-            "lang_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "102"
+            "audio": {
+                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
+                "audio": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "sampleRate": "16000",
+                    "encoding": "NONE"
                 }
             },
             "id": {
@@ -32,10 +29,16 @@
                 "text": {},
                 "description": "Raw Transcription from FLoRes."
             },
-            "lang_group_id": {
+            "gender": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
-                    "numClasses": "7"
+                    "numClasses": "3"
+                }
+            },
+            "lang_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "102"
                 }
             },
             "num_samples": {
@@ -47,23 +50,10 @@
                 },
                 "description": "Total number of frames in the audio"
             },
-            "gender": {
+            "lang_group_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
-                    "numClasses": "3"
-                }
-            },
-            "audio": {
-                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
-                "audio": {
-                    "shape": {
-                        "dimensions": [
-                            "-1"
-                        ]
-                    },
-                    "dtype": "int64",
-                    "sampleRate": "16000",
-                    "encoding": "NONE"
+                    "numClasses": "7"
                 }
             },
             "path": {
@@ -73,6 +63,16 @@
                     "dtype": "string",
                     "encoding": "none"
                 }
+            },
+            "transcription": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Normalized transcription."
+            },
+            "language": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag."
             }
         }
     }

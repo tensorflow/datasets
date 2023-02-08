@@ -4,7 +4,7 @@
   "configName": "contract_nli",
   "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\ncontract_nli subset",
   "downloadSize": "4862245",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://stanfordnlp.github.io/contract-nli/"
@@ -17,6 +17,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "81274988",
       "shardLengths": [
@@ -24,6 +25,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "12797276",
       "shardLengths": [
@@ -31,6 +33,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "23955227",
       "shardLengths": [
@@ -38,5 +41,17 @@
       ]
     }
   ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "input"
+        },
+        {
+          "featureKey": "output"
+        }
+      ]
+    }
+  },
   "version": "1.0.0"
 }

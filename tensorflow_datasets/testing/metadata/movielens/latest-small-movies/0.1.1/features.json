@@ -14,7 +14,7 @@
                     "length": "-1"
                 }
             },
-            "movie_title": {
+            "movie_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
@@ -22,7 +22,7 @@
                     "encoding": "none"
                 }
             },
-            "movie_id": {
+            "movie_title": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},

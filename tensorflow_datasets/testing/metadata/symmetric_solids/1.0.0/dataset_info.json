@@ -2,7 +2,7 @@
   "citation": "@inproceedings{implicitpdf2021,\n  title = {Implicit Representation of Probability Distributions on the Rotation \n  Manifold},\n  author = {Murphy, Kieran and Esteves, Carlos and Jampani, Varun and \n  Ramalingam, Srikumar and Makadia, Ameesh}\n  booktitle = {International Conference on Machine Learning}\n  year = {2021}\n}",
   "description": "This is a pose estimation dataset, consisting of symmetric 3D shapes where \nmultiple orientations are visually indistinguishable. \nThe challenge is to predict all equivalent orientations when only one \norientation is paired with each image during training (as is the scenario for \nmost pose estimation datasets). In contrast to most pose estimation datasets, \nthe full set of equivalent orientations is available for evaluation.\n\nThere are eight shapes total, each rendered from 50,000 viewpoints distributed \nuniformly at random over the full space of 3D rotations.\nFive of the shapes are featureless -- tetrahedron, cube, icosahedron, cone, and \ncylinder.\nOf those, the three Platonic solids (tetrahedron, cube, icosahedron) are \nannotated with their 12-, 24-, and 60-fold discrete symmetries, respectively.\nThe cone and cylinder are annotated with their continuous symmetries discretized\n at 1 degree intervals. These symmetries are provided for evaluation; the \n intended supervision is only a single rotation with each image.\n\nThe remaining three shapes are marked with a distinguishing feature.\nThere is a tetrahedron with one red-colored face, a cylinder with an off-center \ndot, and a sphere with an X capped by a dot. Whether or not the distinguishing \nfeature is visible, the space of possible orientations is reduced.  We do not \nprovide the set of equivalent rotations for these shapes.\n\nEach example contains of \n\n- the 224x224 RGB image\n- a shape index so that the dataset may be filtered by shape.  \nThe indices correspond to: \n\n  - 0 = tetrahedron\n  - 1 = cube\n  - 2 = icosahedron\n  - 3 = cone\n  - 4 = cylinder\n  - 5 = marked tetrahedron\n  - 6 = marked cylinder\n  - 7 = marked sphere\n\n- the rotation used in the rendering process, represented as a 3x3 rotation matrix\n- the set of known equivalent rotations under symmetry, for evaluation.  \n\nIn the case of the three marked shapes, this is only the rendering rotation.",
   "downloadSize": "3328555013",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://implicit-pdf.github.io"
@@ -10,8 +10,12 @@
   },
   "moduleName": "tensorflow_datasets.image.symmetric_solids.symmetric_solids",
   "name": "symmetric_solids",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "3811030727",
       "shardLengths": [
@@ -50,6 +54,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "423707167",
       "shardLengths": [
@@ -61,8 +66,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "rotation"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "rotation"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

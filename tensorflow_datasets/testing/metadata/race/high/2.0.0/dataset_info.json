@@ -4,14 +4,29 @@
   "configName": "high",
   "description": "Race is a large-scale reading comprehension dataset with more than 28,000\npassages and nearly 100,000 questions. The dataset is collected from English\nexaminations in China, which are designed for middle school and high school\nstudents. The dataset can be served as the training and test sets for machine\ncomprehension.",
   "downloadSize": "25443609",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.cs.cmu.edu/~glai1/data/race/"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.race.race",
   "name": "race",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Add the example id."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "49511232",
+      "shardLengths": [
+        "18728"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "dev",
       "numBytes": "2680378",
       "shardLengths": [
@@ -19,17 +34,11 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "2738689",
       "shardLengths": [
         "1045"
-      ]
-    },
-    {
-      "name": "train",
-      "numBytes": "49511232",
-      "shardLengths": [
-        "18728"
       ]
     }
   ],

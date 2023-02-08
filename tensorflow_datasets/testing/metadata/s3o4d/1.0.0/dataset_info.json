@@ -2,14 +2,20 @@
   "citation": "@article{pfau2020disentangling,\n  title={Disentangling by Subspace Diffusion},\n  author={Pfau, David and Higgins, Irina and Botev, Aleksandar and Racani\\`ere,\n  S{\\'e}bastian},\n  journal={Advances in Neural Information Processing Systems (NeurIPS)},\n  year={2020}\n}",
   "description": "The dataset first described in the \"Stanford 3D Objects\"\nsection of the paper [Disentangling by Subspace Diffusion](https://arxiv.org/abs/2006.12982).\nThe data consists of 100,000 renderings each of the Bunny and Dragon objects\nfrom the [Stanford 3D Scanning Repository](http://graphics.stanford.edu/data/3Dscanrep/).\nMore objects may be added in the future, but only the Bunny and Dragon are used\nin the paper. Each object is rendered with a uniformly sampled illumination from\na point on the 2-sphere, and a uniformly sampled 3D rotation. The true latent\nstates are provided as NumPy arrays along with the images. The lighting is given\nas a 3-vector with unit norm, while the rotation is provided both as a\nquaternion and a 3x3 orthogonal matrix.\n\nThere are many similarities between S3O4D and existing ML benchmark datasets\nlike [NORB](https://cs.nyu.edu/~ylclab/data/norb-v1.0/),\n[3D Chairs](https://github.com/mathieuaubry/seeing3Dchairs),\n[3D Shapes](https://github.com/deepmind/3d-shapes) and many others, which also\ninclude renderings of a set of objects under different pose and illumination\nconditions. However, none of these existing datasets include the *full manifold*\nof rotations in 3D - most include only a subset of changes to elevation and\nazimuth. S3O4D images are sampled uniformly and independently from the full space\nof rotations and illuminations, meaning the dataset contains objects that are\nupside down and illuminated from behind or underneath. We believe that this\nmakes S3O4D uniquely suited for research on generative models where the latent\nspace has non-trivial topology, as well as for general manifold learning\nmethods where the curvature of the manifold is important.",
   "downloadSize": "955962583",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/deepmind/deepmind-research/tree/master/geomancer#stanford-3d-objects-for-disentangling-s3o4d"
     ]
   },
+  "moduleName": "tensorflow_datasets.image.s3o4d.s3o4d",
   "name": "s3o4d",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "bunny_train",
       "numBytes": "389447646",
       "shardLengths": [
@@ -20,6 +26,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "bunny_test",
       "numBytes": "97356034",
       "shardLengths": [
@@ -27,6 +34,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "dragon_train",
       "numBytes": "480762797",
       "shardLengths": [
@@ -37,6 +45,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "dragon_test",
       "numBytes": "120314355",
       "shardLengths": [

@@ -1,8 +1,8 @@
 {
   "citation": "@misc{gulcehre2020rl,\n    title={RL Unplugged: Benchmarks for Offline Reinforcement Learning},\n    author={Caglar Gulcehre and Ziyu Wang and Alexander Novikov and Tom Le Paine\n        and  Sergio G\u00f3mez Colmenarejo and Konrad Zolna and Rishabh Agarwal and\n        Josh Merel and Daniel Mankowitz and Cosmin Paduraru and Gabriel\n        Dulac-Arnold and Jerry Li and Mohammad Norouzi and Matt Hoffman and\n        Ofir Nachum and George Tucker and Nicolas Heess and Nando deFreitas},\n    year={2020},\n    eprint={2006.13888},\n    archivePrefix={arXiv},\n    primaryClass={cs.LG}\n}",
   "configName": "cartpole_swingup_combined_challenge_none_5_percent",
-  "description": "RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL\nUnplugged is designed around the following considerations: to facilitate ease of\nuse, we provide the datasets with a unified API which makes it easy for the\npractitioner to work with all data in the suite once a general pipeline has been\nestablished.\n\n\nExamples in the dataset represent SAR transitions stored when running a\npartially online trained agent as described in https://arxiv.org/abs/1904.12901.\nWe follow the RLDS dataset format, as specified in\nhttps://github.com/google-research/rlds#dataset-format.\n\n\nWe release 40 datasets on 8 tasks in total -- with no combined challenge and\neasy combined challenge on the cartpole, walker, quadruped, and humanoid tasks.\nEach task contains 5 different sizes of datasets, 1%, 5%, 20%, 40%, and 100%.\nNote that the smaller dataset is not guaranteed to be a subset of the larger\nones. For details on how the dataset was generated, please refer to the paper.",
-  "fileFormat": "tfrecord",
+  "description": "RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL\nUnplugged is designed around the following considerations: to facilitate ease of\nuse, we provide the datasets with a unified API which makes it easy for the\npractitioner to work with all data in the suite once a general pipeline has been\nestablished.\n\nThe datasets follow the [RLDS format](https://github.com/google-research/rlds)\nto represent steps and episodes.\n\n\nExamples in the dataset represent SAR transitions stored when running a\npartially online trained agent as described in https://arxiv.org/abs/1904.12901.\nWe follow the RLDS dataset format, as specified in\nhttps://github.com/google-research/rlds#dataset-format.\n\n\nWe release 40 datasets on 8 tasks in total -- with no combined challenge and\neasy combined challenge on the cartpole, walker, quadruped, and humanoid tasks.\nEach task contains 5 different sizes of datasets, 1%, 5%, 20%, 40%, and 100%.\nNote that the smaller dataset is not guaranteed to be a subset of the larger\nones. For details on how the dataset was generated, please refer to the paper.",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged"
@@ -10,8 +10,13 @@
   },
   "moduleName": "tensorflow_datasets.rl_unplugged.rlu_rwrl.rlu_rwrl",
   "name": "rlu_rwrl",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "1.0.1": "Fixes a bug in RLU RWRL dataset where there are duplicated episode ids in one of the humanoid datasets."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "882825",
       "shardLengths": [

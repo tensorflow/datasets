@@ -3,6 +3,7 @@
   "configDescription": "All images are bilinearly resized to 480 X 640 with all frames included. The val and test splits are manufactured from the training data.",
   "configName": "480_640_full_train_split",
   "description": "Youtube-vis is a video instance segmentation dataset. It contains 2,883\nhigh-resolution YouTube videos, a per-pixel category label set including 40\ncommon objects such as person, animals and vehicles, 4,883 unique video\ninstances, and 131k high-quality manual annotations.\n\nThe YouTube-VIS dataset is split into 2,238 training videos, 302 validation\nvideos and 343 test videos.\n\nNo files were removed or altered during preprocessing.",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://youtube-vos.org/dataset/vis/"
@@ -10,8 +11,12 @@
   },
   "moduleName": "tensorflow_datasets.video.youtube_vis.youtube_vis",
   "name": "youtube_vis",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "90367327310",
       "shardLengths": [
@@ -1042,6 +1047,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "9283194628",
       "shardLengths": [
@@ -1176,6 +1182,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "9405948825",
       "shardLengths": [

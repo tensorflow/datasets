@@ -4,7 +4,7 @@
   "configName": "raw",
   "description": "QuALITY, a multiple-choice, long-reading comprehension dataset.\n\nWe provide only the raw version.",
   "downloadSize": "18101512",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/nyu-mll/quality"
@@ -17,6 +17,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "9057139",
       "shardLengths": [
@@ -24,6 +25,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "7328997",
       "shardLengths": [
@@ -31,6 +33,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "dev",
       "numBytes": "6869163",
       "shardLengths": [

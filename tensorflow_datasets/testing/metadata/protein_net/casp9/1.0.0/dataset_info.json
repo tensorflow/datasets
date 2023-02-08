@@ -3,7 +3,7 @@
   "configName": "casp9",
   "description": "ProteinNet is a standardized data set for machine learning of protein structure.\nIt provides protein sequences, structures (secondary and tertiary), multiple\nsequence alignments (MSAs), position-specific scoring matrices (PSSMs), and\nstandardized training / validation / test splits. ProteinNet builds on the\nbiennial CASP assessments, which carry out blind predictions of recently solved\nbut publicly unavailable protein structures, to provide test sets that push the\nfrontiers of computational methodology. It is organized as a series of data\nsets, spanning CASP 7 through 12 (covering a ten-year period), to provide a\nrange of data set sizes that enable assessment of new methods in relatively data\npoor and data rich regimes.",
   "downloadSize": "7145253890",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/aqlaboratory/proteinnet"
@@ -11,8 +11,12 @@
   },
   "moduleName": "tensorflow_datasets.structured.proteinnet.proteinnet",
   "name": "protein_net",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "6281707",
       "shardLengths": [
@@ -20,6 +24,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "3217722",
       "shardLengths": [
@@ -27,6 +32,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_30",
       "numBytes": "433932383",
       "shardLengths": [
@@ -37,6 +43,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_50",
       "numBytes": "580763938",
       "shardLengths": [
@@ -51,6 +58,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_70",
       "numBytes": "689664095",
       "shardLengths": [
@@ -65,6 +73,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_90",
       "numBytes": "790369786",
       "shardLengths": [
@@ -79,6 +88,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_95",
       "numBytes": "805619246",
       "shardLengths": [
@@ -93,6 +103,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_100",
       "numBytes": "1568108820",
       "shardLengths": [
@@ -116,8 +127,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "primary",
-    "output": "tertiary"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "primary"
+        },
+        {
+          "featureKey": "tertiary"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

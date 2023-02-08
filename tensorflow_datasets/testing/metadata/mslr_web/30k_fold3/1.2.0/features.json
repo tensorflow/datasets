@@ -14,10 +14,6 @@
                     "encoding": "zlib"
                 }
             },
-            "query_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
             "float_features": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
@@ -30,6 +26,10 @@
                     "dtype": "float64",
                     "encoding": "zlib"
                 }
+            },
+            "query_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             },
             "label": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",

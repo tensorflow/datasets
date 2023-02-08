@@ -4,14 +4,17 @@
   "configName": "enga",
   "description": "Web-Scale Parallel Corpora for Official European Languages.",
   "downloadSize": "29394367",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://paracrawl.eu/releases.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.translate.para_crawl",
   "name": "para_crawl",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "112295151",
       "shardLengths": [
@@ -20,8 +23,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "en",
-    "output": "ga"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "en"
+        },
+        {
+          "featureKey": "ga"
+        }
+      ]
+    }
   },
   "version": "1.2.0"
 }

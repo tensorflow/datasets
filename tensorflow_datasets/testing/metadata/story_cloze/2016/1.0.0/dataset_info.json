@@ -1,25 +1,32 @@
 {
   "citation": "@inproceedings{sharma-etal-2018-tackling,\n    title = \"Tackling the Story Ending Biases in The Story Cloze Test\",\n    author = \"Sharma, Rishi  and\n      Allen, James  and\n      Bakhshandeh, Omid  and\n      Mostafazadeh, Nasrin\",\n    booktitle = \"Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)\",\n    month = jul,\n    year = \"2018\",\n    address = \"Melbourne, Australia\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/P18-2119\",\n    doi = \"10.18653/v1/P18-2119\",\n    pages = \"752--757\",\n    abstract = \"The Story Cloze Test (SCT) is a recent framework for evaluating story comprehension and script learning. There have been a variety of models tackling the SCT so far. Although the original goal behind the SCT was to require systems to perform deep language understanding and commonsense reasoning for successful narrative understanding, some recent models could perform significantly better than the initial baselines by leveraging human-authorship biases discovered in the SCT dataset. In order to shed some light on this issue, we have performed various data analysis and analyzed a variety of top performing models presented for this task. Given the statistics we have aggregated, we have designed a new crowdsourcing scheme that creates a new SCT dataset, which overcomes some of the biases. We benchmark a few models on the new dataset and show that the top-performing model on the original SCT dataset fails to keep up its performance. Our findings further signify the importance of benchmarking NLP systems on various evolving test sets.\",\n}",
-  "configDescription": "Story Cloze Test is a new commonsense reasoning framework\nfor evaluating story understanding, story generation, and script learning.\nThis test requires a system to choose the correct ending to a four-sentence\nstory.\n",
+  "configDescription": "2018 year",
   "configName": "2016",
   "description": "Story Cloze Test is a new commonsense reasoning framework\nfor evaluating story understanding, story generation, and script learning.\nThis test requires a system to choose the correct ending to a four-sentence\nstory.",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.cs.rochester.edu/nlp/rocstories/"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.story_cloze.story_cloze",
   "name": "story_cloze",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "601780",
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "602705",
       "shardLengths": [
         "1871"
       ]
     },
     {
-      "name": "validation",
-      "numBytes": "602705",
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "601780",
       "shardLengths": [
         "1871"
       ]

@@ -4,14 +4,17 @@
   "configName": "ensk",
   "description": "Web-Scale Parallel Corpora for Official European Languages.",
   "downloadSize": "101307152",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://paracrawl.eu/releases.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.translate.para_crawl",
   "name": "para_crawl",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "370056378",
       "shardLengths": [
@@ -23,8 +26,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "en",
-    "output": "sk"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "en"
+        },
+        {
+          "featureKey": "sk"
+        }
+      ]
+    }
   },
   "version": "1.2.0"
 }

@@ -1,8 +1,8 @@
 {
   "citation": "@inproceedings{gulcehre2020rl,\n title = {RL Unplugged: A Suite of Benchmarks for Offline Reinforcement Learning},\n author = {Gulcehre, Caglar and Wang, Ziyu and Novikov, Alexander and Paine, Thomas and G'{o}mez, Sergio and Zolna, Konrad and Agarwal, Rishabh and Merel, Josh S and Mankowitz, Daniel J and Paduraru, Cosmin and Dulac-Arnold, Gabriel and Li, Jerry and Norouzi, Mohammad and Hoffman, Matthew and Heess, Nicolas and de Freitas, Nando},\n booktitle = {Advances in Neural Information Processing Systems},\n pages = {7248--7259},\n volume = {33},\n year = {2020}\n}",
   "configName": "humanoid_gaps",
-  "description": "RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL\nUnplugged is designed around the following considerations: to facilitate ease of\nuse, we provide the datasets with a unified API which makes it easy for the\npractitioner to work with all data in the suite once a general pipeline has been\nestablished.\n\n\nThese tasks are made up of the corridor locomotion tasks involving the CMU\nHumanoid, for which prior efforts have either used motion capture data\n[Merel et al., 2019a](https://arxiv.org/abs/1811.09656),\n[Merel et al., 2019b](https://arxiv.org/abs/1811.11711) or training from scratch\n[Song et al., 2020](https://arxiv.org/abs/1909.12238). In addition, the DM\nLocomotion repository contains a set of tasks adapted to be suited to a virtual\nrodent [Merel et al., 2020](https://arxiv.org/abs/1911.09451). We emphasize that\nthe DM Locomotion tasks feature the combination of challenging high-DoF\ncontinuous control along with perception from rich egocentric observations.\nFor details on how the dataset was generated, please refer to the paper.\n\nWe recommend you to try offline RL methods on DeepMind Locomotion dataset, if\nyou are interested in very challenging offline RL dataset with continuous action\nspace.",
-  "fileFormat": "tfrecord",
+  "description": "RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL\nUnplugged is designed around the following considerations: to facilitate ease of\nuse, we provide the datasets with a unified API which makes it easy for the\npractitioner to work with all data in the suite once a general pipeline has been\nestablished.\n\nThe datasets follow the [RLDS format](https://github.com/google-research/rlds)\nto represent steps and episodes.\n\n\nThese tasks are made up of the corridor locomotion tasks involving the CMU\nHumanoid, for which prior efforts have either used motion capture data\n[Merel et al., 2019a](https://arxiv.org/abs/1811.09656),\n[Merel et al., 2019b](https://arxiv.org/abs/1811.11711) or training from scratch\n[Song et al., 2020](https://arxiv.org/abs/1909.12238). In addition, the DM\nLocomotion repository contains a set of tasks adapted to be suited to a virtual\nrodent [Merel et al., 2020](https://arxiv.org/abs/1911.09451). We emphasize that\nthe DM Locomotion tasks feature the combination of challenging high-DoF\ncontinuous control along with perception from rich egocentric observations.\nFor details on how the dataset was generated, please refer to the paper.\n\nWe recommend you to try offline RL methods on DeepMind Locomotion dataset, if\nyou are interested in very challenging offline RL dataset with continuous action\nspace.",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged"
@@ -15,6 +15,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "4903185184",
       "shardLengths": [
