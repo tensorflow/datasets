@@ -2,14 +2,20 @@
   "citation": "@ONLINE {\n    author = \"Aono, Yasuyuki\",\n    title  = \"Historical Series of Phenological data for Cherry Tree Flowering at Kyoto City (and March Mean Temperature Reconstructions)\",\n    year   = \"2012\",\n    url    = \"http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/\"\n}",
   "description": "Historical phenological data for cherry tree flowering at Kyoto City.\n\nThis data was collected from diaries and chronicles dating back to the 9th\ncentury. Data from the 9th to the 14th century were collected by Aono and Saito\n(2010;  International Journal of Biometeorology, 54, 211-219), while the 15th\nto 21st  century were collected by Aono and Kazui (2008; International Journal\nof  Climatology, 28, 905-914).\n\nAll dates are expressed in the Gregorian calendar.\n\n\nNumber of instances: 1216\n\nVariables:\n\n1. year: Year CE  (int)\n2. doy: Day of year of first bloom. Day 89 is April 1. Day 119 is May 1. (float)\n3. temp: March temperature estimate (float)\n4. temp_upper: Upper 95% bound for estimate (float)\n5. temp_lower: Lower 95% bound for estimate (float)",
   "downloadSize": "27544",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/"
     ]
   },
+  "moduleName": "tensorflow_datasets.structured.cherry_blossoms.cherry_blossoms",
   "name": "cherry_blossoms",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "122715",
       "shardLengths": [

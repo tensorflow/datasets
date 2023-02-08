@@ -2,21 +2,17 @@
   "citation": "@inproceedings{dusek-etal-2019-semantic,\n    title = \"Semantic Noise Matters for Neural Natural Language Generation\",\n    author = \"Du{\\v{s}}ek, Ond{\\v{r}}ej  and\n      Howcroft, David M.  and\n      Rieser, Verena\",\n    booktitle = \"Proceedings of the 12th International Conference on Natural Language Generation\",\n    month = oct # \"{--}\" # nov,\n    year = \"2019\",\n    address = \"Tokyo, Japan\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/W19-8652\",\n    doi = \"10.18653/v1/W19-8652\",\n    pages = \"421--426\",\n    abstract = \"Neural natural language generation (NNLG) systems are known for their pathological outputs, i.e. generating text which is unrelated to the input specification. In this paper, we show the impact of semantic noise on state-of-the-art NNLG models which implement different semantic control mechanisms. We find that cleaned data can improve semantic correctness by up to 97{\\%}, while maintaining fluency. We also find that the most common error is omitting information, rather than hallucination.\",\n}",
   "description": "An update release of E2E NLG Challenge data with cleaned MRs. The E2E data\ncontains dialogue act-based meaning representation (MR) in the restaurant domain\nand up to 5 references in natural language, which is what one needs to predict.",
   "downloadSize": "14597407",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/tuetschek/e2e-cleaning"
     ]
   },
+  "moduleName": "tensorflow_datasets.structured.e2e_cleaned",
   "name": "e2e_cleaned",
   "splits": [
     {
-      "name": "test",
-      "numBytes": "1890844",
-      "shardLengths": [
-        "4693"
-      ]
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "11891270",
       "shardLengths": [
@@ -24,16 +20,33 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "1627393",
       "shardLengths": [
         "4299"
       ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1890844",
+      "shardLengths": [
+        "4693"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "input_text",
-    "output": "target_text"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "input_text"
+        },
+        {
+          "featureKey": "target_text"
+        }
+      ]
+    }
   },
   "version": "0.1.0"
 }

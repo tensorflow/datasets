@@ -1,17 +1,25 @@
 {
   "citation": "@article{Sumbul2019BigEarthNetAL,\n  title={BigEarthNet: A Large-Scale Benchmark Archive For Remote Sensing Image Understanding},\n  author={Gencer Sumbul and Marcela Charfuelan and Beg{\"u}m Demir and Volker Markl},\n  journal={CoRR},\n  year={2019},\n  volume={abs/1902.06148}\n}",
-  "description": "The BigEarthNet is a new large-scale Sentinel-2 benchmark archive, consisting of\n590,326 Sentinel-2 image patches. The image patch size on the ground is\n1.2 x 1.2 km with variable image size depending on the channel resolution.\nThis is a multi-label dataset with 43 imbalanced labels.\n\nTo construct the BigEarthNet, 125 Sentinel-2\ntiles acquired between June 2017 and May 2018 over the 10 countries (Austria,\nBelgium, Finland, Ireland, Kosovo, Lithuania, Luxembourg, Portugal, Serbia,\nSwitzerland) of Europe were initially selected. All the tiles were\natmospherically corrected by the Sentinel-2 Level 2A product generation and\nformatting tool (sen2cor). Then, they were divided into 590,326 non-overlapping\nimage patches. Each image patch was annotated by the multiple land-cover classes\n(i.e., multi-labels) that were provided from the CORINE Land Cover database of\nthe year 2018 (CLC 2018).\n\nBands and pixel resolution in meters:\nB01: Coastal aerosol; 60m\nB02: Blue; 10m\nB03: Green; 10m\nB04: Red; 10m\nB05: Vegetation red edge; 20m\nB06: Vegetation red edge; 20m\nB07: Vegetation red edge; 20m\nB08: NIR; 10m\nB09: Water vapor; 60m\nB11: SWIR; 20m\nB12: SWIR; 20m\nB8A: Narrow NIR; 20m\n\nLicense: Community Data License Agreement - Permissive, Version 1.0.\n\nURL: http://bigearth.net/\n",
+  "configDescription": "Sentinel-2 RGB channels",
+  "configName": "rgb",
+  "description": "The BigEarthNet is a new large-scale Sentinel-2 benchmark archive, consisting of\n590,326 Sentinel-2 image patches. The image patch size on the ground is\n1.2 x 1.2 km with variable image size depending on the channel resolution.\nThis is a multi-label dataset with 43 imbalanced labels.\n\nTo construct the BigEarthNet, 125 Sentinel-2\ntiles acquired between June 2017 and May 2018 over the 10 countries (Austria,\nBelgium, Finland, Ireland, Kosovo, Lithuania, Luxembourg, Portugal, Serbia,\nSwitzerland) of Europe were initially selected. All the tiles were\natmospherically corrected by the Sentinel-2 Level 2A product generation and\nformatting tool (sen2cor). Then, they were divided into 590,326 non-overlapping\nimage patches. Each image patch was annotated by the multiple land-cover classes\n(i.e., multi-labels) that were provided from the CORINE Land Cover database of\nthe year 2018 (CLC 2018).\n\nBands and pixel resolution in meters:\n\n* B01: Coastal aerosol; 60m\n* B02: Blue; 10m\n* B03: Green; 10m\n* B04: Red; 10m\n* B05: Vegetation red edge; 20m\n* B06: Vegetation red edge; 20m\n* B07: Vegetation red edge; 20m\n* B08: NIR; 10m\n* B09: Water vapor; 60m\n* B11: SWIR; 20m\n* B12: SWIR; 20m\n* B8A: Narrow NIR; 20m\n\nLicense: Community Data License Agreement - Permissive, Version 1.0.\n\nURL: http://bigearth.net/",
+  "downloadSize": "70032164579",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://bigearth.net"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.bigearthnet",
   "name": "bigearthnet",
-  "sizeInBytes": "70032164579",
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "128",
+      "numBytes": "15108958427",
       "shardLengths": [
         "4612",
         "4612",
@@ -145,8 +153,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "labels"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "labels"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

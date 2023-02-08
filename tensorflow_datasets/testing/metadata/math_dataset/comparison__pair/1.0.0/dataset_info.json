@@ -1,91 +1,46 @@
 {
-  "citation": "\n@article{2019arXiv,\n  author = {Saxton, Grefenstette, Hill, Kohli},\n  title = {Analysing Mathematical Reasoning Abilities of Neural Models},\n  year = {2019},\n  journal = {arXiv:1904.01557}\n}\n",
-  "description": "\nMathematics database.\n\nThis dataset code generates mathematical question and answer pairs,\nfrom a range of question types at roughly school-level difficulty.\nThis is designed to test the mathematical learning and algebraic\nreasoning skills of learning models.\n\nOriginal paper: Analysing Mathematical Reasoning Abilities of Neural Models\n(Saxton, Grefenstette, Hill, Kohli).\n\nExample usage:\ntrain_examples, val_examples = tfds.load(\n    'math_dataset/arithmetic__mul',\n    split=['train', 'test'],\n    as_supervised=True)\n",
+  "citation": "@article{2019arXiv,\n  author = {Saxton, Grefenstette, Hill, Kohli},\n  title = {Analysing Mathematical Reasoning Abilities of Neural Models},\n  year = {2019},\n  journal = {arXiv:1904.01557}\n}",
+  "configName": "comparison__pair",
+  "description": "Mathematics database.\n\nThis dataset code generates mathematical question and answer pairs,\nfrom a range of question types at roughly school-level difficulty.\nThis is designed to test the mathematical learning and algebraic\nreasoning skills of learning models.\n\nOriginal paper: Analysing Mathematical Reasoning Abilities of Neural Models\n(Saxton, Grefenstette, Hill, Kohli).\n\nExample usage:\n\n```\ntrain_examples, val_examples = tfds.load(\n    'math_dataset/arithmetic__mul',\n    split=['train', 'test'],\n    as_supervised=True)\n```",
+  "downloadSize": "2333082954",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/deepmind/mathematics_dataset"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.math_dataset",
   "name": "math_dataset",
-  "schema": {
-    "feature": [
-      {
-        "name": "answer",
-        "type": "BYTES"
-      },
-      {
-        "name": "question",
-        "type": "BYTES"
-      }
-    ]
-  },
-  "sizeInBytes": "2333082954",
   "splits": [
     {
-      "name": "test",
-      "numShards": "1",
-      "shardLengths": [
-        "10000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              }
-            },
-            "name": "answer",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "10000"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "1",
+      "numBytes": "140957327",
       "shardLengths": [
         "999999",
         "999999"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1999998"
-              }
-            },
-            "name": "answer",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1999998"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "1999998"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "728770",
+      "shardLengths": [
+        "10000"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "question",
-    "output": "answer"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "question"
+        },
+        {
+          "featureKey": "answer"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

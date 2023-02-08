@@ -1,55 +1,22 @@
 {
-  "citation": "@InProceedings{Ignatov_2018_ECCV_Workshops,\nauthor = {Ignatov, Andrey and Timofte, Radu and others},\ntitle = {PIRM challenge on perceptual image enhancement on smartphones: report},\nbooktitle = {European Conference on Computer Vision (ECCV) Workshops},\nurl = \"http://www.vision.ee.ethz.ch/~timofter/publications/Agustsson-CVPRW-2017.pdf\",\nmonth = {January},\nyear = {2019}\n}\n",
-  "description": "\nDIV2K dataset: DIVerse 2K resolution high quality images as used for the challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)\n",
+  "citation": "@InProceedings{Agustsson_2017_CVPR_Workshops,\n\tauthor = {Agustsson, Eirikur and Timofte, Radu},\n\ttitle = {NTIRE 2017 Challenge on Single Image Super-Resolution: Dataset and Study},\n\tbooktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},\n    url = \"http://www.vision.ee.ethz.ch/~timofter/publications/Agustsson-CVPRW-2017.pdf\",\n\tmonth = {July},\n\tyear = {2017}\n}",
+  "configDescription": "Uses bicubic_x8 data.",
+  "configName": "bicubic_x8",
+  "description": "DIV2K dataset: DIVerse 2K resolution high quality images as used for the challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)",
+  "downloadSize": "4053778880",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://data.vision.ee.ethz.ch/cvl/DIV2K/"
     ]
   },
+  "moduleName": "tensorflow_datasets.image.div2k",
   "name": "div2k",
-  "schema": {
-    "feature": [
-      {
-        "name": "hr",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            },
-            {
-              "size": "-1"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "lr",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            },
-            {
-              "size": "-1"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      }
-    ]
-  },
-  "sizeInBytes": "4053778880",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "1",
+      "numBytes": "3599423120",
       "shardLengths": [
         "25",
         "25",
@@ -83,68 +50,31 @@
         "25",
         "25",
         "25"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "hr",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "800"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "lr",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "800"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "800"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
-      "numShards": "1",
+      "numBytes": "457925044",
       "shardLengths": [
         "25",
         "25",
         "25",
         "25"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "hr",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "100"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "lr",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "100"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "100"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "lr",
-    "output": "hr"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "lr"
+        },
+        {
+          "featureKey": "hr"
+        }
+      ]
+    }
   },
   "version": "2.0.0"
 }

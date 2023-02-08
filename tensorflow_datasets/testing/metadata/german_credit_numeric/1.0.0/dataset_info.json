@@ -1,68 +1,36 @@
 {
-  "citation": "@misc{Dua:2019 ,\nauthor = \"Dua, Dheeru and Graff, Casey\",\nyear = \"2017\",\ntitle = \"{UCI} Machine Learning Repository\",\nurl = \"http://archive.ics.uci.edu/ml\",\ninstitution = \"University of California, Irvine, School of Information and Computer Sciences\"\n}\n",
-  "description": "\nThis dataset classifies people described by a set of attributes as good or bad\ncredit risks. The version here is the \"numeric\" variant where categorical and\nordered categorical attributes have been encoded as indicator and integer\nquantities respectively.\n",
+  "citation": "@misc{Dua:2019 ,\nauthor = \"Dua, Dheeru and Graff, Casey\",\nyear = \"2017\",\ntitle = \"{UCI} Machine Learning Repository\",\nurl = \"http://archive.ics.uci.edu/ml\",\ninstitution = \"University of California, Irvine, School of Information and Computer Sciences\"\n}",
+  "description": "This dataset classifies people described by a set of attributes as good or bad\ncredit risks. The version here is the \"numeric\" variant where categorical and\nordered categorical attributes have been encoded as indicator and integer\nquantities respectively.",
   "downloadSize": "102000",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)"
     ]
   },
+  "moduleName": "tensorflow_datasets.structured.german_credit_numeric",
   "name": "german_credit_numeric",
-  "schema": {
-    "feature": [
-      {
-        "name": "features",
-        "shape": {
-          "dim": [
-            {
-              "size": "24"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "60014",
-      "numShards": "1",
       "shardLengths": [
         "1000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "features",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              },
-              "max": 184.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1000"
-              },
-              "max": 1.0
-            }
-          }
-        ],
-        "numExamples": "1000"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "features",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "features"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

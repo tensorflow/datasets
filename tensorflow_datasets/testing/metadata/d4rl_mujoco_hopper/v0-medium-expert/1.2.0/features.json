@@ -21,10 +21,14 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "reward": {
+                                "action": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
-                                        "shape": {},
+                                        "shape": {
+                                            "dimensions": [
+                                                "3"
+                                            ]
+                                        },
                                         "dtype": "float32",
                                         "encoding": "none"
                                     }
@@ -37,7 +41,7 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "discount": {
+                                "reward": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
@@ -61,14 +65,10 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "action": {
+                                "discount": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
-                                        "shape": {
-                                            "dimensions": [
-                                                "3"
-                                            ]
-                                        },
+                                        "shape": {},
                                         "dtype": "float32",
                                         "encoding": "none"
                                     }

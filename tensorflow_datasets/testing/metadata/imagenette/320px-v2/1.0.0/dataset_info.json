@@ -4,6 +4,7 @@
   "configName": "320px-v2",
   "description": "Imagenette is a subset of 10 easily classified classes from the Imagenet\ndataset. It was originally prepared by Jeremy Howard of FastAI. The objective\nbehind putting together a small version of the Imagenet dataset was mainly\nbecause running new ideas/algorithms/experiments on the whole Imagenet take a\nlot of time.\n\nThis version of the dataset allows researchers/practitioners to quickly try out\nideas and share with others. The dataset comes in three variants:\n\n  * Full size\n  * 320 px\n  * 160 px\n\nNote: The v2 config correspond to the new 70/30 train/valid split (released\nin Dec 6 2019).",
   "downloadSize": "341663724",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/fastai/imagenette"
@@ -13,6 +14,7 @@
   "name": "imagenette",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "246144332",
       "shardLengths": [
@@ -21,6 +23,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "102727931",
       "shardLengths": [
@@ -29,8 +32,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

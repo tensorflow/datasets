@@ -2,14 +2,20 @@
   "citation": "@ONLINE {\n    author = \"Howell, Nancy\",\n    title  = \"Dobe !Kung Census of All Population.\",\n    year   = \"2009\",\n    url    = \"https://tspace.library.utoronto.ca/handle/1807/17973\"\n}",
   "description": "Demographic data from Kalahari !Kung San people collected by Nancy Howell\n\nHowell\u2019s observations of the !Kung San were made by Howell in Botswana between\nAugust 1967 and May 1969. Fuller descriptions of the region and the people\nunder study can be found in R. B. Lee and I. DeVore (eds), 1976, Kalahari\nHunter-Gatherers: Studies of the !Kung San and Their Neighbors, Harvard\nUniversity Press, Cambridge, Mass. And in N. Howell, 2000, Demography of the\nDobe !Kung, Aldine de Gruyter, New York.\n\nOnly columns on height, weight, age, and sex were kept. Rows with any\nnull values were dropped.\n\nNumber of instances: 544\n\nVariables:\n\n1. height in cm   (float)\n2. weight in kg   (float)\n3. age in years   (int)\n4. male indicator (int)",
   "downloadSize": "12205",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://tspace.library.utoronto.ca/handle/1807/10395"
     ]
   },
+  "moduleName": "tensorflow_datasets.structured.howell.howell",
   "name": "howell",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "40256",
       "shardLengths": [

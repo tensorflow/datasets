@@ -2,7 +2,7 @@
   "citation": "@misc{cobbe2021training,\n      title={Training Verifiers to Solve Math Word Problems},\n      author={Karl Cobbe and Vineet Kosaraju and Mohammad Bavarian and Jacob Hilton and Reiichiro Nakano and Christopher Hesse and John Schulman},\n      year={2021},\n      eprint={2110.14168},\n      archivePrefix={arXiv},\n      primaryClass={cs.LG}\n}",
   "description": "A dataset of 8.5K high quality linguistically diverse grade school math word problems.",
   "downloadSize": "11290661",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/openai/grade-school-math"
@@ -15,6 +15,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "6689634",
       "shardLengths": [
@@ -22,6 +23,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "1202181",
       "shardLengths": [
@@ -29,6 +31,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_socratic",
       "numBytes": "9164018",
       "shardLengths": [
@@ -36,6 +39,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_socratic",
       "numBytes": "1649167",
       "shardLengths": [

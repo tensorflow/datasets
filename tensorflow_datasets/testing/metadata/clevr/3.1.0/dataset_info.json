@@ -2,110 +2,22 @@
   "citation": "@inproceedings{johnson2017clevr,\n  title={{CLEVR}: A diagnostic dataset for compositional language and elementary visual reasoning},\n  author={Johnson, Justin and Hariharan, Bharath and van der Maaten, Laurens and Fei-Fei, Li and Lawrence Zitnick, C and Girshick, Ross},\n  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},\n  year={2017}\n}",
   "description": "CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.\nIt contains minimal biases and has detailed annotations describing the kind of\nreasoning each question requires.",
   "downloadSize": "19021600724",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://cs.stanford.edu/people/jcjohns/clevr/"
     ]
   },
+  "moduleName": "tensorflow_datasets.image.clevr",
   "name": "clevr",
-  "schema": {
-    "feature": [
-      {
-        "name": "file_name",
-        "type": "BYTES"
-      },
-      {
-        "name": "image",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            },
-            {
-              "size": "-1"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "objects"
-      },
-      {
-        "name": "question_answer"
-      }
-    ]
+  "releaseNotes": {
+    "3.1.0": "Add question/answer text."
   },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "2855741843",
-      "numShards": "1",
-      "shardLengths": [
-        "469",
-        "469",
-        "468",
-        "469",
-        "469",
-        "468",
-        "469",
-        "469",
-        "469",
-        "469",
-        "468",
-        "469",
-        "469",
-        "468",
-        "469",
-        "469",
-        "469",
-        "469",
-        "468",
-        "469",
-        "469",
-        "468",
-        "469",
-        "469",
-        "469",
-        "469",
-        "468",
-        "469",
-        "469",
-        "468",
-        "469",
-        "469"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "15000"
-              }
-            },
-            "name": "file_name",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "15000"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "15000"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "13345709543",
-      "numShards": "1",
       "shardLengths": [
         "547",
         "547",
@@ -235,35 +147,12 @@
         "547",
         "547",
         "547"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "70000"
-              }
-            },
-            "name": "file_name",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "70000"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "70000"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "2858695570",
-      "numShards": "1",
       "shardLengths": [
         "469",
         "469",
@@ -297,30 +186,46 @@
         "468",
         "469",
         "469"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "15000"
-              }
-            },
-            "name": "file_name",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "15000"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "15000"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "2855741843",
+      "shardLengths": [
+        "469",
+        "469",
+        "468",
+        "469",
+        "469",
+        "468",
+        "469",
+        "469",
+        "469",
+        "469",
+        "468",
+        "469",
+        "469",
+        "468",
+        "469",
+        "469",
+        "469",
+        "469",
+        "468",
+        "469",
+        "469",
+        "468",
+        "469",
+        "469",
+        "469",
+        "469",
+        "468",
+        "469",
+        "469",
+        "468",
+        "469",
+        "469"
+      ]
     }
   ],
   "version": "3.1.0"

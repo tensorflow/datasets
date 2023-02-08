@@ -3,7 +3,7 @@
   "configName": "bucc_ru",
   "description": "Identifying parallel sentences in comparable corpora. Given two\nsentence-split monolingual corpora, participant systems are expected\nto identify pairs of sentences that are translations of each other.\n\nThe BUCC mining task is a shared task on parallel sentence extraction from two\nmonolingual corpora with a subset of them assumed to be parallel, and that has\nbeen available since 2016. For each language pair, the shared task provides a\nmonolingual corpus for each language and a gold mapping list containing true\ntranslation pairs. These pairs are the ground truth. The task is to construct a\nlist of translation pairs from the monolingual corpora. The constructed list is\ncompared to the ground truth, and evaluated in terms of the F1 measure.",
   "downloadSize": "41354312",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://comparable.limsi.fr/bucc2018/"

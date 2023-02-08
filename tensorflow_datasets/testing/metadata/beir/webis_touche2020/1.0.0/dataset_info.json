@@ -3,7 +3,7 @@
   "configName": "webis_touche2020",
   "description": "BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides\na common and easy framework for evaluation of your NLP-based retrieval models\nwithin the benchmark.",
   "downloadSize": "227132363",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/beir-cellar/beir"

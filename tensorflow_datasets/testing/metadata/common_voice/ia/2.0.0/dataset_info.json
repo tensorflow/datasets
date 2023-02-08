@@ -3,7 +3,7 @@
   "configName": "ia",
   "description": "Mozilla Common Voice Dataset",
   "downloadSize": "226499645",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://voice.mozilla.org/en/datasets"

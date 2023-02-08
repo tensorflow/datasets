@@ -2,7 +2,7 @@
   "citation": "@article{DBLP:journals/corr/abs-1908-05782,\n  author    = {Ouwen Huang and\n               Will Long and\n               Nick Bottenus and\n               Gregg E. Trahey and\n               Sina Farsiu and\n               Mark L. Palmeri},\n  title     = {MimickNet, Matching Clinical Post-Processing Under Realistic Black-Box\n               Constraints},\n  journal   = {CoRR},\n  volume    = {abs/1908.05782},\n  year      = {2019},\n  url       = {http://arxiv.org/abs/1908.05782},\n  archivePrefix = {arXiv},\n  eprint    = {1908.05782},\n  timestamp = {Mon, 19 Aug 2019 13:21:03 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1908-05782},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
   "description": "DukeUltrasound is an ultrasound dataset collected at Duke University with a\nVerasonics c52v probe. It contains delay-and-sum (DAS) beamformed data as well\nas data post-processed with Siemens Dynamic TCE for speckle reduction, contrast\nenhancement and improvement in conspicuity of anatomical structures. These data\nwere collected with support from the National Institute of Biomedical Imaging\nand Bioengineering under Grant R01-EB026574 and National Institutes of Health\nunder Grant 5T32GM007171-44. A usage example is available\n[here](https://colab.research.google.com/drive/1R_ARqpWoiHcUQWg1Fxwyx-ZkLi0IZ5qs).",
   "downloadSize": "13726187043",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/ouwen/mimicknet"

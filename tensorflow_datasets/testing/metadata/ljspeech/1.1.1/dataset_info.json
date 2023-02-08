@@ -2,7 +2,7 @@
   "citation": "@misc{ljspeech17,\n  author       = {Keith Ito},\n  title        = {The LJ Speech Dataset},\n  howpublished = {\\url{https://keithito.com/LJ-Speech-Dataset/}},\n  year         = 2017\n}",
   "description": "This is a public domain speech dataset consisting of 13,100 short audio clips of\na single speaker reading passages from 7 non-fiction books. A transcription is\nprovided for each clip. Clips vary in length from 1 to 10 seconds and have a\ntotal length of approximately 24 hours.\n\nThe texts were published between 1884 and 1964, and are in the public domain.\nThe audio was recorded in 2016-17 by the LibriVox project and is also in the\npublic domain.",
   "downloadSize": "2748572632",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://keithito.com/LJ-Speech-Dataset/"

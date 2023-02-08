@@ -4,31 +4,43 @@
   "configName": "neen",
   "description": "Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.",
   "downloadSize": "1542781",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/facebookresearch/flores/"
     ]
   },
+  "moduleName": "tensorflow_datasets.translate.flores",
   "name": "flores",
   "splits": [
     {
-      "name": "test",
-      "numBytes": "1066714",
-      "shardLengths": [
-        "2835"
-      ]
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "909949",
       "shardLengths": [
         "2559"
       ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1066714",
+      "shardLengths": [
+        "2835"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "ne",
-    "output": "en"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "ne"
+        },
+        {
+          "featureKey": "en"
+        }
+      ]
+    }
   },
   "version": "1.2.0"
 }
