@@ -3,6 +3,7 @@
   "configName": "u_cfq_compound_divergence_0.333333_0.6_r6",
   "description": "The *-CFQ datasets (and their splits) for measuring the scalability of\ncompositional generalization.\n\nSee https://arxiv.org/abs/2012.08266 for background.\n\nExample usage:\n\n```\ndata = tfds.load('star_cfq/single_pool_10x_b_cfq')\n```",
   "downloadSize": "1575601118",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research/google-research/tree/master/star-cfq"
@@ -12,6 +13,7 @@
   "name": "star_cfq",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "607639023",
       "shardLengths": [
@@ -26,6 +28,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "8282414",
       "shardLengths": [
@@ -33,6 +36,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "8269770",
       "shardLengths": [
@@ -41,8 +45,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "question",
-    "output": "query"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "question"
+        },
+        {
+          "featureKey": "query"
+        }
+      ]
+    }
   },
   "version": "1.1.0"
 }

@@ -2,14 +2,17 @@
   "citation": "@inproceedings{orqa,\ntitle = {Latent Retrieval for Weakly Supervised Open Domain Question Answering},\nauthor = {Lee, Kenton and Chang, Ming-Wei and Toutanova, Kristina},\nyear = {2019},\nmonth = {01},\npages = {6086-6096},\nbooktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},\ndoi = {10.18653/v1/P19-1612}\n}\n\n@article{47761,\ntitle = {Natural Questions: a Benchmark for Question Answering Research},\nauthor = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},\nyear = {2019},\njournal = {Transactions of the Association of Computational Linguistics}\n}",
   "description": "The NQ-Open task, introduced by Lee et.al. 2019, is an open domain question answering benchmark that is derived from Natural Questions. The goal is to predict an English answer string for an input English question. All questions can be answered using the contents of English Wikipedia.",
   "downloadSize": "8913614",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research-datasets/natural-questions/tree/master/nq_open"
     ]
   },
+  "moduleName": "tensorflow_datasets.question_answering.natural_questions_open",
   "name": "natural_questions_open",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "8728769",
       "shardLengths": [
@@ -17,6 +20,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "395426",
       "shardLengths": [

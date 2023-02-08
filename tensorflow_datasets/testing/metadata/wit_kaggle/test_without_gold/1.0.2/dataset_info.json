@@ -3,7 +3,7 @@
   "configDescription": "Test samples (without gold answers) for the Wikipedia-Image/Caption Matching competition.",
   "configName": "test_without_gold",
   "description": "Wikipedia - Image/Caption Matching Kaggle Competition.\n\nThis competition is organized by the\n[Research team](https://research.wikimedia.org/) at the\n[Wikimedia Foundation](https://wikimediafoundation.org/) in collaboration with\nGoogle Research and a few external collaborators.\nThis competition is based on the\n[WIT dataset](https://github.com/google-research-datasets/wit) published by\nGoogle Research as detailed in this[SIGIR paper](https://dl.acm.org/doi/abs/10.1145/3404835.3463257).\n\nIn this competition, you\u2019ll build a model that automatically retrieves the text\nclosest to an image. Specifically, you'll train your model to associate given\nimages with article titles or complex captions, in multiple languages.\nThe best models will account for the semantic granularity of Wikipedia images.\nIf successful, you'll be contributing to the accessibility of the largest\nonline encyclopedia. The millions of Wikipedia readers and edietors will be able\nto more easily understand, search, and describe media at scale. As a result,\nyou\u2019ll contribute to an open model to improve learning for all.",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.kaggle.com/c/wikipedia-image-caption/code"

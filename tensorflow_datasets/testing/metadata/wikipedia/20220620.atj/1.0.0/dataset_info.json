@@ -4,7 +4,7 @@
   "configName": "20220620.atj",
   "description": "Wikipedia dataset containing cleaned articles of all languages.\nThe datasets are built from the Wikipedia dump\n(https://dumps.wikimedia.org/) with one split per language. Each example\ncontains the content of one full Wikipedia article with cleaning to strip\nmarkdown and unwanted sections (references, etc.).",
   "downloadSize": "708904",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://dumps.wikimedia.org"
@@ -19,9 +19,9 @@
     {
       "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numBytes": "959927",
+      "numBytes": "359873",
       "shardLengths": [
-        "1919"
+        "535"
       ]
     }
   ],

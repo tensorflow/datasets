@@ -1,21 +1,17 @@
 {
   "citation": "@article{gliwa2019samsum,\n  title={SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization},\n  author={Gliwa, Bogdan and Mochol, Iwona and Biesek, Maciej and Wawer, Aleksander},\n  journal={arXiv preprint arXiv:1911.12237},\n  year={2019}\n}",
   "description": "SAMSum Corpus contains over 16k chat dialogues with manually annotated\nsummaries.\n\nThere are two features:\n\n  - dialogue: text of dialogue.\n  - summary: human written summary of the dialogue.\n  - id: id of a example.",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://arxiv.org/src/1911.12237v2/anc"
     ]
   },
+  "moduleName": "tensorflow_datasets.summarization.samsum",
   "name": "samsum",
   "splits": [
     {
-      "name": "test",
-      "numBytes": "569770",
-      "shardLengths": [
-        "819"
-      ]
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "10112984",
       "shardLengths": [
@@ -23,16 +19,33 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "551623",
       "shardLengths": [
         "818"
       ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "569770",
+      "shardLengths": [
+        "819"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "dialogue",
-    "output": "summary"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "dialogue"
+        },
+        {
+          "featureKey": "summary"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

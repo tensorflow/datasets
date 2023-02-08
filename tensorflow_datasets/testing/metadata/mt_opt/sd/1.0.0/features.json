@@ -1,18 +1,21 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
         "features": {
-            "image_1": {
-                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
-                "image": {
-                    "shape": {
-                        "dimensions": [
-                            "480",
-                            "640",
-                            "3"
-                        ]
-                    },
-                    "dtype": "uint8"
+            "success": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "bool",
+                    "encoding": "none"
+                }
+            },
+            "task_code": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
                 }
             },
             "image_0": {
@@ -28,12 +31,17 @@
                     "dtype": "uint8"
                 }
             },
-            "success": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "bool",
-                    "encoding": "none"
+            "image_1": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "480",
+                            "640",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8"
                 }
             },
             "image_2": {
@@ -48,16 +56,7 @@
                     },
                     "dtype": "uint8"
                 }
-            },
-            "task_code": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
-                }
             }
         }
-    },
-    "proto_cls": "tensorflow_datasets.FeaturesDict"
+    }
 }

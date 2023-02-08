@@ -34,20 +34,6 @@
                         "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                         "featuresDict": {
                             "features": {
-                                "observation": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
-                                    "image": {
-                                        "shape": {
-                                            "dimensions": [
-                                                "84",
-                                                "84",
-                                                "1"
-                                            ]
-                                        },
-                                        "dtype": "uint8",
-                                        "encodingFormat": "png"
-                                    }
-                                },
                                 "reward": {
                                     "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
                                     "tensor": {
@@ -57,14 +43,6 @@
                                     },
                                     "description": "Clipped reward.",
                                     "valueRange": "[-1, 1]"
-                                },
-                                "is_last": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "bool",
-                                        "encoding": "none"
-                                    }
                                 },
                                 "action": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
@@ -83,6 +61,28 @@
                                     }
                                 },
                                 "is_first": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                    "image": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "84",
+                                                "84",
+                                                "1"
+                                            ]
+                                        },
+                                        "dtype": "uint8",
+                                        "encodingFormat": "png"
+                                    }
+                                },
+                                "is_last": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},

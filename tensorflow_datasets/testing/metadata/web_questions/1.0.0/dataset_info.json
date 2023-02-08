@@ -2,115 +2,30 @@
   "citation": "@inproceedings{berant-etal-2013-semantic,\n    title = \"Semantic Parsing on {F}reebase from Question-Answer Pairs\",\n    author = \"Berant, Jonathan  and\n      Chou, Andrew  and\n      Frostig, Roy  and\n      Liang, Percy\",\n    booktitle = \"Proceedings of the 2013 Conference on Empirical Methods in Natural Language Processing\",\n    month = oct,\n    year = \"2013\",\n    address = \"Seattle, Washington, USA\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/D13-1160\",\n    pages = \"1533--1544\",\n}",
   "description": "This dataset consists of 6,642 question/answer pairs.\nThe questions are supposed to be answerable by Freebase, a large knowledge graph.\nThe questions are mostly centered around a single named entity.\nThe questions are popular ones asked on the web (at least in 2013).",
   "downloadSize": "1272965",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a"
     ]
   },
+  "moduleName": "tensorflow_datasets.question_answering.web_questions",
   "name": "web_questions",
-  "schema": {
-    "feature": [
-      {
-        "name": "answers",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "BYTES"
-      },
-      {
-        "name": "question",
-        "type": "BYTES"
-      },
-      {
-        "name": "url",
-        "type": "BYTES"
-      }
-    ]
-  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "354103",
-      "numShards": "1",
-      "shardLengths": [
-        "2032"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2032"
-              }
-            },
-            "name": "answers",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2032"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2032"
-              }
-            },
-            "name": "url",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "2032"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "653387",
-      "numShards": "1",
       "shardLengths": [
         "3778"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3778"
-              }
-            },
-            "name": "answers",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3778"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3778"
-              }
-            },
-            "name": "url",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "3778"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "354103",
+      "shardLengths": [
+        "2032"
+      ]
     }
   ],
   "version": "1.0.0"

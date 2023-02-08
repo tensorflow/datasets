@@ -4,6 +4,7 @@
   "configName": "goldp",
   "description": "TyDi QA is a question answering dataset covering 11 typologically diverse languages with 204K question-answer pairs. The languages of TyDi QA are diverse with regard to their typology -- the set of linguistic features that each language expresses -- such that we expect models performing well on this set to generalize across a large number of the languages in the world. It contains language phenomena that would not be found in English-only corpora. To provide a realistic information-seeking task and avoid priming effects, questions are written by people who want to know the answer, but don't know the answer yet, (unlike SQuAD and its descendents) and the data is collected directly in each language without the use of translation (unlike MLQA and XQuAD).\n\nIMPORTANT:  Please choose your training split carefully.\n\nTraining splits:\n\n'train': This is the GoldP task from the original TyDi QA paper [https://arxiv.org/abs/2003.05002] that has original-language labeled training data.\n\n'translate-train-*': These splits are the automatic translations from English to each target language used in the translate-train baselines in the XTREME paper [https://arxiv.org/abs/2003.11080]. This purposefully ignores the non-English TyDiQA-GoldP training data to simulate the transfer learning scenario where original-language data is not available and system builders must rely on labeled English data plus existing machine translation systems.\n\nTypically, you should use EITHER the train or translate-train split, but not both.",
   "downloadSize": "127192483",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research-datasets/tydiqa"
@@ -11,8 +12,12 @@
   },
   "moduleName": "tensorflow_datasets.question_answering.tydi_qa",
   "name": "tydi_qa",
+  "releaseNotes": {
+    "3.0.0": "Fixes issue with a number of examples where answer spans are misaligned due to context white-space removal. This change impacts roughly 25% of train and dev examples."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "57505402",
       "shardLengths": [
@@ -20,6 +25,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "5454390",
       "shardLengths": [
@@ -27,6 +33,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-ar",
       "numBytes": "1066634",
       "shardLengths": [
@@ -34,6 +41,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-bn",
       "numBytes": "236286",
       "shardLengths": [
@@ -41,6 +49,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-en",
       "numBytes": "387640",
       "shardLengths": [
@@ -48,6 +57,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-fi",
       "numBytes": "625893",
       "shardLengths": [
@@ -55,6 +65,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-id",
       "numBytes": "476582",
       "shardLengths": [
@@ -62,6 +73,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-ko",
       "numBytes": "247020",
       "shardLengths": [
@@ -69,6 +81,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-ru",
       "numBytes": "1074276",
       "shardLengths": [
@@ -76,6 +89,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-sw",
       "numBytes": "275176",
       "shardLengths": [
@@ -83,6 +97,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation-te",
       "numBytes": "1064883",
       "shardLengths": [
@@ -90,6 +105,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "translate-train-ar",
       "numBytes": "4197490",
       "shardLengths": [
@@ -97,6 +113,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "translate-train-bn",
       "numBytes": "6696814",
       "shardLengths": [
@@ -104,6 +121,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "translate-train-fi",
       "numBytes": "3135628",
       "shardLengths": [
@@ -111,6 +129,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "translate-train-id",
       "numBytes": "3038372",
       "shardLengths": [
@@ -118,6 +137,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "translate-train-ko",
       "numBytes": "3198248",
       "shardLengths": [
@@ -125,6 +145,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "translate-train-ru",
       "numBytes": "4552130",
       "shardLengths": [
@@ -132,6 +153,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "translate-train-sw",
       "numBytes": "3017328",
       "shardLengths": [
@@ -139,6 +161,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "translate-train-te",
       "numBytes": "6876263",
       "shardLengths": [

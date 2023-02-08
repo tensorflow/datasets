@@ -2,7 +2,7 @@
   "citation": "@article{zhou2017places,\n  title={Places: A 10 million Image Database for Scene Recognition},\n  author={Zhou, Bolei and Lapedriza, Agata and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},\n  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},\n  year={2017},\n  publisher={IEEE}\n}",
   "description": "The Places365-Standard dataset contains 1.8 million train images from 365 scene categories,which are used to train the Places365 CNNs.There are 50 images per category in the validation set and 900 images per category in the testing set.",
   "downloadSize": "31433171456",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://places2.csail.mit.edu/"

@@ -3,7 +3,7 @@
   "configName": "en-fr",
   "description": "MTNT: Machine Translation of Noisy Text",
   "downloadSize": "36786600",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://pmichel31415.github.io/mtnt/index.html"

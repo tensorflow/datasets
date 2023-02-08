@@ -4,14 +4,17 @@
   "configName": "en",
   "description": "MLQA (Multilingual Question Answering Dataset) is a benchmark dataset for evaluating multilingual question answering performance. The dataset consists of 7 languages: Arabic, German, Spanish, English, Hindi, Vietnamese, Chinese.",
   "downloadSize": "75719050",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/facebookresearch/MLQA"
     ]
   },
+  "moduleName": "tensorflow_datasets.question_answering.mlqa",
   "name": "mlqa",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "15054981",
       "shardLengths": [
@@ -19,6 +22,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "1433159",
       "shardLengths": [

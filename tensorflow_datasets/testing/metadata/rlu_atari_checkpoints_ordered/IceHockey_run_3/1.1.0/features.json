@@ -17,11 +17,29 @@
                         "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                         "featuresDict": {
                             "features": {
-                                "is_terminal": {
+                                "is_first": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
                                         "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "reward": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Clipped reward.",
+                                    "valueRange": "[-1, 1]"
+                                },
+                                "discount": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
                                         "encoding": "none"
                                     }
                                 },
@@ -47,15 +65,7 @@
                                         "encodingFormat": "png"
                                     }
                                 },
-                                "action": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "int64",
-                                        "encoding": "none"
-                                    }
-                                },
-                                "is_first": {
+                                "is_terminal": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
@@ -63,23 +73,13 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "discount": {
+                                "action": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
-                                        "dtype": "float32",
+                                        "dtype": "int64",
                                         "encoding": "none"
                                     }
-                                },
-                                "reward": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "float32",
-                                        "encoding": "none"
-                                    },
-                                    "description": "Clipped reward.",
-                                    "valueRange": "[-1, 1]"
                                 }
                             }
                         }

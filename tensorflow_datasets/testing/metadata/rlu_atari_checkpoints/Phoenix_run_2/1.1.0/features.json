@@ -2,21 +2,14 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "checkpoint_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "episode_return": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
                 "tensor": {
                     "shape": {},
-                    "dtype": "int64",
+                    "dtype": "float32",
                     "encoding": "none"
-                }
-            },
-            "episode_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int64",
-                    "encoding": "none"
-                }
+                },
+                "description": "Sum of the clipped rewards."
             },
             "steps": {
                 "pythonClassName": "tensorflow_datasets.core.features.dataset_feature.Dataset",
@@ -25,14 +18,6 @@
                         "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                         "featuresDict": {
                             "features": {
-                                "is_terminal": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "bool",
-                                        "encoding": "none"
-                                    }
-                                },
                                 "action": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
@@ -51,11 +36,11 @@
                                     "description": "Clipped reward.",
                                     "valueRange": "[-1, 1]"
                                 },
-                                "discount": {
+                                "is_terminal": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
-                                        "dtype": "float32",
+                                        "dtype": "bool",
                                         "encoding": "none"
                                     }
                                 },
@@ -81,6 +66,14 @@
                                         "encodingFormat": "png"
                                     }
                                 },
+                                "discount": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
                                 "is_first": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
@@ -95,14 +88,21 @@
                     "length": "-1"
                 }
             },
-            "episode_return": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+            "episode_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
-                    "dtype": "float32",
+                    "dtype": "int64",
                     "encoding": "none"
-                },
-                "description": "Sum of the clipped rewards."
+                }
+            },
+            "checkpoint_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
             }
         }
     }

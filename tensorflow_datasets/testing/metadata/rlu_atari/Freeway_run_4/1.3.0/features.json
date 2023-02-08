@@ -2,15 +2,6 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "episode_return": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "float32",
-                    "encoding": "none"
-                },
-                "description": "Sum of the clipped rewards."
-            },
             "steps": {
                 "pythonClassName": "tensorflow_datasets.core.features.dataset_feature.Dataset",
                 "sequence": {
@@ -18,12 +9,18 @@
                         "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                         "featuresDict": {
                             "features": {
-                                "is_first": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "bool",
-                                        "encoding": "none"
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                    "image": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "84",
+                                                "84",
+                                                "1"
+                                            ]
+                                        },
+                                        "dtype": "uint8",
+                                        "encodingFormat": "png"
                                     }
                                 },
                                 "discount": {
@@ -31,6 +28,22 @@
                                     "tensor": {
                                         "shape": {},
                                         "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "action": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "int64",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "is_last": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
                                         "encoding": "none"
                                     }
                                 },
@@ -44,34 +57,12 @@
                                     "description": "Clipped reward.",
                                     "valueRange": "[-1, 1]"
                                 },
-                                "is_last": {
+                                "is_first": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
                                         "dtype": "bool",
                                         "encoding": "none"
-                                    }
-                                },
-                                "action": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "int64",
-                                        "encoding": "none"
-                                    }
-                                },
-                                "observation": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
-                                    "image": {
-                                        "shape": {
-                                            "dimensions": [
-                                                "84",
-                                                "84",
-                                                "1"
-                                            ]
-                                        },
-                                        "dtype": "uint8",
-                                        "encodingFormat": "png"
                                     }
                                 },
                                 "is_terminal": {
@@ -88,7 +79,7 @@
                     "length": "-1"
                 }
             },
-            "episode_id": {
+            "checkpoint_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
@@ -96,7 +87,16 @@
                     "encoding": "none"
                 }
             },
-            "checkpoint_id": {
+            "episode_return": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                },
+                "description": "Sum of the clipped rewards."
+            },
+            "episode_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},

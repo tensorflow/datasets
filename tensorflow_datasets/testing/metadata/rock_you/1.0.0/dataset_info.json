@@ -1,14 +1,17 @@
 {
   "description": "This dataset contains 14,344,391 passwords that were leaked or stolen from\nvarious sites. The author of this dataset states that \"I'm hosting them because\nit seems like nobody else does (hopefully it isn't because hosting them is\nillegal :)). Naturally, I'm not the one who stole these; I simply found them\nonline, removed any names/email addresses/etc.\".\n\nThis dataset is used to train Machine Learning models for password guessing\nand cracking.",
   "downloadSize": "139921497",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://wiki.skullsecurity.org/Passwords"
     ]
   },
+  "moduleName": "tensorflow_datasets.structured.rock_you",
   "name": "rock_you",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "412466272",
       "shardLengths": [

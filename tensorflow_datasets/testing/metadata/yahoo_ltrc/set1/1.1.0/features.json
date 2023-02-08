@@ -2,11 +2,7 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "query_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
-            "label": {
+            "doc_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {
@@ -14,9 +10,13 @@
                             "-1"
                         ]
                     },
-                    "dtype": "float64",
+                    "dtype": "int64",
                     "encoding": "zlib"
                 }
+            },
+            "query_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             },
             "float_features": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
@@ -31,7 +31,7 @@
                     "encoding": "zlib"
                 }
             },
-            "doc_id": {
+            "label": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {
@@ -39,7 +39,7 @@
                             "-1"
                         ]
                     },
-                    "dtype": "int64",
+                    "dtype": "float64",
                     "encoding": "zlib"
                 }
             }

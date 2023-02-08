@@ -2,12 +2,10 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "path": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
+            "lang_group_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "7"
                 }
             },
             "id": {
@@ -19,16 +17,27 @@
                 },
                 "description": "Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id."
             },
-            "language": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag."
-            },
             "lang_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
                     "numClasses": "102"
                 }
+            },
+            "gender": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "3"
+                }
+            },
+            "transcription": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Normalized transcription."
+            },
+            "language": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag."
             },
             "num_samples": {
                 "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
@@ -39,10 +48,13 @@
                 },
                 "description": "Total number of frames in the audio"
             },
-            "raw_transcription": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Raw Transcription from FLoRes."
+            "path": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
             },
             "audio": {
                 "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
@@ -57,22 +69,10 @@
                     "encoding": "NONE"
                 }
             },
-            "transcription": {
+            "raw_transcription": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
-                "description": "Normalized transcription."
-            },
-            "lang_group_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "7"
-                }
-            },
-            "gender": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "3"
-                }
+                "description": "Raw Transcription from FLoRes."
             }
         }
     }

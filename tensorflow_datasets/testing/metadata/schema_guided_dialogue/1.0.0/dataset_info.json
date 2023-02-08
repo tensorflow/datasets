@@ -2,6 +2,7 @@
   "citation": "@article{rastogi2019towards,\n  title={Towards Scalable Multi-domain Conversational Agents: The Schema-Guided Dialogue Dataset},\n  author={Rastogi, Abhinav and Zang, Xiaoxue and Sunkara, Srinivas and Gupta, Raghav and Khaitan, Pranav},\n  journal={arXiv preprint arXiv:1909.05855},\n  year={2019}\n}",
   "description": "The Schema-Guided Dialogue (SGD) dataset consists of over 20k annotated\nmulti-domain, task-oriented conversations between a human and a virtual\nassistant. These conversations involve interactions with services and APIs\nspanning 20 domains, ranging from banks and events to media, calendar, travel,\nand weather. For most of these domains, the dataset contains multiple different\nAPIs, many of which have overlapping functionalities but different interfaces,\nwhich reflects common real-world scenarios. The wide range of available\nannotations can be used for intent prediction, slot filling, dialogue state\ntracking, policy imitation learning, language generation, user simulation\nlearning, among other tasks in large-scale virtual assistants. Besides these,\nthe dataset has unseen domains and services in the evaluation set to quantify\nthe performance in zero-shot or few shot settings.",
   "downloadSize": "36831225",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research-datasets/dstc8-schema-guided-dialogue"
@@ -9,8 +10,12 @@
   },
   "moduleName": "tensorflow_datasets.text.schema_guided_dialogue.schema_guided_dialogue",
   "name": "schema_guided_dialogue",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "18748087",
       "shardLengths": [
@@ -18,6 +23,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "dev",
       "numBytes": "2751903",
       "shardLengths": [
@@ -25,6 +31,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "5088402",
       "shardLengths": [

@@ -4,7 +4,7 @@
   "configName": "wo_wtb",
   "description": "Universal Dependencies (UD) is a framework for consistent annotation of grammar\n(parts of speech, morphological features, and syntactic dependencies) across\ndifferent human languages. UD is an open community effort with over 300\ncontributors producing more than 200 treebanks in over 100 languages. If you\u2019re\nnew to UD, you should start by reading the first part of the Short Introduction\nand then browsing the annotation guidelines.",
   "downloadSize": "2774007",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://universaldependencies.org/"

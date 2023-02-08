@@ -4,7 +4,7 @@
   "configName": "fleurs.ro_ro",
   "description": "FLEURS is the speech version of the FLORES machine translation benchmark, covering 2000 n-way parallel sentences in n=102 languages.\nXTREME-S covers four task families: speech recognition, classification, speech-to-text translation and retrieval. Covering 102\nlanguages from 10+ language families, 3 different domains and 4\ntask families, XTREME-S aims to simplify multilingual speech\nrepresentation evaluation, as well as catalyze research in \u201cuniversal\u201d speech representation learning.\n\nIn this version, only the FLEURS dataset is provided, which covers speech\nrecognition and speech-to-text translation.",
   "downloadSize": "2561770234",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://arxiv.org/abs/2205.12446"

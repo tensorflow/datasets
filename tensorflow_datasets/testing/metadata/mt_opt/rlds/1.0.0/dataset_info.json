@@ -1,9 +1,9 @@
 {
   "citation": "@misc{kalashnikov2021mtopt,\n      title={MT-Opt: Continuous Multi-Task Robotic Reinforcement Learning at Scale},\n      author={Dmitry Kalashnikov and Jacob Varley and Yevgen Chebotar and Benjamin Swanson and Rico Jonschkowski and Chelsea Finn and Sergey Levine and Karol Hausman},\n      year={2021},\n      eprint={2104.08212},\n      archivePrefix={arXiv},\n      primaryClass={cs.RO}\n}",
-  "configDescription": "This dataset contains task episodes collected across a fleet of real robots.",
+  "configDescription": "This dataset contains task episodes collected across afleet of real robots. It follows the [RLDS format](https://github.com/google-research/rlds)to represent steps and episodes.",
   "configName": "rlds",
   "description": "Datasets for the [MT-Opt paper](https://arxiv.org/abs/2104.08212).",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://karolhausman.github.io/mt-opt/"

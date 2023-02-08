@@ -2,23 +2,10 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "lang_id": {
+            "lang_group_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
-                    "numClasses": "102"
-                }
-            },
-            "raw_transcription": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Raw Transcription from FLoRes."
-            },
-            "path": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
+                    "numClasses": "7"
                 }
             },
             "language": {
@@ -32,14 +19,18 @@
                     "numClasses": "3"
                 }
             },
-            "id": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+            "path": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
-                    "dtype": "int32",
+                    "dtype": "string",
                     "encoding": "none"
-                },
-                "description": "Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id."
+                }
+            },
+            "raw_transcription": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Raw Transcription from FLoRes."
             },
             "audio": {
                 "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
@@ -54,15 +45,24 @@
                     "encoding": "NONE"
                 }
             },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id."
+            },
             "transcription": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
                 "description": "Normalized transcription."
             },
-            "lang_group_id": {
+            "lang_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
-                    "numClasses": "7"
+                    "numClasses": "102"
                 }
             },
             "num_samples": {

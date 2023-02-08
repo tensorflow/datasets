@@ -2,14 +2,17 @@
   "citation": "@inproceedings{Bisk2020,\n  author = {Yonatan Bisk and Rowan Zellers and\n            Ronan Le Bras and Jianfeng Gao\n            and Yejin Choi},\n  title = {PIQA: Reasoning about Physical Commonsense in\n           Natural Language},\n  booktitle = {Thirty-Fourth AAAI Conference on\n               Artificial Intelligence},\n  year = {2020},\n}",
   "description": "Physical IQa: Physical Interaction QA, a new commonsense QA benchmark for naive physics\nreasoning focusing on how we interact with everyday objects in everyday situations. This\ndataset focuses on affordances of objects, i.e., what actions each physical object affords\n(e.g., it is possible to use a shoe as a doorstop), and what physical interactions a group\nof objects afford (e.g., it is possible to place an apple on top of a book, but not the\nother way around). The dataset requires reasoning about both the prototypical use of\nobjects (e.g., shoes are used for walking) and non-prototypical but practically plausible\nuse of objects (e.g., shoes can be used as a doorstop). The dataset includes 20,000 QA\npairs that are either multiple-choice or true/false questions.",
   "downloadSize": "1824009",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://leaderboard.allenai.org/physicaliqa/submissions/get-started"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.piqa",
   "name": "piqa",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "5571205",
       "shardLengths": [
@@ -17,6 +20,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "631735",
       "shardLengths": [

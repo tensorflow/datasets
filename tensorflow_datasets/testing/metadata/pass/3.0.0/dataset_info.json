@@ -2,7 +2,7 @@
   "citation": "@Article{asano21pass,\nauthor = \"Yuki M. Asano and Christian Rupprecht and Andrew Zisserman and Andrea Vedaldi\",\ntitle = \"PASS: An ImageNet replacement for self-supervised pretraining without humans\",\njournal = \"NeurIPS Track on Datasets and Benchmarks\",\nyear = \"2021\"\n}",
   "description": "PASS is a large-scale image dataset that does not include any humans,\nhuman parts, or other personally identifiable information.\nIt that can be used for high-quality self-supervised pretraining while significantly reducing privacy concerns.\n\nPASS contains 1,439,589 images without any labels sourced from YFCC-100M.\n\nAll images in this dataset are licenced under the CC-BY licence, as is the dataset itself.\nFor YFCC-100M see  http://www.multimediacommons.org/.",
   "downloadSize": "179640190811",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.robots.ox.ac.uk/~vgg/data/pass/"

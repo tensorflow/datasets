@@ -2,6 +2,43 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
+            "num_samples": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "Total number of frames in the audio"
+            },
+            "path": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "transcription": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Normalized transcription."
+            },
+            "lang_group_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "7"
+                }
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id."
+            },
             "audio": {
                 "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
                 "audio": {
@@ -15,19 +52,10 @@
                     "encoding": "NONE"
                 }
             },
-            "transcription": {
+            "raw_transcription": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
-                "description": "Normalized transcription."
-            },
-            "id": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
-                },
-                "description": "Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id."
+                "description": "Raw Transcription from FLoRes."
             },
             "gender": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
@@ -35,44 +63,16 @@
                     "numClasses": "3"
                 }
             },
-            "raw_transcription": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Raw Transcription from FLoRes."
-            },
-            "language": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag."
-            },
-            "path": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
-                }
-            },
-            "lang_group_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "7"
-                }
-            },
-            "num_samples": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
-                },
-                "description": "Total number of frames in the audio"
-            },
             "lang_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
                     "numClasses": "102"
                 }
+            },
+            "language": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag."
             }
         }
     }

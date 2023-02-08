@@ -2,6 +2,7 @@
   "citation": "@inproceedings{kazemzadeh2014referitgame,\n  title={Referitgame: Referring to objects in photographs of natural scenes},\n  author={Kazemzadeh, Sahar and Ordonez, Vicente and Matten, Mark and Berg, Tamara},\n  booktitle={Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP)},\n  pages={787--798},\n  year={2014}\n}\n@inproceedings{yu2016modeling,\n  title={Modeling context in referring expressions},\n  author={Yu, Licheng and Poirson, Patrick and Yang, Shan and Berg, Alexander C and Berg, Tamara L},\n  booktitle={European Conference on Computer Vision},\n  pages={69--85},\n  year={2016},\n  organization={Springer}\n}\n@inproceedings{mao2016generation,\n  title={Generation and Comprehension of Unambiguous Object Descriptions},\n  author={Mao, Junhua and Huang, Jonathan and Toshev, Alexander and Camburu, Oana and Yuille, Alan and Murphy, Kevin},\n  booktitle={CVPR},\n  year={2016}\n}\n@inproceedings{nagaraja2016modeling,\n  title={Modeling context between objects for referring expression understanding},\n  author={Nagaraja, Varun K and Morariu, Vlad I and Davis, Larry S},\n  booktitle={European Conference on Computer Vision},\n  pages={792--807},\n  year={2016},\n  organization={Springer}\n}",
   "configName": "refcocoplus_unc",
   "description": "A collection of 3 referring expression datasets based off images in the\nCOCO dataset. A referring expression is a piece of text that describes a\nunique object in an image. These datasets are collected by asking human raters\nto disambiguate objects delineated by bounding boxes in the COCO dataset.\n\nRefCoco and RefCoco+ are from Kazemzadeh et al. 2014. RefCoco+ expressions\nare strictly appearance based descriptions, which they enforced by preventing\nraters from using location based descriptions (e.g., \"person to the right\" is\nnot a valid description for RefCoco+). RefCocoG is from Mao et al. 2016, and\nhas more rich description of objects compared to RefCoco due to differences\nin the annotation process. In particular, RefCoco was collected in an\ninteractive game-based setting, while RefCocoG was collected in a\nnon-interactive setting. On average, RefCocoG has 8.4 words per expression\nwhile RefCoco has 3.5 words.\n\nEach dataset has different split allocations that are typically all reported\nin papers. The \"testA\" and \"testB\" sets in RefCoco and RefCoco+ contain only\npeople and only non-people respectively. Images are partitioned into the various\nsplits. In the \"google\" split, objects, not images, are partitioned between the\ntrain and non-train splits. This means that the same image can appear in both\nthe train and validation split, but the objects being referred to in the image\nwill be different between the two sets. In contrast, the \"unc\" and \"umd\" splits\npartition images between the train, validation, and test split.\nIn RefCocoG, the \"google\" split does not have a canonical test set,\nand the validation set is typically reported in papers as \"val*\".\n\nStats for each dataset and split (\"refs\" is the number of referring expressions,\nand \"images\" is the number of images):\n\n|  dataset  | partition |  split  | refs   | images |\n| --------- | --------- | ------- | ------ | ------ |\n|   refcoco |   google  |  train  | 40000  |  19213 |\n|   refcoco |   google  |    val  |  5000  |   4559 |\n|   refcoco |   google  |   test  |  5000  |   4527 |\n|   refcoco |      unc  |  train  | 42404  |  16994 |\n|   refcoco |      unc  |    val  |  3811  |   1500 |\n|   refcoco |      unc  |  testA  |  1975  |    750 |\n|   refcoco |      unc  |  testB  |  1810  |    750 |\n|  refcoco+ |      unc  |  train  | 42278  |  16992 |\n|  refcoco+ |      unc  |    val  |  3805  |   1500 |\n|  refcoco+ |      unc  |  testA  |  1975  |    750 |\n|  refcoco+ |      unc  |  testB  |  1798  |    750 |\n|  refcocog |   google  |  train  | 44822  |  24698 |\n|  refcocog |   google  |    val  |  5000  |   4650 |\n|  refcocog |      umd  |  train  | 42226  |  21899 |\n|  refcocog |      umd  |    val  |  2573  |   1300 |\n|  refcocog |      umd  |   test  |  5023  |   2600 |",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/lichengunc/refer"
@@ -9,8 +10,12 @@
   },
   "moduleName": "tensorflow_datasets.vision_language.refcoco.refcoco",
   "name": "ref_coco",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "2959984917",
       "shardLengths": [
@@ -49,6 +54,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "259773144",
       "shardLengths": [
@@ -57,6 +63,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "testA",
       "numBytes": "127361789",
       "shardLengths": [
@@ -64,6 +71,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "testB",
       "numBytes": "131911297",
       "shardLengths": [

@@ -4,7 +4,7 @@
   "configName": "quality",
   "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\nquality subset",
   "downloadSize": "31252462",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/nyu-mll/quality"
@@ -17,6 +17,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "64266121",
       "shardLengths": [
@@ -24,6 +25,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "52324649",
       "shardLengths": [
@@ -31,6 +33,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "54894613",
       "shardLengths": [
@@ -38,5 +41,17 @@
       ]
     }
   ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "input"
+        },
+        {
+          "featureKey": "output"
+        }
+      ]
+    }
+  },
   "version": "1.0.0"
 }

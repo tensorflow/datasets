@@ -4,6 +4,7 @@
   "configName": "full_resolution",
   "description": "The TAO dataset is a large video object detection dataset consisting of\n2,907 high resolution videos and 833 object categories. Note that this dataset\nrequires at least 300 GB of free space to store.",
   "downloadSize": "122366375830",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://taodataset.org/"
@@ -11,8 +12,12 @@
   },
   "moduleName": "tensorflow_datasets.video.tao.tao",
   "name": "tao",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "62144555133",
       "shardLengths": [
@@ -275,6 +280,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "121720949713",
       "shardLengths": [

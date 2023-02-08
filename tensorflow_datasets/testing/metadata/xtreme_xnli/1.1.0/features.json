@@ -1,54 +1,57 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "premise": {
-            "type": "tensorflow_datasets.core.features.translation_feature.Translation",
-            "content": {
-                "languages": [
-                    "ar",
-                    "bg",
-                    "de",
-                    "el",
-                    "en",
-                    "es",
-                    "fr",
-                    "hi",
-                    "ru",
-                    "sw",
-                    "th",
-                    "tr",
-                    "ur",
-                    "vi",
-                    "zh"
-                ]
-            }
-        },
-        "hypothesis": {
-            "type": "tensorflow_datasets.core.features.translation_feature.TranslationVariableLanguages",
-            "content": {
-                "languages": [
-                    "ar",
-                    "bg",
-                    "de",
-                    "el",
-                    "en",
-                    "es",
-                    "fr",
-                    "hi",
-                    "ru",
-                    "sw",
-                    "th",
-                    "tr",
-                    "ur",
-                    "vi",
-                    "zh"
-                ]
-            }
-        },
-        "label": {
-            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-            "content": {
-                "num_classes": 3
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "hypothesis": {
+                "pythonClassName": "tensorflow_datasets.core.features.translation_feature.TranslationVariableLanguages",
+                "translation": {
+                    "languages": [
+                        "ar",
+                        "bg",
+                        "de",
+                        "el",
+                        "en",
+                        "es",
+                        "fr",
+                        "hi",
+                        "ru",
+                        "sw",
+                        "th",
+                        "tr",
+                        "ur",
+                        "vi",
+                        "zh"
+                    ],
+                    "variableLanguagesPerExample": true
+                }
+            },
+            "premise": {
+                "pythonClassName": "tensorflow_datasets.core.features.translation_feature.Translation",
+                "translation": {
+                    "languages": [
+                        "ar",
+                        "bg",
+                        "de",
+                        "el",
+                        "en",
+                        "es",
+                        "fr",
+                        "hi",
+                        "ru",
+                        "sw",
+                        "th",
+                        "tr",
+                        "ur",
+                        "vi",
+                        "zh"
+                    ]
+                }
+            },
+            "label": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "3"
+                }
             }
         }
     }

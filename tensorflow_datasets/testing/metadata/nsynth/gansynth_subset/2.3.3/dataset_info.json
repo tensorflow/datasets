@@ -1,57 +1,28 @@
 {
   "citation": "@InProceedings{pmlr-v70-engel17a,\n  title = \t {Neural Audio Synthesis of Musical Notes with {W}ave{N}et Autoencoders},\n  author = \t {Jesse Engel and Cinjon Resnick and Adam Roberts and Sander Dieleman and Mohammad Norouzi and Douglas Eck and Karen Simonyan},\n  booktitle = \t {Proceedings of the 34th International Conference on Machine Learning},\n  pages = \t {1068--1077},\n  year = \t {2017},\n  editor = \t {Doina Precup and Yee Whye Teh},\n  volume = \t {70},\n  series = \t {Proceedings of Machine Learning Research},\n  address = \t {International Convention Centre, Sydney, Australia},\n  month = \t {06--11 Aug},\n  publisher = \t {PMLR},\n  pdf = \t {http://proceedings.mlr.press/v70/engel17a/engel17a.pdf},\n  url = \t {http://proceedings.mlr.press/v70/engel17a.html},\n}",
+  "configDescription": "NSynth Dataset limited to acoustic instruments in the MIDI pitch interval\n[24, 84]. Uses alternate splits that have overlap in instruments (but not exact\nnotes) between the train set and valid/test sets. This variant was originally\nintroduced in the ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).\n",
+  "configName": "gansynth_subset",
   "description": "The NSynth Dataset is an audio dataset containing ~300k musical notes, each\nwith a unique pitch, timbre, and envelope. Each note is annotated with three\nadditional pieces of information based on a combination of human evaluation\nand heuristic algorithms: Source, Family, and Qualities.",
   "downloadSize": "78464238650",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://g.co/magenta/nsynth-dataset"
     ]
   },
+  "moduleName": "tensorflow_datasets.audio.nsynth",
   "name": "nsynth",
+  "releaseNotes": {
+    "2.3.0": "New `loudness_db` feature in decibels (unormalized).",
+    "2.3.1": "F0 computed with normalization fix in CREPE.",
+    "2.3.2": "Use Audio feature.",
+    "2.3.3": "F0 computed with fix in CREPE wave normalization (https://github.com/marl/crepe/issues/49)."
+  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "2184769889",
-      "numShards": "32",
-      "shardLengths": [
-        "266",
-        "266",
-        "267",
-        "266",
-        "266",
-        "266",
-        "266",
-        "267",
-        "266",
-        "266",
-        "266",
-        "266",
-        "266",
-        "267",
-        "266",
-        "266",
-        "266",
-        "266",
-        "267",
-        "266",
-        "266",
-        "266",
-        "266",
-        "266",
-        "267",
-        "266",
-        "266",
-        "266",
-        "266",
-        "267",
-        "266",
-        "266"
-      ]
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "15591429125",
-      "numShards": "128",
       "shardLengths": [
         "475",
         "475",
@@ -184,9 +155,9 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "valid",
       "numBytes": "4480599542",
-      "numShards": "64",
       "shardLengths": [
         "273",
         "273",
@@ -252,6 +223,45 @@
         "273",
         "273",
         "273"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "2184769889",
+      "shardLengths": [
+        "266",
+        "266",
+        "267",
+        "266",
+        "266",
+        "266",
+        "266",
+        "267",
+        "266",
+        "266",
+        "266",
+        "266",
+        "266",
+        "267",
+        "266",
+        "266",
+        "266",
+        "266",
+        "267",
+        "266",
+        "266",
+        "266",
+        "266",
+        "266",
+        "267",
+        "266",
+        "266",
+        "266",
+        "266",
+        "267",
+        "266",
+        "266"
       ]
     }
   ],

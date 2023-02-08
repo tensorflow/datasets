@@ -2,15 +2,17 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "raw_transcription": {
+            "transcription": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
-                "description": "Raw Transcription from FLoRes."
+                "description": "Normalized transcription."
             },
-            "lang_group_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "7"
+            "path": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
                 }
             },
             "gender": {
@@ -19,14 +21,30 @@
                     "numClasses": "3"
                 }
             },
-            "num_samples": {
+            "lang_group_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "7"
+                }
+            },
+            "raw_transcription": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Raw Transcription from FLoRes."
+            },
+            "id": {
                 "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
                 "tensor": {
                     "shape": {},
                     "dtype": "int32",
                     "encoding": "none"
                 },
-                "description": "Total number of frames in the audio"
+                "description": "Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id."
+            },
+            "language": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag."
             },
             "audio": {
                 "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
@@ -41,32 +59,14 @@
                     "encoding": "NONE"
                 }
             },
-            "path": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
-                }
-            },
-            "transcription": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Normalized transcription."
-            },
-            "language": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag."
-            },
-            "id": {
+            "num_samples": {
                 "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
                 "tensor": {
                     "shape": {},
                     "dtype": "int32",
                     "encoding": "none"
                 },
-                "description": "Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id."
+                "description": "Total number of frames in the audio"
             },
             "lang_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",

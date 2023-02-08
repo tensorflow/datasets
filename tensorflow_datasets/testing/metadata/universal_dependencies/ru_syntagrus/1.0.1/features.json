@@ -12,7 +12,7 @@
                     "length": "-1"
                 }
             },
-            "xpos": {
+            "deps": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -22,7 +22,7 @@
                     "length": "-1"
                 }
             },
-            "feats": {
+            "lemmas": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -42,9 +42,29 @@
                     "length": "-1"
                 }
             },
-            "idx": {
+            "text": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
+            },
+            "xpos": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "misc": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
             },
             "upos": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
@@ -58,27 +78,7 @@
                     "length": "-1"
                 }
             },
-            "lemmas": {
-                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-                "sequence": {
-                    "feature": {
-                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                        "text": {}
-                    },
-                    "length": "-1"
-                }
-            },
-            "deps": {
-                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-                "sequence": {
-                    "feature": {
-                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                        "text": {}
-                    },
-                    "length": "-1"
-                }
-            },
-            "text": {
+            "idx": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
@@ -92,7 +92,7 @@
                     "length": "-1"
                 }
             },
-            "misc": {
+            "feats": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {

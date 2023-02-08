@@ -4,7 +4,7 @@
   "configName": "Multilingual",
   "description": "The comments in this dataset come from an archive of Wikipedia talk page\ncomments. These have been annotated by Jigsaw for toxicity, as well as (for the\nmain config) a variety of toxicity subtypes, including severe toxicity,\nobscenity, threatening language, insulting language, and identity attacks. This\ndataset is a replica of the data released for the Jigsaw Toxic Comment\nClassification Challenge and Jigsaw Multilingual Toxic Comment Classification\ncompetition on Kaggle, with the test dataset merged with the test_labels\nreleased after the end of the competitions. Test data not used for scoring has\nbeen dropped. This dataset is released under CC0, as is the underlying comment\ntext.",
   "downloadSize": "53025584",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data"
@@ -12,8 +12,14 @@
   },
   "moduleName": "tensorflow_datasets.text.wikipedia_toxicity_subtypes",
   "name": "wikipedia_toxicity_subtypes",
+  "releaseNotes": {
+    "0.2.0": "Updated features for consistency with CivilComments dataset.",
+    "0.3.0": "Added WikipediaToxicityMultilingual config.",
+    "0.3.1": "Added a unique id for each comment. (For the Multilingual config, these are only unique within each split.)"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "3708093",
       "shardLengths": [
@@ -21,6 +27,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "33131757",
       "shardLengths": [

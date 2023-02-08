@@ -2,45 +2,6 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "lang_group_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "7"
-                }
-            },
-            "raw_transcription": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Raw Transcription from FLoRes."
-            },
-            "path": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
-                }
-            },
-            "num_samples": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
-                },
-                "description": "Total number of frames in the audio"
-            },
-            "transcription": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Normalized transcription."
-            },
-            "lang_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "102"
-                }
-            },
             "audio": {
                 "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
                 "audio": {
@@ -53,6 +14,28 @@
                     "sampleRate": "16000",
                     "encoding": "NONE"
                 }
+            },
+            "path": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "transcription": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Normalized transcription."
+            },
+            "num_samples": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "Total number of frames in the audio"
             },
             "id": {
                 "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
@@ -68,6 +51,23 @@
                 "classLabel": {
                     "numClasses": "3"
                 }
+            },
+            "lang_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "102"
+                }
+            },
+            "lang_group_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "7"
+                }
+            },
+            "raw_transcription": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Raw Transcription from FLoRes."
             },
             "language": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",

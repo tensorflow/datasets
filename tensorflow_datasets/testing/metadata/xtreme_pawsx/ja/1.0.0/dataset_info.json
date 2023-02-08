@@ -4,14 +4,17 @@
   "configName": "ja",
   "description": "This dataset contains machine translations of the English PAWS training\ndata. The translations are provided by the XTREME benchmark and cover the following\nlanguages:\n\n* French\n* Spanish\n* German\n* Chinese\n* Japanese\n* Korean\n\nFor further details on PAWS, see the  papers:\nPAWS: Paraphrase Adversaries from Word Scrambling\nat https://arxiv.org/abs/1904.01130\nand\nPAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification\nat  https://arxiv.org/abs/1908.11828\n\nFor details related to XTREME, please refer to:\nXTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization\nat https://arxiv.org/abs/2003.11080",
   "downloadSize": "26343678",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research/xtreme"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.xtreme_pawsx.xtreme_pawsx",
   "name": "xtreme_pawsx",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "17803016",
       "shardLengths": [

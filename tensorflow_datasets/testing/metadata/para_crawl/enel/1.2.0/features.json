@@ -1,6 +1,6 @@
 {
-    "type": "tensorflow_datasets.core.features.translation_feature.Translation",
-    "content": {
+    "pythonClassName": "tensorflow_datasets.core.features.translation_feature.Translation",
+    "translation": {
         "languages": [
             "el",
             "en"

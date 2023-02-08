@@ -12,10 +12,6 @@
                     "length": "-1"
                 }
             },
-            "idx": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
             "deprel": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
@@ -25,6 +21,10 @@
                     },
                     "length": "-1"
                 }
+            },
+            "idx": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             },
             "upos": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
@@ -48,11 +48,7 @@
                     "length": "-1"
                 }
             },
-            "text": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
-            "xpos": {
+            "misc": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -62,7 +58,11 @@
                     "length": "-1"
                 }
             },
-            "head": {
+            "text": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "tokens": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -82,7 +82,7 @@
                     "length": "-1"
                 }
             },
-            "misc": {
+            "xpos": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -92,7 +92,7 @@
                     "length": "-1"
                 }
             },
-            "tokens": {
+            "head": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {

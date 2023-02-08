@@ -1,92 +1,45 @@
 {
   "citation": "@inproceedings{Lake2018GeneralizationWS,\n  title={Generalization without Systematicity: On the Compositional Skills of\n         Sequence-to-Sequence Recurrent Networks},\n  author={Brenden M. Lake and Marco Baroni},\n  booktitle={ICML},\n  year={2018},\n  url={https://arxiv.org/pdf/1711.00350.pdf},\n}\n@inproceedings{Keysers2020,\n  title={Measuring Compositional Generalization: A Comprehensive Method on\n         Realistic Data},\n  author={Daniel Keysers and Nathanael Sch\"{a}rli and Nathan Scales and\n          Hylke Buisman and Daniel Furrer and Sergii Kashubin and\n          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and\n          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and\n          Olivier Bousquet},\n  note={Additional citation for MCD splits},\n  booktitle={ICLR},\n  year={2020},\n  url={https://arxiv.org/abs/1912.09713.pdf},\n}",
-  "description": "SCAN tasks with various splits.\n\nSCAN is a set of simple language-driven navigation tasks for studying\ncompositional learning and zero-shot generalization.\n\nMost splits are described at https://github.com/brendenlake/SCAN. For the MCD\nsplits please see https://arxiv.org/abs/1912.09713.pdf.\n\nBasic usage:\n```\ndata = tfds.load('scan/length')\n```\n\nMore advanced example:\n```\ndata = tfds.load(\n    'scan',\n    builder_kwargs=dict(\n        config=tfds.text.ScanConfig(\n            name='simple_p8', directory='simple_split/size_variations')))\n```",
+  "configName": "addprim_turn_left",
+  "description": "SCAN tasks with various splits.\n\nSCAN is a set of simple language-driven navigation tasks for studying\ncompositional learning and zero-shot generalization.\n\nMost splits are described at https://github.com/brendenlake/SCAN. For the MCD\nsplits please see https://arxiv.org/abs/1912.09713.pdf.\n\nBasic usage:\n\n```\ndata = tfds.load('scan/length')\n```\n\nMore advanced example:\n\n```\ndata = tfds.load(\n    'scan',\n    builder_kwargs=dict(\n        config=tfds.text.ScanConfig(\n            name='simple_p8', directory='simple_split/size_variations')))\n```",
   "downloadSize": "18680912",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/brendenlake/SCAN"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.scan",
   "name": "scan",
-  "schema": {
-    "feature": [
-      {
-        "name": "actions",
-        "type": "BYTES"
-      },
-      {
-        "name": "commands",
-        "type": "BYTES"
-      }
-    ]
-  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "207007",
-      "numShards": "1",
-      "shardLengths": [
-        "1208"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1208"
-              }
-            },
-            "name": "actions",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1208"
-              }
-            },
-            "name": "commands",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "1208"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "4599810",
-      "numShards": "1",
       "shardLengths": [
         "21890"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "21890"
-              }
-            },
-            "name": "actions",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "21890"
-              }
-            },
-            "name": "commands",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "21890"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "207007",
+      "shardLengths": [
+        "1208"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "commands",
-    "output": "actions"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "commands"
+        },
+        {
+          "featureKey": "actions"
+        }
+      ]
+    }
   },
   "version": "1.1.1"
 }

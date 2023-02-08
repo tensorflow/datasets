@@ -4,7 +4,7 @@
   "configName": "long_split",
   "description": "Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu. As defined in\nthe publication, style \"short\" uses title as summary and \"long\" uses tldr as\nsummary.\n\nFeatures includes:\n\n  - document: post text without tldr.\n  - tldr: tldr line.\n  - title: trimmed title without tldr.\n  - ups: upvotes.\n  - score: score.\n  - num_comments: number of comments.\n  - upvote_ratio: upvote ratio.",
   "downloadSize": "671029283",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/ctr4si/MMN"

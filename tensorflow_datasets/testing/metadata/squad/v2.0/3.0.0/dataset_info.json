@@ -4,6 +4,7 @@
   "configName": "v2.0",
   "description": "Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable.",
   "downloadSize": "46494161",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://rajpurkar.github.io/SQuAD-explorer/"
@@ -11,8 +12,12 @@
   },
   "moduleName": "tensorflow_datasets.question_answering.squad.squad",
   "name": "squad",
+  "releaseNotes": {
+    "3.0.0": "Fixes issue with small number of examples (19) where answer spans are misaligned due to context white-space removal."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "141803569",
       "shardLengths": [
@@ -21,6 +26,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "13955276",
       "shardLengths": [

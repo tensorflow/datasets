@@ -2,14 +2,17 @@
   "citation": "@inproceedings{levesque2012winograd,\n  title={The winograd schema challenge},\n  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},\n  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},\n  year={2012},\n  organization={Citeseer}\n}",
   "description": "WSC273 is a common sense reasoning benchmark that requires the system to read a sentence with an ambiguous pronoun and select the referent of that pronoun from two choices.\nIt contains the first 273 examples from the Winograd Schema Challenge.\nA Winograd schema is a pair of sentences that differ in only one or two words and that contain an ambiguity that is resolved in opposite ways in the two sentences and requires the use of world knowledge and reasoning for its resolution.\nThe schema takes its name from a well-known example by Terry Winograd: ``The city councilmen refused the demonstrators a permit because they [feared/advocated] violence.''\nIf the word is ``feared'', then ``they'' presumably refers to the city council; if it is ``advocated'' then ``they'' presumably refers to the demonstrators.",
   "downloadSize": "113235",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.wsc273.wsc273",
   "name": "wsc273",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "89244",
       "shardLengths": [

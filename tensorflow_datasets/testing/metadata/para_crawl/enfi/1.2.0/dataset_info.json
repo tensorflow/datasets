@@ -4,14 +4,17 @@
   "configName": "enfi",
   "description": "Web-Scale Parallel Corpora for Official European Languages.",
   "downloadSize": "159209242",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://paracrawl.eu/releases.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.translate.para_crawl",
   "name": "para_crawl",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "570271412",
       "shardLengths": [
@@ -27,8 +30,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "en",
-    "output": "fi"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "en"
+        },
+        {
+          "featureKey": "fi"
+        }
+      ]
+    }
   },
   "version": "1.2.0"
 }

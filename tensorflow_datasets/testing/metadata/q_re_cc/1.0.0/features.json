@@ -11,16 +11,7 @@
                 },
                 "description": "The id of the conversation turn, within a conversation."
             },
-            "source": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "The original source of the data -- either QuAC, CAsT or Natural Questions"
-            },
-            "answer_url": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {}
-            },
-            "question_rewrite": {
+            "question": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
@@ -28,18 +19,18 @@
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "question": {
+            "answer_url": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "conversation_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
-                },
-                "description": "The id of the conversation."
+            "source": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "The original source of the data -- either QuAC, CAsT or Natural Questions"
+            },
+            "question_rewrite": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
             },
             "context": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
@@ -50,6 +41,15 @@
                     },
                     "length": "-1"
                 }
+            },
+            "conversation_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "The id of the conversation."
             }
         }
     }

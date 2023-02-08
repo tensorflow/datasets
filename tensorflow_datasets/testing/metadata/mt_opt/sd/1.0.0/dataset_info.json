@@ -3,7 +3,7 @@
   "configDescription": "The success detectors dataset that contains human curated definitions of tasks completion.",
   "configName": "sd",
   "description": "Datasets for the [MT-Opt paper](https://arxiv.org/abs/2104.08212).",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://karolhausman.github.io/mt-opt/"

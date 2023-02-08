@@ -2,6 +2,7 @@
   "citation": "@inproceedings{pasupat-liang-2015-compositional,\n    title = \"Compositional Semantic Parsing on Semi-Structured Tables\",\n    author = \"Pasupat, Panupong  and\n      Liang, Percy\",\n    booktitle = \"Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 1: Long Papers)\",\n    month = jul,\n    year = \"2015\",\n    address = \"Beijing, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/P15-1142\",\n    doi = \"10.3115/v1/P15-1142\",\n    pages = \"1470--1480\",\n}",
   "description": "The dataset contains pairs table-question, and the respective answer. The\nquestions require multi-step reasoning and various data operations such as\ncomparison, aggregation, and arithmetic computation. The tables were randomly\nselected among Wikipedia tables with at least 8 rows and 5 columns.\n\n(As per the documentation usage notes)\n\n- Dev: Mean accuracy over three (not five) splits of the training data. In other\nwords, train on 'split-{1,2,3}-train' and test on 'split-{1,2,3}-dev',\nrespectively, then average the accuracy.\n\n- Test: Train on 'train' and test on 'test'.",
   "downloadSize": "68531544",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://ppasupat.github.io/WikiTableQuestions/#usage-notes"
@@ -9,8 +10,12 @@
   },
   "moduleName": "tensorflow_datasets.structured.wiki_table_questions.wiki_table_questions",
   "name": "wiki_table_questions",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "split-1-train",
       "numBytes": "46661032",
       "shardLengths": [
@@ -18,6 +23,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "split-2-train",
       "numBytes": "46603189",
       "shardLengths": [
@@ -25,6 +31,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "split-3-train",
       "numBytes": "44585165",
       "shardLengths": [
@@ -32,6 +39,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "split-1-dev",
       "numBytes": "11023241",
       "shardLengths": [
@@ -39,6 +47,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "split-2-dev",
       "numBytes": "11144193",
       "shardLengths": [
@@ -46,6 +55,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "split-3-dev",
       "numBytes": "13161003",
       "shardLengths": [
@@ -53,6 +63,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "57746168",
       "shardLengths": [
@@ -60,6 +71,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "17842905",
       "shardLengths": [
@@ -68,8 +80,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "input_text",
-    "output": "target_text"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "input_text"
+        },
+        {
+          "featureKey": "target_text"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

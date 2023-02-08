@@ -4,7 +4,7 @@
   "configName": "split_du",
   "description": "Question generation using squad dataset using data splits described in 'Neural\nQuestion Generation from Text: A Preliminary Study' (Zhou et al, 2017) and\n'Learning to Ask: Neural Question Generation for Reading Comprehension' (Du et\nal, 2017).",
   "downloadSize": "65883077",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/xinyadu/nqg\n@inproceedings{du-etal-2017-learning,\n    title = \"Learning to Ask: Neural Question Generation for Reading Comprehension\",\n    author = \"Du, Xinya  and Shao, Junru  and Cardie, Claire\",\n    booktitle = \"Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)\",\n    month = jul,\n    year = \"2017\",\n    address = \"Vancouver, Canada\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/P17-1123\",\n    doi = \"10.18653/v1/P17-1123\",\n    pages = \"1342--1352\",\n}\n"
@@ -19,6 +19,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "68955147",
       "shardLengths": [
@@ -26,6 +27,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "9786553",
       "shardLengths": [
@@ -33,6 +35,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "10038797",
       "shardLengths": [

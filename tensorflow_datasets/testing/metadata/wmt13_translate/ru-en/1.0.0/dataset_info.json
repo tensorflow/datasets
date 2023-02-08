@@ -4,6 +4,7 @@
   "configName": "ru-en",
   "description": "Translate dataset based on the data from statmt.org.\n\nVersions exists for the different years using a combination of multiple data\nsources. The base `wmt_translate` allows you to create your own config to choose\nyour own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.\n\n```\nconfig = tfds.translate.wmt.WmtConfig(\n    version=\"0.0.1\",\n    language_pair=(\"fr\", \"de\"),\n    subsets={\n        tfds.Split.TRAIN: [\"commoncrawl_frde\"],\n        tfds.Split.VALIDATION: [\"euelections_dev2019\"],\n    },\n)\nbuilder = tfds.builder(\"wmt_translate\", config=config)\n```",
   "downloadSize": "1059275675",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.statmt.org/wmt13/translation-task.html"
@@ -13,6 +14,7 @@
   "name": "wmt13_translate",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "871951759",
       "shardLengths": [
@@ -27,6 +29,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "1170810",
       "shardLengths": [
@@ -34,6 +37,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "1047395",
       "shardLengths": [
@@ -42,8 +46,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "ru",
-    "output": "en"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "ru"
+        },
+        {
+          "featureKey": "en"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

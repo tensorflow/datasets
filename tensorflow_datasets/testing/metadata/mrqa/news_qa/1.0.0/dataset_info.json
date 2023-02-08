@@ -4,7 +4,7 @@
   "configName": "news_qa",
   "description": "The MRQA 2019 Shared Task focuses on generalization in question answering. An\neffective question answering system should do more than merely interpolate from\nthe training set to answer test examples drawn from the same distribution: it\nshould also be able to extrapolate to out-of-distribution examples \u2014 a\nsignificantly harder challenge.\n\nMRQA adapts and unifies multiple distinct question answering datasets (carefully\nselected subsets of existing datasets) into the same format (SQuAD format).\nAmong them, six datasets were made available for training, and six datasets were\nmade available for testing. Small portions of the training datasets\nwere held-out as in-domain data that may be used for development. The testing\ndatasets only contain out-of-domain data. This benchmark is released as part of\nthe MRQA 2019 Shared Task.\n\nMore information can be found at: `https://mrqa.github.io/2019/shared.html`.",
   "downloadSize": "59594232",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://mrqa.github.io/2019/shared.html"

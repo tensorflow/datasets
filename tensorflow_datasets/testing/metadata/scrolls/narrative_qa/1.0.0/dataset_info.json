@@ -4,7 +4,7 @@
   "configName": "narrative_qa",
   "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\nnarrative_qa subset",
   "downloadSize": "8048900135",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://deepmind.com/research/publications/narrativeqa-reading-comprehension-challenge"
@@ -17,6 +17,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "18021862320",
       "shardLengths": [
@@ -279,6 +280,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "1900907103",
       "shardLengths": [
@@ -301,6 +303,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "3228726432",
       "shardLengths": [
@@ -339,5 +342,17 @@
       ]
     }
   ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "input"
+        },
+        {
+          "featureKey": "output"
+        }
+      ]
+    }
+  },
   "version": "1.0.0"
 }

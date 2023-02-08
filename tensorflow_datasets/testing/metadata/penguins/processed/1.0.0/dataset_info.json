@@ -4,7 +4,7 @@
   "configName": "processed",
   "description": "Measurements for three penguin species observed in the Palmer Archipelago, Antarctica.\n\nThese data were collected from 2007 - 2009 by Dr. Kristen Gorman with the [Palmer\nStation Long Term Ecological Research Program](https://pal.lternet.edu/), part\nof the [US Long Term Ecological Research Network](https://lternet.edu/). The\ndata were originally imported from the [Environmental Data\nInitiative](https://environmentaldatainitiative.org/) (EDI) Data Portal, and are\navailable for use by CC0 license (\"No Rights Reserved\") in accordance with the\nPalmer Station Data Policy. This copy was imported from [Allison Horst's GitHub\nrepository](https://allisonhorst.github.io/palmerpenguins/articles/intro.html).",
   "downloadSize": "25648",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://allisonhorst.github.io/palmerpenguins/"
@@ -12,8 +12,12 @@
   },
   "moduleName": "tensorflow_datasets.structured.penguins.penguins",
   "name": "penguins",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "18036",
       "shardLengths": [

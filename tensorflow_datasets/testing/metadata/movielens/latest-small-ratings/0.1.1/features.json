@@ -10,7 +10,7 @@
                     "encoding": "none"
                 }
             },
-            "movie_id": {
+            "user_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
@@ -18,15 +18,7 @@
                     "encoding": "none"
                 }
             },
-            "timestamp": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int64",
-                    "encoding": "none"
-                }
-            },
-            "user_id": {
+            "movie_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
@@ -39,6 +31,14 @@
                 "tensor": {
                     "shape": {},
                     "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "timestamp": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int64",
                     "encoding": "none"
                 }
             },

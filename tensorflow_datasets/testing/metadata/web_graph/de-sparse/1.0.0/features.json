@@ -1,6 +1,6 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
         "features": {
             "col_tag": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
@@ -39,6 +39,5 @@
                 }
             }
         }
-    },
-    "proto_cls": "tensorflow_datasets.FeaturesDict"
+    }
 }

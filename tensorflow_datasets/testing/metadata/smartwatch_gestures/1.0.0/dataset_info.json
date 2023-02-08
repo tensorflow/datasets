@@ -2,7 +2,7 @@
   "citation": "@INPROCEEDINGS{\n  6952946,\n  author={Costante, Gabriele and Porzi, Lorenzo and Lanz, Oswald and Valigi, Paolo and Ricci, Elisa},\n  booktitle={2014 22nd European Signal Processing Conference (EUSIPCO)},\n  title={Personalizing a smartwatch-based gesture interface with transfer learning},\n  year={2014},\n  volume={},\n  number={},\n  pages={2530-2534},\n  doi={}}",
   "description": "The **SmartWatch Gestures Dataset** has been collected to evaluate several gesture recognition algorithms for interacting with mobile applications using arm gestures.\n\nEight different users performed twenty repetitions of twenty different gestures, for a total of 3200 sequences.\nEach sequence contains acceleration data from the 3-axis accelerometer of a first generation Sony SmartWatch\u2122, as well as timestamps from the different clock sources available on an Android device.\nThe smartwatch was worn on the user's right wrist.\nThe gestures have been manually segmented by the users performing them by tapping the smartwatch screen at the beginning and at the end of every repetition.",
   "downloadSize": "2156283",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://tev.fbk.eu/technologies/smartwatch-gestures-dataset"
@@ -15,6 +15,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "2769271",
       "shardLengths": [
