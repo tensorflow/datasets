@@ -16,11 +16,11 @@
 """Tests for the translate TED Talk module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.translate import ted_multi
+from tensorflow_datasets.datasets.ted_multi_translate import ted_multi_translate_dataset_builder
 
 
 class TedMultiTranslateTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ted_multi.TedMultiTranslate
+  DATASET_CLASS = ted_multi_translate_dataset_builder.Builder
   SPLITS = {  # Expected number of examples on each split from fake example.
       "train": 4,
       "validation": 4,

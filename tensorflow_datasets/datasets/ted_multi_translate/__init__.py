@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for ted_multi_translate.
-
-DEPRECATED!
-If you want to use the TedMultiTranslate dataset builder class, use:
-tfds.builder_cls('ted_multi_translate')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-TedMultiTranslate = lazy_builder_import.LazyBuilderImport('ted_multi_translate')
