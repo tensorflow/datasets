@@ -322,6 +322,8 @@ toc:
     title: svhn_cropped
   - path: /datasets/catalog/symmetric_solids
     title: symmetric_solids
+  - path: /datasets/catalog/tf_flowers
+    title: tf_flowers
   - path: /datasets/catalog/the300w_lp
     title: the300w_lp
   title: Image
@@ -512,8 +514,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/tf_flowers
-    title: tf_flowers
   - path: /datasets/catalog/uc_merced
     title: uc_merced
   - path: /datasets/catalog/visual_domain_decathlon
@@ -562,6 +562,8 @@ toc:
     title: snli
   - path: /datasets/catalog/squad
     title: squad
+  - path: /datasets/catalog/tedlium
+    title: tedlium
   title: Language modelling
 - section:
   - path: /datasets/catalog/mlqa
@@ -638,6 +640,8 @@ toc:
     title: squad
   - path: /datasets/catalog/story_cloze
     title: story_cloze (manual)
+  - path: /datasets/catalog/tedlium
+    title: tedlium
   title: Monolingual
 - section:
   - path: /datasets/catalog/opinion_abstracts
@@ -946,6 +950,8 @@ toc:
     title: librispeech
   - path: /datasets/catalog/speech_commands
     title: speech_commands
+  - path: /datasets/catalog/tedlium
+    title: tedlium
   title: Speech recognition
 - section:
   - path: /datasets/catalog/cherry_blossoms
@@ -1276,6 +1282,14 @@ toc:
     title: super_glue
   - path: /datasets/catalog/svhn_cropped
     title: svhn_cropped
+  - path: /datasets/catalog/tatoeba
+    title: tatoeba
+  - path: /datasets/catalog/ted_hrlr_translate
+    title: ted_hrlr_translate
+  - path: /datasets/catalog/ted_multi_translate
+    title: ted_multi_translate
+  - path: /datasets/catalog/tedlium
+    title: tedlium
   - path: /datasets/catalog/tiny_shakespeare
     title: tiny_shakespeare
   - path: /datasets/catalog/trec
@@ -1424,12 +1438,6 @@ toc:
     title: flores
   - path: /datasets/catalog/mtnt
     title: mtnt
-  - path: /datasets/catalog/tatoeba
-    title: tatoeba
-  - path: /datasets/catalog/ted_hrlr_translate
-    title: ted_hrlr_translate
-  - path: /datasets/catalog/ted_multi_translate
-    title: ted_multi_translate
   - path: /datasets/catalog/wmt13_translate
     title: wmt13_translate (manual)
   - path: /datasets/catalog/wmt14_translate

@@ -3,10 +3,10 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="tatoeba" />
-  <meta itemprop="description" content="This data is extracted from the Tatoeba corpus, dated Saturday 2018/11/17.&#10;&#10;For each languages, we have selected 1000 English sentences and their&#10;translations, if available. Please check this paper for a description of the&#10;languages, their families and  scripts as well as baseline results.&#10;&#10;Please note that the English sentences are not identical for all language pairs.&#10;This means that the results are not directly comparable across languages.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;tatoeba&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="This data is extracted from the Tatoeba corpus, dated Saturday 2018/11/17.&#10;&#10;For each languages, we have selected 1000 English sentences and their&#10;translations, if available. Please check this paper for a description of the&#10;languages, their families and scripts as well as baseline results.&#10;&#10;Please note that the English sentences are not identical for all language pairs.&#10;This means that the results are not directly comparable across languages.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;tatoeba&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/tatoeba" />
   <meta itemprop="sameAs" content="http://opus.nlpl.eu/Tatoeba.php" />
-  <meta itemprop="citation" content="@article{tatoeba,&#10;          title={Massively Multilingual Sentence Embeddings for Zero-Shot&#10;                   Cross-Lingual Transfer and Beyond},&#10;          author={Mikel, Artetxe and Holger, Schwenk,},&#10;          journal={arXiv:1812.10464v2},&#10;          year={2018}&#10;}&#10;&#10;@InProceedings{TIEDEMANN12.463,&#10;  author = {J{&quot;o}rg}rg Tiedemann},&#10;  title = {Parallel Data, Tools and Interfaces in OPUS},&#10;  booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC&#x27;12)},&#10;  year = {2012},&#10;  month = {may},&#10;  date = {23-25},&#10;  address = {Istanbul, Turkey},&#10;  editor = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},&#10;  publisher = {European Language Resources Association (ELRA)},&#10;  isbn = {978-2-9517408-7-7},&#10;  language = {english}&#10;}" />
+  <meta itemprop="citation" content="@article{tatoeba,&#10;          title={Massively Multilingual Sentence Embeddings for Zero-Shot&#10;                   Cross-Lingual Transfer and Beyond},&#10;          author={Mikel, Artetxe and Holger, Schwenk,},&#10;          journal={arXiv:1812.10464v2},&#10;          year={2018}&#10;}&#10;&#10;@InProceedings{TIEDEMANN12.463,&#10;  author = {J{\&quot;o}rg}rg Tiedemann},&#10;  title = {Parallel Data, Tools and Interfaces in OPUS},&#10;  booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC&#x27;12)},&#10;  year = {2012},&#10;  month = {may},&#10;  date = {23-25},&#10;  address = {Istanbul, Turkey},&#10;  editor = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},&#10;  publisher = {European Language Resources Association (ELRA)},&#10;  isbn = {978-2-9517408-7-7},&#10;  language = {english}&#10;}" />
 </div>
 
 # `tatoeba`
@@ -27,7 +27,7 @@ This means that the results are not directly comparable across languages.
     [http://opus.nlpl.eu/Tatoeba.php](http://opus.nlpl.eu/Tatoeba.php)
 
 *   **Source code**:
-    [`tfds.translate.tatoeba.Tatoeba`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/tatoeba/tatoeba.py)
+    [`tfds.datasets.tatoeba.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/tatoeba/tatoeba_dataset_builder.py)
 
 *   **Versions**:
 
@@ -78,7 +78,7 @@ target_sentence | Text         |       | string |
 }
 
 @InProceedings{TIEDEMANN12.463,
-  author = {J{"o}rg}rg Tiedemann},
+  author = {J{\"o}rg}rg Tiedemann},
   title = {Parallel Data, Tools and Interfaces in OPUS},
   booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12)},
   year = {2012},

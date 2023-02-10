@@ -26,7 +26,7 @@ A large set of images of flowers
     [https://www.tensorflow.org/tutorials/load_data/images](https://www.tensorflow.org/tutorials/load_data/images)
 
 *   **Source code**:
-    [`tfds.image_classification.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/flowers.py)
+    [`tfds.datasets.tf_flowers.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/tf_flowers/tf_flowers_dataset_builder.py)
 
 *   **Versions**:
 

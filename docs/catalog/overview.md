@@ -220,6 +220,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`sun397`](sun397.md)
 *   [`svhn_cropped`](svhn_cropped.md)
 *   [`symmetric_solids`](symmetric_solids.md)
+*   [`tf_flowers`](tf_flowers.md)
 *   [`the300w_lp`](the300w_lp.md)
 
 ### `Image classification`
@@ -329,7 +330,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`mnist`](mnist.md)
 *   [`mnist_corrupted`](mnist_corrupted.md)
 *   [`omniglot`](omniglot.md)
-*   [`tf_flowers`](tf_flowers.md)
 *   [`uc_merced`](uc_merced.md)
 *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
 
@@ -358,6 +358,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`samsum`](samsum.md)
 *   [`snli`](snli.md)
 *   [`squad`](squad.md)
+*   [`tedlium`](tedlium.md)
 
 ### `Machine translation`
 
@@ -400,6 +401,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`spoken_digit`](spoken_digit.md)
 *   [`squad`](squad.md)
 *   [`story_cloze`](story_cloze.md)
+*   [`tedlium`](tedlium.md)
 
 ### `Movies and tv shows`
 
@@ -606,6 +608,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`accentdb`](accentdb.md)
 *   [`librispeech`](librispeech.md)
 *   [`speech_commands`](speech_commands.md)
+*   [`tedlium`](tedlium.md)
 
 ### `Structured`
 
@@ -781,6 +784,10 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`sun397`](sun397.md)
 *   [`super_glue`](super_glue.md)
 *   [`svhn_cropped`](svhn_cropped.md)
+*   [`tatoeba`](tatoeba.md)
+*   [`ted_hrlr_translate`](ted_hrlr_translate.md)
+*   [`ted_multi_translate`](ted_multi_translate.md)
+*   [`tedlium`](tedlium.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
 *   [`unified_qa`](unified_qa.md)
@@ -873,9 +880,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`flores`](flores.md)
 *   [`mtnt`](mtnt.md)
-*   [`tatoeba`](tatoeba.md)
-*   [`ted_hrlr_translate`](ted_hrlr_translate.md)
-*   [`ted_multi_translate`](ted_multi_translate.md)
 *   [`wmt13_translate`](wmt13_translate.md)
 *   [`wmt14_translate`](wmt14_translate.md)
 *   [`wmt15_translate`](wmt15_translate.md)
