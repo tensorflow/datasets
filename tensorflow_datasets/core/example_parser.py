@@ -109,11 +109,8 @@ class ExampleParserNp(Parser):
       self, serialized_example: bytes
   ) -> type_utils.NpArrayOrScalarDict:
     example = example_pb2.Example.FromString(serialized_example)
-    with utils.try_reraise(f"Error wile parsing example {example}: "):
-      np_example = _features_to_numpy(
-          example.features, self._flat_example_specs
-      )
-      return utils.pack_as_nest_dict(np_example, self.example_specs)
+    np_example = _features_to_numpy(example.features, self._flat_example_specs)
+    return utils.pack_as_nest_dict(np_example, self.example_specs)
 
 
 def _features_to_numpy(
@@ -140,9 +137,10 @@ def _features_to_numpy(
           f"Malformed input: {key} is found in the feature, but not in"
           f" {flat_example_specs}"
       )
-    parsed_example[key] = _feature_to_numpy(
-        feature_map[key], flat_example_specs[key], key
-    )
+    with utils.try_reraise(f"Error wile parsing feature {key}: "):
+      parsed_example[key] = _feature_to_numpy(
+          feature_map[key], flat_example_specs[key], key
+      )
   return parsed_example
 
 

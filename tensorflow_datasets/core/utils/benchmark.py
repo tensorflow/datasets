@@ -194,7 +194,10 @@ def raw_benchmark(
   try:
     total = len(ds)  # pytype: disable=wrong-arg-types
   except TypeError:
-    total = None
+    total = num_iter
+
+  if num_iter is not None:
+    total = min(total, num_iter)
 
   results = []
   actual_num_iter = 0
