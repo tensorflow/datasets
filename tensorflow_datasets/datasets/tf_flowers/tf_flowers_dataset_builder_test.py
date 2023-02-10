@@ -15,11 +15,11 @@
 
 """Tests for flowers data loading."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import flowers
+from tensorflow_datasets.datasets.tf_flowers import tf_flowers_dataset_builder
 
 
 class TFFlowersTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = flowers.TFFlowers
+  DATASET_CLASS = tf_flowers_dataset_builder.Builder
 
   SPLITS = {'train': 5}
 
