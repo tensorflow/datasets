@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for tf_flowers.
-
-DEPRECATED!
-If you want to use the TFFlowers dataset builder class, use:
-tfds.builder_cls('tf_flowers')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-TFFlowers = lazy_builder_import.LazyBuilderImport('tf_flowers')
