@@ -337,7 +337,7 @@ class FeatureExpectationsTestCase(SubTestCase):
               decoders={'inner': test.decoders},
           )
           with self._subTest('out_np_value'):
-            np.testing.assert_array_equal(out_numpy['inner'], test.expected)
+            np.testing.assert_array_equal(out_numpy['inner'], test.expected_np)
 
       # Test serialization + decoding from disk
       with self._subTest('out'):

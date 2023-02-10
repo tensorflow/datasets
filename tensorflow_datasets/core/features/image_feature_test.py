@@ -39,15 +39,23 @@ class ImageFeatureTest(
       (tf.uint16, np.uint16, 3),
       (np.uint8, np.uint8, 4),
       (tf.uint8, np.uint8, 4),
+      (np.uint16, np.uint16, 4),
+      (tf.uint16, np.uint16, 4),
   )
   def test_images(self, dtype, np_dtype, channels):
     img = randint(256, size=(128, 100, channels), dtype=np_dtype)
     img_other_shape = randint(256, size=(64, 200, channels), dtype=np_dtype)
 
     filename = {
-        3: '6pixels.png',
-        4: '6pixels_4chan.png',
-    }[channels]
+        np.uint8: {
+            3: '6pixels.png',
+            4: '6pixels_4chan.png',
+        },
+        np.uint16: {
+            3: '6pixels_16bit.png',
+            4: '6pixels_16bit_4chan.png',
+        },
+    }[np_dtype][channels]
 
     img_file_path = os.path.join(
         os.path.dirname(__file__), '../../testing/test_data', filename
@@ -55,7 +63,7 @@ class ImageFeatureTest(
     with tf.io.gfile.GFile(img_file_path, 'rb') as f:
       img_byte_content = f.read()
     img_file_expected_content = np.array(
-        [  # see tests_data/README.md
+        [  # see tensorflow_datasets/testing/test_data/README.md
             [[0, 255, 0, 255], [255, 0, 0, 255], [255, 0, 255, 255]],
             [[0, 0, 255, 255], [255, 255, 0, 255], [126, 127, 128, 255]],
         ],
@@ -75,43 +83,51 @@ class ImageFeatureTest(
             testing.FeatureExpectationItem(
                 value=img,
                 expected=img,
+                expected_np=img,
             ),
             # File path
             testing.FeatureExpectationItem(
                 value=img_file_path,
                 expected=img_file_expected_content,
+                expected_np=img_file_expected_content,
             ),
             # File Path
             testing.FeatureExpectationItem(
                 value=pathlib.Path(img_file_path),
                 expected=img_file_expected_content,
+                expected_np=img_file_expected_content,
             ),
             # Images bytes
             testing.FeatureExpectationItem(
                 value=img_byte_content,
                 expected=img_file_expected_content,
+                expected_np=img_file_expected_content,
             ),
             # 'img' shape can be dynamic
             testing.FeatureExpectationItem(
                 value=img_other_shape,
                 expected=img_other_shape,
+                expected_np=img_other_shape,
             ),
             # Invalid type
             testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128, channels), dtype=np.uint32),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='dtype should be',
             ),
             # Invalid number of dimensions
             testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128), dtype=np_dtype),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='must have the same rank',
             ),
             # Invalid number of channels
             testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128, 1), dtype=np_dtype),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='are incompatible',
             ),
         ],
@@ -137,11 +153,13 @@ class ImageFeatureTest(
             testing.FeatureExpectationItem(
                 value=img_shaped,
                 expected=img_shaped,
+                expected_np=img_shaped,
             ),
             # 'img_shaped' shape should be static
             testing.FeatureExpectationItem(
                 value=randint(256, size=(31, 64, 1), dtype=np.uint8),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='are incompatible',
             ),
         ],
@@ -168,16 +186,19 @@ class ImageFeatureTest(
             testing.FeatureExpectationItem(
                 value=img,
                 expected=img,
+                expected_np=img,
             ),
             # 'img' shape can be dynamic
             testing.FeatureExpectationItem(
                 value=img_other_shape,
                 expected=img_other_shape,
+                expected_np=img_other_shape,
             ),
             # Invalid type
             testing.FeatureExpectationItem(
                 value=img.astype(np.float64),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='dtype should be',
             ),
         ],

@@ -17,7 +17,6 @@
 """Tests for tensorflow_datasets.core.deprecated.text_feature."""
 
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.deprecated.text import text_encoder
@@ -37,19 +36,19 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
             # Non-unicode
             testing.FeatureExpectationItem(
                 value=nonunicode_text,
-                expected=tf.compat.as_bytes(nonunicode_text),
+                expected=b'hello world',
                 expected_np=b'hello world',
             ),
             # Unicode
             testing.FeatureExpectationItem(
                 value=unicode_text,
-                expected=tf.compat.as_bytes(unicode_text),
-                expected_np=b'hello world',
+                expected=b'\xe4\xbd\xa0\xe5\xa5\xbd',  # 你好 in bytes
+                expected_np=b'\xe4\xbd\xa0\xe5\xa5\xbd',  # 你好 in bytes
             ),
             # Empty string
             testing.FeatureExpectationItem(
                 value='',
-                expected=tf.compat.as_bytes(''),
+                expected=b'',
                 expected_np=b'',
             ),
         ],
