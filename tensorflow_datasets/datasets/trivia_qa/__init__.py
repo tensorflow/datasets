@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for trivia_qa.
-
-DEPRECATED!
-If you want to use the TriviaQA dataset builder class, use:
-tfds.builder_cls('trivia_qa')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-TriviaQA = lazy_builder_import.LazyBuilderImport('trivia_qa')
