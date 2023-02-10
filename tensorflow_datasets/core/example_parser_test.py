@@ -97,7 +97,7 @@ def test_key_error_exception_if_example_specs_is_malformed():
   example_specs = features.get_tensor_info()
   example_parser_np = example_parser.ExampleParserNp(example_specs)
   with pytest.raises(
-      RuntimeError,
+      KeyError,
       match='(.|\n)*array_of_ints is found in the feature, but not in*',
   ):
     example_parser_np.parse_example(serialized_example)
