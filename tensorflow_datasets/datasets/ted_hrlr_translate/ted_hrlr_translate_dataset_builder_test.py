@@ -16,11 +16,11 @@
 """Tests for the bilingual translate TED Talk module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.translate import ted_hrlr
+from tensorflow_datasets.datasets.ted_hrlr_translate import ted_hrlr_translate_dataset_builder
 
 
 class TedHrlrTranslateTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ted_hrlr.TedHrlrTranslate
+  DATASET_CLASS = ted_hrlr_translate_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["az_to_en", "aztr_to_en"]
   SPLITS = {
       "train": 4,
