@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for tatoeba.
-
-DEPRECATED!
-If you want to use the Tatoeba dataset builder class, use:
-tfds.builder_cls('tatoeba')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-Tatoeba = lazy_builder_import.LazyBuilderImport('tatoeba')
