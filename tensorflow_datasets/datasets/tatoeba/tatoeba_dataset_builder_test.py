@@ -15,14 +15,14 @@
 
 """tatoeba dataset."""
 
+from tensorflow_datasets.datasets.tatoeba import tatoeba_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.translate.tatoeba import tatoeba
 
 
 class TatoebaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for tatoeba dataset."""
 
-  DATASET_CLASS = tatoeba.Tatoeba
+  DATASET_CLASS = tatoeba_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['tatoeba_af']
   SPLITS = {
       'train': 5,  # Number of fake train example
