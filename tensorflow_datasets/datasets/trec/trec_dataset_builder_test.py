@@ -15,14 +15,14 @@
 
 """trec dataset."""
 
+from tensorflow_datasets.datasets.trec import trec_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.trec import trec
 
 
 class TrecTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for trec dataset."""
 
-  DATASET_CLASS = trec.Trec
+  DATASET_CLASS = trec_dataset_builder.Builder
   SPLITS = {
       "train": 3,  # Number of fake train example
       "test": 1,  # Number of fake test example
