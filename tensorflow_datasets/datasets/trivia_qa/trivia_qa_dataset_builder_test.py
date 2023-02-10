@@ -16,11 +16,11 @@
 """Tests for triviaqa dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import trivia_qa
+from tensorflow_datasets.datasets.trivia_qa import trivia_qa_dataset_builder
 
 
 class TriviaqaTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = trivia_qa.TriviaQA
+  DATASET_CLASS = trivia_qa_dataset_builder.Builder
   DL_EXTRACT_RESULT = {
       "rc": "",
       "unfiltered": "",
