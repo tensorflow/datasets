@@ -16,11 +16,11 @@
 """Tests for tiny Shakespeare dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import tiny_shakespeare
+from tensorflow_datasets.datasets.tiny_shakespeare import tiny_shakespeare_dataset_builder
 
 
 class TinyShakespeareTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = tiny_shakespeare.TinyShakespeare
+  DATASET_CLASS = tiny_shakespeare_dataset_builder.Builder
   SPLITS = {
       "train": 1,
       "validation": 1,

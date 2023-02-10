@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for tiny_shakespeare.
-
-DEPRECATED!
-If you want to use the TinyShakespeare dataset builder class, use:
-tfds.builder_cls('tiny_shakespeare')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-TinyShakespeare = lazy_builder_import.LazyBuilderImport('tiny_shakespeare')
