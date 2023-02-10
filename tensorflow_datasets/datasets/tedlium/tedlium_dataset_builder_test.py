@@ -16,12 +16,12 @@
 """Tests for tedlium dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio import tedlium
+from tensorflow_datasets.datasets.tedlium import tedlium_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class TedliumTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = tedlium.Tedlium
+  DATASET_CLASS = tedlium_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["release1"]
   SPLITS = {
       tfds.Split.TRAIN: 4,
