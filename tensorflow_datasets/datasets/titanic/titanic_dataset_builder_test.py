@@ -15,12 +15,12 @@
 
 """Tests for titanic data loading."""
 
-from tensorflow_datasets.structured import titanic
+from tensorflow_datasets.datasets.titanic import titanic_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class TitanicTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = titanic.Titanic
+  DATASET_CLASS = titanic_dataset_builder.Builder
 
   SPLITS = {'train': 5}
 
