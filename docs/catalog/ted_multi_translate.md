@@ -22,7 +22,7 @@ incomplete translations will be filtered out.
     [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 *   **Source code**:
-    [`tfds.translate.TedMultiTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_multi.py)
+    [`tfds.datasets.ted_multi_translate.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ted_multi_translate/ted_multi_translate_dataset_builder.py)
 
 *   **Versions**:
 

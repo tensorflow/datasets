@@ -21,7 +21,7 @@ where one is high resource and the other is low resource.
     [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 *   **Source code**:
-    [`tfds.translate.TedHrlrTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_hrlr.py)
+    [`tfds.datasets.ted_hrlr_translate.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ted_hrlr_translate/ted_hrlr_translate_dataset_builder.py)
 
 *   **Versions**:
 
