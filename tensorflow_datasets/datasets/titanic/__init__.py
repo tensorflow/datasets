@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for titanic.
-
-DEPRECATED!
-If you want to use the Titanic dataset builder class, use:
-tfds.builder_cls('titanic')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-Titanic = lazy_builder_import.LazyBuilderImport('titanic')
