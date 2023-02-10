@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for trec.
-
-DEPRECATED!
-If you want to use the Trec dataset builder class, use:
-tfds.builder_cls('trec')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-Trec = lazy_builder_import.LazyBuilderImport('trec')
