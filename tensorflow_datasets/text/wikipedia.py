@@ -357,8 +357,11 @@ WIKIPEDIA_LANGUAGES = [
     "zu",
 ]
 
-# Use mirror (your.org) to avoid download caps.
-_BASE_URL_TMPL = "https://dumps.wikimedia.your.org/{lang}wiki/{date}/"
+# Use mirror to avoid download caps.
+_BASE_URL_TMPL = (
+    "https://mirror.accum.se/mirror/wikimedia.org/dumps/{lang}wiki/{date}/"
+)
+_BASE_URL_TMPL_OLD = "https://dumps.wikimedia.your.org/{lang}wiki/{date}/"
 _INFO_FILE = "dumpstatus.json"
 
 
@@ -395,6 +398,11 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
   BUILDER_CONFIGS = (
       [
+          WikipediaConfig(language=lang, date="20230201")
+          for lang in WIKIPEDIA_LANGUAGES
+          if "-" not in lang
+      ]
+      + [
           WikipediaConfig(language=lang, date="20220620")
           for lang in WIKIPEDIA_LANGUAGES
       ]
@@ -435,7 +443,10 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     def _base_url(lang):
-      return _BASE_URL_TMPL.format(
+      tmpl = _BASE_URL_TMPL
+      if self.builder_config.date <= "20220620":
+        tmpl = _BASE_URL_TMPL_OLD
+      return tmpl.format(
           lang=lang.replace("-", "_"), date=self._builder_config.date
       )
 
@@ -463,7 +474,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       total_bytes += info["size"]
       xml_urls.append(_base_url(lang) + fname)
 
-      # Use dictionary since testing mock always returns the same result.
+    # Use dictionary since testing mock always returns the same result.
     downloaded_files = dl_manager.download({"xml": xml_urls})
 
     return {
