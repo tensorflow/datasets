@@ -642,6 +642,10 @@ toc:
     title: story_cloze (manual)
   - path: /datasets/catalog/tedlium
     title: tedlium
+  - path: /datasets/catalog/trec
+    title: trec
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
   title: Monolingual
 - section:
   - path: /datasets/catalog/opinion_abstracts
@@ -720,6 +724,10 @@ toc:
     title: squad
   - path: /datasets/catalog/story_cloze
     title: story_cloze (manual)
+  - path: /datasets/catalog/trec
+    title: trec
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
   title: Natural language understanding
 - section:
   - path: /datasets/catalog/deep1b
@@ -754,6 +762,8 @@ toc:
     title: natural_questions
   - path: /datasets/catalog/squad
     title: squad
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
   title: Open domain question answering
 - section:
   - path: /datasets/catalog/stl10
@@ -792,18 +802,20 @@ toc:
     title: squad
   - path: /datasets/catalog/story_cloze
     title: story_cloze (manual)
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
   title: Question answering
 - section:
   - path: /datasets/catalog/natural_questions
     title: natural_questions
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
   title: Question generation
 - section:
   - path: /datasets/catalog/coqa
     title: coqa
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa
-  - path: /datasets/catalog/trivia_qa
-    title: trivia_qa
   - path: /datasets/catalog/tydi_qa
     title: tydi_qa
   - path: /datasets/catalog/web_questions
@@ -832,6 +844,8 @@ toc:
     title: race
   - path: /datasets/catalog/squad
     title: squad
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
   title: Reading comprehension
 - section:
   - path: /datasets/catalog/criteo
@@ -980,8 +994,6 @@ toc:
     title: movie_lens
   - path: /datasets/catalog/movielens
     title: movielens
-  - path: /datasets/catalog/titanic
-    title: titanic
   - path: /datasets/catalog/web_graph
     title: web_graph
   - path: /datasets/catalog/web_nlg
@@ -1028,6 +1040,8 @@ toc:
     title: radon
   - path: /datasets/catalog/simpte
     title: simpte (manual)
+  - path: /datasets/catalog/titanic
+    title: titanic
   title: Tabular
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -1294,6 +1308,8 @@ toc:
     title: tiny_shakespeare
   - path: /datasets/catalog/trec
     title: trec
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
   - path: /datasets/catalog/unified_qa
     title: unified_qa
   - path: /datasets/catalog/universal_dependencies
@@ -1342,6 +1358,8 @@ toc:
     title: paws_x_wiki
   - path: /datasets/catalog/sentiment140
     title: sentiment140
+  - path: /datasets/catalog/trec
+    title: trec
   title: Text classification
 - section:
   - path: /datasets/catalog/aeslc
@@ -1390,6 +1408,8 @@ toc:
     title: squad
   - path: /datasets/catalog/story_cloze
     title: story_cloze (manual)
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
   title: Text generation
 - section:
   - path: /datasets/catalog/aeslc

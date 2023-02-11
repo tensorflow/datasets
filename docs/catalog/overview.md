@@ -402,6 +402,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`squad`](squad.md)
 *   [`story_cloze`](story_cloze.md)
 *   [`tedlium`](tedlium.md)
+*   [`trec`](trec.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Movies and tv shows`
 
@@ -449,6 +451,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`snli`](snli.md)
 *   [`squad`](squad.md)
 *   [`story_cloze`](story_cloze.md)
+*   [`trec`](trec.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Nearest neighbors`
 
@@ -474,6 +478,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`natural_questions`](natural_questions.md)
 *   [`squad`](squad.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Out of distribution detection`
 
@@ -497,16 +502,17 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`race`](race.md)
 *   [`squad`](squad.md)
 *   [`story_cloze`](story_cloze.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Question generation`
 
 *   [`natural_questions`](natural_questions.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Question answering`
 
 *   [`coqa`](coqa.md)
 *   [`cosmos_qa`](cosmos_qa.md)
-*   [`trivia_qa`](trivia_qa.md)
 *   [`tydi_qa`](tydi_qa.md)
 *   [`web_questions`](web_questions.md)
 *   [`xquad`](xquad.md)
@@ -525,6 +531,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`quac`](quac.md)
 *   [`race`](race.md)
 *   [`squad`](squad.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Recommendation`
 
@@ -625,7 +632,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`iris`](iris.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
-*   [`titanic`](titanic.md)
 *   [`web_graph`](web_graph.md)
 *   [`web_nlg`](web_nlg.md)
 *   [`wiki_bio`](wiki_bio.md)
@@ -655,6 +661,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`opinion_abstracts`](opinion_abstracts.md)
 *   [`radon`](radon.md)
 *   [`simpte`](simpte.md)
+*   [`titanic`](titanic.md)
 
 ### `Text`
 
@@ -790,6 +797,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`tedlium`](tedlium.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
+*   [`trivia_qa`](trivia_qa.md)
 *   [`unified_qa`](unified_qa.md)
 *   [`universal_dependencies`](universal_dependencies.md)
 *   [`unnatural_instructions`](unnatural_instructions.md)
@@ -816,6 +824,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`paws_wiki`](paws_wiki.md)
 *   [`paws_x_wiki`](paws_x_wiki.md)
 *   [`sentiment140`](sentiment140.md)
+*   [`trec`](trec.md)
 
 ### `Text generation`
 
@@ -842,6 +851,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`scientific_papers`](scientific_papers.md)
 *   [`squad`](squad.md)
 *   [`story_cloze`](story_cloze.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Text summarization`
 
