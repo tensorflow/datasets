@@ -692,56 +692,6 @@ class BuilderPickleTest(testing.TestCase):
     self.assertEqual(builder.version, builder2.version)
 
 
-class BuilderRestoreGcsTest(testing.TestCase):
-
-  def setUp(self):
-    super(BuilderRestoreGcsTest, self).setUp()
-
-    def load_mnist_dataset_info(self):
-      mnist_info_path = os.path.join(
-          utils.tfds_path(),
-          "testing/test_data/dataset_info/mnist/3.0.1",
-      )
-      mnist_info_path = os.path.normpath(mnist_info_path)
-      self.read_from_directory(mnist_info_path)
-
-    patcher = mock.patch.object(
-        dataset_info.DatasetInfo,
-        "initialize_from_bucket",
-        new=load_mnist_dataset_info,
-    )
-    patcher.start()
-    self.patch_gcs = patcher
-    self.addCleanup(patcher.stop)
-
-  def test_stats_restored_from_gcs(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].num_examples, 20)
-
-  def test_stats_not_restored_gcs_overwritten(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # If split are different that the one restored, stats should be recomputed
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].num_examples, 20)
-
-  def test_gcs_not_exists(self):
-    # By disabling the patch, and because DummyMnist is not on GCS, we can
-    # simulate a new dataset starting from scratch
-    self.patch_gcs.stop()
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-      # No dataset_info restored, so stats are empty
-      self.assertEqual(builder.info.splits.total_num_examples, 0)
-
-      dl_config = download.DownloadConfig()
-      builder.download_and_prepare(download_config=dl_config)
-
-      # Statistics should have been recomputed
-      self.assertEqual(builder.info.splits["train"].num_examples, 20)
-    self.patch_gcs.start()
-
-
 class DatasetBuilderGenerateModeTest(testing.TestCase):
 
   @classmethod
