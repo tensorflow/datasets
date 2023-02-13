@@ -35,10 +35,8 @@ so2sat/all/2.1.0
 so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
 voxforge/1.0.0
-wikipedia/20230201.aa/1.0.0
 wikipedia/20230201.ab/1.0.0
 wikipedia/20230201.ace/1.0.0
-wikipedia/20230201.ady/1.0.0
 wikipedia/20230201.af/1.0.0
 wikipedia/20230201.ak/1.0.0
 wikipedia/20230201.als/1.0.0
@@ -90,7 +88,6 @@ wikipedia/20230201.cv/1.0.0
 wikipedia/20230201.cy/1.0.0
 wikipedia/20230201.da/1.0.0
 wikipedia/20230201.de/1.0.0
-wikipedia/20230201.din/1.0.0
 wikipedia/20230201.diq/1.0.0
 wikipedia/20230201.dsb/1.0.0
 wikipedia/20230201.dty/1.0.0
@@ -152,7 +149,6 @@ wikipedia/20230201.is/1.0.0
 wikipedia/20230201.it/1.0.0
 wikipedia/20230201.iu/1.0.0
 wikipedia/20230201.ja/1.0.0
-wikipedia/20230201.jam/1.0.0
 wikipedia/20230201.jbo/1.0.0
 wikipedia/20230201.jv/1.0.0
 wikipedia/20230201.ka/1.0.0
@@ -187,7 +183,6 @@ wikipedia/20230201.li/1.0.0
 wikipedia/20230201.lij/1.0.0
 wikipedia/20230201.lmo/1.0.0
 wikipedia/20230201.ln/1.0.0
-wikipedia/20230201.lo/1.0.0
 wikipedia/20230201.lrc/1.0.0
 wikipedia/20230201.lt/1.0.0
 wikipedia/20230201.ltg/1.0.0
@@ -291,7 +286,6 @@ wikipedia/20230201.ti/1.0.0
 wikipedia/20230201.tk/1.0.0
 wikipedia/20230201.tl/1.0.0
 wikipedia/20230201.tn/1.0.0
-wikipedia/20230201.to/1.0.0
 wikipedia/20230201.tpi/1.0.0
 wikipedia/20230201.tr/1.0.0
 wikipedia/20230201.ts/1.0.0
@@ -305,7 +299,6 @@ wikipedia/20230201.ug/1.0.0
 wikipedia/20230201.uk/1.0.0
 wikipedia/20230201.ur/1.0.0
 wikipedia/20230201.uz/1.0.0
-wikipedia/20230201.ve/1.0.0
 wikipedia/20230201.vec/1.0.0
 wikipedia/20230201.vep/1.0.0
 wikipedia/20230201.vi/1.0.0
