@@ -4925,6 +4925,13 @@ wikipedia/20220620.zh-min-nan/1.0.0
 wikipedia/20220620.zh-yue/1.0.0
 wikipedia/20220620.zh/1.0.0
 wikipedia/20220620.zu/1.0.0
+wikipedia/20230201.aa/1.0.0
+wikipedia/20230201.ady/1.0.0
+wikipedia/20230201.din/1.0.0
+wikipedia/20230201.jam/1.0.0
+wikipedia/20230201.lo/1.0.0
+wikipedia/20230201.to/1.0.0
+wikipedia/20230201.ve/1.0.0
 wikipedia_toxicity_subtypes/EnglishSubtypes/0.3.1
 wikipedia_toxicity_subtypes/Multilingual/0.3.1
 wine_quality/red/1.0.0
