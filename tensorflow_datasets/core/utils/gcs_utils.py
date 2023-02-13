@@ -87,10 +87,18 @@ def gcs_listdir(dir_name: str) -> Optional[List[str]]:
   return [posixpath.join(dir_name, f.name) for f in root_dir.iterdir()]
 
 
-def gcs_dataset_info_files(dataset_name: str) -> Optional[List[epath.Path]]:
+def gcs_dataset_info_path(dataset_name: str) -> Optional[epath.Path]:
   """Return paths to the dataset info files of the given dataset in gs://tfds-data."""
   path = gcs_path(posixpath.join(GCS_DATASET_INFO_DIR, dataset_name))
   if _is_gcs_disabled or not exists(path):
+    return None
+  return path
+
+
+def gcs_dataset_info_files(dataset_name: str) -> Optional[List[epath.Path]]:
+  """Return paths to the dataset info files of the given dataset in gs://tfds-data."""
+  path = gcs_dataset_info_path(dataset_name)
+  if path is None:
     return None
   return list(path.iterdir())
 
