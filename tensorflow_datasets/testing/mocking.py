@@ -19,7 +19,6 @@ import contextlib
 import enum
 import functools
 import os
-import random
 from typing import Callable, Iterator, Optional
 from unittest import mock
 
@@ -304,21 +303,17 @@ class RandomFakeGenerator(object):
       max_value: Optional[int] = None,
       seed: int = 0,
   ):
-    self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
-    self._py_rng = random.Random(seed)
+    self._seed = seed
     self._features = features
     self._num_examples = num_examples
     self._num_sub_examples = num_sub_examples
     self._max_value = max_value
 
-  def _generate_random_string_array(self, shape):
+  def _generate_random_string_array(self, shape, rng):
     """Generates an array of random strings."""
-
     def rand_str():
       return ''.join(
-          self._rgn.choice(
-              list(' abcdefghij'), size=(self._py_rng.randint(10, 20))
-          )
+          rng.choice(list(' abcdefghij'), size=(rng.integers(low=10, high=20)))
       )
 
     if not shape:
@@ -328,7 +323,7 @@ class RandomFakeGenerator(object):
         [rand_str() for _ in range(np.prod(shape, dtype=np.int32))]
     ).reshape(shape)
 
-  def _generate_random_obj(self, feature, tensor_info):
+  def _generate_random_obj(self, feature, tensor_info, rng):
     """Generates a random tensor for a single feature."""
     # TODO(tfds): Could improve the fake generatiion:
     # * Use the feature statistics (min, max)
@@ -348,7 +343,8 @@ class RandomFakeGenerator(object):
       return list(generator)
 
     shape = [  # Fill dynamic shape with random values
-        self._rgn.randint(5, 50) if s is None else s for s in tensor_info.shape
+        rng.integers(low=5, high=50) if s is None else s
+        for s in tensor_info.shape
     ]
     if isinstance(feature, features_lib.ClassLabel):
       max_value = feature.num_classes
@@ -363,30 +359,36 @@ class RandomFakeGenerator(object):
     dtype = tensor_info.np_dtype
     # Generate some random values, depending on the dtype
     if dtype_utils.is_integer(dtype):
-      return self._rgn.randint(0, max_value, shape).astype(dtype)
+      return rng.integers(0, max_value, size=shape).astype(dtype)
     elif dtype_utils.is_floating(dtype):
-      return self._rgn.random_sample(shape).astype(dtype)
+      return rng.random(size=shape).astype(dtype)
     elif dtype_utils.is_bool(dtype):
-      return (self._rgn.random_sample(shape) < 0.5).astype(dtype)
+      return (rng.random(size=shape) < 0.5).astype(dtype)
     elif dtype_utils.is_string(dtype):
-      return self._generate_random_string_array(shape)
+      return self._generate_random_string_array(shape, rng)
     raise ValueError('Fake generation not supported for {}'.format(dtype))
 
-  def _generate_example(self):
-    """Generate the next example."""
+  def _generate_example(self, rng):
+    """Generates the next example."""
     root_feature = self._features
     flat_features = root_feature._flatten(root_feature)  # pylint: disable=protected-access
     flat_tensor_info = root_feature._flatten(root_feature.get_tensor_info())  # pylint: disable=protected-access
     flat_objs = [
-        self._generate_random_obj(feature, tensor_info)
+        self._generate_random_obj(feature, tensor_info, rng)
         for feature, tensor_info in zip(flat_features, flat_tensor_info)
     ]
     return root_feature._nest(flat_objs)  # pylint: disable=protected-access
 
   def __iter__(self):
-    """Yields all fake examples."""
+    """Yields all fake examples deterministically."""
+    rng = np.random.default_rng(self._seed)
     for _ in range(self._num_examples):
-      yield self._generate_example()
+      yield self._generate_example(rng)
+
+  def __getitem__(self, index: int):
+    """Returns a single fake example deterministically."""
+    rng = np.random.default_rng(self._seed + index)
+    return self._generate_example(rng)
 
 
 class EncodedRandomFakeGenerator(RandomFakeGenerator):

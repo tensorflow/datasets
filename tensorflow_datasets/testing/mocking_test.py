@@ -172,8 +172,8 @@ def test_max_values(mock_data):
     for ex in ds.take(50):
       assert tf.math.reduce_max(ex['label']).numpy() < 10
     # Test determinism (iterating twice should yield the same samples)
-    assert [ex['label'].numpy() for ex in ds.take(5)] == [1, 9, 2, 5, 3]
-    assert [ex['label'].numpy() for ex in ds.take(5)] == [1, 9, 2, 5, 3]
+    assert [ex['label'].numpy() for ex in ds.take(5)] == [8, 2, 9, 3, 1]
+    assert [ex['label'].numpy() for ex in ds.take(5)] == [8, 2, 9, 3, 1]
 
 
 def test_mock_data_auto(tmp_path):
