@@ -385,7 +385,6 @@ class WriterTest(testing.TestCase):
 
 
 class TfrecordsWriterBeamTest(testing.TestCase):
-  EMPTY_SPLIT_ERROR = 'Not a single example present in the PCollection!'
   NUM_SHARDS = 3
   RECORDS_TO_WRITE = [(i, str(i).encode('utf-8')) for i in range(10)]
   SHARDS_CONTENT = [
@@ -465,6 +464,13 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     self.assertEqual(all_recs, self.SHARDS_CONTENT)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
+
+  def test_empty_split(self):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError,
+        'The total number of generated examples is 0. This should be >0!',
+    ):
+      self._write(to_write=[])
 
   def test_write_tfrecord_sorted_by_key(self):
     """Stores records as tfrecord in a fixed number of shards without shuffling."""
