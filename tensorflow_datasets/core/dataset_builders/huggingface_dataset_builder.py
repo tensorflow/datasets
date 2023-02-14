@@ -165,41 +165,41 @@ def _convert_config_name(hf_config: Optional[str]) -> Optional[str]:
   return hf_config.lower()
 
 
-def _convert_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
+def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
   """Converts a Huggingface value to a TFDS compatible value."""
-  if isinstance(value, lazy_imports_lib.lazy_imports.PIL_Image.Image):
+  if isinstance(hf_value, lazy_imports_lib.lazy_imports.PIL_Image.Image):
     buffer = io.BytesIO()
-    value.save(fp=buffer, format=_IMAGE_ENCODING_FORMAT)
+    hf_value.save(fp=buffer, format=_IMAGE_ENCODING_FORMAT)
     return buffer.getvalue()
-  elif isinstance(value, datetime.datetime):
-    return int(value.timestamp())
+  elif isinstance(hf_value, datetime.datetime):
+    return int(hf_value.timestamp())
   elif isinstance(feature, feature_lib.ClassLabel):
-    return value
+    return hf_value
   elif isinstance(feature, feature_lib.Sequence):
-    if isinstance(value, list):
-      return value
+    if isinstance(hf_value, list):
+      return hf_value
     else:
-      return [value]
+      return [hf_value]
+  elif isinstance(feature, feature_lib.Translation):
+    if isinstance(hf_value, dict):
+      # Replaces `None` values with the default value.
+      return {
+          key: value if value is not None else _default_value(feature[key])
+          for key, value in hf_value.items()
+      }
   elif isinstance(feature, feature_lib.FeaturesDict):
-    if isinstance(value, dict):
-      return value
+    if isinstance(hf_value, dict):
+      return hf_value
     raise ValueError(
-        f"Feature is FeaturesDict, but did not get a dict but a: {value}"
+        f"Feature is FeaturesDict, but did not get a dict but a: {hf_value}"
     )
   elif isinstance(feature, feature_lib.Scalar):
-    if value is not None:
-      return value
-    elif dtype_utils.is_string(feature.np_dtype):
-      return ""
-    elif dtype_utils.is_integer(feature.np_dtype):
-      return 0
-    elif dtype_utils.is_bool(feature.np_dtype):
-      return False
-    elif dtype_utils.is_floating(feature.np_dtype):
-      return 0.0
-    raise ValueError(f"Could not get default value for {feature}")
+    if hf_value is not None:
+      return hf_value
+    else:
+      return _default_value(feature)
   raise ValueError(
-      f"Type {type(value)} of value {value} "
+      f"Type {type(hf_value)} of value {hf_value} "
       f"for feature {type(feature)} is not supported."
   )
 
@@ -223,6 +223,20 @@ def _extract_supervised_keys(hf_info):
     if sk_input is not None and sk_output is not None:
       return (sk_input, sk_output)
   return None
+
+
+def _default_value(
+    feature: feature_lib.FeatureConnector,
+) -> Union[bytes, int, bool, float]:
+  if dtype_utils.is_string(feature.np_dtype):
+    return b""
+  elif dtype_utils.is_integer(feature.np_dtype):
+    return 0
+  elif dtype_utils.is_bool(feature.np_dtype):
+    return False
+  elif dtype_utils.is_floating(feature.np_dtype):
+    return 0.0
+  raise ValueError(f"Could not get default value for {feature}")
 
 
 class HuggingfaceDatasetBuilder(

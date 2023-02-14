@@ -143,6 +143,18 @@ def test_convert_value_image():
   assert huggingface_dataset_builder._convert_value(image, image_feature)
 
 
+def test_convert_value_dict():
+  translation_feature = feature_lib.Translation(languages=["en", "fr", "de"])
+  translation = {
+      "de": b"Hallo Welt",
+      "en": b"Hello world",
+      "fr": None,  # Hugging Face supports `None` values
+  }
+  assert huggingface_dataset_builder._convert_value(
+      translation, translation_feature
+  ) == {"de": b"Hallo Welt", "en": b"Hello world", "fr": b""}
+
+
 # Encapsulate test parameters into a fixture to avoid `datasets` import during
 # tests collection.
 # https://docs.pytest.org/en/7.2.x/example/parametrize.html#deferring-the-setup-of-parametrized-resources
