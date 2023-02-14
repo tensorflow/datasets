@@ -621,6 +621,7 @@ class DatasetInfo(object):
     # Update fields which are not defined in the code. This means that
     # the code will overwrite fields which are present in
     # dataset_info.json.
+    fields_taken_from_code = []
     for field_name, field in self.as_proto.DESCRIPTOR.fields_by_name.items():
       field_value = getattr(self._info_proto, field_name)
       field_value_restored = getattr(parsed_proto, field_name)
@@ -638,13 +639,7 @@ class DatasetInfo(object):
       # If field is defined in code, we ignore the value.
       if is_defined:
         if field_value != field_value_restored:
-          logging.info(
-              (
-                  "Field info.%s from disk and from code do not match. "
-                  "Keeping the one from code."
-              ),
-              field_name,
-          )
+          fields_taken_from_code.append(field_name)
         continue
       # If the field is also not defined in JSON file, we do nothing
       if not is_defined_in_restored:
@@ -654,6 +649,15 @@ class DatasetInfo(object):
         field_value.MergeFrom(field_value_restored)
       else:
         setattr(self._info_proto, field_name, field_value_restored)
+
+    if fields_taken_from_code:
+      logging.info(
+          (
+              "Fields info.[%s] from disk and from code do not match. "
+              "Keeping the one from code."
+          ),
+          ", ".join(fields_taken_from_code),
+      )
 
     # Mark as fully initialized.
     self._fully_initialized = True
