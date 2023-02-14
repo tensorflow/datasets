@@ -394,6 +394,14 @@ class BeamWriter(object):
     self.inc_counter(name="serialized_examples")
     return (hkey, serialized_example)
 
+  def _check_num_examples(self, num_examples: int) -> int:
+    if num_examples <= 0:
+      raise ValueError(
+          f"The total number of generated examples is {num_examples}. This"
+          " should be >0!"
+      )
+    return num_examples
+
   def _write_final_shard(
       self,
       shardid_examples: Tuple[int, Iterable[type_utils.KeySerializedExample]],
@@ -502,7 +510,9 @@ class BeamWriter(object):
         | "LargestKey" >> beam.combiners.Top.Largest(1)
     )
     num_examples = (
-        serialized_examples | "CountExamples" >> beam.combiners.Count.Globally()
+        serialized_examples
+        | "CountExamples" >> beam.combiners.Count.Globally()
+        | "CheckValidNumExamples" >> beam.Map(self._check_num_examples)
     )
     total_size = beam.pvalue.AsSingleton(
         serialized_examples
