@@ -56,9 +56,6 @@ class _Extractor(object):
   def __init__(self, max_workers=None):
     max_workers = max_workers or multiprocessing.cpu_count()
     self._executor = concurrent.futures.ThreadPoolExecutor(
-        max_workers=max_workers
-    )
-    self._copy_executor = concurrent.futures.ThreadPoolExecutor(
         max_workers=max_workers * 4
     )
     self._pbar_path = None
@@ -78,7 +75,7 @@ class _Extractor(object):
     to_path = os.fspath(to_path)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
-    future = self._copy_executor.submit(
+    future = self._executor.submit(
         self._extract, from_path=path, method=extract_method, to_path=to_path
     )
     return promise.Promise.resolve(future)
@@ -103,7 +100,7 @@ class _Extractor(object):
         dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
         max_length_dst_path = max(max_length_dst_path, len(dst_path))
         file_utils.makedirs_cached(os.path.dirname(dst_path))
-        future = self._copy_executor.submit(_copy, handle.read(), dst_path)
+        future = self._executor.submit(_copy, handle.read(), dst_path)
         futures.append(future)
         self._pbar_path.update_total(1)
 

@@ -22,7 +22,7 @@ import itertools
 import os
 import re
 from typing import List
-import xml.etree.cElementTree as ElementTree
+from xml.etree import ElementTree
 
 from absl import logging
 from etils import epath
