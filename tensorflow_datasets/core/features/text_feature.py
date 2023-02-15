@@ -141,11 +141,7 @@ class Text(tensor_feature.Tensor):
       return
 
     # Error checking: ensure there are no metadata files
-    feature_files = [
-        f.name
-        for f in epath.Path(data_dir).iterdir()
-        if f.name.startswith(fname_prefix)
-    ]
+    feature_files = list(epath.Path(data_dir).glob("%s.text*" % feature_name))
     if feature_files:
       raise ValueError(
           "Text feature files found for feature %s but encoder_cls=None. "
