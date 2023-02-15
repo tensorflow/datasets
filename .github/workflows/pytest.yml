@@ -84,20 +84,28 @@ jobs:
     # * imagenet2012_corrupted requires imagemagick binary.
     # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
     # * github_api is run separately to not overuse API quota.
+    # * wmt is run separately to avoid worker hanging.
     - name: Run core tests
+      run: |
+        pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ env.PYTEST_NUM_SHARDS }} \
+          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
+          --ignore="tensorflow_datasets/image/lsun_test.py" \
+          --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
+          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
+          --ignore="tensorflow_datasets/import_without_tf_test.py" \
+          --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
+          --ignore="tensorflow_datasets/translate/wmt19_test.py"
+
+    # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
+    - name: Run leftover tests
+      if: ${{ matrix.shard-id == 1 }}
       uses: nick-fields/retry@v2
       with:
-        timeout_minutes: 5
+        timeout_minutes: 1
         max_attempts: 2
         retry_on: timeout
         command: |
-          pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ env.PYTEST_NUM_SHARDS }} -o faulthandler_timeout=30 \
-            --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
-            --ignore="tensorflow_datasets/image/lsun_test.py" \
-            --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
-            --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
-            --ignore="tensorflow_datasets/import_without_tf_test.py" \
-            --ignore="tensorflow_datasets/core/github_api/github_path_test.py"
+          pytest -vv -o faulthandler_timeout=10 tensorflow_datasets/translate/wmt19_test.py
 
   huggingface-pytest-job:
     # For merged PR, activate testing only on the master branch.
