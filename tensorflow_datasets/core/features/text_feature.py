@@ -127,25 +127,20 @@ class Text(tensor_feature.Tensor):
   def decode_example_np(self, example_data):
     return example_data
 
-  def save_metadata(self, data_dir, feature_name):
-    fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
+  def save_metadata(self, data_dir, feature_name: str) -> None:
     if not self.encoder:
       return
+    fname_prefix = _file_name_prefix_for_metadata(feature_name, data_dir)
     self.encoder.save_to_file(fname_prefix)
 
-  def load_metadata(self, data_dir, feature_name):
-    fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
-    encoder_cls = self._encoder_cls
-    if encoder_cls:
-      self._encoder = encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
+  def load_metadata(self, data_dir, feature_name: str) -> None:
+    if self._encoder_cls:
+      fname_prefix = _file_name_prefix_for_metadata(feature_name, data_dir)
+      self._encoder = self._encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
       return
 
     # Error checking: ensure there are no metadata files
-    feature_files = [
-        f.name
-        for f in epath.Path(data_dir).iterdir()
-        if f.name.startswith(fname_prefix)
-    ]
+    feature_files = list(epath.Path(data_dir).glob(f"{feature_name}.text*"))
     if feature_files:
       raise ValueError(
           "Text feature files found for feature %s but encoder_cls=None. "
@@ -220,3 +215,7 @@ class Text(tensor_feature.Tensor):
       )
       return dict(use_encoder=True)
     return feature_pb2.TextFeature()
+
+
+def _file_name_prefix_for_metadata(feature_name: str, data_dir) -> str:
+  return os.path.join(data_dir, f"{feature_name}.text")

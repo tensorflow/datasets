@@ -654,7 +654,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     # Clean up incomplete files from preempted workers.
     deleted_incomplete_files = []
-    for f in self.data_path.iterdir():
+    for f in self.data_path.glob(f"*{constants.INCOMPLETE_SUFFIX}*"):
       if utils.is_incomplete_file(f):
         deleted_incomplete_files.append(os.fspath(f))
         f.unlink()

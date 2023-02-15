@@ -17,6 +17,7 @@
 """Tests for tensorflow_datasets.core.deprecated.text_feature."""
 
 import numpy as np
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.deprecated.text import text_encoder
@@ -82,9 +83,8 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertEqual(text, text_f.ints2str(text_f.str2ints(text)))
 
   def test_save_load_metadata(self):
-    text_f = features.Text(
-        encoder=text_encoder.ByteTextEncoder(additional_tokens=['HI'])
-    )
+    encoder = text_encoder.ByteTextEncoder(additional_tokens=['HI'])
+    text_f = features.Text(encoder=encoder)
     text = 'HI 你好'
     ids = text_f.str2ints(text)
     self.assertEqual(1, ids[0])
@@ -93,9 +93,17 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
       feature_name = 'dummy'
       text_f.save_metadata(data_dir, feature_name)
 
-      new_f = features.Text()
+      # Test loading it from a newly instantiated feature.
+      new_f = features.Text(encoder=encoder)
       new_f.load_metadata(data_dir, feature_name)
-      self.assertEqual(ids, text_f.str2ints(text))
+      self.assertEqual(ids, new_f.str2ints(text))
+
+      # Test that loading it without an encoder results in an error.
+      with pytest.raises(
+          ValueError, match='Text feature files found for feature.+'
+      ):
+        new_f_no_encoder = features.Text()
+        new_f_no_encoder.load_metadata(data_dir, feature_name)
 
 
 if __name__ == '__main__':
