@@ -53,9 +53,10 @@ _SPLIT_FILENAMES = {
 class INaturalist2021(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for iNaturalist 2021 Competition dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '2.0.0': 'Update: Class indices follow the order in the JSON train file.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -71,7 +72,7 @@ class INaturalist2021(tfds.core.GeneratorBasedBuilder):
                     os.path.join(
                         'image_classification',
                         'i_naturalist2021',
-                        'i_naturalist2021_labels.txt',
+                        'i_naturalist2021_labels_ordered_by_json_id.txt',
                     )
                 )
             ),
