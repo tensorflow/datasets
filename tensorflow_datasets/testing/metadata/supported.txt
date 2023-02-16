@@ -5162,6 +5162,7 @@ wikipedia/20230201.sm/1.0.0
 wikipedia/20230201.sn/1.0.0
 wikipedia/20230201.so/1.0.0
 wikipedia/20230201.sq/1.0.0
+wikipedia/20230201.sr/1.0.0
 wikipedia/20230201.srn/1.0.0
 wikipedia/20230201.ss/1.0.0
 wikipedia/20230201.st/1.0.0
