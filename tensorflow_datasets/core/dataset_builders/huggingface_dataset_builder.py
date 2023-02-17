@@ -266,6 +266,7 @@ class HuggingfaceDatasetBuilder(
       ignore_verifications: bool = False,
       data_dir: Optional[epath.PathLike] = None,
       hf_hub_token: Optional[str] = None,
+      hf_num_proc: Optional[int] = None,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
@@ -289,7 +290,8 @@ class HuggingfaceDatasetBuilder(
     else:
       self._converted_builder_config = None
     self.name = _from_hf_to_tfds(hf_repo_id)
-    self.hf_hub_token = hf_hub_token
+    self._hf_hub_token = hf_hub_token
+    self._hf_num_proc = hf_num_proc
     super().__init__(
         file_format=file_format, config=tfds_config, data_dir=data_dir
     )
@@ -320,18 +322,15 @@ class HuggingfaceDatasetBuilder(
       self, dl_manager: download.DownloadManager
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
-    hf_datasets = lazy_imports_lib.lazy_imports.datasets
-    login_to_hf(self.hf_hub_token)
-    hf_dataset_dict = hf_datasets.load_dataset(
-        self._hf_repo_id,
-        self._hf_config,
+    login_to_hf(self._hf_hub_token)
+    self._hf_builder.download_and_prepare(
         ignore_verifications=self._ignore_verifications,
-        **self.config_kwargs,
+        num_proc=self._hf_num_proc,
     )
-    return {
-        split: self._generate_examples(data)
-        for split, data in hf_dataset_dict.items()
-    }
+    ds = self._hf_builder.as_dataset(
+        ignore_verifications=self._ignore_verifications
+    )
+    return {split: self._generate_examples(data) for split, data in ds.items()}
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
     dataset_info = self._info()
