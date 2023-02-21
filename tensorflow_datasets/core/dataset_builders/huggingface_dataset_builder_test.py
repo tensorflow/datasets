@@ -26,6 +26,14 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
 
 
+try:
+  hf_datasets = lazy_imports_lib.lazy_imports.datasets
+  _SKIP_TEST = False
+except (ImportError, ModuleNotFoundError):
+  # Some tests are only launched when `datasets` can be imported.
+  _SKIP_TEST = True
+
+
 class FakeHfDatasets:
 
   def list_datasets(self):
@@ -155,12 +163,55 @@ def test_convert_value_dict():
   ) == {"de": b"Hallo Welt", "en": b"Hello world", "fr": b""}
 
 
+@pytest.mark.skipif(_SKIP_TEST, reason="Hugging Face cannot be imported")
+def test_errors_are_ignored_or_not_when_generating_examples():
+  with mock.patch.object(
+      lazy_imports_lib.lazy_imports.datasets, "load_dataset"
+  ), mock.patch.object(
+      lazy_imports_lib.lazy_imports.datasets, "load_dataset_builder"
+  ) as load_dataset_builder_mock:
+    load_dataset_builder_mock.return_value.info.citation = "citation"
+    load_dataset_builder_mock.return_value.info.description = "description"
+    load_dataset_builder_mock.return_value.info.supervised_keys = None
+    load_dataset_builder_mock.return_value.info.version = "1.0.0"
+    load_dataset_builder_mock.return_value.info.features = {
+        "feature": hf_datasets.Value("int32")
+    }
+
+    with mock.patch.object(
+        huggingface_dataset_builder,
+        "_convert_example",
+        side_effect=AttributeError("one error"),
+    ):
+      # Ignore exceptions
+      builder = huggingface_dataset_builder.HuggingfaceDatasetBuilder(
+          hf_repo_id="foo/bar",
+          ignore_verifications=True,
+      )
+      for _ in builder._generate_examples(range(1)):
+        continue
+      assert builder.generation_errors == [[0, "one error"]]
+
+      # Do not ignore exceptions
+      builder = huggingface_dataset_builder.HuggingfaceDatasetBuilder(
+          hf_repo_id="foo/bar",
+          ignore_verifications=False,
+      )
+      huggingface_dataset_builder._convert_examples = mock.Mock(
+          side_effect=AttributeError("one error")
+      )
+      with pytest.raises(AttributeError, match="one error"):
+        for _ in builder._generate_examples(range(1)):
+          continue
+      assert not builder.generation_errors
+
+
 # Encapsulate test parameters into a fixture to avoid `datasets` import during
 # tests collection.
 # https://docs.pytest.org/en/7.2.x/example/parametrize.html#deferring-the-setup-of-parametrized-resources
 @pytest.fixture(params=["feat_dict", "audio"], name="features")
 def get_features(request):
-  hf_datasets = pytest.importorskip(
+  datasets = pytest.importorskip(
       "datasets",
       reason=(
           "`datasets` library has to be installed separately for Python >= 3.10"
@@ -172,13 +223,13 @@ def get_features(request):
 
   return {
       "feat_dict": (
-          hf_datasets.Features({
-              "id": hf_datasets.Value("string"),
+          datasets.Features({
+              "id": datasets.Value("string"),
               "meta": {
-                  "left_context": hf_datasets.Value("string"),
+                  "left_context": datasets.Value("string"),
                   "partial_evidence": [{
-                      "start_id": hf_datasets.Value("int32"),
-                      "meta": {"evidence_span": [hf_datasets.Value("string")]},
+                      "start_id": datasets.Value("int32"),
+                      "meta": {"evidence_span": [datasets.Value("string")]},
                   }],
               },
           }),
@@ -187,20 +238,18 @@ def get_features(request):
               "meta": feature_lib.FeaturesDict({
                   "left_context": feature_lib.Scalar(dtype=np.str_),
                   "partial_evidence": feature_lib.Sequence({
-                      "meta": feature_lib.FeaturesDict(
-                          {
-                              "evidence_span": feature_lib.Sequence(
-                                  feature_lib.Scalar(dtype=np.str_)
-                              ),
-                          }
-                      ),
+                      "meta": feature_lib.FeaturesDict({
+                          "evidence_span": feature_lib.Sequence(
+                              feature_lib.Scalar(dtype=np.str_)
+                          ),
+                      }),
                       "start_id": feature_lib.Scalar(dtype=np.int32),
                   }),
               }),
           }),
       ),
       "audio": (
-          hf_datasets.Audio(sampling_rate=48000),
+          datasets.Audio(sampling_rate=48000),
           feature_lib.Audio(sample_rate=48000),
       ),
   }[request.param]

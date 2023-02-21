@@ -24,8 +24,10 @@ Furthermore, this also enables creating datasets based on datasets in
 Huggingface.
 """
 from __future__ import annotations
+
 import datetime
 import io
+import os
 from typing import Any, Dict, Mapping, Optional, Union
 
 from etils import epath
@@ -76,9 +78,7 @@ def _convert_to_np_dtype(dtype: str) -> np.dtype:
 def extract_features(hf_features) -> feature_lib.FeatureConnector:
   """Converts Huggingface feature spec to TFDS feature spec."""
   hf_datasets = lazy_imports_lib.lazy_imports.datasets
-  if isinstance(hf_features, hf_datasets.Features) or isinstance(
-      hf_features, dict
-  ):
+  if isinstance(hf_features, (hf_datasets.Features, dict)):
     return feature_lib.FeaturesDict(
         {
             name: extract_features(hf_inner_feature)
@@ -198,6 +198,11 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
       return hf_value
     else:
       return _default_value(feature)
+  elif isinstance(feature, feature_lib.Audio):
+    is_audio_dict = isinstance(hf_value, dict) and "path" in hf_value
+    if is_audio_dict:
+      return hf_value["path"]
+    raise ValueError(f"{hf_value} should be a dict with a 'path' key")
   raise ValueError(
       f"Type {type(hf_value)} of value {hf_value} "
       f"for feature {type(feature)} is not supported."
@@ -260,6 +265,7 @@ class HuggingfaceDatasetBuilder(
       hf_config: Optional[str] = None,
       ignore_verifications: bool = False,
       data_dir: Optional[epath.PathLike] = None,
+      hf_hub_token: Optional[str] = None,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
@@ -283,11 +289,13 @@ class HuggingfaceDatasetBuilder(
     else:
       self._converted_builder_config = None
     self.name = _from_hf_to_tfds(hf_repo_id)
+    self.hf_hub_token = hf_hub_token
     super().__init__(
         file_format=file_format, config=tfds_config, data_dir=data_dir
     )
     if self._hf_config:
       self._builder_config = self._converted_builder_config
+    self.generation_errors = []
 
   @property
   def builder_config(self) -> Optional[Any]:
@@ -313,6 +321,7 @@ class HuggingfaceDatasetBuilder(
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
+    login_to_hf(self.hf_hub_token)
     hf_dataset_dict = hf_datasets.load_dataset(
         self._hf_repo_id,
         self._hf_config,
@@ -327,7 +336,13 @@ class HuggingfaceDatasetBuilder(
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
     dataset_info = self._info()
     for i, example in enumerate(data):
-      yield i, _convert_example(example, dataset_info)
+      try:
+        yield i, _convert_example(example, dataset_info)
+      except Exception as exception:  # pylint: disable=broad-except
+        if self._ignore_verifications:
+          self.generation_errors.append([example, str(exception)])
+        else:
+          raise exception
 
 
 def builder(
@@ -337,3 +352,11 @@ def builder(
   return HuggingfaceDatasetBuilder(
       hf_repo_id=hf_repo_id, hf_config=config, **builder_kwargs
   )
+
+
+def login_to_hf(hf_hub_token: Optional[str] = None):
+  """Logs in to Hugging Face Hub with the token as arg or env variable."""
+  hf_hub_token = hf_hub_token or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+  if hf_hub_token is not None:
+    huggingface_hub = lazy_imports_lib.lazy_imports.huggingface_hub
+    huggingface_hub.login(token=hf_hub_token)
