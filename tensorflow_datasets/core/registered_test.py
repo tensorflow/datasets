@@ -331,7 +331,7 @@ class ConfigBasedBuildersTest(testing.TestCase):
     ds_packages = registered._get_existing_dataset_packages(
         "testing/dummy_config_based_datasets"
     )
-    self.assertEqual(list(ds_packages.keys()), ["dummy_ds_1", "dummy_ds_2"])
+    self.assertEqual(set(ds_packages.keys()), {"dummy_ds_1", "dummy_ds_2"})
     pkg_path, builder_module = ds_packages["dummy_ds_1"]
     self.assertEndsWith(
         str(pkg_path),
