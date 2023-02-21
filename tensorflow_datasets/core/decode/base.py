@@ -118,6 +118,10 @@ class SkipDecoding(Decoder):
     """Forward the serialized feature field."""
     return serialized_example
 
+  def decode_example_np(self, serialized_example):
+    """Forward the serialized feature field."""
+    return serialized_example
+
 
 class DecoderFn(Decoder):
   """Decoder created by `tfds.decoder.make_decoder` decorator."""
