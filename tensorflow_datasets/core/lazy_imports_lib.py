@@ -228,6 +228,11 @@ class LazyImporter(object):
   def conllu(cls):
     return _try_import("conllu")
 
+  @utils.classproperty
+  @classmethod
+  def huggingface_hub(cls):
+    return _try_import("huggingface_hub")
+
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
 
