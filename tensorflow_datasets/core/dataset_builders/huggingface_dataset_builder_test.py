@@ -33,6 +33,10 @@ except (ImportError, ModuleNotFoundError):
   # Some tests are only launched when `datasets` can be imported.
   _SKIP_TEST = True
 
+skip_because_huggingface_cannot_be_imported = pytest.mark.skipif(
+    _SKIP_TEST, reason="Hugging Face cannot be imported"
+)
+
 
 class FakeHfDatasets:
 
@@ -163,7 +167,49 @@ def test_convert_value_dict():
   ) == {"de": b"Hallo Welt", "en": b"Hello world", "fr": b""}
 
 
-@pytest.mark.skipif(_SKIP_TEST, reason="Hugging Face cannot be imported")
+@skip_because_huggingface_cannot_be_imported
+def test_all_parameters_are_passed_down_to_hf():
+  with mock.patch.object(
+      lazy_imports_lib.lazy_imports.datasets, "load_dataset"
+  ), mock.patch.object(
+      lazy_imports_lib.lazy_imports.datasets, "load_dataset_builder"
+  ) as load_dataset_builder_mock:
+    load_dataset_builder_mock.return_value.info.citation = "citation"
+    load_dataset_builder_mock.return_value.info.description = "description"
+    load_dataset_builder_mock.return_value.info.supervised_keys = None
+    load_dataset_builder_mock.return_value.info.version = "1.0.0"
+    load_dataset_builder_mock.return_value.info.features = {
+        "feature": hf_datasets.Value("int32")
+    }
+    huggingface_dataset_builder.login_to_hf = mock.MagicMock()
+
+    builder = huggingface_dataset_builder.HuggingfaceDatasetBuilder(
+        file_format="tfrecord",
+        hf_repo_id="foo/bar",
+        hf_config="config",
+        ignore_verifications=True,
+        data_dir="/path/to/data",
+        hf_hub_token="SECRET_TOKEN",
+        hf_num_proc=100,
+        other_arg="this is another arg",
+    )
+    load_dataset_builder_mock.assert_called_once_with(
+        "foo/bar", "config", other_arg="this is another arg"
+    )
+
+    builder._split_generators(None)
+    huggingface_dataset_builder.login_to_hf.assert_called_once_with(
+        "SECRET_TOKEN"
+    )
+    load_dataset_builder_mock.return_value.download_and_prepare.assert_called_once_with(
+        ignore_verifications=True, num_proc=100
+    )
+    load_dataset_builder_mock.return_value.as_dataset.assert_called_once_with(
+        ignore_verifications=True
+    )
+
+
+@skip_because_huggingface_cannot_be_imported
 def test_errors_are_ignored_or_not_when_generating_examples():
   with mock.patch.object(
       lazy_imports_lib.lazy_imports.datasets, "load_dataset"
