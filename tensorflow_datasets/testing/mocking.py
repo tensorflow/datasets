@@ -301,6 +301,7 @@ class RandomFakeGenerator(object):
       num_examples: int,
       num_sub_examples: int = 1,
       max_value: Optional[int] = None,
+      constant_dynamic_shape: bool = False,
       seed: int = 0,
   ):
     self._seed = seed
@@ -308,6 +309,7 @@ class RandomFakeGenerator(object):
     self._num_examples = num_examples
     self._num_sub_examples = num_sub_examples
     self._max_value = max_value
+    self._constant_dynamic_shape = constant_dynamic_shape
 
   def _generate_random_string_array(self, shape, rng):
     """Generates an array of random strings."""
@@ -342,10 +344,13 @@ class RandomFakeGenerator(object):
       # Returns the list of examples in the nested dataset.
       return list(generator)
 
-    shape = [  # Fill dynamic shape with random values
-        rng.integers(low=5, high=50) if s is None else s
-        for s in tensor_info.shape
-    ]
+    if self._constant_dynamic_shape:
+      shape = [10 if s is None else s for s in tensor_info.shape]
+    else:
+      shape = [  # Fill dynamic shape with random values
+          rng.integers(low=5, high=50) if s is None else s
+          for s in tensor_info.shape
+      ]
     if isinstance(feature, features_lib.ClassLabel):
       max_value = feature.num_classes
     elif isinstance(feature, features_lib.Text) and feature.vocab_size:
