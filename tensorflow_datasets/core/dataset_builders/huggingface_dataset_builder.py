@@ -43,6 +43,7 @@ from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _IMAGE_ENCODING_FORMAT = "png"
@@ -308,11 +309,30 @@ class HuggingfaceDatasetBuilder(
   ) -> Optional[dataset_builder.BuilderConfig]:
     return self._converted_builder_config
 
+  def _download_and_prepare_for_hf(self) -> Mapping[str, Any]:
+    login_to_hf(self._hf_hub_token)
+    self._hf_builder.download_and_prepare(
+        ignore_verifications=self._ignore_verifications,
+        num_proc=self._hf_num_proc,
+    )
+    return self._hf_builder.as_dataset(
+        ignore_verifications=self._ignore_verifications
+    )
+
+  def _hf_features(self):
+    if self._hf_info.features is not None:
+      return self._hf_info.features
+    # We need to download and prepare the data to know its features.
+    ds = self._download_and_prepare_for_hf()
+    for split in ds.values():
+      return split.info
+
+  @py_utils.memoize()
   def _info(self) -> dataset_info_lib.DatasetInfo:
     return dataset_info_lib.DatasetInfo(
         builder=self,
         description=self._hf_info.description,
-        features=extract_features(self._hf_info.features),
+        features=extract_features(self._hf_features()),
         citation=self._hf_info.citation,
         license=self._hf_info.license,
         supervised_keys=_extract_supervised_keys(self._hf_info),
@@ -322,14 +342,7 @@ class HuggingfaceDatasetBuilder(
       self, dl_manager: download.DownloadManager
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
-    login_to_hf(self._hf_hub_token)
-    self._hf_builder.download_and_prepare(
-        ignore_verifications=self._ignore_verifications,
-        num_proc=self._hf_num_proc,
-    )
-    ds = self._hf_builder.as_dataset(
-        ignore_verifications=self._ignore_verifications
-    )
+    ds = self._download_and_prepare_for_hf()
     return {split: self._generate_examples(data) for split, data in ds.items()}
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
