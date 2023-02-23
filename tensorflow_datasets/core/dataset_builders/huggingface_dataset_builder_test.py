@@ -202,10 +202,10 @@ def test_all_parameters_are_passed_down_to_hf():
         "SECRET_TOKEN"
     )
     load_dataset_builder_mock.return_value.download_and_prepare.assert_called_once_with(
-        ignore_verifications=True, num_proc=100
+        verification_mode="all_checks", num_proc=100
     )
     load_dataset_builder_mock.return_value.as_dataset.assert_called_once_with(
-        ignore_verifications=True
+        verification_mode="all_checks"
     )
 
 
