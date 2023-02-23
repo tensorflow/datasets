@@ -84,6 +84,7 @@ class _AudioDecoder(abc.ABC):
     self._np_dtype = np_dtype
     self._dtype = tf.dtypes.as_dtype(self._np_dtype)
     self._shape = shape
+    self._channels = shape[1] if len(shape) > 1 else 1
 
   @abc.abstractmethod
   def encode_audio(
@@ -98,11 +99,21 @@ class _AudioDecoder(abc.ABC):
     raise NotImplementedError
 
 
-def _pydub_load_audio(fobj: BinaryIO, file_format: Optional[str]) -> np.ndarray:
+def _pydub_load_audio(
+    fobj: BinaryIO, file_format: Optional[str], channels: int
+) -> np.ndarray:
   """Read audio using pydub library."""
   pydub = lazy_imports_lib.lazy_imports.pydub
 
   audio_segment = pydub.AudioSegment.from_file(fobj, format=file_format)
+  if channels != audio_segment.channels:
+    logging.info(
+        'Modifying audio segment from %s to %s channel(s).',
+        audio_segment.channels,
+        channels,
+    )
+    audio_segment = audio_segment.set_channels(channels)
+
   raw_samples = np.array(audio_segment.get_array_of_samples())
 
   if audio_segment.channels > 1:
@@ -112,7 +123,9 @@ def _pydub_load_audio(fobj: BinaryIO, file_format: Optional[str]) -> np.ndarray:
 
 
 def _pydub_decode_audio(
-    audio_tensor: tf.Tensor, file_format_tensor: tf.experimental.Optional
+    audio_tensor: tf.Tensor,
+    file_format_tensor: tf.experimental.Optional,
+    channels: int,
 ) -> np.ndarray:
   """Decode audio from tf.Tensor using pydub library."""
   fobj = io.BytesIO(audio_tensor.numpy())
@@ -120,7 +133,7 @@ def _pydub_decode_audio(
     file_format = file_format_tensor.get_value().numpy()
   else:
     file_format = None
-  return _pydub_load_audio(fobj, file_format)
+  return _pydub_load_audio(fobj, file_format, channels)
 
 
 class _LazyDecoder(_AudioDecoder):
@@ -175,7 +188,9 @@ class _LazyDecoder(_AudioDecoder):
       # pydub.AudioSegment.get_array_of_samples returns an array with type code
       # `b`, `h` or `i` which can be all converted to `tf.int32`
       decoded_audio_tensor = tf.py_function(
-          _pydub_decode_audio, [audio_tensor, file_format_tensor], tf.int32
+          _pydub_decode_audio,
+          [audio_tensor, file_format_tensor, self._channels],
+          tf.int32,
       )
 
     decoded_audio_tensor.set_shape(self._shape)
@@ -189,7 +204,7 @@ class _EagerDecoder(_AudioDecoder):
   def encode_audio(
       self, fobj: BinaryIO, file_format: Optional[str]
   ) -> np.ndarray:
-    audio = _pydub_load_audio(fobj, file_format)
+    audio = _pydub_load_audio(fobj, file_format, self._channels)
     return audio.astype(self._np_dtype)
 
   def decode_audio(self, audio_tensor: tf.Tensor) -> tf.Tensor:
@@ -207,6 +222,9 @@ class Audio(tensor_feature.Tensor):
 
   By default, Audio features are decoded as the raw integer wave form
   `tf.Tensor(shape=(None,), dtype=tf.int64)`.
+
+  When encoding an audio with a different number of channels than expected by
+  the feature, TFDS automatically tries to correct the number of channels.
   """
 
   def __init__(
@@ -273,7 +291,7 @@ class Audio(tensor_feature.Tensor):
       return audio_or_path_or_fobj
     elif isinstance(audio_or_path_or_fobj, epath.PathLikeCls):
       filename = os.fspath(audio_or_path_or_fobj)
-      file_format = self._file_format or filename.split('.')[-1]
+      file_format = _infer_file_format(self._file_format, filename)
       with tf.io.gfile.GFile(filename, 'rb') as audio_f:
         try:
           audio = self._audio_decoder.encode_audio(audio_f, file_format)
@@ -369,3 +387,15 @@ def _save_wav(buff, data, rate) -> None:
     waveobj.setsampwidth(bit_depth // 8)
     waveobj.setcomptype('NONE', 'NONE')
     waveobj.writeframes(encoded_wav)
+
+
+def _infer_file_format(
+    file_format: Optional[str], filename: str
+) -> Optional[str]:
+  """Simple heuristics to infer file format. Pydub will use FFMPEG otherwise."""
+  if file_format is not None:
+    return file_format
+  suffix = epath.Path(filename).suffix
+  if suffix.startswith('.'):
+    return suffix[1:]
+  return None
