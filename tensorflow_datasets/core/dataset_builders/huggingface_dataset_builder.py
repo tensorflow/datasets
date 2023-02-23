@@ -276,7 +276,6 @@ class HuggingfaceDatasetBuilder(
   ):
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
-    self._ignore_verifications = ignore_verifications
     self.config_kwargs = config_kwargs
     tfds_config = _convert_config_name(hf_config)
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
@@ -298,6 +297,9 @@ class HuggingfaceDatasetBuilder(
     self._hf_hub_token = hf_hub_token
     self._hf_num_proc = hf_num_proc
     self._tfds_num_proc = tfds_num_proc
+    self._verification_mode = (
+        "all_checks" if ignore_verifications else "no_checks"
+    )
     super().__init__(
         file_format=file_format, config=tfds_config, data_dir=data_dir
     )
@@ -317,11 +319,11 @@ class HuggingfaceDatasetBuilder(
   def _download_and_prepare_for_hf(self) -> Mapping[str, Any]:
     login_to_hf(self._hf_hub_token)
     self._hf_builder.download_and_prepare(
-        ignore_verifications=self._ignore_verifications,
         num_proc=self._hf_num_proc,
+        verification_mode=self._verification_mode,
     )
     return self._hf_builder.as_dataset(
-        ignore_verifications=self._ignore_verifications
+        verification_mode=self._verification_mode,
     )
 
   def _hf_features(self):
