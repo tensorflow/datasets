@@ -170,19 +170,15 @@ def _convert_config_name(hf_config: Optional[str]) -> Optional[str]:
 
 def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
   """Converts a Huggingface value to a TFDS compatible value."""
-  if isinstance(hf_value, lazy_imports_lib.lazy_imports.PIL_Image.Image):
-    buffer = io.BytesIO()
-    hf_value.save(fp=buffer, format=_IMAGE_ENCODING_FORMAT)
-    return buffer.getvalue()
-  elif isinstance(hf_value, datetime.datetime):
+  if isinstance(hf_value, datetime.datetime):
     return int(hf_value.timestamp())
   elif isinstance(feature, feature_lib.ClassLabel):
     return hf_value
-  elif isinstance(feature, feature_lib.Sequence):
-    if isinstance(hf_value, list):
+  elif isinstance(feature, feature_lib.Scalar):
+    if hf_value is not None:
       return hf_value
     else:
-      return [hf_value]
+      return _default_value(feature)
   elif isinstance(feature, feature_lib.Translation):
     if isinstance(hf_value, dict):
       # Replaces `None` values with the default value.
@@ -196,16 +192,20 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
     raise ValueError(
         f"Feature is FeaturesDict, but did not get a dict but a: {hf_value}"
     )
-  elif isinstance(feature, feature_lib.Scalar):
-    if hf_value is not None:
+  elif isinstance(feature, feature_lib.Sequence):
+    if isinstance(hf_value, list):
       return hf_value
     else:
-      return _default_value(feature)
+      return [hf_value]
   elif isinstance(feature, feature_lib.Audio):
     is_audio_dict = isinstance(hf_value, dict) and "path" in hf_value
     if is_audio_dict:
       return hf_value["path"]
     raise ValueError(f"{hf_value} should be a dict with a 'path' key")
+  elif isinstance(hf_value, lazy_imports_lib.lazy_imports.PIL_Image.Image):
+    buffer = io.BytesIO()
+    hf_value.save(fp=buffer, format=_IMAGE_ENCODING_FORMAT)
+    return buffer.getvalue()
   raise ValueError(
       f"Type {type(hf_value)} of value {hf_value} "
       f"for feature {type(feature)} is not supported."
