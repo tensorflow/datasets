@@ -26,9 +26,11 @@ Huggingface.
 from __future__ import annotations
 
 import datetime
+import functools
 import io
+import multiprocessing
 import os
-from typing import Any, Dict, Mapping, Optional, Union
+from typing import Any, Dict, Mapping, Optional, Tuple, Union
 
 from etils import epath
 import numpy as np
@@ -211,15 +213,16 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
 
 
 def _convert_example(
+    index: int,
     example: Mapping[str, Any],
-    dataset_info: dataset_info_lib.DatasetInfo,
-) -> Mapping[str, Any]:
+    features: feature_lib.FeaturesDict,
+) -> Tuple[int, Mapping[str, Any]]:
   """Converts an example from Huggingface format to TFDS format."""
-  features = dataset_info.features
-  return {
+  converted_example = {
       name: _convert_value(value, features[name])
       for name, value in example.items()
   }
+  return index, converted_example
 
 
 def _extract_supervised_keys(hf_info):
@@ -268,6 +271,7 @@ class HuggingfaceDatasetBuilder(
       data_dir: Optional[epath.PathLike] = None,
       hf_hub_token: Optional[str] = None,
       hf_num_proc: Optional[int] = None,
+      tfds_num_proc: Optional[int] = None,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
@@ -293,6 +297,7 @@ class HuggingfaceDatasetBuilder(
     self.name = _from_hf_to_tfds(hf_repo_id)
     self._hf_hub_token = hf_hub_token
     self._hf_num_proc = hf_num_proc
+    self._tfds_num_proc = tfds_num_proc
     super().__init__(
         file_format=file_format, config=tfds_config, data_dir=data_dir
     )
@@ -347,14 +352,16 @@ class HuggingfaceDatasetBuilder(
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
     dataset_info = self._info()
-    for i, example in enumerate(data):
-      try:
-        yield i, _convert_example(example, dataset_info)
-      except Exception as exception:  # pylint: disable=broad-except
-        if self._ignore_verifications:
-          self.generation_errors.append([example, str(exception)])
-        else:
-          raise exception
+    if self._tfds_num_proc is None:
+      for index, example in enumerate(data):
+        yield _convert_example(index, example, dataset_info.features)
+    else:
+      with multiprocessing.Pool(processes=self._tfds_num_proc) as pool:
+        examples = pool.starmap(
+            functools.partial(_convert_example, features=dataset_info.features),
+            enumerate(data),
+        )
+        yield from examples
 
 
 def builder(
