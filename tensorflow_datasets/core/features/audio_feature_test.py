@@ -195,6 +195,20 @@ class AudioFeatureTest(
     ):
       features.Audio(file_format='flac', lazy_decode=True)
 
+  @parameterized.parameters([(None,), 2, (10,)], [(None, 2), 1, (10, 2)])
+  def test_number_of_channels_is_changed(
+      self, feature_shape, example_num_channels, example_output_shape
+  ):
+    feature = features.Audio(
+        file_format='wav', dtype=np.int16, shape=feature_shape
+    )
+    _, tmp_file = tempfile.mkstemp()
+    np_audio = _create_np_audio(example_num_channels, np.int16)
+    _write_audio_file(np_audio, tmp_file, 'wav')
+    self.assertEqual(
+        feature.encode_example(tmp_file).shape, example_output_shape
+    )
+
 
 def _shape_for_channels(num_channels, *, length=None):
   """Returns the shape."""
