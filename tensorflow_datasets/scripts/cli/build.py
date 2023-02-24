@@ -21,7 +21,7 @@ import importlib
 import json
 import os
 import typing
-from typing import Dict, Iterator, Optional, Tuple, Type, Union
+from typing import Any, Dict, Iterator, Optional, Tuple, Type, Union
 
 from absl import logging
 from etils import epath
@@ -195,7 +195,16 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
           f'Available values: {format_values} (see `tfds.core.FileFormat`).'
       ),
   )
+  generation_group.add_argument(
+      '--download_and_prepare_kwargs',
+      type=str,
+      help=(
+          'JSON formatted string that specifies the kwargs for the '
+          '`download_and_prepare` method in `DatasetBuilder`. For example: '
+          '--download_and_prepare_kwargs="{\'download_config\': {\'num_shards\': 42}}"'
+      ))
 
+  # **** Publish options ****
   publish_group = build_parser.add_argument_group(
       'Publishing',
       description='Options for publishing successfully created datasets.',
@@ -558,24 +567,62 @@ def _publish_data(
     filepath.copy(dst=publish_data_dir / filepath.name, overwrite=overwrite)
 
 
+def _get_download_and_prepare_kwargs(
+    args: argparse.Namespace) -> Dict[str, Any]:
+  """Returns the parsed kwargs from the given arguments."""
+  arg = args.download_and_prepare_kwargs
+  if arg:
+    error_msg = (
+        '--download_and_prepare_kwargs must be a json formatted string that '
+        'encodes the kwargs for download_and_prepare. For example: '
+        '--download_and_prepare_kwargs="{\'download_config\': {\'num_shards\':'
+        ' 42}}".\n'
+        f'Got: {arg}')
+    if arg.startswith('{'):
+      try:
+        return json.loads(arg)
+      except json.decoder.JSONDecodeError as e:
+        raise ValueError(error_msg) from e
+    else:
+      raise ValueError(error_msg)
+  return {}
+
+
 def _make_download_config(
     args: argparse.Namespace,
     dataset_name: str,
 ) -> tfds.download.DownloadConfig:
   """Generate the download and prepare configuration."""
-  # Load the download config
+
+  download_and_prepare_kwargs = _get_download_and_prepare_kwargs(args)
+  dc_kwargs = download_and_prepare_kwargs.pop('download_config', {})
+
   manual_dir = args.manual_dir
   if args.add_name_to_manual_dir:
     manual_dir = os.path.join(manual_dir, dataset_name)
+  dc_kwargs['manual_dir'] = manual_dir
 
-  dl_config = tfds.download.DownloadConfig(
-      extract_dir=args.extract_dir,
-      manual_dir=manual_dir,
-      download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
-      max_examples_per_split=args.max_examples_per_split,
-      register_checksums=args.register_checksums,
-      force_checksums_validation=args.force_checksums_validation,
-  )
+  # Various settings can be specified in two places. If the user used a direct
+  # flag, e.g. `--extract_dir``, then we override any potential setting in the
+  # `download_and_prepare_kwargs`` argument.
+  if args.extract_dir:
+    dc_kwargs['extract_dir'] = args.extract_dir
+
+  if 'download_mode' not in dc_kwargs:
+    download_mode = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
+  else:
+    enum_value = dc_kwargs['download_mode'].upper()
+    download_mode = tfds.download.GenerateMode[enum_value]
+  dc_kwargs['download_mode'] = download_mode
+
+  if args.max_examples_per_split is not None:
+    dc_kwargs['max_examples_per_split'] = args.max_examples_per_split
+
+  # The following arguments have default values so always use them from args.
+  dc_kwargs['register_checksums'] = args.register_checksums
+  dc_kwargs['force_checksums_validation'] = args.force_checksums_validation
+
+  dl_config = tfds.download.DownloadConfig(**dc_kwargs)
 
   # Add Apache Beam options to download config
   try:
