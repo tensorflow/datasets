@@ -22,13 +22,6 @@ from tensorflow_datasets.datasets.plant_leaves import plant_leaves_dataset_build
 class PlantLeavesTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = plant_leaves_dataset_builder.Builder
   SPLITS = {"train": 22}
-  # NOTE: Must match file names in the test directory.
-  DL_EXTRACT_RESULT = {
-      fname: fname
-      for fname in [
-          "{0:04d}_1.JPG".format(label_number) for label_number in range(1, 23)
-      ]
-  }
 
 
 if __name__ == "__main__":

@@ -46,8 +46,8 @@ _LABEL_MAPPING = [
     ("0021", "Lemon (P10) diseased"),
     ("0022", "Chinar (P11) diseased"),
 ]
-_URLS_FNAME = "image_classification/plant_leaves_urls.txt"
-_MAX_DOWNLOAD_RETRY = 10
+
+_DOWNLOAD_URL = "https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/hb74ynkjcn-1.zip"
 
 
 class DownloadRetryLimitReachedError(Exception):
@@ -75,42 +75,28 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     # Batch download for this dataset is broken, therefore images have to be
     # downloaded independently from a list of urls.
-    with tf.io.gfile.GFile(os.fspath(tfds.core.tfds_path(_URLS_FNAME))) as f:
-      name_to_url_map = {
-          os.path.basename(l.strip()): l.strip() for l in f.readlines()
-      }
-      retry_count = 0
-      image_files = {}
-      # We have to retry due to rare 504 HTTP errors. Downloads are cached,
-      # therefore this shouldn't cause successful downloads to be retried.
-      while True:
-        try:
-          image_files = dl_manager.download(name_to_url_map)
-          break
-        except tfds.download.DownloadError:
-          retry_count += 1
-          if retry_count == _MAX_DOWNLOAD_RETRY:
-            raise DownloadRetryLimitReachedError(
-                "Retry limit reached. Try downloading the dataset again."
-            )
-      return [
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files}
-          )
-      ]
+    extract_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={'extract_path': extract_path}
+        )
+    ]
 
-  def _generate_examples(self, image_files):
+  def _generate_examples(self, extract_path):
     """Yields examples."""
-    label_map = {pattern: label for pattern, label in _LABEL_MAPPING}
-    regexp = re.compile(r"^(\d\d\d\d)_.*\.JPG$")
-    # Assigns labels to images based on label mapping.
-    for original_fname, fpath in image_files.items():
-      match = regexp.match(original_fname)
-      if match and match.group(1) in label_map:
-        label = label_map[match.group(1)]
-        record = {
-            "image": fpath,
-            "image/filename": original_fname,
-            "label": label,
-        }
-        yield original_fname, record
+    data_path = os.path.join(extract_path, "hb74ynkjcn-1")
+    for plant_species in tf.io.gfile.listdir(data_path):
+        plant_species_path = os.path.join(data_path, plant_species)
+        for plant_condition in tf.io.gfile.listdir(plant_species_path):
+            label = plant_species + " " + plant_condition
+            plant_condition_path = os.path.join(plant_species_path, plant_condition)
+            for original_fname in tf.io.gfile.listdir(plant_condition_path):
+                fpath = os.path.join(plant_condition_path, original_fname)
+                record = {
+                    "image": fpath,
+                    "image/filename": original_fname,
+                    "label": label,
+                }
+                yield original_fname, record
+
