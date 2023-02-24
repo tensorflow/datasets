@@ -85,9 +85,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, extract_path):
     """Yields examples."""
-    data_path = os.path.join(extract_path, "hb74ynkjcn-1")
-    for plant_species in tf.io.gfile.listdir(data_path):
-        plant_species_path = os.path.join(data_path, plant_species)
+    for plant_species in tf.io.gfile.listdir(extract_path):
+        plant_species_path = os.path.join(extract_path, plant_species)
         for plant_condition in tf.io.gfile.listdir(plant_species_path):
             label = plant_species + " " + plant_condition
             plant_condition_path = os.path.join(plant_species_path, plant_condition)
