@@ -31,6 +31,12 @@ estimating semantic image-text-content matching.
 The image-text-pairs have been extracted from the Common Crawl web data dump and
 are from random web pages crawled between 2014 and 2021.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/laion-400m">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://laion.ai/blog/laion-400-open-dataset/](https://laion.ai/blog/laion-400-open-dataset/)
 

@@ -179,6 +179,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`imagenet_a`](imagenet_a.md)
 *   [`imagenet_lt`](imagenet_lt.md)
+*   [`imagenet_pi`](imagenet_pi.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet_r`](imagenet_r.md)
 *   [`imagenet_resized`](imagenet_resized.md)
 *   [`imagenet_sketch`](imagenet_sketch.md)

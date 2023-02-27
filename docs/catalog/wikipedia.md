@@ -12,11 +12,6 @@
 # `wikipedia`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Wikipedia dataset containing cleaned articles of all languages. The datasets are
@@ -70,7 +65,7 @@ title   | Text         |       | string |
 ```
 
 
-## wikipedia/20230201.aa (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.aa (default config)
 
 *   **Config description**: Wikipedia dataset for aa, parsed from 20230201 dump.
 
@@ -92,7 +87,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230201.ab <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ab
 
 *   **Config description**: Wikipedia dataset for ab, parsed from 20230201 dump.
 
@@ -147,7 +142,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ace <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ace
 
 *   **Config description**: Wikipedia dataset for ace, parsed from 20230201
     dump.
@@ -203,7 +198,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ady <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ady
 
 *   **Config description**: Wikipedia dataset for ady, parsed from 20230201
     dump.
@@ -259,7 +254,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.af <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.af
 
 *   **Config description**: Wikipedia dataset for af, parsed from 20230201 dump.
 
@@ -314,7 +309,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ak <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ak
 
 *   **Config description**: Wikipedia dataset for ak, parsed from 20230201 dump.
 
@@ -369,7 +364,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.als <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.als
 
 *   **Config description**: Wikipedia dataset for als, parsed from 20230201
     dump.
@@ -425,7 +420,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.am <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.am
 
 *   **Config description**: Wikipedia dataset for am, parsed from 20230201 dump.
 
@@ -480,7 +475,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.an <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.an
 
 *   **Config description**: Wikipedia dataset for an, parsed from 20230201 dump.
 
@@ -535,7 +530,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ang <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ang
 
 *   **Config description**: Wikipedia dataset for ang, parsed from 20230201
     dump.
@@ -591,7 +586,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ar <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ar
 
 *   **Config description**: Wikipedia dataset for ar, parsed from 20230201 dump.
 
@@ -646,7 +641,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.arc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.arc
 
 *   **Config description**: Wikipedia dataset for arc, parsed from 20230201
     dump.
@@ -702,7 +697,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.arz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.arz
 
 *   **Config description**: Wikipedia dataset for arz, parsed from 20230201
     dump.
@@ -758,7 +753,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.as <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.as
 
 *   **Config description**: Wikipedia dataset for as, parsed from 20230201 dump.
 
@@ -813,7 +808,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ast <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ast
 
 *   **Config description**: Wikipedia dataset for ast, parsed from 20230201
     dump.
@@ -869,7 +864,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.atj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.atj
 
 *   **Config description**: Wikipedia dataset for atj, parsed from 20230201
     dump.
@@ -925,7 +920,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.av <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.av
 
 *   **Config description**: Wikipedia dataset for av, parsed from 20230201 dump.
 
@@ -980,7 +975,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ay <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ay
 
 *   **Config description**: Wikipedia dataset for ay, parsed from 20230201 dump.
 
@@ -1035,7 +1030,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.az <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.az
 
 *   **Config description**: Wikipedia dataset for az, parsed from 20230201 dump.
 
@@ -1090,7 +1085,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.azb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.azb
 
 *   **Config description**: Wikipedia dataset for azb, parsed from 20230201
     dump.
@@ -1146,7 +1141,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ba <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ba
 
 *   **Config description**: Wikipedia dataset for ba, parsed from 20230201 dump.
 
@@ -1168,7 +1163,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230201.bar <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bar
 
 *   **Config description**: Wikipedia dataset for bar, parsed from 20230201
     dump.
@@ -1224,7 +1219,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bcl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bcl
 
 *   **Config description**: Wikipedia dataset for bcl, parsed from 20230201
     dump.
@@ -1280,7 +1275,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.be <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.be
 
 *   **Config description**: Wikipedia dataset for be, parsed from 20230201 dump.
 
@@ -1335,7 +1330,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bg
 
 *   **Config description**: Wikipedia dataset for bg, parsed from 20230201 dump.
 
@@ -1390,7 +1385,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bh
 
 *   **Config description**: Wikipedia dataset for bh, parsed from 20230201 dump.
 
@@ -1445,7 +1440,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bi
 
 *   **Config description**: Wikipedia dataset for bi, parsed from 20230201 dump.
 
@@ -1500,7 +1495,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bjn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bjn
 
 *   **Config description**: Wikipedia dataset for bjn, parsed from 20230201
     dump.
@@ -1556,7 +1551,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bm
 
 *   **Config description**: Wikipedia dataset for bm, parsed from 20230201 dump.
 
@@ -1611,7 +1606,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bn
 
 *   **Config description**: Wikipedia dataset for bn, parsed from 20230201 dump.
 
@@ -1666,7 +1661,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bo
 
 *   **Config description**: Wikipedia dataset for bo, parsed from 20230201 dump.
 
@@ -1721,7 +1716,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bpy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bpy
 
 *   **Config description**: Wikipedia dataset for bpy, parsed from 20230201
     dump.
@@ -1777,7 +1772,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.br <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.br
 
 *   **Config description**: Wikipedia dataset for br, parsed from 20230201 dump.
 
@@ -1832,7 +1827,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bs
 
 *   **Config description**: Wikipedia dataset for bs, parsed from 20230201 dump.
 
@@ -1887,7 +1882,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bug <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bug
 
 *   **Config description**: Wikipedia dataset for bug, parsed from 20230201
     dump.
@@ -1943,7 +1938,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.bxr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.bxr
 
 *   **Config description**: Wikipedia dataset for bxr, parsed from 20230201
     dump.
@@ -1999,7 +1994,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ca <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ca
 
 *   **Config description**: Wikipedia dataset for ca, parsed from 20230201 dump.
 
@@ -2054,7 +2049,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.cdo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.cdo
 
 *   **Config description**: Wikipedia dataset for cdo, parsed from 20230201
     dump.
@@ -2110,7 +2105,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ce <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ce
 
 *   **Config description**: Wikipedia dataset for ce, parsed from 20230201 dump.
 
@@ -2165,7 +2160,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ceb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ceb
 
 *   **Config description**: Wikipedia dataset for ceb, parsed from 20230201
     dump.
@@ -2221,7 +2216,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ch <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ch
 
 *   **Config description**: Wikipedia dataset for ch, parsed from 20230201 dump.
 
@@ -2276,7 +2271,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.cho <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.cho
 
 *   **Config description**: Wikipedia dataset for cho, parsed from 20230201
     dump.
@@ -2332,7 +2327,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.chr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.chr
 
 *   **Config description**: Wikipedia dataset for chr, parsed from 20230201
     dump.
@@ -2388,7 +2383,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.chy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.chy
 
 *   **Config description**: Wikipedia dataset for chy, parsed from 20230201
     dump.
@@ -2444,7 +2439,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ckb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ckb
 
 *   **Config description**: Wikipedia dataset for ckb, parsed from 20230201
     dump.
@@ -2500,7 +2495,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.co <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.co
 
 *   **Config description**: Wikipedia dataset for co, parsed from 20230201 dump.
 
@@ -2555,7 +2550,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.cr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.cr
 
 *   **Config description**: Wikipedia dataset for cr, parsed from 20230201 dump.
 
@@ -2610,7 +2605,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.crh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.crh
 
 *   **Config description**: Wikipedia dataset for crh, parsed from 20230201
     dump.
@@ -2666,7 +2661,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.cs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.cs
 
 *   **Config description**: Wikipedia dataset for cs, parsed from 20230201 dump.
 
@@ -2721,7 +2716,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.csb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.csb
 
 *   **Config description**: Wikipedia dataset for csb, parsed from 20230201
     dump.
@@ -2777,7 +2772,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.cu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.cu
 
 *   **Config description**: Wikipedia dataset for cu, parsed from 20230201 dump.
 
@@ -2832,7 +2827,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.cv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.cv
 
 *   **Config description**: Wikipedia dataset for cv, parsed from 20230201 dump.
 
@@ -2887,7 +2882,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.cy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.cy
 
 *   **Config description**: Wikipedia dataset for cy, parsed from 20230201 dump.
 
@@ -2942,7 +2937,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.da <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.da
 
 *   **Config description**: Wikipedia dataset for da, parsed from 20230201 dump.
 
@@ -2997,7 +2992,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.de <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.de
 
 *   **Config description**: Wikipedia dataset for de, parsed from 20230201 dump.
 
@@ -3052,7 +3047,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.din <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.din
 
 *   **Config description**: Wikipedia dataset for din, parsed from 20230201
     dump.
@@ -3108,7 +3103,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.diq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.diq
 
 *   **Config description**: Wikipedia dataset for diq, parsed from 20230201
     dump.
@@ -3164,7 +3159,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.dsb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.dsb
 
 *   **Config description**: Wikipedia dataset for dsb, parsed from 20230201
     dump.
@@ -3220,7 +3215,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.dty <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.dty
 
 *   **Config description**: Wikipedia dataset for dty, parsed from 20230201
     dump.
@@ -3276,7 +3271,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.dv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.dv
 
 *   **Config description**: Wikipedia dataset for dv, parsed from 20230201 dump.
 
@@ -3331,7 +3326,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.dz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.dz
 
 *   **Config description**: Wikipedia dataset for dz, parsed from 20230201 dump.
 
@@ -3386,7 +3381,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ee <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ee
 
 *   **Config description**: Wikipedia dataset for ee, parsed from 20230201 dump.
 
@@ -3441,7 +3436,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.el <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.el
 
 *   **Config description**: Wikipedia dataset for el, parsed from 20230201 dump.
 
@@ -3496,7 +3491,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.eml <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.eml
 
 *   **Config description**: Wikipedia dataset for eml, parsed from 20230201
     dump.
@@ -3552,7 +3547,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.en <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.en
 
 *   **Config description**: Wikipedia dataset for en, parsed from 20230201 dump.
 
@@ -3607,7 +3602,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.eo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.eo
 
 *   **Config description**: Wikipedia dataset for eo, parsed from 20230201 dump.
 
@@ -3662,7 +3657,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.es <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.es
 
 *   **Config description**: Wikipedia dataset for es, parsed from 20230201 dump.
 
@@ -3717,7 +3712,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.et <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.et
 
 *   **Config description**: Wikipedia dataset for et, parsed from 20230201 dump.
 
@@ -3772,7 +3767,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.eu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.eu
 
 *   **Config description**: Wikipedia dataset for eu, parsed from 20230201 dump.
 
@@ -3827,7 +3822,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ext <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ext
 
 *   **Config description**: Wikipedia dataset for ext, parsed from 20230201
     dump.
@@ -3883,7 +3878,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.fa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.fa
 
 *   **Config description**: Wikipedia dataset for fa, parsed from 20230201 dump.
 
@@ -3938,7 +3933,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ff <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ff
 
 *   **Config description**: Wikipedia dataset for ff, parsed from 20230201 dump.
 
@@ -3993,7 +3988,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.fi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.fi
 
 *   **Config description**: Wikipedia dataset for fi, parsed from 20230201 dump.
 
@@ -4048,7 +4043,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.fj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.fj
 
 *   **Config description**: Wikipedia dataset for fj, parsed from 20230201 dump.
 
@@ -4103,7 +4098,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.fo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.fo
 
 *   **Config description**: Wikipedia dataset for fo, parsed from 20230201 dump.
 
@@ -4158,7 +4153,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.fr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.fr
 
 *   **Config description**: Wikipedia dataset for fr, parsed from 20230201 dump.
 
@@ -4213,7 +4208,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.frp <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.frp
 
 *   **Config description**: Wikipedia dataset for frp, parsed from 20230201
     dump.
@@ -4269,7 +4264,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.frr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.frr
 
 *   **Config description**: Wikipedia dataset for frr, parsed from 20230201
     dump.
@@ -4325,7 +4320,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.fur <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.fur
 
 *   **Config description**: Wikipedia dataset for fur, parsed from 20230201
     dump.
@@ -4381,7 +4376,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.fy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.fy
 
 *   **Config description**: Wikipedia dataset for fy, parsed from 20230201 dump.
 
@@ -4436,7 +4431,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ga <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ga
 
 *   **Config description**: Wikipedia dataset for ga, parsed from 20230201 dump.
 
@@ -4491,7 +4486,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gag <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gag
 
 *   **Config description**: Wikipedia dataset for gag, parsed from 20230201
     dump.
@@ -4547,7 +4542,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gan <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gan
 
 *   **Config description**: Wikipedia dataset for gan, parsed from 20230201
     dump.
@@ -4603,7 +4598,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gd
 
 *   **Config description**: Wikipedia dataset for gd, parsed from 20230201 dump.
 
@@ -4658,7 +4653,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gl
 
 *   **Config description**: Wikipedia dataset for gl, parsed from 20230201 dump.
 
@@ -4713,7 +4708,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.glk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.glk
 
 *   **Config description**: Wikipedia dataset for glk, parsed from 20230201
     dump.
@@ -4769,7 +4764,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gn
 
 *   **Config description**: Wikipedia dataset for gn, parsed from 20230201 dump.
 
@@ -4824,7 +4819,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gom <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gom
 
 *   **Config description**: Wikipedia dataset for gom, parsed from 20230201
     dump.
@@ -4880,7 +4875,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gor <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gor
 
 *   **Config description**: Wikipedia dataset for gor, parsed from 20230201
     dump.
@@ -4936,7 +4931,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.got <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.got
 
 *   **Config description**: Wikipedia dataset for got, parsed from 20230201
     dump.
@@ -4992,7 +4987,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gu
 
 *   **Config description**: Wikipedia dataset for gu, parsed from 20230201 dump.
 
@@ -5047,7 +5042,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.gv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.gv
 
 *   **Config description**: Wikipedia dataset for gv, parsed from 20230201 dump.
 
@@ -5102,7 +5097,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ha <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ha
 
 *   **Config description**: Wikipedia dataset for ha, parsed from 20230201 dump.
 
@@ -5157,7 +5152,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.hak <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.hak
 
 *   **Config description**: Wikipedia dataset for hak, parsed from 20230201
     dump.
@@ -5213,7 +5208,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.haw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.haw
 
 *   **Config description**: Wikipedia dataset for haw, parsed from 20230201
     dump.
@@ -5269,7 +5264,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.he <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.he
 
 *   **Config description**: Wikipedia dataset for he, parsed from 20230201 dump.
 
@@ -5324,7 +5319,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.hi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.hi
 
 *   **Config description**: Wikipedia dataset for hi, parsed from 20230201 dump.
 
@@ -5379,7 +5374,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.hif <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.hif
 
 *   **Config description**: Wikipedia dataset for hif, parsed from 20230201
     dump.
@@ -5435,7 +5430,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ho <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ho
 
 *   **Config description**: Wikipedia dataset for ho, parsed from 20230201 dump.
 
@@ -5490,7 +5485,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.hr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.hr
 
 *   **Config description**: Wikipedia dataset for hr, parsed from 20230201 dump.
 
@@ -5545,7 +5540,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.hsb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.hsb
 
 *   **Config description**: Wikipedia dataset for hsb, parsed from 20230201
     dump.
@@ -5601,7 +5596,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.ht <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ht
 
 *   **Config description**: Wikipedia dataset for ht, parsed from 20230201 dump.
 
@@ -5656,7 +5651,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wikipedia/20230201.hu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.hu
 
 *   **Config description**: Wikipedia dataset for hu, parsed from 20230201 dump.
 
@@ -5678,7 +5673,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.hy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.hy
 
 *   **Config description**: Wikipedia dataset for hy, parsed from 20230201 dump.
 
@@ -5700,7 +5695,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ia <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ia
 
 *   **Config description**: Wikipedia dataset for ia, parsed from 20230201 dump.
 
@@ -5722,7 +5717,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.id <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.id
 
 *   **Config description**: Wikipedia dataset for id, parsed from 20230201 dump.
 
@@ -5744,7 +5739,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ie <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ie
 
 *   **Config description**: Wikipedia dataset for ie, parsed from 20230201 dump.
 
@@ -5766,7 +5761,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ig <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ig
 
 *   **Config description**: Wikipedia dataset for ig, parsed from 20230201 dump.
 
@@ -5788,7 +5783,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ii <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ii
 
 *   **Config description**: Wikipedia dataset for ii, parsed from 20230201 dump.
 
@@ -5810,7 +5805,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ik <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ik
 
 *   **Config description**: Wikipedia dataset for ik, parsed from 20230201 dump.
 
@@ -5832,7 +5827,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ilo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ilo
 
 *   **Config description**: Wikipedia dataset for ilo, parsed from 20230201
     dump.
@@ -5855,7 +5850,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.inh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.inh
 
 *   **Config description**: Wikipedia dataset for inh, parsed from 20230201
     dump.
@@ -5878,7 +5873,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.io <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.io
 
 *   **Config description**: Wikipedia dataset for io, parsed from 20230201 dump.
 
@@ -5900,7 +5895,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.is <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.is
 
 *   **Config description**: Wikipedia dataset for is, parsed from 20230201 dump.
 
@@ -5922,7 +5917,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.it <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.it
 
 *   **Config description**: Wikipedia dataset for it, parsed from 20230201 dump.
 
@@ -5944,7 +5939,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.iu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.iu
 
 *   **Config description**: Wikipedia dataset for iu, parsed from 20230201 dump.
 
@@ -5966,7 +5961,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ja <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ja
 
 *   **Config description**: Wikipedia dataset for ja, parsed from 20230201 dump.
 
@@ -5988,7 +5983,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.jam <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.jam
 
 *   **Config description**: Wikipedia dataset for jam, parsed from 20230201
     dump.
@@ -6011,7 +6006,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.jbo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.jbo
 
 *   **Config description**: Wikipedia dataset for jbo, parsed from 20230201
     dump.
@@ -6034,7 +6029,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.jv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.jv
 
 *   **Config description**: Wikipedia dataset for jv, parsed from 20230201 dump.
 
@@ -6056,7 +6051,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ka <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ka
 
 *   **Config description**: Wikipedia dataset for ka, parsed from 20230201 dump.
 
@@ -6078,7 +6073,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kaa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kaa
 
 *   **Config description**: Wikipedia dataset for kaa, parsed from 20230201
     dump.
@@ -6101,7 +6096,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kab <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kab
 
 *   **Config description**: Wikipedia dataset for kab, parsed from 20230201
     dump.
@@ -6124,7 +6119,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kbd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kbd
 
 *   **Config description**: Wikipedia dataset for kbd, parsed from 20230201
     dump.
@@ -6147,7 +6142,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kbp <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kbp
 
 *   **Config description**: Wikipedia dataset for kbp, parsed from 20230201
     dump.
@@ -6170,7 +6165,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kg
 
 *   **Config description**: Wikipedia dataset for kg, parsed from 20230201 dump.
 
@@ -6192,7 +6187,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ki <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ki
 
 *   **Config description**: Wikipedia dataset for ki, parsed from 20230201 dump.
 
@@ -6214,7 +6209,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kj
 
 *   **Config description**: Wikipedia dataset for kj, parsed from 20230201 dump.
 
@@ -6236,7 +6231,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kk
 
 *   **Config description**: Wikipedia dataset for kk, parsed from 20230201 dump.
 
@@ -6258,7 +6253,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kl
 
 *   **Config description**: Wikipedia dataset for kl, parsed from 20230201 dump.
 
@@ -6280,7 +6275,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.km <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.km
 
 *   **Config description**: Wikipedia dataset for km, parsed from 20230201 dump.
 
@@ -6302,7 +6297,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kn
 
 *   **Config description**: Wikipedia dataset for kn, parsed from 20230201 dump.
 
@@ -6324,7 +6319,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ko <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ko
 
 *   **Config description**: Wikipedia dataset for ko, parsed from 20230201 dump.
 
@@ -6346,7 +6341,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.koi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.koi
 
 *   **Config description**: Wikipedia dataset for koi, parsed from 20230201
     dump.
@@ -6369,7 +6364,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.krc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.krc
 
 *   **Config description**: Wikipedia dataset for krc, parsed from 20230201
     dump.
@@ -6392,7 +6387,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ks <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ks
 
 *   **Config description**: Wikipedia dataset for ks, parsed from 20230201 dump.
 
@@ -6414,7 +6409,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ksh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ksh
 
 *   **Config description**: Wikipedia dataset for ksh, parsed from 20230201
     dump.
@@ -6437,7 +6432,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ku <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ku
 
 *   **Config description**: Wikipedia dataset for ku, parsed from 20230201 dump.
 
@@ -6459,7 +6454,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kv
 
 *   **Config description**: Wikipedia dataset for kv, parsed from 20230201 dump.
 
@@ -6481,7 +6476,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.kw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.kw
 
 *   **Config description**: Wikipedia dataset for kw, parsed from 20230201 dump.
 
@@ -6503,7 +6498,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ky <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ky
 
 *   **Config description**: Wikipedia dataset for ky, parsed from 20230201 dump.
 
@@ -6525,7 +6520,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.la <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.la
 
 *   **Config description**: Wikipedia dataset for la, parsed from 20230201 dump.
 
@@ -6547,7 +6542,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lad <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lad
 
 *   **Config description**: Wikipedia dataset for lad, parsed from 20230201
     dump.
@@ -6570,7 +6565,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lb
 
 *   **Config description**: Wikipedia dataset for lb, parsed from 20230201 dump.
 
@@ -6592,7 +6587,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lbe <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lbe
 
 *   **Config description**: Wikipedia dataset for lbe, parsed from 20230201
     dump.
@@ -6615,7 +6610,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lez <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lez
 
 *   **Config description**: Wikipedia dataset for lez, parsed from 20230201
     dump.
@@ -6638,7 +6633,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lfn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lfn
 
 *   **Config description**: Wikipedia dataset for lfn, parsed from 20230201
     dump.
@@ -6661,7 +6656,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lg
 
 *   **Config description**: Wikipedia dataset for lg, parsed from 20230201 dump.
 
@@ -6683,7 +6678,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.li <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.li
 
 *   **Config description**: Wikipedia dataset for li, parsed from 20230201 dump.
 
@@ -6705,7 +6700,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lij <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lij
 
 *   **Config description**: Wikipedia dataset for lij, parsed from 20230201
     dump.
@@ -6728,7 +6723,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lmo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lmo
 
 *   **Config description**: Wikipedia dataset for lmo, parsed from 20230201
     dump.
@@ -6751,7 +6746,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ln <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ln
 
 *   **Config description**: Wikipedia dataset for ln, parsed from 20230201 dump.
 
@@ -6773,7 +6768,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lo
 
 *   **Config description**: Wikipedia dataset for lo, parsed from 20230201 dump.
 
@@ -6795,7 +6790,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lrc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lrc
 
 *   **Config description**: Wikipedia dataset for lrc, parsed from 20230201
     dump.
@@ -6818,7 +6813,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lt
 
 *   **Config description**: Wikipedia dataset for lt, parsed from 20230201 dump.
 
@@ -6840,7 +6835,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ltg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ltg
 
 *   **Config description**: Wikipedia dataset for ltg, parsed from 20230201
     dump.
@@ -6863,7 +6858,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.lv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.lv
 
 *   **Config description**: Wikipedia dataset for lv, parsed from 20230201 dump.
 
@@ -6885,7 +6880,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mai <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mai
 
 *   **Config description**: Wikipedia dataset for mai, parsed from 20230201
     dump.
@@ -6908,7 +6903,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mdf <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mdf
 
 *   **Config description**: Wikipedia dataset for mdf, parsed from 20230201
     dump.
@@ -6931,7 +6926,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mg
 
 *   **Config description**: Wikipedia dataset for mg, parsed from 20230201 dump.
 
@@ -6953,7 +6948,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mh
 
 *   **Config description**: Wikipedia dataset for mh, parsed from 20230201 dump.
 
@@ -6975,7 +6970,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mhr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mhr
 
 *   **Config description**: Wikipedia dataset for mhr, parsed from 20230201
     dump.
@@ -6998,7 +6993,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mi
 
 *   **Config description**: Wikipedia dataset for mi, parsed from 20230201 dump.
 
@@ -7020,7 +7015,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.min <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.min
 
 *   **Config description**: Wikipedia dataset for min, parsed from 20230201
     dump.
@@ -7043,7 +7038,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mk
 
 *   **Config description**: Wikipedia dataset for mk, parsed from 20230201 dump.
 
@@ -7065,7 +7060,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ml <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ml
 
 *   **Config description**: Wikipedia dataset for ml, parsed from 20230201 dump.
 
@@ -7087,7 +7082,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mn
 
 *   **Config description**: Wikipedia dataset for mn, parsed from 20230201 dump.
 
@@ -7109,7 +7104,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mr
 
 *   **Config description**: Wikipedia dataset for mr, parsed from 20230201 dump.
 
@@ -7131,7 +7126,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mrj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mrj
 
 *   **Config description**: Wikipedia dataset for mrj, parsed from 20230201
     dump.
@@ -7154,7 +7149,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ms <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ms
 
 *   **Config description**: Wikipedia dataset for ms, parsed from 20230201 dump.
 
@@ -7176,7 +7171,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mt
 
 *   **Config description**: Wikipedia dataset for mt, parsed from 20230201 dump.
 
@@ -7198,7 +7193,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mus <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mus
 
 *   **Config description**: Wikipedia dataset for mus, parsed from 20230201
     dump.
@@ -7221,7 +7216,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mwl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mwl
 
 *   **Config description**: Wikipedia dataset for mwl, parsed from 20230201
     dump.
@@ -7244,7 +7239,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.my <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.my
 
 *   **Config description**: Wikipedia dataset for my, parsed from 20230201 dump.
 
@@ -7266,7 +7261,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.myv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.myv
 
 *   **Config description**: Wikipedia dataset for myv, parsed from 20230201
     dump.
@@ -7289,7 +7284,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.mzn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.mzn
 
 *   **Config description**: Wikipedia dataset for mzn, parsed from 20230201
     dump.
@@ -7312,7 +7307,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.na <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.na
 
 *   **Config description**: Wikipedia dataset for na, parsed from 20230201 dump.
 
@@ -7334,7 +7329,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nah <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nah
 
 *   **Config description**: Wikipedia dataset for nah, parsed from 20230201
     dump.
@@ -7357,7 +7352,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nap <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nap
 
 *   **Config description**: Wikipedia dataset for nap, parsed from 20230201
     dump.
@@ -7380,7 +7375,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nds <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nds
 
 *   **Config description**: Wikipedia dataset for nds, parsed from 20230201
     dump.
@@ -7403,7 +7398,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ne <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ne
 
 *   **Config description**: Wikipedia dataset for ne, parsed from 20230201 dump.
 
@@ -7425,7 +7420,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.new <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.new
 
 *   **Config description**: Wikipedia dataset for new, parsed from 20230201
     dump.
@@ -7448,7 +7443,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ng <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ng
 
 *   **Config description**: Wikipedia dataset for ng, parsed from 20230201 dump.
 
@@ -7470,7 +7465,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nl
 
 *   **Config description**: Wikipedia dataset for nl, parsed from 20230201 dump.
 
@@ -7492,7 +7487,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nn
 
 *   **Config description**: Wikipedia dataset for nn, parsed from 20230201 dump.
 
@@ -7514,7 +7509,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.no <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.no
 
 *   **Config description**: Wikipedia dataset for no, parsed from 20230201 dump.
 
@@ -7536,7 +7531,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nov <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nov
 
 *   **Config description**: Wikipedia dataset for nov, parsed from 20230201
     dump.
@@ -7559,7 +7554,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nrm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nrm
 
 *   **Config description**: Wikipedia dataset for nrm, parsed from 20230201
     dump.
@@ -7582,7 +7577,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nso <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nso
 
 *   **Config description**: Wikipedia dataset for nso, parsed from 20230201
     dump.
@@ -7605,7 +7600,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.nv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.nv
 
 *   **Config description**: Wikipedia dataset for nv, parsed from 20230201 dump.
 
@@ -7627,7 +7622,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ny <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ny
 
 *   **Config description**: Wikipedia dataset for ny, parsed from 20230201 dump.
 
@@ -7649,7 +7644,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.oc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.oc
 
 *   **Config description**: Wikipedia dataset for oc, parsed from 20230201 dump.
 
@@ -7671,7 +7666,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.olo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.olo
 
 *   **Config description**: Wikipedia dataset for olo, parsed from 20230201
     dump.
@@ -7694,7 +7689,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.om <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.om
 
 *   **Config description**: Wikipedia dataset for om, parsed from 20230201 dump.
 
@@ -7716,7 +7711,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.or <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.or
 
 *   **Config description**: Wikipedia dataset for or, parsed from 20230201 dump.
 
@@ -7738,7 +7733,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.os <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.os
 
 *   **Config description**: Wikipedia dataset for os, parsed from 20230201 dump.
 
@@ -7760,7 +7755,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pa
 
 *   **Config description**: Wikipedia dataset for pa, parsed from 20230201 dump.
 
@@ -7782,7 +7777,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pag <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pag
 
 *   **Config description**: Wikipedia dataset for pag, parsed from 20230201
     dump.
@@ -7805,7 +7800,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pam <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pam
 
 *   **Config description**: Wikipedia dataset for pam, parsed from 20230201
     dump.
@@ -7828,7 +7823,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pap <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pap
 
 *   **Config description**: Wikipedia dataset for pap, parsed from 20230201
     dump.
@@ -7851,7 +7846,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pcd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pcd
 
 *   **Config description**: Wikipedia dataset for pcd, parsed from 20230201
     dump.
@@ -7874,7 +7869,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pdc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pdc
 
 *   **Config description**: Wikipedia dataset for pdc, parsed from 20230201
     dump.
@@ -7897,7 +7892,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pfl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pfl
 
 *   **Config description**: Wikipedia dataset for pfl, parsed from 20230201
     dump.
@@ -7920,7 +7915,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pi
 
 *   **Config description**: Wikipedia dataset for pi, parsed from 20230201 dump.
 
@@ -7942,7 +7937,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pih <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pih
 
 *   **Config description**: Wikipedia dataset for pih, parsed from 20230201
     dump.
@@ -7965,7 +7960,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pl
 
 *   **Config description**: Wikipedia dataset for pl, parsed from 20230201 dump.
 
@@ -7987,7 +7982,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pms <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pms
 
 *   **Config description**: Wikipedia dataset for pms, parsed from 20230201
     dump.
@@ -8010,7 +8005,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pnb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pnb
 
 *   **Config description**: Wikipedia dataset for pnb, parsed from 20230201
     dump.
@@ -8033,7 +8028,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pnt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pnt
 
 *   **Config description**: Wikipedia dataset for pnt, parsed from 20230201
     dump.
@@ -8056,7 +8051,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ps <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ps
 
 *   **Config description**: Wikipedia dataset for ps, parsed from 20230201 dump.
 
@@ -8078,7 +8073,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.pt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.pt
 
 *   **Config description**: Wikipedia dataset for pt, parsed from 20230201 dump.
 
@@ -8100,7 +8095,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.qu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.qu
 
 *   **Config description**: Wikipedia dataset for qu, parsed from 20230201 dump.
 
@@ -8122,7 +8117,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.rm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.rm
 
 *   **Config description**: Wikipedia dataset for rm, parsed from 20230201 dump.
 
@@ -8144,7 +8139,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.rmy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.rmy
 
 *   **Config description**: Wikipedia dataset for rmy, parsed from 20230201
     dump.
@@ -8167,7 +8162,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.rn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.rn
 
 *   **Config description**: Wikipedia dataset for rn, parsed from 20230201 dump.
 
@@ -8189,7 +8184,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ro <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ro
 
 *   **Config description**: Wikipedia dataset for ro, parsed from 20230201 dump.
 
@@ -8211,7 +8206,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ru <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ru
 
 *   **Config description**: Wikipedia dataset for ru, parsed from 20230201 dump.
 
@@ -8233,7 +8228,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.rue <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.rue
 
 *   **Config description**: Wikipedia dataset for rue, parsed from 20230201
     dump.
@@ -8256,7 +8251,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.rw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.rw
 
 *   **Config description**: Wikipedia dataset for rw, parsed from 20230201 dump.
 
@@ -8278,7 +8273,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sa
 
 *   **Config description**: Wikipedia dataset for sa, parsed from 20230201 dump.
 
@@ -8300,7 +8295,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sah <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sah
 
 *   **Config description**: Wikipedia dataset for sah, parsed from 20230201
     dump.
@@ -8323,7 +8318,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sat <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sat
 
 *   **Config description**: Wikipedia dataset for sat, parsed from 20230201
     dump.
@@ -8346,7 +8341,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sc
 
 *   **Config description**: Wikipedia dataset for sc, parsed from 20230201 dump.
 
@@ -8368,7 +8363,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.scn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.scn
 
 *   **Config description**: Wikipedia dataset for scn, parsed from 20230201
     dump.
@@ -8391,7 +8386,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sco <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sco
 
 *   **Config description**: Wikipedia dataset for sco, parsed from 20230201
     dump.
@@ -8414,7 +8409,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sd
 
 *   **Config description**: Wikipedia dataset for sd, parsed from 20230201 dump.
 
@@ -8436,7 +8431,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.se <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.se
 
 *   **Config description**: Wikipedia dataset for se, parsed from 20230201 dump.
 
@@ -8458,7 +8453,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sg
 
 *   **Config description**: Wikipedia dataset for sg, parsed from 20230201 dump.
 
@@ -8480,7 +8475,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sh
 
 *   **Config description**: Wikipedia dataset for sh, parsed from 20230201 dump.
 
@@ -8502,7 +8497,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.si <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.si
 
 *   **Config description**: Wikipedia dataset for si, parsed from 20230201 dump.
 
@@ -8524,7 +8519,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.simple <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.simple
 
 *   **Config description**: Wikipedia dataset for simple, parsed from 20230201
     dump.
@@ -8547,7 +8542,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sk
 
 *   **Config description**: Wikipedia dataset for sk, parsed from 20230201 dump.
 
@@ -8569,7 +8564,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sl
 
 *   **Config description**: Wikipedia dataset for sl, parsed from 20230201 dump.
 
@@ -8591,7 +8586,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sm
 
 *   **Config description**: Wikipedia dataset for sm, parsed from 20230201 dump.
 
@@ -8613,7 +8608,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sn
 
 *   **Config description**: Wikipedia dataset for sn, parsed from 20230201 dump.
 
@@ -8635,7 +8630,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.so <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.so
 
 *   **Config description**: Wikipedia dataset for so, parsed from 20230201 dump.
 
@@ -8657,7 +8652,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sq
 
 *   **Config description**: Wikipedia dataset for sq, parsed from 20230201 dump.
 
@@ -8679,7 +8674,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sr
 
 *   **Config description**: Wikipedia dataset for sr, parsed from 20230201 dump.
 
@@ -8701,7 +8696,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.srn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.srn
 
 *   **Config description**: Wikipedia dataset for srn, parsed from 20230201
     dump.
@@ -8724,7 +8719,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ss <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ss
 
 *   **Config description**: Wikipedia dataset for ss, parsed from 20230201 dump.
 
@@ -8746,7 +8741,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.st <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.st
 
 *   **Config description**: Wikipedia dataset for st, parsed from 20230201 dump.
 
@@ -8768,7 +8763,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.stq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.stq
 
 *   **Config description**: Wikipedia dataset for stq, parsed from 20230201
     dump.
@@ -8791,7 +8786,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.su <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.su
 
 *   **Config description**: Wikipedia dataset for su, parsed from 20230201 dump.
 
@@ -8813,7 +8808,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sv
 
 *   **Config description**: Wikipedia dataset for sv, parsed from 20230201 dump.
 
@@ -8835,7 +8830,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.sw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.sw
 
 *   **Config description**: Wikipedia dataset for sw, parsed from 20230201 dump.
 
@@ -8857,7 +8852,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.szl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.szl
 
 *   **Config description**: Wikipedia dataset for szl, parsed from 20230201
     dump.
@@ -8880,7 +8875,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ta <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ta
 
 *   **Config description**: Wikipedia dataset for ta, parsed from 20230201 dump.
 
@@ -8902,7 +8897,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tcy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tcy
 
 *   **Config description**: Wikipedia dataset for tcy, parsed from 20230201
     dump.
@@ -8925,7 +8920,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.te <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.te
 
 *   **Config description**: Wikipedia dataset for te, parsed from 20230201 dump.
 
@@ -8947,7 +8942,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tet <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tet
 
 *   **Config description**: Wikipedia dataset for tet, parsed from 20230201
     dump.
@@ -8970,7 +8965,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tg
 
 *   **Config description**: Wikipedia dataset for tg, parsed from 20230201 dump.
 
@@ -8992,7 +8987,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.th <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.th
 
 *   **Config description**: Wikipedia dataset for th, parsed from 20230201 dump.
 
@@ -9014,7 +9009,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ti <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ti
 
 *   **Config description**: Wikipedia dataset for ti, parsed from 20230201 dump.
 
@@ -9036,7 +9031,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tk
 
 *   **Config description**: Wikipedia dataset for tk, parsed from 20230201 dump.
 
@@ -9058,7 +9053,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tl
 
 *   **Config description**: Wikipedia dataset for tl, parsed from 20230201 dump.
 
@@ -9080,7 +9075,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tn
 
 *   **Config description**: Wikipedia dataset for tn, parsed from 20230201 dump.
 
@@ -9102,7 +9097,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.to <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.to
 
 *   **Config description**: Wikipedia dataset for to, parsed from 20230201 dump.
 
@@ -9124,7 +9119,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tpi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tpi
 
 *   **Config description**: Wikipedia dataset for tpi, parsed from 20230201
     dump.
@@ -9147,7 +9142,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tr
 
 *   **Config description**: Wikipedia dataset for tr, parsed from 20230201 dump.
 
@@ -9169,7 +9164,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ts <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ts
 
 *   **Config description**: Wikipedia dataset for ts, parsed from 20230201 dump.
 
@@ -9191,7 +9186,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tt
 
 *   **Config description**: Wikipedia dataset for tt, parsed from 20230201 dump.
 
@@ -9213,7 +9208,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tum <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tum
 
 *   **Config description**: Wikipedia dataset for tum, parsed from 20230201
     dump.
@@ -9236,7 +9231,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tw
 
 *   **Config description**: Wikipedia dataset for tw, parsed from 20230201 dump.
 
@@ -9258,7 +9253,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ty <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ty
 
 *   **Config description**: Wikipedia dataset for ty, parsed from 20230201 dump.
 
@@ -9280,7 +9275,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.tyv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.tyv
 
 *   **Config description**: Wikipedia dataset for tyv, parsed from 20230201
     dump.
@@ -9303,7 +9298,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.udm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.udm
 
 *   **Config description**: Wikipedia dataset for udm, parsed from 20230201
     dump.
@@ -9326,7 +9321,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ug <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ug
 
 *   **Config description**: Wikipedia dataset for ug, parsed from 20230201 dump.
 
@@ -9348,7 +9343,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.uk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.uk
 
 *   **Config description**: Wikipedia dataset for uk, parsed from 20230201 dump.
 
@@ -9370,7 +9365,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ur <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ur
 
 *   **Config description**: Wikipedia dataset for ur, parsed from 20230201 dump.
 
@@ -9392,7 +9387,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.uz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.uz
 
 *   **Config description**: Wikipedia dataset for uz, parsed from 20230201 dump.
 
@@ -9414,7 +9409,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.ve <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.ve
 
 *   **Config description**: Wikipedia dataset for ve, parsed from 20230201 dump.
 
@@ -9436,7 +9431,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.vec <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.vec
 
 *   **Config description**: Wikipedia dataset for vec, parsed from 20230201
     dump.
@@ -9459,7 +9454,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.vep <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.vep
 
 *   **Config description**: Wikipedia dataset for vep, parsed from 20230201
     dump.
@@ -9482,7 +9477,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.vi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.vi
 
 *   **Config description**: Wikipedia dataset for vi, parsed from 20230201 dump.
 
@@ -9504,7 +9499,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.vls <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.vls
 
 *   **Config description**: Wikipedia dataset for vls, parsed from 20230201
     dump.
@@ -9527,7 +9522,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.vo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.vo
 
 *   **Config description**: Wikipedia dataset for vo, parsed from 20230201 dump.
 
@@ -9549,7 +9544,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.wa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.wa
 
 *   **Config description**: Wikipedia dataset for wa, parsed from 20230201 dump.
 
@@ -9571,7 +9566,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.war <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.war
 
 *   **Config description**: Wikipedia dataset for war, parsed from 20230201
     dump.
@@ -9594,7 +9589,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.wo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.wo
 
 *   **Config description**: Wikipedia dataset for wo, parsed from 20230201 dump.
 
@@ -9616,7 +9611,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.wuu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.wuu
 
 *   **Config description**: Wikipedia dataset for wuu, parsed from 20230201
     dump.
@@ -9639,7 +9634,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.xal <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.xal
 
 *   **Config description**: Wikipedia dataset for xal, parsed from 20230201
     dump.
@@ -9662,7 +9657,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.xh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.xh
 
 *   **Config description**: Wikipedia dataset for xh, parsed from 20230201 dump.
 
@@ -9684,7 +9679,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.xmf <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.xmf
 
 *   **Config description**: Wikipedia dataset for xmf, parsed from 20230201
     dump.
@@ -9707,7 +9702,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.yi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.yi
 
 *   **Config description**: Wikipedia dataset for yi, parsed from 20230201 dump.
 
@@ -9729,7 +9724,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.yo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.yo
 
 *   **Config description**: Wikipedia dataset for yo, parsed from 20230201 dump.
 
@@ -9751,7 +9746,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.za <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.za
 
 *   **Config description**: Wikipedia dataset for za, parsed from 20230201 dump.
 
@@ -9773,7 +9768,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.zea <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.zea
 
 *   **Config description**: Wikipedia dataset for zea, parsed from 20230201
     dump.
@@ -9796,7 +9791,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.zh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.zh
 
 *   **Config description**: Wikipedia dataset for zh, parsed from 20230201 dump.
 
@@ -9818,7 +9813,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20230201.zu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230201.zu
 
 *   **Config description**: Wikipedia dataset for zu, parsed from 20230201 dump.
 
