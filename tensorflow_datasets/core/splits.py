@@ -703,7 +703,7 @@ def _str_to_relative_instruction(spec: str) -> AbstractSplit:
   else:  # split='train[x:y]' or split='train[x]'
     slices = [_SLICE_RE.match(x) for x in split_selector.split(':')]
     # Make sure all slices are valid, and at least one is not empty
-    if not all(slices) or not any(x.group(0) for x in slices):
+    if not all(slices) or not any(x.group(0) for x in slices):  # pytype: disable=attribute-error  # re-none
       raise ValueError(err_msg)
     if len(slices) == 1:
       (from_match,) = slices
