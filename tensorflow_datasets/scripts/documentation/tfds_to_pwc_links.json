@@ -94,6 +94,7 @@
   "kddcup99": "https://paperswithcode.com/dataset/kdd-cup-1999-data-data-set",
   "kitti": "https://paperswithcode.com/dataset/kitti",
   "kmnist": "https://paperswithcode.com/dataset/kmnist",
+  "laion400m": "https://paperswithcode.com/dataset/laion-400m",
   "lambada": "https://paperswithcode.com/dataset/lambada",
   "lfw": "https://paperswithcode.com/dataset/lfw",
   "librispeech": "https://paperswithcode.com/dataset/librispeech",
