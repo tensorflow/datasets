@@ -14,11 +14,28 @@ and this project adheres to
 
 ### Deprecated
 
+### Removed
+
+### Fixed
+
+### Security
+
+## [4.8.3] - 2023-02-27
+
+### Added
+
+### Changed
+
+### Deprecated
+
 -   Python 3.7 support: this version and future version use Python 3.8.
 
 ### Removed
 
 ### Fixed
+
+-   Flag `ignore_verifications` from Hugging Face's `datasets.load_dataset` is
+    deprecated, and used to cause errors in `tfds.load(huggingface:foo)`.
 
 ### Security
 
