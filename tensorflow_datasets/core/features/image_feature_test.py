@@ -33,10 +33,17 @@ class ImageFeatureTest(
 ):
 
   @parameterized.parameters(
+      # Grayscale images
+      (np.uint8, np.uint8, 1),
+      (tf.uint8, np.uint8, 1),
+      (np.uint16, np.uint16, 1),
+      (tf.uint16, np.uint16, 1),
+      # 3 channels
       (np.uint8, np.uint8, 3),
       (tf.uint8, np.uint8, 3),
       (np.uint16, np.uint16, 3),
       (tf.uint16, np.uint16, 3),
+      # 4 channels
       (np.uint8, np.uint8, 4),
       (tf.uint8, np.uint8, 4),
       (np.uint16, np.uint16, 4),
@@ -48,10 +55,12 @@ class ImageFeatureTest(
 
     filename = {
         np.uint8: {
+            1: '6pixels_grayscale.png',
             3: '6pixels.png',
             4: '6pixels_4chan.png',
         },
         np.uint16: {
+            1: '6pixels_grayscale_16bit.png',
             3: '6pixels_16bit.png',
             4: '6pixels_16bit_4chan.png',
         },
@@ -116,6 +125,31 @@ class ImageFeatureTest(
                 raise_cls_np=ValueError,
                 raise_msg='dtype should be',
             ),
+        ],
+        test_attributes=dict(
+            _encoding_format=None,
+            _use_colormap=False,
+        ),
+    )
+
+  @parameterized.parameters(
+      # 3 channels
+      (np.uint8, np.uint8, 3),
+      (tf.uint8, np.uint8, 3),
+      (np.uint16, np.uint16, 3),
+      (tf.uint16, np.uint16, 3),
+      # 4 channels
+      (np.uint8, np.uint8, 4),
+      (tf.uint8, np.uint8, 4),
+      (np.uint16, np.uint16, 4),
+      (tf.uint16, np.uint16, 4),
+  )
+  def test_images_with_invalid_shape(self, dtype, np_dtype, channels):
+    self.assertFeature(
+        feature=features_lib.Image(shape=(None, None, channels), dtype=dtype),
+        shape=(None, None, channels),
+        dtype=dtype,
+        tests=[
             # Invalid number of dimensions
             testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128), dtype=np_dtype),
