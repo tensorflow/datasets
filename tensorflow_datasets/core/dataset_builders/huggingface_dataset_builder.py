@@ -198,10 +198,17 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
     else:
       return [hf_value]
   elif isinstance(feature, feature_lib.Audio):
-    is_audio_dict = isinstance(hf_value, dict) and "path" in hf_value
-    if is_audio_dict:
-      return hf_value["path"]
-    raise ValueError(f"{hf_value} should be a dict with a 'path' key")
+    assert isinstance(hf_value, dict), f"Audio {hf_value} should be a dict"
+    if "array" in hf_value:
+      sample_rate = feature.sample_rate
+      # Hugging Face uses float, TFDS uses integers.
+      return [int(s * sample_rate) for s in hf_value["array"]]
+    if "path" in hf_value:
+      path = epath.Path(hf_value["path"])
+      if path.exists():
+        return path
+    else:
+      raise ValueError(f"{hf_value} is not a valid audio feature.")
   elif isinstance(hf_value, lazy_imports_lib.lazy_imports.PIL_Image.Image):
     buffer = io.BytesIO()
     hf_value.save(fp=buffer, format=_IMAGE_ENCODING_FORMAT)
