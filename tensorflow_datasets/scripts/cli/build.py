@@ -155,6 +155,14 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       ),
   )
   generation_group.add_argument(
+      '--download_config',
+      type=str,
+      help=(
+          'A json of the kwargs forwarded to the config `__init__` (for custom'
+          ' DownloadConfigs).'
+      ),
+  )
+  generation_group.add_argument(
       '--imports',
       '-i',
       type=str,
@@ -563,6 +571,10 @@ def _make_download_config(
   if args.add_name_to_manual_dir:
     manual_dir = os.path.join(manual_dir, dataset_name)
 
+  kwargs = {}
+  if args.download_config:
+    kwargs = json.loads(args.download_config)
+
   dl_config = tfds.download.DownloadConfig(
       extract_dir=args.extract_dir,
       manual_dir=manual_dir,
@@ -570,6 +582,7 @@ def _make_download_config(
       max_examples_per_split=args.max_examples_per_split,
       register_checksums=args.register_checksums,
       force_checksums_validation=args.force_checksums_validation,
+      **kwargs,
   )
 
   # Add Apache Beam options to download config
