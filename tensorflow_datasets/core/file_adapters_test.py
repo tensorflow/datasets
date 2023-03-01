@@ -55,6 +55,7 @@ def test_format_suffix():
 @pytest.mark.parametrize(
     'file_format',
     [
+        file_adapters.FileFormat.ARRAY_RECORD,
         file_adapters.FileFormat.TFRECORD,
     ],
 )
@@ -95,3 +96,11 @@ def test_prase_file_format():
   )
   with pytest.raises(ValueError, match='is not a valid FileFormat'):
     file_adapters.FileFormat.from_value('i do not exist')
+  assert (
+      file_adapters.FileFormat.from_value('array_record')
+      == file_adapters.FileFormat.ARRAY_RECORD
+  )
+  assert (
+      file_adapters.FileFormat.from_value(file_adapters.FileFormat.ARRAY_RECORD)
+      == file_adapters.FileFormat.ARRAY_RECORD
+  )
