@@ -26,6 +26,8 @@ from etils import epath
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
+from array_record.python import array_record_module
+
 ExamplePositions = List[Any]
 
 
@@ -172,6 +174,48 @@ class RiegeliFileAdapter(FileAdapter):
     return positions
 
 
+class ArrayRecordFileAdapter(FileAdapter):
+  """File adapter for ArrayRecord file format."""
+
+  FILE_SUFFIX = 'array_record'
+  # TODO(b/246773240): tune buffer size to optimal value.
+  BUFFER_SIZE = 128
+
+  @classmethod
+  def make_tf_data(
+      cls,
+      filename: epath.PathLike,
+      buffer_size: Optional[int] = None,
+  ) -> tf.data.Dataset:
+    """Returns TensorFlow Dataset comprising given array record file."""
+    raise NotImplementedError(
+        '`.as_dataset()` not implemented for ArrayRecord files. Please, use'
+        ' `.as_data_source()`.'
+    )
+
+  @classmethod
+  def write_examples(
+      cls,
+      path: epath.PathLike,
+      iterator: Iterable[type_utils.KeySerializedExample],
+  ) -> Optional[ExamplePositions]:
+    """Write examples from given iterator in given path.
+
+    Args:
+      path: Path where to write the examples.
+      iterator: Iterable of examples.
+
+    Returns:
+      None
+    """
+    writer = array_record_module.ArrayRecordWriter(
+        os.fspath(path), 'group_size:1'
+    )
+    for _, serialized_example in iterator:
+      writer.write(serialized_example)
+    writer.close()
+
+
 def _to_bytes(key: type_utils.Key) -> bytes:
   """Convert the key to bytes."""
   if isinstance(key, int):
@@ -188,6 +232,7 @@ def _to_bytes(key: type_utils.Key) -> bytes:
 ADAPTER_FOR_FORMAT: Dict[FileFormat, Type[FileAdapter]] = {
     FileFormat.RIEGELI: RiegeliFileAdapter,
     FileFormat.TFRECORD: TfRecordFileAdapter,
+    FileFormat.ARRAY_RECORD: ArrayRecordFileAdapter,
 }
 
 _FILE_SUFFIX_TO_FORMAT = {

@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import abc
+from collections.abc import Sequence
 import dataclasses
 import functools
 import inspect
@@ -44,6 +45,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.data_sources import array_record
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
@@ -55,6 +57,7 @@ import termcolor
 
 if typing.TYPE_CHECKING:
   from apache_beam.runners import runner
+  from array_record.python import array_record_data_source
 
 ListOrTreeOrElem = type_utils.ListOrTreeOrElem
 Tree = type_utils.Tree
@@ -666,6 +669,49 @@ class DatasetBuilder(registered.RegisteredDataset):
       )
 
     self._log_download_done()
+
+  def as_data_source(
+      self,
+      split: Optional[Tree[splits_lib.SplitArg]] = None,
+      *,
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
+  ) -> ListOrTreeOrElem[Sequence[Any]]:
+    """Constructs an `ArrayRecordDataSource`.
+
+    Args:
+      split: Which split of the data to load (e.g. `'train'`, `'test'`,
+        `['train', 'test']`, `'train[80%:]'`,...). See our [split API
+        guide](https://www.tensorflow.org/datasets/splits). If `None`, will
+        return all splits in a `Dict[Split, Sequence]`.
+      decoders: Nested dict of `Decoder` objects which allow to customize the
+        decoding. The structure should match the feature structure, but only
+        customized feature keys need to be present. See [the
+        guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
+        for more info.
+
+    Returns:
+      `Sequence` if `split`,
+      `dict<key: tfds.Split, value: Sequence>` otherwise.
+
+    Raises:
+      NotImplementedError if the data was not generated using ArrayRecords.
+    """
+    # By default, return all splits
+    if split is None:
+      split = {s: s for s in self.info.splits}
+
+    # Create a dataset for each of the given splits
+    def build_single_data_source(
+        split: str,
+    ) -> Sequence[Any]:
+      return array_record.ArrayRecordDataSource(
+          self.info,
+          split=split,
+          decoders=decoders,
+      )
+
+    all_ds = tree_utils.map_structure(build_single_data_source, split)
+    return all_ds
 
   @tfds_logging.as_dataset()
   def as_dataset(
