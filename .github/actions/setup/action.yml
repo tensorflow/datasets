@@ -19,34 +19,36 @@ runs:
   using: 'composite'
   steps:
     - name: Get current date
-      run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_STATE
+      run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       shell: bash
 
-    # Default pip caching doesn't work. See similar problem:
-    # https://stackoverflow.com/questions/74119692/github-actions-setup-python-not-caching-pip-dependencies
-    - uses: actions/setup-python@v4
-      with:
-        python-version: ${{ inputs.python-version }}
-
-    # The cache is refreshed everyday to pull updated dependencies.
-    - uses: actions/cache@v3
-      with:
-        path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ env.today }}-${{ inputs.tf-version }}
-
     # Install deps.
-    - name: Workaround for connectivity issues in Azure  # https://github.com/actions/virtual-environments/issues/675
+    - name: Workaround for connectivity issues in Azure  # https://github.com/actions/runner-images/issues/675#issuecomment-1419388451
       run: |
         sudo gem install apt-spy2
-        sudo apt-spy2 check
-        sudo apt-spy2 fix --commit
+        sudo apt-spy2 fix --commit --launchpad --country=US
         sudo apt-get update
       shell: bash
     - run: sudo apt install -y protobuf-compiler  # for gcld3 tests
       shell: bash
     - uses: FedericoCarboni/setup-ffmpeg@v2  # for Audio FeatureConnector tests.
-    - if: ${{ inputs.tf-version != 'skip' }}
+
+    # Python is cached manually to allow daily refreshes.
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+    - id: python-cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.pythonLocation }}
+        # Use all inputs in the cache key to avoid cache overrides by different installations.
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ env.today }}-${{ inputs.tf-version }}-${{ inputs.extras }}
+
+    # Install Python deps.
+    # If Python cache is restored then we don't need to install dependencies again.
+    - if: ${{ steps.python-cache.outputs.cache-hit != 'true' && inputs.tf-version != 'skip' }}
       run: pip install ${{ inputs.tf-version }}
       shell: bash
-    - run: pip install -e .[${{ inputs.extras }}]
+    - if: ${{ steps.python-cache.outputs.cache-hit != 'true' }}
+      run: pip install .[${{ inputs.extras }}]
       shell: bash
