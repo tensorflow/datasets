@@ -60,6 +60,7 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'array_record',
     'click',
     'dm-tree',
     'etils[enp,epath]>=0.9.0',
