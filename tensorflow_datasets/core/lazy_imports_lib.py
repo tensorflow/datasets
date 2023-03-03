@@ -125,6 +125,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def mwxml(cls):
+    return _try_import("mwxml")
+
+  @utils.classproperty
+  @classmethod
   def networkx(cls):
     return _try_import("networkx")
 
