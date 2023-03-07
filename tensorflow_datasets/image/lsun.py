@@ -84,12 +84,6 @@ _OBJECTS_CATEGORIES = [
 ]
 
 
-def _make_lmdb_dataset(path):
-  return tfds.core.lazy_imports.tensorflow_io.IODataset.from_lmdb(path)
-
-
-
-
 class Lsun(tfds.core.GeneratorBasedBuilder):
   """Lsun dataset."""
 
@@ -170,7 +164,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       path = os.path.join(extracted_dir, file_path, "data.mdb")
       if not tf.io.gfile.exists(path):
         raise RuntimeError(f"Could not open file {path}!")
-      dataset = _make_lmdb_dataset(path)
+      dataset = tfds.core.lazy_imports.tensorflow_io.IODataset.from_lmdb(path)
       for i, (id_bytes, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
         record = {
             "id": id_bytes.decode("utf-8"),
