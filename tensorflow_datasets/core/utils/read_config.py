@@ -39,6 +39,7 @@ MISSING = _MISSING('missing')
 
 @dataclasses.dataclass(eq=False)
 class ReadConfig:
+  # pyformat: disable
   """Configures input reading pipeline.
 
   Attributes:
@@ -88,6 +89,7 @@ class ReadConfig:
       False if input files have been tempered with and they don't mind missing
       records or have too many of them.
   """
+  # pyformat: enable
 
   # General tf.data.Dataset parametters
   options: Optional[tf.data.Options] = None
