@@ -17,8 +17,13 @@
 
 from typing import Any, Dict, List, Mapping
 
+from etils import epath
+import h5py
 import numpy as np
-from tensorflow_datasets.core.utils import tree_utils
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.robomimic import config
+import tree
+
 
 
 def _concat_obs(base_obs, extra_obs):
@@ -64,11 +69,11 @@ def build_episode(steps: Mapping[str, Any]) -> Dict[str, Any]:
 
   # The standard 'obs' needs to be extended with the last element from
   # 'next_obs' to reconstruct the full sequence.
-  obs = tree_utils.map_structure(np.array, dict(steps['obs']))
-  last_obs = tree_utils.map_structure(
+  obs = tree.map_structure(np.array, dict(steps['obs']))
+  last_obs = tree.map_structure(
       lambda el: el[-1], dict(steps['next_obs'])
   )
-  concat_obs = tree_utils.map_structure(_concat_obs, obs, last_obs)
+  concat_obs = tree.map_structure(_concat_obs, obs, last_obs)
 
   actions = steps['actions'][:]
   dones = steps['dones'][:]
@@ -91,3 +96,147 @@ def build_episode(steps: Mapping[str, Any]) -> Dict[str, Any]:
   )
 
   return episode
+
+
+def tensor_feature(size: int) -> tfds.features.Tensor:
+  return tfds.features.Tensor(
+      shape=(size,), dtype=np.float64, encoding=tfds.features.Encoding.ZLIB
+  )
+
+
+def image_feature(size: int) -> tfds.features.Image:
+  return tfds.features.Image(
+      shape=(size, size, 3), dtype=np.uint8, encoding_format='png'
+  )
+
+
+class RobomimicBuilder(tfds.core.GeneratorBasedBuilder):
+  """DatasetBuilder for robomimic datasets."""
+
+  VERSION: tfds.core.Version
+  RELEASE_NOTES: Dict[str, str]
+  BUILDER_CONFIGS: List[tfds.core.BuilderConfig]
+  DATASET_NAME: str
+  DATASET_FILE_EXTENSION: str = ''
+
+
+  def _info(self) -> tfds.core.DatasetInfo:
+    """Returns the dataset metadata."""
+    return self.dataset_info_from_configs(
+        features=self._get_features(),
+        supervised_keys=None,
+        homepage='https://arise-initiative.github.io/robomimic-web/',
+    )
+
+  def _get_features(self) -> tfds.features.FeaturesDict:
+    obs_dim = config.TASKS[self.builder_config.task]['object']
+    states_dim = config.TASKS[self.builder_config.task]['states']
+    action_size = config.TASKS[self.builder_config.task]['action_size']
+
+    observation = {
+        'object': tensor_feature(
+            obs_dim,
+        ),
+        'robot0_eef_pos': tensor_feature(3),
+        'robot0_eef_quat': tensor_feature(4),
+        'robot0_eef_vel_ang': tensor_feature(3),
+        'robot0_eef_vel_lin': tensor_feature(3),
+        'robot0_gripper_qpos': tensor_feature(2),
+        'robot0_gripper_qvel': tensor_feature(2),
+        'robot0_joint_pos': tensor_feature(7),
+        'robot0_joint_pos_cos': tensor_feature(7),
+        'robot0_joint_pos_sin': tensor_feature(7),
+        'robot0_joint_vel': tensor_feature(7),
+    }
+    if self.builder_config.task == config.Task.TRANSPORT:
+      observation['robot1_eef_pos'] = tensor_feature(3)
+      observation['robot1_eef_quat'] = tensor_feature(4)
+      observation['robot1_eef_vel_ang'] = tensor_feature(3)
+      observation['robot1_eef_vel_lin'] = tensor_feature(3)
+      observation['robot1_gripper_qpos'] = tensor_feature(2)
+      observation['robot1_gripper_qvel'] = tensor_feature(2)
+      observation['robot1_joint_pos'] = tensor_feature(7)
+      observation['robot1_joint_pos_cos'] = tensor_feature(7)
+      observation['robot1_joint_pos_sin'] = tensor_feature(7)
+      observation['robot1_joint_vel'] = tensor_feature(7)
+
+    if self.builder_config.filename == config.DataType.IMAGE:
+      if self.builder_config.task == config.Task.TOOL_HANG:
+        observation['robot0_eye_in_hand_image'] = image_feature(240)
+        observation['sideview_image'] = image_feature(240)
+      elif self.builder_config.task == config.Task.TRANSPORT:
+        observation['robot0_eye_in_hand_image'] = image_feature(84)
+        observation['robot1_eye_in_hand_image'] = image_feature(84)
+        observation['shouldercamera0_image'] = image_feature(84)
+        observation['shouldercamera1_image'] = image_feature(84)
+      else:
+        observation['agentview_image'] = image_feature(84)
+        observation['robot0_eye_in_hand_image'] = image_feature(84)
+
+    # metadata depends on the quality type
+    metadata = self._get_metadata()
+
+    features = tfds.features.FeaturesDict({
+        'horizon': np.int32,
+        'episode_id': np.str_,
+        'steps': tfds.features.Dataset({
+            'action': tensor_feature(action_size),
+            'observation': observation,
+            'reward': np.float64,
+            'is_first': np.bool_,
+            'is_last': np.bool_,
+            'is_terminal': np.bool_,
+            'discount': np.int32,
+            'states': tensor_feature(states_dim),
+        }),
+        **metadata,
+    })
+    return features
+
+  def _get_metadata(self) -> Dict[Any, Any]:
+    return {}
+
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+    """Returns SplitGenerators."""
+    # Machine generated datasets have an additional variant as they are trained
+    # using dense rather than sparse rewards. We currently are only interested
+    # in the sparse rewards, for consistency with the other datasets.
+    ext = self.DATASET_FILE_EXTENSION
+    filepath = (
+        'http://downloads.cs.stanford.edu/downloads/rt_benchmark/'
+        f'{self.builder_config.task}/{self.builder_config.dataset}/'
+        f'{self.builder_config.filename}{ext}.hdf5'
+    )
+    path = dl_manager.download_and_extract({'file_path': filepath})
+    return {
+        'train': self._generate_examples(path),
+    }
+
+  def _generate_examples(self, path):
+    """Yields examples."""
+    path = epath.Path(path['file_path'])
+    with path.open('rb') as f:
+      with h5py.File(f, 'r') as dataset_file:
+        data = dataset_file['data']
+        if 'mask' in dataset_file.keys():
+          mask = dataset_file['mask']
+          string_mask = {}
+          for k in mask:
+            string_mask[k] = []
+            for element in mask[k]:
+              string_mask[k].append(element.decode('UTF-8'))
+          mask = string_mask
+          for key in data:
+            yield key, {
+                'steps': build_episode(data[key]),
+                'horizon': self.builder_config.horizon,
+                'episode_id': key,
+                **episode_metadata(mask, key),
+            }
+        else:
+          for key in data:
+            yield key, {
+                'steps': build_episode(data[key]),
+                'horizon': self.builder_config.horizon,
+                'episode_id': key,
+            }

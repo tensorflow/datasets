@@ -19,7 +19,7 @@ from tensorflow_datasets.datasets.robomimic_ph import robomimic_ph_dataset_build
 import tensorflow_datasets.public_api as tfds
 
 
-class RobomimicPhLiftLowDimTest(tfds.testing.DatasetBuilderTestCase):
+class RobomimicPhTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for robomimic_ph dataset."""
 
   DATASET_CLASS = robomimic_ph_dataset_builder.Builder
@@ -29,8 +29,4 @@ class RobomimicPhLiftLowDimTest(tfds.testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {'file_path': 'lift_low_dim.hdf5'}
   DL_DOWNLOAD_RESULT = {'file_path': 'lift_low_dim.hdf5'}
 
-  BUILDER_CONFIG_NAMES_TO_TEST = ['lift_low_dim']
-
-
-if __name__ == '__main__':
-  tfds.testing.test_main()
+  BUILDER_CONFIG_NAMES_TO_TEST = ['lift_ph_low_dim']
