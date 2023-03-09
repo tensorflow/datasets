@@ -195,6 +195,8 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
   elif isinstance(feature, feature_lib.Sequence):
     if isinstance(hf_value, list):
       return hf_value
+    elif hf_value is None:
+      return []
     else:
       return [hf_value]
   elif isinstance(feature, feature_lib.Audio):

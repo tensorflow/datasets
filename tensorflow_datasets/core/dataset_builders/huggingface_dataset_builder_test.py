@@ -147,6 +147,9 @@ def test_convert_value_sequence():
   assert huggingface_dataset_builder._convert_value(42, sequence_feature) == [
       42
   ]
+  assert (
+      huggingface_dataset_builder._convert_value(None, sequence_feature) == []  # pylint: disable=g-explicit-bool-comparison
+  )
 
 
 def test_convert_value_image():
