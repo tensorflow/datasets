@@ -15,6 +15,7 @@
 
 """Tests for tensorflow_datasets.core.utils.tf_utils."""
 
+import numpy as np
 import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -62,11 +63,19 @@ def test_shapes_are_compatible():
   )
 
 
-def test_merge_shape():
-  tensor = tf.constant([28, 28, 3])
-  np_shape = (None, None, 3)
-  actual = tf_utils.merge_shape(tensor, np_shape)
-  assert actual == (tf.constant(28), tf.constant(28), 3)
+@pytest.mark.parametrize(
+    ['tensor', 'np_shape', 'result'],
+    [
+        (
+            tf.constant([28, 28, 3]),
+            (None, None, 3),
+            (tf.constant(28), tf.constant(28), 3),
+        ),
+        (np.array([28, 28, 3]), (None, None, 3), (28, 28, 3)),
+    ],
+)
+def test_merge_shape(tensor, np_shape, result):
+  assert tf_utils.merge_shape(tensor, np_shape) == result
 
 
 @pytest.mark.parametrize(

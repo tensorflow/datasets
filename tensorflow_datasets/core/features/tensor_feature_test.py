@@ -239,20 +239,12 @@ class FeatureTensorTest(
             testing.FeatureExpectationItem(
                 value=x,
                 expected=x,
+                expected_np=x,
             ),
             testing.FeatureExpectationItem(
                 value=x_other_shape,
                 expected=x_other_shape,
-            ),
-            testing.FeatureExpectationItem(
-                value=x,
-                raise_cls_np=ValueError,
-                raise_msg='including None are not supported',
-            ),
-            testing.FeatureExpectationItem(
-                value=x_other_shape,
-                raise_cls_np=ValueError,
-                raise_msg='including None are not supported',
+                expected_np=x_other_shape,
             ),
             # TODO(epot): Is there a way to catch if the user try to encode
             # tensors with different shapes ?

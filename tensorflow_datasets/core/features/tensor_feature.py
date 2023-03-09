@@ -18,7 +18,8 @@
 from __future__ import annotations
 
 import enum
-from typing import Optional, Union
+import functools
+from typing import Optional, Protocol, Tuple, TypeVar, Union
 import zlib
 
 from etils import enp
@@ -27,12 +28,15 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import np_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Json = utils.Json
 Shape = utils.Shape
+
+T = TypeVar('T')
 
 
 class Encoding(enum.Enum):
@@ -195,16 +199,24 @@ class Tensor(feature_lib.FeatureConnector):
     else:
       return example_data
 
+  def _get_value_and_shape(self, example_data):
+    if self._dynamic_shape:
+      value = example_data['value']
+      # Extract the shape (while using static values when available)
+      if enp.lazy.has_tf and isinstance(example_data['shape'], tf.Tensor):
+        shape = utils.merge_shape(example_data['shape'], self._shape)
+      else:
+        shape = utils.merge_shape(
+            example_data['shape'][: len(value)], self._shape
+        )
+    else:
+      value = example_data
+      shape = np_utils.to_np_shape(self._shape)
+    return value, shape
+
   def decode_example(self, tfexample_data):
     """See base class for details."""
-    if self._dynamic_shape:
-      value = tfexample_data['value']
-      # Extract the shape (while using static values when available)
-      shape = utils.merge_shape(tfexample_data['shape'], self._shape)
-    else:
-      value = tfexample_data
-      shape = tuple(-1 if dim is None else dim for dim in self._shape)
-
+    value, shape = self._get_value_and_shape(tfexample_data)
     if self._encoded_to_bytes:
       if self._encoding == Encoding.ZLIB:
         value = tf.io.decode_compressed(value, compression_type='ZLIB')
@@ -213,12 +225,21 @@ class Tensor(feature_lib.FeatureConnector):
 
     return value
 
-  def decode_example_np(self, example_data):
+  def decode_example_np(
+      self, example_data: type_utils.NpArrayOrScalar
+  ) -> type_utils.NpArrayOrScalar:
+    example_data, shape = self._get_value_and_shape(example_data)
     if not self._encoded_to_bytes:
+      if isinstance(example_data, np.ndarray):
+        return example_data.reshape(shape)
       return example_data
     if self._encoding == Encoding.ZLIB:
-      example_data = zlib.decompress(example_data)
-    return np.frombuffer(example_data, dtype=self._dtype).reshape(self._shape)
+      example_data = _execute_function_on_array_or_scalar(
+          zlib.decompress, example_data
+      )
+    return _execute_function_on_array_or_scalar(
+        _bytes_to_np_array, example_data, dtype=self._dtype, shape=shape
+    )
 
   def decode_batch_example(self, example_data):
     """See base class for details."""
@@ -265,6 +286,37 @@ class Tensor(feature_lib.FeatureConnector):
         dtype=feature_lib.dtype_to_str(self._dtype),
         encoding=self._encoding.value,
     )
+
+
+def _bytes_to_np_array(example_data: bytes, dtype: np.dtype, shape: Tuple[int]):
+  return np.frombuffer(example_data, dtype=dtype).reshape(shape)
+
+
+class InputFunc(Protocol[T]):
+  """This protocol is used to type _execute_function_on_array_or_scalar."""
+
+  def __call__(
+      self, example_data: type_utils.NpArrayOrScalar, *args, **kwargs
+  ) -> T:
+    ...
+
+
+def _execute_function_on_array_or_scalar(
+    function: InputFunc[T],
+    data: type_utils.NpArrayOrScalar,
+    *args,
+    **kwargs,
+) -> T:
+  """Runs `function` on `data`, or each element of `data` if it's an array."""
+  if isinstance(data, bytes):
+    return function(data, *args, **kwargs)
+  if isinstance(data, np.ndarray):
+    partial_function = functools.partial(function, *args, **kwargs)
+    return np.array(list(map(partial_function, data)))
+  raise ValueError(
+      'example should have type `bytes` or `np.ndarray(dtype=bytes)`, but'
+      f' has wrong type {type(data)}'
+  )
 
 
 def get_inner_feature_repr(feature):

@@ -701,8 +701,8 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     return tfexample_data
 
   def decode_example_np(
-      self, example_data: type_utils.NpArrayOrScalarDict
-  ) -> type_utils.NpArrayOrScalarDict:
+      self, example_data: type_utils.NpArrayOrScalar
+  ) -> type_utils.NpArrayOrScalar:
     """Encode the feature dict into NumPy-compatible input.
 
     Args:

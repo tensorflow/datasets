@@ -160,7 +160,9 @@ def assert_shape_match(
     if shape1 != shape2:
       raise ValueError(f'Shapes {shape1} and {shape2} must have the same rank')
     return
-  if len(shape1) != len(shape2):
+  rank1 = len(shape1)
+  rank2 = len(shape2)
+  if rank1 != rank2:
     raise ValueError(f'Shapes {shape1} and {shape2} must have the same rank')
   for dimension1, dimension2 in zip(shape1, shape2):
     if dimension1 is None or dimension2 is None:
@@ -172,10 +174,10 @@ def assert_shape_match(
 def assert_tf_shape_match(
     shape1: tf.TensorShape, shape2: tf.TensorShape
 ) -> None:
-  if shape1.ndims is None or shape2.ndims is None:
+  if shape1.rank is None or shape2.rank is None:
     raise ValueError(
         'Shapes must have known rank. Got %s and %s.'
-        % (shape1.ndims, shape2.ndims)
+        % (shape1.rank, shape2.rank)
     )
   shape1.assert_same_rank(shape2)
   shape1.assert_is_compatible_with(shape2)
@@ -209,7 +211,9 @@ def normalize_shape(
     return shape
 
 
-def merge_shape(tf_shape: tf.Tensor, np_shape: type_utils.Shape):
+def merge_shape(
+    tf_shape: Union[tf.Tensor, np.ndarray], np_shape: type_utils.Shape
+):
   """Returns the most static version of the shape.
 
   Static `None` values are replaced by dynamic `tf.Tensor` values.
@@ -230,7 +234,7 @@ def merge_shape(tf_shape: tf.Tensor, np_shape: type_utils.Shape):
   Returns:
     A tuple like np_shape, but with `None` values replaced by `tf.Tensor` values
   """
-  assert_tf_shape_match(tf_shape.shape, tf.TensorShape((len(np_shape),)))
+  assert_shape_match(tf_shape.shape, (len(np_shape),))
   return tuple(
       tf_shape[i] if dim is None else dim for i, dim in enumerate(np_shape)
   )

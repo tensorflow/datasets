@@ -165,11 +165,6 @@ def _feature_to_numpy(
   """
   dtype = tensor_info.np_dtype
   shape = tensor_info.shape
-  if None in shape:
-    raise ValueError(
-        f"tensors with shape ({shape}) including None are not supported when"
-        " decoding with NumPy."
-    )
   if feature.HasField("int64_list"):
     value_array = feature.int64_list.value
   elif feature.HasField("float_list"):
@@ -178,12 +173,10 @@ def _feature_to_numpy(
     value_array = feature.bytes_list.value
   else:
     raise AttributeError(f"cannot convert '{feature_name}' from proto to NumPy")
-  array = np.array(value_array, dtype=dtype).reshape(shape)
+  value_array = np.array(value_array, dtype=dtype)
   if not shape:
-    if array.size != 1:
-      raise ValueError(f"scalar feature '{feature_name}' should have length 1")
-    return array.item()
-  return array
+    return value_array.item()
+  return value_array
 
 
 def _build_feature_specs(flat_example_specs):
