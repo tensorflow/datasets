@@ -32,6 +32,9 @@ def test_example_parser_np():
           'nested_float': np.float32,
       }),
       'array_of_ints': features_lib.Tensor(shape=(2,), dtype=np.int8),
+      'array_of_unknown_shape': features_lib.Tensor(
+          shape=(None,), dtype=np.uint16
+      ),
   })
   serialized_example = example_pb2.Example(
       features=feature_pb2.Features(
@@ -45,42 +48,25 @@ def test_example_parser_np():
               'array_of_ints': feature_pb2.Feature(
                   int64_list=feature_pb2.Int64List(value=[2, 3])
               ),
+              'array_of_unknown_shape': feature_pb2.Feature(
+                  int64_list=feature_pb2.Int64List(value=[4, 5, 6])
+              ),
           }
       )
   ).SerializeToString()
   expected_np = {
       'feature': {'nested_text': b'thisistext', 'nested_float': 1.0},
       'array_of_ints': np.asarray([2, 3], dtype=np.int8),
+      'array_of_unknown_shape': np.asarray([4, 5, 6], dtype=np.uint16),
   }
   example_specs = features.get_tensor_info()
   example_parser_np = example_parser.ExampleParserNp(example_specs)
   parsed_example = example_parser_np.parse_example(serialized_example)
   assert isinstance(parsed_example['array_of_ints'], np.ndarray)
+  assert isinstance(parsed_example['array_of_unknown_shape'], np.ndarray)
   assert parsed_example['array_of_ints'].dtype == np.int8
+  assert parsed_example['array_of_unknown_shape'].dtype == np.uint16
   np.testing.assert_equal(parsed_example, expected_np)
-
-
-def test_raise_exception_if_example_has_wrong_shape():
-  features = features_lib.FeaturesDict(
-      {
-          'array_of_ints': features_lib.Tensor(shape=(2,), dtype=np.int8),
-      }
-  )
-  serialized_example = example_pb2.Example(
-      features=feature_pb2.Features(
-          feature={
-              'array_of_ints': feature_pb2.Feature(
-                  int64_list=feature_pb2.Int64List(value=[2, 3, 4])
-              ),
-          }
-      )
-  ).SerializeToString()
-  example_specs = features.get_tensor_info()
-  example_parser_np = example_parser.ExampleParserNp(example_specs)
-  with pytest.raises(
-      ValueError, match='(.|\n)*cannot reshape array of size 3 into shape (2,)*'
-  ):
-    example_parser_np.parse_example(serialized_example)
 
 
 def test_key_error_exception_if_example_specs_is_malformed():

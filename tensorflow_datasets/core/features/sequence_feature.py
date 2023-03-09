@@ -99,7 +99,7 @@ class Sequence(top_level_feature.TopLevelFeature):
       length: `int`, length of the sequence if static and known in advance
       doc: Documentation of this feature (e.g. description).
     """
-    # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
+    # Convert {} => FeaturesDict, np.int32 => Tensor(shape=(), dtype=np.int32)
     self._feature = features_dict.to_feature(feature)
     self._length = length
     super(Sequence, self).__init__(doc=doc)
