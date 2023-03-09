@@ -65,18 +65,30 @@ def jpeg_cmyk_to_rgb(image_bytes: bytes, quality: int = 100) -> bytes:
 def ffmpeg_run(
     args: List[str],
     stdin: Optional[bytes] = None,
-) -> None:
-  """Executes the ffmpeg function."""
+    timeout: Optional[int] = None,
+) -> bytes:
+  """Executes the ffmpeg function.
+
+  Args:
+    args: A list of string args and flags to send to the ffmpeg binary.
+    stdin: Bytes to provide as standard input, or None.
+    timeout: Maximum amount of seconds to wait for, before interrupting the
+      command. None to wait forever.
+
+  Returns:
+    The stdout output.
+  """
   ffmpeg_path = 'ffmpeg'
   try:
     cmd_args = [ffmpeg_path] + args
-    subprocess.run(
+    return subprocess.run(
         cmd_args,
         check=True,
         input=stdin,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-    )
+        timeout=timeout,
+    ).stdout
   except subprocess.CalledProcessError as e:
     raise ValueError(
         f'Command {e.cmd} returned error code {e.returncode}:\n'
