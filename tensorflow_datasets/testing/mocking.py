@@ -27,6 +27,7 @@ import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.core.utils import dtype_utils
@@ -192,6 +193,14 @@ def mock_data(
       features = self.info.features
       decoders = decoders  # pylint: disable=self-assigning-variable
 
+    @tfds_logging.parse_example()
+    def decode_identity_logged(value):
+      return value
+
+    @tfds_logging.parse_example()
+    def decode_example_logged(value):
+      return features.decode_example(value, decoders=decoders)
+
     has_nested_dataset = any(
         isinstance(f, features_lib.Dataset) for f in features._flatten(features)
     )  # pylint: disable=protected-access
@@ -199,11 +208,11 @@ def mock_data(
       # If a decoder is passed, encode/decode the examples.
       generator_cls = EncodedRandomFakeGenerator
       specs = features.get_serialized_info()
-      decode_fn = functools.partial(features.decode_example, decoders=decoders)
+      decode_fn = decode_example_logged
     else:
       generator_cls = RandomFakeGenerator
       specs = features.get_tensor_info()
-      decode_fn = lambda ex: ex  # identity
+      decode_fn = decode_identity_logged
 
     ds = tf.data.Dataset.from_generator(
         # `from_generator` takes a callable with signature () -> iterable
@@ -221,7 +230,7 @@ def mock_data(
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
     )
     ds = ds.apply(tf.data.experimental.assert_cardinality(num_examples))
-    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    ds = ds.map(decode_fn, num_parallel_calls=1)
 
     if read_config and read_config.add_tfds_id:
       ds_id = reader_lib._make_id_dataset(  # pylint: disable=protected-access

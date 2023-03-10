@@ -450,3 +450,17 @@ class dataset_collection(_FunctionDecorator):  # pylint: disable=invalid-name
         name=args[0] if args else kwargs["name"],
         loader_kwargs=kwargs.get("loader_kwargs"),
     )
+
+
+class parse_example(_FunctionDecorator):  # pylint: disable=invalid-name
+  """Decorator to call `parse_example` method on registered loggers."""
+
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    logger_method(
+        value=args[0] if args else None,
+    )

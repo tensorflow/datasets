@@ -176,3 +176,7 @@ class Logger:
   def process_ends(self):
     """Called when the process is about to end (atexit)."""
     pass
+
+  def parse_example(self, *, metadata: call_metadata.CallMetadata, value: Any):
+    """Callback called when `ds.map()` is called with a parsing function."""
+    pass

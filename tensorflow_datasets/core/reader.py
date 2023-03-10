@@ -26,6 +26,7 @@ from absl import logging
 import numpy as np
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
@@ -451,11 +452,13 @@ class Reader(object):
     )
 
     # Parse and decode
+    @tfds_logging.parse_example()
     def parse_and_decode(ex: Tensor) -> TreeDict[Tensor]:
       # TODO(pierrot): `parse_example` uses
       # `tf.io.parse_single_example`. It might be faster to use `parse_example`,
       # after batching.
       # https://www.tensorflow.org/api_docs/python/tf/io/parse_example
+      logging.error('parse_and_decode called.')  # DO NOT SUBMIT.
       ex = self._parser.parse_example(ex)
       if decode_fn:
         ex = decode_fn(ex)
