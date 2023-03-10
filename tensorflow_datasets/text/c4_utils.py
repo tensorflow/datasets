@@ -201,6 +201,7 @@ def clean_page(
     min_words_per_line=_MIN_WORDS_PER_LINE,
     min_num_sentences=_MIN_NUM_SENTENCES,
     max_word_length=_MAX_WORD_LENGTH,
+    line_delimiter="\n",
 ) -> Iterable[PageFeatures]:
   """Cleans a CommonCrawl page, yielding nothing if it should be skipped.
 
@@ -219,6 +220,7 @@ def clean_page(
       be skipped.
     max_word_length: int, the maximum number of characters allowed in a word.
       Lines containing a word with too many characters are removed.
+    line_delimiter: str, the delimiter used to separate and join lines.
 
   Yields:
     The url and cleaned text for the page.
@@ -275,22 +277,24 @@ def clean_page(
     counter_inc_fn("filtered:too_few_sentences")
     return
   counter_inc_fn("passed")
-  yield dataclasses.replace(page, text="\n".join(valid_lines).strip())
+  yield dataclasses.replace(page, text=line_delimiter.join(valid_lines).strip())
 
 
 def _hash_text(text):
   return hashlib.md5(tf.compat.as_text(text).encode("utf-8")).hexdigest()
 
 
-def _emit_url_to_lines(page: PageFeatures) -> Iterable[Tuple[str, str]]:
+def _emit_url_to_lines(
+    page: PageFeatures, line_delimiter="\n"
+) -> Iterable[Tuple[str, str]]:
   """Emits url to all (lower-cased, hashed) lines."""
   text = page.text
-  for line in text.split("\n"):
+  for line in text.split(line_delimiter):
     yield _hash_text(line.strip().lower()), page.url
 
 
 def _remove_lines_from_text(
-    el, counter_inc_fn, min_num_sentences
+    el, counter_inc_fn, min_num_sentences, line_delimiter="\n"
 ) -> Iterable[PageFeatures]:
   """Removes all lines from the page that do not match the given set of hashes.
 
@@ -306,6 +310,7 @@ def _remove_lines_from_text(
       incremented and the (optional) amount.
     min_num_sentences: int, the minimum number of sentences a page needs to not
       be skipped.
+    line_delimiter: str, the delimiter used to separate and join lines.
 
   Yields:
     The page features with lines removed from text.
@@ -319,7 +324,7 @@ def _remove_lines_from_text(
   lines_to_keep = set(join_values["lines"])
   new_lines = []
   hashed_lines = set()
-  for line in text.split("\n"):
+  for line in text.split(line_delimiter):
     hashed_line = _hash_text(line.strip().lower())
     if hashed_line not in lines_to_keep:
       counter_inc_fn("line-filtered:global_duplicate")
@@ -329,7 +334,7 @@ def _remove_lines_from_text(
       counter_inc_fn("line-passed")
       new_lines.append(line)
       hashed_lines.add(hashed_line)
-  new_text = "\n".join(new_lines)
+  new_text = line_delimiter.join(new_lines)
   if not new_text:
     counter_inc_fn("filtered:empty")
     return
@@ -340,7 +345,9 @@ def _remove_lines_from_text(
   yield dataclasses.replace(page, text=new_text)
 
 
-def remove_duplicate_text(pages, min_num_sentences=_MIN_NUM_SENTENCES):
+def remove_duplicate_text(
+    pages, min_num_sentences=_MIN_NUM_SENTENCES, line_delimiter="\n"
+):
   """Utility to remove duplicate lines across text documents."""
   beam = tfds.core.lazy_imports.apache_beam
 
@@ -349,7 +356,7 @@ def remove_duplicate_text(pages, min_num_sentences=_MIN_NUM_SENTENCES):
   # line, [url]
   line_to_selected_url = (
       pages
-      | beam.FlatMap(_emit_url_to_lines)
+      | beam.FlatMap(_emit_url_to_lines, line_delimiter=line_delimiter)
       | beam.combiners.Top.PerKey(1, key=_hash_text, reverse=True)
   )
   # url, line
@@ -363,13 +370,14 @@ def remove_duplicate_text(pages, min_num_sentences=_MIN_NUM_SENTENCES):
           _remove_lines_from_text,
           counter_inc_fn=get_counter_inc_fn("dedupe-lines"),
           min_num_sentences=min_num_sentences,
+          line_delimiter=line_delimiter,
       )
   )
 
   return final_docs
 
 
-def split_wet_file(wet_file_path, counter_inc_fn=None):
+def split_wet_file(wet_file_path, counter_inc_fn=None, line_delimiter="\n"):
   """Split a WET file into separate pages."""
   logging.info("Splitting file: %s", wet_file_path)
   if not counter_inc_fn:
@@ -419,7 +427,7 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
         continue
 
       if page.text:
-        page.text += "\n"
+        page.text += line_delimiter
       page.text += line
 
     if _validate_features(page):
@@ -540,9 +548,11 @@ def get_badwords_filter_fn(
   return badwords_filter
 
 
-def paragraph_filter(page, min_paragraphs=3, min_paragraph_len=200):
+def paragraph_filter(
+    page, min_paragraphs=3, min_paragraph_len=200, line_delimiter="\n"
+):
   """Returns False iff a page has too few or too short paragraphs."""
-  lines = page.text.split("\n")
+  lines = page.text.split(line_delimiter)
   # Filter out docs that don't have at least three "paragraphs"
   # (lines >= `min_paragraph_len` chars).
   if (
