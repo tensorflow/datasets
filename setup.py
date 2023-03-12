@@ -66,6 +66,7 @@ REQUIRED_PKGS = [
     'etils[enp,epath]>=0.9.0',
     'numpy',
     'promise',
+    'packaging>=14.1',
     'protobuf>=3.12.2',
     'psutil',
     'requests>=2.19.0',

@@ -17,9 +17,9 @@
 
 # pylint: disable=g-import-not-at-top,g-direct-tensorflow-import
 
-import distutils.version
 import functools
 import os
+import packaging.version
 from typing import Optional
 
 MIN_TF_VERSION = "2.1.0"
@@ -44,8 +44,8 @@ def ensure_tf_version(tf):  # pylint: disable=g-statement-before-imports
     return
   _ensure_tf_version_called = True
 
-  tf_version = distutils.version.LooseVersion(tf.__version__)
-  min_tf_version = distutils.version.LooseVersion(MIN_TF_VERSION)
+  tf_version = packaging.version.parse(tf.__version__)
+  min_tf_version = packaging.version.parse(MIN_TF_VERSION)
   if tf_version < min_tf_version:
     raise ImportError(
         "This version of TensorFlow Datasets requires TensorFlow "
