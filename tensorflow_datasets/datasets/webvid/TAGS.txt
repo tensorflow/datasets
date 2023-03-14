@@ -1,0 +1,4 @@
+content.data-type.text # Contains text data.
+content.data-type.video # Contains video data.
+content.language.en # Contains text in language English / en.
+ml.task.conditional-image-generation # Relates to Conditional Image Generation, a machine learning task.
