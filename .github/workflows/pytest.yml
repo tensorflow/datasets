@@ -85,6 +85,7 @@ jobs:
     # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
     # * github_api is run separately to not overuse API quota.
     # * wmt is run separately to avoid worker hanging.
+    # * TODO(b/273289576): dataset_utils_test and sequence_feature_test fail until TensorFlow 2.12.0
     - name: Run core tests
       run: |
         pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ env.PYTEST_NUM_SHARDS }} \
@@ -94,7 +95,9 @@ jobs:
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
           --ignore="tensorflow_datasets/import_without_tf_test.py" \
           --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
-          --ignore="tensorflow_datasets/translate/wmt19_test.py"
+          --ignore="tensorflow_datasets/translate/wmt19_test.py" \
+          --ignore="tensorflow_datasets/core/dataset_utils_test.py" \
+          --ignore="tensorflow_datasets/core/features/sequence_feature_test.py"
 
     # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
     - name: Run leftover tests
