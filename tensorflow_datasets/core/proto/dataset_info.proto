@@ -98,6 +98,47 @@ message RedistributionInfo {
   string license = 1;
 }
 
+message DataSourceAccess {
+  // The time when the data was accessed in milli seconds since unix epoch.
+  int64 access_timestamp_ms = 1;
+
+  oneof source {
+    FileSystem file_system = 2;
+    SqlQuery sql_query = 3;
+    TfdsDatasetReference tfds_dataset = 4;
+  }
+}
+
+message FileSystem {
+  // The path of the files that were read to generate the data. Can contain
+  // wildcards, e.g. data-tfrecord-*.
+  string path = 1;
+}
+
+message SqlQuery {
+  // The SQL query that was executed to get the source data for the dataset.
+  string sql_query = 1;
+}
+
+// A reference to a TFDS dataset.
+message TfdsDatasetReference {
+  // Name of the dataset, e.g. mnist.
+  string name = 1;
+
+  // The config of the variant.
+  string config = 2;
+
+  // The version of the dataset.
+  string version = 3;
+
+  // The root data dir that contains the dataset.
+  string data_dir = 4;
+
+  // The namespace of the dataset, e.g. huggingface. Note that we prefix by ds_
+  // to avoid conflicts with reserved in keywords in languages like C++.
+  string ds_namespace = 5;
+}
+
 // This is a serialization of tensorflow_datasets.core.DatasetInfo.
 message DatasetInfo {
   string name = 1;
@@ -159,5 +200,8 @@ message DatasetInfo {
   // Use string to allow format extension without regenerating the proto.
   string file_format = 17;
 
-  // Next available: 20
+  // The data that was used to generate this dataset.
+  repeated DataSourceAccess data_source_accesses = 20;
+
+  // Next available: 21
 }

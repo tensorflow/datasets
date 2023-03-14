@@ -27,6 +27,7 @@ from google.protobuf import symbol_database as _symbol_database
 
 _sym_db = _symbol_database.Default()
 
+
 DESCRIPTOR = _descriptor.FileDescriptor(
     name='feature.proto',
     package='tensorflow_datasets',
@@ -36,7 +37,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
         b'\n\rfeature.proto\x12\x13tensorflow_datasets"\xa0\x01\n\x0c\x46\x65\x61turesDict\x12\x41\n\x08\x66\x65\x61tures\x18\x01'
         b' \x03(\x0b\x32/.tensorflow_datasets.FeaturesDict.FeaturesEntry\x1aM\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01'
         b' \x01(\t\x12+\n\x05value\x18\x02'
-        b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature:\x02\x38\x01"\xee\x05\n\x07\x46\x65\x61ture\x12\x19\n\x11python_class_name\x18\x01'
+        b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature:\x02\x38\x01"\xbf\x05\n\x07\x46\x65\x61ture\x12\x19\n\x11python_class_name\x18\x01'
         b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x0e'
         b' \x01(\t\x12\x13\n\x0bvalue_range\x18\x0f'
         b' \x01(\t\x12\x38\n\x0cjson_feature\x18\x02 \x01(\x0b\x32'
@@ -51,11 +52,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
         b' \x01(\x0b\x32'
         b' .tensorflow_datasets.TextFeatureH\x00\x12>\n\x0btranslation\x18\x0b'
         b" \x01(\x0b\x32'.tensorflow_datasets.TranslationFeatureH\x00\x12\x31\n\x08sequence\x18\x0c"
-        b' \x01(\x0b\x32\x1d.tensorflow_datasets.SequenceH\x00\x12-\n\x06scalar\x18\r'
-        b' \x01(\x0b\x32\x1b.tensorflow_datasets.ScalarH\x00\x42\t\n\x07\x63ontent"\x1b\n\x0bJsonFeature\x12\x0c\n\x04json\x18\x01'
+        b' \x01(\x0b\x32\x1d.tensorflow_datasets.SequenceH\x00\x42\t\n\x07\x63ontent"\x1b\n\x0bJsonFeature\x12\x0c\n\x04json\x18\x01'
         b' \x01(\t"\x1b\n\x05Shape\x12\x12\n\ndimensions\x18\x01'
-        b' \x03(\x03"\x17\n\x06Scalar\x12\r\n\x05\x64type\x18\x01'
-        b' \x01(\t"[\n\rTensorFeature\x12)\n\x05shape\x18\x01'
+        b' \x03(\x03"[\n\rTensorFeature\x12)\n\x05shape\x18\x01'
         b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
         b' \x01(\t\x12\x10\n\x08\x65ncoding\x18\x03'
         b' \x01(\t"!\n\nClassLabel\x12\x13\n\x0bnum_classes\x18\x01'
@@ -83,6 +82,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
         b' \x01(\x03\x42\x03\xf8\x01\x01\x62\x06proto3'
     ),
 )
+
 
 _FEATURESDICT_FEATURESENTRY = _descriptor.Descriptor(
     name='FeaturesEntry',
@@ -179,6 +179,7 @@ _FEATURESDICT = _descriptor.Descriptor(
     serialized_start=39,
     serialized_end=199,
 )
+
 
 _FEATURE = _descriptor.Descriptor(
     name='Feature',
@@ -439,24 +440,6 @@ _FEATURE = _descriptor.Descriptor(
             serialized_options=None,
             file=DESCRIPTOR,
         ),
-        _descriptor.FieldDescriptor(
-            name='scalar',
-            full_name='tensorflow_datasets.Feature.scalar',
-            index=14,
-            number=13,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
     ],
     extensions=[],
     nested_types=[],
@@ -475,8 +458,9 @@ _FEATURE = _descriptor.Descriptor(
         ),
     ],
     serialized_start=202,
-    serialized_end=952,
+    serialized_end=905,
 )
+
 
 _JSONFEATURE = _descriptor.Descriptor(
     name='JsonFeature',
@@ -512,9 +496,10 @@ _JSONFEATURE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=954,
-    serialized_end=981,
+    serialized_start=907,
+    serialized_end=934,
 )
+
 
 _SHAPE = _descriptor.Descriptor(
     name='Shape',
@@ -550,47 +535,10 @@ _SHAPE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=983,
-    serialized_end=1010,
+    serialized_start=936,
+    serialized_end=963,
 )
 
-_SCALAR = _descriptor.Descriptor(
-    name='Scalar',
-    full_name='tensorflow_datasets.Scalar',
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name='dtype',
-            full_name='tensorflow_datasets.Scalar.dtype',
-            index=0,
-            number=1,
-            type=9,
-            cpp_type=9,
-            label=1,
-            has_default_value=False,
-            default_value=b''.decode('utf-8'),
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax='proto3',
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=1012,
-    serialized_end=1035,
-)
 
 _TENSORFEATURE = _descriptor.Descriptor(
     name='TensorFeature',
@@ -662,9 +610,10 @@ _TENSORFEATURE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1037,
-    serialized_end=1128,
+    serialized_start=965,
+    serialized_end=1056,
 )
+
 
 _CLASSLABEL = _descriptor.Descriptor(
     name='ClassLabel',
@@ -700,9 +649,10 @@ _CLASSLABEL = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1130,
-    serialized_end=1163,
+    serialized_start=1058,
+    serialized_end=1091,
 )
+
 
 _IMAGEFEATURE = _descriptor.Descriptor(
     name='ImageFeature',
@@ -810,9 +760,10 @@ _IMAGEFEATURE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1166,
-    serialized_end=1333,
+    serialized_start=1094,
+    serialized_end=1261,
 )
+
 
 _VIDEOFEATURE = _descriptor.Descriptor(
     name='VideoFeature',
@@ -920,9 +871,10 @@ _VIDEOFEATURE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1336,
-    serialized_end=1482,
+    serialized_start=1264,
+    serialized_end=1410,
 )
+
 
 _AUDIOFEATURE = _descriptor.Descriptor(
     name='AudioFeature',
@@ -1030,9 +982,10 @@ _AUDIOFEATURE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1485,
-    serialized_end=1617,
+    serialized_start=1413,
+    serialized_end=1545,
 )
+
 
 _BOUNDINGBOXFEATURE = _descriptor.Descriptor(
     name='BoundingBoxFeature',
@@ -1086,9 +1039,10 @@ _BOUNDINGBOXFEATURE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1619,
-    serialized_end=1697,
+    serialized_start=1547,
+    serialized_end=1625,
 )
+
 
 _TEXTFEATURE = _descriptor.Descriptor(
     name='TextFeature',
@@ -1105,9 +1059,10 @@ _TEXTFEATURE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1699,
-    serialized_end=1712,
+    serialized_start=1627,
+    serialized_end=1640,
 )
+
 
 _TRANSLATIONFEATURE = _descriptor.Descriptor(
     name='TranslationFeature',
@@ -1161,9 +1116,10 @@ _TRANSLATIONFEATURE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1714,
-    serialized_end=1793,
+    serialized_start=1642,
+    serialized_end=1721,
 )
+
 
 _SEQUENCE = _descriptor.Descriptor(
     name='Sequence',
@@ -1217,8 +1173,8 @@ _SEQUENCE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1795,
-    serialized_end=1868,
+    serialized_start=1723,
+    serialized_end=1796,
 )
 
 _FEATURESDICT_FEATURESENTRY.fields_by_name['value'].message_type = _FEATURE
@@ -1237,7 +1193,6 @@ _FEATURE.fields_by_name['bounding_box'].message_type = _BOUNDINGBOXFEATURE
 _FEATURE.fields_by_name['text'].message_type = _TEXTFEATURE
 _FEATURE.fields_by_name['translation'].message_type = _TRANSLATIONFEATURE
 _FEATURE.fields_by_name['sequence'].message_type = _SEQUENCE
-_FEATURE.fields_by_name['scalar'].message_type = _SCALAR
 _FEATURE.oneofs_by_name['content'].fields.append(
     _FEATURE.fields_by_name['json_feature']
 )
@@ -1304,12 +1259,6 @@ _FEATURE.oneofs_by_name['content'].fields.append(
 _FEATURE.fields_by_name['sequence'].containing_oneof = _FEATURE.oneofs_by_name[
     'content'
 ]
-_FEATURE.oneofs_by_name['content'].fields.append(
-    _FEATURE.fields_by_name['scalar']
-)
-_FEATURE.fields_by_name['scalar'].containing_oneof = _FEATURE.oneofs_by_name[
-    'content'
-]
 _TENSORFEATURE.fields_by_name['shape'].message_type = _SHAPE
 _IMAGEFEATURE.fields_by_name['shape'].message_type = _SHAPE
 _IMAGEFEATURE.fields_by_name['label'].message_type = _CLASSLABEL
@@ -1321,7 +1270,6 @@ DESCRIPTOR.message_types_by_name['FeaturesDict'] = _FEATURESDICT
 DESCRIPTOR.message_types_by_name['Feature'] = _FEATURE
 DESCRIPTOR.message_types_by_name['JsonFeature'] = _JSONFEATURE
 DESCRIPTOR.message_types_by_name['Shape'] = _SHAPE
-DESCRIPTOR.message_types_by_name['Scalar'] = _SCALAR
 DESCRIPTOR.message_types_by_name['TensorFeature'] = _TENSORFEATURE
 DESCRIPTOR.message_types_by_name['ClassLabel'] = _CLASSLABEL
 DESCRIPTOR.message_types_by_name['ImageFeature'] = _IMAGEFEATURE
@@ -1342,12 +1290,12 @@ FeaturesDict = _reflection.GeneratedProtocolMessageType(
             (_message.Message,),
             {
                 'DESCRIPTOR': _FEATURESDICT_FEATURESENTRY,
-                '__module__': 'feature_pb2'
+                '__module__': 'feature_pb2',
                 # @@protoc_insertion_point(class_scope:tensorflow_datasets.FeaturesDict.FeaturesEntry)
             },
         ),
         'DESCRIPTOR': _FEATURESDICT,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.FeaturesDict)
     },
 )
@@ -1359,7 +1307,7 @@ Feature = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _FEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.Feature)
     },
 )
@@ -1370,7 +1318,7 @@ JsonFeature = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _JSONFEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.JsonFeature)
     },
 )
@@ -1381,29 +1329,18 @@ Shape = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _SHAPE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.Shape)
     },
 )
 _sym_db.RegisterMessage(Shape)
-
-Scalar = _reflection.GeneratedProtocolMessageType(
-    'Scalar',
-    (_message.Message,),
-    {
-        'DESCRIPTOR': _SCALAR,
-        '__module__': 'feature_pb2'
-        # @@protoc_insertion_point(class_scope:tensorflow_datasets.Scalar)
-    },
-)
-_sym_db.RegisterMessage(Scalar)
 
 TensorFeature = _reflection.GeneratedProtocolMessageType(
     'TensorFeature',
     (_message.Message,),
     {
         'DESCRIPTOR': _TENSORFEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.TensorFeature)
     },
 )
@@ -1414,7 +1351,7 @@ ClassLabel = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _CLASSLABEL,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.ClassLabel)
     },
 )
@@ -1425,7 +1362,7 @@ ImageFeature = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _IMAGEFEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.ImageFeature)
     },
 )
@@ -1436,7 +1373,7 @@ VideoFeature = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _VIDEOFEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.VideoFeature)
     },
 )
@@ -1447,7 +1384,7 @@ AudioFeature = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _AUDIOFEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.AudioFeature)
     },
 )
@@ -1458,7 +1395,7 @@ BoundingBoxFeature = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _BOUNDINGBOXFEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.BoundingBoxFeature)
     },
 )
@@ -1469,7 +1406,7 @@ TextFeature = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _TEXTFEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.TextFeature)
     },
 )
@@ -1480,7 +1417,7 @@ TranslationFeature = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _TRANSLATIONFEATURE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.TranslationFeature)
     },
 )
@@ -1491,11 +1428,12 @@ Sequence = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _SEQUENCE,
-        '__module__': 'feature_pb2'
+        '__module__': 'feature_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.Sequence)
     },
 )
 _sym_db.RegisterMessage(Sequence)
+
 
 DESCRIPTOR._options = None
 _FEATURESDICT_FEATURESENTRY._options = None

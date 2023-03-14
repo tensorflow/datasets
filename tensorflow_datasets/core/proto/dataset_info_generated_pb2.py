@@ -27,9 +27,11 @@ from google.protobuf import symbol_database as _symbol_database
 
 _sym_db = _symbol_database.Default()
 
+
 from tensorflow_datasets.core.proto import feature_generated_pb2 as feature__pb2
 from tensorflow_metadata.proto.v0 import schema_pb2 as tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2 as tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2
+
 
 DESCRIPTOR = _descriptor.FileDescriptor(
     name='dataset_info.proto',
@@ -55,7 +57,18 @@ DESCRIPTOR = _descriptor.FileDescriptor(
         b' \x01(\tH\x00\x12:\n\x05tuple\x18\x02'
         b' \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.TupleH\x00\x12\x38\n\x04\x64ict\x18\x03'
         b' \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.DictH\x00\x42\x06\n\x04nest"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01'
-        b' \x01(\t"\xda\x06\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
+        b' \x01(\t"\xe8\x01\n\x10\x44\x61taSourceAccess\x12\x1b\n\x13\x61\x63\x63\x65ss_timestamp_ms\x18\x01'
+        b' \x01(\x03\x12\x36\n\x0b\x66ile_system\x18\x02'
+        b' \x01(\x0b\x32\x1f.tensorflow_datasets.FileSystemH\x00\x12\x32\n\tsql_query\x18\x03'
+        b' \x01(\x0b\x32\x1d.tensorflow_datasets.SqlQueryH\x00\x12\x41\n\x0ctfds_dataset\x18\x04'
+        b' \x01(\x0b\x32).tensorflow_datasets.TfdsDatasetReferenceH\x00\x42\x08\n\x06source"\x1a\n\nFileSystem\x12\x0c\n\x04path\x18\x01'
+        b' \x01(\t"\x1d\n\x08SqlQuery\x12\x11\n\tsql_query\x18\x01'
+        b' \x01(\t"m\n\x14TfdsDatasetReference\x12\x0c\n\x04name\x18\x01'
+        b' \x01(\t\x12\x0e\n\x06\x63onfig\x18\x02'
+        b' \x01(\t\x12\x0f\n\x07version\x18\x03'
+        b' \x01(\t\x12\x10\n\x08\x64\x61ta_dir\x18\x04'
+        b' \x01(\t\x12\x14\n\x0c\x64s_namespace\x18\x05'
+        b' \x01(\t"\x9f\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
         b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02'
         b' \x01(\t\x12\x0f\n\x07version\x18\t'
         b' \x01(\t\x12I\n\rrelease_notes\x18\x12'
@@ -74,7 +87,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
         b" \x01(\x0b\x32'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f"
         b' \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10'
         b' \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11'
-        b' \x01(\t\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
+        b' \x01(\t\x12\x43\n\x14\x64\x61ta_source_accesses\x18\x14'
+        b' \x03(\x0b\x32%.tensorflow_datasets.DataSourceAccess\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
         b' \x01(\t\x12\r\n\x05value\x18\x02'
         b' \x01(\t:\x02\x38\x01\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01'
         b' \x01(\t\x12\r\n\x05value\x18\x02'
@@ -86,6 +100,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
         tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2.DESCRIPTOR,
     ],
 )
+
 
 _DATASETLOCATION = _descriptor.Descriptor(
     name='DatasetLocation',
@@ -124,6 +139,7 @@ _DATASETLOCATION = _descriptor.Descriptor(
     serialized_start=148,
     serialized_end=179,
 )
+
 
 _SPLITINFO = _descriptor.Descriptor(
     name='SplitInfo',
@@ -252,6 +268,7 @@ _SPLITINFO = _descriptor.Descriptor(
     serialized_start=182,
     serialized_end=366,
 )
+
 
 _SUPERVISEDKEYS_TUPLE = _descriptor.Descriptor(
     name='Tuple',
@@ -547,6 +564,7 @@ _SUPERVISEDKEYS = _descriptor.Descriptor(
     serialized_end=868,
 )
 
+
 _REDISTRIBUTIONINFO = _descriptor.Descriptor(
     name='RedistributionInfo',
     full_name='tensorflow_datasets.RedistributionInfo',
@@ -584,6 +602,299 @@ _REDISTRIBUTIONINFO = _descriptor.Descriptor(
     serialized_start=870,
     serialized_end=907,
 )
+
+
+_DATASOURCEACCESS = _descriptor.Descriptor(
+    name='DataSourceAccess',
+    full_name='tensorflow_datasets.DataSourceAccess',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='access_timestamp_ms',
+            full_name=(
+                'tensorflow_datasets.DataSourceAccess.access_timestamp_ms'
+            ),
+            index=0,
+            number=1,
+            type=3,
+            cpp_type=2,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name='file_system',
+            full_name='tensorflow_datasets.DataSourceAccess.file_system',
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name='sql_query',
+            full_name='tensorflow_datasets.DataSourceAccess.sql_query',
+            index=2,
+            number=3,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name='tfds_dataset',
+            full_name='tensorflow_datasets.DataSourceAccess.tfds_dataset',
+            index=3,
+            number=4,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name='source',
+            full_name='tensorflow_datasets.DataSourceAccess.source',
+            index=0,
+            containing_type=None,
+            fields=[],
+        ),
+    ],
+    serialized_start=910,
+    serialized_end=1142,
+)
+
+
+_FILESYSTEM = _descriptor.Descriptor(
+    name='FileSystem',
+    full_name='tensorflow_datasets.FileSystem',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='path',
+            full_name='tensorflow_datasets.FileSystem.path',
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=1144,
+    serialized_end=1170,
+)
+
+
+_SQLQUERY = _descriptor.Descriptor(
+    name='SqlQuery',
+    full_name='tensorflow_datasets.SqlQuery',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='sql_query',
+            full_name='tensorflow_datasets.SqlQuery.sql_query',
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=1172,
+    serialized_end=1201,
+)
+
+
+_TFDSDATASETREFERENCE = _descriptor.Descriptor(
+    name='TfdsDatasetReference',
+    full_name='tensorflow_datasets.TfdsDatasetReference',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='name',
+            full_name='tensorflow_datasets.TfdsDatasetReference.name',
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name='config',
+            full_name='tensorflow_datasets.TfdsDatasetReference.config',
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name='version',
+            full_name='tensorflow_datasets.TfdsDatasetReference.version',
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name='data_dir',
+            full_name='tensorflow_datasets.TfdsDatasetReference.data_dir',
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name='ds_namespace',
+            full_name='tensorflow_datasets.TfdsDatasetReference.ds_namespace',
+            index=4,
+            number=5,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=1203,
+    serialized_end=1312,
+)
+
 
 _DATASETINFO_RELEASENOTESENTRY = _descriptor.Descriptor(
     name='ReleaseNotesEntry',
@@ -637,8 +948,8 @@ _DATASETINFO_RELEASENOTESENTRY = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1659,
-    serialized_end=1710,
+    serialized_start=2133,
+    serialized_end=2184,
 )
 
 _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
@@ -697,8 +1008,8 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1712,
-    serialized_end=1768,
+    serialized_start=2186,
+    serialized_end=2242,
 )
 
 _DATASETINFO = _descriptor.Descriptor(
@@ -1050,6 +1361,24 @@ _DATASETINFO = _descriptor.Descriptor(
             serialized_options=None,
             file=DESCRIPTOR,
         ),
+        _descriptor.FieldDescriptor(
+            name='data_source_accesses',
+            full_name='tensorflow_datasets.DatasetInfo.data_source_accesses',
+            index=19,
+            number=20,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[
@@ -1062,8 +1391,8 @@ _DATASETINFO = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=910,
-    serialized_end=1768,
+    serialized_start=1315,
+    serialized_end=2242,
 )
 
 _SPLITINFO.fields_by_name['statistics'].message_type = (
@@ -1105,6 +1434,29 @@ _SUPERVISEDKEYS_NEST.fields_by_name['dict'].containing_oneof = (
     _SUPERVISEDKEYS_NEST.oneofs_by_name['nest']
 )
 _SUPERVISEDKEYS.fields_by_name['tuple'].message_type = _SUPERVISEDKEYS_TUPLE
+_DATASOURCEACCESS.fields_by_name['file_system'].message_type = _FILESYSTEM
+_DATASOURCEACCESS.fields_by_name['sql_query'].message_type = _SQLQUERY
+_DATASOURCEACCESS.fields_by_name['tfds_dataset'].message_type = (
+    _TFDSDATASETREFERENCE
+)
+_DATASOURCEACCESS.oneofs_by_name['source'].fields.append(
+    _DATASOURCEACCESS.fields_by_name['file_system']
+)
+_DATASOURCEACCESS.fields_by_name['file_system'].containing_oneof = (
+    _DATASOURCEACCESS.oneofs_by_name['source']
+)
+_DATASOURCEACCESS.oneofs_by_name['source'].fields.append(
+    _DATASOURCEACCESS.fields_by_name['sql_query']
+)
+_DATASOURCEACCESS.fields_by_name['sql_query'].containing_oneof = (
+    _DATASOURCEACCESS.oneofs_by_name['source']
+)
+_DATASOURCEACCESS.oneofs_by_name['source'].fields.append(
+    _DATASOURCEACCESS.fields_by_name['tfds_dataset']
+)
+_DATASOURCEACCESS.fields_by_name['tfds_dataset'].containing_oneof = (
+    _DATASOURCEACCESS.oneofs_by_name['source']
+)
 _DATASETINFO_RELEASENOTESENTRY.containing_type = _DATASETINFO
 _DATASETINFO_DOWNLOADCHECKSUMSENTRY.containing_type = _DATASETINFO
 _DATASETINFO.fields_by_name['release_notes'].message_type = (
@@ -1123,10 +1475,17 @@ _DATASETINFO.fields_by_name['supervised_keys'].message_type = _SUPERVISEDKEYS
 _DATASETINFO.fields_by_name['redistribution_info'].message_type = (
     _REDISTRIBUTIONINFO
 )
+_DATASETINFO.fields_by_name['data_source_accesses'].message_type = (
+    _DATASOURCEACCESS
+)
 DESCRIPTOR.message_types_by_name['DatasetLocation'] = _DATASETLOCATION
 DESCRIPTOR.message_types_by_name['SplitInfo'] = _SPLITINFO
 DESCRIPTOR.message_types_by_name['SupervisedKeys'] = _SUPERVISEDKEYS
 DESCRIPTOR.message_types_by_name['RedistributionInfo'] = _REDISTRIBUTIONINFO
+DESCRIPTOR.message_types_by_name['DataSourceAccess'] = _DATASOURCEACCESS
+DESCRIPTOR.message_types_by_name['FileSystem'] = _FILESYSTEM
+DESCRIPTOR.message_types_by_name['SqlQuery'] = _SQLQUERY
+DESCRIPTOR.message_types_by_name['TfdsDatasetReference'] = _TFDSDATASETREFERENCE
 DESCRIPTOR.message_types_by_name['DatasetInfo'] = _DATASETINFO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -1135,7 +1494,7 @@ DatasetLocation = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _DATASETLOCATION,
-        '__module__': 'dataset_info_pb2'
+        '__module__': 'dataset_info_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetLocation)
     },
 )
@@ -1146,7 +1505,7 @@ SplitInfo = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _SPLITINFO,
-        '__module__': 'dataset_info_pb2'
+        '__module__': 'dataset_info_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.SplitInfo)
     },
 )
@@ -1161,7 +1520,7 @@ SupervisedKeys = _reflection.GeneratedProtocolMessageType(
             (_message.Message,),
             {
                 'DESCRIPTOR': _SUPERVISEDKEYS_TUPLE,
-                '__module__': 'dataset_info_pb2'
+                '__module__': 'dataset_info_pb2',
                 # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Tuple)
             },
         ),
@@ -1174,12 +1533,12 @@ SupervisedKeys = _reflection.GeneratedProtocolMessageType(
                     (_message.Message,),
                     {
                         'DESCRIPTOR': _SUPERVISEDKEYS_DICT_DICTENTRY,
-                        '__module__': 'dataset_info_pb2'
+                        '__module__': 'dataset_info_pb2',
                         # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Dict.DictEntry)
                     },
                 ),
                 'DESCRIPTOR': _SUPERVISEDKEYS_DICT,
-                '__module__': 'dataset_info_pb2'
+                '__module__': 'dataset_info_pb2',
                 # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Dict)
             },
         ),
@@ -1188,12 +1547,12 @@ SupervisedKeys = _reflection.GeneratedProtocolMessageType(
             (_message.Message,),
             {
                 'DESCRIPTOR': _SUPERVISEDKEYS_NEST,
-                '__module__': 'dataset_info_pb2'
+                '__module__': 'dataset_info_pb2',
                 # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Nest)
             },
         ),
         'DESCRIPTOR': _SUPERVISEDKEYS,
-        '__module__': 'dataset_info_pb2'
+        '__module__': 'dataset_info_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys)
     },
 )
@@ -1208,11 +1567,55 @@ RedistributionInfo = _reflection.GeneratedProtocolMessageType(
     (_message.Message,),
     {
         'DESCRIPTOR': _REDISTRIBUTIONINFO,
-        '__module__': 'dataset_info_pb2'
+        '__module__': 'dataset_info_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.RedistributionInfo)
     },
 )
 _sym_db.RegisterMessage(RedistributionInfo)
+
+DataSourceAccess = _reflection.GeneratedProtocolMessageType(
+    'DataSourceAccess',
+    (_message.Message,),
+    {
+        'DESCRIPTOR': _DATASOURCEACCESS,
+        '__module__': 'dataset_info_pb2',
+        # @@protoc_insertion_point(class_scope:tensorflow_datasets.DataSourceAccess)
+    },
+)
+_sym_db.RegisterMessage(DataSourceAccess)
+
+FileSystem = _reflection.GeneratedProtocolMessageType(
+    'FileSystem',
+    (_message.Message,),
+    {
+        'DESCRIPTOR': _FILESYSTEM,
+        '__module__': 'dataset_info_pb2',
+        # @@protoc_insertion_point(class_scope:tensorflow_datasets.FileSystem)
+    },
+)
+_sym_db.RegisterMessage(FileSystem)
+
+SqlQuery = _reflection.GeneratedProtocolMessageType(
+    'SqlQuery',
+    (_message.Message,),
+    {
+        'DESCRIPTOR': _SQLQUERY,
+        '__module__': 'dataset_info_pb2',
+        # @@protoc_insertion_point(class_scope:tensorflow_datasets.SqlQuery)
+    },
+)
+_sym_db.RegisterMessage(SqlQuery)
+
+TfdsDatasetReference = _reflection.GeneratedProtocolMessageType(
+    'TfdsDatasetReference',
+    (_message.Message,),
+    {
+        'DESCRIPTOR': _TFDSDATASETREFERENCE,
+        '__module__': 'dataset_info_pb2',
+        # @@protoc_insertion_point(class_scope:tensorflow_datasets.TfdsDatasetReference)
+    },
+)
+_sym_db.RegisterMessage(TfdsDatasetReference)
 
 DatasetInfo = _reflection.GeneratedProtocolMessageType(
     'DatasetInfo',
@@ -1223,7 +1626,7 @@ DatasetInfo = _reflection.GeneratedProtocolMessageType(
             (_message.Message,),
             {
                 'DESCRIPTOR': _DATASETINFO_RELEASENOTESENTRY,
-                '__module__': 'dataset_info_pb2'
+                '__module__': 'dataset_info_pb2',
                 # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetInfo.ReleaseNotesEntry)
             },
         ),
@@ -1232,18 +1635,19 @@ DatasetInfo = _reflection.GeneratedProtocolMessageType(
             (_message.Message,),
             {
                 'DESCRIPTOR': _DATASETINFO_DOWNLOADCHECKSUMSENTRY,
-                '__module__': 'dataset_info_pb2'
+                '__module__': 'dataset_info_pb2',
                 # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetInfo.DownloadChecksumsEntry)
             },
         ),
         'DESCRIPTOR': _DATASETINFO,
-        '__module__': 'dataset_info_pb2'
+        '__module__': 'dataset_info_pb2',
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.DatasetInfo)
     },
 )
 _sym_db.RegisterMessage(DatasetInfo)
 _sym_db.RegisterMessage(DatasetInfo.ReleaseNotesEntry)
 _sym_db.RegisterMessage(DatasetInfo.DownloadChecksumsEntry)
+
 
 DESCRIPTOR._options = None
 _SUPERVISEDKEYS_DICT_DICTENTRY._options = None
