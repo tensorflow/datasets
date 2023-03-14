@@ -34,6 +34,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import decode
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
@@ -749,6 +750,20 @@ def data_source(
     `Sequence` if `split`,
     `dict<key: tfds.Split, value: Sequence>` otherwise.
   """
+  if builder_kwargs is None:
+    builder_kwargs = {}
+  if 'file_format' in builder_kwargs:
+    file_format = file_adapters.FileFormat.from_value(
+        builder_kwargs['file_format']
+    )
+    if file_format != file_adapters.FileFormat.ARRAY_RECORD:
+      raise NotImplementedError(
+          f'No random access data source for file format {file_format}. Please,'
+          ' use `tfds.data_source(..., builder_kwargs={"file_format":'
+          f' {file_adapters.FileFormat.ARRAY_RECORD}}})` instead.'
+      )
+  else:
+    builder_kwargs['file_format'] = file_adapters.FileFormat.ARRAY_RECORD
   dbuilder = _fetch_builder(
       name,
       data_dir,

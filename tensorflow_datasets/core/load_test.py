@@ -24,6 +24,7 @@ from unittest import mock
 import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
@@ -38,11 +39,9 @@ def test_load_hf_dataset():
     assert load.builder('huggingface:x/y') is builder
 
 
-@visibility.set_availables_tmp(
-    [
-        visibility.DatasetType.COMMUNITY_PUBLIC,
-    ]
-)
+@visibility.set_availables_tmp([
+    visibility.DatasetType.COMMUNITY_PUBLIC,
+])
 def test_community_public_load():
   with mock.patch(
       'tensorflow_datasets.core.community.community_register.list_builders',
@@ -138,3 +137,33 @@ def test_load_dataset_with_kwargs(
         name='c/e:3.5.7', with_info=False, batch_size=3
     )
     assert loaded_dataset == expected
+
+
+def test_data_source_defaults_to_array_record_format():
+  with mock.patch.object(load, 'builder', autospec=True) as mock_builder:
+    load.data_source('mydataset')
+    mock_builder.assert_called_with(
+        'mydataset',
+        data_dir=None,
+        try_gcs=False,
+        file_format=file_adapters.FileFormat.ARRAY_RECORD,
+    )
+
+    load.data_source(
+        'mydataset', builder_kwargs={'file_format': 'array_record'}
+    )
+    mock_builder.assert_called_with(
+        'mydataset',
+        data_dir=None,
+        try_gcs=False,
+        file_format='array_record',
+    )
+
+
+@pytest.mark.parametrize(
+    'file_format',
+    ['tfrecord', file_adapters.FileFormat.TFRECORD],
+)
+def test_data_source_raises_error_for_other_file_formats(file_format):
+  with pytest.raises(NotImplementedError, match='No random access data source'):
+    load.data_source('mydataset', builder_kwargs={'file_format': file_format})
