@@ -313,6 +313,7 @@ class RandomFakeGenerator(object):
 
   def _generate_random_string_array(self, shape, rng):
     """Generates an array of random strings."""
+
     def rand_str():
       return ''.join(
           rng.choice(list(' abcdefghij'), size=(rng.integers(low=10, high=20)))
