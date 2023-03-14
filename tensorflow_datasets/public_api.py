@@ -33,6 +33,7 @@ from tensorflow_datasets.core.folder_dataset import ImageFolder
 from tensorflow_datasets.core.folder_dataset import TranslateFolder
 from tensorflow_datasets.core.load import builder
 from tensorflow_datasets.core.load import builder_cls
+from tensorflow_datasets.core.load import data_source
 from tensorflow_datasets.core.load import dataset_collection
 from tensorflow_datasets.core.load import list_builders
 from tensorflow_datasets.core.load import list_dataset_collections
@@ -69,6 +70,7 @@ __all__ = [
     "builder_from_directory",
     "builder_from_directories",
     "core",
+    "data_source",
     "dataset_builders",
     "dataset_collection",
     "decode",

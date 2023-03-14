@@ -125,7 +125,7 @@ def test_repr_returns_meaningful_string_without_decoders():
     source = array_record.ArrayRecordDataSource(dataset_info, split='train')
     assert (
         repr(source)
-        == "GrainDataSource(name=dataset_name, split='train', decoders=None)"
+        == "DataSource(name=dataset_name, split='train', decoders=None)"
     )
 
 
@@ -139,7 +139,7 @@ def test_repr_returns_meaningful_string_with_decoders():
     )
     assert (
         repr(source)
-        == 'GrainDataSource(name=dataset_name,'
+        == 'DataSource(name=dataset_name,'
         " split='train', decoders={'my_feature': <class"
         " 'tensorflow_datasets.core.decode.base.SkipDecoding'>})"
     )

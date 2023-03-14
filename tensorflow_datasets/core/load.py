@@ -17,6 +17,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 import dataclasses
 import difflib
 import json
@@ -474,6 +475,29 @@ def dataset_collection(
 
 
 
+def _fetch_builder(
+    name: str,
+    data_dir: Union[None, str, os.PathLike],  # pylint: disable=g-bare-generic
+    builder_kwargs: Optional[Dict[str, Any]],
+    try_gcs: bool,
+) -> dataset_builder.DatasetBuilder:
+  """Fetches the `tfds.core.DatasetBuilder` by name."""
+  if builder_kwargs is None:
+    builder_kwargs = {}
+
+  return builder(name, data_dir=data_dir, try_gcs=try_gcs, **builder_kwargs)
+
+
+def _download_and_prepare_builder(
+    dbuilder: dataset_builder.DatasetBuilder,
+    download: bool,
+    download_and_prepare_kwargs: Optional[Dict[str, Any]],
+) -> None:
+  if download:
+    download_and_prepare_kwargs = download_and_prepare_kwargs or {}
+    dbuilder.download_and_prepare(**download_and_prepare_kwargs)
+
+
 @tfds_logging.load()
 def load(
     name: str,
@@ -559,8 +583,8 @@ def load(
       `False`.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare` before calling
-      `tf.DatasetBuilder.as_dataset`. If `False`, data is expected to be in
-      `data_dir`. If `True` and the data is already in `data_dir`,
+      `tfds.core.DatasetBuilder.as_dataset`. If `False`, data is expected to be
+      in `data_dir`. If `True` and the data is already in `data_dir`,
       when data_dir is a Placer path.
     as_supervised: `bool`, if `True`, the returned `tf.data.Dataset` will have a
       2-tuple structure `(input, label)` according to
@@ -606,15 +630,13 @@ def load(
       object documents the entire dataset, regardless of the `split` requested.
       Split-specific information is available in `ds_info.splits`.
   """
-  # pylint: enable=line-too-long
-
-  if builder_kwargs is None:
-    builder_kwargs = {}
-
-  dbuilder = builder(name, data_dir=data_dir, try_gcs=try_gcs, **builder_kwargs)
-  if download:
-    download_and_prepare_kwargs = download_and_prepare_kwargs or {}
-    dbuilder.download_and_prepare(**download_and_prepare_kwargs)
+  dbuilder = _fetch_builder(
+      name,
+      data_dir,
+      builder_kwargs,
+      try_gcs,
+  )
+  _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
 
   if as_dataset_kwargs is None:
     as_dataset_kwargs = {}
@@ -630,6 +652,111 @@ def load(
   if with_info:
     return ds, dbuilder.info
   return ds
+
+
+def data_source(
+    name: str,
+    *,
+    split: Optional[Tree[splits_lib.SplitArg]] = None,
+    data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
+    download: bool = True,
+    builder_kwargs: Optional[Dict[str, Any]] = None,
+    download_and_prepare_kwargs: Optional[Dict[str, Any]] = None,
+    try_gcs: bool = False,
+) -> type_utils.ListOrTreeOrElem[Sequence[Any]]:
+  """Gets a data source from the named dataset.
+
+  `tfds.data_source` is a convenience method that:
+
+  1. Fetches the `tfds.core.DatasetBuilder` by name:
+
+     ```python
+     builder = tfds.builder(name, data_dir=data_dir, **builder_kwargs)
+     ```
+
+  2. Generates the data (when `download=True`):
+
+     ```python
+     builder.download_and_prepare(**download_and_prepare_kwargs)
+     ```
+
+  3. Gets the data source:
+
+     ```python
+     ds = builder.as_data_source(split=split)
+     ```
+
+  You can consume data sources:
+
+  - In Python by iterating over them:
+
+  ```python
+  for example in ds['train']:
+    print(example)
+  ```
+
+  - With a DataLoader (e.g., with
+  [Pytorch](https://pytorch.org/docs/stable/data.html)).
+
+  **Warning**: calling this function might potentially trigger the download
+  of hundreds of GiB to disk. Refer to the `download` argument.
+
+  Args:
+    name: `str`, the registered name of the `DatasetBuilder` (the snake case
+      version of the class name). The config and version can also be specified
+      in the name as follows: `'dataset_name[/config_name][:version]'`. For
+      example, `'movielens/25m-ratings'` (for the latest version of
+      `'25m-ratings'`), `'movielens:0.1.0'` (for the default config and version
+      0.1.0), or`'movielens/25m-ratings:0.1.0'`. Note that only the latest
+      version can be generated, but old versions can be read if they are present
+      on disk. For convenience, the `name` parameter can contain comma-separated
+      keyword arguments for the builder. For example, `'foo_bar/a=True,b=3'`
+      would use the `FooBar` dataset passing the keyword arguments `a=True` and
+      `b=3` (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'`
+      to use the `'zoo'` config and pass to the builder keyword arguments
+      `a=True` and `b=3`).
+    split: Which split of the data to load (e.g. `'train'`, `'test'`, `['train',
+      'test']`, `'train[80%:]'`,...). See our [split API
+      guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
+      all splits in a `Dict[Split, Sequence]`
+    data_dir: directory to read/write data. Defaults to the value of the
+      environment variable TFDS_DATA_DIR, if set, otherwise falls back to
+      datasets are stored.
+    download: `bool` (optional), whether to call
+      `tfds.core.DatasetBuilder.download_and_prepare` before calling
+      `tfds.core.DatasetBuilder.as_data_source`. If `False`, data is expected to
+      be in `data_dir`. If `True` and the data is already in `data_dir`,
+      when data_dir is a Placer path.
+    builder_kwargs: `dict` (optional), keyword arguments to be passed to the
+      `tfds.core.DatasetBuilder` constructor. `data_dir` will be passed through
+      by default.
+    download_and_prepare_kwargs: `dict` (optional) keyword arguments passed to
+      `tfds.core.DatasetBuilder.download_and_prepare` if `download=True`. Allow
+      to control where to download and extract the cached data. If not set,
+      cache_dir and manual_dir will automatically be deduced from data_dir.
+    try_gcs: `bool`, if True, `tfds.load` will see if the dataset exists on the
+      public GCS bucket before building it locally. This is equivalent to
+      passing `data_dir='gs://tfds-data/datasets'`. Warning: `try_gcs` is
+      different than `builder_kwargs.download_config.try_download_gcs`.
+      `try_gcs` (default: False) overrides `data_dir` to be the public GCS
+      bucket. `try_download_gcs` (default: True) allows downloading from GCS
+      while keeping a different `data_dir` than the public GCS bucket.  So, to
+      fully bypass GCS, please use `try_gcs=False` and
+      `download_and_prepare_kwargs={'download_config':
+      tfds.core.download.DownloadConfig(try_download_gcs=False)})`.
+
+  Returns:
+    `Sequence` if `split`,
+    `dict<key: tfds.Split, value: Sequence>` otherwise.
+  """
+  dbuilder = _fetch_builder(
+      name,
+      data_dir,
+      builder_kwargs,
+      try_gcs,
+  )
+  _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
+  return dbuilder.as_data_source(split=split)
 
 
 def _get_all_versions(

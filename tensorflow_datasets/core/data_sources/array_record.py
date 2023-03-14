@@ -104,7 +104,7 @@ class ArrayRecordDataSource(AbcSequence):
         tree.map_structure(type, self.decoders) if self.decoders else None
     )
     return (
-        f'GrainDataSource(name={self.dataset_info.name}, '
+        f'DataSource(name={self.dataset_info.name}, '
         f'split={self.split!r}, '
         f'decoders={decoders_repr})'
     )
