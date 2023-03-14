@@ -145,7 +145,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     data_dir = os.path.join(
         dl_manager.download_and_extract(
             _DOWNLOAD_URL
-            if self._builder_config.include_audio
+            if self._builder_config.include_audio  # pytype: disable=attribute-error  # always-use-return-annotations
             else _DOWNLOAD_URL_MIDI_ONLY
         ),
         "groove",
@@ -165,7 +165,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, rows, data_dir):
-    split_bars = self._builder_config.split_bars
+    split_bars = self._builder_config.split_bars  # pytype: disable=attribute-error  # always-use-return-annotations
     for row in rows:
       split_genre = row["style"].split("/")
       with tf.io.gfile.GFile(
@@ -173,13 +173,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       ) as midi_f:
         midi = midi_f.read()
       audio = None
-      if self._builder_config.include_audio:
+      if self._builder_config.include_audio:  # pytype: disable=attribute-error  # always-use-return-annotations
         if not row["audio_filename"]:
           # Skip examples with no audio.
           logging.warning("Skipping example with no audio: %s", row["id"])
           continue
         wav_path = os.path.join(data_dir, row["audio_filename"])
-        audio = _load_wav(wav_path, self._builder_config.audio_rate)
+        audio = _load_wav(wav_path, self._builder_config.audio_rate)  # pytype: disable=attribute-error  # always-use-return-annotations
 
       example = {
           "id": row["id"],
@@ -203,7 +203,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         bpm = int(row["bpm"])
         beats_per_bar = int(row["time_signature"].split("-")[0])
         bar_duration = 60 / bpm * beats_per_bar
-        audio_rate = self._builder_config.audio_rate
+        audio_rate = self._builder_config.audio_rate  # pytype: disable=attribute-error  # always-use-return-annotations
 
         pm = tfds.core.lazy_imports.pretty_midi.PrettyMIDI(io.BytesIO(midi))
         total_duration = pm.get_end_time()
