@@ -87,7 +87,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "filepath": os.path.join(
                     dl_dir,
                     EXTRACT_PATH_TOKEN,
-                    self._builder_config.round_dir,
+                    self._builder_config.round_dir,  # pytype: disable=attribute-error  # always-use-return-annotations
                     "test.jsonl",
                 )
             },
@@ -98,7 +98,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "filepath": os.path.join(
                     dl_dir,
                     EXTRACT_PATH_TOKEN,
-                    self._builder_config.round_dir,
+                    self._builder_config.round_dir,  # pytype: disable=attribute-error  # always-use-return-annotations
                     "dev.jsonl",
                 )
             },
@@ -109,7 +109,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "filepath": os.path.join(
                     dl_dir,
                     EXTRACT_PATH_TOKEN,
-                    self._builder_config.round_dir,
+                    self._builder_config.round_dir,  # pytype: disable=attribute-error  # always-use-return-annotations
                     "train.jsonl",
                 )
             },

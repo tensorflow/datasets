@@ -100,7 +100,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    granularity = self._builder_config.granularity
+    granularity = self._builder_config.granularity  # pytype: disable=attribute-error  # always-use-return-annotations
     alignments_base_path = os.path.join(
         dl_manager.manual_dir,
         "booksum",

@@ -115,7 +115,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     # Should return a tfds.core.DatasetInfo object
-    if self._builder_config.recap_source == 'fd':
+    if self._builder_config.recap_source == 'fd':  # pytype: disable=attribute-error  # always-use-return-annotations
       features = tfds.features.FeaturesDict({
           _TRANSCRIPT: tfds.features.Text(),
           _RECAP: tfds.features.Text(),
@@ -124,7 +124,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           'show_title': tfds.features.Text(),
           'transcript_author': tfds.features.Text(),
       })
-    elif self._builder_config.recap_source == 'tms':
+    elif self._builder_config.recap_source == 'tms':  # pytype: disable=attribute-error  # always-use-return-annotations
       features = tfds.features.FeaturesDict({
           _TRANSCRIPT: tfds.features.Text(),
           _RECAP: tfds.features.Text(),
@@ -137,7 +137,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       })
     else:
       raise KeyError(
-          f'Unknown recap_source {self._builder_config.recap_source}'
+          f'Unknown recap_source {self._builder_config.recap_source}'  # pytype: disable=attribute-error  # always-use-return-annotations
       )
 
     return self.dataset_info_from_configs(
@@ -150,11 +150,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     dl_paths = dl_manager.download_and_extract(_DL_URLS)
     filenames_dict = _get_filenames_dict(
         tokenized_path=dl_paths['tokenized'],
-        recap_source=self._builder_config.recap_source,
+        recap_source=self._builder_config.recap_source,  # pytype: disable=attribute-error  # always-use-return-annotations
     )
     paths_dict = _get_paths_dict(
         untokenized_path=dl_paths['untokenized'],
-        recap_source=self._builder_config.recap_source,
+        recap_source=self._builder_config.recap_source,  # pytype: disable=attribute-error  # always-use-return-annotations
         filenames_dict=filenames_dict,
     )
     return {
@@ -167,7 +167,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     for path in paths:
       example = _load_json(path)
       fname = os.path.basename(path)
-      if self._builder_config.recap_source == 'fd':
+      if self._builder_config.recap_source == 'fd':  # pytype: disable=attribute-error  # always-use-return-annotations
         yield fname, {
             _TRANSCRIPT: '\n'.join(example['Transcript']),
             _RECAP: '\n'.join(example['Recap']),
@@ -176,7 +176,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'show_title': example['Show Title'],
             'transcript_author': example['Transcript Author'],
         }
-      elif self._builder_config.recap_source == 'tms':
+      elif self._builder_config.recap_source == 'tms':  # pytype: disable=attribute-error  # always-use-return-annotations
         yield fname, {
             _TRANSCRIPT: '\n'.join(example['Transcript']),
             _RECAP: '\n'.join(example['Recap']),
@@ -187,5 +187,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         }
       else:
         raise KeyError(
-            f'Unknown recap_source {self._builder_config.recap_source}'
+            f'Unknown recap_source {self._builder_config.recap_source}'  # pytype: disable=attribute-error  # always-use-return-annotations
         )
