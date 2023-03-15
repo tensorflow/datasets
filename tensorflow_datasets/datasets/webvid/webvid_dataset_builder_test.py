@@ -35,7 +35,10 @@ class WebvidTest(tfds.testing.DatasetBuilderTestCase):
       'validation': 1,  # Number of fake test examples.
   }
 
+  def setUp(self):
+    webvid_dataset_builder._ffmpeg_decode_diskless = fake_ffmpeg_decode_diskless
+    super().setUp()
+
 
 if __name__ == '__main__':
-  webvid_dataset_builder._ffmpeg_decode_diskless = fake_ffmpeg_decode_diskless
   tfds.testing.test_main()
