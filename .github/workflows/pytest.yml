@@ -82,7 +82,7 @@ jobs:
     #   is linked to static libraries compiled again specific TF version, which
     #   makes test fails with linking error (libtensorflow_io_golang.so).
     # * imagenet2012_corrupted requires imagemagick binary.
-    # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
+    # * import_without_tf_test.py, because the test is launched below independently of other tests.
     # * github_api is run separately to not overuse API quota.
     # * wmt is run separately to avoid worker hanging.
     # * TODO(b/273289576): dataset_utils_test and sequence_feature_test fail until TensorFlow 2.12.0
@@ -98,6 +98,12 @@ jobs:
           --ignore="tensorflow_datasets/translate/wmt19_test.py" \
           --ignore="tensorflow_datasets/core/dataset_utils_test.py" \
           --ignore="tensorflow_datasets/core/features/sequence_feature_test.py"
+    
+    - name: Test import without TensorFlow
+      if: ${{ matrix.shard-id == 1 }}
+      with:
+        command: |
+          pytest -vv tensorflow_datasets/import_without_tf_test.py
 
     # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
     - name: Run leftover tests

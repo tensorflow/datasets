@@ -27,10 +27,8 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-
-import tensorflow as tf
-example_pb2 = tf.train
-feature_pb2 = tf.train
+from tensorflow_datasets.proto import tf_example_pb2
+from tensorflow_datasets.proto import tf_feature_pb2
 
 TensorInfo = feature_lib.TensorInfo
 TreeDict = utils.TreeDict
@@ -103,7 +101,7 @@ class ExampleSerializer(Serializer):
 def _dict_to_tf_example(
     example_dict: Mapping[str, Any],
     tensor_info_dict: Mapping[str, feature_lib.TensorInfo],
-) -> example_pb2.Example:
+) -> tf_example_pb2.Example:
   """Builds tf.train.Example from (string -> int/float/str list) dictionary.
 
   Args:
@@ -144,7 +142,9 @@ def _dict_to_tf_example(
       k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
       for k, (item, tensor_info) in features.items()
   }
-  return example_pb2.Example(features=feature_pb2.Features(feature=features))
+  return tf_example_pb2.Example(
+      features=tf_feature_pb2.Features(feature=features)
+  )
 
 
 def _is_string(item) -> bool:
@@ -187,16 +187,22 @@ def _item_to_tf_feature(
 
   vals = v.flat  # Convert v into a 1-d array (without extra copy)
   if dtype_utils.is_integer(v.dtype):
-    return feature_pb2.Feature(int64_list=feature_pb2.Int64List(value=vals))
+    return tf_feature_pb2.Feature(
+        int64_list=tf_feature_pb2.Int64List(value=vals)
+    )
   elif dtype_utils.is_floating(v.dtype):
-    return feature_pb2.Feature(float_list=feature_pb2.FloatList(value=vals))
+    return tf_feature_pb2.Feature(
+        float_list=tf_feature_pb2.FloatList(value=vals)
+    )
   elif dtype_utils.is_string(tensor_info.np_dtype):
     vals = [_as_bytes(x) for x in vals]
-    return feature_pb2.Feature(bytes_list=feature_pb2.BytesList(value=vals))
+    return tf_feature_pb2.Feature(
+        bytes_list=tf_feature_pb2.BytesList(value=vals)
+    )
   else:
     raise ValueError(
         "Unsupported value: {}.\n"
-        "feature_pb2.Feature does not support type {}. "
+        "tf_feature_pb2.Feature does not support type {}. "
         "This may indicate that one of the FeatureConnectors received an "
         "unsupported value as input.".format(repr(v), repr(type(v)))
     )
