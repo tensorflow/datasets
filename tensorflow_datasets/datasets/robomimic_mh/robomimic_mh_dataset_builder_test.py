@@ -15,18 +15,18 @@
 
 """robomimic_ph dataset."""
 
-from tensorflow_datasets.datasets.robomimic_ph import robomimic_ph_dataset_builder
+from tensorflow_datasets.datasets.robomimic_mh import robomimic_mh_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
-class RobomimicPhTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for robomimic_ph dataset."""
+class RobomimicMhTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for robomimic_mh dataset."""
 
-  DATASET_CLASS = robomimic_ph_dataset_builder.Builder
-  SPLITS = {'train': 2}
+  DATASET_CLASS = robomimic_mh_dataset_builder.Builder
+  SPLITS = {'train': 1}
   SKIP_TF1_GRAPH_MODE = True
 
-  DL_EXTRACT_RESULT = {'file_path': 'lift_low_dim.hdf5'}
-  DL_DOWNLOAD_RESULT = {'file_path': 'lift_low_dim.hdf5'}
+  DL_EXTRACT_RESULT = {'file_path': 'lift_image.hdf5'}
+  DL_DOWNLOAD_RESULT = {'file_path': 'mh/lift_image.hdf5'}
 
-  BUILDER_CONFIG_NAMES_TO_TEST = ['lift_ph_low_dim']
+  BUILDER_CONFIG_NAMES_TO_TEST = ['lift_mh_image']
