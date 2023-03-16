@@ -18,7 +18,7 @@
 from __future__ import annotations
 
 import dataclasses
-from typing import Any, Dict, FrozenSet, Optional, Union
+from typing import Any, Dict, FrozenSet, Optional, Type, Union
 
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -35,7 +35,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
   file_suffix: str = 'medium'
   env: str = 'mujoco'
   # All use float32 except for the replay datasets.
-  float_type: np.dtype = np.float32
+  float_type: Union[np.dtype, Type[np.generic]] = np.float32
   # All datasets have step metadata except for mujoco v0.
   step_metadata_keys: FrozenSet[str] = frozenset([])
   episode_metadata_keys: FrozenSet[str] = frozenset([])
@@ -44,7 +44,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
   has_policy_last_fc_log_std: bool = False
   policy_size: int = 256
   # Some datasets were regenerated with different metadata type.
-  step_metadata_type: np.dtype = np.float32
+  step_metadata_type: Union[np.dtype, Type[np.generic]] = np.float32
 
 
 @dataclasses.dataclass
@@ -344,7 +344,9 @@ ADROIT_BUILDER_CONFIGS = [
 
 def _get_step_metadata(
     builder_config: BuilderConfig, ds_config: DatasetConfig
-) -> Dict[str, Union[np.dtype, tfds.features.FeatureConnector]]:
+) -> Dict[
+    str, Union[np.dtype, Type[np.generic], tfds.features.FeatureConnector]
+]:
   """Builds the features dict of the step metadata.
 
   Args:

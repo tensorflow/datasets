@@ -54,7 +54,10 @@ T = TypeVar('T', bound='FeatureConnector')
 # FeatureConnector-like input accepted by `Sequence()`, `Optional()`,...
 if typing.TYPE_CHECKING:
   FeatureConnectorArg = Union[
-      'FeatureConnector', Dict[str, 'FeatureConnectorArg'], tf.dtypes.DType
+      'FeatureConnector',
+      Dict[str, 'FeatureConnectorArg'],
+      tf.dtypes.DType,
+      Type[np.generic],
   ]
 else:
   FeatureConnectorArg = Any

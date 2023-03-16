@@ -30,7 +30,7 @@ import functools
 import io
 import multiprocessing
 import os
-from typing import Any, Dict, Mapping, Optional, Tuple, Union
+from typing import Any, Dict, Mapping, Optional, Tuple, Type, Union
 
 from etils import epath
 import numpy as np
@@ -51,7 +51,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 _IMAGE_ENCODING_FORMAT = "png"
 
 
-def _convert_to_np_dtype(dtype: str) -> np.dtype:
+def _convert_to_np_dtype(dtype: str) -> Type[np.generic]:
   """Returns the `np.dtype` scalar feature."""
   str2val = {
       "bool": np.bool_,

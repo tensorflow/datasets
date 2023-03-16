@@ -21,7 +21,7 @@ import dataclasses
 import io
 import os
 import tempfile
-from typing import Any, List, Optional, Union
+from typing import Any, List, Optional, Union, Type
 
 from etils import epath
 import numpy as np
@@ -530,7 +530,9 @@ def _get_and_validate_colormap(
 
 
 def _validate_np_array(
-    np_array: np.ndarray, shape: utils.Shape, dtype: np.dtype
+    np_array: np.ndarray,
+    shape: utils.Shape,
+    dtype: Union[np.dtype, Type[np.generic]],
 ) -> None:
   """Validate the numpy array match the expected shape/dtype."""
   if np_array.dtype != dtype:
