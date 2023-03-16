@@ -36,6 +36,7 @@ from tensorflow_datasets.core import dataset_metadata
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import reader as reader_lib

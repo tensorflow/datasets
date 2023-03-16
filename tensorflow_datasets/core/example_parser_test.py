@@ -19,10 +19,8 @@ import numpy as np
 import pytest
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import features as features_lib
-
-import tensorflow as tf
-example_pb2 = tf.train
-feature_pb2 = tf.train
+from tensorflow_datasets.proto import tf_example_pb2
+from tensorflow_datasets.proto import tf_feature_pb2
 
 
 def test_example_parser_np():
@@ -36,20 +34,20 @@ def test_example_parser_np():
           shape=(None,), dtype=np.uint16
       ),
   })
-  serialized_example = example_pb2.Example(
-      features=feature_pb2.Features(
+  serialized_example = tf_example_pb2.Example(
+      features=tf_feature_pb2.Features(
           feature={
-              'feature/nested_text': feature_pb2.Feature(
-                  bytes_list=feature_pb2.BytesList(value=[b'thisistext'])
+              'feature/nested_text': tf_feature_pb2.Feature(
+                  bytes_list=tf_feature_pb2.BytesList(value=[b'thisistext'])
               ),
-              'feature/nested_float': feature_pb2.Feature(
-                  float_list=feature_pb2.FloatList(value=[1.0])
+              'feature/nested_float': tf_feature_pb2.Feature(
+                  float_list=tf_feature_pb2.FloatList(value=[1.0])
               ),
-              'array_of_ints': feature_pb2.Feature(
-                  int64_list=feature_pb2.Int64List(value=[2, 3])
+              'array_of_ints': tf_feature_pb2.Feature(
+                  int64_list=tf_feature_pb2.Int64List(value=[2, 3])
               ),
-              'array_of_unknown_shape': feature_pb2.Feature(
-                  int64_list=feature_pb2.Int64List(value=[4, 5, 6])
+              'array_of_unknown_shape': tf_feature_pb2.Feature(
+                  int64_list=tf_feature_pb2.Int64List(value=[4, 5, 6])
               ),
           }
       )
@@ -71,11 +69,11 @@ def test_example_parser_np():
 
 def test_key_error_exception_if_example_specs_is_malformed():
   features = features_lib.FeaturesDict({'doesnotexist': features_lib.Text()})
-  serialized_example = example_pb2.Example(
-      features=feature_pb2.Features(
+  serialized_example = tf_example_pb2.Example(
+      features=tf_feature_pb2.Features(
           feature={
-              'array_of_ints': feature_pb2.Feature(
-                  int64_list=feature_pb2.Int64List(value=[2, 3, 4])
+              'array_of_ints': tf_feature_pb2.Feature(
+                  int64_list=tf_feature_pb2.Int64List(value=[2, 3, 4])
               ),
           }
       )
