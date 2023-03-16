@@ -13,20 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""robomimic_ph dataset."""
+"""robomimic_mg dataset."""
 
-from tensorflow_datasets.datasets.robomimic_ph import robomimic_ph_dataset_builder
+from __future__ import annotations
+
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.robomimic import dataset_utils as utils
 
 
-class RobomimicPhTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for robomimic_ph dataset."""
+class Builder(utils.RobomimicBuilder):
+  """DatasetBuilder for robomimic_mg dataset."""
 
-  DATASET_CLASS = robomimic_ph_dataset_builder.Builder
-  SPLITS = {'train': 2}
-  SKIP_TF1_GRAPH_MODE = True
-
-  DL_EXTRACT_RESULT = {'file_path': 'lift_low_dim.hdf5'}
-  DL_DOWNLOAD_RESULT = {'file_path': 'lift_low_dim.hdf5'}
-
-  BUILDER_CONFIG_NAMES_TO_TEST = ['lift_ph_low_dim']
+  VERSION = tfds.core.Version('1.0.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'Initial release.',
+  }
+  BUILDER_CONFIGS = utils.make_builder_configs(utils.DataSource.MG)
+  DATASET_NAME = 'robomimic_mg'
+  DATASET_FILE_EXTENSION: str = '_sparse'

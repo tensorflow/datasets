@@ -23,7 +23,6 @@ from absl.testing import absltest
 from etils import epath
 import h5py
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.robomimic import dataset_utils
 import tree
 
@@ -31,7 +30,8 @@ FLAGS = flags.FLAGS
 
 
 def _build_dataset(file_path):
-  with tf.io.gfile.GFile(file_path, 'rb') as f:
+  path = epath.Path(file_path)
+  with path.open('rb') as f:
     with h5py.File(f, 'r') as dataset_file:
       data = dataset_file['data']
       for key in data:
