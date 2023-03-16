@@ -375,19 +375,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # * To save the checksums (in DownloadManager)
     if not cls.code_path:
       return None
-    if isinstance(cls.code_path, epath.resource_utils.ResourcePath):
-      parts = []
-      try:
-        path = cls.code_path.parent
-        while path is not None and path != path.parent:
-          parts.append(path.name)
-          path = path.parent
-      except TypeError:
-        pass
-      parts.reverse()
-      new_path = epath.Path(*parts) / "checksums.tsv"
-    else:
-      new_path = cls.code_path.parent / "checksums.tsv"
+    new_path = cls.code_path.parent / "checksums.tsv"
     # Checksums of legacy datasets are located in a separate dir.
     legacy_path = utils.tfds_path() / "url_checksums" / f"{cls.name}.txt"
     if (
