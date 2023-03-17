@@ -960,7 +960,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       # List all existing versions
       full_builder_dir = os.path.join(data_dir_root, builder_dir)
       data_dir_versions = set(utils.version.list_all_versions(full_builder_dir))
-      # Check for existance of the requested version
+      # Check for existence of the requested version
       if self.version in data_dir_versions:
         requested_version_dirs[data_dir_root] = os.path.join(
             data_dir_root, version_dir
@@ -1384,7 +1384,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     ```
 
     * A `beam.PCollection`: This should only be used if you need to share some
-    distributed processing accross splits. In this case, you can use the
+    distributed processing across splits. In this case, you can use the
     following pattern:
 
     ```python
@@ -1603,7 +1603,7 @@ def _save_default_config_name(
   # Note:
   # * Save inside a dir to support some replicated filesystem
   # * Write inside a `.incomplete` file and rename to avoid multiple configs
-  #   writing concurently the same file
+  #   writing concurrently the same file
   # * Config file is overwritten each time a config is generated. If the
   #   default config is changed, this will be updated.
   config_path = config_dir / "metadata.json"

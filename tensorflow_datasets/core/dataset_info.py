@@ -38,7 +38,8 @@ import json
 import os
 import posixpath
 import tempfile
-from typing import Any, Dict, Optional, Tuple, Union
+import time
+from typing import Any, Dict, Iterable, Optional, Tuple, Union
 
 from absl import logging
 from etils import epath
@@ -662,6 +663,53 @@ class DatasetInfo(object):
     # Mark as fully initialized.
     self._fully_initialized = True
 
+  def add_file_data_source_access(
+      self, path: Union[epath.PathLike, Iterable[epath.PathLike]]
+  ) -> None:
+    """Records that the given query was used to generate this dataset.
+
+    Arguments:
+      path: path or paths of files that were read. Can be a file pattern.
+        Multiple paths or patterns can be specified as a comma-separated string
+        or a list.
+    """
+    access_timestamp_ms = _now_in_milliseconds()
+    if isinstance(path, epath.PathLike):
+      path = os.fspath(path).split(",")
+    for p in path:
+      self._info_proto.data_source_accesses.append(
+          dataset_info_pb2.DataSourceAccess(
+              access_timestamp_ms=access_timestamp_ms,
+              file_system=dataset_info_pb2.FileSystem(path=os.fspath(p)),
+          )
+      )
+
+  def add_sql_data_source_access(self, sql_query: str) -> None:
+    """Records that the given query was used to generate this dataset."""
+    self._info_proto.data_source_accesses.append(
+        dataset_info_pb2.DataSourceAccess(
+            access_timestamp_ms=_now_in_milliseconds(),
+            sql_query=dataset_info_pb2.SqlQuery(sql_query=sql_query),
+        )
+    )
+
+  def add_tfds_data_source_access(
+      self, dataset_reference: naming.DatasetReference
+  ) -> None:
+    """Records that the given query was used to generate this dataset."""
+    self._info_proto.data_source_accesses.append(
+        dataset_info_pb2.DataSourceAccess(
+            access_timestamp_ms=_now_in_milliseconds(),
+            tfds_dataset=dataset_info_pb2.TfdsDatasetReference(
+                name=dataset_reference.dataset_name,
+                config=dataset_reference.config,
+                version=str(dataset_reference.version),
+                data_dir=dataset_reference.data_dir,
+                ds_namespace=dataset_reference.namespace,
+            ),
+        )
+    )
+
   def __repr__(self):
     SKIP = object()  # pylint: disable=invalid-name
 
@@ -919,6 +967,10 @@ def pack_as_supervised_ds(
 
 def _metadata_filepath(data_dir: epath.PathLike) -> epath.Path:
   return epath.Path(data_dir) / constants.METADATA_FILENAME
+
+
+def _now_in_milliseconds() -> int:
+  return time.time_ns() // 1000
 
 
 class MetadataDict(Metadata, dict):
