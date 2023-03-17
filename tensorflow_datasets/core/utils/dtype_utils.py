@@ -15,7 +15,7 @@
 
 """TFDS DType utils to handle both NumPy and TensorFlow DTypes."""
 
-from typing import cast, Any, List
+from typing import cast, Any, List, Type, Union
 
 from absl import logging
 from etils import enp
@@ -55,7 +55,7 @@ def cast_to_numpy(dtype: type_utils.TfdsDType) -> np.dtype:
   # np.array(['', '1234567890'], dtype=np.str_).nbytes == 80
   # np.array(['', '1234567890'], dtype=np.object_).nbytes == 16
   if is_string(dtype):
-    return np.object_
+    return np.dtype(np.object_)
   return cast(np.dtype, dtype)
 
 
@@ -65,7 +65,9 @@ def is_np_or_tf_dtype(value: Any) -> bool:
 
 
 def _is_dtype(
-    numpy_dtypes: List[np.dtype], tf_dtype: Any, dtype: TfdsDType
+    numpy_dtypes: List[Union[np.dtype, Type[np.generic]]],
+    tf_dtype: Any,
+    dtype: TfdsDType,
 ) -> bool:
   if enp.lazy.is_np_dtype(dtype):
     return any(
@@ -95,7 +97,7 @@ def is_integer(dtype: TfdsDType) -> bool:
 
 @py_utils.memoize()
 def is_string(dtype: TfdsDType) -> bool:
-  return _is_dtype([np.character, object], np.object_, dtype)
+  return _is_dtype([np.character, np.object_], np.object_, dtype)
 
 
 @py_utils.memoize()
