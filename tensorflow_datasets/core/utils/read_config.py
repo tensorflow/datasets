@@ -88,6 +88,7 @@ class ReadConfig:
       number from dataset metadata. A power user would typically want to set
       False if input files have been tempered with and they don't mind missing
       records or have too many of them.
+    override_buffer_size: number of bytes to pass to file readers for buffering.
   """
   # pyformat: enable
 
@@ -111,6 +112,7 @@ class ReadConfig:
   num_parallel_calls_for_interleave_files: Optional[int] = None
   enable_ordering_guard: bool = True
   assert_cardinality: bool = True
+  override_buffer_size: Optional[int] = None
 
   def __post_init__(self):
     self.options = self.options or tf.data.Options()
