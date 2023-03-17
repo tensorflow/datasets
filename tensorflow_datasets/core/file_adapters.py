@@ -178,8 +178,6 @@ class ArrayRecordFileAdapter(FileAdapter):
   """File adapter for ArrayRecord file format."""
 
   FILE_SUFFIX = 'array_record'
-  # TODO(b/246773240): tune buffer size to optimal value.
-  BUFFER_SIZE = 128
 
   @classmethod
   def make_tf_data(
