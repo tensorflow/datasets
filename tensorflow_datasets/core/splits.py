@@ -370,7 +370,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
 
   def __init__(
       self,
-      split_infos: List[SplitInfo],
+      split_infos: Iterable[SplitInfo],
       *,
       # TODO(b/216470058): remove this parameter
       dataset_name: Optional[str] = None,  # deprecated, please don't use

@@ -18,9 +18,11 @@
 from unittest import mock
 
 import pytest
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.data_sources import array_record
 from tensorflow_datasets.core.utils import shard_utils
 
@@ -41,12 +43,14 @@ _FILE_INSTRUCTIONS = [
 
 
 def create_dataset_info():
-  dataset_info = mock.create_autospec(dataset_info_lib.DatasetInfo)
-  dataset_info.file_format = file_adapters.FileFormat.ARRAY_RECORD
-  dataset_info.splits = {'train': mock.MagicMock()}
-  dataset_info.splits['train'].file_instructions = _FILE_INSTRUCTIONS
-  dataset_info.name = 'dataset_name'
-  return dataset_info
+  with mock.patch.object(splits_lib, 'SplitInfo') as split_mock:
+    split_mock.return_value.name = 'train'
+    split_mock.return_value.file_instructions = _FILE_INSTRUCTIONS
+    dataset_info = mock.create_autospec(dataset_info_lib.DatasetInfo)
+    dataset_info.file_format = file_adapters.FileFormat.ARRAY_RECORD
+    dataset_info.splits = {'train': split_mock()}
+    dataset_info.name = 'dataset_name'
+    return dataset_info
 
 
 @pytest.mark.parametrize(
@@ -69,8 +73,8 @@ def test_unsupported_file_formats_raise_error(file_format):
 def test_missing_split_raises_error():
   dataset_info = create_dataset_info()
   with pytest.raises(
-      IndexError,
-      match='Split "doesnotexist" is not in',
+      ValueError,
+      match="Unknown split 'doesnotexist'.",
   ):
     array_record.ArrayRecordDataSource(dataset_info, split='doesnotexist')
 
@@ -165,3 +169,21 @@ def test_data_source_is_iterable():
     for _ in data_source:
       continue
     assert mock_data_source.__getitem__.call_count == 42
+
+
+def test_data_source_is_sliceable():
+  mock_array_record_data_source = mock.MagicMock()
+  with tfds.testing.mock_data(
+      mock_array_record_data_source=mock_array_record_data_source
+  ):
+    tfds.data_source('mnist', split='train')
+    assert len(mock_array_record_data_source.call_args_list) == 1
+    file_instructions = mock_array_record_data_source.call_args_list[0].args[0]
+    assert file_instructions[0].skip == 0
+    assert file_instructions[0].take == 60000
+
+    tfds.data_source('mnist', split='train[:50%]')
+    assert len(mock_array_record_data_source.call_args_list) == 2
+    file_instructions = mock_array_record_data_source.call_args_list[1].args[0]
+    assert file_instructions[0].skip == 0
+    assert file_instructions[0].take == 30000
