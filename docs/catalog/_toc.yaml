@@ -110,8 +110,21 @@ toc:
     title: openbookqa
   title: Common sense reasoning
 - section:
+  - path: /datasets/catalog/robomimic_mg
+    status: nightly
+    title: robomimic_mg
+  - path: /datasets/catalog/robomimic_mh
+    status: nightly
+    title: robomimic_mh
+  - path: /datasets/catalog/robomimic_ph
+    title: robomimic_ph
+  title: Computer science
+- section:
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/webvid
+    status: nightly
+    title: webvid (manual)
   title: Conditional image generation
 - section:
   - path: /datasets/catalog/clevr
@@ -299,6 +312,14 @@ toc:
     title: ref_coco (manual)
   - path: /datasets/catalog/resisc45
     title: resisc45 (manual)
+  - path: /datasets/catalog/robomimic_mg
+    status: nightly
+    title: robomimic_mg
+  - path: /datasets/catalog/robomimic_mh
+    status: nightly
+    title: robomimic_mh
+  - path: /datasets/catalog/robomimic_ph
+    title: robomimic_ph
   - path: /datasets/catalog/rock_paper_scissors
     title: rock_paper_scissors
   - path: /datasets/catalog/s3o4d
@@ -857,6 +878,12 @@ toc:
     title: hillstrom
   title: Recommendation
 - section:
+  - path: /datasets/catalog/robomimic_mg
+    status: nightly
+    title: robomimic_mg
+  - path: /datasets/catalog/robomimic_mh
+    status: nightly
+    title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
   title: Reinforcement learning
@@ -1321,6 +1348,9 @@ toc:
     title: unnatural_instructions
   - path: /datasets/catalog/user_libri_text
     title: user_libri_text
+  - path: /datasets/catalog/webvid
+    status: nightly
+    title: webvid (manual)
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wiki_dialog
@@ -1439,6 +1469,14 @@ toc:
     title: wiki_auto
   title: Text simplification
 - section:
+  - path: /datasets/catalog/robomimic_mg
+    status: nightly
+    title: robomimic_mg
+  - path: /datasets/catalog/robomimic_mh
+    status: nightly
+    title: robomimic_mh
+  - path: /datasets/catalog/robomimic_ph
+    title: robomimic_ph
   - path: /datasets/catalog/smartwatch_gestures
     title: smartwatch_gestures
   title: Time series
@@ -1453,6 +1491,12 @@ toc:
     title: smartwatch_gestures
   title: Tracking
 - section:
+  - path: /datasets/catalog/robomimic_mg
+    status: nightly
+    title: robomimic_mg
+  - path: /datasets/catalog/robomimic_mh
+    status: nightly
+    title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
   title: Trajectory
@@ -1505,6 +1549,9 @@ toc:
     title: tao (manual)
   - path: /datasets/catalog/ucf101
     title: ucf101
+  - path: /datasets/catalog/webvid
+    status: nightly
+    title: webvid (manual)
   - path: /datasets/catalog/youtube_vis
     title: youtube_vis (manual)
   title: Video
