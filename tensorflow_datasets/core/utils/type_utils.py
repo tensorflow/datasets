@@ -16,7 +16,7 @@
 """Typing annotation utils."""
 
 import typing
-from typing import Any, Dict, List, Optional, Tuple, TypeVar, Union
+from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
 
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -37,7 +37,7 @@ NpArrayOrScalar = Union[bytes, float, int, np.ndarray, str]
 
 if typing.TYPE_CHECKING:
   Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
-  TfdsDType = Union[np.dtype, tf.DType, tf.dtypes.DType]
+  TfdsDType = Union[np.dtype, Type[np.generic], tf.DType, tf.dtypes.DType]
 else:
   Tensor = Any
   TfdsDType = Any
