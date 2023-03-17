@@ -63,10 +63,11 @@ def _get_dataset_from_filename(
     do_take: bool,
     file_format: file_adapters.FileFormat,
     add_tfds_id: bool,
+    override_buffer_size: Optional[int] = None,
 ) -> tf.data.Dataset:
   """Returns a tf.data.Dataset instance from given instructions."""
   ds = file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
-      instruction.filepath
+      instruction.filepath, buffer_size=override_buffer_size
   )
   if do_skip:
     ds = ds.skip(instruction.skip)
@@ -290,6 +291,7 @@ def _read_files(
           do_take=do_take,
           file_format=file_format,
           add_tfds_id=read_config.add_tfds_id,
+          override_buffer_size=read_config.override_buffer_size,
       ),
       cycle_length=cycle_length,
       block_length=block_length,
