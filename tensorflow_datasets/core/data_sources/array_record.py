@@ -65,10 +65,9 @@ class ArrayRecordDataSource(AbcSequence):
           ' generate your data using `tfds.builder(...,'
           f' file_format={file_adapters.FileFormat.ARRAY_RECORD})`.'
       )
-    if self.split not in self.dataset_info.splits:
-      possible_splits = list(self.dataset_info.splits.keys())
-      raise IndexError(f'Split "{self.split}" is not in {possible_splits}')
-    file_instructions = self.dataset_info.splits[self.split].file_instructions
+    split_infos = self.dataset_info.splits.values()
+    splits_dict = splits_lib.SplitDict(split_infos=split_infos)
+    file_instructions = splits_dict[self.split].file_instructions
     self.data_source = array_record_data_source.ArrayRecordDataSource(
         file_instructions
     )

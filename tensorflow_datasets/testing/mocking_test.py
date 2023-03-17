@@ -92,11 +92,9 @@ def test_mocking_partial_decoding():
   ds = tfds.load(
       'mnist',
       split='train',
-      decoders=tfds.decode.PartialDecoding(
-          {
-              'image': tfds.features.Image(shape=(None, None, 1)),
-          }
-      ),
+      decoders=tfds.decode.PartialDecoding({
+          'image': tfds.features.Image(shape=(None, None, 1)),
+      }),
   )
   assert ds.element_spec == {
       'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
@@ -366,3 +364,18 @@ def test_mocking_rlu_nested_dataset_with_windows(
         assert (
             next(iter(tfds.as_numpy(obs_rew_act['action']))) <= max_value
         ).all()
+
+
+def test_mock_data_source():
+  with tfds.testing.mock_data(num_examples=10):
+    data_source = tfds.data_source('imagenet2012')
+    assert len(data_source['train']) == 10
+    assert isinstance(data_source['train'][0], dict)
+
+    data_source = tfds.data_source('imagenet2012', split='train')
+    assert len(data_source) == 10
+    assert isinstance(data_source[0], dict)
+
+    data_source = tfds.data_source('imagenet2012', split='train[:50%]')
+    assert len(data_source) == 10
+    assert isinstance(data_source[0], dict)
