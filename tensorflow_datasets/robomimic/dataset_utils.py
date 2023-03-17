@@ -267,19 +267,19 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
       observation['robot1_eef_vel_lin'] = tensor_feature(
           3, doc='End-effector cartesian velocity'
       )
-      observation['robot1_gripper_qpos'] = (
-          tensor_feature(2, doc='Gripper position'),
+      observation['robot1_gripper_qpos'] = tensor_feature(
+          2, doc='Gripper position'
       )
-      observation['robot1_gripper_qvel'] = (
-          tensor_feature(2, doc='Gripper velocity'),
+      observation['robot1_gripper_qvel'] = tensor_feature(
+          2, doc='Gripper velocity'
       )
-      observation['robot1_joint_pos'] = (
-          tensor_feature(7, doc='7DOF joint positions'),
+      observation['robot1_joint_pos'] = tensor_feature(
+          7, doc='7DOF joint positions'
       )
       observation['robot1_joint_pos_cos'] = tensor_feature(7)
       observation['robot1_joint_pos_sin'] = tensor_feature(7)
-      observation['robot1_joint_vel'] = (
-          tensor_feature(7, doc='7DOF joint velocities'),
+      observation['robot1_joint_vel'] = tensor_feature(
+          7, doc='7DOF joint velocities'
       )
 
     if self.builder_config.filename == ObservationType.IMAGE:
