@@ -2,27 +2,25 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-  <meta itemprop="name" content="robomimic_ph" />
-  <meta itemprop="description" content="The Robomimic proficient human datasets were collected by 1 proficient operator&#10;using the [RoboTurk](https://roboturk.stanford.edu/) platform (with the&#10;exception of Transport, which had 2 proficient operators working together).&#10;Each dataset consists of 200 successful trajectories.&#10;&#10;Each task has two versions: one with low dimensional observations (`low_dim`),&#10;and one with images (`image`).&#10;&#10;The datasets follow the [RLDS format](https://github.com/google-research/rlds)&#10;to represent steps and episodes.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;robomimic_ph&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
-  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/robomimic_ph" />
+  <meta itemprop="name" content="robomimic_mh" />
+  <meta itemprop="description" content="The Robomimic mixed human datasets were collected by several mixed-ability&#10;operators using the [RoboTurk](https://roboturk.stanford.edu/) platform.&#10;Each dataset consists of 200 demonstrations.&#10;&#10;Each task has two versions: one with low dimensional observations (`low_dim`),&#10;and one with images (`image`).&#10;&#10;The datasets follow the [RLDS format](https://github.com/google-research/rlds)&#10;to represent steps and episodes.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;robomimic_mh&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/robomimic_mh" />
   <meta itemprop="sameAs" content="https://arise-initiative.github.io/robomimic-web/" />
   <meta itemprop="citation" content="@inproceedings{robomimic2021,&#10;  title={What Matters in Learning from Offline Human Demonstrations for Robot Manipulation},&#10;  author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany&#10;          and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese&#10;          and Yuke Zhu and Roberto Mart\&#x27;{i}n-Mart\&#x27;{i}n},&#10;  booktitle={Conference on Robot Learning},&#10;  year={2021}&#10;}" />
 </div>
 
-# `robomimic_ph`
+# `robomimic_mh`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
+Note: This dataset was added recently and is only available in our
+`tfds-nightly` package
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
-The Robomimic proficient human datasets were collected by 1 proficient operator
-using the [RoboTurk](https://roboturk.stanford.edu/) platform (with the
-exception of Transport, which had 2 proficient operators working together). Each
-dataset consists of 200 successful trajectories.
+The Robomimic mixed human datasets were collected by several mixed-ability
+operators using the [RoboTurk](https://roboturk.stanford.edu/) platform. Each
+dataset consists of 200 demonstrations.
 
 Each task has two versions: one with low dimensional observations (`low_dim`),
 and one with images (`image`).
@@ -34,12 +32,24 @@ to represent steps and episodes.
     [https://arise-initiative.github.io/robomimic-web/](https://arise-initiative.github.io/robomimic-web/)
 
 *   **Source code**:
-    [`tfds.datasets.robomimic_ph.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/robomimic_ph/robomimic_ph_dataset_builder.py)
+    [`tfds.datasets.robomimic_mh.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/robomimic_mh/robomimic_mh_dataset_builder.py)
 
 *   **Versions**:
 
-    *   `1.0.0`: Initial release.
-    *   **`1.0.1`** (default): Citation updated.
+    *   **`1.0.0`** (default): Initial release.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -67,21 +77,7 @@ to represent steps and episodes.
 ```
 
 
-## robomimic_ph/lift_ph_image (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `798.43 MiB`
-
-*   **Dataset size**: `114.47 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
+## robomimic_mh/lift_mh_image (default config)
 
 *   **Feature structure**:
 
@@ -93,8 +89,29 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
+    'better': bool,
+    'better_operator_1': bool,
+    'better_operator_1_train': bool,
+    'better_operator_1_valid': bool,
+    'better_operator_2': bool,
+    'better_operator_2_train': bool,
+    'better_operator_2_valid': bool,
+    'better_train': bool,
+    'better_valid': bool,
     'episode_id': string,
     'horizon': int32,
+    'okay': bool,
+    'okay_better': bool,
+    'okay_better_train': bool,
+    'okay_better_valid': bool,
+    'okay_operator_1': bool,
+    'okay_operator_1_train': bool,
+    'okay_operator_1_valid': bool,
+    'okay_operator_2': bool,
+    'okay_operator_2_train': bool,
+    'okay_operator_2_valid': bool,
+    'okay_train': bool,
+    'okay_valid': bool,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
         'discount': int32,
@@ -121,6 +138,21 @@ FeaturesDict({
     }),
     'train': bool,
     'valid': bool,
+    'worse': bool,
+    'worse_better': bool,
+    'worse_better_train': bool,
+    'worse_better_valid': bool,
+    'worse_okay': bool,
+    'worse_okay_train': bool,
+    'worse_okay_valid': bool,
+    'worse_operator_1': bool,
+    'worse_operator_1_train': bool,
+    'worse_operator_1_valid': bool,
+    'worse_operator_2': bool,
+    'worse_operator_2_train': bool,
+    'worse_operator_2_valid': bool,
+    'worse_train': bool,
+    'worse_valid': bool,
 })
 ```
 
@@ -135,8 +167,29 @@ Feature                                    | Class        | Shape       | Dtype 
 50_percent                                 | Tensor       |             | bool    |
 50_percent_train                           | Tensor       |             | bool    |
 50_percent_valid                           | Tensor       |             | bool    |
+better                                     | Tensor       |             | bool    |
+better_operator_1                          | Tensor       |             | bool    |
+better_operator_1_train                    | Tensor       |             | bool    |
+better_operator_1_valid                    | Tensor       |             | bool    |
+better_operator_2                          | Tensor       |             | bool    |
+better_operator_2_train                    | Tensor       |             | bool    |
+better_operator_2_valid                    | Tensor       |             | bool    |
+better_train                               | Tensor       |             | bool    |
+better_valid                               | Tensor       |             | bool    |
 episode_id                                 | Tensor       |             | string  |
 horizon                                    | Tensor       |             | int32   |
+okay                                       | Tensor       |             | bool    |
+okay_better                                | Tensor       |             | bool    |
+okay_better_train                          | Tensor       |             | bool    |
+okay_better_valid                          | Tensor       |             | bool    |
+okay_operator_1                            | Tensor       |             | bool    |
+okay_operator_1_train                      | Tensor       |             | bool    |
+okay_operator_1_valid                      | Tensor       |             | bool    |
+okay_operator_2                            | Tensor       |             | bool    |
+okay_operator_2_train                      | Tensor       |             | bool    |
+okay_operator_2_valid                      | Tensor       |             | bool    |
+okay_train                                 | Tensor       |             | bool    |
+okay_valid                                 | Tensor       |             | bool    |
 steps                                      | Dataset      |             |         |
 steps/action                               | Tensor       | (7,)        | float64 |
 steps/discount                             | Tensor       |             | int32   |
@@ -161,21 +214,23 @@ steps/reward                               | Tensor       |             | float6
 steps/states                               | Tensor       | (32,)       | float64 |
 train                                      | Tensor       |             | bool    |
 valid                                      | Tensor       |             | bool    |
+worse                                      | Tensor       |             | bool    |
+worse_better                               | Tensor       |             | bool    |
+worse_better_train                         | Tensor       |             | bool    |
+worse_better_valid                         | Tensor       |             | bool    |
+worse_okay                                 | Tensor       |             | bool    |
+worse_okay_train                           | Tensor       |             | bool    |
+worse_okay_valid                           | Tensor       |             | bool    |
+worse_operator_1                           | Tensor       |             | bool    |
+worse_operator_1_train                     | Tensor       |             | bool    |
+worse_operator_1_valid                     | Tensor       |             | bool    |
+worse_operator_2                           | Tensor       |             | bool    |
+worse_operator_2_train                     | Tensor       |             | bool    |
+worse_operator_2_valid                     | Tensor       |             | bool    |
+worse_train                                | Tensor       |             | bool    |
+worse_valid                                | Tensor       |             | bool    |
 
-## robomimic_ph/lift_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+## robomimic_mh/lift_mh_low_dim
 
 *   **Feature structure**:
 
@@ -187,8 +242,29 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
+    'better': bool,
+    'better_operator_1': bool,
+    'better_operator_1_train': bool,
+    'better_operator_1_valid': bool,
+    'better_operator_2': bool,
+    'better_operator_2_train': bool,
+    'better_operator_2_valid': bool,
+    'better_train': bool,
+    'better_valid': bool,
     'episode_id': string,
     'horizon': int32,
+    'okay': bool,
+    'okay_better': bool,
+    'okay_better_train': bool,
+    'okay_better_valid': bool,
+    'okay_operator_1': bool,
+    'okay_operator_1_train': bool,
+    'okay_operator_1_valid': bool,
+    'okay_operator_2': bool,
+    'okay_operator_2_train': bool,
+    'okay_operator_2_valid': bool,
+    'okay_train': bool,
+    'okay_valid': bool,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
         'discount': int32,
@@ -213,6 +289,21 @@ FeaturesDict({
     }),
     'train': bool,
     'valid': bool,
+    'worse': bool,
+    'worse_better': bool,
+    'worse_better_train': bool,
+    'worse_better_valid': bool,
+    'worse_okay': bool,
+    'worse_okay_train': bool,
+    'worse_okay_valid': bool,
+    'worse_operator_1': bool,
+    'worse_operator_1_train': bool,
+    'worse_operator_1_valid': bool,
+    'worse_operator_2': bool,
+    'worse_operator_2_train': bool,
+    'worse_operator_2_valid': bool,
+    'worse_train': bool,
+    'worse_valid': bool,
 })
 ```
 
@@ -227,8 +318,29 @@ Feature                                | Class        | Shape | Dtype   | Descri
 50_percent                             | Tensor       |       | bool    |
 50_percent_train                       | Tensor       |       | bool    |
 50_percent_valid                       | Tensor       |       | bool    |
+better                                 | Tensor       |       | bool    |
+better_operator_1                      | Tensor       |       | bool    |
+better_operator_1_train                | Tensor       |       | bool    |
+better_operator_1_valid                | Tensor       |       | bool    |
+better_operator_2                      | Tensor       |       | bool    |
+better_operator_2_train                | Tensor       |       | bool    |
+better_operator_2_valid                | Tensor       |       | bool    |
+better_train                           | Tensor       |       | bool    |
+better_valid                           | Tensor       |       | bool    |
 episode_id                             | Tensor       |       | string  |
 horizon                                | Tensor       |       | int32   |
+okay                                   | Tensor       |       | bool    |
+okay_better                            | Tensor       |       | bool    |
+okay_better_train                      | Tensor       |       | bool    |
+okay_better_valid                      | Tensor       |       | bool    |
+okay_operator_1                        | Tensor       |       | bool    |
+okay_operator_1_train                  | Tensor       |       | bool    |
+okay_operator_1_valid                  | Tensor       |       | bool    |
+okay_operator_2                        | Tensor       |       | bool    |
+okay_operator_2_train                  | Tensor       |       | bool    |
+okay_operator_2_valid                  | Tensor       |       | bool    |
+okay_train                             | Tensor       |       | bool    |
+okay_valid                             | Tensor       |       | bool    |
 steps                                  | Dataset      |       |         |
 steps/action                           | Tensor       | (7,)  | float64 |
 steps/discount                         | Tensor       |       | int32   |
@@ -251,21 +363,23 @@ steps/reward                           | Tensor       |       | float64 |
 steps/states                           | Tensor       | (32,) | float64 |
 train                                  | Tensor       |       | bool    |
 valid                                  | Tensor       |       | bool    |
+worse                                  | Tensor       |       | bool    |
+worse_better                           | Tensor       |       | bool    |
+worse_better_train                     | Tensor       |       | bool    |
+worse_better_valid                     | Tensor       |       | bool    |
+worse_okay                             | Tensor       |       | bool    |
+worse_okay_train                       | Tensor       |       | bool    |
+worse_okay_valid                       | Tensor       |       | bool    |
+worse_operator_1                       | Tensor       |       | bool    |
+worse_operator_1_train                 | Tensor       |       | bool    |
+worse_operator_1_valid                 | Tensor       |       | bool    |
+worse_operator_2                       | Tensor       |       | bool    |
+worse_operator_2_train                 | Tensor       |       | bool    |
+worse_operator_2_valid                 | Tensor       |       | bool    |
+worse_train                            | Tensor       |       | bool    |
+worse_valid                            | Tensor       |       | bool    |
 
-## robomimic_ph/can_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+## robomimic_mh/can_mh_image
 
 *   **Feature structure**:
 
@@ -277,8 +391,29 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
+    'better': bool,
+    'better_operator_1': bool,
+    'better_operator_1_train': bool,
+    'better_operator_1_valid': bool,
+    'better_operator_2': bool,
+    'better_operator_2_train': bool,
+    'better_operator_2_valid': bool,
+    'better_train': bool,
+    'better_valid': bool,
     'episode_id': string,
     'horizon': int32,
+    'okay': bool,
+    'okay_better': bool,
+    'okay_better_train': bool,
+    'okay_better_valid': bool,
+    'okay_operator_1': bool,
+    'okay_operator_1_train': bool,
+    'okay_operator_1_valid': bool,
+    'okay_operator_2': bool,
+    'okay_operator_2_train': bool,
+    'okay_operator_2_valid': bool,
+    'okay_train': bool,
+    'okay_valid': bool,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
         'discount': int32,
@@ -305,6 +440,21 @@ FeaturesDict({
     }),
     'train': bool,
     'valid': bool,
+    'worse': bool,
+    'worse_better': bool,
+    'worse_better_train': bool,
+    'worse_better_valid': bool,
+    'worse_okay': bool,
+    'worse_okay_train': bool,
+    'worse_okay_valid': bool,
+    'worse_operator_1': bool,
+    'worse_operator_1_train': bool,
+    'worse_operator_1_valid': bool,
+    'worse_operator_2': bool,
+    'worse_operator_2_train': bool,
+    'worse_operator_2_valid': bool,
+    'worse_train': bool,
+    'worse_valid': bool,
 })
 ```
 
@@ -319,8 +469,29 @@ Feature                                    | Class        | Shape       | Dtype 
 50_percent                                 | Tensor       |             | bool    |
 50_percent_train                           | Tensor       |             | bool    |
 50_percent_valid                           | Tensor       |             | bool    |
+better                                     | Tensor       |             | bool    |
+better_operator_1                          | Tensor       |             | bool    |
+better_operator_1_train                    | Tensor       |             | bool    |
+better_operator_1_valid                    | Tensor       |             | bool    |
+better_operator_2                          | Tensor       |             | bool    |
+better_operator_2_train                    | Tensor       |             | bool    |
+better_operator_2_valid                    | Tensor       |             | bool    |
+better_train                               | Tensor       |             | bool    |
+better_valid                               | Tensor       |             | bool    |
 episode_id                                 | Tensor       |             | string  |
 horizon                                    | Tensor       |             | int32   |
+okay                                       | Tensor       |             | bool    |
+okay_better                                | Tensor       |             | bool    |
+okay_better_train                          | Tensor       |             | bool    |
+okay_better_valid                          | Tensor       |             | bool    |
+okay_operator_1                            | Tensor       |             | bool    |
+okay_operator_1_train                      | Tensor       |             | bool    |
+okay_operator_1_valid                      | Tensor       |             | bool    |
+okay_operator_2                            | Tensor       |             | bool    |
+okay_operator_2_train                      | Tensor       |             | bool    |
+okay_operator_2_valid                      | Tensor       |             | bool    |
+okay_train                                 | Tensor       |             | bool    |
+okay_valid                                 | Tensor       |             | bool    |
 steps                                      | Dataset      |             |         |
 steps/action                               | Tensor       | (7,)        | float64 |
 steps/discount                             | Tensor       |             | int32   |
@@ -345,21 +516,23 @@ steps/reward                               | Tensor       |             | float6
 steps/states                               | Tensor       | (71,)       | float64 |
 train                                      | Tensor       |             | bool    |
 valid                                      | Tensor       |             | bool    |
+worse                                      | Tensor       |             | bool    |
+worse_better                               | Tensor       |             | bool    |
+worse_better_train                         | Tensor       |             | bool    |
+worse_better_valid                         | Tensor       |             | bool    |
+worse_okay                                 | Tensor       |             | bool    |
+worse_okay_train                           | Tensor       |             | bool    |
+worse_okay_valid                           | Tensor       |             | bool    |
+worse_operator_1                           | Tensor       |             | bool    |
+worse_operator_1_train                     | Tensor       |             | bool    |
+worse_operator_1_valid                     | Tensor       |             | bool    |
+worse_operator_2                           | Tensor       |             | bool    |
+worse_operator_2_train                     | Tensor       |             | bool    |
+worse_operator_2_valid                     | Tensor       |             | bool    |
+worse_train                                | Tensor       |             | bool    |
+worse_valid                                | Tensor       |             | bool    |
 
-## robomimic_ph/can_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+## robomimic_mh/can_mh_low_dim
 
 *   **Feature structure**:
 
@@ -371,8 +544,29 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
+    'better': bool,
+    'better_operator_1': bool,
+    'better_operator_1_train': bool,
+    'better_operator_1_valid': bool,
+    'better_operator_2': bool,
+    'better_operator_2_train': bool,
+    'better_operator_2_valid': bool,
+    'better_train': bool,
+    'better_valid': bool,
     'episode_id': string,
     'horizon': int32,
+    'okay': bool,
+    'okay_better': bool,
+    'okay_better_train': bool,
+    'okay_better_valid': bool,
+    'okay_operator_1': bool,
+    'okay_operator_1_train': bool,
+    'okay_operator_1_valid': bool,
+    'okay_operator_2': bool,
+    'okay_operator_2_train': bool,
+    'okay_operator_2_valid': bool,
+    'okay_train': bool,
+    'okay_valid': bool,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
         'discount': int32,
@@ -397,6 +591,21 @@ FeaturesDict({
     }),
     'train': bool,
     'valid': bool,
+    'worse': bool,
+    'worse_better': bool,
+    'worse_better_train': bool,
+    'worse_better_valid': bool,
+    'worse_okay': bool,
+    'worse_okay_train': bool,
+    'worse_okay_valid': bool,
+    'worse_operator_1': bool,
+    'worse_operator_1_train': bool,
+    'worse_operator_1_valid': bool,
+    'worse_operator_2': bool,
+    'worse_operator_2_train': bool,
+    'worse_operator_2_valid': bool,
+    'worse_train': bool,
+    'worse_valid': bool,
 })
 ```
 
@@ -411,8 +620,29 @@ Feature                                | Class        | Shape | Dtype   | Descri
 50_percent                             | Tensor       |       | bool    |
 50_percent_train                       | Tensor       |       | bool    |
 50_percent_valid                       | Tensor       |       | bool    |
+better                                 | Tensor       |       | bool    |
+better_operator_1                      | Tensor       |       | bool    |
+better_operator_1_train                | Tensor       |       | bool    |
+better_operator_1_valid                | Tensor       |       | bool    |
+better_operator_2                      | Tensor       |       | bool    |
+better_operator_2_train                | Tensor       |       | bool    |
+better_operator_2_valid                | Tensor       |       | bool    |
+better_train                           | Tensor       |       | bool    |
+better_valid                           | Tensor       |       | bool    |
 episode_id                             | Tensor       |       | string  |
 horizon                                | Tensor       |       | int32   |
+okay                                   | Tensor       |       | bool    |
+okay_better                            | Tensor       |       | bool    |
+okay_better_train                      | Tensor       |       | bool    |
+okay_better_valid                      | Tensor       |       | bool    |
+okay_operator_1                        | Tensor       |       | bool    |
+okay_operator_1_train                  | Tensor       |       | bool    |
+okay_operator_1_valid                  | Tensor       |       | bool    |
+okay_operator_2                        | Tensor       |       | bool    |
+okay_operator_2_train                  | Tensor       |       | bool    |
+okay_operator_2_valid                  | Tensor       |       | bool    |
+okay_train                             | Tensor       |       | bool    |
+okay_valid                             | Tensor       |       | bool    |
 steps                                  | Dataset      |       |         |
 steps/action                           | Tensor       | (7,)  | float64 |
 steps/discount                         | Tensor       |       | int32   |
@@ -435,21 +665,23 @@ steps/reward                           | Tensor       |       | float64 |
 steps/states                           | Tensor       | (71,) | float64 |
 train                                  | Tensor       |       | bool    |
 valid                                  | Tensor       |       | bool    |
+worse                                  | Tensor       |       | bool    |
+worse_better                           | Tensor       |       | bool    |
+worse_better_train                     | Tensor       |       | bool    |
+worse_better_valid                     | Tensor       |       | bool    |
+worse_okay                             | Tensor       |       | bool    |
+worse_okay_train                       | Tensor       |       | bool    |
+worse_okay_valid                       | Tensor       |       | bool    |
+worse_operator_1                       | Tensor       |       | bool    |
+worse_operator_1_train                 | Tensor       |       | bool    |
+worse_operator_1_valid                 | Tensor       |       | bool    |
+worse_operator_2                       | Tensor       |       | bool    |
+worse_operator_2_train                 | Tensor       |       | bool    |
+worse_operator_2_valid                 | Tensor       |       | bool    |
+worse_train                            | Tensor       |       | bool    |
+worse_valid                            | Tensor       |       | bool    |
 
-## robomimic_ph/square_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+## robomimic_mh/square_mh_image
 
 *   **Feature structure**:
 
@@ -461,8 +693,29 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
+    'better': bool,
+    'better_operator_1': bool,
+    'better_operator_1_train': bool,
+    'better_operator_1_valid': bool,
+    'better_operator_2': bool,
+    'better_operator_2_train': bool,
+    'better_operator_2_valid': bool,
+    'better_train': bool,
+    'better_valid': bool,
     'episode_id': string,
     'horizon': int32,
+    'okay': bool,
+    'okay_better': bool,
+    'okay_better_train': bool,
+    'okay_better_valid': bool,
+    'okay_operator_1': bool,
+    'okay_operator_1_train': bool,
+    'okay_operator_1_valid': bool,
+    'okay_operator_2': bool,
+    'okay_operator_2_train': bool,
+    'okay_operator_2_valid': bool,
+    'okay_train': bool,
+    'okay_valid': bool,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
         'discount': int32,
@@ -489,6 +742,21 @@ FeaturesDict({
     }),
     'train': bool,
     'valid': bool,
+    'worse': bool,
+    'worse_better': bool,
+    'worse_better_train': bool,
+    'worse_better_valid': bool,
+    'worse_okay': bool,
+    'worse_okay_train': bool,
+    'worse_okay_valid': bool,
+    'worse_operator_1': bool,
+    'worse_operator_1_train': bool,
+    'worse_operator_1_valid': bool,
+    'worse_operator_2': bool,
+    'worse_operator_2_train': bool,
+    'worse_operator_2_valid': bool,
+    'worse_train': bool,
+    'worse_valid': bool,
 })
 ```
 
@@ -503,8 +771,29 @@ Feature                                    | Class        | Shape       | Dtype 
 50_percent                                 | Tensor       |             | bool    |
 50_percent_train                           | Tensor       |             | bool    |
 50_percent_valid                           | Tensor       |             | bool    |
+better                                     | Tensor       |             | bool    |
+better_operator_1                          | Tensor       |             | bool    |
+better_operator_1_train                    | Tensor       |             | bool    |
+better_operator_1_valid                    | Tensor       |             | bool    |
+better_operator_2                          | Tensor       |             | bool    |
+better_operator_2_train                    | Tensor       |             | bool    |
+better_operator_2_valid                    | Tensor       |             | bool    |
+better_train                               | Tensor       |             | bool    |
+better_valid                               | Tensor       |             | bool    |
 episode_id                                 | Tensor       |             | string  |
 horizon                                    | Tensor       |             | int32   |
+okay                                       | Tensor       |             | bool    |
+okay_better                                | Tensor       |             | bool    |
+okay_better_train                          | Tensor       |             | bool    |
+okay_better_valid                          | Tensor       |             | bool    |
+okay_operator_1                            | Tensor       |             | bool    |
+okay_operator_1_train                      | Tensor       |             | bool    |
+okay_operator_1_valid                      | Tensor       |             | bool    |
+okay_operator_2                            | Tensor       |             | bool    |
+okay_operator_2_train                      | Tensor       |             | bool    |
+okay_operator_2_valid                      | Tensor       |             | bool    |
+okay_train                                 | Tensor       |             | bool    |
+okay_valid                                 | Tensor       |             | bool    |
 steps                                      | Dataset      |             |         |
 steps/action                               | Tensor       | (7,)        | float64 |
 steps/discount                             | Tensor       |             | int32   |
@@ -529,21 +818,23 @@ steps/reward                               | Tensor       |             | float6
 steps/states                               | Tensor       | (45,)       | float64 |
 train                                      | Tensor       |             | bool    |
 valid                                      | Tensor       |             | bool    |
+worse                                      | Tensor       |             | bool    |
+worse_better                               | Tensor       |             | bool    |
+worse_better_train                         | Tensor       |             | bool    |
+worse_better_valid                         | Tensor       |             | bool    |
+worse_okay                                 | Tensor       |             | bool    |
+worse_okay_train                           | Tensor       |             | bool    |
+worse_okay_valid                           | Tensor       |             | bool    |
+worse_operator_1                           | Tensor       |             | bool    |
+worse_operator_1_train                     | Tensor       |             | bool    |
+worse_operator_1_valid                     | Tensor       |             | bool    |
+worse_operator_2                           | Tensor       |             | bool    |
+worse_operator_2_train                     | Tensor       |             | bool    |
+worse_operator_2_valid                     | Tensor       |             | bool    |
+worse_train                                | Tensor       |             | bool    |
+worse_valid                                | Tensor       |             | bool    |
 
-## robomimic_ph/square_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+## robomimic_mh/square_mh_low_dim
 
 *   **Feature structure**:
 
@@ -555,8 +846,29 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
+    'better': bool,
+    'better_operator_1': bool,
+    'better_operator_1_train': bool,
+    'better_operator_1_valid': bool,
+    'better_operator_2': bool,
+    'better_operator_2_train': bool,
+    'better_operator_2_valid': bool,
+    'better_train': bool,
+    'better_valid': bool,
     'episode_id': string,
     'horizon': int32,
+    'okay': bool,
+    'okay_better': bool,
+    'okay_better_train': bool,
+    'okay_better_valid': bool,
+    'okay_operator_1': bool,
+    'okay_operator_1_train': bool,
+    'okay_operator_1_valid': bool,
+    'okay_operator_2': bool,
+    'okay_operator_2_train': bool,
+    'okay_operator_2_valid': bool,
+    'okay_train': bool,
+    'okay_valid': bool,
     'steps': Dataset({
         'action': Tensor(shape=(7,), dtype=float64),
         'discount': int32,
@@ -581,6 +893,21 @@ FeaturesDict({
     }),
     'train': bool,
     'valid': bool,
+    'worse': bool,
+    'worse_better': bool,
+    'worse_better_train': bool,
+    'worse_better_valid': bool,
+    'worse_okay': bool,
+    'worse_okay_train': bool,
+    'worse_okay_valid': bool,
+    'worse_operator_1': bool,
+    'worse_operator_1_train': bool,
+    'worse_operator_1_valid': bool,
+    'worse_operator_2': bool,
+    'worse_operator_2_train': bool,
+    'worse_operator_2_valid': bool,
+    'worse_train': bool,
+    'worse_valid': bool,
 })
 ```
 
@@ -595,8 +922,29 @@ Feature                                | Class        | Shape | Dtype   | Descri
 50_percent                             | Tensor       |       | bool    |
 50_percent_train                       | Tensor       |       | bool    |
 50_percent_valid                       | Tensor       |       | bool    |
+better                                 | Tensor       |       | bool    |
+better_operator_1                      | Tensor       |       | bool    |
+better_operator_1_train                | Tensor       |       | bool    |
+better_operator_1_valid                | Tensor       |       | bool    |
+better_operator_2                      | Tensor       |       | bool    |
+better_operator_2_train                | Tensor       |       | bool    |
+better_operator_2_valid                | Tensor       |       | bool    |
+better_train                           | Tensor       |       | bool    |
+better_valid                           | Tensor       |       | bool    |
 episode_id                             | Tensor       |       | string  |
 horizon                                | Tensor       |       | int32   |
+okay                                   | Tensor       |       | bool    |
+okay_better                            | Tensor       |       | bool    |
+okay_better_train                      | Tensor       |       | bool    |
+okay_better_valid                      | Tensor       |       | bool    |
+okay_operator_1                        | Tensor       |       | bool    |
+okay_operator_1_train                  | Tensor       |       | bool    |
+okay_operator_1_valid                  | Tensor       |       | bool    |
+okay_operator_2                        | Tensor       |       | bool    |
+okay_operator_2_train                  | Tensor       |       | bool    |
+okay_operator_2_valid                  | Tensor       |       | bool    |
+okay_train                             | Tensor       |       | bool    |
+okay_valid                             | Tensor       |       | bool    |
 steps                                  | Dataset      |       |         |
 steps/action                           | Tensor       | (7,)  | float64 |
 steps/discount                         | Tensor       |       | int32   |
@@ -619,21 +967,23 @@ steps/reward                           | Tensor       |       | float64 |
 steps/states                           | Tensor       | (45,) | float64 |
 train                                  | Tensor       |       | bool    |
 valid                                  | Tensor       |       | bool    |
+worse                                  | Tensor       |       | bool    |
+worse_better                           | Tensor       |       | bool    |
+worse_better_train                     | Tensor       |       | bool    |
+worse_better_valid                     | Tensor       |       | bool    |
+worse_okay                             | Tensor       |       | bool    |
+worse_okay_train                       | Tensor       |       | bool    |
+worse_okay_valid                       | Tensor       |       | bool    |
+worse_operator_1                       | Tensor       |       | bool    |
+worse_operator_1_train                 | Tensor       |       | bool    |
+worse_operator_1_valid                 | Tensor       |       | bool    |
+worse_operator_2                       | Tensor       |       | bool    |
+worse_operator_2_train                 | Tensor       |       | bool    |
+worse_operator_2_valid                 | Tensor       |       | bool    |
+worse_train                            | Tensor       |       | bool    |
+worse_valid                            | Tensor       |       | bool    |
 
-## robomimic_ph/transport_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+## robomimic_mh/transport_mh_image
 
 *   **Feature structure**:
 
@@ -645,8 +995,17 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
+    'better': bool,
+    'better_train': bool,
+    'better_valid': bool,
     'episode_id': string,
     'horizon': int32,
+    'okay': bool,
+    'okay_better': bool,
+    'okay_better_train': bool,
+    'okay_better_valid': bool,
+    'okay_train': bool,
+    'okay_valid': bool,
     'steps': Dataset({
         'action': Tensor(shape=(14,), dtype=float64),
         'discount': int32,
@@ -685,6 +1044,15 @@ FeaturesDict({
     }),
     'train': bool,
     'valid': bool,
+    'worse': bool,
+    'worse_better': bool,
+    'worse_better_train': bool,
+    'worse_better_valid': bool,
+    'worse_okay': bool,
+    'worse_okay_train': bool,
+    'worse_okay_valid': bool,
+    'worse_train': bool,
+    'worse_valid': bool,
 })
 ```
 
@@ -699,8 +1067,17 @@ Feature                                    | Class        | Shape       | Dtype 
 50_percent                                 | Tensor       |             | bool    |
 50_percent_train                           | Tensor       |             | bool    |
 50_percent_valid                           | Tensor       |             | bool    |
+better                                     | Tensor       |             | bool    |
+better_train                               | Tensor       |             | bool    |
+better_valid                               | Tensor       |             | bool    |
 episode_id                                 | Tensor       |             | string  |
 horizon                                    | Tensor       |             | int32   |
+okay                                       | Tensor       |             | bool    |
+okay_better                                | Tensor       |             | bool    |
+okay_better_train                          | Tensor       |             | bool    |
+okay_better_valid                          | Tensor       |             | bool    |
+okay_train                                 | Tensor       |             | bool    |
+okay_valid                                 | Tensor       |             | bool    |
 steps                                      | Dataset      |             |         |
 steps/action                               | Tensor       | (14,)       | float64 |
 steps/discount                             | Tensor       |             | int32   |
@@ -737,21 +1114,17 @@ steps/reward                               | Tensor       |             | float6
 steps/states                               | Tensor       | (115,)      | float64 |
 train                                      | Tensor       |             | bool    |
 valid                                      | Tensor       |             | bool    |
+worse                                      | Tensor       |             | bool    |
+worse_better                               | Tensor       |             | bool    |
+worse_better_train                         | Tensor       |             | bool    |
+worse_better_valid                         | Tensor       |             | bool    |
+worse_okay                                 | Tensor       |             | bool    |
+worse_okay_train                           | Tensor       |             | bool    |
+worse_okay_valid                           | Tensor       |             | bool    |
+worse_train                                | Tensor       |             | bool    |
+worse_valid                                | Tensor       |             | bool    |
 
-## robomimic_ph/transport_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+## robomimic_mh/transport_mh_low_dim
 
 *   **Feature structure**:
 
@@ -763,8 +1136,17 @@ FeaturesDict({
     '50_percent': bool,
     '50_percent_train': bool,
     '50_percent_valid': bool,
+    'better': bool,
+    'better_train': bool,
+    'better_valid': bool,
     'episode_id': string,
     'horizon': int32,
+    'okay': bool,
+    'okay_better': bool,
+    'okay_better_train': bool,
+    'okay_better_valid': bool,
+    'okay_train': bool,
+    'okay_valid': bool,
     'steps': Dataset({
         'action': Tensor(shape=(14,), dtype=float64),
         'discount': int32,
@@ -799,6 +1181,15 @@ FeaturesDict({
     }),
     'train': bool,
     'valid': bool,
+    'worse': bool,
+    'worse_better': bool,
+    'worse_better_train': bool,
+    'worse_better_valid': bool,
+    'worse_okay': bool,
+    'worse_okay_train': bool,
+    'worse_okay_valid': bool,
+    'worse_train': bool,
+    'worse_valid': bool,
 })
 ```
 
@@ -813,8 +1204,17 @@ Feature                                | Class        | Shape  | Dtype   | Descr
 50_percent                             | Tensor       |        | bool    |
 50_percent_train                       | Tensor       |        | bool    |
 50_percent_valid                       | Tensor       |        | bool    |
+better                                 | Tensor       |        | bool    |
+better_train                           | Tensor       |        | bool    |
+better_valid                           | Tensor       |        | bool    |
 episode_id                             | Tensor       |        | string  |
 horizon                                | Tensor       |        | int32   |
+okay                                   | Tensor       |        | bool    |
+okay_better                            | Tensor       |        | bool    |
+okay_better_train                      | Tensor       |        | bool    |
+okay_better_valid                      | Tensor       |        | bool    |
+okay_train                             | Tensor       |        | bool    |
+okay_valid                             | Tensor       |        | bool    |
 steps                                  | Dataset      |        |         |
 steps/action                           | Tensor       | (14,)  | float64 |
 steps/discount                         | Tensor       |        | int32   |
@@ -847,163 +1247,12 @@ steps/reward                           | Tensor       |        | float64 |
 steps/states                           | Tensor       | (115,) | float64 |
 train                                  | Tensor       |        | bool    |
 valid                                  | Tensor       |        | bool    |
-
-## robomimic_ph/tool_hang_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Feature structure**:
-
-```python
-FeaturesDict({
-    'episode_id': string,
-    'horizon': int32,
-    'steps': Dataset({
-        'action': Tensor(shape=(7,), dtype=float64),
-        'discount': int32,
-        'is_first': bool,
-        'is_last': bool,
-        'is_terminal': bool,
-        'observation': FeaturesDict({
-            'object': Tensor(shape=(44,), dtype=float64),
-            'robot0_eef_pos': Tensor(shape=(3,), dtype=float64),
-            'robot0_eef_quat': Tensor(shape=(4,), dtype=float64),
-            'robot0_eef_vel_ang': Tensor(shape=(3,), dtype=float64),
-            'robot0_eef_vel_lin': Tensor(shape=(3,), dtype=float64),
-            'robot0_eye_in_hand_image': Image(shape=(240, 240, 3), dtype=uint8),
-            'robot0_gripper_qpos': Tensor(shape=(2,), dtype=float64),
-            'robot0_gripper_qvel': Tensor(shape=(2,), dtype=float64),
-            'robot0_joint_pos': Tensor(shape=(7,), dtype=float64),
-            'robot0_joint_pos_cos': Tensor(shape=(7,), dtype=float64),
-            'robot0_joint_pos_sin': Tensor(shape=(7,), dtype=float64),
-            'robot0_joint_vel': Tensor(shape=(7,), dtype=float64),
-            'sideview_image': Image(shape=(240, 240, 3), dtype=uint8),
-        }),
-        'reward': float64,
-        'states': Tensor(shape=(58,), dtype=float64),
-    }),
-    'train': bool,
-    'valid': bool,
-})
-```
-
-*   **Feature documentation**:
-
-Feature                                    | Class        | Shape         | Dtype   | Description
-:----------------------------------------- | :----------- | :------------ | :------ | :----------
-                                           | FeaturesDict |               |         |
-episode_id                                 | Tensor       |               | string  |
-horizon                                    | Tensor       |               | int32   |
-steps                                      | Dataset      |               |         |
-steps/action                               | Tensor       | (7,)          | float64 |
-steps/discount                             | Tensor       |               | int32   |
-steps/is_first                             | Tensor       |               | bool    |
-steps/is_last                              | Tensor       |               | bool    |
-steps/is_terminal                          | Tensor       |               | bool    |
-steps/observation                          | FeaturesDict |               |         |
-steps/observation/object                   | Tensor       | (44,)         | float64 |
-steps/observation/robot0_eef_pos           | Tensor       | (3,)          | float64 | End-effector position
-steps/observation/robot0_eef_quat          | Tensor       | (4,)          | float64 | End-effector orientation
-steps/observation/robot0_eef_vel_ang       | Tensor       | (3,)          | float64 | End-effector angular velocity
-steps/observation/robot0_eef_vel_lin       | Tensor       | (3,)          | float64 | End-effector cartesian velocity
-steps/observation/robot0_eye_in_hand_image | Image        | (240, 240, 3) | uint8   |
-steps/observation/robot0_gripper_qpos      | Tensor       | (2,)          | float64 | Gripper position
-steps/observation/robot0_gripper_qvel      | Tensor       | (2,)          | float64 | Gripper velocity
-steps/observation/robot0_joint_pos         | Tensor       | (7,)          | float64 | 7DOF joint positions
-steps/observation/robot0_joint_pos_cos     | Tensor       | (7,)          | float64 |
-steps/observation/robot0_joint_pos_sin     | Tensor       | (7,)          | float64 |
-steps/observation/robot0_joint_vel         | Tensor       | (7,)          | float64 | 7DOF joint velocities
-steps/observation/sideview_image           | Image        | (240, 240, 3) | uint8   |
-steps/reward                               | Tensor       |               | float64 |
-steps/states                               | Tensor       | (58,)         | float64 |
-train                                      | Tensor       |               | bool    |
-valid                                      | Tensor       |               | bool    |
-
-## robomimic_ph/tool_hang_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Feature structure**:
-
-```python
-FeaturesDict({
-    'episode_id': string,
-    'horizon': int32,
-    'steps': Dataset({
-        'action': Tensor(shape=(7,), dtype=float64),
-        'discount': int32,
-        'is_first': bool,
-        'is_last': bool,
-        'is_terminal': bool,
-        'observation': FeaturesDict({
-            'object': Tensor(shape=(44,), dtype=float64),
-            'robot0_eef_pos': Tensor(shape=(3,), dtype=float64),
-            'robot0_eef_quat': Tensor(shape=(4,), dtype=float64),
-            'robot0_eef_vel_ang': Tensor(shape=(3,), dtype=float64),
-            'robot0_eef_vel_lin': Tensor(shape=(3,), dtype=float64),
-            'robot0_gripper_qpos': Tensor(shape=(2,), dtype=float64),
-            'robot0_gripper_qvel': Tensor(shape=(2,), dtype=float64),
-            'robot0_joint_pos': Tensor(shape=(7,), dtype=float64),
-            'robot0_joint_pos_cos': Tensor(shape=(7,), dtype=float64),
-            'robot0_joint_pos_sin': Tensor(shape=(7,), dtype=float64),
-            'robot0_joint_vel': Tensor(shape=(7,), dtype=float64),
-        }),
-        'reward': float64,
-        'states': Tensor(shape=(58,), dtype=float64),
-    }),
-    'train': bool,
-    'valid': bool,
-})
-```
-
-*   **Feature documentation**:
-
-Feature                                | Class        | Shape | Dtype   | Description
-:------------------------------------- | :----------- | :---- | :------ | :----------
-                                       | FeaturesDict |       |         |
-episode_id                             | Tensor       |       | string  |
-horizon                                | Tensor       |       | int32   |
-steps                                  | Dataset      |       |         |
-steps/action                           | Tensor       | (7,)  | float64 |
-steps/discount                         | Tensor       |       | int32   |
-steps/is_first                         | Tensor       |       | bool    |
-steps/is_last                          | Tensor       |       | bool    |
-steps/is_terminal                      | Tensor       |       | bool    |
-steps/observation                      | FeaturesDict |       |         |
-steps/observation/object               | Tensor       | (44,) | float64 |
-steps/observation/robot0_eef_pos       | Tensor       | (3,)  | float64 | End-effector position
-steps/observation/robot0_eef_quat      | Tensor       | (4,)  | float64 | End-effector orientation
-steps/observation/robot0_eef_vel_ang   | Tensor       | (3,)  | float64 | End-effector angular velocity
-steps/observation/robot0_eef_vel_lin   | Tensor       | (3,)  | float64 | End-effector cartesian velocity
-steps/observation/robot0_gripper_qpos  | Tensor       | (2,)  | float64 | Gripper position
-steps/observation/robot0_gripper_qvel  | Tensor       | (2,)  | float64 | Gripper velocity
-steps/observation/robot0_joint_pos     | Tensor       | (7,)  | float64 | 7DOF joint positions
-steps/observation/robot0_joint_pos_cos | Tensor       | (7,)  | float64 |
-steps/observation/robot0_joint_pos_sin | Tensor       | (7,)  | float64 |
-steps/observation/robot0_joint_vel     | Tensor       | (7,)  | float64 | 7DOF joint velocities
-steps/reward                           | Tensor       |       | float64 |
-steps/states                           | Tensor       | (58,) | float64 |
-train                                  | Tensor       |       | bool    |
-valid                                  | Tensor       |       | bool    |
+worse                                  | Tensor       |        | bool    |
+worse_better                           | Tensor       |        | bool    |
+worse_better_train                     | Tensor       |        | bool    |
+worse_better_valid                     | Tensor       |        | bool    |
+worse_okay                             | Tensor       |        | bool    |
+worse_okay_train                       | Tensor       |        | bool    |
+worse_okay_valid                       | Tensor       |        | bool    |
+worse_train                            | Tensor       |        | bool    |
+worse_valid                            | Tensor       |        | bool    |
