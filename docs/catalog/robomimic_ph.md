@@ -41,6 +41,12 @@ to represent steps and episodes.
     *   `1.0.0`: Initial release.
     *   **`1.0.1`** (default): Citation updated.
 
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 200
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -76,12 +82,6 @@ to represent steps and episodes.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
 
 *   **Feature structure**:
 
@@ -164,18 +164,13 @@ valid                                      | Tensor       |             | bool  
 
 ## robomimic_ph/lift_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.69 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Feature structure**:
 
@@ -254,18 +249,13 @@ valid                                  | Tensor       |       | bool    |
 
 ## robomimic_ph/can_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.87 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `474.55 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -348,18 +338,13 @@ valid                                      | Tensor       |             | bool  
 
 ## robomimic_ph/can_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `43.38 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `27.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Feature structure**:
 
@@ -438,18 +423,13 @@ valid                                  | Tensor       |       | bool    |
 
 ## robomimic_ph/square_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.42 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `401.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -532,18 +512,13 @@ valid                                      | Tensor       |             | bool  
 
 ## robomimic_ph/square_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `47.69 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `29.91 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Feature structure**:
 
@@ -622,18 +597,13 @@ valid                                  | Tensor       |       | bool    |
 
 ## robomimic_ph/transport_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `15.07 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.64 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -740,18 +710,13 @@ valid                                      | Tensor       |             | bool  
 
 ## robomimic_ph/transport_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `294.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `208.05 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Only when `shuffle_files=False` (train)
 
 *   **Feature structure**:
 
@@ -850,18 +815,13 @@ valid                                  | Tensor       |        | bool    |
 
 ## robomimic_ph/tool_hang_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `61.96 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.10 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -932,18 +892,13 @@ valid                                      | Tensor       |               | bool
 
 ## robomimic_ph/tool_hang_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `192.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `121.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Feature structure**:
 
