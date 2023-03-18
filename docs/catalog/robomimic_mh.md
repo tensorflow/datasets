@@ -38,18 +38,11 @@ to represent steps and episodes.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 300
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -78,6 +71,14 @@ Split | Examples
 
 
 ## robomimic_mh/lift_mh_image (default config)
+
+*   **Download size**: `2.50 GiB`
+
+*   **Dataset size**: `363.18 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Feature structure**:
 
@@ -232,6 +233,14 @@ worse_valid                                | Tensor       |             | bool  
 
 ## robomimic_mh/lift_mh_low_dim
 
+*   **Download size**: `45.73 MiB`
+
+*   **Dataset size**: `27.26 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
@@ -380,6 +389,14 @@ worse_train                            | Tensor       |       | bool    |
 worse_valid                            | Tensor       |       | bool    |
 
 ## robomimic_mh/can_mh_image
+
+*   **Download size**: `5.05 GiB`
+
+*   **Dataset size**: `1.23 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Feature structure**:
 
@@ -534,6 +551,14 @@ worse_valid                                | Tensor       |             | bool  
 
 ## robomimic_mh/can_mh_low_dim
 
+*   **Download size**: `107.28 MiB`
+
+*   **Dataset size**: `75.19 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
@@ -682,6 +707,14 @@ worse_train                            | Tensor       |       | bool    |
 worse_valid                            | Tensor       |       | bool    |
 
 ## robomimic_mh/square_mh_image
+
+*   **Download size**: `6.48 GiB`
+
+*   **Dataset size**: `1.07 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Feature structure**:
 
@@ -836,6 +869,14 @@ worse_valid                                | Tensor       |             | bool  
 
 ## robomimic_mh/square_mh_low_dim
 
+*   **Download size**: `118.13 MiB`
+
+*   **Dataset size**: `80.37 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Feature structure**:
 
 ```python
@@ -985,6 +1026,14 @@ worse_valid                            | Tensor       |       | bool    |
 
 ## robomimic_mh/transport_mh_image
 
+*   **Download size**: `31.47 GiB`
+
+*   **Dataset size**: `7.69 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
@@ -1125,6 +1174,14 @@ worse_train                                | Tensor       |             | bool  
 worse_valid                                | Tensor       |             | bool    |
 
 ## robomimic_mh/transport_mh_low_dim
+
+*   **Download size**: `607.47 MiB`
+
+*   **Dataset size**: `434.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Feature structure**:
 

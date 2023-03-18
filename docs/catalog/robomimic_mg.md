@@ -38,19 +38,6 @@ to represent steps and episodes.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -78,6 +65,20 @@ Split | Examples
 
 
 ## robomimic_mg/lift_mg_image (default config)
+
+*   **Download size**: `18.04 GiB`
+
+*   **Dataset size**: `2.73 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,500
 
 *   **Feature structure**:
 
@@ -144,6 +145,20 @@ steps/states                               | Tensor       | (32,)       | float6
 
 ## robomimic_mg/lift_mg_low_dim
 
+*   **Download size**: `302.25 MiB`
+
+*   **Dataset size**: `195.10 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,500
+
 *   **Feature structure**:
 
 ```python
@@ -204,6 +219,19 @@ steps/reward                           | Tensor       |       | float64 |
 steps/states                           | Tensor       | (32,) | float64 |
 
 ## robomimic_mg/can_mg_image
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -269,6 +297,20 @@ steps/reward                               | Tensor       |             | float6
 steps/states                               | Tensor       | (71,)       | float64 |
 
 ## robomimic_mg/can_mg_low_dim
+
+*   **Download size**: `1.01 GiB`
+
+*   **Dataset size**: `697.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,900
 
 *   **Feature structure**:
 
