@@ -220,18 +220,19 @@ steps/states                           | Tensor       | (32,) | float64 |
 
 ## robomimic_mg/can_mg_image
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `47.14 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.15 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,900
 
 *   **Feature structure**:
 
