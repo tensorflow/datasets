@@ -13,18 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for vctk dataset module."""
-
-from tensorflow_datasets import testing
-from tensorflow_datasets.audio import vctk
-
-
-class VctkTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = vctk.Vctk
-  SPLITS = {
-      "train": 1,
-  }
-
-
-if __name__ == "__main__":
-  testing.test_main()
