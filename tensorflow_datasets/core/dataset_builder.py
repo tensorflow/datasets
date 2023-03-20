@@ -1535,6 +1535,33 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     split_dict = splits_lib.SplitDict(split_infos)
     self.info.set_splits(split_dict)
 
+  def read_tfrecord_beam(
+      self,
+      file_pattern: str,
+      /,
+      **kwargs,
+  ) -> "beam.PTransform":
+    """Returns a PTransform reading the TFRecords and records it in the dataset lineage.
+
+    This function records the lineage in the DatasetInfo and then invokes
+    `beam.io.ReadFromTFRecord`. The kwargs should contain any other parameters
+    for `beam.io.ReadFromTFRecord`. See
+    https://beam.apache.org/releases/pydoc/2.6.0/apache_beam.io.tfrecordio.html#apache_beam.io.tfrecordio.ReadFromTFRecord.
+
+    Arguments:
+      file_pattern: A file glob pattern to read TFRecords from.
+      **kwargs: the other parameters for `beam.io.ReadFromTFRecord`.
+
+    Returns:
+      a Beam PTransform that reads the given TFRecord files.
+    """
+    self.info.add_file_data_source_access(file_pattern)
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    return beam.io.ReadFromTFRecord(
+        file_pattern=file_pattern,
+        **kwargs,
+    )
+
 
 @utils.docs.deprecated
 class BeamBasedBuilder(GeneratorBasedBuilder):
