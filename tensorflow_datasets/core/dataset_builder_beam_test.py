@@ -17,6 +17,7 @@
 
 import pathlib
 from typing import Callable
+from unittest import mock
 
 import apache_beam as beam
 import numpy as np
@@ -28,7 +29,6 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import utils
-
 
 
 class DummyBeamDataset(dataset_builder.GeneratorBasedBuilder):
@@ -195,3 +195,13 @@ def _assert_values_equal(nested_lhs, nested_rhs):
     flat_rhs = tf.nest.flatten(dict_rhs)
     for lhs, rhs in zip(flat_lhs, flat_rhs):
       np.testing.assert_array_equal(lhs, rhs)
+
+
+def test_read_tfrecord_beam():
+  builder = DummyBeamDataset()
+  with mock.patch.object(beam.io, 'ReadFromTFRecord') as mock_read:
+    builder.read_tfrecord_beam('/a/b/c', validate=True)
+    mock_read.assert_called_once_with(file_pattern='/a/b/c', validate=True)
+    info_proto = builder.info.as_proto
+    assert len(info_proto.data_source_accesses) == 1
+    assert info_proto.data_source_accesses[0].file_system.path == '/a/b/c'
