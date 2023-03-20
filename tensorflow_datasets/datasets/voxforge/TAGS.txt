@@ -1,0 +1,11 @@
+content.data-type.audio
+content.data-type.speech
+content.data-type.text
+content.language.de
+content.language.en
+content.language.es
+content.language.fr
+content.language.it
+content.language.jp
+content.language.ru
+content.multilingual
