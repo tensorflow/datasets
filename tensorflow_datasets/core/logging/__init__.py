@@ -450,3 +450,37 @@ class dataset_collection(_FunctionDecorator):  # pylint: disable=invalid-name
         name=args[0] if args else kwargs["name"],
         loader_kwargs=kwargs.get("loader_kwargs"),
     )
+
+
+class data_source(_FunctionDecorator):  # pylint: disable=invalid-name
+  """Decorator to call `data_source` method on registered loggers."""
+
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    logger_method(
+        name=args[0] if args else kwargs["name"],
+        split=kwargs.get("split"),
+        data_dir=kwargs.get("data_dir"),
+        download=kwargs.get("download"),
+        decoders=kwargs.get("decoders"),
+        try_gcs=kwargs.get("try_gcs"),
+    )
+
+
+class as_data_source(_DsbuilderMethodDecorator):  # pylint: disable=invalid-name
+  """Decorator to call `as_data_source` method on registered loggers."""
+
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    logger_method(
+        split=args and args[0] or kwargs.get("split"),
+        decoders=kwargs.get("decoders"),
+    )

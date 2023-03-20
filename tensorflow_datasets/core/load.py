@@ -655,12 +655,14 @@ def load(
   return ds
 
 
+@tfds_logging.data_source()
 def data_source(
     name: str,
     *,
     split: Optional[Tree[splits_lib.SplitArg]] = None,
     data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
     download: bool = True,
+    decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
     builder_kwargs: Optional[Dict[str, Any]] = None,
     download_and_prepare_kwargs: Optional[Dict[str, Any]] = None,
     try_gcs: bool = False,
@@ -728,6 +730,11 @@ def data_source(
       `tfds.core.DatasetBuilder.as_data_source`. If `False`, data is expected to
       be in `data_dir`. If `True` and the data is already in `data_dir`,
       when data_dir is a Placer path.
+    decoders: Nested dict of `Decoder` objects which allow to customize the
+      decoding. The structure should match the feature structure, but only
+      customized feature keys need to be present. See [the
+      guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
+      for more info.
     builder_kwargs: `dict` (optional), keyword arguments to be passed to the
       `tfds.core.DatasetBuilder` constructor. `data_dir` will be passed through
       by default.
@@ -771,7 +778,7 @@ def data_source(
       try_gcs,
   )
   _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
-  return dbuilder.as_data_source(split=split)
+  return dbuilder.as_data_source(split=split, decoders=decoders)
 
 
 def _get_all_versions(

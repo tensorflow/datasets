@@ -658,6 +658,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     self._log_download_done()
 
+  @tfds_logging.as_data_source()
   def as_data_source(
       self,
       split: Optional[Tree[splits_lib.SplitArg]] = None,

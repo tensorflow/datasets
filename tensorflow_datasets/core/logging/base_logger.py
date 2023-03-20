@@ -176,3 +176,31 @@ class Logger:
   def process_ends(self):
     """Called when the process is about to end (atexit)."""
     pass
+
+  def data_source(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
+      data_dir: Optional[str],
+      download: Optional[bool],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
+      try_gcs: Optional[bool],
+  ):
+    """Callback called when user calls `tfds.data_source(...)`."""
+    pass
+
+  def as_data_source(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      config_name: Optional[str],
+      version: str,
+      data_path: str,
+      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
+  ):
+    """Callback called when user calls `dataset_builder.as_data_source(...)`."""
+    pass
