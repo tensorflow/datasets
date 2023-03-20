@@ -15,15 +15,15 @@
 
 """UnifiedQA dataset."""
 
+from tensorflow_datasets.datasets.unified_qa import unified_qa_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.unifiedqa import unifiedqa
 
 
 class UnifiedQAAI2ScienceElementaryTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ai2_science_elementary."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['ai2_science_elementary']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -41,7 +41,7 @@ class UnifiedQAAI2ScienceMiddleTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ai2_science_middleai2_science_middle."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['ai2_science_middle']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -59,7 +59,7 @@ class UnifiedQAAmbigQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ambigqa."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['ambigqa']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -75,7 +75,7 @@ class UnifiedQAARCEasyTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_easy."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_easy']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -93,7 +93,7 @@ class UnifiedQAARCEasyDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_easy_dev."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_easy_dev']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -111,7 +111,7 @@ class UnifiedQAARCEasyIRTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_easy_with_ir."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_easy_with_ir']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -129,7 +129,7 @@ class UnifiedQAARCEasyIRDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_easy_with_ir_dev."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_easy_with_ir_dev']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -147,7 +147,7 @@ class UnifiedQAARCHardTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_hard."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_hard']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -165,7 +165,7 @@ class UnifiedQAARCHardDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_hard_dev."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_hard_dev']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -183,7 +183,7 @@ class UnifiedQAARCHardIRTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_hard_with_ir."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_hard_with_ir']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -201,7 +201,7 @@ class UnifiedQAARCHardIRDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for arc_hard_with_ir_dev."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['arc_hard_with_ir_dev']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -219,7 +219,7 @@ class UnifiedQABoolQTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for boolq."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['boolq']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -235,7 +235,7 @@ class UnifiedQABoolQNPTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for boolq_np."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['boolq_np']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -251,7 +251,7 @@ class UnifiedQACQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for commonsenseqa."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['commonsenseqa']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -269,7 +269,7 @@ class UnifiedQACQATestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for commonsenseqa_test."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['commonsenseqa_test']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -287,7 +287,7 @@ class UnifiedQAContrastSetsBoolQTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for contrast_sets_boolq."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['contrast_sets_boolq']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -303,7 +303,7 @@ class UnifiedQAContrastSetsDROPTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for contrast_sets_drop."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['contrast_sets_drop']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -319,7 +319,7 @@ class UnifiedQAContrastSetsQuorefTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for contrast_sets_quoref."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['contrast_sets_quoref']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -335,7 +335,7 @@ class UnifiedQAContrastSetsROPESTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for contrast_sets_ropes."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['contrast_sets_ropes']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -351,7 +351,7 @@ class UnifiedQADROPTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for drop."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['drop']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -367,7 +367,7 @@ class UnifiedQAMCTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for mctest."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['mctest']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -385,7 +385,7 @@ class UnifiedQAMCTestCorrectedTheSeparatorTest(
   """Tests for mctest_corrected_the_separator."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['mctest_corrected_the_separator']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -401,7 +401,7 @@ class UnifiedQAMultiRCTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for multirc."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['multirc']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -417,7 +417,7 @@ class UnifiedQANarrativeQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for narrativeqa."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['narrativeqa']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -435,7 +435,7 @@ class UnifiedQANarrativeQADevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for narrativeqa_dev."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['narrativeqa_dev']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -453,7 +453,7 @@ class UnifiedQANatQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -469,7 +469,7 @@ class UnifiedQANatQADirectAnsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions_direct_ans."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions_direct_ans']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -487,7 +487,7 @@ class UnifiedQANatQADirectAnsTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions_direct_ans_test."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions_direct_ans_test']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -505,7 +505,7 @@ class UnifiedQANatQADPRParaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions_with_dpr_para."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions_with_dpr_para']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -521,7 +521,7 @@ class UnifiedQANatQADPRParaTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for natural_questions_with_dpr_para_test."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['natural_questions_with_dpr_para_test']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'test': 1,  # Number of fake test example
@@ -537,7 +537,7 @@ class UnifiedQANewsQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for newsqa."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['newsqa']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -553,7 +553,7 @@ class UnifiedQAOBQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for openbookqa."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['openbookqa']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -571,7 +571,7 @@ class UnifiedQAOBQADevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for openbookqa_dev."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['openbookqa_dev']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -589,7 +589,7 @@ class UnifiedQAOBQAIRTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for openbookqa_with_ir."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['openbookqa_with_ir']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -607,7 +607,7 @@ class UnifiedQAOBQAIRDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for openbookqa_with_ir_dev."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['openbookqa_with_ir_dev']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -625,7 +625,7 @@ class UnifiedQAPIQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for physical_iqa."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['physical_iqa']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -641,7 +641,7 @@ class UnifiedQAQASCTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['qasc']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -659,7 +659,7 @@ class UnifiedQAQASCTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc_test."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['qasc_test']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -677,7 +677,7 @@ class UnifiedQAQASCIRTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc_with_ir."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['qasc_with_ir']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -695,7 +695,7 @@ class UnifiedQAQASCIRTestTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for qasc_with_ir_test."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['qasc_with_ir_test']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -713,7 +713,7 @@ class UnifiedQAQuorefTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for quoref."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['quoref']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -729,7 +729,7 @@ class UnifiedQARACEStringDevTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for race_string_dev."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['race_string_dev']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -747,7 +747,7 @@ class UnifiedQARACEStringTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for race_string."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['race_string']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -765,7 +765,7 @@ class UnifiedQAROPESTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ropes."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['ropes']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -781,7 +781,7 @@ class UnifiedQASIQATest(tfds.testing.DatasetBuilderTestCase):
   """Tests for social_iqa."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['social_iqa']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -797,7 +797,7 @@ class UnifiedQASQuAD11Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for squad1_1."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['squad1_1']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -813,7 +813,7 @@ class UnifiedQASQuAD20Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for squad2."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['squad2']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -829,7 +829,7 @@ class UnifiedQAWGLTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for winogrande_l."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['winogrande_l']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -845,7 +845,7 @@ class UnifiedQAWGMTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for winogrande_m."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['winogrande_m']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
@@ -861,7 +861,7 @@ class UnifiedQAWGSTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for winogrande_s."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['winogrande_s']
-  DATASET_CLASS = unifiedqa.UnifiedQA
+  DATASET_CLASS = unified_qa_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'validation': 1,  # Number of fake validation example
