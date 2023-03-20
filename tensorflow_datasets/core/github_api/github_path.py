@@ -222,7 +222,7 @@ class GithubPath(pathlib.PurePosixPath):
     _parse_github_path(full_path)
     return super().__new__(cls, full_path.replace(_URI_PREFIX, '/github/', 1))
 
-  @utils.memoized_property
+  @functools.cached_property
   def _path_str(self) -> str:
     return posixpath.join(_URI_PREFIX, *self.parts[2:])
 
@@ -246,7 +246,7 @@ class GithubPath(pathlib.PurePosixPath):
     """
     return cls(f'github://{repo}/tree/{branch}')
 
-  @utils.memoized_property
+  @functools.cached_property
   def _metadata(self) -> _PathMetadata:
     return _PathMetadata.from_path(os.fspath(self))
 

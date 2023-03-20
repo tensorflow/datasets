@@ -18,6 +18,7 @@
 import collections.abc
 import contextlib
 import dataclasses
+import functools
 import itertools
 import sys
 import typing
@@ -204,7 +205,7 @@ class SplitBuilder:
         pipeline_proxy._beam_pipeline = self._beam_pipeline  # pylint:disable=protected-access
     self._in_contextmanager = False
 
-  @utils.memoized_property
+  @functools.cached_property
   def beam_pipeline(self) -> 'beam.Pipeline':
     """Instanciates and returns Apache Beam pipeline.
 

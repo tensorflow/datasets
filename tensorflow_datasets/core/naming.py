@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import dataclasses
+import functools
 import os
 import re
 import textwrap
@@ -455,7 +456,7 @@ class ShardedFileTemplate:
     if not self.template:
       self.template = DEFAULT_FILENAME_TEMPLATE
 
-  @py_utils.memoized_property
+  @functools.cached_property
   def regex(self) -> 're.Pattern[str]':
     """Returns the regular expresssion for this template.
 

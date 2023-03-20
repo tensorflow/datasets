@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import concurrent.futures
 import dataclasses
+import functools
 import hashlib
 import typing
 from typing import Any, Dict, Iterator, Optional, Tuple, Union
@@ -689,7 +690,7 @@ class DownloadManager(object):
   def download_dir(self) -> epath.Path:
     return self._download_dir
 
-  @utils.memoized_property
+  @functools.cached_property
   def manual_dir(self) -> epath.Path:
     """Returns the directory containing the manually extracted data."""
     if not self._manual_dir:

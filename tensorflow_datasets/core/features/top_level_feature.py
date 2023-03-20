@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import enum
+import functools
 from typing import Any, List, Union
 
 from tensorflow_datasets.core import example_parser
@@ -42,15 +43,15 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   eventually better support for augmentations.
   """
 
-  @utils.memoized_property
+  @functools.cached_property
   def flat_features(self) -> List[Any]:
     return self._flatten(self)
 
-  @utils.memoized_property
+  @functools.cached_property
   def flat_serialized_info(self) -> List[Any]:
     return self._flatten(self.get_serialized_info())
 
-  @utils.memoized_property
+  @functools.cached_property
   def flat_sequence_ranks(self) -> List[int]:
     return [_get_sequence_rank(s) for s in self.flat_serialized_info]  # pylint: disable=not-an-iterable
 
@@ -166,17 +167,17 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     """
     return self._example_parser.flat_feature_specs
 
-  @utils.memoized_property
+  @functools.cached_property
   def _example_parser(self):
     example_specs = self.get_serialized_info()
     return example_parser.ExampleParser(example_specs)
 
-  @utils.memoized_property
+  @functools.cached_property
   def _example_parser_np(self):
     example_specs = self.get_serialized_info()
     return example_parser.ExampleParserNp(example_specs)
 
-  @utils.memoized_property
+  @functools.cached_property
   def _example_serializer(self):
     example_specs = self.get_serialized_info()
     return example_serializer.ExampleSerializer(example_specs)

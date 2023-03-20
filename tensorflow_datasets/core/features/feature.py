@@ -309,30 +309,30 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
         lambda ti: ti.to_tensor_spec(), self.get_tensor_info()
     )
 
-  @py_utils.memoized_property
+  @functools.cached_property
   def shape(self):
     """Return the shape (or dict of shape) of this FeatureConnector."""
     return tree_utils.map_structure(lambda t: t.shape, self.get_tensor_info())
 
-  @py_utils.memoized_property
+  @functools.cached_property
   def dtype(self) -> TreeDict[tf.dtypes.DType]:
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
     log_tf_warning('FeatureConnector')
     return self.tf_dtype
 
-  @py_utils.memoized_property
+  @functools.cached_property
   def np_dtype(self) -> TreeDict[np.dtype]:
     return tree_utils.map_structure(
         lambda t: t.np_dtype, self.get_tensor_info()
     )
 
   # For backwards compatibility: now it is named np_dtype.
-  @py_utils.memoized_property
+  @functools.cached_property
   def numpy_dtype(self) -> TreeDict[np.dtype]:
     return self.np_dtype
 
-  @py_utils.memoized_property
-  def tf_dtype(self) -> TreeDict[np.dtype]:
+  @functools.cached_property
+  def tf_dtype(self) -> TreeDict[tf.dtypes.DType]:
     def convert_to_tensorflow(value):
       if enp.lazy.is_np_dtype(value):
         return tf.dtypes.as_dtype(value)

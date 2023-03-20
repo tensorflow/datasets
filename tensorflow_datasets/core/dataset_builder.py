@@ -305,18 +305,18 @@ class DatasetBuilder(registered.RegisteredDataset):
   def __setstate__(self, state):
     self.__init__(**state)
 
-  @utils.memoized_property
+  @functools.cached_property
   def canonical_version(self) -> utils.Version:
     return cannonical_version_for_config(self, self._builder_config)
 
-  @utils.memoized_property
+  @functools.cached_property
   def supported_versions(self):
     if self._builder_config and self._builder_config.supported_versions:
       return self._builder_config.supported_versions
     else:
       return self.SUPPORTED_VERSIONS
 
-  @utils.memoized_property
+  @functools.cached_property
   def versions(self) -> List[utils.Version]:
     """Versions (canonical + availables), in preference order."""
     return [
@@ -1254,7 +1254,7 @@ class FileReaderBuilder(DatasetBuilder):
     super().__init__(**kwargs)
     self.info.set_file_format(file_format)
 
-  @utils.memoized_property
+  @functools.cached_property
   def _example_specs(self):
     return self.info.features.get_serialized_info()
 

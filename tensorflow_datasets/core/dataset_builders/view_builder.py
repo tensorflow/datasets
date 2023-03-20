@@ -207,8 +207,7 @@ class ViewBuilder(
   # means that some redundant reads are done.
   BEAM_WORKERS_PER_SHARD = 1
 
-  @property
-  @functools.lru_cache()
+  @functools.cached_property
   def view_config(self) -> Optional[ViewConfig]:
     if isinstance(self.builder_config, ViewConfig):
       return self.builder_config

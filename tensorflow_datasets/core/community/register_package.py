@@ -18,6 +18,7 @@
 import collections
 import dataclasses
 import datetime
+import functools
 import hashlib
 import json
 import tempfile
@@ -222,7 +223,7 @@ class PackageRegister(register_base.BaseRegister):
     """
     self._path = path
 
-  @utils.memoized_property
+  @functools.cached_property
   def _package_index(self) -> _PackageIndex:
     """`Dict[DatasetName, _DatasetPackage]` containg the community datasets."""
     # Use property to lazy-initialize the cache (and create the tmp dir) only

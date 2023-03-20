@@ -154,23 +154,6 @@ class classproperty(property):  # pylint: disable=invalid-name
     return self.fget.__get__(None, objtype)()  # pytype: disable=attribute-error
 
 
-class memoized_property(property):  # pylint: disable=invalid-name
-  """Descriptor that mimics @property but caches output in member variable."""
-
-  def __get__(self, obj, objtype=None):
-    # See https://docs.python.org/3/howto/descriptor.html#properties
-    if obj is None:
-      return self
-    if self.fget is None:  # pytype: disable=attribute-error
-      raise AttributeError('unreadable attribute')
-    attr = '__cached_' + self.fget.__name__  # pytype: disable=attribute-error
-    cached = getattr(obj, attr, None)
-    if cached is None:
-      cached = self.fget(obj)  # pytype: disable=attribute-error
-      setattr(obj, attr, cached)
-    return cached
-
-
 if typing.TYPE_CHECKING:
   # TODO(b/171883689): There is likely a better way to annotate descriptors
 
