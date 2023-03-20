@@ -16,12 +16,15 @@
 """Wikipedia dataset containing cleaned articles of all languages."""
 
 import bz2
+import codecs
 import json
 import re
+import xml.etree.cElementTree as etree
 
 from absl import flags  # pylint:disable=g-bad-import-order,g-import-not-at-top
 from absl import logging
-from etils import epath
+import six
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 FLAGS = flags.FLAGS
@@ -455,8 +458,8 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
     xml_urls = []
     total_bytes = 0
-    info_path = epath.Path(downloaded_files["info"])
-    dump_info = json.loads(info_path.read_text("utf-8"))
+    with tf.io.gfile.GFile(downloaded_files["info"]) as f:
+      dump_info = json.load(f)
     multistream_dump_info = dump_info["jobs"]["articlesmultistreamdump"]
     assert (
         multistream_dump_info["status"] == "done"
@@ -485,45 +488,61 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
     def _extract_content(filepath):
       """Extracts article content from a single WikiMedia XML file."""
-      filepath = epath.Path(filepath)
       logging.info("generating examples from = %s", filepath)
-      with filepath.open("rb") as f:
+      with tf.io.gfile.GFile(filepath, "rb") as f:
         f = bz2.BZ2File(filename=f)
-        dump = tfds.core.lazy_imports.mwxml.Dump.from_file(f)
-        for page in dump:
+        if six.PY3:
+          # Workaround due to:
+          # https://github.com/tensorflow/tensorflow/issues/33563
+          utf_f = codecs.getreader("utf-8")(f)  # pytype: disable=wrong-arg-types
+        else:
+          utf_f = f
+
+        # To clear root, to free-up more memory than just `elem.clear()`.
+        context = etree.iterparse(utf_f, events=("end",))  # pytype: disable=wrong-arg-types
+        context = iter(context)
+        unused_event, root = next(context)
+        for unused_event, elem in context:
+          if not elem.tag.endswith("page"):
+            continue
+          namespace = elem.tag[:-4]
+          title = elem.find("./{0}title".format(namespace)).text
+          ns = elem.find("./{0}ns".format(namespace)).text
+          id_ = elem.find("./{0}id".format(namespace)).text
+
           # Filter pages that are not in the "main" namespace.
-          if page.namespace != 0:
+          if ns != "0":
+            root.clear()
             continue
 
-          revision = next(iter(page))  # A single revision in dumps.
+          raw_content = elem.find(
+              "./{0}revision/{0}text".format(namespace)
+          ).text
+          root.clear()
 
           # Filter redirects.
-          if revision.text is None or revision.text[:9].lower().startswith(
-              "#redirect"
-          ):
+          if raw_content is None or raw_content.lower().startswith("#redirect"):
             beam.metrics.Metrics.counter(language, "filtered-redirects").inc()
             continue
 
           beam.metrics.Metrics.counter(language, "extracted-examples").inc()
+
           try:
-            text = _parse_and_clean_wikicode(revision.text)
+            text = _parse_and_clean_wikicode(raw_content)
           except (
               tfds.core.lazy_imports.mwparserfromhell.parser.ParserError
           ) as e:
             beam.metrics.Metrics.counter(language, "parser-error").inc()
             logging.error("mwparserfromhell ParseError: %s", e)
-            continue
+            return
 
           if not text:
             beam.metrics.Metrics.counter(language, "empty-clean-examples").inc()
-            continue
+            return
 
           beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
 
-          yield page.id, {
-              "title": page.title.replace("_", " "),
-              "text": revision.text,
-          }
+          yield id_, {"title": title, "text": text}
 
     return beam.Create(filepaths) | beam.FlatMap(_extract_content)
 
@@ -538,10 +557,10 @@ def _parse_and_clean_wikicode(raw_content):
   )
 
   def rm_wikilink(obj):
-    return bool(re_rm_wikilink.match(str(obj.title)))  # pytype: disable=wrong-arg-types
+    return bool(re_rm_wikilink.match(six.text_type(obj.title)))  # pytype: disable=wrong-arg-types
 
   def rm_tag(obj):
-    return str(obj.tag) in {"ref", "table"}
+    return six.text_type(obj.tag) in {"ref", "table"}
 
   def rm_template(obj):
     return obj.name.lower() in {
