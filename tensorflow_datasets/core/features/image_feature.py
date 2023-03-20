@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import dataclasses
+import functools
 import io
 import os
 import tempfile
@@ -79,7 +80,7 @@ class _ImageEncoder:
 
   # TODO(tfds): Should deprecate the TFGraph runner in favor of simpler
   # implementation
-  @utils.memoized_property
+  @functools.cached_property
   def _runner(self) -> utils.TFGraphRunner:
     return utils.TFGraphRunner()
 

@@ -50,7 +50,6 @@ from tensorflow_datasets.core.utils.py_utils import is_notebook
 from tensorflow_datasets.core.utils.py_utils import list_info_files
 from tensorflow_datasets.core.utils.py_utils import map_nested
 from tensorflow_datasets.core.utils.py_utils import memoize
-from tensorflow_datasets.core.utils.py_utils import memoized_property
 from tensorflow_datasets.core.utils.py_utils import NonMutableDict
 from tensorflow_datasets.core.utils.py_utils import nullcontext
 from tensorflow_datasets.core.utils.py_utils import pack_as_nest_dict

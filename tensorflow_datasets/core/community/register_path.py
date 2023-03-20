@@ -17,6 +17,7 @@
 
 import concurrent.futures
 import difflib
+import functools
 import os
 from typing import Any, Dict, FrozenSet, Iterable, Iterator, List, Type
 
@@ -27,7 +28,6 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -65,7 +65,7 @@ class DataDirRegister(register_base.BaseRegister):
     """
     self._ns2data_dir = namespace_to_data_dirs
 
-  @utils.memoized_property
+  @functools.cached_property
   def namespaces(self) -> FrozenSet[str]:
     """Available namespaces."""
     return frozenset(self._ns2data_dir)

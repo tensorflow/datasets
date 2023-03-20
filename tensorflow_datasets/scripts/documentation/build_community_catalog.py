@@ -19,6 +19,7 @@ r"""Tool to generate the dataset community catalog documentation.
 import argparse
 import dataclasses
 import datetime
+import functools
 import json
 import os
 import re
@@ -197,8 +198,7 @@ class DatasetDocumentation:
     # messes up the page. Try escaping backticks or using code blocks.
     # TODO(weide): how to format citation?
     header_template = '## {config_name}'
-    template = textwrap.dedent(
-        """
+    template = textwrap.dedent("""
       Use the following command to load this dataset in TFDS:
 
       ```python
@@ -217,8 +217,7 @@ class DatasetDocumentation:
       {splits}
       *   **Features**:
       {features}
-    """
-    )
+    """)
 
     #       *   **Citation**: `{citation}`
 
@@ -231,23 +230,19 @@ class DatasetDocumentation:
               ]
           )
       )
-      return textwrap.dedent(
-          f"""
+      return textwrap.dedent(f"""
             Split  | Examples
             :----- | -------:
             {py_utils.indent(splits_str, '            ')}
-            """
-      )
+            """)
 
     def format_feature(feature: feature_pb2.Feature) -> str:
       if feature.HasField('json_feature'):
-        return textwrap.dedent(
-            f"""
+        return textwrap.dedent(f"""
 ```json
 {feature.json_feature.json}
 ```
-                               """
-        )
+                               """)
       if feature.HasField('features_dict'):
         descriptions = [
             f'    *   `{name}`'
@@ -323,7 +318,7 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
   def huggingface_link(self) -> str:
     return f'[Huggingface](https://huggingface.co/datasets/{self.name})'
 
-  @utils.memoized_property
+  @functools.cached_property
   def dataset_infos(self) -> utils.JsonValue:
     """Retrieves the dataset info from either a cached copy or from Github."""
 
@@ -423,14 +418,12 @@ class NamespaceFormatter:
     sections = '\n'.join(
         [section.to_namespace_overview() for section in self.sections()]
     )
-    template = textwrap.dedent(
-        """
+    template = textwrap.dedent("""
       # {self.name} datasets
 
 
       {sections}
-      """
-    )
+      """)
     return template.format(sections=sections)
 
   def to_toc_markdown(self) -> str:
@@ -469,8 +462,7 @@ class HuggingfaceFormatter(NamespaceFormatter):
     sections = '\n'.join(
         [section.to_namespace_overview() for section in self.sections()]
     )
-    template = textwrap.dedent(
-        """\
+    template = textwrap.dedent("""\
       # Huggingface datasets
 
       Huggingface has forked TFDS and provides a lot of text datasets. See
@@ -479,8 +471,7 @@ class HuggingfaceFormatter(NamespaceFormatter):
 
 
       {sections}
-      """
-    )
+      """)
     return template.format(sections=sections)
 
 
