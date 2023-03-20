@@ -674,7 +674,7 @@ class DatasetInfo(object):
         or a list.
     """
     access_timestamp_ms = _now_in_milliseconds()
-    if isinstance(path, epath.PathLike):
+    if isinstance(path, str) or isinstance(path, epath.Path):
       path = os.fspath(path).split(",")
     for p in path:
       self._info_proto.data_source_accesses.append(
