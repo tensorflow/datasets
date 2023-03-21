@@ -13,22 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for UserLibriText dataset builder."""
-
-from tensorflow_datasets import testing
-from tensorflow_datasets.text.userlibri_lm_data import userlibri_lm_data
-
-
-class UserLibriTextTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = userlibri_lm_data.UserLibriText
-  SPLITS = {
-      # Number of fake train examples per book.
-      "12345": 4,
-      "6789": 3,
-  }
-  DL_DOWNLOAD_RESULT = ""
-  SKIP_CHECKSUMS = True
-
-
-if __name__ == "__main__":
-  testing.test_main()

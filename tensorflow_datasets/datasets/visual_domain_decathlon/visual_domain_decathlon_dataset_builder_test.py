@@ -13,27 +13,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for VoxForge dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Tests for Visual Domain Decathlon datasets."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio import voxforge
+from tensorflow_datasets.datasets.visual_domain_decathlon import visual_domain_decathlon_dataset_builder
 
 
-class VoxforgeTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = voxforge.Voxforge
+class VisualDomainDecathlonGenericTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = visual_domain_decathlon_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ['aircraft']
   SPLITS = {
       'train': 2,
-      'validation': 1,
       'test': 1,
+      'validation': 1,
   }
+  DL_EXTRACT_RESULT = ['', '']
 
-  DL_EXTRACT_RESULT = {
-      'urls_list': 'urls_list.txt',
+
+class VisualDomainDecathlonImagenetTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = visual_domain_decathlon_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ['imagenet12']
+  SPLITS = {
+      'train': 3,
+      'test': 2,
+      'validation': 1,
   }
+  DL_EXTRACT_RESULT = ['', 'imagenet12.tar']
 
 
 if __name__ == '__main__':

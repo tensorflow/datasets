@@ -13,32 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for Visual Domain Decathlon datasets."""
+"""Tests for VoxCeleb dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import visual_domain_decathlon
+from tensorflow_datasets.datasets.voxceleb import voxceleb_dataset_builder
 
 
-class VisualDomainDecathlonGenericTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = visual_domain_decathlon.VisualDomainDecathlon
-  BUILDER_CONFIG_NAMES_TO_TEST = ['aircraft']
+class VoxcelebTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = voxceleb_dataset_builder.Builder
   SPLITS = {
       'train': 2,
+      'validation': 1,
       'test': 1,
-      'validation': 1,
   }
-  DL_EXTRACT_RESULT = ['', '']
 
-
-class VisualDomainDecathlonImagenetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = visual_domain_decathlon.VisualDomainDecathlon
-  BUILDER_CONFIG_NAMES_TO_TEST = ['imagenet12']
-  SPLITS = {
-      'train': 3,
-      'test': 2,
-      'validation': 1,
+  DL_EXTRACT_RESULT = {
+      'iden_split': 'iden_split.txt',
   }
-  DL_EXTRACT_RESULT = ['', 'imagenet12.tar']
 
 
 if __name__ == '__main__':

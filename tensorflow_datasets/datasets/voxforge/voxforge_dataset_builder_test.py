@@ -13,13 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for user_libri_text.
+"""Tests for VoxForge dataset."""
 
-DEPRECATED!
-If you want to use the UserLibriText dataset builder class, use:
-tfds.builder_cls('user_libri_text')
-"""
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
-from tensorflow_datasets.core import lazy_builder_import
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.voxforge import voxforge_dataset_builder
 
-UserLibriText = lazy_builder_import.LazyBuilderImport('user_libri_text')
+
+class VoxforgeTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = voxforge_dataset_builder.Builder
+  SPLITS = {
+      'train': 2,
+      'validation': 1,
+      'test': 1,
+  }
+
+  DL_EXTRACT_RESULT = {
+      'urls_list': 'urls_list.txt',
+  }
+
+
+if __name__ == '__main__':
+  testing.test_main()
