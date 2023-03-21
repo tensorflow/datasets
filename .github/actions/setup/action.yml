@@ -29,7 +29,9 @@ runs:
         sudo apt-spy2 fix --commit --launchpad --country=US
         sudo apt-get update
       shell: bash
-    - run: sudo apt install -y protobuf-compiler  # for gcld3 tests
+    - run: | # Install protobuf-compiler for gcld3 library.
+        sudo apt install -y --allow-downgrades libprotobuf-lite23=3.12.4-1ubuntu7
+        sudo apt install -y libprotobuf-dev=3.12.4-1ubuntu7 protobuf-compiler=3.12.4-1ubuntu7
       shell: bash
     - uses: FedericoCarboni/setup-ffmpeg@v2  # for Audio FeatureConnector tests.
 
