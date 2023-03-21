@@ -27,9 +27,8 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-
-example_pb2 = tf.train
-feature_pb2 = tf.train
+from tensorflow_datasets.proto import tf_example_pb2
+from tensorflow_datasets.proto import tf_feature_pb2
 
 
 class Parser(abc.ABC):
@@ -108,13 +107,13 @@ class ExampleParserNp(Parser):
   def parse_example(
       self, serialized_example: bytes
   ) -> type_utils.NpArrayOrScalarDict:
-    example = example_pb2.Example.FromString(serialized_example)
+    example = tf_example_pb2.Example.FromString(serialized_example)
     np_example = _features_to_numpy(example.features, self._flat_example_specs)
     return utils.pack_as_nest_dict(np_example, self.example_specs)
 
 
 def _features_to_numpy(
-    features: feature_pb2.Features,
+    features: tf_feature_pb2.Features,
     flat_example_specs: Mapping[str, feature_lib.TensorInfo],
 ) -> type_utils.NpArrayOrScalarDict:
   """Parses features to NumPy type.
@@ -145,7 +144,7 @@ def _features_to_numpy(
 
 
 def _feature_to_numpy(
-    feature: feature_pb2.Feature,
+    feature: tf_feature_pb2.Feature,
     tensor_info: feature_lib.TensorInfo,
     feature_name: str,
 ) -> type_utils.NpArrayOrScalar:

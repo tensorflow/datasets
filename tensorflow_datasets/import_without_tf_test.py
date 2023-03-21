@@ -66,6 +66,13 @@ def test_import_tfds_without_loading_tf():
     builder.download_and_prepare(
         file_format=file_adapters.FileFormat.ARRAY_RECORD,
     )
+    data_source = builder.as_data_source()
+    assert len(data_source['train']) == 20
+    assert data_source['train'][[0]] == [{
+        'integer': 6,
+        'nested': {'text': b'nested_text'},
+        'text': b'test_6',
+    }]
 
     # No warning concerning TensorFlow DTypes was dispatched while loading
     assert not log_first_n.called
