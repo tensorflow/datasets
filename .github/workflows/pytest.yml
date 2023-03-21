@@ -160,12 +160,6 @@ jobs:
 
   notebook-test-job:
     # For merged PR, activate testing only on the master branch.
-    if: |
-      github.ref == 'refs/heads/master'
-      || (
-        github.event.action != 'closed'
-        && github.event.pull_request.merged == false)
-
     name: 'Notebook tests'
     runs-on: ubuntu-latest
     timeout-minutes: 30
