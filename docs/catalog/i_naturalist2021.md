@@ -34,18 +34,22 @@ images (100K in total). There are a total of 500,000 test images in the
     *   **`2.0.0`** (default): Update: Class indices follow the order in the
         JSON train file.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `316.54 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `318.38 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'mini'`  | 500,000
+`'test'`  | 500,000
+`'train'` | 2,686,843
+`'val'`   | 100,000
 
 *   **Feature structure**:
 
