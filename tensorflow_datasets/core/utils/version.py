@@ -195,6 +195,8 @@ def list_all_versions(root_dir: epath.PathLike) -> List[Version]:
 
   versions = []
   for version_dir in root_dir.iterdir():
+    if version_dir.is_file():
+      continue
     if Version.is_valid(version_dir.name):
       versions.append(Version(version_dir.name))
   return sorted(versions)
