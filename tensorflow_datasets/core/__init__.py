@@ -19,7 +19,6 @@
 # natural than having to import a third party module.
 from etils.epath import Path
 
-from tensorflow_datasets.core import community
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
