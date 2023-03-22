@@ -16,11 +16,11 @@
 """Tests for the UC Merced dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import uc_merced
+from tensorflow_datasets.datasets.uc_merced import uc_merced_dataset_builder
 
 
 class UcMercedTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = uc_merced.UcMerced
+  DATASET_CLASS = uc_merced_dataset_builder.Builder
   SPLITS = {
       "train": 5,
   }
