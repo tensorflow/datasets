@@ -18,6 +18,7 @@
 import json
 import os
 import pathlib
+import tempfile
 import time
 from typing import Union
 
@@ -269,6 +270,20 @@ class DatasetInfoTest(testing.TestCase):
               "url3": "some checksum (new)",
           },
       )
+
+  def test_reading_from_gcs_bucket(self):
+    # The base TestCase prevents GCS access, so we explicitly ask it to restore
+    # access here.
+    with self.gcs_access():
+      mnist_builder = mnist.MNIST(
+          data_dir=tempfile.mkdtemp(dir=self.get_temp_dir())
+      )
+      info = dataset_info.DatasetInfo(builder=mnist_builder)
+      info = mnist_builder.info
+
+      # A nominal check to see if we read it.
+      self.assertTrue(info.initialized)
+      self.assertEqual(10000, info.splits["test"].num_examples)
 
   def test_str_smoke(self):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info

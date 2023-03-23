@@ -52,6 +52,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 from google.protobuf import json_format
@@ -709,6 +710,26 @@ class DatasetInfo(object):
             ),
         )
     )
+
+  def initialize_from_bucket(self) -> None:
+    """Initialize DatasetInfo from GCS bucket info files."""
+    # In order to support Colab, we use the HTTP GCS API to access the metadata
+    # files. They are copied locally and then loaded.
+    tmp_dir = epath.Path(tempfile.mkdtemp("tfds"))
+    data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
+    if not data_files:
+      return
+    logging.info(
+        (
+            "Load pre-computed DatasetInfo (eg: splits, num examples,...) "
+            "from GCS: %s"
+        ),
+        self.full_name,
+    )
+    for path in data_files:
+      out_fname = tmp_dir / path.name
+      epath.Path(path).copy(out_fname)
+    self.read_from_directory(tmp_dir)
 
   def __repr__(self):
     SKIP = object()  # pylint: disable=invalid-name
