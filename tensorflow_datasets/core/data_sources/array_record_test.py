@@ -155,8 +155,8 @@ def test_data_source_is_iterable():
       array_record_data_source.ArrayRecordDataSource,
       spec_set=True,
   )
-  mock_data_source.__getitem__.return_value = [['serialized examples']]
-  mock_data_source.__len__.return_value = 42
+  mock_data_source.__getitem__.return_value = [1, 2, 3]
+  mock_data_source.__len__.return_value = 3
   with mock.patch.object(
       array_record_data_source,
       'ArrayRecordDataSource',
@@ -165,10 +165,11 @@ def test_data_source_is_iterable():
     data_source = array_record.ArrayRecordDataSource(
         dataset_info, split='train'
     )
-    assert len(data_source) == 42
+    assert len(data_source) == 3
     for _ in data_source:
       continue
-    assert mock_data_source.__getitem__.call_count == 42
+    assert mock_data_source.__getitem__.call_count == 1
+    assert mock_data_source.__getitem__.call_args_list[0].args[0] == range(0, 3)
 
 
 def test_data_source_is_sliceable():
