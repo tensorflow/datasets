@@ -259,6 +259,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     self._data_dir_root, self._data_dir = self._build_data_dir(data_dir)
     if self.data_path.exists():
       self.info.read_from_directory(self._data_dir)
+    else:  # Use the code version (do not restore data)
+      self.info.initialize_from_bucket()
 
   @utils.classproperty
   @classmethod
