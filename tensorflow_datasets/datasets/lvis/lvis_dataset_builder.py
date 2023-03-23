@@ -32,6 +32,10 @@ _URLS = {
     'validation_images': 'http://images.cocodataset.org/zips/val2017.zip',
     'test_annotation': 'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_image_info_test_dev.json.zip',
     'test_images': 'http://images.cocodataset.org/zips/test2017.zip',
+    # Minival from https://github.com/ashkamath/mdetr/blob/main/.github/lvis.md:
+    'minival_annotation': (
+        'https://nyu.box.com/shared/static/2yk9x8az9pnlsy2v8gd95yncwn2q7vj6.zip'
+    ),
 }
 
 # Annotations with invalid bounding boxes. Will not be used.
@@ -63,12 +67,13 @@ _NUM_CLASSES = 1203
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for lvis dataset."""
 
-  VERSION = tfds.core.Version('1.2.0')
+  VERSION = tfds.core.Version('1.3.0')
   RELEASE_NOTES = {
       '1.1.0': (
           'Added fields `neg_category_ids` and `not_exhaustive_category_ids`.'
       ),
       '1.2.0': 'Added class names.',
+      '1.3.0': 'Added minival split.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -96,6 +101,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         # `as_supervised=True` in `builder.as_dataset`.
         supervised_keys=None,
         homepage='https://www.lvisdataset.org/',
+        description=(
+            'LVIS: A dataset for large vocabulary instance'
+            ' segmentation.\n\nOfficial splits: train, validation, and test.'
+            ' The minival split was introduced by MDETR'
+            ' (https://arxiv.org/abs/2104.12763;'
+            ' https://github.com/ashkamath/mdetr/blob/main/.github/lvis.md).'
+        ),
     )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
@@ -116,6 +128,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         tfds.Split.TEST: self._generate_examples(
             image_dirs,
             paths['test_annotation'] / 'lvis_v1_image_info_test_dev.json',
+        ),
+        'minival': self._generate_examples(
+            image_dirs,
+            paths['minival_annotation'] / 'lvis_v1_minival.json',
         ),
     }
 
@@ -149,7 +165,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'bbox': _build_bbox(image_info, *inst['bbox']),
             'label': inst['category_id'] - 1,
             'segmentation': _build_segmentation_mask(
-                image_info, inst['segmentation']
+                image_info, inst.get('segmentation', [])  # No segs in minival.
             ),
         })
       return image_info['id'], example

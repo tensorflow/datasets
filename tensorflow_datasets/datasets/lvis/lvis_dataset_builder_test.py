@@ -27,7 +27,9 @@ class LvisTest(tfds.testing.DatasetBuilderTestCase):
       'train': 2,
       'validation': 1,
       'test': 1,
+      'minival': 1,
   }
+  OVERLAPPING_SPLITS = ['validation', 'minival']
   DL_EXTRACT_RESULT = {
       'train_annotation': '',
       'train_images': '',
@@ -35,6 +37,7 @@ class LvisTest(tfds.testing.DatasetBuilderTestCase):
       'validation_images': '',
       'test_annotation': '',
       'test_images': '',
+      'minival_annotation': '',
   }
 
 
