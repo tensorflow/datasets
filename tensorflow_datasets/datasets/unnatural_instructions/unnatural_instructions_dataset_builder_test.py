@@ -13,13 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for user_libri_text.
+"""Tests for unnatural_instructions dataset."""
 
-DEPRECATED!
-If you want to use the UserLibriText dataset builder class, use:
-tfds.builder_cls('user_libri_text')
-"""
+from tensorflow_datasets.datasets.unnatural_instructions import unnatural_instructions_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
-from tensorflow_datasets.core import lazy_builder_import
 
-UserLibriText = lazy_builder_import.LazyBuilderImport('user_libri_text')
+class UnnaturalInstructionsTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for unnatural_instructions dataset."""
+
+  DATASET_CLASS = unnatural_instructions_dataset_builder.Builder
+  SPLITS = {
+      'train': 14,  # Number of fake train example
+  }
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()
