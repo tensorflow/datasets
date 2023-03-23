@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for uc_merced.
-
-DEPRECATED!
-If you want to use the UcMerced dataset builder class, use:
-tfds.builder_cls('uc_merced')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-UcMerced = lazy_builder_import.LazyBuilderImport('uc_merced')
