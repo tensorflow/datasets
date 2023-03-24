@@ -272,6 +272,9 @@ def _read_files(
         reshuffle_each_iteration=read_config.shuffle_reshuffle_each_iteration,
     )
 
+  if read_config.repeat_filenames:
+    instruction_ds = instruction_ds.repeat()
+
   deterministic = True
   # If shuffling is true and the seed is not set, then the pipeline is allowed
   # to be non-deterministic. Note that setting the deterministic option in
