@@ -35,6 +35,16 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
+try:
+  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+except ImportError:
+  PIL_Image = None  # pylint: disable=invalid-name
+
+try:
+  cv2 = lazy_imports_lib.lazy_imports.cv2
+except ImportError:
+  cv2 = None
+
 Json = type_utils.Json
 PilImage = Any  # Require lazy deps.
 
@@ -307,12 +317,8 @@ class Image(feature_lib.FeatureConnector):
   def decode_example_np_with_opencv(
       self, example: bytes, channels: int
   ) -> np.ndarray:
-    try:
-      cv2 = lazy_imports_lib.lazy_imports.cv2
-    except ImportError as e:
-      raise Exception(
-          'Decoding 16-bit images with NumPy requires OpenCV.'
-      ) from e
+    if cv2 is None:
+      raise Exception('Decoding 16-bit images with NumPy requires OpenCV.')
     example = np.frombuffer(example, dtype=np.uint8)
     example = cv2.imdecode(example, cv2.IMREAD_UNCHANGED)
     if example.ndim == 2:
@@ -322,10 +328,8 @@ class Image(feature_lib.FeatureConnector):
   def decode_example_np_with_pil(
       self, example: bytes, channels: int
   ) -> np.ndarray:
-    try:
-      PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
-    except ImportError as e:
-      raise Exception('Decoding images with NumPy requires PIL.') from e
+    if PIL_Image is None:
+      raise Exception('Decoding images with NumPy requires PIL.')
     bytes_io = io.BytesIO(example)
     with PIL_Image.open(bytes_io) as image:
       dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
