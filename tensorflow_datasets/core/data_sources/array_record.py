@@ -21,7 +21,7 @@ future without backwards compatibility.
 
 from collections.abc import Sequence as AbcSequence
 import dataclasses
-from typing import Optional, Sequence, TypeVar, Union
+from typing import Any, Optional, Sequence, TypeVar, Union
 
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import decode
@@ -94,6 +94,25 @@ class ArrayRecordDataSource(AbcSequence):
       if record_keys >= self.length or record_keys < 0:
         raise IndexError('data source index out of range')
       record_keys = [record_keys]
+    records = self.__getitems__(record_keys)
+    if has_requested_single_record:
+      return records[0]
+    return records
+
+  def __getitems__(self, record_keys: Sequence[int]) -> Sequence[Any]:
+    """Retrieves items by batch.
+
+    This method allows PyTorch to load records by batch, rather than one by one.
+
+    Args:
+      record_keys: a sequence of keys.
+
+    Returns:
+      The records associated with the keys.
+
+    Raises:
+      IndexError: if the number of retrieved records is incorrect.
+    """
     records = self.data_source[record_keys]
     features = self.dataset_info.features
     if len(record_keys) != len(records):
@@ -101,8 +120,6 @@ class ArrayRecordDataSource(AbcSequence):
           f'Requested {len(record_keys)} records but got'
           f' {len(records)} records.'
       )
-    if has_requested_single_record:
-      return features.deserialize_example_np(records[0], decoders=self.decoders)
     return [
         features.deserialize_example_np(record, decoders=self.decoders)
         for record in records
