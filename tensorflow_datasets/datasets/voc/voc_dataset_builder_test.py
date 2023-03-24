@@ -13,32 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for Visual Domain Decathlon datasets."""
+"""Tests for PASCAL VOC image data loading."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import visual_domain_decathlon
+from tensorflow_datasets.datasets.voc import voc_dataset_builder
 
 
-class VisualDomainDecathlonGenericTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = visual_domain_decathlon.VisualDomainDecathlon
-  BUILDER_CONFIG_NAMES_TO_TEST = ['aircraft']
+class Voc2007Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = voc_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ['2007']
   SPLITS = {
-      'train': 2,
-      'test': 1,
-      'validation': 1,
+      'train': 1,
+      'validation': 2,
+      'test': 3,
   }
-  DL_EXTRACT_RESULT = ['', '']
+  DL_EXTRACT_RESULT = {
+      'trainval': '',
+      'test': '',
+  }
 
 
-class VisualDomainDecathlonImagenetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = visual_domain_decathlon.VisualDomainDecathlon
-  BUILDER_CONFIG_NAMES_TO_TEST = ['imagenet12']
-  SPLITS = {
-      'train': 3,
-      'test': 2,
-      'validation': 1,
-  }
-  DL_EXTRACT_RESULT = ['', 'imagenet12.tar']
+class Voc2012Test(Voc2007Test):
+  BUILDER_CONFIG_NAMES_TO_TEST = ['2012']
 
 
 if __name__ == '__main__':

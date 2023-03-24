@@ -16,11 +16,11 @@
 """Tests for librispeech dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio.userlibri_audio_data import userlibri_audio_data
+from tensorflow_datasets.datasets.user_libri_audio import user_libri_audio_dataset_builder
 
 
 class UserLibriAudioTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = userlibri_audio_data.UserLibriAudio
+  DATASET_CLASS = user_libri_audio_dataset_builder.Builder
   SPLITS = {
       # List number of fake train examples.
       "test-clean_speaker-121-book-1041": 2,

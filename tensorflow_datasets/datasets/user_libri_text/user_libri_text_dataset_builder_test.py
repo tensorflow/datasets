@@ -13,29 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for PASCAL VOC image data loading."""
+"""Tests for UserLibriText dataset builder."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.object_detection import voc
+from tensorflow_datasets.datasets.user_libri_text import user_libri_text_dataset_builder
 
 
-class Voc2007Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = voc.Voc
-  BUILDER_CONFIG_NAMES_TO_TEST = ['2007']
+class UserLibriTextTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = user_libri_text_dataset_builder.Builder
   SPLITS = {
-      'train': 1,
-      'validation': 2,
-      'test': 3,
+      # Number of fake train examples per book.
+      "12345": 4,
+      "6789": 3,
   }
-  DL_EXTRACT_RESULT = {
-      'trainval': '',
-      'test': '',
-  }
+  DL_DOWNLOAD_RESULT = ""
+  SKIP_CHECKSUMS = True
 
 
-class Voc2012Test(Voc2007Test):
-  BUILDER_CONFIG_NAMES_TO_TEST = ['2012']
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
   testing.test_main()

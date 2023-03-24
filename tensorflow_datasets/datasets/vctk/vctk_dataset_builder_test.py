@@ -13,20 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for unnatural_instructions dataset."""
+"""Tests for vctk dataset module."""
 
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.unnatural_instructions import unnatural_instructions
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.vctk import vctk_dataset_builder
 
 
-class UnnaturalInstructionsTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for unnatural_instructions dataset."""
-
-  DATASET_CLASS = unnatural_instructions.UnnaturalInstructions
+class VctkTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = vctk_dataset_builder.Builder
   SPLITS = {
-      'train': 14,  # Number of fake train example
+      "train": 1,
   }
 
 
-if __name__ == '__main__':
-  tfds.testing.test_main()
+if __name__ == "__main__":
+  testing.test_main()
