@@ -49,6 +49,9 @@ class ReadConfig:
     try_autocache: If True (default) and the dataset satisfy the right
       conditions (dataset small enough, files not shuffled,...) the dataset will
       be cached during the first iteration (through `ds = ds.cache()`).
+    repeat_filenames: If True, repeat the filenames iterator. This will result
+      in an infinite dataset. Repeat is called after the shuffle of the
+      filenames.
     add_tfds_id: If True, examples `dict` in `tf.data.Dataset` will have an
       additional key `'tfds_id': tf.Tensor(shape=(), dtype=tf.string)`
       containing the example unique identifier (e.g.
@@ -95,6 +98,7 @@ class ReadConfig:
   # General tf.data.Dataset parametters
   options: Optional[tf.data.Options] = None
   try_autocache: bool = True
+  repeat_filenames: bool = False
   add_tfds_id: bool = False
   # tf.data.Dataset.shuffle parameters
   shuffle_seed: Optional[int] = None
