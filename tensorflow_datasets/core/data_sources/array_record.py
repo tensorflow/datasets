@@ -34,6 +34,8 @@ from array_record.python import array_record_data_source
 
 T = TypeVar('T')
 
+_DEFAULT_ITERATION_STEP = 1000
+
 
 @dataclasses.dataclass
 class ArrayRecordDataSource(AbcSequence):
@@ -52,6 +54,7 @@ class ArrayRecordDataSource(AbcSequence):
   decoders: Optional[type_utils.TreeDict[decode.partial_decode.DecoderArg]] = (
       None
   )
+  iteration_step: int = _DEFAULT_ITERATION_STEP
   data_source: array_record_data_source.ArrayRecordDataSource = (
       dataclasses.field(init=False)
   )
@@ -75,6 +78,13 @@ class ArrayRecordDataSource(AbcSequence):
 
   def __len__(self) -> int:
     return self.length
+
+  def __iter__(self):
+    for i in range(0, self.length, self.iteration_step):
+      # Pre-fetch the `self.iteration_step`` next elements.
+      records = self[range(i, min(self.length, i + self.iteration_step))]
+      for record in records:
+        yield record
 
   def __getitem__(
       self, record_keys: Union[int, Sequence[int]]
