@@ -13,20 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for unnatural_instructions dataset."""
+"""Tests for PASCAL VOC image data loading."""
 
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.unnatural_instructions import unnatural_instructions
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.voc import voc_dataset_builder
 
 
-class UnnaturalInstructionsTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for unnatural_instructions dataset."""
-
-  DATASET_CLASS = unnatural_instructions.UnnaturalInstructions
+class Voc2007Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = voc_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ['2007']
   SPLITS = {
-      'train': 14,  # Number of fake train example
+      'train': 1,
+      'validation': 2,
+      'test': 3,
+  }
+  DL_EXTRACT_RESULT = {
+      'trainval': '',
+      'test': '',
   }
 
 
+class Voc2012Test(Voc2007Test):
+  BUILDER_CONFIG_NAMES_TO_TEST = ['2012']
+
+
 if __name__ == '__main__':
-  tfds.testing.test_main()
+  testing.test_main()

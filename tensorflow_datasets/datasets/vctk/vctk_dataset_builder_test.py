@@ -13,29 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for PASCAL VOC image data loading."""
+"""Tests for vctk dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.object_detection import voc
+from tensorflow_datasets.datasets.vctk import vctk_dataset_builder
 
 
-class Voc2007Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = voc.Voc
-  BUILDER_CONFIG_NAMES_TO_TEST = ['2007']
+class VctkTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = vctk_dataset_builder.Builder
   SPLITS = {
-      'train': 1,
-      'validation': 2,
-      'test': 3,
-  }
-  DL_EXTRACT_RESULT = {
-      'trainval': '',
-      'test': '',
+      "train": 1,
   }
 
 
-class Voc2012Test(Voc2007Test):
-  BUILDER_CONFIG_NAMES_TO_TEST = ['2012']
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
   testing.test_main()

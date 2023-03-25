@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for user_libri_text.
-
-DEPRECATED!
-If you want to use the UserLibriText dataset builder class, use:
-tfds.builder_cls('user_libri_text')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-UserLibriText = lazy_builder_import.LazyBuilderImport('user_libri_text')

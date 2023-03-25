@@ -13,24 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for VoxCeleb dataset."""
+"""Tests for UserLibriText dataset builder."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio import voxceleb
+from tensorflow_datasets.datasets.user_libri_text import user_libri_text_dataset_builder
 
 
-class VoxcelebTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = voxceleb.Voxceleb
+class UserLibriTextTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = user_libri_text_dataset_builder.Builder
   SPLITS = {
-      'train': 2,
-      'validation': 1,
-      'test': 1,
+      # Number of fake train examples per book.
+      "12345": 4,
+      "6789": 3,
   }
-
-  DL_EXTRACT_RESULT = {
-      'iden_split': 'iden_split.txt',
-  }
+  DL_DOWNLOAD_RESULT = ""
+  SKIP_CHECKSUMS = True
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
   testing.test_main()
