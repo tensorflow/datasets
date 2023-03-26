@@ -275,7 +275,7 @@ def glass_blur(x, severity=1):
   ]
   x = np.uint8(
       tfds.core.lazy_imports.skimage.filters.gaussian(
-          np.array(x) / 255.0, sigma=c[0], multichannel=True
+          np.array(x) / 255.0, sigma=c[0], channel_axis=-1
       )
       * 255
   )
@@ -290,7 +290,7 @@ def glass_blur(x, severity=1):
         x[h, w], x[h_prime, w_prime] = x[h_prime, w_prime], x[h, w]
   x_clip = np.clip(
       tfds.core.lazy_imports.skimage.filters.gaussian(
-          x / 255.0, sigma=c[0], multichannel=True
+          x / 255.0, sigma=c[0], channel_axis=-1
       ),
       0,
       1,
@@ -675,7 +675,7 @@ def gaussian_blur(x, severity=1):
   c = [1, 2, 3, 4, 6][severity - 1]
 
   x = tfds.core.lazy_imports.skimage.filters.gaussian(
-      np.array(x) / 255.0, sigma=c, multichannel=True
+      np.array(x) / 255.0, sigma=c, channel_axis=-1
   )
   x = np.clip(x, 0, 1) * 255
 
