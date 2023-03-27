@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/acronym_identification)
+*   [Code](https://github.com/huggingface/datasets/blob/1.2.0/datasets/acronym_identification)
 *   [Huggingface](https://huggingface.co/datasets/acronym_identification)
 
 
