@@ -135,7 +135,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   Follow the download instructions in https://m-bain.github.io/webvid-dataset/
   to get the data. Place the csv files and the video directories in
-  `manual_dir/`, such that mp4 files are placed in `manual_dir/*_*/*.mp4`.
+  `manual_dir/`, such that mp4 files are placed in `manual_dir/*/*_*/*.mp4`.
+
+  First directory typically being an arbitrary part directory (for sharded
+  downloading), second directory is the page directory (two numbers around
+  underscore), inside of which there is one or more mp4 files.
   """
 
   VERSION = tfds.core.Version('1.0.0')
@@ -313,7 +317,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       return new_video_id, features
 
     # Get list of videos in file system.
-    files = epath.Path(image_base_path).glob(os.path.join('*_*', '*.mp4'))
+    files = epath.Path(image_base_path).glob(os.path.join('*', '*_*', '*.mp4'))
     df_files = pd.DataFrame(list(files), columns=[_VIDEO_PATH_KEY])
     logging.info('df_files.shape %s', df_files.shape)
 
