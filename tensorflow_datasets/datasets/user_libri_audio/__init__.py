@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for unified_qa.
-
-DEPRECATED!
-If you want to use the UnifiedQA dataset builder class, use:
-tfds.builder_cls('unified_qa')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-UnifiedQA = lazy_builder_import.LazyBuilderImport('unified_qa')
