@@ -216,7 +216,7 @@ HUGGINGFACE_ALL_DEPENDENCIES = [
 
 EXTRAS = {
     'matplotlib': ['matplotlib'],
-    'tensorflow': ['tensorflow>=2.1'],
+    'tensorflow': ['tensorflow>=2.1,<2.12.0'],
     'tensorflow-data-validation': ['tensorflow-data-validation'],
     'tests-all': TESTS_ALL_DEPENDENCIES,
     'dev': TESTS_DEPENDENCIES + DEV_DEPENDENCIES,
