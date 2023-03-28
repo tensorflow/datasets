@@ -174,7 +174,7 @@ jobs:
     - uses: actions/checkout@v3
     - uses: ./.github/actions/setup
       with:
-        tf-version: tf-nightly
+        tf-version: tensorflow
 
     - run: pip install ipython
 
