@@ -19,10 +19,12 @@ from __future__ import annotations
 
 import dataclasses
 import functools
+import io
 import os
 import tempfile
 from typing import Any, List, Optional, Union, Type
 
+from absl import logging
 from etils import epath
 import numpy as np
 from tensorflow_datasets.core import lazy_imports_lib
@@ -33,6 +35,11 @@ from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+try:
+  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+except ImportError:
+  PIL_Image = None  # pylint: disable=invalid-name
 
 try:
   cv2 = lazy_imports_lib.lazy_imports.cv2
@@ -300,13 +307,33 @@ class Image(feature_lib.FeatureConnector):
     return self._image_encoder.decode_image(example)
 
   def decode_example_np(self, example: bytes) -> np.ndarray:
-    """Reconstruct the image with PIL from bytes."""
-    if cv2 is None:
-      raise Exception(
-          'Decoding images with NumPy requires OpenCV. Install with: `pip'
-          ' install opencv-python`.'
-      )
+    """Reconstruct the image with OpenCV from bytes, or default to PIL."""
     num_channels = self._shape[-1]
+    if cv2 is not None:
+      return self.decode_example_np_with_opencv(example, num_channels)
+    elif PIL_Image is not None:
+      logging.log_first_n(
+          logging.WARNING,
+          (
+              'OpenCV is not installed. We recommend using OpenCV because it is'
+              ' faster according to our benchmarks. Defaulting to PIL to decode'
+              ' images...'
+          ),
+          1,
+      )
+      return self.decode_example_np_with_pil(example, num_channels)
+    else:
+      raise ImportError(
+          'Decoding images with NumPy requires either OpenCV or PIL.\nWe'
+          ' recommend using OpenCV because it is faster according to our'
+          ' benchmarks.\nInstall them with: `pip install opencv-python` or `pip'
+          ' install pillow`.'
+      )
+
+  def decode_example_np_with_opencv(
+      self, example: bytes, num_channels: int
+  ) -> np.ndarray:
+    """Reconstruct the image with OpenCV from bytes."""
     example = np.frombuffer(example, dtype=np.uint8)
     dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
     example = cv2.imdecode(example, cv2.IMREAD_UNCHANGED).astype(dtype)
@@ -316,6 +343,24 @@ class Image(feature_lib.FeatureConnector):
     if self.np_dtype == np.float32:
       return example.view(np.float32)
     return example
+
+  def decode_example_np_with_pil(
+      self, example: bytes, num_channels: int
+  ) -> np.ndarray:
+    bytes_io = io.BytesIO(example)
+    with PIL_Image.open(bytes_io) as image:
+      dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
+      image = np.asarray(image, dtype=dtype)
+      image = _reshape_grayscale_image(image, num_channels)
+      if self.np_dtype == np.uint8:
+        return image
+      # Bitcast 4 channels uint8 -> 1 channel float32.
+      if self.np_dtype == np.float32:
+        return image.view(np.float32)
+      raise ValueError(
+          f'PIL does not handle {self.np_dtype} images. Please, install OpenCV'
+          ' instead.'
+      )
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
