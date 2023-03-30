@@ -190,4 +190,8 @@ with lazy_imports(
 ):
   import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import
 
+with lazy_imports():
+  import pandas as pd  # pylint: disable=g-import-not-at-top,unused-import
+
+pandas = pd
 tensorflow = tf

@@ -25,9 +25,9 @@ from absl import app
 from absl import flags
 from etils import epath
 import numpy as np
-import pandas as pd
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import resource_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 
 # Command-line arguments.
 flags.DEFINE_string('save_path', None, 'Path to save generated data to.')

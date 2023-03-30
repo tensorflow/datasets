@@ -28,16 +28,11 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
-try:
-  import pandas  # pylint: disable=g-import-not-at-top
 
-  DataFrame = pandas.DataFrame
-except ImportError:
-  DataFrame = object
-
-# Should be `pandas.io.formats.style.Styler`, but is a costly import
+# Should be `pd.io.formats.style.Styler`, but is a costly import
 Styler = Any
 
 TreeDict = type_utils.TreeDict
@@ -45,7 +40,7 @@ TreeDict = type_utils.TreeDict
 
 @dataclasses.dataclass
 class ColumnInfo:
-  """`pandas.DataFrame` columns info (name, style formating,...).
+  """`pd.DataFrame` columns info (name, style formating,...).
 
   Attributes:
     name: Name of the column
@@ -127,17 +122,17 @@ def _get_feature(
   return feature, sequence_rank
 
 
-class StyledDataFrame(DataFrame):
-  """`pandas.DataFrame` displayed as `pandas.io.formats.style.Styler`.
+class StyledDataFrame(pd.DataFrame):
+  """`pd.DataFrame` displayed as `pd.io.formats.style.Styler`.
 
-  `StyledDataFrame` is a `pandas.DataFrame` with better Jupyter notebook
-  representation. Contrary to regular `pandas.DataFrame`, the `style` is
-  attached to the `pandas.DataFrame`.
+  `StyledDataFrame` is a `pd.DataFrame` with better Jupyter notebook
+  representation. Contrary to regular `pd.DataFrame`, the `style` is
+  attached to the `pd.DataFrame`.
 
   ```
   df = StyledDataFrame(...)
   df.current_style.apply(...)  # Configure the style
-  df  # The data-frame is displayed using ` pandas.io.formats.style.Styler`
+  df  # The data-frame is displayed using ` pd.io.formats.style.Styler`
   ```
   """
 
@@ -152,7 +147,7 @@ class StyledDataFrame(DataFrame):
 
   @property
   def current_style(self) -> Styler:
-    """Like `pandas.DataFrame.style`, but attach the style to the DataFrame."""
+    """Like `pd.DataFrame.style`, but attach the style to the DataFrame."""
     if self.__styler is None:
       self.__styler = super().style  # pytype: disable=attribute-error  # re-none
     return self.__styler
@@ -168,7 +163,7 @@ def _make_columns(
     specs: TreeDict[tf.TypeSpec],
     ds_info: Optional[dataset_info.DatasetInfo],
 ) -> List[ColumnInfo]:
-  """Extract the columns info of the `panda.DataFrame`."""
+  """Extract the columns info of the `pd.DataFrame`."""
   return [
       ColumnInfo.from_spec(path, ds_info)
       for path, _ in py_utils.flatten_with_path(specs)
@@ -179,7 +174,7 @@ def _make_row_dict(
     ex: TreeDict[np.ndarray],
     columns: List[ColumnInfo],
 ) -> Dict[str, np.ndarray]:
-  """Convert a single example into a `pandas.DataFrame` row."""
+  """Convert a single example into a `pd.DataFrame` row."""
   values = tf.nest.flatten(ex)
   return {column.name: v for column, v in zip(columns, values)}
 
@@ -206,7 +201,7 @@ def as_dataframe(
       `tfds.builder('mnist').info`
 
   Returns:
-    dataframe: The `pandas.DataFrame` object
+    dataframe: The `pd.DataFrame` object
   """
   # Raise a clean error message if panda isn't installed.
   lazy_imports_lib.lazy_imports.pandas  # pylint: disable=pointless-statement

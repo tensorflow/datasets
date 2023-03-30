@@ -24,11 +24,7 @@ from typing import Any, Dict, Iterable, List, Optional, Union
 
 from absl import logging
 from tensorflow_datasets.core.utils import tqdm_utils
-
-try:
-  import pandas as pd  # pylint: disable=g-import-not-at-top
-except ImportError:
-  pd = Any
+from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 
 # pylint: disable=logging-format-interpolation
 
@@ -140,8 +136,7 @@ class RawBenchmarkResult:
     return pd.DataFrame.from_dict(self.stats(), orient='index')
 
   def __repr__(self) -> str:
-    return textwrap.dedent(
-        f"""
+    return textwrap.dedent(f"""
       BenchmarkResult(
         num_iter = {self.num_iter}
         num_examples = {self.num_examples}
@@ -149,8 +144,7 @@ class RawBenchmarkResult:
         examples / sec = {self.examples_per_second()}
         duration: {self.summary_statistics(include_first=True)}
         duration without first: {self.summary_statistics(include_first=False)}
-      )"""
-    )
+      )""")
 
 
 @dataclasses.dataclass(frozen=True)
