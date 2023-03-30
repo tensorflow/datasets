@@ -135,7 +135,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   Follow the download instructions in https://m-bain.github.io/webvid-dataset/
   to get the data. Place the csv files and the video directories in
-  `manual_dir/`, such that mp4 files are placed in `manual_dir/*/*_*/*.mp4`.
+  `manual_dir/webvid`, such that mp4 files are placed in
+  `manual_dir/webvid/*/*_*/*.mp4`.
 
   First directory typically being an arbitrary part directory (for sharded
   downloading), second directory is the page directory (two numbers around
@@ -218,7 +219,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     def get_captions_path(glob):
       paths = list(epath.Path(dl_manager.manual_dir).glob(glob))
       if len(paths) != 1:
-        raise ValueError(f'Invalid amount of glob results in {paths}.')
+        raise ValueError(
+            f'Invalid amount of glob results in {paths} for'
+            f' {dl_manager.manual_dir}/{glob}.'
+        )
       return paths[0]
 
     return {
