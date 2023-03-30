@@ -49,7 +49,7 @@ runs:
     # Install Python deps.
     # If Python cache is restored then we don't need to install dependencies again.
     - if: ${{ steps.python-cache.outputs.cache-hit != 'true' && inputs.tf-version != 'skip' }}
-      run: if [[ "${{ inputs.tf-version }}" == "tf-nightly" ]]; then pip install tf-nightly; else pip install .[tensorflow]; fi
+      run: pip install ${{ inputs.tf-version }}
       shell: bash
     - if: ${{ steps.python-cache.outputs.cache-hit != 'true' }}
       run: pip install .[${{ inputs.extras }}]
