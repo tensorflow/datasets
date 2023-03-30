@@ -65,6 +65,8 @@ flags.DEFINE_string(
 
 def execute(output_dir, code_url_prefix, search_hints, site_path):
   """Builds API docs for tensorflow_datasets."""
+  # Testing is lazily imported, so we first force its import.
+  testing.DummyDataset  # pylint: disable=pointless-statement
   # Internally, tfds.testing defaults to None. Fill it in here so that we get
   # documentation.
   tfds.testing = testing
