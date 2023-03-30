@@ -46,7 +46,8 @@ WebVid-10M contains:
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     Follow the download instructions in https://m-bain.github.io/webvid-dataset/
     to get the data. Place the csv files and the video directories in
-    `manual_dir/`, such that mp4 files are placed in `manual_dir/*/*_*/*.mp4`.
+    `manual_dir/webvid`, such that mp4 files are placed in
+    `manual_dir/webvid/*/*_*/*.mp4`.
 
 First directory typically being an arbitrary part directory (for sharded
 downloading), second directory is the page directory (two numbers around
