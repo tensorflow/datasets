@@ -57,6 +57,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import termcolor
 
 if typing.TYPE_CHECKING:
+  import apache_beam as beam
   from apache_beam.runners import runner
   from array_record.python import array_record_data_source
 
