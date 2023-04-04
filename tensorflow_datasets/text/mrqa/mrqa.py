@@ -278,7 +278,7 @@ class MRQA(tfds.core.GeneratorBasedBuilder):
           citation=textwrap.dedent(
               """\
           @article{dunn2017searchqa,
-              title={Searchqa: A new q\&a dataset augmented with context from a search engine},
+              title={Searchqa: A new q\\&a dataset augmented with context from a search engine},
               author={Dunn, Matthew and Sagun, Levent and Higgins, Mike and Guney, V Ugur and Cirik, Volkan and Cho, Kyunghyun},
               journal={arXiv preprint arXiv:1704.05179},
               year={2017}
