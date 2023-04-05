@@ -111,10 +111,8 @@ toc:
   title: Common sense reasoning
 - section:
   - path: /datasets/catalog/robomimic_mg
-    status: nightly
     title: robomimic_mg
   - path: /datasets/catalog/robomimic_mh
-    status: nightly
     title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
@@ -123,7 +121,6 @@ toc:
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
   - path: /datasets/catalog/webvid
-    status: nightly
     title: webvid (manual)
   title: Conditional image generation
 - section:
@@ -254,7 +251,6 @@ toc:
   - path: /datasets/catalog/imagenet_lt
     title: imagenet_lt (manual)
   - path: /datasets/catalog/imagenet_pi
-    status: nightly
     title: imagenet_pi (manual)
   - path: /datasets/catalog/imagenet_r
     title: imagenet_r
@@ -313,10 +309,8 @@ toc:
   - path: /datasets/catalog/resisc45
     title: resisc45 (manual)
   - path: /datasets/catalog/robomimic_mg
-    status: nightly
     title: robomimic_mg
   - path: /datasets/catalog/robomimic_mh
-    status: nightly
     title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
@@ -879,10 +873,8 @@ toc:
   title: Recommendation
 - section:
   - path: /datasets/catalog/robomimic_mg
-    status: nightly
     title: robomimic_mg
   - path: /datasets/catalog/robomimic_mh
-    status: nightly
     title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
@@ -1349,7 +1341,6 @@ toc:
   - path: /datasets/catalog/user_libri_text
     title: user_libri_text
   - path: /datasets/catalog/webvid
-    status: nightly
     title: webvid (manual)
   - path: /datasets/catalog/wiki40b
     title: wiki40b
@@ -1470,10 +1461,8 @@ toc:
   title: Text simplification
 - section:
   - path: /datasets/catalog/robomimic_mg
-    status: nightly
     title: robomimic_mg
   - path: /datasets/catalog/robomimic_mh
-    status: nightly
     title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
@@ -1492,10 +1481,8 @@ toc:
   title: Tracking
 - section:
   - path: /datasets/catalog/robomimic_mg
-    status: nightly
     title: robomimic_mg
   - path: /datasets/catalog/robomimic_mh
-    status: nightly
     title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
@@ -1550,7 +1537,6 @@ toc:
   - path: /datasets/catalog/ucf101
     title: ucf101
   - path: /datasets/catalog/webvid
-    status: nightly
     title: webvid (manual)
   - path: /datasets/catalog/youtube_vis
     title: youtube_vis (manual)

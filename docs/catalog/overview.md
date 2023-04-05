@@ -97,16 +97,13 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Computer science`
 
 *   [`robomimic_mg`](robomimic_mg.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_mh`](robomimic_mh.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_ph`](robomimic_ph.md)
 
 ### `Conditional image generation`
 
 *   [`imagenet2012`](imagenet2012.md)
 *   [`webvid`](webvid.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Coreference resolution`
 
@@ -190,7 +187,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`imagenet_a`](imagenet_a.md)
 *   [`imagenet_lt`](imagenet_lt.md)
 *   [`imagenet_pi`](imagenet_pi.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet_r`](imagenet_r.md)
 *   [`imagenet_resized`](imagenet_resized.md)
 *   [`imagenet_sketch`](imagenet_sketch.md)
@@ -220,9 +216,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ref_coco`](ref_coco.md)
 *   [`resisc45`](resisc45.md)
 *   [`robomimic_mg`](robomimic_mg.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_mh`](robomimic_mh.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_ph`](robomimic_ph.md)
 *   [`rock_paper_scissors`](rock_paper_scissors.md)
 *   [`s3o4d`](s3o4d.md)
@@ -558,9 +552,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Reinforcement learning`
 
 *   [`robomimic_mg`](robomimic_mg.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_mh`](robomimic_mh.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_ph`](robomimic_ph.md)
 
 ### `Rgb d`
@@ -824,7 +816,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`unnatural_instructions`](unnatural_instructions.md)
 *   [`user_libri_text`](user_libri_text.md)
 *   [`webvid`](webvid.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki40b`](wiki40b.md)
 *   [`wiki_dialog`](wiki_dialog.md)
 *   [`wikiann`](wikiann.md)
@@ -895,9 +886,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Time series`
 
 *   [`robomimic_mg`](robomimic_mg.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_mh`](robomimic_mh.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_ph`](robomimic_ph.md)
 *   [`smartwatch_gestures`](smartwatch_gestures.md)
 
@@ -913,9 +902,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Trajectory`
 
 *   [`robomimic_mg`](robomimic_mg.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_mh`](robomimic_mh.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robomimic_ph`](robomimic_ph.md)
 
 ### `Translate`
@@ -951,7 +938,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`tao`](tao.md)
 *   [`ucf101`](ucf101.md)
 *   [`webvid`](webvid.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`youtube_vis`](youtube_vis.md)
 
 ### `Vision language`
