@@ -257,13 +257,14 @@ class Audio(tensor_feature.Tensor):
     dtype = tf.dtypes.as_dtype(dtype)
     self._file_format = file_format
     self._sample_rate = sample_rate
+    self._lazy_decode = lazy_decode
     if len(shape) > 2:
       raise ValueError(
           'Audio shape should be either (length,) or '
           f'(length, num_channels), got {shape}.'
       )
 
-    if lazy_decode:
+    if self._lazy_decode:
       serialized_dtype = tf.string
       serialized_shape = ()
       _Decoder = _LazyDecoder
@@ -344,6 +345,7 @@ class Audio(tensor_feature.Tensor):
           shape=tuple(value['shape']),
           dtype=feature_lib.dtype_from_str(value['dtype']),
           sample_rate=value['sample_rate'],
+          lazy_decode=value.get('lazy_decode', False),
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
@@ -351,6 +353,7 @@ class Audio(tensor_feature.Tensor):
         file_format=value.file_format or None,
         sample_rate=value.sample_rate,
         encoding=value.encoding,
+        lazy_decode=value.lazy_decode or False,
     )
 
   def to_json_content(self) -> feature_pb2.AudioFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
@@ -360,6 +363,7 @@ class Audio(tensor_feature.Tensor):
         file_format=self._file_format,
         sample_rate=self._sample_rate,
         encoding=self._encoding.name,
+        lazy_decode=self._lazy_decode,
     )
 
 
