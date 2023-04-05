@@ -12,11 +12,6 @@
 # `robomimic_ph`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The Robomimic proficient human datasets were collected by 1 proficient operator
@@ -73,7 +68,7 @@ Split     | Examples
 ```
 
 
-## robomimic_ph/lift_ph_image (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/lift_ph_image (default config)
 
 *   **Download size**: `798.43 MiB`
 
@@ -162,7 +157,7 @@ steps/states                               | Tensor       | (32,)       | float6
 train                                      | Tensor       |             | bool    |
 valid                                      | Tensor       |             | bool    |
 
-## robomimic_ph/lift_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/lift_ph_low_dim
 
 *   **Download size**: `17.69 MiB`
 
@@ -247,7 +242,7 @@ steps/states                           | Tensor       | (32,) | float64 |
 train                                  | Tensor       |       | bool    |
 valid                                  | Tensor       |       | bool    |
 
-## robomimic_ph/can_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/can_ph_image
 
 *   **Download size**: `1.87 GiB`
 
@@ -336,7 +331,7 @@ steps/states                               | Tensor       | (71,)       | float6
 train                                      | Tensor       |             | bool    |
 valid                                      | Tensor       |             | bool    |
 
-## robomimic_ph/can_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/can_ph_low_dim
 
 *   **Download size**: `43.38 MiB`
 
@@ -421,7 +416,7 @@ steps/states                           | Tensor       | (71,) | float64 |
 train                                  | Tensor       |       | bool    |
 valid                                  | Tensor       |       | bool    |
 
-## robomimic_ph/square_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/square_ph_image
 
 *   **Download size**: `2.42 GiB`
 
@@ -510,7 +505,7 @@ steps/states                               | Tensor       | (45,)       | float6
 train                                      | Tensor       |             | bool    |
 valid                                      | Tensor       |             | bool    |
 
-## robomimic_ph/square_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/square_ph_low_dim
 
 *   **Download size**: `47.69 MiB`
 
@@ -595,7 +590,7 @@ steps/states                           | Tensor       | (45,) | float64 |
 train                                  | Tensor       |       | bool    |
 valid                                  | Tensor       |       | bool    |
 
-## robomimic_ph/transport_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/transport_ph_image
 
 *   **Download size**: `15.07 GiB`
 
@@ -708,7 +703,7 @@ steps/states                               | Tensor       | (115,)      | float6
 train                                      | Tensor       |             | bool    |
 valid                                      | Tensor       |             | bool    |
 
-## robomimic_ph/transport_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/transport_ph_low_dim
 
 *   **Download size**: `294.70 MiB`
 
@@ -813,7 +808,7 @@ steps/states                           | Tensor       | (115,) | float64 |
 train                                  | Tensor       |        | bool    |
 valid                                  | Tensor       |        | bool    |
 
-## robomimic_ph/tool_hang_ph_image <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/tool_hang_ph_image
 
 *   **Download size**: `61.96 GiB`
 
@@ -890,7 +885,7 @@ steps/states                               | Tensor       | (58,)         | floa
 train                                      | Tensor       |               | bool    |
 valid                                      | Tensor       |               | bool    |
 
-## robomimic_ph/tool_hang_ph_low_dim <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## robomimic_ph/tool_hang_ph_low_dim
 
 *   **Download size**: `192.29 MiB`
 
