@@ -48,7 +48,6 @@ upper_tabs:
         path: /datasets/gcs
       - title: TFDS for Jax and PyTorch
         path: /datasets/tfless_tfds
-        status: nightly
 
       - heading: "Add a dataset"
       - title: Create your dataset

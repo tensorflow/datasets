@@ -20,6 +20,35 @@ and this project adheres to
 
 ### Security
 
+## [4.9.0] - 2023-04-04
+
+### Added
+
+-   Native support for JAX and PyTorch. TensorFlow is no longer a dependency for
+    reading datasets. See the
+    [documentation](https://www.tensorflow.org/datasets/tfless_tfds).
+-   Added minival split to
+    [LVIS dataset](https://www.tensorflow.org/datasets/catalog/lvis).
+-   [Mixed-human](https://www.tensorflow.org/datasets/catalog/robomimic_mh) and
+    [machine-generated](https://www.tensorflow.org/datasets/catalog/robomimic_mg)
+    robomimic datasets.
+-   WebVid dataset.
+-   ImagenetPI dataset.
+-   [Wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia) for
+    20230201.
+
+### Changed
+
+-   Support for `tensorflow=2.12`.
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
 ## [4.8.3] - 2023-02-27
 
 ### Added
