@@ -189,52 +189,72 @@ class FeatureExpectationsTestCase(SubTestCase):
       test_attributes=None,
   ):
     """Test the given feature against the predicates."""
+    # Fill kwargs
+    run_tests = functools.partial(
+        self._run_tests,
+        shape=shape,
+        dtype=dtype,
+        tests=tests,
+        test_tensor_spec=test_tensor_spec,
+    )
+    assert_feature = functools.partial(
+        self._assert_feature,
+        shape=shape,
+        dtype=dtype,
+        tests=tests,
+        serialized_info=serialized_info,
+        test_tensor_spec=test_tensor_spec,
+        skip_feature_tests=skip_feature_tests,
+        test_attributes=test_attributes,
+    )
+
+    # Create the feature dict
+    fdict = features.FeaturesDict({'inner': feature})
+
+    # Check whether the following doesn't raise an exception
+    fdict.catalog_documentation()
 
     with self._subTest('feature'):
-      self._assert_feature(
-          feature=feature,
-          shape=shape,
-          dtype=dtype,
-          tests=tests,
-          serialized_info=serialized_info,
-          test_tensor_spec=test_tensor_spec,
-          skip_feature_tests=skip_feature_tests,
-          test_attributes=test_attributes,
-      )
+      assert_feature(feature=feature)
+      run_tests(serialize_fdict=fdict, deserialize_fdict=fdict, feature=feature)
+
+    # Test the feature again to make sure it behave correctly after restoring
     # TODO(tfds): Remove `skip_feature_tests` after text encoders are removed
     if not skip_feature_tests:
-      # Test the feature again to make sure that feature restored from config
-      # behave similarly.
+      # Restored from config
+      with test_utils.tmp_dir() as config_dir:
+        feature.save_config(config_dir)
+        new_feature = feature.from_config(config_dir)
+      assert_feature(feature=new_feature)
       with self._subTest('feature_roundtrip'):
-        with test_utils.tmp_dir() as config_dir:
-          feature.save_config(config_dir)
-          new_feature = feature.from_config(config_dir)
-        self._assert_feature(
-            feature=new_feature,
-            shape=shape,
-            dtype=dtype,
-            tests=tests,
-            serialized_info=serialized_info,
-            test_tensor_spec=test_tensor_spec,
-            skip_feature_tests=skip_feature_tests,
-            test_attributes=test_attributes,
+        run_tests(
+            serialize_fdict=fdict, deserialize_fdict=fdict, feature=new_feature
         )
+
+      # Restored from proto
+      with test_utils.tmp_dir() as config_dir:
+        feature_proto = feature.to_proto()
+        feature.save_metadata(config_dir, feature_name=None)
+        new_feature = feature_lib.FeatureConnector.from_proto(feature_proto)
+        new_feature.load_metadata(config_dir, feature_name=None)
+      assert_feature(feature=new_feature)
+      new_fdict = features.FeaturesDict({'inner': new_feature})
       with self._subTest('feature_proto_roundtrip'):
-        with test_utils.tmp_dir() as config_dir:
-          feature_proto = feature.to_proto()
-          feature.save_metadata(config_dir, feature_name=None)
-          new_feature = feature_lib.FeatureConnector.from_proto(feature_proto)
-          new_feature.load_metadata(config_dir, feature_name=None)
-          self._assert_feature(
-              feature=new_feature,
-              shape=shape,
-              dtype=dtype,
-              tests=tests,
-              serialized_info=serialized_info,
-              test_tensor_spec=test_tensor_spec,
-              skip_feature_tests=skip_feature_tests,
-              test_attributes=test_attributes,
-          )
+        run_tests(
+            serialize_fdict=fdict, deserialize_fdict=fdict, feature=new_feature
+        )
+      with self._subTest('serialize_fdict'):
+        run_tests(
+            serialize_fdict=new_fdict,
+            deserialize_fdict=fdict,
+            feature=new_feature,
+        )
+      with self._subTest('deserialize_fdict'):
+        run_tests(
+            serialize_fdict=fdict,
+            deserialize_fdict=new_fdict,
+            feature=new_feature,
+        )
 
   def _assert_feature(
       self,
@@ -266,16 +286,21 @@ class FeatureExpectationsTestCase(SubTestCase):
       for key, value in test_attributes.items():
         self.assertEqual(getattr(feature, key), value)
 
-    # Create the feature dict
-    fdict = features.FeaturesDict({'inner': feature})
-
-    # Check whether the following doesn't raise an exception
-    fdict.catalog_documentation()
-
+  def _run_tests(
+      self,
+      serialize_fdict,
+      deserialize_fdict,
+      feature,
+      shape,
+      dtype,
+      tests,
+      test_tensor_spec=True,
+  ):
     for i, test in enumerate(tests):
       with self._subTest(str(i)):
         self.assertFeatureTest(
-            fdict=fdict,
+            serialize_fdict=serialize_fdict,
+            deserialize_fdict=deserialize_fdict,
             test=test,
             feature=feature,
             shape=shape,
@@ -284,7 +309,14 @@ class FeatureExpectationsTestCase(SubTestCase):
         )
 
   def assertFeatureTest(
-      self, fdict, test, feature, shape, dtype, test_tensor_spec: bool = True
+      self,
+      serialize_fdict,
+      deserialize_fdict,
+      test,
+      feature,
+      shape,
+      dtype,
+      test_tensor_spec: bool = True,
   ):
     """Test that encode=>decoding of a value works correctly."""
     # test feature.encode_example can be pickled and unpickled for beam.
@@ -304,7 +336,12 @@ class FeatureExpectationsTestCase(SubTestCase):
           with self.assertRaisesWithPredicateMatch(
               test.raise_cls, test.raise_msg
           ):
-            features_encode_decode(fdict, input_value, decoders=test.decoders)
+            features_encode_decode(
+                serialize_fdict,
+                deserialize_fdict,
+                input_value,
+                decoders=test.decoders,
+            )
       if test.raise_cls_np is not None:
         with self._subTest('raise_np'):
           if not test.raise_msg:
@@ -317,7 +354,10 @@ class FeatureExpectationsTestCase(SubTestCase):
               test.raise_cls_np, test.raise_msg
           ):
             features_encode_decode_np(
-                fdict, input_value, decoders=test.decoders
+                serialize_fdict,
+                deserialize_fdict,
+                input_value,
+                decoders=test.decoders,
             )
     else:
       # Test the serialization only
@@ -332,7 +372,8 @@ class FeatureExpectationsTestCase(SubTestCase):
       if test.expected_np is not None:
         with self._subTest('out_np'):
           out_numpy = features_encode_decode_np(
-              fdict,
+              serialize_fdict,
+              deserialize_fdict,
               input_value,
               decoders={'inner': test.decoders},
           )
@@ -342,7 +383,8 @@ class FeatureExpectationsTestCase(SubTestCase):
       # Test serialization + decoding from disk
       with self._subTest('out'):
         out_tensor, out_numpy, out_element_spec = features_encode_decode(
-            fdict,
+            serialize_fdict,
+            deserialize_fdict,
             input_value,
             decoders={'inner': test.decoders},
         )
@@ -423,13 +465,15 @@ class FeatureExpectationsTestCase(SubTestCase):
       self.assertIsInstance(text, str)
 
 
-def features_encode_decode(features_dict, example, decoders):
+def features_encode_decode(
+    serialize_fdict, deserialize_fdict, example, decoders
+):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
   # Serialize/deserialize the example using TensorFlow methods.
-  serialized_example = features_dict.serialize_example(example)
+  serialized_example = serialize_fdict.serialize_example(example)
 
   decode_fn = functools.partial(
-      features_dict.deserialize_example,
+      deserialize_fdict.deserialize_example,
       decoders=decoders,
   )
   ds = tf.data.Dataset.from_tensors(serialized_example)
@@ -443,11 +487,13 @@ def features_encode_decode(features_dict, example, decoders):
   return out_tensor, out_numpy, ds.element_spec
 
 
-def features_encode_decode_np(features_dict, example, decoders):
+def features_encode_decode_np(
+    serialize_fdict, deserialize_fdict, example, decoders
+):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
   # Serialize/deserialize the example using NumPy methods.
-  serialized_example = features_dict.serialize_example(example)
-  deserialized_example = features_dict.deserialize_example_np(
+  serialized_example = serialize_fdict.serialize_example(example)
+  deserialized_example = deserialize_fdict.deserialize_example_np(
       serialized_example, decoders=decoders
   )
   return deserialized_example
