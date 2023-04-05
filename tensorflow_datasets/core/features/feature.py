@@ -122,7 +122,7 @@ class TensorInfo(object):
     """Copy constructor."""
     return cls(
         shape=tensor_info.shape,
-        dtype=tensor_info.dtype,
+        dtype=tensor_info.np_dtype,
         default_value=tensor_info.default_value,
         sequence_rank=tensor_info.sequence_rank,
         dataset_lvl=tensor_info.dataset_lvl,
