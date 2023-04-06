@@ -1004,17 +1004,13 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict(
-            {
-                "frames": features.Sequence(
-                    {
-                        "coordinates": features.Sequence(
-                            features.Tensor(shape=(2,), dtype=tf.int32)
-                        ),
-                    }
+        features=features.FeaturesDict({
+            "frames": features.Sequence({
+                "coordinates": features.Sequence(
+                    features.Tensor(shape=(2,), dtype=tf.int32)
                 ),
-            }
-        ),
+            }),
+        }),
     )
 
   def _split_generators(self, dl_manager):
@@ -1094,6 +1090,18 @@ class NestedSequenceBuilderTest(testing.TestCase):
           nested_tensor_info["frames"]["coordinates"].sequence_rank,
           2,
       )
+
+
+def test_read_tfrecord_as_dataset():
+  builder = DummyDatasetWithConfigs()
+  with mock.patch.object(tf.data, "TFRecordDataset") as mock_read:
+    builder.read_tfrecord_as_dataset("/x/y")
+    mock_read.assert_called_once_with(["/x/y"])
+    info_proto = builder.info.as_proto
+    assert len(info_proto.data_source_accesses) == 1
+    assert info_proto.data_source_accesses[0].file_system.path == "/x/y"
+
+
 
 
 if __name__ == "__main__":
