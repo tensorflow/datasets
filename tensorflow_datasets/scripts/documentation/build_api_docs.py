@@ -21,7 +21,8 @@ from absl import flags
 from absl import logging
 
 import tensorflow_datasets as tfds
-from tensorflow_datasets import testing
+# Testing is lazily imported, so we first force its import.
+from tensorflow_datasets.testing import *  # pylint: disable=wildcard-import
 from tensorflow_docs.api_generator import generate_lib
 
 from tensorflow.tools.docs import doc_controls  # pylint: disable=g-direct-tensorflow-import
@@ -65,11 +66,6 @@ flags.DEFINE_string(
 
 def execute(output_dir, code_url_prefix, search_hints, site_path):
   """Builds API docs for tensorflow_datasets."""
-  # Testing is lazily imported, so we first force its import.
-  testing.DummyDataset  # pylint: disable=pointless-statement
-  # Internally, tfds.testing defaults to None. Fill it in here so that we get
-  # documentation.
-  tfds.testing = testing
   doc_generator = generate_lib.DocGenerator(
       root_title="TensorFlow Datasets",
       py_modules=[("tfds", tfds)],
