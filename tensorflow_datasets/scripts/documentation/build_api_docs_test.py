@@ -47,6 +47,11 @@ class BuildDocsTest(absltest.TestCase):
       content = f.read()
     self.assertIn("__init__.py", content)
 
+    # Check that the `testing` folder is generated.
+    with open(os.path.join(self.workdir, "tfds/testing.md")) as f:
+      content = f.read()
+    self.assertIn("__init__.py", content)
+
   def test_tensorflow_decorators_are_used_and_not_dummy_decorator(self):
     self.assertEqual(docs.deprecated.__name__, "set_deprecated")
     self.assertEqual(docs.doc_private.__name__, "doc_private")
