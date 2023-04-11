@@ -46,6 +46,7 @@ as a dictionary with the following keys:
     *   `2.0.0`: Files updated.
     *   **`3.0.0`** (default): Fix file_name, from absolute path to path
         relative to data directory, ie: "class_id/filename.jpg".
+    *   `3.1.0`: New URLs for resources from Hugging Face.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
