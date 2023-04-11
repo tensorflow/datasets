@@ -30,6 +30,7 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as split_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
 
 from google.protobuf import json_format
 

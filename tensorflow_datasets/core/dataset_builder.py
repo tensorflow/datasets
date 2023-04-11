@@ -59,7 +59,6 @@ import termcolor
 if typing.TYPE_CHECKING:
   import apache_beam as beam
   from apache_beam.runners import runner
-  from array_record.python import array_record_data_source
 
 ListOrTreeOrElem = type_utils.ListOrTreeOrElem
 Tree = type_utils.Tree

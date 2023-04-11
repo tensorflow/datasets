@@ -24,9 +24,8 @@ from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
 
 from etils import epath
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-
-from array_record.python import array_record_module
 
 ExamplePositions = List[Any]
 
