@@ -1540,6 +1540,12 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     split_dict = splits_lib.SplitDict(split_infos)
     self.info.set_splits(split_dict)
 
+  def read_text_file(self, filename: epath.PathLike) -> str:
+    """Returns the text in the given file and records the lineage."""
+    filename = epath.Path(filename)
+    self.info.add_file_data_source_access(filename)
+    return filename.read_text()
+
   def read_tfrecord_as_dataset(
       self, filenames: Union[str, Sequence[str]]
   ) -> tf.data.Dataset:
