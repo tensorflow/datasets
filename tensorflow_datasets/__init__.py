@@ -42,6 +42,7 @@ _TIMESTAMP_IMPORT_STARTS = time.time()
 from absl import logging
 import tensorflow_datasets.core.logging as _tfds_logging
 from tensorflow_datasets.core.logging import call_metadata as _call_metadata
+from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
 
 _metadata = _call_metadata.CallMetadata()
 _metadata.start_time_micros = int(_TIMESTAMP_IMPORT_STARTS * 1e6)
@@ -50,13 +51,12 @@ _import_time_ms_dataset_builders = 0
 try:
   # Imports for registration
   _before_dataset_imports = time.time()
-  from tensorflow_datasets import dataset_collections
 
-  # pytype: disable=import-error
   # For builds that don't include all dataset builders, we don't want to fail on
   # import errors of dataset builders.
-  try:
+  with lazy_imports():
     from tensorflow_datasets import audio
+    from tensorflow_datasets import dataset_collections
     from tensorflow_datasets import graphs
     from tensorflow_datasets import image
     from tensorflow_datasets import image_classification
@@ -79,9 +79,6 @@ try:
     from tensorflow_datasets import video
     from tensorflow_datasets import vision_language
 
-  except ImportError:
-    pass
-  # pytype: enable=import-error
 
   _import_time_ms_dataset_builders = int(
       (time.time() - _before_dataset_imports) * 1000
@@ -103,3 +100,6 @@ finally:
       import_time_ms_tensorflow=0,
       import_time_ms_dataset_builders=_import_time_ms_dataset_builders,
   )
+
+# Need to trigger import for documentation?
+del lazy_imports
