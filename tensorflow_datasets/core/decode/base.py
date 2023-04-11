@@ -89,6 +89,12 @@ class Decoder(abc.ABC):
         name='sequence_decode',
     )
 
+  def decode_ragged_example(self, serialized_example):
+    """See `FeatureConnector.decode_ragged_example` for details."""
+    return tf.ragged.map_flat_values(
+        self.decode_batch_example, serialized_example
+    )
+
 
 class SkipDecoding(Decoder):
   """Transformation which skip the decoding entirelly.
