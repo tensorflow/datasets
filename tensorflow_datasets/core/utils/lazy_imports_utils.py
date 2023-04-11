@@ -185,9 +185,26 @@ def tf_success_callback(**kwargs):
   ensure_tf_version(kwargs["module"])
 
 
+def array_record_error_callback(**kwargs):
+  del kwargs
+  print("\n\n***************************************************************")
+  print(
+      "Failed to import ArrayRecord. This probably means that you are running"
+      " on macOS or Windows. ArrayRecord currently does not work for your"
+      " infrastructure, because it uses Python bindings in C++. We are actively"
+      " working on this issue. Thanks for your understanding."
+  )
+  print("***************************************************************\n\n")
+
+
 with lazy_imports(
     error_callback=tf_error_callback, success_callback=tf_success_callback
 ):
   import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import
+
+
+with lazy_imports(error_callback=array_record_error_callback):
+  from array_record.python import array_record_data_source  # pylint: disable=g-import-not-at-top,unused-import
+  from array_record.python import array_record_module  # pylint: disable=g-import-not-at-top,unused-import
 
 tensorflow = tf

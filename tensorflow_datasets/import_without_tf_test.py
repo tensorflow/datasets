@@ -60,6 +60,7 @@ class DummyDataset(dataset_builder.GeneratorBasedBuilder):
 def test_import_tfds_without_loading_tf():
   with mock.patch.object(logging, 'log_first_n') as log_first_n:
     assert 'tensorflow' not in sys.modules
+    assert 'array_record' not in sys.modules
 
     data_dir = '/tmp/import_without_tf'
     builder = DummyDataset(data_dir=data_dir)
@@ -77,3 +78,4 @@ def test_import_tfds_without_loading_tf():
     # No warning concerning TensorFlow DTypes was dispatched while loading
     assert not log_first_n.called
     assert 'tensorflow' not in sys.modules
+    assert 'array_record' in sys.modules

@@ -25,8 +25,7 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.data_sources import array_record
 from tensorflow_datasets.core.utils import shard_utils
-
-from array_record.python import array_record_data_source
+from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
 
 
 _FILE_INSTRUCTIONS = [

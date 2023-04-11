@@ -28,9 +28,8 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
 import tree
-
-from array_record.python import array_record_data_source
 
 T = TypeVar('T')
 
@@ -55,9 +54,9 @@ class ArrayRecordDataSource(AbcSequence):
       None
   )
   iteration_step: int = _DEFAULT_ITERATION_STEP
-  data_source: array_record_data_source.ArrayRecordDataSource = (
-      dataclasses.field(init=False)
-  )
+  # In order to lazy load array_record, we don't load
+  # `array_record_data_source.ArrayRecordDataSource` here.
+  data_source: Any = dataclasses.field(init=False)
   length: int = dataclasses.field(init=False)
 
   def __post_init__(self):
