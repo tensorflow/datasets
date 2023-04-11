@@ -61,7 +61,13 @@ class LazyModule:
   def __getattr__(self, name: str) -> Any:
     if name in self.fromlist:
       module_name = f"{self.module_name}.{name}"
-      return self.from_cache(module_name=module_name)
+      return self.from_cache(
+          module_name=module_name,
+          module=self.module,
+          fromlist=self.fromlist,
+          error_callback=self.error_callback,
+          success_callback=self.success_callback,
+      )
     if self.module is None:  # Load on first call
       try:
         start_import_time = time.perf_counter()
