@@ -286,11 +286,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'Timed out while processing %s with exception: %s', file_path, e
         )
         return None
-      except Exception as e:  # pylint: disable=broad-except
+      except Exception:  # pylint: disable=broad-except
         self._process_error_counter.inc()
-        logging.warning(
-            'Failed to process video %s with exception: %s', file_path, e
-        )
+        logging.exception('Failed to process video %s.', file_path)
         return None
 
       if frames is None:
