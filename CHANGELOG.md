@@ -20,6 +20,27 @@ and this project adheres to
 
 ### Security
 
+## [4.9.1] - 2023-04-11
+
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+-   The installation on macOS now works (see issues
+    [4805](https://github.com/tensorflow/datasets/issues/4805) and
+    [4852](https://github.com/tensorflow/datasets/issues/4852)). The ArrayRecord
+    dependency is lazily loaded, so the
+    [TensorFlow-less path](https://www.tensorflow.org/datasets/tfless_tfds) is
+    not possible at the moment on macOS. A fix for this will follow soon.
+
+### Security
+
 ## [4.9.0] - 2023-04-04
 
 ### Added
