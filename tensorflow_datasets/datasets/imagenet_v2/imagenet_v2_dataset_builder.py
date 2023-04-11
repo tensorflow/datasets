@@ -22,7 +22,7 @@ import tensorflow_datasets.public_api as tfds
 
 # Note: Bump the version if the links change.
 
-_ROOT_URL = 'https://s3-us-west-2.amazonaws.com/imagenetv2public'
+_ROOT_URL = 'https://huggingface.co/datasets/vaishaal/ImageNetV2/resolve/main'
 _IMAGENET_V2_URLS = {
     'matched-frequency': _ROOT_URL + '/imagenetv2-matched-frequency.tar.gz',
     'threshold-0.7': _ROOT_URL + '/imagenetv2-threshold0.7.tar.gz',
@@ -36,7 +36,7 @@ _TAR_TOPDIR = {
 
 
 class ImagenetV2Config(tfds.core.BuilderConfig):
-  """ "Configuration specifying the variant to use."""
+  """Configuration specifying the variant to use."""
 
   def __init__(self, *, variant, **kwargs):
     """The parameters specifying how the dataset will be processed.
@@ -80,6 +80,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           'Fix file_name, from absolute path to path relative to '
           'data directory, ie: "class_id/filename.jpg".'
       ),
+      '3.1.0': 'New URLs for resources from Hugging Face.',
   }
   BUILDER_CONFIGS = list(_create_builder_configs())
 
