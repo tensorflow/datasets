@@ -66,7 +66,7 @@ REQUIRED_PKGS = [
     'etils[enp,epath]>=0.9.0',
     'numpy',
     'promise',
-    'protobuf',
+    'protobuf>=3.20',
     'psutil',
     'requests>=2.19.0',
     'tensorflow-metadata',
