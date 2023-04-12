@@ -52,6 +52,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -678,12 +679,13 @@ class DatasetInfo(object):
     if isinstance(path, str) or isinstance(path, epath.Path):
       path = os.fspath(path).split(",")
     for p in path:
-      self._info_proto.data_source_accesses.append(
-          dataset_info_pb2.DataSourceAccess(
-              access_timestamp_ms=access_timestamp_ms,
-              file_system=dataset_info_pb2.FileSystem(path=os.fspath(p)),
-          )
-      )
+      for file in file_utils.expand_glob(p):
+        self._info_proto.data_source_accesses.append(
+            dataset_info_pb2.DataSourceAccess(
+                access_timestamp_ms=access_timestamp_ms,
+                file_system=dataset_info_pb2.FileSystem(path=os.fspath(file)),
+            )
+        )
 
   def add_sql_data_source_access(self, sql_query: str) -> None:
     """Records that the given query was used to generate this dataset."""

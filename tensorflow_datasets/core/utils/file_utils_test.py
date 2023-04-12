@@ -16,6 +16,8 @@
 """Tests for file_utils."""
 
 import os
+from unittest import mock
+
 from absl.testing import flagsaver
 from etils import epath
 import pytest
@@ -215,6 +217,27 @@ def test_list_datasets_in_data_dir_with_namespace(mock_fs: testing.MockFs):
 )
 def test_looks_like_a_tfds_file(filename, result):
   assert file_utils._looks_like_a_tfds_file(filename) == result
+
+
+@pytest.mark.parametrize(
+    ['path', 'glob_result', 'expected'],
+    [
+        ('/a/*', ['/a/b', '/a/c'], ['/a/b', '/a/c']),
+        ('/a/b', None, ['/a/b']),
+        ('a/*', None, ['a/*']),
+    ],
+)
+def test_expand_glob(path, glob_result, expected):
+  with mock.patch.object(epath, 'Path') as mock_epath:
+    mock_epath.return_value.expanduser.return_value = path
+    mock_epath.return_value.glob.return_value = glob_result
+    actual = file_utils.expand_glob(path)
+    if glob_result is not None:
+      mock_epath.return_value.glob.assert_called_once_with(path[1:])
+    else:
+      mock_epath.return_value.glob.assert_not_called()
+    actual = [os.fspath(p) for p in actual]
+    assert actual == expected
 
 if __name__ == '__main__':
   testing.test_main()
