@@ -37,6 +37,7 @@ ListOrElem = type_utils.ListOrElem
 Path = epath.Path
 
 _registered_data_dir = set()
+_GLOB_CHARS = ['*', '?', '[']
 
 
 @docs.deprecated
@@ -284,3 +285,27 @@ def makedirs_cached(dirname: epath.PathLike):
     dirname: the dir to create.
   """
   epath.Path(dirname).mkdir(parents=True, exist_ok=True)
+
+
+def expand_glob(path: epath.PathLike) -> List[epath.Path]:
+  """Returns all files that match the glob in the given path.
+
+  Warning: If `path` does not contain any wildcards, we do not check whether
+  `path` exists and always return `[path]`.
+
+  Arguments:
+    path: a path that can contain a glob.
+
+  Returns:
+    all files that match the given glob.
+  """
+  path = epath.Path(path).expanduser()
+  path_str = os.fspath(path)
+  if not any([char in path_str for char in _GLOB_CHARS]):
+    return [path]
+  if not path_str.startswith('/'):
+    logging.warning(
+        'Can only expand globs for paths starting with a `/`. Got: %s', path
+    )
+    return [path]
+  return list(epath.Path('/').glob(path_str[1:]))
