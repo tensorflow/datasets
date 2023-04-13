@@ -121,7 +121,12 @@ def main(_) -> None:
 
     # Launch protoc
     subprocess.run(
-        ['protoc', os.fspath(tfds_proto_path), '--python_out=.'],
+        [
+            'protoc',
+            os.fspath(tfds_proto_path),
+            f'--proto_path={PATH_TO_TFDS.parent}',
+            f'--python_out={PATH_TO_TFDS.parent}',
+        ],
         check=True,
     )
     name_before = PATH_TO_PROTO / f'tf_{proto_name.value}_pb2.py'

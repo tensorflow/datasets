@@ -6,10 +6,10 @@
 set -e # Fail on errors
 
 # Ensure we have the desired protoc version.
-MIN_VERSION="libprotoc 3.11.2"
+MIN_VERSION="libprotoc 3.20.0"
 CURR_VERSION="$(protoc --version)"
 if ["$(printf '%s\n' "$MIN_VERSION" "$CURR_VERSION" | sort -V | head -n1)" != "$MIN_VERSION"]; then
-  echo 'Please use version 3.11.2 or above.'
+  echo 'Please use version 3.20.0 or above.'
   echo 'Please run install_protoc.sh to install it.'
   exit
 else
