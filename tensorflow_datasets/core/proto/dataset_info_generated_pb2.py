@@ -94,6 +94,7 @@ _builder.BuildTopDescriptorsAndMessages(
     DESCRIPTOR, 'dataset_info_pb2', globals()
 )
 if _descriptor._USE_C_DESCRIPTORS == False:
+
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\370\001\001'
   _SUPERVISEDKEYS_DICT_DICTENTRY._options = None
