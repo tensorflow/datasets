@@ -2,6 +2,9 @@ name: Unittests
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - "master"
   push:
     # Do not trigger tests for documentation or markdown docs.
     paths-ignore:
