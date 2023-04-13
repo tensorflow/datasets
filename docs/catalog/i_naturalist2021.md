@@ -12,6 +12,11 @@
 # `i_naturalist2021`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The iNaturalist dataset 2021 contains a total of 10,000 species. The full
@@ -31,31 +36,30 @@ images (100K in total). There are a total of 500,000 test images in the
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`2.0.0`** (default): Update: Class indices follow the order in the
-        JSON train file.
+    *   `2.0.0`: Update: Class indices follow the order in the JSON train file.
+    *   **`2.0.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Update: Include the example id as provided in the JSON files.
 
-*   **Download size**: `316.54 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `318.38 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | --------:
-`'mini'`  | 500,000
-`'test'`  | 500,000
-`'train'` | 2,686,843
-`'val'`   | 100,000
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=string),
+    'file_id': Text(shape=(), dtype=string),
+    'id': Scalar(shape=(), dtype=int64),
     'image': Image(shape=(None, None, 3), dtype=uint8),
     'label': ClassLabel(shape=(), dtype=int64, num_classes=10000),
     'supercategory': ClassLabel(shape=(), dtype=int64, num_classes=11),
@@ -67,7 +71,8 @@ FeaturesDict({
 Feature       | Class        | Shape           | Dtype  | Description
 :------------ | :----------- | :-------------- | :----- | :----------
               | FeaturesDict |                 |        |
-id            | Text         |                 | string |
+file_id       | Text         |                 | string |
+id            | Scalar       |                 | int64  |
 image         | Image        | (None, None, 3) | uint8  |
 label         | ClassLabel   |                 | int64  |
 supercategory | ClassLabel   |                 | int64  |
