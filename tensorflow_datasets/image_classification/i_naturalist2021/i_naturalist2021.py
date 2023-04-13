@@ -18,7 +18,8 @@
 import json
 import os
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -53,10 +54,11 @@ _SPLIT_FILENAMES = {
 class INaturalist2021(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for iNaturalist 2021 Competition dataset."""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('2.0.1')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '2.0.0': 'Update: Class indices follow the order in the JSON train file.',
+      '2.0.1': 'Update: Include the example id as provided in the JSON files.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -65,7 +67,8 @@ class INaturalist2021(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'id': tfds.features.Text(),
+            'id': tfds.features.Scalar(dtype=np.int64),
+            'file_id': tfds.features.Text(),
             'image': tfds.features.Image(shape=(None, None, 3)),
             'label': tfds.features.ClassLabel(
                 names_file=tfds.core.tfds_path(
@@ -117,7 +120,7 @@ class INaturalist2021(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, images_archive, json_file):
     """Generate examples."""
     # Training and validation images.
-    with tf.io.gfile.GFile(json_file, 'r') as f:
+    with epath.Path(json_file).open('r') as f:
       inat_json = json.load(f)
 
     def _format(label: str):
@@ -134,20 +137,21 @@ class INaturalist2021(tfds.core.GeneratorBasedBuilder):
         category, supercategory = -1, -1
       return category, supercategory
 
-    key2data = {}
+    fileid2data = {}
     for idx, image in enumerate(inat_json['images']):
       category, supercategory = _get_annotation(idx, image['id'])
-      key = os.path.basename(image['file_name']).split('.')[0]
-      key2data[key] = {
-          'id': key,
+      fileid = os.path.basename(image['file_name']).split('.')[0]
+      fileid2data[fileid] = {
+          'id': image['id'],
+          'file_id': fileid,
           'label': category,
           'supercategory': supercategory,
       }
 
     # Read tar.gz file containing images and yield relevant examples.
     for fpath, fobj in images_archive:
-      key = os.path.basename(fpath).split('.')[0]
-      if key in key2data:
-        data = key2data[key].copy()
+      fileid = os.path.basename(fpath).split('.')[0]
+      if fileid in fileid2data:
+        data = fileid2data[fileid].copy()
         data['image'] = fobj
-        yield key, data
+        yield data['id'], data
