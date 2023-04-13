@@ -10,6 +10,20 @@ and this project adheres to
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [4.9.2] - 2023-04-13
+
+### Added
+
 -   [Experimental] A list of freeform text tags can now be attached to a
     `BuilderConfig`. For example:
     ```py
@@ -32,6 +46,8 @@ and this project adheres to
 ### Removed
 
 ### Fixed
+
+-   Fixed generated proto files (see issue [4858](https://github.com/tensorflow/datasets/issues/4858)).
 
 ### Security
 
