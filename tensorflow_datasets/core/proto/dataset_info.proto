@@ -156,6 +156,9 @@ message DatasetInfo {
   // Config description of the dataset
   string config_description = 14;
 
+  // Config tags of the dataset
+  repeated string config_tags = 21;
+
   // The structure and characteristics of the features of this dataset.
   Feature features = 19;
 
@@ -203,5 +206,5 @@ message DatasetInfo {
   // The data that was used to generate this dataset.
   repeated DataSourceAccess data_source_accesses = 20;
 
-  // Next available: 21
+  // Next available: 22
 }

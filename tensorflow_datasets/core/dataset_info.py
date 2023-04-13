@@ -39,7 +39,7 @@ import os
 import posixpath
 import tempfile
 import time
-from typing import Any, Dict, Iterable, Optional, Tuple, Union
+from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
 
 from absl import logging
 from etils import epath
@@ -106,6 +106,7 @@ class DatasetIdentity:
   module_name: str
   config_name: Optional[str] = None
   config_description: Optional[str] = None
+  config_tags: Optional[List[str]] = None
   release_notes: Optional[Dict[str, str]] = None
 
   @classmethod
@@ -113,9 +114,11 @@ class DatasetIdentity:
     if builder.builder_config:
       config_name = builder.builder_config.name
       config_description = builder.builder_config.description
+      config_tags = builder.builder_config.tags
     else:
       config_name = None
       config_description = None
+      config_tags = None
     return cls(
         name=builder.name,
         version=utils.Version(builder.version),
@@ -123,6 +126,7 @@ class DatasetIdentity:
         module_name=str(builder.__module__),
         config_name=config_name,
         config_description=config_description,
+        config_tags=config_tags,
         release_notes=builder.release_notes,
     )
 
@@ -139,6 +143,7 @@ class DatasetIdentity:
         module_name=info_proto.module_name,
         config_name=info_proto.config_name,
         config_description=info_proto.config_description,
+        config_tags=info_proto.config_tags or [],
         release_notes={k: v for k, v in info_proto.release_notes.items()},
     )
 
@@ -228,6 +233,7 @@ class DatasetInfo(object):
         disable_shuffling=disable_shuffling,
         config_name=self._identity.config_name,
         config_description=self._identity.config_description,
+        config_tags=self._identity.config_tags,
         citation=utils.dedent(citation),
         module_name=self._identity.module_name,
         redistribution_info=dataset_info_pb2.RedistributionInfo(
@@ -319,6 +325,10 @@ class DatasetInfo(object):
   @property
   def config_description(self) -> str:
     return self._identity.config_description
+
+  @property
+  def config_tags(self) -> List[str]:
+    return self._identity.config_tags
 
   @property
   def full_name(self):
@@ -650,6 +660,8 @@ class DatasetInfo(object):
       # Otherwise, we restore the dataset_info.json value
       if field.type == field.TYPE_MESSAGE:
         field_value.MergeFrom(field_value_restored)
+      elif field.label == field.LABEL_REPEATED:
+        field_value.extend(field_value_restored)
       else:
         setattr(self._info_proto, field_name, field_value_restored)
 
@@ -754,6 +766,11 @@ class DatasetInfo(object):
     else:
       config_description = SKIP
 
+    if self._info_proto.config_tags:
+      config_tags = ", ".join(self.config_tags)
+    else:
+      config_tags = SKIP
+
     file_format_str = (
         self.file_format.value
         if self.file_format
@@ -765,6 +782,7 @@ class DatasetInfo(object):
         ("full_name", repr(self.full_name)),
         ("description", _indent(f'"""\n{self.description}\n"""')),
         ("config_description", config_description),
+        ("config_tags", config_tags),
         ("homepage", repr(self.homepage)),
         ("data_path", repr(self.data_dir)),
         ("file_format", file_format_str),

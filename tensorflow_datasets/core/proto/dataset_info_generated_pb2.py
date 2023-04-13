@@ -63,12 +63,13 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\t\x12\x0f\n\x07version\x18\x03'
     b' \x01(\t\x12\x10\n\x08\x64\x61ta_dir\x18\x04'
     b' \x01(\t\x12\x14\n\x0c\x64s_namespace\x18\x05'
-    b' \x01(\t"\x9f\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
+    b' \x01(\t"\xb4\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
     b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02'
     b' \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12I\n\rrelease_notes\x18\x12'
     b' \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r'
     b' \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e'
-    b' \x01(\t\x12.\n\x08\x66\x65\x61tures\x18\x13'
+    b' \x01(\t\x12\x13\n\x0b\x63onfig_tags\x18\x15'
+    b' \x03(\t\x12.\n\x08\x66\x65\x61tures\x18\x13'
     b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature\x12\x10\n\x08\x63itation\x18\x03'
     b' \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04'
     b' \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c'
@@ -138,9 +139,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _TFDSDATASETREFERENCE._serialized_start = 1203
   _TFDSDATASETREFERENCE._serialized_end = 1312
   _DATASETINFO._serialized_start = 1315
-  _DATASETINFO._serialized_end = 2242
-  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2133
-  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2184
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2186
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2242
+  _DATASETINFO._serialized_end = 2263
+  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2154
+  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2205
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2207
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2263
 # @@protoc_insertion_point(module_scope)

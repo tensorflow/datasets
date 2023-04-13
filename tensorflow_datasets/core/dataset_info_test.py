@@ -198,6 +198,7 @@ class DatasetInfoTest(testing.TestCase):
         citation="some citation",
         license="some license",
     )
+    info.as_proto.config_tags.extend(["foo", "bar"])
     info.download_size = 456
     filepath_template = "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
     info.as_proto.splits.add(
