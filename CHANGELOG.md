@@ -10,6 +10,21 @@ and this project adheres to
 
 ### Added
 
+-   [Experimental] A list of freeform text tags can now be attached to a
+    `BuilderConfig`. For example:
+    ```py
+    BUILDER_CONFIGS = [
+        tfds.core.BuilderConfig(name="foo", tags=["foo", "live"]),
+        tfds.core.BuilderConfig(name="bar", tags=["bar", "old"]),
+    ]
+    ```
+    The tags are recorded with the dataset metadata and can later be retrieved
+    using the info object:
+    ```py
+    builder.info.config_tags  # ["foo", "live"]
+    ```
+    This feature is experimental and there are no guidelines on tags format.
+
 ### Changed
 
 ### Deprecated

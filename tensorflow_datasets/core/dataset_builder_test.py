@@ -57,6 +57,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
           name="plus1",
           version=utils.Version("0.0.1"),
           description="Add 1 to the records",
+          tags=["foo:bar"],
           increment=1,
       ),
       DummyBuilderConfig(
@@ -64,6 +65,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
           version=utils.Version("0.0.2"),
           supported_versions=[utils.Version("0.0.1")],
           description="Add 2 to the records",
+          tags=["foo:baz"],
           increment=2,
       ),
   ]

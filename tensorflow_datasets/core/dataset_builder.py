@@ -83,6 +83,16 @@ class BuilderConfig:
 
   DatasetBuilder subclasses with data configuration options should subclass
   `BuilderConfig` and add their own properties.
+
+  Attributes:
+    name: The name of the config.
+    version: The version of the config.
+    release_notes: A dictionary associating versions to changes.
+    supported_versions: A list of versions which this Builder Config supports.
+    description: a human description of the config.
+    tags: [Experimental] a list of freeform tags applying to the config. This is
+      not used by TFDS, but can be retrieved later from a ConfigBuilder
+      instance.
   """
 
   # TODO(py3.10): Should update dataclass to be:
@@ -96,6 +106,7 @@ class BuilderConfig:
       default_factory=list
   )
   description: Optional[str] = None
+  tags: List[str] = dataclasses.field(default_factory=list)
 
   @classmethod
   def from_dataset_info(
@@ -108,6 +119,7 @@ class BuilderConfig:
         description=info_proto.config_description,
         version=info_proto.version,
         release_notes=info_proto.release_notes or {},
+        tags=info_proto.config_tags or [],
     )
 
 
