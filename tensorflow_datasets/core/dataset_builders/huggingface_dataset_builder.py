@@ -134,7 +134,7 @@ def _from_hf_to_tfds(hf_name: str) -> str:
   Returns:
     the TFDS compatible dataset name.
   """
-  return hf_name.replace("-", "_").replace("/", "__").lower()
+  return hf_name.replace("-", "_").replace(".", "_").replace("/", "__").lower()
 
 
 def _from_tfds_to_hf(tfds_name: str) -> str:
