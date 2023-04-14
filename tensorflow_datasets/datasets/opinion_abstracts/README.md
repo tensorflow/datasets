@@ -6,3 +6,5 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 
 (2) IDebate: The arguments crawled from http://idebate.org/. It has fields of
 "_debate_name", "_debate_id", "_claim", "_claim_id", "_argument_sentences".
+
+See also https://web.eecs.umich.edu/~wangluxy/datasets/opinion_README.txt.

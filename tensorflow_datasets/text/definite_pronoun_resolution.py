@@ -61,7 +61,7 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(num_classes=2),
         }),
         supervised_keys=('sentence', 'label'),
-        homepage='http://www.hlt.utdallas.edu/~vince/data/emnlp12/',
+        homepage='https://www.hlt.utdallas.edu/~vince/data/emnlp12/',
         citation=_CITATION,
     )
 

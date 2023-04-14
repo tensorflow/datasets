@@ -89,7 +89,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             ),
         }),
         supervised_keys=(config.opinions_key, config.summary_key),
-        homepage="http://www.ccs.neu.edu/home/luwang/data.html",
+        homepage="https://web.eecs.umich.edu/~wangluxy/data.html",
     )
 
   def _split_generators(
