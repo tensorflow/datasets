@@ -3,9 +3,9 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="opinion_abstracts" />
-  <meta itemprop="description" content="There are two sub datasets:&#10;&#10;(1) RottenTomatoes: The movie critics and consensus crawled from&#10;http://rottentomatoes.com/. It has fields of &quot;_movie_name&quot;, &quot;_movie_id&quot;,&#10;&quot;_critics&quot;, and &quot;_critic_consensus&quot;.&#10;&#10;(2) IDebate: The arguments crawled from http://idebate.org/. It has fields of&#10;&quot;_debate_name&quot;, &quot;_debate_id&quot;, &quot;_claim&quot;, &quot;_claim_id&quot;, &quot;_argument_sentences&quot;.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;opinion_abstracts&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="There are two sub datasets:&#10;&#10;(1) RottenTomatoes: The movie critics and consensus crawled from&#10;http://rottentomatoes.com/. It has fields of &quot;_movie_name&quot;, &quot;_movie_id&quot;,&#10;&quot;_critics&quot;, and &quot;_critic_consensus&quot;.&#10;&#10;(2) IDebate: The arguments crawled from http://idebate.org/. It has fields of&#10;&quot;_debate_name&quot;, &quot;_debate_id&quot;, &quot;_claim&quot;, &quot;_claim_id&quot;, &quot;_argument_sentences&quot;.&#10;&#10;See also https://web.eecs.umich.edu/~wangluxy/datasets/opinion_README.txt.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;opinion_abstracts&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/opinion_abstracts" />
-  <meta itemprop="sameAs" content="http://www.ccs.neu.edu/home/luwang/data.html" />
+  <meta itemprop="sameAs" content="https://web.eecs.umich.edu/~wangluxy/data.html" />
   <meta itemprop="citation" content="@inproceedings{wang-ling-2016-neural,&#10;    title = &quot;Neural Network-Based Abstract Generation for Opinions and Arguments&quot;,&#10;    author = &quot;Wang, Lu  and&#10;      Ling, Wang&quot;,&#10;    booktitle = &quot;Proceedings of the 2016 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies&quot;,&#10;    month = jun,&#10;    year = &quot;2016&quot;,&#10;    address = &quot;San Diego, California&quot;,&#10;    publisher = &quot;Association for Computational Linguistics&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/N16-1007&quot;,&#10;    doi = &quot;10.18653/v1/N16-1007&quot;,&#10;    pages = &quot;47--57&quot;,&#10;}" />
 </div>
 
@@ -23,8 +23,10 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 (2) IDebate: The arguments crawled from http://idebate.org/. It has fields of
 "_debate_name", "_debate_id", "_claim", "_claim_id", "_argument_sentences".
 
+See also https://web.eecs.umich.edu/~wangluxy/datasets/opinion_README.txt.
+
 *   **Homepage**:
-    [http://www.ccs.neu.edu/home/luwang/data.html](http://www.ccs.neu.edu/home/luwang/data.html)
+    [https://web.eecs.umich.edu/~wangluxy/data.html](https://web.eecs.umich.edu/~wangluxy/data.html)
 
 *   **Source code**:
     [`tfds.datasets.opinion_abstracts.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/opinion_abstracts/opinion_abstracts_dataset_builder.py)
