@@ -24,7 +24,6 @@ from typing import Any, Callable, Iterable, Iterator, Union
 
 import numpy as np
 from tensorflow_datasets.core import logging as tfds_logging
-from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
@@ -96,7 +95,8 @@ def _assert_ds_types(nested_ds: Tree[TensorflowElem]) -> None:
   """Assert all inputs are from valid types."""
   for el in tf.nest.flatten(nested_ds):
     if not (
-        isinstance(el, (tf.Tensor, tf.RaggedTensor)) or tf_compat.is_dataset(el)
+        isinstance(el, (tf.Tensor, tf.RaggedTensor))
+        or isinstance(el, tf.data.Dataset)
     ):
       nested_types = tree_utils.map_structure(type, nested_ds)
       raise TypeError(
@@ -113,7 +113,7 @@ def _elem_to_numpy_eager(
     return tf_el._numpy()  # pytype: disable=attribute-error  # pylint: disable=protected-access
   elif isinstance(tf_el, tf.RaggedTensor):
     return tf_el
-  elif tf_compat.is_dataset(tf_el):
+  elif isinstance(tf_el, tf.data.Dataset):
     return _IterableDataset(_eager_dataset_iterator, tf_el)
   elif tf_el is None:
     return None
@@ -128,7 +128,7 @@ def _nested_to_numpy_graph(ds_nested: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   flat_ds = tf.nest.flatten(ds_nested)
   for elem in flat_ds:
     # Create an iterator for all datasets
-    if tf_compat.is_dataset(elem):
+    if isinstance(elem, tf.data.Dataset):
       # Capture the current graph, so calling `iter(ds)` twice will reuse the
       # graph in which `as_numpy` was created.
       graph = tf.compat.v1.get_default_graph()
@@ -148,7 +148,9 @@ def _nested_to_numpy_graph(ds_nested: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   return tf.nest.pack_sequence_as(
       ds_nested,
       [
-          next(iter_ds) if tf_compat.is_dataset(ds_el) else next(iter_array)
+          next(iter_ds)
+          if isinstance(ds_el, tf.data.Dataset)
+          else next(iter_array)
           for ds_el in flat_ds
       ],
   )
