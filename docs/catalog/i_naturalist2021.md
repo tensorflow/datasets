@@ -41,18 +41,22 @@ images (100K in total). There are a total of 500,000 test images in the
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Update: Include the example id as provided in the JSON files.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `316.54 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `318.45 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'mini'`  | 500,000
+`'test'`  | 500,000
+`'train'` | 2,686,843
+`'val'`   | 100,000
 
 *   **Feature structure**:
 
