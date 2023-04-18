@@ -291,7 +291,8 @@ def expand_glob(path: epath.PathLike) -> List[epath.Path]:
   """Returns all files that match the glob in the given path.
 
   Warning: If `path` does not contain any wildcards, we do not check whether
-  `path` exists and always return `[path]`.
+  `path` exists and always return `[path]`. In addition, we don't expand the
+  `@*` pattern to specify shard wildcards.
 
   Arguments:
     path: a path that can contain a glob.
@@ -301,7 +302,9 @@ def expand_glob(path: epath.PathLike) -> List[epath.Path]:
   """
   path = epath.Path(path).expanduser()
   path_str = os.fspath(path)
-  if not any([char in path_str for char in _GLOB_CHARS]):
+  # We don't expand wildcards for number of shards, i.e. paths ending with @*.
+  path_str_no_shard_wildcard = re.sub(r'@\*$', '', path_str)
+  if not any([char in path_str_no_shard_wildcard for char in _GLOB_CHARS]):
     return [path]
   if not path_str.startswith('/'):
     logging.warning(
