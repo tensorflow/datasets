@@ -225,6 +225,7 @@ def test_looks_like_a_tfds_file(filename, result):
         ('/a/*', ['/a/b', '/a/c'], ['/a/b', '/a/c']),
         ('/a/b', None, ['/a/b']),
         ('a/*', None, ['a/*']),
+        ('/a/b@*', None, ['/a/b@*']),
     ],
 )
 def test_expand_glob(path, glob_result, expected):
