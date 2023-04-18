@@ -27,8 +27,6 @@ import time
 import types
 from typing import Any, Callable, Iterator, Optional, Tuple
 
-from tensorflow_datasets.core.tf_compat import ensure_tf_version
-
 Callback = Callable[..., None]
 
 
@@ -187,8 +185,28 @@ def tf_error_callback(**kwargs):
   print("***************************************************************\n\n")
 
 
-def tf_success_callback(**kwargs):
-  ensure_tf_version(kwargs["module"])
+MIN_TF_VERSION = "2.1.0"
+
+_ensure_tf_version_called = False
+
+
+# Ensure TensorFlow version is sufficiently recent. This needs to happen after
+# TensorFlow was imported, as it is referenced.
+def ensure_tf_version(**kwargs):
+  """Ensures TensorFlow version is sufficient."""
+  # Only check the first time.
+  global _ensure_tf_version_called
+  if _ensure_tf_version_called:
+    return
+  _ensure_tf_version_called = True
+
+  tf_version = kwargs["module"].__version__
+  if tf_version < MIN_TF_VERSION:
+    raise ImportError(
+        "This version of TensorFlow Datasets requires TensorFlow "
+        f"version >= {MIN_TF_VERSION}; Detected an installation of version "
+        f"{tf_version}. Please upgrade TensorFlow to proceed."
+    )
 
 
 def array_record_error_callback(**kwargs):
@@ -204,7 +222,7 @@ def array_record_error_callback(**kwargs):
 
 
 with lazy_imports(
-    error_callback=tf_error_callback, success_callback=tf_success_callback
+    error_callback=tf_error_callback, success_callback=ensure_tf_version
 ):
   import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import
 
