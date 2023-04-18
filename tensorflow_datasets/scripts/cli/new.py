@@ -128,8 +128,7 @@ def _create_dataset_test(info: utils.DatasetInfo) -> None:
   """Adds the `dummy_data/` directory."""
   file_path = info.path.joinpath(f'{info.name}_dataset_builder_test.py')
 
-  content = textwrap.dedent(
-      f'''\
+  content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
       import {info.tfds_api} as tfds
@@ -154,34 +153,29 @@ def _create_dataset_test(info: utils.DatasetInfo) -> None:
 
       if __name__ == '__main__':
         tfds.testing.test_main()
-      '''
-  )
+      ''')
   file_path.write_text(content)
 
 
 def _create_dataset_readme(info: utils.DatasetInfo) -> None:
   """Adds the `README.md` file."""
   file_path = info.path / 'README.md'
-  content = textwrap.dedent(
-      f"""\
+  content = textwrap.dedent(f"""\
       {info.todo}: Markdown description of that will appear on the catalog page.
       Description is **formatted** as markdown.
 
       It should also contain any processing which has been applied (if any),
       (e.g. corrupted example skipped, images cropped,...):
-      """
-  )
+      """)
   file_path.write_text(content)
 
 
 def _create_dataset_citations(info: utils.DatasetInfo) -> None:
   """Adds the `CITATIONS.bib` file."""
   file_path = info.path / 'CITATIONS.bib'
-  content = textwrap.dedent(
-      f"""\
+  content = textwrap.dedent(f"""\
       // {info.todo}: BibTeX citation
-      """
-  )
+      """)
   file_path.write_text(content)
 
 
@@ -212,13 +206,11 @@ def _create_dummy_data(info: utils.DatasetInfo) -> None:
 def _create_checksum(info: utils.DatasetInfo) -> None:
   """Adds the `checksums.tsv` file."""
   file_path = info.path / 'checksums.tsv'
-  content = textwrap.dedent(
-      f"""\
+  content = textwrap.dedent(f"""\
       # {info.todo}: If your dataset downloads files, then the checksums
       # will be automatically added here when running
       # `tfds build --register_checksums`.
-      """
-  )
+      """)
   file_path.write_text(content)
 
 
