@@ -29,7 +29,7 @@ beam = tfds.core.lazy_imports.apache_beam
 pd = tfds.core.lazy_imports.pandas
 
 _FFMPEG_TIMEOUT_SECONDS = 20 * 60  # 20 minutes.
-_MAX_SECONDS_PER_VIDEO = 30  # Max allowed length for videos.
+_MAX_SECONDS_PER_VIDEO = 10  # Max allowed length for videos.
 # Max allowed size of texts. We assume max 64 words for an English average word
 # length of 5. It is important to set a limit to this to avoid stragglers in
 # t5x processing.
