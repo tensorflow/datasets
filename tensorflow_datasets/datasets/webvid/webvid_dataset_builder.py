@@ -285,16 +285,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         logging.warning(
             'Timed out while processing %s with exception: %s', file_path, e
         )
-        return None
+        return
       except Exception:  # pylint: disable=broad-except
         self._process_error_counter.inc()
         logging.exception('Failed to process video %s.', file_path)
-        return None
+        return
 
       if frames is None:
         self._empty_video_counter.inc()
         logging.warning('Empty video %s', file_path)
-        return None
+        return
 
       self._frame_count_dist.update(len(frames))
       logging.info(
@@ -316,7 +316,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
       self._final_caption_len_dist.update(len(features['caption']))
       self._success_counter.inc()
-      return new_video_id, features
+      yield new_video_id, features
 
     # Get list of videos in file system.
     files = epath.Path(image_base_path).glob(os.path.join('*', '*_*', '*.mp4'))
@@ -343,8 +343,4 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     logging.info('Number of rows %s', df.shape)
     df = df.to_dict('records')
 
-    return (
-        beam.Create(df)
-        | beam.Map(_process_example)
-        | beam.Filter(lambda x: x is not None)
-    )
+    return beam.Create(df) | beam.FlatMap(_process_example)
