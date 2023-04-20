@@ -23,7 +23,6 @@ from typing import Any, Optional, Type
 import dill
 from etils import enp
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import utils
