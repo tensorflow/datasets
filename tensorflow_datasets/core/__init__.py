@@ -31,6 +31,8 @@ from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.dataset_info import Metadata
 from tensorflow_datasets.core.dataset_info import MetadataDict
 
+from tensorflow_datasets.core.example_serializer import ExampleSerializer
+
 from tensorflow_datasets.core.file_adapters import FileFormat
 
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
