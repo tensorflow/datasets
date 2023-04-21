@@ -68,7 +68,7 @@ by adding a thumbs-up reaction to the issue.
 Please include the following citation when using `tensorflow-datasets` for a
 paper, in addition to any citation specific to the used datasets.
 
-```
+```bibtex
 @misc{TFDS,
   title = {{TensorFlow Datasets}, A collection of ready-to-use datasets},
   howpublished = {\url{https://www.tensorflow.org/datasets}},
