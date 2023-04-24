@@ -52,11 +52,14 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\tH\x00\x12:\n\x05tuple\x18\x02'
     b' \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.TupleH\x00\x12\x38\n\x04\x64ict\x18\x03'
     b' \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.DictH\x00\x42\x06\n\x04nest"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01'
-    b' \x01(\t"\xe8\x01\n\x10\x44\x61taSourceAccess\x12\x1b\n\x13\x61\x63\x63\x65ss_timestamp_ms\x18\x01'
+    b' \x01(\t"\x91\x02\n\x10\x44\x61taSourceAccess\x12\x1b\n\x13\x61\x63\x63\x65ss_timestamp_ms\x18\x01'
     b' \x01(\x03\x12\x36\n\x0b\x66ile_system\x18\x02'
     b' \x01(\x0b\x32\x1f.tensorflow_datasets.FileSystemH\x00\x12\x32\n\tsql_query\x18\x03'
     b' \x01(\x0b\x32\x1d.tensorflow_datasets.SqlQueryH\x00\x12\x41\n\x0ctfds_dataset\x18\x04'
-    b' \x01(\x0b\x32).tensorflow_datasets.TfdsDatasetReferenceH\x00\x42\x08\n\x06source"\x1a\n\nFileSystem\x12\x0c\n\x04path\x18\x01'
+    b" \x01(\x0b\x32).tensorflow_datasets.TfdsDatasetReferenceH\x00\x12'\n\x03url\x18\x05"
+    b' \x01(\x0b\x32\x18.tensorflow_datasets.UrlH\x00\x42\x08\n\x06source"\x1a\n\nFileSystem\x12\x0c\n\x04path\x18\x01'
+    b' \x01(\t"$\n\x03Url\x12\x0b\n\x03url\x18\x01'
+    b' \x01(\t\x12\x10\n\x08\x63hecksum\x18\x02'
     b' \x01(\t"\x1d\n\x08SqlQuery\x12\x11\n\tsql_query\x18\x01'
     b' \x01(\t"m\n\x14TfdsDatasetReference\x12\x0c\n\x04name\x18\x01'
     b' \x01(\t\x12\x0e\n\x06\x63onfig\x18\x02'
@@ -95,7 +98,6 @@ _builder.BuildTopDescriptorsAndMessages(
     DESCRIPTOR, 'dataset_info_pb2', globals()
 )
 if _descriptor._USE_C_DESCRIPTORS == False:
-
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\370\001\001'
   _SUPERVISEDKEYS_DICT_DICTENTRY._options = None
@@ -131,17 +133,19 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _REDISTRIBUTIONINFO._serialized_start = 870
   _REDISTRIBUTIONINFO._serialized_end = 907
   _DATASOURCEACCESS._serialized_start = 910
-  _DATASOURCEACCESS._serialized_end = 1142
-  _FILESYSTEM._serialized_start = 1144
-  _FILESYSTEM._serialized_end = 1170
-  _SQLQUERY._serialized_start = 1172
-  _SQLQUERY._serialized_end = 1201
-  _TFDSDATASETREFERENCE._serialized_start = 1203
-  _TFDSDATASETREFERENCE._serialized_end = 1312
-  _DATASETINFO._serialized_start = 1315
-  _DATASETINFO._serialized_end = 2263
-  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2154
-  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2205
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2207
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2263
+  _DATASOURCEACCESS._serialized_end = 1183
+  _FILESYSTEM._serialized_start = 1185
+  _FILESYSTEM._serialized_end = 1211
+  _URL._serialized_start = 1213
+  _URL._serialized_end = 1249
+  _SQLQUERY._serialized_start = 1251
+  _SQLQUERY._serialized_end = 1280
+  _TFDSDATASETREFERENCE._serialized_start = 1282
+  _TFDSDATASETREFERENCE._serialized_end = 1391
+  _DATASETINFO._serialized_start = 1394
+  _DATASETINFO._serialized_end = 2342
+  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2233
+  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2284
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2286
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2342
 # @@protoc_insertion_point(module_scope)
