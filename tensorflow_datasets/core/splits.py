@@ -284,7 +284,8 @@ class MultiSplitInfo(SplitInfo):
     raise RuntimeError('replace is not supported on MultiSplitInfo')
 
 
-class SubSplitInfo(object):
+@dataclasses.dataclass(eq=False, frozen=True)
+class SubSplitInfo:
   """Wrapper around a sub split info.
 
   This class expose info on the subsplit:
@@ -295,27 +296,25 @@ class SubSplitInfo(object):
   ```
   """
 
-  def __init__(self, file_instructions: List[shard_utils.FileInstruction]):
-    """Constructor.
+  name: str
+  file_instructions: List[shard_utils.FileInstruction]
 
-    Args:
-      file_instructions: List[FileInstruction]
-    """
-    self._file_instructions = file_instructions
+  @property
+  def shard_lengths(self) -> List[int]:
+    return [f.take for f in self.file_instructions]
 
   @property
   def num_examples(self) -> int:
     """Returns the number of example in the subsplit."""
-    return sum(f.take for f in self._file_instructions)
+    return sum(self.shard_lengths)
+
+  @property
+  def num_bytes(self) -> int:
+    return 0  # Unknown
 
   @property
   def num_shards(self) -> int:
     return len(self.file_instructions)
-
-  @property
-  def file_instructions(self) -> List[shard_utils.FileInstruction]:
-    """Returns the list of dict(filename, take, skip)."""
-    return self._file_instructions
 
   @property
   def filenames(self) -> List[str]:
@@ -326,6 +325,14 @@ class SubSplitInfo(object):
   def filepaths(self) -> List[epath.Path]:
     """Returns the list of filepaths."""
     return sorted(epath.Path(f.filename) for f in self.file_instructions)
+
+  def to_proto(self) -> proto_lib.SplitInfo:
+    return proto_lib.SplitInfo(
+        name=self.name,
+        shard_lengths=self.shard_lengths,
+        num_bytes=self.num_bytes,
+        statistics=None,
+    )
 
 
 # TODO(epot): `: tfds.Split` type should be `Union[str, Split]`
@@ -401,7 +408,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
           split_infos=list(self.values()),
           instruction=key,
       )
-      return SubSplitInfo(instructions)
+      return SubSplitInfo(name=key, file_instructions=instructions)
 
   @classmethod
   def from_proto(
