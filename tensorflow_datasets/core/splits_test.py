@@ -260,6 +260,17 @@ class SplitsTest(testing.TestCase):
   def test_sub_split_num_shards(self):
     self.assertEqual(self._builder.info.splits['train[75%:]'].num_shards, 1)
 
+  def test_sub_split_shard_lengths(self):
+    self.assertEqual(
+        self._builder.info.splits['train[75%:]'].shard_lengths,
+        [5],
+    )
+
+  def test_sub_split_to_proto(self):
+    sp = self._builder.info.splits['train[75%:]'].to_proto()
+    self.assertEqual('train[75%:]', sp.name)
+    self.assertEqual([5], sp.shard_lengths)
+
   def test_split_file_instructions(self):
     fi = self._builder.info.splits['train'].file_instructions
     self.assertEqual(
