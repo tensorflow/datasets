@@ -1,0 +1,3 @@
+ml.task.image-segmentation # Relates to Image Segmentation, a machine learning task.
+ml.task.instance-segmentation # Relates to Instance Segmentation, a machine learning task.
+ml.task.semantic-segmentation # Relates to Semantic Segmentation, a machine learning task.
