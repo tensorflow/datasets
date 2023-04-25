@@ -440,6 +440,11 @@ toc:
     title: stl10
   title: Image generation
 - section:
+  - path: /datasets/catalog/segment_anything
+    status: nightly
+    title: segment_anything (manual)
+  title: Image segmentation
+- section:
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
   - path: /datasets/catalog/div2k
@@ -544,6 +549,9 @@ toc:
     title: lvis
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
+  - path: /datasets/catalog/segment_anything
+    status: nightly
+    title: segment_anything (manual)
   title: Instance segmentation
 - section:
   - path: /datasets/catalog/big_patent
@@ -944,6 +952,9 @@ toc:
     title: ref_coco (manual)
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
+  - path: /datasets/catalog/segment_anything
+    status: nightly
+    title: segment_anything (manual)
   - path: /datasets/catalog/so2sat
     title: so2sat
   title: Semantic segmentation
