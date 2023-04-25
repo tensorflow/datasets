@@ -699,6 +699,19 @@ class DatasetInfo(object):
             )
         )
 
+  def add_url_access(
+      self,
+      url: str,
+      checksum: Optional[str] = None,
+  ) -> None:
+    """Records the URL used to generate this dataset."""
+    self._info_proto.data_source_accesses.append(
+        dataset_info_pb2.DataSourceAccess(
+            access_timestamp_ms=_now_in_milliseconds(),
+            url=dataset_info_pb2.Url(url=url, checksum=checksum),
+        )
+    )
+
   def add_sql_data_source_access(self, sql_query: str) -> None:
     """Records that the given query was used to generate this dataset."""
     self._info_proto.data_source_accesses.append(
