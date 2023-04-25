@@ -289,6 +289,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`stanford_dogs`](stanford_dogs.md)
 *   [`stl10`](stl10.md)
 
+### `Image segmentation`
+
+*   [`segment_anything`](segment_anything.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Image super resolution`
 
 *   [`celeb_a_hq`](celeb_a_hq.md)
@@ -349,6 +354,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cityscapes`](cityscapes.md)
 *   [`lvis`](lvis.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
+*   [`segment_anything`](segment_anything.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Language modelling`
 
@@ -599,6 +606,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`places365_small`](places365_small.md)
 *   [`ref_coco`](ref_coco.md)
 *   [`scene_parse150`](scene_parse150.md)
+*   [`segment_anything`](segment_anything.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`so2sat`](so2sat.md)
 
 ### `Sentiment analysis`
