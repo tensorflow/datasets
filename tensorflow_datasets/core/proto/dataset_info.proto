@@ -106,6 +106,7 @@ message DataSourceAccess {
     FileSystem file_system = 2;
     SqlQuery sql_query = 3;
     TfdsDatasetReference tfds_dataset = 4;
+    Url url = 5;
   }
 }
 
@@ -113,6 +114,14 @@ message FileSystem {
   // The path of the files that were read to generate the data. Can contain
   // wildcards, e.g. data-tfrecord-*.
   string path = 1;
+}
+
+message Url {
+  // The URL of the resource that was accessed.
+  string url = 1;
+
+  // Optional checksum of the file that was downloaded.
+  string checksum = 2;
 }
 
 message SqlQuery {
