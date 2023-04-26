@@ -148,8 +148,7 @@ def _dataset_name_and_kwargs_from_name_str(
     name_str: str,
 ) -> Tuple[str, Dict[str, Value]]:
   """Extract kwargs from name str."""
-  err_msg = textwrap.dedent(
-      f"""\
+  err_msg = textwrap.dedent(f"""\
       Parsing builder name string {name_str} failed.
       The builder name string must be of the following format:
         dataset_name[/config_name][:version][/kwargs]
@@ -168,8 +167,7 @@ def _dataset_name_and_kwargs_from_name_str(
           my_dataset/config1:1.*.*
           my_dataset/config1/arg1=val1,arg2=val2
           my_dataset/config1:1.2.3/right=True,foo=bar,rate=1.2
-      """
-  )
+      """)
 
   res = _NAME_REG.match(name_str)
   if not res:
@@ -212,17 +210,15 @@ class DatasetReference:
   """
 
   dataset_name: str
-  namespace: Optional[str] = None
-  config: Optional[str] = None
-  version: Union[None, str, version_lib.Version] = None
-  data_dir: Union[None, str, os.PathLike] = (
-      None  # pylint: disable=g-bare-generic
-  )
-  split_mapping: Optional[Mapping[str, str]] = None
+  namespace: None | str = None
+  config: None | str = None
+  version: None | str | version_lib.Version = None
+  data_dir: None | str | os.PathLike = None  # pylint: disable=g-bare-generic
+  split_mapping: None | Mapping[str, str] = None
 
   def __post_init__(self):
-    if isinstance(self.version, str):
-      self.version = version_lib.Version(self.version)
+    if isinstance(self.version, version_lib.Version):
+      self.version = str(self.version)
 
   def tfds_name(self, include_version: bool = True) -> str:
     """Returns the TFDS name of the referenced dataset.
@@ -278,7 +274,7 @@ class DatasetReference:
     dataset_dir = dataset_dir / str(self.version)
     return dataset_dir
 
-  def replace(self, **kwargs: Any) -> 'DatasetReference':
+  def replace(self, **kwargs: Any) -> DatasetReference:
     """Returns a copy with updated attributes."""
     return dataclasses.replace(self, **kwargs)
 
@@ -288,7 +284,7 @@ class DatasetReference:
       tfds_name: str,
       split_mapping: Optional[Mapping[str, str]] = None,
       data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
-  ) -> 'DatasetReference':
+  ) -> DatasetReference:
     """Returns the `DatasetReference` for the given TFDS dataset."""
     parsed_name, builder_kwargs = parse_builder_name_kwargs(tfds_name)
     version, config = None, None
