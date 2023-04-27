@@ -141,7 +141,7 @@ class NonMutableDict(Dict[T, U]):
       raise ValueError(self._error_msg.format(key=key))
     return super(NonMutableDict, self).__setitem__(key, value)
 
-  def update(self, other):
+  def update(self, other):  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
     if any(k in self.keys() for k in other):
       raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)
