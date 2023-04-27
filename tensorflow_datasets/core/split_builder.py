@@ -409,6 +409,7 @@ class SplitBuilder:
         unit=' examples',
         total=total_num_examples,
         leave=False,
+        mininterval=1.0,
     ):
       try:
         example = self._features.encode_example(example)
