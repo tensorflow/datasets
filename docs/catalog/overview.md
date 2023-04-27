@@ -132,6 +132,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`universal_dependencies`](universal_dependencies.md)
 *   [`xtreme_pos`](xtreme_pos.md)
 
+### `Dialogue`
+
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Document summarization`
 
 *   [`aeslc`](aeslc.md)
@@ -357,11 +362,18 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`segment_anything`](segment_anything.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
+### `Language modeling`
+
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Language modelling`
 
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 *   [`blimp`](blimp.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
 *   [`lambada`](lambada.md)
@@ -447,6 +459,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`math_dataset`](math_dataset.md)
 *   [`math_qa`](math_qa.md)
@@ -494,6 +508,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Open domain question answering`
 
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`natural_questions`](natural_questions.md)
 *   [`squad`](squad.md)
 *   [`trivia_qa`](trivia_qa.md)
@@ -507,6 +523,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`math_dataset`](math_dataset.md)
 *   [`math_qa`](math_qa.md)
 *   [`mlqa`](mlqa.md)
@@ -615,10 +633,22 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`sentiment140`](sentiment140.md)
 
+### `Sequence modeling`
+
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Sequence to sequence language modeling`
+
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Sequence to sequence language modelling`
 
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`math_qa`](math_qa.md)
 *   [`opus`](opus.md)
 *   [`paws_wiki`](paws_wiki.md)
@@ -718,6 +748,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`conll2002`](conll2002.md)
 *   [`conll2003`](conll2003.md)
 *   [`cos_e`](cos_e.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
 *   [`doc_nli`](doc_nli.md)
 *   [`dolphin_number_word`](dolphin_number_word.md)
@@ -856,6 +888,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`lambada`](lambada.md)
 *   [`lm1b`](lm1b.md)
@@ -882,6 +916,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`newsroom`](newsroom.md)
 *   [`reddit`](reddit.md)
 *   [`reddit_tifu`](reddit_tifu.md)

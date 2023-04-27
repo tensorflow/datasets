@@ -162,6 +162,11 @@ toc:
     title: xtreme_pos
   title: Dependency parsing
 - section:
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
+  title: Dialogue
+- section:
   - path: /datasets/catalog/aeslc
     title: aeslc
   - path: /datasets/catalog/booksum
@@ -554,12 +559,20 @@ toc:
     title: segment_anything (manual)
   title: Instance segmentation
 - section:
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
+  title: Language modeling
+- section:
   - path: /datasets/catalog/big_patent
     title: big_patent
   - path: /datasets/catalog/billsum
     title: billsum
   - path: /datasets/catalog/blimp
     title: blimp
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/irc_disentanglement
@@ -706,6 +719,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/math_dataset
@@ -784,6 +800,9 @@ toc:
     title: wider_face
   title: Object detection
 - section:
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
   - path: /datasets/catalog/natural_questions
     title: natural_questions
   - path: /datasets/catalog/squad
@@ -802,6 +821,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
   - path: /datasets/catalog/math_dataset
     title: math_dataset
   - path: /datasets/catalog/math_qa
@@ -965,10 +987,23 @@ toc:
     title: sentiment140
   title: Sentiment analysis
 - section:
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
+  title: Sequence modeling
+- section:
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
+  title: Sequence to sequence language modeling
+- section:
   - path: /datasets/catalog/big_patent
     title: big_patent
   - path: /datasets/catalog/billsum
     title: billsum
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
   - path: /datasets/catalog/math_qa
     title: math_qa
   - path: /datasets/catalog/opus
@@ -1139,6 +1174,9 @@ toc:
     title: conll2003
   - path: /datasets/catalog/cos_e
     title: cos_e
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/doc_nli
@@ -1407,6 +1445,9 @@ toc:
     title: booksum (manual)
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/lambada
@@ -1455,6 +1496,9 @@ toc:
     title: billsum
   - path: /datasets/catalog/booksum
     title: booksum (manual)
+  - path: /datasets/catalog/databricks_dolly
+    status: nightly
+    title: databricks_dolly
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
   - path: /datasets/catalog/reddit
