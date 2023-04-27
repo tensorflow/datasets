@@ -126,7 +126,7 @@ class ImageFolder(dataset_builder.DatasetBuilder):
         supervised_keys=('image', 'label'),
     )
 
-  def _download_and_prepare(self, **kwargs) -> NoReturn:
+  def _download_and_prepare(self, **kwargs) -> NoReturn:  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
     raise NotImplementedError(
         'No need to call download_and_prepare function for {}.'.format(
             type(self).__name__

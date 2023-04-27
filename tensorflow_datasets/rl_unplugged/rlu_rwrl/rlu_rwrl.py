@@ -320,7 +320,7 @@ class RluRwrl(rlu_common.RLUBuilder):
     dataset_size = self.builder_config.dataset_size
     return SHARDS_MAPPING[(combined_challenge, domain, dataset_size)]
 
-  def tf_example_to_step_ds(
+  def tf_example_to_step_ds(  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
       self, tf_example: tf.Tensor, feature_description
   ) -> Dict[str, Any]:
     data = tf.io.parse_single_example(tf_example, feature_description)

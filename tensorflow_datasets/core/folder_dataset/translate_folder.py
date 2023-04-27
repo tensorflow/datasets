@@ -95,7 +95,7 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
         ),
     )
 
-  def _download_and_prepare(self, **kwargs):
+  def _download_and_prepare(self, **kwargs):  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
     raise NotImplementedError(
         'No need to call download_and_prepare function for {}.'.format(
             type(self).__name__
