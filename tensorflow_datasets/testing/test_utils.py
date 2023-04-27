@@ -493,11 +493,9 @@ class DummyDataset(
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict(
-            {
-                'id': tf.int64,
-            }
-        ),
+        features=features.FeaturesDict({
+            'id': np.int64,
+        }),
         supervised_keys=('id', 'id'),
         description='Minimal DatasetBuilder.',
     )
