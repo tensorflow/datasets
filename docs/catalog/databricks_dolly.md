@@ -40,18 +40,19 @@ the terms of the
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `12.60 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.69 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,014
 
 *   **Feature structure**:
 
