@@ -135,6 +135,7 @@ class AdhocBuilder(
       description: Optional[str] = None,
       release_notes: Optional[Mapping[str, str]] = None,
       homepage: Optional[str] = None,
+      citation: Optional[str] = None,
       file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
       disable_shuffling: Optional[bool] = False,
       **kwargs: Any,
@@ -154,6 +155,7 @@ class AdhocBuilder(
         description or "Dataset built without a DatasetBuilder class."
     )
     self._homepage = homepage
+    self._citation = citation
     self._disable_shuffling = disable_shuffling
     super().__init__(
         data_dir=data_dir,
@@ -169,6 +171,7 @@ class AdhocBuilder(
         description=self._description,
         features=self._feature_spec,
         homepage=self._homepage,
+        citation=self._citation,
         disable_shuffling=self._disable_shuffling,
     )
 
@@ -220,6 +223,7 @@ def store_as_tfds_dataset(
     description: Optional[str] = None,
     release_notes: Optional[Mapping[str, str]] = None,
     homepage: Optional[str] = None,
+    citation: Optional[str] = None,
     file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
     download_config: Optional[download.DownloadConfig] = None,
     disable_shuffling: Optional[bool] = False,
@@ -243,6 +247,7 @@ def store_as_tfds_dataset(
       description=description,
       release_notes=release_notes,
       homepage=homepage,
+      citation=citation,
       file_format=file_format,
       disable_shuffling=disable_shuffling,
   )
