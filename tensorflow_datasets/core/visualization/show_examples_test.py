@@ -17,9 +17,11 @@
 
 from unittest import mock
 
+import numpy as np
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import visualization
+from tensorflow_datasets.core.visualization.show_examples import _get_record_in_batch
 
 # Import for registration
 from tensorflow_datasets.image_classification import imagenet  # pylint: disable=unused-import,g-bad-import-order
@@ -108,6 +110,18 @@ class ShowExamplesTest(testing.TestCase):
     with testing.mock_data(num_examples=3):
       ds, ds_info = load.load('imagenet2012', split='train', with_info=True)
     visualization.show_examples(ds.take(3), ds_info)
+
+
+def test_get_record_in_batch():
+  batch_record = {
+      'key1': np.array(['a', 'b', 'c']),
+      'key2': {'key2': np.array(['a', 'b', 'c'])},
+  }
+  i = 1
+  assert _get_record_in_batch(batch_record, i) == {
+      'key1': 'b',
+      'key2': {'key2': 'b'},
+  }
 
 
 if __name__ == '__main__':
