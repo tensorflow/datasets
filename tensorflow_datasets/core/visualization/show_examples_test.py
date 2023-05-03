@@ -17,6 +17,7 @@
 
 from unittest import mock
 
+import numpy as np
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import visualization
