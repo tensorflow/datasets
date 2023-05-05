@@ -419,6 +419,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`plant_village`](plant_village.md)
 *   [`quac`](quac.md)
 *   [`race`](race.md)
+*   [`real_toxicity_prompts`](real_toxicity_prompts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`reddit`](reddit.md)
 *   [`savee`](savee.md)
 *   [`schema_guided_dialogue`](schema_guided_dialogue.md)
@@ -818,6 +820,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`quac`](quac.md)
 *   [`quality`](quality.md)
 *   [`race`](race.md)
+*   [`real_toxicity_prompts`](real_toxicity_prompts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`reddit_disentanglement`](reddit_disentanglement.md)
 *   [`reddit_tifu`](reddit_tifu.md)
 *   [`ref_coco`](ref_coco.md)
@@ -881,6 +885,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`sentiment140`](sentiment140.md)
 *   [`trec`](trec.md)
 
+### `Text classification toxicity prediction`
+
+*   [`real_toxicity_prompts`](real_toxicity_prompts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Text generation`
 
 *   [`aeslc`](aeslc.md)
@@ -901,6 +910,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`openbookqa`](openbookqa.md)
 *   [`piqa`](piqa.md)
 *   [`race`](race.md)
+*   [`real_toxicity_prompts`](real_toxicity_prompts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`reddit`](reddit.md)
 *   [`reddit_tifu`](reddit_tifu.md)
 *   [`samsum`](samsum.md)

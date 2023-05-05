@@ -655,6 +655,9 @@ toc:
     title: quac
   - path: /datasets/catalog/race
     title: race
+  - path: /datasets/catalog/real_toxicity_prompts
+    status: nightly
+    title: real_toxicity_prompts
   - path: /datasets/catalog/reddit
     title: reddit
   - path: /datasets/catalog/savee
@@ -1313,6 +1316,9 @@ toc:
     title: quality
   - path: /datasets/catalog/race
     title: race
+  - path: /datasets/catalog/real_toxicity_prompts
+    status: nightly
+    title: real_toxicity_prompts
   - path: /datasets/catalog/reddit_disentanglement
     title: reddit_disentanglement (manual)
   - path: /datasets/catalog/reddit_tifu
@@ -1435,6 +1441,11 @@ toc:
     title: trec
   title: Text classification
 - section:
+  - path: /datasets/catalog/real_toxicity_prompts
+    status: nightly
+    title: real_toxicity_prompts
+  title: Text classification toxicity prediction
+- section:
   - path: /datasets/catalog/aeslc
     title: aeslc
   - path: /datasets/catalog/big_patent
@@ -1470,6 +1481,9 @@ toc:
     title: piqa
   - path: /datasets/catalog/race
     title: race
+  - path: /datasets/catalog/real_toxicity_prompts
+    status: nightly
+    title: real_toxicity_prompts
   - path: /datasets/catalog/reddit
     title: reddit
   - path: /datasets/catalog/reddit_tifu
