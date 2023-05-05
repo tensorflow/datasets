@@ -1,0 +1,6 @@
+content.data-type.text # Contains text data.
+content.language-formality.informal # Contains informal languages.
+content.language.en # Contains text in language English / en.
+content.monolingual # Contains text in 1 natural language.
+ml.task.text-classification-toxicity-prediction # Relates to Text Classification Toxicity Prediction, a machine learning task.
+ml.task.text-generation # Relates to Text Generation, a machine learning task.
