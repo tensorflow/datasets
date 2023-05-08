@@ -3,7 +3,6 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="real_toxicity_prompts" />
-  <meta itemprop="description" content="# RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models&#10;&#10;The RealToxicityPrompts is a corpus of English prompts (specifically sentence&#10;beginnings) of varying toxicity. These prompts are meant to be given as&#10;contexts to an autoregressive language model (ie. GPT-2) and used for&#10;generating completions.&#10;&#10;More details are presented in the original&#10;[paper](https://api.semanticscholar.org/CorpusID:221878771).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;real_toxicity_prompts&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/real_toxicity_prompts" />
   <meta itemprop="sameAs" content="https://github.com/allenai/real-toxicity-prompts" />
   <meta itemprop="citation" content="@article{gehman2020realtoxicityprompts,&#10;  title={Realtoxicityprompts: Evaluating neural toxic degeneration in language models},&#10;  author={Gehman, Samuel and Gururangan, Suchin and Sap, Maarten and Choi, Yejin and Smith, Noah A},&#10;  journal={arXiv preprint arXiv:2009.11462},&#10;  year={2020}&#10;}" />
@@ -27,6 +26,7 @@ completions.
 
 More details are presented in the original
 [paper](https://api.semanticscholar.org/CorpusID:221878771).
+
 
 *   **Homepage**:
     [https://github.com/allenai/real-toxicity-prompts](https://github.com/allenai/real-toxicity-prompts)
