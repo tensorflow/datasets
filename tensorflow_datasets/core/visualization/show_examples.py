@@ -17,7 +17,8 @@
 
 from __future__ import annotations
 
-from typing import Any
+from collections.abc import Iterable
+from typing import Any, Union
 
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import lazy_imports_lib
@@ -29,15 +30,67 @@ from tensorflow_datasets.core.visualization import image_visualizer
 
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
+_Dataset = Union[
+    tf.data.Dataset,
+    Iterable,
+]
+
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
     graph_visualizer.GraphVisualizer(),
 ]
 
+_DEFAULT_NUM_COLS = 3
+_DEFAULT_NUM_ROWS = 3
+
+
+def _to_tf_dataset(
+    ds: _Dataset,
+    min_length: int,
+    is_batched: bool = False,
+) -> tf.data.Dataset:
+  """Converts any iterable to a small tf.data.Dataset to use visualizations.
+
+  Warning: this util function is not optimized, so it should only be used for a
+  small number of records (i.e., small `min_length`).
+
+  Args:
+    ds: Any dataset as an iterable.
+    min_length: The minimum number of examples to generate.
+    is_batched: Whether the data is batched.
+
+  Returns:
+    the tf.data.Dataset of cardinality at least `min_length`.
+  """
+  if isinstance(ds, tf.data.Dataset):
+    if is_batched:
+      return ds.unbatch()
+    else:
+      return ds
+  tf_dataset = None
+  if is_batched:
+    from_tensor = tf.data.Dataset.from_tensor_slices
+  else:
+    from_tensor = tf.data.Dataset.from_tensors
+  for record in ds:
+    if tf_dataset is None:
+      tf_dataset = from_tensor(record)
+    else:
+      tf_dataset = tf_dataset.concatenate(from_tensor(record))
+    # Terminate if `tf_dataset` reached at least the expected `min_length`.
+    if tf_dataset.cardinality().numpy() >= min_length:
+      break
+  if tf_dataset is None:
+    raise ValueError(
+        'Empty dataset, could not generate a valid tf.data.Dataset.'
+    )
+  return tf_dataset
+
 
 def show_examples(
-    ds: tf.data.Dataset,
+    ds: _Dataset,
     ds_info: dataset_info.DatasetInfo,
+    is_batched: bool = False,
     **options_kwargs: Any,
 ):
   """Visualize images (and labels) from an image classification dataset.
@@ -58,6 +111,7 @@ def show_examples(
     ds_info: The dataset info object to which extract the label and features
       info. Available either through `tfds.load('mnist', with_info=True)` or
       `tfds.builder('mnist').info`
+    is_batched: Whether the data is batched.
     **options_kwargs: Additional display options, specific to the dataset type
       to visualize. Are forwarded to `tfds.visualization.Visualizer.show`. See
       the `tfds.visualization` for a list of available visualizers.
@@ -65,6 +119,9 @@ def show_examples(
   Returns:
     fig: The `matplotlib.Figure` object
   """
+  rows = options_kwargs.pop('rows', _DEFAULT_NUM_ROWS)
+  cols = options_kwargs.pop('cols', _DEFAULT_NUM_COLS)
+  ds = _to_tf_dataset(ds, rows * cols, is_batched=is_batched)
   if not isinstance(ds_info, dataset_info.DatasetInfo):  # Arguments inverted
     # `absl.logging` does not appear on Colab by default, so uses print instead.
     print(
@@ -80,7 +137,9 @@ def show_examples(
 
   for visualizer in _ALL_VISUALIZERS:
     if visualizer.match(ds_info):
-      return visualizer.show(ds, ds_info, **options_kwargs)
+      return visualizer.show(
+          ds, ds_info, **options_kwargs, rows=rows, cols=cols
+      )
 
   raise ValueError(
       'Visualisation not supported for dataset `{}`'.format(ds_info.name)

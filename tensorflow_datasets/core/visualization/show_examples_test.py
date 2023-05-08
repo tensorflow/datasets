@@ -17,6 +17,7 @@
 
 from unittest import mock
 
+import numpy as np
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import visualization
@@ -40,6 +41,14 @@ class ShowExamplesTest(testing.TestCase):
           'imagenet2012', split='train', with_info=True, as_supervised=True
       )
     visualization.show_examples(ds, ds_info)
+
+  @mock.patch('matplotlib.pyplot.figure')
+  def test_show_examples_with_batch(self, _):
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = load.load(
+          'imagenet2012', split='train', with_info=True, batch_size=32
+      )
+    visualization.show_examples(ds, ds_info, is_batched=True)
 
   @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples_graph(self, _):
