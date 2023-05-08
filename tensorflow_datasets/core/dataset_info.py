@@ -1024,7 +1024,7 @@ def _metadata_filepath(data_dir: epath.PathLike) -> epath.Path:
 
 
 def _now_in_milliseconds() -> int:
-  return time.time_ns() // 1000
+  return time.time_ns() // 1000000
 
 
 class MetadataDict(Metadata, dict):
