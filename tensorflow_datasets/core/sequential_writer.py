@@ -28,6 +28,7 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -62,8 +63,9 @@ class Shard(object):
     self.num_bytes += len(serialized_example)
 
   def close_writer(self) -> None:
-    """CLoses the writer."""
-    self.writer.flush()
+    """Closes the writer."""
+    if hasattr(self.writer, 'flush'):
+      self.writer.flush()
     self.writer.close()
 
 
@@ -77,6 +79,7 @@ class Split(object):
   # The dataset name is taken from the builder class.
   ds_name: str = ''
   closed: bool = False
+  file_format: file_adapters.FileFormat = file_adapters.FileFormat.TFRECORD
 
   def add_example(self, serialized_example: str) -> None:
     """Adds an example to the shard.
@@ -95,7 +98,16 @@ class Split(object):
       path = self.info.filename_template.sharded_filepath(
           shard_index=self.complete_shards, num_shards=None
       )
-      self.current_shard = Shard(writer=tf.io.TFRecordWriter(os.fspath(path)))
+      if self.file_format == file_adapters.FileFormat.TFRECORD:
+        self.current_shard = Shard(writer=tf.io.TFRecordWriter(os.fspath(path)))
+      elif self.file_format == file_adapters.FileFormat.ARRAY_RECORD:
+        self.current_shard = Shard(
+            writer=array_record_module.ArrayRecordWriter(
+                os.fspath(path), 'group_size:1'
+            )
+        )
+      else:
+        raise ValueError('Unknown file format %s' % self.file_format)
     self.current_shard.add_example(serialized_example)
 
   def close_shard(self) -> None:
@@ -129,6 +141,7 @@ def _initialize_split(
     data_directory: Any,
     ds_name: str,
     filetype_suffix: str,
+    file_format: file_adapters.FileFormat,
     shard_lengths: Optional[List[int]] = None,
     num_bytes: int = 0,
 ) -> Split:
@@ -139,6 +152,7 @@ def _initialize_split(
     data_directory: directory where the split data will be located.
     ds_name: name of the dataset.
     filetype_suffix: file format.
+    file_format: An entry in file_adapters.FileFormat.
     shard_lengths: if the split already has shards, it contains the list of the
       shard lenghts. If None, it assumes that the split is empty.
     num_bytes: number of bytes that have been written already.
@@ -164,6 +178,7 @@ def _initialize_split(
       ),
       complete_shards=len(shard_lengths),
       ds_name=ds_name,
+      file_format=file_format,
   )
 
 
@@ -213,6 +228,7 @@ class SequentialWriter:
       ds_info: dataset_info.DatasetInfo,
       max_examples_per_shard: int,
       overwrite: bool = True,
+      file_format: str = 'tfrecord',
   ):
     """Creates a SequentialWriter.
 
@@ -222,11 +238,13 @@ class SequentialWriter:
       overwrite: if True, it ignores and overwrites any existing data.
         Otherwise, it loads the existing dataset and appends the new data (new
         data will always be created as new shards).
+      file_format: An entry in file_adapters.FileFormat.
     """
 
     self._data_dir = ds_info.data_dir
     self._ds_name = ds_info.name
     self._ds_info = ds_info
+    self._file_format = file_adapters.FileFormat.from_value(file_format)
     if not overwrite:
       try:
         self._ds_info.read_from_directory(self._data_dir)
@@ -238,13 +256,13 @@ class SequentialWriter:
           )
       except FileNotFoundError:
         self._ds_info.set_file_format(
-            file_format=file_adapters.FileFormat.TFRECORD,
+            file_format=self._file_format,
             # if it was set, we want this to fail to warn the user
             override=False,
         )
     else:
       self._ds_info.set_file_format(
-          file_format=file_adapters.FileFormat.TFRECORD,
+          file_format=self._file_format,
           # if it was set, we want this to fail to warn the user
           override=False,
       )
@@ -261,6 +279,7 @@ class SequentialWriter:
             filetype_suffix=self._filetype_suffix,
             shard_lengths=split.shard_lengths,
             num_bytes=split.num_bytes,
+            file_format=self._file_format,
         )
     self._serializer = example_serializer.ExampleSerializer(
         self._ds_info.features.get_serialized_info()
@@ -289,6 +308,7 @@ class SequentialWriter:
           data_directory=self._data_dir,
           ds_name=self._ds_name,
           filetype_suffix=self._filetype_suffix,
+          file_format=self._file_format,
       )
     self._write_splits_metadata()
 
