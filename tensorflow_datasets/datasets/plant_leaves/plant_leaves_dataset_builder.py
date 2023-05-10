@@ -16,9 +16,7 @@
 """Healthy and unhealthy plant leaves dataset."""
 
 import os
-import re
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # File name prefix to label mapping.
@@ -75,27 +73,24 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     # Batch download for this dataset is broken, therefore images have to be
     # downloaded independently from a list of urls.
-    extract_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
+    archive_path = dl_manager.download(_DOWNLOAD_URL)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={'extract_path': extract_path}
+            gen_kwargs={'archive': dl_manager.iter_archive(archive_path)}
         )
     ]
 
-  def _generate_examples(self, extract_path):
+  def _generate_examples(self, archive):
     """Yields examples."""
-    for plant_species in tf.io.gfile.listdir(extract_path):
-        plant_species_path = os.path.join(extract_path, plant_species)
-        for plant_condition in tf.io.gfile.listdir(plant_species_path):
-            label = plant_species + " " + plant_condition
-            plant_condition_path = os.path.join(plant_species_path, plant_condition)
-            for original_fname in tf.io.gfile.listdir(plant_condition_path):
-                fpath = os.path.join(plant_condition_path, original_fname)
-                record = {
-                    "image": fpath,
-                    "image/filename": original_fname,
-                    "label": label,
-                }
-                yield original_fname, record
-
+    for filename, fobj in archive:
+        if not filename.endswith(".JPG"):
+            continue
+        fname_split = filename.split(os.path.sep)
+        label = fname_split[-3] + " " + fname_split[-2]
+        record = {
+            "image": fobj,
+            "image/filename": fname_split[-1],
+            "label": label
+        }
+        yield fname_split[-1], record
