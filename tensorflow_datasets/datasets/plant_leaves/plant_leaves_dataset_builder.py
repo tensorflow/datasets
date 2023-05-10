@@ -49,48 +49,48 @@ _DOWNLOAD_URL = "https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws
 
 
 class DownloadRetryLimitReachedError(Exception):
-  pass
+    pass
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
-  """Healthy and unhealthy plant leaves dataset."""
+    """Healthy and unhealthy plant leaves dataset."""
 
-  VERSION = tfds.core.Version("0.1.0")
+    VERSION = tfds.core.Version("0.1.0")
 
-  def _info(self):
-    labels = list(zip(*_LABEL_MAPPING))[1]
-    return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(names=labels),
-        }),
-        supervised_keys=("image", "label"),
-        homepage="https://data.mendeley.com/datasets/hb74ynkjcn/1",
-    )
-
-  def _split_generators(self, dl_manager):
-    """Returns SplitGenerators."""
-    # Batch download for this dataset is broken, therefore images have to be
-    # downloaded independently from a list of urls.
-    archive_path = dl_manager.download(_DOWNLOAD_URL)
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={'archive': dl_manager.iter_archive(archive_path)}
+    def _info(self):
+        labels = list(zip(*_LABEL_MAPPING))[1]
+        return self.dataset_info_from_configs(
+            features=tfds.features.FeaturesDict({
+                "image": tfds.features.Image(),
+                "image/filename": tfds.features.Text(),
+                "label": tfds.features.ClassLabel(names=labels),
+            }),
+            supervised_keys=("image", "label"),
+            homepage="https://data.mendeley.com/datasets/hb74ynkjcn/1",
         )
-    ]
 
-  def _generate_examples(self, archive):
-    """Yields examples."""
-    for filename, fobj in archive:
-        if not filename.endswith(".JPG"):
-            continue
-        fname_split = filename.split(os.path.sep)
-        label = fname_split[-3] + " " + fname_split[-2]
-        record = {
-            "image": fobj,
-            "image/filename": fname_split[-1],
-            "label": label
-        }
-        yield fname_split[-1], record
+    def _split_generators(self, dl_manager):
+        """Returns SplitGenerators."""
+        # Batch download for this dataset is broken, therefore images have to be
+        # downloaded independently from a list of urls.
+        archive_path = dl_manager.download(_DOWNLOAD_URL)
+        return [
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TRAIN,
+                gen_kwargs={'archive': dl_manager.iter_archive(archive_path)}
+            )
+        ]
+
+    def _generate_examples(self, archive):
+        """Yields examples."""
+        for filename, fobj in archive:
+            if not filename.endswith(".JPG"):
+                continue
+            fname_split = filename.split(os.path.sep)
+            label = fname_split[-3] + " " + fname_split[-2]
+            record = {
+                "image": fobj,
+                "image/filename": fname_split[-1],
+                "label": label
+            }
+            yield fname_split[-1], record
