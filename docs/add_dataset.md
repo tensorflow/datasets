@@ -294,8 +294,8 @@ for filename, fobj in dl_manager.iter_archive('path/to/archive.zip'):
 #### Specifying dataset splits
 
 If the dataset comes with pre-defined splits (e.g. `MNIST` has `train` and
-`test` splits), keep those. Otherwise, only specify a single `tfds.Split.TRAIN`
-split. Users can dynamically create their own subsplits with the
+`test` splits), keep those. Otherwise, only specify a single `all` split. Users
+can dynamically create their own subsplits with the
 [subsplit API](https://www.tensorflow.org/datasets/splits) (e.g.
 `split='train[80%:]'`).
 
