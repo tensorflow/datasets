@@ -265,7 +265,7 @@ def extract_snippets(
         continue
       count_by_pair[('', '')] += 1
 
-    yield key, (snippet, rarest_pair, index_to_pair)
+    yield key, (snippet, rarest_pair, index_to_pair)  # pytype: disable=bad-return-type  # container-simplification
 
 
 def _reverse_substitute_snippet(
