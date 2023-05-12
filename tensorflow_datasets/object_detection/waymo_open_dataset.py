@@ -263,9 +263,9 @@ def _generate_images_and_annotations(tf_record_file):
   """
   # Go through all frames
   dataset = tf.data.TFRecordDataset(tf_record_file, compression_type="")
-  for data in tfds.as_numpy(dataset):
+  for data in dataset:
     frame = open_dataset.Frame()
-    frame.ParseFromString(bytearray(data))  # pytype: disable=wrong-arg-types
+    frame.ParseFromString(data.numpy())
 
     image_and_annotation = {
         "context": {"name": frame.context.name},
