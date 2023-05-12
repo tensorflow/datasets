@@ -14,13 +14,8 @@
 # limitations under the License.
 
 """Public API of the proto package."""
-# pylint: disable=g-import-not-at-top,g-importing-member, import-outside-toplevel
 
-try:  # pylint: disable=g-statement-before-imports
-  from waymo_open_dataset import dataset_pb2 as waymo_dataset_pb2
-except ImportError:
-  # If original waymo proto is not found, fallback to the pre-generated proto
-  from tensorflow_datasets.proto import waymo_dataset_generated_pb2 as waymo_dataset_pb2  # pylint: disable=line-too-long
+from tensorflow_datasets.proto import waymo_dataset_generated_pb2 as waymo_dataset_pb2  # pylint: disable=line-too-long
 
 from tensorflow_datasets.proto import tf_example_generated_pb2 as tf_example_pb2
 from tensorflow_datasets.proto import tf_feature_generated_pb2 as tf_feature_pb2

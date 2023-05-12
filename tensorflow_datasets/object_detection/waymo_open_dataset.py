@@ -21,8 +21,7 @@ import os
 
 from absl import logging
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-from tensorflow_datasets.proto import waymo_dataset_pb2 as open_dataset
+from tensorflow_datasets.proto import waymo_dataset_generated_pb2 as waymo_dataset_pb2  # pylint: disable=line-too-long
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -175,18 +174,14 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     """
 
     # Training set
-    train_files = tf.io.gfile.glob(
-        os.path.join(
-            self.builder_config.cloud_bucket, "training/segment*camera*"
-        )
+    train_files = os.path.join(
+        self.builder_config.cloud_bucket, "training/segment*camera*"
     )
     logging.info("Train files: %s", train_files)
 
     # Validation set
-    validation_files = tf.io.gfile.glob(
-        os.path.join(
-            self.builder_config.cloud_bucket, "validation/segment*camera*"
-        )
+    validation_files = os.path.join(
+        self.builder_config.cloud_bucket, "validation/segment*camera*"
     )
     logging.info("Validation files: %s", validation_files)
 
@@ -194,23 +189,21 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "tf_record_files": train_files,
+                "tf_record_file_pattern": train_files,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "tf_record_files": validation_files,
+                "tf_record_file_pattern": validation_files,
             },
         ),
     ]
 
     # Testing set (Only available in Waymo Open Dataset v1.2)
     if self.builder_config.name == "v_1_2":
-      test_files = tf.io.gfile.glob(
-          os.path.join(
-              self.builder_config.cloud_bucket, "testing/segment*camera*"
-          )
+      test_files = os.path.join(
+          self.builder_config.cloud_bucket, "testing/segment*camera*"
       )
       logging.info("Testing files: %s", test_files)
 
@@ -218,83 +211,80 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,
               gen_kwargs={
-                  "tf_record_files": test_files,
+                  "tf_record_file_pattern": test_files,
               },
           )
       )
 
     return split_generators
 
-  def _build_pcollection(self, pipeline, tf_record_files):
+  def _build_pcollection(self, pipeline, tf_record_file_pattern):
     """Generate examples as dicts.
 
     Args:
       pipeline: Apache Beam pipeline.
-      tf_record_files: .tfrecord files.
+      tf_record_file_pattern: the file pattern for the tfrecord files.
 
     Returns:
       Dict of examples.
     """
     beam = tfds.core.lazy_imports.apache_beam
 
-    def _process_example(tf_record_file):
-      for image_and_annotation in _generate_images_and_annotations(
-          tf_record_file
-      ):
-        key = "%s:%s" % (
-            image_and_annotation["context"]["name"],
-            image_and_annotation["timestamp_micros"],
-        )
-        yield key, image_and_annotation
+    def _process_example(image_and_annotation):
+      key = "%s:%s" % (
+          image_and_annotation["context"]["name"],
+          image_and_annotation["timestamp_micros"],
+      )
+      yield key, image_and_annotation
 
     return (
-        pipeline | beam.Create(tf_record_files) | beam.FlatMap(_process_example)
+        pipeline
+        | self.read_tfrecord_beam(
+            tf_record_file_pattern,
+            coder=beam.coders.ProtoCoder(waymo_dataset_pb2.Frame),
+        )
+        | beam.FlatMap(_generate_image_and_annotation)
+        | beam.FlatMap(_process_example)
     )
 
 
-def _generate_images_and_annotations(tf_record_file):
-  """Yields the images and annotations from a given file.
+def _generate_image_and_annotation(frame: waymo_dataset_pb2.Frame):
+  """Yields the image and annotation from a given frame.
 
   Args:
-    tf_record_file: .tfrecord files.
+    frame: a frame
 
   Yields:
     Waymo images and annotations.
   """
-  # Go through all frames
-  dataset = tf.data.TFRecordDataset(tf_record_file, compression_type="")
-  for data in tfds.as_numpy(dataset):
-    frame = open_dataset.Frame()
-    frame.ParseFromString(bytearray(data))  # pytype: disable=wrong-arg-types
+  image_and_annotation = {
+      "context": {"name": frame.context.name},
+      "timestamp_micros": frame.timestamp_micros,
+  }
 
-    image_and_annotation = {
-        "context": {"name": frame.context.name},
-        "timestamp_micros": frame.timestamp_micros,
+  camera_calibration = {
+      calibration.name: calibration
+      for calibration in frame.context.camera_calibrations
+  }
+  camera_labels = {label.name: label for label in frame.camera_labels}
+
+  # Go through all 5 camera images in the frame
+  for frame_image in frame.images:
+    labels = None
+    if frame_image.name in camera_labels:
+      image_height = camera_calibration[frame_image.name].height
+      image_width = camera_calibration[frame_image.name].width
+      labels = _convert_labels(
+          camera_labels[frame_image.name], image_width, image_height
+      )
+
+    camera_name = waymo_dataset_pb2.CameraName.Name.Name(frame_image.name)
+    image_and_annotation["camera_" + camera_name] = {
+        "image": frame_image.image,
+        "labels": labels,
     }
 
-    camera_calibration = {
-        calibration.name: calibration
-        for calibration in frame.context.camera_calibrations
-    }
-    camera_labels = {label.name: label for label in frame.camera_labels}
-
-    # Go through all 5 camera images in the frame
-    for frame_image in frame.images:
-      labels = None
-      if frame_image.name in camera_labels:
-        image_height = camera_calibration[frame_image.name].height
-        image_width = camera_calibration[frame_image.name].width
-        labels = _convert_labels(
-            camera_labels[frame_image.name], image_width, image_height
-        )
-
-      camera_name = open_dataset.CameraName.Name.Name(frame_image.name)
-      image_and_annotation["camera_" + camera_name] = {
-          "image": frame_image.image,
-          "labels": labels,
-      }
-
-    yield image_and_annotation
+  yield image_and_annotation
 
 
 def _convert_labels(raw_labels, image_width, image_height):
