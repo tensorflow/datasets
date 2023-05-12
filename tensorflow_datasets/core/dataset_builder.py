@@ -1560,20 +1560,37 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     return filename.read_text(encoding=encoding)
 
   def read_tfrecord_as_dataset(
-      self, filenames: Union[str, Sequence[str]]
+      self,
+      filenames: str | Sequence[str],
+      compression_type: str | None = None,
+      num_parallel_reads: int | None = None,
   ) -> tf.data.Dataset:
     """Returns the dataset for the given tfrecord files and records the lineage."""
     if isinstance(filenames, str):
       filenames = [filenames]
+    if not filenames:
+      raise ValueError("No filenames given!")
     for filename in filenames:
       self.info.add_file_data_source_access(filename)
-    return tf.data.TFRecordDataset(filenames)
+
+    return tf.data.TFRecordDataset(
+        filenames=filenames,
+        compression_type=compression_type,
+        num_parallel_reads=num_parallel_reads,
+    )
 
   def read_tfrecord_as_examples(
-      self, filenames: Union[str, Sequence[str]]
+      self,
+      filenames: Union[str, Sequence[str]],
+      compression_type: str | None = None,
+      num_parallel_reads: int | None = None,
   ) -> Iterator[tf.train.Example]:
     """Returns tf.Examples from the given tfrecord files and records the lineage."""
-    raw_dataset = self.read_tfrecord_as_dataset(filenames)
+    raw_dataset = self.read_tfrecord_as_dataset(
+        filenames=filenames,
+        compression_type=compression_type,
+        num_parallel_reads=num_parallel_reads,
+    )
     for serialized_example in raw_dataset:
       example = tf.train.Example()
       example.ParseFromString(serialized_example.numpy())
