@@ -21,6 +21,7 @@ import pathlib
 from typing import Dict, Iterator, List, Optional
 from unittest import mock
 
+from absl.testing import parameterized
 from etils import epath
 import pytest
 
@@ -298,3 +299,24 @@ def test_download_only():
   ) as mock_download:
     assert not _build('dummy_dataset_no_generate --download_only')
     mock_download.assert_called_with({'file0': 'http://data.org/file1.zip'})
+
+
+@parameterized.parameters(
+    ('--manual_dir=/a/b', {'manual_dir': '/a/b'}),
+    ('--manual_dir=/a/b --add_name_to_manual_dir', {'manual_dir': '/a/b/x'}),
+    ('--extract_dir=/a/b', {'extract_dir': '/a/b'}),
+    ('--max_examples_per_split=42', {'max_examples_per_split': 42}),
+    ('--register_checksums', {'register_checksums': True}),
+    ('--force_checksums_validation', {'force_checksums_validation': True}),
+    ('--max_shard_size_mb=128', {'max_shard_size': 128 << 20}),
+    (
+        '--download_config="{\'max_shard_size\': 1234}"',
+        {'max_shard_size': 1234},
+    ),
+)
+def test_make_download_config(args: str, download_config_kwargs):
+  args = main._parse_flags(f'tfds build x {download_config_kwargs}'.split())
+  actual = build_lib._make_download_config(args, dataset_name='x')
+  # Ignore the beam runner
+  actual.replace(beam_runner=None)
+  assert actual == tfds.download.DownloadConfig(**download_config_kwargs)

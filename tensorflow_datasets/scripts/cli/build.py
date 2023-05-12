@@ -198,6 +198,9 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
           f'Available values: {format_values} (see `tfds.core.FileFormat`).'
       ),
   )
+  generation_group.add_argument(
+      '--max_shard_size_mb', type=int, help='The max shard size in megabytes.'
+  )
 
   publish_group = build_parser.add_argument_group(
       'Publishing',
@@ -572,8 +575,10 @@ def _make_download_config(
     manual_dir = os.path.join(manual_dir, dataset_name)
 
   kwargs = {}
+  if args.max_shard_size_mb:
+    kwargs['max_shard_size'] = args.max_shard_size_mb << 20
   if args.download_config:
-    kwargs = json.loads(args.download_config)
+    kwargs.update(json.loads(args.download_config))
 
   dl_config = tfds.download.DownloadConfig(
       extract_dir=args.extract_dir,
