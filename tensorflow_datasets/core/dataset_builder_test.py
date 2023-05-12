@@ -1098,7 +1098,11 @@ def test_read_tfrecord_as_dataset():
   builder = DummyDatasetWithConfigs()
   with mock.patch.object(tf.data, "TFRecordDataset") as mock_read:
     builder.read_tfrecord_as_dataset("/x/y")
-    mock_read.assert_called_once_with(["/x/y"])
+    mock_read.assert_called_once_with(
+        filenames=["/x/y"],
+        compression_type=None,
+        num_parallel_reads=None,
+    )
     info_proto = builder.info.as_proto
     assert len(info_proto.data_source_accesses) == 1
     assert info_proto.data_source_accesses[0].file_system.path == "/x/y"
