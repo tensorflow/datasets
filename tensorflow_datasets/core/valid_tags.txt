@@ -245,7 +245,7 @@ ml.task.machine-translation # Relates to Machine Translation, a machine learning
 ml.task.named-entity-recognition # Relates to Named Entity Recognition, a machine learning task.
 ml.task.natural-language-inference # Relates to Natural Language Inference, a machine learning task.
 ml.task.natural-language-understanding # Relates to Natural Language Understanding, a machine learning task.
-ml.task.non-verb-aggreement # Relates to Non Verb Aggreement, a machine learning task.
+ml.task.noun-verb-agreement # Relates to Noun-Verb Agreement, a machine learning task.
 ml.task.object-detection # Relates to Object Detection, a machine learning task.
 ml.task.open-domain-question-answering # Relates to Open Domain Question Answering, a machine learning task.
 ml.task.out-of-distribution-detection # Relates to Out Of Distribution Detection, a machine learning task.
