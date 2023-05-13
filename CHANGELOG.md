@@ -613,7 +613,7 @@ migrated all our internal datasets. Please, migrate accordingly:
 
 -   [API] `tfds.ImageFolder` and `tfds.TranslateFolder` to easily create custom
     datasets with your custom data.
--   [API] `tfds.ReadConfig(input_context=)` to shard dataset, for better
+-   [API] `tfds.ReadConfig(input_context=)` to shared dataset, for better
     multi-worker compatibility (#1426).
 -   [API] The default `data_dir` can be controlled by the `TFDS_DATA_DIR`
     environment variable.
@@ -699,7 +699,7 @@ migrated all our internal datasets. Please, migrate accordingly:
 
 ### Changed
 
--   New `image_classification` section. Some datasets have been move there from
+-   New `image_classification` section. Some datasets have been moved there from
     `images`.
 -   `DownloadConfig` does not append the dataset name anymore (manual data
     should be in `<manual_dir>/` instead of `<manual_dir>/<dataset_name>/`).
