@@ -244,16 +244,53 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`abstract_reasoning`](abstract_reasoning.md)
 *   [`bigearthnet`](bigearthnet.md)
 *   [`caltech101`](caltech101.md)
+*   [`caltech_birds2010`](caltech_birds2010.md)
+*   [`caltech_birds2011`](caltech_birds2011.md)
+*   [`cars196`](cars196.md)
+*   [`cassava`](cassava.md)
+*   [`cats_vs_dogs`](cats_vs_dogs.md)
 *   [`celeb_a`](celeb_a.md)
+*   [`chexpert`](chexpert.md)
+*   [`cifar10`](cifar10.md)
+*   [`cifar100`](cifar100.md)
+*   [`cifar100_n`](cifar100_n.md)
+*   [`cifar10_1`](cifar10_1.md)
+*   [`cifar10_corrupted`](cifar10_corrupted.md)
+*   [`cifar10_n`](cifar10_n.md)
+*   [`citrus_leaves`](citrus_leaves.md)
+*   [`cmaterdb`](cmaterdb.md)
+*   [`colorectal_histology`](colorectal_histology.md)
+*   [`colorectal_histology_large`](colorectal_histology_large.md)
+*   [`controlled_noisy_web_labels`](controlled_noisy_web_labels.md)
+*   [`curated_breast_imaging_ddsm`](curated_breast_imaging_ddsm.md)
+*   [`cycle_gan`](cycle_gan.md)
+*   [`deep_weeds`](deep_weeds.md)
+*   [`diabetic_retinopathy_detection`](diabetic_retinopathy_detection.md)
+*   [`dmlab`](dmlab.md)
+*   [`domainnet`](domainnet.md)
+*   [`dtd`](dtd.md)
+*   [`emnist`](emnist.md)
+*   [`eurosat`](eurosat.md)
+*   [`fashion_mnist`](fashion_mnist.md)
 *   [`flic`](flic.md)
+*   [`food101`](food101.md)
+*   [`geirhos_conflict_stimuli`](geirhos_conflict_stimuli.md)
+*   [`horses_or_humans`](horses_or_humans.md)
+*   [`i_naturalist2017`](i_naturalist2017.md)
+*   [`i_naturalist2018`](i_naturalist2018.md)
+*   [`i_naturalist2021`](i_naturalist2021.md)
 *   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet_resized`](imagenet_resized.md)
 *   [`imagenet_sketch`](imagenet_sketch.md)
 *   [`imagenette`](imagenette.md)
 *   [`imagewang`](imagewang.md)
 *   [`kitti`](kitti.md)
+*   [`kmnist`](kmnist.md)
 *   [`lvis`](lvis.md)
 *   [`malaria`](malaria.md)
+*   [`mnist`](mnist.md)
+*   [`mnist_corrupted`](mnist_corrupted.md)
+*   [`omniglot`](omniglot.md)
 *   [`open_images_v4`](open_images_v4.md)
 *   [`oxford_flowers102`](oxford_flowers102.md)
 *   [`oxford_iiit_pet`](oxford_iiit_pet.md)
@@ -267,6 +304,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`stl10`](stl10.md)
 *   [`sun397`](sun397.md)
 *   [`svhn_cropped`](svhn_cropped.md)
+*   [`uc_merced`](uc_merced.md)
+*   [`visual_domain_decathlon`](visual_domain_decathlon.md)
 
 ### `Image clustering`
 
@@ -312,48 +351,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`kitti`](kitti.md)
 *   [`scene_parse150`](scene_parse150.md)
 
-### `Image classification`
-
-*   [`caltech_birds2010`](caltech_birds2010.md)
-*   [`caltech_birds2011`](caltech_birds2011.md)
-*   [`cars196`](cars196.md)
-*   [`cassava`](cassava.md)
-*   [`cats_vs_dogs`](cats_vs_dogs.md)
-*   [`chexpert`](chexpert.md)
-*   [`cifar10`](cifar10.md)
-*   [`cifar100`](cifar100.md)
-*   [`cifar100_n`](cifar100_n.md)
-*   [`cifar10_1`](cifar10_1.md)
-*   [`cifar10_corrupted`](cifar10_corrupted.md)
-*   [`cifar10_n`](cifar10_n.md)
-*   [`citrus_leaves`](citrus_leaves.md)
-*   [`cmaterdb`](cmaterdb.md)
-*   [`colorectal_histology`](colorectal_histology.md)
-*   [`colorectal_histology_large`](colorectal_histology_large.md)
-*   [`controlled_noisy_web_labels`](controlled_noisy_web_labels.md)
-*   [`curated_breast_imaging_ddsm`](curated_breast_imaging_ddsm.md)
-*   [`cycle_gan`](cycle_gan.md)
-*   [`deep_weeds`](deep_weeds.md)
-*   [`diabetic_retinopathy_detection`](diabetic_retinopathy_detection.md)
-*   [`dmlab`](dmlab.md)
-*   [`domainnet`](domainnet.md)
-*   [`dtd`](dtd.md)
-*   [`emnist`](emnist.md)
-*   [`eurosat`](eurosat.md)
-*   [`fashion_mnist`](fashion_mnist.md)
-*   [`food101`](food101.md)
-*   [`geirhos_conflict_stimuli`](geirhos_conflict_stimuli.md)
-*   [`horses_or_humans`](horses_or_humans.md)
-*   [`i_naturalist2017`](i_naturalist2017.md)
-*   [`i_naturalist2018`](i_naturalist2018.md)
-*   [`i_naturalist2021`](i_naturalist2021.md)
-*   [`kmnist`](kmnist.md)
-*   [`mnist`](mnist.md)
-*   [`mnist_corrupted`](mnist_corrupted.md)
-*   [`omniglot`](omniglot.md)
-*   [`uc_merced`](uc_merced.md)
-*   [`visual_domain_decathlon`](visual_domain_decathlon.md)
-
 ### `Instance segmentation`
 
 *   [`cityscapes`](cityscapes.md)
@@ -363,11 +360,6 @@ for ex in tfds.load('cifar10', split='train'):
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Language modeling`
-
-*   [`databricks_dolly`](databricks_dolly.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-### `Language modelling`
 
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
@@ -495,15 +487,12 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Object detection`
 
+*   [`coco`](coco.md)
+*   [`coco_captions`](coco_captions.md)
 *   [`flic`](flic.md)
 *   [`kitti`](kitti.md)
 *   [`lvis`](lvis.md)
 *   [`open_images_v4`](open_images_v4.md)
-
-### `Object detection`
-
-*   [`coco`](coco.md)
-*   [`coco_captions`](coco_captions.md)
 *   [`voc`](voc.md)
 *   [`waymo_open_dataset`](waymo_open_dataset.md)
 *   [`wider_face`](wider_face.md)
@@ -525,6 +514,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
+*   [`coqa`](coqa.md)
+*   [`cosmos_qa`](cosmos_qa.md)
 *   [`databricks_dolly`](databricks_dolly.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`math_dataset`](math_dataset.md)
@@ -541,19 +532,14 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`squad`](squad.md)
 *   [`story_cloze`](story_cloze.md)
 *   [`trivia_qa`](trivia_qa.md)
+*   [`tydi_qa`](tydi_qa.md)
+*   [`web_questions`](web_questions.md)
+*   [`xquad`](xquad.md)
 
 ### `Question generation`
 
 *   [`natural_questions`](natural_questions.md)
 *   [`trivia_qa`](trivia_qa.md)
-
-### `Question answering`
-
-*   [`coqa`](coqa.md)
-*   [`cosmos_qa`](cosmos_qa.md)
-*   [`tydi_qa`](tydi_qa.md)
-*   [`web_questions`](web_questions.md)
-*   [`xquad`](xquad.md)
 
 ### `Ranking`
 
@@ -641,11 +627,6 @@ for ex in tfds.load('cifar10', split='train'):
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Sequence to sequence language modeling`
-
-*   [`databricks_dolly`](databricks_dolly.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-### `Sequence to sequence language modelling`
 
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
@@ -921,6 +902,10 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`story_cloze`](story_cloze.md)
 *   [`trivia_qa`](trivia_qa.md)
 
+### `Text simplification`
+
+*   [`wiki_auto`](wiki_auto.md)
+
 ### `Text summarization`
 
 *   [`aeslc`](aeslc.md)
@@ -934,10 +919,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`reddit_tifu`](reddit_tifu.md)
 *   [`samsum`](samsum.md)
 *   [`scientific_papers`](scientific_papers.md)
-
-### `Text simplification`
-
-*   [`wiki_auto`](wiki_auto.md)
 
 ### `Time series`
 
