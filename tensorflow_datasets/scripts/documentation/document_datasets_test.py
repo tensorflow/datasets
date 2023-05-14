@@ -16,6 +16,8 @@
 """Test of `document_datasets.py`."""
 
 import functools
+from typing import Set
+from unittest import mock
 
 import pytest
 
@@ -107,3 +109,24 @@ def test_with_config_shared_version(document_single_builder_fn):  # pylint: disa
   doc = document_single_builder_fn(DummyDatasetConfigsSharedVersion.name)
   assert 'Minimal DatasetBuilder.' in doc.content  # Shared description.
   assert 'Config description:' not in doc.content  # No config description.
+
+
+@pytest.mark.parametrize(
+    'sections,expected',
+    [
+        (set(), set()),
+        ({'a_b'}, {'A b'}),
+        ({'a-b'}, {'A b'}),
+        ({'c modelling'}, {'C modeling'}),
+        ({'a_b', 'c modelling'}, {'A b', 'C modeling'}),
+    ],
+)
+def test_builder_to_document_sections(sections: Set[str], expected: Set[str]):
+  mock_builder = mock.MagicMock()
+  instance = document_datasets.BuilderToDocument(
+      sections=sections,
+      namespace=None,
+      builder=mock_builder,
+      config_builders=[],
+  )
+  assert instance.sections == expected

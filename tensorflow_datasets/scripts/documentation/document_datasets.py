@@ -18,11 +18,10 @@
 Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 """
 
-import collections
 from concurrent import futures
 import dataclasses
 import functools
-from typing import Any, Dict, Iterator, List, Optional, Text, Type
+from typing import Any, Iterator, List, Optional, Set, Type
 
 from absl import logging
 import tensorflow_datasets as tfds
@@ -35,6 +34,10 @@ import tqdm
 _WORKER_COUNT_DATASETS = 50
 _WORKER_COUNT_CONFIGS = 20
 
+# In the section headers we have different spellings of the same word. This
+# mapping is used to convert to a single spelling.
+_SECTION_WORD_MAPPING = {'modelling': 'modeling'}
+
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
 _BUILDER_BLACKLIST = [
     'wmt_translate',
@@ -43,17 +46,28 @@ _BUILDER_BLACKLIST = [
 # pylint: disable=logging-format-interpolation
 
 
-@dataclasses.dataclass(eq=False, frozen=True)
+def _format_section(section: str) -> str:
+  section = section.replace('_', ' ').replace('-', ' ').lower()
+  for orig_word, new_word in _SECTION_WORD_MAPPING.items():
+    section = section.replace(orig_word, new_word)
+  return section.capitalize()
+
+
+@dataclasses.dataclass(eq=False)
 class BuilderToDocument:
   """Structure containing metadata."""
 
-  sections: List[Text]
+  sections: Set[str]
   namespace: Optional[str]
   builder: tfds.core.DatasetBuilder
   config_builders: List[tfds.core.DatasetBuilder]
 
+  def __post_init__(self):
+    # Make sure section names are formatted correctly.
+    self.sections = {_format_section(section) for section in self.sections}
 
-@dataclasses.dataclass(eq=False, frozen=True)
+
+@dataclasses.dataclass(eq=False)
 class BuilderDocumentation:
   """Documentation output of a single builder.
 
@@ -71,9 +85,13 @@ class BuilderDocumentation:
   name: str
   filestem: str
   content: str
-  sections: List[Text]
+  sections: Set[str]
   is_manual: bool
   is_nightly: bool
+
+  def __post_init__(self):
+    # Make sure section names are formatted correctly.
+    self.sections = {_format_section(section) for section in self.sections}
 
 
 @dataclasses.dataclass(eq=False, frozen=True)
@@ -146,7 +164,7 @@ def _load_builder_from_location(
   else:
     config_builders = []
   return BuilderToDocument(
-      sections=[dataset_name.namespace],
+      sections={dataset_name.namespace},
       namespace=dataset_name.namespace,
       builder=builder,
       config_builders=config_builders,
@@ -222,7 +240,7 @@ def _load_builder_from_code(
     )
 
 
-def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> List[Text]:
+def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> Set[str]:
   """Returns the sections associated with the builder."""
   module_parts = builder_cls.__module__.split('.')
   if module_parts[0] != 'tensorflow_datasets':
@@ -230,20 +248,19 @@ def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> List[Text]:
   # Legacy datasets: a single section, inferred from module path.
   _, category, *_ = module_parts  # tfds.<category>.xyz
   if category != 'datasets':
-    return [category]
+    return {category}
   # Sections are inferred from tags.
   ds_metadata = builder_cls.get_metadata()
   if ds_metadata.tags:
-    sections = []
+    sections = set()
     for tag in ds_metadata.tags:
       # Ignore languages until we have a better way to display them.
       if tag.startswith('content.language'):
         continue
       section = tag.rsplit('.')[-1]
-      section = section.replace('-', ' ')
-      sections.append(section)
+      sections.add(section)
     return sections
-  return ['uncategorized']
+  return {'uncategorized'}
 
 
 def _document_single_collection(
@@ -394,20 +411,3 @@ def iter_documentation_builders(
         tqdm.tqdm.write(f'Documentation generated for {builder_doc.name}...')
         yield builder_doc
   print('All builder documentations generated!')
-
-
-def make_category_to_builders_dict() -> (
-    Dict[str, List[tfds.core.DatasetBuilder]]
-):
-  """Loads all builders with their associated category."""
-  datasets = _all_tfds_datasets()
-  print(f'Creating the vanilla builders for {len(datasets)} datasets...')
-  with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_DATASETS) as tpool:
-    builders = tpool.map(tfds.builder, datasets)
-
-  category_to_builders = collections.defaultdict(list)
-  for builder in builders:
-    sections = _get_sections(type(builder))
-    for section in sections:
-      category_to_builders[section].append(builder)
-  return category_to_builders
