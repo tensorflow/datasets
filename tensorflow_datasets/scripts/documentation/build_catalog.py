@@ -220,11 +220,9 @@ def _save_table_of_content(
   # All builder documented, save the table of content
   for section, builder_docs in sorted(section_to_builder_docs.items()):
     builder_docs = sorted(builder_docs, key=lambda doc: doc.name)
-    # `object_detection` -> `Object detection`
-    section_str = section.replace('_', ' ').capitalize()
 
     # Add `_toc.yaml` section
-    sec_dict = {'title': section_str, 'section': []}
+    sec_dict = {'title': section, 'section': []}
     for doc in builder_docs:
       sidebar_item = {
           'path': os.path.join(toc_relative_path, doc.filestem),
@@ -236,7 +234,7 @@ def _save_table_of_content(
     toc_yaml['toc'].append(sec_dict)
 
     # Add `overview.md` section
-    toc_overview.append(_create_datasets_section_toc(section_str, builder_docs))
+    toc_overview.append(_create_datasets_section_toc(section, builder_docs))
 
   # Write the `overview.md` page
   index_str = index_template.read_text().format(toc='\n'.join(toc_overview))
