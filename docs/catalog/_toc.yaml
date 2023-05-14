@@ -357,10 +357,76 @@ toc:
     title: bigearthnet
   - path: /datasets/catalog/caltech101
     title: caltech101
+  - path: /datasets/catalog/caltech_birds2010
+    title: caltech_birds2010
+  - path: /datasets/catalog/caltech_birds2011
+    title: caltech_birds2011
+  - path: /datasets/catalog/cars196
+    title: cars196
+  - path: /datasets/catalog/cassava
+    title: cassava
+  - path: /datasets/catalog/cats_vs_dogs
+    title: cats_vs_dogs
   - path: /datasets/catalog/celeb_a
     title: celeb_a
+  - path: /datasets/catalog/chexpert
+    title: chexpert (manual)
+  - path: /datasets/catalog/cifar10
+    title: cifar10
+  - path: /datasets/catalog/cifar100
+    title: cifar100
+  - path: /datasets/catalog/cifar100_n
+    title: cifar100_n (manual)
+  - path: /datasets/catalog/cifar10_1
+    title: cifar10_1
+  - path: /datasets/catalog/cifar10_corrupted
+    title: cifar10_corrupted
+  - path: /datasets/catalog/cifar10_n
+    title: cifar10_n (manual)
+  - path: /datasets/catalog/citrus_leaves
+    title: citrus_leaves
+  - path: /datasets/catalog/cmaterdb
+    title: cmaterdb
+  - path: /datasets/catalog/colorectal_histology
+    title: colorectal_histology
+  - path: /datasets/catalog/colorectal_histology_large
+    title: colorectal_histology_large
+  - path: /datasets/catalog/controlled_noisy_web_labels
+    title: controlled_noisy_web_labels (manual)
+  - path: /datasets/catalog/curated_breast_imaging_ddsm
+    title: curated_breast_imaging_ddsm (manual)
+  - path: /datasets/catalog/cycle_gan
+    title: cycle_gan
+  - path: /datasets/catalog/deep_weeds
+    title: deep_weeds
+  - path: /datasets/catalog/diabetic_retinopathy_detection
+    title: diabetic_retinopathy_detection (manual)
+  - path: /datasets/catalog/dmlab
+    title: dmlab
+  - path: /datasets/catalog/domainnet
+    title: domainnet
+  - path: /datasets/catalog/dtd
+    title: dtd
+  - path: /datasets/catalog/emnist
+    title: emnist
+  - path: /datasets/catalog/eurosat
+    title: eurosat
+  - path: /datasets/catalog/fashion_mnist
+    title: fashion_mnist
   - path: /datasets/catalog/flic
     title: flic
+  - path: /datasets/catalog/food101
+    title: food101
+  - path: /datasets/catalog/geirhos_conflict_stimuli
+    title: geirhos_conflict_stimuli
+  - path: /datasets/catalog/horses_or_humans
+    title: horses_or_humans
+  - path: /datasets/catalog/i_naturalist2017
+    title: i_naturalist2017
+  - path: /datasets/catalog/i_naturalist2018
+    title: i_naturalist2018
+  - path: /datasets/catalog/i_naturalist2021
+    title: i_naturalist2021
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet_resized
@@ -373,10 +439,18 @@ toc:
     title: imagewang
   - path: /datasets/catalog/kitti
     title: kitti
+  - path: /datasets/catalog/kmnist
+    title: kmnist
   - path: /datasets/catalog/lvis
     title: lvis
   - path: /datasets/catalog/malaria
     title: malaria
+  - path: /datasets/catalog/mnist
+    title: mnist
+  - path: /datasets/catalog/mnist_corrupted
+    title: mnist_corrupted
+  - path: /datasets/catalog/omniglot
+    title: omniglot
   - path: /datasets/catalog/open_images_v4
     title: open_images_v4
   - path: /datasets/catalog/oxford_flowers102
@@ -403,6 +477,10 @@ toc:
     title: sun397
   - path: /datasets/catalog/svhn_cropped
     title: svhn_cropped
+  - path: /datasets/catalog/uc_merced
+    title: uc_merced
+  - path: /datasets/catalog/visual_domain_decathlon
+    title: visual_domain_decathlon
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -468,86 +546,6 @@ toc:
     title: scene_parse150
   title: Image to image translation
 - section:
-  - path: /datasets/catalog/caltech_birds2010
-    title: caltech_birds2010
-  - path: /datasets/catalog/caltech_birds2011
-    title: caltech_birds2011
-  - path: /datasets/catalog/cars196
-    title: cars196
-  - path: /datasets/catalog/cassava
-    title: cassava
-  - path: /datasets/catalog/cats_vs_dogs
-    title: cats_vs_dogs
-  - path: /datasets/catalog/chexpert
-    title: chexpert (manual)
-  - path: /datasets/catalog/cifar10
-    title: cifar10
-  - path: /datasets/catalog/cifar100
-    title: cifar100
-  - path: /datasets/catalog/cifar100_n
-    title: cifar100_n (manual)
-  - path: /datasets/catalog/cifar10_1
-    title: cifar10_1
-  - path: /datasets/catalog/cifar10_corrupted
-    title: cifar10_corrupted
-  - path: /datasets/catalog/cifar10_n
-    title: cifar10_n (manual)
-  - path: /datasets/catalog/citrus_leaves
-    title: citrus_leaves
-  - path: /datasets/catalog/cmaterdb
-    title: cmaterdb
-  - path: /datasets/catalog/colorectal_histology
-    title: colorectal_histology
-  - path: /datasets/catalog/colorectal_histology_large
-    title: colorectal_histology_large
-  - path: /datasets/catalog/controlled_noisy_web_labels
-    title: controlled_noisy_web_labels (manual)
-  - path: /datasets/catalog/curated_breast_imaging_ddsm
-    title: curated_breast_imaging_ddsm (manual)
-  - path: /datasets/catalog/cycle_gan
-    title: cycle_gan
-  - path: /datasets/catalog/deep_weeds
-    title: deep_weeds
-  - path: /datasets/catalog/diabetic_retinopathy_detection
-    title: diabetic_retinopathy_detection (manual)
-  - path: /datasets/catalog/dmlab
-    title: dmlab
-  - path: /datasets/catalog/domainnet
-    title: domainnet
-  - path: /datasets/catalog/dtd
-    title: dtd
-  - path: /datasets/catalog/emnist
-    title: emnist
-  - path: /datasets/catalog/eurosat
-    title: eurosat
-  - path: /datasets/catalog/fashion_mnist
-    title: fashion_mnist
-  - path: /datasets/catalog/food101
-    title: food101
-  - path: /datasets/catalog/geirhos_conflict_stimuli
-    title: geirhos_conflict_stimuli
-  - path: /datasets/catalog/horses_or_humans
-    title: horses_or_humans
-  - path: /datasets/catalog/i_naturalist2017
-    title: i_naturalist2017
-  - path: /datasets/catalog/i_naturalist2018
-    title: i_naturalist2018
-  - path: /datasets/catalog/i_naturalist2021
-    title: i_naturalist2021
-  - path: /datasets/catalog/kmnist
-    title: kmnist
-  - path: /datasets/catalog/mnist
-    title: mnist
-  - path: /datasets/catalog/mnist_corrupted
-    title: mnist_corrupted
-  - path: /datasets/catalog/omniglot
-    title: omniglot
-  - path: /datasets/catalog/uc_merced
-    title: uc_merced
-  - path: /datasets/catalog/visual_domain_decathlon
-    title: visual_domain_decathlon
-  title: Image classification
-- section:
   - path: /datasets/catalog/cityscapes
     title: cityscapes (manual)
   - path: /datasets/catalog/lvis
@@ -558,11 +556,6 @@ toc:
     status: nightly
     title: segment_anything (manual)
   title: Instance segmentation
-- section:
-  - path: /datasets/catalog/databricks_dolly
-    status: nightly
-    title: databricks_dolly
-  title: Language modeling
 - section:
   - path: /datasets/catalog/big_patent
     title: big_patent
@@ -603,7 +596,7 @@ toc:
     title: squad
   - path: /datasets/catalog/tedlium
     title: tedlium
-  title: Language modelling
+  title: Language modeling
 - section:
   - path: /datasets/catalog/mlqa
     title: mlqa
@@ -781,6 +774,10 @@ toc:
     title: glove100_angular
   title: Nearest neighbors
 - section:
+  - path: /datasets/catalog/coco
+    title: coco
+  - path: /datasets/catalog/coco_captions
+    title: coco_captions
   - path: /datasets/catalog/flic
     title: flic
   - path: /datasets/catalog/kitti
@@ -789,12 +786,6 @@ toc:
     title: lvis
   - path: /datasets/catalog/open_images_v4
     title: open_images_v4
-  title: Object detection
-- section:
-  - path: /datasets/catalog/coco
-    title: coco
-  - path: /datasets/catalog/coco_captions
-    title: coco_captions
   - path: /datasets/catalog/voc
     title: voc
   - path: /datasets/catalog/waymo_open_dataset
@@ -824,6 +815,10 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/coqa
+    title: coqa
+  - path: /datasets/catalog/cosmos_qa
+    title: cosmos_qa
   - path: /datasets/catalog/databricks_dolly
     status: nightly
     title: databricks_dolly
@@ -855,18 +850,6 @@ toc:
     title: story_cloze (manual)
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
-  title: Question answering
-- section:
-  - path: /datasets/catalog/natural_questions
-    title: natural_questions
-  - path: /datasets/catalog/trivia_qa
-    title: trivia_qa
-  title: Question generation
-- section:
-  - path: /datasets/catalog/coqa
-    title: coqa
-  - path: /datasets/catalog/cosmos_qa
-    title: cosmos_qa
   - path: /datasets/catalog/tydi_qa
     title: tydi_qa
   - path: /datasets/catalog/web_questions
@@ -874,6 +857,12 @@ toc:
   - path: /datasets/catalog/xquad
     title: xquad
   title: Question answering
+- section:
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
+  title: Question generation
 - section:
   - path: /datasets/catalog/istella
     title: istella
@@ -995,11 +984,6 @@ toc:
     title: databricks_dolly
   title: Sequence modeling
 - section:
-  - path: /datasets/catalog/databricks_dolly
-    status: nightly
-    title: databricks_dolly
-  title: Sequence to sequence language modeling
-- section:
   - path: /datasets/catalog/big_patent
     title: big_patent
   - path: /datasets/catalog/billsum
@@ -1019,7 +1003,7 @@ toc:
     title: samsum (manual)
   - path: /datasets/catalog/snli
     title: snli
-  title: Sequence to sequence language modelling
+  title: Sequence to sequence language modeling
 - section:
   - path: /datasets/catalog/librispeech
     title: librispeech
@@ -1502,6 +1486,10 @@ toc:
     title: trivia_qa
   title: Text generation
 - section:
+  - path: /datasets/catalog/wiki_auto
+    title: wiki_auto
+  title: Text simplification
+- section:
   - path: /datasets/catalog/aeslc
     title: aeslc
   - path: /datasets/catalog/big_patent
@@ -1524,10 +1512,6 @@ toc:
   - path: /datasets/catalog/scientific_papers
     title: scientific_papers
   title: Text summarization
-- section:
-  - path: /datasets/catalog/wiki_auto
-    title: wiki_auto
-  title: Text simplification
 - section:
   - path: /datasets/catalog/robomimic_mg
     title: robomimic_mg
