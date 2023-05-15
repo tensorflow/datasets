@@ -162,6 +162,14 @@ toc:
     title: xtreme_pos
   title: Dependency parsing
 - section:
+  - path: /datasets/catalog/bot_adversarial_dialogue
+    status: nightly
+    title: bot_adversarial_dialogue
+  title: Dialog act labeling
+- section:
+  - path: /datasets/catalog/bot_adversarial_dialogue
+    status: nightly
+    title: bot_adversarial_dialogue
   - path: /datasets/catalog/databricks_dolly
     status: nightly
     title: databricks_dolly
@@ -598,6 +606,11 @@ toc:
     title: tedlium
   title: Language modeling
 - section:
+  - path: /datasets/catalog/bot_adversarial_dialogue
+    status: nightly
+    title: bot_adversarial_dialogue
+  title: Linguistic acceptability
+- section:
   - path: /datasets/catalog/mlqa
     title: mlqa
   - path: /datasets/catalog/opus
@@ -616,6 +629,9 @@ toc:
     title: booksum (manual)
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/bot_adversarial_dialogue
+    status: nightly
+    title: bot_adversarial_dialogue
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/imdb_reviews
@@ -1137,6 +1153,9 @@ toc:
     title: booksum (manual)
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/bot_adversarial_dialogue
+    status: nightly
+    title: bot_adversarial_dialogue
   - path: /datasets/catalog/bucc
     title: bucc
   - path: /datasets/catalog/c4
@@ -1411,6 +1430,9 @@ toc:
     title: ag_news_subset
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/bot_adversarial_dialogue
+    status: nightly
+    title: bot_adversarial_dialogue
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/natural_instructions
@@ -1425,6 +1447,9 @@ toc:
     title: trec
   title: Text classification
 - section:
+  - path: /datasets/catalog/bot_adversarial_dialogue
+    status: nightly
+    title: bot_adversarial_dialogue
   - path: /datasets/catalog/real_toxicity_prompts
     status: nightly
     title: real_toxicity_prompts
