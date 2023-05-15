@@ -132,8 +132,15 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`universal_dependencies`](universal_dependencies.md)
 *   [`xtreme_pos`](xtreme_pos.md)
 
+### `Dialog act labeling`
+
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Dialogue`
 
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`databricks_dolly`](databricks_dolly.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
@@ -382,6 +389,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`squad`](squad.md)
 *   [`tedlium`](tedlium.md)
 
+### `Linguistic acceptability`
+
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Machine translation`
 
 *   [`mlqa`](mlqa.md)
@@ -395,6 +407,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`kitti`](kitti.md)
@@ -719,6 +733,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`blimp`](blimp.md)
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`bucc`](bucc.md)
 *   [`c4`](c4.md)
 *   [`c4_wsrs`](c4_wsrs.md)
@@ -859,6 +875,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`bool_q`](bool_q.md)
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`natural_instructions`](natural_instructions.md)
 *   [`paws_wiki`](paws_wiki.md)
@@ -868,6 +886,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Text classification toxicity prediction`
 
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`real_toxicity_prompts`](real_toxicity_prompts.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
