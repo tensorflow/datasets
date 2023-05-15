@@ -1,0 +1,8 @@
+content.data-type.dialogue # Contains dialogue data.
+content.data-type.text # Contains text data.
+content.language.en # Contains text in language English / en.
+content.monolingual # Contains text in 1 natural language.
+ml.task.dialog-act-labeling # Relates to Dialog Act Labeling, a machine learning task.
+ml.task.linguistic-acceptability # Relates to Linguistic Acceptability, a machine learning task.
+ml.task.text-classification # Relates to Text Classification, a machine learning task.
+ml.task.text-classification-toxicity-prediction # Relates to Text Classification Toxicity Prediction, a machine learning task.
