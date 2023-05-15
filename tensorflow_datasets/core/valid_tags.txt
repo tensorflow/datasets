@@ -242,6 +242,7 @@ ml.task.language-modelling # Relates to Language Modelling, a machine learning t
 ml.task.lemmatization # Relates to Lemmatization, a machine learning task.
 ml.task.linguistic-acceptability # Relates to Linguistic Acceptability, a machine learning task.
 ml.task.machine-translation # Relates to Machine Translation, a machine learning task.
+ml.task.multi-turn-dialogue-comprehension # Relates to Multi-Turn Dialogue Comprehension, a machine learning task.
 ml.task.named-entity-recognition # Relates to Named Entity Recognition, a machine learning task.
 ml.task.natural-language-inference # Relates to Natural Language Inference, a machine learning task.
 ml.task.natural-language-understanding # Relates to Natural Language Understanding, a machine learning task.
