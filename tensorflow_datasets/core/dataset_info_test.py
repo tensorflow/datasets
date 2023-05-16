@@ -594,7 +594,7 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     The MNIST database of handwritten digits.
     """,
     homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
-    data_path='%s',
+    data_dir='%s',
     file_format=tfrecord,
     download_size=1.95 KiB,
     dataset_size=11.06 MiB,
