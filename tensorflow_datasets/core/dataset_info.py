@@ -797,7 +797,7 @@ class DatasetInfo(object):
         ("config_description", config_description),
         ("config_tags", config_tags),
         ("homepage", repr(self.homepage)),
-        ("data_path", repr(self.data_dir)),
+        ("data_dir", repr(self.data_dir)),
         ("file_format", file_format_str),
         ("download_size", self.download_size),
         ("dataset_size", self.dataset_size),
