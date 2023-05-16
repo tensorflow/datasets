@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ from tensorflow_datasets.robotics.mt_opt import mt_opt
 
 class MtOptTestRlds(tfds.testing.DatasetBuilderTestCase):
   """Tests for mt_opt dataset."""
+
   DATASET_CLASS = mt_opt.MtOpt
   SPLITS = {'train': 2}
 
@@ -37,6 +38,7 @@ class MtOptTestRlds(tfds.testing.DatasetBuilderTestCase):
 
 class MtOptTestSd(tfds.testing.DatasetBuilderTestCase):
   """Tests for mt_opt dataset."""
+
   DATASET_CLASS = mt_opt.MtOpt
   SPLITS = {'train': 2, 'test': 2}
 

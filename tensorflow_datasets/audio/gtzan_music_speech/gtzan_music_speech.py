@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import os
 import re
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -69,7 +69,8 @@ class GTZANMusicSpeech(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"path": path}),
+            name=tfds.Split.TRAIN, gen_kwargs={"path": path}
+        ),
     ]
 
   def _generate_examples(self, path):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,5 +52,5 @@ class WmtT2tTranslate(wmt.WmtTranslate):
     return {
         tfds.Split.TRAIN: ["europarl_v7", "commoncrawl", "newscommentary_v13"],
         tfds.Split.VALIDATION: ["newstest2013"],
-        tfds.Split.TEST: ["newstest2014"]
+        tfds.Split.TEST: ["newstest2014"],
     }

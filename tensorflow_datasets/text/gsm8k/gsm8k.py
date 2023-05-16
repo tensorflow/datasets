@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import json
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -58,7 +58,8 @@ class Gsm8k(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(
-            {k: tfds.features.Text() for k in _FEATURES}),
+            {k: tfds.features.Text() for k in _FEATURES}
+        ),
         supervised_keys=None,
         homepage='https://github.com/openai/grade-school-math',
         citation=_CITATION,
@@ -67,11 +68,11 @@ class Gsm8k(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     extracted = dl_manager.download_and_extract(_URLS)
-    return {k: self._generate_examples(v) for k, v in extracted.items()}
+    return {k: self._generate_examples(v) for k, v in extracted.items()}  # pytype: disable=wrong-arg-types  # always-use-return-annotations
 
   def _generate_examples(self, path: str):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for i, line in enumerate(f):
         ex = json.loads(line)
         ex['annotation'], ex['short_answer'] = ex['answer'].split('#### ')

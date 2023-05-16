@@ -20,6 +20,12 @@ An large scale dataset for speaker identification. This data is collected from
 over 1,251 speakers, with over 150k samples in total. This release contains the
 audio part of the voxceleb1.1 dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/voxceleb1">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html](http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html)
 
@@ -56,20 +62,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1252),
-    'youtube_id': Text(shape=(), dtype=tf.string),
+    'audio': Audio(shape=(None,), dtype=int64),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=1252),
+    'youtube_id': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape   | Dtype     | Description
-:--------- | :----------- | :------ | :-------- | :----------
-           | FeaturesDict |         |           |
-audio      | Audio        | (None,) | tf.int64  |
-label      | ClassLabel   |         | tf.int64  |
-youtube_id | Text         |         | tf.string |
+Feature    | Class        | Shape   | Dtype  | Description
+:--------- | :----------- | :------ | :----- | :----------
+           | FeaturesDict |         |        |
+audio      | Audio        | (None,) | int64  |
+label      | ClassLabel   |         | int64  |
+youtube_id | Text         |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

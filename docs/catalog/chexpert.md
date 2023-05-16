@@ -29,6 +29,12 @@ The CheXpert dataset must be downloaded separately after reading and agreeing to
 a Research Use Agreement. To do so, please follow the instructions on the
 website, https://stanfordmlgroup.github.io/competitions/chexpert/.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/chexpert">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
 
@@ -65,22 +71,22 @@ Split | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image_view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=4)),
-    'name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image_view': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'label': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=4)),
+    'name': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class                | Shape           | Dtype     | Description
-:--------- | :------------------- | :-------------- | :-------- | :----------
-           | FeaturesDict         |                 |           |
-image      | Image                | (None, None, 3) | tf.uint8  |
-image_view | ClassLabel           |                 | tf.int64  |
-label      | Sequence(ClassLabel) | (None,)         | tf.int64  |
-name       | Text                 |                 | tf.string |
+Feature    | Class                | Shape           | Dtype  | Description
+:--------- | :------------------- | :-------------- | :----- | :----------
+           | FeaturesDict         |                 |        |
+image      | Image                | (None, None, 3) | uint8  |
+image_view | ClassLabel           |                 | int64  |
+label      | Sequence(ClassLabel) | (None,)         | int64  |
+name       | Text                 |                 | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

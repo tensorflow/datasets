@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
 
 """Iris dataset."""
 
-import tensorflow as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-IRIS_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+IRIS_URL = (
+    "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+)
 
 _CITATION = """\
 @misc{Dua:2019 ,
@@ -42,6 +45,7 @@ linearly separable from each other.
 
 class Iris(tfds.core.GeneratorBasedBuilder):
   """Iris flower dataset."""
+
   NUM_CLASSES = 3
   VERSION = tfds.core.Version("2.0.0")
   RELEASE_NOTES = {
@@ -54,12 +58,11 @@ class Iris(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            "features":
-                tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+            "features": tfds.features.Tensor(shape=(4,), dtype=np.float32),
             # Here, labels can be one of 3 classes
-            "label":
-                tfds.features.ClassLabel(
-                    names=["Iris-setosa", "Iris-versicolor", "Iris-virginica"]),
+            "label": tfds.features.ClassLabel(
+                names=["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+            ),
         }),
         supervised_keys=("features", "label"),
         homepage="https://archive.ics.uci.edu/ml/datasets/iris",
@@ -74,7 +77,8 @@ class Iris(tfds.core.GeneratorBasedBuilder):
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"records": records}),
+            name=tfds.Split.TRAIN, gen_kwargs={"records": records}
+        ),
     ]
 
   def _generate_examples(self, records):

@@ -24,6 +24,12 @@ contains only recordings submitted prior to 2020-01-01. The samples are splitted
 between train, validation and testing so that samples from each speaker belongs
 to exactly one split.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/voxforge">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://www.voxforge.org/](http://www.voxforge.org/)
 
 *   **Source code**:
@@ -59,20 +65,20 @@ Split | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    'speaker_id': tf.string,
+    'audio': Audio(shape=(None,), dtype=int64),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=6),
+    'speaker_id': string,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape   | Dtype     | Description
-:--------- | :----------- | :------ | :-------- | :----------
-           | FeaturesDict |         |           |
-audio      | Audio        | (None,) | tf.int64  |
-label      | ClassLabel   |         | tf.int64  |
-speaker_id | Tensor       |         | tf.string |
+Feature    | Class        | Shape   | Dtype  | Description
+:--------- | :----------- | :------ | :----- | :----------
+           | FeaturesDict |         |        |
+audio      | Audio        | (None,) | int64  |
+label      | ClassLabel   |         | int64  |
+speaker_id | Tensor       |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

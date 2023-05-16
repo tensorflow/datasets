@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ class DummyDatasetTest(tfds.testing.DatasetBuilderTestCase):
     # registering the dataset for all tests.
     # To avoid this, we move the import registration inside the test.
     from tensorflow_datasets.testing.dummy_dataset import dummy_dataset  # pylint: disable=g-import-not-at-top
+
     cls.DATASET_CLASS = dummy_dataset.DummyDataset
     super().setUpClass()
 

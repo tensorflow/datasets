@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,10 +21,9 @@ import tempfile
 from unittest import mock
 
 from absl import logging
-import six
-import tensorflow as tf
+from tensorflow_datasets import setup_teardown
 from tensorflow_datasets.core.utils import gcs_utils
-from tensorflow_datasets.testing import setup_teardown
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 GCS_ACCESS_FNS = {
     "original_info": gcs_utils.gcs_dataset_info_files,
@@ -85,12 +84,13 @@ class TestCase(tf.test.TestCase):
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
 
   def assertRaisesWithPredicateMatch(self, err_type, predicate):
-    if isinstance(predicate, six.string_types):
+    if isinstance(predicate, str):
       predicate_fct = lambda err: predicate in str(err)
     else:
       predicate_fct = predicate
-    return super(TestCase,
-                 self).assertRaisesWithPredicateMatch(err_type, predicate_fct)
+    return super(TestCase, self).assertRaisesWithPredicateMatch(
+        err_type, predicate_fct
+    )
 
   @contextlib.contextmanager
   def assertLogs(self, text, level="info"):

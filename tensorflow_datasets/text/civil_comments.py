@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,14 @@
 
 """CivilComments from Jigsaw Unintended Bias Kaggle Competition."""
 
+from __future__ import annotations
+
 import ast
 import csv
 import os
 
+from etils import epath
 import numpy as np
-import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # General (main) citation for CivilComments and CivilCommentsIdentities.
@@ -108,8 +110,8 @@ were created from 2015 - 2017 and appeared on approximately 50 English-language
 news sites across the world. When Civil Comments shut down in 2017, they chose
 to make the public comments available in a lasting open archive to enable future
 research. The original data, published on figshare, includes the public comment
-text, some associated metadata such as article IDs, timestamps and
-commenter-generated "civility" labels, but does not include user ids. Jigsaw
+text, some associated metadata such as article IDs, publication IDs, timestamps
+and commenter-generated "civility" labels, but does not include user ids. Jigsaw
 extended this dataset by adding additional labels for toxicity, identity
 mentions, as well as covert offensiveness. This data set is an exact replica of
 the data released for the Jigsaw Unintended Bias in Toxicity Classification
@@ -137,6 +139,9 @@ in addition to the basic seven labels. However, it only includes the subset
 """
 
 _CC_COVERT_DESCRIPTION = """
+WARNING: there's a potential data quality issue with CivilCommentsCovert that
+we're actively working on fixing (06/28/22); the underlying data may change!
+
 The CivilCommentsCovert set is a subset of CivilCommentsIdentities with ~20% of
 the train and test splits further annotated for covert offensiveness, in
 addition to the toxicity and identity labels. Raters were asked to categorize
@@ -162,20 +167,44 @@ a contextual_toxicity feature.
 _DOWNLOAD_URL = 'https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/civil_comments_v1.2.zip'
 
 IDENTITY_LABELS = [
-    'male', 'female', 'transgender', 'other_gender', 'heterosexual',
-    'homosexual_gay_or_lesbian', 'bisexual', 'other_sexual_orientation',
-    'christian', 'jewish', 'muslim', 'hindu', 'buddhist', 'atheist',
-    'other_religion', 'black', 'white', 'asian', 'latino',
-    'other_race_or_ethnicity', 'physical_disability',
-    'intellectual_or_learning_disability', 'psychiatric_or_mental_illness',
-    'other_disability'
+    'male',
+    'female',
+    'transgender',
+    'other_gender',
+    'heterosexual',
+    'homosexual_gay_or_lesbian',
+    'bisexual',
+    'other_sexual_orientation',
+    'christian',
+    'jewish',
+    'muslim',
+    'hindu',
+    'buddhist',
+    'atheist',
+    'other_religion',
+    'black',
+    'white',
+    'asian',
+    'latino',
+    'other_race_or_ethnicity',
+    'physical_disability',
+    'intellectual_or_learning_disability',
+    'psychiatric_or_mental_illness',
+    'other_disability',
 ]
 
 COVERT_LABELS = [
-    'explicitly_offensive', 'implicitly_offensive', 'not_sure_offensive',
-    'not_offensive', 'covert_humor', 'covert_obfuscation',
-    'covert_emoticons_emojis', 'covert_sarcasm', 'covert_microaggression',
-    'covert_masked_harm', 'covert_political'
+    'explicitly_offensive',
+    'implicitly_offensive',
+    'not_sure_offensive',
+    'not_offensive',
+    'covert_humor',
+    'covert_obfuscation',
+    'covert_emoticons_emojis',
+    'covert_sarcasm',
+    'covert_microaggression',
+    'covert_masked_harm',
+    'covert_political',
 ]
 
 
@@ -184,8 +213,13 @@ def _labels(mode):
   if mode == 'spans':
     return ['spans']
   labels = [
-      'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
-      'identity_attack', 'sexual_explicit'
+      'toxicity',
+      'severe_toxicity',
+      'obscene',
+      'threat',
+      'insult',
+      'identity_attack',
+      'sexual_explicit',
   ]
   if mode in ['identity', 'covert']:
     labels += IDENTITY_LABELS
@@ -202,6 +236,8 @@ def _parse_common(row):
   example['id'] = row['id']
   example['text'] = row['comment_text']
   example['parent_text'] = row['parent_text']
+  example['publication_id'] = row['publication_id']
+  example['created_date'] = row['created_date']
   parent_id = row['parent_id'] or 0
   example['parent_id'] = int(float(parent_id))
   example['article_id'] = int(row['article_id'])
@@ -230,7 +266,8 @@ class CivilCommentsConfig(tfds.core.BuilderConfig):
 
   def __init__(self, name, description, mode):
     super(CivilCommentsConfig, self).__init__(
-        name=name, description=description)
+        name=name, description=description
+    )
     self.mode = mode
 
 
@@ -252,27 +289,34 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       CivilCommentsConfig(
-          name='CivilComments', description=_CC_DESCRIPTION, mode='base'),
+          name='CivilComments', description=_CC_DESCRIPTION, mode='base'
+      ),
       CivilCommentsConfig(
           name='CivilCommentsIdentities',
           description=_CC_IDENTITIES_DESCRIPTION,
-          mode='identity'),
+          mode='identity',
+      ),
       CivilCommentsConfig(
           name='CivilCommentsCovert',
           description=_CC_COVERT_DESCRIPTION,
-          mode='covert'),
+          mode='covert',
+      ),
       CivilCommentsConfig(
           name='CivilCommentsToxicSpans',
           description=_CC_SPANS_DESCRIPTION,
-          mode='spans'),
+          mode='spans',
+      ),
       CivilCommentsConfig(
           name='CivilCommentsInContext',
           description=_CC_CONTEXT_DESCRIPTION,
-          mode='context'),
+          mode='context',
+      ),
   ]
 
-  VERSION = tfds.core.Version('1.2.2')
+  VERSION = tfds.core.Version('1.2.4')
   RELEASE_NOTES = {
+      '1.2.4': 'Add publication IDs and comment timestamps.',
+      '1.2.3': 'Add warning to CivilCommentsCovert as we fix a data issue.',
       '1.2.2': 'Update to reflect context only having a train split.',
       '1.2.1': 'Fix incorrect formatting in context splits.',
       '1.2.0': 'Add toxic spans, context, and parent comment text features.',
@@ -291,21 +335,23 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
         'identity': _CITATION,
         'covert': _COVERT_CITATION,
         'spans': _SPANS_CITATION,
-        'context': _CONTEXT_CITATION
+        'context': _CONTEXT_CITATION,
     }[mode]
     features = {
         'text': tfds.features.Text(),
-        'id': tf.string,
+        'id': np.str_,
         'parent_text': tfds.features.Text(),
-        'parent_id': tf.int32,
-        'article_id': tf.int32,
+        'parent_id': np.int32,
+        'article_id': np.int32,
+        'publication_id': np.str_,
+        'created_date': np.str_,
     }
     if mode == 'spans':
-      features['spans'] = tfds.features.Tensor(shape=(None,), dtype=tf.int32)
+      features['spans'] = tfds.features.Tensor(shape=(None,), dtype=np.int32)
       supervised_value = 'spans'
     else:
       for label in _labels(mode):
-        features[label] = tf.float32
+        features[label] = np.float32
       supervised_value = 'toxicity'
 
     return tfds.core.DatasetInfo(
@@ -375,7 +421,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
     Yields:
       A dictionary of features, depending upon the mode.
     """
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f)
       for row in reader:
         if mode == 'spans':

@@ -19,6 +19,12 @@ species (mostly North American). The total number of categories of birds is 200
 and there are 6033 images in the 2010 dataset and 11,788 images in the 2011
 dataset. Annotations include bounding boxes, segmentation labels.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cub-200-2011">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
 
@@ -48,26 +54,26 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=200),
-    'label_name': Text(shape=(), dtype=tf.string),
-    'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+    'bbox': BBoxFeature(shape=(4,), dtype=float32),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=200),
+    'label_name': Text(shape=(), dtype=string),
+    'segmentation_mask': Image(shape=(None, None, 1), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape           | Dtype      | Description
-:---------------- | :----------- | :-------------- | :--------- | :----------
-                  | FeaturesDict |                 |            |
-bbox              | BBoxFeature  | (4,)            | tf.float32 |
-image             | Image        | (None, None, 3) | tf.uint8   |
-image/filename    | Text         |                 | tf.string  |
-label             | ClassLabel   |                 | tf.int64   |
-label_name        | Text         |                 | tf.string  |
-segmentation_mask | Image        | (None, None, 1) | tf.uint8   |
+Feature           | Class        | Shape           | Dtype   | Description
+:---------------- | :----------- | :-------------- | :------ | :----------
+                  | FeaturesDict |                 |         |
+bbox              | BBoxFeature  | (4,)            | float32 |
+image             | Image        | (None, None, 3) | uint8   |
+image/filename    | Text         |                 | string  |
+label             | ClassLabel   |                 | int64   |
+label_name        | Text         |                 | string  |
+segmentation_mask | Image        | (None, None, 1) | uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -23,6 +23,12 @@ The "label" of each example is its "key attribute" (see the official website).
 The official release of the dataset defines a 10-fold cross-validation
 partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/dtd">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
 
@@ -53,20 +59,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
+    'file_name': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=47),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape           | Dtype     | Description
-:-------- | :----------- | :-------------- | :-------- | :----------
-          | FeaturesDict |                 |           |
-file_name | Text         |                 | tf.string |
-image     | Image        | (None, None, 3) | tf.uint8  |
-label     | ClassLabel   |                 | tf.int64  |
+Feature   | Class        | Shape           | Dtype  | Description
+:-------- | :----------- | :-------------- | :----- | :----------
+          | FeaturesDict |                 |        |
+file_name | Text         |                 | string |
+image     | Image        | (None, None, 3) | uint8  |
+label     | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

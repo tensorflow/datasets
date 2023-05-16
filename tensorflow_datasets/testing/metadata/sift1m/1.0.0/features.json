@@ -2,6 +2,18 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
+            "embedding": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "128"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
             "neighbors": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
@@ -42,18 +54,6 @@
                     "encoding": "none"
                 },
                 "description": "Index within the split."
-            },
-            "embedding": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {
-                        "dimensions": [
-                            "128"
-                        ]
-                    },
-                    "dtype": "float32",
-                    "encoding": "none"
-                }
             }
         }
     }

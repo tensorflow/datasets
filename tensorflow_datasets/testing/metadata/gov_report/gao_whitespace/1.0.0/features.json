@@ -1,37 +1,39 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "report": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "highlight": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "title": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "released_date": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "url": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "fastfact": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "published_date": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "id": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "report": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "released_date": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "url": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "fastfact": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "published_date": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "highlight": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "title": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
         }
     }
 }

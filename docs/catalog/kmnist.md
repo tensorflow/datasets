@@ -25,6 +25,12 @@ Kuzushiji-MNIST is a drop-in replacement for the MNIST dataset (28x28 grayscale,
 Since MNIST restricts us to 10 classes, we chose one character to represent each
 of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/kmnist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://codh.rois.ac.jp/kmnist/index.html.en](http://codh.rois.ac.jp/kmnist/index.html.en)
 
@@ -54,18 +60,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape       | Dtype    | Description
-:------ | :----------- | :---------- | :------- | :----------
-        | FeaturesDict |             |          |
-image   | Image        | (28, 28, 1) | tf.uint8 |
-label   | ClassLabel   |             | tf.int64 |
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

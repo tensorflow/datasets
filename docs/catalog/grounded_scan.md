@@ -47,86 +47,86 @@ More information can be found at:
 
 ```python
 FeaturesDict({
-    'command': Sequence(Text(shape=(), dtype=tf.string)),
-    'manner': Text(shape=(), dtype=tf.string),
-    'meaning': Sequence(Text(shape=(), dtype=tf.string)),
-    'referred_target': Text(shape=(), dtype=tf.string),
+    'command': Sequence(Text(shape=(), dtype=string)),
+    'manner': Text(shape=(), dtype=string),
+    'meaning': Sequence(Text(shape=(), dtype=string)),
+    'referred_target': Text(shape=(), dtype=string),
     'situation': FeaturesDict({
-        'agent_direction': tf.int32,
+        'agent_direction': int32,
         'agent_position': FeaturesDict({
-            'column': tf.int32,
-            'row': tf.int32,
+            'column': int32,
+            'row': int32,
         }),
-        'direction_to_target': Text(shape=(), dtype=tf.string),
-        'distance_to_target': tf.int32,
-        'grid_size': tf.int32,
+        'direction_to_target': Text(shape=(), dtype=string),
+        'distance_to_target': int32,
+        'grid_size': int32,
         'placed_objects': Sequence({
             'object': FeaturesDict({
-                'color': Text(shape=(), dtype=tf.string),
-                'shape': Text(shape=(), dtype=tf.string),
-                'size': tf.int32,
+                'color': Text(shape=(), dtype=string),
+                'shape': Text(shape=(), dtype=string),
+                'size': int32,
             }),
             'position': FeaturesDict({
-                'column': tf.int32,
-                'row': tf.int32,
+                'column': int32,
+                'row': int32,
             }),
-            'vector': Text(shape=(), dtype=tf.string),
+            'vector': Text(shape=(), dtype=string),
         }),
         'target_object': FeaturesDict({
             'object': FeaturesDict({
-                'color': Text(shape=(), dtype=tf.string),
-                'shape': Text(shape=(), dtype=tf.string),
-                'size': tf.int32,
+                'color': Text(shape=(), dtype=string),
+                'shape': Text(shape=(), dtype=string),
+                'size': int32,
             }),
             'position': FeaturesDict({
-                'column': tf.int32,
-                'row': tf.int32,
+                'column': int32,
+                'row': int32,
             }),
-            'vector': Text(shape=(), dtype=tf.string),
+            'vector': Text(shape=(), dtype=string),
         }),
     }),
-    'target_commands': Sequence(Text(shape=(), dtype=tf.string)),
-    'verb_in_command': Text(shape=(), dtype=tf.string),
+    'target_commands': Sequence(Text(shape=(), dtype=string)),
+    'verb_in_command': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                  | Class          | Shape   | Dtype     | Description
-:--------------------------------------- | :------------- | :------ | :-------- | :----------
-                                         | FeaturesDict   |         |           |
-command                                  | Sequence(Text) | (None,) | tf.string |
-manner                                   | Text           |         | tf.string |
-meaning                                  | Sequence(Text) | (None,) | tf.string |
-referred_target                          | Text           |         | tf.string |
-situation                                | FeaturesDict   |         |           |
-situation/agent_direction                | Tensor         |         | tf.int32  |
-situation/agent_position                 | FeaturesDict   |         |           |
-situation/agent_position/column          | Tensor         |         | tf.int32  |
-situation/agent_position/row             | Tensor         |         | tf.int32  |
-situation/direction_to_target            | Text           |         | tf.string |
-situation/distance_to_target             | Tensor         |         | tf.int32  |
-situation/grid_size                      | Tensor         |         | tf.int32  |
-situation/placed_objects                 | Sequence       |         |           |
-situation/placed_objects/object          | FeaturesDict   |         |           |
-situation/placed_objects/object/color    | Text           |         | tf.string |
-situation/placed_objects/object/shape    | Text           |         | tf.string |
-situation/placed_objects/object/size     | Tensor         |         | tf.int32  |
-situation/placed_objects/position        | FeaturesDict   |         |           |
-situation/placed_objects/position/column | Tensor         |         | tf.int32  |
-situation/placed_objects/position/row    | Tensor         |         | tf.int32  |
-situation/placed_objects/vector          | Text           |         | tf.string |
-situation/target_object                  | FeaturesDict   |         |           |
-situation/target_object/object           | FeaturesDict   |         |           |
-situation/target_object/object/color     | Text           |         | tf.string |
-situation/target_object/object/shape     | Text           |         | tf.string |
-situation/target_object/object/size      | Tensor         |         | tf.int32  |
-situation/target_object/position         | FeaturesDict   |         |           |
-situation/target_object/position/column  | Tensor         |         | tf.int32  |
-situation/target_object/position/row     | Tensor         |         | tf.int32  |
-situation/target_object/vector           | Text           |         | tf.string |
-target_commands                          | Sequence(Text) | (None,) | tf.string |
-verb_in_command                          | Text           |         | tf.string |
+Feature                                  | Class          | Shape   | Dtype  | Description
+:--------------------------------------- | :------------- | :------ | :----- | :----------
+                                         | FeaturesDict   |         |        |
+command                                  | Sequence(Text) | (None,) | string |
+manner                                   | Text           |         | string |
+meaning                                  | Sequence(Text) | (None,) | string |
+referred_target                          | Text           |         | string |
+situation                                | FeaturesDict   |         |        |
+situation/agent_direction                | Tensor         |         | int32  |
+situation/agent_position                 | FeaturesDict   |         |        |
+situation/agent_position/column          | Tensor         |         | int32  |
+situation/agent_position/row             | Tensor         |         | int32  |
+situation/direction_to_target            | Text           |         | string |
+situation/distance_to_target             | Tensor         |         | int32  |
+situation/grid_size                      | Tensor         |         | int32  |
+situation/placed_objects                 | Sequence       |         |        |
+situation/placed_objects/object          | FeaturesDict   |         |        |
+situation/placed_objects/object/color    | Text           |         | string |
+situation/placed_objects/object/shape    | Text           |         | string |
+situation/placed_objects/object/size     | Tensor         |         | int32  |
+situation/placed_objects/position        | FeaturesDict   |         |        |
+situation/placed_objects/position/column | Tensor         |         | int32  |
+situation/placed_objects/position/row    | Tensor         |         | int32  |
+situation/placed_objects/vector          | Text           |         | string |
+situation/target_object                  | FeaturesDict   |         |        |
+situation/target_object/object           | FeaturesDict   |         |        |
+situation/target_object/object/color     | Text           |         | string |
+situation/target_object/object/shape     | Text           |         | string |
+situation/target_object/object/size      | Tensor         |         | int32  |
+situation/target_object/position         | FeaturesDict   |         |        |
+situation/target_object/position/column  | Tensor         |         | int32  |
+situation/target_object/position/row     | Tensor         |         | int32  |
+situation/target_object/vector           | Text           |         | string |
+target_commands                          | Sequence(Text) | (None,) | string |
+verb_in_command                          | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

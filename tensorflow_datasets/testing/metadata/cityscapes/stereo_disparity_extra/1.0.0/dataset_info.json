@@ -3,14 +3,17 @@
   "configDescription": "Cityscapes stereo image and disparity maps dataset with train_extra split.",
   "configName": "stereo_disparity_extra",
   "description": "Cityscapes is a dataset consisting of diverse urban street scenes across 50 different cities\nat varying times of the year as well as ground truths for several vision tasks including\nsemantic segmentation, instance level segmentation (TODO), and stereo pair disparity inference.\n\nFor segmentation tasks (default split, accessible via 'cityscapes/semantic_segmentation'), Cityscapes provides\ndense pixel level annotations for 5000 images at 1024 * 2048 resolution pre-split into training (2975),\nvalidation (500) and test (1525) sets. Label annotations for segmentation tasks span across 30+ classes\ncommonly encountered during driving scene perception. Detailed label information may be found here:\nhttps://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/helpers/labels.py#L52-L99\n\nCityscapes also provides coarse grain segmentation annotations (accessible via 'cityscapes/semantic_segmentation_extra')\nfor 19998 images in a 'train_extra' split which may prove useful for pretraining / data-heavy models.\n\nBesides segmentation, cityscapes also provides stereo image pairs and ground truths for disparity inference\ntasks on both the normal and extra splits (accessible via 'cityscapes/stereo_disparity' and\n'cityscapes/stereo_disparity_extra' respectively).\n\nIngored examples:\n\n- For 'cityscapes/stereo_disparity_extra':\n  - troisdorf_000000_000073_{*} images (no disparity map present)\n\nWARNING: this dataset requires users to setup a login and password in order to get the files.",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.cityscapes-dataset.com"
     ]
   },
+  "moduleName": "tensorflow_datasets.image.cityscapes",
   "name": "cityscapes",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "16090609772",
       "shardLengths": [
@@ -145,6 +148,46 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "2733705095",
+      "shardLengths": [
+        "16",
+        "15",
+        "16",
+        "15",
+        "16",
+        "16",
+        "15",
+        "16",
+        "16",
+        "15",
+        "16",
+        "16",
+        "15",
+        "16",
+        "15",
+        "16",
+        "16",
+        "15",
+        "16",
+        "15",
+        "16",
+        "16",
+        "15",
+        "16",
+        "16",
+        "15",
+        "16",
+        "16",
+        "15",
+        "16",
+        "15",
+        "16"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_extra",
       "numBytes": "109144537172",
       "shardLengths": [
@@ -1172,44 +1215,6 @@
         "20",
         "19",
         "20"
-      ]
-    },
-    {
-      "name": "validation",
-      "numBytes": "2733705095",
-      "shardLengths": [
-        "16",
-        "15",
-        "16",
-        "15",
-        "16",
-        "16",
-        "15",
-        "16",
-        "16",
-        "15",
-        "16",
-        "16",
-        "15",
-        "16",
-        "15",
-        "16",
-        "16",
-        "15",
-        "16",
-        "15",
-        "16",
-        "16",
-        "15",
-        "16",
-        "16",
-        "15",
-        "16",
-        "16",
-        "15",
-        "16",
-        "15",
-        "16"
       ]
     }
   ],

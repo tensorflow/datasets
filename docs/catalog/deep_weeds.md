@@ -27,6 +27,12 @@ images were collected from weed infestations at the following sites across
 Queensland: "Black River", "Charters Towers", "Cluden", "Douglas", "Hervey
 Range", "Kelso", "McKinlay" and "Paluma".
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/deepweeds">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/AlexOlsen/DeepWeeds](https://github.com/AlexOlsen/DeepWeeds)
 
@@ -56,18 +62,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=9),
+    'image': Image(shape=(256, 256, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=9),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape         | Dtype    | Description
-:------ | :----------- | :------------ | :------- | :----------
-        | FeaturesDict |               |          |
-image   | Image        | (256, 256, 3) | tf.uint8 |
-label   | ClassLabel   |               | tf.int64 |
+Feature | Class        | Shape         | Dtype | Description
+:------ | :----------- | :------------ | :---- | :----------
+        | FeaturesDict |               |       |
+image   | Image        | (256, 256, 3) | uint8 |
+label   | ClassLabel   |               | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

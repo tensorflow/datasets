@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,12 @@
 
 """Dummy dataset self-contained in a directory."""
 
+from __future__ import annotations
+
 import os
 
-import tensorflow as tf
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 
@@ -29,7 +32,7 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        features=tfds.features.FeaturesDict({'x': tf.int64}),
+        features=tfds.features.FeaturesDict({'x': np.int64}),
     )
 
   def _split_generators(self, dl_manager):
@@ -43,7 +46,7 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, path):
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       value = f.read()
     for i in range(int(value)):
       yield i, {'x': i}

@@ -47,55 +47,55 @@ Split     | Examples
 ```python
 FeaturesDict({
     'hypothesis': TranslationVariableLanguages({
-        'language': Text(shape=(), dtype=tf.string),
-        'translation': Text(shape=(), dtype=tf.string),
+        'language': Text(shape=(), dtype=string),
+        'translation': Text(shape=(), dtype=string),
     }),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
     'premise': Translation({
-        'ar': Text(shape=(), dtype=tf.string),
-        'bg': Text(shape=(), dtype=tf.string),
-        'de': Text(shape=(), dtype=tf.string),
-        'el': Text(shape=(), dtype=tf.string),
-        'en': Text(shape=(), dtype=tf.string),
-        'es': Text(shape=(), dtype=tf.string),
-        'fr': Text(shape=(), dtype=tf.string),
-        'hi': Text(shape=(), dtype=tf.string),
-        'ru': Text(shape=(), dtype=tf.string),
-        'sw': Text(shape=(), dtype=tf.string),
-        'th': Text(shape=(), dtype=tf.string),
-        'tr': Text(shape=(), dtype=tf.string),
-        'ur': Text(shape=(), dtype=tf.string),
-        'vi': Text(shape=(), dtype=tf.string),
-        'zh': Text(shape=(), dtype=tf.string),
+        'ar': Text(shape=(), dtype=string),
+        'bg': Text(shape=(), dtype=string),
+        'de': Text(shape=(), dtype=string),
+        'el': Text(shape=(), dtype=string),
+        'en': Text(shape=(), dtype=string),
+        'es': Text(shape=(), dtype=string),
+        'fr': Text(shape=(), dtype=string),
+        'hi': Text(shape=(), dtype=string),
+        'ru': Text(shape=(), dtype=string),
+        'sw': Text(shape=(), dtype=string),
+        'th': Text(shape=(), dtype=string),
+        'tr': Text(shape=(), dtype=string),
+        'ur': Text(shape=(), dtype=string),
+        'vi': Text(shape=(), dtype=string),
+        'zh': Text(shape=(), dtype=string),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                | Class                        | Shape | Dtype     | Description
-:--------------------- | :--------------------------- | :---- | :-------- | :----------
-                       | FeaturesDict                 |       |           |
-hypothesis             | TranslationVariableLanguages |       |           |
-hypothesis/language    | Text                         |       | tf.string |
-hypothesis/translation | Text                         |       | tf.string |
-label                  | ClassLabel                   |       | tf.int64  |
-premise                | Translation                  |       |           |
-premise/ar             | Text                         |       | tf.string |
-premise/bg             | Text                         |       | tf.string |
-premise/de             | Text                         |       | tf.string |
-premise/el             | Text                         |       | tf.string |
-premise/en             | Text                         |       | tf.string |
-premise/es             | Text                         |       | tf.string |
-premise/fr             | Text                         |       | tf.string |
-premise/hi             | Text                         |       | tf.string |
-premise/ru             | Text                         |       | tf.string |
-premise/sw             | Text                         |       | tf.string |
-premise/th             | Text                         |       | tf.string |
-premise/tr             | Text                         |       | tf.string |
-premise/ur             | Text                         |       | tf.string |
-premise/vi             | Text                         |       | tf.string |
-premise/zh             | Text                         |       | tf.string |
+Feature                | Class                        | Shape | Dtype  | Description
+:--------------------- | :--------------------------- | :---- | :----- | :----------
+                       | FeaturesDict                 |       |        |
+hypothesis             | TranslationVariableLanguages |       |        |
+hypothesis/language    | Text                         |       | string |
+hypothesis/translation | Text                         |       | string |
+label                  | ClassLabel                   |       | int64  |
+premise                | Translation                  |       |        |
+premise/ar             | Text                         |       | string |
+premise/bg             | Text                         |       | string |
+premise/de             | Text                         |       | string |
+premise/el             | Text                         |       | string |
+premise/en             | Text                         |       | string |
+premise/es             | Text                         |       | string |
+premise/fr             | Text                         |       | string |
+premise/hi             | Text                         |       | string |
+premise/ru             | Text                         |       | string |
+premise/sw             | Text                         |       | string |
+premise/th             | Text                         |       | string |
+premise/tr             | Text                         |       | string |
+premise/ur             | Text                         |       | string |
+premise/vi             | Text                         |       | string |
+premise/zh             | Text                         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

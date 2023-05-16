@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ def test_build_catalog(tmp_path: pathlib.Path):
           df_base_path=None,
           nightly_path=None,
       ),
+      include_collections=False,
   )
   assert sorted(f.name for f in tmp_path.iterdir()) == [
       '_toc.yaml',
@@ -47,3 +48,35 @@ def test_build_catalog(tmp_path: pathlib.Path):
   content = tmp_path.joinpath('overview.md').read_text()
   assert 'coco' in content
   assert 'mnist' in content
+
+
+def test_build_catalog_with_collections(tmp_path: pathlib.Path):
+  """Tests that build_catalog generates the index including collections."""
+  build_catalog.build_catalog(
+      datasets=['mnist', 'coco'],
+      ds_collections=['longt5'],
+      catalog_dir=tmp_path,
+      doc_util_paths=doc_utils.DocUtilPaths(
+          fig_base_path=None,
+          df_base_path=None,
+          nightly_path=None,
+      ),
+      include_collections=True,
+  )
+  assert sorted(f.name for f in tmp_path.iterdir()) == [
+      '_toc.yaml',
+      'coco.md',
+      'longt5.md',
+      'mnist.md',
+      'overview.md',
+  ]
+
+  content = tmp_path.joinpath('_toc.yaml').read_text()
+  assert 'coco' in content
+  assert 'mnist' in content
+  assert 'longt5' in content
+
+  content = tmp_path.joinpath('overview.md').read_text()
+  assert 'coco' in content
+  assert 'mnist' in content
+  assert 'longt5' in content

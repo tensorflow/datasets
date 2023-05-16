@@ -25,7 +25,7 @@ human-like form of general fluid intelligence.
     [https://github.com/fchollet/ARC/](https://github.com/fchollet/ARC/)
 
 *   **Source code**:
-    [`tfds.image.ARC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/arc.py)
+    [`tfds.datasets.arc.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/arc/arc_dataset_builder.py)
 
 *   **Versions**:
 
@@ -33,11 +33,11 @@ human-like form of general fluid intelligence.
 
 *   **Download size**: `465.07 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.62 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -50,34 +50,30 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'task_id': Text(shape=(), dtype=tf.string),
+    'task_id': Text(shape=(), dtype=string),
     'test': Sequence({
-        'input': Sequence(Sequence(tf.int32)),
-        'output': Sequence(Sequence(tf.int32)),
+        'input': Sequence(Sequence(int32)),
+        'output': Sequence(Sequence(int32)),
     }),
     'train': Sequence({
-        'input': Sequence(Sequence(tf.int32)),
-        'output': Sequence(Sequence(tf.int32)),
+        'input': Sequence(Sequence(int32)),
+        'output': Sequence(Sequence(int32)),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature      | Class                      | Shape  | Dtype     | Description |
-| :----------- | :------------------------- | :----- | :-------- | :---------- |
-|              | FeaturesDict               |        |           |             |
-| task_id      | Text                       |        | tf.string |             |
-| test         | Sequence                   |        |           |             |
-| test/input   | Sequence(Sequence(Tensor)) | (None, | tf.int32  |             |
-:              :                            : None)  :           :             :
-| test/output  | Sequence(Sequence(Tensor)) | (None, | tf.int32  |             |
-:              :                            : None)  :           :             :
-| train        | Sequence                   |        |           |             |
-| train/input  | Sequence(Sequence(Tensor)) | (None, | tf.int32  |             |
-:              :                            : None)  :           :             :
-| train/output | Sequence(Sequence(Tensor)) | (None, | tf.int32  |             |
-:              :                            : None)  :           :             :
+Feature      | Class                      | Shape        | Dtype  | Description
+:----------- | :------------------------- | :----------- | :----- | :----------
+             | FeaturesDict               |              |        |
+task_id      | Text                       |              | string |
+test         | Sequence                   |              |        |
+test/input   | Sequence(Sequence(Tensor)) | (None, None) | int32  |
+test/output  | Sequence(Sequence(Tensor)) | (None, None) | int32  |
+train        | Sequence                   |              |        |
+train/input  | Sequence(Sequence(Tensor)) | (None, None) | int32  |
+train/output | Sequence(Sequence(Tensor)) | (None, None) | int32  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -89,7 +85,40 @@ FeaturesDict({
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/arc-2019-12-06-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 

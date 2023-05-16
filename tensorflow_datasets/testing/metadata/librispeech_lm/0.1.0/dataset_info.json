@@ -1,26 +1,20 @@
 {
-  "citation": "@inproceedings{panayotov2015librispeech,\n  title={Librispeech: an ASR corpus based on public domain audio books},\n  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},\n  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},\n  pages={5206--5210},\n  year={2015},\n  organization={IEEE}\n}\n",
-  "description": "Language modeling resources to be used in conjunction with the LibriSpeech ASR corpus.\n",
+  "citation": "@inproceedings{panayotov2015librispeech,\n  title={Librispeech: an ASR corpus based on public domain audio books},\n  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},\n  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},\n  pages={5206--5210},\n  year={2015},\n  organization={IEEE}\n}",
+  "description": "Language modeling resources to be used in conjunction with the LibriSpeech ASR corpus.",
   "downloadSize": "1507274412",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.openslr.org/11"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.librispeech_lm",
   "name": "librispeech_lm",
-  "schema": {
-    "feature": [
-      {
-        "name": "text",
-        "type": "BYTES"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "4956639523",
-      "numShards": "1",
       "shardLengths": [
         "631535",
         "631536",
@@ -86,26 +80,20 @@
         "631535",
         "631536",
         "631535"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "40418260"
-              }
-            },
-            "name": "text",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "40418260"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "text",
-    "output": "text"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "text"
+        },
+        {
+          "featureKey": "text"
+        }
+      ]
+    }
   },
   "version": "0.1.0"
 }

@@ -21,6 +21,12 @@ editors and includes links to the original articles cited.
 There are two features: - document: text of news articles seperated by special
 token "|||||". - summary: news summary.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/multi-news">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/Alex-Fabbri/Multi-News](https://github.com/Alex-Fabbri/Multi-News)
 
@@ -33,11 +39,11 @@ token "|||||". - summary: news summary.
 
 *   **Download size**: `245.06 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `669.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -51,18 +57,18 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'document': Text(shape=(), dtype=tf.string),
-    'summary': Text(shape=(), dtype=tf.string),
+    'document': Text(shape=(), dtype=string),
+    'summary': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-document | Text         |       | tf.string |
-summary  | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+document | Text         |       | string |
+summary  | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

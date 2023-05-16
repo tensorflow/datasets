@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,9 +25,8 @@ from typing import Any, Callable, List, Optional, TypeVar
 
 from absl import app
 from absl import logging
-
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # pylint: disable=logging-format-interpolation,logging-not-lazy,logging-fstring-interpolation
 
@@ -116,10 +115,13 @@ def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
     return tfds.core.load.list_full_names(current_version_only=True)
   else:
     builder_names = list(
-        itertools.chain.from_iterable([
-            tfds.core.load.single_full_names(builder_name)
-            for builder_name in datasets
-        ]))
+        itertools.chain.from_iterable(
+            [
+                tfds.core.load.single_full_names(builder_name)
+                for builder_name in datasets
+            ]
+        )
+    )
     return builder_names
 
 
@@ -153,7 +155,8 @@ def multi_thread_map(
   """
   full_names = _get_full_names(datasets)
   with concurrent.futures.ThreadPoolExecutor(
-      max_workers=_WORKER_COUNT_DATASETS,) as executor:
+      max_workers=_WORKER_COUNT_DATASETS,
+  ) as executor:
     list(executor.map(worker_fn, full_names))
 
 

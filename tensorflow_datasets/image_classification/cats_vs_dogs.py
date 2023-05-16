@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import re
 
 from absl import logging
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -34,12 +34,15 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 }
 """
 
-_URL = ("https://download.microsoft.com/download/3/E/1/"
-        "3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_5340.zip")
+_URL = (
+    "https://download.microsoft.com/download/3/E/1/"
+    "3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_5340.zip"
+)
 _NUM_CORRUPT_IMAGES = 1738
-_DESCRIPTION = (("A large set of images of cats and dogs. "
-                 "There are %d corrupted images that are dropped.") %
-                _NUM_CORRUPT_IMAGES)
+_DESCRIPTION = (
+    "A large set of images of cats and dogs. "
+    "There are %d corrupted images that are dropped." % _NUM_CORRUPT_IMAGES
+)
 
 _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 
@@ -62,7 +65,9 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["cat", "dog"]),
         }),
         supervised_keys=("image", "label"),
-        homepage="https://www.microsoft.com/en-us/download/details.aspx?id=54765",
+        homepage=(
+            "https://www.microsoft.com/en-us/download/details.aspx?id=54765"
+        ),
         citation=_CITATION,
     )
 
@@ -75,7 +80,8 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(path),
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, archive):
@@ -97,6 +103,8 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       yield fname, record
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
-      raise ValueError("Expected %d corrupt images, but found %d" %
-                       (_NUM_CORRUPT_IMAGES, num_skipped))
+      raise ValueError(
+          "Expected %d corrupt images, but found %d"
+          % (_NUM_CORRUPT_IMAGES, num_skipped)
+      )
     logging.warning("%d images were corrupted and were skipped", num_skipped)

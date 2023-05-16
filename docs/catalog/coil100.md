@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="coil100" />
-  <meta itemprop="description" content="The dataset contains 7200 color images of 100 objects&#10;(72 images per object). The objects have a wide variety of complex geometric and reflectance characteristics.&#10;The objects were placed on a motorized turntable against a black background.&#10;The turntable was rotated through 360 degrees to vary object pose with respect to a fxed color camera.&#10;Images of the objects were taken at pose intervals of   5 degrees.This corresponds to&#10;72 poses per object&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;coil100&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/coil100-2.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="The dataset contains 7200 color images of 100 objects (72 images per object).&#10;The objects have a wide variety of complex geometric and reflectance&#10;characteristics. The objects were placed on a motorized turntable against a&#10;black background. The turntable was rotated through 360 degrees to vary object&#10;pose with respect to a fxed color camera. Images of the objects were taken at&#10;pose intervals of 5 degrees.This corresponds to 72 poses per object&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;coil100&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/coil100-2.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/coil100" />
   <meta itemprop="sameAs" content="http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php" />
   <meta itemprop="citation" content="@article{nene1996columbia,&#10;  title={Columbia object image library (coil-20)},&#10;  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},&#10;  year={1996},&#10;  publisher={Technical report CUCS-005-96}&#10;}" />
@@ -25,7 +25,7 @@ pose intervals of 5 degrees.This corresponds to 72 poses per object
     [http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php](http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php)
 
 *   **Source code**:
-    [`tfds.image.Coil100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coil100.py)
+    [`tfds.datasets.coil100.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/coil100/coil100_dataset_builder.py)
 
 *   **Versions**:
 
@@ -51,22 +51,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'angle': tf.int64,
-    'angle_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=72),
-    'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
-    'object_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
+    'angle': int64,
+    'angle_label': ClassLabel(shape=(), dtype=int64, num_classes=72),
+    'image': Image(shape=(128, 128, 3), dtype=uint8),
+    'object_id': ClassLabel(shape=(), dtype=int64, num_classes=100),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape         | Dtype    | Description
-:---------- | :----------- | :------------ | :------- | :----------
-            | FeaturesDict |               |          |
-angle       | Tensor       |               | tf.int64 |
-angle_label | ClassLabel   |               | tf.int64 |
-image       | Image        | (128, 128, 3) | tf.uint8 |
-object_id   | ClassLabel   |               | tf.int64 |
+Feature     | Class        | Shape         | Dtype | Description
+:---------- | :----------- | :------------ | :---- | :----------
+            | FeaturesDict |               |       |
+angle       | Tensor       |               | int64 |
+angle_label | ClassLabel   |               | int64 |
+image       | Image        | (128, 128, 3) | uint8 |
+object_id   | ClassLabel   |               | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

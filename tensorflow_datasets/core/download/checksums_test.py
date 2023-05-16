@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,18 +24,16 @@ from tensorflow_datasets.core.download import checksums
 def test_checksums(tmp_path: pathlib.Path):
   path = tmp_path / 'checksums.tsv'
   url_infos = {
-      'http://abc.org/data':
-          checksums.UrlInfo(
-              checksum='abcd',
-              size=1234,
-              filename='a.zip',
-          ),
-      'http://edf.org/data':
-          checksums.UrlInfo(
-              checksum='abcd',
-              size=1234,
-              filename='b.zip',
-          ),
+      'http://abc.org/data': checksums.UrlInfo(
+          checksum='abcd',
+          size=1234,
+          filename='a.zip',
+      ),
+      'http://edf.org/data': checksums.UrlInfo(
+          checksum='abcd',
+          size=1234,
+          filename='b.zip',
+      ),
   }
 
   checksums.save_url_infos(path, url_infos)
@@ -47,7 +45,9 @@ def test_compute_url_info():
   filepath = utils.tfds_path() / 'testing/test_data/6pixels.png'
 
   expected_url_info = checksums.UrlInfo(
-      checksum='04f38ebed34d3b027d2683193766155912fba647158c583c3bdb4597ad8af34c',
+      checksum=(
+          '04f38ebed34d3b027d2683193766155912fba647158c583c3bdb4597ad8af34c'
+      ),
       size=utils.Size(102),
       filename='6pixels.png',
   )

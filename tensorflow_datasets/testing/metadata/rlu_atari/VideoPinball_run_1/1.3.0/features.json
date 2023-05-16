@@ -10,14 +10,6 @@
                     "encoding": "none"
                 }
             },
-            "episode_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int64",
-                    "encoding": "none"
-                }
-            },
             "steps": {
                 "pythonClassName": "tensorflow_datasets.core.features.dataset_feature.Dataset",
                 "sequence": {
@@ -39,11 +31,19 @@
                                         "encodingFormat": "png"
                                     }
                                 },
-                                "is_last": {
+                                "discount": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
-                                        "dtype": "bool",
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "action": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "int64",
                                         "encoding": "none"
                                     }
                                 },
@@ -55,11 +55,11 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "action": {
+                                "is_last": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
-                                        "dtype": "int64",
+                                        "dtype": "bool",
                                         "encoding": "none"
                                     }
                                 },
@@ -80,19 +80,19 @@
                                     },
                                     "description": "Clipped reward.",
                                     "valueRange": "[-1, 1]"
-                                },
-                                "discount": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "float32",
-                                        "encoding": "none"
-                                    }
                                 }
                             }
                         }
                     },
                     "length": "-1"
+                }
+            },
+            "episode_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int64",
+                    "encoding": "none"
                 }
             },
             "episode_return": {

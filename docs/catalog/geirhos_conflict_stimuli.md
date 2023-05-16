@@ -49,26 +49,26 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'shape_imagenet_labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1000)),
-    'shape_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=16),
-    'texture_imagenet_labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1000)),
-    'texture_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=16),
+    'file_name': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'shape_imagenet_labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
+    'shape_label': ClassLabel(shape=(), dtype=int64, num_classes=16),
+    'texture_imagenet_labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
+    'texture_label': ClassLabel(shape=(), dtype=int64, num_classes=16),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                 | Class                | Shape           | Dtype     | Description
-:---------------------- | :------------------- | :-------------- | :-------- | :----------
-                        | FeaturesDict         |                 |           |
-file_name               | Text                 |                 | tf.string |
-image                   | Image                | (None, None, 3) | tf.uint8  |
-shape_imagenet_labels   | Sequence(ClassLabel) | (None,)         | tf.int64  |
-shape_label             | ClassLabel           |                 | tf.int64  |
-texture_imagenet_labels | Sequence(ClassLabel) | (None,)         | tf.int64  |
-texture_label           | ClassLabel           |                 | tf.int64  |
+Feature                 | Class                | Shape           | Dtype  | Description
+:---------------------- | :------------------- | :-------------- | :----- | :----------
+                        | FeaturesDict         |                 |        |
+file_name               | Text                 |                 | string |
+image                   | Image                | (None, None, 3) | uint8  |
+shape_imagenet_labels   | Sequence(ClassLabel) | (None,)         | int64  |
+shape_label             | ClassLabel           |                 | int64  |
+texture_imagenet_labels | Sequence(ClassLabel) | (None,)         | int64  |
+texture_label           | ClassLabel           |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

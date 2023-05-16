@@ -1,0 +1,7 @@
+content.data-type.image
+content.data-type.text
+ml.task.anomaly-detection
+ml.task.density-estimation
+ml.task.fine-grained-image-classification
+ml.task.image-classification
+ml.task.unsupervised-anomaly-detection

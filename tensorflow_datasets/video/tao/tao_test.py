@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ from tensorflow_datasets.video.tao import tao
 
 class TaoTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for tao dataset."""
+
   DATASET_CLASS = tao.Tao
   SPLITS = {
       tfds.Split.TRAIN: 1,
@@ -60,8 +61,9 @@ class TaoTest(tfds.testing.DatasetBuilderTestCase):
       for ex in [train_ex, val_ex]:
         # There should be the same number of each of these; a number
         # per group of bboxes indicating which frame they correspond to.
-        self.assertEqual(ex['tracks']['bboxes'].shape[0],
-                         ex['tracks']['frames'].shape[0])
+        self.assertEqual(
+            ex['tracks']['bboxes'].shape[0], ex['tracks']['frames'].shape[0]
+        )
 
     with self.subTest('check_video'):
       splits = builder.as_dataset()

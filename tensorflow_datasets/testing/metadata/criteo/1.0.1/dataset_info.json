@@ -1,0 +1,116 @@
+{
+  "citation": "@inproceedings{Diemert2018,\nauthor = {{Diemert Eustache, Betlei Artem} and Renaudin, Christophe and Massih-Reza, Amini},\ntitle={A Large Scale Benchmark for Uplift Modeling},\npublisher = {ACM},\nbooktitle = {Proceedings of the AdKDD and TargetAd Workshop, KDD, London,United Kingdom, August, 20, 2018},\nyear = {2018}\n}",
+  "description": "# Criteo Uplift Modeling Dataset\nThis dataset is released along with the paper:\n\u201cA Large Scale Benchmark for Uplift Modeling\u201d\nEustache Diemert, Artem Betlei, Christophe Renaudin; (Criteo AI Lab), Massih-Reza Amini (LIG, Grenoble INP)\n\nThis work was published in: AdKDD 2018 Workshop, in conjunction with KDD 2018.\n\n### Data description\nThis dataset is constructed by assembling data resulting from several incrementality tests, a particular randomized trial procedure where a random part of the population is prevented from being targeted by advertising. it consists of 25M rows, each one representing a user with 11 features, a treatment indicator and 2 labels (visits and conversions).\n\n### Fields\nHere is a detailed description of the fields (they are comma-separated in the file):\n\n- f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11: feature values (dense, float)\n- treatment: treatment group (1 = treated, 0 = control)\n- conversion: whether a conversion occured for this user (binary, label)\n- visit: whether a visit occured for this user (binary, label)\n- exposure: treatment effect, whether the user has been effectively exposed (binary)\n\n### Key figures\n\n- Format: CSV\n- Size: 459MB (compressed)\n- Rows: 25,309,483\n- Average Visit Rate: .04132\n- Average Conversion Rate: .00229\n- Treatment Ratio: .846\n\n### Tasks\n\nThe dataset was collected and prepared with uplift prediction in mind as the main task. Additionally we can foresee related usages such as but not limited to:\n\n- benchmark for causal inference\n- uplift modeling\n- interactions between features and treatment\n- heterogeneity of treatment\n- benchmark for observational causality methods",
+  "downloadSize": "311422618",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://ailab.criteo.com/criteo-uplift-prediction-dataset/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.recommendation.criteo.criteo",
+  "name": "criteo",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "1.0.1": "Fixed parsing of fields `conversion`, `visit` and `exposure`."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "3816428616",
+      "shardLengths": [
+        "436862",
+        "436862",
+        "436863",
+        "436862",
+        "436862",
+        "436863",
+        "436862",
+        "436862",
+        "436862",
+        "436862",
+        "436863",
+        "436862",
+        "436862",
+        "436863",
+        "436862",
+        "436862",
+        "436862",
+        "436862",
+        "436863",
+        "436862",
+        "436862",
+        "436863",
+        "436862",
+        "436862",
+        "436862",
+        "436862",
+        "436863",
+        "436862",
+        "436862",
+        "436863",
+        "436862",
+        "436862"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "dict": {
+            "dict": {
+              "exposure": {
+                "featureKey": "exposure"
+              },
+              "f0": {
+                "featureKey": "f0"
+              },
+              "f1": {
+                "featureKey": "f1"
+              },
+              "f10": {
+                "featureKey": "f10"
+              },
+              "f11": {
+                "featureKey": "f11"
+              },
+              "f2": {
+                "featureKey": "f2"
+              },
+              "f3": {
+                "featureKey": "f3"
+              },
+              "f4": {
+                "featureKey": "f4"
+              },
+              "f5": {
+                "featureKey": "f5"
+              },
+              "f6": {
+                "featureKey": "f6"
+              },
+              "f7": {
+                "featureKey": "f7"
+              },
+              "f8": {
+                "featureKey": "f8"
+              },
+              "f9": {
+                "featureKey": "f9"
+              },
+              "treatment": {
+                "featureKey": "treatment"
+              }
+            }
+          }
+        },
+        {
+          "featureKey": "visit"
+        }
+      ]
+    }
+  },
+  "version": "1.0.1"
+}

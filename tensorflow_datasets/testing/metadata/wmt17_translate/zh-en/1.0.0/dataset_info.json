@@ -1,59 +1,22 @@
 {
-  "citation": "\n@InProceedings{bojar-EtAl:2017:WMT1,\n  author    = {Bojar, Ond\u000b{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huang, Shujian  and  Huck, Matthias  and  Koehn, Philipp  and  Liu, Qun  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Rubino, Raphael  and  Specia, Lucia  and  Turchi, Marco},\n  title     = {Findings of the 2017 Conference on Machine Translation (WMT17)},\n  booktitle = {Proceedings of the Second Conference on Machine Translation, Volume 2: Shared Task Papers},\n  month     = {September},\n  year      = {2017},\n  address   = {Copenhagen, Denmark},\n  publisher = {Association for Computational Linguistics},\n  pages     = {169--214},\n  url       = {http://www.aclweb.org/anthology/W17-4717}\n}\n",
-  "description": "Translate dataset based on the data from statmt.org.\n\nVersions exists for the different years using a combination of multiple data\nsources. The base `wmt_translate` allows you to create your own config to choose\nyour own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.\n\n```\nconfig = tfds.translate.wmt.WmtConfig(\n    version=\"0.0.1\",\n    language_pair=(\"fr\", \"de\"),\n    subsets={\n        tfds.Split.TRAIN: [\"commoncrawl_frde\"],\n        tfds.Split.VALIDATION: [\"euelections_dev2019\"],\n    },\n)\nbuilder = tfds.builder(\"wmt_translate\", config=config)\n```\n\n",
+  "citation": "@InProceedings{bojar-EtAl:2017:WMT1,\n  author    = {Bojar, Ond\u000b{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huang, Shujian  and  Huck, Matthias  and  Koehn, Philipp  and  Liu, Qun  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Rubino, Raphael  and  Specia, Lucia  and  Turchi, Marco},\n  title     = {Findings of the 2017 Conference on Machine Translation (WMT17)},\n  booktitle = {Proceedings of the Second Conference on Machine Translation, Volume 2: Shared Task Papers},\n  month     = {September},\n  year      = {2017},\n  address   = {Copenhagen, Denmark},\n  publisher = {Association for Computational Linguistics},\n  pages     = {169--214},\n  url       = {http://www.aclweb.org/anthology/W17-4717}\n}",
+  "configDescription": "WMT 2017 zh-en translation task dataset.",
+  "configName": "zh-en",
+  "description": "Translate dataset based on the data from statmt.org.\n\nVersions exists for the different years using a combination of multiple data\nsources. The base `wmt_translate` allows you to create your own config to choose\nyour own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.\n\n```\nconfig = tfds.translate.wmt.WmtConfig(\n    version=\"0.0.1\",\n    language_pair=(\"fr\", \"de\"),\n    subsets={\n        tfds.Split.TRAIN: [\"commoncrawl_frde\"],\n        tfds.Split.VALIDATION: [\"euelections_dev2019\"],\n    },\n)\nbuilder = tfds.builder(\"wmt_translate\", config=config)\n```",
+  "downloadSize": "927276763",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.statmt.org/wmt17/translation-task.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.translate.wmt17",
   "name": "wmt17_translate",
-  "schema": {
-    "feature": [
-      {
-        "name": "en",
-        "type": "BYTES"
-      },
-      {
-        "name": "zh",
-        "type": "BYTES"
-      }
-    ]
-  },
-  "sizeInBytes": "2313962466",
   "splits": [
     {
-      "name": "test",
-      "numShards": "1",
-      "shardLengths": [
-        "2001"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2001"
-              }
-            },
-            "name": "en",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2001"
-              }
-            },
-            "name": "zh",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "2001"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "10",
+      "numBytes": "6898309864",
       "shardLengths": [
         "392760",
         "392759",
@@ -119,65 +82,36 @@
         "392760",
         "392759",
         "392760"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "25136609"
-              }
-            },
-            "name": "en",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "25136609"
-              }
-            },
-            "name": "zh",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "25136609"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
-      "numShards": "1",
+      "numBytes": "636985",
       "shardLengths": [
         "2002"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2002"
-              }
-            },
-            "name": "en",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2002"
-              }
-            },
-            "name": "zh",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "2002"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "586529",
+      "shardLengths": [
+        "2001"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "zh",
-    "output": "en"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "zh"
+        },
+        {
+          "featureKey": "en"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

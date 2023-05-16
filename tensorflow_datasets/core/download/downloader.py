@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,13 +29,13 @@ import urllib
 from etils import epath
 import promise
 import requests
-
-import tensorflow as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
+MAX_RETRIES = 10
 
 # Response interface. Has `.url` and `.headers` attribute
 Response = Union[requests.Response, urllib.response.addinfourl]
@@ -53,7 +53,8 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
 
 
 def _filename_from_content_disposition(
-    content_disposition: str,) -> Optional[str]:
+    content_disposition: str,
+) -> Optional[str]:
   """Extract the filename from the content disposition.
 
   Parse the content_definition as defined in:
@@ -89,7 +90,8 @@ def _filename_from_content_disposition(
   elif len(match) != 1:
     raise ValueError(
         f'Error while parsing filename for: {content_disposition}\n'
-        f'Multiple filename detected: {list(match)}')
+        f'Multiple filename detected: {list(match)}'
+    )
   return os.path.basename(match[0].rstrip())
 
 
@@ -113,15 +115,27 @@ class _Downloader(object):
   Do not instantiate this class directly. Instead, call `get_downloader()`.
   """
 
-  def __init__(self, max_simultaneous_downloads: int = 50, checksumer=None):
+  _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS = 50
+
+  def __init__(
+      self,
+      max_simultaneous_downloads: Optional[
+          int
+      ] = _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS,
+      checksumer=None,
+  ):
     """Init _Downloader instance.
 
     Args:
-      max_simultaneous_downloads: `int`, max number of simultaneous downloads.
+      max_simultaneous_downloads: `int`, optional max number of simultaneous
+        downloads. If None then it defaults to
+        `self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS`.
       checksumer: `hashlib.HASH`. Defaults to `hashlib.sha256`.
     """
     self._executor = concurrent.futures.ThreadPoolExecutor(
-        max_workers=max_simultaneous_downloads)
+        max_workers=max_simultaneous_downloads
+        or self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS
+    )
     self._checksumer_cls = checksumer or hashlib.sha256
     self._pbar_url = None
     self._pbar_dl_size = None
@@ -166,8 +180,11 @@ class _Downloader(object):
     """
     destination_path = os.fspath(destination_path)
     self._pbar_url.update_total(1)
-    future = self._executor.submit(self._sync_download, url, destination_path,
-                                   verify, **request_kwargs)
+
+    future = self._executor.submit(
+        self._sync_download, url, destination_path,
+        verify, **request_kwargs
+    )
     return promise.Promise.resolve(future)
 
   def _sync_file_copy(
@@ -180,17 +197,20 @@ class _Downloader(object):
     out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
     url_info = checksums_lib.compute_url_info(
-        out_path, checksum_cls=self._checksumer_cls)
+        out_path, checksum_cls=self._checksumer_cls
+    )
     self._pbar_dl_size.update_total(url_info.size)
     self._pbar_dl_size.update(url_info.size)
     self._pbar_url.update(1)
     return DownloadResult(path=epath.Path(out_path), url_info=url_info)
 
-  def _sync_download(self,
-                     url: str,
-                     destination_path: str,
-                     verify: bool = True,
-                     **request_kwargs) -> DownloadResult:
+  def _sync_download(
+      self,
+      url: str,
+      destination_path: str,
+      verify: bool = True,
+      **request_kwargs
+  ) -> DownloadResult:
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,
@@ -250,7 +270,7 @@ class _Downloader(object):
         ),
     )
 
-
+  
 def _open_url(
     url: str,
     **kwargs: Any,
@@ -277,6 +297,17 @@ def _open_with_requests(
 ) -> Iterator[Tuple[Response, Iterable[bytes]]]:
   """Open url with request."""
   with requests.Session() as session:
+    retries = requests.packages.urllib3.util.retry.Retry(
+        total=MAX_RETRIES,
+        backoff_factor=0.2,
+        status_forcelist=[500, 502, 503, 504],
+        raise_on_redirect=True,
+        raise_on_status=True,
+    )
+    session.mount('http://', requests.adapters.HTTPAdapter(max_retries=retries))
+    session.mount(
+        'https://', requests.adapters.HTTPAdapter(max_retries=retries)
+    )
     if _DRIVE_URL.match(url):
       url = _normalize_drive_url(url)
     with session.get(url, stream=True, **kwargs) as response:
@@ -307,5 +338,8 @@ def _normalize_drive_url(url: str) -> str:
 def _assert_status(response: requests.Response) -> None:
   """Ensure the URL response is 200."""
   if response.status_code != 200:
-    raise DownloadError('Failed to get url {}. HTTP code: {}.'.format(
-        response.url, response.status_code))
+    raise DownloadError(
+        'Failed to get url {}. HTTP code: {}.'.format(
+            response.url, response.status_code
+        )
+    )

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,5 +33,6 @@ class D4rlAdroitHammer(dataset_builder.D4RLDatasetBuilder):
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(
-        name='hammer', obs_len=46, action_len=26, qpos_len=33, qvel_len=33)
+        name='hammer', obs_len=46, action_len=26, qpos_len=33, qvel_len=33
+    )
     super().__init__(ds_config=config, **kwargs)

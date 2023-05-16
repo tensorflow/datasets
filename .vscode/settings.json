@@ -3,8 +3,7 @@
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "files.associations": {
-        ".pylintrc": "ini",
-        ".style.yapf": "ini"
+        ".pylintrc": "ini"
     },
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
@@ -15,9 +14,11 @@
             80
         ],
         "editor.tabSize": 2,
+        "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.detectIndentation": false
     },
-    "python.formatting.provider": "yapf",
+    "python.formatting.provider": "none",
+    "black-formatter.path": ["pyink"],
     "python.testing.pytestArgs": [
         "tensorflow_datasets",
         "-vv",

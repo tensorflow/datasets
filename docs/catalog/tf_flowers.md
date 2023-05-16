@@ -26,7 +26,7 @@ A large set of images of flowers
     [https://www.tensorflow.org/tutorials/load_data/images](https://www.tensorflow.org/tutorials/load_data/images)
 
 *   **Source code**:
-    [`tfds.image_classification.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/flowers.py)
+    [`tfds.datasets.tf_flowers.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/tf_flowers/tf_flowers_dataset_builder.py)
 
 *   **Versions**:
 
@@ -50,18 +50,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape           | Dtype    | Description
-:------ | :----------- | :-------------- | :------- | :----------
-        | FeaturesDict |                 |          |
-image   | Image        | (None, None, 3) | tf.uint8 |
-label   | ClassLabel   |                 | tf.int64 |
+Feature | Class        | Shape           | Dtype | Description
+:------ | :----------- | :-------------- | :---- | :----------
+        | FeaturesDict |                 |       |
+image   | Image        | (None, None, 3) | uint8 |
+label   | ClassLabel   |                 | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

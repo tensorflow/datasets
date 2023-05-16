@@ -1,7 +1,7 @@
 {
   "citation": "@article{zhu2021mediasum,\n  title={MediaSum: A Large-scale Media Interview Dataset for Dialogue Summarization},\n  author={Zhu, Chenguang and Liu, Yang and Mei, Jie and Zeng, Michael},\n  journal={arXiv preprint arXiv:2103.06410},\n  year={2021}\n}",
   "description": "This large-scale media interview dataset contains 463.6K transcripts with\nabstractive summaries, collected from interview transcripts and overview /\ntopic descriptions from NPR and CNN.\n\n**Please restrict your usage of this dataset to research purpose only.**\n\nAnd please cite our paper:\n**[MediaSum: A Large-scale Media Interview Dataset for Dialogue Summarization](https://arxiv.org/abs/2103.06410)**\n\n## Ethics\n\nWe have used only the publicly available transcripts data from the media\nsources and adhere to their only-for-research-purpose guideline.\n\nAs media and guests may have biased views, the transcripts and summaries will\nlikely contain them. The content of the transcripts and summaries only reflect\nthe views of the media and guests, and should be viewed with discretion.",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/zcgzcgzcg1/MediaSum"

@@ -1,0 +1,83 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "reformulations": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                        "featuresDict": {
+                            "features": {
+                                "instruction": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Instruction with placeholder for inputs."
+                                },
+                                "instruction_with_input": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Instructions with inputs supplied to placeholders."
+                                },
+                                "input": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Input to be fed into placeholders for given instruction."
+                                },
+                                "output": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Target output for given task."
+                                }
+                            }
+                        }
+                    },
+                    "length": "-1"
+                }
+            },
+            "instances": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                        "featuresDict": {
+                            "features": {
+                                "output": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Target output for given task."
+                                },
+                                "constraints": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Task-specific constraints."
+                                },
+                                "instruction_with_input": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Instructions with inputs supplied to placeholders."
+                                },
+                                "input": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Input to be fed into placeholders for given instruction."
+                                }
+                            }
+                        }
+                    },
+                    "length": "-1"
+                }
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Unique identifier for example."
+            },
+            "instruction": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Instruction with placeholder for inputs."
+            }
+        }
+    }
+}

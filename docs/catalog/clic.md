@@ -30,10 +30,16 @@ Tensor is expected.
 This dataset does *NOT* contain the data from the P-Frame challenge (YUV image
 frames).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/clic">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://www.compression.cc/](https://www.compression.cc/)
 
 *   **Source code**:
-    [`tfds.image.CLIC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clic.py)
+    [`tfds.datasets.clic.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/clic/clic_dataset_builder.py)
 
 *   **Versions**:
 
@@ -59,16 +65,16 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape           | Dtype    | Description
-:------ | :----------- | :-------------- | :------- | :----------
-        | FeaturesDict |                 |          |
-image   | Image        | (None, None, 3) | tf.uint8 |
+Feature | Class        | Shape           | Dtype | Description
+:------ | :----------- | :-------------- | :---- | :----------
+        | FeaturesDict |                 |       |
+image   | Image        | (None, None, 3) | uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

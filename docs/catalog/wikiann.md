@@ -20,6 +20,12 @@ dataset consisting of Wikipedia articles annotated with LOC (location), PER
 corresponds to the balanced train, dev, and test splits of Rahimi et al. (2019),
 which supports 176 of the 282 languages from the original WikiANN corpus.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikiann-1">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/afshinrahimi/mmner](https://github.com/afshinrahimi/mmner)
 
@@ -40,22 +46,22 @@ which supports 176 of the 282 languages from the original WikiANN corpus.
 
 ```python
 FeaturesDict({
-    'langs': Sequence(Text(shape=(), dtype=tf.string)),
-    'spans': Sequence(Text(shape=(), dtype=tf.string)),
-    'tags': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=7)),
-    'tokens': Sequence(Text(shape=(), dtype=tf.string)),
+    'langs': Sequence(Text(shape=(), dtype=string)),
+    'spans': Sequence(Text(shape=(), dtype=string)),
+    'tags': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=7)),
+    'tokens': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class                | Shape   | Dtype     | Description
-:------ | :------------------- | :------ | :-------- | :----------
-        | FeaturesDict         |         |           |
-langs   | Sequence(Text)       | (None,) | tf.string |
-spans   | Sequence(Text)       | (None,) | tf.string |
-tags    | Sequence(ClassLabel) | (None,) | tf.int64  |
-tokens  | Sequence(Text)       | (None,) | tf.string |
+Feature | Class                | Shape   | Dtype  | Description
+:------ | :------------------- | :------ | :----- | :----------
+        | FeaturesDict         |         |        |
+langs   | Sequence(Text)       | (None,) | string |
+spans   | Sequence(Text)       | (None,) | string |
+tags    | Sequence(ClassLabel) | (None,) | int64  |
+tokens  | Sequence(Text)       | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

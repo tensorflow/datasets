@@ -22,11 +22,17 @@
 
 Stanford Online Products Dataset
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/stanford-online-products">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://cvgl.stanford.edu/projects/lifted_struct/](http://cvgl.stanford.edu/projects/lifted_struct/)
 
 *   **Source code**:
-    [`tfds.image_classification.StanfordOnlineProducts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/stanford_online_products.py)
+    [`tfds.datasets.stanford_online_products.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/stanford_online_products/stanford_online_products_dataset_builder.py)
 
 *   **Versions**:
 
@@ -34,11 +40,11 @@ Stanford Online Products Dataset
 
 *   **Download size**: `2.87 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.89 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -51,22 +57,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'class_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=22634),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'super_class_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
-    'super_class_id/num': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
+    'class_id': ClassLabel(shape=(), dtype=int64, num_classes=22634),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'super_class_id': ClassLabel(shape=(), dtype=int64, num_classes=12),
+    'super_class_id/num': ClassLabel(shape=(), dtype=int64, num_classes=12),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature            | Class        | Shape           | Dtype    | Description
-:----------------- | :----------- | :-------------- | :------- | :----------
-                   | FeaturesDict |                 |          |
-class_id           | ClassLabel   |                 | tf.int64 |
-image              | Image        | (None, None, 3) | tf.uint8 |
-super_class_id     | ClassLabel   |                 | tf.int64 |
-super_class_id/num | ClassLabel   |                 | tf.int64 |
+Feature            | Class        | Shape           | Dtype | Description
+:----------------- | :----------- | :-------------- | :---- | :----------
+                   | FeaturesDict |                 |       |
+class_id           | ClassLabel   |                 | int64 |
+image              | Image        | (None, None, 3) | uint8 |
+super_class_id     | ClassLabel   |                 | int64 |
+super_class_id/num | ClassLabel   |                 | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

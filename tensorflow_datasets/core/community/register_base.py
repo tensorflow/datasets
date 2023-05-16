@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 """Base register class."""
 
 import abc
-from typing import Any, List, Type
+from typing import Any, Iterable, List, Type
 
 from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import utils
+from tensorflow_datasets.core import naming
 
 
 class BaseRegister(abc.ABC):
@@ -39,7 +39,6 @@ class BaseRegister(abc.ABC):
   * DataDirRegister: Find the dataset by looking at pre-generated dataset
     inside `data_dir`.
   * RemoteRegister: Find the dataset by fetching remote generation script.
-
   """
 
   @abc.abstractmethod
@@ -47,15 +46,25 @@ class BaseRegister(abc.ABC):
     """Returns the list of registered builders.
 
     Returns:
-      builder_names: The sorted, cannonical list of builder names (including
+      builder_names: The sorted, canonical list of builder names (including
         the eventual namespace). Example: `['kaggle:ds0', 'kaggle:ds1',...]`
+    """
+    raise NotImplementedError
+
+  @abc.abstractmethod
+  def list_dataset_references(self) -> Iterable[naming.DatasetReference]:
+    """Yields registered datasets.
+
+    Yields:
+      references to datasets in this register. Note that configs and versions of
+      the dataset are not included.
     """
     raise NotImplementedError
 
   @abc.abstractmethod
   def builder_cls(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the `tfds.core.DatasetBuilder` instance.
 
@@ -73,7 +82,7 @@ class BaseRegister(abc.ABC):
   @abc.abstractmethod
   def builder(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
       **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the `tfds.core.DatasetBuilder` instance.

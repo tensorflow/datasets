@@ -4,7 +4,7 @@
   "configName": "arc_hard_with_ir_dev",
   "description": "The UnifiedQA benchmark consists of 20 main question answering (QA) datasets\n(each may have multiple versions) that target different formats as well as\nvarious complex linguistic phenomena. These datasets are grouped into several\nformats/categories, including: extractive QA, abstractive QA, multiple-choice\nQA, and yes/no QA. Additionally, contrast sets are used for several datasets\n(denoted with \"contrast_sets_\"). These evaluation sets are expert-generated\nperturbations that deviate from the patterns common in the original dataset. For\nseveral datasets that do not come with evidence paragraphs, two variants are\nincluded: one where the datasets are used as-is and another that uses paragraphs\nfetched via an information retrieval system as additional evidence, indicated\nwith \"_ir\" tags.\n\nMore information can be found at: https://github.com/allenai/unifiedqa.",
   "downloadSize": "3700438",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/allenai/unifiedqa"

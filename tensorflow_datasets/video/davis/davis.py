@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +15,10 @@
 
 """DAVIS 2017 dataset for video object segmentation."""
 
+from __future__ import annotations
+
 import numpy as np
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -57,7 +59,7 @@ def _read_annotation(annotation_path):
 
 
 class DavisConfig(tfds.core.BuilderConfig):
-  """"Configuration for RoboNet video rescaling."""
+  """ "Configuration for RoboNet video rescaling."""
 
   def __init__(self, *, full_resolution=False, **kwargs):
     """The parameters specifying how the dataset will be processed.
@@ -76,6 +78,7 @@ class DavisConfig(tfds.core.BuilderConfig):
 
 class Davis(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for davis dataset."""
+
   BUILDER_CONFIGS = [
       DavisConfig(
           name='480p',
@@ -103,19 +106,16 @@ class Davis(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'video':
-                tfds.features.Sequence({
-                    'frames':
-                        tfds.features.Image(shape=(None, None, 3)),
-                    'segmentations':
-                        tfds.features.Image(
-                            shape=(None, None, 1),
-                            use_colormap=True,
-                        ),
-                }),
+            'video': tfds.features.Sequence({
+                'frames': tfds.features.Image(shape=(None, None, 3)),
+                'segmentations': tfds.features.Image(
+                    shape=(None, None, 1),
+                    use_colormap=True,
+                ),
+            }),
             'metadata': {
-                'num_frames': tf.int64,
-                'video_name': tf.string,
+                'num_frames': np.int64,
+                'video_name': np.str_,
             },
         }),
         supervised_keys=None,
@@ -128,17 +128,19 @@ class Davis(tfds.core.GeneratorBasedBuilder):
 
     if self.builder_config.full_resolution:
       trainval_data = dl_manager.download_and_extract(
-          _URL + 'DAVIS-2017-trainval-Full-Resolution.zip')
+          _URL + 'DAVIS-2017-trainval-Full-Resolution.zip'
+      )
     else:
       trainval_data = dl_manager.download_and_extract(
-          _URL + 'DAVIS-2017-trainval-480p.zip')
+          _URL + 'DAVIS-2017-trainval-480p.zip'
+      )
 
     train_files = trainval_data / 'DAVIS/ImageSets/2017/train.txt'
     val_files = trainval_data / 'DAVIS/ImageSets/2017/val.txt'
 
     return {
         tfds.Split.TRAIN: self._generate_examples(train_files),
-        tfds.Split.VALIDATION: self._generate_examples(val_files)
+        tfds.Split.VALIDATION: self._generate_examples(val_files),
     }
 
   def _generate_examples(self, path):
@@ -146,7 +148,9 @@ class Davis(tfds.core.GeneratorBasedBuilder):
 
     videos_to_include = path.read_text().splitlines()
     root_path = path.parent.parent.parent  # Move up three directories.
-    resolution = 'Full-Resolution' if self.builder_config.full_resolution else '480p'
+    resolution = (
+        'Full-Resolution' if self.builder_config.full_resolution else '480p'
+    )
     for video in videos_to_include:
       images_path = root_path / 'JPEGImages' / resolution / video
       annotations_path = root_path / 'Annotations' / resolution / video

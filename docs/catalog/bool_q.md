@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="bool_q" />
-  <meta itemprop="description" content="BoolQ is a question answering dataset for yes/no questions containing 15942 examples.&#10;These questions are naturally occurring, they are generated in unprompted and unconstrained settings.&#10;&#10;Each example is a triplet of (question, passage, answer),&#10;with the title of the page as optional additional context.&#10;The text-pair classification setup is similar to existing&#10;natural language inference tasks.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;bool_q&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="BoolQ is a question answering dataset for yes/no questions containing 15942&#10;examples. These questions are naturally occurring, they are generated in&#10;unprompted and unconstrained settings.&#10;&#10;Each example is a triplet of (question, passage, answer), with the title of the&#10;page as optional additional context. The text-pair classification setup is&#10;similar to existing natural language inference tasks.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;bool_q&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/bool_q" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
   <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title =     {BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author =    {Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle = {NAACL},&#10;  year =      {2019},&#10;}" />
@@ -22,11 +22,17 @@ Each example is a triplet of (question, passage, answer), with the title of the
 page as optional additional context. The text-pair classification setup is
 similar to existing natural language inference tasks.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/boolq">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
 
 *   **Source code**:
-    [`tfds.text.bool_q.BoolQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/bool_q/bool_q.py)
+    [`tfds.datasets.bool_q.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/bool_q/bool_q_dataset_builder.py)
 
 *   **Versions**:
 
@@ -51,22 +57,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer': tf.bool,
-    'passage': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'answer': bool,
+    'passage': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-answer   | Tensor       |       | tf.bool   |
-passage  | Text         |       | tf.string |
-question | Text         |       | tf.string |
-title    | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+answer   | Tensor       |       | bool   |
+passage  | Text         |       | string |
+question | Text         |       | string |
+title    | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

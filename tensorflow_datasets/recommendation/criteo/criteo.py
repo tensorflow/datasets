@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
 
 """Criteo dataset."""
 
+from __future__ import annotations
+
 import csv
 
-import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -76,8 +78,9 @@ year = {2018}
 class Criteo(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for criteo dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
+      '1.0.1': 'Fixed parsing of fields `conversion`, `visit` and `exposure`.',
       '1.0.0': 'Initial release.',
   }
 
@@ -87,42 +90,45 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'f0': tf.float32,
-            'f1': tf.float32,
-            'f2': tf.float32,
-            'f3': tf.float32,
-            'f4': tf.float32,
-            'f5': tf.float32,
-            'f6': tf.float32,
-            'f7': tf.float32,
-            'f8': tf.float32,
-            'f9': tf.float32,
-            'f10': tf.float32,
-            'f11': tf.float32,
-            'treatment': tf.int64,
-            'conversion': tf.bool,
-            'visit': tf.bool,
-            'exposure': tf.bool
+            'f0': np.float32,
+            'f1': np.float32,
+            'f2': np.float32,
+            'f3': np.float32,
+            'f4': np.float32,
+            'f5': np.float32,
+            'f6': np.float32,
+            'f7': np.float32,
+            'f8': np.float32,
+            'f9': np.float32,
+            'f10': np.float32,
+            'f11': np.float32,
+            'treatment': np.int64,
+            'conversion': np.bool_,
+            'visit': np.bool_,
+            'exposure': np.bool_,
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
         # `as_supervised=True` in `builder.as_dataset`.
-        supervised_keys=({
-            'f0': 'f0',
-            'f1': 'f1',
-            'f2': 'f2',
-            'f3': 'f3',
-            'f4': 'f4',
-            'f5': 'f5',
-            'f6': 'f6',
-            'f7': 'f7',
-            'f8': 'f8',
-            'f9': 'f9',
-            'f10': 'f10',
-            'f11': 'f11',
-            'treatment': 'treatment',
-            'exposure': 'exposure'
-        }, 'visit'),
+        supervised_keys=(
+            {
+                'f0': 'f0',
+                'f1': 'f1',
+                'f2': 'f2',
+                'f3': 'f3',
+                'f4': 'f4',
+                'f5': 'f5',
+                'f6': 'f6',
+                'f7': 'f7',
+                'f8': 'f8',
+                'f9': 'f9',
+                'f10': 'f10',
+                'f11': 'f11',
+                'treatment': 'treatment',
+                'exposure': 'exposure',
+            },
+            'visit',
+        ),
         homepage='https://ailab.criteo.com/criteo-uplift-prediction-dataset/',
         citation=_CITATION,
     )
@@ -130,7 +136,8 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(
-        'http://go.criteo.net/criteo-research-uplift-v2.1.csv.gz')
+        'http://go.criteo.net/criteo-research-uplift-v2.1.csv.gz'
+    )
 
     return {
         'train': self._generate_examples(path),
@@ -156,8 +163,8 @@ class Criteo(tfds.core.GeneratorBasedBuilder):
             'f10': row['f10'],
             'f11': row['f11'],
             'treatment': row['treatment'],
-            'conversion': row['conversion'],
-            'visit': row['visit'],
-            'exposure': row['exposure']
+            'conversion': int(row['conversion']),
+            'visit': int(row['visit']),
+            'exposure': int(row['exposure']),
         }
         index += 1

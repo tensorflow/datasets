@@ -1,0 +1,22 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "rgb_screen": {
+                "pythonClassName": "tensorflow_datasets.core.features.video_feature.Video",
+                "video": {
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "64",
+                            "64",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png"
+                }
+            }
+        }
+    }
+}

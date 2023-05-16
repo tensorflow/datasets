@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,13 +21,14 @@ import functools
 from typing import Any, Optional, Type
 
 import dill
+from etils import enp
 import numpy as np
-import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.utils import tree_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 
@@ -45,6 +46,7 @@ class FeatureExpectationItem:
   Attributes:
     value: Input to `features.encode_example`
     expected: Expected output after `features.decode_example`
+    expected_np: Expected output after `features.decode_example_np`
     expected_serialized: Optional
     decoders: Optional `tfds.decode.Decoder` objects (to overwrite the default
       `features.decode_example`). See
@@ -55,17 +57,22 @@ class FeatureExpectationItem:
       against this value (otherwise, output is checked against `features.shape`)
     raise_cls: Expected error raised during `features.encode_example`. When set
       `expected` and `expected_serialized` should be `None`.
+    raise_cls_np: Expected error raised during `features.encode_example_np`.
+      When set `expected_np` and `expected_serialized_np` should be `None`.
     raise_msg: Expected error message regex.
     atol: If provided, compare float values with this precision (use default
       otherwise).
   """
+
   value: Any
   expected: Optional[Any] = None
+  expected_np: Optional[np.ndarray] = None
   expected_serialized: Optional[Any] = None
   decoders: Optional[utils.TreeDict[Any]] = None
   dtype: Optional[tf.dtypes.DType] = None
   shape: Optional[utils.Shape] = None
   raise_cls: Optional[Type[Exception]] = None
+  raise_cls_np: Optional[Type[Exception]] = None
   raise_msg: Optional[str] = None
   atol: Optional[float] = None
 
@@ -166,7 +173,8 @@ class FeatureExpectationsTestCase(SubTestCase):
         serialized_info=serialized_info,
         test_tensor_spec=test_tensor_spec,
         skip_feature_tests=skip_feature_tests,
-        test_attributes=test_attributes)
+        test_attributes=test_attributes,
+    )
 
   def assertFeatureEagerOnly(
       self,
@@ -180,52 +188,72 @@ class FeatureExpectationsTestCase(SubTestCase):
       test_attributes=None,
   ):
     """Test the given feature against the predicates."""
+    # Fill kwargs
+    run_tests = functools.partial(
+        self._run_tests,
+        shape=shape,
+        dtype=dtype,
+        tests=tests,
+        test_tensor_spec=test_tensor_spec,
+    )
+    assert_feature = functools.partial(
+        self._assert_feature,
+        shape=shape,
+        dtype=dtype,
+        tests=tests,
+        serialized_info=serialized_info,
+        test_tensor_spec=test_tensor_spec,
+        skip_feature_tests=skip_feature_tests,
+        test_attributes=test_attributes,
+    )
+
+    # Create the feature dict
+    fdict = features.FeaturesDict({'inner': feature})
+
+    # Check whether the following doesn't raise an exception
+    fdict.catalog_documentation()
 
     with self._subTest('feature'):
-      self._assert_feature(
-          feature=feature,
-          shape=shape,
-          dtype=dtype,
-          tests=tests,
-          serialized_info=serialized_info,
-          test_tensor_spec=test_tensor_spec,
-          skip_feature_tests=skip_feature_tests,
-          test_attributes=test_attributes,
-      )
+      assert_feature(feature=feature)
+      run_tests(serialize_fdict=fdict, deserialize_fdict=fdict, feature=feature)
+
+    # Test the feature again to make sure it behave correctly after restoring
     # TODO(tfds): Remove `skip_feature_tests` after text encoders are removed
     if not skip_feature_tests:
-      # Test the feature again to make sure that feature restored from config
-      # behave similarly.
+      # Restored from config
+      with test_utils.tmp_dir() as config_dir:
+        feature.save_config(config_dir)
+        new_feature = feature.from_config(config_dir)
+      assert_feature(feature=new_feature)
       with self._subTest('feature_roundtrip'):
-        with test_utils.tmp_dir() as config_dir:
-          feature.save_config(config_dir)
-          new_feature = feature.from_config(config_dir)
-        self._assert_feature(
-            feature=new_feature,
-            shape=shape,
-            dtype=dtype,
-            tests=tests,
-            serialized_info=serialized_info,
-            test_tensor_spec=test_tensor_spec,
-            skip_feature_tests=skip_feature_tests,
-            test_attributes=test_attributes,
+        run_tests(
+            serialize_fdict=fdict, deserialize_fdict=fdict, feature=new_feature
         )
+
+      # Restored from proto
+      with test_utils.tmp_dir() as config_dir:
+        feature_proto = feature.to_proto()
+        feature.save_metadata(config_dir, feature_name=None)
+        new_feature = feature_lib.FeatureConnector.from_proto(feature_proto)
+        new_feature.load_metadata(config_dir, feature_name=None)
+      assert_feature(feature=new_feature)
+      new_fdict = features.FeaturesDict({'inner': new_feature})
       with self._subTest('feature_proto_roundtrip'):
-        with test_utils.tmp_dir() as config_dir:
-          feature_proto = feature.to_proto()
-          feature.save_metadata(config_dir, feature_name=None)
-          new_feature = feature_lib.FeatureConnector.from_proto(feature_proto)
-          new_feature.load_metadata(config_dir, feature_name=None)
-          self._assert_feature(
-              feature=new_feature,
-              shape=shape,
-              dtype=dtype,
-              tests=tests,
-              serialized_info=serialized_info,
-              test_tensor_spec=test_tensor_spec,
-              skip_feature_tests=skip_feature_tests,
-              test_attributes=test_attributes,
-          )
+        run_tests(
+            serialize_fdict=fdict, deserialize_fdict=fdict, feature=new_feature
+        )
+      with self._subTest('serialize_fdict'):
+        run_tests(
+            serialize_fdict=new_fdict,
+            deserialize_fdict=fdict,
+            feature=new_feature,
+        )
+      with self._subTest('deserialize_fdict'):
+        run_tests(
+            serialize_fdict=fdict,
+            deserialize_fdict=new_fdict,
+            feature=new_feature,
+        )
 
   def _assert_feature(
       self,
@@ -242,6 +270,8 @@ class FeatureExpectationsTestCase(SubTestCase):
       self.assertEqual(feature.shape, shape)
     with self._subTest('dtype'):
       self.assertEqual(feature.dtype, dtype)
+      tree_utils.map_structure(enp.lazy.is_np_dtype, feature.np_dtype)
+      tree_utils.map_structure(enp.lazy.is_tf_dtype, feature.tf_dtype)
 
     # Check the serialized features
     if serialized_info:
@@ -255,16 +285,21 @@ class FeatureExpectationsTestCase(SubTestCase):
       for key, value in test_attributes.items():
         self.assertEqual(getattr(feature, key), value)
 
-    # Create the feature dict
-    fdict = features.FeaturesDict({'inner': feature})
-
-    # Check whether the following doesn't raise an exception
-    fdict.catalog_documentation()
-
+  def _run_tests(
+      self,
+      serialize_fdict,
+      deserialize_fdict,
+      feature,
+      shape,
+      dtype,
+      tests,
+      test_tensor_spec=True,
+  ):
     for i, test in enumerate(tests):
       with self._subTest(str(i)):
         self.assertFeatureTest(
-            fdict=fdict,
+            serialize_fdict=serialize_fdict,
+            deserialize_fdict=deserialize_fdict,
             test=test,
             feature=feature,
             shape=shape,
@@ -272,28 +307,57 @@ class FeatureExpectationsTestCase(SubTestCase):
             test_tensor_spec=test_tensor_spec,
         )
 
-  def assertFeatureTest(self,
-                        fdict,
-                        test,
-                        feature,
-                        shape,
-                        dtype,
-                        test_tensor_spec: bool = True):
+  def assertFeatureTest(
+      self,
+      serialize_fdict,
+      deserialize_fdict,
+      test,
+      feature,
+      shape,
+      dtype,
+      test_tensor_spec: bool = True,
+  ):
     """Test that encode=>decoding of a value works correctly."""
     # test feature.encode_example can be pickled and unpickled for beam.
     dill.loads(dill.dumps(feature.encode_example))
 
     input_value = {'inner': test.value}
 
-    if test.raise_cls is not None:
-      with self._subTest('raise'):
-        if not test.raise_msg:
-          raise ValueError(
-              'test.raise_msg should be set with {} for test {}'.format(
-                  test.raise_cls, type(feature)))
-        with self.assertRaisesWithPredicateMatch(test.raise_cls,
-                                                 test.raise_msg):
-          features_encode_decode(fdict, input_value, decoders=test.decoders)
+    if test.raise_cls is not None or test.raise_cls_np is not None:
+      if test.raise_cls is not None:
+        with self._subTest('raise'):
+          if not test.raise_msg:
+            raise ValueError(
+                'test.raise_msg should be set with {} for test {}'.format(
+                    test.raise_cls, type(feature)
+                )
+            )
+          with self.assertRaisesWithPredicateMatch(
+              test.raise_cls, test.raise_msg
+          ):
+            features_encode_decode(
+                serialize_fdict,
+                deserialize_fdict,
+                input_value,
+                decoders=test.decoders,
+            )
+      if test.raise_cls_np is not None:
+        with self._subTest('raise_np'):
+          if not test.raise_msg:
+            raise ValueError(
+                'test.raise_msg should be set with {} for test {}'.format(
+                    test.raise_cls_np, type(feature)
+                )
+            )
+          with self.assertRaisesWithPredicateMatch(
+              test.raise_cls_np, test.raise_msg
+          ):
+            features_encode_decode_np(
+                serialize_fdict,
+                deserialize_fdict,
+                input_value,
+                decoders=test.decoders,
+            )
     else:
       # Test the serialization only
       if test.expected_serialized is not None:
@@ -303,10 +367,23 @@ class FeatureExpectationsTestCase(SubTestCase):
               feature.encode_example(test.value),
           )
 
+      # Test serialization + decoding from disk for NumPy worflow
+      if test.expected_np is not None:
+        with self._subTest('out_np'):
+          out_numpy = features_encode_decode_np(
+              serialize_fdict,
+              deserialize_fdict,
+              input_value,
+              decoders={'inner': test.decoders},
+          )
+          with self._subTest('out_np_value'):
+            np.testing.assert_array_equal(out_numpy['inner'], test.expected_np)
+
       # Test serialization + decoding from disk
       with self._subTest('out'):
         out_tensor, out_numpy, out_element_spec = features_encode_decode(
-            fdict,
+            serialize_fdict,
+            deserialize_fdict,
             input_value,
             decoders={'inner': test.decoders},
         )
@@ -343,8 +420,9 @@ class FeatureExpectationsTestCase(SubTestCase):
           out_shapes = utils.map_nested(_get_shape, out_tensor)
 
           shapes_tuple = utils.zip_nested(out_shapes, expected_shape)
-          utils.map_nested(lambda x: x[0].assert_is_compatible_with(x[1]),
-                           shapes_tuple)
+          utils.map_nested(
+              lambda x: x[0].assert_is_compatible_with(x[1]), shapes_tuple
+          )
 
         # Assert value
         with self._subTest('out_value'):
@@ -386,13 +464,15 @@ class FeatureExpectationsTestCase(SubTestCase):
       self.assertIsInstance(text, str)
 
 
-def features_encode_decode(features_dict, example, decoders):
+def features_encode_decode(
+    serialize_fdict, deserialize_fdict, example, decoders
+):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
-  # Serialize/deserialize the example
-  serialized_example = features_dict.serialize_example(example)
+  # Serialize/deserialize the example using TensorFlow methods.
+  serialized_example = serialize_fdict.serialize_example(example)
 
   decode_fn = functools.partial(
-      features_dict.deserialize_example,
+      deserialize_fdict.deserialize_example,
       decoders=decoders,
   )
   ds = tf.data.Dataset.from_tensors(serialized_example)
@@ -404,3 +484,15 @@ def features_encode_decode(features_dict, example, decoders):
     out_tensor = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
   out_numpy = dataset_utils.as_numpy(out_tensor)
   return out_tensor, out_numpy, ds.element_spec
+
+
+def features_encode_decode_np(
+    serialize_fdict, deserialize_fdict, example, decoders
+):
+  """Runs the full pipeline: encode > write > tmp files > read > decode."""
+  # Serialize/deserialize the example using NumPy methods.
+  serialized_example = serialize_fdict.serialize_example(example)
+  deserialized_example = deserialize_fdict.deserialize_example_np(
+      serialized_example, decoders=decoders
+  )
+  return deserialized_example

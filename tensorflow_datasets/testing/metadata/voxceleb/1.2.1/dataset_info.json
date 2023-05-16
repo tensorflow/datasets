@@ -2,7 +2,7 @@
   "citation": "@InProceedings{Nagrani17,\n\tauthor       = \"Nagrani, A. and Chung, J.~S. and Zisserman, A.\",\n\ttitle        = \"VoxCeleb: a large-scale speaker identification dataset\",\n\tbooktitle    = \"INTERSPEECH\",\n\tyear         = \"2017\",\n}",
   "description": "An large scale dataset for speaker identification. This data is collected from\nover 1,251 speakers, with over 150k samples in total.\nThis release contains the audio part of the voxceleb1.1 dataset.",
   "downloadSize": "4912512",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html"
@@ -10,8 +10,12 @@
   },
   "moduleName": "tensorflow_datasets.audio.voxceleb",
   "name": "voxceleb",
+  "releaseNotes": {
+    "1.2.1": "Add youtube_id field"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "104997628727",
       "shardLengths": [
@@ -1042,6 +1046,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "5014074621",
       "shardLengths": [
@@ -1112,6 +1117,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "5927997357",
       "shardLengths": [
@@ -1183,8 +1189,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "audio",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "audio"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.2.1"
 }

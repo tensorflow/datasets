@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,8 @@
 
 import collections
 import csv
-import six
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -41,8 +40,23 @@ different from the machine translated data provided by the original XNLI paper.
 
 _XTREME_TRANSLATIONS_FORMAT = 'https://storage.googleapis.com/xtreme_translations/XNLI/translate-train/en-{0}-translated.tsv'
 
-_LANGUAGES = ('ar', 'bg', 'de', 'el', 'en', 'es', 'fr', 'hi', 'ru', 'sw', 'th',
-              'tr', 'ur', 'vi', 'zh')
+_LANGUAGES = (
+    'ar',
+    'bg',
+    'de',
+    'el',
+    'en',
+    'es',
+    'fr',
+    'hi',
+    'ru',
+    'sw',
+    'th',
+    'tr',
+    'ur',
+    'vi',
+    'zh',
+)
 
 
 class XtremeXnli(tfds.core.GeneratorBasedBuilder):
@@ -55,14 +69,15 @@ class XtremeXnli(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'premise':
-                tfds.features.Translation(languages=_LANGUAGES,),
-            'hypothesis':
-                tfds.features.TranslationVariableLanguages(
-                    languages=_LANGUAGES,),
-            'label':
-                tfds.features.ClassLabel(
-                    names=['entailment', 'neutral', 'contradiction']),
+            'premise': tfds.features.Translation(
+                languages=_LANGUAGES,
+            ),
+            'hypothesis': tfds.features.TranslationVariableLanguages(
+                languages=_LANGUAGES,
+            ),
+            'label': tfds.features.ClassLabel(
+                names=['entailment', 'neutral', 'contradiction']
+            ),
         }),
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
@@ -103,7 +118,7 @@ class XtremeXnli(tfds.core.GeneratorBasedBuilder):
                 'sentence1': en_sent1,
                 'sentence2': en_sent2,
                 'gold_label': label,
-                'pairID': en_pair_to_id[key]
+                'pairID': en_pair_to_id[key],
             })
           pair_id = en_pair_to_id[key]
           row = {
@@ -111,11 +126,11 @@ class XtremeXnli(tfds.core.GeneratorBasedBuilder):
               'sentence1': translated_sent1,
               'sentence2': translated_sent2,
               'gold_label': label,
-              'pairID': pair_id
+              'pairID': pair_id,
           }
           rows_per_pair_id[key].append(row)
 
-    for rows in six.itervalues(rows_per_pair_id):
+    for rows in rows_per_pair_id.values():
       premise = {row['language']: row['sentence1'] for row in rows}
       hypothesis = {row['language']: row['sentence2'] for row in rows}
       yield rows[0]['pairID'], {

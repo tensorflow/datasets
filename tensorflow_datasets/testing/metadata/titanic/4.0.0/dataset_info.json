@@ -2,7 +2,7 @@
   "citation": "@ONLINE {titanic,\nauthor = \"Frank E. Harrell Jr., Thomas Cason\",\ntitle  = \"Titanic dataset\",\nmonth  = \"oct\",\nyear   = \"2017\",\nurl    = \"https://www.openml.org/d/40945\"\n}",
   "description": "Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'.",
   "downloadSize": "117743",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.openml.org/d/40945"
@@ -10,8 +10,14 @@
   },
   "moduleName": "tensorflow_datasets.structured.titanic",
   "name": "titanic",
+  "releaseNotes": {
+    "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    "3.0.0": "Use a standard flat dictionary of features for the dataset. Use `as_supervised=True` to split the dataset into a `(features_dict, survived)` tuple.",
+    "4.0.0": "Fix inverted labels which were inverted in the 3.0.0."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "391760",
       "shardLengths": [

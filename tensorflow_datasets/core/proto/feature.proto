@@ -97,6 +97,7 @@ message AudioFeature {
   // audio. This value isn't used neither in encoding nor decoding.
   int64 sample_rate = 4;
   string encoding = 5;
+  bool lazy_decode = 6;
 }
 
 // A bounding box around an object in an image. Typically, bounding boxes are

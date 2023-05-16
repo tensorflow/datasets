@@ -1,0 +1,13 @@
+content.data-type.dialogue # Contains dialogue data.
+content.data-type.text # Contains text data.
+content.language.en # Contains text in language English / en.
+ml.task.language-modeling # Relates to Language Modeling, a machine learning task.
+ml.task.language-modelling # Relates to Language Modelling, a machine learning task.
+ml.task.natural-language-understanding # Relates to Natural Language Understanding, a machine learning task.
+ml.task.open-domain-question-answering # Relates to Open Domain Question Answering, a machine learning task.
+ml.task.question-answering # Relates to Question Answering, a machine learning task.
+ml.task.sequence-modeling # Relates to Sequence Modeling, a machine learning task.
+ml.task.sequence-to-sequence-language-modeling # Relates to Sequence To Sequence Language Modeling, a machine learning task.
+ml.task.sequence-to-sequence-language-modelling # Relates to Sequence to Sequence Language Modelling, a machine learning task.
+ml.task.text-generation # Relates to Text Generation, a machine learning task.
+ml.task.text-summarization # Relates to Text Summarization, a machine learning task.

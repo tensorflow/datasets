@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 import collections
 
 from absl.testing.absltest import mock
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import shuffle
 
@@ -72,22 +73,56 @@ _SORTED_ITEMS = [
 _TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS_SPLIT1)
 
 
-class GetShardTest(testing.TestCase):
+@pytest.mark.parametrize(
+    [
+        'num_keys',
+        'num_buckets',
+        'max_hkey',
+        'expected_non_empty_shards',
+        'expected_min_bucket_size',
+        'expected_max_bucket_size',
+    ],
+    [
+        (10, 2, 9, 2, 5, 5),
+        (10, 3, 9, 3, 3, 4),
+        (1024, 10, 1023, 10, 102, 103),
+        (10, 2, 99, 1, 0, 10),
+    ],
+)
+def test_get_bucket_number(
+    num_keys,
+    num_buckets,
+    max_hkey,
+    expected_non_empty_shards,
+    expected_min_bucket_size,
+    expected_max_bucket_size,
+):
+  shards = [
+      shuffle.get_bucket_number(
+          hkey=k, num_buckets=num_buckets, max_hkey=max_hkey
+      )
+      for k in range(num_keys)
+  ]
+  # Check shard(x) <= shard(y) if x < y.
+  previous_shard = 0
+  for shard in shards:
+    assert shard >= previous_shard
+    previous_shard = shard
+  # Check distribution: all shards are used.
+  counts = collections.Counter(shards)
+  assert len(counts) == expected_non_empty_shards
+  for bucket_size in counts.values():
+    assert bucket_size >= expected_min_bucket_size
+    assert bucket_size <= expected_max_bucket_size
 
-  @mock.patch.object(shuffle, 'HKEY_SIZE', 10)  # 1024 keys.
-  def test_order(self):
-    shards_number = 10
-    shards = [shuffle.get_bucket_number(k, shards_number) for k in range(1024)]
-    # Check max(shard_x) < min(shard_y) if x < y.
-    previous_shard = 0
-    for shard in shards:
-      self.assertGreaterEqual(shard, previous_shard)
-      previous_shard = shard
-    # Check distribution: all shards are used.
-    counts = collections.Counter(shards)
-    self.assertEqual(len(counts), shards_number)
-    # And all shards contain same number of elements (102 or 102 in that case).
-    self.assertEqual(len(set(counts.values())), 2)
+
+def test_get_bucket_number_large_hkey():
+  bucket = shuffle.get_bucket_number(
+      hkey=314755909755515592000481005244904880883,
+      num_buckets=5,
+      max_hkey=314755909755515592000481005244904880883,
+  )
+  assert bucket == 4
 
 
 class ShuffleTest(testing.TestCase):
@@ -123,13 +158,15 @@ class ShuffleTest(testing.TestCase):
   def test_sorted_by_key(self):
     self._test_items(
         'split1',
-        _SORTED_ITEMS, [value for key, value in _SORTED_ITEMS],
-        disable_shuffling=True)
+        _SORTED_ITEMS,
+        [value for key, value in _SORTED_ITEMS],
+        disable_shuffling=True,
+    )
 
   def test_nonbytes(self):
     shuffler = shuffle.Shuffler(self.get_temp_dir(), 'split1')
     with self.assertRaisesWithPredicateMatch(AssertionError, 'Only bytes'):
-      shuffler.add(1, u'a')
+      shuffler.add(1, 'a')
     with self.assertRaisesWithPredicateMatch(AssertionError, 'Only bytes'):
       shuffler.add(1, 123)
 
@@ -140,7 +177,8 @@ class ShuffleTest(testing.TestCase):
     shuffler.add(1, b'c')
     iterator = iter(shuffler)
     self.assertEqual(
-        next(iterator), (86269847664267119453139349052967691808, b'a'))
+        next(iterator), (86269847664267119453139349052967691808, b'a')
+    )
     with self.assertRaises(shuffle.DuplicatedKeysError):
       next(iterator)
 

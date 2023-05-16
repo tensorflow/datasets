@@ -44,7 +44,7 @@ If you run on your local machine (or in VM), you can authenticate with your
 account by running:
 
 ```shell
-gcloud login application-default
+gcloud auth application-default login
 ```
 
 If you want to login with service account, download the JSON file key and set

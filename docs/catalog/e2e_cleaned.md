@@ -18,11 +18,17 @@ An update release of E2E NLG Challenge data with cleaned MRs. The E2E data
 contains dialogue act-based meaning representation (MR) in the restaurant domain
 and up to 5 references in natural language, which is what one needs to predict.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/e2e">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/tuetschek/e2e-cleaning](https://github.com/tuetschek/e2e-cleaning)
 
 *   **Source code**:
-    [`tfds.structured.E2eCleaned`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/e2e_cleaned.py)
+    [`tfds.datasets.e2e_cleaned.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/e2e_cleaned/e2e_cleaned_dataset_builder.py)
 
 *   **Versions**:
 
@@ -50,26 +56,26 @@ Split          | Examples
 FeaturesDict({
     'input_text': FeaturesDict({
         'table': Sequence({
-            'column_header': tf.string,
-            'content': tf.string,
-            'row_number': tf.int16,
+            'column_header': string,
+            'content': string,
+            'row_number': int16,
         }),
     }),
-    'target_text': tf.string,
+    'target_text': string,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype     | Description
-:----------------------------- | :----------- | :---- | :-------- | :----------
-                               | FeaturesDict |       |           |
-input_text                     | FeaturesDict |       |           |
-input_text/table               | Sequence     |       |           |
-input_text/table/column_header | Tensor       |       | tf.string |
-input_text/table/content       | Tensor       |       | tf.string |
-input_text/table/row_number    | Tensor       |       | tf.int16  |
-target_text                    | Tensor       |       | tf.string |
+Feature                        | Class        | Shape | Dtype  | Description
+:----------------------------- | :----------- | :---- | :----- | :----------
+                               | FeaturesDict |       |        |
+input_text                     | FeaturesDict |       |        |
+input_text/table               | Sequence     |       |        |
+input_text/table/column_header | Tensor       |       | string |
+input_text/table/content       | Tensor       |       | string |
+input_text/table/row_number    | Tensor       |       | int16  |
+target_text                    | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

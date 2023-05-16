@@ -18,11 +18,17 @@ The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and
 (synthesized) audio of human-performed, tempo-aligned expressive drumming
 captured on a Roland TD-11 V-Drum electronic drum kit.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/groove-midi-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 *   **Source code**:
-    [`tfds.audio.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
+    [`tfds.datasets.groove.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/groove/groove_dataset_builder.py)
 
 *   **Versions**:
 
@@ -35,10 +41,6 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -76,33 +78,70 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'bpm': tf.int32,
-    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': tf.string,
-    'midi': tf.string,
+    'bpm': int32,
+    'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
-        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'secondary': tf.string,
+        'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
+        'secondary': string,
     }),
-    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype     | Description
-:-------------- | :----------- | :---- | :-------- | :----------
-                | FeaturesDict |       |           |
-bpm             | Tensor       |       | tf.int32  |
-drummer         | ClassLabel   |       | tf.int64  |
-id              | Tensor       |       | tf.string |
-midi            | Tensor       |       | tf.string |
-style           | FeaturesDict |       |           |
-style/primary   | ClassLabel   |       | tf.int64  |
-style/secondary | Tensor       |       | tf.string |
-time_signature  | ClassLabel   |       | tf.int64  |
-type            | ClassLabel   |       | tf.int64  |
+Feature         | Class        | Shape | Dtype  | Description
+:-------------- | :----------- | :---- | :----- | :----------
+                | FeaturesDict |       |        |
+bpm             | Tensor       |       | int32  |
+drummer         | ClassLabel   |       | int64  |
+id              | Tensor       |       | string |
+midi            | Tensor       |       | string |
+style           | FeaturesDict |       |        |
+style/primary   | ClassLabel   |       | int64  |
+style/secondary | Tensor       |       | string |
+time_signature  | ClassLabel   |       | int64  |
+type            | ClassLabel   |       | int64  |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/groove-full-midionly-2.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## groove/full-16000hz
 
@@ -128,35 +167,72 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.float32),
-    'bpm': tf.int32,
-    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': tf.string,
-    'midi': tf.string,
+    'audio': Audio(shape=(None,), dtype=float32),
+    'bpm': int32,
+    'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
-        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'secondary': tf.string,
+        'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
+        'secondary': string,
     }),
-    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape   | Dtype      | Description
-:-------------- | :----------- | :------ | :--------- | :----------
-                | FeaturesDict |         |            |
-audio           | Audio        | (None,) | tf.float32 |
-bpm             | Tensor       |         | tf.int32   |
-drummer         | ClassLabel   |         | tf.int64   |
-id              | Tensor       |         | tf.string  |
-midi            | Tensor       |         | tf.string  |
-style           | FeaturesDict |         |            |
-style/primary   | ClassLabel   |         | tf.int64   |
-style/secondary | Tensor       |         | tf.string  |
-time_signature  | ClassLabel   |         | tf.int64   |
-type            | ClassLabel   |         | tf.int64   |
+Feature         | Class        | Shape   | Dtype   | Description
+:-------------- | :----------- | :------ | :------ | :----------
+                | FeaturesDict |         |         |
+audio           | Audio        | (None,) | float32 |
+bpm             | Tensor       |         | int32   |
+drummer         | ClassLabel   |         | int64   |
+id              | Tensor       |         | string  |
+midi            | Tensor       |         | string  |
+style           | FeaturesDict |         |         |
+style/primary   | ClassLabel   |         | int64   |
+style/secondary | Tensor       |         | string  |
+time_signature  | ClassLabel   |         | int64   |
+type            | ClassLabel   |         | int64   |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/groove-full-16000hz-2.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## groove/2bar-midionly
 
@@ -183,33 +259,70 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'bpm': tf.int32,
-    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': tf.string,
-    'midi': tf.string,
+    'bpm': int32,
+    'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
-        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'secondary': tf.string,
+        'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
+        'secondary': string,
     }),
-    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype     | Description
-:-------------- | :----------- | :---- | :-------- | :----------
-                | FeaturesDict |       |           |
-bpm             | Tensor       |       | tf.int32  |
-drummer         | ClassLabel   |       | tf.int64  |
-id              | Tensor       |       | tf.string |
-midi            | Tensor       |       | tf.string |
-style           | FeaturesDict |       |           |
-style/primary   | ClassLabel   |       | tf.int64  |
-style/secondary | Tensor       |       | tf.string |
-time_signature  | ClassLabel   |       | tf.int64  |
-type            | ClassLabel   |       | tf.int64  |
+Feature         | Class        | Shape | Dtype  | Description
+:-------------- | :----------- | :---- | :----- | :----------
+                | FeaturesDict |       |        |
+bpm             | Tensor       |       | int32  |
+drummer         | ClassLabel   |       | int64  |
+id              | Tensor       |       | string |
+midi            | Tensor       |       | string |
+style           | FeaturesDict |       |        |
+style/primary   | ClassLabel   |       | int64  |
+style/secondary | Tensor       |       | string |
+time_signature  | ClassLabel   |       | int64  |
+type            | ClassLabel   |       | int64  |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/groove-2bar-midionly-2.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## groove/2bar-16000hz
 
@@ -235,35 +348,72 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.float32),
-    'bpm': tf.int32,
-    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': tf.string,
-    'midi': tf.string,
+    'audio': Audio(shape=(None,), dtype=float32),
+    'bpm': int32,
+    'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
-        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'secondary': tf.string,
+        'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
+        'secondary': string,
     }),
-    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape   | Dtype      | Description
-:-------------- | :----------- | :------ | :--------- | :----------
-                | FeaturesDict |         |            |
-audio           | Audio        | (None,) | tf.float32 |
-bpm             | Tensor       |         | tf.int32   |
-drummer         | ClassLabel   |         | tf.int64   |
-id              | Tensor       |         | tf.string  |
-midi            | Tensor       |         | tf.string  |
-style           | FeaturesDict |         |            |
-style/primary   | ClassLabel   |         | tf.int64   |
-style/secondary | Tensor       |         | tf.string  |
-time_signature  | ClassLabel   |         | tf.int64   |
-type            | ClassLabel   |         | tf.int64   |
+Feature         | Class        | Shape   | Dtype   | Description
+:-------------- | :----------- | :------ | :------ | :----------
+                | FeaturesDict |         |         |
+audio           | Audio        | (None,) | float32 |
+bpm             | Tensor       |         | int32   |
+drummer         | ClassLabel   |         | int64   |
+id              | Tensor       |         | string  |
+midi            | Tensor       |         | string  |
+style           | FeaturesDict |         |         |
+style/primary   | ClassLabel   |         | int64   |
+style/secondary | Tensor       |         | string  |
+time_signature  | ClassLabel   |         | int64   |
+type            | ClassLabel   |         | int64   |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/groove-2bar-16000hz-2.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## groove/4bar-midionly
 
@@ -290,30 +440,67 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'bpm': tf.int32,
-    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': tf.string,
-    'midi': tf.string,
+    'bpm': int32,
+    'drummer': ClassLabel(shape=(), dtype=int64, num_classes=10),
+    'id': string,
+    'midi': string,
     'style': FeaturesDict({
-        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'secondary': tf.string,
+        'primary': ClassLabel(shape=(), dtype=int64, num_classes=18),
+        'secondary': string,
     }),
-    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'time_signature': ClassLabel(shape=(), dtype=int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype     | Description
-:-------------- | :----------- | :---- | :-------- | :----------
-                | FeaturesDict |       |           |
-bpm             | Tensor       |       | tf.int32  |
-drummer         | ClassLabel   |       | tf.int64  |
-id              | Tensor       |       | tf.string |
-midi            | Tensor       |       | tf.string |
-style           | FeaturesDict |       |           |
-style/primary   | ClassLabel   |       | tf.int64  |
-style/secondary | Tensor       |       | tf.string |
-time_signature  | ClassLabel   |       | tf.int64  |
-type            | ClassLabel   |       | tf.int64  |
+Feature         | Class        | Shape | Dtype  | Description
+:-------------- | :----------- | :---- | :----- | :----------
+                | FeaturesDict |       |        |
+bpm             | Tensor       |       | int32  |
+drummer         | ClassLabel   |       | int64  |
+id              | Tensor       |       | string |
+midi            | Tensor       |       | string |
+style           | FeaturesDict |       |        |
+style/primary   | ClassLabel   |       | int64  |
+style/secondary | Tensor       |       | string |
+time_signature  | ClassLabel   |       | int64  |
+type            | ClassLabel   |       | int64  |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/groove-4bar-midionly-2.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

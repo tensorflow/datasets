@@ -1,56 +1,62 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "text": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "option1": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "option1_normalized": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "option2": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "option2_normalized": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "pronoun_start": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "pronoun_end": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "pronoun_text": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "label": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
-            }
-        },
-        "idx": {
-            "type": "tensorflow_datasets.core.features.feature.Tensor",
-            "content": {
-                "shape": [],
-                "dtype": "int32"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "label": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "pronoun_end": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "option2_normalized": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "pronoun_text": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "option1_normalized": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "pronoun_start": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "option2": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "option1": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "text": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "idx": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
             }
         }
     }

@@ -33,11 +33,11 @@ There are two features: - document: article. - summary: headline.
 
 *   **Download size**: `551.61 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.02 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -51,18 +51,18 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'document': Text(shape=(), dtype=tf.string),
-    'summary': Text(shape=(), dtype=tf.string),
+    'document': Text(shape=(), dtype=string),
+    'summary': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-document | Text         |       | tf.string |
-summary  | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+document | Text         |       | string |
+summary  | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

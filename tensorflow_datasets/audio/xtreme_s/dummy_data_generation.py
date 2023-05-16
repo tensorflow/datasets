@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,25 +23,27 @@ import os
 
 from absl import app
 from absl import flags
-import tensorflow as tf
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-# In TF 2.0, eager execution is enabled by default
-tf.compat.v1.disable_eager_execution()
-
-_TFDS_DIR = flags.DEFINE_string("tfds_dir", str(utils.tfds_write_path()),
-                                "Path to tensorflow_datasets directory")
+_TFDS_DIR = flags.DEFINE_string(
+    "tfds_dir",
+    str(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
+)
 
 
 def _output_dir():
-  return os.path.join(_TFDS_DIR.value, "audio", "xtreme_s", "dummy_data",
-                      "fleurs")
+  return os.path.join(
+      _TFDS_DIR.value, "audio", "xtreme_s", "dummy_data", "fleurs"
+  )
 
 
 def _filepath(language: str, split: str, wav_name: str) -> str:
-  return os.path.join(_output_dir(), language, "audio", split,
-                      f"{wav_name}.wav")
+  return os.path.join(
+      _output_dir(), language, "audio", split, f"{wav_name}.wav"
+  )
 
 
 def _make_wav_file(filepath: str):

@@ -19,6 +19,12 @@ to be answerable by Freebase, a large knowledge graph. The questions are mostly
 centered around a single named entity. The questions are popular ones asked on
 the web (at least in 2013).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/webquestions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a](https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a)
 
@@ -48,20 +54,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'answers': Sequence(Text(shape=(), dtype=tf.string)),
-    'question': Text(shape=(), dtype=tf.string),
-    'url': Text(shape=(), dtype=tf.string),
+    'answers': Sequence(Text(shape=(), dtype=string)),
+    'question': Text(shape=(), dtype=string),
+    'url': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class          | Shape   | Dtype     | Description
-:------- | :------------- | :------ | :-------- | :----------
-         | FeaturesDict   |         |           |
-answers  | Sequence(Text) | (None,) | tf.string |
-question | Text           |         | tf.string |
-url      | Text           |         | tf.string |
+Feature  | Class          | Shape   | Dtype  | Description
+:------- | :------------- | :------ | :----- | :----------
+         | FeaturesDict   |         |        |
+answers  | Sequence(Text) | (None,) | string |
+question | Text           |         | string |
+url      | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

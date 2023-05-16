@@ -29,11 +29,11 @@ reviews.
 
 *   **Download size**: `3.72 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.37 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -47,20 +47,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'evidences': Sequence(Text(shape=(), dtype=tf.string)),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'review': Text(shape=(), dtype=tf.string),
+    'evidences': Sequence(Text(shape=(), dtype=string)),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'review': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class          | Shape   | Dtype     | Description
-:-------- | :------------- | :------ | :-------- | :----------
-          | FeaturesDict   |         |           |
-evidences | Sequence(Text) | (None,) | tf.string |
-label     | ClassLabel     |         | tf.int64  |
-review    | Text           |         | tf.string |
+Feature   | Class          | Shape   | Dtype  | Description
+:-------- | :------------- | :------ | :----- | :----------
+          | FeaturesDict   |         |        |
+evidences | Sequence(Text) | (None,) | string |
+label     | ClassLabel     |         | int64  |
+review    | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

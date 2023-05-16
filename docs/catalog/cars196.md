@@ -25,6 +25,12 @@ split into 8,144 training images and 8,041 testing images, where each class has
 been split roughly in a 50-50 split. Classes are typically at the level of Make,
 Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/stanford-cars">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://ai.stanford.edu/~jkrause/cars/car_dataset.html](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
 
@@ -57,22 +63,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=196),
+    'bbox': BBoxFeature(shape=(4,), dtype=float32),
+    'id': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=196),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape           | Dtype      | Description
-:------ | :----------- | :-------------- | :--------- | :----------
-        | FeaturesDict |                 |            |
-bbox    | BBoxFeature  | (4,)            | tf.float32 |
-id      | Text         |                 | tf.string  |
-image   | Image        | (None, None, 3) | tf.uint8   |
-label   | ClassLabel   |                 | tf.int64   |
+Feature | Class        | Shape           | Dtype   | Description
+:------ | :----------- | :-------------- | :------ | :----------
+        | FeaturesDict |                 |         |
+bbox    | BBoxFeature  | (4,)            | float32 |
+id      | Text         |                 | string  |
+image   | Image        | (None, None, 3) | uint8   |
+label   | ClassLabel   |                 | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

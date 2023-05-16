@@ -2,25 +2,33 @@
   "citation": "@inproceedings{Dua2019DROP,\n  author={Dheeru Dua and Yizhong Wang and Pradeep Dasigi and Gabriel Stanovsky and Sameer Singh and Matt Gardner},\n  title={  {DROP}: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs},\n  booktitle={Proc. of NAACL},\n  year={2019}\n}",
   "description": "With system performance on existing reading comprehension benchmarks nearing or\nsurpassing human performance, we need a new, hard dataset that improves systems'\ncapabilities to actually read paragraphs of text. DROP is a crowdsourced,\nadversarially-created, 96k-question benchmark, in which a system must resolve\nreferences in a question, perhaps to multiple input positions, and perform\ndiscrete operations over them (such as addition, counting, or sorting). These\noperations require a much more comprehensive understanding of the content of\nparagraphs than what was necessary for prior datasets.",
   "downloadSize": "8308692",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://allennlp.org/drop"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.drop.drop",
   "name": "drop",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Add all options for the answers."
+  },
   "splits": [
     {
-      "name": "dev",
-      "numBytes": "12161069",
-      "shardLengths": [
-        "9536"
-      ]
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "109727409",
       "shardLengths": [
         "77409"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "12161069",
+      "shardLengths": [
+        "9536"
       ]
     }
   ],

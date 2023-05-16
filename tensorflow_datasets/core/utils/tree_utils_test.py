@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,17 +20,12 @@ from tensorflow_datasets.core.utils import tree_utils
 
 
 def test_tree_parallel_map():
-  assert tree_utils.parallel_map(lambda x: x * 10, {
-      'a': [1, 2, 3],
-      'b': [4, 5]
-  }) == {
-      'a': [10, 20, 30],
-      'b': [40, 50]
-  }
+  assert tree_utils.parallel_map(
+      lambda x: x * 10, {'a': [1, 2, 3], 'b': [4, 5]}
+  ) == {'a': [10, 20, 30], 'b': [40, 50]}
 
 
 def test_tree_parallel_map_reraise():
-
   def fn(x):
     raise ValueError('Bad value')
 

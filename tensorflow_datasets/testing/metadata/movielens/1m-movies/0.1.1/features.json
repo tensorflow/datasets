@@ -10,6 +10,14 @@
                     "encoding": "none"
                 }
             },
+            "movie_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
             "movie_genres": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
@@ -20,14 +28,6 @@
                         }
                     },
                     "length": "-1"
-                }
-            },
-            "movie_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
                 }
             }
         }

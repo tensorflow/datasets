@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
 
 """dolphin number word dataset."""
 
+from __future__ import annotations
+
 import json
 
-import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DS_PATH = 'https://www.microsoft.com/en-us/research/uploads/prod/2016/02//dolphin-number_word_std.zip'
@@ -40,16 +42,20 @@ doi = {10.18653/v1/D15-1135}
 
 class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for dolphin_number_word problem dataset."""
+
   __count__ = 0
 
   VERSION = tfds.core.Version('0.0.2')
   RELEASE_NOTES = {
       '0.0.1': 'Initial release.',
-      '0.0.2': 'RaggedTensor fix. Equations and Sources represented as a single'
-               'string with components delimited by spaces',
-      '0.0.3':
+      '0.0.2': (
+          'RaggedTensor fix. Equations and Sources represented as a single'
+          'string with components delimited by spaces'
+      ),
+      '0.0.3': (
           'Reintroduced logic to handle edge-case involving examples without '
           'sources.'
+      ),
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -60,14 +66,16 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
         # Per author's recommendation, we discard the ans_simple field.
         features=tfds.features.FeaturesDict({
             'id': tfds.features.Text(),
-            'index': tf.int32,
+            'index': np.int32,
             'text': tfds.features.Text(),
             'sources': tfds.features.Text(),  # Flattened list of str.
             'equations': tfds.features.Text(),  # Flattened list of str.
             'ans': tfds.features.Text(),
         }),
         supervised_keys=('text', 'ans'),  # Alternatively text, ans.
-        homepage='https://www.microsoft.com/en-us/research/project/sigmadolphin-2/',
+        homepage=(
+            'https://www.microsoft.com/en-us/research/project/sigmadolphin-2/'
+        ),
         citation=_CITATION,
     )
 

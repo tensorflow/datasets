@@ -36,11 +36,11 @@ required to submit final prediction files, which we shall proceed to evaluate.
 
 *   **Download size**: `3.42 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.45 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -55,34 +55,34 @@ Split          | Examples
 ```python
 FeaturesDict({
     'faces': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'blur': tf.uint8,
-        'expression': tf.bool,
-        'illumination': tf.bool,
-        'invalid': tf.bool,
-        'occlusion': tf.uint8,
-        'pose': tf.bool,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'blur': uint8,
+        'expression': bool,
+        'illumination': bool,
+        'invalid': bool,
+        'occlusion': uint8,
+        'pose': bool,
     }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature            | Class        | Shape           | Dtype      | Description
-:----------------- | :----------- | :-------------- | :--------- | :----------
-                   | FeaturesDict |                 |            |
-faces              | Sequence     |                 |            |
-faces/bbox         | BBoxFeature  | (4,)            | tf.float32 |
-faces/blur         | Tensor       |                 | tf.uint8   |
-faces/expression   | Tensor       |                 | tf.bool    |
-faces/illumination | Tensor       |                 | tf.bool    |
-faces/invalid      | Tensor       |                 | tf.bool    |
-faces/occlusion    | Tensor       |                 | tf.uint8   |
-faces/pose         | Tensor       |                 | tf.bool    |
-image              | Image        | (None, None, 3) | tf.uint8   |
-image/filename     | Text         |                 | tf.string  |
+Feature            | Class        | Shape           | Dtype   | Description
+:----------------- | :----------- | :-------------- | :------ | :----------
+                   | FeaturesDict |                 |         |
+faces              | Sequence     |                 |         |
+faces/bbox         | BBoxFeature  | (4,)            | float32 |
+faces/blur         | Tensor       |                 | uint8   |
+faces/expression   | Tensor       |                 | bool    |
+faces/illumination | Tensor       |                 | bool    |
+faces/invalid      | Tensor       |                 | bool    |
+faces/occlusion    | Tensor       |                 | uint8   |
+faces/pose         | Tensor       |                 | bool    |
+image              | Image        | (None, None, 3) | uint8   |
+image/filename     | Text         |                 | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

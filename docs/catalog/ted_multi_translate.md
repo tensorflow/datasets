@@ -22,7 +22,7 @@ incomplete translations will be filtered out.
     [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 *   **Source code**:
-    [`tfds.translate.TedMultiTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_multi.py)
+    [`tfds.datasets.ted_multi_translate.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ted_multi_translate/ted_multi_translate_dataset_builder.py)
 
 *   **Versions**:
 
@@ -48,23 +48,23 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'talk_name': Text(shape=(), dtype=tf.string),
+    'talk_name': Text(shape=(), dtype=string),
     'translations': TranslationVariableLanguages({
-        'language': Text(shape=(), dtype=tf.string),
-        'translation': Text(shape=(), dtype=tf.string),
+        'language': Text(shape=(), dtype=string),
+        'translation': Text(shape=(), dtype=string),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                  | Class                        | Shape | Dtype     | Description
-:----------------------- | :--------------------------- | :---- | :-------- | :----------
-                         | FeaturesDict                 |       |           |
-talk_name                | Text                         |       | tf.string |
-translations             | TranslationVariableLanguages |       |           |
-translations/language    | Text                         |       | tf.string |
-translations/translation | Text                         |       | tf.string |
+Feature                  | Class                        | Shape | Dtype  | Description
+:----------------------- | :--------------------------- | :---- | :----- | :----------
+                         | FeaturesDict                 |       |        |
+talk_name                | Text                         |       | string |
+translations             | TranslationVariableLanguages |       |        |
+translations/language    | Text                         |       | string |
+translations/translation | Text                         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

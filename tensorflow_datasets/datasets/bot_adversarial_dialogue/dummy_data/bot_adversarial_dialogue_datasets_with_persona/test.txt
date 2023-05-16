@@ -1,0 +1,2 @@
+text:Hello, how are you doing	labels:__ok__	episode_done:True	speaker_to_eval:human	bot_persona:your persona: i am a yoga instructor.\nyour persona: i like to write poetry in my spare time.
+text:Hello, how are you doing\nI'm doing well, thank you. How are you? What do you do for a living?	labels:__ok__	episode_done:True	speaker_to_eval:bot	bot_persona:your persona: i am a yoga instructor.\nyour persona: i like to write poetry in my spare time.

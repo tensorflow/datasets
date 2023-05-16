@@ -50,20 +50,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'label': Text(shape=(), dtype=tf.string),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=string),
+    'label': Text(shape=(), dtype=string),
+    'premise': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-hypothesis | Text         |       | tf.string |
-label      | Text         |       | tf.string |
-premise    | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | string |
+label      | Text         |       | string |
+premise    | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

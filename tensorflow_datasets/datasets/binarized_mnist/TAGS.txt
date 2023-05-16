@@ -1,0 +1,2 @@
+content.data-type.image
+ml.task.image-generation

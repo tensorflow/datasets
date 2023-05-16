@@ -20,11 +20,17 @@ Image Search for "sketch of __". 100 images were collected and then manually
 filtered. For classes with fewer than 50 good images, additional images were
 constructed by flip or rotation.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/imagenet-sketch">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/HaohanWang/ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch)
 
 *   **Source code**:
-    [`tfds.image_classification.imagenet_sketch.ImagenetSketch`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_sketch/imagenet_sketch.py)
+    [`tfds.datasets.imagenet_sketch.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/imagenet_sketch/imagenet_sketch_dataset_builder.py)
 
 *   **Versions**:
 
@@ -48,20 +54,20 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+    'file_name': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=1000),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape           | Dtype     | Description
-:-------- | :----------- | :-------------- | :-------- | :----------
-          | FeaturesDict |                 |           |
-file_name | Text         |                 | tf.string |
-image     | Image        | (None, None, 3) | tf.uint8  |
-label     | ClassLabel   |                 | tf.int64  |
+Feature   | Class        | Shape           | Dtype  | Description
+:-------- | :----------- | :-------------- | :----- | :----------
+          | FeaturesDict |                 |        |
+file_name | Text         |                 | string |
+image     | Image        | (None, None, 3) | uint8  |
+label     | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

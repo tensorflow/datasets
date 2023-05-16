@@ -1,0 +1,28 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "label": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "101"
+                }
+            },
+            "video": {
+                "pythonClassName": "tensorflow_datasets.core.features.video_feature.Video",
+                "video": {
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "-1",
+                            "-1",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "jpeg"
+                }
+            }
+        }
+    }
+}

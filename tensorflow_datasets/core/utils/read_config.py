@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,26 +15,31 @@
 
 """This module contains the reader config."""
 
+from __future__ import annotations
+
 import dataclasses
 import enum
 from typing import Callable, Optional, Sequence, Union
 
-import tensorflow as tf
 from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
-InterleaveSortFn = Callable[[Sequence[shard_utils.FileInstruction]],
-                            Sequence[shard_utils.FileInstruction],]
+InterleaveSortFn = Callable[
+    [Sequence[shard_utils.FileInstruction]],
+    Sequence[shard_utils.FileInstruction],
+]
 
 
-class _MISSING:
+class _MISSING(str):
   pass
 
 
-MISSING = _MISSING()
+MISSING = _MISSING('missing')
 
 
 @dataclasses.dataclass(eq=False)
 class ReadConfig:
+  # pyformat: disable
   """Configures input reading pipeline.
 
   Attributes:
@@ -44,10 +49,13 @@ class ReadConfig:
     try_autocache: If True (default) and the dataset satisfy the right
       conditions (dataset small enough, files not shuffled,...) the dataset will
       be cached during the first iteration (through `ds = ds.cache()`).
+    repeat_filenames: If True, repeat the filenames iterator. This will result
+      in an infinite dataset. Repeat is called after the shuffle of the
+      filenames.
     add_tfds_id: If True, examples `dict` in `tf.data.Dataset` will have an
       additional key `'tfds_id': tf.Tensor(shape=(), dtype=tf.string)`
-        containing the example unique identifier (e.g.
-        'train.tfrecord-000045-of-001024__123').
+      containing the example unique identifier (e.g.
+      'train.tfrecord-000045-of-001024__123').
        Note: IDs might changes in future version of TFDS.
     shuffle_seed: `tf.int64`, seed forwarded to `tf.data.Dataset.shuffle` during
       file shuffling (which happens when `tfds.load(..., shuffle_files=True)`).
@@ -65,10 +73,10 @@ class ReadConfig:
         `info.splits[split].num_shards < input_context.num_input_pipelines`, an
         error will be raised, as some workers would be empty.
     experimental_interleave_sort_fn: Function with signature `List[FileDict] ->
-      List[FileDict]`, which takes the list of
-      `dict(file: str, take: int, skip: int)` and returns the modified version
-        to read. This can be used to sort/shuffle the shards to read in a custom
-        order, instead of relying on `shuffle_files=True`.
+      List[FileDict]`, which takes the list of `dict(file: str, take: int, skip:
+      int)` and returns the modified version to read. This can be used to
+      sort/shuffle the shards to read in a custom order, instead of relying on
+      `shuffle_files=True`.
     skip_prefetch: If False (default), add a `ds.prefetch()` op at the end.
       Might be set for performance optimization in some cases (e.g. if you're
       already calling `ds.prefetch()` at the end of your pipeline)
@@ -83,10 +91,14 @@ class ReadConfig:
       number from dataset metadata. A power user would typically want to set
       False if input files have been tempered with and they don't mind missing
       records or have too many of them.
+    override_buffer_size: number of bytes to pass to file readers for buffering.
   """
+  # pyformat: enable
+
   # General tf.data.Dataset parametters
-  options: tf.data.Options = dataclasses.field(default_factory=tf.data.Options)
+  options: Optional[tf.data.Options] = None
   try_autocache: bool = True
+  repeat_filenames: bool = False
   add_tfds_id: bool = False
   # tf.data.Dataset.shuffle parameters
   shuffle_seed: Optional[int] = None
@@ -100,8 +112,17 @@ class ReadConfig:
   input_context: Optional[tf.distribute.InputContext] = None
   experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None
   skip_prefetch: bool = False
-  num_parallel_calls_for_decode: Optional[int] = tf.data.experimental.AUTOTUNE
-  num_parallel_calls_for_interleave_files: Optional[int] = (
-      tf.data.experimental.AUTOTUNE)
+  num_parallel_calls_for_decode: Optional[int] = None
+  num_parallel_calls_for_interleave_files: Optional[int] = None
   enable_ordering_guard: bool = True
   assert_cardinality: bool = True
+  override_buffer_size: Optional[int] = None
+
+  def __post_init__(self):
+    self.options = self.options or tf.data.Options()
+    if self.num_parallel_calls_for_decode is None:
+      self.num_parallel_calls_for_decode = tf.data.experimental.AUTOTUNE
+    if self.num_parallel_calls_for_interleave_files is None:
+      self.num_parallel_calls_for_interleave_files = (
+          tf.data.experimental.AUTOTUNE
+      )

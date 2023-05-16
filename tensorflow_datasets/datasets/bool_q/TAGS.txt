@@ -1,0 +1,6 @@
+content.data-type.text
+content.monolingual
+ml.task.natural-language-understanding
+ml.task.question-answering
+ml.task.text-classification
+ml.task.text-generation

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.vision_language.gref import Gref
 from tensorflow_datasets.vision_language.grounded_scan import GroundedScan
+from tensorflow_datasets.vision_language.laion400m import Laion400m
 from tensorflow_datasets.vision_language.refcoco import RefCoco
 from tensorflow_datasets.vision_language.wit import Wit
 from tensorflow_datasets.vision_language.wit_kaggle import WitKaggle

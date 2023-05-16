@@ -1,5 +1,23 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": "{\n  \"features\": {\n    \"output\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"text\": {}\n    },\n    \"input\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"text\": {}\n    },\n    \"id\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"text\": {}\n    },\n    \"pid\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"text\": {}\n    }\n  }\n}",
-    "proto_cls": "tensorflow_datasets.FeaturesDict"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "input": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "pid": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "output": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
+        }
+    }
 }

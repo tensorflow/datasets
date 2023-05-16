@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,13 @@
 
 """Wine quality dataset."""
 
-import csv
-import tensorflow as tf
+from __future__ import annotations
 
+import csv
+
+from etils import epath
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -94,11 +98,10 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
           name="red",
           description="Red Wine",
           dl_url=_DOWNLOAD_URL_RED_WINES,
-      )
+      ),
   ]
 
   def _info(self):
-
     features_dict = {
         "fixed acidity": tf.float32,
         "volatile acidity": tf.float32,
@@ -117,7 +120,7 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "quality": tf.int32,
+            "quality": np.int32,
             "features": features_dict,
         }),
         supervised_keys=("features", "quality"),
@@ -147,12 +150,12 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
        Next examples
     """
 
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       reader = csv.DictReader(f, delimiter=";")
       for index, row in enumerate(reader):
         key = index
         example = {
             "quality": row.pop("quality"),
-            "features": {name: value for name, value in row.items()}
+            "features": {name: value for name, value in row.items()},
         }
         yield key, example

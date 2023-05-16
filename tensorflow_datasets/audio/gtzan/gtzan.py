@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -54,8 +54,16 @@ _DOWNLOAD_URL = "http://opihi.cs.uvic.ca/sound/genres.tar.gz"
 _HOMEPAGE_URL = "http://marsyas.info/index.html"
 
 _CLASS_LABELS = [
-    "blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop",
-    "reggae", "rock"
+    "blues",
+    "classical",
+    "country",
+    "disco",
+    "hiphop",
+    "jazz",
+    "metal",
+    "pop",
+    "reggae",
+    "rock",
 ]
 
 
@@ -85,7 +93,8 @@ class GTZAN(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"path": path}),
+            name=tfds.Split.TRAIN, gen_kwargs={"path": path}
+        ),
     ]
 
   def _generate_examples(self, path):

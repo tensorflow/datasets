@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import tensorflow_datasets.public_api as tfds
 
 class Deep1bTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for deep1b dataset."""
+
   DATASET_CLASS = deep1b.Deep1b
   SPLITS = {
       'database': 3,  # Number of fake train example

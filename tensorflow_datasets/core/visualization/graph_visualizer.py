@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,13 @@
 
 """Graph visualizer."""
 
-from typing import Callable, Any, Optional, Dict, Union
+from __future__ import annotations
 
-import tensorflow as tf
+from typing import Any, Callable, Dict, Optional, Union
 
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.visualization import visualizer
 
 _GraphFn = Callable[[Any], Any]
@@ -43,7 +44,7 @@ class GraphVisualizerMetadataDict(dataset_info.MetadataDict):
 
 
 def _extract_metadata_dict(
-    metadata: Optional[dataset_info.Metadata]
+    metadata: Optional[dataset_info.Metadata],
 ) -> Optional[GraphVisualizerMetadataDict]:
   """Extracts out the metadata dict for the GraphVisualizer."""
   if metadata is None:
@@ -119,7 +120,8 @@ class GraphVisualizer(visualizer.Visualizer):
         nrows=rows,
         ncols=cols,
         squeeze=False,
-        figsize=(plot_scale * cols, plot_scale * rows))
+        figsize=(plot_scale * cols, plot_scale * rows),
+    )
     plt.subplots_adjust(hspace=1 / plot_scale, wspace=1 / plot_scale)
 
     for graph, ax in zip(ds, axs.reshape(-1)):
@@ -161,8 +163,9 @@ def _make_edge_getter_fn(ds_info: dataset_info.DatasetInfo) -> _GraphFn:
   return get_edges_fn
 
 
-def _make_node_color_mapper(node_color_map: _NodeColorDict,
-                            default_color: str = 'C0') -> _NodeColorFn:
+def _make_node_color_mapper(
+    node_color_map: _NodeColorDict, default_color: str = 'C0'
+) -> _NodeColorFn:
   """Helper to map nodes to colors."""
 
   def node_color_mapper(node):
@@ -171,8 +174,9 @@ def _make_node_color_mapper(node_color_map: _NodeColorDict,
   return node_color_mapper
 
 
-def _make_edge_color_mapper(edge_color_map: _EdgeColorDict,
-                            default_color: str = 'C0') -> _EdgeColorFn:
+def _make_edge_color_mapper(
+    edge_color_map: _EdgeColorDict, default_color: str = 'C0'
+) -> _EdgeColorFn:
   """Helper to map edges to colors."""
 
   def edge_color_mapper(edge):

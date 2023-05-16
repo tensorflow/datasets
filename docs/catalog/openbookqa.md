@@ -20,11 +20,17 @@ the train/dev/test questions where each question is associated with its
 originating core fact, a human accuracy score, a clarity score, and an
 anonymized crowd-worker ID.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/openbookqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://leaderboard.allenai.org/open_book_qa/submissions/get-started](https://leaderboard.allenai.org/open_book_qa/submissions/get-started)
 
 *   **Source code**:
-    [`tfds.text.Openbookqa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/openbookqa.py)
+    [`tfds.datasets.openbookqa.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/openbookqa/openbookqa_dataset_builder.py)
 
 *   **Versions**:
 
@@ -50,37 +56,37 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answerKey': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-    'clarity': tf.float32,
-    'fact1': Text(shape=(), dtype=tf.string),
-    'humanScore': tf.float32,
+    'answerKey': ClassLabel(shape=(), dtype=int64, num_classes=4),
+    'clarity': float32,
+    'fact1': Text(shape=(), dtype=string),
+    'humanScore': float32,
     'question': FeaturesDict({
-        'choice_A': Text(shape=(), dtype=tf.string),
-        'choice_B': Text(shape=(), dtype=tf.string),
-        'choice_C': Text(shape=(), dtype=tf.string),
-        'choice_D': Text(shape=(), dtype=tf.string),
-        'stem': Text(shape=(), dtype=tf.string),
+        'choice_A': Text(shape=(), dtype=string),
+        'choice_B': Text(shape=(), dtype=string),
+        'choice_C': Text(shape=(), dtype=string),
+        'choice_D': Text(shape=(), dtype=string),
+        'stem': Text(shape=(), dtype=string),
     }),
-    'turkIdAnonymized': Text(shape=(), dtype=tf.string),
+    'turkIdAnonymized': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype      | Description
-:---------------- | :----------- | :---- | :--------- | :----------
-                  | FeaturesDict |       |            |
-answerKey         | ClassLabel   |       | tf.int64   |
-clarity           | Tensor       |       | tf.float32 |
-fact1             | Text         |       | tf.string  |
-humanScore        | Tensor       |       | tf.float32 |
-question          | FeaturesDict |       |            |
-question/choice_A | Text         |       | tf.string  |
-question/choice_B | Text         |       | tf.string  |
-question/choice_C | Text         |       | tf.string  |
-question/choice_D | Text         |       | tf.string  |
-question/stem     | Text         |       | tf.string  |
-turkIdAnonymized  | Text         |       | tf.string  |
+Feature           | Class        | Shape | Dtype   | Description
+:---------------- | :----------- | :---- | :------ | :----------
+                  | FeaturesDict |       |         |
+answerKey         | ClassLabel   |       | int64   |
+clarity           | Tensor       |       | float32 |
+fact1             | Text         |       | string  |
+humanScore        | Tensor       |       | float32 |
+question          | FeaturesDict |       |         |
+question/choice_A | Text         |       | string  |
+question/choice_B | Text         |       | string  |
+question/choice_C | Text         |       | string  |
+question/choice_D | Text         |       | string  |
+question/stem     | Text         |       | string  |
+turkIdAnonymized  | Text         |       | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

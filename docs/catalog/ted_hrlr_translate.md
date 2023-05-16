@@ -21,7 +21,7 @@ where one is high resource and the other is low resource.
     [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 *   **Source code**:
-    [`tfds.translate.TedHrlrTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_hrlr.py)
+    [`tfds.datasets.ted_hrlr_translate.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ted_hrlr_translate/ted_hrlr_translate_dataset_builder.py)
 
 *   **Versions**:
 
@@ -30,19 +30,13 @@ where one is high resource and the other is low resource.
 
 *   **Download size**: `124.94 MiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -60,6 +54,8 @@ where one is high resource and the other is low resource.
 
 *   **Config description**: Translation dataset from az to en in plain text.
 
+*   **Dataset size**: `1.61 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -72,26 +68,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'az': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
+    'az': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-az      | Text        |       | tf.string |
-en      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+az      | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('az', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-az_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/aztr_to_en
 
 *   **Config description**: Translation dataset from az_tr to en in plain text.
+
+*   **Dataset size**: `42.54 MiB`
 
 *   **Splits**:
 
@@ -105,26 +140,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'az_tr': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
+    'az_tr': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-az_tr   | Text        |       | tf.string |
-en      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+az_tr   | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('az_tr', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-aztr_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/be_to_en
 
 *   **Config description**: Translation dataset from be to en in plain text.
+
+*   **Dataset size**: `1.47 MiB`
 
 *   **Splits**:
 
@@ -138,26 +212,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'be': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
+    'be': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-be      | Text        |       | tf.string |
-en      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+be      | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('be', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-be_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/beru_to_en
 
 *   **Config description**: Translation dataset from be_ru to en in plain text.
+
+*   **Dataset size**: `62.45 MiB`
 
 *   **Splits**:
 
@@ -171,26 +284,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'be_ru': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
+    'be_ru': Text(shape=(), dtype=string),
+    'en': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-be_ru   | Text        |       | tf.string |
-en      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+be_ru   | Text        |       | string |
+en      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('be_ru', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-beru_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/es_to_pt
 
 *   **Config description**: Translation dataset from es to pt in plain text.
+
+*   **Dataset size**: `9.62 MiB`
 
 *   **Splits**:
 
@@ -204,26 +356,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'es': Text(shape=(), dtype=tf.string),
-    'pt': Text(shape=(), dtype=tf.string),
+    'es': Text(shape=(), dtype=string),
+    'pt': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-es      | Text        |       | tf.string |
-pt      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+es      | Text        |       | string |
+pt      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('es', 'pt')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-es_to_pt-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/fr_to_pt
 
 *   **Config description**: Translation dataset from fr to pt in plain text.
+
+*   **Dataset size**: `9.74 MiB`
 
 *   **Splits**:
 
@@ -237,26 +428,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'fr': Text(shape=(), dtype=tf.string),
-    'pt': Text(shape=(), dtype=tf.string),
+    'fr': Text(shape=(), dtype=string),
+    'pt': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-fr      | Text        |       | tf.string |
-pt      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+fr      | Text        |       | string |
+pt      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('fr', 'pt')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-fr_to_pt-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/gl_to_en
 
 *   **Config description**: Translation dataset from gl to en in plain text.
+
+*   **Dataset size**: `2.41 MiB`
 
 *   **Splits**:
 
@@ -270,26 +500,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'gl': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=string),
+    'gl': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-en      | Text        |       | tf.string |
-gl      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+en      | Text        |       | string |
+gl      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('gl', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-gl_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/glpt_to_en
 
 *   **Config description**: Translation dataset from gl_pt to en in plain text.
+
+*   **Dataset size**: `12.90 MiB`
 
 *   **Splits**:
 
@@ -303,26 +572,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'gl_pt': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=string),
+    'gl_pt': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-en      | Text        |       | tf.string |
-gl_pt   | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+en      | Text        |       | string |
+gl_pt   | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('gl_pt', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-glpt_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/he_to_pt
 
 *   **Config description**: Translation dataset from he to pt in plain text.
+
+*   **Dataset size**: `11.71 MiB`
 
 *   **Splits**:
 
@@ -336,26 +644,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'he': Text(shape=(), dtype=tf.string),
-    'pt': Text(shape=(), dtype=tf.string),
+    'he': Text(shape=(), dtype=string),
+    'pt': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-he      | Text        |       | tf.string |
-pt      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+he      | Text        |       | string |
+pt      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('he', 'pt')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-he_to_pt-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/it_to_pt
 
 *   **Config description**: Translation dataset from it to pt in plain text.
+
+*   **Dataset size**: `9.94 MiB`
 
 *   **Splits**:
 
@@ -369,26 +716,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'it': Text(shape=(), dtype=tf.string),
-    'pt': Text(shape=(), dtype=tf.string),
+    'it': Text(shape=(), dtype=string),
+    'pt': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-it      | Text        |       | tf.string |
-pt      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+it      | Text        |       | string |
+pt      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('it', 'pt')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-it_to_pt-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/pt_to_en
 
 *   **Config description**: Translation dataset from pt to en in plain text.
+
+*   **Dataset size**: `10.89 MiB`
 
 *   **Splits**:
 
@@ -402,26 +788,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'pt': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=string),
+    'pt': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-en      | Text        |       | tf.string |
-pt      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+en      | Text        |       | string |
+pt      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('pt', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-pt_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/ru_to_en
 
 *   **Config description**: Translation dataset from ru to en in plain text.
+
+*   **Dataset size**: `63.22 MiB`
 
 *   **Splits**:
 
@@ -435,26 +860,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ru': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=string),
+    'ru': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-en      | Text        |       | tf.string |
-ru      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+en      | Text        |       | string |
+ru      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-ru_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/ru_to_pt
 
 *   **Config description**: Translation dataset from ru to pt in plain text.
+
+*   **Dataset size**: `13.00 MiB`
 
 *   **Splits**:
 
@@ -468,26 +932,65 @@ Split          | Examples
 
 ```python
 Translation({
-    'pt': Text(shape=(), dtype=tf.string),
-    'ru': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=string),
+    'ru': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-pt      | Text        |       | tf.string |
-ru      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+pt      | Text        |       | string |
+ru      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'pt')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-ru_to_pt-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## ted_hrlr_translate/tr_to_en
 
 *   **Config description**: Translation dataset from tr to en in plain text.
+
+*   **Dataset size**: `42.33 MiB`
 
 *   **Splits**:
 
@@ -501,19 +1004,56 @@ Split          | Examples
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'tr': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=string),
+    'tr': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-en      | Text        |       | tf.string |
-tr      | Text        |       | tf.string |
+Feature | Class       | Shape | Dtype  | Description
+:------ | :---------- | :---- | :----- | :----------
+        | Translation |       |        |
+en      | Text        |       | string |
+tr      | Text        |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('tr', 'en')`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-tr_to_en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

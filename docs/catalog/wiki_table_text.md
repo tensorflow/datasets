@@ -52,26 +52,26 @@ Split          | Examples
 FeaturesDict({
     'input_text': FeaturesDict({
         'table': Sequence({
-            'column_header': tf.string,
-            'content': tf.string,
-            'row_number': tf.int16,
+            'column_header': string,
+            'content': string,
+            'row_number': int16,
         }),
     }),
-    'target_text': tf.string,
+    'target_text': string,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype     | Description
-:----------------------------- | :----------- | :---- | :-------- | :----------
-                               | FeaturesDict |       |           |
-input_text                     | FeaturesDict |       |           |
-input_text/table               | Sequence     |       |           |
-input_text/table/column_header | Tensor       |       | tf.string |
-input_text/table/content       | Tensor       |       | tf.string |
-input_text/table/row_number    | Tensor       |       | tf.int16  |
-target_text                    | Tensor       |       | tf.string |
+Feature                        | Class        | Shape | Dtype  | Description
+:----------------------------- | :----------- | :---- | :----- | :----------
+                               | FeaturesDict |       |        |
+input_text                     | FeaturesDict |       |        |
+input_text/table               | Sequence     |       |        |
+input_text/table/column_header | Tensor       |       | string |
+input_text/table/content       | Tensor       |       | string |
+input_text/table/row_number    | Tensor       |       | int16  |
+target_text                    | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

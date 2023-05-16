@@ -37,6 +37,12 @@ sources. Every mixture contains one background source, which is active for the
 entire duration. We provide: a software recipe to create the dataset, the room
 impulse responses, and the original source audio.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/fuss">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md](https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md)
 
@@ -63,36 +69,36 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': tf.string,
-    'jams': tf.string,
-    'mixture_audio': Audio(shape=(160000,), dtype=tf.int16),
+    'id': string,
+    'jams': string,
+    'mixture_audio': Audio(shape=(160000,), dtype=int16),
     'segments': Sequence({
-        'end_time_seconds': tf.float32,
-        'label': tf.string,
-        'start_time_seconds': tf.float32,
+        'end_time_seconds': float32,
+        'label': string,
+        'start_time_seconds': float32,
     }),
     'sources': Sequence({
-        'audio': Audio(shape=(160000,), dtype=tf.int16),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+        'audio': Audio(shape=(160000,), dtype=int16),
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=4),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                     | Class        | Shape     | Dtype      | Description
-:-------------------------- | :----------- | :-------- | :--------- | :----------
-                            | FeaturesDict |           |            |
-id                          | Tensor       |           | tf.string  |
-jams                        | Tensor       |           | tf.string  |
-mixture_audio               | Audio        | (160000,) | tf.int16   |
-segments                    | Sequence     |           |            |
-segments/end_time_seconds   | Tensor       |           | tf.float32 |
-segments/label              | Tensor       |           | tf.string  |
-segments/start_time_seconds | Tensor       |           | tf.float32 |
-sources                     | Sequence     |           |            |
-sources/audio               | Audio        | (160000,) | tf.int16   |
-sources/label               | ClassLabel   |           | tf.int64   |
+Feature                     | Class        | Shape     | Dtype   | Description
+:-------------------------- | :----------- | :-------- | :------ | :----------
+                            | FeaturesDict |           |         |
+id                          | Tensor       |           | string  |
+jams                        | Tensor       |           | string  |
+mixture_audio               | Audio        | (160000,) | int16   |
+segments                    | Sequence     |           |         |
+segments/end_time_seconds   | Tensor       |           | float32 |
+segments/label              | Tensor       |           | string  |
+segments/start_time_seconds | Tensor       |           | float32 |
+sources                     | Sequence     |           |         |
+sources/audio               | Audio        | (160000,) | int16   |
+sources/label               | ClassLabel   |           | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -101,10 +107,6 @@ sources/label               | ClassLabel   |           | tf.int64   |
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -134,6 +136,43 @@ sources/label               | ClassLabel   |           | tf.int64   |
 
 *   **Dataset size**: `43.20 GiB`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/fuss-reverberant-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## fuss/unprocessed
 
 *   **Config description**: Unprocessed audio without additional reverberation.
@@ -141,3 +180,40 @@ sources/label               | ClassLabel   |           | tf.int64   |
 *   **Download size**: `8.28 GiB`
 
 *   **Dataset size**: `45.58 GiB`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/fuss-unprocessed-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

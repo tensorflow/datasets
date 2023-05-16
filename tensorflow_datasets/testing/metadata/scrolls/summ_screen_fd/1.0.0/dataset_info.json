@@ -4,7 +4,7 @@
   "configName": "summ_screen_fd",
   "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\nsumm_screen_fd subset",
   "downloadSize": "51036297",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/mingdachen/SummScreen"
@@ -17,6 +17,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "117675833",
       "shardLengths": [
@@ -24,6 +25,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "10648628",
       "shardLengths": [
@@ -31,6 +33,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "10589084",
       "shardLengths": [
@@ -38,5 +41,17 @@
       ]
     }
   ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "input"
+        },
+        {
+          "featureKey": "output"
+        }
+      ]
+    }
+  },
   "version": "1.0.0"
 }

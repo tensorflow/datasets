@@ -12,11 +12,6 @@
 # `cnn_dailymail`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 CNN/DailyMail non-anonymized summarization dataset.
@@ -24,6 +19,12 @@ CNN/DailyMail non-anonymized summarization dataset.
 There are two features: - article: text of news article, used as the document to
 be summarized - highlights: joined text of highlights with <s> and </s> around
 each highlight, which is the target summary
+
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cnn-daily-mail-1">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Homepage**:
     [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
@@ -47,9 +48,7 @@ each highlight, which is the target summary
 
     *   `3.3.0`: Add publisher feature.
 
-    *   **`3.4.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add ID feature.
+    *   **`3.4.0`** (default): Add ID feature.
 
 *   **Download size**: `558.32 MiB`
 
@@ -71,22 +70,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'article': Text(shape=(), dtype=tf.string),
-    'highlights': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'publisher': Text(shape=(), dtype=tf.string),
+    'article': Text(shape=(), dtype=string),
+    'highlights': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'publisher': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype     | Description
-:--------- | :----------- | :---- | :-------- | :----------
-           | FeaturesDict |       |           |
-article    | Text         |       | tf.string |
-highlights | Text         |       | tf.string |
-id         | Text         |       | tf.string |
-publisher  | Text         |       | tf.string |
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+article    | Text         |       | string |
+highlights | Text         |       | string |
+id         | Text         |       | string |
+publisher  | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

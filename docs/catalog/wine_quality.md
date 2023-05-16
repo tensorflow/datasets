@@ -69,40 +69,40 @@ Output variable (based on sensory data):
 ```python
 FeaturesDict({
     'features': FeaturesDict({
-        'alcohol': tf.float32,
-        'chlorides': tf.float32,
-        'citric acid': tf.float32,
-        'density': tf.float32,
-        'fixed acidity': tf.float32,
-        'free sulfur dioxide': tf.float32,
-        'pH': tf.float32,
-        'residual sugar': tf.float32,
-        'sulphates': tf.float64,
-        'total sulfur dioxide': tf.float32,
-        'volatile acidity': tf.float32,
+        'alcohol': float32,
+        'chlorides': float32,
+        'citric acid': float32,
+        'density': float32,
+        'fixed acidity': float32,
+        'free sulfur dioxide': float32,
+        'pH': float32,
+        'residual sugar': float32,
+        'sulphates': float64,
+        'total sulfur dioxide': float32,
+        'volatile acidity': float32,
     }),
-    'quality': tf.int32,
+    'quality': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape | Dtype      | Description
-:---------------------------- | :----------- | :---- | :--------- | :----------
-                              | FeaturesDict |       |            |
-features                      | FeaturesDict |       |            |
-features/alcohol              | Tensor       |       | tf.float32 |
-features/chlorides            | Tensor       |       | tf.float32 |
-features/citric acid          | Tensor       |       | tf.float32 |
-features/density              | Tensor       |       | tf.float32 |
-features/fixed acidity        | Tensor       |       | tf.float32 |
-features/free sulfur dioxide  | Tensor       |       | tf.float32 |
-features/pH                   | Tensor       |       | tf.float32 |
-features/residual sugar       | Tensor       |       | tf.float32 |
-features/sulphates            | Tensor       |       | tf.float64 |
-features/total sulfur dioxide | Tensor       |       | tf.float32 |
-features/volatile acidity     | Tensor       |       | tf.float32 |
-quality                       | Tensor       |       | tf.int32   |
+Feature                       | Class        | Shape | Dtype   | Description
+:---------------------------- | :----------- | :---- | :------ | :----------
+                              | FeaturesDict |       |         |
+features                      | FeaturesDict |       |         |
+features/alcohol              | Tensor       |       | float32 |
+features/chlorides            | Tensor       |       | float32 |
+features/citric acid          | Tensor       |       | float32 |
+features/density              | Tensor       |       | float32 |
+features/fixed acidity        | Tensor       |       | float32 |
+features/free sulfur dioxide  | Tensor       |       | float32 |
+features/pH                   | Tensor       |       | float32 |
+features/residual sugar       | Tensor       |       | float32 |
+features/sulphates            | Tensor       |       | float64 |
+features/total sulfur dioxide | Tensor       |       | float32 |
+features/volatile acidity     | Tensor       |       | float32 |
+quality                       | Tensor       |       | int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -111,10 +111,6 @@ quality                       | Tensor       |       | tf.int32   |
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -142,6 +138,43 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 4,898
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wine_quality-white-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## wine_quality/red
 
 *   **Config description**: Red Wine
@@ -155,3 +188,40 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 1,599
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wine_quality-red-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

@@ -1,0 +1,281 @@
+# List of tags which can be used to describe a dataset.
+content.data-type.3d # Contains 3d data.
+content.data-type.audio # Contains audio data.
+content.data-type.categorical # Contains categorical data.
+content.data-type.dialogue # Contains dialogue data.
+content.data-type.eeg # Contains eeg data.
+content.data-type.financial # Contains financial data.
+content.data-type.fmri # Contains fmri data.
+content.data-type.graph # Contains graph data.
+content.data-type.image # Contains image data.
+content.data-type.midi # Contains midi data.
+content.data-type.point-cloud # Contains point-cloud data.
+content.data-type.rgb-d # Contains rgb-d data.
+content.data-type.speech # Contains speech data.
+content.data-type.tabular # Contains tabular data.
+content.data-type.text # Contains text data.
+content.data-type.time-series # Contains time-series data.
+content.data-type.tracking # Contains tracking data.
+content.data-type.trajectory # Contains trajectory data.
+content.data-type.video # Contains video data.
+content.data-type.web-page # Contains web-page data.
+content.language-formality.formal # Contains formal languages.
+content.language-formality.formality-unknown # Contains languages whose formality is unknown.
+content.language-formality.informal # Contains informal languages.
+content.language.af # Contains text in language Afrikaans / af.
+content.language.aii # Contains text in language Assyrian.
+content.language.ajp # Contains text in language South Levantine Arabic.
+content.language.akk # Contains text in language Akkadian.
+content.language.am # Contains text in language Amharic / am.
+content.language.ar # Contains text in language Arabic / ar.
+content.language.arr # Contains text in language Karo.
+content.language.as # Contains text in language Assamese / as.
+content.language.az # Contains text in language Azerbaijani / az.
+content.language.bar # Contains text in language Bavarian / bar.
+content.language.be # Contains text in language Belarusian / be.
+content.language.bej # Contains text in language Beja.
+content.language.bg # Contains text in language Bulgarian / bg.
+content.language.bho # Contains text in language Bhojpuri.
+content.language.bn # Contains text in language Bengali / bn.
+content.language.bo # Contains text in language Tibetan.
+content.language.br # Contains text in language Breton / br.
+content.language.bs # Contains text in language Bosnian / bs.
+content.language.bxr # Contains text in language Buryat.
+content.language.ca # Contains text in language Catalan / ca.
+content.language.ce # Contains text in language Chechen / ce.
+content.language.ceb # Contains text in language Cebuano.
+content.language.ckt # Contains text in language Chukchi.
+content.language.co # Contains text in language Corsican.
+content.language.cop # Contains text in language Coptic.
+content.language.cs # Contains text in language Czech / cs.
+content.language.cu # Contains text in language Church Slavic.
+content.language.cy # Contains text in language Welsh / cy.
+content.language.da # Contains text in language Danish / da.
+content.language.de # Contains text in language German / de.
+content.language.dz # Contains text in language Dzongkha.
+content.language.el # Contains text in language Greek / el.
+content.language.en # Contains text in language English / en.
+content.language.eo # Contains text in language Esperanto / eo.
+content.language.es # Contains text in language Spanish / es.
+content.language.ess # Contains text in language Yupik.
+content.language.et # Contains text in language Estonian / et.
+content.language.eu # Contains text in language Basque / eu.
+content.language.fa # Contains text in language Persian / fa.
+content.language.fi # Contains text in language Finnish / fi.
+content.language.fil # Contains text in language Filipino / fil.
+content.language.fo # Contains text in language Faroese.
+content.language.fr # Contains text in language French / fr.
+content.language.fro # Contains text in language Old French.
+content.language.fy # Contains text in language Western Frisian.
+content.language.ga # Contains text in language Irish / ga.
+content.language.gd # Contains text in language Scottish Gaelic / gd.
+content.language.gl # Contains text in language Galician / gl.
+content.language.gn # Contains text in language Guaraní.
+content.language.got # Contains text in language Gothic.
+content.language.grc # Contains text in language Ancient Greek.
+content.language.gsw # Contains text in language Swiss German.
+content.language.gu # Contains text in language Gujarati / gu.
+content.language.gub # Contains text in language Guajajara.
+content.language.gun # Contains text in language Mbyá Guaraní (Tupian).
+content.language.ha # Contains text in language Hausa / ha.
+content.language.haw # Contains text in language Hawaiian.
+content.language.hbo # Contains text in language Ancient Hebrew.
+content.language.he # Contains text in language Hebrew / he.
+content.language.hi # Contains text in language Hindi / hi.
+content.language.hmn # Contains text in language Hmong.
+content.language.hr # Contains text in language Croatian / hr.
+content.language.hsb # Contains text in language Upper Sorbian / hsb.
+content.language.ht # Contains text in language Haitian / ht.
+content.language.hu # Contains text in language Hungarian / hu.
+content.language.hy # Contains text in language Armenian / hy.
+content.language.id # Contains text in language Indonesian / id.
+content.language.ig # Contains text in language Igbo / ig.
+content.language.is # Contains text in language Icelandic / is.
+content.language.it # Contains text in language Italian / it.
+content.language.ja # Contains text in language Japanese.
+content.language.jp # Contains text in language Japanese / jp.
+content.language.jv # Contains text in language Javanese / jv.
+content.language.ka # Contains text in language Georgian / ka.
+content.language.kfm # Contains text in language Khunsari.
+content.language.kk # Contains text in language Kazakh / kk.
+content.language.km # Contains text in language Central Khmer.
+content.language.kmr # Contains text in language Kurmanji.
+content.language.kn # Contains text in language Kannada / kn.
+content.language.ko # Contains text in language Korean / ko.
+content.language.koi # Contains text in language Komi-Permyak.
+content.language.kpv # Contains text in language Komi-Zyrian.
+content.language.krl # Contains text in language Karelian.
+content.language.ku # Contains text in language Kurdish / ku.
+content.language.ky # Contains text in language Kirghiz.
+content.language.la # Contains text in language Latin / la.
+content.language.lb # Contains text in language Luxembourgish.
+content.language.lij # Contains text in language Ligurian.
+content.language.lo # Contains text in language Lao.
+content.language.lt # Contains text in language Lithuanian / lt.
+content.language.lv # Contains text in language Latvian / lv.
+content.language.mdf # Contains text in language Moksha.
+content.language.mg # Contains text in language Malagasy / mg.
+content.language.mi # Contains text in language Maori.
+content.language.mk # Contains text in language Macedonian / mk.
+content.language.ml # Contains text in language Malayalam / ml.
+content.language.mn # Contains text in language Mongolian / mn.
+content.language.mr # Contains text in language Marathi / mr.
+content.language.ms # Contains text in language Malay.
+content.language.mt # Contains text in language Maltese / mt.
+content.language.my # Contains text in language Burmese / my.
+content.language.myu # Contains text in language Mundurukú.
+content.language.myv # Contains text in language Erzya.
+content.language.nb # Contains text in language Bokmål, Norwegian.
+content.language.ne # Contains text in language Nepali (macrolanguage) / ne.
+content.language.nl # Contains text in language Dutch / nl.
+content.language.nn # Contains text in language Norwegian Nynorsk / nn.
+content.language.no # Contains text in language Norwegian / no.
+content.language.nv # Contains text in language Navajo.
+content.language.ny # Contains text in language Chichewa.
+content.language.nyq # Contains text in language Nayini.
+content.language.olo # Contains text in language Livvi.
+content.language.or # Contains text in language Oriya (macrolanguage) / or.
+content.language.orv # Contains text in language Old Russian.
+content.language.otk # Contains text in language Old Turkish.
+content.language.pa # Contains text in language Punjabi / pa.
+content.language.pam # Contains text in language Pampanga.
+content.language.pcm # Contains text in language Naija (Nigerian Pidgin).
+content.language.pl # Contains text in language Polish / pl.
+content.language.ps # Contains text in language Pushto.
+content.language.pt # Contains text in language Portuguese / pt.
+content.language.ro # Contains text in language Romanian / ro.
+content.language.ru # Contains text in language Russian / ru.
+content.language.rw # Contains text in language Kinyarwanda.
+content.language.sa # Contains text in language Sanskrit / sa.
+content.language.sd # Contains text in language Sindhi / sd.
+content.language.si # Contains text in language Sinhala / si.
+content.language.sjo # Contains text in language Xibe.
+content.language.sk # Contains text in language Slovak / sk.
+content.language.sl # Contains text in language Slovenian / sl.
+content.language.sm # Contains text in language Samoan.
+content.language.sme # Contains text in language North Sámi.
+content.language.sms # Contains text in language Skolt Sami.
+content.language.sn # Contains text in language Shona.
+content.language.so # Contains text in language Somali / so.
+content.language.soj # Contains text in language Soi.
+content.language.sq # Contains text in language Albanian / sq.
+content.language.sr # Contains text in language Serbian / sr.
+content.language.st # Contains text in language Sotho, Southern.
+content.language.su # Contains text in language Sundanese / su.
+content.language.sv # Contains text in language Swedish / sv.
+content.language.sw # Contains text in language Swahili / sw.
+content.language.ta # Contains text in language Tamil / ta.
+content.language.te # Contains text in language Telugu / te.
+content.language.tg # Contains text in language Tajik.
+content.language.th # Contains text in language Thai / th.
+content.language.tk # Contains text in language Turkmen.
+content.language.tl # Contains text in language Tagalog / tl.
+content.language.tpn # Contains text in language Tupi(nambá).
+content.language.tr # Contains text in language Turkish / tr.
+content.language.tt # Contains text in language Tatar / tt.
+content.language.ug # Contains text in language Uyghur.
+content.language.uk # Contains text in language Ukrainian / uk.
+content.language.und # Contains text in language Undetermined.
+content.language.ur # Contains text in language Urdu / ur.
+content.language.urb # Contains text in language Ka'apor.
+content.language.uz # Contains text in language Uzbek / uz.
+content.language.vi # Contains text in language Vietnamese / vi.
+content.language.wbp # Contains text in language Warlpiri.
+content.language.wo # Contains text in language Wolof / wo.
+content.language.xh # Contains text in language Xhosa.
+content.language.xnr # Contains text in language Kangri.
+content.language.yi # Contains text in language Yiddish.
+content.language.yo # Contains text in language Yoruba / yo.
+content.language.zh # Contains text in language Chinese / zh.
+content.language.zu # Contains text in language Zulu.
+content.monolingual # Contains text in 1 natural language.
+content.multilingual # Contains text in multiple natural languages.
+content.subject.arts-and-entertainment # Relates to arts and entertainment.
+content.subject.biology # Relates to biology.
+content.subject.business # Relates to business.
+content.subject.clothing-and-accessories # Relates to clothing and accessories.
+content.subject.computer-science # Relates to computer science.
+content.subject.earth-and-nature # Relates to earth and nature.
+content.subject.education # Relates to education.
+content.subject.exercise # Relates to exercise.
+content.subject.food # Relates to food.
+content.subject.health # Relates to health.
+content.subject.internet # Relates to internet.
+content.subject.movies-and-tv-shows # Relates to movies and tv shows.
+content.subject.music # Relates to music.
+content.subject.news # Relates to news.
+content.subject.software # Relates to software.
+ml.fairness.age # Contains data related to age. Example: 0-13, 14-18, 19-30, 31-65,65+
+ml.fairness.dialect # Contains data related to dialect including the particular forms of a language which may be peculiar to a specific region or social group. Examples: American English, British English, African American Vernacular English, etc.
+ml.fairness.disability # Contains data related to disability. Examples: Blind, deaf, temporarily able bodied, etc.
+ml.fairness.facial-attributes # Contains data related to characteristics of the face or head and surrounding hair, such as beard/no beard, eye shape/color, hair style, etc.
+ml.fairness.gender # Contains data related to roles, behaviours, activities, attributes and opportunities that any society considers appropriate for girls and boys, women and men, or other non-binary categories. (examples: transgender, non-binary, woman, man, etc.)
+ml.fairness.genetic-information # Contains data related to DNA, such as the presence of particular genes or genotypes.
+ml.fairness.geographic-distribution # Contains data related to where the data was collected. Examples: longitude and latitude coordinates, state or country names, etc.
+ml.fairness.profession # Contains data related to occupation or profession. Examples: doctor, nurse, computer programmer, etc.
+ml.fairness.race-national-ethnic-origin # Contains data related to (a) the state of belonging to a social group that has a common national or cultural tradition or (b) a grouping of humans based on shared physical or social qualities into categories generally viewed as distinct by society. Examples: Chinese, indian, black, African American, hispanic
+ml.fairness.religion # Contains data related to religion. Examples: Christian, Hindu, Muslim, etc.
+ml.fairness.sexual-orientation # Contains data related to sexual orientation. Examples: Heterosexual, homosexual, bisexual, asexual, etc.
+ml.fairness.skin-tone # Contains data related to the observed coloration of the skin. One (of many) examples: fitzpatrick scale
+ml.task.abstractive-text-summarization # Relates to Abstractive Text Summarization, a machine learning task.
+ml.task.anomaly-detection # Relates to Anomaly Detection, a machine learning task.
+ml.task.audio-classification # Relates to Audio Classification, a machine learning task.
+ml.task.common-sense-reasoning # Relates to Common Sense Reasoning, a machine learning task.
+ml.task.conditional-image-generation # Relates to Conditional Image Generation, a machine learning task.
+ml.task.coref-resolution # Relates to Coref Resolution, a machine learning task.
+ml.task.coreference-resolution # Relates to Coreference Resolution, a machine learning task.
+ml.task.density-estimation # Relates to Density Estimation, a machine learning task.
+ml.task.dependency-parsing # Relates to Dependency Parsing, a machine learning task.
+ml.task.dialog-act-labeling # Relates to Dialog Act Labeling, a machine learning task.
+ml.task.document-summarization # Relates to Document Summarization, a machine learning task.
+ml.task.fine-grained-image-classification # Relates to Fine Grained Image Classification, a machine learning task.
+ml.task.image-classification # Relates to Image Classification, a machine learning task.
+ml.task.image-clustering # Relates to Image Clustering, a machine learning task.
+ml.task.image-compression # Relates to Image Compression, a machine learning task.
+ml.task.image-generation # Relates to Image Generation, a machine learning task.
+ml.task.image-segmentation # Relates to Image Segmentation, a machine learning task.
+ml.task.image-super-resolution # Relates to Image Super Resolution, a machine learning task.
+ml.task.image-to-image-translation # Relates to Image To Image Translation, a machine learning task.
+ml.task.instance-segmentation # Relates to Instance Segmentation, a machine learning task.
+ml.task.language-modeling # Relates to Language Modeling, a machine learning task.
+ml.task.language-modelling # Relates to Language Modelling, a machine learning task.
+ml.task.lemmatization # Relates to Lemmatization, a machine learning task.
+ml.task.linguistic-acceptability # Relates to Linguistic Acceptability, a machine learning task.
+ml.task.machine-translation # Relates to Machine Translation, a machine learning task.
+ml.task.multi-turn-dialogue-comprehension # Relates to Multi-Turn Dialogue Comprehension, a machine learning task.
+ml.task.named-entity-recognition # Relates to Named Entity Recognition, a machine learning task.
+ml.task.natural-language-inference # Relates to Natural Language Inference, a machine learning task.
+ml.task.natural-language-understanding # Relates to Natural Language Understanding, a machine learning task.
+ml.task.noun-verb-agreement # Relates to Noun-Verb Agreement, a machine learning task.
+ml.task.object-detection # Relates to Object Detection, a machine learning task.
+ml.task.open-domain-question-answering # Relates to Open Domain Question Answering, a machine learning task.
+ml.task.out-of-distribution-detection # Relates to Out Of Distribution Detection, a machine learning task.
+ml.task.parsing # Relates to Parsing, a machine learning task.
+ml.task.part-of-speech-tagging # Relates to Part of Speech Tagging, a machine learning task.
+ml.task.question-answering # Relates to Question Answering, a machine learning task.
+ml.task.question-generation # Relates to Question Generation, a machine learning task.
+ml.task.reading-comprehension # Relates to Reading Comprehension, a machine learning task.
+ml.task.reinforcement-learning # Relates to Reinforcement Learning (RL), a machine learning task.
+ml.task.relation-extraction # Relates to Relation Extraction, a machine learning task.
+ml.task.scene-classification # Relates to Scene Classification, a machine learning task.
+ml.task.semantic-parsing # Relates to Semantic Parsing, a machine learning task.
+ml.task.semantic-role-labeling # Relates to Semantic Role Labeling, a machine learning task.
+ml.task.semantic-segmentation # Relates to Semantic Segmentation, a machine learning task.
+ml.task.sentence-similarity # Relates to Sentence Similarity, a machine learning task.
+ml.task.sentiment-analysis # Relates to Sentiment Analysis, a machine learning task.
+ml.task.sequence-modeling # Relates to Sequence Modeling, a machine learning task.
+ml.task.sequence-to-sequence-language-modeling # Relates to Sequence To Sequence Language Modeling, a machine learning task.
+ml.task.sequence-to-sequence-language-modelling # Relates to Sequence to Sequence Language Modelling, a machine learning task.
+ml.task.speech-recognition # Relates to Speech Recognition, a machine learning task.
+ml.task.stemming # Relates to Stemming, a machine learning task.
+ml.task.table-to-text-generation # Relates to Table To Text Generation, a machine learning task.
+ml.task.terminology-extraction # Relates to Terminology Extraction, a machine learning task.
+ml.task.text-breaking # Relates to Text Breaking, a machine learning task.
+ml.task.text-classification # Relates to Text Classification, a machine learning task.
+ml.task.text-classification-toxicity-prediction # Relates to Text Classification Toxicity Prediction, a machine learning task.
+ml.task.text-generation # Relates to Text Generation, a machine learning task.
+ml.task.text-summarization # Relates to Text Summarization, a machine learning task.
+ml.task.textual-entailment # Relates to Textual Entailment, a machine learning task.
+ml.task.token-classification # Relates to Token Classification, a machine learning task.
+ml.task.unsupervised-anomaly-detection # Relates to Unsupervised Anomaly Detection, a machine learning task.
+ml.task.word-sense-disambiguation # Relates to Word Sense Disambiguation, a machine learning task.

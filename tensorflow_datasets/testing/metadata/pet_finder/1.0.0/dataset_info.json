@@ -1,169 +1,62 @@
 {
-  "citation": "\n@ONLINE {kaggle-petfinder-adoption-prediction,\n    author = \"Kaggle and PetFinder.my\",\n    title  = \"PetFinder.my Adoption Prediction\",\n    month  = \"april\",\n    year   = \"2019\",\n    url    = \"https://www.kaggle.com/c/petfinder-adoption-prediction/data/\"\n}\n", 
-  "description": "Dataset with images from 5 classes (see config name for information on the specific class)", 
+  "citation": "@ONLINE {kaggle-petfinder-adoption-prediction,\n    author = \"Kaggle and PetFinder.my\",\n    title  = \"PetFinder.my Adoption Prediction\",\n    month  = \"april\",\n    year   = \"2019\",\n    url    = \"https://www.kaggle.com/c/petfinder-adoption-prediction/data/\"\n}",
+  "description": "Dataset with images from 5 classes (see config name for information on the specific class)",
+  "downloadSize": "2078132887",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
-      "https://storage.googleapis.com/petfinder_dataset/"
+      "https://www.kaggle.com/c/petfinder-adoption-prediction/data"
     ]
-  }, 
-  "name": "pet_finder", 
-  "schema": {
-    "feature": [
-      {
-        "name": "PetID", 
-        "type": "BYTES"
-      }, 
-      {
-        "name": "attributes"
-      }, 
-      {
-        "name": "image", 
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }, 
-            {
-              "size": "-1"
-            }, 
-            {
-              "size": "3"
-            }
-          ]
-        }, 
-        "type": "INT"
-      }, 
-      {
-        "name": "image/filename", 
-        "type": "BYTES"
-      }, 
-      {
-        "name": "label", 
-        "type": "INT"
-      }
-    ]
-  }, 
-  "sizeInBytes": "2078132887", 
+  },
+  "moduleName": "tensorflow_datasets.image_classification.pet_finder",
+  "name": "pet_finder",
   "splits": [
     {
-      "name": "test", 
-      "numShards": "10", 
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1642641847",
       "shardLengths": [
-        "3616", 
-        "3617", 
-        "3616", 
-        "3616"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "14465"
-              }
-            }, 
-            "name": "PetID", 
-            "type": "BYTES"
-          }, 
-          {
-            "name": "image", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "14465"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "14465"
-              }
-            }, 
-            "name": "image/filename", 
-            "type": "BYTES"
-          }, 
-          {
-            "name": "label", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "14465"
-              }, 
-              "max": -1.0, 
-              "min": -1.0
-            }
-          }
-        ], 
-        "numExamples": "14465"
-      }
-    }, 
-    {
-      "name": "train", 
-      "numShards": "10", 
-      "shardLengths": [
-        "3644", 
-        "3645", 
-        "3644", 
-        "3645", 
-        "3644", 
-        "3645", 
-        "3644", 
-        "3645", 
-        "3644", 
-        "3644", 
-        "3645", 
-        "3644", 
-        "3645", 
-        "3644", 
-        "3645", 
+        "3644",
+        "3645",
+        "3644",
+        "3645",
+        "3644",
+        "3645",
+        "3644",
+        "3645",
+        "3644",
+        "3644",
+        "3645",
+        "3644",
+        "3645",
+        "3644",
+        "3645",
         "3644"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "58311"
-              }
-            }, 
-            "name": "PetID", 
-            "type": "BYTES"
-          }, 
-          {
-            "name": "image", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "58311"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "58311"
-              }
-            }, 
-            "name": "image/filename", 
-            "type": "BYTES"
-          }, 
-          {
-            "name": "label", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "58311"
-              }, 
-              "max": 4.0
-            }
-          }
-        ], 
-        "numExamples": "58311"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "401161187",
+      "shardLengths": [
+        "3616",
+        "3616",
+        "3617",
+        "3616"
+      ]
     }
-  ], 
+  ],
   "supervisedKeys": {
-    "input": "attributes", 
-    "output": "label"
-  }, 
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "attributes"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
   "version": "1.0.0"
 }

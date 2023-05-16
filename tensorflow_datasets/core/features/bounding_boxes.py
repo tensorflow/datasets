@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
 
 """Bounding boxes feature."""
 
+from __future__ import annotations
+
 import collections
 from typing import Any, Union
 
 import numpy as np
-import tensorflow as tf
-
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -43,7 +43,7 @@ class BBoxFeature(tensor_feature.Tensor):
   inside a `tfds.features.Sequence`.
 
   Input:
-    * `tfds.features.BBox` tuple.
+    * `tfds.features.BBox` tuple or 4-dim `np.ndarray`.
 
   Output:
     bbox: tf.Tensor of type `tf.float32` and shape `[4,]` which contains the
@@ -72,24 +72,38 @@ class BBoxFeature(tensor_feature.Tensor):
       *,
       doc: feature_lib.DocArg = None,
   ):
-    super(BBoxFeature, self).__init__(shape=(4,), dtype=tf.float32, doc=doc)
+    super(BBoxFeature, self).__init__(shape=(4,), dtype=np.float32, doc=doc)
 
-  def encode_example(self, bbox):
+  def encode_example(self, bbox: Union[BBox, np.ndarray]):
     """See base class for details."""
+
+    if isinstance(bbox, np.ndarray):
+      if bbox.shape != (4,):
+        raise ValueError(
+            'array representing BBox should have exactly 4 floats. '
+            f'Instead, it has {bbox.shape}.'
+        )
+      bbox = bbox.astype(np.float64)
+      bbox = BBox(ymin=bbox[0], xmin=bbox[1], ymax=bbox[2], xmax=bbox[3])
+
     # Validate the coordinates
     for coordinate in bbox:
       if not isinstance(coordinate, float):
         raise ValueError(
-            'BBox coordinates should be float. Got {}.'.format(bbox))
+            'BBox coordinates should be float. Got {}.'.format(bbox)
+        )
       if not 0.0 <= coordinate <= 1.0:
         raise ValueError(
-            'BBox coordinates should be between 0 and 1. Got {}.'.format(bbox))
+            'BBox coordinates should be between 0 and 1. Got {}.'.format(bbox)
+        )
       if bbox.xmax < bbox.xmin or bbox.ymax < bbox.ymin:
         raise ValueError(
-            'BBox coordinates should have min <= max. Got {}.'.format(bbox))
+            'BBox coordinates should have min <= max. Got {}.'.format(bbox)
+        )
 
     return super(BBoxFeature, self).encode_example(
-        [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax])
+        [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax]
+    )
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""
@@ -102,14 +116,15 @@ class BBoxFeature(tensor_feature.Tensor):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.BoundingBoxFeature]) -> 'BBoxFeature':
+      cls, value: Union[Json, feature_pb2.BoundingBoxFeature]
+  ) -> 'BBoxFeature':
     del value  # Unused
     return cls()
 
-  def to_json_content(self) -> feature_pb2.BoundingBoxFeature:
+  def to_json_content(self) -> feature_pb2.BoundingBoxFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.BoundingBoxFeature(
         shape=feature_lib.to_shape_proto(self._shape),
-        dtype=feature_lib.encode_dtype(self._dtype),
+        dtype=feature_lib.dtype_to_str(self._dtype),
     )
 
 

@@ -1,59 +1,22 @@
 {
-  "citation": "\n@InProceedings{bojar-EtAl:2016:WMT1,\n  author    = {Bojar, Ond\u000b{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huck, Matthias  and  Jimeno Yepes, Antonio  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Neveol, Aurelie  and  Neves, Mariana  and  Popel, Martin  and  Post, Matt  and  Rubino, Raphael  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco  and  Verspoor, Karin  and  Zampieri, Marcos},\n  title     = {Findings of the 2016 Conference on Machine Translation},\n  booktitle = {Proceedings of the First Conference on Machine Translation},\n  month     = {August},\n  year      = {2016},\n  address   = {Berlin, Germany},\n  publisher = {Association for Computational Linguistics},\n  pages     = {131--198},\n  url       = {http://www.aclweb.org/anthology/W/W16/W16-2301}\n}\n",
-  "description": "Translate dataset based on the data from statmt.org.\n\nVersions exists for the different years using a combination of multiple data\nsources. The base `wmt_translate` allows you to create your own config to choose\nyour own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.\n\n```\nconfig = tfds.translate.wmt.WmtConfig(\n    version=\"0.0.1\",\n    language_pair=(\"fr\", \"de\"),\n    subsets={\n        tfds.Split.TRAIN: [\"commoncrawl_frde\"],\n        tfds.Split.VALIDATION: [\"euelections_dev2019\"],\n    },\n)\nbuilder = tfds.builder(\"wmt_translate\", config=config)\n```\n\n",
+  "citation": "@InProceedings{bojar-EtAl:2016:WMT1,\n  author    = {Bojar, Ond\u000b{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huck, Matthias  and  Jimeno Yepes, Antonio  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Neveol, Aurelie  and  Neves, Mariana  and  Popel, Martin  and  Post, Matt  and  Rubino, Raphael  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco  and  Verspoor, Karin  and  Zampieri, Marcos},\n  title     = {Findings of the 2016 Conference on Machine Translation},\n  booktitle = {Proceedings of the First Conference on Machine Translation},\n  month     = {August},\n  year      = {2016},\n  address   = {Berlin, Germany},\n  publisher = {Association for Computational Linguistics},\n  pages     = {131--198},\n  url       = {http://www.aclweb.org/anthology/W/W16/W16-2301}\n}",
+  "configDescription": "WMT 2016 fi-en translation task dataset.",
+  "configName": "fi-en",
+  "description": "Translate dataset based on the data from statmt.org.\n\nVersions exists for the different years using a combination of multiple data\nsources. The base `wmt_translate` allows you to create your own config to choose\nyour own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.\n\n```\nconfig = tfds.translate.wmt.WmtConfig(\n    version=\"0.0.1\",\n    language_pair=(\"fr\", \"de\"),\n    subsets={\n        tfds.Split.TRAIN: [\"commoncrawl_frde\"],\n        tfds.Split.VALIDATION: [\"euelections_dev2019\"],\n    },\n)\nbuilder = tfds.builder(\"wmt_translate\", config=config)\n```",
+  "downloadSize": "273160766",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.statmt.org/wmt16/translation-task.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.translate.wmt16",
   "name": "wmt16_translate",
-  "schema": {
-    "feature": [
-      {
-        "name": "en",
-        "type": "BYTES"
-      },
-      {
-        "name": "fi",
-        "type": "BYTES"
-      }
-    ]
-  },
-  "sizeInBytes": "273160766",
   "splits": [
     {
-      "name": "test",
-      "numShards": "1",
-      "shardLengths": [
-        "6000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "6000"
-              }
-            },
-            "name": "en",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "6000"
-              }
-            },
-            "name": "fi",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "6000"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "10",
+      "numBytes": "652760642",
       "shardLengths": [
         "259174",
         "259174",
@@ -63,65 +26,36 @@
         "259175",
         "259174",
         "259174"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2073394"
-              }
-            },
-            "name": "en",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "2073394"
-              }
-            },
-            "name": "fi",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "2073394"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
-      "numShards": "1",
+      "numBytes": "335772",
       "shardLengths": [
         "1370"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1370"
-              }
-            },
-            "name": "en",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1370"
-              }
-            },
-            "name": "fi",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "1370"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1541253",
+      "shardLengths": [
+        "6000"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "fi",
-    "output": "en"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "fi"
+        },
+        {
+          "featureKey": "en"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

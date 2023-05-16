@@ -1,0 +1,12 @@
+Adj
+Adv
+Art
+Conj
+Int
+Misc
+N
+Num
+Prep
+Pron
+Punc
+V

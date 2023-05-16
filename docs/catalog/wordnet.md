@@ -19,6 +19,12 @@ adverbs are grouped into sets of cognitive synonyms (synsets), each expressing a
 distinct concept. Synsets are interlinked by means of conceptual-semantic and
 lexical relations.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wn18">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://wordnet.princeton.edu/](https://wordnet.princeton.edu/)
 
@@ -39,20 +45,20 @@ lexical relations.
 
 ```python
 FeaturesDict({
-    'lhs': Text(shape=(), dtype=tf.string),
-    'relation': Text(shape=(), dtype=tf.string),
-    'rhs': Text(shape=(), dtype=tf.string),
+    'lhs': Text(shape=(), dtype=string),
+    'relation': Text(shape=(), dtype=string),
+    'rhs': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-lhs      | Text         |       | tf.string |
-relation | Text         |       | tf.string |
-rhs      | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+lhs      | Text         |       | string |
+relation | Text         |       | string |
+rhs      | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -61,10 +67,6 @@ rhs      | Text         |       | tf.string |
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 
 ## wordnet/WN18 (default config)
@@ -84,6 +86,43 @@ Split          | Examples
 `'test'`       | 5,000
 `'train'`      | 141,442
 `'validation'` | 5,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wordnet-WN18-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -132,6 +171,43 @@ Split          | Examples
 `'test'`       | 3,134
 `'train'`      | 86,835
 `'validation'` | 3,034
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wordnet-WN18RR-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 

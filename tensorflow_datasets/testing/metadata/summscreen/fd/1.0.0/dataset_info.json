@@ -4,7 +4,7 @@
   "configName": "fd",
   "description": "SummScreen Summarization dataset, non-anonymized, non-tokenized version.\n\nTrain/val/test splits and filtering are based on the final tokenized dataset,\nbut transcripts and recaps provided are based on the untokenized text.\n\nThere are two features:\n\n  - transcript: Full episode transcripts, each line of dialogue\n    separated by newlines\n  - recap: Recaps or summaries of episodes",
   "downloadSize": "882140657",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/mingdachen/SummScreen"
@@ -12,8 +12,12 @@
   },
   "moduleName": "tensorflow_datasets.summarization.summscreen.summscreen",
   "name": "summscreen",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "117944734",
       "shardLengths": [
@@ -21,6 +25,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "10673089",
       "shardLengths": [
@@ -28,6 +33,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "10827219",
       "shardLengths": [
@@ -36,8 +42,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "transcript",
-    "output": "recap"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "transcript"
+        },
+        {
+          "featureKey": "recap"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

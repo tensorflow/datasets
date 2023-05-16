@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import os
 import tempfile
 
 import tensorflow_datasets as tfds
+from tensorflow_datasets import setup_teardown
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import gcs_utils
 
@@ -43,19 +44,23 @@ class GcsUtilsTest(testing.TestCase):
       )
       with tempfile.TemporaryDirectory() as tmp_dir:
         gcs_utils.download_gcs_dataset(
-            dataset_name='mnist/2.0.0', local_dataset_dir=tmp_dir)
+            dataset_name='mnist/2.0.0', local_dataset_dir=tmp_dir
+        )
         self.assertCountEqual(
-            os.listdir(tmp_dir), [
+            os.listdir(tmp_dir),
+            [
                 'mnist-test.tfrecord-00000-of-00001',
                 'mnist-train.tfrecord-00000-of-00001',
                 'dataset_info.json',
                 'image.image.json',
-            ])
+            ],
+        )
 
   def test_mnist(self):
     with self.gcs_access():
       mnist = tfds.image_classification.MNIST(
-          data_dir=gcs_utils.gcs_path('datasets'))
+          data_dir=gcs_utils.gcs_path('datasets')
+      )
       ds = tfds.as_numpy(mnist.as_dataset(split='train').take(1))
       example = next(iter(ds))
     _ = example['image'], example['label']

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@
 import dataclasses
 from typing import Optional
 
-import tensorflow as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.ranking.libsvm_ranking_parser import LibSVMRankingParser
 
@@ -72,7 +73,9 @@ _CITATION = """
 _URLS = {
     "main": "http://library.istella.it/dataset/istella-letor.tar.gz",
     "s": "http://library.istella.it/dataset/istella-s-letor.tar.gz",
-    "x": "http://quickrank.isti.cnr.it/istella-datasets-mirror/istella-X.tar.gz"
+    "x": (
+        "http://quickrank.isti.cnr.it/istella-datasets-mirror/istella-X.tar.gz"
+    ),
 }
 
 _FEATURE_NAMES = {n: f"feature_{n}" for n in range(1, 221)}
@@ -89,16 +92,18 @@ class IstellaConfig(tfds.core.BuilderConfig):
 class Istella(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for istella dataset."""
 
-  VERSION = tfds.core.Version("1.0.1")
+  VERSION = tfds.core.Version("1.2.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
-      "1.0.1": "Fix serialization to support float64."
+      "1.0.1": "Fix serialization to support float64.",
+      "1.1.0": "Bundle features into a single 'float_features' feature.",
+      "1.2.0": "Add query and document identifiers.",
   }
   # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
       IstellaConfig(name="main", has_vali=False, subdirectory="full"),
       IstellaConfig(name="s", has_vali=True, subdirectory="sample"),
-      IstellaConfig(name="x", has_vali=True, subdirectory=None)
+      IstellaConfig(name="x", has_vali=True, subdirectory=None),
   ]
 
   # pytype: enable=wrong-keyword-args
@@ -107,12 +112,19 @@ class Istella(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     encoding = tfds.features.Encoding.ZLIB
     features = {
-        name: tfds.features.Tensor(
-            shape=(None,), dtype=tf.float64, encoding=encoding)
-        for name in _FEATURE_NAMES.values()
+        "float_features": tfds.features.Tensor(
+            shape=(None, len(_FEATURE_NAMES)),
+            dtype=np.float64,
+            encoding=encoding,
+        ),
+        _LABEL_NAME: tfds.features.Tensor(
+            shape=(None,), dtype=np.float64, encoding=encoding
+        ),
+        "query_id": tfds.features.Text(),
+        "doc_id": tfds.features.Tensor(
+            shape=(None,), dtype=np.int64, encoding=encoding
+        ),
     }
-    features[_LABEL_NAME] = tfds.features.Tensor(
-        shape=(None,), dtype=tf.float64, encoding=encoding)
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -132,7 +144,7 @@ class Istella(tfds.core.GeneratorBasedBuilder):
 
     splits = {
         "train": self._generate_examples(path / "train.txt"),
-        "test": self._generate_examples(path / "test.txt")
+        "test": self._generate_examples(path / "test.txt"),
     }
 
     # For some dataset configs, there is an additional validation split.
@@ -147,4 +159,6 @@ class Istella(tfds.core.GeneratorBasedBuilder):
     # to read the file contents as bytes and manually decode it as latin1.
     with tf.io.gfile.GFile(path, "rb") as f:
       lines = map(lambda bytes_line: bytes_line.decode("latin1"), f)
-      yield from LibSVMRankingParser(lines, _FEATURE_NAMES, _LABEL_NAME)
+      yield from LibSVMRankingParser(
+          lines, _FEATURE_NAMES, _LABEL_NAME, combine_features=True
+      )

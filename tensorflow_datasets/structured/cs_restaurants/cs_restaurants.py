@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,12 @@
 
 """Czech Restaurants dataset."""
 
+from __future__ import annotations
+
 import json
 
-import tensorflow.compat.v2 as tf
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""
@@ -45,9 +48,15 @@ It originated as a translation of the English San Francisco Restaurants dataset 
 
 _HOMEPAGE_URL = 'https://github.com/UFAL-DSG/cs_restaurant_dataset'
 
-_TRAIN_URL = 'https://github.com/UFAL-DSG/cs_restaurant_dataset/raw/master/train.json'
-_DEV_URL = 'https://github.com/UFAL-DSG/cs_restaurant_dataset/raw/master/devel.json'
-_TEST_URL = 'https://github.com/UFAL-DSG/cs_restaurant_dataset/raw/master/test.json'
+_TRAIN_URL = (
+    'https://github.com/UFAL-DSG/cs_restaurant_dataset/raw/master/train.json'
+)
+_DEV_URL = (
+    'https://github.com/UFAL-DSG/cs_restaurant_dataset/raw/master/devel.json'
+)
+_TEST_URL = (
+    'https://github.com/UFAL-DSG/cs_restaurant_dataset/raw/master/test.json'
+)
 
 
 def _get_table_from_da(da):
@@ -91,23 +100,21 @@ class CSRestaurants(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             'input_text': {
-                'table':
-                    tfds.features.Sequence({
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
-                    })
+                'table': tfds.features.Sequence({
+                    'column_header': np.str_,
+                    'row_number': np.int16,
+                    'content': np.str_,
+                })
             },
             'delex_input_text': {
-                'table':
-                    tfds.features.Sequence({
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
-                    })
+                'table': tfds.features.Sequence({
+                    'column_header': np.str_,
+                    'row_number': np.int16,
+                    'content': np.str_,
+                })
             },
-            'target_text': tf.string,
-            'delex_target_text': tf.string,
+            'target_text': np.str_,
+            'delex_target_text': np.str_,
         }),
         # If there's a common (input, target) tuple from the features,
         # specify them here. They'll be used if as_supervised=True in
@@ -120,24 +127,23 @@ class CSRestaurants(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    extracted_path = dl_manager.download_and_extract({
-        'train_path': _TRAIN_URL,
-        'dev_path': _DEV_URL,
-        'test_path': _TEST_URL
-    })
+    extracted_path = dl_manager.download_and_extract(
+        {'train_path': _TRAIN_URL, 'dev_path': _DEV_URL, 'test_path': _TEST_URL}
+    )
 
     return {
-        'train':
-            self._generate_examples(json_path=extracted_path['train_path']),
-        'validation':
-            self._generate_examples(json_path=extracted_path['dev_path']),
-        'test':
-            self._generate_examples(json_path=extracted_path['test_path'])
+        'train': self._generate_examples(
+            json_path=extracted_path['train_path']
+        ),
+        'validation': self._generate_examples(
+            json_path=extracted_path['dev_path']
+        ),
+        'test': self._generate_examples(json_path=extracted_path['test_path']),
     }
 
   def _generate_examples(self, json_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(json_path) as f:
+    with epath.Path(json_path).open() as f:
       data = json.load(f)
       for i, row in enumerate(data):
         yield i, {

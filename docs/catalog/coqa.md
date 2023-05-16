@@ -16,6 +16,12 @@
 
 CoQA: A Conversational Question Answering Challenge
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/coqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://stanfordnlp.github.io/coqa/](https://stanfordnlp.github.io/coqa/)
 
@@ -46,28 +52,28 @@ Split     | Examples
 ```python
 FeaturesDict({
     'answers': Sequence({
-        'answer_end': tf.int32,
-        'answer_start': tf.int32,
-        'input_text': Text(shape=(), dtype=tf.string),
+        'answer_end': int32,
+        'answer_start': int32,
+        'input_text': Text(shape=(), dtype=string),
     }),
-    'questions': Sequence(Text(shape=(), dtype=tf.string)),
-    'source': Text(shape=(), dtype=tf.string),
-    'story': Text(shape=(), dtype=tf.string),
+    'questions': Sequence(Text(shape=(), dtype=string)),
+    'source': Text(shape=(), dtype=string),
+    'story': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class          | Shape   | Dtype     | Description
-:------------------- | :------------- | :------ | :-------- | :----------
-                     | FeaturesDict   |         |           |
-answers              | Sequence       |         |           |
-answers/answer_end   | Tensor         |         | tf.int32  |
-answers/answer_start | Tensor         |         | tf.int32  |
-answers/input_text   | Text           |         | tf.string |
-questions            | Sequence(Text) | (None,) | tf.string |
-source               | Text           |         | tf.string |
-story                | Text           |         | tf.string |
+Feature              | Class          | Shape   | Dtype  | Description
+:------------------- | :------------- | :------ | :----- | :----------
+                     | FeaturesDict   |         |        |
+answers              | Sequence       |         |        |
+answers/answer_end   | Tensor         |         | int32  |
+answers/answer_start | Tensor         |         | int32  |
+answers/input_text   | Text           |         | string |
+questions            | Sequence(Text) | (None,) | string |
+source               | Text           |         | string |
+story                | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

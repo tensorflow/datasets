@@ -2,6 +2,14 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
+            "episode_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
             "episode_return": {
                 "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
                 "tensor": {
@@ -28,6 +36,20 @@
                                     "description": "Clipped reward.",
                                     "valueRange": "[-1, 1]"
                                 },
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                    "image": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "84",
+                                                "84",
+                                                "1"
+                                            ]
+                                        },
+                                        "dtype": "uint8",
+                                        "encodingFormat": "png"
+                                    }
+                                },
                                 "is_terminal": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
@@ -44,25 +66,11 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "observation": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
-                                    "image": {
-                                        "shape": {
-                                            "dimensions": [
-                                                "84",
-                                                "84",
-                                                "1"
-                                            ]
-                                        },
-                                        "dtype": "uint8",
-                                        "encodingFormat": "png"
-                                    }
-                                },
-                                "is_first": {
+                                "discount": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
-                                        "dtype": "bool",
+                                        "dtype": "float32",
                                         "encoding": "none"
                                     }
                                 },
@@ -74,11 +82,11 @@
                                         "encoding": "none"
                                     }
                                 },
-                                "discount": {
+                                "is_first": {
                                     "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                                     "tensor": {
                                         "shape": {},
-                                        "dtype": "float32",
+                                        "dtype": "bool",
                                         "encoding": "none"
                                     }
                                 }
@@ -89,14 +97,6 @@
                 }
             },
             "checkpoint_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int64",
-                    "encoding": "none"
-                }
-            },
-            "episode_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},

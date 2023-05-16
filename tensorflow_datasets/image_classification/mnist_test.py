@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,15 +46,17 @@ class KMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.KMNIST
 
 
-mnist.EMNIST.BUILDER_CONFIGS.extend([
-    mnist.EMNISTConfig(
-        name="test",
-        class_number=200,
-        train_examples=10,
-        test_examples=2,
-        description="EMNIST test data config.",
-    ),
-])
+mnist.EMNIST.BUILDER_CONFIGS.extend(
+    [
+        mnist.EMNISTConfig(
+            name="test",
+            class_number=200,
+            train_examples=10,
+            test_examples=2,
+            description="EMNIST test data config.",
+        ),
+    ]
+)
 
 
 class EMNISTTest(testing.DatasetBuilderTestCase):

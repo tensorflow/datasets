@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,8 +28,10 @@ from tensorflow_datasets.image_classification.cbis_ddsm import CuratedBreastImag
 from tensorflow_datasets.image_classification.chexpert import Chexpert
 from tensorflow_datasets.image_classification.cifar import Cifar10
 from tensorflow_datasets.image_classification.cifar import Cifar100
+from tensorflow_datasets.image_classification.cifar100_n import Cifar100N
 from tensorflow_datasets.image_classification.cifar10_1 import Cifar10_1
 from tensorflow_datasets.image_classification.cifar10_corrupted import Cifar10Corrupted
+from tensorflow_datasets.image_classification.cifar10_n import Cifar10N
 from tensorflow_datasets.image_classification.citrus import CitrusLeaves
 from tensorflow_datasets.image_classification.cmaterdb import Cmaterdb
 from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistology
@@ -47,6 +49,7 @@ from tensorflow_datasets.image_classification.food101 import Food101
 from tensorflow_datasets.image_classification.geirhos_conflict_stimuli import GeirhosConflictStimuli
 from tensorflow_datasets.image_classification.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image_classification.i_naturalist2018 import INaturalist2018
+from tensorflow_datasets.image_classification.i_naturalist2021 import INaturalist2021
 from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 from tensorflow_datasets.image_classification.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image_classification.imagenet2012_fewshot import Imagenet2012Fewshot
@@ -75,6 +78,7 @@ from tensorflow_datasets.image_classification.oxford_iiit_pet import OxfordIIITP
 from tensorflow_datasets.image_classification.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image_classification.pet_finder import PetFinder
 from tensorflow_datasets.image_classification.places365_small import Places365Small
+from tensorflow_datasets.image_classification.placesfull import Placesfull
 from tensorflow_datasets.image_classification.plant_leaves import PlantLeaves
 from tensorflow_datasets.image_classification.plant_village import PlantVillage
 from tensorflow_datasets.image_classification.plantae_k import PlantaeK

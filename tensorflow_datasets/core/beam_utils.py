@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 
 """Beam utils."""
 
+import functools
 from typing import Any
 
 from tensorflow_datasets.core import dataset_builder
@@ -23,15 +24,17 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import shard_utils
 
 __all__ = [
+    'inc_counter',
     'ReadFromTFDS',
 ]
 
 
 @lazy_imports_lib.beam_ptransform_fn
-def ReadFromTFDS(
+def ReadFromTFDS(  # pylint: disable=invalid-name
     pipeline,
     builder: dataset_builder.DatasetBuilder,
     split: str,
+    workers_per_shard: int = 1,
     **as_dataset_kwargs: Any,
 ):
   """Creates a beam pipeline yielding TFDS examples.
@@ -62,6 +65,10 @@ def ReadFromTFDS(
     pipeline: beam pipeline (automatically set)
     builder: Dataset builder to load
     split: Split name to load (e.g. `train+test`, `train`)
+    workers_per_shard: number of workers that should read a shard in parallel.
+      The shard will be split in this many parts. Note that workers cannot skip
+      to a specific row in a tfrecord file, so they need to read the file up
+      until that point without using that data.
     **as_dataset_kwargs: Arguments forwarded to `builder.as_dataset`.
 
   Returns:
@@ -71,7 +78,9 @@ def ReadFromTFDS(
 
   if not builder.info.splits.total_num_examples:
     raise ValueError(
-        f'No examples found in {builder.name!r}. Was the dataset generated ?')
+        f'No examples found in {builder.name!r} in data dir {builder.data_dir}.'
+        ' Was the dataset generated?'
+    )
 
   def load_shard(file_instruction: shard_utils.FileInstruction):  # pylint: disable=invalid-name
     """Loads a single shard."""
@@ -86,18 +95,69 @@ def ReadFromTFDS(
     # to absolute instructions (and check that
     # `splits[abs_split].file_instructions == [file_instruction]` ).
 
-    if file_instruction.skip > 0 or file_instruction.take > 0:
+    if file_instruction.skip > 0 or not file_instruction.takes_all:
       batch_size = as_dataset_kwargs.get('batch_size')
       if batch_size is not None:
-        raise NotImplementedError(f'ReadFromTFDS supports skip and take (used '
-                                  f'in split={split!r}) only when batch_size='
-                                  f'None. Got batch_size={batch_size!r}.')
+        raise NotImplementedError(
+            'ReadFromTFDS supports skip and take (used '
+            f'in split={split!r}) only when batch_size='
+            f'None. Got batch_size={batch_size!r}.'
+        )
 
     if file_instruction.skip > 0:
       ds = ds.skip(file_instruction.skip)
-    if file_instruction.take > 0:
+    if not file_instruction.takes_all:
       ds = ds.take(file_instruction.take)
+    inc_counter(
+        name='LoadedFileInstructions', value=1, namespace='ReadFromTFDS'
+    )
     return ds
 
   file_instructions = builder.info.splits[split].file_instructions
+  inc_counter(
+      name='FileInstructions',
+      value=len(file_instructions),
+      namespace='ReadFromTFDS',
+  )
+  if workers_per_shard > 1:
+    expanded_file_instructions = []
+    for file_instruction in file_instructions:
+      expanded_file_instructions.extend(
+          shard_utils.split_file_instruction(
+              file_instruction=file_instruction, num_splits=workers_per_shard
+          )
+      )
+    file_instructions = expanded_file_instructions
+    inc_counter(
+        name='ExpandedFileInstructions',
+        value=len(file_instructions),
+        namespace='ReadFromTFDS',
+    )
   return pipeline | beam.Create(file_instructions) | beam.FlatMap(load_shard)
+
+
+@functools.lru_cache(None)
+def _get_metrics_counter(namespace: str, name: str):
+  beam = lazy_imports_lib.lazy_imports.apache_beam
+  return beam.metrics.Metrics.counter(namespace, name)
+
+
+def inc_counter(name: str, value: int = 1, *, namespace: str = 'tfds') -> None:
+  """Increment a `beam.metrics.Metrics.counter` without boilerplate.
+
+  ```python
+  tfds.beam.inc_counter('my_metric')
+  ```
+
+  Is a small alias for:
+
+  ```python
+  beam.metrics.Metrics.counter(namespace, name).inc(value)
+  ```
+
+  Args:
+    name: The metrics name
+    value: Increment (default to 1)
+    namespace: Metrics namespace (default to `tfds`)
+  """
+  _get_metrics_counter(namespace, name).inc(value)

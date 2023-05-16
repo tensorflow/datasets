@@ -1,0 +1,74 @@
+{
+  "citation": "@article{DBLP:journals/corr/abs-1903-04561,\n  author    = {Daniel Borkan and\n               Lucas Dixon and\n               Jeffrey Sorensen and\n               Nithum Thain and\n               Lucy Vasserman},\n  title     = {Nuanced Metrics for Measuring Unintended Bias with Real Data for Text\n               Classification},\n  journal   = {CoRR},\n  volume    = {abs/1903.04561},\n  year      = {2019},\n  url       = {http://arxiv.org/abs/1903.04561},\n  archivePrefix = {arXiv},\n  eprint    = {1903.04561},\n  timestamp = {Sun, 31 Mar 2019 19:01:24 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1903-04561},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "configDescription": "\nThe CivilCommentsIdentities set here includes an extended set of identity labels\nin addition to the basic seven labels. However, it only includes the subset\n(roughly a quarter) of the data with all these features.\n",
+  "configName": "CivilCommentsIdentities",
+  "description": "This version of the CivilComments Dataset provides access to the primary\nseven labels that were annotated by crowd workers, the toxicity and other\ntags are a value between 0 and 1 indicating the fraction of annotators that\nassigned these attributes to the comment text.\n\nThe other tags are only available for a fraction of the input examples. They\nare currently ignored for the main dataset; the CivilCommentsIdentities set\nincludes those labels, but only consists of the subset of the data with them.\nThe other attributes that were part of the original CivilComments release are\nincluded only in the raw data. See the Kaggle documentation for more details\nabout the available features.\n\nThe comments in this dataset come from an archive of the Civil Comments\nplatform, a commenting plugin for independent news sites. These public comments\nwere created from 2015 - 2017 and appeared on approximately 50 English-language\nnews sites across the world. When Civil Comments shut down in 2017, they chose\nto make the public comments available in a lasting open archive to enable future\nresearch. The original data, published on figshare, includes the public comment\ntext, some associated metadata such as article IDs, publication IDs, timestamps\nand commenter-generated \"civility\" labels, but does not include user ids. Jigsaw\nextended this dataset by adding additional labels for toxicity, identity\nmentions, as well as covert offensiveness. This data set is an exact replica of\nthe data released for the Jigsaw Unintended Bias in Toxicity Classification\nKaggle challenge. This dataset is released under CC0, as is the underlying\ncomment text.\n\nFor comments that have a parent_id also in the civil comments data, the\ntext of the previous comment is provided as the \"parent_text\" feature. Note\nthat the splits were made without regard to this information, so using previous\ncomments may leak some information. The annotators did not have access to the\nparent text when making the labels.",
+  "downloadSize": "448174578",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.civil_comments",
+  "name": "civil_comments",
+  "releaseNotes": {
+    "1.0.0": "Initial full release.",
+    "1.0.1": "Added a unique id for each comment.",
+    "1.1.0": "Added CivilCommentsCovert config.",
+    "1.1.1": "Added CivilCommentsCovert config with correct checksum.",
+    "1.1.2": "Added separate citation for CivilCommentsCovert dataset.",
+    "1.1.3": "Corrected id types from float to string.",
+    "1.2.0": "Add toxic spans, context, and parent comment text features.",
+    "1.2.1": "Fix incorrect formatting in context splits.",
+    "1.2.2": "Update to reflect context only having a train split.",
+    "1.2.3": "Add warning to CivilCommentsCovert as we fix a data issue.",
+    "1.2.4": "Add publication IDs and comment timestamps."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "629520049",
+      "shardLengths": [
+        "50641",
+        "50641",
+        "50642",
+        "50641",
+        "50641",
+        "50642",
+        "50641",
+        "50641"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "28467528",
+      "shardLengths": [
+        "21293"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "28798940",
+      "shardLengths": [
+        "21577"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "text"
+        },
+        {
+          "featureKey": "toxicity"
+        }
+      ]
+    }
+  },
+  "version": "1.2.4"
+}

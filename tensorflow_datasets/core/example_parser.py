@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,30 @@
 
 """To deserialize bytes (Example) to tf.Example."""
 
-import tensorflow as tf
+from __future__ import annotations
+
+import abc
+import dataclasses
+from typing import Mapping, Union
+
+import numpy as np
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.proto import tf_example_pb2
+from tensorflow_datasets.proto import tf_feature_pb2
 
 
-class ExampleParser(object):
+class Parser(abc.ABC):
+
+  @abc.abstractmethod
+  def parse_example(self, serialized_example: bytes):
+    raise NotImplementedError
+
+
+class ExampleParser(Parser):
   """To parse Examples."""
 
   def __init__(self, example_specs):
@@ -27,7 +46,8 @@ class ExampleParser(object):
     self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
     self._nested_feature_specs = _build_feature_specs(self._flat_example_specs)
     self.flat_feature_specs = utils.flatten_nest_dict(
-        self._nested_feature_specs)
+        self._nested_feature_specs
+    )
 
   def parse_example(self, serialized_example):
     """Deserialize a single `tf.train.Example` proto.
@@ -64,13 +84,98 @@ class ExampleParser(object):
 
     example = {  # pylint:disable=g-complex-comprehension
         k: _deserialize_single_field(example_data, tensor_info)
-        for k, (
-            example_data,
-            tensor_info) in utils.zip_dict(example, self._flat_example_specs)
+        for k, (example_data, tensor_info) in utils.zip_dict(
+            example, self._flat_example_specs
+        )
     }
     # Reconstruct all nesting
     example = utils.pack_as_nest_dict(example, self._example_specs)
     return example
+
+
+@dataclasses.dataclass
+class ExampleParserNp(Parser):
+  """Parse Examples with NumPy (without any usage of TensorFlow)."""
+
+  example_specs: Union[
+      feature_lib.TensorInfo, Mapping[str, feature_lib.TensorInfo]
+  ]
+
+  def __post_init__(self):
+    self._flat_example_specs = utils.flatten_nest_dict(self.example_specs)
+
+  def parse_example(
+      self, serialized_example: bytes
+  ) -> type_utils.NpArrayOrScalarDict:
+    example = tf_example_pb2.Example.FromString(serialized_example)
+    np_example = _features_to_numpy(example.features, self._flat_example_specs)
+    return utils.pack_as_nest_dict(np_example, self.example_specs)
+
+
+def _features_to_numpy(
+    features: tf_feature_pb2.Features,
+    flat_example_specs: Mapping[str, feature_lib.TensorInfo],
+) -> type_utils.NpArrayOrScalarDict:
+  """Parses features to NumPy type.
+
+  Args:
+    features: TensorFlow Features.
+    flat_example_specs: All tensor infos in a flat dictionary.
+
+  Returns:
+    The parsed NumPy object of type: np.ndarray or np.dtype.
+
+  Raises:
+    KeyError: if `flat_example_specs` is malformed.
+  """
+  parsed_example = {}
+  feature_map = features.feature
+  for key in feature_map:
+    if key not in flat_example_specs:
+      raise KeyError(
+          f"Malformed input: {key} is found in the feature, but not in"
+          f" {flat_example_specs}"
+      )
+    with utils.try_reraise(f"Error wile parsing feature {key}: "):
+      parsed_example[key] = _feature_to_numpy(
+          feature_map[key], flat_example_specs[key], key
+      )
+  return parsed_example
+
+
+def _feature_to_numpy(
+    feature: tf_feature_pb2.Feature,
+    tensor_info: feature_lib.TensorInfo,
+    feature_name: str,
+) -> type_utils.NpArrayOrScalar:
+  """Parses a single feature to NumPy type.
+
+  Args:
+    feature: TensorFlow Feature.
+    tensor_info: Tensor info for the current feature.
+    feature_name: name of the feature to convert to NumPy.
+
+  Returns:
+    The parsed NumPy object of type: np.ndarray or np.dtype.
+
+  Raises:
+    AttributeError: if the parsed feature is malformed.
+    ValueError: if a scalar feature is represented by an array.
+  """
+  dtype = tensor_info.np_dtype
+  shape = tensor_info.shape
+  if feature.HasField("int64_list"):
+    value_array = feature.int64_list.value
+  elif feature.HasField("float_list"):
+    value_array = feature.float_list.value
+  elif feature.HasField("bytes_list"):
+    value_array = feature.bytes_list.value
+  else:
+    raise AttributeError(f"cannot convert '{feature_name}' from proto to NumPy")
+  value_array = np.array(value_array, dtype=dtype)
+  if not shape:
+    return value_array.item()
+  return value_array
 
 
 def _build_feature_specs(flat_example_specs):
@@ -91,7 +196,9 @@ def _build_feature_specs(flat_example_specs):
   return {k: build_single_spec(k, v) for k, v in flat_example_specs.items()}
 
 
-def _deserialize_single_field(example_data, tensor_info):
+def _deserialize_single_field(
+    example_data, tensor_info: feature_lib.TensorInfo
+):
   """Reconstruct the serialized field."""
   # Ragged tensor case:
   if tensor_info.sequence_rank > 1:
@@ -103,8 +210,8 @@ def _deserialize_single_field(example_data, tensor_info):
     example_data = tf.reshape(example_data, shape)
 
   # Restore dtype
-  if not utils.is_same_tf_dtype(example_data.dtype, tensor_info.dtype):
-    example_data = tf.dtypes.cast(example_data, tensor_info.dtype)
+  if example_data.dtype != tensor_info.tf_dtype:
+    example_data = tf.dtypes.cast(example_data, tensor_info.tf_dtype)
   return example_data
 
 
@@ -119,7 +226,7 @@ def _dict_to_ragged(example_data, tensor_info):
   )
 
 
-def _to_tf_example_spec(tensor_info):
+def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
   """Convert a `TensorInfo` into a feature proto object."""
   # Convert the dtype
 
@@ -127,16 +234,19 @@ def _to_tf_example_spec(tensor_info):
   # This create limitation like float64 downsampled to float32, bool converted
   # to int64 which is space ineficient, no support for complexes or quantized
   # It seems quite space inefficient to convert bool to int64
-  if tensor_info.dtype.is_integer or tensor_info.dtype.is_bool:
+  if dtype_utils.is_integer(tensor_info.tf_dtype) or dtype_utils.is_bool(
+      tensor_info.tf_dtype
+  ):
     dtype = tf.int64
-  elif tensor_info.dtype.is_floating:
+  elif dtype_utils.is_floating(tensor_info.tf_dtype):
     dtype = tf.float32
-  elif tensor_info.dtype == tf.string:
+  elif dtype_utils.is_string(tensor_info.tf_dtype):
     dtype = tf.string
   else:
     # TFRecord only support 3 types
     raise NotImplementedError(
-        "Serialization not implemented for dtype {}".format(tensor_info))
+        "Serialization not implemented for dtype {}".format(tensor_info)
+    )
 
   # Convert the shape
 
@@ -165,10 +275,11 @@ def _to_tf_example_spec(tensor_info):
             shape=(),
             dtype=tf.int64,
             allow_missing=True,
-        ) for k in range(tensor_info.sequence_rank - 1)
+        )
+        for k in range(tensor_info.sequence_rank - 1)
     }
     tf_specs["ragged_flat_values"] = tf.io.FixedLenSequenceFeature(
-        shape=tensor_info.shape[tensor_info.sequence_rank:],
+        shape=tensor_info.shape[tensor_info.sequence_rank :],
         dtype=dtype,
         allow_missing=True,
         default_value=tensor_info.default_value,
@@ -178,4 +289,5 @@ def _to_tf_example_spec(tensor_info):
     raise NotImplementedError(
         "Multiple unknown dimension not supported.\n"
         "If using `tfds.features.Tensor`, please set "
-        "`Tensor(..., encoding='zlib')` (or 'bytes', or 'gzip')")
+        "`Tensor(..., encoding='zlib')` (or 'bytes', or 'gzip')"
+    )

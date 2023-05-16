@@ -1,67 +1,81 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "num_nodes": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    null
-                ],
-                "dtype": "int64",
-                "encoding": "none"
-            }
-        },
-        "node_feat": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    null,
-                    9
-                ],
-                "dtype": "float32",
-                "encoding": "none"
-            }
-        },
-        "num_edges": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    null
-                ],
-                "dtype": "int64",
-                "encoding": "none"
-            }
-        },
-        "edge_feat": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    null,
-                    3
-                ],
-                "dtype": "float32",
-                "encoding": "none"
-            }
-        },
-        "edge_index": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    null,
-                    2
-                ],
-                "dtype": "int64",
-                "encoding": "none"
-            }
-        },
-        "labels": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    128
-                ],
-                "dtype": "float32",
-                "encoding": "none"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "num_nodes": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "labels": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "128"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "num_edges": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "edge_index": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "2"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "node_feat": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "9"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "edge_feat": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "3"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
             }
         }
     }

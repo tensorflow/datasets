@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,14 +18,14 @@
 import math
 import os
 import struct
-from typing import Iterator
+from typing import Iterator, Optional
 import uuid
 
 import six
-import tensorflow as tf
-
 from tensorflow_datasets.core import hashing
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Approximately how much data to store in memory before writing to disk.
 # If the amount of data to shuffle is < MAX_MEM_BUFFER_SIZE, no intermediary
@@ -67,11 +67,17 @@ def _read_hkey(buff):
   return (a << 64) | b
 
 
-def get_bucket_number(hkey, shards_number):
+def get_bucket_number(
+    hkey,
+    num_buckets: int,
+    max_hkey: Optional[int] = None,
+) -> int:
   """Returns bucket (shard) number (int) for given hashed key (int)."""
   # We purposely do not use modulo (%) to keep global order across shards.
-  # floor(key * shards_number / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
-  return math.trunc((hkey * shards_number) >> HKEY_SIZE)
+  # floor(key * num_buckets / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
+  max_hkey = max_hkey or 2**HKEY_SIZE
+  # Make sure that we do not return `bucket_number`.
+  return min(math.trunc((hkey * num_buckets) / max_hkey), num_buckets - 1)
 
 
 class _Bucket(object):
@@ -119,7 +125,7 @@ class _Bucket(object):
       data (binary): the data.
     """
     if not self._fobj:
-      tf.io.gfile.makedirs(os.path.dirname(self._path))
+      file_utils.makedirs_cached(os.path.dirname(self._path))
       self._fobj = tf.io.gfile.GFile(self._path, mode='wb')
     data_size = len(data)
     self._fobj.write(_hkey_to_bytes(key))
@@ -202,7 +208,7 @@ class Shuffler(object):
     return [len(b) for b in self._buckets]
 
   def _add_to_bucket(self, hkey, data):
-    bucket_number = get_bucket_number(hkey, BUCKETS_NUMBER)
+    bucket_number = get_bucket_number(hkey=hkey, num_buckets=BUCKETS_NUMBER)
     self._buckets[bucket_number].add(hkey, data)
 
   def _add_to_mem_buffer(self, hkey, data):
@@ -218,8 +224,9 @@ class Shuffler(object):
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
     if not isinstance(data, six.binary_type):
-      raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' %
-                           (type(data)))
+      raise AssertionError(
+          'Only bytes (not %s) can be stored in Shuffler!' % (type(data))
+      )
     if self._disable_shuffling:
       hkey = key
     else:

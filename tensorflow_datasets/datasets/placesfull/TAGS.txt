@@ -1,0 +1,2 @@
+content.data-type.image
+content.data-type.text

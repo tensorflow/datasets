@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,19 +15,21 @@
 
 """Video feature."""
 
+from __future__ import annotations
+
 import os
 import tempfile
-from typing import Sequence, Optional, Union
+from typing import Optional, Sequence, Union
 
 from etils import epath
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Json = type_utils.Json
 
@@ -87,7 +89,6 @@ class Video(sequence_feature.Sequence):
         'video': tf.io.gfile.GFile('/complex/path/video.avi'),
     }
     ```
-
   """
 
   def __init__(
@@ -96,7 +97,7 @@ class Video(sequence_feature.Sequence):
       encoding_format: str = 'png',
       ffmpeg_extra_args: Sequence[str] = (),
       use_colormap: bool = False,
-      dtype=tf.uint8,
+      dtype: Union[np.uint8, tf.uint8, np.uint16, tf.uint16] = np.uint8,
       doc: feature_lib.DocArg = None,
   ):
     """Initializes the connector.
@@ -108,7 +109,7 @@ class Video(sequence_feature.Sequence):
         can use any encoding format supported by image_feature.Feature.
       ffmpeg_extra_args: A sequence of additional args to be passed to the
         ffmpeg binary. Specifically, ffmpeg will be called as: `` ffmpeg -i
-          <input_file> <ffmpeg_extra_args> %010d.<encoding_format> ``
+        <input_file> <ffmpeg_extra_args> %010d.<encoding_format> ``
       use_colormap: Forwarded to `tfds.features.Image`. If `True`,
         `tfds.as_dataframe` will display each value in the image with a
         different color.
@@ -119,6 +120,7 @@ class Video(sequence_feature.Sequence):
     Raises:
       ValueError: If the shape is invalid
     """
+    dtype = tf.dtypes.as_dtype(dtype)
     shape = tuple(shape)
     if len(shape) != 4:
       raise ValueError('Video shape should be of rank 4')
@@ -160,7 +162,8 @@ class Video(sequence_feature.Sequence):
         _, video_temp_path = tempfile.mkstemp()
         try:
           tf.io.gfile.copy(
-              video_or_path_or_fobj, video_temp_path, overwrite=True)
+              video_or_path_or_fobj, video_temp_path, overwrite=True
+          )
           encoded_video = self._ffmpeg_decode(video_temp_path)
         finally:
           os.unlink(video_temp_path)
@@ -180,7 +183,8 @@ class Video(sequence_feature.Sequence):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.VideoFeature]) -> 'Video':
+      cls, value: Union[Json, feature_pb2.VideoFeature]
+  ) -> 'Video':
     if isinstance(value, dict):
       # For backwards compatibility
       shape = tuple(value['shape'])
@@ -193,16 +197,16 @@ class Video(sequence_feature.Sequence):
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
-        dtype=feature_lib.parse_dtype(value.dtype),
+        dtype=feature_lib.dtype_from_str(value.dtype),
         encoding_format=value.encoding_format or None,
         use_colormap=value.use_colormap,
         ffmpeg_extra_args=value.ffmpeg_extra_args,
     )
 
-  def to_json_content(self) -> feature_pb2.VideoFeature:
+  def to_json_content(self) -> feature_pb2.VideoFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.VideoFeature(
         shape=feature_lib.to_shape_proto(self.shape),
-        dtype=feature_lib.encode_dtype(self.dtype),
+        dtype=feature_lib.dtype_to_str(self.dtype),
         encoding_format=self._encoding_format,
         use_colormap=self._use_colormap,
         ffmpeg_extra_args=self._extra_ffmpeg_args,
@@ -211,6 +215,5 @@ class Video(sequence_feature.Sequence):
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as `<video>`."""
     return image_feature.make_video_repr_html(
-        ex,
-        use_colormap=self.feature._use_colormap  # pylint: disable=protected-access  # pytype: disable=attribute-error
+        ex, use_colormap=self.feature._use_colormap  # pylint: disable=protected-access  # pytype: disable=attribute-error
     )

@@ -90,57 +90,57 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(56,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(56,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
             'walker': FeaturesDict({
-                'body_height': Tensor(shape=(1,), dtype=tf.float32),
-                'egocentric_camera': Image(shape=(64, 64, 3), dtype=tf.uint8),
-                'end_effectors_pos': Tensor(shape=(12,), dtype=tf.float32),
-                'joints_pos': Tensor(shape=(56,), dtype=tf.float32),
-                'joints_vel': Tensor(shape=(56,), dtype=tf.float32),
-                'sensors_accelerometer': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_gyro': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_velocimeter': Tensor(shape=(3,), dtype=tf.float32),
-                'world_zaxis': Tensor(shape=(3,), dtype=tf.float32),
+                'body_height': Tensor(shape=(1,), dtype=float32),
+                'egocentric_camera': Image(shape=(64, 64, 3), dtype=uint8),
+                'end_effectors_pos': Tensor(shape=(12,), dtype=float32),
+                'joints_pos': Tensor(shape=(56,), dtype=float32),
+                'joints_vel': Tensor(shape=(56,), dtype=float32),
+                'sensors_accelerometer': Tensor(shape=(3,), dtype=float32),
+                'sensors_gyro': Tensor(shape=(3,), dtype=float32),
+                'sensors_velocimeter': Tensor(shape=(3,), dtype=float32),
+                'world_zaxis': Tensor(shape=(3,), dtype=float32),
             }),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape       | Dtype      | Description
-:--------------------------------------------- | :----------- | :---------- | :--------- | :----------
-                                               | FeaturesDict |             |            |
-episode_id                                     | Tensor       |             | tf.int64   |
-steps                                          | Dataset      |             |            |
-steps/action                                   | Tensor       | (56,)       | tf.float32 |
-steps/discount                                 | Tensor       |             | tf.float32 |
-steps/is_first                                 | Tensor       |             | tf.bool    |
-steps/is_last                                  | Tensor       |             | tf.bool    |
-steps/is_terminal                              | Tensor       |             | tf.bool    |
-steps/observation                              | FeaturesDict |             |            |
-steps/observation/walker                       | FeaturesDict |             |            |
-steps/observation/walker/body_height           | Tensor       | (1,)        | tf.float32 |
-steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | tf.uint8   |
-steps/observation/walker/end_effectors_pos     | Tensor       | (12,)       | tf.float32 |
-steps/observation/walker/joints_pos            | Tensor       | (56,)       | tf.float32 |
-steps/observation/walker/joints_vel            | Tensor       | (56,)       | tf.float32 |
-steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/world_zaxis           | Tensor       | (3,)        | tf.float32 |
-steps/reward                                   | Tensor       |             | tf.float32 |
-timestamp                                      | Tensor       |             | tf.int64   |
+Feature                                        | Class        | Shape       | Dtype   | Description
+:--------------------------------------------- | :----------- | :---------- | :------ | :----------
+                                               | FeaturesDict |             |         |
+episode_id                                     | Tensor       |             | int64   |
+steps                                          | Dataset      |             |         |
+steps/action                                   | Tensor       | (56,)       | float32 |
+steps/discount                                 | Tensor       |             | float32 |
+steps/is_first                                 | Tensor       |             | bool    |
+steps/is_last                                  | Tensor       |             | bool    |
+steps/is_terminal                              | Tensor       |             | bool    |
+steps/observation                              | FeaturesDict |             |         |
+steps/observation/walker                       | FeaturesDict |             |         |
+steps/observation/walker/body_height           | Tensor       | (1,)        | float32 |
+steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | uint8   |
+steps/observation/walker/end_effectors_pos     | Tensor       | (12,)       | float32 |
+steps/observation/walker/joints_pos            | Tensor       | (56,)       | float32 |
+steps/observation/walker/joints_vel            | Tensor       | (56,)       | float32 |
+steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | float32 |
+steps/observation/walker/world_zaxis           | Tensor       | (3,)        | float32 |
+steps/reward                                   | Tensor       |             | float32 |
+timestamp                                      | Tensor       |             | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -193,57 +193,57 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(56,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(56,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
             'walker': FeaturesDict({
-                'body_height': Tensor(shape=(1,), dtype=tf.float32),
-                'egocentric_camera': Image(shape=(64, 64, 3), dtype=tf.uint8),
-                'end_effectors_pos': Tensor(shape=(12,), dtype=tf.float32),
-                'joints_pos': Tensor(shape=(56,), dtype=tf.float32),
-                'joints_vel': Tensor(shape=(56,), dtype=tf.float32),
-                'sensors_accelerometer': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_gyro': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_velocimeter': Tensor(shape=(3,), dtype=tf.float32),
-                'world_zaxis': Tensor(shape=(3,), dtype=tf.float32),
+                'body_height': Tensor(shape=(1,), dtype=float32),
+                'egocentric_camera': Image(shape=(64, 64, 3), dtype=uint8),
+                'end_effectors_pos': Tensor(shape=(12,), dtype=float32),
+                'joints_pos': Tensor(shape=(56,), dtype=float32),
+                'joints_vel': Tensor(shape=(56,), dtype=float32),
+                'sensors_accelerometer': Tensor(shape=(3,), dtype=float32),
+                'sensors_gyro': Tensor(shape=(3,), dtype=float32),
+                'sensors_velocimeter': Tensor(shape=(3,), dtype=float32),
+                'world_zaxis': Tensor(shape=(3,), dtype=float32),
             }),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape       | Dtype      | Description
-:--------------------------------------------- | :----------- | :---------- | :--------- | :----------
-                                               | FeaturesDict |             |            |
-episode_id                                     | Tensor       |             | tf.int64   |
-steps                                          | Dataset      |             |            |
-steps/action                                   | Tensor       | (56,)       | tf.float32 |
-steps/discount                                 | Tensor       |             | tf.float32 |
-steps/is_first                                 | Tensor       |             | tf.bool    |
-steps/is_last                                  | Tensor       |             | tf.bool    |
-steps/is_terminal                              | Tensor       |             | tf.bool    |
-steps/observation                              | FeaturesDict |             |            |
-steps/observation/walker                       | FeaturesDict |             |            |
-steps/observation/walker/body_height           | Tensor       | (1,)        | tf.float32 |
-steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | tf.uint8   |
-steps/observation/walker/end_effectors_pos     | Tensor       | (12,)       | tf.float32 |
-steps/observation/walker/joints_pos            | Tensor       | (56,)       | tf.float32 |
-steps/observation/walker/joints_vel            | Tensor       | (56,)       | tf.float32 |
-steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/world_zaxis           | Tensor       | (3,)        | tf.float32 |
-steps/reward                                   | Tensor       |             | tf.float32 |
-timestamp                                      | Tensor       |             | tf.int64   |
+Feature                                        | Class        | Shape       | Dtype   | Description
+:--------------------------------------------- | :----------- | :---------- | :------ | :----------
+                                               | FeaturesDict |             |         |
+episode_id                                     | Tensor       |             | int64   |
+steps                                          | Dataset      |             |         |
+steps/action                                   | Tensor       | (56,)       | float32 |
+steps/discount                                 | Tensor       |             | float32 |
+steps/is_first                                 | Tensor       |             | bool    |
+steps/is_last                                  | Tensor       |             | bool    |
+steps/is_terminal                              | Tensor       |             | bool    |
+steps/observation                              | FeaturesDict |             |         |
+steps/observation/walker                       | FeaturesDict |             |         |
+steps/observation/walker/body_height           | Tensor       | (1,)        | float32 |
+steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | uint8   |
+steps/observation/walker/end_effectors_pos     | Tensor       | (12,)       | float32 |
+steps/observation/walker/joints_pos            | Tensor       | (56,)       | float32 |
+steps/observation/walker/joints_vel            | Tensor       | (56,)       | float32 |
+steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | float32 |
+steps/observation/walker/world_zaxis           | Tensor       | (3,)        | float32 |
+steps/reward                                   | Tensor       |             | float32 |
+timestamp                                      | Tensor       |             | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -296,57 +296,57 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(56,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(56,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
             'walker': FeaturesDict({
-                'body_height': Tensor(shape=(1,), dtype=tf.float32),
-                'egocentric_camera': Image(shape=(64, 64, 3), dtype=tf.uint8),
-                'end_effectors_pos': Tensor(shape=(12,), dtype=tf.float32),
-                'joints_pos': Tensor(shape=(56,), dtype=tf.float32),
-                'joints_vel': Tensor(shape=(56,), dtype=tf.float32),
-                'sensors_accelerometer': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_gyro': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_velocimeter': Tensor(shape=(3,), dtype=tf.float32),
-                'world_zaxis': Tensor(shape=(3,), dtype=tf.float32),
+                'body_height': Tensor(shape=(1,), dtype=float32),
+                'egocentric_camera': Image(shape=(64, 64, 3), dtype=uint8),
+                'end_effectors_pos': Tensor(shape=(12,), dtype=float32),
+                'joints_pos': Tensor(shape=(56,), dtype=float32),
+                'joints_vel': Tensor(shape=(56,), dtype=float32),
+                'sensors_accelerometer': Tensor(shape=(3,), dtype=float32),
+                'sensors_gyro': Tensor(shape=(3,), dtype=float32),
+                'sensors_velocimeter': Tensor(shape=(3,), dtype=float32),
+                'world_zaxis': Tensor(shape=(3,), dtype=float32),
             }),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape       | Dtype      | Description
-:--------------------------------------------- | :----------- | :---------- | :--------- | :----------
-                                               | FeaturesDict |             |            |
-episode_id                                     | Tensor       |             | tf.int64   |
-steps                                          | Dataset      |             |            |
-steps/action                                   | Tensor       | (56,)       | tf.float32 |
-steps/discount                                 | Tensor       |             | tf.float32 |
-steps/is_first                                 | Tensor       |             | tf.bool    |
-steps/is_last                                  | Tensor       |             | tf.bool    |
-steps/is_terminal                              | Tensor       |             | tf.bool    |
-steps/observation                              | FeaturesDict |             |            |
-steps/observation/walker                       | FeaturesDict |             |            |
-steps/observation/walker/body_height           | Tensor       | (1,)        | tf.float32 |
-steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | tf.uint8   |
-steps/observation/walker/end_effectors_pos     | Tensor       | (12,)       | tf.float32 |
-steps/observation/walker/joints_pos            | Tensor       | (56,)       | tf.float32 |
-steps/observation/walker/joints_vel            | Tensor       | (56,)       | tf.float32 |
-steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/world_zaxis           | Tensor       | (3,)        | tf.float32 |
-steps/reward                                   | Tensor       |             | tf.float32 |
-timestamp                                      | Tensor       |             | tf.int64   |
+Feature                                        | Class        | Shape       | Dtype   | Description
+:--------------------------------------------- | :----------- | :---------- | :------ | :----------
+                                               | FeaturesDict |             |         |
+episode_id                                     | Tensor       |             | int64   |
+steps                                          | Dataset      |             |         |
+steps/action                                   | Tensor       | (56,)       | float32 |
+steps/discount                                 | Tensor       |             | float32 |
+steps/is_first                                 | Tensor       |             | bool    |
+steps/is_last                                  | Tensor       |             | bool    |
+steps/is_terminal                              | Tensor       |             | bool    |
+steps/observation                              | FeaturesDict |             |         |
+steps/observation/walker                       | FeaturesDict |             |         |
+steps/observation/walker/body_height           | Tensor       | (1,)        | float32 |
+steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | uint8   |
+steps/observation/walker/end_effectors_pos     | Tensor       | (12,)       | float32 |
+steps/observation/walker/joints_pos            | Tensor       | (56,)       | float32 |
+steps/observation/walker/joints_vel            | Tensor       | (56,)       | float32 |
+steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | float32 |
+steps/observation/walker/world_zaxis           | Tensor       | (3,)        | float32 |
+steps/reward                                   | Tensor       |             | float32 |
+timestamp                                      | Tensor       |             | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -399,61 +399,61 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(38,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(38,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
             'walker': FeaturesDict({
-                'appendages_pos': Tensor(shape=(15,), dtype=tf.float32),
-                'egocentric_camera': Image(shape=(64, 64, 3), dtype=tf.uint8),
-                'joints_pos': Tensor(shape=(30,), dtype=tf.float32),
-                'joints_vel': Tensor(shape=(30,), dtype=tf.float32),
-                'sensors_accelerometer': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_gyro': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_touch': Tensor(shape=(4,), dtype=tf.float32),
-                'sensors_velocimeter': Tensor(shape=(3,), dtype=tf.float32),
-                'tendons_pos': Tensor(shape=(8,), dtype=tf.float32),
-                'tendons_vel': Tensor(shape=(8,), dtype=tf.float32),
-                'world_zaxis': Tensor(shape=(3,), dtype=tf.float32),
+                'appendages_pos': Tensor(shape=(15,), dtype=float32),
+                'egocentric_camera': Image(shape=(64, 64, 3), dtype=uint8),
+                'joints_pos': Tensor(shape=(30,), dtype=float32),
+                'joints_vel': Tensor(shape=(30,), dtype=float32),
+                'sensors_accelerometer': Tensor(shape=(3,), dtype=float32),
+                'sensors_gyro': Tensor(shape=(3,), dtype=float32),
+                'sensors_touch': Tensor(shape=(4,), dtype=float32),
+                'sensors_velocimeter': Tensor(shape=(3,), dtype=float32),
+                'tendons_pos': Tensor(shape=(8,), dtype=float32),
+                'tendons_vel': Tensor(shape=(8,), dtype=float32),
+                'world_zaxis': Tensor(shape=(3,), dtype=float32),
             }),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape       | Dtype      | Description
-:--------------------------------------------- | :----------- | :---------- | :--------- | :----------
-                                               | FeaturesDict |             |            |
-episode_id                                     | Tensor       |             | tf.int64   |
-steps                                          | Dataset      |             |            |
-steps/action                                   | Tensor       | (38,)       | tf.float32 |
-steps/discount                                 | Tensor       |             | tf.float32 |
-steps/is_first                                 | Tensor       |             | tf.bool    |
-steps/is_last                                  | Tensor       |             | tf.bool    |
-steps/is_terminal                              | Tensor       |             | tf.bool    |
-steps/observation                              | FeaturesDict |             |            |
-steps/observation/walker                       | FeaturesDict |             |            |
-steps/observation/walker/appendages_pos        | Tensor       | (15,)       | tf.float32 |
-steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | tf.uint8   |
-steps/observation/walker/joints_pos            | Tensor       | (30,)       | tf.float32 |
-steps/observation/walker/joints_vel            | Tensor       | (30,)       | tf.float32 |
-steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_touch         | Tensor       | (4,)        | tf.float32 |
-steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/tendons_pos           | Tensor       | (8,)        | tf.float32 |
-steps/observation/walker/tendons_vel           | Tensor       | (8,)        | tf.float32 |
-steps/observation/walker/world_zaxis           | Tensor       | (3,)        | tf.float32 |
-steps/reward                                   | Tensor       |             | tf.float32 |
-timestamp                                      | Tensor       |             | tf.int64   |
+Feature                                        | Class        | Shape       | Dtype   | Description
+:--------------------------------------------- | :----------- | :---------- | :------ | :----------
+                                               | FeaturesDict |             |         |
+episode_id                                     | Tensor       |             | int64   |
+steps                                          | Dataset      |             |         |
+steps/action                                   | Tensor       | (38,)       | float32 |
+steps/discount                                 | Tensor       |             | float32 |
+steps/is_first                                 | Tensor       |             | bool    |
+steps/is_last                                  | Tensor       |             | bool    |
+steps/is_terminal                              | Tensor       |             | bool    |
+steps/observation                              | FeaturesDict |             |         |
+steps/observation/walker                       | FeaturesDict |             |         |
+steps/observation/walker/appendages_pos        | Tensor       | (15,)       | float32 |
+steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | uint8   |
+steps/observation/walker/joints_pos            | Tensor       | (30,)       | float32 |
+steps/observation/walker/joints_vel            | Tensor       | (30,)       | float32 |
+steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_touch         | Tensor       | (4,)        | float32 |
+steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | float32 |
+steps/observation/walker/tendons_pos           | Tensor       | (8,)        | float32 |
+steps/observation/walker/tendons_vel           | Tensor       | (8,)        | float32 |
+steps/observation/walker/world_zaxis           | Tensor       | (3,)        | float32 |
+steps/reward                                   | Tensor       |             | float32 |
+timestamp                                      | Tensor       |             | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -506,61 +506,61 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(38,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(38,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
             'walker': FeaturesDict({
-                'appendages_pos': Tensor(shape=(15,), dtype=tf.float32),
-                'egocentric_camera': Image(shape=(64, 64, 3), dtype=tf.uint8),
-                'joints_pos': Tensor(shape=(30,), dtype=tf.float32),
-                'joints_vel': Tensor(shape=(30,), dtype=tf.float32),
-                'sensors_accelerometer': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_gyro': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_touch': Tensor(shape=(4,), dtype=tf.float32),
-                'sensors_velocimeter': Tensor(shape=(3,), dtype=tf.float32),
-                'tendons_pos': Tensor(shape=(8,), dtype=tf.float32),
-                'tendons_vel': Tensor(shape=(8,), dtype=tf.float32),
-                'world_zaxis': Tensor(shape=(3,), dtype=tf.float32),
+                'appendages_pos': Tensor(shape=(15,), dtype=float32),
+                'egocentric_camera': Image(shape=(64, 64, 3), dtype=uint8),
+                'joints_pos': Tensor(shape=(30,), dtype=float32),
+                'joints_vel': Tensor(shape=(30,), dtype=float32),
+                'sensors_accelerometer': Tensor(shape=(3,), dtype=float32),
+                'sensors_gyro': Tensor(shape=(3,), dtype=float32),
+                'sensors_touch': Tensor(shape=(4,), dtype=float32),
+                'sensors_velocimeter': Tensor(shape=(3,), dtype=float32),
+                'tendons_pos': Tensor(shape=(8,), dtype=float32),
+                'tendons_vel': Tensor(shape=(8,), dtype=float32),
+                'world_zaxis': Tensor(shape=(3,), dtype=float32),
             }),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape       | Dtype      | Description
-:--------------------------------------------- | :----------- | :---------- | :--------- | :----------
-                                               | FeaturesDict |             |            |
-episode_id                                     | Tensor       |             | tf.int64   |
-steps                                          | Dataset      |             |            |
-steps/action                                   | Tensor       | (38,)       | tf.float32 |
-steps/discount                                 | Tensor       |             | tf.float32 |
-steps/is_first                                 | Tensor       |             | tf.bool    |
-steps/is_last                                  | Tensor       |             | tf.bool    |
-steps/is_terminal                              | Tensor       |             | tf.bool    |
-steps/observation                              | FeaturesDict |             |            |
-steps/observation/walker                       | FeaturesDict |             |            |
-steps/observation/walker/appendages_pos        | Tensor       | (15,)       | tf.float32 |
-steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | tf.uint8   |
-steps/observation/walker/joints_pos            | Tensor       | (30,)       | tf.float32 |
-steps/observation/walker/joints_vel            | Tensor       | (30,)       | tf.float32 |
-steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_touch         | Tensor       | (4,)        | tf.float32 |
-steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/tendons_pos           | Tensor       | (8,)        | tf.float32 |
-steps/observation/walker/tendons_vel           | Tensor       | (8,)        | tf.float32 |
-steps/observation/walker/world_zaxis           | Tensor       | (3,)        | tf.float32 |
-steps/reward                                   | Tensor       |             | tf.float32 |
-timestamp                                      | Tensor       |             | tf.int64   |
+Feature                                        | Class        | Shape       | Dtype   | Description
+:--------------------------------------------- | :----------- | :---------- | :------ | :----------
+                                               | FeaturesDict |             |         |
+episode_id                                     | Tensor       |             | int64   |
+steps                                          | Dataset      |             |         |
+steps/action                                   | Tensor       | (38,)       | float32 |
+steps/discount                                 | Tensor       |             | float32 |
+steps/is_first                                 | Tensor       |             | bool    |
+steps/is_last                                  | Tensor       |             | bool    |
+steps/is_terminal                              | Tensor       |             | bool    |
+steps/observation                              | FeaturesDict |             |         |
+steps/observation/walker                       | FeaturesDict |             |         |
+steps/observation/walker/appendages_pos        | Tensor       | (15,)       | float32 |
+steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | uint8   |
+steps/observation/walker/joints_pos            | Tensor       | (30,)       | float32 |
+steps/observation/walker/joints_vel            | Tensor       | (30,)       | float32 |
+steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_touch         | Tensor       | (4,)        | float32 |
+steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | float32 |
+steps/observation/walker/tendons_pos           | Tensor       | (8,)        | float32 |
+steps/observation/walker/tendons_vel           | Tensor       | (8,)        | float32 |
+steps/observation/walker/world_zaxis           | Tensor       | (3,)        | float32 |
+steps/reward                                   | Tensor       |             | float32 |
+timestamp                                      | Tensor       |             | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -613,61 +613,61 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(38,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(38,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
             'walker': FeaturesDict({
-                'appendages_pos': Tensor(shape=(15,), dtype=tf.float32),
-                'egocentric_camera': Image(shape=(64, 64, 3), dtype=tf.uint8),
-                'joints_pos': Tensor(shape=(30,), dtype=tf.float32),
-                'joints_vel': Tensor(shape=(30,), dtype=tf.float32),
-                'sensors_accelerometer': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_gyro': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_touch': Tensor(shape=(4,), dtype=tf.float32),
-                'sensors_velocimeter': Tensor(shape=(3,), dtype=tf.float32),
-                'tendons_pos': Tensor(shape=(8,), dtype=tf.float32),
-                'tendons_vel': Tensor(shape=(8,), dtype=tf.float32),
-                'world_zaxis': Tensor(shape=(3,), dtype=tf.float32),
+                'appendages_pos': Tensor(shape=(15,), dtype=float32),
+                'egocentric_camera': Image(shape=(64, 64, 3), dtype=uint8),
+                'joints_pos': Tensor(shape=(30,), dtype=float32),
+                'joints_vel': Tensor(shape=(30,), dtype=float32),
+                'sensors_accelerometer': Tensor(shape=(3,), dtype=float32),
+                'sensors_gyro': Tensor(shape=(3,), dtype=float32),
+                'sensors_touch': Tensor(shape=(4,), dtype=float32),
+                'sensors_velocimeter': Tensor(shape=(3,), dtype=float32),
+                'tendons_pos': Tensor(shape=(8,), dtype=float32),
+                'tendons_vel': Tensor(shape=(8,), dtype=float32),
+                'world_zaxis': Tensor(shape=(3,), dtype=float32),
             }),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape       | Dtype      | Description
-:--------------------------------------------- | :----------- | :---------- | :--------- | :----------
-                                               | FeaturesDict |             |            |
-episode_id                                     | Tensor       |             | tf.int64   |
-steps                                          | Dataset      |             |            |
-steps/action                                   | Tensor       | (38,)       | tf.float32 |
-steps/discount                                 | Tensor       |             | tf.float32 |
-steps/is_first                                 | Tensor       |             | tf.bool    |
-steps/is_last                                  | Tensor       |             | tf.bool    |
-steps/is_terminal                              | Tensor       |             | tf.bool    |
-steps/observation                              | FeaturesDict |             |            |
-steps/observation/walker                       | FeaturesDict |             |            |
-steps/observation/walker/appendages_pos        | Tensor       | (15,)       | tf.float32 |
-steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | tf.uint8   |
-steps/observation/walker/joints_pos            | Tensor       | (30,)       | tf.float32 |
-steps/observation/walker/joints_vel            | Tensor       | (30,)       | tf.float32 |
-steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_touch         | Tensor       | (4,)        | tf.float32 |
-steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/tendons_pos           | Tensor       | (8,)        | tf.float32 |
-steps/observation/walker/tendons_vel           | Tensor       | (8,)        | tf.float32 |
-steps/observation/walker/world_zaxis           | Tensor       | (3,)        | tf.float32 |
-steps/reward                                   | Tensor       |             | tf.float32 |
-timestamp                                      | Tensor       |             | tf.int64   |
+Feature                                        | Class        | Shape       | Dtype   | Description
+:--------------------------------------------- | :----------- | :---------- | :------ | :----------
+                                               | FeaturesDict |             |         |
+episode_id                                     | Tensor       |             | int64   |
+steps                                          | Dataset      |             |         |
+steps/action                                   | Tensor       | (38,)       | float32 |
+steps/discount                                 | Tensor       |             | float32 |
+steps/is_first                                 | Tensor       |             | bool    |
+steps/is_last                                  | Tensor       |             | bool    |
+steps/is_terminal                              | Tensor       |             | bool    |
+steps/observation                              | FeaturesDict |             |         |
+steps/observation/walker                       | FeaturesDict |             |         |
+steps/observation/walker/appendages_pos        | Tensor       | (15,)       | float32 |
+steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | uint8   |
+steps/observation/walker/joints_pos            | Tensor       | (30,)       | float32 |
+steps/observation/walker/joints_vel            | Tensor       | (30,)       | float32 |
+steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_touch         | Tensor       | (4,)        | float32 |
+steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | float32 |
+steps/observation/walker/tendons_pos           | Tensor       | (8,)        | float32 |
+steps/observation/walker/tendons_vel           | Tensor       | (8,)        | float32 |
+steps/observation/walker/world_zaxis           | Tensor       | (3,)        | float32 |
+steps/reward                                   | Tensor       |             | float32 |
+timestamp                                      | Tensor       |             | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -720,61 +720,61 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(38,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(38,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
             'walker': FeaturesDict({
-                'appendages_pos': Tensor(shape=(15,), dtype=tf.float32),
-                'egocentric_camera': Image(shape=(64, 64, 3), dtype=tf.uint8),
-                'joints_pos': Tensor(shape=(30,), dtype=tf.float32),
-                'joints_vel': Tensor(shape=(30,), dtype=tf.float32),
-                'sensors_accelerometer': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_gyro': Tensor(shape=(3,), dtype=tf.float32),
-                'sensors_touch': Tensor(shape=(4,), dtype=tf.float32),
-                'sensors_velocimeter': Tensor(shape=(3,), dtype=tf.float32),
-                'tendons_pos': Tensor(shape=(8,), dtype=tf.float32),
-                'tendons_vel': Tensor(shape=(8,), dtype=tf.float32),
-                'world_zaxis': Tensor(shape=(3,), dtype=tf.float32),
+                'appendages_pos': Tensor(shape=(15,), dtype=float32),
+                'egocentric_camera': Image(shape=(64, 64, 3), dtype=uint8),
+                'joints_pos': Tensor(shape=(30,), dtype=float32),
+                'joints_vel': Tensor(shape=(30,), dtype=float32),
+                'sensors_accelerometer': Tensor(shape=(3,), dtype=float32),
+                'sensors_gyro': Tensor(shape=(3,), dtype=float32),
+                'sensors_touch': Tensor(shape=(4,), dtype=float32),
+                'sensors_velocimeter': Tensor(shape=(3,), dtype=float32),
+                'tendons_pos': Tensor(shape=(8,), dtype=float32),
+                'tendons_vel': Tensor(shape=(8,), dtype=float32),
+                'world_zaxis': Tensor(shape=(3,), dtype=float32),
             }),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape       | Dtype      | Description
-:--------------------------------------------- | :----------- | :---------- | :--------- | :----------
-                                               | FeaturesDict |             |            |
-episode_id                                     | Tensor       |             | tf.int64   |
-steps                                          | Dataset      |             |            |
-steps/action                                   | Tensor       | (38,)       | tf.float32 |
-steps/discount                                 | Tensor       |             | tf.float32 |
-steps/is_first                                 | Tensor       |             | tf.bool    |
-steps/is_last                                  | Tensor       |             | tf.bool    |
-steps/is_terminal                              | Tensor       |             | tf.bool    |
-steps/observation                              | FeaturesDict |             |            |
-steps/observation/walker                       | FeaturesDict |             |            |
-steps/observation/walker/appendages_pos        | Tensor       | (15,)       | tf.float32 |
-steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | tf.uint8   |
-steps/observation/walker/joints_pos            | Tensor       | (30,)       | tf.float32 |
-steps/observation/walker/joints_vel            | Tensor       | (30,)       | tf.float32 |
-steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/sensors_touch         | Tensor       | (4,)        | tf.float32 |
-steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | tf.float32 |
-steps/observation/walker/tendons_pos           | Tensor       | (8,)        | tf.float32 |
-steps/observation/walker/tendons_vel           | Tensor       | (8,)        | tf.float32 |
-steps/observation/walker/world_zaxis           | Tensor       | (3,)        | tf.float32 |
-steps/reward                                   | Tensor       |             | tf.float32 |
-timestamp                                      | Tensor       |             | tf.int64   |
+Feature                                        | Class        | Shape       | Dtype   | Description
+:--------------------------------------------- | :----------- | :---------- | :------ | :----------
+                                               | FeaturesDict |             |         |
+episode_id                                     | Tensor       |             | int64   |
+steps                                          | Dataset      |             |         |
+steps/action                                   | Tensor       | (38,)       | float32 |
+steps/discount                                 | Tensor       |             | float32 |
+steps/is_first                                 | Tensor       |             | bool    |
+steps/is_last                                  | Tensor       |             | bool    |
+steps/is_terminal                              | Tensor       |             | bool    |
+steps/observation                              | FeaturesDict |             |         |
+steps/observation/walker                       | FeaturesDict |             |         |
+steps/observation/walker/appendages_pos        | Tensor       | (15,)       | float32 |
+steps/observation/walker/egocentric_camera     | Image        | (64, 64, 3) | uint8   |
+steps/observation/walker/joints_pos            | Tensor       | (30,)       | float32 |
+steps/observation/walker/joints_vel            | Tensor       | (30,)       | float32 |
+steps/observation/walker/sensors_accelerometer | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_gyro          | Tensor       | (3,)        | float32 |
+steps/observation/walker/sensors_touch         | Tensor       | (4,)        | float32 |
+steps/observation/walker/sensors_velocimeter   | Tensor       | (3,)        | float32 |
+steps/observation/walker/tendons_pos           | Tensor       | (8,)        | float32 |
+steps/observation/walker/tendons_vel           | Tensor       | (8,)        | float32 |
+steps/observation/walker/world_zaxis           | Tensor       | (3,)        | float32 |
+steps/reward                                   | Tensor       |             | float32 |
+timestamp                                      | Tensor       |             | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

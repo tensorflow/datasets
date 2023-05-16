@@ -7,7 +7,7 @@ motivated community.
 
 *   If you're new with TFDS, the easiest way to get started is to implement one
     of our
-    [requested dataset](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc),
+    [requested datasets](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc),
     focusing on the most requested ones.
     [Follow our guide](https://www.tensorflow.org/datasets/add_dataset) for
     instructions.

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import json
 import re
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -38,10 +38,8 @@ _CITATION = """
 }
 """
 _SPLIT_DOWNLOAD_URL = {
-    'train':
-        'https://worksheets.codalab.org/rest/bundles/0x4a763f8cde224c2da592b75f29e2f5c2/contents/blob/',
-    'test':
-        'https://worksheets.codalab.org/rest/bundles/0xe7bac352fce7448c9ef238fb0a297ec2/contents/blob/',
+    'train': 'https://worksheets.codalab.org/rest/bundles/0x4a763f8cde224c2da592b75f29e2f5c2/contents/blob/',
+    'test': 'https://worksheets.codalab.org/rest/bundles/0xe7bac352fce7448c9ef238fb0a297ec2/contents/blob/',
 }
 
 _DESCRIPTION = """\
@@ -77,7 +75,8 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=split, gen_kwargs={'file_path': file_path})
+            name=split, gen_kwargs={'file_path': file_path}
+        )
         for split, file_path in file_paths.items()
     ]
 
@@ -87,11 +86,13 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
     def _target_to_answers(target):
       target = re.sub(r'^\(list |\)$', '', target)
       return [
-          ''.join(ans) for ans in re.findall(
-              r'\(description (?:"([^"]+?)"|([^)]+?))\)\w*', target)
+          ''.join(ans)
+          for ans in re.findall(
+              r'\(description (?:"([^"]+?)"|([^)]+?))\)\w*', target
+          )
       ]
 
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       examples = json.load(f)
       for i, ex in enumerate(examples):
         yield i, {

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,22 +15,24 @@
 
 """As dataframe util."""
 
+from __future__ import annotations
+
+import dataclasses
 import typing
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
-import dataclasses
 import numpy as np
-
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 try:
   import pandas  # pylint: disable=g-import-not-at-top
+
   DataFrame = pandas.DataFrame
 except ImportError:
   DataFrame = object
@@ -50,6 +52,7 @@ class ColumnInfo:
     format_fn: Function applied to each column items, which returns the
       displayed string object (eventually HTML)
   """
+
   name: str
   format_fn: Optional[Callable[[np.ndarray], str]] = None
   # Should also add a `style.apply` function
@@ -83,9 +86,11 @@ class ColumnInfo:
       try:
         return repr_fn(val)
       except Exception as e:  # pylint: disable=broad-except
-        err_msg = (f'HTML formatting of column {name} failed:\n'
-                   f' * feature: {feature}\n'
-                   f' * input: {val!r}\n')
+        err_msg = (
+            f'HTML formatting of column {name} failed:\n'
+            f' * feature: {feature}\n'
+            f' * input: {val!r}\n'
+        )
         py_utils.reraise(e, prefix=err_msg)
 
     return ColumnInfo(
@@ -134,14 +139,13 @@ class StyledDataFrame(DataFrame):
   df.current_style.apply(...)  # Configure the style
   df  # The data-frame is displayed using ` pandas.io.formats.style.Styler`
   ```
-
   """
 
   # StyledDataFrame could be improved such as the style is forwarded when
   # selecting sub-data frames.
 
   def __init__(self, *args, **kwargs):
-    super().__init__(*args, **kwargs)
+    super().__init__(*args, **kwargs)  # pytype: disable=wrong-arg-count  # re-none
     # Use name-mangling for forward-compatibility in case pandas
     # adds a `_styler` attribute in the future.
     self.__styler: Optional[Styler] = None
@@ -150,13 +154,13 @@ class StyledDataFrame(DataFrame):
   def current_style(self) -> Styler:
     """Like `pandas.DataFrame.style`, but attach the style to the DataFrame."""
     if self.__styler is None:
-      self.__styler = super().style
+      self.__styler = super().style  # pytype: disable=attribute-error  # re-none
     return self.__styler
 
   def _repr_html_(self) -> str:
     # See base class for doc
     if self.__styler is None:
-      return super()._repr_html_()
+      return super()._repr_html_()  # pytype: disable=attribute-error  # re-none
     return self.__styler._repr_html_()  # pylint: disable=protected-access
 
 

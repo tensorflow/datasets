@@ -22,7 +22,7 @@ We provide only the raw version.
     [https://github.com/nyu-mll/quality](https://github.com/nyu-mll/quality)
 
 *   **Source code**:
-    [`tfds.text.quality.Quality`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/quality/quality.py)
+    [`tfds.datasets.quality.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/quality/quality_dataset_builder.py)
 
 *   **Versions**:
 
@@ -46,43 +46,42 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'article': Text(shape=(), dtype=tf.string),
-    'article_id': Text(shape=(), dtype=tf.string),
-    'difficults': Sequence(tf.bool),
-    'gold_labels': Sequence(tf.int32),
-    'options': Sequence(Sequence(Text(shape=(), dtype=tf.string))),
-    'question_ids': Sequence(Text(shape=(), dtype=tf.string)),
-    'questions': Sequence(Text(shape=(), dtype=tf.string)),
-    'set_unique_id': Text(shape=(), dtype=tf.string),
-    'source': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-    'topic': Text(shape=(), dtype=tf.string),
-    'url': Text(shape=(), dtype=tf.string),
-    'writer_id': Text(shape=(), dtype=tf.string),
-    'writer_labels': Sequence(tf.int32),
+    'article': Text(shape=(), dtype=string),
+    'article_id': Text(shape=(), dtype=string),
+    'difficults': Sequence(bool),
+    'gold_labels': Sequence(int32),
+    'options': Sequence(Sequence(Text(shape=(), dtype=string))),
+    'question_ids': Sequence(Text(shape=(), dtype=string)),
+    'questions': Sequence(Text(shape=(), dtype=string)),
+    'set_unique_id': Text(shape=(), dtype=string),
+    'source': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
+    'topic': Text(shape=(), dtype=string),
+    'url': Text(shape=(), dtype=string),
+    'writer_id': Text(shape=(), dtype=string),
+    'writer_labels': Sequence(int32),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature       | Class                    | Shape   | Dtype     | Description |
-| :------------ | :----------------------- | :------ | :-------- | :---------- |
-|               | FeaturesDict             |         |           |             |
-| article       | Text                     |         | tf.string |             |
-| article_id    | Text                     |         | tf.string |             |
-| difficults    | Sequence(Tensor)         | (None,) | tf.bool   |             |
-| gold_labels   | Sequence(Tensor)         | (None,) | tf.int32  |             |
-| options       | Sequence(Sequence(Text)) | (None,  | tf.string |             |
-:               :                          : None)   :           :             :
-| question_ids  | Sequence(Text)           | (None,) | tf.string |             |
-| questions     | Sequence(Text)           | (None,) | tf.string |             |
-| set_unique_id | Text                     |         | tf.string |             |
-| source        | Text                     |         | tf.string |             |
-| title         | Text                     |         | tf.string |             |
-| topic         | Text                     |         | tf.string |             |
-| url           | Text                     |         | tf.string |             |
-| writer_id     | Text                     |         | tf.string |             |
-| writer_labels | Sequence(Tensor)         | (None,) | tf.int32  |             |
+Feature       | Class                    | Shape        | Dtype  | Description
+:------------ | :----------------------- | :----------- | :----- | :----------
+              | FeaturesDict             |              |        |
+article       | Text                     |              | string |
+article_id    | Text                     |              | string |
+difficults    | Sequence(Tensor)         | (None,)      | bool   |
+gold_labels   | Sequence(Tensor)         | (None,)      | int32  |
+options       | Sequence(Sequence(Text)) | (None, None) | string |
+question_ids  | Sequence(Text)           | (None,)      | string |
+questions     | Sequence(Text)           | (None,)      | string |
+set_unique_id | Text                     |              | string |
+source        | Text                     |              | string |
+title         | Text                     |              | string |
+topic         | Text                     |              | string |
+url           | Text                     |              | string |
+writer_id     | Text                     |              | string |
+writer_labels | Sequence(Tensor)         | (None,)      | int32  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

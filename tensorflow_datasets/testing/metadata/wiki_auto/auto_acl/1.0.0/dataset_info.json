@@ -4,7 +4,7 @@
   "configName": "auto_acl",
   "description": "WikiAuto provides a set of aligned sentences from English Wikipedia and\nSimple English Wikipedia as a resource to train sentence simplification\nsystems. The authors first crowd-sourced a set of manual alignments between\nsentences in a subset of the Simple English Wikipedia and their corresponding\nversions in English Wikipedia (this corresponds to the `manual` config),\nthen trained a neural CRF system to predict these alignments. The trained\nmodel was then applied to the other articles in Simple English Wikipedia\nwith an English counterpart to create a larger corpus of aligned sentences\n(corresponding to the `auto`, `auto_acl`, `auto_full_no_split`, and\n`auto_full_with_split` configs here).",
   "downloadSize": "118068366",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/chaojiang06/wiki-auto"
@@ -17,6 +17,7 @@
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "full",
       "numBytes": "145578750",
       "shardLengths": [

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ from tensorflow_datasets.ranking.mslr_web import mslr_web
 
 class MslrWebTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for mslr_web dataset."""
+
   DATASET_CLASS = mslr_web.MslrWeb
   SPLITS = {
       "train": 6,

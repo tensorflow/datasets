@@ -112,20 +112,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'context_passage': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'answer': Text(shape=(), dtype=string),
+    'context_passage': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype     | Description
-:-------------- | :----------- | :---- | :-------- | :----------
-                | FeaturesDict |       |           |
-answer          | Text         |       | tf.string |
-context_passage | Text         |       | tf.string |
-question        | Text         |       | tf.string |
+Feature         | Class        | Shape | Dtype  | Description
+:-------------- | :----------- | :---- | :----- | :----------
+                | FeaturesDict |       |        |
+answer          | Text         |       | string |
+context_passage | Text         |       | string |
+question        | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -185,22 +185,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'context_passage': Text(shape=(), dtype=tf.string),
-    'context_sentence': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'answer': Text(shape=(), dtype=string),
+    'context_passage': Text(shape=(), dtype=string),
+    'context_sentence': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape | Dtype     | Description
-:--------------- | :----------- | :---- | :-------- | :----------
-                 | FeaturesDict |       |           |
-answer           | Text         |       | tf.string |
-context_passage  | Text         |       | tf.string |
-context_sentence | Text         |       | tf.string |
-question         | Text         |       | tf.string |
+Feature          | Class        | Shape | Dtype  | Description
+:--------------- | :----------- | :---- | :----- | :----------
+                 | FeaturesDict |       |        |
+answer           | Text         |       | string |
+context_passage  | Text         |       | string |
+context_sentence | Text         |       | string |
+question         | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 """deep1b dataset."""
 
 import h5py
-import tensorflow as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -57,23 +58,24 @@ class Deep1b(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'index':
-                tfds.features.Scalar(
-                    dtype=tf.int64, doc='Index within the split.'),
-            'embedding':
-                tfds.features.Tensor(shape=(96,), dtype=tf.float32),
-            'neighbors':
-                tfds.features.Sequence(
-                    {
-                        'index':
-                            tfds.features.Scalar(
-                                dtype=tf.int64, doc='Neighbor index.'),
-                        'distance':
-                            tfds.features.Scalar(
-                                dtype=tf.float32, doc='Neighbor distance.'),
-                    },
-                    doc='The computed neighbors, which is only available for the test split.'
-                )
+            'index': tfds.features.Scalar(
+                dtype=np.int64, doc='Index within the split.'
+            ),
+            'embedding': tfds.features.Tensor(shape=(96,), dtype=np.float32),
+            'neighbors': tfds.features.Sequence(
+                {
+                    'index': tfds.features.Scalar(
+                        dtype=np.int64, doc='Neighbor index.'
+                    ),
+                    'distance': tfds.features.Scalar(
+                        dtype=np.float32, doc='Neighbor distance.'
+                    ),
+                },
+                doc=(
+                    'The computed neighbors, which is only available for'
+                    ' the test split.'
+                ),
+            ),
         }),
         homepage='http://sites.skoltech.ru/compvision/noimi/',
         citation=_CITATION,
@@ -97,8 +99,12 @@ class Deep1b(tfds.core.GeneratorBasedBuilder):
             yield idx, {'index': idx, 'embedding': val, 'neighbors': []}
         else:
           for idx, (val, n_indices, distances) in enumerate(
-              zip(dataset_file['test'], dataset_file['neighbors'],
-                  dataset_file['distances'])):
+              zip(
+                  dataset_file['test'],
+                  dataset_file['neighbors'],
+                  dataset_file['distances'],
+              )
+          ):
             neighbors = []
             for nn_idx, nn_dist in zip(n_indices, distances):
               neighbors.append({'index': nn_idx, 'distance': nn_dist})

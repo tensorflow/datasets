@@ -1,0 +1,102 @@
+{
+  "citation": "@misc{Dua:2019 ,\n  author = \"Dua, Dheeru and Graff, Casey\",\n  year = 2017,\n  title = \"{UCI} Machine Learning Repository\",\n  url = \"http://archive.ics.uci.edu/ml\",\n  institution = \"University of California, Irvine, School of Information and\nComputer Sciences\"\n}",
+  "description": "This is the data set used for The Third International Knowledge Discovery and\nData Mining Tools Competition, which was held in conjunction with KDD-99 The\nFifth International Conference on Knowledge Discovery and Data Mining. The\ncompetition task was to build a network intrusion detector, a predictive model\ncapable of distinguishing between 'bad' connections, called intrusions or\nattacks, and 'good' normal connections. This database contains a standard set of\ndata to be audited, which includes a wide variety of intrusions simulated in a\nmilitary network environment.",
+  "downloadSize": "19524937",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.kddcup99.kddcup99_dataset_builder",
+  "name": "kddcup99",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "1.0.1": "Fixes parsing of boolean fields `land`, `logged_in`, `root_shell`, `is_hot_login` and `is_guest_login`."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "5299366982",
+      "shardLengths": [
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76537",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538",
+        "76538"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "336453591",
+      "shardLengths": [
+        "77757",
+        "77757",
+        "77758",
+        "77757"
+      ]
+    }
+  ],
+  "version": "1.0.1"
+}

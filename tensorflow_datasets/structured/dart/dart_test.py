@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 """Dart dataset tests."""
 
 import json
-
 from unittest import mock
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured.dart import dart
 
@@ -92,15 +92,18 @@ class DartTest(tfds.testing.DatasetBuilderTestCase):
                 },
             ]
         },
-        'target_text':
+        'target_text': (
             'A school from Mars Hill, North Carolina, joined in 1973.'
+        ),
     }]
     dart_dataset = dart.Dart()
     with mock.patch.object(
-        json, 'load',
-        return_value=json.loads(json_str)), mock.patch.object(tf, 'io'):
-      for i, (_, example) in enumerate(dart_dataset._generate_examples('')):
+        json, 'load', return_value=json.loads(json_str)
+    ), mock.patch.object(epath, 'Path'):
+      examples = list(dart_dataset._generate_examples(''))
+      for i, (_, example) in enumerate(examples):
         self.assertCountEqual(example, expected_examples[i])
+      assert len(examples) == len(expected_examples)
 
 
 if __name__ == '__main__':

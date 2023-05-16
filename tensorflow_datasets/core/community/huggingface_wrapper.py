@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +15,11 @@
 
 """Compatibility layer of Hugging Face datasets library."""
 
+from __future__ import annotations
+
 import builtins
 import contextlib
+import functools
 import glob
 import os
 import sys
@@ -25,14 +28,15 @@ from typing import Iterator, NamedTuple, Optional, Union
 from unittest import mock
 
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import split_builder
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 __all__ = [
     'mock_builtin_to_use_gfile',
@@ -111,12 +115,16 @@ class GeneratorBasedBuilder(
         name_to_configs = {c.name: c for c in cls.BUILDER_CONFIGS}
         new_ordered_configs = [name_to_configs[cls.DEFAULT_CONFIG_NAME]]
         new_ordered_configs.extend(
-            config for name, config in name_to_configs.items()
-            if name != cls.DEFAULT_CONFIG_NAME)
+            config
+            for name, config in name_to_configs.items()
+            if name != cls.DEFAULT_CONFIG_NAME
+        )
         cls.BUILDER_CONFIGS = new_ordered_configs
     super().__init_subclass__(**kwargs)
 
-  @utils.memoized_property
+  @property
+  @tfds_logging.builder_info()
+  @functools.lru_cache(maxsize=128)
   def info(self) -> dataset_info.DatasetInfo:
     # HF supports Sequences defined as list: {'video': [{'image': Image()}]}
     with _mock_list_as_sequence():
@@ -133,8 +141,7 @@ class GeneratorBasedBuilder(
   def _download_and_prepare(self, *args, **kwargs):
     # * Patch `open` to use the GFile API (to supports GCS)
     # * Patch `Tensor.encode_example` to support `None` strings
-    with mock_builtin_to_use_gfile(), \
-        _mock_tensor_feature_empty_str():
+    with mock_builtin_to_use_gfile(), _mock_tensor_feature_empty_str():
       return super()._download_and_prepare(*args, **kwargs)
 
 
@@ -172,7 +179,8 @@ def _make_scalar_feature(dtype: str) -> tf.dtypes.DType:
   else:
     raise ValueError(
         f'Unrecognized type {dtype}. Please open an issue if you think '
-        'this is a bug.')
+        'this is a bug.'
+    )
 
 
 class Value:
@@ -208,7 +216,9 @@ def _mock_list_as_sequence() -> Iterator[None]:
 
   def new_to_feature(value):
     if isinstance(value, list):
-      value, = value  # List should contain a single element  # pylint: disable=self-assigning-variable
+      (value,) = (
+          value  # List should contain a single element  # pylint: disable=self-assigning-variable
+      )
       return features.Sequence(value)
     else:
       return to_feature_fn(value)
@@ -311,10 +321,16 @@ def mock_builtin_to_use_gfile() -> Iterator[None]:
       # Patch `__new__` as `Path` might have already be imported as
       # `from pathlib import Path`
       'pathlib.Path.__new__',
-      _new_pathlib_path_new), mock.patch.object(
-          os.path, 'exists', tf.io.gfile.exists), mock.patch.object(
-              os.path, 'isdir', tf.io.gfile.isdir), mock.patch.object(
-                  os, 'listdir', tf.io.gfile.listdir), mock.patch.object(
-                      os, 'walk', tf.io.gfile.walk), mock.patch.object(
-                          glob, 'glob', tf.io.gfile.glob):
+      _new_pathlib_path_new,
+  ), mock.patch.object(
+      os.path, 'exists', tf.io.gfile.exists
+  ), mock.patch.object(
+      os.path, 'isdir', tf.io.gfile.isdir
+  ), mock.patch.object(
+      os, 'listdir', tf.io.gfile.listdir
+  ), mock.patch.object(
+      os, 'walk', tf.io.gfile.walk
+  ), mock.patch.object(
+      glob, 'glob', tf.io.gfile.glob
+  ):
     yield

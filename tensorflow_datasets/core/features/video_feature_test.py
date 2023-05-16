@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import json
 import os
 import pathlib
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -44,7 +45,8 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_video,
             ),
         ],
-        test_attributes=dict(_encoding_format='png', _extra_ffmpeg_args=[]))
+        test_attributes=dict(_encoding_format='png', _extra_ffmpeg_args=[]),
+    )
 
   def test_video_concatenated_frames(self):
     video_shape = (None, 400, 640, 3)
@@ -78,7 +80,7 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
   def test_video_ffmpeg(self):
     video_path = os.path.join(self._test_data_path, 'video.mkv')
     video_json_path = os.path.join(self._test_data_path, 'video.json')
-    with tf.io.gfile.GFile(video_json_path) as fp:
+    with epath.Path(video_json_path).open() as fp:
       video_array = np.asarray(json.load(fp))
 
     self.assertFeature(

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,10 @@ from tensorflow_datasets.rl_unplugged.rlu_dmlab_explore_object_rewards_few impor
 
 class RluDmlabExploreObjectRewardsFewTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_dmlab_explore_object_rewards_few dataset."""
-  DATASET_CLASS = rlu_dmlab_explore_object_rewards_few.RluDmlabExploreObjectRewardsFew
+
+  DATASET_CLASS = (
+      rlu_dmlab_explore_object_rewards_few.RluDmlabExploreObjectRewardsFew
+  )
   SPLITS = {
       'train': 2,  # Number of fake train example
   }
@@ -40,4 +43,3 @@ class RluDmlabExploreObjectRewardsFewTest(tfds.testing.DatasetBuilderTestCase):
 
 if __name__ == '__main__':
   tfds.testing.test_main()
-
