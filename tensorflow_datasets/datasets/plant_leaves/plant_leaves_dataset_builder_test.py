@@ -20,10 +20,10 @@ from tensorflow_datasets.datasets.plant_leaves import plant_leaves_dataset_build
 
 
 class PlantLeavesTest(testing.DatasetBuilderTestCase):
-    DATASET_CLASS = plant_leaves_dataset_builder.Builder
-    SPLITS = {"train": 22}
-    DL_EXTRACT_RESULT = "Alstonia Scholaris (P2).zip"
+  DATASET_CLASS = plant_leaves_dataset_builder.Builder
+  SPLITS = {"train": 22}
+  DL_EXTRACT_RESULT = "Alstonia Scholaris (P2).zip"
 
 
 if __name__ == "__main__":
-    testing.test_main()
+  testing.test_main()
