@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/adversarial_qa)
+*   [Code](https://huggingface.co/datasets/adversarial_qa/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/adversarial_qa)
 
 
