@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/aeslc)
+*   [Code](https://huggingface.co/datasets/aeslc/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/aeslc)
 
 
