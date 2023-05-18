@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/adv_glue)
+*   [Code](https://huggingface.co/datasets/adv_glue/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/adv_glue)
 
 
