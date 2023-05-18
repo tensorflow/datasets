@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/afrikaans_ner_corpus)
+*   [Code](https://huggingface.co/datasets/afrikaans_ner_corpus/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/afrikaans_ner_corpus)
 
 
