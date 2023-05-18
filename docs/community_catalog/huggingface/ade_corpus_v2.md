@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/ade_corpus_v2)
+*   [Code](https://huggingface.co/datasets/ade_corpus_v2/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/ade_corpus_v2)
 
 
