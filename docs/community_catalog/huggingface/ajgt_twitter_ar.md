@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/ajgt_twitter_ar)
+*   [Code](https://huggingface.co/datasets/ajgt_twitter_ar/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/ajgt_twitter_ar)
 
 
