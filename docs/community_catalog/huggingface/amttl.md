@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/amttl)
+*   [Code](https://huggingface.co/datasets/amttl/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/amttl)
 
 
