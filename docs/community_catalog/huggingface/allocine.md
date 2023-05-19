@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/allocine)
+*   [Code](https://huggingface.co/datasets/allocine/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/allocine)
 
 
