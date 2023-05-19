@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/amazon_us_reviews)
+*   [Code](https://huggingface.co/datasets/amazon_us_reviews/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/amazon_us_reviews)
 
 
