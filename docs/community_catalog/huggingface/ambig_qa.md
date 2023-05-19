@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/ambig_qa)
+*   [Code](https://huggingface.co/datasets/ambig_qa/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/ambig_qa)
 
 
