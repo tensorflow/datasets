@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/allegro_reviews)
+*   [Code](https://huggingface.co/datasets/allegro_reviews/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/allegro_reviews)
 
 
