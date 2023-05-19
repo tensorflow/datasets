@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/ami)
+*   [Code](https://huggingface.co/datasets/ami/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/ami)
 
 
