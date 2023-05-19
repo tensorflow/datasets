@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/amazon_polarity)
+*   [Code](https://huggingface.co/datasets/amazon_polarity/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/amazon_polarity)
 
 
