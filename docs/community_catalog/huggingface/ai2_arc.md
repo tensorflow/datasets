@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/ai2_arc)
+*   [Code](https://huggingface.co/datasets/ai2_arc/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/ai2_arc)
 
 
