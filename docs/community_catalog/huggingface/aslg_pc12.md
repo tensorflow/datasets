@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/aslg_pc12)
+*   [Code](https://huggingface.co/datasets/aslg_pc12/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/aslg_pc12)
 
 
