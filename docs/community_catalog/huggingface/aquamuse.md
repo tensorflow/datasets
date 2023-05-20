@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/aquamuse)
+*   [Code](https://huggingface.co/datasets/aquamuse/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/aquamuse)
 
 
