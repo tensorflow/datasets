@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/arsentd_lev)
+*   [Code](https://huggingface.co/datasets/arsentd_lev/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/arsentd_lev)
 
 
