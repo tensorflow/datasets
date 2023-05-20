@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/arxiv_dataset)
+*   [Code](https://huggingface.co/datasets/arxiv_dataset/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/arxiv_dataset)
 
 
