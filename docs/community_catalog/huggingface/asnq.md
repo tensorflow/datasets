@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/asnq)
+*   [Code](https://huggingface.co/datasets/asnq/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/asnq)
 
 
