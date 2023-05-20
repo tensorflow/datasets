@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/art)
+*   [Code](https://huggingface.co/datasets/art/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/art)
 
 
