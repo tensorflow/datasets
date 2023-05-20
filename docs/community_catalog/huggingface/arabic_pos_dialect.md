@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/arabic_pos_dialect)
+*   [Code](https://huggingface.co/datasets/arabic_pos_dialect/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/arabic_pos_dialect)
 
 
