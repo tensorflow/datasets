@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/ascent_kb)
+*   [Code](https://huggingface.co/datasets/ascent_kb/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/ascent_kb)
 
 
