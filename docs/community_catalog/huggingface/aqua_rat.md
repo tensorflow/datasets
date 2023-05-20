@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/aqua_rat)
+*   [Code](https://huggingface.co/datasets/aqua_rat/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/aqua_rat)
 
 
