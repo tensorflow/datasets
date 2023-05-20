@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/arabic_speech_corpus)
+*   [Code](https://huggingface.co/datasets/arabic_speech_corpus/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/arabic_speech_corpus)
 
 
