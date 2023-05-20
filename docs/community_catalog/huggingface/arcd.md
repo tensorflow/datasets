@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/arcd)
+*   [Code](https://huggingface.co/datasets/arcd/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/arcd)
 
 
