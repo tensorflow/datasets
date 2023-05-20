@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/ar_cov19)
+*   [Code](https://huggingface.co/datasets/ar_cov19/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/ar_cov19)
 
 
