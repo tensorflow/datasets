@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/arabic_billion_words)
+*   [Code](https://huggingface.co/datasets/arabic_billion_words/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/arabic_billion_words)
 
 
