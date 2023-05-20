@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/anli)
+*   [Code](https://huggingface.co/datasets/anli/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/anli)
 
 
