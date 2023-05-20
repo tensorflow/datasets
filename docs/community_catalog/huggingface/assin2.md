@@ -2,7 +2,7 @@
 
 References:
 
-*   [Code](https://github.com/huggingface/datasets/blob/master/datasets/assin2)
+*   [Code](https://huggingface.co/datasets/assin2/tree/main)
 *   [Huggingface](https://huggingface.co/datasets/assin2)
 
 
