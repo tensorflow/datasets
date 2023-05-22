@@ -49,6 +49,11 @@ ATTR_DATA = (
     "id=0B7EVK8r0v71pblRyaVFSWGxPY0U"
 )
 
+IDENTITY_DATA= (
+    "https://drive.google.com/uc?export=download&"
+    "id=1_ee_0u7vcNLOfNLegJRHmolfH5ICW-XS"
+)
+
 LANDMARK_HEADINGS = (
     "lefteye_x lefteye_y righteye_x righteye_y "
     "nose_x nose_y leftmouth_x leftmouth_y rightmouth_x "
@@ -85,6 +90,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "landmarks": {name: np.int64 for name in LANDMARK_HEADINGS},
             # Attributes could be some special MultiLabel FeatureConnector
             "attributes": {name: np.bool_ for name in ATTR_HEADINGS},
+            "identity": np.int64,
         }),
         homepage="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
     )
@@ -95,10 +101,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         "list_eval_partition": EVAL_LIST,
         "list_attr_celeba": ATTR_DATA,
         "landmarks_celeba": LANDMARKS_DATA,
+        "identity_celeba": IDENTITY_DATA,
     })
 
-    # Load all images in memory (~1 GiB)
-    # Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
+     #Load all images in memory (~1 GiB)
+     #Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
     all_images = {
         os.path.split(k)[-1]: img
         for k, img in dl_manager.iter_archive(
@@ -166,6 +173,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     img_list_path = downloaded_dirs["list_eval_partition"]
     landmarks_path = downloaded_dirs["landmarks_celeba"]
     attr_path = downloaded_dirs["list_attr_celeba"]
+    identity_path = downloaded_dirs["identity_celeba"]
 
     with epath.Path(img_list_path).open() as f:
       files = [
@@ -176,6 +184,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     attributes = self._process_celeba_config_file(attr_path)
     landmarks = self._process_celeba_config_file(landmarks_path)
+    identity= self._process_celeba_config_file(identity_path)
 
     for file_name in sorted(files):
       record = {
@@ -187,6 +196,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               # atributes value are either 1 or -1, so convert to bool
               k: v > 0
               for k, v in zip(attributes[0], attributes[1][file_name])
+          },
+          "identity":{
+              k:v for k, v in zip(identity[0], identity[1][file_name])
           },
       }
       yield file_name, record
