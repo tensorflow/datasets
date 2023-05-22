@@ -32,6 +32,7 @@ class CelebATest(testing.DatasetBuilderTestCase):
       "list_eval_partition": "list_eval_partition.txt",
       "list_attr_celeba": "list_attr_celeba.txt",
       "landmarks_celeba": "list_landmarks_align_celeba.txt",
+      "identity_celeba" :  "identity_CelebA.txt"
   }
 
 
