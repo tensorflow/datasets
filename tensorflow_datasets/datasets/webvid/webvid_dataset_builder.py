@@ -25,9 +25,6 @@ from absl import logging
 from etils import epath
 import tensorflow_datasets.public_api as tfds
 
-beam = tfds.core.lazy_imports.apache_beam
-pd = tfds.core.lazy_imports.pandas
-
 _FFMPEG_TIMEOUT_SECONDS = 20 * 60  # 20 minutes.
 _MAX_SECONDS_PER_VIDEO = 10  # Max allowed length for videos.
 # Max allowed size of texts. We assume max 64 words for an English average word
@@ -169,28 +166,37 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   }
   """
 
-  _total_counter = beam.metrics.Metrics.counter('ProcessExample', 'Total')
-  _process_error_counter = beam.metrics.Metrics.counter(
-      'ProcessExample', 'Processing error'
-  )
-  _empty_video_counter = beam.metrics.Metrics.counter(
-      'ProcessExample', 'Empty video'
-  )
-  _timeout_counter = beam.metrics.Metrics.counter('ProcessExample', 'Timed out')
-  _success_counter = beam.metrics.Metrics.counter('ProcessExample', 'Success')
-  _text_cropped_counter = beam.metrics.Metrics.counter(
-      'ProcessExample', 'Text cropped'
-  )
+  def __init__(self, **kwargs):
+    super().__init__(**kwargs)
+    beam = tfds.core.lazy_imports.apache_beam
+    self._total_counter = beam.metrics.Metrics.counter(
+        'ProcessExample', 'Total'
+    )
+    self._process_error_counter = beam.metrics.Metrics.counter(
+        'ProcessExample', 'Processing error'
+    )
+    self._empty_video_counter = beam.metrics.Metrics.counter(
+        'ProcessExample', 'Empty video'
+    )
+    self._timeout_counter = beam.metrics.Metrics.counter(
+        'ProcessExample', 'Timed out'
+    )
+    self._success_counter = beam.metrics.Metrics.counter(
+        'ProcessExample', 'Success'
+    )
+    self._text_cropped_counter = beam.metrics.Metrics.counter(
+        'ProcessExample', 'Text cropped'
+    )
 
-  _initial_caption_len_dist = beam.metrics.Metrics.distribution(
-      'ProcessExample', 'Original caption length'
-  )
-  _final_caption_len_dist = beam.metrics.Metrics.distribution(
-      'ProcessExample', 'Final caption length'
-  )
-  _frame_count_dist = beam.metrics.Metrics.distribution(
-      'ProcessExample', 'FrameCount'
-  )
+    self._initial_caption_len_dist = beam.metrics.Metrics.distribution(
+        'ProcessExample', 'Original caption length'
+    )
+    self._final_caption_len_dist = beam.metrics.Metrics.distribution(
+        'ProcessExample', 'Final caption length'
+    )
+    self._frame_count_dist = beam.metrics.Metrics.distribution(
+        'ProcessExample', 'FrameCount'
+    )
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -238,6 +244,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, captions_csv_path, image_base_path):
     """Yields examples."""
+    beam = tfds.core.lazy_imports.apache_beam
+    pd = tfds.core.lazy_imports.pandas
 
     def _load_csv(path):
       # Read all columns as strings, to avoid buggily converting ids with
