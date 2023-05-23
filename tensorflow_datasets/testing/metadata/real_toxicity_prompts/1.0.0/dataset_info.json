@@ -1,0 +1,27 @@
+{
+  "citation": "@article{gehman2020realtoxicityprompts,\n  title={Realtoxicityprompts: Evaluating neural toxic degeneration in language models},\n  author={Gehman, Samuel and Gururangan, Suchin and Sap, Maarten and Choi, Yejin and Smith, Noah A},\n  journal={arXiv preprint arXiv:2009.11462},\n  year={2020}\n}",
+  "description": "# RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models\n\nThe RealToxicityPrompts is a corpus of English prompts (specifically sentence\nbeginnings) of varying toxicity. These prompts are meant to be given as\ncontexts to an autoregressive language model (ie. GPT-2) and used for\ngenerating completions.\n\nMore details are presented in the original\n[paper](https://api.semanticscholar.org/CorpusID:221878771).",
+  "downloadSize": "3715984281",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/allenai/real-toxicity-prompts"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.real_toxicity_prompts.real_toxicity_prompts_dataset_builder",
+  "name": "real_toxicity_prompts",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "85163577",
+      "shardLengths": [
+        "99442"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}
