@@ -69,6 +69,10 @@ ATTR_HEADINGS = (
     "Wearing_Hat Wearing_Lipstick Wearing_Necklace Wearing_Necktie Young"
 ).split()
 
+IDENTITY_HEADINGS = (
+  "Identity_No"
+).split()
+
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
@@ -90,7 +94,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "landmarks": {name: np.int64 for name in LANDMARK_HEADINGS},
             # Attributes could be some special MultiLabel FeatureConnector
             "attributes": {name: np.bool_ for name in ATTR_HEADINGS},
-            "identity": np.int64,
+            "identity": {name: np.int64 for name in IDENTITY_HEADINGS},
         }),
         homepage="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
     )
