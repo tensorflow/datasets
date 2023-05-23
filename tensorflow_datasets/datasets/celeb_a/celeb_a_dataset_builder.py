@@ -31,7 +31,9 @@ import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = (
     "https://drive.google.com/uc?export=download&"
-    "id=0B7EVK8r0v71pZjFTYXZWM3FlRnM"
+    "id=0B7EVK8r0v71pZjFTYXZWM3FlRnM"#&confirm=t&"
+    #"uuid=982f33ac-b873-44c1-ac5c-0b1cf9eef61d&"
+    #"at=AKKF8vzeATNvwHe-2zfAw6ifPZCv:1684779292047"
 )
 EVAL_LIST = (
     "https://drive.google.com/uc?export=download&"
@@ -171,6 +173,33 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       values[row_values[0]] = [int(v) for v in row_values[1:]]
     return keys, values
 
+  def _process_celeba_nonheading_config_file(self, file_path, keysList):
+    """Unpack the celeba config file.
+
+    The file starts with the number of lines, and a header.
+    Afterwards, there is a configuration for each file: one per line.
+
+    Args:
+      file_path: Path to the file with the configuration.
+
+    Returns:
+      keys: names of the attributes
+      values: map from the file name to the list of attribute values for
+              this file.
+    """
+    with epath.Path(file_path).open() as f:
+      data_raw = f.read()
+    lines = data_raw.split("\n")
+
+    keys = keysList
+    values = {}
+    # Go over each line (skip the last one, as it is empty).
+    for line in lines[0:-1]:
+      row_values = line.strip().split()
+      # Each row start with the 'file_name' and then space-separated values.
+      values[row_values[0]] = [int(v) for v in row_values[1:]]
+    return keys, values
+
   def _generate_examples(self, file_id, downloaded_dirs, downloaded_images):
     """Yields examples."""
 
@@ -188,7 +217,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     attributes = self._process_celeba_config_file(attr_path)
     landmarks = self._process_celeba_config_file(landmarks_path)
-    identity= self._process_celeba_config_file(identity_path)
+    identity= self._process_celeba_nonheading_config_file(identity_path, IDENTITY_HEADINGS)
 
     for file_name in sorted(files):
       record = {
