@@ -1570,8 +1570,11 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       filenames = [filenames]
     if not filenames:
       raise ValueError("No filenames given!")
+    expanded_filenames = []
     for filename in filenames:
       self.info.add_file_data_source_access(filename)
+      expanded_filenames.extend(file_utils.expand_glob(filename))
+    filenames = [os.fspath(f) for f in expanded_filenames]
 
     return tf.data.TFRecordDataset(
         filenames=filenames,
