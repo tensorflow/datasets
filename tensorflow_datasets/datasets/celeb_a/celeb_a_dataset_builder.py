@@ -31,9 +31,7 @@ import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = (
     "https://drive.google.com/uc?export=download&"
-    "id=0B7EVK8r0v71pZjFTYXZWM3FlRnM"#&confirm=t&"
-    #"uuid=982f33ac-b873-44c1-ac5c-0b1cf9eef61d&"
-    #"at=AKKF8vzeATNvwHe-2zfAw6ifPZCv:1684779292047"
+    "id=0B7EVK8r0v71pZjFTYXZWM3FlRnM"
 )
 EVAL_LIST = (
     "https://drive.google.com/uc?export=download&"
@@ -110,8 +108,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         "identity_celeba": IDENTITY_DATA,
     })
 
-     #Load all images in memory (~1 GiB)
-     #Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
+    # Load all images in memory (~1 GiB)
+    # Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
     all_images = {
         os.path.split(k)[-1]: img
         for k, img in dl_manager.iter_archive(
