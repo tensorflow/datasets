@@ -668,9 +668,10 @@ class DatasetInfo(object):
     if fields_taken_from_code:
       logging.info(
           (
-              "Fields info.[%s] from disk and from code do not match. "
+              "For '%s': fields info.[%s] differ on disk and in the code. "
               "Keeping the one from code."
           ),
+          self.full_name,
           ", ".join(fields_taken_from_code),
       )
 
