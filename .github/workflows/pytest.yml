@@ -5,11 +5,20 @@ on:
   pull_request:
     branches:
       - master
-  push:
     # Do not trigger tests for documentation or markdown docs.
     paths-ignore:
       - 'docs/**'
       - '*.md'
+  push:
+    branches:
+      - master
+    # Do not trigger tests for documentation or markdown docs.
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  schedule:
+    # Trigger tests every day at 02:00 UTC to refresh cache.
+    - cron: '0 2 * * *'
 
 # Cancel in-progress runs for the current workflow if not on the main branch
 # (as it mark the unittests as failed).
