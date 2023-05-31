@@ -56,6 +56,7 @@ from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import termcolor
 
+
 if typing.TYPE_CHECKING:
   import apache_beam as beam
   from apache_beam.runners import runner
@@ -110,8 +111,18 @@ class BuilderConfig:
 
   @classmethod
   def from_dataset_info(
-      cls, info_proto: dataset_info_pb2.DatasetInfo
+      cls,
+      info_proto: dataset_info_pb2.DatasetInfo,
   ) -> Optional["BuilderConfig"]:
+    """Instantiates a BuilderConfig from the given proto.
+
+    Args:
+      info_proto: DatasetInfo proto which documents the requested dataset
+        config, including its name, version, and features.
+
+    Returns:
+      A BuilderConfig for the requested config.
+    """
     if not info_proto.config_name:
       return None
     return BuilderConfig(
