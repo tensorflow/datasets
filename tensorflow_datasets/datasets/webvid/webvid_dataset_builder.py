@@ -166,38 +166,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   }
   """
 
-  def __init__(self, **kwargs):
-    super().__init__(**kwargs)
-    beam = tfds.core.lazy_imports.apache_beam
-    self._total_counter = beam.metrics.Metrics.counter(
-        'ProcessExample', 'Total'
-    )
-    self._process_error_counter = beam.metrics.Metrics.counter(
-        'ProcessExample', 'Processing error'
-    )
-    self._empty_video_counter = beam.metrics.Metrics.counter(
-        'ProcessExample', 'Empty video'
-    )
-    self._timeout_counter = beam.metrics.Metrics.counter(
-        'ProcessExample', 'Timed out'
-    )
-    self._success_counter = beam.metrics.Metrics.counter(
-        'ProcessExample', 'Success'
-    )
-    self._text_cropped_counter = beam.metrics.Metrics.counter(
-        'ProcessExample', 'Text cropped'
-    )
-
-    self._initial_caption_len_dist = beam.metrics.Metrics.distribution(
-        'ProcessExample', 'Original caption length'
-    )
-    self._final_caption_len_dist = beam.metrics.Metrics.distribution(
-        'ProcessExample', 'Final caption length'
-    )
-    self._frame_count_dist = beam.metrics.Metrics.distribution(
-        'ProcessExample', 'FrameCount'
-    )
-
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     video_shape = (None,) + _IMG_SIZE + (3,)
@@ -247,6 +215,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     beam = tfds.core.lazy_imports.apache_beam
     pd = tfds.core.lazy_imports.pandas
 
+    ns = 'ProcessExample'
+    counter = beam.metrics.Metrics.counter
+    total_counter = counter(ns, 'Total')
+    process_error_counter = counter(ns, 'Processing error')
+    empty_video_counter = counter(ns, 'Empty video')
+    timeout_counter = counter(ns, 'Timed out')
+    success_counter = counter(ns, 'Success')
+    text_cropped_counter = counter(ns, 'Text cropped')
+
+    distribution = beam.metrics.Metrics.distribution
+    initial_caption_len_dist = distribution(ns, 'Original caption length')
+    final_caption_len_dist = distribution(ns, 'Final caption length')
+    frame_count_dist = distribution(ns, 'FrameCount')
+
     def _load_csv(path):
       # Read all columns as strings, to avoid buggily converting ids with
       # leading zeros into ints.
@@ -259,7 +241,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     def _process_example(data_row):
       """Load each video."""
-      self._total_counter.inc()
+      total_counter.inc()
 
       file_path = data_row[_VIDEO_PATH_KEY]
       new_video_id = data_row[_NEW_VIDEO_ID_KEY]
@@ -289,31 +271,31 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             timeout=_FFMPEG_TIMEOUT_SECONDS,
         )
       except subprocess.TimeoutExpired as e:
-        self._timeout_counter.inc()
+        timeout_counter.inc()
         logging.warning(
             'Timed out while processing %s with exception: %s', file_path, e
         )
         return
       except Exception:  # pylint: disable=broad-except
-        self._process_error_counter.inc()
+        process_error_counter.inc()
         logging.exception('Failed to process video %s.', file_path)
         return
 
       if frames is None:
-        self._empty_video_counter.inc()
+        empty_video_counter.inc()
         logging.warning('Empty video %s', file_path)
         return
 
-      self._frame_count_dist.update(len(frames))
+      frame_count_dist.update(len(frames))
       logging.info(
           'Successfully processed %s with original frame count %d',
           file_path,
           len(frames),
       )
 
-      self._initial_caption_len_dist.update(len(caption))
+      initial_caption_len_dist.update(len(caption))
       if len(caption) > _MAX_TEXT_LENGTH:
-        self._text_cropped_counter.inc()
+        text_cropped_counter.inc()
 
       features = {
           'id': new_video_id,
@@ -322,8 +304,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           'url': url,
       }
 
-      self._final_caption_len_dist.update(len(features['caption']))
-      self._success_counter.inc()
+      final_caption_len_dist.update(len(features['caption']))
+      success_counter.inc()
       yield new_video_id, features
 
     # Get list of videos in file system.
