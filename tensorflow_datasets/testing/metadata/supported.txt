@@ -5340,6 +5340,7 @@ xtreme_pos/xtreme_pos_vi/1.0.0
 xtreme_pos/xtreme_pos_yo/1.0.0
 xtreme_pos/xtreme_pos_zh/1.0.0
 xtreme_s/fleurs.af_za/2.0.0
+xtreme_s/fleurs.all/2.0.0
 xtreme_s/fleurs.am_et/2.0.0
 xtreme_s/fleurs.ar_eg/2.0.0
 xtreme_s/fleurs.as_in/2.0.0
