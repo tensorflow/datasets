@@ -15,6 +15,14 @@ and this project adheres to
 
 ### Changed
 
+-   Hugging Face datasets accept `None` values for any features. TFDS has no
+    `tfds.features.Optional`, so `None` values are converted to default values.
+    Those default values used to be `0` and `0.0` for int and float. Now, it's
+    `-inf` as defined by NumPy (e.g., `np.iinfo(np.int32).min` or
+    `np.finfo(np.float32).min`). This avoids ambiguous values when `0` and `0.0`
+    exist in the values of the dataset. The roadmap is to implement
+    `tfds.features.Optional`.
+
 ### Deprecated
 
 ### Removed
