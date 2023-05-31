@@ -38,4 +38,3 @@ so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
 voxforge/1.0.0
 webvid/1.0.0
-xtreme_s/fleurs.all/2.0.0
