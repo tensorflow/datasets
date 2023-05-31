@@ -117,26 +117,21 @@ def test_convert_value_datetime():
 
 def test_convert_value_scalar():
   int64_feature = feature_lib.Scalar(dtype=np.int64)
-  assert huggingface_dataset_builder._convert_value(None, int64_feature) == 0
   assert huggingface_dataset_builder._convert_value(42, int64_feature) == 42
 
   int32_feature = feature_lib.Scalar(dtype=np.int32)
-  assert huggingface_dataset_builder._convert_value(None, int32_feature) == 0
   assert huggingface_dataset_builder._convert_value(42, int32_feature) == 42
 
   string_feature = feature_lib.Scalar(dtype=np.object_)
-  assert not huggingface_dataset_builder._convert_value(None, string_feature)
   assert (
       huggingface_dataset_builder._convert_value("abc", string_feature) == "abc"
   )
 
   bool_feature = feature_lib.Scalar(dtype=np.bool_)
-  assert not huggingface_dataset_builder._convert_value(None, bool_feature)
   assert huggingface_dataset_builder._convert_value(True, bool_feature)
   assert not huggingface_dataset_builder._convert_value(False, bool_feature)
 
   float_feature = feature_lib.Scalar(dtype=np.float32)
-  assert huggingface_dataset_builder._convert_value(None, float_feature) == 0.0
   assert huggingface_dataset_builder._convert_value(42.0, float_feature) == 42.0
 
 
@@ -267,3 +262,26 @@ def test_extract_features(features):
   assert repr(
       huggingface_dataset_builder.extract_features(hf_features)
   ) == repr(tfds_features)
+
+
+def test_default_value():
+  assert (
+      huggingface_dataset_builder._default_value(
+          feature_lib.Scalar(dtype=np.int32)
+      )
+      == -2147483648
+  )
+  assert (
+      huggingface_dataset_builder._default_value(
+          feature_lib.Scalar(dtype=np.float32)
+      )
+      < -3.4028234e38
+  )
+  sequence = feature_lib.Sequence(np.int32)
+  assert huggingface_dataset_builder._default_value(sequence) == []  # pylint: disable=g-explicit-bool-comparison
+  features_dict = feature_lib.FeaturesDict({
+      "foo": feature_lib.Scalar(dtype=np.str_),
+  })
+  assert huggingface_dataset_builder._default_value(features_dict) == {
+      "foo": b""
+  }

@@ -170,15 +170,15 @@ def _convert_config_name(hf_config: Optional[str]) -> Optional[str]:
 
 def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
   """Converts a Huggingface value to a TFDS compatible value."""
+  # See the docstring of _default_value for explanations.
+  if hf_value is None:
+    return _default_value(feature)
   if isinstance(hf_value, datetime.datetime):
     return int(hf_value.timestamp())
   elif isinstance(feature, feature_lib.ClassLabel):
     return hf_value
   elif isinstance(feature, feature_lib.Scalar):
-    if hf_value is not None:
-      return hf_value
-    else:
-      return _default_value(feature)
+    return hf_value
   elif isinstance(feature, feature_lib.Translation):
     if isinstance(hf_value, dict):
       # Replaces `None` values with the default value.
@@ -189,14 +189,10 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
   elif isinstance(feature, feature_lib.FeaturesDict):
     if isinstance(hf_value, dict):
       return hf_value
-    raise ValueError(
-        f"Feature is FeaturesDict, but did not get a dict but a: {hf_value}"
-    )
+    raise ValueError(f"The feature is {feature}, but the value is: {hf_value}")
   elif isinstance(feature, feature_lib.Sequence):
-    if isinstance(hf_value, list):
+    if isinstance(hf_value, (dict, list)):
       return hf_value
-    elif hf_value is None:
-      return []
     else:
       return [hf_value]
   elif isinstance(feature, feature_lib.Audio):
@@ -246,14 +242,43 @@ def _extract_supervised_keys(hf_info):
 def _default_value(
     feature: feature_lib.FeatureConnector,
 ) -> Union[bytes, int, bool, float]:
-  if dtype_utils.is_string(feature.np_dtype):
+  """Returns the default value for a feature.
+
+  Hugging Face is loose as far as typing is concerned. It accepts None values.
+  As long as `tfds.features.Optional` does not exist, we default to a constant
+  default value.
+
+  For int and float, we do not return 0 or -1, but rather -inf, as 0 or -1 can
+  be contained in the values of the dataset. In practice, you can compare your
+  value to:
+
+  ```
+  np.iinfo(np.int32).min  # for integers
+  np.finfo(np.float32).min  # for floats
+  ...
+  ```
+
+  Args:
+    feature: the TFDS feature from which we want the default value.
+
+  Returns:
+    The default value.
+  """
+  if isinstance(feature, feature_lib.FeaturesDict):
+    return {
+        name: _default_value(sub_feature)
+        for name, sub_feature in feature.items()
+    }
+  elif isinstance(feature, feature_lib.Sequence):
+    return []
+  elif dtype_utils.is_string(feature.np_dtype):
     return b""
   elif dtype_utils.is_integer(feature.np_dtype):
-    return 0
+    return np.iinfo(feature.np_dtype).min
+  elif dtype_utils.is_floating(feature.np_dtype):
+    return np.finfo(feature.np_dtype).min
   elif dtype_utils.is_bool(feature.np_dtype):
     return False
-  elif dtype_utils.is_floating(feature.np_dtype):
-    return 0.0
   raise ValueError(f"Could not get default value for {feature}")
 
 
