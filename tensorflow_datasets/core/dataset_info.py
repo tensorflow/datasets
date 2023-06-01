@@ -617,19 +617,20 @@ class DatasetInfo(object):
       self.features.load_metadata(dataset_info_dir)
     # For `ReadOnlyBuilder`, reconstruct the features from the config.
     elif feature_lib.make_config_path(dataset_info_dir).exists():
-      self._features = feature_lib.FeatureConnector.from_config(
-          dataset_info_dir
-      )
+      try:
+        self._features = feature_lib.FeatureConnector.from_config(
+            dataset_info_dir
+        )
+      except OSError:
+        pass
+
     # Restore the MetaDataDict from metadata.json if there is any
-    if (
-        self.metadata is not None
-        or _metadata_filepath(dataset_info_dir).exists()
-    ):
-      # If the dataset was loaded from file, self.metadata will be `None`, so
-      # we create a MetadataDict first.
-      if self.metadata is None:
-        self._metadata = MetadataDict()
-      self.metadata.load_metadata(dataset_info_dir)
+    try:
+      metadata = self.metadata or MetadataDict()
+      metadata.load_metadata(dataset_info_dir)
+      self._metadata = metadata
+    except OSError:
+      pass
 
     # Update fields which are not defined in the code. This means that
     # the code will overwrite fields which are present in
@@ -972,7 +973,10 @@ def get_dataset_feature_statistics(builder, split):
 
 def read_from_json(path: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
   """Read JSON-formatted proto into DatasetInfo proto."""
-  json_str = epath.Path(path).read_text()
+  try:
+    json_str = epath.Path(path).read_text()
+  except OSError as e:
+    raise FileNotFoundError(f"Could not load dataset info from {path}") from e
   # Parse it back into a proto.
   parsed_proto = json_format.Parse(json_str, dataset_info_pb2.DatasetInfo())
   return parsed_proto
@@ -992,14 +996,8 @@ def read_proto_from_builder_dir(
   Raises:
     FileNotFoundError: If the builder_dir does not exist.
   """
-  info_path = (
-      epath.Path(os.path.expanduser(builder_dir))
-      / constants.DATASET_INFO_FILENAME
-  )
-  if not info_path.exists():
-    raise FileNotFoundError(
-        f"Could not load dataset info: {info_path} does not exist."
-    )
+  builder_dir = epath.Path(builder_dir).expanduser()
+  info_path = builder_dir / constants.DATASET_INFO_FILENAME
   return read_from_json(info_path)
 
 
