@@ -17,6 +17,7 @@
 import datetime
 from unittest import mock
 
+from absl import logging
 import numpy as np
 import pytest
 import tensorflow as tf
@@ -164,6 +165,19 @@ def test_convert_value_dict():
   assert huggingface_dataset_builder._convert_value(
       translation, translation_feature
   ) == {"de": b"Hallo Welt", "en": b"Hello world", "fr": b""}
+
+
+def test_remove_empty_splits():
+  splits = {"non_empty_split": range(5), "empty_split": range(0)}
+  with mock.patch.object(logging, "log"):
+    non_empty_splits = huggingface_dataset_builder._remove_empty_splits(splits)
+    logging.log.assert_called_once_with(
+        logging.WARNING,
+        huggingface_dataset_builder._EMPTY_SPLIT_WARNING_MSG,
+        "empty_split",
+    )
+  assert non_empty_splits.keys() == {"non_empty_split"}
+  assert list(non_empty_splits["non_empty_split"]) == list(range(5))
 
 
 @skip_because_huggingface_cannot_be_imported

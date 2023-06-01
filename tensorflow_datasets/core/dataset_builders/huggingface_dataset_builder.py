@@ -28,10 +28,12 @@ from __future__ import annotations
 import datetime
 import functools
 import io
+import itertools
 import multiprocessing
 import os
 from typing import Any, Dict, Mapping, Optional, Tuple, Type, Union
 
+from absl import logging
 from etils import epath
 import numpy as np
 from tensorflow_datasets.core import dataset_builder
@@ -49,6 +51,7 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _IMAGE_ENCODING_FORMAT = "png"
+_EMPTY_SPLIT_WARNING_MSG = "%s split doesn't have any examples"
 
 
 def _convert_to_np_dtype(dtype: str) -> Type[np.generic]:
@@ -282,6 +285,26 @@ def _default_value(
   raise ValueError(f"Could not get default value for {feature}")
 
 
+def _remove_empty_splits(
+    splits: Dict[str, split_builder_lib.SplitGenerator]
+) -> Dict[str, split_builder_lib.SplitGenerator]:
+  """Removes empty splits."""
+  non_empty_splits = {}
+
+  for split, examples_iterable in splits.items():
+    examples_iterator = iter(examples_iterable)
+    # ensure the iterator is not empty
+    try:
+      first_example = next(examples_iterator)
+      non_empty_splits[split] = itertools.chain(
+          [first_example], examples_iterator
+      )
+    except StopIteration:
+      logging.warning(_EMPTY_SPLIT_WARNING_MSG, split)
+
+  return non_empty_splits
+
+
 class HuggingfaceDatasetBuilder(
     dataset_builder.GeneratorBasedBuilder, skip_registration=True
 ):
@@ -384,7 +407,10 @@ class HuggingfaceDatasetBuilder(
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
     ds = self._download_and_prepare_for_hf()
-    return {split: self._generate_examples(data) for split, data in ds.items()}
+    splits = {
+        split: self._generate_examples(data) for split, data in ds.items()
+    }
+    return _remove_empty_splits(splits)
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
     dataset_info = self._info()
