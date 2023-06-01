@@ -41,6 +41,10 @@ recognition and speech-to-text translation.
         match version 2.0.0 on huggingface which has the same FLEURS data (
         https://huggingface.co/datasets/google/xtreme_s).
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
@@ -107,10 +111,6 @@ transcription     | Text         |         | string | Normalized transcription.
 
 *   **Dataset size**: `1.91 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -161,10 +161,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.18 GiB`
 
 *   **Dataset size**: `4.92 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -217,10 +213,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.06 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -271,10 +263,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.67 GiB`
 
 *   **Dataset size**: `5.73 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -327,10 +315,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.03 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -381,10 +365,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.28 GiB`
 
 *   **Dataset size**: `5.08 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -437,10 +417,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.53 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -491,10 +467,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.11 GiB`
 
 *   **Dataset size**: `4.61 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -547,10 +519,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.84 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -601,10 +569,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.32 GiB`
 
 *   **Dataset size**: `5.23 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -657,10 +621,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.32 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -711,10 +671,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.63 GiB`
 
 *   **Dataset size**: `5.65 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -767,10 +723,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.34 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -821,10 +773,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.35 GiB`
 
 *   **Dataset size**: `5.12 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -877,10 +825,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.32 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -931,10 +875,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.90 GiB`
 
 *   **Dataset size**: `6.62 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -987,10 +927,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.17 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1041,10 +977,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.25 GiB`
 
 *   **Dataset size**: `4.88 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1097,10 +1029,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.73 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1151,10 +1079,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.72 GiB`
 
 *   **Dataset size**: `3.76 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1207,10 +1131,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.80 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1261,10 +1181,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.88 GiB`
 
 *   **Dataset size**: `4.20 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1317,10 +1233,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `6.34 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1371,10 +1283,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.93 GiB`
 
 *   **Dataset size**: `6.54 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1427,10 +1335,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.92 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1481,10 +1385,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.47 GiB`
 
 *   **Dataset size**: `5.38 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1537,10 +1437,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.73 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1591,10 +1487,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.78 GiB`
 
 *   **Dataset size**: `6.24 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1647,10 +1539,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.87 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1701,10 +1589,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.33 GiB`
 
 *   **Dataset size**: `4.97 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1757,10 +1641,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `6.84 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1811,10 +1691,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.22 GiB`
 
 *   **Dataset size**: `4.60 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1867,10 +1743,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.27 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -1921,10 +1793,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.40 GiB`
 
 *   **Dataset size**: `5.54 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -1977,10 +1845,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.07 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2031,10 +1895,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.30 GiB`
 
 *   **Dataset size**: `5.23 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2087,10 +1947,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.69 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2141,10 +1997,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `3.32 GiB`
 
 *   **Dataset size**: `7.44 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2197,10 +2049,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `1.16 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2251,10 +2099,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.41 GiB`
 
 *   **Dataset size**: `5.19 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2307,10 +2151,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.94 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2361,10 +2201,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.68 GiB`
 
 *   **Dataset size**: `5.62 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2417,10 +2253,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.37 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2471,10 +2303,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `3.43 GiB`
 
 *   **Dataset size**: `7.37 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2527,10 +2355,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.57 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2581,10 +2405,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.69 GiB`
 
 *   **Dataset size**: `6.24 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2637,10 +2457,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.26 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2691,10 +2507,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.26 GiB`
 
 *   **Dataset size**: `4.81 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2747,10 +2559,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.67 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2801,10 +2609,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.18 GiB`
 
 *   **Dataset size**: `5.13 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2857,10 +2661,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.39 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -2911,10 +2711,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.83 GiB`
 
 *   **Dataset size**: `6.43 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -2967,10 +2763,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `8.13 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3021,10 +2813,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.61 GiB`
 
 *   **Dataset size**: `3.38 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3077,10 +2865,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.03 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3131,10 +2915,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.87 GiB`
 
 *   **Dataset size**: `4.18 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3187,10 +2967,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.84 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3241,10 +3017,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `4.45 GiB`
 
 *   **Dataset size**: `9.67 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3297,10 +3069,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.23 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3351,10 +3119,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.68 GiB`
 
 *   **Dataset size**: `5.80 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3407,10 +3171,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.47 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3461,10 +3221,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `3.00 GiB`
 
 *   **Dataset size**: `6.41 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3517,10 +3273,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.74 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3571,10 +3323,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.39 GiB`
 
 *   **Dataset size**: `5.37 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3627,10 +3375,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `6.43 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3681,10 +3425,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.15 GiB`
 
 *   **Dataset size**: `4.68 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3737,10 +3477,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.39 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3791,10 +3527,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.56 GiB`
 
 *   **Dataset size**: `3.33 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3847,10 +3579,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `7.11 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -3901,10 +3629,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.60 GiB`
 
 *   **Dataset size**: `5.76 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -3957,10 +3681,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `7.43 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4011,10 +3731,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.18 GiB`
 
 *   **Dataset size**: `2.52 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4067,10 +3783,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `2.79 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4121,10 +3833,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.58 GiB`
 
 *   **Dataset size**: `3.34 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4177,10 +3885,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.39 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4231,10 +3935,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.89 GiB`
 
 *   **Dataset size**: `4.20 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4287,10 +3987,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.43 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4341,10 +4037,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.39 GiB`
 
 *   **Dataset size**: `5.09 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4397,10 +4089,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.25 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4451,10 +4139,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `3.00 GiB`
 
 *   **Dataset size**: `6.35 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4507,10 +4191,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.46 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4561,10 +4241,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.74 GiB`
 
 *   **Dataset size**: `4.00 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4617,10 +4293,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.61 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4671,10 +4343,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `3.13 GiB`
 
 *   **Dataset size**: `6.93 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4727,10 +4395,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.04 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4781,10 +4445,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.95 GiB`
 
 *   **Dataset size**: `4.21 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4837,10 +4497,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `5.98 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -4891,10 +4547,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.13 GiB`
 
 *   **Dataset size**: `4.50 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -4947,10 +4599,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.86 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -5001,10 +4649,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.79 GiB`
 
 *   **Dataset size**: `4.26 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -5057,10 +4701,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.91 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -5111,10 +4751,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.99 GiB`
 
 *   **Dataset size**: `4.36 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -5167,10 +4803,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.44 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -5221,10 +4853,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.58 GiB`
 
 *   **Dataset size**: `5.55 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -5277,10 +4905,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `3.13 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -5331,10 +4955,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.33 GiB`
 
 *   **Dataset size**: `5.18 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -5387,10 +5007,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.88 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -5441,10 +5057,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.71 GiB`
 
 *   **Dataset size**: `3.86 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -5497,10 +5109,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `6.80 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -5551,10 +5159,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `2.65 GiB`
 
 *   **Dataset size**: `5.78 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -5607,10 +5211,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `4.06 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -5629,10 +5229,6 @@ Split          | Examples
 
 *   **Dataset size**: `7.27 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split          | Examples
@@ -5647,18 +5243,17 @@ Split          | Examples
 
 ## xtreme_s/fleurs.all
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `231.36 GiB`
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `509.51 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 77,810
+`'train'`      | 271,798
+`'validation'` | 34,452
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
