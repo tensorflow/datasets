@@ -18,7 +18,6 @@ import functools
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
-from tensorflow_datasets.core import transform as transform_lib
 from tensorflow_datasets.core.dataset_builders import view_builder
 
 
@@ -31,14 +30,14 @@ def is_even(number: int) -> bool:
 
 
 _MNIST_TRANSFORMATIONS = [
-    transform_lib.remove_feature(feature_name="image"),
-    transform_lib.apply_filter(fn=is_even, input_feature="label"),
-    transform_lib.apply_fn(
+    tfds.transform.remove_feature(feature_name="image"),
+    tfds.transform.apply_filter(fn=is_even, input_feature="label"),
+    tfds.transform.apply_fn(
         fn=functools.partial(add_number, increment=10),
         input_feature="label",
         output_feature="label_plus_10",
     ),
-    transform_lib.apply_fn(
+    tfds.transform.apply_fn(
         fn=functools.partial(add_number, increment=2),
         input_feature="label",
         output_feature="label_plus_2",
