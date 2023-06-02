@@ -183,8 +183,10 @@ class ClassLabel(tensor_feature.Tensor):
     """See base class for details."""
     # Restore names if defined
     names_filepath = self.get_names_filepath(data_dir, feature_name)
-    if names_filepath.exists():
+    try:
       self.names = _load_names_from_file(names_filepath)
+    except OSError:
+      pass
 
   def _additional_repr_info(self):
     return {"num_classes": self.num_classes}
