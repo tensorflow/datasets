@@ -24,7 +24,6 @@ from typing import Union
 
 import numpy as np
 import pytest
-
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
@@ -39,6 +38,7 @@ from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.image_classification import mnist
 
 from google.protobuf import text_format
+
 
 _TFDS_DIR = utils.tfds_path()
 _DATA_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info")
@@ -463,8 +463,12 @@ def test_file_format_values(tmp_path: pathlib.Path):
     testing.DummyDataset(data_dir=tmp_path, file_format="arrow")
 
 
-def test_dataset_info_from_proto():
-  builder = RandomShapedImageGenerator(data_dir=testing.make_tmp_dir())
+@pytest.fixture(scope="session")
+def generator_builder():
+  return RandomShapedImageGenerator(data_dir=testing.make_tmp_dir())
+
+
+def test_dataset_info_from_proto(generator_builder):  # pylint: disable=redefined-outer-name
   train = dataset_info_pb2.SplitInfo(
       name="train", num_shards=2, shard_lengths=[4, 5]
   )
@@ -477,7 +481,7 @@ def test_dataset_info_from_proto():
   )
   proto = dataset_info_pb2.DatasetInfo(
       name="random_shaped_image_generator",
-      version=str(builder.version),
+      version=str(generator_builder.version),
       features=feature_pb2.Feature(
           python_class_name=(
               "tensorflow_datasets.core.features.features_dict.FeaturesDict"
@@ -488,11 +492,13 @@ def test_dataset_info_from_proto():
       ),
       splits=[train, test],
   )
-  result = dataset_info.DatasetInfo.from_proto(builder=builder, proto=proto)
+  result = dataset_info.DatasetInfo.from_proto(
+      builder=generator_builder, proto=proto
+  )
   assert result.splits["test"].shard_lengths == test.shard_lengths
   assert result.splits["train"].shard_lengths == train.shard_lengths
   assert set(result.features.keys()) == {"text"}
-  assert result.version == builder.version
+  assert result.version == generator_builder.version
 
 
 def test_supervised_keys_from_proto():
