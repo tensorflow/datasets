@@ -15,6 +15,7 @@
 
 """Tests for tensorflow_datasets.core.dataset_utils."""
 
+from etils import enp
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -64,6 +65,10 @@ class DatasetAsNumPyTest(testing.TestCase):
 
     if tf.executing_eagerly():
       self.assertEqual(len(np_ds), 10)
+      self.assertEqual(
+          np_ds.element_spec,
+          enp.ArraySpec(shape=(), dtype=np.int32),
+      )
     else:
       with self.assertRaisesWithPredicateMatch(
           TypeError, "__len__() is not supported for `tfds.as_numpy`"
@@ -86,6 +91,19 @@ class DatasetAsNumPyTest(testing.TestCase):
       self.assertEqual(i + 1, el["b"])
       self.assertEqual(i + 2, el["c"][0])
       self.assertEqual(i + 3, el["c"][1])
+
+    if tf.executing_eagerly():
+      self.assertEqual(
+          np_ds.element_spec,
+          {
+              "a": enp.ArraySpec(shape=(), dtype=np.int32),
+              "b": enp.ArraySpec(shape=(), dtype=np.int32),
+              "c": (
+                  enp.ArraySpec(shape=(), dtype=np.int32),
+                  enp.ArraySpec(shape=(), dtype=np.int32),
+              ),
+          },
+      )
 
   @testing.run_in_graph_and_eager_modes()
   def test_nested_dataset_sequential_access(self):
