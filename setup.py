@@ -63,7 +63,7 @@ REQUIRED_PKGS = [
     'array_record',
     'click',
     'dm-tree',
-    'etils[enp,epath]>=0.9.0',
+    'etils[enp,epath,etree]>=0.9.0',
     'numpy',
     'promise',
     'protobuf>=3.20',

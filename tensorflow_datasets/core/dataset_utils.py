@@ -22,6 +22,8 @@ import functools
 import typing
 from typing import Any, Callable, Iterable, Iterator, Union
 
+from etils import enp
+from etils.etree import nest as etree
 import numpy as np
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import utils
@@ -69,6 +71,11 @@ class _IterableDataset(collections.abc.Iterable):
   def __iter__(self) -> Iterator[NumpyElem]:
     """Calling `iter(ds)` multiple times recreates a new iterator."""
     return self._make_iterator_fn()
+
+  @property
+  def element_spec(self) -> Tree[enp.ArraySpec]:
+    """Numpy version of element-spec."""
+    return etree.spec_like(self._ds.element_spec)
 
 
 def _eager_dataset_iterator(ds: tf.data.Dataset) -> Iterator[NumpyElem]:
