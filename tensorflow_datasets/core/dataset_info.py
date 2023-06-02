@@ -279,7 +279,9 @@ class DatasetInfo(object):
 
   @classmethod
   def from_proto(
-      cls, builder, proto: dataset_info_pb2.DatasetInfo
+      cls,
+      builder,
+      proto: dataset_info_pb2.DatasetInfo,
   ) -> "DatasetInfo":
     """Instantiates DatasetInfo from the given builder and proto."""
     if builder.builder_config:

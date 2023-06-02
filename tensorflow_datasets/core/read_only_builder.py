@@ -67,6 +67,7 @@ class ReadOnlyBuilder(
     self.name = info_proto.name
     self.VERSION = version_lib.Version(info_proto.version)  # pylint: disable=invalid-name
     self.RELEASE_NOTES = info_proto.release_notes or {}  # pylint: disable=invalid-name
+
     if info_proto.module_name:
       # Overwrite the module so documenting `ReadOnlyBuilder` point to the
       # original source code.
@@ -204,7 +205,8 @@ def builder_from_directories(
 
 
 def builder_from_metadata(
-    builder_dir: epath.PathLike, info_proto: dataset_info_pb2.DatasetInfo
+    builder_dir: epath.PathLike,
+    info_proto: dataset_info_pb2.DatasetInfo,
 ) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given metadata.
 
@@ -225,7 +227,10 @@ def builder_from_metadata(
   Returns:
     builder: `tfds.core.DatasetBuilder`, builder for dataset at the given path.
   """
-  return ReadOnlyBuilder(builder_dir=builder_dir, info_proto=info_proto)
+  return ReadOnlyBuilder(
+      builder_dir=builder_dir,
+      info_proto=info_proto,
+  )
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)

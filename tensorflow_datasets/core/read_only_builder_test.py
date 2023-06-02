@@ -42,7 +42,6 @@ from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import file_utils
-
 from google.protobuf import json_format
 
 
@@ -204,12 +203,17 @@ def test_builder_from_directory(code_builder: dataset_builder.DatasetBuilder):
   assert builder.version == builder2.version
 
 
-def test_builder_from_metadata(code_builder: dataset_builder.DatasetBuilder):
-  features = features_dict.FeaturesDict({
+@pytest.fixture(scope='session')
+def dummy_features():
+  return features_dict.FeaturesDict({
       'a': tf.float32,
       'b': tf.string,
   })
-  info_proto = dataset_info_pb2.DatasetInfo(
+
+
+@pytest.fixture(scope='session')
+def dummy_info_proto(dummy_features):  # pylint: disable=redefined-outer-name
+  return dataset_info_pb2.DatasetInfo(
       name='abcd',
       description='efgh',
       config_name='en',
@@ -217,21 +221,30 @@ def test_builder_from_metadata(code_builder: dataset_builder.DatasetBuilder):
       version='0.1.0',
       release_notes={'0.1.0': 'release description'},
       citation='some citation',
-      features=features.to_proto(),
+      features=dummy_features.to_proto(),
   )
+
+
+def test_builder_from_metadata(
+    code_builder: dataset_builder.DatasetBuilder,
+    dummy_features: features_dict.FeaturesDict,
+    dummy_info_proto: dataset_info_pb2.DatasetInfo,
+):
   builder = read_only_builder.builder_from_metadata(
-      code_builder.data_dir, info_proto=info_proto
+      code_builder.data_dir, info_proto=dummy_info_proto
   )
-  assert builder.name == info_proto.name
-  assert builder.info.description == info_proto.description
-  assert builder.info.citation == info_proto.citation
-  assert builder.info.version == info_proto.version
+  assert builder.name == dummy_info_proto.name
+  assert builder.info.description == dummy_info_proto.description
+  assert builder.info.citation == dummy_info_proto.citation
+  assert builder.info.version == dummy_info_proto.version
   assert builder.builder_config
-  assert builder.builder_config.name == info_proto.config_name
-  assert builder.builder_config.version == info_proto.version
-  assert builder.builder_config.description == info_proto.config_description
-  assert builder.builder_config.release_notes == info_proto.release_notes
-  assert str(builder.info.features) == str(features)
+  assert builder.builder_config.name == dummy_info_proto.config_name
+  assert builder.builder_config.version == dummy_info_proto.version
+  assert (
+      builder.builder_config.description == dummy_info_proto.config_description
+  )
+  assert builder.builder_config.release_notes == dummy_info_proto.release_notes
+  assert str(builder.info.features) == str(dummy_features)
 
 
 def test_builder_from_directory_dir_not_exists(tmp_path: pathlib.Path):
