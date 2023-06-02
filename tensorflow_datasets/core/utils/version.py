@@ -190,13 +190,11 @@ def _str_to_version(
 def list_all_versions(root_dir: epath.PathLike) -> List[Version]:
   """Lists all dataset versions present on disk, sorted."""
   root_dir = epath.Path(root_dir)
-  if not root_dir.exists():
-    return []
-
   versions = []
-  for version_dir in root_dir.iterdir():
-    if version_dir.is_file():
-      continue
-    if Version.is_valid(version_dir.name):
-      versions.append(Version(version_dir.name))
+  try:
+    for path in root_dir.iterdir():
+      if Version.is_valid(path.name) and path.is_dir():
+        versions.append(Version(path.name))
+  except OSError:
+    return versions
   return sorted(versions)
