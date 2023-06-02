@@ -973,8 +973,21 @@ def get_dataset_feature_statistics(builder, split):
 
 
 def read_from_json(path: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
-  """Read JSON-formatted proto into DatasetInfo proto."""
-  json_str = epath.Path(path).read_text()
+  """Read JSON-formatted proto into DatasetInfo proto.
+
+  Args:
+    path: the path of the dataset info json file.
+
+  Returns:
+    the DatasetInfo proto.
+
+  Raises:
+    FileNotFoundError: If the builder_dir does not exist.
+  """
+  try:
+    json_str = epath.Path(path).read_text()
+  except OSError as e:
+    raise FileNotFoundError(f"Could not load dataset info from {path}") from e
   # Parse it back into a proto.
   parsed_proto = json_format.Parse(json_str, dataset_info_pb2.DatasetInfo())
   return parsed_proto
@@ -994,14 +1007,8 @@ def read_proto_from_builder_dir(
   Raises:
     FileNotFoundError: If the builder_dir does not exist.
   """
-  info_path = (
-      epath.Path(os.path.expanduser(builder_dir))
-      / constants.DATASET_INFO_FILENAME
-  )
-  if not info_path.exists():
-    raise FileNotFoundError(
-        f"Could not load dataset info: {info_path} does not exist."
-    )
+  builder_dir = epath.Path(builder_dir).expanduser()
+  info_path = builder_dir / constants.DATASET_INFO_FILENAME
   return read_from_json(info_path)
 
 
