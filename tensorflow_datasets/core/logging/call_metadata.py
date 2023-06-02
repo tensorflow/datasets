@@ -14,10 +14,10 @@
 # limitations under the License.
 
 """To associate metadata with TFDS calls."""
+
 import enum
 import threading
 import time
-
 from typing import Dict, Optional, Tuple
 
 # Maps thread_id to "Session ID", if any.
@@ -73,6 +73,7 @@ class CallMetadata:
   # Whether the operation was directly triggered by the user, ie: it is the
   # first operation of the session.
   direct_call: bool
+
 
   def __init__(self):
     self.status = Status.UNKNOWN
