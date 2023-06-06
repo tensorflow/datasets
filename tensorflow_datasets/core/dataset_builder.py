@@ -1153,7 +1153,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       download_config: download.DownloadConfig,
   ) -> download.DownloadManager:
     """Creates a new download manager object."""
-    download_dir = download_dir or self.data_dir_root / "downloads"
+    download_dir = epath.Path(download_dir or self.data_dir_root / "downloads")
     extract_dir = download_config.extract_dir or download_dir / "extracted"
     manual_dir = download_config.manual_dir or download_dir / "manual"
 
