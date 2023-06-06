@@ -29,6 +29,7 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import load as load_lib
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import transform as transform_lib
@@ -224,8 +225,16 @@ class ViewBuilder(
 
   def _src_dataset_builder(self) -> dataset_builder.DatasetBuilder:
     tfds_name = self._src_dataset().tfds_name(include_version=True)
-    data_dir = self._src_dataset().data_dir or self._data_dir_root
-    return load_lib.builder(name=tfds_name, data_dir=data_dir)
+    # First try to load the dataset from the data_dir where this dataset is
+    # downloaded to. If that fails, load it from the default data dir.
+    try:
+      data_dir = self._src_dataset().data_dir or self._data_dir_root
+      builder = load_lib.builder(name=tfds_name, data_dir=data_dir)
+      if builder.is_prepared():
+        return builder
+    except registered.DatasetNotFoundError:
+      pass
+    return load_lib.builder(name=tfds_name)
 
   def _example_transformations(self) -> List[transform_lib.ExampleTransformFn]:
     if self.view_config and self.view_config.ex_transformations:
