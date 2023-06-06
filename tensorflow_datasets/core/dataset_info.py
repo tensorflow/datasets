@@ -563,7 +563,7 @@ class DatasetInfo(object):
     dataset_info_path(dataset_info_dir).write_text(self.as_json)
 
   def read_from_directory(self, dataset_info_dir: epath.PathLike) -> None:
-    """Update DatasetInfo from the JSON files in `dataset_info_dir`.
+    """Update DatasetInfo from the metadata files in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
     hash, time of creation,...) of the DatasetInfo.
