@@ -384,13 +384,37 @@ class DatasetBuilder(registered.RegisteredDataset):
       return self.RELEASE_NOTES
 
   @property
+  def data_dir_root(self) -> epath.Path:
+    """Returns the root directory where all TFDS datasets are stored.
+
+    Note that this is different from `data_dir`, which includes the dataset
+    name, config, and version. For example, if `data_dir` is
+    `/data/tfds/my_dataset/my_config/1.2.3`, then `data_dir_root` is
+    `/data/tfds`.
+
+    Returns:
+      the root directory where all TFDS datasets are stored.
+    """
+    return epath.Path(self._data_dir_root)
+
+  @property
   def data_dir(self) -> str:
+    """Returns the directory where this version + config is stored.
+
+    Note that this is different from `data_dir_root`. For example, if
+    `data_dir_root` is `/data/tfds`, then `data_dir` would be
+    `/data/tfds/my_dataset/my_config/1.2.3`.
+
+    Returns:
+      the directory where this version + config is stored.
+    """
     return self._data_dir
 
   @property
   def data_path(self) -> epath.Path:
+    """Returns the path where this version + config is stored."""
     # Instead, should make `_data_dir` be Path everywhere
-    return epath.Path(self._data_dir)
+    return epath.Path(self.data_dir)
 
   @utils.classproperty
   @classmethod
@@ -506,8 +530,12 @@ class DatasetBuilder(registered.RegisteredDataset):
         namespace=namespace,
         config=config,
         version=self.version,
-        data_dir=epath.Path(self._data_dir_root),
+        data_dir=self.data_dir_root,
     )
+
+  def is_prepared(self) -> bool:
+    """Returns whether this dataset is already downloaded and prepared."""
+    return self.data_path.exists()
 
   @tfds_logging.download_and_prepare()
   def download_and_prepare(
@@ -536,11 +564,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     data_path = self.data_path
     data_exists = data_path.exists()
     if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
-      logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
+      logging.info("Reusing dataset %s (%s)", self.name, self.data_dir)
       return
     elif data_exists and download_config.download_mode == REUSE_CACHE_IF_EXISTS:
       logging.info(
-          "Deleting pre-existing dataset %s (%s)", self.name, self._data_dir
+          "Deleting pre-existing dataset %s (%s)", self.name, self.data_dir
       )
       data_path.rmtree()  # Delete pre-existing data.
       data_exists = data_path.exists()
@@ -597,14 +625,14 @@ class DatasetBuilder(registered.RegisteredDataset):
           "Trying to overwrite an existing dataset {} at {}. A dataset with "
           "the same version {} already exists. If the dataset has changed, "
           "please update the version number.".format(
-              self.name, self._data_dir, self.version
+              self.name, self.data_dir, self.version
           )
       )
 
-    logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
+    logging.info("Generating dataset %s (%s)", self.name, self.data_dir)
     if not utils.has_sufficient_disk_space(
         self.info.dataset_size + self.info.download_size,
-        directory=self._data_dir_root,
+        directory=os.fspath(self.data_dir_root),
     ):
       raise IOError(
           "Not enough disk space. Needed: {} (download: {}, generated: {})"
@@ -640,8 +668,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     if file_format:
       self.info.set_file_format(file_format, override=True)
 
-    # Create a tmp dir and rename to self._data_dir on successful exit.
-    with utils.incomplete_dir(self._data_dir) as tmp_data_dir:
+    # Create a tmp dir and rename to self.data_dir on successful exit.
+    with utils.incomplete_dir(self.data_dir) as tmp_data_dir:
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
@@ -650,9 +678,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         ):
           logging.info(GCS_HOSTED_MSG, self.name)
           gcs_utils.download_gcs_dataset(
-              dataset_name=self.info.full_name, local_dataset_dir=self._data_dir
+              dataset_name=self.info.full_name, local_dataset_dir=self.data_dir
           )
-          self.info.read_from_directory(self._data_dir)
+          self.info.read_from_directory(self.data_dir)
         else:
           self._download_and_prepare(
               dl_manager=dl_manager,
@@ -665,9 +693,9 @@ class DatasetBuilder(registered.RegisteredDataset):
           # when reading from package data.
           self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
-          self.info.write_to_directory(self._data_dir)
+          self.info.write_to_directory(self.data_dir)
       # The generated DatasetInfo contains references to `tmp_data_dir`
-      self.info.update_data_dir(self._data_dir)
+      self.info.update_data_dir(self.data_dir)
 
     # Clean up incomplete files from preempted workers.
     deleted_incomplete_files = []
@@ -816,12 +844,12 @@ class DatasetBuilder(registered.RegisteredDataset):
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
     # pylint: enable=line-too-long
-    if not epath.Path(self._data_dir).exists():
+    if not self.data_path.exists():
       raise AssertionError(
           "Dataset %s: could not find data in %s. Please make sure to call "
           "dataset_builder.download_and_prepare(), or pass download=True to "
           "tfds.load() before trying to access the tf.data.Dataset object."
-          % (self.name, self._data_dir_root)
+          % (self.name, self.data_dir_root)
       )
 
     # By default, return all splits
@@ -1019,7 +1047,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _log_download_done(self) -> None:
     msg = (
-        f"Dataset {self.name} downloaded and prepared to {self._data_dir}. "
+        f"Dataset {self.name} downloaded and prepared to {self.data_dir}. "
         "Subsequent calls will reuse this data."
     )
     termcolor.cprint(msg, attrs=["bold"])
@@ -1034,7 +1062,7 @@ class DatasetBuilder(registered.RegisteredDataset):
             f"(download: {self.info.download_size}, "
             f"generated: {self.info.dataset_size}, "
             f"total: {self.info.download_size + self.info.dataset_size}) "
-            f"to {self._data_dir}..."
+            f"to {self.data_dir}..."
         ),
         attrs=["bold"],
     )
@@ -1121,19 +1149,13 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _make_download_manager(
       self,
-      download_dir,
-      download_config,
+      download_dir: epath.PathLike | None,
+      download_config: download.DownloadConfig,
   ) -> download.DownloadManager:
     """Creates a new download manager object."""
-    download_dir = download_dir or os.path.join(
-        self._data_dir_root, "downloads"
-    )
-    extract_dir = download_config.extract_dir or os.path.join(
-        download_dir, "extracted"
-    )
-    manual_dir = download_config.manual_dir or os.path.join(
-        download_dir, "manual"
-    )
+    download_dir = download_dir or self.data_dir_root / "downloads"
+    extract_dir = download_config.extract_dir or download_dir / "extracted"
+    manual_dir = download_config.manual_dir or download_dir / "manual"
 
     if download_config.register_checksums:
       # Note: Error will be raised here if user try to record checksums
@@ -1305,7 +1327,7 @@ class FileReaderBuilder(DatasetBuilder):
       decoders = decoders  # pylint: disable=self-assigning-variable
 
     reader = reader_lib.Reader(
-        self._data_dir,
+        self.data_dir,
         example_specs=example_specs,
         file_format=self.info.file_format,
     )
