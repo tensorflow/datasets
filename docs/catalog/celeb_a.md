@@ -116,6 +116,9 @@ FeaturesDict({
         'Wearing_Necktie': bool,
         'Young': bool,
     }),
+    'identity': FeaturesDict({
+        'Identity_No': int64,
+    }),
     'image': Image(shape=(218, 178, 3), dtype=uint8),
     'landmarks': FeaturesDict({
         'lefteye_x': int64,
@@ -178,6 +181,8 @@ FeaturesDict({
 | attributes/Wearing_Necklace    | Tensor       |       | bool  |             |
 | attributes/Wearing_Necktie     | Tensor       |       | bool  |             |
 | attributes/Young               | Tensor       |       | bool  |             |
+| identity                       | FeaturesDict |       |       |             |
+| identity/Identity_No           | Tensor       |       | int64 |             |
 | image                          | Image        | (218, | uint8 |             |
 :                                :              : 178,  :       :             :
 :                                :              : 3)    :       :             :
