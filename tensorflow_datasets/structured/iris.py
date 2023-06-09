@@ -19,9 +19,7 @@ import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-IRIS_URL = (
-    "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
-)
+IRIS_URL = "https://archive.ics.uci.edu/static/public/53/iris.zip"
 
 _CITATION = """\
 @misc{Dua:2019 ,
@@ -47,9 +45,10 @@ class Iris(tfds.core.GeneratorBasedBuilder):
   """Iris flower dataset."""
 
   NUM_CLASSES = 3
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("2.1.0")
   RELEASE_NOTES = {
       "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+      "2.1.0": "Updated broken link",
   }
 
   def _info(self):
@@ -70,7 +69,8 @@ class Iris(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    iris_file = dl_manager.download(IRIS_URL)
+    iris_folder = dl_manager.download_and_extract(IRIS_URL)
+    iris_file = iris_folder / "iris.data"
     all_lines = tf.io.gfile.GFile(iris_file).read().splitlines()
     records = [l for l in all_lines if l]  # get rid of empty lines
 
