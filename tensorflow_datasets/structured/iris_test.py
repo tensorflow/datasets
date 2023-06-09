@@ -24,7 +24,7 @@ class IrisTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 15,
   }
-  DL_EXTRACT_RESULT = "iris.data"
+  DL_EXTRACT_RESULT = "iris"
 
 
 if __name__ == "__main__":
