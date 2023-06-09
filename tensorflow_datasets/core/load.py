@@ -877,16 +877,14 @@ def _add_list_builders_context(
   all_datasets = list_builders(with_community_datasets=False)
   all_datasets_str = '\n\t- '.join([''] + all_datasets)
   error_string = f'Available datasets:{all_datasets_str}\n'
-  error_string += textwrap.dedent(
-      """
+  error_string += textwrap.dedent("""
       Check that:
           - if dataset was added recently, it may only be available
             in `tfds-nightly`
           - the dataset name is spelled correctly
           - dataset class defines all base class abstract methods
           - the module defining the dataset class is imported
-      """
-  )
+      """)
 
   # Add close matches
   close_matches = difflib.get_close_matches(str(name), all_datasets, n=1)
