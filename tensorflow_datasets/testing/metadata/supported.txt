@@ -1041,7 +1041,6 @@ imdb_reviews/plain_text/1.0.0
 imdb_reviews/subwords32k/1.0.0
 imdb_reviews/subwords8k/1.0.0
 irc_disentanglement/2.0.0
-iris/2.0.0
 istella/main/1.2.0
 istella/s/1.2.0
 istella/x/1.2.0
