@@ -210,3 +210,20 @@ def test_view_builder_tf_dataset_with_configs_load():
     for example in ds_train:
       assert example["label"] + 10 == example["label_plus_10"]
       assert example["label"] + 2 == example["label_plus_2"]
+
+
+def test_view_builder_lineage():
+  with tfds.testing.tmp_dir() as data_dir:
+    tfds.testing.DummyMnist(data_dir=data_dir).download_and_prepare()
+    _, info = tfds.load(
+        "dummy_mnist_view_dataset_transform",
+        split="train",
+        data_dir=data_dir,
+        with_info=True,
+    )
+    assert len(info.as_proto.data_source_accesses) == 1
+    tfds_dataset = info.as_proto.data_source_accesses[0].tfds_dataset
+    assert tfds_dataset.name == "mnist"
+    assert tfds_dataset.version == "3.0.1"
+    assert not tfds_dataset.config
+    assert not tfds_dataset.ds_namespace

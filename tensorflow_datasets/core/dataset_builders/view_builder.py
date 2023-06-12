@@ -208,15 +208,19 @@ class ViewBuilder(
   # means that some redundant reads are done.
   BEAM_WORKERS_PER_SHARD = 1
 
+  # @property
   @functools.cached_property
   def view_config(self) -> Optional[ViewConfig]:
     if isinstance(self.builder_config, ViewConfig):
       return self.builder_config
     return None
 
+  # @functools.cached_property
+  # @property
   def _src_dataset(self) -> naming.DatasetReference:
-    if self.view_config and self.view_config.input_dataset:
-      return self.view_config.input_dataset
+    view_config = self.view_config
+    if view_config is not None and view_config.input_dataset:
+      return view_config.input_dataset
     elif self.INPUT_DATASET is not None:
       if isinstance(self.INPUT_DATASET, str):
         return naming.DatasetReference.from_tfds_name(self.INPUT_DATASET)
@@ -252,6 +256,7 @@ class ViewBuilder(
       self, dl_manager: download_manager.DownloadManager
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
+    self.info.add_tfds_data_source_access(self._src_dataset())
     builder = self._src_dataset_builder()
     split_generators = {}
     for split, split_info in builder.info.splits.items():
