@@ -437,7 +437,7 @@ class DownloadManager(object):
     if self._register_checksums:
       if not computed_url_info:
         raise ValueError(
-            f'Cannot register checksums for {url}: no computed chechsum. '
+            f'Cannot register checksums for {url}: no computed checksum. '
             '--register_checksums with manually downloaded data not supported.'
         )
       # Note:
