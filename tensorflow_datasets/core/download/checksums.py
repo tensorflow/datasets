@@ -199,7 +199,7 @@ def save_url_infos(
   original_data = load_url_infos(path) if path.exists() else {}
   new_data = original_data.copy()
   new_data.update(url_infos)
-  # Compare filenames separatelly, as filename field is eq=False
+  # Compare filenames separately, as filename field is eq=False
   if original_data == new_data and _filenames_equal(original_data, new_data):
     return
   lines = [

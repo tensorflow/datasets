@@ -16,6 +16,7 @@
 """Wikipedia dataset containing cleaned articles of all languages."""
 
 import bz2
+import dataclasses
 import json
 import re
 
@@ -354,6 +355,10 @@ WIKIPEDIA_LANGUAGES = [
     "zu",
 ]
 
+
+_EMPTY_LANGUAGES = {"20230601": {"aa"}}
+
+
 # Use mirror to avoid download caps.
 _BASE_URL_TMPL = (
     "https://mirror.accum.se/mirror/wikimedia.org/dumps/{lang}wiki/{date}/"
@@ -385,6 +390,25 @@ class WikipediaConfig(tfds.core.BuilderConfig):
     self.language = language
 
 
+@dataclasses.dataclass(frozen=True)
+class WikiPage:
+  id: int
+  title: str
+  text: str
+
+
+def _builder_configs_for(snapshot: str):
+  # We put English as the first language so that it's the default.
+  configs = [WikipediaConfig(language="en", date=snapshot)]
+  for lang in WIKIPEDIA_LANGUAGES:
+    if lang == "en" or "-" in lang:
+      continue
+    if snapshot in _EMPTY_LANGUAGES and lang in _EMPTY_LANGUAGES[snapshot]:
+      continue
+    configs.append(WikipediaConfig(language=lang, date=snapshot))
+  return configs
+
+
 class Wikipedia(tfds.core.BeamBasedBuilder):
   """Wikipedia dataset."""
 
@@ -394,33 +418,14 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
   }
 
   BUILDER_CONFIGS = (
-      [
-          WikipediaConfig(language=lang, date="20230201")
-          for lang in WIKIPEDIA_LANGUAGES
-          if "-" not in lang
-      ]
-      + [
-          WikipediaConfig(language=lang, date="20220620")
-          for lang in WIKIPEDIA_LANGUAGES
-      ]
-      + [
-          # Old versions files do not exists anymore but config are kept as
-          # previously generated datasets can still be read.
-          WikipediaConfig(language=lang, date="20201201")
-          for lang in WIKIPEDIA_LANGUAGES
-      ]
-      + [
-          # Old versions files do not exists anymore but config are kept as
-          # previously generated datasets can still be read.
-          WikipediaConfig(language=lang, date="20200301")
-          for lang in WIKIPEDIA_LANGUAGES
-      ]
-      + [
-          # Old versions files do not exists anymore but config are kept as
-          # previously generated datasets can still be read.
-          WikipediaConfig(language=lang, date="20190301")
-          for lang in WIKIPEDIA_LANGUAGES
-      ]
+      _builder_configs_for("20230601")
+      # Old versions files do not exists anymore but config are kept as
+      # previously generated datasets can still be read.
+      + _builder_configs_for("20230201")
+      + _builder_configs_for("20220620")
+      + _builder_configs_for("20201201")
+      + _builder_configs_for("20200301")
+      + _builder_configs_for("20190301")
   )
 
   def _info(self):
@@ -480,8 +485,9 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
   def _generate_examples(self, filepaths, language):
     """Build PCollection of examples in the raw (text) form."""
-
     beam = tfds.core.lazy_imports.apache_beam
+    mwparserfromhell = tfds.core.lazy_imports.mwparserfromhell
+    mwxml = tfds.core.lazy_imports.mwxml
 
     def _extract_content(filepath):
       """Extracts article content from a single WikiMedia XML file."""
@@ -489,88 +495,106 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       logging.info("generating examples from = %s", filepath)
       with filepath.open("rb") as f:
         f = bz2.BZ2File(filename=f)
-        dump = tfds.core.lazy_imports.mwxml.Dump.from_file(f)
+        dump = mwxml.Dump.from_file(f)
         for page in dump:
+          beam.metrics.Metrics.counter(language, "pages-read").inc()
+          if page is None:
+            continue
           # Filter pages that are not in the "main" namespace.
           if page.namespace != 0:
             continue
+          beam.metrics.Metrics.counter(language, "pages-in-main-read").inc()
 
-          revision = next(iter(page))  # A single revision in dumps.
+          try:
+            revision = next(iter(page))  # A single revision in dumps.
+          except (TypeError, StopIteration):
+            beam.metrics.Metrics.counter(language, "no-revision-error").inc()
+            continue
 
-          # Filter redirects.
-          if revision.text is None or revision.text[:9].lower().startswith(
-              "#redirect"
-          ):
+          if not revision.text:
+            beam.metrics.Metrics.counter(language, "empty-revision-error").inc()
+            continue
+
+          if revision.text[:9].lower().startswith("#redirect"):
             beam.metrics.Metrics.counter(language, "filtered-redirects").inc()
             continue
 
-          beam.metrics.Metrics.counter(language, "extracted-examples").inc()
-          try:
-            text = _parse_and_clean_wikicode(revision.text)
-          except (
-              tfds.core.lazy_imports.mwparserfromhell.parser.ParserError
-          ) as e:
-            beam.metrics.Metrics.counter(language, "parser-error").inc()
-            logging.error("mwparserfromhell ParseError: %s", e)
-            continue
+          yield WikiPage(id=page.id, title=page.title, text=revision.text)
 
-          if not text:
-            beam.metrics.Metrics.counter(language, "empty-clean-examples").inc()
-            continue
+    # Filters for references, tables, and file/image links.
+    re_rm_wikilink = re.compile(
+        "^(?:File|Image|Media):", flags=re.IGNORECASE | re.UNICODE
+    )
 
-          beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
+    def _parse_and_clean_wikicode(raw_content):
+      """Strips formatting and unwanted sections from raw page content."""
+      wikicode = mwparserfromhell.parse(raw_content)
 
-          yield page.id, {
-              "title": page.title.replace("_", " "),
-              "text": revision.text,
-          }
+      def rm_wikilink(obj):
+        return bool(re_rm_wikilink.match(str(obj.title)))  # pytype: disable=wrong-arg-types
 
-    return beam.Create(filepaths) | beam.FlatMap(_extract_content)
+      def rm_tag(obj):
+        return str(obj.tag) in {"ref", "table"}
 
+      def rm_template(obj):
+        return obj.name.lower() in {
+            "reflist",
+            "notelist",
+            "notelist-ua",
+            "notelist-lr",
+            "notelist-ur",
+            "notelist-lg",
+        }
 
-def _parse_and_clean_wikicode(raw_content):
-  """Strips formatting and unwanted sections from raw page content."""
-  wikicode = tfds.core.lazy_imports.mwparserfromhell.parse(raw_content)
+      def try_remove_obj(obj, section):
+        try:
+          section.remove(obj)
+        except ValueError:
+          # For unknown reasons, objects are sometimes not found.
+          pass
 
-  # Filters for references, tables, and file/image links.
-  re_rm_wikilink = re.compile(
-      "^(?:File|Image|Media):", flags=re.IGNORECASE | re.UNICODE
-  )
+      section_text = []
+      # Filter individual sections to clean.
+      for section in wikicode.get_sections(
+          flat=True, include_lead=True, include_headings=True
+      ):
+        for obj in section.ifilter_wikilinks(
+            matches=rm_wikilink, recursive=True
+        ):
+          try_remove_obj(obj, section)
+        for obj in section.ifilter_templates(
+            matches=rm_template, recursive=True
+        ):
+          try_remove_obj(obj, section)
+        for obj in section.ifilter_tags(matches=rm_tag, recursive=True):
+          try_remove_obj(obj, section)
 
-  def rm_wikilink(obj):
-    return bool(re_rm_wikilink.match(str(obj.title)))  # pytype: disable=wrong-arg-types
+        section_text.append(section.strip_code().strip())
+      return "\n\n".join(section_text)
 
-  def rm_tag(obj):
-    return str(obj.tag) in {"ref", "table"}
+    def _parse_page(page: WikiPage):
+      beam.metrics.Metrics.counter(language, "extracted-examples").inc()
+      try:
+        text = _parse_and_clean_wikicode(page.text)
+      except tfds.core.lazy_imports.mwparserfromhell.parser.ParserError as e:
+        beam.metrics.Metrics.counter(language, "parser-error").inc()
+        logging.error("mwparserfromhell ParseError: %s", e)
+        return
 
-  def rm_template(obj):
-    return obj.name.lower() in {
-        "reflist",
-        "notelist",
-        "notelist-ua",
-        "notelist-lr",
-        "notelist-ur",
-        "notelist-lg",
-    }
+      if not text:
+        beam.metrics.Metrics.counter(language, "empty-clean-examples").inc()
+        return
 
-  def try_remove_obj(obj, section):
-    try:
-      section.remove(obj)
-    except ValueError:
-      # For unknown reasons, objects are sometimes not found.
-      pass
+      beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
 
-  section_text = []
-  # Filter individual sections to clean.
-  for section in wikicode.get_sections(
-      flat=True, include_lead=True, include_headings=True
-  ):
-    for obj in section.ifilter_wikilinks(matches=rm_wikilink, recursive=True):
-      try_remove_obj(obj, section)
-    for obj in section.ifilter_templates(matches=rm_template, recursive=True):
-      try_remove_obj(obj, section)
-    for obj in section.ifilter_tags(matches=rm_tag, recursive=True):
-      try_remove_obj(obj, section)
+      yield page.id, {
+          "title": page.title.replace("_", " "),
+          "text": text,
+      }
 
-    section_text.append(section.strip_code().strip())
-  return "\n\n".join(section_text)
+    return (
+        beam.Create(filepaths)
+        | beam.FlatMap(_extract_content)
+        | beam.Reshuffle()
+        | beam.FlatMap(_parse_page)
+    )
