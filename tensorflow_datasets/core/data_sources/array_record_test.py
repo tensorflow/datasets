@@ -94,8 +94,7 @@ def test_data_source_calls_array_record_data_source():
       spec_set=True,
   )
   mock_data_source.__getitem__.side_effect = [
-      ['serialized example1', 'serialized example2'],
-      ['serialized examples'],
+      'serialized example',
   ]
   mock_data_source.__len__.return_value = 42
   with mock.patch.object(
@@ -110,16 +109,11 @@ def test_data_source_calls_array_record_data_source():
     data_source = array_record.ArrayRecordDataSource(
         dataset_info, split='train'
     )
-    assert len(data_source) == 42
-    assert data_source[[0, 12]] == [
-        'deserialized example',
-        'deserialized example',
-    ]
     assert data_source[12] == 'deserialized example'
     deserialize_example_mock.assert_called_with(
-        'serialized examples', decoders=None
+        'serialized example', decoders=None
     )
-    assert deserialize_example_mock.call_count == 3
+    assert deserialize_example_mock.call_count == 1
 
 
 def test_repr_returns_meaningful_string_without_decoders():
@@ -167,8 +161,10 @@ def test_data_source_is_iterable():
     assert len(data_source) == 3
     for _ in data_source:
       continue
-    assert mock_data_source.__getitem__.call_count == 1
-    assert mock_data_source.__getitem__.call_args_list[0].args[0] == range(0, 3)
+    assert mock_data_source.__getitem__.call_count == 3
+    assert mock_data_source.__getitem__.call_args_list[0].args[0] == 0
+    assert mock_data_source.__getitem__.call_args_list[1].args[0] == 1
+    assert mock_data_source.__getitem__.call_args_list[2].args[0] == 2
 
 
 def test_data_source_is_sliceable():
