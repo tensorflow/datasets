@@ -12,6 +12,11 @@
 # `wikipedia`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Wikipedia dataset containing cleaned articles of all languages. The datasets are
@@ -65,7 +70,6507 @@ title   | Text         |       | string |
 ```
 
 
-## wikipedia/20230201.aa (default config)
+## wikipedia/20230601.en (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for en, parsed from 20230601 dump.
+
+*   **Download size**: `20.53 GiB`
+
+*   **Dataset size**: `19.88 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,672,479
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ab <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ab, parsed from 20230601 dump.
+
+*   **Download size**: `3.25 MiB`
+
+*   **Dataset size**: `3.96 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,559
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ace <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ace, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.46 MiB`
+
+*   **Dataset size**: `4.32 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,011
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ady <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ady, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.04 MiB`
+
+*   **Dataset size**: `559.38 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 609
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.af <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for af, parsed from 20230601 dump.
+
+*   **Download size**: `128.42 MiB`
+
+*   **Dataset size**: `216.77 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 132,782
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ak <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ak, parsed from 20230601 dump.
+
+*   **Download size**: `255.26 KiB`
+
+*   **Dataset size**: `153 bytes`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.als <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for als, parsed from 20230601
+    dump.
+
+*   **Download size**: `58.20 MiB`
+
+*   **Dataset size**: `78.05 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,335
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.am <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for am, parsed from 20230601 dump.
+
+*   **Download size**: `8.17 MiB`
+
+*   **Dataset size**: `21.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,847
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.an <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for an, parsed from 20230601 dump.
+
+*   **Download size**: `41.43 MiB`
+
+*   **Dataset size**: `55.22 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 60,634
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ang <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ang, parsed from 20230601
+    dump.
+
+*   **Download size**: `4.78 MiB`
+
+*   **Dataset size**: `2.70 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,026
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ar <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ar, parsed from 20230601 dump.
+
+*   **Download size**: `1.52 GiB`
+
+*   **Dataset size**: `2.93 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,237,839
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.arc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for arc, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.16 MiB`
+
+*   **Dataset size**: `885.92 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,704
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.arz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for arz, parsed from 20230601
+    dump.
+
+*   **Download size**: `232.11 MiB`
+
+*   **Dataset size**: `1.19 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,635,653
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.as <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for as, parsed from 20230601 dump.
+
+*   **Download size**: `35.49 MiB`
+
+*   **Dataset size**: `81.79 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 12,041
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ast <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ast, parsed from 20230601
+    dump.
+
+*   **Download size**: `222.42 MiB`
+
+*   **Dataset size**: `455.49 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 148,016
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.atj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for atj, parsed from 20230601
+    dump.
+
+*   **Download size**: `718.23 KiB`
+
+*   **Dataset size**: `957.72 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,965
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.av <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for av, parsed from 20230601 dump.
+
+*   **Download size**: `8.17 MiB`
+
+*   **Dataset size**: `5.82 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,976
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ay <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ay, parsed from 20230601 dump.
+
+*   **Download size**: `2.50 MiB`
+
+*   **Dataset size**: `4.26 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,453
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.az <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for az, parsed from 20230601 dump.
+
+*   **Download size**: `249.24 MiB`
+
+*   **Dataset size**: `408.29 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 231,404
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.azb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for azb, parsed from 20230601
+    dump.
+
+*   **Download size**: `100.21 MiB`
+
+*   **Dataset size**: `162.59 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 271,703
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ba <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ba, parsed from 20230601 dump.
+
+*   **Download size**: `97.34 MiB`
+
+*   **Dataset size**: `280.42 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 70,618
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bar <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bar, parsed from 20230601
+    dump.
+
+*   **Download size**: `34.64 MiB`
+
+*   **Dataset size**: `35.56 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 41,136
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bcl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bcl, parsed from 20230601
+    dump.
+
+*   **Download size**: `16.95 MiB`
+
+*   **Dataset size**: `17.41 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,940
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.be <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for be, parsed from 20230601 dump.
+
+*   **Download size**: `268.64 MiB`
+
+*   **Dataset size**: `568.27 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 231,631
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bg, parsed from 20230601 dump.
+
+*   **Download size**: `417.03 MiB`
+
+*   **Dataset size**: `1.02 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 421,120
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bh, parsed from 20230601 dump.
+
+*   **Download size**: `17.60 MiB`
+
+*   **Dataset size**: `14.83 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,446
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bi, parsed from 20230601 dump.
+
+*   **Download size**: `627.92 KiB`
+
+*   **Dataset size**: `362.13 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,543
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bjn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bjn, parsed from 20230601
+    dump.
+
+*   **Download size**: `6.10 MiB`
+
+*   **Dataset size**: `6.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,912
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bm, parsed from 20230601 dump.
+
+*   **Download size**: `763.34 KiB`
+
+*   **Dataset size**: `455.91 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,221
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bn, parsed from 20230601 dump.
+
+*   **Download size**: `340.26 MiB`
+
+*   **Dataset size**: `889.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 226,385
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bo, parsed from 20230601 dump.
+
+*   **Download size**: `14.15 MiB`
+
+*   **Dataset size**: `123.96 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 12,435
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bpy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bpy, parsed from 20230601
+    dump.
+
+*   **Download size**: `5.38 MiB`
+
+*   **Dataset size**: `37.74 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 25,699
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.br <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for br, parsed from 20230601 dump.
+
+*   **Download size**: `57.99 MiB`
+
+*   **Dataset size**: `81.19 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 92,433
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bs, parsed from 20230601 dump.
+
+*   **Download size**: `146.44 MiB`
+
+*   **Dataset size**: `191.33 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 205,927
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bug <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bug, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.10 MiB`
+
+*   **Dataset size**: `2.94 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 16,120
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.bxr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for bxr, parsed from 20230601
+    dump.
+
+*   **Download size**: `5.13 MiB`
+
+*   **Dataset size**: `6.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,601
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ca <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ca, parsed from 20230601 dump.
+
+*   **Download size**: `1.11 GiB`
+
+*   **Dataset size**: `1.81 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 851,793
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.cdo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for cdo, parsed from 20230601
+    dump.
+
+*   **Download size**: `5.27 MiB`
+
+*   **Dataset size**: `4.32 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 17,671
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ce <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ce, parsed from 20230601 dump.
+
+*   **Download size**: `93.21 MiB`
+
+*   **Dataset size**: `649.56 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 603,356
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ceb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ceb, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.04 GiB`
+
+*   **Dataset size**: `4.10 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,124,071
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ch <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ch, parsed from 20230601 dump.
+
+*   **Download size**: `768.73 KiB`
+
+*   **Dataset size**: `182.82 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 573
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.cho <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for cho, parsed from 20230601
+    dump.
+
+*   **Download size**: `27.65 KiB`
+
+*   **Dataset size**: `7.44 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 14
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.chr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for chr, parsed from 20230601
+    dump.
+
+*   **Download size**: `727.82 KiB`
+
+*   **Dataset size**: `689.03 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,114
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.chy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for chy, parsed from 20230601
+    dump.
+
+*   **Download size**: `388.58 KiB`
+
+*   **Dataset size**: `121.07 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 801
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ckb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ckb, parsed from 20230601
+    dump.
+
+*   **Download size**: `52.62 MiB`
+
+*   **Dataset size**: `94.99 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 60,761
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.co <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for co, parsed from 20230601 dump.
+
+*   **Download size**: `5.26 MiB`
+
+*   **Dataset size**: `7.64 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,491
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.cr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for cr, parsed from 20230601 dump.
+
+*   **Download size**: `317.96 KiB`
+
+*   **Dataset size**: `39.74 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 182
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.crh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for crh, parsed from 20230601
+    dump.
+
+*   **Download size**: `8.44 MiB`
+
+*   **Dataset size**: `7.98 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 25,647
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.cs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for cs, parsed from 20230601 dump.
+
+*   **Download size**: `1.04 GiB`
+
+*   **Dataset size**: `1.46 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 693,228
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.csb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for csb, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.36 MiB`
+
+*   **Dataset size**: `3.58 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,846
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.cu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for cu, parsed from 20230601 dump.
+
+*   **Download size**: `802.56 KiB`
+
+*   **Dataset size**: `1.01 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,307
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.cv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for cv, parsed from 20230601 dump.
+
+*   **Download size**: `34.06 MiB`
+
+*   **Dataset size**: `75.23 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 56,342
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.cy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for cy, parsed from 20230601 dump.
+
+*   **Download size**: `123.06 MiB`
+
+*   **Dataset size**: `298.92 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 324,367
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.da <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for da, parsed from 20230601 dump.
+
+*   **Download size**: `404.99 MiB`
+
+*   **Dataset size**: `519.15 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 291,814
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.de <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for de, parsed from 20230601 dump.
+
+*   **Download size**: `6.50 GiB`
+
+*   **Dataset size**: `9.00 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,703,022
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.din <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for din, parsed from 20230601
+    dump.
+
+*   **Download size**: `570.67 KiB`
+
+*   **Dataset size**: `534.96 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 506
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.diq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for diq, parsed from 20230601
+    dump.
+
+*   **Download size**: `12.13 MiB`
+
+*   **Dataset size**: `18.18 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 43,859
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.dsb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for dsb, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.90 MiB`
+
+*   **Dataset size**: `3.21 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,604
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.dty <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for dty, parsed from 20230601
+    dump.
+
+*   **Download size**: `7.20 MiB`
+
+*   **Dataset size**: `6.32 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,629
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.dv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for dv, parsed from 20230601 dump.
+
+*   **Download size**: `4.70 MiB`
+
+*   **Dataset size**: `12.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,347
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.dz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for dz, parsed from 20230601 dump.
+
+*   **Download size**: `1.14 MiB`
+
+*   **Dataset size**: `7.98 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 778
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ee <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ee, parsed from 20230601 dump.
+
+*   **Download size**: `780.39 KiB`
+
+*   **Dataset size**: `795.50 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,165
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.el <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for el, parsed from 20230601 dump.
+
+*   **Download size**: `493.25 MiB`
+
+*   **Dataset size**: `1.23 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 307,672
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.eml <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for eml, parsed from 20230601
+    dump.
+
+*   **Download size**: `9.46 MiB`
+
+*   **Dataset size**: `3.37 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,249
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.eo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for eo, parsed from 20230601 dump.
+
+*   **Download size**: `334.95 MiB`
+
+*   **Dataset size**: `500.92 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 471,532
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.es <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for es, parsed from 20230601 dump.
+
+*   **Download size**: `4.05 GiB`
+
+*   **Dataset size**: `5.67 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,267,500
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.et <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for et, parsed from 20230601 dump.
+
+*   **Download size**: `261.00 MiB`
+
+*   **Dataset size**: `423.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 370,007
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.eu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for eu, parsed from 20230601 dump.
+
+*   **Download size**: `287.57 MiB`
+
+*   **Dataset size**: `533.18 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 524,083
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ext <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ext, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.05 MiB`
+
+*   **Dataset size**: `3.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,034
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.fa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for fa, parsed from 20230601 dump.
+
+*   **Download size**: `1.09 GiB`
+
+*   **Dataset size**: `1.89 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,786,413
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ff <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ff, parsed from 20230601 dump.
+
+*   **Download size**: `1.35 MiB`
+
+*   **Dataset size**: `1.31 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,484
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.fi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for fi, parsed from 20230601 dump.
+
+*   **Download size**: `872.65 MiB`
+
+*   **Dataset size**: `1.07 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 762,166
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.fj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for fj, parsed from 20230601 dump.
+
+*   **Download size**: `1010.29 KiB`
+
+*   **Dataset size**: `558.58 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,283
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.fo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for fo, parsed from 20230601 dump.
+
+*   **Download size**: `15.18 MiB`
+
+*   **Dataset size**: `14.46 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,954
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.fr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for fr, parsed from 20230601 dump.
+
+*   **Download size**: `5.64 GiB`
+
+*   **Dataset size**: `7.44 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,527,241
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.frp <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for frp, parsed from 20230601
+    dump.
+
+*   **Download size**: `4.31 MiB`
+
+*   **Dataset size**: `3.67 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,011
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.frr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for frr, parsed from 20230601
+    dump.
+
+*   **Download size**: `13.09 MiB`
+
+*   **Dataset size**: `10.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 19,586
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.fur <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for fur, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.70 MiB`
+
+*   **Dataset size**: `3.87 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,243
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.fy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for fy, parsed from 20230601 dump.
+
+*   **Download size**: `67.61 MiB`
+
+*   **Dataset size**: `125.68 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 51,517
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ga <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ga, parsed from 20230601 dump.
+
+*   **Download size**: `36.02 MiB`
+
+*   **Dataset size**: `57.47 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 68,254
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gag <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gag, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.21 MiB`
+
+*   **Dataset size**: `2.31 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,135
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gan <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gan, parsed from 20230601
+    dump.
+
+*   **Download size**: `4.44 MiB`
+
+*   **Dataset size**: `2.53 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,786
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gd, parsed from 20230601 dump.
+
+*   **Download size**: `9.64 MiB`
+
+*   **Dataset size**: `13.53 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 16,021
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gl, parsed from 20230601 dump.
+
+*   **Download size**: `320.32 MiB`
+
+*   **Dataset size**: `473.58 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 270,549
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.glk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for glk, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.89 MiB`
+
+*   **Dataset size**: `5.64 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,430
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gn, parsed from 20230601 dump.
+
+*   **Download size**: `4.86 MiB`
+
+*   **Dataset size**: `6.48 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,503
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gom <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gom, parsed from 20230601
+    dump.
+
+*   **Download size**: `6.87 MiB`
+
+*   **Dataset size**: `29.14 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,253
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gor <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gor, parsed from 20230601
+    dump.
+
+*   **Download size**: `4.07 MiB`
+
+*   **Dataset size**: `5.36 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,680
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.got <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for got, parsed from 20230601
+    dump.
+
+*   **Download size**: `761.65 KiB`
+
+*   **Dataset size**: `1.38 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,005
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gu, parsed from 20230601 dump.
+
+*   **Download size**: `33.01 MiB`
+
+*   **Dataset size**: `113.11 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 30,360
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.gv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for gv, parsed from 20230601 dump.
+
+*   **Download size**: `7.25 MiB`
+
+*   **Dataset size**: `5.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,955
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ha <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ha, parsed from 20230601 dump.
+
+*   **Download size**: `32.30 MiB`
+
+*   **Dataset size**: `59.46 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 27,905
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.hak <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for hak, parsed from 20230601
+    dump.
+
+*   **Download size**: `4.45 MiB`
+
+*   **Dataset size**: `4.21 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 12,928
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.haw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for haw, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.24 MiB`
+
+*   **Dataset size**: `1.55 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,880
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.he <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for he, parsed from 20230601 dump.
+
+*   **Download size**: `864.64 MiB`
+
+*   **Dataset size**: `1.80 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 527,620
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.hi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for hi, parsed from 20230601 dump.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.hif <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for hif, parsed from 20230601
+    dump.
+
+*   **Download size**: `6.30 MiB`
+
+*   **Dataset size**: `5.23 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,976
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ho <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ho, parsed from 20230601 dump.
+
+*   **Download size**: `19.90 KiB`
+
+*   **Dataset size**: `3.27 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.hr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for hr, parsed from 20230601 dump.
+
+*   **Download size**: `306.78 MiB`
+
+*   **Dataset size**: `424.24 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 252,345
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.hsb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for hsb, parsed from 20230601
+    dump.
+
+*   **Download size**: `11.23 MiB`
+
+*   **Dataset size**: `15.13 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,283
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ht <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ht, parsed from 20230601 dump.
+
+*   **Download size**: `20.15 MiB`
+
+*   **Dataset size**: `51.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 69,781
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.hu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for hu, parsed from 20230601 dump.
+
+*   **Download size**: `1.02 GiB`
+
+*   **Dataset size**: `1.41 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 736,016
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.hy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for hy, parsed from 20230601 dump.
+
+*   **Download size**: `419.70 MiB`
+
+*   **Dataset size**: `1.09 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 654,410
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ia <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ia, parsed from 20230601 dump.
+
+*   **Download size**: `10.88 MiB`
+
+*   **Dataset size**: `14.90 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 27,940
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.id <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for id, parsed from 20230601 dump.
+
+*   **Download size**: `872.37 MiB`
+
+*   **Dataset size**: `1.05 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,233,100
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ie <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ie, parsed from 20230601 dump.
+
+*   **Download size**: `3.58 MiB`
+
+*   **Dataset size**: `5.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 11,706
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ig <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ig, parsed from 20230601 dump.
+
+*   **Download size**: `23.43 MiB`
+
+*   **Dataset size**: `43.08 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 18,388
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ii <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ii, parsed from 20230601 dump.
+
+*   **Download size**: `32.57 KiB`
+
+*   **Dataset size**: `8.31 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 14
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ik <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ik, parsed from 20230601 dump.
+
+*   **Download size**: `347.67 KiB`
+
+*   **Dataset size**: `168.51 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 823
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ilo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ilo, parsed from 20230601
+    dump.
+
+*   **Download size**: `18.80 MiB`
+
+*   **Dataset size**: `15.96 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,380
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.inh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for inh, parsed from 20230601
+    dump.
+
+*   **Download size**: `5.04 MiB`
+
+*   **Dataset size**: `2.62 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,511
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.io <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for io, parsed from 20230601 dump.
+
+*   **Download size**: `17.23 MiB`
+
+*   **Dataset size**: `35.74 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 40,808
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.is <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for is, parsed from 20230601 dump.
+
+*   **Download size**: `55.73 MiB`
+
+*   **Dataset size**: `84.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 82,205
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.it <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for it, parsed from 20230601 dump.
+
+*   **Download size**: `3.49 GiB`
+
+*   **Dataset size**: `4.48 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,226,602
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.iu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for iu, parsed from 20230601 dump.
+
+*   **Download size**: `377.69 KiB`
+
+*   **Dataset size**: `241.49 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 565
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ja <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ja, parsed from 20230601 dump.
+
+*   **Download size**: `3.74 GiB`
+
+*   **Dataset size**: `6.44 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,714,906
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.jam <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for jam, parsed from 20230601
+    dump.
+
+*   **Download size**: `976.34 KiB`
+
+*   **Dataset size**: `1.05 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,772
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.jbo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for jbo, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.26 MiB`
+
+*   **Dataset size**: `2.39 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,390
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.jv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for jv, parsed from 20230601 dump.
+
+*   **Download size**: `56.17 MiB`
+
+*   **Dataset size**: `67.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 92,994
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ka <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ka, parsed from 20230601 dump.
+
+*   **Download size**: `191.35 MiB`
+
+*   **Dataset size**: `660.52 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 209,358
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kaa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kaa, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.89 MiB`
+
+*   **Dataset size**: `4.36 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,034
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kab <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kab, parsed from 20230601
+    dump.
+
+*   **Download size**: `4.18 MiB`
+
+*   **Dataset size**: `4.15 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,801
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kbd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kbd, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.78 MiB`
+
+*   **Dataset size**: `2.81 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,638
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kbp <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kbp, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.44 MiB`
+
+*   **Dataset size**: `3.41 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,918
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kg, parsed from 20230601 dump.
+
+*   **Download size**: `571.71 KiB`
+
+*   **Dataset size**: `431.03 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,334
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ki <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ki, parsed from 20230601 dump.
+
+*   **Download size**: `484.40 KiB`
+
+*   **Dataset size**: `407.56 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,635
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kj, parsed from 20230601 dump.
+
+*   **Download size**: `18.15 KiB`
+
+*   **Dataset size**: `4.93 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kk, parsed from 20230601 dump.
+
+*   **Download size**: `134.04 MiB`
+
+*   **Dataset size**: `452.13 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 277,834
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kl, parsed from 20230601 dump.
+
+*   **Download size**: `577.84 KiB`
+
+*   **Dataset size**: `308.00 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 298
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.km <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for km, parsed from 20230601 dump.
+
+*   **Download size**: `26.16 MiB`
+
+*   **Dataset size**: `97.70 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,778
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kn, parsed from 20230601 dump.
+
+*   **Download size**: `87.92 MiB`
+
+*   **Dataset size**: `375.49 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 30,814
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ko <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ko, parsed from 20230601 dump.
+
+*   **Download size**: `933.11 MiB`
+
+*   **Dataset size**: `1.33 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,364,337
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.koi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for koi, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.50 MiB`
+
+*   **Dataset size**: `4.77 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,962
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.krc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for krc, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.32 MiB`
+
+*   **Dataset size**: `4.39 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,371
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ks <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ks, parsed from 20230601 dump.
+
+*   **Download size**: `3.87 MiB`
+
+*   **Dataset size**: `2.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,060
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ksh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ksh, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.40 MiB`
+
+*   **Dataset size**: `3.01 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,480
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ku <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ku, parsed from 20230601 dump.
+
+*   **Download size**: `31.56 MiB`
+
+*   **Dataset size**: `40.79 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 73,438
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kv, parsed from 20230601 dump.
+
+*   **Download size**: `3.96 MiB`
+
+*   **Dataset size**: `8.82 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,973
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.kw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for kw, parsed from 20230601 dump.
+
+*   **Download size**: `4.12 MiB`
+
+*   **Dataset size**: `4.49 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,557
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ky <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ky, parsed from 20230601 dump.
+
+*   **Download size**: `37.64 MiB`
+
+*   **Dataset size**: `154.64 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 80,599
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.la <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for la, parsed from 20230601 dump.
+
+*   **Download size**: `98.26 MiB`
+
+*   **Dataset size**: `138.85 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 137,858
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lad <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lad, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.59 MiB`
+
+*   **Dataset size**: `4.76 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,978
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lb, parsed from 20230601 dump.
+
+*   **Download size**: `53.34 MiB`
+
+*   **Dataset size**: `84.30 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 68,921
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lbe <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lbe, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.86 MiB`
+
+*   **Dataset size**: `713.86 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,636
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lez <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lez, parsed from 20230601
+    dump.
+
+*   **Download size**: `6.23 MiB`
+
+*   **Dataset size**: `9.26 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,083
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lfn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lfn, parsed from 20230601
+    dump.
+
+*   **Download size**: `4.13 MiB`
+
+*   **Dataset size**: `8.38 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,807
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lg, parsed from 20230601 dump.
+
+*   **Download size**: `3.66 MiB`
+
+*   **Dataset size**: `6.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,017
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.li <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for li, parsed from 20230601 dump.
+
+*   **Download size**: `16.24 MiB`
+
+*   **Dataset size**: `28.32 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 16,969
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lij <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lij, parsed from 20230601
+    dump.
+
+*   **Download size**: `7.59 MiB`
+
+*   **Dataset size**: `10.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 12,463
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lmo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lmo, parsed from 20230601
+    dump.
+
+*   **Download size**: `26.99 MiB`
+
+*   **Dataset size**: `39.10 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 80,175
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ln <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ln, parsed from 20230601 dump.
+
+*   **Download size**: `2.18 MiB`
+
+*   **Dataset size**: `1.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,517
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lo, parsed from 20230601 dump.
+
+*   **Download size**: `6.24 MiB`
+
+*   **Dataset size**: `13.59 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,929
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lrc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lrc, parsed from 20230601
+    dump.
+
+*   **Download size**: `24.67 KiB`
+
+*   **Dataset size**: `107 bytes`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lt, parsed from 20230601 dump.
+
+*   **Download size**: `214.45 MiB`
+
+*   **Dataset size**: `318.46 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 242,917
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ltg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ltg, parsed from 20230601
+    dump.
+
+*   **Download size**: `957.25 KiB`
+
+*   **Dataset size**: `876.27 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,044
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.lv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for lv, parsed from 20230601 dump.
+
+*   **Download size**: `173.29 MiB`
+
+*   **Dataset size**: `212.63 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 120,514
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mai <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mai, parsed from 20230601
+    dump.
+
+*   **Download size**: `12.47 MiB`
+
+*   **Dataset size**: `19.14 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,104
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mdf <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mdf, parsed from 20230601
+    dump.
+
+*   **Download size**: `8.84 MiB`
+
+*   **Dataset size**: `3.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,060
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mg, parsed from 20230601 dump.
+
+*   **Download size**: `30.74 MiB`
+
+*   **Dataset size**: `70.06 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 134,110
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mh, parsed from 20230601 dump.
+
+*   **Download size**: `29.30 KiB`
+
+*   **Dataset size**: `11.04 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mhr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mhr, parsed from 20230601
+    dump.
+
+*   **Download size**: `6.86 MiB`
+
+*   **Dataset size**: `17.88 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,173
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mi, parsed from 20230601 dump.
+
+*   **Download size**: `2.50 MiB`
+
+*   **Dataset size**: `3.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,855
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.min <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for min, parsed from 20230601
+    dump.
+
+*   **Download size**: `36.43 MiB`
+
+*   **Dataset size**: `106.59 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 231,064
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mk, parsed from 20230601 dump.
+
+*   **Download size**: `223.27 MiB`
+
+*   **Dataset size**: `611.37 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 182,674
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ml <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ml, parsed from 20230601 dump.
+
+*   **Download size**: `176.68 MiB`
+
+*   **Dataset size**: `466.46 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 153,341
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mn, parsed from 20230601 dump.
+
+*   **Download size**: `38.06 MiB`
+
+*   **Dataset size**: `84.79 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 26,747
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mr, parsed from 20230601 dump.
+
+*   **Download size**: `77.14 MiB`
+
+*   **Dataset size**: `244.72 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 156,544
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mrj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mrj, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.52 MiB`
+
+*   **Dataset size**: `8.34 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,828
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ms <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ms, parsed from 20230601 dump.
+
+*   **Download size**: `304.62 MiB`
+
+*   **Dataset size**: `389.80 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 416,348
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mt, parsed from 20230601 dump.
+
+*   **Download size**: `15.11 MiB`
+
+*   **Dataset size**: `25.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,825
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mus <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mus, parsed from 20230601
+    dump.
+
+*   **Download size**: `15.76 KiB`
+
+*   **Dataset size**: `875 bytes`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mwl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mwl, parsed from 20230601
+    dump.
+
+*   **Download size**: `9.43 MiB`
+
+*   **Dataset size**: `18.72 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,785
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.my <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for my, parsed from 20230601 dump.
+
+*   **Download size**: `60.15 MiB`
+
+*   **Dataset size**: `275.29 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 108,796
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.myv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for myv, parsed from 20230601
+    dump.
+
+*   **Download size**: `11.54 MiB`
+
+*   **Dataset size**: `10.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,821
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.mzn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for mzn, parsed from 20230601
+    dump.
+
+*   **Download size**: `8.84 MiB`
+
+*   **Dataset size**: `13.54 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 22,374
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.na <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for na, parsed from 20230601 dump.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nah <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nah, parsed from 20230601
+    dump.
+
+*   **Download size**: `4.50 MiB`
+
+*   **Dataset size**: `2.88 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,903
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nap <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nap, parsed from 20230601
+    dump.
+
+*   **Download size**: `5.54 MiB`
+
+*   **Dataset size**: `6.08 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,440
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nds <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nds, parsed from 20230601
+    dump.
+
+*   **Download size**: `43.78 MiB`
+
+*   **Dataset size**: `88.33 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 92,151
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ne <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ne, parsed from 20230601 dump.
+
+*   **Download size**: `43.64 MiB`
+
+*   **Dataset size**: `98.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,040
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.new <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for new, parsed from 20230601
+    dump.
+
+*   **Download size**: `16.04 MiB`
+
+*   **Dataset size**: `140.54 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 73,006
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ng <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ng, parsed from 20230601 dump.
+
+*   **Download size**: `92.88 KiB`
+
+*   **Dataset size**: `66.12 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 21
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nl, parsed from 20230601 dump.
+
+*   **Download size**: `1.73 GiB`
+
+*   **Dataset size**: `2.45 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,651,793
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nn, parsed from 20230601 dump.
+
+*   **Download size**: `157.18 MiB`
+
+*   **Dataset size**: `231.37 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 244,587
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.no <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for no, parsed from 20230601 dump.
+
+*   **Download size**: `742.29 MiB`
+
+*   **Dataset size**: `1008.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 941,304
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nov <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nov, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.26 MiB`
+
+*   **Dataset size**: `850.19 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,627
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nrm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nrm, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.01 MiB`
+
+*   **Dataset size**: `2.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,891
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nso <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nso, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.97 MiB`
+
+*   **Dataset size**: `2.50 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,620
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.nv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for nv, parsed from 20230601 dump.
+
+*   **Download size**: `5.72 MiB`
+
+*   **Dataset size**: `13.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 22,219
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ny <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ny, parsed from 20230601 dump.
+
+*   **Download size**: `2.44 MiB`
+
+*   **Dataset size**: `1.59 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,133
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.oc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for oc, parsed from 20230601 dump.
+
+*   **Download size**: `79.06 MiB`
+
+*   **Dataset size**: `114.46 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 99,037
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.olo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for olo, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.31 MiB`
+
+*   **Dataset size**: `2.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,222
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.om <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for om, parsed from 20230601 dump.
+
+*   **Download size**: `1.84 MiB`
+
+*   **Dataset size**: `2.89 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,574
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.or <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for or, parsed from 20230601 dump.
+
+*   **Download size**: `33.23 MiB`
+
+*   **Dataset size**: `68.75 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,711
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.os <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for os, parsed from 20230601 dump.
+
+*   **Download size**: `15.45 MiB`
+
+*   **Dataset size**: `11.90 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 19,999
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pa, parsed from 20230601 dump.
+
+*   **Download size**: `73.51 MiB`
+
+*   **Dataset size**: `194.67 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 59,842
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pag <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pag, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.55 MiB`
+
+*   **Dataset size**: `1.23 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,638
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pam <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pam, parsed from 20230601
+    dump.
+
+*   **Download size**: `9.54 MiB`
+
+*   **Dataset size**: `7.77 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,935
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pap <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pap, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.68 MiB`
+
+*   **Dataset size**: `3.44 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,238
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pcd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pcd, parsed from 20230601
+    dump.
+
+*   **Download size**: `5.44 MiB`
+
+*   **Dataset size**: `5.42 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,645
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pdc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pdc, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.26 MiB`
+
+*   **Dataset size**: `1.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,508
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pfl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pfl, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.73 MiB`
+
+*   **Dataset size**: `3.60 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,986
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pi, parsed from 20230601 dump.
+
+*   **Download size**: `833.50 KiB`
+
+*   **Dataset size**: `968.65 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,061
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pih <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pih, parsed from 20230601
+    dump.
+
+*   **Download size**: `958.98 KiB`
+
+*   **Dataset size**: `355.87 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 930
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pl, parsed from 20230601 dump.
+
+*   **Download size**: `2.28 GiB`
+
+*   **Dataset size**: `2.75 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,959,303
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pms <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pms, parsed from 20230601
+    dump.
+
+*   **Download size**: `14.70 MiB`
+
+*   **Dataset size**: `31.87 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 69,200
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pnb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pnb, parsed from 20230601
+    dump.
+
+*   **Download size**: `100.48 MiB`
+
+*   **Dataset size**: `284.16 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 82,359
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pnt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pnt, parsed from 20230601
+    dump.
+
+*   **Download size**: `609.76 KiB`
+
+*   **Dataset size**: `647.97 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 551
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ps <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ps, parsed from 20230601 dump.
+
+*   **Download size**: `41.25 MiB`
+
+*   **Dataset size**: `98.23 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 19,604
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.pt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for pt, parsed from 20230601 dump.
+
+*   **Download size**: `2.08 GiB`
+
+*   **Dataset size**: `2.57 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,582,349
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.qu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for qu, parsed from 20230601 dump.
+
+*   **Download size**: `13.60 MiB`
+
+*   **Dataset size**: `16.90 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,180
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.rm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for rm, parsed from 20230601 dump.
+
+*   **Download size**: `7.27 MiB`
+
+*   **Dataset size**: `17.24 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,939
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.rmy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for rmy, parsed from 20230601
+    dump.
+
+*   **Download size**: `649.92 KiB`
+
+*   **Dataset size**: `470.20 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 930
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.rn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for rn, parsed from 20230601 dump.
+
+*   **Download size**: `938.15 KiB`
+
+*   **Dataset size**: `494.18 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 805
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ro <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ro, parsed from 20230601 dump.
+
+*   **Download size**: `618.85 MiB`
+
+*   **Dataset size**: `795.10 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 440,494
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ru <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ru, parsed from 20230601 dump.
+
+*   **Download size**: `4.87 GiB`
+
+*   **Dataset size**: `9.52 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,171,747
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.rue <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for rue, parsed from 20230601
+    dump.
+
+*   **Download size**: `6.84 MiB`
+
+*   **Dataset size**: `12.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,414
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.rw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for rw, parsed from 20230601 dump.
+
+*   **Download size**: `7.47 MiB`
+
+*   **Dataset size**: `10.29 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,434
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sa, parsed from 20230601 dump.
+
+*   **Download size**: `16.99 MiB`
+
+*   **Dataset size**: `67.07 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 22,844
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sah <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sah, parsed from 20230601
+    dump.
+
+*   **Download size**: `16.35 MiB`
+
+*   **Dataset size**: `44.89 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 19,362
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sat <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sat, parsed from 20230601
+    dump.
+
+*   **Download size**: `14.50 MiB`
+
+*   **Dataset size**: `32.48 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,264
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sc, parsed from 20230601 dump.
+
+*   **Download size**: `7.66 MiB`
+
+*   **Dataset size**: `11.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,542
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.scn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for scn, parsed from 20230601
+    dump.
+
+*   **Download size**: `12.35 MiB`
+
+*   **Dataset size**: `16.80 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 31,656
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sco <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sco, parsed from 20230601
+    dump.
+
+*   **Download size**: `54.04 MiB`
+
+*   **Dataset size**: `42.39 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 36,210
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sd, parsed from 20230601 dump.
+
+*   **Download size**: `19.99 MiB`
+
+*   **Dataset size**: `34.99 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 22,577
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.se <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for se, parsed from 20230601 dump.
+
+*   **Download size**: `4.04 MiB`
+
+*   **Dataset size**: `3.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,738
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sg, parsed from 20230601 dump.
+
+*   **Download size**: `391.07 KiB`
+
+*   **Dataset size**: `116.56 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 548
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sh, parsed from 20230601 dump.
+
+*   **Download size**: `436.58 MiB`
+
+*   **Dataset size**: `834.05 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,942,887
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.si <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for si, parsed from 20230601 dump.
+
+*   **Download size**: `51.31 MiB`
+
+*   **Dataset size**: `129.54 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,762
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.simple <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for simple, parsed from 20230601
+    dump.
+
+*   **Download size**: `263.29 MiB`
+
+*   **Dataset size**: `267.22 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 231,282
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sk, parsed from 20230601 dump.
+
+*   **Download size**: `305.04 MiB`
+
+*   **Dataset size**: `393.08 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 266,385
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sl, parsed from 20230601 dump.
+
+*   **Download size**: `282.01 MiB`
+
+*   **Dataset size**: `430.47 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 221,104
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sm, parsed from 20230601 dump.
+
+*   **Download size**: `971.49 KiB`
+
+*   **Dataset size**: `846.60 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,144
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sn, parsed from 20230601 dump.
+
+*   **Download size**: `4.86 MiB`
+
+*   **Dataset size**: `8.67 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,924
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.so <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for so, parsed from 20230601 dump.
+
+*   **Download size**: `12.37 MiB`
+
+*   **Dataset size**: `14.00 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,830
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sq, parsed from 20230601 dump.
+
+*   **Download size**: `115.08 MiB`
+
+*   **Dataset size**: `189.84 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 126,441
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sr, parsed from 20230601 dump.
+
+*   **Download size**: `956.10 MiB`
+
+*   **Dataset size**: `1.85 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,183,435
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.srn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for srn, parsed from 20230601
+    dump.
+
+*   **Download size**: `684.53 KiB`
+
+*   **Dataset size**: `634.11 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,295
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ss <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ss, parsed from 20230601 dump.
+
+*   **Download size**: `1.01 MiB`
+
+*   **Dataset size**: `826.41 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 720
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.st <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for st, parsed from 20230601 dump.
+
+*   **Download size**: `2.37 MiB`
+
+*   **Dataset size**: `884.77 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,073
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.stq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for stq, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.63 MiB`
+
+*   **Dataset size**: `4.84 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,596
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.su <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for su, parsed from 20230601 dump.
+
+*   **Download size**: `28.99 MiB`
+
+*   **Dataset size**: `44.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 68,415
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sv, parsed from 20230601 dump.
+
+*   **Download size**: `1.47 GiB`
+
+*   **Dataset size**: `2.11 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,314,124
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.sw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for sw, parsed from 20230601 dump.
+
+*   **Download size**: `44.71 MiB`
+
+*   **Dataset size**: `68.59 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 77,340
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.szl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for szl, parsed from 20230601
+    dump.
+
+*   **Download size**: `13.90 MiB`
+
+*   **Dataset size**: `19.16 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 57,960
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ta <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ta, parsed from 20230601 dump.
+
+*   **Download size**: `205.59 MiB`
+
+*   **Dataset size**: `743.92 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 188,878
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tcy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tcy, parsed from 20230601
+    dump.
+
+*   **Download size**: `5.38 MiB`
+
+*   **Dataset size**: `11.28 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,177
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.te <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for te, parsed from 20230601 dump.
+
+*   **Download size**: `138.71 MiB`
+
+*   **Dataset size**: `670.19 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 112,186
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tet <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tet, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.40 MiB`
+
+*   **Dataset size**: `1.39 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,499
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tg, parsed from 20230601 dump.
+
+*   **Download size**: `52.40 MiB`
+
+*   **Dataset size**: `131.82 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 121,808
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.th <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for th, parsed from 20230601 dump.
+
+*   **Download size**: `368.24 MiB`
+
+*   **Dataset size**: `958.28 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 288,381
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ti <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ti, parsed from 20230601 dump.
+
+*   **Download size**: `893.44 KiB`
+
+*   **Dataset size**: `625.02 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 433
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tk, parsed from 20230601 dump.
+
+*   **Download size**: `6.42 MiB`
+
+*   **Dataset size**: `11.93 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,838
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tl, parsed from 20230601 dump.
+
+*   **Download size**: `72.37 MiB`
+
+*   **Dataset size**: `78.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 44,818
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tn, parsed from 20230601 dump.
+
+*   **Download size**: `2.67 MiB`
+
+*   **Dataset size**: `3.38 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,162
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.to <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for to, parsed from 20230601 dump.
+
+*   **Download size**: `947.73 KiB`
+
+*   **Dataset size**: `998.04 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,848
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tpi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tpi, parsed from 20230601
+    dump.
+
+*   **Download size**: `1.53 MiB`
+
+*   **Dataset size**: `421.04 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,390
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tr, parsed from 20230601 dump.
+
+*   **Download size**: `826.83 MiB`
+
+*   **Dataset size**: `951.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 796,137
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ts <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ts, parsed from 20230601 dump.
+
+*   **Download size**: `1.83 MiB`
+
+*   **Dataset size**: `808.68 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 771
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tt, parsed from 20230601 dump.
+
+*   **Download size**: `116.89 MiB`
+
+*   **Dataset size**: `622.23 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 545,625
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tum <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tum, parsed from 20230601
+    dump.
+
+*   **Download size**: `12.19 MiB`
+
+*   **Dataset size**: `7.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,169
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tw, parsed from 20230601 dump.
+
+*   **Download size**: `4.09 MiB`
+
+*   **Dataset size**: `6.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,610
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ty <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ty, parsed from 20230601 dump.
+
+*   **Download size**: `603.73 KiB`
+
+*   **Dataset size**: `299.14 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,349
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.tyv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for tyv, parsed from 20230601
+    dump.
+
+*   **Download size**: `5.38 MiB`
+
+*   **Dataset size**: `13.24 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,179
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.udm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for udm, parsed from 20230601
+    dump.
+
+*   **Download size**: `3.97 MiB`
+
+*   **Dataset size**: `6.58 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,967
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ug <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ug, parsed from 20230601 dump.
+
+*   **Download size**: `8.70 MiB`
+
+*   **Dataset size**: `39.40 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,575
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.uk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for uk, parsed from 20230601 dump.
+
+*   **Download size**: `2.04 GiB`
+
+*   **Dataset size**: `4.54 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,943,992
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ur <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ur, parsed from 20230601 dump.
+
+*   **Download size**: `219.05 MiB`
+
+*   **Dataset size**: `388.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 389,321
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.uz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for uz, parsed from 20230601 dump.
+
+*   **Download size**: `243.85 MiB`
+
+*   **Dataset size**: `365.50 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 366,942
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.ve <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for ve, parsed from 20230601 dump.
+
+*   **Download size**: `351.96 KiB`
+
+*   **Dataset size**: `323.14 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 836
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.vec <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for vec, parsed from 20230601
+    dump.
+
+*   **Download size**: `27.83 MiB`
+
+*   **Dataset size**: `35.37 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 78,401
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.vep <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for vep, parsed from 20230601
+    dump.
+
+*   **Download size**: `8.47 MiB`
+
+*   **Dataset size**: `11.02 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,397
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.vi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for vi, parsed from 20230601 dump.
+
+*   **Download size**: `941.06 MiB`
+
+*   **Dataset size**: `1.49 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,521,735
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.vls <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for vls, parsed from 20230601
+    dump.
+
+*   **Download size**: `7.50 MiB`
+
+*   **Dataset size**: `10.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,303
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.vo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for vo, parsed from 20230601 dump.
+
+*   **Download size**: `12.62 MiB`
+
+*   **Dataset size**: `17.83 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,641
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.wa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for wa, parsed from 20230601 dump.
+
+*   **Download size**: `7.77 MiB`
+
+*   **Dataset size**: `11.34 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 11,872
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.war <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for war, parsed from 20230601
+    dump.
+
+*   **Download size**: `265.28 MiB`
+
+*   **Dataset size**: `413.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,266,240
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.wo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for wo, parsed from 20230601 dump.
+
+*   **Download size**: `2.09 MiB`
+
+*   **Dataset size**: `3.33 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,719
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.wuu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for wuu, parsed from 20230601
+    dump.
+
+*   **Download size**: `16.54 MiB`
+
+*   **Dataset size**: `21.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 46,554
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.xal <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for xal, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.09 MiB`
+
+*   **Dataset size**: `1.24 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,825
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.xh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for xh, parsed from 20230601 dump.
+
+*   **Download size**: `1.97 MiB`
+
+*   **Dataset size**: `2.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,602
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.xmf <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for xmf, parsed from 20230601
+    dump.
+
+*   **Download size**: `13.42 MiB`
+
+*   **Dataset size**: `34.69 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 21,496
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.yi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for yi, parsed from 20230601 dump.
+
+*   **Download size**: `13.27 MiB`
+
+*   **Dataset size**: `35.12 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 26,070
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.yo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for yo, parsed from 20230601 dump.
+
+*   **Download size**: `17.19 MiB`
+
+*   **Dataset size**: `16.26 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,183
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.za <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for za, parsed from 20230601 dump.
+
+*   **Download size**: `1.15 MiB`
+
+*   **Dataset size**: `1.20 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,189
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.zea <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for zea, parsed from 20230601
+    dump.
+
+*   **Download size**: `2.95 MiB`
+
+*   **Dataset size**: `4.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,045
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.zh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for zh, parsed from 20230601 dump.
+
+*   **Download size**: `2.62 GiB`
+
+*   **Dataset size**: `2.52 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,935,042
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230601.zu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Wikipedia dataset for zu, parsed from 20230601 dump.
+
+*   **Download size**: `5.18 MiB`
+
+*   **Dataset size**: `6.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 11,381
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## wikipedia/20230201.en
+
+*   **Config description**: Wikipedia dataset for en, parsed from 20230201 dump.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20230201.en-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## wikipedia/20230201.aa
 
 *   **Config description**: Wikipedia dataset for aa, parsed from 20230201 dump.
 
@@ -90,18 +6595,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ab, parsed from 20230201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.65 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.90 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,502
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -145,18 +6651,19 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Wikipedia dataset for ace, parsed from 20230201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.44 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.31 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,991
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -308,18 +6815,19 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Wikipedia dataset for ak, parsed from 20230201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `670.43 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `850.62 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 739
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -417,18 +6925,19 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Wikipedia dataset for am, parsed from 20230201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `8.05 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `21.56 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,741
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3457,60 +9966,6 @@ Split | Examples
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
 const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20230201.eml-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
-## wikipedia/20230201.en
-
-*   **Config description**: Wikipedia dataset for en, parsed from 20230201 dump.
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20230201.en-1.0.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -9546,6 +16001,28 @@ Split | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
+## wikipedia/20220620.en
+
+*   **Config description**: Wikipedia dataset for en, parsed from 20220620 dump.
+
+*   **Download size**: `19.50 GiB`
+
+*   **Dataset size**: `19.14 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,525,137
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
+
 ## wikipedia/20220620.aa
 
 *   **Config description**: Wikipedia dataset for aa, parsed from 20220620 dump.
@@ -10040,29 +16517,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20220620.bat-smg
-
-*   **Config description**: Wikipedia dataset for bat-smg, parsed from 20220620
-    dump.
-
-*   **Download size**: `5.05 MiB`
-
-*   **Dataset size**: `6.80 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 20,196
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20220620.bcl
 
 *   **Config description**: Wikipedia dataset for bcl, parsed from 20220620
@@ -10103,29 +16557,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 219,500
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20220620.be-x-old
-
-*   **Config description**: Wikipedia dataset for be-x-old, parsed from 20220620
-    dump.
-
-*   **Download size**: `96.33 MiB`
-
-*   **Dataset size**: `213.09 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 113,278
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -10416,29 +16847,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 807,863
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20220620.cbk-zam
-
-*   **Config description**: Wikipedia dataset for cbk-zam, parsed from 20220620
-    dump.
-
-*   **Download size**: `3.35 MiB`
-
-*   **Dataset size**: `2.82 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 4,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11051,28 +17459,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20220620.en
-
-*   **Config description**: Wikipedia dataset for en, parsed from 20220620 dump.
-
-*   **Download size**: `19.50 GiB`
-
-*   **Dataset size**: `19.14 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 6,525,137
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20220620.eo
 
 *   **Config description**: Wikipedia dataset for eo, parsed from 20220620 dump.
@@ -11245,29 +17631,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 732,779
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20220620.fiu-vro
-
-*   **Config description**: Wikipedia dataset for fiu-vro, parsed from 20220620
-    dump.
-
-*   **Download size**: `2.58 MiB`
-
-*   **Dataset size**: `4.11 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 7,222
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -13176,29 +19539,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20220620.map-bms
-
-*   **Config description**: Wikipedia dataset for map-bms, parsed from 20220620
-    dump.
-
-*   **Download size**: `4.80 MiB`
-
-*   **Dataset size**: `4.67 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 14,128
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20220620.mdf
 
 *   **Config description**: Wikipedia dataset for mdf, parsed from 20220620
@@ -13689,29 +20029,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 91,692
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20220620.nds-nl
-
-*   **Config description**: Wikipedia dataset for nds-nl, parsed from 20220620
-    dump.
-
-*   **Download size**: `8.36 MiB`
-
-*   **Dataset size**: `12.60 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 11,453
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -14520,52 +20837,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 431,837
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20220620.roa-rup
-
-*   **Config description**: Wikipedia dataset for roa-rup, parsed from 20220620
-    dump.
-
-*   **Download size**: `1.09 MiB`
-
-*   **Dataset size**: `1.18 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,336
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20220620.roa-tara
-
-*   **Config description**: Wikipedia dataset for roa-tara, parsed from 20220620
-    dump.
-
-*   **Download size**: `6.41 MiB`
-
-*   **Dataset size**: `6.68 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,400
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -16178,75 +22449,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20220620.zh-classical
-
-*   **Config description**: Wikipedia dataset for zh-classical, parsed from
-    20220620 dump.
-
-*   **Download size**: `15.29 MiB`
-
-*   **Dataset size**: `11.16 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 13,639
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20220620.zh-min-nan
-
-*   **Config description**: Wikipedia dataset for zh-min-nan, parsed from
-    20220620 dump.
-
-*   **Download size**: `75.95 MiB`
-
-*   **Dataset size**: `131.62 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 449,458
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20220620.zh-yue
-
-*   **Config description**: Wikipedia dataset for zh-yue, parsed from 20220620
-    dump.
-
-*   **Download size**: `88.38 MiB`
-
-*   **Dataset size**: `89.70 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 124,159
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20220620.zu
 
 *   **Config description**: Wikipedia dataset for zu, parsed from 20220620 dump.
@@ -16264,6 +22466,28 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 10,839
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
+
+## wikipedia/20201201.en
+
+*   **Config description**: Wikipedia dataset for en, parsed from 20201201 dump.
+
+*   **Download size**: `17.70 GiB`
+
+*   **Dataset size**: `17.76 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,210,110
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -16763,29 +22987,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20201201.bat-smg
-
-*   **Config description**: Wikipedia dataset for bat-smg, parsed from 20201201
-    dump.
-
-*   **Download size**: `4.91 MiB`
-
-*   **Dataset size**: `6.68 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 19,779
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20201201.bcl
 
 *   **Config description**: Wikipedia dataset for bcl, parsed from 20201201
@@ -16826,29 +23027,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 198,957
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20201201.be-x-old
-
-*   **Config description**: Wikipedia dataset for be-x-old, parsed from 20201201
-    dump.
-
-*   **Download size**: `84.30 MiB`
-
-*   **Dataset size**: `187.21 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 103,888
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -17139,29 +23317,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 740,415
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20201201.cbk-zam
-
-*   **Config description**: Wikipedia dataset for cbk-zam, parsed from 20201201
-    dump.
-
-*   **Download size**: `3.37 MiB`
-
-*   **Dataset size**: `3.23 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 4,479
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -17774,28 +23929,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20201201.en
-
-*   **Config description**: Wikipedia dataset for en, parsed from 20201201 dump.
-
-*   **Download size**: `17.70 GiB`
-
-*   **Dataset size**: `17.76 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 6,210,110
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20201201.eo
 
 *   **Config description**: Wikipedia dataset for eo, parsed from 20201201 dump.
@@ -17968,29 +24101,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 682,734
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20201201.fiu-vro
-
-*   **Config description**: Wikipedia dataset for fiu-vro, parsed from 20201201
-    dump.
-
-*   **Download size**: `2.16 MiB`
-
-*   **Dataset size**: `3.46 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 6,266
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -19899,29 +26009,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20201201.map-bms
-
-*   **Config description**: Wikipedia dataset for map-bms, parsed from 20201201
-    dump.
-
-*   **Download size**: `4.65 MiB`
-
-*   **Dataset size**: `4.67 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 13,882
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20201201.mdf
 
 *   **Config description**: Wikipedia dataset for mdf, parsed from 20201201
@@ -20412,29 +26499,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 87,896
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20201201.nds-nl
-
-*   **Config description**: Wikipedia dataset for nds-nl, parsed from 20201201
-    dump.
-
-*   **Download size**: `7.29 MiB`
-
-*   **Dataset size**: `11.39 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,429
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -21243,52 +27307,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 414,477
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20201201.roa-rup
-
-*   **Config description**: Wikipedia dataset for roa-rup, parsed from 20201201
-    dump.
-
-*   **Download size**: `1002.33 KiB`
-
-*   **Dataset size**: `1.11 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,260
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20201201.roa-tara
-
-*   **Config description**: Wikipedia dataset for roa-tara, parsed from 20201201
-    dump.
-
-*   **Download size**: `6.20 MiB`
-
-*   **Dataset size**: `6.37 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,375
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -22901,75 +28919,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20201201.zh-classical
-
-*   **Config description**: Wikipedia dataset for zh-classical, parsed from
-    20201201 dump.
-
-*   **Download size**: `14.89 MiB`
-
-*   **Dataset size**: `10.27 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,237
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20201201.zh-min-nan
-
-*   **Config description**: Wikipedia dataset for zh-min-nan, parsed from
-    20201201 dump.
-
-*   **Download size**: `73.64 MiB`
-
-*   **Dataset size**: `130.73 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 448,229
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20201201.zh-yue
-
-*   **Config description**: Wikipedia dataset for zh-yue, parsed from 20201201
-    dump.
-
-*   **Download size**: `67.14 MiB`
-
-*   **Dataset size**: `71.77 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 103,834
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20201201.zu
 
 *   **Config description**: Wikipedia dataset for zu, parsed from 20201201 dump.
@@ -22987,6 +28936,28 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 5,359
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
+
+## wikipedia/20200301.en
+
+*   **Config description**: Wikipedia dataset for en, parsed from 20200301 dump.
+
+*   **Download size**: `16.73 GiB`
+
+*   **Dataset size**: `17.05 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,033,151
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -23486,29 +29457,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20200301.bat-smg
-
-*   **Config description**: Wikipedia dataset for bat-smg, parsed from 20200301
-    dump.
-
-*   **Download size**: `4.82 MiB`
-
-*   **Dataset size**: `6.63 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 19,665
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20200301.bcl
 
 *   **Config description**: Wikipedia dataset for bcl, parsed from 20200301
@@ -23549,29 +29497,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 185,758
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20200301.be-x-old
-
-*   **Config description**: Wikipedia dataset for be-x-old, parsed from 20200301
-    dump.
-
-*   **Download size**: `79.73 MiB`
-
-*   **Dataset size**: `178.12 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 99,513
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -23862,29 +29787,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 698,894
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20200301.cbk-zam
-
-*   **Config description**: Wikipedia dataset for cbk-zam, parsed from 20200301
-    dump.
-
-*   **Download size**: `1.86 MiB`
-
-*   **Dataset size**: `2.94 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 3,366
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -24497,28 +30399,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20200301.en
-
-*   **Config description**: Wikipedia dataset for en, parsed from 20200301 dump.
-
-*   **Download size**: `16.73 GiB`
-
-*   **Dataset size**: `17.05 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 6,033,151
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20200301.eo
 
 *   **Config description**: Wikipedia dataset for eo, parsed from 20200301 dump.
@@ -24691,29 +30571,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 656,462
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20200301.fiu-vro
-
-*   **Config description**: Wikipedia dataset for fiu-vro, parsed from 20200301
-    dump.
-
-*   **Download size**: `2.06 MiB`
-
-*   **Dataset size**: `3.41 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 6,132
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -26622,29 +32479,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20200301.map-bms
-
-*   **Config description**: Wikipedia dataset for map-bms, parsed from 20200301
-    dump.
-
-*   **Download size**: `4.55 MiB`
-
-*   **Dataset size**: `4.60 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 13,680
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20200301.mdf
 
 *   **Config description**: Wikipedia dataset for mdf, parsed from 20200301
@@ -27135,29 +32969,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 65,024
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20200301.nds-nl
-
-*   **Config description**: Wikipedia dataset for nds-nl, parsed from 20200301
-    dump.
-
-*   **Download size**: `6.92 MiB`
-
-*   **Dataset size**: `10.86 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 8,976
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -27966,52 +33777,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 405,150
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20200301.roa-rup
-
-*   **Config description**: Wikipedia dataset for roa-rup, parsed from 20200301
-    dump.
-
-*   **Download size**: `963.66 KiB`
-
-*   **Dataset size**: `1.11 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,253
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20200301.roa-tara
-
-*   **Config description**: Wikipedia dataset for roa-tara, parsed from 20200301
-    dump.
-
-*   **Download size**: `5.98 MiB`
-
-*   **Dataset size**: `6.17 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,297
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -29624,75 +35389,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20200301.zh-classical
-
-*   **Config description**: Wikipedia dataset for zh-classical, parsed from
-    20200301 dump.
-
-*   **Download size**: `14.44 MiB`
-
-*   **Dataset size**: `9.97 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 11,897
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20200301.zh-min-nan
-
-*   **Config description**: Wikipedia dataset for zh-min-nan, parsed from
-    20200301 dump.
-
-*   **Download size**: `55.69 MiB`
-
-*   **Dataset size**: `79.40 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 280,886
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20200301.zh-yue
-
-*   **Config description**: Wikipedia dataset for zh-yue, parsed from 20200301
-    dump.
-
-*   **Download size**: `57.83 MiB`
-
-*   **Dataset size**: `61.20 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 77,025
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20200301.zu
 
 *   **Config description**: Wikipedia dataset for zu, parsed from 20200301 dump.
@@ -29710,6 +35406,28 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 1,562
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
+
+## wikipedia/20190301.en
+
+*   **Config description**: Wikipedia dataset for en, parsed from 20190301 dump.
+
+*   **Download size**: `15.72 GiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,824,596
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -30209,29 +35927,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20190301.bat-smg
-
-*   **Config description**: Wikipedia dataset for bat-smg, parsed from 20190301
-    dump.
-
-*   **Download size**: `4.61 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 19,344
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20190301.bcl
 
 *   **Config description**: Wikipedia dataset for bcl, parsed from 20190301
@@ -30272,29 +35967,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 164,589
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.be-x-old
-
-*   **Config description**: Wikipedia dataset for be-x-old, parsed from 20190301
-    dump.
-
-*   **Download size**: `74.77 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 93,527
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -30585,29 +36257,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 650,189
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.cbk-zam
-
-*   **Config description**: Wikipedia dataset for cbk-zam, parsed from 20190301
-    dump.
-
-*   **Download size**: `1.84 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 3,289
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -31220,28 +36869,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20190301.en
-
-*   **Config description**: Wikipedia dataset for en, parsed from 20190301 dump.
-
-*   **Download size**: `15.72 GiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 5,824,596
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20190301.eo
 
 *   **Config description**: Wikipedia dataset for eo, parsed from 20190301 dump.
@@ -31414,29 +37041,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 619,207
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.fiu-vro
-
-*   **Config description**: Wikipedia dataset for fiu-vro, parsed from 20190301
-    dump.
-
-*   **Download size**: `2.00 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 6,050
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -33345,29 +38949,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
-## wikipedia/20190301.map-bms
-
-*   **Config description**: Wikipedia dataset for map-bms, parsed from 20190301
-    dump.
-
-*   **Download size**: `4.49 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 13,710
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## wikipedia/20190301.mdf
 
 *   **Config description**: Wikipedia dataset for mdf, parsed from 20190301
@@ -33858,29 +39439,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 45,754
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.nds-nl
-
-*   **Config description**: Wikipedia dataset for nds-nl, parsed from 20190301
-    dump.
-
-*   **Download size**: `6.67 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 8,644
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -34689,52 +40247,6 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 393,012
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.roa-rup
-
-*   **Config description**: Wikipedia dataset for roa-rup, parsed from 20190301
-    dump.
-
-*   **Download size**: `931.23 KiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,245
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.roa-tara
-
-*   **Config description**: Wikipedia dataset for roa-tara, parsed from 20190301
-    dump.
-
-*   **Download size**: `5.98 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,288
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -36342,75 +41854,6 @@ Split     | Examples
 Split     | Examples
 :-------- | --------:
 `'train'` | 1,482,100
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.zh-classical
-
-*   **Config description**: Wikipedia dataset for zh-classical, parsed from
-    20190301 dump.
-
-*   **Download size**: `13.37 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 10,173
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.zh-min-nan
-
-*   **Config description**: Wikipedia dataset for zh-min-nan, parsed from
-    20190301 dump.
-
-*   **Download size**: `50.30 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 233,720
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## wikipedia/20190301.zh-yue
-
-*   **Config description**: Wikipedia dataset for zh-yue, parsed from 20190301
-    dump.
-
-*   **Download size**: `52.41 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 70,666
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
