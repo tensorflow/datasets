@@ -3175,6 +3175,7 @@ https://mirror.accum.se/mirror/wikimedia.org/dumps/arwiki/20230601/arwiki-202306
 https://mirror.accum.se/mirror/wikimedia.org/dumps/arwiki/20230601/dumpstatus.json	55794	69ac0213d562d6a0f20b0753a45077bee01fadef061ad2404aa3bea25ad8dc9c	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/arzwiki/20230201/arzwiki-20230201-pages-articles-multistream.xml.bz2	236917696	74c797a83a5d786ecf09d472cee040e51f57a78e303a834197a2b999a0fbce17	arzwiki-20230201-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/arzwiki/20230201/dumpstatus.json	11677	3000466a9a178c6e98cccab7b4aa9457217b63cbc7fa27c745aef725dfc61139	dumpstatus.json
+https://mirror.accum.se/mirror/wikimedia.org/dumps/arzwiki/20230601/arzwiki-20230601-pages-articles-multistream.xml.bz2	243372594	03b6df68e236a7cbe0bf13f600ac7276dd47e9bb7fae232cd5015c65c7cc9fbd	arzwiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/arzwiki/20230601/dumpstatus.json	11676	c0daac3b3c23f69aadf5ccc4f7c3022e2f904134e1f75f39c6305f8a6ba6b53a	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/astwiki/20230201/astwiki-20230201-pages-articles-multistream.xml.bz2	232463020	6389d57180e83304ee761089bb8304b4e2228c65f2e1909f712b45795e9d8bad	astwiki-20230201-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/astwiki/20230201/dumpstatus.json	11656	ff0ecad2e573260a5b638731b0f4e5ac1ecba394422a406b830e7d0312b9f533	dumpstatus.json
@@ -3182,6 +3183,8 @@ https://mirror.accum.se/mirror/wikimedia.org/dumps/astwiki/20230601/astwiki-2023
 https://mirror.accum.se/mirror/wikimedia.org/dumps/astwiki/20230601/dumpstatus.json	11656	f8e8671e484cb39d8a76e1ecdcb391465999f6ca6230080d97fcc63941d091d6	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/aswiki/20230201/aswiki-20230201-pages-articles-multistream.xml.bz2	35299485	9008fa297a87b9e862b3600208ab787a4e77ffc117aab5f72529cde8bc211873	aswiki-20230201-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/aswiki/20230201/dumpstatus.json	11518	35c778b74f8b557fc25f4400adc323dec53fd203ede5f1eb2a51d990ecdf7b56	dumpstatus.json
+https://mirror.accum.se/mirror/wikimedia.org/dumps/aswiki/20230601/aswiki-20230601-pages-articles-multistream.xml.bz2	37198699	d5d80d8e513a31b2909dfa1254c5ff65dbce1da2d71b0d96cc69db47ca1b6fca	aswiki-20230601-pages-articles-multistream.xml.bz2
+https://mirror.accum.se/mirror/wikimedia.org/dumps/aswiki/20230601/dumpstatus.json	11518	33f8f34d032f85fcae7c5d61249d2dbe7e7fd6bf0e8e4a19dcd3b0188cc5f96a	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/atjwiki/20230201/atjwiki-20230201-pages-articles-multistream.xml.bz2	710674	9b4383ed3507bbfe65b4ec335e5451444e4e6f4e5488f1912c44f61de9202490	atjwiki-20230201-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/atjwiki/20230201/dumpstatus.json	11589	4ac685cb5b9df469bebfde0caed7c74398dec5f776cc1532bbb6ce97b3676d52	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/atjwiki/20230601/atjwiki-20230601-pages-articles-multistream.xml.bz2	723878	55cd719f87dfebbbc8e8964d1eda38868959ced8edf805ed5e9c7399b34f2fde	atjwiki-20230601-pages-articles-multistream.xml.bz2
@@ -3635,8 +3638,12 @@ https://mirror.accum.se/mirror/wikimedia.org/dumps/fywiki/20230601/dumpstatus.js
 https://mirror.accum.se/mirror/wikimedia.org/dumps/fywiki/20230601/fywiki-20230601-pages-articles-multistream.xml.bz2	70882435	ef1ba354952466bbdcadf2ca2301188f425be0bb51a3538be6ae4d3ea05ec708	fywiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/gagwiki/20230201/dumpstatus.json	11603	35e858853b35e86812bc2ebed0894659003868e217977a391a09e8f9fbbe44bf	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/gagwiki/20230201/gagwiki-20230201-pages-articles-multistream.xml.bz2	2300208	05032001944580d4dd34fa813c92ce4183a693e9a5eb82b96560113593baad15	gagwiki-20230201-pages-articles-multistream.xml.bz2
+https://mirror.accum.se/mirror/wikimedia.org/dumps/gagwiki/20230601/dumpstatus.json	11603	94307ddcfddc619ca94d346f9417a5496a52b62dc0f31dd49a0dd21a61e79d16	dumpstatus.json
+https://mirror.accum.se/mirror/wikimedia.org/dumps/gagwiki/20230601/gagwiki-20230601-pages-articles-multistream.xml.bz2	2304249	6ecc68cb9fa2d8be8f1e8ad106bd03009f29c983a62a54152400ae4b88a94dc6	gagwiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/ganwiki/20230201/dumpstatus.json	11614	207b79257fbc8847113fc8f4725130bc933ec1e957abf19930e974acfcce8e31	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/ganwiki/20230201/ganwiki-20230201-pages-articles-multistream.xml.bz2	4613951	8fbbfc0af5be49639c106eb58247b85d778555fd0669551f975c0b3b01b8577f	ganwiki-20230201-pages-articles-multistream.xml.bz2
+https://mirror.accum.se/mirror/wikimedia.org/dumps/ganwiki/20230601/dumpstatus.json	11615	f5dbc4c12a67ab442d8423bcc85384aaef4d3d7b4d6c1295afe10b2a380e79dd	dumpstatus.json
+https://mirror.accum.se/mirror/wikimedia.org/dumps/ganwiki/20230601/ganwiki-20230601-pages-articles-multistream.xml.bz2	4642642	0cd5d6b558139b74f80c2713b7905c3e29b13ee9358187722f4a22177b05c81c	ganwiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/gawiki/20230201/dumpstatus.json	11526	282c12e071cb01436c69f99113ccb8f4fc206ecbed970fd439868dcc48e945a4	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/gawiki/20230201/gawiki-20230201-pages-articles-multistream.xml.bz2	36776288	8fc1be97faad740372665e5d2bf8ef492cb0a040eab492f7ae8519beb7099e92	gawiki-20230201-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/gawiki/20230601/dumpstatus.json	11527	75427a3d08d9ca04b124c809e020216956534fec32ad190230e6f1cd489096ca	dumpstatus.json
@@ -3915,6 +3922,8 @@ https://mirror.accum.se/mirror/wikimedia.org/dumps/kshwiki/20230601/dumpstatus.j
 https://mirror.accum.se/mirror/wikimedia.org/dumps/kshwiki/20230601/kshwiki-20230601-pages-articles-multistream.xml.bz2	3552567	030837cdf8cc88f69104226488828b5268254e73a60a385b3e0c6e835931be40	kshwiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/kswiki/20230201/dumpstatus.json	11492	3ed7bf4eee811f452d8c6f46f398e44d7dfea82513e2d44d6312e2aff1a758ba	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/kswiki/20230201/kswiki-20230201-pages-articles-multistream.xml.bz2	3463529	dcc08a1fc2a5c741d7fcb2006b80b0f2bbf093a8250a532eebe2f869c7357009	kswiki-20230201-pages-articles-multistream.xml.bz2
+https://mirror.accum.se/mirror/wikimedia.org/dumps/kswiki/20230601/dumpstatus.json	11493	c763613f479425caf3bda0377db7a08cfdda6148332d658763907e4c93da3810	dumpstatus.json
+https://mirror.accum.se/mirror/wikimedia.org/dumps/kswiki/20230601/kswiki-20230601-pages-articles-multistream.xml.bz2	4047537	142343d255f9076f1c743a3bf4e7ce6d0ceddc0c4238af60c43d43471b28a060	kswiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/kuwiki/20230201/dumpstatus.json	11521	c9f76dcb61a36b5891d5ebc7814e6687b40631adfe1384ed9d60db88925a07aa	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/kuwiki/20230201/kuwiki-20230201-pages-articles-multistream.xml.bz2	32290250	6470ab2d857c2efdd2e6e58e444d120c436f6815b0b1bb0f0fffdedebaea2de2	kuwiki-20230201-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/kuwiki/20230601/dumpstatus.json	11521	c38ce8c7928b471eabb32067065c301ea6fb5cb67d2dfb2f105b3a84aa4e2143	dumpstatus.json
@@ -3945,6 +3954,8 @@ https://mirror.accum.se/mirror/wikimedia.org/dumps/lbewiki/20230601/dumpstatus.j
 https://mirror.accum.se/mirror/wikimedia.org/dumps/lbewiki/20230601/lbewiki-20230601-pages-articles-multistream.xml.bz2	1943634	41f25e52a9cee5a450039e2f42b8c2e40d6ca0a9fc5d6fad7e4851c1dbdadfea	lbewiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/lbwiki/20230201/dumpstatus.json	11524	00b39fcaf97d457a112cd028d0e4e80ff861e95c8984e016ab50499f26f509c8	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/lbwiki/20230201/lbwiki-20230201-pages-articles-multistream.xml.bz2	55443681	e50a82c81882cf84ea8f3ff3563f33b00dff2496702a31b1af66e1391d1bbf91	lbwiki-20230201-pages-articles-multistream.xml.bz2
+https://mirror.accum.se/mirror/wikimedia.org/dumps/lbwiki/20230601/dumpstatus.json	11524	c6a76887aa7870528ae46c7a7a60781968c9a41fb2ca67bbddf0ad15f30b3b4f	dumpstatus.json
+https://mirror.accum.se/mirror/wikimedia.org/dumps/lbwiki/20230601/lbwiki-20230601-pages-articles-multistream.xml.bz2	55914311	7f23c334b44805e3fb9f7d41402c2332a6e44e440dcd21cbaf376ce1c247ce0c	lbwiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/lezwiki/20230201/dumpstatus.json	11614	e33ced92f0fab5c514ee4543ed63600d8e42e6ceae995ef9a120c2fead3ff6f2	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/lezwiki/20230201/lezwiki-20230201-pages-articles-multistream.xml.bz2	6493872	9cb42785df73e211742ba1fdef8fcfd22d367dc475a8c5f3649b266873a01af2	lezwiki-20230201-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/lezwiki/20230601/dumpstatus.json	11616	aac6b8dac8d1fc96b762a07361169084815fe7e86c201ca730db08464700e2b0	dumpstatus.json
@@ -4345,6 +4356,8 @@ https://mirror.accum.se/mirror/wikimedia.org/dumps/simplewiki/20230601/dumpstatu
 https://mirror.accum.se/mirror/wikimedia.org/dumps/simplewiki/20230601/simplewiki-20230601-pages-articles-multistream.xml.bz2	276072158	b40dbdd570a4d76c55dceeafcd5c0b7c496d1813a22e319c7989985ff5cf664e	simplewiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/siwiki/20230201/dumpstatus.json	14023	2c818e8807bf1e80114eb02472106358f22a8ce3131a2dc8fd41a9c88ac84eec	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/siwiki/20230201/siwiki-20230201-pages-articles-multistream.xml.bz2	51167999	017eb1d65bbd0388e946f2d166bb739b294f2a1801582d106c412f0310fc2179	siwiki-20230201-pages-articles-multistream.xml.bz2
+https://mirror.accum.se/mirror/wikimedia.org/dumps/siwiki/20230601/dumpstatus.json	14025	8f218746a8a63958538f25a5cfa24f14cf2e2c9fcc28e9c8e699fd40c7a12cc0	dumpstatus.json
+https://mirror.accum.se/mirror/wikimedia.org/dumps/siwiki/20230601/siwiki-20230601-pages-articles-multistream.xml.bz2	53790899	3b6232288f1cec16e904ff077fd4dd30ce9f9d8218d428f2c3d43fc2376e4ed2	siwiki-20230601-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/skwiki/20230201/dumpstatus.json	11546	b8da1e7dc533ab970567fac402d453d9cf03221bc85bad46716c3d74a8b6f0ee	dumpstatus.json
 https://mirror.accum.se/mirror/wikimedia.org/dumps/skwiki/20230201/skwiki-20230201-pages-articles-multistream.xml.bz2	315325859	69a120e5fe7b95b9994e049f59c2cdbfa3dc4d046f748700134bc756281ca439	skwiki-20230201-pages-articles-multistream.xml.bz2
 https://mirror.accum.se/mirror/wikimedia.org/dumps/skwiki/20230601/dumpstatus.json	11546	b5ef26c047b0db0f2c23245699392d0502d14b8a26976b8ca7cbb2939ed92eae	dumpstatus.json
