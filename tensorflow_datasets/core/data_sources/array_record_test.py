@@ -172,13 +172,18 @@ def test_data_source_is_iterable():
 
 
 def test_data_source_is_sliceable():
-  with tfds.testing.mock_data():
-    ds = tfds.data_source('mnist', split='train')
-    file_instructions = ds.data_source._read_instructions
-    assert file_instructions[0].start == 0
-    assert file_instructions[0].end == 60000
+  mock_array_record_data_source = tfds.testing.PickableDataSourceMock()
+  with tfds.testing.mock_data(
+      mock_array_record_data_source=mock_array_record_data_source
+  ):
+    tfds.data_source('mnist', split='train')
+    assert len(mock_array_record_data_source.call_args_list) == 1
+    file_instructions = mock_array_record_data_source.call_args_list[0].args[0]
+    assert file_instructions[0].skip == 0
+    assert file_instructions[0].take == 60000
 
-    ds = tfds.data_source('mnist', split='train[:50%]')
-    file_instructions = ds.data_source._read_instructions
-    assert file_instructions[0].start == 0
-    assert file_instructions[0].end == 30000
+    tfds.data_source('mnist', split='train[:50%]')
+    assert len(mock_array_record_data_source.call_args_list) == 2
+    file_instructions = mock_array_record_data_source.call_args_list[1].args[0]
+    assert file_instructions[0].skip == 0
+    assert file_instructions[0].take == 30000
