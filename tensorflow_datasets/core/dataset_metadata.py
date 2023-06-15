@@ -17,11 +17,13 @@
 
 import dataclasses
 import functools
-from typing import Dict, List, Text
+from typing import Dict, List, Optional
 
 from etils import epath
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import resource_utils
+
 
 CITATIONS_FILENAME = "CITATIONS.bib"
 DESCRIPTIONS_FILENAME = "README.md"
@@ -38,12 +40,12 @@ _METADATA_FILES = [
 class DatasetMetadata:
   """Contains Dataset metadata read from configs."""
 
-  description: Text
-  citation: Text
-  tags: List[Text]
+  description: str
+  citation: str
+  tags: List[str]
 
 
-def _get_tags(tags_txt: Text) -> List[Text]:
+def _get_tags(tags_txt: str) -> List[str]:
   """Returns list of tags from raw tags file content."""
   tags = []
   for line in tags_txt.split("\n"):
@@ -53,18 +55,18 @@ def _get_tags(tags_txt: Text) -> List[Text]:
   return tags
 
 
-def _get_valid_tags_text() -> Text:
+def _get_valid_tags_text() -> str:
   """Returns the valid_tags.txt content."""
   path = resource_utils.tfds_path() / "core/valid_tags.txt"
   return path.read_text("utf-8")
 
 
-def valid_tags() -> List[Text]:
+def valid_tags() -> List[str]:
   """Returns a list of valid tags."""
   return _get_tags(_get_valid_tags_text())
 
 
-def valid_tags_with_comments() -> Text:
+def valid_tags_with_comments() -> str:
   """Returns valid tags (one per line) with comments."""
   return "\n".join(
       [
@@ -87,7 +89,7 @@ def load(pkg_path: epath.Path) -> DatasetMetadata:
   )
 
 
-def _read_files(path: epath.Path) -> Dict[Text, Text]:
+def _read_files(path: epath.Path) -> Dict[str, str]:
   """Reads all metadata files content.
 
   Args:
