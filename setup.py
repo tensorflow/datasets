@@ -134,7 +134,6 @@ DATASET_FILES = [
     'image_classification/inaturalist_labels.txt',
     'image_classification/inaturalist_supercategories.txt',
     'image_classification/placesfull/categories_placesfull.txt',
-    'image_classification/plant_leaves_urls.txt',
     'image_classification/plantae_k_urls.txt',
     'image_classification/sun397_labels.txt',
     'image_classification/sun397_tfds_te.txt',

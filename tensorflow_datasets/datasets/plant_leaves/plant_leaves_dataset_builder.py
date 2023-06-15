@@ -16,9 +16,7 @@
 """Healthy and unhealthy plant leaves dataset."""
 
 import os
-import re
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # File name prefix to label mapping.
@@ -46,8 +44,8 @@ _LABEL_MAPPING = [
     ("0021", "Lemon (P10) diseased"),
     ("0022", "Chinar (P11) diseased"),
 ]
-_URLS_FNAME = "image_classification/plant_leaves_urls.txt"
-_MAX_DOWNLOAD_RETRY = 10
+
+_DOWNLOAD_URL = "https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/hb74ynkjcn-1.zip"
 
 
 class DownloadRetryLimitReachedError(Exception):
@@ -75,42 +73,24 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     # Batch download for this dataset is broken, therefore images have to be
     # downloaded independently from a list of urls.
-    with tf.io.gfile.GFile(os.fspath(tfds.core.tfds_path(_URLS_FNAME))) as f:
-      name_to_url_map = {
-          os.path.basename(l.strip()): l.strip() for l in f.readlines()
-      }
-      retry_count = 0
-      image_files = {}
-      # We have to retry due to rare 504 HTTP errors. Downloads are cached,
-      # therefore this shouldn't cause successful downloads to be retried.
-      while True:
-        try:
-          image_files = dl_manager.download(name_to_url_map)
-          break
-        except tfds.download.DownloadError:
-          retry_count += 1
-          if retry_count == _MAX_DOWNLOAD_RETRY:
-            raise DownloadRetryLimitReachedError(
-                "Retry limit reached. Try downloading the dataset again."
-            )
-      return [
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files}
-          )
-      ]
+    archive_path = dl_manager.download(_DOWNLOAD_URL)
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={"archive": dl_manager.iter_archive(archive_path)},
+        )
+    ]
 
-  def _generate_examples(self, image_files):
+  def _generate_examples(self, archive):
     """Yields examples."""
-    label_map = {pattern: label for pattern, label in _LABEL_MAPPING}
-    regexp = re.compile(r"^(\d\d\d\d)_.*\.JPG$")
-    # Assigns labels to images based on label mapping.
-    for original_fname, fpath in image_files.items():
-      match = regexp.match(original_fname)
-      if match and match.group(1) in label_map:
-        label = label_map[match.group(1)]
-        record = {
-            "image": fpath,
-            "image/filename": original_fname,
-            "label": label,
-        }
-        yield original_fname, record
+    for filename, fobj in archive:
+      if not filename.endswith(".JPG"):
+        continue
+      fname_split = filename.split(os.path.sep)
+      label = fname_split[-3] + " " + fname_split[-2]
+      record = {
+          "image": fobj,
+          "image/filename": fname_split[-1],
+          "label": label,
+      }
+      yield fname_split[-1], record
