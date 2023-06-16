@@ -18,8 +18,8 @@
 import pathlib
 
 import pytest
-
 from tensorflow_datasets.scripts.cli import main
+from tensorflow_datasets.scripts.cli import new
 
 
 def _run_cli(cmd: str) -> None:

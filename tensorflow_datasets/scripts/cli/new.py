@@ -22,8 +22,10 @@ import subprocess
 import textwrap
 from typing import Optional
 
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_metadata
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core.utils import resource_utils
 from tensorflow_datasets.scripts.cli import builder_templates
 from tensorflow_datasets.scripts.cli import cli_utils as utils
 
