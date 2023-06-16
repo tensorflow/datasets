@@ -7035,18 +7035,19 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Wikipedia dataset for ang, parsed from 20230201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.65 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,906
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
