@@ -95,6 +95,8 @@ class Split(object):
     if self.closed:
       raise ValueError(f'Split {self.info.name} is already closed.')
     if self.current_shard is None:
+      if self.info.filename_template is None:
+        raise ValueError(f'Split {self.info.name} has no filename template.')
       path = self.info.filename_template.sharded_filepath(
           shard_index=self.complete_shards, num_shards=None
       )
@@ -267,7 +269,9 @@ class SequentialWriter:
           override=False,
       )
 
-    self._filetype_suffix = ds_info.file_format.file_suffix
+    self._filetype_suffix = (
+        ds_info.file_format or file_adapters.FileFormat.TFRECORD
+    ).file_suffix
     self._max_examples_per_shard = max_examples_per_shard
     self._splits = {}
     if not overwrite:
