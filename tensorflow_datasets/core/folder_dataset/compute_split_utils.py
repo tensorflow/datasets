@@ -179,16 +179,18 @@ def _extract_split_files(
         f'No example files detected in {filename_template.data_dir}. '
         f'Make sure to follow the pattern: {filename_template.template}'
     )
-  files_without_detected_split = [f for f in file_infos if f.split is None]
-  if files_without_detected_split:
-    raise ValueError(
-        'Some matched files did not specify the split: '
-        f'{files_without_detected_split}'
-    )
 
+  files_without_splits = []
   split_files = collections.defaultdict(list)
   for file_info in file_infos:
-    split_files[file_info.split].append(file_info)
+    if file_info.split is not None:
+      split_files[file_info.split].append(file_info)
+    else:
+      files_without_splits.append(file_info)
+  if files_without_splits:
+    raise ValueError(
+        f'Some matched files did not specify the split: {files_without_splits}'
+    )
 
   return split_files
 
