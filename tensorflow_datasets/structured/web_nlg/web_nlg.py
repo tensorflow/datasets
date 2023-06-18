@@ -71,7 +71,8 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             'input_text': {
-                'table': tfds.features.Sequence({  # Each row will be one triple fact.
+                'table': tfds.features.Sequence({
+                    # Each row will be one triple fact.
                     # we'll only have subject/predicate/object headers
                     'column_header': np.str_,
                     'row_number': np.int16,
@@ -162,8 +163,11 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
           for child_element in entry:
             if child_element.tag == 'modifiedtripleset':
               for i, triple in enumerate(child_element):
+                text = triple.text
+                if not text:
+                  continue
                 for header, content in zip(
-                    ['subject', 'predicate', 'object'], triple.text.split(' | ')
+                    ['subject', 'predicate', 'object'], text.split(' | ')
                 ):
                   triples_set.append({
                       'column_header': header,

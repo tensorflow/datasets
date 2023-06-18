@@ -34,7 +34,7 @@ class Pair:
 def get_element_text(xml_pair: ET.Element, tag: str) -> str:
   """Returns the text associated with a given tag."""
   element = xml_pair.find(tag)
-  assert element is not None, f'The tag "{tag}" was not found.'
+  assert element and element.text is not None, f'The tag "{tag}" was not found.'
   return element.text
 
 

@@ -226,6 +226,8 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
     it in `self._available_examples` so that it can be yielded by
     `self.__iter__`.
     """
+    if not self._current_example:
+      return
     qid = self._current_example.qid
     np_features_dict = {
         key: np.array(value)
