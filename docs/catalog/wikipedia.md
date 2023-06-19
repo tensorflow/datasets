@@ -2204,18 +2204,19 @@ Split     | Examples
 
 *   **Config description**: Wikipedia dataset for hi, parsed from 20230601 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `196.49 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `615.83 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 197,556
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
