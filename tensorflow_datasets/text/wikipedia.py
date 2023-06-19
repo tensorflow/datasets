@@ -356,7 +356,7 @@ WIKIPEDIA_LANGUAGES = [
 ]
 
 
-_EMPTY_LANGUAGES = {"20230601": {"aa"}}
+_EMPTY_LANGUAGES = {"20230601": {"aa", "na"}}
 
 
 # Use mirror to avoid download caps.
