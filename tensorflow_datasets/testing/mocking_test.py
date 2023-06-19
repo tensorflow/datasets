@@ -17,10 +17,9 @@
 
 import functools
 
+import numpy as np
 import pytest
-
 import tensorflow as tf
-
 # Import the final API to:
 # * Register datasets
 # * Make sure `tfds.load`, `tfds.builder` aliases works correctly after patching
@@ -379,3 +378,11 @@ def test_mock_data_source():
     data_source = tfds.data_source('imagenet2012', split='train[:50%]')
     assert len(data_source) == 10
     assert isinstance(data_source[0], dict)
+    assert isinstance(data_source[0]['image'], np.ndarray)
+
+    # Without decoding the images
+    decoders = {'image': tfds.decode.SkipDecoding()}
+    data_source = tfds.data_source(
+        'imagenet2012', split='train[:50%]', decoders=decoders
+    )
+    assert isinstance(data_source[0]['image'], bytes)
