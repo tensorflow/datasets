@@ -31,8 +31,6 @@ from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
 import tree
 
-T = TypeVar('T')
-
 _DEFAULT_ITERATION_STEP = 1000
 
 
@@ -81,22 +79,15 @@ class ArrayRecordDataSource(AbcSequence):
   def __iter__(self):
     for i in range(0, self.length, self.iteration_step):
       # Pre-fetch the `self.iteration_step`` next elements.
-      records = self[range(i, min(self.length, i + self.iteration_step))]
+      records = [
+          self[j] for j in range(i, min(self.length, i + self.iteration_step))
+      ]
       for record in records:
         yield record
 
-  def __getitem__(
-      self, record_keys: Union[int, Sequence[int]]
-  ) -> Union[T, Sequence[T]]:
-    has_requested_single_record = isinstance(record_keys, int)
-    if has_requested_single_record:
-      if record_keys >= self.length or record_keys < 0:
-        raise IndexError('data source index out of range')
-      record_keys = [record_keys]
-    records = self.__getitems__(record_keys)
-    if has_requested_single_record:
-      return records[0]
-    return records
+  def __getitem__(self, record_key: int) -> Any:
+    records = self.__getitems__([record_key])
+    return records[0]
 
   def __getitems__(self, record_keys: Sequence[int]) -> Sequence[Any]:
     """Retrieves items by batch.
@@ -112,7 +103,7 @@ class ArrayRecordDataSource(AbcSequence):
     Raises:
       IndexError: if the number of retrieved records is incorrect.
     """
-    records = self.data_source[record_keys]
+    records = [self.data_source[record_key] for record_key in record_keys]
     features = self.dataset_info.features
     if len(record_keys) != len(records):
       raise IndexError(
