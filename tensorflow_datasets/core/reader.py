@@ -198,6 +198,10 @@ def _read_files(
     return ds.with_options(read_config.options)  # Additional users options
 
   def validate_input_context():
+    if not read_config.input_context:
+      raise ValueError(
+          'Cannot shard the pipeline with undefined `input_context`.'
+      )
     if (
         read_config.input_context.num_input_pipelines > 1
         and len(file_instructions)
