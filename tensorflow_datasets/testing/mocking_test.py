@@ -16,6 +16,7 @@
 """Tests for tensorflow_datasets.testing.mocking."""
 
 import functools
+import pickle
 
 import numpy as np
 import pytest
