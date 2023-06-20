@@ -89,6 +89,7 @@ class ViewConfig(dataset_builder.BuilderConfig):
       self,
       data_dir: Optional[str] = None,
   ) -> dataset_builder.DatasetBuilder:
+    assert self.input_dataset, "Input dataset must be specified."
     tfds_name = self.input_dataset.tfds_name(include_version=True)
     data_dir = self.input_dataset.data_dir or data_dir
     return load_lib.builder(name=tfds_name, data_dir=data_dir)
@@ -215,8 +216,9 @@ class ViewBuilder(
     return None
 
   def _src_dataset(self) -> naming.DatasetReference:
-    if self.view_config and self.view_config.input_dataset:
-      return self.view_config.input_dataset
+    input_dataset = self.view_config and self.view_config.input_dataset
+    if input_dataset:
+      return input_dataset
     elif self.INPUT_DATASET is not None:
       if isinstance(self.INPUT_DATASET, str):
         return naming.DatasetReference.from_tfds_name(self.INPUT_DATASET)
@@ -237,8 +239,11 @@ class ViewBuilder(
     return load_lib.builder(name=tfds_name)
 
   def _example_transformations(self) -> List[transform_lib.ExampleTransformFn]:
-    if self.view_config and self.view_config.ex_transformations:
-      return self.view_config.ex_transformations
+    ex_transformations = (
+        self.view_config and self.view_config.ex_transformations
+    )
+    if ex_transformations:
+      return ex_transformations
     return self.EX_TRANSFORMATIONS
 
   def _data_transformations(
