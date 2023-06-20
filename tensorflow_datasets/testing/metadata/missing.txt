@@ -40,6 +40,3 @@ voxforge/1.0.0
 webvid/1.0.0
 wikipedia/20230601.af/1.0.0
 wikipedia/20230601.ceb/1.0.0
-wikipedia/20230601.ilo/1.0.0
-wikipedia/20230601.na/1.0.0
-wikipedia/20230601.zu/1.0.0
