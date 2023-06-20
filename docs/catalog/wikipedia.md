@@ -3990,27 +3990,6 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.na <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Config description**: Wikipedia dataset for na, parsed from 20230601 dump.
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 ## wikipedia/20230601.nah <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 *   **Config description**: Wikipedia dataset for nah, parsed from 20230601
