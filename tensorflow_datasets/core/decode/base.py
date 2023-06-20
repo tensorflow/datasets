@@ -45,7 +45,12 @@ class Decoder(abc.ABC):
   """
 
   def __init__(self):
-    self.feature = None
+    self._feature = None
+
+  @property
+  def feature(self):
+    assert self._feature, 'Feature uninitialized. Call setup() first.'
+    return self._feature
 
   def setup(self, *, feature):
     """Transformation contructor.
@@ -58,7 +63,7 @@ class Decoder(abc.ABC):
       feature: `tfds.features.FeatureConnector`, the feature to which is applied
         this transformation.
     """
-    self.feature = feature
+    self._feature = feature
 
   @property
   def dtype(self):

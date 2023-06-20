@@ -782,13 +782,13 @@ def data_source(
 
 
 def _get_all_versions(
-    current_version: version.Version,
+    current_version: version.Version | None,
     extra_versions: Iterable[version.Version],
     current_version_only: bool,
 ) -> Iterable[str]:
   """Returns the list of all current versions."""
   # Merge current version with all extra versions
-  version_list = [current_version]
+  version_list = [current_version] if current_version else []
   if not current_version_only:
     version_list.extend(extra_versions)
   # Filter datasets which do not have a version (version is `None`) as they

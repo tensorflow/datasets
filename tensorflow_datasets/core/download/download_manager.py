@@ -357,6 +357,7 @@ class DownloadManager(object):
     if isinstance(resource, str):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
+    assert url is not None, 'URL is undefined from resource.'
 
     expected_url_info = self._url_infos.get(url)
 

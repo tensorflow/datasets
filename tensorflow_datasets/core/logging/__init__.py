@@ -41,20 +41,21 @@ _import_operations_lock = threading.Lock()
 _thread_id_to_builder_init_count = collections.Counter()
 
 
-def _check_init_registered_loggers() -> None:
+def _init_registered_loggers() -> List[base_logger.Logger]:
   """Initializes the registered loggers if they are not set yet."""
   global _registered_loggers
   if _registered_loggers is None:
     _registered_loggers = [
         logging_logger.LoggingLogger(),
     ]
+  return _registered_loggers
 
 
 def _log_import_operation():
   """Log import operations (most of time maximum one), if any."""
   with _import_operations_lock:
     for metadata, import_time_tf, import_time_builders in _import_operations:
-      for logger in _registered_loggers:
+      for logger in _init_registered_loggers():
         logger.tfds_import(
             metadata=metadata,
             import_time_ms_tensorflow=import_time_tf,
@@ -63,20 +64,16 @@ def _log_import_operation():
     _import_operations.clear()
 
 
+def _get_registered_loggers() -> List[base_logger.Logger]:
+  _log_import_operation()
+  return _init_registered_loggers()
+
+
 @atexit.register
 def _at_exit():
   """Log import operation if needed, calls `process_ends` on loggers."""
-  if _registered_loggers is None:
-    _check_init_registered_loggers()
-  _log_import_operation()
   for logger in _get_registered_loggers():
     logger.process_ends()
-
-
-def _get_registered_loggers() -> List[base_logger.Logger]:
-  _check_init_registered_loggers()
-  _log_import_operation()
-  return _registered_loggers
 
 
 class _FunctionDecorator(abc.ABC):
@@ -250,8 +247,7 @@ def register(logger: base_logger.Logger) -> None:
   Args:
     logger: the logger to register.
   """
-  _check_init_registered_loggers()
-  _registered_loggers.append(logger)
+  _init_registered_loggers().append(logger)
 
 
 def tfds_import(
