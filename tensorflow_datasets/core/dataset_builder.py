@@ -230,7 +230,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # set on the class, and not on a parent class. If we were accessing the
     # attribute directly, a dataset Builder inheriting from another would read
     # its metadata from its parent directory (which would be wrong).
-    if cls.__dict__.get("pkg_dir_path") is None:
+    if cls.pkg_dir_path is None:
       cls.pkg_dir_path = _get_builder_datadir_path(cls)
     return cls.pkg_dir_path
 

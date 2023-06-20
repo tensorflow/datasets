@@ -201,6 +201,8 @@ class SplitInfo:
   @property
   def filenames(self) -> List[str]:
     """Returns the list of filenames."""
+    if not self.filename_template:
+      raise ValueError('No filename templates available.')
     return sorted(
         self.filename_template.sharded_filenames(len(self.shard_lengths))
     )
@@ -208,6 +210,8 @@ class SplitInfo:
   @property
   def filepaths(self) -> List[epath.Path]:
     """All the paths for all the files that are part of this split."""
+    if not self.filename_template:
+      raise ValueError('No filename templates available.')
     return sorted(
         self.filename_template.sharded_filepaths(len(self.shard_lengths))
     )

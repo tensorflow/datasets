@@ -98,7 +98,7 @@ class PipelineProxy:
 
   @property
   def result(self):
-    return self._beam_pipeline.result
+    return self._beam_pipeline.result if self._beam_pipeline else None
 
 
 class SplitBuilder:
