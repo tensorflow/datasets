@@ -738,7 +738,7 @@ def spatter(x, severity=1):
     #     ker = np.array([[-1,-2,-3],[-2,0,0],[-3,0,1]], dtype=np.float32)
     #     ker -= np.mean(ker)
     ker = np.array([[-2, -1, 0], [-1, 1, 1], [0, 1, 2]])
-    dist = cv2.filter2D(dist, cv2.CVX_8U, ker)
+    dist = cv2.filter2D(dist, cv2.CV_8U, ker)
     dist = cv2.blur(dist, (3, 3)).astype(np.float32)
 
     m = cv2.cvtColor(liquid_layer * dist, cv2.COLOR_GRAY2BGRA)
