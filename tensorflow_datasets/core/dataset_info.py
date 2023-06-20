@@ -325,11 +325,11 @@ class DatasetInfo(object):
     return self._info_proto.config_name
 
   @property
-  def config_description(self) -> str:
+  def config_description(self) -> str | None:
     return self._identity.config_description
 
   @property
-  def config_tags(self) -> List[str]:
+  def config_tags(self) -> List[str] | None:
     return self._identity.config_tags
 
   @property
@@ -529,6 +529,8 @@ class DatasetInfo(object):
         raise RuntimeError(
             "Updating the data_dir for MultiSplitInfo is not supported!"
         )
+      if not split_info.filename_template:
+        continue
       filename_template = split_info.filename_template.replace(
           data_dir=data_dir
       )

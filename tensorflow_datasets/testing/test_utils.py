@@ -118,6 +118,7 @@ class MockFs(object):
     return self._cm.__enter__()
 
   def __exit__(self, exc_type, exc_value, traceback):
+    assert self._cm, 'Context manager uninitialized.'
     return self._cm.__exit__(exc_type, exc_value, traceback)
 
   @contextlib.contextmanager
@@ -138,6 +139,7 @@ class MockFs(object):
 
   def _to_tmp(self, p, *, with_state: bool = False):
     """Normalize the path by returning `tmp_path / p`."""
+    assert self._tmp_dir, 'Temp directory uninitialized.'
     # If `p` was a `epath.Path`, it doesn't matter the value of `is_gcs`
     # as returned values will be normalized anyway.
     p_str = os.fspath(p)
@@ -163,6 +165,7 @@ class MockFs(object):
 
   def _to_abs(self, p, *, state: _PathState):
     """Normalize the output to strip the `tmp_path`."""
+    assert self._tmp_dir, 'Temp directory uninitialized.'
     tmp_path = os.fspath(self._tmp_dir)
     assert p.startswith(tmp_path)
     p = p[len(tmp_path) :]  # Strip the tmp path
@@ -241,8 +244,11 @@ class MockFs(object):
     print(_get_folder_str(self._tmp_dir))
 
 
-def _get_folder_str(root_dir: pathlib.Path) -> str:
+def _get_folder_str(root_dir: pathlib.Path | None) -> str:
   """Get the tree structure."""
+  if not root_dir:
+    raise ValueError('Root dir undefined. Cannot find folder.')
+
   lines = epy.Lines()
   for p in root_dir.iterdir():
     if p.is_dir():

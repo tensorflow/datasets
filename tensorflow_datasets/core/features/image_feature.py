@@ -334,6 +334,7 @@ class Image(feature_lib.FeatureConnector):
       self, example: bytes, num_channels: int
   ) -> np.ndarray:
     """Reconstruct the image with OpenCV from bytes."""
+    assert cv2, 'OpenCV is not installed. OpenCV is required for this method.'
     example = np.frombuffer(example, dtype=np.uint8)
     dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
     example = cv2.imdecode(example, cv2.IMREAD_UNCHANGED).astype(dtype)
@@ -347,6 +348,7 @@ class Image(feature_lib.FeatureConnector):
   def decode_example_np_with_pil(
       self, example: bytes, num_channels: int
   ) -> np.ndarray:
+    assert PIL_Image, 'PIL is not installed. PIL is required for this method.'
     bytes_io = io.BytesIO(example)
     with PIL_Image.open(bytes_io) as image:
       dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
@@ -571,6 +573,7 @@ def _reorder_opencv_channels(example: np.ndarray) -> np.ndarray:
   """Restore channels in the expected order: OpenCV uses BGR rather than RGB."""
   if example.ndim == 2:
     return example
+  assert cv2, 'OpenCV is not installed. OpenCV is required for this method.'
   num_channels = example.shape[-1]
   if num_channels == 3:
     return cv2.cvtColor(example, cv2.COLOR_BGR2RGB)
