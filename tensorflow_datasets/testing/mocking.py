@@ -15,12 +15,12 @@
 
 """Mock util for tfds."""
 
+from __future__ import annotations
+
 import contextlib
-import dataclasses
 import enum
 import functools
 import os
-import sys
 from typing import Any, Callable, Iterator, Optional, Sequence, Union
 from unittest import mock
 
@@ -33,6 +33,7 @@ from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.core.data_sources import array_record
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_utils
 
@@ -72,6 +73,49 @@ def _get_fake_data_components(decoders, features):
   return generator_cls, features, specs, decode_fn
 
 
+class PickableDataSourceMock(mock.MagicMock):
+  """Makes MagicMock pickable in order to work with multiprocessing in Grain."""
+
+  def __getstate__(self):
+    return {'num_examples': len(self), 'generator': self._generator}
+
+  def __setstate__(self, state):
+    num_examples, generator = state['num_examples'], state['generator']
+    self.__len__.return_value = num_examples
+    self.__getitem__ = functools.partial(_getitem, generator=generator)
+
+  def __reduce__(self):
+    return (PickableDataSourceMock, (), self.__getstate__())
+
+
+def _getitem(
+    self, record_keys: Union[int, Sequence[int]], generator: RandomFakeGenerator
+) -> Union[Any, Sequence[Any]]:
+  """Function to overwrite __getitem__ in data sources."""
+  del self
+  if isinstance(record_keys, int):
+    return generator[record_keys]
+  return [generator[record_key] for record_key in record_keys]
+
+
+def _deserialize_example_np(serialized_example, *, decoders=None):
+  """Function to overwrite dataset_info.features.deserialize_example_np.
+
+  Warning: this has to be defined in the outer scope in order for the function
+  to be pickable.
+
+  Args:
+    serialized_example: the example to deserialize.
+    decoders: optional decoders.
+
+  Returns:
+    The serialized example, because deserialization is taken care by
+      RandomFakeGenerator.
+  """
+  del decoders
+  return serialized_example
+
+
 class MockPolicy(enum.Enum):
   """Strategy to use with `tfds.testing.mock_data` to mock the dataset.
 
@@ -100,6 +144,7 @@ def mock_data(
     policy: MockPolicy = MockPolicy.AUTO,
     as_dataset_fn: Optional[Callable[..., tf.data.Dataset]] = None,
     data_dir: Optional[str] = None,
+    mock_array_record_data_source: Optional[PickableDataSourceMock] = None,
 ) -> Iterator[None]:
   """Mock tfds to generate random data.
 
@@ -178,6 +223,8 @@ def mock_data(
     data_dir: Folder containing the metadata file (searched in
       `data_dir/dataset_name/version`). Overwrite `data_dir` kwargs from
       `tfds.load`. Used in `MockPolicy.USE_FILES` mode.
+    mock_array_record_data_source: Overwrite a mock for the underlying
+      ArrayRecord data source if it is used.
 
   Yields:
     None
@@ -186,13 +233,20 @@ def mock_data(
   original_init_fn = dataset_builder.DatasetBuilder.__init__
   original_as_dataset_fn = dataset_builder.DatasetBuilder.as_dataset
   original_builder_from_files = read_only_builder.builder_from_files
+  if mock_array_record_data_source is None:
+    mock_array_record_data_source = PickableDataSourceMock()
+  elif not isinstance(mock_array_record_data_source, PickableDataSourceMock):
+    raise ValueError(
+        '`mock_array_record_data_source` must be a'
+        ' `tfds.testing.PickableDataSourceMock` because it must be pickable.'
+    )
 
   def mock_download_and_prepare(self, *args, **kwargs):
     """`builder.download_and_prepare` is a no-op."""
     del self, args, kwargs  # Unused
 
   def mock_as_dataset_base(self, **kwargs):
-    """Function which overwrites `builder.as_dataset`."""
+    """Mocks `builder.as_dataset`."""
     # When `USE_FILES` is used, make sure the metadata actually exists.
     if tf.io.gfile.exists(self.data_dir):
       logging.info('Metadata found for %s at %s', self.name, self.data_dir)
@@ -220,7 +274,7 @@ def mock_data(
       return original_as_dataset_fn(self, **kwargs)
 
   def mock_as_dataset(self, split, decoders=None, read_config=None, **kwargs):
-    """Function which overwrites `builder._as_dataset`."""
+    """Mocks `builder._as_dataset`."""
     del kwargs
 
     generator_cls, features, specs, decode_fn = _get_fake_data_components(
@@ -255,68 +309,39 @@ def mock_data(
 
     return ds
 
-  @contextlib.contextmanager
-  def mock_as_data_source():
-    """Function which overwrites `builder.as_data_source`.
+  def mock_as_data_source(self, split, decoders=None, **kwargs):
+    """Mocks `builder.as_data_source`."""
+    del kwargs
+    if split is None:
+      split = {s: s for s in self.info.splits}
 
-    We mock the underlying
-    `tensorflow_datasets.core.data_sources.array_record.ArrayRecordDataSource`.
+    generator_cls, features, _, _ = _get_fake_data_components(
+        decoders, self.info.features
+    )
+    generator = generator_cls(features, num_examples)
 
-    Yields:
-      None, with a patched ArrayRecordDataSource in `sys.modules`.
-    """
-    if 'tensorflow_datasets.core.data_sources.array_record' not in sys.modules:
-      return
+    with mock.patch(
+        'array_record.python.array_record_data_source.ArrayRecordDataSource',
+        mock_array_record_data_source,
+    ):
+      self.info.features.deserialize_example_np = _deserialize_example_np
+      mock_array_record_data_source.return_value.__len__.return_value = (
+          num_examples
+      )
+      mock_array_record_data_source.return_value._generator = (  # pylint:disable=protected-access
+          generator
+      )
+      mock_array_record_data_source.return_value.__getitem__ = (
+          functools.partial(_getitem, generator=generator)
+      )
 
-    @dataclasses.dataclass
-    class _FakeDataSource(array_record.ArrayRecordDataSource):
-      """DataSource that returns fake data."""
-
-      def __getitem__(
-          self, record_keys: Union[int, Sequence[int]]
-      ) -> Union[Any, Sequence[Any]]:
-        """This doesn't perform a lookup and just generates fake data.
-
-        ### Miscellaneous
-        * The examples are deterministically generated. "train" and "test" split
-        will yield the same examples.
-
-        Args:
-          record_keys: Indices of records to be looked up from the data source.
-
-        Returns:
-          A list of randomly generated records for each index.
-        """
-        generator_cls, features, _, decode_fn = _get_fake_data_components(
-            self.decoders, self.dataset_info.features
+      def build_single_data_source(split):
+        single_data_source = array_record.ArrayRecordDataSource(
+            dataset_info=self.info, split=split, decoders=decoders
         )
-        generator = generator_cls(features, num_examples)
-        if isinstance(record_keys, int):
-          record_key = record_keys
-          if record_key < 0 or record_key >= self.length:
-            raise ValueError('Record key should be in [0, num_records)')
-          return decode_fn(generator[record_key])
-        for record_key in record_keys:
-          if record_key < 0 or record_key >= self.length:
-            raise ValueError('Record key should be in [0, num_records)')
-        return [decode_fn(generator[record_key]) for record_key in record_keys]
+        return single_data_source
 
-      def __len__(self) -> int:
-        """Length of data source.
-
-        Returns:
-          The number of examples `num_examples`.
-        """
-        return num_examples
-
-    original_data_source = array_record.ArrayRecordDataSource
-    sys.modules[
-        'tensorflow_datasets.core.data_sources.array_record'
-    ].ArrayRecordDataSource = _FakeDataSource
-    yield
-    sys.modules[
-        'tensorflow_datasets.core.data_sources.array_record'
-    ].ArrayRecordDataSource = original_data_source
+      return tree_utils.map_structure(build_single_data_source, split)
 
   if not as_dataset_fn:
     as_dataset_fn = mock_as_dataset
@@ -369,13 +394,16 @@ def mock_data(
             mock_as_dataset_base,
         ),
         (
+            f'{core}.dataset_builder.DatasetBuilder.as_data_source',
+            mock_as_data_source,
+        ),
+        (
             f'{core}.dataset_builder.FileReaderBuilder._as_dataset',
             as_dataset_fn,
         ),
     ]:
       stack.enter_context(mock.patch(path, mocked_fn))
-    with mock_as_data_source():
-      yield
+    yield
 
 
 class RandomFakeGenerator(object):

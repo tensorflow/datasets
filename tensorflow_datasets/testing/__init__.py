@@ -28,6 +28,7 @@ with skip_registration():
   from tensorflow_datasets.testing.feature_test_case import SubTestCase
   from tensorflow_datasets.testing.mocking import mock_data
   from tensorflow_datasets.testing.mocking import MockPolicy
+  from tensorflow_datasets.testing.mocking import PickableDataSourceMock
   from tensorflow_datasets.testing.test_case import TestCase
   from tensorflow_datasets.testing.test_utils import assert_features_equal
   from tensorflow_datasets.testing.test_utils import DummyBeamDataset
@@ -56,6 +57,7 @@ __all__ = [
     "fake_examples_dir",
     "FeatureExpectationItem",
     "FeatureExpectationsTestCase",
+    "PickableDataSourceMock",
     "SubTestCase",
     "TestCase",
     "RaggedConstant",
