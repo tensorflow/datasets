@@ -133,9 +133,8 @@ def _create_dataset_test(info: utils.DatasetInfo) -> None:
   content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
-      import {info.tfds_api} as tfds
       from {info.ds_import} import {info.name}_dataset_builder
-
+      import {info.tfds_api} as tfds
 
       class {info.cls_name}Test(tfds.testing.DatasetBuilderTestCase):
         """Tests for {info.name} dataset."""
