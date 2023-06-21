@@ -5189,6 +5189,7 @@ wikipedia/20230201.zu/1.0.0
 wikipedia/20230601.ab/1.0.0
 wikipedia/20230601.ace/1.0.0
 wikipedia/20230601.ady/1.0.0
+wikipedia/20230601.af/1.0.0
 wikipedia/20230601.ak/1.0.0
 wikipedia/20230601.als/1.0.0
 wikipedia/20230601.am/1.0.0
