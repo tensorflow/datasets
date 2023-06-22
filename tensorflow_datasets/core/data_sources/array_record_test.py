@@ -154,7 +154,11 @@ def test_data_source_is_iterable():
       array_record_data_source,
       'ArrayRecordDataSource',
       return_value=mock_data_source,
-  ):
+  ), mock.patch.object(
+      dataset_info.features,
+      'deserialize_example_np',
+      return_value='deserialized example',
+  ) as deserialize_example_mock:
     data_source = array_record.ArrayRecordDataSource(
         dataset_info, split='train'
     )
@@ -162,6 +166,7 @@ def test_data_source_is_iterable():
     for _ in data_source:
       continue
     assert mock_data_source.__getitem__.call_count == 3
+    assert deserialize_example_mock.call_count == 3
     assert mock_data_source.__getitem__.call_args_list[0].args[0] == 0
     assert mock_data_source.__getitem__.call_args_list[1].args[0] == 1
     assert mock_data_source.__getitem__.call_args_list[2].args[0] == 2
