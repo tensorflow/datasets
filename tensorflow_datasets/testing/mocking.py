@@ -21,7 +21,7 @@ import contextlib
 import enum
 import functools
 import os
-from typing import Any, Callable, Iterator, Optional, Sequence, Union
+from typing import Any, Callable, Iterator, Optional, Sequence
 from unittest import mock
 
 from absl import logging
@@ -83,18 +83,23 @@ class PickableDataSourceMock(mock.MagicMock):
     num_examples, generator = state['num_examples'], state['generator']
     self.__len__.return_value = num_examples
     self.__getitem__ = functools.partial(_getitem, generator=generator)
+    self.__getitems__ = functools.partial(_getitems, generator=generator)
 
   def __reduce__(self):
     return (PickableDataSourceMock, (), self.__getstate__())
 
 
-def _getitem(
-    self, record_keys: Union[int, Sequence[int]], generator: RandomFakeGenerator
-) -> Union[Any, Sequence[Any]]:
+def _getitem(self, record_key: int, generator: RandomFakeGenerator) -> Any:
   """Function to overwrite __getitem__ in data sources."""
   del self
-  if isinstance(record_keys, int):
-    return generator[record_keys]
+  return generator[record_key]
+
+
+def _getitems(
+    self, record_keys: Sequence[int], generator: RandomFakeGenerator
+) -> Sequence[Any]:
+  """Function to overwrite __getitems__ in data sources."""
+  del self
   return [generator[record_key] for record_key in record_keys]
 
 
@@ -333,6 +338,9 @@ def mock_data(
       )
       mock_array_record_data_source.return_value.__getitem__ = (
           functools.partial(_getitem, generator=generator)
+      )
+      mock_array_record_data_source.return_value.__getitems__ = (
+          functools.partial(_getitems, generator=generator)
       )
 
       def build_single_data_source(split):
