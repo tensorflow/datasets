@@ -165,12 +165,13 @@ def _async_tqdm(*args, **kwargs):
     pbar.clear()  # pop pbar from the active list of pbar
 
 
-class _TqdmPbarAsync(object):
+class _TqdmPbarAsync(EmptyTqdm):
   """Wrapper around Tqdm pbar which be shared between thread."""
 
   _tqdm_bars = []
 
   def __init__(self, pbar):
+    super().__init__()
     self._lock = tqdm_lib.tqdm.get_lock()
     self._pbar = pbar
     self._tqdm_bars.append(pbar)

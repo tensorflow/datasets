@@ -94,6 +94,8 @@ class _Extractor(object):
     )
     max_length_dst_path = 0
     futures = []
+    if self._pbar_path is None:
+      raise ValueError("'_pbar_path' is not initialized")
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)
