@@ -80,7 +80,7 @@ class ArrayRecordDataSource(AbcSequence):
 
   def __iter__(self):
     for i in range(self.length):
-      yield self.data_source[i]
+      yield self[i]
 
   def __getitem__(self, record_key: int) -> Any:
     if not isinstance(record_key, int):
