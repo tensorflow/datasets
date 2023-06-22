@@ -5224,6 +5224,7 @@ wikipedia/20230601.bxr/1.0.0
 wikipedia/20230601.ca/1.0.0
 wikipedia/20230601.cdo/1.0.0
 wikipedia/20230601.ce/1.0.0
+wikipedia/20230601.ceb/1.0.0
 wikipedia/20230601.ch/1.0.0
 wikipedia/20230601.cho/1.0.0
 wikipedia/20230601.chr/1.0.0
