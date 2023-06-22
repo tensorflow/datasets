@@ -757,26 +757,28 @@ def data_source(
     `Sequence` if `split`,
     `dict<key: tfds.Split, value: Sequence>` otherwise.
   """
-  if builder_kwargs is None:
-    builder_kwargs = {}
-  if 'file_format' in builder_kwargs:
-    file_format = file_adapters.FileFormat.from_value(
-        builder_kwargs['file_format']
-    )
-    if file_format != file_adapters.FileFormat.ARRAY_RECORD:
-      raise NotImplementedError(
-          f'No random access data source for file format {file_format}. Please,'
-          ' use `tfds.data_source(..., builder_kwargs={"file_format":'
-          f' {file_adapters.FileFormat.ARRAY_RECORD}}})` instead.'
-      )
-  else:
-    builder_kwargs['file_format'] = file_adapters.FileFormat.ARRAY_RECORD
   dbuilder = _fetch_builder(
       name,
       data_dir,
       builder_kwargs,
       try_gcs,
   )
+  if download_and_prepare_kwargs is None:
+    download_and_prepare_kwargs = {}
+  # `tfds.data_source` relies on ArrayRecord for random access. We need to
+  # specify this to download_and_prepare the dataset with the right file format.
+  file_format = download_and_prepare_kwargs.get(
+      'file_format', file_adapters.FileFormat.ARRAY_RECORD
+  )
+  file_format = file_adapters.FileFormat.from_value(file_format)
+  if file_format != file_adapters.FileFormat.ARRAY_RECORD:
+    raise NotImplementedError(
+        f'No random access data source for file format {file_format}. Please,'
+        ' use `tfds.data_source(...,'
+        ' download_and_prepare_kwargs={"file_format":'
+        f' {file_adapters.FileFormat.ARRAY_RECORD}}})` instead.'
+    )
+  download_and_prepare_kwargs['file_format'] = file_format
   _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
   return dbuilder.as_data_source(split=split, decoders=decoders)
 
