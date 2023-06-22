@@ -504,14 +504,14 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
     assert isinstance(data_source["train"], array_record.ArrayRecordDataSource)
     assert isinstance(data_source["test"], array_record.ArrayRecordDataSource)
     assert len(data_source["test"]) == 10
-    assert data_source["test"][[0]][0]["x"] == 28
+    assert data_source["test"][0]["x"] == 28
     assert len(data_source["train"]) == 20
-    assert data_source["train"][[0]][0]["x"] == 7
+    assert data_source["train"][0]["x"] == 7
 
     data_source = builder.as_data_source(split="test")
     assert isinstance(data_source, array_record.ArrayRecordDataSource)
     assert len(data_source) == 10
-    assert data_source[[0]][0]["x"] == 28
+    assert data_source[0]["x"] == 28
 
 
 class DatasetBuilderMultiDirTest(testing.TestCase):

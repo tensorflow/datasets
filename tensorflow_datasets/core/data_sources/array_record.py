@@ -21,8 +21,9 @@ future without backwards compatibility.
 
 from collections.abc import Sequence as AbcSequence
 import dataclasses
-from typing import Any, Optional, Sequence, TypeVar, Union
+from typing import Any, Optional, Sequence, TypeVar
 
+from absl import logging
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import file_adapters
@@ -53,7 +54,6 @@ class ArrayRecordDataSource(AbcSequence):
   decoders: Optional[type_utils.TreeDict[decode.partial_decode.DecoderArg]] = (
       None
   )
-  iteration_step: int = _DEFAULT_ITERATION_STEP
   # In order to lazy load array_record, we don't load
   # `array_record_data_source.ArrayRecordDataSource` here.
   data_source: Any = dataclasses.field(init=False)
@@ -79,24 +79,22 @@ class ArrayRecordDataSource(AbcSequence):
     return self.length
 
   def __iter__(self):
-    for i in range(0, self.length, self.iteration_step):
-      # Pre-fetch the `self.iteration_step`` next elements.
-      records = self[range(i, min(self.length, i + self.iteration_step))]
-      for record in records:
-        yield record
+    for i in range(self.length):
+      yield self.data_source[i]
 
-  def __getitem__(
-      self, record_keys: Union[int, Sequence[int]]
-  ) -> Union[T, Sequence[T]]:
-    has_requested_single_record = isinstance(record_keys, int)
-    if has_requested_single_record:
-      if record_keys >= self.length or record_keys < 0:
-        raise IndexError('data source index out of range')
-      record_keys = [record_keys]
-    records = self.__getitems__(record_keys)
-    if has_requested_single_record:
-      return records[0]
-    return records
+  def __getitem__(self, record_key: int) -> Any:
+    if not isinstance(record_key, int):
+      logging.error(
+          'Calling ArrayRecordDataSource.__getitem__() with sequence '
+          'of record keys (%s) is deprecated. Either pass a single '
+          'integer or switch to __getitems__().',
+          record_key,
+      )
+      return self.__getitems__(record_key)
+    record = self.data_source[record_key]
+    return self.dataset_info.features.deserialize_example_np(
+        record, decoders=self.decoders
+    )
 
   def __getitems__(self, record_keys: Sequence[int]) -> Sequence[Any]:
     """Retrieves items by batch.
@@ -110,14 +108,15 @@ class ArrayRecordDataSource(AbcSequence):
       The records associated with the keys.
 
     Raises:
-      IndexError: if the number of retrieved records is incorrect.
+      IndexError: If the number of retrieved records is incorrect.
     """
-    records = self.data_source[record_keys]
+    records = self.data_source.__getitems__(record_keys)
     features = self.dataset_info.features
     if len(record_keys) != len(records):
       raise IndexError(
           f'Requested {len(record_keys)} records but got'
           f' {len(records)} records.'
+          f'{record_keys=}, {records=}'
       )
     return [
         features.deserialize_example_np(record, decoders=self.decoders)
