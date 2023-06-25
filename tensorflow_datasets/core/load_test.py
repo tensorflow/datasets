@@ -140,7 +140,7 @@ def test_load_dataset_with_kwargs(
 
 
 @pytest.mark.parametrize(
-    'download_and_prepare_kwargs',
+    'builder_kwargs',
     [
         None,
         {'file_format': 'array_record'},
@@ -148,30 +148,27 @@ def test_load_dataset_with_kwargs(
     ],
 )
 def test_data_source_defaults_to_array_record_format(
-    download_and_prepare_kwargs,
+    builder_kwargs,
 ):
   with mock.patch.object(load, 'builder', autospec=True) as mock_builder:
     load.data_source(
-        'mydataset', download_and_prepare_kwargs=download_and_prepare_kwargs
+        'mydataset', builder_kwargs=builder_kwargs,
     )
     mock_builder.assert_called_with(
         'mydataset',
         data_dir=None,
         try_gcs=False,
-    )
-    mock_download_and_prepare = mock_builder.return_value.download_and_prepare
-    mock_download_and_prepare.assert_called_with(
         file_format=file_adapters.FileFormat.ARRAY_RECORD,
     )
-
-
 @pytest.mark.parametrize(
     'file_format',
     ['tfrecord', file_adapters.FileFormat.TFRECORD],
 )
 def test_data_source_raises_error_for_other_file_formats(file_format):
-  with pytest.raises(NotImplementedError, match='No random access data source'):
+  with pytest.raises(
+      NotImplementedError, match='No random access data source'
+  ):
     with mock.patch.object(load, 'builder', autospec=True):
       load.data_source(
-          'mydataset', download_and_prepare_kwargs={'file_format': file_format}
+          'mydataset', builder_kwargs={'file_format': file_format}
       )
