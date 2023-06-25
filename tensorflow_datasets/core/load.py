@@ -655,6 +655,27 @@ def load(
   return ds
 
 
+def _set_file_format_for_data_source(
+    builder_kwargs: Optional[Dict[str, Any]]
+) -> Dict[str, Any]:
+  """Normalizes file format in builder_kwargs for `tfds.data_source`."""
+  if builder_kwargs is None:
+    builder_kwargs = {}
+  file_format = builder_kwargs.get(
+      'file_format', file_adapters.FileFormat.ARRAY_RECORD
+  )
+  file_format = file_adapters.FileFormat.from_value(file_format)
+  if file_format != file_adapters.FileFormat.ARRAY_RECORD:
+    raise NotImplementedError(
+        f'No random access data source for file format {file_format}. Please,'
+        ' use `tfds.data_source(...,'
+        ' builder_kwargs={"file_format":'
+        f' {file_adapters.FileFormat.ARRAY_RECORD}}})` instead.'
+    )
+  builder_kwargs['file_format'] = file_format
+  return builder_kwargs
+
+
 @tfds_logging.data_source()
 def data_source(
     name: str,
@@ -757,28 +778,13 @@ def data_source(
     `Sequence` if `split`,
     `dict<key: tfds.Split, value: Sequence>` otherwise.
   """
+  builder_kwargs = _set_file_format_for_data_source(builder_kwargs)
   dbuilder = _fetch_builder(
       name,
       data_dir,
       builder_kwargs,
       try_gcs,
   )
-  if download_and_prepare_kwargs is None:
-    download_and_prepare_kwargs = {}
-  # `tfds.data_source` relies on ArrayRecord for random access. We need to
-  # specify this to download_and_prepare the dataset with the right file format.
-  file_format = download_and_prepare_kwargs.get(
-      'file_format', file_adapters.FileFormat.ARRAY_RECORD
-  )
-  file_format = file_adapters.FileFormat.from_value(file_format)
-  if file_format != file_adapters.FileFormat.ARRAY_RECORD:
-    raise NotImplementedError(
-        f'No random access data source for file format {file_format}. Please,'
-        ' use `tfds.data_source(...,'
-        ' download_and_prepare_kwargs={"file_format":'
-        f' {file_adapters.FileFormat.ARRAY_RECORD}}})` instead.'
-    )
-  download_and_prepare_kwargs['file_format'] = file_format
   _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
   return dbuilder.as_data_source(split=split, decoders=decoders)
 
