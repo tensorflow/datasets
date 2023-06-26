@@ -16,7 +16,7 @@
 """Utilities for the assin2 dataset."""
 
 import dataclasses
-from typing import List
+from typing import List, Optional
 from xml.etree import cElementTree as ET
 
 _VALID_ENTAILMENT = ('Entailment', 'None')
@@ -31,7 +31,7 @@ class Pair:
   similarity: float
 
 
-def get_element_text(xml_pair: ET.Element, tag: str) -> str:
+def get_element_text(xml_pair: ET.Element, tag: str) -> Optional[str]:
   """Returns the text associated with a given tag."""
   element = xml_pair.find(tag)
   assert element is not None, f'The tag "{tag}" was not found.'
