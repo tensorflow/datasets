@@ -34,7 +34,8 @@ replay during training with sticky actions
 [Agarwal et al., 2020](https://arxiv.org/abs/1907.04543), for each game we use
 data from five runs with 50 million transitions each. We release datasets for 46
 Atari games. For details on how the dataset was generated, please refer to the
-paper.
+paper. Please see [this note](https://github.com/google-research/batch_rl#important-notes-on-atari-rom-versions)
+about the ROM versions used to generate the datasets.
 
 Atari is a standard RL benchmark. We recommend you to try offline RL methods on
 Atari if you are interested in comparing your approach to other state of the art
