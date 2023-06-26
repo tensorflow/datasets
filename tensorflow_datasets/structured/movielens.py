@@ -147,9 +147,9 @@ class MovieLensConfig(tfds.core.BuilderConfig):
       ValueError: if format_version is not one of '_FORMAT_VERSIONS' or if
           table_option is not one of '_TABLE_OPTIONS'.
     """
-    if format_version not in _FORMAT_VERSIONS:
+    if not format_version or format_version not in _FORMAT_VERSIONS:
       raise ValueError('format_version must be one of %s.' % _FORMAT_VERSIONS)
-    if table_option not in _TABLE_OPTIONS:
+    if not table_option or table_option not in _TABLE_OPTIONS:
       raise ValueError('table_option must be one of %s.' % _TABLE_OPTIONS)
     super(MovieLensConfig, self).__init__(**kwargs)
     self._format_version = format_version
@@ -166,7 +166,7 @@ class MovieLensConfig(tfds.core.BuilderConfig):
     return self._table_option
 
   @property
-  def download_url(self) -> str:
+  def download_url(self) -> Optional[str]:
     return self._download_url
 
   @property
