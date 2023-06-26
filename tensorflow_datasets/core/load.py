@@ -485,7 +485,6 @@ def _fetch_builder(
   """Fetches the `tfds.core.DatasetBuilder` by name."""
   if builder_kwargs is None:
     builder_kwargs = {}
-
   return builder(name, data_dir=data_dir, try_gcs=try_gcs, **builder_kwargs)
 
 
