@@ -230,7 +230,7 @@ class Tensor(feature_lib.FeatureConnector):
   ) -> type_utils.NpArrayOrScalar:
     example_data, shape = self._get_value_and_shape(example_data)
     if not self._encoded_to_bytes:
-      if isinstance(example_data, np.ndarray):
+      if isinstance(example_data, np.ndarray) and shape:
         return example_data.reshape(shape)
       return example_data
     if self._encoding == Encoding.ZLIB:
