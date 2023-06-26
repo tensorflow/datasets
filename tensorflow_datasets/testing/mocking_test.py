@@ -198,6 +198,10 @@ def test_mock_data_use_code():
     ds = tfds.load('mnist', split='non_existent')
     assert set(ds.element_spec.keys()) == {'image', 'label'}
 
+    ds = tfds.data_source('mnist', split='non_existent')
+    assert len(ds) == 1
+    assert set(ds[0].keys()) == {'image', 'label'}
+
 
 def test_mock_data_use_files(tmp_path):
   """Test `MockPolicy.USE_FILES` specific behavior."""
@@ -212,6 +216,8 @@ def test_mock_data_use_files(tmp_path):
     # We could make the check more explicit.
     with pytest.raises(ValueError, match='Unknown split'):
       tfds.load('mnist', split='non_existent')
+    with pytest.raises(ValueError, match='Unknown split'):
+      tfds.data_source('mnist', split='non_existent')
 
   with tfds.testing.mock_data(
       policy=tfds.testing.MockPolicy.USE_FILES,
@@ -219,6 +225,8 @@ def test_mock_data_use_files(tmp_path):
   ):
     with pytest.raises(ValueError, match='copy the real metadata files'):
       tfds.load('mnist')
+    with pytest.raises(ValueError, match='copy the real metadata files'):
+      tfds.data_source('mnist', split='non_existent')
 
 
 def test_cardinality():

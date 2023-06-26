@@ -29,8 +29,10 @@ import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import reader as reader_lib
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.data_sources import array_record
 from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import tree_utils
@@ -250,8 +252,8 @@ def mock_data(
     """`builder.download_and_prepare` is a no-op."""
     del self, args, kwargs  # Unused
 
-  def mock_as_dataset_base(self, **kwargs):
-    """Mocks `builder.as_dataset`."""
+  def _check_policy(self) -> MockPolicy:
+    """Checks the policy and returns the actual used policy for mocking."""
     # When `USE_FILES` is used, make sure the metadata actually exists.
     if tf.io.gfile.exists(self.data_dir):
       logging.info('Metadata found for %s at %s', self.name, self.data_dir)
@@ -270,6 +272,12 @@ def mock_data(
             self.name,
             self.data_dir,
         )
+        return MockPolicy.USE_CODE
+    return policy
+
+  def mock_as_dataset_base(self, **kwargs):
+    """Mocks `builder.as_dataset`."""
+    _check_policy(self)
 
     # Info is already restored at this point, so can mock the file system
     # safely in case of `USE_CODE` mode.
@@ -317,6 +325,7 @@ def mock_data(
   def mock_as_data_source(self, split, decoders=None, **kwargs):
     """Mocks `builder.as_data_source`."""
     del kwargs
+    actual_policy = _check_policy(self)
     if split is None:
       split = {s: s for s in self.info.splits}
 
@@ -325,9 +334,24 @@ def mock_data(
     )
     generator = generator_cls(features, num_examples)
 
-    with mock.patch(
+    if actual_policy == MockPolicy.USE_CODE:
+      # Mock `SplitDict`, because splits are not known in advance.
+      split_dict = mock.MagicMock(spec=splits_lib.SplitDict)
+    else:
+      # Use the real `SplitDict`.
+      split_dict = splits_lib.SplitDict
+    with mock.patch.object(
+        splits_lib,
+        'SplitDict',
+        new=split_dict,
+    ), mock.patch(
         'array_record.python.array_record_data_source.ArrayRecordDataSource',
         mock_array_record_data_source,
+    ), mock.patch(
+        'tensorflow_datasets.core.dataset_info.DatasetInfo.file_format',
+        new_callable=mock.PropertyMock,
+        # Force ARRAY_RECORD as the default file_format.
+        return_value=file_adapters.FileFormat.ARRAY_RECORD,
     ):
       self.info.features.deserialize_example_np = _deserialize_example_np
       mock_array_record_data_source.return_value.__len__.return_value = (
