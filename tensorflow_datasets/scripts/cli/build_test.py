@@ -142,6 +142,17 @@ def test_build_multiple():
   ]
 
 
+@parameterized.parameters(range(5))
+def test_build_parallel(num_processes):
+  # Order is not guaranteed
+  assert set(_build(f'trivia_qa --num-proccesses={num_processes}')) == set([
+      'trivia_qa/rc',
+      'trivia_qa/rc.nocontext',
+      'trivia_qa/unfiltered',
+      'trivia_qa/unfiltered.nocontext',
+  ])
+
+
 def test_build_dataset_configs():
   # By default, all configs are build
   assert _build('trivia_qa') == [
