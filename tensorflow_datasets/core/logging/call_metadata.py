@@ -77,7 +77,7 @@ class CallMetadata:
 
   def __init__(self):
     self.status = Status.UNKNOWN
-    self.thread_id = threading.current_thread().ident
+    self.thread_id = threading.get_ident()
     self.session_id, self.direct_call = _get_session_id(self.thread_id)
     self.start_time_micros = int(time.time() * 1e6)
 

@@ -143,7 +143,7 @@ class DatasetBuilderTestCase(
   """
 
   DATASET_CLASS = None
-  SPLITS = None
+  SPLITS = {}
   VERSION = None
   BUILDER_CONFIG_NAMES_TO_TEST: Optional[
       List[Union[str, dataset_builder.BuilderConfig]]
@@ -172,12 +172,12 @@ class DatasetBuilderTestCase(
             visibility.DatasetType.TFDS_PUBLIC,
         ]
     )
-    cls._available_cm.__enter__()
+    cls._available_cm.__enter__()  # pylint: disable=protected-access
 
   @classmethod
   def tearDownClass(cls):
     super().tearDownClass()
-    cls._available_cm.__exit__(None, None, None)
+    cls._available_cm.__exit__(None, None, None)  # pylint: disable=protected-access
 
   def setUp(self):
     super(DatasetBuilderTestCase, self).setUp()
@@ -300,7 +300,7 @@ class DatasetBuilderTestCase(
 
   def _prepare_download_results(
       self,
-      downloaded_files: Mapping[str, str],
+      downloaded_files: Union[Mapping[str, str], str],
   ) -> Mapping[str, epath.PathLike]:
     return tf.nest.map_structure(
         lambda fname: self.dummy_data / fname,
@@ -328,13 +328,26 @@ class DatasetBuilderTestCase(
     return self._prepare_download_results(self.DL_DOWNLOAD_RESULT)
 
   def _get_dl_download_kaggle_result(self, competition_or_dataset):
+    del competition_or_dataset  # Unused
     return self._prepare_download_results(self.DL_DOWNLOAD_RESULT)
 
   def _download_checksums(self, url):
+    del url  # Unused
     self._stop_record_download = True
 
+  @property
+  def dataset_class(self):
+    if self.DATASET_CLASS is None or not issubclass(
+        self.DATASET_CLASS, dataset_builder.DatasetBuilder
+    ):
+      raise ValueError(
+          "DATASET_CLASS is not a subclass of DatasetBuilder. Call setUpClass()"
+          " properly."
+      )
+    return self.DATASET_CLASS
+
   def _make_builder(self, config=None):
-    return self.DATASET_CLASS(  # pylint: disable=not-callable
+    return self.dataset_class(  # pylint: disable=not-callable
         data_dir=self.tmp_dir, config=config, version=self.VERSION
     )
 
@@ -389,8 +402,8 @@ class DatasetBuilderTestCase(
         " want to opt-out of checksums validation, please add `SKIP_CHECKSUMS ="
         " True` to the `DatasetBuilderTestCase`.\n"
     )
-    url_infos = self.DATASET_CLASS.url_infos
-    filepath = self.DATASET_CLASS._checksums_path  # pylint: disable=protected-access
+    url_infos = self.dataset_class.url_infos
+    filepath = self.dataset_class._checksums_path  # pylint: disable=protected-access
     # Legacy checksums: Search in `checksums/` dir
     if url_infos is None:
       legacy_filepath = checksums._checksum_paths().get(self.builder.name)  # pylint: disable=protected-access

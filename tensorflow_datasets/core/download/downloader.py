@@ -32,6 +32,7 @@ import requests
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
+from tensorflow_datasets.core.utils import tqdm_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
@@ -116,6 +117,8 @@ class _Downloader(object):
   """
 
   _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS = 50
+  _pbar_url: tqdm_utils._TqdmPbarAsync
+  _pbar_dl_size: tqdm_utils._TqdmPbarAsync
 
   def __init__(
       self,
@@ -137,8 +140,6 @@ class _Downloader(object):
         or self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS
     )
     self._checksumer_cls = checksumer or hashlib.sha256
-    self._pbar_url = None
-    self._pbar_dl_size = None
 
   @contextlib.contextmanager
   def tqdm(self) -> Iterator[None]:
