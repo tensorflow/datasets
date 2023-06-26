@@ -18,7 +18,9 @@
 import argparse
 import functools
 import importlib
+import itertools
 import json
+import multiprocessing
 import os
 import typing
 from typing import Dict, Iterator, Optional, Tuple, Type, Union
@@ -201,6 +203,12 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   generation_group.add_argument(
       '--max_shard_size_mb', type=int, help='The max shard size in megabytes.'
   )
+  generation_group.add_argument(
+      '--num-processes',
+      type=int,
+      default=1,
+      help='Number of parallel build processes.',
+  )
 
   publish_group = build_parser.add_argument_group(
       'Publishing',
@@ -270,14 +278,20 @@ def _build_datasets(args: argparse.Namespace) -> None:
   else:
     datasets = datasets or ['']  # Empty string for default
 
-  # Generate all datasets sequentially.
-  for ds_to_build in datasets:
-    # Each `str` may correspond to multiple builder (e.g. multiple configs)
-    for builder in _make_builders(args, ds_to_build):
-      if args.download_only:
-        _download(args, builder)
-      else:
-        _download_and_prepare(args, builder)
+  # Parallelize datasets generation.
+  builders = itertools.chain(
+      *(_make_builders(args, dataset) for dataset in datasets)
+  )
+  process_builder_fn = functools.partial(
+      _download if args.download_only else _download_and_prepare, args
+  )
+
+  if args.num_processes == 1:
+    for builder in builders:
+      process_builder_fn(builder)
+  else:
+    with multiprocessing.Pool(args.num_processes) as pool:
+      pool.map(process_builder_fn, builders)
 
 
 def _make_builders(
