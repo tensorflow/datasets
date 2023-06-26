@@ -590,11 +590,9 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
     )
     self.assertEqual(feature.names, ['left', 'right'])
 
-    feature = feature_lib.Sequence(
-        {
-            'label': feature_lib.ClassLabel(names=['left', 'right']),
-        }
-    )
+    feature = feature_lib.Sequence({
+        'label': feature_lib.ClassLabel(names=['left', 'right']),
+    })
     self.assertEqual(feature['label'].names, ['left', 'right'])
 
   def test_metadata(self):
@@ -606,6 +604,23 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
       feature2 = feature_lib.Sequence(feature_lib.ClassLabel(num_classes=2))
       feature2.load_metadata(data_dir=tmp_dir, feature_name='test')
     self.assertEqual(feature2.feature.names, ['left', 'right'])
+
+  def test_sequences_with_dict(self):
+    feature = feature_lib.FeaturesDict({
+        'answers': feature_lib.Sequence({
+            'answer_start': np.int32,
+        }),
+    })
+    example = {
+        'answers': {
+            'answer_start': [1, 2, 3],
+        }
+    }
+    serialized_example = feature.serialize_example(example)
+    self.assertEqual(
+        feature.deserialize_example_np(serialized_example)['answers'],
+        example['answers'],
+    )
 
 
 if __name__ == '__main__':
