@@ -54,3 +54,6 @@ runs:
     - if: ${{ steps.python-cache.outputs.cache-hit != 'true' }}
       run: pip install .[${{ inputs.extras }}]
       shell: bash
+    # Get TFDS library from the repository instead of cache.
+    - run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
+      shell: bash
