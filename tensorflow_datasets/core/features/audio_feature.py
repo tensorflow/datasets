@@ -244,7 +244,7 @@ class Audio(tensor_feature.Tensor):
       file_format: `str`, the audio file format. Can be any format ffmpeg
         understands. If `None`, will attempt to infer from the file extension.
       shape: `tuple`, shape of the data.
-      dtype: The dtype of the data. Numpy DTypes are converted to TF DTypes.
+      dtype: The dtype of the data.
       sample_rate: `int`, additional metadata exposed to the user through
         `info.features['audio'].sample_rate`. This value isn't used neither in
         encoding nor decoding.
@@ -253,8 +253,7 @@ class Audio(tensor_feature.Tensor):
       doc: Documentation of this feature (e.g. description).
       lazy_decode: `bool`, if set `True` then stores audio as is and decodes it
         to numpy array when loaded. Otherwise saves decoded audio.
-    """
-    dtype = tf.dtypes.as_dtype(dtype)
+    """  # fmt:skip
     self._file_format = file_format
     self._sample_rate = sample_rate
     self._lazy_decode = lazy_decode
