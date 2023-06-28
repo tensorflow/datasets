@@ -46,11 +46,11 @@ class FakeHfDatasets:
 
 
 def test_from_hf_to_tfds():
-  assert huggingface_dataset_builder._from_hf_to_tfds("x") == "x"
-  assert huggingface_dataset_builder._from_hf_to_tfds("X") == "x"
-  assert huggingface_dataset_builder._from_hf_to_tfds("x-y") == "x_y"
-  assert huggingface_dataset_builder._from_hf_to_tfds("x/y") == "x__y"
-  assert huggingface_dataset_builder._from_hf_to_tfds("x_v1.0") == "x_v1_0"
+  assert huggingface_dataset_builder.from_hf_to_tfds("x") == "x"
+  assert huggingface_dataset_builder.from_hf_to_tfds("X") == "x"
+  assert huggingface_dataset_builder.from_hf_to_tfds("x-y") == "x_y"
+  assert huggingface_dataset_builder.from_hf_to_tfds("x/y") == "x__y"
+  assert huggingface_dataset_builder.from_hf_to_tfds("x_v1.0") == "x_v1_0"
 
 
 @mock.patch.object(lazy_imports_lib.lazy_imports, "datasets", FakeHfDatasets())

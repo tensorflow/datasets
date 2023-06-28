@@ -121,7 +121,7 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
   raise ValueError(f"Type {type(hf_features)} is not supported.")
 
 
-def _from_hf_to_tfds(hf_name: str) -> str:
+def from_hf_to_tfds(hf_name: str) -> str:
   """Converts Huggingface dataset name to a TFDS compatible name.
 
   Huggingface dataset names can contain characters that are not supported in
@@ -158,7 +158,7 @@ def _from_tfds_to_hf(tfds_name: str) -> str:
   hf_datasets = lazy_imports_lib.lazy_imports.datasets
   hf_names = hf_datasets.list_datasets()
   for hf_name in hf_names:
-    if _from_hf_to_tfds(hf_name) == tfds_name.lower():
+    if from_hf_to_tfds(hf_name) == tfds_name.lower():
       return hf_name
   raise registered.DatasetNotFoundError(
       f'"{tfds_name}" is not listed in Hugging Face datasets.'
@@ -350,7 +350,7 @@ class HuggingfaceDatasetBuilder(
       )
     else:
       self._converted_builder_config = None
-    self.name = _from_hf_to_tfds(hf_repo_id)
+    self.name = from_hf_to_tfds(hf_repo_id)
     self._hf_hub_token = hf_hub_token
     self._hf_num_proc = hf_num_proc
     self._tfds_num_proc = tfds_num_proc
