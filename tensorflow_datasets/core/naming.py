@@ -454,7 +454,7 @@ class ShardedFileTemplate:
 
   @functools.cached_property
   def regex(self) -> 're.Pattern[str]':
-    """Returns the regular expresssion for this template.
+    """Returns the regular expression for this template.
 
     Can be used to test whether a filename matches to this template.
     """
