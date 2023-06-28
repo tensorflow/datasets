@@ -16,6 +16,7 @@
 """Tests for file_utils."""
 
 import os
+import time
 from unittest import mock
 
 from absl.testing import flagsaver
