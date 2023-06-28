@@ -86,7 +86,7 @@ class SplitInfo:
     name: Name of the split (e.g. `train`, `test`,...)
     shard_lengths: List of length <number of files> containing the number of
       examples stored in each file.
-    filename_template: the template used to create sharded filenames.
+    filename_template: The template used to create sharded filenames.
     num_examples: Total number of examples (`sum(shard_lengths)`)
     num_shards: Number of files (`len(shard_lengths)`)
     num_bytes: Size of the files (in bytes)

@@ -32,8 +32,10 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import shuffle
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import type_utils
+
 
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
 Example = Any
@@ -298,6 +300,7 @@ class Writer(object):
       )
 
     shard_lengths = [int(spec.examples_number) for spec in shard_specs]
+
     logging.info(
         "Done writing %s. Number of examples: %s (shards: %s)",
         filename,
