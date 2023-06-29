@@ -36,6 +36,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.image_classification import mnist
+from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
 
 from google.protobuf import text_format
 
@@ -625,6 +626,7 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     redistribution_info=license: "test license",
 )'''
 # pylint: enable=g-inconsistent-quotes
+
 
 if __name__ == "__main__":
   testing.test_main()
