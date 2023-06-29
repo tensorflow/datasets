@@ -239,7 +239,7 @@ class Writer(object):
     self._shuffler.add(key, serialized_example)
     self._num_examples += 1
 
-  def finalize(self):
+  def finalize(self) -> Tuple[List[int], int]:
     """Effectively writes examples to the tfrecord files."""
     filename = self._filename_template.sharded_filepaths_pattern()
     shard_specs = _get_shard_specs(
@@ -566,8 +566,13 @@ class BeamWriter(object):
         >> beam.ParDo(self._store_split_info, total_size=total_size)
     )
 
-  def finalize(self):
-    """Deletes tmp directory and returns shard_lengths and total_size."""
+  def finalize(self) -> Tuple[List[int], int]:
+    """Deletes tmp directory and returns shard_lengths and total_size.
+
+    Returns:
+      List of length <number of shards> containing the number of examples stored
+      in each shard, and size of the files (in bytes).
+    """
     if self._split_info is None:
       split_info_path = epath.Path(self._split_info_path)
       self._split_info = json.loads(split_info_path.read_bytes())
