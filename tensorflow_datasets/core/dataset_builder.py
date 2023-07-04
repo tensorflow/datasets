@@ -69,6 +69,7 @@ VersionOrStr = Union[utils.Version, str]
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
 REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
+UPDATE_DATASET_INFO = download.GenerateMode.UPDATE_DATASET_INFO
 
 GCS_HOSTED_MSG = """\
 Dataset %s is hosted on GCS. It will automatically be downloaded to your
@@ -563,6 +564,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     download_config = download_config or download.DownloadConfig()
     data_path = self.data_path
     data_exists = data_path.exists()
+
+    if download_config.download_mode == UPDATE_DATASET_INFO:
+      self._update_dataset_info(data_path)
+      return
+
     if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
       logging.info("Reusing dataset %s (%s)", self.name, self.data_dir)
       return
@@ -711,6 +717,15 @@ class DatasetBuilder(registered.RegisteredDataset):
       )
 
     self._log_download_done()
+
+  def _update_dataset_info(self, data_path: epath.Path):
+    """Update the `dataset_info.json` file there."""
+    info_file = data_path / constants.DATASET_INFO_FILENAME
+    if not info_file.exists():
+      raise AssertionError(f"To update {info_file}, it must already exist.")
+    new_info = self.info
+    new_info.read_from_directory(data_path)
+    new_info.write_to_directory(data_path, all_metadata=False)
 
   @tfds_logging.as_data_source()
   def as_data_source(

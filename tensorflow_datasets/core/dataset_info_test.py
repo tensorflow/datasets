@@ -219,7 +219,7 @@ class DatasetInfoTest(testing.TestCase):
       # Save it
       info.write_to_directory(tmp_dir)
 
-      # If fields are not defined, then everything is restored from disk
+      # If fields are not defined, then everything is restored from disk.
       restored_info = dataset_info.DatasetInfo(builder=self._builder)
       restored_info.read_from_directory(tmp_dir)
       self.assertProtoEquals(info.as_proto, restored_info.as_proto)
