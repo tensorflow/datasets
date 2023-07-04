@@ -26,14 +26,24 @@ class GenerateMode(enum.Enum):
 
   The generations modes:
 
-  |                                    | Downloads | Dataset |
-  | -----------------------------------|-----------|---------|
-  | `REUSE_DATASET_IF_EXISTS` (default)| Reuse     | Reuse   |
-  | `REUSE_CACHE_IF_EXISTS`            | Reuse     | Fresh   |
-  | `FORCE_REDOWNLOAD`                 | Fresh     | Fresh   |
+  |                                    | Downloads | Dataset | Metadata |
+  | -----------------------------------|-----------|---------|----------|
+  | `REUSE_DATASET_IF_EXISTS` (default)| Reuse     | Reuse   | Reuse    |
+  | `UPDATE_DATASET_INFO`              | Reuse     | Reuse   | Fresh    |
+  | `REUSE_CACHE_IF_EXISTS`            | Reuse     | Fresh   | Fresh    |
+  | `FORCE_REDOWNLOAD`                 | Fresh     | Fresh   | Fresh    |
+
+  UPDATE_DATASET_INFO only regenerates DatasetInfo metadata which is directly
+  coming from the Builder metadata, and not directly used to prepare the data
+  or computed from the downloaded or prepared data.
+  This means that `description`, `config_tags`, etc. will be updated, but
+  `download_size`, `schema`, `splits`, `disable_shuffling`, `file_format` will
+  not be updated.
+  UPDATE_DATASET_INFO will fail if the data has never been prepared.
   """
 
   REUSE_DATASET_IF_EXISTS = 'reuse_dataset_if_exists'
+  UPDATE_DATASET_INFO = 'update_dataset_info'
   REUSE_CACHE_IF_EXISTS = 'reuse_cache_if_exists'
   FORCE_REDOWNLOAD = 'force_redownload'
 

@@ -36,6 +36,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.data_sources import array_record
@@ -787,6 +788,45 @@ class DatasetBuilderGenerateModeTest(testing.TestCase):
       )
       builder.download_and_prepare(download_config=dl_config)
       self.assertEqual(builder.info.splits["train"].num_examples, 5)
+
+  def test_update_dataset_info_keeps_data_source(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+      with mock.patch.object(tf.data, "TFRecordDataset") as mock_read:
+        builder.read_tfrecord_as_dataset("/x/y")
+        mock_read.assert_called_once_with(
+            filenames=["/x/y"],
+            compression_type=None,
+            num_parallel_reads=None,
+        )
+      info_proto = builder.info.as_proto
+      assert len(info_proto.data_source_accesses) == 1
+      assert info_proto.data_source_accesses[0].file_system.path == "/x/y"
+      builder.download_and_prepare()
+      # Manually check information was indeed written in datset_info.json and
+      # can be reloaded:
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+      info_proto = builder.info.as_proto
+      assert len(info_proto.data_source_accesses) == 1
+      assert info_proto.data_source_accesses[0].file_system.path == "/x/y"
+      assert info_proto.description == "Mnist description."
+      # Re-generate the info file with a different description:
+      dl_config = download.DownloadConfig(
+          download_mode=download.GenerateMode.UPDATE_DATASET_INFO,
+      )
+      info_proto.description = "new description"
+      builder.download_and_prepare(download_config=dl_config)
+      # New description is available after callign download_and_prepare:
+      assert info_proto.description == "new description"
+      # Then check that data_source is still there, and description was builder
+      builder = read_only_builder.builder_from_files(
+          builder.name,
+          data_dir=tmp_dir,
+      )
+      info_proto = builder.info.as_proto
+      assert len(info_proto.data_source_accesses) == 1
+      assert info_proto.data_source_accesses[0].file_system.path == "/x/y"
+      assert info_proto.description == "new description"
 
 
 class DatasetBuilderReadTest(testing.TestCase):

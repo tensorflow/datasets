@@ -157,6 +157,15 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       ),
   )
   generation_group.add_argument(
+      '--update_metadata_only',
+      action='store_true',
+      default=False,
+      help=(
+          'If True, existing dataset_info.json is updated with metadata defined'
+          ' in Builder class(es). Datasets must already have been prepared.'
+      ),
+  )
+  generation_group.add_argument(
       '--download_config',
       type=str,
       help=(
@@ -594,10 +603,18 @@ def _make_download_config(
   if args.download_config:
     kwargs.update(json.loads(args.download_config))
 
+  if 'download_mode' in kwargs:
+    kwargs['download_mode'] = tfds.download.GenerateMode(
+        kwargs['download_mode']
+    )
+  else:
+    kwargs['download_mode'] = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
+  if args.update_metadata_only:
+    kwargs['download_mode'] = tfds.download.GenerateMode.UPDATE_DATASET_INFO
+
   dl_config = tfds.download.DownloadConfig(
       extract_dir=args.extract_dir,
       manual_dir=manual_dir,
-      download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=args.max_examples_per_split,
       register_checksums=args.register_checksums,
       force_checksums_validation=args.force_checksums_validation,
