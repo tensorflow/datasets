@@ -102,56 +102,56 @@ class D4rlAntmaze(dataset_builder.D4RLDatasetBuilder):
       ),
       # v2
       dataset_builder.BuilderConfig(
-        name="umaze-v2",
-        dataset_dir="ant_maze_v2",
-        env="mujoco",
+        name='umaze-v2',
+        dataset_dir='ant_maze_v2',
+        env='mujoco',
         file_suffix=(
-            "Ant_maze_u-maze_noisy_multistart_False_multigoal_False_sparse_fixed"
+            'Ant_maze_u-maze_noisy_multistart_False_multigoal_False_sparse_fixed'
         ),
         step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
         description=_TASK_REFERENCE,
       ),
       dataset_builder.BuilderConfig(
-        name="umaze-diverse-v2",
-        dataset_dir="ant_maze_v2",
-        env="mujoco",
-        file_suffix=("Ant_maze_u-maze_noisy_multistart_True_multigoal_True_sparse_fixed"),
+        name='umaze-diverse-v2',
+        dataset_dir='ant_maze_v2',
+        env='mujoco',
+        file_suffix=('Ant_maze_u-maze_noisy_multistart_True_multigoal_True_sparse_fixed'),
         step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
         description=_TASK_REFERENCE,
       ),
       dataset_builder.BuilderConfig(
-        name="medium-play-v2",
-        dataset_dir="ant_maze_v2",
-        env="mujoco",
+        name='medium-play-v2',
+        dataset_dir='ant_maze_v2',
+        env='mujoco',
         file_suffix=(
-            "Ant_maze_big-maze_noisy_multistart_True_multigoal_False_sparse_fixed"
+            'Ant_maze_big-maze_noisy_multistart_True_multigoal_False_sparse_fixed'
         ),
         step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
         description=_TASK_REFERENCE,
       ),
       dataset_builder.BuilderConfig(
-        name="medium-diverse-v2",
-        dataset_dir="ant_maze_v2",
-        env="mujoco",
+        name='medium-diverse-v2',
+        dataset_dir='ant_maze_v2',
+        env='mujoco',
         file_suffix=(
-            "Ant_maze_big-maze_noisy_multistart_True_multigoal_True_sparse_fixed"
+            'Ant_maze_big-maze_noisy_multistart_True_multigoal_True_sparse_fixed'
         ),
         step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
         description=_TASK_REFERENCE,
       ),
       dataset_builder.BuilderConfig(
-        name="large-diverse-v2",
-        dataset_dir="ant_maze_v2",
-        env="mujoco",
-        file_suffix="Ant_maze_hardest-maze_noisy_multistart_True_multigoal_True_sparse_fixed",
+        name='large-diverse-v2',
+        dataset_dir='ant_maze_v2',
+        env='mujoco',
+        file_suffix='Ant_maze_hardest-maze_noisy_multistart_True_multigoal_True_sparse_fixed',
         step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
         description=_TASK_REFERENCE,
       ),
       dataset_builder.BuilderConfig(
-        name="large-play-v2",
-        dataset_dir="ant_maze_v2",
-        env="mujoco",
-        file_suffix="Ant_maze_hardest-maze_noisy_multistart_True_multigoal_False_sparse_fixed",
+        name='large-play-v2',
+        dataset_dir='ant_maze_v2',
+        env='mujoco',
+        file_suffix='Ant_maze_hardest-maze_noisy_multistart_True_multigoal_False_sparse_fixed',
         step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
         description=_TASK_REFERENCE,
       ),
