@@ -94,7 +94,7 @@ TESTS_DEPENDENCIES = [
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
     'pyyaml',
-    'tensorflow-io',
+    'tensorflow-io[tensorflow]',
     # `datasets` needs to be installed separately in Python >= 3.10 due to
     # conflicts between `multiprocess` and `apache-beam` libraries. See
     # https://github.com/uqfoundation/multiprocess/issues/125
@@ -171,7 +171,7 @@ DATASET_EXTRAS = {
         'scipy',
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
-    'lsun': ['tensorflow-io'],
+    'lsun': ['tensorflow-io[tensorflow]'],
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
