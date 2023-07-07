@@ -396,6 +396,24 @@ class list_builders(_FunctionDecorator):  # pylint: disable=invalid-name
     logger_method(with_community_datasets=kwargs.get("with_community_datasets"))
 
 
+class load_from_ml_catalog(_FunctionDecorator):  # pylint: disable=invalid-name
+  """Decorator to call `load_from_ml_catalog` method on registered loggers."""
+
+  def _call_logger_method(
+      self,
+      logger_method: _LoggerMethod,
+      args: Any,
+      kwargs: Any,
+  ):
+    logger_method(
+        name=args[0] if args else kwargs["name"],
+        split=kwargs.get("split"),
+        decoders=kwargs.get("decoders"),
+        read_config=kwargs.get("read_config"),
+        shuffle=kwargs.get("shuffle"),
+    )
+
+
 class load(_FunctionDecorator):  # pylint: disable=invalid-name
   """Decorator to call `load` method on registered loggers."""
 
