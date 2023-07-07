@@ -263,6 +263,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cifar100_n`](cifar100_n.md)
 *   [`cifar10_1`](cifar10_1.md)
 *   [`cifar10_corrupted`](cifar10_corrupted.md)
+*   [`cifar10_h`](cifar10_h.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cifar10_n`](cifar10_n.md)
 *   [`citrus_leaves`](citrus_leaves.md)
 *   [`cmaterdb`](cmaterdb.md)
