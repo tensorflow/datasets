@@ -697,7 +697,9 @@ class DatasetInfo(object):
     self._fully_initialized = True
 
   def add_file_data_source_access(
-      self, path: Union[epath.PathLike, Iterable[epath.PathLike]]
+      self,
+      path: Union[epath.PathLike, Iterable[epath.PathLike]],
+      url: Optional[str] = None,
   ) -> None:
     """Records that the given query was used to generate this dataset.
 
@@ -705,6 +707,7 @@ class DatasetInfo(object):
       path: path or paths of files that were read. Can be a file pattern.
         Multiple paths or patterns can be specified as a comma-separated string
         or a list.
+      url:  URL referring to the data being used.
     """
     access_timestamp_ms = _now_in_milliseconds()
     if isinstance(path, str) or isinstance(path, epath.Path):
@@ -715,6 +718,7 @@ class DatasetInfo(object):
             dataset_info_pb2.DataSourceAccess(
                 access_timestamp_ms=access_timestamp_ms,
                 file_system=dataset_info_pb2.FileSystem(path=os.fspath(file)),
+                url=url,
             )
         )
 
@@ -731,7 +735,10 @@ class DatasetInfo(object):
         )
     )
 
-  def add_sql_data_source_access(self, sql_query: str) -> None:
+  def add_sql_data_source_access(
+      self,
+      sql_query: str,
+  ) -> None:
     """Records that the given query was used to generate this dataset."""
     self._info_proto.data_source_accesses.append(
         dataset_info_pb2.DataSourceAccess(
@@ -741,9 +748,16 @@ class DatasetInfo(object):
     )
 
   def add_tfds_data_source_access(
-      self, dataset_reference: naming.DatasetReference
+      self,
+      dataset_reference: naming.DatasetReference,
+      url: Optional[str] = None,
   ) -> None:
-    """Records that the given query was used to generate this dataset."""
+    """Records that the given query was used to generate this dataset.
+
+    Args:
+      dataset_reference:
+      url: a URL referring to the TFDS dataset.
+    """
     self._info_proto.data_source_accesses.append(
         dataset_info_pb2.DataSourceAccess(
             access_timestamp_ms=_now_in_milliseconds(),
@@ -754,6 +768,7 @@ class DatasetInfo(object):
                 data_dir=dataset_reference.data_dir,
                 ds_namespace=dataset_reference.namespace,
             ),
+            url=url,
         )
     )
 

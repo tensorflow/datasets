@@ -106,8 +106,16 @@ message DataSourceAccess {
     FileSystem file_system = 2;
     SqlQuery sql_query = 3;
     TfdsDatasetReference tfds_dataset = 4;
-    Url url = 5;
   }
+
+  // URL referring to the data being used.
+  // If provided together with a source, the url should correspond to the source
+  // or part of the source.
+  // copybara:strip_begin
+  // If referring to a DataHub dataset, use the following format:
+  // http://data/details/mldataset.tfds.mnist
+  // copybara:strip_end
+  Url url = 5;
 }
 
 message FileSystem {
