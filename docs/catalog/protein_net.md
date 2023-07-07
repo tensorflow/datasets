@@ -29,7 +29,7 @@ poor and data rich regimes.
     [https://github.com/aqlaboratory/proteinnet](https://github.com/aqlaboratory/proteinnet)
 
 *   **Source code**:
-    [`tfds.structured.proteinnet.ProteinNet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/proteinnet/proteinnet.py)
+    [`tfds.datasets.protein_net.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/protein_net/protein_net_dataset_builder.py)
 
 *   **Versions**:
 
@@ -43,26 +43,26 @@ poor and data rich regimes.
 
 ```python
 FeaturesDict({
-    'evolutionary': Tensor(shape=(None, 21), dtype=tf.float32),
-    'id': Text(shape=(), dtype=tf.string),
-    'length': tf.int32,
-    'mask': Tensor(shape=(None,), dtype=tf.bool),
-    'primary': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'tertiary': Tensor(shape=(None, 3), dtype=tf.float32),
+    'evolutionary': Tensor(shape=(None, 21), dtype=float32),
+    'id': Text(shape=(), dtype=string),
+    'length': int32,
+    'mask': Tensor(shape=(None,), dtype=bool),
+    'primary': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=20)),
+    'tertiary': Tensor(shape=(None, 3), dtype=float32),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature      | Class                | Shape      | Dtype      | Description
-:----------- | :------------------- | :--------- | :--------- | :----------
-             | FeaturesDict         |            |            |
-evolutionary | Tensor               | (None, 21) | tf.float32 |
-id           | Text                 |            | tf.string  |
-length       | Tensor               |            | tf.int32   |
-mask         | Tensor               | (None,)    | tf.bool    |
-primary      | Sequence(ClassLabel) | (None,)    | tf.int64   |
-tertiary     | Tensor               | (None, 3)  | tf.float32 |
+Feature      | Class                | Shape      | Dtype   | Description
+:----------- | :------------------- | :--------- | :------ | :----------
+             | FeaturesDict         |            |         |
+evolutionary | Tensor               | (None, 21) | float32 |
+id           | Text                 |            | string  |
+length       | Tensor               |            | int32   |
+mask         | Tensor               | (None,)    | bool    |
+primary      | Sequence(ClassLabel) | (None,)    | int64   |
+tertiary     | Tensor               | (None, 3)  | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

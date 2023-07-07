@@ -12,10 +12,6 @@
 # `controlled_noisy_web_labels`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -105,22 +101,22 @@ The resulting directory structure may then be processed by TFDS:
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'is_clean': tf.bool,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
+    'id': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'is_clean': bool,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=100),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape           | Dtype     | Description
-:------- | :----------- | :-------------- | :-------- | :----------
-         | FeaturesDict |                 |           |
-id       | Text         |                 | tf.string |
-image    | Image        | (None, None, 3) | tf.uint8  |
-is_clean | Tensor       |                 | tf.bool   |
-label    | ClassLabel   |                 | tf.int64  |
+Feature  | Class        | Shape           | Dtype  | Description
+:------- | :----------- | :-------------- | :----- | :----------
+         | FeaturesDict |                 |        |
+id       | Text         |                 | string |
+image    | Image        | (None, None, 3) | uint8  |
+is_clean | Tensor       |                 | bool   |
+label    | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,27 +33,35 @@ class WikiBioTest(testing.DatasetBuilderTestCase):
 
   def test_get_table(self):
     self.assertCountEqual(
-        wiki_bio._get_table(_INFO_BOX_TEST), [{
-            'column_header': 'name',
-            'row_number': 1,
-            'content': 'akoo nana',
-        }, {
-            'column_header': 'background',
-            'row_number': 1,
-            'content': 'solo_singer',
-        }, {
-            'column_header': 'occupation',
-            'row_number': 1,
-            'content': 'singer , songwriter , rapper',
-        }, {
-            'column_header': 'origin',
-            'row_number': 1,
-            'content': 'ghanaian',
-        }, {
-            'column_header': 'years_active',
-            'row_number': 1,
-            'content': '2012 -- present',
-        }])
+        wiki_bio._get_table(_INFO_BOX_TEST),
+        [
+            {
+                'column_header': 'name',
+                'row_number': 1,
+                'content': 'akoo nana',
+            },
+            {
+                'column_header': 'background',
+                'row_number': 1,
+                'content': 'solo_singer',
+            },
+            {
+                'column_header': 'occupation',
+                'row_number': 1,
+                'content': 'singer , songwriter , rapper',
+            },
+            {
+                'column_header': 'origin',
+                'row_number': 1,
+                'content': 'ghanaian',
+            },
+            {
+                'column_header': 'years_active',
+                'row_number': 1,
+                'content': '2012 -- present',
+            },
+        ],
+    )
 
 
 if __name__ == '__main__':

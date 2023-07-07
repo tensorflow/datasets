@@ -2,6 +2,13 @@
 
 [TOC]
 
+This guide documents all format-specific dataset builders currently available in
+TFDS.
+
+Format-specific dataset builders are subclasses of
+[`tfds.core.GeneratorBasedBuilder`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/GeneratorBasedBuilder)
+which take care of most data processing for a specific data format.
+
 ## Datasets based on `tf.data.Dataset`
 
 If you want to create a TFDS dataset from a dataset that's in `tf.data.Dataset`
@@ -144,21 +151,20 @@ class MyDatasetBuilder(tfds.dataset_builders.TfDataBuilder):
     ds_train = tf.data.Dataset.from_tensor_slices([1, 2, 3])
     ds_test = tf.data.Dataset.from_tensor_slices([4, 5])
     super().__init__(
-      name="my_dataset",
-      version="1.0.0",
-      split_datasets={
-          "train": ds_train,
-          "test": ds_test,
-      },
-      features=tfds.features.FeaturesDict({
-          "number": tfds.features.Scalar(dtype=tf.int64),
-      }),
-      config="single_number",
-      description="My dataset with a single number.",
-      release_notes={
-          "1.0.0": "Initial release with numbers up to 5!",
-      }
-    )
+        name="my_dataset",
+        version="1.0.0",
+        split_datasets={
+            "train": ds_train,
+            "test": ds_test,
+        },
+        features=tfds.features.FeaturesDict({
+            "number": tfds.features.Scalar(dtype=tf.int64),
+        }),
+        config="single_number",
+        description="My dataset with a single number.",
+        release_notes={
+            "1.0.0": "Initial release with numbers up to 5!",
+        })
 ```
 
 ## CoNLL
@@ -194,7 +200,32 @@ common code to deal with the specificities of CoNLL datasets (iterating over the
 column-based format, precompiled lists of features and tags, ...).
 
 `tfds.dataset_builders.ConllDatasetBuilder` implements a CoNLL-specific
-`GeneratorBasedBuilder`.
+`GeneratorBasedBuilder`. Refer to the following class as a minimal example of a
+CoNLL dataset builder:
+
+```python
+from tensorflow_datasets.core.dataset_builders.conll import conll_dataset_builder_utils as conll_lib
+import tensorflow_datasets.public_api as tfds
+
+class MyCoNNLDataset(tfds.dataset_builders.ConllDatasetBuilder):
+  VERSION = tfds.core.Version('1.0.0')
+  RELEASE_NOTES = {'1.0.0': 'Initial release.'}
+
+  # conllu_lib contains a set of ready-to-use CONLL-specific configs.
+  BUILDER_CONFIGS = [conll_lib.CONLL_2003_CONFIG]
+
+  def _info(self) -> tfds.core.DatasetInfo:
+    return self.create_dataset_info(
+        # ...
+    )
+
+  def _split_generators(self, dl_manager):
+    path = dl_manager.download_and_extract('https://data-url')
+
+    return {'train': self._generate_examples(path=path / 'train.txt'),
+            'test': self._generate_examples(path=path / 'train.txt'),
+    }
+```
 
 As for standard dataset builders, it requires to overwrite the class methods
 `_info` and `_split_generators`. Depending on the dataset, you might need to
@@ -275,7 +306,43 @@ common code to deal with the specificities of CoNLL-U datasets (iterating over
 the column-based format, precompiled lists of features and tags, ...).
 
 `tfds.dataset_builders.ConllUDatasetBuilder` implements a CoNLL-U specific
-`GeneratorBasedBuilder`.
+`GeneratorBasedBuilder`. Refer to the following class as a minimal example of a
+CoNLL-U dataset builder:
+
+```python
+from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder_utils as conllu_lib
+import tensorflow_datasets.public_api as tfds
+
+class MyCoNNLUDataset(tfds.dataset_builders.ConllUDatasetBuilder):
+  VERSION = tfds.core.Version('1.0.0')
+  RELEASE_NOTES = {'1.0.0': 'Initial release.'}
+
+  # conllu_lib contains a set of ready-to-use features.
+  BUILDER_CONFIGS = [
+      conllu_lib.get_universal_morphology_config(
+          language='en',
+          features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
+      )
+  ]
+
+  def _info(self) -> tfds.core.DatasetInfo:
+    return self.create_dataset_info(
+        # ...
+    )
+
+  def _split_generators(self, dl_manager):
+    path = dl_manager.download_and_extract('https://data-url')
+
+    return {
+        'train':
+            self._generate_examples(
+                path=path / 'train.txt',
+                # If necessary, add optional custom processing (see conllu_lib
+                # for examples).
+                # process_example_fn=...,
+            )
+    }
+```
 
 As for standard dataset builders, it requires to overwrite the class methods
 `_info` and `_split_generators`. Depending on the dataset, you might need to

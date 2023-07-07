@@ -12,10 +12,6 @@
 # `placesfull`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 The Places dataset is designed following principles of human visual cognition.
@@ -41,7 +37,7 @@ and education purposes.
 *   **Homepage**: [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
 
 *   **Source code**:
-    [`tfds.image_classification.placesfull.Placesfull`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/placesfull/placesfull.py)
+    [`tfds.datasets.placesfull.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/placesfull/placesfull_dataset_builder.py)
 
 *   **Versions**:
 
@@ -65,20 +61,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=435),
+    'filename': Text(shape=(), dtype=string),
+    'image': Image(shape=(256, 256, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=435),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape         | Dtype     | Description
-:------- | :----------- | :------------ | :-------- | :----------
-         | FeaturesDict |               |           |
-filename | Text         |               | tf.string |
-image    | Image        | (256, 256, 3) | tf.uint8  |
-label    | ClassLabel   |               | tf.int64  |
+Feature  | Class        | Shape         | Dtype  | Description
+:------- | :----------- | :------------ | :----- | :----------
+         | FeaturesDict |               |        |
+filename | Text         |               | string |
+image    | Image        | (256, 256, 3) | uint8  |
+label    | ClassLabel   |               | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

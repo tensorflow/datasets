@@ -105,32 +105,32 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'identity_attack': tf.float32,
-    'insult': tf.float32,
-    'language': Text(shape=(), dtype=tf.string),
-    'obscene': tf.float32,
-    'severe_toxicity': tf.float32,
-    'text': Text(shape=(), dtype=tf.string),
-    'threat': tf.float32,
-    'toxicity': tf.float32,
+    'id': Text(shape=(), dtype=string),
+    'identity_attack': float32,
+    'insult': float32,
+    'language': Text(shape=(), dtype=string),
+    'obscene': float32,
+    'severe_toxicity': float32,
+    'text': Text(shape=(), dtype=string),
+    'threat': float32,
+    'toxicity': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype      | Description
-:-------------- | :----------- | :---- | :--------- | :----------
-                | FeaturesDict |       |            |
-id              | Text         |       | tf.string  |
-identity_attack | Tensor       |       | tf.float32 |
-insult          | Tensor       |       | tf.float32 |
-language        | Text         |       | tf.string  |
-obscene         | Tensor       |       | tf.float32 |
-severe_toxicity | Tensor       |       | tf.float32 |
-text            | Text         |       | tf.string  |
-threat          | Tensor       |       | tf.float32 |
-toxicity        | Tensor       |       | tf.float32 |
+Feature         | Class        | Shape | Dtype   | Description
+:-------------- | :----------- | :---- | :------ | :----------
+                | FeaturesDict |       |         |
+id              | Text         |       | string  |
+identity_attack | Tensor       |       | float32 |
+insult          | Tensor       |       | float32 |
+language        | Text         |       | string  |
+obscene         | Tensor       |       | float32 |
+severe_toxicity | Tensor       |       | float32 |
+text            | Text         |       | string  |
+threat          | Tensor       |       | float32 |
+toxicity        | Tensor       |       | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -201,22 +201,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'language': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'toxicity': tf.float32,
+    'id': Text(shape=(), dtype=string),
+    'language': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'toxicity': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype      | Description
-:------- | :----------- | :---- | :--------- | :----------
-         | FeaturesDict |       |            |
-id       | Text         |       | tf.string  |
-language | Text         |       | tf.string  |
-text     | Text         |       | tf.string  |
-toxicity | Tensor       |       | tf.float32 |
+Feature  | Class        | Shape | Dtype   | Description
+:------- | :----------- | :---- | :------ | :----------
+         | FeaturesDict |       |         |
+id       | Text         |       | string  |
+language | Text         |       | string  |
+text     | Text         |       | string  |
+toxicity | Tensor       |       | float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

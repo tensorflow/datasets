@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
 
 """Builder for DMLab Datasets."""
 
+from __future__ import annotations
+
 import dataclasses
 from typing import Any, Dict
 
-import tensorflow as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
 
@@ -76,6 +79,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
     task: name of the DMLab task
     episode_length: length of the episodes in this task
   """
+
   task: str = 'seekavoid_arena01'
   episode_length: int = 301
 
@@ -88,30 +92,23 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
 
   def get_features_dict(self):
     return tfds.features.FeaturesDict({
-        'steps':
-            tfds.features.Dataset({
-                'observation': {
-                    'pixels':
-                        tfds.features.Image(
-                            shape=_PIXELS_SHAPE,
-                            dtype=tf.uint8,
-                            encoding_format='png'),
-                    'last_action':
-                        tf.int64,
-                    'last_reward':
-                        tf.float32,
-                },
-                'action': tf.int64,
-                'reward': tf.float32,
-                'is_terminal': tf.bool,
-                'is_first': tf.bool,
-                'is_last': tf.bool,
-                'discount': tf.float32,
-            }),
-        'episode_id':
-            tf.int64,
-        'episode_return':
-            tf.float32,
+        'steps': tfds.features.Dataset({
+            'observation': {
+                'pixels': tfds.features.Image(
+                    shape=_PIXELS_SHAPE, dtype=np.uint8, encoding_format='png'
+                ),
+                'last_action': np.int64,
+                'last_reward': np.float32,
+            },
+            'action': np.int64,
+            'reward': np.float32,
+            'is_terminal': np.bool_,
+            'is_first': np.bool_,
+            'is_last': np.bool_,
+            'discount': np.float32,
+        }),
+        'episode_id': np.int64,
+        'episode_return': np.float32,
     })
 
   def get_description(self):
@@ -128,8 +125,9 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
   def num_shards(self):
     return self._SHARDS
 
-  def tf_example_to_step_ds(self,
-                            tf_example: tf.train.Example) -> Dict[str, Any]:
+  def tf_example_to_step_ds(
+      self, tf_example: tf.train.Example
+  ) -> Dict[str, Any]:
     """Create an episode from a TF example."""
     episode_length = self.builder_config.episode_length
 
@@ -160,7 +158,8 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
     pixels = tf.scan(
         fn=lambda _, png: tf.reshape(tf.io.decode_png(png), _PIXELS_SHAPE),
         elems=data['observations_pixels'],
-        initializer=tf.zeros(_PIXELS_SHAPE, dtype=tf.uint8))
+        initializer=tf.zeros(_PIXELS_SHAPE, dtype=tf.uint8),
+    )
     pixels = tf.reverse(pixels, axis=[-1])
 
     episode = {
@@ -169,22 +168,18 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
         'episode_return': data['episode_return'],
         'steps': {
             'observation': {
-                'pixels':
-                    pixels,
-                'last_action':
-                    tf.argmax(
-                        data['observations_action'],
-                        axis=1,
-                        output_type=tf.int64),
-                'last_reward':
-                    data['observations_reward'],
+                'pixels': pixels,
+                'last_action': tf.argmax(
+                    data['observations_action'], axis=1, output_type=tf.int64
+                ),
+                'last_reward': data['observations_reward'],
             },
             'action': data['actions'],
             'reward': data['rewards'],
             'discount': data['discounts'],
             'is_first': [True] + [False] * (episode_length - 1),
             'is_last': [False] * (episode_length - 1) + [True],
-            'is_terminal': [False] * (episode_length)
-        }
+            'is_terminal': [False] * (episode_length),
+        },
     }
     return episode

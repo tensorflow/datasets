@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,8 +23,13 @@ GiB = 2**30
 TiB = 2**40
 PiB = 2**50
 
-_NAME_LIST = [("PiB", PiB), ("TiB", TiB), ("GiB", GiB), ("MiB", MiB),
-              ("KiB", KiB)]
+_NAME_LIST = [
+    ("PiB", PiB),
+    ("TiB", TiB),
+    ("GiB", GiB),
+    ("MiB", MiB),
+    ("KiB", KiB),
+]
 
 
 def _size_str(size_in_bytes):
@@ -42,7 +47,7 @@ def _size_str(size_in_bytes):
     return "Unknown size"
 
   size_in_bytes = float(size_in_bytes)
-  for (name, size_bytes) in _NAME_LIST:
+  for name, size_bytes in _NAME_LIST:
     value = size_in_bytes / size_bytes
     if value >= 1.0:
       return "{:.2f} {}".format(value, name)

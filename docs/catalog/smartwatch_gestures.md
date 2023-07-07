@@ -3,9 +3,9 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="smartwatch_gestures" />
-  <meta itemprop="description" content="The **SmartWatch Gestures Dataset** has been collected to evaluate several gesture recognition algorithms for interacting with mobile applications using arm gestures.&#10;&#10;Eight different users performed twenty repetitions of twenty different gestures, for a total of 3200 sequences.&#10;Each sequence contains acceleration data from the 3-axis accelerometer of a first generation Sony SmartWatch™, as well as timestamps from the different clock sources available on an Android device.&#10;The smartwatch was worn on the user&#x27;s right wrist.&#10;The gestures have been manually segmented by the users performing them by tapping the smartwatch screen at the beginning and at the end of every repetition.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;smartwatch_gestures&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The **SmartWatch Gestures Dataset** has been collected to evaluate several&#10;gesture recognition algorithms for interacting with mobile applications using&#10;arm gestures.&#10;&#10;Eight different users performed twenty repetitions of twenty different gestures,&#10;for a total of 3200 sequences. Each sequence contains acceleration data from the&#10;3-axis accelerometer of a first generation Sony SmartWatch™, as well as&#10;timestamps from the different clock sources available on an Android device. The&#10;smartwatch was worn on the user&#x27;s right wrist. The gestures have been manually&#10;segmented by the users performing them by tapping the smartwatch screen at the&#10;beginning and at the end of every repetition.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;smartwatch_gestures&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/smartwatch_gestures" />
-  <meta itemprop="sameAs" content="https://tev.fbk.eu/technologies/smartwatch-gestures-dataset" />
+  <meta itemprop="sameAs" content="https://tev.fbk.eu/resources/smartwatch" />
   <meta itemprop="citation" content="@INPROCEEDINGS{&#10;  6952946,&#10;  author={Costante, Gabriele and Porzi, Lorenzo and Lanz, Oswald and Valigi, Paolo and Ricci, Elisa},&#10;  booktitle={2014 22nd European Signal Processing Conference (EUSIPCO)},&#10;  title={Personalizing a smartwatch-based gesture interface with transfer learning},&#10;  year={2014},&#10;  volume={},&#10;  number={},&#10;  pages={2530-2534},&#10;  doi={}}" />
 </div>
 
@@ -27,10 +27,10 @@ segmented by the users performing them by tapping the smartwatch screen at the
 beginning and at the end of every repetition.
 
 *   **Homepage**:
-    [https://tev.fbk.eu/technologies/smartwatch-gestures-dataset](https://tev.fbk.eu/technologies/smartwatch-gestures-dataset)
+    [https://tev.fbk.eu/resources/smartwatch](https://tev.fbk.eu/resources/smartwatch)
 
 *   **Source code**:
-    [`tfds.time_series.smartwatch_gestures.SmartwatchGestures`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/time_series/smartwatch_gestures/smartwatch_gestures.py)
+    [`tfds.datasets.smartwatch_gestures.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/smartwatch_gestures/smartwatch_gestures_dataset_builder.py)
 
 *   **Versions**:
 
@@ -54,35 +54,35 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'attempt': tf.uint8,
+    'attempt': uint8,
     'features': Sequence({
-        'accel_x': tf.float64,
-        'accel_y': tf.float64,
-        'accel_z': tf.float64,
-        'time_event': tf.uint64,
-        'time_millis': tf.uint64,
-        'time_nanos': tf.uint64,
+        'accel_x': float64,
+        'accel_y': float64,
+        'accel_z': float64,
+        'time_event': uint64,
+        'time_millis': uint64,
+        'time_nanos': uint64,
     }),
-    'gesture': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-    'participant': tf.uint8,
+    'gesture': ClassLabel(shape=(), dtype=int64, num_classes=20),
+    'participant': uint8,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class        | Shape | Dtype      | Description
-:------------------- | :----------- | :---- | :--------- | :----------
-                     | FeaturesDict |       |            |
-attempt              | Tensor       |       | tf.uint8   |
-features             | Sequence     |       |            |
-features/accel_x     | Tensor       |       | tf.float64 |
-features/accel_y     | Tensor       |       | tf.float64 |
-features/accel_z     | Tensor       |       | tf.float64 |
-features/time_event  | Tensor       |       | tf.uint64  |
-features/time_millis | Tensor       |       | tf.uint64  |
-features/time_nanos  | Tensor       |       | tf.uint64  |
-gesture              | ClassLabel   |       | tf.int64   |
-participant          | Tensor       |       | tf.uint8   |
+Feature              | Class        | Shape | Dtype   | Description
+:------------------- | :----------- | :---- | :------ | :----------
+                     | FeaturesDict |       |         |
+attempt              | Tensor       |       | uint8   |
+features             | Sequence     |       |         |
+features/accel_x     | Tensor       |       | float64 |
+features/accel_y     | Tensor       |       | float64 |
+features/accel_z     | Tensor       |       | float64 |
+features/time_event  | Tensor       |       | uint64  |
+features/time_millis | Tensor       |       | uint64  |
+features/time_nanos  | Tensor       |       | uint64  |
+gesture              | ClassLabel   |       | int64   |
+participant          | Tensor       |       | uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

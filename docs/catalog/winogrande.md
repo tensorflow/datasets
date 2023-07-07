@@ -18,6 +18,12 @@ The WinoGrande, a large-scale dataset of 44k problems, inspired by the original
 Winograd Schema Challenge design, but adjusted to improve both the scale and the
 hardness of the dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/winogrande">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://winogrande.allenai.org/](http://winogrande.allenai.org/)
 
@@ -52,22 +58,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'option1': Text(shape=(), dtype=tf.string),
-    'option2': Text(shape=(), dtype=tf.string),
-    'sentence': Text(shape=(), dtype=tf.string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'option1': Text(shape=(), dtype=string),
+    'option2': Text(shape=(), dtype=string),
+    'sentence': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-label    | ClassLabel   |       | tf.int64  |
-option1  | Text         |       | tf.string |
-option2  | Text         |       | tf.string |
-sentence | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+label    | ClassLabel   |       | int64  |
+option1  | Text         |       | string |
+option2  | Text         |       | string |
+sentence | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

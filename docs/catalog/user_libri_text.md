@@ -12,10 +12,6 @@
 # `user_libri_text`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 UserLibri is a dataset containing paired audio-transcripts and additional text
@@ -151,20 +147,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'book_id': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
+    'book_id': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-| Feature | Class        | Shape | Dtype     | Description                  |
-| :------ | :----------- | :---- | :-------- | :--------------------------- |
-|         | FeaturesDict |       |           |                              |
-| book_id | Text         |       | tf.string | The book that this text was  |
-:         :              :       :           : pulled from                  :
-| text    | Text         |       | tf.string | A sentence of text extracted |
-:         :              :       :           : from a book                  :
+| Feature | Class        | Shape | Dtype  | Description                        |
+| :------ | :----------- | :---- | :----- | :--------------------------------- |
+|         | FeaturesDict |       |        |                                    |
+| book_id | Text         |       | string | The book that this text was pulled |
+:         :              :       :        : from                               :
+| text    | Text         |       | string | A sentence of text extracted from  |
+:         :              :       :        : a book                             :
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

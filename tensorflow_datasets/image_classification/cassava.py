@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -57,7 +57,7 @@ class Cassava(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),  # test-cbb-0.jpg
-            "label": tfds.features.ClassLabel(names=_LABELS)
+            "label": tfds.features.ClassLabel(names=_LABELS),
         }),
         supervised_keys=("image", "label"),
         homepage="https://www.kaggle.com/c/cassava-disease/overview",

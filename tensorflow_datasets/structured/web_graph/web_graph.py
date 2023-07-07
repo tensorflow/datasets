@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,13 +15,15 @@
 
 """web_graph dataset."""
 
+from __future__ import annotations
+
 import dataclasses
 import os
 import textwrap
 from typing import List
 
 import numpy as np
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -83,6 +85,7 @@ _CITATION = """
 @dataclasses.dataclass
 class WebGraphConfig(tfds.core.BuilderConfig):
   """Palmer Penguins dataset builder config."""
+
   # Basename of the file hosting the data.
   subfolder: str = ''
   num_shards: int = 1
@@ -107,53 +110,65 @@ class WebGraph(tfds.core.GeneratorBasedBuilder):
           name='sparse',
           subfolder='web_graph_min_10',
           num_shards=1000,
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               WebGraph-sparse contains around 30B edges and around 365M nodes.
-              """),
+              """
+          ),
       ),
       WebGraphConfig(
           name='dense',
           subfolder='web_graph_min_50',
           num_shards=1000,
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               WebGraph-dense contains around 22B edges and around 136.5M nodes.
-              """),
+              """
+          ),
       ),
       WebGraphConfig(
           name='de-sparse',
           subfolder='web_graph_tld_de_min_10',
           num_shards=100,
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               WebGraph-de-sparse contains around 1.19B edges and around 19.7M
               nodes.
-              """),
+              """
+          ),
       ),
       WebGraphConfig(
           name='de-dense',
           subfolder='web_graph_tld_de_min_50',
           num_shards=100,
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               WebGraph-de-dense contains around 0.82B edges and around 5.7M
               nodes.
-              """),
+              """
+          ),
       ),
       WebGraphConfig(
           name='in-sparse',
           subfolder='web_graph_tld_in_min_10',
           num_shards=10,
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               WebGraph-de-sparse contains around 0.14B edges and around 1.5M
               nodes.
-              """),
+              """
+          ),
       ),
       WebGraphConfig(
           name='in-dense',
           subfolder='web_graph_tld_in_min_50',
           num_shards=10,
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               WebGraph-de-dense contains around 0.12B edges and around 0.5M
               nodes.
-              """),
+              """
+          ),
       ),
   ]
 
@@ -163,9 +178,9 @@ class WebGraph(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'row_tag': tf.int64,
-            'col_tag': tfds.features.Sequence(tf.int64),
-            'gt_tag': tfds.features.Sequence(tf.int64),
+            'row_tag': np.int64,
+            'col_tag': tfds.features.Sequence(np.int64),
+            'gt_tag': tfds.features.Sequence(np.int64),
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
@@ -175,13 +190,15 @@ class WebGraph(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager,
-                        pipeline):
+  def _split_generators(
+      self, dl_manager: tfds.download.DownloadManager, pipeline
+  ):
     """Returns SplitGenerators."""
     del dl_manager
 
-    subfolder = os.path.join(self.WEB_GRAPH_HOMEPAGE,
-                             self.builder_config.subfolder)
+    subfolder = os.path.join(
+        self.WEB_GRAPH_HOMEPAGE, self.builder_config.subfolder
+    )
     shards = self.SHARDS or self.builder_config.num_shards
 
     train_files = [
@@ -197,20 +214,20 @@ class WebGraph(tfds.core.GeneratorBasedBuilder):
         for i in range(shards)
     ]
     return {
-        'train':
-            self._generate_examples(pipeline, train_files, split='train'),
-        'train_t':
-            self._generate_examples(pipeline, train_t_files, split='train_t'),
-        'test':
-            self._generate_examples(pipeline, test_files, split='test')
+        'train': self._generate_examples(pipeline, train_files, split='train'),
+        'train_t': self._generate_examples(
+            pipeline, train_t_files, split='train_t'
+        ),
+        'test': self._generate_examples(pipeline, test_files, split='test'),
     }
 
   def _generate_examples(self, pipeline, files, split: str):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
 
-    def _get_int_feature(example: tf.train.Example,
-                         feature_name: str) -> List[int]:
+    def _get_int_feature(
+        example: tf.train.Example, feature_name: str
+    ) -> List[int]:
       return example.features.feature[feature_name].int64_list.value
 
     def _process_example(example: bytes, is_test=False):
@@ -225,7 +242,9 @@ class WebGraph(tfds.core.GeneratorBasedBuilder):
       return_dict = {'row_tag': row_tag, 'col_tag': col_tag, 'gt_tag': gt_tag}
       return row_tag, return_dict
 
-    return (pipeline
-            | f'{split}_create' >> beam.Create(files)
-            | f'{split}_read' >> beam.io.tfrecordio.ReadAllFromTFRecord()
-            | f'{split}_process' >> beam.Map(_process_example, split == 'test'))
+    return (
+        pipeline
+        | f'{split}_create' >> beam.Create(files)
+        | f'{split}_read' >> beam.io.tfrecordio.ReadAllFromTFRecord()
+        | f'{split}_process' >> beam.Map(_process_example, split == 'test')
+    )

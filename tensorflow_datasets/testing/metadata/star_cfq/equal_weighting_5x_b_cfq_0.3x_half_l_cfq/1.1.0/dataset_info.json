@@ -3,6 +3,7 @@
   "configName": "equal_weighting_5x_b_cfq_0.3x_half_l_cfq",
   "description": "The *-CFQ datasets (and their splits) for measuring the scalability of\ncompositional generalization.\n\nSee https://arxiv.org/abs/2012.08266 for background.\n\nExample usage:\n\n```\ndata = tfds.load('star_cfq/single_pool_10x_b_cfq')\n```",
   "downloadSize": "819667055",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research/google-research/tree/master/star-cfq"
@@ -12,6 +13,7 @@
   "name": "star_cfq",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "353292498",
       "shardLengths": [
@@ -22,6 +24,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "66730824",
       "shardLengths": [
@@ -30,8 +33,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "question",
-    "output": "query"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "question"
+        },
+        {
+          "featureKey": "query"
+        }
+      ]
+    }
   },
   "version": "1.1.0"
 }

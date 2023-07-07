@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@
 import abc
 import functools
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils import tree_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 class Decoder(abc.ABC):
@@ -44,7 +45,12 @@ class Decoder(abc.ABC):
   """
 
   def __init__(self):
-    self.feature = None
+    self._feature = None
+
+  @property
+  def feature(self):
+    assert self._feature, 'Feature uninitialized. Call setup() first.'
+    return self._feature
 
   def setup(self, *, feature):
     """Transformation contructor.
@@ -57,13 +63,13 @@ class Decoder(abc.ABC):
       feature: `tfds.features.FeatureConnector`, the feature to which is applied
         this transformation.
     """
-    self.feature = feature
+    self._feature = feature
 
   @property
   def dtype(self):
     """Returns the `dtype` after decoding."""
     tensor_info = self.feature.get_tensor_info()
-    return tf.nest.map_structure(lambda t: t.dtype, tensor_info)
+    return tree_utils.map_structure(lambda t: t.dtype, tensor_info)
 
   @abc.abstractmethod
   def decode_example(self, serialized_example):
@@ -86,6 +92,12 @@ class Decoder(abc.ABC):
         dtype=self.dtype,
         parallel_iterations=10,
         name='sequence_decode',
+    )
+
+  def decode_ragged_example(self, serialized_example):
+    """See `FeatureConnector.decode_ragged_example` for details."""
+    return tf.ragged.map_flat_values(
+        self.decode_batch_example, serialized_example
     )
 
 
@@ -111,9 +123,13 @@ class SkipDecoding(Decoder):
   @property
   def dtype(self):
     tensor_info = self.feature.get_serialized_info()
-    return tf.nest.map_structure(lambda t: t.dtype, tensor_info)
+    return tree_utils.map_structure(lambda t: t.dtype, tensor_info)
 
   def decode_example(self, serialized_example):
+    """Forward the serialized feature field."""
+    return serialized_example
+
+  def decode_example_np(self, serialized_example):
     """Forward the serialized feature field."""
     return serialized_example
 
@@ -137,8 +153,9 @@ class DecoderFn(Decoder):
 
   def decode_example(self, serialized_example):
     """Decode the example using the function."""
-    return self._fn(serialized_example, self.feature, *self._args,
-                    **self._kwargs)
+    return self._fn(
+        serialized_example, self.feature, *self._args, **self._kwargs
+    )
 
 
 def make_decoder(output_dtype=None):
@@ -166,15 +183,14 @@ def make_decoder(output_dtype=None):
 
   Args:
     output_dtype: The output dtype after decoding. Required only if the decoded
-      example has a different type than the `FeatureConnector.dtype` and is
-      used to decode features inside sequences (ex: videos)
+      example has a different type than the `FeatureConnector.dtype` and is used
+      to decode features inside sequences (ex: videos)
 
   Returns:
     The decoder object
   """  # pylint: disable=g-docstring-has-escape
 
   def decorator(fn):
-
     @functools.wraps(fn)
     def decorated(*args, **kwargs):
       return DecoderFn(fn, output_dtype, *args, **kwargs)

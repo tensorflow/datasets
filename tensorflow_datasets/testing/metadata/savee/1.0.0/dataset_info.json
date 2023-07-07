@@ -1,163 +1,51 @@
 {
-  "citation": "\n@inproceedings{Vlasenko_combiningframe,\nauthor = {Vlasenko, Bogdan and Schuller, Bjorn and Wendemuth, Andreas and Rigoll, Gerhard},\nyear = {2007},\nmonth = {01},\npages = {2249-2252},\ntitle = {Combining frame and turn-level information for robust recognition of emotions within speech},\njournal = {Proceedings of Interspeech}\n}\n",
-  "description": "\nSAVEE (Surrey Audio-Visual Expressed Emotion) is an emotion recognition\ndataset. It consists of recordings from 4 male actors in 7 different emotions,\n480 British English utterances in total. The sentences were chosen from the\nstandard TIMIT corpus and phonetically-balanced for each emotion.\nThis release contains only the audio stream from the original audio-visual\nrecording.\nThe data is split so that the training set consists of 2 speakers, and both the\nvalidation and test set consists of samples from 1 speaker, respectively.\n",
+  "citation": "@inproceedings{Vlasenko_combiningframe,\nauthor = {Vlasenko, Bogdan and Schuller, Bjorn and Wendemuth, Andreas and Rigoll, Gerhard},\nyear = {2007},\nmonth = {01},\npages = {2249-2252},\ntitle = {Combining frame and turn-level information for robust recognition of emotions within speech},\njournal = {Proceedings of Interspeech}\n}",
+  "description": "SAVEE (Surrey Audio-Visual Expressed Emotion) is an emotion recognition\ndataset. It consists of recordings from 4 male actors in 7 different emotions,\n480 British English utterances in total. The sentences were chosen from the\nstandard TIMIT corpus and phonetically-balanced for each emotion.\nThis release contains only the audio stream from the original audio-visual\nrecording.\nThe data is split so that the training set consists of 2 speakers, and both the\nvalidation and test set consists of samples from 1 speaker, respectively.",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://kahlan.eps.surrey.ac.uk/savee/"
     ]
   },
+  "moduleName": "tensorflow_datasets.audio.savee",
   "name": "savee",
-  "schema": {
-    "feature": [
-      {
-        "name": "audio",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      },
-      {
-        "name": "speaker_id",
-        "type": "BYTES"
-      }
-    ]
-  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "69334769",
-      "numShards": "1",
-      "shardLengths": [
-        "120"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "audio",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "120"
-              },
-              "max": 32767.0,
-              "min": -32768.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "120"
-              },
-              "max": 6.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "120"
-              }
-            },
-            "name": "speaker_id",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "120"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "131227766",
-      "numShards": "1",
       "shardLengths": [
         "240"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "audio",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "240"
-              },
-              "max": 32767.0,
-              "min": -32768.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "240"
-              },
-              "max": 6.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "240"
-              }
-            },
-            "name": "speaker_id",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "240"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "71175763",
-      "numShards": "1",
       "shardLengths": [
         "120"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "audio",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "120"
-              },
-              "max": 32767.0,
-              "min": -32768.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "120"
-              },
-              "max": 6.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "120"
-              }
-            },
-            "name": "speaker_id",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "120"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "69334769",
+      "shardLengths": [
+        "120"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "audio",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "audio"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

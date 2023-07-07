@@ -20,6 +20,12 @@ answers and a rationalte. Each example in this dataset has the following 5 parts
 4. A Classification as to whether the answer is right or wrong 5. An Explanation
 justifying the classification
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/multirc">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://cogcomp.seas.upenn.edu/multirc/](https://cogcomp.seas.upenn.edu/multirc/)
 
@@ -32,11 +38,11 @@ justifying the classification
 
 *   **Download size**: `1.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `62.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -50,22 +56,22 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'evidences': Sequence(Text(shape=(), dtype=tf.string)),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'passage': Text(shape=(), dtype=tf.string),
-    'query_and_answer': Text(shape=(), dtype=tf.string),
+    'evidences': Sequence(Text(shape=(), dtype=string)),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'passage': Text(shape=(), dtype=string),
+    'query_and_answer': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class          | Shape   | Dtype     | Description
-:--------------- | :------------- | :------ | :-------- | :----------
-                 | FeaturesDict   |         |           |
-evidences        | Sequence(Text) | (None,) | tf.string |
-label            | ClassLabel     |         | tf.int64  |
-passage          | Text           |         | tf.string |
-query_and_answer | Text           |         | tf.string |
+Feature          | Class          | Shape   | Dtype  | Description
+:--------------- | :------------- | :------ | :----- | :----------
+                 | FeaturesDict   |         |        |
+evidences        | Sequence(Text) | (None,) | string |
+label            | ClassLabel     |         | int64  |
+passage          | Text           |         | string |
+query_and_answer | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

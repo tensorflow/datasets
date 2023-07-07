@@ -2,7 +2,7 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "head": {
+            "misc": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -16,7 +16,7 @@
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "misc": {
+            "tokens": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -30,7 +30,17 @@
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
             },
-            "deps": {
+            "head": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "deprel": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -41,6 +51,16 @@
                 }
             },
             "feats": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "xpos": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -62,17 +82,7 @@
                     "length": "-1"
                 }
             },
-            "deprel": {
-                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-                "sequence": {
-                    "feature": {
-                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                        "text": {}
-                    },
-                    "length": "-1"
-                }
-            },
-            "xpos": {
+            "deps": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {
@@ -83,16 +93,6 @@
                 }
             },
             "lemmas": {
-                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
-                "sequence": {
-                    "feature": {
-                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                        "text": {}
-                    },
-                    "length": "-1"
-                }
-            },
-            "tokens": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
                     "feature": {

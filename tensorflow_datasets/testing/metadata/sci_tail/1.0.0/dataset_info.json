@@ -2,7 +2,7 @@
   "citation": "@inproceedings{khot2018scitail,\n    title={Scitail: A textual entailment dataset from science question answering},\n    author={Khot, Tushar and Sabharwal, Ashish and Clark, Peter},\n    booktitle={Proceedings of the 32th AAAI Conference on Artificial Intelligence (AAAI 2018)},\n    url = \"http://ai2-website.s3.amazonaws.com/publications/scitail-aaai-2018_cameraready.pdf\",\n    year={2018}\n}",
   "description": "The SciTail dataset is an entailment dataset created from multiple-choice\nscience exams and web sentences. Each question and the correct answer choice\nare converted into an assertive statement to form the hypothesis. Information\nretrieval is used to obtain relevant text from a large text corpus of web\nsentences, and these sentences are used as a premise P. The annotation of such\npremise-hypothesis pair is crowdsourced as supports (entails) or not (neutral),\nin order to create the SciTail dataset. The dataset contains 27,026 examples\nwith 10,101 examples with entails label and 16,925 examples with neutral label.",
   "downloadSize": "14174621",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://allenai.org/data/scitail"

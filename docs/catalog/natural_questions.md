@@ -20,11 +20,17 @@ answer to the question. The inclusion of real user questions, and the
 requirement that solutions should read an entire page to find the answer, cause
 NQ to be a more realistic and challenging task than prior QA datasets.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/natural-questions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://ai.google.com/research/NaturalQuestions/dataset](https://ai.google.com/research/NaturalQuestions/dataset)
 
 *   **Source code**:
-    [`tfds.question_answering.NaturalQuestions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/natural_questions.py)
+    [`tfds.datasets.natural_questions.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/natural_questions/natural_questions_dataset_builder.py)
 
 *   **Versions**:
 
@@ -75,69 +81,69 @@ journal = {Transactions of the Association of Computational Linguistics}
 ```python
 FeaturesDict({
     'annotations': Sequence({
-        'id': tf.string,
+        'id': string,
         'long_answer': FeaturesDict({
-            'end_byte': tf.int64,
-            'end_token': tf.int64,
-            'start_byte': tf.int64,
-            'start_token': tf.int64,
+            'end_byte': int64,
+            'end_token': int64,
+            'start_byte': int64,
+            'start_token': int64,
         }),
         'short_answers': Sequence({
-            'end_byte': tf.int64,
-            'end_token': tf.int64,
-            'start_byte': tf.int64,
-            'start_token': tf.int64,
-            'text': Text(shape=(), dtype=tf.string),
+            'end_byte': int64,
+            'end_token': int64,
+            'start_byte': int64,
+            'start_token': int64,
+            'text': Text(shape=(), dtype=string),
         }),
-        'yes_no_answer': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'yes_no_answer': ClassLabel(shape=(), dtype=int64, num_classes=2),
     }),
     'document': FeaturesDict({
-        'html': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
+        'html': Text(shape=(), dtype=string),
+        'title': Text(shape=(), dtype=string),
         'tokens': Sequence({
-            'is_html': tf.bool,
-            'token': Text(shape=(), dtype=tf.string),
+            'is_html': bool,
+            'token': Text(shape=(), dtype=string),
         }),
-        'url': Text(shape=(), dtype=tf.string),
+        'url': Text(shape=(), dtype=string),
     }),
-    'id': tf.string,
+    'id': string,
     'question': FeaturesDict({
-        'text': Text(shape=(), dtype=tf.string),
-        'tokens': Sequence(tf.string),
+        'text': Text(shape=(), dtype=string),
+        'tokens': Sequence(string),
     }),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                               | Class            | Shape   | Dtype     | Description
-:------------------------------------ | :--------------- | :------ | :-------- | :----------
-                                      | FeaturesDict     |         |           |
-annotations                           | Sequence         |         |           |
-annotations/id                        | Tensor           |         | tf.string |
-annotations/long_answer               | FeaturesDict     |         |           |
-annotations/long_answer/end_byte      | Tensor           |         | tf.int64  |
-annotations/long_answer/end_token     | Tensor           |         | tf.int64  |
-annotations/long_answer/start_byte    | Tensor           |         | tf.int64  |
-annotations/long_answer/start_token   | Tensor           |         | tf.int64  |
-annotations/short_answers             | Sequence         |         |           |
-annotations/short_answers/end_byte    | Tensor           |         | tf.int64  |
-annotations/short_answers/end_token   | Tensor           |         | tf.int64  |
-annotations/short_answers/start_byte  | Tensor           |         | tf.int64  |
-annotations/short_answers/start_token | Tensor           |         | tf.int64  |
-annotations/short_answers/text        | Text             |         | tf.string |
-annotations/yes_no_answer             | ClassLabel       |         | tf.int64  |
-document                              | FeaturesDict     |         |           |
-document/html                         | Text             |         | tf.string |
-document/title                        | Text             |         | tf.string |
-document/tokens                       | Sequence         |         |           |
-document/tokens/is_html               | Tensor           |         | tf.bool   |
-document/tokens/token                 | Text             |         | tf.string |
-document/url                          | Text             |         | tf.string |
-id                                    | Tensor           |         | tf.string |
-question                              | FeaturesDict     |         |           |
-question/text                         | Text             |         | tf.string |
-question/tokens                       | Sequence(Tensor) | (None,) | tf.string |
+Feature                               | Class            | Shape   | Dtype  | Description
+:------------------------------------ | :--------------- | :------ | :----- | :----------
+                                      | FeaturesDict     |         |        |
+annotations                           | Sequence         |         |        |
+annotations/id                        | Tensor           |         | string |
+annotations/long_answer               | FeaturesDict     |         |        |
+annotations/long_answer/end_byte      | Tensor           |         | int64  |
+annotations/long_answer/end_token     | Tensor           |         | int64  |
+annotations/long_answer/start_byte    | Tensor           |         | int64  |
+annotations/long_answer/start_token   | Tensor           |         | int64  |
+annotations/short_answers             | Sequence         |         |        |
+annotations/short_answers/end_byte    | Tensor           |         | int64  |
+annotations/short_answers/end_token   | Tensor           |         | int64  |
+annotations/short_answers/start_byte  | Tensor           |         | int64  |
+annotations/short_answers/start_token | Tensor           |         | int64  |
+annotations/short_answers/text        | Text             |         | string |
+annotations/yes_no_answer             | ClassLabel       |         | int64  |
+document                              | FeaturesDict     |         |        |
+document/html                         | Text             |         | string |
+document/title                        | Text             |         | string |
+document/tokens                       | Sequence         |         |        |
+document/tokens/is_html               | Tensor           |         | bool   |
+document/tokens/token                 | Text             |         | string |
+document/url                          | Text             |         | string |
+id                                    | Tensor           |         | string |
+question                              | FeaturesDict     |         |        |
+question/text                         | Text             |         | string |
+question/tokens                       | Sequence(Tensor) | (None,) | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -187,26 +193,26 @@ dataButton.addEventListener('click', async () => {
 
 ```python
 FeaturesDict({
-    'all_answers': Sequence(Text(shape=(), dtype=tf.string)),
-    'answer': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'all_answers': Sequence(Text(shape=(), dtype=string)),
+    'answer': Text(shape=(), dtype=string),
+    'context': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class          | Shape   | Dtype     | Description
-:---------- | :------------- | :------ | :-------- | :----------
-            | FeaturesDict   |         |           |
-all_answers | Sequence(Text) | (None,) | tf.string |
-answer      | Text           |         | tf.string |
-context     | Text           |         | tf.string |
-id          | Text           |         | tf.string |
-question    | Text           |         | tf.string |
-title       | Text           |         | tf.string |
+Feature     | Class          | Shape   | Dtype  | Description
+:---------- | :------------- | :------ | :----- | :----------
+            | FeaturesDict   |         |        |
+all_answers | Sequence(Text) | (None,) | string |
+answer      | Text           |         | string |
+context     | Text           |         | string |
+id          | Text           |         | string |
+question    | Text           |         | string |
+title       | Text           |         | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

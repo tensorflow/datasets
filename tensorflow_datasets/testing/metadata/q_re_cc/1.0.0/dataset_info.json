@@ -1,0 +1,35 @@
+{
+  "citation": "@article{qrecc,\n  title={Open-Domain Question Answering Goes Conversational via Question Rewriting},\n  author={Anantha, Raviteja and Vakulenko, Svitlana and Tu, Zhucheng and Longpre, Shayne and Pulman, Stephen and Chappidi, Srinivas},\n  journal={Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies},\n  year={2021}\n}",
+  "description": "A dataset containing 14K conversations with 81K question-answer pairs. QReCC is built on questions from TREC CAsT, QuAC and Google Natural Questions.",
+  "downloadSize": "7971464",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/apple/ml-qrecc"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.qrecc.qrecc",
+  "name": "q_re_cc",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "57369720",
+      "shardLengths": [
+        "63501"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "15288871",
+      "shardLengths": [
+        "16451"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

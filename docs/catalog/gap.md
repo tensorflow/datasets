@@ -19,6 +19,12 @@ GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
 Google AI Language for the evaluation of coreference resolution in practical
 applications.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gap">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
 
@@ -27,15 +33,17 @@ applications.
 
 *   **Versions**:
 
-    *   **`0.1.0`** (default): No release notes.
+    *   `0.1.0`: Initial release.
+    *   **`0.1.1`** (default): Fixes parsing of boolean field `A-coref` and
+        `B-coref`.
 
 *   **Download size**: `2.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -49,36 +57,36 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'A': Text(shape=(), dtype=tf.string),
-    'A-coref': tf.bool,
-    'A-offset': tf.int32,
-    'B': Text(shape=(), dtype=tf.string),
-    'B-coref': tf.bool,
-    'B-offset': tf.int32,
-    'ID': Text(shape=(), dtype=tf.string),
-    'Pronoun': Text(shape=(), dtype=tf.string),
-    'Pronoun-offset': tf.int32,
-    'Text': Text(shape=(), dtype=tf.string),
-    'URL': Text(shape=(), dtype=tf.string),
+    'A': Text(shape=(), dtype=string),
+    'A-coref': bool,
+    'A-offset': int32,
+    'B': Text(shape=(), dtype=string),
+    'B-coref': bool,
+    'B-offset': int32,
+    'ID': Text(shape=(), dtype=string),
+    'Pronoun': Text(shape=(), dtype=string),
+    'Pronoun-offset': int32,
+    'Text': Text(shape=(), dtype=string),
+    'URL': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape | Dtype     | Description
-:------------- | :----------- | :---- | :-------- | :----------
-               | FeaturesDict |       |           |
-A              | Text         |       | tf.string |
-A-coref        | Tensor       |       | tf.bool   |
-A-offset       | Tensor       |       | tf.int32  |
-B              | Text         |       | tf.string |
-B-coref        | Tensor       |       | tf.bool   |
-B-offset       | Tensor       |       | tf.int32  |
-ID             | Text         |       | tf.string |
-Pronoun        | Text         |       | tf.string |
-Pronoun-offset | Tensor       |       | tf.int32  |
-Text           | Text         |       | tf.string |
-URL            | Text         |       | tf.string |
+Feature        | Class        | Shape | Dtype  | Description
+:------------- | :----------- | :---- | :----- | :----------
+               | FeaturesDict |       |        |
+A              | Text         |       | string |
+A-coref        | Tensor       |       | bool   |
+A-offset       | Tensor       |       | int32  |
+B              | Text         |       | string |
+B-coref        | Tensor       |       | bool   |
+B-offset       | Tensor       |       | int32  |
+ID             | Text         |       | string |
+Pronoun        | Text         |       | string |
+Pronoun-offset | Tensor       |       | int32  |
+Text           | Text         |       | string |
+URL            | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -98,7 +106,7 @@ URL            | Text         |       | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gap-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gap-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

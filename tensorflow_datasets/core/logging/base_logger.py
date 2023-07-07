@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,12 @@
 
 """This module defines the methods a logger implementation should define."""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 from tensorflow_datasets.core import decode
+from tensorflow_datasets.core import download as download_lib
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.file_adapters import FileFormat
 from tensorflow_datasets.core.logging import call_metadata
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
@@ -34,15 +36,25 @@ class Logger:
   Exceptions are *NOT* caught.
   """
 
-  def tfds_import(self, *, metadata: call_metadata.CallMetadata,
-                  import_time_ms_tensorflow: int,
-                  import_time_ms_dataset_builders: int):
+  def tfds_import(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      import_time_ms_tensorflow: int,
+      import_time_ms_dataset_builders: int,
+  ):
     """Callback called when user calls `import tensorflow_datasets`."""
     pass
 
-  def builder_init(self, *, metadata: call_metadata.CallMetadata, name: str,
-                   data_dir: Optional[str], config: Optional[str],
-                   version: Optional[str]):
+  def builder_init(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      data_dir: Optional[str],
+      config: Optional[str],
+      version: Optional[str],
+  ):
     """Callback called when user calls `DatasetBuilder(...)`."""
     pass
 
@@ -95,6 +107,25 @@ class Logger:
     """
     pass
 
+  def download_and_prepare(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      config_name: Optional[str],
+      version: str,
+      data_path: str,
+      download_dir: Optional[str],
+      download_config: Optional[download_lib.DownloadConfig],
+      file_format: Union[None, str, FileFormat],
+  ):
+    """Callback called when user calls `dataset_builder.download_and_prepare`."""
+    pass
+
+  def as_numpy(self, *, metadata: call_metadata.CallMetadata, dataset: Any):
+    """Callback called when user calls `tfds.as_numpy(...)`."""
+    pass
+
   def builder(
       self,
       *,
@@ -144,4 +175,32 @@ class Logger:
 
   def process_ends(self):
     """Called when the process is about to end (atexit)."""
+    pass
+
+  def data_source(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
+      data_dir: Optional[str],
+      download: Optional[bool],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
+      try_gcs: Optional[bool],
+  ):
+    """Callback called when user calls `tfds.data_source(...)`."""
+    pass
+
+  def as_data_source(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      config_name: Optional[str],
+      version: str,
+      data_path: str,
+      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
+  ):
+    """Callback called when user calls `dataset_builder.as_data_source(...)`."""
     pass

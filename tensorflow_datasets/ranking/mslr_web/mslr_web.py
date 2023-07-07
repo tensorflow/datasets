@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 
 import dataclasses
 import itertools
-import tensorflow as tf
+
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.ranking.libsvm_ranking_parser import LibSVMRankingParser
 
@@ -59,10 +61,8 @@ _CITATION = """
 """
 
 _URLS = {
-    "10k":
-        "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbOIoJ6Ks0bEMp78/root/content",
-    "30k":
-        "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbXGPBlwD1rnFdBY/root/content"
+    "10k": "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbOIoJ6Ks0bEMp78/root/content",
+    "30k": "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbXGPBlwD1rnFdBY/root/content",
 }
 
 _FEATURE_NAMES = {
@@ -216,10 +216,11 @@ class MslrWebConfig(tfds.core.BuilderConfig):
 class MslrWeb(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for mslr_web dataset."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.2.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
-      "1.1.0": "Bundle features into a single 'float_features' feature."
+      "1.1.0": "Bundle features into a single 'float_features' feature.",
+      "1.2.0": "Add query and document identifiers.",
   }
   # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
@@ -233,21 +234,27 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     encoding = tfds.features.Encoding.ZLIB
     features = {
-        "float_features":
-            tfds.features.Tensor(
-                shape=(None, len(_FEATURE_NAMES)),
-                dtype=tf.float64,
-                encoding=encoding),
-        _LABEL_NAME:
-            tfds.features.Tensor(
-                shape=(None,), dtype=tf.float64, encoding=encoding)
+        "float_features": tfds.features.Tensor(
+            shape=(None, len(_FEATURE_NAMES)),
+            dtype=np.float64,
+            encoding=encoding,
+        ),
+        _LABEL_NAME: tfds.features.Tensor(
+            shape=(None,), dtype=np.float64, encoding=encoding
+        ),
+        "query_id": tfds.features.Text(),
+        "doc_id": tfds.features.Tensor(
+            shape=(None,), dtype=np.int64, encoding=encoding
+        ),
     }
-    metadata = tfds.core.MetadataDict({
-        "float_features_names": {
-            idx: _FEATURE_NAMES[key]
-            for idx, key in enumerate(sorted(_FEATURE_NAMES))
+    metadata = tfds.core.MetadataDict(
+        {
+            "float_features_names": {
+                idx: _FEATURE_NAMES[key]
+                for idx, key in enumerate(sorted(_FEATURE_NAMES))
+            }
         }
-    })
+    )
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -255,7 +262,8 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(features),
         homepage="https://www.microsoft.com/en-us/research/project/mslr/",
         citation=_CITATION,
-        metadata=metadata)
+        metadata=metadata,
+    )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
@@ -272,4 +280,5 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     with tf.io.gfile.GFile(path, "r") as f:
       yield from LibSVMRankingParser(
-          f, _FEATURE_NAMES, _LABEL_NAME, combine_features=True)
+          f, _FEATURE_NAMES, _LABEL_NAME, combine_features=True
+      )

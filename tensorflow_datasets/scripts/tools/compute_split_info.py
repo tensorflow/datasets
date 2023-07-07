@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,8 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
   argv = flag_utils.normalize_flags(argv)  # See b/174043007 for context.
 
   parser = argparse_flags.ArgumentParser(
-      description='Tensorflow Datasets CLI tool',)
+      description='Tensorflow Datasets CLI tool',
+  )
   parser.add_argument(
       '--data_dir',
       type=tfds.core.Path,

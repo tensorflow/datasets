@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,12 +30,11 @@ randint = np.random.randint
 class BaseDecodeTest(testing.FeatureExpectationsTestCase):
 
   def test_image_custom_decode(self):
-
     # Do not uses random here because Jpeg compression has loss, so decoded
     # value isn't the same
     img_shaped = np.ones(shape=(30, 60, 3), dtype=np.uint8)
     x, y, w, h = 4, 7, 10, 13
-    img_cropped = img_shaped[y:y + h, x:x + w, :]
+    img_cropped = img_shaped[y : y + h, x : x + w, :]
 
     class DecodeCrop(decode_lib.Decoder):
       """Simple class on how to customize the decoding."""
@@ -63,7 +62,7 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
         # Image with statically defined shape
         feature=features_lib.Image(shape=(30, 60, 3), encoding_format='jpeg'),
         shape=(30, 60, 3),
-        dtype=tf.uint8,
+        dtype=np.uint8,
         # Output shape is different.
         test_tensor_spec=False,
         tests=[
@@ -83,14 +82,13 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
                 value=image_path,
                 expected=serialized_img,
                 shape=(),
-                dtype=tf.string,
+                dtype=np.str_,
                 decoders=decode_lib.SkipDecoding(),
             ),
         ],
     )
 
   def test_video_custom_decode(self):
-
     image_path = os.fspath(utils.tfds_path('testing/test_data/test_image.jpg'))
     with tf.io.gfile.GFile(image_path, 'rb') as f:
       serialized_img = f.read()
@@ -99,7 +97,7 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
         # Image with statically defined shape
         feature=features_lib.Video(shape=(None, 30, 60, 3)),
         shape=(None, 30, 60, 3),
-        dtype=tf.uint8,
+        dtype=np.uint8,
         # Output shape is different.
         test_tensor_spec=False,
         tests=[
@@ -107,7 +105,7 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
                 value=[image_path] * 15,  # 15 frames of video
                 expected=[serialized_img] * 15,  # Non-decoded image
                 shape=(15,),
-                dtype=tf.string,  # Only string are decoded
+                dtype=np.str_,  # Only string are decoded
                 decoders=decode_lib.SkipDecoding(),
             ),
         ],
@@ -116,18 +114,18 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
     # Test with FeatureDict
     self.assertFeature(
         feature=features_lib.FeaturesDict({
-            'image':
-                features_lib.Image(shape=(30, 60, 3), encoding_format='jpeg'),
-            'label':
-                tf.int64,
+            'image': features_lib.Image(
+                shape=(30, 60, 3), encoding_format='jpeg'
+            ),
+            'label': np.int64,
         }),
         shape={
             'image': (30, 60, 3),
             'label': (),
         },
         dtype={
-            'image': tf.uint8,
-            'label': tf.int64,
+            'image': np.uint8,
+            'label': np.int64,
         },
         # Output shape is different.
         test_tensor_spec=False,
@@ -149,8 +147,8 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
                     'label': (),
                 },
                 dtype={
-                    'image': tf.string,
-                    'label': tf.int64,
+                    'image': np.str_,
+                    'label': np.int64,
                 },
             ),
         ],

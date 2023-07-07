@@ -18,6 +18,12 @@ Common Sense Explanations (CoS-E) allows for training language models to
 automatically generate explanations that can be used during training and
 inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cos-e">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/salesforce/cos-e](https://github.com/salesforce/cos-e)
 
@@ -30,11 +36,11 @@ inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
 *   **Download size**: `6.23 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.89 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -47,26 +53,26 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'abstractive_explanation': Text(shape=(), dtype=tf.string),
-    'answer': Text(shape=(), dtype=tf.string),
-    'choices': Sequence(Text(shape=(), dtype=tf.string)),
-    'extractive_explanation': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'abstractive_explanation': Text(shape=(), dtype=string),
+    'answer': Text(shape=(), dtype=string),
+    'choices': Sequence(Text(shape=(), dtype=string)),
+    'extractive_explanation': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                 | Class          | Shape   | Dtype     | Description
-:---------------------- | :------------- | :------ | :-------- | :----------
-                        | FeaturesDict   |         |           |
-abstractive_explanation | Text           |         | tf.string |
-answer                  | Text           |         | tf.string |
-choices                 | Sequence(Text) | (None,) | tf.string |
-extractive_explanation  | Text           |         | tf.string |
-id                      | Text           |         | tf.string |
-question                | Text           |         | tf.string |
+Feature                 | Class          | Shape   | Dtype  | Description
+:---------------------- | :------------- | :------ | :----- | :----------
+                        | FeaturesDict   |         |        |
+abstractive_explanation | Text           |         | string |
+answer                  | Text           |         | string |
+choices                 | Sequence(Text) | (None,) | string |
+extractive_explanation  | Text           |         | string |
+id                      | Text           |         | string |
+question                | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

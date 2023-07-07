@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,14 @@
 
 """CIFAR100-N dataset."""
 
+from __future__ import annotations
+
 import collections
 import os
 
+from etils import epath
 import numpy as np
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # Shared constants
@@ -58,7 +61,7 @@ class Cifar100N(tfds.core.GeneratorBasedBuilder):
   ```
   import numpy as np
   import pandas as pd
-  import tensorflow as tf
+  from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
   
   human_labels_np_path = '<local_path>/CIFAR-100_human_ordered.npy'
   human_labels_csv_path = '<local_path>/CIFAR-100_human_annotations.csv'
@@ -90,8 +93,8 @@ class Cifar100N(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(num_classes=100),
             'coarse_label': tfds.features.ClassLabel(num_classes=20),
             'noise_label': tfds.features.ClassLabel(num_classes=100),
-            'worker_id': tf.int64,
-            'worker_time': tf.float32,
+            'worker_id': np.int64,
+            'worker_time': np.float32,
         }),
         supervised_keys=None,
         homepage='https://www.cs.toronto.edu/~kriz/cifar.html',
@@ -110,7 +113,8 @@ class Cifar100N(tfds.core.GeneratorBasedBuilder):
         label_keys=['coarse_label', 'label'],
         human_label_path='CIFAR-100_human_annotations.csv',
         side_info_path='side_info_cifar100N.csv',
-        annotations_order_path='image_order_c100.npy')
+        annotations_order_path='image_order_c100.npy',
+    )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
@@ -120,19 +124,19 @@ class Cifar100N(tfds.core.GeneratorBasedBuilder):
     cifar_path = os.path.join(cifar_path, cifar_info.prefix)
 
     dl_paths = {
-        'human_labels':
-            dl_manager.manual_dir / cifar_info.human_label_path,
-        'side_info':
-            dl_manager.manual_dir / cifar_info.side_info_path,
-        'annotations_order':
-            dl_manager.manual_dir / cifar_info.annotations_order_path,
+        'human_labels': dl_manager.manual_dir / cifar_info.human_label_path,
+        'side_info': dl_manager.manual_dir / cifar_info.side_info_path,
+        'annotations_order': (
+            dl_manager.manual_dir / cifar_info.annotations_order_path
+        ),
     }
 
     # Load the label names
-    for label_key, label_file in zip(cifar_info.label_keys,
-                                     cifar_info.label_files):
+    for label_key, label_file in zip(
+        cifar_info.label_keys, cifar_info.label_files
+    ):
       labels_path = os.path.join(cifar_path, label_file)
-      with tf.io.gfile.GFile(labels_path) as label_f:
+      with epath.Path(labels_path).open() as label_f:
         label_names = [name for name in label_f.read().split('\n') if name]
       self.info.features[label_key].names = label_names
 
@@ -142,14 +146,12 @@ class Cifar100N(tfds.core.GeneratorBasedBuilder):
         yield os.path.join(cifar_path, f)
 
     return {
-        'train':
-            self._generate_examples('train_',
-                                    gen_filenames(cifar_info.train_files),
-                                    dl_paths),
-        'test':
-            self._generate_examples('test_',
-                                    gen_filenames(cifar_info.test_files),
-                                    dl_paths),
+        'train': self._generate_examples(
+            'train_', gen_filenames(cifar_info.train_files), dl_paths
+        ),
+        'test': self._generate_examples(
+            'test_', gen_filenames(cifar_info.test_files), dl_paths
+        ),
     }
 
   def _generate_examples(self, split_prefix, filepaths, dl_paths):
@@ -208,11 +210,22 @@ class Cifar100N(tfds.core.GeneratorBasedBuilder):
 
 
 class CifarInfo(
-    collections.namedtuple('_CifarInfo', [
-        'name', 'url', 'prefix', 'train_files', 'test_files', 'label_files',
-        'label_keys', 'human_label_path', 'side_info_path',
-        'annotations_order_path'
-    ])):
+    collections.namedtuple(
+        '_CifarInfo',
+        [
+            'name',
+            'url',
+            'prefix',
+            'train_files',
+            'test_files',
+            'label_files',
+            'label_keys',
+            'human_label_path',
+            'side_info_path',
+            'annotations_order_path',
+        ],
+    )
+):
   """Contains the information necessary to generate a CIFAR dataset.
 
   Attributes:
@@ -238,13 +251,15 @@ def _load_data(path, labels_number=1):
   max_offset = len(data) - 1
   while offset < max_offset:
     labels = np.frombuffer(
-        data, dtype=np.uint8, count=labels_number, offset=offset).reshape(
-            (labels_number,))
+        data, dtype=np.uint8, count=labels_number, offset=offset
+    ).reshape((labels_number,))
     # 1 byte per label, 1024 * 3 = 3072 bytes for the image.
     offset += labels_number
     img = (
-        np.frombuffer(data, dtype=np.uint8, count=3072, offset=offset).reshape(
-            (3, _CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE)).transpose((1, 2, 0)))
+        np.frombuffer(data, dtype=np.uint8, count=3072, offset=offset)
+        .reshape((3, _CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE))
+        .transpose((1, 2, 0))
+    )
     offset += 3072
     yield labels, img
 
@@ -263,7 +278,8 @@ def _load_side_info(path):
       2: 'worker_time',
   }
   side_info_array = np.genfromtxt(
-      tf.io.gfile.GFile(path), delimiter=',', skip_header=1)
+      tf.io.gfile.GFile(path), delimiter=',', skip_header=1
+  )
   side_info = {}
   for key in side_info_key_map:
     side_info[side_info_key_map[key]] = side_info_array[:, key]

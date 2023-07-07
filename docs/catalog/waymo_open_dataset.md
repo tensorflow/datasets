@@ -28,6 +28,12 @@ WARNING: this dataset requires additional authorization and registration. Please
 look at tfds documentation for accessing GCS, and afterwards, please register
 via https://waymo.com/open/licensing/
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/waymo-open-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://www.waymo.com/open/](http://www.waymo.com/open/)
 
 *   **Source code**:
@@ -48,80 +54,80 @@ via https://waymo.com/open/licensing/
 ```python
 FeaturesDict({
     'camera_FRONT': FeaturesDict({
-        'image': Image(shape=(1280, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(1280, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'camera_FRONT_LEFT': FeaturesDict({
-        'image': Image(shape=(1280, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(1280, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'camera_FRONT_RIGHT': FeaturesDict({
-        'image': Image(shape=(1280, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(1280, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'camera_SIDE_LEFT': FeaturesDict({
-        'image': Image(shape=(886, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(886, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'camera_SIDE_RIGHT': FeaturesDict({
-        'image': Image(shape=(886, 1920, 3), dtype=tf.uint8),
+        'image': Image(shape=(886, 1920, 3), dtype=uint8),
         'labels': Sequence({
-            'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-            'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+            'bbox': BBoxFeature(shape=(4,), dtype=float32),
+            'type': ClassLabel(shape=(), dtype=int64, num_classes=5),
         }),
     }),
     'context': FeaturesDict({
-        'name': Text(shape=(), dtype=tf.string),
+        'name': Text(shape=(), dtype=string),
     }),
-    'timestamp_micros': tf.int64,
+    'timestamp_micros': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape           | Dtype      | Description
-:----------------------------- | :----------- | :-------------- | :--------- | :----------
-                               | FeaturesDict |                 |            |
-camera_FRONT                   | FeaturesDict |                 |            |
-camera_FRONT/image             | Image        | (1280, 1920, 3) | tf.uint8   |
-camera_FRONT/labels            | Sequence     |                 |            |
-camera_FRONT/labels/bbox       | BBoxFeature  | (4,)            | tf.float32 |
-camera_FRONT/labels/type       | ClassLabel   |                 | tf.int64   |
-camera_FRONT_LEFT              | FeaturesDict |                 |            |
-camera_FRONT_LEFT/image        | Image        | (1280, 1920, 3) | tf.uint8   |
-camera_FRONT_LEFT/labels       | Sequence     |                 |            |
-camera_FRONT_LEFT/labels/bbox  | BBoxFeature  | (4,)            | tf.float32 |
-camera_FRONT_LEFT/labels/type  | ClassLabel   |                 | tf.int64   |
-camera_FRONT_RIGHT             | FeaturesDict |                 |            |
-camera_FRONT_RIGHT/image       | Image        | (1280, 1920, 3) | tf.uint8   |
-camera_FRONT_RIGHT/labels      | Sequence     |                 |            |
-camera_FRONT_RIGHT/labels/bbox | BBoxFeature  | (4,)            | tf.float32 |
-camera_FRONT_RIGHT/labels/type | ClassLabel   |                 | tf.int64   |
-camera_SIDE_LEFT               | FeaturesDict |                 |            |
-camera_SIDE_LEFT/image         | Image        | (886, 1920, 3)  | tf.uint8   |
-camera_SIDE_LEFT/labels        | Sequence     |                 |            |
-camera_SIDE_LEFT/labels/bbox   | BBoxFeature  | (4,)            | tf.float32 |
-camera_SIDE_LEFT/labels/type   | ClassLabel   |                 | tf.int64   |
-camera_SIDE_RIGHT              | FeaturesDict |                 |            |
-camera_SIDE_RIGHT/image        | Image        | (886, 1920, 3)  | tf.uint8   |
-camera_SIDE_RIGHT/labels       | Sequence     |                 |            |
-camera_SIDE_RIGHT/labels/bbox  | BBoxFeature  | (4,)            | tf.float32 |
-camera_SIDE_RIGHT/labels/type  | ClassLabel   |                 | tf.int64   |
-context                        | FeaturesDict |                 |            |
-context/name                   | Text         |                 | tf.string  |
-timestamp_micros               | Tensor       |                 | tf.int64   |
+Feature                        | Class        | Shape           | Dtype   | Description
+:----------------------------- | :----------- | :-------------- | :------ | :----------
+                               | FeaturesDict |                 |         |
+camera_FRONT                   | FeaturesDict |                 |         |
+camera_FRONT/image             | Image        | (1280, 1920, 3) | uint8   |
+camera_FRONT/labels            | Sequence     |                 |         |
+camera_FRONT/labels/bbox       | BBoxFeature  | (4,)            | float32 |
+camera_FRONT/labels/type       | ClassLabel   |                 | int64   |
+camera_FRONT_LEFT              | FeaturesDict |                 |         |
+camera_FRONT_LEFT/image        | Image        | (1280, 1920, 3) | uint8   |
+camera_FRONT_LEFT/labels       | Sequence     |                 |         |
+camera_FRONT_LEFT/labels/bbox  | BBoxFeature  | (4,)            | float32 |
+camera_FRONT_LEFT/labels/type  | ClassLabel   |                 | int64   |
+camera_FRONT_RIGHT             | FeaturesDict |                 |         |
+camera_FRONT_RIGHT/image       | Image        | (1280, 1920, 3) | uint8   |
+camera_FRONT_RIGHT/labels      | Sequence     |                 |         |
+camera_FRONT_RIGHT/labels/bbox | BBoxFeature  | (4,)            | float32 |
+camera_FRONT_RIGHT/labels/type | ClassLabel   |                 | int64   |
+camera_SIDE_LEFT               | FeaturesDict |                 |         |
+camera_SIDE_LEFT/image         | Image        | (886, 1920, 3)  | uint8   |
+camera_SIDE_LEFT/labels        | Sequence     |                 |         |
+camera_SIDE_LEFT/labels/bbox   | BBoxFeature  | (4,)            | float32 |
+camera_SIDE_LEFT/labels/type   | ClassLabel   |                 | int64   |
+camera_SIDE_RIGHT              | FeaturesDict |                 |         |
+camera_SIDE_RIGHT/image        | Image        | (886, 1920, 3)  | uint8   |
+camera_SIDE_RIGHT/labels       | Sequence     |                 |         |
+camera_SIDE_RIGHT/labels/bbox  | BBoxFeature  | (4,)            | float32 |
+camera_SIDE_RIGHT/labels/type  | ClassLabel   |                 | int64   |
+context                        | FeaturesDict |                 |         |
+context/name                   | Text         |                 | string  |
+timestamp_micros               | Tensor       |                 | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -130,10 +136,6 @@ timestamp_micros               | Tensor       |                 | tf.int64   |
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -161,6 +163,43 @@ Split          | Examples
 `'train'`      | 158,081
 `'validation'` | 39,987
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/waymo_open_dataset-v1.2-0.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## waymo_open_dataset/v1.1
 
 *   **Config description**: Waymo Open Dataset v1.1
@@ -173,6 +212,43 @@ Split          | Examples
 :------------- | -------:
 `'train'`      | 158,081
 `'validation'` | 39,987
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/waymo_open_dataset-v1.1-0.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## waymo_open_dataset/v1.0
 
@@ -192,3 +268,40 @@ Split          | Examples
 :------------- | -------:
 `'train'`      | 14,884
 `'validation'` | 4,954
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/waymo_open_dataset-v1.0-0.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

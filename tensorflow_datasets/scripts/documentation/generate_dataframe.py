@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,20 +22,23 @@ import functools
 from absl import app
 from absl import flags
 import pandas
-
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.scripts.documentation import script_utils
 
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
-    'datasets', None,
-    'Comma separated list of datasets to generates. None for all datasets.')
-flags.DEFINE_string('dst_dir', None,
-                    'Destination dir to save the dataframe html.')
-flags.DEFINE_boolean('overwrite', False,
-                     'If True, overwrite the existing visualizations.')
+    'datasets',
+    None,
+    'Comma separated list of datasets to generates. None for all datasets.',
+)
+flags.DEFINE_string(
+    'dst_dir', None, 'Destination dir to save the dataframe html.'
+)
+flags.DEFINE_boolean(
+    'overwrite', False, 'If True, overwrite the existing visualizations.'
+)
 
 
 def _save_html(dst_path: str, df: pandas.DataFrame) -> None:

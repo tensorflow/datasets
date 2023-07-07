@@ -2,6 +2,7 @@
   "citation": "@inproceedings{inproceedings,\nauthor = {Shi, Shuming and Wang, Yuehui and Lin, Chin-Yew and Liu, Xiaojiang and Rui, Yong},\nyear = {2015},\nmonth = {09},\npages = {},\ntitle = {Automatically Solving Number Word Problems by Semantic Parsing and Reasoning},\ndoi = {10.18653/v1/D15-1135}\n}",
   "description": "Dolphin Math Word Problem dataset (2015), as presented in https://www.microsoft.com/en-us/research/uploads/prod/2016/02//dolphin-sigmadolphin.datasets.pdf",
   "downloadSize": "287153",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.microsoft.com/en-us/research/project/sigmadolphin-2/"
@@ -9,8 +10,14 @@
   },
   "moduleName": "tensorflow_datasets.text.dolphin_number_word.dolphin_number_word",
   "name": "dolphin_number_word",
+  "releaseNotes": {
+    "0.0.1": "Initial release.",
+    "0.0.2": "RaggedTensor fix. Equations and Sources represented as a singlestring with components delimited by spaces",
+    "0.0.3": "Reintroduced logic to handle edge-case involving examples without sources."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "311928",
       "shardLengths": [
@@ -18,6 +25,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "1249795",
       "shardLengths": [
@@ -26,8 +34,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "text",
-    "output": "ans"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "text"
+        },
+        {
+          "featureKey": "ans"
+        }
+      ]
+    }
   },
   "version": "0.0.2"
 }

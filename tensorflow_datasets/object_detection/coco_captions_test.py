@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,11 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.object_detection import coco_captions
 
 _BASE_EXAMPLE_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)), "testing", "test_data",
-    "fake_examples")
+    os.path.dirname(os.path.dirname(__file__)),
+    "testing",
+    "test_data",
+    "fake_examples",
+)
 
 
 class CocoCaptionsTest(testing.DatasetBuilderTestCase):
@@ -44,7 +47,7 @@ class CocoCaptionsTest(testing.DatasetBuilderTestCase):
       "test_annotations": "test_annotations",
       "test2015_images": "test2015_images",
       "test2015_annotations": "test2015_annotations",
-      "karpathy_and_li_splits": "karpathy_and_li_splits"
+      "karpathy_and_li_splits": "karpathy_and_li_splits",
   }
 
 

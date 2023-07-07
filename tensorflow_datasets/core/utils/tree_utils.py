@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,16 @@ import concurrent.futures
 import functools
 from typing import Callable, TypeVar
 
-import tensorflow as tf
 from tensorflow_datasets.core.utils import tqdm_utils as tqdm
 from tensorflow_datasets.core.utils import type_utils
+import tree
 
 Tree = type_utils.Tree
 _Tin = TypeVar('_Tin')
 _Tout = TypeVar('_Tout')
+
+# Wrapper around `tree.map_structure` to easily switch backend if needed.
+map_structure = tree.map_structure
 
 
 def parallel_map(
@@ -34,7 +37,7 @@ def parallel_map(
     max_workers: int = 32,
     report_progress: bool = False,
 ) -> Tree[_Tout]:  # pytype: disable=invalid-annotation
-  """Same as `tf.nest.map_structure` but apply map_fn in parallel.
+  """Same as `map_structure` but apply map_fn in parallel.
 
   Args:
     map_fn: Worker function
@@ -46,11 +49,12 @@ def parallel_map(
     The nested structure after `map_fn` has been applied.
   """
   with concurrent.futures.ThreadPoolExecutor(
-      max_workers=max_workers,) as executor:
+      max_workers=max_workers,
+  ) as executor:
     launch_worker = functools.partial(executor.submit, map_fn)
-    futures = tf.nest.map_structure(launch_worker, *trees)
+    futures = map_structure(launch_worker, *trees)
 
-    leaves = tf.nest.flatten(futures)
+    leaves = tree.flatten(futures)
 
     itr = concurrent.futures.as_completed(leaves)
     if report_progress:
@@ -60,4 +64,4 @@ def parallel_map(
       if f.exception():
         raise f.exception()
 
-  return tf.nest.map_structure(lambda f: f.result(), futures)
+  return map_structure(lambda f: f.result(), futures)

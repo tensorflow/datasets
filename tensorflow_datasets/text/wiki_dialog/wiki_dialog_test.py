@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ from tensorflow_datasets.text.wiki_dialog import wiki_dialog
 
 class WikiDialogTest(testing.DatasetBuilderTestCase):
   """Tests for wiki_dialog dataset."""
+
   DATASET_CLASS = wiki_dialog.WikiDialog
   BUILDER_CONFIG_NAMES_TO_TEST = ['OQ']
   DL_EXTRACT_RESULT = {

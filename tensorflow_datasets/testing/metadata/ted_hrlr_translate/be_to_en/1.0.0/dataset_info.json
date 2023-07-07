@@ -1,120 +1,57 @@
 {
-  "citation": "@inproceedings{Ye2018WordEmbeddings,\n  author  = {Ye, Qi and Devendra, Sachan and Matthieu, Felix and Sarguna, Padmanabhan and Graham, Neubig},\n  title   = {When and Why are pre-trained word embeddings useful for Neural Machine Translation},\n  booktitle = {HLT-NAACL},\n  year    = {2018},\n  }\n", 
-  "description": "Data sets derived from TED talk transcripts for comparing similar language pairs\nwhere one is high resource and the other is low resource.\n", 
+  "citation": "@inproceedings{Ye2018WordEmbeddings,\n  author  = {Ye, Qi and Devendra, Sachan and Matthieu, Felix and Sarguna, Padmanabhan and Graham, Neubig},\n  title   = {When and Why are pre-trained word embeddings useful for Neural Machine Translation},\n  booktitle = {HLT-NAACL},\n  year    = {2018},\n  }",
+  "configDescription": "Translation dataset from be to en in plain text.",
+  "configName": "be_to_en",
+  "description": "Data sets derived from TED talk transcripts for comparing similar language pairs\nwhere one is high resource and the other is low resource.",
+  "downloadSize": "131005909",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/neulab/word-embeddings-for-nmt"
     ]
-  }, 
-  "name": "ted_hrlr_translate", 
-  "schema": {
-    "feature": [
-      {
-        "name": "be", 
-        "type": "BYTES"
-      }, 
-      {
-        "name": "en", 
-        "type": "BYTES"
-      }
-    ]
-  }, 
-  "sizeInBytes": "131005909", 
+  },
+  "moduleName": "tensorflow_datasets.translate.ted_hrlr",
+  "name": "ted_hrlr_translate",
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)"
+  },
   "splits": [
     {
-      "name": "test", 
-      "numShards": "1", 
-      "shardLengths": [
-        "664"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "664"
-              }
-            }, 
-            "name": "be", 
-            "type": "BYTES"
-          }, 
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "664"
-              }
-            }, 
-            "name": "en", 
-            "type": "BYTES"
-          }
-        ], 
-        "numExamples": "664"
-      }
-    }, 
-    {
-      "name": "train", 
-      "numShards": "1", 
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1273420",
       "shardLengths": [
         "4509"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "4509"
-              }
-            }, 
-            "name": "be", 
-            "type": "BYTES"
-          }, 
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "4509"
-              }
-            }, 
-            "name": "en", 
-            "type": "BYTES"
-          }
-        ], 
-        "numExamples": "4509"
-      }
-    }, 
+      ]
+    },
     {
-      "name": "validation", 
-      "numShards": "1", 
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "64527",
       "shardLengths": [
         "248"
-      ], 
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "248"
-              }
-            }, 
-            "name": "be", 
-            "type": "BYTES"
-          }, 
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "248"
-              }
-            }, 
-            "name": "en", 
-            "type": "BYTES"
-          }
-        ], 
-        "numExamples": "248"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "201066",
+      "shardLengths": [
+        "664"
+      ]
     }
-  ], 
+  ],
   "supervisedKeys": {
-    "input": "be", 
-    "output": "en"
-  }, 
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "be"
+        },
+        {
+          "featureKey": "en"
+        }
+      ]
+    }
+  },
   "version": "1.0.0"
 }

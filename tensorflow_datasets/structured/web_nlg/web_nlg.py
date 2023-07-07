@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
 
 """web_nlg dataset."""
 
+from __future__ import annotations
+
 import os
 import xml.etree.ElementTree as etree
 
-import tensorflow as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -68,18 +71,17 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             'input_text': {
-                'table':  # Each row will be one triple fact.
-                    tfds.features.Sequence({
-                        # we'll only have subject/predicate/object headers
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
-                    }),
+                'table': tfds.features.Sequence({
+                    # Each row will be one triple fact.
+                    # we'll only have subject/predicate/object headers
+                    'column_header': np.str_,
+                    'row_number': np.int16,
+                    'content': np.str_,
+                }),
                 # context will be the category
-                'context':
-                    tf.string,
+                'context': np.str_,
             },
-            'target_text': tf.string,
+            'target_text': np.str_,
         }),
         supervised_keys=('input_text', 'target_text'),
         # Homepage of the dataset for documentation
@@ -98,45 +100,49 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
       return all_files
 
     extracted_path = os.path.join(
-        dl_manager.download_and_extract(_URL), 'webnlg-dataset-master',
-        'webnlg_challenge_2017')
+        dl_manager.download_and_extract(_URL),
+        'webnlg-dataset-master',
+        'webnlg_challenge_2017',
+    )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'list_files':
-                    get_files_in_dir(os.path.join(extracted_path, 'train')),
-                'set_name':
-                    'train'
+                'list_files': get_files_in_dir(
+                    os.path.join(extracted_path, 'train')
+                ),
+                'set_name': 'train',
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                'list_files':
-                    get_files_in_dir(os.path.join(extracted_path, 'dev')),
-                'set_name':
-                    'validation'
+                'list_files': get_files_in_dir(
+                    os.path.join(extracted_path, 'dev')
+                ),
+                'set_name': 'validation',
             },
         ),
         tfds.core.SplitGenerator(
             name='test_unseen',
             gen_kwargs={
                 'list_files': [
-                    os.path.join(extracted_path, 'test',
-                                 'testdata_unseen_with_lex.xml')
+                    os.path.join(
+                        extracted_path, 'test', 'testdata_unseen_with_lex.xml'
+                    )
                 ],
-                'set_name': 'test_unseen'
+                'set_name': 'test_unseen',
             },
         ),
         tfds.core.SplitGenerator(
             name='test_all',
             gen_kwargs={
                 'list_files': [
-                    os.path.join(extracted_path, 'test',
-                                 'testdata_with_lex.xml')
+                    os.path.join(
+                        extracted_path, 'test', 'testdata_with_lex.xml'
+                    )
                 ],
-                'set_name': 'test_all'
+                'set_name': 'test_all',
             },
         ),
     ]
@@ -150,14 +156,19 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
         for entry in list(xml_root)[0]:
           category = entry.attrib['category']
           entry_id = '{}_{}'.format(
-              os.path.basename(file_path), entry.attrib['eid'])
+              os.path.basename(file_path), entry.attrib['eid']
+          )
           triples_set = []
           target_text_i = 0
           for child_element in entry:
             if child_element.tag == 'modifiedtripleset':
               for i, triple in enumerate(child_element):
-                for header, content in zip(['subject', 'predicate', 'object'],
-                                           triple.text.split(' | ')):
+                text = triple.text
+                if not text:
+                  continue
+                for header, content in zip(
+                    ['subject', 'predicate', 'object'], text.split(' | ')
+                ):
                   triples_set.append({
                       'column_header': header,
                       'row_number': i,
@@ -166,12 +177,10 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
             elif child_element.tag == 'lex':
               if not triples_set:
                 raise UnexpectedFormatError(
-                    'Found language expresion with no previous triplesets.')
+                    'Found language expresion with no previous triplesets.'
+                )
               yield '{}_#{}'.format(entry_id, target_text_i), {
-                  'input_text': {
-                      'table': triples_set,
-                      'context': category
-                  },
-                  'target_text': child_element.text
+                  'input_text': {'table': triples_set, 'context': category},
+                  'target_text': child_element.text,
               }
               target_text_i += 1

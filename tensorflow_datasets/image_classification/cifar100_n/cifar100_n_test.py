@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ from tensorflow_datasets.image_classification.cifar100_n import cifar100_n
 
 class Cifar100NTest(testing.DatasetBuilderTestCase):
   """Tests for cifar100_n dataset."""
+
   DATASET_CLASS = cifar100_n.Cifar100N
   SPLITS = {
       'train': 10,  # Number of fake train example

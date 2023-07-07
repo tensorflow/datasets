@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ class Conll2003(tfds.dataset_builders.ConllDatasetBuilder):
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
   }
-  BUILDER_CONFIGS = [conll_lib.CONLL_2002_CONFIG]
+  BUILDER_CONFIGS = [conll_lib.CONLL_2003_CONFIG]
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -58,10 +58,11 @@ class Conll2003(tfds.dataset_builders.ConllDatasetBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(
-        'https://data.deepai.org/conll2003.zip')
+        'https://data.deepai.org/conll2003.zip'
+    )
 
     return {
         'train': self._generate_examples(path / 'train.txt'),
         'dev': self._generate_examples(path / 'valid.txt'),
-        'test': self._generate_examples(path / 'test.txt')
+        'test': self._generate_examples(path / 'test.txt'),
     }

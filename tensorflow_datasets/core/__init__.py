@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,23 +14,12 @@
 # limitations under the License.
 
 """API to define datasets."""
-# Ensure TensorFlow is importable and its version is sufficiently recent. This
-# needs to happen before anything else, since the imports below will try to
-# import tensorflow, too.
 
-from tensorflow_datasets.core import tf_compat
-
-tf_compat.ensure_tf_install()
-
-# pylint:disable=g-import-not-at-top
-
-# pylint: disable=g-bad-import-order
 # Allow to use `tfds.core.Path` in dataset implementation which seems more
 # natural than having to import a third party module.
 from etils.epath import Path
-# pylint: enable=g-bad-import-order
 
-from tensorflow_datasets.core import community  # pylint: disable=g-bad-import-order
+from tensorflow_datasets.core import community
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
@@ -42,9 +31,13 @@ from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.dataset_info import Metadata
 from tensorflow_datasets.core.dataset_info import MetadataDict
 
+from tensorflow_datasets.core.example_serializer import ExampleSerializer
+
 from tensorflow_datasets.core.file_adapters import FileFormat
 
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
+
+from tensorflow_datasets.core.load import DatasetCollectionLoader
 
 from tensorflow_datasets.core.naming import ShardedFileTemplate
 
@@ -62,6 +55,7 @@ from tensorflow_datasets.core.splits import SubSplitInfo
 
 from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import gcs_path
+from tensorflow_datasets.core.utils import lazy_imports_utils
 from tensorflow_datasets.core.utils import tfds_path
 from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
@@ -71,7 +65,8 @@ from tensorflow_datasets.core.utils.file_utils import as_path
 
 def benchmark(*args, **kwargs):
   raise DeprecationWarning(
-      "`tfds.core.benchmark` has been renamed to `tfds.benchmark`")
+      "`tfds.core.benchmark` has been renamed to `tfds.benchmark`"
+  )
 
 
 __all__ = [
@@ -82,6 +77,7 @@ __all__ = [
     "BeamMetadataDict",
     "BuilderConfig",
     "DatasetBuilder",
+    "DatasetCollectionLoader",
     "DatasetInfo",
     "DatasetIdentity",
     "DatasetNotFoundError",

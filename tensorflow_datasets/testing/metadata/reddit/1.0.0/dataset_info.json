@@ -1,54 +1,20 @@
 {
-  "citation": "\n@inproceedings{volske-etal-2017-tl,\n    title = \"{TL};{DR}: Mining {R}eddit to Learn Automatic Summarization\",\n    author = {V{\"o}lske, Michael  and\n      Potthast, Martin  and\n      Syed, Shahbaz  and\n      Stein, Benno},\n    booktitle = \"Proceedings of the Workshop on New Frontiers in Summarization\",\n    month = sep,\n    year = \"2017\",\n    address = \"Copenhagen, Denmark\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/W17-4508\",\n    doi = \"10.18653/v1/W17-4508\",\n    pages = \"59--63\",\n    abstract = \"Recent advances in automatic text summarization have used deep neural networks to generate high-quality abstractive summaries, but the performance of these models strongly depends on large amounts of suitable training data. We propose a new method for mining social media for author-provided summaries, taking advantage of the common practice of appending a {``}TL;DR{''} to long posts. A case study using a large Reddit crawl yields the Webis-TLDR-17 dataset, complementing existing corpora primarily from the news genre. Our technique is likely applicable to other social media sites and general web crawls.\",\n}\n",
-  "description": "\nThis corpus contains preprocessed posts from the Reddit dataset.\nThe dataset consists of 3,848,330 posts with an average length of 270 words for content,\nand 28 words for the summary.\n\nFeatures includes strings: author, body, normalizedBody, content, summary, subreddit, subreddit_id.\nContent is used as document and summary is used as summary.\n",
+  "citation": "@inproceedings{volske-etal-2017-tl,\n    title = \"{TL};{DR}: Mining {R}eddit to Learn Automatic Summarization\",\n    author = {V{\"o}lske, Michael  and\n      Potthast, Martin  and\n      Syed, Shahbaz  and\n      Stein, Benno},\n    booktitle = \"Proceedings of the Workshop on New Frontiers in Summarization\",\n    month = sep,\n    year = \"2017\",\n    address = \"Copenhagen, Denmark\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/W17-4508\",\n    doi = \"10.18653/v1/W17-4508\",\n    pages = \"59--63\",\n    abstract = \"Recent advances in automatic text summarization have used deep neural networks to generate high-quality abstractive summaries, but the performance of these models strongly depends on large amounts of suitable training data. We propose a new method for mining social media for author-provided summaries, taking advantage of the common practice of appending a {``}TL;DR{''} to long posts. A case study using a large Reddit crawl yields the Webis-TLDR-17 dataset, complementing existing corpora primarily from the news genre. Our technique is likely applicable to other social media sites and general web crawls.\",\n}",
+  "description": "This corpus contains preprocessed posts from the Reddit dataset.\nThe dataset consists of 3,848,330 posts with an average length of 270 words for content,\nand 28 words for the summary.\n\nFeatures includes strings: author, body, normalizedBody, content, summary, subreddit, subreddit_id.\nContent is used as document and summary is used as summary.",
   "downloadSize": "3141854161",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/webis-de/webis-tldr-17-corpus"
     ]
   },
+  "moduleName": "tensorflow_datasets.summarization.reddit",
   "name": "reddit",
-  "schema": {
-    "feature": [
-      {
-        "name": "author",
-        "type": "BYTES"
-      },
-      {
-        "name": "body",
-        "type": "BYTES"
-      },
-      {
-        "name": "content",
-        "type": "BYTES"
-      },
-      {
-        "name": "id",
-        "type": "BYTES"
-      },
-      {
-        "name": "normalizedBody",
-        "type": "BYTES"
-      },
-      {
-        "name": "subreddit",
-        "type": "BYTES"
-      },
-      {
-        "name": "subreddit_id",
-        "type": "BYTES"
-      },
-      {
-        "name": "summary",
-        "type": "BYTES"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "19418832986",
-      "numShards": "1",
       "shardLengths": [
         "15033",
         "15032",
@@ -306,89 +272,20 @@
         "15033",
         "15032",
         "15033"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3848330"
-              }
-            },
-            "name": "author",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3848330"
-              }
-            },
-            "name": "body",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3848330"
-              }
-            },
-            "name": "content",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3848330"
-              }
-            },
-            "name": "id",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3848330"
-              }
-            },
-            "name": "normalizedBody",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3848330"
-              }
-            },
-            "name": "subreddit",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3848330"
-              }
-            },
-            "name": "subreddit_id",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3848330"
-              }
-            },
-            "name": "summary",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "3848330"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "content",
-    "output": "summary"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "content"
+        },
+        {
+          "featureKey": "summary"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

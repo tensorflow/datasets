@@ -1,0 +1,59 @@
+name: 'Setup'
+description: 'Common setup for workflows.'
+
+inputs:
+  tf-version:
+    description: 'Tensorflow version'
+    required: false
+    default: 'skip'  # Use sentinel value to skip Tensorflow installation
+  python-version:
+    description: 'Python version'
+    required: false
+    default: '3.8'
+  extras:
+    description: 'Extra dependencies'
+    required: false
+    default: 'tests-all'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get current date
+      run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      shell: bash
+
+    # Install deps.
+    - name: Workaround for connectivity issues in Azure  # https://github.com/actions/runner-images/issues/675#issuecomment-1419388451
+      run: |
+        sudo gem install apt-spy2
+        sudo apt-spy2 fix --commit --launchpad --country=US
+        sudo apt-get update
+      shell: bash
+    - run: | # Install protobuf-compiler for gcld3 library.
+        sudo apt install -y --allow-downgrades libprotobuf-lite23=3.12.4-1ubuntu7 libprotobuf23=3.12.4-1ubuntu7 libprotoc23=3.12.4-1ubuntu7
+        sudo apt install -y libprotobuf-dev=3.12.4-1ubuntu7 protobuf-compiler=3.12.4-1ubuntu7
+      shell: bash
+    - uses: FedericoCarboni/setup-ffmpeg@v2  # for Audio FeatureConnector tests.
+
+    # Python is cached manually to allow daily refreshes.
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+    - id: python-cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.pythonLocation }}
+        # Use all inputs in the cache key to avoid cache overrides by different installations.
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ env.today }}-${{ inputs.tf-version }}-${{ inputs.extras }}
+
+    # Install Python deps.
+    # If Python cache is restored then we don't need to install dependencies again.
+    - if: ${{ steps.python-cache.outputs.cache-hit != 'true' && inputs.tf-version != 'skip' }}
+      run: pip install ${{ inputs.tf-version }}
+      shell: bash
+    - if: ${{ steps.python-cache.outputs.cache-hit != 'true' }}
+      run: pip install .[${{ inputs.extras }}]
+      shell: bash
+    # Get TFDS library from the repository instead of cache.
+    - run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
+      shell: bash

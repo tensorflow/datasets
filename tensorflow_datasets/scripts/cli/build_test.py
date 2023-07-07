@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,14 +18,16 @@
 import contextlib
 import os
 import pathlib
-from typing import Iterator, List
+from typing import Dict, Iterator, List, Optional
 from unittest import mock
 
+from absl.testing import parameterized
 from etils import epath
 import pytest
-
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import download
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.scripts.cli import build as build_lib
 from tensorflow_datasets.scripts.cli import main
@@ -41,6 +43,17 @@ class DummyDatasetNoGenerate(tfds.testing.DummyDataset):
     if True:  # pylint: disable=using-constant-test
       raise NotImplementedError('Should not be called')
     yield
+
+  @utils.classproperty
+  @classmethod
+  def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
+    return {
+        'http://data.org/file1.zip': download.checksums.UrlInfo(
+            size=42,
+            checksum='d45899d9a6a0e48afb250aac7ee3dc50e73e263687f15761d754515cd8284e0a',
+            filename='file1.zip',
+        ),
+    }
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -74,8 +87,8 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
 
   original_dl_and_prepare = tfds.core.DatasetBuilder.download_and_prepare
 
-  # Unfortunatelly, `mock.Mock` remove `self` from `call_args`, so we have
-  # to patch manually the function to record the generated_ds.
+  # Unfortunately, `mock.Mock` removes `self` from `call_args`, so we have
+  # to patch the function to record the generated_ds manually.
   # See:
   # https://stackoverflow.com/questions/64792295/how-to-get-self-instance-in-mock-mock-call-args
   generated_ds_names = []
@@ -128,6 +141,17 @@ def test_build_multiple():
   ]
 
 
+@parameterized.parameters(range(5))
+def test_build_parallel(num_processes):
+  # Order is not guaranteed
+  assert set(_build(f'trivia_qa --num-proccesses={num_processes}')) == set([
+      'trivia_qa/rc',
+      'trivia_qa/rc.nocontext',
+      'trivia_qa/unfiltered',
+      'trivia_qa/unfiltered.nocontext',
+  ])
+
+
 def test_build_dataset_configs():
   # By default, all configs are build
   assert _build('trivia_qa') == [
@@ -175,7 +199,7 @@ def test_exclude_datasets():
       'mnist',
   ]
 
-  with pytest.raises(ValueError, match='--exclude_datasets can\'t be used'):
+  with pytest.raises(ValueError, match="--exclude_datasets can't be used"):
     _build('mnist --exclude_datasets cifar10')
 
 
@@ -183,7 +207,8 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
   data_dir = mock_default_data_dir / 'mnist/3.0.1'
   data_dir.mkdir(parents=True)
   metadata_path = tfds.core.tfds_path(
-      'testing/test_data/dataset_info/mnist/3.0.1')
+      'testing/test_data/dataset_info/mnist/3.0.1'
+  )
 
   for f in metadata_path.iterdir():  # Copy metadata files.
     data_dir.joinpath(f.name).write_text(f.read_text())
@@ -261,7 +286,8 @@ def test_publish_data_dir(mock_fs: testing.MockFs):
   del mock_fs
   builder = testing.DummyMnist(data_dir='/tmp')
   actual = build_lib._publish_data_dir(
-      publish_dir=epath.Path('/a/b'), builder=builder)
+      publish_dir=epath.Path('/a/b'), builder=builder
+  )
   assert actual == epath.Path('/a/b/dummy_mnist/3.0.1')
   assert build_lib._publish_data_dir(publish_dir=None, builder=builder) is None
 
@@ -275,3 +301,32 @@ def test_publish_data(mock_fs: testing.MockFs):
   publish_data_dir = epath.Path('/a/b')
   build_lib._publish_data(publish_data_dir=publish_data_dir, builder=builder)
   assert mock_fs.read_file(publish_data_dir / filename) == content
+
+
+def test_download_only():
+  with mock.patch(
+      'tensorflow_datasets.download.DownloadManager.download'
+  ) as mock_download:
+    assert not _build('dummy_dataset_no_generate --download_only')
+    mock_download.assert_called_with({'file0': 'http://data.org/file1.zip'})
+
+
+@parameterized.parameters(
+    ('--manual_dir=/a/b', {'manual_dir': '/a/b'}),
+    ('--manual_dir=/a/b --add_name_to_manual_dir', {'manual_dir': '/a/b/x'}),
+    ('--extract_dir=/a/b', {'extract_dir': '/a/b'}),
+    ('--max_examples_per_split=42', {'max_examples_per_split': 42}),
+    ('--register_checksums', {'register_checksums': True}),
+    ('--force_checksums_validation', {'force_checksums_validation': True}),
+    ('--max_shard_size_mb=128', {'max_shard_size': 128 << 20}),
+    (
+        '--download_config="{\'max_shard_size\': 1234}"',
+        {'max_shard_size': 1234},
+    ),
+)
+def test_make_download_config(args: str, download_config_kwargs):
+  args = main._parse_flags(f'tfds build x {download_config_kwargs}'.split())
+  actual = build_lib._make_download_config(args, dataset_name='x')
+  # Ignore the beam runner
+  actual.replace(beam_runner=None)
+  assert actual == tfds.download.DownloadConfig(**download_config_kwargs)

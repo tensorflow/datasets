@@ -19,6 +19,12 @@ dataset consists of 120 tracks, each 30 seconds long. Each class (music/speech)
 has 60 examples. The tracks are all 22050Hz Mono 16-bit audio files in .wav
 format.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gtzan-music-speech">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://marsyas.info/index.html](http://marsyas.info/index.html)
 
@@ -47,20 +53,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
-    'audio/filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'audio': Audio(shape=(None,), dtype=int64),
+    'audio/filename': Text(shape=(), dtype=string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape   | Dtype     | Description
-:------------- | :----------- | :------ | :-------- | :----------
-               | FeaturesDict |         |           |
-audio          | Audio        | (None,) | tf.int64  |
-audio/filename | Text         |         | tf.string |
-label          | ClassLabel   |         | tf.int64  |
+Feature        | Class        | Shape   | Dtype  | Description
+:------------- | :----------- | :------ | :----- | :----------
+               | FeaturesDict |         |        |
+audio          | Audio        | (None,) | int64  |
+audio/filename | Text         |         | string |
+label          | ClassLabel   |         | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

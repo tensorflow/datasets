@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ from tensorflow_datasets.vision_language.wit import wit
 
 class WitTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for wit dataset."""
+
   DATASET_CLASS = wit.Wit
   SPLITS = {
       'train': 3,
@@ -31,7 +32,7 @@ class WitTest(tfds.testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       'train': ['train-00000-of-00009.tsv'],
       'val': ['val-00000-of-00005.tsv'],
-      'test': ['test-00000-of-00005.tsv']
+      'test': ['test-00000-of-00005.tsv'],
   }
 
 

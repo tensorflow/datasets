@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,15 +16,20 @@
 """Tests for tensorflow_datasets.core.registered."""
 
 import abc
+import re
+
 from unittest import mock
 import pytest
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
 
 
 class EmptyDatasetBuilder(registered.RegisteredDataset):
@@ -66,8 +71,9 @@ class RegisteredTest(testing.TestCase):
     self.assertIn(name, load.list_builders())
 
     nonexistent = "nonexistent_foobar_dataset"
-    with self.assertRaisesWithPredicateMatch(registered.DatasetNotFoundError,
-                                             "not found"):
+    with self.assertRaisesWithPredicateMatch(
+        registered.DatasetNotFoundError, "not found"
+    ):
       load.builder(nonexistent)
     # Prints registered datasets
     with self.assertRaisesWithPredicateMatch(ValueError, name):
@@ -82,7 +88,8 @@ class RegisteredTest(testing.TestCase):
       load.builder_cls(nonexistent)
 
     with self.assertRaisesWithPredicateMatch(
-        ValueError, "`builder_cls` only accept the `dataset_name`"):
+        ValueError, "`builder_cls` only accept the `dataset_name`"
+    ):
       name_with_kwargs = "empty_dataset_builder/config:1.0.0"
       load.builder_cls(name_with_kwargs)
 
@@ -92,15 +99,21 @@ class RegisteredTest(testing.TestCase):
     self.assertNotIn(name, load.list_builders())
 
     with self.assertRaisesWithPredicateMatch(
-        TypeError, "Can't instantiate abstract class"):
+        TypeError, "Can't instantiate abstract class"
+    ):
       load.builder(name)
 
   def test_builder_with_kwargs(self):
     name = "empty_dataset_builder"
     name_with_kwargs = name + "/k1=1,k2=1.,k3=foo,k4=True,k5=False"
     builder = load.builder(name_with_kwargs, data_dir="bar")
-    expectations = [("k1", 1), ("k2", 1.), ("k3", u"foo"), ("k4", True),
-                    ("k5", False)]
+    expectations = [
+        ("k1", 1),
+        ("k2", 1.0),
+        ("k3", "foo"),
+        ("k4", True),
+        ("k5", False),
+    ]
     for k, v in expectations:
       self.assertEqual(type(builder.kwargs[k]), type(v))
       self.assertEqual(builder.kwargs[k], v)
@@ -113,7 +126,7 @@ class RegisteredTest(testing.TestCase):
         "k2": 2,
         "version": "1.0.1",
         "config": "conf1-attr",
-        "data_dir": "bar"
+        "data_dir": "bar",
     }
     self.assertEqual(expected, builder.kwargs)
 
@@ -133,7 +146,8 @@ class RegisteredTest(testing.TestCase):
         split=splits.Split.TEST,
         data_dir=data_dir,
         download=False,
-        as_dataset_kwargs=as_dataset_kwargs)
+        as_dataset_kwargs=as_dataset_kwargs,
+    )
     self.assertTrue(builder.as_dataset_called)
     self.assertFalse(builder.download_called)
     self.assertEqual(splits.Split.TEST, builder.as_dataset_kwargs.pop("split"))
@@ -150,7 +164,8 @@ class RegisteredTest(testing.TestCase):
         split=splits.Split.TRAIN,
         data_dir=data_dir,
         download=True,
-        as_dataset_kwargs=as_dataset_kwargs)
+        as_dataset_kwargs=as_dataset_kwargs,
+    )
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)
 
@@ -160,7 +175,8 @@ class RegisteredTest(testing.TestCase):
     self.assertIsNone(builder.as_dataset_kwargs.pop("batch_size"))
     # Setting batch_size=1
     builder = load.load(
-        name=name, split=splits.Split.TEST, data_dir=data_dir, batch_size=1)
+        name=name, split=splits.Split.TEST, data_dir=data_dir, batch_size=1
+    )
     self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
 
   def test_load_all_splits(self):
@@ -260,6 +276,80 @@ def test_custom_name():
   assert "custom_name" in load.list_builders()
 
 
+def test_name_inferred_from_pkg():
+  ds_builder = dummy_ds_1_dataset_builder.Builder()
+  assert ds_builder.name == "dummy_ds_1"
+
+
+def test_name_inferred_from_pkg_level0_fails():
+  pkg_path = (
+      tfds.core.tfds_path() / "testing/dummy_config_based_datasets/dummy_ds_2"
+  )
+  expected_msg = (
+      "When using `Builder` as class name, the dataset builder name is "
+      'inferred from module name if named "*_dataset_builder" or from '
+      'package name, but there is no package in "dummy_builder".'
+  )
+  with tfds.core.utils.add_sys_path(pkg_path):
+    with pytest.raises(AssertionError, match=re.escape(expected_msg)):
+      tfds.core.community.builder_cls_from_module("dummy_builder")
+
+
+@mock.patch.dict(registered._DATASET_REGISTRY, {})
+def test_name_inferred_from_pkg_level1():
+  pkg_path = tfds.core.tfds_path() / "testing/dummy_config_based_datasets"
+  with tfds.core.utils.add_sys_path(pkg_path):
+    ds_builder = tfds.core.community.builder_cls_from_module(
+        "dummy_ds_2.dummy_builder"
+    )
+  assert ds_builder.name == "dummy_ds_2"
+
+
+@mock.patch.dict(registered._DATASET_REGISTRY, {})
+def test_name_inferred_from_pkg_level2():
+  pkg_path = tfds.core.tfds_path() / "testing"
+  with tfds.core.utils.add_sys_path(pkg_path):
+    ds_builder = tfds.core.community.builder_cls_from_module(
+        "dummy_config_based_datasets.dummy_ds_2.dummy_builder"
+    )
+  assert ds_builder.name == "dummy_ds_2"
+
+
+@mock.patch.dict(registered._DATASET_REGISTRY, {})
+def test_name_inferred_from_pkg_level3():
+  pkg_path = tfds.core.tfds_path()
+  with tfds.core.utils.add_sys_path(pkg_path):
+    ds_builder = tfds.core.community.builder_cls_from_module(
+        "testing.dummy_config_based_datasets.dummy_ds_2.dummy_builder"
+    )
+  assert ds_builder.name == "dummy_ds_2"
+
+
+class ConfigBasedBuildersTest(testing.TestCase):
+
+  def test__get_existing_dataset_packages(self):
+    ds_packages = registered._get_existing_dataset_packages(
+        "testing/dummy_config_based_datasets"
+    )
+    self.assertEqual(set(ds_packages.keys()), {"dummy_ds_1", "dummy_ds_2"})
+    pkg_path, builder_module = ds_packages["dummy_ds_1"]
+    self.assertEndsWith(
+        str(pkg_path),
+        "tensorflow_datasets/testing/dummy_config_based_datasets/dummy_ds_1",
+    )
+    self.assertEqual(
+        builder_module,
+        "tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1.dummy_ds_1_dataset_builder",
+    )
+
+  @mock.patch.object(
+      constants, "DATASETS_TFDS_SRC_DIR", "testing/dummy_config_based_datasets"
+  )
+  def test_imported_builder_cls(self):
+    builder = registered.imported_builder_cls("dummy_ds_1")
+    self.assertEqual(builder.name, "dummy_ds_1")
+
+
 # Tests for RegisteredDatasetCollection.
 
 
@@ -286,8 +376,10 @@ def test_skip_dataset_collection_registration():
     class SkipCollectionBuilder(registered.RegisteredDatasetCollection):  # pylint: disable=unused-variable
       pass
 
-  assert ("skip_collection_builder"
-          not in registered.list_imported_dataset_collections())
+  assert (
+      "skip_collection_builder"
+      not in registered.list_imported_dataset_collections()
+  )
 
 
 def test_duplicate_dataset_collection_builders():
@@ -304,7 +396,6 @@ def test_duplicate_dataset_collection_builders():
 
 
 def test_duplicate_dataset_collections_on_notebooks():
-
   with mock.patch.object(py_utils, "is_notebook", lambda: True):
     name = "colab_dataset_collection_builder"
     assert name not in registered.list_imported_dataset_collections()
@@ -326,18 +417,25 @@ def test_duplicate_dataset_collections_on_notebooks():
 
 
 def test_list_imported_dataset_collections():
-  assert ("empty_dataset_collection_builder"
-          in registered.list_imported_dataset_collections())
-  assert ("abstract_dataset_collection_builder"
-          not in registered.list_imported_dataset_collections())
-  assert ("nonexistent_dc_builder"
-          not in registered.list_imported_dataset_collections())
+  assert (
+      "empty_dataset_collection_builder"
+      in registered.list_imported_dataset_collections()
+  )
+  assert (
+      "abstract_dataset_collection_builder"
+      not in registered.list_imported_dataset_collections()
+  )
+  assert (
+      "nonexistent_dc_builder"
+      not in registered.list_imported_dataset_collections()
+  )
 
 
 def test_is_dataset_collection():
   assert registered.is_dataset_collection("empty_dataset_collection_builder")
   assert not registered.is_dataset_collection(
-      "abstract_dataset_collection_builder")
+      "abstract_dataset_collection_builder"
+  )
   assert not registered.is_dataset_collection("nonexistent_dc_builder")
 
 

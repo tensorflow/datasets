@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 
 import json
 import os
+from typing import Optional
 from unittest import mock
 
 from etils import epath
@@ -36,8 +37,6 @@ class GetShardSpecsTest(testing.TestCase):
   # Here we don't need to test all possible reading configs, as this is tested
   # by shard_utils.py.
 
-  @mock.patch.object(writer_lib, '_get_number_shards',
-                     mock.Mock(return_value=6))
   def test_1bucket_6shards(self):
     specs = writer_lib._get_shard_specs(
         num_examples=8,
@@ -47,45 +46,83 @@ class GetShardSpecsTest(testing.TestCase):
             dataset_name='bar',
             split='train',
             data_dir='/',
-            filetype_suffix='tfrecord'))
+            filetype_suffix='tfrecord',
+        ),
+        shard_config=shard_utils.ShardConfig(num_shards=6),
+    )
     self.assertEqual(
         specs,
         [
             # Shard#, path, from_bucket, examples_number, reading instructions.
-            _ShardSpec(0, '/bar-train.tfrecord-00000-of-00006',
-                       '/bar-train.tfrecord-00000-of-00006_index.json', 1, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=0, take=1, num_examples=1),
-                       ]),
-            _ShardSpec(1, '/bar-train.tfrecord-00001-of-00006',
-                       '/bar-train.tfrecord-00001-of-00006_index.json', 2, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=1, take=2, num_examples=2),
-                       ]),
-            _ShardSpec(2, '/bar-train.tfrecord-00002-of-00006',
-                       '/bar-train.tfrecord-00002-of-00006_index.json', 1, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=3, take=1, num_examples=1),
-                       ]),
-            _ShardSpec(3, '/bar-train.tfrecord-00003-of-00006',
-                       '/bar-train.tfrecord-00003-of-00006_index.json', 1, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=4, take=1, num_examples=1),
-                       ]),
-            _ShardSpec(4, '/bar-train.tfrecord-00004-of-00006',
-                       '/bar-train.tfrecord-00004-of-00006_index.json', 2, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=5, take=2, num_examples=2),
-                       ]),
-            _ShardSpec(5, '/bar-train.tfrecord-00005-of-00006',
-                       '/bar-train.tfrecord-00005-of-00006_index.json', 1, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=7, take=-1, num_examples=1),
-                       ]),
-        ])
+            _ShardSpec(
+                0,
+                '/bar-train.tfrecord-00000-of-00006',
+                '/bar-train.tfrecord-00000-of-00006_index.json',
+                1,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=0, take=1, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                1,
+                '/bar-train.tfrecord-00001-of-00006',
+                '/bar-train.tfrecord-00001-of-00006_index.json',
+                2,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=1, take=2, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                2,
+                '/bar-train.tfrecord-00002-of-00006',
+                '/bar-train.tfrecord-00002-of-00006_index.json',
+                1,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=3, take=1, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                3,
+                '/bar-train.tfrecord-00003-of-00006',
+                '/bar-train.tfrecord-00003-of-00006_index.json',
+                1,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=4, take=1, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                4,
+                '/bar-train.tfrecord-00004-of-00006',
+                '/bar-train.tfrecord-00004-of-00006_index.json',
+                2,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=5, take=2, examples_in_shard=8
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                5,
+                '/bar-train.tfrecord-00005-of-00006',
+                '/bar-train.tfrecord-00005-of-00006_index.json',
+                1,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=7, take=1, examples_in_shard=8
+                    ),
+                ],
+            ),
+        ],
+    )
 
-  @mock.patch.object(writer_lib, '_get_number_shards',
-                     mock.Mock(return_value=2))
   def test_4buckets_2shards(self):
     specs = writer_lib._get_shard_specs(
         num_examples=8,
@@ -95,65 +132,44 @@ class GetShardSpecsTest(testing.TestCase):
             dataset_name='bar',
             split='train',
             data_dir='/',
-            filetype_suffix='tfrecord'))
+            filetype_suffix='tfrecord',
+        ),
+        shard_config=shard_utils.ShardConfig(num_shards=2),
+    )
     self.assertEqual(
         specs,
         [
             # Shard#, path, examples_number, reading instructions.
-            _ShardSpec(0, '/bar-train.tfrecord-00000-of-00002',
-                       '/bar-train.tfrecord-00000-of-00002_index.json', 4, [
-                           shard_utils.FileInstruction(
-                               filename='0', skip=0, take=-1, num_examples=2),
-                           shard_utils.FileInstruction(
-                               filename='1', skip=0, take=2, num_examples=2),
-                       ]),
-            _ShardSpec(1, '/bar-train.tfrecord-00001-of-00002',
-                       '/bar-train.tfrecord-00001-of-00002_index.json', 4, [
-                           shard_utils.FileInstruction(
-                               filename='1', skip=2, take=-1, num_examples=1),
-                           shard_utils.FileInstruction(
-                               filename='3', skip=0, take=-1, num_examples=3),
-                       ]),
-        ])
-
-
-class GetNumberShardsTest(testing.TestCase):
-
-  def test_imagenet_train(self):
-    size = 137 << 30  # 137 GiB
-    num_examples = 1281167
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 1024)
-
-  def test_imagenet_evaluation(self):
-    size = 6300 * (1 << 20)  # 6.3 GiB
-    num_examples = 50000
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 64)
-
-  def test_verylarge_few_examples(self):
-    size = 52 << 30  # 52 GiB
-    num_examples = 512
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 512)
-
-  def test_xxl(self):
-    size = 10 << 40  # 10 TiB
-    num_examples = 10**9  # 1G
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 11264)
-
-  def test_xs(self):
-    size = 100 << 20  # 100 MiB
-    num_examples = 100 * 10**3  # 100K
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 1)
-
-  def test_m(self):
-    size = 400 << 20  # 499 MiB
-    num_examples = 200 * 10**3  # 200K
-    n = writer_lib._get_number_shards(size, num_examples)
-    self.assertEqual(n, 4)
+            _ShardSpec(
+                0,
+                '/bar-train.tfrecord-00000-of-00002',
+                '/bar-train.tfrecord-00000-of-00002_index.json',
+                4,
+                [
+                    shard_utils.FileInstruction(
+                        filename='0', skip=0, take=2, examples_in_shard=2
+                    ),
+                    shard_utils.FileInstruction(
+                        filename='1', skip=0, take=2, examples_in_shard=3
+                    ),
+                ],
+            ),
+            _ShardSpec(
+                1,
+                '/bar-train.tfrecord-00001-of-00002',
+                '/bar-train.tfrecord-00001-of-00002_index.json',
+                4,
+                [
+                    shard_utils.FileInstruction(
+                        filename='1', skip=2, take=-1, examples_in_shard=3
+                    ),
+                    shard_utils.FileInstruction(
+                        filename='3', skip=0, take=-1, examples_in_shard=3
+                    ),
+                ],
+            ),
+        ],
+    )
 
 
 def _read_records(path, file_format=file_adapters.DEFAULT_FILE_FORMAT):
@@ -172,7 +188,11 @@ def _read_records(path, file_format=file_adapters.DEFAULT_FILE_FORMAT):
         list(
             dataset_utils.as_numpy(
                 file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
-                    fpath))))
+                    fpath
+                )
+            )
+        )
+    )
   return [os.path.basename(p) for p in paths], all_recs
 
 
@@ -193,9 +213,10 @@ def _read_indices(path):
 
 
 class WriterTest(testing.TestCase):
-
   EMPTY_SPLIT_ERROR = 'No examples were yielded.'
   TOO_SMALL_SPLIT_ERROR = 'num_examples (1) < number_of_shards (2)'
+
+  NUM_SHARDS = 5
   RECORDS_TO_WRITE = [
       (1, b'a'),
       (2, b'b'),
@@ -206,6 +227,30 @@ class WriterTest(testing.TestCase):
       (7, b'g'),
       (8, b'hi'),
   ]
+  RECORDS_WITH_HOLES = [
+      (1, b'a'),
+      (2, b'b'),
+      (3, b'c'),
+      (4, b'd'),
+      (50000, b'e'),
+      (600000, b'f'),
+      (7000000, b'g'),
+      (80000000, b'hi'),
+  ]
+  SHARDS_CONTENT = [
+      [b'f', b'g'],
+      [b'd'],
+      [b'a', b'b'],
+      [b'hi'],
+      [b'e', b'c'],
+  ]
+  SHARDS_CONTENT_NO_SHUFFLING = [
+      [b'a', b'b'],
+      [b'c'],
+      [b'd', b'e'],
+      [b'f'],
+      [b'g', b'hi'],
+  ]
 
   def _write(
       self,
@@ -215,100 +260,143 @@ class WriterTest(testing.TestCase):
       split: str = 'train',
       disable_shuffling=False,
       file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
     filename_template = naming.ShardedFileTemplate(
         dataset_name=dataset_name,
         split=split,
         filetype_suffix=filetype_suffix,
-        data_dir=self.tmp_dir)
+        data_dir=self.tmp_dir,
+    )
+    shard_config = shard_config or shard_utils.ShardConfig(
+        num_shards=self.NUM_SHARDS
+    )
     writer = writer_lib.Writer(
         serializer=testing.DummySerializer('dummy specs'),
         filename_template=filename_template,
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
-        file_format=file_format)
+        file_format=file_format,
+        shard_config=shard_config,
+    )
     for key, record in to_write:
       writer.write(key, record)
     return writer.finalize()
 
   def test_write_tfrecord(self):
-    """Writes 8 records in 5 shards.
-
-    Number of records is evenly distributed (2-1-2-1-2).
-    """
+    """Stores records as tfrecord in a fixed number of shards with shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=5):
-      shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
-    self.assertEqual(shards_length, [2, 1, 2, 1, 2])
+    shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
+    self.assertEqual(self.NUM_SHARDS, len(shards_length))
+    self.assertEqual(
+        shards_length, [len(shard) for shard in self.SHARDS_CONTENT]
+    )
     self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
     written_index_files, all_indices = _read_indices(path)
     self.assertEqual(
         written_files,
-        ['foo-train.tfrecord-0000%s-of-00005' % i for i in range(5)])
-    self.assertEqual(all_recs, [
-        [b'f', b'g'],
-        [b'd'],
-        [b'a', b'b'],
-        [b'hi'],
-        [b'e', b'c'],
-    ])
+        [
+            f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+            for i in range(self.NUM_SHARDS)
+            if shards_length[i]
+        ],
+    )
+    self.assertEqual(all_recs, self.SHARDS_CONTENT)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
 
   def test_write_tfrecord_sorted_by_key(self):
-    """Writes 8 records in 5 shards without shuffling.
-
-    Number of records is evenly distributed (2-1-2-1-2).
-    """
+    """Stores records as tfrecord in a fixed number of shards without shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=5):
-      shards_length, total_size = self._write(
-          to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
-    self.assertEqual(shards_length, [2, 1, 2, 1, 2])
+    shards_length, total_size = self._write(
+        to_write=self.RECORDS_TO_WRITE, disable_shuffling=True
+    )
+    self.assertEqual(
+        shards_length,
+        [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING],
+    )
     self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
     written_index_files, all_indices = _read_indices(path)
     self.assertEqual(
         written_files,
-        ['foo-train.tfrecord-0000%s-of-00005' % i for i in range(5)])
-    self.assertEqual(all_recs, [
-        [b'a', b'b'],
-        [b'c'],
-        [b'd', b'e'],
-        [b'f'],
-        [b'g', b'hi'],
-    ])
+        [
+            f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+            for i in range(self.NUM_SHARDS)
+            if shards_length[i]
+        ],
+    )
+    self.assertEqual(all_recs, self.SHARDS_CONTENT_NO_SHUFFLING)
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
+
+  def test_write_tfrecord_sorted_by_key_with_holes(self):
+    """Stores records as tfrecord in a fixed number of shards without shuffling."""
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
+    shards_length, total_size = self._write(
+        to_write=self.RECORDS_WITH_HOLES, disable_shuffling=True
+    )
+    self.assertEqual(
+        shards_length,
+        [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING],
+    )
+    self.assertEqual(total_size, 9)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(
+        written_files,
+        [
+            f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+            for i in range(self.NUM_SHARDS)
+            if shards_length[i]
+        ],
+    )
+    self.assertEqual(all_recs, self.SHARDS_CONTENT_NO_SHUFFLING)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
 
   @mock.patch.object(example_parser, 'ExampleParser', testing.DummyParser)
   def test_write_duplicated_keys(self):
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=1):
-      with self.assertRaisesWithPredicateMatch(
-          AssertionError, 'Two examples share the same hashed key'):
-        self._write(to_write=to_write)
+    with self.assertRaisesWithPredicateMatch(
+        AssertionError, 'Two examples share the same hashed key'
+    ):
+      shard_config = shard_utils.ShardConfig(num_shards=1)
+      self._write(to_write=to_write, shard_config=shard_config)
 
   def test_empty_split(self):
     to_write = []
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=1):
-      with self.assertRaisesWithPredicateMatch(AssertionError,
-                                               self.EMPTY_SPLIT_ERROR):
-        self._write(to_write=to_write)
+    with self.assertRaisesWithPredicateMatch(
+        AssertionError, self.EMPTY_SPLIT_ERROR
+    ):
+      shard_config = shard_utils.ShardConfig(num_shards=1)
+      self._write(to_write=to_write, shard_config=shard_config)
 
   def test_too_small_split(self):
     to_write = [(1, b'a')]
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=2):
-      with self.assertRaisesWithPredicateMatch(AssertionError,
-                                               self.TOO_SMALL_SPLIT_ERROR):
-        self._write(to_write=to_write)
+    with self.assertRaisesWithPredicateMatch(
+        AssertionError, self.TOO_SMALL_SPLIT_ERROR
+    ):
+      shard_config = shard_utils.ShardConfig(num_shards=2)
+      self._write(to_write=to_write, shard_config=shard_config)
+      self._write(to_write=to_write)
 
 
-class TfrecordsWriterBeamTest(WriterTest):
-
-  EMPTY_SPLIT_ERROR = 'Not a single example present in the PCollection!'
+class TfrecordsWriterBeamTest(testing.TestCase):
+  NUM_SHARDS = 3
+  RECORDS_TO_WRITE = [(i, str(i).encode('utf-8')) for i in range(10)]
+  SHARDS_CONTENT = [
+      [b'6', b'9'],
+      [b'7'],
+      [b'4', b'1', b'2', b'8', b'0', b'5', b'3'],
+  ]
+  SHARDS_CONTENT_NO_SHUFFLING = [
+      [b'0', b'1', b'2'],
+      [b'3', b'4', b'5'],
+      [b'6', b'7', b'8', b'9'],
+  ]
 
   def _write(
       self,
@@ -318,13 +406,18 @@ class TfrecordsWriterBeamTest(WriterTest):
       split: str = 'train',
       disable_shuffling=False,
       file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
     filename_template = naming.ShardedFileTemplate(
         dataset_name=dataset_name,
         split=split,
         filetype_suffix=filetype_suffix,
-        data_dir=self.tmp_dir)
+        data_dir=self.tmp_dir,
+    )
+    shard_config = shard_config or shard_utils.ShardConfig(
+        num_shards=self.NUM_SHARDS
+    )
     beam = lazy_imports_lib.lazy_imports.apache_beam
     writer = writer_lib.BeamWriter(
         serializer=testing.DummySerializer('dummy specs'),
@@ -332,11 +425,13 @@ class TfrecordsWriterBeamTest(WriterTest):
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
         file_format=file_format,
+        shard_config=shard_config,
     )
     # Here we need to disable type check as `beam.Create` is not capable of
     # inferring the type of the PCollection elements.
     options = beam.options.pipeline_options.PipelineOptions(
-        pipeline_type_check=False)
+        pipeline_type_check=False
+    )
     with beam.Pipeline(options=options) as pipeline:
 
       @beam.ptransform_fn
@@ -346,6 +441,94 @@ class TfrecordsWriterBeamTest(WriterTest):
 
       _ = pipeline | 'test' >> _build_pcollection()  # pylint: disable=no-value-for-parameter
     return writer.finalize()
+
+  def test_write_tfrecord(self):
+    """Stores records as tfrecord in a fixed number of shards with shuffling."""
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
+    shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
+    self.assertEqual(self.NUM_SHARDS, len(shards_length))
+    self.assertEqual(
+        shards_length, [len(shard) for shard in self.SHARDS_CONTENT]
+    )
+    self.assertEqual(total_size, 10)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(
+        written_files,
+        [
+            f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+            for i in range(self.NUM_SHARDS)
+            if shards_length[i]
+        ],
+    )
+    self.assertEqual(all_recs, self.SHARDS_CONTENT)
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
+
+  def test_empty_split(self):
+    with self.assertRaisesWithPredicateMatch(
+        ValueError,
+        'The total number of generated examples is 0. This should be >0!',
+    ):
+      self._write(to_write=[])
+
+  def test_write_tfrecord_sorted_by_key(self):
+    """Stores records as tfrecord in a fixed number of shards without shuffling."""
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
+    shards_length, total_size = self._write(
+        to_write=self.RECORDS_TO_WRITE, disable_shuffling=True
+    )
+    self.assertEqual(
+        shards_length,
+        [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING],
+    )
+    self.assertEqual(total_size, 10)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(
+        written_files,
+        [
+            f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+            for i in range(self.NUM_SHARDS)
+            if shards_length[i]
+        ],
+    )
+    self.assertEqual(all_recs, self.SHARDS_CONTENT_NO_SHUFFLING)
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
+
+  def test_write_tfrecord_sorted_by_key_with_holes(self):
+    """Stores records as tfrecord in a fixed number of shards without shuffling.
+
+    Note that the keys are not consecutive but contain gaps.
+    """
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
+    records_with_holes = [
+        (i**4, str(i**4).encode('utf-8')) for i in range(10)
+    ]
+    expected_shards = [
+        [b'0', b'1', b'16', b'81', b'256', b'625', b'1296'],
+        [b'2401', b'4096'],
+        [b'6561'],
+    ]
+
+    shards_length, total_size = self._write(
+        to_write=records_with_holes, disable_shuffling=True
+    )
+    self.assertEqual(shards_length, [len(shard) for shard in expected_shards])
+    self.assertEqual(total_size, 28)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(
+        written_files,
+        [
+            f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+            for i in range(self.NUM_SHARDS)
+        ],
+    )
+    self.assertEqual(all_recs, expected_shards)
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
 
 
 if __name__ == '__main__':

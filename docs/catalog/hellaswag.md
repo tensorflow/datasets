@@ -17,6 +17,12 @@
 The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context
 and some endings which complete the context.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/hellaswag">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://rowanzellers.com/hellaswag/](https://rowanzellers.com/hellaswag/)
 
@@ -61,26 +67,26 @@ Split                          | Examples
 
 ```python
 FeaturesDict({
-    'activity_label': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
-    'endings': Sequence(Text(shape=(), dtype=tf.string)),
-    'label': tf.int32,
-    'source_id': Text(shape=(), dtype=tf.string),
-    'split_type': Text(shape=(), dtype=tf.string),
+    'activity_label': Text(shape=(), dtype=string),
+    'context': Text(shape=(), dtype=string),
+    'endings': Sequence(Text(shape=(), dtype=string)),
+    'label': int32,
+    'source_id': Text(shape=(), dtype=string),
+    'split_type': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class          | Shape   | Dtype     | Description
-:------------- | :------------- | :------ | :-------- | :----------
-               | FeaturesDict   |         |           |
-activity_label | Text           |         | tf.string |
-context        | Text           |         | tf.string |
-endings        | Sequence(Text) | (None,) | tf.string |
-label          | Tensor         |         | tf.int32  |
-source_id      | Text           |         | tf.string |
-split_type     | Text           |         | tf.string |
+Feature        | Class          | Shape   | Dtype  | Description
+:------------- | :------------- | :------ | :----- | :----------
+               | FeaturesDict   |         |        |
+activity_label | Text           |         | string |
+context        | Text           |         | string |
+endings        | Sequence(Text) | (None,) | string |
+label          | Tensor         |         | int32  |
+source_id      | Text           |         | string |
+split_type     | Text           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

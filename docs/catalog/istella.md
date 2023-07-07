@@ -12,11 +12,6 @@
 # `istella`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The Istella datasets are three large-scale Learning-to-Rank datasets released by
@@ -56,9 +51,8 @@ ds = tfds.load("istella")
 
     *   `1.0.0`: Initial release.
     *   `1.0.1`: Fix serialization to support float64.
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Bundle features into a single 'float_features' feature.
+    *   `1.1.0`: Bundle features into a single 'float_features' feature.
+    *   **`1.2.0`** (default): Add query and document identifiers.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -68,18 +62,22 @@ ds = tfds.load("istella")
 
 ```python
 FeaturesDict({
-    'float_features': Tensor(shape=(None, 220), dtype=tf.float64),
-    'label': Tensor(shape=(None,), dtype=tf.float64),
+    'doc_id': Tensor(shape=(None,), dtype=int64),
+    'float_features': Tensor(shape=(None, 220), dtype=float64),
+    'label': Tensor(shape=(None,), dtype=float64),
+    'query_id': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape       | Dtype      | Description
-:------------- | :----------- | :---------- | :--------- | :----------
-               | FeaturesDict |             |            |
-float_features | Tensor       | (None, 220) | tf.float64 |
-label          | Tensor       | (None,)     | tf.float64 |
+Feature        | Class        | Shape       | Dtype   | Description
+:------------- | :----------- | :---------- | :------ | :----------
+               | FeaturesDict |             |         |
+doc_id         | Tensor       | (None,)     | int64   |
+float_features | Tensor       | (None, 220) | float64 |
+label          | Tensor       | (None,)     | float64 |
+query_id       | Text         |             | string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -114,7 +112,7 @@ label          | Tensor       | (None,)     | tf.float64 |
 
 *   **Download size**: `1.20 GiB`
 
-*   **Dataset size**: `1.10 GiB`
+*   **Dataset size**: `1.12 GiB`
 
 *   **Splits**:
 
@@ -133,7 +131,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-main-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-main-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -164,7 +162,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `450.26 MiB`
 
-*   **Dataset size**: `414.69 MiB`
+*   **Dataset size**: `421.88 MiB`
 
 *   **Splits**:
 
@@ -184,7 +182,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-s-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-s-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -215,7 +213,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `4.42 GiB`
 
-*   **Dataset size**: `2.42 GiB`
+*   **Dataset size**: `2.46 GiB`
 
 *   **Splits**:
 
@@ -235,7 +233,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-x-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-x-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

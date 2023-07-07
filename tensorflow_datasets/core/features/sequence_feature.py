@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 
 """Sequence feature."""
 
+from __future__ import annotations
+
 from typing import List, Optional, Union
 
 import numpy as np
-import tensorflow as tf
-
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
@@ -27,6 +27,7 @@ from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -82,7 +83,6 @@ class Sequence(top_level_feature.TopLevelFeature):
   At generation time, you can specify a list of features dict, a dict of list
   values or a stacked numpy array. The lists will automatically be distributed
   into their corresponding `FeatureConnector`.
-
   """
 
   def __init__(
@@ -99,7 +99,7 @@ class Sequence(top_level_feature.TopLevelFeature):
       length: `int`, length of the sequence if static and known in advance
       doc: Documentation of this feature (e.g. description).
     """
-    # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
+    # Convert {} => FeaturesDict, np.int32 => Tensor(shape=(), dtype=np.int32)
     self._feature = features_dict.to_feature(feature)
     self._length = length
     super(Sequence, self).__init__(doc=doc)
@@ -121,14 +121,14 @@ class Sequence(top_level_feature.TopLevelFeature):
     """See base class for details."""
     # Add the additional length dimension to every shape
     tensor_info = self._feature.get_tensor_info()
-    return tf.nest.map_structure(self._add_length_dim, tensor_info)
+    return tree_utils.map_structure(self._add_length_dim, tensor_info)
 
   @py_utils.memoize()
   def get_serialized_info(self):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
     tensor_info = self._feature.get_serialized_info()
-    return tf.nest.map_structure(self._add_length_dim, tensor_info)
+    return tree_utils.map_structure(self._add_length_dim, tensor_info)
 
   def encode_example(self, example_dict):
     # Convert nested dict[list] into list[nested dict]
@@ -138,11 +138,14 @@ class Sequence(top_level_feature.TopLevelFeature):
     if self._length is not None and len(sequence_elements) != self._length:
       raise ValueError(
           'Input sequence length do not match the defined one. Got {} != '
-          '{}'.format(len(sequence_elements), self._length))
+          '{}'.format(len(sequence_elements), self._length)
+      )
 
     # Empty sequences return empty arrays
     if not sequence_elements:
-      return tf.nest.map_structure(build_empty_np, self.get_serialized_info())
+      return tree_utils.map_structure(
+          build_empty_np, self.get_serialized_info()
+      )
 
     # Encode each individual elements
     sequence_elements = [
@@ -199,11 +202,12 @@ class Sequence(top_level_feature.TopLevelFeature):
     inner_feature_repr = tensor_feature.get_inner_feature_repr(self._feature)
     if inner_feature_repr.startswith('FeaturesDict('):
       # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
-      inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]
+      inner_feature_repr = inner_feature_repr[len('FeaturesDict(') : -len(')')]
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
   def catalog_documentation(
-      self) -> List[feature_lib.CatalogFeatureDocumentation]:
+      self,
+  ) -> List[feature_lib.CatalogFeatureDocumentation]:
     sub_feature_docs = self._feature.catalog_documentation()
 
     # If it's a sequence of a single feature, then we add more details.
@@ -240,10 +244,12 @@ class Sequence(top_level_feature.TopLevelFeature):
       # For backwards compatibility
       return cls(
           feature=feature_lib.FeatureConnector.from_json(value['feature']),
-          length=value['length'])
+          length=value['length'],
+      )
     return cls(
         feature=feature_lib.FeatureConnector.from_proto(value.feature),
-        length=None if value.length == -1 else value.length)
+        length=None if value.length == -1 else value.length,
+    )
 
   def to_json_content(self) -> feature_pb2.Sequence:
     return feature_pb2.Sequence(
@@ -256,7 +262,7 @@ def build_empty_np(serialized_info: feature_lib.TensorInfo):
   """Build empty sequence with the shape of serialized_info."""
   return np.empty(
       shape=tuple(s if s else 0 for s in serialized_info.shape),
-      dtype=serialized_info.numpy_dtype,
+      dtype=serialized_info.np_dtype,
   )
 
 
@@ -286,7 +292,8 @@ def _np_to_list(elem):
   else:
     raise ValueError(
         'Input elements of a sequence should be either a numpy array, a '
-        'python list or tuple. Got {}'.format(type(elem)))
+        'python list or tuple. Got {}'.format(type(elem))
+    )
 
 
 def transpose_dict_list(dict_list):
@@ -304,7 +311,8 @@ def transpose_dict_list(dict_list):
     elif length['value'] != len(elem):
       raise ValueError(
           'The length of all elements of one sequence should be the same. '
-          'Got {} != {}'.format(length['value'], len(elem)))
+          'Got {} != {}'.format(length['value'], len(elem))
+      )
     return elem
 
   utils.map_nested(update_length, dict_list, dict_only=True)

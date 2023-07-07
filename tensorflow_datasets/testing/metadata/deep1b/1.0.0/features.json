@@ -30,15 +30,6 @@
                         "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
                         "featuresDict": {
                             "features": {
-                                "distance": {
-                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                                    "tensor": {
-                                        "shape": {},
-                                        "dtype": "float32",
-                                        "encoding": "none"
-                                    },
-                                    "description": "Neighbor distance."
-                                },
                                 "index": {
                                     "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
                                     "tensor": {
@@ -47,6 +38,15 @@
                                         "encoding": "none"
                                     },
                                     "description": "Neighbor index."
+                                },
+                                "distance": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Neighbor distance."
                                 }
                             }
                         }

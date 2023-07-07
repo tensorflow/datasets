@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 
 import json
 import os
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -59,7 +60,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             'passage': tfds.features.Text(),
             'query_and_answer': tfds.features.Text(),
             'label': tfds.features.ClassLabel(names=['False', 'True']),
-            'evidences': tfds.features.Sequence(tfds.features.Text())
+            'evidences': tfds.features.Sequence(tfds.features.Text()),
         }),
         supervised_keys=None,
         homepage='https://cogcomp.seas.upenn.edu/multirc/',
@@ -77,7 +78,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'train.jsonl')
+                'filepath': os.path.join(data_dir, 'train.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
@@ -85,7 +86,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'val.jsonl')
+                'filepath': os.path.join(data_dir, 'val.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
@@ -93,7 +94,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'test.jsonl')
+                'filepath': os.path.join(data_dir, 'test.jsonl'),
             },
         ),
     ]
@@ -102,7 +103,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
 
     multirc_dir = os.path.join(data_dir, 'docs')
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for line in f:
         row = json.loads(line)
         evidences = []
@@ -112,12 +113,12 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
           evidences.append(evidence['text'])
 
         passage_file = os.path.join(multirc_dir, docid)
-        with tf.io.gfile.GFile(passage_file) as f1:
+        with epath.Path(passage_file).open() as f1:
           passage_text = f1.read()
 
         yield row['annotation_id'], {
             'passage': passage_text,
             'query_and_answer': row['query'],
             'label': row['classification'],
-            'evidences': evidences
+            'evidences': evidences,
         }

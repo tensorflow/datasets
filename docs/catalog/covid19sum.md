@@ -27,6 +27,12 @@ Features includes strings of: abstract, full_text, sha (hash of pdf), source_x
 (source of publication), title, doi (digital object identifier), license,
 authors, publish_time, journal, url.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cord-19">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge](https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge)
 
@@ -61,41 +67,41 @@ Split | Examples
 
 ```python
 FeaturesDict({
-    'abstract': tf.string,
-    'authors': tf.string,
+    'abstract': string,
+    'authors': string,
     'body_text': Sequence({
-        'section': tf.string,
-        'text': tf.string,
+        'section': string,
+        'text': string,
     }),
-    'doi': tf.string,
-    'journal': tf.string,
-    'license': tf.string,
-    'publish_time': tf.string,
-    'sha': tf.string,
-    'source_x': tf.string,
-    'title': tf.string,
-    'url': tf.string,
+    'doi': string,
+    'journal': string,
+    'license': string,
+    'publish_time': string,
+    'sha': string,
+    'source_x': string,
+    'title': string,
+    'url': string,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype     | Description
-:---------------- | :----------- | :---- | :-------- | :----------
-                  | FeaturesDict |       |           |
-abstract          | Tensor       |       | tf.string |
-authors           | Tensor       |       | tf.string |
-body_text         | Sequence     |       |           |
-body_text/section | Tensor       |       | tf.string |
-body_text/text    | Tensor       |       | tf.string |
-doi               | Tensor       |       | tf.string |
-journal           | Tensor       |       | tf.string |
-license           | Tensor       |       | tf.string |
-publish_time      | Tensor       |       | tf.string |
-sha               | Tensor       |       | tf.string |
-source_x          | Tensor       |       | tf.string |
-title             | Tensor       |       | tf.string |
-url               | Tensor       |       | tf.string |
+Feature           | Class        | Shape | Dtype  | Description
+:---------------- | :----------- | :---- | :----- | :----------
+                  | FeaturesDict |       |        |
+abstract          | Tensor       |       | string |
+authors           | Tensor       |       | string |
+body_text         | Sequence     |       |        |
+body_text/section | Tensor       |       | string |
+body_text/text    | Tensor       |       | string |
+doi               | Tensor       |       | string |
+journal           | Tensor       |       | string |
+license           | Tensor       |       | string |
+publish_time      | Tensor       |       | string |
+sha               | Tensor       |       | string |
+source_x          | Tensor       |       | string |
+title             | Tensor       |       | string |
+url               | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

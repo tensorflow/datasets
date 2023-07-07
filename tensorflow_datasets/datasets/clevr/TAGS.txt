@@ -1,0 +1,6 @@
+content.data-type.image
+content.data-type.text
+ml.task.coreference-resolution
+ml.task.image-generation
+ml.task.natural-language-understanding
+ml.task.question-answering

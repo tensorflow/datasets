@@ -1,0 +1,40 @@
+{
+  "citation": "@misc{Dua:2019 ,\nauthor = \"Dua, Dheeru and Graff, Casey\",\nyear = \"2017\",\ntitle = \"{UCI} Machine Learning Repository\",\nurl = \"http://archive.ics.uci.edu/ml\",\ninstitution = \"University of California, Irvine, School of Information and Computer Sciences\"\n}",
+  "description": "This is perhaps the best known database to be found in the pattern recognition\nliterature. Fisher's paper is a classic in the field and is referenced\nfrequently to this day. (See Duda & Hart, for example.) The data set contains\n3 classes of 50 instances each, where each class refers to a type of iris\nplant. One class is linearly separable from the other 2; the latter are NOT\nlinearly separable from each other.",
+  "downloadSize": "3738",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://archive.ics.uci.edu/ml/datasets/iris"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.structured.iris",
+  "name": "iris",
+  "releaseNotes": {
+    "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    "2.1.0": "Updated broken link"
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "7800",
+      "shardLengths": [
+        "150"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "features"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "2.1.0"
+}

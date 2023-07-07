@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,7 @@ from typing import Any, Dict
 
 import h5py
 import numpy as np
-import tensorflow as tf
-
-gfile = tf.io.gfile
-
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _DESCRIPTION = """
 D4RL is an open-source benchmark for offline reinforcement learning. It provides
@@ -63,8 +60,9 @@ def generate_examples(file_path: str):
 
   done = [
       terminal or timeout
-      for (terminal,
-           timeout) in zip(d4rl_dict['terminals'], d4rl_dict['timeouts'])
+      for (terminal, timeout) in zip(
+          d4rl_dict['terminals'], d4rl_dict['timeouts']
+      )
   ]
   # is_first corresponds to the done flag delayed by one step.
   d4rl_dict['is_first'] = [True] + done[:-1]
@@ -104,8 +102,9 @@ def generate_examples(file_path: str):
     yield counter, _get_episode(dataset_dict, episode_metadata, prev, num_steps)
 
 
-def _get_nested_metadata(dataset: Dict[str, Any],
-                         prefix: str) -> Dict[str, Any]:
+def _get_nested_metadata(
+    dataset: Dict[str, Any], prefix: str
+) -> Dict[str, Any]:
   """Generate a metadata dictionary using flattened metadata keys.
 
   Args:
@@ -148,8 +147,12 @@ def _get_nested_metadata(dataset: Dict[str, Any],
   return episode_metadata
 
 
-def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
-                 begin: int, end: int) -> Dict[str, Any]:
+def _get_episode(
+    steps: Dict[str, Any],
+    episode_metadata: Dict[str, Any],
+    begin: int,
+    end: int,
+) -> Dict[str, Any]:
   """Builds a full episode dict.
 
   Args:
@@ -164,7 +167,12 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
   # It's an initial step if the episode is empty.
   episode = {}
   for k in [
-      'is_first', 'is_last', 'observation', 'action', 'reward', 'discount'
+      'is_first',
+      'is_last',
+      'observation',
+      'action',
+      'reward',
+      'discount',
   ]:
     episode[k] = steps[k][begin:end]
 
@@ -191,7 +199,8 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
     episode['is_first'] = np.concatenate((episode['is_first'], [False]))
     if has_next_obs:
       episode['observation'] = np.concatenate(
-          (episode['observation'], [steps['next_observation'][-1]]))
+          (episode['observation'], [steps['next_observation'][-1]])
+      )
     else:
       # If the last observation is never recorded and to avoid discarding the
       # last transition to the terminal state, we create a dummy observation.
@@ -199,24 +208,30 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
       # information as possible and let the user decide to keep or ignore such
       # transitions.
       episode['observation'] = np.concatenate(
-          (episode['observation'], [np.zeros_like(steps['observation'][0])]))
+          (episode['observation'], [np.zeros_like(steps['observation'][0])])
+      )
     # Action/reward/discount are set to dummy values since not relevant.
     # When IS_LAST is set, any field coming temporally after the last
     # observation is invalid.
     episode['action'] = np.concatenate(
-        (episode['action'], [np.zeros_like(steps['action'][0])]))
+        (episode['action'], [np.zeros_like(steps['action'][0])])
+    )
     episode['reward'] = np.concatenate(
-        (episode['reward'], [np.zeros_like(steps['reward'][0])]))
+        (episode['reward'], [np.zeros_like(steps['reward'][0])])
+    )
     episode['discount'] = np.array(
-        np.concatenate((episode['discount'], [0.0])), dtype=np.float32)
+        np.concatenate((episode['discount'], [0.0])), dtype=np.float32
+    )
 
     episode['is_terminal'] = np.concatenate(
-        (episode['is_terminal'], [ends_in_terminal]))
+        (episode['is_terminal'], [ends_in_terminal])
+    )
     episode['is_last'] = np.concatenate((episode['is_last'], [True]))
     if 'infos' in steps.keys():
       for k in steps['infos'].keys():
         episode['infos'][k] = np.concatenate(
-            (episode['infos'][k], [np.zeros_like(steps['infos'][k][0])]))
+            (episode['infos'][k], [np.zeros_like(steps['infos'][k][0])])
+        )
   else:
     # Despite the fact that the last action and reward are valid in the
     # stored dataset (in the final transition, [obs, action, reward, next_obs],
@@ -244,7 +259,7 @@ def _get_dataset_keys(h5file):
 
 def read_d4rl_dataset(file_path: str):
   """Reads a D4RL dataset and returns the dataset as a dictionary."""
-  with gfile.GFile(file_path, 'rb') as f:
+  with tf.io.gfile.GFile(file_path, 'rb') as f:
     with h5py.File(f, 'r') as dataset_file:
       dataset_dict = {}
       for k in _get_dataset_keys(dataset_file):

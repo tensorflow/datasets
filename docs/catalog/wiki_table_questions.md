@@ -27,6 +27,12 @@ selected among Wikipedia tables with at least 8 rows and 5 columns.
 
 -   Test: Train on 'train' and test on 'test'.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikitablequestions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://ppasupat.github.io/WikiTableQuestions/#usage-notes](https://ppasupat.github.io/WikiTableQuestions/#usage-notes)
 
@@ -63,29 +69,29 @@ Split             | Examples
 ```python
 FeaturesDict({
     'input_text': FeaturesDict({
-        'context': tf.string,
+        'context': string,
         'table': Sequence({
-            'column_header': tf.string,
-            'content': tf.string,
-            'row_number': tf.int16,
+            'column_header': string,
+            'content': string,
+            'row_number': int16,
         }),
     }),
-    'target_text': tf.string,
+    'target_text': string,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype     | Description
-:----------------------------- | :----------- | :---- | :-------- | :----------
-                               | FeaturesDict |       |           |
-input_text                     | FeaturesDict |       |           |
-input_text/context             | Tensor       |       | tf.string |
-input_text/table               | Sequence     |       |           |
-input_text/table/column_header | Tensor       |       | tf.string |
-input_text/table/content       | Tensor       |       | tf.string |
-input_text/table/row_number    | Tensor       |       | tf.int16  |
-target_text                    | Tensor       |       | tf.string |
+Feature                        | Class        | Shape | Dtype  | Description
+:----------------------------- | :----------- | :---- | :----- | :----------
+                               | FeaturesDict |       |        |
+input_text                     | FeaturesDict |       |        |
+input_text/context             | Tensor       |       | string |
+input_text/table               | Sequence     |       |        |
+input_text/table/column_header | Tensor       |       | string |
+input_text/table/content       | Tensor       |       | string |
+input_text/table/row_number    | Tensor       |       | int16  |
+target_text                    | Tensor       |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

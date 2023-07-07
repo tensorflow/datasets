@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,31 +47,21 @@ def create_builder_template(info: cli_utils.DatasetInfo):
     return _conllu_template(info)
   else:
     raise ValueError(
-        f'Required format {info.data_format} isn\'t associated with '
-        'a format-specific builder in TFDS.')
+        f"Required format {info.data_format} isn't associated with "
+        'a format-specific builder in TFDS.'
+    )
 
 
 def _standard_template(info: cli_utils.DatasetInfo) -> str:
   """Returns a template for a `tfds.core.GeneratorBasedBuilder`."""
-  content = textwrap.dedent(f'''\
+  content = textwrap.dedent(
+      f'''\
       """{info.name} dataset."""
 
       import {info.tfds_api} as tfds
 
-      # {info.todo}: Markdown description  that will appear on the catalog page.
-      _DESCRIPTION = """
-      Description is **formatted** as markdown.
 
-      It should also contain any processing which has been applied (if any),
-      (e.g. corrupted example skipped, images cropped,...):
-      """
-
-      # {info.todo}: BibTeX citation
-      _CITATION = """
-      """
-
-
-      class {info.cls_name}(tfds.core.GeneratorBasedBuilder):
+      class Builder(tfds.core.GeneratorBasedBuilder):
         """DatasetBuilder for {info.name} dataset."""
 
         VERSION = tfds.core.Version('1.0.0')
@@ -82,9 +72,7 @@ def _standard_template(info: cli_utils.DatasetInfo) -> str:
         def _info(self) -> tfds.core.DatasetInfo:
           """Returns the dataset metadata."""
           # {info.todo}: Specifies the tfds.core.DatasetInfo object
-          return tfds.core.DatasetInfo(
-              builder=self,
-              description=_DESCRIPTION,
+          return self.dataset_info_from_configs(
               features=tfds.features.FeaturesDict({{
                   # These are the features of your dataset like images, labels ...
                   'image': tfds.features.Image(shape=(None, None, 3)),
@@ -95,7 +83,6 @@ def _standard_template(info: cli_utils.DatasetInfo) -> str:
               # `as_supervised=True` in `builder.as_dataset`.
               supervised_keys=('image', 'label'),  # Set to `None` to disable
               homepage='https://dataset-homepage/',
-              citation=_CITATION,
           )
 
         def _split_generators(self, dl_manager: tfds.download.DownloadManager):
@@ -116,30 +103,20 @@ def _standard_template(info: cli_utils.DatasetInfo) -> str:
                 'image': f,
                 'label': 'yes',
             }}
-      ''')
+      '''
+  )
   return content
 
 
 def _conll_template(info: cli_utils.DatasetInfo) -> str:
   """A template for ConllDatasetBuilder."""
 
-  content = textwrap.dedent(f'''\
+  content = textwrap.dedent(
+      f'''\
       """{info.name} dataset."""
 
       from tensorflow_datasets.core.dataset_builders.conll import conll_dataset_builder_utils as conll_lib
       import {info.tfds_api} as tfds
-
-      # {info.todo}: Markdown description  that will appear on the catalog page.
-      _DESCRIPTION = """
-      Description is **formatted** as markdown.
-
-      It should also contain any processing which has been applied (if any),
-      (e.g. corrupted example skipped, images cropped,...):
-      """
-
-      # {info.todo}: BibTeX citation
-      _CITATION = """
-      """
 
 
       class {info.cls_name}(tfds.dataset_builders.ConllDatasetBuilder):
@@ -151,15 +128,13 @@ def _conll_template(info: cli_utils.DatasetInfo) -> str:
         }}
         # {info.todo}: Add details about the dataset's features.
         # conll_lib contains a set of ready-to-use features.
-        BUILDER_CONFIGS = [conll_lib.CONLL_2002_CONFIG]
+        BUILDER_CONFIGS = [conll_lib.CONLL_2003_CONFIG]
 
         def _info(self) -> tfds.core.DatasetInfo:
           """Returns the dataset metadata."""
           # {info.todo}: Specifies the dataset infos.
           return self.create_dataset_info(
-            description=_DESCRIPTION,
             homepage="",
-            citation=_CITATION,
           )
 
         def _split_generators(self, dl_manager: tfds.download.DownloadManager):
@@ -179,30 +154,20 @@ def _conll_template(info: cli_utils.DatasetInfo) -> str:
         #   ):
         #   """Yields (key, example) examples."""
         #   pass
-      ''')
+      '''
+  )
   return content
 
 
 def _conllu_template(info: cli_utils.DatasetInfo) -> str:
   """A template for ConllUDatasetBuilder."""
 
-  content = textwrap.dedent(f'''\
+  content = textwrap.dedent(
+      f'''\
       """{info.name} dataset."""
 
       from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder_utils as conllu_lib
       import {info.tfds_api} as tfds
-
-      # {info.todo}: Markdown description  that will appear on the catalog page.
-      _DESCRIPTION = """
-      Description is **formatted** as markdown.
-
-      It should also contain any processing which has been applied (if any),
-      (e.g. corrupted example skipped, images cropped,...):
-      """
-
-      # {info.todo}: BibTeX citation
-      _CITATION = """
-      """
 
 
       class {info.cls_name}(tfds.dataset_builders.ConllUDatasetBuilder):
@@ -225,9 +190,7 @@ def _conllu_template(info: cli_utils.DatasetInfo) -> str:
           """Returns the dataset metadata."""
           # {info.todo}: Specifies the dataset infos.
           return self.create_dataset_info(
-              description=_DESCRIPTION,
               homepage='',
-              citation=_CITATION,
           )
 
         def _split_generators(self, dl_manager: tfds.download.DownloadManager):
@@ -258,5 +221,6 @@ def _conllu_template(info: cli_utils.DatasetInfo) -> str:
         #   ):
         #   """Yields (key, example) examples."""
         #   pass
-      ''')
+      '''
+  )
   return content

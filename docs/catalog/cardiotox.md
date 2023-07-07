@@ -83,28 +83,28 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'active': Tensor(shape=(2,), dtype=tf.int64),
-    'atom_mask': Tensor(shape=(60,), dtype=tf.float32),
-    'atoms': Tensor(shape=(60, 27), dtype=tf.float32),
-    'dist2topk_nbs': Tensor(shape=(1,), dtype=tf.float32),
-    'molecule_id': tf.string,
-    'pair_mask': Tensor(shape=(60, 60), dtype=tf.float32),
-    'pairs': Tensor(shape=(60, 60, 12), dtype=tf.float32),
+    'active': Tensor(shape=(2,), dtype=int64),
+    'atom_mask': Tensor(shape=(60,), dtype=float32),
+    'atoms': Tensor(shape=(60, 27), dtype=float32),
+    'dist2topk_nbs': Tensor(shape=(1,), dtype=float32),
+    'molecule_id': string,
+    'pair_mask': Tensor(shape=(60, 60), dtype=float32),
+    'pairs': Tensor(shape=(60, 60, 12), dtype=float32),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature       | Class        | Shape        | Dtype      | Description
-:------------ | :----------- | :----------- | :--------- | :----------
-              | FeaturesDict |              |            |
-active        | Tensor       | (2,)         | tf.int64   |
-atom_mask     | Tensor       | (60,)        | tf.float32 |
-atoms         | Tensor       | (60, 27)     | tf.float32 |
-dist2topk_nbs | Tensor       | (1,)         | tf.float32 |
-molecule_id   | Tensor       |              | tf.string  |
-pair_mask     | Tensor       | (60, 60)     | tf.float32 |
-pairs         | Tensor       | (60, 60, 12) | tf.float32 |
+Feature       | Class        | Shape        | Dtype   | Description
+:------------ | :----------- | :----------- | :------ | :----------
+              | FeaturesDict |              |         |
+active        | Tensor       | (2,)         | int64   |
+atom_mask     | Tensor       | (60,)        | float32 |
+atoms         | Tensor       | (60, 27)     | float32 |
+dist2topk_nbs | Tensor       | (1,)         | float32 |
+molecule_id   | Tensor       |              | string  |
+pair_mask     | Tensor       | (60, 60)     | float32 |
+pairs         | Tensor       | (60, 60, 12) | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

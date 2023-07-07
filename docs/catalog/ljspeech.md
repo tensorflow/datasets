@@ -12,11 +12,6 @@
 # `ljspeech`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 This is a public domain speech dataset consisting of 13,100 short audio clips of
@@ -28,17 +23,21 @@ The texts were published between 1884 and 1964, and are in the public domain.
 The audio was recorded in 2016-17 by the LibriVox project and is also in the
 public domain.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/ljspeech">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://keithito.com/LJ-Speech-Dataset/](https://keithito.com/LJ-Speech-Dataset/)
 
 *   **Source code**:
-    [`tfds.audio.Ljspeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/ljspeech.py)
+    [`tfds.datasets.ljspeech.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ljspeech/ljspeech_dataset_builder.py)
 
 *   **Versions**:
 
-    *   **`1.1.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix speech data type with dtype=tf.int16.
+    *   **`1.1.1`** (default): Fix speech data type with dtype=tf.int16.
 
 *   **Download size**: `2.56 GiB`
 
@@ -58,22 +57,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'id': tf.string,
-    'speech': Audio(shape=(None,), dtype=tf.int16),
-    'text': Text(shape=(), dtype=tf.string),
-    'text_normalized': Text(shape=(), dtype=tf.string),
+    'id': string,
+    'speech': Audio(shape=(None,), dtype=int16),
+    'text': Text(shape=(), dtype=string),
+    'text_normalized': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape   | Dtype     | Description
-:-------------- | :----------- | :------ | :-------- | :----------
-                | FeaturesDict |         |           |
-id              | Tensor       |         | tf.string |
-speech          | Audio        | (None,) | tf.int16  |
-text            | Text         |         | tf.string |
-text_normalized | Text         |         | tf.string |
+Feature         | Class        | Shape   | Dtype  | Description
+:-------------- | :----------- | :------ | :----- | :----------
+                | FeaturesDict |         |        |
+id              | Tensor       |         | string |
+speech          | Audio        | (None,) | int16  |
+text            | Text         |         | string |
+text_normalized | Text         |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

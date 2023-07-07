@@ -6,7 +6,7 @@
   <meta itemprop="description" content="The *-CFQ datasets (and their splits) for measuring the scalability of&#10;compositional generalization.&#10;&#10;See https://arxiv.org/abs/2012.08266 for background.&#10;&#10;Example usage:&#10;&#10;```&#10;data = tfds.load(&#x27;star_cfq/single_pool_10x_b_cfq&#x27;)&#10;```&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;star_cfq&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/star_cfq" />
   <meta itemprop="sameAs" content="https://github.com/google-research/google-research/tree/master/star-cfq" />
-  <meta itemprop="citation" content="@inproceedings{Tsarkov2021,&#10;  title={*-CFQ: Analyzing the Scalability of Machine Learning on a Compositional Task},&#10;  author={Dmitry Tsarkov and Tibor Tihon and Nathan Scales and Nikola Momchev and Danila Sinopalnikov and Nathanael Sch&quot;{a}rli},&#10;  booktitle={AAAI},&#10;  year={2021},&#10;  url={https://arxiv.org/abs/2012.08266},&#10;}" />
+  <meta itemprop="citation" content="@inproceedings{Tsarkov2021,&#10;  title={*-CFQ: Analyzing the Scalability of Machine Learning on a Compositional Task},&#10;  author={Dmitry Tsarkov and Tibor Tihon and Nathan Scales and Nikola Momchev and Danila Sinopalnikov and Nathanael Sch\&quot;{a}rli},&#10;  booktitle={AAAI},&#10;  year={2021},&#10;  url={https://arxiv.org/abs/2012.08266},&#10;}" />
 </div>
 
 # `star_cfq`
@@ -29,7 +29,7 @@ data = tfds.load('star_cfq/single_pool_10x_b_cfq')
     [https://github.com/google-research/google-research/tree/master/star-cfq](https://github.com/google-research/google-research/tree/master/star-cfq)
 
 *   **Source code**:
-    [`tfds.text.star_cfq.StarCFQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/star_cfq/star_cfq.py)
+    [`tfds.datasets.star_cfq.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/star_cfq/star_cfq_dataset_builder.py)
 
 *   **Versions**:
 
@@ -39,18 +39,18 @@ data = tfds.load('star_cfq/single_pool_10x_b_cfq')
 
 ```python
 FeaturesDict({
-    'query': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'query': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-query    | Text         |       | tf.string |
-question | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+query    | Text         |       | string |
+question | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -65,7 +65,7 @@ question | Text         |       | tf.string |
 ```
 @inproceedings{Tsarkov2021,
   title={*-CFQ: Analyzing the Scalability of Machine Learning on a Compositional Task},
-  author={Dmitry Tsarkov and Tibor Tihon and Nathan Scales and Nikola Momchev and Danila Sinopalnikov and Nathanael Sch"{a}rli},
+  author={Dmitry Tsarkov and Tibor Tihon and Nathan Scales and Nikola Momchev and Danila Sinopalnikov and Nathanael Sch\"{a}rli},
   booktitle={AAAI},
   year={2021},
   url={https://arxiv.org/abs/2012.08266},

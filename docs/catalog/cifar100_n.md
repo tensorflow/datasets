@@ -12,10 +12,6 @@
 # `cifar100_n`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -52,7 +48,7 @@ Then convert 'CIFAR-100_human_ordered.npy' into a CSV file
 ```
 import numpy as np
 import pandas as pd
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 human_labels_np_path = '<local_path>/CIFAR-100_human_ordered.npy'
 human_labels_csv_path = '<local_path>/CIFAR-100_human_annotations.csv'
@@ -81,28 +77,28 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'coarse_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
-    'noise_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
-    'worker_id': tf.int64,
-    'worker_time': tf.float32,
+    'coarse_label': ClassLabel(shape=(), dtype=int64, num_classes=20),
+    'id': Text(shape=(), dtype=string),
+    'image': Image(shape=(32, 32, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=100),
+    'noise_label': ClassLabel(shape=(), dtype=int64, num_classes=100),
+    'worker_id': int64,
+    'worker_time': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature      | Class        | Shape       | Dtype      | Description
-:----------- | :----------- | :---------- | :--------- | :----------
-             | FeaturesDict |             |            |
-coarse_label | ClassLabel   |             | tf.int64   |
-id           | Text         |             | tf.string  |
-image        | Image        | (32, 32, 3) | tf.uint8   |
-label        | ClassLabel   |             | tf.int64   |
-noise_label  | ClassLabel   |             | tf.int64   |
-worker_id    | Tensor       |             | tf.int64   |
-worker_time  | Tensor       |             | tf.float32 |
+Feature      | Class        | Shape       | Dtype   | Description
+:----------- | :----------- | :---------- | :------ | :----------
+             | FeaturesDict |             |         |
+coarse_label | ClassLabel   |             | int64   |
+id           | Text         |             | string  |
+image        | Image        | (32, 32, 3) | uint8   |
+label        | ClassLabel   |             | int64   |
+noise_label  | ClassLabel   |             | int64   |
+worker_id    | Tensor       |             | int64   |
+worker_time  | Tensor       |             | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

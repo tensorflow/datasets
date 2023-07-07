@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,19 +49,30 @@ class Wmt13Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-      ) for l1, l2 in _LANGUAGE_PAIRS
+      )
+      for l1, l2 in _LANGUAGE_PAIRS
   ]
 
   @property
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "commoncrawl", "multiun", "newscommentary_v8",
-            "gigafren", "wikiheadlines_ru", "yandexcorpus", "czeng_10"
+            "europarl_v7",
+            "commoncrawl",
+            "multiun",
+            "newscommentary_v8",
+            "gigafren",
+            "wikiheadlines_ru",
+            "yandexcorpus",
+            "czeng_10",
         ],
         tfds.Split.VALIDATION: [
-            "newstest2012", "newstest2011", "newstest2010", "newstest2009",
-            "newstest2008", "newssyscomb2009"
+            "newstest2012",
+            "newstest2011",
+            "newstest2010",
+            "newstest2009",
+            "newstest2008",
+            "newssyscomb2009",
         ],
-        tfds.Split.TEST: ["newstest2013"]
+        tfds.Split.TEST: ["newstest2013"],
     }

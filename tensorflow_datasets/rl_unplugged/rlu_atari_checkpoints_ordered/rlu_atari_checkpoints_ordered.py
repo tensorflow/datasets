@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
 
 """rlu_atari_checkpoints_ordered dataset."""
 
+from __future__ import annotations
+
 from typing import Any, Dict
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import atari_utils
 from tensorflow_datasets.rl_unplugged import rlu_common
@@ -46,7 +48,7 @@ class RluAtariCheckpointsOrdered(rlu_common.RLUBuilder):
   VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
-      '1.1.0': 'Removed redundant clipped reward fields.'
+      '1.1.0': 'Removed redundant clipped reward fields.',
   }
 
   BUILDER_CONFIGS = atari_utils.builder_configs()
@@ -90,19 +92,20 @@ class RluAtariCheckpointsOrdered(rlu_common.RLUBuilder):
     episode_id = episode['checkpoint_id'] * 1e10 + episode['episode_id']
     return int(episode_id)
 
-  def tf_example_to_step_ds(self,
-                            tf_example: tf.train.Example) -> Dict[str, Any]:
+  def tf_example_to_step_ds(
+      self, tf_example: tf.train.Example
+  ) -> Dict[str, Any]:
     return atari_utils.atari_example_to_rlds(tf_example)
 
   def get_splits(self):
     checkpoints = {}
     for i in range(self.num_shards()):
       paths = {
-          'file_paths':
-              rlu_common.filename(
-                  prefix=self.get_file_prefix(),
-                  num_shards=self.num_shards(),
-                  shard_id=i)
+          'file_paths': rlu_common.filename(
+              prefix=self.get_file_prefix(),
+              num_shards=self.num_shards(),
+              shard_id=i,
+          )
       }
       checkpoints[f'checkpoint_{i:02d}'] = self._generate_examples(paths)
     return checkpoints

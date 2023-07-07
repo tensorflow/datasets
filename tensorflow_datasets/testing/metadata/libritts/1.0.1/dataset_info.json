@@ -1,18 +1,20 @@
 {
-  "citation": "@inproceedings{zen2019libritts,\n  title = {LibriTTS: A Corpus Derived from LibriSpeech for Text-to-Speech},\n  author = {H. Zen and V. Dang and R. Clark and Y. Zhang and R. J. Weiss and Y. Jia and Z. Chen and Y. Wu},\n  booktitle = {Proc. Interspeech},\n  month = sep,\n  year = {2019},\n  doi = {10.21437/Interspeech.2019-2441},\n}\n",
-  "description": "LibriTTS is a multi-speaker English corpus of approximately 585 hours of read\nEnglish speech at 24kHz sampling rate, prepared by Heiga Zen with the assistance\nof Google Speech and Google Brain team members. The LibriTTS corpus is designed\nfor TTS research. It is derived from the original materials (mp3 audio files\nfrom LibriVox and text files from Project Gutenberg) of the LibriSpeech corpus.\nThe main differences from the LibriSpeech corpus are listed below:\n\n1. The audio files are at 24kHz sampling rate.\n2. The speech is split at sentence breaks.\n3. Both original and normalized texts are included.\n4. Contextual information (e.g., neighbouring sentences) can be extracted.\n5. Utterances with significant background noise are excluded.\n",
+  "citation": "@inproceedings{zen2019libritts,\n  title = {LibriTTS: A Corpus Derived from LibriSpeech for Text-to-Speech},\n  author = {H. Zen and V. Dang and R. Clark and Y. Zhang and R. J. Weiss and Y. Jia and Z. Chen and Y. Wu},\n  booktitle = {Proc. Interspeech},\n  month = sep,\n  year = {2019},\n  doi = {10.21437/Interspeech.2019-2441},\n}",
+  "description": "LibriTTS is a multi-speaker English corpus of approximately 585 hours of read\nEnglish speech at 24kHz sampling rate, prepared by Heiga Zen with the assistance\nof Google Speech and Google Brain team members. The LibriTTS corpus is designed\nfor TTS research. It is derived from the original materials (mp3 audio files\nfrom LibriVox and text files from Project Gutenberg) of the LibriSpeech corpus.\nThe main differences from the LibriSpeech corpus are listed below:\n\n1. The audio files are at 24kHz sampling rate.\n2. The speech is split at sentence breaks.\n3. Both original and normalized texts are included.\n4. Contextual information (e.g., neighbouring sentences) can be extracted.\n5. Utterances with significant background noise are excluded.",
   "downloadSize": "84204238754",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.openslr.org/60"
     ]
   },
+  "moduleName": "tensorflow_datasets.audio.libritts",
   "name": "libritts",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "dev_clean",
       "numBytes": "4459626787",
-      "numShards": "64",
       "shardLengths": [
         "90",
         "89",
@@ -81,9 +83,9 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "dev_other",
       "numBytes": "3145021919",
-      "numShards": "32",
       "shardLengths": [
         "144",
         "144",
@@ -120,9 +122,9 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_clean",
       "numBytes": "4224241410",
-      "numShards": "32",
       "shardLengths": [
         "151",
         "151",
@@ -159,9 +161,9 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test_other",
       "numBytes": "3292589348",
-      "numShards": "32",
       "shardLengths": [
         "160",
         "160",
@@ -198,9 +200,9 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_clean100",
       "numBytes": "26788583729",
-      "numShards": "256",
       "shardLengths": [
         "130",
         "130",
@@ -461,9 +463,9 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_clean360",
       "numBytes": "95020548049",
-      "numShards": "1024",
       "shardLengths": [
         "114",
         "114",
@@ -1492,9 +1494,9 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train_other500",
       "numBytes": "154496474660",
-      "numShards": "1024",
       "shardLengths": [
         "200",
         "200",
@@ -2524,8 +2526,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "text_normalized",
-    "output": "speech"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "text_normalized"
+        },
+        {
+          "featureKey": "speech"
+        }
+      ]
+    }
   },
   "version": "1.0.1"
 }

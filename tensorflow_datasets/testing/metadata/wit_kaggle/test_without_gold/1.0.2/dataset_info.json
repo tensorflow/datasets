@@ -1,0 +1,73 @@
+{
+  "citation": "@article{srinivasan2021wit,\n  title={WIT: Wikipedia-based Image Text Dataset for Multimodal Multilingual Machine Learning},\n  author={Srinivasan, Krishna and Raman, Karthik and Chen, Jiecao and Bendersky, Michael and Najork, Marc},\n  journal={arXiv preprint arXiv:2103.01913},\n  year={2021}\n}",
+  "configDescription": "Test samples (without gold answers) for the Wikipedia-Image/Caption Matching competition.",
+  "configName": "test_without_gold",
+  "description": "Wikipedia - Image/Caption Matching Kaggle Competition.\n\nThis competition is organized by the\n[Research team](https://research.wikimedia.org/) at the\n[Wikimedia Foundation](https://wikimediafoundation.org/) in collaboration with\nGoogle Research and a few external collaborators.\nThis competition is based on the\n[WIT dataset](https://github.com/google-research-datasets/wit) published by\nGoogle Research as detailed in this[SIGIR paper](https://dl.acm.org/doi/abs/10.1145/3404835.3463257).\n\nIn this competition, you\u2019ll build a model that automatically retrieves the text\nclosest to an image. Specifically, you'll train your model to associate given\nimages with article titles or complex captions, in multiple languages.\nThe best models will account for the semantic granularity of Wikipedia images.\nIf successful, you'll be contributing to the accessibility of the largest\nonline encyclopedia. The millions of Wikipedia readers and edietors will be able\nto more easily understand, search, and describe media at scale. As a result,\nyou\u2019ll contribute to an open model to improve learning for all.",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/wikipedia-image-caption/code"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.vision_language.wit_kaggle.wit_kaggle",
+  "name": "wit_kaggle",
+  "releaseNotes": {
+    "1.0.0": "Initial release. It provides the train and test datasets from the\n      Wikipedia - Image/Caption Matching Kaggle competition\n      (https://www.kaggle.com/c/wikipedia-image-caption/data).\n\n      The goal of the competition is to build a model that automatically\n      retrieves the text closest to an image. Specifically, the model shuld be\n      trained to associate given images with article titles or complex captions,\n      in multiple languages. The best models will account for the semantic\n      granularity of Wikipedia images.\n\n      Note that this release doesn't provide the ground truth for the test set,\n      as it hasn't been provided by the Kaggle competition yet.\n\n      Note that not all of the training observations have corresponding image\n      data. The released images exclude all images containing humans. For\n      samples which are not associated with image data, the following image\n      features are used: `image` is a byte-64 encoded blank image, `embedding`\n      is a vector of 2048 zeros.\n\n      The samples released for the competition can be loaded as:\n      ```\n      tfds.load(\"wit_kaggle/train_with_extended_features\")\n      tfds.load(\"wit_kaggle/test_without_gold\")\n      ```\n      ",
+    "1.0.1": "Optimize Beam pipeline to avoid strugglers, ignoring rows without an image URL. Also added more Beam counters.",
+    "1.0.2": "Fixes parsing of boolean fields."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test_without_gold",
+      "numBytes": "3623001379",
+      "shardLengths": [
+        "2931",
+        "2942",
+        "2835",
+        "2946",
+        "2934",
+        "2875",
+        "2870",
+        "2907",
+        "2864",
+        "2873",
+        "2904",
+        "2783",
+        "2881",
+        "2871",
+        "2882",
+        "2946",
+        "2873",
+        "2791",
+        "2961",
+        "2935",
+        "2920",
+        "2906",
+        "2921",
+        "2897",
+        "2914",
+        "2934",
+        "2740",
+        "2915",
+        "2846",
+        "2936",
+        "2838",
+        "2795"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image_url"
+        },
+        {
+          "featureKey": "caption_title_and_reference_description"
+        }
+      ]
+    }
+  },
+  "version": "1.0.2"
+}

@@ -3,7 +3,7 @@
   "configName": "msmarco",
   "description": "BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides\na common and easy framework for evaluation of your NLP-based retrieval models\nwithin the benchmark.",
   "downloadSize": "1082258632",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/beir-cellar/beir"
@@ -97,7 +97,7 @@
     {
       "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numBytes": "288898649",
+      "numBytes": "288898385",
       "shardLengths": [
         "129118",
         "129118",
@@ -108,7 +108,7 @@
     {
       "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
-      "numBytes": "3995200",
+      "numBytes": "3995198",
       "shardLengths": [
         "7433"
       ]
@@ -116,7 +116,7 @@
     {
       "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
-      "numBytes": "5007399",
+      "numBytes": "5007487",
       "shardLengths": [
         "9139"
       ]

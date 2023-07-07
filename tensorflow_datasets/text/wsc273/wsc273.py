@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@
 
 """WSC273 Dataset."""
 
-import tensorflow as tf
+from __future__ import annotations
+
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -36,9 +38,13 @@ The schema takes its name from a well-known example by Terry Winograd: ``The cit
 If the word is ``feared'', then ``they'' presumably refers to the city council; if it is ``advocated'' then ``they'' presumably refers to the demonstrators.
 """
 
-_HOMEPAGE_URL = "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+_HOMEPAGE_URL = (
+    "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+)
 
-_DOWNLOAD_URL = "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WSCollection.xml"
+_DOWNLOAD_URL = (
+    "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WSCollection.xml"
+)
 
 
 class Wsc273(tfds.core.GeneratorBasedBuilder):
@@ -56,11 +62,11 @@ class Wsc273(tfds.core.GeneratorBasedBuilder):
             "option1_normalized": tfds.features.Text(),
             "option2": tfds.features.Text(),
             "option2_normalized": tfds.features.Text(),
-            "pronoun_start": tf.int32,
-            "pronoun_end": tf.int32,
+            "pronoun_start": np.int32,
+            "pronoun_end": np.int32,
             "pronoun_text": tfds.features.Text(),
-            "label": tf.int32,
-            "idx": tf.int32,
+            "label": np.int32,
+            "idx": np.int32,
         }),
         homepage=_HOMEPAGE_URL,
         citation=_CITATION,
@@ -96,8 +102,15 @@ def normalize_text(text):
 
 def normalize_cap(option, pron):
   """Normalize the capitalization of the option according to the pronoun."""
-  cap_tuples = [("The", "the"), ("His", "his"), ("My", "my"), ("Her", "her"),
-                ("Their", "their"), ("An", "an"), ("A", "a")]
+  cap_tuples = [
+      ("The", "the"),
+      ("His", "his"),
+      ("My", "my"),
+      ("Her", "her"),
+      ("Their", "their"),
+      ("An", "an"),
+      ("A", "a"),
+  ]
   uncap_dict = dict(cap_tuples)
   cap_dict = dict([(t[1], t[0]) for t in cap_tuples])
   words = option.split(" ")
@@ -147,6 +160,7 @@ def parse_wsc273_xml(xml_data):
         option1_normalized=normalized_answers[0],
         option2_normalized=normalized_answers[1],
         label=label,
-        idx=i)
+        idx=i,
+    )
     assert text[pronoun_start:pronoun_end] == pronoun_text
     yield example

@@ -17,6 +17,12 @@
 A large set of images of cats and dogs. There are 1738 corrupted images that are
 dropped.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cats-vs-dogs">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 
@@ -28,13 +34,13 @@ dropped.
     *   **`4.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `786.68 MiB`
+*   **Download size**: `786.67 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `689.64 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -46,20 +52,20 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape           | Dtype     | Description
-:------------- | :----------- | :-------------- | :-------- | :----------
-               | FeaturesDict |                 |           |
-image          | Image        | (None, None, 3) | tf.uint8  |
-image/filename | Text         |                 | tf.string |
-label          | ClassLabel   |                 | tf.int64  |
+Feature        | Class        | Shape           | Dtype  | Description
+:------------- | :----------- | :-------------- | :----- | :----------
+               | FeaturesDict |                 |        |
+image          | Image        | (None, None, 3) | uint8  |
+image/filename | Text         |                 | string |
+label          | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

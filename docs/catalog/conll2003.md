@@ -12,10 +12,6 @@
 # `conll2003`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 The shared task of CoNLL-2003 concerns language-independent named entity
@@ -53,22 +49,22 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'chunks': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=23)),
-    'ner': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=9)),
-    'pos': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=47)),
-    'tokens': Sequence(Text(shape=(), dtype=tf.string)),
+    'chunks': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=23)),
+    'ner': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=9)),
+    'pos': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=47)),
+    'tokens': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class                | Shape   | Dtype     | Description
-:------ | :------------------- | :------ | :-------- | :----------
-        | FeaturesDict         |         |           |
-chunks  | Sequence(ClassLabel) | (None,) | tf.int64  |
-ner     | Sequence(ClassLabel) | (None,) | tf.int64  |
-pos     | Sequence(ClassLabel) | (None,) | tf.int64  |
-tokens  | Sequence(Text)       | (None,) | tf.string |
+Feature | Class                | Shape   | Dtype  | Description
+:------ | :------------------- | :------ | :----- | :----------
+        | FeaturesDict         |         |        |
+chunks  | Sequence(ClassLabel) | (None,) | int64  |
+ner     | Sequence(ClassLabel) | (None,) | int64  |
+pos     | Sequence(ClassLabel) | (None,) | int64  |
+tokens  | Sequence(Text)       | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -88,7 +84,7 @@ tokens  | Sequence(Text)       | (None,) | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/conll2003-conll2022-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/conll2003-conll2003-1.0.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -130,4 +126,4 @@ dataButton.addEventListener('click', async () => {
 ```
 
 
-## conll2003/conll2022 (default config)
+## conll2003/conll2003 (default config)

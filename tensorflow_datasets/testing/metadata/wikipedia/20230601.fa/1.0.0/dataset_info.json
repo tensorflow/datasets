@@ -1,0 +1,44 @@
+{
+  "citation": "@ONLINE {wikidump,\n    author = \"Wikimedia Foundation\",\n    title  = \"Wikimedia Downloads\",\n    url    = \"https://dumps.wikimedia.org\"\n}",
+  "configDescription": "Wikipedia dataset for fa, parsed from 20230601 dump.",
+  "configName": "20230601.fa",
+  "description": "Wikipedia dataset containing cleaned articles of all languages.\nThe datasets are built from the Wikipedia dump\n(https://dumps.wikimedia.org/) with one split per language. Each example\ncontains the content of one full Wikipedia article with cleaning to strip\nmarkdown and unwanted sections (references, etc.).",
+  "downloadSize": "1166330643",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://dumps.wikimedia.org"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.wikipedia",
+  "name": "wikipedia",
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)"
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "2028800384",
+      "shardLengths": [
+        "174468",
+        "173666",
+        "173371",
+        "173506",
+        "174389",
+        "173855",
+        "175068",
+        "173608",
+        "174492",
+        "174588",
+        "174793",
+        "174603",
+        "175040",
+        "174464",
+        "173626",
+        "172876"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

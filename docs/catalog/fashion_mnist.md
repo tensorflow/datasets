@@ -24,6 +24,12 @@ Fashion-MNIST is a dataset of Zalando's article images consisting of a training
 set of 60,000 examples and a test set of 10,000 examples. Each example is a
 28x28 grayscale image, associated with a label from 10 classes.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/fashion-mnist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 
@@ -53,18 +59,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape       | Dtype    | Description
-:------ | :----------- | :---------- | :------- | :----------
-        | FeaturesDict |             |          |
-image   | Image        | (28, 28, 1) | tf.uint8 |
-label   | ClassLabel   |             | tf.int64 |
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

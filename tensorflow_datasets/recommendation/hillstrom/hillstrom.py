@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
 
 """Hillstrom dataset."""
 
+from __future__ import annotations
+
 import csv
 
-import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -54,32 +56,35 @@ class Hillstrom(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             # These are the features of your dataset like images, labels ...
-            'history': tf.float32,
+            'history': np.float32,
             'zip_code': tfds.features.Text(),
             'segment': tfds.features.Text(),
-            'recency': tf.int64,
+            'recency': np.int64,
             'history_segment': tfds.features.Text(),
-            'mens': tf.int64,
-            'womens': tf.int64,
-            'newbie': tf.int64,
+            'mens': np.int64,
+            'womens': np.int64,
+            'newbie': np.int64,
             'channel': tfds.features.Text(),
-            'visit': tf.int64,
-            'conversion': tf.int64,
-            'spend': tf.float32
+            'visit': np.int64,
+            'conversion': np.int64,
+            'spend': np.float32,
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
         # `as_supervised=True` in `builder.as_dataset`.
-        supervised_keys=({
-            'history': 'history',
-            'zip_code': 'zip_code',
-            'segment': 'segment',
-            'recency': 'recency',
-            'mens': 'mens',
-            'womens': 'womens',
-            'newbie': 'newbie',
-            'channel': 'channel'
-        }, 'visit'),
+        supervised_keys=(
+            {
+                'history': 'history',
+                'zip_code': 'zip_code',
+                'segment': 'segment',
+                'recency': 'recency',
+                'mens': 'mens',
+                'womens': 'womens',
+                'newbie': 'newbie',
+                'channel': 'channel',
+            },
+            'visit',
+        ),
         homepage='https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html',
         citation=_CITATION,
     )
@@ -112,6 +117,6 @@ class Hillstrom(tfds.core.GeneratorBasedBuilder):
             'conversion': row['conversion'],
             'spend': row['spend'],
             'history': row['history'],
-            'zip_code': row['zip_code']
+            'zip_code': row['zip_code'],
         }
         index += 1

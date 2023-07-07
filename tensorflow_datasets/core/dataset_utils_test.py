@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 
 """Tests for tensorflow_datasets.core.dataset_utils."""
 
+from etils import enp
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -64,9 +65,14 @@ class DatasetAsNumPyTest(testing.TestCase):
 
     if tf.executing_eagerly():
       self.assertEqual(len(np_ds), 10)
+      self.assertEqual(
+          np_ds.element_spec,
+          enp.ArraySpec(shape=(), dtype=np.int32),
+      )
     else:
       with self.assertRaisesWithPredicateMatch(
-          TypeError, "__len__() is not supported for `tfds.as_numpy`"):
+          TypeError, "__len__() is not supported for `tfds.as_numpy`"
+      ):
         _ = len(np_ds)
 
   def test_with_graph(self):
@@ -85,6 +91,19 @@ class DatasetAsNumPyTest(testing.TestCase):
       self.assertEqual(i + 1, el["b"])
       self.assertEqual(i + 2, el["c"][0])
       self.assertEqual(i + 3, el["c"][1])
+
+    if tf.executing_eagerly():
+      self.assertEqual(
+          np_ds.element_spec,
+          {
+              "a": enp.ArraySpec(shape=(), dtype=np.int32),
+              "b": enp.ArraySpec(shape=(), dtype=np.int32),
+              "c": (
+                  enp.ArraySpec(shape=(), dtype=np.int32),
+                  enp.ArraySpec(shape=(), dtype=np.int32),
+              ),
+          },
+      )
 
   @testing.run_in_graph_and_eager_modes()
   def test_nested_dataset_sequential_access(self):
@@ -152,15 +171,17 @@ class DatasetAsNumPyTest(testing.TestCase):
     else:
       self.assertIsInstance(rt, tf.RaggedTensor)
 
-    self.assertAllEqual(rt, tf.ragged.constant([
-        [1, 2, 3],
-        [],
-        [4, 5],
-    ]))
+    self.assertAllEqual(
+        rt,
+        tf.ragged.constant([
+            [1, 2, 3],
+            [],
+            [4, 5],
+        ]),
+    )
 
   @testing.run_in_graph_and_eager_modes()
   def test_ragged_tensors_ds(self):
-
     def _gen_ragged_tensors():
       # Yield the (flat_values, rowids)
       yield ([0, 1, 2, 3], [0, 0, 0, 2])  # ex0
@@ -170,17 +191,21 @@ class DatasetAsNumPyTest(testing.TestCase):
     ds = tf.data.Dataset.from_generator(
         _gen_ragged_tensors,
         output_types=(tf.int64, tf.int64),
-        output_shapes=((None,), (None,)))
+        output_shapes=((None,), (None,)),
+    )
     ds = ds.map(tf.RaggedTensor.from_value_rowids)
 
     rt0, rt1, rt2 = list(dataset_utils.as_numpy(ds))
-    self.assertAllEqual(rt0, [
-        [0, 1, 2],
-        [],
+    self.assertAllEqual(
+        rt0,
         [
-            3,
+            [0, 1, 2],
+            [],
+            [
+                3,
+            ],
         ],
-    ])
+    )
     self.assertAllEqual(rt1, [])
     self.assertAllEqual(rt2, [[4], [5, 6]])
 

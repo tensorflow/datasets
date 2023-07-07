@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,5 +46,9 @@ class LoggingLogger(base_logger.Logger):
       as_supervised: bool,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
   ):
-    logging.info("Constructing tf.data.Dataset %s for split %s, from %s", name,
-                 str(split), data_path)
+    logging.info(
+        "Constructing tf.data.Dataset %s for split %s, from %s",
+        name,
+        str(split),
+        data_path,
+    )

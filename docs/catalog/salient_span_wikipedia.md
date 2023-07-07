@@ -20,7 +20,7 @@ Wikipedia sentences with labeled salient spans.
     [https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia](https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia)
 
 *   **Source code**:
-    [`tfds.text.SalientSpanWikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/salient_span_wikipedia.py)
+    [`tfds.datasets.salient_span_wikipedia.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/salient_span_wikipedia/salient_span_wikipedia_dataset_builder.py)
 
 *   **Versions**:
 
@@ -72,26 +72,26 @@ Split     | Examples
 ```python
 FeaturesDict({
     'spans': Sequence({
-        'limit': tf.int32,
-        'start': tf.int32,
-        'type': tf.string,
+        'limit': int32,
+        'start': int32,
+        'type': string,
     }),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape | Dtype     | Description
-:---------- | :----------- | :---- | :-------- | :----------
-            | FeaturesDict |       |           |
-spans       | Sequence     |       |           |
-spans/limit | Tensor       |       | tf.int32  |
-spans/start | Tensor       |       | tf.int32  |
-spans/type  | Tensor       |       | tf.string |
-text        | Text         |       | tf.string |
-title       | Text         |       | tf.string |
+Feature     | Class        | Shape | Dtype  | Description
+:---------- | :----------- | :---- | :----- | :----------
+            | FeaturesDict |       |        |
+spans       | Sequence     |       |        |
+spans/limit | Tensor       |       | int32  |
+spans/start | Tensor       |       | int32  |
+spans/type  | Tensor       |       | string |
+text        | Text         |       | string |
+title       | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -147,33 +147,33 @@ Split     | Examples
 ```python
 FeaturesDict({
     'sentences': Sequence({
-        'limit': tf.int32,
-        'start': tf.int32,
+        'limit': int32,
+        'start': int32,
     }),
     'spans': Sequence({
-        'limit': tf.int32,
-        'start': tf.int32,
-        'type': tf.string,
+        'limit': int32,
+        'start': int32,
+        'type': string,
     }),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype     | Description
-:-------------- | :----------- | :---- | :-------- | :----------
-                | FeaturesDict |       |           |
-sentences       | Sequence     |       |           |
-sentences/limit | Tensor       |       | tf.int32  |
-sentences/start | Tensor       |       | tf.int32  |
-spans           | Sequence     |       |           |
-spans/limit     | Tensor       |       | tf.int32  |
-spans/start     | Tensor       |       | tf.int32  |
-spans/type      | Tensor       |       | tf.string |
-text            | Text         |       | tf.string |
-title           | Text         |       | tf.string |
+Feature         | Class        | Shape | Dtype  | Description
+:-------------- | :----------- | :---- | :----- | :----------
+                | FeaturesDict |       |        |
+sentences       | Sequence     |       |        |
+sentences/limit | Tensor       |       | int32  |
+sentences/start | Tensor       |       | int32  |
+spans           | Sequence     |       |        |
+spans/limit     | Tensor       |       | int32  |
+spans/start     | Tensor       |       | int32  |
+spans/type      | Tensor       |       | string |
+text            | Text         |       | string |
+title           | Text         |       | string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

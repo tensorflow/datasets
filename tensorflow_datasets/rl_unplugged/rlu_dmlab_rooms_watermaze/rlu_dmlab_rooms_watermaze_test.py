@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ from tensorflow_datasets.rl_unplugged import dmlab_dataset
 from tensorflow_datasets.rl_unplugged.rlu_dmlab_rooms_watermaze import rlu_dmlab_rooms_watermaze
 
 
-class RluDmlabRoomsWatermazeTest(
-    tfds.testing.DatasetBuilderTestCase):
+class RluDmlabRoomsWatermazeTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_dmlab_rooms_watermaze dataset."""
+
   DATASET_CLASS = rlu_dmlab_rooms_watermaze.RluDmlabRoomsWatermaze
   SPLITS = {
       'train': 2,  # Number of fake train example

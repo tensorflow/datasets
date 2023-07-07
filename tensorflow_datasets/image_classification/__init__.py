@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ from tensorflow_datasets.image_classification.cifar import Cifar100
 from tensorflow_datasets.image_classification.cifar100_n import Cifar100N
 from tensorflow_datasets.image_classification.cifar10_1 import Cifar10_1
 from tensorflow_datasets.image_classification.cifar10_corrupted import Cifar10Corrupted
+from tensorflow_datasets.image_classification.cifar10_h import Cifar10H
 from tensorflow_datasets.image_classification.cifar10_n import Cifar10N
 from tensorflow_datasets.image_classification.citrus import CitrusLeaves
 from tensorflow_datasets.image_classification.cmaterdb import Cmaterdb

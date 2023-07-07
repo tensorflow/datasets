@@ -1,149 +1,44 @@
 {
-  "citation": "@TECHREPORT{Krizhevsky09learningmultiple,\n    author = {Alex Krizhevsky},\n    title = {Learning multiple layers of features from tiny images},\n    institution = {},\n    year = {2009}\n}\n",
+  "citation": "@TECHREPORT{Krizhevsky09learningmultiple,\n    author = {Alex Krizhevsky},\n    title = {Learning multiple layers of features from tiny images},\n    institution = {},\n    year = {2009}\n}",
   "description": "This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a \"fine\" label (the class to which it belongs) and a \"coarse\" label (the superclass to which it belongs).",
   "downloadSize": "168513733",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://www.cs.toronto.edu/~kriz/cifar.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.cifar",
   "name": "cifar100",
-  "schema": {
-    "feature": [
-      {
-        "name": "coarse_label",
-        "type": "INT"
-      },
-      {
-        "name": "id",
-        "type": "BYTES"
-      },
-      {
-        "name": "image",
-        "shape": {
-          "dim": [
-            {
-              "size": "32"
-            },
-            {
-              "size": "32"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      }
-    ]
-  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "23111198",
-      "numShards": "1",
-      "shardLengths": [
-        "10000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "coarse_label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              },
-              "max": 19.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              }
-            },
-            "name": "id",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              },
-              "max": 99.0
-            }
-          }
-        ],
-        "numExamples": "10000"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "115334082",
-      "numShards": "1",
       "shardLengths": [
         "50000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "coarse_label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "50000"
-              },
-              "max": 19.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "50000"
-              }
-            },
-            "name": "id",
-            "type": "BYTES"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "50000"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "50000"
-              },
-              "max": 99.0
-            }
-          }
-        ],
-        "numExamples": "50000"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "23111198",
+      "shardLengths": [
+        "10000"
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "3.0.2"
 }

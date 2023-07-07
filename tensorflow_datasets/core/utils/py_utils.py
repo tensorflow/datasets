@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import logging
 import operator
 import os
 import random
+import re
 import shutil
 import string
 import sys
@@ -36,9 +37,9 @@ import uuid
 from absl import logging as absl_logging
 from etils import epath
 from six.moves import urllib
-import tensorflow as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Tree = type_utils.Tree
 
@@ -140,7 +141,7 @@ class NonMutableDict(Dict[T, U]):
       raise ValueError(self._error_msg.format(key=key))
     return super(NonMutableDict, self).__setitem__(key, value)
 
-  def update(self, other):
+  def update(self, other):  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
     if any(k in self.keys() for k in other):
       raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)
@@ -151,23 +152,6 @@ class classproperty(property):  # pylint: disable=invalid-name
 
   def __get__(self, obj, objtype=None):
     return self.fget.__get__(None, objtype)()  # pytype: disable=attribute-error
-
-
-class memoized_property(property):  # pylint: disable=invalid-name
-  """Descriptor that mimics @property but caches output in member variable."""
-
-  def __get__(self, obj, objtype=None):
-    # See https://docs.python.org/3/howto/descriptor.html#properties
-    if obj is None:
-      return self
-    if self.fget is None:  # pytype: disable=attribute-error
-      raise AttributeError('unreadable attribute')
-    attr = '__cached_' + self.fget.__name__  # pytype: disable=attribute-error
-    cached = getattr(obj, attr, None)
-    if cached is None:
-      cached = self.fget(obj)  # pytype: disable=attribute-error
-      setattr(obj, attr, cached)
-    return cached
 
 
 if typing.TYPE_CHECKING:
@@ -214,8 +198,7 @@ def zip_nested(arg0, *args, **kwargs):
   # Could add support for more exotic data_struct, like OrderedDict
   if isinstance(arg0, dict):
     return {
-        k: zip_nested(*a, dict_only=dict_only)
-        for k, a in zip_dict(arg0, *args)
+        k: zip_nested(*a, dict_only=dict_only) for k, a in zip_dict(arg0, *args)
     }
   elif not dict_only:
     if isinstance(arg0, list):
@@ -230,8 +213,8 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> Dict[str, T]:
   flat_dict = NonMutableDict()
   for k, v in d.items():
     if isinstance(v, dict):
-      flat_dict.update(
-          {f'{k}/{k2}': v2 for k2, v2 in flatten_nest_dict(v).items()})
+      for k2, v2 in flatten_nest_dict(v).items():
+        flat_dict[f'{k}/{k2}'] = v2
     else:
       flat_dict[k] = v
   return flat_dict
@@ -297,7 +280,8 @@ def pack_as_nest_dict(flat_d, nest_d):
   if flat_d:  # At the end, flat_d should be empty
     raise ValueError(
         'Flat dict strucure do not match the nested dict. Extra keys: '
-        '{}'.format(list(flat_d.keys())))
+        '{}'.format(list(flat_d.keys()))
+    )
   return nest_out_d
 
 
@@ -310,8 +294,9 @@ def nullcontext(enter_result: T = None) -> Iterator[T]:
 def _get_incomplete_path(filename):
   """Returns a temporary filename based on filename."""
   random_suffix = ''.join(
-      random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
-  return filename + '.incomplete' + random_suffix
+      random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
+  )
+  return filename + constants.INCOMPLETE_SUFFIX + random_suffix
 
 
 @contextlib.contextmanager
@@ -319,25 +304,41 @@ def incomplete_dir(dirname: epath.PathLike) -> Iterator[str]:
   """Create temporary dir for dirname and rename on exit."""
   dirname = os.fspath(dirname)
   tmp_dir = _get_incomplete_path(dirname)
-  tf.io.gfile.makedirs(tmp_dir)
+  tmp_path = epath.Path(tmp_dir)
+  tmp_path.mkdir(parents=True, exist_ok=True)
   try:
     yield tmp_dir
-    tf.io.gfile.rename(tmp_dir, dirname)
+    tmp_path.rename(dirname)
   finally:
-    if tf.io.gfile.exists(tmp_dir):
-      tf.io.gfile.rmtree(tmp_dir)
+    if tmp_path.exists():
+      tmp_path.rmtree()
 
 
 @contextlib.contextmanager
-def incomplete_file(path: epath.Path,) -> Iterator[epath.Path]:
+def incomplete_file(
+    path: epath.Path,
+) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = path.parent / f'{path.name}.incomplete.{uuid.uuid4().hex}'
+  tmp_path = (
+      path.parent
+      / f'{path.name}{constants.INCOMPLETE_SUFFIX}.{uuid.uuid4().hex}'
+  )
   try:
     yield tmp_path
     tmp_path.replace(path)
   finally:
     # Eventually delete the tmp_path if exception was raised
     tmp_path.unlink(missing_ok=True)
+
+
+def is_incomplete_file(path: epath.Path) -> bool:
+  """Returns whether the given filename suggests that it's incomplete."""
+  return bool(
+      re.search(
+          rf'^.+{re.escape(constants.INCOMPLETE_SUFFIX)}\.[0-9a-fA-F]{{32}}$',
+          path.name,
+      )
+  )
 
 
 @contextlib.contextmanager
@@ -365,7 +366,9 @@ def reraise(
       type(e).__str__ is not BaseException.__str__
       # This should never happens unless the user plays with Exception
       # internals
-      or not hasattr(e, 'args') or not isinstance(e.args, tuple)):
+      or not hasattr(e, 'args')
+      or not isinstance(e.args, tuple)
+  ):
     msg = f'{prefix}{e}{suffix}'
     # Could try to dynamically create a
     # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
@@ -387,8 +390,8 @@ def reraise(
   # If there is more than 1 args, concatenate the message with other args
   else:
     e.args = tuple(
-        p for p in (prefix,) + e.args + (suffix,)
-        if not isinstance(p, str) or p)
+        p for p in (prefix,) + e.args + (suffix,) if not isinstance(p, str) or p
+    )
     raise  # pylint: disable=misplaced-bare-raise
 
 
@@ -437,7 +440,7 @@ def get_class_path(cls, use_tfds_prefix=True):
     cls = cls.__class__
   module_path = cls.__module__
   if use_tfds_prefix and module_path.startswith('tensorflow_datasets'):
-    module_path = 'tfds' + module_path[len('tensorflow_datasets'):]
+    module_path = 'tfds' + module_path[len('tensorflow_datasets') :]
   return '.'.join([module_path, cls.__name__])
 
 
@@ -470,7 +473,6 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
   lock = threading.Lock()
 
   def lock_decorator(fn: Fn) -> Fn:
-
     @functools.wraps(fn)
     def lock_decorated(*args, **kwargs):
       with lock:
@@ -494,15 +496,19 @@ def basename_from_url(url: str) -> str:
 def list_info_files(dir_path: epath.PathLike) -> List[str]:
   """Returns name of info files within dir_path."""
   from tensorflow_datasets.core import file_adapters  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
+
   path = os.fspath(dir_path)
   return [
-      fname for fname in tf.io.gfile.listdir(path)
-      if not tf.io.gfile.isdir(os.path.join(path, fname)) and
-      not file_adapters.is_example_file(fname)
+      fname
+      for fname in tf.io.gfile.listdir(path)
+      if not tf.io.gfile.isdir(os.path.join(path, fname))
+      and not file_adapters.is_example_file(fname)
   ]
 
 
-def get_base64(write_fn: Union[bytes, Callable[[io.BytesIO], None]],) -> str:
+def get_base64(
+    write_fn: Union[bytes, Callable[[io.BytesIO], None]],
+) -> str:
   """Extracts the base64 string of an object by writing into a tmp buffer."""
   if isinstance(write_fn, bytes):  # Value already encoded
     bytes_value = write_fn

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 
 from unittest import mock
 
+import numpy as np
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import visualization
@@ -37,8 +38,17 @@ class ShowExamplesTest(testing.TestCase):
   def test_show_examples_supervised(self, _):
     with testing.mock_data(num_examples=20):
       ds, ds_info = load.load(
-          'imagenet2012', split='train', with_info=True, as_supervised=True)
+          'imagenet2012', split='train', with_info=True, as_supervised=True
+      )
     visualization.show_examples(ds, ds_info)
+
+  @mock.patch('matplotlib.pyplot.figure')
+  def test_show_examples_with_batch(self, _):
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = load.load(
+          'imagenet2012', split='train', with_info=True, batch_size=32
+      )
+    visualization.show_examples(ds, ds_info, is_batched=True)
 
   @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples_graph(self, _):
@@ -61,7 +71,7 @@ class ShowExamplesTest(testing.TestCase):
         15: 'P',
         16: 'S',
         17: 'Cl',
-        35: 'Br,'
+        35: 'Br,',
     }
     elements_to_colors = {
         element: f'C{index}'
@@ -99,7 +109,8 @@ class ShowExamplesTest(testing.TestCase):
         ds_info,
         node_color_fn=node_color_fn,
         node_label_fn=node_label_fn,
-        edge_color_fn=edge_color_fn)
+        edge_color_fn=edge_color_fn,
+    )
 
   @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples_missing_sample(self, _):

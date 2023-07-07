@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
 
 """Builder and Buidler Configs for D4RL Datasets."""
 
-import dataclasses
-from typing import Any, Dict, FrozenSet, Optional
+from __future__ import annotations
 
-import tensorflow as tf
+import dataclasses
+from typing import Any, Dict, FrozenSet, Optional, Type, Union
+
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.d4rl import dataset_utils
 import tensorflow_datasets.public_api as tfds
 
@@ -27,11 +30,12 @@ import tensorflow_datasets.public_api as tfds
 @dataclasses.dataclass
 class BuilderConfig(tfds.core.BuilderConfig):
   """Configuration of the dataset versions."""
+
   dataset_dir: str = 'gym_mujoco'
   file_suffix: str = 'medium'
   env: str = 'mujoco'
   # All use float32 except for the replay datasets.
-  float_type: tf.DType = tf.float32
+  float_type: Union[np.dtype, Type[np.generic]] = np.float32
   # All datasets have step metadata except for mujoco v0.
   step_metadata_keys: FrozenSet[str] = frozenset([])
   episode_metadata_keys: FrozenSet[str] = frozenset([])
@@ -40,11 +44,11 @@ class BuilderConfig(tfds.core.BuilderConfig):
   has_policy_last_fc_log_std: bool = False
   policy_size: int = 256
   # Some datasets were regenerated with different metadata type.
-  step_metadata_type: tf.DType = tf.float32
+  step_metadata_type: Union[np.dtype, Type[np.generic]] = np.float32
 
 
 @dataclasses.dataclass
-class DatasetConfig():
+class DatasetConfig:
   """Configuration of the shape of the dataset.
 
   Attributes:
@@ -58,6 +62,7 @@ class DatasetConfig():
     goal_len: first dimension of the infos/goal field (ignored if the dataset
       does not include step metadata).
   """
+
   name: str
   obs_len: int
   action_len: int
@@ -78,16 +83,12 @@ _ACTION_LOG_STD = 'action_log_std'
 _ADROIT_BODY_POS = 'adroit_body_pos'
 
 _ADROIT_BODY_POS_KEYS = {
-    'door': {
-        'door_body_pos': (3,)
-    },
+    'door': {'door_body_pos': (3,)},
     'hammer': {
         'board_pos': (3,),
         'target_pos': (3,),
     },
-    'pen': {
-        'desired_orien': (4,)
-    },
+    'pen': {'desired_orien': (4,)},
     'relocate': {
         'hand_qpos': (30,),
         'obj_pos': (3,),
@@ -101,11 +102,14 @@ _ALGORITHM = 'algorithm'
 _ITERATION = 'iteration'
 
 # Data description
-_MUJOCO_DESCRIPTION = ('See more details about the task and its versions in '
-                       'https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym')
+_MUJOCO_DESCRIPTION = (
+    'See more details about the task and its versions in '
+    'https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym'
+)
 _ADROIT_DESCRIPTION = (
     'See more details about the task and its versions in '
-    'https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit')
+    'https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit'
+)
 
 # pytype: disable=wrong-keyword-args
 MUJOCO_BUILDER_CONFIGS = [
@@ -114,31 +118,36 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco',
         env='mujoco',
         file_suffix='_expert',
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v0-medium',
         dataset_dir='gym_mujoco',
         env='mujoco',
         file_suffix='_medium',
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v0-medium-expert',
         dataset_dir='gym_mujoco',
         env='mujoco',
         file_suffix='_medium_expert',
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v0-mixed',
         dataset_dir='gym_mujoco',
         env='mujoco',
         file_suffix='_mixed',
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v0-random',
         dataset_dir='gym_mujoco',
         env='mujoco',
         file_suffix='_random',
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v1-expert',
         dataset_dir='gym_mujoco_v1',
@@ -149,7 +158,8 @@ MUJOCO_BUILDER_CONFIGS = [
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
         policy_size=256,
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v1-medium',
         dataset_dir='gym_mujoco_v1',
@@ -160,7 +170,8 @@ MUJOCO_BUILDER_CONFIGS = [
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
         policy_size=256,
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v1-medium-expert',
         dataset_dir='gym_mujoco_v1',
@@ -174,8 +185,8 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v1',
         env='mujoco',
         file_suffix='_medium_replay-v1',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -185,8 +196,8 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v1',
         env='mujoco',
         file_suffix='_full_replay-v1',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -204,19 +215,20 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_expert-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
         policy_size=256,
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v2-full-replay',
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_full_replay-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -226,19 +238,20 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
         policy_size=256,
-        description=_MUJOCO_DESCRIPTION),
+        description=_MUJOCO_DESCRIPTION,
+    ),
     BuilderConfig(
         name='v2-medium-expert',
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium_expert-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         description=_MUJOCO_DESCRIPTION,
     ),
@@ -247,7 +260,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium_replay-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -257,7 +270,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_random-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         description=_MUJOCO_DESCRIPTION,
     ),
@@ -276,8 +289,8 @@ ADROIT_BUILDER_CONFIGS = [
         dataset_dir='hand_dapg',
         env='adroit',
         file_suffix='-demos-v0-bc-combined',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL]),
         description=_ADROIT_DESCRIPTION,
     ),
@@ -287,7 +300,8 @@ ADROIT_BUILDER_CONFIGS = [
         env='adroit',
         file_suffix='-v0_expert_clipped',
         step_metadata_keys=frozenset(
-            [_QPOS, _QVEL, _ACTION_MEAN, _ACTION_LOGSTD]),
+            [_QPOS, _QVEL, _ACTION_MEAN, _ACTION_LOGSTD]
+        ),
         description=_ADROIT_DESCRIPTION,
     ),
     BuilderConfig(
@@ -316,7 +330,8 @@ ADROIT_BUILDER_CONFIGS = [
         env='adroit',
         file_suffix='-expert-v1',
         step_metadata_keys=frozenset(
-            [_QPOS, _QVEL, _ADROIT_BODY_POS, _ACTION_MEAN, _ACTION_LOG_STD]),
+            [_QPOS, _QVEL, _ADROIT_BODY_POS, _ACTION_MEAN, _ACTION_LOG_STD]
+        ),
         episode_metadata_keys=frozenset([_ALGORITHM]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
@@ -328,8 +343,10 @@ ADROIT_BUILDER_CONFIGS = [
 
 
 def _get_step_metadata(
-    builder_config: BuilderConfig,
-    ds_config: DatasetConfig) -> Dict[str, tfds.features.FeatureConnector]:
+    builder_config: BuilderConfig, ds_config: DatasetConfig
+) -> Dict[
+    str, Union[np.dtype, Type[np.generic], tfds.features.FeatureConnector]
+]:
   """Builds the features dict of the step metadata.
 
   Args:
@@ -348,29 +365,33 @@ def _get_step_metadata(
       infos_dict[k] = float_type
     elif k == _QPOS:
       infos_dict[k] = tfds.features.Tensor(
-          shape=(ds_config.qpos_len,), dtype=float_type)
+          shape=(ds_config.qpos_len,), dtype=float_type
+      )
     elif k == _QVEL:
       infos_dict[k] = tfds.features.Tensor(
-          shape=(ds_config.qvel_len,), dtype=float_type)
+          shape=(ds_config.qvel_len,), dtype=float_type
+      )
     elif k == _GOAL:
       infos_dict[k] = tfds.features.Tensor(
-          shape=(ds_config.goal_len,), dtype=float_type)
+          shape=(ds_config.goal_len,), dtype=float_type
+      )
     elif k == _ADROIT_BODY_POS:
       # We use the task name to get the names of the body position keys.
       adroit_keys = _ADROIT_BODY_POS_KEYS[ds_config.name]
-      for (ak, shape) in adroit_keys.items():
+      for ak, shape in adroit_keys.items():
         infos_dict[ak] = tfds.features.Tensor(shape=shape, dtype=float_type)
     elif k in [_ACTION_MEAN, _ACTION_LOG_STD, _ACTION_LOGSTD]:
       infos_dict[k] = tfds.features.Tensor(
-          shape=(ds_config.action_len,), dtype=float_type)
+          shape=(ds_config.action_len,), dtype=float_type
+      )
     else:
       raise ValueError(f'Unknown key in the step metadata {k}')
   return infos_dict
 
 
 def _get_policy_info(
-    builder_config: BuilderConfig,
-    ds_config: DatasetConfig) -> Dict[str, tfds.typing.FeatureConnectorArg]:
+    builder_config: BuilderConfig, ds_config: DatasetConfig
+) -> Dict[str, tfds.typing.FeatureConnectorArg]:
   """Builds the features dict of the policy weights.
 
   Args:
@@ -386,32 +407,31 @@ def _get_policy_info(
   # See https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym.
   policy_dict = {
       'fc0': {
-          'bias':
-              tfds.features.Tensor(
-                  shape=(builder_config.policy_size,), dtype=float_type),
-          'weight':
-              tfds.features.Tensor(
-                  shape=(builder_config.policy_size, ds_config.obs_len),
-                  dtype=float_type),
+          'bias': tfds.features.Tensor(
+              shape=(builder_config.policy_size,), dtype=float_type
+          ),
+          'weight': tfds.features.Tensor(
+              shape=(builder_config.policy_size, ds_config.obs_len),
+              dtype=float_type,
+          ),
       },
       'fc1': {
-          'bias':
-              tfds.features.Tensor(
-                  shape=(builder_config.policy_size,), dtype=float_type),
-          'weight':
-              tfds.features.Tensor(
-                  shape=(builder_config.policy_size,
-                         builder_config.policy_size),
-                  dtype=float_type),
+          'bias': tfds.features.Tensor(
+              shape=(builder_config.policy_size,), dtype=float_type
+          ),
+          'weight': tfds.features.Tensor(
+              shape=(builder_config.policy_size, builder_config.policy_size),
+              dtype=float_type,
+          ),
       },
       'last_fc': {
-          'bias':
-              tfds.features.Tensor(
-                  shape=(ds_config.action_len,), dtype=float_type),
-          'weight':
-              tfds.features.Tensor(
-                  shape=(ds_config.action_len, builder_config.policy_size),
-                  dtype=float_type),
+          'bias': tfds.features.Tensor(
+              shape=(ds_config.action_len,), dtype=float_type
+          ),
+          'weight': tfds.features.Tensor(
+              shape=(ds_config.action_len, builder_config.policy_size),
+              dtype=float_type,
+          ),
       },
       'nonlinearity': tf.string,
       'output_distribution': tf.string,
@@ -419,27 +439,29 @@ def _get_policy_info(
   if builder_config.env == 'adroit' and builder_config.name == 'v1-cloned':
     # v1-cloned from d4rl_adroit uses a different policy shape
     policy_dict['fc0']['weight'] = tfds.features.Tensor(
-        shape=(ds_config.obs_len, builder_config.policy_size), dtype=float_type)
+        shape=(ds_config.obs_len, builder_config.policy_size), dtype=float_type
+    )
     policy_dict['last_fc']['weight'] = tfds.features.Tensor(
         shape=(builder_config.policy_size, ds_config.action_len),
-        dtype=float_type)
+        dtype=float_type,
+    )
   if builder_config.has_policy_last_fc_log_std:
     policy_dict['last_fc_log_std'] = {
-        'bias':
-            tfds.features.Tensor(
-                shape=(ds_config.action_len,), dtype=float_type),
-        'weight':
-            tfds.features.Tensor(
-                shape=(ds_config.action_len, builder_config.policy_size),
-                dtype=float_type),
+        'bias': tfds.features.Tensor(
+            shape=(ds_config.action_len,), dtype=float_type
+        ),
+        'weight': tfds.features.Tensor(
+            shape=(ds_config.action_len, builder_config.policy_size),
+            dtype=float_type,
+        ),
     }
 
   return policy_dict
 
 
 def get_features_dict(
-    builder_config: BuilderConfig,
-    ds_config: DatasetConfig) -> Dict[str, tfds.typing.FeatureConnectorArg]:
+    builder_config: BuilderConfig, ds_config: DatasetConfig
+) -> Dict[str, tfds.typing.FeatureConnectorArg]:
   """Builds the features dict of a D4RL dataset.
 
   Args:
@@ -453,26 +475,24 @@ def get_features_dict(
   float_type = builder_config.float_type
 
   steps_dict = {
-      'observation':
-          tfds.features.Tensor(shape=(ds_config.obs_len,), dtype=float_type),
-      'action':
-          tfds.features.Tensor(shape=(ds_config.action_len,), dtype=float_type),
-      'reward':
-          float_type,
-      'is_terminal':
-          tf.bool,
-      'is_first':
-          tf.bool,
-      'is_last':
-          tf.bool,
-      'discount':
-          float_type,
+      'observation': tfds.features.Tensor(
+          shape=(ds_config.obs_len,), dtype=float_type
+      ),
+      'action': tfds.features.Tensor(
+          shape=(ds_config.action_len,), dtype=float_type
+      ),
+      'reward': float_type,
+      'is_terminal': tf.bool,
+      'is_first': tf.bool,
+      'is_last': tf.bool,
+      'discount': float_type,
   }
   if builder_config.env == 'adroit' and builder_config.name == 'v0-cloned':
     # D4RL adroit in the v0-cloned config, action uses a different float type
     # than the rest of the dataset.
     steps_dict['action'] = tfds.features.Tensor(
-        shape=(ds_config.action_len,), dtype=tf.float32)
+        shape=(ds_config.action_len,), dtype=np.float32
+    )
 
   if builder_config.step_metadata_keys:
     steps_dict['infos'] = _get_step_metadata(builder_config, ds_config)
@@ -497,7 +517,8 @@ def get_features_dict(
 
 
 class D4RLDatasetBuilder(
-    tfds.core.GeneratorBasedBuilder, skip_registration=True):
+    tfds.core.GeneratorBasedBuilder, skip_registration=True
+):
   """DatasetBuilder for D4RL datasets."""
 
   def __init__(self, *, ds_config: DatasetConfig, **kwargs: Any):
@@ -507,7 +528,8 @@ class D4RLDatasetBuilder(
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     features_dict = get_features_dict(
-        builder_config=self.builder_config, ds_config=self._ds_config)
+        builder_config=self.builder_config, ds_config=self._ds_config
+    )
     return tfds.core.DatasetInfo(
         builder=self,
         description=dataset_utils.description(),
@@ -525,12 +547,17 @@ class D4RLDatasetBuilder(
       # There is a mismatch in the name of the original files, where one of them
       # uses walker instead of walker2d.
       name = 'walker'
-    ds_name = (name + self.builder_config.file_suffix + '.hdf5')
-    path = dl_manager.download_and_extract({
-        'file_path':
-            'http://rail.eecs.berkeley.edu/datasets/offline_rl/' + ds_dir +
-            '/' + ds_name
-    })
+    ds_name = name + self.builder_config.file_suffix + '.hdf5'
+    path = dl_manager.download_and_extract(
+        {
+            'file_path': (
+                'http://rail.eecs.berkeley.edu/datasets/offline_rl/'
+                + ds_dir
+                + '/'
+                + ds_name
+            )
+        }
+    )
     return {
         'train': self._generate_examples(path),
     }

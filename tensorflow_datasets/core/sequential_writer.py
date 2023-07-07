@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
 
 """Writer to sequentially write examples to disk."""
 
+from __future__ import annotations
+
 import dataclasses
 import os
 from typing import Any, Dict, List, Optional
 
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
@@ -27,16 +28,22 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 
-def _serialize_example(example: Any, features: features_lib.FeaturesDict,
-                       serializer: example_serializer.ExampleSerializer) -> str:
+def _serialize_example(
+    example: Any,
+    features: features_lib.FeaturesDict,
+    serializer: example_serializer.ExampleSerializer,
+) -> str:
   try:
     encoded_example = features.encode_example(example)
   except Exception as e:  # pylint: disable=broad-except
     py_utils.reraise(
-        e, prefix='Failed to encode example:\n', suffix=f'{example}\n')
+        e, prefix='Failed to encode example:\n', suffix=f'{example}\n'
+    )
 
   return serializer.serialize_example(encoded_example)
 
@@ -44,6 +51,7 @@ def _serialize_example(example: Any, features: features_lib.FeaturesDict,
 @dataclasses.dataclass
 class Shard(object):
   """Shard that is being written."""
+
   writer: tf.io.TFRecordWriter  # TODO(sabela): use a file adapter
   num_examples: int = 0
   num_bytes: int = 0
@@ -55,20 +63,23 @@ class Shard(object):
     self.num_bytes += len(serialized_example)
 
   def close_writer(self) -> None:
-    """CLoses the writer."""
-    self.writer.flush()
+    """Closes the writer."""
+    if hasattr(self.writer, 'flush'):
+      self.writer.flush()
     self.writer.close()
 
 
 @dataclasses.dataclass
 class Split(object):
   """Information of a split that is being created."""
+
   info: splits_lib.SplitInfo
   current_shard: Optional[Shard] = None
   complete_shards: int = 0
   # The dataset name is taken from the builder class.
   ds_name: str = ''
   closed: bool = False
+  file_format: file_adapters.FileFormat = file_adapters.FileFormat.TFRECORD
 
   def add_example(self, serialized_example: str) -> None:
     """Adds an example to the shard.
@@ -84,9 +95,21 @@ class Split(object):
     if self.closed:
       raise ValueError(f'Split {self.info.name} is already closed.')
     if self.current_shard is None:
+      if self.info.filename_template is None:
+        raise ValueError(f'Split {self.info.name} has no filename template.')
       path = self.info.filename_template.sharded_filepath(
-          shard_index=self.complete_shards, num_shards=None)
-      self.current_shard = Shard(writer=tf.io.TFRecordWriter(os.fspath(path)))
+          shard_index=self.complete_shards, num_shards=None
+      )
+      if self.file_format == file_adapters.FileFormat.TFRECORD:
+        self.current_shard = Shard(writer=tf.io.TFRecordWriter(os.fspath(path)))
+      elif self.file_format == file_adapters.FileFormat.ARRAY_RECORD:
+        self.current_shard = Shard(
+            writer=array_record_module.ArrayRecordWriter(
+                os.fspath(path), 'group_size:1'
+            )
+        )
+      else:
+        raise ValueError('Unknown file format %s' % self.file_format)
     self.current_shard.add_example(serialized_example)
 
   def close_shard(self) -> None:
@@ -96,10 +119,11 @@ class Split(object):
     self.current_shard.close_writer()
     self.info = splits_lib.SplitInfo(
         name=self.info.name,
-        shard_lengths=self.info.shard_lengths +
-        [self.current_shard.num_examples],
+        shard_lengths=self.info.shard_lengths
+        + [self.current_shard.num_examples],
         num_bytes=self.info.num_bytes + self.current_shard.num_bytes,
-        filename_template=self.info.filename_template)
+        filename_template=self.info.filename_template,
+    )
     self.complete_shards += 1
     self.current_shard = None
 
@@ -114,12 +138,15 @@ def _split_dict(splits: Dict[str, Split]) -> splits_lib.SplitDict:
   return splits_lib.SplitDict([split.info for _, split in splits.items()])
 
 
-def _initialize_split(split_name: str,
-                      data_directory: Any,
-                      ds_name: str,
-                      filetype_suffix: str,
-                      shard_lengths: Optional[List[int]] = None,
-                      num_bytes: int = 0) -> Split:
+def _initialize_split(
+    split_name: str,
+    data_directory: Any,
+    ds_name: str,
+    filetype_suffix: str,
+    file_format: file_adapters.FileFormat,
+    shard_lengths: Optional[List[int]] = None,
+    num_bytes: int = 0,
+) -> Split:
   """Initializes a split.
 
   Args:
@@ -127,9 +154,11 @@ def _initialize_split(split_name: str,
     data_directory: directory where the split data will be located.
     ds_name: name of the dataset.
     filetype_suffix: file format.
+    file_format: An entry in file_adapters.FileFormat.
     shard_lengths: if the split already has shards, it contains the list of the
       shard lenghts. If None, it assumes that the split is empty.
     num_bytes: number of bytes that have been written already.
+
   Returns:
     A Split.
   """
@@ -147,12 +176,15 @@ def _initialize_split(split_name: str,
           name=split_name,
           shard_lengths=shard_lengths,
           num_bytes=num_bytes,
-          filename_template=filename_template),
+          filename_template=filename_template,
+      ),
       complete_shards=len(shard_lengths),
-      ds_name=ds_name)
+      ds_name=ds_name,
+      file_format=file_format,
+  )
 
 
-class SequentialWriter():
+class SequentialWriter:
   """Class to write a TFDS dataset sequentially.
 
   The SequentialWriter can be used to generate TFDS datasets by directly
@@ -186,7 +218,6 @@ class SequentialWriter():
     ...
 
   writer.close_splits()
-
   """
 
   # TODO(sabela): add support for beam.
@@ -194,10 +225,13 @@ class SequentialWriter():
   # TODO(sabela): support non-TFRecord writers. At the moment, the FileAdapters
   # API only suports writing a set of examples, so the support for other formats
   # would have to be manual.
-  def __init__(self,
-               ds_info: dataset_info.DatasetInfo,
-               max_examples_per_shard: int,
-               overwrite: bool = True):
+  def __init__(
+      self,
+      ds_info: dataset_info.DatasetInfo,
+      max_examples_per_shard: int,
+      overwrite: bool = True,
+      file_format: str = 'tfrecord',
+  ):
     """Creates a SequentialWriter.
 
     Args:
@@ -206,11 +240,13 @@ class SequentialWriter():
       overwrite: if True, it ignores and overwrites any existing data.
         Otherwise, it loads the existing dataset and appends the new data (new
         data will always be created as new shards).
+      file_format: An entry in file_adapters.FileFormat.
     """
 
     self._data_dir = ds_info.data_dir
     self._ds_name = ds_info.name
     self._ds_info = ds_info
+    self._file_format = file_adapters.FileFormat.from_value(file_format)
     if not overwrite:
       try:
         self._ds_info.read_from_directory(self._data_dir)
@@ -218,19 +254,24 @@ class SequentialWriter():
         if self._ds_info.name != self._ds_name:
           raise ValueError(
               f'Trying to append a dataset with name {ds_info.name}'
-              f' to an existing dataset with name {self._ds_info.name}')
+              f' to an existing dataset with name {self._ds_info.name}'
+          )
       except FileNotFoundError:
         self._ds_info.set_file_format(
-            file_format=file_adapters.FileFormat.TFRECORD,
+            file_format=self._file_format,
             # if it was set, we want this to fail to warn the user
-            override=False)
+            override=False,
+        )
     else:
       self._ds_info.set_file_format(
-          file_format=file_adapters.FileFormat.TFRECORD,
+          file_format=self._file_format,
           # if it was set, we want this to fail to warn the user
-          override=False)
+          override=False,
+      )
 
-    self._filetype_suffix = ds_info.file_format.file_suffix
+    self._filetype_suffix = (
+        ds_info.file_format or file_adapters.FileFormat.TFRECORD
+    ).file_suffix
     self._max_examples_per_shard = max_examples_per_shard
     self._splits = {}
     if not overwrite:
@@ -241,13 +282,16 @@ class SequentialWriter():
             ds_name=self._ds_name,
             filetype_suffix=self._filetype_suffix,
             shard_lengths=split.shard_lengths,
-            num_bytes=split.num_bytes)
+            num_bytes=split.num_bytes,
+            file_format=self._file_format,
+        )
     self._serializer = example_serializer.ExampleSerializer(
-        self._ds_info.features.get_serialized_info())
+        self._ds_info.features.get_serialized_info()
+    )
 
-  def initialize_splits(self,
-                        splits: List[str],
-                        fail_if_exists: bool = True) -> None:
+  def initialize_splits(
+      self, splits: List[str], fail_if_exists: bool = True
+  ) -> None:
     """Adds new splits to the dataset.
 
     Args:
@@ -267,7 +311,9 @@ class SequentialWriter():
           split_name=split,
           data_directory=self._data_dir,
           ds_name=self._ds_name,
-          filetype_suffix=self._filetype_suffix)
+          filetype_suffix=self._filetype_suffix,
+          file_format=self._file_format,
+      )
     self._write_splits_metadata()
 
   def add_examples(self, split_examples: Dict[str, List[Any]]) -> None:
@@ -275,8 +321,8 @@ class SequentialWriter():
 
     Args:
       split_examples: dictionary of `split_name`:list_of_examples that includes
-        the list of examples that has to be added to each of the splits. Not
-        all the existing splits have to be in the dictionary
+        the list of examples that has to be added to each of the splits. Not all
+        the existing splits have to be in the dictionary
 
     Raises:
       KeyError: if any of the splits doesn't exist.
@@ -287,8 +333,9 @@ class SequentialWriter():
       if not split:
         raise KeyError(f'Split {split} was not initialized.')
       for example in examples:
-        serialized_example = _serialize_example(example, self._ds_info.features,
-                                                self._serializer)
+        serialized_example = _serialize_example(
+            example, self._ds_info.features, self._serializer
+        )
         split.add_example(serialized_example)
         if split.current_shard.num_examples >= self._max_examples_per_shard:
           split.close_shard()

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,17 +21,19 @@ import os
 from absl import app
 from absl import flags
 from absl import logging
-import tensorflow as tf
-
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 flags.DEFINE_boolean('dry_run', True, 'If True, just print, do nothing.')
 flags.DEFINE_boolean('overwrite', False, 'If True, overwrites the data.')
 flags.DEFINE_string(
-    'from_directory', tfds.core.constants.DATA_DIR,
-    'Where to get the info files from (datasets/ dir on placer).')
-flags.DEFINE_string('to_directory', None,
-                    'Path where dataset info files will be copied.')
+    'from_directory',
+    tfds.core.constants.DATA_DIR,
+    'Where to get the info files from (datasets/ dir on placer).',
+)
+flags.DEFINE_string(
+    'to_directory', None, 'Path where dataset info files will be copied.'
+)
 
 FLAGS = flags.FLAGS
 

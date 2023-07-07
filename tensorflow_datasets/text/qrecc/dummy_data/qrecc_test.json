@@ -1,0 +1,17 @@
+[
+    {
+        "Context": [
+            "What is a physician's assistant?",
+            "physician assistants are medical providers who are licensed to diagnose and treat illness and disease and to prescribe medication for patients",
+            "What are the educational requirements required to become a physician's assistant?",
+            "Complete your bachelor's degree (a science or healthcare related major is usually best); Gain experience either working or volunteering in a healthcare setting; Apply to ARC-PA accredited physician assistant programs; Complete a 2-3 year, master's level PA program;"
+        ],
+        "Question": "What does it cost?",
+        "Rewrite": "What does it cost to become a physician's assistant?",
+        "Answer": "Average Cost Across all PA Schools for the 2017 Application Cycle is as Follows: Average cost of resident tuition for a 27-month physician assistant program is: $71,369. Average cost of non-resident tuition for a 27-month physician assistant program is: $89,975.",
+        "Answer_URL": "https://www.thepalife.com/how-much-does-it-cost-to-go-to-physician-assistant-pa-school/",
+        "Conversation_no": 1,
+        "Turn_no": 3,
+        "Conversation_source": "trec"
+    }
+]

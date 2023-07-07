@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ class MyConllDataset(tfds.dataset_builders.ConllDatasetBuilder):
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
   }
-  BUILDER_CONFIGS = [conll_lib.CONLL_2002_CONFIG]
+  BUILDER_CONFIGS = [conll_lib.CONLL_2003_CONFIG]
 
   def _info(self) -> tfds.core.DatasetInfo:
     ...
@@ -35,7 +35,6 @@ class MyConllDataset(tfds.dataset_builders.ConllDatasetBuilder):
 from typing import List, Optional, OrderedDict, Sequence, Union
 
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import split_builder as split_builder_lib
@@ -54,9 +53,13 @@ class ConllBuilderConfig(dataset_builder.BuilderConfig):
       type, in the same order as they appear as columns in the input lines.
   """
 
-  def __init__(self, *, separator: str,
-               ordered_features: OrderedDict[str, feature_lib.FeatureConnector],
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      separator: str,
+      ordered_features: OrderedDict[str, feature_lib.FeatureConnector],
+      **kwargs,
+  ):
     """Initializes the builder config for Conll datasets.
 
     Args:
@@ -76,22 +79,24 @@ class ConllBuilderConfig(dataset_builder.BuilderConfig):
 
 
 class ConllDatasetBuilder(
-    dataset_builder.GeneratorBasedBuilder, skip_registration=True):
+    dataset_builder.GeneratorBasedBuilder, skip_registration=True
+):
   """Base class for CoNLL-like formatted datasets.
 
   It provides functionalities to ease the processing of CoNLL-like datasets.
   Users can overwrite `_generate_examples` to customize the pipeline.
   """
+
   BUILDER_CONFIGS: Sequence[ConllBuilderConfig] = []
 
   @property
   def builder_config(self) -> ConllBuilderConfig:
     """`tfds.core.BuilderConfig` for this builder."""
-    return self._builder_config
+    return self._builder_config  # pytype: disable=bad-return-type  # always-use-return-annotations
 
   def create_dataset_info(
       self,
-      description: str,
+      description: Optional[str] = None,
       supervised_keys: Optional[dataset_info.SupervisedKeysType] = None,
       homepage: Optional[str] = None,
       citation: Optional[str] = None,
@@ -99,20 +104,20 @@ class ConllDatasetBuilder(
     """Initializes `dataset_info.DatasetInfo` for Conll datasets.
 
     Args:
-      description: A short, markdown-formatted description of the dataset.
+      description: [DEPRECATED] A short, markdown-formatted description of the
+        dataset. Prefer placing description in `README.md` file.
       supervised_keys:  Specifies the input structure for supervised learning,
         if applicable for the dataset, used with "as_supervised". Typically this
         is a `(input_key, target_key)` tuple.
       homepage: The homepage of the dataset, if applicable for this dataset.
-      citation: The citation to use for this dataset, if applicable for this
-        dataset.
+      citation: [DEPRECATED] The citation to use for this dataset, if applicable
+        for this dataset. Prefer placing citations in `CITATIONS.bib` file.
 
     Returns:
       `dataset_info.DatasetInfo` for Conll datasets, populated with the values
       from the provided arguments.
     """
-    return dataset_info.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         description=description,
         features=self.builder_config.features_dict,
         supervised_keys=supervised_keys,
@@ -139,7 +144,7 @@ class ConllDatasetBuilder(
 
     example_id = 0
     for filepath in path:
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         for line in f:
           if line.startswith("-DOCSTART-") or line == "\n" or not line:
             if input_sequences["tokens"]:
@@ -150,11 +155,13 @@ class ConllDatasetBuilder(
             splits = line.split(self.builder_config.separator)
             if len(splits) != len(self.builder_config.ordered_features):
               raise ValueError(
-                  (f"Mismatch in the number of features found in line: {line}\n"
-                   f"Should be {len(self.builder_config.ordered_features)}, "
-                   f"but found {len(splits)}"))
+                  f"Mismatch in the number of features found in line: {line}\n"
+                  f"Should be {len(self.builder_config.ordered_features)}, "
+                  f"but found {len(splits)}"
+              )
             for index, feature in enumerate(
-                self.builder_config.ordered_features.keys()):
+                self.builder_config.ordered_features.keys()
+            ):
               input_sequences[feature].append(splits[index].rstrip())
 
       # Last example from file.

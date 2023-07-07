@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import dataclasses
+import functools
 import os
 import re
 import textwrap
@@ -31,12 +32,14 @@ _NAME_CLASS = r'[a-zA-Z][\w]*'
 _NAME_CLASS_REG = re.compile(r'^' + _NAME_CLASS + r'$')
 
 # Regex matching 'dataset/config:1.*.*/arg=123'
-_NAME_REG = re.compile(r'^'
-                       r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
-                       r'(/(?P<config>[\w\-\.]+))?'
-                       r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
-                       r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
-                       r'$')
+_NAME_REG = re.compile(
+    r'^'
+    r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
+    r'(/(?P<config>[\w\+\-\.]+))?'
+    r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
+    r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
+    r'$'
+)
 
 _DEFAULT_NUM_DIGITS_FOR_SHARDS = 5
 
@@ -66,6 +69,7 @@ Value = Union[str, int, float, bool]
 @dataclasses.dataclass(eq=True, order=True, frozen=True)
 class DatasetName:
   """Dataset namespace+name."""
+
   namespace: Optional[str]
   name: str
 
@@ -81,7 +85,8 @@ class DatasetName:
       raise ValueError(
           "Name should be defined by `DatasetName('ns:name')` or "
           "`DatasetName(namespace='ns', name='name'). Mixing args and kwargs "
-          'is invalid.')
+          'is invalid.'
+      )
     if namespace_name:
       if ':' in namespace_name:
         namespace, name = namespace_name.split(':')
@@ -140,7 +145,8 @@ def parse_builder_name_kwargs(
 
 
 def _dataset_name_and_kwargs_from_name_str(
-    name_str: str,) -> Tuple[str, Dict[str, Value]]:
+    name_str: str,
+) -> Tuple[str, Dict[str, Value]]:
   """Extract kwargs from name str."""
   err_msg = textwrap.dedent(f"""\
       Parsing builder name string {name_str} failed.
@@ -183,33 +189,36 @@ def _dataset_name_and_kwargs_from_name_str(
     py_utils.reraise(e, prefix=err_msg)  # pytype: disable=bad-return-type
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(order=True)
 class DatasetReference:
   """Reference to a dataset.
 
   Attributes:
     dataset_name: name of the dataset.
+    namespace: optional namespace in which this dataset belongs.
+    config: optional config to be used in the dataset.
     version: version of the dataset to be used. If `None`, the latest version
       will be loaded. An error is raised if the specified version cannot be
       provided.
+    data_dir: Optional data dir where this dataset is located. If None, defaults
+      to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
     split_mapping: mapping between split names. If the `DatasetCollection` wants
       to use different split names than the source datasets, then this mapping
       can be used. For example, if the collection uses the split `valid`, but
       this dataset uses the split `validation`, then the `split_mapping` should
       be `{'validation': 'valid'}`.
-    config: optional config to be used in the dataset.
-    data_dir: Optional data dir where this dataset is located. If None, defaults
-      to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
   """
+
   dataset_name: str
-  version: Union[None, str, version_lib.Version] = None
-  split_mapping: Optional[Mapping[str, str]] = None
-  config: Optional[str] = None
-  data_dir: Union[None, str, os.PathLike] = None  # pylint: disable=g-bare-generic
+  namespace: None | str = None
+  config: None | str = None
+  version: None | str | version_lib.Version = None
+  data_dir: None | str | os.PathLike = None  # pylint: disable=g-bare-generic
+  split_mapping: None | Mapping[str, str] = None
 
   def __post_init__(self):
-    if isinstance(self.version, str):
-      self.version = version_lib.Version(self.version)
+    if isinstance(self.version, version_lib.Version):
+      self.version = str(self.version)
 
   def tfds_name(self, include_version: bool = True) -> str:
     """Returns the TFDS name of the referenced dataset.
@@ -223,6 +232,8 @@ class DatasetReference:
       The TFDS name of the `DatasetReference`.
     """
     dataset_name = self.dataset_name
+    if self.namespace:
+      dataset_name = f'{self.namespace}:{dataset_name}'
     if self.config:
       dataset_name += f'/{self.config}'
     if self.version and include_version:
@@ -234,13 +245,46 @@ class DatasetReference:
       return self.split_mapping.get(split, split)
     return split
 
+  def dataset_dir(
+      self,
+      data_dir: Optional[epath.PathLike] = None,
+  ) -> epath.Path:
+    """Returns the path where the data of this dataset lives.
+
+    Example: `/my_data_dir/datasets/c4/en/3.0.0`.
+
+    Arguments:
+      data_dir: optional path where this dataset is stored. If not specified,
+        then it uses the `data_dir` specified in this dataset reference. If that
+        is not specified either, then a `ValueError` is raised.
+
+    Returns:
+      the path where the data of this dataset lives.
+    """
+    data_dir = data_dir or self.data_dir
+    if data_dir is None:
+      raise ValueError('No data dir was specified!')
+    dataset_dir: epath.Path = epath.Path(data_dir) / self.dataset_name
+    if self.config:
+      dataset_dir = dataset_dir / self.config
+    if self.version is None:
+      raise ValueError(
+          "Version wasn't specified and is needed to get the dataset dir!"
+      )
+    dataset_dir = dataset_dir / str(self.version)
+    return dataset_dir
+
+  def replace(self, **kwargs: Any) -> DatasetReference:
+    """Returns a copy with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
+
   @classmethod
   def from_tfds_name(
       cls,
       tfds_name: str,
       split_mapping: Optional[Mapping[str, str]] = None,
       data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
-  ) -> 'DatasetReference':
+  ) -> DatasetReference:
     """Returns the `DatasetReference` for the given TFDS dataset."""
     parsed_name, builder_kwargs = parse_builder_name_kwargs(tfds_name)
     version, config = None, None
@@ -248,14 +292,17 @@ class DatasetReference:
     config = builder_kwargs.get('config')
     return cls(
         dataset_name=parsed_name.name,
+        namespace=parsed_name.namespace,
         version=version,
         config=config,
         split_mapping=split_mapping,
-        data_dir=data_dir)
+        data_dir=data_dir,
+    )
 
 
 def references_for(
-    name_to_tfds_name: Mapping[str, str]) -> Mapping[str, DatasetReference]:
+    name_to_tfds_name: Mapping[str, str]
+) -> Mapping[str, DatasetReference]:
   """Constructs of dataset references.
 
   Note that you can specify the config and the version in the TFDS name.
@@ -343,11 +390,13 @@ def _replace_shard_suffix(filepath: str, replacement: str) -> str:
   (new_string, num_subs) = re.subn(
       pattern=r'^(.+?)-?\d{5,}(-of-\d{5,})?$',
       repl=rf'\g<1>{replacement}',
-      string=filepath)
+      string=filepath,
+  )
   if num_subs != 1:
     raise RuntimeError(
         f'Should do 1 shard suffix substitution, but did {num_subs}! '
-        f'Filepath was {filepath}')
+        f'Filepath was {filepath}'
+    )
   return new_string
 
 
@@ -367,8 +416,10 @@ def _filename_template_to_regex(filename_template: str) -> str:
   for var, regex in _VAR_REGEX_MAPPING.items():
     result = result.replace(f'{{{var}}}', regex)
   if re.match(re.compile(r'\{\w+\}'), result):
-    raise ValueError('Regex still contains variables '
-                     f'that have not been substituted: {result}')
+    raise ValueError(
+        'Regex still contains variables '
+        f'that have not been substituted: {result}'
+    )
   return result
 
 
@@ -385,6 +436,7 @@ class ShardedFileTemplate:
     filetype_suffix: the filetype suffix to denote the type of file. For
       example, `tfrecord`.
   """
+
   data_dir: epath.Path
   template: str = DEFAULT_FILENAME_TEMPLATE
   dataset_name: Optional[str] = None
@@ -400,9 +452,9 @@ class ShardedFileTemplate:
     if not self.template:
       self.template = DEFAULT_FILENAME_TEMPLATE
 
-  @py_utils.memoized_property
+  @functools.cached_property
   def regex(self) -> 're.Pattern[str]':
-    """Returns the regular expresssion for this template.
+    """Returns the regular expression for this template.
 
     Can be used to test whether a filename matches to this template.
     """
@@ -434,7 +486,8 @@ class ShardedFileTemplate:
         filetype_suffix=groupdict.get('filetype_suffix', self.filetype_suffix),
         shard_index=int(shard_index) if shard_index is not None else None,
         num_shards=int(num_shards) if num_shards is not None else None,
-        filename_template=self)
+        filename_template=self,
+    )
 
   def is_valid(self, filename: str) -> bool:
     """Returns whether the given filename follows this template."""
@@ -444,16 +497,23 @@ class ShardedFileTemplate:
 
     # Even when `dataset_name` is set, it may not be in the template,
     # so also test that `filename_info.dataset_name` is not None`.`
-    if (self.dataset_name is not None and
-        filename_info.dataset_name is not None and
-        filename_info.dataset_name != self.dataset_name):
+    if (
+        self.dataset_name is not None
+        and filename_info.dataset_name is not None
+        and filename_info.dataset_name != self.dataset_name
+    ):
       return False
-    if (self.split is not None and filename_info.split is not None and
-        filename_info.split != self.split):
+    if (
+        self.split is not None
+        and filename_info.split is not None
+        and filename_info.split != self.split
+    ):
       return False
-    if (self.filetype_suffix is not None and
-        filename_info.filetype_suffix is not None and
-        filename_info.filetype_suffix != self.filetype_suffix):
+    if (
+        self.filetype_suffix is not None
+        and filename_info.filetype_suffix is not None
+        and filename_info.filetype_suffix != self.filetype_suffix
+    ):
       return False
     return True
 
@@ -481,8 +541,9 @@ class ShardedFileTemplate:
     mappings[_VAR_SHARD_INDEX] = shard_number_template.format(n=shard_index)
     if num_shards:
       mappings[_VAR_NUM_SHARDS] = shard_number_template.format(n=num_shards)
-      mappings[_VAR_SHARD_X_OF_Y] = (f'{mappings[_VAR_SHARD_INDEX]}'
-                                     f'-of-{mappings[_VAR_NUM_SHARDS]}')
+      mappings[_VAR_SHARD_X_OF_Y] = (
+          f'{mappings[_VAR_SHARD_INDEX]}-of-{mappings[_VAR_NUM_SHARDS]}'
+      )
     return self.template.format(**mappings)
 
   def sharded_filepath(
@@ -493,7 +554,8 @@ class ShardedFileTemplate:
   ) -> epath.Path:
     """Returns the filename (including full path if `data_dir` is set) for the given shard."""
     return self.data_dir / self.relative_filepath(
-        shard_index=shard_index, num_shards=num_shards)
+        shard_index=shard_index, num_shards=num_shards
+    )
 
   def sharded_filepaths(
       self,
@@ -504,7 +566,9 @@ class ShardedFileTemplate:
         for i in range(num_shards)
     ]
 
-  def filepath_prefix(self,) -> str:
+  def filepath_prefix(
+      self,
+  ) -> str:
     a_filepath = self.sharded_filepath(shard_index=0, num_shards=1)
     return _replace_shard_suffix(os.fspath(a_filepath), '')
 
@@ -565,7 +629,8 @@ def filepattern_for_dataset_split(
       data_dir=epath.Path(data_dir),
       dataset_name=dataset_name,
       split=split,
-      filetype_suffix=filetype_suffix)
+      filetype_suffix=filetype_suffix,
+  )
   return os.fspath(template.sharded_filepaths_pattern(num_shards=num_shards))
 
 
@@ -582,7 +647,8 @@ def filenames_for_dataset_split(
       dataset_name=dataset_name,
       split=split,
       filetype_suffix=filetype_suffix,
-      data_dir=epath.Path(data_dir))
+      data_dir=epath.Path(data_dir),
+  )
   return [
       os.fspath(fp) for fp in template.sharded_filenames(num_shards=num_shards)
   ]
@@ -601,15 +667,16 @@ def filepaths_for_dataset_split(
       dataset_name=dataset_name,
       split=split,
       filetype_suffix=filetype_suffix,
-      data_dir=epath.Path(data_dir))
+      data_dir=epath.Path(data_dir),
+  )
   return [
       os.fspath(fp) for fp in template.sharded_filepaths(num_shards=num_shards)
   ]
 
 
 def _get_filename_template(
-    filename: str,
-    filename_template: Optional[ShardedFileTemplate]) -> ShardedFileTemplate:
+    filename: str, filename_template: Optional[ShardedFileTemplate]
+) -> ShardedFileTemplate:
   if filename_template is None:
     return ShardedFileTemplate(data_dir=epath.Path(os.path.dirname(filename)))
   return filename_template
@@ -627,6 +694,7 @@ class FilenameInfo:
     num_shards: if known, the total number of shards.
     filename_template: the template to which this file conforms.
   """
+
   dataset_name: Optional[str] = None
   split: Optional[str] = None
   filetype_suffix: Optional[str] = None
@@ -635,13 +703,18 @@ class FilenameInfo:
   filename_template: Optional[ShardedFileTemplate] = None
 
   def full_filename_template(self):
-    template = (
-        self.filename_template or ShardedFileTemplate(data_dir=epath.Path('')))
+    template = self.filename_template or ShardedFileTemplate(
+        data_dir=epath.Path('')
+    )
     return template.replace(
         dataset_name=self.dataset_name,
         split=self.split,
         filetype_suffix=self.filetype_suffix,
     )
+
+  def replace(self, **kwargs: Any) -> 'FilenameInfo':
+    """Returns a copy with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
 
   @classmethod
   def from_str(
@@ -655,8 +728,10 @@ class FilenameInfo:
     filename = os.path.basename(filename)
     filename_info = filename_template.parse_filename_info(filename)
     if filename_info is None:
-      raise ValueError(f'Could not parse filename {filename} '
-                       f'with template {filename_template}')
+      raise ValueError(
+          f'Could not parse filename {filename} '
+          f'with template {filename_template}'
+      )
     return filename_info
 
   @staticmethod
@@ -670,4 +745,5 @@ class FilenameInfo:
 
   def __str__(self) -> str:
     return self.full_filename_template().relative_filepath(
-        shard_index=self.shard_index, num_shards=self.num_shards)
+        shard_index=self.shard_index, num_shards=self.num_shards
+    )

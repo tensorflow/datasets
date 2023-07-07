@@ -2,10 +2,26 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "sentence": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "Supposed transcription of the audio"
+            "voice": {
+                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
+                "audio": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "encoding": "NONE"
+                }
+            },
+            "upvotes": {
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                },
+                "description": "Number of people who said audio matches the text"
             },
             "age": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
@@ -19,36 +35,10 @@
                 },
                 "description": "Gender of the speaker"
             },
-            "segment": {
-                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
-                "text": {},
-                "description": "If sentence belongs to a custom dataset segment, it will be listed here"
-            },
-            "upvotes": {
-                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int32",
-                    "encoding": "none"
-                },
-                "description": "Number of people who said audio matches the text"
-            },
             "client_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
                 "description": "Hashed UUID of a given user"
-            },
-            "voice": {
-                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
-                "audio": {
-                    "shape": {
-                        "dimensions": [
-                            "-1"
-                        ]
-                    },
-                    "dtype": "int64",
-                    "encoding": "NONE"
-                }
             },
             "downvotes": {
                 "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
@@ -59,10 +49,20 @@
                 },
                 "description": "Number of people who said audio does not match text"
             },
+            "segment": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "If sentence belongs to a custom dataset segment, it will be listed here"
+            },
             "accent": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {},
                 "description": "Accent of the speaker, see https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
+            },
+            "sentence": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "Supposed transcription of the audio"
             }
         }
     }

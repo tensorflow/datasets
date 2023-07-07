@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="bucc" />
-  <meta itemprop="description" content="Identifying parallel sentences in comparable corpora. Given two&#10;sentence-split monolingual corpora, participant systems are expected&#10;to identify pairs of sentences that are translations of each other.&#10;&#10;The BUCC mining task is a shared task on parallel sentence extraction from two&#10;monolingual corpora with a subset of them assumed to be parallel, and that has&#10;been available since 2016. For each language pair, the shared task provides a&#10;monolingual corpus for each language and a gold mapping list containing true&#10;translation pairs. These pairs are the ground truth. The task is to construct a&#10;list of translation pairs from the monolingual corpora. The constructed list is&#10;compared to the ground truth, and evaluated in terms of the F1 measure.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;bucc&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="Identifying parallel sentences in comparable corpora. Given two sentence-split&#10;monolingual corpora, participant systems are expected to identify pairs of&#10;sentences that are translations of each other.&#10;&#10;The BUCC mining task is a shared task on parallel sentence extraction from two&#10;monolingual corpora with a subset of them assumed to be parallel, and that has&#10;been available since 2016. For each language pair, the shared task provides a&#10;monolingual corpus for each language and a gold mapping list containing true&#10;translation pairs. These pairs are the ground truth. The task is to construct a&#10;list of translation pairs from the monolingual corpora. The constructed list is&#10;compared to the ground truth, and evaluated in terms of the F1 measure.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;bucc&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/bucc" />
   <meta itemprop="sameAs" content="https://comparable.limsi.fr/bucc2018/" />
   <meta itemprop="citation" content="@inproceedings{zweigenbaum2018overview,&#10;  title={Overview of the third BUCC shared task: Spotting parallel sentences  in comparable corpora},&#10;  author={Zweigenbaum, Pierre and Sharoff, Serge and Rapp, Reinhard},&#10;  booktitle={Proceedings of 11th Workshop on Building and Using Comparable Corpora},&#10;  pages={39--42},&#10;  year={2018}&#10;}" />
@@ -11,10 +11,6 @@
 
 # `bucc`
 
-
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -34,7 +30,7 @@ compared to the ground truth, and evaluated in terms of the F1 measure.
     [https://comparable.limsi.fr/bucc2018/](https://comparable.limsi.fr/bucc2018/)
 
 *   **Source code**:
-    [`tfds.translate.bucc.Bucc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/bucc/bucc.py)
+    [`tfds.datasets.bucc.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/bucc/bucc_dataset_builder.py)
 
 *   **Versions**:
 
@@ -48,22 +44,22 @@ compared to the ground truth, and evaluated in terms of the F1 measure.
 
 ```python
 FeaturesDict({
-    'source_id': Text(shape=(), dtype=tf.string),
-    'source_sentence': Text(shape=(), dtype=tf.string),
-    'target_id': Text(shape=(), dtype=tf.string),
-    'target_sentence': Text(shape=(), dtype=tf.string),
+    'source_id': Text(shape=(), dtype=string),
+    'source_sentence': Text(shape=(), dtype=string),
+    'target_id': Text(shape=(), dtype=string),
+    'target_sentence': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature         | Class        | Shape | Dtype     | Description
-:-------------- | :----------- | :---- | :-------- | :----------
-                | FeaturesDict |       |           |
-source_id       | Text         |       | tf.string |
-source_sentence | Text         |       | tf.string |
-target_id       | Text         |       | tf.string |
-target_sentence | Text         |       | tf.string |
+Feature         | Class        | Shape | Dtype  | Description
+:-------------- | :----------- | :---- | :----- | :----------
+                | FeaturesDict |       |        |
+source_id       | Text         |       | string |
+source_sentence | Text         |       | string |
+target_id       | Text         |       | string |
+target_sentence | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

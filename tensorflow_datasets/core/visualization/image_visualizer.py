@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,15 +15,16 @@
 
 """Image visualizer."""
 
+from __future__ import annotations
+
 from typing import Optional
 
 from absl import logging
-import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.visualization import visualizer
 
 
@@ -68,7 +69,8 @@ def _add_image(ax, image):
   if len(image.shape) != 3:
     raise ValueError(
         'Image dimension should be 3. tfds.show_examples does not support '
-        'batched examples or video.')
+        'batched examples or video.'
+    )
   _, _, c = image.shape
   if c == 1:
     image = image.reshape(image.shape[:2])
@@ -93,7 +95,7 @@ class ImageGridVisualizer(visualizer.Visualizer):
       ds_info: dataset_info.DatasetInfo,
       rows: int = 3,
       cols: int = 3,
-      plot_scale: float = 3.,
+      plot_scale: float = 3.0,
       image_key: Optional[str] = None,
       label_key: Optional[str] = None,
   ):
@@ -124,15 +126,19 @@ class ImageGridVisualizer(visualizer.Visualizer):
         raise ValueError(
             'Multiple image features detected in the dataset. '
             'Use `image_key` argument to override. Images detected: {}'.format(
-                image_keys))
+                image_keys
+            )
+        )
       image_key = image_keys[0]
 
     # Optionally extract the label key
-    label_keys = visualizer.extract_keys(ds_info.features,
-                                         features_lib.ClassLabel)
+    label_keys = visualizer.extract_keys(
+        ds_info.features, features_lib.ClassLabel
+    )
     if label_key is not None:
-      assert label_key in label_keys, (
-          f'Label "{label_key}" not found: {label_keys}.')
+      assert (
+          label_key in label_keys
+      ), f'Label "{label_key}" not found: {label_keys}.'
     else:
       label_key = label_keys[0] if len(label_keys) == 1 else None
       if not label_key:
@@ -147,7 +153,9 @@ class ImageGridVisualizer(visualizer.Visualizer):
             '{} requires examples as `dict`, with the same '
             'structure as `ds_info.features`. It is currently not compatible '
             'with `as_supervised=True`. Received: {}'.format(
-                type(self).__name__, type(ex)))
+                type(self).__name__, type(ex)
+            )
+        )
 
       _add_image(ax, ex[image_key])
       if label_key:

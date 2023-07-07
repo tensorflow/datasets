@@ -12,10 +12,6 @@
 # `universal_dependencies`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 Universal Dependencies (UD) is a framework for consistent annotation of grammar
@@ -29,7 +25,7 @@ and then browsing the annotation guidelines.
     [https://universaldependencies.org/](https://universaldependencies.org/)
 
 *   **Source code**:
-    [`tfds.text.universal_dependencies.UniversalDependencies`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/universal_dependencies/universal_dependencies.py)
+    [`tfds.datasets.universal_dependencies.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/universal_dependencies/universal_dependencies_dataset_builder.py)
 
 *   **Versions**:
 
@@ -41,36 +37,36 @@ and then browsing the annotation guidelines.
 
 ```python
 FeaturesDict({
-    'deprel': Sequence(Text(shape=(), dtype=tf.string)),
-    'deps': Sequence(Text(shape=(), dtype=tf.string)),
-    'feats': Sequence(Text(shape=(), dtype=tf.string)),
-    'head': Sequence(Text(shape=(), dtype=tf.string)),
-    'idx': Text(shape=(), dtype=tf.string),
-    'lemmas': Sequence(Text(shape=(), dtype=tf.string)),
-    'misc': Sequence(Text(shape=(), dtype=tf.string)),
-    'text': Text(shape=(), dtype=tf.string),
-    'tokens': Sequence(Text(shape=(), dtype=tf.string)),
-    'upos': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=18)),
-    'xpos': Sequence(Text(shape=(), dtype=tf.string)),
+    'deprel': Sequence(Text(shape=(), dtype=string)),
+    'deps': Sequence(Text(shape=(), dtype=string)),
+    'feats': Sequence(Text(shape=(), dtype=string)),
+    'head': Sequence(Text(shape=(), dtype=string)),
+    'idx': Text(shape=(), dtype=string),
+    'lemmas': Sequence(Text(shape=(), dtype=string)),
+    'misc': Sequence(Text(shape=(), dtype=string)),
+    'text': Text(shape=(), dtype=string),
+    'tokens': Sequence(Text(shape=(), dtype=string)),
+    'upos': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=18)),
+    'xpos': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class                | Shape   | Dtype     | Description
-:------ | :------------------- | :------ | :-------- | :----------
-        | FeaturesDict         |         |           |
-deprel  | Sequence(Text)       | (None,) | tf.string |
-deps    | Sequence(Text)       | (None,) | tf.string |
-feats   | Sequence(Text)       | (None,) | tf.string |
-head    | Sequence(Text)       | (None,) | tf.string |
-idx     | Text                 |         | tf.string |
-lemmas  | Sequence(Text)       | (None,) | tf.string |
-misc    | Sequence(Text)       | (None,) | tf.string |
-text    | Text                 |         | tf.string |
-tokens  | Sequence(Text)       | (None,) | tf.string |
-upos    | Sequence(ClassLabel) | (None,) | tf.int64  |
-xpos    | Sequence(Text)       | (None,) | tf.string |
+Feature | Class                | Shape   | Dtype  | Description
+:------ | :------------------- | :------ | :----- | :----------
+        | FeaturesDict         |         |        |
+deprel  | Sequence(Text)       | (None,) | string |
+deps    | Sequence(Text)       | (None,) | string |
+feats   | Sequence(Text)       | (None,) | string |
+head    | Sequence(Text)       | (None,) | string |
+idx     | Text                 |         | string |
+lemmas  | Sequence(Text)       | (None,) | string |
+misc    | Sequence(Text)       | (None,) | string |
+text    | Text                 |         | string |
+tokens  | Sequence(Text)       | (None,) | string |
+upos    | Sequence(ClassLabel) | (None,) | int64  |
+xpos    | Sequence(Text)       | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,13 +32,16 @@ class Xtreme(dataset_collection_builder.DatasetCollection):
         release_notes={
             "1.0.0": "Initial release",
         },
+        homepage="https://sites.research.google/xtreme",
     )
 
   @property
-  def datasets(self,) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
-    return collections.OrderedDict({
-        "1.0.0":
-            naming.references_for({
+  def datasets(
+      self,
+  ) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
+    return collections.OrderedDict(
+        {
+            "1.0.0": naming.references_for({
                 "xnli": "xtreme_xnli:1.1.0",
                 "pawsx": "xtreme_pawsx:1.0.0",
                 "pos": "xtreme_pos:1.0.0",
@@ -49,4 +52,5 @@ class Xtreme(dataset_collection_builder.DatasetCollection):
                 "bucc": "bucc:1.0.0",
                 "tatoeba": "tatoeba:1.0.0",
             })
-    })
+        }
+    )

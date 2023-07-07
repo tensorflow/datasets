@@ -2,15 +2,29 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "gender": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "2"
-                }
-            },
             "text": {
                 "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
                 "text": {}
+            },
+            "accent": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "13"
+                }
+            },
+            "speaker": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "110"
+                }
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
             },
             "speech": {
                 "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
@@ -25,24 +39,10 @@
                     "encoding": "NONE"
                 }
             },
-            "id": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
-                }
-            },
-            "speaker": {
+            "gender": {
                 "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "classLabel": {
-                    "numClasses": "110"
-                }
-            },
-            "accent": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "13"
+                    "numClasses": "2"
                 }
             }
         }

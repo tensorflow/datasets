@@ -2,7 +2,7 @@
   "citation": "@article{zhou2017places,\n  title={Places: A 10 million Image Database for Scene Recognition},\n  author={Zhou, Bolei and Lapedriza, Agata and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},\n  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},\n  year={2017},\n  publisher={IEEE}\n}",
   "description": "The Places dataset is designed following principles of human visual cognition.\nOur goal is to build a core of visual knowledge that can be used to train\nartificial systems for high-level visual understanding tasks, such as scene\ncontext, object recognition, action and event prediction, and theory-of-mind\ninference.\n\nThe semantic categories of Places are defined by their function: the labels\nrepresent the entry-level of an environment. To illustrate, the dataset has\ndifferent categories of bedrooms, or streets, etc, as one does not act the same\nway, and does not make the same predictions of what can happen next, in a home\nbedroom, an hotel bedroom or a nursery. In total, Places contains more than 10\nmillion images comprising 400+ unique scene categories. The dataset features\n5000 to 30,000 training images per class, consistent with real-world frequencies\nof occurrence. Using convolutional neural networks (CNN), Places dataset allows\nlearning of deep scene features for various scene recognition tasks, with the\ngoal to establish new state-of-the-art performances on scene-centric benchmarks.\n\nHere we provide the Places Database and the trained CNNs for academic research\nand education purposes.",
   "downloadSize": "154149795840",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://places2.csail.mit.edu/"

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ import textwrap
 from typing import Union
 
 from absl import logging
-import tensorflow as tf
-
+from etils import epath
+import numpy as np
 from tensorflow_datasets.core.deprecated import text as text_lib
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
@@ -55,7 +55,8 @@ class Text(tensor_feature.Tensor):
       raise ValueError("If encoder is provided, encoder_config must be None.")
     if encoder:
       encoder_config = text_lib.TextEncoderConfig(
-          encoder_cls=type(encoder), vocab_size=encoder.vocab_size)
+          encoder_cls=type(encoder), vocab_size=encoder.vocab_size
+      )
     elif encoder_config:
       encoder = encoder_config.encoder
 
@@ -72,7 +73,7 @@ class Text(tensor_feature.Tensor):
       )
     super(Text, self).__init__(
         shape=(None,) if has_encoder else (),
-        dtype=tf.int64 if has_encoder else tf.string,
+        dtype=np.int64 if has_encoder else np.object_,
         doc=doc,
     )
 
@@ -87,8 +88,10 @@ class Text(tensor_feature.Tensor):
     self._encoder = new_encoder
     encoder_cls = self._encoder_cls or type(None)
     if not isinstance(new_encoder, encoder_cls):
-      raise ValueError("Changing type of encoder. Got %s but must be %s" %
-                       (type(new_encoder).__name__, self._encoder_cls.__name__))
+      raise ValueError(
+          "Changing type of encoder. Got %s but must be %s"
+          % (type(new_encoder).__name__, self._encoder_cls.__name__)
+      )
 
   def maybe_set_encoder(self, new_encoder):
     """Set encoder, but no-op if encoder is already set."""
@@ -104,14 +107,16 @@ class Text(tensor_feature.Tensor):
     """Conversion string => encoded list[int]."""
     if not self._encoder:
       raise ValueError(
-          "Text.str2ints is not available because encoder hasn't been defined.")
+          "Text.str2ints is not available because encoder hasn't been defined."
+      )
     return self._encoder.encode(str_value)
 
   def ints2str(self, int_values):
     """Conversion list[int] => decoded string."""
     if not self._encoder:
       raise ValueError(
-          "Text.ints2str is not available because encoder hasn't been defined.")
+          "Text.ints2str is not available because encoder hasn't been defined."
+      )
     return self._encoder.decode(int_values)
 
   def encode_example(self, example_data):
@@ -119,28 +124,29 @@ class Text(tensor_feature.Tensor):
       example_data = self.encoder.encode(example_data)
     return super(Text, self).encode_example(example_data)
 
-  def save_metadata(self, data_dir, feature_name):
-    fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
+  def decode_example_np(self, example_data):
+    return example_data
+
+  def save_metadata(self, data_dir, feature_name: str) -> None:
     if not self.encoder:
       return
+    fname_prefix = _file_name_prefix_for_metadata(feature_name, data_dir)
     self.encoder.save_to_file(fname_prefix)
 
-  def load_metadata(self, data_dir, feature_name):
-    fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
-    encoder_cls = self._encoder_cls
-    if encoder_cls:
-      self._encoder = encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
+  def load_metadata(self, data_dir, feature_name: str) -> None:
+    if self._encoder_cls:
+      fname_prefix = _file_name_prefix_for_metadata(feature_name, data_dir)
+      self._encoder = self._encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
       return
 
     # Error checking: ensure there are no metadata files
-    feature_files = [
-        f for f in tf.io.gfile.listdir(data_dir) if f.startswith(fname_prefix)
-    ]
+    feature_files = list(epath.Path(data_dir).glob(f"{feature_name}.text*"))
     if feature_files:
       raise ValueError(
           "Text feature files found for feature %s but encoder_cls=None. "
           "Make sure to set encoder_cls in the TextEncoderConfig. "
-          "Files: %s" % (feature_name, feature_files))
+          "Files: %s" % (feature_name, feature_files)
+      )
 
   def maybe_build_from_corpus(self, corpus_generator, **kwargs):
     """Call SubwordTextEncoder.build_from_corpus is encoder_cls is such.
@@ -163,7 +169,8 @@ class Text(tensor_feature.Tensor):
     self.encoder = text_lib.SubwordTextEncoder.build_from_corpus(
         corpus_generator=corpus_generator,
         target_vocab_size=vocab_size,
-        **kwargs)
+        **kwargs,
+    )
 
   @property
   def _encoder_cls(self):
@@ -189,19 +196,26 @@ class Text(tensor_feature.Tensor):
     return ex
 
   @classmethod
-  def from_json_content(cls, value: Union[Json,
-                                          feature_pb2.TextFeature]) -> "Text":
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.TextFeature]
+  ) -> "Text":
     if isinstance(value, dict) and "use_encoder" in value:
       raise ValueError(
           "Deprecated encoder not supported. Please use the plain text version "
-          "with `tensorflow_text`.")
+          "with `tensorflow_text`."
+      )
     return cls()
 
-  def to_json_content(self) -> Union[Json, feature_pb2.TextFeature]:
+  def to_json_content(self) -> Union[Json, feature_pb2.TextFeature]:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     if self._encoder:
       logging.warning(
           "Dataset is using deprecated text encoder API which will be removed "
           "soon. Please use the plain_text version of the dataset and migrate "
-          "to `tensorflow_text`.")
+          "to `tensorflow_text`."
+      )
       return dict(use_encoder=True)
     return feature_pb2.TextFeature()
+
+
+def _file_name_prefix_for_metadata(feature_name: str, data_dir) -> str:
+  return os.path.join(data_dir, f"{feature_name}.text")

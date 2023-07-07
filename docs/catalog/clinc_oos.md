@@ -25,6 +25,12 @@ breadth that a production task-oriented agent must handle. It offers a way of
 more rigorously and realistically benchmarking text classification in
 task-driven dialog systems.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/clinc150">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/clinc/oos-eval/](https://github.com/clinc/oos-eval/)
 
@@ -58,24 +64,24 @@ Split              | Examples
 
 ```python
 FeaturesDict({
-    'domain': tf.int32,
-    'domain_name': Text(shape=(), dtype=tf.string),
-    'intent': tf.int32,
-    'intent_name': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
+    'domain': int32,
+    'domain_name': Text(shape=(), dtype=string),
+    'intent': int32,
+    'intent_name': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature     | Class        | Shape | Dtype     | Description
-:---------- | :----------- | :---- | :-------- | :----------
-            | FeaturesDict |       |           |
-domain      | Tensor       |       | tf.int32  |
-domain_name | Text         |       | tf.string |
-intent      | Tensor       |       | tf.int32  |
-intent_name | Text         |       | tf.string |
-text        | Text         |       | tf.string |
+Feature     | Class        | Shape | Dtype  | Description
+:---------- | :----------- | :---- | :----- | :----------
+            | FeaturesDict |       |        |
+domain      | Tensor       |       | int32  |
+domain_name | Text         |       | string |
+intent      | Tensor       |       | int32  |
+intent_name | Text         |       | string |
+text        | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

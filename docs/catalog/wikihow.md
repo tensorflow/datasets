@@ -33,6 +33,12 @@ Train/validation/test splits are provided by the authors. Preprocessing is
 applied to remove short articles (abstract length < 0.75 article length) and
 clean up extra commas.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikihow">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 
@@ -45,8 +51,6 @@ clean up extra commas.
 
 *   **Download size**: `5.21 MiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -55,7 +59,7 @@ clean up extra commas.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -64,10 +68,6 @@ clean up extra commas.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -88,6 +88,8 @@ clean up extra commas.
 *   **Config description**: Use the concatenation of all paragraphs as the
     articles and the bold lines as the reference summaries
 
+*   **Dataset size**: `531.56 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -100,24 +102,63 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'headline': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'headline': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-headline | Text         |       | tf.string |
-text     | Text         |       | tf.string |
-title    | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+headline | Text         |       | string |
+text     | Text         |       | string |
+title    | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikihow-all-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikihow/sep
 
 *   **Config description**: use each paragraph and its summary.
+
+*   **Dataset size**: `1.07 GiB`
 
 *   **Splits**:
 
@@ -131,21 +172,58 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'headline': Text(shape=(), dtype=tf.string),
-    'overview': Text(shape=(), dtype=tf.string),
-    'sectionLabel': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'headline': Text(shape=(), dtype=string),
+    'overview': Text(shape=(), dtype=string),
+    'sectionLabel': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature      | Class        | Shape | Dtype     | Description
-:----------- | :----------- | :---- | :-------- | :----------
-             | FeaturesDict |       |           |
-headline     | Text         |       | tf.string |
-overview     | Text         |       | tf.string |
-sectionLabel | Text         |       | tf.string |
-text         | Text         |       | tf.string |
-title        | Text         |       | tf.string |
+Feature      | Class        | Shape | Dtype  | Description
+:----------- | :----------- | :---- | :----- | :----------
+             | FeaturesDict |       |        |
+headline     | Text         |       | string |
+overview     | Text         |       | string |
+sectionLabel | Text         |       | string |
+text         | Text         |       | string |
+title        | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikihow-sep-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

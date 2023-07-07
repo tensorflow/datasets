@@ -2,7 +2,7 @@
   "citation": "@article{Wahltinez2020,\n  author = \"O. Wahltinez and others\",\n  year = 2020,\n  title = \"COVID-19 Open-Data: curating a fine-grained, global-scale data repository for SARS-CoV-2\",\n  note = \"Work in progress\",\n  url = {https://goo.gle/covid-19-open-data},\n}",
   "description": "This repository attempts to assemble the largest Covid-19 epidemiological database\nin addition to a powerful set of expansive covariates. It includes open, publicly sourced,\nlicensed data relating to demographics, economy, epidemiology, geography, health, hospitalizations,\nmobility, government response, weather, and more.\n\nThis particular dataset corresponds to a join of all the different tables that are part of the repository.\nTherefore, expect the resulting samples to be highly sparse.",
   "downloadSize": "727117248",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/GoogleCloudPlatform/covid-19-open-data"
@@ -10,8 +10,12 @@
   },
   "moduleName": "tensorflow_datasets.structured.covid19.covid19",
   "name": "covid19",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "309825892121",
       "shardLengths": [

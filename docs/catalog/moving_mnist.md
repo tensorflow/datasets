@@ -19,6 +19,12 @@ the authors for reporting model performance. See
 `tfds.video.moving_mnist.image_as_moving_sequence` for generating
 training/validation data from the MNIST dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/moving-mnist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 
@@ -30,7 +36,7 @@ training/validation data from the MNIST dataset.
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.25 MiB`
 
 *   **Dataset size**: `91.70 MiB`
 
@@ -48,16 +54,16 @@ Split    | Examples
 
 ```python
 FeaturesDict({
-    'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
+    'image_sequence': Video(Image(shape=(64, 64, 1), dtype=uint8)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature        | Class        | Shape           | Dtype    | Description
-:------------- | :----------- | :-------------- | :------- | :----------
-               | FeaturesDict |                 |          |
-image_sequence | Video(Image) | (20, 64, 64, 1) | tf.uint8 |
+Feature        | Class        | Shape           | Dtype | Description
+:------------- | :----------- | :-------------- | :---- | :----------
+               | FeaturesDict |                 |       |
+image_sequence | Video(Image) | (20, 64, 64, 1) | uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

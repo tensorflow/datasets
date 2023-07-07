@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,15 +38,19 @@ _CITATION = """
 }
 """
 
-_DATA_LINK = "https://s3-us-west-2.amazonaws.com/allennlp/datasets/drop/drop_dataset.zip"
+_DATA_LINK = (
+    "https://s3-us-west-2.amazonaws.com/allennlp/datasets/drop/drop_dataset.zip"
+)
 
 
 def _get_answer(answer_dict):
   if answer_dict.get("number", ""):
     return answer_dict["number"]
   elif answer_dict.get("date", {}).get("day", ""):
-    return (f'{answer_dict["date"]["year"]}-'
-            f'{answer_dict["date"]["month"]}-{answer_dict["date"]["day"]}')
+    return (
+        f'{answer_dict["date"]["year"]}-'
+        f'{answer_dict["date"]["month"]}-{answer_dict["date"]["day"]}'
+    )
   elif answer_dict.get("spans", []):
     return answer_dict["spans"][0]
   else:

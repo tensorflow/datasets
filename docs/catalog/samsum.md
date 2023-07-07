@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="samsum" />
-  <meta itemprop="description" content="SAMSum Corpus contains over 16k chat dialogues with manually annotated&#10;summaries.&#10;&#10;There are two features:&#10;&#10;  - dialogue: text of dialogue.&#10;  - summary: human written summary of the dialogue.&#10;  - id: id of a example.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;samsum&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="SAMSum Corpus contains over 16k chat dialogues with manually annotated&#10;summaries.&#10;&#10;There are two features:&#10;&#10;-   dialogue: text of dialogue.&#10;-   summary: human written summary of the dialogue.&#10;-   id: id of an example.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;samsum&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/samsum" />
   <meta itemprop="sameAs" content="https://arxiv.org/src/1911.12237v2/anc" />
   <meta itemprop="citation" content="@article{gliwa2019samsum,&#10;  title={SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization},&#10;  author={Gliwa, Bogdan and Mochol, Iwona and Biesek, Maciej and Wawer, Aleksander},&#10;  journal={arXiv preprint arXiv:1911.12237},&#10;  year={2019}&#10;}" />
@@ -23,13 +23,19 @@ There are two features:
 
 -   dialogue: text of dialogue.
 -   summary: human written summary of the dialogue.
--   id: id of a example.
+-   id: id of an example.
+
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/samsum-corpus">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Homepage**:
     [https://arxiv.org/src/1911.12237v2/anc](https://arxiv.org/src/1911.12237v2/anc)
 
 *   **Source code**:
-    [`tfds.summarization.Samsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/samsum.py)
+    [`tfds.datasets.samsum.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/samsum/samsum_dataset_builder.py)
 
 *   **Versions**:
 
@@ -61,20 +67,20 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'dialogue': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'summary': Text(shape=(), dtype=tf.string),
+    'dialogue': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'summary': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-dialogue | Text         |       | tf.string |
-id       | Text         |       | tf.string |
-summary  | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+dialogue | Text         |       | string |
+id       | Text         |       | string |
+summary  | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -12,11 +12,6 @@
 # `wit`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual
@@ -24,6 +19,12 @@ dataset. WIT is composed of a curated set of 37.6 million entity rich image-text
 examples with 11.5 million unique images across 108 Wikipedia languages. Its
 size enables WIT to be used as a pretraining dataset for multimodal machine
 learning models.
+
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wit">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Homepage**:
     [https://github.com/google-research-datasets/wit/](https://github.com/google-research-datasets/wit/)
@@ -35,9 +36,7 @@ learning models.
 
     *   `1.0.0`: Initial release. It loads the WIT dataset from
         https://storage.googleapis.com/gresearch/wit/
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added `val` and `test` splits.
+    *   **`1.1.0`** (default): Added `val` and `test` splits.
 
 *   **Download size**: `25.20 GiB`
 
@@ -59,48 +58,48 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'attribution_passes_lang_id': tf.bool,
-    'caption_alt_text_description': Text(shape=(), dtype=tf.string),
-    'caption_attribution_description': Text(shape=(), dtype=tf.string),
-    'caption_reference_description': Text(shape=(), dtype=tf.string),
-    'context_page_description': Text(shape=(), dtype=tf.string),
-    'context_section_description': Text(shape=(), dtype=tf.string),
-    'hierarchical_section_title': Text(shape=(), dtype=tf.string),
-    'image_url': Text(shape=(), dtype=tf.string),
-    'is_main_image': tf.bool,
-    'language': Text(shape=(), dtype=tf.string),
-    'mime_type': Text(shape=(), dtype=tf.string),
-    'original_height': tf.int32,
-    'original_width': tf.int32,
-    'page_changed_recently': tf.bool,
-    'page_title': Text(shape=(), dtype=tf.string),
-    'page_url': Text(shape=(), dtype=tf.string),
-    'section_title': Text(shape=(), dtype=tf.string),
+    'attribution_passes_lang_id': bool,
+    'caption_alt_text_description': Text(shape=(), dtype=string),
+    'caption_attribution_description': Text(shape=(), dtype=string),
+    'caption_reference_description': Text(shape=(), dtype=string),
+    'context_page_description': Text(shape=(), dtype=string),
+    'context_section_description': Text(shape=(), dtype=string),
+    'hierarchical_section_title': Text(shape=(), dtype=string),
+    'image_url': Text(shape=(), dtype=string),
+    'is_main_image': bool,
+    'language': Text(shape=(), dtype=string),
+    'mime_type': Text(shape=(), dtype=string),
+    'original_height': int32,
+    'original_width': int32,
+    'page_changed_recently': bool,
+    'page_title': Text(shape=(), dtype=string),
+    'page_url': Text(shape=(), dtype=string),
+    'section_title': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                         | Class        | Shape | Dtype     | Description
-:------------------------------ | :----------- | :---- | :-------- | :----------
-                                | FeaturesDict |       |           |
-attribution_passes_lang_id      | Tensor       |       | tf.bool   |
-caption_alt_text_description    | Text         |       | tf.string |
-caption_attribution_description | Text         |       | tf.string |
-caption_reference_description   | Text         |       | tf.string |
-context_page_description        | Text         |       | tf.string |
-context_section_description     | Text         |       | tf.string |
-hierarchical_section_title      | Text         |       | tf.string |
-image_url                       | Text         |       | tf.string |
-is_main_image                   | Tensor       |       | tf.bool   |
-language                        | Text         |       | tf.string |
-mime_type                       | Text         |       | tf.string |
-original_height                 | Tensor       |       | tf.int32  |
-original_width                  | Tensor       |       | tf.int32  |
-page_changed_recently           | Tensor       |       | tf.bool   |
-page_title                      | Text         |       | tf.string |
-page_url                        | Text         |       | tf.string |
-section_title                   | Text         |       | tf.string |
+Feature                         | Class        | Shape | Dtype  | Description
+:------------------------------ | :----------- | :---- | :----- | :----------
+                                | FeaturesDict |       |        |
+attribution_passes_lang_id      | Tensor       |       | bool   |
+caption_alt_text_description    | Text         |       | string |
+caption_attribution_description | Text         |       | string |
+caption_reference_description   | Text         |       | string |
+context_page_description        | Text         |       | string |
+context_section_description     | Text         |       | string |
+hierarchical_section_title      | Text         |       | string |
+image_url                       | Text         |       | string |
+is_main_image                   | Tensor       |       | bool   |
+language                        | Text         |       | string |
+mime_type                       | Text         |       | string |
+original_height                 | Tensor       |       | int32  |
+original_width                  | Tensor       |       | int32  |
+page_changed_recently           | Tensor       |       | bool   |
+page_title                      | Text         |       | string |
+page_url                        | Text         |       | string |
+section_title                   | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

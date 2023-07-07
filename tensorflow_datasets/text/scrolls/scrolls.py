@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 """scrolls dataset."""
 import dataclasses
 import json
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 # Corresponding HF dataset:
@@ -148,6 +149,7 @@ _QUALITY_CITATION = """\
 @dataclasses.dataclass
 class ScrollsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SCROLLS."""
+
   data_url: str = ""
   citation: str = ""
   url: str = ""
@@ -160,6 +162,7 @@ _FEATURES = ("id", "pid", _INPUT_KEY, _OUTPUT_KEY)
 
 class Scrolls(tfds.core.GeneratorBasedBuilder):
   """The SCROLLS benchmark."""
+
   VERSION = tfds.core.Version("1.0.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
@@ -190,21 +193,27 @@ class Scrolls(tfds.core.GeneratorBasedBuilder):
       ScrollsConfig(
           name="narrative_qa",
           description="narrative_qa subset",
-          data_url="https://scrolls-tau.s3.us-east-2.amazonaws.com/narrative_qa.zip",
+          data_url=(
+              "https://scrolls-tau.s3.us-east-2.amazonaws.com/narrative_qa.zip"
+          ),
           citation=_NARRATIVE_QA_CITATION,
           url="https://deepmind.com/research/publications/narrativeqa-reading-comprehension-challenge",
       ),
       ScrollsConfig(
           name="gov_report",
           description="gov_report subset",
-          data_url="https://scrolls-tau.s3.us-east-2.amazonaws.com/gov_report.zip",
+          data_url=(
+              "https://scrolls-tau.s3.us-east-2.amazonaws.com/gov_report.zip"
+          ),
           citation=_GOV_REPORT_CITATION,
           url="https://gov-report-data.github.io/",
       ),
       ScrollsConfig(
           name="contract_nli",
           description="contract_nli subset",
-          data_url="https://scrolls-tau.s3.us-east-2.amazonaws.com/contract_nli.zip",
+          data_url=(
+              "https://scrolls-tau.s3.us-east-2.amazonaws.com/contract_nli.zip"
+          ),
           citation=_CONTRACT_NLI_CITATION,
           url="https://stanfordnlp.github.io/contract-nli/",
       ),
@@ -218,12 +227,12 @@ class Scrolls(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-
     return tfds.core.DatasetInfo(
         builder=self,
         description=_SCROLLS_DESCRIPTION + self.builder_config.description,
         features=tfds.features.FeaturesDict(
-            {feature: tfds.features.Text() for feature in _FEATURES}),
+            {feature: tfds.features.Text() for feature in _FEATURES}
+        ),
         supervised_keys=(_INPUT_KEY, _OUTPUT_KEY),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation + "\n" + _SCROLLS_CITATION,
@@ -232,25 +241,25 @@ class Scrolls(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     dl_dir = dl_manager.download_and_extract(self.builder_config.data_url)
     task_name = task_name = _get_task_name_from_data_url(
-        self.builder_config.data_url)
+        self.builder_config.data_url
+    )
 
     return {
-        "train":
-            self._generate_examples(dl_dir / task_name / "train.jsonl"),
-        "validation":
-            self._generate_examples(dl_dir / task_name / "validation.jsonl"),
-        "test":
-            self._generate_examples(dl_dir / task_name / "test.jsonl"),
+        "train": self._generate_examples(dl_dir / task_name / "train.jsonl"),
+        "validation": self._generate_examples(
+            dl_dir / task_name / "validation.jsonl"
+        ),
+        "test": self._generate_examples(dl_dir / task_name / "test.jsonl"),
     }
 
   def _generate_examples(self, path):
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for line in f:
         row = json.loads(line)
 
         # Test set has 'null' for 'output'
         yield row["pid"], {
-            k: (row[k] if row[k] is not None else "") for k in _FEATURES
+            k: row[k] if row[k] is not None else "" for k in _FEATURES
         }
 
 

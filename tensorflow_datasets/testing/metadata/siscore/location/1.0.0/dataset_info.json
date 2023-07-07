@@ -3,14 +3,20 @@
   "configDescription": "factor of variation: location",
   "configName": "location",
   "downloadSize": "19550491774",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/google-research/si-score"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.siscore.siscore",
   "name": "siscore",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "19656718397",
       "shardLengths": [
@@ -274,8 +280,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

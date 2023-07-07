@@ -21,6 +21,12 @@ people's everyday narratives, asking questions concerning on the likely causes
 or effects of events that require reasoning beyond the exact text spans in the
 context.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cosmosqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://wilburone.github.io/cosmos/](https://wilburone.github.io/cosmos/)
 
@@ -51,30 +57,30 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'answer0': Text(shape=(), dtype=tf.string),
-    'answer1': Text(shape=(), dtype=tf.string),
-    'answer2': Text(shape=(), dtype=tf.string),
-    'answer3': Text(shape=(), dtype=tf.string),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-    'question': Text(shape=(), dtype=tf.string),
+    'answer0': Text(shape=(), dtype=string),
+    'answer1': Text(shape=(), dtype=string),
+    'answer2': Text(shape=(), dtype=string),
+    'answer3': Text(shape=(), dtype=string),
+    'context': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=4),
+    'question': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature  | Class        | Shape | Dtype     | Description
-:------- | :----------- | :---- | :-------- | :----------
-         | FeaturesDict |       |           |
-answer0  | Text         |       | tf.string |
-answer1  | Text         |       | tf.string |
-answer2  | Text         |       | tf.string |
-answer3  | Text         |       | tf.string |
-context  | Text         |       | tf.string |
-id       | Text         |       | tf.string |
-label    | ClassLabel   |       | tf.int64  |
-question | Text         |       | tf.string |
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+answer0  | Text         |       | string |
+answer1  | Text         |       | string |
+answer2  | Text         |       | string |
+answer3  | Text         |       | string |
+context  | Text         |       | string |
+id       | Text         |       | string |
+label    | ClassLabel   |       | int64  |
+question | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

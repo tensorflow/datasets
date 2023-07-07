@@ -24,11 +24,17 @@ The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
 images for each class. The images have large variations in scale, pose and
 lighting. All images have an associated ground truth annotation of breed.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/oxford-iiit-pets">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 
 *   **Source code**:
-    [`tfds.image_classification.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_iiit_pet.py)
+    [`tfds.datasets.oxford_iiit_pet.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/oxford_iiit_pet/oxford_iiit_pet_dataset_builder.py)
 
 *   **Versions**:
 
@@ -53,24 +59,24 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
-    'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
-    'species': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'file_name': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=37),
+    'segmentation_mask': Image(shape=(None, None, 1), dtype=uint8),
+    'species': ClassLabel(shape=(), dtype=int64, num_classes=2),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape           | Dtype     | Description
-:---------------- | :----------- | :-------------- | :-------- | :----------
-                  | FeaturesDict |                 |           |
-file_name         | Text         |                 | tf.string |
-image             | Image        | (None, None, 3) | tf.uint8  |
-label             | ClassLabel   |                 | tf.int64  |
-segmentation_mask | Image        | (None, None, 1) | tf.uint8  |
-species           | ClassLabel   |                 | tf.int64  |
+Feature           | Class        | Shape           | Dtype  | Description
+:---------------- | :----------- | :-------------- | :----- | :----------
+                  | FeaturesDict |                 |        |
+file_name         | Text         |                 | string |
+image             | Image        | (None, None, 3) | uint8  |
+label             | ClassLabel   |                 | int64  |
+segmentation_mask | Image        | (None, None, 1) | uint8  |
+species           | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

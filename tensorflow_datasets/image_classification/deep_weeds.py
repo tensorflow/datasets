@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@
 import csv
 import os
 
-import tensorflow as tf
+from etils import epath
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "https://drive.google.com/uc?export=download&id=1xnK3B6K6KekDI55vwJ0vnc2IGoDga9cj"
@@ -88,10 +89,9 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Define Splits."""
-    paths = dl_manager.download_and_extract({
-        "image": _URL,
-        "label": _URL_LABELS
-    })
+    paths = dl_manager.download_and_extract(
+        {"image": _URL, "label": _URL_LABELS}
+    )
 
     return [
         tfds.core.SplitGenerator(
@@ -106,7 +106,7 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, data_dir_path, label_path):
     """Generate images and labels for splits."""
 
-    with tf.io.gfile.GFile(label_path) as f:
+    with epath.Path(label_path).open() as f:
       # Convert to list to reuse the iterator multiple times
       reader = list(csv.DictReader(f))
 
@@ -121,5 +121,5 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
     for file_name in tf.io.gfile.listdir(data_dir_path):
       yield file_name, {
           "image": os.path.join(data_dir_path, file_name),
-          "label": filename_to_label[file_name]
+          "label": filename_to_label[file_name],
       }

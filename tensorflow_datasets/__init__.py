@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,26 +37,17 @@ Documentation:
 # pylint: disable=g-import-not-at-top,g-bad-import-order,wrong-import-position,unused-import
 
 import time
+
 _TIMESTAMP_IMPORT_STARTS = time.time()
+from absl import logging
 import tensorflow_datasets.core.logging as _tfds_logging
 from tensorflow_datasets.core.logging import call_metadata as _call_metadata
 
 _metadata = _call_metadata.CallMetadata()
-_metadata.start_time_micros = int(_TIMESTAMP_IMPORT_STARTS * 1E6)
-_import_time_ms_tensorflow = 0
+_metadata.start_time_micros = int(_TIMESTAMP_IMPORT_STARTS * 1e6)
 _import_time_ms_dataset_builders = 0
 
 try:
-  _before_tf_inport = time.time()
-  import tensorflow
-  _import_time_ms_tensorflow = int((time.time() - _before_tf_inport) * 1000)
-
-  # Ensure TensorFlow is importable and its version is sufficiently recent. This
-  # needs to happen before anything else, since the imports below will try to
-  # import tensorflow, too.
-  from tensorflow_datasets.core import tf_compat
-  tf_compat.ensure_tf_install()
-
   # Imports for registration
   _before_dataset_imports = time.time()
   from tensorflow_datasets import dataset_collections
@@ -93,7 +84,8 @@ try:
   # pytype: enable=import-error
 
   _import_time_ms_dataset_builders = int(
-      (time.time() - _before_dataset_imports) * 1000)
+      (time.time() - _before_dataset_imports) * 1000
+  )
 
   # Public API to create and generate a dataset
   from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
@@ -101,11 +93,13 @@ try:
   # __all__ for import * as well as documentation
   __all__ = public_api.__all__
 
-except Exception:  # pylint: disable=broad-except
+except Exception as exception:  # pylint: disable=broad-except
   _metadata.mark_error()
+  logging.exception(exception)
 finally:
   _metadata.mark_end()
   _tfds_logging.tfds_import(
       metadata=_metadata,
-      import_time_ms_tensorflow=_import_time_ms_tensorflow,
-      import_time_ms_dataset_builders=_import_time_ms_dataset_builders)
+      import_time_ms_tensorflow=0,
+      import_time_ms_dataset_builders=_import_time_ms_dataset_builders,
+  )

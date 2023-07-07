@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
 
 """HellaSwag dataset."""
 
+from __future__ import annotations
+
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -35,7 +38,9 @@ The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context
 and some endings which complete the context.
 """
 
-_HELLASWAG_URL = 'https://raw.githubusercontent.com/rowanz/hellaswag/master/data/'
+_HELLASWAG_URL = (
+    'https://raw.githubusercontent.com/rowanz/hellaswag/master/data/'
+)
 
 
 class Hellaswag(tfds.core.GeneratorBasedBuilder):
@@ -44,13 +49,15 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
       '1.1.0': 'Another split dimension for source (wikihow vs activitynet)',
-      '1.0.0': 'Adding separate splits for in-domain and out-of-domain '
-               'validation/test sets.'
+      '1.0.0': (
+          'Adding separate splits for in-domain and out-of-domain '
+          'validation/test sets.'
+      ),
   }
   SUPPORTED_VERSIONS = [
       tfds.core.Version('1.1.0'),
       tfds.core.Version('1.0.0'),
-      tfds.core.Version('0.0.1')
+      tfds.core.Version('0.0.1'),
   ]
 
   def _info(self):
@@ -61,7 +68,7 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
             'context': tfds.features.Text(),
             'endings': tfds.features.Sequence(tfds.features.Text()),
             'activity_label': tfds.features.Text(),
-            'label': tf.int32,
+            'label': np.int32,
             'split_type': tfds.features.Text(),
             'source_id': tfds.features.Text(),
         }),
@@ -80,37 +87,44 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
     })
 
     return {
-        'train':
-            self._generate_examples(files['train']),
-        'train_activitynet':
-            self._generate_examples(files['train'], source='activitynet'),
-        'train_wikihow':
-            self._generate_examples(files['train'], source='wikihow'),
-        'validation':
-            self._generate_examples(files['validation']),
-        'test':
-            self._generate_examples(files['test']),
-        'validation_ind_activitynet':
-            self._generate_examples(files['validation'], 'IND', 'activitynet'),
-        'validation_ood_activitynet':
-            self._generate_examples(files['validation'], 'OOD', 'activitynet'),
-        'test_ind_activitynet':
-            self._generate_examples(files['test'], 'IND', 'activitynet'),
-        'test_ood_activitynet':
-            self._generate_examples(files['test'], 'OOD', 'activitynet'),
-        'validation_ind_wikihow':
-            self._generate_examples(files['validation'], 'IND', 'wikihow'),
-        'validation_ood_wikihow':
-            self._generate_examples(files['validation'], 'OOD', 'wikihow'),
-        'test_ind_wikihow':
-            self._generate_examples(files['test'], 'IND', 'wikihow'),
-        'test_ood_wikihow':
-            self._generate_examples(files['test'], 'OOD', 'wikihow')
+        'train': self._generate_examples(files['train']),
+        'train_activitynet': self._generate_examples(
+            files['train'], source='activitynet'
+        ),
+        'train_wikihow': self._generate_examples(
+            files['train'], source='wikihow'
+        ),
+        'validation': self._generate_examples(files['validation']),
+        'test': self._generate_examples(files['test']),
+        'validation_ind_activitynet': self._generate_examples(
+            files['validation'], 'IND', 'activitynet'
+        ),
+        'validation_ood_activitynet': self._generate_examples(
+            files['validation'], 'OOD', 'activitynet'
+        ),
+        'test_ind_activitynet': self._generate_examples(
+            files['test'], 'IND', 'activitynet'
+        ),
+        'test_ood_activitynet': self._generate_examples(
+            files['test'], 'OOD', 'activitynet'
+        ),
+        'validation_ind_wikihow': self._generate_examples(
+            files['validation'], 'IND', 'wikihow'
+        ),
+        'validation_ood_wikihow': self._generate_examples(
+            files['validation'], 'OOD', 'wikihow'
+        ),
+        'test_ind_wikihow': self._generate_examples(
+            files['test'], 'IND', 'wikihow'
+        ),
+        'test_ood_wikihow': self._generate_examples(
+            files['test'], 'OOD', 'wikihow'
+        ),
     }
 
   def _generate_examples(self, filepath, domain=None, source=None):
     """Yields examples."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for idx, line in enumerate(f):
         elem = json.loads(line)
         elem_id = '%s_%d' % (os.path.basename(filepath), idx)
@@ -128,5 +142,5 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
             'activity_label': elem['activity_label'],
             'label': elem.get('label', -1),
             'split_type': elem['split_type'],
-            'source_id': elem['source_id']
+            'source_id': elem['source_id'],
         }

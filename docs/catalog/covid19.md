@@ -52,1414 +52,1414 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'adult_female_mortality_rate': tf.float64,
-    'adult_male_mortality_rate': tf.float64,
-    'age_bin_0': tf.string,
-    'age_bin_1': tf.string,
-    'age_bin_2': tf.string,
-    'age_bin_3': tf.string,
-    'age_bin_4': tf.string,
-    'age_bin_5': tf.string,
-    'age_bin_6': tf.string,
-    'age_bin_7': tf.string,
-    'age_bin_8': tf.string,
-    'age_bin_9': tf.string,
-    'aggregation_level': tf.float64,
-    'area_rural_sq_km': tf.float64,
-    'area_sq_km': tf.float64,
-    'area_urban_sq_km': tf.float64,
-    'average_temperature_celsius': tf.float64,
-    'cancel_public_events': tf.float64,
-    'comorbidity_mortality_rate': tf.float64,
-    'contact_tracing': tf.float64,
-    'country_code': tf.string,
-    'country_name': tf.string,
-    'cumulative_confirmed': tf.float64,
-    'cumulative_confirmed_age_0': tf.float64,
-    'cumulative_confirmed_age_1': tf.float64,
-    'cumulative_confirmed_age_2': tf.float64,
-    'cumulative_confirmed_age_3': tf.float64,
-    'cumulative_confirmed_age_4': tf.float64,
-    'cumulative_confirmed_age_5': tf.float64,
-    'cumulative_confirmed_age_6': tf.float64,
-    'cumulative_confirmed_age_7': tf.float64,
-    'cumulative_confirmed_age_8': tf.float64,
-    'cumulative_confirmed_age_9': tf.float64,
-    'cumulative_confirmed_female': tf.float64,
-    'cumulative_confirmed_male': tf.float64,
-    'cumulative_deceased': tf.float64,
-    'cumulative_deceased_age_0': tf.float64,
-    'cumulative_deceased_age_1': tf.float64,
-    'cumulative_deceased_age_2': tf.float64,
-    'cumulative_deceased_age_3': tf.float64,
-    'cumulative_deceased_age_4': tf.float64,
-    'cumulative_deceased_age_5': tf.float64,
-    'cumulative_deceased_age_6': tf.float64,
-    'cumulative_deceased_age_7': tf.float64,
-    'cumulative_deceased_age_8': tf.float64,
-    'cumulative_deceased_age_9': tf.float64,
-    'cumulative_deceased_female': tf.float64,
-    'cumulative_deceased_male': tf.float64,
-    'cumulative_hospitalized_patients': tf.float64,
-    'cumulative_hospitalized_patients_age_0': tf.float64,
-    'cumulative_hospitalized_patients_age_1': tf.float64,
-    'cumulative_hospitalized_patients_age_2': tf.float64,
-    'cumulative_hospitalized_patients_age_3': tf.float64,
-    'cumulative_hospitalized_patients_age_4': tf.float64,
-    'cumulative_hospitalized_patients_age_5': tf.float64,
-    'cumulative_hospitalized_patients_age_6': tf.float64,
-    'cumulative_hospitalized_patients_age_7': tf.float64,
-    'cumulative_hospitalized_patients_age_8': tf.float64,
-    'cumulative_hospitalized_patients_age_9': tf.float64,
-    'cumulative_hospitalized_patients_female': tf.float64,
-    'cumulative_hospitalized_patients_male': tf.float64,
-    'cumulative_intensive_care_patients': tf.float64,
-    'cumulative_intensive_care_patients_age_0': tf.float64,
-    'cumulative_intensive_care_patients_age_1': tf.float64,
-    'cumulative_intensive_care_patients_age_2': tf.float64,
-    'cumulative_intensive_care_patients_age_3': tf.float64,
-    'cumulative_intensive_care_patients_age_4': tf.float64,
-    'cumulative_intensive_care_patients_age_5': tf.float64,
-    'cumulative_intensive_care_patients_age_6': tf.float64,
-    'cumulative_intensive_care_patients_age_7': tf.float64,
-    'cumulative_intensive_care_patients_age_8': tf.float64,
-    'cumulative_intensive_care_patients_age_9': tf.float64,
-    'cumulative_intensive_care_patients_female': tf.float64,
-    'cumulative_intensive_care_patients_male': tf.float64,
-    'cumulative_persons_fully_vaccinated': tf.float64,
-    'cumulative_persons_fully_vaccinated_janssen': tf.float64,
-    'cumulative_persons_fully_vaccinated_moderna': tf.float64,
-    'cumulative_persons_fully_vaccinated_pfizer': tf.float64,
-    'cumulative_persons_vaccinated': tf.float64,
-    'cumulative_recovered': tf.float64,
-    'cumulative_recovered_age_0': tf.float64,
-    'cumulative_recovered_age_1': tf.float64,
-    'cumulative_recovered_age_2': tf.float64,
-    'cumulative_recovered_age_3': tf.float64,
-    'cumulative_recovered_age_4': tf.float64,
-    'cumulative_recovered_age_5': tf.float64,
-    'cumulative_recovered_age_6': tf.float64,
-    'cumulative_recovered_age_7': tf.float64,
-    'cumulative_recovered_age_8': tf.float64,
-    'cumulative_recovered_age_9': tf.float64,
-    'cumulative_recovered_female': tf.float64,
-    'cumulative_recovered_male': tf.float64,
-    'cumulative_tested': tf.float64,
-    'cumulative_tested_age_0': tf.float64,
-    'cumulative_tested_age_1': tf.float64,
-    'cumulative_tested_age_2': tf.float64,
-    'cumulative_tested_age_3': tf.float64,
-    'cumulative_tested_age_4': tf.float64,
-    'cumulative_tested_age_5': tf.float64,
-    'cumulative_tested_age_6': tf.float64,
-    'cumulative_tested_age_7': tf.float64,
-    'cumulative_tested_age_8': tf.float64,
-    'cumulative_tested_age_9': tf.float64,
-    'cumulative_tested_female': tf.float64,
-    'cumulative_tested_male': tf.float64,
-    'cumulative_vaccine_doses_administered': tf.float64,
-    'cumulative_vaccine_doses_administered_janssen': tf.float64,
-    'cumulative_vaccine_doses_administered_moderna': tf.float64,
-    'cumulative_vaccine_doses_administered_pfizer': tf.float64,
-    'cumulative_ventilator_patients': tf.float64,
-    'current_hospitalized_patients': tf.float64,
-    'current_intensive_care_patients': tf.float64,
-    'current_ventilator_patients': tf.float64,
-    'datacommons_id': tf.string,
-    'date': tf.string,
-    'debt_relief': tf.float64,
-    'dew_point': tf.float64,
-    'diabetes_prevalence': tf.float64,
-    'elevation_m': tf.float64,
-    'emergency_investment_in_healthcare': tf.float64,
-    'facial_coverings': tf.float64,
-    'fiscal_measures': tf.float64,
-    'gdp_per_capita_usd': tf.float64,
-    'gdp_usd': tf.float64,
-    'health_expenditure_usd': tf.float64,
-    'hospital_beds_per_1000': tf.float64,
-    'human_capital_index': tf.float64,
-    'human_development_index': tf.float64,
-    'income_support': tf.float64,
-    'infant_mortality_rate': tf.float64,
-    'international_support': tf.float64,
-    'international_travel_controls': tf.float64,
-    'investment_in_vaccines': tf.float64,
-    'iso_3166_1_alpha_2': tf.string,
-    'iso_3166_1_alpha_3': tf.string,
-    'latitude': tf.float64,
-    'life_expectancy': tf.float64,
-    'locality_code': tf.string,
-    'locality_name': tf.string,
-    'location_key': tf.string,
-    'longitude': tf.float64,
-    'maximum_temperature_celsius': tf.float64,
-    'minimum_temperature_celsius': tf.float64,
-    'mobility_grocery_and_pharmacy': tf.float64,
-    'mobility_parks': tf.float64,
-    'mobility_residential': tf.float64,
-    'mobility_retail_and_recreation': tf.float64,
-    'mobility_transit_stations': tf.float64,
-    'mobility_workplaces': tf.float64,
-    'new_confirmed': tf.float64,
-    'new_confirmed_age_0': tf.float64,
-    'new_confirmed_age_1': tf.float64,
-    'new_confirmed_age_2': tf.float64,
-    'new_confirmed_age_3': tf.float64,
-    'new_confirmed_age_4': tf.float64,
-    'new_confirmed_age_5': tf.float64,
-    'new_confirmed_age_6': tf.float64,
-    'new_confirmed_age_7': tf.float64,
-    'new_confirmed_age_8': tf.float64,
-    'new_confirmed_age_9': tf.float64,
-    'new_confirmed_female': tf.float64,
-    'new_confirmed_male': tf.float64,
-    'new_deceased': tf.float64,
-    'new_deceased_age_0': tf.float64,
-    'new_deceased_age_1': tf.float64,
-    'new_deceased_age_2': tf.float64,
-    'new_deceased_age_3': tf.float64,
-    'new_deceased_age_4': tf.float64,
-    'new_deceased_age_5': tf.float64,
-    'new_deceased_age_6': tf.float64,
-    'new_deceased_age_7': tf.float64,
-    'new_deceased_age_8': tf.float64,
-    'new_deceased_age_9': tf.float64,
-    'new_deceased_female': tf.float64,
-    'new_deceased_male': tf.float64,
-    'new_hospitalized_patients': tf.float64,
-    'new_hospitalized_patients_age_0': tf.float64,
-    'new_hospitalized_patients_age_1': tf.float64,
-    'new_hospitalized_patients_age_2': tf.float64,
-    'new_hospitalized_patients_age_3': tf.float64,
-    'new_hospitalized_patients_age_4': tf.float64,
-    'new_hospitalized_patients_age_5': tf.float64,
-    'new_hospitalized_patients_age_6': tf.float64,
-    'new_hospitalized_patients_age_7': tf.float64,
-    'new_hospitalized_patients_age_8': tf.float64,
-    'new_hospitalized_patients_age_9': tf.float64,
-    'new_hospitalized_patients_female': tf.float64,
-    'new_hospitalized_patients_male': tf.float64,
-    'new_intensive_care_patients': tf.float64,
-    'new_intensive_care_patients_age_0': tf.float64,
-    'new_intensive_care_patients_age_1': tf.float64,
-    'new_intensive_care_patients_age_2': tf.float64,
-    'new_intensive_care_patients_age_3': tf.float64,
-    'new_intensive_care_patients_age_4': tf.float64,
-    'new_intensive_care_patients_age_5': tf.float64,
-    'new_intensive_care_patients_age_6': tf.float64,
-    'new_intensive_care_patients_age_7': tf.float64,
-    'new_intensive_care_patients_age_8': tf.float64,
-    'new_intensive_care_patients_age_9': tf.float64,
-    'new_intensive_care_patients_female': tf.float64,
-    'new_intensive_care_patients_male': tf.float64,
-    'new_persons_fully_vaccinated': tf.float64,
-    'new_persons_fully_vaccinated_janssen': tf.float64,
-    'new_persons_fully_vaccinated_moderna': tf.float64,
-    'new_persons_fully_vaccinated_pfizer': tf.float64,
-    'new_persons_vaccinated': tf.float64,
-    'new_recovered': tf.float64,
-    'new_recovered_age_0': tf.float64,
-    'new_recovered_age_1': tf.float64,
-    'new_recovered_age_2': tf.float64,
-    'new_recovered_age_3': tf.float64,
-    'new_recovered_age_4': tf.float64,
-    'new_recovered_age_5': tf.float64,
-    'new_recovered_age_6': tf.float64,
-    'new_recovered_age_7': tf.float64,
-    'new_recovered_age_8': tf.float64,
-    'new_recovered_age_9': tf.float64,
-    'new_recovered_female': tf.float64,
-    'new_recovered_male': tf.float64,
-    'new_tested': tf.float64,
-    'new_tested_age_0': tf.float64,
-    'new_tested_age_1': tf.float64,
-    'new_tested_age_2': tf.float64,
-    'new_tested_age_3': tf.float64,
-    'new_tested_age_4': tf.float64,
-    'new_tested_age_5': tf.float64,
-    'new_tested_age_6': tf.float64,
-    'new_tested_age_7': tf.float64,
-    'new_tested_age_8': tf.float64,
-    'new_tested_age_9': tf.float64,
-    'new_tested_female': tf.float64,
-    'new_tested_male': tf.float64,
-    'new_vaccine_doses_administered': tf.float64,
-    'new_vaccine_doses_administered_janssen': tf.float64,
-    'new_vaccine_doses_administered_moderna': tf.float64,
-    'new_vaccine_doses_administered_pfizer': tf.float64,
-    'new_ventilator_patients': tf.float64,
-    'nurses_per_1000': tf.float64,
-    'openstreetmap_id': tf.string,
-    'out_of_pocket_health_expenditure_usd': tf.float64,
-    'physicians_per_1000': tf.float64,
-    'place_id': tf.string,
-    'pollution_mortality_rate': tf.float64,
-    'population': tf.float64,
-    'population_age_00_09': tf.float64,
-    'population_age_10_19': tf.float64,
-    'population_age_20_29': tf.float64,
-    'population_age_30_39': tf.float64,
-    'population_age_40_49': tf.float64,
-    'population_age_50_59': tf.float64,
-    'population_age_60_69': tf.float64,
-    'population_age_70_79': tf.float64,
-    'population_age_80_and_older': tf.float64,
-    'population_clustered': tf.float64,
-    'population_density': tf.float64,
-    'population_female': tf.float64,
-    'population_largest_city': tf.float64,
-    'population_male': tf.float64,
-    'population_rural': tf.float64,
-    'population_urban': tf.float64,
-    'public_information_campaigns': tf.float64,
-    'public_transport_closing': tf.float64,
-    'rainfall_mm': tf.float64,
-    'relative_humidity': tf.float64,
-    'restrictions_on_gatherings': tf.float64,
-    'restrictions_on_internal_movement': tf.float64,
-    'school_closing': tf.float64,
-    'search_trends_abdominal_obesity': tf.float64,
-    'search_trends_abdominal_pain': tf.float64,
-    'search_trends_acne': tf.float64,
-    'search_trends_actinic_keratosis': tf.float64,
-    'search_trends_acute_bronchitis': tf.float64,
-    'search_trends_adrenal_crisis': tf.float64,
-    'search_trends_ageusia': tf.float64,
-    'search_trends_alcoholism': tf.float64,
-    'search_trends_allergic_conjunctivitis': tf.float64,
-    'search_trends_allergy': tf.float64,
-    'search_trends_amblyopia': tf.float64,
-    'search_trends_amenorrhea': tf.float64,
-    'search_trends_amnesia': tf.float64,
-    'search_trends_anal_fissure': tf.float64,
-    'search_trends_anaphylaxis': tf.float64,
-    'search_trends_anemia': tf.float64,
-    'search_trends_angina_pectoris': tf.float64,
-    'search_trends_angioedema': tf.float64,
-    'search_trends_angular_cheilitis': tf.float64,
-    'search_trends_anosmia': tf.float64,
-    'search_trends_anxiety': tf.float64,
-    'search_trends_aphasia': tf.float64,
-    'search_trends_aphonia': tf.float64,
-    'search_trends_apnea': tf.float64,
-    'search_trends_arthralgia': tf.float64,
-    'search_trends_arthritis': tf.float64,
-    'search_trends_ascites': tf.float64,
-    'search_trends_asperger_syndrome': tf.float64,
-    'search_trends_asphyxia': tf.float64,
-    'search_trends_asthma': tf.float64,
-    'search_trends_astigmatism': tf.float64,
-    'search_trends_ataxia': tf.float64,
-    'search_trends_atheroma': tf.float64,
-    'search_trends_attention_deficit_hyperactivity_disorder': tf.float64,
-    'search_trends_auditory_hallucination': tf.float64,
-    'search_trends_autoimmune_disease': tf.float64,
-    'search_trends_avoidant_personality_disorder': tf.float64,
-    'search_trends_back_pain': tf.float64,
-    'search_trends_bacterial_vaginosis': tf.float64,
-    'search_trends_balance_disorder': tf.float64,
-    'search_trends_beaus_lines': tf.float64,
-    'search_trends_bells_palsy': tf.float64,
-    'search_trends_biliary_colic': tf.float64,
-    'search_trends_binge_eating': tf.float64,
-    'search_trends_bleeding': tf.float64,
-    'search_trends_bleeding_on_probing': tf.float64,
-    'search_trends_blepharospasm': tf.float64,
-    'search_trends_bloating': tf.float64,
-    'search_trends_blood_in_stool': tf.float64,
-    'search_trends_blurred_vision': tf.float64,
-    'search_trends_blushing': tf.float64,
-    'search_trends_boil': tf.float64,
-    'search_trends_bone_fracture': tf.float64,
-    'search_trends_bone_tumor': tf.float64,
-    'search_trends_bowel_obstruction': tf.float64,
-    'search_trends_bradycardia': tf.float64,
-    'search_trends_braxton_hicks_contractions': tf.float64,
-    'search_trends_breakthrough_bleeding': tf.float64,
-    'search_trends_breast_pain': tf.float64,
-    'search_trends_bronchitis': tf.float64,
-    'search_trends_bruise': tf.float64,
-    'search_trends_bruxism': tf.float64,
-    'search_trends_bunion': tf.float64,
-    'search_trends_burn': tf.float64,
-    'search_trends_burning_chest_pain': tf.float64,
-    'search_trends_burning_mouth_syndrome': tf.float64,
-    'search_trends_candidiasis': tf.float64,
-    'search_trends_canker_sore': tf.float64,
-    'search_trends_cardiac_arrest': tf.float64,
-    'search_trends_carpal_tunnel_syndrome': tf.float64,
-    'search_trends_cataplexy': tf.float64,
-    'search_trends_cataract': tf.float64,
-    'search_trends_chancre': tf.float64,
-    'search_trends_cheilitis': tf.float64,
-    'search_trends_chest_pain': tf.float64,
-    'search_trends_chills': tf.float64,
-    'search_trends_chorea': tf.float64,
-    'search_trends_chronic_pain': tf.float64,
-    'search_trends_cirrhosis': tf.float64,
-    'search_trends_cleft_lip_and_cleft_palate': tf.float64,
-    'search_trends_clouding_of_consciousness': tf.float64,
-    'search_trends_cluster_headache': tf.float64,
-    'search_trends_colitis': tf.float64,
-    'search_trends_coma': tf.float64,
-    'search_trends_common_cold': tf.float64,
-    'search_trends_compulsive_behavior': tf.float64,
-    'search_trends_compulsive_hoarding': tf.float64,
-    'search_trends_confusion': tf.float64,
-    'search_trends_congenital_heart_defect': tf.float64,
-    'search_trends_conjunctivitis': tf.float64,
-    'search_trends_constipation': tf.float64,
-    'search_trends_convulsion': tf.float64,
-    'search_trends_cough': tf.float64,
-    'search_trends_crackles': tf.float64,
-    'search_trends_cramp': tf.float64,
-    'search_trends_crepitus': tf.float64,
-    'search_trends_croup': tf.float64,
-    'search_trends_cyanosis': tf.float64,
-    'search_trends_dandruff': tf.float64,
-    'search_trends_delayed_onset_muscle_soreness': tf.float64,
-    'search_trends_dementia': tf.float64,
-    'search_trends_dentin_hypersensitivity': tf.float64,
-    'search_trends_depersonalization': tf.float64,
-    'search_trends_depression': tf.float64,
-    'search_trends_dermatitis': tf.float64,
-    'search_trends_desquamation': tf.float64,
-    'search_trends_developmental_disability': tf.float64,
-    'search_trends_diabetes': tf.float64,
-    'search_trends_diabetic_ketoacidosis': tf.float64,
-    'search_trends_diarrhea': tf.float64,
-    'search_trends_dizziness': tf.float64,
-    'search_trends_dry_eye_syndrome': tf.float64,
-    'search_trends_dysautonomia': tf.float64,
-    'search_trends_dysgeusia': tf.float64,
-    'search_trends_dysmenorrhea': tf.float64,
-    'search_trends_dyspareunia': tf.float64,
-    'search_trends_dysphagia': tf.float64,
-    'search_trends_dysphoria': tf.float64,
-    'search_trends_dystonia': tf.float64,
-    'search_trends_dysuria': tf.float64,
-    'search_trends_ear_pain': tf.float64,
-    'search_trends_eczema': tf.float64,
-    'search_trends_edema': tf.float64,
-    'search_trends_encephalitis': tf.float64,
-    'search_trends_encephalopathy': tf.float64,
-    'search_trends_epidermoid_cyst': tf.float64,
-    'search_trends_epilepsy': tf.float64,
-    'search_trends_epiphora': tf.float64,
-    'search_trends_erectile_dysfunction': tf.float64,
-    'search_trends_erythema': tf.float64,
-    'search_trends_erythema_chronicum_migrans': tf.float64,
-    'search_trends_esophagitis': tf.float64,
-    'search_trends_excessive_daytime_sleepiness': tf.float64,
-    'search_trends_eye_pain': tf.float64,
-    'search_trends_eye_strain': tf.float64,
-    'search_trends_facial_nerve_paralysis': tf.float64,
-    'search_trends_facial_swelling': tf.float64,
-    'search_trends_fasciculation': tf.float64,
-    'search_trends_fatigue': tf.float64,
-    'search_trends_fatty_liver_disease': tf.float64,
-    'search_trends_fecal_incontinence': tf.float64,
-    'search_trends_fever': tf.float64,
-    'search_trends_fibrillation': tf.float64,
-    'search_trends_fibrocystic_breast_changes': tf.float64,
-    'search_trends_fibromyalgia': tf.float64,
-    'search_trends_flatulence': tf.float64,
-    'search_trends_floater': tf.float64,
-    'search_trends_focal_seizure': tf.float64,
-    'search_trends_folate_deficiency': tf.float64,
-    'search_trends_food_craving': tf.float64,
-    'search_trends_food_intolerance': tf.float64,
-    'search_trends_frequent_urination': tf.float64,
-    'search_trends_gastroesophageal_reflux_disease': tf.float64,
-    'search_trends_gastroparesis': tf.float64,
-    'search_trends_generalized_anxiety_disorder': tf.float64,
-    'search_trends_genital_wart': tf.float64,
-    'search_trends_gingival_recession': tf.float64,
-    'search_trends_gingivitis': tf.float64,
-    'search_trends_globus_pharyngis': tf.float64,
-    'search_trends_goitre': tf.float64,
-    'search_trends_gout': tf.float64,
-    'search_trends_grandiosity': tf.float64,
-    'search_trends_granuloma': tf.float64,
-    'search_trends_guilt': tf.float64,
-    'search_trends_hair_loss': tf.float64,
-    'search_trends_halitosis': tf.float64,
-    'search_trends_hay_fever': tf.float64,
-    'search_trends_headache': tf.float64,
-    'search_trends_heart_arrhythmia': tf.float64,
-    'search_trends_heart_murmur': tf.float64,
-    'search_trends_heartburn': tf.float64,
-    'search_trends_hematochezia': tf.float64,
-    'search_trends_hematoma': tf.float64,
-    'search_trends_hematuria': tf.float64,
-    'search_trends_hemolysis': tf.float64,
-    'search_trends_hemoptysis': tf.float64,
-    'search_trends_hemorrhoids': tf.float64,
-    'search_trends_hepatic_encephalopathy': tf.float64,
-    'search_trends_hepatitis': tf.float64,
-    'search_trends_hepatotoxicity': tf.float64,
-    'search_trends_hiccup': tf.float64,
-    'search_trends_hip_pain': tf.float64,
-    'search_trends_hives': tf.float64,
-    'search_trends_hot_flash': tf.float64,
-    'search_trends_hydrocephalus': tf.float64,
-    'search_trends_hypercalcaemia': tf.float64,
-    'search_trends_hypercapnia': tf.float64,
-    'search_trends_hypercholesterolemia': tf.float64,
-    'search_trends_hyperemesis_gravidarum': tf.float64,
-    'search_trends_hyperglycemia': tf.float64,
-    'search_trends_hyperhidrosis': tf.float64,
-    'search_trends_hyperkalemia': tf.float64,
-    'search_trends_hyperlipidemia': tf.float64,
-    'search_trends_hypermobility': tf.float64,
-    'search_trends_hyperpigmentation': tf.float64,
-    'search_trends_hypersomnia': tf.float64,
-    'search_trends_hypertension': tf.float64,
-    'search_trends_hyperthermia': tf.float64,
-    'search_trends_hyperthyroidism': tf.float64,
-    'search_trends_hypertriglyceridemia': tf.float64,
-    'search_trends_hypertrophy': tf.float64,
-    'search_trends_hyperventilation': tf.float64,
-    'search_trends_hypocalcaemia': tf.float64,
-    'search_trends_hypochondriasis': tf.float64,
-    'search_trends_hypoglycemia': tf.float64,
-    'search_trends_hypogonadism': tf.float64,
-    'search_trends_hypokalemia': tf.float64,
-    'search_trends_hypomania': tf.float64,
-    'search_trends_hyponatremia': tf.float64,
-    'search_trends_hypotension': tf.float64,
-    'search_trends_hypothyroidism': tf.float64,
-    'search_trends_hypoxemia': tf.float64,
-    'search_trends_hypoxia': tf.float64,
-    'search_trends_impetigo': tf.float64,
-    'search_trends_implantation_bleeding': tf.float64,
-    'search_trends_impulsivity': tf.float64,
-    'search_trends_indigestion': tf.float64,
-    'search_trends_infection': tf.float64,
-    'search_trends_inflammation': tf.float64,
-    'search_trends_inflammatory_bowel_disease': tf.float64,
-    'search_trends_ingrown_hair': tf.float64,
-    'search_trends_insomnia': tf.float64,
-    'search_trends_insulin_resistance': tf.float64,
-    'search_trends_intermenstrual_bleeding': tf.float64,
-    'search_trends_intracranial_pressure': tf.float64,
-    'search_trends_iron_deficiency': tf.float64,
-    'search_trends_irregular_menstruation': tf.float64,
-    'search_trends_itch': tf.float64,
-    'search_trends_jaundice': tf.float64,
-    'search_trends_kidney_failure': tf.float64,
-    'search_trends_kidney_stone': tf.float64,
-    'search_trends_knee_pain': tf.float64,
-    'search_trends_kyphosis': tf.float64,
-    'search_trends_lactose_intolerance': tf.float64,
-    'search_trends_laryngitis': tf.float64,
-    'search_trends_leg_cramps': tf.float64,
-    'search_trends_lesion': tf.float64,
-    'search_trends_leukorrhea': tf.float64,
-    'search_trends_lightheadedness': tf.float64,
-    'search_trends_low_back_pain': tf.float64,
-    'search_trends_low_grade_fever': tf.float64,
-    'search_trends_lymphedema': tf.float64,
-    'search_trends_major_depressive_disorder': tf.float64,
-    'search_trends_malabsorption': tf.float64,
-    'search_trends_male_infertility': tf.float64,
-    'search_trends_manic_disorder': tf.float64,
-    'search_trends_melasma': tf.float64,
-    'search_trends_melena': tf.float64,
-    'search_trends_meningitis': tf.float64,
-    'search_trends_menorrhagia': tf.float64,
-    'search_trends_middle_back_pain': tf.float64,
-    'search_trends_migraine': tf.float64,
-    'search_trends_milium': tf.float64,
-    'search_trends_mitral_insufficiency': tf.float64,
-    'search_trends_mood_disorder': tf.float64,
-    'search_trends_mood_swing': tf.float64,
-    'search_trends_morning_sickness': tf.float64,
-    'search_trends_motion_sickness': tf.float64,
-    'search_trends_mouth_ulcer': tf.float64,
-    'search_trends_muscle_atrophy': tf.float64,
-    'search_trends_muscle_weakness': tf.float64,
-    'search_trends_myalgia': tf.float64,
-    'search_trends_mydriasis': tf.float64,
-    'search_trends_myocardial_infarction': tf.float64,
-    'search_trends_myoclonus': tf.float64,
-    'search_trends_nasal_congestion': tf.float64,
-    'search_trends_nasal_polyp': tf.float64,
-    'search_trends_nausea': tf.float64,
-    'search_trends_neck_mass': tf.float64,
-    'search_trends_neck_pain': tf.float64,
-    'search_trends_neonatal_jaundice': tf.float64,
-    'search_trends_nerve_injury': tf.float64,
-    'search_trends_neuralgia': tf.float64,
-    'search_trends_neutropenia': tf.float64,
-    'search_trends_night_sweats': tf.float64,
-    'search_trends_night_terror': tf.float64,
-    'search_trends_nocturnal_enuresis': tf.float64,
-    'search_trends_nodule': tf.float64,
-    'search_trends_nosebleed': tf.float64,
-    'search_trends_nystagmus': tf.float64,
-    'search_trends_obesity': tf.float64,
-    'search_trends_onychorrhexis': tf.float64,
-    'search_trends_oral_candidiasis': tf.float64,
-    'search_trends_orthostatic_hypotension': tf.float64,
-    'search_trends_osteopenia': tf.float64,
-    'search_trends_osteophyte': tf.float64,
-    'search_trends_osteoporosis': tf.float64,
-    'search_trends_otitis': tf.float64,
-    'search_trends_otitis_externa': tf.float64,
-    'search_trends_otitis_media': tf.float64,
-    'search_trends_pain': tf.float64,
-    'search_trends_palpitations': tf.float64,
-    'search_trends_pancreatitis': tf.float64,
-    'search_trends_panic_attack': tf.float64,
-    'search_trends_papule': tf.float64,
-    'search_trends_paranoia': tf.float64,
-    'search_trends_paresthesia': tf.float64,
-    'search_trends_pelvic_inflammatory_disease': tf.float64,
-    'search_trends_pericarditis': tf.float64,
-    'search_trends_periodontal_disease': tf.float64,
-    'search_trends_periorbital_puffiness': tf.float64,
-    'search_trends_peripheral_neuropathy': tf.float64,
-    'search_trends_perspiration': tf.float64,
-    'search_trends_petechia': tf.float64,
-    'search_trends_phlegm': tf.float64,
-    'search_trends_photodermatitis': tf.float64,
-    'search_trends_photophobia': tf.float64,
-    'search_trends_photopsia': tf.float64,
-    'search_trends_pleural_effusion': tf.float64,
-    'search_trends_pleurisy': tf.float64,
-    'search_trends_pneumonia': tf.float64,
-    'search_trends_podalgia': tf.float64,
-    'search_trends_polycythemia': tf.float64,
-    'search_trends_polydipsia': tf.float64,
-    'search_trends_polyneuropathy': tf.float64,
-    'search_trends_polyuria': tf.float64,
-    'search_trends_poor_posture': tf.float64,
-    'search_trends_post_nasal_drip': tf.float64,
-    'search_trends_postural_orthostatic_tachycardia_syndrome': tf.float64,
-    'search_trends_prediabetes': tf.float64,
-    'search_trends_proteinuria': tf.float64,
-    'search_trends_pruritus_ani': tf.float64,
-    'search_trends_psychosis': tf.float64,
-    'search_trends_ptosis': tf.float64,
-    'search_trends_pulmonary_edema': tf.float64,
-    'search_trends_pulmonary_hypertension': tf.float64,
-    'search_trends_purpura': tf.float64,
-    'search_trends_pus': tf.float64,
-    'search_trends_pyelonephritis': tf.float64,
-    'search_trends_radiculopathy': tf.float64,
-    'search_trends_rectal_pain': tf.float64,
-    'search_trends_rectal_prolapse': tf.float64,
-    'search_trends_red_eye': tf.float64,
-    'search_trends_renal_colic': tf.float64,
-    'search_trends_restless_legs_syndrome': tf.float64,
-    'search_trends_rheum': tf.float64,
-    'search_trends_rhinitis': tf.float64,
-    'search_trends_rhinorrhea': tf.float64,
-    'search_trends_rosacea': tf.float64,
-    'search_trends_round_ligament_pain': tf.float64,
-    'search_trends_rumination': tf.float64,
-    'search_trends_scar': tf.float64,
-    'search_trends_sciatica': tf.float64,
-    'search_trends_scoliosis': tf.float64,
-    'search_trends_seborrheic_dermatitis': tf.float64,
-    'search_trends_self_harm': tf.float64,
-    'search_trends_sensitivity_to_sound': tf.float64,
-    'search_trends_sexual_dysfunction': tf.float64,
-    'search_trends_shallow_breathing': tf.float64,
-    'search_trends_sharp_pain': tf.float64,
-    'search_trends_shivering': tf.float64,
-    'search_trends_shortness_of_breath': tf.float64,
-    'search_trends_shyness': tf.float64,
-    'search_trends_sinusitis': tf.float64,
-    'search_trends_skin_condition': tf.float64,
-    'search_trends_skin_rash': tf.float64,
-    'search_trends_skin_tag': tf.float64,
-    'search_trends_skin_ulcer': tf.float64,
-    'search_trends_sleep_apnea': tf.float64,
-    'search_trends_sleep_deprivation': tf.float64,
-    'search_trends_sleep_disorder': tf.float64,
-    'search_trends_snoring': tf.float64,
-    'search_trends_sore_throat': tf.float64,
-    'search_trends_spasticity': tf.float64,
-    'search_trends_splenomegaly': tf.float64,
-    'search_trends_sputum': tf.float64,
-    'search_trends_stomach_rumble': tf.float64,
-    'search_trends_strabismus': tf.float64,
-    'search_trends_stretch_marks': tf.float64,
-    'search_trends_stridor': tf.float64,
-    'search_trends_stroke': tf.float64,
-    'search_trends_stuttering': tf.float64,
-    'search_trends_subdural_hematoma': tf.float64,
-    'search_trends_suicidal_ideation': tf.float64,
-    'search_trends_swelling': tf.float64,
-    'search_trends_swollen_feet': tf.float64,
-    'search_trends_swollen_lymph_nodes': tf.float64,
-    'search_trends_syncope': tf.float64,
-    'search_trends_tachycardia': tf.float64,
-    'search_trends_tachypnea': tf.float64,
-    'search_trends_telangiectasia': tf.float64,
-    'search_trends_tenderness': tf.float64,
-    'search_trends_testicular_pain': tf.float64,
-    'search_trends_throat_irritation': tf.float64,
-    'search_trends_thrombocytopenia': tf.float64,
-    'search_trends_thyroid_nodule': tf.float64,
-    'search_trends_tic': tf.float64,
-    'search_trends_tinnitus': tf.float64,
-    'search_trends_tonsillitis': tf.float64,
-    'search_trends_toothache': tf.float64,
-    'search_trends_tremor': tf.float64,
-    'search_trends_trichoptilosis': tf.float64,
-    'search_trends_tumor': tf.float64,
-    'search_trends_type_2_diabetes': tf.float64,
-    'search_trends_unconsciousness': tf.float64,
-    'search_trends_underweight': tf.float64,
-    'search_trends_upper_respiratory_tract_infection': tf.float64,
-    'search_trends_urethritis': tf.float64,
-    'search_trends_urinary_incontinence': tf.float64,
-    'search_trends_urinary_tract_infection': tf.float64,
-    'search_trends_urinary_urgency': tf.float64,
-    'search_trends_uterine_contraction': tf.float64,
-    'search_trends_vaginal_bleeding': tf.float64,
-    'search_trends_vaginal_discharge': tf.float64,
-    'search_trends_vaginitis': tf.float64,
-    'search_trends_varicose_veins': tf.float64,
-    'search_trends_vasculitis': tf.float64,
-    'search_trends_ventricular_fibrillation': tf.float64,
-    'search_trends_ventricular_tachycardia': tf.float64,
-    'search_trends_vertigo': tf.float64,
-    'search_trends_viral_pneumonia': tf.float64,
-    'search_trends_visual_acuity': tf.float64,
-    'search_trends_vomiting': tf.float64,
-    'search_trends_wart': tf.float64,
-    'search_trends_water_retention': tf.float64,
-    'search_trends_weakness': tf.float64,
-    'search_trends_weight_gain': tf.float64,
-    'search_trends_wheeze': tf.float64,
-    'search_trends_xeroderma': tf.float64,
-    'search_trends_xerostomia': tf.float64,
-    'search_trends_yawn': tf.float64,
-    'smoking_prevalence': tf.float64,
-    'snowfall_mm': tf.float64,
-    'stay_at_home_requirements': tf.float64,
-    'stringency_index': tf.float64,
-    'subregion1_code': tf.string,
-    'subregion1_name': tf.string,
-    'subregion2_code': tf.string,
-    'subregion2_name': tf.string,
-    'testing_policy': tf.float64,
-    'vaccination_policy': tf.float64,
-    'wikidata_id': tf.string,
-    'workplace_closing': tf.float64,
+    'adult_female_mortality_rate': float64,
+    'adult_male_mortality_rate': float64,
+    'age_bin_0': string,
+    'age_bin_1': string,
+    'age_bin_2': string,
+    'age_bin_3': string,
+    'age_bin_4': string,
+    'age_bin_5': string,
+    'age_bin_6': string,
+    'age_bin_7': string,
+    'age_bin_8': string,
+    'age_bin_9': string,
+    'aggregation_level': float64,
+    'area_rural_sq_km': float64,
+    'area_sq_km': float64,
+    'area_urban_sq_km': float64,
+    'average_temperature_celsius': float64,
+    'cancel_public_events': float64,
+    'comorbidity_mortality_rate': float64,
+    'contact_tracing': float64,
+    'country_code': string,
+    'country_name': string,
+    'cumulative_confirmed': float64,
+    'cumulative_confirmed_age_0': float64,
+    'cumulative_confirmed_age_1': float64,
+    'cumulative_confirmed_age_2': float64,
+    'cumulative_confirmed_age_3': float64,
+    'cumulative_confirmed_age_4': float64,
+    'cumulative_confirmed_age_5': float64,
+    'cumulative_confirmed_age_6': float64,
+    'cumulative_confirmed_age_7': float64,
+    'cumulative_confirmed_age_8': float64,
+    'cumulative_confirmed_age_9': float64,
+    'cumulative_confirmed_female': float64,
+    'cumulative_confirmed_male': float64,
+    'cumulative_deceased': float64,
+    'cumulative_deceased_age_0': float64,
+    'cumulative_deceased_age_1': float64,
+    'cumulative_deceased_age_2': float64,
+    'cumulative_deceased_age_3': float64,
+    'cumulative_deceased_age_4': float64,
+    'cumulative_deceased_age_5': float64,
+    'cumulative_deceased_age_6': float64,
+    'cumulative_deceased_age_7': float64,
+    'cumulative_deceased_age_8': float64,
+    'cumulative_deceased_age_9': float64,
+    'cumulative_deceased_female': float64,
+    'cumulative_deceased_male': float64,
+    'cumulative_hospitalized_patients': float64,
+    'cumulative_hospitalized_patients_age_0': float64,
+    'cumulative_hospitalized_patients_age_1': float64,
+    'cumulative_hospitalized_patients_age_2': float64,
+    'cumulative_hospitalized_patients_age_3': float64,
+    'cumulative_hospitalized_patients_age_4': float64,
+    'cumulative_hospitalized_patients_age_5': float64,
+    'cumulative_hospitalized_patients_age_6': float64,
+    'cumulative_hospitalized_patients_age_7': float64,
+    'cumulative_hospitalized_patients_age_8': float64,
+    'cumulative_hospitalized_patients_age_9': float64,
+    'cumulative_hospitalized_patients_female': float64,
+    'cumulative_hospitalized_patients_male': float64,
+    'cumulative_intensive_care_patients': float64,
+    'cumulative_intensive_care_patients_age_0': float64,
+    'cumulative_intensive_care_patients_age_1': float64,
+    'cumulative_intensive_care_patients_age_2': float64,
+    'cumulative_intensive_care_patients_age_3': float64,
+    'cumulative_intensive_care_patients_age_4': float64,
+    'cumulative_intensive_care_patients_age_5': float64,
+    'cumulative_intensive_care_patients_age_6': float64,
+    'cumulative_intensive_care_patients_age_7': float64,
+    'cumulative_intensive_care_patients_age_8': float64,
+    'cumulative_intensive_care_patients_age_9': float64,
+    'cumulative_intensive_care_patients_female': float64,
+    'cumulative_intensive_care_patients_male': float64,
+    'cumulative_persons_fully_vaccinated': float64,
+    'cumulative_persons_fully_vaccinated_janssen': float64,
+    'cumulative_persons_fully_vaccinated_moderna': float64,
+    'cumulative_persons_fully_vaccinated_pfizer': float64,
+    'cumulative_persons_vaccinated': float64,
+    'cumulative_recovered': float64,
+    'cumulative_recovered_age_0': float64,
+    'cumulative_recovered_age_1': float64,
+    'cumulative_recovered_age_2': float64,
+    'cumulative_recovered_age_3': float64,
+    'cumulative_recovered_age_4': float64,
+    'cumulative_recovered_age_5': float64,
+    'cumulative_recovered_age_6': float64,
+    'cumulative_recovered_age_7': float64,
+    'cumulative_recovered_age_8': float64,
+    'cumulative_recovered_age_9': float64,
+    'cumulative_recovered_female': float64,
+    'cumulative_recovered_male': float64,
+    'cumulative_tested': float64,
+    'cumulative_tested_age_0': float64,
+    'cumulative_tested_age_1': float64,
+    'cumulative_tested_age_2': float64,
+    'cumulative_tested_age_3': float64,
+    'cumulative_tested_age_4': float64,
+    'cumulative_tested_age_5': float64,
+    'cumulative_tested_age_6': float64,
+    'cumulative_tested_age_7': float64,
+    'cumulative_tested_age_8': float64,
+    'cumulative_tested_age_9': float64,
+    'cumulative_tested_female': float64,
+    'cumulative_tested_male': float64,
+    'cumulative_vaccine_doses_administered': float64,
+    'cumulative_vaccine_doses_administered_janssen': float64,
+    'cumulative_vaccine_doses_administered_moderna': float64,
+    'cumulative_vaccine_doses_administered_pfizer': float64,
+    'cumulative_ventilator_patients': float64,
+    'current_hospitalized_patients': float64,
+    'current_intensive_care_patients': float64,
+    'current_ventilator_patients': float64,
+    'datacommons_id': string,
+    'date': string,
+    'debt_relief': float64,
+    'dew_point': float64,
+    'diabetes_prevalence': float64,
+    'elevation_m': float64,
+    'emergency_investment_in_healthcare': float64,
+    'facial_coverings': float64,
+    'fiscal_measures': float64,
+    'gdp_per_capita_usd': float64,
+    'gdp_usd': float64,
+    'health_expenditure_usd': float64,
+    'hospital_beds_per_1000': float64,
+    'human_capital_index': float64,
+    'human_development_index': float64,
+    'income_support': float64,
+    'infant_mortality_rate': float64,
+    'international_support': float64,
+    'international_travel_controls': float64,
+    'investment_in_vaccines': float64,
+    'iso_3166_1_alpha_2': string,
+    'iso_3166_1_alpha_3': string,
+    'latitude': float64,
+    'life_expectancy': float64,
+    'locality_code': string,
+    'locality_name': string,
+    'location_key': string,
+    'longitude': float64,
+    'maximum_temperature_celsius': float64,
+    'minimum_temperature_celsius': float64,
+    'mobility_grocery_and_pharmacy': float64,
+    'mobility_parks': float64,
+    'mobility_residential': float64,
+    'mobility_retail_and_recreation': float64,
+    'mobility_transit_stations': float64,
+    'mobility_workplaces': float64,
+    'new_confirmed': float64,
+    'new_confirmed_age_0': float64,
+    'new_confirmed_age_1': float64,
+    'new_confirmed_age_2': float64,
+    'new_confirmed_age_3': float64,
+    'new_confirmed_age_4': float64,
+    'new_confirmed_age_5': float64,
+    'new_confirmed_age_6': float64,
+    'new_confirmed_age_7': float64,
+    'new_confirmed_age_8': float64,
+    'new_confirmed_age_9': float64,
+    'new_confirmed_female': float64,
+    'new_confirmed_male': float64,
+    'new_deceased': float64,
+    'new_deceased_age_0': float64,
+    'new_deceased_age_1': float64,
+    'new_deceased_age_2': float64,
+    'new_deceased_age_3': float64,
+    'new_deceased_age_4': float64,
+    'new_deceased_age_5': float64,
+    'new_deceased_age_6': float64,
+    'new_deceased_age_7': float64,
+    'new_deceased_age_8': float64,
+    'new_deceased_age_9': float64,
+    'new_deceased_female': float64,
+    'new_deceased_male': float64,
+    'new_hospitalized_patients': float64,
+    'new_hospitalized_patients_age_0': float64,
+    'new_hospitalized_patients_age_1': float64,
+    'new_hospitalized_patients_age_2': float64,
+    'new_hospitalized_patients_age_3': float64,
+    'new_hospitalized_patients_age_4': float64,
+    'new_hospitalized_patients_age_5': float64,
+    'new_hospitalized_patients_age_6': float64,
+    'new_hospitalized_patients_age_7': float64,
+    'new_hospitalized_patients_age_8': float64,
+    'new_hospitalized_patients_age_9': float64,
+    'new_hospitalized_patients_female': float64,
+    'new_hospitalized_patients_male': float64,
+    'new_intensive_care_patients': float64,
+    'new_intensive_care_patients_age_0': float64,
+    'new_intensive_care_patients_age_1': float64,
+    'new_intensive_care_patients_age_2': float64,
+    'new_intensive_care_patients_age_3': float64,
+    'new_intensive_care_patients_age_4': float64,
+    'new_intensive_care_patients_age_5': float64,
+    'new_intensive_care_patients_age_6': float64,
+    'new_intensive_care_patients_age_7': float64,
+    'new_intensive_care_patients_age_8': float64,
+    'new_intensive_care_patients_age_9': float64,
+    'new_intensive_care_patients_female': float64,
+    'new_intensive_care_patients_male': float64,
+    'new_persons_fully_vaccinated': float64,
+    'new_persons_fully_vaccinated_janssen': float64,
+    'new_persons_fully_vaccinated_moderna': float64,
+    'new_persons_fully_vaccinated_pfizer': float64,
+    'new_persons_vaccinated': float64,
+    'new_recovered': float64,
+    'new_recovered_age_0': float64,
+    'new_recovered_age_1': float64,
+    'new_recovered_age_2': float64,
+    'new_recovered_age_3': float64,
+    'new_recovered_age_4': float64,
+    'new_recovered_age_5': float64,
+    'new_recovered_age_6': float64,
+    'new_recovered_age_7': float64,
+    'new_recovered_age_8': float64,
+    'new_recovered_age_9': float64,
+    'new_recovered_female': float64,
+    'new_recovered_male': float64,
+    'new_tested': float64,
+    'new_tested_age_0': float64,
+    'new_tested_age_1': float64,
+    'new_tested_age_2': float64,
+    'new_tested_age_3': float64,
+    'new_tested_age_4': float64,
+    'new_tested_age_5': float64,
+    'new_tested_age_6': float64,
+    'new_tested_age_7': float64,
+    'new_tested_age_8': float64,
+    'new_tested_age_9': float64,
+    'new_tested_female': float64,
+    'new_tested_male': float64,
+    'new_vaccine_doses_administered': float64,
+    'new_vaccine_doses_administered_janssen': float64,
+    'new_vaccine_doses_administered_moderna': float64,
+    'new_vaccine_doses_administered_pfizer': float64,
+    'new_ventilator_patients': float64,
+    'nurses_per_1000': float64,
+    'openstreetmap_id': string,
+    'out_of_pocket_health_expenditure_usd': float64,
+    'physicians_per_1000': float64,
+    'place_id': string,
+    'pollution_mortality_rate': float64,
+    'population': float64,
+    'population_age_00_09': float64,
+    'population_age_10_19': float64,
+    'population_age_20_29': float64,
+    'population_age_30_39': float64,
+    'population_age_40_49': float64,
+    'population_age_50_59': float64,
+    'population_age_60_69': float64,
+    'population_age_70_79': float64,
+    'population_age_80_and_older': float64,
+    'population_clustered': float64,
+    'population_density': float64,
+    'population_female': float64,
+    'population_largest_city': float64,
+    'population_male': float64,
+    'population_rural': float64,
+    'population_urban': float64,
+    'public_information_campaigns': float64,
+    'public_transport_closing': float64,
+    'rainfall_mm': float64,
+    'relative_humidity': float64,
+    'restrictions_on_gatherings': float64,
+    'restrictions_on_internal_movement': float64,
+    'school_closing': float64,
+    'search_trends_abdominal_obesity': float64,
+    'search_trends_abdominal_pain': float64,
+    'search_trends_acne': float64,
+    'search_trends_actinic_keratosis': float64,
+    'search_trends_acute_bronchitis': float64,
+    'search_trends_adrenal_crisis': float64,
+    'search_trends_ageusia': float64,
+    'search_trends_alcoholism': float64,
+    'search_trends_allergic_conjunctivitis': float64,
+    'search_trends_allergy': float64,
+    'search_trends_amblyopia': float64,
+    'search_trends_amenorrhea': float64,
+    'search_trends_amnesia': float64,
+    'search_trends_anal_fissure': float64,
+    'search_trends_anaphylaxis': float64,
+    'search_trends_anemia': float64,
+    'search_trends_angina_pectoris': float64,
+    'search_trends_angioedema': float64,
+    'search_trends_angular_cheilitis': float64,
+    'search_trends_anosmia': float64,
+    'search_trends_anxiety': float64,
+    'search_trends_aphasia': float64,
+    'search_trends_aphonia': float64,
+    'search_trends_apnea': float64,
+    'search_trends_arthralgia': float64,
+    'search_trends_arthritis': float64,
+    'search_trends_ascites': float64,
+    'search_trends_asperger_syndrome': float64,
+    'search_trends_asphyxia': float64,
+    'search_trends_asthma': float64,
+    'search_trends_astigmatism': float64,
+    'search_trends_ataxia': float64,
+    'search_trends_atheroma': float64,
+    'search_trends_attention_deficit_hyperactivity_disorder': float64,
+    'search_trends_auditory_hallucination': float64,
+    'search_trends_autoimmune_disease': float64,
+    'search_trends_avoidant_personality_disorder': float64,
+    'search_trends_back_pain': float64,
+    'search_trends_bacterial_vaginosis': float64,
+    'search_trends_balance_disorder': float64,
+    'search_trends_beaus_lines': float64,
+    'search_trends_bells_palsy': float64,
+    'search_trends_biliary_colic': float64,
+    'search_trends_binge_eating': float64,
+    'search_trends_bleeding': float64,
+    'search_trends_bleeding_on_probing': float64,
+    'search_trends_blepharospasm': float64,
+    'search_trends_bloating': float64,
+    'search_trends_blood_in_stool': float64,
+    'search_trends_blurred_vision': float64,
+    'search_trends_blushing': float64,
+    'search_trends_boil': float64,
+    'search_trends_bone_fracture': float64,
+    'search_trends_bone_tumor': float64,
+    'search_trends_bowel_obstruction': float64,
+    'search_trends_bradycardia': float64,
+    'search_trends_braxton_hicks_contractions': float64,
+    'search_trends_breakthrough_bleeding': float64,
+    'search_trends_breast_pain': float64,
+    'search_trends_bronchitis': float64,
+    'search_trends_bruise': float64,
+    'search_trends_bruxism': float64,
+    'search_trends_bunion': float64,
+    'search_trends_burn': float64,
+    'search_trends_burning_chest_pain': float64,
+    'search_trends_burning_mouth_syndrome': float64,
+    'search_trends_candidiasis': float64,
+    'search_trends_canker_sore': float64,
+    'search_trends_cardiac_arrest': float64,
+    'search_trends_carpal_tunnel_syndrome': float64,
+    'search_trends_cataplexy': float64,
+    'search_trends_cataract': float64,
+    'search_trends_chancre': float64,
+    'search_trends_cheilitis': float64,
+    'search_trends_chest_pain': float64,
+    'search_trends_chills': float64,
+    'search_trends_chorea': float64,
+    'search_trends_chronic_pain': float64,
+    'search_trends_cirrhosis': float64,
+    'search_trends_cleft_lip_and_cleft_palate': float64,
+    'search_trends_clouding_of_consciousness': float64,
+    'search_trends_cluster_headache': float64,
+    'search_trends_colitis': float64,
+    'search_trends_coma': float64,
+    'search_trends_common_cold': float64,
+    'search_trends_compulsive_behavior': float64,
+    'search_trends_compulsive_hoarding': float64,
+    'search_trends_confusion': float64,
+    'search_trends_congenital_heart_defect': float64,
+    'search_trends_conjunctivitis': float64,
+    'search_trends_constipation': float64,
+    'search_trends_convulsion': float64,
+    'search_trends_cough': float64,
+    'search_trends_crackles': float64,
+    'search_trends_cramp': float64,
+    'search_trends_crepitus': float64,
+    'search_trends_croup': float64,
+    'search_trends_cyanosis': float64,
+    'search_trends_dandruff': float64,
+    'search_trends_delayed_onset_muscle_soreness': float64,
+    'search_trends_dementia': float64,
+    'search_trends_dentin_hypersensitivity': float64,
+    'search_trends_depersonalization': float64,
+    'search_trends_depression': float64,
+    'search_trends_dermatitis': float64,
+    'search_trends_desquamation': float64,
+    'search_trends_developmental_disability': float64,
+    'search_trends_diabetes': float64,
+    'search_trends_diabetic_ketoacidosis': float64,
+    'search_trends_diarrhea': float64,
+    'search_trends_dizziness': float64,
+    'search_trends_dry_eye_syndrome': float64,
+    'search_trends_dysautonomia': float64,
+    'search_trends_dysgeusia': float64,
+    'search_trends_dysmenorrhea': float64,
+    'search_trends_dyspareunia': float64,
+    'search_trends_dysphagia': float64,
+    'search_trends_dysphoria': float64,
+    'search_trends_dystonia': float64,
+    'search_trends_dysuria': float64,
+    'search_trends_ear_pain': float64,
+    'search_trends_eczema': float64,
+    'search_trends_edema': float64,
+    'search_trends_encephalitis': float64,
+    'search_trends_encephalopathy': float64,
+    'search_trends_epidermoid_cyst': float64,
+    'search_trends_epilepsy': float64,
+    'search_trends_epiphora': float64,
+    'search_trends_erectile_dysfunction': float64,
+    'search_trends_erythema': float64,
+    'search_trends_erythema_chronicum_migrans': float64,
+    'search_trends_esophagitis': float64,
+    'search_trends_excessive_daytime_sleepiness': float64,
+    'search_trends_eye_pain': float64,
+    'search_trends_eye_strain': float64,
+    'search_trends_facial_nerve_paralysis': float64,
+    'search_trends_facial_swelling': float64,
+    'search_trends_fasciculation': float64,
+    'search_trends_fatigue': float64,
+    'search_trends_fatty_liver_disease': float64,
+    'search_trends_fecal_incontinence': float64,
+    'search_trends_fever': float64,
+    'search_trends_fibrillation': float64,
+    'search_trends_fibrocystic_breast_changes': float64,
+    'search_trends_fibromyalgia': float64,
+    'search_trends_flatulence': float64,
+    'search_trends_floater': float64,
+    'search_trends_focal_seizure': float64,
+    'search_trends_folate_deficiency': float64,
+    'search_trends_food_craving': float64,
+    'search_trends_food_intolerance': float64,
+    'search_trends_frequent_urination': float64,
+    'search_trends_gastroesophageal_reflux_disease': float64,
+    'search_trends_gastroparesis': float64,
+    'search_trends_generalized_anxiety_disorder': float64,
+    'search_trends_genital_wart': float64,
+    'search_trends_gingival_recession': float64,
+    'search_trends_gingivitis': float64,
+    'search_trends_globus_pharyngis': float64,
+    'search_trends_goitre': float64,
+    'search_trends_gout': float64,
+    'search_trends_grandiosity': float64,
+    'search_trends_granuloma': float64,
+    'search_trends_guilt': float64,
+    'search_trends_hair_loss': float64,
+    'search_trends_halitosis': float64,
+    'search_trends_hay_fever': float64,
+    'search_trends_headache': float64,
+    'search_trends_heart_arrhythmia': float64,
+    'search_trends_heart_murmur': float64,
+    'search_trends_heartburn': float64,
+    'search_trends_hematochezia': float64,
+    'search_trends_hematoma': float64,
+    'search_trends_hematuria': float64,
+    'search_trends_hemolysis': float64,
+    'search_trends_hemoptysis': float64,
+    'search_trends_hemorrhoids': float64,
+    'search_trends_hepatic_encephalopathy': float64,
+    'search_trends_hepatitis': float64,
+    'search_trends_hepatotoxicity': float64,
+    'search_trends_hiccup': float64,
+    'search_trends_hip_pain': float64,
+    'search_trends_hives': float64,
+    'search_trends_hot_flash': float64,
+    'search_trends_hydrocephalus': float64,
+    'search_trends_hypercalcaemia': float64,
+    'search_trends_hypercapnia': float64,
+    'search_trends_hypercholesterolemia': float64,
+    'search_trends_hyperemesis_gravidarum': float64,
+    'search_trends_hyperglycemia': float64,
+    'search_trends_hyperhidrosis': float64,
+    'search_trends_hyperkalemia': float64,
+    'search_trends_hyperlipidemia': float64,
+    'search_trends_hypermobility': float64,
+    'search_trends_hyperpigmentation': float64,
+    'search_trends_hypersomnia': float64,
+    'search_trends_hypertension': float64,
+    'search_trends_hyperthermia': float64,
+    'search_trends_hyperthyroidism': float64,
+    'search_trends_hypertriglyceridemia': float64,
+    'search_trends_hypertrophy': float64,
+    'search_trends_hyperventilation': float64,
+    'search_trends_hypocalcaemia': float64,
+    'search_trends_hypochondriasis': float64,
+    'search_trends_hypoglycemia': float64,
+    'search_trends_hypogonadism': float64,
+    'search_trends_hypokalemia': float64,
+    'search_trends_hypomania': float64,
+    'search_trends_hyponatremia': float64,
+    'search_trends_hypotension': float64,
+    'search_trends_hypothyroidism': float64,
+    'search_trends_hypoxemia': float64,
+    'search_trends_hypoxia': float64,
+    'search_trends_impetigo': float64,
+    'search_trends_implantation_bleeding': float64,
+    'search_trends_impulsivity': float64,
+    'search_trends_indigestion': float64,
+    'search_trends_infection': float64,
+    'search_trends_inflammation': float64,
+    'search_trends_inflammatory_bowel_disease': float64,
+    'search_trends_ingrown_hair': float64,
+    'search_trends_insomnia': float64,
+    'search_trends_insulin_resistance': float64,
+    'search_trends_intermenstrual_bleeding': float64,
+    'search_trends_intracranial_pressure': float64,
+    'search_trends_iron_deficiency': float64,
+    'search_trends_irregular_menstruation': float64,
+    'search_trends_itch': float64,
+    'search_trends_jaundice': float64,
+    'search_trends_kidney_failure': float64,
+    'search_trends_kidney_stone': float64,
+    'search_trends_knee_pain': float64,
+    'search_trends_kyphosis': float64,
+    'search_trends_lactose_intolerance': float64,
+    'search_trends_laryngitis': float64,
+    'search_trends_leg_cramps': float64,
+    'search_trends_lesion': float64,
+    'search_trends_leukorrhea': float64,
+    'search_trends_lightheadedness': float64,
+    'search_trends_low_back_pain': float64,
+    'search_trends_low_grade_fever': float64,
+    'search_trends_lymphedema': float64,
+    'search_trends_major_depressive_disorder': float64,
+    'search_trends_malabsorption': float64,
+    'search_trends_male_infertility': float64,
+    'search_trends_manic_disorder': float64,
+    'search_trends_melasma': float64,
+    'search_trends_melena': float64,
+    'search_trends_meningitis': float64,
+    'search_trends_menorrhagia': float64,
+    'search_trends_middle_back_pain': float64,
+    'search_trends_migraine': float64,
+    'search_trends_milium': float64,
+    'search_trends_mitral_insufficiency': float64,
+    'search_trends_mood_disorder': float64,
+    'search_trends_mood_swing': float64,
+    'search_trends_morning_sickness': float64,
+    'search_trends_motion_sickness': float64,
+    'search_trends_mouth_ulcer': float64,
+    'search_trends_muscle_atrophy': float64,
+    'search_trends_muscle_weakness': float64,
+    'search_trends_myalgia': float64,
+    'search_trends_mydriasis': float64,
+    'search_trends_myocardial_infarction': float64,
+    'search_trends_myoclonus': float64,
+    'search_trends_nasal_congestion': float64,
+    'search_trends_nasal_polyp': float64,
+    'search_trends_nausea': float64,
+    'search_trends_neck_mass': float64,
+    'search_trends_neck_pain': float64,
+    'search_trends_neonatal_jaundice': float64,
+    'search_trends_nerve_injury': float64,
+    'search_trends_neuralgia': float64,
+    'search_trends_neutropenia': float64,
+    'search_trends_night_sweats': float64,
+    'search_trends_night_terror': float64,
+    'search_trends_nocturnal_enuresis': float64,
+    'search_trends_nodule': float64,
+    'search_trends_nosebleed': float64,
+    'search_trends_nystagmus': float64,
+    'search_trends_obesity': float64,
+    'search_trends_onychorrhexis': float64,
+    'search_trends_oral_candidiasis': float64,
+    'search_trends_orthostatic_hypotension': float64,
+    'search_trends_osteopenia': float64,
+    'search_trends_osteophyte': float64,
+    'search_trends_osteoporosis': float64,
+    'search_trends_otitis': float64,
+    'search_trends_otitis_externa': float64,
+    'search_trends_otitis_media': float64,
+    'search_trends_pain': float64,
+    'search_trends_palpitations': float64,
+    'search_trends_pancreatitis': float64,
+    'search_trends_panic_attack': float64,
+    'search_trends_papule': float64,
+    'search_trends_paranoia': float64,
+    'search_trends_paresthesia': float64,
+    'search_trends_pelvic_inflammatory_disease': float64,
+    'search_trends_pericarditis': float64,
+    'search_trends_periodontal_disease': float64,
+    'search_trends_periorbital_puffiness': float64,
+    'search_trends_peripheral_neuropathy': float64,
+    'search_trends_perspiration': float64,
+    'search_trends_petechia': float64,
+    'search_trends_phlegm': float64,
+    'search_trends_photodermatitis': float64,
+    'search_trends_photophobia': float64,
+    'search_trends_photopsia': float64,
+    'search_trends_pleural_effusion': float64,
+    'search_trends_pleurisy': float64,
+    'search_trends_pneumonia': float64,
+    'search_trends_podalgia': float64,
+    'search_trends_polycythemia': float64,
+    'search_trends_polydipsia': float64,
+    'search_trends_polyneuropathy': float64,
+    'search_trends_polyuria': float64,
+    'search_trends_poor_posture': float64,
+    'search_trends_post_nasal_drip': float64,
+    'search_trends_postural_orthostatic_tachycardia_syndrome': float64,
+    'search_trends_prediabetes': float64,
+    'search_trends_proteinuria': float64,
+    'search_trends_pruritus_ani': float64,
+    'search_trends_psychosis': float64,
+    'search_trends_ptosis': float64,
+    'search_trends_pulmonary_edema': float64,
+    'search_trends_pulmonary_hypertension': float64,
+    'search_trends_purpura': float64,
+    'search_trends_pus': float64,
+    'search_trends_pyelonephritis': float64,
+    'search_trends_radiculopathy': float64,
+    'search_trends_rectal_pain': float64,
+    'search_trends_rectal_prolapse': float64,
+    'search_trends_red_eye': float64,
+    'search_trends_renal_colic': float64,
+    'search_trends_restless_legs_syndrome': float64,
+    'search_trends_rheum': float64,
+    'search_trends_rhinitis': float64,
+    'search_trends_rhinorrhea': float64,
+    'search_trends_rosacea': float64,
+    'search_trends_round_ligament_pain': float64,
+    'search_trends_rumination': float64,
+    'search_trends_scar': float64,
+    'search_trends_sciatica': float64,
+    'search_trends_scoliosis': float64,
+    'search_trends_seborrheic_dermatitis': float64,
+    'search_trends_self_harm': float64,
+    'search_trends_sensitivity_to_sound': float64,
+    'search_trends_sexual_dysfunction': float64,
+    'search_trends_shallow_breathing': float64,
+    'search_trends_sharp_pain': float64,
+    'search_trends_shivering': float64,
+    'search_trends_shortness_of_breath': float64,
+    'search_trends_shyness': float64,
+    'search_trends_sinusitis': float64,
+    'search_trends_skin_condition': float64,
+    'search_trends_skin_rash': float64,
+    'search_trends_skin_tag': float64,
+    'search_trends_skin_ulcer': float64,
+    'search_trends_sleep_apnea': float64,
+    'search_trends_sleep_deprivation': float64,
+    'search_trends_sleep_disorder': float64,
+    'search_trends_snoring': float64,
+    'search_trends_sore_throat': float64,
+    'search_trends_spasticity': float64,
+    'search_trends_splenomegaly': float64,
+    'search_trends_sputum': float64,
+    'search_trends_stomach_rumble': float64,
+    'search_trends_strabismus': float64,
+    'search_trends_stretch_marks': float64,
+    'search_trends_stridor': float64,
+    'search_trends_stroke': float64,
+    'search_trends_stuttering': float64,
+    'search_trends_subdural_hematoma': float64,
+    'search_trends_suicidal_ideation': float64,
+    'search_trends_swelling': float64,
+    'search_trends_swollen_feet': float64,
+    'search_trends_swollen_lymph_nodes': float64,
+    'search_trends_syncope': float64,
+    'search_trends_tachycardia': float64,
+    'search_trends_tachypnea': float64,
+    'search_trends_telangiectasia': float64,
+    'search_trends_tenderness': float64,
+    'search_trends_testicular_pain': float64,
+    'search_trends_throat_irritation': float64,
+    'search_trends_thrombocytopenia': float64,
+    'search_trends_thyroid_nodule': float64,
+    'search_trends_tic': float64,
+    'search_trends_tinnitus': float64,
+    'search_trends_tonsillitis': float64,
+    'search_trends_toothache': float64,
+    'search_trends_tremor': float64,
+    'search_trends_trichoptilosis': float64,
+    'search_trends_tumor': float64,
+    'search_trends_type_2_diabetes': float64,
+    'search_trends_unconsciousness': float64,
+    'search_trends_underweight': float64,
+    'search_trends_upper_respiratory_tract_infection': float64,
+    'search_trends_urethritis': float64,
+    'search_trends_urinary_incontinence': float64,
+    'search_trends_urinary_tract_infection': float64,
+    'search_trends_urinary_urgency': float64,
+    'search_trends_uterine_contraction': float64,
+    'search_trends_vaginal_bleeding': float64,
+    'search_trends_vaginal_discharge': float64,
+    'search_trends_vaginitis': float64,
+    'search_trends_varicose_veins': float64,
+    'search_trends_vasculitis': float64,
+    'search_trends_ventricular_fibrillation': float64,
+    'search_trends_ventricular_tachycardia': float64,
+    'search_trends_vertigo': float64,
+    'search_trends_viral_pneumonia': float64,
+    'search_trends_visual_acuity': float64,
+    'search_trends_vomiting': float64,
+    'search_trends_wart': float64,
+    'search_trends_water_retention': float64,
+    'search_trends_weakness': float64,
+    'search_trends_weight_gain': float64,
+    'search_trends_wheeze': float64,
+    'search_trends_xeroderma': float64,
+    'search_trends_xerostomia': float64,
+    'search_trends_yawn': float64,
+    'smoking_prevalence': float64,
+    'snowfall_mm': float64,
+    'stay_at_home_requirements': float64,
+    'stringency_index': float64,
+    'subregion1_code': string,
+    'subregion1_name': string,
+    'subregion2_code': string,
+    'subregion2_name': string,
+    'testing_policy': float64,
+    'vaccination_policy': float64,
+    'wikidata_id': string,
+    'workplace_closing': float64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                                 | Class        | Shape | Dtype      | Description
-:------------------------------------------------------ | :----------- | :---- | :--------- | :----------
-                                                        | FeaturesDict |       |            |
-adult_female_mortality_rate                             | Tensor       |       | tf.float64 |
-adult_male_mortality_rate                               | Tensor       |       | tf.float64 |
-age_bin_0                                               | Tensor       |       | tf.string  |
-age_bin_1                                               | Tensor       |       | tf.string  |
-age_bin_2                                               | Tensor       |       | tf.string  |
-age_bin_3                                               | Tensor       |       | tf.string  |
-age_bin_4                                               | Tensor       |       | tf.string  |
-age_bin_5                                               | Tensor       |       | tf.string  |
-age_bin_6                                               | Tensor       |       | tf.string  |
-age_bin_7                                               | Tensor       |       | tf.string  |
-age_bin_8                                               | Tensor       |       | tf.string  |
-age_bin_9                                               | Tensor       |       | tf.string  |
-aggregation_level                                       | Tensor       |       | tf.float64 |
-area_rural_sq_km                                        | Tensor       |       | tf.float64 |
-area_sq_km                                              | Tensor       |       | tf.float64 |
-area_urban_sq_km                                        | Tensor       |       | tf.float64 |
-average_temperature_celsius                             | Tensor       |       | tf.float64 |
-cancel_public_events                                    | Tensor       |       | tf.float64 |
-comorbidity_mortality_rate                              | Tensor       |       | tf.float64 |
-contact_tracing                                         | Tensor       |       | tf.float64 |
-country_code                                            | Tensor       |       | tf.string  |
-country_name                                            | Tensor       |       | tf.string  |
-cumulative_confirmed                                    | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_0                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_1                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_2                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_3                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_4                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_5                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_6                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_7                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_8                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_age_9                              | Tensor       |       | tf.float64 |
-cumulative_confirmed_female                             | Tensor       |       | tf.float64 |
-cumulative_confirmed_male                               | Tensor       |       | tf.float64 |
-cumulative_deceased                                     | Tensor       |       | tf.float64 |
-cumulative_deceased_age_0                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_1                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_2                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_3                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_4                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_5                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_6                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_7                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_8                               | Tensor       |       | tf.float64 |
-cumulative_deceased_age_9                               | Tensor       |       | tf.float64 |
-cumulative_deceased_female                              | Tensor       |       | tf.float64 |
-cumulative_deceased_male                                | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients                        | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_0                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_1                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_2                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_3                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_4                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_5                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_6                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_7                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_8                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_age_9                  | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_female                 | Tensor       |       | tf.float64 |
-cumulative_hospitalized_patients_male                   | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients                      | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_0                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_1                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_2                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_3                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_4                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_5                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_6                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_7                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_8                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_age_9                | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_female               | Tensor       |       | tf.float64 |
-cumulative_intensive_care_patients_male                 | Tensor       |       | tf.float64 |
-cumulative_persons_fully_vaccinated                     | Tensor       |       | tf.float64 |
-cumulative_persons_fully_vaccinated_janssen             | Tensor       |       | tf.float64 |
-cumulative_persons_fully_vaccinated_moderna             | Tensor       |       | tf.float64 |
-cumulative_persons_fully_vaccinated_pfizer              | Tensor       |       | tf.float64 |
-cumulative_persons_vaccinated                           | Tensor       |       | tf.float64 |
-cumulative_recovered                                    | Tensor       |       | tf.float64 |
-cumulative_recovered_age_0                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_1                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_2                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_3                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_4                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_5                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_6                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_7                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_8                              | Tensor       |       | tf.float64 |
-cumulative_recovered_age_9                              | Tensor       |       | tf.float64 |
-cumulative_recovered_female                             | Tensor       |       | tf.float64 |
-cumulative_recovered_male                               | Tensor       |       | tf.float64 |
-cumulative_tested                                       | Tensor       |       | tf.float64 |
-cumulative_tested_age_0                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_1                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_2                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_3                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_4                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_5                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_6                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_7                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_8                                 | Tensor       |       | tf.float64 |
-cumulative_tested_age_9                                 | Tensor       |       | tf.float64 |
-cumulative_tested_female                                | Tensor       |       | tf.float64 |
-cumulative_tested_male                                  | Tensor       |       | tf.float64 |
-cumulative_vaccine_doses_administered                   | Tensor       |       | tf.float64 |
-cumulative_vaccine_doses_administered_janssen           | Tensor       |       | tf.float64 |
-cumulative_vaccine_doses_administered_moderna           | Tensor       |       | tf.float64 |
-cumulative_vaccine_doses_administered_pfizer            | Tensor       |       | tf.float64 |
-cumulative_ventilator_patients                          | Tensor       |       | tf.float64 |
-current_hospitalized_patients                           | Tensor       |       | tf.float64 |
-current_intensive_care_patients                         | Tensor       |       | tf.float64 |
-current_ventilator_patients                             | Tensor       |       | tf.float64 |
-datacommons_id                                          | Tensor       |       | tf.string  |
-date                                                    | Tensor       |       | tf.string  |
-debt_relief                                             | Tensor       |       | tf.float64 |
-dew_point                                               | Tensor       |       | tf.float64 |
-diabetes_prevalence                                     | Tensor       |       | tf.float64 |
-elevation_m                                             | Tensor       |       | tf.float64 |
-emergency_investment_in_healthcare                      | Tensor       |       | tf.float64 |
-facial_coverings                                        | Tensor       |       | tf.float64 |
-fiscal_measures                                         | Tensor       |       | tf.float64 |
-gdp_per_capita_usd                                      | Tensor       |       | tf.float64 |
-gdp_usd                                                 | Tensor       |       | tf.float64 |
-health_expenditure_usd                                  | Tensor       |       | tf.float64 |
-hospital_beds_per_1000                                  | Tensor       |       | tf.float64 |
-human_capital_index                                     | Tensor       |       | tf.float64 |
-human_development_index                                 | Tensor       |       | tf.float64 |
-income_support                                          | Tensor       |       | tf.float64 |
-infant_mortality_rate                                   | Tensor       |       | tf.float64 |
-international_support                                   | Tensor       |       | tf.float64 |
-international_travel_controls                           | Tensor       |       | tf.float64 |
-investment_in_vaccines                                  | Tensor       |       | tf.float64 |
-iso_3166_1_alpha_2                                      | Tensor       |       | tf.string  |
-iso_3166_1_alpha_3                                      | Tensor       |       | tf.string  |
-latitude                                                | Tensor       |       | tf.float64 |
-life_expectancy                                         | Tensor       |       | tf.float64 |
-locality_code                                           | Tensor       |       | tf.string  |
-locality_name                                           | Tensor       |       | tf.string  |
-location_key                                            | Tensor       |       | tf.string  |
-longitude                                               | Tensor       |       | tf.float64 |
-maximum_temperature_celsius                             | Tensor       |       | tf.float64 |
-minimum_temperature_celsius                             | Tensor       |       | tf.float64 |
-mobility_grocery_and_pharmacy                           | Tensor       |       | tf.float64 |
-mobility_parks                                          | Tensor       |       | tf.float64 |
-mobility_residential                                    | Tensor       |       | tf.float64 |
-mobility_retail_and_recreation                          | Tensor       |       | tf.float64 |
-mobility_transit_stations                               | Tensor       |       | tf.float64 |
-mobility_workplaces                                     | Tensor       |       | tf.float64 |
-new_confirmed                                           | Tensor       |       | tf.float64 |
-new_confirmed_age_0                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_1                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_2                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_3                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_4                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_5                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_6                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_7                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_8                                     | Tensor       |       | tf.float64 |
-new_confirmed_age_9                                     | Tensor       |       | tf.float64 |
-new_confirmed_female                                    | Tensor       |       | tf.float64 |
-new_confirmed_male                                      | Tensor       |       | tf.float64 |
-new_deceased                                            | Tensor       |       | tf.float64 |
-new_deceased_age_0                                      | Tensor       |       | tf.float64 |
-new_deceased_age_1                                      | Tensor       |       | tf.float64 |
-new_deceased_age_2                                      | Tensor       |       | tf.float64 |
-new_deceased_age_3                                      | Tensor       |       | tf.float64 |
-new_deceased_age_4                                      | Tensor       |       | tf.float64 |
-new_deceased_age_5                                      | Tensor       |       | tf.float64 |
-new_deceased_age_6                                      | Tensor       |       | tf.float64 |
-new_deceased_age_7                                      | Tensor       |       | tf.float64 |
-new_deceased_age_8                                      | Tensor       |       | tf.float64 |
-new_deceased_age_9                                      | Tensor       |       | tf.float64 |
-new_deceased_female                                     | Tensor       |       | tf.float64 |
-new_deceased_male                                       | Tensor       |       | tf.float64 |
-new_hospitalized_patients                               | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_0                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_1                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_2                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_3                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_4                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_5                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_6                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_7                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_8                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_age_9                         | Tensor       |       | tf.float64 |
-new_hospitalized_patients_female                        | Tensor       |       | tf.float64 |
-new_hospitalized_patients_male                          | Tensor       |       | tf.float64 |
-new_intensive_care_patients                             | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_0                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_1                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_2                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_3                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_4                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_5                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_6                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_7                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_8                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_age_9                       | Tensor       |       | tf.float64 |
-new_intensive_care_patients_female                      | Tensor       |       | tf.float64 |
-new_intensive_care_patients_male                        | Tensor       |       | tf.float64 |
-new_persons_fully_vaccinated                            | Tensor       |       | tf.float64 |
-new_persons_fully_vaccinated_janssen                    | Tensor       |       | tf.float64 |
-new_persons_fully_vaccinated_moderna                    | Tensor       |       | tf.float64 |
-new_persons_fully_vaccinated_pfizer                     | Tensor       |       | tf.float64 |
-new_persons_vaccinated                                  | Tensor       |       | tf.float64 |
-new_recovered                                           | Tensor       |       | tf.float64 |
-new_recovered_age_0                                     | Tensor       |       | tf.float64 |
-new_recovered_age_1                                     | Tensor       |       | tf.float64 |
-new_recovered_age_2                                     | Tensor       |       | tf.float64 |
-new_recovered_age_3                                     | Tensor       |       | tf.float64 |
-new_recovered_age_4                                     | Tensor       |       | tf.float64 |
-new_recovered_age_5                                     | Tensor       |       | tf.float64 |
-new_recovered_age_6                                     | Tensor       |       | tf.float64 |
-new_recovered_age_7                                     | Tensor       |       | tf.float64 |
-new_recovered_age_8                                     | Tensor       |       | tf.float64 |
-new_recovered_age_9                                     | Tensor       |       | tf.float64 |
-new_recovered_female                                    | Tensor       |       | tf.float64 |
-new_recovered_male                                      | Tensor       |       | tf.float64 |
-new_tested                                              | Tensor       |       | tf.float64 |
-new_tested_age_0                                        | Tensor       |       | tf.float64 |
-new_tested_age_1                                        | Tensor       |       | tf.float64 |
-new_tested_age_2                                        | Tensor       |       | tf.float64 |
-new_tested_age_3                                        | Tensor       |       | tf.float64 |
-new_tested_age_4                                        | Tensor       |       | tf.float64 |
-new_tested_age_5                                        | Tensor       |       | tf.float64 |
-new_tested_age_6                                        | Tensor       |       | tf.float64 |
-new_tested_age_7                                        | Tensor       |       | tf.float64 |
-new_tested_age_8                                        | Tensor       |       | tf.float64 |
-new_tested_age_9                                        | Tensor       |       | tf.float64 |
-new_tested_female                                       | Tensor       |       | tf.float64 |
-new_tested_male                                         | Tensor       |       | tf.float64 |
-new_vaccine_doses_administered                          | Tensor       |       | tf.float64 |
-new_vaccine_doses_administered_janssen                  | Tensor       |       | tf.float64 |
-new_vaccine_doses_administered_moderna                  | Tensor       |       | tf.float64 |
-new_vaccine_doses_administered_pfizer                   | Tensor       |       | tf.float64 |
-new_ventilator_patients                                 | Tensor       |       | tf.float64 |
-nurses_per_1000                                         | Tensor       |       | tf.float64 |
-openstreetmap_id                                        | Tensor       |       | tf.string  |
-out_of_pocket_health_expenditure_usd                    | Tensor       |       | tf.float64 |
-physicians_per_1000                                     | Tensor       |       | tf.float64 |
-place_id                                                | Tensor       |       | tf.string  |
-pollution_mortality_rate                                | Tensor       |       | tf.float64 |
-population                                              | Tensor       |       | tf.float64 |
-population_age_00_09                                    | Tensor       |       | tf.float64 |
-population_age_10_19                                    | Tensor       |       | tf.float64 |
-population_age_20_29                                    | Tensor       |       | tf.float64 |
-population_age_30_39                                    | Tensor       |       | tf.float64 |
-population_age_40_49                                    | Tensor       |       | tf.float64 |
-population_age_50_59                                    | Tensor       |       | tf.float64 |
-population_age_60_69                                    | Tensor       |       | tf.float64 |
-population_age_70_79                                    | Tensor       |       | tf.float64 |
-population_age_80_and_older                             | Tensor       |       | tf.float64 |
-population_clustered                                    | Tensor       |       | tf.float64 |
-population_density                                      | Tensor       |       | tf.float64 |
-population_female                                       | Tensor       |       | tf.float64 |
-population_largest_city                                 | Tensor       |       | tf.float64 |
-population_male                                         | Tensor       |       | tf.float64 |
-population_rural                                        | Tensor       |       | tf.float64 |
-population_urban                                        | Tensor       |       | tf.float64 |
-public_information_campaigns                            | Tensor       |       | tf.float64 |
-public_transport_closing                                | Tensor       |       | tf.float64 |
-rainfall_mm                                             | Tensor       |       | tf.float64 |
-relative_humidity                                       | Tensor       |       | tf.float64 |
-restrictions_on_gatherings                              | Tensor       |       | tf.float64 |
-restrictions_on_internal_movement                       | Tensor       |       | tf.float64 |
-school_closing                                          | Tensor       |       | tf.float64 |
-search_trends_abdominal_obesity                         | Tensor       |       | tf.float64 |
-search_trends_abdominal_pain                            | Tensor       |       | tf.float64 |
-search_trends_acne                                      | Tensor       |       | tf.float64 |
-search_trends_actinic_keratosis                         | Tensor       |       | tf.float64 |
-search_trends_acute_bronchitis                          | Tensor       |       | tf.float64 |
-search_trends_adrenal_crisis                            | Tensor       |       | tf.float64 |
-search_trends_ageusia                                   | Tensor       |       | tf.float64 |
-search_trends_alcoholism                                | Tensor       |       | tf.float64 |
-search_trends_allergic_conjunctivitis                   | Tensor       |       | tf.float64 |
-search_trends_allergy                                   | Tensor       |       | tf.float64 |
-search_trends_amblyopia                                 | Tensor       |       | tf.float64 |
-search_trends_amenorrhea                                | Tensor       |       | tf.float64 |
-search_trends_amnesia                                   | Tensor       |       | tf.float64 |
-search_trends_anal_fissure                              | Tensor       |       | tf.float64 |
-search_trends_anaphylaxis                               | Tensor       |       | tf.float64 |
-search_trends_anemia                                    | Tensor       |       | tf.float64 |
-search_trends_angina_pectoris                           | Tensor       |       | tf.float64 |
-search_trends_angioedema                                | Tensor       |       | tf.float64 |
-search_trends_angular_cheilitis                         | Tensor       |       | tf.float64 |
-search_trends_anosmia                                   | Tensor       |       | tf.float64 |
-search_trends_anxiety                                   | Tensor       |       | tf.float64 |
-search_trends_aphasia                                   | Tensor       |       | tf.float64 |
-search_trends_aphonia                                   | Tensor       |       | tf.float64 |
-search_trends_apnea                                     | Tensor       |       | tf.float64 |
-search_trends_arthralgia                                | Tensor       |       | tf.float64 |
-search_trends_arthritis                                 | Tensor       |       | tf.float64 |
-search_trends_ascites                                   | Tensor       |       | tf.float64 |
-search_trends_asperger_syndrome                         | Tensor       |       | tf.float64 |
-search_trends_asphyxia                                  | Tensor       |       | tf.float64 |
-search_trends_asthma                                    | Tensor       |       | tf.float64 |
-search_trends_astigmatism                               | Tensor       |       | tf.float64 |
-search_trends_ataxia                                    | Tensor       |       | tf.float64 |
-search_trends_atheroma                                  | Tensor       |       | tf.float64 |
-search_trends_attention_deficit_hyperactivity_disorder  | Tensor       |       | tf.float64 |
-search_trends_auditory_hallucination                    | Tensor       |       | tf.float64 |
-search_trends_autoimmune_disease                        | Tensor       |       | tf.float64 |
-search_trends_avoidant_personality_disorder             | Tensor       |       | tf.float64 |
-search_trends_back_pain                                 | Tensor       |       | tf.float64 |
-search_trends_bacterial_vaginosis                       | Tensor       |       | tf.float64 |
-search_trends_balance_disorder                          | Tensor       |       | tf.float64 |
-search_trends_beaus_lines                               | Tensor       |       | tf.float64 |
-search_trends_bells_palsy                               | Tensor       |       | tf.float64 |
-search_trends_biliary_colic                             | Tensor       |       | tf.float64 |
-search_trends_binge_eating                              | Tensor       |       | tf.float64 |
-search_trends_bleeding                                  | Tensor       |       | tf.float64 |
-search_trends_bleeding_on_probing                       | Tensor       |       | tf.float64 |
-search_trends_blepharospasm                             | Tensor       |       | tf.float64 |
-search_trends_bloating                                  | Tensor       |       | tf.float64 |
-search_trends_blood_in_stool                            | Tensor       |       | tf.float64 |
-search_trends_blurred_vision                            | Tensor       |       | tf.float64 |
-search_trends_blushing                                  | Tensor       |       | tf.float64 |
-search_trends_boil                                      | Tensor       |       | tf.float64 |
-search_trends_bone_fracture                             | Tensor       |       | tf.float64 |
-search_trends_bone_tumor                                | Tensor       |       | tf.float64 |
-search_trends_bowel_obstruction                         | Tensor       |       | tf.float64 |
-search_trends_bradycardia                               | Tensor       |       | tf.float64 |
-search_trends_braxton_hicks_contractions                | Tensor       |       | tf.float64 |
-search_trends_breakthrough_bleeding                     | Tensor       |       | tf.float64 |
-search_trends_breast_pain                               | Tensor       |       | tf.float64 |
-search_trends_bronchitis                                | Tensor       |       | tf.float64 |
-search_trends_bruise                                    | Tensor       |       | tf.float64 |
-search_trends_bruxism                                   | Tensor       |       | tf.float64 |
-search_trends_bunion                                    | Tensor       |       | tf.float64 |
-search_trends_burn                                      | Tensor       |       | tf.float64 |
-search_trends_burning_chest_pain                        | Tensor       |       | tf.float64 |
-search_trends_burning_mouth_syndrome                    | Tensor       |       | tf.float64 |
-search_trends_candidiasis                               | Tensor       |       | tf.float64 |
-search_trends_canker_sore                               | Tensor       |       | tf.float64 |
-search_trends_cardiac_arrest                            | Tensor       |       | tf.float64 |
-search_trends_carpal_tunnel_syndrome                    | Tensor       |       | tf.float64 |
-search_trends_cataplexy                                 | Tensor       |       | tf.float64 |
-search_trends_cataract                                  | Tensor       |       | tf.float64 |
-search_trends_chancre                                   | Tensor       |       | tf.float64 |
-search_trends_cheilitis                                 | Tensor       |       | tf.float64 |
-search_trends_chest_pain                                | Tensor       |       | tf.float64 |
-search_trends_chills                                    | Tensor       |       | tf.float64 |
-search_trends_chorea                                    | Tensor       |       | tf.float64 |
-search_trends_chronic_pain                              | Tensor       |       | tf.float64 |
-search_trends_cirrhosis                                 | Tensor       |       | tf.float64 |
-search_trends_cleft_lip_and_cleft_palate                | Tensor       |       | tf.float64 |
-search_trends_clouding_of_consciousness                 | Tensor       |       | tf.float64 |
-search_trends_cluster_headache                          | Tensor       |       | tf.float64 |
-search_trends_colitis                                   | Tensor       |       | tf.float64 |
-search_trends_coma                                      | Tensor       |       | tf.float64 |
-search_trends_common_cold                               | Tensor       |       | tf.float64 |
-search_trends_compulsive_behavior                       | Tensor       |       | tf.float64 |
-search_trends_compulsive_hoarding                       | Tensor       |       | tf.float64 |
-search_trends_confusion                                 | Tensor       |       | tf.float64 |
-search_trends_congenital_heart_defect                   | Tensor       |       | tf.float64 |
-search_trends_conjunctivitis                            | Tensor       |       | tf.float64 |
-search_trends_constipation                              | Tensor       |       | tf.float64 |
-search_trends_convulsion                                | Tensor       |       | tf.float64 |
-search_trends_cough                                     | Tensor       |       | tf.float64 |
-search_trends_crackles                                  | Tensor       |       | tf.float64 |
-search_trends_cramp                                     | Tensor       |       | tf.float64 |
-search_trends_crepitus                                  | Tensor       |       | tf.float64 |
-search_trends_croup                                     | Tensor       |       | tf.float64 |
-search_trends_cyanosis                                  | Tensor       |       | tf.float64 |
-search_trends_dandruff                                  | Tensor       |       | tf.float64 |
-search_trends_delayed_onset_muscle_soreness             | Tensor       |       | tf.float64 |
-search_trends_dementia                                  | Tensor       |       | tf.float64 |
-search_trends_dentin_hypersensitivity                   | Tensor       |       | tf.float64 |
-search_trends_depersonalization                         | Tensor       |       | tf.float64 |
-search_trends_depression                                | Tensor       |       | tf.float64 |
-search_trends_dermatitis                                | Tensor       |       | tf.float64 |
-search_trends_desquamation                              | Tensor       |       | tf.float64 |
-search_trends_developmental_disability                  | Tensor       |       | tf.float64 |
-search_trends_diabetes                                  | Tensor       |       | tf.float64 |
-search_trends_diabetic_ketoacidosis                     | Tensor       |       | tf.float64 |
-search_trends_diarrhea                                  | Tensor       |       | tf.float64 |
-search_trends_dizziness                                 | Tensor       |       | tf.float64 |
-search_trends_dry_eye_syndrome                          | Tensor       |       | tf.float64 |
-search_trends_dysautonomia                              | Tensor       |       | tf.float64 |
-search_trends_dysgeusia                                 | Tensor       |       | tf.float64 |
-search_trends_dysmenorrhea                              | Tensor       |       | tf.float64 |
-search_trends_dyspareunia                               | Tensor       |       | tf.float64 |
-search_trends_dysphagia                                 | Tensor       |       | tf.float64 |
-search_trends_dysphoria                                 | Tensor       |       | tf.float64 |
-search_trends_dystonia                                  | Tensor       |       | tf.float64 |
-search_trends_dysuria                                   | Tensor       |       | tf.float64 |
-search_trends_ear_pain                                  | Tensor       |       | tf.float64 |
-search_trends_eczema                                    | Tensor       |       | tf.float64 |
-search_trends_edema                                     | Tensor       |       | tf.float64 |
-search_trends_encephalitis                              | Tensor       |       | tf.float64 |
-search_trends_encephalopathy                            | Tensor       |       | tf.float64 |
-search_trends_epidermoid_cyst                           | Tensor       |       | tf.float64 |
-search_trends_epilepsy                                  | Tensor       |       | tf.float64 |
-search_trends_epiphora                                  | Tensor       |       | tf.float64 |
-search_trends_erectile_dysfunction                      | Tensor       |       | tf.float64 |
-search_trends_erythema                                  | Tensor       |       | tf.float64 |
-search_trends_erythema_chronicum_migrans                | Tensor       |       | tf.float64 |
-search_trends_esophagitis                               | Tensor       |       | tf.float64 |
-search_trends_excessive_daytime_sleepiness              | Tensor       |       | tf.float64 |
-search_trends_eye_pain                                  | Tensor       |       | tf.float64 |
-search_trends_eye_strain                                | Tensor       |       | tf.float64 |
-search_trends_facial_nerve_paralysis                    | Tensor       |       | tf.float64 |
-search_trends_facial_swelling                           | Tensor       |       | tf.float64 |
-search_trends_fasciculation                             | Tensor       |       | tf.float64 |
-search_trends_fatigue                                   | Tensor       |       | tf.float64 |
-search_trends_fatty_liver_disease                       | Tensor       |       | tf.float64 |
-search_trends_fecal_incontinence                        | Tensor       |       | tf.float64 |
-search_trends_fever                                     | Tensor       |       | tf.float64 |
-search_trends_fibrillation                              | Tensor       |       | tf.float64 |
-search_trends_fibrocystic_breast_changes                | Tensor       |       | tf.float64 |
-search_trends_fibromyalgia                              | Tensor       |       | tf.float64 |
-search_trends_flatulence                                | Tensor       |       | tf.float64 |
-search_trends_floater                                   | Tensor       |       | tf.float64 |
-search_trends_focal_seizure                             | Tensor       |       | tf.float64 |
-search_trends_folate_deficiency                         | Tensor       |       | tf.float64 |
-search_trends_food_craving                              | Tensor       |       | tf.float64 |
-search_trends_food_intolerance                          | Tensor       |       | tf.float64 |
-search_trends_frequent_urination                        | Tensor       |       | tf.float64 |
-search_trends_gastroesophageal_reflux_disease           | Tensor       |       | tf.float64 |
-search_trends_gastroparesis                             | Tensor       |       | tf.float64 |
-search_trends_generalized_anxiety_disorder              | Tensor       |       | tf.float64 |
-search_trends_genital_wart                              | Tensor       |       | tf.float64 |
-search_trends_gingival_recession                        | Tensor       |       | tf.float64 |
-search_trends_gingivitis                                | Tensor       |       | tf.float64 |
-search_trends_globus_pharyngis                          | Tensor       |       | tf.float64 |
-search_trends_goitre                                    | Tensor       |       | tf.float64 |
-search_trends_gout                                      | Tensor       |       | tf.float64 |
-search_trends_grandiosity                               | Tensor       |       | tf.float64 |
-search_trends_granuloma                                 | Tensor       |       | tf.float64 |
-search_trends_guilt                                     | Tensor       |       | tf.float64 |
-search_trends_hair_loss                                 | Tensor       |       | tf.float64 |
-search_trends_halitosis                                 | Tensor       |       | tf.float64 |
-search_trends_hay_fever                                 | Tensor       |       | tf.float64 |
-search_trends_headache                                  | Tensor       |       | tf.float64 |
-search_trends_heart_arrhythmia                          | Tensor       |       | tf.float64 |
-search_trends_heart_murmur                              | Tensor       |       | tf.float64 |
-search_trends_heartburn                                 | Tensor       |       | tf.float64 |
-search_trends_hematochezia                              | Tensor       |       | tf.float64 |
-search_trends_hematoma                                  | Tensor       |       | tf.float64 |
-search_trends_hematuria                                 | Tensor       |       | tf.float64 |
-search_trends_hemolysis                                 | Tensor       |       | tf.float64 |
-search_trends_hemoptysis                                | Tensor       |       | tf.float64 |
-search_trends_hemorrhoids                               | Tensor       |       | tf.float64 |
-search_trends_hepatic_encephalopathy                    | Tensor       |       | tf.float64 |
-search_trends_hepatitis                                 | Tensor       |       | tf.float64 |
-search_trends_hepatotoxicity                            | Tensor       |       | tf.float64 |
-search_trends_hiccup                                    | Tensor       |       | tf.float64 |
-search_trends_hip_pain                                  | Tensor       |       | tf.float64 |
-search_trends_hives                                     | Tensor       |       | tf.float64 |
-search_trends_hot_flash                                 | Tensor       |       | tf.float64 |
-search_trends_hydrocephalus                             | Tensor       |       | tf.float64 |
-search_trends_hypercalcaemia                            | Tensor       |       | tf.float64 |
-search_trends_hypercapnia                               | Tensor       |       | tf.float64 |
-search_trends_hypercholesterolemia                      | Tensor       |       | tf.float64 |
-search_trends_hyperemesis_gravidarum                    | Tensor       |       | tf.float64 |
-search_trends_hyperglycemia                             | Tensor       |       | tf.float64 |
-search_trends_hyperhidrosis                             | Tensor       |       | tf.float64 |
-search_trends_hyperkalemia                              | Tensor       |       | tf.float64 |
-search_trends_hyperlipidemia                            | Tensor       |       | tf.float64 |
-search_trends_hypermobility                             | Tensor       |       | tf.float64 |
-search_trends_hyperpigmentation                         | Tensor       |       | tf.float64 |
-search_trends_hypersomnia                               | Tensor       |       | tf.float64 |
-search_trends_hypertension                              | Tensor       |       | tf.float64 |
-search_trends_hyperthermia                              | Tensor       |       | tf.float64 |
-search_trends_hyperthyroidism                           | Tensor       |       | tf.float64 |
-search_trends_hypertriglyceridemia                      | Tensor       |       | tf.float64 |
-search_trends_hypertrophy                               | Tensor       |       | tf.float64 |
-search_trends_hyperventilation                          | Tensor       |       | tf.float64 |
-search_trends_hypocalcaemia                             | Tensor       |       | tf.float64 |
-search_trends_hypochondriasis                           | Tensor       |       | tf.float64 |
-search_trends_hypoglycemia                              | Tensor       |       | tf.float64 |
-search_trends_hypogonadism                              | Tensor       |       | tf.float64 |
-search_trends_hypokalemia                               | Tensor       |       | tf.float64 |
-search_trends_hypomania                                 | Tensor       |       | tf.float64 |
-search_trends_hyponatremia                              | Tensor       |       | tf.float64 |
-search_trends_hypotension                               | Tensor       |       | tf.float64 |
-search_trends_hypothyroidism                            | Tensor       |       | tf.float64 |
-search_trends_hypoxemia                                 | Tensor       |       | tf.float64 |
-search_trends_hypoxia                                   | Tensor       |       | tf.float64 |
-search_trends_impetigo                                  | Tensor       |       | tf.float64 |
-search_trends_implantation_bleeding                     | Tensor       |       | tf.float64 |
-search_trends_impulsivity                               | Tensor       |       | tf.float64 |
-search_trends_indigestion                               | Tensor       |       | tf.float64 |
-search_trends_infection                                 | Tensor       |       | tf.float64 |
-search_trends_inflammation                              | Tensor       |       | tf.float64 |
-search_trends_inflammatory_bowel_disease                | Tensor       |       | tf.float64 |
-search_trends_ingrown_hair                              | Tensor       |       | tf.float64 |
-search_trends_insomnia                                  | Tensor       |       | tf.float64 |
-search_trends_insulin_resistance                        | Tensor       |       | tf.float64 |
-search_trends_intermenstrual_bleeding                   | Tensor       |       | tf.float64 |
-search_trends_intracranial_pressure                     | Tensor       |       | tf.float64 |
-search_trends_iron_deficiency                           | Tensor       |       | tf.float64 |
-search_trends_irregular_menstruation                    | Tensor       |       | tf.float64 |
-search_trends_itch                                      | Tensor       |       | tf.float64 |
-search_trends_jaundice                                  | Tensor       |       | tf.float64 |
-search_trends_kidney_failure                            | Tensor       |       | tf.float64 |
-search_trends_kidney_stone                              | Tensor       |       | tf.float64 |
-search_trends_knee_pain                                 | Tensor       |       | tf.float64 |
-search_trends_kyphosis                                  | Tensor       |       | tf.float64 |
-search_trends_lactose_intolerance                       | Tensor       |       | tf.float64 |
-search_trends_laryngitis                                | Tensor       |       | tf.float64 |
-search_trends_leg_cramps                                | Tensor       |       | tf.float64 |
-search_trends_lesion                                    | Tensor       |       | tf.float64 |
-search_trends_leukorrhea                                | Tensor       |       | tf.float64 |
-search_trends_lightheadedness                           | Tensor       |       | tf.float64 |
-search_trends_low_back_pain                             | Tensor       |       | tf.float64 |
-search_trends_low_grade_fever                           | Tensor       |       | tf.float64 |
-search_trends_lymphedema                                | Tensor       |       | tf.float64 |
-search_trends_major_depressive_disorder                 | Tensor       |       | tf.float64 |
-search_trends_malabsorption                             | Tensor       |       | tf.float64 |
-search_trends_male_infertility                          | Tensor       |       | tf.float64 |
-search_trends_manic_disorder                            | Tensor       |       | tf.float64 |
-search_trends_melasma                                   | Tensor       |       | tf.float64 |
-search_trends_melena                                    | Tensor       |       | tf.float64 |
-search_trends_meningitis                                | Tensor       |       | tf.float64 |
-search_trends_menorrhagia                               | Tensor       |       | tf.float64 |
-search_trends_middle_back_pain                          | Tensor       |       | tf.float64 |
-search_trends_migraine                                  | Tensor       |       | tf.float64 |
-search_trends_milium                                    | Tensor       |       | tf.float64 |
-search_trends_mitral_insufficiency                      | Tensor       |       | tf.float64 |
-search_trends_mood_disorder                             | Tensor       |       | tf.float64 |
-search_trends_mood_swing                                | Tensor       |       | tf.float64 |
-search_trends_morning_sickness                          | Tensor       |       | tf.float64 |
-search_trends_motion_sickness                           | Tensor       |       | tf.float64 |
-search_trends_mouth_ulcer                               | Tensor       |       | tf.float64 |
-search_trends_muscle_atrophy                            | Tensor       |       | tf.float64 |
-search_trends_muscle_weakness                           | Tensor       |       | tf.float64 |
-search_trends_myalgia                                   | Tensor       |       | tf.float64 |
-search_trends_mydriasis                                 | Tensor       |       | tf.float64 |
-search_trends_myocardial_infarction                     | Tensor       |       | tf.float64 |
-search_trends_myoclonus                                 | Tensor       |       | tf.float64 |
-search_trends_nasal_congestion                          | Tensor       |       | tf.float64 |
-search_trends_nasal_polyp                               | Tensor       |       | tf.float64 |
-search_trends_nausea                                    | Tensor       |       | tf.float64 |
-search_trends_neck_mass                                 | Tensor       |       | tf.float64 |
-search_trends_neck_pain                                 | Tensor       |       | tf.float64 |
-search_trends_neonatal_jaundice                         | Tensor       |       | tf.float64 |
-search_trends_nerve_injury                              | Tensor       |       | tf.float64 |
-search_trends_neuralgia                                 | Tensor       |       | tf.float64 |
-search_trends_neutropenia                               | Tensor       |       | tf.float64 |
-search_trends_night_sweats                              | Tensor       |       | tf.float64 |
-search_trends_night_terror                              | Tensor       |       | tf.float64 |
-search_trends_nocturnal_enuresis                        | Tensor       |       | tf.float64 |
-search_trends_nodule                                    | Tensor       |       | tf.float64 |
-search_trends_nosebleed                                 | Tensor       |       | tf.float64 |
-search_trends_nystagmus                                 | Tensor       |       | tf.float64 |
-search_trends_obesity                                   | Tensor       |       | tf.float64 |
-search_trends_onychorrhexis                             | Tensor       |       | tf.float64 |
-search_trends_oral_candidiasis                          | Tensor       |       | tf.float64 |
-search_trends_orthostatic_hypotension                   | Tensor       |       | tf.float64 |
-search_trends_osteopenia                                | Tensor       |       | tf.float64 |
-search_trends_osteophyte                                | Tensor       |       | tf.float64 |
-search_trends_osteoporosis                              | Tensor       |       | tf.float64 |
-search_trends_otitis                                    | Tensor       |       | tf.float64 |
-search_trends_otitis_externa                            | Tensor       |       | tf.float64 |
-search_trends_otitis_media                              | Tensor       |       | tf.float64 |
-search_trends_pain                                      | Tensor       |       | tf.float64 |
-search_trends_palpitations                              | Tensor       |       | tf.float64 |
-search_trends_pancreatitis                              | Tensor       |       | tf.float64 |
-search_trends_panic_attack                              | Tensor       |       | tf.float64 |
-search_trends_papule                                    | Tensor       |       | tf.float64 |
-search_trends_paranoia                                  | Tensor       |       | tf.float64 |
-search_trends_paresthesia                               | Tensor       |       | tf.float64 |
-search_trends_pelvic_inflammatory_disease               | Tensor       |       | tf.float64 |
-search_trends_pericarditis                              | Tensor       |       | tf.float64 |
-search_trends_periodontal_disease                       | Tensor       |       | tf.float64 |
-search_trends_periorbital_puffiness                     | Tensor       |       | tf.float64 |
-search_trends_peripheral_neuropathy                     | Tensor       |       | tf.float64 |
-search_trends_perspiration                              | Tensor       |       | tf.float64 |
-search_trends_petechia                                  | Tensor       |       | tf.float64 |
-search_trends_phlegm                                    | Tensor       |       | tf.float64 |
-search_trends_photodermatitis                           | Tensor       |       | tf.float64 |
-search_trends_photophobia                               | Tensor       |       | tf.float64 |
-search_trends_photopsia                                 | Tensor       |       | tf.float64 |
-search_trends_pleural_effusion                          | Tensor       |       | tf.float64 |
-search_trends_pleurisy                                  | Tensor       |       | tf.float64 |
-search_trends_pneumonia                                 | Tensor       |       | tf.float64 |
-search_trends_podalgia                                  | Tensor       |       | tf.float64 |
-search_trends_polycythemia                              | Tensor       |       | tf.float64 |
-search_trends_polydipsia                                | Tensor       |       | tf.float64 |
-search_trends_polyneuropathy                            | Tensor       |       | tf.float64 |
-search_trends_polyuria                                  | Tensor       |       | tf.float64 |
-search_trends_poor_posture                              | Tensor       |       | tf.float64 |
-search_trends_post_nasal_drip                           | Tensor       |       | tf.float64 |
-search_trends_postural_orthostatic_tachycardia_syndrome | Tensor       |       | tf.float64 |
-search_trends_prediabetes                               | Tensor       |       | tf.float64 |
-search_trends_proteinuria                               | Tensor       |       | tf.float64 |
-search_trends_pruritus_ani                              | Tensor       |       | tf.float64 |
-search_trends_psychosis                                 | Tensor       |       | tf.float64 |
-search_trends_ptosis                                    | Tensor       |       | tf.float64 |
-search_trends_pulmonary_edema                           | Tensor       |       | tf.float64 |
-search_trends_pulmonary_hypertension                    | Tensor       |       | tf.float64 |
-search_trends_purpura                                   | Tensor       |       | tf.float64 |
-search_trends_pus                                       | Tensor       |       | tf.float64 |
-search_trends_pyelonephritis                            | Tensor       |       | tf.float64 |
-search_trends_radiculopathy                             | Tensor       |       | tf.float64 |
-search_trends_rectal_pain                               | Tensor       |       | tf.float64 |
-search_trends_rectal_prolapse                           | Tensor       |       | tf.float64 |
-search_trends_red_eye                                   | Tensor       |       | tf.float64 |
-search_trends_renal_colic                               | Tensor       |       | tf.float64 |
-search_trends_restless_legs_syndrome                    | Tensor       |       | tf.float64 |
-search_trends_rheum                                     | Tensor       |       | tf.float64 |
-search_trends_rhinitis                                  | Tensor       |       | tf.float64 |
-search_trends_rhinorrhea                                | Tensor       |       | tf.float64 |
-search_trends_rosacea                                   | Tensor       |       | tf.float64 |
-search_trends_round_ligament_pain                       | Tensor       |       | tf.float64 |
-search_trends_rumination                                | Tensor       |       | tf.float64 |
-search_trends_scar                                      | Tensor       |       | tf.float64 |
-search_trends_sciatica                                  | Tensor       |       | tf.float64 |
-search_trends_scoliosis                                 | Tensor       |       | tf.float64 |
-search_trends_seborrheic_dermatitis                     | Tensor       |       | tf.float64 |
-search_trends_self_harm                                 | Tensor       |       | tf.float64 |
-search_trends_sensitivity_to_sound                      | Tensor       |       | tf.float64 |
-search_trends_sexual_dysfunction                        | Tensor       |       | tf.float64 |
-search_trends_shallow_breathing                         | Tensor       |       | tf.float64 |
-search_trends_sharp_pain                                | Tensor       |       | tf.float64 |
-search_trends_shivering                                 | Tensor       |       | tf.float64 |
-search_trends_shortness_of_breath                       | Tensor       |       | tf.float64 |
-search_trends_shyness                                   | Tensor       |       | tf.float64 |
-search_trends_sinusitis                                 | Tensor       |       | tf.float64 |
-search_trends_skin_condition                            | Tensor       |       | tf.float64 |
-search_trends_skin_rash                                 | Tensor       |       | tf.float64 |
-search_trends_skin_tag                                  | Tensor       |       | tf.float64 |
-search_trends_skin_ulcer                                | Tensor       |       | tf.float64 |
-search_trends_sleep_apnea                               | Tensor       |       | tf.float64 |
-search_trends_sleep_deprivation                         | Tensor       |       | tf.float64 |
-search_trends_sleep_disorder                            | Tensor       |       | tf.float64 |
-search_trends_snoring                                   | Tensor       |       | tf.float64 |
-search_trends_sore_throat                               | Tensor       |       | tf.float64 |
-search_trends_spasticity                                | Tensor       |       | tf.float64 |
-search_trends_splenomegaly                              | Tensor       |       | tf.float64 |
-search_trends_sputum                                    | Tensor       |       | tf.float64 |
-search_trends_stomach_rumble                            | Tensor       |       | tf.float64 |
-search_trends_strabismus                                | Tensor       |       | tf.float64 |
-search_trends_stretch_marks                             | Tensor       |       | tf.float64 |
-search_trends_stridor                                   | Tensor       |       | tf.float64 |
-search_trends_stroke                                    | Tensor       |       | tf.float64 |
-search_trends_stuttering                                | Tensor       |       | tf.float64 |
-search_trends_subdural_hematoma                         | Tensor       |       | tf.float64 |
-search_trends_suicidal_ideation                         | Tensor       |       | tf.float64 |
-search_trends_swelling                                  | Tensor       |       | tf.float64 |
-search_trends_swollen_feet                              | Tensor       |       | tf.float64 |
-search_trends_swollen_lymph_nodes                       | Tensor       |       | tf.float64 |
-search_trends_syncope                                   | Tensor       |       | tf.float64 |
-search_trends_tachycardia                               | Tensor       |       | tf.float64 |
-search_trends_tachypnea                                 | Tensor       |       | tf.float64 |
-search_trends_telangiectasia                            | Tensor       |       | tf.float64 |
-search_trends_tenderness                                | Tensor       |       | tf.float64 |
-search_trends_testicular_pain                           | Tensor       |       | tf.float64 |
-search_trends_throat_irritation                         | Tensor       |       | tf.float64 |
-search_trends_thrombocytopenia                          | Tensor       |       | tf.float64 |
-search_trends_thyroid_nodule                            | Tensor       |       | tf.float64 |
-search_trends_tic                                       | Tensor       |       | tf.float64 |
-search_trends_tinnitus                                  | Tensor       |       | tf.float64 |
-search_trends_tonsillitis                               | Tensor       |       | tf.float64 |
-search_trends_toothache                                 | Tensor       |       | tf.float64 |
-search_trends_tremor                                    | Tensor       |       | tf.float64 |
-search_trends_trichoptilosis                            | Tensor       |       | tf.float64 |
-search_trends_tumor                                     | Tensor       |       | tf.float64 |
-search_trends_type_2_diabetes                           | Tensor       |       | tf.float64 |
-search_trends_unconsciousness                           | Tensor       |       | tf.float64 |
-search_trends_underweight                               | Tensor       |       | tf.float64 |
-search_trends_upper_respiratory_tract_infection         | Tensor       |       | tf.float64 |
-search_trends_urethritis                                | Tensor       |       | tf.float64 |
-search_trends_urinary_incontinence                      | Tensor       |       | tf.float64 |
-search_trends_urinary_tract_infection                   | Tensor       |       | tf.float64 |
-search_trends_urinary_urgency                           | Tensor       |       | tf.float64 |
-search_trends_uterine_contraction                       | Tensor       |       | tf.float64 |
-search_trends_vaginal_bleeding                          | Tensor       |       | tf.float64 |
-search_trends_vaginal_discharge                         | Tensor       |       | tf.float64 |
-search_trends_vaginitis                                 | Tensor       |       | tf.float64 |
-search_trends_varicose_veins                            | Tensor       |       | tf.float64 |
-search_trends_vasculitis                                | Tensor       |       | tf.float64 |
-search_trends_ventricular_fibrillation                  | Tensor       |       | tf.float64 |
-search_trends_ventricular_tachycardia                   | Tensor       |       | tf.float64 |
-search_trends_vertigo                                   | Tensor       |       | tf.float64 |
-search_trends_viral_pneumonia                           | Tensor       |       | tf.float64 |
-search_trends_visual_acuity                             | Tensor       |       | tf.float64 |
-search_trends_vomiting                                  | Tensor       |       | tf.float64 |
-search_trends_wart                                      | Tensor       |       | tf.float64 |
-search_trends_water_retention                           | Tensor       |       | tf.float64 |
-search_trends_weakness                                  | Tensor       |       | tf.float64 |
-search_trends_weight_gain                               | Tensor       |       | tf.float64 |
-search_trends_wheeze                                    | Tensor       |       | tf.float64 |
-search_trends_xeroderma                                 | Tensor       |       | tf.float64 |
-search_trends_xerostomia                                | Tensor       |       | tf.float64 |
-search_trends_yawn                                      | Tensor       |       | tf.float64 |
-smoking_prevalence                                      | Tensor       |       | tf.float64 |
-snowfall_mm                                             | Tensor       |       | tf.float64 |
-stay_at_home_requirements                               | Tensor       |       | tf.float64 |
-stringency_index                                        | Tensor       |       | tf.float64 |
-subregion1_code                                         | Tensor       |       | tf.string  |
-subregion1_name                                         | Tensor       |       | tf.string  |
-subregion2_code                                         | Tensor       |       | tf.string  |
-subregion2_name                                         | Tensor       |       | tf.string  |
-testing_policy                                          | Tensor       |       | tf.float64 |
-vaccination_policy                                      | Tensor       |       | tf.float64 |
-wikidata_id                                             | Tensor       |       | tf.string  |
-workplace_closing                                       | Tensor       |       | tf.float64 |
+Feature                                                 | Class        | Shape | Dtype   | Description
+:------------------------------------------------------ | :----------- | :---- | :------ | :----------
+                                                        | FeaturesDict |       |         |
+adult_female_mortality_rate                             | Tensor       |       | float64 |
+adult_male_mortality_rate                               | Tensor       |       | float64 |
+age_bin_0                                               | Tensor       |       | string  |
+age_bin_1                                               | Tensor       |       | string  |
+age_bin_2                                               | Tensor       |       | string  |
+age_bin_3                                               | Tensor       |       | string  |
+age_bin_4                                               | Tensor       |       | string  |
+age_bin_5                                               | Tensor       |       | string  |
+age_bin_6                                               | Tensor       |       | string  |
+age_bin_7                                               | Tensor       |       | string  |
+age_bin_8                                               | Tensor       |       | string  |
+age_bin_9                                               | Tensor       |       | string  |
+aggregation_level                                       | Tensor       |       | float64 |
+area_rural_sq_km                                        | Tensor       |       | float64 |
+area_sq_km                                              | Tensor       |       | float64 |
+area_urban_sq_km                                        | Tensor       |       | float64 |
+average_temperature_celsius                             | Tensor       |       | float64 |
+cancel_public_events                                    | Tensor       |       | float64 |
+comorbidity_mortality_rate                              | Tensor       |       | float64 |
+contact_tracing                                         | Tensor       |       | float64 |
+country_code                                            | Tensor       |       | string  |
+country_name                                            | Tensor       |       | string  |
+cumulative_confirmed                                    | Tensor       |       | float64 |
+cumulative_confirmed_age_0                              | Tensor       |       | float64 |
+cumulative_confirmed_age_1                              | Tensor       |       | float64 |
+cumulative_confirmed_age_2                              | Tensor       |       | float64 |
+cumulative_confirmed_age_3                              | Tensor       |       | float64 |
+cumulative_confirmed_age_4                              | Tensor       |       | float64 |
+cumulative_confirmed_age_5                              | Tensor       |       | float64 |
+cumulative_confirmed_age_6                              | Tensor       |       | float64 |
+cumulative_confirmed_age_7                              | Tensor       |       | float64 |
+cumulative_confirmed_age_8                              | Tensor       |       | float64 |
+cumulative_confirmed_age_9                              | Tensor       |       | float64 |
+cumulative_confirmed_female                             | Tensor       |       | float64 |
+cumulative_confirmed_male                               | Tensor       |       | float64 |
+cumulative_deceased                                     | Tensor       |       | float64 |
+cumulative_deceased_age_0                               | Tensor       |       | float64 |
+cumulative_deceased_age_1                               | Tensor       |       | float64 |
+cumulative_deceased_age_2                               | Tensor       |       | float64 |
+cumulative_deceased_age_3                               | Tensor       |       | float64 |
+cumulative_deceased_age_4                               | Tensor       |       | float64 |
+cumulative_deceased_age_5                               | Tensor       |       | float64 |
+cumulative_deceased_age_6                               | Tensor       |       | float64 |
+cumulative_deceased_age_7                               | Tensor       |       | float64 |
+cumulative_deceased_age_8                               | Tensor       |       | float64 |
+cumulative_deceased_age_9                               | Tensor       |       | float64 |
+cumulative_deceased_female                              | Tensor       |       | float64 |
+cumulative_deceased_male                                | Tensor       |       | float64 |
+cumulative_hospitalized_patients                        | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_0                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_1                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_2                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_3                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_4                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_5                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_6                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_7                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_8                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_age_9                  | Tensor       |       | float64 |
+cumulative_hospitalized_patients_female                 | Tensor       |       | float64 |
+cumulative_hospitalized_patients_male                   | Tensor       |       | float64 |
+cumulative_intensive_care_patients                      | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_0                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_1                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_2                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_3                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_4                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_5                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_6                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_7                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_8                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_age_9                | Tensor       |       | float64 |
+cumulative_intensive_care_patients_female               | Tensor       |       | float64 |
+cumulative_intensive_care_patients_male                 | Tensor       |       | float64 |
+cumulative_persons_fully_vaccinated                     | Tensor       |       | float64 |
+cumulative_persons_fully_vaccinated_janssen             | Tensor       |       | float64 |
+cumulative_persons_fully_vaccinated_moderna             | Tensor       |       | float64 |
+cumulative_persons_fully_vaccinated_pfizer              | Tensor       |       | float64 |
+cumulative_persons_vaccinated                           | Tensor       |       | float64 |
+cumulative_recovered                                    | Tensor       |       | float64 |
+cumulative_recovered_age_0                              | Tensor       |       | float64 |
+cumulative_recovered_age_1                              | Tensor       |       | float64 |
+cumulative_recovered_age_2                              | Tensor       |       | float64 |
+cumulative_recovered_age_3                              | Tensor       |       | float64 |
+cumulative_recovered_age_4                              | Tensor       |       | float64 |
+cumulative_recovered_age_5                              | Tensor       |       | float64 |
+cumulative_recovered_age_6                              | Tensor       |       | float64 |
+cumulative_recovered_age_7                              | Tensor       |       | float64 |
+cumulative_recovered_age_8                              | Tensor       |       | float64 |
+cumulative_recovered_age_9                              | Tensor       |       | float64 |
+cumulative_recovered_female                             | Tensor       |       | float64 |
+cumulative_recovered_male                               | Tensor       |       | float64 |
+cumulative_tested                                       | Tensor       |       | float64 |
+cumulative_tested_age_0                                 | Tensor       |       | float64 |
+cumulative_tested_age_1                                 | Tensor       |       | float64 |
+cumulative_tested_age_2                                 | Tensor       |       | float64 |
+cumulative_tested_age_3                                 | Tensor       |       | float64 |
+cumulative_tested_age_4                                 | Tensor       |       | float64 |
+cumulative_tested_age_5                                 | Tensor       |       | float64 |
+cumulative_tested_age_6                                 | Tensor       |       | float64 |
+cumulative_tested_age_7                                 | Tensor       |       | float64 |
+cumulative_tested_age_8                                 | Tensor       |       | float64 |
+cumulative_tested_age_9                                 | Tensor       |       | float64 |
+cumulative_tested_female                                | Tensor       |       | float64 |
+cumulative_tested_male                                  | Tensor       |       | float64 |
+cumulative_vaccine_doses_administered                   | Tensor       |       | float64 |
+cumulative_vaccine_doses_administered_janssen           | Tensor       |       | float64 |
+cumulative_vaccine_doses_administered_moderna           | Tensor       |       | float64 |
+cumulative_vaccine_doses_administered_pfizer            | Tensor       |       | float64 |
+cumulative_ventilator_patients                          | Tensor       |       | float64 |
+current_hospitalized_patients                           | Tensor       |       | float64 |
+current_intensive_care_patients                         | Tensor       |       | float64 |
+current_ventilator_patients                             | Tensor       |       | float64 |
+datacommons_id                                          | Tensor       |       | string  |
+date                                                    | Tensor       |       | string  |
+debt_relief                                             | Tensor       |       | float64 |
+dew_point                                               | Tensor       |       | float64 |
+diabetes_prevalence                                     | Tensor       |       | float64 |
+elevation_m                                             | Tensor       |       | float64 |
+emergency_investment_in_healthcare                      | Tensor       |       | float64 |
+facial_coverings                                        | Tensor       |       | float64 |
+fiscal_measures                                         | Tensor       |       | float64 |
+gdp_per_capita_usd                                      | Tensor       |       | float64 |
+gdp_usd                                                 | Tensor       |       | float64 |
+health_expenditure_usd                                  | Tensor       |       | float64 |
+hospital_beds_per_1000                                  | Tensor       |       | float64 |
+human_capital_index                                     | Tensor       |       | float64 |
+human_development_index                                 | Tensor       |       | float64 |
+income_support                                          | Tensor       |       | float64 |
+infant_mortality_rate                                   | Tensor       |       | float64 |
+international_support                                   | Tensor       |       | float64 |
+international_travel_controls                           | Tensor       |       | float64 |
+investment_in_vaccines                                  | Tensor       |       | float64 |
+iso_3166_1_alpha_2                                      | Tensor       |       | string  |
+iso_3166_1_alpha_3                                      | Tensor       |       | string  |
+latitude                                                | Tensor       |       | float64 |
+life_expectancy                                         | Tensor       |       | float64 |
+locality_code                                           | Tensor       |       | string  |
+locality_name                                           | Tensor       |       | string  |
+location_key                                            | Tensor       |       | string  |
+longitude                                               | Tensor       |       | float64 |
+maximum_temperature_celsius                             | Tensor       |       | float64 |
+minimum_temperature_celsius                             | Tensor       |       | float64 |
+mobility_grocery_and_pharmacy                           | Tensor       |       | float64 |
+mobility_parks                                          | Tensor       |       | float64 |
+mobility_residential                                    | Tensor       |       | float64 |
+mobility_retail_and_recreation                          | Tensor       |       | float64 |
+mobility_transit_stations                               | Tensor       |       | float64 |
+mobility_workplaces                                     | Tensor       |       | float64 |
+new_confirmed                                           | Tensor       |       | float64 |
+new_confirmed_age_0                                     | Tensor       |       | float64 |
+new_confirmed_age_1                                     | Tensor       |       | float64 |
+new_confirmed_age_2                                     | Tensor       |       | float64 |
+new_confirmed_age_3                                     | Tensor       |       | float64 |
+new_confirmed_age_4                                     | Tensor       |       | float64 |
+new_confirmed_age_5                                     | Tensor       |       | float64 |
+new_confirmed_age_6                                     | Tensor       |       | float64 |
+new_confirmed_age_7                                     | Tensor       |       | float64 |
+new_confirmed_age_8                                     | Tensor       |       | float64 |
+new_confirmed_age_9                                     | Tensor       |       | float64 |
+new_confirmed_female                                    | Tensor       |       | float64 |
+new_confirmed_male                                      | Tensor       |       | float64 |
+new_deceased                                            | Tensor       |       | float64 |
+new_deceased_age_0                                      | Tensor       |       | float64 |
+new_deceased_age_1                                      | Tensor       |       | float64 |
+new_deceased_age_2                                      | Tensor       |       | float64 |
+new_deceased_age_3                                      | Tensor       |       | float64 |
+new_deceased_age_4                                      | Tensor       |       | float64 |
+new_deceased_age_5                                      | Tensor       |       | float64 |
+new_deceased_age_6                                      | Tensor       |       | float64 |
+new_deceased_age_7                                      | Tensor       |       | float64 |
+new_deceased_age_8                                      | Tensor       |       | float64 |
+new_deceased_age_9                                      | Tensor       |       | float64 |
+new_deceased_female                                     | Tensor       |       | float64 |
+new_deceased_male                                       | Tensor       |       | float64 |
+new_hospitalized_patients                               | Tensor       |       | float64 |
+new_hospitalized_patients_age_0                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_1                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_2                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_3                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_4                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_5                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_6                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_7                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_8                         | Tensor       |       | float64 |
+new_hospitalized_patients_age_9                         | Tensor       |       | float64 |
+new_hospitalized_patients_female                        | Tensor       |       | float64 |
+new_hospitalized_patients_male                          | Tensor       |       | float64 |
+new_intensive_care_patients                             | Tensor       |       | float64 |
+new_intensive_care_patients_age_0                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_1                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_2                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_3                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_4                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_5                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_6                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_7                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_8                       | Tensor       |       | float64 |
+new_intensive_care_patients_age_9                       | Tensor       |       | float64 |
+new_intensive_care_patients_female                      | Tensor       |       | float64 |
+new_intensive_care_patients_male                        | Tensor       |       | float64 |
+new_persons_fully_vaccinated                            | Tensor       |       | float64 |
+new_persons_fully_vaccinated_janssen                    | Tensor       |       | float64 |
+new_persons_fully_vaccinated_moderna                    | Tensor       |       | float64 |
+new_persons_fully_vaccinated_pfizer                     | Tensor       |       | float64 |
+new_persons_vaccinated                                  | Tensor       |       | float64 |
+new_recovered                                           | Tensor       |       | float64 |
+new_recovered_age_0                                     | Tensor       |       | float64 |
+new_recovered_age_1                                     | Tensor       |       | float64 |
+new_recovered_age_2                                     | Tensor       |       | float64 |
+new_recovered_age_3                                     | Tensor       |       | float64 |
+new_recovered_age_4                                     | Tensor       |       | float64 |
+new_recovered_age_5                                     | Tensor       |       | float64 |
+new_recovered_age_6                                     | Tensor       |       | float64 |
+new_recovered_age_7                                     | Tensor       |       | float64 |
+new_recovered_age_8                                     | Tensor       |       | float64 |
+new_recovered_age_9                                     | Tensor       |       | float64 |
+new_recovered_female                                    | Tensor       |       | float64 |
+new_recovered_male                                      | Tensor       |       | float64 |
+new_tested                                              | Tensor       |       | float64 |
+new_tested_age_0                                        | Tensor       |       | float64 |
+new_tested_age_1                                        | Tensor       |       | float64 |
+new_tested_age_2                                        | Tensor       |       | float64 |
+new_tested_age_3                                        | Tensor       |       | float64 |
+new_tested_age_4                                        | Tensor       |       | float64 |
+new_tested_age_5                                        | Tensor       |       | float64 |
+new_tested_age_6                                        | Tensor       |       | float64 |
+new_tested_age_7                                        | Tensor       |       | float64 |
+new_tested_age_8                                        | Tensor       |       | float64 |
+new_tested_age_9                                        | Tensor       |       | float64 |
+new_tested_female                                       | Tensor       |       | float64 |
+new_tested_male                                         | Tensor       |       | float64 |
+new_vaccine_doses_administered                          | Tensor       |       | float64 |
+new_vaccine_doses_administered_janssen                  | Tensor       |       | float64 |
+new_vaccine_doses_administered_moderna                  | Tensor       |       | float64 |
+new_vaccine_doses_administered_pfizer                   | Tensor       |       | float64 |
+new_ventilator_patients                                 | Tensor       |       | float64 |
+nurses_per_1000                                         | Tensor       |       | float64 |
+openstreetmap_id                                        | Tensor       |       | string  |
+out_of_pocket_health_expenditure_usd                    | Tensor       |       | float64 |
+physicians_per_1000                                     | Tensor       |       | float64 |
+place_id                                                | Tensor       |       | string  |
+pollution_mortality_rate                                | Tensor       |       | float64 |
+population                                              | Tensor       |       | float64 |
+population_age_00_09                                    | Tensor       |       | float64 |
+population_age_10_19                                    | Tensor       |       | float64 |
+population_age_20_29                                    | Tensor       |       | float64 |
+population_age_30_39                                    | Tensor       |       | float64 |
+population_age_40_49                                    | Tensor       |       | float64 |
+population_age_50_59                                    | Tensor       |       | float64 |
+population_age_60_69                                    | Tensor       |       | float64 |
+population_age_70_79                                    | Tensor       |       | float64 |
+population_age_80_and_older                             | Tensor       |       | float64 |
+population_clustered                                    | Tensor       |       | float64 |
+population_density                                      | Tensor       |       | float64 |
+population_female                                       | Tensor       |       | float64 |
+population_largest_city                                 | Tensor       |       | float64 |
+population_male                                         | Tensor       |       | float64 |
+population_rural                                        | Tensor       |       | float64 |
+population_urban                                        | Tensor       |       | float64 |
+public_information_campaigns                            | Tensor       |       | float64 |
+public_transport_closing                                | Tensor       |       | float64 |
+rainfall_mm                                             | Tensor       |       | float64 |
+relative_humidity                                       | Tensor       |       | float64 |
+restrictions_on_gatherings                              | Tensor       |       | float64 |
+restrictions_on_internal_movement                       | Tensor       |       | float64 |
+school_closing                                          | Tensor       |       | float64 |
+search_trends_abdominal_obesity                         | Tensor       |       | float64 |
+search_trends_abdominal_pain                            | Tensor       |       | float64 |
+search_trends_acne                                      | Tensor       |       | float64 |
+search_trends_actinic_keratosis                         | Tensor       |       | float64 |
+search_trends_acute_bronchitis                          | Tensor       |       | float64 |
+search_trends_adrenal_crisis                            | Tensor       |       | float64 |
+search_trends_ageusia                                   | Tensor       |       | float64 |
+search_trends_alcoholism                                | Tensor       |       | float64 |
+search_trends_allergic_conjunctivitis                   | Tensor       |       | float64 |
+search_trends_allergy                                   | Tensor       |       | float64 |
+search_trends_amblyopia                                 | Tensor       |       | float64 |
+search_trends_amenorrhea                                | Tensor       |       | float64 |
+search_trends_amnesia                                   | Tensor       |       | float64 |
+search_trends_anal_fissure                              | Tensor       |       | float64 |
+search_trends_anaphylaxis                               | Tensor       |       | float64 |
+search_trends_anemia                                    | Tensor       |       | float64 |
+search_trends_angina_pectoris                           | Tensor       |       | float64 |
+search_trends_angioedema                                | Tensor       |       | float64 |
+search_trends_angular_cheilitis                         | Tensor       |       | float64 |
+search_trends_anosmia                                   | Tensor       |       | float64 |
+search_trends_anxiety                                   | Tensor       |       | float64 |
+search_trends_aphasia                                   | Tensor       |       | float64 |
+search_trends_aphonia                                   | Tensor       |       | float64 |
+search_trends_apnea                                     | Tensor       |       | float64 |
+search_trends_arthralgia                                | Tensor       |       | float64 |
+search_trends_arthritis                                 | Tensor       |       | float64 |
+search_trends_ascites                                   | Tensor       |       | float64 |
+search_trends_asperger_syndrome                         | Tensor       |       | float64 |
+search_trends_asphyxia                                  | Tensor       |       | float64 |
+search_trends_asthma                                    | Tensor       |       | float64 |
+search_trends_astigmatism                               | Tensor       |       | float64 |
+search_trends_ataxia                                    | Tensor       |       | float64 |
+search_trends_atheroma                                  | Tensor       |       | float64 |
+search_trends_attention_deficit_hyperactivity_disorder  | Tensor       |       | float64 |
+search_trends_auditory_hallucination                    | Tensor       |       | float64 |
+search_trends_autoimmune_disease                        | Tensor       |       | float64 |
+search_trends_avoidant_personality_disorder             | Tensor       |       | float64 |
+search_trends_back_pain                                 | Tensor       |       | float64 |
+search_trends_bacterial_vaginosis                       | Tensor       |       | float64 |
+search_trends_balance_disorder                          | Tensor       |       | float64 |
+search_trends_beaus_lines                               | Tensor       |       | float64 |
+search_trends_bells_palsy                               | Tensor       |       | float64 |
+search_trends_biliary_colic                             | Tensor       |       | float64 |
+search_trends_binge_eating                              | Tensor       |       | float64 |
+search_trends_bleeding                                  | Tensor       |       | float64 |
+search_trends_bleeding_on_probing                       | Tensor       |       | float64 |
+search_trends_blepharospasm                             | Tensor       |       | float64 |
+search_trends_bloating                                  | Tensor       |       | float64 |
+search_trends_blood_in_stool                            | Tensor       |       | float64 |
+search_trends_blurred_vision                            | Tensor       |       | float64 |
+search_trends_blushing                                  | Tensor       |       | float64 |
+search_trends_boil                                      | Tensor       |       | float64 |
+search_trends_bone_fracture                             | Tensor       |       | float64 |
+search_trends_bone_tumor                                | Tensor       |       | float64 |
+search_trends_bowel_obstruction                         | Tensor       |       | float64 |
+search_trends_bradycardia                               | Tensor       |       | float64 |
+search_trends_braxton_hicks_contractions                | Tensor       |       | float64 |
+search_trends_breakthrough_bleeding                     | Tensor       |       | float64 |
+search_trends_breast_pain                               | Tensor       |       | float64 |
+search_trends_bronchitis                                | Tensor       |       | float64 |
+search_trends_bruise                                    | Tensor       |       | float64 |
+search_trends_bruxism                                   | Tensor       |       | float64 |
+search_trends_bunion                                    | Tensor       |       | float64 |
+search_trends_burn                                      | Tensor       |       | float64 |
+search_trends_burning_chest_pain                        | Tensor       |       | float64 |
+search_trends_burning_mouth_syndrome                    | Tensor       |       | float64 |
+search_trends_candidiasis                               | Tensor       |       | float64 |
+search_trends_canker_sore                               | Tensor       |       | float64 |
+search_trends_cardiac_arrest                            | Tensor       |       | float64 |
+search_trends_carpal_tunnel_syndrome                    | Tensor       |       | float64 |
+search_trends_cataplexy                                 | Tensor       |       | float64 |
+search_trends_cataract                                  | Tensor       |       | float64 |
+search_trends_chancre                                   | Tensor       |       | float64 |
+search_trends_cheilitis                                 | Tensor       |       | float64 |
+search_trends_chest_pain                                | Tensor       |       | float64 |
+search_trends_chills                                    | Tensor       |       | float64 |
+search_trends_chorea                                    | Tensor       |       | float64 |
+search_trends_chronic_pain                              | Tensor       |       | float64 |
+search_trends_cirrhosis                                 | Tensor       |       | float64 |
+search_trends_cleft_lip_and_cleft_palate                | Tensor       |       | float64 |
+search_trends_clouding_of_consciousness                 | Tensor       |       | float64 |
+search_trends_cluster_headache                          | Tensor       |       | float64 |
+search_trends_colitis                                   | Tensor       |       | float64 |
+search_trends_coma                                      | Tensor       |       | float64 |
+search_trends_common_cold                               | Tensor       |       | float64 |
+search_trends_compulsive_behavior                       | Tensor       |       | float64 |
+search_trends_compulsive_hoarding                       | Tensor       |       | float64 |
+search_trends_confusion                                 | Tensor       |       | float64 |
+search_trends_congenital_heart_defect                   | Tensor       |       | float64 |
+search_trends_conjunctivitis                            | Tensor       |       | float64 |
+search_trends_constipation                              | Tensor       |       | float64 |
+search_trends_convulsion                                | Tensor       |       | float64 |
+search_trends_cough                                     | Tensor       |       | float64 |
+search_trends_crackles                                  | Tensor       |       | float64 |
+search_trends_cramp                                     | Tensor       |       | float64 |
+search_trends_crepitus                                  | Tensor       |       | float64 |
+search_trends_croup                                     | Tensor       |       | float64 |
+search_trends_cyanosis                                  | Tensor       |       | float64 |
+search_trends_dandruff                                  | Tensor       |       | float64 |
+search_trends_delayed_onset_muscle_soreness             | Tensor       |       | float64 |
+search_trends_dementia                                  | Tensor       |       | float64 |
+search_trends_dentin_hypersensitivity                   | Tensor       |       | float64 |
+search_trends_depersonalization                         | Tensor       |       | float64 |
+search_trends_depression                                | Tensor       |       | float64 |
+search_trends_dermatitis                                | Tensor       |       | float64 |
+search_trends_desquamation                              | Tensor       |       | float64 |
+search_trends_developmental_disability                  | Tensor       |       | float64 |
+search_trends_diabetes                                  | Tensor       |       | float64 |
+search_trends_diabetic_ketoacidosis                     | Tensor       |       | float64 |
+search_trends_diarrhea                                  | Tensor       |       | float64 |
+search_trends_dizziness                                 | Tensor       |       | float64 |
+search_trends_dry_eye_syndrome                          | Tensor       |       | float64 |
+search_trends_dysautonomia                              | Tensor       |       | float64 |
+search_trends_dysgeusia                                 | Tensor       |       | float64 |
+search_trends_dysmenorrhea                              | Tensor       |       | float64 |
+search_trends_dyspareunia                               | Tensor       |       | float64 |
+search_trends_dysphagia                                 | Tensor       |       | float64 |
+search_trends_dysphoria                                 | Tensor       |       | float64 |
+search_trends_dystonia                                  | Tensor       |       | float64 |
+search_trends_dysuria                                   | Tensor       |       | float64 |
+search_trends_ear_pain                                  | Tensor       |       | float64 |
+search_trends_eczema                                    | Tensor       |       | float64 |
+search_trends_edema                                     | Tensor       |       | float64 |
+search_trends_encephalitis                              | Tensor       |       | float64 |
+search_trends_encephalopathy                            | Tensor       |       | float64 |
+search_trends_epidermoid_cyst                           | Tensor       |       | float64 |
+search_trends_epilepsy                                  | Tensor       |       | float64 |
+search_trends_epiphora                                  | Tensor       |       | float64 |
+search_trends_erectile_dysfunction                      | Tensor       |       | float64 |
+search_trends_erythema                                  | Tensor       |       | float64 |
+search_trends_erythema_chronicum_migrans                | Tensor       |       | float64 |
+search_trends_esophagitis                               | Tensor       |       | float64 |
+search_trends_excessive_daytime_sleepiness              | Tensor       |       | float64 |
+search_trends_eye_pain                                  | Tensor       |       | float64 |
+search_trends_eye_strain                                | Tensor       |       | float64 |
+search_trends_facial_nerve_paralysis                    | Tensor       |       | float64 |
+search_trends_facial_swelling                           | Tensor       |       | float64 |
+search_trends_fasciculation                             | Tensor       |       | float64 |
+search_trends_fatigue                                   | Tensor       |       | float64 |
+search_trends_fatty_liver_disease                       | Tensor       |       | float64 |
+search_trends_fecal_incontinence                        | Tensor       |       | float64 |
+search_trends_fever                                     | Tensor       |       | float64 |
+search_trends_fibrillation                              | Tensor       |       | float64 |
+search_trends_fibrocystic_breast_changes                | Tensor       |       | float64 |
+search_trends_fibromyalgia                              | Tensor       |       | float64 |
+search_trends_flatulence                                | Tensor       |       | float64 |
+search_trends_floater                                   | Tensor       |       | float64 |
+search_trends_focal_seizure                             | Tensor       |       | float64 |
+search_trends_folate_deficiency                         | Tensor       |       | float64 |
+search_trends_food_craving                              | Tensor       |       | float64 |
+search_trends_food_intolerance                          | Tensor       |       | float64 |
+search_trends_frequent_urination                        | Tensor       |       | float64 |
+search_trends_gastroesophageal_reflux_disease           | Tensor       |       | float64 |
+search_trends_gastroparesis                             | Tensor       |       | float64 |
+search_trends_generalized_anxiety_disorder              | Tensor       |       | float64 |
+search_trends_genital_wart                              | Tensor       |       | float64 |
+search_trends_gingival_recession                        | Tensor       |       | float64 |
+search_trends_gingivitis                                | Tensor       |       | float64 |
+search_trends_globus_pharyngis                          | Tensor       |       | float64 |
+search_trends_goitre                                    | Tensor       |       | float64 |
+search_trends_gout                                      | Tensor       |       | float64 |
+search_trends_grandiosity                               | Tensor       |       | float64 |
+search_trends_granuloma                                 | Tensor       |       | float64 |
+search_trends_guilt                                     | Tensor       |       | float64 |
+search_trends_hair_loss                                 | Tensor       |       | float64 |
+search_trends_halitosis                                 | Tensor       |       | float64 |
+search_trends_hay_fever                                 | Tensor       |       | float64 |
+search_trends_headache                                  | Tensor       |       | float64 |
+search_trends_heart_arrhythmia                          | Tensor       |       | float64 |
+search_trends_heart_murmur                              | Tensor       |       | float64 |
+search_trends_heartburn                                 | Tensor       |       | float64 |
+search_trends_hematochezia                              | Tensor       |       | float64 |
+search_trends_hematoma                                  | Tensor       |       | float64 |
+search_trends_hematuria                                 | Tensor       |       | float64 |
+search_trends_hemolysis                                 | Tensor       |       | float64 |
+search_trends_hemoptysis                                | Tensor       |       | float64 |
+search_trends_hemorrhoids                               | Tensor       |       | float64 |
+search_trends_hepatic_encephalopathy                    | Tensor       |       | float64 |
+search_trends_hepatitis                                 | Tensor       |       | float64 |
+search_trends_hepatotoxicity                            | Tensor       |       | float64 |
+search_trends_hiccup                                    | Tensor       |       | float64 |
+search_trends_hip_pain                                  | Tensor       |       | float64 |
+search_trends_hives                                     | Tensor       |       | float64 |
+search_trends_hot_flash                                 | Tensor       |       | float64 |
+search_trends_hydrocephalus                             | Tensor       |       | float64 |
+search_trends_hypercalcaemia                            | Tensor       |       | float64 |
+search_trends_hypercapnia                               | Tensor       |       | float64 |
+search_trends_hypercholesterolemia                      | Tensor       |       | float64 |
+search_trends_hyperemesis_gravidarum                    | Tensor       |       | float64 |
+search_trends_hyperglycemia                             | Tensor       |       | float64 |
+search_trends_hyperhidrosis                             | Tensor       |       | float64 |
+search_trends_hyperkalemia                              | Tensor       |       | float64 |
+search_trends_hyperlipidemia                            | Tensor       |       | float64 |
+search_trends_hypermobility                             | Tensor       |       | float64 |
+search_trends_hyperpigmentation                         | Tensor       |       | float64 |
+search_trends_hypersomnia                               | Tensor       |       | float64 |
+search_trends_hypertension                              | Tensor       |       | float64 |
+search_trends_hyperthermia                              | Tensor       |       | float64 |
+search_trends_hyperthyroidism                           | Tensor       |       | float64 |
+search_trends_hypertriglyceridemia                      | Tensor       |       | float64 |
+search_trends_hypertrophy                               | Tensor       |       | float64 |
+search_trends_hyperventilation                          | Tensor       |       | float64 |
+search_trends_hypocalcaemia                             | Tensor       |       | float64 |
+search_trends_hypochondriasis                           | Tensor       |       | float64 |
+search_trends_hypoglycemia                              | Tensor       |       | float64 |
+search_trends_hypogonadism                              | Tensor       |       | float64 |
+search_trends_hypokalemia                               | Tensor       |       | float64 |
+search_trends_hypomania                                 | Tensor       |       | float64 |
+search_trends_hyponatremia                              | Tensor       |       | float64 |
+search_trends_hypotension                               | Tensor       |       | float64 |
+search_trends_hypothyroidism                            | Tensor       |       | float64 |
+search_trends_hypoxemia                                 | Tensor       |       | float64 |
+search_trends_hypoxia                                   | Tensor       |       | float64 |
+search_trends_impetigo                                  | Tensor       |       | float64 |
+search_trends_implantation_bleeding                     | Tensor       |       | float64 |
+search_trends_impulsivity                               | Tensor       |       | float64 |
+search_trends_indigestion                               | Tensor       |       | float64 |
+search_trends_infection                                 | Tensor       |       | float64 |
+search_trends_inflammation                              | Tensor       |       | float64 |
+search_trends_inflammatory_bowel_disease                | Tensor       |       | float64 |
+search_trends_ingrown_hair                              | Tensor       |       | float64 |
+search_trends_insomnia                                  | Tensor       |       | float64 |
+search_trends_insulin_resistance                        | Tensor       |       | float64 |
+search_trends_intermenstrual_bleeding                   | Tensor       |       | float64 |
+search_trends_intracranial_pressure                     | Tensor       |       | float64 |
+search_trends_iron_deficiency                           | Tensor       |       | float64 |
+search_trends_irregular_menstruation                    | Tensor       |       | float64 |
+search_trends_itch                                      | Tensor       |       | float64 |
+search_trends_jaundice                                  | Tensor       |       | float64 |
+search_trends_kidney_failure                            | Tensor       |       | float64 |
+search_trends_kidney_stone                              | Tensor       |       | float64 |
+search_trends_knee_pain                                 | Tensor       |       | float64 |
+search_trends_kyphosis                                  | Tensor       |       | float64 |
+search_trends_lactose_intolerance                       | Tensor       |       | float64 |
+search_trends_laryngitis                                | Tensor       |       | float64 |
+search_trends_leg_cramps                                | Tensor       |       | float64 |
+search_trends_lesion                                    | Tensor       |       | float64 |
+search_trends_leukorrhea                                | Tensor       |       | float64 |
+search_trends_lightheadedness                           | Tensor       |       | float64 |
+search_trends_low_back_pain                             | Tensor       |       | float64 |
+search_trends_low_grade_fever                           | Tensor       |       | float64 |
+search_trends_lymphedema                                | Tensor       |       | float64 |
+search_trends_major_depressive_disorder                 | Tensor       |       | float64 |
+search_trends_malabsorption                             | Tensor       |       | float64 |
+search_trends_male_infertility                          | Tensor       |       | float64 |
+search_trends_manic_disorder                            | Tensor       |       | float64 |
+search_trends_melasma                                   | Tensor       |       | float64 |
+search_trends_melena                                    | Tensor       |       | float64 |
+search_trends_meningitis                                | Tensor       |       | float64 |
+search_trends_menorrhagia                               | Tensor       |       | float64 |
+search_trends_middle_back_pain                          | Tensor       |       | float64 |
+search_trends_migraine                                  | Tensor       |       | float64 |
+search_trends_milium                                    | Tensor       |       | float64 |
+search_trends_mitral_insufficiency                      | Tensor       |       | float64 |
+search_trends_mood_disorder                             | Tensor       |       | float64 |
+search_trends_mood_swing                                | Tensor       |       | float64 |
+search_trends_morning_sickness                          | Tensor       |       | float64 |
+search_trends_motion_sickness                           | Tensor       |       | float64 |
+search_trends_mouth_ulcer                               | Tensor       |       | float64 |
+search_trends_muscle_atrophy                            | Tensor       |       | float64 |
+search_trends_muscle_weakness                           | Tensor       |       | float64 |
+search_trends_myalgia                                   | Tensor       |       | float64 |
+search_trends_mydriasis                                 | Tensor       |       | float64 |
+search_trends_myocardial_infarction                     | Tensor       |       | float64 |
+search_trends_myoclonus                                 | Tensor       |       | float64 |
+search_trends_nasal_congestion                          | Tensor       |       | float64 |
+search_trends_nasal_polyp                               | Tensor       |       | float64 |
+search_trends_nausea                                    | Tensor       |       | float64 |
+search_trends_neck_mass                                 | Tensor       |       | float64 |
+search_trends_neck_pain                                 | Tensor       |       | float64 |
+search_trends_neonatal_jaundice                         | Tensor       |       | float64 |
+search_trends_nerve_injury                              | Tensor       |       | float64 |
+search_trends_neuralgia                                 | Tensor       |       | float64 |
+search_trends_neutropenia                               | Tensor       |       | float64 |
+search_trends_night_sweats                              | Tensor       |       | float64 |
+search_trends_night_terror                              | Tensor       |       | float64 |
+search_trends_nocturnal_enuresis                        | Tensor       |       | float64 |
+search_trends_nodule                                    | Tensor       |       | float64 |
+search_trends_nosebleed                                 | Tensor       |       | float64 |
+search_trends_nystagmus                                 | Tensor       |       | float64 |
+search_trends_obesity                                   | Tensor       |       | float64 |
+search_trends_onychorrhexis                             | Tensor       |       | float64 |
+search_trends_oral_candidiasis                          | Tensor       |       | float64 |
+search_trends_orthostatic_hypotension                   | Tensor       |       | float64 |
+search_trends_osteopenia                                | Tensor       |       | float64 |
+search_trends_osteophyte                                | Tensor       |       | float64 |
+search_trends_osteoporosis                              | Tensor       |       | float64 |
+search_trends_otitis                                    | Tensor       |       | float64 |
+search_trends_otitis_externa                            | Tensor       |       | float64 |
+search_trends_otitis_media                              | Tensor       |       | float64 |
+search_trends_pain                                      | Tensor       |       | float64 |
+search_trends_palpitations                              | Tensor       |       | float64 |
+search_trends_pancreatitis                              | Tensor       |       | float64 |
+search_trends_panic_attack                              | Tensor       |       | float64 |
+search_trends_papule                                    | Tensor       |       | float64 |
+search_trends_paranoia                                  | Tensor       |       | float64 |
+search_trends_paresthesia                               | Tensor       |       | float64 |
+search_trends_pelvic_inflammatory_disease               | Tensor       |       | float64 |
+search_trends_pericarditis                              | Tensor       |       | float64 |
+search_trends_periodontal_disease                       | Tensor       |       | float64 |
+search_trends_periorbital_puffiness                     | Tensor       |       | float64 |
+search_trends_peripheral_neuropathy                     | Tensor       |       | float64 |
+search_trends_perspiration                              | Tensor       |       | float64 |
+search_trends_petechia                                  | Tensor       |       | float64 |
+search_trends_phlegm                                    | Tensor       |       | float64 |
+search_trends_photodermatitis                           | Tensor       |       | float64 |
+search_trends_photophobia                               | Tensor       |       | float64 |
+search_trends_photopsia                                 | Tensor       |       | float64 |
+search_trends_pleural_effusion                          | Tensor       |       | float64 |
+search_trends_pleurisy                                  | Tensor       |       | float64 |
+search_trends_pneumonia                                 | Tensor       |       | float64 |
+search_trends_podalgia                                  | Tensor       |       | float64 |
+search_trends_polycythemia                              | Tensor       |       | float64 |
+search_trends_polydipsia                                | Tensor       |       | float64 |
+search_trends_polyneuropathy                            | Tensor       |       | float64 |
+search_trends_polyuria                                  | Tensor       |       | float64 |
+search_trends_poor_posture                              | Tensor       |       | float64 |
+search_trends_post_nasal_drip                           | Tensor       |       | float64 |
+search_trends_postural_orthostatic_tachycardia_syndrome | Tensor       |       | float64 |
+search_trends_prediabetes                               | Tensor       |       | float64 |
+search_trends_proteinuria                               | Tensor       |       | float64 |
+search_trends_pruritus_ani                              | Tensor       |       | float64 |
+search_trends_psychosis                                 | Tensor       |       | float64 |
+search_trends_ptosis                                    | Tensor       |       | float64 |
+search_trends_pulmonary_edema                           | Tensor       |       | float64 |
+search_trends_pulmonary_hypertension                    | Tensor       |       | float64 |
+search_trends_purpura                                   | Tensor       |       | float64 |
+search_trends_pus                                       | Tensor       |       | float64 |
+search_trends_pyelonephritis                            | Tensor       |       | float64 |
+search_trends_radiculopathy                             | Tensor       |       | float64 |
+search_trends_rectal_pain                               | Tensor       |       | float64 |
+search_trends_rectal_prolapse                           | Tensor       |       | float64 |
+search_trends_red_eye                                   | Tensor       |       | float64 |
+search_trends_renal_colic                               | Tensor       |       | float64 |
+search_trends_restless_legs_syndrome                    | Tensor       |       | float64 |
+search_trends_rheum                                     | Tensor       |       | float64 |
+search_trends_rhinitis                                  | Tensor       |       | float64 |
+search_trends_rhinorrhea                                | Tensor       |       | float64 |
+search_trends_rosacea                                   | Tensor       |       | float64 |
+search_trends_round_ligament_pain                       | Tensor       |       | float64 |
+search_trends_rumination                                | Tensor       |       | float64 |
+search_trends_scar                                      | Tensor       |       | float64 |
+search_trends_sciatica                                  | Tensor       |       | float64 |
+search_trends_scoliosis                                 | Tensor       |       | float64 |
+search_trends_seborrheic_dermatitis                     | Tensor       |       | float64 |
+search_trends_self_harm                                 | Tensor       |       | float64 |
+search_trends_sensitivity_to_sound                      | Tensor       |       | float64 |
+search_trends_sexual_dysfunction                        | Tensor       |       | float64 |
+search_trends_shallow_breathing                         | Tensor       |       | float64 |
+search_trends_sharp_pain                                | Tensor       |       | float64 |
+search_trends_shivering                                 | Tensor       |       | float64 |
+search_trends_shortness_of_breath                       | Tensor       |       | float64 |
+search_trends_shyness                                   | Tensor       |       | float64 |
+search_trends_sinusitis                                 | Tensor       |       | float64 |
+search_trends_skin_condition                            | Tensor       |       | float64 |
+search_trends_skin_rash                                 | Tensor       |       | float64 |
+search_trends_skin_tag                                  | Tensor       |       | float64 |
+search_trends_skin_ulcer                                | Tensor       |       | float64 |
+search_trends_sleep_apnea                               | Tensor       |       | float64 |
+search_trends_sleep_deprivation                         | Tensor       |       | float64 |
+search_trends_sleep_disorder                            | Tensor       |       | float64 |
+search_trends_snoring                                   | Tensor       |       | float64 |
+search_trends_sore_throat                               | Tensor       |       | float64 |
+search_trends_spasticity                                | Tensor       |       | float64 |
+search_trends_splenomegaly                              | Tensor       |       | float64 |
+search_trends_sputum                                    | Tensor       |       | float64 |
+search_trends_stomach_rumble                            | Tensor       |       | float64 |
+search_trends_strabismus                                | Tensor       |       | float64 |
+search_trends_stretch_marks                             | Tensor       |       | float64 |
+search_trends_stridor                                   | Tensor       |       | float64 |
+search_trends_stroke                                    | Tensor       |       | float64 |
+search_trends_stuttering                                | Tensor       |       | float64 |
+search_trends_subdural_hematoma                         | Tensor       |       | float64 |
+search_trends_suicidal_ideation                         | Tensor       |       | float64 |
+search_trends_swelling                                  | Tensor       |       | float64 |
+search_trends_swollen_feet                              | Tensor       |       | float64 |
+search_trends_swollen_lymph_nodes                       | Tensor       |       | float64 |
+search_trends_syncope                                   | Tensor       |       | float64 |
+search_trends_tachycardia                               | Tensor       |       | float64 |
+search_trends_tachypnea                                 | Tensor       |       | float64 |
+search_trends_telangiectasia                            | Tensor       |       | float64 |
+search_trends_tenderness                                | Tensor       |       | float64 |
+search_trends_testicular_pain                           | Tensor       |       | float64 |
+search_trends_throat_irritation                         | Tensor       |       | float64 |
+search_trends_thrombocytopenia                          | Tensor       |       | float64 |
+search_trends_thyroid_nodule                            | Tensor       |       | float64 |
+search_trends_tic                                       | Tensor       |       | float64 |
+search_trends_tinnitus                                  | Tensor       |       | float64 |
+search_trends_tonsillitis                               | Tensor       |       | float64 |
+search_trends_toothache                                 | Tensor       |       | float64 |
+search_trends_tremor                                    | Tensor       |       | float64 |
+search_trends_trichoptilosis                            | Tensor       |       | float64 |
+search_trends_tumor                                     | Tensor       |       | float64 |
+search_trends_type_2_diabetes                           | Tensor       |       | float64 |
+search_trends_unconsciousness                           | Tensor       |       | float64 |
+search_trends_underweight                               | Tensor       |       | float64 |
+search_trends_upper_respiratory_tract_infection         | Tensor       |       | float64 |
+search_trends_urethritis                                | Tensor       |       | float64 |
+search_trends_urinary_incontinence                      | Tensor       |       | float64 |
+search_trends_urinary_tract_infection                   | Tensor       |       | float64 |
+search_trends_urinary_urgency                           | Tensor       |       | float64 |
+search_trends_uterine_contraction                       | Tensor       |       | float64 |
+search_trends_vaginal_bleeding                          | Tensor       |       | float64 |
+search_trends_vaginal_discharge                         | Tensor       |       | float64 |
+search_trends_vaginitis                                 | Tensor       |       | float64 |
+search_trends_varicose_veins                            | Tensor       |       | float64 |
+search_trends_vasculitis                                | Tensor       |       | float64 |
+search_trends_ventricular_fibrillation                  | Tensor       |       | float64 |
+search_trends_ventricular_tachycardia                   | Tensor       |       | float64 |
+search_trends_vertigo                                   | Tensor       |       | float64 |
+search_trends_viral_pneumonia                           | Tensor       |       | float64 |
+search_trends_visual_acuity                             | Tensor       |       | float64 |
+search_trends_vomiting                                  | Tensor       |       | float64 |
+search_trends_wart                                      | Tensor       |       | float64 |
+search_trends_water_retention                           | Tensor       |       | float64 |
+search_trends_weakness                                  | Tensor       |       | float64 |
+search_trends_weight_gain                               | Tensor       |       | float64 |
+search_trends_wheeze                                    | Tensor       |       | float64 |
+search_trends_xeroderma                                 | Tensor       |       | float64 |
+search_trends_xerostomia                                | Tensor       |       | float64 |
+search_trends_yawn                                      | Tensor       |       | float64 |
+smoking_prevalence                                      | Tensor       |       | float64 |
+snowfall_mm                                             | Tensor       |       | float64 |
+stay_at_home_requirements                               | Tensor       |       | float64 |
+stringency_index                                        | Tensor       |       | float64 |
+subregion1_code                                         | Tensor       |       | string  |
+subregion1_name                                         | Tensor       |       | string  |
+subregion2_code                                         | Tensor       |       | string  |
+subregion2_name                                         | Tensor       |       | string  |
+testing_policy                                          | Tensor       |       | float64 |
+vaccination_policy                                      | Tensor       |       | float64 |
+wikidata_id                                             | Tensor       |       | string  |
+workplace_closing                                       | Tensor       |       | float64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

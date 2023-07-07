@@ -26,6 +26,8 @@ upper_tabs:
         path: /datasets/overview
       - title: End-to-end Keras example
         path: /datasets/keras_example
+      - title: Dataset collections
+        path: /datasets/dataset_collections
 
       - heading: "Features & performances"
       - title: TFDS CLI
@@ -44,14 +46,18 @@ upper_tabs:
         path: /datasets/datasets_versioning
       - title: Store your dataset on GCS
         path: /datasets/gcs
+      - title: TFDS for Jax and PyTorch
+        path: /datasets/tfless_tfds
 
-      - heading: "Create your dataset"
+      - heading: "Add a dataset"
       - title: Create your dataset
         path: /datasets/add_dataset
       - title: Huge datasets (Apache Beam)
         path: /datasets/beam_datasets
       - title: Format-specific builders
         path: /datasets/format_specific_dataset_builders
+      - title: Add a dataset collection
+        path: /datasets/add_dataset_collection
       - title: Contribute to TFDS
         path: /datasets/contribute
       - title: Common gotchas

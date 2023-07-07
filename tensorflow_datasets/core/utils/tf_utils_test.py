@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 """Tests for tensorflow_datasets.core.utils.tf_utils."""
 
 import numpy as np
+import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import tf_utils
@@ -53,42 +54,80 @@ class TfUtilsTest(testing.TestCase):
 
 def test_shapes_are_compatible():
   assert tf_utils.shapes_are_compatible(
-      {'a': {
-          'b': (28, 28, 3)
-      }},
-      {'a': {
-          'b': (None, None, 3)
-      }},
+      {'a': {'b': (28, 28, 3)}},
+      {'a': {'b': (None, None, 3)}},
   )
   assert not tf_utils.shapes_are_compatible(
-      {'a': {
-          'b': (28, 28, 3)
-      }},
-      {'a': {
-          'b': (None, 27, 3)
-      }},
+      {'a': {'b': (28, 28, 3)}},
+      {'a': {'b': (None, 27, 3)}},
   )
 
 
-def test_is_np_sub_dtype():
-  assert tf_utils.is_np_sub_dtype(np.int32, np.integer)
-  assert tf_utils.is_np_sub_dtype(np.int64, np.integer)
-  assert tf_utils.is_np_sub_dtype(np.float, np.floating)
-  assert not tf_utils.is_np_sub_dtype(np.int64, np.floating)
-  assert not tf_utils.is_np_sub_dtype(np.float, np.integer)
+@pytest.mark.parametrize(
+    ['tensor', 'np_shape', 'result'],
+    [
+        (
+            tf.constant([28, 28, 3]),
+            (None, None, 3),
+            (tf.constant(28), tf.constant(28), 3),
+        ),
+        (np.array([28, 28, 3]), (None, None, 3), (28, 28, 3)),
+    ],
+)
+def test_merge_shape(tensor, np_shape, result):
+  assert tf_utils.merge_shape(tensor, np_shape) == result
 
 
-def test_is_same_tf_dtype():
-  assert tf_utils.is_same_tf_dtype(tf.int32, tf.int32)
-  assert not tf_utils.is_same_tf_dtype(tf.int32, tf.int64)
-  assert not tf_utils.is_same_tf_dtype(tf.int64, tf.int32)
+@pytest.mark.parametrize(
+    ['shape1', 'shape2'],
+    [
+        (None, None),
+        ((None,), (None,)),
+        ((1,), (1,)),
+        ((None,), (1,)),
+        ((1,), (None,)),
+        ((1, 2), (1, 2)),
+        ((1, 2), (None, None)),
+        ((1, None), (None, None)),
+        ((None, 2), (None, None)),
+        ((None, None), (1, 2)),
+        ((None, None), (1, None)),
+        ((None, None), (None, 2)),
+    ],
+)
+def test_assert_shapes_match(shape1, shape2):
+  try:
+    tf_utils.assert_shape_match(shape1, shape2)
+  except ValueError as exception:
+    raise Exception(f'test should fail for {shape1}/{shape2}') from exception
 
 
-def test_merge_shape():
-  tensor = tf.constant([28, 28, 3])
-  np_shape = (None, None, 3)
-  actual = tf_utils.merge_shape(tensor, np_shape)
-  assert actual == (tf.constant(28), tf.constant(28), 3)
+@pytest.mark.parametrize(
+    ['shape1', 'shape2'],
+    [
+        ((1, 2), (3, 2)),
+        ((1, 2), (1, 3)),
+    ],
+)
+def test_assert_must_have_the_same_dimension(shape1, shape2):
+  with pytest.raises(ValueError, match='are incompatible'):
+    tf_utils.assert_shape_match(shape1, shape2)
+
+
+@pytest.mark.parametrize(
+    ['shape1', 'shape2'],
+    [
+        (None, (1,)),
+        (None, (1, 2)),
+        ((1,), None),
+        ((1, 2), None),
+        ((1,), (1, 2)),
+        ((1, 2), (1,)),
+    ],
+)
+def test_assert_must_have_the_same_rank(shape1, shape2):
+  with pytest.raises(ValueError, match='must have the same rank'):
+    tf_utils.assert_shape_match(shape1, shape2)
 
 
 if __name__ == '__main__':

@@ -2,11 +2,23 @@ name: Unittests
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
+    branches:
+      - master
     # Do not trigger tests for documentation or markdown docs.
     paths-ignore:
       - 'docs/**'
       - '*.md'
+  push:
+    branches:
+      - master
+    # Do not trigger tests for documentation or markdown docs.
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  schedule:
+    # Trigger tests every day at 02:00 UTC to refresh cache.
+    - cron: '0 2 * * *'
 
 # Cancel in-progress runs for the current workflow if not on the main branch
 # (as it mark the unittests as failed).
@@ -17,92 +29,160 @@ concurrency:
   # Cancel only PR intermediate builds
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
+env:
+  PYTEST_NUM_SHARDS: 4  # Controls tests sharding enabled by `pytest-shard`
 
 jobs:
-  pytest-job:
-    # For merged PR, activate testing only on the master branch, based on:
-    # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
-    if:
-      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+  activate-tests:
+    name: Check if tests should be run
+    runs-on: ubuntu-latest
 
-    name: "Core TFDS tests on ${{ matrix.tf_version }}"
+    steps:
+      - name: Check
+        id: check
+        # For merged PR, activate testing only on the master branch, based on:
+        # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
+        run: |
+          echo "status=${{ github.ref == 'refs/heads/master' || (
+            github.event.action != 'closed'
+            && github.event.pull_request.merged == false
+          ) }}" >> $GITHUB_OUTPUT
+
+    outputs:
+      status: ${{ steps.check.outputs.status }}
+
+  shards-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    name: Generate shards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create variables
+        id: create-vars
+        run: |
+          echo "num-shards=$(jq -n -c '[${{ env.PYTEST_NUM_SHARDS }}]')" >> $GITHUB_OUTPUT
+          echo "shard-ids=$(jq -n -c '[range(1;${{ env.PYTEST_NUM_SHARDS }}+1)]')" >> $GITHUB_OUTPUT
+
+    outputs:
+      num-shards: ${{ steps.create-vars.outputs.num-shards }}
+      shard-ids: ${{ steps.create-vars.outputs.shard-ids }}
+
+  pytest-job:
+    needs: shards-job
+
+    name: '[${{ matrix.tf-version }}][Python ${{ matrix.python-version }}][${{ matrix.shard-id }}/${{ matrix.num-shards }}] Core TFDS tests'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
       # Do not cancel in-progress jobs if any matrix job fails.
       fail-fast: false
       matrix:
-        tf_version: ["tensorflow", "tf-nightly"]
-        shard_id: [0, 1, 2, 3]
+        tf-version: ['tensorflow', 'tf-nightly']
+        # Can't reference env variables in matrix
+        num-shards: ${{ fromJson(needs.shards-job.outputs.num-shards) }}
+        shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
+        # TF suppported versions: https://www.tensorflow.org/install/pip#software_requirements
+        python-version: ['3.8', '3.9', '3.10']
 
     steps:
-    - uses: actions/checkout@v2
-
-    # Install deps
-    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
       with:
-        python-version: 3.7
-
-    # Get current date.
-    - name: Get current date
-      id: date
-      run: |
-        echo "::set-output name=today::$(date +'%Y-%m-%d')"
-
-    # The cache is refreshed everyday.
-    - uses: actions/cache@v2
-      with:
-        path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}-${{ matrix.tf_version }}
-
-    - run: pip install ${{ matrix.tf_version }}
-
-    # Update the package directory before installing.
-    - run: sudo apt-get update
-    # Install the protocol buffer compiler for gcld3 tests.
-    - run: sudo apt install -y protobuf-compiler
-    # Install ffmpeg for Audio FeatureConnector tests.
-    - run: sudo apt-get install ffmpeg
-
-    - run: pip install -e .[tests-all]
+        tf-version: ${{ matrix.tf-version }}
+        python-version: ${{ matrix.python-version }}
 
     # Run tests
+    # Ignores:
+    # * Nsynth is run in isolation due to dependency conflict (crepe).
+    # * Lsun tests is disabled because the tensorflow_io used in open-source
+    #   is linked to static libraries compiled again specific TF version, which
+    #   makes test fails with linking error (libtensorflow_io_golang.so).
+    # * imagenet2012_corrupted requires imagemagick binary.
+    # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
+    # * github_api is run separately to not overuse API quota.
+    # * wmt is run separately to avoid worker hanging.
+    # * TODO(b/273289576): dataset_utils_test and sequence_feature_test fail until TensorFlow 2.12.0
     - name: Run core tests
       run: |
-        pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard_id }} --num-shards=4 \
-          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
-          --ignore="tensorflow_datasets/core/features/features_test.py" \
-          --ignore="tensorflow_datasets/testing/test_utils.py" \
+        pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ env.PYTEST_NUM_SHARDS }} \
+          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
           --ignore="tensorflow_datasets/image/lsun_test.py" \
-          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+          --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
+          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
+          --ignore="tensorflow_datasets/import_without_tf_test.py" \
+          --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
+          --ignore="tensorflow_datasets/translate/wmt19_test.py" \
+          --ignore="tensorflow_datasets/core/dataset_utils_test.py" \
+          --ignore="tensorflow_datasets/core/features/sequence_feature_test.py"
 
-  notebooktest-job:
-    # For merged PR, activate testing only on the master branch.
-    if:
-      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+    # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
+    - name: Run leftover tests
+      if: ${{ matrix.shard-id == 1 }}
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 1
+        max_attempts: 2
+        retry_on: timeout
+        command: |
+          pytest -vv -o faulthandler_timeout=10 tensorflow_datasets/translate/wmt19_test.py
 
-    name: "Notebook tests"
+  huggingface-pytest-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    # HuggingFace tests need to be run separately because they're disabled without installed
+    # `datasets` library which is not included in ['tests-all'] extras for Python >=3.10
+    name: 'HuggingFace Python 3.10 tests'
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-    - uses: styfle/cancel-workflow-action@0.9.1
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
       with:
-        access_token: ${{ github.token }}
-    - uses: actions/checkout@v2
+        tf-version: tensorflow
+        python-version: '3.10'
+        extras: huggingface
 
-    # Install deps.
-    - uses: actions/setup-python@v2
+    - name: Run HuggingFace tests
+      run: pytest -vv -n auto tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py
+
+  githubapi-pytest-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    name: 'Github API tests'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
       with:
-        python-version: 3.7
+        tf-version: tensorflow
 
-    - run: pip --version
-    - run: pip install tf-nightly
+    - name: Run Github API tests
+      run: pytest --durations=100 -vv -n auto tensorflow_datasets/core/github_api/github_path_test.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  notebook-test-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    name: 'Notebook tests'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
+      with:
+        tf-version: tensorflow
+
     - run: pip install ipython
-    - run: sudo apt install -y protobuf-compiler
-
-    - run: pip install -e .[tests-all]
 
     # Test each notebook sequentially.
     - name: Run notebook
@@ -110,7 +190,9 @@ jobs:
         ipython kernel install --user --name tfds-notebook
         for notebook in docs/*ipynb
           do
-            if [$notebook != "docs/determinism.ipynb"]
+            # These notebooks time out because they rely on loading huge datasets.
+            if [[ "$notebook" != "docs/determinism.ipynb" ]] && \
+               [[ "$notebook" != "docs/dataset_collections.ipynb" ]]
             then
               jupyter nbconvert \
                 --ExecutePreprocessor.timeout=600 \

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -99,14 +99,17 @@ def _set_default_visibility() -> None:
   to only open-source non-community datasets.
   """
   import __main__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+
   main_file = getattr(__main__, '__file__', None)
   if main_file and 'tensorflow_datasets' in pathlib.Path(main_file).parts:
     # If the script is launched from within a TFDS script, we disable community
     # datasets and restrict scripts to only public datasets.
     # Accessing community datasets should be explicitly requested.
-    set_availables([
-        DatasetType.TFDS_PUBLIC,
-    ])
+    set_availables(
+        [
+            DatasetType.TFDS_PUBLIC,
+        ]
+    )
 
 
 app.call_after_init(_set_default_visibility)

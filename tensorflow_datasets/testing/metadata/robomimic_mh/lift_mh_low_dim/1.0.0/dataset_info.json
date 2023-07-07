@@ -1,0 +1,28 @@
+{
+  "citation": "@inproceedings{robomimic2021,\n  title={What Matters in Learning from Offline Human Demonstrations for Robot Manipulation},\n  author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany\n          and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese\n          and Yuke Zhu and Roberto Mart\\'{i}n-Mart\\'{i}n},\n  booktitle={Conference on Robot Learning},\n  year={2021}\n}",
+  "configName": "lift_mh_low_dim",
+  "description": "The Robomimic mixed human datasets were collected by several mixed-ability\noperators using the [RoboTurk](https://roboturk.stanford.edu/) platform.\nEach dataset consists of 200 demonstrations.\n\nEach task has two versions: one with low dimensional observations (`low_dim`),\nand one with images (`image`).\n\nThe datasets follow the [RLDS format](https://github.com/google-research/rlds)\nto represent steps and episodes.",
+  "downloadSize": "47947760",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://arise-initiative.github.io/robomimic-web/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.robomimic_mh.robomimic_mh_dataset_builder",
+  "name": "robomimic_mh",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "28584320",
+      "shardLengths": [
+        "300"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

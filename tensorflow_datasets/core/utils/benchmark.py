@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,6 +55,7 @@ class RawBenchmarkResult:
     batch_size: the number of examples in each iteration.
     durations_ns: the duration in ns of each iteration that was processed.
   """
+
   num_iter: int
   num_examples: int
   start_time: int
@@ -90,7 +91,8 @@ class RawBenchmarkResult:
     return [_ns_to_s(d) for d in self.durations_ns]
 
   def summary_statistics(
-      self, include_first: bool) -> Dict[str, Union[float, List[float]]]:
+      self, include_first: bool
+  ) -> Dict[str, Union[float, List[float]]]:
     if self.durations_ns is None:
       return {}
     durations = self.durations_s(include_first)
@@ -101,7 +103,7 @@ class RawBenchmarkResult:
         'quantiles': statistics.quantiles(durations),
     }
 
-  def raw_stats_pd(self) -> pd.DataFrame:
+  def raw_stats_pd(self) -> pd.DataFrame:  # pytype: disable=invalid-annotation  # typed-pandas
     raw_stats = {
         'start_time': _ns_to_s(self.start_time),
         'first_batch_time': _ns_to_s(self.first_batch_time),
@@ -109,26 +111,37 @@ class RawBenchmarkResult:
         'num_iter': self.num_iter,
     }
     return pd.DataFrame.from_dict(
-        raw_stats, orient='index', columns=['duration'])
+        raw_stats, orient='index', columns=['duration']
+    )
 
   def stats(self) -> Dict[str, StatDict]:
     return {
-        'first+lasts':
-            _log_stats('First included', self.start_time, self.end_time,
-                       self.num_examples + self.batch_size),
-        'first':
-            _log_stats('First only', self.start_time, self.first_batch_time,
-                       self.batch_size),
-        'lasts':
-            _log_stats('First excluded', self.first_batch_time, self.end_time,
-                       self.num_examples)
+        'first+lasts': _log_stats(
+            'First included',
+            self.start_time,
+            self.end_time,
+            self.num_examples + self.batch_size,
+        ),
+        'first': _log_stats(
+            'First only',
+            self.start_time,
+            self.first_batch_time,
+            self.batch_size,
+        ),
+        'lasts': _log_stats(
+            'First excluded',
+            self.first_batch_time,
+            self.end_time,
+            self.num_examples,
+        ),
     }
 
-  def stats_pd(self) -> pd.DataFrame:
+  def stats_pd(self) -> pd.DataFrame:  # pytype: disable=invalid-annotation  # typed-pandas
     return pd.DataFrame.from_dict(self.stats(), orient='index')
 
   def __repr__(self) -> str:
-    return textwrap.dedent(f"""
+    return textwrap.dedent(
+        f"""
       BenchmarkResult(
         num_iter = {self.num_iter}
         num_examples = {self.num_examples}
@@ -136,13 +149,14 @@ class RawBenchmarkResult:
         examples / sec = {self.examples_per_second()}
         duration: {self.summary_statistics(include_first=True)}
         duration without first: {self.summary_statistics(include_first=False)}
-      )""")
+      )"""
+    )
 
 
 @dataclasses.dataclass(frozen=True)
 class BenchmarkResult:
-  stats: pd.DataFrame
-  raw_stats: pd.DataFrame
+  stats: pd.DataFrame  # pytype: disable=invalid-annotation  # typed-pandas
+  raw_stats: pd.DataFrame  # pytype: disable=invalid-annotation  # typed-pandas
 
   def _repr_html_(self) -> str:
     """Colab/notebook representation."""
@@ -180,7 +194,10 @@ def raw_benchmark(
   try:
     total = len(ds)  # pytype: disable=wrong-arg-types
   except TypeError:
-    total = None
+    total = num_iter
+
+  if num_iter is not None:
+    total = min(total, num_iter)
 
   results = []
   actual_num_iter = 0
@@ -202,7 +219,9 @@ def raw_benchmark(
   if num_iter and actual_num_iter < num_iter:
     logging.warning(
         'Number of iterations is shorter than expected ({} vs {})'.format(
-            actual_num_iter, num_iter))
+            actual_num_iter, num_iter
+        )
+    )
 
   durations_ns = []
   for i in range(len(results)):
@@ -218,7 +237,8 @@ def raw_benchmark(
       first_batch_time=first_batch_time,
       end_time=end_time,
       batch_size=batch_size,
-      durations_ns=durations_ns)
+      durations_ns=durations_ns,
+  )
 
 
 def benchmark(
@@ -264,9 +284,9 @@ def _log_stats(msg: str, start: int, end: int, num_examples: int) -> StatDict:
   """Log and returns stats."""
   if not num_examples:
     stats = {
-        'duration': 0.,
+        'duration': 0.0,
         'num_examples': 0,
-        'avg': 0.,
+        'avg': 0.0,
     }
   else:
     # Make sure the total time is not 0.
@@ -277,6 +297,8 @@ def _log_stats(msg: str, start: int, end: int, num_examples: int) -> StatDict:
         'num_examples': num_examples,
         'avg': num_examples / total_time_s,
     }
-  print('Examples/sec ({}) {avg:.2f} ex/sec (total: {num_examples} ex, '
-        '{duration:.2f} sec)'.format(msg, **stats))
+  print(
+      'Examples/sec ({}) {avg:.2f} ex/sec (total: {num_examples} ex, '
+      '{duration:.2f} sec)'.format(msg, **stats)
+  )
   return stats

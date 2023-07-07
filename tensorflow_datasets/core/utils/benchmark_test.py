@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,13 +21,16 @@ import tensorflow as tf
 from tensorflow_datasets.core.utils import benchmark
 
 
-@pytest.mark.parametrize('ds, num_iter, batch_size, expected_num_examples', [
-    (tf.data.Dataset.range(10), 10, 1, 10),
-    (tf.data.Dataset.range(10), 5, 1, 5),
-    (tf.data.Dataset.range(10), 10, 2, 20),
-    (range(10), 10, 1, 10),
-    (range(10), 10, 2, 20),
-])
+@pytest.mark.parametrize(
+    'ds, num_iter, batch_size, expected_num_examples',
+    [
+        (tf.data.Dataset.range(10), 10, 1, 10),
+        (tf.data.Dataset.range(10), 5, 1, 5),
+        (tf.data.Dataset.range(10), 10, 2, 20),
+        (range(10), 10, 1, 10),
+        (range(10), 10, 2, 20),
+    ],
+)
 def test_raw_benchmark(ds, num_iter, batch_size, expected_num_examples):
   result = benchmark.raw_benchmark(ds, num_iter=num_iter, batch_size=batch_size)
   assert isinstance(result, benchmark.RawBenchmarkResult)

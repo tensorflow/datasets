@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="math_qa" />
-  <meta itemprop="description" content="A large-scale dataset of math word problems and an interpretable neural math problem solver that learns to map problems to operation programs.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;math_qa&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="A large-scale dataset of math word problems and an interpretable neural math&#10;problem solver that learns to map problems to operation programs.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;math_qa&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/math_qa" />
   <meta itemprop="sameAs" content="https://math-qa.github.io/" />
   <meta itemprop="citation" content="@misc{amini2019mathqa,&#10;      title={MathQA: Towards Interpretable Math Word Problem Solving with Operation-Based Formalisms},&#10;      author={Aida Amini and Saadia Gabriel and Peter Lin and Rik Koncel-Kedziorski and Yejin Choi and Hannaneh Hajishirzi},&#10;      year={2019},&#10;      eprint={1905.13319},&#10;      archivePrefix={arXiv},&#10;      primaryClass={cs.CL}&#10;}" />
@@ -17,10 +17,16 @@
 A large-scale dataset of math word problems and an interpretable neural math
 problem solver that learns to map problems to operation programs.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/mathqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://math-qa.github.io/](https://math-qa.github.io/)
 
 *   **Source code**:
-    [`tfds.text.math_qa.MathQa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/math_qa/math_qa.py)
+    [`tfds.datasets.math_qa.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/math_qa/math_qa_dataset_builder.py)
 
 *   **Versions**:
 
@@ -46,30 +52,30 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'Problem': Text(shape=(), dtype=tf.string),
-    'Rationale': Text(shape=(), dtype=tf.string),
-    'annotated_formula': Text(shape=(), dtype=tf.string),
-    'category': Text(shape=(), dtype=tf.string),
-    'correct': Text(shape=(), dtype=tf.string),
-    'correct_option': Text(shape=(), dtype=tf.string),
-    'linear_formula': Text(shape=(), dtype=tf.string),
-    'options': Text(shape=(), dtype=tf.string),
+    'Problem': Text(shape=(), dtype=string),
+    'Rationale': Text(shape=(), dtype=string),
+    'annotated_formula': Text(shape=(), dtype=string),
+    'category': Text(shape=(), dtype=string),
+    'correct': Text(shape=(), dtype=string),
+    'correct_option': Text(shape=(), dtype=string),
+    'linear_formula': Text(shape=(), dtype=string),
+    'options': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape | Dtype     | Description
-:---------------- | :----------- | :---- | :-------- | :----------
-                  | FeaturesDict |       |           |
-Problem           | Text         |       | tf.string |
-Rationale         | Text         |       | tf.string |
-annotated_formula | Text         |       | tf.string |
-category          | Text         |       | tf.string |
-correct           | Text         |       | tf.string |
-correct_option    | Text         |       | tf.string |
-linear_formula    | Text         |       | tf.string |
-options           | Text         |       | tf.string |
+Feature           | Class        | Shape | Dtype  | Description
+:---------------- | :----------- | :---- | :----- | :----------
+                  | FeaturesDict |       |        |
+Problem           | Text         |       | string |
+Rationale         | Text         |       | string |
+annotated_formula | Text         |       | string |
+category          | Text         |       | string |
+correct           | Text         |       | string |
+correct_option    | Text         |       | string |
+linear_formula    | Text         |       | string |
+options           | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

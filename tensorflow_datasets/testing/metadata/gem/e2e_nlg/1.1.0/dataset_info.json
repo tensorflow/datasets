@@ -4,6 +4,7 @@
   "configName": "e2e_nlg",
   "description": "**GEM** is a benchmark environment for Natural Language Generation with a focus\non its Evaluation, both through human annotations and automated Metrics.\n\nGEM aims to: (1) measure NLG progress across 13 datasets spanning many NLG\ntasks and languages. (2) provide an in-depth analysis of data and models\npresented via data statements and challenge sets. (3) develop standards for\nevaluation of generated text using both automated and human metrics.\n\nMore information can be found at\n[https://gem-benchmark.com](https://gem-benchmark.com).",
   "downloadSize": "14668048",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://gem-benchmark.com"
@@ -11,8 +12,14 @@
   },
   "moduleName": "tensorflow_datasets.text.gem.gem",
   "name": "gem",
+  "releaseNotes": {
+    "1.0.0": "Initial version",
+    "1.0.1": "Update bad links filter for MLSum",
+    "1.1.0": "Release of the Challenge Sets"
+  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "12168065",
       "shardLengths": [
@@ -20,6 +27,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
       "numBytes": "2252048",
       "shardLengths": [
@@ -27,6 +35,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "2572260",
       "shardLengths": [
@@ -34,6 +43,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_train_sample",
       "numBytes": "190637",
       "shardLengths": [
@@ -41,6 +51,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_validation_sample",
       "numBytes": "272656",
       "shardLengths": [
@@ -48,6 +59,7 @@
       ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "challenge_test_scramble",
       "numBytes": "282906",
       "shardLengths": [

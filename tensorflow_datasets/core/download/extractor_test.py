@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,16 +43,12 @@ class ExtractorTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(ExtractorTest, cls).setUpClass()
-    f1_path = os.path.join(cls.test_data, '6pixels.png')
-    f2_path = os.path.join(cls.test_data, 'foo.csv')
-    with tf.io.gfile.GFile(f1_path, 'rb') as f1_f:
-      cls.f1_content = f1_f.read()
-    with tf.io.gfile.GFile(f2_path, 'rb') as f2_f:
-      cls.f2_content = f2_f.read()
+    cls.f1_content = _read(os.path.join(cls.test_data, '6pixels.png'))
+    cls.f2_content = _read(os.path.join(cls.test_data, 'foo.csv'))
 
   def setUp(self):
     super(ExtractorTest, self).setUp()
-    self.extractor = extractor.get_extractor()
+    self.extractor = extractor._Extractor()
     self.extractor._pbar_path = mock.MagicMock()
     # Where archive will be extracted:
     self.to_path = os.path.join(self.tmp_dir, 'extracted_arch')
@@ -74,34 +70,39 @@ class ExtractorTest(testing.TestCase):
       self.assertEqual(_read(path), content, 'File %s has bad content.' % path)
 
   def test_zip(self):
-    self._test_extract(ZIP, 'arch1.zip', {
-        '6pixels.png': self.f1_content,
-        'foo.csv': self.f2_content
-    })
+    self._test_extract(
+        ZIP,
+        'arch1.zip',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content},
+    )
 
   def test_tar(self):
-    self._test_extract(TAR, 'arch1.tar', {
-        '6pixels.png': self.f1_content,
-        'foo.csv': self.f2_content
-    })
+    self._test_extract(
+        TAR,
+        'arch1.tar',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content},
+    )
 
   def test_targz(self):
-    self._test_extract(TAR_GZ, 'arch1.tar.gz', {
-        '6pixels.png': self.f1_content,
-        'foo.csv': self.f2_content
-    })
+    self._test_extract(
+        TAR_GZ,
+        'arch1.tar.gz',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content},
+    )
 
   def test_tar_stream(self):
-    self._test_extract(TAR_STREAM, 'arch1.tar', {
-        '6pixels.png': self.f1_content,
-        'foo.csv': self.f2_content
-    })
+    self._test_extract(
+        TAR_STREAM,
+        'arch1.tar',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content},
+    )
 
   def test_targz_stream(self):
-    self._test_extract(TAR_GZ_STREAM, 'arch1.tar.gz', {
-        '6pixels.png': self.f1_content,
-        'foo.csv': self.f2_content
-    })
+    self._test_extract(
+        TAR_GZ_STREAM,
+        'arch1.tar.gz',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content},
+    )
 
   def test_gzip(self):
     from_path = os.path.join(self.test_data, 'archives', 'arch1.tar.gz')
@@ -130,8 +131,9 @@ class ExtractorTest(testing.TestCase):
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
     promise = self.extractor.extract(from_path, ZIP, self.to_path)
     expected_msg = 'File is not a zip file'
-    with self.assertRaisesWithPredicateMatch(extractor.ExtractError,
-                                             expected_msg):
+    with self.assertRaisesWithPredicateMatch(
+        extractor.ExtractError, expected_msg
+    ):
       promise.get()
 
 

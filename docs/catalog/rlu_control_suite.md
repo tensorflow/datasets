@@ -91,40 +91,40 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(1,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(1,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'position': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(2,), dtype=tf.float32),
+            'position': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(2,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_id                 | Tensor       |       | tf.int64   |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (1,)  | tf.float32 |
-steps/discount             | Tensor       |       | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/position | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
-steps/reward               | Tensor       |       | tf.float32 |
-timestamp                  | Tensor       |       | tf.int64   |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_id                 | Tensor       |       | int64   |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (1,)  | float32 |
+steps/discount             | Tensor       |       | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/position | Tensor       | (3,)  | float32 |
+steps/observation/velocity | Tensor       | (2,)  | float32 |
+steps/reward               | Tensor       |       | float32 |
+timestamp                  | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -181,40 +181,40 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'position': Tensor(shape=(8,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'position': Tensor(shape=(8,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape | Dtype      | Description
-:------------------------- | :----------- | :---- | :--------- | :----------
-                           | FeaturesDict |       |            |
-episode_id                 | Tensor       |       | tf.int64   |
-steps                      | Dataset      |       |            |
-steps/action               | Tensor       | (6,)  | tf.float32 |
-steps/discount             | Tensor       |       | tf.float32 |
-steps/is_first             | Tensor       |       | tf.bool    |
-steps/is_last              | Tensor       |       | tf.bool    |
-steps/is_terminal          | Tensor       |       | tf.bool    |
-steps/observation          | FeaturesDict |       |            |
-steps/observation/position | Tensor       | (8,)  | tf.float32 |
-steps/observation/velocity | Tensor       | (9,)  | tf.float32 |
-steps/reward               | Tensor       |       | tf.float32 |
-timestamp                  | Tensor       |       | tf.int64   |
+Feature                    | Class        | Shape | Dtype   | Description
+:------------------------- | :----------- | :---- | :------ | :----------
+                           | FeaturesDict |       |         |
+episode_id                 | Tensor       |       | int64   |
+steps                      | Dataset      |       |         |
+steps/action               | Tensor       | (6,)  | float32 |
+steps/discount             | Tensor       |       | float32 |
+steps/is_first             | Tensor       |       | bool    |
+steps/is_last              | Tensor       |       | bool    |
+steps/is_terminal          | Tensor       |       | bool    |
+steps/observation          | FeaturesDict |       |         |
+steps/observation/position | Tensor       | (8,)  | float32 |
+steps/observation/velocity | Tensor       | (9,)  | float32 |
+steps/reward               | Tensor       |       | float32 |
+timestamp                  | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -271,44 +271,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(2,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(2,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'dist_to_target': Tensor(shape=(1,), dtype=tf.float32),
-            'position': Tensor(shape=(4,), dtype=tf.float32),
-            'target_position': Tensor(shape=(2,), dtype=tf.float32),
-            'velocity': Tensor(shape=(3,), dtype=tf.float32),
+            'dist_to_target': Tensor(shape=(1,), dtype=float32),
+            'position': Tensor(shape=(4,), dtype=float32),
+            'target_position': Tensor(shape=(2,), dtype=float32),
+            'velocity': Tensor(shape=(3,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                           | Class        | Shape | Dtype      | Description
-:-------------------------------- | :----------- | :---- | :--------- | :----------
-                                  | FeaturesDict |       |            |
-episode_id                        | Tensor       |       | tf.int64   |
-steps                             | Dataset      |       |            |
-steps/action                      | Tensor       | (2,)  | tf.float32 |
-steps/discount                    | Tensor       |       | tf.float32 |
-steps/is_first                    | Tensor       |       | tf.bool    |
-steps/is_last                     | Tensor       |       | tf.bool    |
-steps/is_terminal                 | Tensor       |       | tf.bool    |
-steps/observation                 | FeaturesDict |       |            |
-steps/observation/dist_to_target  | Tensor       | (1,)  | tf.float32 |
-steps/observation/position        | Tensor       | (4,)  | tf.float32 |
-steps/observation/target_position | Tensor       | (2,)  | tf.float32 |
-steps/observation/velocity        | Tensor       | (3,)  | tf.float32 |
-steps/reward                      | Tensor       |       | tf.float32 |
-timestamp                         | Tensor       |       | tf.int64   |
+Feature                           | Class        | Shape | Dtype   | Description
+:-------------------------------- | :----------- | :---- | :------ | :----------
+                                  | FeaturesDict |       |         |
+episode_id                        | Tensor       |       | int64   |
+steps                             | Dataset      |       |         |
+steps/action                      | Tensor       | (2,)  | float32 |
+steps/discount                    | Tensor       |       | float32 |
+steps/is_first                    | Tensor       |       | bool    |
+steps/is_last                     | Tensor       |       | bool    |
+steps/is_terminal                 | Tensor       |       | bool    |
+steps/observation                 | FeaturesDict |       |         |
+steps/observation/dist_to_target  | Tensor       | (1,)  | float32 |
+steps/observation/position        | Tensor       | (4,)  | float32 |
+steps/observation/target_position | Tensor       | (2,)  | float32 |
+steps/observation/velocity        | Tensor       | (3,)  | float32 |
+steps/reward                      | Tensor       |       | float32 |
+timestamp                         | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -365,44 +365,44 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(5,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(5,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'joint_angles': Tensor(shape=(7,), dtype=tf.float32),
-            'target': Tensor(shape=(3,), dtype=tf.float32),
-            'upright': Tensor(shape=(1,), dtype=tf.float32),
-            'velocity': Tensor(shape=(13,), dtype=tf.float32),
+            'joint_angles': Tensor(shape=(7,), dtype=float32),
+            'target': Tensor(shape=(3,), dtype=float32),
+            'upright': Tensor(shape=(1,), dtype=float32),
+            'velocity': Tensor(shape=(13,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_id                     | Tensor       |       | tf.int64   |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (5,)  | tf.float32 |
-steps/discount                 | Tensor       |       | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/joint_angles | Tensor       | (7,)  | tf.float32 |
-steps/observation/target       | Tensor       | (3,)  | tf.float32 |
-steps/observation/upright      | Tensor       | (1,)  | tf.float32 |
-steps/observation/velocity     | Tensor       | (13,) | tf.float32 |
-steps/reward                   | Tensor       |       | tf.float32 |
-timestamp                      | Tensor       |       | tf.int64   |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_id                     | Tensor       |       | int64   |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (5,)  | float32 |
+steps/discount                 | Tensor       |       | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/joint_angles | Tensor       | (7,)  | float32 |
+steps/observation/target       | Tensor       | (3,)  | float32 |
+steps/observation/upright      | Tensor       | (1,)  | float32 |
+steps/observation/velocity     | Tensor       | (13,) | float32 |
+steps/reward                   | Tensor       |       | float32 |
+timestamp                      | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -459,48 +459,48 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(21,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(21,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'com_velocity': Tensor(shape=(3,), dtype=tf.float32),
-            'extremities': Tensor(shape=(12,), dtype=tf.float32),
-            'head_height': Tensor(shape=(1,), dtype=tf.float32),
-            'joint_angles': Tensor(shape=(21,), dtype=tf.float32),
-            'torso_vertical': Tensor(shape=(3,), dtype=tf.float32),
-            'velocity': Tensor(shape=(27,), dtype=tf.float32),
+            'com_velocity': Tensor(shape=(3,), dtype=float32),
+            'extremities': Tensor(shape=(12,), dtype=float32),
+            'head_height': Tensor(shape=(1,), dtype=float32),
+            'joint_angles': Tensor(shape=(21,), dtype=float32),
+            'torso_vertical': Tensor(shape=(3,), dtype=float32),
+            'velocity': Tensor(shape=(27,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape | Dtype      | Description
-:------------------------------- | :----------- | :---- | :--------- | :----------
-                                 | FeaturesDict |       |            |
-episode_id                       | Tensor       |       | tf.int64   |
-steps                            | Dataset      |       |            |
-steps/action                     | Tensor       | (21,) | tf.float32 |
-steps/discount                   | Tensor       |       | tf.float32 |
-steps/is_first                   | Tensor       |       | tf.bool    |
-steps/is_last                    | Tensor       |       | tf.bool    |
-steps/is_terminal                | Tensor       |       | tf.bool    |
-steps/observation                | FeaturesDict |       |            |
-steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
-steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
-steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
-steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
-steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
-steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
-steps/reward                     | Tensor       |       | tf.float32 |
-timestamp                        | Tensor       |       | tf.int64   |
+Feature                          | Class        | Shape | Dtype   | Description
+:------------------------------- | :----------- | :---- | :------ | :----------
+                                 | FeaturesDict |       |         |
+episode_id                       | Tensor       |       | int64   |
+steps                            | Dataset      |       |         |
+steps/action                     | Tensor       | (21,) | float32 |
+steps/discount                   | Tensor       |       | float32 |
+steps/is_first                   | Tensor       |       | bool    |
+steps/is_last                    | Tensor       |       | bool    |
+steps/is_terminal                | Tensor       |       | bool    |
+steps/observation                | FeaturesDict |       |         |
+steps/observation/com_velocity   | Tensor       | (3,)  | float32 |
+steps/observation/extremities    | Tensor       | (12,) | float32 |
+steps/observation/head_height    | Tensor       | (1,)  | float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | float32 |
+steps/observation/velocity       | Tensor       | (27,) | float32 |
+steps/reward                     | Tensor       |       | float32 |
+timestamp                        | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -557,50 +557,50 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(5,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(5,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'arm_pos': Tensor(shape=(16,), dtype=tf.float32),
-            'arm_vel': Tensor(shape=(8,), dtype=tf.float32),
-            'hand_pos': Tensor(shape=(4,), dtype=tf.float32),
-            'object_pos': Tensor(shape=(4,), dtype=tf.float32),
-            'object_vel': Tensor(shape=(3,), dtype=tf.float32),
-            'target_pos': Tensor(shape=(4,), dtype=tf.float32),
-            'touch': Tensor(shape=(5,), dtype=tf.float32),
+            'arm_pos': Tensor(shape=(16,), dtype=float32),
+            'arm_vel': Tensor(shape=(8,), dtype=float32),
+            'hand_pos': Tensor(shape=(4,), dtype=float32),
+            'object_pos': Tensor(shape=(4,), dtype=float32),
+            'object_vel': Tensor(shape=(3,), dtype=float32),
+            'target_pos': Tensor(shape=(4,), dtype=float32),
+            'touch': Tensor(shape=(5,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape | Dtype      | Description
-:--------------------------- | :----------- | :---- | :--------- | :----------
-                             | FeaturesDict |       |            |
-episode_id                   | Tensor       |       | tf.int64   |
-steps                        | Dataset      |       |            |
-steps/action                 | Tensor       | (5,)  | tf.float32 |
-steps/discount               | Tensor       |       | tf.float32 |
-steps/is_first               | Tensor       |       | tf.bool    |
-steps/is_last                | Tensor       |       | tf.bool    |
-steps/is_terminal            | Tensor       |       | tf.bool    |
-steps/observation            | FeaturesDict |       |            |
-steps/observation/arm_pos    | Tensor       | (16,) | tf.float32 |
-steps/observation/arm_vel    | Tensor       | (8,)  | tf.float32 |
-steps/observation/hand_pos   | Tensor       | (4,)  | tf.float32 |
-steps/observation/object_pos | Tensor       | (4,)  | tf.float32 |
-steps/observation/object_vel | Tensor       | (3,)  | tf.float32 |
-steps/observation/target_pos | Tensor       | (4,)  | tf.float32 |
-steps/observation/touch      | Tensor       | (5,)  | tf.float32 |
-steps/reward                 | Tensor       |       | tf.float32 |
-timestamp                    | Tensor       |       | tf.int64   |
+Feature                      | Class        | Shape | Dtype   | Description
+:--------------------------- | :----------- | :---- | :------ | :----------
+                             | FeaturesDict |       |         |
+episode_id                   | Tensor       |       | int64   |
+steps                        | Dataset      |       |         |
+steps/action                 | Tensor       | (5,)  | float32 |
+steps/discount               | Tensor       |       | float32 |
+steps/is_first               | Tensor       |       | bool    |
+steps/is_last                | Tensor       |       | bool    |
+steps/is_terminal            | Tensor       |       | bool    |
+steps/observation            | FeaturesDict |       |         |
+steps/observation/arm_pos    | Tensor       | (16,) | float32 |
+steps/observation/arm_vel    | Tensor       | (8,)  | float32 |
+steps/observation/hand_pos   | Tensor       | (4,)  | float32 |
+steps/observation/object_pos | Tensor       | (4,)  | float32 |
+steps/observation/object_vel | Tensor       | (3,)  | float32 |
+steps/observation/target_pos | Tensor       | (4,)  | float32 |
+steps/observation/touch      | Tensor       | (5,)  | float32 |
+steps/reward                 | Tensor       |       | float32 |
+timestamp                    | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -657,50 +657,50 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(5,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(5,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'arm_pos': Tensor(shape=(16,), dtype=tf.float32),
-            'arm_vel': Tensor(shape=(8,), dtype=tf.float32),
-            'hand_pos': Tensor(shape=(4,), dtype=tf.float32),
-            'object_pos': Tensor(shape=(4,), dtype=tf.float32),
-            'object_vel': Tensor(shape=(3,), dtype=tf.float32),
-            'target_pos': Tensor(shape=(4,), dtype=tf.float32),
-            'touch': Tensor(shape=(5,), dtype=tf.float32),
+            'arm_pos': Tensor(shape=(16,), dtype=float32),
+            'arm_vel': Tensor(shape=(8,), dtype=float32),
+            'hand_pos': Tensor(shape=(4,), dtype=float32),
+            'object_pos': Tensor(shape=(4,), dtype=float32),
+            'object_vel': Tensor(shape=(3,), dtype=float32),
+            'target_pos': Tensor(shape=(4,), dtype=float32),
+            'touch': Tensor(shape=(5,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                      | Class        | Shape | Dtype      | Description
-:--------------------------- | :----------- | :---- | :--------- | :----------
-                             | FeaturesDict |       |            |
-episode_id                   | Tensor       |       | tf.int64   |
-steps                        | Dataset      |       |            |
-steps/action                 | Tensor       | (5,)  | tf.float32 |
-steps/discount               | Tensor       |       | tf.float32 |
-steps/is_first               | Tensor       |       | tf.bool    |
-steps/is_last                | Tensor       |       | tf.bool    |
-steps/is_terminal            | Tensor       |       | tf.bool    |
-steps/observation            | FeaturesDict |       |            |
-steps/observation/arm_pos    | Tensor       | (16,) | tf.float32 |
-steps/observation/arm_vel    | Tensor       | (8,)  | tf.float32 |
-steps/observation/hand_pos   | Tensor       | (4,)  | tf.float32 |
-steps/observation/object_pos | Tensor       | (4,)  | tf.float32 |
-steps/observation/object_vel | Tensor       | (3,)  | tf.float32 |
-steps/observation/target_pos | Tensor       | (4,)  | tf.float32 |
-steps/observation/touch      | Tensor       | (5,)  | tf.float32 |
-steps/reward                 | Tensor       |       | tf.float32 |
-timestamp                    | Tensor       |       | tf.int64   |
+Feature                      | Class        | Shape | Dtype   | Description
+:--------------------------- | :----------- | :---- | :------ | :----------
+                             | FeaturesDict |       |         |
+episode_id                   | Tensor       |       | int64   |
+steps                        | Dataset      |       |         |
+steps/action                 | Tensor       | (5,)  | float32 |
+steps/discount               | Tensor       |       | float32 |
+steps/is_first               | Tensor       |       | bool    |
+steps/is_last                | Tensor       |       | bool    |
+steps/is_terminal            | Tensor       |       | bool    |
+steps/observation            | FeaturesDict |       |         |
+steps/observation/arm_pos    | Tensor       | (16,) | float32 |
+steps/observation/arm_vel    | Tensor       | (8,)  | float32 |
+steps/observation/hand_pos   | Tensor       | (4,)  | float32 |
+steps/observation/object_pos | Tensor       | (4,)  | float32 |
+steps/observation/object_vel | Tensor       | (3,)  | float32 |
+steps/observation/target_pos | Tensor       | (4,)  | float32 |
+steps/observation/touch      | Tensor       | (5,)  | float32 |
+steps/reward                 | Tensor       |       | float32 |
+timestamp                    | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -757,42 +757,42 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_id                     | Tensor       |       | tf.int64   |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       |       | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       |       | tf.float32 |
-timestamp                      | Tensor       |       | tf.int64   |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_id                     | Tensor       |       | int64   |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       |       | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       |       | float32 |
+timestamp                      | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -849,42 +849,42 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'episode_id': tf.int64,
+    'episode_id': int64,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float32),
-        'discount': tf.float32,
-        'is_first': tf.bool,
-        'is_last': tf.bool,
-        'is_terminal': tf.bool,
+        'action': Tensor(shape=(6,), dtype=float32),
+        'discount': float32,
+        'is_first': bool,
+        'is_last': bool,
+        'is_terminal': bool,
         'observation': FeaturesDict({
-            'height': Tensor(shape=(1,), dtype=tf.float32),
-            'orientations': Tensor(shape=(14,), dtype=tf.float32),
-            'velocity': Tensor(shape=(9,), dtype=tf.float32),
+            'height': Tensor(shape=(1,), dtype=float32),
+            'orientations': Tensor(shape=(14,), dtype=float32),
+            'velocity': Tensor(shape=(9,), dtype=float32),
         }),
-        'reward': tf.float32,
+        'reward': float32,
     }),
-    'timestamp': tf.int64,
+    'timestamp': int64,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                        | Class        | Shape | Dtype      | Description
-:----------------------------- | :----------- | :---- | :--------- | :----------
-                               | FeaturesDict |       |            |
-episode_id                     | Tensor       |       | tf.int64   |
-steps                          | Dataset      |       |            |
-steps/action                   | Tensor       | (6,)  | tf.float32 |
-steps/discount                 | Tensor       |       | tf.float32 |
-steps/is_first                 | Tensor       |       | tf.bool    |
-steps/is_last                  | Tensor       |       | tf.bool    |
-steps/is_terminal              | Tensor       |       | tf.bool    |
-steps/observation              | FeaturesDict |       |            |
-steps/observation/height       | Tensor       | (1,)  | tf.float32 |
-steps/observation/orientations | Tensor       | (14,) | tf.float32 |
-steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
-steps/reward                   | Tensor       |       | tf.float32 |
-timestamp                      | Tensor       |       | tf.int64   |
+Feature                        | Class        | Shape | Dtype   | Description
+:----------------------------- | :----------- | :---- | :------ | :----------
+                               | FeaturesDict |       |         |
+episode_id                     | Tensor       |       | int64   |
+steps                          | Dataset      |       |         |
+steps/action                   | Tensor       | (6,)  | float32 |
+steps/discount                 | Tensor       |       | float32 |
+steps/is_first                 | Tensor       |       | bool    |
+steps/is_last                  | Tensor       |       | bool    |
+steps/is_terminal              | Tensor       |       | bool    |
+steps/observation              | FeaturesDict |       |         |
+steps/observation/height       | Tensor       | (1,)  | float32 |
+steps/observation/orientations | Tensor       | (14,) | float32 |
+steps/observation/velocity     | Tensor       | (9,)  | float32 |
+steps/reward                   | Tensor       |       | float32 |
+timestamp                      | Tensor       |       | int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

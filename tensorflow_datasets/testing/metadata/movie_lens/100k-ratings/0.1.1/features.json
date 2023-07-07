@@ -2,14 +2,6 @@
     "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
     "featuresDict": {
         "features": {
-            "timestamp": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "int64",
-                    "encoding": "none"
-                }
-            },
             "movie_genres": {
                 "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
                 "sequence": {
@@ -22,11 +14,11 @@
                     "length": "-1"
                 }
             },
-            "user_occupation_text": {
+            "raw_user_age": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
-                    "dtype": "string",
+                    "dtype": "float32",
                     "encoding": "none"
                 }
             },
@@ -38,28 +30,6 @@
                     "encoding": "none"
                 }
             },
-            "user_occupation_label": {
-                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "classLabel": {
-                    "numClasses": "22"
-                }
-            },
-            "user_id": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
-                }
-            },
-            "movie_title": {
-                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-                "tensor": {
-                    "shape": {},
-                    "dtype": "string",
-                    "encoding": "none"
-                }
-            },
             "user_gender": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
@@ -68,7 +38,7 @@
                     "encoding": "none"
                 }
             },
-            "movie_id": {
+            "user_zip_code": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
@@ -84,7 +54,7 @@
                     "encoding": "none"
                 }
             },
-            "user_zip_code": {
+            "user_id": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
@@ -92,11 +62,41 @@
                     "encoding": "none"
                 }
             },
-            "raw_user_age": {
+            "timestamp": {
                 "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
                 "tensor": {
                     "shape": {},
-                    "dtype": "float32",
+                    "dtype": "int64",
+                    "encoding": "none"
+                }
+            },
+            "movie_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "user_occupation_text": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "user_occupation_label": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "22"
+                }
+            },
+            "movie_title": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
                     "encoding": "none"
                 }
             }

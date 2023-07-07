@@ -30,6 +30,12 @@ the MRQA 2019 Shared Task.
 
 More information can be found at: `https://mrqa.github.io/2019/shared.html`.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/mrqa-2019">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://mrqa.github.io/2019/shared.html](https://mrqa.github.io/2019/shared.html)
 
@@ -44,57 +50,57 @@ More information can be found at: `https://mrqa.github.io/2019/shared.html`.
 
 ```python
 FeaturesDict({
-    'answers': Sequence(tf.string),
-    'context': tf.string,
+    'answers': Sequence(string),
+    'context': string,
     'context_tokens': Sequence({
-        'offsets': tf.int32,
-        'tokens': tf.string,
+        'offsets': int32,
+        'tokens': string,
     }),
     'detected_answers': Sequence({
         'char_spans': Sequence({
-            'end': tf.int32,
-            'start': tf.int32,
+            'end': int32,
+            'start': int32,
         }),
-        'text': tf.string,
+        'text': string,
         'token_spans': Sequence({
-            'end': tf.int32,
-            'start': tf.int32,
+            'end': int32,
+            'start': int32,
         }),
     }),
-    'qid': tf.string,
-    'question': tf.string,
+    'qid': string,
+    'question': string,
     'question_tokens': Sequence({
-        'offsets': tf.int32,
-        'tokens': tf.string,
+        'offsets': int32,
+        'tokens': string,
     }),
-    'subset': tf.string,
+    'subset': string,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                            | Class            | Shape   | Dtype     | Description
-:--------------------------------- | :--------------- | :------ | :-------- | :----------
-                                   | FeaturesDict     |         |           |
-answers                            | Sequence(Tensor) | (None,) | tf.string |
-context                            | Tensor           |         | tf.string |
-context_tokens                     | Sequence         |         |           |
-context_tokens/offsets             | Tensor           |         | tf.int32  |
-context_tokens/tokens              | Tensor           |         | tf.string |
-detected_answers                   | Sequence         |         |           |
-detected_answers/char_spans        | Sequence         |         |           |
-detected_answers/char_spans/end    | Tensor           |         | tf.int32  |
-detected_answers/char_spans/start  | Tensor           |         | tf.int32  |
-detected_answers/text              | Tensor           |         | tf.string |
-detected_answers/token_spans       | Sequence         |         |           |
-detected_answers/token_spans/end   | Tensor           |         | tf.int32  |
-detected_answers/token_spans/start | Tensor           |         | tf.int32  |
-qid                                | Tensor           |         | tf.string |
-question                           | Tensor           |         | tf.string |
-question_tokens                    | Sequence         |         |           |
-question_tokens/offsets            | Tensor           |         | tf.int32  |
-question_tokens/tokens             | Tensor           |         | tf.string |
-subset                             | Tensor           |         | tf.string |
+Feature                            | Class            | Shape   | Dtype  | Description
+:--------------------------------- | :--------------- | :------ | :----- | :----------
+                                   | FeaturesDict     |         |        |
+answers                            | Sequence(Tensor) | (None,) | string |
+context                            | Tensor           |         | string |
+context_tokens                     | Sequence         |         |        |
+context_tokens/offsets             | Tensor           |         | int32  |
+context_tokens/tokens              | Tensor           |         | string |
+detected_answers                   | Sequence         |         |        |
+detected_answers/char_spans        | Sequence         |         |        |
+detected_answers/char_spans/end    | Tensor           |         | int32  |
+detected_answers/char_spans/start  | Tensor           |         | int32  |
+detected_answers/text              | Tensor           |         | string |
+detected_answers/token_spans       | Sequence         |         |        |
+detected_answers/token_spans/end   | Tensor           |         | int32  |
+detected_answers/token_spans/start | Tensor           |         | int32  |
+qid                                | Tensor           |         | string |
+question                           | Tensor           |         | string |
+question_tokens                    | Sequence         |         |        |
+question_tokens/offsets            | Tensor           |         | int32  |
+question_tokens/tokens             | Tensor           |         | string |
+subset                             | Tensor           |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

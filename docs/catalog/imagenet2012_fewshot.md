@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="imagenet2012_fewshot" />
-  <meta itemprop="description" content="Imagenet2012Fewshot is a subset of original ImageNet ILSVRC 2012 dataset.&#10;The dataset share the *same* validation set as the original ImageNet ILSVRC 2012&#10;dataset. However, the training set is subsampled in a label balanced fashion.&#10;In `5shot` configuration, 5 images per label, or 5000 images are sampled; and&#10;in `10shot` configuration, 10 images per label, or 10000 images are sampled.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;imagenet2012_fewshot&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/imagenet2012_fewshot-1shot-5.0.1.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="Imagenet2012Fewshot is a subset of original ImageNet ILSVRC 2012 dataset. The&#10;dataset share the *same* validation set as the original ImageNet ILSVRC 2012&#10;dataset. However, the training set is subsampled in a label balanced fashion. In&#10;`5shot` configuration, 5 images per label, or 5000 images are sampled; and in&#10;`10shot` configuration, 10 images per label, or 10000 images are sampled.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;imagenet2012_fewshot&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/imagenet2012_fewshot-1shot-5.0.1.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/imagenet2012_fewshot" />
   <meta itemprop="sameAs" content="http://image-net.org/" />
   <meta itemprop="citation" content="@article{ILSVRC15,&#10;  Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},&#10;  Title = {{ImageNet Large Scale Visual Recognition Challenge}},&#10;  Year = {2015},&#10;  journal   = {International Journal of Computer Vision (IJCV)},&#10;  doi = {10.1007/s11263-015-0816-y},&#10;  volume={115},&#10;  number={3},&#10;  pages={211-252}&#10;}" />
@@ -25,7 +25,7 @@ dataset. However, the training set is subsampled in a label balanced fashion. In
 *   **Homepage**: [http://image-net.org/](http://image-net.org/)
 
 *   **Source code**:
-    [`tfds.image_classification.Imagenet2012Fewshot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_fewshot.py)
+    [`tfds.datasets.imagenet2012_fewshot.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/imagenet2012_fewshot/imagenet2012_fewshot_dataset_builder.py)
 
 *   **Versions**:
 
@@ -61,20 +61,20 @@ dataset. However, the training set is subsampled in a label balanced fashion. In
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+    'file_name': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=1000),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature   | Class        | Shape           | Dtype     | Description
-:-------- | :----------- | :-------------- | :-------- | :----------
-          | FeaturesDict |                 |           |
-file_name | Text         |                 | tf.string |
-image     | Image        | (None, None, 3) | tf.uint8  |
-label     | ClassLabel   |                 | tf.int64  |
+Feature   | Class        | Shape           | Dtype  | Description
+:-------- | :----------- | :-------------- | :----- | :----------
+          | FeaturesDict |                 |        |
+file_name | Text         |                 | string |
+image     | Image        | (None, None, 3) | uint8  |
+label     | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

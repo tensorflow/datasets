@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """MovingMNIST."""
 
 import numpy as np
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.video.moving_sequence import image_as_moving_sequence  # pylint: disable=unused-import
 
@@ -60,11 +60,13 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image_sequence":
-                tfds.features.Video(
-                    shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,))
-        }),
+        features=tfds.features.FeaturesDict(
+            {
+                "image_sequence": tfds.features.Video(
+                    shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,)
+                )
+            }
+        ),
         homepage=_URL,
         citation=_CITATION,
     )
@@ -77,7 +79,8 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     # function to create training/validation dataset from MNIST.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs=dict(data_path=data_path)),
+            name=tfds.Split.TEST, gen_kwargs=dict(data_path=data_path)
+        ),
     ]
 
   def _generate_examples(self, data_path):

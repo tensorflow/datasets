@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,23 +32,39 @@ def test_is_example_file():
 
 
 def test_format_suffix():
-  assert file_adapters.ADAPTER_FOR_FORMAT[
-      file_adapters.DEFAULT_FILE_FORMAT].FILE_SUFFIX == 'tfrecord'
-  assert file_adapters.ADAPTER_FOR_FORMAT[
-      file_adapters.FileFormat.TFRECORD].FILE_SUFFIX == 'tfrecord'
-  assert file_adapters.ADAPTER_FOR_FORMAT[
-      file_adapters.FileFormat.RIEGELI].FILE_SUFFIX == 'riegeli'
+  assert (
+      file_adapters.ADAPTER_FOR_FORMAT[
+          file_adapters.DEFAULT_FILE_FORMAT
+      ].FILE_SUFFIX
+      == 'tfrecord'
+  )
+  assert (
+      file_adapters.ADAPTER_FOR_FORMAT[
+          file_adapters.FileFormat.TFRECORD
+      ].FILE_SUFFIX
+      == 'tfrecord'
+  )
+  assert (
+      file_adapters.ADAPTER_FOR_FORMAT[
+          file_adapters.FileFormat.RIEGELI
+      ].FILE_SUFFIX
+      == 'riegeli'
+  )
 
 
 @pytest.mark.parametrize(
     'file_format',
     [
         file_adapters.FileFormat.TFRECORD,
-    ])
-@pytest.mark.parametrize('builder_cls', [
-    testing.DummyDataset,
-    testing.DummyBeamDataset,
-])
+    ],
+)
+@pytest.mark.parametrize(
+    'builder_cls',
+    [
+        testing.DummyDataset,
+        testing.DummyBeamDataset,
+    ],
+)
 def test_read_write(
     tmp_path: pathlib.Path,
     builder_cls: Type[dataset_builder.DatasetBuilder],
@@ -60,14 +76,43 @@ def test_read_write(
   assert list(ds.as_numpy_iterator()) == [{'id': i} for i in range(3)]
 
 
+def test_as_dataset_fails_for_array_record(
+    tmp_path: pathlib.Path,
+):
+  builder = testing.DummyDataset(
+      data_dir=tmp_path, file_format=file_adapters.FileFormat.ARRAY_RECORD
+  )
+  builder.download_and_prepare()
+  with pytest.raises(
+      NotImplementedError, match='not implemented for ArrayRecord files'
+  ):
+    ds = builder.as_dataset(split='train')
+
+
 def test_prase_file_format():
-  assert file_adapters.FileFormat.from_value(
-      'tfrecord') == file_adapters.FileFormat.TFRECORD
-  assert file_adapters.FileFormat.from_value(
-      file_adapters.FileFormat.TFRECORD) == file_adapters.FileFormat.TFRECORD
-  assert file_adapters.FileFormat.from_value(
-      'riegeli') == file_adapters.FileFormat.RIEGELI
-  assert file_adapters.FileFormat.from_value(
-      file_adapters.FileFormat.RIEGELI) == file_adapters.FileFormat.RIEGELI
+  assert (
+      file_adapters.FileFormat.from_value('tfrecord')
+      == file_adapters.FileFormat.TFRECORD
+  )
+  assert (
+      file_adapters.FileFormat.from_value(file_adapters.FileFormat.TFRECORD)
+      == file_adapters.FileFormat.TFRECORD
+  )
+  assert (
+      file_adapters.FileFormat.from_value('riegeli')
+      == file_adapters.FileFormat.RIEGELI
+  )
+  assert (
+      file_adapters.FileFormat.from_value(file_adapters.FileFormat.RIEGELI)
+      == file_adapters.FileFormat.RIEGELI
+  )
   with pytest.raises(ValueError, match='is not a valid FileFormat'):
     file_adapters.FileFormat.from_value('i do not exist')
+  assert (
+      file_adapters.FileFormat.from_value('array_record')
+      == file_adapters.FileFormat.ARRAY_RECORD
+  )
+  assert (
+      file_adapters.FileFormat.from_value(file_adapters.FileFormat.ARRAY_RECORD)
+      == file_adapters.FileFormat.ARRAY_RECORD
+  )

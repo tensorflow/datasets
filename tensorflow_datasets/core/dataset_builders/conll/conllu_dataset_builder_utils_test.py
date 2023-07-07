@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,12 +24,14 @@ def test_get_universal_morphology_config():
   config_1 = conllu_lib.get_universal_morphology_config(
       language=lang_1,
       features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
-      name=f"test_{lang_1}")
+      name=f"test_{lang_1}",
+  )
   config_2 = conllu_lib.get_universal_morphology_config(
       language=lang_2,
       features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
       name=f"test_{lang_2}",
-      description="Config 2 description.")
+      description="Config 2 description.",
+  )
 
   assert config_1.name == f"test_{lang_1}"
   assert config_2.name == f"test_{lang_2}"

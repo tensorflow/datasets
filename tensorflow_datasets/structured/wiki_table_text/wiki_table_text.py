@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,10 @@
 
 """wiki_table_text dataset."""
 
-import tensorflow as tf
+from __future__ import annotations
+
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -57,14 +60,13 @@ class WikiTableText(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'input_text': {
-                'table':
-                    tfds.features.Sequence({
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
-                    }),
+                'table': tfds.features.Sequence({
+                    'column_header': np.str_,
+                    'row_number': np.int16,
+                    'content': np.str_,
+                }),
             },
-            'target_text': tf.string,
+            'target_text': np.str_,
         }),
         supervised_keys=('input_text', 'target_text'),
         homepage='https://github.com/msra-nlc/Table2Text',
@@ -73,23 +75,20 @@ class WikiTableText(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    extracted_path = dl_manager.download_and_extract({
-        'train_path': _TRAIN_URL,
-        'dev_path': _DEV_URL,
-        'test_path': _TEST_URL
-    })
+    extracted_path = dl_manager.download_and_extract(
+        {'train_path': _TRAIN_URL, 'dev_path': _DEV_URL, 'test_path': _TEST_URL}
+    )
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(extracted_path['train_path']),
-        tfds.Split.VALIDATION:
-            self._generate_examples(extracted_path['dev_path']),
-        tfds.Split.TEST:
-            self._generate_examples(extracted_path['test_path']),
+        tfds.Split.TRAIN: self._generate_examples(extracted_path['train_path']),
+        tfds.Split.VALIDATION: self._generate_examples(
+            extracted_path['dev_path']
+        ),
+        tfds.Split.TEST: self._generate_examples(extracted_path['test_path']),
     }
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for i, example_line in enumerate(f):
         _, headers, values, text = example_line.split('\t')
         headers = [h.replace('_$$_', ' ') for h in headers.split('_||_')]
@@ -97,11 +96,9 @@ class WikiTableText(tfds.core.GeneratorBasedBuilder):
         # The tables only have one row and we specify it because the dataset
         # follows a standarized table format.
         table = []
-        for (header_i, value_i) in zip(headers, values):
-          table.append({
-              'column_header': header_i,
-              'row_number': 1,
-              'content': value_i
-          })
+        for header_i, value_i in zip(headers, values):
+          table.append(
+              {'column_header': header_i, 'row_number': 1, 'content': value_i}
+          )
         text = text.replace('_$$_', ' ').replace(' .', '')
         yield i, {'input_text': {'table': table}, 'target_text': text}

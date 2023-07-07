@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,13 +14,25 @@
 # limitations under the License.
 
 """robosuite_panda_pick_place_can dataset."""
+import sys
 
+import pytest
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rlds.robosuite_panda_pick_place_can import robosuite_panda_pick_place_can
 
 
+pytest.importorskip(
+    'envlogger',
+    reason=(
+        f'`envlogger` library might not be available for Python {sys.version};'
+        'see https://pypi.org/project/envlogger/#files'
+    ),
+)
+
+
 class RobosuitePandaPickPlaceCanHumanTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for robosuite_panda_pick_place_can dataset."""
+
   DATASET_CLASS = robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -35,8 +47,10 @@ class RobosuitePandaPickPlaceCanHumanTest(tfds.testing.DatasetBuilderTestCase):
 
 
 class RobosuitePandaPickPlaceCanHumanImagesTest(
-    tfds.testing.DatasetBuilderTestCase):
+    tfds.testing.DatasetBuilderTestCase
+):
   """Tests for robosuite_panda_pick_place_can dataset."""
+
   DATASET_CLASS = robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -51,8 +65,10 @@ class RobosuitePandaPickPlaceCanHumanImagesTest(
 
 
 class RobosuitePandaPickPlaceCanSyntheticTest(
-    tfds.testing.DatasetBuilderTestCase):
+    tfds.testing.DatasetBuilderTestCase
+):
   """Tests for robosuite_panda_pick_place_can dataset."""
+
   DATASET_CLASS = robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan
   SPLITS = {
       'train': 2,  # Number of fake train example

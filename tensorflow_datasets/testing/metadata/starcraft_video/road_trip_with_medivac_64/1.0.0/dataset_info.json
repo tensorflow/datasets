@@ -1,65 +1,25 @@
 {
-  "citation": "@article{DBLP:journals/corr/abs-1812-01717,\n  author    = {Thomas Unterthiner and\n               Sjoerd van Steenkiste and\n               Karol Kurach and\n               Rapha{\"{e}}l Marinier and\n               Marcin Michalski and\n               Sylvain Gelly},\n  title     = {Towards Accurate Generative Models of Video: {A} New Metric and\n               Challenges},\n  journal   = {CoRR},\n  volume    = {abs/1812.01717},\n  year      = {2018},\n  url       = {http://arxiv.org/abs/1812.01717},\n  archivePrefix = {arXiv},\n  eprint    = {1812.01717},\n  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n",
+  "citation": "@article{DBLP:journals/corr/abs-1812-01717,\n  author    = {Thomas Unterthiner and\n               Sjoerd van Steenkiste and\n               Karol Kurach and\n               Rapha{\"{e}}l Marinier and\n               Marcin Michalski and\n               Sylvain Gelly},\n  title     = {Towards Accurate Generative Models of Video: {A} New Metric and\n               Challenges},\n  journal   = {CoRR},\n  volume    = {abs/1812.01717},\n  year      = {2018},\n  url       = {http://arxiv.org/abs/1812.01717},\n  archivePrefix = {arXiv},\n  eprint    = {1812.01717},\n  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "configDescription": "RoadTripWithMedivac map with 64x64 resolution.",
+  "configName": "road_trip_with_medivac_64",
   "description": "This data set contains videos generated from Starcraft.",
+  "downloadSize": "2659123150",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://storage.googleapis.com/scv_dataset/README.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.video.starcraft",
   "name": "starcraft_video",
-  "schema": {
-    "feature": [
-      {
-        "name": "rgb_screen",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            },
-            {
-              "size": "64"
-            },
-            {
-              "size": "64"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      }
-    ]
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)"
   },
-  "sizeInBytes": "2659123150",
   "splits": [
     {
-      "name": "test",
-      "numShards": "1",
-      "shardLengths": [
-        "500",
-        "500",
-        "500",
-        "500"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "rgb_screen",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "2000"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "2000"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "10",
+      "numBytes": "1893641974",
       "shardLengths": [
         "625",
         "625",
@@ -77,45 +37,29 @@
         "625",
         "625",
         "625"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "rgb_screen",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "10000"
-      }
+      ]
     },
     {
-      "name": "validation",
-      "numShards": "1",
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "378724921",
       "shardLengths": [
         "500",
         "500",
         "500",
         "500"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "rgb_screen",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "2000"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "2000"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "378748255",
+      "shardLengths": [
+        "500",
+        "500",
+        "500",
+        "500"
+      ]
     }
   ],
   "version": "1.0.0"

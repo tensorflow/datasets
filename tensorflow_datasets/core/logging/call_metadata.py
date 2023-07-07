@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
 # limitations under the License.
 
 """To associate metadata with TFDS calls."""
+
 import enum
 import threading
 import time
-
 from typing import Dict, Optional, Tuple
 
 # Maps thread_id to "Session ID", if any.
@@ -53,6 +53,7 @@ class CallMetadata:
 
   Object must be initialized just before the call, on same thread.
   """
+
   # The start and end times of the event (microseconds since Epoch).
   start_time_micros: Optional[int]
   end_time_micros: Optional[int]
@@ -73,14 +74,15 @@ class CallMetadata:
   # first operation of the session.
   direct_call: bool
 
+
   def __init__(self):
     self.status = Status.UNKNOWN
-    self.thread_id = threading.current_thread().ident
+    self.thread_id = threading.get_ident()
     self.session_id, self.direct_call = _get_session_id(self.thread_id)
-    self.start_time_micros = int(time.time() * 1E6)
+    self.start_time_micros = int(time.time() * 1e6)
 
   def mark_end(self):
-    self.end_time_micros = int(time.time() * 1E6)
+    self.end_time_micros = int(time.time() * 1e6)
     if self.status == Status.UNKNOWN:
       self.status = Status.SUCCESS
     if self.direct_call:

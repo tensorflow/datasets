@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
 
 """wiki_table_questions dataset."""
 
+from __future__ import annotations
+
 import csv
 import os
 
-import tensorflow as tf
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -52,7 +55,9 @@ _CITATION = """
 }
 """
 
-_DOWNLOAD_URL = 'https://github.com/ppasupat/WikiTableQuestions/archive/master.zip'
+_DOWNLOAD_URL = (
+    'https://github.com/ppasupat/WikiTableQuestions/archive/master.zip'
+)
 
 
 class WikiTableQuestions(tfds.core.GeneratorBasedBuilder):
@@ -70,17 +75,15 @@ class WikiTableQuestions(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'input_text': {
-                'table':
-                    tfds.features.Sequence({
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
-                    }),
+                'table': tfds.features.Sequence({
+                    'column_header': np.str_,
+                    'row_number': np.int16,
+                    'content': np.str_,
+                }),
                 # Here the context corresponds to the question.
-                'context':
-                    tf.string,
+                'context': np.str_,
             },
-            'target_text': tf.string,
+            'target_text': np.str_,
         }),
         supervised_keys=('input_text', 'target_text'),
         homepage='https://ppasupat.github.io/WikiTableQuestions/#usage-notes',
@@ -91,45 +94,51 @@ class WikiTableQuestions(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = os.path.join(
         dl_manager.download_and_extract(_DOWNLOAD_URL),
-        'WikiTableQuestions-master')
+        'WikiTableQuestions-master',
+    )
     examples_sub_dir = os.path.join(path, 'data')
     data_splits = {}
     for split_name in ['train', 'dev']:
       for split_num in range(1, 4):
         examples_file = os.path.join(
-            examples_sub_dir, f'random-split-{split_num}-{split_name}.tsv')
+            examples_sub_dir, f'random-split-{split_num}-{split_name}.tsv'
+        )
         data_split_key = 'split-{}-{}'.format(split_num, split_name)
         data_splits[data_split_key] = self._generate_examples(
-            examples_path=examples_file, tables_path=path)
+            examples_path=examples_file, tables_path=path
+        )
     data_splits['train'] = self._generate_examples(
         examples_path=os.path.join(examples_sub_dir, 'training.tsv'),
-        tables_path=path)
+        tables_path=path,
+    )
     data_splits['test'] = self._generate_examples(
-        examples_path=os.path.join(examples_sub_dir,
-                                   'pristine-unseen-tables.tsv'),
-        tables_path=path)
+        examples_path=os.path.join(
+            examples_sub_dir, 'pristine-unseen-tables.tsv'
+        ),
+        tables_path=path,
+    )
     return data_splits
 
   def _generate_examples(self, examples_path, tables_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(examples_path) as examples:
+    with epath.Path(examples_path).open() as examples:
       for example in csv.DictReader(examples, delimiter='\t'):
         table = []
-        with tf.io.gfile.GFile(os.path.join(tables_path,
-                                            example['context'])) as table_csv:
+        with epath.Path(
+            os.path.join(tables_path, example['context'])
+        ).open() as table_csv:
           for row_number, row in enumerate(
               csv.DictReader(
-                  table_csv, delimiter=',', quotechar='"', escapechar='\\')):
+                  table_csv, delimiter=',', quotechar='"', escapechar='\\'
+              )
+          ):
             for header, value in row.items():
               table.append({
                   'column_header': header,
                   'row_number': row_number,
-                  'content': value
+                  'content': value,
               })
         yield example['id'], {
-            'input_text': {
-                'table': table,
-                'context': example['utterance']
-            },
-            'target_text': example['targetValue']
+            'input_text': {'table': table, 'context': example['utterance']},
+            'target_text': example['targetValue'],
         }

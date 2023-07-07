@@ -63,24 +63,24 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'doy': tf.float32,
-    'temp': tf.float32,
-    'temp_lower': tf.float32,
-    'temp_upper': tf.float32,
-    'year': tf.int32,
+    'doy': float32,
+    'temp': float32,
+    'temp_lower': float32,
+    'temp_upper': float32,
+    'year': int32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature    | Class        | Shape | Dtype      | Description
-:--------- | :----------- | :---- | :--------- | :----------
-           | FeaturesDict |       |            |
-doy        | Tensor       |       | tf.float32 |
-temp       | Tensor       |       | tf.float32 |
-temp_lower | Tensor       |       | tf.float32 |
-temp_upper | Tensor       |       | tf.float32 |
-year       | Tensor       |       | tf.int32   |
+Feature    | Class        | Shape | Dtype   | Description
+:--------- | :----------- | :---- | :------ | :----------
+           | FeaturesDict |       |         |
+doy        | Tensor       |       | float32 |
+temp       | Tensor       |       | float32 |
+temp_lower | Tensor       |       | float32 |
+temp_upper | Tensor       |       | float32 |
+year       | Tensor       |       | int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

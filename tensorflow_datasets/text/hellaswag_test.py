@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ class HellaswagTest(tfds.testing.DatasetBuilderTestCase):
       'validation_ind_wikihow': 1,
       'validation_ood_wikihow': 1,
       'test_ind_wikihow': 1,
-      'test_ood_wikihow': 1
+      'test_ood_wikihow': 1,
   }
   DL_EXTRACT_RESULT = {
       'train': 'hellaswag_train.jsonl',
@@ -42,10 +42,16 @@ class HellaswagTest(tfds.testing.DatasetBuilderTestCase):
       'validation': 'hellaswag_val.jsonl',
   }
   OVERLAPPING_SPLITS = [
-      'train_activitynet', 'train_wikihow', 'validation_ind_activitynet',
-      'validation_ood_activitynet', 'test_ind_activitynet',
-      'test_ood_activitynet', 'validation_ind_wikihow',
-      'validation_ood_wikihow', 'test_ind_wikihow', 'test_ood_wikihow'
+      'train_activitynet',
+      'train_wikihow',
+      'validation_ind_activitynet',
+      'validation_ood_activitynet',
+      'test_ind_activitynet',
+      'test_ood_activitynet',
+      'validation_ind_wikihow',
+      'validation_ood_wikihow',
+      'test_ind_wikihow',
+      'test_ood_wikihow',
   ]
 
 

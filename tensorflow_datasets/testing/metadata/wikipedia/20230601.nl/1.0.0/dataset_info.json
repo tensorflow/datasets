@@ -1,0 +1,60 @@
+{
+  "citation": "@ONLINE {wikidump,\n    author = \"Wikimedia Foundation\",\n    title  = \"Wikimedia Downloads\",\n    url    = \"https://dumps.wikimedia.org\"\n}",
+  "configDescription": "Wikipedia dataset for nl, parsed from 20230601 dump.",
+  "configName": "20230601.nl",
+  "description": "Wikipedia dataset containing cleaned articles of all languages.\nThe datasets are built from the Wikipedia dump\n(https://dumps.wikimedia.org/) with one split per language. Each example\ncontains the content of one full Wikipedia article with cleaning to strip\nmarkdown and unwanted sections (references, etc.).",
+  "downloadSize": "1859587421",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://dumps.wikimedia.org"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.wikipedia",
+  "name": "wikipedia",
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)"
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "2626056463",
+      "shardLengths": [
+        "82923",
+        "83111",
+        "82856",
+        "83001",
+        "82684",
+        "82379",
+        "82750",
+        "82951",
+        "82918",
+        "83017",
+        "82390",
+        "82982",
+        "82810",
+        "82716",
+        "82475",
+        "82609",
+        "82790",
+        "82835",
+        "83249",
+        "82671",
+        "83262",
+        "83320",
+        "83107",
+        "83125",
+        "82558",
+        "83419",
+        "82670",
+        "82991",
+        "82766",
+        "83301",
+        "82659",
+        "82498"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

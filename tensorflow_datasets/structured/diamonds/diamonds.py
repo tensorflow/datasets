@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,12 @@
 
 """diamonds dataset."""
 
-import collections
-from typing import Dict
+from __future__ import annotations
 
-import tensorflow as tf
+import collections
+
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -53,17 +55,21 @@ _CITATION = """
 _CUTS = ('Fair', 'Good', 'Very Good', 'Premium', 'Ideal')
 _COLORS = ('D', 'E', 'F', 'G', 'H', 'I', 'J')
 _CLARITY = ('I1', 'SI2', 'SI1', 'VS2', 'VS1', 'VVS2', 'VVS1', 'IF')
-_FEATURES = collections.OrderedDict((
-    ('carat', tf.float32),
-    ('cut', tfds.features.ClassLabel(names=_CUTS)),
-    ('color', tfds.features.ClassLabel(names=_COLORS)),
-    ('clarity', tfds.features.ClassLabel(names=_CLARITY)),
-    ('x', tf.float32),
-    ('y', tf.float32),
-    ('z', tf.float32),
-    ('depth', tf.float32),
-    ('table', tf.float32),
-))
+
+
+def _features():
+  return collections.OrderedDict((
+      ('carat', np.float32),
+      ('cut', tfds.features.ClassLabel(names=_CUTS)),
+      ('color', tfds.features.ClassLabel(names=_COLORS)),
+      ('clarity', tfds.features.ClassLabel(names=_CLARITY)),
+      ('x', np.float32),
+      ('y', np.float32),
+      ('z', np.float32),
+      ('depth', np.float32),
+      ('table', np.float32),
+  ))
+
 
 _URL = 'https://raw.githubusercontent.com/tidyverse/ggplot2/main/data-raw/diamonds.csv'
 
@@ -82,17 +88,15 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'features': {k: v for k, v in _FEATURES.items()},
-            'price': tf.float32,
+            'features': {k: v for k, v in _features().items()},
+            'price': np.float32,
         }),
         supervised_keys=('features', 'price'),
         homepage='https://ggplot2.tidyverse.org/reference/diamonds.html',
         citation=_CITATION,
     )
 
-  def _split_generators(
-      self, dl_manager: tfds.download.DownloadManager
-  ) -> Dict[str, tfds.core.SplitGenerator]:
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     data = dl_manager.download({'data': _URL})
     # There is no predefined train/val/test split for this dataset.
@@ -102,11 +106,11 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     pd = tfds.core.lazy_imports.pandas
 
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       df = pd.read_csv(f)
 
     for row in df.itertuples():
       yield row.Index, {
-          'features': {k: getattr(row, k) for k in _FEATURES.keys()},
-          'price': row.price
+          'features': {k: getattr(row, k) for k in _features().keys()},
+          'price': row.price,
       }

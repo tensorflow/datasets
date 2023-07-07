@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,8 +27,9 @@ DESCRIPTION_FILE = "description.md"
 CITATIONS_FILE = "citations.bib"
 
 
-def get_filepath_in_dataset_folder(dataset_cls: Type[Any],
-                                   file_name: str) -> epath.Path:
+def get_filepath_in_dataset_folder(
+    dataset_cls: Type[Any], file_name: str
+) -> epath.Path:
   directory_path = epath.Path(inspect.getfile(dataset_cls)).parent
   return directory_path / file_name
 
@@ -75,36 +76,46 @@ class DatasetCollectionInfo:
     release_notes: A mapping of dataset collection's versions with their
       corresponding release notes.
     citation: Optional citation for the dataset collection.
+    homepage: Optional homepage for the dataset collection.
   """
 
   name: str
   description: str
   release_notes: Mapping[str, str]
   citation: Optional[str] = None
+  homepage: Optional[str] = None
 
   @classmethod
-  def from_cls(cls,
-               dataset_collection_class: Type["DatasetCollection"],
-               release_notes: Mapping[str, str],
-               description: Optional[str] = None,
-               citation: Optional[str] = None) -> "DatasetCollectionInfo":
+  def from_cls(
+      cls,
+      dataset_collection_class: Type["DatasetCollection"],
+      release_notes: Mapping[str, str],
+      description: Optional[str] = None,
+      citation: Optional[str] = None,
+      homepage: Optional[str] = None,
+  ) -> "DatasetCollectionInfo":
     """Creates a DatasetCollectionInfo instance based on class information."""
     name: str = naming.camelcase_to_snakecase(dataset_collection_class.__name__)
     if not description:
       description = get_file_content_from_dataset_folder(
-          dataset_collection_class, DESCRIPTION_FILE, raise_error_if_fails=True)
+          dataset_collection_class, DESCRIPTION_FILE, raise_error_if_fails=True
+      )
     if not citation:
-      citation = get_file_content_from_dataset_folder(dataset_collection_class,
-                                                      CITATIONS_FILE)
+      citation = get_file_content_from_dataset_folder(
+          dataset_collection_class, CITATIONS_FILE
+      )
     return cls(
         name=name,
         release_notes=release_notes,
         description=description,
-        citation=citation)
+        citation=citation,
+        homepage=homepage,
+    )
 
 
 class DatasetCollection(
-    registered.RegisteredDatasetCollection, skip_registration=True):
+    registered.RegisteredDatasetCollection, skip_registration=True
+):
   """Base class to define a dataset collection.
 
   Subclasses should overwrite `info` to return populated DatasetCollectionInfo.
@@ -165,15 +176,13 @@ class DatasetCollection(
     raise NotImplementedError
 
   def __repr__(self):
-    return (f"DatasetCollection(info={self.info}, "
-            f"datasets={self.datasets})")
+    return f"DatasetCollection(info={self.info}, datasets={self.datasets})"
 
   @property
   def all_versions(self) -> List[version_lib.Version]:
     """Returns all versions available for the dataset collection."""
     return [
-        version_lib.Version(version_str)
-        for version_str in self.datasets.keys()
+        version_lib.Version(version_str) for version_str in self.datasets.keys()
     ]
 
   def get_latest_version(self) -> str:

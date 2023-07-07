@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
 
 """Image feature."""
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional, Union
 
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core.features import class_label_feature
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import image_feature
@@ -43,7 +44,6 @@ class LabeledImage(image_feature.Image):
   builder = tfds.builder('my_dataset')
   builder.info.features['label_image'].names == ['background', 'car', ...]
   ```
-
   """
 
   def __init__(
@@ -51,7 +51,7 @@ class LabeledImage(image_feature.Image):
       *,
       labels: _LabelArg,
       shape: Optional[type_utils.Shape] = None,
-      dtype: Optional[tf.dtypes.DType] = None,
+      dtype: Optional[type_utils.TfdsDType] = None,
       encoding_format: Optional[str] = None,
       doc: feature_lib.DocArg = None,
   ):
@@ -84,7 +84,8 @@ class LabeledImage(image_feature.Image):
     )
     if self.shape[-1] != 1:
       raise ValueError(
-          f'LabeledImage shape should have a single channel. Got: {shape}')
+          f'LabeledImage shape should have a single channel. Got: {shape}'
+      )
     label_kwargs = _labels_to_kwarg(labels)
     self._class_label = class_label_feature.ClassLabel(**label_kwargs)
 
@@ -99,25 +100,28 @@ class LabeledImage(image_feature.Image):
   def save_metadata(self, data_dir, feature_name=None) -> None:
     super().save_metadata(data_dir=data_dir, feature_name=feature_name)
     self._class_label.save_metadata(
-        data_dir=data_dir, feature_name=feature_name)
+        data_dir=data_dir, feature_name=feature_name
+    )
 
   def load_metadata(self, data_dir, feature_name=None) -> None:
     super().load_metadata(data_dir=data_dir, feature_name=feature_name)
     self._class_label.load_metadata(
-        data_dir=data_dir, feature_name=feature_name)
+        data_dir=data_dir, feature_name=feature_name
+    )
 
   def _additional_repr_info(self):
     return {'num_classes': self.num_classes}
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.ImageFeature]) -> 'LabeledImage':
+      cls, value: Union[Json, feature_pb2.ImageFeature]
+  ) -> 'LabeledImage':
     if isinstance(value, dict):
       # For backwards compatibility
       return cls(**value)
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
-        dtype=feature_lib.parse_dtype(value.dtype),
+        dtype=feature_lib.dtype_from_str(value.dtype),
         encoding_format=value.encoding_format or None,
         labels=value.label.num_classes or None,
     )
@@ -139,6 +143,8 @@ def _labels_to_kwarg(labels: _LabelArg) -> Dict[str, _LabelArg]:
   elif isinstance(labels, list):
     kwarg_name = 'names'
   else:
-    raise TypeError(f'Invalid `labels` type: {type(labels)}. Should be one of '
-                    'list[labels], path, num_labels')
+    raise TypeError(
+        f'Invalid `labels` type: {type(labels)}. Should be one of '
+        'list[labels], path, num_labels'
+    )
   return {kwarg_name: labels}

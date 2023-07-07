@@ -1,7 +1,7 @@
 {
   "citation": "@misc{https://doi.org/10.48550/arxiv.1212.2995,\n  doi = {10.48550/ARXIV.1212.2995},\n  url = {https://arxiv.org/abs/1212.2995},\n  author = {Tian, Lu and Alizadeh, Ash and Gentles, Andrew and Tibshirani, Robert},\n  keywords = {Methodology (stat.ME), FOS: Computer and information sciences, FOS: Computer and information sciences},\n  title = {A Simple Method for Detecting Interactions between a Treatment and a Large Number of Covariates},\n  publisher = {arXiv},\n  year = {2012},\n  copyright = {arXiv.org perpetual, non-exclusive license}\n}",
   "description": "Full name: Simulations for Personalized Treatment Effects\nGenerated with the R's Uplift package: https://rdrr.io/cran/uplift/man/sim_pte.html\nThe package could be downloaded here: https://cran.r-project.org/src/contrib/Archive/uplift/\n\nDataset generated in R version 4.1.2 with following code:\n\n  library(uplift)\n\n  set.seed(123)\n\n  train <- sim_pte(n = 1000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)\n  test <- sim_pte(n = 2000, p = 20, rho = 0, sigma = sqrt(2), beta.den = 4)\n\n  train$treat <- ifelse(train$treat == 1, 2, 1)\n  test$treat <- ifelse(test$treat == 1, 2, 1)\n\n  train$y <- ifelse(train$y == 1, 2, 1)\n  test$y <- ifelse(test$y == 1, 2, 1)\n\n  train$ts = NULL\n  test$ts = NULL\n\n\nParameters:\n  n = number of samples\n  p = number of predictors\n  ro = covariance between predictors\n  sigma = mutiplier of the error term\n  beta.den = beta is mutiplied by 1/beta.den\n\nCreator: Leo Guelman leo.guelman@gmail.com",
-  "fileFormat": "tfrecord",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://rdrr.io/cran/uplift/man/sim_pte.html"

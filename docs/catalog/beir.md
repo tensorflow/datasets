@@ -18,11 +18,17 @@ BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides
 a common and easy framework for evaluation of your NLP-based retrieval models
 within the benchmark.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/beir">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/beir-cellar/beir](https://github.com/beir-cellar/beir)
 
 *   **Source code**:
-    [`tfds.text.beir.Beir`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/beir/beir.py)
+    [`tfds.datasets.beir.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/beir/beir_dataset_builder.py)
 
 *   **Versions**:
 
@@ -32,28 +38,28 @@ within the benchmark.
 
 ```python
 FeaturesDict({
-    'passage': Text(shape=(), dtype=tf.string),
-    'passage_id': Text(shape=(), dtype=tf.string),
-    'passage_metadata': Text(shape=(), dtype=tf.string),
-    'query': Text(shape=(), dtype=tf.string),
-    'query_id': Text(shape=(), dtype=tf.string),
-    'query_metadata': Text(shape=(), dtype=tf.string),
-    'score': tf.float32,
+    'passage': Text(shape=(), dtype=string),
+    'passage_id': Text(shape=(), dtype=string),
+    'passage_metadata': Text(shape=(), dtype=string),
+    'query': Text(shape=(), dtype=string),
+    'query_id': Text(shape=(), dtype=string),
+    'query_metadata': Text(shape=(), dtype=string),
+    'score': float32,
 })
 ```
 
 *   **Feature documentation**:
 
-Feature          | Class        | Shape | Dtype      | Description
-:--------------- | :----------- | :---- | :--------- | :----------
-                 | FeaturesDict |       |            |
-passage          | Text         |       | tf.string  |
-passage_id       | Text         |       | tf.string  |
-passage_metadata | Text         |       | tf.string  |
-query            | Text         |       | tf.string  |
-query_id         | Text         |       | tf.string  |
-query_metadata   | Text         |       | tf.string  |
-score            | Tensor       |       | tf.float32 |
+Feature          | Class        | Shape | Dtype   | Description
+:--------------- | :----------- | :---- | :------ | :----------
+                 | FeaturesDict |       |         |
+passage          | Text         |       | string  |
+passage_id       | Text         |       | string  |
+passage_metadata | Text         |       | string  |
+query            | Text         |       | string  |
+query_id         | Text         |       | string  |
+query_metadata   | Text         |       | string  |
+score            | Tensor       |       | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

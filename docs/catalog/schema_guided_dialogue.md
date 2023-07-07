@@ -27,11 +27,17 @@ learning, among other tasks in large-scale virtual assistants. Besides these,
 the dataset has unseen domains and services in the evaluation set to quantify
 the performance in zero-shot or few shot settings.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/sgd">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/dstc8-schema-guided-dialogue](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue)
 
 *   **Source code**:
-    [`tfds.text.schema_guided_dialogue.SchemaGuidedDialogue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/schema_guided_dialogue/schema_guided_dialogue.py)
+    [`tfds.datasets.schema_guided_dialogue.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/schema_guided_dialogue/schema_guided_dialogue_dataset_builder.py)
 
 *   **Versions**:
 
@@ -57,26 +63,26 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'first_speaker': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'first_speaker': ClassLabel(shape=(), dtype=int64, num_classes=2),
     'metadata': FeaturesDict({
         'services': Sequence({
-            'name': tf.string,
+            'name': string,
         }),
     }),
-    'utterances': Sequence(Text(shape=(), dtype=tf.string)),
+    'utterances': Sequence(Text(shape=(), dtype=string)),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                | Class          | Shape   | Dtype     | Description
-:--------------------- | :------------- | :------ | :-------- | :----------
-                       | FeaturesDict   |         |           |
-first_speaker          | ClassLabel     |         | tf.int64  |
-metadata               | FeaturesDict   |         |           |
-metadata/services      | Sequence       |         |           |
-metadata/services/name | Tensor         |         | tf.string |
-utterances             | Sequence(Text) | (None,) | tf.string |
+Feature                | Class          | Shape   | Dtype  | Description
+:--------------------- | :------------- | :------ | :----- | :----------
+                       | FeaturesDict   |         |        |
+first_speaker          | ClassLabel     |         | int64  |
+metadata               | FeaturesDict   |         |        |
+metadata/services      | Sequence       |         |        |
+metadata/services/name | Tensor         |         | string |
+utterances             | Sequence(Text) | (None,) | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

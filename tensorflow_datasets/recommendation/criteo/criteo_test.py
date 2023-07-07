@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,10 +21,9 @@ from tensorflow_datasets.recommendation.criteo import criteo
 
 class CriteoTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for criteo dataset."""
+
   DATASET_CLASS = criteo.Criteo
-  SPLITS = {
-      'train': 5  # Number of fake train example
-  }
+  SPLITS = {'train': 5}  # Number of fake train example
 
   # If you are calling `download/download_and_extract` with a dict, like:
   #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})

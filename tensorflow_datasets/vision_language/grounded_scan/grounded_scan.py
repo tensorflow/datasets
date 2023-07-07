@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,14 @@
 # limitations under the License.
 
 """Grounded Scan dataset."""
+from __future__ import annotations
+
 import json
 import os
 from typing import List
 
-import tensorflow as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -67,7 +70,9 @@ _CITATION = """
 }
 """
 
-_GSCAN_DATA_PATH = 'https://raw.githubusercontent.com/LauraRuis/groundedSCAN/master/data/'
+_GSCAN_DATA_PATH = (
+    'https://raw.githubusercontent.com/LauraRuis/groundedSCAN/master/data/'
+)
 _SPATIAL_DATA_PATH = 'https://storage.googleapis.com/gresearch/gscan/'
 
 
@@ -89,15 +94,23 @@ class GroundedScanConfig(tfds.core.BuilderConfig):
 
 class GroundedScan(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for grounded_scan dataset."""
+
   BUILDER_CONFIGS = [
       GroundedScanConfig(
           name='compositional_splits',
           description='Examples for compositional generalization.',
           data_path=os.path.join(_GSCAN_DATA_PATH, 'compositional_splits.zip'),
           splits_names=[
-              'train', 'dev', 'test', 'visual', 'situational_1',
-              'situational_2', 'contextual', 'adverb_1', 'adverb_2',
-              'visual_easier'
+              'train',
+              'dev',
+              'test',
+              'visual',
+              'situational_1',
+              'situational_2',
+              'contextual',
+              'adverb_1',
+              'adverb_2',
+              'visual_easier',
           ],
       ),
       GroundedScanConfig(
@@ -109,11 +122,18 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
       GroundedScanConfig(
           name='spatial_relation_splits',
           description='Examples for spatial relation reasoning.',
-          data_path=os.path.join(_SPATIAL_DATA_PATH,
-                                 'spatial_relation_splits.zip'),
+          data_path=os.path.join(
+              _SPATIAL_DATA_PATH, 'spatial_relation_splits.zip'
+          ),
           splits_names=[
-              'train', 'dev', 'test', 'visual', 'relation', 'referent',
-              'relative_position_1', 'relative_position_2'
+              'train',
+              'dev',
+              'test',
+              'visual',
+              'relation',
+              'referent',
+              'relative_position_1',
+              'relative_position_2',
           ],
       ),
   ]
@@ -122,53 +142,42 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '1.1.0': 'Changed `vector` feature to Text().',
-      '2.0.0': 'Adds the new spatial_relation_splits config.'
+      '2.0.0': 'Adds the new spatial_relation_splits config.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    position_feature = tfds.features.FeaturesDict({
-        'row': tf.int32,
-        'column': tf.int32
-    })
+    position_feature = tfds.features.FeaturesDict(
+        {'row': np.int32, 'column': np.int32}
+    )
     object_feature = tfds.features.FeaturesDict({
-        'vector':
-            tfds.features.Text(),
-        'position':
-            position_feature,
-        'object':
-            tfds.features.FeaturesDict({
-                'shape': tfds.features.Text(),
-                'color': tfds.features.Text(),
-                'size': tf.int32,
-            }),
+        'vector': tfds.features.Text(),
+        'position': position_feature,
+        'object': tfds.features.FeaturesDict({
+            'shape': tfds.features.Text(),
+            'color': tfds.features.Text(),
+            'size': np.int32,
+        }),
     })
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'situation':
-                tfds.features.FeaturesDict({
-                    'grid_size': tf.int32,
-                    'agent_position': position_feature,
-                    'agent_direction': tf.int32,
-                    'target_object': object_feature,
-                    'distance_to_target': tf.int32,
-                    'direction_to_target': tfds.features.Text(),
-                    'placed_objects': tfds.features.Sequence(object_feature),
-                }),
-            'target_commands':
-                tfds.features.Sequence(tfds.features.Text()),
-            'command':
-                tfds.features.Sequence(tfds.features.Text()),
-            'meaning':
-                tfds.features.Sequence(tfds.features.Text()),
-            'verb_in_command':
-                tfds.features.Text(),
-            'manner':
-                tfds.features.Text(),
-            'referred_target':
-                tfds.features.Text(),
+            'situation': tfds.features.FeaturesDict({
+                'grid_size': np.int32,
+                'agent_position': position_feature,
+                'agent_direction': np.int32,
+                'target_object': object_feature,
+                'distance_to_target': np.int32,
+                'direction_to_target': tfds.features.Text(),
+                'placed_objects': tfds.features.Sequence(object_feature),
+            }),
+            'target_commands': tfds.features.Sequence(tfds.features.Text()),
+            'command': tfds.features.Sequence(tfds.features.Text()),
+            'meaning': tfds.features.Sequence(tfds.features.Text()),
+            'verb_in_command': tfds.features.Text(),
+            'manner': tfds.features.Text(),
+            'referred_target': tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage='https://github.com/LauraRuis/groundedSCAN',
@@ -181,7 +190,8 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(self.builder_config.data_path)
     return {
         split_name: self._generate_examples(
-            path / self.builder_config.name, split_name=split_name)
+            path / self.builder_config.name, split_name=split_name
+        )
         for split_name in self.builder_config.splits_names
     }
 
@@ -193,7 +203,7 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
     def _get_position_feature(raw_position):
       return {
           'row': int(raw_position['row']),
-          'column': int(raw_position['column'])
+          'column': int(raw_position['column']),
       }
 
     def _get_object_feature(raw_object):
@@ -203,24 +213,18 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
           'object': {
               'shape': raw_object['object']['shape'],
               'color': raw_object['object']['color'],
-              'size': int(raw_object['object']['size'])
-          }
+              'size': int(raw_object['object']['size']),
+          },
       }
 
     def _parse_sparse_situation_to_feature(situation):
       return {
-          'grid_size':
-              int(situation['grid_size']),
-          'agent_direction':
-              int(situation['agent_direction']),
-          'distance_to_target':
-              int(situation['grid_size']),
-          'direction_to_target':
-              situation['direction_to_target'],
-          'agent_position':
-              _get_position_feature(situation['agent_position']),
-          'target_object':
-              _get_object_feature(situation['target_object']),
+          'grid_size': int(situation['grid_size']),
+          'agent_direction': int(situation['agent_direction']),
+          'distance_to_target': int(situation['grid_size']),
+          'direction_to_target': situation['direction_to_target'],
+          'agent_position': _get_position_feature(situation['agent_position']),
+          'target_object': _get_object_feature(situation['target_object']),
           'placed_objects': [
               _get_object_feature(obj)
               for obj in situation['placed_objects'].values()
@@ -235,7 +239,7 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
           'manner': example['manner'],
           'verb_in_command': example['verb_in_command'],
           'referred_target': example['referred_target'],
-          'situation': _parse_sparse_situation_to_feature(example['situation'])
+          'situation': _parse_sparse_situation_to_feature(example['situation']),
       }
 
     def _yield_examples(path):
@@ -245,5 +249,6 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
       for i, example in enumerate(dataset['examples'][split_name]):
         yield f'{split_name}_{i}', _preprocess(example)
 
-    return ('Create pipeline' >> beam.Create([path])
-            | 'Process samples' >> beam.FlatMap(_yield_examples))
+    return 'Create pipeline' >> beam.Create(
+        [path]
+    ) | 'Process samples' >> beam.FlatMap(_yield_examples)

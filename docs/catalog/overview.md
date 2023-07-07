@@ -24,6 +24,36 @@ for ex in tfds.load('cifar10', split='train'):
 
 ## All Datasets
 
+## `Dataset Collections`
+
+*   [`longt5`](longt5.md)
+*   [`xtreme`](xtreme.md)
+
+### `3d`
+
+*   [`aflw2k3d`](aflw2k3d.md)
+*   [`smallnorb`](smallnorb.md)
+*   [`smartwatch_gestures`](smartwatch_gestures.md)
+
+### `Abstractive text summarization`
+
+*   [`aeslc`](aeslc.md)
+*   [`billsum`](billsum.md)
+*   [`booksum`](booksum.md)
+*   [`newsroom`](newsroom.md)
+*   [`reddit`](reddit.md)
+*   [`reddit_tifu`](reddit_tifu.md)
+*   [`samsum`](samsum.md)
+*   [`scientific_papers`](scientific_papers.md)
+
+### `Anomaly detection`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`caltech101`](caltech101.md)
+*   [`kddcup99`](kddcup99.md)
+*   [`lost_and_found`](lost_and_found.md)
+*   [`stl10`](stl10.md)
+
 ### `Audio`
 
 *   [`accentdb`](accentdb.md)
@@ -43,12 +73,41 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`spoken_digit`](spoken_digit.md)
 *   [`tedlium`](tedlium.md)
 *   [`user_libri_audio`](user_libri_audio.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`vctk`](vctk.md)
 *   [`voxceleb`](voxceleb.md)
 *   [`voxforge`](voxforge.md)
 *   [`xtreme_s`](xtreme_s.md)
 *   [`yes_no`](yes_no.md)
+
+### `Biology`
+
+*   [`ogbg_molpcba`](ogbg_molpcba.md)
+
+### `Categorical`
+
+*   [`sift1m`](sift1m.md)
+
+### `Common sense reasoning`
+
+*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`arc`](arc.md)
+*   [`natural_questions`](natural_questions.md)
+*   [`openbookqa`](openbookqa.md)
+
+### `Computer science`
+
+*   [`robomimic_mg`](robomimic_mg.md)
+*   [`robomimic_mh`](robomimic_mh.md)
+*   [`robomimic_ph`](robomimic_ph.md)
+
+### `Conditional image generation`
+
+*   [`imagenet2012`](imagenet2012.md)
+*   [`webvid`](webvid.md)
+
+### `Coreference resolution`
+
+*   [`clevr`](clevr.md)
 
 ### `D4rl`
 
@@ -62,18 +121,65 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`d4rl_mujoco_hopper`](d4rl_mujoco_hopper.md)
 *   [`d4rl_mujoco_walker2d`](d4rl_mujoco_walker2d.md)
 
+### `Density estimation`
+
+*   [`caltech101`](caltech101.md)
+*   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`imagenet2012`](imagenet2012.md)
+
+### `Dependency parsing`
+
+*   [`universal_dependencies`](universal_dependencies.md)
+*   [`xtreme_pos`](xtreme_pos.md)
+
+### `Dialog act labeling`
+
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Dialogue`
+
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Document summarization`
+
+*   [`aeslc`](aeslc.md)
+*   [`booksum`](booksum.md)
+*   [`newsroom`](newsroom.md)
+*   [`scientific_papers`](scientific_papers.md)
+
+### `Fine grained image classification`
+
+*   [`caltech101`](caltech101.md)
+*   [`oxford_flowers102`](oxford_flowers102.md)
+*   [`oxford_iiit_pet`](oxford_iiit_pet.md)
+*   [`stanford_dogs`](stanford_dogs.md)
+*   [`stl10`](stl10.md)
+*   [`sun397`](sun397.md)
+
+### `Graph`
+
+*   [`ogbg_molpcba`](ogbg_molpcba.md)
+*   [`reddit`](reddit.md)
+
 ### `Graphs`
 
 *   [`cardiotox`](cardiotox.md)
-*   [`ogbg_molpcba`](ogbg_molpcba.md)
 
 ### `Image`
 
 *   [`abstract_reasoning`](abstract_reasoning.md)
 *   [`aflw2k3d`](aflw2k3d.md)
-*   [`arc`](arc.md)
 *   [`bccd`](bccd.md)
+*   [`beans`](beans.md)
+*   [`bee_dataset`](bee_dataset.md)
+*   [`bigearthnet`](bigearthnet.md)
 *   [`binarized_mnist`](binarized_mnist.md)
+*   [`binary_alpha_digits`](binary_alpha_digits.md)
+*   [`caltech101`](caltech101.md)
 *   [`celeb_a`](celeb_a.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`cityscapes`](cityscapes.md)
@@ -83,45 +189,86 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`div2k`](div2k.md)
 *   [`downsampled_imagenet`](downsampled_imagenet.md)
 *   [`dsprites`](dsprites.md)
-*   [`duke_ultrasound`](duke_ultrasound.md)
 *   [`flic`](flic.md)
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
+*   [`imagenet2012_fewshot`](imagenet2012_fewshot.md)
+*   [`imagenet2012_multilabel`](imagenet2012_multilabel.md)
+*   [`imagenet2012_real`](imagenet2012_real.md)
+*   [`imagenet2012_subset`](imagenet2012_subset.md)
+*   [`imagenet_a`](imagenet_a.md)
+*   [`imagenet_lt`](imagenet_lt.md)
+*   [`imagenet_pi`](imagenet_pi.md)
+*   [`imagenet_r`](imagenet_r.md)
+*   [`imagenet_resized`](imagenet_resized.md)
+*   [`imagenet_sketch`](imagenet_sketch.md)
+*   [`imagenet_v2`](imagenet_v2.md)
+*   [`imagenette`](imagenette.md)
+*   [`imagewang`](imagewang.md)
+*   [`kitti`](kitti.md)
+*   [`lfw`](lfw.md)
 *   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
+*   [`lvis`](lvis.md)
+*   [`malaria`](malaria.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
+*   [`open_images_challenge2019_detection`](open_images_challenge2019_detection.md)
+*   [`open_images_v4`](open_images_v4.md)
+*   [`oxford_flowers102`](oxford_flowers102.md)
+*   [`oxford_iiit_pet`](oxford_iiit_pet.md)
 *   [`pass`](pass.md)
+*   [`patch_camelyon`](patch_camelyon.md)
+*   [`pet_finder`](pet_finder.md)
+*   [`places365_small`](places365_small.md)
+*   [`placesfull`](placesfull.md)
+*   [`plant_leaves`](plant_leaves.md)
+*   [`plant_village`](plant_village.md)
+*   [`plantae_k`](plantae_k.md)
+*   [`quickdraw_bitmap`](quickdraw_bitmap.md)
+*   [`ref_coco`](ref_coco.md)
+*   [`resisc45`](resisc45.md)
+*   [`robomimic_mg`](robomimic_mg.md)
+*   [`robomimic_mh`](robomimic_mh.md)
+*   [`robomimic_ph`](robomimic_ph.md)
+*   [`rock_paper_scissors`](rock_paper_scissors.md)
 *   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
+*   [`siscore`](siscore.md)
+*   [`smallnorb`](smallnorb.md)
+*   [`so2sat`](so2sat.md)
+*   [`stanford_dogs`](stanford_dogs.md)
+*   [`stanford_online_products`](stanford_online_products.md)
+*   [`stl10`](stl10.md)
+*   [`sun397`](sun397.md)
+*   [`svhn_cropped`](svhn_cropped.md)
 *   [`symmetric_solids`](symmetric_solids.md)
+*   [`tf_flowers`](tf_flowers.md)
 *   [`the300w_lp`](the300w_lp.md)
 
 ### `Image classification`
 
-*   [`beans`](beans.md)
-*   [`bee_dataset`](bee_dataset.md)
+*   [`abstract_reasoning`](abstract_reasoning.md)
 *   [`bigearthnet`](bigearthnet.md)
-*   [`binary_alpha_digits`](binary_alpha_digits.md)
 *   [`caltech101`](caltech101.md)
 *   [`caltech_birds2010`](caltech_birds2010.md)
 *   [`caltech_birds2011`](caltech_birds2011.md)
 *   [`cars196`](cars196.md)
 *   [`cassava`](cassava.md)
 *   [`cats_vs_dogs`](cats_vs_dogs.md)
+*   [`celeb_a`](celeb_a.md)
 *   [`chexpert`](chexpert.md)
 *   [`cifar10`](cifar10.md)
 *   [`cifar100`](cifar100.md)
 *   [`cifar100_n`](cifar100_n.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cifar10_1`](cifar10_1.md)
 *   [`cifar10_corrupted`](cifar10_corrupted.md)
 *   [`cifar10_n`](cifar10_n.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`citrus_leaves`](citrus_leaves.md)
 *   [`cmaterdb`](cmaterdb.md)
 *   [`colorectal_histology`](colorectal_histology.md)
 *   [`colorectal_histology_large`](colorectal_histology_large.md)
 *   [`controlled_noisy_web_labels`](controlled_noisy_web_labels.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`curated_breast_imaging_ddsm`](curated_breast_imaging_ddsm.md)
 *   [`cycle_gan`](cycle_gan.md)
 *   [`deep_weeds`](deep_weeds.md)
@@ -132,107 +279,312 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`emnist`](emnist.md)
 *   [`eurosat`](eurosat.md)
 *   [`fashion_mnist`](fashion_mnist.md)
+*   [`flic`](flic.md)
 *   [`food101`](food101.md)
 *   [`geirhos_conflict_stimuli`](geirhos_conflict_stimuli.md)
 *   [`horses_or_humans`](horses_or_humans.md)
 *   [`i_naturalist2017`](i_naturalist2017.md)
 *   [`i_naturalist2018`](i_naturalist2018.md)
 *   [`i_naturalist2021`](i_naturalist2021.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet2012`](imagenet2012.md)
-*   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
-*   [`imagenet2012_fewshot`](imagenet2012_fewshot.md)
-*   [`imagenet2012_multilabel`](imagenet2012_multilabel.md)
-*   [`imagenet2012_real`](imagenet2012_real.md)
-*   [`imagenet2012_subset`](imagenet2012_subset.md)
-*   [`imagenet_a`](imagenet_a.md)
-*   [`imagenet_lt`](imagenet_lt.md)
-*   [`imagenet_r`](imagenet_r.md)
 *   [`imagenet_resized`](imagenet_resized.md)
 *   [`imagenet_sketch`](imagenet_sketch.md)
-*   [`imagenet_v2`](imagenet_v2.md)
 *   [`imagenette`](imagenette.md)
 *   [`imagewang`](imagewang.md)
+*   [`kitti`](kitti.md)
 *   [`kmnist`](kmnist.md)
-*   [`lfw`](lfw.md)
+*   [`lvis`](lvis.md)
 *   [`malaria`](malaria.md)
 *   [`mnist`](mnist.md)
 *   [`mnist_corrupted`](mnist_corrupted.md)
 *   [`omniglot`](omniglot.md)
+*   [`open_images_v4`](open_images_v4.md)
 *   [`oxford_flowers102`](oxford_flowers102.md)
 *   [`oxford_iiit_pet`](oxford_iiit_pet.md)
-*   [`patch_camelyon`](patch_camelyon.md)
-*   [`pet_finder`](pet_finder.md)
 *   [`places365_small`](places365_small.md)
-*   [`placesfull`](placesfull.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-*   [`plant_leaves`](plant_leaves.md)
 *   [`plant_village`](plant_village.md)
-*   [`plantae_k`](plantae_k.md)
-*   [`quickdraw_bitmap`](quickdraw_bitmap.md)
 *   [`resisc45`](resisc45.md)
-*   [`rock_paper_scissors`](rock_paper_scissors.md)
 *   [`siscore`](siscore.md)
 *   [`smallnorb`](smallnorb.md)
-*   [`so2sat`](so2sat.md)
 *   [`stanford_dogs`](stanford_dogs.md)
 *   [`stanford_online_products`](stanford_online_products.md)
 *   [`stl10`](stl10.md)
 *   [`sun397`](sun397.md)
 *   [`svhn_cropped`](svhn_cropped.md)
-*   [`tf_flowers`](tf_flowers.md)
 *   [`uc_merced`](uc_merced.md)
 *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
+
+### `Image clustering`
+
+*   [`imagenet2012`](imagenet2012.md)
+*   [`stanford_dogs`](stanford_dogs.md)
+*   [`stl10`](stl10.md)
+
+### `Image compression`
+
+*   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet_resized`](imagenet_resized.md)
+*   [`oxford_iiit_pet`](oxford_iiit_pet.md)
+*   [`patch_camelyon`](patch_camelyon.md)
+*   [`stl10`](stl10.md)
+
+### `Image generation`
+
+*   [`binarized_mnist`](binarized_mnist.md)
+*   [`celeb_a`](celeb_a.md)
+*   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`cityscapes`](cityscapes.md)
+*   [`clevr`](clevr.md)
+*   [`imagenet2012`](imagenet2012.md)
+*   [`oxford_flowers102`](oxford_flowers102.md)
+*   [`stanford_dogs`](stanford_dogs.md)
+*   [`stl10`](stl10.md)
+
+### `Image segmentation`
+
+*   [`segment_anything`](segment_anything.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Image super resolution`
+
+*   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`div2k`](div2k.md)
+*   [`kitti`](kitti.md)
+
+### `Image to image translation`
+
+*   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`cityscapes`](cityscapes.md)
+*   [`kitti`](kitti.md)
+*   [`scene_parse150`](scene_parse150.md)
+
+### `Instance segmentation`
+
+*   [`cityscapes`](cityscapes.md)
+*   [`lvis`](lvis.md)
+*   [`nyu_depth_v2`](nyu_depth_v2.md)
+*   [`segment_anything`](segment_anything.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Language modeling`
+
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
+*   [`blimp`](blimp.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`e2e_cleaned`](e2e_cleaned.md)
+*   [`irc_disentanglement`](irc_disentanglement.md)
+*   [`lambada`](lambada.md)
+*   [`librispeech_lm`](librispeech_lm.md)
+*   [`lm1b`](lm1b.md)
+*   [`math_qa`](math_qa.md)
+*   [`opus`](opus.md)
+*   [`paws_wiki`](paws_wiki.md)
+*   [`paws_x_wiki`](paws_x_wiki.md)
+*   [`pg19`](pg19.md)
+*   [`reddit`](reddit.md)
+*   [`samsum`](samsum.md)
+*   [`snli`](snli.md)
+*   [`squad`](squad.md)
+*   [`tedlium`](tedlium.md)
+
+### `Linguistic acceptability`
+
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Machine translation`
+
+*   [`mlqa`](mlqa.md)
+*   [`opus`](opus.md)
+
+### `Monolingual`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`arc`](arc.md)
+*   [`beir`](beir.md)
+*   [`booksum`](booksum.md)
+*   [`bool_q`](bool_q.md)
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`e2e_cleaned`](e2e_cleaned.md)
+*   [`imdb_reviews`](imdb_reviews.md)
+*   [`kitti`](kitti.md)
+*   [`lambada`](lambada.md)
+*   [`librispeech`](librispeech.md)
+*   [`librispeech_lm`](librispeech_lm.md)
+*   [`libritts`](libritts.md)
+*   [`ljspeech`](ljspeech.md)
+*   [`lm1b`](lm1b.md)
+*   [`natural_questions`](natural_questions.md)
+*   [`natural_questions_open`](natural_questions_open.md)
+*   [`openbookqa`](openbookqa.md)
+*   [`paws_wiki`](paws_wiki.md)
+*   [`plant_village`](plant_village.md)
+*   [`quac`](quac.md)
+*   [`race`](race.md)
+*   [`real_toxicity_prompts`](real_toxicity_prompts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`reddit`](reddit.md)
+*   [`savee`](savee.md)
+*   [`schema_guided_dialogue`](schema_guided_dialogue.md)
+*   [`sci_tail`](sci_tail.md)
+*   [`scicite`](scicite.md)
+*   [`scientific_papers`](scientific_papers.md)
+*   [`sentiment140`](sentiment140.md)
+*   [`snli`](snli.md)
+*   [`speech_commands`](speech_commands.md)
+*   [`spoken_digit`](spoken_digit.md)
+*   [`squad`](squad.md)
+*   [`story_cloze`](story_cloze.md)
+*   [`tedlium`](tedlium.md)
+*   [`trec`](trec.md)
+*   [`trivia_qa`](trivia_qa.md)
+
+### `Movies and tv shows`
+
+*   [`opinion_abstracts`](opinion_abstracts.md)
+
+### `Multilingual`
+
+*   [`librispeech`](librispeech.md)
+*   [`mlqa`](mlqa.md)
+*   [`paws_x_wiki`](paws_x_wiki.md)
+
+### `Natural language inference`
+
+*   [`anli`](anli.md)
+*   [`paws_wiki`](paws_wiki.md)
+*   [`sci_tail`](sci_tail.md)
+*   [`snli`](snli.md)
+
+### `Natural language understanding`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`anli`](anli.md)
+*   [`beir`](beir.md)
+*   [`bool_q`](bool_q.md)
+*   [`clevr`](clevr.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`imdb_reviews`](imdb_reviews.md)
+*   [`math_dataset`](math_dataset.md)
+*   [`math_qa`](math_qa.md)
+*   [`mlqa`](mlqa.md)
+*   [`natural_instructions`](natural_instructions.md)
+*   [`natural_questions`](natural_questions.md)
+*   [`natural_questions_open`](natural_questions_open.md)
+*   [`openbookqa`](openbookqa.md)
+*   [`opus`](opus.md)
+*   [`paws_wiki`](paws_wiki.md)
+*   [`paws_x_wiki`](paws_x_wiki.md)
+*   [`pg19`](pg19.md)
+*   [`piqa`](piqa.md)
+*   [`qasc`](qasc.md)
+*   [`quac`](quac.md)
+*   [`race`](race.md)
+*   [`schema_guided_dialogue`](schema_guided_dialogue.md)
+*   [`sci_tail`](sci_tail.md)
+*   [`sentiment140`](sentiment140.md)
+*   [`snli`](snli.md)
+*   [`squad`](squad.md)
+*   [`story_cloze`](story_cloze.md)
+*   [`trec`](trec.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Nearest neighbors`
 
 *   [`deep1b`](deep1b.md)
 *   [`glove100_angular`](glove100_angular.md)
-*   [`sift1m`](sift1m.md)
 
 ### `Object detection`
 
 *   [`coco`](coco.md)
 *   [`coco_captions`](coco_captions.md)
+*   [`flic`](flic.md)
 *   [`kitti`](kitti.md)
 *   [`lvis`](lvis.md)
-*   [`open_images_challenge2019_detection`](open_images_challenge2019_detection.md)
 *   [`open_images_v4`](open_images_v4.md)
 *   [`voc`](voc.md)
 *   [`waymo_open_dataset`](waymo_open_dataset.md)
 *   [`wider_face`](wider_face.md)
 
+### `Open domain question answering`
+
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`natural_questions`](natural_questions.md)
+*   [`squad`](squad.md)
+*   [`trivia_qa`](trivia_qa.md)
+
+### `Out of distribution detection`
+
+*   [`stl10`](stl10.md)
+
 ### `Question answering`
 
-*   [`ai2_arc`](ai2_arc.md)
-*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
-*   [`answer_equivalence`](answer_equivalence.md)
-*   [`asqa`](asqa.md)
+*   [`beir`](beir.md)
+*   [`bool_q`](bool_q.md)
+*   [`clevr`](clevr.md)
 *   [`coqa`](coqa.md)
 *   [`cosmos_qa`](cosmos_qa.md)
-*   [`mctaco`](mctaco.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`math_dataset`](math_dataset.md)
+*   [`math_qa`](math_qa.md)
 *   [`mlqa`](mlqa.md)
+*   [`natural_instructions`](natural_instructions.md)
 *   [`natural_questions`](natural_questions.md)
 *   [`natural_questions_open`](natural_questions_open.md)
+*   [`openbookqa`](openbookqa.md)
+*   [`piqa`](piqa.md)
 *   [`qasc`](qasc.md)
+*   [`quac`](quac.md)
+*   [`race`](race.md)
 *   [`squad`](squad.md)
+*   [`story_cloze`](story_cloze.md)
 *   [`trivia_qa`](trivia_qa.md)
 *   [`tydi_qa`](tydi_qa.md)
 *   [`web_questions`](web_questions.md)
 *   [`xquad`](xquad.md)
+
+### `Question generation`
+
+*   [`natural_questions`](natural_questions.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Ranking`
 
 *   [`istella`](istella.md)
 *   [`mslr_web`](mslr_web.md)
 *   [`yahoo_ltrc`](yahoo_ltrc.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Reading comprehension`
+
+*   [`opus`](opus.md)
+*   [`pg19`](pg19.md)
+*   [`qasc`](qasc.md)
+*   [`quac`](quac.md)
+*   [`race`](race.md)
+*   [`squad`](squad.md)
+*   [`trivia_qa`](trivia_qa.md)
 
 ### `Recommendation`
 
 *   [`criteo`](criteo.md)
 *   [`hillstrom`](hillstrom.md)
-*   [`simpte`](simpte.md)
+
+### `Reinforcement learning`
+
+*   [`robomimic_mg`](robomimic_mg.md)
+*   [`robomimic_mh`](robomimic_mh.md)
+*   [`robomimic_ph`](robomimic_ph.md)
+
+### `Rgb d`
+
+*   [`nyu_depth_v2`](nyu_depth_v2.md)
 
 ### `Rl unplugged`
 
@@ -253,39 +605,82 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`locomotion`](locomotion.md)
 *   [`robosuite_panda_pick_place_can`](robosuite_panda_pick_place_can.md)
 
-### `Robomimic`
-
-*   [`robomimic_ph`](robomimic_ph.md)
-
 ### `Robotics`
 
 *   [`mt_opt`](mt_opt.md)
 
+### `Scene classification`
+
+*   [`bigearthnet`](bigearthnet.md)
+*   [`places365_small`](places365_small.md)
+*   [`resisc45`](resisc45.md)
+
+### `Semantic segmentation`
+
+*   [`bigearthnet`](bigearthnet.md)
+*   [`cityscapes`](cityscapes.md)
+*   [`kitti`](kitti.md)
+*   [`lost_and_found`](lost_and_found.md)
+*   [`nyu_depth_v2`](nyu_depth_v2.md)
+*   [`open_images_v4`](open_images_v4.md)
+*   [`places365_small`](places365_small.md)
+*   [`ref_coco`](ref_coco.md)
+*   [`scene_parse150`](scene_parse150.md)
+*   [`segment_anything`](segment_anything.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`so2sat`](so2sat.md)
+
+### `Sentiment analysis`
+
+*   [`imdb_reviews`](imdb_reviews.md)
+*   [`sentiment140`](sentiment140.md)
+
+### `Sequence modeling`
+
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Sequence to sequence language modeling`
+
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`math_qa`](math_qa.md)
+*   [`opus`](opus.md)
+*   [`paws_wiki`](paws_wiki.md)
+*   [`reddit`](reddit.md)
+*   [`samsum`](samsum.md)
+*   [`snli`](snli.md)
+
+### `Speech`
+
+*   [`librispeech`](librispeech.md)
+*   [`libritts`](libritts.md)
+*   [`speech_commands`](speech_commands.md)
+
+### `Speech recognition`
+
+*   [`accentdb`](accentdb.md)
+*   [`librispeech`](librispeech.md)
+*   [`speech_commands`](speech_commands.md)
+*   [`tedlium`](tedlium.md)
+
 ### `Structured`
 
-*   [`amazon_us_reviews`](amazon_us_reviews.md)
-*   [`ble_wind_field`](ble_wind_field.md)
 *   [`cherry_blossoms`](cherry_blossoms.md)
 *   [`covid19`](covid19.md)
 *   [`cs_restaurants`](cs_restaurants.md)
 *   [`dart`](dart.md)
 *   [`diamonds`](diamonds.md)
-*   [`e2e_cleaned`](e2e_cleaned.md)
-*   [`efron_morris75`](efron_morris75.md)
 *   [`forest_fires`](forest_fires.md)
 *   [`genomics_ood`](genomics_ood.md)
 *   [`german_credit_numeric`](german_credit_numeric.md)
 *   [`higgs`](higgs.md)
 *   [`howell`](howell.md)
 *   [`iris`](iris.md)
-*   [`kddcup99`](kddcup99.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
-*   [`penguins`](penguins.md)
-*   [`protein_net`](protein_net.md)
-*   [`radon`](radon.md)
-*   [`rock_you`](rock_you.md)
-*   [`titanic`](titanic.md)
 *   [`web_graph`](web_graph.md)
 *   [`web_nlg`](web_nlg.md)
 *   [`wiki_bio`](wiki_bio.md)
@@ -295,48 +690,74 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Summarization`
 
-*   [`aeslc`](aeslc.md)
-*   [`big_patent`](big_patent.md)
-*   [`billsum`](billsum.md)
-*   [`booksum`](booksum.md)
 *   [`cnn_dailymail`](cnn_dailymail.md)
 *   [`covid19sum`](covid19sum.md)
 *   [`gigaword`](gigaword.md)
 *   [`gov_report`](gov_report.md)
-*   [`media_sum`](media_sum.md)
 *   [`multi_news`](multi_news.md)
-*   [`newsroom`](newsroom.md)
-*   [`opinion_abstracts`](opinion_abstracts.md)
-*   [`opinosis`](opinosis.md)
-*   [`reddit`](reddit.md)
-*   [`reddit_tifu`](reddit_tifu.md)
-*   [`samsum`](samsum.md)
-*   [`scientific_papers`](scientific_papers.md)
-*   [`summscreen`](summscreen.md)
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)
 
+### `Table to text generation`
+
+*   [`e2e_cleaned`](e2e_cleaned.md)
+
+### `Tabular`
+
+*   [`ble_wind_field`](ble_wind_field.md)
+*   [`efron_morris75`](efron_morris75.md)
+*   [`kddcup99`](kddcup99.md)
+*   [`opinion_abstracts`](opinion_abstracts.md)
+*   [`radon`](radon.md)
+*   [`simpte`](simpte.md)
+*   [`titanic`](titanic.md)
+
 ### `Text`
 
+*   [`abstract_reasoning`](abstract_reasoning.md)
+*   [`aeslc`](aeslc.md)
 *   [`ag_news_subset`](ag_news_subset.md)
+*   [`ai2_arc`](ai2_arc.md)
+*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`amazon_us_reviews`](amazon_us_reviews.md)
 *   [`anli`](anli.md)
+*   [`answer_equivalence`](answer_equivalence.md)
+*   [`arc`](arc.md)
+*   [`asqa`](asqa.md)
+*   [`asset`](asset.md)
 *   [`assin2`](assin2.md)
+*   [`bccd`](bccd.md)
 *   [`beir`](beir.md)
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
 *   [`blimp`](blimp.md)
+*   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
-*   [`c4`](c4.md)
-*   [`cfq`](cfq.md)
-*   [`civil_comments`](civil_comments.md)
-*   [`clinc_oos`](clinc_oos.md)
-*   [`conll2003`](conll2003.md)
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`bucc`](bucc.md)
+*   [`c4`](c4.md)
+*   [`c4_wsrs`](c4_wsrs.md)
+*   [`caltech101`](caltech101.md)
+*   [`cfq`](cfq.md)
+*   [`cityscapes`](cityscapes.md)
+*   [`civil_comments`](civil_comments.md)
+*   [`clevr`](clevr.md)
+*   [`clinc_oos`](clinc_oos.md)
+*   [`conll2002`](conll2002.md)
+*   [`conll2003`](conll2003.md)
 *   [`cos_e`](cos_e.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
 *   [`doc_nli`](doc_nli.md)
 *   [`dolphin_number_word`](dolphin_number_word.md)
 *   [`drop`](drop.md)
+*   [`dsprites`](dsprites.md)
+*   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`eraser_multi_rc`](eraser_multi_rc.md)
 *   [`esnli`](esnli.md)
+*   [`flic`](flic.md)
 *   [`gap`](gap.md)
 *   [`gem`](gem.md)
 *   [`glue`](glue.md)
@@ -346,44 +767,97 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`hellaswag`](hellaswag.md)
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
+*   [`kitti`](kitti.md)
 *   [`lambada`](lambada.md)
+*   [`lfw`](lfw.md)
+*   [`librispeech`](librispeech.md)
 *   [`librispeech_lm`](librispeech_lm.md)
+*   [`libritts`](libritts.md)
+*   [`ljspeech`](ljspeech.md)
 *   [`lm1b`](lm1b.md)
+*   [`lost_and_found`](lost_and_found.md)
 *   [`math_dataset`](math_dataset.md)
 *   [`math_qa`](math_qa.md)
+*   [`mctaco`](mctaco.md)
+*   [`media_sum`](media_sum.md)
+*   [`mlqa`](mlqa.md)
 *   [`movie_rationales`](movie_rationales.md)
 *   [`mrqa`](mrqa.md)
 *   [`multi_nli`](multi_nli.md)
 *   [`multi_nli_mismatch`](multi_nli_mismatch.md)
+*   [`natural_instructions`](natural_instructions.md)
+*   [`natural_questions`](natural_questions.md)
+*   [`natural_questions_open`](natural_questions_open.md)
+*   [`newsroom`](newsroom.md)
+*   [`open_images_challenge2019_detection`](open_images_challenge2019_detection.md)
+*   [`open_images_v4`](open_images_v4.md)
 *   [`openbookqa`](openbookqa.md)
+*   [`opinion_abstracts`](opinion_abstracts.md)
+*   [`opinosis`](opinosis.md)
+*   [`opus`](opus.md)
+*   [`oxford_flowers102`](oxford_flowers102.md)
+*   [`oxford_iiit_pet`](oxford_iiit_pet.md)
+*   [`para_crawl`](para_crawl.md)
+*   [`patch_camelyon`](patch_camelyon.md)
 *   [`paws_wiki`](paws_wiki.md)
 *   [`paws_x_wiki`](paws_x_wiki.md)
+*   [`penguins`](penguins.md)
+*   [`pet_finder`](pet_finder.md)
 *   [`pg19`](pg19.md)
 *   [`piqa`](piqa.md)
+*   [`places365_small`](places365_small.md)
+*   [`placesfull`](placesfull.md)
+*   [`plant_leaves`](plant_leaves.md)
+*   [`plant_village`](plant_village.md)
+*   [`plantae_k`](plantae_k.md)
+*   [`protein_net`](protein_net.md)
+*   [`q_re_cc`](q_re_cc.md)
 *   [`qa4mre`](qa4mre.md)
+*   [`qasc`](qasc.md)
 *   [`quac`](quac.md)
 *   [`quality`](quality.md)
 *   [`race`](race.md)
+*   [`real_toxicity_prompts`](real_toxicity_prompts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`reddit_disentanglement`](reddit_disentanglement.md)
+*   [`reddit_tifu`](reddit_tifu.md)
+*   [`ref_coco`](ref_coco.md)
+*   [`resisc45`](resisc45.md)
+*   [`robonet`](robonet.md)
+*   [`rock_you`](rock_you.md)
 *   [`salient_span_wikipedia`](salient_span_wikipedia.md)
+*   [`samsum`](samsum.md)
 *   [`scan`](scan.md)
 *   [`schema_guided_dialogue`](schema_guided_dialogue.md)
 *   [`sci_tail`](sci_tail.md)
 *   [`scicite`](scicite.md)
+*   [`scientific_papers`](scientific_papers.md)
 *   [`scrolls`](scrolls.md)
 *   [`sentiment140`](sentiment140.md)
+*   [`smallnorb`](smallnorb.md)
 *   [`snli`](snli.md)
+*   [`spoken_digit`](spoken_digit.md)
+*   [`squad`](squad.md)
 *   [`squad_question_generation`](squad_question_generation.md)
+*   [`stanford_dogs`](stanford_dogs.md)
 *   [`star_cfq`](star_cfq.md)
 *   [`story_cloze`](story_cloze.md)
+*   [`summscreen`](summscreen.md)
+*   [`sun397`](sun397.md)
 *   [`super_glue`](super_glue.md)
+*   [`svhn_cropped`](svhn_cropped.md)
+*   [`tatoeba`](tatoeba.md)
+*   [`ted_hrlr_translate`](ted_hrlr_translate.md)
+*   [`ted_multi_translate`](ted_multi_translate.md)
+*   [`tedlium`](tedlium.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
+*   [`trivia_qa`](trivia_qa.md)
 *   [`unified_qa`](unified_qa.md)
 *   [`universal_dependencies`](universal_dependencies.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`unnatural_instructions`](unnatural_instructions.md)
 *   [`user_libri_text`](user_libri_text.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`webvid`](webvid.md)
 *   [`wiki40b`](wiki40b.md)
 *   [`wiki_dialog`](wiki_dialog.md)
 *   [`wikiann`](wikiann.md)
@@ -394,31 +868,104 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wsc273`](wsc273.md)
 *   [`xnli`](xnli.md)
 *   [`xtreme_pawsx`](xtreme_pawsx.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xtreme_xnli`](xtreme_xnli.md)
 *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
 
+### `Text classification`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`bool_q`](bool_q.md)
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`imdb_reviews`](imdb_reviews.md)
+*   [`natural_instructions`](natural_instructions.md)
+*   [`paws_wiki`](paws_wiki.md)
+*   [`paws_x_wiki`](paws_x_wiki.md)
+*   [`sentiment140`](sentiment140.md)
+*   [`trec`](trec.md)
+
+### `Text classification toxicity prediction`
+
+*   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`real_toxicity_prompts`](real_toxicity_prompts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Text generation`
+
+*   [`aeslc`](aeslc.md)
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
+*   [`booksum`](booksum.md)
+*   [`bool_q`](bool_q.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`e2e_cleaned`](e2e_cleaned.md)
+*   [`lambada`](lambada.md)
+*   [`lm1b`](lm1b.md)
+*   [`math_qa`](math_qa.md)
+*   [`mctaco`](mctaco.md)
+*   [`natural_instructions`](natural_instructions.md)
+*   [`natural_questions`](natural_questions.md)
+*   [`newsroom`](newsroom.md)
+*   [`openbookqa`](openbookqa.md)
+*   [`piqa`](piqa.md)
+*   [`race`](race.md)
+*   [`real_toxicity_prompts`](real_toxicity_prompts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`reddit`](reddit.md)
+*   [`reddit_tifu`](reddit_tifu.md)
+*   [`samsum`](samsum.md)
+*   [`schema_guided_dialogue`](schema_guided_dialogue.md)
+*   [`scientific_papers`](scientific_papers.md)
+*   [`squad`](squad.md)
+*   [`story_cloze`](story_cloze.md)
+*   [`trivia_qa`](trivia_qa.md)
+
 ### `Text simplification`
 
-*   [`asset`](asset.md)
 *   [`wiki_auto`](wiki_auto.md)
+
+### `Text summarization`
+
+*   [`aeslc`](aeslc.md)
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
+*   [`booksum`](booksum.md)
+*   [`databricks_dolly`](databricks_dolly.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`newsroom`](newsroom.md)
+*   [`reddit`](reddit.md)
+*   [`reddit_tifu`](reddit_tifu.md)
+*   [`samsum`](samsum.md)
+*   [`scientific_papers`](scientific_papers.md)
 
 ### `Time series`
 
+*   [`robomimic_mg`](robomimic_mg.md)
+*   [`robomimic_mh`](robomimic_mh.md)
+*   [`robomimic_ph`](robomimic_ph.md)
 *   [`smartwatch_gestures`](smartwatch_gestures.md)
+
+### `Token classification`
+
+*   [`universal_dependencies`](universal_dependencies.md)
+*   [`xtreme_pos`](xtreme_pos.md)
+
+### `Tracking`
+
+*   [`smartwatch_gestures`](smartwatch_gestures.md)
+
+### `Trajectory`
+
+*   [`robomimic_mg`](robomimic_mg.md)
+*   [`robomimic_mh`](robomimic_mh.md)
+*   [`robomimic_ph`](robomimic_ph.md)
 
 ### `Translate`
 
-*   [`bucc`](bucc.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`flores`](flores.md)
-*   [`opus`](opus.md)
-*   [`para_crawl`](para_crawl.md)
-*   [`tatoeba`](tatoeba.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-*   [`ted_hrlr_translate`](ted_hrlr_translate.md)
-*   [`ted_multi_translate`](ted_multi_translate.md)
+*   [`mtnt`](mtnt.md)
 *   [`wmt13_translate`](wmt13_translate.md)
 *   [`wmt14_translate`](wmt14_translate.md)
 *   [`wmt15_translate`](wmt15_translate.md)
@@ -428,22 +975,33 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wmt19_translate`](wmt19_translate.md)
 *   [`wmt_t2t_translate`](wmt_t2t_translate.md)
 
+### `Uncategorized`
+
+*   [`duke_ultrasound`](duke_ultrasound.md)
+
+### `Unsupervised anomaly detection`
+
+*   [`caltech101`](caltech101.md)
+
 ### `Video`
 
+*   [`abstract_reasoning`](abstract_reasoning.md)
 *   [`bair_robot_pushing_small`](bair_robot_pushing_small.md)
 *   [`davis`](davis.md)
+*   [`flic`](flic.md)
 *   [`moving_mnist`](moving_mnist.md)
 *   [`robonet`](robonet.md)
 *   [`starcraft_video`](starcraft_video.md)
 *   [`tao`](tao.md)
 *   [`ucf101`](ucf101.md)
+*   [`webvid`](webvid.md)
 *   [`youtube_vis`](youtube_vis.md)
 
 ### `Vision language`
 
 *   [`gref`](gref.md)
 *   [`grounded_scan`](grounded_scan.md)
-*   [`ref_coco`](ref_coco.md)
+*   [`laion400m`](laion400m.md)
 *   [`wit`](wit.md)
 *   [`wit_kaggle`](wit_kaggle.md)
 

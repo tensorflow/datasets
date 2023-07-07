@@ -1,20 +1,24 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "species": {
-            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-            "content": {
-                "num_classes": 3
-            }
-        },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
         "features": {
-            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
-            "content": {
-                "shape": [
-                    4
-                ],
-                "dtype": "float32",
-                "encoding": "none"
+            "species": {
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "classLabel": {
+                    "numClasses": "3"
+                }
+            },
+            "features": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "4"
+                        ]
+                    },
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
             }
         }
     }

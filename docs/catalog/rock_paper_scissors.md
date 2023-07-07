@@ -26,7 +26,7 @@ Images of hands playing rock, paper, scissor game.
     [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
 
 *   **Source code**:
-    [`tfds.image_classification.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/rock_paper_scissors.py)
+    [`tfds.datasets.rock_paper_scissors.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/rock_paper_scissors/rock_paper_scissors_dataset_builder.py)
 
 *   **Versions**:
 
@@ -35,11 +35,11 @@ Images of hands playing rock, paper, scissor game.
 
 *   **Download size**: `219.53 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `219.23 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -52,18 +52,18 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'image': Image(shape=(300, 300, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape         | Dtype    | Description
-:------ | :----------- | :------------ | :------- | :----------
-        | FeaturesDict |               |          |
-image   | Image        | (300, 300, 3) | tf.uint8 |
-label   | ClassLabel   |               | tf.int64 |
+Feature | Class        | Shape         | Dtype | Description
+:------ | :----------- | :------------ | :---- | :----------
+        | FeaturesDict |               |       |
+image   | Image        | (300, 300, 3) | uint8 |
+label   | ClassLabel   |               | int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

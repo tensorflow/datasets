@@ -37,7 +37,7 @@ atmospheric reanalyses of the global climate. Copernicus Climate Change Service
     [https://github.com/google/balloon-learning-environment](https://github.com/google/balloon-learning-environment)
 
 *   **Source code**:
-    [`tfds.structured.ble_wind_field.BLEWindField`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/ble_wind_field/ble_wind_field.py)
+    [`tfds.datasets.ble_wind_field.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ble_wind_field/ble_wind_field_dataset_builder.py)
 
 *   **Versions**:
 
@@ -49,16 +49,16 @@ atmospheric reanalyses of the global climate. Copernicus Climate Change Service
 
 ```python
 FeaturesDict({
-    'field': Tensor(shape=(21, 21, 10, 9, 2), dtype=tf.float32),
+    'field': Tensor(shape=(21, 21, 10, 9, 2), dtype=float32),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature | Class        | Shape              | Dtype      | Description
-:------ | :----------- | :----------------- | :--------- | :----------
-        | FeaturesDict |                    |            |
-field   | Tensor       | (21, 21, 10, 9, 2) | tf.float32 |
+Feature | Class        | Shape              | Dtype   | Description
+:------ | :----------- | :----------------- | :------ | :----------
+        | FeaturesDict |                    |         |
+field   | Tensor       | (21, 21, 10, 9, 2) | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

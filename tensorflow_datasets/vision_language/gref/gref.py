@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
 
 r"""GRef dataset.
 """
+from __future__ import annotations
 
 import collections
 import json
 
-import tensorflow as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -119,23 +120,21 @@ class Gref(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         homepage='https://github.com/mjhucla/Google_Refexp_toolbox',
         features=tfds.features.FeaturesDict({
-            'image':
-                tfds.features.Image(encoding_format='jpeg'),
-            'image/id':
-                tf.int64,
-            'objects':
-                tfds.features.Sequence({
-                    'id': tf.int64,
-                    'area': tf.int64,
-                    'bbox': tfds.features.BBoxFeature(),
-                    'label': tf.int64,
-                    'label_name': tfds.features.ClassLabel(num_classes=80),
-                    'refexp': tfds.features.Sequence({
-                        'refexp_id': tf.int64,
-                        'tokens': tfds.features.Sequence(tfds.features.Text()),
-                        'referent': tfds.features.Text(),
-                        'raw': tfds.features.Text()}),
+            'image': tfds.features.Image(encoding_format='jpeg'),
+            'image/id': np.int64,
+            'objects': tfds.features.Sequence({
+                'id': np.int64,
+                'area': np.int64,
+                'bbox': tfds.features.BBoxFeature(),
+                'label': np.int64,
+                'label_name': tfds.features.ClassLabel(num_classes=80),
+                'refexp': tfds.features.Sequence({
+                    'refexp_id': np.int64,
+                    'tokens': tfds.features.Sequence(tfds.features.Text()),
+                    'referent': tfds.features.Text(),
+                    'raw': tfds.features.Text(),
                 }),
+            }),
         }),
         # If there's a common `(input, target)` tuple from the features,
         # specify them here. They'll be used if as_supervised=True in
@@ -147,17 +146,23 @@ class Gref(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     coco_image_dir = dl_manager.manual_dir / 'coco_train2014'
-    gref_aligned_json_train = dl_manager.manual_dir / (
-        'google_refexp_train_201511_coco_aligned_catg.json')
-    gref_aligned_json_val = dl_manager.manual_dir / (
-        'google_refexp_val_201511_coco_aligned_catg.json')
+    gref_aligned_json_train = (
+        dl_manager.manual_dir
+        / 'google_refexp_train_201511_coco_aligned_catg.json'
+    )
+    gref_aligned_json_val = (
+        dl_manager.manual_dir
+        / 'google_refexp_val_201511_coco_aligned_catg.json'
+    )
     # Specify the splits
     return {
         tfds.Split.TRAIN: self._generate_examples(
-            coco_image_dir, gref_aligned_json_train,
+            coco_image_dir,
+            gref_aligned_json_train,
         ),
         tfds.Split.VALIDATION: self._generate_examples(
-            coco_image_dir, gref_aligned_json_val,
+            coco_image_dir,
+            gref_aligned_json_val,
         ),
     }
 

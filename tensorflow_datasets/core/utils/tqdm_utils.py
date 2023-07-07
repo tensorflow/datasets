@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,7 +36,6 @@ class TqdmStream:
   for _ in tqdm.tqdm(range(10)):
     logger.info('No visual artifacts')
   ```
-
   """
 
   def write(self, x):
@@ -120,7 +119,6 @@ def disable_progress_bar():
   ```
   tfds.disable_progress_bar()
   ```
-
   """
   # Replace tqdm
   global _active
@@ -135,7 +133,6 @@ def enable_progress_bar():
   ```
   tfds.enable_progress_bar()
   ```
-
   """
   # Replace tqdm
   global _active
@@ -168,11 +165,13 @@ def _async_tqdm(*args, **kwargs):
     pbar.clear()  # pop pbar from the active list of pbar
 
 
-class _TqdmPbarAsync(object):
+class _TqdmPbarAsync(EmptyTqdm):
   """Wrapper around Tqdm pbar which be shared between thread."""
+
   _tqdm_bars = []
 
   def __init__(self, pbar):
+    super().__init__()
     self._lock = tqdm_lib.tqdm.get_lock()
     self._pbar = pbar
     self._tqdm_bars.append(pbar)

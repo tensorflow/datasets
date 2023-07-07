@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,24 +15,112 @@
 
 """Mock util for tfds."""
 
+from __future__ import annotations
+
 import contextlib
 import enum
 import functools
 import os
-import random
-from typing import Callable, Iterator, Optional
+from typing import Any, Callable, Iterator, Optional, Sequence
 from unittest import mock
 
 from absl import logging
 import numpy as np
-import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import reader as reader_lib
+from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.data_sources import array_record
+from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import tree_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_utils
+
+
+def _get_fake_data_components(decoders, features):
+  """Gets all the components to generate fake data in the tests.
+
+  Args:
+    decoders: The decoders to override, or `None` if no decoding is used.
+    features: The original features.
+
+  Returns:
+    A tuple with the data generator class, the features, the feature specs and
+      the decode function.
+  """
+  # Partial decoding
+  if isinstance(decoders, decode.PartialDecoding):
+    # TODO(epot): Should be moved inside `features.decode_example`
+    features = decoders.extract_features(features)
+    decoders = decoders.decoders
+  # Full decoding (all features decoded)
+  else:
+    decoders = decoders  # pylint: disable=self-assigning-variable
+
+  has_nested_dataset = any(
+      isinstance(f, features_lib.Dataset) for f in features._flatten(features)  # pylint: disable=protected-access
+  )
+  if decoders is not None or has_nested_dataset:
+    # If a decoder is passed, encode/decode the examples.
+    generator_cls = EncodedRandomFakeGenerator
+    specs = features.get_serialized_info()
+    decode_fn = functools.partial(features.decode_example, decoders=decoders)
+  else:
+    generator_cls = RandomFakeGenerator
+    specs = features.get_tensor_info()
+    decode_fn = lambda ex: ex  # identity
+  return generator_cls, features, specs, decode_fn
+
+
+class PickableDataSourceMock(mock.MagicMock):
+  """Makes MagicMock pickable in order to work with multiprocessing in Grain."""
+
+  def __getstate__(self):
+    return {'num_examples': len(self), 'generator': self._generator}
+
+  def __setstate__(self, state):
+    num_examples, generator = state['num_examples'], state['generator']
+    self.__len__.return_value = num_examples
+    self.__getitem__ = functools.partial(_getitem, generator=generator)
+    self.__getitems__ = functools.partial(_getitems, generator=generator)
+
+  def __reduce__(self):
+    return (PickableDataSourceMock, (), self.__getstate__())
+
+
+def _getitem(self, record_key: int, generator: RandomFakeGenerator) -> Any:
+  """Function to overwrite __getitem__ in data sources."""
+  del self
+  return generator[record_key]
+
+
+def _getitems(
+    self, record_keys: Sequence[int], generator: RandomFakeGenerator
+) -> Sequence[Any]:
+  """Function to overwrite __getitems__ in data sources."""
+  del self
+  return [generator[record_key] for record_key in record_keys]
+
+
+def _deserialize_example_np(serialized_example, *, decoders=None):
+  """Function to overwrite dataset_info.features.deserialize_example_np.
+
+  Warning: this has to be defined in the outer scope in order for the function
+  to be pickable.
+
+  Args:
+    serialized_example: the example to deserialize.
+    decoders: optional decoders.
+
+  Returns:
+    The serialized example, because deserialization is taken care by
+      RandomFakeGenerator.
+  """
+  del decoders
+  return serialized_example
 
 
 class MockPolicy(enum.Enum):
@@ -48,6 +136,7 @@ class MockPolicy(enum.Enum):
       use any generated files. More is more convenient but less safe than
       `USE_FILES`. Not all features might be available (e.g. no split-names).
   """
+
   AUTO = enum.auto()
   USE_CODE = enum.auto()
   USE_FILES = enum.auto()
@@ -62,6 +151,7 @@ def mock_data(
     policy: MockPolicy = MockPolicy.AUTO,
     as_dataset_fn: Optional[Callable[..., tf.data.Dataset]] = None,
     data_dir: Optional[str] = None,
+    mock_array_record_data_source: Optional[PickableDataSourceMock] = None,
 ) -> Iterator[None]:
   """Mock tfds to generate random data.
 
@@ -76,6 +166,9 @@ def mock_data(
     for ex in ds:  # ds will yield randomly generated examples.
       ex
   ```
+
+  All calls to `tfds.load`/`tfds.data_source` within the context manager then
+  return deterministic mocked data.
 
   * Usage (manual):
 
@@ -137,6 +230,8 @@ def mock_data(
     data_dir: Folder containing the metadata file (searched in
       `data_dir/dataset_name/version`). Overwrite `data_dir` kwargs from
       `tfds.load`. Used in `MockPolicy.USE_FILES` mode.
+    mock_array_record_data_source: Overwrite a mock for the underlying
+      ArrayRecord data source if it is used.
 
   Yields:
     None
@@ -145,13 +240,20 @@ def mock_data(
   original_init_fn = dataset_builder.DatasetBuilder.__init__
   original_as_dataset_fn = dataset_builder.DatasetBuilder.as_dataset
   original_builder_from_files = read_only_builder.builder_from_files
+  if mock_array_record_data_source is None:
+    mock_array_record_data_source = PickableDataSourceMock()
+  elif not isinstance(mock_array_record_data_source, PickableDataSourceMock):
+    raise ValueError(
+        '`mock_array_record_data_source` must be a'
+        ' `tfds.testing.PickableDataSourceMock` because it must be pickable.'
+    )
 
   def mock_download_and_prepare(self, *args, **kwargs):
     """`builder.download_and_prepare` is a no-op."""
     del self, args, kwargs  # Unused
 
-  def mock_as_dataset_base(self, **kwargs):
-    """Function which overwrite `builder.as_dataset`."""
+  def _check_policy(self) -> MockPolicy:
+    """Checks the policy and returns the actual used policy for mocking."""
     # When `USE_FILES` is used, make sure the metadata actually exists.
     if tf.io.gfile.exists(self.data_dir):
       logging.info('Metadata found for %s at %s', self.name, self.data_dir)
@@ -170,6 +272,12 @@ def mock_data(
             self.name,
             self.data_dir,
         )
+        return MockPolicy.USE_CODE
+    return policy
+
+  def mock_as_dataset_base(self, **kwargs):
+    """Mocks `builder.as_dataset`."""
+    _check_policy(self)
 
     # Info is already restored at this point, so can mock the file system
     # safely in case of `USE_CODE` mode.
@@ -179,42 +287,24 @@ def mock_data(
       return original_as_dataset_fn(self, **kwargs)
 
   def mock_as_dataset(self, split, decoders=None, read_config=None, **kwargs):
-    """Function which overwrite `builder._as_dataset`."""
+    """Mocks `builder._as_dataset`."""
     del kwargs
 
-    # Partial decoding
-    if isinstance(decoders, decode.PartialDecoding):
-      # TODO(epot): Should be moved inside `features.decode_example`
-      features = decoders.extract_features(self.info.features)
-      decoders = decoders.decoders
-    # Full decoding (all features decoded)
-    else:
-      features = self.info.features
-      decoders = decoders  # pylint: disable=self-assigning-variable
-
-    has_nested_dataset = any(
-        isinstance(f, features_lib.Dataset)
-        for f in features._flatten(features))  # pylint: disable=protected-access
-    if decoders is not None or has_nested_dataset:
-      # If a decoder is passed, encode/decode the examples.
-      generator_cls = EncodedRandomFakeGenerator
-      specs = features.get_serialized_info()
-      decode_fn = functools.partial(features.decode_example, decoders=decoders)
-    else:
-      generator_cls = RandomFakeGenerator
-      specs = features.get_tensor_info()
-      decode_fn = lambda ex: ex  # identity
+    generator_cls, features, specs, decode_fn = _get_fake_data_components(
+        decoders, self.info.features
+    )
 
     ds = tf.data.Dataset.from_generator(
         # `from_generator` takes a callable with signature () -> iterable
         # Recreating a new generator each time ensure that all pipelines are
         # using the same examples
-        # pylint: disable=g-long-lambda]
-        lambda: generator_cls(
+        functools.partial(
+            generator_cls,
             features=features,
             num_examples=num_examples,
             num_sub_examples=num_sub_examples,
-            max_value=max_value),
+            max_value=max_value,
+        ),
         # pylint: enable=g-long-lambda]
         output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
@@ -231,6 +321,59 @@ def mock_data(
       ds = ds.map(lambda ex, id: {'tfds_id': id, **ex})
 
     return ds
+
+  def mock_as_data_source(self, split, decoders=None, **kwargs):
+    """Mocks `builder.as_data_source`."""
+    del kwargs
+    actual_policy = _check_policy(self)
+    if split is None:
+      split = {s: s for s in self.info.splits}
+
+    generator_cls, features, _, _ = _get_fake_data_components(
+        decoders, self.info.features
+    )
+    generator = generator_cls(features, num_examples)
+
+    if actual_policy == MockPolicy.USE_CODE:
+      # Mock `SplitDict`, because splits are not known in advance.
+      split_dict = mock.MagicMock(spec=splits_lib.SplitDict)
+    else:
+      # Use the real `SplitDict`.
+      split_dict = splits_lib.SplitDict
+    with mock.patch.object(
+        splits_lib,
+        'SplitDict',
+        new=split_dict,
+    ), mock.patch(
+        'array_record.python.array_record_data_source.ArrayRecordDataSource',
+        mock_array_record_data_source,
+    ), mock.patch(
+        'tensorflow_datasets.core.dataset_info.DatasetInfo.file_format',
+        new_callable=mock.PropertyMock,
+        # Force ARRAY_RECORD as the default file_format.
+        return_value=file_adapters.FileFormat.ARRAY_RECORD,
+    ):
+      self.info.features.deserialize_example_np = _deserialize_example_np
+      mock_array_record_data_source.return_value.__len__.return_value = (
+          num_examples
+      )
+      mock_array_record_data_source.return_value._generator = (  # pylint:disable=protected-access
+          generator
+      )
+      mock_array_record_data_source.return_value.__getitem__ = (
+          functools.partial(_getitem, generator=generator)
+      )
+      mock_array_record_data_source.return_value.__getitems__ = (
+          functools.partial(_getitems, generator=generator)
+      )
+
+      def build_single_data_source(split):
+        single_data_source = array_record.ArrayRecordDataSource(
+            dataset_info=self.info, split=split, decoders=decoders
+        )
+        return single_data_source
+
+      return tree_utils.map_structure(build_single_data_source, split)
 
   if not as_dataset_fn:
     as_dataset_fn = mock_as_dataset
@@ -252,10 +395,12 @@ def mock_data(
     # `DatasetBuilder.__init__` is mocked above to inject the wrong data_dir.
     # So we restore the original `DatasetBuilder.__init__` inside
     # `builder_from_files` calls.
-    with mock.patch(f'{core}.dataset_builder.DatasetBuilder.__init__',
-                    original_init_fn):
+    with mock.patch(
+        f'{core}.dataset_builder.DatasetBuilder.__init__', original_init_fn
+    ):
       return original_builder_from_files(
-          *args, data_dir=mock_data_dir, **kwargs)
+          *args, data_dir=mock_data_dir, **kwargs
+      )
 
   core = 'tensorflow_datasets.core'
   with contextlib.ExitStack() as stack:
@@ -281,6 +426,10 @@ def mock_data(
             mock_as_dataset_base,
         ),
         (
+            f'{core}.dataset_builder.DatasetBuilder.as_data_source',
+            mock_as_data_source,
+        ),
+        (
             f'{core}.dataset_builder.FileReaderBuilder._as_dataset',
             as_dataset_fn,
         ),
@@ -292,34 +441,38 @@ def mock_data(
 class RandomFakeGenerator(object):
   """Generator of fake examples randomly and deterministically generated."""
 
-  def __init__(self,
-               features,
-               num_examples: int,
-               num_sub_examples: int = 1,
-               max_value: Optional[int] = None,
-               seed: int = 0):
-    self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
-    self._py_rng = random.Random(seed)
+  def __init__(
+      self,
+      features,
+      num_examples: int,
+      num_sub_examples: int = 1,
+      max_value: Optional[int] = None,
+      constant_dynamic_shape: bool = False,
+      seed: int = 0,
+  ):
+    self._seed = seed
     self._features = features
     self._num_examples = num_examples
     self._num_sub_examples = num_sub_examples
     self._max_value = max_value
+    self._constant_dynamic_shape = constant_dynamic_shape
 
-  def _generate_random_string_array(self, shape):
+  def _generate_random_string_array(self, shape, rng):
     """Generates an array of random strings."""
 
     def rand_str():
       return ''.join(
-          self._rgn.choice(
-              list(' abcdefghij'), size=(self._py_rng.randint(10, 20))))
+          rng.choice(list(' abcdefghij'), size=(rng.integers(low=10, high=20)))
+      )
 
     if not shape:
       return rand_str()
 
-    return np.array([rand_str() for _ in range(np.prod(shape, dtype=np.int32))
-                    ]).reshape(shape)
+    return np.array(
+        [rand_str() for _ in range(np.prod(shape, dtype=np.int32))]
+    ).reshape(shape)
 
-  def _generate_random_obj(self, feature, tensor_info):
+  def _generate_random_obj(self, feature, tensor_info, rng):
     """Generates a random tensor for a single feature."""
     # TODO(tfds): Could improve the fake generatiion:
     # * Use the feature statistics (min, max)
@@ -333,13 +486,18 @@ class RandomFakeGenerator(object):
           feature.feature,
           num_examples=self._num_sub_examples,
           num_sub_examples=1,
-          max_value=self._max_value)
+          max_value=self._max_value,
+      )
       # Returns the list of examples in the nested dataset.
       return list(generator)
 
-    shape = [  # Fill dynamic shape with random values
-        self._rgn.randint(5, 50) if s is None else s for s in tensor_info.shape
-    ]
+    if self._constant_dynamic_shape:
+      shape = [10 if s is None else s for s in tensor_info.shape]
+    else:
+      shape = [  # Fill dynamic shape with random values
+          rng.integers(low=5, high=50) if s is None else s
+          for s in tensor_info.shape
+      ]
     if isinstance(feature, features_lib.ClassLabel):
       max_value = feature.num_classes
     elif isinstance(feature, features_lib.Text) and feature.vocab_size:
@@ -350,33 +508,39 @@ class RandomFakeGenerator(object):
       max_value = 255
 
     # We cast the data to make sure `encode_example` don't raise errors
-    dtype = tensor_info.dtype
+    dtype = tensor_info.np_dtype
     # Generate some random values, depending on the dtype
-    if dtype.is_integer:
-      return self._rgn.randint(0, max_value, shape).astype(dtype.as_numpy_dtype)
-    elif dtype.is_floating:
-      return self._rgn.random_sample(shape).astype(dtype.as_numpy_dtype)
-    elif dtype.is_bool:
-      return (self._rgn.random_sample(shape) < .5).astype(dtype.as_numpy_dtype)
-    elif dtype == tf.string:
-      return self._generate_random_string_array(shape)
+    if dtype_utils.is_integer(dtype):
+      return rng.integers(0, max_value, size=shape).astype(dtype)
+    elif dtype_utils.is_floating(dtype):
+      return rng.random(size=shape).astype(dtype)
+    elif dtype_utils.is_bool(dtype):
+      return (rng.random(size=shape) < 0.5).astype(dtype)
+    elif dtype_utils.is_string(dtype):
+      return self._generate_random_string_array(shape, rng)
     raise ValueError('Fake generation not supported for {}'.format(dtype))
 
-  def _generate_example(self):
-    """Generate the next example."""
+  def _generate_example(self, rng):
+    """Generates the next example."""
     root_feature = self._features
     flat_features = root_feature._flatten(root_feature)  # pylint: disable=protected-access
     flat_tensor_info = root_feature._flatten(root_feature.get_tensor_info())  # pylint: disable=protected-access
     flat_objs = [
-        self._generate_random_obj(feature, tensor_info)
+        self._generate_random_obj(feature, tensor_info, rng)
         for feature, tensor_info in zip(flat_features, flat_tensor_info)
     ]
     return root_feature._nest(flat_objs)  # pylint: disable=protected-access
 
   def __iter__(self):
-    """Yields all fake examples."""
+    """Yields all fake examples deterministically."""
+    rng = np.random.default_rng(self._seed)
     for _ in range(self._num_examples):
-      yield self._generate_example()
+      yield self._generate_example(rng)
+
+  def __getitem__(self, index: int):
+    """Returns a single fake example deterministically."""
+    rng = np.random.default_rng(self._seed + index)
+    return self._generate_example(rng)
 
 
 class EncodedRandomFakeGenerator(RandomFakeGenerator):
@@ -384,5 +548,22 @@ class EncodedRandomFakeGenerator(RandomFakeGenerator):
 
   def __iter__(self):
     """Yields all fake examples."""
-    for ex in super(EncodedRandomFakeGenerator, self).__iter__():
+    for ex in super().__iter__():
       yield self._features.encode_example(ex)
+
+  def __getitem__(self, index: int):
+    decoded_example = super().__getitem__(index)
+    return self._features.encode_example(decoded_example)
+
+
+class SerializedRandomFakeGenerator(RandomFakeGenerator):
+  """Generator of fake serialized examples."""
+
+  def __iter__(self):
+    """Yields all fake examples."""
+    for ex in super().__iter__():
+      yield self._features.serialize_example(ex)
+
+  def __getitem__(self, index: int):
+    example = super().__getitem__(index)
+    return self._features.serialize_example(example)

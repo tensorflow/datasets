@@ -1,0 +1,6 @@
+content.data-type.text
+content.language.en
+content.monolingual
+ml.task.language-modelling
+ml.task.table-to-text-generation
+ml.task.text-generation

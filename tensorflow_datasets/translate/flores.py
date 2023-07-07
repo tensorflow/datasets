@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import collections
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -40,8 +40,9 @@ _DATA_URL = "https://github.com/facebookresearch/flores/raw/master/data/wikipedi
 # Tuple that describes a single pair of files with matching translations.
 # language_to_file is the map from language (2 letter string: example 'en')
 # to the file path in the extracted directory.
-TranslateData = collections.namedtuple("TranslateData",
-                                       ["url", "language_to_file"])
+TranslateData = collections.namedtuple(
+    "TranslateData", ["url", "language_to_file"]
+)
 
 
 class FloresConfig(tfds.core.BuilderConfig):
@@ -59,20 +60,26 @@ class FloresConfig(tfds.core.BuilderConfig):
     name = f"{language_pair[0]}{language_pair[1]}"
 
     description = (
-        f"Translation dataset from {language_pair[0]} to {language_pair[1]}.")
+        f"Translation dataset from {language_pair[0]} to {language_pair[1]}."
+    )
     super(FloresConfig, self).__init__(
         name=name,
         description=description,
         version=tfds.core.Version("1.2.0"),
-        **kwargs)
+        **kwargs,
+    )
 
     # Validate language pair.
     assert "en" in language_pair, (
-        "Config language pair must contain `en`, got: %s", language_pair)
+        "Config language pair must contain `en`, got: %s",
+        language_pair,
+    )
     source, target = language_pair
     non_en = source if target == "en" else target
-    assert non_en in ["ne",
-                      "si"], ("Invalid non-en language in pair: %s", non_en)
+    assert non_en in ["ne", "si"], (
+        "Invalid non-en language in pair: %s",
+        non_en,
+    )
 
     self.language_pair = language_pair
 
@@ -81,8 +88,12 @@ class Flores(tfds.core.GeneratorBasedBuilder):
   """FLoRes machine translation dataset."""
 
   BUILDER_CONFIGS = [
-      FloresConfig(language_pair=("ne", "en"),),
-      FloresConfig(language_pair=("si", "en"),),
+      FloresConfig(
+          language_pair=("ne", "en"),
+      ),
+      FloresConfig(
+          language_pair=("si", "en"),
+      ),
   ]
 
   def _info(self):
@@ -91,7 +102,8 @@ class Flores(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair),
+            languages=self.builder_config.language_pair
+        ),
         supervised_keys=(source, target),
         homepage="https://github.com/facebookresearch/flores/",
         citation=_CITATION,
@@ -104,36 +116,44 @@ class Flores(tfds.core.GeneratorBasedBuilder):
     non_en = source if target == "en" else target
     path_tmpl = (
         "{dl_dir}/wikipedia_en_ne_si_test_sets/wikipedia.{split}.{non_en}-en."
-        "{lang}")
+        "{lang}"
+    )
 
     files = {}
     for split in ("dev", "devtest"):
       files[split] = {
-          "source_file":
-              path_tmpl.format(
-                  dl_dir=dl_dir, split=split, non_en=non_en, lang=source),
-          "target_file":
-              path_tmpl.format(
-                  dl_dir=dl_dir, split=split, non_en=non_en, lang=target),
+          "source_file": path_tmpl.format(
+              dl_dir=dl_dir, split=split, non_en=non_en, lang=source
+          ),
+          "target_file": path_tmpl.format(
+              dl_dir=dl_dir, split=split, non_en=non_en, lang=target
+          ),
       }
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION, gen_kwargs=files["dev"]),
+            name=tfds.Split.VALIDATION, gen_kwargs=files["dev"]
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs=files["devtest"]),
+            name=tfds.Split.TEST, gen_kwargs=files["devtest"]
+        ),
     ]
 
   def _generate_examples(self, source_file, target_file):
     """This function returns the examples in the raw (text) form."""
-    with tf.io.gfile.GFile(source_file) as f:
+    with epath.Path(source_file).open() as f:
       source_sentences = f.read().split("\n")
-    with tf.io.gfile.GFile(target_file) as f:
+    with epath.Path(target_file).open() as f:
       target_sentences = f.read().split("\n")
 
     assert len(target_sentences) == len(
-        source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (len(
-            source_sentences), len(target_sentences), source_file, target_file)
+        source_sentences
+    ), "Sizes do not match: %d vs %d for %s vs %s." % (
+        len(source_sentences),
+        len(target_sentences),
+        source_file,
+        target_file,
+    )
 
     source, target = self.builder_config.language_pair
     for idx, (l1, l2) in enumerate(zip(source_sentences, target_sentences)):

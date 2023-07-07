@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,13 +26,15 @@ import tempfile
 from absl import app
 from absl import flags
 import md5  # pytype: disable=import-error
-
 import numpy as np
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
+)
 FLAGS = flags.FLAGS
 
 MIN_HEIGHT_WIDTH = 10
@@ -40,8 +42,9 @@ MAX_HEIGHT_WIDTH = 15
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "sun397")
+  return os.path.join(
+      FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "sun397"
+  )
 
 
 def _get_random_picture(height=None, width=None, channels=None):
@@ -96,8 +99,10 @@ def _generate_data():
     # Regardless of the actual format, always write with .jpg extension.
     fobj = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
     _encode_image(image, image_format, fobj=fobj)
-    filename = "SUN397/%s/sun_%s.jpg" % (label, md5.new(
-        fobj.read()).hexdigest())
+    filename = "SUN397/%s/sun_%s.jpg" % (
+        label,
+        md5.new(fobj.read()).hexdigest(),
+    )
     fobj.seek(0)
     fobj.close()
     tar.add(fobj.name, arcname=filename)

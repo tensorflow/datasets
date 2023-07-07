@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The TensorFlow Datasets Authors.
+# Copyright 2023 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,19 @@ from unittest import mock
 import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import visibility
+def test_load_hf_dataset():
+  builder = object()
+  with mock.patch(
+      'tensorflow_datasets.core.dataset_builders.huggingface_dataset_builder.builder',
+      return_value=builder,
+  ):
+    assert load.builder('huggingface:x/y') is builder
 
 
 @visibility.set_availables_tmp([
@@ -41,6 +49,9 @@ def test_community_public_load():
   ), mock.patch(
       'tensorflow_datasets.core.community.community_register.builder_cls',
       return_value=testing.DummyDataset,
+  ), mock.patch(
+      'tensorflow_datasets.core.registered.list_imported_builders',
+      return_value=[],
   ):
     assert load.list_builders() == ['ns:ds']
 
@@ -52,7 +63,8 @@ def test_community_public_load():
 @pytest.fixture(scope='session')
 def dummy_dc_loader() -> load.DatasetCollectionLoader:
   return load.DatasetCollectionLoader(
-      collection=testing.DummyDatasetCollection())
+      collection=testing.DummyDatasetCollection()
+  )
 
 
 def test_dc_loader_name(dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
@@ -76,7 +88,8 @@ def test_load_dataset_split(dummy_dc_loader: load.DatasetCollectionLoader):  # p
     mock_load.return_value = [examples, examples]
     loaded_dataset = dummy_dc_loader.load_dataset('c', split='train')
     mock_load.assert_called_once_with(
-        name='c/e:3.5.7', with_info=False, split=['train'])
+        name='c/e:3.5.7', with_info=False, split=['train']
+    )
     assert loaded_dataset == expected
 
 
@@ -87,12 +100,14 @@ def test_load_dataset_splits(dummy_dc_loader: load.DatasetCollectionLoader):  # 
     mock_load.return_value = [examples, examples]
     loaded_dataset = dummy_dc_loader.load_dataset('c', split=['train', 'test'])
     mock_load.assert_called_once_with(
-        name='c/e:3.5.7', with_info=False, split=['train', 'test'])
+        name='c/e:3.5.7', with_info=False, split=['train', 'test']
+    )
     assert loaded_dataset == expected
 
 
 def test_load_dataset_runtime_error(
-    dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+    dummy_dc_loader: load.DatasetCollectionLoader,
+):  # pylint: disable=redefined-outer-name
   with pytest.raises(RuntimeError, match='Unsupported return type.+'):
     with mock.patch.object(load, 'load', autospec=True) as mock_load:
       examples = tf.data.Dataset.from_tensor_slices([1, 2, 3])
@@ -102,22 +117,58 @@ def test_load_dataset_runtime_error(
 
 def test_load_dataset_key_error(dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
   with pytest.raises(
-      KeyError, match='Dataset d is not included in this collection.+'):
+      KeyError, match='Dataset d is not included in this collection.+'
+  ):
     dummy_dc_loader.load_dataset('d')
 
 
 def test_load_dataset_with_kwargs(
-    dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+    dummy_dc_loader: load.DatasetCollectionLoader,
+):  # pylint: disable=redefined-outer-name
   with mock.patch.object(load, 'load', autospec=True) as mock_load:
     examples = tf.data.Dataset.from_tensor_slices([1, 2, 3])
     expected = {'train': examples, 'test': examples}
     mock_load.return_value = expected
     loaded_dataset = dummy_dc_loader.load_dataset(
-        'c', loader_kwargs={
-            'with_info': True,
-            'batch_size': 3
-        })
+        'c', loader_kwargs={'with_info': True, 'batch_size': 3}
+    )
 
     mock_load.assert_called_once_with(
-        name='c/e:3.5.7', with_info=False, batch_size=3)
+        name='c/e:3.5.7', with_info=False, batch_size=3
+    )
     assert loaded_dataset == expected
+
+
+@pytest.mark.parametrize(
+    'builder_kwargs',
+    [
+        None,
+        {'file_format': 'array_record'},
+        {'file_format': file_adapters.FileFormat.ARRAY_RECORD},
+    ],
+)
+def test_data_source_defaults_to_array_record_format(
+    builder_kwargs,
+):
+  with mock.patch.object(load, 'builder', autospec=True) as mock_builder:
+    load.data_source(
+        'mydataset', builder_kwargs=builder_kwargs,
+    )
+    mock_builder.assert_called_with(
+        'mydataset',
+        data_dir=None,
+        try_gcs=False,
+        file_format=file_adapters.FileFormat.ARRAY_RECORD,
+    )
+@pytest.mark.parametrize(
+    'file_format',
+    ['tfrecord', file_adapters.FileFormat.TFRECORD],
+)
+def test_data_source_raises_error_for_other_file_formats(file_format):
+  with pytest.raises(
+      NotImplementedError, match='No random access data source'
+  ):
+    with mock.patch.object(load, 'builder', autospec=True):
+      load.data_source(
+          'mydataset', builder_kwargs={'file_format': file_format}
+      )

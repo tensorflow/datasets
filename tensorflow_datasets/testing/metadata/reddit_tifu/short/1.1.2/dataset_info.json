@@ -1,0 +1,44 @@
+{
+  "citation": "@misc{kim2018abstractive,\n    title={Abstractive Summarization of Reddit Posts with Multi-level Memory Networks},\n    author={Byeongchang Kim and Hyunwoo Kim and Gunhee Kim},\n    year={2018},\n    eprint={1811.00783},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "configDescription": "Using title as summary.",
+  "configName": "short",
+  "description": "Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu. As defined in\nthe publication, style \"short\" uses title as summary and \"long\" uses tldr as\nsummary.\n\nFeatures includes:\n\n  - document: post text without tldr.\n  - tldr: tldr line.\n  - title: trimmed title without tldr.\n  - ups: upvotes.\n  - score: score.\n  - num_comments: number of comments.\n  - upvote_ratio: upvote ratio.",
+  "downloadSize": "670607856",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/ctr4si/MMN"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.reddit_tifu.reddit_tifu_dataset_builder",
+  "name": "reddit_tifu",
+  "releaseNotes": {
+    "1.1.0": "Remove empty document and summary strings.",
+    "1.1.1": "Add train, dev and test (80/10/10) splits which are used in PEGASUS (https://arxiv.org/abs/1912.08777) in a separate config. These were created randomly using the tfds split function and are being released to ensure that results on Reddit Tifu Long are reproducible and comparable.Also add `id` to the datapoints.",
+    "1.1.2": "Corrected splits uploaded."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "148332714",
+      "shardLengths": [
+        "39870",
+        "39870"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "documents"
+        },
+        {
+          "featureKey": "title"
+        }
+      ]
+    }
+  },
+  "version": "1.1.2"
+}

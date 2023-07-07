@@ -17,6 +17,12 @@
 A dataset of 8.5K high quality linguistically diverse grade school math word
 problems.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gsm8k">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/openai/grade-school-math](https://github.com/openai/grade-school-math)
 
@@ -48,22 +54,22 @@ Split              | Examples
 
 ```python
 FeaturesDict({
-    'annotation': Text(shape=(), dtype=tf.string),
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-    'short_answer': Text(shape=(), dtype=tf.string),
+    'annotation': Text(shape=(), dtype=string),
+    'answer': Text(shape=(), dtype=string),
+    'question': Text(shape=(), dtype=string),
+    'short_answer': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature      | Class        | Shape | Dtype     | Description
-:----------- | :----------- | :---- | :-------- | :----------
-             | FeaturesDict |       |           |
-annotation   | Text         |       | tf.string |
-answer       | Text         |       | tf.string |
-question     | Text         |       | tf.string |
-short_answer | Text         |       | tf.string |
+Feature      | Class        | Shape | Dtype  | Description
+:----------- | :----------- | :---- | :----- | :----------
+             | FeaturesDict |       |        |
+annotation   | Text         |       | string |
+answer       | Text         |       | string |
+question     | Text         |       | string |
+short_answer | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

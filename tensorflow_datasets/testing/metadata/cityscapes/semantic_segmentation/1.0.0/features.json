@@ -1,32 +1,39 @@
 {
-    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
-    "content": {
-        "image_id": {
-            "type": "tensorflow_datasets.core.features.text_feature.Text",
-            "content": {}
-        },
-        "image_left": {
-            "type": "tensorflow_datasets.core.features.image_feature.Image",
-            "content": {
-                "shape": [
-                    1024,
-                    2048,
-                    3
-                ],
-                "dtype": "uint8",
-                "encoding_format": "png"
-            }
-        },
-        "segmentation_label": {
-            "type": "tensorflow_datasets.core.features.image_feature.Image",
-            "content": {
-                "shape": [
-                    1024,
-                    2048,
-                    1
-                ],
-                "dtype": "uint8",
-                "encoding_format": "png"
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "image_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "image_left": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "1024",
+                            "2048",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png"
+                }
+            },
+            "segmentation_label": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "1024",
+                            "2048",
+                            "1"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png",
+                    "useColormap": true
+                }
             }
         }
     }

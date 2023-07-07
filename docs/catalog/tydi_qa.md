@@ -43,6 +43,12 @@ English data plus existing machine translation systems.
 Typically, you should use EITHER the train or translate-train split, but not
 both.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/tydi-qa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Config description**: Gold passage (GoldP) task
     (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline).
 
@@ -95,28 +101,28 @@ Split                  | Examples
 ```python
 FeaturesDict({
     'answers': Sequence({
-        'answer_start': tf.int32,
-        'text': Text(shape=(), dtype=tf.string),
+        'answer_start': int32,
+        'text': Text(shape=(), dtype=string),
     }),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': tf.string,
-    'question': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'context': Text(shape=(), dtype=string),
+    'id': string,
+    'question': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature              | Class        | Shape | Dtype     | Description
-:------------------- | :----------- | :---- | :-------- | :----------
-                     | FeaturesDict |       |           |
-answers              | Sequence     |       |           |
-answers/answer_start | Tensor       |       | tf.int32  |
-answers/text         | Text         |       | tf.string |
-context              | Text         |       | tf.string |
-id                   | Tensor       |       | tf.string |
-question             | Text         |       | tf.string |
-title                | Text         |       | tf.string |
+Feature              | Class        | Shape | Dtype  | Description
+:------------------- | :----------- | :---- | :----- | :----------
+                     | FeaturesDict |       |        |
+answers              | Sequence     |       |        |
+answers/answer_start | Tensor       |       | int32  |
+answers/text         | Text         |       | string |
+context              | Text         |       | string |
+id                   | Tensor       |       | string |
+question             | Text         |       | string |
+title                | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

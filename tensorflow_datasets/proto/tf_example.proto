@@ -1,0 +1,26 @@
+// DO NOT EDIT
+// This file was copied from
+// https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/core/example/example.proto
+
+// Use according to the original license.
+
+syntax = "proto3";
+
+package tensorflow_copy;
+
+import "tensorflow_datasets/proto/tf_feature.proto";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "ExampleProtos";
+option java_multiple_files = true;
+option java_package = "org.tensorflow.example";
+option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/core/example/example_protos_go_proto";
+
+message Example {
+  Features features = 1;
+}
+
+message SequenceExample {
+  Features context = 1;
+  FeatureLists feature_lists = 2;
+}
