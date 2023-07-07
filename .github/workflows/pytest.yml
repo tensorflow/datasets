@@ -33,14 +33,27 @@ env:
   PYTEST_NUM_SHARDS: 4  # Controls tests sharding enabled by `pytest-shard`
 
 jobs:
+  activate-tests:
+    name: Check if tests should be run
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check
+        id: check
+        # For merged PR, activate testing only on the master branch, based on:
+        # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
+        run: |
+          echo "status=${{ github.ref == 'refs/heads/master' || (
+            github.event.action != 'closed'
+            && github.event.pull_request.merged == false
+          ) }}" >> $GITHUB_OUTPUT
+
+    outputs:
+      status: ${{ steps.check.outputs.status }}
+
   shards-job:
-    # For merged PR, activate testing only on the master branch, based on:
-    # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
-    if: |
-      github.ref == 'refs/heads/master'
-      || (
-        github.event.action != 'closed'
-        && github.event.pull_request.merged == false)
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
 
     name: Generate shards
     runs-on: ubuntu-latest
@@ -57,13 +70,6 @@ jobs:
       shard-ids: ${{ steps.create-vars.outputs.shard-ids }}
 
   pytest-job:
-    # For merged PR, activate testing only on the master branch, based on:
-    # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
-    if: |
-      github.ref == 'refs/heads/master'
-      || (
-        github.event.action != 'closed'
-        && github.event.pull_request.merged == false)
     needs: shards-job
 
     name: '[${{ matrix.tf-version }}][Python ${{ matrix.python-version }}][${{ matrix.shard-id }}/${{ matrix.num-shards }}] Core TFDS tests'
@@ -123,12 +129,8 @@ jobs:
           pytest -vv -o faulthandler_timeout=10 tensorflow_datasets/translate/wmt19_test.py
 
   huggingface-pytest-job:
-    # For merged PR, activate testing only on the master branch.
-    if: |
-      github.ref == 'refs/heads/master'
-      || (
-        github.event.action != 'closed'
-        && github.event.pull_request.merged == false)
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
 
     # HuggingFace tests need to be run separately because they're disabled without installed
     # `datasets` library which is not included in ['tests-all'] extras for Python >=3.10
@@ -148,12 +150,8 @@ jobs:
       run: pytest -vv -n auto tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py
 
   githubapi-pytest-job:
-    # For merged PR, activate testing only on the master branch.
-    if: |
-      github.ref == 'refs/heads/master'
-      || (
-        github.event.action != 'closed'
-        && github.event.pull_request.merged == false)
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
 
     name: 'Github API tests'
     runs-on: ubuntu-latest
@@ -171,12 +169,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   notebook-test-job:
-    # For merged PR, activate testing only on the master branch.
-    if: |
-      github.ref == 'refs/heads/master'
-      || (
-        github.event.action != 'closed'
-        && github.event.pull_request.merged == false)
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
 
     name: 'Notebook tests'
     runs-on: ubuntu-latest
