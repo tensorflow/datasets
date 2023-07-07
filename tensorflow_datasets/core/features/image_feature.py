@@ -336,8 +336,9 @@ class Image(feature_lib.FeatureConnector):
     """Reconstruct the image with OpenCV from bytes."""
     assert cv2, 'OpenCV is not installed. OpenCV is required for this method.'
     example = np.frombuffer(example, dtype=np.uint8)
+    example = cv2.imdecode(example, cv2.IMREAD_UNCHANGED)
     dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
-    example = cv2.imdecode(example, cv2.IMREAD_UNCHANGED).astype(dtype)
+    example = example.astype(dtype, copy=False)
     example = _reorder_opencv_channels(example)
     example = _reshape_grayscale_image(example, num_channels)
     # Bitcast 4 channels uint8 -> 1 channel float32.
