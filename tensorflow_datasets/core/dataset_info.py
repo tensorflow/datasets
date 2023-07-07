@@ -718,7 +718,7 @@ class DatasetInfo(object):
             dataset_info_pb2.DataSourceAccess(
                 access_timestamp_ms=access_timestamp_ms,
                 file_system=dataset_info_pb2.FileSystem(path=os.fspath(file)),
-                url=url,
+                url=dataset_info_pb2.Url(url=url),
             )
         )
 
@@ -768,7 +768,7 @@ class DatasetInfo(object):
                 data_dir=dataset_reference.data_dir,
                 ds_namespace=dataset_reference.namespace,
             ),
-            url=url,
+            url=dataset_info_pb2.Url(url=url),
         )
     )
 
