@@ -12,6 +12,7 @@ c4/webtextlike/2.2.0
 c4/webtextlike/2.2.1
 c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
+cifar10_h/1.0.0
 covid19sum/1.0.0
 glue/ax/1.0.1
 glue/cola/1.0.1
