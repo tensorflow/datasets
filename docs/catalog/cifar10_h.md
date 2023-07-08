@@ -34,18 +34,20 @@ original dataset.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `172.92 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `144.85 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 50,000
 
 *   **Feature structure**:
 
