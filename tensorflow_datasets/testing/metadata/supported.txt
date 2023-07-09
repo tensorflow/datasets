@@ -431,6 +431,7 @@ cifar10_corrupted/zoom_blur_2/1.0.0
 cifar10_corrupted/zoom_blur_3/1.0.0
 cifar10_corrupted/zoom_blur_4/1.0.0
 cifar10_corrupted/zoom_blur_5/1.0.0
+cifar10_h/1.0.0
 cifar10_n/1.0.4
 citrus_leaves/0.1.2
 cityscapes/semantic_segmentation/1.0.0
