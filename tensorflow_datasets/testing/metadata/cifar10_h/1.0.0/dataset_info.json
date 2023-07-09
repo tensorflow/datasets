@@ -1,0 +1,35 @@
+{
+  "citation": "@inproceedings{wei2022learning,\n  title={Human uncertainty makes classification more robust},\n  author={Joshua C. Peterson and Ruairidh M. Battleday and Thomas L. Griffiths\n  and Olga Russakovsky},\n  booktitle={IEEE International Conference on Computer Vision and Pattern\n  Recognition (CVPR)},\n  year={2019}\n}",
+  "description": "A re-labeled version of CIFAR-10's test set with soft-labels\ncoming from real human annotators. For every pair (image, label) in the\noriginal CIFAR-10 test set, it provides several additional labels given by real\nhuman annotators as well as the average soft-label. The training set is\nidentical to the one of the original dataset.",
+  "downloadSize": "181324731",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/jcpeterson/cifar-10h"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.cifar10_h.cifar10_h",
+  "name": "cifar10_h",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "122900776",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "28981347",
+      "shardLengths": [
+        "10000"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}
