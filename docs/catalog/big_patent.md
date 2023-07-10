@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="big_patent" />
-  <meta itemprop="description" content="BIGPATENT, consisting of 1.3 million records of U.S. patent documents along with&#10;human written abstractive summaries. Each US patent application is filed under a&#10;Cooperative Patent Classification (CPC) code. There are nine such classification&#10;categories: A (Human Necessities), B (Performing Operations; Transporting), C&#10;(Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions), F&#10;(Mechanical Engineering; Lightning; Heating; Weapons; Blasting), G (Physics), H&#10;(Electricity), and Y (General tagging of new or cross-sectional technology)&#10;&#10;There are two features: - description: detailed description of patent. -&#10;summary: Patent abastract.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;big_patent&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="BIGPATENT, consisting of 1.3 million records of U.S. patent documents along with&#10;human written abstractive summaries. Each US patent application is filed under a&#10;Cooperative Patent Classification (CPC) code. There are nine such classification&#10;categories:&#10;&#10; - A (Human Necessities),&#10; - B (Performing Operations; Transporting),&#10; - C (Chemistry; Metallurgy),&#10; - D (Textiles; Paper),&#10; - E (Fixed Constructions),&#10; - F (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),&#10; - G (Physics),&#10; - H (Electricity), and&#10; - Y (General tagging of new or cross-sectional technology)&#10;&#10;There are two features:&#10;&#10; - description: detailed description of patent.&#10; - summary: Patent abstract.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;big_patent&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/big_patent" />
   <meta itemprop="sameAs" content="https://evasharma.github.io/bigpatent/" />
   <meta itemprop="citation" content="@misc{sharma2019bigpatent,&#10;    title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},&#10;    author={Eva Sharma and Chen Li and Lu Wang},&#10;    year={2019},&#10;    eprint={1906.03741},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
@@ -17,13 +17,22 @@
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents along with
 human written abstractive summaries. Each US patent application is filed under a
 Cooperative Patent Classification (CPC) code. There are nine such classification
-categories: A (Human Necessities), B (Performing Operations; Transporting), C
-(Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions), F
-(Mechanical Engineering; Lightning; Heating; Weapons; Blasting), G (Physics), H
-(Electricity), and Y (General tagging of new or cross-sectional technology)
+categories:
 
-There are two features: - description: detailed description of patent. -
-summary: Patent abastract.
+-   A (Human Necessities),
+-   B (Performing Operations; Transporting),
+-   C (Chemistry; Metallurgy),
+-   D (Textiles; Paper),
+-   E (Fixed Constructions),
+-   F (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),
+-   G (Physics),
+-   H (Electricity), and
+-   Y (General tagging of new or cross-sectional technology)
+
+There are two features:
+
+-   description: detailed description of patent.
+-   summary: Patent abstract.
 
 *   **Additional Documentation**:
     <a class="button button-with-icon" href="https://paperswithcode.com/dataset/bigpatent">
