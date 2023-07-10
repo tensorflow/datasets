@@ -121,8 +121,6 @@ class ReadConfig:
   def __post_init__(self):
     self.options = self.options or tf.data.Options()
     if self.num_parallel_calls_for_decode is None:
-      self.num_parallel_calls_for_decode = tf.data.experimental.AUTOTUNE
+      self.num_parallel_calls_for_decode = tf.data.AUTOTUNE
     if self.num_parallel_calls_for_interleave_files is None:
-      self.num_parallel_calls_for_interleave_files = (
-          tf.data.experimental.AUTOTUNE
-      )
+      self.num_parallel_calls_for_interleave_files = tf.data.AUTOTUNE
