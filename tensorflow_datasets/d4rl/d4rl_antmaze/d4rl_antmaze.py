@@ -24,9 +24,10 @@ import tensorflow_datasets.public_api as tfds
 class D4rlAntmaze(dataset_builder.D4RLDatasetBuilder):
   """DatasetBuilder for ant dataset."""
 
-  VERSION = tfds.core.Version('1.1.0')
+  VERSION = tfds.core.Version('1.1.1')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.1.1': 'Added v2 datasets.',
   }
 
   _TASK_REFERENCE = (
@@ -41,7 +42,9 @@ class D4rlAntmaze(dataset_builder.D4RLDatasetBuilder):
   GOAL = dataset_builder._GOAL
   # pylint: enable=protected-access
 
+  # pylint: disable=unexpected-keyword-arg,line-too-long
   BUILDER_CONFIGS = [
+      # v0
       dataset_builder.BuilderConfig(
           name='umaze-v0',
           dataset_dir='ant_maze_new',
@@ -98,7 +101,57 @@ class D4rlAntmaze(dataset_builder.D4RLDatasetBuilder):
           step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
           description=_TASK_REFERENCE,
       ),
+      # v2
+      dataset_builder.BuilderConfig(
+          name='umaze-v2',
+          dataset_dir='ant_maze_v2',
+          env='mujoco',
+          file_suffix='Ant_maze_u-maze_noisy_multistart_False_multigoal_False_sparse_fixed',
+          step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
+          description=_TASK_REFERENCE,
+      ),
+      dataset_builder.BuilderConfig(
+          name='umaze-diverse-v2',
+          dataset_dir='ant_maze_v2',
+          env='mujoco',
+          file_suffix='Ant_maze_u-maze_noisy_multistart_True_multigoal_True_sparse_fixed',
+          step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
+          description=_TASK_REFERENCE,
+      ),
+      dataset_builder.BuilderConfig(
+          name='medium-play-v2',
+          dataset_dir='ant_maze_v2',
+          env='mujoco',
+          file_suffix='Ant_maze_big-maze_noisy_multistart_True_multigoal_False_sparse_fixed',
+          step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
+          description=_TASK_REFERENCE,
+      ),
+      dataset_builder.BuilderConfig(
+          name='medium-diverse-v2',
+          dataset_dir='ant_maze_v2',
+          env='mujoco',
+          file_suffix='Ant_maze_big-maze_noisy_multistart_True_multigoal_True_sparse_fixed',
+          step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
+          description=_TASK_REFERENCE,
+      ),
+      dataset_builder.BuilderConfig(
+          name='large-diverse-v2',
+          dataset_dir='ant_maze_v2',
+          env='mujoco',
+          file_suffix='Ant_maze_hardest-maze_noisy_multistart_True_multigoal_True_sparse_fixed',
+          step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
+          description=_TASK_REFERENCE,
+      ),
+      dataset_builder.BuilderConfig(
+          name='large-play-v2',
+          dataset_dir='ant_maze_v2',
+          env='mujoco',
+          file_suffix='Ant_maze_hardest-maze_noisy_multistart_True_multigoal_False_sparse_fixed',
+          step_metadata_keys=frozenset([QPOS, QVEL, GOAL]),
+          description=_TASK_REFERENCE,
+      ),
   ]
+  # pylint: enable=unexpected-keyword-arg,line-too-long
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(
