@@ -1,0 +1,33 @@
+{
+  "citation": "@misc{fu2020d4rl,\n    title={D4RL: Datasets for Deep Data-Driven Reinforcement Learning},\n    author={Justin Fu and Aviral Kumar and Ofir Nachum and George Tucker and Sergey Levine},\n    year={2020},\n    eprint={2004.07219},\n    archivePrefix={arXiv},\n    primaryClass={cs.LG}\n}",
+  "configDescription": "See more details about the task and its versions in https://github.com/rail-berkeley/d4rl/wiki/Tasks#antmaze",
+  "configName": "large-play-v2",
+  "description": "D4RL is an open-source benchmark for offline reinforcement learning. It provides\nstandardized environments and datasets for training and benchmarking algorithms.\n\nThe datasets follow the [RLDS format](https://github.com/google-research/rlds)\nto represent steps and episodes.",
+  "downloadSize": "230880653",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://sites.google.com/view/d4rl/home"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.d4rl.d4rl_antmaze.d4rl_antmaze",
+  "name": "d4rl_antmaze",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "1.1.1": "Added v2 datasets."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "290066457",
+      "shardLengths": [
+        "3379",
+        "3379",
+        "3380",
+        "3379"
+      ]
+    }
+  ],
+  "version": "1.1.1"
+}
