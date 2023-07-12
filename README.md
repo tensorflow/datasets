@@ -92,4 +92,4 @@ paper, in addition to any citation specific to the used datasets.
 *fairness, please see Google AI's [Responsible AI Practices](https://ai.google/education/responsible-ai-practices).*
 
 *`tensorflow/datasets` is Apache 2.0 licensed. See the
-[`LICENSE`](LICENSE) file.*
+[`LICENSE`](https://github.com/tensorflow/datasets/blob/master/LICENSE) file.*
