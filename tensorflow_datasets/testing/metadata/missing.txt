@@ -14,17 +14,8 @@ c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
 covid19sum/1.0.0
 d4rl_antmaze/large-diverse-v0/1.1.1
-d4rl_antmaze/large-diverse-v2/1.1.1
-d4rl_antmaze/large-play-v0/1.1.1
-d4rl_antmaze/large-play-v2/1.1.1
-d4rl_antmaze/medium-diverse-v0/1.1.1
-d4rl_antmaze/medium-diverse-v2/1.1.1
-d4rl_antmaze/medium-play-v0/1.1.1
 d4rl_antmaze/medium-play-v2/1.1.1
-d4rl_antmaze/umaze-diverse-v0/1.1.1
 d4rl_antmaze/umaze-diverse-v2/1.1.1
-d4rl_antmaze/umaze-v0/1.1.1
-d4rl_antmaze/umaze-v2/1.1.1
 glue/ax/1.0.1
 glue/cola/1.0.1
 glue/mnli/1.0.1
