@@ -44,15 +44,15 @@ runs:
       with:
         path: ${{ env.pythonLocation }}
         # Use all inputs in the cache key to avoid cache overrides by different installations.
-        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ env.today }}-${{ inputs.tf-version }}-${{ inputs.extras }}
+        key: ${{ runner.os }}-Python:${{ inputs.python-version }}-${{ hashFiles('setup.py') }}-${{ env.today }}-${{ inputs.extras }}
 
     # Install Python deps.
     # If Python cache is restored then we don't need to install dependencies again.
-    - if: ${{ steps.python-cache.outputs.cache-hit != 'true' && inputs.tf-version != 'skip' }}
-      run: pip install ${{ inputs.tf-version }}
-      shell: bash
     - if: ${{ steps.python-cache.outputs.cache-hit != 'true' }}
       run: pip install .[${{ inputs.extras }}]
+      shell: bash
+    - if: ${{ inputs.tf-version != 'skip' }}
+      run: pip install ${{ inputs.tf-version }}
       shell: bash
     # Get TFDS library from the repository instead of cache.
     - run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
