@@ -568,6 +568,7 @@ d4rl_adroit_relocate/v0-human/1.1.0
 d4rl_adroit_relocate/v1-cloned/1.1.0
 d4rl_adroit_relocate/v1-expert/1.1.0
 d4rl_adroit_relocate/v1-human/1.1.0
+d4rl_antmaze/large-diverse-v0/1.1.1
 d4rl_antmaze/large-diverse-v2/1.1.1
 d4rl_antmaze/large-play-v0/1.1.1
 d4rl_antmaze/large-play-v2/1.1.1
