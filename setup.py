@@ -29,6 +29,7 @@ import datetime
 import itertools
 import os
 import sys
+from typing import List
 
 import pkg_resources
 from setuptools import find_packages
@@ -206,12 +207,35 @@ all_dataset_dependencies = list(
     )
 )
 
-TESTS_ALL_DEPENDENCIES = TESTS_DEPENDENCIES + all_dataset_dependencies
-HUGGINGFACE_ALL_DEPENDENCIES = [
-    dep
-    for dep in TESTS_ALL_DEPENDENCIES
-    if not dep.startswith('apache-beam') and not dep.startswith('datasets')
-] + ['datasets']
+
+def _filter_deps(all_deps: List[str], ignore_deps: List[str]) -> List[str]:
+  """ "Returns a filtered list of dependencies.
+
+  Args:
+    all_deps: list of all dependencies (possibly with version).
+    ignore_deps: list of dependency names to be ignored.
+
+  Returns:
+    list of all not ignored dependencies.
+  """
+
+  def do_not_ignore(dep) -> bool:
+    for ignore_dep in ignore_deps:
+      if dep.startswith(ignore_dep):
+        return False
+    return True
+
+  return list(filter(do_not_ignore, all_deps))
+
+
+TESTS_ALL_DEPENDENCIES = _filter_deps(
+    TESTS_DEPENDENCIES + all_dataset_dependencies,
+    ['gcld3'],  # requires protobuf compiler installation
+)
+HUGGINGFACE_ALL_DEPENDENCIES = _filter_deps(
+    TESTS_ALL_DEPENDENCIES,
+    ['apache-beam', 'datasets'],
+) + ['datasets']
 
 EXTRAS = {
     'matplotlib': ['matplotlib'],

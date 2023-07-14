@@ -103,6 +103,7 @@ jobs:
     # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
     # * github_api is run separately to not overuse API quota.
     # * wmt is run separately to avoid worker hanging.
+    # * c4_utils is run separately to install additional dependencies
     # * TODO(b/273289576): dataset_utils_test and sequence_feature_test fail until TensorFlow 2.12.0
     - name: Run core tests
       run: |
@@ -115,11 +116,36 @@ jobs:
           --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
           --ignore="tensorflow_datasets/translate/wmt19_test.py" \
           --ignore="tensorflow_datasets/core/dataset_utils_test.py" \
-          --ignore="tensorflow_datasets/core/features/sequence_feature_test.py"
+          --ignore="tensorflow_datasets/core/features/sequence_feature_test.py" \
+          --ignore="tensorflow_datasets/text/c4_utils_test.py" \
 
-    # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
-    - name: Run leftover tests
-      if: ${{ matrix.shard-id == 1 }}
+  separate-pytest-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    name: 'Excluded tests'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
+      with:
+        tf-version: tensorflow
+
+    - name: Run Github API tests
+      run: pytest -vv -n auto tensorflow_datasets/core/github_api/github_path_test.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Run C4 utils tests
+      run: |
+        sudo apt install -y --allow-downgrades libprotobuf-lite23=3.12.4-1ubuntu7 libprotobuf23=3.12.4-1ubuntu7 libprotoc23=3.12.4-1ubuntu7
+        sudo apt install -y libprotobuf-dev=3.12.4-1ubuntu7 protobuf-compiler=3.12.4-1ubuntu7
+        pip install gcld3
+        pytest -vv -n auto tensorflow_datasets/text/c4_utils_test.py
+
+    - name: Run WMT tests
       uses: nick-fields/retry@v2
       with:
         timeout_minutes: 1
@@ -148,25 +174,6 @@ jobs:
 
     - name: Run HuggingFace tests
       run: pytest -vv -n auto tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py
-
-  githubapi-pytest-job:
-    needs: activate-tests
-    if: ${{ needs.activate-tests.outputs.status }}
-
-    name: 'Github API tests'
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-
-    steps:
-    - uses: actions/checkout@v3
-    - uses: ./.github/actions/setup
-      with:
-        tf-version: tensorflow
-
-    - name: Run Github API tests
-      run: pytest --durations=100 -vv -n auto tensorflow_datasets/core/github_api/github_path_test.py
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   notebook-test-job:
     needs: activate-tests
