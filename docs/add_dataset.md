@@ -297,7 +297,8 @@ If the dataset comes with pre-defined splits (e.g. `MNIST` has `train` and
 `test` splits), keep those. Otherwise, only specify a single `all` split. Users
 can dynamically create their own subsplits with the
 [subsplit API](https://www.tensorflow.org/datasets/splits) (e.g.
-`split='train[80%:]'`).
+`split='train[80%:]'`). Note that any alphabetical string can be used as split
+name, apart from the aforementioned `all`.
 
 ```python
 def _split_generators(self, dl_manager):
