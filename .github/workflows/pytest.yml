@@ -72,8 +72,8 @@ jobs:
   pytest-job:
     needs: shards-job
 
-    name: '[${{ matrix.tf-version }}][Python ${{ matrix.python-version }}][${{ matrix.shard-id }}/${{ matrix.num-shards }}] Core TFDS tests'
-    runs-on: ubuntu-latest
+    name: '[${{ matrix.os-version }}][${{ matrix.tf-version }}][Python ${{ matrix.python-version }}][${{ matrix.shard-id }}/${{ matrix.num-shards }}] Core TFDS tests'
+    runs-on: ${{ matrix.os-version }}
     timeout-minutes: 30
     strategy:
       # Do not cancel in-progress jobs if any matrix job fails.
@@ -85,6 +85,7 @@ jobs:
         shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
         # TF suppported versions: https://www.tensorflow.org/install/pip#software_requirements
         python-version: ['3.8', '3.9', '3.10']
+        os-version: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v3
