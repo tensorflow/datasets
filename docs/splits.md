@@ -2,7 +2,9 @@
 
 All TFDS datasets expose various data splits (e.g. `'train'`, `'test'`) which
 can be explored in the
-[catalog](https://www.tensorflow.org/datasets/catalog/overview).
+[catalog](https://www.tensorflow.org/datasets/catalog/overview). Any
+alphabetical string can be used as split name, apart from `all` (which is a
+reserved term which corresponds to the union of all splits, see below).
 
 In addition of the "official" dataset splits, TFDS allow to select slice(s) of
 split(s) and various combinations.
@@ -23,8 +25,8 @@ ds = builder.as_dataset(split='test+train[:75%]')
 
 Split can be:
 
-*   **Plain split** (`'train'`, `'test'`): All examples within the split
-    selected.
+*   **Plain split names** (a string such as `'train'`, `'test'`, ...): All
+    examples within the split selected.
 *   **Slices**: Slices have the same semantic as
     [python slice notation](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations).
     Slices can be:
