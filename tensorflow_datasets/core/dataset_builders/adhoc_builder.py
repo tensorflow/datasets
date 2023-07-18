@@ -21,6 +21,8 @@ notebook. For example, if you are in a notebook and you want to transform a
 `tf.data.Dataset` into a TFDS dataset, then you can do so as follows:
 
 ```
+import numpy as np
+
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -41,7 +43,7 @@ builder = tfds.dataset_builders.store_as_tfds_dataset(
         "test": my_ds_test,
     },
     features=tfds.features.FeaturesDict({
-        "number": tfds.features.Scalar(dtype=int64),
+        "number": tfds.features.Scalar(dtype=np.int64),
     }),
     description="My dataset with a single number.",
     release_notes={
