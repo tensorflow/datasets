@@ -748,6 +748,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`clinc_oos`](clinc_oos.md)
 *   [`conll2002`](conll2002.md)
 *   [`conll2003`](conll2003.md)
+*   [`corr2cause`](corr2cause.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cos_e`](cos_e.md)
 *   [`databricks_dolly`](databricks_dolly.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
