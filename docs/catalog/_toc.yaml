@@ -1181,6 +1181,9 @@ toc:
     title: conll2002
   - path: /datasets/catalog/conll2003
     title: conll2003
+  - path: /datasets/catalog/corr2cause
+    status: nightly
+    title: corr2cause
   - path: /datasets/catalog/cos_e
     title: cos_e
   - path: /datasets/catalog/databricks_dolly
