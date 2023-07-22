@@ -42,18 +42,21 @@ a comprehensive coverage over all sizes of graphs.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `727.22 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `739.91 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 2,246
+`'test'`  | 2,246
+`'train'` | 411,452
 
 *   **Feature structure**:
 
