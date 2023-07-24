@@ -179,11 +179,13 @@ DATASET_EXTRAS = {
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
-    # envlogger is not available for Python versions >= 3.10
-    # https://pypi.org/project/envlogger/#files
+    # envlogger is not available for Python versions >= 3.10 or non Linux
+    # platforms: https://pypi.org/project/envlogger/#files
     # tests are disabled in `tensorflow_datasets/conftest.py`
-    'locomotion': ['envlogger;python_version<"3.10"'],
-    'robosuite_panda_pick_place_can': ['envlogger;python_version<"3.10"'],
+    'locomotion': ['envlogger;python_version<"3.10" and sys_platform=="linux"'],
+    'robosuite_panda_pick_place_can': [
+        'envlogger;python_version<"3.10" and sys_platform=="linux"'
+    ],
     'smartwatch_gestures': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
@@ -217,6 +219,7 @@ HUGGINGFACE_ALL_DEPENDENCIES = [
 EXTRAS = {
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=2.1'],
+    'tf-nightly': ['tf-nightly'],
     'tensorflow-data-validation': ['tensorflow-data-validation'],
     'tests-all': TESTS_ALL_DEPENDENCIES,
     'dev': TESTS_DEPENDENCIES + DEV_DEPENDENCIES,
