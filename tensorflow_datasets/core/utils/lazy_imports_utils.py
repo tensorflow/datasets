@@ -224,7 +224,7 @@ def array_record_error_callback(**kwargs):
 with lazy_imports(
     error_callback=tf_error_callback, success_callback=ensure_tf_version
 ):
-  import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import
+  import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import  # pytype: disable=import-error
 
 
 with lazy_imports(error_callback=array_record_error_callback):

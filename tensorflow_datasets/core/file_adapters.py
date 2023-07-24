@@ -143,7 +143,7 @@ class RiegeliFileAdapter(FileAdapter):
       buffer_size: Optional[int] = None,
   ) -> tf.data.Dataset:
     buffer_size = buffer_size or cls.BUFFER_SIZE
-    from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top
+    from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
 
     return riegeli_tf.RiegeliDataset(filename, buffer_size=buffer_size)
 

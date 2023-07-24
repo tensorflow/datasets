@@ -62,7 +62,7 @@ def _to_tf_dataset(
   Returns:
     the tf.data.Dataset of cardinality at least `min_length`.
   """
-  if isinstance(ds, tf.data.Dataset):
+  if isinstance(ds, tf.data.Dataset) and not isinstance(ds, Iterable):
     if is_batched:
       return ds.unbatch()
     else:
