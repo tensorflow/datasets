@@ -98,7 +98,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 KeyExample = split_builder_lib.KeyExample
 
 if typing.TYPE_CHECKING:
-  import tensorflow as tf
+  import tensorflow as tf  # pytype: disable=import-error
   import apache_beam as beam  # pytype: disable=import-error
 
   BeamInput = Union[beam.PTransform, beam.PCollection[KeyExample]]
