@@ -22,6 +22,9 @@ See: https://docs.pytest.org/en/latest/writing_plugins.html
 """
 from __future__ import annotations
 
+import builtins
+import importlib
+import sys
 import typing
 from typing import Iterator, Type
 
@@ -54,6 +57,35 @@ def disable_community_datasets():
           visibility.DatasetType.TFDS_PUBLIC,
       ]
   )
+
+
+@pytest.fixture(scope='session', autouse=True)
+def skip_test_if_array_record_not_supported():
+  """Skip all tests that depend on `array_record` package if it's not supported."""
+  if sys.platform == 'linux':
+    yield
+  else:
+
+    def patch(func):
+      def patched_func(*args, **kwargs):
+        name = kwargs.get('name', args[0])
+        if name.startswith('array_record'):
+          pytest.skip(
+              reason=(
+                  'ArrayRecord file format is not supported on your platform,'
+                  ' skipping affected tests.'
+              ),
+          )
+        return func(*args, **kwargs)
+
+      return patched_func
+
+    with pytest.MonkeyPatch.context() as monkeypatch:
+      monkeypatch.setattr('builtins.__import__', patch(builtins.__import__))
+      monkeypatch.setattr(
+          'importlib.import_module', patch(importlib.import_module)
+      )
+      yield monkeypatch
 
 
 # Register all fixtures defined in `setup_teardown` to be automatically

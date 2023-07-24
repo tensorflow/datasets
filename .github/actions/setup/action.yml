@@ -24,14 +24,26 @@ runs:
 
     # Install deps.
     - name: Workaround for connectivity issues in Azure  # https://github.com/actions/runner-images/issues/675#issuecomment-1419388451
+      if: ${{ runner.os == 'Linux' }}
       run: |
         sudo gem install apt-spy2
         sudo apt-spy2 fix --commit --launchpad --country=US
         sudo apt-get update
       shell: bash
-    - run: | # Install protobuf-compiler for gcld3 library.
+    # Install protobuf-compiler for gcld3 library.
+    - if: ${{ runner.os == 'Linux' }}
+      run: |
         sudo apt install -y --allow-downgrades libprotobuf-lite23=3.12.4-1ubuntu7 libprotobuf23=3.12.4-1ubuntu7 libprotoc23=3.12.4-1ubuntu7
         sudo apt install -y libprotobuf-dev=3.12.4-1ubuntu7 protobuf-compiler=3.12.4-1ubuntu7
+      shell: bash
+    - if: ${{ runner.os == 'macOS' && inputs.python-version != '3.8' }}
+      # protobuf version must be compatible with C++11 (used by gcld3)
+      run: |
+        brew install protobuf@21
+        echo "/usr/local/opt/protobuf@21/bin" >> $GITHUB_PATH
+        echo "LDFLAGS=-L/usr/local/opt/protobuf@21/lib" >> $GITHUB_ENV
+        echo "CPPFLAGS=-I/usr/local/opt/protobuf@21/include" >> $GITHUB_ENV
+        echo "PKG_CONFIG_PATH=/usr/local/opt/protobuf@21/lib/pkgconfig" >> $GITHUB_ENV
       shell: bash
     - uses: FedericoCarboni/setup-ffmpeg@v2  # for Audio FeatureConnector tests.
 

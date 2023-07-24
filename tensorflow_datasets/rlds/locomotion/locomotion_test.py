@@ -24,8 +24,9 @@ from tensorflow_datasets.rlds.locomotion import locomotion
 pytest.importorskip(
     'envlogger',
     reason=(
-        f'`envlogger` library might not be available for Python {sys.version};'
-        'see https://pypi.org/project/envlogger/#files'
+        '`envlogger` library might not be available for Python'
+        f' {sys.version} or platform {sys.platform}; see'
+        ' https://pypi.org/project/envlogger/#files'
     ),
 )
 
