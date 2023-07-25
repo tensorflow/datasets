@@ -20,62 +20,82 @@ from unittest import mock
 
 from absl import logging
 import numpy as np
-import tensorflow_datasets as tfds
-from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import features
-from tensorflow_datasets.core import file_adapters
+
+import unittest
 
 
-class DummyDataset(dataset_builder.GeneratorBasedBuilder):
-  """Test DatasetBuilder."""
+class ImportWithoutTfTest(unittest.TestCase):
 
-  VERSION = tfds.core.Version('1.0.0')
+  @mock.patch.object(logging, 'log_first_n')
+  @mock.patch('builtins.print')
+  def test_import_tfds_without_loading_tf(self, print_mock, log_first_n):
+    # Check that conftest.py didn't already import TFDS:
+    self.assertNotIn('tensorflow_datasets', sys.modules)
 
-  def _info(self):
-    return dataset_info.DatasetInfo(
-        builder=self,
-        features=features.FeaturesDict({
-            'integer': np.int32,
-            'nested': features.FeaturesDict({'text': features.Text()}),
-            'text': features.Text(),
-        }),
-    )
+    import tensorflow_datasets as tfds  # pylint: disable=g-import-not-at-top
 
-  def _split_generators(self, dl_manager):
-    return {
-        'train': self._generate_examples(),
-        'test': self._generate_examples(),
-    }
+    class DummyDataset(tfds.core.dataset_builder.GeneratorBasedBuilder):
+      """Test DatasetBuilder."""
 
-  def _generate_examples(self):
-    for i in range(20):
-      yield i, {
-          'integer': i,
-          'nested': {'text': 'nested_text'},
-          'text': f'test_{i}',
-      }
+      VERSION = tfds.core.Version('1.0.0')
 
+      def _info(self):
+        return tfds.core.dataset_info.DatasetInfo(
+            builder=self,
+            features=tfds.core.features.FeaturesDict({
+                'integer': np.int32,
+                'nested': tfds.core.features.FeaturesDict(
+                    {'text': tfds.core.features.Text()}
+                ),
+                'text': tfds.core.features.Text(),
+            }),
+        )
 
-def test_import_tfds_without_loading_tf():
-  with mock.patch.object(logging, 'log_first_n') as log_first_n:
-    assert 'tensorflow' not in sys.modules
-    assert 'array_record' not in sys.modules
+      def _split_generators(self, dl_manager):
+        return {
+            'train': self._generate_examples(),
+            'test': self._generate_examples(),
+        }
+
+      def _generate_examples(self):
+        for i in range(20):
+          yield i, {
+              'integer': i,
+              'nested': {'text': 'nested_text'},
+              'text': f'test_{i}',
+          }
+
+    self.assertNotIn('tensorflow', sys.modules)
+    self.assertNotIn('array_record', sys.modules)
 
     data_dir = '/tmp/import_without_tf'
     builder = DummyDataset(data_dir=data_dir)
     builder.download_and_prepare(
-        file_format=file_adapters.FileFormat.ARRAY_RECORD,
+        file_format=tfds.core.file_adapters.FileFormat.ARRAY_RECORD,
     )
     data_source = builder.as_data_source()
-    assert len(data_source['train']) == 20
-    assert data_source['train'][0] == {
-        'integer': 6,
-        'nested': {'text': b'nested_text'},
-        'text': b'test_6',
-    }
+    self.assertLen(data_source['train'], 20)
+    self.assertEqual(
+        data_source['train'][0],
+        {
+            'integer': 6,
+            'nested': {'text': b'nested_text'},
+            'text': b'test_6',
+        },
+    )
 
     # No warning concerning TensorFlow DTypes was dispatched while loading
-    assert not log_first_n.called
-    assert 'tensorflow' not in sys.modules
-    assert 'array_record' in sys.modules
+    self.assertFalse(log_first_n.called)
+    self.assertNotIn('tensorflow', sys.modules)
+    self.assertIn('array_record', sys.modules)
+
+    # No error concerning TensorFlow was dispatched:
+    self.assertLen(print_mock.call_args_list, 2)
+    first_call_args = print_mock.call_args_list[0][0][0]
+    self.assertRegex(first_call_args, '.*Downloading and preparing dataset.*')
+    second_call_args = print_mock.call_args_list[1][0][0]
+    self.assertRegex(second_call_args, '.*Dataset .* downloaded and prepared.*')
+
+
+if __name__ == '__main__':
+  unittest.main()

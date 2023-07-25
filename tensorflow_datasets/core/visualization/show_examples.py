@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+import typing
 from typing import Any, Union
 
 from tensorflow_datasets.core import dataset_info
@@ -30,10 +31,13 @@ from tensorflow_datasets.core.visualization import image_visualizer
 
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
-_Dataset = Union[
-    tf.data.Dataset,
-    Iterable,
-]
+if typing.TYPE_CHECKING:
+  _Dataset = Union[
+      tf.data.Dataset,
+      Iterable,
+  ]
+else:
+  _Dataset = Any
 
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
