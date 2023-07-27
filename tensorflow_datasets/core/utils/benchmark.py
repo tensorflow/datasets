@@ -23,8 +23,12 @@ import time
 from typing import Any, Dict, Iterable, List, Optional, Union
 
 from absl import logging
-import pandas as pd
 from tensorflow_datasets.core.utils import tqdm_utils
+
+try:
+  import pandas as pd  # pylint: disable=g-import-not-at-top
+except ImportError:
+  pd = Any
 
 # pylint: disable=logging-format-interpolation
 
@@ -99,7 +103,7 @@ class RawBenchmarkResult:
         'quantiles': statistics.quantiles(durations),
     }
 
-  def raw_stats_pd(self) -> pd.DataFrame:
+  def raw_stats_pd(self) -> pd.DataFrame:  # pytype: disable=invalid-annotation  # typed-pandas
     raw_stats = {
         'start_time': _ns_to_s(self.start_time),
         'first_batch_time': _ns_to_s(self.first_batch_time),
@@ -132,7 +136,7 @@ class RawBenchmarkResult:
         ),
     }
 
-  def stats_pd(self) -> pd.DataFrame:
+  def stats_pd(self) -> pd.DataFrame:  # pytype: disable=invalid-annotation  # typed-pandas
     return pd.DataFrame.from_dict(self.stats(), orient='index')
 
   def __repr__(self) -> str:
@@ -151,8 +155,8 @@ class RawBenchmarkResult:
 
 @dataclasses.dataclass(frozen=True)
 class BenchmarkResult:
-  stats: pd.DataFrame
-  raw_stats: pd.DataFrame
+  stats: pd.DataFrame  # pytype: disable=invalid-annotation  # typed-pandas
+  raw_stats: pd.DataFrame  # pytype: disable=invalid-annotation  # typed-pandas
 
   def _repr_html_(self) -> str:
     """Colab/notebook representation."""
