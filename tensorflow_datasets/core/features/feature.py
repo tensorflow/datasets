@@ -717,6 +717,10 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     """
     raise NotImplementedError
 
+  def decode_batch_example_np(self, tfexample_data):
+    """Uses tf to decode batch examples for Video."""
+    return self.decode_batch_example(tfexample_data)
+
   def decode_batch_example(self, tfexample_data):
     """Decode multiple features batched in a single tf.Tensor.
 

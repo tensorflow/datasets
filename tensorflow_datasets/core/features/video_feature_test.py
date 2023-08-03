@@ -26,6 +26,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 
 
+
 class VideoFeatureTest(testing.FeatureExpectationsTestCase):
 
   @property
@@ -38,11 +39,12 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=features.Video(shape=(None, 64, 64, 3)),
         shape=(None, 64, 64, 3),
-        dtype=tf.uint8,
+        dtype=np.uint8,
         tests=[
             testing.FeatureExpectationItem(
                 value=np_video,
                 expected=np_video,
+                expected_np=np_video,
             ),
         ],
         test_attributes=dict(_encoding_format='png', _extra_ffmpeg_args=[]),
@@ -67,12 +69,13 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=features.Video(shape=video_shape),
         shape=video_shape,
-        dtype=tf.uint8,
+        dtype=np.uint8,
         tests=[
             # Numpy array
             testing.FeatureExpectationItem(
                 value=frames_paths,
                 expected=video,
+                expected_np=video,
             ),
         ],
     )
@@ -86,15 +89,17 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=features.Video(shape=(5, 4, 2, 3)),
         shape=(5, 4, 2, 3),
-        dtype=tf.uint8,
+        dtype=np.uint8,
         tests=[
             testing.FeatureExpectationItem(
                 value=video_path,
                 expected=video_array,
+                expected_np=video_array,
             ),
             testing.FeatureExpectationItem(
                 value=pathlib.Path(video_path),
                 expected=video_array,
+                expected_np=video_array,
             ),
         ],
     )
@@ -110,11 +115,12 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
       self.assertFeature(
           feature=features.Video(shape=(5, 4, 2, 3)),
           shape=(5, 4, 2, 3),
-          dtype=tf.uint8,
+          dtype=np.uint8,
           tests=[
               testing.FeatureExpectationItem(
                   value=video_fp,
                   expected=video_array,
+                  expected_np=video_array,
               ),
           ],
       )
