@@ -15,10 +15,10 @@
 
 """Testing utilities."""
 
-from tensorflow_datasets.core.registered import skip_registration
+from tensorflow_datasets.core.utils import lazy_imports_utils
 
-# pylint: disable=g-import-not-at-top
-with skip_registration():
+# pylint: disable=g-import-not-at-top,g-importing-member
+with lazy_imports_utils.lazy_imports():
   # We import testing namespace but without registering the tests datasets
   # (e.g. DummyMnist,...).
   from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase
@@ -46,6 +46,8 @@ with skip_registration():
   from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
   from tensorflow_datasets.testing.test_utils import test_main
   from tensorflow_datasets.testing.test_utils import tmp_dir
+
+del lazy_imports_utils
 
 __all__ = [
     "assert_features_equal",

@@ -20,9 +20,9 @@ from absl import app
 from absl import flags
 from absl import logging
 
-import tensorflow_datasets as tfds
-# Testing is lazily imported, so we first force its import.
-from tensorflow_datasets.testing import *  # pylint: disable=wildcard-import
+flags.FLAGS.tfds_use_lazy_imports = False
+
+import tensorflow_datasets as tfds  # pylint: disable=g-import-not-at-top
 from tensorflow_docs.api_generator import generate_lib
 
 from tensorflow.tools.docs import doc_controls  # pylint: disable=g-direct-tensorflow-import
