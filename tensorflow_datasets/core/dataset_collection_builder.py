@@ -30,7 +30,11 @@ CITATIONS_FILE = "citations.bib"
 def get_filepath_in_dataset_folder(
     dataset_cls: Type[Any], file_name: str
 ) -> epath.Path:
-  directory_path = epath.Path(inspect.getfile(dataset_cls)).parent
+  try:
+    directory_path = epath.Path(inspect.getfile(dataset_cls)).parent
+  except TypeError:
+    # If the dataset was lazily loaded with LazyModule, it will fall here:
+    directory_path = epath.Path(inspect.getfile(dataset_cls.__class__)).parent
   return directory_path / file_name
 
 
