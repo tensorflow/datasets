@@ -96,6 +96,10 @@ class ImportWithoutTfTest(unittest.TestCase):
     second_call_args = print_mock.call_args_list[1][0][0]
     self.assertRegex(second_call_args, '.*Dataset .* downloaded and prepared.*')
 
+    # The function `tfds.testing.mock_data` can be used without TF:
+    with tfds.testing.mock_data():
+      assert 'tensorflow' not in sys.modules
+
 
 if __name__ == '__main__':
   unittest.main()

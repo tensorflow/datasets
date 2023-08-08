@@ -20,9 +20,12 @@ from unittest import mock
 from tensorflow_datasets.core.folder_dataset import translate_folder
 import tensorflow_datasets.public_api as tfds
 
-_EXAMPLE_DIR = os.path.join(
-    tfds.testing.test_utils.fake_examples_dir(), 'translate_folder'
-)
+
+def _example_dir():
+  return os.path.join(
+      tfds.testing.test_utils.fake_examples_dir(), 'translate_folder'
+  )
+
 
 original_init = tfds.TranslateFolder.__init__
 original_download_and_prepare = tfds.TranslateFolder.download_and_prepare
@@ -31,7 +34,7 @@ original_download_and_prepare = tfds.TranslateFolder.download_and_prepare
 def new_init(self, root_dir=None, **kwargs):
   assert root_dir is None
   del kwargs
-  original_init(self, root_dir=_EXAMPLE_DIR)
+  original_init(self, root_dir=_example_dir())
 
 
 class TranslateFolderTests(tfds.testing.DatasetBuilderTestCase):

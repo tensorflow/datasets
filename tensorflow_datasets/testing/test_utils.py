@@ -423,7 +423,10 @@ def run_in_graph_and_eager_modes(func=None, config=None, use_gpu=True):
   return decorator
 
 
-class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
+class DummyDatasetSharedGenerator(
+    dataset_builder.GeneratorBasedBuilder,
+    skip_registration=True,
+):
   """Test DatasetBuilder."""
 
   VERSION = utils.Version('1.0.0')
@@ -459,7 +462,10 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
       yield i, {'x': i}
 
 
-class DummyMnist(dataset_builder.GeneratorBasedBuilder):
+class DummyMnist(
+    dataset_builder.GeneratorBasedBuilder,
+    skip_registration=True,
+):
   """Test DatasetBuilder."""
 
   VERSION = utils.Version('3.0.1')
@@ -609,7 +615,10 @@ def _assert_feature_equal(feature0, feature1):
     assert feature0.names == feature1.names
 
 
-class DummyDatasetCollection(dataset_collection_builder.DatasetCollection):
+class DummyDatasetCollection(
+    dataset_collection_builder.DatasetCollection,
+    skip_registration=True,
+):
   """Minimal Dataset Collection builder."""
 
   @property

@@ -25,6 +25,7 @@ from typing import Any, Callable, Iterator, Optional, Sequence
 from unittest import mock
 
 from absl import logging
+from etils import epath
 import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
@@ -255,7 +256,7 @@ def mock_data(
   def _check_policy(self) -> MockPolicy:
     """Checks the policy and returns the actual used policy for mocking."""
     # When `USE_FILES` is used, make sure the metadata actually exists.
-    if tf.io.gfile.exists(self.data_dir):
+    if epath.Path(self.data_dir).exists():
       logging.info('Metadata found for %s at %s', self.name, self.data_dir)
     else:
       if policy == MockPolicy.USE_FILES:
