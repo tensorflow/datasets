@@ -21,7 +21,6 @@ import functools
 import io
 import itertools
 import logging
-import operator
 import os
 import random
 import re
@@ -31,7 +30,7 @@ import sys
 import textwrap
 import threading
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, Dict, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
 import uuid
 
 from absl import logging as absl_logging
@@ -528,8 +527,3 @@ def add_sys_path(path: epath.PathLike) -> Iterator[None]:
     yield
   finally:
     sys.path.remove(path)
-
-
-def prod(iterable: Iterable[int], *, start=1) -> int:
-  """Backport of python 3.8 `math.prod`."""
-  return functools.reduce(operator.mul, iterable, start)

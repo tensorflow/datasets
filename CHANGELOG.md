@@ -25,6 +25,10 @@ and this project adheres to
 
 ### Deprecated
 
+-   Python 3.8 support. As per
+    [NEP 29](https://numpy.org/neps/nep-0029-deprecation_policy.html), TFDS now
+    uses Python>=3.9.
+
 ### Removed
 
 ### Fixed
