@@ -84,7 +84,7 @@ jobs:
         num-shards: ${{ fromJson(needs.shards-job.outputs.num-shards) }}
         shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
         # TF suppported versions: https://www.tensorflow.org/install/pip#software_requirements
-        python-version: ['3.8', '3.9', '3.10']
+        python-version: ['3.9', '3.10']
         os-version: [ubuntu-latest, macos-latest]
 
     steps:

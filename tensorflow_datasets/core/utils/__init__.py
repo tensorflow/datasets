@@ -54,7 +54,6 @@ from tensorflow_datasets.core.utils.py_utils import NonMutableDict
 from tensorflow_datasets.core.utils.py_utils import nullcontext
 from tensorflow_datasets.core.utils.py_utils import pack_as_nest_dict
 from tensorflow_datasets.core.utils.py_utils import print_notebook
-from tensorflow_datasets.core.utils.py_utils import prod
 from tensorflow_datasets.core.utils.py_utils import reraise
 from tensorflow_datasets.core.utils.py_utils import rgetattr
 from tensorflow_datasets.core.utils.py_utils import temporary_assignment

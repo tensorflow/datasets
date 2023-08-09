@@ -76,7 +76,6 @@ class DatasetName:
   def __init__(
       self,
       namespace_name: Optional[str] = None,
-      # TODO(py3.8): Positional-only arg /,
       *,
       namespace: Optional[str] = None,
       name: Optional[str] = None,
