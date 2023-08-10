@@ -98,30 +98,22 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(
             {
-                "data": collections.OrderedDict([
-                    ("marketplace", np.str_),
-                    ("customer_id", np.str_),
-                    ("review_id", np.str_),
-                    ("product_id", np.str_),
-                    ("product_parent", np.str_),
-                    ("product_title", np.str_),
-                    ("product_category", np.str_),
-                    ("star_rating", np.int32),
-                    ("helpful_votes", np.int32),
-                    ("total_votes", np.int32),
-                    ("vine", tfds.features.ClassLabel(names=["Y", "N"])),
-                    (
-                        "verified_purchase",
-                        tfds.features.ClassLabel(names=["Y", "N"]),
-                    ),
-                    ("review_headline", np.str_),
-                    ("review_body", np.str_),
-                    ("review_date", np.str_),
-                ])
+                "unixReviewTime": np.int32,
+                "reviewTime": np.str_,
+                "reviewerID": np.str_,
+                "reviewerName": np.str_,
+                "asin": np.str_,
+                "overall": np.int32,
+                "summary": np.str_,
+                "reviewText": np.str_,
+                "verified": np.bool_, # tfds.features.ClassLabel(names=["Y", "N"])
+                "style": np.str_, # collections.OrderedDict([("marketplace", np.str_), ("customer_id", np.str_)]),
+                "vote": np.int32,
+                "image": np.str_, # tfds.features.Sequence(np.str_)
             }
         ),
         supervised_keys=None,
-        homepage="https://s3.amazonaws.com/amazon-reviews-pds/readme.html",
+        homepage="https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/",
     )
 
   def _split_generators(self, dl_manager):
