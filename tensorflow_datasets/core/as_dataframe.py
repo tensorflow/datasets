@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import dataclasses
 import typing
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 import numpy as np
 from tensorflow_datasets.core import dataset_info
@@ -28,14 +28,8 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-
-try:
-  import pandas  # pylint: disable=g-import-not-at-top
-
-  DataFrame = pandas.DataFrame
-except ImportError:
-  DataFrame = object
 
 # Should be `pandas.io.formats.style.Styler`, but is a costly import
 Styler = Any
@@ -127,43 +121,6 @@ def _get_feature(
   return feature, sequence_rank
 
 
-class StyledDataFrame(DataFrame):
-  """`pandas.DataFrame` displayed as `pandas.io.formats.style.Styler`.
-
-  `StyledDataFrame` is a `pandas.DataFrame` with better Jupyter notebook
-  representation. Contrary to regular `pandas.DataFrame`, the `style` is
-  attached to the `pandas.DataFrame`.
-
-  ```
-  df = StyledDataFrame(...)
-  df.current_style.apply(...)  # Configure the style
-  df  # The data-frame is displayed using ` pandas.io.formats.style.Styler`
-  ```
-  """
-
-  # StyledDataFrame could be improved such as the style is forwarded when
-  # selecting sub-data frames.
-
-  def __init__(self, *args, **kwargs):
-    super().__init__(*args, **kwargs)  # pytype: disable=wrong-arg-count  # re-none
-    # Use name-mangling for forward-compatibility in case pandas
-    # adds a `_styler` attribute in the future.
-    self.__styler: Optional[Styler] = None
-
-  @property
-  def current_style(self) -> Styler:
-    """Like `pandas.DataFrame.style`, but attach the style to the DataFrame."""
-    if self.__styler is None:
-      self.__styler = super().style  # pytype: disable=attribute-error  # re-none
-    return self.__styler
-
-  def _repr_html_(self) -> str:
-    # See base class for doc
-    if self.__styler is None:
-      return super()._repr_html_()  # pytype: disable=attribute-error  # re-none
-    return self.__styler._repr_html_()  # pylint: disable=protected-access
-
-
 def _make_columns(
     specs: TreeDict[tf.TypeSpec],
     ds_info: Optional[dataset_info.DatasetInfo],
@@ -187,7 +144,7 @@ def _make_row_dict(
 def as_dataframe(
     ds: tf.data.Dataset,
     ds_info: Optional[dataset_info.DatasetInfo] = None,
-) -> StyledDataFrame:
+) -> pd.DataFrame:
   """Convert the dataset into a pandas dataframe.
 
   Warning: The dataframe will be loaded entirely in memory, you may
@@ -210,6 +167,42 @@ def as_dataframe(
   """
   # Raise a clean error message if panda isn't installed.
   lazy_imports_lib.lazy_imports.pandas  # pylint: disable=pointless-statement
+
+  class StyledDataFrame(pd.DataFrame):
+    """`pandas.DataFrame` displayed as `pandas.io.formats.style.Styler`.
+
+    `StyledDataFrame` is a `pandas.DataFrame` with better Jupyter notebook
+    representation. Contrary to regular `pandas.DataFrame`, the `style` is
+    attached to the `pandas.DataFrame`.
+
+    ```
+    df = StyledDataFrame(...)
+    df.current_style.apply(...)  # Configure the style
+    df  # The data-frame is displayed using ` pandas.io.formats.style.Styler`
+    ```
+    """
+
+    # StyledDataFrame could be improved such as the style is forwarded when
+    # selecting sub-data frames.
+
+    def __init__(self, *args, **kwargs):
+      super().__init__(*args, **kwargs)  # pytype: disable=wrong-arg-count  # re-none
+      # Use name-mangling for forward-compatibility in case pandas
+      # adds a `_styler` attribute in the future.
+      self.__styler: Optional[Styler] = None
+
+    @property
+    def current_style(self) -> Styler:
+      """Like `pandas.DataFrame.style`, but attach the style to the DataFrame."""
+      if self.__styler is None:
+        self.__styler = super().style  # pytype: disable=attribute-error  # re-none
+      return self.__styler
+
+    def _repr_html_(self) -> Union[None, str]:
+      # See base class for doc
+      if self.__styler is None:
+        return super()._repr_html_()  # pytype: disable=attribute-error  # re-none
+      return self.__styler._repr_html_()  # pylint: disable=protected-access
 
   # Pack `as_supervised=True` datasets
   if ds_info:
