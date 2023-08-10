@@ -19,7 +19,6 @@ import collections
 import csv
 import json
 
-from etils import epath
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
