@@ -47,7 +47,7 @@ Then convert 'CIFAR-100_human_ordered.npy' into a CSV file
 
 ```
 import numpy as np
-import pandas as pd
+from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 human_labels_np_path = '<local_path>/CIFAR-100_human_ordered.npy'
