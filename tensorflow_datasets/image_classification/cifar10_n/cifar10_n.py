@@ -60,7 +60,7 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
 
   ```
   import numpy as np
-  import pandas as pd
+  from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
   from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
   human_labels_np_path = '<local_path>/CIFAR-10_human_ordered.npy'

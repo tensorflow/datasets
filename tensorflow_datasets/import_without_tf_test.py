@@ -67,6 +67,7 @@ class ImportWithoutTfTest(unittest.TestCase):
 
     self.assertNotIn('tensorflow', sys.modules)
     self.assertNotIn('array_record', sys.modules)
+    self.assertNotIn('pandas', sys.modules)
 
     data_dir = '/tmp/import_without_tf'
     builder = DummyDataset(data_dir=data_dir)

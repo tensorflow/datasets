@@ -221,14 +221,16 @@ def array_record_error_callback(**kwargs):
   print("***************************************************************\n\n")
 
 
+with lazy_imports():
+  import pandas  # pylint: disable=g-import-not-at-top,unused-import
+
+
 with lazy_imports(
     error_callback=tf_error_callback, success_callback=ensure_tf_version
 ):
-  import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import  # pytype: disable=import-error
+  import tensorflow  # pylint: disable=g-import-not-at-top,unused-import  # pytype: disable=import-error
 
 
 with lazy_imports(error_callback=array_record_error_callback):
   from array_record.python import array_record_data_source  # pylint: disable=g-import-not-at-top,unused-import
   from array_record.python import array_record_module  # pylint: disable=g-import-not-at-top,unused-import
-
-tensorflow = tf
