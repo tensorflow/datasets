@@ -137,20 +137,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     Yields:
       The features.
     """
-   with open(file_path, "r", encoding="utf-8") as json_file:
-     for i, row in enumerate(json_file):
-       example = json.loads(row)
-       yield i, {
-           "unixReviewTime": int(example["unixReviewTime"]),
-           "reviewTime": example["reviewTime"],
-           "reviewerID": example["reviewerID"],
-           "reviewerName": example["reviewerName"],
-           "asin": example["asin"],
-           "overall": int(example["overall"]),
-           "summary": example["summary"],
-           "reviewText": example["reviewText"],
-           "verified": example.get("verified", False),
-           "style": str(example.get("style", {})),
-           "vote": int(example.get("vote", 0)),
-           "image": str(example.get("image", "")),
-       }
+    with open(file_path, "r", encoding="utf-8") as json_file:
+        for i, row in enumerate(json_file):
+            example = json.loads(row)
+            yield i, {
+                "unixReviewTime": int(example["unixReviewTime"]),
+                "reviewTime": example["reviewTime"],
+                "reviewerID": example["reviewerID"],
+                "reviewerName": example["reviewerName"],
+                "asin": example["asin"],
+                "overall": int(example["overall"]),
+                "summary": example["summary"],
+                "reviewText": example["reviewText"],
+                "verified": example.get("verified", False),
+                "style": str(example.get("style", {})),
+                "vote": int(example.get("vote", 0)),
+                "image": str(example.get("image", "")),
+            }
