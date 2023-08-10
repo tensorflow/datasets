@@ -17,6 +17,7 @@
 
 import collections
 import csv
+import json
 
 from etils import epath
 import numpy as np
@@ -134,18 +135,25 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Generate features given the directory path.
 
     Args:
-      file_path: path where the tsv file is stored
+      file_path: path where the json file is stored
 
     Yields:
       The features.
     """
-
-    with epath.Path(file_path).open() as tsvfile:
-      # Need to disable quoting - as dataset contains invalid double quotes.
-      reader = csv.DictReader(
-          tsvfile, dialect="excel-tab", quoting=csv.QUOTE_NONE
-      )
-      for i, row in enumerate(reader):
-        yield i, {
-            "data": row,
-        }
+   with open(file_path, "r", encoding="utf-8") as json_file:
+     for i, row in enumerate(json_file):
+       example = json.loads(row)
+       yield i, {
+           "unixReviewTime": int(example["unixReviewTime"]),
+           "reviewTime": example["reviewTime"],
+           "reviewerID": example["reviewerID"],
+           "reviewerName": example["reviewerName"],
+           "asin": example["asin"],
+           "overall": int(example["overall"]),
+           "summary": example["summary"],
+           "reviewText": example["reviewText"],
+           "verified": example.get("verified", False),
+           "style": str(example.get("style", {})),
+           "vote": int(example.get("vote", 0)),
+           "image": str(example.get("image", "")),
+       }
