@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Amazon Customer Reviews Dataset --- US REVIEWS DATASET."""
+"""Amazon Per-category Review Dataset v2 (2018) --- US REVIEWS DATASET."""
 
 import collections
 import csv
