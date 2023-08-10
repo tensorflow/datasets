@@ -15,8 +15,6 @@
 
 """Amazon Per-category Review Dataset v2 (2018) --- US REVIEWS DATASET."""
 
-import collections
-import csv
 import json
 
 import numpy as np
