@@ -88,7 +88,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           + config_name
           + " products in US marketplace. Each product has its own version as"
           " specified with it.",
-          version="0.1.0",
+          version="2.0.0",
           data=config_name,
       )
       for config_name in _DATA_OPTIONS
