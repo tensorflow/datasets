@@ -104,10 +104,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 "overall": np.int32,
                 "summary": np.str_,
                 "reviewText": np.str_,
-                "verified": np.bool_, # tfds.features.ClassLabel(names=["Y", "N"])
-                "style": np.str_, # collections.OrderedDict([("marketplace", np.str_), ("customer_id", np.str_)]),
+                "verified": np.bool_,
+                "style": np.str_,
                 "vote": np.int32,
-                "image": np.str_, # tfds.features.Sequence(np.str_)
+                "image": np.str_,
             }
         ),
         supervised_keys=None,
@@ -137,6 +137,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     Yields:
       The features.
     """
+
     with open(file_path, "r", encoding="utf-8") as json_file:
         for i, row in enumerate(json_file):
             example = json.loads(row)
