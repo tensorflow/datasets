@@ -225,6 +225,12 @@ class DatasetInfo(object):
     else:
       self._identity = DatasetIdentity.from_builder(builder)
 
+    if redistribution_info is not None:
+      redistribution_info = dataset_info_pb2.RedistributionInfo(
+          license=utils.dedent(license or redistribution_info.pop("license")),
+          **redistribution_info,
+      )
+
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=self._identity.name,
         description=utils.dedent(description),
@@ -236,12 +242,7 @@ class DatasetInfo(object):
         config_tags=self._identity.config_tags,
         citation=utils.dedent(citation),
         module_name=self._identity.module_name,
-        redistribution_info=dataset_info_pb2.RedistributionInfo(
-            license=utils.dedent(license or redistribution_info.pop("license")),
-            **redistribution_info,
-        )
-        if redistribution_info
-        else None,
+        redistribution_info=redistribution_info,
     )
 
     if homepage:
@@ -315,6 +316,13 @@ class DatasetInfo(object):
   @property
   def as_proto(self) -> dataset_info_pb2.DatasetInfo:
     return self._info_proto
+
+  @property
+  def as_proto_with_features(self) -> dataset_info_pb2.DatasetInfo:
+    info_proto = dataset_info_pb2.DatasetInfo()
+    info_proto.CopyFrom(self._info_proto)
+    info_proto.features.CopyFrom(self.features.to_proto())
+    return info_proto
 
   @property
   def name(self) -> str:
