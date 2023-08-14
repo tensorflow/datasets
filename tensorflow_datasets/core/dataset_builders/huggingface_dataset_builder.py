@@ -165,7 +165,7 @@ def _from_tfds_to_hf(tfds_name: str) -> str:
   )
 
 
-def _convert_config_name(hf_config: Optional[str]) -> Optional[str]:
+def convert_config_name(hf_config: Optional[str]) -> Optional[str]:
   if hf_config is None:
     return hf_config
   return hf_config.lower()
@@ -334,7 +334,7 @@ class HuggingfaceDatasetBuilder(
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
     self.config_kwargs = config_kwargs
-    tfds_config = _convert_config_name(hf_config)
+    tfds_config = convert_config_name(hf_config)
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
     self._hf_builder = hf_datasets.load_dataset_builder(
         self._hf_repo_id, self._hf_config, **self.config_kwargs
