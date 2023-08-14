@@ -74,9 +74,9 @@ def test_from_tfds_to_hf():
 
 
 def test_convert_config_name():
-  assert huggingface_dataset_builder._convert_config_name(None) is None
-  assert huggingface_dataset_builder._convert_config_name("x") == "x"
-  assert huggingface_dataset_builder._convert_config_name("X") == "x"
+  assert huggingface_dataset_builder.convert_config_name(None) is None
+  assert huggingface_dataset_builder.convert_config_name("x") == "x"
+  assert huggingface_dataset_builder.convert_config_name("X") == "x"
 
 
 def test_convert_to_np_dtype():
