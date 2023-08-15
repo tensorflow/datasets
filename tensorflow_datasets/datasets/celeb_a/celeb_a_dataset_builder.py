@@ -77,12 +77,10 @@ IDENTITY_HEADINGS = (
 class Builder(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
-  VERSION = tfds.core.Version("2.0.1")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0"),
-  ]
+  VERSION = tfds.core.Version("2.1.0")
   RELEASE_NOTES = {
       "2.0.1": "New split API (https://tensorflow.org/datasets/splits)",
+      "2.1.0": "Identity feature added.",
   }
 
   def _info(self):
