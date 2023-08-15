@@ -1051,6 +1051,38 @@ def read_proto_from_builder_dir(
   return read_from_json(info_path)
 
 
+def read_full_proto_from_builder_dir(
+    builder_dir: epath.PathLike,
+) -> dataset_info_pb2.DatasetInfo:
+  """Reads the dataset info from the given builder dir.
+
+  Also reads data from the features files and puts it inside the dataset info.
+
+  Args:
+    builder_dir: The folder that contains the dataset info files.
+
+  Returns:
+    The DatasetInfo proto including feature information as read from the builder
+    dir.
+
+  Raises:
+    FileNotFoundError: If the builder_dir does not exist or it doesn't contain
+    dataset_info.json.
+  """
+  builder_dir = epath.Path(builder_dir).expanduser()
+  info_path = builder_dir / constants.DATASET_INFO_FILENAME
+  info_proto = read_from_json(info_path)
+  if not info_proto.HasField("features"):
+    try:
+      features = feature_lib.FeatureConnector.from_config(
+          os.fspath(builder_dir)
+      )
+      info_proto.features.CopyFrom(features.to_proto())
+    except IOError:
+      logging.warning("Could not read features from %s", builder_dir)
+  return info_proto
+
+
 def pack_as_supervised_ds(
     ds: tf.data.Dataset,
     ds_info: DatasetInfo,
