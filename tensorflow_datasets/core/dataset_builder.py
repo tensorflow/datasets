@@ -718,7 +718,6 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     self._log_download_done()
 
-
   def _update_dataset_info(self, data_path: epath.Path):
     """Update the `dataset_info.json` file there."""
     info_file = data_path / constants.DATASET_INFO_FILENAME
