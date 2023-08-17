@@ -15,9 +15,8 @@
 
 """Library of helper functions to handle dealing with files."""
 
-import concurrent.futures
+import collections
 import functools
-import multiprocessing
 import os
 import re
 import time
@@ -126,40 +125,6 @@ def get_default_data_dir(
     return constants.DATA_DIR
 
 
-def is_version_folder(
-    folder: epath.PathLike,
-    check_content: bool = True,
-    include_old_tfds_version: bool = False,
-) -> bool:
-  """Returns whether `folder` is a version folder and contains dataset metadata.
-
-  Checks that the deepest directory is a semantic version (e.g. `3.1.4`) and
-  whether it contains dataset metadata files.
-
-  Arguments:
-    folder: the folder to check.
-    check_content: whether to check the content for the folder if it contains
-      files required for a dataset.
-    include_old_tfds_version: include datasets that have been generated with
-      TFDS before 4.0.0. This is only used if `check_content=True`.
-
-  Returns:
-    whether `folder` is a version folder and contains dataset metadata.
-  """
-  folder = epath.Path(folder)
-  looks_like_a_version = version_lib.Version.is_valid(folder.name)
-  if check_content:
-    if include_old_tfds_version:
-      # If TFDS version before 4.0.0 was used, then the generated dataset
-      # doesn't contain `features.json`, but has `dataset_info.json`.
-      content_to_check = folder / constants.DATASET_INFO_FILENAME
-    else:
-      content_to_check = folder / constants.FEATURES_FILENAME
-    return looks_like_a_version and content_to_check.exists()
-  else:
-    return looks_like_a_version
-
-
 def _looks_like_a_tfds_file(filename: str) -> bool:
   filename_has_shard_re = re.compile(r'.*\d{5,}-of-\d{5,}.*')
   return bool(filename_has_shard_re.match(filename)) or filename.endswith(
@@ -193,41 +158,58 @@ def list_dataset_variants(
       dataset_name=dataset_name, namespace=namespace, data_dir=data_dir
   )
 
-  is_version_folder_ = functools.partial(
-      is_version_folder,
-      check_content=include_versions,
-      include_old_tfds_version=include_old_tfds_version,
-  )
+  json_files_per_folder = collections.defaultdict(set)
+  interesting_file_names = [
+      constants.FEATURES_FILENAME,
+      constants.DATASET_INFO_FILENAME,
+  ]
+  # Check all JSON files under a config.
+  for json_file in dataset_dir.glob('*/*/*.json'):
+    if json_file.name in interesting_file_names:
+      json_files_per_folder[json_file.parent].add(json_file.name)
+  # Check all JSON files that are not under a config.
+  for json_file in dataset_dir.glob('*/*.json'):
+    if json_file.name in interesting_file_names:
+      json_files_per_folder[json_file.parent].add(json_file.name)
 
-  def get_dataset_references(
-      config_or_version_dir: epath.Path,
-  ) -> Iterator[naming.DatasetReference]:
-    if _looks_like_a_tfds_file(config_or_version_dir.name):
-      return
-    logging.info('Getting configs and versions in %s', config_or_version_dir)
-    if is_version_folder_(config_or_version_dir):
-      if include_versions:
-        yield base_reference.replace(version=config_or_version_dir.name)
-      else:
-        yield base_reference
-    elif config_or_version_dir.is_dir():
-      config = config_or_version_dir.name
-      if not include_versions:
-        yield base_reference.replace(config=config)
-      else:
-        for version_dir in config_or_version_dir.iterdir():
-          if is_version_folder_(version_dir):
-            yield base_reference.replace(
-                config=config, version=version_dir.name
-            )
-
-  with concurrent.futures.ThreadPoolExecutor(
-      max_workers=multiprocessing.cpu_count()
-  ) as executor:
-    for references in executor.map(
-        get_dataset_references, dataset_dir.iterdir()
+  version_references_per_config = collections.defaultdict(list)
+  for folder, json_files in json_files_per_folder.items():
+    if constants.DATASET_INFO_FILENAME not in json_files:
+      logging.warning(
+          'Ignoring dataset folder %s, which has no dataset_info.json',
+          os.fspath(folder),
+      )
+      continue
+    if (
+        not include_old_tfds_version
+        and constants.FEATURES_FILENAME not in json_files
     ):
-      yield from references
+      logging.info(
+          'Ignoring dataset folder %s, which has no features.json',
+          os.fspath(folder),
+      )
+      continue
+    version = folder.name
+    if not version_lib.Version.is_valid(version):
+      logging.warning(
+          'Ignoring dataset folder %s, which has invalid version %s',
+          os.fspath(folder),
+          version,
+      )
+      continue
+    if folder.parent == dataset_dir:
+      config = None
+    else:
+      config = folder.parent.name
+    reference = base_reference.replace(config=config, version=version)
+    version_references_per_config[config].append(reference)
+
+  if include_versions:
+    for versions in version_references_per_config.values():
+      yield from versions
+  else:
+    for config in version_references_per_config.keys():
+      yield base_reference.replace(config=config)
 
 
 def list_datasets_in_data_dir(
