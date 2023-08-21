@@ -446,6 +446,13 @@ class ShardedFileTemplate:
     self.data_dir = epath.Path(self.data_dir)
     if self.split is not None and not self.split:
       raise ValueError(f'Split must be a non-empty string: {self}')
+    if self.split is not None and not any(
+        char.isalnum() for char in self.split
+    ):
+      raise ValueError(
+          'Split name should contain at least one alphanumeric character.'
+          f' Given split name: {self.split}'
+      )
     if self.filetype_suffix is not None and not self.filetype_suffix:
       raise ValueError(f'Filetype suffix must be a non-empty string: {self}')
     if not self.template:
