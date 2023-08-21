@@ -17,7 +17,6 @@
 
 import os
 from absl.testing import parameterized
-
 from etils import epath
 import pytest
 from tensorflow_datasets import testing
@@ -438,6 +437,34 @@ def test_sharded_file_template_empty_split():
         filetype_suffix='tfrecord',
         split='',
     )
+
+
+@pytest.mark.parametrize('split_name', [':', ',', '(())'])
+def test_sharded_file_template_non_alphanumeric_split(split_name):
+  match = (
+      'Split name should contain at least one alphanumeric character. Given'
+      f' split name: {split_name}'
+  )
+  with pytest.raises(
+      ValueError,
+      match=match,
+  ):
+    naming.ShardedFileTemplate(
+        data_dir='/path',
+        dataset_name='ds',
+        filetype_suffix='',
+        split=split_name,
+    )
+
+
+@pytest.mark.parametrize('split_name', ['train', '1', 'c', 'train_1', 'c:'])
+def test_sharded_file_template_valid_split(split_name):
+  naming.ShardedFileTemplate(
+      data_dir='/path',
+      dataset_name='mnist',
+      filetype_suffix='tfrecord',
+      split=split_name,
+  )
 
 
 def test_sharded_file_template_shard_index():
