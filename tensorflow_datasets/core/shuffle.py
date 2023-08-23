@@ -17,10 +17,12 @@
 
 import math
 import os
+import resource
 import struct
-from typing import Iterator, Optional
+from typing import Iterator, List, Optional
 import uuid
 
+from absl import logging
 import six
 from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core.utils import file_utils
@@ -65,6 +67,25 @@ def _read_hkey(buff):
   """Reads from fobj and returns hkey (128 bites integer)."""
   a, b = struct.unpack('=QQ', buff)
   return (a << 64) | b
+
+
+def _increase_open_files_limit():
+  """Attempts to increase the maximum number of open file descriptors."""
+  soft_limit, hard_limit = resource.getrlimit(resource.RLIMIT_NOFILE)
+  if soft_limit < hard_limit:
+    new_soft_limit = min(soft_limit + BUCKETS_NUMBER, hard_limit)
+    resource.setrlimit(resource.RLIMIT_NOFILE, (new_soft_limit, hard_limit))
+    logging.warning(
+        'Soft limit for the maximum number of open file descriptors for'
+        ' the current process increased from %d to %d',
+        soft_limit,
+        new_soft_limit,
+    )
+  else:
+    logging.error(
+        'Soft and hard limits for the maximum number of open file descriptors'
+        ' for the current process are identical.'
+    )
 
 
 def get_bucket_number(
@@ -128,7 +149,16 @@ class _Bucket(object):
       file_utils.makedirs_cached(os.path.dirname(self._path))
       self._fobj = tf.io.gfile.GFile(self._path, mode='wb')
     data_size = len(data)
-    self._fobj.write(_hkey_to_bytes(key))
+
+    try:
+      self._fobj.write(_hkey_to_bytes(key))
+    except tf.errors.ResourceExhaustedError as error:
+      # catch "Too many open files"
+      if error.message.endswith('Too many open files'):
+        _increase_open_files_limit()
+        self._fobj.write(_hkey_to_bytes(key))
+      else:
+        raise error
     # http://docs.python.org/3/library/struct.html#byte-order-size-and-alignment
     # The equal sign ("=") is important here, has it guarantees the standard
     # size (Q: 8 bytes) is used, as opposed to native size, which can differ
@@ -185,7 +215,7 @@ class Shuffler(object):
     grp_name = uuid.uuid4()
     self._hasher = hashing.Hasher(hash_salt)
     self._disable_shuffling = disable_shuffling
-    self._buckets = []
+    self._buckets: List[_Bucket] = []
     for i in range(BUCKETS_NUMBER):
       bucket_name = 'bucket_%s_%03d.tmp' % (grp_name, i)
       path = os.path.join(dirpath, bucket_name)
