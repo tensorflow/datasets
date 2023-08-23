@@ -16,11 +16,16 @@
 """Tests for tensorflow_datasets.core.shuffle."""
 
 import collections
+import contextlib
+import logging
+import resource
+import tempfile
 
 from absl.testing.absltest import mock
 import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import shuffle
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _ITEMS = [
     (1, b'The'),
@@ -71,6 +76,17 @@ _SORTED_ITEMS = [
 ]
 
 _TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS_SPLIT1)
+
+
+@contextlib.contextmanager
+def disable_opening_files():
+  """Context manager to disable opening new files."""
+  soft_limit, hard_limit = resource.getrlimit(resource.RLIMIT_NOFILE)
+  try:
+    resource.setrlimit(resource.RLIMIT_NOFILE, (1, hard_limit))
+    yield
+  finally:
+    resource.setrlimit(resource.RLIMIT_NOFILE, (soft_limit, hard_limit))
 
 
 @pytest.mark.parametrize(
@@ -125,6 +141,57 @@ def test_get_bucket_number_large_hkey():
   assert bucket == 4
 
 
+def test_increase_open_files_limit(caplog):
+  with disable_opening_files():
+    with pytest.raises(OSError) as exc_info:
+      tempfile.TemporaryFile()
+    assert exc_info.value.strerror == 'Too many open files'
+
+    shuffle._increase_open_files_limit()
+    assert caplog.record_tuples == [(
+        'absl',
+        logging.WARNING,
+        (
+            'Soft limit for the maximum number of open file descriptors for the'
+            ' current process increased from 1 to 1001'
+        ),
+    )]
+    tempfile.TemporaryFile()
+
+  _, hard_limit = resource.getrlimit(resource.RLIMIT_NOFILE)
+  resource.setrlimit(resource.RLIMIT_NOFILE, (hard_limit, hard_limit))
+  caplog.clear()
+  shuffle._increase_open_files_limit()
+  assert caplog.record_tuples == [(
+      'absl',
+      logging.ERROR,
+      (
+          'Soft and hard limits for the maximum number of open file descriptors'
+          ' for the current process are identical.'
+      ),
+  )]
+
+
+def test_shuffler_with_limited_open_files(tmp_path, monkeypatch, caplog):
+  monkeypatch.setattr(shuffle, 'MAX_MEM_BUFFER_SIZE', 0)
+  shuffler = shuffle.Shuffler(tmp_path, 'salt', disable_shuffling=False)
+  # trigger Tensorflow imports before disabling opening files
+  tf.io.gfile.GFile  # pylint: disable=pointless-statement
+  tf.errors.ResourceExhaustedError  # pylint: disable=pointless-statement
+
+  with disable_opening_files():
+    shuffler.add(1, b'The')
+
+  assert caplog.record_tuples == [(
+      'absl',
+      logging.WARNING,
+      (
+          'Soft limit for the maximum number of open file descriptors for the'
+          ' current process increased from 1 to 1001'
+      ),
+  )]
+
+
 class ShuffleTest(testing.TestCase):
 
   def _test_items(self, salt, items, expected_order, disable_shuffling=False):
@@ -159,7 +226,7 @@ class ShuffleTest(testing.TestCase):
     self._test_items(
         'split1',
         _SORTED_ITEMS,
-        [value for key, value in _SORTED_ITEMS],
+        [value for _, value in _SORTED_ITEMS],
         disable_shuffling=True,
     )
 
