@@ -789,7 +789,9 @@ class DatasetBuilderGenerateModeTest(testing.TestCase):
       builder.download_and_prepare(download_config=dl_config)
       self.assertEqual(builder.info.splits["train"].num_examples, 5)
 
-  def test_update_dataset_info_keeps_data_source(self):
+  def test_update_dataset_info_keeps_data_source(
+      self,
+  ):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
       with mock.patch.object(tf.data, "TFRecordDataset") as mock_read:
@@ -816,7 +818,7 @@ class DatasetBuilderGenerateModeTest(testing.TestCase):
       )
       info_proto.description = "new description"
       builder.download_and_prepare(download_config=dl_config)
-      # New description is available after callign download_and_prepare:
+      # New description is available after calling download_and_prepare:
       assert info_proto.description == "new description"
       # Then check that data_source is still there, and description was builder
       builder = read_only_builder.builder_from_files(
