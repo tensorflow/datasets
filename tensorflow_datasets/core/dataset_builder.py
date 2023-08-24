@@ -566,7 +566,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     data_exists = data_path.exists()
 
     if download_config.download_mode == UPDATE_DATASET_INFO:
-      self._update_dataset_info(data_path)
+      self._update_dataset_info()
       return
 
     if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
@@ -719,14 +719,14 @@ class DatasetBuilder(registered.RegisteredDataset):
     self._log_download_done()
 
 
-  def _update_dataset_info(self, data_path: epath.Path):
+  def _update_dataset_info(self) -> None:
     """Update the `dataset_info.json` file there."""
-    info_file = data_path / constants.DATASET_INFO_FILENAME
+    info_file = self.data_path / constants.DATASET_INFO_FILENAME
     if not info_file.exists():
       raise AssertionError(f"To update {info_file}, it must already exist.")
     new_info = self.info
-    new_info.read_from_directory(data_path)
-    new_info.write_to_directory(data_path, all_metadata=False)
+    new_info.read_from_directory(self.data_path)
+    new_info.write_to_directory(self.data_path, all_metadata=False)
 
   @tfds_logging.as_data_source()
   def as_data_source(
