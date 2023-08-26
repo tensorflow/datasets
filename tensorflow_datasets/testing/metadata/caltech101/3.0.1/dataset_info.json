@@ -5,7 +5,7 @@
   "fileFormat": "array_record",
   "location": {
     "urls": [
-      "http://www.vision.caltech.edu/Image_Datasets/Caltech101/"
+      "https://doi.org/10.22002/D1.20086"
     ]
   },
   "moduleName": "tensorflow_datasets.image_classification.caltech",
