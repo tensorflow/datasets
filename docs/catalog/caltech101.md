@@ -5,7 +5,7 @@
   <meta itemprop="name" content="caltech101" />
   <meta itemprop="description" content="Caltech-101 consists of pictures of objects belonging to 101 classes, plus one&#10;`background clutter` class. Each image is labelled with a single object. Each&#10;class contains roughly 40 to 800 images, totalling around 9k images. Images are&#10;of variable sizes, with typical edge lengths of 200-300 pixels. This version&#10;contains image-level labels only. The original dataset also contains bounding&#10;boxes.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;caltech101&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/caltech101-3.0.1.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/caltech101" />
-  <meta itemprop="sameAs" content="http://www.vision.caltech.edu/Image_Datasets/Caltech101/" />
+  <meta itemprop="sameAs" content="https://doi.org/10.22002/D1.20086" />
   <meta itemprop="citation" content="@article{FeiFei2004LearningGV,&#10;  title={Learning Generative Visual Models from Few Training Examples: An Incremental Bayesian Approach Tested on 101 Object Categories},&#10;  author={Li Fei-Fei and Rob Fergus and Pietro Perona},&#10;  journal={Computer Vision and Pattern Recognition Workshop},&#10;  year={2004},&#10;}" />
 </div>
 
@@ -28,7 +28,7 @@ boxes.
     </span> </a>
 
 *   **Homepage**:
-    [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
+    [https://doi.org/10.22002/D1.20086](https://doi.org/10.22002/D1.20086)
 
 *   **Source code**:
     [`tfds.datasets.caltech101.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/caltech101/caltech101_dataset_builder.py)
@@ -128,4 +128,3 @@ dataButton.addEventListener('click', async () => {
   year={2004},
 }
 ```
-

@@ -23,7 +23,7 @@ import tensorflow_datasets.public_api as tfds
 
 _LABELS_FNAME = "image_classification/caltech101_labels.txt"
 # Original url should be
-# http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategories.tar.gz
+# https://doi.org/10.22002/D1.20086
 # which redirect to drive. We could use the original URL once
 # `downloader.download` correctly handle drive URLs hidden behind a redirection.
 _URL = "https://drive.google.com/uc?export=download&id=137RyRjvTBkBiIfeYBNZBtViDHQ6_Ewsp"
@@ -48,7 +48,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "image/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
         }),
         supervised_keys=("image", "label"),
-        homepage="http://www.vision.caltech.edu/Image_Datasets/Caltech101/",
+        homepage="https://doi.org/10.22002/D1.20086",
     )
 
   def _split_generators(self, dl_manager):
