@@ -19,6 +19,7 @@ Displayed in https://www.tensorflow.org/datasets/catalog/.
 """
 
 import abc
+import datetime
 import html
 import os
 import re
@@ -659,6 +660,7 @@ def _display_dataset_heading(
     builder: tfds.core.DatasetBuilder,
 ) -> str:
   ds_name = tfds.core.naming.DatasetName(namespace=namespace, name=builder.name)
+  reviewed = datetime.datetime.now().strftime('%Y-%m-%d')
   return f"""
       # `{ds_name}`
 
