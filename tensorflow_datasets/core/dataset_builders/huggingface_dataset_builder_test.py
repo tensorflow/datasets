@@ -149,6 +149,21 @@ def test_convert_value_sequence():
   )
 
 
+def test_convert_value_empty_sequence():
+  assert huggingface_dataset_builder._convert_value(
+      [None, "string"], feature_lib.Sequence(feature=np.str_)
+  ) == [b"", "string"]
+
+
+def test_convert_value_sequence_of_dict():
+  sequence_feature = feature_lib.Sequence(
+      {"someint": feature_lib.Scalar(dtype=np.str_)}
+  )
+  assert huggingface_dataset_builder._convert_value(
+      {"someint": [None, "string", None]}, sequence_feature
+  ) == {"someint": [b"", "string", b""]}
+
+
 def test_convert_value_image():
   image_feature = feature_lib.Image()
   image = lazy_imports_lib.lazy_imports.PIL_Image.new(mode="RGB", size=(4, 4))

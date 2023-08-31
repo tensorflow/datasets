@@ -191,11 +191,17 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
       }
   elif isinstance(feature, feature_lib.FeaturesDict):
     if isinstance(hf_value, dict):
-      return hf_value
+      return {k: _convert_value(v, feature[k]) for k, v in hf_value.items()}
     raise ValueError(f"The feature is {feature}, but the value is: {hf_value}")
   elif isinstance(feature, feature_lib.Sequence):
-    if isinstance(hf_value, (dict, list)):
-      return hf_value
+    if isinstance(hf_value, dict):
+      # Should be a dict of lists:
+      return {
+          k: [_convert_value(el, feature.feature[k]) for el in v]
+          for k, v in hf_value.items()
+      }
+    if isinstance(hf_value, list):
+      return [_convert_value(v, feature.feature) for v in hf_value]
     else:
       return [hf_value]
   elif isinstance(feature, feature_lib.Audio):
@@ -214,6 +220,8 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
     buffer = io.BytesIO()
     hf_value.save(fp=buffer, format=_IMAGE_ENCODING_FORMAT)
     return buffer.getvalue()
+  elif isinstance(feature, feature_lib.Tensor):
+    return hf_value
   raise ValueError(
       f"Type {type(hf_value)} of value {hf_value} "
       f"for feature {type(feature)} is not supported."
