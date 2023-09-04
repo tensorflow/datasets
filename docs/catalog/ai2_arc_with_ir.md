@@ -27,12 +27,6 @@ Compared to the original dataset, this adds context sentences obtained through
 information retrieval in the same way as UnifiedQA (see:
 https://arxiv.org/abs/2005.00700 ).
 
-*   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/arc">
-    Explore on Papers With Code
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Homepage**: [https://allenai.org/data/arc](https://allenai.org/data/arc)
 
 *   **Source code**:
