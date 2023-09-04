@@ -33,8 +33,8 @@ Split can be:
     *   **Absolute** (`'train[123:450]'`, `train[:4000]`): (see note below for
         caveat about read order)
     *   **Percent** (`'train[:75%]'`, `'train[25%:75%]'`): Divide the full data
-        into 100 even slices. If the data is not divisible by 100, some percent
-        might contain additional examples.
+        into even slices. If the data is not evenly divisible, some percent
+        might contain additional examples. Fractional percent are supported.
     *   **Shard** (`train[:4shard]`, `train[4shard]`): Select all examples in
         the requested shard. (see `info.splits['train'].num_shards` to get the
         number of shards of the split)
@@ -149,7 +149,7 @@ ds = tfds.load('my_dataset', split=split)
 *   `shard`: Shard slicing
 
 `tfds.ReadInstruction` also has a rounding argument. If the number of example in
-the dataset is not divide evenly by `100`:
+the dataset is not divide evenly:
 
 *   `rounding='closest'` (default): The remaining examples are distributed among
     the percent, so some percent might contain additional examples.
