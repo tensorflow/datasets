@@ -35,6 +35,12 @@ certain classes are absent. In the competition, all other unannotated classes
 are excluded from evaluation in that image. For each positive image-level label
 in an image, every instance of that object class in the image was annotated.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/open-images-v4">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://storage.googleapis.com/openimages/web/challenge2019.html](https://storage.googleapis.com/openimages/web/challenge2019.html)
 
