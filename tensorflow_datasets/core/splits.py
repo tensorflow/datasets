@@ -46,7 +46,7 @@ _SUB_SPEC_RE = re.compile(
     r"""^
     (?P<split_name>[\w-]+)
     (\[
-      (?P<split_selector>[\d\w%:-]+)
+      (?P<split_selector>[\d\w%:.-]+)
     \])?
     $""",
     re.X,  # Ignore whitespace
@@ -55,7 +55,7 @@ _SUB_SPEC_RE = re.compile(
 _SLICE_RE = re.compile(
     r"""^
     (
-        (?P<val>-?[\d_]+)
+        (?P<val>-?[\d_.]+)
         (?P<unit>(?:%|shard))?
     )?
     $""",
@@ -627,8 +627,8 @@ class ReadInstruction(AbstractSplit):
 
   Attributes:
     split_name: name of the split to read. Eg: 'train'.
-    from_: Starting index, or None if no lower boundary.
-    to: Ending index, or None if no upper boundary.
+    from_: Starting position, or None if no lower boundary.
+    to: Ending position, or None if no upper boundary.
     unit: optional, one of: '%': to set the slicing unit as percents of the
       split size. 'abs': to set the slicing unit as absolute numbers. 'shard':
       to set the slicing unit as shard.
@@ -644,8 +644,8 @@ class ReadInstruction(AbstractSplit):
 
   split_name: str
   # TODO(py3.10): Add `_ = dataclasses.KW_ONLY`
-  from_: Optional[int] = None
-  to: Optional[int] = None
+  from_: Optional[int | float] = None
+  to: Optional[int | float] = None
   unit: str = 'abs'
   rounding: str = 'closest'
 
@@ -671,8 +671,8 @@ class ReadInstruction(AbstractSplit):
 
   def __repr__(self) -> str:
     unit = '' if self.unit == 'abs' else self.unit
-    from_ = '' if self.from_ is None else f'{self.from_}{unit}'
-    to = '' if self.to is None else f'{self.to}{unit}'
+    from_ = '' if self.from_ is None else f'{self.from_:g}{unit}'
+    to = '' if self.to is None else f'{self.to:g}{unit}'
     if self.from_ is None and self.to is None:
       slice_str = ''  # Full split selected
     else:
@@ -716,14 +716,14 @@ def _str_to_relative_instruction(spec: str) -> AbstractSplit:
     # Make sure all slices are valid, and at least one is not empty
     if not all(slices) or not any(x.group(0) for x in slices):  # pytype: disable=attribute-error  # re-none
       raise ValueError(err_msg)
-    if len(slices) == 1:
+    if len(slices) == 1:  # split='train[x]'
       (from_match,) = slices
       from_ = from_match['val']
       to = int(from_) + 1
       unit = from_match['unit'] or 'abs'
       if unit != 'shard':
         raise ValueError('Absolute or percent only support slice syntax.')
-    elif len(slices) == 2:
+    elif len(slices) == 2:  # split='train[x:y]'
       from_match, to_match = slices
       from_ = from_match['val']
       to = to_match['val']
@@ -732,9 +732,9 @@ def _str_to_relative_instruction(spec: str) -> AbstractSplit:
       raise ValueError(err_msg)
 
   if from_ is not None:
-    from_ = int(from_)
+    from_ = float(from_) if unit == '%' else int(from_)
   if to is not None:
-    to = int(to)
+    to = float(to) if unit == '%' else int(to)
 
   return ReadInstruction(
       split_name=split_name,

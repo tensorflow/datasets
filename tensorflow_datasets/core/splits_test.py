@@ -394,6 +394,7 @@ class ReadInstructionTest(testing.TestCase):
     self.assertEqual(
         str(ri), "ReadInstruction('test[:99%]', rounding='closest')"
     )
+    self.check_from_spec('train[:0.5%]', [('train', None, 1)])
     # No overlap:
     self.check_from_spec('test[100%:]', [('test', 101, None)])
     # Percent slicing, pct1_dropremainder rounding:
