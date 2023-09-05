@@ -310,6 +310,13 @@ class DatasetInfoTest(testing.TestCase):
       )
       self.assertEqual(builder3.info.metadata, {"some_key": 123})
 
+  def test_redistribution_info(self):
+    info = dataset_info.DatasetInfo(
+        builder=self._builder, license="some license"
+    )
+    info_proto = info.as_proto
+    self.assertEqual(info_proto.redistribution_info.license, "some license")
+
   def test_updates_on_bucket_info(self):
     info = dataset_info.DatasetInfo(
         builder=self._builder, description="won't be updated"
@@ -591,6 +598,45 @@ def test_supervised_keys_from_proto_different_ordering():
   supervised_keys1 = dataset_info._supervised_keys_from_proto(proto=proto1)
   supervised_keys2 = dataset_info._supervised_keys_from_proto(proto=proto2)
   assert str(supervised_keys1) == str(supervised_keys2)
+
+
+@pytest.mark.parametrize(
+    ("license_", "redistribution_info", "expected_license"),
+    (
+        ("a", None, "a"),
+        (None, {"license": "a"}, "a"),
+        ("a", {"license": "a"}, "a"),
+        (None, None, None),
+    ),
+)
+def test_create_redistribution_info_proto(
+    license_, redistribution_info, expected_license
+):
+  result = dataset_info._create_redistribution_info_proto(
+      license=license_, redistribution_info=redistribution_info
+  )
+  if expected_license is None:
+    assert result is None
+  else:
+    assert result.license == expected_license
+
+
+def test_create_redistribution_info_proto_inconsistent():
+  with pytest.raises(
+      ValueError, match="License specified twice and inconsistently"
+  ):
+    dataset_info._create_redistribution_info_proto(
+        license="a", redistribution_info={"license": "b"}
+    )
+
+
+def test_create_redistribution_info_proto_unsupported_fields():
+  with pytest.raises(
+      ValueError, match="`redistribution_info` contains unsupported keys"
+  ):
+    dataset_info._create_redistribution_info_proto(
+        license="a", redistribution_info={"unsupported": "b"}
+    )
 
 
 # pylint: disable=g-inconsistent-quotes

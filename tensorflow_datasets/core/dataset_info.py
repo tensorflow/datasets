@@ -225,12 +225,6 @@ class DatasetInfo(object):
     else:
       self._identity = DatasetIdentity.from_builder(builder)
 
-    if redistribution_info is not None:
-      redistribution_info = dataset_info_pb2.RedistributionInfo(
-          license=utils.dedent(license or redistribution_info.pop("license")),
-          **redistribution_info,
-      )
-
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=self._identity.name,
         description=utils.dedent(description),
@@ -242,7 +236,9 @@ class DatasetInfo(object):
         config_tags=self._identity.config_tags,
         citation=utils.dedent(citation),
         module_name=self._identity.module_name,
-        redistribution_info=redistribution_info,
+        redistribution_info=_create_redistribution_info_proto(
+            license=license, redistribution_info=redistribution_info
+        ),
     )
 
     if homepage:
@@ -1106,6 +1102,48 @@ def _metadata_filepath(data_dir: epath.PathLike) -> epath.Path:
 
 def _now_in_milliseconds() -> int:
   return time.time_ns() // 1000000
+
+
+def _create_redistribution_info_proto(
+    license: str | None = None,  # pylint: disable=redefined-builtin
+    redistribution_info: dict[str, str] | None = None,
+) -> dataset_info_pb2.RedistributionInfo | None:
+  """Returns a consistent redistribution info.
+
+  Note that the license can be specified in both `license` and in
+  `redistribution_info`. Please prefer the `license` field.
+
+  Arguments:
+    license: the license of a dataset.
+    redistribution_info: mapping of other information about redistribution. Can
+      contain `license` as well.
+
+  Returns:
+    consistent redistribution info or `None` when no info is specified.
+  """
+  redistribution_info = redistribution_info or {}
+
+  if "license" in redistribution_info:
+    redistribution_info_license = redistribution_info.pop("license")
+    # Make sure `license` and `redistribution_info_license` are the same.
+    if license is not None and license != redistribution_info_license:
+      raise ValueError(
+          f"License specified twice and inconsistently: {license=} and"
+          f" {redistribution_info_license=}"
+      )
+    license = redistribution_info_license
+
+  if redistribution_info:
+    raise ValueError(
+        "`redistribution_info` contains unsupported keys:"
+        f" {redistribution_info.keys()}"
+    )
+
+  if license is not None:
+    return dataset_info_pb2.RedistributionInfo(
+        license=utils.dedent(str(license))
+    )
+  return None
 
 
 class MetadataDict(Metadata, dict):
