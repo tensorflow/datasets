@@ -334,7 +334,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @functools.cached_property
   def canonical_version(self) -> utils.Version:
-    return cannonical_version_for_config(self, self._builder_config)
+    return canonical_version_for_config(self, self._builder_config)
 
   @functools.cached_property
   def supported_versions(self):
@@ -720,7 +720,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
 
   def _update_dataset_info(self) -> None:
-    """Update the `dataset_info.json` file there."""
+    """Updates the `dataset_info.json` file in the dataset dir."""
     info_file = self.data_path / constants.DATASET_INFO_FILENAME
     if not info_file.exists():
       raise AssertionError(f"To update {info_file}, it must already exist.")
@@ -1762,11 +1762,11 @@ def load_default_config_name(
   return data.get("default_config_name")
 
 
-def cannonical_version_for_config(
+def canonical_version_for_config(
     instance_or_cls: Union[DatasetBuilder, Type[DatasetBuilder]],
     config: Optional[BuilderConfig] = None,
 ) -> utils.Version:
-  """Get the cannonical version for the given config.
+  """Get the canonical version for the given config.
 
   This allow to get the version without instanciating the class.
   The version can be stored either at the class or in the config object.

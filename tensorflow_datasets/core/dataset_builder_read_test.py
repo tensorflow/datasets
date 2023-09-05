@@ -108,8 +108,8 @@ def test_registered_logger_is_called(
   ]
 
 
-def test_cannonical_version_for_config():
-  get_version = dataset_builder.cannonical_version_for_config
+def test_canonical_version_for_config():
+  get_version = dataset_builder.canonical_version_for_config
 
   # No config
   version = get_version(testing.DummyDataset)
