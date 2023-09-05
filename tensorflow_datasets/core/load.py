@@ -312,7 +312,7 @@ class DatasetCollectionLoader:
       A `dict` of {`str`: tf.data.Dataset} for the desided dataset.
 
     Raises:
-      KeyError: if trying to load an dataset not included in the collection.
+      KeyError: if trying to load a dataset not included in the collection.
       RuntimeError: if `load` return type is not a `dict` or a `list`.
     """
     if not dataset:
