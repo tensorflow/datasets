@@ -189,6 +189,13 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       action='store_true',
       help='If True, raise an error if the checksums are not found.',
   )
+  # For compatibility with absl.flags (which generates --foo and --nofoo).
+  generation_group.add_argument(
+      '--noforce_checksums_validation',
+      dest='force_checksums_validation',
+      action='store_false',
+      help='If specified, bypass the checks on the checksums.',
+  )
   generation_group.add_argument(
       '--beam_pipeline_options',
       type=str,
