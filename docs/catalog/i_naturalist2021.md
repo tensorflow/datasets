@@ -12,11 +12,6 @@
 # `i_naturalist2021`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The iNaturalist dataset 2021 contains a total of 10,000 species. The full
@@ -37,9 +32,8 @@ images (100K in total). There are a total of 500,000 test images in the
 
     *   `1.0.0`: Initial release.
     *   `2.0.0`: Update: Class indices follow the order in the JSON train file.
-    *   **`2.0.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Update: Include the example id as provided in the JSON files.
+    *   **`2.0.1`** (default): Update: Include the example id as provided in the
+        JSON files.
 
 *   **Download size**: `316.54 GiB`
 
