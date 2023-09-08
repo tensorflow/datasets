@@ -10,6 +10,20 @@ and this project adheres to
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [4.9.3] - 2023-09-08
+
+### Added
+
 -   [Segment Anything](https://ai.facebook.com/datasets/segment-anything-downloads)
     (SA-1B) dataset.
 
