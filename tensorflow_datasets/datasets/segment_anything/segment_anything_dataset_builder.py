@@ -76,6 +76,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       f'Download the links file from {_HOMEPAGE_URL}. `manual_dir` should'
       f' contain the links file saved as {_LOCAL_LINKS_FILE_NAME}.'
   )
+  # The dataset is ~1000 * 10.5GB = ~10.5TB big, so we try to increase
+  # parallelism to download. The default is 50.
+  MAX_SIMULTANEOUS_DOWNLOADS = 100
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
