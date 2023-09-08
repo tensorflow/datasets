@@ -12,11 +12,6 @@
 # `d4rl_antmaze`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 D4RL is an open-source benchmark for offline reinforcement learning. It provides
@@ -37,9 +32,7 @@ to represent steps and episodes.
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.1.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added v2 datasets.
+    *   **`1.1.1`** (default): Added v2 datasets.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -400,7 +393,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## d4rl_antmaze/umaze-v2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## d4rl_antmaze/umaze-v2
 
 *   **Download size**: `221.76 MiB`
 
@@ -449,7 +442,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## d4rl_antmaze/umaze-diverse-v2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## d4rl_antmaze/umaze-diverse-v2
 
 *   **Download size**: `220.16 MiB`
 
@@ -498,7 +491,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## d4rl_antmaze/medium-play-v2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## d4rl_antmaze/medium-play-v2
 
 *   **Download size**: `220.40 MiB`
 
@@ -547,7 +540,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## d4rl_antmaze/medium-diverse-v2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## d4rl_antmaze/medium-diverse-v2
 
 *   **Download size**: `220.39 MiB`
 
@@ -596,7 +589,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## d4rl_antmaze/large-diverse-v2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## d4rl_antmaze/large-diverse-v2
 
 *   **Download size**: `220.47 MiB`
 
@@ -645,7 +638,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## d4rl_antmaze/large-play-v2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## d4rl_antmaze/large-play-v2
 
 *   **Download size**: `220.18 MiB`
 

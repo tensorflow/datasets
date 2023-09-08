@@ -163,15 +163,12 @@ toc:
   title: Dependency parsing
 - section:
   - path: /datasets/catalog/bot_adversarial_dialogue
-    status: nightly
     title: bot_adversarial_dialogue
   title: Dialog act labeling
 - section:
   - path: /datasets/catalog/bot_adversarial_dialogue
-    status: nightly
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   title: Dialogue
 - section:
@@ -390,7 +387,6 @@ toc:
   - path: /datasets/catalog/cifar10_corrupted
     title: cifar10_corrupted
   - path: /datasets/catalog/cifar10_h
-    status: nightly
     title: cifar10_h
   - path: /datasets/catalog/cifar10_n
     title: cifar10_n (manual)
@@ -535,7 +531,6 @@ toc:
   title: Image generation
 - section:
   - path: /datasets/catalog/segment_anything
-    status: nightly
     title: segment_anything (manual)
   title: Image segmentation
 - section:
@@ -564,7 +559,6 @@ toc:
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
   - path: /datasets/catalog/segment_anything
-    status: nightly
     title: segment_anything (manual)
   title: Instance segmentation
 - section:
@@ -575,7 +569,6 @@ toc:
   - path: /datasets/catalog/blimp
     title: blimp
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -610,7 +603,6 @@ toc:
   title: Language modeling
 - section:
   - path: /datasets/catalog/bot_adversarial_dialogue
-    status: nightly
     title: bot_adversarial_dialogue
   title: Linguistic acceptability
 - section:
@@ -633,7 +625,6 @@ toc:
   - path: /datasets/catalog/bool_q
     title: bool_q
   - path: /datasets/catalog/bot_adversarial_dialogue
-    status: nightly
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -668,7 +659,6 @@ toc:
   - path: /datasets/catalog/race
     title: race
   - path: /datasets/catalog/real_toxicity_prompts
-    status: nightly
     title: real_toxicity_prompts
   - path: /datasets/catalog/reddit
     title: reddit
@@ -735,7 +725,6 @@ toc:
   - path: /datasets/catalog/clevr
     title: clevr
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
@@ -814,7 +803,6 @@ toc:
   title: Object detection
 - section:
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   - path: /datasets/catalog/natural_questions
     title: natural_questions
@@ -839,7 +827,6 @@ toc:
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   - path: /datasets/catalog/math_dataset
     title: math_dataset
@@ -986,7 +973,6 @@ toc:
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
   - path: /datasets/catalog/segment_anything
-    status: nightly
     title: segment_anything (manual)
   - path: /datasets/catalog/so2sat
     title: so2sat
@@ -999,7 +985,6 @@ toc:
   title: Sentiment analysis
 - section:
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   title: Sequence modeling
 - section:
@@ -1008,7 +993,6 @@ toc:
   - path: /datasets/catalog/billsum
     title: billsum
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   - path: /datasets/catalog/math_qa
     title: math_qa
@@ -1157,7 +1141,6 @@ toc:
   - path: /datasets/catalog/bool_q
     title: bool_q
   - path: /datasets/catalog/bot_adversarial_dialogue
-    status: nightly
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/bucc
     title: bucc
@@ -1182,12 +1165,10 @@ toc:
   - path: /datasets/catalog/conll2003
     title: conll2003
   - path: /datasets/catalog/corr2cause
-    status: nightly
     title: corr2cause
   - path: /datasets/catalog/cos_e
     title: cos_e
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
@@ -1326,7 +1307,6 @@ toc:
   - path: /datasets/catalog/race
     title: race
   - path: /datasets/catalog/real_toxicity_prompts
-    status: nightly
     title: real_toxicity_prompts
   - path: /datasets/catalog/reddit_disentanglement
     title: reddit_disentanglement (manual)
@@ -1437,7 +1417,6 @@ toc:
   - path: /datasets/catalog/bool_q
     title: bool_q
   - path: /datasets/catalog/bot_adversarial_dialogue
-    status: nightly
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
@@ -1454,10 +1433,8 @@ toc:
   title: Text classification
 - section:
   - path: /datasets/catalog/bot_adversarial_dialogue
-    status: nightly
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/real_toxicity_prompts
-    status: nightly
     title: real_toxicity_prompts
   title: Text classification toxicity prediction
 - section:
@@ -1472,7 +1449,6 @@ toc:
   - path: /datasets/catalog/bool_q
     title: bool_q
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -1497,7 +1473,6 @@ toc:
   - path: /datasets/catalog/race
     title: race
   - path: /datasets/catalog/real_toxicity_prompts
-    status: nightly
     title: real_toxicity_prompts
   - path: /datasets/catalog/reddit
     title: reddit
@@ -1530,7 +1505,6 @@ toc:
   - path: /datasets/catalog/booksum
     title: booksum (manual)
   - path: /datasets/catalog/databricks_dolly
-    status: nightly
     title: databricks_dolly
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)

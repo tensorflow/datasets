@@ -12,11 +12,6 @@
 # `wikipedia`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Wikipedia dataset containing cleaned articles of all languages. The datasets are
@@ -70,7 +65,7 @@ title   | Text         |       | string |
 ```
 
 
-## wikipedia/20230601.en (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.en (default config)
 
 *   **Config description**: Wikipedia dataset for en, parsed from 20230601 dump.
 
@@ -92,7 +87,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ab <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ab
 
 *   **Config description**: Wikipedia dataset for ab, parsed from 20230601 dump.
 
@@ -114,7 +109,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ace <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ace
 
 *   **Config description**: Wikipedia dataset for ace, parsed from 20230601
     dump.
@@ -137,7 +132,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ady <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ady
 
 *   **Config description**: Wikipedia dataset for ady, parsed from 20230601
     dump.
@@ -160,7 +155,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.af <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.af
 
 *   **Config description**: Wikipedia dataset for af, parsed from 20230601 dump.
 
@@ -182,7 +177,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ak <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ak
 
 *   **Config description**: Wikipedia dataset for ak, parsed from 20230601 dump.
 
@@ -204,7 +199,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.als <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.als
 
 *   **Config description**: Wikipedia dataset for als, parsed from 20230601
     dump.
@@ -227,7 +222,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.am <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.am
 
 *   **Config description**: Wikipedia dataset for am, parsed from 20230601 dump.
 
@@ -249,7 +244,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.an <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.an
 
 *   **Config description**: Wikipedia dataset for an, parsed from 20230601 dump.
 
@@ -271,7 +266,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ang <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ang
 
 *   **Config description**: Wikipedia dataset for ang, parsed from 20230601
     dump.
@@ -294,7 +289,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ar <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ar
 
 *   **Config description**: Wikipedia dataset for ar, parsed from 20230601 dump.
 
@@ -316,7 +311,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.arc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.arc
 
 *   **Config description**: Wikipedia dataset for arc, parsed from 20230601
     dump.
@@ -339,7 +334,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.arz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.arz
 
 *   **Config description**: Wikipedia dataset for arz, parsed from 20230601
     dump.
@@ -362,7 +357,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.as <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.as
 
 *   **Config description**: Wikipedia dataset for as, parsed from 20230601 dump.
 
@@ -384,7 +379,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ast <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ast
 
 *   **Config description**: Wikipedia dataset for ast, parsed from 20230601
     dump.
@@ -407,7 +402,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.atj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.atj
 
 *   **Config description**: Wikipedia dataset for atj, parsed from 20230601
     dump.
@@ -430,7 +425,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.av <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.av
 
 *   **Config description**: Wikipedia dataset for av, parsed from 20230601 dump.
 
@@ -452,7 +447,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ay <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ay
 
 *   **Config description**: Wikipedia dataset for ay, parsed from 20230601 dump.
 
@@ -474,7 +469,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.az <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.az
 
 *   **Config description**: Wikipedia dataset for az, parsed from 20230601 dump.
 
@@ -496,7 +491,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.azb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.azb
 
 *   **Config description**: Wikipedia dataset for azb, parsed from 20230601
     dump.
@@ -519,7 +514,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ba <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ba
 
 *   **Config description**: Wikipedia dataset for ba, parsed from 20230601 dump.
 
@@ -541,7 +536,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bar <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bar
 
 *   **Config description**: Wikipedia dataset for bar, parsed from 20230601
     dump.
@@ -564,7 +559,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bcl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bcl
 
 *   **Config description**: Wikipedia dataset for bcl, parsed from 20230601
     dump.
@@ -587,7 +582,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.be <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.be
 
 *   **Config description**: Wikipedia dataset for be, parsed from 20230601 dump.
 
@@ -609,7 +604,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bg
 
 *   **Config description**: Wikipedia dataset for bg, parsed from 20230601 dump.
 
@@ -631,7 +626,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bh
 
 *   **Config description**: Wikipedia dataset for bh, parsed from 20230601 dump.
 
@@ -653,7 +648,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bi
 
 *   **Config description**: Wikipedia dataset for bi, parsed from 20230601 dump.
 
@@ -675,7 +670,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bjn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bjn
 
 *   **Config description**: Wikipedia dataset for bjn, parsed from 20230601
     dump.
@@ -698,7 +693,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bm
 
 *   **Config description**: Wikipedia dataset for bm, parsed from 20230601 dump.
 
@@ -720,7 +715,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bn
 
 *   **Config description**: Wikipedia dataset for bn, parsed from 20230601 dump.
 
@@ -742,7 +737,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bo
 
 *   **Config description**: Wikipedia dataset for bo, parsed from 20230601 dump.
 
@@ -764,7 +759,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bpy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bpy
 
 *   **Config description**: Wikipedia dataset for bpy, parsed from 20230601
     dump.
@@ -787,7 +782,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.br <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.br
 
 *   **Config description**: Wikipedia dataset for br, parsed from 20230601 dump.
 
@@ -809,7 +804,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bs
 
 *   **Config description**: Wikipedia dataset for bs, parsed from 20230601 dump.
 
@@ -831,7 +826,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bug <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bug
 
 *   **Config description**: Wikipedia dataset for bug, parsed from 20230601
     dump.
@@ -854,7 +849,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.bxr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.bxr
 
 *   **Config description**: Wikipedia dataset for bxr, parsed from 20230601
     dump.
@@ -877,7 +872,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ca <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ca
 
 *   **Config description**: Wikipedia dataset for ca, parsed from 20230601 dump.
 
@@ -899,7 +894,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.cdo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.cdo
 
 *   **Config description**: Wikipedia dataset for cdo, parsed from 20230601
     dump.
@@ -922,7 +917,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ce <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ce
 
 *   **Config description**: Wikipedia dataset for ce, parsed from 20230601 dump.
 
@@ -944,7 +939,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ceb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ceb
 
 *   **Config description**: Wikipedia dataset for ceb, parsed from 20230601
     dump.
@@ -967,7 +962,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ch <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ch
 
 *   **Config description**: Wikipedia dataset for ch, parsed from 20230601 dump.
 
@@ -989,7 +984,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.cho <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.cho
 
 *   **Config description**: Wikipedia dataset for cho, parsed from 20230601
     dump.
@@ -1012,7 +1007,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.chr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.chr
 
 *   **Config description**: Wikipedia dataset for chr, parsed from 20230601
     dump.
@@ -1035,7 +1030,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.chy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.chy
 
 *   **Config description**: Wikipedia dataset for chy, parsed from 20230601
     dump.
@@ -1058,7 +1053,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ckb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ckb
 
 *   **Config description**: Wikipedia dataset for ckb, parsed from 20230601
     dump.
@@ -1081,7 +1076,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.co <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.co
 
 *   **Config description**: Wikipedia dataset for co, parsed from 20230601 dump.
 
@@ -1103,7 +1098,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.cr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.cr
 
 *   **Config description**: Wikipedia dataset for cr, parsed from 20230601 dump.
 
@@ -1125,7 +1120,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.crh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.crh
 
 *   **Config description**: Wikipedia dataset for crh, parsed from 20230601
     dump.
@@ -1148,7 +1143,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.cs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.cs
 
 *   **Config description**: Wikipedia dataset for cs, parsed from 20230601 dump.
 
@@ -1170,7 +1165,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.csb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.csb
 
 *   **Config description**: Wikipedia dataset for csb, parsed from 20230601
     dump.
@@ -1193,7 +1188,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.cu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.cu
 
 *   **Config description**: Wikipedia dataset for cu, parsed from 20230601 dump.
 
@@ -1215,7 +1210,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.cv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.cv
 
 *   **Config description**: Wikipedia dataset for cv, parsed from 20230601 dump.
 
@@ -1237,7 +1232,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.cy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.cy
 
 *   **Config description**: Wikipedia dataset for cy, parsed from 20230601 dump.
 
@@ -1259,7 +1254,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.da <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.da
 
 *   **Config description**: Wikipedia dataset for da, parsed from 20230601 dump.
 
@@ -1281,7 +1276,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.de <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.de
 
 *   **Config description**: Wikipedia dataset for de, parsed from 20230601 dump.
 
@@ -1303,7 +1298,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.din <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.din
 
 *   **Config description**: Wikipedia dataset for din, parsed from 20230601
     dump.
@@ -1326,7 +1321,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.diq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.diq
 
 *   **Config description**: Wikipedia dataset for diq, parsed from 20230601
     dump.
@@ -1349,7 +1344,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.dsb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.dsb
 
 *   **Config description**: Wikipedia dataset for dsb, parsed from 20230601
     dump.
@@ -1372,7 +1367,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.dty <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.dty
 
 *   **Config description**: Wikipedia dataset for dty, parsed from 20230601
     dump.
@@ -1395,7 +1390,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.dv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.dv
 
 *   **Config description**: Wikipedia dataset for dv, parsed from 20230601 dump.
 
@@ -1417,7 +1412,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.dz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.dz
 
 *   **Config description**: Wikipedia dataset for dz, parsed from 20230601 dump.
 
@@ -1439,7 +1434,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ee <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ee
 
 *   **Config description**: Wikipedia dataset for ee, parsed from 20230601 dump.
 
@@ -1461,7 +1456,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.el <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.el
 
 *   **Config description**: Wikipedia dataset for el, parsed from 20230601 dump.
 
@@ -1483,7 +1478,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.eml <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.eml
 
 *   **Config description**: Wikipedia dataset for eml, parsed from 20230601
     dump.
@@ -1506,7 +1501,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.eo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.eo
 
 *   **Config description**: Wikipedia dataset for eo, parsed from 20230601 dump.
 
@@ -1528,7 +1523,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.es <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.es
 
 *   **Config description**: Wikipedia dataset for es, parsed from 20230601 dump.
 
@@ -1550,7 +1545,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.et <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.et
 
 *   **Config description**: Wikipedia dataset for et, parsed from 20230601 dump.
 
@@ -1572,7 +1567,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.eu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.eu
 
 *   **Config description**: Wikipedia dataset for eu, parsed from 20230601 dump.
 
@@ -1594,7 +1589,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ext <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ext
 
 *   **Config description**: Wikipedia dataset for ext, parsed from 20230601
     dump.
@@ -1617,7 +1612,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.fa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.fa
 
 *   **Config description**: Wikipedia dataset for fa, parsed from 20230601 dump.
 
@@ -1639,7 +1634,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ff <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ff
 
 *   **Config description**: Wikipedia dataset for ff, parsed from 20230601 dump.
 
@@ -1661,7 +1656,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.fi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.fi
 
 *   **Config description**: Wikipedia dataset for fi, parsed from 20230601 dump.
 
@@ -1683,7 +1678,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.fj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.fj
 
 *   **Config description**: Wikipedia dataset for fj, parsed from 20230601 dump.
 
@@ -1705,7 +1700,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.fo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.fo
 
 *   **Config description**: Wikipedia dataset for fo, parsed from 20230601 dump.
 
@@ -1727,7 +1722,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.fr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.fr
 
 *   **Config description**: Wikipedia dataset for fr, parsed from 20230601 dump.
 
@@ -1749,7 +1744,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.frp <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.frp
 
 *   **Config description**: Wikipedia dataset for frp, parsed from 20230601
     dump.
@@ -1772,7 +1767,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.frr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.frr
 
 *   **Config description**: Wikipedia dataset for frr, parsed from 20230601
     dump.
@@ -1795,7 +1790,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.fur <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.fur
 
 *   **Config description**: Wikipedia dataset for fur, parsed from 20230601
     dump.
@@ -1818,7 +1813,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.fy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.fy
 
 *   **Config description**: Wikipedia dataset for fy, parsed from 20230601 dump.
 
@@ -1840,7 +1835,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ga <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ga
 
 *   **Config description**: Wikipedia dataset for ga, parsed from 20230601 dump.
 
@@ -1862,7 +1857,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gag <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gag
 
 *   **Config description**: Wikipedia dataset for gag, parsed from 20230601
     dump.
@@ -1885,7 +1880,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gan <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gan
 
 *   **Config description**: Wikipedia dataset for gan, parsed from 20230601
     dump.
@@ -1908,7 +1903,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gd
 
 *   **Config description**: Wikipedia dataset for gd, parsed from 20230601 dump.
 
@@ -1930,7 +1925,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gl
 
 *   **Config description**: Wikipedia dataset for gl, parsed from 20230601 dump.
 
@@ -1952,7 +1947,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.glk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.glk
 
 *   **Config description**: Wikipedia dataset for glk, parsed from 20230601
     dump.
@@ -1975,7 +1970,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gn
 
 *   **Config description**: Wikipedia dataset for gn, parsed from 20230601 dump.
 
@@ -1997,7 +1992,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gom <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gom
 
 *   **Config description**: Wikipedia dataset for gom, parsed from 20230601
     dump.
@@ -2020,7 +2015,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gor <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gor
 
 *   **Config description**: Wikipedia dataset for gor, parsed from 20230601
     dump.
@@ -2043,7 +2038,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.got <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.got
 
 *   **Config description**: Wikipedia dataset for got, parsed from 20230601
     dump.
@@ -2066,7 +2061,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gu
 
 *   **Config description**: Wikipedia dataset for gu, parsed from 20230601 dump.
 
@@ -2088,7 +2083,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.gv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.gv
 
 *   **Config description**: Wikipedia dataset for gv, parsed from 20230601 dump.
 
@@ -2110,7 +2105,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ha <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ha
 
 *   **Config description**: Wikipedia dataset for ha, parsed from 20230601 dump.
 
@@ -2132,7 +2127,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.hak <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.hak
 
 *   **Config description**: Wikipedia dataset for hak, parsed from 20230601
     dump.
@@ -2155,7 +2150,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.haw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.haw
 
 *   **Config description**: Wikipedia dataset for haw, parsed from 20230601
     dump.
@@ -2178,7 +2173,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.he <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.he
 
 *   **Config description**: Wikipedia dataset for he, parsed from 20230601 dump.
 
@@ -2200,7 +2195,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.hi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.hi
 
 *   **Config description**: Wikipedia dataset for hi, parsed from 20230601 dump.
 
@@ -2222,7 +2217,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.hif <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.hif
 
 *   **Config description**: Wikipedia dataset for hif, parsed from 20230601
     dump.
@@ -2245,7 +2240,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ho <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ho
 
 *   **Config description**: Wikipedia dataset for ho, parsed from 20230601 dump.
 
@@ -2267,7 +2262,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.hr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.hr
 
 *   **Config description**: Wikipedia dataset for hr, parsed from 20230601 dump.
 
@@ -2289,7 +2284,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.hsb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.hsb
 
 *   **Config description**: Wikipedia dataset for hsb, parsed from 20230601
     dump.
@@ -2312,7 +2307,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ht <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ht
 
 *   **Config description**: Wikipedia dataset for ht, parsed from 20230601 dump.
 
@@ -2334,7 +2329,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.hu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.hu
 
 *   **Config description**: Wikipedia dataset for hu, parsed from 20230601 dump.
 
@@ -2356,7 +2351,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.hy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.hy
 
 *   **Config description**: Wikipedia dataset for hy, parsed from 20230601 dump.
 
@@ -2378,7 +2373,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ia <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ia
 
 *   **Config description**: Wikipedia dataset for ia, parsed from 20230601 dump.
 
@@ -2400,7 +2395,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.id <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.id
 
 *   **Config description**: Wikipedia dataset for id, parsed from 20230601 dump.
 
@@ -2422,7 +2417,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ie <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ie
 
 *   **Config description**: Wikipedia dataset for ie, parsed from 20230601 dump.
 
@@ -2444,7 +2439,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ig <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ig
 
 *   **Config description**: Wikipedia dataset for ig, parsed from 20230601 dump.
 
@@ -2466,7 +2461,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ii <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ii
 
 *   **Config description**: Wikipedia dataset for ii, parsed from 20230601 dump.
 
@@ -2488,7 +2483,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ik <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ik
 
 *   **Config description**: Wikipedia dataset for ik, parsed from 20230601 dump.
 
@@ -2510,7 +2505,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ilo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ilo
 
 *   **Config description**: Wikipedia dataset for ilo, parsed from 20230601
     dump.
@@ -2533,7 +2528,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.inh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.inh
 
 *   **Config description**: Wikipedia dataset for inh, parsed from 20230601
     dump.
@@ -2556,7 +2551,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.io <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.io
 
 *   **Config description**: Wikipedia dataset for io, parsed from 20230601 dump.
 
@@ -2578,7 +2573,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.is <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.is
 
 *   **Config description**: Wikipedia dataset for is, parsed from 20230601 dump.
 
@@ -2600,7 +2595,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.it <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.it
 
 *   **Config description**: Wikipedia dataset for it, parsed from 20230601 dump.
 
@@ -2622,7 +2617,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.iu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.iu
 
 *   **Config description**: Wikipedia dataset for iu, parsed from 20230601 dump.
 
@@ -2644,7 +2639,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ja <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ja
 
 *   **Config description**: Wikipedia dataset for ja, parsed from 20230601 dump.
 
@@ -2666,7 +2661,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.jam <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.jam
 
 *   **Config description**: Wikipedia dataset for jam, parsed from 20230601
     dump.
@@ -2689,7 +2684,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.jbo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.jbo
 
 *   **Config description**: Wikipedia dataset for jbo, parsed from 20230601
     dump.
@@ -2712,7 +2707,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.jv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.jv
 
 *   **Config description**: Wikipedia dataset for jv, parsed from 20230601 dump.
 
@@ -2734,7 +2729,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ka <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ka
 
 *   **Config description**: Wikipedia dataset for ka, parsed from 20230601 dump.
 
@@ -2756,7 +2751,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kaa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kaa
 
 *   **Config description**: Wikipedia dataset for kaa, parsed from 20230601
     dump.
@@ -2779,7 +2774,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kab <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kab
 
 *   **Config description**: Wikipedia dataset for kab, parsed from 20230601
     dump.
@@ -2802,7 +2797,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kbd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kbd
 
 *   **Config description**: Wikipedia dataset for kbd, parsed from 20230601
     dump.
@@ -2825,7 +2820,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kbp <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kbp
 
 *   **Config description**: Wikipedia dataset for kbp, parsed from 20230601
     dump.
@@ -2848,7 +2843,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kg
 
 *   **Config description**: Wikipedia dataset for kg, parsed from 20230601 dump.
 
@@ -2870,7 +2865,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ki <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ki
 
 *   **Config description**: Wikipedia dataset for ki, parsed from 20230601 dump.
 
@@ -2892,7 +2887,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kj
 
 *   **Config description**: Wikipedia dataset for kj, parsed from 20230601 dump.
 
@@ -2914,7 +2909,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kk
 
 *   **Config description**: Wikipedia dataset for kk, parsed from 20230601 dump.
 
@@ -2936,7 +2931,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kl
 
 *   **Config description**: Wikipedia dataset for kl, parsed from 20230601 dump.
 
@@ -2958,7 +2953,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.km <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.km
 
 *   **Config description**: Wikipedia dataset for km, parsed from 20230601 dump.
 
@@ -2980,7 +2975,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kn
 
 *   **Config description**: Wikipedia dataset for kn, parsed from 20230601 dump.
 
@@ -3002,7 +2997,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ko <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ko
 
 *   **Config description**: Wikipedia dataset for ko, parsed from 20230601 dump.
 
@@ -3024,7 +3019,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.koi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.koi
 
 *   **Config description**: Wikipedia dataset for koi, parsed from 20230601
     dump.
@@ -3047,7 +3042,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.krc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.krc
 
 *   **Config description**: Wikipedia dataset for krc, parsed from 20230601
     dump.
@@ -3070,7 +3065,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ks <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ks
 
 *   **Config description**: Wikipedia dataset for ks, parsed from 20230601 dump.
 
@@ -3092,7 +3087,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ksh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ksh
 
 *   **Config description**: Wikipedia dataset for ksh, parsed from 20230601
     dump.
@@ -3115,7 +3110,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ku <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ku
 
 *   **Config description**: Wikipedia dataset for ku, parsed from 20230601 dump.
 
@@ -3137,7 +3132,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kv
 
 *   **Config description**: Wikipedia dataset for kv, parsed from 20230601 dump.
 
@@ -3159,7 +3154,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.kw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.kw
 
 *   **Config description**: Wikipedia dataset for kw, parsed from 20230601 dump.
 
@@ -3181,7 +3176,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ky <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ky
 
 *   **Config description**: Wikipedia dataset for ky, parsed from 20230601 dump.
 
@@ -3203,7 +3198,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.la <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.la
 
 *   **Config description**: Wikipedia dataset for la, parsed from 20230601 dump.
 
@@ -3225,7 +3220,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lad <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lad
 
 *   **Config description**: Wikipedia dataset for lad, parsed from 20230601
     dump.
@@ -3248,7 +3243,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lb
 
 *   **Config description**: Wikipedia dataset for lb, parsed from 20230601 dump.
 
@@ -3270,7 +3265,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lbe <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lbe
 
 *   **Config description**: Wikipedia dataset for lbe, parsed from 20230601
     dump.
@@ -3293,7 +3288,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lez <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lez
 
 *   **Config description**: Wikipedia dataset for lez, parsed from 20230601
     dump.
@@ -3316,7 +3311,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lfn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lfn
 
 *   **Config description**: Wikipedia dataset for lfn, parsed from 20230601
     dump.
@@ -3339,7 +3334,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lg
 
 *   **Config description**: Wikipedia dataset for lg, parsed from 20230601 dump.
 
@@ -3361,7 +3356,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.li <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.li
 
 *   **Config description**: Wikipedia dataset for li, parsed from 20230601 dump.
 
@@ -3383,7 +3378,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lij <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lij
 
 *   **Config description**: Wikipedia dataset for lij, parsed from 20230601
     dump.
@@ -3406,7 +3401,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lmo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lmo
 
 *   **Config description**: Wikipedia dataset for lmo, parsed from 20230601
     dump.
@@ -3429,7 +3424,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ln <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ln
 
 *   **Config description**: Wikipedia dataset for ln, parsed from 20230601 dump.
 
@@ -3451,7 +3446,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lo
 
 *   **Config description**: Wikipedia dataset for lo, parsed from 20230601 dump.
 
@@ -3473,7 +3468,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lrc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lrc
 
 *   **Config description**: Wikipedia dataset for lrc, parsed from 20230601
     dump.
@@ -3496,7 +3491,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lt
 
 *   **Config description**: Wikipedia dataset for lt, parsed from 20230601 dump.
 
@@ -3518,7 +3513,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ltg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ltg
 
 *   **Config description**: Wikipedia dataset for ltg, parsed from 20230601
     dump.
@@ -3541,7 +3536,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.lv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.lv
 
 *   **Config description**: Wikipedia dataset for lv, parsed from 20230601 dump.
 
@@ -3563,7 +3558,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mai <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mai
 
 *   **Config description**: Wikipedia dataset for mai, parsed from 20230601
     dump.
@@ -3586,7 +3581,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mdf <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mdf
 
 *   **Config description**: Wikipedia dataset for mdf, parsed from 20230601
     dump.
@@ -3609,7 +3604,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mg
 
 *   **Config description**: Wikipedia dataset for mg, parsed from 20230601 dump.
 
@@ -3631,7 +3626,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mh
 
 *   **Config description**: Wikipedia dataset for mh, parsed from 20230601 dump.
 
@@ -3653,7 +3648,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mhr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mhr
 
 *   **Config description**: Wikipedia dataset for mhr, parsed from 20230601
     dump.
@@ -3676,7 +3671,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mi
 
 *   **Config description**: Wikipedia dataset for mi, parsed from 20230601 dump.
 
@@ -3698,7 +3693,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.min <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.min
 
 *   **Config description**: Wikipedia dataset for min, parsed from 20230601
     dump.
@@ -3721,7 +3716,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mk
 
 *   **Config description**: Wikipedia dataset for mk, parsed from 20230601 dump.
 
@@ -3743,7 +3738,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ml <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ml
 
 *   **Config description**: Wikipedia dataset for ml, parsed from 20230601 dump.
 
@@ -3765,7 +3760,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mn
 
 *   **Config description**: Wikipedia dataset for mn, parsed from 20230601 dump.
 
@@ -3787,7 +3782,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mr
 
 *   **Config description**: Wikipedia dataset for mr, parsed from 20230601 dump.
 
@@ -3809,7 +3804,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mrj <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mrj
 
 *   **Config description**: Wikipedia dataset for mrj, parsed from 20230601
     dump.
@@ -3832,7 +3827,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ms <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ms
 
 *   **Config description**: Wikipedia dataset for ms, parsed from 20230601 dump.
 
@@ -3854,7 +3849,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mt
 
 *   **Config description**: Wikipedia dataset for mt, parsed from 20230601 dump.
 
@@ -3876,7 +3871,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mus <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mus
 
 *   **Config description**: Wikipedia dataset for mus, parsed from 20230601
     dump.
@@ -3899,7 +3894,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mwl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mwl
 
 *   **Config description**: Wikipedia dataset for mwl, parsed from 20230601
     dump.
@@ -3922,7 +3917,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.my <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.my
 
 *   **Config description**: Wikipedia dataset for my, parsed from 20230601 dump.
 
@@ -3944,7 +3939,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.myv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.myv
 
 *   **Config description**: Wikipedia dataset for myv, parsed from 20230601
     dump.
@@ -3967,7 +3962,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.mzn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.mzn
 
 *   **Config description**: Wikipedia dataset for mzn, parsed from 20230601
     dump.
@@ -3990,7 +3985,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nah <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nah
 
 *   **Config description**: Wikipedia dataset for nah, parsed from 20230601
     dump.
@@ -4013,7 +4008,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nap <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nap
 
 *   **Config description**: Wikipedia dataset for nap, parsed from 20230601
     dump.
@@ -4036,7 +4031,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nds <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nds
 
 *   **Config description**: Wikipedia dataset for nds, parsed from 20230601
     dump.
@@ -4059,7 +4054,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ne <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ne
 
 *   **Config description**: Wikipedia dataset for ne, parsed from 20230601 dump.
 
@@ -4081,7 +4076,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.new <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.new
 
 *   **Config description**: Wikipedia dataset for new, parsed from 20230601
     dump.
@@ -4104,7 +4099,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ng <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ng
 
 *   **Config description**: Wikipedia dataset for ng, parsed from 20230601 dump.
 
@@ -4126,7 +4121,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nl
 
 *   **Config description**: Wikipedia dataset for nl, parsed from 20230601 dump.
 
@@ -4148,7 +4143,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nn
 
 *   **Config description**: Wikipedia dataset for nn, parsed from 20230601 dump.
 
@@ -4170,7 +4165,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.no <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.no
 
 *   **Config description**: Wikipedia dataset for no, parsed from 20230601 dump.
 
@@ -4192,7 +4187,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nov <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nov
 
 *   **Config description**: Wikipedia dataset for nov, parsed from 20230601
     dump.
@@ -4215,7 +4210,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nrm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nrm
 
 *   **Config description**: Wikipedia dataset for nrm, parsed from 20230601
     dump.
@@ -4238,7 +4233,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nso <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nso
 
 *   **Config description**: Wikipedia dataset for nso, parsed from 20230601
     dump.
@@ -4261,7 +4256,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.nv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.nv
 
 *   **Config description**: Wikipedia dataset for nv, parsed from 20230601 dump.
 
@@ -4283,7 +4278,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ny <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ny
 
 *   **Config description**: Wikipedia dataset for ny, parsed from 20230601 dump.
 
@@ -4305,7 +4300,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.oc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.oc
 
 *   **Config description**: Wikipedia dataset for oc, parsed from 20230601 dump.
 
@@ -4327,7 +4322,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.olo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.olo
 
 *   **Config description**: Wikipedia dataset for olo, parsed from 20230601
     dump.
@@ -4350,7 +4345,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.om <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.om
 
 *   **Config description**: Wikipedia dataset for om, parsed from 20230601 dump.
 
@@ -4372,7 +4367,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.or <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.or
 
 *   **Config description**: Wikipedia dataset for or, parsed from 20230601 dump.
 
@@ -4394,7 +4389,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.os <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.os
 
 *   **Config description**: Wikipedia dataset for os, parsed from 20230601 dump.
 
@@ -4416,7 +4411,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pa
 
 *   **Config description**: Wikipedia dataset for pa, parsed from 20230601 dump.
 
@@ -4438,7 +4433,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pag <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pag
 
 *   **Config description**: Wikipedia dataset for pag, parsed from 20230601
     dump.
@@ -4461,7 +4456,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pam <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pam
 
 *   **Config description**: Wikipedia dataset for pam, parsed from 20230601
     dump.
@@ -4484,7 +4479,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pap <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pap
 
 *   **Config description**: Wikipedia dataset for pap, parsed from 20230601
     dump.
@@ -4507,7 +4502,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pcd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pcd
 
 *   **Config description**: Wikipedia dataset for pcd, parsed from 20230601
     dump.
@@ -4530,7 +4525,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pdc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pdc
 
 *   **Config description**: Wikipedia dataset for pdc, parsed from 20230601
     dump.
@@ -4553,7 +4548,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pfl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pfl
 
 *   **Config description**: Wikipedia dataset for pfl, parsed from 20230601
     dump.
@@ -4576,7 +4571,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pi
 
 *   **Config description**: Wikipedia dataset for pi, parsed from 20230601 dump.
 
@@ -4598,7 +4593,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pih <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pih
 
 *   **Config description**: Wikipedia dataset for pih, parsed from 20230601
     dump.
@@ -4621,7 +4616,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pl
 
 *   **Config description**: Wikipedia dataset for pl, parsed from 20230601 dump.
 
@@ -4643,7 +4638,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pms <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pms
 
 *   **Config description**: Wikipedia dataset for pms, parsed from 20230601
     dump.
@@ -4666,7 +4661,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pnb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pnb
 
 *   **Config description**: Wikipedia dataset for pnb, parsed from 20230601
     dump.
@@ -4689,7 +4684,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pnt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pnt
 
 *   **Config description**: Wikipedia dataset for pnt, parsed from 20230601
     dump.
@@ -4712,7 +4707,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ps <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ps
 
 *   **Config description**: Wikipedia dataset for ps, parsed from 20230601 dump.
 
@@ -4734,7 +4729,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.pt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.pt
 
 *   **Config description**: Wikipedia dataset for pt, parsed from 20230601 dump.
 
@@ -4756,7 +4751,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.qu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.qu
 
 *   **Config description**: Wikipedia dataset for qu, parsed from 20230601 dump.
 
@@ -4778,7 +4773,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.rm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.rm
 
 *   **Config description**: Wikipedia dataset for rm, parsed from 20230601 dump.
 
@@ -4800,7 +4795,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.rmy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.rmy
 
 *   **Config description**: Wikipedia dataset for rmy, parsed from 20230601
     dump.
@@ -4823,7 +4818,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.rn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.rn
 
 *   **Config description**: Wikipedia dataset for rn, parsed from 20230601 dump.
 
@@ -4845,7 +4840,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ro <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ro
 
 *   **Config description**: Wikipedia dataset for ro, parsed from 20230601 dump.
 
@@ -4867,7 +4862,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ru <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ru
 
 *   **Config description**: Wikipedia dataset for ru, parsed from 20230601 dump.
 
@@ -4889,7 +4884,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.rue <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.rue
 
 *   **Config description**: Wikipedia dataset for rue, parsed from 20230601
     dump.
@@ -4912,7 +4907,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.rw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.rw
 
 *   **Config description**: Wikipedia dataset for rw, parsed from 20230601 dump.
 
@@ -4934,7 +4929,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sa
 
 *   **Config description**: Wikipedia dataset for sa, parsed from 20230601 dump.
 
@@ -4956,7 +4951,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sah <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sah
 
 *   **Config description**: Wikipedia dataset for sah, parsed from 20230601
     dump.
@@ -4979,7 +4974,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sat <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sat
 
 *   **Config description**: Wikipedia dataset for sat, parsed from 20230601
     dump.
@@ -5002,7 +4997,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sc <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sc
 
 *   **Config description**: Wikipedia dataset for sc, parsed from 20230601 dump.
 
@@ -5024,7 +5019,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.scn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.scn
 
 *   **Config description**: Wikipedia dataset for scn, parsed from 20230601
     dump.
@@ -5047,7 +5042,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sco <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sco
 
 *   **Config description**: Wikipedia dataset for sco, parsed from 20230601
     dump.
@@ -5070,7 +5065,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sd <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sd
 
 *   **Config description**: Wikipedia dataset for sd, parsed from 20230601 dump.
 
@@ -5092,7 +5087,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.se <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.se
 
 *   **Config description**: Wikipedia dataset for se, parsed from 20230601 dump.
 
@@ -5114,7 +5109,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sg
 
 *   **Config description**: Wikipedia dataset for sg, parsed from 20230601 dump.
 
@@ -5136,7 +5131,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sh
 
 *   **Config description**: Wikipedia dataset for sh, parsed from 20230601 dump.
 
@@ -5158,7 +5153,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.si <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.si
 
 *   **Config description**: Wikipedia dataset for si, parsed from 20230601 dump.
 
@@ -5180,7 +5175,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.simple <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.simple
 
 *   **Config description**: Wikipedia dataset for simple, parsed from 20230601
     dump.
@@ -5203,7 +5198,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sk
 
 *   **Config description**: Wikipedia dataset for sk, parsed from 20230601 dump.
 
@@ -5225,7 +5220,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sl
 
 *   **Config description**: Wikipedia dataset for sl, parsed from 20230601 dump.
 
@@ -5247,7 +5242,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sm
 
 *   **Config description**: Wikipedia dataset for sm, parsed from 20230601 dump.
 
@@ -5269,7 +5264,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sn
 
 *   **Config description**: Wikipedia dataset for sn, parsed from 20230601 dump.
 
@@ -5291,7 +5286,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.so <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.so
 
 *   **Config description**: Wikipedia dataset for so, parsed from 20230601 dump.
 
@@ -5313,7 +5308,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sq
 
 *   **Config description**: Wikipedia dataset for sq, parsed from 20230601 dump.
 
@@ -5335,7 +5330,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sr
 
 *   **Config description**: Wikipedia dataset for sr, parsed from 20230601 dump.
 
@@ -5357,7 +5352,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.srn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.srn
 
 *   **Config description**: Wikipedia dataset for srn, parsed from 20230601
     dump.
@@ -5380,7 +5375,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ss <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ss
 
 *   **Config description**: Wikipedia dataset for ss, parsed from 20230601 dump.
 
@@ -5402,7 +5397,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.st <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.st
 
 *   **Config description**: Wikipedia dataset for st, parsed from 20230601 dump.
 
@@ -5424,7 +5419,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.stq <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.stq
 
 *   **Config description**: Wikipedia dataset for stq, parsed from 20230601
     dump.
@@ -5447,7 +5442,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.su <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.su
 
 *   **Config description**: Wikipedia dataset for su, parsed from 20230601 dump.
 
@@ -5469,7 +5464,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sv
 
 *   **Config description**: Wikipedia dataset for sv, parsed from 20230601 dump.
 
@@ -5491,7 +5486,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.sw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.sw
 
 *   **Config description**: Wikipedia dataset for sw, parsed from 20230601 dump.
 
@@ -5513,7 +5508,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.szl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.szl
 
 *   **Config description**: Wikipedia dataset for szl, parsed from 20230601
     dump.
@@ -5536,7 +5531,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ta <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ta
 
 *   **Config description**: Wikipedia dataset for ta, parsed from 20230601 dump.
 
@@ -5558,7 +5553,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tcy <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tcy
 
 *   **Config description**: Wikipedia dataset for tcy, parsed from 20230601
     dump.
@@ -5581,7 +5576,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.te <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.te
 
 *   **Config description**: Wikipedia dataset for te, parsed from 20230601 dump.
 
@@ -5603,7 +5598,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tet <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tet
 
 *   **Config description**: Wikipedia dataset for tet, parsed from 20230601
     dump.
@@ -5626,7 +5621,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tg
 
 *   **Config description**: Wikipedia dataset for tg, parsed from 20230601 dump.
 
@@ -5648,7 +5643,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.th <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.th
 
 *   **Config description**: Wikipedia dataset for th, parsed from 20230601 dump.
 
@@ -5670,7 +5665,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ti <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ti
 
 *   **Config description**: Wikipedia dataset for ti, parsed from 20230601 dump.
 
@@ -5692,7 +5687,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tk
 
 *   **Config description**: Wikipedia dataset for tk, parsed from 20230601 dump.
 
@@ -5714,7 +5709,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tl
 
 *   **Config description**: Wikipedia dataset for tl, parsed from 20230601 dump.
 
@@ -5736,7 +5731,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tn
 
 *   **Config description**: Wikipedia dataset for tn, parsed from 20230601 dump.
 
@@ -5758,7 +5753,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.to <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.to
 
 *   **Config description**: Wikipedia dataset for to, parsed from 20230601 dump.
 
@@ -5780,7 +5775,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tpi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tpi
 
 *   **Config description**: Wikipedia dataset for tpi, parsed from 20230601
     dump.
@@ -5803,7 +5798,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tr
 
 *   **Config description**: Wikipedia dataset for tr, parsed from 20230601 dump.
 
@@ -5825,7 +5820,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ts <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ts
 
 *   **Config description**: Wikipedia dataset for ts, parsed from 20230601 dump.
 
@@ -5847,7 +5842,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tt
 
 *   **Config description**: Wikipedia dataset for tt, parsed from 20230601 dump.
 
@@ -5869,7 +5864,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tum <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tum
 
 *   **Config description**: Wikipedia dataset for tum, parsed from 20230601
     dump.
@@ -5892,7 +5887,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tw
 
 *   **Config description**: Wikipedia dataset for tw, parsed from 20230601 dump.
 
@@ -5914,7 +5909,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ty <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ty
 
 *   **Config description**: Wikipedia dataset for ty, parsed from 20230601 dump.
 
@@ -5936,7 +5931,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.tyv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.tyv
 
 *   **Config description**: Wikipedia dataset for tyv, parsed from 20230601
     dump.
@@ -5959,7 +5954,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.udm <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.udm
 
 *   **Config description**: Wikipedia dataset for udm, parsed from 20230601
     dump.
@@ -5982,7 +5977,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ug <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ug
 
 *   **Config description**: Wikipedia dataset for ug, parsed from 20230601 dump.
 
@@ -6004,7 +5999,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.uk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.uk
 
 *   **Config description**: Wikipedia dataset for uk, parsed from 20230601 dump.
 
@@ -6026,7 +6021,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ur <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ur
 
 *   **Config description**: Wikipedia dataset for ur, parsed from 20230601 dump.
 
@@ -6048,7 +6043,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.uz <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.uz
 
 *   **Config description**: Wikipedia dataset for uz, parsed from 20230601 dump.
 
@@ -6070,7 +6065,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.ve <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.ve
 
 *   **Config description**: Wikipedia dataset for ve, parsed from 20230601 dump.
 
@@ -6092,7 +6087,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.vec <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.vec
 
 *   **Config description**: Wikipedia dataset for vec, parsed from 20230601
     dump.
@@ -6115,7 +6110,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.vep <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.vep
 
 *   **Config description**: Wikipedia dataset for vep, parsed from 20230601
     dump.
@@ -6138,7 +6133,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.vi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.vi
 
 *   **Config description**: Wikipedia dataset for vi, parsed from 20230601 dump.
 
@@ -6160,7 +6155,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.vls <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.vls
 
 *   **Config description**: Wikipedia dataset for vls, parsed from 20230601
     dump.
@@ -6183,7 +6178,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.vo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.vo
 
 *   **Config description**: Wikipedia dataset for vo, parsed from 20230601 dump.
 
@@ -6205,7 +6200,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.wa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.wa
 
 *   **Config description**: Wikipedia dataset for wa, parsed from 20230601 dump.
 
@@ -6227,7 +6222,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.war <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.war
 
 *   **Config description**: Wikipedia dataset for war, parsed from 20230601
     dump.
@@ -6250,7 +6245,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.wo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.wo
 
 *   **Config description**: Wikipedia dataset for wo, parsed from 20230601 dump.
 
@@ -6272,7 +6267,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.wuu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.wuu
 
 *   **Config description**: Wikipedia dataset for wuu, parsed from 20230601
     dump.
@@ -6295,7 +6290,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.xal <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.xal
 
 *   **Config description**: Wikipedia dataset for xal, parsed from 20230601
     dump.
@@ -6318,7 +6313,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.xh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.xh
 
 *   **Config description**: Wikipedia dataset for xh, parsed from 20230601 dump.
 
@@ -6340,7 +6335,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.xmf <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.xmf
 
 *   **Config description**: Wikipedia dataset for xmf, parsed from 20230601
     dump.
@@ -6363,7 +6358,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.yi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.yi
 
 *   **Config description**: Wikipedia dataset for yi, parsed from 20230601 dump.
 
@@ -6385,7 +6380,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.yo <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.yo
 
 *   **Config description**: Wikipedia dataset for yo, parsed from 20230601 dump.
 
@@ -6407,7 +6402,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.za <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.za
 
 *   **Config description**: Wikipedia dataset for za, parsed from 20230601 dump.
 
@@ -6429,7 +6424,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.zea <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.zea
 
 *   **Config description**: Wikipedia dataset for zea, parsed from 20230601
     dump.
@@ -6452,7 +6447,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.zh <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.zh
 
 *   **Config description**: Wikipedia dataset for zh, parsed from 20230601 dump.
 
@@ -6474,7 +6469,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## wikipedia/20230601.zu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia/20230601.zu
 
 *   **Config description**: Wikipedia dataset for zu, parsed from 20230601 dump.
 
