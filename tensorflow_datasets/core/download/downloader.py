@@ -145,8 +145,12 @@ class _Downloader(object):
   def tqdm(self) -> Iterator[None]:
     """Add a progression bar for the current download."""
     async_tqdm = utils.async_tqdm
-    with async_tqdm(total=0, desc='Dl Completed...', unit=' url') as pbar_url:
-      with async_tqdm(total=0, desc='Dl Size...', unit=' MiB') as pbar_dl_size:
+    with async_tqdm(
+        total=0, desc='Dl Completed...', unit=' url', mininterval=1.0
+    ) as pbar_url:
+      with async_tqdm(
+          total=0, desc='Dl Size...', unit=' MiB', mininterval=1.0
+      ) as pbar_dl_size:
         self._pbar_url = pbar_url
         self._pbar_dl_size = pbar_dl_size
         yield
