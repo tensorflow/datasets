@@ -75,14 +75,27 @@ class DataDirRegister(register_base.BaseRegister):
     return sorted(_iter_builder_names(self._ns2data_dir))
 
   def list_dataset_references(self) -> Iterable[naming.DatasetReference]:
+    exceptions = []
     for namespace, data_dirs in self._ns2data_dir.items():
       for data_dir in data_dirs:
-        yield from file_utils.list_datasets_in_data_dir(
-            data_dir=data_dir,
-            namespace=namespace,
-            include_configs=False,
-            include_versions=False,
-        )
+        try:
+          yield from file_utils.list_datasets_in_data_dir(
+              data_dir=data_dir,
+              namespace=namespace,
+              include_configs=False,
+              include_versions=False,
+          )
+        except Exception as e:  # pylint: disable=broad-exception-caught
+          exceptions.append(e)
+          logging.exception(
+              'Could not get datasets for namespace %s and data dir %s',
+              namespace,
+              data_dir,
+          )
+    if exceptions:
+      # TODO(b/299874845): py3.11 - raise an ExceptionGroup
+      # https://realpython.com/python311-exception-groups/#group-exceptions-with-exceptiongroup
+      raise exceptions[0]
 
   def builder_cls(
       self,
