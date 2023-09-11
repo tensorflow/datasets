@@ -64,7 +64,7 @@ class _Extractor(object):
   def tqdm(self):
     """Add a progression bar for the current extraction."""
     with utils.async_tqdm(
-        total=0, desc='Extraction completed...', unit=' file'
+        total=0, desc='Extraction completed...', unit=' file', mininterval=1.0
     ) as pbar_path:
       self._pbar_path = pbar_path
       yield
