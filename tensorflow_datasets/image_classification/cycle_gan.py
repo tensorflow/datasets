@@ -41,9 +41,10 @@ _CITATION = """\
 }
 """
 
-_DL_URL = "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
+_DL_URL = "http://efrosgans.eecs.berkeley.edu/cyclegan/datasets/"
 
 # "ae_photos" : Not added because trainA and trainB are missing.
+# "cityscapes" : Removed due to a licensing issue.
 _DATA_OPTIONS = [
     "apple2orange",
     "summer2winter_yosemite",
@@ -53,7 +54,6 @@ _DATA_OPTIONS = [
     "ukiyoe2photo",
     "vangogh2photo",
     "maps",
-    "cityscapes",
     "facades",
     "iphone2dslr_flower",
 ]
@@ -106,7 +106,7 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         homepage=(
-            "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
+            "http://efrosgans.eecs.berkeley.edu/cyclegan/datasets/"
         ),
         citation=_CITATION,
     )
