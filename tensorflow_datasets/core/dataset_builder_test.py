@@ -832,13 +832,16 @@ class DatasetBuilderGenerateModeTest(testing.TestCase):
 
 
 class DatasetBuilderReadTest(testing.TestCase):
+  NUM_SHARDS = None  # Automatically infers the number based on size.
 
   @classmethod
   def setUpClass(cls):
     super().setUpClass()
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
-    builder.download_and_prepare()
+    builder.download_and_prepare(
+        download_config=download.DownloadConfig(num_shards=cls.NUM_SHARDS)
+    )
 
   @classmethod
   def tearDownClass(cls):
@@ -862,8 +865,8 @@ class DatasetBuilderReadTest(testing.TestCase):
 
     train_data = splits[splits_lib.Split.TRAIN]["x"]
     test_data = splits[splits_lib.Split.TEST]["x"]
-    self.assertEqual(20, len(train_data))
-    self.assertEqual(10, len(test_data))
+    self.assertLen(train_data, 20)
+    self.assertLen(test_data, 10)
     self.assertEqual(sum(range(30)), int(train_data.sum() + test_data.sum()))
 
   @testing.run_in_graph_and_eager_modes()
@@ -874,7 +877,7 @@ class DatasetBuilderReadTest(testing.TestCase):
         )
     )
     # 3 batches of 10
-    self.assertEqual(3, len(items))
+    self.assertLen(items, 3)
     x1, x2, x3 = items[0]["x"], items[1]["x"], items[2]["x"]
     self.assertEqual(10, x1.shape[0])
     self.assertEqual(10, x2.shape[0])
@@ -883,13 +886,13 @@ class DatasetBuilderReadTest(testing.TestCase):
 
     # By default batch_size is None and won't add a batch dimension
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN)
-    self.assertEqual(0, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
+    self.assertEmpty(ds.element_spec["x"].shape)
     # Setting batch_size=1 will add an extra batch dimension
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=1)
-    self.assertEqual(1, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
+    self.assertLen(ds.element_spec["x"].shape, 1)
     # Setting batch_size=2 will add an extra batch dimension
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=2)
-    self.assertEqual(1, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
+    self.assertLen(ds.element_spec["x"].shape, 1)
 
   def test_autocache(self):
     # All the following should cache
@@ -954,7 +957,52 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   def test_with_tfds_info(self):
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN)
-    self.assertEqual(0, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
+    self.assertEmpty(ds.element_spec["x"].shape)
+
+
+class DatasetBuilderReadWithMutipleShardsTest(DatasetBuilderReadTest):
+  NUM_SHARDS = 3
+
+  def test_autocache(self):
+    """Default should not cache as dataset with multiple shards."""
+    self.assertFalse(
+        self.builder._should_cache_ds(
+            split="train",
+            shuffle_files=True,
+            read_config=read_config_lib.ReadConfig(),
+        )
+    )
+
+  def test_function_tracing(self):
+    """Tests `DatasetBuilder.as_dataset` can be traced with `tf.function`."""
+
+    @tf.function(
+        input_signature=(
+            tf.TensorSpec((), tf.int64, "num_input_pipelines"),
+            tf.TensorSpec((), tf.int64, "input_pipeline_id"),
+        ),
+        autograph=False,
+    )
+    def dataset_fn(
+        num_input_pipelines: tf.Tensor, input_pipeline_id: tf.Tensor
+    ) -> tf.data.Dataset:
+      input_context = tf.distribute.InputContext(
+          num_input_pipelines, input_pipeline_id
+      )
+      return self.builder.as_dataset(
+          split=splits_lib.Split.TRAIN,
+          batch_size=-1,
+          read_config=read_config_lib.ReadConfig(input_context=input_context),
+      )
+
+    xs = []
+    num_input_pipelines = np.array(self.NUM_SHARDS, np.int64)
+    for i in range(num_input_pipelines):
+      dataset = dataset_fn(num_input_pipelines, np.array(i, np.int64))
+      x = dataset_utils.as_numpy(dataset)["x"]
+      self.assertBetween(len(x), 6, 7)
+      xs.extend(x)
+    self.assertCountEqual(xs, range(20))
 
 
 class DummyDatasetWithSupervisedKeys(DummyDatasetSharedGenerator):

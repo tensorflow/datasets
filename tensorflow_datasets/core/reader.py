@@ -202,11 +202,12 @@ def _read_files(
       raise ValueError(
           'Cannot shard the pipeline with undefined `input_context`.'
       )
-    if (
-        read_config.input_context.num_input_pipelines > 1
-        and len(file_instructions)
-        < read_config.input_context.num_input_pipelines
-    ):
+    try:
+      num_input_pipelines = int(read_config.input_context.num_input_pipelines)
+    except TypeError as e:
+      logging.warning('Unable to validate `read_config.input_context`: %s', e)
+      return
+    if num_input_pipelines > 1 and len(file_instructions) < num_input_pipelines:
       raise ValueError(
           'Cannot shard the pipeline with given `input_context`.'
           '`num_shards={}` but `num_input_pipelines={}`. This means that some '
