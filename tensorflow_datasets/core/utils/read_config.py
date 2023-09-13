@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import dataclasses
 import enum
-from typing import Callable, Optional, Sequence, Union
+from typing import Callable, Optional, Sequence, Union, cast
 
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -113,7 +113,8 @@ class ReadConfig:
   experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None
   skip_prefetch: bool = False
   num_parallel_calls_for_decode: Optional[int] = None
-  num_parallel_calls_for_interleave_files: Optional[int] = None
+  # Cast to an `int`. `__post_init__` will ensure the type invariant.
+  num_parallel_calls_for_interleave_files: Optional[int] = cast(int, MISSING)
   enable_ordering_guard: bool = True
   assert_cardinality: bool = True
   override_buffer_size: Optional[int] = None
