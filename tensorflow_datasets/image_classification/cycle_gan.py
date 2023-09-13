@@ -41,7 +41,7 @@ _CITATION = """\
 }
 """
 
-_DL_URL = "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
+_DL_URL = "https://efrosgans.eecs.berkeley.edu/cyclegan/datasets/"
 
 # "ae_photos" : Not added because trainA and trainB are missing.
 _DATA_OPTIONS = [
@@ -106,7 +106,7 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         homepage=(
-            "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
+            "https://efrosgans.eecs.berkeley.edu/cyclegan/datasets/"
         ),
         citation=_CITATION,
     )
