@@ -257,6 +257,13 @@ def _read_files(
     )
 
 
+  unique_folders = set(os.path.dirname(path) for path in tensor_inputs.filepath)
+  logging.info(
+      'Creating a tf.data.Dataset reading %d files located in folders: %s.',
+      len(tensor_inputs.filepath),
+      ', '.join(sorted(unique_folders)),
+  )
+
   instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
   # On distributed environments, we can shard per-file if a
