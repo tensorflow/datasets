@@ -19,8 +19,8 @@ from typing import Any, Dict, Optional, Union
 
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download as download_lib
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core.file_adapters import FileFormat
 from tensorflow_datasets.core.logging import call_metadata
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
@@ -117,7 +117,7 @@ class Logger:
       data_path: str,
       download_dir: Optional[str],
       download_config: Optional[download_lib.DownloadConfig],
-      file_format: Union[None, str, FileFormat],
+      file_format: Union[None, str, file_adapters.FileFormat],
   ):
     """Callback called when user calls `dataset_builder.download_and_prepare`."""
     pass
