@@ -41,11 +41,9 @@ _CITATION = """\
 }
 """
 
-_DL_URL = "https://efrosgans.eecs.berkeley.edu/cyclegan/datasets/"
+_DL_URL = "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
 
 # "ae_photos" : Not added because trainA and trainB are missing.
-# "cityscapes" : Removed due to a licensing issue. See
-#   https://github.com/junyanz/CycleGAN/blob/master/datasets/download_dataset.sh
 _DATA_OPTIONS = [
     "apple2orange",
     "summer2winter_yosemite",
@@ -55,6 +53,7 @@ _DATA_OPTIONS = [
     "ukiyoe2photo",
     "vangogh2photo",
     "maps",
+    "cityscapes",
     "facades",
     "iphone2dslr_flower",
 ]
@@ -85,9 +84,9 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       CycleGANConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
-          version=tfds.core.Version("3.0.0"),
+          version=tfds.core.Version("2.0.0"),
           release_notes={
-              "3.0.0": "Cityscapes dataset is removed due to license issue.",
+              "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
           },
           data=config_name,
       )
@@ -106,7 +105,9 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["A", "B"]),
         }),
         supervised_keys=("image", "label"),
-        homepage="https://junyanz.github.io/CycleGAN/",
+        homepage=(
+            "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
+        ),
         citation=_CITATION,
     )
 
