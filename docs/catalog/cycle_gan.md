@@ -40,19 +40,6 @@ horses/zebras, apple/orange,...)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Cityscapes dataset is removed due to license issue.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Feature structure**:
 
 ```python
@@ -107,20 +94,190 @@ label   | ClassLabel   |                 | int64 |
 
 ## cycle_gan/apple2orange (default config)
 
+*   **Download size**: `74.82 MiB`
+
+*   **Dataset size**: `76.89 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 266
+`'testB'`  | 248
+`'trainA'` | 995
+`'trainB'` | 1,019
+
 ## cycle_gan/summer2winter_yosemite
+
+*   **Download size**: `126.50 MiB`
+
+*   **Dataset size**: `127.52 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 309
+`'testB'`  | 238
+`'trainA'` | 1,231
+`'trainB'` | 962
 
 ## cycle_gan/horse2zebra
 
+*   **Download size**: `111.45 MiB`
+
+*   **Dataset size**: `112.55 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 120
+`'testB'`  | 140
+`'trainA'` | 1,067
+`'trainB'` | 1,334
+
 ## cycle_gan/monet2photo
+
+*   **Download size**: `291.09 MiB`
+
+*   **Dataset size**: `295.75 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 121
+`'testB'`  | 751
+`'trainA'` | 1,072
+`'trainB'` | 6,287
 
 ## cycle_gan/cezanne2photo
 
+*   **Download size**: `266.92 MiB`
+
+*   **Dataset size**: `269.56 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 58
+`'testB'`  | 751
+`'trainA'` | 525
+`'trainB'` | 6,287
+
 ## cycle_gan/ukiyoe2photo
+
+*   **Download size**: `279.38 MiB`
+
+*   **Dataset size**: `282.62 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 263
+`'testB'`  | 751
+`'trainA'` | 562
+`'trainB'` | 6,287
 
 ## cycle_gan/vangogh2photo
 
+*   **Download size**: `292.39 MiB`
+
+*   **Dataset size**: `295.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 400
+`'testB'`  | 751
+`'trainA'` | 400
+`'trainB'` | 6,287
+
 ## cycle_gan/maps
+
+*   **Download size**: `1.38 GiB`
+
+*   **Dataset size**: `701.08 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 1,098
+`'testB'`  | 1,098
+`'trainA'` | 1,096
+`'trainB'` | 1,096
 
 ## cycle_gan/facades
 
+*   **Download size**: `33.51 MiB`
+
+*   **Dataset size**: `34.83 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 106
+`'testB'`  | 106
+`'trainA'` | 400
+`'trainB'` | 400
+
 ## cycle_gan/iphone2dslr_flower
+
+*   **Download size**: `324.22 MiB`
+
+*   **Dataset size**: `325.82 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 569
+`'testB'`  | 480
+`'trainA'` | 1,812
+`'trainB'` | 3,325
