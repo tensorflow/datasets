@@ -17,7 +17,6 @@
 
 import math
 import os
-import resource
 import struct
 from typing import Iterator, List, Optional
 import uuid
@@ -70,7 +69,17 @@ def _read_hkey(buff):
 
 
 def _increase_open_files_limit():
-  """Attempts to increase the maximum number of open file descriptors."""
+  """Attempts to increase the maximum number of open file descriptors on UNIX."""
+  try:
+    import resource  # pylint: disable=g-import-not-at-top
+  except ModuleNotFoundError:
+    logging.error(
+        "Missing `resource` module, can't automatically increase the maximum"
+        ' number of open file descriptors on your system. Try increasing it'
+        ' manually.'
+    )
+    return
+
   soft_limit, hard_limit = resource.getrlimit(resource.RLIMIT_NOFILE)
   if soft_limit < hard_limit:
     new_soft_limit = min(soft_limit + BUCKETS_NUMBER, hard_limit)
