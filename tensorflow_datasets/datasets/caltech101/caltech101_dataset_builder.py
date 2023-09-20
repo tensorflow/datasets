@@ -22,21 +22,18 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _LABELS_FNAME = "image_classification/caltech101_labels.txt"
-# Original url should be
-# http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategories.tar.gz
-# which redirect to drive. We could use the original URL once
-# `downloader.download` correctly handle drive URLs hidden behind a redirection.
-_URL = "https://drive.google.com/uc?export=download&id=137RyRjvTBkBiIfeYBNZBtViDHQ6_Ewsp"
+_URL = "https://data.caltech.edu/records/mzrjq-6wc02/files/caltech-101.zip?download=1"
 _TRAIN_POINTS_PER_CLASS = 30
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
-  VERSION = tfds.core.Version("3.0.1")
+  VERSION = tfds.core.Version("3.0.2")
   RELEASE_NOTES = {
       "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
       "3.0.1": "Website URL update",
+      "3.0.2": "Download URL update",
   }
 
   def _info(self):
@@ -48,27 +45,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "image/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
         }),
         supervised_keys=("image", "label"),
-        homepage="http://www.vision.caltech.edu/Image_Datasets/Caltech101/",
+        homepage="https://doi.org/10.22002/D1.20086",
     )
 
-  def _split_generators(self, dl_manager):
-    path = dl_manager.download_and_extract(_URL)
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "images_dir_path": path,
-                "is_train_split": True,
-            },
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                "images_dir_path": path,
-                "is_train_split": False,
-            },
-        ),
-    ]
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+    data_dir = dl_manager.download_and_extract(_URL)
+    images_dir = dl_manager.extract(
+        data_dir / "caltech-101" / "101_ObjectCategories.tar.gz"
+    )
+
+    return {
+        "train": self._generate_examples(images_dir, is_train_split=True),
+        "test": self._generate_examples(images_dir, is_train_split=False),
+    }
 
   def _generate_examples(self, images_dir_path, is_train_split):
     """Generates images and labels given the image directory path.
