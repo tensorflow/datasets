@@ -46,18 +46,20 @@ boxes.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Download URL update
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `131.05 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `132.86 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,084
+`'train'` | 3,060
 
 *   **Feature structure**:
 
