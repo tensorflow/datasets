@@ -132,8 +132,112 @@ def _looks_like_a_tfds_file(filename: str) -> bool:
   )
 
 
+def _find_files_with_glob(
+    folder: epath.Path, globs: list[str], file_names: list[str]
+) -> Iterator[epath.Path]:
+  for glob in globs:
+    for file in folder.glob(glob):
+      if file.name in file_names:
+        yield file
+
+
+def _find_references_with_glob(
+    folder: epath.Path,
+    is_data_dir: bool,
+    is_dataset_dir: bool,
+    namespace: Optional[str] = None,
+    include_old_tfds_version: bool = True,
+) -> Iterator[naming.DatasetReference]:
+  """Yields all dataset references in the given folder.
+
+  Args:
+    folder: the folder where to look for datasets. Can be either a root data
+      dir, or a dataset folder.
+    is_data_dir: Whether `folder` is a root TFDS data dir.
+    is_dataset_dir: Whether `folder` is the folder of one specific dataset.
+    namespace: Optional namespace to which the found datasets belong to.
+    include_old_tfds_version: include datasets that have been generated with
+      TFDS before 4.0.0.
+
+  Yields:
+    all dataset references in the given folder.
+  """
+  if is_dataset_dir and is_data_dir:
+    raise ValueError('Folder cannot be both a data dir and dataset dir!')
+  if not is_data_dir and not is_dataset_dir:
+    raise ValueError('Folder must be either a data dir or a dataset dir!')
+
+  if is_data_dir:
+    data_dir = folder
+    dataset_name = None
+    globs = ['*/*/*/*.json', '*/*/*.json']
+  else:
+    data_dir = folder.parent
+    dataset_name = folder.name
+    globs = ['*/*/*.json', '*/*.json']
+
+  # Check files matching the globs and are files we are interested in.
+  matched_files_per_folder = collections.defaultdict(set)
+  file_names = [constants.FEATURES_FILENAME, constants.DATASET_INFO_FILENAME]
+  for file in _find_files_with_glob(folder, globs=globs, file_names=file_names):
+    matched_files_per_folder[file.parent].add(file.name)
+
+  for data_folder, matched_files in matched_files_per_folder.items():
+    if constants.DATASET_INFO_FILENAME not in matched_files:
+      logging.warning(
+          'Ignoring dataset folder %s, which has no dataset_info.json',
+          os.fspath(data_folder),
+      )
+      continue
+    if (
+        not include_old_tfds_version
+        and constants.FEATURES_FILENAME not in matched_files
+    ):
+      logging.info(
+          'Ignoring dataset folder %s, which has no features.json',
+          os.fspath(data_folder),
+      )
+      continue
+
+    version = data_folder.name
+    if not version_lib.Version.is_valid(version):
+      logging.warning(
+          'Ignoring dataset folder %s, which has invalid version %s',
+          os.fspath(data_folder),
+          version,
+      )
+      continue
+
+    config = None
+    if is_data_dir:
+      if data_folder.parent.parent == folder:
+        dataset_name = data_folder.parent.name
+      elif data_folder.parent.parent.parent == folder:
+        dataset_name = data_folder.parent.parent.name
+        config = data_folder.parent.name
+      else:
+        raise ValueError(
+            f'Could not detect dataset and config from path {data_folder} in'
+            f' {folder}'
+        )
+    else:
+      if data_folder.parent != folder:
+        config = data_folder.parent.name
+
+    if not naming.is_valid_dataset_name(dataset_name):
+      logging.warning('Invalid dataset name: %s', dataset_name)
+      continue
+
+    yield naming.DatasetReference(
+        namespace=namespace,
+        data_dir=data_dir,
+        dataset_name=dataset_name,
+        config=config,
+        version=version,
+    )
+
+
 def list_dataset_variants(
-    dataset_name: str,
     dataset_dir: epath.PathLike,
     namespace: Optional[str] = None,
     include_versions: bool = True,
@@ -142,7 +246,6 @@ def list_dataset_variants(
   """Yields all variants (config + version) found in `dataset_dir`.
 
   Arguments:
-    dataset_name: the name of the dataset for which variants are listed.
     dataset_dir: the folder of the dataset.
     namespace: optional namespace to which this data dir belongs.
     include_versions: whether to list what versions are available.
@@ -153,63 +256,23 @@ def list_dataset_variants(
     all variants of the given dataset.
   """
   dataset_dir = epath.Path(dataset_dir)
-  data_dir = dataset_dir.parent
-  base_reference = naming.DatasetReference(
-      dataset_name=dataset_name, namespace=namespace, data_dir=data_dir
-  )
-
-  json_files_per_folder = collections.defaultdict(set)
-  interesting_file_names = [
-      constants.FEATURES_FILENAME,
-      constants.DATASET_INFO_FILENAME,
-  ]
-  # Check all JSON files under a config.
-  for json_file in dataset_dir.glob('*/*/*.json'):
-    if json_file.name in interesting_file_names:
-      json_files_per_folder[json_file.parent].add(json_file.name)
-  # Check all JSON files that are not under a config.
-  for json_file in dataset_dir.glob('*/*.json'):
-    if json_file.name in interesting_file_names:
-      json_files_per_folder[json_file.parent].add(json_file.name)
-
-  version_references_per_config = collections.defaultdict(list)
-  for folder, json_files in json_files_per_folder.items():
-    if constants.DATASET_INFO_FILENAME not in json_files:
-      logging.warning(
-          'Ignoring dataset folder %s, which has no dataset_info.json',
-          os.fspath(folder),
-      )
-      continue
-    if (
-        not include_old_tfds_version
-        and constants.FEATURES_FILENAME not in json_files
-    ):
-      logging.info(
-          'Ignoring dataset folder %s, which has no features.json',
-          os.fspath(folder),
-      )
-      continue
-    version = folder.name
-    if not version_lib.Version.is_valid(version):
-      logging.warning(
-          'Ignoring dataset folder %s, which has invalid version %s',
-          os.fspath(folder),
-          version,
-      )
-      continue
-    if folder.parent == dataset_dir:
-      config = None
+  references = {}
+  for reference in _find_references_with_glob(
+      folder=dataset_dir,
+      is_data_dir=False,
+      is_dataset_dir=True,
+      namespace=namespace,
+      include_old_tfds_version=include_old_tfds_version,
+  ):
+    if include_versions:
+      key = f'{reference.dataset_name}/{reference.config}:{reference.version}'
     else:
-      config = folder.parent.name
-    reference = base_reference.replace(config=config, version=version)
-    version_references_per_config[config].append(reference)
+      key = f'{reference.dataset_name}/{reference.config}'
+      reference = reference.replace(version=None)
+    references[key] = reference
 
-  if include_versions:
-    for versions in version_references_per_config.values():
-      yield from versions
-  else:
-    for config in version_references_per_config.keys():
-      yield base_reference.replace(config=config)
+  for reference in references.values():
+    yield reference
 
 
 def list_datasets_in_data_dir(
@@ -237,23 +300,27 @@ def list_datasets_in_data_dir(
     references to the datasets found in `data_dir`. The references include the
     data dir.
   """
-  for dataset_dir in epath.Path(data_dir).iterdir():
-    if not dataset_dir.is_dir():
-      continue
-    if not naming.is_valid_dataset_name(dataset_dir.name):
-      continue
-    if include_configs:
-      yield from list_dataset_variants(
-          dataset_name=dataset_dir.name,
-          dataset_dir=dataset_dir,
-          namespace=namespace,
-          include_versions=include_versions,
-          include_old_tfds_version=include_old_tfds_version,
-      )
+  data_dir = epath.Path(data_dir)
+  references = {}
+  for reference in _find_references_with_glob(
+      folder=data_dir,
+      is_data_dir=True,
+      is_dataset_dir=False,
+      namespace=namespace,
+      include_old_tfds_version=include_old_tfds_version,
+  ):
+    if include_versions:
+      key = f'{reference.dataset_name}/{reference.config}:{reference.version}'
+    elif include_configs:
+      key = f'{reference.dataset_name}/{reference.config}'
+      reference = reference.replace(version=None)
     else:
-      yield naming.DatasetReference(
-          dataset_name=dataset_dir.name, namespace=namespace, data_dir=data_dir
-      )
+      key = reference.dataset_name
+      reference = reference.replace(config=None, version=None)
+    references[key] = reference
+
+  for reference in references.values():
+    yield reference
 
 
 @functools.lru_cache(maxsize=None)
