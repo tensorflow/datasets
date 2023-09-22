@@ -1,6 +1,6 @@
 # Contribute to the TFDS repository
 
-Thank you for your interest to our library ! We are thrilled to have such a
+Thank you for your interest in our library ! We are thrilled to have such a
 motivated community.
 
 ## Get started
@@ -20,9 +20,9 @@ motivated community.
 *   Don't hesitate to take over bugs which are already assigned, but haven't
     been updated in a while.
 *   No need to get the issue assigned to you. Simply comment on the issue when
-    you're starting working on it :)
-*   Don't hesitate to ask for help if you're interested by an issue but don't
-    know how to get started. And please send draft PR if you want early
+    you're starting to work on it :)
+*   Don't hesitate to ask for help if you're interested in an issue but don't
+    know how to get started. And please send a draft PR if you want early
     feedback.
 *   To avoid unnecessary duplication of work, check the list of
     [pending Pull Requests](https://github.com/tensorflow/datasets/pulls), and
