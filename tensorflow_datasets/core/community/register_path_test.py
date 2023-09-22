@@ -30,9 +30,13 @@ def test_data_dir_register():
 
 def test_list_dataset_references(mock_fs: testing.MockFs):
   path = '/path/ns1'
+  mock_fs.add_file(path=f'{path}/ds1/1.0.0/dataset_info.json')
   mock_fs.add_file(path=f'{path}/ds1/1.0.0/features.json')
+  mock_fs.add_file(path=f'{path}/ds2/config1/1.0.0/dataset_info.json')
   mock_fs.add_file(path=f'{path}/ds2/config1/1.0.0/features.json')
+  mock_fs.add_file(path=f'{path}/ds2/config1/2.0.0/dataset_info.json')
   mock_fs.add_file(path=f'{path}/ds2/config1/2.0.0/features.json')
+  mock_fs.add_file(path=f'{path}/ds2/config2/1.0.0/dataset_info.json')
   mock_fs.add_file(path=f'{path}/ds2/config2/1.0.0/features.json')
   data_dir = epath.Path('/path/ns1')
   register = register_path.DataDirRegister(
