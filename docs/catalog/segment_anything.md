@@ -59,9 +59,9 @@ for example in tfds.as_numpy(ds):
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `10.28 TiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.59 TiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -70,12 +70,13 @@ for example in tfds.as_numpy(ds):
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | ---------:
+`'train'` | 11,185,362
 
 *   **Feature structure**:
 
