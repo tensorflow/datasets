@@ -26,11 +26,11 @@ import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 _URLS = {
-    'train_annotation': 'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_train.json.zip',
+    'train_annotation': 'https://dl.fbaipublicfiles.com/LVIS/lvis_v1_train.json.zip',
     'train_images': 'http://images.cocodataset.org/zips/train2017.zip',
-    'validation_annotation': 'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_val.json.zip',
+    'validation_annotation': 'https://dl.fbaipublicfiles.com/LVIS/lvis_v1_val.json.zip',
     'validation_images': 'http://images.cocodataset.org/zips/val2017.zip',
-    'test_annotation': 'https://s3-us-west-2.amazonaws.com/dl.fbaipublicfiles.com/LVIS/lvis_v1_image_info_test_dev.json.zip',
+    'test_annotation': 'https://dl.fbaipublicfiles.com/LVIS/lvis_v1_image_info_test_dev.json.zip',
     'test_images': 'http://images.cocodataset.org/zips/test2017.zip',
     # Minival from https://github.com/ashkamath/mdetr/blob/main/.github/lvis.md:
     'minival_annotation': (
