@@ -45,6 +45,7 @@ class AudioFeatureTest(
             testing.FeatureExpectationItem(
                 value=np_audio,
                 expected=np_audio,
+                expected_np=np_audio,
             ),
         ],
         test_attributes=dict(
@@ -67,6 +68,7 @@ class AudioFeatureTest(
             testing.FeatureExpectationItem(
                 value=np_audio,
                 expected=np_audio,
+                expected_np=np_audio,
             ),
         ],
     )
@@ -96,10 +98,12 @@ class AudioFeatureTest(
             testing.FeatureExpectationItem(
                 value=tmp_file,
                 expected=np_audio,
+                expected_np=np_audio,
             ),
             testing.FeatureExpectationItem(
                 value=pathlib.Path(tmp_file),
                 expected=np_audio,
+                expected_np=np_audio,
             ),
         ],
         test_attributes=dict(
@@ -133,10 +137,12 @@ class AudioFeatureTest(
             testing.FeatureExpectationItem(
                 value=tmp_file,
                 expected=np_audio,
+                expected_np=np_audio,
             ),
             testing.FeatureExpectationItem(
                 value=pathlib.Path(tmp_file),
                 expected=np_audio,
+                expected_np=np_audio,
             ),
         ],
         test_attributes=dict(
@@ -182,6 +188,7 @@ class AudioFeatureTest(
               testing.FeatureExpectationItem(
                   value=file_obj,
                   expected=np_audio,
+                  expected_np=np_audio,
               ),
           ],
       )

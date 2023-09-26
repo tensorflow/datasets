@@ -334,7 +334,10 @@ class Image(feature_lib.FeatureConnector):
       self, example: bytes, num_channels: int
   ) -> np.ndarray:
     """Reconstruct the image with OpenCV from bytes."""
-    assert cv2, 'OpenCV is not installed. OpenCV is required for this method.'
+    if cv2 is None:
+      raise ImportError(
+          'OpenCV is not installed. OpenCV is required for this method.'
+      )
     example = np.frombuffer(example, dtype=np.uint8)
     example = cv2.imdecode(example, cv2.IMREAD_UNCHANGED)
     dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
@@ -349,7 +352,10 @@ class Image(feature_lib.FeatureConnector):
   def decode_example_np_with_pil(
       self, example: bytes, num_channels: int
   ) -> np.ndarray:
-    assert PIL_Image, 'PIL is not installed. PIL is required for this method.'
+    if PIL_Image is None:
+      raise ImportError(
+          'PIL is not installed. PIL is required for this method.'
+      )
     bytes_io = io.BytesIO(example)
     with PIL_Image.open(bytes_io) as image:
       dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
