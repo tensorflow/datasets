@@ -27,7 +27,6 @@ from tensorflow_datasets.core.logging import call_metadata
 from tensorflow_datasets.core.logging import logging_logger
 import wrapt
 
-
 _T = TypeVar("_T")
 _Decorator = Callable[[_T], _T]
 _LoggerMethod = Callable[..., None]
@@ -72,6 +71,9 @@ def _get_registered_loggers() -> List[base_logger.Logger]:
 @atexit.register
 def _at_exit():
   """Log import operation if needed, calls `process_ends` on loggers."""
+  # Do not try to populate loggers when nothing was called.
+  if _registered_loggers is None:
+    return
   for logger in _get_registered_loggers():
     logger.process_ends()
 
