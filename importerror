@@ -1,0 +1,2 @@
+ImportError: cannot import name 'core' from partially initialized module 'tensorflow_datasets' (most likely due to a circular import) (C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\tensorflow_datasets\__init__.py)
+Cannot fix this issue
