@@ -16,15 +16,31 @@
 """Dataset feature for nested datasets."""
 from __future__ import annotations
 
+import dataclasses
 import functools
-from typing import Any, Dict, Iterator, Union
+from typing import Any, Callable, Dict, Iterator, Union
 
+from tensorflow_datasets.core.data_sources import python
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import sequence_feature
+from tensorflow_datasets.core.features import tensor_feature
+from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+
+@dataclasses.dataclass(frozen=True)
+class _getitem:  # pylint: disable=invalid-name
+  """A pickable version of getitem that can be fed to Beam pipelines."""
+
+  decode_fn: Callable[[Any], Any]
+  nest: Callable[[Any], Any]
+  flat_example: list[Any]
+
+  def __call__(self, i):
+    return self.decode_fn(self.nest([v[i] for v in self.flat_example]))
 
 
 class Dataset(sequence_feature.Sequence):
@@ -34,6 +50,12 @@ class Dataset(sequence_feature.Sequence):
   `tfds.features.Dataset` will return a nested `tf.data.Dataset` inside the
   top-level `tf.data.Dataset` returned by `tfds.load`. At generation time, an
   iterable over the dataset elements is given.
+
+  If you use tfds.data_source and the NumPy path, `Dataset` will return
+  a [data
+  source](https://www.tensorflow.org/datasets/api_docs/python/tfds/data_source).
+  The advantage of having a data source is that decoding will be lazily executed
+  when you access each example in the dataset.
 
   This is an experimental feature. Currently, only one level of nesting is
   supported and TF1 graph is not supported either.
@@ -145,6 +167,54 @@ class Dataset(sequence_feature.Sequence):
         decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE
     )
     return ds
+
+  def decode_example_np(
+      self, serialized_example, decoders=None
+  ) -> python.PythonDataSource:
+    """See base class for details."""
+    flatten = self.feature._flatten  # pylint: disable=protected-access
+    nest = self.feature._nest  # pylint: disable=protected-access
+    flat_example = flatten(serialized_example)
+    flat_features = flatten(self.feature)
+    num_slices: int | None = None
+
+    # First discover the number of slices in the Dataset. Notably, it's possible
+    # that tensors have to be reshaped. We call slice a record in the Dataset.
+    # We don't use `example` to avoid confusion with the `serialized_example`.
+    for i, feature in enumerate(flat_features):
+      if isinstance(feature, tensor_feature.Tensor) and feature.shape:
+        try:
+          flat_example[i] = flat_example[i].reshape((-1,) + feature.shape)
+        except ValueError as e:
+          raise ValueError(
+              "The length of all elements of one slice should be the same."
+          ) from e
+        feature_num_slices = flat_example[i].shape[0]
+      else:
+        feature_num_slices = len(flat_example[i])
+      if num_slices is None:
+        num_slices = feature_num_slices
+      else:
+        if feature_num_slices != num_slices:
+          raise ValueError(
+              "The length of elements of all slices should be the same. Got"
+              f" {num_slices} and {feature_num_slices}"
+          )
+    if num_slices is None:
+      raise ValueError("no feature was found.")
+
+    # Then, we apply the decode function on each slice.
+    if isinstance(self.feature, top_level_feature.TopLevelFeature):
+      # Only top-level features accept decoders.
+      decode_fn = functools.partial(
+          self.feature.decode_example_np, decoders=decoders
+      )
+    else:
+      decode_fn = self.feature.decode_example_np
+
+    return python.PythonDataSource(
+        length=num_slices, getitem=_getitem(decode_fn, nest, flat_example)
+    )
 
   def _flatten(self, x):
     """See base class for details."""

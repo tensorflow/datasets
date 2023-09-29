@@ -26,6 +26,7 @@ import numpy as np
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.data_sources import python
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -120,11 +121,18 @@ class SubTestCase(test_case.TestCase):
           zipped_examples,
           dict_only=True,
       )
-    elif isinstance(d1, (tf.data.Dataset, dataset_utils._IterableDataset)):  # pylint: disable=protected-access
+    elif isinstance(
+        d1,
+        (
+            tf.data.Dataset,
+            dataset_utils._IterableDataset,  # pylint: disable=protected-access
+            python.PythonDataSource,
+        ),
+    ):
       # Checks length and elements of the dataset. At the moment, more than one
       # level of nested datasets is not supported.
       self.assertEqual(len(d1), len(d2))
-      for ex1, ex2 in zip(d1, d2):
+      for ex1, ex2 in zip(iter(d1), iter(d2)):
         self.assertAllEqualNested(ex1, ex2, atol=atol)
     elif atol:
       self.assertAllClose(d1, d2, atol=atol)
@@ -377,7 +385,7 @@ class FeatureExpectationsTestCase(SubTestCase):
               decoders={'inner': test.decoders},
           )
           with self._subTest('out_np_value'):
-            np.testing.assert_array_equal(out_numpy['inner'], test.expected_np)
+            self.assertAllEqualNested(out_numpy['inner'], test.expected_np)
 
       # Test serialization + decoding from disk
       with self._subTest('out'):

@@ -15,6 +15,10 @@
 
 """Tests for tensorflow_datasets.core.features.dataset_feature."""
 
+# pylint: disable=g-complex-comprehension  # Comprehensions allow us to write more compact/readable tests in this file.
+
+import pickle
+
 from absl.testing import parameterized
 import numpy as np
 import tensorflow as tf
@@ -49,6 +53,7 @@ class DatasetDictFeatureTest(
             testing.FeatureExpectationItem(
                 value=[{'int': 1}, {'int': 2}, {'int': 3}],
                 expected=tf.data.Dataset.from_tensor_slices({'int': [1, 2, 3]}),
+                # expected_np=Not implemented yet,
             ),
             # Numpy array
             testing.FeatureExpectationItem(
@@ -58,6 +63,7 @@ class DatasetDictFeatureTest(
                     )
                 ),
                 expected=tf.data.Dataset.from_tensor_slices({'int': [1, 1, 1]}),
+                expected_np=[{'int': 1}] * 3,
             ),
             # Dataset length doesn't matter
             testing.FeatureExpectationItem(
@@ -69,6 +75,7 @@ class DatasetDictFeatureTest(
                 expected=tf.data.Dataset.from_tensor_slices(
                     {'int': [1, 1, 1, 1]}
                 ),
+                expected_np=[{'int': 1}] * 4,
             ),
         ],
         test_attributes=dict(_length=None),
@@ -98,6 +105,7 @@ class DatasetDictFeatureTest(
                 expected=tf.data.Dataset.from_tensor_slices(
                     {'label': [1, 0, 0]}
                 ),
+                # expected_np=Not implemented yet,
             ),
             # Variable sequence length
             testing.FeatureExpectationItem(
@@ -109,6 +117,12 @@ class DatasetDictFeatureTest(
                 expected=tf.data.Dataset.from_tensor_slices(
                     {'label': [1, 0, 1, 0]}
                 ),
+                expected_np=[
+                    {'label': 1},
+                    {'label': 0},
+                    {'label': 1},
+                    {'label': 0},
+                ],
             ),
         ],
         test_attributes=dict(_length=None),
@@ -162,6 +176,29 @@ class DatasetDictFeatureTest(
                         'd': [1, 2, 3],
                     },
                 }),
+                expected_np=[
+                    {
+                        'a': b'aa',
+                        'b': {
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 1,
+                        },
+                    },
+                    {
+                        'a': b'b',
+                        'b': {
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 2,
+                        },
+                    },
+                    {
+                        'a': b'ccc',
+                        'b': {
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 3,
+                        },
+                    },
+                ],
             ),
             testing.FeatureExpectationItem(
                 value=dataset_utils.as_numpy(
@@ -183,6 +220,16 @@ class DatasetDictFeatureTest(
                         'd': [5] * 100,
                     },
                 }),
+                expected_np=[
+                    {
+                        'a': str(i).encode(),
+                        'b': {
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 5,
+                        },
+                    }
+                    for i in range(100)
+                ],
             ),
         ],
     )
@@ -233,6 +280,29 @@ class DatasetDictFeatureTest(
                         'd': [1, 2, 3],
                     },
                 }),
+                expected_np=[
+                    {
+                        'a': b'aa',
+                        'b': {
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 1,
+                        },
+                    },
+                    {
+                        'a': b'b',
+                        'b': {
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 2,
+                        },
+                    },
+                    {
+                        'a': b'ccc',
+                        'b': {
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 3,
+                        },
+                    },
+                ],
             ),
             testing.FeatureExpectationItem(
                 value={
@@ -252,6 +322,16 @@ class DatasetDictFeatureTest(
                         'd': [5] * 100,
                     },
                 }),
+                expected_np=[
+                    {
+                        'a': str(i).encode(),
+                        'b': {
+                            'c': np.ones(shape=(4, 2), dtype=np.int32),
+                            'd': 5,
+                        },
+                    }
+                    for i in range(100)
+                ],
             ),
             # Wrong length in one of the lists.
             testing.FeatureExpectationItem(
@@ -263,6 +343,7 @@ class DatasetDictFeatureTest(
                     },
                 },
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg=(
                     'The length of all elements of one sequence should be the'
                     ' same.'
@@ -319,6 +400,26 @@ class DatasetDictFeatureTest(
                         'c': [2, 3, 4],
                     },
                 }),
+                expected_np=[
+                    {
+                        'a': b'aa',
+                        'b': {
+                            'c': 2,
+                        },
+                    },
+                    {
+                        'a': b'b',
+                        'b': {
+                            'c': 3,
+                        },
+                    },
+                    {
+                        'a': b'ccc',
+                        'b': {
+                            'c': 4,
+                        },
+                    },
+                ],
             ),
         ],
     )
@@ -339,16 +440,19 @@ class DatasetFeatureTest(
             testing.FeatureExpectationItem(
                 value=[1, 2, 3],
                 expected=tf.data.Dataset.from_tensor_slices([1, 2, 3]),
+                expected_np=[1, 2, 3],
             ),
             # Numpy array
             testing.FeatureExpectationItem(
                 value=np.ones(shape=(3,), dtype=np.int32),
                 expected=tf.data.Dataset.from_tensor_slices([1, 1, 1]),
+                expected_np=[1, 1, 1],
             ),
             # Datasets with a different lenght will fail on encoding.
             testing.FeatureExpectationItem(
                 value=np.ones(shape=(4,), dtype=np.int32),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='Error while serializing feature',
             ),
         ],
@@ -365,16 +469,19 @@ class DatasetFeatureTest(
             testing.FeatureExpectationItem(
                 value=['right', 'left', 'left'],
                 expected=tf.data.Dataset.from_tensor_slices([1, 0, 0]),
+                expected_np=[1, 0, 0],
             ),
             # Variable sequence length
             testing.FeatureExpectationItem(
                 value=['right', 'left', 'right', 'left'],
                 expected=tf.data.Dataset.from_tensor_slices([1, 0, 1, 0]),
+                expected_np=[1, 0, 1, 0],
             ),
             # Empty sequence length
             testing.FeatureExpectationItem(
                 value=[],
                 expected=[],
+                expected_np=[],
             ),
         ],
     )
@@ -401,6 +508,48 @@ class DatasetFeatureTest(
       feature2 = feature_lib.Dataset(feature_lib.ClassLabel(num_classes=2))
       feature2.load_metadata(data_dir=tmp_dir, feature_name='test')
     self.assertEqual(feature2.feature.names, ['left', 'right'])
+
+
+class DecodeExampleNpTest(testing.SubTestCase):
+
+  def test_top_level_feature(self):
+    feature = feature_lib.Dataset(
+        {'feature_name': feature_lib.Tensor(dtype=np.uint8, shape=(4, 2))}
+    )
+    example = {'feature_name': np.ones(shape=(24,), dtype=np.int32)}
+    expected = [{'feature_name': np.ones(shape=(4, 2), dtype=np.int32)}] * 3
+    self.assertAllEqualNested(feature.decode_example_np(example), expected)
+
+  def test_tensor_feature(self):
+    feature = feature_lib.Dataset(
+        feature_lib.Tensor(dtype=np.uint8, shape=(4, 2))
+    )
+    example = np.ones(shape=(24,), dtype=np.uint8)
+    expected = [np.ones(shape=(4, 2), dtype=np.int32)] * 3
+    self.assertAllEqualNested(feature.decode_example_np(example), expected)
+
+  def test_nested_dict(self):
+    feature = feature_lib.Dataset({'a': {'b': np.int32}, 'b': np.str_})
+    example = {'a': {'b': [1, 2, 3]}, 'b': ['a', 'b', 'c']}
+    expected = [
+        {'a': {'b': 1}, 'b': 'a'},
+        {'a': {'b': 2}, 'b': 'b'},
+        {'a': {'b': 3}, 'b': 'c'},
+    ]
+    self.assertAllEqualNested(feature.decode_example_np(example), expected)
+
+  def test_example_with_wrong_shape(self):
+    feature = feature_lib.Dataset({'a': {'b': np.int32}, 'b': np.str_})
+    example = {'a': {'b': [1, 2]}, 'b': ['a', 'b', 'c']}
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Got 2 and 3'):
+      feature.decode_example_np(example)
+
+  def test_decode_example_np_is_picklable(self):
+    feature = feature_lib.Dataset(np.str_)
+    example = [b'a']
+    pickle.loads(pickle.dumps(feature.decode_example_np(example)))
+    pickle.loads(pickle.dumps(feature.decode_example_np))
+    pickle.loads(pickle.dumps(feature_lib.Dataset.decode_example_np))
 
 
 if __name__ == '__main__':

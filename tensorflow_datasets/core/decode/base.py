@@ -84,6 +84,18 @@ class Decoder(abc.ABC):
     """
     raise NotImplementedError('Abstract class')
 
+  def decode_example_np(self, serialized_example):
+    """Decode the example feature field for NumPy (eg: image).
+
+    Args:
+      serialized_example: `np.array` as decoded, the dtype/shape should be
+        identical to `feature.get_serialized_info()`.
+
+    Returns:
+      example: Decoded example. Defaults to `decode_example`.
+    """
+    return self.decode_example(serialized_example)
+
   def decode_batch_example(self, serialized_example):
     """See `FeatureConnector.decode_batch_example` for details."""
     return tf.map_fn(
