@@ -218,6 +218,9 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
       raise ValueError(f"{hf_value} is not a valid audio feature.")
   elif isinstance(hf_value, lazy_imports_lib.lazy_imports.PIL_Image.Image):
     buffer = io.BytesIO()
+    if hf_value.mode == "CMYK":
+      # Convert CMYK images to RGB.
+      hf_value = hf_value.convert("RGB")
     hf_value.save(fp=buffer, format=_IMAGE_ENCODING_FORMAT)
     return buffer.getvalue()
   elif isinstance(feature, feature_lib.Tensor):
