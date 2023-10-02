@@ -45,6 +45,15 @@ class DatasetImporterBuilder(
       '0.1.0': 'Initial release.',
   }
   _GCS_BUCKET = 'gs://gresearch/robotics/'
+  # _GCS_BUCKET = ''
+  KEYS_TO_STRIP = [
+      'episode_id',
+      'legacy_datasets',
+      'project_name',
+      'publish_timestamp',
+      'session_pb',
+      'ssot_session_key',
+  ]
 
 
   @abc.abstractmethod
@@ -72,6 +81,14 @@ class DatasetImporterBuilder(
     """Returns the dataset metadata."""
     description = self.get_description()
     features = self.get_ds_builder().info.features
+
+    tmp = dict(features)
+
+    for key in self.KEYS_TO_STRIP:
+      if key in tmp:
+        del tmp[key]
+    features = tfds.features.FeaturesDict(tmp)
+
     return tfds.core.DatasetInfo(
         builder=self,
         description=description,
@@ -115,6 +132,10 @@ class DatasetImporterBuilder(
 
       example_id = example_out['tfds_id'].decode('utf-8')
       del example_out['tfds_id']
+      for key in self.KEYS_TO_STRIP:
+        if key in example_out:
+          del example_out[key]
+
       yield example_id, example_out
 
     return f'read_tfds_dataset@{split}' >> beam_utils.ReadFromTFDS(
