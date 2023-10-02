@@ -944,6 +944,9 @@ toc:
 - section:
   - path: /datasets/catalog/mt_opt
     title: mt_opt
+  - path: /datasets/catalog/utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds
+    status: nightly
+    title: utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds
   title: Robotics
 - section:
   - path: /datasets/catalog/bigearthnet
