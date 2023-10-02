@@ -13,6 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Robotics datasets."""
-from tensorflow_datasets.robotics.mt_opt import MtOpt
-from tensorflow_datasets.robotics.rtx import UtokyoPr2TabletopManipulationConvertedExternallyToRlds
+"""All RT-X datasets."""
+
+from tensorflow_datasets.robotics.rtx.rtx import UtokyoPr2TabletopManipulationConvertedExternallyToRlds
