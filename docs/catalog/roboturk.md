@@ -32,16 +32,18 @@ Cloth folding, bowl stacking
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `45.39 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 199
+`'train'` | 1,796
 
 *   **Feature structure**:
 

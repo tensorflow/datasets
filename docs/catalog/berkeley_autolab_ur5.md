@@ -32,16 +32,18 @@ UR5 performing cloth manipulation, pick place etc tasks
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `76.39 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 104
+`'train'` | 896
 
 *   **Feature structure**:
 

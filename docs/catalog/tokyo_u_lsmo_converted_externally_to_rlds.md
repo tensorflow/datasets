@@ -32,16 +32,17 @@ motion planning trajectory of pick place tasks
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `335.71 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 50
 
 *   **Feature structure**:
 
