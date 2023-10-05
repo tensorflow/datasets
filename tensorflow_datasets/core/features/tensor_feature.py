@@ -263,6 +263,14 @@ class Tensor(feature_lib.FeatureConnector):
       # directly (avoid `tf.ragged.map_flat_values overhead`)
       return self.decode_example(example_data)
 
+  def decode_ragged_example_np(self, example_data):
+    """See base class for details."""
+    # See comments in `decode_ragged_example`.
+    if self._dynamic_shape or self._encoded_to_bytes:
+      raise NotImplementedError()
+    else:
+      return self.decode_example_np(example_data)
+
   @classmethod
   def from_json_content(
       cls, value: Union[Json, feature_pb2.TensorFeature]

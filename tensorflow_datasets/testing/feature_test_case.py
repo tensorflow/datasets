@@ -127,6 +127,7 @@ class SubTestCase(test_case.TestCase):
             tf.data.Dataset,
             dataset_utils._IterableDataset,  # pylint: disable=protected-access
             python.PythonDataSource,
+            list,
         ),
     ):
       # Checks length and elements of the dataset. At the moment, more than one

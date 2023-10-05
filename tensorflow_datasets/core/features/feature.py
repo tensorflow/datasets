@@ -35,6 +35,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import np_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import tree_utils
@@ -768,6 +769,10 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
           lambda: _make_empty_seq_output(shape=self.shape, dtype=tf_type),
           lambda: decode_map_fn(ex),
       )
+
+  def decode_batch_example_np(self, batch):
+    """See decode_batch_example."""
+    return np_utils.np_map_fn(self.decode_example_np, batch)
 
   def decode_ragged_example(self, tfexample_data):
     """Decode nested features from a tf.RaggedTensor.

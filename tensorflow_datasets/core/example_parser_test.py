@@ -33,6 +33,14 @@ def test_example_parser_np():
       'array_of_unknown_shape': features_lib.Tensor(
           shape=(None,), dtype=np.uint16
       ),
+      'ragged_tensor': features_lib.Sequence(
+          features_lib.Sequence(
+              features_lib.Tensor(shape=(2,), dtype=np.int32),
+          ),
+      ),
+      'ragged_tensor_without_length': features_lib.Sequence(
+          features_lib.Sequence(np.str_),
+      ),
   })
   serialized_example = tf_example_pb2.Example(
       features=tf_feature_pb2.Features(
@@ -49,6 +57,24 @@ def test_example_parser_np():
               'array_of_unknown_shape': tf_feature_pb2.Feature(
                   int64_list=tf_feature_pb2.Int64List(value=[4, 5, 6])
               ),
+              'ragged_tensor/ragged_flat_values': tf_feature_pb2.Feature(
+                  int64_list=tf_feature_pb2.Int64List(value=[0, 1, 2, 3, 4, 5])
+              ),
+              'ragged_tensor/ragged_row_lengths_0': tf_feature_pb2.Feature(
+                  int64_list=tf_feature_pb2.Int64List(value=[2, 0, 1])
+              ),
+              'ragged_tensor_without_length/ragged_flat_values': (
+                  tf_feature_pb2.Feature(
+                      bytes_list=tf_feature_pb2.BytesList(
+                          value=[b'abcd', b'efg', b'hij']
+                      )
+                  )
+              ),
+              'ragged_tensor_without_length/ragged_row_lengths_0': (
+                  tf_feature_pb2.Feature(
+                      int64_list=tf_feature_pb2.Int64List(value=[2, 0, 1])
+                  )
+              ),
           }
       )
   ).SerializeToString()
@@ -56,6 +82,16 @@ def test_example_parser_np():
       'feature': {'nested_text': b'thisistext', 'nested_float': 1.0},
       'array_of_ints': np.asarray([2, 3], dtype=np.int8),
       'array_of_unknown_shape': np.asarray([4, 5, 6], dtype=np.uint16),
+      'ragged_tensor': [
+          [[0, 1], [2, 3]],
+          [],
+          [[4, 5]],
+      ],
+      'ragged_tensor_without_length': [
+          [b'abcd', b'efg'],
+          [],
+          [b'hij'],
+      ],
   }
   example_specs = features.get_tensor_info()
   example_parser_np = example_parser.ExampleParserNp(example_specs)
@@ -85,3 +121,60 @@ def test_key_error_exception_if_example_specs_is_malformed():
       match='(.|\n)*array_of_ints is found in the feature, but not in*',
   ):
     example_parser_np.parse_example(serialized_example)
+
+
+@pytest.mark.parametrize(
+    ('flat_values', 'row_lengths', 'shape', 'expected'),
+    (
+        (
+            [0, 1, 2],  # flat_values
+            [[1, 0, 2]],  # row_lengths
+            (None,),  # shape
+            [  # expected
+                [0],
+                [],
+                [1, 2],
+            ],
+        ),
+        (
+            [0, 1, 2, 3, 4, 10, 11, 12, 13, 14],  # flat_values
+            [[3, 3], [3, 0, 2, 2, 2, 1]],  # row_lengths
+            (None, None, None),  # shape
+            [  # expected
+                [[0, 1, 2], [], [3, 4]],
+                [[10, 11], [12, 13], [14]],
+            ],
+        ),
+        (
+            [1, 2, 3, 4, 5, 10, 11, 12, 13, 14],  # flat_values
+            [[3, 3], [3, 0, 2, 2, 2, 1]],  # row_lengths
+            (None, 3, None),  # shape
+            [  # expected
+                [[1, 2, 3], [], [4, 5]],
+                [[10, 11], [12, 13], [14]],
+            ],
+        ),
+    ),
+)
+def test_reshape_deep_ragged_tensor(flat_values, row_lengths, shape, expected):
+  np.testing.assert_equal(
+      example_parser.reshape_ragged_tensor(flat_values, row_lengths, shape),
+      expected,
+  )
+
+
+def test_full_row_lengths():
+  assert list(
+      example_parser._full_row_lengths(
+          [1, 2, 3, 4, 10, 11, 12, 13, 14],
+          [[2, 0, 1]],
+          (None, None, 3),
+      )
+  ) == [[3, 3, 3], [2, 0, 1]]
+  assert list(
+      example_parser._full_row_lengths(
+          [1, 2, 3, 4, 10, 11, 12, 13, 14],
+          [[3, 3], [3, 0, 2, 2, 2, 1]],
+          (None, 3, None),
+      )
+  ) == [[3, 0, 2, 2, 2, 1], [3, 3]]

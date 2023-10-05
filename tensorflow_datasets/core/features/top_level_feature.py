@@ -206,7 +206,12 @@ def _decode_feature(
     decoder = feature
 
   if backend == _Backend.NP:
-    return decoder.decode_example_np(example, **decode_kwargs)
+    if sequence_rank == 0:
+      return decoder.decode_example_np(example, **decode_kwargs)
+    elif sequence_rank == 1:
+      return decoder.decode_batch_example_np(example, **decode_kwargs)
+    elif sequence_rank > 1:
+      return decoder.decode_ragged_example_np(example, **decode_kwargs)
   elif backend == _Backend.TF:
     if sequence_rank == 0:
       return decoder.decode_example(example, **decode_kwargs)

@@ -18,17 +18,40 @@
 from __future__ import annotations
 
 import abc
+from collections.abc import Iterable, Mapping, Sequence
 import dataclasses
-from typing import Mapping, Union
+import re
+from typing import Any, Union
 
 import numpy as np
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import dtype_utils
-from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.proto import tf_example_pb2
 from tensorflow_datasets.proto import tf_feature_pb2
+
+_RAGGED_ROW_COLUMN = re.compile(
+    r"(?P<feature_name>.+)/(ragged_row_lengths_\d+|ragged_flat_values)$"
+)
+_RAGGED_ROW_LENGTH_REGEX = re.compile(
+    r"(?P<feature_name>.+)/ragged_row_lengths_(?P<length>\d+)$"
+)
+_RAGGED_FLAT_VALUES_REGEX = re.compile(
+    r"(?P<feature_name>.+)/ragged_flat_values$"
+)
+
+
+def _key_to_feature_name(key: str) -> str:
+  """Extracts the feature name from the key in the Example dictionary."""
+  if (match := _RAGGED_ROW_COLUMN.match(key)) is not None:
+    return match.group("feature_name")
+  else:
+    return key
+
+
+def _is_ragged_tensor(key: str) -> bool:
+  return _RAGGED_ROW_COLUMN.match(key) is not None
 
 
 class Parser(abc.ABC):
@@ -106,7 +129,7 @@ class ExampleParserNp(Parser):
 
   def parse_example(
       self, serialized_example: bytes
-  ) -> type_utils.NpArrayOrScalarDict:
+  ) -> Mapping[str, Union[np.ndarray, list[Any]]]:
     example = tf_example_pb2.Example.FromString(serialized_example)
     np_example = _features_to_numpy(example.features, self._flat_example_specs)
     return utils.pack_as_nest_dict(np_example, self.example_specs)
@@ -115,53 +138,75 @@ class ExampleParserNp(Parser):
 def _features_to_numpy(
     features: tf_feature_pb2.Features,
     flat_example_specs: Mapping[str, feature_lib.TensorInfo],
-) -> type_utils.NpArrayOrScalarDict:
+) -> Mapping[str, Union[np.ndarray, list[Any]]]:
   """Parses features to NumPy type.
 
   Args:
-    features: TensorFlow Features.
+    features: The features of an example, encoded by TFDS.
     flat_example_specs: All tensor infos in a flat dictionary.
 
   Returns:
     The parsed NumPy object of type: np.ndarray or np.dtype.
 
   Raises:
-    KeyError: if `flat_example_specs` is malformed.
+    KeyError: if `features` and `flat_example_specs` do not correspond.
   """
   parsed_example = {}
   feature_map = features.feature
   for key in feature_map:
-    if key not in flat_example_specs:
+    ragged_row_length = _RAGGED_ROW_LENGTH_REGEX.match(key)
+    ragged_flat_values = _RAGGED_FLAT_VALUES_REGEX.match(key)
+    # For ragged arrays we need to reshape the np.arrays using
+    # ragged_flat_values/ragged_row_lengths_*. `features` can look like:
+    # {
+    #     'video/image': np.array(...),
+    #     'video/object/bbox': {
+    #         'ragged_flat_values': np.array(...),
+    #         'ragged_row_lengths_0', np.array(...),
+    #     },
+    # }
+    if key in flat_example_specs or ragged_flat_values:
+      feature_name = _key_to_feature_name(key)
+      with utils.try_reraise(f"Error wile parsing feature {key}: "):
+        parsed_example[feature_name] = _feature_to_numpy(
+            feature_map,
+            flat_example_specs[feature_name],
+            key,
+        )
+    elif ragged_row_length:
+      # Lengths are extracted later for each feature in _feature_to_numpy.
+      continue
+    else:
       raise KeyError(
           f"Malformed input: {key} is found in the feature, but not in"
           f" {flat_example_specs}"
-      )
-    with utils.try_reraise(f"Error wile parsing feature {key}: "):
-      parsed_example[key] = _feature_to_numpy(
-          feature_map[key], flat_example_specs[key], key
       )
   return parsed_example
 
 
 def _feature_to_numpy(
-    feature: tf_feature_pb2.Feature,
+    features: Mapping[str, tf_feature_pb2.Feature],
     tensor_info: feature_lib.TensorInfo,
-    feature_name: str,
-) -> type_utils.NpArrayOrScalar:
+    key: str,
+) -> Union[np.ndarray, list[Any]]:
   """Parses a single feature to NumPy type.
 
   Args:
-    feature: TensorFlow Feature.
+    features: TFDS features.
     tensor_info: Tensor info for the current feature.
-    feature_name: name of the feature to convert to NumPy.
+    key: full name of the feature to convert to NumPy.
 
   Returns:
     The parsed NumPy object of type: np.ndarray or np.dtype.
 
   Raises:
     AttributeError: if the parsed feature is malformed.
+    KeyError: if feature_name is not found in example_specs.
     ValueError: if a scalar feature is represented by an array.
   """
+  if key not in features:
+    raise KeyError(f"Malformed input: {key} is not in {features}")
+  feature = features[key]
   dtype = tensor_info.np_dtype
   shape = tensor_info.shape
   if feature.HasField("int64_list"):
@@ -171,11 +216,97 @@ def _feature_to_numpy(
   elif feature.HasField("bytes_list"):
     value_array = feature.bytes_list.value
   else:
-    raise AttributeError(f"cannot convert '{feature_name}' from proto to NumPy")
+    raise AttributeError(f"cannot convert '{key}' from proto to NumPy")
   value_array = np.array(value_array, dtype=dtype)
   if not shape:
     return value_array.item()
-  return value_array
+  feature_name = _key_to_feature_name(key)
+  row_lengths = _extract_row_lengths(features, feature_name)
+  return reshape_ragged_tensor(value_array, row_lengths, shape)
+
+
+def _extract_row_lengths(
+    features: Mapping[str, tf_feature_pb2.Feature],
+    feature_name: str,
+) -> list[Sequence[int]]:
+  """Extracts all existing row lengths from the `features`."""
+  i = 0
+  row_lengths: list[Sequence[int]] = []
+  while True:
+    row_length_key = f"{feature_name}/ragged_row_lengths_{i}"
+    if row_length_key not in features:
+      break
+    row_lengths.append(features[row_length_key].int64_list.value)
+    i += 1
+  return row_lengths
+
+
+def reshape_ragged_tensor(
+    values: np.ndarray,
+    row_lengths: list[Sequence[int]],
+    shape: tuple[Union[int, None], ...],
+) -> Union[np.ndarray, list[Any]]:
+  """Reshapes a list to a heterogeneous NumPy array.
+
+  Warning: this function makes copies of arrays. It could be optimized by not
+  recreating the array at each iteration but by reshaping an existing array.
+
+  Args:
+    values: 1-dimension array with all the values to reshape.
+    row_lengths: array of length of the unknown dimension.
+    shape: target shape of the array containing None for unknown dimensions.
+
+  Returns:
+    An array of ragged NumPy arrays.
+  """
+  if not row_lengths:
+    # Reshape with (None, 3, 4) -> (-1, 3, 4).
+    return values.reshape([d if d is not None else -1 for d in shape])
+  full_row_lengths = _full_row_lengths(values, row_lengths, shape)
+  # We start by the most upright dimension, which is the innerest dimension.
+  for row_length in full_row_lengths:
+    array = []
+    i = 0
+    for length in row_length:
+      value = values[i : i + length]
+      array.append(value)
+      i += length
+    values = array
+  return values
+
+
+def _full_row_lengths(
+    values: np.ndarray,
+    row_lengths: list[Sequence[int]],
+    shape: tuple[Union[int, None], ...],
+) -> Iterable[Sequence[int]]:
+  """Corrects `row_lengths` by adding the length of non-ambiguous rows.
+
+  `row_lengths` only contain the lengths of the ambiguous (None) rows. If the
+  last dimensions are non-ambiguous (int), we can complete them.
+
+  Args:
+    values: 1-dimension array with all the values to reshape.
+    row_lengths: array of length of the unknown dimension.
+    shape: target shape of the array containing None for unknown dimensions.
+
+  Returns:
+    The corrected row lengths in reversed order (left is the most outer
+      dimension).
+  """
+  if shape and shape[-1] is None:
+    return reversed(row_lengths)
+  full_row_lengths: list[Sequence[int]] = []
+  current_row_length = len(row_lengths) - 1
+  for dim_length in reversed(shape):
+    if dim_length is None:
+      if current_row_length < 0:
+        return full_row_lengths
+      full_row_lengths.append(row_lengths[current_row_length])
+      current_row_length -= 1
+    else:
+      full_row_lengths.append([dim_length] * (len(values) // dim_length))
+  return full_row_lengths
 
 
 def _build_feature_specs(flat_example_specs):
