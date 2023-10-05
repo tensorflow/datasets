@@ -25,22 +25,24 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_int(self):
     self.assertFeature(
-        feature=feature_lib.Sequence({'int': tf.int32}, length=3),
+        feature=feature_lib.Sequence({'int': np.int32}, length=3),
         shape={'int': (3,)},
-        dtype={'int': tf.int32},
+        dtype={'int': np.int32},
         serialized_info={
-            'int': feature_lib.TensorInfo(shape=(3,), dtype=tf.int32),
+            'int': feature_lib.TensorInfo(shape=(3,), dtype=np.int32),
         },
         tests=[
             # Python array
             testing.FeatureExpectationItem(
                 value={'int': [1, 2, 3]},
                 expected={'int': [1, 2, 3]},
+                expected_np={'int': [1, 2, 3]},
             ),
             # Numpy array
             testing.FeatureExpectationItem(
                 value={'int': np.ones(shape=(3,), dtype=np.int32)},
                 expected={'int': [1, 1, 1]},
+                expected_np={'int': [1, 1, 1]},
             ),
             # Array of dict
             testing.FeatureExpectationItem(
@@ -50,11 +52,13 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     {'int': 100},
                 ],
                 expected={'int': [1, 10, 100]},
+                expected_np={'int': [1, 10, 100]},
             ),
             # Wrong sequence length
             testing.FeatureExpectationItem(
                 value={'int': np.ones(shape=(4,), dtype=np.int32)},
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='Input sequence length do not match',
             ),
         ],
@@ -70,24 +74,27 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
             length=None,
         ),
         shape={'label': (None,)},
-        dtype={'label': tf.int64},
+        dtype={'label': np.int64},
         serialized_info={
-            'label': feature_lib.TensorInfo(shape=(None,), dtype=tf.int64),
+            'label': feature_lib.TensorInfo(shape=(None,), dtype=np.int64),
         },
         tests=[
             testing.FeatureExpectationItem(
                 value={'label': ['right', 'left', 'left']},
                 expected={'label': [1, 0, 0]},
+                expected_np={'label': [1, 0, 0]},
             ),
             # Variable sequence length
             testing.FeatureExpectationItem(
                 value={'label': ['right', 'left', 'right', 'left']},
                 expected={'label': [1, 0, 1, 0]},
+                expected_np={'label': [1, 0, 1, 0]},
             ),
             # Empty sequence length
             testing.FeatureExpectationItem(
                 value={'label': []},
                 expected={'label': []},
+                expected_np={'label': []},
             ),
         ],
         test_attributes=dict(_length=None),
@@ -97,10 +104,10 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=feature_lib.Sequence(
             {
-                'a': tf.string,
+                'a': np.str_,
                 'b': {
-                    'c': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
-                    'd': tf.uint8,
+                    'c': feature_lib.Tensor(shape=(4, 2), dtype=np.int32),
+                    'd': np.uint8,
                 },
             },
             length=None,
@@ -113,10 +120,10 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
             },
         },
         dtype={
-            'a': tf.string,
+            'a': np.str_,
             'b': {
-                'c': tf.int32,
-                'd': tf.uint8,
+                'c': np.int32,
+                'd': np.uint8,
             },
         },
         tests=[
@@ -130,6 +137,13 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                 },
                 expected={
                     'a': [tf.compat.as_bytes(t) for t in ('aa', 'b', 'ccc')],
+                    'b': {
+                        'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
+                        'd': [1, 2, 3],
+                    },
+                },
+                expected_np={
+                    'a': [b'aa', b'b', b'ccc'],
                     'b': {
                         'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
                         'd': [1, 2, 3],
@@ -154,6 +168,13 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                         'd': [5] * 100,
                     },
                 },
+                expected_np={
+                    'a': [str(i).encode() for i in range(100)],
+                    'b': {
+                        'c': np.ones(shape=(100, 4, 2), dtype=np.int32),
+                        'd': [5] * 100,
+                    },
+                },
             ),
             # Test inputs not same sequence length
             testing.FeatureExpectationItem(
@@ -165,6 +186,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     },
                 },
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='length of all elements of one sequence should',
             ),
         ],
@@ -172,8 +194,8 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_encoding(self):
     f = feature_lib.Sequence({
-        'a': feature_lib.Sequence({'c': tf.int64}),
-        'b': tf.int64,
+        'a': feature_lib.Sequence({'c': np.int64}),
+        'b': np.int64,
     })
 
     # Different combinaison of list of dict/dict of list to encode the same
@@ -247,16 +269,16 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     # Mix of sequence and non-sequence
     self.assertFeature(
         feature=feature_lib.Sequence({
-            'a': feature_lib.Sequence(tf.int32),
-            'b': tf.int32,
+            'a': feature_lib.Sequence(np.int32),
+            'b': np.int32,
         }),
         shape={
             'a': (None, None),
             'b': (None,),
         },
         dtype={
-            'a': tf.int32,
-            'b': tf.int32,
+            'a': np.int32,
+            'b': np.int32,
         },
         tests=[
             testing.FeatureExpectationItem(
@@ -268,6 +290,10 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     'a': [[1, 1, 1], [], [3, 3]],
                     'b': [1, 2, 3],
                 },
+                expected_np={
+                    'a': [[1, 1, 1], [], [3, 3]],
+                    'b': [1, 2, 3],
+                },
             ),
         ],
     )
@@ -276,11 +302,11 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=feature_lib.Sequence(
             feature_lib.Sequence(
-                feature_lib.Tensor(shape=(2,), dtype=tf.int32),
+                feature_lib.Tensor(shape=(2,), dtype=np.int32),
             ),
         ),
         shape=(None, None, 2),
-        dtype=tf.int32,
+        dtype=np.int32,
         test_tensor_spec=False,  # TODO(b/227584124): doesn't work
         tests=[
             testing.FeatureExpectationItem(
@@ -297,16 +323,23 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     ],
                     inner_shape=(2,),
                 ),
+                expected_np=[
+                    [[0, 1], [2, 3]],
+                    [],
+                    [[4, 5]],
+                ],
             ),
             # Empty
             testing.FeatureExpectationItem(
                 value=[],
                 expected=[],
+                expected_np=[],
             ),
             # List of empty lists
             testing.FeatureExpectationItem(
                 value=[[], [], []],
                 expected=[[], [], []],
+                expected_np=[[], [], []],
             ),
             # List of empty np.array
             testing.FeatureExpectationItem(
@@ -315,6 +348,10 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     np.empty(shape=(0, 2), dtype=np.int32),
                 ],
                 expected=[
+                    [],
+                    [],
+                ],
+                expected_np=[
                     [],
                     [],
                 ],
@@ -330,6 +367,11 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     [],
                     [[1, 1], [1, 1], [1, 1]],
                 ],
+                expected_np=[
+                    [],
+                    [],
+                    [[1, 1], [1, 1], [1, 1]],
+                ],
             ),
             # Wrong types should fails
             testing.FeatureExpectationItem(
@@ -337,7 +379,8 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     np.ones(shape=(3, 2), dtype=np.float32),
                 ],
                 raise_cls=ValueError,
-                raise_msg='float32 do not match int32',
+                raise_cls_np=ValueError,
+                raise_msg='float32 do not match',
             ),
         ],
     )
@@ -345,13 +388,13 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
   def test_2lvl_sequences_string(self):
     self.assertFeature(
         feature=feature_lib.Sequence(
-            feature_lib.Sequence(tf.string),
+            feature_lib.Sequence(np.str_),
         ),
         shape=(
             None,
             None,
         ),
-        dtype=tf.string,
+        dtype=np.str_,
         tests=[
             testing.FeatureExpectationItem(
                 value=[
@@ -361,6 +404,12 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     ['hij'],
                 ],
                 expected=[
+                    [b'abcd', b'', b'efg'],
+                    [],
+                    [b'', b''],
+                    [b'hij'],
+                ],
+                expected_np=[
                     [b'abcd', b'', b'efg'],
                     [],
                     [b'', b''],
@@ -376,12 +425,17 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     [],
                     [],
                 ],
+                expected_np=[
+                    [],
+                    [],
+                ],
             ),
             testing.FeatureExpectationItem(
                 value=[
                     ['abcd', 'efg', 123],
                 ],
                 raise_cls=TypeError,
+                raise_cls_np=TypeError,
                 raise_msg='Expected binary or unicode string',
             ),
         ],
@@ -391,12 +445,12 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=feature_lib.Sequence(
             feature_lib.Sequence(
-                feature_lib.Sequence(tf.int32),
+                feature_lib.Sequence(np.int32),
                 length=3,
             ),
         ),
         shape=(None, 3, None),
-        dtype=tf.int32,
+        dtype=np.int32,
         test_tensor_spec=False,  # TODO(b/227584124): doesn't work
         tests=[
             testing.FeatureExpectationItem(
@@ -408,6 +462,10 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     [[1, 2, 3], [], [4, 5]],
                     [[10, 11], [12, 13], [14]],
                 ],
+                expected_np=[
+                    [[1, 2, 3], [], [4, 5]],
+                    [[10, 11], [12, 13], [14]],
+                ],
             ),
             testing.FeatureExpectationItem(
                 value=[
@@ -415,6 +473,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     [[10, 11], [12, 13], [14]],
                 ],
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='Input sequence length do not match',
             ),
         ],
@@ -437,25 +496,31 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
             length=None,
         ),
         shape={'image': (None, 128, 100, 3)},
-        dtype={'image': tf.uint8},
+        dtype={'image': np.uint8},
         tests=[
             testing.FeatureExpectationItem(
                 value=[{'image': img} for img in imgs],
                 expected={'image': imgs_stacked},
+                expected_np={'image': imgs_stacked},
             ),
             testing.FeatureExpectationItem(
                 value={'image': imgs_stacked},
                 expected={'image': imgs_stacked},
+                expected_np={'image': imgs_stacked},
             ),
             testing.FeatureExpectationItem(
                 value={'image': imgs},
                 expected={'image': imgs_stacked},
+                expected_np={'image': imgs_stacked},
             ),
             # Empty value
             testing.FeatureExpectationItem(
                 value={'image': []},
                 # The empty value still has the right shape
                 expected={
+                    'image': np.empty(shape=(0, 128, 100, 3), dtype=np.uint8)
+                },
+                expected_np={
                     'image': np.empty(shape=(0, 128, 100, 3), dtype=np.uint8)
                 },
             ),
@@ -469,24 +534,27 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_int(self):
     self.assertFeature(
-        feature=feature_lib.Sequence(tf.int32, length=3),
+        feature=feature_lib.Sequence(np.int32, length=3),
         shape=(3,),
-        dtype=tf.int32,
+        dtype=np.int32,
         tests=[
             # Python array
             testing.FeatureExpectationItem(
                 value=[1, 2, 3],
                 expected=[1, 2, 3],
+                expected_np=[1, 2, 3],
             ),
             # Numpy array
             testing.FeatureExpectationItem(
                 value=np.ones(shape=(3,), dtype=np.int32),
                 expected=[1, 1, 1],
+                expected_np=[1, 1, 1],
             ),
             # Wrong sequence length
             testing.FeatureExpectationItem(
                 value=np.ones(shape=(4,), dtype=np.int32),
                 raise_cls=ValueError,
+                raise_cls_np=ValueError,
                 raise_msg='Input sequence length do not match',
             ),
         ],
@@ -498,21 +566,24 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
             feature_lib.ClassLabel(names=['left', 'right']),
         ),
         shape=(None,),
-        dtype=tf.int64,
+        dtype=np.int64,
         tests=[
             testing.FeatureExpectationItem(
                 value=['right', 'left', 'left'],
                 expected=[1, 0, 0],
+                expected_np=[1, 0, 0],
             ),
             # Variable sequence length
             testing.FeatureExpectationItem(
                 value=['right', 'left', 'right', 'left'],
                 expected=[1, 0, 1, 0],
+                expected_np=[1, 0, 1, 0],
             ),
             # Empty sequence length
             testing.FeatureExpectationItem(
                 value=[],
                 expected=[],
+                expected_np=[],
             ),
         ],
     )
@@ -526,16 +597,18 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
 
     self.assertFeature(
         feature=feature_lib.Sequence(feature_lib.Image(shape=(None, None, 3))),
-        dtype=tf.uint8,
+        dtype=np.uint8,
         shape=(None, None, None, 3),  # (length, h, w, c)
         tests=[
             testing.FeatureExpectationItem(
                 value=[],  # Empty input
                 expected=np.empty(shape=(0, 0, 0, 3), dtype=np.uint8),
+                expected_np=np.empty(shape=(0, 0, 0, 3), dtype=np.uint8),
             ),
             testing.FeatureExpectationItem(
                 value=imgs,
                 expected=imgs_stacked,
+                expected_np=imgs_stacked,
             ),
         ],
     )
@@ -550,15 +623,15 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
     self.assertFeature(
         feature=feature_lib.Sequence({
             'a': feature_lib.Image(shape=(None, None, 3)),
-            'b': tf.int32,
+            'b': np.int32,
         }),
         shape={
             'a': (None, None, None, 3),
             'b': (None,),
         },
         dtype={
-            'a': tf.uint8,
-            'b': tf.int32,
+            'a': np.uint8,
+            'b': np.int32,
         },
         tests=[
             testing.FeatureExpectationItem(
@@ -570,6 +643,10 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
                     'a': imgs_stacked,
                     'b': [1, 2],
                 },
+                expected_np={
+                    'a': imgs_stacked,
+                    'b': [1, 2],
+                },
             ),
             testing.FeatureExpectationItem(
                 value={
@@ -577,6 +654,10 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
                     'b': [],
                 },
                 expected={
+                    'a': np.empty(shape=(0, 0, 0, 3), dtype=np.uint8),
+                    'b': [],
+                },
+                expected_np={
                     'a': np.empty(shape=(0, 0, 0, 3), dtype=np.uint8),
                     'b': [],
                 },
