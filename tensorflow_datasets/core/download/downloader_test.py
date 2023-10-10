@@ -27,6 +27,7 @@ import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resource_lib
+from tensorflow_datasets.core.download import util
 
 
 class _FakeResponse(object):
@@ -120,7 +121,7 @@ class DownloaderTest(testing.TestCase):
         lambda *a, **kw: _FakeResponse(self.url, b'error', status_code=404),
     ).start()
     promise = self.downloader.download(self.url, self.tmp_dir)
-    with self.assertRaises(downloader.DownloadError):
+    with self.assertRaises(util.DownloadError):
       promise.get()
 
   def test_ftp(self):

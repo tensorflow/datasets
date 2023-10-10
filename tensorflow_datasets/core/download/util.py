@@ -18,6 +18,10 @@
 import enum
 
 
+class DownloadError(Exception):
+  pass
+
+
 class GenerateMode(enum.Enum):
   """`Enum` for how to treat pre-existing downloads and data.
 
