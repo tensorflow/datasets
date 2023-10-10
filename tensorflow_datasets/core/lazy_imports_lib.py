@@ -47,6 +47,7 @@ class LazyImporter(object):
   lazily imported here.
   """
 
+
   @utils.classproperty
   @classmethod
   def apache_beam(cls):
@@ -71,6 +72,11 @@ class LazyImporter(object):
   @classmethod
   def datasets(cls):
     return _try_import("datasets")
+
+  @utils.classproperty
+  @classmethod
+  def downloader(cls):
+    return _try_import("tensorflow_datasets.core.download.downloader")
 
   @utils.classproperty
   @classmethod

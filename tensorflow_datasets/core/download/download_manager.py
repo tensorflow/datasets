@@ -27,10 +27,9 @@ import uuid
 from absl import logging
 from etils import epath
 import promise
-
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
-from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -38,6 +37,9 @@ from tensorflow_datasets.core.download import util
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
+
+if typing.TYPE_CHECKING:
+  from tensorflow_datasets.core.download import downloader  # pytype: disable=bad-import-order
 
 # pylint: disable=logging-fstring-interpolation
 
@@ -48,6 +50,7 @@ ExtractPath = Union[epath.PathLike, resource_lib.Resource]
 
 
 def get_downloader(*args: Any, **kwargs: Any):
+  downloader = lazy_imports_lib.lazy_imports.downloader
   return downloader.get_downloader(*args, **kwargs)
 
 
@@ -300,6 +303,7 @@ class DownloadManager(object):
   @property
   def _downloader(self):
     if not self.__downloader:
+      downloader = lazy_imports_lib.lazy_imports.downloader
       self.__downloader = downloader.get_downloader(
           max_simultaneous_downloads=self._max_simultaneous_downloads
       )
@@ -729,6 +733,8 @@ def _get_cached_path(
     url_path: Cached in the tmp destination (if checksum unknown).
     expected_url_info: Registered checksum (if known)
   """
+  downloader = lazy_imports_lib.lazy_imports.downloader
+
   # User has manually downloaded the file.
   if manually_downloaded_path and manually_downloaded_path.exists():
     return downloader.DownloadResult(manually_downloaded_path, url_info=None)  # pytype: disable=wrong-arg-types

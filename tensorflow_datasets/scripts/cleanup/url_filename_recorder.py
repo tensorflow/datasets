@@ -74,7 +74,7 @@ def _request_filename(
   except (
       requests.exceptions.RequestException,
       urllib.error.URLError,
-      downloader.DownloadError,
+      tfds.core.download.util.DownloadError,
   ) as e:
     tqdm.tqdm.write(f'Error for {url}: {e}')
     filename = None

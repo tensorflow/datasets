@@ -32,6 +32,7 @@ import requests
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
+from tensorflow_datasets.core.download import util as download_utils_lib
 from tensorflow_datasets.core.utils import tqdm_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -104,10 +105,6 @@ def _get_filename(response: Response) -> str:
       return filename
   # Otherwise, fallback on extracting the name from the url.
   return utils.basename_from_url(response.url)
-
-
-class DownloadError(Exception):
-  pass
 
 
 class _Downloader(object):
@@ -331,7 +328,7 @@ def _normalize_drive_url(url: str) -> str:
 def _assert_status(response: requests.Response) -> None:
   """Ensure the URL response is 200."""
   if response.status_code != 200:
-    raise DownloadError(
+    raise download_utils_lib.DownloadError(
         'Failed to get url {}. HTTP code: {}.'.format(
             response.url, response.status_code
         )
