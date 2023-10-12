@@ -75,11 +75,6 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def downloader(cls):
-    return _try_import("tensorflow_datasets.core.download.downloader")
-
-  @utils.classproperty
-  @classmethod
   def envlogger(cls):
     return _try_import("envlogger.reader")
 
