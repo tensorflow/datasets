@@ -37,6 +37,7 @@ from tensorflow_datasets.robotics.rtx import DlrEdanSharedControlConvertedExtern
 from tensorflow_datasets.robotics.rtx import DlrSaraGridClampConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import DlrSaraPourConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import EthAgentAffordances
+from tensorflow_datasets.robotics.rtx import Fractal20220817Data
 from tensorflow_datasets.robotics.rtx import IamlabCmuPickupInsertConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import ImperialcollegeSawyerWristCam
 from tensorflow_datasets.robotics.rtx import JacoPlay
