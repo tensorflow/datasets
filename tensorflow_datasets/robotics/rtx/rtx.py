@@ -1195,3 +1195,24 @@ class ImperialcollegeSawyerWristCam(
 
   def get_relative_dataset_location(self):
     return 'imperialcollege_sawyer_wrist_cam/0.1.0'
+
+
+class Fractal20220817Data(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `fractal_20220817_data` dataset."""
+
+  def get_description(self):
+    return 'Table-top manipulation with 17 objects'
+
+  def get_citation(self):
+    return r"""@article{brohan2022rt,
+  title={Rt-1: Robotics transformer for real-world control at scale},
+  author={Brohan, Anthony and Brown, Noah and Carbajal, Justice and Chebotar, Yevgen and Dabis, Joseph and Finn, Chelsea and Gopalakrishnan, Keerthana and Hausman, Karol and Herzog, Alex and Hsu, Jasmine and others},
+  journal={arXiv preprint arXiv:2212.06817},
+  year={2022}
+}"""
+
+  def get_homepage(self):
+    return 'https://ai.googleblog.com/2022/12/rt-1-robotics-transformer-for-real.html'
+
+  def get_relative_dataset_location(self):
+    return 'fractal20220817_data/0.1.0'
