@@ -1008,6 +1008,9 @@ toc:
   - path: /datasets/catalog/eth_agent_affordances
     status: nightly
     title: eth_agent_affordances
+  - path: /datasets/catalog/fractal20220817_data
+    status: nightly
+    title: fractal20220817_data
   - path: /datasets/catalog/iamlab_cmu_pickup_insert_converted_externally_to_rlds
     status: nightly
     title: iamlab_cmu_pickup_insert_converted_externally_to_rlds
