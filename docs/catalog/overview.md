@@ -640,6 +640,8 @@ for ex in tfds.load('cifar10', split='train'):
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`eth_agent_affordances`](eth_agent_affordances.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`fractal20220817_data`](fractal20220817_data.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`iamlab_cmu_pickup_insert_converted_externally_to_rlds`](iamlab_cmu_pickup_insert_converted_externally_to_rlds.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imperialcollege_sawyer_wrist_cam`](imperialcollege_sawyer_wrist_cam.md)
