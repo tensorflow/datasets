@@ -32,16 +32,17 @@ Table-top manipulation with 17 objects
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `111.38 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 87,212
 
 *   **Feature structure**:
 
