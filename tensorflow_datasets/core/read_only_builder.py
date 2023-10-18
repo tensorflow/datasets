@@ -15,6 +15,7 @@
 
 """Load Datasets without reading dataset generation code."""
 
+import functools
 import os
 import typing
 from typing import Any, List, Optional, Tuple, Type
