@@ -300,27 +300,22 @@ def list_datasets_in_data_dir(
     references to the datasets found in `data_dir`. The references include the
     data dir.
   """
-  data_dir = epath.Path(data_dir)
-  references = {}
-  for reference in _find_references_with_glob(
-      folder=data_dir,
-      is_data_dir=True,
-      is_dataset_dir=False,
-      namespace=namespace,
-      include_old_tfds_version=include_old_tfds_version,
-  ):
-    if include_versions:
-      key = f'{reference.dataset_name}/{reference.config}:{reference.version}'
-    elif include_configs:
-      key = f'{reference.dataset_name}/{reference.config}'
-      reference = reference.replace(version=None)
+  for dataset_dir in epath.Path(data_dir).iterdir():
+    if not dataset_dir.is_dir():
+      continue
+    if not naming.is_valid_dataset_name(dataset_dir.name):
+      continue
+    if include_configs:
+      yield from list_dataset_variants(
+          dataset_dir=dataset_dir,
+          namespace=namespace,
+          include_versions=include_versions,
+          include_old_tfds_version=include_old_tfds_version,
+      )
     else:
-      key = reference.dataset_name
-      reference = reference.replace(config=None, version=None)
-    references[key] = reference
-
-  for reference in references.values():
-    yield reference
+      yield naming.DatasetReference(
+          dataset_name=dataset_dir.name, namespace=namespace, data_dir=data_dir
+      )
 
 
 @functools.lru_cache(maxsize=None)
