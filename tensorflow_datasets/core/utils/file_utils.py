@@ -132,13 +132,55 @@ def _looks_like_a_tfds_file(filename: str) -> bool:
   )
 
 
+def _find_files_without_glob(
+    folder: epath.Path, globs: list[str], file_names: list[str]
+) -> Iterator[epath.Path]:
+  """Finds files without using globs over nested folders.
+
+  When there is a folder with no permission, then the entire glob fails. This
+  function uses `iterdir` to find subfolders.
+
+  Args:
+    folder: the folder in which to find files.
+    globs: the glob patterns to use to find files.
+    file_names: the file names that we are interested in. Used to filter
+      results.
+
+  Yields:
+    the matching file paths.
+  """
+  for glob in globs:
+    glob_parts = glob.split('/')
+    if len(glob_parts) == 1:
+      for file in folder.glob(glob):
+        if file.name in file_names:
+          yield file
+    else:
+      if glob_parts[0] != '*':
+        raise NotImplementedError()
+      remaining_glob = '/'.join(glob_parts[1:])
+      for subfolder in folder.iterdir():
+        if not subfolder.is_dir() or subfolder.name.startswith('.'):
+          # Ignore files and folders starting with a dot.
+          continue
+        yield from _find_files_with_glob(
+            subfolder, globs=[remaining_glob], file_names=file_names
+        )
+
+
 def _find_files_with_glob(
     folder: epath.Path, globs: list[str], file_names: list[str]
 ) -> Iterator[epath.Path]:
+  """Finds files matching any of the given globs and given file names."""
   for glob in globs:
-    for file in folder.glob(glob):
-      if file.name in file_names:
-        yield file
+    try:
+      for file in folder.glob(glob):
+        if file.name in file_names:
+          yield file
+    except OSError:
+      # If permission was denied on any subfolder, then the glob fails. Manually
+      # iterate through the subfolders instead to be more robust against this.
+      yield from _find_files_without_glob(folder, globs, file_names)
 
 
 def _find_references_with_glob(
