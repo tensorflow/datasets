@@ -631,6 +631,11 @@ def load(
       object documents the entire dataset, regardless of the `split` requested.
       Split-specific information is available in `ds_info.splits`.
   """
+  # If the dataset belongs to the Huggingface namespace, we convert its name to
+  # use TFDS accepted format.
+  if name.startswith('huggingface:'):
+    name = huggingface_dataset_builder.from_hf_to_tfds(name)
+
   dbuilder = _fetch_builder(
       name,
       data_dir,
