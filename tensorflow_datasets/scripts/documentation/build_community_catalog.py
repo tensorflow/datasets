@@ -28,11 +28,11 @@ from typing import Any, Iterator, List, Mapping, MutableMapping, Optional, Seque
 
 from absl import app
 from absl.flags import argparse_flags
-
 from etils import epath
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_package
+from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
 from tensorflow_datasets.core.github_api import github_path
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import feature_pb2
@@ -254,10 +254,15 @@ class DatasetDocumentation:
     def format_template(
         config_name: str, info: dataset_info_pb2.DatasetInfo
     ) -> str:
-      if config_name == 'default':
-        tfds_id = self.tfds_id
+      if self.namespace and self.namespace == 'huggingface':
+        tfds_id = huggingface_dataset_builder.from_hf_to_tfds(self.tfds_id)
       else:
-        tfds_id = f'{self.tfds_id}/{config_name}'
+        tfds_id = self.tfds_id
+      if config_name != 'default':
+        config_name = huggingface_dataset_builder.convert_config_name(
+            config_name
+        )
+        tfds_id = f'{tfds_id}/{config_name}'
       if keep_short:
         features = ''
       else:
@@ -318,6 +323,9 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
   def huggingface_link(self) -> str:
     return f'[Huggingface](https://huggingface.co/datasets/{self.name})'
 
+  def huggingface_raw_info_url(self) -> str:
+    return f'https://huggingface.co/datasets/{self.name}/raw/main/dataset_infos.json'
+
   @functools.cached_property
   def dataset_infos(self) -> utils.JsonValue:
     """Retrieves the dataset info from either a cached copy or from Github."""
@@ -332,9 +340,9 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
 
     if not content:
       try:
-        dataset_info_path = self.gh_path / 'dataset_infos.json'
-        print(f'Retrieving {dataset_info_path.as_raw_url()}')
-        content = github_path.get_content(dataset_info_path.as_raw_url())
+        dataset_info_path = self.huggingface_raw_info_url()
+        print(f'Retrieving {dataset_info_path}')
+        content = github_path.get_content(dataset_info_path)
         if tmp_file_path:
           tmp_file_path.write_text(content.decode())
       except FileNotFoundError:

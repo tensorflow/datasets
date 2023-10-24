@@ -117,6 +117,9 @@ def test_huggingface_dataset_documentation():
       '[Code](https://github.com/huggingface/datasets/blob/master/datasets/ds1)',
       '[Huggingface](https://huggingface.co/datasets/ds1)',
   ]
+  assert dataset_doc.huggingface_raw_info_url() == (
+      'https://huggingface.co/datasets/ds1/raw/main/dataset_infos.json'
+  )
 
 
 def test_huggingface_formatter_overview_page():
