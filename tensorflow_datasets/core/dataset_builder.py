@@ -78,6 +78,10 @@ GCS bucket (recommended if you're running on GCP), you can instead pass
 `try_gcs=True` to `tfds.load` or set `data_dir=gs://tfds-data/datasets`.
 """
 
+run_after_download_and_prepare = utils.MethodTagger(
+    tag_name="after_download_and_prepare"
+)
+
 
 @dataclasses.dataclass(eq=False)
 class BuilderConfig:
@@ -717,6 +721,8 @@ class DatasetBuilder(registered.RegisteredDataset):
       )
 
     self._log_download_done()
+    for method in run_after_download_and_prepare.get_methods(self):
+      method(self)
 
 
   def _update_dataset_info(self) -> None:
