@@ -1,1 +1,1 @@
-https://storage.googleapis.com/ai2-mosaic/public/winogrande/winogrande_1.1.zip	2797793	d5699402a41de2b4e6b3c6e2a1e6b4faab2130543a12019a8c5d4f35ec502d47	winogrande_1.1.zip
+https://storage.googleapis.com/ai2-mosaic/public/winogrande/winogrande_1.1.zip	3395492	3619ab104d8be2977b25c90ff420cb42d491707dcc75362a1e5d22bc082b7318	winogrande_1.1.zip

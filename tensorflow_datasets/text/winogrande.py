@@ -46,7 +46,10 @@ _DATA_URL = 'https://storage.googleapis.com/ai2-mosaic/public/winogrande/winogra
 class Winogrande(tfds.core.GeneratorBasedBuilder):
   """The Winogrande challenge."""
 
-  VERSION = tfds.core.Version('1.1.0')
+  VERSION = tfds.core.Version('1.2.0')
+  RELEASE_NOTES = {
+      '1.2.0': 'Updated source file with more data and new checksums.',
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
