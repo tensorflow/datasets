@@ -81,7 +81,19 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
         ),
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=(_TILES_SIZE,) * 2 + (3,)),
-            "label": tfds.features.ClassLabel(names=_CLASS_NAMES),
+            "label": tfds.features.ClassLabel(names=_CLASS_NAMES,
+                doc=("Eight classes: "
+                    "0: 'tumour epithelium', "
+                    "1: 'simple stroma', "
+                    "2: 'complex stroma' (stroma that contains single tumour "
+                    "cells and/or single immune cells), "
+                    "3: 'immune cell conglomerates', "
+                    "4: 'debris and mucus', "
+                    "5: 'mucosal glands', "
+                    "6: 'adipose tissue', and "
+                    "7: 'background'."
+                ),
+            ),
             "filename": tfds.features.Text(),
         }),
         homepage=_URL,
