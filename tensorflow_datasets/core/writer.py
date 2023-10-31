@@ -374,6 +374,11 @@ class BeamWriter(object):
     beam = lazy_imports_lib.lazy_imports.apache_beam
     return beam.metrics.Metrics.counter(namespace, name)
 
+  @functools.lru_cache()
+  def _get_distribution(self, name: str, namespace: str = "BeamWriter"):
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    return beam.metrics.Metrics.distribution(namespace, name)
+
   def inc_counter(self, name: str, value: int = 1) -> None:
     self._get_counter(name).inc(value)
 
@@ -427,6 +432,7 @@ class BeamWriter(object):
     # There may be empty shards, this ensures there are no gaps.
     shard_id = non_empty_shard_ids.index(original_shard_id)
     examples = sorted(examples)
+    self._get_distribution(name="ShardLenDistribution").update(len(examples))
     # Compare continuous examples
     for ex0, ex1 in zip(examples[:-1], examples[1:]):
       if ex0[0] == ex1[0]:  # Different keys
@@ -471,6 +477,7 @@ class BeamWriter(object):
     shard_number = shuffle.get_bucket_number(
         hkey=key, num_buckets=num_shards, max_hkey=largest_key
     )
+    self._get_distribution(name="ShardDistribution").update(shard_number)
     return (shard_number, key_serialized_example)
 
   def _store_split_info(
