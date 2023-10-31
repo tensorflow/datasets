@@ -65,7 +65,7 @@ Feature  | Class        | Shape         | Dtype  | Description
          | FeaturesDict |               |        |
 filename | Text         |               | string |
 image    | Image        | (150, 150, 3) | uint8  |
-label    | ClassLabel   |               | int64  | Eight classes: 0: "tumour epithelium", 1: "simple stroma", 2: "complex stroma" (stroma that contains single tumour cells and/or single immune cells), 3: "immune cell conglomerates", 4: "debris and mucus", 5: "mucosal glands", 6: "adipose tissue", and 7: "background".
+label    | ClassLabel   |               | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
