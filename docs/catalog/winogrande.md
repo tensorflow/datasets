@@ -41,18 +41,25 @@ hardness of the dataset.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Updated source file with more data and new checksums.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.24 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,767
+`'train_l'`    | 10,234
+`'train_m'`    | 2,558
+`'train_s'`    | 640
+`'train_xl'`   | 40,398
+`'train_xs'`   | 160
+`'validation'` | 1,267
 
 *   **Feature structure**:
 
