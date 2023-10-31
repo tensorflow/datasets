@@ -16,6 +16,8 @@
 """Cats vs Dogs dataset."""
 
 import re
+import io
+import zipfile
 
 from absl import logging
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -92,8 +94,15 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       if tf.compat.as_bytes("JFIF") not in fobj.peek(10):
         num_skipped += 1
         continue
+      img_data = fobj.read()
+      img_tensor = tf.image.decode_image(img_data)
+      img_recoded = tf.io.encode_jpeg(img_tensor)
+      buffer = io.BytesIO()
+      with zipfile.ZipFile(buffer, 'w') as new_zip:
+          new_zip.writestr(fname, img_recoded.numpy())
+      new_fobj = zipfile.ZipFile(buffer).open(fname)
       record = {
-          "image": fobj,
+          "image": new_fobj,
           "image/filename": fname,
           "label": label,
       }
