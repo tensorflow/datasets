@@ -94,13 +94,20 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       if tf.compat.as_bytes("JFIF") not in fobj.peek(10):
         num_skipped += 1
         continue
+
+      # some images caused 'Corrupt JPEG data...' messages during training or any other iteration
+      # recoding them once fixes the issue (discussion: https://github.com/tensorflow/datasets/issues/2188)
+      # those messages are now displayed when generating the dataset instead
       img_data = fobj.read()
       img_tensor = tf.image.decode_image(img_data)
       img_recoded = tf.io.encode_jpeg(img_tensor)
+
+      # converting the recoded image back into a zip file container
       buffer = io.BytesIO()
       with zipfile.ZipFile(buffer, 'w') as new_zip:
-          new_zip.writestr(fname, img_recoded.numpy())
+        new_zip.writestr(fname, img_recoded.numpy())
       new_fobj = zipfile.ZipFile(buffer).open(fname)
+
       record = {
           "image": new_fobj,
           "image/filename": fname,
