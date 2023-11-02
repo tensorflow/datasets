@@ -49,9 +49,10 @@ _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version("4.0.0")
+  VERSION = tfds.core.Version("4.0.1")
   RELEASE_NOTES = {
       "4.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+      "4.0.1": "Recoding images in generator to fix corrupt JPEG data warnings (https://github.com/tensorflow/datasets/issues/2188)"
   }
 
   def _info(self):
