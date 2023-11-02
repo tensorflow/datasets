@@ -54,6 +54,7 @@ class Logger:
       data_dir: Optional[str],
       config: Optional[str],
       version: Optional[str],
+      is_read_only_builder: bool,
   ):
     """Callback called when user calls `DatasetBuilder(...)`."""
     pass

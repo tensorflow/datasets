@@ -41,7 +41,7 @@ class ReadOnlyBuilder(
 ):
   """Generic DatasetBuilder loading from a directory."""
 
-  @tfds_logging.builder_init()
+  @tfds_logging.builder_init(is_read_only_builder=True)
   def __init__(
       self,
       builder_dir: epath.PathLike,

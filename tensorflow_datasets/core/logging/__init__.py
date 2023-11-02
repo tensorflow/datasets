@@ -277,7 +277,7 @@ def tfds_import(
     )
 
 
-def builder_init() -> _Decorator:
+def builder_init(is_read_only_builder: bool = False) -> _Decorator:
   """Decorator to call `builder_init` method on registered loggers."""
 
   @wrapt.decorator
@@ -306,6 +306,7 @@ def builder_init() -> _Decorator:
               data_dir=data_dir,
               config=config,
               version=version,
+              is_read_only_builder=is_read_only_builder,
           )
       _thread_id_to_builder_init_count[metadata.thread_id] -= 1
 
