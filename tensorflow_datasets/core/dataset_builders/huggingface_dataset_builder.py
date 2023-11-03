@@ -118,7 +118,12 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
     return feature_lib.Image(encoding_format=_IMAGE_ENCODING_FORMAT)
   if isinstance(hf_features, hf_datasets.Audio):
     return feature_lib.Audio(sample_rate=hf_features.sampling_rate)
-  raise ValueError(f"Type {type(hf_features)} is not supported.")
+  raise ValueError(
+      f"Type {type(hf_features)} is not supported. For some datasets. Hugging"
+      " Face does not declare explicit features, as they are read/infered"
+      " directly from the files. In this case, you should probably specify"
+      " explicit features with `--features`."
+  )
 
 
 def from_hf_to_tfds(hf_name: str) -> str:
@@ -325,6 +330,23 @@ class HuggingfaceDatasetBuilder(
   TFDS BuilderConfig. Note that TFDS has some restrictions on config names such
   as it is not allowed to use the config name `all`. Therefore, `all` is
   converted to `_all`.
+
+  Attributes:
+    file_format: whether to generate in TFRecords or ArrayRecords.
+    hf_repo_id: Hugging Face repo id as found on hf.co/datasets.
+    hf_config: Hugging Face config to generate.
+    ignore_verifications: Whether to ignore verifications on Hugging Face side.
+    data_dir: data dir for TFDS.
+    hf_hub_token: Hugging Face Hub authentication token if the dataset is
+      private.
+    hf_num_proc: Number of processes to parallelize the generation on Hugging
+      Face side.
+    tfds_num_proc: Number of processes to parallelize the generation on TFDS
+      side.
+    tfds_features: Stringified version of the TFDS features. Refer to the
+      features using: `tfds.features.FeatureName`. This feature is to use at
+      your own risk, because it uses `exec` to execute the string.
+      Warning: Always control the input from a user.
   """
 
   VERSION = utils.Version("1.0.0")  # This will be replaced in __init__.
@@ -340,8 +362,12 @@ class HuggingfaceDatasetBuilder(
       hf_hub_token: Optional[str] = None,
       hf_num_proc: Optional[int] = None,
       tfds_num_proc: Optional[int] = None,
+      tfds_features: Optional[str] = None,
       **config_kwargs,
   ):
+    import tensorflow_datasets as tfds  # pylint: disable=unused-import,g-import-not-at-top  # This is needed to call exec().
+
+    self._tfds_features = exec(tfds_features) if tfds_features else None  # pylint: disable=exec-used
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
     self.config_kwargs = config_kwargs
@@ -404,10 +430,15 @@ class HuggingfaceDatasetBuilder(
 
   @py_utils.memoize()
   def _info(self) -> dataset_info_lib.DatasetInfo:
+    features = (
+        self._tfds_features
+        if self._tfds_features
+        else extract_features(self._hf_features())
+    )
     return dataset_info_lib.DatasetInfo(
         builder=self,
         description=self._hf_info.description,
-        features=extract_features(self._hf_features()),
+        features=features,
         citation=self._hf_info.citation,
         license=self._hf_info.license,
         supervised_keys=_extract_supervised_keys(self._hf_info),
