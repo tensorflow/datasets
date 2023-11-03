@@ -102,13 +102,13 @@ class BuilderConfig:
   # * Kwargs-only (https://bugs.python.org/issue33129)
 
   name: str
-  version: Optional[VersionOrStr] = None
-  release_notes: Optional[Dict[str, str]] = None
-  supported_versions: List[VersionOrStr] = dataclasses.field(
+  version: VersionOrStr | None = None
+  release_notes: Dict[str, str] | None = None
+  supported_versions: list[VersionOrStr] = dataclasses.field(
       default_factory=list
   )
-  description: Optional[str] = None
-  tags: List[str] = dataclasses.field(default_factory=list)
+  description: str | None = None
+  tags: list[str] = dataclasses.field(default_factory=list)
 
   @classmethod
   def from_dataset_info(

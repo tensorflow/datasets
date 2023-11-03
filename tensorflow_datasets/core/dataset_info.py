@@ -104,13 +104,14 @@ class DatasetIdentity:
   version: utils.Version
   data_dir: str
   module_name: str
-  config_name: Optional[str] = None
-  config_description: Optional[str] = None
-  config_tags: Optional[List[str]] = None
-  release_notes: Optional[Dict[str, str]] = None
+  config_name: str | None = None
+  config_description: str | None = None
+  config_tags: list[str] | None = None
+  release_notes: Dict[str, str] | None = None
 
   @classmethod
   def from_builder(cls, builder) -> "DatasetIdentity":
+    """Constructs a `DatasetIdentity` from a given dataset builder."""
     if builder.builder_config:
       config_name = builder.builder_config.name
       config_description = builder.builder_config.description
@@ -136,6 +137,15 @@ class DatasetIdentity:
       info_proto: dataset_info_pb2.DatasetInfo,
       data_dir: str,
   ) -> "DatasetIdentity":
+    """Constructs a `DatasetIdentity` for a given dataset.
+
+    Args:
+      info_proto: The `DatasetInfo` proto for the dataset.
+      data_dir: Path to the data_dir for the dataset.
+
+    Returns:
+      A `DatasetIdentity` object for the required dataset.
+    """
     return cls(
         name=info_proto.name,
         version=utils.Version(info_proto.version),
