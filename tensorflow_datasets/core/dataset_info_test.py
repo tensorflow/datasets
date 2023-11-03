@@ -26,6 +26,7 @@ import numpy as np
 import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_adapters
@@ -51,6 +52,12 @@ DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
 
 class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
+
+  BUILDER_CONFIGS = [
+      dataset_builder.BuilderConfig(
+          name="random_shaped_image_config",
+      )
+  ]
 
   def _info(self):
     return dataset_info.DatasetInfo(
@@ -489,6 +496,7 @@ def test_dataset_info_from_proto(generator_builder):  # pylint: disable=redefine
   )
   proto = dataset_info_pb2.DatasetInfo(
       name="random_shaped_image_generator",
+      config_name=generator_builder.builder_config.name,
       version=str(generator_builder.version),
       features=feature_pb2.Feature(
           python_class_name=(
@@ -501,7 +509,8 @@ def test_dataset_info_from_proto(generator_builder):  # pylint: disable=redefine
       splits=[train, test],
   )
   result = dataset_info.DatasetInfo.from_proto(
-      builder=generator_builder, proto=proto
+      builder=generator_builder,
+      proto=proto,
   )
   assert result.splits["test"].shard_lengths == test.shard_lengths
   assert result.splits["train"].shard_lengths == train.shard_lengths
