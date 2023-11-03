@@ -15,9 +15,7 @@
 
 """Cats vs Dogs dataset."""
 
-import io
 import re
-import zipfile
 
 from absl import logging
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -52,13 +50,9 @@ _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version("4.0.1")
+  VERSION = tfds.core.Version("4.0.0")
   RELEASE_NOTES = {
       "4.0.0": "New split API (https://tensorflow.org/datasets/splits)",
-      "4.0.1": (
-          "Recoding images in generator to fix corrupt JPEG data warnings"
-          " (https://github.com/tensorflow/datasets/issues/2188)"
-      ),
   }
 
   def _info(self):
@@ -101,23 +95,8 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       if tf.compat.as_bytes("JFIF") not in fobj.peek(10):
         num_skipped += 1
         continue
-
-      # Some images caused 'Corrupt JPEG data...' messages during training or
-      # any other iteration recoding them once fixes the issue (discussion:
-      # https://github.com/tensorflow/datasets/issues/2188).
-      # Those messages are now displayed when generating the dataset instead.
-      img_data = fobj.read()
-      img_tensor = tf.image.decode_image(img_data)
-      img_recoded = tf.io.encode_jpeg(img_tensor)
-
-      # Converting the recoded image back into a zip file container.
-      buffer = io.BytesIO()
-      with zipfile.ZipFile(buffer, "w") as new_zip:
-        new_zip.writestr(fname, img_recoded.numpy())
-      new_fobj = zipfile.ZipFile(buffer).open(fname)
-
       record = {
-          "image": new_fobj,
+          "image": fobj,
           "image/filename": fname,
           "label": label,
       }
