@@ -221,6 +221,17 @@ def array_record_error_callback(**kwargs):
   print("***************************************************************\n\n")
 
 
+def mlcroissant_error_callback(**kwargs):
+  """Error callback for mlcroissant."""
+  del kwargs
+  print("\n\n***************************************************************")
+  print("Failed to import mlcroissant.")
+  print('Please install mlcroissant using `pip install mlcroissant`.')
+  print("***************************************************************\n\n")
+
+
+with lazy_imports(error_callback=mlcroissant_error_callback):
+  import mlcroissant  # pylint: disable=g-import-not-at-top,unused-import  # pytype: disable=import-error
 with lazy_imports():
   import pandas  # pylint: disable=g-import-not-at-top,unused-import
 
