@@ -17,7 +17,6 @@
 
 import dataclasses
 import functools
-from typing import Dict, List, Optional
 
 from etils import epath
 from tensorflow_datasets.core import constants
@@ -28,6 +27,7 @@ from tensorflow_datasets.core.utils import resource_utils
 CITATIONS_FILENAME = "CITATIONS.bib"
 DESCRIPTIONS_FILENAME = "README.md"
 TAGS_FILENAME = "TAGS.txt"
+
 
 _METADATA_FILES = [
     CITATIONS_FILENAME,
@@ -42,10 +42,10 @@ class DatasetMetadata:
 
   description: str
   citation: str
-  tags: List[str]
+  tags: list[str]
 
 
-def _get_tags(tags_txt: str) -> List[str]:
+def _get_tags(tags_txt: str) -> list[str]:
   """Returns list of tags from raw tags file content."""
   tags = []
   for line in tags_txt.split("\n"):
@@ -61,7 +61,7 @@ def _get_valid_tags_text() -> str:
   return path.read_text("utf-8")
 
 
-def valid_tags() -> List[str]:
+def valid_tags() -> list[str]:
   """Returns a list of valid tags."""
   return _get_tags(_get_valid_tags_text())
 
@@ -89,7 +89,7 @@ def load(pkg_path: epath.Path) -> DatasetMetadata:
   )
 
 
-def _read_files(path: epath.Path) -> Dict[str, str]:
+def _read_files(path: epath.Path) -> dict[str, str]:
   """Reads all metadata files content.
 
   Args:
