@@ -232,7 +232,10 @@ def mlcroissant_error_callback(**kwargs):
 
 with lazy_imports(error_callback=mlcroissant_error_callback):
   import mlcroissant  # pylint: disable=g-import-not-at-top,unused-import  # pytype: disable=import-error
+
+
 with lazy_imports():
+  import apache_beam  # pylint: disable=g-import-not-at-top,unused-import
   import pandas  # pylint: disable=g-import-not-at-top,unused-import
 
 
