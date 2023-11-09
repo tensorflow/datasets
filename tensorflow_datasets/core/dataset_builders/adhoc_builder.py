@@ -76,11 +76,12 @@ ds_test = tfds.load("my_dataset/single_number:1.0.0", split="test",
 data_dir=custom_data_dir)
 ```
 """
+
 from __future__ import annotations
 
-import sys
+from collections.abc import Iterable, Mapping
 import typing
-from typing import Any, Dict, Iterable, Mapping, Optional, Union
+from typing import Any, Dict
 
 from absl import logging
 from etils import epath
@@ -93,31 +94,20 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 KeyExample = split_builder_lib.KeyExample
 
-if typing.TYPE_CHECKING:
-  import tensorflow as tf  # pytype: disable=import-error
-  import apache_beam as beam  # pytype: disable=import-error
 
-  BeamInput = Union[beam.PTransform, beam.PCollection[KeyExample]]
-  InputData = Union[
-      tf.data.Dataset,
-      beam.PTransform,
-      beam.PCollection[KeyExample],
-      Iterable[KeyExample],
-  ]
-else:
-  BeamInput = Union[
-      "beam.PTransform", "beam.PCollection[split_builder_lib.KeyExample]"
-  ]
-  InputData = Union[
-      "tf.data.Dataset",
-      "beam.PTransform",
-      "beam.PCollection[split_builder_lib.KeyExample]",
-      "Iterable[KeyExample]",
-  ]
+if typing.TYPE_CHECKING:
+  BeamInput = beam.PTransform | beam.PCollection[KeyExample]
+  InputData = (
+      tf.data.Dataset
+      | beam.PTransform
+      | beam.PCollection[KeyExample]
+      | Iterable[KeyExample]
+  )
 
 
 class AdhocBuilder(
@@ -129,17 +119,17 @@ class AdhocBuilder(
       self,
       *,
       name: str,
-      version: Union[utils.Version, str],
+      version: utils.Version | str,
       features: feature_lib.FeatureConnector,
       split_datasets: Mapping[str, InputData],
-      config: Union[None, str, dataset_builder.BuilderConfig] = None,
-      data_dir: Optional[epath.PathLike] = None,
-      description: Optional[str] = None,
-      release_notes: Optional[Mapping[str, str]] = None,
-      homepage: Optional[str] = None,
-      citation: Optional[str] = None,
-      file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
-      disable_shuffling: Optional[bool] = False,
+      config: None | str | dataset_builder.BuilderConfig = None,
+      data_dir: epath.PathLike | None = None,
+      description: str | None = None,
+      release_notes: Mapping[str, str] | None = None,
+      homepage: str | None = None,
+      citation: str | None = None,
+      file_format: str | file_adapters.FileFormat | None = None,
+      disable_shuffling: bool | None = False,
       **kwargs: Any,
   ):
     self.name = name
@@ -182,15 +172,13 @@ class AdhocBuilder(
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
     split_generators = {}
-    beam = sys.modules.get("apache_beam", None)
     for split_name, dataset in self._split_datasets.items():
       if isinstance(dataset, tf.data.Dataset):
         split_generators[split_name] = self._generate_examples_tf_data(dataset)
       elif isinstance(dataset, Iterable):
         split_generators[split_name] = self._generate_examples_iterator(dataset)
-      elif beam and (
-          isinstance(dataset, beam.PTransform)
-          or isinstance(dataset, beam.PCollection)
+      elif isinstance(dataset, beam.PTransform) or isinstance(
+          dataset, beam.PCollection
       ):
         split_generators[split_name] = dataset
       else:
@@ -217,18 +205,18 @@ class AdhocBuilder(
 
 def store_as_tfds_dataset(
     name: str,
-    version: Union[utils.Version, str],
+    version: utils.Version | str,
     features: feature_lib.FeatureConnector,
     split_datasets: Mapping[str, InputData],
-    config: Union[None, str, dataset_builder.BuilderConfig] = None,
-    data_dir: Optional[epath.PathLike] = None,
-    description: Optional[str] = None,
-    release_notes: Optional[Mapping[str, str]] = None,
-    homepage: Optional[str] = None,
-    citation: Optional[str] = None,
-    file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
-    download_config: Optional[download.DownloadConfig] = None,
-    disable_shuffling: Optional[bool] = False,
+    config: None | str | dataset_builder.BuilderConfig = None,
+    data_dir: epath.PathLike | None = None,
+    description: str | None = None,
+    release_notes: Mapping[str, str] | None = None,
+    homepage: str | None = None,
+    citation: str | None = None,
+    file_format: str | file_adapters.FileFormat | None = None,
+    download_config: download.DownloadConfig | None = None,
+    disable_shuffling: bool | None = False,
 ) -> AdhocBuilder:
   """Store a dataset as a TFDS dataset."""
   if not split_datasets:
@@ -250,9 +238,13 @@ def store_as_tfds_dataset(
       release_notes=release_notes,
       homepage=homepage,
       citation=citation,
-      file_format=file_format,
       disable_shuffling=disable_shuffling,
   )
+  if builder.is_prepared():
+    raise RuntimeError(
+        f"Dataset '{name}' was already prepared as a TFDS dataset. Dataset"
+        f" info: {builder.info}"
+    )
   builder.download_and_prepare(
       download_config=download_config, file_format=file_format
   )
