@@ -275,14 +275,12 @@ class ManualDatasetSection(Section):
     if not manual_instructions:
       return _SKIP_SECTION
     manual_instructions = tfds.core.utils.dedent(manual_instructions)
-    return textwrap.dedent(
-        f"""
+    return textwrap.dedent(f"""
         This dataset requires you to
         download the source data manually into `download_config.manual_dir`
         (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
         {tfds.core.utils.indent(manual_instructions, '        ')}
-        """
-    )
+        """)
 
 
 class AutocacheSection(Section):
@@ -363,15 +361,11 @@ class SplitInfoSection(Section):
             for split_name, split_info in sorted(builder.info.splits.items())
         ]
     )
-    return Block(
-        textwrap.dedent(
-            f"""
+    return Block(textwrap.dedent(f"""
             Split  | Examples
             :----- | -------:
             {tfds.core.utils.indent(splits_str, '            ')}
-            """
-        )
-    )
+            """))
 
 
 class FeatureInfoSection(Section):
@@ -381,13 +375,11 @@ class FeatureInfoSection(Section):
     return repr(builder.info.features)
 
   def features_content(self, features: tfds.features.FeatureConnector) -> Block:
-    code = textwrap.dedent(
-        """
+    code = textwrap.dedent("""
         ```python
         {}
         ```
-        """
-    ).format(features)
+        """).format(features)
     return Block(code)
 
   def content(self, builder: tfds.core.DatasetBuilder):
@@ -486,15 +478,11 @@ class DatasetCitationSection(Section):
   def content(self, builder: tfds.core.DatasetBuilder):
     if not builder.info.citation:
       return ''
-    return Block(
-        textwrap.dedent(
-            f"""
+    return Block(textwrap.dedent(f"""
             ```
             {tfds.core.utils.indent(builder.info.citation, '            ')}
             ```
-            """
-        )
-    )
+            """))
 
 
 class KnowYourDataSection(Section):
