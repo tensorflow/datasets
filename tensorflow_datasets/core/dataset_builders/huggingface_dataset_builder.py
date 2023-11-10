@@ -23,6 +23,7 @@ Huggingface community datasets that are hosted on external repositories.
 Furthermore, this also enables creating datasets based on datasets in
 Huggingface.
 """
+
 from __future__ import annotations
 
 import datetime
@@ -168,7 +169,7 @@ def _from_tfds_to_hf(tfds_name: str) -> str:
 def convert_config_name(hf_config: Optional[str]) -> Optional[str]:
   if hf_config is None:
     return hf_config
-  return hf_config.lower()
+  return hf_config.lower().replace(",", "_")
 
 
 def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
