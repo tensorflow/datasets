@@ -77,6 +77,7 @@ def test_convert_config_name():
   assert huggingface_dataset_builder.convert_config_name(None) is None
   assert huggingface_dataset_builder.convert_config_name("x") == "x"
   assert huggingface_dataset_builder.convert_config_name("X") == "x"
+  assert huggingface_dataset_builder.convert_config_name("X,y") == "x_y"
 
 
 def test_convert_to_np_dtype():
