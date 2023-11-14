@@ -44,7 +44,6 @@ from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
 
-
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
 
