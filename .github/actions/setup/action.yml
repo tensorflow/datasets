@@ -69,3 +69,11 @@ runs:
     # Get TFDS library from the repository instead of cache.
     - run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
       shell: bash
+    # Get mlcroissant from git latest version. Installing from pip does not allow us to get the
+    # latest mlcroissant features. Note that we can test using mlcroissant only for python version
+    # >= 3.10.
+    - if: ${{ inputs.python-version != '3.9'}}
+      run: |
+        sudo apt-get install -y libgraphviz-dev
+        pip install mlcroissant@git+https://github.com/mlcommons/croissant#subdirectory=python/mlcroissant
+      shell: bash
