@@ -120,6 +120,7 @@ class DatasetIdentity:
       config_name = None
       config_description = None
       config_tags = None
+
     return cls(
         name=builder.name,
         version=utils.Version(builder.version),
