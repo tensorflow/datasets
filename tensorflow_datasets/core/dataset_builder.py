@@ -53,6 +53,7 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import ml_catalog_api
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import termcolor
 

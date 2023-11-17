@@ -35,7 +35,6 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
@@ -50,6 +49,7 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
+from tensorflow_datasets.core.utils.lazy_imports_utils import ml_catalog_api
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # pylint: disable=logging-format-interpolation
