@@ -15,7 +15,7 @@
 
 """Dummy config-based dataset self-contained in a directory.
 
-The builder module intentionnaly does not follow the naming conventions.
+The builder module intentionally does not follow the naming conventions.
 This is used in registered_test.py to check the logic to infer dataset
 name.
 """
