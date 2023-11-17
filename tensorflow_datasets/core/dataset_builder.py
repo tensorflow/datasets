@@ -320,7 +320,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # equivalent to the above return.
     try:
       filepath = inspect.getfile(cls)
-    except TypeError:
+    except (TypeError, OSError):  # Module is not a package
       # Could happen when the class is defined in Colab.
       return None
     else:
