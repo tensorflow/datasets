@@ -114,7 +114,7 @@ class ImageFeatureTest(
       with tf.io.gfile.GFile(img_file_path, 'rb') as f:
         img_byte_content = f.read()
       img_file_expected_content = np.array(
-          [  # see tensorflow_datasets/testing/test_data/README.md
+          [
               [[0, 255, 0, 255], [255, 0, 0, 255], [255, 0, 255, 255]],
               [[0, 0, 255, 255], [255, 255, 0, 255], [126, 127, 128, 255]],
           ],
