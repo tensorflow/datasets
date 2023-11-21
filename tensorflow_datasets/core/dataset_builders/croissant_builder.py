@@ -45,12 +45,30 @@ from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 
 
-def datatype_converter(field):
-  """Converts a Croissant field to a TFDS-compatible feature."""
+def datatype_converter(
+    field,
+    int_dtype: Optional[type_utils.TfdsDType] = np.int64,
+    float_dtype: Optional[type_utils.TfdsDType] = np.float32,
+):
+  """Converts a Croissant field to a TFDS-compatible feature.
+
+  Args:
+    field: A mlcroissant Field object.
+    int_dtype: The dtype to use for TFDS integer features. Defaults to np.int64.
+    float_dtype: The dtype to use for TFDS float features. Defaults to
+      np.float32.
+
+  Returns:
+    Converted datatype for TFDS.
+
+  Raises:
+    NotImplementedError
+  """
   if field.is_enumeration:
     raise NotImplementedError("Not implemented yet.")
 
@@ -58,11 +76,10 @@ def datatype_converter(field):
 
   if not field_data_type:
     return None
-  # TODO(stanzelc): Add options for users to specify data type (int64/32).
   elif field_data_type == int:
-    return np.int64
+    return int_dtype
   elif field_data_type == float:
-    return np.float32
+    return float_dtype
   elif field_data_type == bool:
     return np.bool_
   elif field_data_type == bytes:
@@ -87,6 +104,8 @@ class CroissantBuilder(
       file: epath.PathLike,
       record_set_names: Sequence[str],
       disable_shuffling: Optional[bool] = False,
+      int_dtype: Optional[type_utils.TfdsDType] = np.int64,
+      float_dtype: Optional[type_utils.TfdsDType] = np.float32,
       **kwargs: Any,
   ):
     """Initializes a CroissantBuilder.
@@ -96,6 +115,10 @@ class CroissantBuilder(
       record_set_names: The names of the record sets to generate. Each record
         set will correspond to a separate config.
       disable_shuffling: Specify whether to shuffle the examples.
+      int_dtype: The dtype to use for TFDS integer features. Defaults to
+        np.int64.
+      float_dtype: The dtype to use for TFDS float features. Defaults to
+        np.float32.
       **kwargs: kwargs to pass to GeneratorBasedBuilder directly.
     """
     self.dataset = mlc.Dataset(file)
@@ -114,6 +137,9 @@ class CroissantBuilder(
     ]
 
     self._disable_shuffling = disable_shuffling
+
+    self._int_dtype = int_dtype
+    self._float_dtype = float_dtype
 
     super().__init__(
         **kwargs,
@@ -151,7 +177,9 @@ class CroissantBuilder(
     fields = record_set.fields
     features = {}
     for field in fields:
-      feature = datatype_converter(field)
+      feature = datatype_converter(
+          field, int_dtype=self._int_dtype, float_dtype=self._float_dtype
+      )
       if field.repeated:
         feature = sequence_feature.Sequence(feature)
       features[field.name] = feature
