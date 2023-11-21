@@ -90,30 +90,56 @@ def get_dummy_metadata():
 
 
 @pytest.mark.parametrize(
-    ["field", "feature_type"],
+    ["field", "feature_type", "int_dtype", "float_dtype"],
     [
         (
             mlc.Field(
                 data_types=mlc.DataType.INTEGER, description="Integer feature"
             ),
             np.int64,
+            None,
+            None,
+        ),
+        (
+            mlc.Field(
+                data_types=mlc.DataType.INTEGER, description="Integer feature"
+            ),
+            np.int8,
+            np.int8,
+            None,
         ),
         (
             mlc.Field(
                 data_types=mlc.DataType.FLOAT, description="Float feature"
             ),
             np.float32,
+            None,
+            None,
+        ),
+        (
+            mlc.Field(
+                data_types=mlc.DataType.FLOAT, description="Float feature"
+            ),
+            np.float64,
+            None,
+            np.float64,
         ),
         (
             mlc.Field(
                 data_types=mlc.DataType.BOOL, description="Boolean feature"
             ),
             np.bool_,
+            None,
+            None,
         ),
     ],
 )
-def test_simple_datatype_converter(field, feature_type):
-  actual_feature = croissant_builder.datatype_converter(field)
+def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
+  actual_feature = croissant_builder.datatype_converter(
+      field,
+      int_dtype=int_dtype if int_dtype else np.int64,
+      float_dtype=float_dtype if float_dtype else np.float32,
+  )
   assert actual_feature == feature_type
 
 
