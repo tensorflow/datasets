@@ -22,7 +22,7 @@ import functools
 import io
 import os
 import tempfile
-from typing import Any, List, Optional, Union, Type
+from typing import Any, List, Optional, Type, Union
 
 from absl import logging
 from etils import epath
@@ -77,6 +77,12 @@ THUMBNAIL_SIZE = 128
 _VISU_FRAMERATE = 10
 
 
+def check_pil_import_or_raise_error():
+  if not PIL_Image:
+    raise ImportError('PIL is not installed. PIL is required for this method.')
+  return True
+
+
 @dataclasses.dataclass
 class _ImageEncoder:
   """Utils which encode/decode images."""
@@ -105,6 +111,10 @@ class _ImageEncoder:
         encoded_image = image_f.read()
     elif isinstance(image_or_path_or_fobj, bytes):
       encoded_image = image_or_path_or_fobj
+    elif PIL_Image is not None and isinstance(
+        image_or_path_or_fobj, PIL_Image.Image
+    ):
+      encoded_image = self._encode_pil_image(image_or_path_or_fobj)
     else:
       encoded_image = image_or_path_or_fobj.read()
     # If encoding is explicitly set, should verify that bytes match encoding.
@@ -123,6 +133,25 @@ class _ImageEncoder:
     return self._runner.run(
         _ENCODE_FN[self.encoding_format or 'png'](), np_image
     )
+
+  def _encode_pil_image(self, pil_image) -> bytes:
+    """Encode a PIL Image object to bytes.
+
+    Args:
+      pil_image: A PIL Image object.
+
+    Returns:
+      The PIL Image's content in bytes.
+    """
+    check_pil_import_or_raise_error()
+    buffer = io.BytesIO()
+    if self.encoding_format and pil_image.format != self.encoding_format:
+      raise ValueError(
+          f'PIL Image format {pil_image.format} does not match encoding format '
+          f'{self.encoding_format}'
+      )
+    pil_image.save(buffer, format=self.encoding_format or pil_image.format)
+    return buffer.getvalue()
 
   def decode_image(self, img: tf.Tensor) -> tf.Tensor:
     """Decode the jpeg or png bytes to 3d tensor."""
@@ -194,6 +223,7 @@ class Image(feature_lib.FeatureConnector):
     * `np.array`: 3d `np.uint8` array representing an image.
     * A file object containing the png or jpeg encoded image string (ex:
       `io.BytesIO(encoded_img_bytes)`)
+    * A `PIL.Image.Image`: PIL Image object.
 
   Output:
 
@@ -349,7 +379,10 @@ class Image(feature_lib.FeatureConnector):
   def decode_example_np_with_pil(
       self, example: bytes, num_channels: int
   ) -> np.ndarray:
-    assert PIL_Image, 'PIL is not installed. PIL is required for this method.'
+    if not PIL_Image:
+      raise ImportError(
+          'PIL is not installed. PIL is required for this method.'
+      )
     bytes_io = io.BytesIO(example)
     with PIL_Image.open(bytes_io) as image:
       dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
@@ -361,8 +394,8 @@ class Image(feature_lib.FeatureConnector):
       if self.np_dtype == np.float32:
         return image.view(np.float32)
       raise ValueError(
-          f'PIL does not handle {self.np_dtype} images. Please, install OpenCV'
-          ' instead.'
+          f'PIL does not handle {self.np_dtype} images. Please, install'
+          ' OpenCV instead.'
       )
 
   def repr_html(self, ex: np.ndarray) -> str:

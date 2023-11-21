@@ -23,6 +23,7 @@ from typing import Optional, Type
 
 from absl.testing import parameterized
 import numpy as np
+import PIL
 import pytest
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -156,18 +157,28 @@ class ImageFeatureTest(
           raise_cls_np=ValueError,
           raise_msg='dtype should be',
       )
+      tests = [
+          numpy_array,
+          file_path_as_string,
+          file_path_as_path,
+          images_bytes,
+          img_shape_can_be_dynamic,
+          invalid_type,
+      ]
+      # PIL doesn't support 16-bit images.
+      if (failing_lib != LibWithImportError.PIL) and np_dtype != np.uint16:
+        tests.append(
+            testing.FeatureExpectationItem(
+                value=PIL.Image.open(img_file_path),
+                expected=img_file_expected_content,
+                expected_np=img_file_expected_content,
+            )
+        )
       self.assertFeature(
           feature=features_lib.Image(shape=(None, None, channels), dtype=dtype),
           shape=(None, None, channels),
           dtype=dtype,
-          tests=[
-              numpy_array,
-              file_path_as_string,
-              file_path_as_path,
-              images_bytes,
-              img_shape_can_be_dynamic,
-              invalid_type,
-          ],
+          tests=tests,
           test_attributes=dict(
               _encoding_format=None,
               _use_colormap=False,
@@ -342,3 +353,13 @@ def test_invalid_img(shape, dtype, encoding_format, err_msg):
     features_lib.Image(
         shape=shape, dtype=dtype, encoding_format=encoding_format
     )
+
+
+def test_pil_encoding():
+  image_feat = features_lib.Image(encoding_format='png')
+  x = np.uint8(np.array([[[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]]))
+  pil_image = PIL.Image.fromarray(x)
+  pil_image.format = 'png'
+  encoded_example = image_feat.encode_example(pil_image)
+
+  assert isinstance(encoded_example, bytes)
