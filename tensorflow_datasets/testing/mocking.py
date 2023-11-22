@@ -232,7 +232,8 @@ def mock_data(
       `data_dir/dataset_name/version`). Overwrite `data_dir` kwargs from
       `tfds.load`. Used in `MockPolicy.USE_FILES` mode.
     mock_array_record_data_source: Overwrite a mock for the underlying
-      ArrayRecord data source if it is used.
+      ArrayRecord data source if it is used. Note: If used the same mock will be
+      used for all data sources loaded within this context.
 
   Yields:
     None
@@ -241,9 +242,9 @@ def mock_data(
   original_init_fn = dataset_builder.DatasetBuilder.__init__
   original_as_dataset_fn = dataset_builder.DatasetBuilder.as_dataset
   original_builder_from_files = read_only_builder.builder_from_files
-  if mock_array_record_data_source is None:
-    mock_array_record_data_source = PickableDataSourceMock()
-  elif not isinstance(mock_array_record_data_source, PickableDataSourceMock):
+  if mock_array_record_data_source and not isinstance(
+      mock_array_record_data_source, PickableDataSourceMock
+  ):
     raise ValueError(
         '`mock_array_record_data_source` must be a'
         ' `tfds.testing.PickableDataSourceMock` because it must be pickable.'
@@ -326,6 +327,8 @@ def mock_data(
   def mock_as_data_source(self, split, decoders=None, **kwargs):
     """Mocks `builder.as_data_source`."""
     del kwargs
+    nonlocal mock_array_record_data_source
+    mock_data_source = mock_array_record_data_source or PickableDataSourceMock()
     actual_policy = _check_policy(self)
     if split is None:
       split = {s: s for s in self.info.splits}
@@ -347,7 +350,7 @@ def mock_data(
         new=split_dict,
     ), mock.patch(
         'array_record.python.array_record_data_source.ArrayRecordDataSource',
-        mock_array_record_data_source,
+        mock_data_source,
     ), mock.patch(
         'tensorflow_datasets.core.dataset_info.DatasetInfo.file_format',
         new_callable=mock.PropertyMock,
@@ -355,17 +358,15 @@ def mock_data(
         return_value=file_adapters.FileFormat.ARRAY_RECORD,
     ):
       self.info.features.deserialize_example_np = _deserialize_example_np
-      mock_array_record_data_source.return_value.__len__.return_value = (
-          num_examples
-      )
-      mock_array_record_data_source.return_value._generator = (  # pylint:disable=protected-access
+      mock_data_source.return_value.__len__.return_value = num_examples
+      mock_data_source.return_value._generator = (  # pylint:disable=protected-access
           generator
       )
-      mock_array_record_data_source.return_value.__getitem__ = (
-          functools.partial(_getitem, generator=generator)
+      mock_data_source.return_value.__getitem__ = functools.partial(
+          _getitem, generator=generator
       )
-      mock_array_record_data_source.return_value.__getitems__ = (
-          functools.partial(_getitems, generator=generator)
+      mock_data_source.return_value.__getitems__ = functools.partial(
+          _getitems, generator=generator
       )
 
       def build_single_data_source(split):
