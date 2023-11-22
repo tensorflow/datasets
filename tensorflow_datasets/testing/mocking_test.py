@@ -395,3 +395,14 @@ def test_mock_data_source():
         'imagenet2012', split='train[:50%]', decoders=decoders
     )
     assert isinstance(data_source[0]['image'], bytes)
+
+
+def test_mock_multiple_data_source():
+  with tfds.testing.mock_data(num_examples=10):
+    imagenet = tfds.data_source('imagenet2012', split='train')
+    librispeech = tfds.data_source('librispeech_lm', split='train')
+
+    # Data sources of different element specs produce different elements.
+    assert set(next(iter(imagenet)).keys()) != set(
+        next(iter(librispeech)).keys()
+    )
