@@ -104,8 +104,7 @@ jobs:
     # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
     # * github_api is run separately to not overuse API quota.
     # * wmt is run separately to avoid worker hanging.
-    - name: Run core tests 3.10
-      if: ${{ matrix.python-version == 3.10 }}
+    - name: Run core tests
       run: |
         pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ env.PYTEST_NUM_SHARDS }} \
           --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
@@ -115,20 +114,6 @@ jobs:
           --ignore="tensorflow_datasets/import_without_tf_test.py" \
           --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
           --ignore="tensorflow_datasets/translate/wmt19_test.py"
-
-    # * croissant_builder_test depends on mlcroissant, which requires python>=3.10
-    - name: Run core tests 3.9
-      if: ${{ matrix.python-version == 3.9 }}
-      run: |
-        pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ env.PYTEST_NUM_SHARDS }} \
-          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/image/lsun_test.py" \
-          --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
-          --ignore="tensorflow_datasets/import_without_tf_test.py" \
-          --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
-          --ignore="tensorflow_datasets/translate/wmt19_test.py" \
-          --ignore="tensorflow_datasets/core/dataset_builders/croissant_builder_test.py"
 
     # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
     - name: Run leftover tests
