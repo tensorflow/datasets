@@ -15,8 +15,7 @@
 
 """ClassLabel feature."""
 
-from collections.abc import Iterable
-from typing import Optional, Union
+from typing import List, Optional, Union
 
 from etils import epath
 import numpy as np
@@ -36,8 +35,8 @@ class ClassLabel(tensor_feature.Tensor):
       self,
       *,
       num_classes: Optional[int] = None,
-      names: Optional[Iterable[str]] = None,
-      names_file: Optional[epath.Path] = None,
+      names=None,
+      names_file=None,
       doc: feature_lib.DocArg = None,
   ):
     """Constructs a ClassLabel FeatureConnector.
@@ -61,9 +60,9 @@ class ClassLabel(tensor_feature.Tensor):
     """
     super(ClassLabel, self).__init__(shape=(), dtype=np.int64, doc=doc)
 
-    self._num_classes: Optional[int] = None
-    self._str2int: Optional[dict[str, int]] = None
-    self._int2str: Optional[list[str]] = None
+    self._num_classes = None
+    self._str2int = None
+    self._int2str = None
 
     # The label is explicitly set as undefined (no label defined)
     if all(a is None for a in (num_classes, names, names_file)):
@@ -82,17 +81,17 @@ class ClassLabel(tensor_feature.Tensor):
       self.names = _load_names_from_file(epath.Path(names_file))
 
   @property
-  def num_classes(self) -> Optional[int]:
+  def num_classes(self):
     return self._num_classes
 
   @property
-  def names(self) -> list[str]:
+  def names(self):
     if not self._int2str:
       return [str(i) for i in range(self._num_classes)]
     return list(self._int2str)
 
   @names.setter
-  def names(self, new_names: list[str]):
+  def names(self, new_names):
     int2str = new_names
     # Names can only be defined once
     if self._int2str is not None and self._int2str != int2str:
@@ -121,7 +120,7 @@ class ClassLabel(tensor_feature.Tensor):
           )
       )
 
-  def str2int(self, str_value: str) -> int:
+  def str2int(self, str_value):
     """Conversion class name string => integer."""
     if self._str2int:
       return self._str2int[str_value]
@@ -136,7 +135,7 @@ class ClassLabel(tensor_feature.Tensor):
       raise ValueError("Invalid string class label %s" % str_value)
     return int_value
 
-  def int2str(self, int_value: int) -> str:
+  def int2str(self, int_value):
     """Conversion integer => class name string."""
     if self._int2str:
       # Maybe should support batched np array/eager tensors, to allow things
@@ -173,14 +172,14 @@ class ClassLabel(tensor_feature.Tensor):
       )
     return example_data
 
-  def save_metadata(self, data_dir, feature_name=None) -> None:
+  def save_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Save names if defined
     if self._str2int is not None:
       names_filepath = self.get_names_filepath(data_dir, feature_name)
       _write_names_to_file(names_filepath, self.names)
 
-  def load_metadata(self, data_dir, feature_name=None) -> Optional[list[str]]:
+  def load_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Restore names if defined
     names_filepath = self.get_names_filepath(data_dir, feature_name)
@@ -189,7 +188,7 @@ class ClassLabel(tensor_feature.Tensor):
     except OSError:
       pass
 
-  def _additional_repr_info(self) -> dict[str, int]:
+  def _additional_repr_info(self):
     return {"num_classes": self.num_classes}
 
   def repr_html(self, ex: int) -> str:
@@ -217,7 +216,7 @@ class ClassLabel(tensor_feature.Tensor):
     return epath.Path(data_dir) / f"{feature_name}.labels.txt"
 
 
-def _load_names_from_file(names_filepath: epath.Path) -> list[str]:
+def _load_names_from_file(names_filepath: epath.Path) -> List[str]:
   return [
       name.strip()
       for name in names_filepath.read_text().split("\n")

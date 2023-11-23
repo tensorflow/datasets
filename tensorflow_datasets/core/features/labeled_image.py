@@ -17,8 +17,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
-from typing import Optional, Union
+from typing import Dict, List, Optional, Union
 
 from etils import epath
 from tensorflow_datasets.core.features import class_label_feature
@@ -29,7 +28,7 @@ from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
-_LabelArg = Union[list[str], epath.PathLike, None, int]
+_LabelArg = Union[List[str], epath.PathLike, None, int]
 
 
 class LabeledImage(image_feature.Image):
@@ -95,7 +94,7 @@ class LabeledImage(image_feature.Image):
     return self._class_label.num_classes
 
   @property
-  def names(self) -> Iterable[str]:
+  def names(self) -> List[str]:
     return self._class_label.names
 
   def save_metadata(self, data_dir, feature_name=None) -> None:
@@ -133,7 +132,7 @@ class LabeledImage(image_feature.Image):
     return feature
 
 
-def _labels_to_kwarg(labels: _LabelArg) -> dict[str, _LabelArg]:
+def _labels_to_kwarg(labels: _LabelArg) -> Dict[str, _LabelArg]:
   """Creates the `ClassLabel.__init__` kwargs."""
   if labels is None:
     return {}
