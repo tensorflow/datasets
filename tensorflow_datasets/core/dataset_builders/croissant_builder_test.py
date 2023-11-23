@@ -30,10 +30,10 @@ from tensorflow_datasets.core.features import text_feature
 
 if sys.version_info >= (3, 10):
   from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc  # pylint: disable=g-import-not-at-top
-
-incompatible_python_version = pytest.mark.skipif(
-    sys.version_info < (3, 10), reason="requires python3.10 or higher"
-)
+else:
+  pytest.skip(
+      "Croissant library requires python3.10 or higher", allow_module_level=True
+  )
 
 DUMMY_ENTRIES = [{"index": i, "text": f"Dummy example {i}"} for i in range(2)]
 
