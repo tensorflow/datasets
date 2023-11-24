@@ -17,11 +17,12 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 import contextlib
 import enum
 import functools
 import os
-from typing import Any, Callable, Iterator, Optional, Sequence
+from typing import Any, Callable, Iterator, Optional
 from unittest import mock
 
 from absl import logging
@@ -151,6 +152,7 @@ def mock_data(
     *,
     policy: MockPolicy = MockPolicy.AUTO,
     as_dataset_fn: Optional[Callable[..., tf.data.Dataset]] = None,
+    as_data_source_fn: Optional[Callable[..., Sequence[Any]]] = None,
     data_dir: Optional[str] = None,
     mock_array_record_data_source: Optional[PickableDataSourceMock] = None,
 ) -> Iterator[None]:
@@ -194,6 +196,11 @@ def mock_data(
       ex
   ```
 
+  Similarly, `as_data_source_fn` allows to manually mock `tfds.data_source`. See
+  [the
+  tests](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/mocking_test.py;l=399;rcl=584915359)
+  for more examples.
+
   ### Policy
 
   For improved results, you can copy the true metadata files
@@ -228,6 +235,9 @@ def mock_data(
       `tfds.testing.MockPolicy`.
     as_dataset_fn: If provided, will replace the default random example
       generator. This function mock the `FileAdapterBuilder._as_dataset`
+    as_data_source_fn: If provided, will replace the default random example
+      generator for `as_data_source`. The function must return a custom data
+      source that implements `__len__` and `__getitem__` (e.g., a list).
     data_dir: Folder containing the metadata file (searched in
       `data_dir/dataset_name/version`). Overwrite `data_dir` kwargs from
       `tfds.load`. Used in `MockPolicy.USE_FILES` mode.
@@ -429,7 +439,7 @@ def mock_data(
         ),
         (
             f'{core}.dataset_builder.DatasetBuilder.as_data_source',
-            mock_as_data_source,
+            as_data_source_fn if as_data_source_fn else mock_as_data_source,
         ),
         (
             f'{core}.dataset_builder.FileReaderBuilder._as_dataset',

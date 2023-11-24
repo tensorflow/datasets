@@ -406,3 +406,13 @@ def test_mock_multiple_data_source():
     assert set(next(iter(imagenet)).keys()) != set(
         next(iter(librispeech)).keys()
     )
+
+
+def test_as_data_source_fn():
+  as_data_source_fn = lambda *args, **kwargs: ['foo', 'bar', 'baz']
+  with tfds.testing.mock_data(as_data_source_fn=as_data_source_fn):
+    imagenet = tfds.data_source('imagenet2012', split='train')
+    assert len(imagenet) == 3
+    assert imagenet[0] == 'foo'
+    assert imagenet[1] == 'bar'
+    assert imagenet[2] == 'baz'
