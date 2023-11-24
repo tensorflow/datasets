@@ -16,8 +16,10 @@
 """Tests for the PythonDataSource."""
 
 import pickle
+from unittest import mock
 
 from tensorflow_datasets.core.data_sources import python
+import tree
 
 
 def getitem(i):
@@ -44,3 +46,11 @@ def test_python_data_source_is_pickable():
   source = python.PythonDataSource(length=42, getitem=getitem)
   source = pickle.loads(pickle.dumps(source))
   assert source[0] == 0
+
+
+def test_tree_map_structure():
+  source = python.PythonDataSource(length=3, getitem=getitem)
+  func = mock.MagicMock()
+  tree.map_structure(func, source)
+  calls = [mock.call(0), mock.call(1), mock.call(2)]
+  func.assert_has_calls(calls)
