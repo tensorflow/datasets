@@ -17,13 +17,13 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import MappingView, Sequence
 import dataclasses
 from typing import Any, Callable
 
 
 @dataclasses.dataclass
-class PythonDataSource(Sequence):
+class PythonDataSource(MappingView, Sequence):
   """Python data source backed by Python objects: length and __getitem__."""
 
   length: int
