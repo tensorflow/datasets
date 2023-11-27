@@ -25,6 +25,7 @@ import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import FileFormat
 from tensorflow_datasets.core.dataset_builders import croissant_builder
+from tensorflow_datasets.core.features import bounding_boxes
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import text_feature
 
@@ -160,6 +161,13 @@ def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
                 description="Image feature",
             ),
             image_feature.Image,
+        ),
+        (
+            mlc.Field(
+                data_types=mlc.DataType.BOUNDING_BOX,
+                description="Bbox feature",
+            ),
+            bounding_boxes.BBoxFeature,
         ),
     ],
 )
