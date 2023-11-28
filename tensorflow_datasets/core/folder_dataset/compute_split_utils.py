@@ -16,12 +16,13 @@
 r"""Pipeline which computes the number of examples in a dataset."""
 
 import collections
+from collections.abc import Mapping, Sequence, Set
 import dataclasses
 import functools
 import itertools
 import os
 import pprint
-from typing import cast, Dict, List, Optional, Type, Union
+from typing import Optional, Type, Union, cast
 
 from etils import epath
 from tensorflow_datasets.core import file_adapters
@@ -30,11 +31,12 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as split_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
-from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
+from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
 
 from google.protobuf import json_format
 
-_SplitFilesDict = Dict[str, List[naming.FilenameInfo]]
+_SplitFilesDict = Mapping[str, Sequence[naming.FilenameInfo]]
 
 
 @dataclasses.dataclass
@@ -82,7 +84,7 @@ def compute_split_info_from_directory(
     out_dir: Optional[epath.PathLike] = None,
     data_dir: epath.PathLike,
     filename_template: Union[None, str, naming.ShardedFileTemplate] = None,
-) -> List[split_lib.SplitInfo]:
+) -> Sequence[split_lib.SplitInfo]:
   """Compute the split info for the splits in the given data dir.
 
   Arguments:
@@ -123,7 +125,7 @@ def compute_split_info(
     *,
     out_dir: Optional[epath.PathLike] = None,
     filename_template: naming.ShardedFileTemplate,
-) -> List[split_lib.SplitInfo]:
+) -> Sequence[split_lib.SplitInfo]:
   """Compute the split info on the given files.
 
   Compute the split info (num shards, num examples,...) metadata required
@@ -148,14 +150,15 @@ def compute_split_info(
   for split_name, file_infos in split_files.items():
     print(f' * {split_name}: {file_infos[0].num_shards} shards')
 
-  # Launch the beam pipeline to compute the split info
   if out_dir is not None:
+    # Launch the beam pipeline to compute the split infos.
     split_infos = _compute_split_statistics_beam(
         split_files=split_files,
         out_dir=out_dir,
         filename_template=filename_template,
     )
   else:
+    # Compute split infos locally.
     split_infos = _compute_split_statistics(
         split_files=split_files,
         filename_template=filename_template,
@@ -195,7 +198,9 @@ def _extract_split_files(
   return split_files
 
 
-def _assert_split_is_consistent(file_infos: List[naming.FilenameInfo]) -> None:
+def _assert_split_is_consistent(
+    file_infos: Sequence[naming.FilenameInfo],
+) -> None:
   # Use unpack syntax on set to implicitly check that all values are the same
   (_,) = {f.split for f in file_infos}
 
@@ -211,7 +216,7 @@ def _compute_split_statistics(
     *,
     split_files: _SplitFilesDict,
     filename_template: naming.ShardedFileTemplate,
-) -> List[split_lib.SplitInfo]:
+) -> Sequence[split_lib.SplitInfo]:
   """Computes and returns the split statistics."""
 
   adapter = None
@@ -224,7 +229,7 @@ def _compute_split_statistics(
 
   # Compute all shard info in parallel
   split_to_shard_infos = cast(
-      Dict[str, List[_ShardInfo]],
+      Mapping[str, Sequence[_ShardInfo]],
       utils.tree.parallel_map(
           functools.partial(
               _process_shard,
@@ -247,13 +252,11 @@ def _compute_split_statistics_beam(
     split_files: _SplitFilesDict,
     out_dir: epath.PathLike,
     filename_template: naming.ShardedFileTemplate,
-) -> List[split_lib.SplitInfo]:
+) -> Sequence[split_lib.SplitInfo]:
   """Compute statistics."""
   out_dir = epath.Path(out_dir)
 
   assert out_dir.exists(), f'{out_dir} does not exist'
-
-  beam = lazy_imports_lib.lazy_imports.apache_beam
 
   # Launch the beam pipeline computation
   runner = None
@@ -290,11 +293,9 @@ def _process_split(
     *,
     filename_template: naming.ShardedFileTemplate,
     out_dir: epath.Path,
-    file_infos: List[naming.FilenameInfo],
+    file_infos: Sequence[naming.FilenameInfo],
 ):
   """Process a single split."""
-  beam = lazy_imports_lib.lazy_imports.apache_beam
-
   # Use unpack syntax on set to implicitly check that all values are the same
   (split_name,) = {f.split for f in file_infos}
 
@@ -315,26 +316,16 @@ def _process_split(
       pipeline
       | beam.Create(file_infos)
       | beam.Map(_process_shard, data_dir=data_dir, adapter=adapter)
-      # Group everything in a single elem (_ShardInfo -> List[_ShardInfo])
-      | _group_all()  # pytype: disable=missing-parameter  # pylint: disable=no-value-for-parameter
+      # Group everything in a single elem (_ShardInfo -> Sequence[_ShardInfo])
+      | beam.GroupBy(lambda x: None)
+      | beam.Values()
       | beam.Map(_merge_shard_info, filename_template=filename_template)
       | beam.Map(_split_info_to_json_str)
-      | beam.io.WriteToText(  # pytype: disable=missing-parameter
+      | beam.io.WriteToText(
           os.fspath(out_dir / _out_filename(split_name)),
           num_shards=1,
           shard_name_template='',
       )
-  )
-
-
-@lazy_imports_lib.beam_ptransform_fn
-def _group_all(pipeline):
-  beam = lazy_imports_lib.lazy_imports.apache_beam
-  # We do not use CombineGlobally(_process_shard) as it might be called
-  # recursively. We want `_process_shard` to be called only once on the full
-  # collection.
-  return (
-      pipeline | beam.GroupBy(lambda x: None) | beam.MapTuple(lambda key, x: x)
   )
 
 
@@ -344,7 +335,7 @@ def _process_shard(
     data_dir: epath.Path,
     adapter: Type[file_adapters.FileAdapter],
 ) -> _ShardInfo:
-  """Process a single `.tfrecord` file."""
+  """Process a single shard."""
   # Load the ds
   ds = adapter.make_tf_data(data_dir / str(file_info))
   num_examples = 0
@@ -360,7 +351,7 @@ def _process_shard(
 
 
 def _merge_shard_info(
-    shard_infos: List[_ShardInfo],
+    shard_infos: Sequence[_ShardInfo],
     filename_template: naming.ShardedFileTemplate,
 ) -> split_lib.SplitInfo:
   """Merge all shard info from one splits and returns the SplitInfo.
@@ -405,9 +396,9 @@ def _split_info_from_path(
 
 
 def split_infos_from_path(
-    split_names: List[str],
+    split_names: Sequence[str],
     filename_template: naming.ShardedFileTemplate,
-) -> List[split_lib.SplitInfo]:
+) -> Sequence[split_lib.SplitInfo]:
   """Restore the split info from a directory."""
   return [
       _split_info_from_path(

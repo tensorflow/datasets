@@ -14,8 +14,10 @@
 # limitations under the License.
 
 """Util to add metadata into an existing dataset folder."""
+
+from collections.abc import Sequence
 import os
-from typing import List, Union
+from typing import Union
 
 from etils import epath
 from tensorflow_datasets.core import dataset_info
@@ -30,7 +32,7 @@ from tensorflow_datasets.core.folder_dataset import compute_split_utils
 
 def _get_file_infos(
     filename_template: naming.ShardedFileTemplate,
-) -> List[naming.FilenameInfo]:
+) -> Sequence[naming.FilenameInfo]:
   """Returns the file infos from the files matching the given template."""
   file_infos = []
   for f in filename_template.data_dir.iterdir():
@@ -64,7 +66,7 @@ def _construct_filename_template(
 
 def _enrich_filename_template(
     filename_template: naming.ShardedFileTemplate,
-    file_infos: List[naming.FilenameInfo],
+    file_infos: Sequence[naming.FilenameInfo],
 ) -> naming.ShardedFileTemplate:
   """Enriches the given template with data from the given file infos."""
   # Use set with tuple expansion syntax to ensure all names are consistent.
@@ -106,7 +108,9 @@ def write_metadata(
     *,
     data_dir: epath.PathLike,
     features: features_lib.feature.FeatureConnectorArg,
-    split_infos: Union[None, epath.PathLike, List[split_lib.SplitInfo]] = None,
+    split_infos: Union[
+        None, epath.PathLike, Sequence[split_lib.SplitInfo]
+    ] = None,
     version: Union[None, str, utils.Version] = None,
     filename_template: Union[None, str, naming.ShardedFileTemplate] = None,
     check_data: bool = True,
@@ -193,8 +197,8 @@ def write_metadata(
 
 def _load_splits(
     *,
-    split_infos: Union[None, epath.PathLike, List[split_lib.SplitInfo]],
-    file_infos: List[naming.FilenameInfo],
+    split_infos: Union[None, epath.PathLike, Sequence[split_lib.SplitInfo]],
+    file_infos: Sequence[naming.FilenameInfo],
     filename_template: naming.ShardedFileTemplate,
 ) -> split_lib.SplitDict:
   """Load the SplitDict which can be passed to DatasetInfo."""
@@ -204,7 +208,7 @@ def _load_splits(
     split_infos = compute_split_utils.compute_split_info(
         filename_template=filename_template
     )
-  # Load the List[SplitInfo]
+  # Load the Sequence[SplitInfo]
   elif isinstance(split_infos, epath.PathLikeCls):
     split_infos = compute_split_utils.split_infos_from_path(
         split_names=split_names,
