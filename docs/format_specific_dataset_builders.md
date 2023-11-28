@@ -167,6 +167,35 @@ class MyDatasetBuilder(tfds.dataset_builders.TfDataBuilder):
         })
 ```
 
+## CroissantBuilder
+
+### The format
+
+[Croissant](https://github.com/mlcommons/croissant) 🥐 is a high-level format for
+machine learning datasets that combines metadata, resource file descriptions,
+data structure, and default ML semantics into a single file; it works with
+existing datasets to make them easier to find, use, and support with tools.
+
+Croissant builds on schema.org and its `sc:Dataset` vocabulary, a widely used
+format to represent datasets on the Web, and make them searchable.
+
+### `CroissantBuilder`
+
+A `CroissantBuilder` defines a TFDS dataset based on a Croissant 🥐 metadata
+file; each of the `record_set_names` specified will result in a separate
+`ConfigBuilder`.
+
+For example, to initialize a `CroissantBuilder` for the Titanic dataset using
+its
+[Croissant 🥐 definition](https://github.com/mlcommons/croissant/tree/main/datasets/titanic):
+
+```python
+titanic_file="path/to/titanic/metadata.json"
+builder = croissant_builder.CroissantBuilder(
+      file=titanic_file, record_set_names=["passengers"]
+  )
+```
+
 ## CoNLL
 
 ### The format

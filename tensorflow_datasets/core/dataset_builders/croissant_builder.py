@@ -18,7 +18,7 @@
 Croissant is a high-level format for machine learning datasets
 https://github.com/mlcommons/croissant
 
-A CroissantBuilder initialized a TFDS DatasetBuilder from a Croissant dataset
+A CroissantBuilder initializes a TFDS DatasetBuilder from a Croissant dataset
 file; each of the record_set_names specified will result in a separate
 ConfigBuilder.
 
