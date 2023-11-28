@@ -19,12 +19,6 @@ synthesis benchmark, or as a psychometric intelligence test. It is targeted at
 both humans and artificially intelligent systems that aim at emulating a
 human-like form of general fluid intelligence.
 
-*   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/arc">
-    Explore on Papers With Code
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Config description**: ARC commit bd9e2c9 from 2019-12-06
 
 *   **Homepage**:
