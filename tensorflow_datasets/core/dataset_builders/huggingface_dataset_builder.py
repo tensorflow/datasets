@@ -385,6 +385,7 @@ class HuggingfaceDatasetBuilder(
   ) -> Optional[dataset_builder.BuilderConfig]:
     return self._converted_builder_config
 
+  @functools.lru_cache(maxsize=1)
   def _download_and_prepare_for_hf(self) -> Mapping[str, Any]:
     login_to_hf(self._hf_hub_token)
     self._hf_builder.download_and_prepare(
@@ -399,9 +400,9 @@ class HuggingfaceDatasetBuilder(
     if self._hf_info.features is not None:
       return self._hf_info.features
     # We need to download and prepare the data to know its features.
-    ds = self._download_and_prepare_for_hf()
-    for split in ds.values():
-      return split.info
+    dataset_dict = self._download_and_prepare_for_hf()
+    for dataset in dataset_dict.values():
+      return dataset.info.features
 
   @py_utils.memoize()
   def _info(self) -> dataset_info_lib.DatasetInfo:

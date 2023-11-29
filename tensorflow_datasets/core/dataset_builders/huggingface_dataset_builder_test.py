@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Tests for huggingface_dataset_builder."""
+
 import datetime
 from unittest import mock
 
@@ -196,22 +197,70 @@ def test_remove_empty_splits():
   assert list(non_empty_splits["non_empty_split"]) == list(range(5))
 
 
-@skip_because_huggingface_cannot_be_imported
-def test_all_parameters_are_passed_down_to_hf():
+# Encapsulate test parameters into a fixture to avoid `datasets` import during
+# tests collection.
+# https://docs.pytest.org/en/7.2.x/example/parametrize.html#deferring-the-setup-of-parametrized-resources
+@pytest.fixture(params=["feat_dict", "audio"], name="features")
+def get_features(request):
+  if request.param == "feat_dict":
+    return (
+        hf_datasets.Features({
+            "id": hf_datasets.Value("string"),
+            "meta": {
+                "left_context": hf_datasets.Value("string"),
+                "partial_evidence": [{
+                    "start_id": hf_datasets.Value("int32"),
+                    "meta": {"evidence_span": [hf_datasets.Value("string")]},
+                }],
+            },
+        }),
+        feature_lib.FeaturesDict({
+            "id": feature_lib.Scalar(dtype=np.str_),
+            "meta": feature_lib.FeaturesDict({
+                "left_context": feature_lib.Scalar(dtype=np.str_),
+                "partial_evidence": feature_lib.Sequence({
+                    "meta": feature_lib.FeaturesDict({
+                        "evidence_span": feature_lib.Sequence(
+                            feature_lib.Scalar(dtype=np.str_)
+                        ),
+                    }),
+                    "start_id": feature_lib.Scalar(dtype=np.int32),
+                }),
+            }),
+        }),
+    )
+  elif request.param == "audio":
+    return (
+        hf_datasets.Audio(sampling_rate=48000),
+        feature_lib.Audio(sample_rate=48000),
+    )
+
+
+@pytest.fixture(name="load_dataset_builder_mock")
+def get_load_dataset_builder_mock():
   with mock.patch.object(
-      lazy_imports_lib.lazy_imports.datasets, "load_dataset"
-  ), mock.patch.object(
       lazy_imports_lib.lazy_imports.datasets, "load_dataset_builder"
   ) as load_dataset_builder_mock:
-    load_dataset_builder_mock.return_value.info.citation = "citation"
-    load_dataset_builder_mock.return_value.info.description = "description"
-    load_dataset_builder_mock.return_value.info.supervised_keys = None
-    load_dataset_builder_mock.return_value.info.version = "1.0.0"
-    load_dataset_builder_mock.return_value.info.features = {
-        "feature": hf_datasets.Value("int32")
-    }
-    huggingface_dataset_builder.login_to_hf = mock.MagicMock()
+    hf_builder = load_dataset_builder_mock.return_value
+    hf_builder.info.citation = "citation"
+    hf_builder.info.description = "description"
+    hf_builder.info.features = None
+    hf_builder.info.splits = ["all"]
+    hf_builder.info.supervised_keys = None
+    hf_builder.info.version = "1.0.0"
 
+    dataset = mock.MagicMock()
+    dataset.info.features = {"feature": hf_datasets.Value("int32")}
+    dataset_dict = hf_datasets.DatasetDict({"test": dataset})
+    hf_builder.as_dataset.return_value = dataset_dict
+    yield load_dataset_builder_mock
+
+
+@pytest.fixture(name="builder")
+def get_huggingface_dataset_builder_mock(load_dataset_builder_mock):
+  with mock.patch.object(
+      huggingface_dataset_builder, "login_to_hf"
+  ) as login_to_hf_mock:
     builder = huggingface_dataset_builder.HuggingfaceDatasetBuilder(
         file_format="tfrecord",
         hf_repo_id="foo/bar",
@@ -225,68 +274,24 @@ def test_all_parameters_are_passed_down_to_hf():
     load_dataset_builder_mock.assert_called_once_with(
         "foo/bar", "config", other_arg="this is another arg"
     )
-
-    builder._split_generators(None)
-    huggingface_dataset_builder.login_to_hf.assert_called_once_with(
-        "SECRET_TOKEN"
-    )
-    load_dataset_builder_mock.return_value.download_and_prepare.assert_called_once_with(
-        verification_mode="all_checks", num_proc=100
-    )
-    load_dataset_builder_mock.return_value.as_dataset.assert_called_once_with(
-        verification_mode="all_checks"
-    )
+    login_to_hf_mock.assert_called_once_with("SECRET_TOKEN")
+    yield builder
 
 
-# Encapsulate test parameters into a fixture to avoid `datasets` import during
-# tests collection.
-# https://docs.pytest.org/en/7.2.x/example/parametrize.html#deferring-the-setup-of-parametrized-resources
-@pytest.fixture(params=["feat_dict", "audio"], name="features")
-def get_features(request):
-  datasets = pytest.importorskip(
-      "datasets",
-      reason=(
-          "`datasets` library has to be installed separately for Python >= 3.10"
-          " due to conflicts between `multiprocess` and `apache-beam`"
-          " libraries. See"
-          " https://github.com/uqfoundation/multiprocess/issues/125"
-      ),
+@skip_because_huggingface_cannot_be_imported
+def test_all_parameters_are_passed_down_to_hf(
+    load_dataset_builder_mock, builder
+):
+  builder._split_generators(None)
+  load_dataset_builder_mock.return_value.download_and_prepare.assert_called_once_with(
+      verification_mode="all_checks", num_proc=100
+  )
+  load_dataset_builder_mock.return_value.as_dataset.assert_called_once_with(
+      verification_mode="all_checks"
   )
 
-  return {
-      "feat_dict": (
-          datasets.Features({
-              "id": datasets.Value("string"),
-              "meta": {
-                  "left_context": datasets.Value("string"),
-                  "partial_evidence": [{
-                      "start_id": datasets.Value("int32"),
-                      "meta": {"evidence_span": [datasets.Value("string")]},
-                  }],
-              },
-          }),
-          feature_lib.FeaturesDict({
-              "id": feature_lib.Scalar(dtype=np.str_),
-              "meta": feature_lib.FeaturesDict({
-                  "left_context": feature_lib.Scalar(dtype=np.str_),
-                  "partial_evidence": feature_lib.Sequence({
-                      "meta": feature_lib.FeaturesDict({
-                          "evidence_span": feature_lib.Sequence(
-                              feature_lib.Scalar(dtype=np.str_)
-                          ),
-                      }),
-                      "start_id": feature_lib.Scalar(dtype=np.int32),
-                  }),
-              }),
-          }),
-      ),
-      "audio": (
-          datasets.Audio(sampling_rate=48000),
-          feature_lib.Audio(sample_rate=48000),
-      ),
-  }[request.param]
 
-
+@skip_because_huggingface_cannot_be_imported
 def test_extract_features(features):
   hf_features, tfds_features = features
   assert repr(
@@ -315,3 +320,8 @@ def test_default_value():
   assert huggingface_dataset_builder._default_value(features_dict) == {
       "foo": b""
   }
+
+
+@skip_because_huggingface_cannot_be_imported
+def test_hf_features(builder):
+  assert builder._hf_features() == {"feature": hf_datasets.Value("int32")}
