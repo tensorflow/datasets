@@ -18,7 +18,7 @@
 from __future__ import annotations
 
 import collections
-from typing import Any, Union
+from typing import Any, Optional, Union
 
 import numpy as np
 from tensorflow_datasets.core import lazy_imports_lib
@@ -31,9 +31,42 @@ from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
+# A BBox contains the bounding boox coordinates in the YXYX format, following
+# this order: [top, left, bottom, right].
 BBox = collections.namedtuple('BBox', 'ymin, xmin, ymax, xmax')
 
 PilImage = Any
+
+# Bonding box formats which are supported in TFDS. If new formats are added, you
+# probably need to update the `convert_to_bbox` converter.
+SUPPORTED_BBOX_FORMATS = ['XYXY', 'YXYX', 'XYWH']
+
+
+def convert_to_bbox(
+    coordinates: np.ndarray, bbox_format: Optional[str] = None
+) -> BBox:
+  """Converts four coordinates to a BBox.
+
+  Args:
+    coordinates: np.array with the four coordinates expressing a bounding box.
+    bbox_format: the format of the bounding box.
+
+  Returns:
+    A BBox in the correct format.
+  """
+  if len(coordinates) != 4:
+    raise ValueError(f'Expected 4 coordinates, got {coordinates}.')
+
+  bbox = coordinates.astype(np.float64)
+  if not bbox_format or bbox_format == 'YXYX':
+    return BBox(ymin=bbox[0], xmin=bbox[1], ymax=bbox[2], xmax=bbox[3])
+  elif bbox_format == 'XYXY':
+    return BBox(ymin=bbox[1], xmin=bbox[0], ymax=bbox[3], xmax=bbox[2])
+  elif bbox_format == 'XYWH':
+    x, y, width, height = coordinates
+    return BBox(ymin=y, xmin=x, ymax=(y + height), xmax=(x + width))
+  else:
+    raise ValueError(f'Unsupported bbox format: {format}.')
 
 
 class BBoxFeature(tensor_feature.Tensor):
@@ -71,20 +104,26 @@ class BBoxFeature(tensor_feature.Tensor):
       self,
       *,
       doc: feature_lib.DocArg = None,
+      bbox_format: Optional[str] = None,
   ):
+    if bbox_format:
+      if bbox_format not in SUPPORTED_BBOX_FORMATS:
+        raise ValueError(
+            f'Invalid bbox_format: {bbox_format}. Currently supported formats'
+            f' for bounding boxes are: {SUPPORTED_BBOX_FORMATS}.'
+        )
+    self.bbox_format = bbox_format
     super(BBoxFeature, self).__init__(shape=(4,), dtype=np.float32, doc=doc)
 
   def encode_example(self, bbox: Union[BBox, np.ndarray]):
     """See base class for details."""
-
     if isinstance(bbox, np.ndarray):
       if bbox.shape != (4,):
         raise ValueError(
             'array representing BBox should have exactly 4 floats. '
             f'Instead, it has {bbox.shape}.'
         )
-      bbox = bbox.astype(np.float64)
-      bbox = BBox(ymin=bbox[0], xmin=bbox[1], ymax=bbox[2], xmax=bbox[3])
+      bbox = convert_to_bbox(coordinates=bbox, bbox_format=self.bbox_format)
 
     # Validate the coordinates
     for coordinate in bbox:
@@ -118,13 +157,15 @@ class BBoxFeature(tensor_feature.Tensor):
   def from_json_content(
       cls, value: Union[Json, feature_pb2.BoundingBoxFeature]
   ) -> 'BBoxFeature':
-    del value  # Unused
-    return cls()
+    if isinstance(value, dict):
+      return cls(**value)
+    return cls(bbox_format=value.bbox_format)
 
   def to_json_content(self) -> feature_pb2.BoundingBoxFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.BoundingBoxFeature(
         shape=feature_lib.to_shape_proto(self._shape),
         dtype=feature_lib.dtype_to_str(self._dtype),
+        bbox_format=self.bbox_format,
     )
 
 

@@ -106,6 +106,7 @@ message AudioFeature {
 message BoundingBoxFeature {
   Shape shape = 1;
   string dtype = 2;
+  string bbox_format = 3;
 }
 
 message TextFeature {}
