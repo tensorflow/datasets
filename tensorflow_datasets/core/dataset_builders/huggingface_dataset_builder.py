@@ -341,6 +341,7 @@ class HuggingfaceDatasetBuilder(
       hf_hub_token: Optional[str] = None,
       hf_num_proc: Optional[int] = None,
       tfds_num_proc: Optional[int] = None,
+      disable_shuffling: bool = True,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
@@ -369,6 +370,7 @@ class HuggingfaceDatasetBuilder(
     self._verification_mode = (
         "all_checks" if ignore_verifications else "no_checks"
     )
+    self._disable_shuffling = disable_shuffling
     super().__init__(
         file_format=file_format, config=tfds_config, data_dir=data_dir
     )
@@ -413,6 +415,7 @@ class HuggingfaceDatasetBuilder(
         citation=self._hf_info.citation,
         license=self._hf_info.license,
         supervised_keys=_extract_supervised_keys(self._hf_info),
+        disable_shuffling=self._disable_shuffling,
     )
 
   def _split_generators(
