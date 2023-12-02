@@ -79,7 +79,7 @@ GCS bucket (recommended if you're running on GCP), you can instead pass
 """
 
 
-@dataclasses.dataclass(eq=False)
+@dataclasses.dataclass(eq=False, kw_only=True)
 class BuilderConfig:
   """Base class for `DatasetBuilder` data configuration.
 
@@ -99,7 +99,6 @@ class BuilderConfig:
 
   # TODO(py3.10): Should update dataclass to be:
   # * Frozen (https://bugs.python.org/issue32953)
-  # * Kwargs-only (https://bugs.python.org/issue33129)
 
   name: str
   version: VersionOrStr | None = None

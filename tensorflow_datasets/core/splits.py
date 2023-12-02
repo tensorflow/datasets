@@ -643,7 +643,7 @@ class ReadInstruction(AbstractSplit):
   """
 
   split_name: str
-  # TODO(py3.10): Add `_ = dataclasses.KW_ONLY`
+  _: dataclasses.KW_ONLY
   from_: Optional[int | float] = None
   to: Optional[int | float] = None
   unit: str = 'abs'
