@@ -17,12 +17,12 @@
 
 from __future__ import annotations
 
-import collections
 from typing import Any, Union
 
 import numpy as np
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import bounding_boxes_utils as bb_utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import tensor_feature
@@ -30,8 +30,6 @@ from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
-
-BBox = collections.namedtuple('BBox', 'ymin, xmin, ymax, xmax')
 
 PilImage = Any
 
@@ -74,7 +72,7 @@ class BBoxFeature(tensor_feature.Tensor):
   ):
     super(BBoxFeature, self).__init__(shape=(4,), dtype=np.float32, doc=doc)
 
-  def encode_example(self, bbox: Union[BBox, np.ndarray]):
+  def encode_example(self, bbox: Union[bb_utils.BBox, np.ndarray]):
     """See base class for details."""
 
     if isinstance(bbox, np.ndarray):
@@ -84,7 +82,9 @@ class BBoxFeature(tensor_feature.Tensor):
             f'Instead, it has {bbox.shape}.'
         )
       bbox = bbox.astype(np.float64)
-      bbox = BBox(ymin=bbox[0], xmin=bbox[1], ymax=bbox[2], xmax=bbox[3])
+      bbox = bb_utils.BBox(
+          ymin=bbox[0], xmin=bbox[1], ymax=bbox[2], xmax=bbox[3]
+      )
 
     # Validate the coordinates
     for coordinate in bbox:
