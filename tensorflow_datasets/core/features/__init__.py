@@ -20,8 +20,8 @@ See [the guide](https://www.tensorflow.org/datasets/features).
 """
 
 from tensorflow_datasets.core.features.audio_feature import Audio
-from tensorflow_datasets.core.features.bounding_boxes import BBox
 from tensorflow_datasets.core.features.bounding_boxes import BBoxFeature
+from tensorflow_datasets.core.features.bounding_boxes_utils import BBox
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.dataset_feature import Dataset
 from tensorflow_datasets.core.features.feature import DocArg
