@@ -98,10 +98,6 @@ TESTS_DEPENDENCIES = [
     # Required by scripts/documentation/
     'pyyaml',
     'tensorflow-io[tensorflow]',
-    # `datasets` needs to be installed separately in Python >= 3.10 due to
-    # conflicts between `multiprocess` and `apache-beam` libraries. See
-    # https://github.com/uqfoundation/multiprocess/issues/125
-    'datasets;python_version<"3.10"',
 ]
 
 # Additional deps for formatting
@@ -182,12 +178,11 @@ DATASET_EXTRAS = {
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
-    # envlogger is not available for Python versions >= 3.10 or non Linux
+    # envlogger is not available for Python versions >= 3.11 or non Linux
     # platforms: https://pypi.org/project/envlogger/#files
-    # tests are disabled in `tensorflow_datasets/conftest.py`
-    'locomotion': ['envlogger;python_version<"3.10" and sys_platform=="linux"'],
+    'locomotion': ['envlogger;python_version<"3.11" and sys_platform=="linux"'],
     'robosuite_panda_pick_place_can': [
-        'envlogger;python_version<"3.10" and sys_platform=="linux"'
+        'envlogger;python_version<"3.11" and sys_platform=="linux"'
     ],
     'smartwatch_gestures': ['pandas'],
     'svhn': ['scipy'],
@@ -213,10 +208,11 @@ all_dataset_dependencies = list(
 )
 
 TESTS_ALL_DEPENDENCIES = TESTS_DEPENDENCIES + all_dataset_dependencies
+# `datasets` needs to be installed separately in Python >= 3.10 due to
+# conflicts between `multiprocess` and `apache-beam` libraries. See
+# https://github.com/uqfoundation/multiprocess/issues/125
 HUGGINGFACE_ALL_DEPENDENCIES = [
-    dep
-    for dep in TESTS_ALL_DEPENDENCIES
-    if not dep.startswith('apache-beam') and not dep.startswith('datasets')
+    dep for dep in TESTS_ALL_DEPENDENCIES if not dep.startswith('apache-beam')
 ] + ['datasets']
 
 EXTRAS = {
@@ -262,7 +258,7 @@ setup(
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
-    python_requires='>=3.9',
+    python_requires='>=3.10',
     extras_require=EXTRAS,
     classifiers=[
         'Development Status :: 4 - Beta',
