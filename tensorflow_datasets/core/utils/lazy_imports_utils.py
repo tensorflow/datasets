@@ -237,6 +237,7 @@ with lazy_imports(error_callback=mlcroissant_error_callback):
 with lazy_imports():
   import apache_beam  # pylint: disable=g-import-not-at-top,unused-import
   import pandas  # pylint: disable=g-import-not-at-top,unused-import
+  import streamlit  # pylint: disable=g-import-not-at-top,unused-import
 
 
 with lazy_imports(
