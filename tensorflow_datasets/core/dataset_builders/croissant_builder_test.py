@@ -16,7 +16,6 @@
 """Tests for croissant_builder."""
 
 import json
-import sys
 import tempfile
 
 from etils import epath
@@ -27,13 +26,7 @@ from tensorflow_datasets.core import FileFormat
 from tensorflow_datasets.core.dataset_builders import croissant_builder
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import text_feature
-
-if sys.version_info >= (3, 10):
-  from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc  # pylint: disable=g-import-not-at-top
-else:
-  pytest.skip(
-      "Croissant library requires python3.10 or higher", allow_module_level=True
-  )
+from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 
 DUMMY_ENTRIES = [{"index": i, "text": f"Dummy example {i}"} for i in range(2)]
 

@@ -32,7 +32,10 @@ class MyConllDataset(tfds.dataset_builders.ConllDatasetBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     ...
 """
-from typing import List, Optional, OrderedDict, Sequence, Union
+
+import collections
+from collections.abc import Sequence
+from typing import Optional, Union
 
 from etils import epath
 from tensorflow_datasets.core import dataset_builder
@@ -57,7 +60,9 @@ class ConllBuilderConfig(dataset_builder.BuilderConfig):
       self,
       *,
       separator: str,
-      ordered_features: OrderedDict[str, feature_lib.FeatureConnector],
+      ordered_features: collections.OrderedDict[
+          str, feature_lib.FeatureConnector
+      ],
       **kwargs,
   ):
     """Initializes the builder config for Conll datasets.
@@ -127,7 +132,7 @@ class ConllDatasetBuilder(
 
   def _generate_examples(
       self,
-      filepaths: Union[epath.PathLike, List[epath.PathLike]],
+      filepaths: Union[epath.PathLike, list[epath.PathLike]],
   ) -> split_builder_lib.SplitGenerator:
     """Processes CoNLL-like datasets and generate examples.
 

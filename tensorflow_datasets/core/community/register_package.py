@@ -125,11 +125,10 @@ class _InstalledPackage:
     }
 
 
-# TODO(tfds): py3.9 Should be `UserDict[naming.DatasetName, _DatasetPackage]`
-class _PackageIndex(collections.UserDict):
+class _PackageIndex(collections.UserDict[naming.DatasetName, DatasetPackage]):
   """Package index.
 
-  Package index is a `Dict[DatasetName, _DatasetPackage]` loaded from cache.
+  Package index is a `Dict[DatasetName, DatasetPackage]` loaded from cache.
   It has an additional `.refresh()` method to update the local cache by
   querying the remote index (stored in `gs://tfds-data`).
 
@@ -225,7 +224,7 @@ class PackageRegister(register_base.BaseRegister):
 
   @functools.cached_property
   def _package_index(self) -> _PackageIndex:
-    """`Dict[DatasetName, _DatasetPackage]` containg the community datasets."""
+    """`Dict[DatasetName, DatasetPackage]` containg the community datasets."""
     # Use property to lazy-initialize the cache (and create the tmp dir) only
     # if it is used.
     return _PackageIndex(self._path)

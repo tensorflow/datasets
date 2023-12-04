@@ -84,7 +84,7 @@ jobs:
         num-shards: ${{ fromJson(needs.shards-job.outputs.num-shards) }}
         shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
         # TF suppported versions: https://www.tensorflow.org/install/pip#software_requirements
-        python-version: ['3.9', '3.10']
+        python-version: ['3.10', '3.11']
         os-version: [ubuntu-latest, macos-latest]
 
     steps:
@@ -131,7 +131,7 @@ jobs:
     if: ${{ needs.activate-tests.outputs.status }}
 
     # HuggingFace tests need to be run separately because they're disabled without installed
-    # `datasets` library which is not included in ['tests-all'] extras for Python >=3.10
+    # `datasets` library.
     name: 'HuggingFace Python 3.10 tests'
     runs-on: ubuntu-latest
     timeout-minutes: 30

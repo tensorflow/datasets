@@ -14,6 +14,8 @@ and this project adheres to
 
 ### Deprecated
 
+-   Python 3.9 support.
+
 ### Removed
 
 ### Fixed
