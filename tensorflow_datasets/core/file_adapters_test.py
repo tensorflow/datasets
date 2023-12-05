@@ -50,6 +50,12 @@ def test_format_suffix():
       ].FILE_SUFFIX
       == 'riegeli'
   )
+  assert (
+      file_adapters.ADAPTER_FOR_FORMAT[
+          file_adapters.FileFormat.ARRAY_RECORD
+      ].FILE_SUFFIX
+      == 'array_record'
+  )
 
 
 @pytest.mark.parametrize(
