@@ -77,6 +77,7 @@ def get_dummy_metadata():
       url="https://dummy_url",
       distribution=distribution,
       record_sets=record_sets,
+      version="1.2.0",
       license="Public",
   )
   return dummy_metadata
@@ -192,6 +193,7 @@ class CroissantBuilderTest(testing.TestCase):
 
   def test_dataset_info(self):
     assert self.builder.name == "DummyDataset"
+    assert self.builder.version == "1.2.0"
     assert self.builder._info().description == "Dummy description."
     assert self.builder._info().homepage == "https://dummy_url"
     assert self.builder._info().redistribution_info.license == "Public"
