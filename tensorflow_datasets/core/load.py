@@ -175,13 +175,16 @@ def builder(
       name, **builder_kwargs
   )
 
+  def get_dataset_repr() -> str:
+    return f'dataset "{name}", builder_kwargs "{builder_kwargs}"'
+
   # `try_gcs` currently only supports non-community datasets
   if try_gcs and not name.namespace and gcs_utils.is_dataset_on_gcs(str(name)):
     data_dir = builder_kwargs.get('data_dir')
     if data_dir:
       raise ValueError(
-          f'Cannot have both `try_gcs=True` and `data_dir={data_dir}` '
-          'explicitly set'
+          f'Cannot have both `try_gcs=True` and `data_dir={data_dir}`'
+          f' explicitly set. Wrong arguments for {get_dataset_repr()}'
       )
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
   if name.namespace:
@@ -206,12 +209,14 @@ def builder(
     try:
       return read_only_builder.builder_from_files(str(name), **builder_kwargs)
     except registered.DatasetNotFoundError:
-      pass
+      logging.info('Failed to load %s from files.', get_dataset_repr())
 
   # If code exists and loading from files was skipped (e.g. files not found),
   # load from the source code.
   if cls:
-    with py_utils.try_reraise(prefix=f'Failed to construct dataset {name}: '):
+    with py_utils.try_reraise(
+        prefix=f'Failed to construct {get_dataset_repr()}: '
+    ):
       return cls(**builder_kwargs)  # pytype: disable=not-instantiable
 
   # If neither the code nor the files are found, raise DatasetNotFoundError
