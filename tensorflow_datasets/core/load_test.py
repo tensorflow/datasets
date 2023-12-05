@@ -19,6 +19,7 @@ Note: `load.py` code was previously in `registered.py`, so some of the tests
 are still on `registered_test.py`.
 """
 
+import logging
 from unittest import mock
 
 import pytest
