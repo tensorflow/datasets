@@ -125,10 +125,10 @@ class CroissantBuilder(
     self.name = self.dataset.metadata.name
     self.metadata = self.dataset.metadata
 
-    # pylint: disable=g-bad-todo
-    # TODO(https://github.com/mlcommons/croissant/issues/91): Correctly
-    # populate the version once versioning is fixed for Croissant.
-    self.VERSION = "1.0.0"  # pylint: disable=invalid-name
+    # In TFDS, version is a mandatory attribute, while in Croissant it is only a
+    # recommended attribute. If the version is unspecified in Croissant, we set
+    # it to `1.0.0` in TFDS.
+    self.VERSION = self.dataset.metadata.version or "1.0.0"  # pylint: disable=invalid-name
     self.RELEASE_NOTES = {}  # pylint: disable=invalid-name
 
     self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
