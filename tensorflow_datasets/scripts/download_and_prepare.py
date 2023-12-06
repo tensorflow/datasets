@@ -21,7 +21,6 @@ from typing import List
 from absl import app
 from absl import flags
 from absl import logging
-
 from tensorflow_datasets.scripts.cli import main as main_cli
 
 module_import = flags.DEFINE_string('module_import', None, '`--imports` flag.')
@@ -35,7 +34,10 @@ builder_config_id = flags.DEFINE_integer(
 
 def _parse_flags(argv: List[str]) -> argparse.Namespace:
   """Command lines flag parsing."""
-  return main_cli._parse_flags([argv[0], 'build'] + argv[1:])  # pylint: disable=protected-access
+  # Support converting datasets from one format to another.
+  if argv[1] in ('convert_format', '--convert_format'):
+    return main_cli.parse_flags([argv[0], 'convert_format'] + argv[2:])
+  return main_cli.parse_flags([argv[0], 'build'] + argv[1:])
 
 
 _display_warning = True

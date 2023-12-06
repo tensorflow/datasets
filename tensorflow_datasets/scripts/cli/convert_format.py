@@ -69,7 +69,14 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   )
   new_parser.add_argument(
       '--use_beam',
-      type=bool,
+      action='store_true',
+      help='Whether to use beam to convert the dataset.',
+      default=True,
+  )
+  new_parser.add_argument(
+      '--nouse_beam',
+      dest='use_beam',
+      action='store_false',
       help='Whether to use beam to convert the dataset.',
   )
   new_parser.set_defaults(subparser_fn=_convert_dataset)
