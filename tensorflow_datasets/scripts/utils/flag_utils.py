@@ -29,10 +29,10 @@ def normalize_flags(argv: List[str]) -> List[str]:
   Args:
     argv: Arguments for `main()`.
   """
-  bolean_flag_patern = re.compile(r'--[\w_]+=(true|false)')
+  boolean_flag_pattern = re.compile(r'--[\w_]+=(true|false)')
 
   def _normalize_flag(arg: str) -> str:
-    if not bolean_flag_patern.match(arg):
+    if not boolean_flag_pattern.match(arg):
       return arg
     if arg.endswith('=true'):
       return arg[: -len('=true')]  # `--flag=true` -> `--flag`
