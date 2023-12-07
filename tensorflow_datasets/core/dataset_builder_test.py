@@ -231,7 +231,7 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
         with self.assertRaises(NotImplementedError):
           load.load(name="mnist", data_dir=tmp_dir)
         # Enable GCS access so that dataset will be loaded from GCS.
-        with self.gcs_access():
+        with testing.enable_gcs_access():
           _, info = load.load(name="mnist", data_dir=tmp_dir, with_info=True)
       self.assertSetEqual(
           set([

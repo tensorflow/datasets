@@ -35,7 +35,9 @@ if typing.TYPE_CHECKING:
   from tensorflow_datasets.testing.mocking import MockPolicy
   from tensorflow_datasets.testing.mocking import PickableDataSourceMock
   from tensorflow_datasets.testing.test_case import TestCase
+  from tensorflow_datasets.testing.test_case_in_context import TestCaseInContext
   from tensorflow_datasets.testing.test_utils import assert_features_equal
+  from tensorflow_datasets.testing.test_utils import disable_gcs_access
   from tensorflow_datasets.testing.test_utils import DummyBeamDataset
   from tensorflow_datasets.testing.test_utils import DummyDataset
   from tensorflow_datasets.testing.test_utils import DummyDatasetCollection
@@ -43,6 +45,7 @@ if typing.TYPE_CHECKING:
   from tensorflow_datasets.testing.test_utils import DummyMnist
   from tensorflow_datasets.testing.test_utils import DummyParser
   from tensorflow_datasets.testing.test_utils import DummySerializer
+  from tensorflow_datasets.testing.test_utils import enable_gcs_access
   from tensorflow_datasets.testing.test_utils import fake_examples_dir
   from tensorflow_datasets.testing.test_utils import make_tmp_dir
   from tensorflow_datasets.testing.test_utils import mock_kaggle_api
@@ -60,6 +63,7 @@ _API = {
     "DatasetBuilderTestCase": (
         "tensorflow_datasets.testing.dataset_builder_testing"
     ),
+    "disable_gcs_access": "tensorflow_datasets.testing.test_utils",
     "DummyBeamDataset": "tensorflow_datasets.testing.test_utils",
     "DummyDataset": "tensorflow_datasets.testing.test_utils",
     "DummyDatasetCollection": "tensorflow_datasets.testing.test_utils",
@@ -67,6 +71,7 @@ _API = {
     "DummyMnist": "tensorflow_datasets.testing.test_utils",
     "DummyParser": "tensorflow_datasets.testing.test_utils",
     "DummySerializer": "tensorflow_datasets.testing.test_utils",
+    "enable_gcs_access": "tensorflow_datasets.testing.test_utils",
     "fake_examples_dir": "tensorflow_datasets.testing.test_utils",
     "FeatureExpectationItem": "tensorflow_datasets.testing.feature_test_case",
     "FeatureExpectationsTestCase": (
@@ -86,6 +91,7 @@ _API = {
     "SubTestCase": "tensorflow_datasets.testing.feature_test_case",
     "test_main": "tensorflow_datasets.testing.test_utils",
     "TestCase": "tensorflow_datasets.testing.test_case",
+    "TestCaseInContext": "tensorflow_datasets.testing.test_case_in_context",
     # TODO(afrozm): rm from here and add as methods to TestCase
     "tmp_dir": "tensorflow_datasets.testing.test_utils",
     # LINT.ThenChange(:pydeps)
