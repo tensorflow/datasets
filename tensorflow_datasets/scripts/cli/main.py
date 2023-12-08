@@ -23,7 +23,6 @@ See: https://www.tensorflow.org/datasets/cli
 
 import argparse
 import logging as python_logging
-import sys
 from typing import List
 
 from absl import app
@@ -93,11 +92,7 @@ def main(args: argparse.Namespace) -> None:
     python_handler.setFormatter(formatter)
     # Replace `sys.stderr` by the TQDM file
     new_stream = tfds.core.utils.tqdm_utils.TqdmStream()
-    if sys.version_info >= (3, 7):
-      python_handler.setStream(new_stream)
-    else:
-      python_handler.stream.flush()
-      python_handler.stream = new_stream
+    python_handler.setStream(new_stream)
 
   # Launch the subcommand defined in the subparser (or default to print help)
   args.subparser_fn(args)
