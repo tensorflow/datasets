@@ -23,7 +23,6 @@ import re
 from typing import Sequence
 from unittest import mock
 
-from absl import flags
 import dill
 from etils import epath
 import pytest
@@ -308,7 +307,6 @@ def test_find_builder_dir_with_namespace_given():
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def test_find_builder_dir_with_multiple_data_dir(mock_fs: testing.MockFs):
-
   mock_fs.add_file('path/to/ds0/1.0.0/features.json')
 
   # Dataset not found.
