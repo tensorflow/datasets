@@ -268,9 +268,10 @@ def builder_from_files(
         given_data_dir=builder_kwargs.get('data_dir')
     )
     raise registered.DatasetNotFoundError(
-        f'Could not find dataset files for: {name}. Make sure the dataset '
-        f'has been generated in: {data_dirs}. If the dataset has configs, you '
-        'might have to specify the config name.'
+        f'Could not find dataset files for: {name}. Make sure you have the'
+        ' correct permissions to access the dataset '
+        f'and that it has been generated in: {data_dirs}. If the dataset has'
+        ' configs, you might have to specify the config name.'
     )
   return builder_from_directory(builder_dir)
 
