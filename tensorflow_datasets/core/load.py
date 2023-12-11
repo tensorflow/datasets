@@ -208,8 +208,10 @@ def builder(
   if _try_load_from_files_first(cls, **builder_kwargs):
     try:
       return read_only_builder.builder_from_files(str(name), **builder_kwargs)
-    except registered.DatasetNotFoundError:
-      logging.info('Failed to load %s from files.', get_dataset_repr())
+    except registered.DatasetNotFoundError as e:
+      logging.info(
+          'Failed to load %s from files: %s', get_dataset_repr(), str(e)
+      )
 
   # If code exists and loading from files was skipped (e.g. files not found),
   # load from the source code.
