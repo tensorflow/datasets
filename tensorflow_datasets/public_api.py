@@ -16,6 +16,7 @@
 """Public API of tfds, without the registered dataset."""
 
 from tensorflow_datasets import core
+from tensorflow_datasets import testing
 from tensorflow_datasets import typing
 from tensorflow_datasets.core import beam_utils as beam
 from tensorflow_datasets.core import dataset_builders
@@ -56,9 +57,6 @@ from tensorflow_datasets.version import __version__
 
 deprecated = core.utils.docs.deprecated(deprecated)
 
-with lazy_imports():
-  from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
-del lazy_imports
 
 __all__ = [
     "as_dataframe",
