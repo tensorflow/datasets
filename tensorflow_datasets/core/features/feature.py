@@ -581,7 +581,9 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
       root_dir: `path/to/dir` containing the `features.json`
     """
     json_dict = json_format.MessageToDict(self.to_proto())
-    make_config_path(root_dir).write_text(json.dumps(json_dict, indent=4))
+    make_config_path(root_dir).write_text(
+        json.dumps(json_dict, indent=4, sort_keys=True)
+    )
     self.save_metadata(root_dir, feature_name=None)
 
   @classmethod
