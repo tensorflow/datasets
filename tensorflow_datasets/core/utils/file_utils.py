@@ -122,6 +122,7 @@ def get_default_data_dir(
   elif 'TFDS_DATA_DIR' in os.environ:
     return os.environ['TFDS_DATA_DIR']
   else:
+    del dataset
     return constants.DATA_DIR
 
 
