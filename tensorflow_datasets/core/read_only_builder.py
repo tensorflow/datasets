@@ -74,7 +74,9 @@ class ReadOnlyBuilder(
       # original source code.
       self.__module__ = info_proto.module_name
 
-    builder_config = dataset_builder.BuilderConfig.from_dataset_info(info_proto)
+    builder_config = dataset_builder.BuilderConfig.from_dataset_info(
+        info_proto,
+    )
     # __init__ will call _build_data_dir, _create_builder_config,
     # _pick_version to set the data_dir, config, and version
     super().__init__(
@@ -187,12 +189,10 @@ def builder_from_directories(
         filename_template=filename_template,
     )
 
-  merged_split_dict = splits_lib.SplitDict.merge_multiple(
-      [
-          get_split_dict(builder_dir, dataset_info_proto)
-          for builder_dir, dataset_info_proto in dataset_infos.items()
-      ]
-  )
+  merged_split_dict = splits_lib.SplitDict.merge_multiple([
+      get_split_dict(builder_dir, dataset_info_proto)
+      for builder_dir, dataset_info_proto in dataset_infos.items()
+  ])
 
   # We create the ReadOnlyBuilder for a random builder_dir and then update the
   # splits to capture the splits from all builder dirs.
