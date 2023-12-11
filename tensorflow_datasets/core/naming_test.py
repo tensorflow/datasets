@@ -542,7 +542,7 @@ def test_sharded_file_template_no_template_incomplete():
   template_without_split = naming.ShardedFileTemplate(
       data_dir=builder_dir, dataset_name='imagenet', filetype_suffix='riegeli'
   )
-  with pytest.raises(KeyError):
+  with pytest.raises(ValueError, match='Could not format template .+'):
     template_without_split.sharded_filepath(shard_index=12, num_shards=100)
 
 

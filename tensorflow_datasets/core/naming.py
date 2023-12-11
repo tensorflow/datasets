@@ -550,7 +550,12 @@ class ShardedFileTemplate:
       mappings[_VAR_SHARD_X_OF_Y] = (
           f'{mappings[_VAR_SHARD_INDEX]}-of-{mappings[_VAR_NUM_SHARDS]}'
       )
-    return self.template.format(**mappings)
+    try:
+      return self.template.format(**mappings)
+    except KeyError as e:
+      raise ValueError(
+          f'Could not format template {self.template} with mappings {mappings}!'
+      ) from e
 
   def sharded_filepath(
       self,
