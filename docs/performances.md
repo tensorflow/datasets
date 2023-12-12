@@ -187,3 +187,39 @@ If you're only using a subset of the features, it is possible to entirely skip
 some features. If your dataset has many unused features, not decoding them can
 significantly improve performances. See
 https://www.tensorflow.org/datasets/decode#only_decode_a_sub-set_of_the_features.
+
+## tf.data uses all my RAM!
+
+If you are limited in RAM, or if you are loading many datasets in parallel while
+using `tf.data`, here are a few options which can help:
+
+### Override buffer size
+
+```py
+builder.as_dataset(
+  read_config=tfds.ReadConfig(
+    ...
+    override_buffer_size=1024,  # Save quite a bit of RAM.
+  ),
+  ...
+)
+```
+
+This overrides the `buffer_size` passed to `TFRecordDataset` (or equivalent):
+https://www.tensorflow.org/api_docs/python/tf/data/TFRecordDataset#args.
+
+### Use tf.data.Dataset.with_options to stop magic behaviors
+
+https://www.tensorflow.org/api_docs/python/tf/data/Dataset#with_options
+
+```py
+options = tf.data.Options()
+
+# Stop magic stuff that eats up RAM:
+options.autotune.enabled = False
+options.experimental_distribute.auto_shard_policy = (
+  tf.data.experimental.AutoShardPolicy.OFF)
+options.experimental_optimization.inject_prefetch = False
+
+data = data.with_options(options)
+```
