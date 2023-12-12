@@ -71,6 +71,7 @@ def get_dummy_metadata():
   dummy_metadata = mlc.Metadata(
       name="DummyDataset",
       description="Dummy description.",
+      conforms_to="http://mlcommons.org/croissant/1.0",
       citation=(
           "@article{dummyarticle, title={title}, author={author}, year={2020}}"
       ),
