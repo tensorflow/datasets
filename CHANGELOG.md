@@ -10,6 +10,12 @@ and this project adheres to
 
 ### Added
 
+-   A new [CroissantBuilder](https://www.tensorflow.org/datasets/format_specific_dataset_builders#croissantbuilder)
+    which initializes a DatasetBuilder based on a [Croissant](https://github.com/mlcommons/croissant)
+    metadata file.
+-   New conversion options between different bounding boxes formats.
+-   Better support for `HuggingfaceDatasetBuilder`.
+
 ### Changed
 
 ### Deprecated
