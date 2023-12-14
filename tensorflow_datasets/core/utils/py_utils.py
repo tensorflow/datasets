@@ -38,7 +38,6 @@ from etils import epath
 from six.moves import urllib
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Tree = type_utils.Tree
 
@@ -341,12 +340,15 @@ def is_incomplete_file(path: epath.Path) -> bool:
 
 
 @contextlib.contextmanager
-def atomic_write(path, mode):
+def atomic_write(path: epath.PathLike, mode: str):
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = '%s%s_%s' % (path, constants.INCOMPLETE_SUFFIX, uuid.uuid4().hex)
-  with tf.io.gfile.GFile(tmp_path, mode) as file_:
+  tmp_path = epath.Path(
+      f'{os.fspath(path)}{constants.INCOMPLETE_SUFFIX}_{uuid.uuid4().hex}'
+  )
+  with tmp_path.open(mode=mode) as file_:
     yield file_
-  tf.io.gfile.rename(tmp_path, path, overwrite=True)
+  epath.Path(path).unlink(missing_ok=True)
+  tmp_path.rename(path)
 
 
 def reraise(
@@ -496,12 +498,12 @@ def list_info_files(dir_path: epath.PathLike) -> List[str]:
   """Returns name of info files within dir_path."""
   from tensorflow_datasets.core import file_adapters  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
 
-  path = os.fspath(dir_path)
+  path = epath.Path(dir_path)
   return [
-      fname
-      for fname in tf.io.gfile.listdir(path)
-      if not tf.io.gfile.isdir(os.path.join(path, fname))
-      and not file_adapters.is_example_file(fname)
+      file_path.name
+      for file_path in path.iterdir()
+      if not file_adapters.is_example_file(file_path.name)
+      and not file_path.is_dir()
   ]
 
 
