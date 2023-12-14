@@ -19,12 +19,15 @@ from collections.abc import Iterator
 import dataclasses
 from typing import Type
 
+from absl import logging
 from etils import epath
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import read_only_builder as read_only_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 
 
 @dataclasses.dataclass(frozen=True)
@@ -128,3 +131,72 @@ def convert_metadata(
 ) -> None:
   info.as_proto.file_format = out_file_format.value
   info.write_to_directory(out_path)
+
+
+def convert_dataset(
+    dataset_dir: str,
+    out_dir: str,
+    out_file_format: str | file_adapters.FileFormat,
+    use_beam: bool,
+    overwrite: bool = False,
+) -> None:
+  """Convert a dataset from one file format to another format."""
+  dataset_dir = epath.Path(dataset_dir)
+  out_path = epath.Path(out_dir)
+
+  if dataset_dir == out_path:
+    raise ValueError(
+        f'The dataset dir ({dataset_dir}) is the same as the specified out'
+        f' directory ({out_dir})'
+    )
+
+  if overwrite:
+    out_path.unlink(missing_ok=True)
+  out_path.mkdir(parents=True, exist_ok=False)
+
+  if isinstance(out_file_format, str):
+    out_file_format = file_adapters.file_format_from_suffix(out_file_format)
+  out_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[out_file_format]
+
+  builder = read_only_builder_lib.builder_from_directory(dataset_dir)
+  if out_file_format == builder.info.file_format:
+    raise ValueError(
+        f'The file format of the dataset ({builder.info.file_format}) is the'
+        f' same as the specified out file format! ({out_file_format})'
+    )
+  in_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[builder.info.file_format]
+
+  logging.info(
+      'Converting dataset in %s from %s to %s., storing in %s',
+      dataset_dir,
+      builder.info.file_format,
+      out_file_format,
+      out_path,
+  )
+  shard_instructions = get_all_shard_instructions(
+      info=builder.info,
+      out_file_format=out_file_format,
+      out_path=out_path,
+      in_file_adapter=in_file_adapter,
+      out_file_adapter=out_file_adapter,
+  )
+  if use_beam:
+    runner = None
+    with beam.Pipeline(runner=runner) as pipeline:
+      _ = (
+          pipeline
+          | beam.Create(shard_instructions)
+          | beam.Map(lambda shard_instruction: shard_instruction.convert())
+      )
+
+  else:
+    for shard_instruction in shard_instructions:
+      shard_instruction.convert()
+
+  logging.info('Converting metadata in %s.', dataset_dir)
+  convert_metadata(
+      info=builder.info, out_file_format=out_file_format, out_path=out_path
+  )
+  logging.info(
+      'Dataset in %s successfully converted to %s.', dataset_dir, out_path
+  )
