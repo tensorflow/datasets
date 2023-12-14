@@ -15,6 +15,8 @@ and this project adheres to
     metadata file.
 -   New conversion options between different bounding boxes formats.
 -   Better support for `HuggingfaceDatasetBuilder`.
+-   A [script](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/scripts/convert_format.py)
+    to convert a dataset from one format to another.
 
 ### Changed
 
