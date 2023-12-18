@@ -12,11 +12,6 @@
 # `caltech101`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Caltech-101 consists of pictures of objects belonging to 101 classes, plus one
@@ -42,9 +37,7 @@ boxes.
 
     *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
     *   `3.0.1`: Website URL update
-    *   **`3.0.2`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Download URL update
+    *   **`3.0.2`** (default): Download URL update
 
 *   **Download size**: `131.05 MiB`
 

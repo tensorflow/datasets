@@ -12,11 +12,6 @@
 # `cycle_gan`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Visualization**:
     <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=cycle_gan">
     Explore in Know Your Data
@@ -36,9 +31,8 @@ horses/zebras, apple/orange,...)
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Cityscapes dataset is removed due to license issue.
+    *   **`3.0.0`** (default): Cityscapes dataset is removed due to license
+        issue.
 
 *   **Feature structure**:
 

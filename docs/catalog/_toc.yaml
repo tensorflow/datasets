@@ -943,159 +943,108 @@ toc:
   title: Rlds
 - section:
   - path: /datasets/catalog/asu_table_top_converted_externally_to_rlds
-    status: nightly
     title: asu_table_top_converted_externally_to_rlds
   - path: /datasets/catalog/austin_buds_dataset_converted_externally_to_rlds
-    status: nightly
     title: austin_buds_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/austin_sailor_dataset_converted_externally_to_rlds
-    status: nightly
     title: austin_sailor_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/austin_sirius_dataset_converted_externally_to_rlds
-    status: nightly
     title: austin_sirius_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/bc_z
-    status: nightly
     title: bc_z
   - path: /datasets/catalog/berkeley_autolab_ur5
-    status: nightly
     title: berkeley_autolab_ur5
   - path: /datasets/catalog/berkeley_cable_routing
-    status: nightly
     title: berkeley_cable_routing
   - path: /datasets/catalog/berkeley_fanuc_manipulation
-    status: nightly
     title: berkeley_fanuc_manipulation
   - path: /datasets/catalog/berkeley_gnm_cory_hall
-    status: nightly
     title: berkeley_gnm_cory_hall
   - path: /datasets/catalog/berkeley_gnm_recon
-    status: nightly
     title: berkeley_gnm_recon
   - path: /datasets/catalog/berkeley_gnm_sac_son
-    status: nightly
     title: berkeley_gnm_sac_son
   - path: /datasets/catalog/berkeley_mvp_converted_externally_to_rlds
-    status: nightly
     title: berkeley_mvp_converted_externally_to_rlds
   - path: /datasets/catalog/berkeley_rpt_converted_externally_to_rlds
-    status: nightly
     title: berkeley_rpt_converted_externally_to_rlds
   - path: /datasets/catalog/bridge
-    status: nightly
     title: bridge
   - path: /datasets/catalog/cmu_franka_exploration_dataset_converted_externally_to_rlds
-    status: nightly
     title: cmu_franka_exploration_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/cmu_play_fusion
-    status: nightly
     title: cmu_play_fusion
   - path: /datasets/catalog/cmu_stretch
-    status: nightly
     title: cmu_stretch
   - path: /datasets/catalog/columbia_cairlab_pusht_real
-    status: nightly
     title: columbia_cairlab_pusht_real
   - path: /datasets/catalog/dlr_edan_shared_control_converted_externally_to_rlds
-    status: nightly
     title: dlr_edan_shared_control_converted_externally_to_rlds
   - path: /datasets/catalog/dlr_sara_grid_clamp_converted_externally_to_rlds
-    status: nightly
     title: dlr_sara_grid_clamp_converted_externally_to_rlds
   - path: /datasets/catalog/dlr_sara_pour_converted_externally_to_rlds
-    status: nightly
     title: dlr_sara_pour_converted_externally_to_rlds
   - path: /datasets/catalog/eth_agent_affordances
-    status: nightly
     title: eth_agent_affordances
   - path: /datasets/catalog/fractal20220817_data
-    status: nightly
     title: fractal20220817_data
   - path: /datasets/catalog/iamlab_cmu_pickup_insert_converted_externally_to_rlds
-    status: nightly
     title: iamlab_cmu_pickup_insert_converted_externally_to_rlds
   - path: /datasets/catalog/imperialcollege_sawyer_wrist_cam
-    status: nightly
     title: imperialcollege_sawyer_wrist_cam
   - path: /datasets/catalog/jaco_play
-    status: nightly
     title: jaco_play
   - path: /datasets/catalog/kaist_nonprehensile_converted_externally_to_rlds
-    status: nightly
     title: kaist_nonprehensile_converted_externally_to_rlds
   - path: /datasets/catalog/kuka
-    status: nightly
     title: kuka
   - path: /datasets/catalog/maniskill_dataset_converted_externally_to_rlds
-    status: nightly
     title: maniskill_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/mt_opt
     title: mt_opt
   - path: /datasets/catalog/nyu_door_opening_surprising_effectiveness
-    status: nightly
     title: nyu_door_opening_surprising_effectiveness
   - path: /datasets/catalog/nyu_franka_play_dataset_converted_externally_to_rlds
-    status: nightly
     title: nyu_franka_play_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/nyu_rot_dataset_converted_externally_to_rlds
-    status: nightly
     title: nyu_rot_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/roboturk
-    status: nightly
     title: roboturk
   - path: /datasets/catalog/stanford_hydra_dataset_converted_externally_to_rlds
-    status: nightly
     title: stanford_hydra_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/stanford_kuka_multimodal_dataset_converted_externally_to_rlds
-    status: nightly
     title: stanford_kuka_multimodal_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/stanford_mask_vit_converted_externally_to_rlds
-    status: nightly
     title: stanford_mask_vit_converted_externally_to_rlds
   - path: /datasets/catalog/stanford_robocook_converted_externally_to_rlds
-    status: nightly
     title: stanford_robocook_converted_externally_to_rlds
   - path: /datasets/catalog/taco_play
-    status: nightly
     title: taco_play
   - path: /datasets/catalog/tokyo_u_lsmo_converted_externally_to_rlds
-    status: nightly
     title: tokyo_u_lsmo_converted_externally_to_rlds
   - path: /datasets/catalog/toto
-    status: nightly
     title: toto
   - path: /datasets/catalog/ucsd_kitchen_dataset_converted_externally_to_rlds
-    status: nightly
     title: ucsd_kitchen_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/ucsd_pick_and_place_dataset_converted_externally_to_rlds
-    status: nightly
     title: ucsd_pick_and_place_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/uiuc_d3field
-    status: nightly
     title: uiuc_d3field
   - path: /datasets/catalog/usc_cloth_sim_converted_externally_to_rlds
-    status: nightly
     title: usc_cloth_sim_converted_externally_to_rlds
   - path: /datasets/catalog/utaustin_mutex
-    status: nightly
     title: utaustin_mutex
   - path: /datasets/catalog/utokyo_pr2_opening_fridge_converted_externally_to_rlds
-    status: nightly
     title: utokyo_pr2_opening_fridge_converted_externally_to_rlds
   - path: /datasets/catalog/utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds
-    status: nightly
     title: utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds
   - path: /datasets/catalog/utokyo_saytap_converted_externally_to_rlds
-    status: nightly
     title: utokyo_saytap_converted_externally_to_rlds
   - path: /datasets/catalog/utokyo_xarm_bimanual_converted_externally_to_rlds
-    status: nightly
     title: utokyo_xarm_bimanual_converted_externally_to_rlds
   - path: /datasets/catalog/utokyo_xarm_pick_and_place_converted_externally_to_rlds
-    status: nightly
     title: utokyo_xarm_pick_and_place_converted_externally_to_rlds
   - path: /datasets/catalog/viola
-    status: nightly
     title: viola
   title: Robotics
 - section:

@@ -12,11 +12,6 @@
 # `cats_vs_dogs`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 A large set of images of cats and dogs. There are 1738 corrupted images that are
@@ -37,10 +32,8 @@ dropped.
 *   **Versions**:
 
     *   `4.0.0`: New split API (https://tensorflow.org/datasets/splits)
-    *   **`4.0.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Recoding images in generator to fix corrupt JPEG data warnings
-        (https://github.com/tensorflow/datasets/issues/2188)
+    *   **`4.0.1`** (default): Recoding images in generator to fix corrupt JPEG
+        data warnings (https://github.com/tensorflow/datasets/issues/2188)
 
 *   **Download size**: `786.67 MiB`
 

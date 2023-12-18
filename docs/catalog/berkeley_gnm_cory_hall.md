@@ -12,10 +12,6 @@
 # `berkeley_gnm_cory_hall`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 hallway navigation
