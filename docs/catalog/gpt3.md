@@ -12,11 +12,6 @@
 # `gpt3`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Synthetic datasets for word scramble and arithmetic tasks described in the GPT3
@@ -30,9 +25,7 @@ paper.
 
 *   **Versions**:
 
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        New commit for the files.
+    *   **`1.1.0`** (default): New commit for the files.
 
 *   **Download size**: `2.16 MiB`
 

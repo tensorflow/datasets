@@ -597,108 +597,57 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Robotics`
 
 *   [`asu_table_top_converted_externally_to_rlds`](asu_table_top_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`austin_buds_dataset_converted_externally_to_rlds`](austin_buds_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`austin_sailor_dataset_converted_externally_to_rlds`](austin_sailor_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`austin_sirius_dataset_converted_externally_to_rlds`](austin_sirius_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`bc_z`](bc_z.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`berkeley_autolab_ur5`](berkeley_autolab_ur5.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`berkeley_cable_routing`](berkeley_cable_routing.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`berkeley_fanuc_manipulation`](berkeley_fanuc_manipulation.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`berkeley_gnm_cory_hall`](berkeley_gnm_cory_hall.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`berkeley_gnm_recon`](berkeley_gnm_recon.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`berkeley_gnm_sac_son`](berkeley_gnm_sac_son.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`berkeley_mvp_converted_externally_to_rlds`](berkeley_mvp_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`berkeley_rpt_converted_externally_to_rlds`](berkeley_rpt_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`bridge`](bridge.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cmu_franka_exploration_dataset_converted_externally_to_rlds`](cmu_franka_exploration_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cmu_play_fusion`](cmu_play_fusion.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cmu_stretch`](cmu_stretch.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`columbia_cairlab_pusht_real`](columbia_cairlab_pusht_real.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dlr_edan_shared_control_converted_externally_to_rlds`](dlr_edan_shared_control_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dlr_sara_grid_clamp_converted_externally_to_rlds`](dlr_sara_grid_clamp_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dlr_sara_pour_converted_externally_to_rlds`](dlr_sara_pour_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`eth_agent_affordances`](eth_agent_affordances.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`fractal20220817_data`](fractal20220817_data.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`iamlab_cmu_pickup_insert_converted_externally_to_rlds`](iamlab_cmu_pickup_insert_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imperialcollege_sawyer_wrist_cam`](imperialcollege_sawyer_wrist_cam.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`jaco_play`](jaco_play.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`kaist_nonprehensile_converted_externally_to_rlds`](kaist_nonprehensile_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`kuka`](kuka.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`maniskill_dataset_converted_externally_to_rlds`](maniskill_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`mt_opt`](mt_opt.md)
 *   [`nyu_door_opening_surprising_effectiveness`](nyu_door_opening_surprising_effectiveness.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`nyu_franka_play_dataset_converted_externally_to_rlds`](nyu_franka_play_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`nyu_rot_dataset_converted_externally_to_rlds`](nyu_rot_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`roboturk`](roboturk.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`stanford_hydra_dataset_converted_externally_to_rlds`](stanford_hydra_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`stanford_kuka_multimodal_dataset_converted_externally_to_rlds`](stanford_kuka_multimodal_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`stanford_mask_vit_converted_externally_to_rlds`](stanford_mask_vit_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`stanford_robocook_converted_externally_to_rlds`](stanford_robocook_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`taco_play`](taco_play.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`tokyo_u_lsmo_converted_externally_to_rlds`](tokyo_u_lsmo_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`toto`](toto.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`ucsd_kitchen_dataset_converted_externally_to_rlds`](ucsd_kitchen_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`ucsd_pick_and_place_dataset_converted_externally_to_rlds`](ucsd_pick_and_place_dataset_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`uiuc_d3field`](uiuc_d3field.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`usc_cloth_sim_converted_externally_to_rlds`](usc_cloth_sim_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`utaustin_mutex`](utaustin_mutex.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`utokyo_pr2_opening_fridge_converted_externally_to_rlds`](utokyo_pr2_opening_fridge_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds`](utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`utokyo_saytap_converted_externally_to_rlds`](utokyo_saytap_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`utokyo_xarm_bimanual_converted_externally_to_rlds`](utokyo_xarm_bimanual_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`utokyo_xarm_pick_and_place_converted_externally_to_rlds`](utokyo_xarm_pick_and_place_converted_externally_to_rlds.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`viola`](viola.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Scene classification`
 

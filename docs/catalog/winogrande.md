@@ -12,11 +12,6 @@
 # `winogrande`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The WinoGrande, a large-scale dataset of 44k problems, inspired by the original
@@ -37,9 +32,8 @@ hardness of the dataset.
 
 *   **Versions**:
 
-    *   **`1.2.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Updated source file with more data and new checksums.
+    *   **`1.2.0`** (default): Updated source file with more data and new
+        checksums.
 
 *   **Download size**: `3.24 MiB`
 
