@@ -10,6 +10,20 @@ and this project adheres to
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [4.9.4] - 2023-12-16
+
+### Added
+
 -   A new [CroissantBuilder](https://www.tensorflow.org/datasets/format_specific_dataset_builders#croissantbuilder)
     which initializes a DatasetBuilder based on a [Croissant](https://github.com/mlcommons/croissant)
     metadata file.
@@ -22,7 +36,7 @@ and this project adheres to
 
 ### Deprecated
 
--   Python 3.9 support.
+-   Python 3.9 support. TFDS now uses Python 3.10
 
 ### Removed
 
