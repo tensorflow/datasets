@@ -41,6 +41,14 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
+_GCS_ACCESS_FNS = {
+    'original_info': utils.gcs_utils.gcs_dataset_info_files,
+    'dummy_info': lambda _: [],
+    'original_datasets': utils.gcs_utils.is_dataset_on_gcs,
+    'dummy_datasets': lambda _: False,
+}
+
+
 @contextlib.contextmanager
 def tmp_dir(dirname=None):
   """Context manager for a temporary directory."""
@@ -421,6 +429,32 @@ def run_in_graph_and_eager_modes(func=None, config=None, use_gpu=True):
     return decorator(func)
 
   return decorator
+
+
+@contextlib.contextmanager
+def disable_gcs_access() -> Iterator[None]:
+  """Disable GCS access."""
+  with mock.patch(
+      'tensorflow_datasets.core.utils.gcs_utils.gcs_dataset_info_files',
+      _GCS_ACCESS_FNS['dummy_info'],
+  ), mock.patch(
+      'tensorflow_datasets.core.utils.gcs_utils.is_dataset_on_gcs',
+      _GCS_ACCESS_FNS['dummy_datasets'],
+  ):
+    yield
+
+
+@contextlib.contextmanager
+def enable_gcs_access() -> Iterator[None]:
+  """Enable GCS access."""
+  with mock.patch(
+      'tensorflow_datasets.core.utils.gcs_utils.gcs_dataset_info_files',
+      _GCS_ACCESS_FNS['original_info'],
+  ), mock.patch(
+      'tensorflow_datasets.core.utils.gcs_utils.is_dataset_on_gcs',
+      _GCS_ACCESS_FNS['original_datasets'],
+  ):
+    yield
 
 
 class DummyDatasetSharedGenerator(
