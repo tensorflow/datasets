@@ -18,9 +18,7 @@
 import pathlib
 
 import pytest
-
 import tensorflow as tf
-
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 
@@ -211,3 +209,20 @@ def test_mock_fs_gcs():
     assert tf.io.gfile.glob(f'{bs}/bucket/*/file.txt') == [
         f'{bs}/bucket/dir/file.txt',
     ]
+
+
+def test_gcs_access():
+  gcs_utils = test_utils.utils.gcs_utils
+
+  def is_lambda(fn):
+    """Returns True if the function is a lambda."""
+    return callable(fn) and fn.__name__ == (lambda: None).__name__
+
+  # Test that `gcs_utils.gcs_dataset_info_files` is correctly patched
+  assert not is_lambda(gcs_utils.gcs_dataset_info_files)
+  with test_utils.disable_gcs_access():
+    assert is_lambda(gcs_utils.gcs_dataset_info_files)
+    with test_utils.enable_gcs_access():
+      assert not is_lambda(gcs_utils.gcs_dataset_info_files)
+    assert is_lambda(gcs_utils.gcs_dataset_info_files)
+  assert not is_lambda(gcs_utils.gcs_dataset_info_files)

@@ -283,7 +283,7 @@ class DatasetInfoTest(testing.TestCase):
   def test_reading_from_gcs_bucket(self):
     # The base TestCase prevents GCS access, so we explicitly ask it to restore
     # access here.
-    with self.gcs_access():
+    with testing.enable_gcs_access():
       mnist_builder = mnist.MNIST(
           data_dir=tempfile.mkdtemp(dir=self.get_temp_dir())
       )
