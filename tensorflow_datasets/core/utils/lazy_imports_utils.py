@@ -115,9 +115,9 @@ def lazy_imports(
       was raised after the error; 2) module_name (str): the name of the imported
       module.
     success_callback: a callback to trigger when an import succeeds. The
-      callback is passed kwargs containing: 1) import_time_ms (float): the
-      import time (in milliseconds); 2) module (Any): the imported module; 3)
-      module_name (str): the name of the imported module.
+      callback is passed kwargs containing: 1) `import_time_ms` (float) for the
+      import time (in milliseconds); 2) `module` (Any) for the imported module;
+      3) `module_name` (str) for the name of the imported module.
 
   Yields:
     None
@@ -230,21 +230,23 @@ def mlcroissant_error_callback(**kwargs):
   print("***************************************************************\n\n")
 
 
+# pylint: disable=g-import-not-at-top,unused-import
+
 with lazy_imports(error_callback=mlcroissant_error_callback):
-  import mlcroissant  # pylint: disable=g-import-not-at-top,unused-import  # pytype: disable=import-error
+  import mlcroissant  # pytype: disable=import-error
 
 
 with lazy_imports():
-  import apache_beam  # pylint: disable=g-import-not-at-top,unused-import
-  import pandas  # pylint: disable=g-import-not-at-top,unused-import
+  import apache_beam
+  import pandas
 
 
 with lazy_imports(
     error_callback=tf_error_callback, success_callback=ensure_tf_version
 ):
-  import tensorflow  # pylint: disable=g-import-not-at-top,unused-import  # pytype: disable=import-error
+  import tensorflow  # pytype: disable=import-error
 
 
 with lazy_imports(error_callback=array_record_error_callback):
-  from array_record.python import array_record_data_source  # pylint: disable=g-import-not-at-top,unused-import
-  from array_record.python import array_record_module  # pylint: disable=g-import-not-at-top,unused-import
+  from array_record.python import array_record_data_source
+  from array_record.python import array_record_module
