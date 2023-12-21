@@ -54,6 +54,7 @@ from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 from google.protobuf import json_format
@@ -1197,7 +1198,6 @@ class BeamMetadataDict(MetadataDict):
       key: hashable type, the key for the item.
       item: `beam.pvalue.PValue` or other, the metadata value.
     """
-    beam = lazy_imports_lib.lazy_imports.apache_beam
     if isinstance(item, beam.PTransform):
       # Implementing Beam support might be possible but would
       # require very careful implementation to avoid computing the
@@ -1237,7 +1237,6 @@ class BeamMetadataDict(MetadataDict):
 
   def save_metadata(self, data_dir):
     """Save the metadata inside the beam job."""
-    beam = lazy_imports_lib.lazy_imports.apache_beam
     for key, item in self.items():
       if isinstance(item, beam.pvalue.PValue):
         with self._temp_filepath(key).open(mode="r") as f:

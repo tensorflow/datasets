@@ -22,6 +22,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 
 __all__ = [
     'inc_counter',
@@ -74,8 +75,6 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
   Returns:
     The PCollection containing the TFDS examples.
   """
-  beam = lazy_imports_lib.lazy_imports.apache_beam
-
   if not builder.info.splits.total_num_examples:
     raise ValueError(
         f'No examples found in {builder.name!r} in data dir {builder.data_dir}.'
@@ -138,7 +137,6 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
 
 @functools.lru_cache(None)
 def _get_metrics_counter(namespace: str, name: str):
-  beam = lazy_imports_lib.lazy_imports.apache_beam
   return beam.metrics.Metrics.counter(namespace, name)
 
 

@@ -35,6 +35,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 
 
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
@@ -371,12 +372,10 @@ class BeamWriter(object):
 
   @functools.lru_cache()
   def _get_counter(self, name: str, namespace: str = "BeamWriter"):
-    beam = lazy_imports_lib.lazy_imports.apache_beam
     return beam.metrics.Metrics.counter(namespace, name)
 
   @functools.lru_cache()
   def _get_distribution(self, name: str, namespace: str = "BeamWriter"):
-    beam = lazy_imports_lib.lazy_imports.apache_beam
     return beam.metrics.Metrics.distribution(namespace, name)
 
   def inc_counter(self, name: str, value: int = 1) -> None:
@@ -507,7 +506,6 @@ class BeamWriter(object):
 
   def write_from_pcollection(self, examples_pcollection):
     """Returns PTransform to write (key, example) PCollection to tfrecords."""
-    beam = lazy_imports_lib.lazy_imports.apache_beam
     serialized_examples = (
         examples_pcollection
         | "Serialize" >> beam.Map(self._serialize_example)
