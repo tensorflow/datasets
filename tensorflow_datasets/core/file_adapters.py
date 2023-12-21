@@ -21,6 +21,7 @@ import abc
 import enum
 import os
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
+import uuid
 
 from etils import epath
 from tensorflow_datasets.core.utils import type_utils
