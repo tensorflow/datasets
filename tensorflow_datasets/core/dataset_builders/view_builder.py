@@ -26,7 +26,6 @@ from typing import Callable, Dict, Iterator, List, Optional, Union
 from tensorflow_datasets.core import beam_utils
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import load as load_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
@@ -35,6 +34,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import transform as transform_lib
 from tensorflow_datasets.core.download import download_manager
 from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Key = transform_lib.Key
@@ -137,7 +137,6 @@ def _transform_per_example_beam(
     transformations: List[transform_lib.ExampleTransformFn],
     workers_per_shard: int = 1,
 ) -> split_builder_lib.SplitGenerator:
-  beam = lazy_imports_lib.lazy_imports.apache_beam
   split = split_info.name
   read_config = read_config_lib.ReadConfig(add_tfds_id=True)
   return (

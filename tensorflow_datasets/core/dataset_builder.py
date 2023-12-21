@@ -25,7 +25,6 @@ import inspect
 import json
 import os
 import sys
-import typing
 from typing import Any, ClassVar, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
 
 from absl import logging
@@ -53,13 +52,9 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import termcolor
-
-
-if typing.TYPE_CHECKING:
-  import apache_beam as beam
-  from apache_beam.runners import runner
 
 ListOrTreeOrElem = type_utils.ListOrTreeOrElem
 Tree = type_utils.Tree
@@ -1499,7 +1494,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     raise NotImplementedError()
 
   def _process_pipeline_result(
-      self, pipeline_result: "runner.PipelineResult"
+      self, pipeline_result: beam.runners.runner.PipelineResult
   ) -> None:
     """Processes the result of the beam pipeline if we used one.
 
@@ -1653,7 +1648,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       file_pattern: str,
       /,
       **kwargs,
-  ) -> "beam.PTransform":
+  ) -> beam.PTransform:
     """Returns a PTransform reading the TFRecords and records it in the dataset lineage.
 
     This function records the lineage in the DatasetInfo and then invokes
@@ -1669,7 +1664,6 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       a Beam PTransform that reads the given TFRecord files.
     """
     self.info.add_file_data_source_access(file_pattern)
-    beam = lazy_imports_lib.lazy_imports.apache_beam
     return beam.io.ReadFromTFRecord(
         file_pattern=file_pattern,
         **kwargs,

@@ -21,7 +21,6 @@ import dataclasses
 import functools
 import itertools
 import sys
-import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Union
 
 from absl import logging
@@ -30,15 +29,12 @@ import psutil
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import shard_utils
-
-if typing.TYPE_CHECKING:
-  import apache_beam as beam  # pytype: disable=import-error
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 
 # Example key used for shuffling
 Key = Union[str, int]
@@ -220,13 +216,10 @@ class SplitBuilder:
           'contextmanager.'
       )
 
-    beam = lazy_imports_lib.lazy_imports.apache_beam
-
     # On Colab, stderr isn't displayed by default, so using `print`.
     print_fn = print if utils.is_notebook() else logging.warning
     if not self._beam_runner and not self._beam_options:
-      msg = utils.dedent(
-          """
+      msg = utils.dedent("""
           **************************** WARNING *********************************
           Warning: The dataset you're trying to generate is using Apache Beam,
           yet no `beam_runner` nor `beam_options` was explicitly provided.
@@ -237,8 +230,7 @@ class SplitBuilder:
 
           https://www.tensorflow.org/datasets/beam_datasets#generating_a_beam_dataset
           **********************************************************************
-          """
-      )
+          """)
       print_fn(msg)
 
       total_memory = psutil.virtual_memory().total
@@ -293,7 +285,6 @@ class SplitBuilder:
       return split_generators
     if isinstance(split_generators, list):  # Legacy structure
       if is_beam:  # Legacy `tfds.core.BeamBasedBuilder`
-        beam = lazy_imports_lib.lazy_imports.apache_beam
         generator_fn = beam.ptransform_fn(generator_fn)
         return {
             s.name: generator_fn(**s.gen_kwargs)  # Create the `beam.PTransform`
@@ -345,11 +336,6 @@ class SplitBuilder:
           'Expected generator or apache_beam object. Got: '
           f'{type(generator)}'
       )
-      try:
-        import apache_beam as beam  # pylint: disable=g-import-not-at-top
-      except ImportError:
-        # Beam can't be imported, what was the object returned by the user ?
-        raise unknown_generator_type  # pylint: disable=raise-missing-from
       if isinstance(generator, beam.PTransform):
         # Generate the beam.PCollection
         pcollection = self.beam_pipeline | split_name >> generator
@@ -435,8 +421,6 @@ class SplitBuilder:
   ) -> _SplitInfoFuture:
     """Split generator for `beam.PCollection`."""
     # TODO(tfds): Should try to add support to `max_examples_per_split`
-    beam = lazy_imports_lib.lazy_imports.apache_beam
-
     beam_writer = writer_lib.BeamWriter(
         serializer=example_serializer.ExampleSerializer(
             self._features.get_serialized_info()
