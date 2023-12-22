@@ -58,12 +58,7 @@ def test_format_suffix():
   )
 
 
-@pytest.mark.parametrize(
-    'file_format',
-    [
-        file_adapters.FileFormat.TFRECORD,
-    ],
-)
+@pytest.mark.parametrize('file_format', file_adapters.FileFormat)
 @pytest.mark.parametrize(
     'builder_cls',
     [
