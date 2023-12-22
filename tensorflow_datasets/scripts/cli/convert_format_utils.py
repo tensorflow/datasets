@@ -21,11 +21,13 @@ from typing import Type
 
 from absl import logging
 from etils import epath
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder as read_only_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 
@@ -173,30 +175,40 @@ def convert_dataset(
       out_file_format,
       out_path,
   )
-  shard_instructions = get_all_shard_instructions(
-      info=builder.info,
-      out_file_format=out_file_format,
-      out_path=out_path,
-      in_file_adapter=in_file_adapter,
-      out_file_adapter=out_file_adapter,
-  )
-  if use_beam:
-    runner = None
-    with beam.Pipeline(runner=runner) as pipeline:
-      _ = (
-          pipeline
-          | beam.Create(shard_instructions)
-          | beam.Map(lambda shard_instruction: shard_instruction.convert())
-      )
+  with py_utils.incomplete_dir(out_path) as tmp_dir:
+    tmp_dir = epath.Path(tmp_dir)
+    shard_instructions = get_all_shard_instructions(
+        info=builder.info,
+        out_file_format=out_file_format,
+        out_path=tmp_dir,
+        in_file_adapter=in_file_adapter,
+        out_file_adapter=out_file_adapter,
+    )
+    if use_beam:
+      runner = None
+      with beam.Pipeline(runner=runner) as pipeline:
+        _ = (
+            pipeline
+            | beam.Create(shard_instructions)
+            | beam.Map(lambda shard_instruction: shard_instruction.convert())
+        )
 
-  else:
-    for shard_instruction in shard_instructions:
-      shard_instruction.convert()
+    else:
+      for shard_instruction in shard_instructions:
+        shard_instruction.convert()
 
-  logging.info('Converting metadata in %s.', dataset_dir)
-  convert_metadata(
-      info=builder.info, out_file_format=out_file_format, out_path=out_path
-  )
+    logging.info('Converting metadata in %s.', dataset_dir)
+    convert_metadata(
+        info=builder.info, out_file_format=out_file_format, out_path=tmp_dir
+    )
+
+    logging.info('Removing incomplete files in %s.', dataset_dir)
+    num_incomplete_files = 0
+    for incomplete_file in tmp_dir.glob(f'*{constants.INCOMPLETE_SUFFIX}.*'):
+      incomplete_file.unlink()
+      num_incomplete_files += 1
+    logging.info('Removed %d incomplete files.', num_incomplete_files)
+
   logging.info(
       'Dataset in %s successfully converted to %s.', dataset_dir, out_path
   )
