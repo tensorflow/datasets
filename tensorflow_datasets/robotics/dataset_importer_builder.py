@@ -18,9 +18,9 @@
 from __future__ import annotations
 
 import abc
-import os
 from typing import Any
 
+from etils import epath
 from tensorflow_datasets.core import beam_utils
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
@@ -44,7 +44,7 @@ class DatasetImporterBuilder(
   RELEASE_NOTES = {
       '0.1.0': 'Initial release.',
   }
-  _GCS_BUCKET = ''
+  _GCS_BUCKET = 'gs://gresearch/robotics/'
   KEYS_TO_STRIP = [
       'episode_id',
       'legacy_datasets',
@@ -71,9 +71,9 @@ class DatasetImporterBuilder(
   def get_relative_dataset_location(self):
     pass
 
-  def get_dataset_location(self):
-    return os.path.join(
-        str(self._GCS_BUCKET), self.get_relative_dataset_location()
+  def get_dataset_location(self) -> epath.Path:
+    return (
+        epath.Path(str(self._GCS_BUCKET)) / self.get_relative_dataset_location()
     )
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -99,8 +99,7 @@ class DatasetImporterBuilder(
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    ds_location = self.get_dataset_location()
-    ds_builder = tfds.builder_from_directory(ds_location)
+    ds_builder = self.get_ds_builder()
 
     splits = {}
     for split, split_info in ds_builder.info.splits.items():
