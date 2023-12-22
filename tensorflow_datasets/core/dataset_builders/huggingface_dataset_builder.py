@@ -86,12 +86,10 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
   """Converts Huggingface feature spec to TFDS feature spec."""
   hf_datasets = lazy_imports_lib.lazy_imports.datasets
   if isinstance(hf_features, (hf_datasets.Features, dict)):
-    return feature_lib.FeaturesDict(
-        {
-            name: extract_features(hf_inner_feature)
-            for name, hf_inner_feature in hf_features.items()
-        }
-    )
+    return feature_lib.FeaturesDict({
+        name: extract_features(hf_inner_feature)
+        for name, hf_inner_feature in hf_features.items()
+    })
   if isinstance(hf_features, hf_datasets.Sequence):
     return feature_lib.Sequence(feature=extract_features(hf_features.feature))
   if isinstance(hf_features, list):
@@ -349,9 +347,16 @@ class HuggingfaceDatasetBuilder(
     self.config_kwargs = config_kwargs
     tfds_config = convert_config_name(hf_config)
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
-    self._hf_builder = hf_datasets.load_dataset_builder(
-        self._hf_repo_id, self._hf_config, **self.config_kwargs
-    )
+    try:
+      self._hf_builder = hf_datasets.load_dataset_builder(
+          self._hf_repo_id, self._hf_config, **self.config_kwargs
+      )
+    except Exception as e:
+      raise RuntimeError(
+          "Failed to load Huggingface dataset builder with"
+          f" hf_repo_id={self._hf_repo_id}, hf_config={self._hf_config},"
+          f" config_kwargs={self.config_kwargs}"
+      ) from e
     self._hf_info = self._hf_builder.info
     version = str(self._hf_info.version or self._hf_builder.VERSION or "1.0.0")
     self.VERSION = utils.Version(version)  # pylint: disable=invalid-name
