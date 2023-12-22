@@ -758,11 +758,15 @@ class DatasetBuilder(registered.RegisteredDataset):
     def build_single_data_source(
         split: str,
     ) -> Sequence[Any]:
-      return array_record.ArrayRecordDataSource(
-          self.info,
-          split=split,
-          decoders=decoders,
-      )
+      file_format = self.info.file_format
+      if file_format == file_adapters.FileFormat.ARRAY_RECORD:
+        return array_record.ArrayRecordDataSource(
+            self.info,
+            split=split,
+            decoders=decoders,
+        )
+      else:
+        raise NotImplementedError(f"{self.info.file_format} is not supported.")
 
     all_ds = tree_utils.map_structure(build_single_data_source, split)
     return all_ds
