@@ -71,6 +71,7 @@ REQUIRED_PKGS = [
     'promise',
     'protobuf>=3.20',
     'psutil',
+    'pyarrow',
     'requests>=2.19.0',
     'tensorflow-metadata',
     'termcolor',

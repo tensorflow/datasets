@@ -18,17 +18,21 @@
 from __future__ import annotations
 
 import abc
+from collections.abc import Iterator
 import enum
+import itertools
 import os
-from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
+from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, TypeVar, Union
 import uuid
 
 from etils import epath
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
+from tensorflow_datasets.core.utils.lazy_imports_utils import pyarrow as pa
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 ExamplePositions = List[Any]
+T = TypeVar('T')
 
 
 class FileFormat(enum.Enum):
@@ -40,6 +44,7 @@ class FileFormat(enum.Enum):
   TFRECORD = 'tfrecord'
   RIEGELI = 'riegeli'
   ARRAY_RECORD = 'array_record'
+  PARQUET = 'parquet'
 
   @property
   def file_suffix(self) -> str:
@@ -214,6 +219,81 @@ class ArrayRecordFileAdapter(FileAdapter):
     writer.close()
 
 
+class ParquetFileAdapter(FileAdapter):
+  """File adapter for the [Parquet](https://parquet.apache.org) file format.
+
+  This FileAdapter requires `pyarrow` as a dependency and builds upon
+  `pyarrow.parquet`.
+
+  At the moment, the Parquet adapter doesn't leverage Parquet's columnar
+  features and behaves like any other adapter. Instead of saving the features in
+  the columns, we use one single `data` column where we store the serialized
+  tf.Example proto.
+
+  TODO(b/317277518): Let Parquet handle the serialization/deserialization.
+  """
+
+  FILE_SUFFIX = 'parquet'
+  _PARQUET_FIELD = 'data'
+  _BATCH_SIZE = 100
+
+  @classmethod
+  def _schema(cls) -> pa.Schema:
+    """Returns the Parquet schema as a one-column `data` binary field."""
+    return pa.schema([pa.field(cls._PARQUET_FIELD, pa.binary())])
+
+  @classmethod
+  def make_tf_data(
+      cls,
+      filename: epath.PathLike,
+      buffer_size: int | None = None,
+  ) -> tf.data.Dataset:
+    """Reads a Parquet file as a tf.data.Dataset.
+
+    Args:
+      filename: Path to the Parquet file.
+      buffer_size: Unused buffer size.
+
+    Returns:
+      A tf.data.Dataset with the serialized examples.
+    """
+    del buffer_size  # unused
+    import pyarrow.parquet as pq  # pylint: disable=g-import-not-at-top
+
+    def get_data(py_filename: bytes) -> Iterator[tf.Tensor]:
+      table = pq.read_table(py_filename.decode(), schema=cls._schema())
+      for batch in table.to_batches():
+        for example in batch.to_pylist():
+          yield tf.constant(example[cls._PARQUET_FIELD])
+
+    return tf.data.Dataset.from_generator(
+        get_data,
+        args=(filename,),
+        output_signature=tf.TensorSpec(shape=(), dtype=tf.string),
+    )
+
+  @classmethod
+  def write_examples(
+      cls,
+      path: epath.PathLike,
+      iterator: Iterable[type_utils.KeySerializedExample],
+  ) -> None:
+    """Writes the serialized tf.Example proto in a binary field named `data`.
+
+    Args:
+      path: Path to the Parquet file.
+      iterator: Iterable of serialized examples.
+    """
+    import pyarrow.parquet as pq  # pylint: disable=g-import-not-at-top
+
+    with pq.ParquetWriter(path, schema=cls._schema()) as writer:
+      for examples in _batched(iterator, cls._BATCH_SIZE):
+        examples = [{cls._PARQUET_FIELD: example} for _, example in examples]
+        batch = pa.RecordBatch.from_pylist(examples)
+        writer.write_batch(batch)
+    return None
+
+
 def _to_bytes(key: type_utils.Key) -> bytes:
   """Convert the key to bytes."""
   if isinstance(key, int):
@@ -231,6 +311,7 @@ ADAPTER_FOR_FORMAT: Dict[FileFormat, Type[FileAdapter]] = {
     FileFormat.RIEGELI: RiegeliFileAdapter,
     FileFormat.TFRECORD: TfRecordFileAdapter,
     FileFormat.ARRAY_RECORD: ArrayRecordFileAdapter,
+    FileFormat.PARQUET: ParquetFileAdapter,
 }
 
 _FILE_SUFFIX_TO_FORMAT = {
@@ -255,3 +336,26 @@ def is_example_file(filename: str) -> bool:
       f'.{adapter.FILE_SUFFIX}' in filename
       for adapter in ADAPTER_FOR_FORMAT.values()
   )
+
+
+def _batched(iterator: Iterator[T] | Iterable[T], n: int) -> Iterator[List[T]]:
+  """Batches the result of an iterator into lists of length n.
+
+  This function is built-in the standard library from 3.12 (source:
+  https://docs.python.org/3/library/itertools.html#itertools.batched). However,
+  TFDS supports older versions of Python.
+
+  Args:
+    iterator: The iterator to batch.
+    n: The maximal length of each batch.
+
+  Yields:
+    The next list of n elements.
+  """
+  i = 0
+  while True:
+    batch = list(itertools.islice(iterator, i, i + n))
+    if not batch:
+      return
+    yield batch
+    i += n

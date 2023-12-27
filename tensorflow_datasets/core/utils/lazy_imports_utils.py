@@ -239,6 +239,7 @@ with lazy_imports(error_callback=mlcroissant_error_callback):
 with lazy_imports():
   import apache_beam
   import pandas
+  import pyarrow
 
 
 with lazy_imports(
