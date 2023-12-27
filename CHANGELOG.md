@@ -10,6 +10,15 @@ and this project adheres to
 
 ### Added
 
+-   Support to download and prepare datasets using the
+    [Parquet](https://parquet.apache.org) data format.
+    ```python
+    builder = tfds.builder('fashion_mnist', file_format='parquet')
+    builder.download_and_prepare()
+    ds = builder.as_dataset(split='train')
+    print(next(iter(ds)))
+    ```
+
 ### Changed
 
 ### Deprecated

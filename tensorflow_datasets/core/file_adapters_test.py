@@ -24,6 +24,17 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import file_adapters
 
 
+def test_batched():
+  assert list(file_adapters._batched(range(10), 5)) == [
+      [0, 1, 2, 3, 4],
+      [5, 6, 7, 8, 9],
+  ]
+  assert list(file_adapters._batched(range(10), 100)) == [
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  ]
+  assert not list(file_adapters._batched(range(10), 0))
+
+
 def test_is_example_file():
   assert file_adapters.is_example_file('example1.tfrecord')
   assert file_adapters.is_example_file('example1.riegeli')
@@ -56,12 +67,19 @@ def test_format_suffix():
       ].FILE_SUFFIX
       == 'array_record'
   )
+  assert (
+      file_adapters.ADAPTER_FOR_FORMAT[
+          file_adapters.FileFormat.PARQUET
+      ].FILE_SUFFIX
+      == 'parquet'
+  )
 
 
 @pytest.mark.parametrize(
     'file_format',
     [
         file_adapters.FileFormat.TFRECORD,
+        file_adapters.FileFormat.PARQUET,
     ],
 )
 @pytest.mark.parametrize(
@@ -121,4 +139,12 @@ def test_prase_file_format():
   assert (
       file_adapters.FileFormat.from_value(file_adapters.FileFormat.ARRAY_RECORD)
       == file_adapters.FileFormat.ARRAY_RECORD
+  )
+  assert (
+      file_adapters.FileFormat.from_value('parquet')
+      == file_adapters.FileFormat.PARQUET
+  )
+  assert (
+      file_adapters.FileFormat.from_value(file_adapters.FileFormat.PARQUET)
+      == file_adapters.FileFormat.PARQUET
   )
