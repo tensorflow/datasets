@@ -95,7 +95,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     for part in parts:
       for fname, fobj in dl_manager.iter_archive(part):
         i += 1
-        img_hash = fname.split('/')[-1].split('.')[0]
+        img_hash = os.path.split(fname)[-1].split('.')[0]
         img_meta = meta.loc[img_hash]
 
         record = {
