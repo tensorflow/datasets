@@ -48,15 +48,16 @@ runs:
     - uses: FedericoCarboni/setup-ffmpeg@v2  # for Audio FeatureConnector tests.
 
     # Python is cached manually to allow daily refreshes.
-    - uses: actions/setup-python@v4
+    - name: Store inputs for identifying Python cache
+      run: echo "${{ env.today }}-${{ inputs.extras }}" >> python-cache-keys.txt
+      shell: bash
+    - uses: actions/setup-python@v5
       with:
         python-version: ${{ inputs.python-version }}
-    - id: python-cache
-      uses: actions/cache@v3
-      with:
-        path: ${{ env.pythonLocation }}
-        # Use all inputs in the cache key to avoid cache overrides by different installations.
-        key: ${{ runner.os }}-Python:${{ inputs.python-version }}-${{ hashFiles('setup.py') }}-${{ env.today }}-${{ inputs.extras }}
+        cache: 'pip'
+        cache-dependency-path: |
+          setup.py
+          python-cache-keys.txt
 
     # Install Python deps.
     # If Python cache is restored then we don't need to install dependencies again.
