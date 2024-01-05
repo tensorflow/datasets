@@ -36,7 +36,7 @@ class ClassLabel(tensor_feature.Tensor):
       *,
       num_classes: Optional[int] = None,
       names=None,
-      names_file: epath.Path | None = None,
+      names_file: epath.PathLike | None = None,
       doc: feature_lib.DocArg = None,
   ):
     """Constructs a ClassLabel FeatureConnector.
