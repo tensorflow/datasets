@@ -24,6 +24,7 @@ from absl.testing import parameterized
 import dill
 from etils import epath
 import numpy as np
+import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
@@ -513,6 +514,28 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
     assert isinstance(data_source, array_record.ArrayRecordDataSource)
     assert len(data_source) == 10
     assert data_source[0]["x"] == 28
+
+  @parameterized.named_parameters(
+      *[
+          {"file_format": file_format, "testcase_name": file_format.value}
+          for file_format in file_adapters.FileFormat
+          if file_format not in file_adapters.FileFormat.with_random_access()
+          and file_format != file_adapters.FileFormat.RIEGELI
+      ],
+  )
+  def test_unsupported_file_formats_raise_error(self, file_format):
+    data_dir = self.get_temp_dir()
+    builder = DummyDatasetWithConfigs(
+        data_dir=data_dir,
+        config="plus1",
+        file_format=file_format,
+    )
+    builder.download_and_prepare()
+    with pytest.raises(
+        NotImplementedError,
+        match="Random access data source for file format",
+    ):
+      builder.as_data_source(split="train")
 
 
 class DatasetBuilderMultiDirTest(testing.TestCase):

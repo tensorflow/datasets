@@ -46,6 +46,7 @@ from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.data_sources import array_record
+from tensorflow_datasets.core.data_sources import parquet
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
@@ -765,8 +766,22 @@ class DatasetBuilder(registered.RegisteredDataset):
             split=split,
             decoders=decoders,
         )
+      elif file_format == file_adapters.FileFormat.PARQUET:
+        return parquet.ParquetDataSource(
+            self.info,
+            split=split,
+            decoders=decoders,
+        )
       else:
-        raise NotImplementedError(f"{self.info.file_format} is not supported.")
+        args = [
+            f"`file_format='{file_format.value}'`"
+            for file_format in file_adapters.FileFormat.with_random_access()
+        ]
+        raise NotImplementedError(
+            f"Random access data source for file format {file_format} is not"
+            " supported. Can you try to run download_and_prepare with"
+            f" {' or '.join(args)}?"
+        )
 
     all_ds = tree_utils.map_structure(build_single_data_source, split)
     return all_ds
