@@ -435,6 +435,9 @@ class ShardedFileTemplate:
     split: the split of the dataset.
     filetype_suffix: the filetype suffix to denote the type of file. For
       example, `tfrecord`.
+    encryption_suffix: an optional encryption string added to the end of the
+      sharded filename string. The encryption suffix is only added to the data
+      files and not to the metadata files (e.g. dataset_info.json).
   """
 
   data_dir: epath.Path
@@ -442,6 +445,7 @@ class ShardedFileTemplate:
   dataset_name: Optional[str] = None
   split: Optional[str] = None
   filetype_suffix: Optional[str] = None
+  encryption_suffix: Optional[str] = None
 
   def __post_init__(self):
     self.data_dir = epath.Path(self.data_dir)
@@ -552,11 +556,16 @@ class ShardedFileTemplate:
           f'{mappings[_VAR_SHARD_INDEX]}-of-{mappings[_VAR_NUM_SHARDS]}'
       )
     try:
-      return self.template.format(**mappings)
+      filepath = self.template.format(**mappings)
     except KeyError as e:
       raise ValueError(
           f'Could not format template {self.template} with mappings {mappings}!'
       ) from e
+
+    if self.encryption_suffix:
+      filepath += self.encryption_suffix
+
+    return filepath
 
   def sharded_filepath(
       self,
