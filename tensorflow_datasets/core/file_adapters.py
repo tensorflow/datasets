@@ -26,6 +26,7 @@ from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, TypeVar,
 import uuid
 
 from etils import epath
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
 from tensorflow_datasets.core.utils.lazy_imports_utils import pyarrow as pa
