@@ -52,6 +52,15 @@ class FileFormat(enum.Enum):
     return ADAPTER_FOR_FORMAT[self].FILE_SUFFIX
 
   @classmethod
+  def with_random_access(cls) -> set[FileFormat]:
+    """File formats with random access."""
+    return {
+        file_format
+        for file_format, adapter in ADAPTER_FOR_FORMAT.items()
+        if adapter.SUPPORTS_RANDOM_ACCESS
+    }
+
+  @classmethod
   def from_value(cls, file_format: Union[str, 'FileFormat']) -> 'FileFormat':
     try:
       return cls(file_format)
@@ -70,6 +79,7 @@ class FileAdapter(abc.ABC):
   """Interface for Adapter objects which read and write examples in a format."""
 
   FILE_SUFFIX: ClassVar[str]
+  SUPPORTS_RANDOM_ACCESS: ClassVar[bool]
   BUFFER_SIZE = 8 << 20  # 8 MiB per file.
 
   @classmethod
@@ -106,6 +116,7 @@ class TfRecordFileAdapter(FileAdapter):
   """File adapter for TFRecord file format."""
 
   FILE_SUFFIX = 'tfrecord'
+  SUPPORTS_RANDOM_ACCESS = False
 
   @classmethod
   def make_tf_data(
@@ -142,6 +153,7 @@ class RiegeliFileAdapter(FileAdapter):
   """File adapter for Riegeli file format."""
 
   FILE_SUFFIX = 'riegeli'
+  SUPPORTS_RANDOM_ACCESS = False
 
   @classmethod
   def make_tf_data(
@@ -184,6 +196,7 @@ class ArrayRecordFileAdapter(FileAdapter):
   """File adapter for ArrayRecord file format."""
 
   FILE_SUFFIX = 'array_record'
+  SUPPORTS_RANDOM_ACCESS = True
 
   @classmethod
   def make_tf_data(
@@ -235,6 +248,7 @@ class ParquetFileAdapter(FileAdapter):
   """
 
   FILE_SUFFIX = 'parquet'
+  SUPPORTS_RANDOM_ACCESS = True
   _PARQUET_FIELD = 'data'
   _BATCH_SIZE = 100
 
