@@ -34,9 +34,9 @@ class ClassLabel(tensor_feature.Tensor):
   def __init__(
       self,
       *,
-      num_classes: Optional[int] = None,
+      num_classes: int | None = None,
       names=None,
-      names_file: epath.PathLike | None = None,
+      names_file: str | epath.PathLike | None = None,
       doc: feature_lib.DocArg = None,
   ):
     """Constructs a ClassLabel FeatureConnector.
@@ -54,8 +54,8 @@ class ClassLabel(tensor_feature.Tensor):
       num_classes: `int`, number of classes. All labels must be < num_classes.
       names: `list<str>`, string names for the integer classes. The order in
         which the names are provided is kept.
-      names_file: `str`, path to a file with names for the integer classes, one
-        per line.
+      names_file: `str` or `epath.PathLike`, path to a file with names for the
+        integer classes, one per line.
       doc: Documentation of this feature (e.g. description).
     """
     super(ClassLabel, self).__init__(shape=(), dtype=np.int64, doc=doc)
