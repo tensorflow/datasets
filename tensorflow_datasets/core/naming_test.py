@@ -91,6 +91,23 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
         os.fspath(names[-1]), path_template % (expected_last_suffix)
     )
 
+  def test_encryption_suffix(self):
+    encryption_suffix = '%e=1'
+    template = naming.ShardedFileTemplate(
+        split='train',
+        dataset_name='ds',
+        data_dir='/path',
+        filetype_suffix='tfrecord',
+        encryption_suffix=encryption_suffix,
+    )
+    names = template.sharded_filepaths(2)
+    shards = ['00000-of-00002', '00001-of-00002']
+    path_template = '/path/ds-train.tfrecord-%s'
+    self.assertAllEqual(
+        [os.fspath(n) for n in names],
+        [path_template % s + encryption_suffix for s in shards],
+    )
+
   @parameterized.parameters(
       ('foo', 'foo-train'),
       ('Foo', 'foo-train'),
