@@ -15,6 +15,7 @@
 
 """PASS dataset."""
 
+import os
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -95,7 +96,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     for part in parts:
       for fname, fobj in dl_manager.iter_archive(part):
         i += 1
-        img_hash = fname.split('/')[-1].split('.')[0]
+        img_hash = os.path.split(fname)[-1].split('.')[0]
         img_meta = meta.loc[img_hash]
 
         record = {
