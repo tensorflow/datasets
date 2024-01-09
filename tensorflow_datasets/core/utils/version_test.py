@@ -39,6 +39,8 @@ class VersionTest(testing.TestCase):
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       version.Version('1.3.-534')
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
+      version.Version('1.3.0000534')
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       version.Version('1.3')
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       version.Version('1.3.')
