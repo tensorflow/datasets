@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Version utils."""
+
 from __future__ import annotations
 
 import enum
@@ -23,8 +24,11 @@ from typing import List, Tuple, Union
 from etils import epath
 
 _VERSION_TMPL = r"^(?P<major>{v})" r"\.(?P<minor>{v})" r"\.(?P<patch>{v})$"
-_VERSION_WILDCARD_REG = re.compile(_VERSION_TMPL.format(v=r"\d+|\*"))
-_VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=r"\d+"))
+_NO_LEADING_ZEROS = r"\d|[1-9]\d*"
+_VERSION_WILDCARD_REG = re.compile(
+    _VERSION_TMPL.format(v=_NO_LEADING_ZEROS + r"|\*")
+)
+_VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=_NO_LEADING_ZEROS))
 
 
 class Experiment(enum.Enum):
@@ -179,7 +183,7 @@ def _str_to_version(
     if allow_wildcard:
       msg += " with {x,y,z} being digits or wildcard."
     else:
-      msg += " with {x,y,z} being digits."
+      msg += " with {x,y,z} being numbers without leading zeros."
     raise ValueError(msg)
   return tuple(
       v if v == "*" else int(v)  # pylint:disable=g-complex-comprehension
