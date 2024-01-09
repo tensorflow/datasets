@@ -44,7 +44,7 @@ class DatasetImporterBuilder(
   RELEASE_NOTES = {
       '0.1.0': 'Initial release.',
   }
-  _GCS_BUCKET = ''
+  _GCS_BUCKET = 'gs://gresearch/robotics/'
   KEYS_TO_STRIP = [
       'episode_id',
       'legacy_datasets',
