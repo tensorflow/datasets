@@ -29,6 +29,7 @@ from etils import epath
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
+from tensorflow_datasets.core.utils.lazy_imports_utils import parquet as pq
 from tensorflow_datasets.core.utils.lazy_imports_utils import pyarrow as pa
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -273,7 +274,6 @@ class ParquetFileAdapter(FileAdapter):
       A tf.data.Dataset with the serialized examples.
     """
     del buffer_size  # unused
-    import pyarrow.parquet as pq  # pylint: disable=g-import-not-at-top
 
     def get_data(py_filename: bytes) -> Iterator[tf.Tensor]:
       table = pq.read_table(py_filename.decode(), schema=cls._schema())
@@ -299,8 +299,6 @@ class ParquetFileAdapter(FileAdapter):
       path: Path to the Parquet file.
       iterator: Iterable of serialized examples.
     """
-    import pyarrow.parquet as pq  # pylint: disable=g-import-not-at-top
-
     with pq.ParquetWriter(path, schema=cls._schema()) as writer:
       for examples in _batched(iterator, cls._BATCH_SIZE):
         examples = [{cls._PARQUET_FIELD: example} for _, example in examples]

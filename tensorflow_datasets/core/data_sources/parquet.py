@@ -21,6 +21,7 @@ from typing import Any
 
 import numpy as np
 from tensorflow_datasets.core.data_sources import base
+from tensorflow_datasets.core.utils.lazy_imports_utils import parquet as pq
 from tensorflow_datasets.core.utils.lazy_imports_utils import pyarrow as pa
 
 
@@ -56,8 +57,6 @@ class ParquetDataSource(base.BaseDataSource):
   """ParquetDataSource to read from a ParquetDataset."""
 
   def __post_init__(self):
-    import pyarrow.parquet as pq  # pylint: disable=g-import-not-at-top
-
     file_instructions = base.file_instructions(self.dataset_info, self.split)
     filenames = [
         file_instruction.filename for file_instruction in file_instructions

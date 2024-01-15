@@ -18,7 +18,6 @@
 from unittest import mock
 
 from etils import epath
-import pyarrow.parquet as pq
 import pytest
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
@@ -31,6 +30,7 @@ from tensorflow_datasets.core.data_sources import array_record
 from tensorflow_datasets.core.data_sources import parquet
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
+from tensorflow_datasets.core.utils.lazy_imports_utils import parquet as pq
 
 
 @pytest.fixture()
