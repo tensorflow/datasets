@@ -240,6 +240,7 @@ with lazy_imports():
   import apache_beam
   import pandas
   import pyarrow
+  from pyarrow import parquet
 
 
 with lazy_imports(
