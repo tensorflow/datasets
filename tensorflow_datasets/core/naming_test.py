@@ -579,40 +579,87 @@ def test_sharded_file_template_template_and_properties():
   )
 
 
-def test_replace_shard_suffix():
+@pytest.mark.parametrize(
+    ['template', 'expected_prefix'],
+    [
+        (
+            'data/mnist-train.tfrecord-{SHARD_INDEX}',
+            '/my/path/data/mnist-train',
+        ),
+    ],
+)
+def test_filepath_prefix(template, expected_prefix):
+  builder_dir = epath.Path('/my/path')
+  template = naming.ShardedFileTemplate(template=template, data_dir=builder_dir)
+  assert os.fspath(template.filepath_prefix()) == expected_prefix
+
+
+@pytest.mark.parametrize(
+    'testcase',
+    [
+        dict(
+            filepath='/path/file-00001-of-01234',
+            replacement='repl',
+            expected='/path/filerepl',
+        ),
+        dict(
+            filepath='/path/file.tfrecord-00001-of-01234',
+            replacement='repl',
+            expected='/path/file.tfrecordrepl',
+        ),
+        dict(
+            filepath='/path/file-00001-of-01234.bagz',
+            replacement='repl',
+            expected='/path/filerepl.bagz',
+        ),
+        dict(
+            filepath='/path/file00001-of-01234',
+            replacement='repl',
+            expected='/path/filerepl',
+        ),
+        dict(
+            filepath='/path/file00001-of-01234.bagz',
+            replacement='repl',
+            expected='/path/filerepl.bagz',
+        ),
+        dict(
+            filepath='/path/file-00001',
+            replacement='repl',
+            expected='/path/filerepl',
+        ),
+        dict(
+            filepath='/path/file-00001.bagz',
+            replacement='repl',
+            expected='/path/filerepl.bagz',
+        ),
+        # The folder is similar to the shard
+        dict(
+            filepath='/path/i-look-like-a-shard-000001/file-00001-of-01234',
+            replacement='repl',
+            expected='/path/i-look-like-a-shard-000001/filerepl',
+        ),
+        dict(
+            filepath=(
+                '/path/i-look-like-a-shard-000001/file-00001-of-01234.bagz'
+            ),
+            replacement='repl',
+            expected='/path/i-look-like-a-shard-000001/filerepl.bagz',
+        ),
+    ],
+)
+def test_replace_shard_pattern(testcase):
   assert (
-      naming._replace_shard_suffix(
-          filepath='/path/file-00001-of-01234', replacement='repl'
+      naming._replace_shard_pattern(
+          filepath=testcase['filepath'],
+          replacement=testcase['replacement'],
       )
-      == '/path/filerepl'
-  )
-  assert (
-      naming._replace_shard_suffix(
-          filepath='/path/file00001-of-01234', replacement='repl'
-      )
-      == '/path/filerepl'
-  )
-  assert (
-      naming._replace_shard_suffix(
-          filepath='/path/file-00001', replacement='repl'
-      )
-      == '/path/filerepl'
+      == testcase['expected']
   )
 
 
-def test_replace_shard_suffix_folder_similar_to_shard():
-  assert (
-      naming._replace_shard_suffix(
-          filepath='/path/i-look-like-a-shard-000001/file-00001-of-01234',
-          replacement='repl',
-      )
-      == '/path/i-look-like-a-shard-000001/filerepl'
-  )
-
-
-def test_replace_shard_suffix_no_suffix_found():
+def test_replace_shard_pattern_no_suffix_found():
   with pytest.raises(RuntimeError, match='Should do 1 shard suffix'):
-    naming._replace_shard_suffix(filepath='/path/a/b', replacement='')
+    naming._replace_shard_pattern(filepath='/path/a/b', replacement='')
 
 
 def test_filename_template_to_regex():

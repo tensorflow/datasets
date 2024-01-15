@@ -385,19 +385,32 @@ def _num_digits_needed(num_shards: Optional[int]) -> int:
   return max(len(str(num_shards or 0)), _DEFAULT_NUM_DIGITS_FOR_SHARDS)
 
 
-def _replace_shard_suffix(filepath: str, replacement: str) -> str:
-  """Replaces the shard suffix (must be at the end) with the given string."""
+def _replace_shard_pattern(filepath: str, replacement: str) -> str:
+  """Replaces the shard pattern with the given string."""
+  pattern = r'^(?P<prefix>.+?)-?\d{5,}(-of-\d{5,})?(?P<suffix>.+)?$'
+
+  def replace_func(matchobj):
+    if matchobj.group('suffix') is None:
+      return f"{matchobj.group('prefix')}{replacement}"
+    return f"{matchobj.group('prefix')}{replacement}{matchobj.group('suffix')}"
+
+  filepath = epath.Path(filepath)
   (new_string, num_subs) = re.subn(
-      pattern=r'^(.+?)-?\d{5,}(-of-\d{5,})?$',
-      repl=rf'\g<1>{replacement}',
-      string=filepath,
+      pattern=pattern,
+      repl=replace_func,
+      string=filepath.name,
   )
   if num_subs != 1:
     raise RuntimeError(
         f'Should do 1 shard suffix substitution, but did {num_subs}! '
         f'Filepath was {filepath}'
     )
-  return new_string
+  return os.fspath(filepath.parent / new_string)
+
+
+def _remove_extension(filepath: str) -> str:
+  pattern = r'\.[^.]+$'
+  return re.sub(pattern, '', filepath)
 
 
 def _filename_template_to_regex(filename_template: str) -> str:
@@ -591,7 +604,8 @@ class ShardedFileTemplate:
       self,
   ) -> str:
     a_filepath = self.sharded_filepath(shard_index=0, num_shards=1)
-    return _replace_shard_suffix(os.fspath(a_filepath), '')
+    prefix = _replace_shard_pattern(os.fspath(a_filepath), '')
+    return _remove_extension(prefix)
 
   def sharded_filepaths_pattern(
       self,
@@ -601,9 +615,10 @@ class ShardedFileTemplate:
     """Returns a pattern describing all the file paths captured by this template.
 
     If `num_shards` is given, then it returns
-    '/path/dataset_name-split.fileformat@num_shards`.
+    `/path/dataset_name-split.fileformat@num_shards` or
+    `/path/dataset_name-split@num_shards.fileformat` depending on the format.
     If `num_shards` is not given, then it returns
-    '/path/dataset_name-split.fileformat*`.
+    `/path/dataset_name-split.fileformat*`.
 
     Args:
       num_shards: optional specification of the number of shards.
@@ -616,7 +631,7 @@ class ShardedFileTemplate:
       replacement = f'@{num_shards}'
     else:
       replacement = '*'
-    return _replace_shard_suffix(os.fspath(a_filepath), replacement)
+    return _replace_shard_pattern(os.fspath(a_filepath), replacement)
 
   def sharded_filenames(self, num_shards: int) -> List[str]:
     return [path.name for path in self.sharded_filepaths(num_shards=num_shards)]

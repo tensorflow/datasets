@@ -78,8 +78,10 @@ def test_format_suffix():
 @pytest.mark.parametrize(
     'file_format',
     [
-        file_adapters.FileFormat.TFRECORD,
-        file_adapters.FileFormat.PARQUET,
+        file_format
+        for file_format in file_adapters.FileFormat
+        if file_format != file_adapters.FileFormat.ARRAY_RECORD
+        and file_format != file_adapters.FileFormat.RIEGELI
     ],
 )
 @pytest.mark.parametrize(
