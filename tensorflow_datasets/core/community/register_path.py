@@ -15,11 +15,12 @@
 
 """Location-based register."""
 
+from collections.abc import Mapping
 import concurrent.futures
 import difflib
 import functools
 import os
-from typing import Any, Dict, FrozenSet, Iterable, Iterator, List, Type
+from typing import Any, FrozenSet, Iterable, Iterator, List, Type
 
 from absl import flags
 from absl import logging
@@ -28,6 +29,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core.community import config as config_lib
 from tensorflow_datasets.core.community import register_base
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -35,8 +37,6 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 TFDS_DEBUG_VERBOSE = flags.DEFINE_boolean(
     'tfds_debug_list_dir', False, 'Debug the catalog generation'
 )
-
-# pylint: disable=logging-fstring-interpolation
 
 
 class DataDirRegister(register_base.BaseRegister):
@@ -56,28 +56,31 @@ class DataDirRegister(register_base.BaseRegister):
   ```
   """
 
-  def __init__(self, namespace_to_data_dirs: Dict[str, List[epath.Path]]):
+  def __init__(self, namespaces: Mapping[str, config_lib.NamespaceConfig]):
     """Contructor.
 
     Args:
-      namespace_to_data_dirs: Mapping from namespace to list of paths where the
-        datasets for that namespace are located.
+      namespaces: Mapping from namespace to namespace config.
     """
-    self._ns2data_dir = namespace_to_data_dirs
+    self._namespace_configs = namespaces
+
+  @property
+  def namespace_configs(self) -> Mapping[str, config_lib.NamespaceConfig]:
+    return self._namespace_configs
 
   @functools.cached_property
   def namespaces(self) -> FrozenSet[str]:
     """Available namespaces."""
-    return frozenset(self._ns2data_dir)
+    return frozenset(self._namespace_configs)
 
   def list_builders(self) -> List[str]:
     """Returns the list of registered builders."""
-    return sorted(_iter_builder_names(self._ns2data_dir))
+    return sorted(_iter_builder_names(self._namespace_configs))
 
   def list_dataset_references(self) -> Iterable[naming.DatasetReference]:
     exceptions = []
-    for namespace, data_dirs in self._ns2data_dir.items():
-      for data_dir in data_dirs:
+    for namespace, config in self._namespace_configs.items():
+      for data_dir in config.paths:
         try:
           yield from file_utils.list_datasets_in_data_dir(
               data_dir=data_dir,
@@ -127,27 +130,32 @@ class DataDirRegister(register_base.BaseRegister):
       )
     if name.namespace is None:
       raise AssertionError(f'No namespace found: {name}')
-    if name.namespace not in self._ns2data_dir:  # pylint: disable=unsupported-membership-test
+    if name.namespace not in self._namespace_configs:
       close_matches = difflib.get_close_matches(
-          name.namespace, self._ns2data_dir, n=1
+          name.namespace, self._namespace_configs, n=1
       )
       hint = f'\nDid you mean: {close_matches[0]}' if close_matches else ''
       error_msg = (
           f'Namespace `{name.namespace}` for `{name}` not found. '
-          f'Should be one of {sorted(self._ns2data_dir)}{hint}'
+          f'Should be one of {sorted(self._namespace_configs)}{hint}'
       )
       raise KeyError(error_msg)
     return read_only_builder.builder_from_files(
         name.name,
         data_dir=[
-            os.fspath(path) for path in self._ns2data_dir[name.namespace]
+            os.fspath(path)
+            for path in self._namespace_configs[name.namespace].paths
         ],
         **builder_kwargs,
     )
 
   def get_builder_root_dirs(self, name: naming.DatasetName) -> List[epath.Path]:
     """Returns root dir of the generated builder (without version/config)."""
-    return [d / name.name for d in self._ns2data_dir[name.namespace]]
+    if name.namespace is None:
+      raise ValueError(f'No namespace defined: {name}')
+    return [
+        d / name.name for d in self._namespace_configs[name.namespace].paths
+    ]
 
 
 def _maybe_iterdir(path: epath.Path) -> Iterator[epath.Path]:
@@ -163,12 +171,12 @@ def _maybe_iterdir(path: epath.Path) -> Iterator[epath.Path]:
       PermissionError,
       tf.errors.NotFoundError,
       tf.errors.PermissionDeniedError,
-  ) as e:
+  ):
     pass
 
 
 def _iter_builder_names(
-    ns2data_dir: Dict[str, List[epath.Path]],
+    namespaces: Mapping[str, config_lib.NamespaceConfig],
 ) -> Iterator[str]:
   """Yields the `ns:name` dataset names."""
   FILTERED_DIRNAME = frozenset(('downloads',))  # pylint: disable=invalid-name
@@ -195,8 +203,8 @@ def _iter_builder_names(
 
   with concurrent.futures.ThreadPoolExecutor(max_workers=10) as ex:
     builder_names_futures = []
-    for ns_name, data_dirs in ns2data_dir.items():
-      for data_dir in data_dirs:
+    for ns_name, ns_config in namespaces.items():
+      for data_dir in ns_config.paths:
         future = ex.submit(
             _get_builder_names_single_namespace,
             ns_name,

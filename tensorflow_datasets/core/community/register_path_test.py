@@ -18,12 +18,15 @@
 from etils import epath
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core.community import config as config_lib
 from tensorflow_datasets.core.community import register_path
 
 
 def test_data_dir_register():
   register = register_path.DataDirRegister(
-      namespace_to_data_dirs={'ns1': [epath.Path('/path/ns1')]}
+      namespaces={
+          'ns1': config_lib.NamespaceConfig(paths=[epath.Path('/path/ns1')])
+      }
   )
   assert {'ns1'} == register.namespaces
 
@@ -40,7 +43,7 @@ def test_list_dataset_references(mock_fs: testing.MockFs):
   mock_fs.add_file(path=f'{path}/ds2/config2/1.0.0/features.json')
   data_dir = epath.Path('/path/ns1')
   register = register_path.DataDirRegister(
-      namespace_to_data_dirs={'ns1': [data_dir]}
+      namespaces={'ns1': config_lib.NamespaceConfig(paths=[data_dir])}
   )
   assert sorted(register.list_dataset_references()) == [
       naming.DatasetReference(

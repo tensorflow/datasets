@@ -16,16 +16,16 @@
 """Source-based register."""
 
 import collections
+from collections.abc import Iterator, Sequence
 import dataclasses
 import datetime
 import functools
 import hashlib
 import json
 import tempfile
-from typing import Any, Iterator, List, Optional, Type
+from typing import Any, Type
 
 from absl import logging
-
 from etils import epath
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
@@ -229,7 +229,7 @@ class PackageRegister(register_base.BaseRegister):
     # if it is used.
     return _PackageIndex(self._path)
 
-  def list_builders(self) -> List[str]:
+  def list_builders(self) -> Sequence[str]:
     """Returns the list of registered builders."""
     if not self._package_index:  # Package index not loaded nor cached
       self._package_index.refresh()  # Try updating the index
@@ -266,7 +266,7 @@ class PackageRegister(register_base.BaseRegister):
 def list_ds_packages_for_namespace(
     namespace: str,
     path: epath.Path,
-) -> List[DatasetPackage]:
+) -> Sequence[DatasetPackage]:
   """Returns the dataset names found in a specific directory.
 
   Directories that contain code should have the following structure:
@@ -313,7 +313,7 @@ def list_ds_packages_for_namespace(
 
 def get_dataset_source(
     ds_path: epath.Path,
-) -> Optional[dataset_sources_lib.DatasetSource]:
+) -> dataset_sources_lib.DatasetSource | None:
   """Returns a `DatasetSource` instance if the given path corresponds to a dataset.
 
   To determine whether the given path contains a dataset, a simple heuristic is
@@ -405,7 +405,7 @@ def _download_or_reuse_cache(
 
 def _get_last_installed_version(
     name: naming.DatasetName,
-) -> Optional[_InstalledPackage]:
+) -> _InstalledPackage | None:
   """Checks whether the datasets is installed locally and returns it."""
   root_dir = (
       cache.module_path() / _IMPORT_MODULE_NAME / name.namespace / name.name
