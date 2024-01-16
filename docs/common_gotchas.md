@@ -195,7 +195,7 @@ x = self.f(y)  # Does f depend on additional hidden variables ? Is it stateful ?
 
 We lazily import big modules like TensorFlow. Lazy imports defer the actual
 import of the module to the first usage of the module. So users who don't need
-this big module will never import it.
+this big module will never import it. We use `etils.epy.lazy_imports`.
 
 ```python
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -208,15 +208,15 @@ features = tfds.features.Image(dtype=tf.uint8)
 ```
 
 Under the hood, the
-[`LazyModule` class](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/utils/lazy_imports_utils.py)
+[`LazyModule` class](https://github.com/google/etils/blob/main/etils/epy/lazy_imports_utils.py)
 acts as a factory, that will only actually import the module when an attribute
 is accessed (`__getattr__`).
 
 You can also use it conveniently with a context manager:
 
 ```python
-from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
+from etils import epy
 
-with lazy_imports(error_callback=..., success_callback=...):
+with epy.lazy_imports(error_callback=..., success_callback=...):
   import some_big_module
 ```
