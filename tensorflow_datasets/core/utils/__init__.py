@@ -28,7 +28,6 @@ from tensorflow_datasets.core.utils.image_utils import jpeg_cmyk_to_rgb
 from tensorflow_datasets.core.utils.image_utils import PilImage
 from tensorflow_datasets.core.utils.image_utils import png_to_jpeg
 from tensorflow_datasets.core.utils.image_utils import THUMBNAIL_SIZE
-from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
 from tensorflow_datasets.core.utils.py_utils import add_sys_path
 from tensorflow_datasets.core.utils.py_utils import atomic_write
 from tensorflow_datasets.core.utils.py_utils import basename_from_url
