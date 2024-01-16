@@ -15,6 +15,7 @@
 
 """Community dataset API."""
 
+from tensorflow_datasets.core.community.config import NamespaceConfig
 from tensorflow_datasets.core.community.huggingface_wrapper import mock_builtin_to_use_gfile
 from tensorflow_datasets.core.community.huggingface_wrapper import mock_huggingface_import
 from tensorflow_datasets.core.community.load import builder_cls_from_module
@@ -25,4 +26,5 @@ __all__ = [
     'community_register',
     'mock_builtin_to_use_gfile',
     'mock_huggingface_import',
+    'NamespaceConfig',
 ]

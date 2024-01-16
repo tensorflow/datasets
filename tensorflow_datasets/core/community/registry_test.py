@@ -14,17 +14,18 @@
 # limitations under the License.
 
 """Tests for registry."""
+
 import os
-import pathlib
 import tempfile
 import textwrap
 from unittest import mock
 
+from etils import epath
 import pytest
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core.community import config as config_lib
 from tensorflow_datasets.core.community import register_package
 from tensorflow_datasets.core.community import register_path
 from tensorflow_datasets.core.community import registry as registry_lib
@@ -43,7 +44,7 @@ class Ds1(testing.DummyDataset):
 def dummy_register():
   """Dummy register."""
   with tempfile.TemporaryDirectory() as tmp_path:
-    tmp_path = pathlib.Path(tmp_path)
+    tmp_path = epath.Path(tmp_path)
 
     # Prepare the datasets
     # Namespace 0
@@ -52,7 +53,6 @@ def dummy_register():
     # Namespace 1
     Ds0(data_dir=tmp_path / 'mlds').download_and_prepare()
     # Namespace 2: (non-existing)
-    print('XXXXXXX: CONTENT!!!')
     for d in tmp_path.iterdir():
       print(d)
     for d in (tmp_path / 'kaggle').iterdir():
@@ -62,23 +62,23 @@ def dummy_register():
     for d in (tmp_path / 'mlds').iterdir():
       print(d)
 
-    content = textwrap.dedent(
-        f"""
-        [Namespaces]
-        kaggle=[
+    content = textwrap.dedent(f"""
+        [kaggle]
+        paths=[
             '{os.fspath(tmp_path / 'kaggle')}',
             '{os.fspath(tmp_path / 'kaggle2')}',
         ]
-        mlds='{os.fspath(tmp_path / 'mlds')}'
-        other='/tmp/path/to/non-existing-path'
-        """
-    )
+        info = "Kaggle datasets."
+        [mlds]
+        paths='{os.fspath(tmp_path / 'mlds')}'
+        [other]
+        paths='/tmp/path/to/non-existing-path'
+        """)
 
     dummy_path = tmp_path / 'dummy-community-datasets.toml'
     dummy_path.write_text(content)
-    yield registry_lib.DatasetRegistry(
-        namespace_config=registry_lib.NamespaceConfig(config_path=dummy_path)
-    )
+    config = config_lib.NamespaceRegistry(dummy_path)
+    yield registry_lib.DatasetRegistry(config)
 
 
 def test_register_builder(dummy_register):  # pylint: disable=redefined-outer-name
@@ -119,32 +119,36 @@ def test_register_path_list_builders(dummy_register):  # pylint: disable=redefin
 
 
 def test_load_register_for_path_github():
-  registers = registry_lib._load_register_for_paths(
+  register = registry_lib._load_registry(
       namespace='huggingface',
-      paths=['github://huggingface/datasets/tree/master/datasets'],
+      config=config_lib.NamespaceConfig(
+          paths=['github://huggingface/datasets/tree/master/datasets']
+      ),
   )
-  assert len(registers) == 1
-  assert isinstance(registers[0], register_package.PackageRegister)
-  assert registers[0]._path == gcs_utils.GCS_COMMUNITY_INDEX_PATH
+  assert isinstance(register, register_package.PackageRegister)
+  assert register._path == gcs_utils.GCS_COMMUNITY_INDEX_PATH
 
 
 def test_load_register_for_path_gcs():
-  registers = registry_lib._load_register_for_paths(
+  registers = registry_lib._load_registry(
       namespace='my_namespace',
-      paths=['gs://my-bucket/datasets', 'gs://my-bucket2/datasets'],
+      config=config_lib.NamespaceConfig(
+          paths=['gs://my-bucket/datasets', 'gs://my-bucket2/datasets']
+      ),
   )
-  assert len(registers) == 1
-  assert isinstance(registers[0], register_path.DataDirRegister)
+  assert isinstance(registers, register_path.DataDirRegister)
 
 
 def test_load_register_for_path_mixed():
   with pytest.raises(RuntimeError, match='Both a path containing .*'):
-    registry_lib._load_register_for_paths(
+    registry_lib._load_registry(
         namespace='my_namespace',
-        paths=[
-            'github://huggingface/datasets/tree/master/datasets',
-            'gs://my-bucket/datasets',
-        ],
+        config=config_lib.NamespaceConfig(
+            paths=[
+                'github://huggingface/datasets/tree/master/datasets',
+                'gs://my-bucket/datasets',
+            ]
+        ),
     )
 
 
@@ -152,33 +156,61 @@ def test_community_register():
   assert 'huggingface' in registry_lib.community_register.list_namespaces()
 
 
-def test_dataset_registry_list_builders():
+def _write_dummy_config(content: str, tmp_path: str) -> epath.Path:
+  tmp_path = epath.Path(tmp_path)
+  dummy_path = tmp_path / 'dummy-community-datasets.toml'
+  dummy_path.write_text(content)
+  return dummy_path
+
+
+@mock.patch.object(registry_lib, '_registers_per_namespace')
+def test_dataset_registry_list_builders(mock_registers_per_namespace, tmp_path):
   register1 = mock.create_autospec(register_path.DataDirRegister)
   register1.list_builders.return_value = ['a', 'b']
   register2 = mock.create_autospec(register_package.PackageRegister)
   register2.list_builders.return_value = ['c']
-  namespace_config = mock.create_autospec(registry_lib.NamespaceConfig)
-  namespace_config.registers_per_namespace.return_value = {
+  mock_registers_per_namespace.return_value = {
       'ns1': [register1],
       'ns2': [register2],
   }
-  registry = registry_lib.DatasetRegistry(namespace_config=namespace_config)
+  dummy_path = _write_dummy_config(
+      textwrap.dedent("""
+    [ns1]
+    paths = '/data/ds1'
+    [ns2]
+    paths = '/data/ds2'
+  """),
+      tmp_path,
+  )
+  config = config_lib.NamespaceRegistry(dummy_path)
+  registry = registry_lib.DatasetRegistry(config)
   assert set(registry.list_namespaces()) == {'ns1', 'ns2'}
   assert set(registry.list_builders()) == {'a', 'b', 'c'}
 
 
-def test_list_dataset_references():
-  ref1 = naming.DatasetReference(dataset_name='ds1', namespace='kaggle')
-  ref2 = naming.DatasetReference(dataset_name='ds2', namespace='kaggle')
-  ref3 = naming.DatasetReference(dataset_name='ds3', namespace='kaggle')
+@mock.patch.object(registry_lib, '_registers_per_namespace')
+def test_list_dataset_references(mock_registers_per_namespace, tmp_path):
+  ref1 = naming.DatasetReference(dataset_name='ds1', namespace='ns1')
+  ref2 = naming.DatasetReference(dataset_name='ds2', namespace='ns1')
+  ref3 = naming.DatasetReference(dataset_name='ds3', namespace='ns2')
   register1 = mock.create_autospec(register_path.DataDirRegister)
   register1.list_dataset_references.return_value = [ref1, ref2]
   register2 = mock.create_autospec(register_package.PackageRegister)
   register2.list_dataset_references.return_value = [ref3]
-  namespace_config = mock.create_autospec(registry_lib.NamespaceConfig)
-  namespace_config.registers_per_namespace.return_value = {
+  mock_registers_per_namespace.return_value = {
       'ns1': [register1],
       'ns2': [register2],
   }
-  registry = registry_lib.DatasetRegistry(namespace_config=namespace_config)
+
+  dummy_path = _write_dummy_config(
+      textwrap.dedent("""
+    [ns1]
+    paths = '/data/ds1'
+    [ns2]
+    paths = '/data/ds2'
+  """),
+      tmp_path,
+  )
+  config = config_lib.NamespaceRegistry(dummy_path)
+  registry = registry_lib.DatasetRegistry(config)
   assert sorted(registry.list_dataset_references()) == [ref1, ref2, ref3]
