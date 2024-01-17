@@ -16,9 +16,7 @@
 """Meta register that uses other registers."""
 
 from collections.abc import Iterable, Mapping, Sequence
-import dataclasses
 import difflib
-import functools
 import os
 from typing import Any, Type
 
@@ -71,7 +69,6 @@ def _registers_per_namespace(
   }
 
 
-@dataclasses.dataclass()
 class DatasetRegistry(register_base.BaseRegister):
   """Registry of dataset registries.
 
@@ -85,17 +82,46 @@ class DatasetRegistry(register_base.BaseRegister):
       for that namespace.
   """
 
-  namespace_registry: config_lib.NamespaceRegistry
+  def __init__(self, namespace_registry: config_lib.NamespaceRegistry):
+    self.namespace_registry = namespace_registry
+    self._registers_per_namespace: dict[
+        str, Sequence[register_base.BaseRegister]
+    ] = {}
+    self._is_registers_per_namespace_initialized = False
 
   @property
   def config_per_namespace(self) -> Mapping[str, config_lib.NamespaceConfig]:
     return self.namespace_registry.config_per_namespace
 
-  @functools.cached_property
+  def _init_registers_per_namespace(self):
+    if self._is_registers_per_namespace_initialized:
+      return
+    self._registers_per_namespace.update(
+        _registers_per_namespace(self.config_per_namespace)
+    )
+    self._is_registers_per_namespace_initialized = True
+
+  @property
   def registers_per_namespace(
       self,
   ) -> Mapping[str, Sequence[register_base.BaseRegister]]:
-    return _registers_per_namespace(self.config_per_namespace)
+    self._init_registers_per_namespace()
+    return self._registers_per_namespace
+
+  def add_namespace(
+      self,
+      namespace: str,
+      config: config_lib.NamespaceConfig,
+      registers: Sequence[register_base.BaseRegister],
+  ):
+    self._init_registers_per_namespace()
+    if namespace in self._registers_per_namespace:
+      raise ValueError(
+          f'Namespace {namespace} already exists! Existing namespace config is'
+          f' {self.config_per_namespace[namespace]}.'
+      )
+    self._registers_per_namespace[namespace] = registers
+    self.namespace_registry.add_namespace(namespace=namespace, config=config)
 
   def has_namespace(self, namespace: str) -> bool:
     if not namespace:
