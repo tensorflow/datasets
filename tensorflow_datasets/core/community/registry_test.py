@@ -214,3 +214,29 @@ def test_list_dataset_references(mock_registers_per_namespace, tmp_path):
   config = config_lib.NamespaceRegistry(dummy_path)
   registry = registry_lib.DatasetRegistry(config)
   assert sorted(registry.list_dataset_references()) == [ref1, ref2, ref3]
+
+
+def test_add_namespace(dummy_register: registry_lib.DatasetRegistry):  # pylint: disable=redefined-outer-name
+  mock_register = mock.create_autospec(register_path.DataDirRegister)
+  dummy_register.add_namespace(
+      'my_namespace',
+      config=config_lib.NamespaceConfig(paths=[epath.Path('/data')]),
+      registers=[mock_register],
+  )
+  assert 'my_namespace' in dummy_register.list_namespaces()
+  assert 'my_namespace' in dummy_register.config_per_namespace
+  assert 'my_namespace' in dummy_register.registers_per_namespace
+  assert dummy_register.registers_per_namespace['my_namespace'] == [
+      mock_register
+  ]
+  assert 'kaggle' in dummy_register.list_namespaces()
+
+
+def test_add_namespace_duplicate(dummy_register: registry_lib.DatasetRegistry):  # pylint: disable=redefined-outer-name
+  mock_register = mock.create_autospec(register_path.DataDirRegister)
+  with pytest.raises(ValueError, match='Namespace kaggle already exists!.*'):
+    dummy_register.add_namespace(
+        'kaggle',
+        config=config_lib.NamespaceConfig(paths=[epath.Path('/data')]),
+        registers=[mock_register],
+    )

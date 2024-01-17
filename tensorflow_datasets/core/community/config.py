@@ -17,7 +17,6 @@ r"""Config for community datasets."""
 
 from collections.abc import Mapping, Sequence
 import dataclasses
-import functools
 from typing import Any
 
 from etils import epath
@@ -53,7 +52,6 @@ def _load_config(config: Mapping[str, Any]) -> NamespaceConfig:
   )
 
 
-@dataclasses.dataclass(frozen=True)
 class NamespaceRegistry:
   """What namespaces there are and where to find their datasets.
 
@@ -73,21 +71,30 @@ class NamespaceRegistry:
     config_per_namespace: mapping from namespace to configuration.
   """
 
-  config_path: epath.Path
+  def __init__(self, config_path: epath.Path):
+    self.config_path = config_path
+    # Load the namespace config only when it is needed.
+    self._config_per_namespace: dict[str, NamespaceConfig] = {}
+    self._is_config_per_namespace_initialized = False
 
-  @functools.cached_property
+  @property
   def config_per_namespace(self) -> Mapping[str, NamespaceConfig]:
     """Returns a mapping from namespace to configuration."""
-    config_per_namespace = {}
-    config = toml.loads(self.config_path.read_text())
-    for namespace, namespace_config in config.items():
-      if namespace in config_per_namespace:
-        raise RuntimeError(
-            f'Namespace {namespace} is defined twice in config'
-            f' {self.config_path}'
-        )
-      config_per_namespace[namespace] = _load_config(config=namespace_config)
-    return config_per_namespace
+    if not self._is_config_per_namespace_initialized:
+      raw_config = toml.loads(self.config_path.read_text())
+      for namespace, raw_namespace_config in raw_config.items():
+        namespace_config = _load_config(config=raw_namespace_config)
+        self.add_namespace(namespace, namespace_config)
+      self._is_config_per_namespace_initialized = True
+    return self._config_per_namespace
+
+  def add_namespace(self, namespace: str, config: NamespaceConfig) -> None:
+    if namespace in self._config_per_namespace:
+      raise RuntimeError(
+          f'NamespaceRegistry({self.config_path}): namespace {namespace} is'
+          ' already defined!'
+      )
+    self._config_per_namespace[namespace] = config
 
 
 community_config = NamespaceRegistry(
