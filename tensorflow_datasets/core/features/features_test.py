@@ -51,6 +51,9 @@ class AnInputConnector(features_lib.FeatureConnector):
     # Merge the two values
     return tfexample_dict['a'] + tfexample_dict['b']
 
+  def decode_example_np(self, example):
+    return example['a'] + example['b']
+
 
 class AnOutputConnector(features_lib.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
@@ -63,6 +66,9 @@ class AnOutputConnector(features_lib.FeatureConnector):
 
   def decode_example(self, tfexample_data):
     return tfexample_data / 10.0
+
+  def decode_example_np(self, example):
+    return example / 10.0
 
 
 class FeatureDictTest(
@@ -236,6 +242,18 @@ class FeatureDictTest(
                         'metadata/path': tf.compat.as_bytes('path/to/xyz.jpg'),
                     },
                 },
+                expected_np={
+                    # See explanations above.
+                    'input': 12,
+                    'output': -1.0,
+                    'img': {
+                        'size': {
+                            'height': 256,
+                            'width': 128,
+                        },
+                        'metadata/path': b'path/to/xyz.jpg',
+                    },
+                },
             ),
         ],
     )
@@ -268,25 +286,21 @@ class FeatureDictTest(
   def test_feature__repr__(self):
     label = features_lib.ClassLabel(names=['m', 'f'])
     feature_dict = features_lib.FeaturesDict({
-        'metadata': features_lib.Sequence(
-            {
-                'frame': features_lib.Image(shape=(32, 32, 3)),
-            }
-        ),
+        'metadata': features_lib.Sequence({
+            'frame': features_lib.Image(shape=(32, 32, 3)),
+        }),
         'label': features_lib.Sequence(label),
     })
 
     self.assertEqual(
         repr(feature_dict),
-        textwrap.dedent(
-            """\
+        textwrap.dedent("""\
         FeaturesDict({
             'label': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=2)),
             'metadata': Sequence({
                 'frame': Image(shape=(32, 32, 3), dtype=uint8),
             }),
-        })"""
-        ),
+        })"""),
     )
 
   def test_feature_save_load_metadata_slashes(self):
@@ -325,14 +339,12 @@ class FeatureDictTest(
                 'child': ChildTensor(shape=(), dtype=dtype),
             })
         ),
-        textwrap.dedent(
-            """\
+        textwrap.dedent("""\
         FeaturesDict({
             'child': ChildTensor(shape=(), dtype=int32),
             'colapsed': int32,
             'noncolapsed': Tensor(shape=(1,), dtype=int32),
-        })"""
-        ),
+        })"""),
     )
 
 

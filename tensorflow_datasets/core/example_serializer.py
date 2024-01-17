@@ -130,17 +130,15 @@ def _dict_to_tf_example(
   #     'objects/tokens/flat_values': [0, 1, 2, 3, 4],
   #     'objects/tokens/row_lengths_0': [3, 0, 2],
   # }
-  features = utils.flatten_nest_dict(
-      {
-          k: run_with_reraise(
-              _add_ragged_fields, k, example_dict[k], tensor_info
-          )
-          for k, tensor_info in tensor_info_dict.items()
-      }
-  )
+  features = utils.flatten_nest_dict({
+      k: run_with_reraise(_add_ragged_fields, k, example_dict[k], tensor_info)
+      for k, tensor_info in tensor_info_dict.items()
+  })
   features = {
       k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
       for k, (item, tensor_info) in features.items()
+      # If the item is None, it doesn't appear in the proto at all.
+      if item is not None
   }
   return tf_example_pb2.Example(
       features=tf_feature_pb2.Features(feature=features)

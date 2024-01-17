@@ -32,7 +32,7 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b'\n\rfeature.proto\x12\x13tensorflow_datasets"\xa0\x01\n\x0c\x46\x65\x61turesDict\x12\x41\n\x08\x66\x65\x61tures\x18\x01'
     b' \x03(\x0b\x32/.tensorflow_datasets.FeaturesDict.FeaturesEntry\x1aM\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01'
     b' \x01(\t\x12+\n\x05value\x18\x02'
-    b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature:\x02\x38\x01"\xbf\x05\n\x07\x46\x65\x61ture\x12\x19\n\x11python_class_name\x18\x01'
+    b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature:\x02\x38\x01"\xf2\x05\n\x07\x46\x65\x61ture\x12\x19\n\x11python_class_name\x18\x01'
     b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x0e'
     b' \x01(\t\x12\x13\n\x0bvalue_range\x18\x0f'
     b' \x01(\t\x12\x38\n\x0cjson_feature\x18\x02 \x01(\x0b\x32'
@@ -47,7 +47,8 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\x0b\x32'
     b' .tensorflow_datasets.TextFeatureH\x00\x12>\n\x0btranslation\x18\x0b'
     b" \x01(\x0b\x32'.tensorflow_datasets.TranslationFeatureH\x00\x12\x31\n\x08sequence\x18\x0c"
-    b' \x01(\x0b\x32\x1d.tensorflow_datasets.SequenceH\x00\x42\t\n\x07\x63ontent"\x1b\n\x0bJsonFeature\x12\x0c\n\x04json\x18\x01'
+    b' \x01(\x0b\x32\x1d.tensorflow_datasets.SequenceH\x00\x12\x31\n\x08optional\x18\r'
+    b' \x01(\x0b\x32\x1d.tensorflow_datasets.OptionalH\x00\x42\t\n\x07\x63ontent"\x1b\n\x0bJsonFeature\x12\x0c\n\x04json\x18\x01'
     b' \x01(\t"\x1b\n\x05Shape\x12\x12\n\ndimensions\x18\x01'
     b' \x03(\x03"\x9f\x01\n\rTensorFeature\x12)\n\x05shape\x18\x01'
     b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
@@ -77,7 +78,8 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x03(\t\x12&\n\x1evariable_languages_per_example\x18\x02'
     b' \x01(\x08"I\n\x08Sequence\x12-\n\x07\x66\x65\x61ture\x18\x01'
     b' \x01(\x0b\x32\x1c.tensorflow_datasets.Feature\x12\x0e\n\x06length\x18\x02'
-    b' \x01(\x03\x42\x03\xf8\x01\x01\x62\x06proto3'
+    b' \x01(\x03"9\n\x08Optional\x12-\n\x07\x66\x65\x61ture\x18\x01'
+    b' \x01(\x0b\x32\x1c.tensorflow_datasets.FeatureB\x03\xf8\x01\x01\x62\x06proto3'
 )
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
@@ -92,27 +94,29 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _FEATURESDICT_FEATURESENTRY._serialized_start = 122
   _FEATURESDICT_FEATURESENTRY._serialized_end = 199
   _FEATURE._serialized_start = 202
-  _FEATURE._serialized_end = 905
-  _JSONFEATURE._serialized_start = 907
-  _JSONFEATURE._serialized_end = 934
-  _SHAPE._serialized_start = 936
-  _SHAPE._serialized_end = 963
-  _TENSORFEATURE._serialized_start = 966
-  _TENSORFEATURE._serialized_end = 1125
-  _CLASSLABEL._serialized_start = 1127
-  _CLASSLABEL._serialized_end = 1160
-  _IMAGEFEATURE._serialized_start = 1163
-  _IMAGEFEATURE._serialized_end = 1330
-  _VIDEOFEATURE._serialized_start = 1333
-  _VIDEOFEATURE._serialized_end = 1479
-  _AUDIOFEATURE._serialized_start = 1482
-  _AUDIOFEATURE._serialized_end = 1635
-  _BOUNDINGBOXFEATURE._serialized_start = 1637
-  _BOUNDINGBOXFEATURE._serialized_end = 1715
-  _TEXTFEATURE._serialized_start = 1717
-  _TEXTFEATURE._serialized_end = 1730
-  _TRANSLATIONFEATURE._serialized_start = 1732
-  _TRANSLATIONFEATURE._serialized_end = 1811
-  _SEQUENCE._serialized_start = 1813
-  _SEQUENCE._serialized_end = 1886
+  _FEATURE._serialized_end = 956
+  _JSONFEATURE._serialized_start = 958
+  _JSONFEATURE._serialized_end = 985
+  _SHAPE._serialized_start = 987
+  _SHAPE._serialized_end = 1014
+  _TENSORFEATURE._serialized_start = 1017
+  _TENSORFEATURE._serialized_end = 1176
+  _CLASSLABEL._serialized_start = 1178
+  _CLASSLABEL._serialized_end = 1211
+  _IMAGEFEATURE._serialized_start = 1214
+  _IMAGEFEATURE._serialized_end = 1381
+  _VIDEOFEATURE._serialized_start = 1384
+  _VIDEOFEATURE._serialized_end = 1530
+  _AUDIOFEATURE._serialized_start = 1533
+  _AUDIOFEATURE._serialized_end = 1686
+  _BOUNDINGBOXFEATURE._serialized_start = 1688
+  _BOUNDINGBOXFEATURE._serialized_end = 1766
+  _TEXTFEATURE._serialized_start = 1768
+  _TEXTFEATURE._serialized_end = 1781
+  _TRANSLATIONFEATURE._serialized_start = 1783
+  _TRANSLATIONFEATURE._serialized_end = 1862
+  _SEQUENCE._serialized_start = 1864
+  _SEQUENCE._serialized_end = 1937
+  _OPTIONAL._serialized_start = 1939
+  _OPTIONAL._serialized_end = 1996
 # @@protoc_insertion_point(module_scope)

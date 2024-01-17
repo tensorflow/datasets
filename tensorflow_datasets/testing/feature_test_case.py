@@ -17,6 +17,7 @@
 
 import contextlib
 import dataclasses
+import enum
 import functools
 from typing import Any, Optional, Type
 
@@ -34,6 +35,12 @@ from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 
 
+class TestValue(enum.Enum):
+  """Expresses None values in test without writing the Python None."""
+
+  NONE = 0
+
+
 @dataclasses.dataclass
 class FeatureExpectationItem:
   """Test item of a FeatureExpectation.
@@ -47,7 +54,9 @@ class FeatureExpectationItem:
   Attributes:
     value: Input to `features.encode_example`
     expected: Expected output after `features.decode_example`
-    expected_np: Expected output after `features.decode_example_np`
+    expected_np: Expected output after `features.decode_example_np`. If you want
+      to expect `None`, use `tfds.testing.TestValue.NONE`, as None values are
+      not picked up by the tests.
     expected_serialized: Optional
     decoders: Optional `tfds.decode.Decoder` objects (to overwrite the default
       `features.decode_example`). See
@@ -378,6 +387,11 @@ class FeatureExpectationsTestCase(SubTestCase):
 
       # Test serialization + decoding from disk for NumPy worflow
       if test.expected_np is not None:
+        if (
+            isinstance(test.expected_np, TestValue)
+            and test.expected_np == TestValue.NONE
+        ):
+          test.expected_np = None
         with self._subTest('out_np'):
           out_numpy = features_encode_decode_np(
               serialize_fdict,
@@ -389,63 +403,64 @@ class FeatureExpectationsTestCase(SubTestCase):
             self.assertAllEqualNested(out_numpy['inner'], test.expected_np)
 
       # Test serialization + decoding from disk
-      with self._subTest('out'):
-        out_tensor, out_numpy, out_element_spec = features_encode_decode(
-            serialize_fdict,
-            deserialize_fdict,
-            input_value,
-            decoders={'inner': test.decoders},
-        )
-        out_tensor = out_tensor['inner']
-        out_numpy = out_numpy['inner']
-        out_element_spec = out_element_spec['inner']
-
-        if test_tensor_spec:
-          with self._subTest('tensor_spec'):
-            assert feature.get_tensor_spec() == out_element_spec
-
-        # Assert the returned type match the expected one
-        with self._subTest('dtype'):
-
-          def _get_dtype(s):
-            if isinstance(s, tf.data.Dataset):
-              return tf.nest.map_structure(_get_dtype, s.element_spec)
-            else:
-              return s.dtype
-
-          out_dtypes = tf.nest.map_structure(_get_dtype, out_tensor)
-          self.assertEqual(out_dtypes, test.dtype or feature.dtype)
-        with self._subTest('shape'):
-          # For shape, because (None, 3) match with (5, 3), we use
-          # tf.TensorShape.assert_is_compatible_with on each of the elements
-          expected_shape = feature.shape if test.shape is None else test.shape
-
-          def _get_shape(s):
-            if isinstance(s, tf.data.Dataset):
-              return utils.map_nested(_get_shape, s.element_spec)
-            else:
-              return s.shape
-
-          out_shapes = utils.map_nested(_get_shape, out_tensor)
-
-          shapes_tuple = utils.zip_nested(out_shapes, expected_shape)
-          utils.map_nested(
-              lambda x: x[0].assert_is_compatible_with(x[1]), shapes_tuple
+      if test.expected is not None:
+        with self._subTest('out'):
+          out_tensor, out_numpy, out_element_spec = features_encode_decode(
+              serialize_fdict,
+              deserialize_fdict,
+              input_value,
+              decoders={'inner': test.decoders},
           )
+          out_tensor = out_tensor['inner']
+          out_numpy = out_numpy['inner']
+          out_element_spec = out_element_spec['inner']
 
-        # Assert value
-        with self._subTest('out_value'):
-          # Eventually construct the tf.RaggedTensor
-          expected = tf.nest.map_structure(
-              lambda t: t.build() if isinstance(t, RaggedConstant) else t,
-              test.expected,
-          )
-          self.assertAllEqualNested(out_numpy, expected, atol=test.atol)
+          if test_tensor_spec:
+            with self._subTest('tensor_spec'):
+              assert feature.get_tensor_spec() == out_element_spec
 
-        # Assert the HTML representation works
-        if not test.decoders:
-          with self._subTest('repr'):
-            self._test_repr(feature, out_numpy)
+          # Assert the returned type match the expected one
+          with self._subTest('dtype'):
+
+            def _get_dtype(s):
+              if isinstance(s, tf.data.Dataset):
+                return tf.nest.map_structure(_get_dtype, s.element_spec)
+              else:
+                return s.dtype
+
+            out_dtypes = tf.nest.map_structure(_get_dtype, out_tensor)
+            self.assertEqual(out_dtypes, test.dtype or feature.dtype)
+          with self._subTest('shape'):
+            # For shape, because (None, 3) match with (5, 3), we use
+            # tf.TensorShape.assert_is_compatible_with on each of the elements
+            expected_shape = feature.shape if test.shape is None else test.shape
+
+            def _get_shape(s):
+              if isinstance(s, tf.data.Dataset):
+                return utils.map_nested(_get_shape, s.element_spec)
+              else:
+                return s.shape
+
+            out_shapes = utils.map_nested(_get_shape, out_tensor)
+
+            shapes_tuple = utils.zip_nested(out_shapes, expected_shape)
+            utils.map_nested(
+                lambda x: x[0].assert_is_compatible_with(x[1]), shapes_tuple
+            )
+
+          # Assert value
+          with self._subTest('out_value'):
+            # Eventually construct the tf.RaggedTensor
+            expected = tf.nest.map_structure(
+                lambda t: t.build() if isinstance(t, RaggedConstant) else t,
+                test.expected,
+            )
+            self.assertAllEqualNested(out_numpy, expected, atol=test.atol)
+
+          # Assert the HTML representation works
+          if not test.decoders:
+            with self._subTest('repr'):
+              self._test_repr(feature, out_numpy)
 
   def _test_repr(
       self,

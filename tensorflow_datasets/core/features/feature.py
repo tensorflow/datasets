@@ -758,7 +758,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
 
   def decode_example_np(
       self, example_data: type_utils.NpArrayOrScalar
-  ) -> type_utils.NpArrayOrScalar:
+  ) -> type_utils.NpArrayOrScalar | None:
     """Encode the feature dict into NumPy-compatible input.
 
     Args:
@@ -1122,12 +1122,11 @@ def _name2proto_cls(cls_name: str) -> Type[message.Message]:
 
 def _proto2oneof_field_name(proto: message.Message) -> str:
   """Returns the field name associated with the class."""
-  for field in _feature_content_fields():
+  fields = _feature_content_fields()
+  for field in fields:
     if field.message_type._concrete_class == type(proto):  # pylint: disable=protected-access
       return field.name
-  supported_cls = [
-      f.message_type._concrete_class.name for f in _feature_content_fields()  # pylint: disable=protected-access
-  ]
+  supported_cls = [field.message_type._concrete_class for field in fields]  # pylint: disable=protected-access
   raise ValueError(f'Unknown proto {type(proto)}. Supported: {supported_cls}.')
 
 

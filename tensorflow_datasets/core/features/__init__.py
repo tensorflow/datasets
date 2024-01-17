@@ -16,7 +16,6 @@
 """API defining dataset features (image, text, scalar,...).
 
 See [the guide](https://www.tensorflow.org/datasets/features).
-
 """
 
 from tensorflow_datasets.core.features.audio_feature import Audio
@@ -31,6 +30,7 @@ from tensorflow_datasets.core.features.feature import TensorInfo
 from tensorflow_datasets.core.features.features_dict import FeaturesDict
 from tensorflow_datasets.core.features.image_feature import Image
 from tensorflow_datasets.core.features.labeled_image import LabeledImage
+from tensorflow_datasets.core.features.optional_feature import Optional
 from tensorflow_datasets.core.features.scalar import Scalar
 from tensorflow_datasets.core.features.sequence_feature import Sequence
 from tensorflow_datasets.core.features.tensor_feature import Encoding
@@ -52,6 +52,7 @@ __all__ = [
     "FeatureConnector",
     "FeaturesDict",
     "LabeledImage",
+    "Optional",
     "Tensor",
     "TensorInfo",
     "Scalar",
