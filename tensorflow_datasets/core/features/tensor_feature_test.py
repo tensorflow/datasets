@@ -31,14 +31,20 @@ class FeatureTensorTest(
 ):
 
   @parameterized.parameters([
-      (np.float32, features_lib.Encoding.NONE),
-      (tf.float32, features_lib.Encoding.NONE),
-      (np.float32, features_lib.Encoding.ZLIB),
-      (tf.float32, features_lib.Encoding.ZLIB),
-      (np.float32, features_lib.Encoding.BYTES),
-      (tf.float32, features_lib.Encoding.BYTES),
+      (np.float32, features_lib.Encoding.NONE, (2, 3), tf.float32),
+      (tf.float32, features_lib.Encoding.NONE, (2, 3), tf.float32),
+      (np.float32, features_lib.Encoding.ZLIB, (), tf.string),
+      (tf.float32, features_lib.Encoding.ZLIB, (), tf.string),
+      (np.float32, features_lib.Encoding.BYTES, (), tf.string),
+      (tf.float32, features_lib.Encoding.BYTES, (), tf.string),
   ])
-  def test_shape_static(self, dtype, encoding: features_lib.Encoding):
+  def test_shape_static(
+      self,
+      dtype,
+      encoding: features_lib.Encoding,
+      serialized_shape: tuple[int, ...],
+      serialized_dtype: tf.DType,
+  ):
     np_input = np.random.rand(2, 3).astype(np.float32)
     array_input = [
         [1, 2, 3],
@@ -50,9 +56,17 @@ class FeatureTensorTest(
             shape=(2, 3),
             dtype=dtype,
             encoding=encoding,
+            minimum=1,
+            maximum=6,
         ),
         dtype=dtype,
         shape=(2, 3),
+        serialized_info=features_lib.TensorInfo(
+            shape=serialized_shape,
+            dtype=serialized_dtype,
+            minimum=1,
+            maximum=6,
+        ),
         tests=[
             # Np array
             testing.FeatureExpectationItem(
@@ -338,14 +352,12 @@ class FeatureTensorTest(
         ],
     )
 
-  @parameterized.parameters(
-      [
-          (np.str_, features_lib.Encoding.NONE),
-          (np.object_, features_lib.Encoding.NONE),
-          (tf.string, features_lib.Encoding.NONE),
-          # Bytes encoding not supported for tf.string
-      ]
-  )
+  @parameterized.parameters([
+      (np.str_, features_lib.Encoding.NONE),
+      (np.object_, features_lib.Encoding.NONE),
+      (tf.string, features_lib.Encoding.NONE),
+      # Bytes encoding not supported for tf.string
+  ])
   def test_string(self, dtype, encoding: features_lib.Encoding):
     nonunicode_text = 'hello world'
     unicode_text = '你好'
@@ -475,13 +487,11 @@ def test_invalid_input():
 
 
 def test_jax_bfloat16():
-  features = features_lib.FeaturesDict(
-      {
-          'data': features_lib.Tensor(
-              shape=(1,), dtype=tf.bfloat16, encoding='bytes'
-          )
-      }
-  )
+  features = features_lib.FeaturesDict({
+      'data': features_lib.Tensor(
+          shape=(1,), dtype=tf.bfloat16, encoding='bytes'
+      )
+  })
   data = {
       'data': jnp.array([6.0], dtype=jnp.bfloat16),
   }

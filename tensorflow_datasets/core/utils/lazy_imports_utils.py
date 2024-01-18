@@ -84,6 +84,14 @@ def mlcroissant_error_callback(module_name: str):
   print("***************************************************************\n\n")
 
 
+def tf_agents_error_callback(**kwargs):
+  del kwargs
+  print("\n\n***************************************************************")
+  print("Failed to import tf_agents.")
+  print('Please install tf_agents using `pip install tf_agents`.')
+  print("***************************************************************\n\n")
+
+
 # pylint: disable=g-import-not-at-top,unused-import
 
 with epy.lazy_imports(error_callback=mlcroissant_error_callback):
@@ -101,6 +109,9 @@ with epy.lazy_imports(
     error_callback=tf_error_callback, success_callback=ensure_tf_version
 ):
   import tensorflow  # pytype: disable=import-error
+
+with epy.lazy_imports(error_callback=tf_agents_error_callback):
+  import tf_agents  # pytype: disable=import-error
 
 
 with epy.lazy_imports(error_callback=array_record_error_callback):

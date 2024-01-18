@@ -99,6 +99,8 @@ TESTS_DEPENDENCIES = [
     # Required by scripts/documentation/
     'pyyaml',
     'tensorflow-io[tensorflow]',
+    # Fix the version in order to work with tensorflow@2.14.1
+    'tf_agents<=0.18.0',
 ]
 
 # Additional deps for formatting

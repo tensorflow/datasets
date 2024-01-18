@@ -82,6 +82,8 @@ class Tensor(feature_lib.FeatureConnector):
       doc: feature_lib.DocArg = None,
       serialized_dtype: Optional[type_utils.TfdsDType] = None,
       serialized_shape: Optional[utils.Shape] = None,
+      minimum: Optional[type_utils.NpArrayOrScalar] = None,
+      maximum: Optional[type_utils.NpArrayOrScalar] = None,
   ):
     """Construct a Tensor feature.
 
@@ -95,6 +97,10 @@ class Tensor(feature_lib.FeatureConnector):
         have this dtype. If `None` then defaults to `dtype`
       serialized_shape: Tensor shape. Used to validate that serialized examples
         have this shape. If `None` then defaults to `shape`
+      minimum: Tensor minimum. This can be useful to specify
+        `tf_agents.specs.BoundedArraySpec` for example.
+      maximum: Tensor maximum. This can be useful to specify
+        `tf_agents.specs.BoundedArraySpec` for example.
     """
     super().__init__(doc=doc)
     self._shape = tuple(shape)
@@ -112,6 +118,9 @@ class Tensor(feature_lib.FeatureConnector):
     self._encoded_to_bytes = self._encoding != Encoding.NONE
     self._dynamic_shape = self._shape.count(None) > 1
 
+    self._minimum = minimum
+    self._maximum = maximum
+
     if dtype_utils.is_string(self._dtype) and self._encoded_to_bytes:
       raise NotImplementedError(
           'tfds.features.Tensor() does not support `encoding=` when '
@@ -121,17 +130,29 @@ class Tensor(feature_lib.FeatureConnector):
   @py_utils.memoize()
   def get_tensor_info(self) -> feature_lib.TensorInfo:
     """See base class for details."""
-    return feature_lib.TensorInfo(shape=self._shape, dtype=self._dtype)
+    return feature_lib.TensorInfo(
+        shape=self._shape,
+        dtype=self._dtype,
+        minimum=self._minimum,
+        maximum=self._maximum,
+    )
 
   @py_utils.memoize()
   def get_serialized_info(self):
     """See base class for details."""
     if self._encoded_to_bytes:  # Values encoded (stored as bytes)
-      serialized_spec = feature_lib.TensorInfo(shape=(), dtype=np.object_)
+      serialized_spec = feature_lib.TensorInfo(
+          shape=(),
+          dtype=np.object_,
+          minimum=self._minimum,
+          maximum=self._maximum,
+      )
     else:
       serialized_spec = feature_lib.TensorInfo(
           shape=self._serialized_shape,
           dtype=self._serialized_dtype,
+          minimum=self._minimum,
+          maximum=self._maximum,
       )
 
     # Dynamic shape, need an additional field to restore the shape after
@@ -141,6 +162,8 @@ class Tensor(feature_lib.FeatureConnector):
           'shape': feature_lib.TensorInfo(
               shape=(len(self._shape),),
               dtype=np.int32,
+              minimum=self._minimum,
+              maximum=self._maximum,
           ),
           'value': serialized_spec,
       }
@@ -281,11 +304,15 @@ class Tensor(feature_lib.FeatureConnector):
           dtype=feature_lib.dtype_from_str(value['dtype']),
           # Use .get for backward-compatibility
           encoding=value.get('encoding', Encoding.NONE),
+          minimum=value.get('minimum', None),
+          maximum=value.get('maximum', None),
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
         dtype=feature_lib.dtype_from_str(value.dtype),
         encoding=value.encoding or Encoding.NONE,
+        minimum=value.minimum if value.HasField('minimum') else None,
+        maximum=value.maximum if value.HasField('maximum') else None,
     )
 
   def to_json_content(self) -> feature_pb2.TensorFeature:
@@ -293,6 +320,8 @@ class Tensor(feature_lib.FeatureConnector):
         shape=feature_lib.to_shape_proto(self._shape),
         dtype=feature_lib.dtype_to_str(self._dtype),
         encoding=self._encoding.value,
+        minimum=self._minimum,
+        maximum=self._maximum,
     )
 
 
