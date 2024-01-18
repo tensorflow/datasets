@@ -41,6 +41,7 @@ from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tf_agents
 
 from google.protobuf import descriptor
 from google.protobuf import json_format
@@ -60,8 +61,10 @@ if typing.TYPE_CHECKING:
       tf.dtypes.DType,
       Type[np.generic],
   ]
+  BoundedTensorSpec = tf.python.framework.tensor_spec.BoundedTensorSpec
 else:
   FeatureConnectorArg = Any
+  BoundedTensorSpec = Any
 
 
 def log_tf_warning(class_name: str) -> None:
@@ -88,6 +91,8 @@ class TensorInfo(object):
       'dataset_lvl',
       'np_dtype',
       '_tf_dtype',
+      'minimum',
+      'maximum',
   ]
 
   def __init__(
@@ -97,6 +102,8 @@ class TensorInfo(object):
       default_value=None,
       sequence_rank: Optional[int] = None,
       dataset_lvl: int = 0,
+      minimum: Optional[type_utils.NpArrayOrScalar] = None,
+      maximum: Optional[type_utils.NpArrayOrScalar] = None,
   ):
     """Constructor.
 
@@ -107,6 +114,10 @@ class TensorInfo(object):
         field is added to provide a default value when reading the file.
       sequence_rank: `int`, Number of `tfds.features.Sequence` dimension.
       dataset_lvl: `int`, if >0, nesting level of a `tfds.features.Dataset`.
+      minimum: Tensor minimum. This can be useful to specify
+        `tf_agents.specs.BoundedArraySpec` for example.
+      maximum: Tensor maximum. This can be useful to specify
+        `tf_agents.specs.BoundedArraySpec` for example.
     """
     self.shape = tf_utils.convert_to_shape(shape)
     self._dtype = dtype
@@ -117,6 +128,8 @@ class TensorInfo(object):
     self.default_value = default_value
     self.sequence_rank = sequence_rank or 0
     self.dataset_lvl = dataset_lvl
+    self.minimum = minimum
+    self.maximum = maximum
 
   @classmethod
   def copy_from(cls, tensor_info: TensorInfo) -> TensorInfo:
@@ -127,6 +140,8 @@ class TensorInfo(object):
         default_value=tensor_info.default_value,
         sequence_rank=tensor_info.sequence_rank,
         dataset_lvl=tensor_info.dataset_lvl,
+        minimum=tensor_info.minimum,
+        maximum=tensor_info.maximum,
     )
 
   @classmethod
@@ -134,6 +149,18 @@ class TensorInfo(object):
     return cls(
         shape=tf_utils.convert_to_shape(tensor_spec.shape),
         dtype=tensor_spec.dtype,
+    )
+
+  @classmethod
+  def from_bounded_tensor_spec(
+      cls, tensor_spec: tf_agents.specs.BoundedTensorSpec
+  ) -> TensorInfo:
+    """Creates a new TensorInfo instance from a BoundedTensorSpec."""
+    return cls(
+        shape=tf_utils.convert_to_shape(tensor_spec.shape),
+        dtype=tensor_spec.dtype,
+        minimum=tensor_spec.minimum,
+        maximum=tensor_spec.maximum,
     )
 
   def to_tensor_spec(self) -> tf.TensorSpec:
@@ -150,6 +177,20 @@ class TensorInfo(object):
     if self.dataset_lvl > 1 or self.sequence_rank > 1:
       return tf.RaggedTensorSpec(dtype=dtype, shape=shape)
     return tf.TensorSpec(dtype=dtype, shape=shape)
+
+  def to_bounded_tensor_spec(self) -> tf_agents.specs.BoundedTensorSpec:
+    """Converts this TensorInfo instance to a tf.BoundedTensorSpec.
+
+    Returns:
+      The tf.TensorSpec corresponding to this instance.
+    """
+    dtype = self.tf_dtype
+    shape = _to_tensor_shape(self.shape)
+    if self.dataset_lvl > 1 or self.sequence_rank > 1:
+      raise ValueError('Bounded tensor spec does not allow for ragged tensors.')
+    return tf_agents.specs.BoundedTensorSpec(
+        dtype=dtype, shape=shape, minimum=self.minimum, maximum=self.maximum
+    )
 
   @property
   def dtype(self) -> TreeDict[type_utils.TfdsDType]:
@@ -169,13 +210,22 @@ class TensorInfo(object):
         self.shape == other.shape
         and self._dtype == other._dtype
         and self.default_value == other.default_value
+        and self.minimum == other.minimum
+        and self.maximum == other.maximum
     )
 
   def __repr__(self):
-    return '{}(shape={}, dtype={})'.format(
-        type(self).__name__,
+    kwargs = 'shape={}, dtype={}'.format(
         self.shape,
         dtype_to_str(self.np_dtype),
+    )
+    if self.minimum is not None:
+      kwargs += ', minimum={}'.format(self.minimum)
+    if self.maximum is not None:
+      kwargs += ', maximum={}'.format(self.maximum)
+    return '{}({})'.format(
+        type(self).__name__,
+        kwargs,
     )
 
 

@@ -14,12 +14,14 @@
 # limitations under the License.
 
 """Tests for feature."""
+
 import numpy as np
 import pytest
 import tensorflow as tf
 from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.proto import feature_pb2
+import tf_agents
 
 
 def test_to_shape_proto_single_dimension():
@@ -181,3 +183,41 @@ def test_convert_feature_name_to_filename(feature_name, parent_name, expected):
       )
       == expected
   )
+
+
+def test_from_bounded_tensor_spec():
+  bounded_tensor_spec = tf_agents.specs.BoundedTensorSpec(
+      shape=tf.TensorShape([28, 28, 3]),
+      dtype=tf.int32,
+      minimum=-1.0,
+      maximum=1.0,
+  )
+  info = feature.TensorInfo.from_bounded_tensor_spec(bounded_tensor_spec)
+  assert info.shape == (28, 28, 3)
+  assert info.dtype == np.int32
+  assert info.minimum == -1.0
+  assert info.maximum == 1.0
+
+
+def test_to_bounded_tensor_spec():
+  tensor_info = feature.TensorInfo(
+      shape=(28, 28, 3), dtype=np.int32, minimum=-1.0, maximum=1.0
+  )
+  spec = tensor_info.to_bounded_tensor_spec()
+  assert isinstance(spec, tf_agents.specs.BoundedTensorSpec)
+  assert spec.shape == tf.TensorShape([28, 28, 3])
+  assert spec.dtype == tf.int32
+  assert spec.minimum == -1.0
+  assert spec.maximum == 1.0
+
+
+def test_tensor_info_repr():
+  tensor_info = feature.TensorInfo(
+      shape=(), dtype=np.int32, minimum=1, maximum=42
+  )
+  assert (
+      str(tensor_info)
+      == "TensorInfo(shape=(), dtype=int32, minimum=1, maximum=42)"
+  )
+  tensor_info = feature.TensorInfo(shape=(), dtype=np.int32)
+  assert str(tensor_info) == "TensorInfo(shape=(), dtype=int32)"

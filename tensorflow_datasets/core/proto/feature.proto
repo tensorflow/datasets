@@ -53,6 +53,8 @@ message TensorFeature {
   Shape shape = 1;
   string dtype = 2;
   string encoding = 3;
+  optional int64 minimum = 4;
+  optional int64 maximum = 5;
 }
 
 message ClassLabel {
