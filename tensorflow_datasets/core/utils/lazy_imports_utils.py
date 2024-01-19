@@ -25,7 +25,7 @@ import importlib
 from etils import epy
 
 
-def tf_error_callback(module_name: str):
+def tf_error_callback(module_name: Exception):
   del module_name
   print("\n\n***************************************************************")
   print(
@@ -63,7 +63,7 @@ def ensure_tf_version(module_name: str):
     )
 
 
-def array_record_error_callback(module_name: str):
+def array_record_error_callback(module_name: Exception):
   del module_name
   print("\n\n***************************************************************")
   print(
@@ -75,7 +75,7 @@ def array_record_error_callback(module_name: str):
   print("***************************************************************\n\n")
 
 
-def mlcroissant_error_callback(module_name: str):
+def mlcroissant_error_callback(module_name: Exception):
   """Error callback for mlcroissant."""
   del module_name
   print("\n\n***************************************************************")
@@ -84,8 +84,8 @@ def mlcroissant_error_callback(module_name: str):
   print("***************************************************************\n\n")
 
 
-def tf_agents_error_callback(**kwargs):
-  del kwargs
+def tf_agents_error_callback(module_name: Exception):
+  del module_name
   print("\n\n***************************************************************")
   print("Failed to import tf_agents.")
   print('Please install tf_agents using `pip install tf_agents`.')
