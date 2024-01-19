@@ -154,7 +154,6 @@ def convert_dataset(
 
   if overwrite:
     out_path.unlink(missing_ok=True)
-  out_path.mkdir(parents=True, exist_ok=False)
 
   if isinstance(out_file_format, str):
     out_file_format = file_adapters.file_format_from_suffix(out_file_format)
