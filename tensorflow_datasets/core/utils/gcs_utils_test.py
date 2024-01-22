@@ -15,24 +15,19 @@
 
 """GCS utils test."""
 
-import os
-import tempfile
-
-import tensorflow_datasets as tfds
-from tensorflow_datasets import setup_teardown
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import gcs_utils
+
+
+import os
+import tempfile
+import tensorflow_datasets as tfds
 from tensorflow_datasets.testing import test_utils
-
-
 class GcsUtilsTest(testing.TestCase):
-
   DO_NOT_APPLY_FIXTURES = [test_utils.disable_gcs_access]
-
   def test_is_dataset_accessible(self):
     self.assertTrue(gcs_utils.is_dataset_on_gcs('mnist/1.0.0'))
     self.assertFalse(gcs_utils.is_dataset_on_gcs('non_dataset/1.0.0'))
-
   def test_download_dataset(self):
     files = [
         'gs://tfds-data/dataset_info/mnist/2.0.0/dataset_info.json',
@@ -55,7 +50,6 @@ class GcsUtilsTest(testing.TestCase):
               'image.image.json',
           ],
       )
-
   def test_mnist(self):
     mnist = tfds.image_classification.MNIST(
         data_dir=gcs_utils.gcs_path('datasets')
@@ -66,8 +60,6 @@ class GcsUtilsTest(testing.TestCase):
 
 
 class GcsUtilsDisabledTest(testing.TestCase):
-
-  DO_NOT_APPLY_FIXTURES = [test_utils.disable_gcs_access]
 
   def test_is_dataset_accessible(self):
     is_ds_on_gcs = gcs_utils.is_dataset_on_gcs('mnist/1.0.0')
