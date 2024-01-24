@@ -183,6 +183,7 @@ def builder_from_directories(
         dataset_name=dataset_info_proto.name,
         data_dir=builder_dir,
         filetype_suffix=dataset_info_proto.file_format or filetype_suffix,
+        encryption_suffix=dataset_info_proto.encryption_suffix,
     )
     return splits_lib.SplitDict.from_proto(
         repeated_split_infos=dataset_info_proto.splits,

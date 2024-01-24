@@ -220,8 +220,13 @@ message DatasetInfo {
   // Use string to allow format extension without regenerating the proto.
   string file_format = 17;
 
+  // Optional file encryption suffix string.
+  // If present, this string is appended to the end of each filename when the
+  // file is read.
+  string encryption_suffix = 22;
+
   // The data that was used to generate this dataset.
   repeated DataSourceAccess data_source_accesses = 20;
 
-  // Next available: 22
+  // Next available: 23
 }
