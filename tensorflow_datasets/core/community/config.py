@@ -19,6 +19,7 @@ from collections.abc import Mapping, Sequence
 import dataclasses
 from typing import Any
 
+from absl import logging
 from etils import epath
 # Make sure that github paths are registered. This import makes sure that epath
 # understands paths that start with github://.
@@ -73,7 +74,7 @@ class NamespaceRegistry:
 
   def __init__(self, config_path: epath.Path):
     self.config_path = config_path
-    # Load the namespace config only when it is needed.
+    # Load the namespace config only when it is used.
     self._config_per_namespace: dict[str, NamespaceConfig] = {}
     self._is_config_per_namespace_initialized = False
 
@@ -81,6 +82,7 @@ class NamespaceRegistry:
   def config_per_namespace(self) -> Mapping[str, NamespaceConfig]:
     """Returns a mapping from namespace to configuration."""
     if not self._is_config_per_namespace_initialized:
+      logging.info('Loading namespace config from %s', self.config_path)
       raw_config = toml.loads(self.config_path.read_text())
       for namespace, raw_namespace_config in raw_config.items():
         namespace_config = _load_config(config=raw_namespace_config)
@@ -90,9 +92,12 @@ class NamespaceRegistry:
 
   def add_namespace(self, namespace: str, config: NamespaceConfig) -> None:
     if namespace in self._config_per_namespace:
+      namespaces = ', '.join(sorted(self._config_per_namespace.keys()))
       raise RuntimeError(
-          f'NamespaceRegistry({self.config_path}): namespace {namespace} is'
-          ' already defined!'
+          f'NamespaceRegistry({self.config_path},'
+          f' initialized={self._is_config_per_namespace_initialized}):'
+          f' namespace {namespace} is already defined! Defined namespaces:'
+          f' {namespaces}'
       )
     self._config_per_namespace[namespace] = config
 

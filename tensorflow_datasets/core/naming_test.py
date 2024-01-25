@@ -157,33 +157,46 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     )
 
 
-def test_dataset_name_and_kwargs_from_name_str():
-  assert naming._dataset_name_and_kwargs_from_name_str('ds1') == ('ds1', {})
-  assert naming._dataset_name_and_kwargs_from_name_str('ds1:1.2.*') == (
-      'ds1',
-      {'version': '1.2.*'},
-  )
-  assert naming._dataset_name_and_kwargs_from_name_str('ds1/config1') == (
-      'ds1',
-      {'config': 'config1'},
-  )
-  assert naming._dataset_name_and_kwargs_from_name_str('ds1/config1:1.*.*') == (
-      'ds1',
-      {'config': 'config1', 'version': '1.*.*'},
-  )
-  assert naming._dataset_name_and_kwargs_from_name_str(
-      'ds1/config1/arg1=val1,arg2=val2'
-  ) == ('ds1', {'config': 'config1', 'arg1': 'val1', 'arg2': 'val2'})
-  assert naming._dataset_name_and_kwargs_from_name_str(
-      'ds1/config1:1.2.3/arg1=val1,arg2=val2'
-  ) == (
-      'ds1',
-      {'config': 'config1', 'version': '1.2.3', 'arg1': 'val1', 'arg2': 'val2'},
-  )
-  assert naming._dataset_name_and_kwargs_from_name_str('ds1/arg1=val1') == (
-      'ds1',
-      {'arg1': 'val1'},
-  )
+@pytest.mark.parametrize(
+    ('tfds_name', 'expected'),
+    [
+        ('ds1', ('ds1', {})),
+        (
+            'ds1:1.2.*',
+            ('ds1', {'version': '1.2.*'}),
+        ),
+        (
+            'ds1/config1',
+            ('ds1', {'config': 'config1'}),
+        ),
+        (
+            'ds1/config1:1.*.*',
+            ('ds1', {'config': 'config1', 'version': '1.*.*'}),
+        ),
+        (
+            'ds1/config1/arg1=val1,arg2=val2',
+            ('ds1', {'config': 'config1', 'arg1': 'val1', 'arg2': 'val2'}),
+        ),
+        (
+            'ds1/config1:1.2.3/arg1=val1,arg2=val*',
+            (
+                'ds1',
+                {
+                    'config': 'config1',
+                    'version': '1.2.3',
+                    'arg1': 'val1',
+                    'arg2': 'val*',
+                },
+            ),
+        ),
+        (
+            'ds1/arg1=val1',
+            ('ds1', {'arg1': 'val1'}),
+        ),
+    ],
+)
+def test_dataset_name_and_kwargs_from_name_str(tfds_name, expected):
+  assert naming._dataset_name_and_kwargs_from_name_str(tfds_name) == expected
 
 
 def test_dataset_name():
