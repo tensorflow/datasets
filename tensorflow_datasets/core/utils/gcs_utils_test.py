@@ -15,15 +15,14 @@
 
 """GCS utils test."""
 
-import os
-import tempfile
-
-import tensorflow_datasets as tfds
-from tensorflow_datasets import setup_teardown
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.testing import test_utils
 
+
+import os
+import tempfile
+import tensorflow_datasets as tfds
 
 class GcsUtilsTest(testing.TestCase):
 
