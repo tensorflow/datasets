@@ -383,6 +383,27 @@ class WriterTest(testing.TestCase):
       self._write(to_write=to_write, shard_config=shard_config)
       self._write(to_write=to_write)
 
+  def test_write_with_encrypted_suffix_not_implemented(self):
+    file_format = file_adapters.DEFAULT_FILE_FORMAT
+    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name='foo',
+        split='train',
+        filetype_suffix=filetype_suffix,
+        data_dir=self.tmp_dir,
+        encryption_suffix='%e=0',
+    )
+    shard_config = shard_utils.ShardConfig(num_shards=self.NUM_SHARDS)
+    with self.assertRaises(NotImplementedError):
+      writer_lib.Writer(
+          serializer=testing.DummySerializer('dummy specs'),
+          filename_template=filename_template,
+          hash_salt='',
+          disable_shuffling=False,
+          file_format=file_format,
+          shard_config=shard_config,
+      )
+
 
 class TfrecordsWriterBeamTest(testing.TestCase):
   NUM_SHARDS = 3

@@ -422,6 +422,11 @@ class DatasetInfoTest(testing.TestCase):
     info.set_file_format(file_adapters.FileFormat.RIEGELI, override=True)
     self.assertEqual(info.file_format, file_adapters.FileFormat.RIEGELI)
 
+  def test_set_encryption_suffix(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    info.set_encryption_suffix("%e=1")
+    self.assertEqual(info.encryption_suffix, "%e=1")
+
 
 @pytest.mark.parametrize(
     "file_format",

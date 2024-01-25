@@ -169,6 +169,7 @@ def write_metadata(
       filename_template.filetype_suffix
   )
   ds_info.set_file_format(file_format)
+  ds_info.set_encryption_suffix(filename_template.encryption_suffix)
 
   # Add the split infos
   split_dict = _load_splits(

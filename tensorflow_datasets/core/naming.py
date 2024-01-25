@@ -38,7 +38,7 @@ _NAME_REG = re.compile(
     r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
     r'(/(?P<config>[\w\+\-\.]+))?'
     r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
-    r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
+    r'(/(?P<kwargs>(\w+=[^,]+,?)+))?'
     r'$'
 )
 
@@ -449,8 +449,8 @@ class ShardedFileTemplate:
     filetype_suffix: the filetype suffix to denote the type of file. For
       example, `tfrecord`.
     encryption_suffix: an optional encryption string added to the end of the
-      sharded filename string. The encryption suffix is only added to the data
-      files and not to the metadata files (e.g. dataset_info.json).
+      sharded filename string. The encryption suffix is added to the data file
+      path, but not added to metadata file paths (e.g. dataset_info.json).
   """
 
   data_dir: epath.Path

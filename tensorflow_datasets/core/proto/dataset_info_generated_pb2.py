@@ -66,7 +66,7 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\t\x12\x0f\n\x07version\x18\x03'
     b' \x01(\t\x12\x10\n\x08\x64\x61ta_dir\x18\x04'
     b' \x01(\t\x12\x14\n\x0c\x64s_namespace\x18\x05'
-    b' \x01(\t"\xb4\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
+    b' \x01(\t"\xcf\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
     b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02'
     b' \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12I\n\rrelease_notes\x18\x12'
     b' \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r'
@@ -85,6 +85,7 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b" \x01(\x0b\x32'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f"
     b' \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10'
     b' \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11'
+    b' \x01(\t\x12\x19\n\x11\x65ncryption_suffix\x18\x16'
     b' \x01(\t\x12\x43\n\x14\x64\x61ta_source_accesses\x18\x14'
     b' \x03(\x0b\x32%.tensorflow_datasets.DataSourceAccess\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
     b' \x01(\t\x12\r\n\x05value\x18\x02'
@@ -98,6 +99,7 @@ _builder.BuildTopDescriptorsAndMessages(
     DESCRIPTOR, 'dataset_info_pb2', globals()
 )
 if _descriptor._USE_C_DESCRIPTORS == False:
+
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\370\001\001'
   _SUPERVISEDKEYS_DICT_DICTENTRY._options = None
@@ -143,9 +145,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _TFDSDATASETREFERENCE._serialized_start = 1280
   _TFDSDATASETREFERENCE._serialized_end = 1389
   _DATASETINFO._serialized_start = 1392
-  _DATASETINFO._serialized_end = 2340
-  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2231
-  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2282
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2284
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2340
+  _DATASETINFO._serialized_end = 2367
+  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2258
+  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2309
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2311
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2367
 # @@protoc_insertion_point(module_scope)
