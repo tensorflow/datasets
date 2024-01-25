@@ -306,6 +306,7 @@ class DatasetInfo(object):
         dataset_name=builder.name,
         data_dir=builder.data_dir,
         filetype_suffix=proto.file_format or "tfrecord",
+        encryption_suffix=proto.encryption_suffix,
     )
     return cls(
         builder=builder,
@@ -476,6 +477,15 @@ class DatasetInfo(object):
     self._info_proto.file_format = file_format.value
 
   @property
+  def encryption_suffix(self) -> str:
+    return self.as_proto.encryption_suffix
+
+  def set_encryption_suffix(self, encryption_suffix: Union[None, str]) -> None:
+    if encryption_suffix is None:
+      return
+    self._info_proto.encryption_suffix = encryption_suffix
+
+  @property
   def splits(self) -> splits_lib.SplitDict:
     return self._splits
 
@@ -504,6 +514,7 @@ class DatasetInfo(object):
         filetype_suffix=(
             self.as_proto.file_format or file_adapters.DEFAULT_FILE_FORMAT.value
         ),
+        encryption_suffix=self.as_proto.encryption_suffix,
     )
     for split_info in split_dict.values():
       if isinstance(split_info, splits_lib.MultiSplitInfo):
@@ -638,6 +649,7 @@ class DatasetInfo(object):
         dataset_name=self.name,
         data_dir=self.data_dir,
         filetype_suffix=parsed_proto.file_format or "tfrecord",
+        encryption_suffix=parsed_proto.encryption_suffix,
     )
     split_dict = splits_lib.SplitDict.from_proto(
         repeated_split_infos=parsed_proto.splits,
@@ -990,6 +1002,7 @@ def get_dataset_feature_statistics(builder, split):
       dataset_name=builder.name,
       split=split,
       filetype_suffix=filetype_suffix,
+      encryption_suffix=builder.info.encryption_suffix,
   )
   filepattern = filename_template.sharded_filepaths_pattern()
   # Avoid generating a large number of buckets in rank histogram

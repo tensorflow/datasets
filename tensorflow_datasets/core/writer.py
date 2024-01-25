@@ -221,6 +221,10 @@ class Writer(object):
         disable_shuffling=disable_shuffling,
     )
     self._num_examples = 0
+    if filename_template.encryption_suffix:
+      raise NotImplementedError(
+          "Encryption suffix is not supported in the writer."
+      )
     self._filename_template = filename_template
     self._file_format = file_format
     self._shard_config = shard_config or shard_utils.ShardConfig()
@@ -359,6 +363,10 @@ class BeamWriter(object):
         file_format=file_format,
         shard_config=shard_config,
     )
+    if filename_template.encryption_suffix:
+      raise NotImplementedError(
+          "Encryption suffix is not supported in the Beam writer."
+      )
     self._filename_template = filename_template
     self._split_info_path = (
         f"{filename_template.filepath_prefix()}.split_info.json"
