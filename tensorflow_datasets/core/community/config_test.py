@@ -13,21 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""GCS utils test."""
-
-from tensorflow_datasets import testing
-from tensorflow_datasets.core.utils import gcs_utils
-from tensorflow_datasets.testing import test_utils
+from tensorflow_datasets.core.community import config as config_lib
 
 
-class GcsUtilsDisabledTest(testing.TestCase):
-
-  DO_NOT_APPLY_FIXTURES = [test_utils.disable_gcs_access]
-
-  def test_is_dataset_accessible(self):
-    is_ds_on_gcs = gcs_utils.is_dataset_on_gcs('mnist/1.0.0')
-    self.assertTrue(is_ds_on_gcs)
-
-
-if __name__ == '__main__':
-  testing.test_main()
+def test_community_config():
+  assert "huggingface" in config_lib.community_config.config_per_namespace
+  assert "kubric" in config_lib.community_config.config_per_namespace
+  assert "robotics" in config_lib.community_config.config_per_namespace

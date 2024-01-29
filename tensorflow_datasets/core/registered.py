@@ -251,12 +251,7 @@ def _get_existing_dataset_packages(
                             'tensorflow_datasets.datasets.mnist.builder')}
   """
   datasets = {}
-  try:
-    datasets_dir_path = resource_utils.tfds_path(datasets_dir)
-  except OSError:
-    # Raised when datasets_dir does not exist, for example in tests when data
-    # does not contain the directory (when running with bazel).
-    return datasets
+  datasets_dir_path = resource_utils.tfds_path(datasets_dir)
   if not datasets_dir_path.exists():
     return datasets
   ds_dir_pkg = '.'.join(

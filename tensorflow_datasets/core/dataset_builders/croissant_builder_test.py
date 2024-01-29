@@ -38,7 +38,9 @@ def get_dummy_metadata():
           description="File with the data.",
           encoding_format="application/jsonlines",
           content_url="data/raw_data.jsonl",
-          sha256="sha256",
+          sha256=(
+              "ec6a2e5865be2c3ea2bf41817bf9ca78cbfcdd60bce0282721da8625a28fd10d"
+          ),
       ),
   ]
   record_sets = [

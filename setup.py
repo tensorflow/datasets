@@ -31,8 +31,7 @@ import os
 import sys
 
 import pkg_resources
-from setuptools import find_packages
-from setuptools import setup
+import setuptools
 
 if '--nightly' in sys.argv:
   nightly = True
@@ -66,7 +65,7 @@ REQUIRED_PKGS = [
     'array_record>=0.5.0',
     'click',
     'dm-tree',
-    'etils[enp,epath,epy,etree]>=0.9.0',
+    'etils[enp,epath,epy,etree]>=1.6.0',
     'numpy',
     'promise',
     'protobuf>=3.20',
@@ -99,8 +98,6 @@ TESTS_DEPENDENCIES = [
     # Required by scripts/documentation/
     'pyyaml',
     'tensorflow-io[tensorflow]',
-    # Fix the version in order to work with tensorflow@2.14.1
-    'tf_agents<=0.18.0',
 ]
 
 # Additional deps for formatting
@@ -229,7 +226,7 @@ EXTRAS = {
 }
 EXTRAS.update(DATASET_EXTRAS)
 
-setup(
+setuptools.setup(
     name=project_name,
     version=__version__,
     description=DOCLINES[0],
@@ -239,7 +236,7 @@ setup(
     url='https://github.com/tensorflow/datasets',
     download_url='https://github.com/tensorflow/datasets/tags',
     license='Apache 2.0',
-    packages=find_packages(),
+    packages=setuptools.find_packages(),
     package_data={
         'tensorflow_datasets':
             DATASET_FILES + [

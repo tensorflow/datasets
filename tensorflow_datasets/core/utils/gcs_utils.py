@@ -127,10 +127,7 @@ def download_gcs_folder(
 
     def _copy(gcs_path_: epath.Path):
       # Copy 'gs://tfds-data/datasets/ds/1.0.0/file' -> `local_dir/file`
-      tf.io.gfile.copy(
-          os.fspath(gcs_path_),
-          os.path.join(local_folder, gcs_path_.name),
-      )
+      gcs_path_.copy(dst=os.path.join(local_folder, gcs_path_.name))
       pbar.update(1)
 
     with concurrent.futures.ThreadPoolExecutor(
