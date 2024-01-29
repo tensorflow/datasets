@@ -38,7 +38,7 @@ _NAME_REG = re.compile(
     r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
     r'(/(?P<config>[\w\+\-\.]+))?'
     r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
-    r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
+    r'(/(?P<kwargs>(\w+=[^,]+,?)+))?'
     r'$'
 )
 
