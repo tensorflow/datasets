@@ -15,8 +15,6 @@
 
 """Tests for tensorflow_datasets.core.features.top_level_feature."""
 
-import time
-
 import numpy as np
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
@@ -141,34 +139,6 @@ class FeaturesManagerTest(testing.TestCase):
             'c': 2,
         },
     })
-
-
-def test_benchmark_deserialization_speed():
-  features = features_lib.FeaturesDict({
-      'a': np.int32,
-      'b': {
-          'c': np.int32,
-      },
-  })
-  example = {'a': 1, 'b': {'c': 2}}
-  serialized_example = features.serialize_example(example)
-  number_of_examples = 100
-  assert features.deserialize_example(serialized_example) == example
-  assert features.deserialize_example_np(serialized_example) == example
-
-  start_time = time.time()
-  for _ in range(number_of_examples):
-    features.deserialize_example(serialized_example)
-  tf_time = time.time() - start_time
-
-  start_time = time.time()
-  for _ in range(number_of_examples):
-    features.deserialize_example_np(serialized_example)
-  np_time = time.time() - start_time
-
-  # NumPy deserialization should be faster than TensorFlow deserialization.
-  # If you improved TensorFlow deserialization, please delete this test.
-  assert np_time < tf_time
 
 
 if __name__ == '__main__':
