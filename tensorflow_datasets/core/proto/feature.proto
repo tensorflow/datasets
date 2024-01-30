@@ -55,6 +55,7 @@ message TensorFeature {
   string encoding = 3;
   optional int64 minimum = 4;
   optional int64 maximum = 5;
+  bool optional = 6;
 }
 
 message ClassLabel {

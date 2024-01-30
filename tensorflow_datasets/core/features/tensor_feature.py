@@ -84,6 +84,7 @@ class Tensor(feature_lib.FeatureConnector):
       serialized_shape: Optional[utils.Shape] = None,
       minimum: Optional[type_utils.NpArrayOrScalar] = None,
       maximum: Optional[type_utils.NpArrayOrScalar] = None,
+      optional: bool = False,
   ):
     """Construct a Tensor feature.
 
@@ -101,6 +102,7 @@ class Tensor(feature_lib.FeatureConnector):
         `tf_agents.specs.BoundedArraySpec` for example.
       maximum: Tensor maximum. This can be useful to specify
         `tf_agents.specs.BoundedArraySpec` for example.
+      optional: Whether the feature is optional and accepts None values.
     """
     super().__init__(doc=doc)
     self._shape = tuple(shape)
@@ -120,6 +122,7 @@ class Tensor(feature_lib.FeatureConnector):
 
     self._minimum = minimum
     self._maximum = maximum
+    self._optional = optional
 
     if dtype_utils.is_string(self._dtype) and self._encoded_to_bytes:
       raise NotImplementedError(
@@ -135,6 +138,7 @@ class Tensor(feature_lib.FeatureConnector):
         dtype=self._dtype,
         minimum=self._minimum,
         maximum=self._maximum,
+        optional=self._optional,
     )
 
   @py_utils.memoize()
@@ -146,6 +150,7 @@ class Tensor(feature_lib.FeatureConnector):
           dtype=np.object_,
           minimum=self._minimum,
           maximum=self._maximum,
+          optional=self._optional,
       )
     else:
       serialized_spec = feature_lib.TensorInfo(
@@ -153,6 +158,7 @@ class Tensor(feature_lib.FeatureConnector):
           dtype=self._serialized_dtype,
           minimum=self._minimum,
           maximum=self._maximum,
+          optional=self._optional,
       )
 
     # Dynamic shape, need an additional field to restore the shape after
@@ -164,6 +170,7 @@ class Tensor(feature_lib.FeatureConnector):
               dtype=np.int32,
               minimum=self._minimum,
               maximum=self._maximum,
+              optional=self._optional,
           ),
           'value': serialized_spec,
       }
@@ -171,6 +178,8 @@ class Tensor(feature_lib.FeatureConnector):
 
   def encode_example(self, example_data):
     """See base class for details."""
+    if example_data is None and self._optional:
+      return None
     # TODO(epot): Is there a better workaround ?
     # It seems some user have non-conventional use of tfds.features.Tensor where
     # they defined shape=(None, None) even if it wasn't supported.
@@ -239,6 +248,10 @@ class Tensor(feature_lib.FeatureConnector):
 
   def decode_example(self, tfexample_data):
     """See base class for details."""
+    if self._optional:
+      raise NotImplementedError(
+          'tfds.features.Tensor().optional only supports tfds.data_source.'
+      )
     value, shape = self._get_value_and_shape(tfexample_data)
     if self._encoded_to_bytes:
       if self._encoding == Encoding.ZLIB:
@@ -306,6 +319,7 @@ class Tensor(feature_lib.FeatureConnector):
           encoding=value.get('encoding', Encoding.NONE),
           minimum=value.get('minimum', None),
           maximum=value.get('maximum', None),
+          optional=value.get('optional', False),
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
@@ -313,6 +327,7 @@ class Tensor(feature_lib.FeatureConnector):
         encoding=value.encoding or Encoding.NONE,
         minimum=value.minimum if value.HasField('minimum') else None,
         maximum=value.maximum if value.HasField('maximum') else None,
+        optional=value.optional,
     )
 
   def to_json_content(self) -> feature_pb2.TensorFeature:
@@ -322,6 +337,7 @@ class Tensor(feature_lib.FeatureConnector):
         encoding=self._encoding.value,
         minimum=self._minimum,
         maximum=self._maximum,
+        optional=self._optional,
     )
 
 

@@ -34,9 +34,13 @@ class Scalar(tensor_feature.Tensor):
       dtype: type_utils.TfdsDType,
       *,
       doc: feature_lib.DocArg = None,
+      optional: bool = False,
   ):
-    super().__init__(shape=(), dtype=dtype, doc=doc)
+    super().__init__(shape=(), dtype=dtype, doc=doc, optional=optional)
 
   @classmethod
   def from_json_content(cls, value: feature_pb2.TensorFeature) -> 'Scalar':
-    return cls(dtype=feature_lib.dtype_from_str(value.dtype))
+    return cls(
+        dtype=feature_lib.dtype_from_str(value.dtype),
+        optional=value.optional,
+    )
