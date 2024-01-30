@@ -194,3 +194,5 @@ def test_tensor_info_repr():
   )
   tensor_info = feature.TensorInfo(shape=(), dtype=np.int32)
   assert str(tensor_info) == "TensorInfo(shape=(), dtype=int32)"
+  tensor_info = feature.TensorInfo(shape=(), dtype=np.int32, optional=True)
+  assert str(tensor_info) == "TensorInfo(shape=(), dtype=int32, optional=True)"

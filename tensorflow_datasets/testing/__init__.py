@@ -31,6 +31,7 @@ if typing.TYPE_CHECKING:
   from tensorflow_datasets.testing.feature_test_case import FeatureExpectationsTestCase
   from tensorflow_datasets.testing.feature_test_case import RaggedConstant
   from tensorflow_datasets.testing.feature_test_case import SubTestCase
+  from tensorflow_datasets.testing.feature_test_case import TestValue
   from tensorflow_datasets.testing.mocking import mock_data
   from tensorflow_datasets.testing.mocking import MockPolicy
   from tensorflow_datasets.testing.mocking import PickableDataSourceMock
@@ -92,6 +93,7 @@ _API = {
     "test_main": "tensorflow_datasets.testing.test_utils",
     "TestCase": "tensorflow_datasets.testing.test_case",
     "TestCaseInContext": "tensorflow_datasets.testing.test_case_in_context",
+    "TestValue": "tensorflow_datasets.testing.feature_test_case",
     # TODO(afrozm): rm from here and add as methods to TestCase
     "tmp_dir": "tensorflow_datasets.testing.test_utils",
     # LINT.ThenChange(:pydeps)

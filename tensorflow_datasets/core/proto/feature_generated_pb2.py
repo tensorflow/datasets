@@ -49,12 +49,13 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b" \x01(\x0b\x32'.tensorflow_datasets.TranslationFeatureH\x00\x12\x31\n\x08sequence\x18\x0c"
     b' \x01(\x0b\x32\x1d.tensorflow_datasets.SequenceH\x00\x42\t\n\x07\x63ontent"\x1b\n\x0bJsonFeature\x12\x0c\n\x04json\x18\x01'
     b' \x01(\t"\x1b\n\x05Shape\x12\x12\n\ndimensions\x18\x01'
-    b' \x03(\x03"\x9f\x01\n\rTensorFeature\x12)\n\x05shape\x18\x01'
+    b' \x03(\x03"\xb1\x01\n\rTensorFeature\x12)\n\x05shape\x18\x01'
     b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
     b' \x01(\t\x12\x10\n\x08\x65ncoding\x18\x03'
     b' \x01(\t\x12\x14\n\x07minimum\x18\x04'
     b' \x01(\x03H\x00\x88\x01\x01\x12\x14\n\x07maximum\x18\x05'
-    b' \x01(\x03H\x01\x88\x01\x01\x42\n\n\x08_minimumB\n\n\x08_maximum"!\n\nClassLabel\x12\x13\n\x0bnum_classes\x18\x01'
+    b' \x01(\x03H\x01\x88\x01\x01\x12\x10\n\x08optional\x18\x06'
+    b' \x01(\x08\x42\n\n\x08_minimumB\n\n\x08_maximum"!\n\nClassLabel\x12\x13\n\x0bnum_classes\x18\x01'
     b' \x01(\x03"\xa7\x01\n\x0cImageFeature\x12)\n\x05shape\x18\x01'
     b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
     b' \x01(\t\x12\x17\n\x0f\x65ncoding_format\x18\x03'
@@ -83,6 +84,7 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'feature_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
+
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\370\001\001'
   _FEATURESDICT_FEATURESENTRY._options = None
@@ -98,21 +100,21 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SHAPE._serialized_start = 936
   _SHAPE._serialized_end = 963
   _TENSORFEATURE._serialized_start = 966
-  _TENSORFEATURE._serialized_end = 1125
-  _CLASSLABEL._serialized_start = 1127
-  _CLASSLABEL._serialized_end = 1160
-  _IMAGEFEATURE._serialized_start = 1163
-  _IMAGEFEATURE._serialized_end = 1330
-  _VIDEOFEATURE._serialized_start = 1333
-  _VIDEOFEATURE._serialized_end = 1479
-  _AUDIOFEATURE._serialized_start = 1482
-  _AUDIOFEATURE._serialized_end = 1635
-  _BOUNDINGBOXFEATURE._serialized_start = 1637
-  _BOUNDINGBOXFEATURE._serialized_end = 1715
-  _TEXTFEATURE._serialized_start = 1717
-  _TEXTFEATURE._serialized_end = 1730
-  _TRANSLATIONFEATURE._serialized_start = 1732
-  _TRANSLATIONFEATURE._serialized_end = 1811
-  _SEQUENCE._serialized_start = 1813
-  _SEQUENCE._serialized_end = 1886
+  _TENSORFEATURE._serialized_end = 1143
+  _CLASSLABEL._serialized_start = 1145
+  _CLASSLABEL._serialized_end = 1178
+  _IMAGEFEATURE._serialized_start = 1181
+  _IMAGEFEATURE._serialized_end = 1348
+  _VIDEOFEATURE._serialized_start = 1351
+  _VIDEOFEATURE._serialized_end = 1497
+  _AUDIOFEATURE._serialized_start = 1500
+  _AUDIOFEATURE._serialized_end = 1653
+  _BOUNDINGBOXFEATURE._serialized_start = 1655
+  _BOUNDINGBOXFEATURE._serialized_end = 1733
+  _TEXTFEATURE._serialized_start = 1735
+  _TEXTFEATURE._serialized_end = 1748
+  _TRANSLATIONFEATURE._serialized_start = 1750
+  _TRANSLATIONFEATURE._serialized_end = 1829
+  _SEQUENCE._serialized_start = 1831
+  _SEQUENCE._serialized_end = 1904
 # @@protoc_insertion_point(module_scope)

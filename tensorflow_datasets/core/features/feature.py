@@ -93,6 +93,7 @@ class TensorInfo(object):
       '_tf_dtype',
       'minimum',
       'maximum',
+      'optional',
   ]
 
   def __init__(
@@ -104,6 +105,7 @@ class TensorInfo(object):
       dataset_lvl: int = 0,
       minimum: Optional[type_utils.NpArrayOrScalar] = None,
       maximum: Optional[type_utils.NpArrayOrScalar] = None,
+      optional: bool = False,
   ):
     """Constructor.
 
@@ -118,6 +120,7 @@ class TensorInfo(object):
         `tf_agents.specs.BoundedArraySpec` for example.
       maximum: Tensor maximum. This can be useful to specify
         `tf_agents.specs.BoundedArraySpec` for example.
+      optional: Whether the feature is optional and accepts None values.
     """
     self.shape = tf_utils.convert_to_shape(shape)
     self._dtype = dtype
@@ -130,6 +133,7 @@ class TensorInfo(object):
     self.dataset_lvl = dataset_lvl
     self.minimum = minimum
     self.maximum = maximum
+    self.optional = optional
 
   @classmethod
   def copy_from(cls, tensor_info: TensorInfo) -> TensorInfo:
@@ -142,6 +146,7 @@ class TensorInfo(object):
         dataset_lvl=tensor_info.dataset_lvl,
         minimum=tensor_info.minimum,
         maximum=tensor_info.maximum,
+        optional=tensor_info.optional,
     )
 
   @classmethod
@@ -212,6 +217,7 @@ class TensorInfo(object):
         and self.default_value == other.default_value
         and self.minimum == other.minimum
         and self.maximum == other.maximum
+        and self.optional == other.optional
     )
 
   def __repr__(self):
@@ -223,6 +229,8 @@ class TensorInfo(object):
       kwargs += ', minimum={}'.format(self.minimum)
     if self.maximum is not None:
       kwargs += ', maximum={}'.format(self.maximum)
+    if self.optional:
+      kwargs += ', optional=True'
     return '{}({})'.format(
         type(self).__name__,
         kwargs,
@@ -758,7 +766,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
 
   def decode_example_np(
       self, example_data: type_utils.NpArrayOrScalar
-  ) -> type_utils.NpArrayOrScalar:
+  ) -> type_utils.NpArrayOrScalar | None:
     """Encode the feature dict into NumPy-compatible input.
 
     Args:
@@ -1122,11 +1130,12 @@ def _name2proto_cls(cls_name: str) -> Type[message.Message]:
 
 def _proto2oneof_field_name(proto: message.Message) -> str:
   """Returns the field name associated with the class."""
-  for field in _feature_content_fields():
+  fields = _feature_content_fields()
+  for field in fields:
     if field.message_type._concrete_class == type(proto):  # pylint: disable=protected-access
       return field.name
   supported_cls = [
-      f.message_type._concrete_class.name for f in _feature_content_fields()  # pylint: disable=protected-access
+      field.message_type._concrete_class for field in fields  # pylint: disable=protected-access
   ]
   raise ValueError(f'Unknown proto {type(proto)}. Supported: {supported_cls}.')
 

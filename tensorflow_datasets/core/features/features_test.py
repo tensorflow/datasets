@@ -51,6 +51,11 @@ class AnInputConnector(features_lib.FeatureConnector):
     # Merge the two values
     return tfexample_dict['a'] + tfexample_dict['b']
 
+  def decode_example_np(self, example):
+    if example['a'] is None or example['b'] is None:
+      return None
+    return example['a'] + example['b']
+
 
 class AnOutputConnector(features_lib.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
@@ -63,6 +68,11 @@ class AnOutputConnector(features_lib.FeatureConnector):
 
   def decode_example(self, tfexample_data):
     return tfexample_data / 10.0
+
+  def decode_example_np(self, example):
+    if example is None:
+      return None
+    return example / 10.0
 
 
 class FeatureDictTest(
@@ -234,6 +244,18 @@ class FeatureDictTest(
                             'width': 128,
                         },
                         'metadata/path': tf.compat.as_bytes('path/to/xyz.jpg'),
+                    },
+                },
+                expected_np={
+                    # See previous comments to understand the magic numbers.
+                    'input': 12,
+                    'output': -1.0,
+                    'img': {
+                        'size': {
+                            'height': 256,
+                            'width': 128,
+                        },
+                        'metadata/path': b'path/to/xyz.jpg',
                     },
                 },
             ),

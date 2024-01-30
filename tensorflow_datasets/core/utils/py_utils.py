@@ -268,17 +268,15 @@ def pack_as_nest_dict(flat_d, nest_d):
   for k, v in nest_d.items():
     if isinstance(v, dict):
       v_flat = flatten_nest_dict(v)
-      sub_d = {
-          k2: flat_d.pop('{}/{}'.format(k, k2)) for k2, _ in v_flat.items()
-      }
+      sub_d = {k2: flat_d.pop(f'{k}/{k2}', None) for k2, _ in v_flat.items()}
       # Recursively pack the dictionary
       nest_out_d[k] = pack_as_nest_dict(sub_d, v)
     else:
-      nest_out_d[k] = flat_d.pop(k)
+      nest_out_d[k] = flat_d.pop(k, None)
   if flat_d:  # At the end, flat_d should be empty
     raise ValueError(
         'Flat dict strucure do not match the nested dict. Extra keys: '
-        '{}'.format(list(flat_d.keys()))
+        f'{list(flat_d.keys())}'
     )
   return nest_out_d
 

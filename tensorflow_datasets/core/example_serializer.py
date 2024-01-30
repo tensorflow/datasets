@@ -141,6 +141,12 @@ def _dict_to_tf_example(
   features = {
       k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
       for k, (item, tensor_info) in features.items()
+      # If the item is None, it doesn't appear in the proto at all.
+      if not (
+          item is None
+          and isinstance(tensor_info, TensorInfo)
+          and tensor_info.optional
+      )
   }
   return tf_example_pb2.Example(
       features=tf_feature_pb2.Features(feature=features)

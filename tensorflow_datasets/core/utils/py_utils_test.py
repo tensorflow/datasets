@@ -161,6 +161,22 @@ class PyUtilsTest(testing.TestCase):
     self.assertEqual(py_utils.flatten_nest_dict(nest_d), flat_d)
     self.assertEqual(py_utils.pack_as_nest_dict(flat_d, nest_d), nest_d)
 
+    nest_d = {
+        'a': 1,
+        'b': {
+            'c': 2,
+            'd': 3,
+            'e': 4,  # Extra key
+        },
+    }
+    flat_d = {
+        'a': 1,
+        'b/c': 2,
+        'b/d': 3,
+    }
+    expected = {'a': 1, 'b': {'c': 2, 'd': 3, 'e': None}}
+    self.assertEqual(py_utils.pack_as_nest_dict(flat_d, nest_d), expected)
+
     with self.assertRaisesWithPredicateMatch(ValueError, 'Extra keys'):
       py_utils.pack_as_nest_dict(
           {
@@ -171,23 +187,6 @@ class PyUtilsTest(testing.TestCase):
               'b/h': 5,  # Extra key
           },
           nest_d,
-      )
-
-    with self.assertRaisesWithPredicateMatch(KeyError, 'b/e'):
-      py_utils.pack_as_nest_dict(
-          {
-              'a': 1,
-              'b/c': 2,
-              'b/d': 3,
-          },
-          {
-              'a': 1,
-              'b': {
-                  'c': 2,
-                  'd': 3,
-                  'e': 4,  # Extra key
-              },
-          },
       )
 
     with self.assertRaisesWithPredicateMatch(
