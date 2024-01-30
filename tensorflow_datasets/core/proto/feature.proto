@@ -35,6 +35,7 @@ message Feature {
     TextFeature text = 10;
     TranslationFeature translation = 11;
     Sequence sequence = 12;
+    Optional optional = 13;
   }
 }
 
@@ -126,4 +127,10 @@ message Sequence {
 
   // Optional length of the sequence.
   int64 length = 2;
+}
+
+// An optional feature.
+message Optional {
+  // The optional feature.
+  Feature feature = 1;
 }
