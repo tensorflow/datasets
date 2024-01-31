@@ -496,3 +496,39 @@ def test_jax_bfloat16():
       'data': jnp.array([6.0], dtype=jnp.bfloat16),
   }
   features.encode_example(data)
+
+
+@pytest.mark.parametrize(
+    ('feature', 'expected'),
+    [
+        # Optional = True
+        (features_lib.Tensor(shape=(), dtype=np.int16, optional=True), -32768),
+        (
+            features_lib.Tensor(shape=(), dtype=np.int32, optional=True),
+            -2147483648,
+        ),
+        (features_lib.Tensor(shape=(), dtype=np.bool_, optional=True), False),
+        (
+            features_lib.Tensor(shape=(), dtype=np.float16, optional=True),
+            np.finfo(np.float16).min,
+        ),
+        (
+            features_lib.Tensor(shape=(), dtype=np.float32, optional=True),
+            np.finfo(np.float32).min,
+        ),
+        (features_lib.Tensor(shape=(), dtype=np.str_, optional=True), b''),
+        (
+            features_lib.Tensor(shape=(2, 2), dtype=np.bool_, optional=True),
+            np.asarray([[False, False], [False, False]], dtype=np.bool_),
+        ),
+        # Optional = False
+        (features_lib.Tensor(shape=(), dtype=np.int16), None),
+        (features_lib.Tensor(shape=(), dtype=np.int32), None),
+        (features_lib.Tensor(shape=(), dtype=np.bool_), None),
+        (features_lib.Tensor(shape=(), dtype=np.float16), None),
+        (features_lib.Tensor(shape=(), dtype=np.float32), None),
+        (features_lib.Tensor(shape=(), dtype=np.str_), None),
+    ],
+)
+def test_default_value(feature, expected):
+  np.testing.assert_array_equal(feature._default_value(), expected)

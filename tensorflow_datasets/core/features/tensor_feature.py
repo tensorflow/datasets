@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import enum
 import functools
-from typing import Optional, Protocol, Tuple, TypeVar, Union
+from typing import Any, Optional, Protocol, Tuple, TypeVar, Union
 import zlib
 
 from etils import enp
@@ -139,6 +139,7 @@ class Tensor(feature_lib.FeatureConnector):
         minimum=self._minimum,
         maximum=self._maximum,
         optional=self._optional,
+        default_value=self._default_value(),
     )
 
   @py_utils.memoize()
@@ -151,6 +152,7 @@ class Tensor(feature_lib.FeatureConnector):
           minimum=self._minimum,
           maximum=self._maximum,
           optional=self._optional,
+          default_value=self._default_value(),
       )
     else:
       serialized_spec = feature_lib.TensorInfo(
@@ -159,6 +161,7 @@ class Tensor(feature_lib.FeatureConnector):
           minimum=self._minimum,
           maximum=self._maximum,
           optional=self._optional,
+          default_value=self._default_value(),
       )
 
     # Dynamic shape, need an additional field to restore the shape after
@@ -171,10 +174,31 @@ class Tensor(feature_lib.FeatureConnector):
               minimum=self._minimum,
               maximum=self._maximum,
               optional=self._optional,
+              default_value=self._default_value(),
           ),
           'value': serialized_spec,
       }
     return serialized_spec
+
+  def _default_value(self) -> Any:
+    """Default value for None value when the tensor is optional."""
+    if not self._optional:
+      return None
+    # np.object_ arrays are normalized to np.str_ with empty str.
+    dtype = self._dtype if self._dtype != np.object_ else np.str_
+    if dtype_utils.is_string(dtype):
+      default_value = b''
+    elif dtype_utils.is_integer(dtype):
+      default_value = np.iinfo(dtype).min
+    elif dtype_utils.is_floating(dtype):
+      default_value = np.finfo(dtype).min
+    elif dtype_utils.is_bool(dtype):
+      default_value = False
+    else:
+      raise ValueError(f'Unsupported dtype: {dtype}')
+    if not self._shape:
+      return default_value
+    return np.full(self._shape, default_value, dtype=dtype)
 
   def encode_example(self, example_data):
     """See base class for details."""
@@ -248,10 +272,6 @@ class Tensor(feature_lib.FeatureConnector):
 
   def decode_example(self, tfexample_data):
     """See base class for details."""
-    if self._optional:
-      raise NotImplementedError(
-          'tfds.features.Tensor().optional only supports tfds.data_source.'
-      )
     value, shape = self._get_value_and_shape(tfexample_data)
     if self._encoded_to_bytes:
       if self._encoding == Encoding.ZLIB:

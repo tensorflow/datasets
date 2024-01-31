@@ -26,12 +26,12 @@ class ScalarFeatureTest(
 ):
 
   @parameterized.parameters(
-      (np.int64, 42, 42),
-      (np.int64, None, testing.TestValue.NONE),
-      (np.str_, 'foo', 'foo'),
-      (np.str_, None, testing.TestValue.NONE),
+      (np.int64, 42, 42, 42),
+      (np.int64, None, -9223372036854775808, testing.TestValue.NONE),
+      (np.str_, 'foo', 'foo', 'foo'),
+      (np.str_, None, '', testing.TestValue.NONE),
   )
-  def test_scalar(self, dtype, value, expected_np):
+  def test_scalar(self, dtype, value, expected, expected_np):
     self.assertFeature(
         feature=features.Scalar(
             dtype=dtype, doc='Some description', optional=True
@@ -41,11 +41,7 @@ class ScalarFeatureTest(
         tests=[
             testing.FeatureExpectationItem(
                 value=value,
-                raise_cls=NotImplementedError,
-                raise_msg='supports tfds.data_source',
-            ),
-            testing.FeatureExpectationItem(
-                value=value,
+                expected=expected,
                 expected_np=expected_np,
             ),
         ],
@@ -61,16 +57,13 @@ class ScalarFeatureTest(
         tests=[
             testing.FeatureExpectationItem(
                 value={'a': None},
-                raise_cls=NotImplementedError,
-                raise_msg='supports tfds.data_source',
-            ),
-            testing.FeatureExpectationItem(
-                value={'a': None},
+                expected={'a': -2147483648},
                 expected_np={'a': None},
             ),
             # You cannot ommit the key, you do have to specify {'a': None}.
             testing.FeatureExpectationItem(
                 value={},
+                raise_cls=RuntimeError,
                 raise_cls_np=RuntimeError,
                 raise_msg="'a'",
             ),
