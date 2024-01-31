@@ -189,7 +189,6 @@ class CroissantBuilderTest(testing.TestCase):
 
     cls.builder = croissant_builder.CroissantBuilder(
         file=croissant_file,
-        record_set_names=["jsonl"],
         file_format=FileFormat.ARRAY_RECORD,
         disable_shuffling=True,
     )
@@ -200,6 +199,8 @@ class CroissantBuilderTest(testing.TestCase):
     assert self.builder._info().description == "Dummy description."
     assert self.builder._info().homepage == "https://dummy_url"
     assert self.builder._info().redistribution_info.license == "Public"
+    assert len(self.builder.metadata.record_sets) == 1
+    assert self.builder.metadata.record_sets[0].name == "jsonl"
 
   def test_generated_samples(self):
     self.builder.download_and_prepare()
