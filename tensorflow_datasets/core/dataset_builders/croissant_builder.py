@@ -102,7 +102,7 @@ class CroissantBuilder(
       self,
       *,
       file: epath.PathLike,
-      record_set_names: Sequence[str],
+      record_set_names: Sequence[str] | None = None,
       disable_shuffling: Optional[bool] = False,
       int_dtype: Optional[type_utils.TfdsDType] = np.int64,
       float_dtype: Optional[type_utils.TfdsDType] = np.float32,
@@ -113,7 +113,8 @@ class CroissantBuilder(
     Args:
       file: The Croissant config file for the given dataset.
       record_set_names: The names of the record sets to generate. Each record
-        set will correspond to a separate config.
+        set will correspond to a separate config. If not specified, it will use
+        all the record sets.
       disable_shuffling: Specify whether to shuffle the examples.
       int_dtype: The dtype to use for TFDS integer features. Defaults to
         np.int64.
@@ -131,6 +132,10 @@ class CroissantBuilder(
     self.VERSION = self.dataset.metadata.version or "1.0.0"  # pylint: disable=invalid-name
     self.RELEASE_NOTES = {}  # pylint: disable=invalid-name
 
+    if not record_set_names:
+      record_set_names = [
+          record_set.name for record_set in self.metadata.record_sets
+      ]
     self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
         dataset_builder.BuilderConfig(name=record_set_name)
         for record_set_name in record_set_names
