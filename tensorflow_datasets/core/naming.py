@@ -381,6 +381,13 @@ def filename_prefix_for_split(name: str, split: str) -> str:
   return '%s-%s' % (filename_prefix_for_name(name), split)
 
 
+def _strip_encoding_suffix(path: str) -> str:
+  """Strips the encoding suffix from the path."""
+  if '%' not in path:
+    return path
+  return path[: path.rfind('%')]
+
+
 def _num_digits_needed(num_shards: Optional[int]) -> int:
   return max(len(str(num_shards or 0)), _DEFAULT_NUM_DIGITS_FOR_SHARDS)
 
@@ -448,9 +455,6 @@ class ShardedFileTemplate:
     split: the split of the dataset.
     filetype_suffix: the filetype suffix to denote the type of file. For
       example, `tfrecord`.
-    encryption_suffix: an optional encryption string added to the end of the
-      sharded filename string. The encryption suffix is only added to the data
-      files and not to the metadata files (e.g. dataset_info.json).
   """
 
   data_dir: epath.Path
@@ -458,7 +462,6 @@ class ShardedFileTemplate:
   dataset_name: Optional[str] = None
   split: Optional[str] = None
   filetype_suffix: Optional[str] = None
-  encryption_suffix: Optional[str] = None
 
   def __post_init__(self):
     self.data_dir = epath.Path(self.data_dir)
@@ -482,7 +485,9 @@ class ShardedFileTemplate:
 
     Can be used to test whether a filename matches to this template.
     """
-    return re.compile(_filename_template_to_regex(self.template))
+    # Strip the encoding suffix since it is only used for read/write operations.
+    template = _strip_encoding_suffix(self.template)
+    return re.compile(_filename_template_to_regex(template))
 
   def parse_filename_info(self, filename: str) -> Optional[FilenameInfo]:
     """Parses the filename using this template.
@@ -574,9 +579,6 @@ class ShardedFileTemplate:
       raise ValueError(
           f'Could not format template {self.template} with mappings {mappings}!'
       ) from e
-
-    if self.encryption_suffix:
-      filepath += self.encryption_suffix
 
     return filepath
 
