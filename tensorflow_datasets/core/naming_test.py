@@ -98,7 +98,7 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
         dataset_name='ds',
         data_dir='/path',
         filetype_suffix='tfrecord',
-        encryption_suffix=encryption_suffix,
+        template=naming.DEFAULT_FILENAME_TEMPLATE + encryption_suffix,
     )
     names = template.sharded_filepaths(2)
     shards = ['00000-of-00002', '00001-of-00002']
