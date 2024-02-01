@@ -188,8 +188,8 @@ def test_dataset_registry_list_builders(mock_registers_per_namespace, tmp_path):
   assert set(registry.list_builders()) == {'a', 'b', 'c'}
 
 
-@mock.patch.object(registry_lib, '_registers_per_namespace')
-def test_list_dataset_references(mock_registers_per_namespace, tmp_path):
+@pytest.fixture()
+def dummy_refs_and_registers():
   ref1 = naming.DatasetReference(dataset_name='ds1', namespace='ns1')
   ref2 = naming.DatasetReference(dataset_name='ds2', namespace='ns1')
   ref3 = naming.DatasetReference(dataset_name='ds3', namespace='ns2')
@@ -197,11 +197,14 @@ def test_list_dataset_references(mock_registers_per_namespace, tmp_path):
   register1.list_dataset_references.return_value = [ref1, ref2]
   register2 = mock.create_autospec(register_package.PackageRegister)
   register2.list_dataset_references.return_value = [ref3]
-  mock_registers_per_namespace.return_value = {
-      'ns1': [register1],
-      'ns2': [register2],
+  return {
+      'dummy_references': [ref1, ref2, ref3],
+      'dummy_registers': [register1, register2],
   }
 
+
+@pytest.fixture()
+def dummy_config(tmp_path):
   dummy_path = _write_dummy_config(
       textwrap.dedent("""
     [ns1]
@@ -211,9 +214,45 @@ def test_list_dataset_references(mock_registers_per_namespace, tmp_path):
   """),
       tmp_path,
   )
-  config = config_lib.NamespaceRegistry(dummy_path)
-  registry = registry_lib.DatasetRegistry(config)
-  assert sorted(registry.list_dataset_references()) == [ref1, ref2, ref3]
+  return config_lib.NamespaceRegistry(dummy_path)
+
+
+@mock.patch.object(registry_lib, '_registers_per_namespace')
+def test_list_dataset_references(
+    mock_registers_per_namespace, dummy_refs_and_registers, dummy_config
+):  # pylint: disable=redefined-outer-name
+  register1, register2 = dummy_refs_and_registers['dummy_registers']
+  mock_registers_per_namespace.return_value = {
+      'ns1': [register1],
+      'ns2': [register2],
+  }
+  registry = registry_lib.DatasetRegistry(dummy_config)
+  assert (
+      sorted(registry.list_dataset_references())
+      == dummy_refs_and_registers['dummy_references']
+  )
+
+
+@mock.patch.object(registry_lib, '_registers_per_namespace')
+def test_list_dataset_references_per_namespace(
+    mock_registers_per_namespace, dummy_refs_and_registers, dummy_config
+):  # pylint: disable=redefined-outer-name
+  ref1, ref2, ref3 = dummy_refs_and_registers['dummy_references']
+  register1, register2 = dummy_refs_and_registers['dummy_registers']
+  mock_registers_per_namespace.return_value = {
+      'ns1': [register1],
+      'ns2': [register2],
+  }
+  registry = registry_lib.DatasetRegistry(dummy_config)
+  assert sorted(
+      registry.list_dataset_references_for_namespace(namespace='ns1')
+  ) == [ref1, ref2]
+  assert sorted(
+      registry.list_dataset_references_for_namespace(namespace='ns2')
+  ) == [ref3]
+
+  with pytest.raises(ValueError, match='Namespace ns3 not found.'):
+    list(registry.list_dataset_references_for_namespace(namespace='ns3'))
 
 
 def test_add_namespace(dummy_register: registry_lib.DatasetRegistry):  # pylint: disable=redefined-outer-name

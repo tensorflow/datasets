@@ -149,6 +149,32 @@ class DatasetRegistry(register_base.BaseRegister):
               register,
           )
 
+  def list_dataset_references_for_namespace(
+      self, namespace: str
+  ) -> Iterable[naming.DatasetReference]:
+    """Lists the dataset references available for a specific namespace.
+
+    Args:
+      namespace: a namespace.
+
+    Yields:
+      An iterator over the datasets references for the given namespace.
+
+    Raises:
+      ValueError if the given namespace doesn't exist in the registry.
+    """
+    if not self.has_namespace(namespace):
+      raise ValueError(f'Namespace {namespace} not found.')
+    for register in self.registers_per_namespace[namespace]:
+      try:
+        yield from register.list_dataset_references()
+      except Exception as e:  # pylint: disable=broad-except
+        logging.exception(
+            'Exception while getting dataset references from register %s: %s',
+            register,
+            e,
+        )
+
   def list_builders_per_namespace(self, namespace: str) -> Sequence[str]:
     """Lists the builders available for a specific namespace."""
     builders = []
