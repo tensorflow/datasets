@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import collections
+import io
 import json
 import operator
 
@@ -33,6 +34,15 @@ def _build_bbox(image_info, x, y, width, height):
       ymax=(y + height) / image_info['height'],
       xmax=(x + width) / image_info['width'],
   )
+
+
+def _compute_mask(image_info, ann):
+  h, w = image_info['height'], image_info['width']
+  rles = tfds.core.lazy_imports.pycocotools.frPyObjects(
+      ann['segmentation'], h, w
+  )
+  rle = tfds.core.lazy_imports.pycocotools.merge(rles)
+  return tfds.core.lazy_imports.pycocotools.decode(rle)
 
 
 def _extract_annotation(ann, image_info):
@@ -110,9 +120,17 @@ def _generate_examples(refcoco_json, dataset, dataset_partition, split):
         raise ValueError(f'gt_box_index does not have length 1: {gt_box_index}')
       gt_box_index = gt_box_index[0]
 
+      mask = _compute_mask(image_info, r['ann']).astype(np.bool_)
+      mask_buf = io.BytesIO()
+      tfds.core.lazy_imports.PIL_Image.fromarray(mask).save(
+          mask_buf, format='png'
+      )
+      mask_buf.seek(0)
+
       obj.update({
           'refexp': refexp,
           'gt_box_index': gt_box_index,
+          'mask': mask_buf,
       })
       example['objects'].append(obj)
 
@@ -132,8 +150,9 @@ class RefCocoConfig(tfds.core.BuilderConfig):
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for RefCoco datasets."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
+      '1.1.0': 'Added masks.',
       '1.0.0': 'Initial release.',
   }
 
@@ -180,6 +199,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 'bbox': tfds.features.BBoxFeature(),
                 'label': np.int64,
                 'gt_box_index': np.int64,
+                'mask': tfds.features.Image(encoding_format='png'),
                 'refexp': tfds.features.Sequence({
                     'refexp_id': np.int64,
                     'raw': tfds.features.Text(),
