@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="ref_coco" />
-  <meta itemprop="description" content="A collection of 3 referring expression datasets based off images in the COCO&#10;dataset. A referring expression is a piece of text that describes a unique&#10;object in an image. These datasets are collected by asking human raters to&#10;disambiguate objects delineated by bounding boxes in the COCO dataset.&#10;&#10;RefCoco and RefCoco+ are from Kazemzadeh et al. 2014. RefCoco+ expressions are&#10;strictly appearance based descriptions, which they enforced by preventing raters&#10;from using location based descriptions (e.g., &quot;person to the right&quot; is not a&#10;valid description for RefCoco+). RefCocoG is from Mao et al. 2016, and has more&#10;rich description of objects compared to RefCoco due to differences in the&#10;annotation process. In particular, RefCoco was collected in an interactive&#10;game-based setting, while RefCocoG was collected in a non-interactive setting.&#10;On average, RefCocoG has 8.4 words per expression while RefCoco has 3.5 words.&#10;&#10;Each dataset has different split allocations that are typically all reported in&#10;papers. The &quot;testA&quot; and &quot;testB&quot; sets in RefCoco and RefCoco+ contain only people&#10;and only non-people respectively. Images are partitioned into the various&#10;splits. In the &quot;google&quot; split, objects, not images, are partitioned between the&#10;train and non-train splits. This means that the same image can appear in both&#10;the train and validation split, but the objects being referred to in the image&#10;will be different between the two sets. In contrast, the &quot;unc&quot; and &quot;umd&quot; splits&#10;partition images between the train, validation, and test split. In RefCocoG, the&#10;&quot;google&quot; split does not have a canonical test set, and the validation set is&#10;typically reported in papers as &quot;val*&quot;.&#10;&#10;Stats for each dataset and split (&quot;refs&quot; is the number of referring expressions,&#10;and &quot;images&quot; is the number of images):&#10;&#10;dataset  | partition | split | refs  | images&#10;-------- | --------- | ----- | ----- | ------&#10;refcoco  | google    | train | 40000 | 19213&#10;refcoco  | google    | val   | 5000  | 4559&#10;refcoco  | google    | test  | 5000  | 4527&#10;refcoco  | unc       | train | 42404 | 16994&#10;refcoco  | unc       | val   | 3811  | 1500&#10;refcoco  | unc       | testA | 1975  | 750&#10;refcoco  | unc       | testB | 1810  | 750&#10;refcoco+ | unc       | train | 42278 | 16992&#10;refcoco+ | unc       | val   | 3805  | 1500&#10;refcoco+ | unc       | testA | 1975  | 750&#10;refcoco+ | unc       | testB | 1798  | 750&#10;refcocog | google    | train | 44822 | 24698&#10;refcocog | google    | val   | 5000  | 4650&#10;refcocog | umd       | train | 42226 | 21899&#10;refcocog | umd       | val   | 2573  | 1300&#10;refcocog | umd       | test  | 5023  | 2600&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;ref_coco&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/ref_coco-refcoco_unc-1.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="A collection of 3 referring expression datasets based off images in the COCO&#10;dataset. A referring expression is a piece of text that describes a unique&#10;object in an image. These datasets are collected by asking human raters to&#10;disambiguate objects delineated by bounding boxes in the COCO dataset.&#10;&#10;RefCoco and RefCoco+ are from Kazemzadeh et al. 2014. RefCoco+ expressions are&#10;strictly appearance based descriptions, which they enforced by preventing raters&#10;from using location based descriptions (e.g., &quot;person to the right&quot; is not a&#10;valid description for RefCoco+). RefCocoG is from Mao et al. 2016, and has more&#10;rich description of objects compared to RefCoco due to differences in the&#10;annotation process. In particular, RefCoco was collected in an interactive&#10;game-based setting, while RefCocoG was collected in a non-interactive setting.&#10;On average, RefCocoG has 8.4 words per expression while RefCoco has 3.5 words.&#10;&#10;Each dataset has different split allocations that are typically all reported in&#10;papers. The &quot;testA&quot; and &quot;testB&quot; sets in RefCoco and RefCoco+ contain only people&#10;and only non-people respectively. Images are partitioned into the various&#10;splits. In the &quot;google&quot; split, objects, not images, are partitioned between the&#10;train and non-train splits. This means that the same image can appear in both&#10;the train and validation split, but the objects being referred to in the image&#10;will be different between the two sets. In contrast, the &quot;unc&quot; and &quot;umd&quot; splits&#10;partition images between the train, validation, and test split. In RefCocoG, the&#10;&quot;google&quot; split does not have a canonical test set, and the validation set is&#10;typically reported in papers as &quot;val*&quot;.&#10;&#10;Stats for each dataset and split (&quot;refs&quot; is the number of referring expressions,&#10;and &quot;images&quot; is the number of images):&#10;&#10;dataset  | partition | split | refs  | images&#10;-------- | --------- | ----- | ----- | ------&#10;refcoco  | google    | train | 40000 | 19213&#10;refcoco  | google    | val   | 5000  | 4559&#10;refcoco  | google    | test  | 5000  | 4527&#10;refcoco  | unc       | train | 42404 | 16994&#10;refcoco  | unc       | val   | 3811  | 1500&#10;refcoco  | unc       | testA | 1975  | 750&#10;refcoco  | unc       | testB | 1810  | 750&#10;refcoco+ | unc       | train | 42278 | 16992&#10;refcoco+ | unc       | val   | 3805  | 1500&#10;refcoco+ | unc       | testA | 1975  | 750&#10;refcoco+ | unc       | testB | 1798  | 750&#10;refcocog | google    | train | 44822 | 24698&#10;refcocog | google    | val   | 5000  | 4650&#10;refcocog | umd       | train | 42226 | 21899&#10;refcocog | umd       | val   | 2573  | 1300&#10;refcocog | umd       | test  | 5023  | 2600&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;ref_coco&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/ref_coco" />
   <meta itemprop="sameAs" content="https://github.com/lichengunc/refer" />
   <meta itemprop="citation" content="@inproceedings{kazemzadeh2014referitgame,&#10;  title={Referitgame: Referring to objects in photographs of natural scenes},&#10;  author={Kazemzadeh, Sahar and Ordonez, Vicente and Matten, Mark and Berg, Tamara},&#10;  booktitle={Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP)},&#10;  pages={787--798},&#10;  year={2014}&#10;}&#10;@inproceedings{yu2016modeling,&#10;  title={Modeling context in referring expressions},&#10;  author={Yu, Licheng and Poirson, Patrick and Yang, Shan and Berg, Alexander C and Berg, Tamara L},&#10;  booktitle={European Conference on Computer Vision},&#10;  pages={69--85},&#10;  year={2016},&#10;  organization={Springer}&#10;}&#10;@inproceedings{mao2016generation,&#10;  title={Generation and Comprehension of Unambiguous Object Descriptions},&#10;  author={Mao, Junhua and Huang, Jonathan and Toshev, Alexander and Camburu, Oana and Yuille, Alan and Murphy, Kevin},&#10;  booktitle={CVPR},&#10;  year={2016}&#10;}&#10;@inproceedings{nagaraja2016modeling,&#10;  title={Modeling context between objects for referring expression understanding},&#10;  author={Nagaraja, Varun K and Morariu, Vlad I and Davis, Larry S},&#10;  booktitle={European Conference on Computer Vision},&#10;  pages={792--807},&#10;  year={2016},&#10;  organization={Springer}&#10;}" />
@@ -11,6 +11,11 @@
 
 # `ref_coco`
 
+
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
 
 Warning: Manual download required. See instructions below.
 
@@ -77,9 +82,14 @@ refcocog | umd       | test  | 5023  | 2600
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Added masks.
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -108,7 +118,12 @@ refcocog | umd       | test  | 5023  | 2600
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -128,6 +143,7 @@ FeaturesDict({
         'gt_box_index': int64,
         'id': int64,
         'label': int64,
+        'mask': Image(shape=(None, None, 3), dtype=uint8),
         'refexp': Sequence({
             'raw': Text(shape=(), dtype=string),
             'refexp_id': int64,
@@ -155,6 +171,8 @@ FeaturesDict({
 | objects/gt_box_index     | Tensor       |          | int64   |             |
 | objects/id               | Tensor       |          | int64   |             |
 | objects/label            | Tensor       |          | int64   |             |
+| objects/mask             | Image        | (None,   | uint8   |             |
+:                          :              : None, 3) :         :             :
 | objects/refexp           | Sequence     |          |         |             |
 | objects/refexp/raw       | Text         |          | string  |             |
 | objects/refexp/refexp_id | Tensor       |          | int64   |             |
@@ -162,6 +180,14 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -200,271 +226,10 @@ FeaturesDict({
 
 ## ref_coco/refcoco_unc (default config)
 
-*   **Dataset size**: `3.24 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'testA'`      | 750
-`'testB'`      | 750
-`'train'`      | 16,994
-`'validation'` | 1,500
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/ref_coco-refcoco_unc-1.0.0.png" alt="Visualization" width="500px">
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcoco_unc-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## ref_coco/refcoco_google
-
-*   **Dataset size**: `4.60 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 4,527
-`'train'`      | 19,213
-`'validation'` | 4,559
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/ref_coco-refcoco_google-1.0.0.png" alt="Visualization" width="500px">
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcoco_google-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## ref_coco/refcocoplus_unc
 
-*   **Dataset size**: `3.24 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'testA'`      | 750
-`'testB'`      | 750
-`'train'`      | 16,992
-`'validation'` | 1,500
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/ref_coco-refcocoplus_unc-1.0.0.png" alt="Visualization" width="500px">
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocoplus_unc-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## ref_coco/refcocog_google
 
-*   **Dataset size**: `4.59 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 24,698
-`'validation'` | 4,650
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/ref_coco-refcocog_google-1.0.0.png" alt="Visualization" width="500px">
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocog_google-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## ref_coco/refcocog_umd
-
-*   **Dataset size**: `4.04 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 2,600
-`'train'`      | 21,899
-`'validation'` | 1,300
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/ref_coco-refcocog_umd-1.0.0.png" alt="Visualization" width="500px">
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocog_umd-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
