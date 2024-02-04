@@ -279,7 +279,8 @@ Split          | Examples
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/ref_coco-refcocog_google-1.1.0.png" alt="Visualization" width="500px">
 
 ## ref_coco/refcocog_umd
 
