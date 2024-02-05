@@ -60,6 +60,9 @@ the dataset has been updated since the last release.
 echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
+If you're using additional dependencies not included in TFDS library follow
+[the instructions for managing Python pipeline dependencies](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/#local-or-nonpypi).
+
 Finally, you can launch the job using the command below:
 
 ```sh
