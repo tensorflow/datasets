@@ -260,6 +260,7 @@ class Writer(object):
             total=self._num_examples,
             unit=" examples",
             leave=False,
+            mininterval=1.0,
         )
     )
     try:

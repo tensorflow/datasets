@@ -287,12 +287,12 @@ def nullcontext(enter_result: T = None) -> Iterator[T]:
   yield enter_result
 
 
-def _get_incomplete_path(filename):
+def _get_incomplete_path(filename: str) -> str:
   """Returns a temporary filename based on filename."""
   random_suffix = ''.join(
       random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
   )
-  return filename + constants.INCOMPLETE_SUFFIX + random_suffix
+  return filename + constants.INCOMPLETE_SUFFIX + random_suffix + '/'
 
 
 @contextlib.contextmanager
