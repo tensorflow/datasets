@@ -675,8 +675,10 @@ class DatasetBuilder(registered.RegisteredDataset):
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
-        if download_config.try_download_gcs and gcs_utils.is_dataset_on_gcs(
-            self.info.full_name
+        if (
+            download_config.try_download_gcs
+            and gcs_utils.is_dataset_on_gcs(self.info.full_name)
+            and self.info.file_format == file_adapters.FileFormat.TFRECORD
         ):
           logging.info(GCS_HOSTED_MSG, self.name)
           gcs_utils.download_gcs_dataset(
