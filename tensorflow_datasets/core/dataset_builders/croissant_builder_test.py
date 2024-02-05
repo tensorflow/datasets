@@ -46,6 +46,7 @@ def get_dummy_metadata():
   record_sets = [
       mlc.RecordSet(
           name="jsonl",
+          description="Dummy record set.",
           fields=[
               mlc.Field(
                   name="index",
@@ -53,7 +54,7 @@ def get_dummy_metadata():
                   data_types=mlc.DataType.INTEGER,
                   source=mlc.Source(
                       uid="raw_data",
-                      node_type="distribution",
+                      node_type="fileObject",
                       extract=mlc.Extract(column="index"),
                   ),
               ),
@@ -63,7 +64,7 @@ def get_dummy_metadata():
                   data_types=mlc.DataType.TEXT,
                   source=mlc.Source(
                       uid="raw_data",
-                      node_type="distribution",
+                      node_type="fileObject",
                       extract=mlc.Extract(column="text"),
                   ),
               ),
@@ -73,7 +74,6 @@ def get_dummy_metadata():
   dummy_metadata = mlc.Metadata(
       name="DummyDataset",
       description="Dummy description.",
-      conforms_to="http://mlcommons.org/croissant/1.0",
       citation=(
           "@article{dummyarticle, title={title}, author={author}, year={2020}}"
       ),
@@ -187,10 +187,12 @@ class CroissantBuilderTest(testing.TestCase):
       f.write(json.dumps(dummy_metadata.to_json(), indent=2))
       f.write("\n")
 
+    cls._tfds_tmp_dir = testing.make_tmp_dir()
     cls.builder = croissant_builder.CroissantBuilder(
         file=croissant_file,
         file_format=FileFormat.ARRAY_RECORD,
         disable_shuffling=True,
+        data_dir=cls._tfds_tmp_dir,
     )
 
   def test_dataset_info(self):
@@ -201,6 +203,10 @@ class CroissantBuilderTest(testing.TestCase):
     assert self.builder._info().redistribution_info.license == "Public"
     assert len(self.builder.metadata.record_sets) == 1
     assert self.builder.metadata.record_sets[0].name == "jsonl"
+    assert (
+        self.builder.metadata.ctx.conforms_to.value
+        == "http://mlcommons.org/croissant/1.0"
+    )
 
   def test_generated_samples(self):
     self.builder.download_and_prepare()
