@@ -74,7 +74,7 @@ def get_dummy_metadata():
   dummy_metadata = mlc.Metadata(
       name="DummyDataset",
       description="Dummy description.",
-      citation=(
+      cite_as=(
           "@article{dummyarticle, title={title}, author={author}, year={2020}}"
       ),
       url="https://dummy_url",
@@ -198,6 +198,10 @@ class CroissantBuilderTest(testing.TestCase):
   def test_dataset_info(self):
     assert self.builder.name == "DummyDataset"
     assert self.builder.version == "1.2.0"
+    assert (
+        self.builder._info().citation
+        == "@article{dummyarticle, title={title}, author={author}, year={2020}}"
+    )
     assert self.builder._info().description == "Dummy description."
     assert self.builder._info().homepage == "https://dummy_url"
     assert self.builder._info().redistribution_info.license == "Public"
