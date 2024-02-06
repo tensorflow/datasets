@@ -35,6 +35,7 @@ import tensorflow_datasets.public_api as tfds
 # Import commands
 from tensorflow_datasets.scripts.cli import build
 from tensorflow_datasets.scripts.cli import convert_format
+from tensorflow_datasets.scripts.cli import croissant
 from tensorflow_datasets.scripts.cli import new
 from tensorflow_datasets.scripts.utils import flag_utils
 
@@ -60,6 +61,7 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
   build.register_subparser(subparser)
   new.register_subparser(subparser)
   convert_format.register_subparser(subparser)
+  croissant.register_subparser(subparser)
   return parser.parse_args(argv[1:])
 
 
