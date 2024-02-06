@@ -165,7 +165,7 @@ class CroissantBuilder(
         description=self.dataset.metadata.description,
         features=self.get_features(),
         homepage=self.dataset.metadata.url,
-        citation=self.dataset.metadata.citation,
+        citation=self.dataset.metadata.cite_as,
         license=self.dataset.metadata.license,
         disable_shuffling=self._disable_shuffling,
     )
