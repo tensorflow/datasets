@@ -189,7 +189,7 @@ class CroissantBuilderTest(testing.TestCase):
 
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     cls.builder = croissant_builder.CroissantBuilder(
-        file=croissant_file,
+        jsonld=croissant_file,
         file_format=FileFormat.ARRAY_RECORD,
         disable_shuffling=True,
         data_dir=cls._tfds_tmp_dir,

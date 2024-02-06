@@ -23,11 +23,14 @@ file; each of the record_set_names specified will result in a separate
 ConfigBuilder.
 
 ```python
-
-titanic_file="path/to/titanic/metadata.json"
-d = croissant_builder.CroissantBuilder(
-      file=titanic_file, record_set_names=["passengers"]
-  )
+import tensorflow_datasets as tfds
+builder = tfds.dataset_builders.CroissantBuilder(
+    jsonld="https://raw.githubusercontent.com/mlcommons/croissant/main/datasets/0.8/huggingface-mnist/metadata.json",
+    file_format='array_record',
+)
+builder.download_and_prepare()
+ds = builder.as_data_source()
+print(ds['default'][0])
 ```
 """
 
@@ -101,7 +104,7 @@ class CroissantBuilder(
   def __init__(
       self,
       *,
-      file: epath.PathLike,
+      jsonld: epath.PathLike | str,
       record_set_names: Sequence[str] | None = None,
       disable_shuffling: Optional[bool] = False,
       int_dtype: Optional[type_utils.TfdsDType] = np.int64,
@@ -111,7 +114,8 @@ class CroissantBuilder(
     """Initializes a CroissantBuilder.
 
     Args:
-      file: The Croissant config file for the given dataset.
+      jsonld: The Croissant JSON-LD for the given dataset: either a file path or
+        a URL.
       record_set_names: The names of the record sets to generate. Each record
         set will correspond to a separate config. If not specified, it will use
         all the record sets.
@@ -122,7 +126,7 @@ class CroissantBuilder(
         np.float32.
       **kwargs: kwargs to pass to GeneratorBasedBuilder directly.
     """
-    self.dataset = mlc.Dataset(file)
+    self.dataset = mlc.Dataset(jsonld)
     self.name = self.dataset.metadata.name
     self.metadata = self.dataset.metadata
 

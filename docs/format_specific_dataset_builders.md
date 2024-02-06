@@ -185,15 +185,18 @@ A `CroissantBuilder` defines a TFDS dataset based on a Croissant 🥐 metadata
 file; each of the `record_set_names` specified will result in a separate
 `ConfigBuilder`.
 
-For example, to initialize a `CroissantBuilder` for the Titanic dataset using
-its
-[Croissant 🥐 definition](https://github.com/mlcommons/croissant/tree/main/datasets/titanic):
+For example, to initialize a `CroissantBuilder` for the MNIST dataset using its
+[Croissant 🥐 definition](https://github.com/mlcommons/croissant/tree/main/datasets/1.0/huggingface-mnist):
 
 ```python
-titanic_file="path/to/titanic/metadata.json"
-builder = croissant_builder.CroissantBuilder(
-      file=titanic_file, record_set_names=["passengers"]
-  )
+import tensorflow_datasets as tfds
+builder = tfds.dataset_builders.CroissantBuilder(
+    jsonld="https://raw.githubusercontent.com/mlcommons/croissant/main/datasets/0.8/huggingface-mnist/metadata.json",
+    file_format='array_record',
+)
+builder.download_and_prepare()
+ds = builder.as_data_source()
+print(ds['default'][0])
 ```
 
 ## CoNLL
