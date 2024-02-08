@@ -126,7 +126,7 @@ class DatasetInfoTest(testing.TestCase):
     split_dict = info.splits
 
     # Assert they are the correct number.
-    self.assertTrue(len(split_dict), 2)
+    self.assertLen(split_dict, 2)
 
     # Assert on what they are
     self.assertIn("train", split_dict)
@@ -271,7 +271,7 @@ class DatasetInfoTest(testing.TestCase):
       )
       self.assertEqual(restored_info.download_size, 789)
       self.assertEqual(restored_info.dataset_size, 576)
-      self.assertEqual(len(restored_info.as_proto.schema.feature), 4)
+      self.assertLen(restored_info.as_proto.schema.feature, 4)
       self.assertEqual(
           restored_info.download_checksums,
           {
@@ -330,7 +330,7 @@ class DatasetInfoTest(testing.TestCase):
     )
     # No statistics in the above.
     self.assertEqual(0, info.splits.total_num_examples)
-    self.assertEqual(0, len(info.as_proto.schema.feature))
+    self.assertEmpty(info.as_proto.schema.feature)
 
     # Partial update will happen here.
     info.read_from_directory(_INFO_DIR)
@@ -341,7 +341,7 @@ class DatasetInfoTest(testing.TestCase):
 
     # These are dynamically computed, so will be updated.
     self.assertEqual(40, info.splits.total_num_examples)
-    self.assertEqual(2, len(info.as_proto.schema.feature))
+    self.assertLen(info.as_proto.schema.feature, 2)
 
   def test_set_splits_normal(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
