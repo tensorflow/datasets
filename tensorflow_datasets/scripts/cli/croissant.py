@@ -19,13 +19,15 @@ Example usage:
 ```
 tfds build_croissant \
   --jsonld=/tmp/croissant.json \
-  --record_sets=record1 record2
-  --file_format=arrayrecord
+  --record_sets=record1 --record_sets=record2
+  --file_format=array_record
   --out_dir=/tmp/foo
+  --mapping='{"document.csv": "~/Downloads/document.csv"}"'
 ```
 """
 
 import argparse
+import json
 import pathlib
 
 from tensorflow_datasets.core import file_adapters
@@ -50,7 +52,6 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
   parser.add_argument(
       '--record_sets',
       nargs='*',
-      choices=[file_format.value for file_format in file_adapters.FileFormat],
       help=(
           'The names of the record sets to generate. Each record set will'
           ' correspond to a separate config. If not specified, it will use all'
@@ -62,6 +63,16 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
       type=pathlib.Path,
       help='Path where the converted dataset will be stored.',
       required=True,
+  )
+  parser.add_argument(
+      '--mapping',
+      type=str,
+      help=(
+          'Mapping filename->filepath as a Python dict[str, str] to handle'
+          ' manual downloads. If `document.csv` is the FileObject and you'
+          ' downloaded it to `~/Downloads/document.csv`, you can'
+          ' specify`--mapping=\'{"document.csv": "~/Downloads/document.csv"}\''
+      ),
   )
 
 
@@ -78,6 +89,7 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
           record_sets=args.record_sets,
           file_format=args.file_format,
           out_dir=args.out_dir,
+          mapping=args.mapping,
       )
   )
 
@@ -87,6 +99,7 @@ def prepare_croissant_builder(
     record_sets: list[str],
     file_format: str,
     out_dir: pathlib.Path,
+    mapping: str | None,
 ) -> None:
   """Creates a Croissant Builder and runs the preparation.
 
@@ -97,15 +110,25 @@ def prepare_croissant_builder(
       record sets
     file_format: File format to convert the dataset to.
     out_dir: Path where the converted dataset will be stored.
+    mapping: Mapping filename->filepath as a Python dict[str, str] to handle
+      manual downloads. If `document.csv` is the FileObject and you downloaded
+      it to `~/Downloads/document.csv`, you can specify
+      `mapping={"document.csv": "~/Downloads/document.csv"}`.,
   """
   if not record_sets:
     record_sets = None
 
+  if mapping:
+    try:
+      mapping = json.loads(mapping)
+    except json.JSONDecodeError as e:
+      raise ValueError(f'Error parsing mapping parameter: {mapping}') from e
   builder = croissant_builder.CroissantBuilder(
       jsonld=jsonld,
       record_set_names=record_sets,
       file_format=file_format,
       data_dir=out_dir,
+      mapping=mapping,
   )
   builder.download_and_prepare()
   return
