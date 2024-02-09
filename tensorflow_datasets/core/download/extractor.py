@@ -69,10 +69,15 @@ class _Extractor(object):
       self._pbar_path = pbar_path
       yield
 
-  def extract(self, path, extract_method, to_path):
+  def extract(
+      self,
+      path: epath.PathLike,
+      extract_method: resource_lib.ExtractMethod,
+      to_path: epath.PathLike,
+  ) -> promise.Promise:
     """Returns `promise.Promise` => to_path."""
-    path = os.fspath(path)
-    to_path = os.fspath(to_path)
+    path = epath.Path(path)
+    to_path = epath.Path(to_path)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
     future = self._executor.submit(
@@ -82,16 +87,17 @@ class _Extractor(object):
 
   def _extract(
       self,
-      from_path: epath.PathLike,
-      method,
-      to_path: epath.PathLike,
+      from_path: epath.Path,
+      method: resource_lib.ExtractMethod,
+      to_path: epath.Path,
   ) -> epath.Path:
     """Returns `to_path` once resource has been extracted there."""
-    to_path_tmp = '%s%s_%s' % (
-        to_path,
-        constants.INCOMPLETE_SUFFIX,
+    tmp_file_name = '%s%s_%s' % (
+        constants.INCOMPLETE_PREFIX,
         uuid.uuid4().hex,
+        to_path.name,
     )
+    to_path_tmp = os.fspath(to_path.parent / tmp_file_name)
     max_length_dst_path = 0
     futures = []
     if self._pbar_path is None:
@@ -119,7 +125,7 @@ class _Extractor(object):
             ' in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
-      raise ExtractError(msg)
+      raise ExtractError(msg) from err
 
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.

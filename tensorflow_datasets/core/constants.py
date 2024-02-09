@@ -31,8 +31,8 @@ SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 DATA_DIR = os.environ.get('TFDS_DATA_DIR',
                           os.path.join(os.path.expanduser('~'), 'tensorflow_datasets'))
 
-# Suffix of files / directories which aren't finished downloading / extracting.
-INCOMPLETE_SUFFIX = '.incomplete'
+# Prefix of files / directories which aren't finished downloading / extracting.
+INCOMPLETE_PREFIX = 'incomplete.'
 
 # Note: GCS constants are defined in `core/utils/gcs_utils.py`
 

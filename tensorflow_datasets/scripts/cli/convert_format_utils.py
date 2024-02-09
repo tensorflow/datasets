@@ -203,7 +203,7 @@ def convert_dataset(
 
     logging.info('Removing incomplete files in %s.', dataset_dir)
     num_incomplete_files = 0
-    for incomplete_file in tmp_dir.glob(f'*{constants.INCOMPLETE_SUFFIX}.*'):
+    for incomplete_file in tmp_dir.glob(f'*{constants.INCOMPLETE_PREFIX}*'):
       incomplete_file.unlink()
       num_incomplete_files += 1
     logging.info('Removed %d incomplete files.', num_incomplete_files)
