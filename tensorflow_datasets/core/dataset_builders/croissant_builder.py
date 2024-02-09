@@ -34,6 +34,7 @@ print(ds['default'][0])
 ```
 """
 
+from collections.abc import Mapping
 from typing import Any, Dict, Optional, Sequence
 
 from etils import epath
@@ -109,6 +110,7 @@ class CroissantBuilder(
       disable_shuffling: Optional[bool] = False,
       int_dtype: Optional[type_utils.TfdsDType] = np.int64,
       float_dtype: Optional[type_utils.TfdsDType] = np.float32,
+      mapping: Optional[Mapping[str, epath.PathLike]] = None,
       **kwargs: Any,
   ):
     """Initializes a CroissantBuilder.
@@ -124,9 +126,15 @@ class CroissantBuilder(
         np.int64.
       float_dtype: The dtype to use for TFDS float features. Defaults to
         np.float32.
+      mapping: Mapping filename->filepath as a Python dict[str, str] to handle
+        manual downloads. If `document.csv` is the FileObject and you downloaded
+        it to `~/Downloads/document.csv`, you can specify
+        `mapping={"document.csv": "~/Downloads/document.csv"}`.,
       **kwargs: kwargs to pass to GeneratorBasedBuilder directly.
     """
-    self.dataset = mlc.Dataset(jsonld)
+    if mapping is None:
+      mapping = {}
+    self.dataset = mlc.Dataset(jsonld, mapping=mapping)
     self.name = self.dataset.metadata.name
     self.metadata = self.dataset.metadata
 
