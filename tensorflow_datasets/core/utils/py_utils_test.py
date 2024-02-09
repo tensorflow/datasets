@@ -352,10 +352,10 @@ def test_incomplete_file(tmp_path: pathlib.Path):
 @pytest.mark.parametrize(
     ['path', 'is_incomplete'],
     [
-        ('/a/bcd.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf', True),
+        ('/a/incomplete.a8c53d7beff74b2eb31b9b86c7d046cf.bcd', True),
         ('/a/incomplete-dataset.tfrecord-00000-of-00100', False),
-        ('/a/bcd.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf.suffix', False),
-        ('/a/bcd.incomplete.a8c53d7beff74beb3', False),
+        ('/a/prefix.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf', False),
+        ('/a/incomplete.a8c53d7beff74beb3.bcd', False),
     ],
 )
 def test_is_incomplete_file(path: str, is_incomplete: bool):

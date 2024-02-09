@@ -287,19 +287,20 @@ def nullcontext(enter_result: T = None) -> Iterator[T]:
   yield enter_result
 
 
-def _get_incomplete_path(filename: str) -> str:
-  """Returns a temporary filename based on filename."""
+def _get_incomplete_dir(dir_name: str) -> str:
+  """Returns a temporary dir name based on `dir_name`."""
   random_suffix = ''.join(
       random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
   )
-  return filename + constants.INCOMPLETE_SUFFIX + random_suffix + '/'
+  dir_name = epath.Path(dir_name)
+  return f'{dir_name.parent}/{constants.INCOMPLETE_PREFIX}{random_suffix}_{dir_name.name}/'
 
 
 @contextlib.contextmanager
 def incomplete_dir(dirname: epath.PathLike) -> Iterator[str]:
   """Create temporary dir for dirname and rename on exit."""
   dirname = os.fspath(dirname)
-  tmp_dir = _get_incomplete_path(dirname)
+  tmp_dir = _get_incomplete_dir(dirname)
   tmp_path = epath.Path(tmp_dir)
   tmp_path.mkdir(parents=True, exist_ok=True)
   try:
@@ -310,15 +311,20 @@ def incomplete_dir(dirname: epath.PathLike) -> Iterator[str]:
       tmp_path.rmtree()
 
 
+def _tmp_file_name(path: epath.PathLike) -> epath.Path:
+  path = epath.Path(path)
+  return (
+      path.parent
+      / f'{constants.INCOMPLETE_PREFIX}{uuid.uuid4().hex}.{path.name}'
+  )
+
+
 @contextlib.contextmanager
 def incomplete_file(
     path: epath.Path,
 ) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = (
-      path.parent
-      / f'{path.name}{constants.INCOMPLETE_SUFFIX}.{uuid.uuid4().hex}'
-  )
+  tmp_path = _tmp_file_name(path)
   try:
     yield tmp_path
     tmp_path.replace(path)
@@ -331,7 +337,7 @@ def is_incomplete_file(path: epath.Path) -> bool:
   """Returns whether the given filename suggests that it's incomplete."""
   return bool(
       re.search(
-          rf'^.+{re.escape(constants.INCOMPLETE_SUFFIX)}\.[0-9a-fA-F]{{32}}$',
+          rf'^{re.escape(constants.INCOMPLETE_PREFIX)}[0-9a-fA-F]{{32}}\..+$',
           path.name,
       )
   )
@@ -340,12 +346,11 @@ def is_incomplete_file(path: epath.Path) -> bool:
 @contextlib.contextmanager
 def atomic_write(path: epath.PathLike, mode: str):
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = epath.Path(
-      f'{os.fspath(path)}{constants.INCOMPLETE_SUFFIX}_{uuid.uuid4().hex}'
-  )
+  path = epath.Path(path)
+  tmp_path = _tmp_file_name(path)
   with tmp_path.open(mode=mode) as file_:
     yield file_
-  epath.Path(path).unlink(missing_ok=True)
+  path.unlink(missing_ok=True)
   tmp_path.rename(path)
 
 
