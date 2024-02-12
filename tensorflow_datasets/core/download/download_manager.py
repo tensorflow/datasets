@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Download manager interface."""
+
 from __future__ import annotations
 
 import concurrent.futures
@@ -21,13 +22,14 @@ import dataclasses
 import functools
 import hashlib
 import typing
-from typing import Any, Dict, Iterator, Optional, Tuple, Union
+from typing import Any, Dict, Iterator, Optional, Tuple, Type, Union
 import uuid
 
 from absl import logging
 from etils import epath
 import promise
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
@@ -85,6 +87,8 @@ class DownloadConfig:
       on Beam for the generation.
     beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
       datasets based on Beam for the generation.
+    beam_writer: full custom Beam writer class extending `BeamWriter`, only used
+      for datasets based on Beam for the generation.
     try_download_gcs: `bool`, defaults to True. If True, prepared dataset will
       be downloaded from GCS, when available. If False, dataset will be
       downloaded and prepared from scratch.
@@ -111,6 +115,7 @@ class DownloadConfig:
   force_checksums_validation: bool = False
   beam_runner: Optional[Any] = None
   beam_options: Optional[Any] = None
+  beam_writer: Optional[Type[writer_lib.BeamWriter]] = None
   try_download_gcs: bool = True
   verify_ssl: bool = True
   override_max_simultaneous_downloads: Optional[int] = None
@@ -248,9 +253,7 @@ class DownloadManager(object):
 
     self._download_dir: epath.Path = download_dir
     self._extract_dir: epath.Path = extract_dir
-    self._manual_dir: Optional[epath.Path] = (
-        manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
-    )
+    self._manual_dir: Optional[epath.Path] = manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     self._download_dir.mkdir(parents=True, exist_ok=True)
     self._extract_dir.mkdir(parents=True, exist_ok=True)

@@ -21,7 +21,7 @@ import dataclasses
 import functools
 import itertools
 import sys
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
 
 from absl import logging
 import click
@@ -130,6 +130,7 @@ class SplitBuilder:
       dataset_size: utils.Size,
       beam_options: Optional['beam.options.pipeline_options.PipelineOptions'],
       beam_runner: Optional['beam.runners.PipelineRunner'],
+      beam_writer: Optional[Type[writer_lib.BeamWriter]] = None,
       max_examples_per_split: Optional[int],
       file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
       shard_config: Optional[shard_utils.ShardConfig] = None,
@@ -145,6 +146,7 @@ class SplitBuilder:
     self._beam_pipeline: Optional['beam.Pipeline'] = None
     self._file_format = file_format
     self._shard_config = shard_config
+    self._beam_writer = beam_writer or writer_lib.BeamWriter
 
   @contextlib.contextmanager
   def maybe_beam_pipeline(self) -> Iterator[PipelineProxy]:
@@ -340,8 +342,10 @@ class SplitBuilder:
         # Generate the beam.PCollection
         pcollection = self.beam_pipeline | split_name >> generator
         build_kwargs['generator'] = pcollection
+        build_kwargs['beam_writer'] = self._beam_writer
         return self._build_from_pcollection(**build_kwargs)
       elif isinstance(generator, beam.PCollection):
+        build_kwargs['beam_writer'] = self._beam_writer
         return self._build_from_pcollection(**build_kwargs)
       else:
         raise unknown_generator_type
@@ -418,6 +422,7 @@ class SplitBuilder:
       generator: 'beam.PCollection[KeyExample]',
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
+      beam_writer: writer_lib.BeamWriter | None = None,
   ) -> _SplitInfoFuture:
     """Split generator for `beam.PCollection`."""
     # TODO(tfds): Should try to add support to `max_examples_per_split`
