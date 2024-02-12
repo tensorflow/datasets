@@ -249,6 +249,27 @@ class ShuffleTest(testing.TestCase):
     with self.assertRaises(shuffle.DuplicatedKeysError):
       next(iterator)
 
+  def test_disable_shuffling(self):
+    self._test_items(
+        'split1',
+        _ITEMS,
+        [value for _, value in _ITEMS],
+        disable_shuffling=True,
+    )
+    with mock.patch.object(
+        shuffle, 'MAX_MEM_BUFFER_SIZE', 0
+    ), self.assertRaisesWithLiteralMatch(
+        AssertionError,
+        "Only int (not <class 'str'>) can be used as key in Shuffler when"
+        ' adding to bucket!',
+    ):
+      self._test_items(
+          'split1',
+          _ITEMS,
+          [value for _, value in _ITEMS],
+          disable_shuffling=True,
+      )
+
 
 if __name__ == '__main__':
   testing.test_main()
