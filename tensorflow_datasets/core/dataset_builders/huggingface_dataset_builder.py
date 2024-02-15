@@ -26,13 +26,14 @@ Huggingface.
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 import datetime
 import functools
 import io
 import itertools
 import multiprocessing
 import os
-from typing import Any, Dict, Mapping, Optional, Tuple, Type, Union
+from typing import Any, Type
 
 from absl import logging
 from etils import epath
@@ -164,7 +165,7 @@ def _from_tfds_to_hf(tfds_name: str) -> str:
   )
 
 
-def convert_config_name(hf_config: Optional[str]) -> Optional[str]:
+def convert_config_name(hf_config: str | None) -> str | None:
   if hf_config is None:
     return hf_config
   return hf_config.lower().replace(",", "_")
@@ -234,7 +235,7 @@ def _convert_example(
     index: int,
     example: Mapping[str, Any],
     features: feature_lib.FeaturesDict,
-) -> Tuple[int, Mapping[str, Any]]:
+) -> tuple[int, Mapping[str, Any]]:
   """Converts an example from Huggingface format to TFDS format."""
   converted_example = {
       name: _convert_value(value, features[name])
@@ -254,7 +255,7 @@ def _extract_supervised_keys(hf_info):
 
 def _default_value(
     feature: feature_lib.FeatureConnector,
-) -> Union[bytes, int, bool, float]:
+) -> bytes | int | bool | float:
   """Returns the default value for a feature.
 
   Hugging Face is loose as far as typing is concerned. It accepts None values.
@@ -296,8 +297,8 @@ def _default_value(
 
 
 def _remove_empty_splits(
-    splits: Dict[str, split_builder_lib.SplitGenerator]
-) -> Dict[str, split_builder_lib.SplitGenerator]:
+    splits: Mapping[str, split_builder_lib.SplitGenerator]
+) -> Mapping[str, split_builder_lib.SplitGenerator]:
   """Removes empty splits."""
   non_empty_splits = {}
 
@@ -331,19 +332,21 @@ class HuggingfaceDatasetBuilder(
   def __init__(
       self,
       *,
-      file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
+      file_format: str | file_adapters.FileFormat | None = None,
       hf_repo_id: str,
-      hf_config: Optional[str] = None,
+      hf_config: str | None = None,
       ignore_verifications: bool = False,
-      data_dir: Optional[epath.PathLike] = None,
-      hf_hub_token: Optional[str] = None,
-      hf_num_proc: Optional[int] = None,
-      tfds_num_proc: Optional[int] = None,
+      data_dir: epath.PathLike | None = None,
+      hf_hub_token: str | None = None,
+      hf_num_proc: int | None = None,
+      tfds_num_proc: int | None = None,
       disable_shuffling: bool = True,
+      use_beam: bool = False,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
+    self._use_beam = use_beam
     self.config_kwargs = config_kwargs
     tfds_config = convert_config_name(hf_config)
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
@@ -384,12 +387,12 @@ class HuggingfaceDatasetBuilder(
     self.generation_errors = []
 
   @property
-  def builder_config(self) -> Optional[Any]:
+  def builder_config(self) -> Any | None:
     return self._converted_builder_config
 
   def _create_builder_config(
       self, builder_config
-  ) -> Optional[dataset_builder.BuilderConfig]:
+  ) -> dataset_builder.BuilderConfig | None:
     return self._converted_builder_config
 
   @functools.lru_cache(maxsize=1)
@@ -425,30 +428,44 @@ class HuggingfaceDatasetBuilder(
 
   def _split_generators(
       self, dl_manager: download.DownloadManager
-  ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
+  ) -> Mapping[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
-    ds = self._download_and_prepare_for_hf()
+    ds = _remove_empty_splits(self._download_and_prepare_for_hf())
     splits = {
-        split: self._generate_examples(data) for split, data in ds.items()
+        split: (
+            self._generate_examples_with_beam(data)
+            if self._use_beam
+            else self._generate_examples(data)
+        )
+        for split, data in ds.items()
     }
-    return _remove_empty_splits(splits)
+    return splits
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
-    dataset_info = self._info()
+    convert_example = functools.partial(
+        _convert_example, features=self.info.features
+    )
+    enumerated_data = enumerate(data)
+
     if self._tfds_num_proc is None:
-      for index, example in enumerate(data):
-        yield _convert_example(index, example, dataset_info.features)
+      yield from itertools.starmap(convert_example, enumerated_data)
     else:
       with multiprocessing.Pool(processes=self._tfds_num_proc) as pool:
-        examples = pool.starmap(
-            functools.partial(_convert_example, features=dataset_info.features),
-            enumerate(data),
-        )
-        yield from examples
+        yield from pool.starmap(convert_example, enumerate(data))
+
+  def _generate_examples_with_beam(
+      self, data
+  ) -> split_builder_lib.SplitGenerator:
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    convert_example = functools.partial(
+        _convert_example, features=self.info.features
+    )
+
+    return beam.Create(enumerate(data)) | beam.MapTuple(convert_example)
 
 
 def builder(
-    name: str, config: Optional[str] = None, **builder_kwargs
+    name: str, config: str | None = None, **builder_kwargs
 ) -> HuggingfaceDatasetBuilder:
   hf_repo_id = _from_tfds_to_hf(name)
   return HuggingfaceDatasetBuilder(
@@ -456,7 +473,7 @@ def builder(
   )
 
 
-def login_to_hf(hf_hub_token: Optional[str] = None):
+def login_to_hf(hf_hub_token: str | None = None):
   """Logs in to Hugging Face Hub with the token as arg or env variable."""
   hf_hub_token = hf_hub_token or os.environ.get("HUGGING_FACE_HUB_TOKEN")
   if hf_hub_token is not None:
