@@ -148,7 +148,9 @@ def test_beam_datasets(
   dataset_name = dataset_cls.name
 
   builder = dataset_cls(data_dir=tmp_path)
-  builder.download_and_prepare(download_config=make_dl_config())
+  builder.download_and_prepare(
+      download_config=make_dl_config(), file_format='tfrecord'
+  )
 
   data_path = tmp_path / dataset_name / '1.0.0'
   assert data_path.exists()  # Dataset has been generated

@@ -172,7 +172,7 @@ class GetShardSpecsTest(testing.TestCase):
     )
 
 
-def _read_records(path, file_format=file_adapters.DEFAULT_FILE_FORMAT):
+def _read_records(path, file_format=file_adapters.FileFormat.TFRECORD):
   """Returns (files_names, list_of_records_in_each_file).
 
   Args:
@@ -259,7 +259,7 @@ class WriterTest(testing.TestCase):
       dataset_name: str = 'foo',
       split: str = 'train',
       disable_shuffling=False,
-      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      file_format=file_adapters.FileFormat.TFRECORD,
       shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
@@ -405,7 +405,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
       dataset_name: str = 'foo',
       split: str = 'train',
       disable_shuffling=False,
-      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      file_format=file_adapters.FileFormat.TFRECORD,
       shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
     filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX

@@ -47,7 +47,7 @@ def test_format_suffix():
       file_adapters.ADAPTER_FOR_FORMAT[
           file_adapters.DEFAULT_FILE_FORMAT
       ].FILE_SUFFIX
-      == 'tfrecord'
+      == 'array_record'
   )
   assert (
       file_adapters.ADAPTER_FOR_FORMAT[
@@ -96,8 +96,8 @@ def test_read_write(
     builder_cls: Type[dataset_builder.DatasetBuilder],
     file_format: file_adapters.FileFormat,
 ):
-  builder = builder_cls(data_dir=tmp_path, file_format=file_format)
-  builder.download_and_prepare()
+  builder = builder_cls(data_dir=tmp_path)
+  builder.download_and_prepare(file_format=file_format)
   ds = builder.as_dataset(split='train')
   assert list(ds.as_numpy_iterator()) == [{'id': i} for i in range(3)]
 
