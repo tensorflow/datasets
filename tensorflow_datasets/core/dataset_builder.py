@@ -1538,6 +1538,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
         beam_options=download_config.beam_options,
         beam_runner=download_config.beam_runner,
+        beam_writer=download_config.beam_writer,
         file_format=self.info.file_format,
         shard_config=download_config.get_shard_config(),
     )
