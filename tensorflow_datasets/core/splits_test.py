@@ -223,7 +223,7 @@ class SplitsTest(testing.TestCase):
     super(SplitsTest, cls).setUpClass()
     tmp_dir = testing.make_tmp_dir()
     cls._builder = testing.DummyDatasetSharedGenerator(data_dir=tmp_dir)
-    cls._builder.download_and_prepare()
+    cls._builder.download_and_prepare(file_format='tfrecord')
 
   def test_sub_split_num_examples(self):
     s = self._builder.info.splits

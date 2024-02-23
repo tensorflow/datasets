@@ -461,7 +461,7 @@ def test_file_format_save_restore(
 def test_file_format_values(tmp_path: pathlib.Path):
   # Default file format
   builder = testing.DummyDataset(data_dir=tmp_path, file_format=None)
-  assert builder.info.file_format == file_adapters.FileFormat.TFRECORD
+  assert builder.info.file_format == file_adapters.FileFormat.ARRAY_RECORD
 
   # str accepted
   builder = testing.DummyDataset(data_dir=tmp_path, file_format="riegeli")
@@ -657,7 +657,7 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     """,
     homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
     data_dir='%s',
-    file_format=tfrecord,
+    file_format=array_record,
     download_size=1.95 KiB,
     dataset_size=11.06 MiB,
     features=FeaturesDict({

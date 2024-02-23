@@ -120,7 +120,7 @@ def _make_dataset(
 ) -> dataset_builder.DatasetBuilder:
   tmp_path = tmp_path_factory.mktemp(f'global_{builder_cls.__name__}')
   builder = builder_cls(data_dir=tmp_path)
-  builder.download_and_prepare()
+  builder.download_and_prepare(file_format='tfrecord')
   return builder
 
 
