@@ -15,12 +15,13 @@
 
 """To write records into sharded records files."""
 
+from collections.abc import Iterable, Sequence
 import dataclasses
 import functools
 import itertools
 import json
 import os
-from typing import Any, Iterable, List, Optional, Tuple
+from typing import Any, List, Optional, Tuple
 
 from absl import logging
 from etils import epath
@@ -97,7 +98,7 @@ def _get_index_path(path: str) -> epath.PathLike:
 def _get_shard_specs(
     num_examples: int,
     total_size: int,
-    bucket_lengths: List[int],
+    bucket_lengths: Sequence[int],
     filename_template: naming.ShardedFileTemplate,
     shard_config: shard_utils.ShardConfig,
 ) -> List[_ShardSpec]:
@@ -225,7 +226,7 @@ class Writer(object):
     self._file_format = file_format
     self._shard_config = shard_config or shard_utils.ShardConfig()
 
-  def write(self, key, example):
+  def write(self, key: type_utils.Key, example):
     """Writes given Example.
 
     The given example is not directly written to the tfrecord file, but to a
@@ -233,8 +234,8 @@ class Writer(object):
     files.
 
     Args:
-      key (int|bytes): the key associated with the example. Used for shuffling.
-      example: the Example to write to the tfrecord file.
+      key: The key associated with the example. Used for shuffling.
+      example: The Example to write to the tfrecord file.
     """
     serialized_example = self._serializer.serialize_example(example=example)
     self._shuffler.add(key, serialized_example)

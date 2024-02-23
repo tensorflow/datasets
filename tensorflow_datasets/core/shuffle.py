@@ -15,14 +15,15 @@
 
 """To shuffle records (stable)."""
 
+from collections.abc import Iterator, Sequence
 import math
 import os
 import struct
-from typing import Iterator, List, Optional
+from typing import List, Optional
 import uuid
 
 from absl import logging
-import six
+from etils import epath
 from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import type_utils
@@ -56,14 +57,14 @@ class DuplicatedKeysError(Exception):
     self.item2 = item2
 
 
-def _hkey_to_bytes(hkey):
+def _hkey_to_bytes(hkey: int) -> bytes:
   """Converts 128 bits integer hkey to binary representation."""
   max_int64 = 0xFFFFFFFFFFFFFFFF
   return struct.pack('=QQ', (hkey >> 64) & max_int64, hkey & max_int64)
 
 
-def _read_hkey(buff):
-  """Reads from fobj and returns hkey (128 bites integer)."""
+def _read_hkey(buff: bytes) -> int:
+  """Reads from fobj and returns hkey (128 bits integer)."""
   a, b = struct.unpack('=QQ', buff)
   return (a << 64) | b
 
@@ -98,7 +99,7 @@ def _increase_open_files_limit():
 
 
 def get_bucket_number(
-    hkey,
+    hkey: int,
     num_buckets: int,
     max_hkey: Optional[int] = None,
 ) -> int:
@@ -110,7 +111,7 @@ def get_bucket_number(
   return min(math.trunc((hkey * num_buckets) / max_hkey), num_buckets - 1)
 
 
-class _Bucket(object):
+class _Bucket:
   """Holds (key, binary value) tuples to disk, fast.
 
   Bucket instances are designed to be used either:
@@ -129,11 +130,11 @@ class _Bucket(object):
     ...
   """
 
-  def __init__(self, path):
+  def __init__(self, path: epath.Path):
     """Initialize a _Bucket instance.
 
     Args:
-      path (str): path to bucket file, where to write to or read from.
+      path: Path to bucket file, where to write to or read from.
     """
     self._path = path
     self._fobj = None
@@ -141,18 +142,18 @@ class _Bucket(object):
     self._size = 0
 
   @property
-  def size(self):
+  def size(self) -> int:
     return self._size
 
-  def __len__(self):
+  def __len__(self) -> int:
     return self._length
 
-  def add(self, key, data):
-    """Adds (key, data) to bucket.
+  def add(self, hkey: type_utils.Key, data: bytes):
+    """Adds (hkey, data) to bucket.
 
     Args:
-      key (int): the key.
-      data (binary): the data.
+      hkey: The hashed key.
+      data: The data.
     """
     if not self._fobj:
       file_utils.makedirs_cached(os.path.dirname(self._path))
@@ -160,12 +161,12 @@ class _Bucket(object):
     data_size = len(data)
 
     try:
-      self._fobj.write(_hkey_to_bytes(key))
+      self._fobj.write(_hkey_to_bytes(hkey))
     except tf.errors.ResourceExhaustedError as error:
       # catch "Too many open files"
       if error.message.endswith('Too many open files'):
         _increase_open_files_limit()
-        self._fobj.write(_hkey_to_bytes(key))
+        self._fobj.write(_hkey_to_bytes(hkey))
       else:
         raise error
     # http://docs.python.org/3/library/struct.html#byte-order-size-and-alignment
@@ -185,7 +186,7 @@ class _Bucket(object):
       self._fobj.flush()
       self._fobj.close()
 
-  def read_values(self):
+  def read_values(self) -> Iterator[type_utils.KeySerializedExample]:
     """Yields (hkey, data) tuples stored in bucket."""
     self.flush()
     path = self._path
@@ -210,16 +211,21 @@ class _Bucket(object):
       tf.io.gfile.remove(self._path)
 
 
-class Shuffler(object):
+class Shuffler:
   """Stores data in temp buckets, restitute it shuffled."""
 
-  def __init__(self, dirpath, hash_salt, disable_shuffling: bool = False):
+  def __init__(
+      self,
+      dirpath: epath.PathLike,
+      hash_salt: str | bytes,
+      disable_shuffling: bool = False,
+  ):
     """Initialize Shuffler.
 
     Args:
-      dirpath (string): directory in which to store temporary files.
-      hash_salt (string or bytes): salt to hash keys.
-      disable_shuffling (bool): specify whether to shuffle by hashing the key.
+      dirpath: Directory in which to store temporary files.
+      hash_salt: Salt to hash keys.
+      disable_shuffling: Specify whether to shuffle by hashing the key.
     """
     grp_name = uuid.uuid4()
     self._hasher = hashing.Hasher(hash_salt)
@@ -227,30 +233,37 @@ class Shuffler(object):
     self._buckets: List[_Bucket] = []
     for i in range(BUCKETS_NUMBER):
       bucket_name = 'bucket_%s_%03d.tmp' % (grp_name, i)
-      path = os.path.join(dirpath, bucket_name)
+      path = epath.Path(dirpath) / bucket_name
       self._buckets.append(_Bucket(path))
     self._read_only = False
     self._total_bytes = 0
     # To keep data in memory until enough data has been gathered.
     self._in_memory = True
-    self._mem_buffer = []
+    self._mem_buffer: List[type_utils.KeySerializedExample] = []
 
   @property
-  def size(self):
+  def size(self) -> int:
     """Return total size in bytes of records (not keys)."""
     return self._total_bytes
 
   @property
-  def bucket_lengths(self):
+  def bucket_lengths(self) -> Sequence[int]:
     if self._in_memory:
       return [len(self._mem_buffer)]
     return [len(b) for b in self._buckets]
 
-  def _add_to_bucket(self, hkey, data):
+  def _add_to_bucket(self, hkey: type_utils.Key, data: bytes):
+    # TODO(tfds): Support arbitrary keys.
+    # https://github.com/tensorflow/datasets/issues/5002
+    if not isinstance(hkey, int):
+      raise AssertionError(
+          f'Only int (not {type(hkey)}) can be used as key in Shuffler when'
+          ' adding to bucket!'
+      )
     bucket_number = get_bucket_number(hkey=hkey, num_buckets=BUCKETS_NUMBER)
     self._buckets[bucket_number].add(hkey, data)
 
-  def _add_to_mem_buffer(self, hkey, data):
+  def _add_to_mem_buffer(self, hkey: type_utils.Key, data: bytes):
     self._mem_buffer.append((hkey, data))
     if self._total_bytes > MAX_MEM_BUFFER_SIZE:
       for hkey, data in self._mem_buffer:
@@ -258,13 +271,13 @@ class Shuffler(object):
       self._mem_buffer = None
       self._in_memory = False
 
-  def add(self, key, data):
+  def add(self, key: type_utils.Key, data: bytes):
     """Add (key, data) to shuffler."""
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
-    if not isinstance(data, six.binary_type):
+    if not isinstance(data, bytes):
       raise AssertionError(
-          'Only bytes (not %s) can be stored in Shuffler!' % (type(data))
+          f'Only bytes (not {type(data)}) can be stored in Shuffler!'
       )
     if self._disable_shuffling:
       hkey = key
@@ -281,6 +294,8 @@ class Shuffler(object):
     previous_hkey = None
     previous_data = None
     iterator = self._iter_mem() if self._in_memory else self._iter_buckets()
+    if not self._disable_shuffling:
+      iterator = sorted(iterator)
     for hkey, data in iterator:
       if hkey == previous_hkey:
         raise DuplicatedKeysError(data, previous_data)
@@ -288,13 +303,10 @@ class Shuffler(object):
       yield hkey, data
       previous_data = data
 
-  def _iter_mem(self):
-    for hkey, data in sorted(self._mem_buffer):
-      yield hkey, data
+  def _iter_mem(self) -> Iterator[type_utils.KeySerializedExample]:
+    yield from self._mem_buffer
 
-  def _iter_buckets(self):
+  def _iter_buckets(self) -> Iterator[type_utils.KeySerializedExample]:
     for bucket in self._buckets:
-      bucket_data = sorted(bucket.read_values())
+      yield from bucket.read_values()
       bucket.del_file()
-      for hkey, data in bucket_data:
-        yield hkey, data
