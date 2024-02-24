@@ -45,6 +45,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.data_sources import array_record
 from tensorflow_datasets.core.data_sources import parquet
 from tensorflow_datasets.core.proto import dataset_info_pb2
@@ -1523,7 +1524,15 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     Args:
       pipeline_result: PipelineResult returned by beam.Pipeline.run().
     """
-    return
+    del pipeline_result
+
+  def _example_writer(self) -> writer_lib.ExampleWriter:
+    """Returns an example writer.
+
+    If datasets should be written to a custom storage, e.g., a database, then
+    implement a custom `ExampleWriter` and inject it here.
+    """
+    return writer_lib.ExampleWriter(file_format=self.info.file_format)
 
   def _download_and_prepare(  # pytype: disable=signature-mismatch  # overriding-parameter-type-checks
       self,
@@ -1538,8 +1547,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
         beam_options=download_config.beam_options,
         beam_runner=download_config.beam_runner,
-        file_format=self.info.file_format,
         shard_config=download_config.get_shard_config(),
+        example_writer=self._example_writer(),
     )
     # Wrap the generation inside a context manager.
     # If `beam` is used during generation (when a pipeline gets created),

@@ -25,6 +25,7 @@ import psutil
 import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import split_builder as split_builder_lib
+from tensorflow_datasets.core import writer as writer_lib
 
 
 def _inc_placeholder_counter(x):
@@ -35,6 +36,7 @@ def _inc_placeholder_counter(x):
 @pytest.fixture(name='split_builder')
 def fixture_split_builder():
   builder = testing.DummyMnist()
+  example_writer = writer_lib.ExampleWriter(builder.info.file_format)
   return split_builder_lib.SplitBuilder(
       split_dict=builder.info.splits,
       features=builder.info.features,
@@ -42,6 +44,7 @@ def fixture_split_builder():
       beam_options=None,
       beam_runner=None,
       max_examples_per_split=None,
+      example_writer=example_writer,
   )
 
 

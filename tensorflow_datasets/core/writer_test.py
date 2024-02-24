@@ -259,10 +259,15 @@ class WriterTest(testing.TestCase):
       dataset_name: str = 'foo',
       split: str = 'train',
       disable_shuffling=False,
-      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      example_writer: Optional[writer_lib.ExampleWriter] = None,
       shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
-    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
+    example_writer = example_writer or writer_lib.ExampleWriter(
+        file_format=file_adapters.DEFAULT_FILE_FORMAT
+    )
+    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[
+        example_writer.file_format
+    ].FILE_SUFFIX
     filename_template = naming.ShardedFileTemplate(
         dataset_name=dataset_name,
         split=split,
@@ -277,7 +282,7 @@ class WriterTest(testing.TestCase):
         filename_template=filename_template,
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
-        file_format=file_format,
+        example_writer=example_writer,
         shard_config=shard_config,
     )
     for key, record in to_write:
@@ -288,7 +293,7 @@ class WriterTest(testing.TestCase):
     """Stores records as tfrecord in a fixed number of shards with shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
     shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
-    self.assertEqual(self.NUM_SHARDS, len(shards_length))
+    self.assertLen(shards_length, self.NUM_SHARDS)
     self.assertEqual(
         shards_length, [len(shard) for shard in self.SHARDS_CONTENT]
     )
@@ -357,6 +362,14 @@ class WriterTest(testing.TestCase):
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
 
+  def test_custom_writer(self):
+    custom_example_writer = CustomExampleWriter()
+    _, total_size = self._write(
+        to_write=self.RECORDS_TO_WRITE, example_writer=custom_example_writer
+    )
+    self.assertEqual(total_size, 9)
+    self.assertEqual(custom_example_writer.num_examples_written, 8)
+
   @mock.patch.object(example_parser, 'ExampleParser', testing.DummyParser)
   def test_write_duplicated_keys(self):
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
@@ -405,10 +418,15 @@ class TfrecordsWriterBeamTest(testing.TestCase):
       dataset_name: str = 'foo',
       split: str = 'train',
       disable_shuffling=False,
-      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      example_writer: Optional[writer_lib.ExampleWriter] = None,
       shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
-    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
+    example_writer = example_writer or writer_lib.ExampleWriter(
+        file_format=file_adapters.DEFAULT_FILE_FORMAT
+    )
+    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[
+        example_writer.file_format
+    ].FILE_SUFFIX
     filename_template = naming.ShardedFileTemplate(
         dataset_name=dataset_name,
         split=split,
@@ -424,7 +442,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
         filename_template=filename_template,
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
-        file_format=file_format,
+        example_writer=example_writer,
         shard_config=shard_config,
     )
     # Here we need to disable type check as `beam.Create` is not capable of
@@ -446,7 +464,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     """Stores records as tfrecord in a fixed number of shards with shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
     shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
-    self.assertEqual(self.NUM_SHARDS, len(shards_length))
+    self.assertLen(shards_length, self.NUM_SHARDS)
     self.assertEqual(
         shards_length, [len(shard) for shard in self.SHARDS_CONTENT]
     )
@@ -503,9 +521,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     Note that the keys are not consecutive but contain gaps.
     """
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    records_with_holes = [
-        (i**4, str(i**4).encode('utf-8')) for i in range(10)
-    ]
+    records_with_holes = [(i**4, str(i**4).encode('utf-8')) for i in range(10)]
     expected_shards = [
         [b'0', b'1', b'16', b'81', b'256', b'625', b'1296'],
         [b'2401', b'4096'],
@@ -529,6 +545,17 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     self.assertEqual(all_recs, expected_shards)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
+
+
+class CustomExampleWriter(writer_lib.ExampleWriter):
+
+  def __init__(self):
+    super().__init__(file_adapters.FileFormat.TFRECORD)
+    self.num_examples_written = 0
+
+  def write(self, path, examples) -> file_adapters.ExamplePositions | None:
+    self.num_examples_written += len(list(examples))
+    epath.Path(path).touch()
 
 
 if __name__ == '__main__':

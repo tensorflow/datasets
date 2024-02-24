@@ -24,6 +24,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import example_parser
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.core import splits
@@ -62,7 +63,10 @@ def _write_tfrecord_from_shard_spec(shard_spec, get):
     skip, take = instruction.skip, instruction.take
     stop = skip + take if take > 0 else None
     iterators.append(itertools.islice(iterator, skip, stop))
-  writer_lib._write_examples(shard_spec.path, itertools.chain(*iterators))
+  example_writer = writer_lib.ExampleWriter(
+      file_format=file_adapters.FileFormat.TFRECORD
+  )
+  example_writer.write(shard_spec.path, itertools.chain(*iterators))
 
 
 class ReaderTest(testing.TestCase):

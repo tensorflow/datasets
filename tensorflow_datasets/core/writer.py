@@ -15,12 +15,15 @@
 
 """To write records into sharded records files."""
 
+from __future__ import annotations
+
+from collections.abc import Iterable, Sequence
 import dataclasses
 import functools
 import itertools
 import json
 import os
-from typing import Any, Iterable, List, Optional, Tuple
+from typing import Any
 
 from absl import logging
 from etils import epath
@@ -63,7 +66,7 @@ class _ShardSpec:
   path: str
   index_path: str
   examples_number: int
-  file_instructions: List[shard_utils.FileInstruction]
+  file_instructions: Sequence[shard_utils.FileInstruction]
 
 
 def _raise_error_for_duplicated_keys(example1, example2, example_specs):
@@ -97,10 +100,10 @@ def _get_index_path(path: str) -> epath.PathLike:
 def _get_shard_specs(
     num_examples: int,
     total_size: int,
-    bucket_lengths: List[int],
+    bucket_lengths: Sequence[int],
     filename_template: naming.ShardedFileTemplate,
     shard_config: shard_utils.ShardConfig,
-) -> List[_ShardSpec]:
+) -> Sequence[_ShardSpec]:
   """Returns list of _ShardSpec instances, corresponding to shards to write.
 
   Args:
@@ -140,7 +143,8 @@ def _get_shard_specs(
 def _get_shard_boundaries(
     num_examples: int,
     number_of_shards: int,
-) -> List[int]:
+) -> Sequence[int]:
+  """Returns the offsets of all shards."""
   if num_examples == 0:
     raise AssertionError("No examples were yielded.")
   if num_examples < number_of_shards:
@@ -155,19 +159,8 @@ def _get_shard_boundaries(
   ]
 
 
-def _write_examples(
-    path: epath.PathLike,
-    iterator: Iterable[type_utils.KeySerializedExample],
-    file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
-) -> Optional[file_adapters.ExamplePositions]:
-  """Write examples from iterator in the given `file_format`."""
-  return file_adapters.ADAPTER_FOR_FORMAT[file_format].write_examples(
-      path, iterator
-  )
-
-
 def _write_index_file(
-    sharded_index_path: epath.PathLike, record_keys: List[Any]
+    sharded_index_path: epath.PathLike, record_keys: Sequence[Any]
 ):
   """Writes index file for records of a shard at given `sharded_index_path`.
 
@@ -177,7 +170,7 @@ def _write_index_file(
 
   Args:
     sharded_index_path: Path to the sharded index path.
-    record_keys: List of keys/indices of the records in the shard.
+    record_keys: Sequence of keys/indices of the records in the shard.
   """
   # Store string representation of each record position.
   #
@@ -188,8 +181,24 @@ def _write_index_file(
   logging.info("Wrote index file to %s", os.fspath(sharded_index_path))
 
 
-class Writer(object):
-  """Shuffles and writes Examples to sharded TFRecord files.
+class ExampleWriter:
+  """Writes examples to files."""
+
+  def __init__(self, file_format: file_adapters.FileFormat):
+    self.file_format = file_format
+
+  def write(
+      self,
+      path: epath.PathLike,
+      examples: Iterable[type_utils.KeySerializedExample],
+  ) -> file_adapters.ExamplePositions | None:
+    """Write examples from iterator."""
+    adapter = file_adapters.ADAPTER_FOR_FORMAT[self.file_format]
+    return adapter.write_examples(path, examples)
+
+
+class Writer:
+  """Shuffles and writes Examples to sharded files.
 
   The number of shards is computed automatically.
   """
@@ -200,8 +209,8 @@ class Writer(object):
       filename_template: naming.ShardedFileTemplate,
       hash_salt,
       disable_shuffling: bool,
-      file_format=file_adapters.DEFAULT_FILE_FORMAT,
-      shard_config: Optional[shard_utils.ShardConfig] = None,
+      example_writer: ExampleWriter,
+      shard_config: shard_utils.ShardConfig | None = None,
   ):
     """Initializes Writer.
 
@@ -210,8 +219,7 @@ class Writer(object):
       filename_template: template to format sharded filenames.
       hash_salt (str or bytes): salt to hash keys.
       disable_shuffling (bool): Specifies whether to shuffle the records.
-      file_format (FileFormat): format of the record files in which the dataset
-        should be written in.
+      example_writer: class that writes examples to disk or elsewhere.
       shard_config: the configuration for creating shards.
     """
     self._serializer = serializer
@@ -222,33 +230,32 @@ class Writer(object):
     )
     self._num_examples = 0
     self._filename_template = filename_template
-    self._file_format = file_format
     self._shard_config = shard_config or shard_utils.ShardConfig()
+    self._example_writer = example_writer
 
-  def write(self, key, example):
-    """Writes given Example.
+  def write(self, key: int | bytes, example: Example):
+    """Writes given example.
 
-    The given example is not directly written to the tfrecord file, but to a
-    temporary file (or memory). The finalize() method does write the tfrecord
-    files.
+    The given example is not directly written to the shard, but to a
+    temporary file (or memory). The finalize() method writes all the shards.
 
     Args:
       key (int|bytes): the key associated with the example. Used for shuffling.
-      example: the Example to write to the tfrecord file.
+      example: the Example to write to the shard.
     """
     serialized_example = self._serializer.serialize_example(example=example)
     self._shuffler.add(key, serialized_example)
     self._num_examples += 1
 
-  def finalize(self) -> Tuple[List[int], int]:
-    """Effectively writes examples to the tfrecord files."""
+  def finalize(self) -> tuple[list[int], int]:
+    """Effectively writes examples to the shards."""
     filename = self._filename_template.sharded_filepaths_pattern()
     shard_specs = _get_shard_specs(
-        self._num_examples,
-        self._shuffler.size,
-        self._shuffler.bucket_lengths,
-        self._filename_template,
-        self._shard_config,
+        num_examples=self._num_examples,
+        total_size=self._shuffler.size,
+        bucket_lengths=self._shuffler.bucket_lengths,
+        filename_template=self._filename_template,
+        shard_config=self._shard_config,
     )
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
@@ -268,9 +275,7 @@ class Writer(object):
         iterator = itertools.islice(
             examples_generator, 0, shard_spec.examples_number
         )
-        record_keys = _write_examples(
-            shard_spec.path, iterator, self._file_format
-        )
+        record_keys = self._example_writer.write(shard_spec.path, iterator)
 
         # No shard keys returned (e.g: TFRecord format), index cannot be
         # created.
@@ -319,11 +324,11 @@ class _ShardInfo:
   size: int
 
 
-class BeamWriter(object):
-  """Shuffles / writes Examples beam collection to sharded TFRecord files.
+class BeamWriter:
+  """Shuffles / writes Examples beam collection to sharded files.
 
-  The given examples are not directly writen to the final tfrecord file, but to
-  temporary files.
+  Examples are not directly writen to the final shards, but first to temporary
+  files. Only if that was successful, the shard is moved to the final location.
   """
 
   _OUTPUT_TAG_BUCKETS_LEN_SIZE = "tag_buckets_len_size"
@@ -334,8 +339,8 @@ class BeamWriter(object):
       filename_template: naming.ShardedFileTemplate,
       hash_salt,
       disable_shuffling: bool,
-      file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
-      shard_config: Optional[shard_utils.ShardConfig] = None,
+      example_writer: ExampleWriter,
+      shard_config: shard_utils.ShardConfig | None = None,
   ):
     """Init BeamWriter.
 
@@ -348,8 +353,7 @@ class BeamWriter(object):
       filename_template: template to format sharded filenames.
       hash_salt: string, the salt to use for hashing of keys.
       disable_shuffling: bool, specifies whether to shuffle the records.
-      file_format: file_adapters.FileFormat, format of the record files in which
-        the dataset will be read/written from.
+      example_writer: class that writes examples to storage.
       shard_config: the configuration for creating shards.
     """
     self._original_state = dict(
@@ -357,8 +361,8 @@ class BeamWriter(object):
         filename_template=filename_template,
         hash_salt=hash_salt,
         disable_shuffling=disable_shuffling,
-        file_format=file_format,
         shard_config=shard_config,
+        example_writer=example_writer,
     )
     self._filename_template = filename_template
     self._split_info_path = (
@@ -367,9 +371,9 @@ class BeamWriter(object):
     self._serializer = serializer
     self._hasher = hashing.Hasher(hash_salt)
     self._split_info = None
-    self._file_format = file_format
     self._disable_shuffling = disable_shuffling
     self._shard_config = shard_config or shard_utils.ShardConfig()
+    self._example_writer = example_writer
 
   @functools.lru_cache()
   def _get_counter(self, name: str, namespace: str = "BeamWriter"):
@@ -390,8 +394,8 @@ class BeamWriter(object):
 
   def _serialize_example(
       self,
-      key_example: Tuple[hashing.HashKey, Example],
-  ) -> Tuple[Any, bytes]:
+      key_example: tuple[hashing.HashKey, Example],
+  ) -> tuple[Any, bytes]:
     """Returns (shard#, (hkey, serialized_example))."""
     key, example = key_example
     serialized_example = self._serializer.serialize_example(example)
@@ -412,8 +416,8 @@ class BeamWriter(object):
 
   def _write_final_shard(
       self,
-      shardid_examples: Tuple[int, Iterable[type_utils.KeySerializedExample]],
-      non_empty_shard_ids: List[int],
+      shardid_examples: tuple[int, Iterable[type_utils.KeySerializedExample]],
+      non_empty_shard_ids: Sequence[int],
   ) -> _ShardInfo:
     """Write all examples of a shard to disk.
 
@@ -446,7 +450,7 @@ class BeamWriter(object):
       logging.info(
           "Writing %d examples to %s.", len(examples), os.fspath(tmp_path)
       )
-      record_keys = _write_examples(tmp_path, examples, self._file_format)
+      record_keys = self._example_writer.write(tmp_path, examples)
     self.inc_counter(name="written_shards")
     # If there are record_keys, create index files.
     if record_keys:
@@ -467,10 +471,10 @@ class BeamWriter(object):
 
   def _assign_shard(
       self,
-      key_serialized_example: Tuple[Any, bytes],
+      key_serialized_example: tuple[Any, bytes],
       num_shards: int,
-      largest_key: List[int],
-  ) -> Tuple[int, Tuple[Any, bytes]]:
+      largest_key: Sequence[int],
+  ) -> tuple[int, tuple[Any, bytes]]:
     """Assigns a shard id to the example."""
     key, _ = key_serialized_example
     largest_key = largest_key[0]
@@ -482,7 +486,7 @@ class BeamWriter(object):
 
   def _store_split_info(
       self,
-      shard_infos: List[_ShardInfo],
+      shard_infos: Sequence[_ShardInfo],
       total_size: int,
   ) -> None:
     """Stores the split info to disk."""
@@ -494,8 +498,8 @@ class BeamWriter(object):
       )
 
   def _sort_shard_ids(
-      self, shard_ids: List[int], ideal_num_shards: int
-  ) -> List[int]:
+      self, shard_ids: Sequence[int], ideal_num_shards: int
+  ) -> Sequence[int]:
     """Returns the sorted shard ids and logs information."""
     if len(shard_ids) != ideal_num_shards:
       logging.info(
@@ -506,7 +510,7 @@ class BeamWriter(object):
     return sorted(shard_ids)
 
   def write_from_pcollection(self, examples_pcollection):
-    """Returns PTransform to write (key, example) PCollection to tfrecords."""
+    """Returns PTransform to write (key, example) PCollection."""
     serialized_examples = (
         examples_pcollection
         | "Serialize" >> beam.Map(self._serialize_example)
@@ -572,7 +576,7 @@ class BeamWriter(object):
         >> beam.ParDo(self._store_split_info, total_size=total_size)
     )
 
-  def finalize(self) -> Tuple[List[int], int]:
+  def finalize(self) -> tuple[list[int], int]:
     """Deletes tmp directory and returns shard_lengths and total_size.
 
     Returns:

@@ -28,7 +28,6 @@ import click
 import psutil
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
-from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -130,9 +129,9 @@ class SplitBuilder:
       dataset_size: utils.Size,
       beam_options: Optional['beam.options.pipeline_options.PipelineOptions'],
       beam_runner: Optional['beam.runners.PipelineRunner'],
-      max_examples_per_split: Optional[int],
-      file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
-      shard_config: Optional[shard_utils.ShardConfig] = None,
+      max_examples_per_split: int | None,
+      example_writer: writer_lib.ExampleWriter,
+      shard_config: shard_utils.ShardConfig | None = None,
   ):
     self._split_dict = split_dict
     self._features = features
@@ -143,8 +142,8 @@ class SplitBuilder:
     self._beam_options = beam_options
     self._beam_runner = beam_runner
     self._beam_pipeline: Optional['beam.Pipeline'] = None
-    self._file_format = file_format
     self._shard_config = shard_config
+    self._example_writer = example_writer
 
   @contextlib.contextmanager
   def maybe_beam_pipeline(self) -> Iterator[PipelineProxy]:
@@ -385,9 +384,8 @@ class SplitBuilder:
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
-        # TODO(weide) remove this because it's already in filename_template?
-        file_format=self._file_format,
         shard_config=self._shard_config,
+        example_writer=self._example_writer,
     )
     for key, example in utils.tqdm(
         generator,
@@ -428,8 +426,8 @@ class SplitBuilder:
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
-        file_format=self._file_format,
         shard_config=self._shard_config,
+        example_writer=self._example_writer,
     )
 
     def _encode_example(key_ex, encode_fn=self._features.encode_example):
