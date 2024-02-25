@@ -284,6 +284,17 @@ def _default_value(
     }
   elif isinstance(feature, feature_lib.Sequence):
     return []
+  elif isinstance(feature, tf.RaggedTensor):
+    return {
+        "ragged_flat_values": (
+            [],
+            feature_lib.TensorInfo(shape=(None,), dtype=np.int64),
+        ),
+        "ragged_row_length_0": (
+            [],
+            feature_lib.TensorInfo(shape=(None,), dtype=np.int64),
+        ),
+    }
   elif dtype_utils.is_string(feature.np_dtype):
     return b""
   elif dtype_utils.is_integer(feature.np_dtype):
