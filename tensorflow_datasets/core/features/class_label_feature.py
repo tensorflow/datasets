@@ -189,7 +189,7 @@ class ClassLabel(tensor_feature.Tensor):
       pass
 
   def _additional_repr_info(self) -> dict[str, int]:
-    return {"num_classes": self.num_classes}
+    return {"num_classes": self.num_classes}  # pytype: disable=bad-return-type  # always-use-property-annotation
 
   def repr_html(self, ex: int) -> str:
     """Class labels are displayed with their name."""

@@ -329,7 +329,7 @@ class DatasetInfo(object):
   def as_proto_with_features(self) -> dataset_info_pb2.DatasetInfo:
     info_proto = dataset_info_pb2.DatasetInfo()
     info_proto.CopyFrom(self._info_proto)
-    info_proto.features.CopyFrom(self.features.to_proto())
+    info_proto.features.CopyFrom(self.features.to_proto())  # pytype: disable=attribute-error  # always-use-property-annotation
     return info_proto
 
   @property
@@ -634,7 +634,7 @@ class DatasetInfo(object):
     )
 
     # Update splits
-    filename_template = naming.ShardedFileTemplate(
+    filename_template = naming.ShardedFileTemplate(  # pytype: disable=wrong-arg-types  # always-use-property-annotation
         dataset_name=self.name,
         data_dir=self.data_dir,
         filetype_suffix=parsed_proto.file_format or "tfrecord",
@@ -647,7 +647,7 @@ class DatasetInfo(object):
 
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
-      self.features.load_metadata(dataset_info_dir)
+      self.features.load_metadata(dataset_info_dir)  # pytype: disable=missing-parameter  # always-use-property-annotation
     # For `ReadOnlyBuilder`, reconstruct the features from the config.
     elif feature_lib.make_config_path(dataset_info_dir).exists():
       self._features = feature_lib.FeatureConnector.from_config(
@@ -662,7 +662,7 @@ class DatasetInfo(object):
       # we create a MetadataDict first.
       if self.metadata is None:
         self._metadata = MetadataDict()
-      self.metadata.load_metadata(dataset_info_dir)
+      self.metadata.load_metadata(dataset_info_dir)  # pytype: disable=attribute-error  # always-use-property-annotation
 
     # Update fields which are not defined in the code. This means that
     # the code will overwrite fields which are present in
@@ -1101,7 +1101,7 @@ def pack_as_supervised_ds(
       and isinstance(ds.element_spec, tuple)
       and len(ds.element_spec) == 2
   ):
-    x_key, y_key = ds_info.supervised_keys
+    x_key, y_key = ds_info.supervised_keys  # pytype: disable=bad-unpacking  # always-use-property-annotation
     ds = ds.map(lambda x, y: {x_key: x, y_key: y})
     return ds
   else:  # If dataset isn't a supervised tuple (input, label), return as-is
