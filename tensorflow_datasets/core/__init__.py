@@ -24,6 +24,7 @@ from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
+from tensorflow_datasets.core.dataset_builder import run_after_download_and_prepare
 
 from tensorflow_datasets.core.dataset_info import BeamMetadataDict
 from tensorflow_datasets.core.dataset_info import DatasetIdentity
@@ -90,6 +91,7 @@ __all__ = [
     "MetadataDict",
     "Path",
     "ReadInstruction",
+    "run_after_download_and_prepare",
     "SequentialWriter",
     "ShardedFileTemplate",
     "SplitDict",

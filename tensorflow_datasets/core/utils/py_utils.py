@@ -16,6 +16,7 @@
 """Some python utils function and classes."""
 
 import base64
+import collections
 import contextlib
 import functools
 import io
@@ -532,3 +533,77 @@ def add_sys_path(path: epath.PathLike) -> Iterator[None]:
     yield
   finally:
     sys.path.remove(path)
+
+
+class _TaggedMethod:
+  """Replaces the original method until the owning class is constructed."""
+
+  def __init__(self, method: Fn, tag_name: str, tagged_methods_variable: str):
+    self._method = method
+    self._tag_name = tag_name
+    self._tagged_methods_variable = tagged_methods_variable
+
+  def __set_name__(self, owner, name):
+    """Adds the method to the corresponding tag list.
+
+    The method owning class doesn't exist during method declaration, so we
+    access it in `__set_name__` after it's created:
+    https://docs.python.org/3/reference/datamodel.html#object.__set_name__
+
+    Args:
+      owner: the owning class
+      name: method name
+    """
+    methods_by_tags = getattr(owner, self._tagged_methods_variable, None)
+    if not methods_by_tags:
+      methods_by_tags = collections.defaultdict(list)
+      setattr(owner, self._tagged_methods_variable, methods_by_tags)
+    methods_by_tags[self._tag_name].append(self._method)
+    # make the original method accessible in the owning class
+    setattr(owner, name, self._method)
+
+
+class MethodTagger:
+  """Helper class for assigning tags to object methods.
+
+  The tagged methods are stored as lists by tag name in the methods owning class
+  variable.
+
+  Typical `MethodTagger` usage:
+  ```python
+  with_my_tag = MethodTagger(tag_name='my_tag')
+
+  class Child:
+    def my_method(self):
+      for method in with_my_tag.get_methods(self):
+        method()
+
+  class Parent(Child):
+    @with_my_tag
+    def my_method(self):
+      pass
+  ```
+  """
+
+  # Name of the methods owning class variable storing tagged methods.
+  TAGGED_METHODS_VARIABLE = 'METHODS_BY_TAGS'
+
+  def __init__(self, tag_name: str):
+    """Constructs MethodTagger.
+
+    Args:
+      tag_name: tag name.
+    """
+    self._tag_name = tag_name
+
+  def __call__(self, method: Fn):
+    return _TaggedMethod(method, self._tag_name, self.TAGGED_METHODS_VARIABLE)
+
+  def get_methods(self, owner) -> List[Fn]:
+    """Returns the methods stored by tag name in no particular order.
+
+    Args:
+      owner: the owning class
+    """
+    methods_by_tags = getattr(owner, self.TAGGED_METHODS_VARIABLE, {})
+    return methods_by_tags.get(self._tag_name, [])

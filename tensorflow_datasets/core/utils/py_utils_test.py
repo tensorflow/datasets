@@ -362,5 +362,44 @@ def test_is_incomplete_file(path: str, is_incomplete: bool):
   assert py_utils.is_incomplete_file(epath.Path(path)) == is_incomplete
 
 
+def test_method_tagger():
+  with_test_tag = py_utils.MethodTagger(tag_name='test')
+
+  class Base:
+
+    def __init__(self):
+      self.result = []
+
+    def run_tagged_methods(self):
+      for tagged_method in with_test_tag.get_methods(self):
+        tagged_method(self)
+
+  obj = Base()
+  obj.run_tagged_methods()
+  assert obj.result == []
+
+  class WithTaggedMethods(Base):
+
+    @with_test_tag
+    def tagged_method(self):
+      self.result.append(1)
+
+  obj = WithTaggedMethods()
+  obj.run_tagged_methods()
+  assert obj.result == [1]
+  obj.tagged_method()
+  assert obj.result == [1, 1]
+
+  class WithSameTaggedMethods(WithTaggedMethods):
+
+    @with_test_tag
+    def tagged_method(self):
+      self.result.append(2)
+
+  obj = WithSameTaggedMethods()
+  obj.run_tagged_methods()
+  assert sorted(obj.result) == [1, 2]
+
+
 if __name__ == '__main__':
   tf.test.main()

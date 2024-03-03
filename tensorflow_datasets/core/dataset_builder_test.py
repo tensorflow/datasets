@@ -1221,6 +1221,21 @@ def test_read_tfrecord_as_dataset():
     assert info_proto.data_source_accesses[0].file_system.path == "/x/y"
 
 
+def test_run_after_download_and_prepare():
+  result = []
+
+  class DatasetWithTaggedMethod(DummyDatasetWithConfigs):
+
+    @dataset_builder.run_after_download_and_prepare
+    def append_to_result(self):
+      result.append("test")
+
+  with testing.tmp_dir() as data_dir:
+    builder = DatasetWithTaggedMethod(data_dir=data_dir)
+    builder.download_and_prepare()
+    assert result == ["test"]
+
+
 
 
 if __name__ == "__main__":
