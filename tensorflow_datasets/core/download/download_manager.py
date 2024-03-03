@@ -14,8 +14,10 @@
 # limitations under the License.
 
 """Download manager interface."""
+
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 import concurrent.futures
 import dataclasses
 import functools
@@ -96,6 +98,9 @@ class DownloadConfig:
     num_shards: optional number of shards that should be created. If `None`,
       then the number of shards is computed based on the total size of the
       dataset and the min and max shard size.
+    shard_boundaries_by_split: optional shard boundaries per split. If `None`,
+      then the shard boundaries are computed based on the total number of
+      examples and the number of shards.
     min_shard_size: optional minimum shard size in bytes. If `None`, 64 MB is
       used.
     max_shard_size: optional maximum shard size in bytes. If `None`, 1 GiB is
@@ -115,12 +120,16 @@ class DownloadConfig:
   verify_ssl: bool = True
   override_max_simultaneous_downloads: Optional[int] = None
   num_shards: Optional[int] = None
+  shard_boundaries_by_split: Mapping[str, Sequence[int]] = dataclasses.field(
+      default_factory=dict
+  )
   min_shard_size: int = shard_utils.DEFAULT_MIN_SHARD_SIZE
   max_shard_size: int = shard_utils.DEFAULT_MAX_SHARD_SIZE
 
-  def get_shard_config(self) -> shard_utils.ShardConfig:
+  def get_shard_config(self, split_name: str) -> shard_utils.ShardConfig:
     return shard_utils.ShardConfig(
         num_shards=self.num_shards,
+        shard_boundaries=self.shard_boundaries_by_split.get(split_name),
         min_shard_size=self.min_shard_size,
         max_shard_size=self.max_shard_size,
     )
@@ -248,9 +257,7 @@ class DownloadManager(object):
 
     self._download_dir: epath.Path = download_dir
     self._extract_dir: epath.Path = extract_dir
-    self._manual_dir: Optional[epath.Path] = (
-        manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
-    )
+    self._manual_dir: Optional[epath.Path] = manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     self._download_dir.mkdir(parents=True, exist_ok=True)
     self._extract_dir.mkdir(parents=True, exist_ok=True)

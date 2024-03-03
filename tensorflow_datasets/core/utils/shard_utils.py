@@ -22,10 +22,11 @@ This logic is shared between:
 """
 from __future__ import annotations
 
+from collections.abc import Sequence
 import dataclasses
 import math
 import os
-from typing import Any, List, Optional, Sequence
+from typing import Any, List
 
 DEFAULT_MIN_SHARD_SIZE: int = 64 << 20  # 64 MiB
 DEFAULT_MAX_SHARD_SIZE: int = 1024 << 20  # 1 GiB
@@ -36,17 +37,20 @@ class ShardConfig:
   """Configuration of how shards should be created.
 
   Attributes:
-    num_shards: number of shards that should be used. If `None`, then the number
+    num_shards: Number of shards that should be used. If `None`, then the number
       of shards is computed based on the total size of the dataset and the min
       and max shard size.
-    min_shard_size: minimum shard size in bytes.
-    max_shard_size: maximum shard size in bytes.
-    overhead: the amount of overhead when writing a file. By default, it is the
+    shard_boundaries: Shard boundaries. If `None`, then the shard boundaries are
+      computed based on the total number of examples and the number of shards.
+    min_shard_size: Minimum shard size in bytes.
+    max_shard_size: Maximum shard size in bytes.
+    overhead: The amount of overhead when writing a file. By default, it is the
       TFRecord overhead. See
       https://github.com/tensorflow/tensorflow/blob/27325fabed898880fa1b33a04d4b125a6ef4bbc8/tensorflow/core/lib/io/record_writer.h#L104
   """
 
-  num_shards: Optional[int] = None
+  num_shards: int | None = None
+  shard_boundaries: Sequence[int] | None = None
   min_shard_size: int = DEFAULT_MIN_SHARD_SIZE
   max_shard_size: int = DEFAULT_MAX_SHARD_SIZE
   overhead: int = 16
@@ -78,6 +82,8 @@ class ShardConfig:
     """
     if self.num_shards:
       return self.num_shards
+    if self.shard_boundaries:
+      return len(self.shard_boundaries)
 
     total_size += num_examples * self.overhead
     max_shards_number = total_size // self.min_shard_size

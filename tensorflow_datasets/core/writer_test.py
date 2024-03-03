@@ -39,8 +39,7 @@ class GetShardSpecsTest(testing.TestCase):
 
   def test_1bucket_6shards(self):
     specs = writer_lib._get_shard_specs(
-        num_examples=8,
-        total_size=16,
+        shard_boundaries=[1, 3, 4, 5, 7, 8],
         bucket_lengths=[8],
         filename_template=naming.ShardedFileTemplate(
             dataset_name='bar',
@@ -48,73 +47,71 @@ class GetShardSpecsTest(testing.TestCase):
             data_dir='/',
             filetype_suffix='tfrecord',
         ),
-        shard_config=shard_utils.ShardConfig(num_shards=6),
     )
     self.assertEqual(
         specs,
         [
-            # Shard#, path, from_bucket, examples_number, reading instructions.
             _ShardSpec(
-                0,
-                '/bar-train.tfrecord-00000-of-00006',
-                '/bar-train.tfrecord-00000-of-00006_index.json',
-                1,
-                [
+                shard_index=0,
+                path='/bar-train.tfrecord-00000-of-00006',
+                index_path='/bar-train.tfrecord-00000-of-00006_index.json',
+                num_examples=1,
+                file_instructions=[
                     shard_utils.FileInstruction(
                         filename='0', skip=0, take=1, examples_in_shard=8
                     ),
                 ],
             ),
             _ShardSpec(
-                1,
-                '/bar-train.tfrecord-00001-of-00006',
-                '/bar-train.tfrecord-00001-of-00006_index.json',
-                2,
-                [
+                shard_index=1,
+                path='/bar-train.tfrecord-00001-of-00006',
+                index_path='/bar-train.tfrecord-00001-of-00006_index.json',
+                num_examples=2,
+                file_instructions=[
                     shard_utils.FileInstruction(
                         filename='0', skip=1, take=2, examples_in_shard=8
                     ),
                 ],
             ),
             _ShardSpec(
-                2,
-                '/bar-train.tfrecord-00002-of-00006',
-                '/bar-train.tfrecord-00002-of-00006_index.json',
-                1,
-                [
+                shard_index=2,
+                path='/bar-train.tfrecord-00002-of-00006',
+                index_path='/bar-train.tfrecord-00002-of-00006_index.json',
+                num_examples=1,
+                file_instructions=[
                     shard_utils.FileInstruction(
                         filename='0', skip=3, take=1, examples_in_shard=8
                     ),
                 ],
             ),
             _ShardSpec(
-                3,
-                '/bar-train.tfrecord-00003-of-00006',
-                '/bar-train.tfrecord-00003-of-00006_index.json',
-                1,
-                [
+                shard_index=3,
+                path='/bar-train.tfrecord-00003-of-00006',
+                index_path='/bar-train.tfrecord-00003-of-00006_index.json',
+                num_examples=1,
+                file_instructions=[
                     shard_utils.FileInstruction(
                         filename='0', skip=4, take=1, examples_in_shard=8
                     ),
                 ],
             ),
             _ShardSpec(
-                4,
-                '/bar-train.tfrecord-00004-of-00006',
-                '/bar-train.tfrecord-00004-of-00006_index.json',
-                2,
-                [
+                shard_index=4,
+                path='/bar-train.tfrecord-00004-of-00006',
+                index_path='/bar-train.tfrecord-00004-of-00006_index.json',
+                num_examples=2,
+                file_instructions=[
                     shard_utils.FileInstruction(
                         filename='0', skip=5, take=2, examples_in_shard=8
                     ),
                 ],
             ),
             _ShardSpec(
-                5,
-                '/bar-train.tfrecord-00005-of-00006',
-                '/bar-train.tfrecord-00005-of-00006_index.json',
-                1,
-                [
+                shard_index=5,
+                path='/bar-train.tfrecord-00005-of-00006',
+                index_path='/bar-train.tfrecord-00005-of-00006_index.json',
+                num_examples=1,
+                file_instructions=[
                     shard_utils.FileInstruction(
                         filename='0', skip=7, take=1, examples_in_shard=8
                     ),
@@ -125,8 +122,7 @@ class GetShardSpecsTest(testing.TestCase):
 
   def test_4buckets_2shards(self):
     specs = writer_lib._get_shard_specs(
-        num_examples=8,
-        total_size=16,
+        shard_boundaries=[4, 8],
         bucket_lengths=[2, 3, 0, 3],
         filename_template=naming.ShardedFileTemplate(
             dataset_name='bar',
@@ -134,18 +130,16 @@ class GetShardSpecsTest(testing.TestCase):
             data_dir='/',
             filetype_suffix='tfrecord',
         ),
-        shard_config=shard_utils.ShardConfig(num_shards=2),
     )
     self.assertEqual(
         specs,
         [
-            # Shard#, path, examples_number, reading instructions.
             _ShardSpec(
-                0,
-                '/bar-train.tfrecord-00000-of-00002',
-                '/bar-train.tfrecord-00000-of-00002_index.json',
-                4,
-                [
+                shard_index=0,
+                path='/bar-train.tfrecord-00000-of-00002',
+                index_path='/bar-train.tfrecord-00000-of-00002_index.json',
+                num_examples=4,
+                file_instructions=[
                     shard_utils.FileInstruction(
                         filename='0', skip=0, take=2, examples_in_shard=2
                     ),
@@ -155,11 +149,11 @@ class GetShardSpecsTest(testing.TestCase):
                 ],
             ),
             _ShardSpec(
-                1,
-                '/bar-train.tfrecord-00001-of-00002',
-                '/bar-train.tfrecord-00001-of-00002_index.json',
-                4,
-                [
+                shard_index=1,
+                path='/bar-train.tfrecord-00001-of-00002',
+                index_path='/bar-train.tfrecord-00001-of-00002_index.json',
+                num_examples=4,
+                file_instructions=[
                     shard_utils.FileInstruction(
                         filename='1', skip=2, take=-1, examples_in_shard=3
                     ),
@@ -285,9 +279,7 @@ class WriterTest(testing.TestCase):
         example_writer=example_writer,
         shard_config=shard_config,
     )
-    for key, record in to_write:
-      writer.write(key, record)
-    return writer.finalize()
+    return writer.write(to_write)
 
   def test_write_tfrecord(self):
     """Stores records as tfrecord in a fixed number of shards with shuffling."""

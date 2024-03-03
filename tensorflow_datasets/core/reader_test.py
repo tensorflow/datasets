@@ -95,11 +95,11 @@ class ReaderTest(testing.TestCase):
     filename_template = self._filename_template(split=split_name)
     num_examples = len(records)
     shard_specs = writer_lib._get_shard_specs(
-        num_examples=num_examples,
-        total_size=0,
+        shard_boundaries=writer_lib._get_shard_boundaries(
+            num_examples, shards_number
+        ),
         bucket_lengths=[num_examples],
         filename_template=filename_template,
-        shard_config=shard_utils.ShardConfig(num_shards=shards_number),
     )
     serialized_records = [
         (key, bytes(rec, encoding='utf-8')) for key, rec in enumerate(records)
@@ -110,7 +110,7 @@ class ReaderTest(testing.TestCase):
       )
     return splits.SplitInfo(
         name=split_name,
-        shard_lengths=[int(s.examples_number) for s in shard_specs],
+        shard_lengths=[int(s.num_examples) for s in shard_specs],
         num_bytes=0,
         filename_template=filename_template,
     )

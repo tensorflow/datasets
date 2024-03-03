@@ -17,7 +17,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable, Iterator, Sequence
 import dataclasses
 import functools
 import itertools
@@ -58,14 +58,14 @@ class _ShardSpec:
       corresponding shard. NOTE: Value for this attribute is always set, but
       usage depends on whether `write_examples` returned a list of record
       positions for each example.
-    examples_number: Number of examples in shard.
+    num_examples: Number of examples in shard.
     file_instructions: Reading instructions.
   """
 
   shard_index: int
   path: str
   index_path: str
-  examples_number: int
+  num_examples: int
   file_instructions: Sequence[shard_utils.FileInstruction]
 
 
@@ -98,23 +98,17 @@ def _get_index_path(path: str) -> epath.PathLike:
 
 
 def _get_shard_specs(
-    num_examples: int,
-    total_size: int,
+    shard_boundaries: Sequence[int],
     bucket_lengths: Sequence[int],
     filename_template: naming.ShardedFileTemplate,
-    shard_config: shard_utils.ShardConfig,
 ) -> Sequence[_ShardSpec]:
   """Returns list of _ShardSpec instances, corresponding to shards to write.
 
   Args:
-    num_examples: int, number of examples in split.
-    total_size: int (bytes), sum of example sizes.
-    bucket_lengths: list of ints, number of examples in each bucket.
-    filename_template: template to format sharded filenames.
-    shard_config: the configuration for creating shards.
+    shard_boundaries: Offsets of all shards.
+    bucket_lengths: Number of examples in each bucket.
+    filename_template: Template to format sharded filenames.
   """
-  num_shards = shard_config.get_number_shards(total_size, num_examples)
-  shard_boundaries = _get_shard_boundaries(num_examples, num_shards)
   shard_specs = []
   bucket_indexes = [str(i) for i in range(len(bucket_lengths))]
   from_ = 0
@@ -124,7 +118,7 @@ def _get_shard_specs(
         from_, to, bucket_indexes, bucket_lengths
     )
     shard_path = filename_template.sharded_filepath(
-        shard_index=shard_index, num_shards=num_shards
+        shard_index=shard_index, num_shards=len(shard_boundaries)
     )
     index_path = _get_index_path(os.fspath(shard_path))
     shard_specs.append(
@@ -132,7 +126,7 @@ def _get_shard_specs(
             shard_index=shard_index,
             path=os.fspath(shard_path),
             index_path=index_path,
-            examples_number=to - from_,
+            num_examples=to - from_,
             file_instructions=file_instructions,
         )
     )
@@ -154,7 +148,7 @@ def _get_shard_boundaries(
         )
     )
   return [
-      int(round(num_examples * (float(i) / number_of_shards)))
+      round(num_examples * i / number_of_shards)
       for i in range(1, number_of_shards + 1)
   ]
 
@@ -228,43 +222,69 @@ class Writer:
         hash_salt=hash_salt,
         disable_shuffling=disable_shuffling,
     )
-    self._num_examples = 0
     self._filename_template = filename_template
     self._shard_config = shard_config or shard_utils.ShardConfig()
     self._example_writer = example_writer
 
-  def write(self, key: int | bytes, example: Example):
-    """Writes given example.
+  def write(
+      self, examples: Iterator[tuple[type_utils.Key, Example]]
+  ) -> tuple[list[int], int]:
+    """Writes given examples.
 
     The given example is not directly written to the shard, but to a
     temporary file (or memory). The finalize() method writes all the shards.
 
     Args:
-      key (int|bytes): the key associated with the example. Used for shuffling.
-      example: the Example to write to the shard.
-    """
-    serialized_example = self._serializer.serialize_example(example=example)
-    self._shuffler.add(key, serialized_example)
-    self._num_examples += 1
+      examples: (key, example) pairs. The key is used for shuffling.
 
-  def finalize(self) -> tuple[list[int], int]:
-    """Effectively writes examples to the shards."""
-    filename = self._filename_template.sharded_filepaths_pattern()
+    Returns:
+      Shard lengths and total size.
+    """
+    total_size = 0
+
+    def get_serialized_examples() -> Iterable[type_utils.KeySerializedExample]:
+      nonlocal total_size
+      for key, example in examples:
+        serialized_example = self._serializer.serialize_example(example)
+        total_size += len(serialized_example)
+        yield key, serialized_example
+
+    serialized_examples = get_serialized_examples()
+
+    if self._shard_config.shard_boundaries:
+      shard_boundaries = self._shard_config.shard_boundaries
+      bucket_lengths = []
+      prev_boundary = 0
+      for boundary in shard_boundaries:
+        bucket_lengths.append(boundary - prev_boundary)
+        prev_boundary = boundary
+    else:
+      num_examples = 0
+      for key, serialized_example in serialized_examples:
+        self._shuffler.add(key, serialized_example)
+        num_examples += 1
+
+      serialized_examples = self._shuffler
+      num_shards = self._shard_config.get_number_shards(
+          total_size, num_examples
+      )
+      shard_boundaries = _get_shard_boundaries(num_examples, num_shards)
+      bucket_lengths = self._shuffler.bucket_lengths
+
     shard_specs = _get_shard_specs(
-        num_examples=self._num_examples,
-        total_size=self._shuffler.size,
-        bucket_lengths=self._shuffler.bucket_lengths,
+        shard_boundaries=shard_boundaries,
+        bucket_lengths=bucket_lengths,
         filename_template=self._filename_template,
-        shard_config=self._shard_config,
     )
+    filename = self._filename_template.sharded_filepaths_pattern()
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
     # parallelize, but one would need to be careful not to sort buckets twice.
     examples_generator = iter(
         utils.tqdm(
-            self._shuffler,
+            serialized_examples,
             desc=f"Shuffling {filename}...",
-            total=self._num_examples,
+            total=shard_boundaries[-1],
             unit=" examples",
             leave=False,
             mininterval=1.0,
@@ -273,7 +293,7 @@ class Writer:
     try:
       for shard_spec in shard_specs:
         iterator = itertools.islice(
-            examples_generator, 0, shard_spec.examples_number
+            examples_generator, 0, shard_spec.num_examples
         )
         record_keys = self._example_writer.write(shard_spec.path, iterator)
 
@@ -284,10 +304,10 @@ class Writer:
 
         # Number of `shard_keys` received should match the number of examples
         # written in this shard.
-        if len(record_keys) != int(shard_spec.examples_number):
+        if len(record_keys) != int(shard_spec.num_examples):
           raise RuntimeError(
               f"Length of example `keys` ({len(record_keys)}) does not match "
-              f"`shard_spec.examples_number: (`{shard_spec.examples_number})"
+              f"`shard_spec.num_examples: (`{shard_spec.num_examples})"
           )
         _write_index_file(shard_spec.index_path, record_keys)
 
@@ -306,7 +326,7 @@ class Writer:
           f"Shuffling more elements than expected. Additional element: {val}"
       )
 
-    shard_lengths = [int(spec.examples_number) for spec in shard_specs]
+    shard_lengths = [int(spec.num_examples) for spec in shard_specs]
 
     logging.info(
         "Done writing %s. Number of examples: %s (shards: %s)",
@@ -314,7 +334,7 @@ class Writer:
         sum(shard_lengths),
         shard_lengths,
     )
-    return shard_lengths, self._shuffler.size
+    return shard_lengths, total_size
 
 
 @dataclasses.dataclass

@@ -15,13 +15,13 @@
 
 """Dataset generator code."""
 
-import collections.abc
+from collections.abc import Iterable, Mapping
 import contextlib
 import dataclasses
 import functools
 import itertools
 import sys
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple, Union
 
 from absl import logging
 import click
@@ -131,7 +131,9 @@ class SplitBuilder:
       beam_runner: Optional['beam.runners.PipelineRunner'],
       max_examples_per_split: int | None,
       example_writer: writer_lib.ExampleWriter,
-      shard_config: shard_utils.ShardConfig | None = None,
+      shard_config_by_split: (
+          Mapping[str, shard_utils.ShardConfig] | None
+      ) = None,
   ):
     self._split_dict = split_dict
     self._features = features
@@ -142,7 +144,7 @@ class SplitBuilder:
     self._beam_options = beam_options
     self._beam_runner = beam_runner
     self._beam_pipeline: Optional['beam.Pipeline'] = None
-    self._shard_config = shard_config
+    self._shard_config_by_split = shard_config_by_split
     self._example_writer = example_writer
 
   @contextlib.contextmanager
@@ -305,6 +307,7 @@ class SplitBuilder:
       generator: SplitGenerator,
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
+      shard_config: shard_utils.ShardConfig,
   ) -> _SplitInfoFuture:
     """Start the split generation.
 
@@ -313,6 +316,7 @@ class SplitBuilder:
       generator: Generator, beam.PTransform,... yielding the examples
       filename_template: Template to format the filename for a shard.
       disable_shuffling: Specifies whether to shuffle the examples
+      shard_config: Shard configuration.
 
     Returns:
       split_info_future: Future containing the `split_info`, once generation
@@ -324,10 +328,11 @@ class SplitBuilder:
         generator=generator,
         filename_template=filename_template,
         disable_shuffling=disable_shuffling,
+        shard_config=shard_config,
     )
     # Depending on the type of generator, we use the corresponding
     # `_build_from_xyz` method.
-    if isinstance(generator, collections.abc.Iterable):
+    if isinstance(generator, Iterable):
       return self._build_from_generator(**build_kwargs)
     else:  # Otherwise, beam required
       unknown_generator_type = TypeError(
@@ -351,6 +356,7 @@ class SplitBuilder:
       generator: Iterable[KeyExample],
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
+      shard_config: shard_utils.ShardConfig,
   ) -> _SplitInfoFuture:
     """Split generator for example generators.
 
@@ -358,7 +364,8 @@ class SplitBuilder:
       split_name: str,
       generator: Iterable[KeyExample],
       filename_template: Template to format the filename for a shard.
-      disable_shuffling: Specifies whether to shuffle the examples,
+      disable_shuffling: Specifies whether to shuffle the examples.
+      shard_config: Shard configuration.
 
     Returns:
       future: The future containing the `tfds.core.SplitInfo`.
@@ -384,23 +391,25 @@ class SplitBuilder:
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
-        shard_config=self._shard_config,
+        shard_config=shard_config,
         example_writer=self._example_writer,
     )
-    for key, example in utils.tqdm(
-        generator,
+
+    def encode(example):
+      try:
+        return self._features.encode_example(example)
+      except Exception as e:  # pylint: disable=broad-except
+        utils.reraise(e, prefix=f'Failed to encode example:\n{example}\n')
+
+    examples = utils.tqdm(
+        ((key, encode(example)) for key, example in generator),
         desc=f'Generating {split_name} examples...',
         unit=' examples',
         total=total_num_examples,
         leave=False,
         mininterval=1.0,
-    ):
-      try:
-        example = self._features.encode_example(example)
-      except Exception as e:  # pylint: disable=broad-except
-        utils.reraise(e, prefix=f'Failed to encode example:\n{example}\n')
-      writer.write(key, example)
-    shard_lengths, total_size = writer.finalize()
+    )
+    shard_lengths, total_size = writer.write(examples)
 
     split_info = splits_lib.SplitInfo(
         name=split_name,
@@ -416,6 +425,7 @@ class SplitBuilder:
       generator: 'beam.PCollection[KeyExample]',
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
+      shard_config: shard_utils.ShardConfig,
   ) -> _SplitInfoFuture:
     """Split generator for `beam.PCollection`."""
     # TODO(tfds): Should try to add support to `max_examples_per_split`
@@ -426,7 +436,7 @@ class SplitBuilder:
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
-        shard_config=self._shard_config,
+        shard_config=shard_config,
         example_writer=self._example_writer,
     )
 

@@ -47,8 +47,10 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core import writer
 from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _IMAGE_ENCODING_FORMAT = "png"
@@ -231,16 +233,14 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
 
 
 def _convert_example(
-    index: int,
     example: Mapping[str, Any],
     features: feature_lib.FeaturesDict,
 ) -> Tuple[int, Mapping[str, Any]]:
   """Converts an example from Huggingface format to TFDS format."""
-  converted_example = {
+  return {
       name: _convert_value(value, features[name])
       for name, value in example.items()
   }
-  return index, converted_example
 
 
 def _extract_supervised_keys(hf_info):
@@ -351,6 +351,7 @@ class HuggingfaceDatasetBuilder(
       self._hf_builder = hf_datasets.load_dataset_builder(
           self._hf_repo_id, self._hf_config, **self.config_kwargs
       )
+      self._hf_dataset = None
     except Exception as e:
       raise RuntimeError(
           "Failed to load Huggingface dataset builder with"
@@ -392,23 +393,23 @@ class HuggingfaceDatasetBuilder(
   ) -> Optional[dataset_builder.BuilderConfig]:
     return self._converted_builder_config
 
-  @functools.lru_cache(maxsize=1)
-  def _download_and_prepare_for_hf(self) -> Mapping[str, Any]:
-    login_to_hf(self._hf_hub_token)
-    self._hf_builder.download_and_prepare(
-        num_proc=self._hf_num_proc,
-        verification_mode=self._verification_mode,
-    )
-    return self._hf_builder.as_dataset(
-        verification_mode=self._verification_mode,
-    )
+  @property
+  def hf_dataset(self):
+    if not self._hf_dataset:
+      login_to_hf(self._hf_hub_token)
+      self._hf_builder.download_and_prepare(
+          num_proc=self._hf_num_proc,
+          verification_mode=self._verification_mode,
+      )
+      self._hf_dataset = self._hf_builder.as_dataset(
+          verification_mode=self._verification_mode,
+      )
+    return self._hf_dataset
 
   def _hf_features(self):
     if self._hf_info.features is not None:
       return self._hf_info.features
-    # We need to download and prepare the data to know its features.
-    dataset_dict = self._download_and_prepare_for_hf()
-    for dataset in dataset_dict.values():
+    for dataset in self.hf_dataset.values():
       return dataset.info.features
 
   @py_utils.memoize()
@@ -427,24 +428,43 @@ class HuggingfaceDatasetBuilder(
       self, dl_manager: download.DownloadManager
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
-    ds = self._download_and_prepare_for_hf()
     splits = {
-        split: self._generate_examples(data) for split, data in ds.items()
+        split: self._generate_examples(data)
+        for split, data in self.hf_dataset.items()
     }
     return _remove_empty_splits(splits)
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
-    dataset_info = self._info()
+    convert_example = functools.partial(
+        _convert_example, features=self.info.features
+    )
+
     if self._tfds_num_proc is None:
-      for index, example in enumerate(data):
-        yield _convert_example(index, example, dataset_info.features)
+      yield from enumerate(map(convert_example, data))
     else:
       with multiprocessing.Pool(processes=self._tfds_num_proc) as pool:
-        examples = pool.starmap(
-            functools.partial(_convert_example, features=dataset_info.features),
-            enumerate(data),
-        )
-        yield from examples
+        yield from enumerate(pool.imap(convert_example, data, chunksize=10000))
+
+  def download_and_prepare(self):
+    shard_config = shard_utils.ShardConfig()
+    num_shards_by_split = {}
+    shard_boundaries_by_split = {}
+
+    for split, ds in self.hf_dataset.items():
+      num_shards = shard_config.get_number_shards(
+          total_size=ds.info.dataset_size,
+          num_examples=len(ds),
+          uses_precise_sharding=False,
+      )
+      num_shards_by_split[split] = num_shards
+      shard_boundaries_by_split[split] = writer._get_shard_boundaries(
+          len(ds), num_shards
+      )
+
+    download_config = download.DownloadConfig(
+        shard_boundaries_by_split=shard_boundaries_by_split
+    )
+    super().download_and_prepare(download_config=download_config)
 
 
 def builder(

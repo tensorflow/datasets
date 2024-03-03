@@ -1547,7 +1547,6 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
         beam_options=download_config.beam_options,
         beam_runner=download_config.beam_runner,
-        shard_config=download_config.get_shard_config(),
         example_writer=self._example_writer(),
     )
     # Wrap the generation inside a context manager.
@@ -1611,6 +1610,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
             generator=generator,
             filename_template=filename_template,
             disable_shuffling=self.info.disable_shuffling,
+            shard_config=download_config.get_shard_config(split_name),
         )
         split_info_futures.append(future)
 
