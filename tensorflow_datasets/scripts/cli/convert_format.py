@@ -35,13 +35,31 @@ from tensorflow_datasets.scripts.cli import convert_format_utils
 def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
   """Add arguments for `convert_format` subparser."""
   parser.add_argument(
+      '--root_data_dir',
+      type=str,
+      help=(
+          'Root data dir that contains all datasets. All datasets and all their'
+          ' configs and versions that are in this folder will be converted.'
+      ),
+      required=False,
+  )
+  parser.add_argument(
       '--dataset_dir',
+      type=str,
+      help=(
+          'Path where the dataset to be converted is located. Converts all'
+          ' configs and versions in this folder.'
+      ),
+      required=False,
+  )
+  parser.add_argument(
+      '--dataset_version_dir',
       type=str,
       help=(
           'Path where the dataset to be converted is located. Should include'
           ' config and version.'
       ),
-      required=True,
+      required=False,
   )
   parser.add_argument(
       '--out_file_format',
@@ -80,9 +98,12 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
   add_parser_arguments(parser)
   parser.set_defaults(
       subparser_fn=lambda args: convert_format_utils.convert_dataset(
-          dataset_dir=args.dataset_dir,
           out_dir=args.out_dir,
           out_file_format=args.out_file_format,
+          dataset_dir=args.dataset_dir or None,
+          root_data_dir=args.root_data_dir or None,
+          dataset_version_dir=args.dataset_version_dir or None,
+          overwrite=args.overwrite,
           use_beam=args.use_beam,
       )
   )

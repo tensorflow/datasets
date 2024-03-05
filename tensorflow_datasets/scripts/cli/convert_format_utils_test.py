@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from etils import epath
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
@@ -61,3 +63,38 @@ def test_shard_instructions_for_split():
           out_file_adapter=out_file_adapter,
       ),
   ]
+
+
+def test_create_out_dir():
+  actual = convert_format_utils._create_out_dir(
+      dataset_dir='/a/b/c/d',
+      root_in_dir='/a/b',
+      root_out_dir='/e',
+  )
+  assert os.fspath(actual) == '/e/c/d'
+
+
+def test_create_from_to_dirs():
+  references = [
+      naming.DatasetReference(
+          dataset_name='a', config='cfg1', version='1.0.0', data_dir='/data/in'
+      ),
+      naming.DatasetReference(
+          dataset_name='a', config='cfg2', version='1.0.0', data_dir='/data/in'
+      ),
+      naming.DatasetReference(
+          dataset_name='b', config='cfg1', version='1.0.0', data_dir='/data/in'
+      ),
+      naming.DatasetReference(
+          dataset_name='c', version='1.0.0', data_dir='/data/in'
+      ),
+  ]
+  actual = convert_format_utils._create_from_to_dirs(
+      references, epath.Path('/data/in'), epath.Path('/out')
+  )
+  assert actual == {
+      epath.Path('/data/in/a/cfg1/1.0.0'): epath.Path('/out/a/cfg1/1.0.0'),
+      epath.Path('/data/in/a/cfg2/1.0.0'): epath.Path('/out/a/cfg2/1.0.0'),
+      epath.Path('/data/in/b/cfg1/1.0.0'): epath.Path('/out/b/cfg1/1.0.0'),
+      epath.Path('/data/in/c/1.0.0'): epath.Path('/out/c/1.0.0'),
+  }
