@@ -207,12 +207,13 @@ all_dataset_dependencies = list(
 )
 
 TESTS_ALL_DEPENDENCIES = TESTS_DEPENDENCIES + all_dataset_dependencies
-# `datasets` needs to be installed separately in Python >= 3.10 due to
-# conflicts between `multiprocess` and `apache-beam` libraries. See
+# `datasets` depends on `multiprocess` which conflicts with `apache-beam`. See
 # https://github.com/uqfoundation/multiprocess/issues/125
-HUGGINGFACE_ALL_DEPENDENCIES = [
-    dep for dep in TESTS_ALL_DEPENDENCIES if not dep.startswith('apache-beam')
-] + ['datasets']
+HUGGINGFACE_DEPENDENCIES = [
+    'apache-beam',
+    'datasets',
+    'multiprocess==0.70.9',
+]
 
 EXTRAS = {
     'matplotlib': ['matplotlib'],
@@ -221,7 +222,7 @@ EXTRAS = {
     'tensorflow-data-validation': ['tensorflow-data-validation'],
     'tests-all': TESTS_ALL_DEPENDENCIES,
     'dev': TESTS_DEPENDENCIES + DEV_DEPENDENCIES,
-    'huggingface': HUGGINGFACE_ALL_DEPENDENCIES,
+    'huggingface': TESTS_DEPENDENCIES + HUGGINGFACE_DEPENDENCIES,
 }
 EXTRAS.update(DATASET_EXTRAS)
 
