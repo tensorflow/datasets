@@ -129,5 +129,6 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
       )
   ]
 
+
 if __name__ == '__main__':
   testing.test_main()

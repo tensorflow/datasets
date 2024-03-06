@@ -16,6 +16,7 @@
 """Some python utils function and classes."""
 
 import base64
+from collections.abc import Iterator, Sequence
 import contextlib
 import functools
 import io
@@ -30,7 +31,7 @@ import sys
 import textwrap
 import threading
 import typing
-from typing import Any, Callable, Dict, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, NoReturn, Type, TypeVar
 import uuid
 
 from absl import logging as absl_logging
@@ -118,7 +119,7 @@ def disable_logging():
     logger.disabled = logger_disabled
 
 
-class NonMutableDict(Dict[T, U]):
+class NonMutableDict(dict[T, U]):
   """Dict where keys can only be added but not modified.
 
   Raises an error if a key is overwritten. The error message can be customized
@@ -205,7 +206,7 @@ def zip_nested(arg0, *args, **kwargs):
   return (arg0,) + args
 
 
-def flatten_nest_dict(d: type_utils.TreeDict[T]) -> Dict[str, T]:
+def flatten_nest_dict(d: type_utils.TreeDict[T]) -> dict[str, T]:
   """Return the dict with all nested keys flattened joined with '/'."""
   # Use NonMutableDict to ensure there is no collision between features keys
   flat_dict = NonMutableDict()
@@ -222,7 +223,7 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> Dict[str, T]:
 # users to compile from source.
 def flatten_with_path(
     structure: Tree[T],
-) -> Iterator[Tuple[Tuple[Union[str, int], ...], T]]:  # pytype: disable=invalid-annotation
+) -> Iterator[tuple[tuple[str | int, ...], T]]:  # pytype: disable=invalid-annotation
   """Convert a TreeDict into a flat list of paths and their values.
 
   ```py
@@ -356,8 +357,8 @@ def atomic_write(path: epath.PathLike, mode: str):
 
 def reraise(
     e: Exception,
-    prefix: Optional[str] = None,
-    suffix: Optional[str] = None,
+    prefix: str | None = None,
+    suffix: str | None = None,
 ) -> NoReturn:
   """Reraise an exception with an additional message."""
   prefix = prefix or ''
@@ -497,21 +498,17 @@ def basename_from_url(url: str) -> str:
   return filename or 'unknown_name'
 
 
-def list_info_files(dir_path: epath.PathLike) -> List[str]:
+def list_info_files(dir_path: epath.PathLike) -> Sequence[str]:
   """Returns name of info files within dir_path."""
-  from tensorflow_datasets.core import file_adapters  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
-
   path = epath.Path(dir_path)
-  return [
-      file_path.name
-      for file_path in path.iterdir()
-      if not file_adapters.is_example_file(file_path.name)
-      and not file_path.is_dir()
-  ]
+  info_files = []
+  for file_path in path.glob('*.json'):
+    info_files.append(file_path.name)
+  return info_files
 
 
 def get_base64(
-    write_fn: Union[bytes, Callable[[io.BytesIO], None]],
+    write_fn: bytes | Callable[[io.BytesIO], None],
 ) -> str:
   """Extracts the base64 string of an object by writing into a tmp buffer."""
   if isinstance(write_fn, bytes):  # Value already encoded

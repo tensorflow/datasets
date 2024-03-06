@@ -16,11 +16,11 @@
 """Library of helper functions to handle dealing with files."""
 
 import collections
+from collections.abc import Iterator, Sequence
 import functools
 import os
 import re
 import time
-from typing import Iterator, List, Optional
 
 from absl import logging
 from etils import epath
@@ -85,9 +85,9 @@ def add_data_dir(data_dir):
 
 
 def list_data_dirs(
-    given_data_dir: Optional[ListOrElem[PathLike]] = None,
-    dataset: Optional[str] = None,
-) -> List[PathLike]:
+    given_data_dir: ListOrElem[PathLike] | None = None,
+    dataset: str | None = None,
+) -> Sequence[PathLike]:
   """Return the list of all `data_dir` to look-up.
 
   Args:
@@ -114,7 +114,7 @@ def list_data_dirs(
 
 
 def get_default_data_dir(
-    given_data_dir: Optional[str] = None, dataset: Optional[str] = None
+    given_data_dir: str | None = None, dataset: str | None = None
 ) -> str:
   """Returns the default data_dir."""
   if given_data_dir:
@@ -188,7 +188,7 @@ def _find_references_with_glob(
     folder: epath.Path,
     is_data_dir: bool,
     is_dataset_dir: bool,
-    namespace: Optional[str] = None,
+    namespace: str | None = None,
     include_old_tfds_version: bool = True,
 ) -> Iterator[naming.DatasetReference]:
   """Yields all dataset references in the given folder.
@@ -282,7 +282,7 @@ def _find_references_with_glob(
 
 def list_dataset_variants(
     dataset_dir: epath.PathLike,
-    namespace: Optional[str] = None,
+    namespace: str | None = None,
     include_versions: bool = True,
     include_old_tfds_version: bool = False,
 ) -> Iterator[naming.DatasetReference]:
@@ -320,7 +320,7 @@ def list_dataset_variants(
 
 def list_datasets_in_data_dir(
     data_dir: epath.PathLike,
-    namespace: Optional[str] = None,
+    namespace: str | None = None,
     include_configs: bool = True,
     include_versions: bool = True,
     include_old_tfds_version: bool = False,
@@ -375,7 +375,7 @@ def makedirs_cached(dirname: epath.PathLike):
   epath.Path(dirname).mkdir(parents=True, exist_ok=True)
 
 
-def expand_glob(path: epath.PathLike) -> List[epath.Path]:
+def expand_glob(path: epath.PathLike) -> Sequence[epath.Path]:
   """Returns all files that match the glob in the given path.
 
   Warning: If `path` does not contain any wildcards, we do not check whether
