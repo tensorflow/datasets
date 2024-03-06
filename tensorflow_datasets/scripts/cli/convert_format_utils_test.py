@@ -16,6 +16,7 @@
 import os
 
 from etils import epath
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
@@ -98,3 +99,58 @@ def test_create_from_to_dirs():
       epath.Path('/data/in/b/cfg1/1.0.0'): epath.Path('/out/b/cfg1/1.0.0'),
       epath.Path('/data/in/c/1.0.0'): epath.Path('/out/c/1.0.0'),
   }
+
+
+def test_get_root_data_dir():
+  leaf_data_dir = epath.Path('/data/a/cfg1/1.2.3')
+  info = dataset_info.DatasetInfo(
+      builder=dataset_info.DatasetIdentity(
+          name='a',
+          version='1.2.3',
+          config_name='cfg1',
+          data_dir=leaf_data_dir,
+          module_name='xyz',
+      )
+  )
+  actual = convert_format_utils._get_root_data_dir(
+      in_dir=leaf_data_dir, info=info
+  )
+  assert '/data' == os.fspath(actual)
+
+
+def test_record_source_dataset(tmpdir):
+  tmpdir = epath.Path(tmpdir)
+  in_root_data_dir = tmpdir / 'data'
+  in_data_dir = in_root_data_dir / 'a/cfg1/1.2.3'
+  out_data_dir = tmpdir / 'out'
+  in_data_dir.mkdir(parents=True)
+  out_data_dir.mkdir(parents=True)
+  info = dataset_info.DatasetInfo(
+      builder=dataset_info.DatasetIdentity(
+          name='a',
+          version='1.2.3',
+          config_name='cfg1',
+          data_dir=in_data_dir,
+          module_name='xyz',
+      )
+  )
+  info.set_file_format(file_adapters.FileFormat.TFRECORD)
+  info.write_to_directory(in_data_dir)
+  convert_format_utils.convert_metadata(
+      in_dir=in_data_dir,
+      out_path=out_data_dir,
+      info=info,
+      out_file_format=file_adapters.FileFormat.RIEGELI,
+  )
+  converted_info = dataset_info.read_proto_from_builder_dir(out_data_dir)
+  assert converted_info.name == info.name
+  assert converted_info.version == info.version
+  assert converted_info.config_name == info.config_name
+  assert converted_info.module_name == info.module_name
+  assert converted_info.file_format == file_adapters.FileFormat.RIEGELI.value
+  assert len(converted_info.data_source_accesses) == 1
+  data_source_access = converted_info.data_source_accesses[0]
+  assert data_source_access.tfds_dataset.data_dir == os.fspath(in_root_data_dir)
+  assert data_source_access.tfds_dataset.name == info.name
+  assert data_source_access.tfds_dataset.version == info.version
+  assert data_source_access.tfds_dataset.config == info.config_name

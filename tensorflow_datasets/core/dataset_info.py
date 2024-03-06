@@ -781,7 +781,7 @@ class DatasetInfo(object):
                 name=dataset_reference.dataset_name,
                 config=dataset_reference.config,
                 version=str(dataset_reference.version),
-                data_dir=dataset_reference.data_dir,
+                data_dir=os.fspath(dataset_reference.data_dir),
                 ds_namespace=dataset_reference.namespace,
             ),
             url=dataset_info_pb2.Url(url=url),

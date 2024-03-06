@@ -18,6 +18,7 @@ r"""`tfds convert_format` command."""
 from collections.abc import Iterable, Iterator, Mapping
 import dataclasses
 import os
+import re
 from typing import Type
 
 from absl import logging
@@ -118,6 +119,18 @@ def get_all_shard_instructions(
   return shard_instructions
 
 
+def _get_root_data_dir(
+    in_dir: epath.Path, info: dataset_info.DatasetInfo
+) -> epath.Path:
+  in_dir = os.fspath(in_dir)
+  if info.config_name:
+    parts = [info.name, info.config_name, str(info.version)]
+  else:
+    parts = [info.name, str(info.version)]
+  relative_data_dir = os.path.join(*parts)
+  return epath.Path(re.sub(rf'{relative_data_dir}/?$', '', in_dir))
+
+
 def convert_metadata(
     in_dir: epath.Path,
     info: dataset_info.DatasetInfo,
@@ -134,6 +147,15 @@ def convert_metadata(
     logging.info('Copied %s to %s', json_file, out_file)
 
   # Update dataset info and store it.
+  in_dataset_reference = naming.DatasetReference(
+      dataset_name=info.name,
+      config=info.config_name,
+      version=info.version,
+      data_dir=os.fspath(_get_root_data_dir(in_dir, info)),
+  )
+  # Record the source TFDS dataset. Note that existing data source accesses will
+  # not be removed.
+  info.add_tfds_data_source_access(in_dataset_reference)
   info.as_proto.file_format = out_file_format.value
   info.write_to_directory(out_path)
 
