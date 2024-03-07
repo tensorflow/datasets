@@ -16,7 +16,9 @@
 """Meta register that uses other registers."""
 
 from collections.abc import Iterable, Mapping, Sequence
+import concurrent.futures
 import difflib
+import multiprocessing
 import os
 from typing import Any, Type
 
@@ -138,16 +140,29 @@ class DatasetRegistry(register_base.BaseRegister):
         builders.extend(register.list_builders())
     return builders
 
-  def list_dataset_references(self) -> Iterable[naming.DatasetReference]:
+  def list_dataset_references(
+      self, max_workers: int = multiprocessing.cpu_count()
+  ) -> Iterable[naming.DatasetReference]:
+    all_registers = []
     for registers in self.registers_per_namespace.values():
-      for register in registers:
-        try:
-          yield from register.list_dataset_references()
-        except Exception:  # pylint: disable=broad-except
-          logging.exception(
-              'Exception while getting dataset references from register %s',
-              register,
-          )
+      all_registers.extend(registers)
+
+    def _get_references(register: register_base.BaseRegister):
+      try:
+        return list(register.list_dataset_references())
+      except Exception:  # pylint: disable=broad-except
+        logging.exception(
+            'Exception while getting dataset references from register %s',
+            register,
+        )
+        return []
+
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=max_workers
+    ) as executor:
+      output = list(executor.map(_get_references, all_registers))
+      for dataset_references in output:
+        yield from dataset_references
 
   def list_dataset_references_for_namespace(
       self, namespace: str
