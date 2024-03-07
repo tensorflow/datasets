@@ -66,6 +66,7 @@ REQUIRED_PKGS = [
     'click',
     'dm-tree',
     'etils[enp,epath,epy,etree]>=1.6.0',
+    'immutabledict',
     'numpy',
     'promise',
     'protobuf>=3.20',

@@ -81,31 +81,6 @@ def test_convert_config_name():
   assert huggingface_dataset_builder.convert_config_name("X,y") == "x_y"
 
 
-def test_convert_to_np_dtype():
-  assert huggingface_dataset_builder._convert_to_np_dtype("bool_") == np.bool_
-  assert huggingface_dataset_builder._convert_to_np_dtype("float") == np.float32
-  assert (
-      huggingface_dataset_builder._convert_to_np_dtype("double") == np.float64
-  )
-  assert (
-      huggingface_dataset_builder._convert_to_np_dtype("large_string")
-      == np.object_
-  )
-  assert (
-      huggingface_dataset_builder._convert_to_np_dtype("string") == np.object_
-  )
-  assert huggingface_dataset_builder._convert_to_np_dtype("utf8") == np.object_
-  assert huggingface_dataset_builder._convert_to_np_dtype("int32") == np.int32
-  assert huggingface_dataset_builder._convert_to_np_dtype("int64") == np.int64
-  assert huggingface_dataset_builder._convert_to_np_dtype("int64") == tf.int64
-  assert (
-      huggingface_dataset_builder._convert_to_np_dtype("timestamp[s, tz=UTC]")
-      == np.int64
-  )
-  with pytest.raises(ValueError, match="Unrecognized type.+"):
-    huggingface_dataset_builder._convert_to_np_dtype("I am no dtype")
-
-
 def test_convert_value_datetime():
   feature = feature_lib.Scalar(dtype=np.int64)
   epoch_start = datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)

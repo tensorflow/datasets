@@ -32,7 +32,7 @@ import io
 import itertools
 import multiprocessing
 import os
-from typing import Any, Dict, Mapping, Optional, Tuple, Type, Union
+from typing import Any, Dict, Mapping, Optional, Tuple, Union
 
 from absl import logging
 from etils import epath
@@ -46,40 +46,13 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils import version as version_lib
 
 _IMAGE_ENCODING_FORMAT = "png"
 _EMPTY_SPLIT_WARNING_MSG = "%s split doesn't have any examples"
-
-
-def _convert_to_np_dtype(dtype: str) -> Type[np.generic]:
-  """Returns the `np.dtype` scalar feature."""
-  str2val = {
-      "bool": np.bool_,
-      "bool_": np.bool_,
-      "float": np.float32,
-      "double": np.float64,
-      "large_string": np.object_,
-      "utf8": np.object_,
-      "string": np.object_,
-  }
-  if dtype in str2val:
-    return str2val[dtype]
-  elif hasattr(np, dtype):
-    return getattr(np, dtype)
-  elif dtype.startswith("timestamp"):
-    # Timestamps are converted to seconds since UNIX epoch.
-    return np.int64
-  elif hasattr(tf.dtypes, dtype):
-    return getattr(tf.dtypes, dtype)
-  else:
-    raise ValueError(
-        f"Unrecognized type {dtype}. Please open an issue if you think "
-        "this is a bug."
-    )
 
 
 def extract_features(hf_features) -> feature_lib.FeatureConnector:
@@ -97,7 +70,9 @@ def extract_features(hf_features) -> feature_lib.FeatureConnector:
       raise ValueError(f"List {hf_features} should have a length of 1.")
     return feature_lib.Sequence(feature=extract_features(hf_features[0]))
   if isinstance(hf_features, hf_datasets.Value):
-    return feature_lib.Scalar(dtype=_convert_to_np_dtype(hf_features.dtype))
+    return feature_lib.Scalar(
+        dtype=huggingface_utils.convert_to_np_dtype(hf_features.dtype)
+    )
   if isinstance(hf_features, hf_datasets.ClassLabel):
     if hf_features.names:
       return feature_lib.ClassLabel(names=hf_features.names)
@@ -326,7 +301,7 @@ class HuggingfaceDatasetBuilder(
   converted to `_all`.
   """
 
-  VERSION = utils.Version("1.0.0")  # This will be replaced in __init__.
+  VERSION = version_lib.Version("1.0.0")  # This will be replaced in __init__.
 
   def __init__(
       self,
@@ -359,7 +334,7 @@ class HuggingfaceDatasetBuilder(
       ) from e
     self._hf_info = self._hf_builder.info
     version = str(self._hf_info.version or self._hf_builder.VERSION or "1.0.0")
-    self.VERSION = utils.Version(version)  # pylint: disable=invalid-name
+    self.VERSION = version_lib.Version(version)  # pylint: disable=invalid-name
     if self._hf_config:
       self._converted_builder_config = dataset_builder.BuilderConfig(
           name=tfds_config,
