@@ -15,10 +15,13 @@
 
 """Utility functions for huggingface_dataset_builder."""
 
-from typing import Type
+from collections.abc import Mapping, Sequence
+from typing import Any, Type
 
 import immutabledict
 import numpy as np
+from tensorflow_datasets.core import features as feature_lib
+from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -55,6 +58,52 @@ def convert_to_np_dtype(hf_dtype: str) -> Type[np.generic]:
         f'Unrecognized type {hf_dtype}. Please open an issue if you think '
         'this is a bug.'
     )
+
+
+def _get_default_value(
+    feature: feature_lib.FeatureConnector,
+) -> Mapping[str, Any] | Sequence[Any] | bytes | int | float | bool:
+  """Returns the default value for a feature.
+
+  Hugging Face is loose as far as typing is concerned. It accepts None values.
+  As long as `tfds.features.Optional` does not exist, we default to a constant
+  default value.
+
+  For int and float, we do not return 0 or -1, but rather -inf, as 0 or -1 can
+  be contained in the values of the dataset. In practice, you can compare your
+  value to:
+
+  ```
+  np.iinfo(np.int32).min  # for integers
+  np.finfo(np.float32).min  # for floats
+  ...
+  ```
+
+  Args:
+    feature: The TFDS feature from which we want the default value.
+
+  Raises:
+    ValueError: If couldn't recognize feature dtype.
+  """
+  match feature:
+    case feature_lib.FeaturesDict():
+      return {
+          name: _get_default_value(sub_feature)
+          for name, sub_feature in feature.items()
+      }
+    case feature_lib.Sequence():
+      return []
+    case _:
+      if dtype_utils.is_string(feature.np_dtype):
+        return b''
+      elif dtype_utils.is_integer(feature.np_dtype):
+        return np.iinfo(feature.np_dtype).min
+      elif dtype_utils.is_floating(feature.np_dtype):
+        return np.finfo(feature.np_dtype).min
+      elif dtype_utils.is_bool(feature.np_dtype):
+        return False
+      else:
+        raise ValueError(f'Could not get default value for {feature}')
 
 
 def convert_hf_dataset_name(hf_dataset_name: str) -> str:

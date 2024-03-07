@@ -257,29 +257,6 @@ def test_extract_features(features):
   ) == repr(tfds_features)
 
 
-def test_default_value():
-  assert (
-      huggingface_dataset_builder._default_value(
-          feature_lib.Scalar(dtype=np.int32)
-      )
-      == -2147483648
-  )
-  assert (
-      huggingface_dataset_builder._default_value(
-          feature_lib.Scalar(dtype=np.float32)
-      )
-      < -3.4028234e38
-  )
-  sequence = feature_lib.Sequence(np.int32)
-  assert huggingface_dataset_builder._default_value(sequence) == []  # pylint: disable=g-explicit-bool-comparison
-  features_dict = feature_lib.FeaturesDict({
-      "foo": feature_lib.Scalar(dtype=np.str_),
-  })
-  assert huggingface_dataset_builder._default_value(features_dict) == {
-      "foo": b""
-  }
-
-
 @skip_because_huggingface_cannot_be_imported
 def test_hf_features(builder):
   assert builder._hf_features() == {"feature": hf_datasets.Value("int32")}

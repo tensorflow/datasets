@@ -15,6 +15,7 @@
 
 import numpy as np
 import pytest
+from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -46,6 +47,24 @@ def test_convert_to_np_dtype_raises():
 )
 def test_convert_to_np_dtype(hf_dtype, np_dtype):
   assert huggingface_utils.convert_to_np_dtype(hf_dtype) is np_dtype
+
+
+@pytest.mark.parametrize(
+    'feature,default_value',
+    [
+        (feature_lib.Scalar(dtype=np.int32), -2147483648),
+        (feature_lib.Scalar(dtype=np.float32), -3.4028234663852886e38),
+        (feature_lib.Sequence(np.int32), []),
+        (
+            feature_lib.FeaturesDict({
+                'foo': feature_lib.Scalar(dtype=np.str_),
+            }),
+            {'foo': b''},
+        ),
+    ],
+)
+def test_get_default_value(feature, default_value):
+  assert huggingface_utils._get_default_value(feature) == default_value
 
 
 @pytest.mark.parametrize(

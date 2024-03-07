@@ -36,7 +36,6 @@ from typing import Any, Dict, Mapping, Optional, Tuple, Union
 
 from absl import logging
 from etils import epath
-import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import download
@@ -46,7 +45,6 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import version as version_lib
@@ -125,9 +123,9 @@ def _from_tfds_to_hf(tfds_name: str) -> str:
 
 def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
   """Converts a Huggingface value to a TFDS compatible value."""
-  # See the docstring of _default_value for explanations.
+  # See the docstring of huggingface_utils._get_default_value for explanations.
   if hf_value is None:
-    return _default_value(feature)
+    return huggingface_utils._get_default_value(feature)  # pylint: disable=protected-access
   if isinstance(hf_value, datetime.datetime):
     return int(hf_value.timestamp())
   elif isinstance(feature, feature_lib.ClassLabel):
@@ -138,7 +136,11 @@ def _convert_value(hf_value: Any, feature: feature_lib.FeatureConnector) -> Any:
     if isinstance(hf_value, dict):
       # Replaces `None` values with the default value.
       return {
-          key: value if value is not None else _default_value(feature[key])
+          key: (
+              value
+              if value is not None
+              else huggingface_utils._get_default_value(feature[key])  # pylint: disable=protected-access
+          )
           for key, value in hf_value.items()
       }
   elif isinstance(feature, feature_lib.FeaturesDict):
@@ -203,49 +205,6 @@ def _extract_supervised_keys(hf_info):
     if sk_input is not None and sk_output is not None:
       return (sk_input, sk_output)
   return None
-
-
-def _default_value(
-    feature: feature_lib.FeatureConnector,
-) -> Union[bytes, int, bool, float]:
-  """Returns the default value for a feature.
-
-  Hugging Face is loose as far as typing is concerned. It accepts None values.
-  As long as `tfds.features.Optional` does not exist, we default to a constant
-  default value.
-
-  For int and float, we do not return 0 or -1, but rather -inf, as 0 or -1 can
-  be contained in the values of the dataset. In practice, you can compare your
-  value to:
-
-  ```
-  np.iinfo(np.int32).min  # for integers
-  np.finfo(np.float32).min  # for floats
-  ...
-  ```
-
-  Args:
-    feature: the TFDS feature from which we want the default value.
-
-  Returns:
-    The default value.
-  """
-  if isinstance(feature, feature_lib.FeaturesDict):
-    return {
-        name: _default_value(sub_feature)
-        for name, sub_feature in feature.items()
-    }
-  elif isinstance(feature, feature_lib.Sequence):
-    return []
-  elif dtype_utils.is_string(feature.np_dtype):
-    return b""
-  elif dtype_utils.is_integer(feature.np_dtype):
-    return np.iinfo(feature.np_dtype).min
-  elif dtype_utils.is_floating(feature.np_dtype):
-    return np.finfo(feature.np_dtype).min
-  elif dtype_utils.is_bool(feature.np_dtype):
-    return False
-  raise ValueError(f"Could not get default value for {feature}")
 
 
 def _remove_empty_splits(
