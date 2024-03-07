@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for huggingface_dataset_builder."""
-
 import datetime
 from unittest import mock
 
@@ -46,14 +44,6 @@ class FakeHfDatasets:
     return ["mnist", "bigscience/P3", "x", "x/Y-z", "fashion_mnist"]
 
 
-def test_from_hf_to_tfds():
-  assert huggingface_dataset_builder.from_hf_to_tfds("x") == "x"
-  assert huggingface_dataset_builder.from_hf_to_tfds("X") == "x"
-  assert huggingface_dataset_builder.from_hf_to_tfds("x-y") == "x_y"
-  assert huggingface_dataset_builder.from_hf_to_tfds("x/y") == "x__y"
-  assert huggingface_dataset_builder.from_hf_to_tfds("x_v1.0") == "x_v1_0"
-
-
 @mock.patch.object(lazy_imports_lib.lazy_imports, "datasets", FakeHfDatasets())
 def test_from_tfds_to_hf():
   assert huggingface_dataset_builder._from_tfds_to_hf("x") == "x"
@@ -72,13 +62,6 @@ def test_from_tfds_to_hf():
       match='"z" is not listed in Hugging Face datasets.',
   ):
     assert huggingface_dataset_builder._from_tfds_to_hf("z")
-
-
-def test_convert_config_name():
-  assert huggingface_dataset_builder.convert_config_name(None) is None
-  assert huggingface_dataset_builder.convert_config_name("x") == "x"
-  assert huggingface_dataset_builder.convert_config_name("X") == "x"
-  assert huggingface_dataset_builder.convert_config_name("X,y") == "x_y"
 
 
 def test_convert_value_datetime():

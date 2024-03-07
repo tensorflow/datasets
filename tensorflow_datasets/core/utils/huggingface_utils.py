@@ -55,3 +55,42 @@ def convert_to_np_dtype(hf_dtype: str) -> Type[np.generic]:
         f'Unrecognized type {hf_dtype}. Please open an issue if you think '
         'this is a bug.'
     )
+
+
+def convert_hf_dataset_name(hf_dataset_name: str) -> str:
+  """Converts Huggingface dataset name to a TFDS compatible dataset name.
+
+  Huggingface dataset names can contain characters that are not supported in
+  TFDS. For example, in Huggingface a dataset name like `a/b` is supported,
+  while in TFDS `b` would be parsed as the config.
+
+  Examples:
+  - `hf_dataset_name='codeparrot/github-code'` becomes
+  `codeparrot__github_code`.
+
+  Args:
+    hf_dataset_name: Huggingface dataset name.
+
+  Returns:
+    The TFDS compatible dataset name.
+  """
+  return (
+      hf_dataset_name.replace('-', '_')
+      .replace('.', '_')
+      .replace('/', '__')
+      .lower()
+  )
+
+
+def convert_hf_config_name(hf_config_name: str | None) -> str | None:
+  """Converts Huggingface config name to a TFDS compatible config name.
+
+  Args:
+    hf_config_name: Optional Huggingface config name.
+
+  Returns:
+    The TFDS compatible config name.
+  """
+  if hf_config_name is None:
+    return hf_config_name
+  return hf_config_name.lower().replace(',', '_')

@@ -32,11 +32,11 @@ from etils import epath
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_package
-from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
 from tensorflow_datasets.core.github_api import github_path
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import py_utils
 import yaml
 
@@ -255,13 +255,11 @@ class DatasetDocumentation:
         config_name: str, info: dataset_info_pb2.DatasetInfo
     ) -> str:
       if self.namespace and self.namespace == 'huggingface':
-        tfds_id = huggingface_dataset_builder.from_hf_to_tfds(self.tfds_id)
+        tfds_id = huggingface_utils.convert_hf_dataset_name(self.tfds_id)
       else:
         tfds_id = self.tfds_id
       if config_name != 'default':
-        config_name = huggingface_dataset_builder.convert_config_name(
-            config_name
-        )
+        config_name = huggingface_utils.convert_hf_config_name(config_name)
         tfds_id = f'{tfds_id}/{config_name}'
       if keep_short:
         features = ''

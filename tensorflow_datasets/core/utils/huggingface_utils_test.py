@@ -46,3 +46,31 @@ def test_convert_to_np_dtype_raises():
 )
 def test_convert_to_np_dtype(hf_dtype, np_dtype):
   assert huggingface_utils.convert_to_np_dtype(hf_dtype) is np_dtype
+
+
+@pytest.mark.parametrize(
+    'hf_dataset_name,tfds_dataset_name',
+    [
+        ('x', 'x'),
+        ('X', 'x'),
+        ('x-y', 'x_y'),
+        ('x/y', 'x__y'),
+        ('x_v1.0', 'x_v1_0'),
+    ],
+)
+def test_from_hf_to_tfds(hf_dataset_name, tfds_dataset_name):
+  assert (
+      huggingface_utils.convert_hf_dataset_name(hf_dataset_name)
+      == tfds_dataset_name
+  )
+
+
+@pytest.mark.parametrize(
+    'hf_config_name,tfds_config_name',
+    [(None, None), ('x', 'x'), ('X', 'x'), ('X,y', 'x_y')],
+)
+def test_convert_config_name(hf_config_name, tfds_config_name):
+  assert (
+      huggingface_utils.convert_hf_config_name(hf_config_name)
+      == tfds_config_name
+  )
