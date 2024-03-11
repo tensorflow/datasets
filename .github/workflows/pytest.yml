@@ -115,7 +115,8 @@ jobs:
           --ignore="tensorflow_datasets/import_without_tf_test.py" \
           --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
           --ignore="tensorflow_datasets/translate/wmt19_test.py" \
-          --ignore="tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py"
+          --ignore="tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py" \
+          --ignore="tensorflow_datasets/core/utils/huggingface_utils_test.py"
 
     # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
     - name: Run leftover tests
@@ -147,7 +148,10 @@ jobs:
         extras: huggingface
 
     - name: Run HuggingFace tests
-      run: pytest -vv -n auto tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py
+      run: |
+        pytest -vv -n auto \
+          tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py \
+          tensorflow_datasets/core/utils/huggingface_utils_test.py
 
   githubapi-pytest-job:
     needs: activate-tests

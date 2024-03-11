@@ -15,6 +15,7 @@
 
 import datetime
 
+import datasets as hf_datasets
 import numpy as np
 import pytest
 from tensorflow_datasets.core import features as feature_lib
@@ -25,7 +26,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 def test_convert_to_np_dtype_raises():
   with pytest.raises(TypeError, match='Unrecognized type.+'):
-    huggingface_utils.convert_to_np_dtype('I am no dtype')
+    huggingface_utils._convert_to_np_dtype('I am no dtype')
 
 
 @pytest.mark.parametrize(
@@ -49,7 +50,64 @@ def test_convert_to_np_dtype_raises():
     ],
 )
 def test_convert_to_np_dtype(hf_dtype, np_dtype):
-  assert huggingface_utils.convert_to_np_dtype(hf_dtype) is np_dtype
+  assert huggingface_utils._convert_to_np_dtype(hf_dtype) is np_dtype
+
+
+def test_convert_hf_features_raises_type_error():
+  with pytest.raises(TypeError, match='Type <.+> is not supported.'):
+    huggingface_utils.convert_hf_features('I am no features')
+
+
+def test_convert_hf_features_raises_value_error():
+  with pytest.raises(
+      ValueError, match=r'List \[.+\] should have a length of 1.'
+  ):
+    huggingface_utils.convert_hf_features(
+        [hf_datasets.Value('int32'), hf_datasets.Value('int32')]
+    )
+
+
+@pytest.mark.parametrize(
+    'hf_features,tfds_features',
+    [
+        (
+            hf_datasets.Features(
+                id=hf_datasets.Value('string'),
+                meta={
+                    'left_context': hf_datasets.Value('string'),
+                    'partial_evidence': [{
+                        'start_id': hf_datasets.Value('int32'),
+                        'meta': {
+                            'evidence_span': [hf_datasets.Value('string')]
+                        },
+                    }],
+                },
+            ),
+            feature_lib.FeaturesDict({
+                'id': feature_lib.Scalar(dtype=np.str_),
+                'meta': feature_lib.FeaturesDict({
+                    'left_context': feature_lib.Scalar(dtype=np.str_),
+                    'partial_evidence': feature_lib.Sequence({
+                        'meta': feature_lib.FeaturesDict({
+                            'evidence_span': feature_lib.Sequence(
+                                feature_lib.Scalar(dtype=np.str_)
+                            ),
+                        }),
+                        'start_id': feature_lib.Scalar(dtype=np.int32),
+                    }),
+                }),
+            }),
+        ),
+        (
+            hf_datasets.Audio(sampling_rate=48000),
+            feature_lib.Audio(sample_rate=48000),
+        ),
+    ],
+)
+def test_convert_hf_features(hf_features, tfds_features):
+  assert repr(huggingface_utils.convert_hf_features(hf_features)) == repr(
+      tfds_features
+  )
 
 
 @pytest.mark.parametrize(

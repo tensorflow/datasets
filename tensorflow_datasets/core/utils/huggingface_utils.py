@@ -25,6 +25,7 @@ import numpy as np
 from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -36,9 +37,10 @@ _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
     'utf8': np.object_,
     'string': np.object_,
 })
+_IMAGE_ENCODING_FORMAT = 'png'
 
 
-def convert_to_np_dtype(hf_dtype: str) -> Type[np.generic]:
+def _convert_to_np_dtype(hf_dtype: str) -> Type[np.generic]:
   """Returns the `np.dtype` scalar feature.
 
   Args:
@@ -61,6 +63,56 @@ def convert_to_np_dtype(hf_dtype: str) -> Type[np.generic]:
         f'Unrecognized type {hf_dtype}. Please open an issue if you think '
         'this is a bug.'
     )
+
+
+def convert_hf_features(hf_features) -> feature_lib.FeatureConnector:
+  """Converts Huggingface feature spec to a TFDS compatible feature spec.
+
+  Args:
+    hf_features: Huggingface feature spec.
+
+  Returns:
+    The TFDS compatible feature spec.
+
+  Raises:
+    ValueError: If the given Huggingface features is a list with length > 1.
+    TypeError: If couldn't recognize the given feature spec.
+  """
+  match hf_features:
+    case hf_datasets.Features() | dict():
+      return feature_lib.FeaturesDict({
+          name: convert_hf_features(hf_inner_feature)
+          for name, hf_inner_feature in hf_features.items()
+      })
+    case hf_datasets.Sequence():
+      return feature_lib.Sequence(
+          feature=convert_hf_features(hf_features.feature)
+      )
+    case list():
+      if len(hf_features) != 1:
+        raise ValueError(f'List {hf_features} should have a length of 1.')
+      return feature_lib.Sequence(feature=convert_hf_features(hf_features[0]))
+    case hf_datasets.Value():
+      return feature_lib.Scalar(dtype=_convert_to_np_dtype(hf_features.dtype))
+    case hf_datasets.ClassLabel():
+      if hf_features.names:
+        return feature_lib.ClassLabel(names=hf_features.names)
+      if hf_features.names_file:
+        return feature_lib.ClassLabel(names_file=hf_features.names_file)
+      if hf_features.num_classes:
+        return feature_lib.ClassLabel(num_classes=hf_features.num_classes)
+    case hf_datasets.Translation():
+      return feature_lib.Translation(languages=hf_features.languages)
+    case hf_datasets.TranslationVariableLanguages():
+      return feature_lib.TranslationVariableLanguages(
+          languages=hf_features.languages
+      )
+    case hf_datasets.Image():
+      return feature_lib.Image(encoding_format=_IMAGE_ENCODING_FORMAT)
+    case hf_datasets.Audio():
+      return feature_lib.Audio(sample_rate=hf_features.sampling_rate)
+
+  raise TypeError(f'Type {type(hf_features)} is not supported.')
 
 
 def _get_default_value(

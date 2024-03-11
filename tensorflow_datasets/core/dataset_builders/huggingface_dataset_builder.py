@@ -37,7 +37,6 @@ from etils import epath
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import download
-from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
@@ -48,47 +47,7 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 
-_IMAGE_ENCODING_FORMAT = "png"
 _EMPTY_SPLIT_WARNING_MSG = "%s split doesn't have any examples"
-
-
-def extract_features(hf_features) -> feature_lib.FeatureConnector:
-  """Converts Huggingface feature spec to TFDS feature spec."""
-  if isinstance(hf_features, (hf_datasets.Features, dict)):
-    return feature_lib.FeaturesDict({
-        name: extract_features(hf_inner_feature)
-        for name, hf_inner_feature in hf_features.items()
-    })
-  if isinstance(hf_features, hf_datasets.Sequence):
-    return feature_lib.Sequence(feature=extract_features(hf_features.feature))
-  if isinstance(hf_features, list):
-    if len(hf_features) != 1:
-      raise ValueError(f"List {hf_features} should have a length of 1.")
-    return feature_lib.Sequence(feature=extract_features(hf_features[0]))
-  if isinstance(hf_features, hf_datasets.Value):
-    return feature_lib.Scalar(
-        dtype=huggingface_utils.convert_to_np_dtype(hf_features.dtype)
-    )
-  if isinstance(hf_features, hf_datasets.ClassLabel):
-    if hf_features.names:
-      return feature_lib.ClassLabel(names=hf_features.names)
-    if hf_features.names_file:
-      return feature_lib.ClassLabel(names_file=hf_features.names_file)
-    if hf_features.num_classes:
-      return feature_lib.ClassLabel(num_classes=hf_features.num_classes)
-  if isinstance(hf_features, hf_datasets.Translation):
-    return feature_lib.Translation(
-        languages=hf_features.languages,
-    )
-  if isinstance(hf_features, hf_datasets.TranslationVariableLanguages):
-    return feature_lib.TranslationVariableLanguages(
-        languages=hf_features.languages,
-    )
-  if isinstance(hf_features, hf_datasets.Image):
-    return feature_lib.Image(encoding_format=_IMAGE_ENCODING_FORMAT)
-  if isinstance(hf_features, hf_datasets.Audio):
-    return feature_lib.Audio(sample_rate=hf_features.sampling_rate)
-  raise ValueError(f"Type {type(hf_features)} is not supported.")
 
 
 def _from_tfds_to_hf(tfds_name: str) -> str:
@@ -247,7 +206,7 @@ class HuggingfaceDatasetBuilder(
     return dataset_info_lib.DatasetInfo(
         builder=self,
         description=self._hf_info.description,
-        features=extract_features(self._hf_features()),
+        features=huggingface_utils.convert_hf_features(self._hf_features()),
         citation=self._hf_info.citation,
         license=self._hf_info.license,
         supervised_keys=_extract_supervised_keys(self._hf_info),

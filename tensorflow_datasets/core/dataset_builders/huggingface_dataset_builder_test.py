@@ -17,9 +17,7 @@ from unittest import mock
 
 from absl import logging
 import datasets as hf_datasets
-import numpy as np
 import pytest
-from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
 
@@ -59,45 +57,6 @@ def test_remove_empty_splits():
     )
   assert non_empty_splits.keys() == {"non_empty_split"}
   assert list(non_empty_splits["non_empty_split"]) == list(range(5))
-
-
-# Encapsulate test parameters into a fixture to avoid `datasets` import during
-# tests collection.
-# https://docs.pytest.org/en/7.2.x/example/parametrize.html#deferring-the-setup-of-parametrized-resources
-@pytest.fixture(params=["feat_dict", "audio"], name="features")
-def get_features(request):
-  if request.param == "feat_dict":
-    return (
-        hf_datasets.Features({
-            "id": hf_datasets.Value("string"),
-            "meta": {
-                "left_context": hf_datasets.Value("string"),
-                "partial_evidence": [{
-                    "start_id": hf_datasets.Value("int32"),
-                    "meta": {"evidence_span": [hf_datasets.Value("string")]},
-                }],
-            },
-        }),
-        feature_lib.FeaturesDict({
-            "id": feature_lib.Scalar(dtype=np.str_),
-            "meta": feature_lib.FeaturesDict({
-                "left_context": feature_lib.Scalar(dtype=np.str_),
-                "partial_evidence": feature_lib.Sequence({
-                    "meta": feature_lib.FeaturesDict({
-                        "evidence_span": feature_lib.Sequence(
-                            feature_lib.Scalar(dtype=np.str_)
-                        ),
-                    }),
-                    "start_id": feature_lib.Scalar(dtype=np.int32),
-                }),
-            }),
-        }),
-    )
-  elif request.param == "audio":
-    return (
-        hf_datasets.Audio(sampling_rate=48000),
-        feature_lib.Audio(sample_rate=48000),
-    )
 
 
 @pytest.fixture(name="load_dataset_builder_mock")
@@ -152,13 +111,6 @@ def test_all_parameters_are_passed_down_to_hf(
   load_dataset_builder_mock.return_value.as_dataset.assert_called_once_with(
       verification_mode="all_checks"
   )
-
-
-def test_extract_features(features):
-  hf_features, tfds_features = features
-  assert repr(
-      huggingface_dataset_builder.extract_features(hf_features)
-  ) == repr(tfds_features)
 
 
 def test_hf_features(builder):
