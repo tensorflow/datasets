@@ -30,7 +30,7 @@ import functools
 import itertools
 import multiprocessing
 import os
-from typing import Any, Dict, Mapping, Optional, Tuple, Union
+from typing import Any, Dict, Mapping, Optional, Union
 
 from absl import logging
 from etils import epath
@@ -117,19 +117,6 @@ def _from_tfds_to_hf(tfds_name: str) -> str:
   raise registered.DatasetNotFoundError(
       f'"{tfds_name}" is not listed in Hugging Face datasets.'
   )
-
-
-def _convert_example(
-    index: int,
-    example: Mapping[str, Any],
-    features: feature_lib.FeaturesDict,
-) -> Tuple[int, Mapping[str, Any]]:
-  """Converts an example from Huggingface format to TFDS format."""
-  converted_example = {
-      name: huggingface_utils.convert_hf_value(value, features[name])
-      for name, value in example.items()
-  }
-  return index, converted_example
 
 
 def _extract_supervised_keys(hf_info):
@@ -280,17 +267,14 @@ class HuggingfaceDatasetBuilder(
     return _remove_empty_splits(splits)
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
-    dataset_info = self._info()
+    convert_example = functools.partial(
+        huggingface_utils.convert_hf_value, feature=self._info().features
+    )
     if self._tfds_num_proc is None:
-      for index, example in enumerate(data):
-        yield _convert_example(index, example, dataset_info.features)
+      yield from enumerate(map(convert_example, data))
     else:
       with multiprocessing.Pool(processes=self._tfds_num_proc) as pool:
-        examples = pool.starmap(
-            functools.partial(_convert_example, features=dataset_info.features),
-            enumerate(data),
-        )
-        yield from examples
+        yield from enumerate(pool.imap(convert_example, data))
 
 
 def builder(
