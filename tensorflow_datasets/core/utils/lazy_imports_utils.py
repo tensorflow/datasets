@@ -92,6 +92,15 @@ def tf_agents_error_callback(module_name: Exception):
   print("***************************************************************\n\n")
 
 
+def datasets_error_callback(module_name: Exception):
+  """Error callback for datasets."""
+  del module_name
+  print("\n\n***************************************************************")
+  print("Failed to import datasets.")
+  print('Please install datasets using `pip install datasets`.')
+  print("***************************************************************\n\n")
+
+
 # pylint: disable=g-import-not-at-top,unused-import
 
 with epy.lazy_imports(error_callback=mlcroissant_error_callback):
@@ -113,6 +122,8 @@ with epy.lazy_imports(
 with epy.lazy_imports(error_callback=tf_agents_error_callback):
   import tf_agents  # pytype: disable=import-error
 
+with epy.lazy_imports(error_callback=datasets_error_callback):
+  import datasets  # pytype: disable=import-error
 
 with epy.lazy_imports(error_callback=array_record_error_callback):
   from array_record.python import array_record_data_source

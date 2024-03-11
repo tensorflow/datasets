@@ -70,11 +70,6 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def datasets(cls):
-    return _try_import("datasets")
-
-  @utils.classproperty
-  @classmethod
   def envlogger(cls):
     return _try_import("envlogger.reader")
 

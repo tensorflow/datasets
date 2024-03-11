@@ -46,6 +46,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import version as version_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 
 _IMAGE_ENCODING_FORMAT = "png"
 _EMPTY_SPLIT_WARNING_MSG = "%s split doesn't have any examples"
@@ -53,7 +54,6 @@ _EMPTY_SPLIT_WARNING_MSG = "%s split doesn't have any examples"
 
 def extract_features(hf_features) -> feature_lib.FeatureConnector:
   """Converts Huggingface feature spec to TFDS feature spec."""
-  hf_datasets = lazy_imports_lib.lazy_imports.datasets
   if isinstance(hf_features, (hf_datasets.Features, dict)):
     return feature_lib.FeaturesDict({
         name: extract_features(hf_inner_feature)
@@ -106,7 +106,6 @@ def _from_tfds_to_hf(tfds_name: str) -> str:
   Raises:
     Exception: if the name doesn't correspond to any existing dataset.
   """
-  hf_datasets = lazy_imports_lib.lazy_imports.datasets
   hf_dataset_names = hf_datasets.list_datasets()
   for hf_dataset_name in hf_dataset_names:
     if (
@@ -179,7 +178,6 @@ class HuggingfaceDatasetBuilder(
     self._hf_config = hf_config
     self.config_kwargs = config_kwargs
     tfds_config = huggingface_utils.convert_hf_config_name(hf_config)
-    hf_datasets = lazy_imports_lib.lazy_imports.datasets
     try:
       self._hf_builder = hf_datasets.load_dataset_builder(
           self._hf_repo_id, self._hf_config, **self.config_kwargs

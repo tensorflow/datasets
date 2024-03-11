@@ -16,34 +16,20 @@
 from unittest import mock
 
 from absl import logging
+import datasets as hf_datasets
 import numpy as np
 import pytest
 from tensorflow_datasets.core import features as feature_lib
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
 
 
-try:
-  hf_datasets = lazy_imports_lib.lazy_imports.datasets
-  _SKIP_TEST = False
-except (ImportError, ModuleNotFoundError):
-  # Some tests are only launched when `datasets` can be imported.
-  _SKIP_TEST = True
-
-skip_because_huggingface_cannot_be_imported = pytest.mark.skipif(
-    _SKIP_TEST, reason="Hugging Face cannot be imported"
+@mock.patch.object(
+    hf_datasets,
+    "list_datasets",
+    return_value=["mnist", "bigscience/P3", "x", "x/Y-z", "fashion_mnist"],
 )
-
-
-class FakeHfDatasets:
-
-  def list_datasets(self):
-    return ["mnist", "bigscience/P3", "x", "x/Y-z", "fashion_mnist"]
-
-
-@mock.patch.object(lazy_imports_lib.lazy_imports, "datasets", FakeHfDatasets())
-def test_from_tfds_to_hf():
+def test_from_tfds_to_hf(_):
   assert huggingface_dataset_builder._from_tfds_to_hf("x") == "x"
   assert huggingface_dataset_builder._from_tfds_to_hf("X") == "x"
   assert (
@@ -117,7 +103,7 @@ def get_features(request):
 @pytest.fixture(name="load_dataset_builder_mock")
 def get_load_dataset_builder_mock():
   with mock.patch.object(
-      lazy_imports_lib.lazy_imports.datasets, "load_dataset_builder"
+      hf_datasets, "load_dataset_builder"
   ) as load_dataset_builder_mock:
     hf_builder = load_dataset_builder_mock.return_value
     hf_builder.info.citation = "citation"
@@ -156,7 +142,6 @@ def get_huggingface_dataset_builder_mock(load_dataset_builder_mock):
     yield builder
 
 
-@skip_because_huggingface_cannot_be_imported
 def test_all_parameters_are_passed_down_to_hf(
     load_dataset_builder_mock, builder
 ):
@@ -169,7 +154,6 @@ def test_all_parameters_are_passed_down_to_hf(
   )
 
 
-@skip_because_huggingface_cannot_be_imported
 def test_extract_features(features):
   hf_features, tfds_features = features
   assert repr(
@@ -177,6 +161,5 @@ def test_extract_features(features):
   ) == repr(tfds_features)
 
 
-@skip_because_huggingface_cannot_be_imported
 def test_hf_features(builder):
   assert builder._hf_features() == {"feature": hf_datasets.Value("int32")}
