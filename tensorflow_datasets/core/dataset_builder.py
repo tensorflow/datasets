@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import abc
+import collections
 from collections.abc import Sequence
 import dataclasses
 import functools
@@ -273,7 +274,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         data_dir=data_dir, config=config, version=version
     )
     # To do the work:
-    self._builder_config = self._create_builder_config(config)
+    self._builder_config = self._create_builder_config(config, version=version)
     # Extract code version (VERSION or config)
     self._version = self._pick_version(version)
     # Compute the base directory (for download) and dataset/version directory.
@@ -349,7 +350,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     ]
 
   def _pick_version(
-      self, requested_version: Union[str, utils.Version]
+      self, requested_version: str | utils.Version | None
   ) -> utils.Version:
     """Returns utils.Version instance, or raise AssertionError."""
     # Validate that `canonical_version` is correctly defined
@@ -1256,7 +1257,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     """`tfds.core.BuilderConfig` for this builder."""
     return self._builder_config
 
-  def _create_builder_config(self, builder_config) -> Optional[BuilderConfig]:
+  def _create_builder_config(
+      self,
+      builder_config: str | BuilderConfig | None,
+      version: str | utils.Version | None,
+  ) -> BuilderConfig | None:
     """Create and validate BuilderConfig object."""
     if builder_config is None:
       builder_config = self.get_default_builder_config()
@@ -1271,10 +1276,12 @@ class DatasetBuilder(registered.RegisteredDataset):
     if isinstance(builder_config, str):
       name = builder_config
       builder_config = self.builder_configs.get(name)
+      if builder_config is None and version is not None:
+        builder_config = self.builder_configs.get(f"{name}:{version}")
       if builder_config is None:
         raise ValueError(
-            "BuilderConfig %s not found. Available: %s"
-            % (name, list(self.builder_configs.keys()))
+            "BuilderConfig %s not found with version %s. Available: %s"
+            % (name, version, list(self.builder_configs.keys()))
         )
     name = builder_config.name
     if not name:
@@ -1294,9 +1301,28 @@ class DatasetBuilder(registered.RegisteredDataset):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def builder_configs(cls):
-    """Pre-defined list of configurations for this builder class."""
-    config_dict = {config.name: config for config in cls.BUILDER_CONFIGS}
+  def builder_configs(cls) -> dict[str, BuilderConfig]:
+    """Returns pre-defined list of configurations for this builder class.
+
+    If the builder contains multiple versions of the same config, then the key
+    of the dict will be "config_name:version".
+    """
+    # Determine whether there are configs with multiple versions.
+    versions_per_config = collections.defaultdict(set)
+    for config in cls.BUILDER_CONFIGS:
+      version = config.version or cls.VERSION
+      if version:
+        versions_per_config[config.name].add(version)
+    config_with_multiple_versions = any(
+        [len(versions) > 1 for versions in versions_per_config.values()]
+    )
+    if config_with_multiple_versions:
+      config_dict = {
+          f"{config.name}:{config.version}": config
+          for config in cls.BUILDER_CONFIGS
+      }
+    else:
+      config_dict = {config.name: config for config in cls.BUILDER_CONFIGS}
     if len(config_dict) != len(cls.BUILDER_CONFIGS):
       names = [config.name for config in cls.BUILDER_CONFIGS]
       raise ValueError(

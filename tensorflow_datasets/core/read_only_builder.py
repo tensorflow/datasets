@@ -18,7 +18,7 @@
 import functools
 import os
 import typing
-from typing import Any, List, Optional, Tuple, Type
+from typing import Any, List, Optional, Type
 
 from etils import epath
 from tensorflow_datasets.core import dataset_builder
@@ -96,14 +96,22 @@ class ReadOnlyBuilder(
       )
 
   def _create_builder_config(
-      self, builder_config: Optional[dataset_builder.BuilderConfig]
-  ) -> Optional[dataset_builder.BuilderConfig]:
+      self,
+      builder_config: str | dataset_builder.BuilderConfig | None,
+      version: str | utils.Version | None,
+  ) -> dataset_builder.BuilderConfig | None:
+    del version
+    if isinstance(builder_config, str):
+      raise ValueError(
+          "'builder_config' must be a BuilderConfig, not a str. Value is"
+          f" '{builder_config}"
+      )
     return builder_config  # BuilderConfig is created in __init__
 
   def _pick_version(self, version: str) -> utils.Version:
     return utils.Version(version)
 
-  def _build_data_dir(self, data_dir: str) -> Tuple[str, str]:
+  def _build_data_dir(self, data_dir: str) -> tuple[str, str]:
     return data_dir, data_dir  # _data_dir_root, _data_dir are builder_dir.
 
   def _info(self) -> dataset_info.DatasetInfo:

@@ -75,7 +75,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict({"x": tf.int64}),
+        features=features.FeaturesDict({"x": np.int64}),
         supervised_keys=("x", "x"),
     )
 
@@ -96,6 +96,40 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
 
 class DummyDatasetWithDefaultConfig(DummyDatasetWithConfigs):
   DEFAULT_BUILDER_CONFIG_NAME = "plus2"
+
+
+class DummyDatasetWithVersionedConfigs(dataset_builder.GeneratorBasedBuilder):
+  """Builder that has multiple versions of the same config name."""
+
+  SUPPORTED_VERSIONS = [utils.Version("0.0.1"), utils.Version("0.0.2")]
+  BUILDER_CONFIGS = [
+      DummyBuilderConfig(
+          name="cfg1",
+          version=utils.Version("0.0.1"),
+          increment=0,
+      ),
+      DummyBuilderConfig(
+          name="cfg1",
+          version=utils.Version("0.0.2"),
+          increment=1,
+      ),
+  ]
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": np.int64}),
+        supervised_keys=("x", "x"),
+    )
+
+  def _split_generators(self, dl_manager):
+    del dl_manager
+    return {"train": self._generate_examples(range(20))}
+
+  def _generate_examples(self, range_):
+    for i in range_:
+      x = i + self.builder_config.increment
+      yield i, {"x": x}
 
 
 class InvalidSplitDataset(DummyDatasetWithConfigs):
@@ -352,6 +386,35 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
     self.assertEqual(
         DummyDatasetWithDefaultConfig.default_builder_config.name, "plus2"
     )
+
+  def test_builder_configs_configs_with_multiple_versions(self):
+    self.assertSetEqual(
+        set(["cfg1:0.0.1", "cfg1:0.0.2"]),
+        set(DummyDatasetWithVersionedConfigs.builder_configs.keys()),
+    )
+
+  def test_versioned_configs(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      tmp_dir = epath.Path(tmp_dir)
+      builder1 = DummyDatasetWithVersionedConfigs(
+          config="cfg1", version="0.0.1", data_dir=tmp_dir
+      )
+      builder2 = DummyDatasetWithVersionedConfigs(
+          config="cfg1", version="0.0.2", data_dir=tmp_dir
+      )
+      builder1.download_and_prepare()
+      builder2.download_and_prepare()
+      data_dir1 = tmp_dir / builder1.name / "cfg1" / "0.0.1"
+      data_dir2 = tmp_dir / builder2.name / "cfg1" / "0.0.2"
+      # 1 train shard plus metadata files
+      self.assertGreaterEqual(len(list(data_dir1.iterdir())), 3)
+      self.assertGreaterEqual(len(list(data_dir2.iterdir())), 3)
+      ds1 = builder1.as_dataset(split="train")
+      total1 = sum(el["x"] for el in dataset_utils.as_numpy(ds1))
+      ds2 = builder2.as_dataset(split="train")
+      total2 = sum(el["x"] for el in dataset_utils.as_numpy(ds2))
+      self.assertEqual(total1, 190)
+      self.assertEqual(total2, 210)
 
   def test_read_config(self):
     is_called = []
@@ -688,7 +751,7 @@ class DummyOrderedDataset(dataset_builder.GeneratorBasedBuilder):
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict({"x": tf.int64}),
+        features=features.FeaturesDict({"x": np.int64}),
         disable_shuffling=True,
     )
 
@@ -1036,7 +1099,7 @@ class DummyDatasetWithSupervisedKeys(DummyDatasetSharedGenerator):
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict({"x": tf.int64}),
+        features=features.FeaturesDict({"x": np.int64}),
         supervised_keys=self.supervised_keys,
     )
 

@@ -300,7 +300,7 @@ class HuggingfaceDatasetBuilder(
     return self._converted_builder_config
 
   def _create_builder_config(
-      self, builder_config
+      self, builder_config, version
   ) -> Optional[dataset_builder.BuilderConfig]:
     return self._converted_builder_config
 
