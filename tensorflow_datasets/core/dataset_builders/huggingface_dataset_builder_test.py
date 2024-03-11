@@ -18,32 +18,7 @@ from unittest import mock
 from absl import logging
 import datasets as hf_datasets
 import pytest
-from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
-
-
-@mock.patch.object(
-    hf_datasets,
-    "list_datasets",
-    return_value=["mnist", "bigscience/P3", "x", "x/Y-z", "fashion_mnist"],
-)
-def test_from_tfds_to_hf(_):
-  assert huggingface_dataset_builder._from_tfds_to_hf("x") == "x"
-  assert huggingface_dataset_builder._from_tfds_to_hf("X") == "x"
-  assert (
-      huggingface_dataset_builder._from_tfds_to_hf("bigscience__p3")
-      == "bigscience/P3"
-  )
-  assert (
-      huggingface_dataset_builder._from_tfds_to_hf("fashion_mnist")
-      == "fashion_mnist"
-  )
-  assert huggingface_dataset_builder._from_tfds_to_hf("x__y_z") == "x/Y-z"
-  with pytest.raises(
-      registered.DatasetNotFoundError,
-      match='"z" is not listed in Hugging Face datasets.',
-  ):
-    assert huggingface_dataset_builder._from_tfds_to_hf("z")
 
 
 def test_remove_empty_splits():

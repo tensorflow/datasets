@@ -20,6 +20,7 @@ import numpy as np
 import pytest
 from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -224,6 +225,43 @@ def test_from_hf_to_tfds(hf_dataset_name, tfds_dataset_name):
   assert (
       huggingface_utils.convert_hf_dataset_name(hf_dataset_name)
       == tfds_dataset_name
+  )
+
+
+@pytest.fixture(name='mock_list_datasets')
+def _list_datasets(monkeypatch):
+  def mock_list_datasets():
+    return ['mnist', 'bigscience/P3', 'x', 'x/Y-z', 'fashion_mnist']
+
+  monkeypatch.setattr(hf_datasets, 'list_datasets', mock_list_datasets)
+
+
+def test_convert_tfds_dataset_name_raises(mock_list_datasets):
+  del mock_list_datasets
+  with pytest.raises(
+      registered.DatasetNotFoundError,
+      match='"z" is not listed in Huggingface datasets.',
+  ):
+    assert huggingface_utils.convert_tfds_dataset_name('z')
+
+
+@pytest.mark.parametrize(
+    'tfds_dataset_name,hf_dataset_name',
+    [
+        ('x', 'x'),
+        ('X', 'x'),
+        ('bigscience__p3', 'bigscience/P3'),
+        ('fashion_mnist', 'fashion_mnist'),
+        ('x__y_z', 'x/Y-z'),
+    ],
+)
+def test_convert_tfds_dataset_name(
+    mock_list_datasets, tfds_dataset_name, hf_dataset_name
+):
+  del mock_list_datasets
+  assert (
+      huggingface_utils.convert_tfds_dataset_name(tfds_dataset_name)
+      == hf_dataset_name
   )
 
 

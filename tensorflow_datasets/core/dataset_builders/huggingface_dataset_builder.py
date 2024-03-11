@@ -39,7 +39,6 @@ from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import huggingface_utils
@@ -48,33 +47,6 @@ from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 
 _EMPTY_SPLIT_WARNING_MSG = "%s split doesn't have any examples"
-
-
-def _from_tfds_to_hf(tfds_name: str) -> str:
-  """Finds the original HF repo ID.
-
-  As TFDS doesn't support case-sensitive names, we list all HF datasets and pick
-  the dataset that has a case-insensitive match.
-
-  Args:
-    tfds_name: the dataset name in TFDS.
-
-  Returns:
-    the HF dataset name.
-
-  Raises:
-    Exception: if the name doesn't correspond to any existing dataset.
-  """
-  hf_dataset_names = hf_datasets.list_datasets()
-  for hf_dataset_name in hf_dataset_names:
-    if (
-        huggingface_utils.convert_hf_dataset_name(hf_dataset_name)
-        == tfds_name.lower()
-    ):
-      return hf_dataset_name
-  raise registered.DatasetNotFoundError(
-      f'"{tfds_name}" is not listed in Hugging Face datasets.'
-  )
 
 
 def _extract_supervised_keys(hf_info):
@@ -237,7 +209,7 @@ class HuggingfaceDatasetBuilder(
 def builder(
     name: str, config: Optional[str] = None, **builder_kwargs
 ) -> HuggingfaceDatasetBuilder:
-  hf_repo_id = _from_tfds_to_hf(name)
+  hf_repo_id = huggingface_utils.convert_tfds_dataset_name(name)
   return HuggingfaceDatasetBuilder(
       hf_repo_id=hf_repo_id, hf_config=config, **builder_kwargs
   )

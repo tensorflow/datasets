@@ -24,6 +24,7 @@ import immutabledict
 import numpy as np
 from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -250,6 +251,30 @@ def convert_hf_dataset_name(hf_dataset_name: str) -> str:
       .replace('.', '_')
       .replace('/', '__')
       .lower()
+  )
+
+
+def convert_tfds_dataset_name(tfds_dataset_name: str) -> str:
+  """Converts TFDS dataset name to a Huggingface compatible dataset name.
+
+  As TFDS doesn't support case-sensitive names, we list all HF datasets and pick
+  the dataset that has a case-insensitive match.
+
+  Args:
+    tfds_dataset_name: TFDS dataset name.
+
+  Returns:
+    The Huggingface compatible dataset name.
+
+  Raises:
+    DatasetNotFoundError: If the TFDS dataset name doesn't correspond to any
+    existing Huggingface dataset.
+  """
+  for hf_dataset_name in hf_datasets.list_datasets():
+    if convert_hf_dataset_name(hf_dataset_name) == tfds_dataset_name.lower():
+      return hf_dataset_name
+  raise registered.DatasetNotFoundError(
+      f'"{tfds_dataset_name}" is not listed in Huggingface datasets.'
   )
 
 
