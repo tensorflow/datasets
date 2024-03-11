@@ -107,8 +107,7 @@ class _ImageEncoder:
       encoded_image = self._encode_image(image_or_path_or_fobj)
     elif isinstance(image_or_path_or_fobj, epath.PathLikeCls):
       image_or_path_or_fobj = os.fspath(image_or_path_or_fobj)
-      with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
-        encoded_image = image_f.read()
+      encoded_image = epath.Path(image_or_path_or_fobj).read_bytes()
     elif isinstance(image_or_path_or_fobj, bytes):
       encoded_image = image_or_path_or_fobj
     elif PIL_Image is not None and isinstance(
@@ -145,11 +144,6 @@ class _ImageEncoder:
     """
     check_pil_import_or_raise_error()
     buffer = io.BytesIO()
-    if self.encoding_format and pil_image.format != self.encoding_format:
-      raise ValueError(
-          f'PIL Image format {pil_image.format} does not match encoding format '
-          f'{self.encoding_format}'
-      )
     pil_image.save(buffer, format=self.encoding_format or pil_image.format)
     return buffer.getvalue()
 
