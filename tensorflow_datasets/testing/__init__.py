@@ -55,6 +55,7 @@ if typing.TYPE_CHECKING:
   from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
   from tensorflow_datasets.testing.test_utils import test_main
   from tensorflow_datasets.testing.test_utils import tmp_dir
+  from tensorflow_datasets.testing.test_utils import set_current_datetime
   # LINT.ThenChange(:deps)
 # pylint: enable=g-import-not-at-top,g-importing-member
 
@@ -96,6 +97,7 @@ _API = {
     "TestValue": "tensorflow_datasets.testing.feature_test_case",
     # TODO(afrozm): rm from here and add as methods to TestCase
     "tmp_dir": "tensorflow_datasets.testing.test_utils",
+    "set_current_datetime": "tensorflow_datasets.testing.test_utils",
     # LINT.ThenChange(:pydeps)
 }
 

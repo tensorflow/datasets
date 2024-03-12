@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import contextlib
 import dataclasses
+import datetime
 import functools
 import os
 import pathlib
@@ -691,3 +692,17 @@ class DummyDatasetCollection(
             'c': 'c/e:3.5.7',
         }),
     }
+
+
+@contextlib.contextmanager
+def set_current_datetime(now_datetime: datetime.datetime) -> Iterator[None]:
+  """Mocks datetime.datetime.now()."""
+
+  class MockDatetime(datetime.datetime):
+
+    @classmethod
+    def now(cls, tz=None) -> datetime.datetime:
+      return now_datetime
+
+  with mock.patch.object(datetime, 'datetime', new=MockDatetime):
+    yield
