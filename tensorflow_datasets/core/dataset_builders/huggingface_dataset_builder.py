@@ -42,7 +42,6 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import huggingface_utils
-from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 
@@ -135,7 +134,7 @@ class HuggingfaceDatasetBuilder(
     self._hf_num_proc = hf_num_proc
     self._tfds_num_proc = tfds_num_proc
     self._verification_mode = (
-        "all_checks" if ignore_verifications else "no_checks"
+        "no_checks" if ignore_verifications else "all_checks"
     )
     self._disable_shuffling = disable_shuffling
     super().__init__(
@@ -173,7 +172,6 @@ class HuggingfaceDatasetBuilder(
     for dataset in dataset_dict.values():
       return dataset.info.features
 
-  @py_utils.memoize()
   def _info(self) -> dataset_info_lib.DatasetInfo:
     return dataset_info_lib.DatasetInfo(
         builder=self,
@@ -197,7 +195,7 @@ class HuggingfaceDatasetBuilder(
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
     convert_example = functools.partial(
-        huggingface_utils.convert_hf_value, feature=self._info().features
+        huggingface_utils.convert_hf_value, feature=self.info.features
     )
     if self._tfds_num_proc is None:
       yield from enumerate(map(convert_example, data))
