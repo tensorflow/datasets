@@ -177,6 +177,7 @@ DATASET_EXTRAS = {
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
+    'qm9': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
     # envlogger is not available for Python versions >= 3.11 or non Linux
     # platforms: https://pypi.org/project/envlogger/#files
