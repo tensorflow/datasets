@@ -347,22 +347,34 @@ def list_datasets_in_data_dir(
     references to the datasets found in `data_dir`. The references include the
     data dir.
   """
+  num_datasets = 0
+  num_variants = 0
   for dataset_dir in epath.Path(data_dir).iterdir():
     if not dataset_dir.is_dir():
       continue
     if not naming.is_valid_dataset_name(dataset_dir.name):
       continue
+    num_datasets += 1
     if include_configs:
-      yield from list_dataset_variants(
+      for variant in list_dataset_variants(
           dataset_dir=dataset_dir,
           namespace=namespace,
           include_versions=include_versions,
           include_old_tfds_version=include_old_tfds_version,
-      )
+      ):
+        num_variants += 1
+        yield variant
     else:
+      num_variants += 1
       yield naming.DatasetReference(
           dataset_name=dataset_dir.name, namespace=namespace, data_dir=data_dir
       )
+  logging.info(
+      'Found %d datasets and %d variants in %s',
+      num_datasets,
+      num_variants,
+      data_dir,
+  )
 
 
 @functools.lru_cache(maxsize=None)

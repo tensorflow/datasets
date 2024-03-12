@@ -81,13 +81,27 @@ class DataDirRegister(register_base.BaseRegister):
     exceptions = []
     for namespace, config in self._namespace_configs.items():
       for data_dir in config.paths:
+        logging.info(
+            'Listing datasets for namespace %s and data dir %s',
+            namespace,
+            data_dir,
+        )
         try:
-          yield from file_utils.list_datasets_in_data_dir(
-              data_dir=data_dir,
-              namespace=namespace,
-              include_configs=False,
-              include_versions=False,
+          found_datasets = list(
+              file_utils.list_datasets_in_data_dir(
+                  data_dir=data_dir,
+                  namespace=namespace,
+                  include_configs=False,
+                  include_versions=False,
+              )
           )
+          logging.info(
+              'Found %d dataset variants in namespace %s and data dir %s',
+              len(found_datasets),
+              namespace,
+              data_dir,
+          )
+          yield from found_datasets
         except Exception as e:  # pylint: disable=broad-exception-caught
           exceptions.append(e)
           logging.exception(
