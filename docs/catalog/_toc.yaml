@@ -1672,6 +1672,9 @@ toc:
 - section:
   - path: /datasets/catalog/duke_ultrasound
     title: duke_ultrasound
+  - path: /datasets/catalog/qm9
+    status: nightly
+    title: qm9
   title: Uncategorized
 - section:
   - path: /datasets/catalog/caltech101
