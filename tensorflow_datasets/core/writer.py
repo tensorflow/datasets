@@ -114,7 +114,7 @@ def _get_shard_specs(
     shard_config: the configuration for creating shards.
   """
   num_shards = shard_config.get_number_shards(total_size, num_examples)
-  shard_boundaries = _get_shard_boundaries(num_examples, num_shards)
+  shard_boundaries = shard_utils.get_shard_boundaries(num_examples, num_shards)
   shard_specs = []
   bucket_indexes = [str(i) for i in range(len(bucket_lengths))]
   from_ = 0
@@ -138,25 +138,6 @@ def _get_shard_specs(
     )
     from_ = to
   return shard_specs
-
-
-def _get_shard_boundaries(
-    num_examples: int,
-    number_of_shards: int,
-) -> Sequence[int]:
-  """Returns the offsets of all shards."""
-  if num_examples == 0:
-    raise AssertionError("No examples were yielded.")
-  if num_examples < number_of_shards:
-    raise AssertionError(
-        "num_examples ({}) < number_of_shards ({})".format(
-            num_examples, number_of_shards
-        )
-    )
-  return [
-      int(round(num_examples * (float(i) / number_of_shards)))
-      for i in range(1, number_of_shards + 1)
-  ]
 
 
 def _write_index_file(

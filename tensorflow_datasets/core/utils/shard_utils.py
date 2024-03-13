@@ -22,10 +22,11 @@ This logic is shared between:
 """
 from __future__ import annotations
 
+from collections.abc import Sequence
 import dataclasses
 import math
 import os
-from typing import Any, List, Optional, Sequence
+from typing import Any, List
 
 DEFAULT_MIN_SHARD_SIZE: int = 64 << 20  # 64 MiB
 DEFAULT_MAX_SHARD_SIZE: int = 1024 << 20  # 1 GiB
@@ -46,48 +47,35 @@ class ShardConfig:
       https://github.com/tensorflow/tensorflow/blob/27325fabed898880fa1b33a04d4b125a6ef4bbc8/tensorflow/core/lib/io/record_writer.h#L104
   """
 
-  num_shards: Optional[int] = None
+  num_shards: int | None = None
   min_shard_size: int = DEFAULT_MIN_SHARD_SIZE
   max_shard_size: int = DEFAULT_MAX_SHARD_SIZE
   overhead: int = 16
 
-  def get_number_shards(
-      self,
+  @classmethod
+  def calculate_number_shards(
+      cls,
       total_size: int,
       num_examples: int,
       uses_precise_sharding: bool = True,
   ) -> int:
     """Returns number of shards for num_examples of total_size in bytes.
 
-    Each shard should be at least 128MB.
-    A pod has 16*16=256 TPU devices containing 1024 TPU chips (2048 cores).
-    So if the dataset is large enough, we want the number of shards to be a
-    multiple of 1024, but with shards as big as possible.
-    If the dataset is too small, we want the number of shards to be a power
-    of two so it distributes better on smaller TPU configs (8, 16, 32, ...
-    cores).
-
     Args:
       total_size: the size of the data (serialized, not couting any overhead).
       num_examples: the number of records in the data.
       uses_precise_sharding: whether a mechanism is used to exactly control how
         many examples go in each shard.
-
-    Returns:
-      number of shards to use.
     """
-    if self.num_shards:
-      return self.num_shards
-
-    total_size += num_examples * self.overhead
-    max_shards_number = total_size // self.min_shard_size
+    total_size += num_examples * cls.overhead
+    max_shards_number = total_size // cls.min_shard_size
     if uses_precise_sharding:
-      max_shard_size = self.max_shard_size
+      max_shard_size = cls.max_shard_size
     else:
       # When the pipeline does not control exactly how many rows go into each
       # shard (called 'precise sharding' here), we use a smaller max shard size
       # so that the pipeline doesn't fail if a shard gets some more examples.
-      max_shard_size = 0.9 * self.max_shard_size
+      max_shard_size = 0.9 * cls.max_shard_size
     min_shards_number = total_size // max_shard_size
     if min_shards_number <= 1024 <= max_shards_number and num_examples >= 1024:
       return 1024
@@ -103,6 +91,37 @@ class ShardConfig:
         if min_shards_number <= n <= max_shards_number and num_examples >= n:
           return n
     return 1
+
+  def get_number_shards(
+      self,
+      total_size: int,
+      num_examples: int,
+      uses_precise_sharding: bool = True,
+  ) -> int:
+    if self.num_shards:
+      return self.num_shards
+    return self.calculate_number_shards(
+        total_size, num_examples, uses_precise_sharding
+    )
+
+
+def get_shard_boundaries(
+    num_examples: int,
+    number_of_shards: int,
+) -> Sequence[int]:
+  """Returns the offsets of all shards."""
+  if num_examples == 0:
+    raise AssertionError('No examples were yielded.')
+  if num_examples < number_of_shards:
+    raise AssertionError(
+        'num_examples ({}) < number_of_shards ({})'.format(
+            num_examples, number_of_shards
+        )
+    )
+  return [
+      round(num_examples * shard_index / number_of_shards)
+      for shard_index in range(1, number_of_shards + 1)
+  ]
 
 
 @dataclasses.dataclass(eq=True, frozen=True)

@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.utils.shard_utils."""
 from absl.testing import parameterized
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import shard_utils
 
@@ -51,6 +51,34 @@ class ShardConfigTest(parameterized.TestCase):
             total_size=100, num_examples=1, uses_precise_sharding=True
         ),
     )
+
+
+def test_get_shard_boundaries_no_examples():
+  with pytest.raises(AssertionError, match='No examples were yielded.'):
+    shard_utils.get_shard_boundaries(num_examples=0, number_of_shards=3)
+
+
+def test_get_shard_boundaries_not_enough_examples():
+  with pytest.raises(
+      AssertionError, match=r'num_examples \(2\) < number_of_shards \(3\)'
+  ):
+    shard_utils.get_shard_boundaries(num_examples=2, number_of_shards=3)
+
+
+@pytest.mark.parametrize(
+    'num_examples,number_of_shards,expected',
+    [
+        (3, 3, [1, 2, 3]),
+        (4, 3, [1, 3, 4]),
+        (5, 3, [2, 3, 5]),
+        (6, 3, [2, 4, 6]),
+    ],
+)
+def test_shard_boundaries(num_examples, number_of_shards, expected):
+  assert (
+      shard_utils.get_shard_boundaries(num_examples, number_of_shards)
+      == expected
+  )
 
 
 class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
