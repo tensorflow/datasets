@@ -38,9 +38,27 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.scripts.cli import convert_format_utils
 
 
+_ROOT_DATA_DIR = flags.DEFINE_string(
+    'root_data_dir',
+    required=False,
+    help=(
+        'Root data dir that contains all datasets. All datasets and all their'
+        ' configs and versions that are in this folder will be converted.'
+    ),
+    default=None,
+)
 _DATASET_DIR = flags.DEFINE_string(
     'dataset_dir',
-    required=True,
+    required=False,
+    help=(
+        'Path where the dataset to be converted is located. Converts all'
+        ' configs and versions in this folder.'
+    ),
+    default=None,
+)
+_DATASET_VERSION_DIR = flags.DEFINE_string(
+    'dataset_version_dir',
+    required=False,
     help=(
         'Path where the dataset to be converted is located. Should include'
         ' config and version.'
@@ -81,7 +99,9 @@ _OVERWRITE = flags.DEFINE_bool(
 
 def main(_):
   convert_format_utils.convert_dataset(
+      root_data_dir=_ROOT_DATA_DIR.value,
       dataset_dir=_DATASET_DIR.value,
+      dataset_version_dir=_DATASET_VERSION_DIR.value,
       out_file_format=_OUT_FILE_FORMAT.value,
       out_dir=_OUT_DIR.value,
       use_beam=_USE_BEAM.value,
