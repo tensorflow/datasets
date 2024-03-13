@@ -147,15 +147,16 @@ class DatasetRegistry(register_base.BaseRegister):
     for registers in self.registers_per_namespace.values():
       all_registers.extend(registers)
 
-    def _get_references(register: register_base.BaseRegister):
+    def _get_references(
+        register: register_base.BaseRegister,
+    ) -> Iterable[naming.DatasetReference]:
       try:
-        return list(register.list_dataset_references())
+        yield from register.list_dataset_references()
       except Exception:  # pylint: disable=broad-except
         logging.exception(
             'Exception while getting dataset references from register %s',
             register,
         )
-        return []
 
     with concurrent.futures.ThreadPoolExecutor(
         max_workers=max_workers
