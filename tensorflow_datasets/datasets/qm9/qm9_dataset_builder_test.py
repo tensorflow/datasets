@@ -16,21 +16,21 @@
 """Test QM9 dataset conversion to tensorflow_datasets format."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.datasets.qm9 import qm9
+from tensorflow_datasets.datasets.qm9 import qm9_dataset_builder
 
 
 class Qm9Test(testing.DatasetBuilderTestCase):
   """Tests for QM9 dataset. See superclass for details."""
 
   # We patch properties of the testdata here.
-  qm9._SIZE = 5
-  qm9._CHARACTERIZED_SIZE = 4
-  qm9._TRAIN_SIZE = 2
-  qm9._VALIDATION_SIZE = 1
-  qm9._TEST_SIZE = 1
+  qm9_dataset_builder._SIZE = 5
+  qm9_dataset_builder._CHARACTERIZED_SIZE = 4
+  qm9_dataset_builder._TRAIN_SIZE = 2
+  qm9_dataset_builder._VALIDATION_SIZE = 1
+  qm9_dataset_builder._TEST_SIZE = 1
 
   SKIP_CHECKSUMS = True
-  DATASET_CLASS = qm9.Qm9
+  DATASET_CLASS = qm9_dataset_builder.Builder
 
   DL_EXTRACT_RESULT = {
       'atomref': 'atomref.txt',

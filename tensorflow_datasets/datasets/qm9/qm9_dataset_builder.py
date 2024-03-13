@@ -135,7 +135,7 @@ def _get_valid_ids(uncharacterized):
   return characterized_ids
 
 
-class Qm9(tfds.core.GeneratorBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for QM9 dataset. See superclass for details."""
 
   VERSION = tfds.core.Version('1.0.0')
