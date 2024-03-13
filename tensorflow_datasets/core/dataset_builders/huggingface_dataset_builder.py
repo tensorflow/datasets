@@ -30,7 +30,7 @@ import functools
 import itertools
 import multiprocessing
 import os
-from typing import Any, Dict, Mapping, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 from absl import logging
 from etils import epath
@@ -88,7 +88,7 @@ class HuggingfaceDatasetBuilder(
   converted to `_all`.
   """
 
-  VERSION = version_lib.Version("1.0.0")  # This will be replaced in __init__.
+  VERSION = version_lib.Version('1.0.0')  # This will be replaced in __init__.
 
   def __init__(
       self,
@@ -114,12 +114,11 @@ class HuggingfaceDatasetBuilder(
       )
     except Exception as e:
       raise RuntimeError(
-          "Failed to load Huggingface dataset builder with"
-          f" hf_repo_id={self._hf_repo_id}, hf_config={self._hf_config},"
-          f" config_kwargs={self.config_kwargs}"
+          'Failed to load Huggingface dataset builder with'
+          f' hf_repo_id={self._hf_repo_id}, hf_config={self._hf_config},'
+          f' config_kwargs={self.config_kwargs}'
       ) from e
-    self._hf_info = self._hf_builder.info
-    version = str(self._hf_info.version or self._hf_builder.VERSION or "1.0.0")
+    version = str(self._hf_info.version or self._hf_builder.VERSION or '1.0.0')
     self.VERSION = version_lib.Version(version)  # pylint: disable=invalid-name
     if self._hf_config:
       self._converted_builder_config = dataset_builder.BuilderConfig(
@@ -134,7 +133,7 @@ class HuggingfaceDatasetBuilder(
     self._hf_num_proc = hf_num_proc
     self._tfds_num_proc = tfds_num_proc
     self._verification_mode = (
-        "no_checks" if ignore_verifications else "all_checks"
+        'no_checks' if ignore_verifications else 'all_checks'
     )
     self._disable_shuffling = disable_shuffling
     super().__init__(
@@ -154,23 +153,23 @@ class HuggingfaceDatasetBuilder(
     return self._converted_builder_config
 
   @functools.lru_cache(maxsize=1)
-  def _download_and_prepare_for_hf(self) -> Mapping[str, Any]:
+  def _hf_download_and_prepare(self):
     login_to_hf(self._hf_hub_token)
     self._hf_builder.download_and_prepare(
         num_proc=self._hf_num_proc,
         verification_mode=self._verification_mode,
     )
-    return self._hf_builder.as_dataset(
-        verification_mode=self._verification_mode,
-    )
+
+  @property
+  def _hf_info(self) -> hf_datasets.DatasetInfo:
+    return self._hf_builder.info
 
   def _hf_features(self):
-    if self._hf_info.features is not None:
-      return self._hf_info.features
-    # We need to download and prepare the data to know its features.
-    dataset_dict = self._download_and_prepare_for_hf()
-    for dataset in dataset_dict.values():
-      return dataset.info.features
+    if not self._hf_info.features:
+      # We need to download and prepare the data to know its features.
+      self._hf_download_and_prepare()
+
+    return self._hf_info.features
 
   def _info(self) -> dataset_info_lib.DatasetInfo:
     return dataset_info_lib.DatasetInfo(
@@ -187,7 +186,8 @@ class HuggingfaceDatasetBuilder(
       self, dl_manager: download.DownloadManager
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
-    ds = self._download_and_prepare_for_hf()
+    self._hf_download_and_prepare()
+    ds = self._hf_builder.as_dataset(verification_mode=self._verification_mode)
     splits = {
         split: self._generate_examples(data) for split, data in ds.items()
     }
@@ -215,7 +215,7 @@ def builder(
 
 def login_to_hf(hf_hub_token: Optional[str] = None):
   """Logs in to Hugging Face Hub with the token as arg or env variable."""
-  hf_hub_token = hf_hub_token or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+  hf_hub_token = hf_hub_token or os.environ.get('HUGGING_FACE_HUB_TOKEN')
   if hf_hub_token is not None:
     huggingface_hub = lazy_imports_lib.lazy_imports.huggingface_hub
     huggingface_hub.login(token=hf_hub_token)

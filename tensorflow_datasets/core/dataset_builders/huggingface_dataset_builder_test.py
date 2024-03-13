@@ -48,7 +48,7 @@ class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
     return [hf_datasets.SplitGenerator(name=hf_datasets.Split.TRAIN)]
 
   def _generate_examples(self):
-    for i in range(5):
+    for i in range(2):
       yield i, {'feature': i}
 
   def download_and_prepare(self, *args, **kwargs):
@@ -63,7 +63,6 @@ def mock_load_dataset_builder(tmp_path):
   hf_builder.download_and_prepare = mock.Mock(
       wraps=hf_builder.download_and_prepare
   )
-  hf_builder.as_dataset = mock.Mock(wraps=hf_builder.as_dataset)
   with mock.patch.object(
       hf_datasets, 'load_dataset_builder', return_value=hf_builder
   ) as load_dataset_builder:
@@ -79,13 +78,15 @@ def mock_login_to_hf():
 
 
 @pytest.fixture(name='builder')
-def mock_huggingface_dataset_builder(load_dataset_builder, login_to_hf):
+def mock_huggingface_dataset_builder(
+    tmp_path, load_dataset_builder, login_to_hf
+):
   builder = huggingface_dataset_builder.HuggingfaceDatasetBuilder(
-      file_format='tfrecord',
+      file_format='array_record',
       hf_repo_id='foo/bar',
       hf_config='config',
       ignore_verifications=True,
-      data_dir='/path/to/data',
+      data_dir=tmp_path / 'data',
       hf_hub_token='SECRET_TOKEN',
       hf_num_proc=100,
       other_arg='this is another arg',
@@ -97,12 +98,15 @@ def mock_huggingface_dataset_builder(load_dataset_builder, login_to_hf):
   yield builder
 
 
+def test_download_and_prepare(builder):
+  builder.download_and_prepare()
+  ds = builder.as_data_source()
+  assert list(ds['train']) == [{'feature': 0}, {'feature': 1}]
+
+
 def test_all_parameters_are_passed_down_to_hf(builder):
   builder._hf_builder.download_and_prepare.assert_called_once_with(
       verification_mode='no_checks', num_proc=100
-  )
-  builder._hf_builder.as_dataset.assert_called_once_with(
-      verification_mode='no_checks'
   )
 
 
