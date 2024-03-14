@@ -212,20 +212,22 @@ def test_convert_value(hf_value, feature, expected_value):
 
 
 @pytest.mark.parametrize(
-    'hf_dataset_name,tfds_dataset_name',
+    'hf_name,tfds_name',
     [
+        # Dataset names
         ('x', 'x'),
         ('X', 'x'),
         ('x-y', 'x_y'),
         ('x/y', 'x__y'),
+        ('x/Y-z', 'x__y_z'),
+        # Config and split names
+        ('x.y', 'x_y'),
         ('x_v1.0', 'x_v1_0'),
+        (None, None),
     ],
 )
-def test_from_hf_to_tfds(hf_dataset_name, tfds_dataset_name):
-  assert (
-      huggingface_utils.convert_hf_dataset_name(hf_dataset_name)
-      == tfds_dataset_name
-  )
+def test_from_hf_to_tfds(hf_name, tfds_name):
+  assert huggingface_utils.convert_hf_name(hf_name) == tfds_name
 
 
 @pytest.fixture(name='mock_list_datasets')
@@ -262,15 +264,4 @@ def test_convert_tfds_dataset_name(
   assert (
       huggingface_utils.convert_tfds_dataset_name(tfds_dataset_name)
       == hf_dataset_name
-  )
-
-
-@pytest.mark.parametrize(
-    'hf_config_name,tfds_config_name',
-    [(None, None), ('x', 'x'), ('X', 'x'), ('X,y', 'x_y')],
-)
-def test_convert_config_name(hf_config_name, tfds_config_name):
-  assert (
-      huggingface_utils.convert_hf_config_name(hf_config_name)
-      == tfds_config_name
   )

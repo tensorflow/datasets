@@ -45,7 +45,7 @@ class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    return [hf_datasets.SplitGenerator(name=hf_datasets.Split.TRAIN)]
+    return [hf_datasets.SplitGenerator(name='train.clean')]
 
   def _generate_examples(self):
     for i in range(2):
@@ -101,7 +101,8 @@ def mock_huggingface_dataset_builder(
 def test_download_and_prepare(builder):
   builder.download_and_prepare()
   ds = builder.as_data_source()
-  assert list(ds['train']) == [{'feature': 0}, {'feature': 1}]
+  # Split names are sanitized, eg train.clean -> train_clean
+  assert list(ds['train_clean']) == [{'feature': 0}, {'feature': 1}]
 
 
 def test_all_parameters_are_passed_down_to_hf(builder):

@@ -255,11 +255,11 @@ class DatasetDocumentation:
         config_name: str, info: dataset_info_pb2.DatasetInfo
     ) -> str:
       if self.namespace and self.namespace == 'huggingface':
-        tfds_id = huggingface_utils.convert_hf_dataset_name(self.tfds_id)
+        tfds_id = huggingface_utils.convert_hf_name(self.tfds_id)
       else:
         tfds_id = self.tfds_id
       if config_name != 'default':
-        config_name = huggingface_utils.convert_hf_config_name(config_name)
+        config_name = huggingface_utils.convert_hf_name(config_name)
         tfds_id = f'{tfds_id}/{config_name}'
       if keep_short:
         features = ''

@@ -107,7 +107,7 @@ class HuggingfaceDatasetBuilder(
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
     self.config_kwargs = config_kwargs
-    tfds_config = huggingface_utils.convert_hf_config_name(hf_config)
+    tfds_config = huggingface_utils.convert_hf_name(hf_config)
     try:
       self._hf_builder = hf_datasets.load_dataset_builder(
           self._hf_repo_id, self._hf_config, **self.config_kwargs
@@ -128,7 +128,7 @@ class HuggingfaceDatasetBuilder(
       )
     else:
       self._converted_builder_config = None
-    self.name = huggingface_utils.convert_hf_dataset_name(hf_repo_id)
+    self.name = huggingface_utils.convert_hf_name(hf_repo_id)
     self._hf_hub_token = hf_hub_token
     self._hf_num_proc = hf_num_proc
     self._tfds_num_proc = tfds_num_proc
@@ -189,7 +189,8 @@ class HuggingfaceDatasetBuilder(
     self._hf_download_and_prepare()
     ds = self._hf_builder.as_dataset(verification_mode=self._verification_mode)
     splits = {
-        split: self._generate_examples(data) for split, data in ds.items()
+        huggingface_utils.convert_hf_name(split): self._generate_examples(data)
+        for split, data in ds.items()
     }
     return _remove_empty_splits(splits)
 

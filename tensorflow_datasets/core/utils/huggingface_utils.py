@@ -17,7 +17,8 @@
 
 from collections.abc import Mapping, Sequence
 import datetime
-from typing import Any, Type
+import re
+from typing import Any, Type, TypeVar
 
 from etils import epath
 import immutabledict
@@ -39,6 +40,9 @@ _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
     'string': np.object_,
 })
 _IMAGE_ENCODING_FORMAT = 'png'
+# Regular expression to match strings that are not valid Python/TFDS names:
+_INVALID_TFDS_NAME_CHARACTER = re.compile(r'[^a-zA-Z0-9_]')
+_StrOrNone = TypeVar('_StrOrNone', str, None)
 
 
 def _convert_to_np_dtype(hf_dtype: str) -> Type[np.generic]:
@@ -229,29 +233,27 @@ def convert_hf_value(
   )
 
 
-def convert_hf_dataset_name(hf_dataset_name: str) -> str:
-  """Converts Huggingface dataset name to a TFDS compatible dataset name.
+def convert_hf_name(hf_name: _StrOrNone) -> _StrOrNone:
+  """Converts Huggingface name to a TFDS compatible dataset name.
 
-  Huggingface dataset names can contain characters that are not supported in
+  Huggingface names can contain characters that are not supported in
   TFDS. For example, in Huggingface a dataset name like `a/b` is supported,
   while in TFDS `b` would be parsed as the config.
 
   Examples:
-  - `hf_dataset_name='codeparrot/github-code'` becomes
-  `codeparrot__github_code`.
+  - `hf_name='codeparrot/github-code'` becomes `codeparrot__github_code`.
 
   Args:
-    hf_dataset_name: Huggingface dataset name.
+    hf_name: Huggingface name.
 
   Returns:
-    The TFDS compatible dataset name.
+    The TFDS compatible dataset name (dataset names, config names and split
+    names).
   """
-  return (
-      hf_dataset_name.replace('-', '_')
-      .replace('.', '_')
-      .replace('/', '__')
-      .lower()
-  )
+  if hf_name is None:
+    return hf_name
+  hf_name = hf_name.lower().replace('/', '__')
+  return re.sub(_INVALID_TFDS_NAME_CHARACTER, '_', hf_name)
 
 
 def convert_tfds_dataset_name(tfds_dataset_name: str) -> str:
@@ -271,22 +273,8 @@ def convert_tfds_dataset_name(tfds_dataset_name: str) -> str:
     existing Huggingface dataset.
   """
   for hf_dataset_name in hf_datasets.list_datasets():
-    if convert_hf_dataset_name(hf_dataset_name) == tfds_dataset_name.lower():
+    if convert_hf_name(hf_dataset_name) == tfds_dataset_name.lower():
       return hf_dataset_name
   raise registered.DatasetNotFoundError(
       f'"{tfds_dataset_name}" is not listed in Huggingface datasets.'
   )
-
-
-def convert_hf_config_name(hf_config_name: str | None) -> str | None:
-  """Converts Huggingface config name to a TFDS compatible config name.
-
-  Args:
-    hf_config_name: Optional Huggingface config name.
-
-  Returns:
-    The TFDS compatible config name.
-  """
-  if hf_config_name is None:
-    return hf_config_name
-  return hf_config_name.lower().replace(',', '_')
