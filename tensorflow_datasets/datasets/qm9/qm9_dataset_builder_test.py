@@ -29,7 +29,6 @@ class Qm9Test(testing.DatasetBuilderTestCase):
   qm9_dataset_builder._VALIDATION_SIZE = 1
   qm9_dataset_builder._TEST_SIZE = 1
 
-  SKIP_CHECKSUMS = True
   DATASET_CLASS = qm9_dataset_builder.Builder
 
   DL_EXTRACT_RESULT = {

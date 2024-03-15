@@ -30,22 +30,6 @@ import tensorflow_datasets.public_api as tfds
 
 pd = tfds.core.lazy_imports.pandas
 
-_DESCRIPTION = """\
-QM9 consists of computed geometric, energetic, electronic, and thermodynamic
-properties for 134k stable small organic molecules made up of CHONF.
-"""
-
-_CITATION = """\
-@article{ramakrishnan2014quantum,
-  title={Quantum chemistry structures and properties of 134 kilo molecules},
-  author={Ramakrishnan, Raghunathan and Dral, Pavlo O and Rupp, Matthias and von Lilienfeld, O Anatole},
-  journal={Scientific Data},
-  volume={1},
-  year={2014},
-  publisher={Nature Publishing Group}
-}
-"""
-
 _HOMEPAGE = 'https://doi.org/10.6084/m9.figshare.c.978904.v5'
 
 _ATOMREF_URL = 'https://figshare.com/ndownloader/files/3195395'
@@ -145,15 +129,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
+    return self.dataset_info_from_configs(
         disable_shuffling=True,
         features=tfds.features.FeaturesDict({
             'num_atoms': tfds.features.Tensor(shape=(), dtype=np.int64),
             'charges': tfds.features.Tensor(shape=(29,), dtype=np.int64),
-            'Mulliken_charges': tfds.features.Tensor(shape=(29,),
-                                                     dtype=np.float32),
+            'Mulliken_charges': tfds.features.Tensor(
+                shape=(29,), dtype=np.float32
+            ),
             'positions': tfds.features.Tensor(shape=(29, 3), dtype=np.float32),
             'index': tfds.features.Tensor(shape=(), dtype=np.int64),
             'A': tfds.features.Tensor(shape=(), dtype=np.float32),
@@ -180,13 +163,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'SMILES_relaxed': tfds.features.Tensor(shape=(), dtype=np.str_),
             'InChI': tfds.features.Tensor(shape=(), dtype=np.str_),
             'InChI_relaxed': tfds.features.Tensor(shape=(), dtype=np.str_),
-            'frequencies': tfds.features.Tensor(shape=(None,),
-                                                dtype=np.float32),
+            'frequencies': tfds.features.Tensor(
+                shape=(None,), dtype=np.float32
+            ),
         }),
         # These are returned if `as_supervised=True` in `builder.as_dataset`.
         supervised_keys=None,
         homepage=_HOMEPAGE,
-        citation=_CITATION,
     )
 
   def _split_generators(
