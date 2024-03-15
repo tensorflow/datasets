@@ -1560,12 +1560,25 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     """
     return writer_lib.ExampleWriter(file_format=self.info.file_format)
 
-  def _download_and_prepare(  # pytype: disable=signature-mismatch  # overriding-parameter-type-checks
+  def _get_filename_template(
+      self, split_name: str
+  ) -> naming.ShardedFileTemplate:
+    """Returns a filename template for the given split."""
+    return naming.ShardedFileTemplate(
+        split=split_name,
+        dataset_name=self.name,
+        data_dir=self.data_path,
+        filetype_suffix=file_adapters.ADAPTER_FOR_FORMAT[
+            self.info.file_format
+        ].FILE_SUFFIX,
+    )
+
+  def _generate_splits(
       self,
       dl_manager: download.DownloadManager,
       download_config: download.DownloadConfig,
-  ) -> None:
-    """Generate all splits and returns the computed split infos."""
+  ) -> Sequence[splits_lib.SplitInfo]:
+    """Generates all splits and returns the computed split infos."""
     split_builder = split_builder_lib.SplitBuilder(
         split_dict=self.info.splits,
         features=self.info.features,
@@ -1610,15 +1623,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       # Ensure `all` isn't used as key.
       _check_split_names(split_generators.keys())
 
-      # Writer fail if the number of example yield is `0`, so we return here.
-      if download_config.max_examples_per_split == 0:
-        return
-
       # Start generating data for all splits
-      path_suffix = file_adapters.ADAPTER_FOR_FORMAT[
-          self.info.file_format
-      ].FILE_SUFFIX
-
       split_info_futures = []
       for split_name, generator in utils.tqdm(
           split_generators.items(),
@@ -1626,12 +1631,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
           unit=" splits",
           leave=False,
       ):
-        filename_template = naming.ShardedFileTemplate(
-            split=split_name,
-            dataset_name=self.name,
-            data_dir=self.data_path,
-            filetype_suffix=path_suffix,
-        )
+        filename_template = self._get_filename_template(split_name=split_name)
         future = split_builder.submit_split_generation(
             split_name=split_name,
             generator=generator,
@@ -1645,7 +1645,19 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       self._process_pipeline_result(pipeline_result=maybe_pipeline_proxy.result)
 
     # Finalize the splits (after apache beam completed, if it was used)
-    split_infos = [future.result() for future in split_info_futures]
+    return [future.result() for future in split_info_futures]
+
+  def _download_and_prepare(  # pytype: disable=signature-mismatch  # overriding-parameter-type-checks
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: download.DownloadConfig,
+  ) -> None:
+    """Generates all splits and sets the computed split infos."""
+    # Writer fails if the number of example yield is `0`, so we return here.
+    if download_config.max_examples_per_split == 0:
+      return
+
+    split_infos = self._generate_splits(dl_manager, download_config)
 
     # Update the info object with the splits.
     split_dict = splits_lib.SplitDict(split_infos)

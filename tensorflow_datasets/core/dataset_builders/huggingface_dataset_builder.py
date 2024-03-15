@@ -26,26 +26,29 @@ Huggingface.
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
+import dataclasses
 import functools
 import itertools
 import multiprocessing
 import os
 from typing import Any, Dict, Optional, Union
 
-from absl import logging
 from etils import epath
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import download
+from tensorflow_datasets.core import example_serializer
+from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import huggingface_utils
+from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_datasets.core.utils import tqdm_utils
 from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
-
-_EMPTY_SPLIT_WARNING_MSG = "%s split doesn't have any examples"
 
 
 def _extract_supervised_keys(hf_info):
@@ -57,24 +60,79 @@ def _extract_supervised_keys(hf_info):
   return None
 
 
-def _remove_empty_splits(
-    splits: Dict[str, split_builder_lib.SplitGenerator]
-) -> Dict[str, split_builder_lib.SplitGenerator]:
-  """Removes empty splits."""
-  non_empty_splits = {}
+@dataclasses.dataclass(frozen=True)
+class _ShardSpec:
+  """Spec to write a shard.
 
-  for split, examples_iterable in splits.items():
-    examples_iterator = iter(examples_iterable)
-    # ensure the iterator is not empty
-    try:
-      first_example = next(examples_iterator)
-      non_empty_splits[split] = itertools.chain(
-          [first_example], examples_iterator
-      )
-    except StopIteration:
-      logging.warning(_EMPTY_SPLIT_WARNING_MSG, split)
+  Attributes:
+    path: Shard path.
+    hf_split: HuggingFace split name.
+    split: TFDS split name.
+    start_index: Index of the shard start.
+    end_index: Index of the shard end.
+    num_examples: Number of examples in the shard.
+    shard_split: HuggingFace split for the shard.
+  """
 
-  return non_empty_splits
+  path: epath.Path
+  hf_split: str
+  split: str
+  start_index: int
+  end_index: int
+
+  @property
+  def num_examples(self) -> int:
+    return self.end_index - self.start_index
+
+  @property
+  def shard_split(self) -> str:
+    return f'{self.hf_split}[{self.start_index}:{self.end_index}]'
+
+
+def _write_shard(
+    shard_spec: _ShardSpec,
+    hf_builder,
+    example_writer,
+    features: feature_lib.FeaturesDict,
+) -> int:
+  """Writes shard to the file.
+
+  Args:
+    shard_spec: Shard spec.
+    hf_builder: HuggingFace dataset builder.
+    example_writer: Example writer.
+    features: TFDS features dict.
+
+  Returns:
+    Shard size in bytes.
+  """
+  serialized_info = features.get_serialized_info()
+  serializer = example_serializer.ExampleSerializer(serialized_info)
+  num_bytes = 0
+
+  def get_serialized_examples_iter():
+    nonlocal num_bytes
+    for hf_value in hf_builder.as_dataset(
+        split=shard_spec.shard_split, run_post_process=False
+    ):
+      example = huggingface_utils.convert_hf_value(hf_value, features)
+      serialized_example = serializer.serialize_example(example)
+      num_bytes += len(serialized_example)
+      yield serialized_example
+
+  example_writer.write(
+      os.fspath(shard_spec.path),
+      tqdm_utils.tqdm(
+          enumerate(get_serialized_examples_iter()),
+          desc=f'Writing {shard_spec.path} examples...',
+          unit=' examples',
+          total=shard_spec.num_examples,
+          leave=False,
+          mininterval=1.0,
+      ),
+  )
+
+  return num_bytes
 
 
 class HuggingfaceDatasetBuilder(
@@ -164,7 +222,7 @@ class HuggingfaceDatasetBuilder(
   def _hf_info(self) -> hf_datasets.DatasetInfo:
     return self._hf_builder.info
 
-  def _hf_features(self):
+  def _hf_features(self) -> hf_datasets.Features:
     if not self._hf_info.features:
       # We need to download and prepare the data to know its features.
       self._hf_download_and_prepare()
@@ -185,24 +243,121 @@ class HuggingfaceDatasetBuilder(
   def _split_generators(
       self, dl_manager: download.DownloadManager
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
-    del dl_manager
-    self._hf_download_and_prepare()
-    ds = self._hf_builder.as_dataset(verification_mode=self._verification_mode)
-    splits = {
-        huggingface_utils.convert_hf_name(split): self._generate_examples(data)
-        for split, data in ds.items()
-    }
-    return _remove_empty_splits(splits)
+    raise NotImplementedError('This method should not be called.')
 
   def _generate_examples(self, data) -> split_builder_lib.SplitGenerator:
-    convert_example = functools.partial(
-        huggingface_utils.convert_hf_value, feature=self.info.features
+    raise NotImplementedError('This method should not be called.')
+
+  def _generate_splits(
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: download.DownloadConfig,
+  ) -> Sequence[splits_lib.SplitInfo]:
+    """Prepares the dataset by writing to shards directly."""
+    del dl_manager, download_config  # Unused.
+    self._hf_download_and_prepare()
+
+    shard_specs_by_split: dict[str, Sequence[_ShardSpec]] = {}
+    for hf_split, hf_split_info in self._hf_info.splits.items():
+      split = huggingface_utils.convert_hf_name(hf_split)
+      shard_specs_by_split[split] = self._compute_shard_specs(
+          hf_split_info, split
+      )
+
+    shard_sizes_by_split = self._write_shards(shard_specs_by_split)
+
+    return [
+        splits_lib.SplitInfo(
+            name=split,
+            shard_lengths=[
+                shard_spec.num_examples for shard_spec in shard_specs
+            ],
+            num_bytes=sum(shard_sizes_by_split[split]),
+            filename_template=self._get_filename_template(split),
+        )
+        for split, shard_specs in shard_specs_by_split.items()
+    ]
+
+  def _compute_shard_specs(
+      self, hf_split_info: hf_datasets.SplitInfo, split: str
+  ) -> Sequence[_ShardSpec]:
+    """Returns specs for evenly spread shards.
+
+    Args:
+      hf_split_info: HuggingFace split info.
+      split: TFDS split name.
+    """
+    # HF split size is good enough for estimating the number of shards.
+    num_shards = shard_utils.ShardConfig.calculate_number_shards(
+        total_size=hf_split_info.num_bytes,
+        num_examples=hf_split_info.num_examples,
+        uses_precise_sharding=False,
     )
+    filename_template = self._get_filename_template(split)
+    shard_boundaries = shard_utils.get_shard_boundaries(
+        num_examples=hf_split_info.num_examples, number_of_shards=num_shards
+    )
+
+    prev_shard_boundary = 0
+    shard_specs: list[_ShardSpec] = []
+
+    for shard_index, shard_boundary in enumerate(shard_boundaries):
+      shard_specs.append(
+          _ShardSpec(
+              path=filename_template.sharded_filepath(
+                  shard_index=shard_index, num_shards=len(shard_boundaries)
+              ),
+              hf_split=hf_split_info.name,
+              split=split,
+              start_index=prev_shard_boundary,
+              end_index=shard_boundary,
+          )
+      )
+      prev_shard_boundary = shard_boundary
+
+    return shard_specs
+
+  def _write_shards(
+      self,
+      shard_specs_by_split: Mapping[str, Sequence[_ShardSpec]],
+  ) -> Mapping[str, Sequence[int]]:
+    """Writes shards to files.
+
+    Args:
+      shard_specs_by_split: Shard specs by split name.
+
+    Returns:
+      Shard sizes in bytes.
+    """
+    shard_specs = list(itertools.chain(*shard_specs_by_split.values()))
+    shard_specs = tqdm_utils.tqdm(
+        shard_specs,
+        desc='Writing shards...',
+        unit=' shards',
+        total=len(shard_specs),
+        leave=False,
+    )
+    write_shard = functools.partial(
+        _write_shard,
+        hf_builder=self._hf_builder,
+        example_writer=self._example_writer(),
+        features=self.info.features,
+    )
+
     if self._tfds_num_proc is None:
-      yield from enumerate(map(convert_example, data))
+      shard_sizes = list(map(write_shard, shard_specs))
     else:
       with multiprocessing.Pool(processes=self._tfds_num_proc) as pool:
-        yield from enumerate(pool.imap(convert_example, data))
+        shard_sizes = pool.map(write_shard, shard_specs)
+
+    shard_idx = 0
+    shard_sizes_by_split: dict[str, Sequence[int]] = {}
+    for split, shard_specs in shard_specs_by_split.items():
+      shard_sizes_by_split[split] = shard_sizes[
+          shard_idx : shard_idx + len(shard_specs)
+      ]
+      shard_idx += len(shard_specs)
+    return shard_sizes_by_split
 
 
 def builder(
