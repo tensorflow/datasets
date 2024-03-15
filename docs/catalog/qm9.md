@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="qm9" />
-  <meta itemprop="description" content="QM9 consists of computed geometric, energetic, electronic, and thermodynamic&#10;properties for 134k stable small organic molecules made up of CHONF.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;qm9&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="QM9 consists of computed geometric, energetic, electronic, and thermodynamic&#10;properties for 134k stable small organic molecules made up of CHONF. As usual,&#10;we remove the uncharacterized molecules and provide the remaining 130,831 in the&#10;original order (not shuffled). We provide a single &#x27;train&#x27; split, users are&#10;expected to make their own validation/test splits.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;qm9&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/qm9" />
   <meta itemprop="sameAs" content="https://doi.org/10.6084/m9.figshare.c.978904.v5" />
   <meta itemprop="citation" content="@article{ramakrishnan2014quantum,&#10;  title={Quantum chemistry structures and properties of 134 kilo molecules},&#10;  author={Ramakrishnan, Raghunathan and Dral, Pavlo O and Rupp, Matthias and von Lilienfeld, O Anatole},&#10;  journal={Scientific Data},&#10;  volume={1},&#10;  year={2014},&#10;  publisher={Nature Publishing Group}&#10;}" />
@@ -19,7 +19,10 @@ Note: This dataset was added recently and is only available in our
 *   **Description**:
 
 QM9 consists of computed geometric, energetic, electronic, and thermodynamic
-properties for 134k stable small organic molecules made up of CHONF.
+properties for 134k stable small organic molecules made up of CHONF. As usual,
+we remove the uncharacterized molecules and provide the remaining 130,831 in the
+original order (not shuffled). We provide a single 'train' split, users are
+expected to make their own validation/test splits.
 
 *   **Homepage**:
     [https://doi.org/10.6084/m9.figshare.c.978904.v5](https://doi.org/10.6084/m9.figshare.c.978904.v5)
