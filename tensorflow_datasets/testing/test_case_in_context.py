@@ -18,10 +18,11 @@
 from collections.abc import Sequence
 import contextlib
 from typing import Any, ContextManager
-import unittest
+
+from absl.testing import absltest
 
 
-class TestCaseInContext(unittest.TestCase):
+class TestCaseInContext(absltest.TestCase):
   """Base TestCase for running tests inside the given contexts.
 
   It ensures that all contexts are entered before any test starts and are exited
@@ -47,3 +48,10 @@ class TestCaseInContext(unittest.TestCase):
     # Exit all contexts in the reverse order
     cls._stack.close()
     super().tearDownClass()
+
+  def assertRaisesWithPredicateMatch(self, err_type, predicate):  # pylint: disable=invalid-name
+    if isinstance(predicate, str):
+      predicate_fn = lambda err: predicate in str(err)
+    else:
+      predicate_fn = predicate
+    return super().assertRaisesWithPredicateMatch(err_type, predicate_fn)

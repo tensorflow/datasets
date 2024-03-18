@@ -59,13 +59,6 @@ class TestCase(test_case_in_context.TestCaseInContext, tf.test.TestCase):
     # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
 
-  def assertRaisesWithPredicateMatch(self, err_type, predicate):
-    if isinstance(predicate, str):
-      predicate_fct = lambda err: predicate in str(err)
-    else:
-      predicate_fct = predicate
-    return super().assertRaisesWithPredicateMatch(err_type, predicate_fct)
-
   @contextlib.contextmanager
   def assertLogs(self, text, level="info"):
     with mock.patch.object(logging, level) as mock_log:
