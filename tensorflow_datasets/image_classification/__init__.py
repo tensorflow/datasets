@@ -78,6 +78,7 @@ from tensorflow_datasets.image_classification.oxford_flowers102 import OxfordFlo
 from tensorflow_datasets.image_classification.oxford_iiit_pet import OxfordIIITPet
 from tensorflow_datasets.image_classification.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image_classification.pet_finder import PetFinder
+from tensorflow_datasets.image_classification.pklot import Pklot
 from tensorflow_datasets.image_classification.places365_small import Places365Small
 from tensorflow_datasets.image_classification.placesfull import Placesfull
 from tensorflow_datasets.image_classification.plant_leaves import PlantLeaves
