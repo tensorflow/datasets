@@ -96,3 +96,4 @@ from tensorflow_datasets.image_classification.sun import Sun397
 from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
+from tensorflow_datasets.image_classification.wake_vision import WakeVision
