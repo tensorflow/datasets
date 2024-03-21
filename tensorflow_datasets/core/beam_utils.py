@@ -36,6 +36,7 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
     builder: dataset_builder.DatasetBuilder,
     split: str,
     workers_per_shard: int = 1,
+    take_first_element_only: bool = False,
     **as_dataset_kwargs: Any,
 ):
   """Creates a beam pipeline yielding TFDS examples.
@@ -70,6 +71,8 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
       The shard will be split in this many parts. Note that workers cannot skip
       to a specific row in a tfrecord file, so they need to read the file up
       until that point without using that data.
+    take_first_element_only: If true, only the first element of the first shard
+      will be returned, this is useful for testing.
     **as_dataset_kwargs: Arguments forwarded to `builder.as_dataset`.
 
   Returns:
@@ -93,6 +96,8 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
     # if `batch_size=None. An alternativ would be to convert file_instruction
     # to absolute instructions (and check that
     # `splits[abs_split].file_instructions == [file_instruction]` ).
+    if take_first_element_only:
+      return ds.take(1)
 
     if file_instruction.skip > 0 or not file_instruction.takes_all:
       batch_size = as_dataset_kwargs.get('batch_size')
@@ -113,6 +118,10 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
     return ds
 
   file_instructions = builder.info.splits[split].file_instructions
+
+  if take_first_element_only:
+    file_instructions = file_instructions[:1]
+
   inc_counter(
       name='FileInstructions',
       value=len(file_instructions),
