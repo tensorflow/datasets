@@ -30,6 +30,7 @@ from typing import Any, ClassVar, Dict, Iterable, Iterator, List, Optional, Tupl
 
 from absl import logging
 from etils import epath
+import importlib_resources
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_metadata
@@ -310,8 +311,14 @@ class DatasetBuilder(registered.RegisteredDataset):
         # For dynamically added modules, `importlib.resources` returns
         # `pathlib.Path('.')` rather than the real path, so filter those by
         # checking for `parts`.
-        # Check for `zipfile.Path` (`ResourcePath`) as it does not have `.parts`
-        if isinstance(path, epath.resource_utils.ResourcePath) or path.parts:
+        # Check for `zipfile.Path` (`ResourcePath`) or
+        # `importlib_resources.abc.Traversable` (e.g. `MultiplexedPath`) as they
+        # do not have `.parts`.
+        if (
+            isinstance(path, epath.resource_utils.ResourcePath)
+            or isinstance(path, importlib_resources.abc.Traversable)
+            or path.parts
+        ):
           modules[-1] += ".py"
           return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
