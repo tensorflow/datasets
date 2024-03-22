@@ -99,8 +99,7 @@ class DatasetImporterBuilder(
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    ds_location = self.get_dataset_location()
-    ds_builder = tfds.builder_from_directory(ds_location)
+    ds_builder = self.get_ds_builder()
 
     splits = {}
     for split, split_info in ds_builder.info.splits.items():
