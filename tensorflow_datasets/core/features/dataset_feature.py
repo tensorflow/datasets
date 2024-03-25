@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Dataset feature for nested datasets."""
+
 from __future__ import annotations
 
 import dataclasses
@@ -26,9 +27,9 @@ from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import tree
 
 
 @dataclasses.dataclass(frozen=True)
@@ -120,7 +121,7 @@ class Dataset(sequence_feature.Sequence):
     """Shape of one element of the dataset."""
     # Add the dataset level
     tensor_info = self._feature.get_tensor_info()
-    return tree_utils.map_structure(_add_dataset_lvl, tensor_info)
+    return tree.map_structure(_add_dataset_lvl, tensor_info)
 
   def get_tensor_spec(self) -> tf.data.DatasetSpec:
     return tf.data.DatasetSpec(element_spec=self._feature.get_tensor_spec())
@@ -129,7 +130,7 @@ class Dataset(sequence_feature.Sequence):
   def get_serialized_info(self):
     # Add the dataset level and the number of elements in the dataset
     tensor_info = super().get_serialized_info()
-    return tree_utils.map_structure(_add_dataset_lvl, tensor_info)
+    return tree.map_structure(_add_dataset_lvl, tensor_info)
 
   def encode_example(
       self,
@@ -146,7 +147,7 @@ class Dataset(sequence_feature.Sequence):
 
     # Empty datasets return empty arrays
     if not ds_elements:
-      return tree_utils.map_structure(
+      return tree.map_structure(
           sequence_feature.build_empty_np, self.get_serialized_info()
       )
 

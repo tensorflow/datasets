@@ -19,8 +19,8 @@ import dataclasses
 import functools
 
 from etils import epath
+from etils import etree
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import resource_utils
 
 
@@ -68,13 +68,11 @@ def valid_tags() -> list[str]:
 
 def valid_tags_with_comments() -> str:
   """Returns valid tags (one per line) with comments."""
-  return "\n".join(
-      [
-          line
-          for line in _get_valid_tags_text().split("\n")
-          if not line.startswith("#")
-      ]
-  )
+  return "\n".join([
+      line
+      for line in _get_valid_tags_text().split("\n")
+      if not line.startswith("#")
+  ])
 
 
 @functools.lru_cache(maxsize=256)
@@ -103,6 +101,4 @@ def _read_files(path: epath.Path) -> dict[str, str]:
   for inode in path.iterdir():
     if inode.name in _METADATA_FILES:
       name2path[inode.name] = path.joinpath(inode.name)
-  return utils.tree.parallel_map(
-      lambda f: f.read_text(encoding="utf-8"), name2path
-  )
+  return etree.parallel_map(lambda f: f.read_text(encoding="utf-8"), name2path)

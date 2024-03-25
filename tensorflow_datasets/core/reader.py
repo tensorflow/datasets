@@ -32,8 +32,8 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import shard_utils
-from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+import tree
 
 Tree = utils.Tree
 TreeDict = utils.TreeDict
@@ -427,7 +427,7 @@ class Reader(object):
           decode_fn=decode_fn,
       )
 
-    return tree_utils.map_structure(_read_instruction_to_ds, instructions)
+    return tree.map_structure(_read_instruction_to_ds, instructions)
 
   def read_files(
       self,

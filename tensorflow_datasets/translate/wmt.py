@@ -26,8 +26,8 @@ from xml.etree import ElementTree
 
 from absl import logging
 from etils import epath
-from tensorflow_datasets.core.utils import tree_utils
 import tensorflow_datasets.public_api as tfds
+import tree
 
 _DESCRIPTION = """\
 Translate dataset based on the data from statmt.org.
@@ -861,8 +861,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     # Extract manually downloaded files.
     manual_files = dl_manager.extract(manual_paths)
 
-    manual_files = tree_utils.map_structure(os.fspath, manual_files)
-    downloaded_files = tree_utils.map_structure(os.fspath, downloaded_files)
+    manual_files = tree.map_structure(os.fspath, manual_files)
+    downloaded_files = tree.map_structure(os.fspath, downloaded_files)
 
     extraction_map = dict(downloaded_files, **manual_files)
 

@@ -31,7 +31,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
         (tf.uint8, np.uint8),
     ],
 )
-def test_tree_parallel_map(input_args, expected_output):
+def test_cast_to_numpy(input_args, expected_output):
   assert dtype_utils.cast_to_numpy(input_args) == expected_output
 
 

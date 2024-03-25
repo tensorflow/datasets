@@ -25,16 +25,14 @@ from unittest import mock
 from absl.testing import parameterized
 from etils import epath
 import promise
-
 import tensorflow as tf
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
-from tensorflow_datasets.core.utils import tree_utils
+import tree
 
 ZIP = resource_lib.ExtractMethod.ZIP
 TAR = resource_lib.ExtractMethod.TAR
@@ -46,7 +44,7 @@ def _sha256(str_):
 
 
 def _as_path(nested_paths):
-  return tree_utils.map_structure(epath.Path, nested_paths)
+  return tree.map_structure(epath.Path, nested_paths)
 
 
 def _info_path(path):
