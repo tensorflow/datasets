@@ -118,8 +118,9 @@ def _normalize_feature_dict(
     inner_features = {
         k: v for k, v in expected_feature.items() if v is not False  # pylint: disable=g-bool-id-comparison
     }
+    feature = typing.cast(features_lib.FeaturesDict, feature)
     inner_features = {  # Extract the feature subset  # pylint: disable=g-complex-comprehension
-        k: _extract_feature_item(  # pytype: disable=wrong-arg-types  # always-use-return-annotations
+        k: _extract_feature_item(
             feature=feature,
             expected_key=k,
             expected_value=v,
@@ -153,18 +154,17 @@ def _extract_features(
   # Recurse into FeaturesDict, Sequence
   # Use `type` rather than `isinstance` to not recurse into inherited classes.
   if type(feature) == features_lib.FeaturesDict:  # pylint: disable=unidiomatic-typecheck
+    feature = typing.cast(features_lib.FeaturesDict, feature)
     expected_feature = typing.cast(features_lib.FeaturesDict, expected_feature)
-    return features_lib.FeaturesDict(
-        {  # Extract the feature subset  # pylint: disable=g-complex-comprehension
-            k: _extract_feature_item(  # pytype: disable=wrong-arg-types  # always-use-return-annotations
-                feature=feature,
-                expected_key=k,
-                expected_value=v,
-                fn=_extract_features,
-            )
-            for k, v in expected_feature.items()
-        }
-    )
+    return features_lib.FeaturesDict({  # Extract the feature subset  # pylint: disable=g-complex-comprehension
+        k: _extract_feature_item(
+            feature=feature,
+            expected_key=k,
+            expected_value=v,
+            fn=_extract_features,
+        )
+        for k, v in expected_feature.items()
+    })
   elif type(feature) == features_lib.Sequence:  # pylint: disable=unidiomatic-typecheck
     feature = typing.cast(features_lib.Sequence, feature)
     expected_feature = typing.cast(features_lib.Sequence, expected_feature)
