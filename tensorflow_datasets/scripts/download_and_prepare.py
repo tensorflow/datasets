@@ -21,7 +21,6 @@ from typing import List
 from absl import app
 from absl import flags
 from absl import logging
-
 from tensorflow_datasets.scripts.cli import main as main_cli
 
 module_import = flags.DEFINE_string('module_import', None, '`--imports` flag.')
@@ -59,6 +58,7 @@ def main(args: argparse.Namespace) -> None:
     )
   if module_import.value:
     args.imports = module_import.value
+
   if dataset.value:
     args.datasets = [dataset.value]
   if builder_config_id.value is not None:
