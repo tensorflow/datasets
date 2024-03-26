@@ -266,6 +266,7 @@ def iter_archive(
   Returns:
     An iterator of `(path_in_archive, f_obj)`
   """
+
   if method == resource_lib.ExtractMethod.NO_EXTRACT:
     raise ValueError(
         f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.'

@@ -20,6 +20,7 @@ import concurrent.futures
 import dataclasses
 import functools
 import hashlib
+import multiprocessing
 import typing
 from typing import Any, Dict, Iterator, Optional, Tuple, Union
 import uuid
@@ -308,7 +309,8 @@ class DownloadManager(object):
   @property
   def _extractor(self):
     if not self.__extractor:
-      self.__extractor = extractor.get_extractor()
+      self.__extractor = extractor.get_extractor(
+          max_workers=multiprocessing.cpu_count())
     return self.__extractor
 
   @property
