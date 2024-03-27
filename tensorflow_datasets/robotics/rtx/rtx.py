@@ -1216,3 +1216,156 @@ class Fractal20220817Data(dataset_importer_builder.DatasetImporterBuilder):
 
   def get_relative_dataset_location(self):
     return 'fractal20220817_data/0.1.0'
+
+
+class ConqHoseManipulation(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `conq_hose_manipulation` dataset."""
+
+  def get_description(self):
+    return r"""Mobile manipulation dataset"""
+
+  def get_citation(self):
+    return r"""@misc{ConqHoseManipData,
+author={Peter Mitrano and Dmitry Berenson},
+title={Conq Hose Manipulation Dataset, v1.15.0},
+year={2024},
+howpublished={https://sites.google.com/view/conq-hose-manipulation-dataset}
+}"""
+
+  def get_homepage(self):
+    return (
+        'https://sites.google.com/corp/view/conq-hose-manipulation-dataset/home'
+    )
+
+  def get_relative_dataset_location(self):
+    return 'conq_hose_manipulation/0.0.1'
+
+
+class Dobbe(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `dobbe` dataset."""
+
+  def get_description(self):
+    return r""" """
+
+  def get_citation(self):
+    return r"""@misc{shafiullah2023dobbe, title={On Bringing Robots Home}, author={Nur Muhammad Mahi Shafiullah and Anant Rai and Haritheja Etukuru and Yiqian Liu and Ishan Misra and Soumith Chintala and Lerrel Pinto}, year={2023}, eprint={2311.16098}, archivePrefix={arXiv}, primaryClass={cs.RO} }"""
+
+  def get_homepage(self):
+    return 'https://github.com/notmahi/dobb-e'
+
+  def get_relative_dataset_location(self):
+    return 'dobbe/0.0.1'
+
+
+class Fmb(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `fmb` dataset."""
+
+  def get_description(self):
+    return r"""Our dataset consists of objects in diverse appearance and geometry. It requires multi-stage and multi-modal fine motor skills to successfully assemble the pegs onto a unfixed board in a randomized scene. We collected a total of 22,550 trajectories across two different tasks on a Franka Panda arm. We record the trajectories from 2 global views and 2 wrist views. Each view contains both RGB and depth map."""
+
+  def get_citation(self):
+    return 'https://doi.org/10.48550/arXiv.2401.08553'
+
+  def get_homepage(self):
+    return 'https://functional-manipulation-benchmark.github.io/'
+
+  def get_relative_dataset_location(self):
+    return 'fmb/0.0.1'
+
+
+class IoAiTech(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `io_ai_tech` dataset."""
+
+  def get_description(self):
+    return ''
+
+  def get_citation(self):
+    return ''
+
+  def get_homepage(self):
+    return 'https://github.com/ioai-tech/rlds_dataset_builder'
+
+  def get_relative_dataset_location(self):
+    return 'io_ai_tech/0.0.1'
+
+
+class MimicPlay(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `mimic_play` dataset."""
+
+  def get_description(self):
+    return r"""Real dataset of 14 long horizon manipulation tasks. A mix of human play data and single robot arm data performing the same tasks. """
+
+  def get_citation(self):
+    return r"""@article{wang2023mimicplay,title={Mimicplay: Long-horizon imitation learning by watching human play},author={Wang, Chen and Fan, Linxi and Sun, Jiankai and Zhang, Ruohan and Fei-Fei, Li and Xu, Danfei and Zhu, Yuke and Anandkumar, Anima},journal={arXiv preprint arXiv:2302.12422},year={2023}}"""
+
+  def get_homepage(self):
+    return 'https://mimic-play.github.io/'
+
+  def get_relative_dataset_location(self):
+    return 'mimic_play/0.0.1'
+
+
+class AlohaMobile(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `aloha_mobile` dataset."""
+
+  def get_description(self):
+    return r"""Real dataset. Imitating mobile manipulation tasks that are bimanual and require whole-body control.  50 demonstrations for each task."""
+
+  def get_citation(self):
+    return r"""@inproceedings{fu2024mobile,author = {Fu, Zipeng and Zhao, Tony Z. and Finn, Chelsea},title = {Mobile ALOHA: Learning Bimanual Mobile Manipulation with Low-Cost Whole-Body Teleoperation},booktitle = {arXiv},year = {2024},}"""
+
+  def get_homepage(self):
+    return 'https://mobile-aloha.github.io'
+
+  def get_relative_dataset_location(self):
+    return 'aloha_mobile/0.0.1'
+
+
+class RoboSet(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `robo_set` dataset."""
+
+  def get_description(self):
+    return r"""Real dataset of a single robot arm demonstrating 12 non-trivial manipulation skills across 38 tasks, 7500 trajectories."""
+
+  def get_citation(self):
+    return r"""@misc{bharadhwaj2023roboagent, title={RoboAgent: Generalization and Efficiency in Robot Manipulation via Semantic Augmentations and Action Chunking}, author={Homanga Bharadhwaj and Jay Vakil and Mohit Sharma and Abhinav Gupta and Shubham Tulsiani and Vikash Kumar},  year={2023}, eprint={2309.01918}, archivePrefix={arXiv}, primaryClass={cs.RO} }"""
+
+  def get_homepage(self):
+    return 'https://robopen.github.io/'
+
+  def get_relative_dataset_location(self):
+    return 'robo_set/0.0.1'
+
+
+class Tidybot(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `tidybot` dataset."""
+
+  def get_description(self):
+    return ''
+
+  def get_citation(self):
+    return r"""@article{wu2023tidybot,title = {TidyBot: Personalized Robot Assistance with Large Language Models},author = {Wu, Jimmy and Antonova, Rika and Kan, Adam and Lepert, Marion and Zeng, Andy and Song, Shuran and Bohg, Jeannette and Rusinkiewicz, Szymon and Funkhouser, Thomas},journal = {Autonomous Robots},year = {2023}}"""
+
+  def get_homepage(self):
+    return 'https://github.com/jimmyyhwu/tidybot'
+
+  def get_relative_dataset_location(self):
+    return 'tidybot/0.0.1'
+
+
+class VimaConvertedExternallyToRlds(
+    dataset_importer_builder.DatasetImporterBuilder
+):
+  """DatasetBuilder for `vima_converted_externally_to_rlds` dataset."""
+
+  def get_description(self):
+    return r"""SIM dataset of a single robot arm performing procedurally-generated tabletop tasks with multimodal prompts, 600K+ trajectories"""
+
+  def get_citation(self):
+    return r"""@inproceedings{jiang2023vima,  title     = {VIMA: General Robot Manipulation with Multimodal Prompts},  author    = {Yunfan Jiang and Agrim Gupta and Zichen Zhang and Guanzhi Wang and Yongqiang Dou and Yanjun Chen and Li Fei-Fei and Anima Anandkumar and Yuke Zhu and Linxi Fan}, booktitle = {Fortieth International Conference on Machine Learning},  year      = {2023}. }"""
+
+  def get_homepage(self):
+    return r"""https://vimalabs.github.io/"""
+
+  def get_relative_dataset_location(self):
+    return 'vima_converted_externally_to_rlds/0.0.1'
