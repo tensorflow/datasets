@@ -47,7 +47,7 @@ upper_tabs:
       - title: Store your dataset on GCS
         path: /datasets/gcs
       - title: TFDS for Jax and PyTorch
-        path: /datasets/tfless_tfds
+        path: /datasets/data_source
 
       - heading: "Add a dataset"
       - title: Create your dataset
