@@ -34,18 +34,19 @@ expected to make their own validation/test splits.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `82.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `177.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 130,831
 
 *   **Feature structure**:
 
