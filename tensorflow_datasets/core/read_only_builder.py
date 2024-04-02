@@ -21,6 +21,7 @@ import typing
 from typing import Any, List, Optional, Type
 
 from etils import epath
+from etils import etree
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import logging as tfds_logging
@@ -180,7 +181,7 @@ def builder_from_directories(
   if not builder_dirs:
     raise ValueError('No builder dirs were given!')
 
-  dataset_infos = utils.tree.parallel_map(
+  dataset_infos = etree.parallel_map(
       dataset_info.read_proto_from_builder_dir, {d: d for d in builder_dirs}
   )
 

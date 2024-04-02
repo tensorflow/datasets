@@ -433,7 +433,7 @@ class DatasetCollectionLoader:
       `dict` of `dataset_names` mapping to a `dict` of {`split_name`:
       tf.data.Dataset} for each desired datasets.
     """
-    return self.load_datasets(  # pytype: disable=wrong-arg-types
+    return self.load_datasets(
         datasets=self.datasets.keys(), split=split, loader_kwargs=loader_kwargs
     )
 

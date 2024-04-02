@@ -37,9 +37,9 @@ from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.data_sources import array_record
 from tensorflow_datasets.core.utils import dtype_utils
-from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_utils
+import tree
 
 
 def _get_fake_data_components(decoders, features):
@@ -385,7 +385,7 @@ def mock_data(
         )
         return single_data_source
 
-      return tree_utils.map_structure(build_single_data_source, split)
+      return tree.map_structure(build_single_data_source, split)
 
   if not as_dataset_fn:
     as_dataset_fn = mock_as_dataset

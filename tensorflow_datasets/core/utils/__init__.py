@@ -17,7 +17,6 @@
 
 from tensorflow_datasets.core.units import Size
 from tensorflow_datasets.core.utils import docs
-from tensorflow_datasets.core.utils import tree_utils as tree
 from tensorflow_datasets.core.utils.gcs_utils import gcs_path
 from tensorflow_datasets.core.utils.image_utils import apply_colormap
 from tensorflow_datasets.core.utils.image_utils import create_thumbnail

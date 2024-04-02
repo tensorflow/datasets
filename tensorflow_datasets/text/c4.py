@@ -24,10 +24,10 @@ import uuid
 
 from absl import logging
 from etils import epath
-from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import c4_utils
+import tree
 
 PageFeatures = c4_utils.PageFeatures
 
@@ -533,7 +533,7 @@ class C4(tfds.core.BeamBasedBuilder):
         )
       file_paths["openwebtext_urls_zip"] = dl_manager.extract(owt_path)
 
-    file_paths = tree_utils.map_structure(os.fspath, file_paths)
+    file_paths = tree.map_structure(os.fspath, file_paths)
 
     pages_pcollection = self._get_pages_pcollection(
         pipeline, file_paths, dl_manager

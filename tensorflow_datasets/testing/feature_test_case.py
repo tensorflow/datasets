@@ -29,10 +29,10 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.data_sources import python
 from tensorflow_datasets.core.features import feature as feature_lib
-from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
+import tree
 
 
 class TestValue(enum.Enum):
@@ -288,8 +288,8 @@ class FeatureExpectationsTestCase(SubTestCase):
       self.assertEqual(feature.shape, shape)
     with self._subTest('dtype'):
       self.assertEqual(feature.dtype, dtype)
-      tree_utils.map_structure(enp.lazy.is_np_dtype, feature.np_dtype)
-      tree_utils.map_structure(enp.lazy.is_tf_dtype, feature.tf_dtype)
+      tree.map_structure(enp.lazy.is_np_dtype, feature.np_dtype)
+      tree.map_structure(enp.lazy.is_tf_dtype, feature.tf_dtype)
 
     # Check the serialized features
     if serialized_info:

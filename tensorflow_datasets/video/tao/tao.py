@@ -18,9 +18,10 @@
 from __future__ import annotations
 
 import collections
+from collections.abc import Mapping
 import json
 import os
-from typing import Any, Dict, Optional, Tuple
+from typing import Any
 
 from etils import epath
 import numpy as np
@@ -52,12 +53,12 @@ _CITATION = """
 }
 """
 
-NestedDict = Dict[str, Any]
+NestedDict = Mapping[str, Any]
 
 
 def _build_annotations_index(
     annotations: NestedDict,
-) -> Tuple[NestedDict, NestedDict, NestedDict, NestedDict]:
+) -> tuple[NestedDict, NestedDict, NestedDict, NestedDict]:
   """Builds several dictionaries to aid in looking up annotations."""
   vids = {x['id']: x for x in annotations['videos']}
   images = {x['id']: x for x in annotations['images']}
@@ -72,7 +73,7 @@ def _build_annotations_index(
   return vids, ann_to_images, track_to_anns, vid_to_tracks
 
 
-def _merge_categories_map(annotations: NestedDict) -> Dict[str, str]:
+def _merge_categories_map(annotations: NestedDict) -> dict[str, str]:
   """Some categories should be renamed into others.
 
   This code segment is based on the TAO provided preprocessing API.
@@ -91,7 +92,9 @@ def _merge_categories_map(annotations: NestedDict) -> Dict[str, str]:
   return merge_map
 
 
-def _maybe_prepare_manual_data(dl_manager: tfds.download.DownloadManager):
+def _maybe_prepare_manual_data(
+    dl_manager: tfds.download.DownloadManager,
+) -> tuple[epath.Path | None, epath.Path | None]:
   """Return paths to the manually downloaded data if it is available."""
 
   # The file has a different name each time it is downloaded.
@@ -115,7 +118,7 @@ def _maybe_prepare_manual_data(dl_manager: tfds.download.DownloadManager):
   return dl_manager.extract(files)
 
 
-def _get_category_id_map(annotations_root) -> Dict[str, int]:
+def _get_category_id_map(annotations_root) -> dict[str, int]:
   """Gets a map from the TAO category id to a tfds category index.
 
   The tfds category index is the index which a category appears in the
@@ -150,7 +153,7 @@ def _get_category_id_map(annotations_root) -> Dict[str, int]:
 
 
 def _preprocess_annotations(
-    annotations_file: str, id_map: Dict[int, int]
+    annotations_file: str, id_map: dict[str, int]
 ) -> NestedDict:
   """Preprocesses the data to group together some category labels."""
   with epath.Path(annotations_file).open('r') as f:
@@ -226,8 +229,8 @@ class TaoConfig(tfds.core.BuilderConfig):
   def __init__(
       self,
       *,
-      height: Optional[int] = None,
-      width: Optional[int] = None,
+      height: int | None = None,
+      width: int | None = None,
       **kwargs,
   ):
     """The parameters specifying how the dataset will be processed.
@@ -391,11 +394,15 @@ class Tao(tfds.core.BeamBasedBuilder):
     return metadata
 
   def _generate_examples(
-      self, data_path, manual_path, annotations_path, id_map
+      self,
+      data_path: epath.PathLike,
+      manual_path: epath.Path | None,
+      annotations_path: epath.Path,
+      id_map: dict[str, int],
   ):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
-    annotations = _preprocess_annotations(annotations_path, id_map)  # pytype: disable=wrong-arg-types  # always-use-return-annotations
+    annotations = _preprocess_annotations(os.fspath(annotations_path), id_map)
     outs = _build_annotations_index(annotations)
     vids, ann_to_images, track_to_anns, vid_to_tracks = outs
 

@@ -25,11 +25,11 @@ import pprint
 from typing import Optional, Type, Union, cast
 
 from etils import epath
+from etils import etree
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as split_lib
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
@@ -230,14 +230,14 @@ def _compute_split_statistics(
   # Compute all shard info in parallel
   split_to_shard_infos = cast(
       Mapping[str, Sequence[_ShardInfo]],
-      utils.tree.parallel_map(
+      etree.parallel_map(
           functools.partial(
               _process_shard,
               data_dir=filename_template.data_dir,
               adapter=adapter,
           ),
           split_files,
-          report_progress=True,
+          progress_bar=True,
       ),
   )
   # Create the SplitInfo for all splits

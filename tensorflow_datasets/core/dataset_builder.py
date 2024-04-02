@@ -30,6 +30,7 @@ from typing import Any, ClassVar, Dict, Iterable, Iterator, List, Optional, Tupl
 
 from absl import logging
 from etils import epath
+import importlib_resources
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_metadata
@@ -53,11 +54,12 @@ from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
-from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import termcolor
+import tree
+
 
 ListOrTreeOrElem = type_utils.ListOrTreeOrElem
 Tree = type_utils.Tree
@@ -310,8 +312,14 @@ class DatasetBuilder(registered.RegisteredDataset):
         # For dynamically added modules, `importlib.resources` returns
         # `pathlib.Path('.')` rather than the real path, so filter those by
         # checking for `parts`.
-        # Check for `zipfile.Path` (`ResourcePath`) as it does not have `.parts`
-        if isinstance(path, epath.resource_utils.ResourcePath) or path.parts:
+        # Check for `zipfile.Path` (`ResourcePath`) or
+        # `importlib_resources.abc.Traversable` (e.g. `MultiplexedPath`) as they
+        # do not have `.parts`.
+        if (
+            isinstance(path, epath.resource_utils.ResourcePath)
+            or isinstance(path, importlib_resources.abc.Traversable)
+            or path.parts
+        ):
           modules[-1] += ".py"
           return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
@@ -787,7 +795,7 @@ class DatasetBuilder(registered.RegisteredDataset):
             f" {' or '.join(args)}?"
         )
 
-    all_ds = tree_utils.map_structure(build_single_data_source, split)
+    all_ds = tree.map_structure(build_single_data_source, split)
     return all_ds
 
   @tfds_logging.as_dataset()
@@ -901,7 +909,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         read_config=read_config,
         as_supervised=as_supervised,
     )
-    all_ds = tree_utils.map_structure(build_single_dataset, split)
+    all_ds = tree.map_structure(build_single_dataset, split)
     return all_ds
 
   def _build_single_dataset(
@@ -954,7 +962,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         Returns:
           A tuple with elements structured according to `supervised_keys`
         """
-        return tree_utils.map_structure(
+        return tree.map_structure(
             lambda key: features[key], self.info.supervised_keys
         )
 

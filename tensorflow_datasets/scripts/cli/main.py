@@ -42,7 +42,7 @@ from tensorflow_datasets.scripts.utils import flag_utils
 FLAGS = flags.FLAGS
 
 
-def _parse_flags(argv: List[str]) -> argparse.Namespace:
+def parse_flags(argv: List[str]) -> argparse.Namespace:
   """Command lines flag parsing."""
   argv = flag_utils.normalize_flags(argv)  # See b/174043007 for context.
 
@@ -102,7 +102,7 @@ def main(args: argparse.Namespace) -> None:
 
 def launch_cli() -> None:
   """Parse arguments and launch the CLI main function."""
-  app.run(main, flags_parser=_parse_flags)
+  app.run(main, flags_parser=parse_flags)
 
 
 if __name__ == '__main__':

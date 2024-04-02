@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Wrapper around `tfds build`."""
+r"""Wrapper around `tfds build` and `tfds build_croissant`."""
 
 import argparse
 from typing import List
@@ -35,7 +35,18 @@ builder_config_id = flags.DEFINE_integer(
 
 def _parse_flags(argv: List[str]) -> argparse.Namespace:
   """Command lines flag parsing."""
-  return main_cli._parse_flags([argv[0], 'build'] + argv[1:])  # pylint: disable=protected-access
+  parser = argparse.ArgumentParser(
+      description='Runs either `tfds build` or `tfds build_croissant`.'
+  )
+  parser.add_argument('--croissant', action='store_true')
+  args, other_argv = parser.parse_known_args(argv)
+
+  if args.croissant:
+    build_cmd = 'build_croissant'
+  else:
+    build_cmd = 'build'
+
+  return main_cli.parse_flags([other_argv[0], build_cmd] + other_argv[1:])
 
 
 _display_warning = True

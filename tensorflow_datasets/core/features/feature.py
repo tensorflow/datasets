@@ -38,10 +38,10 @@ from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import np_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tf_utils
-from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.utils.lazy_imports_utils import tf_agents
+import tree
 
 from google.protobuf import descriptor
 from google.protobuf import json_format
@@ -364,14 +364,14 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     of the dataset. For example, currently this method does not support
     RaggedTensorSpec.
     """
-    return tree_utils.map_structure(
+    return tree.map_structure(
         lambda ti: ti.to_tensor_spec(), self.get_tensor_info()
     )
 
   @functools.cached_property
   def shape(self):
     """Return the shape (or dict of shape) of this FeatureConnector."""
-    return tree_utils.map_structure(lambda t: t.shape, self.get_tensor_info())
+    return tree.map_structure(lambda t: t.shape, self.get_tensor_info())
 
   @functools.cached_property
   def dtype(self) -> TreeDict[tf.dtypes.DType]:
@@ -381,9 +381,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
 
   @functools.cached_property
   def np_dtype(self) -> TreeDict[np.dtype]:
-    return tree_utils.map_structure(
-        lambda t: t.np_dtype, self.get_tensor_info()
-    )
+    return tree.map_structure(lambda t: t.np_dtype, self.get_tensor_info())
 
   # For backwards compatibility: now it is named np_dtype.
   @functools.cached_property
@@ -397,7 +395,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
         return tf.dtypes.as_dtype(value)
       return value.tf_dtype
 
-    return tree_utils.map_structure(convert_to_tensorflow, self.np_dtype)
+    return tree.map_structure(convert_to_tensorflow, self.np_dtype)
 
   @classmethod
   def cls_from_name(cls, python_class_name: str) -> Type['FeatureConnector']:
