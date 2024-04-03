@@ -185,8 +185,7 @@ jobs:
     - uses: ./.github/actions/setup
       with:
         tf-version: tensorflow
-
-    - run: pip install ipython
+        use-cache: false
 
     # Test each notebook sequentially.
     - name: Run notebook
@@ -202,6 +201,7 @@ jobs:
                 --ExecutePreprocessor.timeout=600 \
                 --ExecutePreprocessor.kernel_name=tfds-notebook \
                 --to notebook \
-                --execute $notebook
+                --execute $notebook && \
+              pip install tensorflow  # reinstall tensorflow if it was uninstalled
             fi
           done
