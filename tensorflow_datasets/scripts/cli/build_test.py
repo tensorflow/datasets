@@ -83,7 +83,7 @@ def mock_cwd(path: epath.PathLike) -> Iterator[None]:
 def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
   """Executes `tfds build {cmd_flags}` and returns the list of generated ds."""
   # Execute the command
-  args = main.parse_flags(f'tfds build {cmd_flags}'.split())
+  args = main._parse_flags(f'tfds build {cmd_flags}'.split())
 
   original_dl_and_prepare = tfds.core.DatasetBuilder.download_and_prepare
 
@@ -325,7 +325,7 @@ def test_download_only():
     ),
 )
 def test_make_download_config(args: str, download_config_kwargs):
-  args = main.parse_flags(f'tfds build x {download_config_kwargs}'.split())
+  args = main._parse_flags(f'tfds build x {download_config_kwargs}'.split())
   actual = build_lib._make_download_config(args, dataset_name='x')
   # Ignore the beam runner
   actual.replace(beam_runner=None)

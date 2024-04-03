@@ -28,4 +28,4 @@ def test_main():
   # Argparse call `sys.exit(0)` when `--version` is passed.
   with mock.patch('sys.exit', _check_exit):
     version_flag = '--version'
-    main.main(main.parse_flags(['', version_flag]))
+    main.main(main._parse_flags(['', version_flag]))
