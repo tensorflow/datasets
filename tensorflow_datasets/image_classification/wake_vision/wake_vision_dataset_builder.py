@@ -2,46 +2,123 @@
 
 import tensorflow_datasets.public_api as tfds
 
+_TRAIN_IMAGE_IDS = [9270406, 9270356, 9270408, 9270367, 9270349, 9270351, 9270390, 9270375, 9270387, 9270370, 9270396, 9270340, 9270411, 9270369, 9270357, 9270378, 9270386, 9270376, 9270341, 9270392, 9270334, 9270404, 9270330, 9270321, 9270364, 9270380, 9270343, 9270335, 9270412, 9270362, 9270339, 9270331, 9270399, 9270410, 9270393, 9270325, 9270346, 9270337, 9270391, 9270361, 9270363, 9270372, 9270326, 9270322, 9270329, 9270381, 9270338, 9270397, 9270405, 9270379, 9270352, 9270400, 9270384, 9270383, 9270388, 9270324, 9270407, 9270348, 9270347, 9270371, 9270358, 9270350, 9270323, 9270401, 9270368, 9270360, 9270328, 9270327, 9270382, 9270332, 9270394, 9270409, 9270345, 9270342, 9270353, 9270403, 9270398, 9270402, 9270395, 9270333, 9270373, 9270336, 9270385, 9270320, 9270366, 9270374, 9270377, 9270354, 9270344, 9270359]
+
+_URLS = {
+    'train_images': [
+      tfds.download.Resource(
+        url=f'https://dataverse.harvard.edu/api/access/datafile/{id}?format=original',
+        extract_method=tfds.download.ExtractMethod.GZIP,
+      )
+      for id in _TRAIN_IMAGE_IDS
+    ],
+    'validation_images': tfds.download.Resource(
+      url='https://dataverse.harvard.edu/api/access/datafile/9270355?format=original',
+      extract_method=tfds.download.ExtractMethod.GZIP,
+    ),
+    'test_images': tfds.download.Resource(
+      url='https://dataverse.harvard.edu/api/access/datafile/9270389?format=original',
+      extract_method=tfds.download.ExtractMethod.GZIP,
+    ),
+    'train_image_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844933?format=original',
+    'train_bbox_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844934?format=original',
+    'validation_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844936?format=original',
+    'test_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844935?format=original',
+}
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for wake_vision dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
+      '1.0.0': 'Initial TensorFlow Datasets release. Note that this is based on the 2.0 version of Wake Vision on Harvard Dataverse.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    # TODO(wake_vision): Specifies the tfds.core.DatasetInfo object
     return self.dataset_info_from_configs(
+        description=
+        """
+        The Wake Vision dataset for person detection.
+
+        The dataset contains images with annotations of whether each image contains a person. Additional annotations about perceived gender, perceived age, subject distance, lighting conditions, depictions, and specific body parts are also available for some subsets of the dataset.
+
+        We publish the annotations of this dataset under a CC BY 4.0 license. All images in the dataset are from the Open Images v7 dataset, which sourced images from Flickr listed as having a CC BY 2.0 license.
+        """
+        ,
         features=tfds.features.FeaturesDict({
             # These are the features of your dataset like images, labels ...
             'image': tfds.features.Image(shape=(None, None, 3)),
-            'label': tfds.features.ClassLabel(names=['no', 'yes']),
+            'filename': tfds.features.Text(),
+            'person': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'depiction': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'body_part': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'predominantly_female': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'predominantly_male': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'gender_unknown': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'young': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'middle_age': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'older': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'age_unknown': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'near': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'medium_distance': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'far': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'dark': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'normal_lighting': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'bright': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'person_depiction': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'non-person_depiction': tfds.features.ClassLabel(names=['No', 'Yes']),
+            'non-person_non-depiction': tfds.features.ClassLabel(names=['No', 'Yes']),
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
         # `as_supervised=True` in `builder.as_dataset`.
-        supervised_keys=('image', 'label'),  # Set to `None` to disable
-        homepage='https://dataset-homepage/',
+        supervised_keys=('image', 'person'),  # Set to `None` to disable
+        homepage='https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2F1HOPXC',
+        license='See homepage for license information.',
     )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    # TODO(wake_vision): Downloads the data and defines the splits
-    path = dl_manager.download_and_extract('https://todo-data-url')
+    paths = dl_manager.download_and_extract(_URLS)
 
-    # TODO(wake_vision): Returns the Dict[split names, Iterator[Key, Example]]
     return {
-        'train': self._generate_examples(path / 'train_imgs'),
+        'train_image': self._generate_examples(paths['train_images'], paths['train_image_metadata']),
+        'train_bbox': self._generate_examples(paths['train_images'], paths['train_bbox_metadata']),
+        'validation' : self._generate_examples(paths['validation_images'], paths['validation_metadata']),
+        'test' : self._generate_examples(paths['test_images'], paths['test_metadata']),
     }
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, image_paths, metadata_path):
     """Yields examples."""
-    # TODO(wake_vision): Yields (key, example) tuples from the dataset
-    for f in path.glob('*.jpeg'):
-      yield 'key', {
-          'image': f,
-          'label': 'yes',
-      }
+    metadata = tfds.core.lazy_imports.pandas.read_csv(metadata_path, index_col='filename')
+
+    for tar_file in image_paths:
+      for sample_path, sample_object in tfds.download.iter_archive(tar_file, tfds.download.ExtractMethod.TAR_STREAM):
+        file_name = sample_path
+
+        sample_metadata = metadata.loc[file_name]
+
+        yield file_name, {
+            'image': sample_object,
+            'filename': file_name,
+            'person': sample_metadata['person'],
+            'depiction': sample_metadata['depiction'],
+            'body_part': sample_metadata['body_part'],
+            'predominantly_female': sample_metadata['predominantly_female'],
+            'predominantly_male': sample_metadata['predominantly_male'],
+            'gender_unknown': sample_metadata['gender_unknown'],
+            'young': sample_metadata['young'],
+            'middle_age': sample_metadata['middle_age'],
+            'older': sample_metadata['older'],
+            'age_unknown': sample_metadata['age_unknown'],
+            'near': sample_metadata['near'],
+            'medium_distance': sample_metadata['medium_distance'],
+            'far': sample_metadata['far'],
+            'dark': sample_metadata['dark'],
+            'normal_lighting': sample_metadata['normal_lighting'],
+            'bright': sample_metadata['bright'],
+            'person_depiction': sample_metadata['person_depiction'],
+            'non-person_depiction': sample_metadata['non-person_depiction'],
+            'non-person_non-depiction': sample_metadata['non-person_non-depiction'],
+        }
