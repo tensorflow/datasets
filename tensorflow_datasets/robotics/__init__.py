@@ -15,6 +15,7 @@
 
 """Robotics datasets."""
 from tensorflow_datasets.robotics.mt_opt import MtOpt
+from tensorflow_datasets.robotics.rtx import AlohaMobile
 from tensorflow_datasets.robotics.rtx import AsuTableTopConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import AustinBudsDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import AustinSailorDatasetConvertedExternallyToRlds
@@ -33,26 +34,33 @@ from tensorflow_datasets.robotics.rtx import CmuFrankaExplorationDatasetConverte
 from tensorflow_datasets.robotics.rtx import CmuPlayFusion
 from tensorflow_datasets.robotics.rtx import CmuStretch
 from tensorflow_datasets.robotics.rtx import ColumbiaCairlabPushtReal
+from tensorflow_datasets.robotics.rtx import ConqHoseManipulation
 from tensorflow_datasets.robotics.rtx import DlrEdanSharedControlConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import DlrSaraGridClampConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import DlrSaraPourConvertedExternallyToRlds
+from tensorflow_datasets.robotics.rtx import Dobbe
 from tensorflow_datasets.robotics.rtx import EthAgentAffordances
+from tensorflow_datasets.robotics.rtx import Fmb
 from tensorflow_datasets.robotics.rtx import Fractal20220817Data
 from tensorflow_datasets.robotics.rtx import IamlabCmuPickupInsertConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import ImperialcollegeSawyerWristCam
+from tensorflow_datasets.robotics.rtx import IoAiTech
 from tensorflow_datasets.robotics.rtx import JacoPlay
 from tensorflow_datasets.robotics.rtx import KaistNonprehensileConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import Kuka
 from tensorflow_datasets.robotics.rtx import ManiskillDatasetConvertedExternallyToRlds
+from tensorflow_datasets.robotics.rtx import MimicPlay
 from tensorflow_datasets.robotics.rtx import NyuDoorOpeningSurprisingEffectiveness
 from tensorflow_datasets.robotics.rtx import NyuFrankaPlayDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import NyuRotDatasetConvertedExternallyToRlds
+from tensorflow_datasets.robotics.rtx import RoboSet
 from tensorflow_datasets.robotics.rtx import Roboturk
 from tensorflow_datasets.robotics.rtx import StanfordHydraDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import StanfordKukaMultimodalDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import StanfordMaskVitConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import StanfordRobocookConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import TacoPlay
+from tensorflow_datasets.robotics.rtx import Tidybot
 from tensorflow_datasets.robotics.rtx import TokyoULsmoConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import Toto
 from tensorflow_datasets.robotics.rtx import UcsdKitchenDatasetConvertedExternallyToRlds
@@ -65,4 +73,5 @@ from tensorflow_datasets.robotics.rtx import UtokyoPr2TabletopManipulationConver
 from tensorflow_datasets.robotics.rtx import UtokyoSaytapConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import UtokyoXarmBimanualConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import UtokyoXarmPickAndPlaceConvertedExternallyToRlds
+from tensorflow_datasets.robotics.rtx import VimaConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import Viola
