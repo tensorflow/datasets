@@ -27,9 +27,10 @@ tfds build_croissant \
 """
 
 import argparse
+from collections.abc import Sequence
 import json
-import pathlib
 
+from etils import epath
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
 
@@ -60,7 +61,7 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
   )
   parser.add_argument(
       '--out_dir',
-      type=pathlib.Path,
+      type=epath.Path,
       help='Path where the converted dataset will be stored.',
       required=True,
   )
@@ -87,7 +88,7 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
       subparser_fn=lambda args: prepare_croissant_builder(
           jsonld=args.jsonld,
           record_sets=args.record_sets,
-          file_format=args.file_format,
+          out_file_format=args.file_format,
           out_dir=args.out_dir,
           mapping=args.mapping,
       )
@@ -95,10 +96,10 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
 
 
 def prepare_croissant_builder(
-    jsonld: pathlib.Path,
-    record_sets: list[str],
-    file_format: str,
-    out_dir: pathlib.Path,
+    jsonld: epath.PathLike,
+    record_sets: Sequence[str],
+    out_file_format: str,
+    out_dir: epath.PathLike,
     mapping: str | None,
 ) -> None:
   """Creates a Croissant Builder and runs the preparation.
@@ -108,7 +109,7 @@ def prepare_croissant_builder(
     record_sets: The names of the record sets to generate. Each record set will
       correspond to a separate config. If not specified, it will use all the
       record sets
-    file_format: File format to convert the dataset to.
+    out_file_format: File format to convert the dataset to.
     out_dir: Path where the converted dataset will be stored.
     mapping: Mapping filename->filepath as a Python dict[str, str] to handle
       manual downloads. If `document.csv` is the FileObject and you downloaded
@@ -126,7 +127,7 @@ def prepare_croissant_builder(
   builder = croissant_builder.CroissantBuilder(
       jsonld=jsonld,
       record_set_names=record_sets,
-      file_format=file_format,
+      file_format=out_file_format,
       data_dir=out_dir,
       mapping=mapping,
   )
