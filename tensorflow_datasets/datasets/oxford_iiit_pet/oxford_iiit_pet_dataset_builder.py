@@ -16,11 +16,12 @@
 """Oxford-IIIT pet dataset."""
 
 import os
+import xml.etree.ElementTree
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
+_BASE_URL = "https://thor.robots.ox.ac.uk/~vgg/data/pets"
 
 _LABEL_CLASSES = [
     "Abyssinian",
@@ -63,6 +64,44 @@ _LABEL_CLASSES = [
 ]
 _SPECIES_CLASSES = ["Cat", "Dog"]
 
+# List of samples with corrupt image files
+_SKIP_SAMPLES = [
+    "beagle_116",
+    "chihuahua_121",
+    "Abyssinian_5",
+    "Abyssinian_34",
+    "Egyptian_Mau_14",
+    "Egyptian_Mau_139",
+    "Egyptian_Mau_145",
+    "Egyptian_Mau_156",
+    "Egyptian_Mau_167",
+    "Egyptian_Mau_177",
+    "Egyptian_Mau_186",
+    "Egyptian_Mau_191"
+]
+
+def _get_head_bbox(annon_filepath):
+  """Read head bbox from annotation XML file."""
+  with tf.io.gfile.GFile(annon_filepath, "r") as f:
+    root = xml.etree.ElementTree.parse(f).getroot()
+
+    # Disable pytype to avoid attribute-error due to find returning
+    # Optional[Element]
+    # pytype: disable=attribute-error
+    size = root.find("size")
+    width = float(size.find("width").text)
+    height = float(size.find("height").text)
+
+    obj = root.find("object")
+    bndbox = obj.find("bndbox")
+    xmax = float(bndbox.find("xmax").text)
+    xmin = float(bndbox.find("xmin").text)
+    ymax = float(bndbox.find("ymax").text)
+    ymin = float(bndbox.find("ymin").text)
+    return tfds.features.BBox(
+              ymin / height, xmin / width, ymax / height, xmax / width
+        )
+
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
@@ -79,6 +118,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "segmentation_mask": tfds.features.Image(
                 shape=(None, None, 1), use_colormap=True
             ),
+            "head": tfds.features.BBoxFeature()
         }),
         supervised_keys=("image", "label"),
         homepage="http://www.robots.ox.ac.uk/~vgg/data/pets/",
@@ -126,12 +166,24 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       for line in images_list:
         image_name, label, species, _ = line.strip().split(" ")
 
+        # skip corrupt samples
+        if image_name in _SKIP_SAMPLES:
+          continue
+
         trimaps_dir_path = os.path.join(annotations_dir_path, "trimaps")
+        xmls_dir_path = os.path.join(annotations_dir_path, "xmls")
 
         trimap_name = image_name + ".png"
+        xml_name = image_name + ".xml"
         image_name += ".jpg"
         label = int(label) - 1
         species = int(species) - 1
+
+        try:
+            head_bbox = _get_head_bbox(os.path.join(xmls_dir_path, xml_name))
+        except tf.errors.NotFoundError:
+            # test samples do not have an annotation file
+            head_bbox = tfds.features.BBox(0., 0., 0., 0.)
 
         record = {
             "image": os.path.join(images_dir_path, image_name),
@@ -139,5 +191,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "species": species,
             "file_name": image_name,
             "segmentation_mask": os.path.join(trimaps_dir_path, trimap_name),
+            "head": head_bbox
         }
         yield image_name, record
