@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import contextlib
+import dataclasses
 import enum
 import functools
 import os
@@ -32,6 +33,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import load
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.core import splits as splits_lib
@@ -93,18 +95,31 @@ class PickableDataSourceMock(mock.MagicMock):
     return (PickableDataSourceMock, (), self.__getstate__())
 
 
-def _getitem(self, record_key: int, generator: RandomFakeGenerator) -> Any:
+def _getitem(
+    self,
+    record_key: int,
+    generator: RandomFakeGenerator,
+    serialized: bool = False,
+) -> Any:
   """Function to overwrite __getitem__ in data sources."""
-  del self
-  return generator[record_key]
+  example = generator[record_key]
+  if serialized:
+    # Return serialized raw bytes
+    return self.dataset_info.features.serialize_example(example)
+  return example
 
 
 def _getitems(
-    self, record_keys: Sequence[int], generator: RandomFakeGenerator
+    self,
+    record_keys: Sequence[int],
+    generator: RandomFakeGenerator,
+    serialized: bool = False,
 ) -> Sequence[Any]:
   """Function to overwrite __getitems__ in data sources."""
-  del self
-  return [generator[record_key] for record_key in record_keys]
+  return [
+      _getitem(self, record_key, generator, serialized=serialized)
+      for record_key in record_keys
+  ]
 
 
 def _deserialize_example_np(serialized_example, *, decoders=None):
