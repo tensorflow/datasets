@@ -34,19 +34,18 @@ expected to make their own validation/test splits.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `82.62 MiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `177.16 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 130,831
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -146,3 +145,22 @@ zpve             | Tensor       |         | float32 |
 }
 ```
 
+
+## qm9/original (default config)
+
+*   **Config description**: QM9 does not define any splits. So this variant puts
+    the full QM9 dataset in the train split, without shuffling.
+
+## qm9/cormorant
+
+*   **Config description**: Dataset split used by Cormorant. 100,000 train,
+    17,748 validation, and 13,083 test samples. Splitting happens after
+    shuffling with seed 0. Paper: https://arxiv.org/abs/1906.04015. Split:
+    https://github.com/risilab/cormorant/blob/master/src/cormorant/data/prepare/qm9.py
+
+## qm9/dimenet
+
+*   **Config description**: Dataset split used by DimeNet. 110,000 train, 10,000
+    validation, and 10,831 test samples. Splitting happens after shuffling with
+    seed 42. Paper: https://arxiv.org/abs/2003.03123. Split:
+    https://github.com/gasteigerjo/dimenet/blob/master/dimenet/training/data_provider.py

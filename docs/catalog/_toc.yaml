@@ -34,6 +34,11 @@ toc:
     title: scientific_papers
   title: Abstractive text summarization
 - section:
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
+  title: Age
+- section:
   - path: /datasets/catalog/ag_news_subset
     title: ag_news_subset
   - path: /datasets/catalog/caltech101
@@ -96,6 +101,9 @@ toc:
     title: ogbg_molpcba
   title: Biology
 - section:
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   - path: /datasets/catalog/sift1m
     title: sift1m
   title: Categorical
@@ -170,6 +178,9 @@ toc:
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   title: Dialogue
 - section:
   - path: /datasets/catalog/aeslc
@@ -195,6 +206,11 @@ toc:
   - path: /datasets/catalog/sun397
     title: sun397
   title: Fine grained image classification
+- section:
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
+  title: Gender
 - section:
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
@@ -570,6 +586,9 @@ toc:
     title: blimp
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/irc_disentanglement
@@ -626,6 +645,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/bot_adversarial_dialogue
     title: bot_adversarial_dialogue
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/imdb_reviews
@@ -706,6 +728,9 @@ toc:
 - section:
   - path: /datasets/catalog/anli
     title: anli
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   - path: /datasets/catalog/paws_wiki
     title: paws_wiki
   - path: /datasets/catalog/sci_tail
@@ -726,6 +751,9 @@ toc:
     title: clevr
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/math_dataset
@@ -869,6 +897,11 @@ toc:
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
   title: Question generation
+- section:
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
+  title: Race national ethnic origin
 - section:
   - path: /datasets/catalog/istella
     title: istella
@@ -1301,6 +1334,9 @@ toc:
     title: databricks_dolly
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   - path: /datasets/catalog/doc_nli
     title: doc_nli
   - path: /datasets/catalog/dolphin_number_word
@@ -1547,6 +1583,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/bot_adversarial_dialogue
     title: bot_adversarial_dialogue
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/natural_instructions
@@ -1563,6 +1602,9 @@ toc:
 - section:
   - path: /datasets/catalog/bot_adversarial_dialogue
     title: bot_adversarial_dialogue
+  - path: /datasets/catalog/dices
+    status: nightly
+    title: dices
   - path: /datasets/catalog/real_toxicity_prompts
     title: real_toxicity_prompts
   title: Text classification toxicity prediction

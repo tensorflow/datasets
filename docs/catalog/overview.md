@@ -46,6 +46,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`samsum`](samsum.md)
 *   [`scientific_papers`](scientific_papers.md)
 
+### `Age`
+
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Anomaly detection`
 
 *   [`ag_news_subset`](ag_news_subset.md)
@@ -85,6 +90,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Categorical`
 
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`sift1m`](sift1m.md)
 
 ### `Common sense reasoning`
@@ -140,6 +147,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
 *   [`databricks_dolly`](databricks_dolly.md)
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Document summarization`
 
@@ -156,6 +165,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`stanford_dogs`](stanford_dogs.md)
 *   [`stl10`](stl10.md)
 *   [`sun397`](sun397.md)
+
+### `Gender`
+
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Graph`
 
@@ -368,6 +382,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`billsum`](billsum.md)
 *   [`blimp`](blimp.md)
 *   [`databricks_dolly`](databricks_dolly.md)
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
 *   [`lambada`](lambada.md)
@@ -402,6 +418,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
 *   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`kitti`](kitti.md)
@@ -448,6 +466,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Natural language inference`
 
 *   [`anli`](anli.md)
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`paws_wiki`](paws_wiki.md)
 *   [`sci_tail`](sci_tail.md)
 *   [`snli`](snli.md)
@@ -460,6 +480,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
 *   [`databricks_dolly`](databricks_dolly.md)
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`math_dataset`](math_dataset.md)
 *   [`math_qa`](math_qa.md)
@@ -543,6 +565,11 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`natural_questions`](natural_questions.md)
 *   [`trivia_qa`](trivia_qa.md)
+
+### `Race national ethnic origin`
+
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Ranking`
 
@@ -804,6 +831,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cos_e`](cos_e.md)
 *   [`databricks_dolly`](databricks_dolly.md)
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`doc_nli`](doc_nli.md)
 *   [`dolphin_number_word`](dolphin_number_word.md)
 *   [`drop`](drop.md)
@@ -929,6 +958,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`bool_q`](bool_q.md)
 *   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`natural_instructions`](natural_instructions.md)
 *   [`paws_wiki`](paws_wiki.md)
@@ -939,6 +970,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Text classification toxicity prediction`
 
 *   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+*   [`dices`](dices.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`real_toxicity_prompts`](real_toxicity_prompts.md)
 
 ### `Text generation`
