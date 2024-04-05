@@ -17,6 +17,8 @@
 
 from collections.abc import Mapping, Sequence
 import datetime
+import io
+import re
 from typing import Any, Type, TypeVar
 
 from etils import epath
@@ -232,8 +234,15 @@ def convert_hf_value(
         return path
     case feature_lib.Image():
       hf_value: lazy_imports_lib.lazy_imports.PIL_Image.Image
-      # Ensure RGB format for PNG encoding.
-      return hf_value.convert('RGB')
+      if hf_value.mode == 'CMYK':  # Convert CMYK images to RGB.
+        hf_value = hf_value.convert('RGB')
+      img_format = hf_value.format
+      if img_format not in ('PNG', 'JPEG', 'GIF', 'BMP'):
+        # Convert to png if original format is not supported.
+        img_format = 'PNG'
+      with io.BytesIO() as buffer:
+        hf_value.save(buffer, format=img_format)
+        return buffer.getvalue()
     case feature_lib.Tensor():
       return hf_value
 

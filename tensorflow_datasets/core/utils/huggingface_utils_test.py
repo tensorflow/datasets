@@ -14,6 +14,8 @@
 # limitations under the License.
 
 import datetime
+import io
+import logging
 
 import datasets as hf_datasets
 import numpy as np
@@ -23,6 +25,8 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
 
 
 def test_convert_to_np_dtype_raises():
@@ -148,6 +152,15 @@ def test_convert_value_raises(hf_value, feature):
     huggingface_utils.convert_hf_value(hf_value, feature)
 
 
+def _get_red_png():
+  """Returns PNGvalue for a red 1x1 pixel image."""
+  pixel_data = np.array([[[255, 0, 0]]], dtype=np.uint8)
+  image = PIL_Image.fromarray(pixel_data, mode='RGB')
+  with io.BytesIO() as buffer:
+    image.save(buffer, format='PNG')
+    return buffer.getvalue()
+
+
 @pytest.mark.parametrize(
     'hf_value,feature,expected_value',
     [
@@ -183,11 +196,9 @@ def test_convert_value_raises(hf_value, feature):
         ),
         # image
         (
-            lazy_imports_lib.lazy_imports.PIL_Image.new(mode='L', size=(4, 4)),
+            PIL_Image.new(mode='RGB', size=(1, 1), color='red'),
             feature_lib.Image(),
-            lazy_imports_lib.lazy_imports.PIL_Image.new(
-                mode='RGB', size=(4, 4)
-            ),
+            _get_red_png(),
         ),
         # dict
         (
@@ -213,7 +224,12 @@ def test_convert_value_raises(hf_value, feature):
     ],
 )
 def test_convert_value(hf_value, feature, expected_value):
-  assert huggingface_utils.convert_hf_value(hf_value, feature) == expected_value
+  logging.info('hf_value: %s', hf_value)
+  logging.info('feature: %s', feature)
+  logging.info('expected_value: %s', expected_value)
+  result = huggingface_utils.convert_hf_value(hf_value, feature)
+  logging.info('result: %s', result)
+  assert result == expected_value
 
 
 @pytest.mark.parametrize(
