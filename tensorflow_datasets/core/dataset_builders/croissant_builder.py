@@ -105,12 +105,12 @@ class CroissantBuilder(
   def __init__(
       self,
       *,
-      jsonld: epath.PathLike | str,
+      jsonld: epath.PathLike,
       record_set_names: Sequence[str] | None = None,
-      disable_shuffling: Optional[bool] = False,
-      int_dtype: Optional[type_utils.TfdsDType] = np.int64,
-      float_dtype: Optional[type_utils.TfdsDType] = np.float32,
-      mapping: Optional[Mapping[str, epath.PathLike]] = None,
+      disable_shuffling: bool | None = False,
+      int_dtype: type_utils.TfdsDType | None = np.int64,
+      float_dtype: type_utils.TfdsDType | None = np.float32,
+      mapping: Mapping[str, epath.PathLike] | None = None,
       **kwargs: Any,
   ):
     """Initializes a CroissantBuilder.

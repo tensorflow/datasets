@@ -248,9 +248,9 @@ class DatasetBuilder(registered.RegisteredDataset):
   def __init__(
       self,
       *,
-      data_dir: Optional[epath.PathLike] = None,
-      config: Union[None, str, BuilderConfig] = None,
-      version: Union[None, str, utils.Version] = None,
+      data_dir: epath.PathLike | None = None,
+      config: None | str | BuilderConfig = None,
+      version: None | str | utils.Version = None,
   ):
     """Constructs a DatasetBuilder.
 
