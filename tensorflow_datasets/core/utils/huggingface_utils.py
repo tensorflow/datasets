@@ -152,7 +152,11 @@ def _get_default_value(
           for name, inner_feature in feature.items()
       }
     case feature_lib.Sequence():
-      return []
+      match feature.feature:
+        case feature_lib.FeaturesDict():
+          return {feature_name: [] for feature_name in feature.feature.keys()}
+        case _:
+          return []
     case _:
       if dtype_utils.is_string(feature.np_dtype):
         return b''

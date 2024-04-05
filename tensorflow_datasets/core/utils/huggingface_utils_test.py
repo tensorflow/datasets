@@ -116,6 +116,10 @@ def test_convert_hf_features(hf_features, tfds_features):
     [
         (feature_lib.Scalar(dtype=np.int32), -2147483648),
         (feature_lib.Scalar(dtype=np.float32), -3.4028234663852886e38),
+        (
+            feature_lib.Sequence({'name': feature_lib.Scalar(dtype=np.int32)}),
+            {'name': []},
+        ),
         (feature_lib.Sequence(np.int32), []),
         (
             feature_lib.FeaturesDict({
