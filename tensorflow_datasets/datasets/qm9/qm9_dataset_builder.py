@@ -23,6 +23,7 @@ To build the dataset, run the following from directory containing this file:
 $ tfds build.
 """
 
+import dataclasses
 import re
 from typing import Any, Iterable
 
@@ -96,7 +97,7 @@ def _process_molecule(
     if atoms[key].values.dtype == 'object':
       # there are unrecognized numbers.
       atoms[key].values[:] = np.array(
-          [float(x.replace('*^', 'e')) for i, x in enumerate(atoms[key].values)]
+          [float(x.replace('*^', 'e')) for x in atoms[key].values]
       )
 
   charges = np.pad(
@@ -135,14 +136,50 @@ def _process_molecule(
   return example
 
 
-def _get_valid_ids(uncharacterized):
-  """Get valid ids."""
+def _get_split_ids(
+    uncharacterized,
+    *,
+    permutation_seed: int | None,
+    train_size: int,
+    validation_size: int,
+):
+  """Get train/validation/test split ids."""
   # Original data files are  1-indexed.
   characterized_ids = np.array(
       sorted(set(range(1, _SIZE + 1)) - set(uncharacterized))
   )
   assert len(characterized_ids) == _CHARACTERIZED_SIZE
-  return characterized_ids
+
+  if permutation_seed is None:
+    ids = characterized_ids
+  else:
+    rng = np.random.RandomState(permutation_seed)
+    ids = rng.permutation(characterized_ids)
+
+  split_ids = {}
+  split_ids['train'] = ids[:train_size]
+
+  if train_size < _CHARACTERIZED_SIZE and validation_size > 0:
+    split_ids['validation'] = ids[train_size : train_size + validation_size]
+
+  if train_size + validation_size < _CHARACTERIZED_SIZE:
+    split_ids['test'] = ids[train_size + validation_size :]
+
+  return split_ids
+
+
+@dataclasses.dataclass
+class BuilderConfig(tfds.core.BuilderConfig):
+  # Seed used for permuting (shuffling) the dataset samples before generating
+  # splits. Setting this to None disables shuffling, both before and after
+  # splitting.
+  permutation_seed: int | None = None
+  # Size of the train split. Setting this to the full dataset size
+  # (_CHARACTERIZED_SIZE) will disable the validation and test splits.
+  train_size: int = _CHARACTERIZED_SIZE
+  # Size of the validation split. The test split will contain remaining samples,
+  # i.e. those that are neither in the train nor the validation split.
+  validation_size: int = 0
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
@@ -152,11 +189,51 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
   }
+  BUILDER_CONFIGS = [
+      BuilderConfig(
+          name='original',
+          description=(
+              'QM9 does not define any splits. So this variant puts the full'
+              ' QM9 dataset in the train split, without shuffling.'
+          ),
+          permutation_seed=None,
+          train_size=_CHARACTERIZED_SIZE,
+          validation_size=0,
+      ),
+      BuilderConfig(
+          name='cormorant',
+          description=(
+              'Dataset split used by Cormorant. 100,000 train,'
+              ' 17,748 validation, and 13,083 test samples.'
+              ' Splitting happens after shuffling with seed 0.'
+              ' Paper: https://arxiv.org/abs/1906.04015.'
+              ' Split:'
+              ' https://github.com/risilab/cormorant/blob/master/src/cormorant/data/prepare/qm9.py'
+          ),
+          permutation_seed=0,
+          train_size=100_000,
+          validation_size=17_748,
+      ),
+      BuilderConfig(
+          name='dimenet',
+          description=(
+              'Dataset split used by DimeNet. 110,000 train, 10,000 validation,'
+              ' and 10,831 test samples.'
+              ' Splitting happens after shuffling with seed 42.'
+              ' Paper: https://arxiv.org/abs/2003.03123.'
+              ' Split:'
+              ' https://github.com/gasteigerjo/dimenet/blob/master/dimenet/training/data_provider.py'
+          ),
+          permutation_seed=42,
+          train_size=110_000,
+          validation_size=10_000,
+      ),
+  ]
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
-        disable_shuffling=True,
+        disable_shuffling=self.builder_config.permutation_seed is None,
         features=tfds.features.FeaturesDict({
             'num_atoms': tfds.features.Tensor(shape=(), dtype=np.int64),
             'charges': tfds.features.Tensor(shape=(29,), dtype=np.int64),
@@ -226,19 +303,27 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         {'dsgdb9nsd': _MOLECULES_URL}
     )['dsgdb9nsd']
 
-    valid_ids = _get_valid_ids(uncharacterized)
+    split_ids = _get_split_ids(
+        uncharacterized,
+        permutation_seed=self.builder_config.permutation_seed,
+        train_size=self.builder_config.train_size,
+        validation_size=self.builder_config.validation_size,
+    )
 
-    return {'train': self._generate_examples(valid_ids, atomref, molecules_dir)}
+    return {
+        split: self._generate_examples(ids, atomref, molecules_dir)
+        for split, ids in split_ids.items()
+    }
 
   def _generate_examples(
       self,
-      split: np.ndarray,
+      ids: np.ndarray,
       atomref: dict[str, Any],
       molecules_dir: epath.Path,
   ) -> Iterable[tuple[int, dict[str, Any]]]:
     """Dataset generator. See superclass method for details."""
 
-    for i in split:
+    for i in ids:
       entry = _process_molecule(
           atomref, molecules_dir / f'dsgdb9nsd_{i:06d}.xyz'
       )
