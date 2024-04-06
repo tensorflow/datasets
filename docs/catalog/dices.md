@@ -55,19 +55,6 @@ that may be offensive.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -102,6 +89,20 @@ Split | Examples
     woman), race/ethnicity (White, Black, Latine, Asian, Multiracial) and each
     rater rated all items. Each rater rated all conversations. Each conversation
     has 123 unique ratings. Total number of rows in this dataset is 43050.
+
+*   **Download size**: `29.70 MiB`
+
+*   **Dataset size**: `74.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 43,050
 
 *   **Feature structure**:
 
@@ -207,6 +208,20 @@ safety_gold_reason                                                | Text        
     conversation was balanced by gender (Man, Woman) and locale (US, India).
     Each rater rated only a sample of the conversation. Each conversation has
     60-70 unique ratings. Total number of rows in this dataset is 72103.
+
+*   **Download size**: `48.06 MiB`
+
+*   **Dataset size**: `150.38 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 72,103
 
 *   **Feature structure**:
 
