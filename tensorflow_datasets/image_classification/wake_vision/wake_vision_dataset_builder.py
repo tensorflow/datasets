@@ -97,28 +97,31 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       for sample_path, sample_object in tfds.download.iter_archive(tar_file, tfds.download.ExtractMethod.TAR_STREAM):
         file_name = sample_path
 
+        if file_name not in metadata.index:
+            continue
+
         sample_metadata = metadata.loc[file_name]
 
         yield file_name, {
             'image': sample_object,
             'filename': file_name,
             'person': sample_metadata['person'],
-            'depiction': sample_metadata['depiction'],
-            'body_part': sample_metadata['body_part'],
-            'predominantly_female': sample_metadata['predominantly_female'],
-            'predominantly_male': sample_metadata['predominantly_male'],
-            'gender_unknown': sample_metadata['gender_unknown'],
-            'young': sample_metadata['young'],
-            'middle_age': sample_metadata['middle_age'],
-            'older': sample_metadata['older'],
-            'age_unknown': sample_metadata['age_unknown'],
-            'near': sample_metadata['near'],
-            'medium_distance': sample_metadata['medium_distance'],
-            'far': sample_metadata['far'],
-            'dark': sample_metadata['dark'],
-            'normal_lighting': sample_metadata['normal_lighting'],
-            'bright': sample_metadata['bright'],
-            'person_depiction': sample_metadata['person_depiction'],
-            'non-person_depiction': sample_metadata['non-person_depiction'],
-            'non-person_non-depiction': sample_metadata['non-person_non-depiction'],
+            'depiction': sample_metadata.get('depiction', -1),
+            'body_part': sample_metadata.get('body_part', -1),
+            'predominantly_female': sample_metadata.get('predominantly_female', -1),
+            'predominantly_male': sample_metadata.get('predominantly_male',-1),
+            'gender_unknown': sample_metadata.get('gender_unknown', -1),
+            'young': sample_metadata.get('young', -1),
+            'middle_age': sample_metadata.get('middle_age', -1),
+            'older': sample_metadata.get('older', -1),
+            'age_unknown': sample_metadata.get('age_unknown', -1),
+            'near': sample_metadata.get('near', -1),
+            'medium_distance': sample_metadata.get('medium_distance', -1),
+            'far': sample_metadata.get('far', -1),
+            'dark': sample_metadata.get('dark', -1),
+            'normal_lighting': sample_metadata.get('normal_lighting', -1),
+            'bright': sample_metadata.get('bright', -1),
+            'person_depiction': sample_metadata.get('person_depiction', -1),
+            'non-person_depiction': sample_metadata.get('non-person_depiction', -1),
+            'non-person_non-depiction': sample_metadata.get('non-person_non-depiction', -1),
         }
