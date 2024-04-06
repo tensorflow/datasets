@@ -22,8 +22,8 @@ _URLS = {
     ),
     'train_image_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844933?format=original',
     'train_bbox_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844934?format=original',
-    'validation_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844936?format=original',
-    'test_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844935?format=original',
+    'validation_metadata': 'https://dataverse.harvard.edu/api/access/datafile/10069808?format=original',
+    'test_metadata': 'https://dataverse.harvard.edu/api/access/datafile/10069809?format=original',
 }
 
 class Builder(tfds.core.GeneratorBasedBuilder):
