@@ -1,6 +1,7 @@
 """wake_vision dataset."""
 
 import tensorflow_datasets.public_api as tfds
+import os
 
 _TRAIN_IMAGE_IDS = [9270406, 9270356, 9270408, 9270367, 9270349, 9270351, 9270390, 9270375, 9270387, 9270370, 9270396, 9270340, 9270411, 9270369, 9270357, 9270378, 9270386, 9270376, 9270341, 9270392, 9270334, 9270404, 9270330, 9270321, 9270364, 9270380, 9270343, 9270335, 9270412, 9270362, 9270339, 9270331, 9270399, 9270410, 9270393, 9270325, 9270346, 9270337, 9270391, 9270361, 9270363, 9270372, 9270326, 9270322, 9270329, 9270381, 9270338, 9270397, 9270405, 9270379, 9270352, 9270400, 9270384, 9270383, 9270388, 9270324, 9270407, 9270348, 9270347, 9270371, 9270358, 9270350, 9270323, 9270401, 9270368, 9270360, 9270328, 9270327, 9270382, 9270332, 9270394, 9270409, 9270345, 9270342, 9270353, 9270403, 9270398, 9270402, 9270395, 9270333, 9270373, 9270336, 9270385, 9270320, 9270366, 9270374, 9270377, 9270354, 9270344, 9270359]
 
@@ -12,14 +13,20 @@ _URLS = {
       )
       for id in _TRAIN_IMAGE_IDS
     ],
-    'validation_images': tfds.download.Resource(
-      url='https://dataverse.harvard.edu/api/access/datafile/9270355?format=original',
-      extract_method=tfds.download.ExtractMethod.GZIP,
-    ),
-    'test_images': tfds.download.Resource(
-      url='https://dataverse.harvard.edu/api/access/datafile/9270389?format=original',
-      extract_method=tfds.download.ExtractMethod.GZIP,
-    ),
+    'validation_images': [
+      tfds.download.Resource(
+        url='https://dataverse.harvard.edu/api/access/datafile/9270355?format=original',
+        extract_method=tfds.download.ExtractMethod.GZIP,
+      )
+    ]
+    ,
+    'test_images': [
+      tfds.download.Resource(
+        url='https://dataverse.harvard.edu/api/access/datafile/9270389?format=original',
+        extract_method=tfds.download.ExtractMethod.GZIP,
+      )
+    ]
+    ,
     'train_image_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844933?format=original',
     'train_bbox_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844934?format=original',
     'validation_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844936?format=original',
@@ -95,7 +102,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     for tar_file in image_paths:
       for sample_path, sample_object in tfds.download.iter_archive(tar_file, tfds.download.ExtractMethod.TAR_STREAM):
-        file_name = sample_path
+        file_name = os.path.basename(sample_path)
 
         if file_name not in metadata.index:
             continue

@@ -1,22 +1,27 @@
 """wake_vision dataset."""
 
-from tensorflow_datasets.image_classification.wake_vision import wake_vision_dataset_builder
+import wake_vision_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 class WakeVisionTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for wake_vision dataset."""
-  # TODO(wake_vision):
   DATASET_CLASS = wake_vision_dataset_builder.Builder
   SPLITS = {
-      'train': 3,  # Number of fake train example
-      'test': 1,  # Number of fake test example
+      'train_image': 16,  # Number of fake train image examples
+      'train_bbox': 4,  # Number of fake train bbox examples
+      'validation': 11,  # Number of fake validation examples
+      'test': 10,  # Number of fake test examples
   }
 
-  # If you are calling `download/download_and_extract` with a dict, like:
-  #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
-  # then the tests needs to provide the fake output paths relative to the
-  # fake data directory
-  # DL_EXTRACT_RESULT = {'some_key': 'output_file1.txt', ...}
+  DL_EXTRACT_RESULT = {
+      'train_images': ['wake-vision-train-dummy-1.tar.gz', 'wake-vision-train-dummy-2.tar.gz'],
+      'validation_images': ['wake-vision-validation-dummy.tar.gz'],
+      'test_images': ['wake-vision-test-dummy.tar.gz'],
+      'train_image_metadata': 'wake_vision_train_image.csv',
+      'train_bbox_metadata': 'wake_vision_train_bbox.csv',
+      'validation_metadata': 'wake_vision_validation.csv',
+      'test_metadata': 'wake_vision_test.csv',
+  }
 
 
 if __name__ == '__main__':
