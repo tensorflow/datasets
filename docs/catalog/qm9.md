@@ -34,6 +34,10 @@ expected to make their own validation/test splits.
 
     *   **`1.0.0`** (default): Initial release.
 
+*   **Download size**: `82.62 MiB`
+
+*   **Dataset size**: `177.16 MiB`
+
 *   **Feature structure**:
 
 ```python
@@ -138,10 +142,6 @@ zpve             | Tensor       |         | float32 |
 *   **Config description**: QM9 does not define any splits. So this variant puts
     the full QM9 dataset in the train split, without shuffling.
 
-*   **Download size**: `82.62 MiB`
-
-*   **Dataset size**: `177.16 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
@@ -159,18 +159,17 @@ Split     | Examples
     shuffling with seed 0. Paper: https://arxiv.org/abs/1906.04015. Split:
     https://github.com/risilab/cormorant/blob/master/src/cormorant/data/prepare/qm9.py
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 13,083
+`'train'`      | 100,000
+`'validation'` | 17,748
 
 ## qm9/dimenet
 
@@ -179,15 +178,14 @@ Split | Examples
     seed 42. Paper: https://arxiv.org/abs/2003.03123. Split:
     https://github.com/gasteigerjo/dimenet/blob/master/dimenet/training/data_provider.py
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,831
+`'train'`      | 110,000
+`'validation'` | 10,000
