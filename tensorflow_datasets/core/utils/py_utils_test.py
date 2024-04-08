@@ -20,7 +20,6 @@ import pathlib
 
 from etils import epath
 import pytest
-
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
@@ -198,6 +197,20 @@ class PyUtilsTest(testing.TestCase):
           },
           'a/b': 2,  # Collision
       })
+
+  def test_flatten_nest_dict_with_dict_list_dict(self):
+    nest_d = {
+        'conversation': [
+            {'content': 'A = 5, B =10, A+B=?', 'role': 'user'},
+            {'content': 'A + B = 5 + 10 = 15', 'role': 'assistant'},
+        ],
+    }
+    flat_d = {
+        'conversation/content': ['A = 5, B =10, A+B=?', 'A + B = 5 + 10 = 15'],
+        'conversation/role': ['user', 'assistant'],
+    }
+    self.assertEqual(py_utils.flatten_nest_dict(nest_d), flat_d)
+    self.assertEqual(py_utils.pack_as_nest_dict(flat_d, nest_d), nest_d)
 
   def test_reraise(self):
     class CustomError(Exception):

@@ -214,6 +214,9 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> dict[str, T]:
     if isinstance(v, dict):
       for k2, v2 in flatten_nest_dict(v).items():
         flat_dict[f'{k}/{k2}'] = v2
+    elif isinstance(v, list) and v and isinstance(v[0], dict):
+      for k2 in v[0]:
+        flat_dict[f'{k}/{k2}'] = [v[i][k2] for i in range(len(v))]
     else:
       flat_dict[k] = v
   return flat_dict
@@ -272,6 +275,17 @@ def pack_as_nest_dict(flat_d, nest_d):
       sub_d = {k2: flat_d.pop(f'{k}/{k2}', None) for k2, _ in v_flat.items()}
       # Recursively pack the dictionary
       nest_out_d[k] = pack_as_nest_dict(sub_d, v)
+    elif isinstance(v, list) and v and isinstance(v[0], dict):
+      first_inner_key = list(v[0].keys())[0]
+      list_size = len(flat_d[f'{k}/{first_inner_key}'])
+      nest_out_d[k] = [{} for _ in range(list_size)]
+      for k2 in v[0].keys():
+        subvals = flat_d.pop(f'{k}/{k2}', [])
+        assert (
+            len(subvals) == len(v) == list_size
+        ), f'{subvals}, {v}, {list_size}'
+        for i in range(list_size):
+          nest_out_d[k][i][k2] = subvals[i]
     else:
       nest_out_d[k] = flat_d.pop(k, None)
   if flat_d:  # At the end, flat_d should be empty
