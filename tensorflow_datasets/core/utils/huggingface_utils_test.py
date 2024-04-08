@@ -127,6 +127,7 @@ def test_convert_hf_features(hf_features, tfds_features):
             }),
             {'foo': b''},
         ),
+        (feature_lib.Image(), huggingface_utils._DEFAULT_IMG),
     ],
 )
 def test_get_default_value(feature, default_value):

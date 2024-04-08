@@ -40,6 +40,7 @@ _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
     'string': np.object_,
 })
 _IMAGE_ENCODING_FORMAT = 'png'
+_DEFAULT_IMG = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\x0cIDATx\x9cc```\x00\x00\x00\x04\x00\x01\xf6\x178U\x00\x00\x00\x00IEND\xaeB`\x82'
 # Regular expression to match strings that are not valid Python/TFDS names:
 _INVALID_TFDS_NAME_CHARACTER = re.compile(r'[^a-zA-Z0-9_]')
 _StrOrNone = TypeVar('_StrOrNone', str, None)
@@ -139,6 +140,9 @@ def _get_default_value(
   ...
   ```
 
+  For images, if the HuggingFace dataset does not contain an image, we
+  set a default value which corresponds to a PNG of 1px, black.
+
   Args:
     feature: The TFDS feature from which we want the default value.
 
@@ -157,6 +161,9 @@ def _get_default_value(
           return {feature_name: [] for feature_name in feature.feature.keys()}
         case _:
           return []
+    case feature_lib.Image():
+      # Return an empty PNG image of 1x1 pixel, black.
+      return _DEFAULT_IMG
     case _:
       if dtype_utils.is_string(feature.np_dtype):
         return b''
