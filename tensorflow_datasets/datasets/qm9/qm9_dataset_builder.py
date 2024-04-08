@@ -194,7 +194,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           name='original',
           description=(
               'QM9 does not define any splits. So this variant puts the full'
-              ' QM9 dataset in the train split, without shuffling.'
+              ' QM9 dataset in the train split, in the original order'
+              ' (no shuffling).'
           ),
           permutation_seed=None,
           train_size=_CHARACTERIZED_SIZE,
