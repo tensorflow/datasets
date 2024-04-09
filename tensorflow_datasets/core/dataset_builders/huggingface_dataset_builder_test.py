@@ -16,8 +16,12 @@
 from unittest import mock
 
 import datasets as hf_datasets
+import numpy as np
 import pytest
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
+
+PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
 
 
 class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
@@ -34,8 +38,13 @@ class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
     return [hf_datasets.SplitGenerator(name='train.clean')]
 
   def _generate_examples(self):
+    pixel_data = np.array([[[255, 0, 0]]], dtype=np.uint8)
+    image = PIL_Image.fromarray(pixel_data, mode='RGB')
     for i in range(2):
-      yield i, {'feature': i}
+      yield i, {
+          'feature': i,
+          'image_feature': image,
+      }
 
   def download_and_prepare(self, *args, **kwargs):
     # Disable downloads from GCS
@@ -87,8 +96,18 @@ def mock_huggingface_dataset_builder(
 def test_download_and_prepare(builder):
   builder.download_and_prepare()
   ds = builder.as_data_source()
-  # Split names are sanitized, eg train.clean -> train_clean
-  assert list(ds['train_clean']) == [{'feature': 0}, {'feature': 1}]
+  pixel_data = np.array([[[255, 0, 0]]], dtype=np.uint8)
+  expected_dataset = [
+      {'feature': 0, 'image_feature': pixel_data},
+      {'feature': 1, 'image_feature': pixel_data},
+  ]
+  for actual, expected in zip(ds['train_clean'], expected_dataset):
+    assert list(actual.keys()) == list(expected.keys())
+    # Check non-array values for equality.
+    assert actual['feature'] == expected['feature']
+
+    # Check NumPy array equality.
+    assert np.array_equal(actual['image_feature'], expected['image_feature'])
 
 
 def test_all_parameters_are_passed_down_to_hf(builder):
@@ -98,4 +117,7 @@ def test_all_parameters_are_passed_down_to_hf(builder):
 
 
 def test_hf_features(builder):
-  assert builder._hf_features() == {'feature': hf_datasets.Value('int64')}
+  assert builder._hf_features() == {
+      'feature': hf_datasets.Value('int64'),
+      'image_feature': hf_datasets.Image(decode=True),
+  }
