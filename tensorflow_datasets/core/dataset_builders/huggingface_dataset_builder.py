@@ -116,7 +116,8 @@ def _write_shard(
         split=shard_spec.shard_split, run_post_process=False
     ):
       example = huggingface_utils.convert_hf_value(hf_value, features)
-      serialized_example = serializer.serialize_example(example)
+      encoded_example = features.encode_example(example)
+      serialized_example = serializer.serialize_example(encoded_example)
       num_bytes += len(serialized_example)
       yield serialized_example
 
