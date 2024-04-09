@@ -375,5 +375,17 @@ def test_is_incomplete_file(path: str, is_incomplete: bool):
   assert py_utils.is_incomplete_file(epath.Path(path)) == is_incomplete
 
 
+@pytest.mark.parametrize(
+    ['name', 'expected'],
+    [
+        ('foobar', 'foobar'),
+        ('FooBar', 'FooBar'),
+        ('_foo-bar!', '_foo_bar_'),
+    ],
+)
+def test_make_valid_name(name: str, expected: str):
+  assert py_utils.make_valid_name(name) == expected
+
+
 if __name__ == '__main__':
   tf.test.main()

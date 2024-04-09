@@ -19,7 +19,7 @@ Croissant is a high-level format for machine learning datasets
 https://github.com/mlcommons/croissant
 
 A CroissantBuilder initializes a TFDS DatasetBuilder from a Croissant dataset
-file; each of the record_set_names specified will result in a separate
+file; each of the record_set_ids specified will result in a separate
 ConfigBuilder.
 
 ```python
@@ -49,6 +49,7 @@ from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
@@ -97,6 +98,40 @@ def datatype_converter(
     raise ValueError(f"Unknown data type: {field_data_type}.")
 
 
+def _extract_license(license_: Any) -> str | None:
+  """Extracts the full terms of a license as a string.
+
+  In case the license is a CreativeWork, we join the name, description and url
+  fields with brackets, e.g.
+  [U.S. Government Works][https://www.usa.gov/government-works/].
+
+  Args:
+    license_: The license from mlcroissant.
+
+  Returns:
+    The full terms of the license as a string.
+  """
+  if isinstance(license_, str):
+    return license_
+  elif isinstance(license_, mlc.CreativeWork):
+    possible_fields = [license_.name, license_.description, license_.url]
+    fields = [field for field in possible_fields if field]
+    return "[" + "][".join(fields) + "]"
+  raise ValueError(
+      f"license_ should be mlc.CreativeWork | str. Got {type(license_)}"
+  )
+
+
+def _get_license(metadata: Any) -> str | None:
+  """Gets the license from the metadata."""
+  if not isinstance(metadata, mlc.Metadata):
+    raise ValueError(f"metadata should be mlc.Metadata. Got {type(metadata)}")
+  licenses = metadata.license
+  if licenses:
+    return ", ".join([_extract_license(l) for l in licenses if l])
+  return None
+
+
 class CroissantBuilder(
     dataset_builder.GeneratorBasedBuilder, skip_registration=True
 ):
@@ -106,7 +141,7 @@ class CroissantBuilder(
       self,
       *,
       jsonld: epath.PathLike,
-      record_set_names: Sequence[str] | None = None,
+      record_set_ids: Sequence[str] | None = None,
       disable_shuffling: bool | None = False,
       int_dtype: type_utils.TfdsDType | None = np.int64,
       float_dtype: type_utils.TfdsDType | None = np.float32,
@@ -118,9 +153,9 @@ class CroissantBuilder(
     Args:
       jsonld: The Croissant JSON-LD for the given dataset: either a file path or
         a URL.
-      record_set_names: The names of the record sets to generate. Each record
-        set will correspond to a separate config. If not specified, it will use
-        all the record sets.
+      record_set_ids: The @ids of the record sets to generate. Each record set
+        will correspond to a separate config. If not specified, it will use all
+        the record sets.
       disable_shuffling: Specify whether to shuffle the examples.
       int_dtype: The dtype to use for TFDS integer features. Defaults to
         np.int64.
@@ -135,7 +170,7 @@ class CroissantBuilder(
     if mapping is None:
       mapping = {}
     self.dataset = mlc.Dataset(jsonld, mapping=mapping)
-    self.name = self.dataset.metadata.name
+    self.name = py_utils.make_valid_name(self.dataset.metadata.name)
     self.metadata = self.dataset.metadata
 
     # In TFDS, version is a mandatory attribute, while in Croissant it is only a
@@ -144,13 +179,14 @@ class CroissantBuilder(
     self.VERSION = self.dataset.metadata.version or "1.0.0"  # pylint: disable=invalid-name
     self.RELEASE_NOTES = {}  # pylint: disable=invalid-name
 
-    if not record_set_names:
-      record_set_names = [
-          record_set.name for record_set in self.metadata.record_sets
+    if not record_set_ids:
+      record_set_ids = [
+          py_utils.make_valid_name(record_set.id)
+          for record_set in self.metadata.record_sets
       ]
     self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
-        dataset_builder.BuilderConfig(name=record_set_name)
-        for record_set_name in record_set_names
+        dataset_builder.BuilderConfig(name=record_set_id)
+        for record_set_id in record_set_ids
     ]
 
     self._disable_shuffling = disable_shuffling
@@ -174,17 +210,17 @@ class CroissantBuilder(
         features=self.get_features(),
         homepage=self.dataset.metadata.url,
         citation=self.dataset.metadata.cite_as,
-        license=self.dataset.metadata.license,
+        license=_get_license(self.dataset.metadata),
         disable_shuffling=self._disable_shuffling,
     )
 
-  def get_record_set(self, record_set_name: str):
+  def get_record_set(self, record_set_id: str):
     """Returns the desired record set from self.metadata."""
     for record_set in self.dataset.metadata.record_sets:
-      if record_set.name == record_set_name:
+      if py_utils.make_valid_name(record_set.id) == record_set_id:
         return record_set
     raise ValueError(
-        f"Did not find any record set with the name {record_set_name}."
+        f"Did not find any record set with the name {record_set_id}."
     )
 
   def get_features(self) -> Optional[feature_lib.FeatureConnector]:

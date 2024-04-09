@@ -34,7 +34,7 @@ DUMMY_ENTRIES = [{"index": i, "text": f"Dummy example {i}"} for i in range(2)]
 def get_dummy_metadata():
   distribution = [
       mlc.FileObject(
-          name="raw_data",
+          id="raw_data",
           description="File with the data.",
           encoding_format="application/jsonlines",
           content_url="data/raw_data.jsonl",
@@ -45,7 +45,7 @@ def get_dummy_metadata():
   ]
   record_sets = [
       mlc.RecordSet(
-          name="jsonl",
+          id="jsonl",
           description="Dummy record set.",
           fields=[
               mlc.Field(
@@ -53,8 +53,7 @@ def get_dummy_metadata():
                   description="The sample index.",
                   data_types=mlc.DataType.INTEGER,
                   source=mlc.Source(
-                      uid="raw_data",
-                      node_type="fileObject",
+                      file_object="raw_data",
                       extract=mlc.Extract(column="index"),
                   ),
               ),
@@ -63,8 +62,7 @@ def get_dummy_metadata():
                   description="The dummy sample text.",
                   data_types=mlc.DataType.TEXT,
                   source=mlc.Source(
-                      uid="raw_data",
-                      node_type="fileObject",
+                      file_object="raw_data",
                       extract=mlc.Extract(column="text"),
                   ),
               ),
@@ -206,7 +204,7 @@ class CroissantBuilderTest(testing.TestCase):
     assert self.builder._info().homepage == "https://dummy_url"
     assert self.builder._info().redistribution_info.license == "Public"
     assert len(self.builder.metadata.record_sets) == 1
-    assert self.builder.metadata.record_sets[0].name == "jsonl"
+    assert self.builder.metadata.record_sets[0].id == "jsonl"
     assert (
         self.builder.metadata.ctx.conforms_to.value
         == "http://mlcommons.org/croissant/1.0"

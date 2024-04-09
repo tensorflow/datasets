@@ -17,7 +17,6 @@
 
 from collections.abc import Mapping, Sequence
 import datetime
-import re
 from typing import Any, Type, TypeVar
 
 from etils import epath
@@ -27,6 +26,7 @@ from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -41,8 +41,6 @@ _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
 })
 _IMAGE_ENCODING_FORMAT = 'png'
 _DEFAULT_IMG = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\x0cIDATx\x9cc```\x00\x00\x00\x04\x00\x01\xf6\x178U\x00\x00\x00\x00IEND\xaeB`\x82'
-# Regular expression to match strings that are not valid Python/TFDS names:
-_INVALID_TFDS_NAME_CHARACTER = re.compile(r'[^a-zA-Z0-9_]')
 _StrOrNone = TypeVar('_StrOrNone', str, None)
 
 
@@ -264,7 +262,7 @@ def convert_hf_name(hf_name: _StrOrNone) -> _StrOrNone:
   if hf_name is None:
     return hf_name
   hf_name = hf_name.lower().replace('/', '__')
-  return re.sub(_INVALID_TFDS_NAME_CHARACTER, '_', hf_name)
+  return py_utils.make_valid_name(hf_name)
 
 
 def convert_tfds_dataset_name(tfds_dataset_name: str) -> str:

@@ -53,6 +53,8 @@ T = TypeVar('T')
 U = TypeVar('U')
 
 Fn = TypeVar('Fn', bound=Callable[..., Any])
+# Regular expression to match strings that are not valid Python/TFDS names:
+_INVALID_TFDS_NAME_CHARACTER = re.compile(r'[^a-zA-Z0-9_]')
 
 
 def is_notebook() -> bool:
@@ -543,3 +545,18 @@ def add_sys_path(path: epath.PathLike) -> Iterator[None]:
     yield
   finally:
     sys.path.remove(path)
+
+
+def make_valid_name(name: str) -> str:
+  """Sanitizes a string to follow the Python lexical definitions.
+
+  The function removes all forbidden characters outside of A-Za-z0-9_ and
+  replaces them with an underscore.
+
+  Args:
+    name: The input string to sanitize.
+
+  Returns:
+    The sanitized string.
+  """
+  return re.sub(_INVALID_TFDS_NAME_CHARACTER, '_', name)

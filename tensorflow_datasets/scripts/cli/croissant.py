@@ -106,7 +106,7 @@ def prepare_croissant_builder(
 
   Args:
     jsonld: The Croissant config file for the given dataset
-    record_sets: The names of the record sets to generate. Each record set will
+    record_sets: The `@id`s of the record sets to generate. Each record set will
       correspond to a separate config. If not specified, it will use all the
       record sets
     out_file_format: File format to convert the dataset to.
@@ -126,7 +126,7 @@ def prepare_croissant_builder(
       raise ValueError(f'Error parsing mapping parameter: {mapping}') from e
   builder = croissant_builder.CroissantBuilder(
       jsonld=jsonld,
-      record_set_names=record_sets,
+      record_set_ids=record_sets,
       file_format=out_file_format,
       data_dir=out_dir,
       mapping=mapping,

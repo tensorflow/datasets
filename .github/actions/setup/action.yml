@@ -79,12 +79,12 @@ runs:
     # Get TFDS library from the repository instead of cache.
     - run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
       shell: bash
-    # Get mlcroissant from the repository to get the latest features.
+    # Get mlcroissant from PyPI to fix the version.
     - if: ${{ runner.os == 'Linux' }}
       run: sudo apt-get install -y libgraphviz-dev
       shell: bash
     - if: ${{ runner.os == 'macOS' }}
       run: brew install graphviz
       shell: bash
-    - run: pip install mlcroissant==1.0.1
+    - run: pip install mlcroissant==1.0.5
       shell: bash
