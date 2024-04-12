@@ -35,7 +35,6 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
@@ -58,7 +57,6 @@ Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
 
 PredicateFn = Callable[[Type[dataset_builder.DatasetBuilder]], bool]
-
 
 
 # Regex matching 'dataset/config/1.3.0'
