@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Download manager interface."""
+
 from __future__ import annotations
 
 import concurrent.futures
@@ -100,6 +101,8 @@ class DownloadConfig:
       used.
     max_shard_size: optional maximum shard size in bytes. If `None`, 1 GiB is
       used.
+    ignore_duplicates: whether to ignore duplicated examples with the same key.
+      If there are multiple examples with the same key, the first one is kept.
   """
 
   extract_dir: Optional[epath.PathLike] = None
@@ -117,6 +120,7 @@ class DownloadConfig:
   num_shards: Optional[int] = None
   min_shard_size: int = shard_utils.DEFAULT_MIN_SHARD_SIZE
   max_shard_size: int = shard_utils.DEFAULT_MAX_SHARD_SIZE
+  ignore_duplicates: bool = False
 
   def get_shard_config(self) -> shard_utils.ShardConfig:
     return shard_utils.ShardConfig(
@@ -248,9 +252,7 @@ class DownloadManager(object):
 
     self._download_dir: epath.Path = download_dir
     self._extract_dir: epath.Path = extract_dir
-    self._manual_dir: Optional[epath.Path] = (
-        manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
-    )
+    self._manual_dir: Optional[epath.Path] = manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     self._download_dir.mkdir(parents=True, exist_ok=True)
     self._extract_dir.mkdir(parents=True, exist_ok=True)

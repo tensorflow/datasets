@@ -1596,6 +1596,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         beam_runner=download_config.beam_runner,
         shard_config=download_config.get_shard_config(),
         example_writer=self._example_writer(),
+        ignore_duplicates=download_config.ignore_duplicates,
     )
     # Wrap the generation inside a context manager.
     # If `beam` is used during generation (when a pipeline gets created),

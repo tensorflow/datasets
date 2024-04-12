@@ -132,6 +132,7 @@ class SplitBuilder:
       max_examples_per_split: int | None,
       example_writer: writer_lib.ExampleWriter,
       shard_config: shard_utils.ShardConfig | None = None,
+      ignore_duplicates: bool = False,
   ):
     self._split_dict = split_dict
     self._features = features
@@ -143,6 +144,7 @@ class SplitBuilder:
     self._beam_runner = beam_runner
     self._beam_pipeline: Optional['beam.Pipeline'] = None
     self._shard_config = shard_config
+    self._ignore_duplicates = ignore_duplicates
     self._example_writer = example_writer
 
   @contextlib.contextmanager
@@ -386,6 +388,7 @@ class SplitBuilder:
         disable_shuffling=disable_shuffling,
         shard_config=self._shard_config,
         example_writer=self._example_writer,
+        ignore_duplicates=self._ignore_duplicates,
     )
     for key, example in utils.tqdm(
         generator,
@@ -428,6 +431,7 @@ class SplitBuilder:
         disable_shuffling=disable_shuffling,
         shard_config=self._shard_config,
         example_writer=self._example_writer,
+        ignore_duplicates=self._ignore_duplicates,
     )
 
     def _encode_example(key_ex, encode_fn=self._features.encode_example):

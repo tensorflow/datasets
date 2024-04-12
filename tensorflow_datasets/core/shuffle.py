@@ -15,10 +15,11 @@
 
 """To shuffle records (stable)."""
 
+from collections.abc import Iterator, Sequence
 import math
 import os
 import struct
-from typing import Iterator, List, Optional
+from typing import Optional
 import uuid
 
 from absl import logging
@@ -213,18 +214,28 @@ class _Bucket(object):
 class Shuffler(object):
   """Stores data in temp buckets, restitute it shuffled."""
 
-  def __init__(self, dirpath, hash_salt, disable_shuffling: bool = False):
+  def __init__(
+      self,
+      dirpath,
+      hash_salt,
+      disable_shuffling: bool = False,
+      ignore_duplicates: bool = False,
+  ):
     """Initialize Shuffler.
 
     Args:
       dirpath (string): directory in which to store temporary files.
       hash_salt (string or bytes): salt to hash keys.
       disable_shuffling (bool): specify whether to shuffle by hashing the key.
+      ignore_duplicates: whether to ignore duplicated examples with the same
+        key. If there are multiple examples with the same key, the first one is
+        kept. If this is False, then a `DuplicatedKeysError` is raised.
     """
     grp_name = uuid.uuid4()
     self._hasher = hashing.Hasher(hash_salt)
     self._disable_shuffling = disable_shuffling
-    self._buckets: List[_Bucket] = []
+    self._ignore_duplicates = ignore_duplicates
+    self._buckets: list[_Bucket] = []
     for i in range(BUCKETS_NUMBER):
       bucket_name = 'bucket_%s_%03d.tmp' % (grp_name, i)
       path = os.path.join(dirpath, bucket_name)
@@ -234,23 +245,29 @@ class Shuffler(object):
     # To keep data in memory until enough data has been gathered.
     self._in_memory = True
     self._mem_buffer = []
+    self._seen_keys: set[int] = set()
+    self._num_examples = 0
 
   @property
-  def size(self):
+  def size(self) -> int:
     """Return total size in bytes of records (not keys)."""
     return self._total_bytes
 
   @property
-  def bucket_lengths(self):
+  def bucket_lengths(self) -> Sequence[int]:
     if self._in_memory:
       return [len(self._mem_buffer)]
     return [len(b) for b in self._buckets]
 
-  def _add_to_bucket(self, hkey, data):
+  @property
+  def num_examples(self) -> int:
+    return self._num_examples
+
+  def _add_to_bucket(self, hkey, data) -> None:
     bucket_number = get_bucket_number(hkey=hkey, num_buckets=BUCKETS_NUMBER)
     self._buckets[bucket_number].add(hkey, data)
 
-  def _add_to_mem_buffer(self, hkey, data):
+  def _add_to_mem_buffer(self, hkey, data) -> None:
     self._mem_buffer.append((hkey, data))
     if self._total_bytes > MAX_MEM_BUFFER_SIZE:
       for hkey, data in self._mem_buffer:
@@ -258,7 +275,7 @@ class Shuffler(object):
       self._mem_buffer = None
       self._in_memory = False
 
-  def add(self, key, data):
+  def add(self, key, data) -> bool:
     """Add (key, data) to shuffler."""
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
@@ -266,15 +283,20 @@ class Shuffler(object):
       raise AssertionError(
           'Only bytes (not %s) can be stored in Shuffler!' % (type(data))
       )
+    hkey = self._hasher.hash_key(key)
+    if self._ignore_duplicates:
+      if hkey in self._seen_keys:
+        return
+      self._seen_keys.add(hkey)
     if self._disable_shuffling:
+      # Use the original key and not the hashed key to maintain the order.
       hkey = key
-    else:
-      hkey = self._hasher.hash_key(key)
     self._total_bytes += len(data)
     if self._in_memory:
       self._add_to_mem_buffer(hkey, data)
     else:
       self._add_to_bucket(hkey, data)
+    self._num_examples += 1
 
   def __iter__(self) -> Iterator[type_utils.KeySerializedExample]:
     self._read_only = True
