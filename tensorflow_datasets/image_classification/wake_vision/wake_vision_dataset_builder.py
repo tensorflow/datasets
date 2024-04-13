@@ -27,8 +27,8 @@ _URLS = {
       )
     ]
     ,
-    'train_image_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844933?format=original',
-    'train_bbox_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844934?format=original',
+    'train_large_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844933?format=original',
+    'train_quality_metadata': 'https://dataverse.harvard.edu/api/access/datafile/9844934?format=original',
     'validation_metadata': 'https://dataverse.harvard.edu/api/access/datafile/10069808?format=original',
     'test_metadata': 'https://dataverse.harvard.edu/api/access/datafile/10069809?format=original',
 }
@@ -90,8 +90,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     paths = dl_manager.download_and_extract(_URLS)
 
     return {
-        'train_image': self._generate_examples(paths['train_images'], paths['train_image_metadata']),
-        'train_bbox': self._generate_examples(paths['train_images'], paths['train_bbox_metadata']),
+        'train_large': self._generate_examples(paths['train_images'], paths['train_large_metadata']),
+        'train_quality': self._generate_examples(paths['train_images'], paths['train_quality_metadata']),
         'validation' : self._generate_examples(paths['validation_images'], paths['validation_metadata']),
         'test' : self._generate_examples(paths['test_images'], paths['test_metadata']),
     }
