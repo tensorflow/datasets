@@ -53,7 +53,7 @@ class DatasetInfo:
         if self.in_tfds
         else 'tensorflow_datasets'
     )
-    self.todo = f'TODO({self.name})'
+    self.todo = f'TODO({self.name.lower()})'
 
     if self.in_tfds:
       # `/path/to/tensorflow_datasets/image/my_dataset`
