@@ -30,6 +30,7 @@ from tensorflow_datasets.robotics.rtx.rtx import BerkeleyGnmSacSon
 from tensorflow_datasets.robotics.rtx.rtx import BerkeleyMvpConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx.rtx import BerkeleyRptConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx.rtx import Bridge
+from tensorflow_datasets.robotics.rtx.rtx import BridgeDataMsr
 from tensorflow_datasets.robotics.rtx.rtx import CmuFrankaExplorationDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx.rtx import CmuPlayFusion
 from tensorflow_datasets.robotics.rtx.rtx import CmuStretch

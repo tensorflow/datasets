@@ -1369,3 +1369,24 @@ class VimaConvertedExternallyToRlds(
 
   def get_relative_dataset_location(self):
     return 'vima_converted_externally_to_rlds/0.0.1'
+
+
+class BridgeDataMsr(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `bridge_data_msr` dataset."""
+
+  def get_description(self):
+    return (
+        'A set of object manipulation trajectories collected at Microsoft'
+        ' Research on a WidowX-250 robot in a setup and format compatible with'
+        " UC Berkeley's BridgeData V2"
+        ' (https://rail-berkeley.github.io/bridgedata/)'
+    )
+
+  def get_citation(self):
+    return ''
+
+  def get_homepage(self):
+    return 'https://www.microsoft.com/en-us/download/details.aspx?id=105937'
+
+  def get_relative_dataset_location(self):
+    return 'bridge_data_msr/0.0.1'
