@@ -582,7 +582,7 @@ def load(
       guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
       all splits in a `Dict[Split, tf.data.Dataset]`
     data_dir: directory to read/write data. Defaults to the value of the
-      environment variable TFDS_DATA_DIR, if set, otherwise falls back to
+      environment variable TFDS_DATA_DIR, if set, otherwise falls back to where
       datasets are stored.
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If `batch_size=-1`, will return
@@ -751,7 +751,7 @@ def data_source(
       guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
       all splits in a `Dict[Split, Sequence]`
     data_dir: directory to read/write data. Defaults to the value of the
-      environment variable TFDS_DATA_DIR, if set, otherwise falls back to
+      environment variable TFDS_DATA_DIR, if set, otherwise falls back to where
       datasets are stored.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare` before calling
