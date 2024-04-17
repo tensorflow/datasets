@@ -1006,6 +1006,9 @@ toc:
     title: berkeley_rpt_converted_externally_to_rlds
   - path: /datasets/catalog/bridge
     title: bridge
+  - path: /datasets/catalog/bridge_data_msr
+    status: nightly
+    title: bridge_data_msr
   - path: /datasets/catalog/cmu_franka_exploration_dataset_converted_externally_to_rlds
     title: cmu_franka_exploration_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/cmu_play_fusion

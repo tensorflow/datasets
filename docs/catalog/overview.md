@@ -639,6 +639,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`berkeley_mvp_converted_externally_to_rlds`](berkeley_mvp_converted_externally_to_rlds.md)
 *   [`berkeley_rpt_converted_externally_to_rlds`](berkeley_rpt_converted_externally_to_rlds.md)
 *   [`bridge`](bridge.md)
+*   [`bridge_data_msr`](bridge_data_msr.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cmu_franka_exploration_dataset_converted_externally_to_rlds`](cmu_franka_exploration_dataset_converted_externally_to_rlds.md)
 *   [`cmu_play_fusion`](cmu_play_fusion.md)
 *   [`cmu_stretch`](cmu_stretch.md)
