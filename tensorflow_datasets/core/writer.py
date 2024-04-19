@@ -240,7 +240,9 @@ class Writer:
 
   def finalize(self) -> tuple[list[int], int]:
     """Effectively writes examples to the shards."""
-    filename = self._filename_template.sharded_filepaths_pattern()
+    if self._shuffler.num_examples == 0:
+      raise AssertionError("No examples were yielded.")
+
     shard_specs = _get_shard_specs(
         num_examples=self._shuffler.num_examples,
         total_size=self._shuffler.size,
@@ -248,6 +250,7 @@ class Writer:
         filename_template=self._filename_template,
         shard_config=self._shard_config,
     )
+    filename = self._filename_template.sharded_filepaths_pattern()
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
     # parallelize, but one would need to be careful not to sort buckets twice.
