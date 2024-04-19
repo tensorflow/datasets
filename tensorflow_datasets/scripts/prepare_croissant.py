@@ -20,9 +20,9 @@ Instructions:
 ```
 python tensorflow_datasets/scripts/prepare_croissant.py \
   --jsonld=/tmp/croissant.json \
-  --record_sets=record1 --record_sets=record2
-  --file_format=array_record
-  --out_dir=/tmp/foo
+  --out_dir=/tmp/foo \
+  --out_file_format=array_record \
+  --record_sets=record1,record2 \
   --mapping='{"document.csv": "~/Downloads/document.csv"}"'
 ```
 """
@@ -36,14 +36,19 @@ from tensorflow_datasets.scripts.cli import croissant
 _JSONLD = flags.DEFINE_string(
     name='jsonld', default=None, help='Path to the JSONLD file.', required=True
 )
-_OUT_FILE_FORMAT = flags.DEFINE_enum_class(
-    name='out_file_format',
+_OUT_DIR = flags.DEFINE_string(
+    name='out_dir',
     default=None,
-    enum_class=file_adapters.FileFormat,
-    help='File format to convert the dataset to.',
+    help='Path where the converted dataset will be stored.',
     required=True,
 )
-_RECORD_SETS = flags.DEFINE_multi_string(
+_OUT_FILE_FORMAT = flags.DEFINE_enum_class(
+    name='out_file_format',
+    default=file_adapters.FileFormat.ARRAY_RECORD,
+    enum_class=file_adapters.FileFormat,
+    help='File format to convert the dataset to.',
+)
+_RECORD_SETS = flags.DEFINE_list(
     name='record_sets',
     default=[],
     help=(
@@ -51,12 +56,6 @@ _RECORD_SETS = flags.DEFINE_multi_string(
         ' correspond to a separate config. If not specified, it will use all'
         ' the record sets.'
     ),
-)
-_OUT_DIR = flags.DEFINE_string(
-    name='out_dir',
-    default=None,
-    help='Path where the converted dataset will be stored.',
-    required=True,
 )
 _MAPPING = flags.DEFINE_string(
     name='mapping',
@@ -73,9 +72,9 @@ _MAPPING = flags.DEFINE_string(
 def main(_):
   croissant.prepare_croissant_builder(
       jsonld=_JSONLD.value,
-      record_sets=_RECORD_SETS.value,
-      out_file_format=_OUT_FILE_FORMAT.value,
       out_dir=_OUT_DIR.value,
+      out_file_format=_OUT_FILE_FORMAT.value.value,
+      record_sets=_RECORD_SETS.value,
       mapping=_MAPPING.value,
   )
 

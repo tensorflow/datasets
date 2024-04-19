@@ -19,9 +19,9 @@ Example usage:
 ```
 tfds build_croissant \
   --jsonld=/tmp/croissant.json \
-  --record_sets=record1 --record_sets=record2
-  --file_format=array_record
-  --out_dir=/tmp/foo
+  --out_dir=/tmp/foo \
+  --file_format=array_record \
+  --record_sets=record1 --record_sets=record2 \
   --mapping='{"document.csv": "~/Downloads/document.csv"}"'
 ```
 """
@@ -44,11 +44,17 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
       required=True,
   )
   parser.add_argument(
+      '--out_dir',
+      type=epath.Path,
+      help='Path where the converted dataset will be stored.',
+      required=True,
+  )
+  parser.add_argument(
       '--file_format',
+      default=file_adapters.FileFormat.ARRAY_RECORD.value,
       type=str,
       choices=[file_format.value for file_format in file_adapters.FileFormat],
       help='File format to convert the dataset to.',
-      required=True,
   )
   parser.add_argument(
       '--record_sets',
@@ -58,12 +64,6 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
           ' correspond to a separate config. If not specified, it will use all'
           ' the record sets'
       ),
-  )
-  parser.add_argument(
-      '--out_dir',
-      type=epath.Path,
-      help='Path where the converted dataset will be stored.',
-      required=True,
   )
   parser.add_argument(
       '--mapping',
@@ -87,9 +87,9 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
   parser.set_defaults(
       subparser_fn=lambda args: prepare_croissant_builder(
           jsonld=args.jsonld,
-          record_sets=args.record_sets,
-          out_file_format=args.file_format,
           out_dir=args.out_dir,
+          out_file_format=args.file_format,
+          record_sets=args.record_sets,
           mapping=args.mapping,
       )
   )
@@ -97,20 +97,20 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
 
 def prepare_croissant_builder(
     jsonld: epath.PathLike,
-    record_sets: Sequence[str],
-    out_file_format: str,
     out_dir: epath.PathLike,
+    out_file_format: str,
+    record_sets: Sequence[str],
     mapping: str | None,
 ) -> None:
   """Creates a Croissant Builder and runs the preparation.
 
   Args:
     jsonld: The Croissant config file for the given dataset
+    out_dir: Path where the converted dataset will be stored.
+    out_file_format: File format to convert the dataset to.
     record_sets: The `@id`s of the record sets to generate. Each record set will
       correspond to a separate config. If not specified, it will use all the
       record sets
-    out_file_format: File format to convert the dataset to.
-    out_dir: Path where the converted dataset will be stored.
     mapping: Mapping filename->filepath as a Python dict[str, str] to handle
       manual downloads. If `document.csv` is the FileObject and you downloaded
       it to `~/Downloads/document.csv`, you can specify
