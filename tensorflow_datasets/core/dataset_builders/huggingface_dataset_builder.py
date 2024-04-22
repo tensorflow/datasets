@@ -34,6 +34,7 @@ import multiprocessing
 import os
 from typing import Any, Dict, Optional, Union
 
+from absl import logging
 from etils import epath
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
@@ -89,12 +90,30 @@ class _ShardSpec:
     return f'{self.hf_split}[{self.start_index}:{self.end_index}]'
 
 
+@dataclasses.dataclass(frozen=True)
+class _ShardInfo:
+  """Information about a shard after it is generated.
+
+  _ShardSpec is the input to the shard generation. This is the output.
+
+  Attributes:
+    num_bytes: Actual number of bytes in the shard.
+    num_examples: Actual number of examples in the shard.
+    num_exceptions: Number of exceptions during retrieval.
+  """
+
+  num_bytes: int
+  num_examples: int
+  num_exceptions: int
+
+
 def _write_shard(
     shard_spec: _ShardSpec,
     hf_builder,
     example_writer,
     features: feature_lib.FeaturesDict,
-) -> int:
+    ignore_hf_errors: bool,
+) -> _ShardInfo:
   """Writes shard to the file.
 
   Args:
@@ -102,19 +121,33 @@ def _write_shard(
     hf_builder: HuggingFace dataset builder.
     example_writer: Example writer.
     features: TFDS features dict.
+    ignore_hf_errors: Whether to silence and log Hugging Face errors during
+      retrieval.
 
   Returns:
-    Shard size in bytes.
+    A _ShardInfo containing the actual shard information.
   """
   serialized_info = features.get_serialized_info()
   serializer = example_serializer.ExampleSerializer(serialized_info)
   num_bytes = 0
+  num_exceptions = 0
 
   def get_serialized_examples_iter():
     nonlocal num_bytes
-    for hf_value in hf_builder.as_dataset(
+    nonlocal num_exceptions
+    dataset = hf_builder.as_dataset(
         split=shard_spec.shard_split, run_post_process=False
-    ):
+    )
+    for i in range(shard_spec.num_examples):
+      try:
+        hf_value = dataset[i]
+      except Exception:  # pylint: disable=broad-exception-caught
+        num_exceptions += 1
+        if ignore_hf_errors:
+          logging.exception('Ignoring Hugging Face error')
+          continue
+        else:
+          raise
       example = huggingface_utils.convert_hf_value(hf_value, features)
       encoded_example = features.encode_example(example)
       serialized_example = serializer.serialize_example(encoded_example)
@@ -133,7 +166,11 @@ def _write_shard(
       ),
   )
 
-  return num_bytes
+  return _ShardInfo(
+      num_bytes=num_bytes,
+      num_examples=shard_spec.num_examples - num_exceptions,
+      num_exceptions=num_exceptions,
+  )
 
 
 class HuggingfaceDatasetBuilder(
@@ -160,6 +197,7 @@ class HuggingfaceDatasetBuilder(
       hf_hub_token: Optional[str] = None,
       hf_num_proc: Optional[int] = None,
       tfds_num_proc: Optional[int] = None,
+      ignore_hf_errors: bool = False,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
@@ -199,6 +237,7 @@ class HuggingfaceDatasetBuilder(
     if self._hf_config:
       self._builder_config = self._converted_builder_config
     self.generation_errors = []
+    self._ignore_hf_errors = ignore_hf_errors
 
   @property
   def builder_config(self) -> Optional[Any]:
@@ -262,19 +301,20 @@ class HuggingfaceDatasetBuilder(
           hf_split_info, split
       )
 
-    shard_sizes_by_split = self._write_shards(shard_specs_by_split)
-
-    return [
-        splits_lib.SplitInfo(
-            name=split,
-            shard_lengths=[
-                shard_spec.num_examples for shard_spec in shard_specs
-            ],
-            num_bytes=sum(shard_sizes_by_split[split]),
-            filename_template=self._get_filename_template(split),
-        )
-        for split, shard_specs in shard_specs_by_split.items()
-    ]
+    shard_infos_by_split = self._write_shards(shard_specs_by_split)
+    split_infos: list[splits_lib.SplitInfo] = []
+    for split, shard_infos in shard_infos_by_split.items():
+      shard_lengths = [shard_info.num_examples for shard_info in shard_infos]
+      num_bytes = sum(shard_info.num_bytes for shard_info in shard_infos)
+      split_infos.append(
+          splits_lib.SplitInfo(
+              name=split,
+              shard_lengths=shard_lengths,
+              num_bytes=num_bytes,
+              filename_template=self._get_filename_template(split),
+          )
+      )
+    return split_infos
 
   def _compute_shard_specs(
       self, hf_split_info: hf_datasets.SplitInfo, split: str
@@ -318,7 +358,7 @@ class HuggingfaceDatasetBuilder(
   def _write_shards(
       self,
       shard_specs_by_split: Mapping[str, Sequence[_ShardSpec]],
-  ) -> Mapping[str, Sequence[int]]:
+  ) -> Mapping[str, Sequence[_ShardInfo]]:
     """Writes shards to files.
 
     Args:
@@ -340,22 +380,32 @@ class HuggingfaceDatasetBuilder(
         hf_builder=self._hf_builder,
         example_writer=self._example_writer(),
         features=self.info.features,
+        ignore_hf_errors=self._ignore_hf_errors,
     )
 
     if self._tfds_num_proc is None:
-      shard_sizes = list(map(write_shard, shard_specs))
+      shard_infos = list(map(write_shard, shard_specs))
     else:
       with multiprocessing.Pool(processes=self._tfds_num_proc) as pool:
-        shard_sizes = pool.map(write_shard, shard_specs)
+        shard_infos = pool.map(write_shard, shard_specs)
 
     shard_idx = 0
-    shard_sizes_by_split: dict[str, Sequence[int]] = {}
+    shard_infos_by_split: dict[str, Sequence[_ShardInfo]] = {}
     for split, shard_specs in shard_specs_by_split.items():
-      shard_sizes_by_split[split] = shard_sizes[
+      shard_infos_by_split[split] = shard_infos[
           shard_idx : shard_idx + len(shard_specs)
       ]
       shard_idx += len(shard_specs)
-    return shard_sizes_by_split
+    expected_num_examples = sum(spec.num_examples for spec in shard_specs)
+    if self._ignore_hf_errors and expected_num_examples > 0:
+      num_exceptions = sum(info.num_exceptions for info in shard_infos)
+      percentage_exceptions = num_exceptions / expected_num_examples * 100
+      logging.info(
+          'Got %d exceptions (%.2f%%) during Hugging Face generation',
+          num_exceptions,
+          percentage_exceptions,
+      )
+    return shard_infos_by_split
 
 
 def builder(

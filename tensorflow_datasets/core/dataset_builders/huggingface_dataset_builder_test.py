@@ -106,6 +106,7 @@ def test_download_and_prepare(builder):
   ):
     for feature in ['number', 'text', 'image']:
       assert np.array_equal(element[feature], expected[feature])
+  assert len(ds['train_clean']) == 2
 
 
 def test_all_parameters_are_passed_down_to_hf(builder):
