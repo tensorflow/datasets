@@ -29,7 +29,7 @@ flags.DEFINE_boolean('overwrite', False, 'If True, overwrites the data.')
 flags.DEFINE_string(
     'from_directory',
     tfds.core.constants.DATA_DIR,
-    'Where to get the info files from (datasets/ dir on placer).',
+    'Where to get the info files from (datasets/ dir).',
 )
 flags.DEFINE_string(
     'to_directory', None, 'Path where dataset info files will be copied.'
