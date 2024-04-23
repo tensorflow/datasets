@@ -202,12 +202,13 @@ class DatasetReference:
       provided.
     data_dir: Optional data dir where this dataset is located. If None, defaults
       to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
+      falls back to '~/tensorflow_datasets'.
     split_mapping: mapping between split names. If the `DatasetCollection` wants
       to use different split names than the source datasets, then this mapping
       can be used. For example, if the collection uses the split `valid`, but
       this dataset uses the split `validation`, then the `split_mapping` should
       be `{'validation': 'valid'}`.
-  """
+  """  # fmt: skip
 
   dataset_name: str
   namespace: None | str = None
