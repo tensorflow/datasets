@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import enum
 import functools
-from typing import Any, List, Union
+from typing import Any
 
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
@@ -44,15 +44,15 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   """
 
   @functools.cached_property
-  def flat_features(self) -> List[Any]:
+  def flat_features(self) -> list[Any]:
     return self._flatten(self)
 
   @functools.cached_property
-  def flat_serialized_info(self) -> List[Any]:
+  def flat_serialized_info(self) -> list[Any]:
     return self._flatten(self.get_serialized_info())
 
   @functools.cached_property
-  def flat_sequence_ranks(self) -> List[int]:
+  def flat_sequence_ranks(self) -> list[int]:
     return [_get_sequence_rank(s) for s in self.flat_serialized_info]  # pylint: disable=not-an-iterable
 
   def _decode_example_generic(
@@ -129,7 +129,7 @@ class TopLevelFeature(feature_lib.FeatureConnector):
 
   def deserialize_example(
       self,
-      serialized_example: Union[tf.Tensor, bytes],
+      serialized_example: tf.Tensor | bytes,
       *,
       decoders=None,
   ) -> utils.TensorDict:
@@ -151,7 +151,7 @@ class TopLevelFeature(feature_lib.FeatureConnector):
 
   def deserialize_example_np(
       self,
-      serialized_example: Union[tf.Tensor, bytes],
+      serialized_example: tf.Tensor | bytes | memoryview,
       *,
       decoders=None,
   ) -> utils.NpArrayOrScalarDict:
