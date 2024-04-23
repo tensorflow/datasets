@@ -29,7 +29,7 @@ from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 
 @dataclasses.dataclass(frozen=True)

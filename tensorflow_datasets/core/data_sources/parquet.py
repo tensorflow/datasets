@@ -38,14 +38,14 @@ class _ParquetTable:
       return []
     # All elements are written in the first column (see core.ParquetFileAdapter)
     elements = self.table.take(keys).column(0)
-    return [element.as_buffer() for element in elements]
+    return [bytes(element.as_buffer()) for element in elements]
 
   def __getitem__(self, key: int) -> Any:
     """Retrieves the n-th element from the Parquet table."""
     # The element is written in the first column (see core.ParquetFileAdapter)
     element = self.table.slice(key, 1).column(0)
     if len(element) == 1:
-      return element[0].as_buffer()
+      return bytes(element[0].as_buffer())
     raise IndexError(f'Could not find element at index {key}')
 
   def __len__(self) -> int:

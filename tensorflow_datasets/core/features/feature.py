@@ -41,7 +41,7 @@ from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.utils.lazy_imports_utils import tf_agents
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 from google.protobuf import descriptor
 from google.protobuf import json_format

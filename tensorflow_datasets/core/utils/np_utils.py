@@ -20,7 +20,7 @@ from typing import Any, Callable, Tuple, Union
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 
 @py_utils.memoize()

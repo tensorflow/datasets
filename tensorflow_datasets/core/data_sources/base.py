@@ -26,7 +26,7 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import type_utils
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 T = TypeVar('T')
 

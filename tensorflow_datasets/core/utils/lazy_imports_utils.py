@@ -112,6 +112,7 @@ with epy.lazy_imports():
   import pandas
   import pyarrow
   from pyarrow import parquet
+  import tree
 
 
 with epy.lazy_imports(

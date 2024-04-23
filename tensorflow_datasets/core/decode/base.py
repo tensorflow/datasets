@@ -19,7 +19,7 @@ import abc
 import functools
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 
 class Decoder(abc.ABC):
