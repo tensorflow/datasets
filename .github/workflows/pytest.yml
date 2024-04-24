@@ -85,7 +85,7 @@ jobs:
         shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
         # TF suppported versions: https://www.tensorflow.org/install/pip#software_requirements
         python-version: ['3.10', '3.11']
-        os-version: [ubuntu-latest, macos-latest]
+        os-version: [ubuntu-20.04, macos-latest]
 
     steps:
     - uses: actions/checkout@v3
