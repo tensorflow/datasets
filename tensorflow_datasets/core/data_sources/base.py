@@ -77,7 +77,7 @@ class BaseDataSource(MappingView, Sequence):
   data_source: DataSource[Any] = dataclasses.field(init=False)
 
   def __getitem__(self, record_key: int) -> Any:
-    if not isinstance(record_key, int):
+    if isinstance(record_key, Sequence):
       logging.error(
           'Calling DataSource.__getitem__() with sequence '
           'of record keys (%s) is deprecated. Either pass a single '
