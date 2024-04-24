@@ -1062,11 +1062,17 @@ toc:
     title: nyu_franka_play_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/nyu_rot_dataset_converted_externally_to_rlds
     title: nyu_rot_dataset_converted_externally_to_rlds
+  - path: /datasets/catalog/plex_robosuite
+    status: nightly
+    title: plex_robosuite
   - path: /datasets/catalog/robo_set
     status: nightly
     title: robo_set
   - path: /datasets/catalog/roboturk
     title: roboturk
+  - path: /datasets/catalog/spoc
+    status: nightly
+    title: spoc
   - path: /datasets/catalog/stanford_hydra_dataset_converted_externally_to_rlds
     title: stanford_hydra_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/stanford_kuka_multimodal_dataset_converted_externally_to_rlds
