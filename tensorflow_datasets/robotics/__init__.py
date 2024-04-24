@@ -54,8 +54,10 @@ from tensorflow_datasets.robotics.rtx import MimicPlay
 from tensorflow_datasets.robotics.rtx import NyuDoorOpeningSurprisingEffectiveness
 from tensorflow_datasets.robotics.rtx import NyuFrankaPlayDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import NyuRotDatasetConvertedExternallyToRlds
+from tensorflow_datasets.robotics.rtx import PlexRobosuite
 from tensorflow_datasets.robotics.rtx import RoboSet
 from tensorflow_datasets.robotics.rtx import Roboturk
+from tensorflow_datasets.robotics.rtx import Spoc
 from tensorflow_datasets.robotics.rtx import StanfordHydraDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import StanfordKukaMultimodalDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import StanfordMaskVitConvertedExternallyToRlds
