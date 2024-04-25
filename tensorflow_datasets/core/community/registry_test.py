@@ -153,7 +153,7 @@ def test_load_register_for_path_mixed():
 
 
 def test_community_register():
-  assert 'huggingface' in registry_lib.community_register.list_namespaces()
+  assert 'huggingface' in registry_lib.community_register().list_namespaces()
 
 
 def _write_dummy_config(content: str, tmp_path: str) -> epath.Path:

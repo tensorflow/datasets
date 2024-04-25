@@ -45,10 +45,10 @@ def test_load_hf_dataset():
 ])
 def test_community_public_load():
   with mock.patch(
-      'tensorflow_datasets.core.community.community_register.list_builders',
+      'tensorflow_datasets.core.community.registry.DatasetRegistry.list_builders',
       return_value=['ns:ds'],
   ), mock.patch(
-      'tensorflow_datasets.core.community.community_register.builder_cls',
+      'tensorflow_datasets.core.community.registry.DatasetRegistry.builder_cls',
       return_value=testing.DummyDataset,
   ), mock.patch(
       'tensorflow_datasets.core.registered.list_imported_builders',

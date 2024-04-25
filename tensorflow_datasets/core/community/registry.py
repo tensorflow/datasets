@@ -18,6 +18,7 @@
 from collections.abc import Iterable, Mapping, Sequence
 import concurrent.futures
 import difflib
+import functools
 import multiprocessing
 import os
 from typing import Any, Type
@@ -308,4 +309,6 @@ class DatasetRegistry(register_base.BaseRegister):
     return result
 
 
-community_register = DatasetRegistry(config_lib.community_config)
+@functools.lru_cache(maxsize=1)
+def community_register() -> DatasetRegistry:
+  return DatasetRegistry(config_lib.get_community_config())

@@ -78,7 +78,7 @@ def list_builders(
   datasets = registered.list_imported_builders()
   if with_community_datasets:
     if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
-      datasets += community.community_register.list_builders()
+      datasets += community.community_register().list_builders()
   return datasets
 
 
@@ -112,7 +112,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   if ds_name.namespace:
     # `namespace:dataset` are loaded from the community register
     if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
-      return community.community_register.builder_cls(ds_name)
+      return community.community_register().builder_cls(ds_name)
     else:
       raise ValueError(
           f'Cannot load {ds_name} when community datasets are disabled'
@@ -191,9 +191,9 @@ def builder(
           name=name.name, **builder_kwargs)
     if (
         visibility.DatasetType.COMMUNITY_PUBLIC.is_available()
-        and community.community_register.has_namespace(name.namespace)
+        and community.community_register().has_namespace(name.namespace)
     ):
-      return community.community_register.builder(name=name, **builder_kwargs)
+      return community.community_register().builder(name=name, **builder_kwargs)
 
   # First check whether we can find the corresponding dataset builder code
   try:

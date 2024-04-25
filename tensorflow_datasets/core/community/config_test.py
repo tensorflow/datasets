@@ -17,6 +17,7 @@ from tensorflow_datasets.core.community import config as config_lib
 
 
 def test_community_config():
-  assert "huggingface" in config_lib.community_config.config_per_namespace
-  assert "kubric" in config_lib.community_config.config_per_namespace
-  assert "robotics" in config_lib.community_config.config_per_namespace
+  community_config = config_lib.get_community_config()
+  assert "huggingface" in community_config.config_per_namespace
+  assert "kubric" in community_config.config_per_namespace
+  assert "robotics" in community_config.config_per_namespace
