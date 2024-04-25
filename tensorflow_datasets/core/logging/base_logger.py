@@ -17,6 +17,7 @@
 
 from typing import Any, Dict, Optional, Union
 
+from etils import epath
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download as download_lib
 from tensorflow_datasets.core import file_adapters

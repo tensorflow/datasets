@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """TFDS logging module."""
+
 import abc
 import atexit
 import collections
@@ -503,3 +504,5 @@ class as_data_source(_DsbuilderMethodDecorator):  # pylint: disable=invalid-name
         split=args and args[0] or kwargs.get("split"),
         decoders=kwargs.get("decoders"),
     )
+
+
