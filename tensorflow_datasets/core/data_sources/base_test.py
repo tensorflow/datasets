@@ -86,9 +86,9 @@ def test_read_write(
   assert len(data_source) == 3
   for i in range(3):
     assert data_source[i] == {'id': i}
-  assert data_source[[0, 2]] == [{'id': 0}, {'id': 2}]
-  assert data_source[range(0, 2)] == [{'id': 0}, {'id': 1}]
-  assert data_source[[]] == []  # pylint: disable=g-explicit-bool-comparison
+  assert data_source.__getitems__([0, 2]) == [{'id': 0}, {'id': 2}]
+  assert data_source.__getitems__(range(0, 2)) == [{'id': 0}, {'id': 1}]
+  assert data_source.__getitems__([]) == []  # pylint: disable=g-explicit-bool-comparison
   for i, element in enumerate(data_source):
     assert element == {'id': i}
 
