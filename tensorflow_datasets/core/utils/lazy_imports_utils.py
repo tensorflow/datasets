@@ -109,9 +109,13 @@ with epy.lazy_imports(error_callback=mlcroissant_error_callback):
 
 with epy.lazy_imports():
   import apache_beam
+  import click
   import pandas
+  import psutil
   import pyarrow
+  import promise
   from pyarrow import parquet
+  import requests
   import tree
 
 

@@ -16,7 +16,7 @@
 """Typing annotation utils."""
 
 import typing
-from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
+from typing import Any, Type, TypeVar
 
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -27,17 +27,17 @@ T = TypeVar('T')
 
 # Note: `TupleOrList` avoid abiguity from `Sequence` (`str` is `Sequence[str]`,
 # `bytes` is `Sequence[int]`).
-TupleOrList = Union[Tuple[T, ...], List[T]]
-ListOrElem = Union[T, List[T]]
+TupleOrList = tuple[T, ...] | list[T]
+ListOrElem = T | list[T]
 
-TreeDict = Union[T, Dict[str, 'TreeDict']]
-Tree = Union[T, Any]
-ListOrTreeOrElem = Union[T, TreeDict[T], List[T]]
-NpArrayOrScalar = Union[bytes, float, int, np.ndarray, str]
+TreeDict = T | dict[str, 'TreeDict']
+Tree = T | Any
+ListOrTreeOrElem = T | TreeDict[T] | list[T]
+NpArrayOrScalar = bytes | float | int | np.ndarray | str
 
 if typing.TYPE_CHECKING:
-  Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
-  TfdsDType = Union[np.dtype, Type[np.generic], tf.DType, tf.dtypes.DType]
+  Tensor = tf.Tensor | tf.SparseTensor | tf.RaggedTensor
+  TfdsDType = np.dtype | Type[np.generic] | tf.DType | tf.dtypes.DType
 else:
   Tensor = Any
   TfdsDType = Any
@@ -46,24 +46,18 @@ else:
 TensorDict = TreeDict[Tensor]
 NpArrayOrScalarDict = TreeDict[NpArrayOrScalar]
 
-Dim = Optional[int]
+Dim = int | None
 Shape = TupleOrList[Dim]
 
-JsonValue = Union[
-    str,
-    bool,
-    int,
-    float,
-    None,
-    List['JsonValue'],
-    Dict[str, 'JsonValue'],  # pytype: disable=not-supported-yet
-]
-Json = Dict[str, JsonValue]
+JsonValue = (
+    str | bool | int | float | None | list['JsonValue'] | dict[str, 'JsonValue']
+)
+Json = dict[str, JsonValue]
 
 # Types for the tfrecord example construction.
 
-Key = Union[int, str, bytes]
-KeySerializedExample = Tuple[Key, bytes]  # `(key, serialized_proto)`
+Key = int | str | bytes
+KeySerializedExample = tuple[Key, bytes]  # `(key, serialized_proto)`
 
 
 __all__ = sorted(

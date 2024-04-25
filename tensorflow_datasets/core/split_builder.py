@@ -24,8 +24,6 @@ import sys
 from typing import Any, Callable, Optional, Union
 
 from absl import logging
-import click
-import psutil
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import naming
@@ -34,6 +32,8 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
+from tensorflow_datasets.core.utils.lazy_imports_utils import click
+from tensorflow_datasets.core.utils.lazy_imports_utils import psutil
 
 # Example key used for shuffling
 Key = str | int

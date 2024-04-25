@@ -15,9 +15,16 @@
 
 """Utils to handle resources."""
 
+import functools
 from etils import epath
 
 to_write_path = epath.to_write_path
+
+
+@functools.lru_cache(maxsize=1)
+def root_tfds_path() -> epath.Path:
+  """Path to `tensorflow_datasets/` root dir."""
+  return epath.resource_path('tensorflow_datasets')
 
 
 def tfds_path(*relative_path: epath.PathLike) -> epath.Path:
@@ -40,7 +47,7 @@ def tfds_path(*relative_path: epath.PathLike) -> epath.Path:
   Returns:
     path: The root TFDS path.
   """
-  return epath.resource_path('tensorflow_datasets').joinpath(*relative_path)
+  return root_tfds_path().joinpath(*relative_path)
 
 
 def tfds_write_path(*relative_path: epath.PathLike) -> epath.Path:

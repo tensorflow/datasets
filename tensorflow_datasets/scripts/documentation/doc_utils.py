@@ -19,28 +19,30 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 """
 
 import collections
+from collections.abc import Mapping, Sequence
 import dataclasses
 import json
 import os
 import textwrap
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Dict of `full_names_dict['dataset']['config']['version']`
-FullNamesDict = Dict[str, Dict[str, Dict[str, Any]]]
+FullNamesDict = dict[str, dict[str, dict[str, Any]]]
 # Same as `FullNamesDict`, but contains `True` for nightly datasets:
 # * New dataset: nightly_dict['dataset'] is True
 # * New config: nightly_dict['dataset']['config'] is True
 # * New version: nightly_dict['dataset']['config']['version'] is True
-NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
+NightlyDict = dict[str, bool | dict[str, bool | dict[str, bool]]]
 
 
 def get_pwc_catalog_urls() -> Mapping[str, str]:
-  with open(constants.PWC_LINKS_PATH, 'r') as f:
-    return json.load(f)
+  filepath = utils.tfds_path(constants.PWC_LINKS_PATH)
+  return json.loads(filepath.read_text())
 
 
 @dataclasses.dataclass
@@ -48,21 +50,21 @@ class DocUtilPaths:
   """Structure containing the utils paths."""
 
   # VisualizationDocUtil
-  fig_base_path: Optional[tfds.typing.PathLike] = tfds.core.gcs_path(
+  fig_base_path: tfds.typing.PathLike | None = tfds.core.gcs_path(
       'visualization/fig/'
   )
   fig_base_url: str = (
       'https://storage.googleapis.com/tfds-data/visualization/fig/'
   )
   # DataframeDocUtil
-  df_base_path: Optional[tfds.typing.PathLike] = tfds.core.gcs_path(
+  df_base_path: tfds.typing.PathLike | None = tfds.core.gcs_path(
       'visualization/dataframe'
   )
   df_base_url: str = (
       'https://storage.googleapis.com/tfds-data/visualization/dataframe/'
   )
   # NightlyDocUtil
-  nightly_path: Optional[tfds.typing.PathLike] = tfds.core.utils.tfds_path(
+  nightly_path: tfds.typing.PathLike | None = tfds.core.utils.tfds_path(
       'stable_versions.txt'
   )
 
@@ -162,7 +164,7 @@ class DataframeDocUtil(object):
     return tf.io.gfile.exists(filepath)
 
 
-def _split_full_name(full_name: str) -> Tuple[str, str, str]:
+def _split_full_name(full_name: str) -> tuple[str, str, str]:
   """Extracts the `(ds name, config, version)` from the full_name."""
   if not tfds.core.load.is_full_name(full_name):
     raise ValueError(
@@ -176,7 +178,7 @@ def _split_full_name(full_name: str) -> Tuple[str, str, str]:
   return ds_name, config, version
 
 
-def _full_names_to_dict(full_names: List[str]) -> FullNamesDict:
+def _full_names_to_dict(full_names: Sequence[str]) -> FullNamesDict:
   """Creates the dict `d['dataset']['config']['version']`."""
   full_names_dict = collections.defaultdict(
       lambda: collections.defaultdict(  # pylint: disable=g-long-lambda
@@ -249,7 +251,7 @@ class NightlyDocUtil(object):
 
   def is_builder_nightly(
       self,
-      builder: Union[tfds.core.DatasetBuilder, str],
+      builder: tfds.core.DatasetBuilder | str,
   ) -> bool:
     """Returns `True` if the builder is new."""
     if isinstance(builder, tfds.core.DatasetBuilder):

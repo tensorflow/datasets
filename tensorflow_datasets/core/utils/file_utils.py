@@ -24,6 +24,7 @@ import time
 
 from absl import logging
 from etils import epath
+from etils import epy
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import docs

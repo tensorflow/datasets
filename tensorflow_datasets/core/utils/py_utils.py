@@ -36,9 +36,15 @@ import uuid
 
 from absl import logging as absl_logging
 from etils import epath
-from six.moves import urllib
+from etils import epy
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from six.moves import urllib
+  # pylint: enable=g-import-not-at-top
+
 
 Tree = type_utils.Tree
 

@@ -23,8 +23,8 @@ import posixpath
 from typing import Iterator, Mapping, MutableMapping, Optional, Set, Tuple
 
 from etils import epath
-import requests
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import requests
 
 JsonValue = utils.JsonValue
 

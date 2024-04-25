@@ -15,6 +15,7 @@
 
 """Async download API with checksum verification. No business logic."""
 
+from collections.abc import Iterable, Iterator
 import concurrent.futures
 import contextlib
 import dataclasses
@@ -23,30 +24,36 @@ import hashlib
 import io
 import os
 import re
-from typing import Any, ContextManager, Iterable, Iterator, Optional, Tuple, Union
+import typing
+from typing import Any, ContextManager
 import urllib
 
 from etils import epath
-import promise
-import requests
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
+from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util as download_utils_lib
 from tensorflow_datasets.core.utils import tqdm_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import promise
+from tensorflow_datasets.core.utils.lazy_imports_utils import requests
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 MAX_RETRIES = 10
 
-# Response interface. Has `.url` and `.headers` attribute
-Response = Union[requests.Response, urllib.response.addinfourl]
+if typing.TYPE_CHECKING:
+  # Response interface. Has `.url` and `.headers` attribute
+  Response = requests.Response | urllib.response.addinfourl
+else:
+  Response = Any
 
 
 @dataclasses.dataclass(eq=False, frozen=True)
 class DownloadResult:
-  path: epath.Path
-  url_info: checksums_lib.UrlInfo
+  path: epath.Path | None
+  url_info: checksums_lib.UrlInfo | None
 
 
 @utils.memoize()
@@ -54,9 +61,67 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
   return _Downloader(*args, **kwargs)
 
 
+def _read_url_info(url_path: epath.PathLike) -> checksums_lib.UrlInfo:
+  """Loads the `UrlInfo` from the `.INFO` file."""
+  file_info = resource_lib.read_info_file(url_path)
+  if 'url_info' not in file_info:
+    raise ValueError(
+        'Could not find `url_info` in {}. This likely indicates that '
+        'the files where downloaded with a previous version of TFDS (<=3.1.0). '
+    )
+  url_info = file_info['url_info']
+  url_info.setdefault('filename', None)
+  url_info['size'] = utils.Size(url_info['size'])
+  return checksums_lib.UrlInfo(**url_info)
+
+
+def get_cached_path(
+    manually_downloaded_path: epath.Path | None,
+    checksum_path: epath.Path | None,
+    url_path: epath.Path,
+    expected_url_info: checksums_lib.UrlInfo | None,
+) -> DownloadResult:
+  """Returns the downloaded path and computed url-info.
+
+  If the path is not cached, or that `url_path` does not match checksums,
+  the file will be downloaded again.
+
+  Path can be cached at three different locations:
+
+  Args:
+    manually_downloaded_path: Manually downloaded in `dl_manager.manual_dir`
+    checksum_path: Cached in the final destination (if checksum known)
+    url_path: Cached in the tmp destination (if checksum unknown).
+    expected_url_info: Registered checksum (if known)
+  """
+  # User has manually downloaded the file.
+  if manually_downloaded_path and manually_downloaded_path.exists():
+    return DownloadResult(path=manually_downloaded_path, url_info=None)
+
+  # Download has been cached (checksum known)
+  elif checksum_path and resource_lib.Resource.exists_locally(checksum_path):
+    # `path = f(checksum)` was found, so url_info match
+    return DownloadResult(checksum_path, url_info=expected_url_info)
+
+  # Download has been cached (checksum unknown)
+  elif resource_lib.Resource.exists_locally(url_path):
+    # Info restored from `.INFO` file
+    computed_url_info = _read_url_info(url_path)
+    # If checksums are now registered but do not match, trigger a new
+    # download (e.g. previous file corrupted, checksums updated)
+    if expected_url_info and computed_url_info != expected_url_info:
+      return DownloadResult(path=None, url_info=None)
+    else:
+      return DownloadResult(path=url_path, url_info=computed_url_info)
+
+  # Else file not found (or has bad checksums). (re)download.
+  else:
+    return DownloadResult(path=None, url_info=None)
+
+
 def _filename_from_content_disposition(
     content_disposition: str,
-) -> Optional[str]:
+) -> str | None:
   """Extract the filename from the content disposition.
 
   Parse the content_definition as defined in:
@@ -119,9 +184,9 @@ class _Downloader(object):
 
   def __init__(
       self,
-      max_simultaneous_downloads: Optional[
-          int
-      ] = _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS,
+      max_simultaneous_downloads: (
+          int | None
+      ) = _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS,
       checksumer=None,
   ):
     """Init _Downloader instance.
@@ -264,7 +329,7 @@ class _Downloader(object):
 def _open_url(
     url: str,
     **kwargs: Any,
-) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
+) -> ContextManager[tuple[Response, Iterable[bytes]]]:
   """Context manager to open an url.
 
   Args:
@@ -284,7 +349,7 @@ def _open_url(
 def _open_with_requests(
     url: str,
     **kwargs: Any,
-) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+) -> Iterator[tuple[Response, Iterable[bytes]]]:
   """Open url with request."""
   with requests.Session() as session:
     retries = requests.packages.urllib3.util.retry.Retry(
@@ -309,7 +374,7 @@ def _open_with_requests(
 def _open_with_urllib(
     url: str,
     **kwargs: Any,
-) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+) -> Iterator[tuple[Response, Iterable[bytes]]]:
   del kwargs
   with urllib.request.urlopen(url) as response:  # pytype: disable=attribute-error
     yield (
