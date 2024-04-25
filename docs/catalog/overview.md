@@ -670,13 +670,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`nyu_door_opening_surprising_effectiveness`](nyu_door_opening_surprising_effectiveness.md)
 *   [`nyu_franka_play_dataset_converted_externally_to_rlds`](nyu_franka_play_dataset_converted_externally_to_rlds.md)
 *   [`nyu_rot_dataset_converted_externally_to_rlds`](nyu_rot_dataset_converted_externally_to_rlds.md)
-*   [`plex_robosuite`](plex_robosuite.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`robo_set`](robo_set.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`roboturk`](roboturk.md)
-*   [`spoc`](spoc.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`stanford_hydra_dataset_converted_externally_to_rlds`](stanford_hydra_dataset_converted_externally_to_rlds.md)
 *   [`stanford_kuka_multimodal_dataset_converted_externally_to_rlds`](stanford_kuka_multimodal_dataset_converted_externally_to_rlds.md)
 *   [`stanford_mask_vit_converted_externally_to_rlds`](stanford_mask_vit_converted_externally_to_rlds.md)
