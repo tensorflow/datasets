@@ -43,6 +43,7 @@ class Logger:
       metadata: call_metadata.CallMetadata,
       import_time_ms_tensorflow: int,
       import_time_ms_dataset_builders: int,
+      import_time_ms: int,
   ):
     """Callback called when user calls `import tensorflow_datasets`."""
     pass
