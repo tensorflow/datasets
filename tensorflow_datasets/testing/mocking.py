@@ -116,10 +116,13 @@ def _getitems(
     serialized: bool = False,
 ) -> Sequence[Any]:
   """Function to overwrite __getitems__ in data sources."""
-  return [
+  items = [
       _getitem(self, record_key, generator, serialized=serialized)
       for record_key in record_keys
   ]
+  if serialized:
+    return np.array(items)
+  return items
 
 
 def _deserialize_example_np(serialized_example, *, decoders=None):
