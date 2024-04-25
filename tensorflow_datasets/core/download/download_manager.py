@@ -47,13 +47,6 @@ with epy.lazy_imports():
 
 # pylint: disable=logging-fstring-interpolation
 
-Tree = type_utils.Tree
-
-Url = str | resource_lib.Resource
-ExtractPath = epath.PathLike | resource_lib.Resource
-
-
-def get_downloader(*args: Any, **kwargs: Any):
   return downloader.get_downloader(*args, **kwargs)
 
 
