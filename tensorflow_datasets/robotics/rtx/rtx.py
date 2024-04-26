@@ -1390,3 +1390,23 @@ class BridgeDataMsr(dataset_importer_builder.DatasetImporterBuilder):
 
   def get_relative_dataset_location(self):
     return 'bridge_data_msr/0.0.1'
+
+
+class PlexRobosuite(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `plex_robosuite` dataset."""
+
+  def get_description(self):
+    return (
+        "A dataset of high-qualty demonstration trajectories for Robosuite's"
+        ' Door, Stack, PickPlaceMilk, PickPlaceBread, PickPlaceCereal, and'
+        ' NutAssemblyRound tasks, 75 demonstrations per each.'
+    )
+
+  def get_citation(self):
+    return 'https://doi.org/10.48550/arXiv.2303.08789'
+
+  def get_homepage(self):
+    return 'https://microsoft.github.io/PLEX/'
+
+  def get_relative_dataset_location(self):
+    return 'plex_robosuite/0.0.1'
