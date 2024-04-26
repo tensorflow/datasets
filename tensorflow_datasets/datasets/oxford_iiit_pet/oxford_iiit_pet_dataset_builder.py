@@ -18,6 +18,7 @@
 import os
 import xml.etree.ElementTree
 
+from etils.epath import Path
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -64,8 +65,8 @@ _LABEL_CLASSES = [
 ]
 _SPECIES_CLASSES = ["Cat", "Dog"]
 
-# List of samples with corrupt image files
-_SKIP_SAMPLES = [
+# List of samples with corrupt image files (mostly wrong format -> we are fixing these during dataset creation)
+_CORRUPT_SAMPLES = [
     "beagle_116",
     "chihuahua_121",
     "Abyssinian_5",
@@ -80,15 +81,15 @@ _SKIP_SAMPLES = [
     "Egyptian_Mau_191"
 ]
 
+_EMPTY_BBOX = tfds.features.BBox(0., 0., 0., 0.)
+
+
 def _get_head_bbox(annon_filepath):
   """Read head bbox from annotation XML file."""
-  with tf.io.gfile.GFile(annon_filepath, "r") as f:
+  with Path(annon_filepath).open("r") as f:
     root = xml.etree.ElementTree.parse(f).getroot()
 
-    # Disable pytype to avoid attribute-error due to find returning
-    # Optional[Element]
-    # pytype: disable=attribute-error
-    size = root.find("size")
+    size = root.find("size")  # pytype: disable=annotation-type-mismatch
     width = float(size.find("width").text)
     height = float(size.find("height").text)
 
@@ -106,7 +107,10 @@ def _get_head_bbox(annon_filepath):
 class Builder(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
 
-  VERSION = tfds.core.Version("3.2.0")
+  VERSION = tfds.core.Version("4.0.0")
+  RELEASE_NOTES = {
+      '4.0.0': 'Add head bounding boxes. Fix corrupt iamges. Update dataset URL.'
+  }
 
   def _info(self):
     return self.dataset_info_from_configs(
@@ -118,7 +122,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "segmentation_mask": tfds.features.Image(
                 shape=(None, None, 1), use_colormap=True
             ),
-            "head": tfds.features.BBoxFeature()
+            "head_bbox": tfds.features.BBoxFeature()
         }),
         supervised_keys=("image", "label"),
         homepage="http://www.robots.ox.ac.uk/~vgg/data/pets/",
@@ -162,13 +166,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(
       self, images_dir_path, annotations_dir_path, images_list_file
   ):
-    with tf.io.gfile.GFile(images_list_file, "r") as images_list:
+    with Path(images_list_file).open("r") as images_list:
       for line in images_list:
         image_name, label, species, _ = line.strip().split(" ")
 
-        # skip corrupt samples
-        if image_name in _SKIP_SAMPLES:
-          continue
+        image_path = os.path.join(images_dir_path, image_name + ".jpg")
+
+        if image_name in _CORRUPT_SAMPLES:
+            # some images caused 'Corrupt JPEG data...' messages during training or any other iteration
+            # recoding them once fixes the issue (discussion: https://github.com/tensorflow/datasets/issues/2188)
+            with Path(image_path).open("rb") as image_file:
+                img_data = image_file.read()
+                img_tensor = tf.image.decode_image(img_data)
+                if tf.shape(img_tensor)[-1] == 4:  # some files have an alpha channel -> remove
+                    img_tensor = img_tensor[:, :, :-1]
+                img_recoded = tf.io.encode_jpeg(img_tensor)
+            with Path(image_path).open("wb") as image_file:
+                image_file.write(img_recoded.numpy())
 
         trimaps_dir_path = os.path.join(annotations_dir_path, "trimaps")
         xmls_dir_path = os.path.join(annotations_dir_path, "xmls")
@@ -181,9 +195,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
         try:
             head_bbox = _get_head_bbox(os.path.join(xmls_dir_path, xml_name))
-        except tf.errors.NotFoundError:
+        except FileNotFoundError as e:
             # test samples do not have an annotation file
-            head_bbox = tfds.features.BBox(0., 0., 0., 0.)
+            head_bbox = _EMPTY_BBOX
 
         record = {
             "image": os.path.join(images_dir_path, image_name),
@@ -191,6 +205,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "species": species,
             "file_name": image_name,
             "segmentation_mask": os.path.join(trimaps_dir_path, trimap_name),
-            "head": head_bbox
+            "head_bbox": head_bbox
         }
         yield image_name, record
