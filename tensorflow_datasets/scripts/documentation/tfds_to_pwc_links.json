@@ -43,7 +43,7 @@
   "covid19sum": "https://paperswithcode.com/dataset/cord-19",
   "crema_d": "https://paperswithcode.com/dataset/crema-d",
   "criteo": "https://paperswithcode.com/dataset/criteo",
-  "d4rl_mujoco_ant": "https://paperswithcode.com/dataset/d4rl",
+  "d4rl_mujoco_walker2d": "https://paperswithcode.com/dataset/d4rl",
   "dart": "https://paperswithcode.com/dataset/dart",
   "davis": "https://paperswithcode.com/dataset/davis",
   "deep_weeds": "https://paperswithcode.com/dataset/deepweeds",
