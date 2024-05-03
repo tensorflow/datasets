@@ -30,6 +30,7 @@ class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
     return hf_datasets.DatasetInfo(
         description='description',
         citation='citation',
+        license='test-license',
         features=None,
         version='1.0.0',
     )
@@ -89,6 +90,9 @@ def mock_huggingface_dataset_builder(
       'foo/bar', 'config', other_arg='this is another arg'
   )
   login_to_hf.assert_called_once_with('SECRET_TOKEN')
+  assert builder.info.description == 'description'
+  assert builder.info.citation == 'citation'
+  assert builder.info.redistribution_info.license == 'test-license'
   yield builder
 
 

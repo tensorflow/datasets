@@ -273,7 +273,7 @@ class HuggingfaceDatasetBuilder(
         description=self._hf_info.description,
         features=huggingface_utils.convert_hf_features(self._hf_features()),
         citation=self._hf_info.citation,
-        license=self._hf_info.license,
+        license=self._get_license(),
         supervised_keys=_extract_supervised_keys(self._hf_info),
     )
 
@@ -406,6 +406,24 @@ class HuggingfaceDatasetBuilder(
           percentage_exceptions,
       )
     return shard_infos_by_split
+
+  def _get_license(self) -> str | None:
+    """Implements heuristics to get the license from HuggingFace."""
+    # First heuristic: check the DatasetInfo from Hugging Face datasets.
+    if self._hf_info.license:
+      return self._hf_info.license
+    huggingface_hub = lazy_imports_lib.lazy_imports.huggingface_hub
+    # Retrieve the dataset info from the HuggingFace Hub.
+    repo_id, token = self._hf_repo_id, self._hf_hub_token
+    dataset_info = huggingface_hub.dataset_info(repo_id, token=token)
+    # Second heuristic: check the card data.
+    if 'license' in dataset_info.card_data:
+      return dataset_info.card_data['license']
+    # Third heuristic: check the tags.
+    for tag in dataset_info.tags:
+      if tag.startswith('license:'):
+        return tag[len('license:') :]
+    return None
 
 
 def builder(
