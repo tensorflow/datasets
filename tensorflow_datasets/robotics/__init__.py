@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Robotics datasets."""
+from tensorflow_datasets.robotics.language_table import LanguageTable
 from tensorflow_datasets.robotics.mt_opt import MtOpt
 from tensorflow_datasets.robotics.rtx import AlohaMobile
 from tensorflow_datasets.robotics.rtx import AsuTableTopConvertedExternallyToRlds
