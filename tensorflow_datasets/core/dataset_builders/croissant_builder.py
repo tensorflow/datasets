@@ -181,12 +181,14 @@ class CroissantBuilder(
 
     if not record_set_ids:
       record_set_ids = [
-          py_utils.make_valid_name(record_set.id)
-          for record_set in self.metadata.record_sets
+          record_set.id for record_set in self.metadata.record_sets
       ]
+    config_names = [
+        py_utils.make_valid_name(record_set) for record_set in record_set_ids
+    ]
     self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
-        dataset_builder.BuilderConfig(name=record_set_id)
-        for record_set_id in record_set_ids
+        dataset_builder.BuilderConfig(name=config_name)
+        for config_name in config_names
     ]
 
     self._disable_shuffling = disable_shuffling
@@ -248,6 +250,7 @@ class CroissantBuilder(
   def _generate_examples(
       self,
   ) -> split_builder_lib.SplitGenerator:
-    records = self.dataset.records(self.builder_config.name)
+    record_set = self.get_record_set(self.builder_config.name)
+    records = self.dataset.records(record_set.id)
     for i, record in enumerate(records):
       yield i, record
