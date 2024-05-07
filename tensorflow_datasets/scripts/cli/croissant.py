@@ -19,7 +19,7 @@ Example usage:
 ```
 tfds build_croissant \
   --jsonld=/tmp/croissant.json \
-  --out_dir=/tmp/foo \
+  --data_dir=/tmp/foo \
   --file_format=array_record \
   --record_sets=record1 --record_sets=record2 \
   --mapping='{"document.csv": "~/Downloads/document.csv"}"'
@@ -31,30 +31,17 @@ from collections.abc import Sequence
 import json
 
 from etils import epath
-from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
+from tensorflow_datasets.scripts.cli import cli_utils
 
 
-def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
+def add_parser_arguments(parser: argparse.ArgumentParser):
   """Add arguments for `build_croissant` subparser."""
   parser.add_argument(
       '--jsonld',
       type=str,
       help='The Croissant config file for the given dataset.',
       required=True,
-  )
-  parser.add_argument(
-      '--out_dir',
-      type=epath.Path,
-      help='Path where the converted dataset will be stored.',
-      required=True,
-  )
-  parser.add_argument(
-      '--file_format',
-      default=file_adapters.FileFormat.ARRAY_RECORD.value,
-      type=str,
-      choices=[file_format.value for file_format in file_adapters.FileFormat],
-      help='File format to convert the dataset to.',
   )
   parser.add_argument(
       '--record_sets',
@@ -76,8 +63,13 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
       ),
   )
 
+  cli_utils.add_debug_argument_group(parser)
+  cli_utils.add_path_argument_group(parser)
+  cli_utils.add_generation_argument_group(parser)
+  cli_utils.add_publish_argument_group(parser)
 
-def register_subparser(parsers: argparse._SubParsersAction) -> None:
+
+def register_subparser(parsers: argparse._SubParsersAction):
   """Add subparser for `convert_format` command."""
   parser = parsers.add_parser(
       'build_croissant',
@@ -87,27 +79,36 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
   parser.set_defaults(
       subparser_fn=lambda args: prepare_croissant_builder(
           jsonld=args.jsonld,
-          out_dir=args.out_dir,
-          out_file_format=args.file_format,
+          data_dir=args.data_dir,
+          file_format=args.file_format,
           record_sets=args.record_sets,
           mapping=args.mapping,
+          download_dir=args.download_dir,
+          publish_dir=args.publish_dir,
+          skip_if_published=args.skip_if_published,
+          overwrite=args.overwrite,
       )
   )
 
 
 def prepare_croissant_builder(
     jsonld: epath.PathLike,
-    out_dir: epath.PathLike,
-    out_file_format: str,
+    data_dir: epath.PathLike,
+    file_format: str,
     record_sets: Sequence[str],
     mapping: str | None,
+    download_dir: epath.PathLike | None,
+    publish_dir: epath.PathLike | None,
+    skip_if_published: bool,
+    overwrite: bool,
 ) -> None:
+  # pyformat: disable
   """Creates a Croissant Builder and runs the preparation.
 
   Args:
     jsonld: The Croissant config file for the given dataset
-    out_dir: Path where the converted dataset will be stored.
-    out_file_format: File format to convert the dataset to.
+    data_dir: Path where the converted dataset will be stored.
+    file_format: File format to convert the dataset to.
     record_sets: The `@id`s of the record sets to generate. Each record set will
       correspond to a separate config. If not specified, it will use all the
       record sets
@@ -115,7 +116,15 @@ def prepare_croissant_builder(
       manual downloads. If `document.csv` is the FileObject and you downloaded
       it to `~/Downloads/document.csv`, you can specify
       `mapping={"document.csv": "~/Downloads/document.csv"}`.,
+    download_dir: Where to place downloads. Default to `<data_dir>/downloads/`.
+    publish_dir: Where to optionally publish the dataset after it has been
+      generated successfully. Should be the root data dir under which datasets
+      are stored. If unspecified, dataset will not be published.
+    skip_if_published: If the dataset with the same version and config is
+      already published, then it will not be regenerated.
+    overwrite: Delete pre-existing dataset if it exists.
   """
+  # pyformat: enable
   if not record_sets:
     record_sets = None
 
@@ -124,12 +133,20 @@ def prepare_croissant_builder(
       mapping = json.loads(mapping)
     except json.JSONDecodeError as e:
       raise ValueError(f'Error parsing mapping parameter: {mapping}') from e
+
   builder = croissant_builder.CroissantBuilder(
       jsonld=jsonld,
       record_set_ids=record_sets,
-      file_format=out_file_format,
-      data_dir=out_dir,
+      file_format=file_format,
+      data_dir=data_dir,
       mapping=mapping,
   )
-  builder.download_and_prepare()
-  return
+  cli_utils.download_and_prepare(
+      builder=builder,
+      download_config=None,
+      download_dir=epath.Path(download_dir) if download_dir else None,
+      publish_dir=epath.Path(publish_dir) if publish_dir else None,
+      skip_if_published=skip_if_published,
+      freeze_files=freeze_files,
+      overwrite=overwrite,
+  )

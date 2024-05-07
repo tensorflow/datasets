@@ -15,13 +15,12 @@
 
 r"""Prepare a Croissant dataset.
 
-Instructions:
-
+Example usage:
 ```
 python tensorflow_datasets/scripts/prepare_croissant.py \
   --jsonld=/tmp/croissant.json \
-  --out_dir=/tmp/foo \
-  --out_file_format=array_record \
+  --data_dir=/tmp/foo \
+  --file_format=array_record \
   --record_sets=record1,record2 \
   --mapping='{"document.csv": "~/Downloads/document.csv"}"'
 ```
@@ -36,14 +35,14 @@ from tensorflow_datasets.scripts.cli import croissant
 _JSONLD = flags.DEFINE_string(
     name='jsonld', default=None, help='Path to the JSONLD file.', required=True
 )
-_OUT_DIR = flags.DEFINE_string(
-    name='out_dir',
+_DATA_DIR = flags.DEFINE_string(
+    name='data_dir',
     default=None,
     help='Path where the converted dataset will be stored.',
     required=True,
 )
-_OUT_FILE_FORMAT = flags.DEFINE_enum_class(
-    name='out_file_format',
+_FILE_FORMAT = flags.DEFINE_enum_class(
+    name='file_format',
     default=file_adapters.FileFormat.ARRAY_RECORD,
     enum_class=file_adapters.FileFormat,
     help='File format to convert the dataset to.',
@@ -67,15 +66,46 @@ _MAPPING = flags.DEFINE_string(
         ' specify`--mapping=\'{"document.csv": "~/Downloads/document.csv"}\''
     ),
 )
+_DOWNLOAD_DIR = flags.DEFINE_string(
+    name='download_dir',
+    default=None,
+    help='Where to place downloads. Default to `<data_dir>/downloads/`.',
+)
+_PUBLISH_DIR = flags.DEFINE_string(
+    name='publish_dir',
+    default=None,
+    help=(
+        'Where to optionally publish the dataset after it has been generated '
+        'successfully. Should be the root data dir under which datasets are '
+        'stored. If unspecified, dataset will not be published.'
+    ),
+)
+_SKIP_IF_PUBLISHED = flags.DEFINE_bool(
+    name='skip_if_published',
+    default=False,
+    help=(
+        'If the dataset with the same version and config is already published, '
+        'then it will not be regenerated.'
+    ),
+)
+_OVERWRITE = flags.DEFINE_bool(
+    name='overwrite',
+    default=False,
+    help='Delete pre-existing dataset if it exists.',
+)
 
 
 def main(_):
   croissant.prepare_croissant_builder(
       jsonld=_JSONLD.value,
-      out_dir=_OUT_DIR.value,
-      out_file_format=_OUT_FILE_FORMAT.value.value,
+      data_dir=_DATA_DIR.value,
+      file_format=_FILE_FORMAT.value.value,
       record_sets=_RECORD_SETS.value,
       mapping=_MAPPING.value,
+      download_dir=_DOWNLOAD_DIR.value,
+      publish_dir=_PUBLISH_DIR.value,
+      skip_if_published=_SKIP_IF_PUBLISHED.value,
+      overwrite=_OVERWRITE.value,
   )
 
 

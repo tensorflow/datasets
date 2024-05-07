@@ -417,3 +417,22 @@ def expand_glob(path: epath.PathLike) -> Sequence[epath.Path]:
     )
     return [path]
   return list(epath.Path('/').glob(path_str[1:]))
+
+
+def publish_data(
+    from_data_dir: epath.Path,
+    to_data_dir: epath.Path,
+    overwrite: bool = False,
+) -> None:
+  """Publishes the data from the given `from_data_dir` to `to_data_dir`.
+
+  Arguments:
+    from_data_dir: the folder whose data needs to be published.
+    to_data_dir: folder where the data should be published. Should include
+      config and version.
+    overwrite: whether to overwrite existing data in the `publish_root_dir` if
+      it exists.
+  """
+  to_data_dir.mkdir(parents=True, exist_ok=True)
+  for filepath in from_data_dir.iterdir():
+    filepath.copy(dst=to_data_dir / filepath.name, overwrite=overwrite)

@@ -25,10 +25,8 @@ from absl.testing import parameterized
 from etils import epath
 import pytest
 import tensorflow_datasets as tfds
-from tensorflow_datasets import testing
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.scripts.cli import build as build_lib
 from tensorflow_datasets.scripts.cli import main
 
@@ -280,27 +278,6 @@ def test_build_import():
   # --imports register the dataset
   ds_module = 'tensorflow_datasets.testing.dummy_dataset.dummy_dataset'
   assert _build(f'dummy_dataset --imports {ds_module}') == ['dummy_dataset']
-
-
-def test_publish_data_dir(mock_fs: testing.MockFs):
-  del mock_fs
-  builder = testing.DummyMnist(data_dir='/tmp')
-  actual = build_lib._publish_data_dir(
-      publish_dir=epath.Path('/a/b'), builder=builder
-  )
-  assert actual == epath.Path('/a/b/dummy_mnist/3.0.1')
-  assert build_lib._publish_data_dir(publish_dir=None, builder=builder) is None
-
-
-def test_publish_data(mock_fs: testing.MockFs):
-  builder = testing.DummyMnist(data_dir='/tmp')
-  expected_from = epath.Path('/tmp') / 'dummy_mnist/3.0.1'
-  filename = 'dataset_info.json'
-  content = 'a'
-  mock_fs.add_file(path=expected_from / filename, content=content)
-  publish_data_dir = epath.Path('/a/b')
-  build_lib._publish_data(publish_data_dir=publish_data_dir, builder=builder)
-  assert mock_fs.read_file(publish_data_dir / filename) == content
 
 
 def test_download_only():
