@@ -258,7 +258,7 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 class EMNIST(MNIST):
   """Emnist dataset."""
 
-  URL = "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
+  URL = "https://biometrics.nist.gov/cs_links/EMNIST/gzip.zip"
   VERSION = tfds.core.Version("3.0.0")
   RELEASE_NOTES = {
       "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
