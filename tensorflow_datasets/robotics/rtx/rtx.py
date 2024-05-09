@@ -1410,3 +1410,25 @@ class PlexRobosuite(dataset_importer_builder.DatasetImporterBuilder):
 
   def get_relative_dataset_location(self):
     return 'plex_robosuite/0.0.1'
+
+
+class SpocRobot(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `spoc_robot` dataset."""
+
+  def get_description(self):
+    return ''
+
+  def get_citation(self):
+    return r"""@article{spoc2023,
+    author    = {Kiana Ehsani, Tanmay Gupta, Rose Hendrix, Jordi Salvador, Luca Weihs, Kuo-Hao Zeng, Kunal Pratap Singh, Yejin Kim, Winson Han, Alvaro Herrasti, Ranjay Krishna, Dustin Schwenk, Eli VanderBilt, Aniruddha Kembhavi},
+    title     = {Imitating Shortest Paths in Simulation Enables Effective Navigation and Manipulation in the Real World},
+    journal   = {arXiv},
+    year      = {2023},
+    eprint    = {2312.02976},
+}"""
+
+  def get_homepage(self):
+    return 'https://spoc-robot.github.io/'
+
+  def get_relative_dataset_location(self):
+    return 'spoc/0.0.1'

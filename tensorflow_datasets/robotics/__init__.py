@@ -57,6 +57,7 @@ from tensorflow_datasets.robotics.rtx import NyuRotDatasetConvertedExternallyToR
 from tensorflow_datasets.robotics.rtx import PlexRobosuite
 from tensorflow_datasets.robotics.rtx import RoboSet
 from tensorflow_datasets.robotics.rtx import Roboturk
+from tensorflow_datasets.robotics.rtx import SpocRobot
 from tensorflow_datasets.robotics.rtx import StanfordHydraDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import StanfordKukaMultimodalDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import StanfordMaskVitConvertedExternallyToRlds
