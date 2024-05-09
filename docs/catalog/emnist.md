@@ -52,18 +52,7 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Updated broken download URL
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+*   **Download size**: `535.73 MiB`
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -94,6 +83,19 @@ Split | Examples
 
 *   **Config description**: EMNIST ByClass
 
+*   **Dataset size**: `349.16 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 116,323
+`'train'` | 697,932
+
 *   **Feature structure**:
 
 ```python
@@ -114,6 +116,19 @@ label   | ClassLabel   |             | int64 |
 ## emnist/bymerge
 
 *   **Config description**: EMNIST ByMerge
+
+*   **Dataset size**: `349.16 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 116,323
+`'train'` | 697,932
 
 *   **Feature structure**:
 
@@ -136,6 +151,19 @@ label   | ClassLabel   |             | int64 |
 
 *   **Config description**: EMNIST Balanced
 
+*   **Dataset size**: `56.63 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 18,800
+`'train'` | 112,800
+
 *   **Feature structure**:
 
 ```python
@@ -156,6 +184,19 @@ label   | ClassLabel   |             | int64 |
 ## emnist/letters
 
 *   **Config description**: EMNIST Letters
+
+*   **Dataset size**: `44.14 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 14,800
+`'train'` | 88,800
 
 *   **Feature structure**:
 
@@ -178,6 +219,19 @@ label   | ClassLabel   |             | int64 |
 
 *   **Config description**: EMNIST Digits
 
+*   **Dataset size**: `120.32 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 40,000
+`'train'` | 240,000
+
 *   **Feature structure**:
 
 ```python
@@ -198,6 +252,19 @@ label   | ClassLabel   |             | int64 |
 ## emnist/mnist
 
 *   **Config description**: EMNIST MNIST
+
+*   **Dataset size**: `30.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 60,000
 
 *   **Feature structure**:
 
