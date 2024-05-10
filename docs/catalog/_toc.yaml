@@ -1070,6 +1070,9 @@ toc:
     title: robo_set
   - path: /datasets/catalog/roboturk
     title: roboturk
+  - path: /datasets/catalog/spoc_robot
+    status: nightly
+    title: spoc_robot
   - path: /datasets/catalog/stanford_hydra_dataset_converted_externally_to_rlds
     title: stanford_hydra_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/stanford_kuka_multimodal_dataset_converted_externally_to_rlds
