@@ -26,88 +26,76 @@ python tensorflow_datasets/scripts/prepare_croissant.py \
 ```
 """
 
+import dataclasses
+
 from absl import app
-from absl import flags
+from etils import eapp
+from etils import epath
+import simple_parsing
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.scripts.cli import croissant
 
 
-_JSONLD = flags.DEFINE_string(
-    name='jsonld', default=None, help='Path to the JSONLD file.', required=True
-)
-_DATA_DIR = flags.DEFINE_string(
-    name='data_dir',
-    default=None,
-    help='Path where the converted dataset will be stored.',
-    required=True,
-)
-_FILE_FORMAT = flags.DEFINE_enum_class(
-    name='file_format',
-    default=file_adapters.FileFormat.ARRAY_RECORD,
-    enum_class=file_adapters.FileFormat,
-    help='File format to convert the dataset to.',
-)
-_RECORD_SETS = flags.DEFINE_list(
-    name='record_sets',
-    default=[],
-    help=(
-        'The names of the record sets to generate. Each record set will'
-        ' correspond to a separate config. If not specified, it will use all'
-        ' the record sets.'
-    ),
-)
-_MAPPING = flags.DEFINE_string(
-    name='mapping',
-    default=None,
-    help=(
-        'Mapping filename->filepath as a Python dict[str, str] to handle'
-        ' manual downloads. If `document.csv` is the FileObject and you'
-        ' downloaded it to `~/Downloads/document.csv`, you can'
-        ' specify`--mapping=\'{"document.csv": "~/Downloads/document.csv"}\''
-    ),
-)
-_DOWNLOAD_DIR = flags.DEFINE_string(
-    name='download_dir',
-    default=None,
-    help='Where to place downloads. Default to `<data_dir>/downloads/`.',
-)
-_PUBLISH_DIR = flags.DEFINE_string(
-    name='publish_dir',
-    default=None,
-    help=(
-        'Where to optionally publish the dataset after it has been generated '
-        'successfully. Should be the root data dir under which datasets are '
-        'stored. If unspecified, dataset will not be published.'
-    ),
-)
-_SKIP_IF_PUBLISHED = flags.DEFINE_bool(
-    name='skip_if_published',
-    default=False,
-    help=(
-        'If the dataset with the same version and config is already published, '
-        'then it will not be regenerated.'
-    ),
-)
-_OVERWRITE = flags.DEFINE_bool(
-    name='overwrite',
-    default=False,
-    help='Delete pre-existing dataset if it exists.',
-)
+@dataclasses.dataclass
+class CmdArgs:
+  """CLI arguments for preparing a Croissant dataset.
+
+  Attributes:
+    jsonld: Path to the JSONLD file.
+    data_dir: Path where the converted dataset will be stored.
+    file_format: File format to convert the dataset to.
+    record_sets: The names of the record sets to generate. Each record set will
+      correspond to a separate config. If not specified, it will use all the
+      record sets.
+    mapping: Mapping filename->filepath as a Python dict[str, str] to handle
+      manual downloads. If `document.csv` is the FileObject and you downloaded
+      it to `~/Downloads/document.csv`, you can specify
+      `--mapping='{"document.csv": "~/Downloads/document.csv"}'`
+    download_dir: Where to place downloads. Default to `<data_dir>/downloads/`.
+    publish_dir: Where to optionally publish the dataset after it has been
+      generated successfully. Should be the root data dir under which datasets
+      are stored. If unspecified, dataset will not be published.
+    skip_if_published: If the dataset with the same version and config is
+      already published, then it will not be regenerated.
+    overwrite: Delete pre-existing dataset if it exists.
+  """
+
+  jsonld: epath.PathLike
+  data_dir: epath.PathLike
+  # Need to override the default use of `Enum.name` for choice options.
+  file_format: str = simple_parsing.choice(
+      *(file_format.value for file_format in file_adapters.FileFormat),
+      default=file_adapters.FileFormat.ARRAY_RECORD.value,
+  )
+  # Need to manually parse comma-separated list of values, see:
+  # https://github.com/lebrice/SimpleParsing/issues/142.
+  record_sets: list[str] = simple_parsing.field(
+      default_factory=list,
+      type=lambda record_sets_str: record_sets_str.split(','),
+      nargs='?',
+  )
+  mapping: str | None = None
+  download_dir: epath.PathLike | None = None
+  publish_dir: epath.PathLike | None = None
+  skip_if_published: bool = False
+  overwrite: bool = False
+
+parse_flags = eapp.make_flags_parser(CmdArgs)
 
 
-def main(_):
+def main(args: CmdArgs):
   croissant.prepare_croissant_builder(
-      jsonld=_JSONLD.value,
-      data_dir=_DATA_DIR.value,
-      file_format=_FILE_FORMAT.value.value,
-      record_sets=_RECORD_SETS.value,
-      mapping=_MAPPING.value,
-      download_dir=_DOWNLOAD_DIR.value,
-      publish_dir=_PUBLISH_DIR.value,
-      skip_if_published=_SKIP_IF_PUBLISHED.value,
-      overwrite=_OVERWRITE.value,
+      jsonld=args.jsonld,
+      data_dir=args.data_dir,
+      file_format=args.file_format,
+      record_sets=args.record_sets,
+      mapping=args.mapping,
+      download_dir=args.download_dir,
+      publish_dir=args.publish_dir,
+      skip_if_published=args.skip_if_published,
+      overwrite=args.overwrite,
   )
 
 
 if __name__ == '__main__':
-  app.run(main)
+  app.run(main, flags_parser=parse_flags)
