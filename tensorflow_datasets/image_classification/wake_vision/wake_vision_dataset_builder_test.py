@@ -17,8 +17,8 @@ class WakeVisionTest(tfds.testing.DatasetBuilderTestCase):
       'train_images': ['wake-vision-train-dummy-1.tar.gz', 'wake-vision-train-dummy-2.tar.gz'],
       'validation_images': ['wake-vision-validation-dummy.tar.gz'],
       'test_images': ['wake-vision-test-dummy.tar.gz'],
-      'train_large_metadata': 'wake_vision_train_image.csv',
-      'train_quality_metadata': 'wake_vision_train_bbox.csv',
+      'train_large_metadata': 'wake_vision_train_large.csv',
+      'train_quality_metadata': 'wake_vision_train_quality.csv',
       'validation_metadata': 'wake_vision_validation.csv',
       'test_metadata': 'wake_vision_test.csv',
   }
