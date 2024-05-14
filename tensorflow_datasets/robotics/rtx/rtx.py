@@ -37,7 +37,7 @@ class Bridge(dataset_importer_builder.DatasetImporterBuilder):
     return 'https://rail-berkeley.github.io/bridgedata/'
 
   def get_relative_dataset_location(self):
-    return 'bridge/0.1.0'
+    return 'bridge_data_v2/0.0.1'
 
 
 class TacoPlay(dataset_importer_builder.DatasetImporterBuilder):
