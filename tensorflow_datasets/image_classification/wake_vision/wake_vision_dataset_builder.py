@@ -46,11 +46,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         description=
         """
-        The Wake Vision dataset for person detection.
-
-        The dataset contains images with annotations of whether each image contains a person. Additional annotations about perceived gender, perceived age, subject distance, lighting conditions, depictions, and specific body parts are also available for some subsets of the dataset.
-
-        We publish the annotations of this dataset under a CC BY 4.0 license. All images in the dataset are from the Open Images v7 dataset, which sourced images from Flickr listed as having a CC BY 2.0 license.
+        "Wake Vision" is a large, high-quality dataset featuring over 6 million images, significantly exceeding the scale and diversity of current tinyML datasets (100x). This dataset includes images with annotations of whether each image contains a person. Additionally, it incorporates a comprehensive fine-grained benchmark to assess fairness and robustness, covering perceived gender, perceived age, subject distance, lighting conditions, and depictions. Hosted on Harvard Dataverse, it provides images, CSV files, and code to generate a Wake Vision TensorFlow Dataset. Annotations are published under a CC BY 4.0 license, and all images are sourced from the Open Images v7 dataset under a CC BY 2.0 license.
         """
         ,
         features=tfds.features.FeaturesDict({
