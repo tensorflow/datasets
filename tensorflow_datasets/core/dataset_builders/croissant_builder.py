@@ -51,6 +51,7 @@ from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils import version as version_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 
@@ -75,7 +76,7 @@ def datatype_converter(
     NotImplementedError
   """
   if field.is_enumeration:
-    raise NotImplementedError("Not implemented yet.")
+    raise NotImplementedError('Not implemented yet.')
 
   field_data_type = field.data_type
 
@@ -95,7 +96,7 @@ def datatype_converter(
   elif field_data_type == mlc.DataType.IMAGE_OBJECT:
     return image_feature.Image(doc=field.description)
   else:
-    raise ValueError(f"Unknown data type: {field_data_type}.")
+    raise ValueError(f'Unknown data type: {field_data_type}.')
 
 
 def _extract_license(license_: Any) -> str | None:
@@ -116,19 +117,19 @@ def _extract_license(license_: Any) -> str | None:
   elif isinstance(license_, mlc.CreativeWork):
     possible_fields = [license_.name, license_.description, license_.url]
     fields = [field for field in possible_fields if field]
-    return "[" + "][".join(fields) + "]"
+    return '[' + ']['.join(fields) + ']'
   raise ValueError(
-      f"license_ should be mlc.CreativeWork | str. Got {type(license_)}"
+      f'license_ should be mlc.CreativeWork | str. Got {type(license_)}'
   )
 
 
 def _get_license(metadata: Any) -> str | None:
   """Gets the license from the metadata."""
   if not isinstance(metadata, mlc.Metadata):
-    raise ValueError(f"metadata should be mlc.Metadata. Got {type(metadata)}")
+    raise ValueError(f'metadata should be mlc.Metadata. Got {type(metadata)}')
   licenses = metadata.license
   if licenses:
-    return ", ".join([_extract_license(l) for l in licenses if l])
+    return ', '.join([_extract_license(l) for l in licenses if l])
   return None
 
 
@@ -146,6 +147,7 @@ class CroissantBuilder(
       int_dtype: type_utils.TfdsDType | None = np.int64,
       float_dtype: type_utils.TfdsDType | None = np.float32,
       mapping: Mapping[str, epath.PathLike] | None = None,
+      overwrite_version: str | None = None,
       **kwargs: Any,
   ):
     """Initializes a CroissantBuilder.
@@ -164,7 +166,8 @@ class CroissantBuilder(
       mapping: Mapping filename->filepath as a Python dict[str, str] to handle
         manual downloads. If `document.csv` is the FileObject and you downloaded
         it to `~/Downloads/document.csv`, you can specify
-        `mapping={"document.csv": "~/Downloads/document.csv"}`.,
+        `mapping={"document.csv": "~/Downloads/document.csv"}`.
+      overwrite_version: Semantic version of the dataset to be set.
       **kwargs: kwargs to pass to GeneratorBasedBuilder directly.
     """
     if mapping is None:
@@ -176,7 +179,9 @@ class CroissantBuilder(
     # In TFDS, version is a mandatory attribute, while in Croissant it is only a
     # recommended attribute. If the version is unspecified in Croissant, we set
     # it to `1.0.0` in TFDS.
-    self.VERSION = self.dataset.metadata.version or "1.0.0"  # pylint: disable=invalid-name
+    self.VERSION = version_utils.Version(  # pylint: disable=invalid-name
+        overwrite_version or self.dataset.metadata.version or '1.0.0'
+    )
     self.RELEASE_NOTES = {}  # pylint: disable=invalid-name
 
     if not record_set_ids:
@@ -222,7 +227,7 @@ class CroissantBuilder(
       if py_utils.make_valid_name(record_set.id) == record_set_id:
         return record_set
     raise ValueError(
-        f"Did not find any record set with the name {record_set_id}."
+        f'Did not find any record set with the name {record_set_id}.'
     )
 
   def get_features(self) -> Optional[feature_lib.FeatureConnector]:
@@ -245,7 +250,7 @@ class CroissantBuilder(
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     # This will be updated when partitions are implemented in Croissant, ref to:
     # https://docs.google.com/document/d/1saz3usja6mk5ugJXNF64_uSXsOzIgbIV28_bu1QamVY
-    return {"default": self._generate_examples()}  # pylint: disable=unreachable
+    return {'default': self._generate_examples()}  # pylint: disable=unreachable
 
   def _generate_examples(
       self,

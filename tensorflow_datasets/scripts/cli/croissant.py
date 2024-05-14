@@ -60,6 +60,7 @@ class CmdArgs:
     skip_if_published: If the dataset with the same version and config is
       already published, then it will not be regenerated.
     overwrite: Delete pre-existing dataset if it exists.
+    overwrite_version: Semantic version of the dataset to be set.
   """
 
   jsonld: epath.PathLike
@@ -81,6 +82,7 @@ class CmdArgs:
   publish_dir: epath.PathLike | None = None
   skip_if_published: bool = False
   overwrite: bool = False
+  overwrite_version: str | None = None
 
 
 def register_subparser(parsers: argparse._SubParsersAction):
@@ -123,6 +125,7 @@ def prepare_croissant_builder(args: CmdArgs) -> None:
       file_format=args.file_format,
       data_dir=args.data_dir,
       mapping=mapping,
+      overwrite_version=args.overwrite_version,
   )
   cli_utils.download_and_prepare(
       builder=builder,
