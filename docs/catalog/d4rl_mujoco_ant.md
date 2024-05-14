@@ -20,12 +20,6 @@ standardized environments and datasets for training and benchmarking algorithms.
 The datasets follow the [RLDS format](https://github.com/google-research/rlds)
 to represent steps and episodes.
 
-*   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/d4rl">
-    Explore on Papers With Code
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Config description**: See more details about the task and its versions in
     https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym
 
