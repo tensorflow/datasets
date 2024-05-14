@@ -73,6 +73,7 @@ REQUIRED_PKGS = [
     'psutil',
     'pyarrow',
     'requests>=2.19.0',
+    'simple_parsing',
     'tensorflow-metadata',
     'termcolor',
     'toml',
