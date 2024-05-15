@@ -262,6 +262,12 @@ class ExampleSerializerTest(parameterized.TestCase, testing.SubTestCase):
     )
     self.assertEqual(out[1], tensor_info)
 
+  def test_uint_to_tf_feature_overflow(self):
+    tensor_info = feature_lib.TensorInfo(shape=(), dtype=np.uint64)
+    bigint = np.array((1 << 63) + 10, dtype=np.uint64)
+    # Does not raise value error.
+    example_serializer._item_to_tf_feature(bigint, tensor_info)
+
   @parameterized.parameters((np.int64), (tf.int64))
   def test_item_to_tf_feature_incorrect_shape(self, dtype):
     # Test shape check in _item_to_tf_feature raises ValueError.

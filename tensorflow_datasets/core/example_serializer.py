@@ -187,7 +187,9 @@ def _item_to_tf_feature(
   # Convert boolean to integer (tf.train.Example does not support bool)
   if v.dtype == np.bool_:
     v = v.astype(int)
-
+  if v.dtype == np.uint64:
+    # We cannot store uint64 in tf.Example, so we bitcast to int64.
+    v = v.view(np.int64)
   vals = v.flat  # Convert v into a 1-d array (without extra copy)
   if dtype_utils.is_integer(v.dtype):
     return tf_feature_pb2.Feature(
