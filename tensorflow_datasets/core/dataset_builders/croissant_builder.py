@@ -42,6 +42,7 @@ import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -173,7 +174,9 @@ class CroissantBuilder(
     if mapping is None:
       mapping = {}
     self.dataset = mlc.Dataset(jsonld, mapping=mapping)
-    self.name = py_utils.make_valid_name(self.dataset.metadata.name)
+    self.name = py_utils.make_valid_name(
+        naming.camelcase_to_snakecase(self.dataset.metadata.name)
+    )
     self.metadata = self.dataset.metadata
 
     # In TFDS, version is a mandatory attribute, while in Croissant it is only a
@@ -189,7 +192,8 @@ class CroissantBuilder(
           record_set.id for record_set in self.metadata.record_sets
       ]
     config_names = [
-        py_utils.make_valid_name(record_set) for record_set in record_set_ids
+        py_utils.make_valid_name(naming.camelcase_to_snakecase(record_set))
+        for record_set in record_set_ids
     ]
     self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
         dataset_builder.BuilderConfig(name=config_name)
