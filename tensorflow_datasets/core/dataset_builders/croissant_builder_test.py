@@ -194,7 +194,7 @@ class CroissantBuilderTest(testing.TestCase):
     )
 
   def test_dataset_info(self):
-    assert self.builder.name == "dummy_dataset"
+    assert self.builder.name == "dummydataset"
     assert self.builder.version == "1.2.0"
     assert (
         self.builder._info().citation

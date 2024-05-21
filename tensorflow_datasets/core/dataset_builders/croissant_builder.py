@@ -42,7 +42,6 @@ import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
-from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -50,7 +49,7 @@ from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version as version_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
@@ -174,9 +173,7 @@ class CroissantBuilder(
     if mapping is None:
       mapping = {}
     self.dataset = mlc.Dataset(jsonld, mapping=mapping)
-    self.name = py_utils.make_valid_name(
-        naming.camelcase_to_snakecase(self.dataset.metadata.name)
-    )
+    self.name = huggingface_utils.convert_hf_name(self.dataset.metadata.name)
     self.metadata = self.dataset.metadata
 
     # In TFDS, version is a mandatory attribute, while in Croissant it is only a
@@ -192,7 +189,7 @@ class CroissantBuilder(
           record_set.id for record_set in self.metadata.record_sets
       ]
     config_names = [
-        py_utils.make_valid_name(naming.camelcase_to_snakecase(record_set))
+        huggingface_utils.convert_hf_name(record_set)
         for record_set in record_set_ids
     ]
     self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
@@ -228,7 +225,7 @@ class CroissantBuilder(
   def get_record_set(self, record_set_id: str):
     """Returns the desired record set from self.metadata."""
     for record_set in self.dataset.metadata.record_sets:
-      if py_utils.make_valid_name(record_set.id) == record_set_id:
+      if huggingface_utils.convert_hf_name(record_set.id) == record_set_id:
         return record_set
     raise ValueError(
         f'Did not find any record set with the name {record_set_id}.'
