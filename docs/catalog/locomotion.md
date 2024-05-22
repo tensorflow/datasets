@@ -25,7 +25,7 @@ to represent steps and episodes.s
     [https://github.com/google-research/rlds](https://github.com/google-research/rlds)
 
 *   **Source code**:
-    [`tfds.rlds.locomotion.Locomotion`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/rlds/locomotion/locomotion.py)
+    [`tfds.rlds.datasets.locomotion.Locomotion`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/rlds/datasets/locomotion/locomotion.py)
 
 *   **Versions**:
 
