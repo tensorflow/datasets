@@ -18,7 +18,7 @@ import sys
 
 import pytest
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.rlds.locomotion import locomotion
+from tensorflow_datasets.rlds.datasets.locomotion import locomotion
 
 
 pytest.importorskip(

@@ -18,7 +18,7 @@ import sys
 
 import pytest
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.rlds.robosuite_panda_pick_place_can import robosuite_panda_pick_place_can
+from tensorflow_datasets.rlds.datasets.robosuite_panda_pick_place_can import robosuite_panda_pick_place_can
 
 
 pytest.importorskip(

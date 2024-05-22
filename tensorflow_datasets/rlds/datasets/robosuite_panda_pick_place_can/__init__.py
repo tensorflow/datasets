@@ -15,4 +15,4 @@
 
 """robosuite_panda_pick_place_can dataset."""
 
-from tensorflow_datasets.rlds.robosuite_panda_pick_place_can.robosuite_panda_pick_place_can import RobosuitePandaPickPlaceCan
+from tensorflow_datasets.rlds.datasets.robosuite_panda_pick_place_can.robosuite_panda_pick_place_can import RobosuitePandaPickPlaceCan
