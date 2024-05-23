@@ -15,13 +15,15 @@
 
 """Tests for all data sources."""
 
+import pickle
 from unittest import mock
 
+import cloudpickle
 from etils import epath
 import pytest
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_builder as dataset_builder_lib
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import file_adapters
@@ -77,7 +79,7 @@ _DATA_SOURCE_CLS = [
 )
 def test_read_write(
     tmp_path: epath.Path,
-    builder_cls: dataset_builder.DatasetBuilder,
+    builder_cls: dataset_builder_lib.DatasetBuilder,
     file_format: file_adapters.FileFormat,
 ):
   builder = builder_cls(data_dir=tmp_path, file_format=file_format)
@@ -106,7 +108,7 @@ _FILE_INSTRUCTIONS = [
 ]
 
 
-def create_dataset_info(file_format: file_adapters.FileFormat):
+def create_dataset_builder(file_format: file_adapters.FileFormat):
   with mock.patch.object(splits_lib, 'SplitInfo') as split_mock:
     split_mock.return_value.name = 'train'
     split_mock.return_value.file_instructions = _FILE_INSTRUCTIONS
@@ -114,7 +116,11 @@ def create_dataset_info(file_format: file_adapters.FileFormat):
     dataset_info.file_format = file_format
     dataset_info.splits = {'train': split_mock()}
     dataset_info.name = 'dataset_name'
-    return dataset_info
+
+    dataset_builder = mock.create_autospec(dataset_builder_lib.DatasetBuilder)
+    dataset_builder.info = dataset_info
+
+    return dataset_builder
 
 
 @pytest.mark.parametrize(
@@ -122,12 +128,14 @@ def create_dataset_info(file_format: file_adapters.FileFormat):
     _DATA_SOURCE_CLS,
 )
 def test_missing_split_raises_error(data_source_cls):
-  dataset_info = create_dataset_info(file_adapters.FileFormat.ARRAY_RECORD)
+  dataset_builder = create_dataset_builder(
+      file_adapters.FileFormat.ARRAY_RECORD
+  )
   with pytest.raises(
       ValueError,
       match="Unknown split 'doesnotexist'.",
   ):
-    data_source_cls(dataset_info, split='doesnotexist')
+    data_source_cls(dataset_builder, split='doesnotexist')
 
 
 @pytest.mark.usefixtures(*_FIXTURES)
@@ -136,8 +144,10 @@ def test_missing_split_raises_error(data_source_cls):
     _DATA_SOURCE_CLS,
 )
 def test_repr_returns_meaningful_string_without_decoders(data_source_cls):
-  dataset_info = create_dataset_info(file_adapters.FileFormat.ARRAY_RECORD)
-  source = data_source_cls(dataset_info, split='train')
+  dataset_builder = create_dataset_builder(
+      file_adapters.FileFormat.ARRAY_RECORD
+  )
+  source = data_source_cls(dataset_builder, split='train')
   name = data_source_cls.__name__
   assert (
       repr(source) == f"{name}(name=dataset_name, split='train', decoders=None)"
@@ -150,9 +160,11 @@ def test_repr_returns_meaningful_string_without_decoders(data_source_cls):
     _DATA_SOURCE_CLS,
 )
 def test_repr_returns_meaningful_string_with_decoders(data_source_cls):
-  dataset_info = create_dataset_info(file_adapters.FileFormat.ARRAY_RECORD)
+  dataset_builder = create_dataset_builder(
+      file_adapters.FileFormat.ARRAY_RECORD
+  )
   source = data_source_cls(
-      dataset_info,
+      dataset_builder,
       split='train',
       decoders={'my_feature': decode.SkipDecoding()},
   )
@@ -181,3 +193,18 @@ def test_data_source_is_sliceable():
     file_instructions = mock_array_record_data_source.call_args_list[1].args[0]
     assert file_instructions[0].skip == 0
     assert file_instructions[0].take == 30000
+
+
+# PyGrain requires that data sources are picklable.
+@pytest.mark.parametrize(
+    'file_format',
+    file_adapters.FileFormat.with_random_access(),
+)
+@pytest.mark.parametrize('pickle_module', [pickle, cloudpickle])
+def test_data_source_is_picklable_after_use(file_format, pickle_module):
+  with tfds.testing.tmp_dir() as data_dir:
+    builder = tfds.testing.DummyDataset(data_dir=data_dir)
+    builder.download_and_prepare(file_format=file_format)
+    data_source = builder.as_data_source(split='train')
+    assert data_source[0] == {'id': 0}
+    assert pickle_module.loads(pickle_module.dumps(data_source))[0] == {'id': 0}
