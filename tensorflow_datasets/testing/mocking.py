@@ -83,25 +83,13 @@ class PickableDataSourceMock(mock.MagicMock):
   """Makes MagicMock pickable in order to work with multiprocessing in Grain."""
 
   def __getstate__(self):
-    return {
-        'num_examples': len(self),
-        'generator': self._generator,
-        'serialize_example': self._serialize_example,
-    }
+    return {'num_examples': len(self), 'generator': self._generator}
 
   def __setstate__(self, state):
-    num_examples, generator, serialize_example = (
-        state['num_examples'],
-        state['generator'],
-        state['serialize_example'],
-    )
+    num_examples, generator = state['num_examples'], state['generator']
     self.__len__.return_value = num_examples
-    self.__getitem__ = functools.partial(
-        _getitem, generator=generator, serialize_example=serialize_example
-    )
-    self.__getitems__ = functools.partial(
-        _getitems, generator=generator, serialize_example=serialize_example
-    )
+    self.__getitem__ = functools.partial(_getitem, generator=generator)
+    self.__getitems__ = functools.partial(_getitems, generator=generator)
 
   def __reduce__(self):
     return (PickableDataSourceMock, (), self.__getstate__())
@@ -111,14 +99,13 @@ def _getitem(
     self,
     record_key: int,
     generator: RandomFakeGenerator,
-    serialize_example=None,
+    serialized: bool = False,
 ) -> Any:
   """Function to overwrite __getitem__ in data sources."""
-  del self
   example = generator[record_key]
-  if serialize_example:
+  if serialized:
     # Return serialized raw bytes
-    return serialize_example(example)
+    return self.dataset_info.features.serialize_example(example)
   return example
 
 
@@ -126,16 +113,34 @@ def _getitems(
     self,
     record_keys: Sequence[int],
     generator: RandomFakeGenerator,
-    serialize_example=None,
+    serialized: bool = False,
 ) -> Sequence[Any]:
   """Function to overwrite __getitems__ in data sources."""
   items = [
-      _getitem(self, record_key, generator, serialize_example=serialize_example)
+      _getitem(self, record_key, generator, serialized=serialized)
       for record_key in record_keys
   ]
-  if serialize_example:
+  if serialized:
     return np.array(items)
   return items
+
+
+def _deserialize_example_np(serialized_example, *, decoders=None):
+  """Function to overwrite dataset_info.features.deserialize_example_np.
+
+  Warning: this has to be defined in the outer scope in order for the function
+  to be pickable.
+
+  Args:
+    serialized_example: the example to deserialize.
+    decoders: optional decoders.
+
+  Returns:
+    The serialized example, because deserialization is taken care by
+      RandomFakeGenerator.
+  """
+  del decoders
+  return serialized_example
 
 
 class MockPolicy(enum.Enum):
@@ -380,27 +385,21 @@ def mock_data(
         # Force ARRAY_RECORD as the default file_format.
         return_value=file_adapters.FileFormat.ARRAY_RECORD,
     ):
-      # Make mock_data_source pickable with a given len:
+      self.info.features.deserialize_example_np = _deserialize_example_np
       mock_data_source.return_value.__len__.return_value = num_examples
-      # Make mock_data_source pickable with a given generator:
       mock_data_source.return_value._generator = (  # pylint:disable=protected-access
           generator
       )
-      # Make mock_data_source pickable with a given serialize_example:
-      mock_data_source.return_value._serialize_example = (  # pylint:disable=protected-access
-          self.info.features.serialize_example
-      )
-      serialize_example = self.info.features.serialize_example
       mock_data_source.return_value.__getitem__ = functools.partial(
-          _getitem, generator=generator, serialize_example=serialize_example
+          _getitem, generator=generator
       )
       mock_data_source.return_value.__getitems__ = functools.partial(
-          _getitems, generator=generator, serialize_example=serialize_example
+          _getitems, generator=generator
       )
 
       def build_single_data_source(split):
         single_data_source = array_record.ArrayRecordDataSource(
-            dataset_builder=self, split=split, decoders=decoders
+            dataset_info=self.info, split=split, decoders=decoders
         )
         return single_data_source
 

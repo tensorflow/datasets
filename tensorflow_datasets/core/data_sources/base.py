@@ -17,14 +17,12 @@
 
 from collections.abc import MappingView, Sequence
 import dataclasses
-import functools
 import typing
 from typing import Any, Generic, Iterable, Protocol, SupportsIndex, TypeVar
 
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tree
@@ -56,14 +54,6 @@ def file_instructions(
   return split_dict[split].file_instructions
 
 
-class _DatasetBuilder(Protocol):
-  """Protocol for the DatasetBuilder to avoid cyclic imports."""
-
-  @property
-  def info(self) -> dataset_info_lib.DatasetInfo:
-    ...
-
-
 @dataclasses.dataclass
 class BaseDataSource(MappingView, Sequence):
   """Base DataSource to override all dunder methods with the deserialization.
@@ -74,28 +64,22 @@ class BaseDataSource(MappingView, Sequence):
   deserialization/decoding.
 
   Attributes:
-    dataset_builder: The dataset builder.
+    dataset_info: The DatasetInfo of the
     split: The split to load in the data source.
     decoders: Optional decoders for decoding.
     data_source: The underlying data source to initialize in the __post_init__.
   """
 
-  dataset_builder: _DatasetBuilder
+  dataset_info: dataset_info_lib.DatasetInfo
   split: splits_lib.Split | None = None
   decoders: type_utils.TreeDict[decode.partial_decode.DecoderArg] | None = None
   data_source: DataSource[Any] = dataclasses.field(init=False)
 
-  @functools.cached_property
-  def _features(self) -> top_level_feature.TopLevelFeature:
-    """Caches features because we log the use of dataset_builder.info."""
-    features = self.dataset_builder.info.features
-    if not features:
-      raise ValueError('No feature defined in the dataset buidler.')
-    return features
-
   def __getitem__(self, key: SupportsIndex) -> Any:
     record = self.data_source[key.__index__()]
-    return self._features.deserialize_example_np(record, decoders=self.decoders)
+    return self.dataset_info.features.deserialize_example_np(
+        record, decoders=self.decoders
+    )
 
   def __getitems__(self, keys: Sequence[int]) -> Sequence[Any]:
     """Retrieves items by batch.
@@ -114,6 +98,7 @@ class BaseDataSource(MappingView, Sequence):
     if not keys:
       return []
     records = self.data_source.__getitems__(keys)
+    features = self.dataset_info.features
     if len(keys) != len(records):
       raise IndexError(
           f'Requested {len(keys)} records but got'
@@ -121,7 +106,7 @@ class BaseDataSource(MappingView, Sequence):
           f'{keys=}, {records=}'
       )
     return [
-        self._features.deserialize_example_np(record, decoders=self.decoders)
+        features.deserialize_example_np(record, decoders=self.decoders)
         for record in records
     ]
 
@@ -129,9 +114,8 @@ class BaseDataSource(MappingView, Sequence):
     decoders_repr = (
         tree.map_structure(type, self.decoders) if self.decoders else None
     )
-    name = self.dataset_builder.info.name
     return (
-        f'{self.__class__.__name__}(name={name}, '
+        f'{self.__class__.__name__}(name={self.dataset_info.name}, '
         f'split={self.split!r}, '
         f'decoders={decoders_repr})'
     )

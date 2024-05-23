@@ -20,8 +20,13 @@ future without backwards compatibility.
 """
 
 import dataclasses
+from typing import Any, Optional
 
+from tensorflow_datasets.core import dataset_info as dataset_info_lib
+from tensorflow_datasets.core import decode
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.data_sources import base
+from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
 
 
@@ -37,9 +42,18 @@ class ArrayRecordDataSource(base.BaseDataSource):
   source.
   """
 
+  dataset_info: dataset_info_lib.DatasetInfo
+  split: splits_lib.Split = None
+  decoders: Optional[type_utils.TreeDict[decode.partial_decode.DecoderArg]] = (
+      None
+  )
+  # In order to lazy load array_record, we don't load
+  # `array_record_data_source.ArrayRecordDataSource` here.
+  data_source: Any = dataclasses.field(init=False)
+  length: int = dataclasses.field(init=False)
+
   def __post_init__(self):
-    dataset_info = self.dataset_builder.info
-    file_instructions = base.file_instructions(dataset_info, self.split)
+    file_instructions = base.file_instructions(self.dataset_info, self.split)
     self.data_source = array_record_data_source.ArrayRecordDataSource(
         file_instructions
     )

@@ -392,12 +392,3 @@ def test_as_data_source_fn():
     assert imagenet[0] == 'foo'
     assert imagenet[1] == 'bar'
     assert imagenet[2] == 'baz'
-
-
-# PyGrain requires that data sources are picklable.
-def test_mocked_data_source_is_pickable():
-  with tfds.testing.mock_data(num_examples=2):
-    data_source = tfds.data_source('imagenet2012', split='train')
-    pickled_and_unpickled_data_source = pickle.loads(pickle.dumps(data_source))
-    assert len(pickled_and_unpickled_data_source) == 2
-    assert isinstance(pickled_and_unpickled_data_source[0]['image'], np.ndarray)

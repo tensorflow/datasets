@@ -774,13 +774,13 @@ class DatasetBuilder(registered.RegisteredDataset):
       file_format = self.info.file_format
       if file_format == file_adapters.FileFormat.ARRAY_RECORD:
         return array_record.ArrayRecordDataSource(
-            self,
+            self.info,
             split=split,
             decoders=decoders,
         )
       elif file_format == file_adapters.FileFormat.PARQUET:
         return parquet.ParquetDataSource(
-            self,
+            self.info,
             split=split,
             decoders=decoders,
         )
