@@ -173,6 +173,7 @@ class DatasetInfo(object):
   """
 
   def __init__(
+      # LINT.IfChange(dataset_info_args)
       self,
       *,
       builder: Union[DatasetIdentity, Any],
@@ -186,6 +187,7 @@ class DatasetInfo(object):
       license: Optional[str] = None,  # pylint: disable=redefined-builtin
       redistribution_info: Optional[Dict[str, str]] = None,
       split_dict: Optional[splits_lib.SplitDict] = None,
+      # LINT.ThenChange(:setstate)
   ):
     # pyformat: disable
     """Constructs DatasetInfo.
@@ -863,6 +865,35 @@ class DatasetInfo(object):
         lines.append(f"    {key}={value},")
     lines.append(")")
     return "\n".join(lines)
+
+  def __getstate__(self):
+    return {
+        "builder": self._builder_or_identity,
+        "description": self.description,
+        "features": self.features,
+        "supervised_keys": self.supervised_keys,
+        "disable_shuffling": self.disable_shuffling,
+        "homepage": self.homepage,
+        "citation": self.citation,
+        "metadata": self.metadata,
+        "license": self.redistribution_info.license,
+        "split_dict": self.splits,
+    }
+  def __setstate__(self, state):
+    # LINT.IfChange(setstate)
+    self.__init__(
+        builder=state["builder"],
+        description=state["description"],
+        features=state["features"],
+        supervised_keys=state["supervised_keys"],
+        disable_shuffling=state["disable_shuffling"],
+        homepage=state["homepage"],
+        citation=state["citation"],
+        metadata=state["metadata"],
+        license=state["license"],
+        split_dict=state["split_dict"],
+    )
+    # LINT.ThenChange(:dataset_info_args)
 
 
 def _nest_to_proto(nest: Nest) -> dataset_info_pb2.SupervisedKeys.Nest:

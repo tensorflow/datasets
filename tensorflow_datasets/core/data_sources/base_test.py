@@ -15,8 +15,10 @@
 
 """Tests for all data sources."""
 
+import pickle
 from unittest import mock
 
+import cloudpickle
 from etils import epath
 import pytest
 import tensorflow_datasets as tfds
@@ -181,3 +183,18 @@ def test_data_source_is_sliceable():
     file_instructions = mock_array_record_data_source.call_args_list[1].args[0]
     assert file_instructions[0].skip == 0
     assert file_instructions[0].take == 30000
+
+
+# PyGrain requires that data sources are picklable.
+@pytest.mark.parametrize(
+    'file_format',
+    file_adapters.FileFormat.with_random_access(),
+)
+@pytest.mark.parametrize('pickle_module', [pickle, cloudpickle])
+def test_data_source_is_picklable_after_use(file_format, pickle_module):
+  with tfds.testing.tmp_dir() as data_dir:
+    builder = tfds.testing.DummyDataset(data_dir=data_dir)
+    builder.download_and_prepare(file_format=file_format)
+    data_source = builder.as_data_source(split='train')
+    assert data_source[0] == {'id': 0}
+    assert pickle_module.loads(pickle_module.dumps(data_source))[0] == {'id': 0}
