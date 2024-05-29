@@ -17,22 +17,17 @@
 
 import abc
 import collections
-from collections.abc import Iterator
 import contextlib
 import functools
 import importlib
 import inspect
 import os.path
-import time
-from typing import ClassVar, Type
+from typing import ClassVar, Dict, Iterator, List, Type, Text, Tuple
 
-from absl import logging
 from etils import epath
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import visibility
-import tensorflow_datasets.core.logging as _tfds_logging
-from tensorflow_datasets.core.logging import call_metadata as _call_metadata
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import resource_utils
 
@@ -43,7 +38,7 @@ _DATASET_REGISTRY = {}
 # <str snake_cased_name, abstract DatasetBuilder subclass>
 _ABSTRACT_DATASET_REGISTRY = {}
 
-# Keep track of dict[str (module name), list[DatasetBuilder]]
+# Keep track of Dict[str (module name), List[DatasetBuilder]]
 # This is directly accessed by `tfds.community.builder_cls_from_module` when
 # importing community packages.
 _MODULE_TO_DATASETS = collections.defaultdict(list)
@@ -56,7 +51,7 @@ _DATASET_COLLECTION_REGISTRY = {}
 # <str snake_cased_name, abstract DatasetCollectionBuilder subclass>
 _ABSTRACT_DATASET_COLLECTION_REGISTRY = {}
 
-# Keep track of dict[str (module name), list[DatasetCollectionBuilder]]
+# Keep track of Dict[str (module name), List[DatasetCollectionBuilder]]
 _MODULE_TO_DATASET_COLLECTIONS = collections.defaultdict(list)
 
 # eg for dataset "foo": "tensorflow_datasets.datasets.foo.foo_dataset_builder".
@@ -83,70 +78,6 @@ def skip_registration() -> Iterator[None]:
     yield
   finally:
     _skip_registration = False
-
-
-@functools.cache
-def _import_legacy_builders() -> None:
-  """Imports legacy builders."""
-  modules_to_import = [
-      'audio',
-      'graphs',
-      'image',
-      'image_classification',
-      'object_detection',
-      'nearest_neighbors',
-      'question_answering',
-      'd4rl',
-      'ranking',
-      'recommendation',
-      'rl_unplugged',
-      'rlds.datasets',
-      'robotics',
-      'robomimic',
-      'structured',
-      'summarization',
-      'text',
-      'text_simplification',
-      'time_series',
-      'translate',
-      'video',
-      'vision_language',
-  ]
-
-  before_dataset_imports = time.time()
-  metadata = _call_metadata.CallMetadata()
-  metadata.start_time_micros = int(before_dataset_imports * 1e6)
-  try:
-    # For builds that don't include all dataset builders, we don't want to fail
-    # on import errors of dataset builders.
-    try:
-      for module in modules_to_import:
-        importlib.import_module(f'tensorflow_datasets.{module}')
-    except (ImportError, ModuleNotFoundError):
-      pass
-
-  except Exception as exception:  # pylint: disable=broad-except
-    metadata.mark_error()
-    logging.exception(exception)
-  finally:
-    import_time_ms_dataset_builders = int(
-        (time.time() - before_dataset_imports) * 1000
-    )
-    metadata.mark_end()
-    _tfds_logging.tfds_import(
-        metadata=metadata,
-        import_time_ms_tensorflow=0,
-        import_time_ms_dataset_builders=import_time_ms_dataset_builders,
-    )
-
-
-@functools.cache
-def _import_dataset_collections() -> None:
-  """Imports dataset collections."""
-  try:
-    importlib.import_module('tensorflow_datasets.dataset_collections')
-  except (ImportError, ModuleNotFoundError):
-    pass
 
 
 # The implementation of this class follows closely RegisteredDataset.
@@ -198,15 +129,16 @@ class RegisteredDatasetCollection(abc.ABC):
       _DATASET_COLLECTION_REGISTRY[cls.name] = cls
 
 
-def list_imported_dataset_collections() -> list[str]:
+def list_imported_dataset_collections() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetCollection`s."""
-  _import_dataset_collections()
-  all_dataset_collections = list(_DATASET_COLLECTION_REGISTRY.keys())
+  all_dataset_collections = [
+      dataset_collection_name
+      for dataset_collection_name, dataset_collection_cls in _DATASET_COLLECTION_REGISTRY.items()
+  ]
   return sorted(all_dataset_collections)
 
 
 def is_dataset_collection(name: str) -> bool:
-  _import_dataset_collections()
   return name in _DATASET_COLLECTION_REGISTRY
 
 
@@ -214,8 +146,6 @@ def imported_dataset_collection_cls(
     name: str,
 ) -> Type[RegisteredDatasetCollection]:
   """Returns the Registered dataset class."""
-  _import_dataset_collections()
-
   if name in _ABSTRACT_DATASET_COLLECTION_REGISTRY:
     raise AssertionError(f'DatasetCollection {name} is an abstract class.')
 
@@ -294,9 +224,8 @@ def _is_builder_available(builder_cls: Type[RegisteredDataset]) -> bool:
   return visibility.DatasetType.TFDS_PUBLIC.is_available()
 
 
-def list_imported_builders() -> list[str]:
+def list_imported_builders() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
-  _import_legacy_builders()
   all_builders = [
       builder_name
       for builder_name, builder_cls in _DATASET_REGISTRY.items()
@@ -307,8 +236,8 @@ def list_imported_builders() -> list[str]:
 
 @functools.lru_cache(maxsize=None)
 def _get_existing_dataset_packages(
-    datasets_dir: str,
-) -> dict[str, tuple[epath.Path, str]]:
+    datasets_dir: Text,
+) -> Dict[Text, Tuple[epath.Path, Text]]:
   """Returns existing datasets.
 
   Args:
@@ -364,12 +293,7 @@ def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
     raise AssertionError(f'Dataset {name} is an abstract class.')
 
   if name not in _DATASET_REGISTRY:
-    # Dataset not found in the registry, try to import legacy builders.
-    # Dataset builders are imported lazily to avoid slowing down the startup
-    # of the binary.
-    _import_legacy_builders()
-    if name not in _DATASET_REGISTRY:
-      raise DatasetNotFoundError(f'Dataset {name} not found.')
+    raise DatasetNotFoundError(f'Dataset {name} not found.')
 
   builder_cls = _DATASET_REGISTRY[name]
   if not _is_builder_available(builder_cls):

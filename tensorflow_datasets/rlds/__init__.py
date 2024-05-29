@@ -13,10 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""RLDS utils.
+"""Datasets generated with RLDS."""
 
-Note that the datasets are imported lazily so they don't need to be in here.
-"""
-
+from tensorflow_datasets.rlds import datasets
 from tensorflow_datasets.rlds import envlogger_reader
 from tensorflow_datasets.rlds import rlds_base
