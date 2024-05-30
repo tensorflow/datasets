@@ -10,6 +10,20 @@ and this project adheres to
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [4.9.5] - 2024-05-30
+
+### Added
+
 -   Support to download and prepare datasets using the
     [Parquet](https://parquet.apache.org) data format.
     ```python
@@ -18,6 +32,16 @@ and this project adheres to
     ds = builder.as_dataset(split='train')
     print(next(iter(ds)))
     ```
+
+-   [`tfds.data_source`](https://www.tensorflow.org/datasets/api_docs/python/tfds/data_source)
+    is pickable, thus working smoothly with
+    [PyGrain](https://github.com/google/grain). Learn more by following the
+    [tutorial](https://www.tensorflow.org/datasets/data_source).
+
+-   TFDS plays nicely with
+    [Croissant](https://mlcommons.org/working-groups/croissant). Learn more by
+    following the
+    [recipe](https://colab.research.google.com/github/mlcommons/croissant/blob/main/python/mlcroissant/recipes/tfds_croissant_builder.ipynb).
 
 ### Changed
 
