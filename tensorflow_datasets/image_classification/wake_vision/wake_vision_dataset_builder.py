@@ -48,9 +48,9 @@ _URLS = {
   'train_quality_metadata':
     'https://dataverse.harvard.edu/api/access/datafile/9844934?format=original',
   'validation_metadata':
-    'https://dataverse.harvard.edu/api/access/datafile/10069808?format=original',
+    'https://dataverse.harvard.edu/api/access/datafile/10243658?format=original',
   'test_metadata':
-    'https://dataverse.harvard.edu/api/access/datafile/10069809?format=original',
+    'https://dataverse.harvard.edu/api/access/datafile/10243659?format=original',
 }
 
 
