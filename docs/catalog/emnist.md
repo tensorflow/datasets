@@ -12,11 +12,6 @@
 # `emnist`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Visualization**:
     <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=emnist">
     Explore in Know Your Data
@@ -48,9 +43,7 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 *   **Versions**:
 
     *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
-    *   **`3.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Updated broken download URL
+    *   **`3.1.0`** (default): Updated broken download URL
 
 *   **Download size**: `535.73 MiB`
 

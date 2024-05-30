@@ -12,11 +12,6 @@
 # `plant_leaves`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Visualization**:
     <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=plant_leaves">
     Explore in Know Your Data
@@ -48,9 +43,7 @@ http://creativecommons.org/licenses/by/4.0
 *   **Versions**:
 
     *   `0.1.0`: Initial release.
-    *   **`0.1.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix checksum error.
+    *   **`0.1.1`** (default): Fix checksum error.
 
 *   **Download size**: `6.56 GiB`
 

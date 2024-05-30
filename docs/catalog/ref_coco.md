@@ -12,11 +12,6 @@
 # `ref_coco`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -83,9 +78,7 @@ refcocog | umd       | test  | 5023  | 2600
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added masks.
+    *   **`1.1.0`** (default): Added masks.
 
 *   **Download size**: `Unknown size`
 

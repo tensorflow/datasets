@@ -35,7 +35,6 @@ toc:
   title: Abstractive text summarization
 - section:
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   title: Age
 - section:
@@ -102,7 +101,6 @@ toc:
   title: Biology
 - section:
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   - path: /datasets/catalog/sift1m
     title: sift1m
@@ -179,7 +177,6 @@ toc:
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   title: Dialogue
 - section:
@@ -208,7 +205,6 @@ toc:
   title: Fine grained image classification
 - section:
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   title: Gender
 - section:
@@ -587,7 +583,6 @@ toc:
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -646,7 +641,6 @@ toc:
   - path: /datasets/catalog/bot_adversarial_dialogue
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -729,7 +723,6 @@ toc:
   - path: /datasets/catalog/anli
     title: anli
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   - path: /datasets/catalog/paws_wiki
     title: paws_wiki
@@ -752,7 +745,6 @@ toc:
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
@@ -899,7 +891,6 @@ toc:
   title: Question generation
 - section:
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   title: Race national ethnic origin
 - section:
@@ -976,7 +967,6 @@ toc:
   title: Rlds
 - section:
   - path: /datasets/catalog/aloha_mobile
-    status: nightly
     title: aloha_mobile
   - path: /datasets/catalog/asu_table_top_converted_externally_to_rlds
     title: asu_table_top_converted_externally_to_rlds
@@ -1007,7 +997,6 @@ toc:
   - path: /datasets/catalog/bridge
     title: bridge
   - path: /datasets/catalog/bridge_data_msr
-    status: nightly
     title: bridge_data_msr
   - path: /datasets/catalog/cmu_franka_exploration_dataset_converted_externally_to_rlds
     title: cmu_franka_exploration_dataset_converted_externally_to_rlds
@@ -1018,7 +1007,6 @@ toc:
   - path: /datasets/catalog/columbia_cairlab_pusht_real
     title: columbia_cairlab_pusht_real
   - path: /datasets/catalog/conq_hose_manipulation
-    status: nightly
     title: conq_hose_manipulation
   - path: /datasets/catalog/dlr_edan_shared_control_converted_externally_to_rlds
     title: dlr_edan_shared_control_converted_externally_to_rlds
@@ -1027,12 +1015,10 @@ toc:
   - path: /datasets/catalog/dlr_sara_pour_converted_externally_to_rlds
     title: dlr_sara_pour_converted_externally_to_rlds
   - path: /datasets/catalog/dobbe
-    status: nightly
     title: dobbe
   - path: /datasets/catalog/eth_agent_affordances
     title: eth_agent_affordances
   - path: /datasets/catalog/fmb
-    status: nightly
     title: fmb
   - path: /datasets/catalog/fractal20220817_data
     title: fractal20220817_data
@@ -1041,7 +1027,6 @@ toc:
   - path: /datasets/catalog/imperialcollege_sawyer_wrist_cam
     title: imperialcollege_sawyer_wrist_cam
   - path: /datasets/catalog/io_ai_tech
-    status: nightly
     title: io_ai_tech
   - path: /datasets/catalog/jaco_play
     title: jaco_play
@@ -1052,7 +1037,6 @@ toc:
   - path: /datasets/catalog/maniskill_dataset_converted_externally_to_rlds
     title: maniskill_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/mimic_play
-    status: nightly
     title: mimic_play
   - path: /datasets/catalog/mt_opt
     title: mt_opt
@@ -1063,15 +1047,12 @@ toc:
   - path: /datasets/catalog/nyu_rot_dataset_converted_externally_to_rlds
     title: nyu_rot_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/plex_robosuite
-    status: nightly
     title: plex_robosuite
   - path: /datasets/catalog/robo_set
-    status: nightly
     title: robo_set
   - path: /datasets/catalog/roboturk
     title: roboturk
   - path: /datasets/catalog/spoc_robot
-    status: nightly
     title: spoc_robot
   - path: /datasets/catalog/stanford_hydra_dataset_converted_externally_to_rlds
     title: stanford_hydra_dataset_converted_externally_to_rlds
@@ -1084,7 +1065,6 @@ toc:
   - path: /datasets/catalog/taco_play
     title: taco_play
   - path: /datasets/catalog/tidybot
-    status: nightly
     title: tidybot
   - path: /datasets/catalog/tokyo_u_lsmo_converted_externally_to_rlds
     title: tokyo_u_lsmo_converted_externally_to_rlds
@@ -1111,7 +1091,6 @@ toc:
   - path: /datasets/catalog/utokyo_xarm_pick_and_place_converted_externally_to_rlds
     title: utokyo_xarm_pick_and_place_converted_externally_to_rlds
   - path: /datasets/catalog/vima_converted_externally_to_rlds
-    status: nightly
     title: vima_converted_externally_to_rlds
   - path: /datasets/catalog/viola
     title: viola
@@ -1344,7 +1323,6 @@ toc:
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   - path: /datasets/catalog/doc_nli
     title: doc_nli
@@ -1593,7 +1571,6 @@ toc:
   - path: /datasets/catalog/bot_adversarial_dialogue
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
@@ -1612,7 +1589,6 @@ toc:
   - path: /datasets/catalog/bot_adversarial_dialogue
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/dices
-    status: nightly
     title: dices
   - path: /datasets/catalog/real_toxicity_prompts
     title: real_toxicity_prompts
@@ -1751,7 +1727,6 @@ toc:
   - path: /datasets/catalog/duke_ultrasound
     title: duke_ultrasound
   - path: /datasets/catalog/qm9
-    status: nightly
     title: qm9
   title: Uncategorized
 - section:
