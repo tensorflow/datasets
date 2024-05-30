@@ -485,31 +485,6 @@ class DatasetCitationSection(Section):
             """))
 
 
-class KnowYourDataSection(Section):
-  NAME = 'Visualization'
-
-  def __init__(self):
-    super().__init__()
-    self._catalog_urls = {}
-
-  def get_key(self, builder: tfds.core.DatasetBuilder):
-    return None  # Single url for all configs
-
-  def content(self, builder: tfds.core.DatasetBuilder):
-    url = self._catalog_urls.get(builder.name)
-    if url:
-      return f"""
-        <a class="button button-with-icon" href="{url}">
-          Explore in Know Your Data
-          <span class="material-icons icon-after" aria-hidden="true">
-            north_east
-          </span>
-        </a>
-      """
-    else:
-      return _SKIP_SECTION
-
-
 class PapersWithCodeSection(Section):
   NAME = 'Additional Documentation'
 
@@ -777,7 +752,6 @@ def get_markdown_string(
   """Build the dataset markdown."""
 
   all_sections = [
-      KnowYourDataSection(),
       DatasetDescriptionSection(),
       PapersWithCodeSection(),
       ConfigDescriptionSection(),
