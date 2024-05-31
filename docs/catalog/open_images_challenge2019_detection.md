@@ -12,12 +12,6 @@
 # `open_images_challenge2019_detection`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=open_images_challenge2019_detection">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 Open Images is a collaborative release of ~9 million images annotated with

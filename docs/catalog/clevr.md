@@ -12,12 +12,6 @@
 # `clevr`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=clevr">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.

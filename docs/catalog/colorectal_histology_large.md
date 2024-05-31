@@ -12,12 +12,6 @@
 # `colorectal_histology_large`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=colorectal_histology_large">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 10 large 5000 x 5000 textured colorectal cancer histology images

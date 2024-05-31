@@ -12,12 +12,6 @@
 # `celeb_a`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=celeb_a">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset

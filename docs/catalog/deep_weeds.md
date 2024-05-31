@@ -12,12 +12,6 @@
 # `deep_weeds`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=deep_weeds">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 The DeepWeeds dataset consists of 17,509 images capturing eight different weed

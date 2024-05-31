@@ -12,12 +12,6 @@
 # `i_naturalist2017`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=i_naturalist2017">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 This dataset contains a total of 5,089 categories, across 579,184 training

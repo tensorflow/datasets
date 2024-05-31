@@ -12,12 +12,6 @@
 # `plant_village`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=plant_village">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 The PlantVillage dataset consists of 54303 healthy and unhealthy leaf images

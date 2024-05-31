@@ -12,12 +12,6 @@
 # `fashion_mnist`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=fashion_mnist">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 Fashion-MNIST is a dataset of Zalando's article images consisting of a training
