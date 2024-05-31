@@ -417,12 +417,14 @@ class HuggingfaceDatasetBuilder(
     repo_id, token = self._hf_repo_id, self._hf_hub_token
     dataset_info = huggingface_hub.dataset_info(repo_id, token=token)
     # Second heuristic: check the card data.
-    if 'license' in dataset_info.card_data:
-      return dataset_info.card_data['license']
+    if dataset_info.card_data:
+      if card_data_license := dataset_info.card_data.get('license'):
+        return card_data_license
     # Third heuristic: check the tags.
-    for tag in dataset_info.tags:
-      if tag.startswith('license:'):
-        return tag[len('license:') :]
+    if dataset_info.tags:
+      for tag in dataset_info.tags:
+        if tag.startswith('license:'):
+          return tag.removeprefix('license:')
     return None
 
 
