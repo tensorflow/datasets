@@ -15,13 +15,20 @@
 
 """Logic related to reading datasets metadata from config files."""
 
+from __future__ import annotations
+
 import dataclasses
 import functools
 
 from etils import epath
-from etils import etree
+from etils import epy
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core.utils import resource_utils
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from etils import etree
+  from tensorflow_datasets.core.utils import resource_utils
+  # pylint: enable=g-import-not-at-top
 
 
 CITATIONS_FILENAME = "CITATIONS.bib"

@@ -37,6 +37,8 @@ tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/mast
 # pylint: enable=line-too-long
 # pylint: disable=g-import-not-at-top,g-bad-import-order,wrong-import-position,unused-import
 
+from __future__ import annotations
+
 from absl import logging
 from etils import epy as _epy
 

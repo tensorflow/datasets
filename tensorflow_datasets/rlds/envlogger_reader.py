@@ -18,7 +18,7 @@
 from typing import Any, Callable, Dict, Generator, List, Optional, Sequence, Tuple, Union
 
 import numpy as np
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 
 def _get_episode_metadata(episode: Sequence[Any]) -> Dict[str, Any]:

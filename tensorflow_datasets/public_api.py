@@ -15,6 +15,8 @@
 
 """Public API of tfds, without the registered dataset."""
 
+from __future__ import annotations
+
 from etils import epy
 from tensorflow_datasets import core
 from tensorflow_datasets import typing

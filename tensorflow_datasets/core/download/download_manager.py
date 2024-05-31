@@ -29,20 +29,21 @@ import uuid
 from absl import logging
 from etils import epath
 from etils import epy
-import promise
-from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.download import checksums
-from tensorflow_datasets.core.download import extractor
-from tensorflow_datasets.core.download import kaggle
-from tensorflow_datasets.core.download import resource as resource_lib
-from tensorflow_datasets.core.download import util
-from tensorflow_datasets.core.utils import shard_utils
-from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
+  import promise
+
+  from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core.download import checksums
   from tensorflow_datasets.core.download import downloader
+  from tensorflow_datasets.core.download import extractor
+  from tensorflow_datasets.core.download import kaggle
+  from tensorflow_datasets.core.download import resource as resource_lib
+  from tensorflow_datasets.core.download import util
+  from tensorflow_datasets.core.utils import shard_utils
+  from tensorflow_datasets.core.utils import type_utils
   # pylint: enable=g-import-not-at-top
 
 # pylint: disable=logging-fstring-interpolation

@@ -15,6 +15,8 @@
 
 """Library of helper functions to handle dealing with files."""
 
+from __future__ import annotations
+
 import collections
 from collections.abc import Iterator, Sequence
 import functools

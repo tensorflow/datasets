@@ -15,6 +15,8 @@
 
 """Some python utils function and classes."""
 
+from __future__ import annotations
+
 import base64
 from collections.abc import Iterator, Sequence
 import contextlib

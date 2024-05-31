@@ -15,16 +15,24 @@
 
 """This module defines the methods a logger implementation should define."""
 
+from __future__ import annotations
+
 from typing import Any, Dict, Optional, Union
 
-from etils import epath
-from tensorflow_datasets.core import decode
-from tensorflow_datasets.core import download as download_lib
-from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core.logging import call_metadata
-from tensorflow_datasets.core.utils import read_config as read_config_lib
-from tensorflow_datasets.core.utils import type_utils
+from etils import epy
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from etils import epath
+  from tensorflow_datasets.core import decode
+  from tensorflow_datasets.core import download as download_lib
+  from tensorflow_datasets.core import file_adapters
+  from tensorflow_datasets.core import splits as splits_lib
+  from tensorflow_datasets.core.logging import call_metadata
+  from tensorflow_datasets.core.utils import read_config as read_config_lib
+  from tensorflow_datasets.core.utils import type_utils
+  # pylint: enable=g-import-not-at-top
+
 
 TreeDict = type_utils.TreeDict
 
