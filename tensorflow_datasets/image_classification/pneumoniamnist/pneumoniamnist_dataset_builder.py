@@ -17,14 +17,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             # These are the features of your dataset like images, labels ...
-            'image': tfds.features.Image(shape=(None, None, 3)),
-            'label': tfds.features.ClassLabel(names=['no', 'yes']),
+            'image': tfds.features.Image(shape=(28, 28, 3)),
+            'label': tfds.features.ClassLabel(names=['Normal', 'Pneumonia']),
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
         # `as_supervised=True` in `builder.as_dataset`.
         supervised_keys=('image', 'label'),  # Set to `None` to disable
-        homepage='https://dataset-homepage/',
+        homepage='https://medmnist.com//',
     )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
