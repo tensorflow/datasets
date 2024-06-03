@@ -41,11 +41,6 @@ landing_page:
         {% dynamic endif %}
   - classname: devsite-landing-row-cards
     items:
-    - heading: "Explore datasets with Know Your Data"
-      image_path: /resources/images/kyd-screenshot.jpg
-      buttons:
-      - label: Go to Know Your Data
-        path: https://knowyourdata.withgoogle.com
     - heading: Introducing TensorFlow Datasets
       image_path: /resources/images/tf-logo-card-16x9.png
       path: https://blog.tensorflow.org/2019/02/introducing-tensorflow-datasets.html
