@@ -110,6 +110,10 @@ class AudioFeatureTest(
   @parameterized.product(lazy_decode=[True, False], num_channels=[1, 2, 8])
   def test_flac_file(self, lazy_decode, num_channels):
     if lazy_decode:
+      try:
+        import tensorflow_io  # pylint: disable=g-import-not-at-top, unused-import
+      except ImportError:
+        self.skipTest('`tensorflow_io` dependency is not available')
       if 'dev' in tf.__version__:
         self.skipTest('`tensorflow_io` is not compatible with `tf-nightly`')
 

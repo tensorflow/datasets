@@ -65,7 +65,8 @@ REQUIRED_PKGS = [
     'array_record>=0.5.0;platform_system=="Linux"',
     'click',
     'dm-tree',
-    'etils[enp,epath,epy,etree]>=1.6.0',
+    'etils[enp,epath,epy,etree]>=1.6.0;python_version<"3.11"',
+    'etils[enp,epath,epy,etree]>=1.9.1;python_version>="3.11"',
     'immutabledict',
     'numpy',
     'promise',
@@ -99,7 +100,7 @@ TESTS_DEPENDENCIES = [
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
     'pyyaml',
-    'tensorflow-io[tensorflow]',
+    'tensorflow-io[tensorflow];python_version<"3.12"',
 ]
 
 # Additional deps for formatting
