@@ -336,10 +336,7 @@ class DatasetInfo(object):
 
   @property
   def as_proto_with_features(self) -> dataset_info_pb2.DatasetInfo:
-    info_proto = dataset_info_pb2.DatasetInfo()
-    info_proto.CopyFrom(self._info_proto)
-    info_proto.features.CopyFrom(self.features.to_proto())  # pytype: disable=attribute-error  # always-use-property-annotation
-    return info_proto
+    return update_info_proto_with_features(self._info_proto, self.features)
 
   @property
   def name(self) -> str:
@@ -1194,6 +1191,25 @@ def _create_redistribution_info_proto(
         license=utils.dedent(str(license))
     )
   return None
+
+
+def update_info_proto_with_features(
+    info_proto: dataset_info_pb2.DatasetInfo,
+    features: feature_lib.FeatureConnector,
+) -> dataset_info_pb2.DatasetInfo:
+  """Update the info proto with the given features, if any.
+
+  Args:
+    info_proto: the info proto to update.
+    features: the features to use.
+
+  Returns:
+    the updated info proto.
+  """
+  completed_info_proto = dataset_info_pb2.DatasetInfo()
+  completed_info_proto.CopyFrom(info_proto)
+  completed_info_proto.features.CopyFrom(features.to_proto())
+  return completed_info_proto
 
 
 class MetadataDict(Metadata, dict):

@@ -41,21 +41,44 @@ def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
       'x': ['1.0.0', '1.0.1'],
       'y': ['2.0.0'],
   }
+  info_filenames = {
+      'features.json',
+      'dataset_info.json',
+  }
+  glob_suffixes = [
+      'json',
+  ]
   for config, versions in configs_and_versions.items():
     for version in versions:
-      mock_fs.add_file(dataset_dir / config / version / 'dataset_info.json')
-      mock_fs.add_file(dataset_dir / config / version / 'features.json')
+      for info_filename in info_filenames:
+        mock_fs.add_file(dataset_dir / config / version / info_filename)
 
-  references = sorted(file_utils.list_dataset_variants(dataset_dir=dataset_dir))
+  references = sorted(
+      file_utils.list_dataset_variants(
+          dataset_dir=dataset_dir, glob_suffixes=glob_suffixes
+      )
+  )
   assert references == [
       naming.DatasetReference(
-          dataset_name='my_ds', config='x', version='1.0.0', data_dir=data_dir
+          dataset_name='my_ds',
+          config='x',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
-          dataset_name='my_ds', config='x', version='1.0.1', data_dir=data_dir
+          dataset_name='my_ds',
+          config='x',
+          version='1.0.1',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
-          dataset_name='my_ds', config='y', version='2.0.0', data_dir=data_dir
+          dataset_name='my_ds',
+          config='y',
+          version='2.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
   ]
 
@@ -69,10 +92,12 @@ def test_list_dataset_variants_with_configs_no_versions(
       'x': ['1.0.0', '1.0.1'],
       'y': ['2.0.0'],
   }
+  info_filenames = {'dataset_info.json', 'features.json'}
   for config, versions in configs_and_versions.items():
     for version in versions:
-      mock_fs.add_file(dataset_dir / config / version / 'dataset_info.json')
-      mock_fs.add_file(dataset_dir / config / version / 'features.json')
+      for filename in info_filenames:
+        mock_fs.add_file(dataset_dir / config / version / filename)
+        mock_fs.add_file(dataset_dir / config / version / filename)
 
   references = sorted(
       file_utils.list_dataset_variants(
@@ -81,10 +106,16 @@ def test_list_dataset_variants_with_configs_no_versions(
   )
   assert references == [
       naming.DatasetReference(
-          dataset_name='my_ds', config='x', data_dir=data_dir
+          dataset_name='my_ds',
+          config='x',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
-          dataset_name='my_ds', config='y', data_dir=data_dir
+          dataset_name='my_ds',
+          config='y',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
   ]
 
@@ -108,10 +139,16 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   )
   assert references == [
       naming.DatasetReference(
-          dataset_name='my_ds', version='1.0.0', data_dir=data_dir
+          dataset_name='my_ds',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames={'dataset_info.json'},
       ),
       naming.DatasetReference(
-          dataset_name='my_ds', version='1.0.1', data_dir=data_dir
+          dataset_name='my_ds',
+          version='1.0.1',
+          data_dir=data_dir,
+          info_filenames={'dataset_info.json', 'features.json'},
       ),
   ]
 
@@ -125,7 +162,10 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   )
   assert references == [
       naming.DatasetReference(
-          dataset_name='my_ds', version='1.0.1', data_dir=data_dir
+          dataset_name='my_ds',
+          version='1.0.1',
+          data_dir=data_dir,
+          info_filenames={'dataset_info.json', 'features.json'},
       )
   ]
 
@@ -140,6 +180,7 @@ def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
   mock_fs.add_file(data_dir / 'ds1/config2/1.0.0/features.json')
   mock_fs.add_file(data_dir / 'ds2/1.0.0/dataset_info.json')
   mock_fs.add_file(data_dir / 'ds2/1.0.0/features.json')
+  info_filenames = {'dataset_info.json', 'features.json'}
 
   # The following are problematic and should thus be ignored.
   mock_fs.add_file(
@@ -164,21 +205,27 @@ def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
           config='config1',
           version='1.0.0',
           data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
           dataset_name='ds1',
           config='config1',
           version='2.0.0',
           data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
           dataset_name='ds1',
           config='config2',
           version='1.0.0',
           data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
-          dataset_name='ds2', version='1.0.0', data_dir=data_dir
+          dataset_name='ds2',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
   ]
 
@@ -205,6 +252,7 @@ def test_list_datasets_in_data_dir_with_namespace(mock_fs: testing.MockFs):
           config='config1',
           version='1.0.0',
           data_dir=data_dir,
+          info_filenames={'dataset_info.json', 'features.json'},
       ),
   ]
 

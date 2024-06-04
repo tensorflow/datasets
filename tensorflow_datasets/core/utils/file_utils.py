@@ -177,15 +177,20 @@ def _find_files_without_glob(
 
 
 def _find_files_with_glob(
-    folder: epath.Path, globs: list[str], file_names: list[str]
+    folder: epath.Path,
+    globs: list[str],
+    file_names: list[str],
 ) -> Iterator[epath.Path]:
   """Finds files matching any of the given globs and given file names."""
   for glob in globs:
+    found_files = folder.glob(glob)
     try:
-      for file in folder.glob(glob):
+      for file in found_files:
         if file.name in file_names:
           yield file
-    except OSError:
+    except (
+        OSError,
+    ):
       # If permission was denied on any subfolder, then the glob fails. Manually
       # iterate through the subfolders instead to be more robust against this.
       yield from _find_files_without_glob(folder, globs, file_names)
@@ -197,6 +202,7 @@ def _find_references_with_glob(
     is_dataset_dir: bool,
     namespace: str | None = None,
     include_old_tfds_version: bool = True,
+    glob_suffixes: Sequence[str] = ('json',),
 ) -> Iterator[naming.DatasetReference]:
   """Yields all dataset references in the given folder.
 
@@ -208,6 +214,8 @@ def _find_references_with_glob(
     namespace: Optional namespace to which the found datasets belong to.
     include_old_tfds_version: include datasets that have been generated with
       TFDS before 4.0.0.
+    glob_suffixes: list of file suffixes to use to create the the glob for
+      interesting TFDS files. Defaults to json files.
 
   Yields:
     all dataset references in the given folder.
@@ -220,16 +228,26 @@ def _find_references_with_glob(
   if is_data_dir:
     data_dir = folder
     dataset_name = None
-    globs = ['*/*/*/*.json', '*/*/*.json']
+    stars = ['*/*/*/*', '*/*/*']
   else:
     data_dir = folder.parent
     dataset_name = folder.name
-    globs = ['*/*/*.json', '*/*.json']
+    stars = ['*/*/*', '*/*']
+
+  globs = [f'{star}.{suffix}' for star in stars for suffix in glob_suffixes]  # pylint:disable=g-complex-comprehension
 
   # Check files matching the globs and are files we are interested in.
   matched_files_per_folder = collections.defaultdict(set)
-  file_names = [constants.FEATURES_FILENAME, constants.DATASET_INFO_FILENAME]
-  for file in _find_files_with_glob(folder, globs=globs, file_names=file_names):
+  file_names = [
+      constants.FEATURES_FILENAME,
+      constants.DATASET_INFO_FILENAME,
+  ]
+
+  for file in _find_files_with_glob(
+      folder,
+      globs=globs,
+      file_names=file_names,
+  ):
     matched_files_per_folder[file.parent].add(file.name)
 
   for data_folder, matched_files in matched_files_per_folder.items():
@@ -284,6 +302,7 @@ def _find_references_with_glob(
         dataset_name=dataset_name,
         config=config,
         version=version,
+        info_filenames=matched_files,
     )
 
 
@@ -292,6 +311,7 @@ def list_dataset_variants(
     namespace: str | None = None,
     include_versions: bool = True,
     include_old_tfds_version: bool = False,
+    glob_suffixes: Sequence[str] = ('json',),
 ) -> Iterator[naming.DatasetReference]:
   """Yields all variants (config + version) found in `dataset_dir`.
 
@@ -301,6 +321,8 @@ def list_dataset_variants(
     include_versions: whether to list what versions are available.
     include_old_tfds_version: include datasets that have been generated with
       TFDS before 4.0.0.
+    glob_suffixes: list of file suffixes to use to create the the glob for
+      interesting TFDS files. Defaults to json files.
 
   Yields:
     all variants of the given dataset.
@@ -313,6 +335,7 @@ def list_dataset_variants(
       is_dataset_dir=True,
       namespace=namespace,
       include_old_tfds_version=include_old_tfds_version,
+      glob_suffixes=glob_suffixes,
   ):
     if include_versions:
       key = f'{reference.dataset_name}/{reference.config}:{reference.version}'

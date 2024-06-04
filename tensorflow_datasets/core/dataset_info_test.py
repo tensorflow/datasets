@@ -422,6 +422,14 @@ class DatasetInfoTest(testing.TestCase):
     info.set_file_format(file_adapters.FileFormat.RIEGELI, override=True)
     self.assertEqual(info.file_format, file_adapters.FileFormat.RIEGELI)
 
+  def test_update_info_proto_with_features(self):
+    info_proto = dataset_info.DatasetInfo(builder=self._builder).as_proto
+    new_features = features.FeaturesDict({"text": features.Text()})
+    new_info = dataset_info.update_info_proto_with_features(
+        info_proto, new_features
+    )
+    self.assertEqual(new_info.features, new_features.to_proto())
+
 
 @pytest.mark.parametrize(
     "file_format",

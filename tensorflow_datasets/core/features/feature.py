@@ -1068,7 +1068,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     will restore the feature metadata from the saved file.
 
     Args:
-      data_dir: path to the dataset folder to which save the info (ex:
+      data_dir: path to the dataset folder where the info is saved (ex:
         `~/datasets/cifar10/1.2.0/`)
       feature_name: the name of the feature (from the FeaturesDict key)
     """

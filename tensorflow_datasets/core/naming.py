@@ -208,6 +208,9 @@ class DatasetReference:
       can be used. For example, if the collection uses the split `valid`, but
       this dataset uses the split `validation`, then the `split_mapping` should
       be `{'validation': 'valid'}`.
+    info_filenames: Filenames which are used to describe the dataset. They might
+      include, for example, `dataset_info.json`, `features.json`, etc. If None,
+      then it wasn't checked which info files exist on disk.
   """  # fmt: skip
 
   dataset_name: str
@@ -216,6 +219,7 @@ class DatasetReference:
   version: None | str | version_lib.Version = None
   data_dir: None | str | os.PathLike = None  # pylint: disable=g-bare-generic
   split_mapping: None | Mapping[str, str] = None
+  info_filenames: set[str] | None = None
 
   def __post_init__(self):
     if isinstance(self.version, version_lib.Version):
@@ -302,7 +306,7 @@ class DatasetReference:
 
 
 def references_for(
-    name_to_tfds_name: Mapping[str, str]
+    name_to_tfds_name: Mapping[str, str],
 ) -> Mapping[str, DatasetReference]:
   """Constructs of dataset references.
 
