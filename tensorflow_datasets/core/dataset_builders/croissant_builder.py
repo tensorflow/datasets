@@ -173,7 +173,9 @@ class CroissantBuilder(
     if mapping is None:
       mapping = {}
     self.dataset = mlc.Dataset(jsonld, mapping=mapping)
-    self.name = huggingface_utils.convert_hf_name(self.dataset.metadata.name)
+    self.name = huggingface_utils.get_tfds_name_from_croissant_dataset(
+        self.dataset
+    )
     self.metadata = self.dataset.metadata
 
     # In TFDS, version is a mandatory attribute, while in Croissant it is only a

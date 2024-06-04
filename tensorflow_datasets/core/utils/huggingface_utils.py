@@ -15,8 +15,11 @@
 
 """Utility functions for huggingface_dataset_builder."""
 
+from __future__ import annotations
+
 from collections.abc import Mapping, Sequence
 import datetime
+import typing
 from typing import Any, Type, TypeVar
 
 from etils import epath
@@ -29,6 +32,10 @@ from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+if typing.TYPE_CHECKING:
+  # pylint: disable=g-bad-import-order
+  import mlcroissant as mlc
 
 
 _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
@@ -242,7 +249,17 @@ def convert_hf_value(
   )
 
 
-def convert_hf_name(hf_name: _StrOrNone) -> _StrOrNone:
+def get_tfds_name_from_croissant_dataset(dataset: mlc.Dataset) -> str:
+  """Returns TFDS compatible dataset name of the given MLcroissant dataset."""
+  if (url := dataset.metadata.url) and url.startswith(
+      'https://huggingface.co/datasets/'
+  ):
+    url_suffix = url.removeprefix('https://huggingface.co/datasets/')
+    return convert_hf_name(url_suffix)
+  return convert_hf_name(dataset.metadata.name)
+
+
+def convert_hf_name(hf_name: str) -> str:
   """Converts Huggingface name to a TFDS compatible dataset name.
 
   Huggingface names can contain characters that are not supported in
@@ -259,8 +276,6 @@ def convert_hf_name(hf_name: _StrOrNone) -> _StrOrNone:
     The TFDS compatible dataset name (dataset names, config names and split
     names).
   """
-  if hf_name is None:
-    return hf_name
   hf_name = hf_name.lower().replace('/', '__')
   return py_utils.make_valid_name(hf_name)
 

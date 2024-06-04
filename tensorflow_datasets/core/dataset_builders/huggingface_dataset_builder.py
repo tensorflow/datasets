@@ -203,7 +203,9 @@ class HuggingfaceDatasetBuilder(
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
     self.config_kwargs = config_kwargs
-    tfds_config = huggingface_utils.convert_hf_name(hf_config)
+    tfds_config = (
+        huggingface_utils.convert_hf_name(hf_config) if hf_config else None
+    )
     try:
       self._hf_builder = hf_datasets.load_dataset_builder(
           self._hf_repo_id, self._hf_config, **self.config_kwargs
