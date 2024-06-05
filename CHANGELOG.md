@@ -20,6 +20,12 @@ and this project adheres to
 
 ### Security
 
+## [4.9.6] - 2024-06-04
+
+### Added
+
+-   Full support for Python 3.12.
+
 ## [4.9.5] - 2024-05-30
 
 ### Added
