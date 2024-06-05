@@ -18,9 +18,7 @@
 import contextlib
 import os
 import tempfile
-from unittest import mock
 
-from absl import logging
 from tensorflow_datasets import setup_teardown
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_case_in_context
@@ -58,15 +56,3 @@ class TestCase(test_case_in_context.TestCaseInContext, tf.test.TestCase):
     super().setUp()
     # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
-
-  @contextlib.contextmanager
-  def assertLogs(self, text, level="info"):
-    with mock.patch.object(logging, level) as mock_log:
-      yield
-      concat_logs = ""
-      for log_call in mock_log.call_args_list:
-        args = log_call[0]
-        base, args = args[0], args[1:]
-        log_text = base % tuple(args)
-        concat_logs += " " + log_text
-      self.assertIn(text, concat_logs)

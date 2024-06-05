@@ -18,7 +18,9 @@
 from collections.abc import Sequence
 import contextlib
 from typing import Any, ContextManager
+from unittest import mock
 
+from absl import logging
 from absl.testing import absltest
 
 
@@ -55,3 +57,15 @@ class TestCaseInContext(absltest.TestCase):
     else:
       predicate_fn = predicate
     return super().assertRaisesWithPredicateMatch(err_type, predicate_fn)
+
+  @contextlib.contextmanager
+  def assertLogs(self, text, level="info"):
+    with mock.patch.object(logging, level.lower()) as mock_log:
+      yield
+      concat_logs = ""
+      for log_call in mock_log.call_args_list:
+        args = log_call[0]
+        base, args = args[0], args[1:]
+        log_text = base % tuple(args)
+        concat_logs += " " + log_text
+      self.assertIn(text, concat_logs)
