@@ -39,6 +39,7 @@ if typing.TYPE_CHECKING:
   from tensorflow_datasets.testing.test_case_in_context import TestCaseInContext
   from tensorflow_datasets.testing.test_utils import assert_features_equal
   from tensorflow_datasets.testing.test_utils import disable_gcs_access
+  from tensorflow_datasets.testing.test_utils import dummy_croissant_file
   from tensorflow_datasets.testing.test_utils import DummyBeamDataset
   from tensorflow_datasets.testing.test_utils import DummyDataset
   from tensorflow_datasets.testing.test_utils import DummyDatasetCollection
@@ -53,9 +54,9 @@ if typing.TYPE_CHECKING:
   from tensorflow_datasets.testing.test_utils import MockFs
   from tensorflow_datasets.testing.test_utils import rm_tmp_dir
   from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
+  from tensorflow_datasets.testing.test_utils import set_current_datetime
   from tensorflow_datasets.testing.test_utils import test_main
   from tensorflow_datasets.testing.test_utils import tmp_dir
-  from tensorflow_datasets.testing.test_utils import set_current_datetime
   # LINT.ThenChange(:deps)
 # pylint: enable=g-import-not-at-top,g-importing-member
 
@@ -66,6 +67,7 @@ _API = {
         "tensorflow_datasets.testing.dataset_builder_testing"
     ),
     "disable_gcs_access": "tensorflow_datasets.testing.test_utils",
+    "dummy_croissant_file": "tensorflow_datasets.testing.test_utils",
     "DummyBeamDataset": "tensorflow_datasets.testing.test_utils",
     "DummyDataset": "tensorflow_datasets.testing.test_utils",
     "DummyDatasetCollection": "tensorflow_datasets.testing.test_utils",
@@ -90,6 +92,7 @@ _API = {
     # TODO(afrozm): rm from here and add as methods to TestCase
     "rm_tmp_dir": "tensorflow_datasets.testing.test_utils",
     "run_in_graph_and_eager_modes": "tensorflow_datasets.testing.test_utils",
+    "set_current_datetime": "tensorflow_datasets.testing.test_utils",
     "SubTestCase": "tensorflow_datasets.testing.feature_test_case",
     "test_main": "tensorflow_datasets.testing.test_utils",
     "TestCase": "tensorflow_datasets.testing.test_case",
@@ -97,7 +100,6 @@ _API = {
     "TestValue": "tensorflow_datasets.testing.feature_test_case",
     # TODO(afrozm): rm from here and add as methods to TestCase
     "tmp_dir": "tensorflow_datasets.testing.test_utils",
-    "set_current_datetime": "tensorflow_datasets.testing.test_utils",
     # LINT.ThenChange(:pydeps)
 }
 
