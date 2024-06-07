@@ -23,6 +23,7 @@ import threading
 from typing import Any, Callable, Dict, List, Optional, Tuple, TypeVar
 
 from absl import flags
+from absl import logging
 from tensorflow_datasets.core.logging import base_logger
 from tensorflow_datasets.core.logging import call_metadata
 from tensorflow_datasets.core.logging import logging_logger
@@ -155,11 +156,17 @@ class _FunctionDecorator(abc.ABC):
     metadata.mark_end()
     for logger in _get_registered_loggers():
       method_name = self.__class__.__name__
-      logger_method = getattr(logger, method_name)
-      logger_method = self._fill_logger_method_kwargs(
-          logger_method, metadata, instance, args, kwargs
-      )
-      self._call_logger_method(logger_method, args, kwargs)
+      try:
+        logger_method = getattr(logger, method_name)
+        logger_method = self._fill_logger_method_kwargs(
+            logger_method, metadata, instance, args, kwargs
+        )
+        self._call_logger_method(logger_method, args, kwargs)
+      except Exception:  # pylint: disable=broad-exception-caught
+        logger_name = logger.__class__.__name__
+        logging.exception(
+            "Failed to call logger %s, method %s", logger_name, method_name
+        )
 
   @wrapt.decorator
   def __call__(self, function, instance, args, kwargs):
