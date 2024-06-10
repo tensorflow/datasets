@@ -17,6 +17,7 @@
 
 import pathlib
 
+import mlcroissant as mlc
 import pytest
 import tensorflow as tf
 from tensorflow_datasets.testing import test_case
@@ -226,3 +227,21 @@ def test_gcs_access():
       assert not is_lambda(gcs_utils.gcs_dataset_info_files)
     assert is_lambda(gcs_utils.gcs_dataset_info_files)
   assert not is_lambda(gcs_utils.gcs_dataset_info_files)
+
+
+def test_dummy_croissant_file():
+  with test_utils.dummy_croissant_file() as croissant_file:
+    dataset = mlc.Dataset(jsonld=croissant_file)
+
+    assert dataset.jsonld == croissant_file
+    assert dataset.mapping is None
+    assert dataset.metadata.description == 'Dummy description.'
+    assert [record_set.id for record_set in dataset.metadata.record_sets] == [
+        'jsonl'
+    ]
+    assert [record for record in dataset.records('jsonl')] == [
+        {'text': b'Dummy example 0', 'index': 0},
+        {'text': b'Dummy example 1', 'index': 1},
+    ]
+    assert dataset.metadata.url == 'https://dummy_url'
+    assert dataset.metadata.version == '1.2.0'

@@ -29,7 +29,7 @@ from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 Tree = type_utils.Tree
 Tensor = type_utils.Tensor
@@ -208,9 +208,7 @@ def dataset_shape_is_fully_defined(ds):
 
 
 def features_shape_is_fully_defined(features):
-  return all(
-      [
-          tf.TensorShape(info.shape).is_fully_defined()
-          for info in tf.nest.flatten(features.get_tensor_info())
-      ]
-  )
+  return all([
+      tf.TensorShape(info.shape).is_fully_defined()
+      for info in tf.nest.flatten(features.get_tensor_info())
+  ])

@@ -45,20 +45,28 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'episode_metadata': FeaturesDict({
+        'episode_id': Scalar(shape=(), dtype=int32),
+        'file_path': string,
+        'has_image_0': Scalar(shape=(), dtype=bool),
+        'has_image_1': Scalar(shape=(), dtype=bool),
+        'has_image_2': Scalar(shape=(), dtype=bool),
+        'has_image_3': Scalar(shape=(), dtype=bool),
+        'has_language': Scalar(shape=(), dtype=bool),
+    }),
     'steps': Dataset({
-        'action': FeaturesDict({
-            'open_gripper': bool,
-            'rotation_delta': Tensor(shape=(3,), dtype=float32),
-            'terminate_episode': float32,
-            'world_vector': Tensor(shape=(3,), dtype=float32),
-        }),
+        'action': Tensor(shape=(7,), dtype=float32),
+        'discount': Scalar(shape=(), dtype=float32),
         'is_first': bool,
         'is_last': bool,
         'is_terminal': bool,
+        'language_embedding': Tensor(shape=(512,), dtype=float32),
+        'language_instruction': string,
         'observation': FeaturesDict({
-            'image': Image(shape=(480, 640, 3), dtype=uint8),
-            'natural_language_embedding': Tensor(shape=(512,), dtype=float32),
-            'natural_language_instruction': string,
+            'image_0': Image(shape=(256, 256, 3), dtype=uint8),
+            'image_1': Image(shape=(256, 256, 3), dtype=uint8),
+            'image_2': Image(shape=(256, 256, 3), dtype=uint8),
+            'image_3': Image(shape=(256, 256, 3), dtype=uint8),
             'state': Tensor(shape=(7,), dtype=float32),
         }),
         'reward': Scalar(shape=(), dtype=float32),
@@ -68,24 +76,32 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape         | Dtype   | Description
-:--------------------------------------------- | :----------- | :------------ | :------ | :----------
-                                               | FeaturesDict |               |         |
-steps                                          | Dataset      |               |         |
-steps/action                                   | FeaturesDict |               |         |
-steps/action/open_gripper                      | Tensor       |               | bool    |
-steps/action/rotation_delta                    | Tensor       | (3,)          | float32 |
-steps/action/terminate_episode                 | Tensor       |               | float32 |
-steps/action/world_vector                      | Tensor       | (3,)          | float32 |
-steps/is_first                                 | Tensor       |               | bool    |
-steps/is_last                                  | Tensor       |               | bool    |
-steps/is_terminal                              | Tensor       |               | bool    |
-steps/observation                              | FeaturesDict |               |         |
-steps/observation/image                        | Image        | (480, 640, 3) | uint8   |
-steps/observation/natural_language_embedding   | Tensor       | (512,)        | float32 |
-steps/observation/natural_language_instruction | Tensor       |               | string  |
-steps/observation/state                        | Tensor       | (7,)          | float32 |
-steps/reward                                   | Scalar       |               | float32 |
+Feature                       | Class        | Shape         | Dtype   | Description
+:---------------------------- | :----------- | :------------ | :------ | :----------
+                              | FeaturesDict |               |         |
+episode_metadata              | FeaturesDict |               |         |
+episode_metadata/episode_id   | Scalar       |               | int32   |
+episode_metadata/file_path    | Tensor       |               | string  |
+episode_metadata/has_image_0  | Scalar       |               | bool    |
+episode_metadata/has_image_1  | Scalar       |               | bool    |
+episode_metadata/has_image_2  | Scalar       |               | bool    |
+episode_metadata/has_image_3  | Scalar       |               | bool    |
+episode_metadata/has_language | Scalar       |               | bool    |
+steps                         | Dataset      |               |         |
+steps/action                  | Tensor       | (7,)          | float32 |
+steps/discount                | Scalar       |               | float32 |
+steps/is_first                | Tensor       |               | bool    |
+steps/is_last                 | Tensor       |               | bool    |
+steps/is_terminal             | Tensor       |               | bool    |
+steps/language_embedding      | Tensor       | (512,)        | float32 |
+steps/language_instruction    | Tensor       |               | string  |
+steps/observation             | FeaturesDict |               |         |
+steps/observation/image_0     | Image        | (256, 256, 3) | uint8   |
+steps/observation/image_1     | Image        | (256, 256, 3) | uint8   |
+steps/observation/image_2     | Image        | (256, 256, 3) | uint8   |
+steps/observation/image_3     | Image        | (256, 256, 3) | uint8   |
+steps/observation/state       | Tensor       | (7,)          | float32 |
+steps/reward                  | Scalar       |               | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

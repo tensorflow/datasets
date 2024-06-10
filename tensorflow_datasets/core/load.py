@@ -35,7 +35,6 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
@@ -60,7 +59,6 @@ TreeDict = type_utils.TreeDict
 PredicateFn = Callable[[Type[dataset_builder.DatasetBuilder]], bool]
 
 
-
 # Regex matching 'dataset/config/1.3.0'
 _FULL_NAME_REG = re.compile(
     r'^{ds_name}/({config_name}/)?{version}$'.format(
@@ -80,7 +78,7 @@ def list_builders(
   datasets = registered.list_imported_builders()
   if with_community_datasets:
     if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
-      datasets += community.community_register.list_builders()
+      datasets += community.community_register().list_builders()
   return datasets
 
 
@@ -114,7 +112,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   if ds_name.namespace:
     # `namespace:dataset` are loaded from the community register
     if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
-      return community.community_register.builder_cls(ds_name)
+      return community.community_register().builder_cls(ds_name)
     else:
       raise ValueError(
           f'Cannot load {ds_name} when community datasets are disabled'
@@ -193,9 +191,9 @@ def builder(
           name=name.name, **builder_kwargs)
     if (
         visibility.DatasetType.COMMUNITY_PUBLIC.is_available()
-        and community.community_register.has_namespace(name.namespace)
+        and community.community_register().has_namespace(name.namespace)
     ):
-      return community.community_register.builder(name=name, **builder_kwargs)
+      return community.community_register().builder(name=name, **builder_kwargs)
 
   # First check whether we can find the corresponding dataset builder code
   try:
@@ -585,7 +583,7 @@ def load(
       all splits in a `Dict[Split, tf.data.Dataset]`
     data_dir: directory to read/write data. Defaults to the value of the
       environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-      datasets are stored.
+      '~/tensorflow_datasets'.
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If `batch_size=-1`, will return
       the full dataset as `tf.Tensor`s.
@@ -595,7 +593,7 @@ def load(
       `tfds.core.DatasetBuilder.download_and_prepare` before calling
       `tfds.core.DatasetBuilder.as_dataset`. If `False`, data is expected to be
       in `data_dir`. If `True` and the data is already in `data_dir`,
-      when data_dir is a Placer path.
+      `download_and_prepare` is a no-op.
     as_supervised: `bool`, if `True`, the returned `tf.data.Dataset` will have a
       2-tuple structure `(input, label)` according to
       `builder.info.supervised_keys`. If `False`, the default, the returned
@@ -639,7 +637,7 @@ def load(
       (version, features, splits, num_examples,...). Note that the `ds_info`
       object documents the entire dataset, regardless of the `split` requested.
       Split-specific information is available in `ds_info.splits`.
-  """
+  """  # fmt: skip
   dbuilder = _fetch_builder(
       name,
       data_dir,
@@ -754,12 +752,12 @@ def data_source(
       all splits in a `Dict[Split, Sequence]`
     data_dir: directory to read/write data. Defaults to the value of the
       environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-      datasets are stored.
+      '~/tensorflow_datasets'.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare` before calling
       `tfds.core.DatasetBuilder.as_data_source`. If `False`, data is expected to
       be in `data_dir`. If `True` and the data is already in `data_dir`,
-      when data_dir is a Placer path.
+      `download_and_prepare` is a no-op.
     decoders: Nested dict of `Decoder` objects which allow to customize the
       decoding. The structure should match the feature structure, but only
       customized feature keys need to be present. See [the
@@ -786,7 +784,7 @@ def data_source(
   Returns:
     `Sequence` if `split`,
     `dict<key: tfds.Split, value: Sequence>` otherwise.
-  """
+  """  # fmt:skip
   builder_kwargs = _set_file_format_for_data_source(builder_kwargs)
   dbuilder = _fetch_builder(
       name,

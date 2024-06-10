@@ -33,7 +33,7 @@ Note that, due to the EnvLogger dependency, generation of this dataset is
 currently supported on Linux environments only.
 
 *   **Source code**:
-    [`tfds.rlds.robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/rlds/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can.py)
+    [`tfds.rlds.datasets.robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/rlds/datasets/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can.py)
 
 *   **Versions**:
 

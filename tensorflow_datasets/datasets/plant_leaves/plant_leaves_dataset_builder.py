@@ -55,7 +55,11 @@ class DownloadRetryLimitReachedError(Exception):
 class Builder(tfds.core.GeneratorBasedBuilder):
   """Healthy and unhealthy plant leaves dataset."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.1")
+  RELEASE_NOTES = {
+      "0.1.0": "Initial release.",
+      "0.1.1": "Fix checksum error.",
+  }
 
   def _info(self):
     labels = list(zip(*_LABEL_MAPPING))[1]

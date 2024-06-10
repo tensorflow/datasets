@@ -128,7 +128,7 @@ class ExampleParserNp(Parser):
     self._flat_example_specs = utils.flatten_nest_dict(self.example_specs)
 
   def parse_example(
-      self, serialized_example: bytes
+      self, serialized_example: bytes | memoryview
   ) -> Mapping[str, Union[np.ndarray, list[Any]]]:
     example = tf_example_pb2.Example.FromString(serialized_example)
     np_example = _features_to_numpy(example.features, self._flat_example_specs)

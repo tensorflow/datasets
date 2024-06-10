@@ -87,7 +87,7 @@ def create_dataset_files(
 ) -> None:
   """Creates the dataset files."""
   # Creates the root directory
-  dataset_dir = dataset_dir.expanduser().resolve() / dataset_name
+  dataset_dir = dataset_dir.expanduser().resolve() / dataset_name.lower()
   dataset_dir.mkdir(parents=True)
   in_tfds = 'tensorflow_datasets' in dataset_dir.parts
 
@@ -118,9 +118,14 @@ def create_dataset_files(
   )
 
 
+def _get_filename(info: utils.DatasetInfo) -> str:
+  """Returns the dataset builder filename without Py extension."""
+  return f'{info.name.lower()}_dataset_builder'
+
+
 def _create_dataset_file(info: utils.DatasetInfo) -> None:
   """Create a new dataset from a template."""
-  file_path = info.path / f'{info.name}_dataset_builder.py'
+  file_path = info.path / (_get_filename(info) + '.py')
 
   content = builder_templates.create_builder_template(info)
   file_path.write_text(content)
@@ -128,18 +133,19 @@ def _create_dataset_file(info: utils.DatasetInfo) -> None:
 
 def _create_dataset_test(info: utils.DatasetInfo) -> None:
   """Adds the `dummy_data/` directory."""
-  file_path = info.path.joinpath(f'{info.name}_dataset_builder_test.py')
+  filename = _get_filename(info)
+  file_path = info.path / (filename + '_test.py')
 
   content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
-      from {info.ds_import} import {info.name}_dataset_builder
+      from {info.ds_import} import {filename}
       import {info.tfds_api} as tfds
 
       class {info.cls_name}Test(tfds.testing.DatasetBuilderTestCase):
         """Tests for {info.name} dataset."""
         # {info.todo}:
-        DATASET_CLASS = {info.name}_dataset_builder.Builder
+        DATASET_CLASS = {filename}.Builder
         SPLITS = {{
             'train': 3,  # Number of fake train example
             'test': 1,  # Number of fake test example

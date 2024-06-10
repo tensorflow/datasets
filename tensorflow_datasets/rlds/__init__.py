@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Datasets generated with RLDS."""
-from tensorflow_datasets.rlds.locomotion.locomotion import Locomotion
-from tensorflow_datasets.rlds.robosuite_panda_pick_place_can.robosuite_panda_pick_place_can import RobosuitePandaPickPlaceCan
+"""RLDS utils.
+
+Note that the datasets are imported lazily so they don't need to be in here.
+"""
+
+from tensorflow_datasets.rlds import envlogger_reader
+from tensorflow_datasets.rlds import rlds_base

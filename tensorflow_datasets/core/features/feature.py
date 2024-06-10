@@ -41,7 +41,7 @@ from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.utils.lazy_imports_utils import tf_agents
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 from google.protobuf import descriptor
 from google.protobuf import json_format
@@ -1068,7 +1068,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     will restore the feature metadata from the saved file.
 
     Args:
-      data_dir: path to the dataset folder to which save the info (ex:
+      data_dir: path to the dataset folder where the info is saved (ex:
         `~/datasets/cifar10/1.2.0/`)
       feature_name: the name of the feature (from the FeaturesDict key)
     """

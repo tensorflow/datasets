@@ -12,12 +12,6 @@
 # `citrus_leaves`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=citrus_leaves">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 The original citrus dataset contains 759 images of healthy and unhealthy citrus

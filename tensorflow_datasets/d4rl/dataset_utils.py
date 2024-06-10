@@ -49,7 +49,7 @@ def citation():
 
 
 def url():
-  return 'https://sites.google.com/view/d4rl/home'
+  return 'https://sites.google.com/view/d4rl-anonymous'
 
 
 def generate_examples(file_path: str):

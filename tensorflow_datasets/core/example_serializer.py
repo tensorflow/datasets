@@ -19,8 +19,9 @@ from __future__ import annotations
 
 import abc
 import collections
+from collections.abc import Mapping
 import dataclasses
-from typing import Any, Mapping, Union
+from typing import Any
 
 import numpy as np
 from tensorflow_datasets.core import utils
@@ -130,14 +131,10 @@ def _dict_to_tf_example(
   #     'objects/tokens/flat_values': [0, 1, 2, 3, 4],
   #     'objects/tokens/row_lengths_0': [3, 0, 2],
   # }
-  features = utils.flatten_nest_dict(
-      {
-          k: run_with_reraise(
-              _add_ragged_fields, k, example_dict[k], tensor_info
-          )
-          for k, tensor_info in tensor_info_dict.items()
-      }
-  )
+  features = utils.flatten_nest_dict({
+      k: run_with_reraise(_add_ragged_fields, k, example_dict[k], tensor_info)
+      for k, tensor_info in tensor_info_dict.items()
+  })
   features = {
       k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
       for k, (item, tensor_info) in features.items()
@@ -190,7 +187,9 @@ def _item_to_tf_feature(
   # Convert boolean to integer (tf.train.Example does not support bool)
   if v.dtype == np.bool_:
     v = v.astype(int)
-
+  if v.dtype == np.uint64:
+    # We cannot store uint64 in tf.Example, so we bitcast to int64.
+    v = v.view(np.int64)
   vals = v.flat  # Convert v into a 1-d array (without extra copy)
   if dtype_utils.is_integer(v.dtype):
     return tf_feature_pb2.Feature(
@@ -214,7 +213,7 @@ def _item_to_tf_feature(
     )
 
 
-def _as_bytes(bytes_or_text: Union[bytearray, bytes, str]) -> bytes:
+def _as_bytes(bytes_or_text: bytearray | bytes | str) -> bytes:
   """Converts `bytearray`, `bytes`, or unicode python input types to `bytes`.
 
   Uses utf-8 encoding for text by default.

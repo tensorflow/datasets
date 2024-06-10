@@ -12,12 +12,6 @@
 # `dsprites`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=dsprites">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 dSprites is a dataset of 2D shapes procedurally generated from 6 ground truth

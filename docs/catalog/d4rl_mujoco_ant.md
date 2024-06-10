@@ -5,7 +5,7 @@
   <meta itemprop="name" content="d4rl_mujoco_ant" />
   <meta itemprop="description" content="D4RL is an open-source benchmark for offline reinforcement learning. It provides&#10;standardized environments and datasets for training and benchmarking algorithms.&#10;&#10;The datasets follow the [RLDS format](https://github.com/google-research/rlds)&#10;to represent steps and episodes.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;d4rl_mujoco_ant&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/d4rl_mujoco_ant" />
-  <meta itemprop="sameAs" content="https://sites.google.com/view/d4rl/home" />
+  <meta itemprop="sameAs" content="https://sites.google.com/view/d4rl-anonymous" />
   <meta itemprop="citation" content="@misc{fu2020d4rl,&#10;    title={D4RL: Datasets for Deep Data-Driven Reinforcement Learning},&#10;    author={Justin Fu and Aviral Kumar and Ofir Nachum and George Tucker and Sergey Levine},&#10;    year={2020},&#10;    eprint={2004.07219},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.LG}&#10;}" />
 </div>
 
@@ -20,17 +20,11 @@ standardized environments and datasets for training and benchmarking algorithms.
 The datasets follow the [RLDS format](https://github.com/google-research/rlds)
 to represent steps and episodes.
 
-*   **Additional Documentation**:
-    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/d4rl">
-    Explore on Papers With Code
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Config description**: See more details about the task and its versions in
     https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym
 
 *   **Homepage**:
-    [https://sites.google.com/view/d4rl/home](https://sites.google.com/view/d4rl/home)
+    [https://sites.google.com/view/d4rl-anonymous](https://sites.google.com/view/d4rl-anonymous)
 
 *   **Source code**:
     [`tfds.d4rl.d4rl_mujoco_ant.D4rlMujocoAnt`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/d4rl/d4rl_mujoco_ant/d4rl_mujoco_ant.py)

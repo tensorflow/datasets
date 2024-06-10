@@ -21,6 +21,7 @@ import contextlib
 import dataclasses
 import datetime
 import functools
+import json
 import os
 import pathlib
 import subprocess
@@ -39,6 +40,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -706,3 +708,77 @@ def set_current_datetime(now_datetime: datetime.datetime) -> Iterator[None]:
 
   with mock.patch.object(datetime, 'datetime', new=MockDatetime):
     yield
+
+
+@contextlib.contextmanager
+def dummy_croissant_file() -> Iterator[epath.Path]:
+  """Yields temporary path to a dummy Croissant file.
+
+  The function creates a temporary directory that stores raw data files and the
+  Croissant JSON-LD.
+  """
+  entries = [{'index': i, 'text': f'Dummy example {i}'} for i in range(2)]
+  distribution = [
+      mlc.FileObject(
+          id='raw_data',
+          description='File with the data.',
+          encoding_format='application/jsonlines',
+          content_url='data/raw_data.jsonl',
+          sha256=(
+              'b13bbcd65bb5ec7c0c64cbceb635de3eadda17f3311c5982dc2d5a342ed97690'
+          ),
+      ),
+  ]
+  record_sets = [
+      mlc.RecordSet(
+          id='jsonl',
+          description='Dummy record set.',
+          fields=[
+              mlc.Field(
+                  name='index',
+                  description='The sample index.',
+                  data_types=mlc.DataType.INTEGER,
+                  source=mlc.Source(
+                      file_object='raw_data',
+                      extract=mlc.Extract(column='index'),
+                  ),
+              ),
+              mlc.Field(
+                  name='text',
+                  description='The dummy sample text.',
+                  data_types=mlc.DataType.TEXT,
+                  source=mlc.Source(
+                      file_object='raw_data',
+                      extract=mlc.Extract(column='text'),
+                  ),
+              ),
+          ],
+      )
+  ]
+  dummy_metadata = mlc.Metadata(
+      name='DummyDataset',
+      description='Dummy description.',
+      cite_as=(
+          '@article{dummyarticle, title={title}, author={author}, year={2020}}'
+      ),
+      url='https://dummy_url',
+      distribution=distribution,
+      record_sets=record_sets,
+      version='1.2.0',
+      license='Public',
+  )
+
+  with tempfile.TemporaryDirectory() as tempdir:
+    tempdir = epath.Path(tempdir)
+
+    # Write raw examples to tempdir/data.
+    raw_data_dir = tempdir / 'data'
+    raw_data_dir.mkdir()
+    raw_data_file = raw_data_dir / 'raw_data.jsonl'
+    raw_data_file.write_text('\n'.join(map(json.dumps, entries)))
+
+    # Write Croissant JSON-LD to tempdir.
+    croissant_file = tempdir / 'croissant.json'
+    croissant_file.write_text(json.dumps(dummy_metadata.to_json(), indent=2))
+
+    yield croissant_file

@@ -25,9 +25,6 @@ class Qm9Test(testing.DatasetBuilderTestCase):
   # We patch properties of the testdata here.
   qm9_dataset_builder._SIZE = 5
   qm9_dataset_builder._CHARACTERIZED_SIZE = 4
-  qm9_dataset_builder._TRAIN_SIZE = 2
-  qm9_dataset_builder._VALIDATION_SIZE = 1
-  qm9_dataset_builder._TEST_SIZE = 1
 
   DATASET_CLASS = qm9_dataset_builder.Builder
 

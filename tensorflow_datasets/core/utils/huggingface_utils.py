@@ -15,9 +15,11 @@
 
 """Utility functions for huggingface_dataset_builder."""
 
+from __future__ import annotations
+
 from collections.abc import Mapping, Sequence
 import datetime
-import re
+import typing
 from typing import Any, Type, TypeVar
 
 from etils import epath
@@ -27,8 +29,13 @@ from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import dtype_utils
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+if typing.TYPE_CHECKING:
+  # pylint: disable=g-bad-import-order
+  import mlcroissant as mlc
 
 
 _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
@@ -40,8 +47,7 @@ _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
     'string': np.object_,
 })
 _IMAGE_ENCODING_FORMAT = 'png'
-# Regular expression to match strings that are not valid Python/TFDS names:
-_INVALID_TFDS_NAME_CHARACTER = re.compile(r'[^a-zA-Z0-9_]')
+_DEFAULT_IMG = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\x0cIDATx\x9cc```\x00\x00\x00\x04\x00\x01\xf6\x178U\x00\x00\x00\x00IEND\xaeB`\x82'
 _StrOrNone = TypeVar('_StrOrNone', str, None)
 
 
@@ -139,6 +145,9 @@ def _get_default_value(
   ...
   ```
 
+  For images, if the HuggingFace dataset does not contain an image, we
+  set a default value which corresponds to a PNG of 1px, black.
+
   Args:
     feature: The TFDS feature from which we want the default value.
 
@@ -152,7 +161,14 @@ def _get_default_value(
           for name, inner_feature in feature.items()
       }
     case feature_lib.Sequence():
-      return []
+      match feature.feature:
+        case feature_lib.FeaturesDict():
+          return {feature_name: [] for feature_name in feature.feature.keys()}
+        case _:
+          return []
+    case feature_lib.Image():
+      # Return an empty PNG image of 1x1 pixel, black.
+      return _DEFAULT_IMG
     case _:
       if dtype_utils.is_string(feature.np_dtype):
         return b''
@@ -233,7 +249,17 @@ def convert_hf_value(
   )
 
 
-def convert_hf_name(hf_name: _StrOrNone) -> _StrOrNone:
+def get_tfds_name_from_croissant_dataset(dataset: mlc.Dataset) -> str:
+  """Returns TFDS compatible dataset name of the given MLcroissant dataset."""
+  if (url := dataset.metadata.url) and url.startswith(
+      'https://huggingface.co/datasets/'
+  ):
+    url_suffix = url.removeprefix('https://huggingface.co/datasets/')
+    return convert_hf_name(url_suffix)
+  return convert_hf_name(dataset.metadata.name)
+
+
+def convert_hf_name(hf_name: str) -> str:
   """Converts Huggingface name to a TFDS compatible dataset name.
 
   Huggingface names can contain characters that are not supported in
@@ -250,10 +276,8 @@ def convert_hf_name(hf_name: _StrOrNone) -> _StrOrNone:
     The TFDS compatible dataset name (dataset names, config names and split
     names).
   """
-  if hf_name is None:
-    return hf_name
   hf_name = hf_name.lower().replace('/', '__')
-  return re.sub(_INVALID_TFDS_NAME_CHARACTER, '_', hf_name)
+  return py_utils.make_valid_name(hf_name)
 
 
 def convert_tfds_dataset_name(tfds_dataset_name: str) -> str:

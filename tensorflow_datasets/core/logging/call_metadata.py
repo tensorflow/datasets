@@ -15,13 +15,15 @@
 
 """To associate metadata with TFDS calls."""
 
+from __future__ import annotations
+
 import enum
 import threading
 import time
-from typing import Dict, Optional, Tuple
+
 
 # Maps thread_id to "Session ID", if any.
-_THREAD_TO_SESSIONID: Dict[int, int] = {}
+_THREAD_TO_SESSIONID: dict[int, int] = {}
 
 _NEXT_SESSION_ID = 1
 _NEXT_SESSION_ID_LOCK = threading.Lock()
@@ -33,7 +35,7 @@ class Status(enum.Enum):
   ERROR = 2
 
 
-def _get_session_id(thread_id: int) -> Tuple[int, bool]:
+def _get_session_id(thread_id: int) -> tuple[int, bool]:
   """Returns (session_id, direct_call) tuple."""
   session_id = _THREAD_TO_SESSIONID.get(thread_id, None)
   if session_id:
@@ -55,8 +57,8 @@ class CallMetadata:
   """
 
   # The start and end times of the event (microseconds since Epoch).
-  start_time_micros: Optional[int]
-  end_time_micros: Optional[int]
+  start_time_micros: int | None
+  end_time_micros: int | None
 
   # The status (success or error) of the call.
   status: Status

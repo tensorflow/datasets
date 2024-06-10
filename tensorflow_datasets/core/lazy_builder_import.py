@@ -19,7 +19,6 @@ This module is only intended to be used until all TFDS `DatasetsBuilder`s are
 defined under the "datasets/" directory and the legacy locations have been
 deprecated (ie: a new major release).
 """
-from typing import Text
 
 from absl import logging
 from tensorflow_datasets.core import registered
@@ -28,11 +27,12 @@ from tensorflow_datasets.core import registered
 class LazyBuilderImport:
   """Lazy load DatasetBuilder from given name from legacy locations."""
 
-  def __init__(self, dataset_name: Text):
+  def __init__(self, dataset_name: str):
     object.__setattr__(self, "_dataset_name", dataset_name)
     object.__setattr__(self, "_dataset_cls", None)
 
   def _get_builder_cls(self):
+    """Returns the DatasetBuilder class."""
     cls = object.__getattribute__(self, "_dataset_cls")
     if not cls:
       builder_name = object.__getattribute__(self, "_dataset_name")

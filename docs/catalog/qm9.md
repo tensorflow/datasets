@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="qm9" />
-  <meta itemprop="description" content="QM9 consists of computed geometric, energetic, electronic, and thermodynamic&#10;properties for 134k stable small organic molecules made up of CHONF. As usual,&#10;we remove the uncharacterized molecules and provide the remaining 130,831 in the&#10;original order (not shuffled). We provide a single &#x27;train&#x27; split, users are&#10;expected to make their own validation/test splits.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;qm9&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="QM9 consists of computed geometric, energetic, electronic, and thermodynamic&#10;properties for 134k stable small organic molecules made up of C, H, O, N, and F.&#10;As usual, we remove the uncharacterized molecules and provide the remaining&#10;130,831.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;qm9&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/qm9" />
   <meta itemprop="sameAs" content="https://doi.org/10.6084/m9.figshare.c.978904.v5" />
   <meta itemprop="citation" content="@article{ramakrishnan2014quantum,&#10;  title={Quantum chemistry structures and properties of 134 kilo molecules},&#10;  author={Ramakrishnan, Raghunathan and Dral, Pavlo O and Rupp, Matthias and von Lilienfeld, O Anatole},&#10;  journal={Scientific Data},&#10;  volume={1},&#10;  year={2014},&#10;  publisher={Nature Publishing Group}&#10;}" />
@@ -12,17 +12,12 @@
 # `qm9`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 QM9 consists of computed geometric, energetic, electronic, and thermodynamic
-properties for 134k stable small organic molecules made up of CHONF. As usual,
-we remove the uncharacterized molecules and provide the remaining 130,831 in the
-original order (not shuffled). We provide a single 'train' split, users are
-expected to make their own validation/test splits.
+properties for 134k stable small organic molecules made up of C, H, O, N, and F.
+As usual, we remove the uncharacterized molecules and provide the remaining
+130,831.
 
 *   **Homepage**:
     [https://doi.org/10.6084/m9.figshare.c.978904.v5](https://doi.org/10.6084/m9.figshare.c.978904.v5)
@@ -37,16 +32,6 @@ expected to make their own validation/test splits.
 *   **Download size**: `82.62 MiB`
 
 *   **Dataset size**: `177.16 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 130,831
 
 *   **Feature structure**:
 
@@ -146,3 +131,57 @@ zpve             | Tensor       |         | float32 |
 }
 ```
 
+
+## qm9/original (default config)
+
+*   **Config description**: QM9 does not define any splits. So this variant puts
+    the full QM9 dataset in the train split, in the original order (no
+    shuffling).
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 130,831
+
+## qm9/cormorant
+
+*   **Config description**: Dataset split used by Cormorant. 100,000 train,
+    17,748 validation, and 13,083 test samples. Splitting happens after
+    shuffling with seed 0. Paper: https://arxiv.org/abs/1906.04015. Split:
+    https://github.com/risilab/cormorant/blob/master/src/cormorant/data/prepare/qm9.py
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 13,083
+`'train'`      | 100,000
+`'validation'` | 17,748
+
+## qm9/dimenet
+
+*   **Config description**: Dataset split used by DimeNet. 110,000 train, 10,000
+    validation, and 10,831 test samples. Splitting happens after shuffling with
+    seed 42. Paper: https://arxiv.org/abs/2003.03123. Split:
+    https://github.com/gasteigerjo/dimenet/blob/master/dimenet/training/data_provider.py
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,831
+`'train'`      | 110,000
+`'validation'` | 10,000

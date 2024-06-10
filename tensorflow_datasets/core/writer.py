@@ -73,11 +73,19 @@ def _raise_error_for_duplicated_keys(example1, example2, example_specs):
   """Log information about the examples and raise an AssertionError."""
   msg = "Two examples share the same hashed key!"
   logging.error(msg)
-  parser = example_parser.ExampleParser(example_specs)
-  ex1 = parser.parse_example(example1)
-  ex2 = parser.parse_example(example2)
-  logging.error("1st example: %s", ex1)
-  logging.error("2nd example: %s", ex2)
+  try:
+    parser = example_parser.ExampleParser(example_specs)
+    ex1 = parser.parse_example(example1)
+    ex2 = parser.parse_example(example2)
+    logging.error("1st example: %s", ex1)
+    logging.error("2nd example: %s", ex2)
+  except ValueError:
+    logging.error(
+        "Failed to parse examples! Cannot log them to see the examples behind"
+        " the duplicated keys. Raw example 1: %s, raw example 2: %s",
+        example1,
+        example2,
+    )
   raise AssertionError(msg + " See logs above to view the examples.")
 
 
@@ -192,6 +200,7 @@ class Writer:
       disable_shuffling: bool,
       example_writer: ExampleWriter,
       shard_config: shard_utils.ShardConfig | None = None,
+      ignore_duplicates: bool = False,
   ):
     """Initializes Writer.
 
@@ -202,14 +211,16 @@ class Writer:
       disable_shuffling (bool): Specifies whether to shuffle the records.
       example_writer: class that writes examples to disk or elsewhere.
       shard_config: the configuration for creating shards.
+      ignore_duplicates: whether to ignore duplicated examples with the same
+        key. If False, a `DuplicatedKeysError` will be raised on duplicates.
     """
     self._serializer = serializer
     self._shuffler = shuffle.Shuffler(
         dirpath=filename_template.data_dir,
         hash_salt=hash_salt,
         disable_shuffling=disable_shuffling,
+        ignore_duplicates=ignore_duplicates,
     )
-    self._num_examples = 0
     self._filename_template = filename_template
     self._shard_config = shard_config or shard_utils.ShardConfig()
     self._example_writer = example_writer
@@ -226,18 +237,20 @@ class Writer:
     """
     serialized_example = self._serializer.serialize_example(example=example)
     self._shuffler.add(key, serialized_example)
-    self._num_examples += 1
 
   def finalize(self) -> tuple[list[int], int]:
     """Effectively writes examples to the shards."""
-    filename = self._filename_template.sharded_filepaths_pattern()
+    if self._shuffler.num_examples == 0:
+      raise AssertionError("No examples were yielded.")
+
     shard_specs = _get_shard_specs(
-        num_examples=self._num_examples,
+        num_examples=self._shuffler.num_examples,
         total_size=self._shuffler.size,
         bucket_lengths=self._shuffler.bucket_lengths,
         filename_template=self._filename_template,
         shard_config=self._shard_config,
     )
+    filename = self._filename_template.sharded_filepaths_pattern()
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
     # parallelize, but one would need to be careful not to sort buckets twice.
@@ -245,7 +258,7 @@ class Writer:
         utils.tqdm(
             self._shuffler,
             desc=f"Shuffling {filename}...",
-            total=self._num_examples,
+            total=self._shuffler.num_examples,
             unit=" examples",
             leave=False,
             mininterval=1.0,
@@ -322,6 +335,7 @@ class BeamWriter:
       disable_shuffling: bool,
       example_writer: ExampleWriter,
       shard_config: shard_utils.ShardConfig | None = None,
+      ignore_duplicates: bool = False,
   ):
     """Init BeamWriter.
 
@@ -336,6 +350,8 @@ class BeamWriter:
       disable_shuffling: bool, specifies whether to shuffle the records.
       example_writer: class that writes examples to storage.
       shard_config: the configuration for creating shards.
+      ignore_duplicates: whether to ignore duplicated examples with the same
+        key. If False, a `DuplicatedKeysError` will be raised on duplicates.
     """
     self._original_state = dict(
         serializer=serializer,
@@ -344,6 +360,7 @@ class BeamWriter:
         disable_shuffling=disable_shuffling,
         shard_config=shard_config,
         example_writer=example_writer,
+        ignore_duplicates=ignore_duplicates,
     )
     self._filename_template = filename_template
     self._split_info_path = (
@@ -355,6 +372,7 @@ class BeamWriter:
     self._disable_shuffling = disable_shuffling
     self._shard_config = shard_config or shard_utils.ShardConfig()
     self._example_writer = example_writer
+    self._ignore_duplicates = ignore_duplicates
 
   @functools.lru_cache()
   def _get_counter(self, name: str, namespace: str = "BeamWriter"):
@@ -416,29 +434,34 @@ class BeamWriter:
       raise AssertionError("Not a single example present in the PCollection!")
     # There may be empty shards, this ensures there are no gaps.
     shard_id = non_empty_shard_ids.index(original_shard_id)
-    examples = sorted(examples)
-    self._get_distribution(name="ShardLenDistribution").update(len(examples))
-    # Compare continuous examples
-    for ex0, ex1 in zip(examples[:-1], examples[1:]):
-      if ex0[0] == ex1[0]:  # Different keys
-        _raise_error_for_duplicated_keys(
-            ex0[1], ex1[1], self._serializer.example_specs
-        )
+    example_by_key = {}
+    for key, example in examples:
+      if key in example_by_key:
+        if not self._ignore_duplicates:
+          _raise_error_for_duplicated_keys(
+              example_by_key[key], example, self._serializer.example_specs
+          )
+      else:
+        example_by_key[key] = example
     shard_path = self._filename_template.sharded_filepath(
         shard_index=shard_id, num_shards=len(non_empty_shard_ids)
     )
     with utils.incomplete_file(epath.Path(shard_path)) as tmp_path:
       logging.info(
-          "Writing %d examples to %s.", len(examples), os.fspath(tmp_path)
+          "Writing %d examples to %s.", len(example_by_key), os.fspath(tmp_path)
       )
-      record_keys = self._example_writer.write(tmp_path, examples)
+      record_keys = self._example_writer.write(
+          tmp_path, sorted(example_by_key.items())
+      )
     self.inc_counter(name="written_shards")
     # If there are record_keys, create index files.
     if record_keys:
       index_path = _get_index_path(os.fspath(shard_path))
       _write_index_file(index_path, list(record_keys))
-    shard_size = sum(map(len, examples))
-    return _ShardInfo(id=shard_id, num_examples=len(examples), size=shard_size)
+    shard_size = sum(map(len, example_by_key.values()))
+    return _ShardInfo(
+        id=shard_id, num_examples=len(example_by_key), size=shard_size
+    )
 
   def _number_of_shards(self, num_examples: int, total_size: int) -> int:
     """Returns the number of shards."""
@@ -468,11 +491,11 @@ class BeamWriter:
   def _store_split_info(
       self,
       shard_infos: Sequence[_ShardInfo],
-      total_size: int,
   ) -> None:
     """Stores the split info to disk."""
     shard_infos = sorted(shard_infos, key=lambda x: x.id)
     shard_lengths = [info.num_examples for info in shard_infos]
+    total_size = sum([info.size for info in shard_infos])
     with utils.incomplete_file(epath.Path(self._split_info_path)) as tmp_path:
       tmp_path.write_text(
           json.dumps({"total_size": total_size, "shard_lengths": shard_lengths})
@@ -553,8 +576,7 @@ class BeamWriter:
         # (_ShardInfo)
         | "CollectShardInfo" >> beam.transforms.combiners.ToList()
         # [_ShardInfo]
-        | "CalculateSplitInfo"
-        >> beam.ParDo(self._store_split_info, total_size=total_size)
+        | "CalculateSplitInfo" >> beam.ParDo(self._store_split_info)
     )
 
   def finalize(self) -> tuple[list[int], int]:

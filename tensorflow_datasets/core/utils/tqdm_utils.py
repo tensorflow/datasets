@@ -15,10 +15,17 @@
 
 """Wrapper around tqdm."""
 
+from __future__ import annotations
+
 import contextlib
 import os
 
-from tqdm import auto as tqdm_lib
+from etils import epy
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from tqdm import auto as tqdm_lib
+  # pylint: enable=g-import-not-at-top
 
 
 class TqdmStream:

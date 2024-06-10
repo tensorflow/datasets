@@ -18,15 +18,14 @@
 from collections.abc import MappingView, Sequence
 import dataclasses
 import typing
-from typing import Any, Generic, Iterable, Protocol, TypeVar
+from typing import Any, Generic, Iterable, Protocol, SupportsIndex, TypeVar
 
-from absl import logging
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import type_utils
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 T = TypeVar('T')
 
@@ -38,7 +37,7 @@ class DataSource(Protocol, Generic[T]):
   def __len__(self) -> int:
     """Returns the total number of records in the data source."""
 
-  def __getitem__(self, key: int) -> T:
+  def __getitem__(self, key: SupportsIndex) -> T:
     """Returns the value for the given `key`."""
 
   def __getitems__(self, keys: Iterable[int]) -> T:
@@ -76,27 +75,19 @@ class BaseDataSource(MappingView, Sequence):
   decoders: type_utils.TreeDict[decode.partial_decode.DecoderArg] | None = None
   data_source: DataSource[Any] = dataclasses.field(init=False)
 
-  def __getitem__(self, record_key: int) -> Any:
-    if not isinstance(record_key, int):
-      logging.error(
-          'Calling DataSource.__getitem__() with sequence '
-          'of record keys (%s) is deprecated. Either pass a single '
-          'integer or switch to __getitems__().',
-          record_key,
-      )
-      return self.__getitems__(record_key)
-    record = self.data_source[record_key]
+  def __getitem__(self, key: SupportsIndex) -> Any:
+    record = self.data_source[key.__index__()]
     return self.dataset_info.features.deserialize_example_np(
         record, decoders=self.decoders
     )
 
-  def __getitems__(self, record_keys: Sequence[int]) -> Sequence[Any]:
+  def __getitems__(self, keys: Sequence[int]) -> Sequence[Any]:
     """Retrieves items by batch.
 
     This method allows PyTorch to load records by batch, rather than one by one.
 
     Args:
-      record_keys: a sequence of keys.
+      keys: a sequence of keys.
 
     Returns:
       The records associated with the keys.
@@ -104,15 +95,15 @@ class BaseDataSource(MappingView, Sequence):
     Raises:
       IndexError: If the number of retrieved records is incorrect.
     """
-    if not record_keys:
+    if not keys:
       return []
-    records = self.data_source.__getitems__(record_keys)
+    records = self.data_source.__getitems__(keys)
     features = self.dataset_info.features
-    if len(record_keys) != len(records):
+    if len(keys) != len(records):
       raise IndexError(
-          f'Requested {len(record_keys)} records but got'
+          f'Requested {len(keys)} records but got'
           f' {len(records)} records.'
-          f'{record_keys=}, {records=}'
+          f'{keys=}, {records=}'
       )
     return [
         features.deserialize_example_np(record, decoders=self.decoders)

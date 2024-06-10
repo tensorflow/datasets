@@ -202,12 +202,16 @@ class DatasetReference:
       provided.
     data_dir: Optional data dir where this dataset is located. If None, defaults
       to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
+      falls back to '~/tensorflow_datasets'.
     split_mapping: mapping between split names. If the `DatasetCollection` wants
       to use different split names than the source datasets, then this mapping
       can be used. For example, if the collection uses the split `valid`, but
       this dataset uses the split `validation`, then the `split_mapping` should
       be `{'validation': 'valid'}`.
-  """
+    info_filenames: Filenames which are used to describe the dataset. They might
+      include, for example, `dataset_info.json`, `features.json`, etc. If None,
+      then it wasn't checked which info files exist on disk.
+  """  # fmt: skip
 
   dataset_name: str
   namespace: None | str = None
@@ -215,6 +219,7 @@ class DatasetReference:
   version: None | str | version_lib.Version = None
   data_dir: None | str | os.PathLike = None  # pylint: disable=g-bare-generic
   split_mapping: None | Mapping[str, str] = None
+  info_filenames: set[str] | None = None
 
   def __post_init__(self):
     if isinstance(self.version, version_lib.Version):
@@ -301,7 +306,7 @@ class DatasetReference:
 
 
 def references_for(
-    name_to_tfds_name: Mapping[str, str]
+    name_to_tfds_name: Mapping[str, str],
 ) -> Mapping[str, DatasetReference]:
   """Constructs of dataset references.
 

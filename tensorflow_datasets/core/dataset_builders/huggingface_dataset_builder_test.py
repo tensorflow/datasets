@@ -16,8 +16,12 @@
 from unittest import mock
 
 import datasets as hf_datasets
+import numpy as np
 import pytest
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
+
+PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
 
 
 class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
@@ -26,6 +30,7 @@ class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
     return hf_datasets.DatasetInfo(
         description='description',
         citation='citation',
+        license='test-license',
         features=None,
         version='1.0.0',
     )
@@ -35,7 +40,11 @@ class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
 
   def _generate_examples(self):
     for i in range(2):
-      yield i, {'feature': i}
+      yield i, {
+          'number': i,
+          'text': f'{i}',
+          'image': PIL_Image.new(mode='L', size=(4, 4)),
+      }
 
   def download_and_prepare(self, *args, **kwargs):
     # Disable downloads from GCS
@@ -81,14 +90,27 @@ def mock_huggingface_dataset_builder(
       'foo/bar', 'config', other_arg='this is another arg'
   )
   login_to_hf.assert_called_once_with('SECRET_TOKEN')
+  assert builder.info.description == 'description'
+  assert builder.info.citation == 'citation'
+  assert builder.info.redistribution_info.license == 'test-license'
   yield builder
 
 
 def test_download_and_prepare(builder):
   builder.download_and_prepare()
   ds = builder.as_data_source()
+  expected_image = PIL_Image.new(mode='RGB', size=(4, 4))
   # Split names are sanitized, eg train.clean -> train_clean
-  assert list(ds['train_clean']) == [{'feature': 0}, {'feature': 1}]
+  for element, expected in zip(
+      ds['train_clean'],
+      [
+          {'number': 0, 'text': b'0', 'image': expected_image},
+          {'number': 1, 'text': b'1', 'image': expected_image},
+      ],
+  ):
+    for feature in ['number', 'text', 'image']:
+      assert np.array_equal(element[feature], expected[feature])
+  assert len(ds['train_clean']) == 2
 
 
 def test_all_parameters_are_passed_down_to_hf(builder):
@@ -98,4 +120,8 @@ def test_all_parameters_are_passed_down_to_hf(builder):
 
 
 def test_hf_features(builder):
-  assert builder._hf_features() == {'feature': hf_datasets.Value('int64')}
+  assert builder._hf_features() == {
+      'number': hf_datasets.Value('int64'),
+      'text': hf_datasets.Value('string'),
+      'image': hf_datasets.Image(),
+  }

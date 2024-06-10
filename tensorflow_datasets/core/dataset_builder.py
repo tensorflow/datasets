@@ -57,8 +57,8 @@ from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 import termcolor
-import tree
 
 
 ListOrTreeOrElem = type_utils.ListOrTreeOrElem
@@ -248,9 +248,9 @@ class DatasetBuilder(registered.RegisteredDataset):
   def __init__(
       self,
       *,
-      data_dir: Optional[epath.PathLike] = None,
-      config: Union[None, str, BuilderConfig] = None,
-      version: Union[None, str, utils.Version] = None,
+      data_dir: epath.PathLike | None = None,
+      config: None | str | BuilderConfig = None,
+      version: None | str | utils.Version = None,
   ):
     """Constructs a DatasetBuilder.
 
@@ -259,7 +259,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     Args:
       data_dir: directory to read/write data. Defaults to the value of the
         environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-        datasets are stored.
+        "~/tensorflow_datasets".
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
@@ -268,7 +268,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         special value "experimental_latest" will use the highest version, even
         if not default. This is not recommended unless you know what you are
         doing, as the version could be broken.
-    """
+    """  # fmt: skip
     if data_dir:
       data_dir = os.fspath(data_dir)  # Pathlib -> str
     # For pickling:
@@ -1596,6 +1596,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         beam_runner=download_config.beam_runner,
         shard_config=download_config.get_shard_config(),
         example_writer=self._example_writer(),
+        ignore_duplicates=download_config.ignore_duplicates,
     )
     # Wrap the generation inside a context manager.
     # If `beam` is used during generation (when a pipeline gets created),

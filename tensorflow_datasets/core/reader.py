@@ -33,7 +33,7 @@ from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 Tree = utils.Tree
 TreeDict = utils.TreeDict

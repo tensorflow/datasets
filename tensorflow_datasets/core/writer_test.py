@@ -258,7 +258,8 @@ class WriterTest(testing.TestCase):
       salt: str = '',
       dataset_name: str = 'foo',
       split: str = 'train',
-      disable_shuffling=False,
+      disable_shuffling: bool = False,
+      ignore_duplicates: bool = False,
       example_writer: Optional[writer_lib.ExampleWriter] = None,
       shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
@@ -284,6 +285,7 @@ class WriterTest(testing.TestCase):
         disable_shuffling=disable_shuffling,
         example_writer=example_writer,
         shard_config=shard_config,
+        ignore_duplicates=ignore_duplicates,
     )
     for key, record in to_write:
       writer.write(key, record)
@@ -379,6 +381,16 @@ class WriterTest(testing.TestCase):
       shard_config = shard_utils.ShardConfig(num_shards=1)
       self._write(to_write=to_write, shard_config=shard_config)
 
+  @mock.patch.object(example_parser, 'ExampleParser', testing.DummyParser)
+  def test_write_duplicated_keys_ignore_duplicates(self):
+    to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
+    shard_config = shard_utils.ShardConfig(num_shards=1)
+    shards_length, total_size = self._write(
+        to_write=to_write, shard_config=shard_config, ignore_duplicates=True
+    )
+    self.assertEqual(shards_length, [2])
+    self.assertEqual(total_size, 2)
+
   def test_empty_split(self):
     to_write = []
     with self.assertRaisesWithPredicateMatch(
@@ -400,6 +412,12 @@ class WriterTest(testing.TestCase):
 class TfrecordsWriterBeamTest(testing.TestCase):
   NUM_SHARDS = 3
   RECORDS_TO_WRITE = [(i, str(i).encode('utf-8')) for i in range(10)]
+  RECORDS_WITH_DUPLICATES = [
+      (1, b'a'),
+      (1, b'a'),
+      (1, b'a'),
+      (2, b'b'),
+  ]
   SHARDS_CONTENT = [
       [b'6', b'9'],
       [b'7'],
@@ -417,7 +435,8 @@ class TfrecordsWriterBeamTest(testing.TestCase):
       salt: str = '',
       dataset_name: str = 'foo',
       split: str = 'train',
-      disable_shuffling=False,
+      disable_shuffling: bool = False,
+      ignore_duplicates: bool = False,
       example_writer: Optional[writer_lib.ExampleWriter] = None,
       shard_config: Optional[shard_utils.ShardConfig] = None,
   ):
@@ -444,6 +463,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
         disable_shuffling=disable_shuffling,
         example_writer=example_writer,
         shard_config=shard_config,
+        ignore_duplicates=ignore_duplicates,
     )
     # Here we need to disable type check as `beam.Create` is not capable of
     # inferring the type of the PCollection elements.
@@ -482,6 +502,19 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     self.assertEqual(all_recs, self.SHARDS_CONTENT)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
+
+  def test_write_tfrecord_with_duplicates(self):
+    with self.assertRaisesWithPredicateMatch(
+        AssertionError, 'Two examples share the same hashed key'
+    ):
+      self._write(to_write=self.RECORDS_WITH_DUPLICATES)
+
+  def test_write_tfrecord_with_ignored_duplicates(self):
+    shards_length, total_size = self._write(
+        to_write=self.RECORDS_WITH_DUPLICATES, ignore_duplicates=True
+    )
+    self.assertEqual(shards_length, [2])
+    self.assertEqual(total_size, 2)
 
   def test_empty_split(self):
     with self.assertRaisesWithPredicateMatch(

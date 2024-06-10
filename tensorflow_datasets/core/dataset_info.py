@@ -33,16 +33,18 @@ processed the dataset as well:
 from __future__ import annotations
 
 import abc
+from collections.abc import Iterable
 import dataclasses
 import json
 import os
 import posixpath
 import tempfile
 import time
-from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
+from typing import Any, Optional
 
 from absl import logging
 from etils import epath
+from etils import epy
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
@@ -52,16 +54,21 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
-from tensorflow_datasets.core.utils import file_utils
-from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
-from google.protobuf import json_format
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from tensorflow_datasets.core.utils import file_utils
+  from tensorflow_datasets.core.utils import gcs_utils
+
+  from google.protobuf import json_format
+  # pylint: enable=g-import-not-at-top
+
 
 # TODO(b/109648354): Remove the "pytype: disable" comment.
-Nest = Union[Tuple["Nest", ...], Dict[str, "Nest"], str]  # pytype: disable=not-supported-yet
-SupervisedKeysType = Union[Tuple[Nest, Nest], Tuple[Nest, Nest, Nest]]
+Nest = tuple["Nest", ...] | dict[str, "Nest"] | str  # pytype: disable=not-supported-yet
+SupervisedKeysType = tuple[Nest, Nest] | tuple[Nest, Nest, Nest]
 
 
 def dataset_info_path(dataset_info_dir: epath.PathLike) -> epath.Path:
@@ -108,7 +115,7 @@ class DatasetIdentity:
   config_name: str | None = None
   config_description: str | None = None
   config_tags: list[str] | None = None
-  release_notes: Dict[str, str] | None = None
+  release_notes: dict[str, str] | None = None
 
   @classmethod
   def from_builder(cls, builder) -> "DatasetIdentity":
@@ -173,19 +180,21 @@ class DatasetInfo(object):
   """
 
   def __init__(
+      # LINT.IfChange(dataset_info_args)
       self,
       *,
-      builder: Union[DatasetIdentity, Any],
-      description: Optional[str] = None,
+      builder: DatasetIdentity | Any,
+      description: str | None = None,
       features: Optional[feature_lib.FeatureConnector] = None,
       supervised_keys: Optional[SupervisedKeysType] = None,
       disable_shuffling: bool = False,
-      homepage: Optional[str] = None,
-      citation: Optional[str] = None,
-      metadata: Optional[Metadata] = None,
-      license: Optional[str] = None,  # pylint: disable=redefined-builtin
-      redistribution_info: Optional[Dict[str, str]] = None,
+      homepage: str | None = None,
+      citation: str | None = None,
+      metadata: Metadata | None = None,
+      license: str | None = None,  # pylint: disable=redefined-builtin
+      redistribution_info: Optional[dict[str, str]] = None,
       split_dict: Optional[splits_lib.SplitDict] = None,
+      # LINT.ThenChange(:setstate)
   ):
     # pyformat: disable
     """Constructs DatasetInfo.
@@ -327,10 +336,7 @@ class DatasetInfo(object):
 
   @property
   def as_proto_with_features(self) -> dataset_info_pb2.DatasetInfo:
-    info_proto = dataset_info_pb2.DatasetInfo()
-    info_proto.CopyFrom(self._info_proto)
-    info_proto.features.CopyFrom(self.features.to_proto())  # pytype: disable=attribute-error  # always-use-property-annotation
-    return info_proto
+    return update_info_proto_with_features(self._info_proto, self.features)
 
   @property
   def name(self) -> str:
@@ -345,7 +351,7 @@ class DatasetInfo(object):
     return self._identity.config_description
 
   @property
-  def config_tags(self) -> List[str] | None:
+  def config_tags(self) -> list[str] | None:
     return self._identity.config_tags
 
   @property
@@ -366,7 +372,7 @@ class DatasetInfo(object):
     return self._identity.version
 
   @property
-  def release_notes(self) -> Optional[Dict[str, str]]:
+  def release_notes(self) -> dict[str, str] | None:
     return self._identity.release_notes
 
   @property
@@ -410,7 +416,7 @@ class DatasetInfo(object):
     return self._features
 
   @property
-  def metadata(self) -> Optional[Metadata]:
+  def metadata(self) -> Metadata | None:
     return self._metadata
 
   @property
@@ -429,14 +435,14 @@ class DatasetInfo(object):
     return self._identity.module_name
 
   @property
-  def file_format(self) -> Optional[file_adapters.FileFormat]:
+  def file_format(self) -> file_adapters.FileFormat | None:
     if not self.as_proto.file_format:
       return None
     return file_adapters.FileFormat(self.as_proto.file_format)
 
   def set_file_format(
       self,
-      file_format: Union[None, str, file_adapters.FileFormat],
+      file_format: None | str | file_adapters.FileFormat,
       override: bool = False,
   ) -> None:
     """Internal function to define the file format.
@@ -714,8 +720,8 @@ class DatasetInfo(object):
 
   def add_file_data_source_access(
       self,
-      path: Union[epath.PathLike, Iterable[epath.PathLike]],
-      url: Optional[str] = None,
+      path: epath.PathLike | Iterable[epath.PathLike],
+      url: str | None = None,
   ) -> None:
     """Records that the given query was used to generate this dataset.
 
@@ -741,7 +747,7 @@ class DatasetInfo(object):
   def add_url_access(
       self,
       url: str,
-      checksum: Optional[str] = None,
+      checksum: str | None = None,
   ) -> None:
     """Records the URL used to generate this dataset."""
     self._info_proto.data_source_accesses.append(
@@ -766,7 +772,7 @@ class DatasetInfo(object):
   def add_tfds_data_source_access(
       self,
       dataset_reference: naming.DatasetReference,
-      url: Optional[str] = None,
+      url: str | None = None,
   ) -> None:
     """Records that the given query was used to generate this dataset.
 
@@ -863,6 +869,35 @@ class DatasetInfo(object):
         lines.append(f"    {key}={value},")
     lines.append(")")
     return "\n".join(lines)
+
+  def __getstate__(self):
+    return {
+        "builder": self._builder_or_identity,
+        "description": self.description,
+        "features": self.features,
+        "supervised_keys": self.supervised_keys,
+        "disable_shuffling": self.disable_shuffling,
+        "homepage": self.homepage,
+        "citation": self.citation,
+        "metadata": self.metadata,
+        "license": self.redistribution_info.license,
+        "split_dict": self.splits,
+    }
+  def __setstate__(self, state):
+    # LINT.IfChange(setstate)
+    self.__init__(
+        builder=state["builder"],
+        description=state["description"],
+        features=state["features"],
+        supervised_keys=state["supervised_keys"],
+        disable_shuffling=state["disable_shuffling"],
+        homepage=state["homepage"],
+        citation=state["citation"],
+        metadata=state["metadata"],
+        license=state["license"],
+        split_dict=state["split_dict"],
+    )
+    # LINT.ThenChange(:dataset_info_args)
 
 
 def _nest_to_proto(nest: Nest) -> dataset_info_pb2.SupervisedKeys.Nest:
@@ -1156,6 +1191,25 @@ def _create_redistribution_info_proto(
         license=utils.dedent(str(license))
     )
   return None
+
+
+def update_info_proto_with_features(
+    info_proto: dataset_info_pb2.DatasetInfo,
+    features: feature_lib.FeatureConnector,
+) -> dataset_info_pb2.DatasetInfo:
+  """Update the info proto with the given features, if any.
+
+  Args:
+    info_proto: the info proto to update.
+    features: the features to use.
+
+  Returns:
+    the updated info proto.
+  """
+  completed_info_proto = dataset_info_pb2.DatasetInfo()
+  completed_info_proto.CopyFrom(info_proto)
+  completed_info_proto.features.CopyFrom(features.to_proto())
+  return completed_info_proto
 
 
 class MetadataDict(Metadata, dict):

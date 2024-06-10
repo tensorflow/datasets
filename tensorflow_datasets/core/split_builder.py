@@ -15,17 +15,15 @@
 
 """Dataset generator code."""
 
-import collections.abc
+from collections.abc import Iterable, Iterator
 import contextlib
 import dataclasses
 import functools
 import itertools
 import sys
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Union
+from typing import Any, Callable, Optional, Union
 
 from absl import logging
-import click
-import psutil
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import naming
@@ -34,12 +32,14 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
+from tensorflow_datasets.core.utils.lazy_imports_utils import click
+from tensorflow_datasets.core.utils.lazy_imports_utils import psutil
 
 # Example key used for shuffling
-Key = Union[str, int]
+Key = str | int
 # The nested example dict passed to `features.encode_example`
-Example = Dict[str, Any]
-KeyExample = Tuple[Key, Example]
+Example = dict[str, Any]
+KeyExample = tuple[Key, Example]
 
 # Possible values returned by `GeneratorBasedBuilder._split_generators`
 SplitGenerator = Union[
@@ -68,7 +68,7 @@ class SplitGeneratorLegacy:
   """
 
   name: str
-  gen_kwargs: Optional[Dict[str, Any]] = dataclasses.field(default_factory=dict)
+  gen_kwargs: dict[str, Any] | None = dataclasses.field(default_factory=dict)
 
 
 class _SplitInfoFuture:
@@ -132,6 +132,7 @@ class SplitBuilder:
       max_examples_per_split: int | None,
       example_writer: writer_lib.ExampleWriter,
       shard_config: shard_utils.ShardConfig | None = None,
+      ignore_duplicates: bool = False,
   ):
     self._split_dict = split_dict
     self._features = features
@@ -143,6 +144,7 @@ class SplitBuilder:
     self._beam_runner = beam_runner
     self._beam_pipeline: Optional['beam.Pipeline'] = None
     self._shard_config = shard_config
+    self._ignore_duplicates = ignore_duplicates
     self._example_writer = example_writer
 
   @contextlib.contextmanager
@@ -259,15 +261,13 @@ class SplitBuilder:
 
   def normalize_legacy_split_generators(
       self,
-      split_generators: Union[
-          Dict[str, SplitGenerator], List[SplitGeneratorLegacy]
-      ],
+      split_generators: dict[str, SplitGenerator] | list[SplitGeneratorLegacy],
       generator_fn: Callable[..., Any],
       is_beam: bool,
-  ) -> Dict[str, SplitGenerator]:
+  ) -> dict[str, SplitGenerator]:
     """Normalize legacy split API into new dict[split_name, generator].
 
-    This function convert the legacy `List[tfds.core.SplitGenerator]` into
+    This function convert the legacy `list[tfds.core.SplitGenerator]` into
     the new `{'split_name': generator}` structure.
 
     Could be removed if all datasets were updated.
@@ -327,7 +327,7 @@ class SplitBuilder:
     )
     # Depending on the type of generator, we use the corresponding
     # `_build_from_xyz` method.
-    if isinstance(generator, collections.abc.Iterable):
+    if isinstance(generator, Iterable):
       return self._build_from_generator(**build_kwargs)
     else:  # Otherwise, beam required
       unknown_generator_type = TypeError(
@@ -386,6 +386,7 @@ class SplitBuilder:
         disable_shuffling=disable_shuffling,
         shard_config=self._shard_config,
         example_writer=self._example_writer,
+        ignore_duplicates=self._ignore_duplicates,
     )
     for key, example in utils.tqdm(
         generator,
@@ -398,9 +399,14 @@ class SplitBuilder:
       try:
         example = self._features.encode_example(example)
       except Exception as e:  # pylint: disable=broad-except
-        utils.reraise(e, prefix=f'Failed to encode example:\n{example}\n')
+        e.add_note(f'Failed to encode example:\n{example}\n')
+        raise
       writer.write(key, example)
-    shard_lengths, total_size = writer.finalize()
+    try:
+      shard_lengths, total_size = writer.finalize()
+    except Exception as e:  # pylint: disable=broad-except
+      e.add_note(f'Failed to finalize writing of split "{split_name}"')
+      raise
 
     split_info = splits_lib.SplitInfo(
         name=split_name,
@@ -428,6 +434,7 @@ class SplitBuilder:
         disable_shuffling=disable_shuffling,
         shard_config=self._shard_config,
         example_writer=self._example_writer,
+        ignore_duplicates=self._ignore_duplicates,
     )
 
     def _encode_example(key_ex, encode_fn=self._features.encode_example):

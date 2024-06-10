@@ -19,116 +19,119 @@ Example usage:
 ```
 tfds build_croissant \
   --jsonld=/tmp/croissant.json \
-  --record_sets=record1 --record_sets=record2
-  --file_format=array_record
-  --out_dir=/tmp/foo
+  --data_dir=/tmp/foo \
+  --file_format=array_record \
+  --record_sets=record1,record2 \
   --mapping='{"document.csv": "~/Downloads/document.csv"}"'
 ```
 """
 
 import argparse
+import dataclasses
 import json
-import pathlib
+import typing
 
+from etils import epath
+import simple_parsing
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
+from tensorflow_datasets.scripts.cli import cli_utils
 
 
-def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
-  """Add arguments for `build_croissant` subparser."""
-  parser.add_argument(
-      '--jsonld',
-      type=str,
-      help='The Croissant config file for the given dataset.',
-      required=True,
-  )
-  parser.add_argument(
-      '--file_format',
-      type=str,
-      choices=[file_format.value for file_format in file_adapters.FileFormat],
-      help='File format to convert the dataset to.',
-      required=True,
-  )
-  parser.add_argument(
-      '--record_sets',
-      nargs='*',
-      help=(
-          'The names of the record sets to generate. Each record set will'
-          ' correspond to a separate config. If not specified, it will use all'
-          ' the record sets'
-      ),
-  )
-  parser.add_argument(
-      '--out_dir',
-      type=pathlib.Path,
-      help='Path where the converted dataset will be stored.',
-      required=True,
-  )
-  parser.add_argument(
-      '--mapping',
-      type=str,
-      help=(
-          'Mapping filename->filepath as a Python dict[str, str] to handle'
-          ' manual downloads. If `document.csv` is the FileObject and you'
-          ' downloaded it to `~/Downloads/document.csv`, you can'
-          ' specify`--mapping=\'{"document.csv": "~/Downloads/document.csv"}\''
-      ),
-  )
+@dataclasses.dataclass
+class CmdArgs:
+  """CLI arguments for preparing a Croissant dataset.
 
-
-def register_subparser(parsers: argparse._SubParsersAction) -> None:
-  """Add subparser for `convert_format` command."""
-  parser = parsers.add_parser(
-      'build_croissant',
-      help='Prepares a croissant dataset',
-  )
-  add_parser_arguments(parser)
-  parser.set_defaults(
-      subparser_fn=lambda args: prepare_croissant_builder(
-          jsonld=args.jsonld,
-          record_sets=args.record_sets,
-          file_format=args.file_format,
-          out_dir=args.out_dir,
-          mapping=args.mapping,
-      )
-  )
-
-
-def prepare_croissant_builder(
-    jsonld: pathlib.Path,
-    record_sets: list[str],
-    file_format: str,
-    out_dir: pathlib.Path,
-    mapping: str | None,
-) -> None:
-  """Creates a Croissant Builder and runs the preparation.
-
-  Args:
-    jsonld: The Croissant config file for the given dataset
+  Attributes:
+    jsonld: Path to the JSONLD file.
+    data_dir: Path where the converted dataset will be stored.
+    file_format: File format to convert the dataset to.
     record_sets: The names of the record sets to generate. Each record set will
       correspond to a separate config. If not specified, it will use all the
-      record sets
-    file_format: File format to convert the dataset to.
-    out_dir: Path where the converted dataset will be stored.
+      record sets.
     mapping: Mapping filename->filepath as a Python dict[str, str] to handle
       manual downloads. If `document.csv` is the FileObject and you downloaded
       it to `~/Downloads/document.csv`, you can specify
-      `mapping={"document.csv": "~/Downloads/document.csv"}`.,
+      `--mapping='{"document.csv": "~/Downloads/document.csv"}'`
+    download_dir: Where to place downloads. Default to `<data_dir>/downloads/`.
+    publish_dir: Where to optionally publish the dataset after it has been
+      generated successfully. Should be the root data dir under which datasets
+      are stored. If unspecified, dataset will not be published.
+    skip_if_published: If the dataset with the same version and config is
+      already published, then it will not be regenerated.
+    overwrite: Delete pre-existing dataset if it exists.
+    overwrite_version: Semantic version of the dataset to be set.
   """
-  if not record_sets:
-    record_sets = None
 
-  if mapping:
-    try:
-      mapping = json.loads(mapping)
-    except json.JSONDecodeError as e:
-      raise ValueError(f'Error parsing mapping parameter: {mapping}') from e
-  builder = croissant_builder.CroissantBuilder(
-      jsonld=jsonld,
-      record_set_names=record_sets,
-      file_format=file_format,
-      data_dir=out_dir,
-      mapping=mapping,
+  jsonld: epath.PathLike
+  data_dir: epath.PathLike
+  # Need to override the default use of `Enum.name` for choice options.
+  file_format: str = simple_parsing.choice(
+      *(file_format.value for file_format in file_adapters.FileFormat),
+      default=file_adapters.FileFormat.ARRAY_RECORD.value,
   )
-  builder.download_and_prepare()
-  return
+  # Need to manually parse comma-separated list of values, see:
+  # https://github.com/lebrice/SimpleParsing/issues/142.
+  record_sets: list[str] = simple_parsing.field(
+      default_factory=list,
+      type=lambda record_sets_str: record_sets_str.split(','),
+      nargs='?',
+  )
+  mapping: str | None = None
+  download_dir: epath.PathLike | None = None
+  publish_dir: epath.PathLike | None = None
+  skip_if_published: bool = False
+  overwrite: bool = False
+  overwrite_version: str | None = None
+
+
+def register_subparser(parsers: argparse._SubParsersAction):
+  """Add subparser for `convert_format` command."""
+  orig_parser_class = parsers._parser_class  # pylint: disable=protected-access
+  try:
+    parsers._parser_class = simple_parsing.ArgumentParser  # pylint: disable=protected-access
+    parser = parsers.add_parser(
+        'build_croissant',
+        help='Prepares a croissant dataset',
+    )
+    parser = typing.cast(simple_parsing.ArgumentParser, parser)
+  finally:
+    parsers._parser_class = orig_parser_class  # pylint: disable=protected-access
+  parser.add_arguments(CmdArgs, dest='args')
+  parser.set_defaults(
+      subparser_fn=lambda args: prepare_croissant_builder(args.args)
+  )
+
+
+def prepare_croissant_builder(args: CmdArgs) -> None:
+  """Creates a Croissant Builder and runs the preparation.
+
+  Args:
+    args: CLI arguments.
+  """
+  if args.mapping:
+    try:
+      mapping = json.loads(args.mapping)
+    except json.JSONDecodeError as e:
+      raise ValueError(
+          f'Error parsing mapping parameter: {args.mapping}'
+      ) from e
+  else:
+    mapping = None
+
+  builder = croissant_builder.CroissantBuilder(
+      jsonld=args.jsonld,
+      record_set_ids=args.record_sets or None,
+      file_format=args.file_format,
+      data_dir=args.data_dir,
+      mapping=mapping,
+      overwrite_version=args.overwrite_version,
+  )
+  cli_utils.download_and_prepare(
+      builder=builder,
+      download_config=None,
+      download_dir=epath.Path(args.download_dir) if args.download_dir else None,
+      publish_dir=epath.Path(args.publish_dir) if args.publish_dir else None,
+      skip_if_published=args.skip_if_published,
+      overwrite=args.overwrite,
+  )

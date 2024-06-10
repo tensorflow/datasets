@@ -20,11 +20,12 @@ import functools
 import os
 import pathlib
 import posixpath
+import sys
 from typing import Iterator, Mapping, MutableMapping, Optional, Set, Tuple
 
 from etils import epath
-import requests
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import requests
 
 JsonValue = utils.JsonValue
 
@@ -217,10 +218,22 @@ class GithubPath(pathlib.PurePosixPath):
   ```
   """
 
-  def __new__(cls, *parts: epath.PathLike) -> 'GithubPath':
-    full_path = '/'.join(os.fspath(p) for p in parts)
-    _parse_github_path(full_path)
-    return super().__new__(cls, full_path.replace(_URI_PREFIX, '/github/', 1))
+  if sys.version_info < (3, 12):
+
+    def __new__(cls, *parts: epath.PathLike) -> 'GithubPath':
+      full_path = '/'.join(os.fspath(p) for p in parts)
+      _parse_github_path(full_path)
+      return super().__new__(cls, full_path.replace(_URI_PREFIX, '/github/', 1))
+
+  else:
+
+    def __init__(self, *parts: epath.PathLike):
+      full_path = '/'.join(os.fspath(p) for p in parts)
+      if full_path.startswith(_URI_PREFIX):
+        # If we already converted the prefix github:// -> /github, we don't do
+        # the check again.
+        _parse_github_path(full_path)
+      super().__init__(full_path.replace(_URI_PREFIX, '/github/', 1))
 
   @functools.cached_property
   def _path_str(self) -> str:

@@ -12,12 +12,6 @@
 # `downsampled_imagenet`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=downsampled_imagenet">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 Dataset with images of 2 resolutions (see config name for information on the

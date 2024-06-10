@@ -12,12 +12,6 @@
 # `oxford_iiit_pet`
 
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=oxford_iiit_pet">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200

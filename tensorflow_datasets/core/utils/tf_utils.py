@@ -25,7 +25,7 @@ import numpy as np
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 # Struct containing a graph for the TFGraphRunner
 GraphRun = collections.namedtuple(
@@ -201,7 +201,7 @@ def shapes_are_compatible(
 
 
 def normalize_shape(
-    shape: Union[type_utils.Shape, tf.TensorShape]
+    shape: Union[type_utils.Shape, tf.TensorShape],
 ) -> type_utils.Shape:
   """Normalize `tf.TensorShape` to tuple of int/None."""
   if isinstance(shape, tf.TensorShape):

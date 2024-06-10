@@ -15,26 +15,33 @@
 
 """Load Datasets without reading dataset generation code."""
 
+from __future__ import annotations
+
 import functools
 import os
 import typing
 from typing import Any, List, Optional, Type
 
-from etils import epath
-from etils import etree
-from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import logging as tfds_logging
-from tensorflow_datasets.core import naming
-from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.features import feature as feature_lib
-from tensorflow_datasets.core.proto import dataset_info_pb2
-from tensorflow_datasets.core.utils import error_utils
-from tensorflow_datasets.core.utils import file_utils
-from tensorflow_datasets.core.utils import version as version_lib
+from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from etils import epath
+  from etils import etree
+  from tensorflow_datasets.core import dataset_builder
+  from tensorflow_datasets.core import dataset_info
+  from tensorflow_datasets.core import logging as tfds_logging
+  from tensorflow_datasets.core import naming
+  from tensorflow_datasets.core import registered
+  from tensorflow_datasets.core import splits as splits_lib
+  from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core.features import feature as feature_lib
+  from tensorflow_datasets.core.proto import dataset_info_pb2
+  from tensorflow_datasets.core.utils import error_utils
+  from tensorflow_datasets.core.utils import file_utils
+  from tensorflow_datasets.core.utils import version as version_lib
+  # pylint: enable=g-import-not-at-top
 
 
 class ReadOnlyBuilder(

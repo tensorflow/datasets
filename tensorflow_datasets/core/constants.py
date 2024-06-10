@@ -18,7 +18,6 @@
 # IMPORTANT: when changing values here, update docstrings.
 
 import os
-from etils import epath
 
 # Directory in which datasets are declared within TFDS sources.
 DATASETS_TFDS_SRC_DIR = 'datasets'
@@ -48,7 +47,4 @@ METADATA_FILENAME = 'metadata.json'
 
 # Filepath for mapping between TFDS datasets and PapersWithCode entries.
 PWC_FILENAME = 'tfds_to_pwc_links.json'
-PWC_LINKS_PATH = (
-    epath.resource_path('tensorflow_datasets')
-    / f'scripts/documentation/{PWC_FILENAME}'
-)
+PWC_LINKS_PATH = f'scripts/documentation/{PWC_FILENAME}'

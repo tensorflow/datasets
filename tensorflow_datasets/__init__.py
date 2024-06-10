@@ -30,32 +30,27 @@ Documentation:
 
 * These API docs
 * [Available datasets](https://www.tensorflow.org/datasets/catalog/overview)
-* [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
+* [Colab
+tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
 * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
 """
 # pylint: enable=line-too-long
 # pylint: disable=g-import-not-at-top,g-bad-import-order,wrong-import-position,unused-import
 
-import time
+from __future__ import annotations
 
-_TIMESTAMP_IMPORT_STARTS = time.time()
 from absl import logging
-import tensorflow_datasets.core.logging as _tfds_logging
-from tensorflow_datasets.core.logging import call_metadata as _call_metadata
+from etils import epy as _epy
 
-_metadata = _call_metadata.CallMetadata()
-_metadata.start_time_micros = int(_TIMESTAMP_IMPORT_STARTS * 1e6)
-_import_time_ms_dataset_builders = 0
 
 try:
-  # Imports for registration
-  _before_dataset_imports = time.time()
-  from tensorflow_datasets import dataset_collections
-
+  # pylint: disable=g-import-not-at-top
   # pytype: disable=import-error
   # For builds that don't include all dataset builders, we don't want to fail on
   # import errors of dataset builders.
-  try:
+  with _epy.lazy_imports(
+      error_callback='Could not import TFDS dataset builders.'
+  ):
     from tensorflow_datasets import audio
     from tensorflow_datasets import graphs
     from tensorflow_datasets import image
@@ -67,7 +62,7 @@ try:
     from tensorflow_datasets import ranking
     from tensorflow_datasets import recommendation
     from tensorflow_datasets import rl_unplugged
-    from tensorflow_datasets import rlds
+    from tensorflow_datasets.rlds import datasets
     from tensorflow_datasets import robotics
     from tensorflow_datasets import robomimic
     from tensorflow_datasets import structured
@@ -79,27 +74,18 @@ try:
     from tensorflow_datasets import video
     from tensorflow_datasets import vision_language
 
-  except ImportError:
-    pass
   # pytype: enable=import-error
 
-  _import_time_ms_dataset_builders = int(
-      (time.time() - _before_dataset_imports) * 1000
-  )
+  from tensorflow_datasets import rlds  # pylint: disable=g-bad-import-order
 
   # Public API to create and generate a dataset
   from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
   from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
+  # pylint: enable=g-import-not-at-top
   # __all__ for import * as well as documentation
   __all__ = public_api.__all__
 
 except Exception as exception:  # pylint: disable=broad-except
-  _metadata.mark_error()
   logging.exception(exception)
-finally:
-  _metadata.mark_end()
-  _tfds_logging.tfds_import(
-      metadata=_metadata,
-      import_time_ms_tensorflow=0,
-      import_time_ms_dataset_builders=_import_time_ms_dataset_builders,
-  )
+
+del _epy

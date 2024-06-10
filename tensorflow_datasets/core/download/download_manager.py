@@ -14,37 +14,44 @@
 # limitations under the License.
 
 """Download manager interface."""
+
 from __future__ import annotations
 
+from collections.abc import Iterator
 import concurrent.futures
 import dataclasses
 import functools
 import hashlib
 import typing
-from typing import Any, Dict, Iterator, Optional, Tuple, Union
+from typing import Any
 import uuid
 
 from absl import logging
 from etils import epath
-import promise
-from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.download import checksums
-from tensorflow_datasets.core.download import downloader
-from tensorflow_datasets.core.download import extractor
-from tensorflow_datasets.core.download import kaggle
-from tensorflow_datasets.core.download import resource as resource_lib
-from tensorflow_datasets.core.download import util
-from tensorflow_datasets.core.utils import shard_utils
-from tensorflow_datasets.core.utils import type_utils
-import tree
+from etils import epy
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  import promise
+
+  from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core.download import checksums
+  from tensorflow_datasets.core.download import downloader
+  from tensorflow_datasets.core.download import extractor
+  from tensorflow_datasets.core.download import kaggle
+  from tensorflow_datasets.core.download import resource as resource_lib
+  from tensorflow_datasets.core.download import util
+  from tensorflow_datasets.core.utils import shard_utils
+  from tensorflow_datasets.core.utils import type_utils
+  # pylint: enable=g-import-not-at-top
 
 # pylint: disable=logging-fstring-interpolation
 
 Tree = type_utils.Tree
 
-Url = Union[str, resource_lib.Resource]
-ExtractPath = Union[epath.PathLike, resource_lib.Resource]
+Url = str | resource_lib.Resource
+ExtractPath = epath.PathLike | resource_lib.Resource
 
 
 def get_downloader(*args: Any, **kwargs: Any):
@@ -100,23 +107,26 @@ class DownloadConfig:
       used.
     max_shard_size: optional maximum shard size in bytes. If `None`, 1 GiB is
       used.
+    ignore_duplicates: whether to ignore duplicated examples with the same key.
+      If there are multiple examples with the same key, the first one is kept.
   """
 
-  extract_dir: Optional[epath.PathLike] = None
-  manual_dir: Optional[epath.PathLike] = None
+  extract_dir: epath.PathLike | None = None
+  manual_dir: epath.PathLike | None = None
   download_mode: util.GenerateMode = util.GenerateMode.REUSE_DATASET_IF_EXISTS
   compute_stats: util.ComputeStatsMode = util.ComputeStatsMode.SKIP
-  max_examples_per_split: Optional[int] = None
+  max_examples_per_split: int | None = None
   register_checksums: bool = False
   force_checksums_validation: bool = False
-  beam_runner: Optional[Any] = None
-  beam_options: Optional[Any] = None
+  beam_runner: Any | None = None
+  beam_options: Any | None = None
   try_download_gcs: bool = True
   verify_ssl: bool = True
-  override_max_simultaneous_downloads: Optional[int] = None
-  num_shards: Optional[int] = None
+  override_max_simultaneous_downloads: int | None = None
+  num_shards: int | None = None
   min_shard_size: int = shard_utils.DEFAULT_MIN_SHARD_SIZE
   max_shard_size: int = shard_utils.DEFAULT_MAX_SHARD_SIZE
+  ignore_duplicates: bool = False
 
   def get_shard_config(self) -> shard_utils.ShardConfig:
     return shard_utils.ShardConfig(
@@ -182,18 +192,18 @@ class DownloadManager(object):
       self,
       *,
       download_dir: epath.PathLike,
-      extract_dir: Optional[epath.PathLike] = None,
-      manual_dir: Optional[epath.PathLike] = None,
-      manual_dir_instructions: Optional[str] = None,
-      url_infos: Optional[Dict[str, checksums.UrlInfo]] = None,
-      dataset_name: Optional[str] = None,
+      extract_dir: epath.PathLike | None = None,
+      manual_dir: epath.PathLike | None = None,
+      manual_dir_instructions: str | None = None,
+      url_infos: dict[str, checksums.UrlInfo] | None = None,
+      dataset_name: str | None = None,
       force_download: bool = False,
       force_extraction: bool = False,
       force_checksums_validation: bool = False,
       register_checksums: bool = False,
-      register_checksums_path: Optional[epath.PathLike] = None,
+      register_checksums_path: epath.PathLike | None = None,
       verify_ssl: bool = True,
-      max_simultaneous_downloads: Optional[int] = None,
+      max_simultaneous_downloads: int | None = None,
   ):
     """Download manager constructor.
 
@@ -243,14 +253,12 @@ class DownloadManager(object):
       extract_dir = epath.Path(extract_dir).expanduser()
     else:
       extract_dir = download_dir / 'extracted'
-    if manual_dir:
+    if manual_dir is not None:
       manual_dir = epath.Path(manual_dir).expanduser()
 
     self._download_dir: epath.Path = download_dir
     self._extract_dir: epath.Path = extract_dir
-    self._manual_dir: Optional[epath.Path] = (
-        manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
-    )
+    self._manual_dir: epath.Path | None = manual_dir
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     self._download_dir.mkdir(parents=True, exist_ok=True)
     self._extract_dir.mkdir(parents=True, exist_ok=True)
@@ -270,7 +278,7 @@ class DownloadManager(object):
       self._url_infos.update(url_infos)
 
     # To record what is being used: {url: UrlInfo(size, checksum, filename)}
-    self._recorded_url_infos: Dict[str, checksums.UrlInfo] = {}
+    self._recorded_url_infos: dict[str, checksums.UrlInfo] = {}
     # These attributes are lazy-initialized since they must be cleared when this
     # object is pickled for Beam. They are then recreated on each worker.
     self.__downloader = None
@@ -300,7 +308,7 @@ class DownloadManager(object):
   @property
   def _downloader(self):
     if not self.__downloader:
-      self.__downloader = downloader.get_downloader(
+      self.__downloader = get_downloader(
           max_simultaneous_downloads=self._max_simultaneous_downloads
       )
     return self.__downloader
@@ -336,9 +344,7 @@ class DownloadManager(object):
   # processed once, even if passed twice to download_manager.
   @utils.build_synchronize_decorator()
   @utils.memoize()
-  def _download(
-      self, resource: Union[str, resource_lib.Resource]
-  ) -> promise.Promise[epath.Path]:
+  def _download(self, resource: Url) -> promise.Promise[epath.Path]:
     """Download resource, returns Promise->path to downloaded file.
 
     This function:
@@ -379,7 +385,7 @@ class DownloadManager(object):
     )
 
     # Get the cached path and url_info (if they exists)
-    dl_result = _get_cached_path(
+    dl_result = downloader.get_cached_path(
         manually_downloaded_path=manually_downloaded_path,
         checksum_path=checksum_path,
         url_path=url_path,
@@ -419,9 +425,9 @@ class DownloadManager(object):
       self,
       path: epath.Path,
       url: str,
-      expected_url_info: Optional[checksums.UrlInfo],
-      computed_url_info: Optional[checksums.UrlInfo],
-      checksum_path: Optional[epath.Path],
+      expected_url_info: checksums.UrlInfo | None,
+      computed_url_info: checksums.UrlInfo | None,
+      checksum_path: epath.Path | None,
       url_path: epath.Path,
   ) -> epath.Path:
     """Validates/records checksums and renames final downloaded path."""
@@ -483,9 +489,9 @@ class DownloadManager(object):
       self,
       url: str,
       path: epath.Path,
-      expected_url_info: Optional[checksums.UrlInfo],
-      computed_url_info: Optional[checksums.UrlInfo],
-      checksum_path: Optional[epath.Path],
+      expected_url_info: checksums.UrlInfo | None,
+      computed_url_info: checksums.UrlInfo | None,
+      checksum_path: epath.Path | None,
       url_path: epath.Path,
   ) -> epath.Path:
     """Eventually rename the downloaded file if checksums were recorded."""
@@ -578,7 +584,7 @@ class DownloadManager(object):
     ...
 
   @typing.overload
-  def download(self, url_or_urls: Dict[str, Url]) -> Dict[str, epath.Path]:
+  def download(self, url_or_urls: dict[str, Url]) -> dict[str, epath.Path]:
     ...
 
   @typing.overload
@@ -603,7 +609,7 @@ class DownloadManager(object):
   def iter_archive(
       self,
       resource: ExtractPath,
-  ) -> Iterator[Tuple[str, typing.BinaryIO]]:
+  ) -> Iterator[tuple[str, typing.BinaryIO]]:
     """Returns iterator over files within archive.
 
     **Important Note**: caller should read files as they are yielded.
@@ -625,8 +631,8 @@ class DownloadManager(object):
 
   @typing.overload
   def extract(
-      self, path_or_paths: Dict[str, ExtractPath]
-  ) -> Dict[str, epath.Path]:
+      self, path_or_paths: dict[str, ExtractPath]
+  ) -> dict[str, epath.Path]:
     ...
 
   @typing.overload
@@ -656,8 +662,8 @@ class DownloadManager(object):
 
   @typing.overload
   def download_and_extract(
-      self, url_or_urls: Dict[str, Url]
-  ) -> Dict[str, epath.Path]:
+      self, url_or_urls: dict[str, Url]
+  ) -> dict[str, epath.Path]:
     ...
 
   @typing.overload
@@ -710,54 +716,10 @@ class DownloadManager(object):
     return self._manual_dir
 
 
-def _get_cached_path(
-    manually_downloaded_path: Optional[epath.Path],
-    checksum_path: Optional[epath.Path],
-    url_path: epath.Path,
-    expected_url_info: Optional[checksums.UrlInfo],
-) -> downloader.DownloadResult:
-  """Returns the downloaded path and computed url-info.
-
-  If the path is not cached, or that `url_path` does not match checksums,
-  the file will be downloaded again.
-
-  Path can be cached at three different locations:
-
-  Args:
-    manually_downloaded_path: Manually downloaded in `dl_manager.manual_dir`
-    checksum_path: Cached in the final destination (if checksum known)
-    url_path: Cached in the tmp destination (if checksum unknown).
-    expected_url_info: Registered checksum (if known)
-  """
-  # User has manually downloaded the file.
-  if manually_downloaded_path and manually_downloaded_path.exists():
-    return downloader.DownloadResult(manually_downloaded_path, url_info=None)  # pytype: disable=wrong-arg-types
-
-  # Download has been cached (checksum known)
-  elif checksum_path and resource_lib.Resource.exists_locally(checksum_path):
-    # `path = f(checksum)` was found, so url_info match
-    return downloader.DownloadResult(checksum_path, url_info=expected_url_info)
-
-  # Download has been cached (checksum unknown)
-  elif resource_lib.Resource.exists_locally(url_path):
-    # Info restored from `.INFO` file
-    computed_url_info = _read_url_info(url_path)
-    # If checksums are now registered but do not match, trigger a new
-    # download (e.g. previous file corrupted, checksums updated)
-    if expected_url_info and computed_url_info != expected_url_info:
-      return downloader.DownloadResult(path=None, url_info=None)  # pytype: disable=wrong-arg-types
-    else:
-      return downloader.DownloadResult(url_path, url_info=computed_url_info)
-
-  # Else file not found (or has bad checksums). (re)download.
-  else:
-    return downloader.DownloadResult(path=None, url_info=None)  # pytype: disable=wrong-arg-types
-
-
 def _get_manually_downloaded_path(
-    manual_dir: Optional[epath.Path],
-    expected_url_info: Optional[checksums.UrlInfo],
-) -> Optional[epath.Path]:
+    manual_dir: epath.Path | None,
+    expected_url_info: checksums.UrlInfo | None,
+) -> epath.Path | None:
   """Checks if file is already downloaded in manual_dir."""
   if not manual_dir:  # Manual dir not passed
     return None
@@ -775,8 +737,8 @@ def _get_manually_downloaded_path(
 def _validate_checksums(
     url: str,
     path: epath.Path,
-    computed_url_info: Optional[checksums.UrlInfo],
-    expected_url_info: Optional[checksums.UrlInfo],
+    computed_url_info: checksums.UrlInfo | None,
+    expected_url_info: checksums.UrlInfo | None,
     force_checksums_validation: bool,
 ) -> None:
   """Validate computed_url_info match expected_url_info."""

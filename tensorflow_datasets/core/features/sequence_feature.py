@@ -28,7 +28,7 @@ from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
-import tree
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 Json = type_utils.Json
 

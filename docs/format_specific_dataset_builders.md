@@ -182,7 +182,7 @@ format to represent datasets on the Web, and make them searchable.
 ### `CroissantBuilder`
 
 A `CroissantBuilder` defines a TFDS dataset based on a Croissant 🥐 metadata
-file; each of the `record_set_names` specified will result in a separate
+file; each of the `record_set_ids` specified will result in a separate
 `ConfigBuilder`.
 
 For example, to initialize a `CroissantBuilder` for the MNIST dataset using its

@@ -102,6 +102,30 @@ class FeatureTensorTest(
     )
 
   @parameterized.parameters([
+      features_lib.Encoding.BYTES,
+      features_lib.Encoding.ZLIB,
+  ])
+  def test_uint64_encoded_roundtrip(self, encoding: features_lib.Encoding):
+    bigint = np.array((1 << 63) + 10, dtype=np.uint64)
+    feature = features_lib.Tensor(shape=(), dtype=np.uint64, encoding=encoding)
+    self.assertEqual(
+        feature.decode_example(feature.encode_example(bigint)),
+        bigint,
+    )
+    self.assertEqual(
+        feature.decode_example_np(feature.encode_example(bigint)),
+        bigint,
+    )
+
+  def test_uint64_roundtrip(self):
+    feature = features_lib.Tensor(shape=(), dtype=np.uint64)
+    bigint = np.array((1 << 63) + 10, dtype=np.uint64)
+    # since we are using tf.Example int64 to hold this result, we start with
+    # the manually encoded (bitcasted) version of the value.
+    self.assertEqual(feature.decode_example(bigint.view(np.int64)), bigint)
+    self.assertEqual(feature.decode_example_np(bigint.view(np.int64)), bigint)
+
+  @parameterized.parameters([
       (np.int32, features_lib.Encoding.NONE),
       (tf.int32, features_lib.Encoding.NONE),
       (np.int32, features_lib.Encoding.ZLIB),

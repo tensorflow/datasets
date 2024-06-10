@@ -41,21 +41,44 @@ def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
       'x': ['1.0.0', '1.0.1'],
       'y': ['2.0.0'],
   }
+  info_filenames = {
+      'features.json',
+      'dataset_info.json',
+  }
+  glob_suffixes = [
+      'json',
+  ]
   for config, versions in configs_and_versions.items():
     for version in versions:
-      mock_fs.add_file(dataset_dir / config / version / 'dataset_info.json')
-      mock_fs.add_file(dataset_dir / config / version / 'features.json')
+      for info_filename in info_filenames:
+        mock_fs.add_file(dataset_dir / config / version / info_filename)
 
-  references = sorted(file_utils.list_dataset_variants(dataset_dir=dataset_dir))
+  references = sorted(
+      file_utils.list_dataset_variants(
+          dataset_dir=dataset_dir, glob_suffixes=glob_suffixes
+      )
+  )
   assert references == [
       naming.DatasetReference(
-          dataset_name='my_ds', config='x', version='1.0.0', data_dir=data_dir
+          dataset_name='my_ds',
+          config='x',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
-          dataset_name='my_ds', config='x', version='1.0.1', data_dir=data_dir
+          dataset_name='my_ds',
+          config='x',
+          version='1.0.1',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
-          dataset_name='my_ds', config='y', version='2.0.0', data_dir=data_dir
+          dataset_name='my_ds',
+          config='y',
+          version='2.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
   ]
 
@@ -69,10 +92,12 @@ def test_list_dataset_variants_with_configs_no_versions(
       'x': ['1.0.0', '1.0.1'],
       'y': ['2.0.0'],
   }
+  info_filenames = {'dataset_info.json', 'features.json'}
   for config, versions in configs_and_versions.items():
     for version in versions:
-      mock_fs.add_file(dataset_dir / config / version / 'dataset_info.json')
-      mock_fs.add_file(dataset_dir / config / version / 'features.json')
+      for filename in info_filenames:
+        mock_fs.add_file(dataset_dir / config / version / filename)
+        mock_fs.add_file(dataset_dir / config / version / filename)
 
   references = sorted(
       file_utils.list_dataset_variants(
@@ -81,10 +106,16 @@ def test_list_dataset_variants_with_configs_no_versions(
   )
   assert references == [
       naming.DatasetReference(
-          dataset_name='my_ds', config='x', data_dir=data_dir
+          dataset_name='my_ds',
+          config='x',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
       naming.DatasetReference(
-          dataset_name='my_ds', config='y', data_dir=data_dir
+          dataset_name='my_ds',
+          config='y',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
       ),
   ]
 
@@ -108,10 +139,16 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   )
   assert references == [
       naming.DatasetReference(
-          dataset_name='my_ds', version='1.0.0', data_dir=data_dir
+          dataset_name='my_ds',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames={'dataset_info.json'},
       ),
       naming.DatasetReference(
-          dataset_name='my_ds', version='1.0.1', data_dir=data_dir
+          dataset_name='my_ds',
+          version='1.0.1',
+          data_dir=data_dir,
+          info_filenames={'dataset_info.json', 'features.json'},
       ),
   ]
 
@@ -125,9 +162,161 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   )
   assert references == [
       naming.DatasetReference(
-          dataset_name='my_ds', version='1.0.1', data_dir=data_dir
+          dataset_name='my_ds',
+          version='1.0.1',
+          data_dir=data_dir,
+          info_filenames={'dataset_info.json', 'features.json'},
       )
   ]
+
+
+def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
+  data_dir = epath.Path('/a')
+  mock_fs.add_file(data_dir / 'ds1/config1/1.0.0/dataset_info.json')
+  mock_fs.add_file(data_dir / 'ds1/config1/1.0.0/features.json')
+  mock_fs.add_file(data_dir / 'ds1/config1/2.0.0/dataset_info.json')
+  mock_fs.add_file(data_dir / 'ds1/config1/2.0.0/features.json')
+  mock_fs.add_file(data_dir / 'ds1/config2/1.0.0/dataset_info.json')
+  mock_fs.add_file(data_dir / 'ds1/config2/1.0.0/features.json')
+  mock_fs.add_file(data_dir / 'ds2/1.0.0/dataset_info.json')
+  mock_fs.add_file(data_dir / 'ds2/1.0.0/features.json')
+  info_filenames = {'dataset_info.json', 'features.json'}
+
+  # The following are problematic and should thus be ignored.
+  mock_fs.add_file(
+      os.path.join(data_dir, 'invalid-name/1.0.0/features.json'), content='x'
+  )
+  mock_fs.add_file(
+      os.path.join(data_dir, 'invalid_version1/1.a.b/features.json'),
+      content='x',
+  )
+  mock_fs.add_file(
+      os.path.join(data_dir, 'invalid_version2/1.2.3.4/features.json'),
+      content='x',
+  )
+
+  references = sorted(
+      file_utils.list_datasets_in_data_dir(data_dir=epath.Path(data_dir))
+  )
+  data_dir = epath.Path('/a')
+  assert references == [
+      naming.DatasetReference(
+          dataset_name='ds1',
+          config='config1',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
+      ),
+      naming.DatasetReference(
+          dataset_name='ds1',
+          config='config1',
+          version='2.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
+      ),
+      naming.DatasetReference(
+          dataset_name='ds1',
+          config='config2',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
+      ),
+      naming.DatasetReference(
+          dataset_name='ds2',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames=info_filenames,
+      ),
+  ]
+
+
+def test_list_datasets_in_data_dir_with_namespace(mock_fs: testing.MockFs):
+  namespace = 'ns'
+  data_dir = epath.Path('/a')
+  mock_fs.add_file(data_dir / 'ds1/config1/1.0.0/dataset_info.json')
+  mock_fs.add_file(data_dir / 'ds1/config1/1.0.0/features.json')
+
+  references = sorted(
+      file_utils.list_datasets_in_data_dir(
+          data_dir=epath.Path(data_dir),
+          namespace=namespace,
+          include_configs=True,
+          include_versions=True,
+      )
+  )
+  data_dir = epath.Path('/a')
+  assert references == [
+      naming.DatasetReference(
+          dataset_name='ds1',
+          namespace=namespace,
+          config='config1',
+          version='1.0.0',
+          data_dir=data_dir,
+          info_filenames={'dataset_info.json', 'features.json'},
+      ),
+  ]
+
+
+def test_find_files_without_glob(mock_fs: testing.MockFs):
+  folder = epath.Path('/')
+  mock_fs.add_file(folder / 'a' / 'b' / 'x')
+  mock_fs.add_file(folder / 'a' / 'c' / 'x')
+  mock_fs.add_file(folder / 'b' / 'd' / 'x')
+  mock_fs.add_file(folder / 'b' / 'd' / 'y')  # Should be ignored.
+  mock_fs.add_file(folder / 'b' / '.config' / 'x')  # Should be ignored.
+  mock_fs.add_file(folder / 'b' / 'x')
+  mock_fs.add_file(folder / 'b' / 'y')  # Should be ignored.
+  actual = file_utils._find_files_without_glob(
+      folder, globs=['*/*', '*/*/*'], file_names=['x']
+  )
+  actual = [os.fspath(p) for p in actual]
+  assert sorted(actual) == ['/a/b/x', '/a/c/x', '/b/d/x', '/b/x']
+
+
+@pytest.mark.parametrize(
+    ['filename', 'result'],
+    [
+        ('abc', False),
+        ('dataset_info.json', True),
+        ('features.json', True),
+        ('mnist-test.tfrecord-00000-of-00001', True),
+        ('mnist-test.arrayrecord-00000-of-00001', True),
+    ],
+)
+def test_looks_like_a_tfds_file(filename, result):
+  assert file_utils._looks_like_a_tfds_file(filename) == result
+
+
+@pytest.mark.parametrize(
+    ['path', 'glob_result', 'expected'],
+    [
+        ('/a/*', ['/a/b', '/a/c'], ['/a/b', '/a/c']),
+        ('/a/b', None, ['/a/b']),
+        ('a/*', None, ['a/*']),
+        ('/a/b@*', None, ['/a/b@*']),
+    ],
+)
+def test_expand_glob(path, glob_result, expected):
+  with mock.patch.object(epath, 'Path') as mock_epath:
+    mock_epath.return_value.expanduser.return_value = path
+    mock_epath.return_value.glob.return_value = glob_result
+    actual = file_utils.expand_glob(path)
+    if glob_result is not None:
+      mock_epath.return_value.glob.assert_called_once_with(path[1:])
+    else:
+      mock_epath.return_value.glob.assert_not_called()
+    actual = [os.fspath(p) for p in actual]
+    assert actual == expected
+
+
+def test_publish_data(mock_fs: testing.MockFs):
+  from_data_dir = epath.Path('/tmp') / 'dummy_mnist/3.0.1'
+  filename = 'dataset_info.json'
+  content = 'a'
+  mock_fs.add_file(path=from_data_dir / filename, content=content)
+  to_data_dir = epath.Path('/a/b')
+  file_utils.publish_data(from_data_dir=from_data_dir, to_data_dir=to_data_dir)
+  assert mock_fs.read_file(to_data_dir / filename) == content
 
 
 if __name__ == '__main__':

@@ -17,6 +17,7 @@ r"""Config for community datasets."""
 
 from collections.abc import Mapping, Sequence
 import dataclasses
+import functools
 import threading
 from typing import Any
 
@@ -114,6 +115,9 @@ class NamespaceRegistry:
     self._config_per_namespace[namespace] = config
 
 
-community_config = NamespaceRegistry(
-    config_path=utils.tfds_path('community-datasets.toml')
-)
+COMMUNITY_CONFIG_PATH = 'community-datasets.toml'
+
+
+@functools.lru_cache(maxsize=1)
+def get_community_config() -> NamespaceRegistry:
+  return NamespaceRegistry(config_path=utils.tfds_path(COMMUNITY_CONFIG_PATH))

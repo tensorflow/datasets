@@ -14,6 +14,7 @@ ai2_arc/ARC-Challenge/1.0.0
 ai2_arc/ARC-Easy/1.0.0
 ai2_arc_with_ir/ARC-Challenge-IR/1.0.0
 ai2_arc_with_ir/ARC-Easy-IR/1.0.0
+aloha_mobile/0.1.0
 amazon_us_reviews/Apparel_v1_00/0.1.0
 amazon_us_reviews/Automotive_v1_00/0.1.0
 amazon_us_reviews/Baby_v1_00/0.1.0
@@ -224,6 +225,7 @@ bool_q/1.0.0
 bot_adversarial_dialogue/dialogue_datasets/1.0.0
 bot_adversarial_dialogue/human_nonadv_safety_eval/1.0.0
 bridge/0.1.0
+bridge_data_msr/0.1.0
 bucc/bucc_de/1.0.0
 bucc/bucc_fr/1.0.0
 bucc/bucc_ru/1.0.0
@@ -549,6 +551,7 @@ common_voice/zh-TW/2.0.0
 conll2002/es/1.0.0
 conll2002/nl/1.0.0
 conll2003/conll2003/1.0.0
+conq_hose_manipulation/0.1.0
 controlled_noisy_web_labels/mini_imagenet_blue/1.0.0
 controlled_noisy_web_labels/mini_imagenet_red/1.0.0
 coqa/1.0.0
@@ -690,6 +693,8 @@ diabetic_retinopathy_detection/250K/3.0.0
 diabetic_retinopathy_detection/btgraham-300/3.0.0
 diabetic_retinopathy_detection/original/3.0.0
 diamonds/1.0.0
+dices/350/1.0.0
+dices/990/1.0.0
 div2k/bicubic_x2/2.0.0
 div2k/bicubic_x3/2.0.0
 div2k/bicubic_x4/2.0.0
@@ -704,6 +709,7 @@ dlr_edan_shared_control_converted_externally_to_rlds/0.1.0
 dlr_sara_grid_clamp_converted_externally_to_rlds/0.1.0
 dlr_sara_pour_converted_externally_to_rlds/0.1.0
 dmlab/2.0.1
+dobbe/0.1.0
 doc_nli/1.0.0
 dolphin_number_word/0.0.2
 domainnet/clipart/1.0.0
@@ -721,12 +727,12 @@ dtd/3.0.1
 duke_ultrasound/1.0.1
 e2e_cleaned/0.1.0
 efron_morris75/1.0.0
-emnist/balanced/3.0.0
-emnist/byclass/3.0.0
-emnist/bymerge/3.0.0
-emnist/digits/3.0.0
-emnist/letters/3.0.0
-emnist/mnist/3.0.0
+emnist/balanced/3.1.0
+emnist/byclass/3.1.0
+emnist/bymerge/3.1.0
+emnist/digits/3.1.0
+emnist/letters/3.1.0
+emnist/mnist/3.1.0
 eraser_multi_rc/0.1.1
 esnli/0.1.0
 eth_agent_affordances/0.1.0
@@ -737,6 +743,7 @@ flic/full/2.0.0
 flic/small/2.0.0
 flores/neen/1.2.0
 flores/sien/1.2.0
+fmb/0.1.0
 food101/1.0.0
 food101/2.0.0
 food101/2.1.0
@@ -1096,6 +1103,7 @@ imdb_reviews/plain_text/1.0.0
 imdb_reviews/subwords32k/1.0.0
 imdb_reviews/subwords8k/1.0.0
 imperialcollege_sawyer_wrist_cam/0.1.0
+io_ai_tech/0.1.0
 irc_disentanglement/2.0.0
 iris/2.1.0
 istella/main/1.2.0
@@ -1219,6 +1227,7 @@ math_dataset/probability__swr_p_sequence/1.0.0
 math_qa/1.0.0
 mctaco/1.0.0
 media_sum/1.0.0
+mimic_play/0.1.0
 mlqa/ar/1.0.0
 mlqa/de/1.0.0
 mlqa/en/1.0.0
@@ -1381,9 +1390,10 @@ pg19/0.1.1
 piqa/1.0.0
 places365_small/2.1.0
 placesfull/1.0.0
-plant_leaves/0.1.0
+plant_leaves/0.1.1
 plant_village/1.0.2
 plantae_k/0.1.0
+plex_robosuite/0.1.0
 protein_net/casp10/1.0.0
 protein_net/casp11/1.0.0
 protein_net/casp12/1.0.0
@@ -1412,6 +1422,9 @@ qa4mre/2013.main.EN/0.1.0
 qa4mre/2013.main.ES/0.1.0
 qa4mre/2013.main.RO/0.1.0
 qasc/0.1.0
+qm9/cormorant/1.0.0
+qm9/dimenet/1.0.0
+qm9/original/1.0.0
 quac/1.0.0
 quality/raw/1.0.0
 quality/stripped/1.0.0
@@ -1425,11 +1438,11 @@ reddit_disentanglement/2.0.0
 reddit_tifu/long/1.1.2
 reddit_tifu/long_split/1.1.2
 reddit_tifu/short/1.1.2
-ref_coco/refcoco_google/1.0.0
-ref_coco/refcoco_unc/1.0.0
-ref_coco/refcocog_google/1.0.0
-ref_coco/refcocog_umd/1.0.0
-ref_coco/refcocoplus_unc/1.0.0
+ref_coco/refcoco_google/1.1.0
+ref_coco/refcoco_unc/1.1.0
+ref_coco/refcocog_google/1.1.0
+ref_coco/refcocog_umd/1.1.0
+ref_coco/refcocoplus_unc/1.1.0
 resisc45/3.0.0
 rlu_atari/Alien_run_1/1.3.0
 rlu_atari/Alien_run_2/1.3.0
@@ -2198,6 +2211,7 @@ rlu_rwrl/walker_walk_combined_challenge_none_1_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_20_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_40_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_5_percent/1.0.1
+robo_set/0.1.0
 robomimic_mg/can_mg_image/1.0.0
 robomimic_mg/can_mg_low_dim/1.0.0
 robomimic_mg/lift_mg_image/1.0.0
@@ -2282,6 +2296,7 @@ so2sat/all/2.1.0
 so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
 speech_commands/0.0.3
+spoc_robot/0.1.0
 spoken_digit/1.0.9
 squad/v1.1/3.0.0
 squad/v2.0/3.0.0
@@ -3280,6 +3295,7 @@ tedlium/release2/1.0.1
 tedlium/release3/1.0.1
 tf_flowers/3.0.1
 the300w_lp/1.0.0
+tidybot/0.1.0
 tiny_shakespeare/1.0.0
 titanic/2.0.0
 titanic/4.0.0
@@ -3579,6 +3595,7 @@ utokyo_xarm_bimanual_converted_externally_to_rlds/0.1.0
 utokyo_xarm_pick_and_place_converted_externally_to_rlds/0.1.0
 vctk/mic1/1.0.1
 vctk/mic2/1.0.1
+vima_converted_externally_to_rlds/0.1.0
 viola/0.1.0
 visual_domain_decathlon/aircraft/1.2.0
 visual_domain_decathlon/cifar100/1.2.0
