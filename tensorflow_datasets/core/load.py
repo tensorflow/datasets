@@ -587,7 +587,10 @@ def load(
       would use the `FooBar` dataset passing the keyword arguments `a=True` and
       `b=3` (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'`
       to use the `'zoo'` config and pass to the builder keyword arguments
-      `a=True` and `b=3`).
+      `a=True` and `b=3`).  If the dataset name features a `/` in its name, one
+      should replace it with `__`, as this might happen with certain namespaces
+      such as huggingface (example: "huggingface:microsoft/cats_vs_dogs" becomes
+      "huggingface:microsoft__cats_vs_dogs".)
     split: Which split of the data to load (e.g. `'train'`, `'test'`, `['train',
       'test']`, `'train[80%:]'`,...). See our [split API
       guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
