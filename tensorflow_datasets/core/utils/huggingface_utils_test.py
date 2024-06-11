@@ -40,6 +40,7 @@ def test_convert_to_np_dtype_raises():
         ('large_string', np.object_),
         ('utf8', np.object_),
         ('string', np.object_),
+        ('binary', np.bytes_),
         # from np
         ('bool_', np.bool_),
         ('int32', np.int32),

@@ -40,6 +40,7 @@ _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
     'large_string': np.object_,
     'utf8': np.object_,
     'string': np.object_,
+    'binary': np.bytes_,
 })
 _IMAGE_ENCODING_FORMAT = 'png'
 _DEFAULT_IMG = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\x0cIDATx\x9cc```\x00\x00\x00\x04\x00\x01\xf6\x178U\x00\x00\x00\x00IEND\xaeB`\x82'
