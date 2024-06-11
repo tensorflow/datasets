@@ -43,6 +43,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder  # pylint:disable=unused-import
+from tensorflow_datasets.core.download import util
 from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
@@ -501,6 +502,16 @@ def _download_and_prepare_builder(
     download: bool,
     download_and_prepare_kwargs: Optional[Dict[str, Any]],
 ) -> None:
+  """Downloads and prepares the dataset builder if necessary."""
+  if dbuilder.is_prepared():
+    if not download_and_prepare_kwargs:
+      return
+    if download_config := download_and_prepare_kwargs.get('download_config'):
+      if (
+          download_config.download_mode
+          == util.GenerateMode.REUSE_DATASET_IF_EXISTS
+      ):
+        return
   if download:
     download_and_prepare_kwargs = download_and_prepare_kwargs or {}
     dbuilder.download_and_prepare(**download_and_prepare_kwargs)
@@ -663,7 +674,7 @@ def load(
 
 
 def _set_file_format_for_data_source(
-    builder_kwargs: Optional[Dict[str, Any]]
+    builder_kwargs: Optional[Dict[str, Any]],
 ) -> Dict[str, Any]:
   """Normalizes file format in builder_kwargs for `tfds.data_source`."""
   if builder_kwargs is None:

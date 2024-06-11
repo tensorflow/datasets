@@ -17,10 +17,8 @@
 
 import abc
 import re
-
 from unittest import mock
 import pytest
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import load
@@ -48,6 +46,9 @@ class EmptyDatasetBuilder(registered.RegisteredDataset):
     self.as_dataset_called = True
     self.as_dataset_kwargs = kwargs
     return self
+
+  def is_prepared(self) -> bool:
+    return False
 
   VERSION = utils.Version("1.0.0")
   BUILDER_CONFIGS = []
