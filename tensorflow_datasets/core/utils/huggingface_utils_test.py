@@ -22,7 +22,6 @@ from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import huggingface_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -215,29 +214,6 @@ def test_convert_value_raises(hf_value, feature):
 )
 def test_convert_value(hf_value, feature, expected_value):
   assert huggingface_utils.convert_hf_value(hf_value, feature) == expected_value
-
-
-@pytest.mark.parametrize(
-    'croissant_name,croissant_url,tfds_name',
-    [
-        (
-            'Name+1',
-            'https://huggingface.co/datasets/HuggingFaceH4/ultrachat_200k',
-            'huggingfaceh4__ultrachat_200k',
-        ),
-        ('Name+1', 'bad_url', 'name_1'),
-        ('Name+1', None, 'name_1'),
-    ],
-)
-def test_get_tfds_name_from_croissant_dataset(
-    croissant_name, croissant_url, tfds_name
-):
-  metadata = mlc.Metadata(name=croissant_name, url=croissant_url)
-  dataset = mlc.Dataset.from_metadata(metadata)
-  assert (
-      huggingface_utils.get_tfds_name_from_croissant_dataset(dataset)
-      == tfds_name
-  )
 
 
 @pytest.mark.parametrize(

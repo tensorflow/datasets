@@ -49,6 +49,7 @@ from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.utils import croissant_utils
 from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version as version_utils
@@ -173,9 +174,7 @@ class CroissantBuilder(
     if mapping is None:
       mapping = {}
     self.dataset = mlc.Dataset(jsonld, mapping=mapping)
-    self.name = huggingface_utils.get_tfds_name_from_croissant_dataset(
-        self.dataset
-    )
+    self.name = croissant_utils.get_tfds_dataset_name(self.dataset)
     self.metadata = self.dataset.metadata
 
     # In TFDS, version is a mandatory attribute, while in Croissant it is only a

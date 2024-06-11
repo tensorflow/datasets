@@ -19,7 +19,6 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 import datetime
-import typing
 from typing import Any, Type, TypeVar
 
 from etils import epath
@@ -32,10 +31,6 @@ from tensorflow_datasets.core.utils import dtype_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-
-if typing.TYPE_CHECKING:
-  # pylint: disable=g-bad-import-order
-  import mlcroissant as mlc
 
 
 _HF_DTYPE_TO_NP_DTYPE = immutabledict.immutabledict({
@@ -247,16 +242,6 @@ def convert_hf_value(
   raise TypeError(
       f'Conversion of value {hf_value} to feature {feature} is not supported.'
   )
-
-
-def get_tfds_name_from_croissant_dataset(dataset: mlc.Dataset) -> str:
-  """Returns TFDS compatible dataset name of the given MLcroissant dataset."""
-  if (url := dataset.metadata.url) and url.startswith(
-      'https://huggingface.co/datasets/'
-  ):
-    url_suffix = url.removeprefix('https://huggingface.co/datasets/')
-    return convert_hf_name(url_suffix)
-  return convert_hf_name(dataset.metadata.name)
 
 
 def convert_hf_name(hf_name: str) -> str:
