@@ -86,7 +86,7 @@ REQUIRED_PKGS = [
 
 TESTS_DEPENDENCIES = [
     'dill',
-    'jax[cpu]',
+    'jax[cpu]==0.4.28',
     'jupyter',
     'pytest',
     'pytest-shard',
