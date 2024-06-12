@@ -38,8 +38,8 @@ from tensorflow_datasets.core.dataset_builders import croissant_builder
 from tensorflow_datasets.scripts.cli import cli_utils
 
 
-@dataclasses.dataclass
-class CmdArgs:
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class CmdArgs(simple_parsing.helpers.FrozenSerializable):
   """CLI arguments for preparing a Croissant dataset.
 
   Attributes:
