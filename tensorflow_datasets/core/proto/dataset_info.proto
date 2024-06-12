@@ -154,6 +154,12 @@ message TfdsDatasetReference {
   // The namespace of the dataset, e.g. huggingface. Note that we prefix by ds_
   // to avoid conflicts with reserved in keywords in languages like C++.
   string ds_namespace = 5;
+
+  // The split of the dataset. Since the dataset reference is used to refer to
+  // the dataset as a whole, this is usually an empty string, but it can be
+  // set to a specific split if the dataset reference is used to refer to a
+  // specific split.
+  string split = 6;
 }
 
 // This is a serialization of tensorflow_datasets.core.DatasetInfo.
