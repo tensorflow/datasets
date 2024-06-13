@@ -198,6 +198,7 @@ class HuggingfaceDatasetBuilder(
       hf_num_proc: Optional[int] = None,
       tfds_num_proc: Optional[int] = None,
       ignore_hf_errors: bool = False,
+      overwrite_version: str | None = None,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
@@ -216,7 +217,12 @@ class HuggingfaceDatasetBuilder(
           f' hf_repo_id={self._hf_repo_id}, hf_config={self._hf_config},'
           f' config_kwargs={self.config_kwargs}'
       ) from e
-    version = str(self._hf_info.version or self._hf_builder.VERSION or '1.0.0')
+    version = str(
+        overwrite_version
+        or self._hf_info.version
+        or self._hf_builder.VERSION
+        or '1.0.0'
+    )
     self.VERSION = version_lib.Version(version)  # pylint: disable=invalid-name
     if self._hf_config:
       self._converted_builder_config = dataset_builder.BuilderConfig(
