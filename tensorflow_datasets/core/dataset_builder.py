@@ -29,37 +29,42 @@ import sys
 from typing import Any, ClassVar, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
 
 from absl import logging
-from etils import epath
-import importlib_resources
-from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import dataset_metadata
-from tensorflow_datasets.core import decode
-from tensorflow_datasets.core import download
-from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core import logging as tfds_logging
-from tensorflow_datasets.core import naming
-from tensorflow_datasets.core import reader as reader_lib
-from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import split_builder as split_builder_lib
-from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core import tf_compat
-from tensorflow_datasets.core import units
-from tensorflow_datasets.core import utils
-from tensorflow_datasets.core import writer as writer_lib
-from tensorflow_datasets.core.data_sources import array_record
-from tensorflow_datasets.core.data_sources import parquet
-from tensorflow_datasets.core.proto import dataset_info_pb2
-from tensorflow_datasets.core.utils import file_utils
-from tensorflow_datasets.core.utils import gcs_utils
-from tensorflow_datasets.core.utils import read_config as read_config_lib
-from tensorflow_datasets.core.utils import type_utils
+from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.utils.lazy_imports_utils import tree
-import termcolor
 
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from etils import epath
+  import importlib_resources
+  import termcolor
+
+  from tensorflow_datasets.core import constants
+  from tensorflow_datasets.core import dataset_info
+  from tensorflow_datasets.core import dataset_metadata
+  from tensorflow_datasets.core import decode
+  from tensorflow_datasets.core import download
+  from tensorflow_datasets.core import file_adapters
+  from tensorflow_datasets.core import lazy_imports_lib
+  from tensorflow_datasets.core import logging as tfds_logging
+  from tensorflow_datasets.core import naming
+  from tensorflow_datasets.core import reader as reader_lib
+  from tensorflow_datasets.core import registered
+  from tensorflow_datasets.core import split_builder as split_builder_lib
+  from tensorflow_datasets.core import splits as splits_lib
+  from tensorflow_datasets.core import tf_compat
+  from tensorflow_datasets.core import units
+  from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core import writer as writer_lib
+  from tensorflow_datasets.core.data_sources import array_record
+  from tensorflow_datasets.core.data_sources import parquet
+  from tensorflow_datasets.core.proto import dataset_info_pb2
+  from tensorflow_datasets.core.utils import file_utils
+  from tensorflow_datasets.core.utils import gcs_utils
+  from tensorflow_datasets.core.utils import read_config as read_config_lib
+  from tensorflow_datasets.core.utils import type_utils
+  # pylint: enable=g-import-not-at-top
 
 ListOrTreeOrElem = type_utils.ListOrTreeOrElem
 Tree = type_utils.Tree
