@@ -237,7 +237,13 @@ class Tensor(feature_lib.FeatureConnector):
 
     shape = example_data.shape
 
-    utils.assert_shape_match(shape, self._serialized_shape)
+    try:
+      utils.assert_shape_match(shape, self._serialized_shape)
+    except (AssertionError, ValueError) as e:
+      raise ValueError(
+          f'Shape {shape} does not match {self._serialized_shape} for feature '
+          f'with doc {self.doc} ({e})'
+      ) from e
 
     # Eventually encode the data
     if self._encoded_to_bytes:
