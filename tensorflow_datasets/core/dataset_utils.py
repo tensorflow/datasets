@@ -22,14 +22,20 @@ import functools
 import typing
 from typing import Any, Callable, Iterable, Iterator, Union
 
-from etils import enp
-from etils.etree import nest as etree
-import numpy as np
-from tensorflow_datasets.core import logging as tfds_logging
-from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import type_utils
+from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.utils.lazy_imports_utils import tree
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from etils import enp
+  from etils.etree import nest as etree
+  import numpy as np
+  from tensorflow_datasets.core import logging as tfds_logging
+  from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core.utils import type_utils
+  # pylint: enable=g-import-not-at-top
+
 
 Tree = type_utils.Tree
 Tensor = type_utils.Tensor
