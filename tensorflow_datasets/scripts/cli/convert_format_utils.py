@@ -101,10 +101,10 @@ def get_all_shard_instructions(
     info: dataset_info.DatasetInfo,
     out_file_format: file_adapters.FileFormat,
     out_path: epath.Path,
-    in_file_adapter: Type[file_adapters.FileAdapter],
-    out_file_adapter: Type[file_adapters.FileAdapter],
 ) -> list[ShardInstruction]:
   """Returns all shard instructions for the given dataset info."""
+  in_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[info.file_format]
+  out_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[out_file_format]
   shard_instructions = []
   for split_info in info.splits.values():
     shard_instructions.extend(
@@ -179,14 +179,10 @@ def _convert_dataset(
     out_dir.unlink(missing_ok=True)
   out_dir.mkdir(parents=True, exist_ok=True)
 
-  in_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[info.file_format]
-  out_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[out_file_format]
   shard_instructions = get_all_shard_instructions(
       info=info,
       out_file_format=out_file_format,
       out_path=out_dir,
-      in_file_adapter=in_file_adapter,
-      out_file_adapter=out_file_adapter,
   )
 
   if not shard_instructions:
