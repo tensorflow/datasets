@@ -63,8 +63,8 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
     overwrite_version: Semantic version of the dataset to be set.
   """
 
-  jsonld: epath.PathLike
-  data_dir: epath.PathLike
+  jsonld: epath.Path
+  data_dir: epath.Path
   # Need to override the default use of `Enum.name` for choice options.
   file_format: str = simple_parsing.choice(
       *(file_format.value for file_format in file_adapters.FileFormat),
@@ -78,8 +78,8 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
       nargs='?',
   )
   mapping: str | None = None
-  download_dir: epath.PathLike | None = None
-  publish_dir: epath.PathLike | None = None
+  download_dir: epath.Path | None = None
+  publish_dir: epath.Path | None = None
   skip_if_published: bool = False
   overwrite: bool = False
   overwrite_version: str | None = None
@@ -130,8 +130,8 @@ def prepare_croissant_builder(args: CmdArgs) -> None:
   cli_utils.download_and_prepare(
       builder=builder,
       download_config=None,
-      download_dir=epath.Path(args.download_dir) if args.download_dir else None,
-      publish_dir=epath.Path(args.publish_dir) if args.publish_dir else None,
+      download_dir=args.download_dir,
+      publish_dir=args.publish_dir,
       skip_if_published=args.skip_if_published,
       overwrite=args.overwrite,
   )
