@@ -731,6 +731,17 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     self._log_download_done()
 
+    # Execute post download and prepare hook if it exists.
+    self._post_download_and_prepare_hook()
+
+
+  def _post_download_and_prepare_hook(self) -> None:
+    """Hook to be executed after download and prepare.
+
+    Override this in custom dataset builders to execute custom logic after
+    download and prepare.
+    """
+    pass
 
   def _update_dataset_info(self) -> None:
     """Updates the `dataset_info.json` file in the dataset dir."""
