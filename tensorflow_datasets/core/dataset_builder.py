@@ -783,33 +783,56 @@ class DatasetBuilder(registered.RegisteredDataset):
     if split is None:
       split = {s: s for s in self.info.splits}
 
-    # Create a dataset for each of the given splits
-    def build_single_data_source(
-        split: str,
-    ) -> Sequence[Any]:
-      file_format = self.info.file_format
-      if file_format == file_adapters.FileFormat.ARRAY_RECORD:
-        return array_record.ArrayRecordDataSource(
-            self.info,
-            split=split,
-            decoders=decoders,
+    info = self.info
+
+    random_access_formats = file_adapters.FileFormat.with_random_access()
+    random_access_formats_msg = " or ".join(
+        [f.value for f in random_access_formats]
+    )
+    unsupported_format_msg = (
+        f"Random access data source for file format {info.file_format} is"
+        " not supported. Can you try to run download_and_prepare with"
+        f" file_format set to one of: {random_access_formats_msg}?"
+    )
+
+    if info.file_format is None and not info.alternative_file_formats:
+      raise ValueError(
+          "Dataset info file format is not set! For random access, one of the"
+          f" following formats is required: {random_access_formats_msg}"
+      )
+
+    if (
+        info.file_format is None
+        or info.file_format not in random_access_formats
+    ):
+      available_formats = set(info.alternative_file_formats)
+      suitable_formats = available_formats.intersection(random_access_formats)
+      if suitable_formats:
+        chosen_format = suitable_formats.pop()
+        logging.info(
+            "Found random access formats: %s. Chose to use %s. Overriding file"
+            " format in the dataset info.",
+            ", ".join([f.name for f in suitable_formats]),
+            chosen_format,
         )
-      elif file_format == file_adapters.FileFormat.PARQUET:
-        return parquet.ParquetDataSource(
-            self.info,
-            split=split,
-            decoders=decoders,
+        # Change the dataset info to read from a random access format.
+        info.set_file_format(
+            chosen_format, override=True, override_if_initialized=True
         )
       else:
-        args = [
-            f"`file_format='{file_format.value}'`"
-            for file_format in file_adapters.FileFormat.with_random_access()
-        ]
-        raise NotImplementedError(
-            f"Random access data source for file format {file_format} is not"
-            " supported. Can you try to run download_and_prepare with"
-            f" {' or '.join(args)}?"
-        )
+        raise NotImplementedError(unsupported_format_msg)
+
+    # Create a dataset for each of the given splits
+    def build_single_data_source(split: str) -> Sequence[Any]:
+      match info.file_format:
+        case file_adapters.FileFormat.ARRAY_RECORD:
+          return array_record.ArrayRecordDataSource(
+              info, split=split, decoders=decoders
+          )
+        case file_adapters.FileFormat.PARQUET:
+          return parquet.ParquetDataSource(info, split=split, decoders=decoders)
+        case _:
+          raise NotImplementedError(unsupported_format_msg)
 
     all_ds = tree.map_structure(build_single_data_source, split)
     return all_ds

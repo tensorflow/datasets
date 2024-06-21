@@ -578,6 +578,32 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
     assert len(data_source) == 10
     assert data_source[0]["x"] == 28
 
+  def test_load_as_data_source_alternative_file_format(self):
+    data_dir = self.get_temp_dir()
+    builder = DummyDatasetWithConfigs(
+        data_dir=data_dir,
+        config="plus1",
+        file_format=file_adapters.FileFormat.ARRAY_RECORD,
+    )
+    builder.download_and_prepare()
+    # Change the default file format and add alternative file format.
+    builder.info.as_proto.file_format = "tfrecord"
+    builder.info.add_alternative_file_format("array_record")
+
+    data_source = builder.as_data_source()
+    assert isinstance(data_source, dict)
+    assert isinstance(data_source["train"], array_record.ArrayRecordDataSource)
+    assert isinstance(data_source["test"], array_record.ArrayRecordDataSource)
+    assert len(data_source["test"]) == 10
+    assert data_source["test"][0]["x"] == 28
+    assert len(data_source["train"]) == 20
+    assert data_source["train"][0]["x"] == 7
+
+    data_source = builder.as_data_source(split="test")
+    assert isinstance(data_source, array_record.ArrayRecordDataSource)
+    assert len(data_source) == 10
+    assert data_source[0]["x"] == 28
+
   @parameterized.named_parameters(
       *[
           {"file_format": file_format, "testcase_name": file_format.value}

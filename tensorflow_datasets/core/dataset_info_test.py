@@ -422,6 +422,32 @@ class DatasetInfoTest(testing.TestCase):
     info.set_file_format(file_adapters.FileFormat.RIEGELI, override=True)
     self.assertEqual(info.file_format, file_adapters.FileFormat.RIEGELI)
 
+  def test_set_file_format_override_failes_when_fully_initialized(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    info.set_file_format(file_adapters.FileFormat.TFRECORD)
+    info._fully_initialized = True
+    self.assertEqual(info.file_format, file_adapters.FileFormat.TFRECORD)
+    with pytest.raises(
+        ValueError,
+        match=(
+            "File format is already set to FileFormat.TFRECORD. Got"
+            " FileFormat.RIEGELI"
+        ),
+    ):
+      info.set_file_format(file_adapters.FileFormat.RIEGELI)
+
+  def test_set_file_format_override_fully_initialized(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    info.set_file_format(file_adapters.FileFormat.TFRECORD)
+    info._fully_initialized = True
+    self.assertEqual(info.file_format, file_adapters.FileFormat.TFRECORD)
+    info.set_file_format(
+        file_adapters.FileFormat.RIEGELI,
+        override=True,
+        override_if_initialized=True,
+    )
+    self.assertEqual(info.file_format, file_adapters.FileFormat.RIEGELI)
+
   def test_update_info_proto_with_features(self):
     info_proto = dataset_info.DatasetInfo(builder=self._builder).as_proto
     new_features = features.FeaturesDict({"text": features.Text()})
