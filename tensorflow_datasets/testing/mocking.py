@@ -120,18 +120,17 @@ def _getitems(
       _getitem(self, record_key, generator, serialized=serialized)
       for record_key in record_keys
   ]
-  if serialized:
-    return np.array(items)
-  return items
+  return np.asarray(items)
 
 
-def _deserialize_example_np(serialized_example, *, decoders=None):
+def _deserialize_example_np(self, serialized_example, *, decoders=None):
   """Function to overwrite dataset_info.features.deserialize_example_np.
 
   Warning: this has to be defined in the outer scope in order for the function
   to be pickable.
 
   Args:
+    self: the dataset builder.
     serialized_example: the example to deserialize.
     decoders: optional decoders.
 
@@ -139,7 +138,7 @@ def _deserialize_example_np(serialized_example, *, decoders=None):
     The serialized example, because deserialization is taken care by
       RandomFakeGenerator.
   """
-  del decoders
+  del self, decoders
   return serialized_example
 
 
@@ -173,6 +172,7 @@ def mock_data(
     as_data_source_fn: Optional[Callable[..., Sequence[Any]]] = None,
     data_dir: Optional[str] = None,
     mock_array_record_data_source: Optional[PickableDataSourceMock] = None,
+    use_in_multiprocessing: bool = False,
 ) -> Iterator[None]:
   """Mock tfds to generate random data.
 
@@ -262,6 +262,10 @@ def mock_data(
     mock_array_record_data_source: Overwrite a mock for the underlying
       ArrayRecord data source if it is used. Note: If used the same mock will be
       used for all data sources loaded within this context.
+    use_in_multiprocessing: If True, the mock will use a multiprocessing-safe
+      approach to generate the data. It's notably useful for PyGrain. The goal
+      is to migrate the codebase to this mode by default. Find a more detailed
+      explanation of this parameter in a comment in the code below.
 
   Yields:
     None
@@ -361,9 +365,31 @@ def mock_data(
     if split is None:
       split = {s: s for s in self.info.splits}
 
-    generator_cls, features, _, _ = _get_fake_data_components(
-        decoders, self.info.features
-    )
+    features = self.info.features
+    if use_in_multiprocessing:
+      # In multiprocessing, we generate serialized data. The data is then
+      # re-deserialized by the feature as it would normally happen in TFDS. In
+      # this approach, we don't need to monkey-patch workers to propagate the
+      # information that deserialize_example_np should be a no-op. Indeed, doing
+      # so is difficult as PyGrain uses the `spawn` multiprocessing mode. Users
+      # of tfds.testing.mock_data in the codebase started relying on the
+      # function not serializing (for example, they don't have TensorFlow in
+      # their dependency), so we cannot have use_in_multiprocessing by default.
+      #       ┌─────────────┐
+      #       │ Main process│
+      #       └─┬──────┬────┘
+      # ┌───────▼─┐  ┌─▼───────┐
+      # │ worker1 │  │ worker2 │  ...
+      # └───────┬─┘  └─┬───────┘
+      #       serialized data by the generator
+      # ┌───────▼─┐  ┌─▼───────┐
+      # │ tfds 1  │  │ tfds 2  │  ...
+      # └───────┬─┘  └─┬───────┘
+      #       deserialized data
+      generator_cls = SerializedRandomFakeGenerator
+    else:
+      # We generate already deserialized data with the generator.
+      generator_cls, _, _, _ = _get_fake_data_components(decoders, features)
     generator = generator_cls(features, num_examples)
 
     if actual_policy == MockPolicy.USE_CODE:
@@ -385,7 +411,6 @@ def mock_data(
         # Force ARRAY_RECORD as the default file_format.
         return_value=file_adapters.FileFormat.ARRAY_RECORD,
     ):
-      self.info.features.deserialize_example_np = _deserialize_example_np
       mock_data_source.return_value.__len__.return_value = num_examples
       mock_data_source.return_value._generator = (  # pylint:disable=protected-access
           generator
@@ -399,7 +424,7 @@ def mock_data(
 
       def build_single_data_source(split):
         single_data_source = array_record.ArrayRecordDataSource(
-            dataset_info=self.info, split=split, decoders=decoders
+            dataset_builder=self, split=split, decoders=decoders
         )
         return single_data_source
 
@@ -462,6 +487,10 @@ def mock_data(
         (
             f'{core}.dataset_builder.FileReaderBuilder._as_dataset',
             as_dataset_fn,
+        ),
+        (
+            f'{core}.features.top_level_feature.TopLevelFeature.deserialize_example_np',
+            _deserialize_example_np,
         ),
     ]:
       stack.enter_context(mock.patch(path, mocked_fn))
