@@ -251,12 +251,13 @@ class DatasetInfo(object):
     else:
       self._identity = DatasetIdentity.from_builder(builder)
 
+    # Convert alternative_file_formats to a list of `FileFormat`.
     self._alternative_file_formats: list[file_adapters.FileFormat] = []
-    if alternative_file_formats:
-      for file_format in alternative_file_formats:
-        if isinstance(file_format, str):
-          file_format = file_adapters.FileFormat.from_value(file_format)
-        self.add_alternative_file_format(file_format)
+    if alternative_file_formats is not None:
+      for f in alternative_file_formats:
+        if isinstance(f, str):
+          f = file_adapters.FileFormat.from_value(f)
+        self._alternative_file_formats.append(f)
 
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=self._identity.name,
