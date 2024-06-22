@@ -61,12 +61,13 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\t"$\n\x03Url\x12\x0b\n\x03url\x18\x01'
     b' \x01(\t\x12\x10\n\x08\x63hecksum\x18\x02'
     b' \x01(\t"\x1d\n\x08SqlQuery\x12\x11\n\tsql_query\x18\x01'
-    b' \x01(\t"m\n\x14TfdsDatasetReference\x12\x0c\n\x04name\x18\x01'
+    b' \x01(\t"|\n\x14TfdsDatasetReference\x12\x0c\n\x04name\x18\x01'
     b' \x01(\t\x12\x0e\n\x06\x63onfig\x18\x02'
     b' \x01(\t\x12\x0f\n\x07version\x18\x03'
     b' \x01(\t\x12\x10\n\x08\x64\x61ta_dir\x18\x04'
     b' \x01(\t\x12\x14\n\x0c\x64s_namespace\x18\x05'
-    b' \x01(\t"\xb4\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
+    b' \x01(\t\x12\r\n\x05split\x18\x06'
+    b' \x01(\t"\xd6\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
     b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02'
     b' \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12I\n\rrelease_notes\x18\x12'
     b' \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r'
@@ -84,8 +85,9 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b'
     b" \x01(\x0b\x32'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f"
     b' \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10'
-    b' \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11'
-    b' \x01(\t\x12\x43\n\x14\x64\x61ta_source_accesses\x18\x14'
+    b' \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x12'
+    b' \n\x18\x61lternative_file_formats\x18\x16'
+    b' \x03(\t\x12\x43\n\x14\x64\x61ta_source_accesses\x18\x14'
     b' \x03(\x0b\x32%.tensorflow_datasets.DataSourceAccess\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
     b' \x01(\t\x12\r\n\x05value\x18\x02'
     b' \x01(\t:\x02\x38\x01\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01'
@@ -142,11 +144,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SQLQUERY._serialized_start = 1249
   _SQLQUERY._serialized_end = 1278
   _TFDSDATASETREFERENCE._serialized_start = 1280
-  _TFDSDATASETREFERENCE._serialized_end = 1389
-  _DATASETINFO._serialized_start = 1392
-  _DATASETINFO._serialized_end = 2340
-  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2231
-  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2282
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2284
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2340
+  _TFDSDATASETREFERENCE._serialized_end = 1404
+  _DATASETINFO._serialized_start = 1407
+  _DATASETINFO._serialized_end = 2389
+  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2280
+  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2331
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2333
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2389
 # @@protoc_insertion_point(module_scope)

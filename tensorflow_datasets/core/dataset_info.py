@@ -33,7 +33,7 @@ processed the dataset as well:
 from __future__ import annotations
 
 import abc
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 import dataclasses
 import json
 import os
@@ -194,6 +194,9 @@ class DatasetInfo(object):
       license: str | None = None,  # pylint: disable=redefined-builtin
       redistribution_info: Optional[dict[str, str]] = None,
       split_dict: Optional[splits_lib.SplitDict] = None,
+      alternative_file_formats: (
+          Sequence[str | file_adapters.FileFormat] | None
+      ) = None,
       # LINT.ThenChange(:setstate)
   ):
     # pyformat: disable
@@ -238,6 +241,8 @@ class DatasetInfo(object):
         subfield will automatically be written to a LICENSE file stored with the
         dataset.
       split_dict: information about the splits in this dataset.
+      alternative_file_formats: alternative file formats that are availablefor
+        this dataset.
     """
     # pyformat: enable
     self._builder_or_identity = builder
@@ -245,6 +250,14 @@ class DatasetInfo(object):
       self._identity = builder
     else:
       self._identity = DatasetIdentity.from_builder(builder)
+
+    # Convert alternative_file_formats to a list of `FileFormat`.
+    self._alternative_file_formats: list[file_adapters.FileFormat] = []
+    if alternative_file_formats is not None:
+      for f in alternative_file_formats:
+        if isinstance(f, str):
+          f = file_adapters.FileFormat.from_value(f)
+        self._alternative_file_formats.append(f)
 
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=self._identity.name,
@@ -260,6 +273,9 @@ class DatasetInfo(object):
         redistribution_info=_create_redistribution_info_proto(
             license=license, redistribution_info=redistribution_info
         ),
+        alternative_file_formats=[
+            f.value for f in self._alternative_file_formats
+        ],
     )
 
     if homepage:
@@ -328,6 +344,7 @@ class DatasetInfo(object):
             repeated_split_infos=proto.splits,
             filename_template=filename_template,
         ),
+        alternative_file_formats=proto.alternative_file_formats,
     )
 
   @property
@@ -416,6 +433,10 @@ class DatasetInfo(object):
     return self._features
 
   @property
+  def alternative_file_formats(self) -> Sequence[file_adapters.FileFormat]:
+    return self._alternative_file_formats
+
+  @property
   def metadata(self) -> Metadata | None:
     return self._metadata
 
@@ -444,6 +465,7 @@ class DatasetInfo(object):
       self,
       file_format: None | str | file_adapters.FileFormat,
       override: bool = False,
+      override_if_initialized: bool = False,
   ) -> None:
     """Internal function to define the file format.
 
@@ -454,6 +476,8 @@ class DatasetInfo(object):
       file_format: The file format.
       override: Whether the file format should be overridden if it is already
         set.
+      override_if_initialized: Whether the file format should be overridden if
+        the DatasetInfo is already fully initialized.
 
     Raises:
       ValueError: if the file format was already set and the `override`
@@ -474,12 +498,39 @@ class DatasetInfo(object):
       raise ValueError(
           f"File format is already set to {self.file_format}. Got {file_format}"
       )
-    if override and self._fully_initialized:
+    if override and self._fully_initialized and not override_if_initialized:
       raise RuntimeError(
-          "Cannot override the file format "
-          "when the DatasetInfo is already fully initialized!"
+          "Cannot override the file format when the DatasetInfo is already"
+          " fully initialized!"
       )
     self._info_proto.file_format = file_format.value
+    if override_if_initialized:
+      # Update the splits to point to the new file format.
+      updated_split_infos = []
+      for split_info in self.splits.values():
+        if split_info.filename_template is None:
+          continue
+        updated_split_info = split_info.replace(
+            filename_template=split_info.filename_template.replace(
+                filetype_suffix=file_format.value
+            )
+        )
+        updated_split_infos.append(updated_split_info)
+      self._splits = splits_lib.SplitDict(updated_split_infos)
+
+  def add_alternative_file_format(
+      self,
+      file_format: str | file_adapters.FileFormat,
+  ) -> None:
+    """Adds an alternative file format to the dataset info."""
+    if isinstance(file_format, str):
+      file_format = file_adapters.FileFormat.from_value(file_format)
+    if file_format in self.alternative_file_formats:
+      raise ValueError(
+          f"Alternative file format {file_format} is already present."
+      )
+    self._alternative_file_formats.append(file_format)
+    self.as_proto.alternative_file_formats.append(file_format.value)
 
   @property
   def splits(self) -> splits_lib.SplitDict:
@@ -882,6 +933,7 @@ class DatasetInfo(object):
         "metadata": self.metadata,
         "license": self.redistribution_info.license,
         "split_dict": self.splits,
+        "alternative_file_formats": self.alternative_file_formats,
     }
   def __setstate__(self, state):
     # LINT.IfChange(setstate)
@@ -896,6 +948,7 @@ class DatasetInfo(object):
         metadata=state["metadata"],
         license=state["license"],
         split_dict=state["split_dict"],
+        alternative_file_formats=state["alternative_file_formats"],
     )
     # LINT.ThenChange(:dataset_info_args)
 

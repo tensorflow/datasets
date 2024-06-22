@@ -129,6 +129,7 @@ with epy.lazy_imports(error_callback=tf_agents_error_callback):
 
 with epy.lazy_imports(error_callback=datasets_error_callback):
   import datasets  # pytype: disable=import-error
+  import huggingface_hub  # pytype: disable=import-error
 
 with epy.lazy_imports(error_callback=array_record_error_callback):
   from array_record.python import array_record_data_source

@@ -154,6 +154,12 @@ message TfdsDatasetReference {
   // The namespace of the dataset, e.g. huggingface. Note that we prefix by ds_
   // to avoid conflicts with reserved in keywords in languages like C++.
   string ds_namespace = 5;
+
+  // The split of the dataset. Since the dataset reference is used to refer to
+  // the dataset as a whole, this is usually an empty string, but it can be
+  // set to a specific split if the dataset reference is used to refer to a
+  // specific split.
+  string split = 6;
 }
 
 // This is a serialization of tensorflow_datasets.core.DatasetInfo.
@@ -216,9 +222,15 @@ message DatasetInfo {
   // Specifies whether examples should be shuffled.
   bool disable_shuffling = 16;
 
-  // File format used.
-  // Use string to allow format extension without regenerating the proto.
+  // Default file format to use. Note that alternative file formats may be
+  // available too and that depending on how the dataset is loaded, the default
+  // file format may be ignored.
   string file_format = 17;
+
+  // Alternative file formats available for this dataset. Note that the number
+  // of shards and the number of examples per shard must be the same for all
+  // file formats.
+  repeated string alternative_file_formats = 22;
 
   // The data that was used to generate this dataset.
   repeated DataSourceAccess data_source_accesses = 20;

@@ -42,7 +42,6 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import huggingface_utils
@@ -50,6 +49,7 @@ from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import tqdm_utils
 from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
+from tensorflow_datasets.core.utils.lazy_imports_utils import huggingface_hub
 
 
 def _extract_supervised_keys(hf_info):
@@ -198,6 +198,7 @@ class HuggingfaceDatasetBuilder(
       hf_num_proc: Optional[int] = None,
       tfds_num_proc: Optional[int] = None,
       ignore_hf_errors: bool = False,
+      overwrite_version: str | None = None,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
@@ -216,16 +217,13 @@ class HuggingfaceDatasetBuilder(
           f' hf_repo_id={self._hf_repo_id}, hf_config={self._hf_config},'
           f' config_kwargs={self.config_kwargs}'
       ) from e
-    version = str(self._hf_info.version or self._hf_builder.VERSION or '1.0.0')
+    version = str(
+        overwrite_version
+        or self._hf_info.version
+        or self._hf_builder.VERSION
+        or '1.0.0'
+    )
     self.VERSION = version_lib.Version(version)  # pylint: disable=invalid-name
-    if self._hf_config:
-      self._converted_builder_config = dataset_builder.BuilderConfig(
-          name=tfds_config,
-          version=self.VERSION,
-          description=self._hf_info.description,
-      )
-    else:
-      self._converted_builder_config = None
     self.name = huggingface_utils.convert_hf_name(hf_repo_id)
     self._hf_hub_token = hf_hub_token
     self._hf_num_proc = hf_num_proc
@@ -233,6 +231,14 @@ class HuggingfaceDatasetBuilder(
     self._verification_mode = (
         'no_checks' if ignore_verifications else 'all_checks'
     )
+    if self._hf_config:
+      self._converted_builder_config = dataset_builder.BuilderConfig(
+          name=tfds_config,
+          version=self.VERSION,
+          description=self._get_text_field('description'),
+      )
+    else:
+      self._converted_builder_config = None
     super().__init__(
         file_format=file_format, config=tfds_config, data_dir=data_dir
     )
@@ -260,7 +266,15 @@ class HuggingfaceDatasetBuilder(
 
   @property
   def _hf_info(self) -> hf_datasets.DatasetInfo:
+    """Retrieves the dataset info from the HuggingFace Datasets."""
     return self._hf_builder.info
+
+  @functools.cached_property
+  def _hf_hub_info(self) -> huggingface_hub.hf_api.DatasetInfo:
+    """Retrieves the dataset info from the HuggingFace Hub and caches it."""
+    return huggingface_hub.dataset_info(
+        self._hf_repo_id, token=self._hf_hub_token
+    )
 
   def _hf_features(self) -> hf_datasets.Features:
     if not self._hf_info.features:
@@ -272,9 +286,9 @@ class HuggingfaceDatasetBuilder(
   def _info(self) -> dataset_info_lib.DatasetInfo:
     return dataset_info_lib.DatasetInfo(
         builder=self,
-        description=self._hf_info.description,
+        description=self._get_text_field('description'),
         features=huggingface_utils.convert_hf_features(self._hf_features()),
-        citation=self._hf_info.citation,
+        citation=self._get_text_field('citation'),
         license=self._get_license(),
         supervised_keys=_extract_supervised_keys(self._hf_info),
     )
@@ -411,22 +425,30 @@ class HuggingfaceDatasetBuilder(
 
   def _get_license(self) -> str | None:
     """Implements heuristics to get the license from HuggingFace."""
-    # First heuristic: check the DatasetInfo from Hugging Face datasets.
-    if self._hf_info.license:
-      return self._hf_info.license
-    huggingface_hub = lazy_imports_lib.lazy_imports.huggingface_hub
-    # Retrieve the dataset info from the HuggingFace Hub.
-    repo_id, token = self._hf_repo_id, self._hf_hub_token
-    dataset_info = huggingface_hub.dataset_info(repo_id, token=token)
-    # Second heuristic: check the card data.
+    # Heuristic #1: check the DatasetInfo from Hugging Face Hub/Datasets.
+    if info_license := self._get_text_field('license'):
+      return info_license
+    dataset_info = self._hf_hub_info
+    # Heuristic #2: check the card data.
     if dataset_info.card_data:
       if card_data_license := dataset_info.card_data.get('license'):
         return card_data_license
-    # Third heuristic: check the tags.
+    # Heuristic #3: check the tags.
     if dataset_info.tags:
       for tag in dataset_info.tags:
         if tag.startswith('license:'):
           return tag.removeprefix('license:')
+    return None
+
+  def _get_text_field(self, field: str) -> str | None:
+    """Get the field from either HF Hub or HF Datasets."""
+    # The information retrieved from the Hub has priority over the one in the
+    # builder, because the Hub which is allegedly the new source of truth.
+    for dataset_info in [self._hf_hub_info, self._hf_info]:
+      # `description` and `citation` are not official fields in the Hugging Face
+      # Hub API but they're still exposed in its __dict__.
+      if value := getattr(dataset_info, field, None):
+        return value
     return None
 
 
@@ -443,5 +465,4 @@ def login_to_hf(hf_hub_token: Optional[str] = None):
   """Logs in to Hugging Face Hub with the token as arg or env variable."""
   hf_hub_token = hf_hub_token or os.environ.get('HUGGING_FACE_HUB_TOKEN')
   if hf_hub_token is not None:
-    huggingface_hub = lazy_imports_lib.lazy_imports.huggingface_hub
     huggingface_hub.login(token=hf_hub_token)

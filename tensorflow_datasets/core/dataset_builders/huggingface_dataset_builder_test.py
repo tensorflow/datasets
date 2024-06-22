@@ -20,6 +20,7 @@ import numpy as np
 import pytest
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
+from tensorflow_datasets.core.utils.lazy_imports_utils import huggingface_hub
 
 PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
 
@@ -72,6 +73,22 @@ def mock_login_to_hf():
     yield login_to_hf
 
 
+@pytest.fixture(autouse=True)
+def mock_hub_dataset_info():
+  fake_dataset_info = huggingface_hub.hf_api.DatasetInfo(
+      id='foo/bar',
+      citation='citation from the hub',
+      private=False,
+      downloads=123,
+      likes=456,
+      tags=[],
+  )
+  with mock.patch.object(
+      huggingface_hub, 'dataset_info', return_value=fake_dataset_info
+  ) as dataset_info:
+    yield dataset_info
+
+
 @pytest.fixture(name='builder')
 def mock_huggingface_dataset_builder(
     tmp_path, load_dataset_builder, login_to_hf
@@ -91,7 +108,7 @@ def mock_huggingface_dataset_builder(
   )
   login_to_hf.assert_called_once_with('SECRET_TOKEN')
   assert builder.info.description == 'description'
-  assert builder.info.citation == 'citation'
+  assert builder.info.citation == 'citation from the hub'
   assert builder.info.redistribution_info.license == 'test-license'
   yield builder
 
