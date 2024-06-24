@@ -101,6 +101,19 @@ def test_create_from_to_dirs():
   }
 
 
+def test_create_from_to_dirs_same_folder():
+  references = [
+      naming.DatasetReference(
+          dataset_name='a', config='cfg1', version='1.0.0', data_dir='/data/in'
+      )
+  ]
+  actual = convert_format_utils._create_from_to_dirs(
+      references, root_in_dir=epath.Path('/data/in'), out_path=None
+  )
+  expected_path = epath.Path('/data/in/a/cfg1/1.0.0')
+  assert actual == {expected_path: expected_path}
+
+
 def test_get_root_data_dir():
   leaf_data_dir = epath.Path('/data/a/cfg1/1.2.3')
   info = dataset_info.DatasetInfo(
@@ -154,3 +167,30 @@ def test_record_source_dataset(tmpdir):
   assert data_source_access.tfds_dataset.name == info.name
   assert data_source_access.tfds_dataset.version == info.version
   assert data_source_access.tfds_dataset.config == info.config_name
+
+
+def test_convert_metadata_add_to_existing(tmpdir):
+  in_data_dir = epath.Path(tmpdir) / 'a/cfg1/1.2.3'
+  in_data_dir.mkdir(parents=True)
+  info = dataset_info.DatasetInfo(
+      builder=dataset_info.DatasetIdentity(
+          name='a',
+          version='1.2.3',
+          config_name='cfg1',
+          data_dir=in_data_dir,
+          module_name='xyz',
+      )
+  )
+  info.set_file_format(file_adapters.FileFormat.TFRECORD)
+  info.write_to_directory(in_data_dir)
+  convert_format_utils.convert_metadata(
+      in_dir=in_data_dir,
+      out_path=in_data_dir,
+      info=info,
+      out_file_format=file_adapters.FileFormat.RIEGELI,
+  )
+  converted_info = dataset_info.read_proto_from_builder_dir(in_data_dir)
+  assert converted_info.file_format == file_adapters.FileFormat.TFRECORD.value
+  assert converted_info.alternative_file_formats == [
+      file_adapters.FileFormat.RIEGELI.value
+  ]

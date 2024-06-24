@@ -73,9 +73,12 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
       type=pathlib.Path,
       help=(
           'Path where the converted dataset will be stored. Should include the'
-          ' config and version, e.g. `/data/dataset_name/config/1.2.3`.'
+          ' config and version, e.g. `/data/dataset_name/config/1.2.3`. If not'
+          ' specified, the converted shards will be stored in the same'
+          ' directory as the input dataset.'
       ),
-      required=True,
+      default=None,
+      required=False,
   )
   parser.add_argument(
       '--overwrite',
@@ -86,6 +89,16 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
       '--use_beam',
       action='store_true',
       help='Use beam to convert the dataset.',
+  )
+  parser.add_argument(
+      '--num_workers',
+      type=int,
+      default=8,
+      help=(
+          'Number of workers to use when not using Beam. If `--use_beam` is'
+          ' set, this flag is ignored. If `--num_workers=1`, the conversion'
+          ' will be done sequentially.'
+      ),
   )
 
 
@@ -105,5 +118,6 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
           dataset_version_dir=args.dataset_version_dir or None,
           overwrite=args.overwrite,
           use_beam=args.use_beam,
+          num_workers=args.num_workers,
       )
   )

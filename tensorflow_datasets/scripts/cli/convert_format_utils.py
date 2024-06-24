@@ -13,26 +13,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""`tfds convert_format` command."""
+r"""Library to convert a dataset from one file format to another."""
 
 from collections.abc import Iterable, Iterator, Mapping
 import dataclasses
+import functools
 import os
 import re
 from typing import Type
 
-from absl import logging
-from etils import epath
-from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import naming
-from tensorflow_datasets.core import read_only_builder as read_only_builder_lib
-from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core.utils import file_utils
-from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
+from etils import epy
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  import concurrent.futures
+
+  from absl import logging
+  import apache_beam as beam
+  from etils import epath
+  from tensorflow_datasets.core import constants
+  from tensorflow_datasets.core import dataset_info
+  from tensorflow_datasets.core import file_adapters
+  from tensorflow_datasets.core import naming
+  from tensorflow_datasets.core import read_only_builder as read_only_builder_lib
+  from tensorflow_datasets.core import splits as splits_lib
+  from tensorflow_datasets.core.utils import file_utils
+  from tensorflow_datasets.core.utils import py_utils
+  from tensorflow_datasets.core.utils import type_utils
+
+  # pylint: enable=g-import-not-at-top
 
 
 @dataclasses.dataclass(frozen=True)
@@ -137,7 +146,29 @@ def convert_metadata(
     out_file_format: file_adapters.FileFormat,
     out_path: epath.Path,
 ) -> None:
-  """Converts all metadata to the converted dataset."""
+  """Converts all metadata to the converted dataset.
+
+  Args:
+    in_dir: folder that contains the dataset to convert.
+    info: dataset info of the dataset to convert.
+    out_file_format: the format to which the dataset should be converted to.
+    out_path: folder where the converted dataset should be stored.
+  """
+  if in_dir == out_path:
+    # File format was added to an existing dataset.
+    # Add the file format to `alternative_file_formats` field.
+    if out_file_format not in info.alternative_file_formats:
+      info.add_alternative_file_format(out_file_format.value)
+      info.write_to_directory(out_path)
+    else:
+      logging.info(
+          'File format %s is already an alternative file format of the dataset'
+          ' in %s. Skipping updating metadata..',
+          out_file_format.value,
+          os.fspath(in_dir),
+      )
+    return
+
   # Copy all json files except dataset_info.json because it needs to be updated.
   for json_file in in_dir.glob('*.json'):
     if json_file.name == constants.DATASET_INFO_FILENAME:
@@ -169,15 +200,16 @@ def _convert_dataset(
     pipeline: beam.Pipeline | None = None,
 ) -> None:
   """Converts a single dataset version to the given file format."""
-  logging.info('Converting shards in %s, saving in %s.', dataset_dir, out_dir)
-  if dataset_dir == out_dir:
-    raise ValueError(
-        f'The dataset dir is the same as the out dir: {dataset_dir=} =='
-        f' {out_dir=}'
-    )
-  if overwrite:
-    out_dir.unlink(missing_ok=True)
-  out_dir.mkdir(parents=True, exist_ok=True)
+  logging.info(
+      'Converting shards in %s to %s, saving in %s.',
+      dataset_dir,
+      out_file_format.value,
+      out_dir,
+  )
+  if dataset_dir != out_dir:
+    if overwrite:
+      out_dir.unlink(missing_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
   shard_instructions = get_all_shard_instructions(
       info=info,
@@ -192,6 +224,8 @@ def _convert_dataset(
         dataset_dir,
     )
     return
+  else:
+    logging.info('Found %d shards to convert.', len(shard_instructions))
 
   if pipeline is not None:
     _ = (
@@ -221,6 +255,7 @@ def _convert_dataset_dirs(
     out_file_format: file_adapters.FileFormat,
     overwrite: bool = False,
     use_beam: bool = False,
+    num_workers: int = 8,
 ) -> None:
   """Converts all datasets in the given `from_to_dirs` parameter.
 
@@ -230,6 +265,7 @@ def _convert_dataset_dirs(
     out_file_format: the format to which the datasets should be converted to.
     overwrite: whether to overwrite the to_dirs if they exist.
     use_beam: whether to use Beam to convert the datasets.
+    num_workers: number of workers to use if `use_beam` is `False`.
   """
   logging.info('Converting %d datasets.', len(from_to_dirs))
 
@@ -241,7 +277,28 @@ def _convert_dataset_dirs(
           f'The file format of the dataset ({builder.info.file_format}) is the'
           f' same as the specified out file format! ({out_file_format})'
       )
+    if out_file_format in builder.info.alternative_file_formats:
+      if overwrite:
+        logging.warning(
+            'The file format to convert to (%s) is already an alternative file'
+            ' format. Overwriting the shards!',
+            out_file_format.value,
+        )
+      else:
+        logging.info(
+            'The file format to convert to (%s) is already an alternative file'
+            ' format of the dataset in %s. Skipping conversion.',
+            os.fspath(from_dir),
+            out_file_format.value,
+        )
+        continue
     found_dataset_versions[from_dir] = builder.info
+
+  convert_dataset_fn = functools.partial(
+      _convert_dataset,
+      out_file_format=out_file_format,
+      overwrite=overwrite,
+  )
 
   # First convert all shards (with or without Beam), then convert the metadata.
   if use_beam:
@@ -249,24 +306,31 @@ def _convert_dataset_dirs(
     with beam.Pipeline(runner=runner) as pipeline:
       for dataset_dir, info in found_dataset_versions.items():
         out_dir = from_to_dirs[dataset_dir]
-        _convert_dataset(
+        convert_dataset_fn(
             info=info,
             dataset_dir=dataset_dir,
             out_dir=out_dir,
-            out_file_format=out_file_format,
-            overwrite=overwrite,
             pipeline=pipeline,
+        )
+  elif num_workers > 1:
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=num_workers
+    ) as executor:
+      for dataset_dir, info in found_dataset_versions.items():
+        out_dir = from_to_dirs[dataset_dir]
+        executor.submit(
+            convert_dataset_fn,
+            info=info,
+            dataset_dir=dataset_dir,
+            out_dir=out_dir,
         )
   else:
     for dataset_dir, info in found_dataset_versions.items():
       out_dir = from_to_dirs[dataset_dir]
-      _convert_dataset(
+      convert_dataset_fn(
           info=info,
           dataset_dir=dataset_dir,
           out_dir=out_dir,
-          out_file_format=out_file_format,
-          overwrite=overwrite,
-          pipeline=None,
       )
 
   logging.info('All shards have been converted. Now converting metadata.')
@@ -291,27 +355,31 @@ def _convert_dataset_dirs(
 def _create_from_to_dirs(
     references: Iterable[naming.DatasetReference],
     root_in_dir: epath.Path,
-    out_path: epath.Path,
+    out_path: epath.Path | None,
 ) -> Mapping[epath.Path, epath.Path]:
   """Returns a mapping from dataset dirs to their corresponding out dirs."""
   from_to_dirs: dict[epath.Path, epath.Path] = {}
   for reference in references:
     dataset_dir = reference.dataset_dir()
-    out_dir = _create_out_dir(
-        dataset_dir=dataset_dir,
-        root_in_dir=root_in_dir,
-        root_out_dir=out_path,
-    )
+    if out_path is None:
+      out_dir = dataset_dir
+    else:
+      out_dir = _create_out_dir(
+          dataset_dir=dataset_dir,
+          root_in_dir=root_in_dir,
+          root_out_dir=out_path,
+      )
     from_to_dirs[dataset_dir] = out_dir
   return from_to_dirs
 
 
 def convert_root_data_dir(
     root_data_dir: epath.PathLike,
-    out_dir: epath.PathLike,
+    out_dir: epath.PathLike | None,
     out_file_format: str | file_adapters.FileFormat,
     use_beam: bool,
     overwrite: bool = False,
+    num_workers: int = 8,
 ) -> None:
   """Converts all datasets found in the given dataset dir.
 
@@ -319,13 +387,16 @@ def convert_root_data_dir(
     root_data_dir: folder that contains one or multiple TFDS datasets, each with
       their own configs and versions.
     out_dir: folder where the converted datasets should be stored. Datasets will
-      be stored with the same folder structure as the input folder.
+      be stored with the same folder structure as the input folder. If `None`,
+      the converted datasets will be stored in the same folder as the input
+      datasets.
     out_file_format: file format to which the dataset should be converted.
     use_beam: whether to use Beam to convert datasets. Useful for big datasets.
     overwrite: whether to overwrite folders in `out_dir` if they already exist.
+    num_workers: number of workers to use if `use_beam` is `False`.
   """
   root_data_dir = epath.Path(root_data_dir)
-  out_path = epath.Path(out_dir)
+  out_path = epath.Path(out_dir) if out_dir is not None else None
 
   if isinstance(out_file_format, str):
     out_file_format = file_adapters.file_format_from_suffix(out_file_format)
@@ -348,13 +419,14 @@ def convert_root_data_dir(
       out_file_format=out_file_format,
       overwrite=overwrite,
       use_beam=use_beam,
+      num_workers=num_workers,
   )
 
 
 def _create_out_dir(
-    dataset_dir: epath.PathLike,
-    root_in_dir: epath.PathLike,
-    root_out_dir: epath.PathLike,
+    dataset_dir: epath.Path,
+    root_in_dir: epath.Path,
+    root_out_dir: epath.Path,
 ) -> epath.Path:
   """Returns the folder where the data should be written."""
   relative_path = os.fspath(dataset_dir).removeprefix(os.fspath(root_in_dir))
@@ -364,10 +436,11 @@ def _create_out_dir(
 
 def convert_dataset_dir(
     dataset_dir: epath.PathLike,
-    out_dir: epath.PathLike,
+    out_dir: epath.PathLike | None,
     out_file_format: file_adapters.FileFormat,
     use_beam: bool,
     overwrite: bool = False,
+    num_workers: int = 8,
 ) -> None:
   """Converts all datasets found in the given dataset dir.
 
@@ -375,13 +448,16 @@ def convert_dataset_dir(
     dataset_dir: folder that contains a single dataset with all its configs and
       versions.
     out_dir: folder where the converted datasets should be stored. Datasets will
-      be stored with the same folder structure as the input folder.
+      be stored with the same folder structure as the input folder. If `None`,
+      the converted shards will be stored in the same folder as the input
+      datasets.
     out_file_format: file format to which the dataset should be converted.
     use_beam: whether to use Beam to convert datasets. Useful for big datasets.
     overwrite: whether to overwrite folders in `out_dir` if they already exist.
+    num_workers: number of workers to use if `use_beam` is `False`.
   """
   dataset_dir = epath.Path(dataset_dir)
-  out_path = epath.Path(out_dir)
+  out_path = epath.Path(out_dir) if out_dir is not None else None
 
   logging.info(
       'Converting all configs and versions in dataset dir %s, saving to %s.',
@@ -406,19 +482,42 @@ def convert_dataset_dir(
       out_file_format=out_file_format,
       overwrite=overwrite,
       use_beam=use_beam,
+      num_workers=num_workers,
   )
 
 
 def convert_dataset(
-    out_dir: epath.PathLike,
+    out_dir: epath.PathLike | None,
     out_file_format: str | file_adapters.FileFormat,
     root_data_dir: epath.PathLike | None = None,
     dataset_dir: epath.PathLike | None = None,
     dataset_version_dir: epath.PathLike | None = None,
     overwrite: bool = False,
     use_beam: bool = False,
+    num_workers: int = 8,
 ) -> None:
-  """Convert a dataset from one file format to another format."""
+  """Convert a dataset from one file format to another format.
+
+  Note that exactly one of `root_data_dir`, `dataset_dir`, or
+  `dataset_version_dir` must be specified.
+
+  Args:
+    out_dir: folder where the converted datasets should be stored. Datasets will
+      be stored with the same folder structure as the input folder. If `None`,
+      the converted shards will be stored in the same folder as the input
+      datasets.
+    out_file_format: file format to which the dataset should be converted.
+    root_data_dir: folder that contains one or multiple TFDS datasets, each with
+      their own configs and versions.
+    dataset_dir: folder that contains a single dataset with all its configs and
+      versions.
+    dataset_version_dir: folder that contains a single dataset version.
+    overwrite: whether to overwrite folders in `out_dir` if they already exist.
+    use_beam: whether to use Beam to convert datasets. Useful for big datasets.
+    num_workers: number of workers to use when not using Beam. If `use_beam` is
+      set, this flag is ignored. If `num_workers=1`, the conversion will be done
+      sequentially.
+  """
   if (
       root_data_dir is None
       and dataset_dir is None
@@ -449,12 +548,15 @@ def convert_dataset(
         overwrite=overwrite,
     )
   elif dataset_version_dir:
+    if out_dir is None:
+      out_dir = dataset_version_dir
     from_to_dirs = {epath.Path(dataset_version_dir): epath.Path(out_dir)}
     _convert_dataset_dirs(
         from_to_dirs=from_to_dirs,
         out_file_format=out_file_format,
         overwrite=overwrite,
         use_beam=use_beam,
+        num_workers=num_workers,
     )
   else:
     raise ValueError(
