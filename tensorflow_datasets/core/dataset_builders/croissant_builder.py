@@ -156,9 +156,9 @@ class CroissantBuilder(
     Args:
       jsonld: The Croissant JSON-LD for the given dataset: either a file path or
         a URL.
-      record_set_ids: The @ids of the record sets to generate. Each record set
-        will correspond to a separate config. If not specified, it will use all
-        the record sets.
+      record_set_ids: The @ids of the record sets for the dataset. Each record
+        set will correspond to a separate config. If not specified, a config
+        will be generated for each record set defined in the Croissant JSON-LD.
       disable_shuffling: Specify whether to shuffle the examples.
       int_dtype: The dtype to use for TFDS integer features. Defaults to
         np.int64.
