@@ -28,13 +28,16 @@ tfds build_croissant \
 
 import argparse
 import dataclasses
+import functools
 import json
 import typing
 
 from etils import epath
+import mlcroissant as mlc
 import simple_parsing
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
+from tensorflow_datasets.core.utils import croissant_utils
 from tensorflow_datasets.scripts.cli import cli_utils
 
 
@@ -84,6 +87,25 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
   overwrite: bool = False
   overwrite_version: str | None = None
 
+  @functools.cached_property
+  def mapping_json(self) -> dict[str, epath.PathLike]:
+    if self.mapping:
+      try:
+        return json.loads(self.mapping)
+      except json.JSONDecodeError as e:
+        raise ValueError(
+            f'Error parsing mapping parameter: {self.mapping}'
+        ) from e
+    return {}
+
+  @functools.cached_property
+  def dataset(self) -> mlc.Dataset:
+    return mlc.Dataset(jsonld=self.jsonld, mapping=self.mapping_json)
+
+  @functools.cached_property
+  def dataset_name(self) -> str:
+    return croissant_utils.get_dataset_name(self.dataset)
+
 
 def register_subparser(parsers: argparse._SubParsersAction):
   """Add subparser for `convert_format` command."""
@@ -109,22 +131,12 @@ def prepare_croissant_builder(args: CmdArgs) -> None:
   Args:
     args: CLI arguments.
   """
-  if args.mapping:
-    try:
-      mapping = json.loads(args.mapping)
-    except json.JSONDecodeError as e:
-      raise ValueError(
-          f'Error parsing mapping parameter: {args.mapping}'
-      ) from e
-  else:
-    mapping = None
-
   builder = croissant_builder.CroissantBuilder(
       jsonld=args.jsonld,
       record_set_ids=args.record_sets or None,
       file_format=args.file_format,
       data_dir=args.data_dir,
-      mapping=mapping,
+      mapping=args.mapping_json,
       overwrite_version=args.overwrite_version,
   )
   cli_utils.download_and_prepare(
