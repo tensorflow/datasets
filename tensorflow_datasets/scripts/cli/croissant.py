@@ -139,11 +139,22 @@ def prepare_croissant_builder(args: CmdArgs) -> None:
       mapping=args.mapping_json,
       overwrite_version=args.overwrite_version,
   )
-  cli_utils.download_and_prepare(
-      builder=builder,
-      download_config=None,
-      download_dir=args.download_dir,
-      publish_dir=args.publish_dir,
-      skip_if_published=args.skip_if_published,
-      overwrite=args.overwrite,
-  )
+
+  # Generate each config sequentially.
+  for config in builder.BUILDER_CONFIGS:
+    builder_for_config = croissant_builder.CroissantBuilder(
+        jsonld=args.jsonld,
+        record_set_ids=[config.name],
+        file_format=args.file_format,
+        data_dir=args.data_dir,
+        mapping=args.mapping_json,
+        overwrite_version=args.overwrite_version,
+    )
+    cli_utils.download_and_prepare(
+        builder=builder_for_config,
+        download_config=None,
+        download_dir=args.download_dir,
+        publish_dir=args.publish_dir,
+        skip_if_published=args.skip_if_published,
+        overwrite=args.overwrite,
+    )
