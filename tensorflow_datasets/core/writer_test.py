@@ -20,6 +20,7 @@ import os
 from typing import Optional
 from unittest import mock
 
+from absl.testing import parameterized
 from etils import epath
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -589,6 +590,52 @@ class CustomExampleWriter(writer_lib.ExampleWriter):
   def write(self, path, examples) -> file_adapters.ExamplePositions | None:
     self.num_examples_written += len(list(examples))
     epath.Path(path).touch()
+
+
+class ExampleWriterTest(parameterized.TestCase):
+
+  @parameterized.parameters(
+      dict(
+          path='/tmp/dataset-train.tfrecord-00000-of-00001',
+          file_format=file_adapters.FileFormat.TFRECORD,
+          expected_path='/tmp/dataset-train.tfrecord-00000-of-00001',
+      ),
+      dict(
+          path='/tmp/dataset-train.riegeli-00000-of-00001',
+          file_format=file_adapters.FileFormat.TFRECORD,
+          expected_path='/tmp/dataset-train.tfrecord-00000-of-00001',
+      ),
+      dict(
+          path='/tmp/dataset-train.tfrecord-00000-of-00001',
+          file_format=file_adapters.FileFormat.RIEGELI,
+          expected_path='/tmp/dataset-train.riegeli-00000-of-00001',
+      ),
+  )
+  def test_convert_path_to_file_format(self, path, file_format, expected_path):
+    converted_path = writer_lib._convert_path_to_file_format(path, file_format)
+    self.assertEqual(os.fspath(converted_path), expected_path)
+
+  def test_multi_output_example_writer(self):
+    tfrecord_writer = mock.create_autospec(writer_lib.ExampleWriter)
+    tfrecord_writer.file_format = file_adapters.FileFormat.TFRECORD
+
+    riegeli_writer = mock.create_autospec(writer_lib.ExampleWriter)
+    riegeli_writer.file_format = file_adapters.FileFormat.RIEGELI
+
+    path = '/tmp/dataset-train.tfrecord-00000-of-00001'
+    iterator = [
+        ('key1', b'value1'),
+        ('key2', b'value2'),
+    ]
+    writer = writer_lib.MultiOutputExampleWriter([
+        tfrecord_writer,
+        riegeli_writer,
+    ])
+    writer.write(path=path, examples=iterator)
+    tfrecord_writer.write.assert_called_once_with(path, mock.ANY)
+    riegeli_writer.write.assert_called_once_with(
+        '/tmp/dataset-train.riegeli-00000-of-00001', mock.ANY
+    )
 
 
 if __name__ == '__main__':

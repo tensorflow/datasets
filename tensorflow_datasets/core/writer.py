@@ -23,23 +23,28 @@ import functools
 import itertools
 import json
 import os
+import re
 from typing import Any
 
-from absl import logging
-from etils import epath
-from tensorflow_datasets.core import example_parser
-from tensorflow_datasets.core import example_serializer
-from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import hashing
-from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core import naming
-from tensorflow_datasets.core import shuffle
-from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import file_utils
-from tensorflow_datasets.core.utils import shard_utils
-from tensorflow_datasets.core.utils import type_utils
+from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from absl import logging
+  from etils import epath
+  from tensorflow_datasets.core import example_parser
+  from tensorflow_datasets.core import example_serializer
+  from tensorflow_datasets.core import file_adapters
+  from tensorflow_datasets.core import hashing
+  from tensorflow_datasets.core import naming
+  from tensorflow_datasets.core import shuffle
+  from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core.utils import file_utils
+  from tensorflow_datasets.core.utils import shard_utils
+  from tensorflow_datasets.core.utils import type_utils
+
+  # pylint: enable=g-import-not-at-top
 
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
 Example = Any
@@ -184,6 +189,63 @@ class ExampleWriter:
     """Write examples from iterator."""
     adapter = file_adapters.ADAPTER_FOR_FORMAT[self.file_format]
     return adapter.write_examples(path, examples)
+
+
+def _convert_path_to_file_format(
+    path: epath.PathLike, file_format: file_adapters.FileFormat
+) -> epath.Path:
+  """Returns the path to a specific shard in a different file format.
+
+  TFDS typically stores the file format in the filename. For example,
+  `dataset-train.tfrecord-00000-of-00001` is a TFRecord file and
+  `dataset-train-00000-of-00001.bagz` is a Bagz file. This function converts
+  the filename to the desired file format.
+
+  Args:
+    path: The path of a specific to convert. Can be the path for different file
+      formats.
+    file_format: The file format to which the shard path should be converted.
+  """
+  path = epath.Path(path)
+
+  infix_formats = [
+      f.value
+      for f in file_adapters.FileFormat
+  ]
+  infix_format_concat = "|".join(infix_formats)
+
+  file_name = re.sub(
+      rf"\.({infix_format_concat})", f".{file_format.value}", path.name
+  )
+  return path.parent / file_name
+
+
+class MultiOutputExampleWriter(ExampleWriter):
+  """Example writer that can write multiple outputs."""
+
+  def __init__(self, writers: Sequence[ExampleWriter]):  # pylint: disable=super-init-not-called
+    self._writers = writers
+
+  def write(
+      self,
+      path: epath.PathLike,
+      examples: Iterable[type_utils.KeySerializedExample],
+  ) -> file_adapters.ExamplePositions | None:
+    """Writes examples to multiple outputs."""
+    write_fns = []
+    for writer, my_iter in zip(
+        self._writers, itertools.tee(examples, len(self._writers))
+    ):
+      if file_format := writer.file_format:
+        shard_path = os.fspath(
+            _convert_path_to_file_format(path=path, file_format=file_format)
+        )
+        write_fns.append(functools.partial(writer.write, shard_path, my_iter))
+      else:
+        write_fns.append(functools.partial(writer.write, path, my_iter))
+
+    for write_fn in write_fns:
+      write_fn()
 
 
 class Writer:
