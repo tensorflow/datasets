@@ -24,7 +24,6 @@ from typing import Any, Callable, Dict, Iterator, Union
 from tensorflow_datasets.core.data_sources import python
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import sequence_feature
-from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
@@ -66,7 +65,7 @@ class Dataset(sequence_feature.Sequence):
 
   ```python
     features=tfds.features.FeatureDict({
-     'agent_id': np.object_,
+      'agent_id': np.object_,
       'episode': tfds.features.Dataset({
         'observation': tfds.features.Image(),
         'reward': tfds.features.Image(),
@@ -176,23 +175,13 @@ class Dataset(sequence_feature.Sequence):
     flatten = self.feature._flatten  # pylint: disable=protected-access
     nest = self.feature._nest  # pylint: disable=protected-access
     flat_example = flatten(serialized_example)
-    flat_features = flatten(self.feature)
     num_slices: int | None = None
 
-    # First discover the number of slices in the Dataset. Notably, it's possible
-    # that tensors have to be reshaped. We call slice a record in the Dataset.
+    # Discover the number of slices in the Dataset (ie: the outter dimension).
+    # We call slice a record in the Dataset.
     # We don't use `example` to avoid confusion with the `serialized_example`.
-    for i, feature in enumerate(flat_features):
-      if isinstance(feature, tensor_feature.Tensor) and feature.shape:
-        try:
-          flat_example[i] = flat_example[i].reshape((-1,) + feature.shape)
-        except ValueError as e:
-          raise ValueError(
-              "The length of all elements of one slice should be the same."
-          ) from e
-        feature_num_slices = flat_example[i].shape[0]
-      else:
-        feature_num_slices = len(flat_example[i])
+    for example_feature in flat_example:
+      feature_num_slices = len(example_feature)
       if num_slices is None:
         num_slices = feature_num_slices
       else:

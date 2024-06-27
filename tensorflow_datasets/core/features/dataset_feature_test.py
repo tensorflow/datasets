@@ -492,11 +492,9 @@ class DatasetFeatureTest(
     )
     self.assertEqual(feature.names, ['left', 'right'])
 
-    feature = feature_lib.Dataset(
-        {
-            'label': feature_lib.ClassLabel(names=['left', 'right']),
-        }
-    )
+    feature = feature_lib.Dataset({
+        'label': feature_lib.ClassLabel(names=['left', 'right']),
+    })
     self.assertEqual(feature['label'].names, ['left', 'right'])
 
   def test_metadata(self):
@@ -512,24 +510,52 @@ class DatasetFeatureTest(
 
 class DecodeExampleNpTest(testing.SubTestCase):
 
-  def test_top_level_feature(self):
-    feature = feature_lib.Dataset(
-        {'feature_name': feature_lib.Tensor(dtype=np.uint8, shape=(4, 2))}
-    )
-    example = {'feature_name': np.ones(shape=(24,), dtype=np.int32)}
-    expected = [{'feature_name': np.ones(shape=(4, 2), dtype=np.int32)}] * 3
-    self.assertAllEqualNested(feature.decode_example_np(example), expected)
-
-  def test_tensor_feature(self):
-    feature = feature_lib.Dataset(
-        feature_lib.Tensor(dtype=np.uint8, shape=(4, 2))
-    )
-    example = np.ones(shape=(24,), dtype=np.uint8)
-    expected = [np.ones(shape=(4, 2), dtype=np.int32)] * 3
-    self.assertAllEqualNested(feature.decode_example_np(example), expected)
+  def test_representative_example(self):
+    feature = feature_lib.FeaturesDict({
+        'step_number': feature_lib.Tensor(dtype=np.int32, shape=()),
+        'steps': feature_lib.Dataset({
+            'tensor': feature_lib.Tensor(dtype=np.uint8, shape=(7, 8)),
+            'strings': feature_lib.Tensor(dtype=np.str_, shape=(3,)),
+            'bool': feature_lib.Tensor(dtype=np.bool_, shape=()),
+            'obj': feature_lib.FeaturesDict({
+                'a': feature_lib.Tensor(
+                    dtype=np.float32,
+                    shape=(5,),
+                    encoding=feature_lib.Encoding.ZLIB,
+                ),
+                'b': feature_lib.Tensor(dtype=np.int32, shape=(6,)),
+            }),
+            'reward': feature_lib.Tensor(dtype=np.float32, shape=()),
+        }),
+        'timestamp': feature_lib.Tensor(dtype=np.int64, shape=()),
+    })
+    subdataset_size = 42
+    example = {
+        'step_number': 7,
+        'steps': [
+            {
+                'tensor': np.ones(shape=(7, 8), dtype=np.uint8),
+                'strings': ['foo', 'bar', 'baz'],
+                'bool': True,
+                'obj': {
+                    'a': np.zeros(shape=(5,), dtype=np.float32),
+                    'b': np.zeros(shape=(6,), dtype=np.int32),
+                },
+                'reward': np.float32(42.42),
+            }
+            for _ in range(subdataset_size)
+        ],
+        'timestamp': 1234567890,
+    }
+    encoded_example = feature.encode_example(example)
+    decoded_encoded_example = feature.decode_example_np(encoded_example)
+    self.assertAllEqualNested(decoded_encoded_example, example)
 
   def test_nested_dict(self):
-    feature = feature_lib.Dataset({'a': {'b': np.int32}, 'b': np.str_})
+    feature = feature_lib.Dataset({
+        'a': {'b': np.int32},
+        'b': np.str_,
+    })
     example = {'a': {'b': [1, 2, 3]}, 'b': ['a', 'b', 'c']}
     expected = [
         {'a': {'b': 1}, 'b': 'a'},
