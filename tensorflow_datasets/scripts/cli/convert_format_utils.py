@@ -15,7 +15,7 @@
 
 r"""Library to convert a dataset from one file format to another."""
 
-from collections.abc import Iterable, Iterator, Mapping
+from collections.abc import Iterable, Iterator, Mapping, Sequence
 import dataclasses
 import functools
 import os
@@ -491,7 +491,9 @@ def convert_dataset(
     out_file_format: str | file_adapters.FileFormat,
     root_data_dir: epath.PathLike | None = None,
     dataset_dir: epath.PathLike | None = None,
-    dataset_version_dir: epath.PathLike | None = None,
+    dataset_version_dir: (
+        epath.PathLike | Sequence[epath.PathLike] | None
+    ) = None,
     overwrite: bool = False,
     use_beam: bool = False,
     num_workers: int = 8,
@@ -511,7 +513,10 @@ def convert_dataset(
       their own configs and versions.
     dataset_dir: folder that contains a single dataset with all its configs and
       versions.
-    dataset_version_dir: folder that contains a single dataset version.
+    dataset_version_dir: a single or list of folders that each contains a single
+      dataset version. If multiple folders are specified, `out_dir` should be
+      `None`, since each dataset will be converted in the same folder as the
+      input dataset.
     overwrite: whether to overwrite folders in `out_dir` if they already exist.
     use_beam: whether to use Beam to convert datasets. Useful for big datasets.
     num_workers: number of workers to use when not using Beam. If `use_beam` is
@@ -548,9 +553,23 @@ def convert_dataset(
         overwrite=overwrite,
     )
   elif dataset_version_dir:
-    if out_dir is None:
-      out_dir = dataset_version_dir
-    from_to_dirs = {epath.Path(dataset_version_dir): epath.Path(out_dir)}
+    if isinstance(dataset_version_dir, str):
+      dataset_version_dir = [dataset_version_dir]
+
+    if len(dataset_version_dir) > 1 and out_dir is not None:
+      raise ValueError(
+          'If multiple dataset version dirs are specified, `out_dir` must be'
+          ' `None`, since each dataset will be converted in the same folder as'
+          ' the input dataset.'
+      )
+
+    from_to_dirs = {}
+    for path in dataset_version_dir:
+      if out_dir is None:
+        from_to_dirs[epath.Path(path)] = epath.Path(path)
+      else:
+        from_to_dirs[epath.Path(path)] = epath.Path(out_dir)
+
     _convert_dataset_dirs(
         from_to_dirs=from_to_dirs,
         out_file_format=out_file_format,

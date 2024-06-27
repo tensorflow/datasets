@@ -56,12 +56,15 @@ _DATASET_DIR = flags.DEFINE_string(
     ),
     default=None,
 )
-_DATASET_VERSION_DIR = flags.DEFINE_string(
+_DATASET_VERSION_DIR = flags.DEFINE_list(
     'dataset_version_dir',
     required=False,
     help=(
         'Path where the dataset to be converted is located. Should include'
-        ' config and version.'
+        ' config and version. Can also be a comma-separated list of paths. If'
+        ' multiple paths are specified, `--out_dir` should not be specified,'
+        ' since each dataset will be converted in the same directory as the'
+        ' input dataset.'
     ),
     default=None,
 )
@@ -76,10 +79,12 @@ _OUT_FILE_FORMAT = flags.DEFINE_enum_class(
 
 _OUT_DIR = flags.DEFINE_string(
     'out_dir',
-    required=True,
+    required=False,
     help=(
         'Path where the converted dataset will be stored. Should include the'
-        ' config and version, e.g. `/data/dataset_name/config/1.2.3`.'
+        ' config and version, e.g. `/data/dataset_name/config/1.2.3`. If not'
+        ' specified, the converted shards will be stored in the same directory'
+        ' as the input dataset.'
     ),
     default=None,
 )
@@ -90,6 +95,13 @@ _USE_BEAM = flags.DEFINE_bool(
     help='Whether to use beam to convert the dataset.',
 )
 
+_NUM_WORKERS = flags.DEFINE_integer(
+    'num_workers',
+    default=8,
+    help='Number of workers to use if `use_beam` is `False`.',
+)
+
+
 _OVERWRITE = flags.DEFINE_bool(
     'overwrite',
     default=False,
@@ -98,6 +110,7 @@ _OVERWRITE = flags.DEFINE_bool(
 
 
 def main(_):
+
   convert_format_utils.convert_dataset(
       root_data_dir=_ROOT_DATA_DIR.value,
       dataset_dir=_DATASET_DIR.value,
@@ -106,6 +119,7 @@ def main(_):
       out_dir=_OUT_DIR.value,
       use_beam=_USE_BEAM.value,
       overwrite=_OVERWRITE.value,
+      num_workers=_NUM_WORKERS.value,
   )
 
 

@@ -18,7 +18,7 @@ r"""`tfds convert_format` command.
 Example usage:
 ```
 tfds convert_format \
-  --dataset_dir=/data/dataset/config/1.2.3 \
+  --dataset_version_dir=/data/dataset/config/1.2.3 \
   --out_file_format=array_record \
   --out_dir=/data_array_record/dataset/config/1.2.3 \
   --use_beam=True
@@ -26,8 +26,9 @@ tfds convert_format \
 """
 
 import argparse
-import pathlib
+from collections.abc import Sequence
 
+from etils import epath
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.scripts.cli import convert_format_utils
 
@@ -57,7 +58,10 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
       type=str,
       help=(
           'Path where the dataset to be converted is located. Should include'
-          ' config and version.'
+          ' config and version. Can also be a comma-separated list of paths. If'
+          ' multiple paths are specified, `--out_dir` should not be specified,'
+          ' since each dataset will be converted in the same directory as the'
+          ' input dataset.'
       ),
       required=False,
   )
@@ -70,14 +74,14 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
   )
   parser.add_argument(
       '--out_dir',
-      type=pathlib.Path,
+      type=str,
       help=(
           'Path where the converted dataset will be stored. Should include the'
           ' config and version, e.g. `/data/dataset_name/config/1.2.3`. If not'
           ' specified, the converted shards will be stored in the same'
           ' directory as the input dataset.'
       ),
-      default=None,
+      default='',
       required=False,
   )
   parser.add_argument(
@@ -109,13 +113,23 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
       help='Converts a dataset from one file format to another format.',
   )
   add_parser_arguments(parser)
+
+  def _parse_dataset_version_dir(
+      dataset_version_dir: str | None,
+  ) -> Sequence[epath.Path] | None:
+    if not dataset_version_dir:
+      return None
+    return [epath.Path(path) for path in dataset_version_dir.split(',')]
+
   parser.set_defaults(
       subparser_fn=lambda args: convert_format_utils.convert_dataset(
-          out_dir=args.out_dir,
+          out_dir=args.out_dir if args.out_dir else None,
           out_file_format=args.out_file_format,
           dataset_dir=args.dataset_dir or None,
           root_data_dir=args.root_data_dir or None,
-          dataset_version_dir=args.dataset_version_dir or None,
+          dataset_version_dir=_parse_dataset_version_dir(
+              args.dataset_version_dir
+          ),
           overwrite=args.overwrite,
           use_beam=args.use_beam,
           num_workers=args.num_workers,
