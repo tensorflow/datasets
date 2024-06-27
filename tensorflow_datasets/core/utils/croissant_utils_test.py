@@ -34,3 +34,24 @@ def test_get_tfds_dataset_name(croissant_name, croissant_url, tfds_name):
   metadata = mlc.Metadata(name=croissant_name, url=croissant_url)
   dataset = mlc.Dataset.from_metadata(metadata)
   assert croissant_utils.get_tfds_dataset_name(dataset) == tfds_name
+
+
+def test_get_record_set_ids():
+  metadata = mlc.Metadata(
+      name='dummy_dataset',
+      url='https://dummy_url',
+      record_sets=[
+          mlc.RecordSet(
+              id='record_set_1',
+              fields=[],
+          ),
+          mlc.RecordSet(
+              id='record_set_2',
+              data_types=['http://mlcommons.org/croissant/Split'],
+              fields=[mlc.Field(name='name', data_types=mlc.DataType.TEXT)],
+              data=[{'name': 'train'}, {'name': 'test'}],
+          ),
+      ],
+  )
+  record_set_ids = croissant_utils.get_record_set_ids(metadata=metadata)
+  assert record_set_ids == ['record_set_1']

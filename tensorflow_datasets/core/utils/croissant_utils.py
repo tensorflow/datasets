@@ -39,3 +39,20 @@ def get_tfds_dataset_name(dataset: mlc.Dataset) -> str:
   """Returns TFDS compatible dataset name of the given MLcroissant dataset."""
   dataset_name = get_dataset_name(dataset)
   return huggingface_utils.convert_hf_name(dataset_name)
+
+
+def get_record_set_ids(metadata: mlc.Metadata) -> typing.Sequence[str]:
+  """Returns record set ids of the given MLcroissant metadata.
+
+  Record sets which have the attribute `cr:Data` are excluded (e.g. splits that
+  specify split or labels mappings).
+
+  Args:
+    metadata: The metadata of the dataset.
+  """
+  record_set_ids = []
+  for record_set in metadata.record_sets:
+    if record_set.data is not None:
+      continue
+    record_set_ids.append(record_set.id)
+  return record_set_ids

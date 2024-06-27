@@ -158,7 +158,8 @@ class CroissantBuilder(
         a URL.
       record_set_ids: The @ids of the record sets for the dataset. Each record
         set will correspond to a separate config. If not specified, a config
-        will be generated for each record set defined in the Croissant JSON-LD.
+        will be generated for each record set defined in the Croissant JSON-LD,
+        except for the record sets which specify `cr:data`.
       disable_shuffling: Specify whether to shuffle the examples.
       int_dtype: The dtype to use for TFDS integer features. Defaults to
         np.int64.
@@ -186,9 +187,7 @@ class CroissantBuilder(
     self.RELEASE_NOTES = {}  # pylint: disable=invalid-name
 
     if not record_set_ids:
-      record_set_ids = [
-          record_set.id for record_set in self.metadata.record_sets
-      ]
+      record_set_ids = croissant_utils.get_record_set_ids(self.metadata)
     config_names = [
         huggingface_utils.convert_hf_name(record_set)
         for record_set in record_set_ids
