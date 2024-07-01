@@ -17,9 +17,9 @@
 
 import contextlib
 import dataclasses
-import threading
 from typing import Callable, Iterator, List, Type, Union
 
+from etils import edc
 from tensorflow_datasets.core import utils
 
 Message = Union[str, Callable[[], str]]
@@ -38,7 +38,13 @@ class ErrorContext:
 
 
 # Current error context. Accessed by `reraise_with_context` and `add_context`.
-context_holder = threading.local()
+@edc.dataclass
+@dataclasses.dataclass
+class ContextHolder:
+  current_context_msg: edc.ContextVar[ErrorContext | None] = None
+
+
+context_holder = ContextHolder()
 
 
 @contextlib.contextmanager
@@ -53,7 +59,7 @@ def reraise_with_context(error_cls: Type[Exception]) -> Iterator[None]:
   """
   # If current_context_msg exists, we are already within the scope of the
   # session contextmanager.
-  if hasattr(context_holder, 'current_context_msg'):
+  if context_holder.current_context_msg is not None:
     yield
     return
 
@@ -64,7 +70,7 @@ def reraise_with_context(error_cls: Type[Exception]) -> Iterator[None]:
     context_msg = '\n'.join(context_holder.current_context_msg.messages)
     utils.reraise(e, suffix=context_msg)
   finally:
-    del context_holder.current_context_msg
+    context_holder.current_context_msg = None
 
 
 def add_context(msg: str) -> None:
@@ -79,7 +85,7 @@ def add_context(msg: str) -> None:
   Raises:
     AttributeError if local thread has no current_context_msg attribute.
   """
-  if not hasattr(context_holder, 'current_context_msg'):
+  if context_holder.current_context_msg is None:
     raise AttributeError(
         'add_context called outside of reraise_with_context contextmanager.'
     )
