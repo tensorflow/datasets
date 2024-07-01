@@ -194,7 +194,10 @@ class MultiOutputExampleWriter(ExampleWriter):
   """Example writer that can write multiple outputs."""
 
   def __init__(self, writers: Sequence[ExampleWriter]):  # pylint: disable=super-init-not-called
-    self._writers = writers
+    self._writers: list[ExampleWriter] = list(writers)
+
+  def add_writer(self, writer: ExampleWriter):
+    self._writers.append(writer)
 
   def write(
       self,
