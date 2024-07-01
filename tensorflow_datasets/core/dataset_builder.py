@@ -119,7 +119,7 @@ class BuilderConfig:
   def from_dataset_info(
       cls,
       info_proto: dataset_info_pb2.DatasetInfo,
-  ) -> Optional["BuilderConfig"]:
+  ) -> BuilderConfig | None:
     """Instantiates a BuilderConfig from the given proto.
 
     Args:

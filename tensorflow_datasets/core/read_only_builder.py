@@ -17,10 +17,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 import functools
 import os
 import typing
-from typing import Any, List, Optional, Type
+from typing import Any, Type
 
 from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -54,7 +55,7 @@ class ReadOnlyBuilder(
       self,
       builder_dir: epath.PathLike,
       *,
-      info_proto: Optional[dataset_info_pb2.DatasetInfo] = None,
+      info_proto: dataset_info_pb2.DatasetInfo | None = None,
   ):
     """Constructor.
 
@@ -82,9 +83,7 @@ class ReadOnlyBuilder(
       # original source code.
       self.__module__ = info_proto.module_name
 
-    builder_config = dataset_builder.BuilderConfig.from_dataset_info(
-        info_proto,
-    )
+    builder_config = dataset_builder.BuilderConfig.from_dataset_info(info_proto)
     # __init__ will call _build_data_dir, _create_builder_config,
     # _pick_version to set the data_dir, config, and version
     super().__init__(
@@ -158,9 +157,9 @@ def builder_from_directory(
 
 
 def builder_from_directories(
-    builder_dirs: List[epath.PathLike],
+    builder_dirs: Sequence[epath.PathLike],
     *,
-    filetype_suffix: Optional[str] = None,  # DEPRECATED
+    filetype_suffix: str | None = None,  # DEPRECATED
 ) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
@@ -244,10 +243,8 @@ def builder_from_metadata(
   Returns:
     builder: `tfds.core.DatasetBuilder`, builder for dataset at the given path.
   """
-  return ReadOnlyBuilder(
-      builder_dir=builder_dir,
-      info_proto=info_proto,
-  )
+  builder = ReadOnlyBuilder(builder_dir=builder_dir, info_proto=info_proto)
+  return builder
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
@@ -292,7 +289,7 @@ def builder_from_files(
   return builder_from_directory(builder_dir)
 
 
-def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
+def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
   """Search whether the given dataset is present on disk and return its path.
 
   Note:
@@ -344,17 +341,17 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
     return None
 
   # Search the dataset across all registered data_dirs
-  all_builder_dirs = []
-  all_data_dirs = file_utils.list_data_dirs(given_data_dir=data_dir)
+  all_builder_dirs = set()
+  all_data_dirs = set(file_utils.list_data_dirs(given_data_dir=data_dir))
+  find_builder_fn = functools.partial(
+      _find_builder_dir_single_dir,
+      builder_name=name.name,
+      version_str=str(version) if version else None,
+      config_name=config,
+  )
   for current_data_dir in all_data_dirs:
-    builder_dir = _find_builder_dir_single_dir(
-        name.name,
-        data_dir=current_data_dir,
-        version_str=str(version) if version else None,
-        config_name=config,
-    )
-    if builder_dir:
-      all_builder_dirs.append(builder_dir)
+    if builder_dir := find_builder_fn(data_dir=current_data_dir):
+      all_builder_dirs.add(builder_dir)
 
   if not all_builder_dirs:
     all_dirs_str = '\n\t- '.join([''] + [str(dir) for dir in all_data_dirs])
@@ -378,14 +375,14 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
         'Please resolve the ambiguity by explicitly setting `data_dir=`.'
     )
 
-  return all_builder_dirs[0]
+  return all_builder_dirs.pop()
 
 
 def _get_dataset_dir(
     builder_dir: epath.Path,
     *,
     version_str: str,
-    config_name: Optional[str] = None,
+    config_name: str | None = None,
 ) -> epath.Path:
   """Returns the path for the given dataset, config and version."""
   dataset_dir = builder_dir
@@ -402,12 +399,11 @@ def _contains_dataset(dataset_dir: epath.PathLike) -> bool:
 
 
 def _find_builder_dir_single_dir(
-    builder_name: str,
-    *,
     data_dir: epath.PathLike,
-    config_name: Optional[str] = None,
-    version_str: Optional[str] = None,
-) -> Optional[str]:
+    builder_name: str,
+    config_name: str | None = None,
+    version_str: str | None = None,
+) -> str | None:
   """Same as `find_builder_dir` but requires explicit dir."""
 
   builder_dir = epath.Path(data_dir) / builder_name
@@ -462,7 +458,7 @@ def _find_builder_dir_single_dir(
 def _get_default_config_name(
     builder_dir: epath.Path,
     name: str,
-) -> Optional[str]:
+) -> str | None:
   """Returns the default config of the given dataset, None if not found."""
   # Search for the DatasetBuilder generation code
   try:
@@ -488,9 +484,9 @@ def _get_default_config_name(
 def _get_version_str(
     builder_dir: epath.Path,
     *,
-    config_name: Optional[str] = None,
-    requested_version: Optional[str] = None,
-) -> Optional[str]:
+    config_name: str | None = None,
+    requested_version: str | None = None,
+) -> str | None:
   """Returns the version name found in the directory.
 
   Args:
