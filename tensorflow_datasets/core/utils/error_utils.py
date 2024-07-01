@@ -41,7 +41,7 @@ class ErrorContext:
 @edc.dataclass
 @dataclasses.dataclass
 class ContextHolder:
-  current_context_msg: edc.ContextVar[ErrorContext | None] = None
+  current_context_msg: ErrorContext | None = None
 
 
 context_holder = ContextHolder()
