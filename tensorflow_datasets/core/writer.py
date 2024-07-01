@@ -23,7 +23,6 @@ import functools
 import itertools
 import json
 import os
-import re
 from typing import Any
 
 from etils import epy
@@ -191,35 +190,6 @@ class ExampleWriter:
     return adapter.write_examples(path, examples)
 
 
-def _convert_path_to_file_format(
-    path: epath.PathLike, file_format: file_adapters.FileFormat
-) -> epath.Path:
-  """Returns the path to a specific shard in a different file format.
-
-  TFDS typically stores the file format in the filename. For example,
-  `dataset-train.tfrecord-00000-of-00001` is a TFRecord file and
-  `dataset-train-00000-of-00001.bagz` is a Bagz file. This function converts
-  the filename to the desired file format.
-
-  Args:
-    path: The path of a specific to convert. Can be the path for different file
-      formats.
-    file_format: The file format to which the shard path should be converted.
-  """
-  path = epath.Path(path)
-
-  infix_formats = [
-      f.value
-      for f in file_adapters.FileFormat
-  ]
-  infix_format_concat = "|".join(infix_formats)
-
-  file_name = re.sub(
-      rf"\.({infix_format_concat})", f".{file_format.value}", path.name
-  )
-  return path.parent / file_name
-
-
 class MultiOutputExampleWriter(ExampleWriter):
   """Example writer that can write multiple outputs."""
 
@@ -238,7 +208,9 @@ class MultiOutputExampleWriter(ExampleWriter):
     ):
       if file_format := writer.file_format:
         shard_path = os.fspath(
-            _convert_path_to_file_format(path=path, file_format=file_format)
+            file_adapters.convert_path_to_file_format(
+                path=path, file_format=file_format
+            )
         )
         write_fns.append(functools.partial(writer.write, shard_path, my_iter))
       else:

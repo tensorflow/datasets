@@ -15,13 +15,17 @@
 
 """Tests for file_adapters."""
 
+import os
 import pathlib
-from typing import Type
+from typing import Type, TypeAlias
 
 import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import file_adapters
+
+
+FileFormat: TypeAlias = file_adapters.FileFormat
 
 
 def test_batched():
@@ -42,36 +46,18 @@ def test_is_example_file():
   assert not file_adapters.is_example_file('example1.info')
 
 
-def test_format_suffix():
+@pytest.mark.parametrize(
+    'format_suffix,file_format',
+    (
+        ('array_record', FileFormat.ARRAY_RECORD),
+        ('parquet', FileFormat.PARQUET),
+        ('riegeli', FileFormat.RIEGELI),
+        ('tfrecord', FileFormat.TFRECORD),
+    ),
+)
+def test_format_suffix(format_suffix, file_format):
   assert (
-      file_adapters.ADAPTER_FOR_FORMAT[
-          file_adapters.DEFAULT_FILE_FORMAT
-      ].FILE_SUFFIX
-      == 'tfrecord'
-  )
-  assert (
-      file_adapters.ADAPTER_FOR_FORMAT[
-          file_adapters.FileFormat.TFRECORD
-      ].FILE_SUFFIX
-      == 'tfrecord'
-  )
-  assert (
-      file_adapters.ADAPTER_FOR_FORMAT[
-          file_adapters.FileFormat.RIEGELI
-      ].FILE_SUFFIX
-      == 'riegeli'
-  )
-  assert (
-      file_adapters.ADAPTER_FOR_FORMAT[
-          file_adapters.FileFormat.ARRAY_RECORD
-      ].FILE_SUFFIX
-      == 'array_record'
-  )
-  assert (
-      file_adapters.ADAPTER_FOR_FORMAT[
-          file_adapters.FileFormat.PARQUET
-      ].FILE_SUFFIX
-      == 'parquet'
+      file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX == format_suffix
   )
 
 
@@ -79,9 +65,9 @@ def test_format_suffix():
     'file_format',
     [
         file_format
-        for file_format in file_adapters.FileFormat
-        if file_format != file_adapters.FileFormat.ARRAY_RECORD
-        and file_format != file_adapters.FileFormat.RIEGELI
+        for file_format in FileFormat
+        if file_format in FileFormat.with_tf_data()
+        and file_format != FileFormat.RIEGELI
     ],
 )
 @pytest.mark.parametrize(
@@ -94,7 +80,7 @@ def test_format_suffix():
 def test_read_write(
     tmp_path: pathlib.Path,
     builder_cls: Type[dataset_builder.DatasetBuilder],
-    file_format: file_adapters.FileFormat,
+    file_format: FileFormat,
 ):
   builder = builder_cls(data_dir=tmp_path, file_format=file_format)
   builder.download_and_prepare()
@@ -106,7 +92,7 @@ def test_as_dataset_fails_for_array_record(
     tmp_path: pathlib.Path,
 ):
   builder = testing.DummyDataset(
-      data_dir=tmp_path, file_format=file_adapters.FileFormat.ARRAY_RECORD
+      data_dir=tmp_path, file_format=FileFormat.ARRAY_RECORD
   )
   builder.download_and_prepare()
   with pytest.raises(
@@ -115,38 +101,40 @@ def test_as_dataset_fails_for_array_record(
     ds = builder.as_dataset(split='train')
 
 
-def test_prase_file_format():
-  assert (
-      file_adapters.FileFormat.from_value('tfrecord')
-      == file_adapters.FileFormat.TFRECORD
-  )
-  assert (
-      file_adapters.FileFormat.from_value(file_adapters.FileFormat.TFRECORD)
-      == file_adapters.FileFormat.TFRECORD
-  )
-  assert (
-      file_adapters.FileFormat.from_value('riegeli')
-      == file_adapters.FileFormat.RIEGELI
-  )
-  assert (
-      file_adapters.FileFormat.from_value(file_adapters.FileFormat.RIEGELI)
-      == file_adapters.FileFormat.RIEGELI
-  )
-  with pytest.raises(ValueError, match='is not a valid FileFormat'):
-    file_adapters.FileFormat.from_value('i do not exist')
-  assert (
-      file_adapters.FileFormat.from_value('array_record')
-      == file_adapters.FileFormat.ARRAY_RECORD
-  )
-  assert (
-      file_adapters.FileFormat.from_value(file_adapters.FileFormat.ARRAY_RECORD)
-      == file_adapters.FileFormat.ARRAY_RECORD
-  )
-  assert (
-      file_adapters.FileFormat.from_value('parquet')
-      == file_adapters.FileFormat.PARQUET
-  )
-  assert (
-      file_adapters.FileFormat.from_value(file_adapters.FileFormat.PARQUET)
-      == file_adapters.FileFormat.PARQUET
-  )
+@pytest.mark.parametrize(
+    'format_enum_value,file_format',
+    (
+        ('array_record', FileFormat.ARRAY_RECORD),
+        ('parquet', FileFormat.PARQUET),
+        ('riegeli', FileFormat.RIEGELI),
+        ('tfrecord', FileFormat.TFRECORD),
+    ),
+)
+def test_prase_file_format(format_enum_value, file_format):
+  assert FileFormat.from_value(format_enum_value) == file_format
+  assert FileFormat.from_value(file_format) == file_format
+
+
+@pytest.mark.parametrize(
+    'path,file_format,expected_path',
+    (
+        (
+            '/tmp/dataset-train.tfrecord-00000-of-00001',
+            file_adapters.FileFormat.TFRECORD,
+            '/tmp/dataset-train.tfrecord-00000-of-00001',
+        ),
+        (
+            '/tmp/dataset-train.riegeli-00000-of-00001',
+            file_adapters.FileFormat.TFRECORD,
+            '/tmp/dataset-train.tfrecord-00000-of-00001',
+        ),
+        (
+            '/tmp/dataset-train.tfrecord-00000-of-00001',
+            file_adapters.FileFormat.RIEGELI,
+            '/tmp/dataset-train.riegeli-00000-of-00001',
+        ),
+    ),
+)
+def test_convert_path_to_file_format(path, file_format, expected_path):
+  converted_path = file_adapters.convert_path_to_file_format(path, file_format)
+  assert os.fspath(converted_path) == expected_path

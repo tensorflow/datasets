@@ -18,11 +18,12 @@
 from __future__ import annotations
 
 import abc
-from collections.abc import Iterator
+from collections.abc import Iterable, Iterator
 import enum
 import itertools
 import os
-from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, TypeVar, Union
+import re
+from typing import Any, ClassVar, Type, TypeVar
 
 from etils import epath
 from tensorflow_datasets.core.utils import file_utils
@@ -32,7 +33,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import parquet as pq
 from tensorflow_datasets.core.utils.lazy_imports_utils import pyarrow as pa
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
-ExamplePositions = List[Any]
+ExamplePositions = list[Any]
 T = TypeVar('T')
 
 
@@ -61,7 +62,34 @@ class FileFormat(enum.Enum):
     }
 
   @classmethod
-  def from_value(cls, file_format: Union[str, 'FileFormat']) -> 'FileFormat':
+  def with_tf_data(cls) -> set[FileFormat]:
+    """File formats with tf.data support."""
+    return {
+        file_format
+        for file_format, adapter in ADAPTER_FOR_FORMAT.items()
+        if adapter.SUPPORTS_TF_DATA
+    }
+
+  @classmethod
+  def with_suffix_before_shard_spec(cls) -> set[FileFormat]:
+    """File formats with suffix before shard spec."""
+    return {
+        file_format
+        for file_format, adapter in ADAPTER_FOR_FORMAT.items()
+        if adapter.SUFFIX_BEFORE_SHARD_SPEC
+    }
+
+  @classmethod
+  def with_suffix_after_shard_spec(cls) -> set[FileFormat]:
+    """File formats with suffix after shard spec."""
+    return {
+        file_format
+        for file_format, adapter in ADAPTER_FOR_FORMAT.items()
+        if not adapter.SUFFIX_BEFORE_SHARD_SPEC
+    }
+
+  @classmethod
+  def from_value(cls, file_format: str | FileFormat) -> FileFormat:
     try:
       return cls(file_format)
     except ValueError as e:
@@ -79,7 +107,14 @@ class FileAdapter(abc.ABC):
   """Interface for Adapter objects which read and write examples in a format."""
 
   FILE_SUFFIX: ClassVar[str]
+
+  # Whether the file format suffix should go before the shard spec.
+  # For example, `dataset-train.tfrecord-00000-of-00001` if `True`,
+  # otherwise `dataset-train-00000-of-00001.tfrecord`.
+  SUFFIX_BEFORE_SHARD_SPEC: ClassVar[bool] = True
+
   SUPPORTS_RANDOM_ACCESS: ClassVar[bool]
+  SUPPORTS_TF_DATA: ClassVar[bool]
   BUFFER_SIZE = 8 << 20  # 8 MiB per file.
 
   @classmethod
@@ -87,7 +122,7 @@ class FileAdapter(abc.ABC):
   def make_tf_data(
       cls,
       filename: epath.PathLike,
-      buffer_size: Optional[int] = None,
+      buffer_size: int | None = None,
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     raise NotImplementedError()
@@ -98,7 +133,7 @@ class FileAdapter(abc.ABC):
       cls,
       path: epath.PathLike,
       iterator: Iterable[type_utils.KeySerializedExample],
-  ) -> Optional[ExamplePositions]:
+  ) -> ExamplePositions | None:
     """Write examples from given iterator in given path.
 
     Args:
@@ -117,12 +152,13 @@ class TfRecordFileAdapter(FileAdapter):
 
   FILE_SUFFIX = 'tfrecord'
   SUPPORTS_RANDOM_ACCESS = False
+  SUPPORTS_TF_DATA = True
 
   @classmethod
   def make_tf_data(
       cls,
       filename: epath.PathLike,
-      buffer_size: Optional[int] = None,
+      buffer_size: int | None = None,
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     buffer_size = buffer_size or cls.BUFFER_SIZE
@@ -133,7 +169,7 @@ class TfRecordFileAdapter(FileAdapter):
       cls,
       path: epath.PathLike,
       iterator: Iterable[type_utils.KeySerializedExample],
-  ) -> Optional[ExamplePositions]:
+  ) -> ExamplePositions | None:
     """Write examples from given iterator in given path.
 
     Args:
@@ -154,12 +190,13 @@ class RiegeliFileAdapter(FileAdapter):
 
   FILE_SUFFIX = 'riegeli'
   SUPPORTS_RANDOM_ACCESS = False
+  SUPPORTS_TF_DATA = True
 
   @classmethod
   def make_tf_data(
       cls,
       filename: epath.PathLike,
-      buffer_size: Optional[int] = None,
+      buffer_size: int | None = None,
   ) -> tf.data.Dataset:
     buffer_size = buffer_size or cls.BUFFER_SIZE
     from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
@@ -171,7 +208,7 @@ class RiegeliFileAdapter(FileAdapter):
       cls,
       path: epath.PathLike,
       iterator: Iterable[type_utils.KeySerializedExample],
-  ) -> Optional[ExamplePositions]:
+  ) -> ExamplePositions | None:
     """Write examples from given iterator in given path.
 
     Args:
@@ -197,12 +234,13 @@ class ArrayRecordFileAdapter(FileAdapter):
 
   FILE_SUFFIX = 'array_record'
   SUPPORTS_RANDOM_ACCESS = True
+  SUPPORTS_TF_DATA = False
 
   @classmethod
   def make_tf_data(
       cls,
       filename: epath.PathLike,
-      buffer_size: Optional[int] = None,
+      buffer_size: int | None = None,
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given array record file."""
     raise NotImplementedError(
@@ -215,7 +253,7 @@ class ArrayRecordFileAdapter(FileAdapter):
       cls,
       path: epath.PathLike,
       iterator: Iterable[type_utils.KeySerializedExample],
-  ) -> Optional[ExamplePositions]:
+  ) -> ExamplePositions | None:
     """Write examples from given iterator in given path.
 
     Args:
@@ -249,6 +287,7 @@ class ParquetFileAdapter(FileAdapter):
 
   FILE_SUFFIX = 'parquet'
   SUPPORTS_RANDOM_ACCESS = True
+  SUPPORTS_TF_DATA = True
   _PARQUET_FIELD = 'data'
   _BATCH_SIZE = 100
 
@@ -319,11 +358,11 @@ def _to_bytes(key: type_utils.Key) -> bytes:
 
 
 # Create a mapping from FileFormat -> FileAdapter.
-ADAPTER_FOR_FORMAT: Dict[FileFormat, Type[FileAdapter]] = {
-    FileFormat.RIEGELI: RiegeliFileAdapter,
-    FileFormat.TFRECORD: TfRecordFileAdapter,
+ADAPTER_FOR_FORMAT: dict[FileFormat, Type[FileAdapter]] = {
     FileFormat.ARRAY_RECORD: ArrayRecordFileAdapter,
     FileFormat.PARQUET: ParquetFileAdapter,
+    FileFormat.RIEGELI: RiegeliFileAdapter,
+    FileFormat.TFRECORD: TfRecordFileAdapter,
 }
 
 _FILE_SUFFIX_TO_FORMAT = {
@@ -350,7 +389,7 @@ def is_example_file(filename: str) -> bool:
   )
 
 
-def _batched(iterator: Iterator[T] | Iterable[T], n: int) -> Iterator[List[T]]:
+def _batched(iterator: Iterator[T] | Iterable[T], n: int) -> Iterator[list[T]]:
   """Batches the result of an iterator into lists of length n.
 
   This function is built-in the standard library from 3.12 (source:
@@ -371,3 +410,49 @@ def _batched(iterator: Iterator[T] | Iterable[T], n: int) -> Iterator[List[T]]:
       return
     yield batch
     i += n
+
+
+def convert_path_to_file_format(
+    path: epath.PathLike, file_format: FileFormat
+) -> epath.Path:
+  """Returns the path to a specific shard for a different file format.
+
+  TFDS can store the file format in the filename as a suffix or as an infix. For
+  example:
+
+  - `dataset-train.<FILE_FORMAT>-00000-of-00001`, a so-called infix format
+    because the file format comes before the shard spec.
+  - `dataset-train-00000-of-00001.<FILE_FORMAT>`, a so-called suffix format
+    because the file format comes after the shard spec.
+
+  Args:
+    path: The path of a specific to convert. Can be the path for different file
+      formats.
+    file_format: The file format to which the shard path should be converted.
+  """
+  path = epath.Path(path)
+  file_name: str = path.name
+  if file_format.file_suffix in file_name:
+    # Already has the right file format in the file name.
+    return path
+
+  infix_formats = FileFormat.with_suffix_before_shard_spec()
+  suffix_formats = FileFormat.with_suffix_after_shard_spec()
+
+  # Remove any existing file format from the file name.
+  infix_format_concat = '|'.join(f.file_suffix for f in infix_formats)
+  file_name = re.sub(rf'(\.({infix_format_concat}))', '', file_name)
+
+  suffix_formats_concat = '|'.join(f.file_suffix for f in suffix_formats)
+  file_name = re.sub(rf'(\.({suffix_formats_concat}))$', '', file_name)
+
+  # Add back the proper file format.
+  if file_format in suffix_formats:
+    file_name = f'{file_name}.{file_format.file_suffix}'
+  else:
+    file_name = re.sub(
+        r'-(\d+)-of-(\d+)',
+        rf'.{file_format.file_suffix}-\1-of-\2',
+        file_name,
+    )
+  return path.parent / file_name

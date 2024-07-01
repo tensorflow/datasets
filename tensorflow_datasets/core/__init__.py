@@ -18,41 +18,29 @@
 # Allow to use `tfds.core.Path` in dataset implementation which seems more
 # natural than having to import a third party module.
 from etils.epath import Path
-
 from tensorflow_datasets.core import community
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
-
 from tensorflow_datasets.core.dataset_info import BeamMetadataDict
 from tensorflow_datasets.core.dataset_info import DatasetIdentity
 from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.dataset_info import Metadata
 from tensorflow_datasets.core.dataset_info import MetadataDict
-
 from tensorflow_datasets.core.example_serializer import ExampleSerializer
-
 from tensorflow_datasets.core.file_adapters import FileFormat
-
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
-
 from tensorflow_datasets.core.load import DatasetCollectionLoader
-
 from tensorflow_datasets.core.naming import ShardedFileTemplate
-
 from tensorflow_datasets.core.registered import DatasetNotFoundError
-
 from tensorflow_datasets.core.sequential_writer import SequentialWriter
-
 from tensorflow_datasets.core.split_builder import SplitGeneratorLegacy as SplitGenerator
-
 from tensorflow_datasets.core.splits import ReadInstruction
 from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitInfo
 from tensorflow_datasets.core.splits import SubSplitInfo
-
 from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import gcs_path
 from tensorflow_datasets.core.utils import lazy_imports_utils
@@ -61,6 +49,7 @@ from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
 from tensorflow_datasets.core.utils.file_utils import add_data_dir
 from tensorflow_datasets.core.utils.file_utils import as_path
+from tensorflow_datasets.core.writer import ExampleWriter
 
 
 def benchmark(*args, **kwargs):
@@ -81,6 +70,7 @@ __all__ = [
     "DatasetInfo",
     "DatasetIdentity",
     "DatasetNotFoundError",
+    "ExampleWriter",
     "Experiment",
     "FileFormat",
     "GeneratorBasedBuilder",
