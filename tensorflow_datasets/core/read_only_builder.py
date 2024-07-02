@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
+import concurrent.futures
 import functools
 import os
 import typing
@@ -349,9 +350,15 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
       version_str=str(version) if version else None,
       config_name=config,
   )
-  for current_data_dir in all_data_dirs:
-    if builder_dir := find_builder_fn(data_dir=current_data_dir):
-      all_builder_dirs.add(builder_dir)
+  if len(all_data_dirs) <= 1:
+    for current_data_dir in all_data_dirs:
+      if builder_dir := find_builder_fn(data_dir=current_data_dir):
+        all_builder_dirs.add(builder_dir)
+  else:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+      for builder_dir in executor.map(find_builder_fn, all_data_dirs):
+        if builder_dir:
+          all_builder_dirs.add(builder_dir)
 
   if not all_builder_dirs:
     all_dirs_str = '\n\t- '.join([''] + [str(dir) for dir in all_data_dirs])
