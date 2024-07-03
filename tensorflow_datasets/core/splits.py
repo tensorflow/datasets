@@ -476,10 +476,11 @@ def _file_instructions_for_split(
 ) -> List[shard_utils.FileInstruction]:
   """Returns the file instructions from the given instruction applied to the given split info."""
   if not split_info.num_examples:
-    raise ValueError(
-        "Shard empty. This might means that dataset hasn't been generated "
-        'yet and info not restored from GCS, or that legacy dataset is used.'
+    logging.warning(
+        'Split %s has no examples. Skipping file instructions.',
+        split_info.name,
     )
+    return []
   to = split_info.num_examples if instruction.to is None else instruction.to
   return shard_utils.get_file_instructions(
       from_=instruction.from_ or 0,

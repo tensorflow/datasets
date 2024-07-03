@@ -627,20 +627,18 @@ class GetDatasetFilesTest(testing.TestCase):
     self.assertEqual(files, [])
 
   def test_missing_shard_lengths(self):
-    with self.assertRaisesWithPredicateMatch(ValueError, 'Shard empty.'):
-      filename_template = _filename_template(
-          split='train', dataset_name='mnist'
-      )
-      split_infos = [
-          splits.SplitInfo(
-              name='train',
-              shard_lengths=[],
-              num_bytes=0,
-              filename_template=filename_template,
-          ),
-      ]
-      splits_dict = splits.SplitDict(split_infos=split_infos)
-      _ = splits_dict['train'].file_instructions
+    filename_template = _filename_template(split='train', dataset_name='mnist')
+    split_infos = [
+        splits.SplitInfo(
+            name='train',
+            shard_lengths=[],
+            num_bytes=0,
+            filename_template=filename_template,
+        ),
+    ]
+    splits_dict = splits.SplitDict(split_infos=split_infos)
+    files = splits_dict['train'].file_instructions
+    self.assertEqual(files, [])
 
 
 if __name__ == '__main__':
