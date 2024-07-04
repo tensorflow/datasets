@@ -445,8 +445,8 @@ class BeamWriter:
   def _check_num_examples(self, num_examples: int) -> int:
     if num_examples <= 0:
       raise ValueError(
-          f"The total number of generated examples is {num_examples}. This"
-          " should be >0!"
+          f"The total number of generated examples is {num_examples} for split"
+          f" {self._filename_template.split}. This should be >0!"
       )
     return num_examples
 

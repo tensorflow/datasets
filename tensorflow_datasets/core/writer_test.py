@@ -31,7 +31,6 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import shard_utils
-from tensorflow_datasets.core.writer import _ShardSpec
 
 
 class GetShardSpecsTest(testing.TestCase):
@@ -55,7 +54,7 @@ class GetShardSpecsTest(testing.TestCase):
         specs,
         [
             # Shard#, path, from_bucket, examples_number, reading instructions.
-            _ShardSpec(
+            writer_lib._ShardSpec(
                 0,
                 '/bar-train.tfrecord-00000-of-00006',
                 '/bar-train.tfrecord-00000-of-00006_index.json',
@@ -66,7 +65,7 @@ class GetShardSpecsTest(testing.TestCase):
                     ),
                 ],
             ),
-            _ShardSpec(
+            writer_lib._ShardSpec(
                 1,
                 '/bar-train.tfrecord-00001-of-00006',
                 '/bar-train.tfrecord-00001-of-00006_index.json',
@@ -77,7 +76,7 @@ class GetShardSpecsTest(testing.TestCase):
                     ),
                 ],
             ),
-            _ShardSpec(
+            writer_lib._ShardSpec(
                 2,
                 '/bar-train.tfrecord-00002-of-00006',
                 '/bar-train.tfrecord-00002-of-00006_index.json',
@@ -88,7 +87,7 @@ class GetShardSpecsTest(testing.TestCase):
                     ),
                 ],
             ),
-            _ShardSpec(
+            writer_lib._ShardSpec(
                 3,
                 '/bar-train.tfrecord-00003-of-00006',
                 '/bar-train.tfrecord-00003-of-00006_index.json',
@@ -99,7 +98,7 @@ class GetShardSpecsTest(testing.TestCase):
                     ),
                 ],
             ),
-            _ShardSpec(
+            writer_lib._ShardSpec(
                 4,
                 '/bar-train.tfrecord-00004-of-00006',
                 '/bar-train.tfrecord-00004-of-00006_index.json',
@@ -110,7 +109,7 @@ class GetShardSpecsTest(testing.TestCase):
                     ),
                 ],
             ),
-            _ShardSpec(
+            writer_lib._ShardSpec(
                 5,
                 '/bar-train.tfrecord-00005-of-00006',
                 '/bar-train.tfrecord-00005-of-00006_index.json',
@@ -141,7 +140,7 @@ class GetShardSpecsTest(testing.TestCase):
         specs,
         [
             # Shard#, path, examples_number, reading instructions.
-            _ShardSpec(
+            writer_lib._ShardSpec(
                 0,
                 '/bar-train.tfrecord-00000-of-00002',
                 '/bar-train.tfrecord-00000-of-00002_index.json',
@@ -155,7 +154,7 @@ class GetShardSpecsTest(testing.TestCase):
                     ),
                 ],
             ),
-            _ShardSpec(
+            writer_lib._ShardSpec(
                 1,
                 '/bar-train.tfrecord-00001-of-00002',
                 '/bar-train.tfrecord-00001-of-00002_index.json',
@@ -520,7 +519,8 @@ class TfrecordsWriterBeamTest(testing.TestCase):
   def test_empty_split(self):
     with self.assertRaisesWithPredicateMatch(
         ValueError,
-        'The total number of generated examples is 0. This should be >0!',
+        'The total number of generated examples is 0 for split train. This'
+        ' should be >0!',
     ):
       self._write(to_write=[])
 
