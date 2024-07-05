@@ -21,12 +21,13 @@ import contextlib
 import dataclasses
 import datetime
 import functools
+import hashlib
 import json
 import os
 import pathlib
 import subprocess
 import tempfile
-from typing import Any, Iterator, Mapping
+from typing import Any, Iterator, Mapping, Sequence
 from unittest import mock
 
 from etils import epath
@@ -711,62 +712,56 @@ def set_current_datetime(now_datetime: datetime.datetime) -> Iterator[None]:
 
 
 @contextlib.contextmanager
-def dummy_croissant_file() -> Iterator[epath.Path]:
+def dummy_croissant_file(
+    dataset_name: str = 'DummyDataset',
+    entries: Sequence[dict[str, Any]] | None = None,
+    raw_data_filename: epath.PathLike = 'raw_data.jsonl',
+    croissant_filename: epath.PathLike = 'croissant.json',
+) -> Iterator[epath.Path]:
   """Yields temporary path to a dummy Croissant file.
 
   The function creates a temporary directory that stores raw data files and the
   Croissant JSON-LD.
+
+  Args:
+    dataset_name: The name of the dataset.
+    entries: A list of dictionaries representing the dataset's entries. Each
+      dictionary should contain an 'index' and a 'text' key. If None, the
+      function will create two entries with indices 0 and 1 and dummy text.
+    raw_data_filename: Filename of the raw data file.
+    croissant_filename: Filename of the Croissant JSON-LD file.
   """
-  entries = [{'index': i, 'text': f'Dummy example {i}'} for i in range(2)]
-  distribution = [
-      mlc.FileObject(
-          id='raw_data',
-          description='File with the data.',
-          encoding_format='application/jsonlines',
-          content_url='data/raw_data.jsonl',
-          sha256=(
-              'b13bbcd65bb5ec7c0c64cbceb635de3eadda17f3311c5982dc2d5a342ed97690'
+  if not entries:
+    entries = [{'index': i, 'text': f'Dummy example {i}'} for i in range(2)]
+
+  fields = [
+      mlc.Field(
+          name='index',
+          description='The sample index.',
+          data_types=mlc.DataType.INTEGER,
+          source=mlc.Source(
+              file_object='raw_data',
+              extract=mlc.Extract(column='index'),
+          ),
+      ),
+      mlc.Field(
+          name='text',
+          description='The dummy sample text.',
+          data_types=mlc.DataType.TEXT,
+          source=mlc.Source(
+              file_object='raw_data',
+              extract=mlc.Extract(column='text'),
           ),
       ),
   ]
+
   record_sets = [
       mlc.RecordSet(
           id='jsonl',
           description='Dummy record set.',
-          fields=[
-              mlc.Field(
-                  name='index',
-                  description='The sample index.',
-                  data_types=mlc.DataType.INTEGER,
-                  source=mlc.Source(
-                      file_object='raw_data',
-                      extract=mlc.Extract(column='index'),
-                  ),
-              ),
-              mlc.Field(
-                  name='text',
-                  description='The dummy sample text.',
-                  data_types=mlc.DataType.TEXT,
-                  source=mlc.Source(
-                      file_object='raw_data',
-                      extract=mlc.Extract(column='text'),
-                  ),
-              ),
-          ],
+          fields=fields,
       )
   ]
-  dummy_metadata = mlc.Metadata(
-      name='DummyDataset',
-      description='Dummy description.',
-      cite_as=(
-          '@article{dummyarticle, title={title}, author={author}, year={2020}}'
-      ),
-      url='https://dummy_url',
-      distribution=distribution,
-      record_sets=record_sets,
-      version='1.2.0',
-      license='Public',
-  )
 
   with tempfile.TemporaryDirectory() as tempdir:
     tempdir = epath.Path(tempdir)
@@ -774,11 +769,37 @@ def dummy_croissant_file() -> Iterator[epath.Path]:
     # Write raw examples to tempdir/data.
     raw_data_dir = tempdir / 'data'
     raw_data_dir.mkdir()
-    raw_data_file = raw_data_dir / 'raw_data.jsonl'
+    raw_data_file = raw_data_dir / raw_data_filename
     raw_data_file.write_text('\n'.join(map(json.dumps, entries)))
 
+    # Get the actual raw file's hash, set distribution and metadata.
+    raw_data_file_content = raw_data_file.read_text()
+    sha256 = hashlib.sha256(raw_data_file_content.encode()).hexdigest()
+    distribution = [
+        mlc.FileObject(
+            id='raw_data',
+            description='File with the data.',
+            encoding_format='application/jsonlines',
+            content_url=f'data/{raw_data_filename}',
+            sha256=sha256,
+        ),
+    ]
+    dummy_metadata = mlc.Metadata(
+        name=dataset_name,
+        description='Dummy description.',
+        cite_as=(
+            '@article{dummyarticle, title={title}, author={author},'
+            ' year={2020}}'
+        ),
+        url='https://dummy_url',
+        distribution=distribution,
+        record_sets=record_sets,
+        version='1.2.0',
+        license='Public',
+    )
+
     # Write Croissant JSON-LD to tempdir.
-    croissant_file = tempdir / 'croissant.json'
+    croissant_file = tempdir / croissant_filename
     croissant_file.write_text(json.dumps(dummy_metadata.to_json(), indent=2))
 
     yield croissant_file

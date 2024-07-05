@@ -229,19 +229,35 @@ def test_gcs_access():
   assert not is_lambda(gcs_utils.gcs_dataset_info_files)
 
 
-def test_dummy_croissant_file():
-  with test_utils.dummy_croissant_file() as croissant_file:
+@pytest.mark.parametrize(
+    'entries',
+    [
+        [
+            {'text': 'Dummy example 0', 'index': 0},
+            {'text': 'Dummy example 1', 'index': 1},
+        ],
+        [
+            {'text': 'Dummy example 0', 'index': 0},
+            {'text': None, 'index': 1},
+        ],
+    ],
+)
+def test_dummy_croissant_file(entries):
+  with test_utils.dummy_croissant_file(entries=entries) as croissant_file:
     dataset = mlc.Dataset(jsonld=croissant_file)
 
     assert dataset.jsonld == croissant_file
     assert dataset.mapping is None
     assert dataset.metadata.description == 'Dummy description.'
+    assert dataset.metadata.url == 'https://dummy_url'
+    assert dataset.metadata.version == '1.2.0'
+
     assert [record_set.id for record_set in dataset.metadata.record_sets] == [
         'jsonl'
     ]
-    assert [record for record in dataset.records('jsonl')] == [
-        {'text': b'Dummy example 0', 'index': 0},
-        {'text': b'Dummy example 1', 'index': 1},
-    ]
-    assert dataset.metadata.url == 'https://dummy_url'
-    assert dataset.metadata.version == '1.2.0'
+    for i, record in enumerate(dataset.records('jsonl')):
+      assert record['index'] == entries[i]['index']
+      if record['text'] is not None:
+        assert record['text'].decode() == entries[i]['text']
+      else:
+        assert record['text'] == entries[i]['text']
