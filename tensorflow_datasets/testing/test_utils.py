@@ -731,7 +731,7 @@ def dummy_croissant_file(
     raw_data_filename: Filename of the raw data file.
     croissant_filename: Filename of the Croissant JSON-LD file.
   """
-  if not entries:
+  if entries is None:
     entries = [{'index': i, 'text': f'Dummy example {i}'} for i in range(2)]
 
   fields = [
