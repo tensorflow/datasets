@@ -25,6 +25,19 @@ from tensorflow_datasets.core.features import text_feature
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 
 
+DUMMY_ENTRIES = entries = [
+    {"index": i, "text": f"Dummy example {i}"} for i in range(2)
+]
+DUMMY_ENTRIES_WITH_NONE_VALUES = [
+    {"index": 0, "text": "Dummy example 0"},
+    {"index": 1, "text": None},
+]
+DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
+    {"index": 0, "text": "Dummy example 0"},
+    {"index": 1, "text": ""},
+]
+
+
 @pytest.mark.parametrize(
     ["field", "feature_type", "int_dtype", "float_dtype"],
     [
@@ -104,43 +117,72 @@ def test_complex_datatype_converter(field, feature_type):
   assert isinstance(actual_feature, feature_type)
 
 
-class CroissantBuilderTest(testing.TestCase):
-
-  @classmethod
-  def setUpClass(cls):
-    super(CroissantBuilderTest, cls).setUpClass()
-
-    with testing.dummy_croissant_file() as croissant_file:
-      cls._tfds_tmp_dir = testing.make_tmp_dir()
-      cls.builder = croissant_builder.CroissantBuilder(
-          jsonld=croissant_file,
-          file_format=FileFormat.ARRAY_RECORD,
-          disable_shuffling=True,
-          data_dir=cls._tfds_tmp_dir,
-      )
-      cls.builder.download_and_prepare()
-
-  def test_dataset_info(self):
-    assert self.builder.name == "dummydataset"
-    assert self.builder.version == "1.2.0"
-    assert (
-        self.builder._info().citation
-        == "@article{dummyarticle, title={title}, author={author}, year={2020}}"
+@pytest.fixture(name="crs_builder")
+def mock_croissant_dataset_builder(tmp_path, request):
+  dataset_name = request.param["dataset_name"]
+  with testing.dummy_croissant_file(
+      dataset_name=dataset_name,
+      entries=request.param["entries"],
+  ) as croissant_file:
+    builder = croissant_builder.CroissantBuilder(
+        jsonld=croissant_file,
+        file_format=FileFormat.ARRAY_RECORD,
+        disable_shuffling=True,
+        data_dir=tmp_path,
     )
-    assert self.builder._info().description == "Dummy description."
-    assert self.builder._info().homepage == "https://dummy_url"
-    assert self.builder._info().redistribution_info.license == "Public"
-    assert len(self.builder.metadata.record_sets) == 1
-    assert self.builder.metadata.record_sets[0].id == "jsonl"
-    assert (
-        self.builder.metadata.ctx.conforms_to.value
-        == "http://mlcommons.org/croissant/1.0"
-    )
+    yield builder
 
-  def test_generated_samples(self):
-    for split_name in ["all", "default"]:
-      data_source = self.builder.as_data_source(split=split_name)
-      assert len(data_source) == 2
-      for i in range(2):
-        assert data_source[i]["index"] == i
-        assert data_source[i]["text"].decode() == f"Dummy example {i}"
+
+@pytest.mark.parametrize(
+    "crs_builder",
+    [
+        {"dataset_name": "DummyDataset", "entries": DUMMY_ENTRIES},
+        {
+            "dataset_name": "DummyDatasetWithNoneValues",
+            "entries": DUMMY_ENTRIES_WITH_NONE_VALUES,
+        },
+    ],
+    indirect=True,
+)
+def test_croissant_builder(crs_builder):
+  assert crs_builder.version == "1.2.0"
+  assert (
+      crs_builder._info().citation
+      == "@article{dummyarticle, title={title}, author={author}, year={2020}}"
+  )
+  assert crs_builder._info().description == "Dummy description."
+  assert crs_builder._info().homepage == "https://dummy_url"
+  assert crs_builder._info().redistribution_info.license == "Public"
+  assert len(crs_builder.metadata.record_sets) == 1
+  assert crs_builder.metadata.record_sets[0].id == "jsonl"
+  assert (
+      crs_builder.metadata.ctx.conforms_to.value
+      == "http://mlcommons.org/croissant/1.0"
+  )
+
+
+@pytest.mark.parametrize(
+    "crs_builder,expected_entries",
+    [
+        (
+            {"dataset_name": "DummyDataset", "entries": DUMMY_ENTRIES},
+            DUMMY_ENTRIES,
+        ),
+        (
+            {
+                "dataset_name": "DummyDatasetWithNoneValues",
+                "entries": DUMMY_ENTRIES_WITH_NONE_VALUES,
+            },
+            DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES,
+        ),
+    ],
+    indirect=["crs_builder"],
+)
+@pytest.mark.parametrize("split_name", ["all", "default"])
+def test_download_and_prepare(crs_builder, expected_entries, split_name):
+  crs_builder.download_and_prepare()
+  data_source = crs_builder.as_data_source(split=split_name)
+  assert len(data_source) == 2
+  for i in range(2):
+    assert data_source[i]["index"] == expected_entries[i]["index"]
+    assert data_source[i]["text"].decode() == expected_entries[i]["text"]

@@ -259,4 +259,8 @@ class CroissantBuilder(
     record_set = self.get_record_set(self.builder_config.name)
     records = self.dataset.records(record_set.id)
     for i, record in enumerate(records):
+      # Some samples might not be TFDS-compatible as-is, e.g. from croissant
+      # describing HuggingFace datasets, so we convert them here. This shouldn't
+      # impact datasets which are already TFDS-compatible.
+      record = huggingface_utils.convert_hf_value(record, self.info.features)
       yield i, record

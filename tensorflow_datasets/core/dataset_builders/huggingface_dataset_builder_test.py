@@ -107,10 +107,13 @@ def mock_huggingface_dataset_builder(
       'foo/bar', 'config', other_arg='this is another arg'
   )
   login_to_hf.assert_called_once_with('SECRET_TOKEN')
+  yield builder
+
+
+def test_dataset_info(builder):
   assert builder.info.description == 'description'
   assert builder.info.citation == 'citation from the hub'
   assert builder.info.redistribution_info.license == 'test-license'
-  yield builder
 
 
 def test_download_and_prepare(builder):
