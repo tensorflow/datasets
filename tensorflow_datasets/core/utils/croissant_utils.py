@@ -41,7 +41,7 @@ def get_tfds_dataset_name(dataset: mlc.Dataset) -> str:
   return huggingface_utils.convert_hf_name(dataset_name)
 
 
-def get_record_set_ids(metadata: mlc.Metadata) -> typing.Sequence[str]:
+def get_record_set_ids(metadata: mlc.Metadata) -> list[str]:
   """Returns record set ids of the given MLcroissant metadata.
 
   Record sets which have the attribute `cr:Data` are excluded (e.g. splits that

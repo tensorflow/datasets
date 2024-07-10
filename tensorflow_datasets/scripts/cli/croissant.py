@@ -106,6 +106,12 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
   def dataset_name(self) -> str:
     return croissant_utils.get_dataset_name(self.dataset)
 
+  @functools.cached_property
+  def record_set_ids(self) -> list[str]:
+    return self.record_sets or croissant_utils.get_record_set_ids(
+        self.dataset.metadata
+    )
+
 
 def register_subparser(parsers: argparse._SubParsersAction):
   """Add subparser for `convert_format` command."""
@@ -133,7 +139,7 @@ def prepare_croissant_builder(args: CmdArgs) -> None:
   """
   builder = croissant_builder.CroissantBuilder(
       jsonld=args.jsonld,
-      record_set_ids=args.record_sets or None,
+      record_set_ids=args.record_set_ids,
       file_format=args.file_format,
       data_dir=args.data_dir,
       mapping=args.mapping_json,
