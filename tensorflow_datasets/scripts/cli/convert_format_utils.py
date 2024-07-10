@@ -174,7 +174,12 @@ def convert_metadata(
     if json_file.name == constants.DATASET_INFO_FILENAME:
       continue
     out_file = out_path / json_file.name
-    json_file.copy(out_file)
+    if out_file.exists():
+      logging.info(
+          'Not copying %s because it already exists.', os.fspath(json_file)
+      )
+    else:
+      json_file.copy(out_file)
     logging.info('Copied %s to %s', json_file, out_file)
 
   # Update dataset info and store it.
