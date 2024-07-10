@@ -211,6 +211,12 @@ def test_convert_value_raises(hf_value, feature):
             ),
             {'foo': b''},
         ),
+        # nan, but the feature type is not float
+        (
+            np.nan,
+            feature_lib.Text(),
+            b'',
+        ),
     ],
 )
 def test_convert_value(hf_value, feature, expected_value):

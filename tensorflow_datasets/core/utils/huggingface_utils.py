@@ -238,6 +238,12 @@ def convert_hf_value(
       # Ensure RGB format for PNG encoding.
       return hf_value.convert('RGB')
     case feature_lib.Tensor():
+      if isinstance(hf_value, float):
+        # In some cases, for example when loading jsonline files using pandas,
+        # empty non-float values, such as strings, are converted to float nan.
+        # We spot those occurrences as the feature.np_dtype is not float.
+        if np.isnan(hf_value) and not dtype_utils.is_floating(feature.np_dtype):
+          return _get_default_value(feature)
       return hf_value
 
   raise TypeError(
