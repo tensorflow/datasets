@@ -399,14 +399,14 @@ class SplitBuilder:
       try:
         example = self._features.encode_example(example)
       except Exception as e:  # pylint: disable=broad-except
-        e.add_note(f'Failed to encode example:\n{example}\n')
-        raise
+        utils.reraise(e, prefix=f'Failed to encode example:\n{example}\n')
       writer.write(key, example)
     try:
       shard_lengths, total_size = writer.finalize()
     except Exception as e:  # pylint: disable=broad-except
-      e.add_note(f'Failed to finalize writing of split "{split_name}"')
-      raise
+      utils.reraise(
+          e, prefix=f'Failed to finalize writing of split "{split_name}"'
+      )
 
     split_info = splits_lib.SplitInfo(
         name=split_name,

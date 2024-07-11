@@ -26,6 +26,7 @@ from typing import Any, Dict, List, Mapping, MutableMapping, Optional, Tuple, Un
 
 from absl import logging
 from etils import epath
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
 _NAME_CLASS = r'[a-zA-Z][\w]*'
@@ -185,8 +186,7 @@ def _dataset_name_and_kwargs_from_name_str(
       kwargs[attr] = val
     return name, kwargs
   except Exception as e:  # pylint: disable=broad-except
-    e.add_note(err_msg)
-    raise e
+    py_utils.reraise(e, prefix=err_msg)  # pytype: disable=bad-return-type
 
 
 @dataclasses.dataclass(order=True)
