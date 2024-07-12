@@ -275,7 +275,7 @@ def _convert_dataset_dirs(
   logging.info('Converting %d datasets.', len(from_to_dirs))
 
   found_dataset_versions: dict[epath.Path, dataset_info.DatasetInfo] = {}
-  for from_dir in from_to_dirs.keys():
+  for from_dir, to_dir in from_to_dirs.items():
     builder = read_only_builder_lib.builder_from_directory(from_dir)
     if out_file_format == builder.info.file_format:
       raise ValueError(
@@ -289,7 +289,7 @@ def _convert_dataset_dirs(
             ' format. Overwriting the shards!',
             out_file_format.value,
         )
-      else:
+      elif from_dir == to_dir:
         logging.info(
             'The file format to convert to (%s) is already an alternative file'
             ' format of the dataset in %s. Skipping conversion.',
@@ -297,6 +297,13 @@ def _convert_dataset_dirs(
             out_file_format.value,
         )
         continue
+      else:
+        logging.warning(
+            'The file format to convert to (%s) is already an alternative file'
+            ' format, but the converted output is being written to a different'
+            ' folder, so the shards will be converted anyway.',
+            out_file_format.value,
+        )
     found_dataset_versions[from_dir] = builder.info
 
   convert_dataset_fn = functools.partial(
