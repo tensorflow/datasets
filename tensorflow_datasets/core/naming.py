@@ -721,7 +721,10 @@ def _get_filename_template(
     filename: str, filename_template: Optional[ShardedFileTemplate]
 ) -> ShardedFileTemplate:
   if filename_template is None:
-    return ShardedFileTemplate(data_dir=epath.Path(os.path.dirname(filename)))
+    return ShardedFileTemplate(
+        data_dir=epath.Path(os.path.dirname(filename)),
+        filetype_suffix=epath.Path(filename).suffix[1:] or None,
+    )
   return filename_template
 
 
