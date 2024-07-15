@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import abc
+from collections.abc import Iterable
 import dataclasses
 import functools
 import itertools
@@ -26,7 +27,7 @@ import operator
 import os
 import re
 import typing
-from typing import Any, Dict, Iterable, List, Optional, Union
+from typing import Any, Union
 
 from absl import logging
 from etils import epath
@@ -73,7 +74,7 @@ class _AbsoluteInstruction:
   from_: int  # uint (starting index).
   to: int  # uint (ending index).
 
-  def to_absolute(self, split_infos) -> List['_AbsoluteInstruction']:
+  def to_absolute(self, split_infos) -> list['_AbsoluteInstruction']:
     del split_infos  # unused
     return [self]
 
@@ -94,9 +95,9 @@ class SplitInfo:
   """
 
   name: str
-  shard_lengths: List[int]
+  shard_lengths: list[int]
   num_bytes: int
-  filename_template: Optional[naming.ShardedFileTemplate] = None
+  filename_template: naming.ShardedFileTemplate | None = None
   statistics: statistics_pb2.DatasetFeatureStatistics = dataclasses.field(
       default_factory=statistics_pb2.DatasetFeatureStatistics,
   )
@@ -163,7 +164,7 @@ class SplitInfo:
     )
 
   @property
-  def file_instructions(self) -> List[shard_utils.FileInstruction]:
+  def file_instructions(self) -> list[shard_utils.FileInstruction]:
     """Returns the list of dict(filename, take, skip).
 
     This allows for creating your own `tf.data.Dataset` using the low-level
@@ -199,7 +200,7 @@ class SplitInfo:
     )
 
   @property
-  def filenames(self) -> List[str]:
+  def filenames(self) -> list[str]:
     """Returns the list of filenames."""
     if not self.filename_template:
       raise ValueError('No filename templates available.')
@@ -208,7 +209,7 @@ class SplitInfo:
     )
 
   @property
-  def filepaths(self) -> List[epath.Path]:
+  def filepaths(self) -> list[epath.Path]:
     """All the paths for all the files that are part of this split."""
     if not self.filename_template:
       raise ValueError('No filename templates available.')
@@ -228,9 +229,9 @@ class MultiSplitInfo(SplitInfo):
   This should only be used to read data and not when producing data.
   """
 
-  split_infos: List[SplitInfo] = dataclasses.field(default_factory=list)
+  split_infos: list[SplitInfo] = dataclasses.field(default_factory=list)
 
-  def __init__(self, name: str, split_infos: List[SplitInfo]):
+  def __init__(self, name: str, split_infos: list[SplitInfo]):
     if not split_infos:
       raise ValueError('Need to pass a non-empty list of SplitInfos')
     object.__setattr__(self, 'split_infos', split_infos)
@@ -262,14 +263,14 @@ class MultiSplitInfo(SplitInfo):
     )
 
   @property
-  def file_instructions(self) -> List[shard_utils.FileInstruction]:
+  def file_instructions(self) -> list[shard_utils.FileInstruction]:
     result = []
     for split_info in self.split_infos:
       result.extend(split_info.file_instructions)
     return result
 
   @property
-  def filenames(self) -> List[str]:
+  def filenames(self) -> list[str]:
     """Returns the list of filenames."""
     result = []
     for split_info in self.split_infos:
@@ -277,7 +278,7 @@ class MultiSplitInfo(SplitInfo):
     return result
 
   @property
-  def filepaths(self) -> List[epath.Path]:
+  def filepaths(self) -> list[epath.Path]:
     """All the paths for all the files that are part of this split."""
     result = []
     for split_info in self.split_infos:
@@ -301,10 +302,10 @@ class SubSplitInfo:
   """
 
   name: str
-  file_instructions: List[shard_utils.FileInstruction]
+  file_instructions: list[shard_utils.FileInstruction]
 
   @property
-  def shard_lengths(self) -> List[int]:
+  def shard_lengths(self) -> list[int]:
     return [f.take for f in self.file_instructions]
 
   @property
@@ -321,12 +322,12 @@ class SubSplitInfo:
     return len(self.file_instructions)
 
   @property
-  def filenames(self) -> List[str]:
+  def filenames(self) -> list[str]:
     """Returns the list of filenames."""
     return sorted(os.path.basename(f.filename) for f in self.file_instructions)
 
   @property
-  def filepaths(self) -> List[epath.Path]:
+  def filepaths(self) -> list[epath.Path]:
     """Returns the list of filepaths."""
     return sorted(epath.Path(f.filename) for f in self.file_instructions)
 
@@ -384,7 +385,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
       split_infos: Iterable[SplitInfo],
       *,
       # TODO(b/216470058): remove this parameter
-      dataset_name: Optional[str] = None,  # deprecated, please don't use
+      dataset_name: str | None = None,  # deprecated, please don't use
   ):
     super(SplitDict, self).__init__(
         {split_info.name: split_info for split_info in split_infos},
@@ -401,7 +402,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
     if not self:
       raise KeyError(
           f'Trying to access `splits[{key!r}]` but `splits` is empty. '
-          'This likely indicate the dataset has not been generated yet.'
+          'This likely indicates the dataset has not been generated yet.'
       )
     # 1st case: The key exists: `info.splits['train']`
     elif str(key) in self.keys():
@@ -435,11 +436,11 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
 
   @property
   def total_num_examples(self):
-    """Return the total number of examples."""
+    """Returns the total number of examples."""
     return sum(s.num_examples for s in self.values())
 
   @classmethod
-  def merge_multiple(cls, split_dicts: List['SplitDict']) -> 'SplitDict':
+  def merge_multiple(cls, split_dicts: list['SplitDict']) -> 'SplitDict':
     info_per_split = []
     for split in set(itertools.chain(*split_dicts)):
       infos_of_split = []
@@ -461,7 +462,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
 def _make_absolute_instructions(
     split_infos: Iterable[SplitInfo],
     instruction: SplitArg,
-) -> List[_AbsoluteInstruction]:
+) -> list[_AbsoluteInstruction]:
   if isinstance(instruction, str):
     instruction = AbstractSplit.from_spec(instruction)
 
@@ -473,7 +474,7 @@ def _make_absolute_instructions(
 def _file_instructions_for_split(
     instruction: _AbsoluteInstruction,
     split_info: SplitInfo,
-) -> List[shard_utils.FileInstruction]:
+) -> list[shard_utils.FileInstruction]:
   """Returns the file instructions from the given instruction applied to the given split info."""
   if not split_info.num_examples:
     logging.warning(
@@ -491,9 +492,9 @@ def _file_instructions_for_split(
 
 
 def _make_file_instructions(
-    split_infos: List[SplitInfo],
+    split_infos: list[SplitInfo],
     instruction: SplitArg,
-) -> List[shard_utils.FileInstruction]:
+) -> list[shard_utils.FileInstruction]:
   """Returns file instructions by applying the given instruction on the given splits.
 
   Args:
@@ -566,7 +567,7 @@ class AbstractSplit(abc.ABC):
     return functools.reduce(operator.add, instructions)
 
   @abc.abstractmethod
-  def to_absolute(self, split_infos) -> List[_AbsoluteInstruction]:
+  def to_absolute(self, split_infos) -> list[_AbsoluteInstruction]:
     """Translate instruction into a list of absolute instructions.
 
     Those absolute instructions are then to be added together.
@@ -603,7 +604,7 @@ class _SplitAdd(AbstractSplit):
   def __repr__(self):
     return f'{self.left!r}+{self.right!r}'
 
-  def to_absolute(self, split_infos) -> List[_AbsoluteInstruction]:
+  def to_absolute(self, split_infos) -> list[_AbsoluteInstruction]:
     # Merge instructions from left and right
     return self.left.to_absolute(split_infos) + self.right.to_absolute(
         split_infos
@@ -613,7 +614,7 @@ class _SplitAdd(AbstractSplit):
 class _SplitAll(AbstractSplit):
   """Union of all splits of the dataset."""
 
-  def to_absolute(self, split_infos) -> List[_AbsoluteInstruction]:
+  def to_absolute(self, split_infos) -> list[_AbsoluteInstruction]:
     # Create the union of all splits
     split_names = split_infos.keys()
     split = AbstractSplit.from_spec('+'.join(split_names))
@@ -645,8 +646,8 @@ class ReadInstruction(AbstractSplit):
 
   split_name: str
   # TODO(py3.10): Add `_ = dataclasses.KW_ONLY`
-  from_: Optional[int | float] = None
-  to: Optional[int | float] = None
+  from_: int | float | None = None
+  to: int | float | None = None
   unit: str = 'abs'
   rounding: str = 'closest'
 
@@ -681,7 +682,7 @@ class ReadInstruction(AbstractSplit):
     rounding = f', rounding={self.rounding!r}' if self.unit == '%' else ''
     return f"ReadInstruction('{self.split_name}{slice_str}'{rounding})"
 
-  def to_absolute(self, split_infos) -> List[_AbsoluteInstruction]:
+  def to_absolute(self, split_infos) -> list[_AbsoluteInstruction]:
     return [_rel_to_abs_instr(self, split_infos)]
 
 
@@ -763,7 +764,7 @@ def _pct_to_abs_closest(boundary, num_examples: int) -> int:
 
 def _rel_to_abs_instr(
     rel_instr: ReadInstruction,
-    split_infos: Dict[str, SplitInfo],
+    split_infos: dict[str, SplitInfo],
 ) -> _AbsoluteInstruction:
   """Returns _AbsoluteInstruction instance for given RelativeInstruction.
 
