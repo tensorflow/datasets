@@ -25,10 +25,8 @@ import io
 import itertools
 import logging
 import os
-import random
 import re
 import shutil
-import string
 import sys
 import textwrap
 import threading
@@ -310,30 +308,6 @@ def pack_as_nest_dict(flat_d, nest_d):
 def nullcontext(enter_result: T = None) -> Iterator[T]:
   """Backport of `contextlib.nullcontext`."""
   yield enter_result
-
-
-def _get_incomplete_dir(dir_name: str) -> str:
-  """Returns a temporary dir name based on `dir_name`."""
-  random_suffix = ''.join(
-      random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
-  )
-  dir_name = epath.Path(dir_name)
-  return f'{dir_name.parent}/{constants.INCOMPLETE_PREFIX}{random_suffix}_{dir_name.name}/'
-
-
-@contextlib.contextmanager
-def incomplete_dir(dirname: epath.PathLike) -> Iterator[str]:
-  """Create temporary dir for dirname and rename on exit."""
-  dirname = os.fspath(dirname)
-  tmp_dir = _get_incomplete_dir(dirname)
-  tmp_path = epath.Path(tmp_dir)
-  tmp_path.mkdir(parents=True, exist_ok=True)
-  try:
-    yield tmp_dir
-    tmp_path.rename(dirname)
-  finally:
-    if tmp_path.exists():
-      tmp_path.rmtree()
 
 
 def _tmp_file_name(path: epath.PathLike) -> epath.Path:

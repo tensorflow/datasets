@@ -49,6 +49,7 @@ from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
 from tensorflow_datasets.core.utils.file_utils import add_data_dir
 from tensorflow_datasets.core.utils.file_utils import as_path
+from tensorflow_datasets.core.utils.file_utils import Permissions
 from tensorflow_datasets.core.writer import ExampleWriter
 
 
@@ -79,6 +80,7 @@ __all__ = [
     "Metadata",
     "MetadataDict",
     "Path",
+    "Permissions",
     "ReadInstruction",
     "SequentialWriter",
     "ShardedFileTemplate",

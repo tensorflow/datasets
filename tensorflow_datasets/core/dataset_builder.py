@@ -561,9 +561,10 @@ class DatasetBuilder(registered.RegisteredDataset):
   def download_and_prepare(
       self,
       *,
-      download_dir: Optional[epath.PathLike] = None,
-      download_config: Optional[download.DownloadConfig] = None,
-      file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
+      download_dir: epath.PathLike | None = None,
+      download_config: download.DownloadConfig | None = None,
+      file_format: str | file_adapters.FileFormat | None = None,
+      permissions: file_utils.Permissions | None = None,
   ) -> None:
     """Downloads and prepares dataset for reading.
 
@@ -574,6 +575,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         downloading and preparing dataset.
       file_format: optional `str` or `file_adapters.FileFormat`, format of the
         record files in which the dataset will be written.
+      permissions: optional permissions to set on the generated folder and
+        files.
 
     Raises:
       IOError: if there is not enough disk space available.
@@ -694,7 +697,9 @@ class DatasetBuilder(registered.RegisteredDataset):
       self.info.set_file_format(file_format, override=True)
 
     # Create a tmp dir and rename to self.data_dir on successful exit.
-    with utils.incomplete_dir(self.data_dir) as tmp_data_dir:
+    with utils.incomplete_dir(
+        dirname=self.data_dir, permissions=permissions
+    ) as tmp_data_dir:
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):

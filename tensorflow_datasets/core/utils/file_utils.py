@@ -19,9 +19,13 @@ from __future__ import annotations
 
 import collections
 from collections.abc import Iterator, Sequence
+import contextlib
+import dataclasses
 import functools
 import os
+import random
 import re
+import string
 import time
 
 from absl import logging
@@ -41,6 +45,15 @@ Path = epath.Path
 
 _registered_data_dir = set()
 _GLOB_CHARS = ['*', '?', '[']
+
+
+@dataclasses.dataclass(frozen=True)
+class Permissions:
+  """Permissions for a file or directory."""
+
+  owner: str | None = None
+  group: str | None = None
+  mode: int | None = None
 
 
 @docs.deprecated
@@ -85,6 +98,32 @@ def add_data_dir(data_dir):
   # with and without a final slash.
   data_dir = data_dir.rstrip('/')
   _registered_data_dir.add(data_dir)
+
+
+def _get_incomplete_dir(dir_name: str) -> str:
+  """Returns a temporary dir name based on `dir_name`."""
+  random_suffix = ''.join(
+      random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
+  )
+  dir_name = epath.Path(dir_name)
+  return f'{dir_name.parent}/{constants.INCOMPLETE_PREFIX}{random_suffix}_{dir_name.name}/'
+
+
+@contextlib.contextmanager
+def incomplete_dir(
+    dirname: epath.PathLike, permissions: Permissions | None = None
+) -> Iterator[str]:
+  """Create temporary dir for dirname and rename on exit."""
+  dirname = os.fspath(dirname)
+  tmp_dir = _get_incomplete_dir(dirname)
+  tmp_path = epath.Path(tmp_dir)
+  tmp_path.mkdir(parents=True, exist_ok=True)
+  try:
+    yield tmp_dir
+    tmp_path.rename(dirname)
+  finally:
+    if tmp_path.exists():
+      tmp_path.rmtree()
 
 
 def list_data_dirs(

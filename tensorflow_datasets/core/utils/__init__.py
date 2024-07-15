@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.core.units import Size
 from tensorflow_datasets.core.utils import docs
+from tensorflow_datasets.core.utils.file_utils import incomplete_dir
 from tensorflow_datasets.core.utils.gcs_utils import gcs_path
 from tensorflow_datasets.core.utils.image_utils import apply_colormap
 from tensorflow_datasets.core.utils.image_utils import create_thumbnail
@@ -40,7 +41,6 @@ from tensorflow_datasets.core.utils.py_utils import get_base64
 from tensorflow_datasets.core.utils.py_utils import get_class_path
 from tensorflow_datasets.core.utils.py_utils import get_class_url
 from tensorflow_datasets.core.utils.py_utils import has_sufficient_disk_space
-from tensorflow_datasets.core.utils.py_utils import incomplete_dir
 from tensorflow_datasets.core.utils.py_utils import incomplete_file
 from tensorflow_datasets.core.utils.py_utils import indent
 from tensorflow_datasets.core.utils.py_utils import is_incomplete_file
