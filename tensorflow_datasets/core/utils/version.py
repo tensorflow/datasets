@@ -17,6 +17,7 @@
 
 from __future__ import annotations
 
+import dataclasses
 import enum
 import re
 from typing import List, Tuple, Union
@@ -29,6 +30,41 @@ _VERSION_WILDCARD_REG = re.compile(
     _VERSION_TMPL.format(v=_NO_LEADING_ZEROS + r"|\*")
 )
 _VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=_NO_LEADING_ZEROS))
+
+
+# A dictionary of blocked versions or configs.
+# The key is a version or config string, the value is a short sentence
+# explaining why that version or config should not be used (or None).
+BlockedWithMsg = dict[str, str | None]
+
+
+@dataclasses.dataclass(frozen=True)
+class BlockedVersions:
+  """Holds information on versions and configs that should not be used.
+
+  Note that only complete versions can be blocked: wilcards in versions are not
+  supported.
+
+  versions: A dictionary of bad versions for which all configs should be
+    blocked.
+  configs: A mapping from versions to a dictionary of configs that should not be
+    used for that version.
+  """
+
+  versions: BlockedWithMsg = dataclasses.field(default_factory=dict)
+  configs: dict[str, BlockedWithMsg] = dataclasses.field(default_factory=dict)
+
+  def is_blocked(
+      self, version: str | Version, config: str | None = None
+  ) -> bool:
+    """Checks whether a version or config is blocked."""
+    if isinstance(version, Version):
+      version = str(version)
+    if version in self.versions:
+      return True
+    if config is not None and version in self.configs:
+      return config in self.configs[version]
+    return False
 
 
 class Experiment(enum.Enum):

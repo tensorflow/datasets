@@ -14,6 +14,8 @@
 # limitations under the License.
 
 """Tests for tensorflow_datasets.core.utils.version."""
+
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import version
 
@@ -146,6 +148,31 @@ def test_str_to_version():
   v0 = version.Version('1.2.3')
   v1 = version.Version(v0)
   assert v1 == v0
+
+
+@pytest.mark.parametrize(
+    'blocked_version, blocked_config, expected',
+    [
+        ('1.2.3', None, True),
+        ('1.0.0', None, False),
+        ('1.2.3', 'non_existing_config', True),
+        ('1.0.0', 'config_1', True),
+        ('1.0.0', 'config_2', True),
+        ('1.0.0', 'config_1', True),
+        ('1.1.0', 'config_2', False),
+    ],
+)
+def test_is_blocked(blocked_version, blocked_config, expected):
+  blocked_versions = version.BlockedVersions(
+      versions={'1.2.3': None},
+      configs={
+          '1.0.0': {'config_1': 'blocked_config', 'config_2': None},
+          '1.1.0': {'config_1': 'blocked config in version 1.1.0'},
+      },
+  )
+  assert (
+      blocked_versions.is_blocked(blocked_version, blocked_config) == expected
+  )
 
 
 if __name__ == '__main__':

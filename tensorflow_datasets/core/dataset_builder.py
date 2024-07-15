@@ -229,6 +229,9 @@ class DatasetBuilder(registered.RegisteredDataset):
   # Example: `imported_builder_cls` function in `registered.py` module sets it.
   pkg_dir_path: Optional[epath.Path] = None
 
+  # Holds information on versions and configs that should not be used.
+  BLOCKED_VERSIONS: ClassVar[Optional[utils.BlockedVersions]] = None
+
   @classmethod
   def _get_pkg_dir_path(cls) -> epath.Path:
     """Returns class pkg_dir_path, infer it first if not set."""
@@ -395,6 +398,10 @@ class DatasetBuilder(registered.RegisteredDataset):
       return self.builder_config.release_notes
     else:
       return self.RELEASE_NOTES
+
+  @property
+  def blocked_versions(self) -> utils.BlockedVersions | None:
+    return self.BLOCKED_VERSIONS
 
   @property
   def data_dir_root(self) -> epath.Path:
