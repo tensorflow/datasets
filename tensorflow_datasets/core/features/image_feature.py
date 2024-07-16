@@ -94,6 +94,9 @@ class _ImageEncoder:
 
   def __post_init__(self):
     self.np_dtype = dtype_utils.cast_to_numpy(self.dtype)
+    # When encoding isn't defined, default to PNG.
+    if self.encoding_format is None:
+      self.encoding_format = 'png'
 
   # TODO(tfds): Should deprecate the TFGraph runner in favor of simpler
   # implementation
@@ -123,15 +126,12 @@ class _ImageEncoder:
     """Returns np_image encoded as jpeg or png."""
     _validate_np_array(np_image, shape=self.shape, dtype=self.np_dtype)
 
-    # When encoding isn't defined, default to PNG.
     # Should we be more strict about explicitly define the encoding (raise
     # error / warning instead) ?
     # It has created subtle issues for imagenet_corrupted: images are read as
     # JPEG images to apply some processing, but final image saved as PNG
     # (default) rather than JPEG.
-    return self._runner.run(
-        _ENCODE_FN[self.encoding_format or 'png'](), np_image
-    )
+    return self._runner.run(_ENCODE_FN[self.encoding_format](), np_image)
 
   def _encode_pil_image(self, pil_image) -> bytes:
     """Encode a PIL Image object to bytes.
@@ -144,7 +144,7 @@ class _ImageEncoder:
     """
     check_pil_import_or_raise_error()
     buffer = io.BytesIO()
-    pil_image.save(buffer, format=self.encoding_format or pil_image.format)
+    pil_image.save(buffer, format=self.encoding_format)
     return buffer.getvalue()
 
   def decode_image(self, img: tf.Tensor) -> tf.Tensor:
