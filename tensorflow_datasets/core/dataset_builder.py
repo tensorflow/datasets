@@ -806,6 +806,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     Raises:
       NotImplementedError if the data was not generated using ArrayRecords.
     """
+    self.assert_is_not_blocked()
+
     # By default, return all splits
     if split is None:
       split = {s: s for s in self.info.splits}
@@ -951,6 +953,8 @@ class DatasetBuilder(registered.RegisteredDataset):
       If `batch_size` is -1, will return feature dictionaries containing
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
+    self.assert_is_not_blocked()
+
     # pylint: enable=line-too-long
     if not self.data_path.exists():
       raise AssertionError(

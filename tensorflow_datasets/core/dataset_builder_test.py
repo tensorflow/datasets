@@ -437,6 +437,25 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
         assert builder_3.assert_is_not_blocked()
       assert not_blocked_builder.assert_is_not_blocked() is None
 
+  def test_blocked_as_dataset_and_as_data_source(self):
+    for config, version, expected_msg in [
+        ("plus1", "0.0.1", "Version 0.0.1 is blocked"),
+        ("plus2", "0.0.2", "plus2 is blocked for version 0.0.2"),
+    ]:
+      with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+        tmp_dir = epath.Path(tmp_dir)
+        blocked_builder = DummyDatasetWithBlockedVersions(
+            config=config, version=version, data_dir=tmp_dir
+        )
+        with pytest.raises(
+            utils.DatasetVariantBlockedError, match=expected_msg
+        ):
+          blocked_builder.as_dataset()
+        with pytest.raises(
+            utils.DatasetVariantBlockedError, match=expected_msg
+        ):
+          blocked_builder.as_data_source()
+
   def test_versioned_configs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       tmp_dir = epath.Path(tmp_dir)
