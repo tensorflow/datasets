@@ -149,6 +149,7 @@ class CroissantBuilder(
       float_dtype: type_utils.TfdsDType | None = np.float32,
       mapping: Mapping[str, epath.PathLike] | None = None,
       overwrite_version: str | None = None,
+      filters: Mapping[str, Any] | None = None,
       **kwargs: Any,
   ):
     """Initializes a CroissantBuilder.
@@ -170,6 +171,10 @@ class CroissantBuilder(
         it to `~/Downloads/document.csv`, you can specify
         `mapping={"document.csv": "~/Downloads/document.csv"}`.
       overwrite_version: Semantic version of the dataset to be set.
+      filters: A dict of filters to apply to the records at preparation time (in
+        the `_generate_examples` function). The keys should be field names and
+        the values should be the values to filter by. If a record matches all
+        the filters, it will be included in the dataset.
       **kwargs: kwargs to pass to GeneratorBasedBuilder directly.
     """
     if mapping is None:
@@ -201,6 +206,7 @@ class CroissantBuilder(
 
     self._int_dtype = int_dtype
     self._float_dtype = float_dtype
+    self._filters = filters or {}
 
     super().__init__(
         **kwargs,
@@ -222,19 +228,11 @@ class CroissantBuilder(
         disable_shuffling=self._disable_shuffling,
     )
 
-  def get_record_set(self, record_set_id: str):
-    """Returns the desired record set from self.metadata."""
-    for record_set in self.dataset.metadata.record_sets:
-      if huggingface_utils.convert_hf_name(record_set.id) == record_set_id:
-        return record_set
-    raise ValueError(
-        f'Did not find any record set with the name {record_set_id}.'
-    )
-
   def get_features(self) -> Optional[feature_lib.FeatureConnector]:
     """Infers the features dict for the required record set."""
-    record_set = self.get_record_set(self.builder_config.name)
-
+    record_set = croissant_utils.get_record_set(
+        self.builder_config.name, metadata=self.metadata
+    )
     fields = record_set.fields
     features = {}
     for field in fields:
@@ -249,18 +247,53 @@ class CroissantBuilder(
   def _split_generators(
       self, dl_manager: download.DownloadManager
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
-    # This will be updated when partitions are implemented in Croissant, ref to:
-    # https://docs.google.com/document/d/1saz3usja6mk5ugJXNF64_uSXsOzIgbIV28_bu1QamVY
-    return {'default': self._generate_examples()}  # pylint: disable=unreachable
+    # If a split recordset is joined for the required record set, we generate
+    # splits accordingly. Otherwise, it generates a single `default` split with
+    # all the records.
+    record_set = croissant_utils.get_record_set(
+        self.builder_config.name, metadata=self.metadata
+    )
+    if split_reference := croissant_utils.get_split_recordset(
+        record_set, metadata=self.metadata
+    ):
+      return {
+          split['name']: self._generate_examples(
+              filters={
+                  **self._filters,
+                  split_reference.reference_field.id: split['name'].encode(),
+              }
+          )
+          for split in split_reference.split_record_set.data
+      }
+    else:
+      return {'default': self._generate_examples(filters=self._filters)}
 
   def _generate_examples(
       self,
+      filters: dict[str, Any],
   ) -> split_builder_lib.SplitGenerator:
-    record_set = self.get_record_set(self.builder_config.name)
+    """Generates the examples for the given record set.
+
+    Args:
+      filters: A dict of filters to apply to the records. The keys should be
+        field names and the values should be the values to filter by. If a
+        record matches all the filters, it will be included in the dataset.
+
+    Yields:
+      A tuple of (index, record) for each record in the dataset.
+    """
+    record_set = croissant_utils.get_record_set(
+        self.builder_config.name, metadata=self.metadata
+    )
     records = self.dataset.records(record_set.id)
     for i, record in enumerate(records):
       # Some samples might not be TFDS-compatible as-is, e.g. from croissant
       # describing HuggingFace datasets, so we convert them here. This shouldn't
       # impact datasets which are already TFDS-compatible.
       record = huggingface_utils.convert_hf_value(record, self.info.features)
-      yield i, record
+      # After partition implementation, the filters will be applied from
+      # mlcroissant `dataset.records` directly.
+      # `records = records.filter(f == v for f, v in filters.items())``
+      # For now, we apply them in TFDS.
+      if all(record[filter] == value for filter, value in filters.items()):
+        yield i, record
