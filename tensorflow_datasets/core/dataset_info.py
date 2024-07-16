@@ -512,7 +512,7 @@ class DatasetInfo(object):
           continue
         updated_split_info = split_info.replace(
             filename_template=split_info.filename_template.replace(
-                filetype_suffix=file_format.value
+                filetype_suffix=file_format.file_suffix
             )
         )
         updated_split_infos.append(updated_split_info)
