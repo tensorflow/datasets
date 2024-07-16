@@ -557,6 +557,16 @@ class DatasetBuilder(registered.RegisteredDataset):
     """Returns whether this dataset is already downloaded and prepared."""
     return self.data_path.exists()
 
+  def assert_is_not_blocked(self) -> None:
+    """Checks that the dataset is not blocked."""
+    config_name = self.builder_config.name if self.builder_config else None
+    if blocked_versions := self.blocked_versions:
+      is_blocked = blocked_versions.is_blocked(
+          version=self.version, config=config_name
+      )
+      if is_blocked.result:
+        raise utils.DatasetVariantBlockedError(is_blocked.blocked_msg)
+
   @tfds_logging.download_and_prepare()
   def download_and_prepare(
       self,
@@ -581,7 +591,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     Raises:
       IOError: if there is not enough disk space available.
       RuntimeError: when the config cannot be found.
+      DatasetBlockedError: if the given version, or combination of version and
+        config, has been marked as blocked in the builder's BLOCKED_VERSIONS.
     """
+    self.assert_is_not_blocked()
+
 
     download_config = download_config or download.DownloadConfig()
     data_path = self.data_path

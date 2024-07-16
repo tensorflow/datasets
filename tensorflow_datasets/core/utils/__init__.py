@@ -84,5 +84,6 @@ from tensorflow_datasets.core.utils.tqdm_utils import tqdm
 from tensorflow_datasets.core.utils.tqdm_utils import TqdmStream
 from tensorflow_datasets.core.utils.type_utils import *
 from tensorflow_datasets.core.utils.version import BlockedVersions
+from tensorflow_datasets.core.utils.version import DatasetVariantBlockedError
 from tensorflow_datasets.core.utils.version import Experiment
 from tensorflow_datasets.core.utils.version import Version

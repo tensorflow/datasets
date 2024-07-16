@@ -32,10 +32,26 @@ _VERSION_WILDCARD_REG = re.compile(
 _VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=_NO_LEADING_ZEROS))
 
 
+class DatasetVariantBlockedError(ValueError):
+  """Exception raised when a blocked version and/or config is requested."""
+
+
 # A dictionary of blocked versions or configs.
 # The key is a version or config string, the value is a short sentence
 # explaining why that version or config should not be used (or None).
 BlockedWithMsg = dict[str, str | None]
+
+
+@dataclasses.dataclass(frozen=True)
+class IsBlocked:
+  """Class to store information about a version or config being blocked.
+
+  Also contains an optional message explaining why the version or config is
+  blocked.
+  """
+
+  result: bool
+  blocked_msg: str | None = None
 
 
 @dataclasses.dataclass(frozen=True)
@@ -56,15 +72,31 @@ class BlockedVersions:
 
   def is_blocked(
       self, version: str | Version, config: str | None = None
-  ) -> bool:
-    """Checks whether a version or config is blocked."""
+  ) -> IsBlocked:
+    """Checks whether a version or config is blocked.
+
+    Args:
+      version: The version to check.
+      config: The config to check. If None, the version is checked.
+
+    Returns:
+      An IsBlocked object. If IsBlocked.result is True, IsBlocked.blocked_msg
+      contains the message explaining why the version or config is blocked, if
+      it exists, or a default message otherwise.
+    """
     if isinstance(version, Version):
       version = str(version)
     if version in self.versions:
-      return True
+      blocked_msg = self.versions[version] or f"Version {version} is blocked."
+      return IsBlocked(True, blocked_msg)
     if config is not None and version in self.configs:
-      return config in self.configs[version]
-    return False
+      if config in self.configs[version]:
+        blocked_msg = (
+            self.configs[version][config]
+            or f"Config {config} for version {version} is blocked."
+        )
+        return IsBlocked(True, blocked_msg)
+    return IsBlocked(False)
 
 
 class Experiment(enum.Enum):

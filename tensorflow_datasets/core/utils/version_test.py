@@ -151,18 +151,25 @@ def test_str_to_version():
 
 
 @pytest.mark.parametrize(
-    'blocked_version, blocked_config, expected',
+    'blocked_version, blocked_config, expected_res, expected_msg',
     [
-        ('1.2.3', None, True),
-        ('1.0.0', None, False),
-        ('1.2.3', 'non_existing_config', True),
-        ('1.0.0', 'config_1', True),
-        ('1.0.0', 'config_2', True),
-        ('1.0.0', 'config_1', True),
-        ('1.1.0', 'config_2', False),
+        ('1.2.3', None, True, 'Version 1.2.3 is blocked.'),
+        ('1.0.0', None, False, None),
+        ('1.2.3', 'non_existing_config', True, 'Version 1.2.3 is blocked.'),
+        ('1.0.0', 'config_1', True, 'blocked_config'),
+        (
+            '1.0.0',
+            'config_2',
+            True,
+            'Config config_2 for version 1.0.0 is blocked.',
+        ),
+        ('1.1.0', 'config_1', True, 'blocked config in version 1.1.0'),
+        ('1.1.0', 'config_2', False, None),
     ],
 )
-def test_is_blocked(blocked_version, blocked_config, expected):
+def test_is_blocked(
+    blocked_version, blocked_config, expected_res, expected_msg
+):
   blocked_versions = version.BlockedVersions(
       versions={'1.2.3': None},
       configs={
@@ -170,9 +177,9 @@ def test_is_blocked(blocked_version, blocked_config, expected):
           '1.1.0': {'config_1': 'blocked config in version 1.1.0'},
       },
   )
-  assert (
-      blocked_versions.is_blocked(blocked_version, blocked_config) == expected
-  )
+  is_blocked = blocked_versions.is_blocked(blocked_version, blocked_config)
+  assert is_blocked.result == expected_res
+  assert is_blocked.blocked_msg == expected_msg
 
 
 if __name__ == '__main__':

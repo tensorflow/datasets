@@ -94,6 +94,14 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
       yield i, {"x": x}
 
 
+class DummyDatasetWithBlockedVersions(DummyDatasetWithConfigs):
+
+  BLOCKED_VERSIONS = utils.BlockedVersions(
+      versions={"0.0.1": "Version 0.0.1 is blocked"},
+      configs={"0.0.2": {"plus2": "plus2 is blocked for version 0.0.2"}},
+  )
+
+
 class DummyDatasetWithDefaultConfig(DummyDatasetWithConfigs):
   DEFAULT_BUILDER_CONFIG_NAME = "plus2"
 
@@ -392,6 +400,42 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
         set(["cfg1:0.0.1", "cfg1:0.0.2"]),
         set(DummyDatasetWithVersionedConfigs.builder_configs.keys()),
     )
+
+  def test_assert_is_not_blocked(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      tmp_dir = epath.Path(tmp_dir)
+      builder_1 = DummyDatasetWithBlockedVersions(
+          config="plus1", version="0.0.1", data_dir=tmp_dir
+      )
+      builder_2 = DummyDatasetWithBlockedVersions(
+          config="plus2", version="0.0.2", data_dir=tmp_dir
+      )
+      builder_3 = DummyDatasetWithBlockedVersions(
+          config="plus2", version="0.0.1", data_dir=tmp_dir
+      )
+      not_blocked_builder = DummyDatasetWithConfigs(
+          config="plus1", version="0.0.1", data_dir=tmp_dir
+      )
+
+      assert builder_1.blocked_versions is not None
+      assert builder_2.blocked_versions is not None
+      assert builder_3.blocked_versions is not None
+      assert not_blocked_builder.blocked_versions is None
+
+      with pytest.raises(
+          utils.DatasetVariantBlockedError, match="Version 0.0.1 is blocked"
+      ):
+        assert builder_1.assert_is_not_blocked()
+      with pytest.raises(
+          utils.DatasetVariantBlockedError,
+          match="plus2 is blocked for version 0.0.2",
+      ):
+        assert builder_2.assert_is_not_blocked()
+      with pytest.raises(
+          utils.DatasetVariantBlockedError, match="Version 0.0.1 is blocked"
+      ):
+        assert builder_3.assert_is_not_blocked()
+      assert not_blocked_builder.assert_is_not_blocked() is None
 
   def test_versioned_configs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
