@@ -21,7 +21,7 @@ import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_DATASET_URL = "https://drive.google.com/uc?export=download&id=0B7OEHD3T4eCkVGs0TkhUWFN6N1k"
+_DATASET_URL = "https://drive.usercontent.google.com/download?id=0B7OEHD3T4eCkVGs0TkhUWFN6N1k&export=download&confirm=t"
 
 _PROJECT_URL = (
     "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm"
