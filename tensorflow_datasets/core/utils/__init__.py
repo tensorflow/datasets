@@ -42,6 +42,7 @@ from tensorflow_datasets.core.utils.py_utils import get_class_path
 from tensorflow_datasets.core.utils.py_utils import get_class_url
 from tensorflow_datasets.core.utils.py_utils import has_sufficient_disk_space
 from tensorflow_datasets.core.utils.py_utils import incomplete_file
+from tensorflow_datasets.core.utils.py_utils import incomplete_files
 from tensorflow_datasets.core.utils.py_utils import indent
 from tensorflow_datasets.core.utils.py_utils import is_incomplete_file
 from tensorflow_datasets.core.utils.py_utils import is_notebook

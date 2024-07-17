@@ -310,12 +310,13 @@ def nullcontext(enter_result: T = None) -> Iterator[T]:
   yield enter_result
 
 
+def _tmp_file_prefix() -> str:
+  return f'{constants.INCOMPLETE_PREFIX}{uuid.uuid4().hex}'
+
+
 def _tmp_file_name(path: epath.PathLike) -> epath.Path:
   path = epath.Path(path)
-  return (
-      path.parent
-      / f'{constants.INCOMPLETE_PREFIX}{uuid.uuid4().hex}.{path.name}'
-  )
+  return path.parent / f'{_tmp_file_prefix()}.{path.name}'
 
 
 @contextlib.contextmanager
@@ -330,6 +331,25 @@ def incomplete_file(
   finally:
     # Eventually delete the tmp_path if exception was raised
     tmp_path.unlink(missing_ok=True)
+
+
+@contextlib.contextmanager
+def incomplete_files(
+    path: epath.Path,
+) -> Iterator[epath.Path]:
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_file_prefix = _tmp_file_prefix()
+  tmp_path = path.parent / f'{tmp_file_prefix}.{path.name}'
+  try:
+    yield tmp_path
+    # Rename all tmp files to their final name.
+    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
+      file_name = tmp_file.name.removeprefix(tmp_file_prefix + '.')
+      tmp_file.replace(path.parent / file_name)
+  finally:
+    # Eventually delete the tmp_path if exception was raised
+    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
+      tmp_file.unlink(missing_ok=True)
 
 
 def is_incomplete_file(path: epath.Path) -> bool:
