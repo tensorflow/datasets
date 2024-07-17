@@ -557,6 +557,15 @@ class DatasetBuilder(registered.RegisteredDataset):
     """Returns whether this dataset is already downloaded and prepared."""
     return self.data_path.exists()
 
+  def is_blocked(self) -> utils.IsBlocked:
+    """Returns whether this builder (version, config) is blocked."""
+    config_name = self.builder_config.name if self.builder_config else None
+    if blocked_versions := self.blocked_versions:
+      return blocked_versions.is_blocked(
+          version=self.version, config=config_name
+      )
+    return utils.IsBlocked(False)
+
   def assert_is_not_blocked(self) -> None:
     """Checks that the dataset is not blocked."""
     config_name = self.builder_config.name if self.builder_config else None

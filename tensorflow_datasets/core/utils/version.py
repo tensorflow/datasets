@@ -50,8 +50,11 @@ class IsBlocked:
   blocked.
   """
 
-  result: bool
+  result: bool = False
   blocked_msg: str | None = None
+
+  def __bool__(self) -> bool:
+    return self.result
 
 
 @dataclasses.dataclass(frozen=True)

@@ -150,6 +150,12 @@ def test_str_to_version():
   assert v1 == v0
 
 
+@pytest.mark.parametrize('is_blocked_result', [True, False])
+def test_is_blocked_bool(is_blocked_result):
+  is_blocked = version.IsBlocked(is_blocked_result)
+  assert bool(is_blocked) == is_blocked_result
+
+
 @pytest.mark.parametrize(
     'blocked_version, blocked_config, expected_res, expected_msg',
     [

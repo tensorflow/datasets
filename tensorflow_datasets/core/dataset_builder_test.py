@@ -401,6 +401,22 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
         set(DummyDatasetWithVersionedConfigs.builder_configs.keys()),
     )
 
+  def test_is_blocked(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      tmp_dir = epath.Path(tmp_dir)
+      builder_1 = DummyDatasetWithBlockedVersions(
+          config="plus1", version="0.0.1", data_dir=tmp_dir
+      )
+      builder_2 = DummyDatasetWithBlockedVersions(
+          config="plus2", version="0.0.2", data_dir=tmp_dir
+      )
+      not_blocked_builder = DummyDatasetWithConfigs(
+          config="plus1", version="0.0.1", data_dir=tmp_dir
+      )
+      assert builder_1.is_blocked()
+      assert builder_2.is_blocked()
+      assert not not_blocked_builder.is_blocked()
+
   def test_assert_is_not_blocked(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       tmp_dir = epath.Path(tmp_dir)
@@ -736,7 +752,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     )
 
   def test_explicitly_passed(self):
-    # When a dir is explictly passed, use it.
+    # When a dir is explicitly passed, use it.
     self.assertBuildDataDir(
         self.builder._build_data_dir(self.other_data_dir), self.other_data_dir
     )
@@ -801,7 +817,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     with self.assertRaisesRegex(ValueError, "found in more than one directory"):
       self.builder._build_data_dir(None)
 
-  def test_expicit_multi_dir(self):
+  def test_explicit_multi_dir(self):
     # If two data dirs contains the same version
     # Data dir is explicitly passed
     file_utils.add_data_dir(self.other_data_dir)
@@ -979,7 +995,7 @@ class DatasetBuilderGenerateModeTest(testing.TestCase):
       assert len(info_proto.data_source_accesses) == 1
       assert info_proto.data_source_accesses[0].file_system.path == "/x/y"
       builder.download_and_prepare()
-      # Manually check information was indeed written in datset_info.json and
+      # Manually check information was indeed written in dataset_info.json and
       # can be reloaded:
       builder = testing.DummyMnist(data_dir=tmp_dir)
       info_proto = builder.info.as_proto
