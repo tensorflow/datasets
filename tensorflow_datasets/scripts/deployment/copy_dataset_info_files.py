@@ -13,7 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Copy the info files from placer to GCS bucket.
+r"""Copy the info files from one directory to another.
+
+If no destination is specified, the default is TFDS GCS bucket.
 """
 
 import os
