@@ -35,8 +35,8 @@ from tensorflow_datasets.core.community import register_package
 from tensorflow_datasets.core.github_api import github_path
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils import gcs_utils
-from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import py_utils
 import yaml
 
@@ -223,12 +223,10 @@ class DatasetDocumentation:
 
     def format_splits(split_infos: Sequence[dataset_info_pb2.SplitInfo]) -> str:
       splits_str = ('\n').join(
-          sorted(
-              [
-                  f"`'{split.name}'` | {sum(split.shard_lengths)}"
-                  for split in split_infos
-              ]
-          )
+          sorted([
+              f"`'{split.name}'` | {sum(split.shard_lengths)}"
+              for split in split_infos
+          ])
       )
       return textwrap.dedent(f"""
             Split  | Examples
@@ -255,11 +253,11 @@ class DatasetDocumentation:
         config_name: str, info: dataset_info_pb2.DatasetInfo
     ) -> str:
       if self.namespace and self.namespace == 'huggingface':
-        tfds_id = huggingface_utils.convert_hf_name(self.tfds_id)
+        tfds_id = conversion_utils.to_tfds_name(self.tfds_id)
       else:
         tfds_id = self.tfds_id
       if config_name != 'default':
-        config_name = huggingface_utils.convert_hf_name(config_name)
+        config_name = conversion_utils.to_tfds_name(config_name)
         tfds_id = f'{tfds_id}/{config_name}'
       if keep_short:
         features = ''
@@ -517,7 +515,7 @@ def build_overview(
 
 
 def build_namespace_details(
-    formatter_per_namespace: Mapping[str, NamespaceFormatter]
+    formatter_per_namespace: Mapping[str, NamespaceFormatter],
 ) -> Iterator[Tuple[str, str]]:
   """Generates all the detail pages for all namespaces and datasets."""
   for namespace, formatter in formatter_per_namespace.items():
@@ -534,7 +532,7 @@ def build_namespace_dataset_details(
 
 
 def build_toc_yaml(
-    formatter_per_namespace: Mapping[str, NamespaceFormatter]
+    formatter_per_namespace: Mapping[str, NamespaceFormatter],
 ) -> Mapping[str, Any]:
   """Returns a mapping representing the TOC (to be converted into Yaml)."""
   toc_relative_path = '/datasets/community_catalog'

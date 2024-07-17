@@ -20,7 +20,7 @@ from __future__ import annotations
 import dataclasses
 import typing
 
-from tensorflow_datasets.core.utils import huggingface_utils
+from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 
 if typing.TYPE_CHECKING:
@@ -50,13 +50,13 @@ def get_dataset_name(dataset: mlc.Dataset) -> str:
 def get_tfds_dataset_name(dataset: mlc.Dataset) -> str:
   """Returns TFDS compatible dataset name of the given MLcroissant dataset."""
   dataset_name = get_dataset_name(dataset)
-  return huggingface_utils.convert_hf_name(dataset_name)
+  return conversion_utils.to_tfds_name(dataset_name)
 
 
 def get_record_set(record_set_id: str, metadata: mlc.Metadata) -> mlc.RecordSet:
   """Returns the desired record set from a dataset's metadata."""
   for record_set in metadata.record_sets:
-    if huggingface_utils.convert_hf_name(record_set.id) == record_set_id:
+    if conversion_utils.to_tfds_name(record_set.id) == record_set_id:
       return record_set
   raise ValueError(
       f"Did not find any record set with the name {record_set_id}."

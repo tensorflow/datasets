@@ -17,18 +17,13 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
-import datetime
-from typing import Any, Type, TypeVar
+from typing import Type, TypeVar
 
-from etils import epath
 import immutabledict
 import numpy as np
 from tensorflow_datasets.core import features as feature_lib
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core.utils import dtype_utils
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -122,157 +117,7 @@ def convert_hf_features(hf_features) -> feature_lib.FeatureConnector:
   raise TypeError(f'Type {type(hf_features)} is not supported.')
 
 
-def _get_default_value(
-    feature: feature_lib.FeatureConnector,
-) -> Mapping[str, Any] | Sequence[Any] | bytes | int | float | bool:
-  """Returns the default value for a feature.
-
-  Hugging Face is loose as far as typing is concerned. It accepts None values.
-  As long as `tfds.features.Optional` does not exist, we default to a constant
-  default value.
-
-  For int and float, we do not return 0 or -1, but rather -inf, as 0 or -1 can
-  be contained in the values of the dataset. In practice, you can compare your
-  value to:
-
-  ```
-  np.iinfo(np.int32).min  # for integers
-  np.finfo(np.float32).min  # for floats
-  ...
-  ```
-
-  For images, if the HuggingFace dataset does not contain an image, we
-  set a default value which corresponds to a PNG of 1px, black.
-
-  Args:
-    feature: The TFDS feature from which we want the default value.
-
-  Raises:
-    TypeError: If couldn't recognize feature dtype.
-  """
-  match feature:
-    case feature_lib.FeaturesDict():
-      return {
-          name: _get_default_value(inner_feature)
-          for name, inner_feature in feature.items()
-      }
-    case feature_lib.Sequence():
-      match feature.feature:
-        case feature_lib.FeaturesDict():
-          return {feature_name: [] for feature_name in feature.feature.keys()}
-        case _:
-          return []
-    case feature_lib.Image():
-      # Return an empty PNG image of 1x1 pixel, black.
-      return _DEFAULT_IMG
-    case _:
-      if dtype_utils.is_string(feature.np_dtype):
-        return b''
-      elif dtype_utils.is_integer(feature.np_dtype):
-        return np.iinfo(feature.np_dtype).min
-      elif dtype_utils.is_floating(feature.np_dtype):
-        return np.finfo(feature.np_dtype).min
-      elif dtype_utils.is_bool(feature.np_dtype):
-        return False
-      else:
-        raise TypeError(f'Could not recognize the dtype of {feature}')
-
-
-def convert_hf_value(
-    hf_value: Any, feature: feature_lib.FeatureConnector
-) -> Any:
-  """Converts Huggingface value to a TFDS compatible value.
-
-  Args:
-    hf_value: Huggingface value.
-    feature: The TFDS feature for which we want the compatible value.
-
-  Returns:
-    The TFDS compatible value.
-
-  Raises:
-    TypeError: If couldn't recognize the given feature type.
-  """
-  match hf_value:
-    case None:
-      return _get_default_value(feature)
-    case datetime.datetime():
-      return int(hf_value.timestamp())
-
-  match feature:
-    case feature_lib.ClassLabel() | feature_lib.Scalar():
-      return hf_value
-    case feature_lib.FeaturesDict():
-      return {
-          name: convert_hf_value(hf_value.get(name), inner_feature)
-          for name, inner_feature in feature.items()
-      }
-    case feature_lib.Sequence():
-      match hf_value:
-        case dict():
-          # Should be a dict of lists:
-          return {
-              name: [
-                  convert_hf_value(inner_hf_value, inner_feature)
-                  for inner_hf_value in hf_value.get(name)
-              ]
-              for name, inner_feature in feature.feature.items()
-          }
-        case list():
-          return [
-              convert_hf_value(inner_hf_value, feature.feature)
-              for inner_hf_value in hf_value
-          ]
-        case _:
-          return [hf_value]
-    case feature_lib.Audio():
-      if array := hf_value.get('array'):
-        # Hugging Face uses floats, TFDS uses integers.
-        return [int(sample * feature.sample_rate) for sample in array]
-      elif (path := hf_value.get('path')) and (
-          path := epath.Path(path)
-      ).exists():
-        return path
-    case feature_lib.Image():
-      hf_value: lazy_imports_lib.lazy_imports.PIL_Image.Image
-      # Ensure RGB format for PNG encoding.
-      return hf_value.convert('RGB')
-    case feature_lib.Tensor():
-      if isinstance(hf_value, float):
-        # In some cases, for example when loading jsonline files using pandas,
-        # empty non-float values, such as strings, are converted to float nan.
-        # We spot those occurrences as the feature.np_dtype is not float.
-        if np.isnan(hf_value) and not dtype_utils.is_floating(feature.np_dtype):
-          return _get_default_value(feature)
-      return hf_value
-
-  raise TypeError(
-      f'Conversion of value {hf_value} to feature {feature} is not supported.'
-  )
-
-
-def convert_hf_name(hf_name: str) -> str:
-  """Converts Huggingface name to a TFDS compatible dataset name.
-
-  Huggingface names can contain characters that are not supported in
-  TFDS. For example, in Huggingface a dataset name like `a/b` is supported,
-  while in TFDS `b` would be parsed as the config.
-
-  Examples:
-  - `hf_name='codeparrot/github-code'` becomes `codeparrot__github_code`.
-
-  Args:
-    hf_name: Huggingface name.
-
-  Returns:
-    The TFDS compatible dataset name (dataset names, config names and split
-    names).
-  """
-  hf_name = hf_name.lower().replace('/', '__')
-  return py_utils.make_valid_name(hf_name)
-
-
-def convert_tfds_dataset_name(tfds_dataset_name: str) -> str:
+def to_huggingface_name(tfds_dataset_name: str) -> str:
   """Converts TFDS dataset name to a Huggingface compatible dataset name.
 
   As TFDS doesn't support case-sensitive names, we list all HF datasets and pick
@@ -289,7 +134,10 @@ def convert_tfds_dataset_name(tfds_dataset_name: str) -> str:
     existing Huggingface dataset.
   """
   for hf_dataset_name in hf_datasets.list_datasets():
-    if convert_hf_name(hf_dataset_name) == tfds_dataset_name.lower():
+    if (
+        conversion_utils.to_tfds_name(hf_dataset_name)
+        == tfds_dataset_name.lower()
+    ):
       return hf_dataset_name
   raise registered.DatasetNotFoundError(
       f'"{tfds_dataset_name}" is not listed in Huggingface datasets.'

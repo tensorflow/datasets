@@ -49,8 +49,8 @@ from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils import croissant_utils
-from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version as version_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
@@ -194,7 +194,7 @@ class CroissantBuilder(
     if not record_set_ids:
       record_set_ids = croissant_utils.get_record_set_ids(self.metadata)
     config_names = [
-        huggingface_utils.convert_hf_name(record_set)
+        conversion_utils.to_tfds_name(record_set)
         for record_set in record_set_ids
     ]
     self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
@@ -290,7 +290,7 @@ class CroissantBuilder(
       # Some samples might not be TFDS-compatible as-is, e.g. from croissant
       # describing HuggingFace datasets, so we convert them here. This shouldn't
       # impact datasets which are already TFDS-compatible.
-      record = huggingface_utils.convert_hf_value(record, self.info.features)
+      record = conversion_utils.to_tfds_value(record, self.info.features)
       # After partition implementation, the filters will be applied from
       # mlcroissant `dataset.records` directly.
       # `records = records.filter(f == v for f, v in filters.items())``

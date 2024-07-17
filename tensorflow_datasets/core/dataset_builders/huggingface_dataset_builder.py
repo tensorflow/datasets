@@ -44,6 +44,7 @@ from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils import huggingface_utils
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import tqdm_utils
@@ -148,7 +149,7 @@ def _write_shard(
           continue
         else:
           raise
-      example = huggingface_utils.convert_hf_value(hf_value, features)
+      example = conversion_utils.to_tfds_value(hf_value, features)
       encoded_example = features.encode_example(example)
       serialized_example = serializer.serialize_example(encoded_example)
       num_bytes += len(serialized_example)
@@ -205,7 +206,7 @@ class HuggingfaceDatasetBuilder(
     self._hf_config = hf_config
     self.config_kwargs = config_kwargs
     tfds_config = (
-        huggingface_utils.convert_hf_name(hf_config) if hf_config else None
+        conversion_utils.to_tfds_name(hf_config) if hf_config else None
     )
     try:
       self._hf_builder = hf_datasets.load_dataset_builder(
@@ -224,7 +225,7 @@ class HuggingfaceDatasetBuilder(
         or '1.0.0'
     )
     self.VERSION = version_lib.Version(version)  # pylint: disable=invalid-name
-    self.name = huggingface_utils.convert_hf_name(hf_repo_id)
+    self.name = conversion_utils.to_tfds_name(hf_repo_id)
     self._hf_hub_token = hf_hub_token
     self._hf_num_proc = hf_num_proc
     self._tfds_num_proc = tfds_num_proc
@@ -312,7 +313,7 @@ class HuggingfaceDatasetBuilder(
 
     shard_specs_by_split: dict[str, Sequence[_ShardSpec]] = {}
     for hf_split, hf_split_info in self._hf_info.splits.items():
-      split = huggingface_utils.convert_hf_name(hf_split)
+      split = conversion_utils.to_tfds_name(hf_split)
       shard_specs_by_split[split] = self._compute_shard_specs(
           hf_split_info, split
       )
@@ -455,7 +456,7 @@ class HuggingfaceDatasetBuilder(
 def builder(
     name: str, config: Optional[str] = None, **builder_kwargs
 ) -> HuggingfaceDatasetBuilder:
-  hf_repo_id = huggingface_utils.convert_tfds_dataset_name(name)
+  hf_repo_id = huggingface_utils.to_huggingface_name(name)
   return HuggingfaceDatasetBuilder(
       hf_repo_id=hf_repo_id, hf_config=config, **builder_kwargs
   )
