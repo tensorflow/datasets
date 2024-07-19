@@ -57,6 +57,40 @@ def test_get_record_set_ids():
   assert record_set_ids == ['record_set_1']
 
 
+def test_get_split_recordset():
+  record_sets = [
+      mlc.RecordSet(
+          id='records',
+          fields=[
+              mlc.Field(
+                  id='records/split',
+                  data_types=[mlc.DataType.TEXT],
+                  references=mlc.Source(field='splits/name'),
+              )
+          ],
+      ),
+      mlc.RecordSet(
+          id='splits',
+          key='name',
+          data_types=[mlc.DataType.SPLIT],
+          fields=[
+              mlc.Field(
+                  id='splits/name', name='name', data_types=mlc.DataType.TEXT
+              )
+          ],
+          data=[{'name': 'train'}, {'name': 'test'}],
+      ),
+  ]
+  metadata = mlc.Metadata(name='dummy', url='dum.my', record_sets=record_sets)
+  dataset = mlc.Dataset.from_metadata(metadata)
+  split_recordset = croissant_utils.get_split_recordset(
+      record_set=dataset.metadata.record_sets[0], metadata=metadata
+  )
+  assert split_recordset is not None
+  assert split_recordset.reference_field.id == 'records/split'
+  assert split_recordset.split_record_set.id == 'splits'
+
+
 def test_get_split_recordset_with_no_split_recordset():
   record_sets = [
       mlc.RecordSet(
