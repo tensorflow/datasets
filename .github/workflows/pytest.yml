@@ -1,24 +1,9 @@
 name: Unittests
 
 on:
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - master
-    # Do not trigger tests for documentation or markdown docs.
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
-  push:
-    branches:
-      - master
-    # Do not trigger tests for documentation or markdown docs.
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
-  schedule:
-    # Trigger tests every day at 02:00 UTC to refresh cache.
-    - cron: '0 2 * * *'
+  workflow_run:
+    workflows: ["Tests trigger"]
+    types: [completed]
 
 # Cancel in-progress runs for the current workflow if not on the main branch
 # (as it mark the unittests as failed).
@@ -33,27 +18,8 @@ env:
   PYTEST_NUM_SHARDS: 4  # Controls tests sharding enabled by `pytest-shard`
 
 jobs:
-  activate-tests:
-    name: Check if tests should be run
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check
-        id: check
-        # For merged PR, activate testing only on the master branch, based on:
-        # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
-        run: |
-          echo "status=${{ github.ref == 'refs/heads/master' || (
-            github.event.action != 'closed'
-            && github.event.pull_request.merged == false
-          ) }}" >> $GITHUB_OUTPUT
-
-    outputs:
-      status: ${{ steps.check.outputs.status }}
-
   shards-job:
-    needs: activate-tests
-    if: ${{ needs.activate-tests.outputs.status }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     name: Generate shards
     runs-on: ubuntu-latest

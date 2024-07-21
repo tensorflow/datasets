@@ -1,0 +1,52 @@
+name: Tests trigger
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    # Do not trigger tests for documentation or markdown docs.
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  push:
+    branches:
+      - master
+    # Do not trigger tests for documentation or markdown docs.
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  schedule:
+    # Trigger tests every day at 02:00 UTC to refresh cache.
+    - cron: '0 2 * * *'
+
+jobs:
+  activate-tests:
+    name: Check if tests should be run
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check
+        id: check
+        # For merged PR, activate testing only on the master branch, based on:
+        # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
+        run: |
+          echo "status=${{ github.ref == 'refs/heads/master' || (
+            github.event.action != 'closed'
+            && github.event.pull_request.merged == false
+          ) }}" >> $GITHUB_OUTPUT
+
+      - name: Trigger tests
+        if: ${{ steps.check.outputs.status == 'true' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            core.summary.addHeading(':white_check_mark: trigger tests', '2')
+
+      - name: No tests
+        if: ${{ steps.check.outputs.status != 'true' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            core.summary.addHeading(':x: no need to trigger tests', '2')
+            core.setFailed('Tests do not need to run')
