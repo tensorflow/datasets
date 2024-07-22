@@ -363,6 +363,19 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
   if not all_builder_dirs:
     all_dirs_str = '\n\t- '.join([''] + [str(dir) for dir in all_data_dirs])
     error_msg = f'No registered data_dirs were found in:{all_dirs_str}\n'
+
+    # If the dataset root_dir exists, a common error is that the config name
+    # was not specified. So we list the possible configs and display them.
+    possible_configs = _list_possible_configs(name, all_data_dirs)
+    if possible_configs:
+      configs = '\n\t- '.join([''] + list(possible_configs))
+      error_msg = (
+          f'However, a folder for "{name.name}" does exist. Is it possible that'
+          ' you specified the wrong config? You can add a config by replacing'
+          f' `tfds.load({name.name})` by `tfds.load("{name.name}/my_config")`.'
+          f' Possible configs are:{configs}\n'
+      )
+
     error_utils.add_context(error_msg)
     return None
 
@@ -383,6 +396,19 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
     )
 
   return all_builder_dirs.pop()
+
+
+def _list_possible_configs(
+    name: naming.DatasetName, all_data_dirs: set[epath.PathLike]
+) -> Sequence[str]:
+  configs = []
+  for data_dir in all_data_dirs:
+    root_dir = epath.Path(data_dir) / name.name
+    if root_dir.exists():
+      for path in root_dir.iterdir():
+        if path.is_dir():
+          configs.append(path.name)
+  return configs
 
 
 def _get_dataset_dir(
