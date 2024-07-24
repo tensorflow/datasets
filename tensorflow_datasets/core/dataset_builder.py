@@ -583,7 +583,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       download_dir: epath.PathLike | None = None,
       download_config: download.DownloadConfig | None = None,
       file_format: str | file_adapters.FileFormat | None = None,
-      permissions: file_utils.Permissions | None = None,
+      permissions: file_utils.Permissions = file_utils.Permissions(mode=0o775),
   ) -> None:
     """Downloads and prepares dataset for reading.
 
@@ -594,8 +594,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         downloading and preparing dataset.
       file_format: optional `str` or `file_adapters.FileFormat`, format of the
         record files in which the dataset will be written.
-      permissions: optional permissions to set on the generated folder and
-        files.
+      permissions: permissions to set on the generated folder and files.
+        Defaults to 0o775 instead of gFile's default 0o750.
 
     Raises:
       IOError: if there is not enough disk space available.
