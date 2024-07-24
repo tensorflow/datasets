@@ -828,9 +828,12 @@ class DatasetBuilder(registered.RegisteredDataset):
         [f.value for f in random_access_formats]
     )
     unsupported_format_msg = (
-        f"Random access data source for file format {info.file_format} is"
-        " not supported. Can you try to run download_and_prepare with"
-        f" file_format set to one of: {random_access_formats_msg}?"
+        f"Random access data source for file format {info.file_format} is not"
+        " supported. Possible root causes:\n\t* You have to run"
+        " download_and_prepare with"
+        f" file_format={random_access_formats_msg}.\n\t* The dataset is already"
+        f" prepared at {self.data_dir} in the {info.file_format} format. Either"
+        " choose another data_dir or delete the data."
     )
 
     if info.file_format is None and not info.alternative_file_formats:
