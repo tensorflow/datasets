@@ -260,7 +260,7 @@ class CroissantBuilder(
           split['name']: self._generate_examples(
               filters={
                   **self._filters,
-                  split_reference.reference_field.id: split['name'].encode(),
+                  split_reference.reference_field.id: split['name'],
               }
           )
           for split in split_reference.split_record_set.data
@@ -285,15 +285,10 @@ class CroissantBuilder(
     record_set = croissant_utils.get_record_set(
         self.builder_config.name, metadata=self.metadata
     )
-    records = self.dataset.records(record_set.id)
+    records = self.dataset.records(record_set.id, filters=filters)
     for i, record in enumerate(records):
       # Some samples might not be TFDS-compatible as-is, e.g. from croissant
       # describing HuggingFace datasets, so we convert them here. This shouldn't
       # impact datasets which are already TFDS-compatible.
       record = conversion_utils.to_tfds_value(record, self.info.features)
-      # After partition implementation, the filters will be applied from
-      # mlcroissant `dataset.records` directly.
-      # `records = records.filter(f == v for f, v in filters.items())``
-      # For now, we apply them in TFDS.
-      if all(record[filter] == value for filter, value in filters.items()):
-        yield i, record
+      yield i, record
