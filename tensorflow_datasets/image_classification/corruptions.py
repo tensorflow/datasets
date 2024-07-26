@@ -132,7 +132,7 @@ def plasma_fractal(mapsize=512, wibbledecay=3):
   """
   if mapsize & (mapsize - 1) != 0:
     raise ValueError('mapsize must be a power of two.')
-  maparray = np.empty((mapsize, mapsize), dtype=np.float_)
+  maparray = np.empty((mapsize, mapsize), dtype=np.float64)
   maparray[0, 0] = 0
   stepsize = mapsize
   wibble = 100

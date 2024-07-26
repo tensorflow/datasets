@@ -247,7 +247,7 @@ def _write_audio_file(np_audio, path, file_format):
         f'`{np_audio.dtype}`.'
     )
 
-  data = array.array(np.sctype2char(dtype), np_audio.reshape((-1,)))
+  data = array.array(np.dtype(dtype).char, np_audio.reshape((-1,)))
   sample_width = np.dtype(dtype).alignment
   num_channels = np_audio.shape[1] if len(np_audio.shape) == 2 else 1
 
