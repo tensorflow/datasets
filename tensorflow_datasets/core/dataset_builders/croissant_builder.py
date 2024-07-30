@@ -38,6 +38,7 @@ from collections.abc import Mapping
 from typing import Any, Dict, Optional, Sequence
 
 from etils import epath
+import mlcroissant as mlc
 import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -53,7 +54,6 @@ from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils import croissant_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version as version_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 
 
