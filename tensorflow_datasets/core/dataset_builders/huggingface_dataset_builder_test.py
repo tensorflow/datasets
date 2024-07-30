@@ -114,6 +114,7 @@ def test_dataset_info(builder):
   assert builder.info.description == 'description'
   assert builder.info.citation == 'citation from the hub'
   assert builder.info.redistribution_info.license == 'test-license'
+  assert builder.info.homepage == 'https://huggingface.co/datasets/foo/bar'
 
 
 def test_download_and_prepare(builder):

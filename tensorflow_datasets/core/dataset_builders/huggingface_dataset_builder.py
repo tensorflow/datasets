@@ -226,6 +226,7 @@ class HuggingfaceDatasetBuilder(
     )
     self.VERSION = version_lib.Version(version)  # pylint: disable=invalid-name
     self.name = conversion_utils.to_tfds_name(hf_repo_id)
+    self.homepage = f'https://huggingface.co/datasets/{hf_repo_id}'
     self._hf_hub_token = hf_hub_token
     self._hf_num_proc = hf_num_proc
     self._tfds_num_proc = tfds_num_proc
@@ -233,10 +234,13 @@ class HuggingfaceDatasetBuilder(
         'no_checks' if ignore_verifications else 'all_checks'
     )
     if self._hf_config:
+      description = self._get_text_field('description')
+      if self._is_gated():
+        description = self._gated_text + '\n' + description
       self._converted_builder_config = dataset_builder.BuilderConfig(
           name=tfds_config,
           version=self.VERSION,
-          description=self._get_text_field('description'),
+          description=description,
       )
     else:
       self._converted_builder_config = None
@@ -277,6 +281,48 @@ class HuggingfaceDatasetBuilder(
         self._hf_repo_id, token=self._hf_hub_token
     )
 
+  def _is_gated(self) -> bool:
+    """Whether the dataset is gated."""
+    # Gated datasets return a string ('manual' or 'automatic').
+    if isinstance(self._hf_hub_info.gated, str):
+      return True
+    return False
+
+  @property
+  def _gated_dataset_warning(self) -> str:
+    """The warning message for a gated dataset."""
+    return (
+        'WARNING: This dataset is gated. Before using it, make sure to sign'
+        f' the conditions at: {self.homepage}. Important: access requests are'
+        ' always granted to individual users rather than to entire'
+        ' organizations.'
+    )
+
+  @property
+  def _gated_text(self) -> str | None:
+    """Returns the conditions for a dataset, if it is gated.
+
+    All datasets share the same default conditions. Extra conditions are stored
+    in the dataset card:
+    https://huggingface.co/docs/hub/en/datasets-gated
+
+    Returns:
+      The gated text if the dataset is gated. None otherwise.
+    """
+    if self._is_gated():
+      # This condition is the same for all gated datasets.
+      conditions = (
+          'The conditions consist of:\nBy agreeing you accept to share your'
+          ' contact information (email and username) with the repository'
+          ' authors.'
+      )
+      if dataset_card := self._hf_hub_info.card_data:
+        gated_text = dataset_card.get('extra_gated_prompt', None)
+        if gated_text:
+          conditions = conditions + '\n' + gated_text
+      return self._gated_dataset_warning + '\n' + conditions
+    return None
+
   def _hf_features(self) -> hf_datasets.Features:
     if not self._hf_info.features:
       # We need to download and prepare the data to know its features.
@@ -285,13 +331,19 @@ class HuggingfaceDatasetBuilder(
     return self._hf_info.features
 
   def _info(self) -> dataset_info_lib.DatasetInfo:
+    ds_description = self._get_text_field('description')
+    ds_license = self._get_license()
+    if self._is_gated():
+      ds_description = self._gated_text + '\n' + ds_description
+      ds_license = ds_license + ' ' + self._gated_dataset_warning
     return dataset_info_lib.DatasetInfo(
         builder=self,
-        description=self._get_text_field('description'),
+        description=ds_description,
         features=huggingface_utils.convert_hf_features(self._hf_features()),
         citation=self._get_text_field('citation'),
-        license=self._get_license(),
+        license=ds_license,
         supervised_keys=_extract_supervised_keys(self._hf_info),
+        homepage=self.homepage,
     )
 
   def _split_generators(
