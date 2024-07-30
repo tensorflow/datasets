@@ -158,6 +158,24 @@ message TfdsDatasetReference {
   string split = 6;
 }
 
+// Blocked versions or configs of a TFDS dataset.
+message BlockedVersions {
+  // A mapping from bad versions, for which all configs should be blocked, to an
+  // optional message explaining why the version is blocked. If the message is
+  // empty, it means that it has not been set.
+  map<string, string> versions = 1;
+
+  message BadConfigs {
+    map<string, string> configs = 1;
+  }
+
+  // A mapping from versions to a dictionary of configs that should not be used
+  // for that version, each with the optional corresponding message explaining
+  // why the combination of string and config should be blocked. If the message
+  // is empty, it means that it has not been set.
+  map<string, BadConfigs> configs = 2;
+}
+
 // This is a serialization of tensorflow_datasets.core.DatasetInfo.
 message DatasetInfo {
   string name = 1;
@@ -231,5 +249,8 @@ message DatasetInfo {
   // The data that was used to generate this dataset.
   repeated DataSourceAccess data_source_accesses = 20;
 
-  // Next available: 22
+  // Blocked versions and configs for the dataset.
+  BlockedVersions blocked_versions = 23;
+
+  // Next available: 24
 }

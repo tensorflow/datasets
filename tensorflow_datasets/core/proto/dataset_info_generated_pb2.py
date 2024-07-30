@@ -67,7 +67,16 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\t\x12\x10\n\x08\x64\x61ta_dir\x18\x04'
     b' \x01(\t\x12\x14\n\x0c\x64s_namespace\x18\x05'
     b' \x01(\t\x12\r\n\x05split\x18\x06'
-    b' \x01(\t"\xd6\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
+    b' \x01(\t"\xbb\x03\n\x0f\x42lockedVersions\x12\x44\n\x08versions\x18\x01'
+    b' \x03(\x0b\x32\x32.tensorflow_datasets.BlockedVersions.VersionsEntry\x12\x42\n\x07\x63onfigs\x18\x02'
+    b' \x03(\x0b\x32\x31.tensorflow_datasets.BlockedVersions.ConfigsEntry\x1a/\n\rVersionsEntry\x12\x0b\n\x03key\x18\x01'
+    b' \x01(\t\x12\r\n\x05value\x18\x02'
+    b' \x01(\t:\x02\x38\x01\x1a\x8b\x01\n\nBadConfigs\x12M\n\x07\x63onfigs\x18\x01'
+    b' \x03(\x0b\x32<.tensorflow_datasets.BlockedVersions.BadConfigs.ConfigsEntry\x1a.\n\x0c\x43onfigsEntry\x12\x0b\n\x03key\x18\x01'
+    b' \x01(\t\x12\r\n\x05value\x18\x02'
+    b' \x01(\t:\x02\x38\x01\x1a_\n\x0c\x43onfigsEntry\x12\x0b\n\x03key\x18\x01'
+    b' \x01(\t\x12>\n\x05value\x18\x02'
+    b' \x01(\x0b\x32/.tensorflow_datasets.BlockedVersions.BadConfigs:\x02\x38\x01"\x96\x08\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
     b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02'
     b' \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12I\n\rrelease_notes\x18\x12'
     b' \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r'
@@ -88,7 +97,8 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x12'
     b' \n\x18\x61lternative_file_formats\x18\x16'
     b' \x03(\t\x12\x43\n\x14\x64\x61ta_source_accesses\x18\x14'
-    b' \x03(\x0b\x32%.tensorflow_datasets.DataSourceAccess\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
+    b' \x03(\x0b\x32%.tensorflow_datasets.DataSourceAccess\x12>\n\x10\x62locked_versions\x18\x17'
+    b' \x01(\x0b\x32$.tensorflow_datasets.BlockedVersions\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
     b' \x01(\t\x12\r\n\x05value\x18\x02'
     b' \x01(\t:\x02\x38\x01\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01'
     b' \x01(\t\x12\r\n\x05value\x18\x02'
@@ -109,6 +119,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SUPERVISEDKEYS.fields_by_name['input']._serialized_options = b'\030\001'
   _SUPERVISEDKEYS.fields_by_name['output']._options = None
   _SUPERVISEDKEYS.fields_by_name['output']._serialized_options = b'\030\001'
+  _BLOCKEDVERSIONS_VERSIONSENTRY._options = None
+  _BLOCKEDVERSIONS_VERSIONSENTRY._serialized_options = b'8\001'
+  _BLOCKEDVERSIONS_BADCONFIGS_CONFIGSENTRY._options = None
+  _BLOCKEDVERSIONS_BADCONFIGS_CONFIGSENTRY._serialized_options = b'8\001'
+  _BLOCKEDVERSIONS_CONFIGSENTRY._options = None
+  _BLOCKEDVERSIONS_CONFIGSENTRY._serialized_options = b'8\001'
   _DATASETINFO_RELEASENOTESENTRY._options = None
   _DATASETINFO_RELEASENOTESENTRY._serialized_options = b'8\001'
   _DATASETINFO_DOWNLOADCHECKSUMSENTRY._options = None
@@ -145,10 +161,20 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SQLQUERY._serialized_end = 1278
   _TFDSDATASETREFERENCE._serialized_start = 1280
   _TFDSDATASETREFERENCE._serialized_end = 1404
-  _DATASETINFO._serialized_start = 1407
-  _DATASETINFO._serialized_end = 2389
-  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2280
-  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2331
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2333
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2389
+  _BLOCKEDVERSIONS._serialized_start = 1407
+  _BLOCKEDVERSIONS._serialized_end = 1850
+  _BLOCKEDVERSIONS_VERSIONSENTRY._serialized_start = 1564
+  _BLOCKEDVERSIONS_VERSIONSENTRY._serialized_end = 1611
+  _BLOCKEDVERSIONS_BADCONFIGS._serialized_start = 1614
+  _BLOCKEDVERSIONS_BADCONFIGS._serialized_end = 1753
+  _BLOCKEDVERSIONS_BADCONFIGS_CONFIGSENTRY._serialized_start = 1707
+  _BLOCKEDVERSIONS_BADCONFIGS_CONFIGSENTRY._serialized_end = 1753
+  _BLOCKEDVERSIONS_CONFIGSENTRY._serialized_start = 1755
+  _BLOCKEDVERSIONS_CONFIGSENTRY._serialized_end = 1850
+  _DATASETINFO._serialized_start = 1853
+  _DATASETINFO._serialized_end = 2899
+  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2790
+  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2841
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2843
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2899
 # @@protoc_insertion_point(module_scope)

@@ -17,7 +17,35 @@
 
 import pytest
 from tensorflow_datasets import testing
+from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import version
+
+
+DUMMY_BLOCKED_VERSIONS = version.BlockedVersions(
+    versions={'1.2.3': None},
+    configs={
+        '1.0.0': {'config_1': 'blocked_config', 'config_2': None},
+        '1.1.0': {'config_1': 'blocked config in version 1.1.0'},
+    },
+)
+
+
+DUMMY_PROTO = dataset_info_pb2.BlockedVersions(
+    versions={'1.2.3': ''},
+    configs={
+        '1.0.0': dataset_info_pb2.BlockedVersions.BadConfigs(
+            configs={
+                'config_1': 'blocked_config',
+                'config_2': '',
+            }
+        ),
+        '1.1.0': dataset_info_pb2.BlockedVersions.BadConfigs(
+            configs={
+                'config_1': 'blocked config in version 1.1.0',
+            }
+        ),
+    },
+)
 
 
 class VersionTest(testing.TestCase):
@@ -186,6 +214,16 @@ def test_is_blocked(
   is_blocked = blocked_versions.is_blocked(blocked_version, blocked_config)
   assert is_blocked.result == expected_res
   assert is_blocked.blocked_msg == expected_msg
+
+
+def test_blocked_versions_to_proto():
+  assert DUMMY_BLOCKED_VERSIONS.to_proto() == DUMMY_PROTO
+
+
+def test_blocked_versions_from_proto():
+  assert (
+      DUMMY_BLOCKED_VERSIONS.from_proto(DUMMY_PROTO) == DUMMY_BLOCKED_VERSIONS
+  )
 
 
 if __name__ == '__main__':

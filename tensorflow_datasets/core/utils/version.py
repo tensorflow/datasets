@@ -23,6 +23,7 @@ import re
 from typing import List, Tuple, Union
 
 from etils import epath
+from tensorflow_datasets.core.proto import dataset_info_pb2
 
 _VERSION_TMPL = r"^(?P<major>{v})" r"\.(?P<minor>{v})" r"\.(?P<patch>{v})$"
 _NO_LEADING_ZEROS = r"\d|[1-9]\d*"
@@ -57,6 +58,26 @@ class IsBlocked:
     return self.result
 
 
+def substitute_empty_msg(
+    blocked_with_msg: BlockedWithMsg, default_msg: str | None = ""
+) -> BlockedWithMsg:
+  """Substitutes empty messages in BlockedWithMsg with a default msg.
+
+  Empty messages are None messages, or messages which are set to the empty
+  string.
+
+  Args:
+    blocked_with_msg: A dictionary of blocked versions or configs.
+    default_msg: The message to substitute empty messages with. Defaults to the
+      empty string.
+
+  Returns:
+    A dictionary of blocked versions or configs with empty messages substituted
+    with `default_msg`.
+  """
+  return {key: value or default_msg for key, value in blocked_with_msg.items()}
+
+
 @dataclasses.dataclass(frozen=True)
 class BlockedVersions:
   """Holds information on versions and configs that should not be used.
@@ -72,6 +93,58 @@ class BlockedVersions:
 
   versions: BlockedWithMsg = dataclasses.field(default_factory=dict)
   configs: dict[str, BlockedWithMsg] = dataclasses.field(default_factory=dict)
+
+  def to_proto(self) -> dataset_info_pb2.BlockedVersions:
+    """Converts to a dataset_info_pb2.BlockedVersions proto.
+
+    Blocked messages which are set to None are converted to empty strings.
+
+    Returns:
+      A dataset_info_pb2.BlockedVersions proto.
+    """
+    return dataset_info_pb2.BlockedVersions(
+        versions=substitute_empty_msg(self.versions),
+        configs={
+            version: dataset_info_pb2.BlockedVersions.BadConfigs(
+                configs={
+                    config_name: bad_msg
+                    for config_name, bad_msg in substitute_empty_msg(
+                        bad_configs
+                    ).items()
+                }
+            )
+            for version, bad_configs in self.configs.items()
+        },
+    )
+
+  @classmethod
+  def from_proto(
+      cls, proto: dataset_info_pb2.BlockedVersions
+  ) -> BlockedVersions:
+    """Get BlockedVersions from a dataset_info_pb2.BlockedVersions proto."""
+
+    def _get_configs(proto_configs) -> dict[str, BlockedWithMsg] | None:
+      if proto_configs is None:
+        return None
+
+      return {
+          version: substitute_empty_msg(
+              {
+                  config_name: bad_msg
+                  for config_name, bad_msg in bad_configs.configs.items()
+              },
+              default_msg=None,
+          )
+          for version, bad_configs in proto_configs.items()
+      }
+
+    return cls(
+        versions=substitute_empty_msg(
+            {version: msg for version, msg in proto.versions.items()},
+            default_msg=None,
+        ),
+        configs=_get_configs(proto.configs),
+    )
 
   def is_blocked(
       self, version: str | Version, config: str | None = None
