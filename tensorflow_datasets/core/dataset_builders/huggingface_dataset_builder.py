@@ -334,8 +334,16 @@ class HuggingfaceDatasetBuilder(
     ds_description = self._get_text_field('description')
     ds_license = self._get_license()
     if self._is_gated():
-      ds_description = self._gated_text + '\n' + ds_description
-      ds_license = ds_license + ' ' + self._gated_dataset_warning
+      ds_description = (
+          f'{self._gated_text}\n{ds_description}'
+          if ds_description
+          else self._gated_text
+      )
+      ds_license = (
+          f'{ds_license} {self._gated_dataset_warning}'
+          if ds_license
+          else self._gated_dataset_warning
+      )
     return dataset_info_lib.DatasetInfo(
         builder=self,
         description=ds_description,
