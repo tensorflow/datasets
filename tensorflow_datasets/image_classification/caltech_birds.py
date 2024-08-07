@@ -33,7 +33,7 @@ dataset and 11,788 images in the 2011 dataset.
 Annotations include bounding boxes, segmentation labels.
 """
 
-_URL = "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+_URL = "https://www.vision.caltech.edu/datasets/cub_200_2011/"
 _CITATION = """\
 @techreport{WelinderEtal2010,
 Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
