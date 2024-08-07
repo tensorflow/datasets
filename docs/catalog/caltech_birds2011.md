@@ -5,7 +5,7 @@
   <meta itemprop="name" content="caltech_birds2011" />
   <meta itemprop="description" content="Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos &#10;of 200 bird species (mostly North American). The total number of &#10;categories of birds is 200 and there are 6033 images in the 2010 &#10;dataset and 11,788 images in the 2011 dataset.&#10;Annotations include bounding boxes, segmentation labels.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;caltech_birds2011&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/caltech_birds2011" />
-  <meta itemprop="sameAs" content="http://www.vision.caltech.edu/visipedia/CUB-200.html" />
+  <meta itemprop="sameAs" content="https://www.vision.caltech.edu/datasets/cub_200_2011/" />
   <meta itemprop="citation" content="@techreport{WelinderEtal2010,&#10;Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},&#10;Institution = {California Institute of Technology},&#10;Number = {CNS-TR-2010-001},&#10;Title = {{Caltech-UCSD Birds 200}},&#10;Year = {2010}&#10;}" />
 </div>
 
@@ -26,7 +26,7 @@ dataset. Annotations include bounding boxes, segmentation labels.
     </span> </a>
 
 *   **Homepage**:
-    [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
+    [https://www.vision.caltech.edu/datasets/cub_200_2011/](https://www.vision.caltech.edu/datasets/cub_200_2011/)
 
 *   **Source code**:
     [`tfds.image_classification.CaltechBirds2011`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/caltech_birds.py)
