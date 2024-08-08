@@ -1,7 +1,8 @@
 """wake_vision dataset."""
 
-import tensorflow_datasets.public_api as tfds
 import os
+
+import tensorflow_datasets as tfds
 
 _TRAIN_IMAGE_IDS = [
   9270406, 9270356, 9270408, 9270367, 9270349, 9270351, 9270390, 9270375,
