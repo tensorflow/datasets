@@ -555,6 +555,9 @@ def make_valid_name(name: str) -> str:
   The function removes all forbidden characters outside of A-Za-z0-9_ and
   replaces them with an underscore.
 
+  Warning: if you want to convert a name to a valid TFDS name, prefer
+  `conversion_utils.to_tfds_name` instead.
+
   Args:
     name: The input string to sanitize.
 
