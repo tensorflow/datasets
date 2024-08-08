@@ -549,6 +549,20 @@ def add_sys_path(path: epath.PathLike) -> Iterator[None]:
     sys.path.remove(path)
 
 
+def is_valid_name(name: str) -> bool:
+  """Returns true if the name is valid.
+
+  A name is valid if it only contains characters in A-Za-z0-9_.
+
+  Args:
+    name: The input string to check.
+
+  Returns:
+    True if the name is valid.
+  """
+  return re.search(_INVALID_TFDS_NAME_CHARACTER, name) is None
+
+
 def make_valid_name(name: str) -> str:
   """Sanitizes a string to follow the Python lexical definitions.
 

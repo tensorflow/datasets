@@ -378,6 +378,18 @@ def test_is_incomplete_file(path: str, is_incomplete: bool):
 @pytest.mark.parametrize(
     ['name', 'expected'],
     [
+        ('foobar', True),
+        ('FooBar', True),
+        ('_foo-bar!', False),
+    ],
+)
+def test_is_valid_name(name: str, expected: bool):
+  assert py_utils.is_valid_name(name) == expected
+
+
+@pytest.mark.parametrize(
+    ['name', 'expected'],
+    [
         ('foobar', 'foobar'),
         ('FooBar', 'FooBar'),
         ('_foo-bar!', '_foo_bar_'),
