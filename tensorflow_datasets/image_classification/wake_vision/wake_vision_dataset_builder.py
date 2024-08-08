@@ -117,10 +117,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                   tfds.features.ClassLabel(names=['No', 'Yes']),
           }
       ),
-      # If there's a common (input, target) tuple from the
-      # features, specify them here. They'll be used if
-      # `as_supervised=True` in `builder.as_dataset`.
-      supervised_keys=('image', 'person'),  # Set to `None` to disable
+      supervised_keys=('image', 'person'),
       homepage=
       'https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2F1HOPXC',
       license='See homepage for license information.',
