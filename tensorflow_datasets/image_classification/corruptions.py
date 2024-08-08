@@ -36,7 +36,7 @@ FROST_FILENAMES = []
 
 
 def _imagemagick_bin():
-  return 'imagemagick'  # pylint: disable=unreachable
+  return 'convert'  # pylint: disable=unreachable
 
 
 # /////////////// Corruption Helpers ///////////////
