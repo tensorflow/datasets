@@ -104,7 +104,10 @@ def mock_huggingface_dataset_builder(
       other_arg='this is another arg',
   )
   load_dataset_builder.assert_called_once_with(
-      'foo/bar', 'config', other_arg='this is another arg'
+      'foo/bar',
+      'config',
+      other_arg='this is another arg',
+      trust_remote_code=False,
   )
   login_to_hf.assert_called_once_with('SECRET_TOKEN')
   yield builder

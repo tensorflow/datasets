@@ -200,6 +200,7 @@ class HuggingfaceDatasetBuilder(
       tfds_num_proc: Optional[int] = None,
       ignore_hf_errors: bool = False,
       overwrite_version: str | None = None,
+      trust_remote_code: bool = False,
       **config_kwargs,
   ):
     self._hf_repo_id = hf_repo_id
@@ -210,7 +211,10 @@ class HuggingfaceDatasetBuilder(
     )
     try:
       self._hf_builder = hf_datasets.load_dataset_builder(
-          self._hf_repo_id, self._hf_config, **self.config_kwargs
+          self._hf_repo_id,
+          self._hf_config,
+          trust_remote_code=trust_remote_code,
+          **self.config_kwargs,
       )
     except Exception as e:
       raise RuntimeError(
