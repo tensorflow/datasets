@@ -1,0 +1,7 @@
+content.data-type.categorical # Contains categorical data.
+content.data-type.image # Contains image data.
+ml.fairness.age # Contains data related to age. Example: 0-13, 14-18, 19-30, 31-65,65+
+ml.fairness.facial-attributes # Contains data related to characteristics of the face or head and surrounding hair, such as beard/no beard, eye shape/color, hair style, etc.
+ml.fairness.gender # Contains data related to roles, behaviours, activities, attributes and opportunities that any society considers appropriate for girls and boys, women and men, or other non-binary categories. (examples: transgender, non-binary, woman, man, etc.)
+ml.task.fine-grained-image-classification # Relates to Fine Grained Image Classification, a machine learning task.
+ml.task.image-classification # Relates to Image Classification, a machine learning task.
