@@ -155,7 +155,14 @@ DATASET_EXTRAS = {
     'aflw2k3d': ['scipy'],
     'beir': ['apache-beam'],
     'ble_wind_field': ['gcsfs', 'zarr'],
-    'c4': ['apache-beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
+    'c4': [
+        'apache-beam',
+        'gcld3',
+        'langdetect',
+        # nltk==3.8.2 is broken: https://github.com/nltk/nltk/issues/3293
+        'nltk==3.8.1',
+        'tldextract',
+    ],
     'c4_wsrs': ['apache-beam'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
