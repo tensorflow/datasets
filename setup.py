@@ -197,6 +197,7 @@ DATASET_EXTRAS = {
     'smartwatch_gestures': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
+    'wake_vision': ['pandas'],
     'wider_face': ['Pillow'],
     'wiki_dialog': ['apache-beam'],
     'wikipedia': ['apache-beam', 'mwparserfromhell', 'mwxml'],

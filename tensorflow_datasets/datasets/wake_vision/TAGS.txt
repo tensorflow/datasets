@@ -1,0 +1,7 @@
+content.data-type.categorical
+content.data-type.image
+ml.fairness.age
+ml.fairness.facial-attributes
+ml.fairness.gender
+ml.task.fine-grained-image-classification
+ml.task.image-classification
