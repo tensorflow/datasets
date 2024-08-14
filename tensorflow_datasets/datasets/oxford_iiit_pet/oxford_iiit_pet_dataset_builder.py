@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """Oxford-IIIT pet dataset."""
-
+import io
 import os
 import xml.etree.ElementTree as ET
 
@@ -119,7 +119,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
+            "image": tfds.features.Image(encoding_format="jpeg"),
             "label": tfds.features.ClassLabel(names=_LABEL_CLASSES),
             "species": tfds.features.ClassLabel(names=_SPECIES_CLASSES),
             "file_name": tfds.features.Text(),
@@ -175,21 +175,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         image_name, label, species, _ = line.strip().split(" ")
 
         image_path = os.path.join(images_dir_path, image_name + ".jpg")
+        with epath.Path(image_path).open("rb") as image_file:
+          img_data = image_file.read()
 
         if image_name in _CORRUPT_SAMPLES:
           # some images caused 'Corrupt JPEG data...' messages during training
           # or any other iteration recoding them once fixes the issue
           # (discussion: https://github.com/tensorflow/datasets/issues/2188)
-          with epath.Path(image_path).open("rb") as image_file:
-            img_data = image_file.read()
-            img_tensor = tf.image.decode_image(img_data)
-            if (
-                tf.shape(img_tensor)[-1] == 4
-            ):  # some files have an alpha channel -> remove
-              img_tensor = img_tensor[:, :, :-1]
-            img_recoded = tf.io.encode_jpeg(img_tensor)
-          with epath.Path(image_path).open("wb") as image_file:
-            image_file.write(img_recoded.numpy())
+          img_tensor = tf.image.decode_image(img_data)
+          if (
+              tf.shape(img_tensor)[-1] == 4
+          ):  # some files have an alpha channel -> remove
+            img_tensor = img_tensor[:, :, :-1]
+          img_data = tf.io.encode_jpeg(img_tensor).numpy()
 
         trimaps_dir_path = os.path.join(annotations_dir_path, "trimaps")
         xmls_dir_path = os.path.join(annotations_dir_path, "xmls")
@@ -207,7 +205,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           head_bbox = _EMPTY_BBOX
 
         record = {
-            "image": os.path.join(images_dir_path, image_name),
+            "image": io.BytesIO(img_data),
             "label": int(label),
             "species": species,
             "file_name": image_name,
