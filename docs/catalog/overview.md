@@ -49,6 +49,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Age`
 
 *   [`dices`](dices.md)
+*   [`wake_vision`](wake_vision.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Anomaly detection`
 
@@ -91,6 +93,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`dices`](dices.md)
 *   [`sift1m`](sift1m.md)
+*   [`wake_vision`](wake_vision.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Common sense reasoning`
 
@@ -154,6 +158,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`newsroom`](newsroom.md)
 *   [`scientific_papers`](scientific_papers.md)
 
+### `Facial attributes`
+
+*   [`wake_vision`](wake_vision.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Fine grained image classification`
 
 *   [`caltech101`](caltech101.md)
@@ -162,10 +171,14 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`stanford_dogs`](stanford_dogs.md)
 *   [`stl10`](stl10.md)
 *   [`sun397`](sun397.md)
+*   [`wake_vision`](wake_vision.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Gender`
 
 *   [`dices`](dices.md)
+*   [`wake_vision`](wake_vision.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Graph`
 
@@ -252,6 +265,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`symmetric_solids`](symmetric_solids.md)
 *   [`tf_flowers`](tf_flowers.md)
 *   [`the300w_lp`](the300w_lp.md)
+*   [`wake_vision`](wake_vision.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Image classification`
 
@@ -321,6 +336,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`svhn_cropped`](svhn_cropped.md)
 *   [`uc_merced`](uc_merced.md)
 *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
+*   [`wake_vision`](wake_vision.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Image clustering`
 

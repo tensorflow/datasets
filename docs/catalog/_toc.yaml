@@ -36,6 +36,9 @@ toc:
 - section:
   - path: /datasets/catalog/dices
     title: dices
+  - path: /datasets/catalog/wake_vision
+    status: nightly
+    title: wake_vision
   title: Age
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -104,6 +107,9 @@ toc:
     title: dices
   - path: /datasets/catalog/sift1m
     title: sift1m
+  - path: /datasets/catalog/wake_vision
+    status: nightly
+    title: wake_vision
   title: Categorical
 - section:
   - path: /datasets/catalog/ai2_arc_with_ir
@@ -190,6 +196,11 @@ toc:
     title: scientific_papers
   title: Document summarization
 - section:
+  - path: /datasets/catalog/wake_vision
+    status: nightly
+    title: wake_vision
+  title: Facial attributes
+- section:
   - path: /datasets/catalog/caltech101
     title: caltech101
   - path: /datasets/catalog/oxford_flowers102
@@ -202,10 +213,16 @@ toc:
     title: stl10
   - path: /datasets/catalog/sun397
     title: sun397
+  - path: /datasets/catalog/wake_vision
+    status: nightly
+    title: wake_vision
   title: Fine grained image classification
 - section:
   - path: /datasets/catalog/dices
     title: dices
+  - path: /datasets/catalog/wake_vision
+    status: nightly
+    title: wake_vision
   title: Gender
 - section:
   - path: /datasets/catalog/ogbg_molpcba
@@ -366,6 +383,9 @@ toc:
     title: tf_flowers
   - path: /datasets/catalog/the300w_lp
     title: the300w_lp
+  - path: /datasets/catalog/wake_vision
+    status: nightly
+    title: wake_vision
   title: Image
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -500,6 +520,9 @@ toc:
     title: uc_merced
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
+  - path: /datasets/catalog/wake_vision
+    status: nightly
+    title: wake_vision
   title: Image classification
 - section:
   - path: /datasets/catalog/imagenet2012
