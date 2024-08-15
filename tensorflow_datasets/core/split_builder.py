@@ -405,7 +405,7 @@ class SplitBuilder:
       shard_lengths, total_size = writer.finalize()
     except Exception as e:  # pylint: disable=broad-except
       utils.reraise(
-          e, prefix=f'Failed to finalize writing of split "{split_name}"'
+          e, prefix=f'Failed to finalize writing of split "{split_name}": '
       )
 
     split_info = splits_lib.SplitInfo(
