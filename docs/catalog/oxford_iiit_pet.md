@@ -44,18 +44,20 @@ split, the bounding boxes are empty.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Add head bounding boxes. Fix corrupt images. Update dataset URL.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `773.52 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `773.68 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 3,669
+`'train'` | 3,680
 
 *   **Feature structure**:
 
