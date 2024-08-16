@@ -1,0 +1,207 @@
+// Copyright 2022 Google LLC
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+//     https://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// This proto defines the message exchange between the building and the
+// controlling RL agent, and defines the zones and devices inside the building.
+// At each time step, the agent sends an observation request. The building
+// returns an observation response. The agent then sends an action request
+// for its action space. The building response to the action request with
+// an action response.
+//
+// Please see smart_control_reward.proto for the feedback reward message defs.
+
+syntax = "proto3";
+
+package smart_buildings.smart_control.proto;
+
+import "google/protobuf/timestamp.proto";
+
+// Details about the thermal zone in the building.
+message ZoneInfo {
+  enum ZoneType {
+    UNDEFINED = 0;
+    ROOM = 1;
+    FLOOR = 2;
+    OTHER = 10;
+  }
+  // Unique Identifier of the zone.
+  string zone_id = 1;
+  // Name of the building, e.g., US-MTV-1055, or sim, etc.
+  string building_id = 2;
+  // Free-form description of the zone, like microkitchen, office, etc.
+  string zone_description = 3;
+  // Square footage of the zone.
+  float area = 4;  // square meters
+  // Zero to multiple device identifiers associated with this zone, like VAVs.
+  repeated string devices = 5;
+  // Optional field to describe the type of zone.
+  ZoneType zone_type = 6;
+  // Optional field to indicate the floor of the buildling.
+  int32 floor = 7;
+}
+
+// Details about a specific device in the building.
+message DeviceInfo {
+  // Device types in smart buildings (official Carson top-level device types).
+  enum DeviceType {
+    UNDEFINED = 0;
+    FAN = 1;
+    PMP = 2;
+    FCU = 3;
+    VAV = 4;
+    DH = 5;
+    AHU = 6;
+    BLR = 7;
+    CDWS = 8;
+    CH = 9;
+    CHWS = 10;
+    CT = 11;
+    DC = 12;
+    DFR = 13;
+    DMP = 14;
+    HWS = 15;
+    HX = 16;
+    MAU = 17;
+    SDC = 18;
+    UH = 19;
+    PWR = 20;
+    GAS = 21;
+    AC = 22;
+    OTHER = 23;
+  }
+
+  enum ValueType {
+    VALUE_TYPE_UNDEFINED = 0;
+    VALUE_CONTINUOUS = 1;
+    VALUE_INTEGER = 2;
+    VALUE_CATEGORICAL = 3;
+    VALUE_BINARY = 4;
+  }
+
+  // Unique device identifier.
+  string device_id = 1;
+  // If applicable, the zone associated with the device (like VAVs).
+  string namespace = 2;
+  string code = 3;
+  string zone_id = 4;
+  // The type of device, VAV, AHU, etc.
+  DeviceType device_type = 5;
+  // Map of measurement name exposed by the device to the value type.
+  map<string, ValueType> observable_fields = 6;
+  // Map of setpoint name exposed by the device to their value type.
+  map<string, ValueType> action_fields = 7;
+}
+
+// A request to get a single measurement from a specific sensor.
+message SingleObservationRequest {
+  // Unique device identifier.
+  string device_id = 1;
+  // Name of the sensor, e.g., zone_air_temperature.
+  string measurement_name = 2;
+}
+
+// Response for a single observation request.
+message SingleObservationResponse {
+  // The validity time in UTC of the meaurement.
+  google.protobuf.Timestamp timestamp = 1;
+  // Original request.
+  SingleObservationRequest single_observation_request = 2;
+  // Validity flag on the observation.
+  bool observation_valid = 3;
+  // Actual observed/measured value.
+  oneof observation_value {
+    float continuous_value = 4;
+    int32 integer_value = 5;
+    string categorical_value = 6;
+    bool binary_value = 7;
+    string string_value = 8;
+  }
+}
+
+// Agent's request to get the current observation vector.
+message ObservationRequest {
+  // UTC timestamp when the agent generated the request.
+  google.protobuf.Timestamp timestamp = 1;
+  // One or more individual requests.
+  repeated SingleObservationRequest single_observation_requests = 2;
+}
+
+// Building's response to an observation request message.
+message ObservationResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  ObservationRequest request = 2;
+  repeated SingleObservationResponse single_observation_responses = 3;
+}
+
+// An action request to assign a value to one setpoint on one device.
+message SingleActionRequest {
+  // The device being commanded.
+  string device_id = 1;
+  // Actual setpoint to be changed, like zone_air_temperature_setpoint.
+  string setpoint_name = 2;
+  oneof setpoint_value {
+    float continuous_value = 3;
+    int32 integer_value = 4;
+    string categorical_value = 5;
+    bool binary_value = 6;
+    string string_value = 7;
+  }
+}
+
+// Building's response to a single action request.
+message SingleActionResponse {
+  enum ActionResponseType {
+    UNDEFINED = 0;
+    // The building accepted the action as requested.
+    ACCEPTED = 1;
+    // The building is processing the request, but has not completed.
+    PENDING = 2;
+    // The action request timed out by request handler.
+    TIMED_OUT = 3;
+    // Request is rejected because the set value is not in an acceptable range.
+    REJECTED_INVALID_SETTING = 4;
+    // Rejected because the setting is not enabled or available for control.
+    REJECTED_NOT_ENABLED_OR_AVAILABLE = 5;
+    // A technician or control function overrode the action.
+    REJECTED_OVERRIDE = 6;
+    // The action was assigned to a device that does not exist.
+    REJECTED_INVALID_DEVICE = 7;
+    // The action was assigned to a valid device that's offline.
+    REJECTED_DEVICE_OFFLINE = 8;
+    UNKNOWN = 9;
+    OTHER = 10;
+  }
+  SingleActionRequest request = 1;
+  ActionResponseType response_type = 2;
+  // Additional optional information related to the action/response.
+  string additional_info = 3;
+}
+
+// Agent's request to the building with an action.
+message ActionRequest {
+  // The UTC timestamp that the agent initiated the request.
+  google.protobuf.Timestamp timestamp = 1;
+  // One or more action requests to be performed.
+  repeated SingleActionRequest single_action_requests = 2;
+}
+
+// Building's response to an action request.
+message ActionResponse {
+  // UTC timestamp of the building's response.
+  google.protobuf.Timestamp timestamp = 1;
+  // Original action request.
+  ActionRequest request = 2;
+  // Individual responses for each action.
+  repeated SingleActionResponse single_action_responses = 3;
+}
