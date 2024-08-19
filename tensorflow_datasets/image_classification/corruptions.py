@@ -589,9 +589,9 @@ def snow(x, severity=1):
 
       subprocess.check_output([
           convert_bin,
+          im_input.name,
           '-motion-blur',
           '{}x{}+{}'.format(radius, sigma, angle),
-          im_input.name,
           im_output.name,
       ])
 
@@ -637,9 +637,9 @@ def motion_blur(x, severity=1):
 
       subprocess.check_output([
           convert_bin,
+          im_input.name,
           '-motion-blur',
           '{}x{}+{}'.format(radius, sigma, angle),
-          im_input.name,
           im_output.name,
       ])
 
