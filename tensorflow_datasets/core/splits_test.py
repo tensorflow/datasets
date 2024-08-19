@@ -641,5 +641,34 @@ class GetDatasetFilesTest(testing.TestCase):
     self.assertEqual(files, [])
 
 
+class SplitInfoTest(testing.TestCase):
+
+  def test_file_spec(self):
+    split_info = tfds.core.SplitInfo(
+        name='train',
+        shard_lengths=[1, 2, 3],
+        num_bytes=42,
+        filename_template=_filename_template(split='train'),
+    )
+    self.assertEqual(
+        split_info.file_spec(
+            file_format=tfds.core.file_adapters.FileFormat.TFRECORD
+        ),
+        '/path/ds_name-train.tfrecord@3',
+    )
+
+  def test_file_spec_missing_template(self):
+    split_info = tfds.core.SplitInfo(
+        name='train',
+        shard_lengths=[1, 2, 3],
+        num_bytes=42,
+        filename_template=None,
+    )
+    with self.assertRaises(ValueError):
+      split_info.file_spec(
+          file_format=tfds.core.file_adapters.FileFormat.TFRECORD
+      )
+
+
 if __name__ == '__main__':
   testing.test_main()

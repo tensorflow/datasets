@@ -31,6 +31,7 @@ from typing import Any, Union
 
 from absl import logging
 from etils import epath
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import units
@@ -124,7 +125,7 @@ class SplitInfo:
       cls,
       proto: proto_lib.SplitInfo,
       filename_template: naming.ShardedFileTemplate,
-  ) -> 'SplitInfo':
+  ) -> SplitInfo:
     """Returns a SplitInfo class instance from a SplitInfo proto."""
     return cls(
         name=proto.name,
@@ -217,9 +218,31 @@ class SplitInfo:
         self.filename_template.sharded_filepaths(len(self.shard_lengths))
     )
 
-  def replace(self, **kwargs: Any) -> 'SplitInfo':
+  def replace(self, **kwargs: Any) -> SplitInfo:
     """Returns a copy of the `SplitInfo` with updated attributes."""
     return dataclasses.replace(self, **kwargs)
+
+  def file_spec(self, file_format: file_adapters.FileFormat) -> str:
+    """Returns the file spec of the split for the given file format.
+
+    A file spec is the full path with sharded notation, e.g.,
+    `/data/ds/cfg/1.2.3/ds-train@10`.
+
+    Args:
+      file_format: the file format for which to create the file spec for.
+    """
+    if filename_template := self.filename_template:
+      if filename_template.filetype_suffix != file_format.file_suffix:
+        raise ValueError(
+            f'File format {file_format} does not match filename template'
+            f' {filename_template}.'
+        )
+      return filename_template.sharded_filepaths_pattern(
+          num_shards=self.num_shards
+      )
+    raise ValueError(
+        f'Could not get filename template for split from split info: {self}.'
+    )
 
 
 @dataclasses.dataclass(eq=False, frozen=True)
