@@ -532,6 +532,13 @@ class DatasetInfo(object):
     self._alternative_file_formats.append(file_format)
     self.as_proto.alternative_file_formats.append(file_format.value)
 
+  def available_file_formats(self) -> set[file_adapters.FileFormat]:
+    formats = set()
+    if self.file_format:
+      formats.add(self.file_format)
+    formats.update(self.alternative_file_formats)
+    return formats
+
   @property
   def splits(self) -> splits_lib.SplitDict:
     return self._splits
@@ -1263,6 +1270,19 @@ def update_info_proto_with_features(
   completed_info_proto.CopyFrom(info_proto)
   completed_info_proto.features.CopyFrom(features.to_proto())
   return completed_info_proto
+
+
+def supports_file_format(
+    dataset_info_proto: dataset_info_pb2.DatasetInfo,
+    file_format: str | file_adapters.FileFormat,
+) -> bool:
+  """Returns whether the given file format is supported by the dataset."""
+  if isinstance(file_format, file_adapters.FileFormat):
+    file_format = file_format.value
+  return (
+      file_format == dataset_info_proto.file_format
+      or file_format in dataset_info_proto.alternative_file_formats
+  )
 
 
 class MetadataDict(Metadata, dict):

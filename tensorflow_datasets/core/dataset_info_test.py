@@ -682,6 +682,22 @@ def test_create_redistribution_info_proto_unsupported_fields():
     )
 
 
+def test_supports_file_format():
+  dataset_info_proto = dataset_info_pb2.DatasetInfo(
+      file_format=file_adapters.FileFormat.TFRECORD.value,
+      alternative_file_formats=[file_adapters.FileFormat.RIEGELI.value],
+  )
+  assert dataset_info.supports_file_format(
+      dataset_info_proto, file_format=file_adapters.FileFormat.TFRECORD
+  )
+  assert dataset_info.supports_file_format(
+      dataset_info_proto, file_format=file_adapters.FileFormat.RIEGELI
+  )
+  assert not dataset_info.supports_file_format(
+      dataset_info_proto, file_format=file_adapters.FileFormat.PARQUET
+  )
+
+
 # pylint: disable=g-inconsistent-quotes
 _INFO_STR = '''tfds.core.DatasetInfo(
     name='mnist',

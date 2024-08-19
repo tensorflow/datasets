@@ -836,32 +836,28 @@ class DatasetBuilder(registered.RegisteredDataset):
         " choose another data_dir or delete the data."
     )
 
-    if info.file_format is None and not info.alternative_file_formats:
+    available_formats = info.available_file_formats()
+    if not available_formats:
       raise ValueError(
           "Dataset info file format is not set! For random access, one of the"
           f" following formats is required: {random_access_formats_msg}"
       )
 
-    if (
-        info.file_format is None
-        or info.file_format not in random_access_formats
-    ):
-      available_formats = set(info.alternative_file_formats)
-      suitable_formats = available_formats.intersection(random_access_formats)
-      if suitable_formats:
-        chosen_format = suitable_formats.pop()
-        logging.info(
-            "Found random access formats: %s. Chose to use %s. Overriding file"
-            " format in the dataset info.",
-            ", ".join([f.name for f in suitable_formats]),
-            chosen_format,
-        )
-        # Change the dataset info to read from a random access format.
-        info.set_file_format(
-            chosen_format, override=True, override_if_initialized=True
-        )
-      else:
-        raise NotImplementedError(unsupported_format_msg)
+    suitable_formats = available_formats.intersection(random_access_formats)
+    if suitable_formats:
+      chosen_format = suitable_formats.pop()
+      logging.info(
+          "Found random access formats: %s. Chose to use %s. Overriding file"
+          " format in the dataset info.",
+          ", ".join([f.name for f in suitable_formats]),
+          chosen_format,
+      )
+      # Change the dataset info to read from a random access format.
+      info.set_file_format(
+          chosen_format, override=True, override_if_initialized=True
+      )
+    else:
+      raise NotImplementedError(unsupported_format_msg)
 
     # Create a dataset for each of the given splits
     def build_single_data_source(split: str) -> Sequence[Any]:
