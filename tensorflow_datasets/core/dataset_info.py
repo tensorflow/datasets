@@ -1272,6 +1272,16 @@ def update_info_proto_with_features(
   return completed_info_proto
 
 
+def available_file_formats(
+    dataset_info_proto: dataset_info_pb2.DatasetInfo,
+) -> set[str]:
+  """Returns the available file formats for the given dataset."""
+  return set(
+      [dataset_info_proto.file_format]
+      + list(dataset_info_proto.alternative_file_formats)
+  )
+
+
 def supports_file_format(
     dataset_info_proto: dataset_info_pb2.DatasetInfo,
     file_format: str | file_adapters.FileFormat,
@@ -1279,10 +1289,45 @@ def supports_file_format(
   """Returns whether the given file format is supported by the dataset."""
   if isinstance(file_format, file_adapters.FileFormat):
     file_format = file_format.value
-  return (
-      file_format == dataset_info_proto.file_format
-      or file_format in dataset_info_proto.alternative_file_formats
-  )
+  return file_format in available_file_formats(dataset_info_proto)
+
+
+def get_split_info_from_proto(
+    dataset_info_proto: dataset_info_pb2.DatasetInfo,
+    split_name: str,
+    data_dir: epath.PathLike,
+    file_format: file_adapters.FileFormat,
+) -> splits_lib.SplitInfo | None:
+  """Returns split info from the given dataset info proto.
+
+  Args:
+    dataset_info_proto: the proto with the dataset info.
+    split_name: the split for which to retrieve info for.
+    data_dir: the directory where the data is stored.
+    file_format: the file format for which to get the split info.
+  """
+  if not supports_file_format(dataset_info_proto, file_format):
+    available_format = available_file_formats(dataset_info_proto)
+    raise ValueError(
+        f"File format {file_format.value} does not match available dataset file"
+        f" formats: {sorted(available_format)}."
+    )
+  for split_info in dataset_info_proto.splits:
+    if split_info.name == split_name:
+      filename_template = naming.ShardedFileTemplate(
+          dataset_name=dataset_info_proto.name,
+          data_dir=epath.Path(data_dir),
+          filetype_suffix=file_format.file_suffix,
+      )
+      # Override the default file name template if it was set.
+      if split_info.filepath_template:
+        filename_template = filename_template.replace(
+            template=split_info.filepath_template
+        )
+      return splits_lib.SplitInfo.from_proto(
+          proto=split_info, filename_template=filename_template
+      )
+  return None
 
 
 class MetadataDict(Metadata, dict):

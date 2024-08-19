@@ -18,6 +18,7 @@
 import json
 import os
 import pathlib
+import re
 import tempfile
 import time
 from typing import Union
@@ -696,6 +697,81 @@ def test_supports_file_format():
   assert not dataset_info.supports_file_format(
       dataset_info_proto, file_format=file_adapters.FileFormat.PARQUET
   )
+
+
+class GetSplitInfoFromProtoTest(testing.TestCase):
+
+  def _dataset_info_proto_with_splits(self):
+    return dataset_info_pb2.DatasetInfo(
+        name="dataset",
+        file_format="tfrecord",
+        alternative_file_formats=["riegeli"],
+        splits=[
+            dataset_info_pb2.SplitInfo(
+                name="train",
+                shard_lengths=[1, 2, 3],
+                num_bytes=42,
+            ),
+            dataset_info_pb2.SplitInfo(
+                name="test",
+                shard_lengths=[1, 2, 3],
+                num_bytes=42,
+                filepath_template="{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+            ),
+        ],
+    )
+
+  def test_get_split_info_from_proto_undefined_filename_template(self):
+    actual = dataset_info.get_split_info_from_proto(
+        dataset_info_proto=self._dataset_info_proto_with_splits(),
+        split_name="train",
+        data_dir="/path/to/data",
+        file_format=file_adapters.FileFormat.TFRECORD,
+    )
+    assert actual.name == "train"
+    assert actual.shard_lengths == [1, 2, 3]
+    assert actual.num_bytes == 42
+    assert actual.filename_template.dataset_name == "dataset"
+    assert actual.filename_template.template == naming.DEFAULT_FILENAME_TEMPLATE
+
+  def test_get_split_info_from_proto_defined_filename_template(self):
+    actual = dataset_info.get_split_info_from_proto(
+        dataset_info_proto=self._dataset_info_proto_with_splits(),
+        split_name="test",
+        data_dir="/path/to/data",
+        file_format=file_adapters.FileFormat.TFRECORD,
+    )
+    assert actual.name == "test"
+    assert actual.shard_lengths == [1, 2, 3]
+    assert actual.filename_template.dataset_name == "dataset"
+    assert (
+        actual.filename_template.template
+        == "{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+    )
+
+  def test_get_split_info_from_proto_non_existing_split(self):
+    actual = dataset_info.get_split_info_from_proto(
+        dataset_info_proto=self._dataset_info_proto_with_splits(),
+        split_name="undefined",
+        data_dir="/path/to/data",
+        file_format=file_adapters.FileFormat.TFRECORD,
+    )
+    assert actual is None
+
+  def test_get_split_info_from_proto_unavailable_format(self):
+    with pytest.raises(
+        ValueError,
+        match=re.escape(
+            "File format parquet does not match available dataset file formats:"
+            " ['riegeli', 'tfrecord']."
+        ),
+    ):
+      dataset_info.get_split_info_from_proto(
+          dataset_info_proto=self._dataset_info_proto_with_splits(),
+          split_name="undefined",
+          data_dir="/path/to/data",
+          file_format=file_adapters.FileFormat.PARQUET,
+      )
 
 
 # pylint: disable=g-inconsistent-quotes
