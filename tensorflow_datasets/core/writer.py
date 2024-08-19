@@ -17,12 +17,13 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable, Iterator, Sequence
 import dataclasses
 import functools
 import itertools
 import json
 import os
+import threading
 from typing import Any
 
 from etils import epy
@@ -190,6 +191,38 @@ class ExampleWriter:
     return adapter.write_examples(path, examples)
 
 
+class ThreadSafeIterator(Iterator):
+  """A wrapper around a tee object to make it thread-safe.
+
+  See https://stackoverflow.com/q/6703594 for more details.
+  """
+
+  def __init__(self, tee_object: Any, lock: threading.Lock):
+    self._tee_object = tee_object
+    self._lock = lock
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    with self._lock:
+      return next(self._tee_object)
+
+  def __copy__(self):
+    return ThreadSafeIterator(self._tee_object.__copy__(), self._lock)
+
+
+def thread_safe_tee(
+    iterable: Iterable[Any], n: int
+) -> tuple[ThreadSafeIterator, ...]:
+  """Returns a tuple of n independent thread-safe iterators."""
+  lock = threading.Lock()
+  return tuple(
+      ThreadSafeIterator(tee_object, lock)
+      for tee_object in itertools.tee(iterable, n)
+  )
+
+
 class MultiOutputExampleWriter(ExampleWriter):
   """Example writer that can write multiple outputs."""
 
@@ -207,7 +240,7 @@ class MultiOutputExampleWriter(ExampleWriter):
     """Writes examples to multiple outputs."""
     write_fns = []
     for writer, my_iter in zip(
-        self._writers, itertools.tee(examples, len(self._writers))
+        self._writers, thread_safe_tee(examples, len(self._writers))
     ):
       if file_format := writer.file_format:
         shard_path = os.fspath(
