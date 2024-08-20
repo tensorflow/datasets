@@ -23,11 +23,11 @@ from typing import Callable, Mapping, Sequence, TypeVar, Union
 
 from absl import logging
 import pandas as pd
-from tensorflow_datasets.datasets.smart_buildings_dataset import constants
-from tensorflow_datasets.datasets.smart_buildings_dataset import reader_lib
-from tensorflow_datasets.datasets.smart_buildings_dataset import smart_control_building_pb2
-from tensorflow_datasets.datasets.smart_buildings_dataset import smart_control_normalization_pb2
-from tensorflow_datasets.datasets.smart_buildings_dataset import smart_control_reward_pb2
+from tensorflow_datasets.datasets.smart_buildings import constants
+from tensorflow_datasets.datasets.smart_buildings import reader_lib
+from tensorflow_datasets.datasets.smart_buildings import smart_control_building_pb2
+from tensorflow_datasets.datasets.smart_buildings import smart_control_normalization_pb2
+from tensorflow_datasets.datasets.smart_buildings import smart_control_reward_pb2
 
 
 T = TypeVar('T')

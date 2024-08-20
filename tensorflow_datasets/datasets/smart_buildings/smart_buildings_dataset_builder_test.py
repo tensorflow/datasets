@@ -15,8 +15,8 @@
 
 """smart_buildings_dataset dataset."""
 
-# from tensorflow_datasets.datasets.smart_buildings_dataset
-# import smart_buildings_dataset_dataset_builder
+# from tensorflow_datasets.datasets.smart_buildings
+# import smart_buildingsdataset_builder
 # import tensorflow_datasets.public_api as tfds
 
 

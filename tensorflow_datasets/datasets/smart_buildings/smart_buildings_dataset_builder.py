@@ -13,14 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""smart_buildings_dataset dataset."""
+"""smart_buildings dataset."""
 
 import datetime
 from absl import logging
 from google.protobuf import json_format
 import numpy as np
 import pandas as pd
-from tensorflow_datasets.datasets.smart_buildings_dataset import controller_reader
+from tensorflow_datasets.datasets.smart_buildings import controller_reader
 import tensorflow_datasets.public_api as tfds
 
 # The years in the dataset.
@@ -53,7 +53,7 @@ def _make_building_config(building: str) -> BuilderConfig:
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):
-  """DatasetBuilder for smart_buildings_dataset dataset."""
+  """DatasetBuilder for smart_buildings dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
