@@ -108,6 +108,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`robomimic_mg`](robomimic_mg.md)
 *   [`robomimic_mh`](robomimic_mh.md)
 *   [`robomimic_ph`](robomimic_ph.md)
+*   [`smart_buildings`](smart_buildings.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Conditional image generation`
 
@@ -605,6 +607,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`robomimic_mg`](robomimic_mg.md)
 *   [`robomimic_mh`](robomimic_mh.md)
 *   [`robomimic_ph`](robomimic_ph.md)
+*   [`smart_buildings`](smart_buildings.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Rgb d`
 
@@ -724,6 +728,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Sequence modeling`
 
 *   [`databricks_dolly`](databricks_dolly.md)
+*   [`smart_buildings`](smart_buildings.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Sequence to sequence language modeling`
 
@@ -1024,6 +1030,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`robomimic_mg`](robomimic_mg.md)
 *   [`robomimic_mh`](robomimic_mh.md)
 *   [`robomimic_ph`](robomimic_ph.md)
+*   [`smart_buildings`](smart_buildings.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`smartwatch_gestures`](smartwatch_gestures.md)
 
 ### `Token classification`

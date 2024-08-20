@@ -128,6 +128,9 @@ toc:
     title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
+  - path: /datasets/catalog/smart_buildings
+    status: nightly
+    title: smart_buildings
   title: Computer science
 - section:
   - path: /datasets/catalog/imagenet2012
@@ -953,6 +956,9 @@ toc:
     title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
+  - path: /datasets/catalog/smart_buildings
+    status: nightly
+    title: smart_buildings
   title: Reinforcement learning
 - section:
   - path: /datasets/catalog/nyu_depth_v2
@@ -1159,6 +1165,9 @@ toc:
 - section:
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
+  - path: /datasets/catalog/smart_buildings
+    status: nightly
+    title: smart_buildings
   title: Sequence modeling
 - section:
   - path: /datasets/catalog/big_patent
@@ -1703,6 +1712,9 @@ toc:
     title: robomimic_mh
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
+  - path: /datasets/catalog/smart_buildings
+    status: nightly
+    title: smart_buildings
   - path: /datasets/catalog/smartwatch_gestures
     title: smartwatch_gestures
   title: Time series
