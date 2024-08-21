@@ -1,0 +1,16 @@
+name: Unittests [Optional]
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Unittests]
+    types: [requested]
+
+# Cancel in-progress runs for the current workflow if not on the main branch
+# (as it marks the unittests as failed).
+# Conditionals to concurrent are based on the solution proposed in this link:
+# https://github.community/t/concurrency-cancel-in-progress-but-not-when-ref-is-master/194707
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
+  # Cancel only PR intermediate builds.
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}

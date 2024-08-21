@@ -21,12 +21,12 @@ on:
     - cron: '0 2 * * *'
 
 # Cancel in-progress runs for the current workflow if not on the main branch
-# (as it mark the unittests as failed).
+# (as it marks the unittests as failed).
 # Conditionals to concurrent are based on the solution proposed in this link:
 # https://github.community/t/concurrency-cancel-in-progress-but-not-when-ref-is-master/194707
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
-  # Cancel only PR intermediate builds
+  # Cancel only PR intermediate builds.
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 env:
@@ -79,7 +79,7 @@ jobs:
       # Do not cancel in-progress jobs if any matrix job fails.
       fail-fast: false
       matrix:
-        tf-version: ['tensorflow']
+        tf-version: [tensorflow]
         # Can't reference env variables in matrix
         num-shards: ${{ fromJson(needs.shards-job.outputs.num-shards) }}
         shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
