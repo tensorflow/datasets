@@ -51,6 +51,9 @@ def test_read_from_tfds(
             dummy_dataset, split=split, workers_per_shard=workers_per_shard
         )
         | beam.Map(dataset_utils.as_numpy)
+        # Post numpy2, we don't get `{'id': 0}` but
+        # `{'id': np.int64(0)}`
+        | beam.Map(lambda x: {'id': int(x['id'])})
         | beam.io.WriteToText(os.fspath(tmp_path / 'out.txt'))
     )
 
