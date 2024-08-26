@@ -1,0 +1,21 @@
+name: 'Activate tests'
+description: 'Determines whether we should run tests or not.'
+
+outputs:
+  status:
+    description: 'Whether we should run tests or not.'
+    value: ${{ steps.check.outputs.status }}
+
+runs:
+  using: 'composite'
+  steps:
+  - name: Check if the merged PR is on the master branch
+    id: check
+    # For merged PR, activate testing only on the master branch, based on:
+    # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
+    run: |
+      echo "status=${{ github.ref == 'refs/heads/master' || (
+        github.event.action != 'closed'
+        && github.event.pull_request.merged == false
+      ) }}" >> $GITHUB_OUTPUT
+    shell: bash

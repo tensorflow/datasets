@@ -14,3 +14,35 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
   # Cancel only PR intermediate builds.
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+jobs:
+  activate-tests:
+    name: Check whether we should run tests or not
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - id: check
+      uses: ./.github/actions/activate-tests
+
+    outputs:
+      status: ${{ steps.check.outputs.status }}
+
+  pytest-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+    strategy:
+      # Do not cancel in-progress jobs if any matrix job fails.
+      fail-fast: false
+      matrix:
+        tf-version: [tensorflow, tf-nightly]
+        os-version: [ubuntu-latest, macos-latest]
+        exclude:
+          - tf-version: tensorflow
+            os-version: ubuntu-latest
+
+    name: 'Core TFDS tests'
+    uses: ./.github/workflows/pytest-template.yml
+    with:
+      tf-version: ${{ matrix.tf-version }}
+      os-version: ${{ matrix.os-version }}

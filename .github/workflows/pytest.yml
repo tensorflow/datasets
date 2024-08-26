@@ -29,105 +29,28 @@ concurrency:
   # Cancel only PR intermediate builds.
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
-env:
-  PYTEST_NUM_SHARDS: 4  # Controls tests sharding enabled by `pytest-shard`
-
 jobs:
   activate-tests:
-    name: Check if tests should be run
+    name: Check whether we should run tests or not
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check
-        id: check
-        # For merged PR, activate testing only on the master branch, based on:
-        # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
-        run: |
-          echo "status=${{ github.ref == 'refs/heads/master' || (
-            github.event.action != 'closed'
-            && github.event.pull_request.merged == false
-          ) }}" >> $GITHUB_OUTPUT
+    - uses: actions/checkout@v3
+    - id: check
+      uses: ./.github/actions/activate-tests
 
     outputs:
       status: ${{ steps.check.outputs.status }}
 
-  shards-job:
+  pytest-job:
     needs: activate-tests
     if: ${{ needs.activate-tests.outputs.status }}
 
-    name: Generate shards
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Create variables
-        id: create-vars
-        run: |
-          echo "num-shards=$(jq -n -c '[${{ env.PYTEST_NUM_SHARDS }}]')" >> $GITHUB_OUTPUT
-          echo "shard-ids=$(jq -n -c '[range(1;${{ env.PYTEST_NUM_SHARDS }}+1)]')" >> $GITHUB_OUTPUT
-
-    outputs:
-      num-shards: ${{ steps.create-vars.outputs.num-shards }}
-      shard-ids: ${{ steps.create-vars.outputs.shard-ids }}
-
-  pytest-job:
-    needs: shards-job
-
-    name: '[${{ matrix.os-version }}][${{ matrix.tf-version }}][Python ${{ matrix.python-version }}][${{ matrix.shard-id }}/${{ matrix.num-shards }}] Core TFDS tests'
-    runs-on: ${{ matrix.os-version }}
-    timeout-minutes: 30
-    strategy:
-      # Do not cancel in-progress jobs if any matrix job fails.
-      fail-fast: false
-      matrix:
-        tf-version: [tensorflow]
-        # Can't reference env variables in matrix
-        num-shards: ${{ fromJson(needs.shards-job.outputs.num-shards) }}
-        shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
-        # TF suppported versions: https://www.tensorflow.org/install/pip#software_requirements
-        python-version: ['3.10', '3.11', '3.12']
-        os-version: [ubuntu-latest]
-
-    steps:
-    - uses: actions/checkout@v3
-    - uses: ./.github/actions/setup
-      with:
-        tf-version: ${{ matrix.tf-version }}
-        python-version: ${{ matrix.python-version }}
-
-    # Run tests
-    # Ignores:
-    # * Nsynth is run in isolation due to dependency conflict (crepe).
-    # * Lsun tests is disabled because the tensorflow_io used in open-source
-    #   is linked to static libraries compiled again specific TF version, which
-    #   makes test fails with linking error (libtensorflow_io_golang.so).
-    # * imagenet2012_corrupted requires imagemagick binary.
-    # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
-    # * github_api is run separately to not overuse API quota.
-    # * wmt is run separately to avoid worker hanging.
-    # * Huggingface requires `datasets` library.
-    - name: Run core tests
-      run: |
-        pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ env.PYTEST_NUM_SHARDS }} \
-          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/image/lsun_test.py" \
-          --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
-          --ignore="tensorflow_datasets/import_without_tf_test.py" \
-          --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
-          --ignore="tensorflow_datasets/translate/wmt19_test.py" \
-          --ignore="tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/core/utils/huggingface_utils_test.py"
-
-    # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
-    - name: Run leftover tests
-      if: ${{ matrix.shard-id == 1 }}
-      uses: nick-fields/retry@v2
-      with:
-        timeout_minutes: 1
-        max_attempts: 2
-        retry_on: timeout
-        command: |
-          pytest -vv -o faulthandler_timeout=10 tensorflow_datasets/translate/wmt19_test.py
+    name: 'Core TFDS tests'
+    uses: ./.github/workflows/pytest-template.yml
+    with:
+      tf-version: tensorflow
+      os-version: ubuntu-latest
 
   huggingface-pytest-job:
     needs: activate-tests
