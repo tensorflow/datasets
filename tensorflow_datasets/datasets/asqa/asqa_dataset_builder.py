@@ -23,7 +23,7 @@ import tensorflow_datasets.public_api as tfds
 
 def _features():
   return tfds.features.FeaturesDict({
-      'sample_id': np.int32,
+      'sample_id': np.int64,
       'ambiguous_question': tfds.features.Text(
           doc='Disambiguated question from AmbigQA.'
       ),
@@ -82,6 +82,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
+      '2.0.0': 'Sample ID goes from int32 (overflowing) to int64.',
       '1.0.0': 'Initial release.',
   }
 
