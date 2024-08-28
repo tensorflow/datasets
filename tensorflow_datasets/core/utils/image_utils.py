@@ -127,15 +127,17 @@ def get_colormap() -> np.ndarray:
   """
   colormap_path = resource_utils.tfds_path() / 'core/utils/colormap.csv'
   with colormap_path.open() as f:
-    return np.array(list(csv.reader(f)), dtype=np.uint8)
+    colormap = np.array(list(csv.reader(f)), dtype=np.uint8)
+  assert colormap.shape == (256, 3)
+  return colormap
 
 
 def apply_colormap(image: np.ndarray) -> np.ndarray:
   """Apply colormap from grayscale (h, w, 1) to colored (h, w, 3) image."""
   image = image.squeeze(axis=-1)  # (h, w, 1) -> (h, w)
   cmap = get_colormap()  # Get the (256, 3) colormap
-  # Normalize uint16 and convert each value to a unique color
-  return cmap[image % len(cmap)]
+  # Convert the image to uint64 first to avoid overflow.
+  return cmap[(image.astype(np.int64) % 256)]
 
 
 # Visualization single image
