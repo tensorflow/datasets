@@ -16,8 +16,8 @@
 """DAS beamformed phantom images and paired clinical post-processed images."""
 
 import csv
+import datetime
 import os
-
 from etils import epath
 import numpy as np
 from tensorflow_datasets.core.utils import bool_utils
@@ -44,6 +44,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
+      '2.0.0': r'Fix timestamp_id from %Y%m%d%H%M%S to posix timestamp.',
       '1.0.1': 'Fixes parsing of boolean field `harmonic`.',
       '1.0.0': 'Initial release.',
   }
@@ -124,6 +125,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         iq = iq / iq.max()
         iq = 20 * np.log10(iq)
 
+        timestamp_id = datetime.datetime.strptime(
+            row['timestamp_id'], '%Y%m%d%H%M%S'
+        )
+        timestamp = int(timestamp_id.timestamp())
+
         yield row['filename'], {
             'das': {
                 'dB': iq.astype(np.float32),
@@ -143,6 +149,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'probe': row['probe'],
             'scanner': row['scanner'],
             'target': row['target'],
-            'timestamp_id': row['timestamp_id'],
+            'timestamp_id': timestamp,
             'harmonic': bool_utils.parse_bool(row['harm']),
         }
