@@ -33,6 +33,7 @@ under Grant 5T32GM007171-44. A usage example is available
 
     *   `1.0.0`: Initial release.
     *   **`1.0.1`** (default): Fixes parsing of boolean field `harmonic`.
+    *   `2.0.0`: Fix timestamp_id from %Y%m%d%H%M%S to posix timestamp.
 
 *   **Download size**: `12.78 GiB`
 

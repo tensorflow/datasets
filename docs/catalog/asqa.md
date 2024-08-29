@@ -32,6 +32,7 @@ repostory we release the ASQA dataset, together with the evaluation code:
 *   **Versions**:
 
     *   **`1.0.0`** (default): Initial release.
+    *   `2.0.0`: Sample ID goes from int32 (overflowing) to int64.
 
 *   **Download size**: `17.86 MiB`
 
@@ -66,7 +67,7 @@ FeaturesDict({
         'short_answers': Sequence(Text(shape=(), dtype=string)),
         'wikipage': Text(shape=(), dtype=string),
     }),
-    'sample_id': int32,
+    'sample_id': int64,
     'wikipages': Sequence({
         'title': Text(shape=(), dtype=string),
         'url': Text(shape=(), dtype=string),
@@ -90,7 +91,7 @@ qa_pairs/context               | Text           |         | string | Additional 
 qa_pairs/question              | Text           |         | string |
 qa_pairs/short_answers         | Sequence(Text) | (None,) | string | List of short answers from AmbigQA.
 qa_pairs/wikipage              | Text           |         | string | Title of the Wikipedia page the additional context was taken from.
-sample_id                      | Tensor         |         | int32  |
+sample_id                      | Tensor         |         | int64  |
 wikipages                      | Sequence       |         |        | List of Wikipedia pages visited by AmbigQA annotators.
 wikipages/title                | Text           |         | string | Title of the Wikipedia page.
 wikipages/url                  | Text           |         | string | Link to the Wikipedia page.
