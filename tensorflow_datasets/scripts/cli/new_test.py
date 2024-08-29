@@ -32,7 +32,10 @@ def test_new_without_args(capsys):
     _run_cli('new')
 
   captured = capsys.readouterr()
-  assert 'the following arguments are required: dataset_name' in captured.err
+  assert (
+      'the following arguments are required: args.command.dataset_name'
+      in captured.err
+  )
 
 
 def test_new_invalid_name():

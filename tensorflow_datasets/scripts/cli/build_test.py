@@ -316,7 +316,7 @@ def test_download_only():
 )
 def test_make_download_config(args: str, download_config_kwargs):
   args = main._parse_flags(f'tfds build x {args}'.split())
-  actual = build_lib._make_download_config(args, dataset_name='x')
+  actual = build_lib._make_download_config(args.command, dataset_name='x')
   # Ignore the beam runner
   actual = actual.replace(beam_runner=None)
   expected = tfds.download.DownloadConfig(**download_config_kwargs)

@@ -21,15 +21,14 @@ TFDS CLI to help creates and build datasets (e.g. `tfds new my_dataset`,
 See: https://www.tensorflow.org/datasets/cli
 """
 
-import argparse
+import dataclasses
 import logging as python_logging
-from typing import List
 
 from absl import app
 from absl import flags
 from absl import logging
-from absl.flags import argparse_flags
-
+from etils import eapp
+import simple_parsing
 import tensorflow_datasets.public_api as tfds
 
 # Import commands
@@ -37,35 +36,42 @@ from tensorflow_datasets.scripts.cli import build
 from tensorflow_datasets.scripts.cli import convert_format
 from tensorflow_datasets.scripts.cli import croissant
 from tensorflow_datasets.scripts.cli import new
-from tensorflow_datasets.scripts.utils import flag_utils
 
 FLAGS = flags.FLAGS
 
 
-def _parse_flags(argv: List[str]) -> argparse.Namespace:
-  """Command lines flag parsing."""
-  argv = flag_utils.normalize_flags(argv)  # See b/174043007 for context.
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class CmdArgs:
+  """TFDS CLI."""
 
-  parser = argparse_flags.ArgumentParser(
-      description='Tensorflow Datasets CLI tool',
-      allow_abbrev=False,
+  command: (
+      build.CmdArgs | convert_format.CmdArgs | croissant.CmdArgs | new.CmdArgs
+  ) = simple_parsing.subparsers(
+      subcommands={
+          'build': build.CmdArgs,
+          'convert_format': convert_format.CmdArgs,
+          'build_croissant': croissant.CmdArgs,
+          'new': new.CmdArgs,
+      },
+      default=None,
   )
-  parser.add_argument(
-      '--version',
+  # pyformat: disable
+  version: bool = simple_parsing.field(
+  # pyformat: enable
       action='version',
       version='TensorFlow Datasets: ' + tfds.__version__,
+      help='Print version.',
   )
-  parser.set_defaults(subparser_fn=lambda _: parser.print_help())
-  # Register sub-commands
-  subparser = parser.add_subparsers(title='command')
-  build.register_subparser(subparser)
-  new.register_subparser(subparser)
-  convert_format.register_subparser(subparser)
-  croissant.register_subparser(subparser)
-  return parser.parse_args(argv[1:])
 
 
-def main(args: argparse.Namespace) -> None:
+_parse_flags = eapp.make_flags_parser(
+    CmdArgs,
+    description='Tensorflow Datasets CLI tool',
+    allow_abbrev=False,
+)
+
+
+def main(args: CmdArgs) -> None:
 
   # From the CLI, all datasets are visible
   tfds.core.visibility.set_availables([
@@ -97,7 +103,10 @@ def main(args: argparse.Namespace) -> None:
     python_handler.setStream(new_stream)
 
   # Launch the subcommand defined in the subparser (or default to print help)
-  args.subparser_fn(args)
+  if args.command:
+    args.command.execute()
+  else:
+    _parse_flags(['', '--help'])
 
 
 def launch_cli() -> None:

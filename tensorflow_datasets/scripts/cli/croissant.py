@@ -26,11 +26,9 @@ tfds build_croissant \
 ```
 """
 
-import argparse
 import dataclasses
 import functools
 import json
-import typing
 
 from etils import epath
 import mlcroissant as mlc
@@ -73,13 +71,7 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
       *(file_format.value for file_format in file_adapters.FileFormat),
       default=file_adapters.FileFormat.ARRAY_RECORD.value,
   )
-  # Need to manually parse comma-separated list of values, see:
-  # https://github.com/lebrice/SimpleParsing/issues/142.
-  record_sets: list[str] = simple_parsing.field(
-      default_factory=list,
-      type=lambda record_sets_str: record_sets_str.split(','),
-      nargs='?',
-  )
+  record_sets: list[str] = cli_utils.comma_separated_list_field()
   mapping: str | None = None
   download_dir: epath.Path | None = None
   publish_dir: epath.Path | None = None
@@ -112,23 +104,8 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
         self.dataset.metadata
     )
 
-
-def register_subparser(parsers: argparse._SubParsersAction):
-  """Add subparser for `convert_format` command."""
-  orig_parser_class = parsers._parser_class  # pylint: disable=protected-access
-  try:
-    parsers._parser_class = simple_parsing.ArgumentParser  # pylint: disable=protected-access
-    parser = parsers.add_parser(
-        'build_croissant',
-        help='Prepares a croissant dataset',
-    )
-    parser = typing.cast(simple_parsing.ArgumentParser, parser)
-  finally:
-    parsers._parser_class = orig_parser_class  # pylint: disable=protected-access
-  parser.add_arguments(CmdArgs, dest='args')
-  parser.set_defaults(
-      subparser_fn=lambda args: prepare_croissant_builder(args.args)
-  )
+  def execute(self):
+    prepare_croissant_builder(self)
 
 
 def prepare_croissant_builder(args: CmdArgs) -> None:

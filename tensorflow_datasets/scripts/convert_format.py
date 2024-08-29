@@ -33,95 +33,24 @@ by adding `--use_beam`.
 """
 
 from absl import app
-from absl import flags
-from tensorflow_datasets.core import file_adapters
+from etils import eapp
+from tensorflow_datasets.scripts.cli import convert_format as convert_format_cli
 from tensorflow_datasets.scripts.cli import convert_format_utils
 
 
-_ROOT_DATA_DIR = flags.DEFINE_string(
-    'root_data_dir',
-    required=False,
-    help=(
-        'Root data dir that contains all datasets. All datasets and all their'
-        ' configs and versions that are in this folder will be converted.'
-    ),
-    default=None,
-)
-_DATASET_DIR = flags.DEFINE_string(
-    'dataset_dir',
-    required=False,
-    help=(
-        'Path where the dataset to be converted is located. Converts all'
-        ' configs and versions in this folder.'
-    ),
-    default=None,
-)
-_DATASET_VERSION_DIR = flags.DEFINE_list(
-    'dataset_version_dir',
-    required=False,
-    help=(
-        'Path where the dataset to be converted is located. Should include'
-        ' config and version. Can also be a comma-separated list of paths. If'
-        ' multiple paths are specified, `--out_dir` should not be specified,'
-        ' since each dataset will be converted in the same directory as the'
-        ' input dataset.'
-    ),
-    default=None,
-)
-
-_OUT_FILE_FORMAT = flags.DEFINE_enum_class(
-    'out_file_format',
-    enum_class=file_adapters.FileFormat,
-    required=True,
-    help='File format to convert the dataset to.',
-    default=None,
-)
-
-_OUT_DIR = flags.DEFINE_string(
-    'out_dir',
-    required=False,
-    help=(
-        'Path where the converted dataset will be stored. Should include the'
-        ' config and version, e.g. `/data/dataset_name/config/1.2.3`. If not'
-        ' specified, the converted shards will be stored in the same directory'
-        ' as the input dataset.'
-    ),
-    default=None,
-)
-
-_USE_BEAM = flags.DEFINE_bool(
-    'use_beam',
-    default=False,
-    help='Whether to use beam to convert the dataset.',
-)
-
-_NUM_WORKERS = flags.DEFINE_integer(
-    'num_workers',
-    default=8,
-    help='Number of workers to use if `use_beam` is `False`.',
-)
-
-
-_OVERWRITE = flags.DEFINE_bool(
-    'overwrite',
-    default=False,
-    help='Whether to overwrite the output folder.',
-)
-
-
-def main(_):
+def main(args: convert_format_cli.CmdArgs):
 
   convert_format_utils.convert_dataset(
-      root_data_dir=_ROOT_DATA_DIR.value,
-      dataset_dir=_DATASET_DIR.value,
-      dataset_version_dir=_DATASET_VERSION_DIR.value,
-      out_file_format=_OUT_FILE_FORMAT.value,
-      out_dir=_OUT_DIR.value,
-      use_beam=_USE_BEAM.value,
-      overwrite=_OVERWRITE.value,
-      num_workers=_NUM_WORKERS.value,
+      out_dir=args.out_dir,
+      out_file_format=args.out_file_format,
+      root_data_dir=args.root_data_dir,
+      dataset_dir=args.dataset_dir,
+      dataset_version_dir=args.dataset_version_dir,
+      overwrite=args.overwrite,
+      use_beam=args.use_beam,
+      num_workers=args.num_workers,
   )
 
 
 if __name__ == '__main__':
-  app.run(main)
+  app.run(main, flags_parser=eapp.make_flags_parser(convert_format_cli.CmdArgs))
