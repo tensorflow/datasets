@@ -17,12 +17,13 @@
 
 import hashlib
 import pathlib
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 
 
 def test_checksums(tmp_path: pathlib.Path):
-  path = tmp_path / 'checksums.tsv'
+  path = tmp_path / constants.CHECKSUMS_FILENAME
   url_infos = {
       'http://abc.org/data': checksums.UrlInfo(
           checksum='abcd',

@@ -211,8 +211,8 @@ def _create_dummy_data(info: utils.DatasetInfo) -> None:
 
 
 def _create_checksum(info: utils.DatasetInfo) -> None:
-  """Adds the `checksums.tsv` file."""
-  file_path = info.path / 'checksums.tsv'
+  """Adds the checksum file."""
+  file_path = info.path / constants.CHECKSUMS_FILENAME
   content = textwrap.dedent(f"""\
       # {info.todo}: If your dataset downloads files, then the checksums
       # will be automatically added here when running
