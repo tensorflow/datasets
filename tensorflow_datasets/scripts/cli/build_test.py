@@ -16,12 +16,13 @@
 """Tests for tensorflow_datasets.scripts.cli.build."""
 
 import contextlib
+import dataclasses
+import multiprocessing
 import os
 import pathlib
 from typing import Dict, Iterator, List, Optional
 from unittest import mock
 
-from absl.testing import parameterized
 from etils import epath
 import pytest
 import tensorflow_datasets as tfds
@@ -89,12 +90,12 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
   # to patch the function to record the generated_ds manually.
   # See:
   # https://stackoverflow.com/questions/64792295/how-to-get-self-instance-in-mock-mock-call-args
-  generated_ds_names = []
+  queue = multiprocessing.Queue()
 
   def _download_and_prepare(self, *args, **kwargs):
     # Remove version from generated name (as only last version can be generated)
     full_name = '/'.join(self.info.full_name.split('/')[:-1])
-    generated_ds_names.append(full_name)
+    queue.put(full_name)
     if mock_download_and_prepare:
       return
     else:
@@ -105,6 +106,12 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
       _download_and_prepare,
   ):
     main.main(args)
+    queue.put(None)
+
+  generated_ds_names = []
+  while full_name := queue.get():
+    generated_ds_names.append(full_name)
+
   return generated_ds_names
 
 
@@ -139,10 +146,10 @@ def test_build_multiple():
   ]
 
 
-@parameterized.parameters(range(5))
+@pytest.mark.parametrize('num_processes', range(1, 4))
 def test_build_parallel(num_processes):
   # Order is not guaranteed
-  assert set(_build(f'trivia_qa --num-proccesses={num_processes}')) == set([
+  assert set(_build(f'trivia_qa --num-processes={num_processes}')) == set([
       'trivia_qa/rc',
       'trivia_qa/rc.nocontext',
       'trivia_qa/unfiltered',
@@ -288,22 +295,29 @@ def test_download_only():
     mock_download.assert_called_with({'file0': 'http://data.org/file1.zip'})
 
 
-@parameterized.parameters(
-    ('--manual_dir=/a/b', {'manual_dir': '/a/b'}),
-    ('--manual_dir=/a/b --add_name_to_manual_dir', {'manual_dir': '/a/b/x'}),
-    ('--extract_dir=/a/b', {'extract_dir': '/a/b'}),
-    ('--max_examples_per_split=42', {'max_examples_per_split': 42}),
-    ('--register_checksums', {'register_checksums': True}),
-    ('--force_checksums_validation', {'force_checksums_validation': True}),
-    ('--max_shard_size_mb=128', {'max_shard_size': 128 << 20}),
-    (
-        '--download_config="{\'max_shard_size\': 1234}"',
-        {'max_shard_size': 1234},
-    ),
+@pytest.mark.parametrize(
+    'args,download_config_kwargs',
+    [
+        ('--manual_dir=/a/b', {'manual_dir': epath.Path('/a/b')}),
+        (
+            '--manual_dir=/a/b --add_name_to_manual_dir',
+            {'manual_dir': epath.Path('/a/b/x')},
+        ),
+        ('--extract_dir=/a/b', {'extract_dir': epath.Path('/a/b')}),
+        ('--max_examples_per_split=42', {'max_examples_per_split': 42}),
+        ('--register_checksums', {'register_checksums': True}),
+        ('--force_checksums_validation', {'force_checksums_validation': True}),
+        ('--max_shard_size_mb=128', {'max_shard_size': 128 << 20}),
+        (
+            '--download_config={"max_shard_size":1234}',
+            {'max_shard_size': 1234},
+        ),
+    ],
 )
 def test_make_download_config(args: str, download_config_kwargs):
-  args = main._parse_flags(f'tfds build x {download_config_kwargs}'.split())
+  args = main._parse_flags(f'tfds build x {args}'.split())
   actual = build_lib._make_download_config(args, dataset_name='x')
   # Ignore the beam runner
-  actual.replace(beam_runner=None)
-  assert actual == tfds.download.DownloadConfig(**download_config_kwargs)
+  actual = actual.replace(beam_runner=None)
+  expected = tfds.download.DownloadConfig(**download_config_kwargs)
+  assert dataclasses.asdict(actual) == dataclasses.asdict(expected)

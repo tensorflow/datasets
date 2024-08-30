@@ -367,7 +367,7 @@ def _make_download_config(
   # Load the download config
   manual_dir = args.manual_dir
   if args.add_name_to_manual_dir:
-    manual_dir = os.path.join(manual_dir, dataset_name)
+    manual_dir = manual_dir / dataset_name
 
   kwargs = {}
   if args.max_shard_size_mb:
