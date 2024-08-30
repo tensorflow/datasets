@@ -20,7 +20,6 @@ import re
 from unittest import mock
 import pytest
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
@@ -326,14 +325,16 @@ def test_name_inferred_from_pkg_level3():
   assert ds_builder.name == "dummy_ds_2"
 
 
-class ConfigBasedBuildersTest(testing.TestCase):
+class SourceDirDatasetBuilderProviderTest(testing.TestCase):
 
-  def test__get_existing_dataset_packages(self):
-    ds_packages = registered._get_existing_dataset_packages(
+  def test_provider(self):
+    provider = registered.SourceDirDatasetBuilderProvider(
         "testing/dummy_config_based_datasets"
     )
-    self.assertEqual(set(ds_packages.keys()), {"dummy_ds_1", "dummy_ds_2"})
-    pkg_path, builder_module = ds_packages["dummy_ds_1"]
+    self.assertEqual(
+        set(provider.dataset_packages), {"dummy_ds_1", "dummy_ds_2"}
+    )
+    pkg_path, builder_module = provider.dataset_packages["dummy_ds_1"]
     self.assertEndsWith(
         str(pkg_path),
         "tensorflow_datasets/testing/dummy_config_based_datasets/dummy_ds_1",
@@ -343,10 +344,12 @@ class ConfigBasedBuildersTest(testing.TestCase):
         "tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1.dummy_ds_1_dataset_builder",
     )
 
-  @mock.patch.object(
-      constants, "DATASETS_TFDS_SRC_DIR", "testing/dummy_config_based_datasets"
-  )
   def test_imported_builder_cls(self):
+    registered.add_dataset_builder_provider(
+        registered.SourceDirDatasetBuilderProvider(
+            "testing/dummy_config_based_datasets"
+        )
+    )
     builder = registered.imported_builder_cls("dummy_ds_1")
     self.assertEqual(builder.name, "dummy_ds_1")
 

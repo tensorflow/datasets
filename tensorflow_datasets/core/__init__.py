@@ -33,6 +33,8 @@ from tensorflow_datasets.core.file_adapters import FileFormat
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 from tensorflow_datasets.core.load import DatasetCollectionLoader
 from tensorflow_datasets.core.naming import ShardedFileTemplate
+from tensorflow_datasets.core.registered import add_dataset_builder_provider
+from tensorflow_datasets.core.registered import DatasetBuilderProvider
 from tensorflow_datasets.core.registered import DatasetNotFoundError
 from tensorflow_datasets.core.sequential_writer import SequentialWriter
 from tensorflow_datasets.core.split_builder import SplitGeneratorLegacy as SplitGenerator
@@ -61,12 +63,14 @@ def benchmark(*args, **kwargs):
 
 __all__ = [
     "add_data_dir",
+    "add_dataset_builder_provider",
     "as_path",
     "BenchmarkResult",
     "BeamBasedBuilder",
     "BeamMetadataDict",
     "BuilderConfig",
     "DatasetBuilder",
+    "DatasetBuilderProvider",
     "DatasetCollectionLoader",
     "DatasetInfo",
     "DatasetIdentity",
