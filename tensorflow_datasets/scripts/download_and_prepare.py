@@ -15,43 +15,56 @@
 
 r"""Wrapper around `tfds build`."""
 
-import argparse
+import dataclasses
 from typing import List
 
 from absl import app
-from absl import flags
 from absl import logging
-
+import simple_parsing
 from tensorflow_datasets.scripts.cli import main as main_cli
 
-module_import = flags.DEFINE_string('module_import', None, '`--imports` flag.')
-dataset = flags.DEFINE_string('dataset', None, 'singleton `--datasets` flag.')
 
-builder_config_id = flags.DEFINE_integer(
-    'builder_config_id', None, '`--config_idx` flag'
-)
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class CmdArgs:
+  """CLI arguments for downloading and preparing datasets.
+
+  Attributes:
+    module_import: `--imports` flag.
+    dataset: singleton `--datasets` flag.
+    builder_config_id: `--config_idx` flag.
+  """
+
+  module_import: str | None = None
+  dataset: str | None = None
+  builder_config_id: int | None = None
 
 
-
-def _parse_flags(argv: List[str]) -> argparse.Namespace:
+def _parse_flags(argv: List[str]) -> main_cli.CmdArgs:
   """Command lines flag parsing."""
-  return main_cli._parse_flags([argv[0], 'build'] + argv[1:])  # pylint: disable=protected-access
+  parser = simple_parsing.ArgumentParser()
+  parser.add_arguments(CmdArgs, dest='args')
+  namespace, build_argv = parser.parse_known_args(argv[1:])
+  args = namespace.args
+
+  # Construct CLI arguments for build command
+  build_argv = [argv[0], 'build'] + build_argv
+  if args.module_import:
+    build_argv += ['--imports', args.module_import]
+  if args.dataset:
+    build_argv += ['--datasets', args.dataset]
+  if args.builder_config_id is not None:
+    build_argv += ['--config_idx', args.builder_config_id]
+  return main_cli._parse_flags(build_argv)  # pylint: disable=protected-access
 
 
 _display_warning = True
 
 
-def main(args: argparse.Namespace) -> None:
+def main(args: main_cli.CmdArgs) -> None:
   if _display_warning:
     logging.warning(
         '***`tfds build` should be used instead of `download_and_prepare`.***'
     )
-  if module_import.value:
-    args.imports = module_import.value
-  if dataset.value:
-    args.datasets = [dataset.value]
-  if builder_config_id.value is not None:
-    args.config_idx = builder_config_id.value
   main_cli.main(args)
 
 
