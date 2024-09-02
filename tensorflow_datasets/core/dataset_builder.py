@@ -1315,7 +1315,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       )
 
     return download.DownloadManager(
-        download_dir=download_dir,
+        download_dir=download_dir / self.name,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
         url_infos=self.url_infos,

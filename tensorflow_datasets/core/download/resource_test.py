@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for resource module."""
+import hashlib
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import resource
 
@@ -85,7 +86,8 @@ cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.
 
   def test_(self):
     for url, expected in zip(self.urls, self.expected):
-      res = resource.get_dl_dirname(url)
+      checksum = hashlib.sha256(url.encode()).hexdigest()
+      res = resource.get_dl_fname(url, checksum)
       self.assertEqual(res, expected)
 
 
