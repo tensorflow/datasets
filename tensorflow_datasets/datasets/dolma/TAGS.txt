@@ -1,0 +1,4 @@
+content.data-type.text # Contains text data.
+content.language.en # Contains text in language English / en.
+content.monolingual # Contains text in 1 natural language.
+ml.task.language-modelling # Relates to Language Modelling, a machine learning task.
