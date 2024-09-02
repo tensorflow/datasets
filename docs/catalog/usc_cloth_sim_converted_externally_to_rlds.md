@@ -49,17 +49,17 @@ FeaturesDict({
         'file_path': Text(shape=(), dtype=string),
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(4,), dtype=float32),
-        'discount': Scalar(shape=(), dtype=float32),
+        'action': Tensor(shape=(4,), dtype=float32, description=Robot action, consists of x,y,z goal and picker commandpicker<0.5 = open, picker>0.5 = close.),
+        'discount': Scalar(shape=(), dtype=float32, description=Discount if provided, default to 1.),
         'is_first': bool,
         'is_last': bool,
         'is_terminal': bool,
-        'language_embedding': Tensor(shape=(512,), dtype=float32),
+        'language_embedding': Tensor(shape=(512,), dtype=float32, description=Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5),
         'language_instruction': Text(shape=(), dtype=string),
         'observation': FeaturesDict({
-            'image': Image(shape=(32, 32, 3), dtype=uint8),
+            'image': Image(shape=(32, 32, 3), dtype=uint8, description=Image observation of cloth.),
         }),
-        'reward': Scalar(shape=(), dtype=float32),
+        'reward': Scalar(shape=(), dtype=float32, description=Reward as a normalized performance metric in [0, 1].0 = no change from initial state. 1 = perfect fold.-ve performance means the cloth is worse off than initial state.),
     }),
 })
 ```

@@ -47,19 +47,19 @@ FeaturesDict({
         'file_path': Text(shape=(), dtype=string),
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(20,), dtype=float32),
-        'discount': Scalar(shape=(), dtype=float32),
+        'action': Tensor(shape=(20,), dtype=float32, description=Robot action, consists of [3x end-effector position residual, 3x end-effector axis-angle residual, 7x robot joint k_p gain coefficient, 7x robot joint damping ratio coefficient].The action residuals are global, i.e. multiplied on theleft-hand side of the current end-effector state.),
+        'discount': Scalar(shape=(), dtype=float32, description=Discount if provided, default to 1.),
         'is_first': bool,
         'is_last': bool,
         'is_terminal': bool,
-        'language_embedding': Tensor(shape=(512,), dtype=float32),
+        'language_embedding': Tensor(shape=(512,), dtype=float32, description=Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5),
         'language_instruction': Text(shape=(), dtype=string),
         'observation': FeaturesDict({
-            'image': Image(shape=(480, 640, 3), dtype=uint8),
-            'partial_pointcloud': Tensor(shape=(512, 3), dtype=float32),
-            'state': Tensor(shape=(21,), dtype=float32),
+            'image': Image(shape=(480, 640, 3), dtype=uint8, description=Main camera RGB observation.),
+            'partial_pointcloud': Tensor(shape=(512, 3), dtype=float32, description=Partial pointcloud observation),
+            'state': Tensor(shape=(21,), dtype=float32, description=Robot state, consists of [joint_states, end_effector_pose].Joint states are 14-dimensional, formatted in the order of [q_0, w_0, q_1, w_0, ...].In other words,  joint positions and velocities are interleaved.The end-effector pose is 7-dimensional, formatted in the order of [position, quaternion].The quaternion is formatted in (x,y,z,w) order. The end-effector pose references the tool frame, in the center of the two fingers of the gripper.),
         }),
-        'reward': Scalar(shape=(), dtype=float32),
+        'reward': Scalar(shape=(), dtype=float32, description=Reward if provided, 1 on final step for demos.),
     }),
 })
 ```

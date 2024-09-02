@@ -70,7 +70,7 @@ Checkpoints are ordered in time (so checkpoint 0 ran before checkpoint 1).
 FeaturesDict({
     'checkpoint_id': int64,
     'episode_id': int64,
-    'episode_return': Scalar(shape=(), dtype=float32),
+    'episode_return': Scalar(shape=(), dtype=float32, description=Sum of the clipped rewards.),
     'steps': Dataset({
         'action': int64,
         'discount': float32,
@@ -78,7 +78,7 @@ FeaturesDict({
         'is_last': bool,
         'is_terminal': bool,
         'observation': Image(shape=(84, 84, 1), dtype=uint8),
-        'reward': Scalar(shape=(), dtype=float32),
+        'reward': Scalar(shape=(), dtype=float32, description=Clipped reward.),
     }),
 })
 ```

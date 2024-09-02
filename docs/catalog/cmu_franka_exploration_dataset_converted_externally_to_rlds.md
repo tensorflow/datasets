@@ -48,19 +48,19 @@ FeaturesDict({
         'file_path': Text(shape=(), dtype=string),
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=float32),
-        'discount': Scalar(shape=(), dtype=float32),
+        'action': Tensor(shape=(8,), dtype=float32, description=Robot action, consists of [end effector position3x, end effector orientation3x, gripper action1x, episode termination1x].),
+        'discount': Scalar(shape=(), dtype=float32, description=Discount if provided, default to 1.),
         'is_first': bool,
         'is_last': bool,
         'is_terminal': bool,
-        'language_embedding': Tensor(shape=(512,), dtype=float32),
+        'language_embedding': Tensor(shape=(512,), dtype=float32, description=Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5),
         'language_instruction': Text(shape=(), dtype=string),
         'observation': FeaturesDict({
-            'highres_image': Image(shape=(480, 640, 3), dtype=uint8),
-            'image': Image(shape=(64, 64, 3), dtype=uint8),
+            'highres_image': Image(shape=(480, 640, 3), dtype=uint8, description=High resolution main camera observation),
+            'image': Image(shape=(64, 64, 3), dtype=uint8, description=Main camera RGB observation.),
         }),
-        'reward': Scalar(shape=(), dtype=float32),
-        'structured_action': Tensor(shape=(8,), dtype=float32),
+        'reward': Scalar(shape=(), dtype=float32, description=Reward if provided, 1 on final step for demos.),
+        'structured_action': Tensor(shape=(8,), dtype=float32, description=Structured action, consisting of hybrid affordance and end-effector control, described in Structured World Models from Human Videos.),
     }),
 })
 ```

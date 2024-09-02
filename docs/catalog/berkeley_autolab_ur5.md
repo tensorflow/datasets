@@ -48,9 +48,9 @@ FeaturesDict({
     'steps': Dataset({
         'action': FeaturesDict({
             'gripper_closedness_action': float32,
-            'rotation_delta': Tensor(shape=(3,), dtype=float32),
+            'rotation_delta': Tensor(shape=(3,), dtype=float32, description=Delta change in roll, pitch, yaw.),
             'terminate_episode': float32,
-            'world_vector': Tensor(shape=(3,), dtype=float32),
+            'world_vector': Tensor(shape=(3,), dtype=float32, description=Delta change in XYZ.),
         }),
         'is_first': bool,
         'is_last': bool,
@@ -61,7 +61,7 @@ FeaturesDict({
             'image_with_depth': Image(shape=(480, 640, 1), dtype=float32),
             'natural_language_embedding': Tensor(shape=(512,), dtype=float32),
             'natural_language_instruction': string,
-            'robot_state': Tensor(shape=(15,), dtype=float32),
+            'robot_state': Tensor(shape=(15,), dtype=float32, description=Explanation of the robot state can be found at https://sites.google.com/corp/view/berkeley-ur5),
         }),
         'reward': Scalar(shape=(), dtype=float32),
     }),

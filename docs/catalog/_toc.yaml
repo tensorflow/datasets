@@ -610,6 +610,9 @@ toc:
     title: databricks_dolly
   - path: /datasets/catalog/dices
     title: dices
+  - path: /datasets/catalog/dolma
+    status: nightly
+    title: dolma
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/irc_disentanglement
@@ -668,6 +671,9 @@ toc:
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/dices
     title: dices
+  - path: /datasets/catalog/dolma
+    status: nightly
+    title: dolma
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/imdb_reviews
@@ -1358,6 +1364,9 @@ toc:
     title: dices
   - path: /datasets/catalog/doc_nli
     title: doc_nli
+  - path: /datasets/catalog/dolma
+    status: nightly
+    title: dolma
   - path: /datasets/catalog/dolphin_number_word
     title: dolphin_number_word
   - path: /datasets/catalog/drop

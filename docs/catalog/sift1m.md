@@ -53,10 +53,10 @@ Split        | Examples
 ```python
 FeaturesDict({
     'embedding': Tensor(shape=(128,), dtype=float32),
-    'index': Scalar(shape=(), dtype=int64),
+    'index': Scalar(shape=(), dtype=int64, description=Index within the split.),
     'neighbors': Sequence({
-        'distance': Scalar(shape=(), dtype=float32),
-        'index': Scalar(shape=(), dtype=int64),
+        'distance': Scalar(shape=(), dtype=float32, description=Neighbor distance.),
+        'index': Scalar(shape=(), dtype=int64, description=Neighbor index.),
     }),
 })
 ```

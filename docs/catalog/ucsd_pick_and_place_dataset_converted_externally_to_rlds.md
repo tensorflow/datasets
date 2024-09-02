@@ -46,23 +46,23 @@ FeaturesDict({
     'episode_metadata': FeaturesDict({
         'disclaimer': Text(shape=(), dtype=string),
         'file_path': Text(shape=(), dtype=string),
-        'n_transitions': Scalar(shape=(), dtype=int32),
-        'success': Scalar(shape=(), dtype=bool),
+        'n_transitions': Scalar(shape=(), dtype=int32, description=Number of transitions in the episode.),
+        'success': Scalar(shape=(), dtype=bool, description=True if the last state of an episode is a success state, False otherwise.),
         'success_labeled_by': Text(shape=(), dtype=string),
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(4,), dtype=float32),
-        'discount': Scalar(shape=(), dtype=float32),
+        'action': Tensor(shape=(4,), dtype=float32, description=Robot action, consists of [3x gripper velocities,1x gripper open/close torque].),
+        'discount': Scalar(shape=(), dtype=float32, description=Discount if provided, default to 1.),
         'is_first': bool,
         'is_last': bool,
         'is_terminal': bool,
-        'language_embedding': Tensor(shape=(512,), dtype=float32),
+        'language_embedding': Tensor(shape=(512,), dtype=float32, description=Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5),
         'language_instruction': Text(shape=(), dtype=string),
         'observation': FeaturesDict({
-            'image': Image(shape=(224, 224, 3), dtype=uint8),
-            'state': Tensor(shape=(7,), dtype=float32),
+            'image': Image(shape=(224, 224, 3), dtype=uint8, description=Camera RGB observation.),
+            'state': Tensor(shape=(7,), dtype=float32, description=Robot state, consists of [3x gripper position,3x gripper orientation, 1x finger distance].),
         }),
-        'reward': Scalar(shape=(), dtype=float32),
+        'reward': Scalar(shape=(), dtype=float32, description=Reward if provided, 1 on final step for demos.),
     }),
 })
 ```

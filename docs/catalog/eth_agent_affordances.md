@@ -46,22 +46,22 @@ Split     | Examples
 FeaturesDict({
     'episode_metadata': FeaturesDict({
         'file_path': Text(shape=(), dtype=string),
-        'input_point_cloud': Tensor(shape=(10000, 3), dtype=float16),
+        'input_point_cloud': Tensor(shape=(10000, 3), dtype=float16, description=Point cloud (geometry only) of the object at the beginning of the episode (world frame) as a numpy array (10000,3).),
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=float32),
-        'discount': Scalar(shape=(), dtype=float32),
+        'action': Tensor(shape=(6,), dtype=float32, description=Robot action, consists of [end-effector velocity (v_x,v_y,v_z,omega_x,omega_y,omega_z) in world frame),
+        'discount': Scalar(shape=(), dtype=float32, description=Discount if provided, default to 1.),
         'is_first': bool,
         'is_last': bool,
         'is_terminal': bool,
-        'language_embedding': Tensor(shape=(512,), dtype=float32),
+        'language_embedding': Tensor(shape=(512,), dtype=float32, description=Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5),
         'language_instruction': Text(shape=(), dtype=string),
         'observation': FeaturesDict({
-            'image': Image(shape=(64, 64, 3), dtype=uint8),
-            'input_point_cloud': Tensor(shape=(10000, 3), dtype=float16),
-            'state': Tensor(shape=(8,), dtype=float32),
+            'image': Image(shape=(64, 64, 3), dtype=uint8, description=Main camera RGB observation. Not available for this dataset, will be set to np.zeros.),
+            'input_point_cloud': Tensor(shape=(10000, 3), dtype=float16, description=Point cloud (geometry only) of the object at the beginning of the episode (world frame) as a numpy array (10000,3).),
+            'state': Tensor(shape=(8,), dtype=float32, description=State, consists of [end-effector pose (x,y,z,yaw,pitch,roll) in world frame, 1x gripper open/close, 1x door opening angle].),
         }),
-        'reward': Scalar(shape=(), dtype=float32),
+        'reward': Scalar(shape=(), dtype=float32, description=Reward if provided, 1 on final step for demos.),
     }),
 })
 ```

@@ -51,11 +51,11 @@ recognition and speech-to-text translation.
 FeaturesDict({
     'audio': Audio(shape=(None,), dtype=int64),
     'gender': ClassLabel(shape=(), dtype=int64, num_classes=3),
-    'id': Scalar(shape=(), dtype=int32),
+    'id': Scalar(shape=(), dtype=int32, description=Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id.),
     'lang_group_id': ClassLabel(shape=(), dtype=int64, num_classes=7),
     'lang_id': ClassLabel(shape=(), dtype=int64, num_classes=102),
     'language': Text(shape=(), dtype=string),
-    'num_samples': Scalar(shape=(), dtype=int32),
+    'num_samples': Scalar(shape=(), dtype=int32, description=Total number of frames in the audio),
     'path': string,
     'raw_transcription': Text(shape=(), dtype=string),
     'transcription': Text(shape=(), dtype=string),

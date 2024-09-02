@@ -56,7 +56,7 @@ FeaturesDict({
             'image': Image(shape=(480, 640, 3), dtype=uint8),
             'natural_language_embedding': Tensor(shape=(512,), dtype=float32),
             'natural_language_instruction': string,
-            'state': Tensor(shape=(7,), dtype=float32),
+            'state': Tensor(shape=(7,), dtype=float32, description=numpy array of shape (7,). Contains the robot joint states (as absolute joint angles) at each timestep),
         }),
         'reward': Scalar(shape=(), dtype=float32),
     }),

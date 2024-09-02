@@ -155,7 +155,7 @@ Split                                  | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=int64),
+    'audio': Audio(shape=(None,), dtype=int64, description=The audio clip containing a snippet from a book read aloud),
     'book_id': Text(shape=(), dtype=string),
     'id': Text(shape=(), dtype=string),
     'speaker_id': Text(shape=(), dtype=string),

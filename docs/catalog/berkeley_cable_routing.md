@@ -47,9 +47,9 @@ Split     | Examples
 FeaturesDict({
     'steps': Dataset({
         'action': FeaturesDict({
-            'rotation_delta': Tensor(shape=(3,), dtype=float32),
+            'rotation_delta': Tensor(shape=(3,), dtype=float32, description=Angular velocity about the z axis.),
             'terminate_episode': float32,
-            'world_vector': Tensor(shape=(3,), dtype=float32),
+            'world_vector': Tensor(shape=(3,), dtype=float32, description=Velocity in XYZ.),
         }),
         'is_first': bool,
         'is_last': bool,

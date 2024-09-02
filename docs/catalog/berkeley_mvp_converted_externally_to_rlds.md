@@ -48,20 +48,20 @@ FeaturesDict({
         'file_path': Text(shape=(), dtype=string),
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=float32),
-        'discount': Scalar(shape=(), dtype=float32),
+        'action': Tensor(shape=(8,), dtype=float32, description=Robot action, consists of [7 delta joint pos,1x gripper binary state].),
+        'discount': Scalar(shape=(), dtype=float32, description=Discount if provided, default to 1.),
         'is_first': bool,
         'is_last': bool,
         'is_terminal': bool,
-        'language_embedding': Tensor(shape=(512,), dtype=float32),
+        'language_embedding': Tensor(shape=(512,), dtype=float32, description=Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5),
         'language_instruction': Text(shape=(), dtype=string),
         'observation': FeaturesDict({
-            'gripper': Scalar(shape=(), dtype=bool),
-            'hand_image': Image(shape=(480, 640, 3), dtype=uint8),
-            'joint_pos': Tensor(shape=(7,), dtype=float32),
-            'pose': Tensor(shape=(7,), dtype=float32),
+            'gripper': Scalar(shape=(), dtype=bool, description=Binary gripper state (1 - closed, 0 - open)),
+            'hand_image': Image(shape=(480, 640, 3), dtype=uint8, description=Hand camera RGB observation.),
+            'joint_pos': Tensor(shape=(7,), dtype=float32, description=xArm joint positions (7 DoF).),
+            'pose': Tensor(shape=(7,), dtype=float32, description=Gripper pose, robot frame, [3 position, 4 rotation]),
         }),
-        'reward': Scalar(shape=(), dtype=float32),
+        'reward': Scalar(shape=(), dtype=float32, description=Reward if provided, 1 on final step for demos.),
     }),
 })
 ```

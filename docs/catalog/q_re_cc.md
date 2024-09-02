@@ -49,11 +49,11 @@ FeaturesDict({
     'answer': Text(shape=(), dtype=string),
     'answer_url': Text(shape=(), dtype=string),
     'context': Sequence(Text(shape=(), dtype=string)),
-    'conversation_id': Scalar(shape=(), dtype=int32),
+    'conversation_id': Scalar(shape=(), dtype=int32, description=The id of the conversation.),
     'question': Text(shape=(), dtype=string),
     'question_rewrite': Text(shape=(), dtype=string),
     'source': Text(shape=(), dtype=string),
-    'turn_id': Scalar(shape=(), dtype=int32),
+    'turn_id': Scalar(shape=(), dtype=int32, description=The id of the conversation turn, within a conversation.),
 })
 ```
 

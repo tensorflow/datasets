@@ -40,11 +40,11 @@ FeaturesDict({
     'accent': Text(shape=(), dtype=string),
     'age': Text(shape=(), dtype=string),
     'client_id': Text(shape=(), dtype=string),
-    'downvotes': Scalar(shape=(), dtype=int32),
+    'downvotes': Scalar(shape=(), dtype=int32, description=Number of people who said audio does not match text),
     'gender': ClassLabel(shape=(), dtype=int64, num_classes=3),
     'segment': Text(shape=(), dtype=string),
     'sentence': Text(shape=(), dtype=string),
-    'upvotes': Scalar(shape=(), dtype=int32),
+    'upvotes': Scalar(shape=(), dtype=int32, description=Number of people who said audio matches the text),
     'voice': Audio(shape=(None,), dtype=int64),
 })
 ```

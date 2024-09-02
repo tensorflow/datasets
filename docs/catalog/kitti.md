@@ -64,9 +64,9 @@ FeaturesDict({
     'image/file_name': Text(shape=(), dtype=string),
     'objects': Sequence({
         'alpha': float32,
-        'bbox': BBoxFeature(shape=(4,), dtype=float32),
-        'dimensions': Tensor(shape=(3,), dtype=float32),
-        'location': Tensor(shape=(3,), dtype=float32),
+        'bbox': BBoxFeature(shape=(4,), dtype=float32, description=2D bounding box of object in the image),
+        'dimensions': Tensor(shape=(3,), dtype=float32, description=3D object dimensions: height, width, length (in meters)),
+        'location': Tensor(shape=(3,), dtype=float32, description=3D object location x,y,z in camera coordinates (in meters)),
         'occluded': ClassLabel(shape=(), dtype=int64, num_classes=4),
         'rotation_y': float32,
         'truncated': float32,

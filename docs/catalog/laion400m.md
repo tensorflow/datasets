@@ -112,12 +112,12 @@ Split | Examples
 ```python
 FeaturesDict({
     'caption': Text(shape=(), dtype=string),
-    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image': Image(shape=(None, None, 3), dtype=uint8, description=image),
     'license': Text(shape=(), dtype=string),
     'nsfw': ClassLabel(shape=(), dtype=int64, num_classes=4),
-    'original_height': Scalar(shape=(), dtype=int32),
-    'original_width': Scalar(shape=(), dtype=int32),
-    'similarity': Scalar(shape=(), dtype=float64),
+    'original_height': Scalar(shape=(), dtype=int32, description=original height of the image),
+    'original_width': Scalar(shape=(), dtype=int32, description=original width of the image),
+    'similarity': Scalar(shape=(), dtype=float64, description=cosine similarity score between the text and image embedding. Missing values default to -1.0),
     'url': Text(shape=(), dtype=string),
 })
 ```
@@ -174,13 +174,13 @@ FeaturesDict({
 ```python
 FeaturesDict({
     'caption': Text(shape=(), dtype=string),
-    'image_embedding': Tensor(shape=(512,), dtype=float16),
+    'image_embedding': Tensor(shape=(512,), dtype=float16, description=CLIP image embedding),
     'license': Text(shape=(), dtype=string),
     'nsfw': ClassLabel(shape=(), dtype=int64, num_classes=4),
-    'original_height': Scalar(shape=(), dtype=int32),
-    'original_width': Scalar(shape=(), dtype=int32),
-    'similarity': Scalar(shape=(), dtype=float64),
-    'text_embedding': Tensor(shape=(512,), dtype=float16),
+    'original_height': Scalar(shape=(), dtype=int32, description=original height of the image),
+    'original_width': Scalar(shape=(), dtype=int32, description=original width of the image),
+    'similarity': Scalar(shape=(), dtype=float64, description=cosine similarity score between the text and image embedding. Missing values default to -1.0),
+    'text_embedding': Tensor(shape=(512,), dtype=float16, description=CLIP text embedding),
     'url': Text(shape=(), dtype=string),
 })
 ```

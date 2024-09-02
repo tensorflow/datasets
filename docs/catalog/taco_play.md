@@ -47,9 +47,9 @@ Split     | Examples
 FeaturesDict({
     'steps': Dataset({
         'action': FeaturesDict({
-            'actions': Tensor(shape=(7,), dtype=float32),
-            'rel_actions_gripper': Tensor(shape=(7,), dtype=float32),
-            'rel_actions_world': Tensor(shape=(7,), dtype=float32),
+            'actions': Tensor(shape=(7,), dtype=float32, description=absolute desired values for gripper pose (first 6 dimensions are x, y, z, yaw, pitch, roll), last dimension is open_gripper (-1 is open gripper, 1 is close)),
+            'rel_actions_gripper': Tensor(shape=(7,), dtype=float32, description=relative actions for gripper pose in the gripper camera frame (first 6 dimensions are x, y, z, yaw, pitch, roll), last dimension is open_gripper (-1 is open gripper, 1 is close)),
+            'rel_actions_world': Tensor(shape=(7,), dtype=float32, description=relative actions for gripper pose in the robot base frame (first 6 dimensions are x, y, z, yaw, pitch, roll), last dimension is open_gripper (-1 is open gripper, 1 is close)),
             'terminate_episode': float32,
         }),
         'is_first': bool,
@@ -61,8 +61,8 @@ FeaturesDict({
             'natural_language_embedding': Tensor(shape=(512,), dtype=float32),
             'natural_language_instruction': string,
             'rgb_gripper': Image(shape=(84, 84, 3), dtype=uint8),
-            'rgb_static': Image(shape=(150, 200, 3), dtype=uint8),
-            'robot_obs': Tensor(shape=(15,), dtype=float32),
+            'rgb_static': Image(shape=(150, 200, 3), dtype=uint8, description=RGB static image of shape. (150, 200, 3). Subsampled from (200,200, 3) image.),
+            'robot_obs': Tensor(shape=(15,), dtype=float32, description=EE position (3), EE orientation in euler angles (3), gripper width (1), joint positions (7), gripper action (1)),
             'structured_language_instruction': string,
         }),
         'reward': Scalar(shape=(), dtype=float32),

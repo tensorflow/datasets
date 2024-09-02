@@ -47,18 +47,18 @@ FeaturesDict({
         'file_path': Text(shape=(), dtype=string),
     }),
     'steps': Dataset({
-        'action': Tensor(shape=(8,), dtype=float32),
-        'discount': Scalar(shape=(), dtype=float32),
+        'action': Tensor(shape=(8,), dtype=float32, description=8-dimensional action, consisting of end-effector position and orientation, gripper open/close and a episode termination action.),
+        'discount': Scalar(shape=(), dtype=float32, description=Discount if provided, default to 1.),
         'is_first': bool,
         'is_last': bool,
         'is_terminal': bool,
-        'language_embedding': Tensor(shape=(512,), dtype=float32),
+        'language_embedding': Tensor(shape=(512,), dtype=float32, description=Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5),
         'language_instruction': Text(shape=(), dtype=string),
         'observation': FeaturesDict({
-            'image': Image(shape=(480, 640, 3), dtype=uint8),
-            'state': Tensor(shape=(21,), dtype=float32),
+            'image': Image(shape=(480, 640, 3), dtype=uint8, description=Main camera RGB observation.),
+            'state': Tensor(shape=(21,), dtype=float32, description=21-dimensional joint states, consists of robot joint angles, joint velocity and joint torque.),
         }),
-        'reward': Scalar(shape=(), dtype=float32),
+        'reward': Scalar(shape=(), dtype=float32, description=Reward if provided, 1 on final step for demos.),
     }),
 })
 ```

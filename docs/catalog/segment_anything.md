@@ -83,20 +83,20 @@ Split     | Examples
 ```python
 FeaturesDict({
     'annotations': Sequence({
-        'area': Scalar(shape=(), dtype=uint64),
-        'bbox': BBoxFeature(shape=(4,), dtype=float32),
-        'crop_box': BBoxFeature(shape=(4,), dtype=float32),
-        'id': Scalar(shape=(), dtype=uint64),
-        'point_coords': Tensor(shape=(1, 2), dtype=float64),
-        'predicted_iou': Scalar(shape=(), dtype=float64),
+        'area': Scalar(shape=(), dtype=uint64, description=The area in pixels of the mask.),
+        'bbox': BBoxFeature(shape=(4,), dtype=float32, description=The box around the mask, in TFDS format.),
+        'crop_box': BBoxFeature(shape=(4,), dtype=float32, description=The crop of the image used to generate the mask, in TFDS format.),
+        'id': Scalar(shape=(), dtype=uint64, description=Identifier for the annotation.),
+        'point_coords': Tensor(shape=(1, 2), dtype=float64, description=The point coordinates input to the model to generate the mask.),
+        'predicted_iou': Scalar(shape=(), dtype=float64, description=The model's own prediction of the mask's quality.),
         'segmentation': FeaturesDict({
             'counts': string,
             'size': Tensor(shape=(2,), dtype=uint64),
         }),
-        'stability_score': Scalar(shape=(), dtype=float64),
+        'stability_score': Scalar(shape=(), dtype=float64, description=A measure of the mask's quality.),
     }),
     'image': FeaturesDict({
-        'content': Image(shape=(None, None, 3), dtype=uint8),
+        'content': Image(shape=(None, None, 3), dtype=uint8, description=Content of the image.),
         'file_name': string,
         'height': uint64,
         'image_id': uint64,
