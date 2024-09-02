@@ -77,9 +77,9 @@ def _read_url_info(url_path: epath.Path) -> checksums_lib.UrlInfo:
 
 def get_cached_path(
     manually_downloaded_path: epath.Path | None,
-    checksum_path: epath.Path | None,
-    url_path: epath.Path,
-    expected_url_info: checksums_lib.UrlInfo | None,
+    registered_path: epath.Path | None,
+    unregistered_path: epath.Path,
+    registered_url_info: checksums_lib.UrlInfo | None,
 ) -> DownloadResult:
   """Returns the downloaded path and computed url-info.
 
@@ -90,29 +90,31 @@ def get_cached_path(
 
   Args:
     manually_downloaded_path: Manually downloaded in `dl_manager.manual_dir`
-    checksum_path: Cached in the final destination (if checksum known)
-    url_path: Cached in the tmp destination (if checksum unknown).
-    expected_url_info: Registered checksum (if known)
+    registered_path: Cached at the final destination (if checksum known)
+    unregistered_path: Cached at the tmp destination (if checksum unknown).
+    registered_url_info: Registered checksum (if known)
   """
   # User has manually downloaded the file.
   if manually_downloaded_path and manually_downloaded_path.exists():
     return DownloadResult(path=manually_downloaded_path, url_info=None)
 
   # Download has been cached (checksum known)
-  elif checksum_path and resource_lib.Resource.exists_locally(checksum_path):
+  elif registered_path and resource_lib.Resource.exists_locally(
+      registered_path
+  ):
     # `path = f(checksum)` was found, so url_info match
-    return DownloadResult(checksum_path, url_info=expected_url_info)
+    return DownloadResult(path=registered_path, url_info=registered_url_info)
 
   # Download has been cached (checksum unknown)
-  elif resource_lib.Resource.exists_locally(url_path):
+  elif resource_lib.Resource.exists_locally(unregistered_path):
     # Info restored from `.INFO` file
-    computed_url_info = _read_url_info(url_path)
+    url_info = _read_url_info(unregistered_path)
     # If checksums are now registered but do not match, trigger a new
     # download (e.g. previous file corrupted, checksums updated)
-    if expected_url_info and computed_url_info != expected_url_info:
+    if registered_url_info and url_info != registered_url_info:
       return DownloadResult(path=None, url_info=None)
     else:
-      return DownloadResult(path=url_path, url_info=computed_url_info)
+      return DownloadResult(path=unregistered_path, url_info=url_info)
 
   # Else file not found (or has bad checksums). (re)download.
   else:
