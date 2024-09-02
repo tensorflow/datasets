@@ -184,6 +184,26 @@ def test_convert_feature_name_to_filename(feature_name, parent_name, expected):
   )
 
 
+def test_feature_repr():
+  json = {
+      "description": "Image encoded as JPEG.",
+      "image": {
+          "dtype": "uint8",
+          "encodingFormat": "jpeg",
+          "shape": {"dimensions": ["-1", "-1", "3"]},
+      },
+      "pythonClassName": (
+          "tensorflow_datasets.core.features.image_feature.Image"
+      ),
+  }
+  feature_connector = feature.FeatureConnector.from_json(json)
+  expected_feature_connector_repr = (
+      "Image(shape=(None, None, 3), dtype=uint8, description=Image encoded as"
+      " JPEG.)"
+  )
+  assert str(feature_connector) == expected_feature_connector_repr
+
+
 def test_tensor_info_repr():
   tensor_info = feature.TensorInfo(
       shape=(), dtype=np.int32, minimum=1, maximum=42

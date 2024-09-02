@@ -973,7 +973,10 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
 
   def _additional_repr_info(self):
     """Override to return additional info to go into __repr__."""
-    return {}
+    additional_repr_info = {}
+    if description := self.doc.desc:
+      additional_repr_info['description'] = description
+    return additional_repr_info
 
   def __repr__(self):
     """Display the feature dictionary."""
