@@ -1280,7 +1280,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     if download_config.register_checksums:
       # Note: Error will be raised here if user try to record checksums
       # from a `zipapp`
-      register_checksums_path = utils.to_write_path(self._checksums_path)
+      try:
+        register_checksums_path = utils.to_write_path(self._checksums_path)
+        download.validate_checksums_path(register_checksums_path)
+      except Exception:  # pylint: disable=broad-except
+        raise
     else:
       register_checksums_path = None
 

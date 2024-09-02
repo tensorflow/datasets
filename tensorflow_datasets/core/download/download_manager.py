@@ -239,14 +239,6 @@ class DownloadManager(object):
             ' set.'
         )
       register_checksums_path = epath.Path(register_checksums_path)
-      if not register_checksums_path.exists():
-        # Create the file here to make sure user has write access before
-        # starting downloads.
-        register_checksums_path.touch()
-      else:
-        # Make sure the user has write access before downloading any files.
-        # (e.g. TFDS installed by admin)
-        register_checksums_path.write_text(register_checksums_path.read_text())
 
     download_dir = epath.Path(download_dir).expanduser()
     if extract_dir:
