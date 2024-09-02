@@ -13,17 +13,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    # TODO(pneumoniamnist): Specifies the tfds.core.DatasetInfo object
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            # These are the features of your dataset like images, labels ...
-            'image': tfds.features.Image(shape=(28, 28, 3)),
+            'image': tfds.features.Image(shape=(28, 28, 1)),
             'label': tfds.features.ClassLabel(names=['Normal', 'Pneumonia']),
         }),
-        # If there's a common (input, target) tuple from the
-        # features, specify them here. They'll be used if
-        # `as_supervised=True` in `builder.as_dataset`.
-        supervised_keys=('image', 'label'),  # Set to `None` to disable
+        supervised_keys=('image', 'label'),
         homepage='https://medmnist.com//',
     )
 
