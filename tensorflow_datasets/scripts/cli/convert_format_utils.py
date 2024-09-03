@@ -20,7 +20,7 @@ import dataclasses
 import functools
 import os
 import re
-from typing import Type
+from typing import Callable, Type
 
 from etils import epy
 
@@ -31,6 +31,7 @@ with epy.lazy_imports():
   from absl import logging
   import apache_beam as beam
   from etils import epath
+  import tensorflow as tf
   from tensorflow_datasets.core import constants
   from tensorflow_datasets.core import dataset_info
   from tensorflow_datasets.core import file_adapters
@@ -44,6 +45,9 @@ with epy.lazy_imports():
   # pylint: enable=g-import-not-at-top
 
 
+ConvertFn = Callable[[tf.train.Example], bytes]
+
+
 @dataclasses.dataclass(frozen=True)
 class ShardInstruction:
   """Instruction for how one single shard should be converted."""
@@ -52,12 +56,16 @@ class ShardInstruction:
   in_file_adapter: Type[file_adapters.FileAdapter]
   out_path: epath.Path
   out_file_adapter: Type[file_adapters.FileAdapter]
+  convert_fn: ConvertFn | None = None
 
   def convert(self) -> None:
     def read_in() -> Iterator[type_utils.KeySerializedExample]:
       in_dataset = self.in_file_adapter.make_tf_data(filename=self.in_path)
       for i, row in enumerate(in_dataset):
-        yield i, row.numpy()
+        if self.convert_fn is not None:
+          yield i, self.convert_fn(row)
+        else:
+          yield i, row.numpy()
 
     with py_utils.incomplete_file(self.out_path) as tmp_file:
       self.out_file_adapter.write_examples(path=tmp_file, iterator=read_in())
@@ -69,6 +77,7 @@ def _shard_instructions_for_split(
     out_path: epath.Path,
     in_file_adapter: Type[file_adapters.FileAdapter],
     out_file_adapter: Type[file_adapters.FileAdapter],
+    convert_fn: ConvertFn | None = None,
 ) -> list[ShardInstruction]:
   """Returns shard instructions for the given split."""
 
@@ -101,6 +110,7 @@ def _shard_instructions_for_split(
             in_file_adapter=in_file_adapter,
             out_path=out_path,
             out_file_adapter=out_file_adapter,
+            convert_fn=convert_fn,
         )
     )
   return instructions
@@ -110,6 +120,7 @@ def get_all_shard_instructions(
     info: dataset_info.DatasetInfo,
     out_file_format: file_adapters.FileFormat,
     out_path: epath.Path,
+    convert_fn: ConvertFn | None = None,
 ) -> list[ShardInstruction]:
   """Returns all shard instructions for the given dataset info."""
   in_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[info.file_format]
@@ -123,6 +134,7 @@ def get_all_shard_instructions(
             out_path=out_path,
             in_file_adapter=in_file_adapter,
             out_file_adapter=out_file_adapter,
+            convert_fn=convert_fn,
         )
     )
   return shard_instructions
@@ -203,6 +215,7 @@ def _convert_dataset(
     out_file_format: file_adapters.FileFormat,
     overwrite: bool = False,
     pipeline: beam.Pipeline | None = None,
+    convert_fn: ConvertFn | None = None,
 ) -> None:
   """Converts a single dataset version to the given file format."""
   logging.info(
@@ -220,6 +233,7 @@ def _convert_dataset(
       info=info,
       out_file_format=out_file_format,
       out_path=out_dir,
+      convert_fn=convert_fn,
   )
 
   if not shard_instructions:
@@ -261,6 +275,7 @@ def _convert_dataset_dirs(
     overwrite: bool = False,
     use_beam: bool = False,
     num_workers: int = 8,
+    convert_fn: ConvertFn | None = None,
 ) -> None:
   """Converts all datasets in the given `from_to_dirs` parameter.
 
@@ -271,6 +286,8 @@ def _convert_dataset_dirs(
     overwrite: whether to overwrite the to_dirs if they exist.
     use_beam: whether to use Beam to convert the datasets.
     num_workers: number of workers to use if `use_beam` is `False`.
+    convert_fn: optional function to convert TF examples into whatever is
+      desired.
   """
   logging.info('Converting %d datasets.', len(from_to_dirs))
 
@@ -310,6 +327,7 @@ def _convert_dataset_dirs(
       _convert_dataset,
       out_file_format=out_file_format,
       overwrite=overwrite,
+      convert_fn=convert_fn,
   )
 
   # First convert all shards (with or without Beam), then convert the metadata.
@@ -392,6 +410,7 @@ def convert_root_data_dir(
     use_beam: bool,
     overwrite: bool = False,
     num_workers: int = 8,
+    convert_fn: ConvertFn | None = None,
 ) -> None:
   """Converts all datasets found in the given dataset dir.
 
@@ -406,6 +425,8 @@ def convert_root_data_dir(
     use_beam: whether to use Beam to convert datasets. Useful for big datasets.
     overwrite: whether to overwrite folders in `out_dir` if they already exist.
     num_workers: number of workers to use if `use_beam` is `False`.
+    convert_fn: optional function to convert TF examples into whatever is
+      desired.
   """
   root_data_dir = epath.Path(root_data_dir)
   out_path = epath.Path(out_dir) if out_dir is not None else None
@@ -432,6 +453,7 @@ def convert_root_data_dir(
       overwrite=overwrite,
       use_beam=use_beam,
       num_workers=num_workers,
+      convert_fn=convert_fn,
   )
 
 
@@ -453,6 +475,7 @@ def convert_dataset_dir(
     use_beam: bool,
     overwrite: bool = False,
     num_workers: int = 8,
+    convert_fn: ConvertFn | None = None,
 ) -> None:
   """Converts all datasets found in the given dataset dir.
 
@@ -467,6 +490,8 @@ def convert_dataset_dir(
     use_beam: whether to use Beam to convert datasets. Useful for big datasets.
     overwrite: whether to overwrite folders in `out_dir` if they already exist.
     num_workers: number of workers to use if `use_beam` is `False`.
+    convert_fn: optional function to convert TF examples into whatever is
+      desired.
   """
   dataset_dir = epath.Path(dataset_dir)
   out_path = epath.Path(out_dir) if out_dir is not None else None
@@ -495,6 +520,7 @@ def convert_dataset_dir(
       overwrite=overwrite,
       use_beam=use_beam,
       num_workers=num_workers,
+      convert_fn=convert_fn,
   )
 
 
@@ -509,6 +535,7 @@ def convert_dataset(
     overwrite: bool = False,
     use_beam: bool = False,
     num_workers: int = 8,
+    convert_fn: ConvertFn | None = None,
 ) -> None:
   """Convert a dataset from one file format to another format.
 
@@ -534,6 +561,8 @@ def convert_dataset(
     num_workers: number of workers to use when not using Beam. If `use_beam` is
       set, this flag is ignored. If `num_workers=1`, the conversion will be done
       sequentially.
+    convert_fn: optional function to convert TF examples into whatever is
+      desired.
   """
   if (
       root_data_dir is None
@@ -588,6 +617,7 @@ def convert_dataset(
         overwrite=overwrite,
         use_beam=use_beam,
         num_workers=num_workers,
+        convert_fn=convert_fn,
     )
   else:
     raise ValueError(
