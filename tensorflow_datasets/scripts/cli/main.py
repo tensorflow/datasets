@@ -55,6 +55,11 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
       action='version',
       version='TensorFlow Datasets: ' + tfds.__version__,
   )
+  parser.add_argument(
+      '--dry_run',
+      action='store_true',
+      help='If True, print the parsed arguments.',
+  )
   parser.set_defaults(subparser_fn=lambda _: parser.print_help())
   # Register sub-commands
   subparser = parser.add_subparsers(title='command')
@@ -96,8 +101,11 @@ def main(args: argparse.Namespace) -> None:
     new_stream = tfds.core.utils.tqdm_utils.TqdmStream()
     python_handler.setStream(new_stream)
 
-  # Launch the subcommand defined in the subparser (or default to print help)
-  args.subparser_fn(args)
+  if args.dry_run:
+    print(args)
+  else:
+    # Launch the subcommand defined in the subparser (or default to print help)
+    args.subparser_fn(args)
 
 
 def launch_cli() -> None:
