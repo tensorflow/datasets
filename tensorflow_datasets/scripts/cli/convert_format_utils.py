@@ -86,7 +86,7 @@ def _shard_instructions_for_split(
 
   in_filename_template = split_info.filename_template
   out_filename_template = in_filename_template.replace(
-      data_dir=out_path, filetype_suffix=out_file_format.value
+      data_dir=out_path, filetype_suffix=out_file_format.file_suffix
   )
   num_shards = len(split_info.shard_lengths)
   if num_shards <= 0:
