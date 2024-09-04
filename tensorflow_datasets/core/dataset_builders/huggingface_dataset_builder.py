@@ -291,12 +291,13 @@ class HuggingfaceDatasetBuilder(
   @property
   def _gated_dataset_warning(self) -> str:
     """The warning message for a gated dataset."""
-    return (
-        'WARNING: This dataset is gated. Before using it, make sure to sign'
-        f' the conditions at: {self.homepage}. Important: access requests are'
-        ' always granted to individual users rather than to entire'
-        ' organizations.'
+    gated_dataset_warning = (
+        'WARNING: This dataset is gated. Before using it, make sure '
+        + f'to sign the conditions at: {self.homepage}. Important: access'
+        ' requests are always granted to individual users rather than to'
+        ' entire organizations.'
     )
+    return gated_dataset_warning
 
   @property
   def _gated_text(self) -> str | None:
