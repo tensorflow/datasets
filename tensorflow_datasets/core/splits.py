@@ -205,18 +205,14 @@ class SplitInfo:
     """Returns the list of filenames."""
     if not self.filename_template:
       raise ValueError('No filename templates available.')
-    return sorted(
-        self.filename_template.sharded_filenames(len(self.shard_lengths))
-    )
+    return sorted(self.filename_template.sharded_filenames(self.num_shards))
 
   @property
   def filepaths(self) -> list[epath.Path]:
     """All the paths for all the files that are part of this split."""
     if not self.filename_template:
       raise ValueError('No filename templates available.')
-    return sorted(
-        self.filename_template.sharded_filepaths(len(self.shard_lengths))
-    )
+    return sorted(self.filename_template.sharded_filepaths(self.num_shards))
 
   def replace(self, **kwargs: Any) -> SplitInfo:
     """Returns a copy of the `SplitInfo` with updated attributes."""
@@ -421,7 +417,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
       )
     self._dataset_name = dataset_name  # deprecated, please don't use
 
-  def __getitem__(self, key):
+  def __getitem__(self, key) -> SplitInfo | SubSplitInfo:
     if not self:
       raise KeyError(
           f'Trying to access `splits[{key!r}]` but `splits` is empty. '

@@ -553,6 +553,11 @@ class DatasetBuilder(registered.RegisteredDataset):
         data_dir=self.data_dir_root,
     )
 
+  def get_file_spec(self, split: str) -> str:
+    """Returns the file spec of the split."""
+    split_info: splits_lib.SplitInfo = self.info.splits[split]
+    return split_info.file_spec(self.info.file_format)
+
   def is_prepared(self) -> bool:
     """Returns whether this dataset is already downloaded and prepared."""
     return self.data_path.exists()
@@ -1082,7 +1087,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # shuffling is enabled, as this would effectively disable shuffling.
     # An exception is for single shard (as shuffling is a no-op).
     # Another exception is if reshuffle is disabled (shuffling already cached)
-    num_shards = len(self.info.splits[split].file_instructions)
+    num_shards = self.info.splits[split].num_shards
     if (
         shuffle_files
         and
@@ -1658,9 +1663,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         split=split_name,
         dataset_name=self.name,
         data_dir=self.data_path,
-        filetype_suffix=file_adapters.ADAPTER_FOR_FORMAT[
-            self.info.file_format
-        ].FILE_SUFFIX,
+        filetype_suffix=self.info.file_format.file_suffix,  # pytype: disable=attribute-error
     )
 
   def _generate_splits(

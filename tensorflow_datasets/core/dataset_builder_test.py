@@ -634,6 +634,20 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
     )
     self.assertEqual(reference, expected_reference)
 
+  def test_get_file_spec(self):
+    builder = DummyDatasetWithConfigs(
+        config="plus1", data_dir=self.get_temp_dir()
+    )
+    builder.download_and_prepare()
+    self.assertEndsWith(
+        builder.get_file_spec("train"),
+        "dummy_dataset_with_configs/plus1/0.0.1/dummy_dataset_with_configs-train.tfrecord@1",
+    )
+    self.assertEndsWith(
+        builder.get_file_spec("test"),
+        "dummy_dataset_with_configs/plus1/0.0.1/dummy_dataset_with_configs-test.tfrecord@1",
+    )
+
   def test_load_as_data_source(self):
     data_dir = self.get_temp_dir()
     builder = DummyDatasetWithConfigs(
