@@ -398,7 +398,7 @@ class DownloadManager(object):
       download_tmp_dir.mkdir()
       logging.info(f'Downloading {url} into {download_tmp_dir}...')
       future = self._downloader.download(
-          url, download_tmp_dir, verify=self._verify_ssl
+          url, download_tmp_dir, verify=self._verify_ssl, **resource.request_kwargs
       )
 
     # Post-process the result

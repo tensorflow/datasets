@@ -226,7 +226,11 @@ class _Downloader(object):
       self._pbar_dl_size.update(dl_result.url_info.size)
 
   def download(
-      self, url: str, destination_path: str, verify: bool = True
+      self,
+      url: str,
+      destination_path: str,
+      verify: bool = True,
+      **request_kwargs
   ) -> 'promise.Promise[concurrent.futures.Future[DownloadResult]]':
     """Download url to given path.
 
@@ -236,14 +240,17 @@ class _Downloader(object):
       url: address of resource to download.
       destination_path: `str`, path to directory where to download the resource.
       verify: whether to verify ssl certificates
+      **request_kwargs: Additional kwargs to forward to `request.get`.
 
     Returns:
       Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
     destination_path = os.fspath(destination_path)
     self._pbar_url.update_total(1)
+
     future = self._executor.submit(
-        self._sync_download, url, destination_path, verify
+        self._sync_download, url, destination_path,
+        verify, **request_kwargs
     )
     return promise.Promise.resolve(future)
 
@@ -265,7 +272,11 @@ class _Downloader(object):
     return DownloadResult(path=epath.Path(out_path), url_info=url_info)
 
   def _sync_download(
-      self, url: str, destination_path: str, verify: bool = True
+      self,
+      url: str,
+      destination_path: str,
+      verify: bool = True,
+      **request_kwargs
   ) -> DownloadResult:
     """Synchronous version of `download` method.
 
@@ -278,6 +289,7 @@ class _Downloader(object):
       url: url to download
       destination_path: path where to write it
       verify: whether to verify ssl certificates
+      **request_kwargs: Additional kwargs to forward to `request.get`.
 
     Returns:
       None
@@ -293,7 +305,7 @@ class _Downloader(object):
     except tf.errors.UnimplementedError:
       pass
 
-    with _open_url(url, verify=verify) as (response, iter_content):
+    with _open_url(url, verify=verify, **request_kwargs) as (response, iter_content):
       fname = _get_filename(response)
       path = os.path.join(destination_path, fname)
       size = 0
@@ -325,7 +337,7 @@ class _Downloader(object):
         ),
     )
 
-
+  
 def _open_url(
     url: str,
     **kwargs: Any,
