@@ -34,6 +34,8 @@ print(ds['default'][0])
 ```
 """
 
+from __future__ import annotations
+
 from collections.abc import Mapping
 from typing import Any, Dict, Optional, Sequence
 
@@ -53,6 +55,7 @@ from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils import croissant_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version as version_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 
@@ -142,7 +145,7 @@ class CroissantBuilder(
   def __init__(
       self,
       *,
-      jsonld: epath.PathLike,
+      jsonld: epath.PathLike | Mapping[str, Any],
       record_set_ids: Sequence[str] | None = None,
       disable_shuffling: bool | None = False,
       int_dtype: type_utils.TfdsDType | None = np.int64,
@@ -245,7 +248,9 @@ class CroissantBuilder(
     return features_dict.FeaturesDict(features)
 
   def _split_generators(
-      self, dl_manager: download.DownloadManager
+      self,
+      dl_manager: download.DownloadManager,
+      pipeline: beam.Pipeline,
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     # If a split recordset is joined for the required record set, we generate
     # splits accordingly. Otherwise, it generates a single `default` split with
@@ -258,37 +263,56 @@ class CroissantBuilder(
     ):
       return {
           split['name']: self._generate_examples(
+              pipeline=pipeline,
               filters={
                   **self._filters,
                   split_reference.reference_field.id: split['name'],
-              }
+              },
           )
           for split in split_reference.split_record_set.data
       }
     else:
-      return {'default': self._generate_examples(filters=self._filters)}
+      return {
+          'default': self._generate_examples(
+              pipeline=pipeline, filters=self._filters
+          )
+      }
 
   def _generate_examples(
       self,
+      pipeline: beam.Pipeline,
       filters: dict[str, Any],
-  ) -> split_builder_lib.SplitGenerator:
+  ) -> beam.PTransform:
     """Generates the examples for the given record set.
 
     Args:
+      pipeline: The Beam pipeline.
       filters: A dict of filters to apply to the records. The keys should be
         field names and the values should be the values to filter by. If a
         record matches all the filters, it will be included in the dataset.
 
-    Yields:
-      A tuple of (index, record) for each record in the dataset.
+    Returns:
+      A collection with tuple of (index, record) for each record in the dataset.
     """
     record_set = croissant_utils.get_record_set(
         self.builder_config.name, metadata=self.metadata
     )
     records = self.dataset.records(record_set.id, filters=filters)
-    for i, record in enumerate(records):
-      # Some samples might not be TFDS-compatible as-is, e.g. from croissant
-      # describing HuggingFace datasets, so we convert them here. This shouldn't
-      # impact datasets which are already TFDS-compatible.
-      record = conversion_utils.to_tfds_value(record, self.info.features)
-      yield i, record
+
+    def convert_to_tfds_format(
+        global_index: int,
+        record: Any,
+        features: feature_lib.FeatureConnector | None = None,
+    ) -> tuple[int, Any]:
+      if not features:
+        raise ValueError('features should not be None.')
+      return (
+          global_index,
+          conversion_utils.to_tfds_value(record, features),
+      )
+
+    return records.beam_reader(
+        pipeline=pipeline
+    ) | 'Convert to TFDS format' >> beam.MapTuple(
+        convert_to_tfds_format, features=self.info.features
+    )

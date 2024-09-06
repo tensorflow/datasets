@@ -18,11 +18,13 @@
 import numpy as np
 import pytest
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import FileFormat
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import text_feature
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
+
+FileFormat = file_adapters.FileFormat
 
 
 DUMMY_ENTRIES = entries = [
