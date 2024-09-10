@@ -140,7 +140,7 @@ class DownloadConfig:
     return dataclasses.replace(self, **kwargs)
 
 
-class DownloadManager(object):
+class DownloadManager:
   """Manages the download and extraction of files, as well as caching.
 
   Downloaded files are cached under `download_dir`. The file name of downloaded
@@ -353,8 +353,9 @@ class DownloadManager(object):
     """
     # Normalize the input
     if isinstance(resource, str):
-      resource = resource_lib.Resource(url=resource)
-    url = resource.url
+      url = resource
+    else:
+      url = resource.url
     assert url is not None, 'URL is undefined from resource.'
 
     expected_url_info = self._url_infos.get(url)
@@ -500,7 +501,7 @@ class DownloadManager(object):
     elif path == url_path:
       if checksum_path:
         # Checksums were registered: Rename -> checksums_path
-        resource_lib.rename_info_file(path, checksum_path, overwrite=True)
+        resource_lib.replace_info_file(path, checksum_path)
         return path.replace(checksum_path)
       else:
         # Checksums not registered: -> do nothing
@@ -522,7 +523,7 @@ class DownloadManager(object):
   @utils.memoize()
   def _extract(self, resource: ExtractPath) -> promise.Promise[epath.Path]:
     """Extract a single archive, returns Promise->path to extraction result."""
-    if isinstance(resource, epath.PathLikeCls):
+    if not isinstance(resource, resource_lib.Resource):
       resource = resource_lib.Resource(path=resource)
     path = resource.path
     extract_method = resource.extract_method
@@ -613,7 +614,7 @@ class DownloadManager(object):
     Returns:
       Generator yielding tuple (path_within_archive, file_obj).
     """
-    if isinstance(resource, epath.PathLikeCls):
+    if not isinstance(resource, resource_lib.Resource):
       resource = resource_lib.Resource(path=resource)
     return extractor.iter_archive(resource.path, resource.extract_method)
 
@@ -761,20 +762,6 @@ def _validate_checksums(
         'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
     )
     raise NonMatchingChecksumError(msg)
-
-
-def _read_url_info(url_path: epath.PathLike) -> checksums.UrlInfo:
-  """Loads the `UrlInfo` from the `.INFO` file."""
-  file_info = resource_lib.read_info_file(url_path)
-  if 'url_info' not in file_info:
-    raise ValueError(
-        'Could not find `url_info` in {}. This likely indicates that '
-        'the files where downloaded with a previous version of TFDS (<=3.1.0). '
-    )
-  url_info = file_info['url_info']
-  url_info.setdefault('filename', None)
-  url_info['size'] = utils.Size(url_info['size'])
-  return checksums.UrlInfo(**url_info)
 
 
 def _map_promise(map_fn, all_inputs):

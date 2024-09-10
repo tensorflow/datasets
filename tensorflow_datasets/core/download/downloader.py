@@ -61,7 +61,7 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
   return _Downloader(*args, **kwargs)
 
 
-def _read_url_info(url_path: epath.PathLike) -> checksums_lib.UrlInfo:
+def _read_url_info(url_path: epath.Path) -> checksums_lib.UrlInfo:
   """Loads the `UrlInfo` from the `.INFO` file."""
   file_info = resource_lib.read_info_file(url_path)
   if 'url_info' not in file_info:
@@ -172,7 +172,7 @@ def _get_filename(response: Response) -> str:
   return utils.basename_from_url(response.url)
 
 
-class _Downloader(object):
+class _Downloader:
   """Class providing async download API with checksum validation.
 
   Do not instantiate this class directly. Instead, call `get_downloader()`.
@@ -192,9 +192,8 @@ class _Downloader(object):
     """Init _Downloader instance.
 
     Args:
-      max_simultaneous_downloads: `int`, optional max number of simultaneous
-        downloads. If None then it defaults to
-        `self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS`.
+      max_simultaneous_downloads: Optional max number of simultaneous downloads.
+        If None then it defaults to `self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS`.
       checksumer: `hashlib.HASH`. Defaults to `hashlib.sha256`.
     """
     self._executor = concurrent.futures.ThreadPoolExecutor(
@@ -227,18 +226,18 @@ class _Downloader(object):
 
   def download(
       self, url: str, destination_path: str, verify: bool = True
-  ) -> 'promise.Promise[concurrent.futures.Future[DownloadResult]]':
+  ) -> promise.Promise[concurrent.futures.Future[DownloadResult]]:
     """Download url to given path.
 
     Returns Promise -> sha256 of downloaded file.
 
     Args:
-      url: address of resource to download.
-      destination_path: `str`, path to directory where to download the resource.
-      verify: whether to verify ssl certificates
+      url: Address of resource to download.
+      destination_path: Path to directory where to download the resource.
+      verify: Whether to verify ssl certificates
 
     Returns:
-      Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
+      Promise obj -> Download result.
     """
     destination_path = os.fspath(destination_path)
     self._pbar_url.update_total(1)
@@ -250,11 +249,11 @@ class _Downloader(object):
   def _sync_file_copy(
       self,
       filepath: str,
-      destination_path: str,
+      destination_path: epath.Path,
   ) -> DownloadResult:
     """Downloads the file through `tf.io.gfile` API."""
     filename = os.path.basename(filepath)
-    out_path = os.path.join(destination_path, filename)
+    out_path = destination_path / filename
     tf.io.gfile.copy(filepath, out_path)
     url_info = checksums_lib.compute_url_info(
         out_path, checksum_cls=self._checksumer_cls
@@ -262,7 +261,7 @@ class _Downloader(object):
     self._pbar_dl_size.update_total(url_info.size)
     self._pbar_dl_size.update(url_info.size)
     self._pbar_url.update(1)
-    return DownloadResult(path=epath.Path(out_path), url_info=url_info)
+    return DownloadResult(path=out_path, url_info=url_info)
 
   def _sync_download(
       self, url: str, destination_path: str, verify: bool = True
@@ -275,16 +274,17 @@ class _Downloader(object):
     https://requests.readthedocs.io/en/master/user/advanced/#proxies
 
     Args:
-      url: url to download
-      destination_path: path where to write it
-      verify: whether to verify ssl certificates
+      url: Url to download.
+      destination_path: Path where to write it.
+      verify: Whether to verify ssl certificates.
 
     Returns:
-      None
+      Download result.
 
     Raises:
       DownloadError: when download fails.
     """
+    destination_path = epath.Path(destination_path)
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
       # use requests (http) or urllib (ftp).
@@ -295,7 +295,7 @@ class _Downloader(object):
 
     with _open_url(url, verify=verify) as (response, iter_content):
       fname = _get_filename(response)
-      path = os.path.join(destination_path, fname)
+      path = destination_path / fname
       size = 0
 
       # Initialize the download size progress bar
@@ -303,7 +303,7 @@ class _Downloader(object):
       unit_mb = units.MiB
       total_size = int(response.headers.get('Content-length', 0)) // unit_mb
       self._pbar_dl_size.update_total(total_size)
-      with tf.io.gfile.GFile(path, 'wb') as file_:
+      with path.open('wb') as file_:
         checksum = self._checksumer_cls()
         for block in iter_content:
           size += len(block)
@@ -317,7 +317,7 @@ class _Downloader(object):
             size_mb %= unit_mb
     self._pbar_url.update(1)
     return DownloadResult(
-        path=epath.Path(path),
+        path=path,
         url_info=checksums_lib.UrlInfo(
             checksum=checksum.hexdigest(),
             size=utils.Size(size),

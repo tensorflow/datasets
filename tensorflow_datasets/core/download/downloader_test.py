@@ -30,7 +30,7 @@ from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
 
 
-class _FakeResponse(object):
+class _FakeResponse:
 
   def __init__(self, url, content, cookies=None, headers=None, status_code=200):
     self.url = url

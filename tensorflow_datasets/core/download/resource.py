@@ -17,29 +17,29 @@
 
 import base64
 import codecs
+from collections.abc import Mapping
 import enum
 import hashlib
 import itertools
 import json
 import os
 import re
-from typing import Any, Optional
+from typing import Any
+import urllib
 
 from etils import epath
-from six.moves import urllib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Should be `Union[int, float, bool, str, Dict[str, Json], List[Json]]`
-Json = Any
+Json = Mapping[str, Any]
 
 _hex_codec = codecs.getdecoder('hex_codec')
 
 
-def _decode_hex(hexstr):
+def _decode_hex(hexstr: str):
   """Returns binary digest, given str hex digest."""
-  return _hex_codec(hexstr)[0]
+  return _hex_codec(hexstr)[0]  # pytype: disable=wrong-arg-types
 
 
 class ExtractMethod(enum.Enum):
@@ -91,7 +91,7 @@ _URL_COMMON_PARTS = [
 ]
 
 
-def _guess_extract_method(fname):
+def _guess_extract_method(fname) -> ExtractMethod:
   """Guess extraction method, given file name (or path)."""
   for method, extensions in _EXTRACTION_METHOD_TO_EXTS:
     for ext in extensions:
@@ -100,7 +100,7 @@ def _guess_extract_method(fname):
   return ExtractMethod.NO_EXTRACT
 
 
-def _sanitize_url(url, max_length):
+def _sanitize_url(url: str, max_length: int) -> tuple[str, str]:
   """Sanitize and shorten url to fit in max_length.
 
   Function is stable: same input MUST ALWAYS give same result, accros changes
@@ -127,11 +127,11 @@ def _sanitize_url(url, max_length):
   4- Truncate result, keeping prefix: 'abc_def_ghi_jkl' -> 'abc_def'
 
   Args:
-    url: string, url to sanitize and shorten.
-    max_length: int, max length of result.
+    url: Url to sanitize and shorten.
+    max_length: Max length of result.
 
   Returns:
-    (string, string): sanitized and shorted url, file extension.
+    Sanitized and shorted url, file extension.
   """
   url = urllib.parse.urlparse(url)
   netloc = url.netloc
@@ -141,7 +141,7 @@ def _sanitize_url(url, max_length):
   for suffix in _NETLOC_COMMON_SUFFIXES:
     if netloc.endswith(suffix):
       netloc = netloc[: -len(suffix)]
-  url = '%s%s%s%s' % (netloc, url.path, url.params, url.query)
+  url = f'{netloc}{url.path}{url.params}{url.query}'
   # Get the extension:
   for ext in _KNOWN_EXTENSIONS:
     if url.endswith(ext):
@@ -167,7 +167,7 @@ def _sanitize_url(url, max_length):
   return url[:max_length], extension
 
 
-def get_dl_fname(url, checksum):
+def get_dl_fname(url: str, checksum: str) -> str:
   """Returns name of file for (url, checksum).
 
   The max length of linux and windows filenames is 255 chars.
@@ -179,60 +179,53 @@ def get_dl_fname(url, checksum):
    - checksum: base64url encoded sha256: 44 chars (removing trailing '=').
 
   Args:
-    url: `str`, url of the file.
-    checksum: `str` (hex), the sha256 hexdigest of file or url.
+    url: Url of the file.
+    checksum: The sha256 hexdigest of file or url.
 
   Returns:
     string of 90 chars max.
   """
-  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))  # pytype: disable=wrong-arg-types
-  checksum = tf.compat.as_text(checksum)[:-1]
+  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))
+  checksum = checksum.decode()[:-1]
   name, extension = _sanitize_url(url, max_length=46)
-  return '%s%s%s' % (name, checksum, extension)
+  return f'{name}{checksum}{extension}'
 
 
-def get_dl_dirname(url):
+def get_dl_dirname(url: str) -> str:
   """Returns name of temp dir for given url."""
-  checksum = hashlib.sha256(tf.compat.as_bytes(url)).hexdigest()
+  checksum = hashlib.sha256(url.encode()).hexdigest()
   return get_dl_fname(url, checksum)
 
 
-def _get_info_path(path: epath.PathLike) -> str:
-  """Returns path (`str`) of INFO file associated with resource at path."""
-  return '%s.INFO' % os.fspath(path)
+def _get_info_path(path: epath.Path) -> epath.Path:
+  """Returns path of INFO file associated with resource at path."""
+  return path.with_suffix(path.suffix + '.INFO')
 
 
-def _read_info(info_path: epath.PathLike) -> Json:
-  """Returns info dict or None."""
-  if not tf.io.gfile.exists(os.fspath(info_path)):
-    return None
-  with tf.io.gfile.GFile(os.fspath(info_path)) as info_f:
-    return json.load(info_f)
+def _read_info(info_path: epath.Path) -> Json:
+  """Returns info dict."""
+  if not info_path.exists():
+    return {}
+  return json.loads(info_path.read_text())
 
 
 # TODO(pierrot): one lock per info path instead of locking everything.
 synchronize_decorator = utils.build_synchronize_decorator()
 
 
-def rename_info_file(
-    src_path: epath.PathLike,
-    dst_path: epath.PathLike,
-    overwrite: bool = False,
-) -> None:
-  tf.io.gfile.rename(
-      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite
-  )
+def replace_info_file(src_path: epath.Path, dst_path: epath.Path) -> None:
+  _get_info_path(src_path).replace(_get_info_path(dst_path))
 
 
 @synchronize_decorator
-def read_info_file(info_path: epath.PathLike) -> Json:
+def read_info_file(info_path: epath.Path) -> Json:
   return _read_info(_get_info_path(info_path))
 
 
 @synchronize_decorator
 def write_info_file(
     url: str,
-    path: epath.PathLike,
+    path: epath.Path,
     dataset_name: str,
     original_fname: str,
     url_info: checksums_lib.UrlInfo,
@@ -252,7 +245,7 @@ def write_info_file(
   """
   url_info_dict = url_info.asdict()
   info_path = _get_info_path(path)
-  info = _read_info(info_path) or {}
+  info = _read_info(info_path)
   urls = set(info.get('urls', []) + [url])
   dataset_names = info.get('dataset_names', [])
   if dataset_name:
@@ -280,49 +273,45 @@ def write_info_file(
     json.dump(info, info_f, sort_keys=True)
 
 
-def get_extract_method(path: epath.PathLike):
+def get_extract_method(path: epath.Path) -> ExtractMethod:
   """Returns `ExtractMethod` to use on resource at path. Cannot be None."""
-  path = os.fspath(path)
   info_path = _get_info_path(path)
   info = _read_info(info_path)
-  fname = info.get('original_fname', path) if info else path
+  fname = info.get('original_fname', os.fspath(path))
   return _guess_extract_method(fname)
 
 
-class Resource(object):
+class Resource:
   """Represents a resource to download, extract, or both."""
 
   def __init__(
       self,
       *,
-      url: Optional[str] = None,
-      extract_method: Optional[ExtractMethod] = None,
-      path: Optional[epath.PathLike] = None,
+      url: str | None = None,
+      extract_method: ExtractMethod | None = None,
+      path: epath.PathLike | None = None,
   ):
     """Resource constructor.
 
     Args:
-      url: `str`, the URL at which to download the resource.
+      url: The URL at which to download the resource.
       extract_method: `ExtractMethod` to be used to extract resource. If not
         set, will be guessed from downloaded file name `original_fname`.
-      path: `str`, path of resource on local disk. Can be None if resource has
-        not be downloaded yet. In such case, `url` must be set.
+      path: Path of resource on local disk. Can be None if resource has not be
+        downloaded yet. In such case, `url` must be set.
     """
     self.url = url
-    self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._extract_method = extract_method
+    self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
 
   @classmethod
-  def exists_locally(cls, path: epath.PathLike):
+  def exists_locally(cls, path: epath.Path) -> bool:
     """Returns whether the resource exists locally, at `resource.path`."""
     # If INFO file doesn't exist, consider resource does NOT exist, as it would
     # prevent guessing the `extract_method`.
-    path = os.fspath(path)
-    return tf.io.gfile.exists(path) and tf.io.gfile.exists(_get_info_path(path))
+    return path.exists() and _get_info_path(path).exists()
 
   @property
-  def extract_method(self):
+  def extract_method(self) -> ExtractMethod:
     """Returns `ExtractMethod` to use on resource. Cannot be None."""
-    if self._extract_method:
-      return self._extract_method
-    return get_extract_method(self.path)
+    return self._extract_method or get_extract_method(self.path)

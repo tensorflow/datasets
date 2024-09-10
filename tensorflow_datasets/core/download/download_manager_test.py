@@ -64,7 +64,7 @@ class PathDict(collections.UserDict):
     return super().__setitem__(os.fspath(key), epath.Path(value))
 
 
-class Artifact(object):
+class Artifact:
   # For testing only.
 
   def __init__(self, name, url=None, content=None):
