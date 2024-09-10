@@ -27,6 +27,7 @@ from etils import epy
 with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
   import concurrent.futures
+  import tqdm
 
   from absl import logging
   import apache_beam as beam
@@ -59,9 +60,10 @@ class ShardInstruction:
   convert_fn: ConvertFn | None = None
 
   def convert(self) -> None:
+    """Converts the shard to the desired file format."""
     def read_in() -> Iterator[type_utils.KeySerializedExample]:
       in_dataset = self.in_file_adapter.make_tf_data(filename=self.in_path)
-      for i, row in enumerate(in_dataset):
+      for i, row in tqdm.tqdm(enumerate(in_dataset)):
         if self.convert_fn is not None:
           yield i, self.convert_fn(row)
         else:
@@ -364,7 +366,7 @@ def _convert_dataset_dirs(
       )
 
   logging.info('All shards have been converted. Now converting metadata.')
-  for dataset_dir, info in found_dataset_versions.items():
+  for dataset_dir, info in tqdm.tqdm(found_dataset_versions.items()):
     out_dir = from_to_dirs[dataset_dir]
     logging.info('Converting metadata in %s.', dataset_dir)
     convert_metadata(
