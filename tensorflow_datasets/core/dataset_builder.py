@@ -1902,7 +1902,7 @@ def _save_default_config_name(
   #   writing concurrently the same file
   # * Config file is overwritten each time a config is generated. If the
   #   default config is changed, this will be updated.
-  config_path = config_dir / "metadata.json"
+  config_path = config_dir / constants.METADATA_FILENAME
   with utils.incomplete_file(config_path) as tmp_config_path:
     tmp_config_path.write_text(json.dumps(data))
 
@@ -1911,7 +1911,9 @@ def load_default_config_name(
     common_dir: epath.Path,
 ) -> Optional[str]:
   """Load `builder_cls` metadata (common to all builder configs)."""
-  config_path = epath.Path(common_dir) / ".config/metadata.json"
+  config_path = (
+      epath.Path(common_dir) / f".config/{constants.METADATA_FILENAME}"
+  )
   if not config_path.exists():
     return None
   data = json.loads(config_path.read_text())
