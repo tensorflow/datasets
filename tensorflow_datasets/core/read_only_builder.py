@@ -356,9 +356,20 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
         all_builder_dirs.add(builder_dir)
   else:
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-      for builder_dir in executor.map(find_builder_fn, all_data_dirs):
+      # Keep track of each new thread's error context, and add it to the main
+      # error context when each thread finishes.
+      def wrapped_find_builder_fn(data_dir):
+        with error_utils.record_error_context() as thread_context:
+          builder_dir = find_builder_fn(data_dir)
+        return thread_context, builder_dir
+
+      for context, builder_dir in executor.map(
+          wrapped_find_builder_fn, all_data_dirs
+      ):
         if builder_dir:
           all_builder_dirs.add(builder_dir)
+        for msg in context.messages:
+          error_utils.add_context(msg)
 
   if not all_builder_dirs:
     all_dirs_str = '\n\t- '.join([''] + [str(dir) for dir in all_data_dirs])

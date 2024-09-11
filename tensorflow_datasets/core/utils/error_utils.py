@@ -41,10 +41,27 @@ class ErrorContext:
 @edc.dataclass
 @dataclasses.dataclass
 class ContextHolder:
-  current_context_msg: ErrorContext | None = None
+  # Each thread will use its own instance of current_context_msg.
+  current_context_msg: edc.ContextVar[ErrorContext | None] = None
 
 
 context_holder = ContextHolder()
+
+
+@contextlib.contextmanager
+def record_error_context() -> Iterator[ErrorContext]:
+  """Contextmanager which captures the error context for a thread."""
+
+  if context_holder.current_context_msg is not None:
+    raise ValueError(
+        'Cannot record error context within the scope of another error context.'
+    )
+
+  context_holder.current_context_msg = ErrorContext()
+  try:
+    yield context_holder.current_context_msg
+  finally:
+    context_holder.current_context_msg = None
 
 
 @contextlib.contextmanager
