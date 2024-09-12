@@ -1,7 +1,7 @@
 """pneumoniamnist dataset."""
 
 import tensorflow_datasets.public_api as tfds
-
+import numpy as np
 
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for pneumoniamnist dataset."""
@@ -24,19 +24,27 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    # TODO(pneumoniamnist): Downloads the data and defines the splits
-    path = dl_manager.download_and_extract('https://todo-data-url')
 
-    # TODO(pneumoniamnist): Returns the Dict[split names, Iterator[Key, Example]]
+    path = dl_manager.download('https://zenodo.org/records/10519652/files/pneumoniamnist.npz?download=1')
+
+    raw_data = np.load(path, allow_pickle=True)
+    train_images = np.expand_dims(raw_data.f.train_images, axis=-1)
+    val_images = np.expand_dims(raw_data.f.val_images, axis=-1)
+    test_images = np.expand_dims(raw_data.f.test_images, axis=-1)
+    train_labels = np.squeeze(raw_data.f.train_labels)
+    val_labels = np.squeeze(raw_data.f.val_labels)
+    test_labels = np.squeeze(raw_data.f.test_labels)
+
     return {
-        'train': self._generate_examples(path / 'train_imgs'),
+      'train': self._generate_examples(train_images, train_labels),
+      'val': self._generate_examples(val_images, val_labels),
+      'test': self._generate_examples(test_images, test_labels),
     }
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, images, labels):
     """Yields examples."""
-    # TODO(pneumoniamnist): Yields (key, example) tuples from the dataset
-    for f in path.glob('*.jpeg'):
-      yield 'key', {
-          'image': f,
-          'label': 'yes',
+    for idx, (image, label) in enumerate(zip(images, labels)):
+      yield idx, {
+          'image': image,
+          'label': int(np.squeeze(label)),
       }
