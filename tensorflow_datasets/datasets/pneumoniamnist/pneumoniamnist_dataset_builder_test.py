@@ -1,22 +1,23 @@
 """pneumoniamnist dataset."""
 
-from tensorflow_datasets.image_classification.pneumoniamnist.pneumoniamnist import pneumoniamnist_dataset_builder
+# from tensorflow_datasets.datasets.pneumoniamnist import pneumoniamnist_dataset_builder
+from . import pneumoniamnist_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 class PneumoniamnistTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for pneumoniamnist dataset."""
-  # TODO(pneumoniamnist):
+
   DATASET_CLASS = pneumoniamnist_dataset_builder.Builder
   SPLITS = {
-      'train': 3,  # Number of fake train example
-      'test': 1,  # Number of fake test example
+    'train': 3,
+    'val': 1,
+    'test': 1,
   }
 
-  # If you are calling `download/download_and_extract` with a dict, like:
-  #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
-  # then the tests needs to provide the fake output paths relative to the
-  # fake data directory
-  # DL_EXTRACT_RESULT = {'some_key': 'output_file1.txt', ...}
+  DL_EXTRACT_RESULT = {
+        'https://zenodo.org/record/10519652/files/pneumoniamnist.npz?download=1': 'dummy_data/pneumoniamnist.npz',
+  }
+
 
 
 if __name__ == '__main__':
