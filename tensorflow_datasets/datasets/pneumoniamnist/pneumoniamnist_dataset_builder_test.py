@@ -1,7 +1,6 @@
 """pneumoniamnist dataset."""
 
-# from tensorflow_datasets.datasets.pneumoniamnist import pneumoniamnist_dataset_builder
-from . import pneumoniamnist_dataset_builder
+from tensorflow_datasets.datasets.pneumoniamnist import pneumoniamnist_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 class PneumoniamnistTest(tfds.testing.DatasetBuilderTestCase):
