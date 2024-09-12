@@ -14,7 +14,7 @@ class PneumoniamnistTest(tfds.testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = {
-        'https://zenodo.org/record/10519652/files/pneumoniamnist.npz?download=1': 'dummy_data/pneumoniamnist.npz',
+        'https://zenodo.org/record/10519652/files/pneumoniamnist.npz?download=1': 'pneumoniamnist.npz',
   }
 
 
