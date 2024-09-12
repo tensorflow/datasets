@@ -19,7 +19,6 @@ import base64
 import codecs
 from collections.abc import Mapping
 import enum
-import hashlib
 import itertools
 import json
 import os
@@ -189,12 +188,6 @@ def get_dl_fname(url: str, checksum: str) -> str:
   checksum = checksum.decode()[:-1]
   name, extension = _sanitize_url(url, max_length=46)
   return f'{name}{checksum}{extension}'
-
-
-def get_dl_dirname(url: str) -> str:
-  """Returns name of temp dir for given url."""
-  checksum = hashlib.sha256(url.encode()).hexdigest()
-  return get_dl_fname(url, checksum)
 
 
 def _get_info_path(path: epath.Path) -> epath.Path:
