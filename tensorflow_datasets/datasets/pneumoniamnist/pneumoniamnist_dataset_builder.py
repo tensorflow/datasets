@@ -27,8 +27,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
 
     path = dl_manager.download('https://zenodo.org/records/10519652/files/pneumoniamnist.npz?download=1')
+    npz_path = path['https://zenodo.org/record/10519652/files/pneumoniamnist.npz?download=1']
 
-    with tf.io.gfile.GFile(path, 'rb') as f:
+    with tf.io.gfile.GFile(npz_path, 'rb') as f:
         raw_data = np.load(f)
 
     train_images = np.expand_dims(raw_data.f.train_images, axis=-1)
