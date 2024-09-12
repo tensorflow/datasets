@@ -47,11 +47,6 @@ class DummyHuggingfaceBuilder(hf_datasets.GeneratorBasedBuilder):
           'image': PIL_Image.new(mode='L', size=(4, 4)),
       }
 
-  def download_and_prepare(self, *args, **kwargs):
-    # Disable downloads from GCS
-    kwargs['try_from_hf_gcs'] = False
-    super().download_and_prepare(*args, **kwargs)
-
 
 @pytest.fixture(name='load_dataset_builder')
 def mock_load_dataset_builder(tmp_path):

@@ -14,6 +14,7 @@
 # limitations under the License.
 
 import datasets as hf_datasets
+import huggingface_hub
 import numpy as np
 import pytest
 from tensorflow_datasets.core import features as feature_lib
@@ -114,7 +115,7 @@ def _list_datasets(monkeypatch):
   def mock_list_datasets():
     return ['mnist', 'bigscience/P3', 'x', 'x/Y-z', 'fashion_mnist']
 
-  monkeypatch.setattr(hf_datasets, 'list_datasets', mock_list_datasets)
+  monkeypatch.setattr(huggingface_hub, 'list_datasets', mock_list_datasets)
 
 
 def test_to_huggingface_name_raises(mock_list_datasets):

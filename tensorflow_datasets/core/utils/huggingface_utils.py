@@ -25,6 +25,7 @@ from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import datasets as hf_datasets
+from tensorflow_datasets.core.utils.lazy_imports_utils import huggingface_hub
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -133,7 +134,7 @@ def to_huggingface_name(tfds_dataset_name: str) -> str:
     DatasetNotFoundError: If the TFDS dataset name doesn't correspond to any
     existing Huggingface dataset.
   """
-  for hf_dataset_name in hf_datasets.list_datasets():
+  for hf_dataset_name in huggingface_hub.list_datasets():
     if (
         conversion_utils.to_tfds_name(hf_dataset_name)
         == tfds_dataset_name.lower()
