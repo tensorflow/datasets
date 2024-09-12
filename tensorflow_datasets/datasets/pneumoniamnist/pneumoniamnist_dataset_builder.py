@@ -29,7 +29,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download('https://zenodo.org/records/10519652/files/pneumoniamnist.npz?download=1')
 
     with tf.io.gfile.GFile(path, 'rb') as f:
-        raw_data = np.load(f, allow_pickle=True)
+        raw_data = np.load(f)
 
     train_images = np.expand_dims(raw_data.f.train_images, axis=-1)
     val_images = np.expand_dims(raw_data.f.val_images, axis=-1)
