@@ -35,9 +35,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     train_images = np.expand_dims(raw_data.f.train_images, axis=-1)
     val_images = np.expand_dims(raw_data.f.val_images, axis=-1)
     test_images = np.expand_dims(raw_data.f.test_images, axis=-1)
-    train_labels = np.squeeze(raw_data.f.train_labels)
-    val_labels = np.squeeze(raw_data.f.val_labels)
-    test_labels = np.squeeze(raw_data.f.test_labels)
+    train_labels = raw_data.f.train_labels.flatten()
+    val_labels = raw_data.f.val_labels.flatten()
+    test_labels = raw_data.f.test_labels.flatten()
 
     return {
       'train': self._generate_examples(train_images, train_labels),
