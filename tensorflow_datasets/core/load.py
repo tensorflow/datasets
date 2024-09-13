@@ -705,6 +705,7 @@ def data_source(
     data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
     download: bool = True,
     decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
+    deserialize_method: decode.DeserializeMethod = decode.DeserializeMethod.DESERIALIZE_AND_DECODE,
     builder_kwargs: Optional[Dict[str, Any]] = None,
     download_and_prepare_kwargs: Optional[Dict[str, Any]] = None,
     try_gcs: bool = False,
@@ -777,6 +778,11 @@ def data_source(
       customized feature keys need to be present. See [the
       guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
       for more info.
+    deserialize_method: Whether the read examples should be deserialized and/or
+      decoded. If not specified, it'll deserialize the data and decode the
+      features. Decoding is only supported if the examples are tf examples.
+      Note that if the parse method is other than PARSE_AND_DECODE, then the
+      `decoders` argument is ignored.
     builder_kwargs: `dict` (optional), keyword arguments to be passed to the
       `tfds.core.DatasetBuilder` constructor. `data_dir` will be passed through
       by default.
@@ -807,7 +813,9 @@ def data_source(
       try_gcs,
   )
   _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
-  return dbuilder.as_data_source(split=split, decoders=decoders)
+  return dbuilder.as_data_source(
+      split=split, decoders=decoders, deserialize_method=deserialize_method
+  )
 
 
 def _get_all_versions(

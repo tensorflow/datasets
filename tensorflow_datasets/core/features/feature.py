@@ -765,7 +765,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
   def decode_example_np(
       self, example_data: type_utils.NpArrayOrScalar
   ) -> type_utils.NpArrayOrScalar | None:
-    """Encode the feature dict into NumPy-compatible input.
+    """Decode the example data into NumPy-compatible input.
 
     Args:
       example_data: Value to convert to NumPy.

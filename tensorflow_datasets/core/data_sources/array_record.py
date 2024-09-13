@@ -47,6 +47,9 @@ class ArrayRecordDataSource(base.BaseDataSource):
   decoders: Optional[type_utils.TreeDict[decode.partial_decode.DecoderArg]] = (
       None
   )
+  deserialize_method: decode.DeserializeMethod = (
+      decode.DeserializeMethod.DESERIALIZE_AND_DECODE
+  )
   # In order to lazy load array_record, we don't load
   # `array_record_data_source.ArrayRecordDataSource` here.
   data_source: Any = dataclasses.field(init=False)

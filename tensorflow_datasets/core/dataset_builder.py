@@ -799,6 +799,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       split: Optional[Tree[splits_lib.SplitArg]] = None,
       *,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
+      deserialize_method: decode.DeserializeMethod = decode.DeserializeMethod.DESERIALIZE_AND_DECODE,
   ) -> ListOrTreeOrElem[Sequence[Any]]:
     """Constructs an `ArrayRecordDataSource`.
 
@@ -812,6 +813,11 @@ class DatasetBuilder(registered.RegisteredDataset):
         customized feature keys need to be present. See [the
         guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
         for more info.
+      deserialize_method: Whether the read examples should be deserialized
+        and/or decoded. If not specified, it'll deserialize the data and decode
+        the features. Decoding is only supported if the examples are tf
+        examples. Note that if the deserialize_method method is other than
+        PARSE_AND_DECODE, then the `decoders` argument is ignored.
 
     Returns:
       `Sequence` if `split`,
@@ -866,13 +872,27 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     # Create a dataset for each of the given splits
     def build_single_data_source(split: str) -> Sequence[Any]:
+      if info.file_format is None:
+        raise ValueError(
+            "Dataset info file format is not set! For random access, one of the"
+            f" following formats is required: {random_access_formats_msg}"
+        )
+
       match info.file_format:
         case file_adapters.FileFormat.ARRAY_RECORD:
           return array_record.ArrayRecordDataSource(
-              info, split=split, decoders=decoders
+              info,
+              split=split,
+              decoders=decoders,
+              deserialize_method=deserialize_method,
           )
         case file_adapters.FileFormat.PARQUET:
-          return parquet.ParquetDataSource(info, split=split, decoders=decoders)
+          return parquet.ParquetDataSource(
+              info,
+              split=split,
+              decoders=decoders,
+              deserialize_method=deserialize_method,
+          )
         case _:
           raise NotImplementedError(unsupported_format_msg)
 

@@ -68,18 +68,34 @@ class BaseDataSource(MappingView, Sequence):
     split: The split to load in the data source.
     decoders: Optional decoders for decoding.
     data_source: The underlying data source to initialize in the __post_init__.
+    deserialize_method: How to deserialize the bytes that are read before
+      returning.
   """
 
   dataset_info: dataset_info_lib.DatasetInfo
   split: splits_lib.Split | None = None
   decoders: type_utils.TreeDict[decode.partial_decode.DecoderArg] | None = None
   data_source: DataSource[Any] = dataclasses.field(init=False)
+  deserialize_method: decode.DeserializeMethod = (
+      decode.DeserializeMethod.DESERIALIZE_AND_DECODE
+  )
+
+  def _deserialize(self, record: Any) -> Any:
+    match self.deserialize_method:
+      case decode.DeserializeMethod.RAW_BYTES:
+        return record
+      case decode.DeserializeMethod.DESERIALIZE_NO_DECODE:
+        if file_format := self.dataset_info.file_format:
+          return file_format.deserialize(record)
+        raise ValueError('No file format set, cannot deserialize bytes!')
+      case decode.DeserializeMethod.DESERIALIZE_AND_DECODE:
+        if features := self.dataset_info.features:
+          return features.deserialize_example_np(record, decoders=self.decoders)  # pylint: disable=attribute-error
+        raise ValueError('No features set, cannot decode example!')
 
   def __getitem__(self, key: SupportsIndex) -> Any:
     record = self.data_source[key.__index__()]
-    return self.dataset_info.features.deserialize_example_np(
-        record, decoders=self.decoders
-    )
+    return self._deserialize(record)
 
   def __getitems__(self, keys: Sequence[int]) -> Sequence[Any]:
     """Retrieves items by batch.
@@ -98,17 +114,12 @@ class BaseDataSource(MappingView, Sequence):
     if not keys:
       return []
     records = self.data_source.__getitems__(keys)
-    features = self.dataset_info.features
     if len(keys) != len(records):
       raise IndexError(
-          f'Requested {len(keys)} records but got'
-          f' {len(records)} records.'
+          f'Requested {len(keys)} records but got {len(records)} records.'
           f'{keys=}, {records=}'
       )
-    return [
-        features.deserialize_example_np(record, decoders=self.decoders)
-        for record in records
-    ]
+    return [self._deserialize(record) for record in records]
 
   def __repr__(self) -> str:
     decoders_repr = (

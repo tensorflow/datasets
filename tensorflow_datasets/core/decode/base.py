@@ -16,6 +16,7 @@
 """Base decoders."""
 
 import abc
+import enum
 import functools
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -210,3 +211,30 @@ def make_decoder(output_dtype=None):
     return decorated
 
   return decorator
+
+
+class DeserializeMethod(enum.Enum):
+  """How to deserialize the bytes that are read before returning.
+
+  When reading examples from a source (e.g., a file), we consider 2 phases in
+  parsing the raw data:
+
+  1. Deserialize: deserializes raw bytes into an object. Typically it will be
+     deserialized into a `tf.train.Example`.
+
+  2. Decode: A `tf.train.Example` might encode information (e.g., a bytes
+     feature encodes an image or a int64 list encodes a tensor). The second
+     phase decodes the encoded information.
+
+  DESERIALIZE_AND_DECODE: deserialize the raw bytes to tf example (if file
+    format doesn't have a custom encoding) and then decode the features. Note
+    that how and what is decoded can typically be overriden with `decoders`.
+  DESERIALIZE_NO_DECODE: parse the raw bytes to tf example (if file format
+    doesn't have a custom encoding). If this parse method is used, then all
+    decoders are ignored.
+  RAW_BYTES: don't parse nor decode, but return the raw bytes.
+  """
+
+  DESERIALIZE_AND_DECODE = 'deserialize_and_decode'
+  DESERIALIZE_NO_DECODE = 'deserialize_no_decode'
+  RAW_BYTES = 'raw_bytes'

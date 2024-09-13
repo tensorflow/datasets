@@ -25,13 +25,19 @@ import os
 import re
 from typing import Any, ClassVar, Type, TypeVar
 
-from etils import epath
-from tensorflow_datasets.core.utils import file_utils
-from tensorflow_datasets.core.utils import type_utils
+from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
 from tensorflow_datasets.core.utils.lazy_imports_utils import parquet as pq
 from tensorflow_datasets.core.utils.lazy_imports_utils import pyarrow as pa
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from etils import epath
+  from tensorflow_datasets.core.utils import file_utils
+  from tensorflow_datasets.core.utils import type_utils
+
+  # pylint: enable=g-import-not-at-top
 
 ExamplePositions = list[Any]
 T = TypeVar('T')
@@ -51,6 +57,10 @@ class FileFormat(enum.Enum):
   @property
   def file_suffix(self) -> str:
     return ADAPTER_FOR_FORMAT[self].FILE_SUFFIX
+
+  def deserialize(self, raw_example: bytes) -> Any:
+    """Deserializes bytes into an object, but does not decode features."""
+    return ADAPTER_FOR_FORMAT[self].deserialize(raw_example)
 
   @classmethod
   def with_random_access(cls) -> set[FileFormat]:
@@ -145,6 +155,17 @@ class FileAdapter(abc.ABC):
       TFRecords, does not return anything.
     """
     raise NotImplementedError()
+
+  @classmethod
+  def deserialize(cls, raw_example: bytes) -> Any:
+    """Returns the deserialized example, but does not decode features.
+
+    If custom serialization is used, override this method in the file adapter.
+
+    Args:
+      raw_example: the bytes read from the source that should be deserialized.
+    """
+    return tf.train.Example.FromString(raw_example)
 
 
 class TfRecordFileAdapter(FileAdapter):

@@ -16,6 +16,7 @@
 """Decoder public API."""
 
 from tensorflow_datasets.core.decode.base import Decoder
+from tensorflow_datasets.core.decode.base import DeserializeMethod
 from tensorflow_datasets.core.decode.base import make_decoder
 from tensorflow_datasets.core.decode.base import SkipDecoding
 from tensorflow_datasets.core.decode.partial_decode import PartialDecoding
@@ -23,6 +24,7 @@ from tensorflow_datasets.core.decode.partial_decode import PartialDecoding
 __all__ = [
     'Decoder',
     'make_decoder',
+    'DeserializeMethod',
     'PartialDecoding',
     'SkipDecoding',
 ]
