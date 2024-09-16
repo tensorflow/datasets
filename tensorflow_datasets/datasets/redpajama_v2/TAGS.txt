@@ -1,0 +1,9 @@
+content.data-type.text # Contains text data.
+content.language.de # Contains text in language German / de.
+content.language.en # Contains text in language English / en.
+content.language.es # Contains text in language Spanish / es.
+content.language.fr # Contains text in language French / fr.
+content.language.it # Contains text in language Italian / it.
+content.multilingual # Contains text in multiple natural languages.
+ml.task.language-modelling # Relates to Language Modelling, a machine learning task.
+ml.task.text-generation # Relates to Text Generation, a machine learning task.
