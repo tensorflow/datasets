@@ -15,7 +15,7 @@ Limitations:
 
 *   `tf.train.SequenceExample` is not supported, only `tf.train.Example`.
 *   You need to be able to express the `tf.train.Example` in terms of
-    `tfds.features` (see section bellow).
+    `tfds.features` (see section below).
 
 ## File naming convention
 
