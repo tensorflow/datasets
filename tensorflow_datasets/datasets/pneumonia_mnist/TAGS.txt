@@ -1,0 +1,3 @@
+content.data-type.image # Contains image data.
+content.subject.health # Relates to health.
+ml.task.image-classification # Relates to Image Classification, a machine learning task.
