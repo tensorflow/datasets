@@ -127,40 +127,44 @@ def register_subparser(parsers: argparse._SubParsersAction):
     parsers._parser_class = orig_parser_class  # pylint: disable=protected-access
   parser.add_arguments(CmdArgs, dest='args')
   parser.set_defaults(
-      subparser_fn=lambda args: prepare_croissant_builder(args.args)
+      subparser_fn=lambda args: prepare_croissant_builders(args.args)
   )
 
 
-def prepare_croissant_builder(args: CmdArgs) -> None:
-  """Creates a Croissant Builder and runs the preparation.
+def prepare_croissant_builder(
+    args: CmdArgs, record_set_id: str
+) -> croissant_builder.CroissantBuilder:
+  """Returns prepared Croissant Builder for the given record set id.
 
   Args:
     args: CLI arguments.
+    record_set_id: Record set id.
   """
   builder = croissant_builder.CroissantBuilder(
       jsonld=args.jsonld,
-      record_set_ids=args.record_set_ids,
+      record_set_ids=[record_set_id],
       file_format=args.file_format,
       data_dir=args.data_dir,
       mapping=args.mapping_json,
       overwrite_version=args.overwrite_version,
   )
+  cli_utils.download_and_prepare(
+      builder=builder,
+      download_config=None,
+      download_dir=args.download_dir,
+      publish_dir=args.publish_dir,
+      skip_if_published=args.skip_if_published,
+      overwrite=args.overwrite,
+  )
+  return builder
 
+
+def prepare_croissant_builders(args: CmdArgs):
+  """Creates Croissant Builders and prepares them.
+
+  Args:
+    args: CLI arguments.
+  """
   # Generate each config sequentially.
-  for config in builder.BUILDER_CONFIGS:
-    builder_for_config = croissant_builder.CroissantBuilder(
-        jsonld=args.jsonld,
-        record_set_ids=[config.name],
-        file_format=args.file_format,
-        data_dir=args.data_dir,
-        mapping=args.mapping_json,
-        overwrite_version=args.overwrite_version,
-    )
-    cli_utils.download_and_prepare(
-        builder=builder_for_config,
-        download_config=None,
-        download_dir=args.download_dir,
-        publish_dir=args.publish_dir,
-        skip_if_published=args.skip_if_published,
-        overwrite=args.overwrite,
-    )
+  for record_set_id in args.record_set_ids:
+    prepare_croissant_builder(args=args, record_set_id=record_set_id)

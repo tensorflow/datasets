@@ -197,8 +197,8 @@ class CroissantBuilder(
     if not record_set_ids:
       record_set_ids = croissant_utils.get_record_set_ids(self.metadata)
     config_names = [
-        conversion_utils.to_tfds_name(record_set)
-        for record_set in record_set_ids
+        conversion_utils.to_tfds_name(record_set_id)
+        for record_set_id in record_set_ids
     ]
     self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
         dataset_builder.BuilderConfig(name=config_name)
