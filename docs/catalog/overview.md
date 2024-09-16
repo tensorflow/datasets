@@ -191,6 +191,11 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`cardiotox`](cardiotox.md)
 
+### `Health`
+
+*   [`pneumonia_mnist`](pneumonia_mnist.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Image`
 
 *   [`abstract_reasoning`](abstract_reasoning.md)
@@ -246,6 +251,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`plant_leaves`](plant_leaves.md)
 *   [`plant_village`](plant_village.md)
 *   [`plantae_k`](plantae_k.md)
+*   [`pneumonia_mnist`](pneumonia_mnist.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`quickdraw_bitmap`](quickdraw_bitmap.md)
 *   [`ref_coco`](ref_coco.md)
 *   [`resisc45`](resisc45.md)
@@ -328,6 +335,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`oxford_iiit_pet`](oxford_iiit_pet.md)
 *   [`places365_small`](places365_small.md)
 *   [`plant_village`](plant_village.md)
+*   [`pneumonia_mnist`](pneumonia_mnist.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`resisc45`](resisc45.md)
 *   [`siscore`](siscore.md)
 *   [`smallnorb`](smallnorb.md)

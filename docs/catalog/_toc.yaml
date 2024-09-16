@@ -238,6 +238,11 @@ toc:
     title: cardiotox
   title: Graphs
 - section:
+  - path: /datasets/catalog/pneumonia_mnist
+    status: nightly
+    title: pneumonia_mnist
+  title: Health
+- section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
   - path: /datasets/catalog/aflw2k3d
@@ -344,6 +349,9 @@ toc:
     title: plant_village
   - path: /datasets/catalog/plantae_k
     title: plantae_k
+  - path: /datasets/catalog/pneumonia_mnist
+    status: nightly
+    title: pneumonia_mnist
   - path: /datasets/catalog/quickdraw_bitmap
     title: quickdraw_bitmap
   - path: /datasets/catalog/ref_coco
@@ -503,6 +511,9 @@ toc:
     title: places365_small
   - path: /datasets/catalog/plant_village
     title: plant_village
+  - path: /datasets/catalog/pneumonia_mnist
+    status: nightly
+    title: pneumonia_mnist
   - path: /datasets/catalog/resisc45
     title: resisc45 (manual)
   - path: /datasets/catalog/siscore
