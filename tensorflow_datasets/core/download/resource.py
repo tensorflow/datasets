@@ -19,7 +19,6 @@ import base64
 import codecs
 from collections.abc import Mapping
 import enum
-import hashlib
 import itertools
 import json
 import os
@@ -191,12 +190,6 @@ def get_dl_fname(url: str, checksum: str) -> str:
   return f'{name}{checksum}{extension}'
 
 
-def get_dl_dirname(url: str) -> str:
-  """Returns name of temp dir for given url."""
-  checksum = hashlib.sha256(url.encode()).hexdigest()
-  return get_dl_fname(url, checksum)
-
-
 def _get_info_path(path: epath.Path) -> epath.Path:
   """Returns path of INFO file associated with resource at path."""
   return path.with_suffix(path.suffix + '.INFO')
@@ -290,6 +283,7 @@ class Resource:
       url: str | None = None,
       extract_method: ExtractMethod | None = None,
       path: epath.PathLike | None = None,
+      relative_download_dir: epath.PathLike = '',
   ):
     """Resource constructor.
 
@@ -299,10 +293,13 @@ class Resource:
         set, will be guessed from downloaded file name `original_fname`.
       path: Path of resource on local disk. Can be None if resource has not be
         downloaded yet. In such case, `url` must be set.
+      relative_download_dir: Optional directory for downloading relative to
+        `download_dir`.
     """
     self.url = url
     self._extract_method = extract_method
     self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
+    self.relative_download_dir = relative_download_dir
 
   @classmethod
   def exists_locally(cls, path: epath.Path) -> bool:
