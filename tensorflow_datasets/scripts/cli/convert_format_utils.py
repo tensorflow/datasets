@@ -61,9 +61,14 @@ class ShardInstruction:
 
   def convert(self) -> None:
     """Converts the shard to the desired file format."""
+
     def read_in() -> Iterator[type_utils.KeySerializedExample]:
       in_dataset = self.in_file_adapter.make_tf_data(filename=self.in_path)
-      for i, row in tqdm.tqdm(enumerate(in_dataset)):
+      for i, row in tqdm.tqdm(
+          enumerate(in_dataset),
+          unit=' examples',
+          desc=f'Shard {self.in_path.name}',
+      ):
         if self.convert_fn is not None:
           yield i, self.convert_fn(row)
         else:
@@ -258,7 +263,11 @@ def _convert_dataset(
     )
 
   else:
-    for shard_instruction in shard_instructions:
+    for shard_instruction in tqdm.tqdm(
+        shard_instructions,
+        unit=' shards',
+        desc=f'Shards in {os.fspath(dataset_dir)}',
+    ):
       shard_instruction.convert()
 
 
@@ -357,7 +366,9 @@ def _convert_dataset_dirs(
             out_dir=out_dir,
         )
   else:
-    for dataset_dir, info in found_dataset_versions.items():
+    for dataset_dir, info in tqdm.tqdm(
+        found_dataset_versions.items(), unit=' datasets'
+    ):
       out_dir = from_to_dirs[dataset_dir]
       convert_dataset_fn(
           info=info,
@@ -366,7 +377,9 @@ def _convert_dataset_dirs(
       )
 
   logging.info('All shards have been converted. Now converting metadata.')
-  for dataset_dir, info in tqdm.tqdm(found_dataset_versions.items()):
+  for dataset_dir, info in tqdm.tqdm(
+      found_dataset_versions.items(), unit=' datasets'
+  ):
     out_dir = from_to_dirs[dataset_dir]
     logging.info('Converting metadata in %s.', dataset_dir)
     convert_metadata(
