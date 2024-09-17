@@ -558,6 +558,7 @@ class DatasetInfo(object):
 
   def set_splits(self, split_dict: splits_lib.SplitDict) -> None:
     """Split setter (private method)."""
+    logging.info("kano 14: set_splits: %s %s", self.name, split_dict)
     for split, split_info in split_dict.items():
       if isinstance(split_info, splits_lib.MultiSplitInfo):
         # When splits are from multiple folders, the dataset can be different.

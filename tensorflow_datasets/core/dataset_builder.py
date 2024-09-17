@@ -496,6 +496,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Ensure .info hasn't been called before versioning is set-up
     # Otherwise, backward compatibility cannot be guaranteed as some code will
     # depend on the code version instead of the restored data version
+    logging.info("kano 14: info: %s", self._version)
     if not getattr(self, "_version", None):
       # Message for developers creating new dataset. Will trigger if they are
       # using .info in the constructor before calling super().__init__
@@ -1403,10 +1404,17 @@ class DatasetBuilder(registered.RegisteredDataset):
       if builder_config is None and version is not None:
         builder_config = self.builder_configs.get(f"{name}:{version}")
       if builder_config is None:
-        raise ValueError(
-            "BuilderConfig %s not found with version %s. Available: %s"
-            % (name, version, list(self.builder_configs.keys()))
-        )
+        biggest_version = ''
+        for key in self.builder_configs.keys():
+          n, v = key.split(':')
+          if name == n and v > biggest_version:
+            builder_config = self.builder_configs[key]
+            biggest_version = v
+        if builder_config is None:
+          raise ValueError(
+              "BuilderConfig %s not found with version %s. Available: %s"
+              % (name, version, list(self.builder_configs.keys()))
+          )
     name = builder_config.name
     if not name:
       raise ValueError("BuilderConfig must have a name, got %s" % name)
