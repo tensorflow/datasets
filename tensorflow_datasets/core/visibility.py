@@ -36,7 +36,6 @@ Updating the visibility affect the following functions:
 * `tfds.load`
 * `tfds.list_builders`
 * `tfds.core.load.list_full_names`
-
 """
 
 import contextlib
@@ -48,7 +47,11 @@ from absl import app
 
 
 class DatasetType(enum.Enum):
+  """Available visibilities."""
+
+  # Open-source TFDS datasets
   TFDS_PUBLIC = enum.auto()
+  # Community datasets (open-source)
   COMMUNITY_PUBLIC = enum.auto()
 
   def is_available(self) -> bool:
@@ -105,11 +108,9 @@ def _set_default_visibility() -> None:
     # If the script is launched from within a TFDS script, we disable community
     # datasets and restrict scripts to only public datasets.
     # Accessing community datasets should be explicitly requested.
-    set_availables(
-        [
-            DatasetType.TFDS_PUBLIC,
-        ]
-    )
+    set_availables([
+        DatasetType.TFDS_PUBLIC,
+    ])
 
 
 app.call_after_init(_set_default_visibility)
