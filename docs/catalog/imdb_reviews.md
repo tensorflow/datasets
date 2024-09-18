@@ -36,20 +36,6 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `80.23 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split            | Examples
-:--------------- | -------:
-`'test'`         | 25,000
-`'train'`        | 25,000
-`'unsupervised'` | 50,000
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'label')`
@@ -79,7 +65,21 @@ Split            | Examples
 
 *   **Config description**: Plain text
 
+*   **Download size**: `80.23 MiB`
+
 *   **Dataset size**: `129.83 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split            | Examples
+:--------------- | -------:
+`'test'`         | 25,000
+`'train'`        | 25,000
+`'unsupervised'` | 50,000
 
 *   **Feature structure**:
 
@@ -140,7 +140,18 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses byte-level text encoding with
     `tfds.deprecated.text.ByteTextEncoder`
 
-*   **Dataset size**: `129.88 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -201,14 +212,25 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
     8k vocab size
 
-*   **Dataset size**: `54.72 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=int64, encoder=<SubwordTextEncoder vocab_size=8185>),
+    'text': Text(shape=(None,), dtype=int64),
 })
 ```
 
@@ -262,14 +284,25 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
     32k vocab size
 
-*   **Dataset size**: `50.33 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=int64, encoder=<SubwordTextEncoder vocab_size=32650>),
+    'text': Text(shape=(None,), dtype=int64),
 })
 ```
 
