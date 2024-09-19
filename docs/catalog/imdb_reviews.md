@@ -25,6 +25,8 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
     <span class="material-icons icon-after" aria-hidden="true"> north_east
     </span> </a>
 
+*   **Config description**: Plain text
+
 *   **Homepage**:
     [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
@@ -35,35 +37,6 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
 
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('text', 'label')`
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
-
-*   **Citation**:
-
-```
-@InProceedings{maas-EtAl:2011:ACL-HLT2011,
-  author    = {Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher},
-  title     = {Learning Word Vectors for Sentiment Analysis},
-  booktitle = {Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies},
-  month     = {June},
-  year      = {2011},
-  address   = {Portland, Oregon, USA},
-  publisher = {Association for Computational Linguistics},
-  pages     = {142--150},
-  url       = {http://www.aclweb.org/anthology/P11-1015}
-}
-```
-
-
-## imdb_reviews/plain_text (default config)
-
-*   **Config description**: Plain text
 
 *   **Download size**: `80.23 MiB`
 
@@ -97,6 +70,14 @@ Feature | Class        | Shape | Dtype  | Description
         | FeaturesDict |       |        |
 label   | ClassLabel   |       | int64  |
 text    | Text         |       | string |
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'label')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -135,218 +116,21 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## imdb_reviews/bytes
+*   **Citation**:
 
-*   **Config description**: Uses byte-level text encoding with
-    `tfds.deprecated.text.ByteTextEncoder`
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Feature structure**:
-
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
+```
+@InProceedings{maas-EtAl:2011:ACL-HLT2011,
+  author    = {Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher},
+  title     = {Learning Word Vectors for Sentiment Analysis},
+  booktitle = {Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies},
+  month     = {June},
+  year      = {2011},
+  address   = {Portland, Oregon, USA},
+  publisher = {Association for Computational Linguistics},
+  pages     = {142--150},
+  url       = {http://www.aclweb.org/anthology/P11-1015}
+}
 ```
 
-*   **Feature documentation**:
 
-Feature | Class        | Shape   | Dtype | Description
-:------ | :----------- | :------ | :---- | :----------
-        | FeaturesDict |         |       |
-label   | ClassLabel   |         | int64 |
-text    | Text         | (None,) | int64 |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imdb_reviews-bytes-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
-## imdb_reviews/subwords8k
-
-*   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
-    8k vocab size
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Feature structure**:
-
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=int64),
-})
-```
-
-*   **Feature documentation**:
-
-Feature | Class        | Shape   | Dtype | Description
-:------ | :----------- | :------ | :---- | :----------
-        | FeaturesDict |         |       |
-label   | ClassLabel   |         | int64 |
-text    | Text         | (None,) | int64 |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imdb_reviews-subwords8k-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
-## imdb_reviews/subwords32k
-
-*   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
-    32k vocab size
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Feature structure**:
-
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=int64),
-})
-```
-
-*   **Feature documentation**:
-
-Feature | Class        | Shape   | Dtype | Description
-:------ | :----------- | :------ | :---- | :----------
-        | FeaturesDict |         |       |
-label   | ClassLabel   |         | int64 |
-text    | Text         | (None,) | int64 |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imdb_reviews-subwords32k-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+## imdb_reviews/plain_text (default config)
