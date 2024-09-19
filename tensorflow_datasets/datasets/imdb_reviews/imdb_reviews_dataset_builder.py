@@ -54,39 +54,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       IMDBReviewsConfig(
           name="plain_text",
           description="Plain text",
-      ),
-      IMDBReviewsConfig(
-          name="bytes",
-          description=(
-              "Uses byte-level text encoding with "
-              "`tfds.deprecated.text.ByteTextEncoder`"
-          ),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder=tfds.deprecated.text.ByteTextEncoder()
-          ),
-      ),
-      IMDBReviewsConfig(
-          name="subwords8k",
-          description=(
-              "Uses `tfds.deprecated.text.SubwordTextEncoder` with 8k "
-              "vocab size"
-          ),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-              vocab_size=2**13,
-          ),
-      ),
-      IMDBReviewsConfig(
-          name="subwords32k",
-          description=(
-              "Uses `tfds.deprecated.text.SubwordTextEncoder` with "
-              "32k vocab size"
-          ),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-              vocab_size=2**15,
-          ),
-      ),
+      )
   ]
 
   def _info(self):
