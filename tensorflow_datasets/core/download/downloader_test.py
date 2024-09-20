@@ -13,17 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for downloader."""
-
 import hashlib
 import io
-import os
-import tempfile
 from typing import Optional
 from unittest import mock
 
+from etils import epath
 import pytest
-import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -59,11 +55,13 @@ class DownloaderTest(testing.TestCase):
     super(DownloaderTest, self).setUp()
     self.addCleanup(mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)
-    self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
+    self.tmp_dir = epath.Path(self.tmp_dir)
     self.url = 'http://example.com/foo.tar.gz'
     self.resource = resource_lib.Resource(url=self.url)
-    self.path = os.path.join(self.tmp_dir, 'foo.tar.gz')
-    self.incomplete_path = '%s.incomplete' % self.path
+    self.path = self.tmp_dir / 'foo.tar.gz'
+    self.incomplete_path = self.path.with_suffix(
+        self.path.suffix + '.incomplete'
+    )
     self.response = b'This \nis an \nawesome\n response!'
     self.resp_checksum = hashlib.sha256(self.response).hexdigest()
     self.cookies = {}
@@ -84,22 +82,20 @@ class DownloaderTest(testing.TestCase):
     promise = self.downloader.download(self.url, self.tmp_dir)
     future = promise.get()
     url_info = future.url_info
-    self.assertEqual(self.path, os.fspath(future.path))
+    self.assertEqual(self.path, future.path)
     self.assertEqual(url_info.checksum, self.resp_checksum)
-    with tf.io.gfile.GFile(self.path, 'rb') as result:
-      self.assertEqual(result.read(), self.response)
-    self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
+    self.assertEqual(self.path.read_bytes(), self.response)
+    self.assertFalse(self.incomplete_path.exists())
 
   def test_drive_no_cookies(self):
     url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
     promise = self.downloader.download(url, self.tmp_dir)
     future = promise.get()
     url_info = future.url_info
-    self.assertEqual(self.path, os.fspath(future.path))
+    self.assertEqual(self.path, future.path)
     self.assertEqual(url_info.checksum, self.resp_checksum)
-    with tf.io.gfile.GFile(self.path, 'rb') as result:
-      self.assertEqual(result.read(), self.response)
-    self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
+    self.assertEqual(self.path.read_bytes(), self.response)
+    self.assertFalse(self.incomplete_path.exists())
 
   def test_drive(self):
     self.cookies = {'foo': 'bar', 'download_warning_a': 'token', 'a': 'b'}
@@ -129,11 +125,10 @@ class DownloaderTest(testing.TestCase):
     promise = self.downloader.download(url, self.tmp_dir)
     future = promise.get()
     url_info = future.url_info
-    self.assertEqual(self.path, os.fspath(future.path))
+    self.assertEqual(self.path, future.path)
     self.assertEqual(url_info.checksum, self.resp_checksum)
-    with tf.io.gfile.GFile(self.path, 'rb') as result:
-      self.assertEqual(result.read(), self.response)
-    self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
+    self.assertEqual(self.path.read_bytes(), self.response)
+    self.assertFalse(self.incomplete_path.exists())
 
   def test_ftp_error(self):
     error = downloader.urllib.error.URLError('Problem serving file.')

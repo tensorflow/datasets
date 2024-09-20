@@ -225,7 +225,7 @@ class _Downloader:
       self._pbar_dl_size.update(dl_result.url_info.size)
 
   def download(
-      self, url: str, destination_path: str, verify: bool = True
+      self, url: str, destination_path: epath.Path, verify: bool = True
   ) -> promise.Promise[concurrent.futures.Future[DownloadResult]]:
     """Download url to given path.
 
@@ -239,7 +239,6 @@ class _Downloader:
     Returns:
       Promise obj -> Download result.
     """
-    destination_path = os.fspath(destination_path)
     self._pbar_url.update_total(1)
     future = self._executor.submit(
         self._sync_download, url, destination_path, verify
@@ -264,7 +263,7 @@ class _Downloader:
     return DownloadResult(path=out_path, url_info=url_info)
 
   def _sync_download(
-      self, url: str, destination_path: str, verify: bool = True
+      self, url: str, destination_path: epath.Path, verify: bool = True
   ) -> DownloadResult:
     """Synchronous version of `download` method.
 
@@ -284,7 +283,6 @@ class _Downloader:
     Raises:
       DownloadError: when download fails.
     """
-    destination_path = epath.Path(destination_path)
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
       # use requests (http) or urllib (ftp).

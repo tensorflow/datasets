@@ -297,7 +297,7 @@ class DownloadManager:
     return state
 
   @property
-  def _downloader(self):
+  def _downloader(self) -> downloader._Downloader:
     if not self.__downloader:
       self.__downloader = get_downloader(
           max_simultaneous_downloads=self._max_simultaneous_downloads
@@ -305,13 +305,13 @@ class DownloadManager:
     return self.__downloader
 
   @property
-  def _extractor(self):
+  def _extractor(self) -> extractor._Extractor:
     if not self.__extractor:
       self.__extractor = extractor.get_extractor()
     return self.__extractor
 
   @property
-  def downloaded_size(self):
+  def downloaded_size(self) -> int:
     """Returns the total size of downloaded files."""
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
@@ -330,6 +330,22 @@ class DownloadManager:
         self._register_checksums_path,
         self._recorded_url_infos,
     )
+
+  def _get_manually_downloaded_path(
+      self, expected_url_info: checksums.UrlInfo | None
+  ) -> epath.Path | None:
+    """Checks if file is already downloaded in manual_dir."""
+    if not self._manual_dir:  # Manual dir not passed
+      return None
+
+    if not expected_url_info or not expected_url_info.filename:
+      return None  # Filename unknown.
+
+    manual_path = self._manual_dir / expected_url_info.filename
+    if not manual_path.exists():  # File not manually downloaded
+      return None
+
+    return manual_path
 
   # Synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.
@@ -363,9 +379,8 @@ class DownloadManager:
     # * In `manual_dir` (manually downloaded data)
     # * In `downloads/url_path` (checksum unknown)
     # * In `downloads/checksum_path` (checksum registered)
-    manually_downloaded_path = _get_manually_downloaded_path(
-        manual_dir=self._manual_dir,
-        expected_url_info=expected_url_info,
+    manually_downloaded_path = self._get_manually_downloaded_path(
+        expected_url_info=expected_url_info
     )
     url_path = self._get_dl_path(url)
     checksum_path = (
@@ -459,12 +474,11 @@ class DownloadManager:
       #   the download isn't cached (re-running build will retrigger a new
       #   download). This is expected as it might mean the downloaded file
       #   was corrupted. Note: The tmp file isn't deleted to allow inspection.
-      _validate_checksums(
+      self._validate_checksums(
           url=url,
           path=path,
           expected_url_info=expected_url_info,
           computed_url_info=computed_url_info,
-          force_checksums_validation=self._force_checksums_validation,
       )
 
     return self._rename_and_get_final_dl_path(
@@ -475,6 +489,42 @@ class DownloadManager:
         checksum_path=checksum_path,
         url_path=url_path,
     )
+
+  def _validate_checksums(
+      self,
+      url: str,
+      path: epath.Path,
+      computed_url_info: checksums.UrlInfo | None,
+      expected_url_info: checksums.UrlInfo | None,
+  ) -> None:
+    """Validate computed_url_info match expected_url_info."""
+    # If force-checksums validations, both expected and computed url_info
+    # should exists
+    if self._force_checksums_validation:
+      # Checksum of the downloaded file unknown (for manually downloaded file)
+      if not computed_url_info:
+        computed_url_info = checksums.compute_url_info(path)
+      # Checksums have not been registered
+      if not expected_url_info:
+        raise ValueError(
+            f'Missing checksums url: {url}, yet '
+            '`force_checksums_validation=True`. '
+            'Did you forget to register checksums?'
+        )
+
+    if (
+        expected_url_info
+        and computed_url_info
+        and expected_url_info != computed_url_info
+    ):
+      msg = (
+          f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
+          f'* Expected: {expected_url_info}\n'
+          f'* Got: {computed_url_info}\n'
+          'To debug, see: '
+          'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
+      )
+      raise NonMatchingChecksumError(msg)
 
   def _rename_and_get_final_dl_path(
       self,
@@ -705,61 +755,6 @@ class DownloadManager:
           f'instructions:\n{self._manual_dir_instructions}'
       )
     return self._manual_dir
-
-
-def _get_manually_downloaded_path(
-    manual_dir: epath.Path | None,
-    expected_url_info: checksums.UrlInfo | None,
-) -> epath.Path | None:
-  """Checks if file is already downloaded in manual_dir."""
-  if not manual_dir:  # Manual dir not passed
-    return None
-
-  if not expected_url_info or not expected_url_info.filename:
-    return None  # Filename unknown.
-
-  manual_path = manual_dir / expected_url_info.filename
-  if not manual_path.exists():  # File not manually downloaded
-    return None
-
-  return manual_path
-
-
-def _validate_checksums(
-    url: str,
-    path: epath.Path,
-    computed_url_info: checksums.UrlInfo | None,
-    expected_url_info: checksums.UrlInfo | None,
-    force_checksums_validation: bool,
-) -> None:
-  """Validate computed_url_info match expected_url_info."""
-  # If force-checksums validations, both expected and computed url_info
-  # should exists
-  if force_checksums_validation:
-    # Checksum of the downloaded file unknown (for manually downloaded file)
-    if not computed_url_info:
-      computed_url_info = checksums.compute_url_info(path)
-    # Checksums have not been registered
-    if not expected_url_info:
-      raise ValueError(
-          f'Missing checksums url: {url}, yet '
-          '`force_checksums_validation=True`. '
-          'Did you forget to register checksums?'
-      )
-
-  if (
-      expected_url_info
-      and computed_url_info
-      and expected_url_info != computed_url_info
-  ):
-    msg = (
-        f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
-        f'* Expected: {expected_url_info}\n'
-        f'* Got: {computed_url_info}\n'
-        'To debug, see: '
-        'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
-    )
-    raise NonMatchingChecksumError(msg)
 
 
 def _map_promise(map_fn, all_inputs):
