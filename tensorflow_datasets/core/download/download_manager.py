@@ -21,7 +21,6 @@ from collections.abc import Iterator
 import concurrent.futures
 import dataclasses
 import functools
-import hashlib
 import typing
 from typing import Any
 import uuid
@@ -316,8 +315,8 @@ class DownloadManager:
     """Returns the total size of downloaded files."""
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
-  def _get_dl_path(self, url: str, sha256: str) -> epath.Path:
-    return self._download_dir / resource_lib.get_dl_fname(url, sha256)
+  def _get_dl_path(self, url: str, checksum: str | None = None) -> epath.Path:
+    return self._download_dir / resource_lib.get_dl_fname(url, checksum)
 
   @property
   def register_checksums(self):
@@ -368,11 +367,9 @@ class DownloadManager:
         manual_dir=self._manual_dir,
         expected_url_info=expected_url_info,
     )
-    url_path = self._get_dl_path(
-        url, sha256=hashlib.sha256(url.encode('utf-8')).hexdigest()
-    )
+    url_path = self._get_dl_path(url)
     checksum_path = (
-        self._get_dl_path(url, sha256=expected_url_info.checksum)
+        self._get_dl_path(url, expected_url_info.checksum)
         if expected_url_info
         else None
     )
@@ -392,10 +389,11 @@ class DownloadManager:
       self._downloader.increase_tqdm(dl_result)
       future = promise.Promise.resolve(dl_result)
     else:
-      # Download in an empty tmp directory (to avoid name collisions)
+      # Download in a tmp directory next to url_path (to avoid name collisions)
       # `download_tmp_dir` is cleaned-up in `_rename_and_get_final_dl_path`
-      dirname = f'{resource_lib.get_dl_dirname(url)}.tmp.{uuid.uuid4().hex}'
-      download_tmp_dir = self._download_dir / dirname
+      download_tmp_dir = (
+          url_path.parent / f'{url_path.name}.tmp.{uuid.uuid4().hex}'
+      )
       download_tmp_dir.mkdir()
       logging.info(f'Downloading {url} into {download_tmp_dir}...')
       future = self._downloader.download(

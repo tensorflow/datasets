@@ -36,6 +36,10 @@ def _default_checksum_dirs() -> list[epath.Path]:
   ]
 
 
+def sha256(str_: str) -> str:
+  return hashlib.sha256(str_.encode()).hexdigest()
+
+
 @dataclasses.dataclass(eq=True)
 class UrlInfo:
   """Small wrapper around the url metadata (checksum, size).

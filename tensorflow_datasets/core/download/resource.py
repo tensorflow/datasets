@@ -19,7 +19,6 @@ import base64
 import codecs
 from collections.abc import Mapping
 import enum
-import hashlib
 import itertools
 import json
 import os
@@ -91,7 +90,7 @@ _URL_COMMON_PARTS = [
 ]
 
 
-def _guess_extract_method(fname) -> ExtractMethod:
+def guess_extract_method(fname) -> ExtractMethod:
   """Guess extraction method, given file name (or path)."""
   for method, extensions in _EXTRACTION_METHOD_TO_EXTS:
     for ext in extensions:
@@ -167,7 +166,7 @@ def _sanitize_url(url: str, max_length: int) -> tuple[str, str]:
   return url[:max_length], extension
 
 
-def get_dl_fname(url: str, checksum: str) -> str:
+def get_dl_fname(url: str, checksum: str | None = None) -> str:
   """Returns name of file for (url, checksum).
 
   The max length of linux and windows filenames is 255 chars.
@@ -185,19 +184,15 @@ def get_dl_fname(url: str, checksum: str) -> str:
   Returns:
     string of 90 chars max.
   """
+  if not checksum:
+    checksum = checksums_lib.sha256(url)
   checksum = base64.urlsafe_b64encode(_decode_hex(checksum))
   checksum = checksum.decode()[:-1]
   name, extension = _sanitize_url(url, max_length=46)
   return f'{name}{checksum}{extension}'
 
 
-def get_dl_dirname(url: str) -> str:
-  """Returns name of temp dir for given url."""
-  checksum = hashlib.sha256(url.encode()).hexdigest()
-  return get_dl_fname(url, checksum)
-
-
-def _get_info_path(path: epath.Path) -> epath.Path:
+def get_info_path(path: epath.Path) -> epath.Path:
   """Returns path of INFO file associated with resource at path."""
   return path.with_suffix(path.suffix + '.INFO')
 
@@ -214,12 +209,12 @@ synchronize_decorator = utils.build_synchronize_decorator()
 
 
 def replace_info_file(src_path: epath.Path, dst_path: epath.Path) -> None:
-  _get_info_path(src_path).replace(_get_info_path(dst_path))
+  get_info_path(src_path).replace(get_info_path(dst_path))
 
 
 @synchronize_decorator
 def read_info_file(info_path: epath.Path) -> Json:
-  return _read_info(_get_info_path(info_path))
+  return _read_info(get_info_path(info_path))
 
 
 @synchronize_decorator
@@ -244,7 +239,7 @@ def write_info_file(
     url_info: checksums/size info of the url
   """
   url_info_dict = url_info.asdict()
-  info_path = _get_info_path(path)
+  info_path = get_info_path(path)
   info = _read_info(info_path)
   urls = set(info.get('urls', []) + [url])
   dataset_names = info.get('dataset_names', [])
@@ -273,12 +268,12 @@ def write_info_file(
     json.dump(info, info_f, sort_keys=True)
 
 
-def get_extract_method(path: epath.Path) -> ExtractMethod:
+def _get_extract_method(path: epath.Path) -> ExtractMethod:
   """Returns `ExtractMethod` to use on resource at path. Cannot be None."""
-  info_path = _get_info_path(path)
+  info_path = get_info_path(path)
   info = _read_info(info_path)
   fname = info.get('original_fname', os.fspath(path))
-  return _guess_extract_method(fname)
+  return guess_extract_method(fname)
 
 
 class Resource:
@@ -309,9 +304,9 @@ class Resource:
     """Returns whether the resource exists locally, at `resource.path`."""
     # If INFO file doesn't exist, consider resource does NOT exist, as it would
     # prevent guessing the `extract_method`.
-    return path.exists() and _get_info_path(path).exists()
+    return path.exists() and get_info_path(path).exists()
 
   @property
   def extract_method(self) -> ExtractMethod:
     """Returns `ExtractMethod` to use on resource. Cannot be None."""
-    return self._extract_method or get_extract_method(self.path)
+    return self._extract_method or _get_extract_method(self.path)
