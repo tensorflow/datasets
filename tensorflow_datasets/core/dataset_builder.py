@@ -19,14 +19,14 @@ from __future__ import annotations
 
 import abc
 import collections
-from collections.abc import Sequence
+from collections.abc import Iterable, Iterator, Mapping, Sequence
 import dataclasses
 import functools
 import inspect
 import json
 import os
 import sys
-from typing import Any, ClassVar, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
+from typing import Any, ClassVar, Dict, List, Optional, Tuple, Type, Union
 
 from absl import logging
 from etils import epy
@@ -1445,6 +1445,17 @@ class DatasetBuilder(registered.RegisteredDataset):
       )
     return config_dict
 
+  def _get_filename_template(
+      self, split_name: str
+  ) -> naming.ShardedFileTemplate:
+    """Returns a filename template for the given split."""
+    return naming.ShardedFileTemplate(
+        split=split_name,
+        dataset_name=self.name,
+        data_dir=self.data_path,
+        filetype_suffix=self.info.file_format.file_suffix,  # pytype: disable=attribute-error
+    )
+
 
 class FileReaderBuilder(DatasetBuilder):
   """Base class for datasets reading files.
@@ -1675,17 +1686,6 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     """
     return writer_lib.ExampleWriter(file_format=self.info.file_format)
 
-  def _get_filename_template(
-      self, split_name: str
-  ) -> naming.ShardedFileTemplate:
-    """Returns a filename template for the given split."""
-    return naming.ShardedFileTemplate(
-        split=split_name,
-        dataset_name=self.name,
-        data_dir=self.data_path,
-        filetype_suffix=self.info.file_format.file_suffix,  # pytype: disable=attribute-error
-    )
-
   def _generate_splits(
       self,
       dl_manager: download.DownloadManager,
@@ -1850,6 +1850,99 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         file_pattern=file_pattern,
         **kwargs,
     )
+
+
+class ShardBasedBuilder(FileReaderBuilder):
+  """Base class for datasets with data generated shard by shard.
+
+  Like `GeneratorBasedBuilder`, this base class can be used to create datasets.
+  However, `ShardBasedBuilder` gives strict control over the number of shards
+  and what data ends up in what shard.
+
+  This is useful for datasets where you want to keep the same ordering as the
+  original data source, and/or where you want to keep the same sharding as the
+  original data source.
+
+  You have to implement the `_shard_iterators_per_split` method, which returns
+  a mapping from split name to a list of `ExampleGeneratorFn` functions that
+  return an example iterator. The signature of the function is `Callable[[],
+  Iterator[KeyExample]]` where `KeyExample` is a tuple of (key, example) where
+  key is a unique key for the example and example is a dict of features.
+
+  Note that a `ExampleGeneratorFn` can also be a class that implements a
+  `__call__` method that returns a `Iterator[KeyExample]`.
+
+  Also note that shuffling is not supported. Also, the following fields in
+  `DownloadConfig` are not supported:
+  - `ignore_duplicates`
+  - `max_examples_per_split`
+  - `shard_config`
+  """
+
+  def _download_and_prepare(
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: download.DownloadConfig | None = None,
+  ) -> None:
+    download_config = download_config or download.DownloadConfig()
+
+    split_builder = split_builder_lib.SplitBuilder(
+        split_dict=self.info.splits,
+        features=self.info.features,
+        dataset_size=self.info.dataset_size,
+        beam_options=download_config.beam_options,
+        beam_runner=download_config.beam_runner,
+        example_writer=self._example_writer(),
+        # The following options are ignored by `ShardBasedBuilder`.
+        ignore_duplicates=None,
+        max_examples_per_split=None,
+        shard_config=None,
+    )
+
+    shard_iterators_per_split = self._shard_iterators_per_split(dl_manager)
+    split_info_futures = []
+    for split_name, example_gen_per_shard in shard_iterators_per_split.items():
+      logging.info("Generating split %s", split_name)
+      split_info_future = split_builder.submit_shard_based_generation(
+          split_name=split_name,
+          example_gen_per_shard=example_gen_per_shard,
+          filename_template=self._get_filename_template(split_name=split_name),
+      )
+      split_info_futures.append(split_info_future)
+
+    # Update the info object with the splits.
+    split_infos: list[splits_lib.SplitInfo] = [
+        future.result() for future in split_info_futures
+    ]
+    split_dict = splits_lib.SplitDict(split_infos)
+    self.info.set_splits(split_dict)
+
+  @abc.abstractmethod
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
+  def _shard_iterators_per_split(
+      self, dl_manager: download.DownloadManager
+  ) -> Mapping[str, Sequence[split_builder_lib.ExampleGeneratorFn]]:
+    """Returns a mapping from split name to example generators per shard.
+
+    The example generators are functions with signature `Callable[[],
+    Iterator[KeyExample]]` that take no parameters and return
+    an iterator of tuples of (key, example). The order of the example generators
+    is the order in which the shards will be written.
+
+    Args:
+      dl_manager: `tfds.download.DownloadManager` used to download/extract the
+        data.
+    """
+    raise NotImplementedError()
+
+  def _example_writer(self) -> writer_lib.ExampleWriter:
+    """Returns an example writer.
+
+    If datasets should be written to a custom storage, e.g., a database, then
+    implement a custom `ExampleWriter` and inject it here.
+    """
+    return writer_lib.ExampleWriter(file_format=self.info.file_format)
 
 
 @utils.docs.deprecated

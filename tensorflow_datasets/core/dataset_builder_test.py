@@ -15,7 +15,9 @@
 
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
+from collections.abc import Iterator, Mapping, Sequence
 import dataclasses
+import functools
 import os
 import tempfile
 from unittest import mock
@@ -37,9 +39,11 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
+from tensorflow_datasets.core import split_builder
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.data_sources import array_record
+from tensorflow_datasets.core.download import download_manager
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
@@ -145,6 +149,50 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
   def _split_generators(self, _):
     # Error: ALL cannot be used as Split key
     return {"all": self._generate_examples(range(5))}
+
+
+class ShardBuilder(dataset_builder.ShardBasedBuilder):
+  VERSION = utils.Version("0.0.1")
+  BUILDER_CONFIGS = [DummyBuilderConfig(name="cfg1")]
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": np.int64}),
+    )
+
+  def _shard_iterators_per_split(
+      self, dl_manager: download_manager.DownloadManager
+  ) -> Mapping[str, Sequence[Iterator[split_builder.KeyExample]]]:
+    del dl_manager
+
+    def gen_examples(
+        start: int, end: int
+    ) -> Iterator[split_builder.KeyExample]:
+      for i in range(start, end):
+        yield i, {"x": i}
+
+    return {
+        # train split has 2 shards
+        "train": [
+            functools.partial(gen_examples, start=0, end=10),
+            functools.partial(gen_examples, start=10, end=20),
+        ],
+        "test": [functools.partial(gen_examples, start=100, end=110)],
+    }
+
+
+class ShardBuilderTest(testing.TestCase):
+
+  def test_download_and_prepare(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = ShardBuilder(data_dir=tmp_dir, config="cfg1", version="0.0.1")
+      builder.download_and_prepare(file_format="array_record")
+      actual_data = list(builder.as_data_source(split="train"))
+      self.assertEqual(
+          actual_data,
+          [{"x": i} for i in range(20)],
+      )
 
 
 class GetBuilderDatadirPathTest(testing.TestCase):

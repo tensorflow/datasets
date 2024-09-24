@@ -15,25 +15,34 @@
 
 """Dataset generator code."""
 
-from collections.abc import Iterable, Iterator
+from collections.abc import Iterable, Iterator, Sequence
 import contextlib
 import dataclasses
 import functools
 import itertools
+import json
 import sys
 from typing import Any, Callable, Optional, Union
 
 from absl import logging
-from tensorflow_datasets.core import example_serializer
-from tensorflow_datasets.core import features as features_lib
-from tensorflow_datasets.core import naming
-from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core import utils
-from tensorflow_datasets.core import writer as writer_lib
-from tensorflow_datasets.core.utils import shard_utils
+from etils import epath
+from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import click
 from tensorflow_datasets.core.utils.lazy_imports_utils import psutil
+
+with epy.lazy_imports():
+  # pylint: disable=g-import-not-at-top
+  from tensorflow_datasets.core import example_serializer
+  from tensorflow_datasets.core import features as features_lib
+  from tensorflow_datasets.core import naming
+  from tensorflow_datasets.core import splits as splits_lib
+  from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core import writer as writer_lib
+  from tensorflow_datasets.core.utils import shard_utils
+
+  # pylint: enable=g-import-not-at-top
+
 
 # Example key used for shuffling
 Key = str | int
@@ -49,6 +58,7 @@ SplitGenerator = Union[
     'beam.PTransform',
     'beam.PCollection[KeyExample]',
 ]
+ExampleGeneratorFn = Callable[[], Iterator[KeyExample]]
 
 
 @utils.docs.deprecated
@@ -146,6 +156,96 @@ class SplitBuilder:
     self._shard_config = shard_config
     self._ignore_duplicates = ignore_duplicates
     self._example_writer = example_writer
+
+  def submit_shard_based_generation(
+      self,
+      split_name: str,
+      filename_template: naming.ShardedFileTemplate,
+      example_gen_per_shard: Sequence[ExampleGeneratorFn],
+  ) -> _SplitInfoFuture:
+    """Creates the shards for the split with the given example generators.
+
+    If a Beam runner was added when initializing the `SplitBuilder`, then
+    the `example_gen_per_shard` will be run in parallel using Beam. Otherwise,
+    they will be run sequentially in the current process.
+
+    Args:
+      split_name: Name of the split to generate
+      filename_template: Template to format the filename for a shard.
+      example_gen_per_shard: List of example generators, one per shard. Must be
+        in the same order as the shards.
+
+    Returns:
+      a future with the split info.
+    """
+    num_shards = len(example_gen_per_shard)
+    filename_template = filename_template.replace(split=split_name)
+    serialized_info = self._features.get_serialized_info()
+    serializer = example_serializer.ExampleSerializer(serialized_info)
+
+    shard_writer = writer_lib.ShardWriter(
+        serializer=serializer,
+        example_writer=self._example_writer,
+    )
+
+    shard_paths = []
+    shard_lengths = []
+    if self._beam_runner is None:
+      for shard_index, example_gen in enumerate(example_gen_per_shard):
+        shard_path = filename_template.sharded_filepath(
+            shard_index=shard_index, num_shards=num_shards
+        )
+        shard_paths.append(shard_path)
+        num_examples = shard_writer.write(
+            path=shard_path, examples=example_gen()
+        )
+        shard_lengths.append(num_examples)
+    else:
+      shard_infos_path = filename_template.data_dir / 'shard_infos.json'
+      with self.maybe_beam_pipeline():
+        shard_infos = []
+        for shard_index, example_gen in enumerate(example_gen_per_shard):
+          shard_path = filename_template.sharded_filepath(
+              shard_index=shard_index, num_shards=num_shards
+          )
+          shard_paths.append(shard_path)
+          shard_info = shard_writer.write_with_beam(
+              path=shard_path,
+              example_gen=example_gen,
+              shard_index=shard_index,
+              pipeline=self.beam_pipeline,
+          )
+          shard_infos.append(shard_info)
+
+        def write_shard_infos(
+            shard_infos: list[tuple[int, int]], path: epath.Path
+        ) -> None:
+          shard_infos_dict = {index: length for index, length in shard_infos}
+          path.write_text(json.dumps(shard_infos_dict))
+
+        _ = (
+            shard_infos
+            | f'FlattenShardInfos_{split_name}' >> beam.Flatten()
+            | f'CombineShardInfos_{split_name}'
+            >> beam.CombineGlobally(beam.combiners.ToListCombineFn())
+            | f'WriteShardInfos_{split_name}'
+            >> beam.Map(write_shard_infos, path=shard_infos_path)
+        )
+
+      shard_infos_dict = json.loads(shard_infos_path.read_text())
+      shard_lengths = [
+          num_examples for _, num_examples in sorted(shard_infos_dict.items())
+      ]
+
+    total_size = sum([shard_path.stat().length for shard_path in shard_paths])
+
+    split_info = splits_lib.SplitInfo(
+        name=split_name,
+        shard_lengths=shard_lengths,
+        num_bytes=total_size,
+        filename_template=filename_template,
+    )
+    return _SplitInfoFuture(lambda: split_info)
 
   @contextlib.contextmanager
   def maybe_beam_pipeline(self) -> Iterator[PipelineProxy]:

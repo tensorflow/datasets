@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.dataset_builder."""
-
+import functools
 import pathlib
 from typing import Callable
 from unittest import mock
@@ -100,6 +99,31 @@ class CommonPipelineDummyBeamDataset(DummyBeamDataset):
     self.info.metadata[f'id_mean_{num_examples}'] = _compute_mean(examples)
     self.info.metadata[f'label_sum_{num_examples}'] = _compute_sum(examples)
     return examples
+
+
+class ShardBuilderBeam(dataset_builder.ShardBasedBuilder):
+  VERSION = utils.Version('0.0.1')
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({'x': np.int64}),
+    )
+
+  def _shard_iterators_per_split(self, dl_manager):
+    del dl_manager
+
+    def gen_examples(start: int, end: int):
+      for i in range(start, end):
+        yield i, {'x': i}
+
+    return {
+        'train': [
+            functools.partial(gen_examples, start=0, end=10),
+            functools.partial(gen_examples, start=10, end=20),
+        ],
+        'test': [functools.partial(gen_examples, start=100, end=110)],
+    }
 
 
 def _gen_example(x):
@@ -196,6 +220,26 @@ def _assert_values_equal(nested_lhs, nested_rhs):
     flat_rhs = tf.nest.flatten(dict_rhs)
     for lhs, rhs in zip(flat_lhs, flat_rhs):
       np.testing.assert_array_equal(lhs, rhs)
+
+
+@pytest.mark.parametrize(
+    'make_dl_config',
+    [
+        make_default_config,
+    ],
+)
+def test_beam_shard_builder_dataset(
+    tmp_path: pathlib.Path,
+    make_dl_config: Callable[[], download.DownloadConfig],
+):
+  builder = ShardBuilderBeam(data_dir=tmp_path, version='0.0.1')
+  builder.download_and_prepare(
+      file_format='array_record', download_config=make_dl_config()
+  )
+  actual_train_data = list(builder.as_data_source(split='train'))
+  assert actual_train_data == [{'x': i} for i in range(20)]
+  actual_test_data = list(builder.as_data_source(split='test'))
+  assert actual_test_data == [{'x': i} for i in range(100, 110)]
 
 
 def test_read_tfrecord_beam():

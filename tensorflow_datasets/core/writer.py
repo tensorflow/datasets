@@ -24,7 +24,7 @@ import itertools
 import json
 import os
 import threading
-from typing import Any
+from typing import Any, Callable
 
 from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
@@ -48,6 +48,8 @@ with epy.lazy_imports():
 
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
 Example = Any
+Key = int | bytes
+KeyExample = tuple[Key, Example]
 
 _INDEX_PATH_SUFFIX = "_index.json"
 
@@ -254,6 +256,59 @@ class MultiOutputExampleWriter(ExampleWriter):
 
     for write_fn in write_fns:
       write_fn()
+
+
+class ShardWriter:
+  """Writes examples to a single shard."""
+
+  def __init__(
+      self,
+      serializer: example_serializer.Serializer,
+      example_writer: ExampleWriter,
+  ):
+    """Initializes Writer.
+
+    Args:
+      serializer: class that can serialize examples.
+      example_writer: class that writes examples to disk or elsewhere.
+    """
+    self._serializer = serializer
+    self._example_writer = example_writer
+
+  def write(
+      self,
+      examples: Iterable[KeyExample],
+      path: epath.Path,
+  ) -> int:
+    """Returns the number of examples written to the given path."""
+    serialized_examples = [
+        (k, self._serializer.serialize_example(v)) for k, v in examples
+    ]
+    self._example_writer.write(path=path, examples=serialized_examples)
+
+    return len(serialized_examples)
+
+  def write_with_beam(
+      self,
+      example_gen: Callable[[], Iterable[KeyExample]],
+      path: epath.Path,
+      shard_index: int,
+      pipeline: beam.Pipeline,
+  ) -> beam.Pipeline:
+    """Writes a PCollection of examples to a file."""
+
+    def write_examples(dummy_value: Any) -> tuple[int, int]:
+      # The dummy value is needed to make the pipeline work with
+      # `beam.Create([None])`.
+      del dummy_value
+      num_examples = self.write(examples=example_gen(), path=path)
+      return shard_index, num_examples
+
+    return (
+        pipeline
+        | f"CreateShard({path.name})" >> beam.Create([None])
+        | f"WriteShard({path.name})" >> beam.Map(write_examples)
+    )
 
 
 class Writer:
@@ -660,4 +715,5 @@ class BeamWriter:
       split_info_path = epath.Path(self._split_info_path)
       self._split_info = json.loads(split_info_path.read_bytes())
       split_info_path.unlink()
+
     return self._split_info["shard_lengths"], self._split_info["total_size"]
