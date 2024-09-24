@@ -246,6 +246,29 @@ def test_builder_from_metadata(
   assert str(builder.info.features) == str(dummy_features)
 
 
+def test_restore_blocked_versions(
+    code_builder: dataset_builder.DatasetBuilder,
+    dummy_features: features_dict.FeaturesDict,
+):
+  info_proto = dataset_info_pb2.DatasetInfo(
+      name='abcd',
+      description='efgh',
+      config_name='en',
+      config_description='something',
+      version='0.1.0',
+      release_notes={'0.1.0': 'release description'},
+      citation='some citation',
+      features=dummy_features.to_proto(),
+      is_blocked='some reason for blocking',
+  )
+  with pytest.raises(
+      utils.DatasetVariantBlockedError, match='some reason for blocking'
+  ):
+    read_only_builder.builder_from_metadata(
+        code_builder.data_dir, info_proto=info_proto
+    )
+
+
 def test_builder_from_directory_dir_not_exists(tmp_path: pathlib.Path):
   with pytest.raises(FileNotFoundError, match='Could not load dataset info'):
     read_only_builder.builder_from_directory(tmp_path)

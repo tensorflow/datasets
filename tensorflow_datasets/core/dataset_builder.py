@@ -294,6 +294,18 @@ class DatasetBuilder(registered.RegisteredDataset):
       self.info.read_from_directory(self._data_dir)
     else:  # Use the code version (do not restore data)
       self.info.initialize_from_bucket()
+    if self.BLOCKED_VERSIONS is not None:
+      config_name = self._builder_config.name if self._builder_config else None
+      if is_blocked := self.BLOCKED_VERSIONS.is_blocked(
+          version=self._version, config=config_name
+      ):
+        default_msg = (
+            f"Dataset {self.name} is blocked at version {self._version} and"
+            f" config {config_name}."
+        )
+        self.info.set_is_blocked(
+            is_blocked.blocked_msg if is_blocked.blocked_msg else default_msg
+        )
 
   @utils.classproperty
   @classmethod

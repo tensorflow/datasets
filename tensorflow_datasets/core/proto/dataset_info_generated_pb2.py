@@ -67,7 +67,7 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\t\x12\x10\n\x08\x64\x61ta_dir\x18\x04'
     b' \x01(\t\x12\x14\n\x0c\x64s_namespace\x18\x05'
     b' \x01(\t\x12\r\n\x05split\x18\x06'
-    b' \x01(\t"\xd6\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
+    b' \x01(\t"\xea\x07\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01'
     b' \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02'
     b' \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12I\n\rrelease_notes\x18\x12'
     b' \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r'
@@ -88,7 +88,8 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x12'
     b' \n\x18\x61lternative_file_formats\x18\x16'
     b' \x03(\t\x12\x43\n\x14\x64\x61ta_source_accesses\x18\x14'
-    b' \x03(\x0b\x32%.tensorflow_datasets.DataSourceAccess\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
+    b' \x03(\x0b\x32%.tensorflow_datasets.DataSourceAccess\x12\x12\n\nis_blocked\x18\x17'
+    b' \x01(\t\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01'
     b' \x01(\t\x12\r\n\x05value\x18\x02'
     b' \x01(\t:\x02\x38\x01\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01'
     b' \x01(\t\x12\r\n\x05value\x18\x02'
@@ -146,9 +147,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _TFDSDATASETREFERENCE._serialized_start = 1280
   _TFDSDATASETREFERENCE._serialized_end = 1404
   _DATASETINFO._serialized_start = 1407
-  _DATASETINFO._serialized_end = 2389
-  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2280
-  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2331
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2333
-  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2389
+  _DATASETINFO._serialized_end = 2409
+  _DATASETINFO_RELEASENOTESENTRY._serialized_start = 2300
+  _DATASETINFO_RELEASENOTESENTRY._serialized_end = 2351
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_start = 2353
+  _DATASETINFO_DOWNLOADCHECKSUMSENTRY._serialized_end = 2409
 # @@protoc_insertion_point(module_scope)

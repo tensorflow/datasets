@@ -197,6 +197,7 @@ class DatasetInfo(object):
       alternative_file_formats: (
           Sequence[str | file_adapters.FileFormat] | None
       ) = None,
+      is_blocked: str | None = None,
       # LINT.ThenChange(:setstate)
   ):
     # pyformat: disable
@@ -243,6 +244,8 @@ class DatasetInfo(object):
       split_dict: information about the splits in this dataset.
       alternative_file_formats: alternative file formats that are availablefor
         this dataset.
+      is_blocked: A message explaining why the dataset, in its version and
+        config, is blocked. If empty or None, the dataset is not blocked.
     """
     # pyformat: enable
     self._builder_or_identity = builder
@@ -258,6 +261,8 @@ class DatasetInfo(object):
         if isinstance(f, str):
           f = file_adapters.FileFormat.from_value(f)
         self._alternative_file_formats.append(f)
+
+    self._is_blocked = is_blocked
 
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=self._identity.name,
@@ -276,6 +281,7 @@ class DatasetInfo(object):
         alternative_file_formats=[
             f.value for f in self._alternative_file_formats
         ],
+        is_blocked=self._is_blocked,
     )
 
     if homepage:
@@ -439,6 +445,13 @@ class DatasetInfo(object):
   @property
   def metadata(self) -> Metadata | None:
     return self._metadata
+
+  @property
+  def is_blocked(self) -> str | None:
+    return self._is_blocked
+
+  def set_is_blocked(self, is_blocked: str) -> None:
+    self._is_blocked = is_blocked
 
   @property
   def supervised_keys(self) -> Optional[SupervisedKeysType]:
@@ -941,6 +954,7 @@ class DatasetInfo(object):
         "license": self.redistribution_info.license,
         "split_dict": self.splits,
         "alternative_file_formats": self.alternative_file_formats,
+        "is_blocked": self.is_blocked,
     }
   def __setstate__(self, state):
     # LINT.IfChange(setstate)
@@ -956,6 +970,7 @@ class DatasetInfo(object):
         license=state["license"],
         split_dict=state["split_dict"],
         alternative_file_formats=state["alternative_file_formats"],
+        is_blocked=state["is_blocked"],
     )
     # LINT.ThenChange(:dataset_info_args)
 

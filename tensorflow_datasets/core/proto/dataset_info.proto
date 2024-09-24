@@ -231,5 +231,9 @@ message DatasetInfo {
   // The data that was used to generate this dataset.
   repeated DataSourceAccess data_source_accesses = 20;
 
-  // Next available: 22
+  // A message explaining why the dataset is blocked. If empty, it means that
+  // the dataset is not blocked.
+  string is_blocked = 23;
+
+  // Next available: 24
 }

@@ -78,6 +78,7 @@ class ReadOnlyBuilder(
     self.name = info_proto.name
     self.VERSION = version_lib.Version(info_proto.version)  # pylint: disable=invalid-name
     self.RELEASE_NOTES = info_proto.release_notes or {}  # pylint: disable=invalid-name
+    self.BLOCKED_VERSIONS = self._restore_blocked_versions(info_proto)  # pylint: disable=invalid-name
 
     if info_proto.module_name:
       # Overwrite the module so documenting `ReadOnlyBuilder` point to the
@@ -92,6 +93,7 @@ class ReadOnlyBuilder(
         config=builder_config,
         version=info_proto.version,
     )
+    self.assert_is_not_blocked()
 
     # For pickling, should come after super.__init__ which is setting that same
     # _original_state attribute.
@@ -102,6 +104,25 @@ class ReadOnlyBuilder(
           f'Cannot restore {self.info.full_name}. It likely means the dataset '
           'was generated with an old TFDS version (<=3.2.1).'
       )
+
+  def _restore_blocked_versions(
+      self, info_proto: dataset_info_pb2.DatasetInfo
+  ) -> version_lib.BlockedVersions | None:
+    """Restores the blocked version information from the dataset info proto.
+
+    Args:
+      info_proto: DatasetInfo describing the name, config, etc of the requested
+        dataset.
+
+    Returns:
+      None if the dataset is not blocked, or a populated BlockedVersions object.
+    """
+    if info_proto.is_blocked:
+      configs = {
+          info_proto.version: {info_proto.config_name: info_proto.is_blocked}
+      }
+      return version_lib.BlockedVersions(configs=configs)
+    return None
 
   def _create_builder_config(
       self,
