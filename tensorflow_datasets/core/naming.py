@@ -609,6 +609,7 @@ class ShardedFileTemplate:
   def filepath_prefix(
       self,
   ) -> str:
+    """Returns the path of the data shards without the shard suffix."""
     a_filepath = self.sharded_filepath(shard_index=0, num_shards=1)
     prefix = _replace_shard_pattern(os.fspath(a_filepath), '')
     return _remove_extension(prefix)

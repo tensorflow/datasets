@@ -201,7 +201,12 @@ class SplitBuilder:
         )
         shard_lengths.append(num_examples)
     else:
-      shard_infos_path = filename_template.data_dir / 'shard_infos.json'
+      # To store the shard information temporarily, we use the same path as the
+      # data shard paths, minus the shard suffix (e.g., 00000-of-00042), with
+      # the suffix `.shard_infos.json`.
+      shard_infos_path = epath.Path(
+          f'{filename_template.filepath_prefix()}.shard_infos.json'
+      )
       with self.maybe_beam_pipeline():
         shard_infos = []
         for shard_index, example_gen in enumerate(example_gen_per_shard):
