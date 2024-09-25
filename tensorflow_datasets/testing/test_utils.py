@@ -202,7 +202,7 @@ class MockFs(object):
   def add_file(self, path, content=None) -> None:
     """Add a file, creating all parent directories."""
     path = os.fspath(path)
-    content = f'Content of {path}' if content is None else content
+    content = content or f'Content of {path}'
     fpath = self._to_tmp(path)
     fpath.parent.mkdir(parents=True, exist_ok=True)  # pytype: disable=attribute-error
     fpath.write_text(content)  # pytype: disable=attribute-error

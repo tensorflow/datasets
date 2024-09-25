@@ -46,20 +46,23 @@ _EXTRACT_DIR = epath.Path('/extract_dir')
 class Artifact:
   # For testing only.
 
-  def __init__(self, name, url=None, content=None):
-    url = url or f'http://foo-bar.ch/{name}'
-    content = content or f'content of {name}'
-    self.url = url
+  def __init__(
+      self, name: str, url: str | None = None, content: str | None = None
+  ):
+    self.name = name
+    self.url = url or f'http://foo-bar.ch/{self.name}'
+    self.content = content or f'content of {self.name}'
+
     self.url_info = checksums_lib.UrlInfo(
-        size=len(content),
-        checksum=checksums_lib.sha256(content),
-        filename=name,
+        size=len(self.content),
+        checksum=checksums_lib.sha256(self.content),
+        filename=self.name,
     )
 
-    self.file_name = resource_lib.get_dl_fname(url, self.url_info.checksum)
+    self.file_name = resource_lib.get_dl_fname(self.url, self.url_info.checksum)
     self.file_path = _DOWNLOAD_DIR / self.file_name
 
-    self.url_name = resource_lib.get_dl_fname(url)
+    self.url_name = resource_lib.get_dl_fname(self.url)
     self.url_path = _DOWNLOAD_DIR / self.url_name
 
     self.manual_path = _MANUAL_DIR / name
@@ -91,17 +94,17 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
   def _make_downloader_mock(self):
     """`downloader.download` patch which creates the returns the path."""
 
-    def _download(url, tmpdir_path, verify):
+    def _download(url: str, tmpdir_path: epath.Path, verify: bool):
       del verify
       self.downloaded_urls.append(url)  # Record downloader.download() calls
       # If the name isn't explicitly provided, then it is extracted from the
       # url.
       filename = self.dl_fnames.get(url, os.path.basename(url))
       # Save the file in the tmp_dir
-      path = os.path.join(tmpdir_path, filename)
+      path = tmpdir_path / filename
       self.fs.add_file(path)
       dl_result = downloader.DownloadResult(
-          path=epath.Path(path),
+          path=path,
           url_info=self.dl_results[url],
       )
       return promise.Promise.resolve(dl_result)
@@ -224,7 +227,7 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
     a, b = [Artifact(i) for i in 'ab']
 
     # File a is manually downloaded
-    self.fs.add_file(a.manual_path)
+    self.fs.add_file(a.manual_path, content=a.content)
     self.fs.add_file(b.file_path)
 
     self.dl_results[b.url] = b.url_info
@@ -298,8 +301,8 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
             b.url: b.url_info,
         }
     )
-    res = manager.download_and_extract({'a': a.url, 'b': b.url})
-    self.assertEqual(res, {'a': a.extract_path, 'b': b.file_path})
+    res = manager.download_and_extract({a.name: a.url, b.name: b.url})
+    self.assertEqual(res, {a.name: a.extract_path, b.name: b.file_path})
 
   def test_download_and_extract_no_manual_dir(self):
     a, b = Artifact('a.zip'), Artifact('b')
@@ -316,8 +319,8 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
             b.url: b.url_info,
         },
     )
-    res = manager.download_and_extract({'a': a.url, 'b': b.url})
-    self.assertEqual(res, {'a': a.extract_path, 'b': b.file_path})
+    res = manager.download_and_extract({a.name: a.url, b.name: b.url})
+    self.assertEqual(res, {a.name: a.extract_path, b.name: b.file_path})
 
   def test_download_and_extract_archive_ext_in_fname(self):
     # Make sure extraction method is properly deduced from original fname, and
@@ -582,7 +585,7 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
 
   def test_download_cached_url_path_checksum_updated(self):
     old_a = Artifact('a.tar.gz')
-    new_a = Artifact('a.tar.gz', content='New a content')  # New checksums
+    new_a = Artifact('a.tar.gz', content='New content')  # New checksums
 
     # Urls are equals, but not checksums
     self.assertEqual(old_a.url, new_a.url)

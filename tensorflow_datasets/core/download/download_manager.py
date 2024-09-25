@@ -315,8 +315,12 @@ class DownloadManager:
     """Returns the total size of downloaded files."""
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
-  def _get_dl_path(self, url: str, checksum: str | None = None) -> epath.Path:
-    return self._download_dir / resource_lib.get_dl_fname(url, checksum)
+  def _get_dl_path(
+      self, resource: resource_lib.Resource, checksum: str | None = None
+  ) -> epath.Path:
+    return self._download_dir / resource_lib.get_dl_fname(
+        resource.url, checksum
+    )
 
   @property
   def register_checksums(self):
@@ -352,7 +356,7 @@ class DownloadManager:
   @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download(self, resource: Url) -> promise.Promise[epath.Path]:
-    """Download resource, returns Promise->path to downloaded file.
+    """Downloads resource or gets downloaded cache.
 
     This function:
 
@@ -364,13 +368,12 @@ class DownloadManager:
       resource: The URL to download.
 
     Returns:
-      path: The path to the downloaded resource.
+      Promise of the path to the downloaded resource.
     """
     # Normalize the input
-    if isinstance(resource, str):
-      url = resource
-    else:
-      url = resource.url
+    if not isinstance(resource, resource_lib.Resource):
+      resource = resource_lib.Resource(url=resource)
+    url = resource.url
     assert url is not None, 'URL is undefined from resource.'
 
     expected_url_info = self._url_infos.get(url)
@@ -382,9 +385,9 @@ class DownloadManager:
     manually_downloaded_path = self._get_manually_downloaded_path(
         expected_url_info=expected_url_info
     )
-    url_path = self._get_dl_path(url)
+    url_path = self._get_dl_path(resource)
     checksum_path = (
-        self._get_dl_path(url, expected_url_info.checksum)
+        self._get_dl_path(resource, expected_url_info.checksum)
         if expected_url_info
         else None
     )
@@ -396,12 +399,12 @@ class DownloadManager:
         url_path=url_path,
         expected_url_info=expected_url_info,
     )
-    if dl_result.path and not self._force_download:  # Download was cached
+    if dl_result and not self._force_download:  # Download was cached
       logging.info(
           f'Skipping download of {url}: File cached in {dl_result.path}'
       )
       # Still update the progression bar to indicate the file was downloaded
-      self._downloader.increase_tqdm(dl_result)
+      self._downloader.increase_tqdm(dl_result.url_info)
       future = promise.Promise.resolve(dl_result)
     else:
       # Download in a tmp directory next to url_path (to avoid name collisions)
@@ -418,7 +421,7 @@ class DownloadManager:
     # Post-process the result
     return future.then(
         lambda dl_result: self._register_or_validate_checksums(  # pylint: disable=g-long-lambda
-            url=url,
+            resource=resource,
             path=dl_result.path,
             computed_url_info=dl_result.url_info,
             expected_url_info=expected_url_info,
@@ -429,10 +432,10 @@ class DownloadManager:
 
   def _register_or_validate_checksums(
       self,
+      resource: resource_lib.Resource,
       path: epath.Path,
-      url: str,
       expected_url_info: checksums.UrlInfo | None,
-      computed_url_info: checksums.UrlInfo | None,
+      computed_url_info: checksums.UrlInfo,
       checksum_path: epath.Path | None,
       url_path: epath.Path,
   ) -> epath.Path:
@@ -443,16 +446,11 @@ class DownloadManager:
     # * (cached) url_path
     # * `tmp_dir/file` (downloaded path)
 
-    if computed_url_info:
-      # Used both in `.downloaded_size` and `_record_url_infos()`
-      self._recorded_url_infos[url] = computed_url_info
+    url: str = resource.url  # pytype: disable=annotation-type-mismatch
+    # Used both in `.downloaded_size` and `_record_url_infos()`
+    self._recorded_url_infos[url] = computed_url_info
 
     if self._register_checksums:
-      if not computed_url_info:
-        raise ValueError(
-            f'Cannot register checksums for {url}: no computed checksum. '
-            '--register_checksums with manually downloaded data not supported.'
-        )
       # Note:
       # * We save even if `expected_url_info == computed_url_info` as
       #   `expected_url_info` might have been loaded from another dataset.
@@ -463,7 +461,7 @@ class DownloadManager:
       # Checksum path should now match the new registered checksum (even if
       # checksums were previously registered)
       expected_url_info = computed_url_info
-      checksum_path = self._get_dl_path(url, computed_url_info.checksum)
+      checksum_path = self._get_dl_path(resource, computed_url_info.checksum)
     else:
       # Eventually validate checksums
       # Note:
@@ -476,9 +474,9 @@ class DownloadManager:
       #   was corrupted. Note: The tmp file isn't deleted to allow inspection.
       self._validate_checksums(
           url=url,
-          path=path,
           expected_url_info=expected_url_info,
           computed_url_info=computed_url_info,
+          path=path,
       )
 
     return self._rename_and_get_final_dl_path(
@@ -493,17 +491,14 @@ class DownloadManager:
   def _validate_checksums(
       self,
       url: str,
-      path: epath.Path,
-      computed_url_info: checksums.UrlInfo | None,
       expected_url_info: checksums.UrlInfo | None,
+      computed_url_info: checksums.UrlInfo,
+      path: epath.Path,
   ) -> None:
     """Validate computed_url_info match expected_url_info."""
     # If force-checksums validations, both expected and computed url_info
     # should exists
     if self._force_checksums_validation:
-      # Checksum of the downloaded file unknown (for manually downloaded file)
-      if not computed_url_info:
-        computed_url_info = checksums.compute_url_info(path)
       # Checksums have not been registered
       if not expected_url_info:
         raise ValueError(
@@ -512,11 +507,7 @@ class DownloadManager:
             'Did you forget to register checksums?'
         )
 
-    if (
-        expected_url_info
-        and computed_url_info
-        and expected_url_info != computed_url_info
-    ):
+    if expected_url_info and expected_url_info != computed_url_info:
       msg = (
           f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
           f'* Expected: {expected_url_info}\n'

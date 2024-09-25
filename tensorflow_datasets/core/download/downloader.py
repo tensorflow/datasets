@@ -52,8 +52,8 @@ else:
 
 @dataclasses.dataclass(eq=False, frozen=True)
 class DownloadResult:
-  path: epath.Path | None
-  url_info: checksums_lib.UrlInfo | None
+  path: epath.Path
+  url_info: checksums_lib.UrlInfo
 
 
 @utils.memoize()
@@ -80,7 +80,7 @@ def get_cached_path(
     checksum_path: epath.Path | None,
     url_path: epath.Path,
     expected_url_info: checksums_lib.UrlInfo | None,
-) -> DownloadResult:
+) -> DownloadResult | None:
   """Returns the downloaded path and computed url-info.
 
   If the path is not cached, or that `url_path` does not match checksums,
@@ -96,7 +96,10 @@ def get_cached_path(
   """
   # User has manually downloaded the file.
   if manually_downloaded_path and manually_downloaded_path.exists():
-    return DownloadResult(path=manually_downloaded_path, url_info=None)
+    computed_url_info = checksums_lib.compute_url_info(manually_downloaded_path)
+    return DownloadResult(
+        path=manually_downloaded_path, url_info=computed_url_info
+    )
 
   # Download has been cached (checksum known)
   elif checksum_path and resource_lib.Resource.exists_locally(checksum_path):
@@ -110,13 +113,13 @@ def get_cached_path(
     # If checksums are now registered but do not match, trigger a new
     # download (e.g. previous file corrupted, checksums updated)
     if expected_url_info and computed_url_info != expected_url_info:
-      return DownloadResult(path=None, url_info=None)
+      return None
     else:
       return DownloadResult(path=url_path, url_info=computed_url_info)
 
   # Else file not found (or has bad checksums). (re)download.
   else:
-    return DownloadResult(path=None, url_info=None)
+    return None
 
 
 def _filename_from_content_disposition(
@@ -216,13 +219,12 @@ class _Downloader:
         self._pbar_dl_size = pbar_dl_size
         yield
 
-  def increase_tqdm(self, dl_result: DownloadResult) -> None:
-    """Update the tqdm bars to visually indicate the dl_result is downloaded."""
+  def increase_tqdm(self, url_info: checksums_lib.UrlInfo) -> None:
+    """Update the tqdm bars to visually indicate the url_info is downloaded."""
     self._pbar_url.update_total(1)
     self._pbar_url.update(1)
-    if dl_result.url_info:  # Info unknown for manually downloaded files
-      self._pbar_dl_size.update_total(dl_result.url_info.size)
-      self._pbar_dl_size.update(dl_result.url_info.size)
+    self._pbar_dl_size.update_total(url_info.size)
+    self._pbar_dl_size.update(url_info.size)
 
   def download(
       self, url: str, destination_path: epath.Path, verify: bool = True
