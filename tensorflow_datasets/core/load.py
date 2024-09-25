@@ -104,6 +104,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     DatasetNotFoundError: if `name` is unrecognized.
   """
   ds_name, kwargs = naming.parse_builder_name_kwargs(name)
+  # print("**********************", ds_name, kwargs)
   if kwargs:
     raise ValueError(
         '`builder_cls` only accept the `dataset_name` without config, '
