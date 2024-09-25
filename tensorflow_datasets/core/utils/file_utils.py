@@ -128,7 +128,6 @@ def incomplete_dir(
 
 def list_data_dirs(
     given_data_dir: ListOrElem[PathLike] | None = None,
-    dataset: str | None = None,
 ) -> Sequence[PathLike]:
   """Return the list of all `data_dir` to look-up.
 
@@ -136,7 +135,6 @@ def list_data_dirs(
     given_data_dir: If a `data_dir` is provided, only the explicitly given
       `data_dir` will be returned, otherwise the list of all registered data_dir
       is returned
-    dataset: Dataset to load.
 
   Returns:
     The list of all data_dirs to look-up.
@@ -148,23 +146,18 @@ def list_data_dirs(
     else:
       return [given_data_dir]
   else:
-    default_data_dir = get_default_data_dir(
-        given_data_dir=given_data_dir, dataset=dataset
-    )
+    default_data_dir = get_default_data_dir(given_data_dir=given_data_dir)
     all_data_dirs = _registered_data_dir | {default_data_dir}
     return sorted(os.path.expanduser(d) for d in all_data_dirs)
 
 
-def get_default_data_dir(
-    given_data_dir: str | None = None, dataset: str | None = None
-) -> str:
+def get_default_data_dir(given_data_dir: str | None = None) -> str:
   """Returns the default data_dir."""
   if given_data_dir:
     return os.path.expanduser(given_data_dir)
   elif 'TFDS_DATA_DIR' in os.environ:
     return os.environ['TFDS_DATA_DIR']
   else:
-    del dataset
     return constants.DATA_DIR
 
 

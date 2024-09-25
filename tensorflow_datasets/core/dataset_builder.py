@@ -1162,9 +1162,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     default_data_dir = file_utils.get_default_data_dir(
         given_data_dir=given_data_dir
     )
-    all_data_dirs = file_utils.list_data_dirs(
-        given_data_dir=given_data_dir, dataset=self.name
-    )
+    all_data_dirs = file_utils.list_data_dirs(given_data_dir=given_data_dir)
 
     all_versions = set()
     requested_version_dirs = {}

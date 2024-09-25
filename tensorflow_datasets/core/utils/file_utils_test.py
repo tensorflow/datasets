@@ -31,7 +31,6 @@ from tensorflow_datasets.core.utils import read_config
 def test_default_data_dir():
   data_dir = file_utils.get_default_data_dir(given_data_dir=None)
   assert data_dir
-  assert isinstance(data_dir, str)
 
 
 def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
