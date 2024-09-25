@@ -22,7 +22,7 @@ Instructions:
 
 ```
 python tensorflow_datasets/scripts/convert_format.py \
-  --dataset_dir=/data/my_dataset/config/1.2.3 \
+  --dataset_version_dir=/data/my_dataset/config/1.2.3 \
   --out_file_format=array_record \
   --out_dir=/data/array_record/my_dataset/config/1.2.3
 ```
