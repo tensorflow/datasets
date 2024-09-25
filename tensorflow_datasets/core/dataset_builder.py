@@ -553,14 +553,10 @@ class DatasetBuilder(registered.RegisteredDataset):
     Returns:
       a reference to this instantiated builder.
     """
-    if self.builder_config:
-      config = self.builder_config.name
-    else:
-      config = None
     return naming.DatasetReference(
         dataset_name=self.name,
         namespace=namespace,
-        config=config,
+        config=self.builder_config_name,
         version=self.version,
         data_dir=self.data_dir_root,
     )
@@ -576,19 +572,17 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def is_blocked(self) -> utils.IsBlocked:
     """Returns whether this builder (version, config) is blocked."""
-    config_name = self.builder_config.name if self.builder_config else None
     if blocked_versions := self.blocked_versions:
       return blocked_versions.is_blocked(
-          version=self.version, config=config_name
+          version=self.version, config=self.builder_config_name
       )
     return utils.IsBlocked(False)
 
   def assert_is_not_blocked(self) -> None:
     """Checks that the dataset is not blocked."""
-    config_name = self.builder_config.name if self.builder_config else None
     if blocked_versions := self.blocked_versions:
       is_blocked = blocked_versions.is_blocked(
-          version=self.version, config=config_name
+          version=self.version, config=self.builder_config_name
       )
       if is_blocked.result:
         raise utils.DatasetVariantBlockedError(is_blocked.blocked_msg)
@@ -1381,6 +1375,11 @@ class DatasetBuilder(registered.RegisteredDataset):
   def builder_config(self) -> Optional[Any]:
     """`tfds.core.BuilderConfig` for this builder."""
     return self._builder_config
+
+  @property
+  def builder_config_name(self) -> str | None:
+    """Name of the `tfds.core.BuilderConfig` for this builder."""
+    return self._builder_config.name if self._builder_config else None
 
   def _create_builder_config(
       self,
