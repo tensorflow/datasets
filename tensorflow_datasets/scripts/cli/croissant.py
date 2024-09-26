@@ -155,6 +155,7 @@ def prepare_croissant_builder(
       publish_dir=args.publish_dir,
       skip_if_published=args.skip_if_published,
       overwrite=args.overwrite,
+      beam_pipeline_options=None,
   )
   return builder
 

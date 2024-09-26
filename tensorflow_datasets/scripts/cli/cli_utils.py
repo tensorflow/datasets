@@ -299,6 +299,7 @@ def download_and_prepare(
     publish_dir: epath.Path | None,
     skip_if_published: bool,
     overwrite: bool,
+    beam_pipeline_options: str | None,
 ) -> None:
   """Generate a single builder."""
   dataset = builder.info.full_name
@@ -311,6 +312,22 @@ def download_and_prepare(
           'Dataset already exists in %s. Skipping generation.', publish_data_dir
       )
       return
+
+  if not download_config:
+    download_config = download.DownloadConfig()
+
+  # Add Apache Beam options to download config
+  try:
+    import apache_beam as beam  # pylint: disable=g-import-not-at-top
+
+    if beam_pipeline_options:
+      download_config.beam_options = (
+          beam.options.pipeline_options.PipelineOptions(
+              flags=[f'--{opt}' for opt in beam_pipeline_options.split(',')]
+          )
+      )
+  except ImportError:
+    pass
 
   builder.download_and_prepare(
       download_dir=download_dir,
