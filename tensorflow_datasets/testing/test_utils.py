@@ -736,6 +736,7 @@ def dummy_croissant_file(
 
   fields = [
       mlc.Field(
+          id='index',
           name='index',
           description='The sample index.',
           data_types=mlc.DataType.INTEGER,
@@ -745,6 +746,7 @@ def dummy_croissant_file(
           ),
       ),
       mlc.Field(
+          id='text',
           name='text',
           description='The dummy sample text.',
           data_types=mlc.DataType.TEXT,
@@ -758,6 +760,7 @@ def dummy_croissant_file(
   record_sets = [
       mlc.RecordSet(
           id='jsonl',
+          name='jsonl',
           description='Dummy record set.',
           fields=fields,
       )
@@ -778,6 +781,7 @@ def dummy_croissant_file(
     distribution = [
         mlc.FileObject(
             id='raw_data',
+            name='raw_data',
             description='File with the data.',
             encoding_format='application/jsonlines',
             content_url=f'data/{raw_data_filename}',

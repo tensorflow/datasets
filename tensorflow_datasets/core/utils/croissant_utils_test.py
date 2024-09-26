@@ -71,7 +71,7 @@ def test_get_split_recordset():
       ),
       mlc.RecordSet(
           id='splits',
-          key='name',
+          key='splits/name',
           data_types=[mlc.DataType.SPLIT],
           fields=[
               mlc.Field(
@@ -95,7 +95,7 @@ def test_get_split_recordset_with_no_split_recordset():
   record_sets = [
       mlc.RecordSet(
           id='labels',
-          key='name',
+          key='labels/label',
           fields=[
               mlc.Field(
                   id='labels/label',
