@@ -186,5 +186,5 @@ def test_download_and_prepare(crs_builder, expected_entries, split_name):
   data_source = crs_builder.as_data_source(split=split_name)
   assert len(data_source) == 2
   for i in range(2):
-    assert data_source[i]["index"] == expected_entries[i]["index"]
-    assert data_source[i]["text"].decode() == expected_entries[i]["text"]
+    assert data_source[i]["jsonl/index"] == expected_entries[i]["index"]
+    assert data_source[i]["jsonl/text"].decode() == expected_entries[i]["text"]

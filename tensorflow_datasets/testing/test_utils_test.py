@@ -237,7 +237,7 @@ def test_gcs_access():
                 {'text': 'Dummy example 0', 'index': 0},
             ],
             [
-                {'text': b'Dummy example 0', 'index': 0},
+                {'jsonl/text': b'Dummy example 0', 'jsonl/index': 0},
             ],
         ),
         (
@@ -246,8 +246,8 @@ def test_gcs_access():
                 {'text': None, 'index': 1},
             ],
             [
-                {'text': b'Dummy example 0', 'index': 0},
-                {'text': None, 'index': 1},
+                {'jsonl/text': b'Dummy example 0', 'jsonl/index': 0},
+                {'jsonl/text': None, 'jsonl/index': 1},
             ],
         ),
         (
@@ -259,8 +259,8 @@ def test_gcs_access():
         (
             None,
             [
-                {'text': b'Dummy example 0', 'index': 0},
-                {'text': b'Dummy example 1', 'index': 1},
+                {'jsonl/text': b'Dummy example 0', 'jsonl/index': 0},
+                {'jsonl/text': b'Dummy example 1', 'jsonl/index': 1},
             ],
         ),
     ],

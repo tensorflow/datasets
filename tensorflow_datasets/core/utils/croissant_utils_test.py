@@ -48,8 +48,15 @@ def test_get_record_set_ids():
           mlc.RecordSet(
               id='record_set_2',
               data_types=['http://mlcommons.org/croissant/Split'],
-              fields=[mlc.Field(name='name', data_types=mlc.DataType.TEXT)],
-              data=[{'name': 'train'}, {'name': 'test'}],
+              fields=[
+                  mlc.Field(
+                      id='record_set_2/name', data_types=mlc.DataType.TEXT
+                  )
+              ],
+              data=[
+                  {'record_set_2/name': 'train'},
+                  {'record_set_2/name': 'test'},
+              ],
           ),
       ],
   )
@@ -71,14 +78,14 @@ def test_get_split_recordset():
       ),
       mlc.RecordSet(
           id='splits',
-          key='name',
+          key='splits/name',
           data_types=[mlc.DataType.SPLIT],
           fields=[
               mlc.Field(
                   id='splits/name', name='name', data_types=mlc.DataType.TEXT
               )
           ],
-          data=[{'name': 'train'}, {'name': 'test'}],
+          data=[{'splits/name': 'train'}, {'splits/name': 'test'}],
       ),
   ]
   metadata = mlc.Metadata(name='dummy', url='dum.my', record_sets=record_sets)
@@ -95,7 +102,7 @@ def test_get_split_recordset_with_no_split_recordset():
   record_sets = [
       mlc.RecordSet(
           id='labels',
-          key='name',
+          key='labels/label',
           fields=[
               mlc.Field(
                   id='labels/label',
@@ -103,7 +110,7 @@ def test_get_split_recordset_with_no_split_recordset():
                   data_types=mlc.DataType.TEXT,
               )
           ],
-          data=[{'label': 'bird'}, {'label': 'bike'}],
+          data=[{'labels/label': 'bird'}, {'labels/label': 'bike'}],
       ),
       mlc.RecordSet(
           id='samples',
