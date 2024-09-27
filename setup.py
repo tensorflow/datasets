@@ -97,7 +97,6 @@ TESTS_DEPENDENCIES = [
     'mlcroissant>=1.0.9',
     'pandas',
     'pydub',
-    # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
     'pyyaml',
     'tensorflow-io[tensorflow];python_version<"3.12"',
