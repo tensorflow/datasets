@@ -61,7 +61,7 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
   return _Downloader(*args, **kwargs)
 
 
-def _read_url_info(url_path: epath.Path) -> checksums_lib.UrlInfo:
+def read_url_info(url_path: epath.Path) -> checksums_lib.UrlInfo:
   """Loads the `UrlInfo` from the `.INFO` file."""
   file_info = resource_lib.read_info_file(url_path)
   if 'url_info' not in file_info:
@@ -73,53 +73,6 @@ def _read_url_info(url_path: epath.Path) -> checksums_lib.UrlInfo:
   url_info.setdefault('filename', None)
   url_info['size'] = utils.Size(url_info['size'])
   return checksums_lib.UrlInfo(**url_info)
-
-
-def get_cached_path(
-    manually_downloaded_path: epath.Path | None,
-    checksum_path: epath.Path | None,
-    url_path: epath.Path,
-    expected_url_info: checksums_lib.UrlInfo | None,
-) -> DownloadResult | None:
-  """Returns the downloaded path and computed url-info.
-
-  If the path is not cached, or that `url_path` does not match checksums,
-  the file will be downloaded again.
-
-  Path can be cached at three different locations:
-
-  Args:
-    manually_downloaded_path: Manually downloaded in `dl_manager.manual_dir`
-    checksum_path: Cached in the final destination (if checksum known)
-    url_path: Cached in the tmp destination (if checksum unknown).
-    expected_url_info: Registered checksum (if known)
-  """
-  # User has manually downloaded the file.
-  if manually_downloaded_path and manually_downloaded_path.exists():
-    computed_url_info = checksums_lib.compute_url_info(manually_downloaded_path)
-    return DownloadResult(
-        path=manually_downloaded_path, url_info=computed_url_info
-    )
-
-  # Download has been cached (checksum known)
-  elif checksum_path and resource_lib.Resource.exists_locally(checksum_path):
-    # `path = f(checksum)` was found, so url_info match
-    return DownloadResult(checksum_path, url_info=expected_url_info)
-
-  # Download has been cached (checksum unknown)
-  elif resource_lib.Resource.exists_locally(url_path):
-    # Info restored from `.INFO` file
-    computed_url_info = _read_url_info(url_path)
-    # If checksums are now registered but do not match, trigger a new
-    # download (e.g. previous file corrupted, checksums updated)
-    if expected_url_info and computed_url_info != expected_url_info:
-      return None
-    else:
-      return DownloadResult(path=url_path, url_info=computed_url_info)
-
-  # Else file not found (or has bad checksums). (re)download.
-  else:
-    return None
 
 
 def _filename_from_content_disposition(
