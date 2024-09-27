@@ -92,11 +92,11 @@ TESTS_DEPENDENCIES = [
     'pytest-shard',
     'pytest-xdist',
     # Lazy-deps required by core
-    'pandas',
-    'pydub',
     'apache-beam',
     'conllu',
-    # TODO(b/142892342): Re-enable
+    'mlcroissant>=1.0.9',
+    'pandas',
+    'pydub',
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
     'pyyaml',

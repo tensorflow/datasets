@@ -34,11 +34,12 @@ runs:
         sudo apt-spy2 fix --commit --launchpad --country=US
         sudo apt-get update
       shell: bash
-    # Install protobuf-compiler for gcld3 library.
+    # Install protobuf-compiler for gcld3 library and graphviz for mlcroissant.
     - if: ${{ runner.os == 'Linux' }}
       run: |
         sudo apt install -y --allow-downgrades libprotobuf-lite23=3.12.4-1ubuntu7 libprotobuf23=3.12.4-1ubuntu7 libprotoc23=3.12.4-1ubuntu7
         sudo apt install -y libprotobuf-dev=3.12.4-1ubuntu7 protobuf-compiler=3.12.4-1ubuntu7
+        sudo apt install -y libgraphviz-dev
       shell: bash
     - if: ${{ runner.os == 'macOS' }}
       # protobuf version must be compatible with C++11 (used by gcld3)
@@ -48,6 +49,7 @@ runs:
         echo "LDFLAGS=-L/usr/local/opt/protobuf@21/lib" >> $GITHUB_ENV
         echo "CPPFLAGS=-I/usr/local/opt/protobuf@21/include" >> $GITHUB_ENV
         echo "PKG_CONFIG_PATH=/usr/local/opt/protobuf@21/lib/pkgconfig" >> $GITHUB_ENV
+        brew install graphviz
       shell: bash
     - uses: FedericoCarboni/setup-ffmpeg@v2  # for Audio FeatureConnector tests.
 
@@ -78,13 +80,4 @@ runs:
       shell: bash
     # Get TFDS library from the repository instead of cache.
     - run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
-      shell: bash
-    # Get mlcroissant from PyPI to fix the version.
-    - if: ${{ runner.os == 'Linux' }}
-      run: sudo apt-get install -y libgraphviz-dev
-      shell: bash
-    - if: ${{ runner.os == 'macOS' }}
-      run: brew install graphviz
-      shell: bash
-    - run: pip install "mlcroissant>=1.0.9"
       shell: bash
