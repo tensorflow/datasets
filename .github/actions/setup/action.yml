@@ -86,5 +86,5 @@ runs:
     - if: ${{ runner.os == 'macOS' }}
       run: brew install graphviz
       shell: bash
-    - run: pip install mlcroissant>=1.0.7
+    - run: pip install "mlcroissant>=1.0.9"
       shell: bash
