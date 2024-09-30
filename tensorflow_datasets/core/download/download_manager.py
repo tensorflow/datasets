@@ -375,6 +375,16 @@ class DownloadManager:
     assert url is not None, 'URL is undefined from resource.'
 
     expected_url_info = self._url_infos.get(url)
+    if (
+        not self._register_checksums
+        and self._force_checksums_validation
+        and not expected_url_info
+    ):
+      raise ValueError(
+          f'Missing checksums url: {url}, yet'
+          ' `force_checksums_validation=True`. Did you forget to register'
+          ' checksums?'
+      )
 
     # User has manually downloaded the file.
     if manually_downloaded_path := self._get_manually_downloaded_path(
@@ -449,7 +459,6 @@ class DownloadManager:
   ) -> epath.Path | None:
     """Validates/records checksums and returns checksum path if registered."""
     url: str = resource.url  # pytype: disable=annotation-type-mismatch
-    self._recorded_url_infos[url] = computed_url_info
 
     if self._register_checksums:
       # Note:
@@ -457,10 +466,10 @@ class DownloadManager:
       #   `expected_url_info` might have been loaded from another dataset.
       # * `register_checksums_path` was validated in `__init__` so this
       #   shouldn't fail.
+      self._recorded_url_infos[url] = computed_url_info
       self._record_url_infos()
       return self._get_dl_path(resource, computed_url_info.checksum)
-    else:
-      expected_url_info = self._url_infos.get(url)
+    elif expected_url_info := self._url_infos.get(url):
       # Eventually validate checksums
       # Note:
       # * If path is cached at `url_path` but cached
@@ -476,29 +485,17 @@ class DownloadManager:
           computed_url_info=computed_url_info,
           path=path,
       )
-      if expected_url_info:
-        return self._get_dl_path(resource, expected_url_info.checksum)
+      return self._get_dl_path(resource, expected_url_info.checksum)
 
   def _validate_checksums(
       self,
       url: str,
-      expected_url_info: checksums.UrlInfo | None,
+      expected_url_info: checksums.UrlInfo,
       computed_url_info: checksums.UrlInfo,
       path: epath.Path,
   ) -> None:
     """Validate computed_url_info match expected_url_info."""
-    # If force-checksums validations, both expected and computed url_info
-    # should exists
-    if self._force_checksums_validation:
-      # Checksums have not been registered
-      if not expected_url_info:
-        raise ValueError(
-            f'Missing checksums url: {url}, yet '
-            '`force_checksums_validation=True`. '
-            'Did you forget to register checksums?'
-        )
-
-    if expected_url_info and expected_url_info != computed_url_info:
+    if expected_url_info != computed_url_info:
       msg = (
           f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
           f'* Expected: {expected_url_info}\n'
