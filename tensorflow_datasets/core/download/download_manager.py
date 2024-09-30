@@ -318,8 +318,10 @@ class DownloadManager:
   def _get_dl_path(
       self, resource: resource_lib.Resource, checksum: str | None = None
   ) -> epath.Path:
-    return self._download_dir / resource_lib.get_dl_fname(
-        resource.url, checksum
+    return (
+        self._download_dir
+        / resource.relative_download_dir
+        / resource_lib.get_dl_fname(resource.url, checksum)
     )
 
   @property

@@ -285,6 +285,7 @@ class Resource:
       url: str | None = None,
       extract_method: ExtractMethod | None = None,
       path: epath.PathLike | None = None,
+      relative_download_dir: epath.PathLike = '',
   ):
     """Resource constructor.
 
@@ -294,10 +295,13 @@ class Resource:
         set, will be guessed from downloaded file name `original_fname`.
       path: Path of resource on local disk. Can be None if resource has not be
         downloaded yet. In such case, `url` must be set.
+      relative_download_dir: Optional directory for downloading relative to
+        `download_dir`.
     """
     self.url = url
     self._extract_method = extract_method
     self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
+    self.relative_download_dir = relative_download_dir
 
   @classmethod
   def exists_locally(cls, path: epath.Path) -> bool:
