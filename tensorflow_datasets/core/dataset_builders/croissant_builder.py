@@ -244,7 +244,7 @@ class CroissantBuilder(
       )
       if field.repeated:
         feature = sequence_feature.Sequence(feature)
-      features[field.name] = feature
+      features[field.id] = feature
     return features_dict.FeaturesDict(features)
 
   def _split_generators(
