@@ -315,8 +315,8 @@ class DatasetBuilderTestCase(
     return self._prepare_download_results(self.DL_EXTRACT_RESULT)
 
   def _get_dl_extract_only_result(self, url):
+    del url
     if self.DL_EXTRACT_ONLY_RESULT:
-      tf.nest.map_structure(self._add_url, url)
       return self._prepare_download_results(self.DL_EXTRACT_ONLY_RESULT)
 
   def _get_dl_download_result(self, url):

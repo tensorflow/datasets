@@ -197,6 +197,12 @@ def get_info_path(path: epath.Path) -> epath.Path:
   return path.with_suffix(path.suffix + '.INFO')
 
 
+def is_locally_cached(path: epath.Path) -> bool:
+  """Returns whether the path is locally cached."""
+  # If INFO file doesn't exist, consider path NOT cached.
+  return path.exists() and get_info_path(path).exists()
+
+
 def _read_info(info_path: epath.Path) -> Json:
   """Returns info dict."""
   if not info_path.exists():
@@ -298,19 +304,19 @@ class Resource:
       relative_download_dir: Optional directory for downloading relative to
         `download_dir`.
     """
-    self.url = url
+    self._url = url
     self._extract_method = extract_method
     self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self.relative_download_dir = relative_download_dir
 
-  @classmethod
-  def exists_locally(cls, path: epath.Path) -> bool:
-    """Returns whether the resource exists locally, at `resource.path`."""
-    # If INFO file doesn't exist, consider resource does NOT exist, as it would
-    # prevent guessing the `extract_method`.
-    return path.exists() and get_info_path(path).exists()
+  @property
+  def url(self) -> str:
+    """Returns the URL at which to download the resource."""
+    if not self._url:
+      raise ValueError('URL is undefined from resource.')
+    return self._url
 
   @property
   def extract_method(self) -> ExtractMethod:
-    """Returns `ExtractMethod` to use on resource. Cannot be None."""
+    """Returns `ExtractMethod` to use on resource."""
     return self._extract_method or _get_extract_method(self.path)

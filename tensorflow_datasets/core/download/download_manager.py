@@ -372,7 +372,6 @@ class DownloadManager:
     if not isinstance(resource, resource_lib.Resource):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
-    assert url is not None, 'URL is undefined from resource.'
 
     expected_url_info = self._url_infos.get(url)
     if (
@@ -406,7 +405,7 @@ class DownloadManager:
       return self._download(resource)
 
     # Download has been cached (checksum known)
-    elif expected_url_info and resource_lib.Resource.exists_locally(
+    elif expected_url_info and resource_lib.is_locally_cached(
         checksum_path := self._get_dl_path(resource, expected_url_info.checksum)
     ):
       self._register_or_validate_checksums(
@@ -420,7 +419,7 @@ class DownloadManager:
       return promise.Promise.resolve(checksum_path)
 
     # Download has been cached (checksum unknown)
-    elif resource_lib.Resource.exists_locally(
+    elif resource_lib.is_locally_cached(
         url_path := self._get_dl_path(resource)
     ):
       computed_url_info = downloader.read_url_info(url_path)
@@ -458,7 +457,7 @@ class DownloadManager:
       computed_url_info: checksums.UrlInfo,
   ) -> epath.Path | None:
     """Validates/records checksums and returns checksum path if registered."""
-    url: str = resource.url  # pytype: disable=annotation-type-mismatch
+    url = resource.url
 
     if self._register_checksums:
       # Note:
@@ -517,7 +516,7 @@ class DownloadManager:
       Promise of the path to the downloaded url.
     """
     url_path = self._get_dl_path(resource)
-    url: str = resource.url  # pytype: disable=annotation-type-mismatch
+    url = resource.url
 
     # Download in a tmp directory next to url_path (to avoid name collisions)
     # `download_tmp_dir` is cleaned-up in `callback`
