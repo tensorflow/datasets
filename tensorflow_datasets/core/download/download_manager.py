@@ -390,56 +390,55 @@ class DownloadManager:
         expected_url_info
     ):
       computed_url_info = checksums.compute_url_info(manually_downloaded_path)
-      self._register_or_validate_checksums(
-          resource=resource,
-          path=manually_downloaded_path,
-          computed_url_info=computed_url_info,
+      dl_result = downloader.DownloadResult(
+          path=manually_downloaded_path, url_info=computed_url_info
       )
-      self._log_skip_download(
-          url=url, url_info=computed_url_info, path=manually_downloaded_path
-      )
-      return promise.Promise.resolve(manually_downloaded_path)
 
     # Force download
     elif self._force_download:
-      return self._download(resource)
+      dl_result = None
 
     # Download has been cached (checksum known)
     elif expected_url_info and resource_lib.is_locally_cached(
         checksum_path := self._get_dl_path(resource, expected_url_info.checksum)
     ):
-      self._register_or_validate_checksums(
-          resource=resource,
-          path=checksum_path,
-          computed_url_info=expected_url_info,
+      dl_result = downloader.DownloadResult(
+          path=checksum_path, url_info=expected_url_info
       )
-      self._log_skip_download(
-          url=url, url_info=expected_url_info, path=checksum_path
-      )
-      return promise.Promise.resolve(checksum_path)
 
     # Download has been cached (checksum unknown)
     elif resource_lib.is_locally_cached(
         url_path := self._get_dl_path(resource)
     ):
-      computed_url_info = downloader.read_url_info(url_path)
-      if expected_url_info and expected_url_info != computed_url_info:
+      url_info = downloader.read_url_info(url_path)
+
+      if expected_url_info and expected_url_info != url_info:
         # If checksums are registered but do not match, trigger a new
         # download (e.g. previous file corrupted, checksums updated)
-        return self._download(resource)
-      if checksum_path := self._register_or_validate_checksums(
-          resource=resource, path=url_path, computed_url_info=computed_url_info
-      ):
+        dl_result = None
+      elif self._is_checksum_registered(url=url):
         # Checksums were registered: Rename -> checksum_path
-        resource_lib.replace_info_file(url_path, checksum_path)
-        path = url_path.replace(checksum_path)
+        path = self._get_dl_path(resource, url_info.checksum)
+        resource_lib.replace_info_file(url_path, path)
+        url_path.replace(path)
+        dl_result = downloader.DownloadResult(path=path, url_info=url_info)
       else:
         # Checksums not registered: -> do nothing
-        path = url_path
-      self._log_skip_download(url=url, url_info=computed_url_info, path=path)
-      return promise.Promise.resolve(path)
+        dl_result = downloader.DownloadResult(path=url_path, url_info=url_info)
 
     # Cache not found
+    else:
+      dl_result = None
+
+    if dl_result:
+      path = dl_result.path
+      url_info = dl_result.url_info
+
+      self._log_skip_download(url=url, url_info=url_info, path=path)
+      self._register_or_validate_checksums(
+          url=url, url_info=url_info, path=path
+      )
+      return promise.Promise.resolve(path)
     else:
       return self._download(resource)
 
@@ -451,58 +450,40 @@ class DownloadManager:
     self._downloader.increase_tqdm(url_info)
 
   def _register_or_validate_checksums(
-      self,
-      resource: resource_lib.Resource,
-      path: epath.Path,
-      computed_url_info: checksums.UrlInfo,
-  ) -> epath.Path | None:
-    """Validates/records checksums and returns checksum path if registered."""
-    url = resource.url
-
+      self, url: str, url_info: checksums.UrlInfo, path: epath.Path
+  ) -> None:
+    """Registers or validates checksums depending on `self._register_checksums`."""
     if self._register_checksums:
       # Note:
-      # * We save even if `expected_url_info == computed_url_info` as
+      # * We save even if `expected_url_info == url_info` as
       #   `expected_url_info` might have been loaded from another dataset.
       # * `register_checksums_path` was validated in `__init__` so this
       #   shouldn't fail.
-      self._recorded_url_infos[url] = computed_url_info
+      self._recorded_url_infos[url] = url_info
       self._record_url_infos()
-      return self._get_dl_path(resource, computed_url_info.checksum)
     elif expected_url_info := self._url_infos.get(url):
       # Eventually validate checksums
-      # Note:
-      # * If path is cached at `url_path` but cached
-      #   `computed_url_info != expected_url_info`, a new download has
-      #   been triggered (as _get_cached_path returns None)
-      # * If path was downloaded but checksums don't match expected, then
-      #   the download isn't cached (re-running build will retrigger a new
-      #   download). This is expected as it might mean the downloaded file
-      #   was corrupted. Note: The tmp file isn't deleted to allow inspection.
-      self._validate_checksums(
-          url=url,
-          expected_url_info=expected_url_info,
-          computed_url_info=computed_url_info,
-          path=path,
-      )
-      return self._get_dl_path(resource, expected_url_info.checksum)
+      if expected_url_info != url_info:
+        msg = (
+            f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
+            f'* Expected: {expected_url_info}\n'
+            f'* Got: {url_info}\n'
+            'To debug, see: '
+            'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
+        )
+        raise NonMatchingChecksumError(msg)
 
-  def _validate_checksums(
-      self,
-      url: str,
-      expected_url_info: checksums.UrlInfo,
-      computed_url_info: checksums.UrlInfo,
-      path: epath.Path,
-  ) -> None:
-    """Validate computed_url_info match expected_url_info."""
-    if expected_url_info != computed_url_info:
-      msg = (
-          f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
-          f'* Expected: {expected_url_info}\n'
-          f'* Got: {computed_url_info}\n'
-          'To debug, see: '
-          'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
-      )
-      raise NonMatchingChecksumError(msg)
+  def _is_checksum_registered(self, url: str) -> bool:
+    """Returns whether checksums are registered for the given url."""
+    if url in self._url_infos:
+      # Checksum is already registered
+      return True
+    elif self._register_checksums:
+      # Checksum is being registered
+      return True
+    else:
+      # Checksum is not registered
+      return False
 
   def _download(
       self, resource: resource_lib.Resource
@@ -534,10 +515,12 @@ class DownloadManager:
       dl_path = dl_result.path
       dl_url_info = dl_result.url_info
 
-      dst_path = self._register_or_validate_checksums(
-          resource=resource, computed_url_info=dl_url_info, path=dl_path
+      self._register_or_validate_checksums(
+          url=url, url_info=dl_url_info, path=dl_path
       )
-      if not dst_path:
+      if self._is_checksum_registered(url=url):
+        dst_path = self._get_dl_path(resource, dl_url_info.checksum)
+      else:
         dst_path = url_path
 
       resource_lib.write_info_file(
