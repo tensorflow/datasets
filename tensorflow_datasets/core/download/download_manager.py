@@ -316,13 +316,24 @@ class DownloadManager:
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
   def _get_dl_path(
-      self, resource: resource_lib.Resource, checksum: str | None = None
+      self,
+      resource: resource_lib.Resource,
+      checksum: str | None = None,
+      legacy_mode: bool = False,
   ) -> epath.Path:
-    return (
-        self._download_dir
-        / resource.relative_download_dir
-        / resource_lib.get_dl_fname(resource.url, checksum)
-    )
+    """Returns the path where the resource should be downloaded.
+
+    Args:
+      resource: The resource to download.
+      checksum: The checksum of the resource.
+      legacy_mode: If True, returns path in the legacy format without dataset
+        name in the path.
+    """
+    download_dir = self._download_dir
+    if not legacy_mode:
+      download_dir /= self._dataset_name
+    download_dir /= resource.relative_download_dir
+    return download_dir / resource_lib.get_dl_fname(resource.url, checksum)
 
   @property
   def register_checksums(self):
@@ -352,6 +363,50 @@ class DownloadManager:
       return None
 
     return manual_path
+
+  def _get_checksum_dl_result(
+      self, resource: resource_lib.Resource, legacy_mode: bool = False
+  ) -> downloader.DownloadResult | None:
+    """Checks if the download has been cached and checksum is known."""
+    expected_url_info = self._url_infos.get(resource.url)
+
+    if not expected_url_info:
+      return None
+
+    checksum_path = self._get_dl_path(
+        resource, expected_url_info.checksum, legacy_mode=legacy_mode
+    )
+    if not resource_lib.is_locally_cached(checksum_path):
+      return None
+
+    return downloader.DownloadResult(
+        path=checksum_path, url_info=expected_url_info
+    )
+
+  def _get_url_dl_result(
+      self, resource: resource_lib.Resource, legacy_mode: bool = False
+  ) -> downloader.DownloadResult | None:
+    """Checks if the download has been cached and checksum is unknown."""
+    url_path = self._get_dl_path(resource, legacy_mode=legacy_mode)
+    if not resource_lib.is_locally_cached(url_path):
+      return None
+
+    expected_url_info = self._url_infos.get(resource.url)
+    url_info = downloader.read_url_info(url_path)
+
+    if expected_url_info and expected_url_info != url_info:
+      # If checksums are registered but do not match, trigger a new
+      # download (e.g. previous file corrupted, checksums updated)
+      return None
+    elif self._is_checksum_registered(url=resource.url):
+      # Checksums were registered: Rename -> checksum_path
+      path = self._get_dl_path(resource, url_info.checksum)
+      resource_lib.replace_info_file(url_path, path)
+      url_path.replace(path)
+      return downloader.DownloadResult(path=path, url_info=url_info)
+    else:
+      # Checksums not registered: -> do nothing
+      return downloader.DownloadResult(path=url_path, url_info=url_info)
 
   # Synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.
@@ -399,32 +454,20 @@ class DownloadManager:
       dl_result = None
 
     # Download has been cached (checksum known)
-    elif expected_url_info and resource_lib.is_locally_cached(
-        checksum_path := self._get_dl_path(resource, expected_url_info.checksum)
-    ):
-      dl_result = downloader.DownloadResult(
-          path=checksum_path, url_info=expected_url_info
-      )
+    elif dl_result := self._get_checksum_dl_result(resource):
+      pass
+
+    # Download has been cached (checksum known, legacy mode)
+    elif dl_result := self._get_checksum_dl_result(resource, legacy_mode=True):
+      pass
 
     # Download has been cached (checksum unknown)
-    elif resource_lib.is_locally_cached(
-        url_path := self._get_dl_path(resource)
-    ):
-      url_info = downloader.read_url_info(url_path)
+    elif dl_result := self._get_url_dl_result(resource):
+      pass
 
-      if expected_url_info and expected_url_info != url_info:
-        # If checksums are registered but do not match, trigger a new
-        # download (e.g. previous file corrupted, checksums updated)
-        dl_result = None
-      elif self._is_checksum_registered(url=url):
-        # Checksums were registered: Rename -> checksum_path
-        path = self._get_dl_path(resource, url_info.checksum)
-        resource_lib.replace_info_file(url_path, path)
-        url_path.replace(path)
-        dl_result = downloader.DownloadResult(path=path, url_info=url_info)
-      else:
-        # Checksums not registered: -> do nothing
-        dl_result = downloader.DownloadResult(path=url_path, url_info=url_info)
+    # Download has been cached (checksum unknown, legacy mode)
+    elif dl_result := self._get_url_dl_result(resource, legacy_mode=True):
+      pass
 
     # Cache not found
     else:
@@ -504,7 +547,7 @@ class DownloadManager:
     download_tmp_dir = (
         url_path.parent / f'{url_path.name}.tmp.{uuid.uuid4().hex}'
     )
-    download_tmp_dir.mkdir()
+    download_tmp_dir.mkdir(parents=True, exist_ok=True)
     logging.info(f'Downloading {url} into {download_tmp_dir}...')
     future = self._downloader.download(
         url, download_tmp_dir, verify=self._verify_ssl

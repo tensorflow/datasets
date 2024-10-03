@@ -33,6 +33,8 @@ ZIP = resource_lib.ExtractMethod.ZIP
 TAR = resource_lib.ExtractMethod.TAR
 NO_EXTRACT = resource_lib.ExtractMethod.NO_EXTRACT
 
+_DATASET_NAME = 'mnist'
+
 _CHECKSUMS_DIR = epath.Path('/checksums')
 _CHECKSUMS_PATH = _CHECKSUMS_DIR / 'checksums.tsv'
 
@@ -60,10 +62,10 @@ class Artifact:
     )
 
     self.file_name = resource_lib.get_dl_fname(self.url, self.url_info.checksum)
-    self.file_path = _DOWNLOAD_DIR / self.file_name
+    self.file_path = _DOWNLOAD_DIR / _DATASET_NAME / self.file_name
 
     self.url_name = resource_lib.get_dl_fname(self.url)
-    self.url_path = _DOWNLOAD_DIR / self.url_name
+    self.url_path = _DOWNLOAD_DIR / _DATASET_NAME / self.url_name
 
     self.manual_path = _MANUAL_DIR / name
     extract_method = resource_lib.guess_extract_method(name)
@@ -177,7 +179,7 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
       **kwargs,
   ):
     manager = dm.DownloadManager(
-        dataset_name='mnist',
+        dataset_name=_DATASET_NAME,
         download_dir=dl_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
