@@ -354,10 +354,13 @@ class DatasetBuilder(registered.RegisteredDataset):
       return epath.Path(filepath)
 
   def __getstate__(self):
-    return self._original_state
+    # This needs to be of the same format as __dict__,
+    # to match with the pickling implementation of the derived classes.
+    return dict(_original_state=self._original_state)
 
   def __setstate__(self, state):
-    self.__init__(**state)
+    original_state = state["_original_state"]
+    self.__init__(**original_state)
 
   @functools.cached_property
   def canonical_version(self) -> utils.Version:
