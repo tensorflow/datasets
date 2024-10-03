@@ -101,6 +101,7 @@ def _maybe_prepare_manual_data(
   manually_downloaded_files = [
       '1_AVA_HACS_TRAIN_*.zip',
       '2_AVA_HACS_VAL_*.zip',
+      '3_AVA_HACS_TEST_*.zip',
   ]
   files = []
   for file in manually_downloaded_files:
@@ -282,7 +283,7 @@ class Tao(tfds.core.BeamBasedBuilder):
   ]
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
+      '1.1.0': 'Added test split.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -336,6 +337,7 @@ class Tao(tfds.core.BeamBasedBuilder):
     data = dl_manager.download_and_extract({
         'train': _VIDEO_URL + '1-TAO_TRAIN.zip',
         'val': _VIDEO_URL + '2-TAO_VAL.zip',
+        'test': _VIDEO_URL + '3-TAO_TEST.zip',
         'annotations': _ANNOTATIONS_URL,
     })
 
@@ -357,6 +359,14 @@ class Tao(tfds.core.BeamBasedBuilder):
             annotations_path=data['annotations']
             / 'annotations-1.2'
             / 'validation.json',
+            id_map=id_map,
+        ),
+        tfds.Split.TEST: self._generate_examples(
+            data_path=data['test'],
+            manual_path=None,
+            annotations_path=data['annotations']
+            / 'annotations-1.2'
+            / 'test_without_annotations.json',
             id_map=id_map,
         ),
     }
