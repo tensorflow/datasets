@@ -46,6 +46,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.features import bounding_boxes
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
@@ -99,6 +100,8 @@ def datatype_converter(
     return text_feature.Text(doc=field.description)
   elif field_data_type == mlc.DataType.IMAGE_OBJECT:
     return image_feature.Image(doc=field.description)
+  elif field_data_type == mlc.DataType.BOUNDING_BOX:
+    return bounding_boxes.BBoxFeature(doc=field.description)
   else:
     raise ValueError(f'Unknown data type: {field_data_type}.')
 
