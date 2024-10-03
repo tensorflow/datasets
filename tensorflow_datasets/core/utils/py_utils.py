@@ -354,12 +354,8 @@ def incomplete_files(
 
 def is_incomplete_file(path: epath.Path) -> bool:
   """Returns whether the given filename suggests that it's incomplete."""
-  return bool(
-      re.search(
-          rf'^{re.escape(constants.INCOMPLETE_PREFIX)}[0-9a-fA-F]{{32}}\..+$',
-          path.name,
-      )
-  )
+  regex = rf'{re.escape(constants.INCOMPLETE_PREFIX)}[0-9a-fA-F]{{32}}\..+'
+  return bool(re.search(rf'^{regex}$', path.name))
 
 
 @contextlib.contextmanager
