@@ -28,6 +28,7 @@ import os.path
 import time
 from typing import ClassVar, Protocol, Type
 
+from absl import flags
 from absl import logging
 from etils import epath
 from tensorflow_datasets.core import constants
@@ -37,6 +38,19 @@ import tensorflow_datasets.core.logging as _tfds_logging
 from tensorflow_datasets.core.logging import call_metadata as _call_metadata
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import resource_utils
+
+
+SKIP_REGISTERED_DATASET_SUBCLASSES = flags.DEFINE_bool(
+    'skip_registered_dataset_subclasses',
+    False,
+    help=(
+        'This is a temporary flag to test dynamic dataset builders for Bard'
+        ' when transitioning from subclass datasets to dynamic datasets. When'
+        ' set, it will ignore the registered subclass datasets when looking up'
+        ' for a given dataset name. This will either enforce the dynamic'
+        ' dataset if the corresponding textproto exists or return an error.'
+    ),
+)
 
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY: dict[str, Type[RegisteredDataset]] = {}
@@ -364,7 +378,8 @@ def _is_builder_available(builder_cls: Type[RegisteredDataset]) -> bool:
   """Returns `True` is the builder is available."""
   return visibility.DatasetType.TFDS_PUBLIC.is_available()
 
-
+# TODO(shushanik): Q to the reviewers (tfds) should we add the textproto class
+# names to the list here or anywhere else?
 def list_imported_builders() -> list[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   _import_legacy_builders()
@@ -415,12 +430,7 @@ def _get_existing_dataset_packages(
   return datasets
 
 
-def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
-  """Returns the Registered dataset class."""
-  for dataset_builder_provider in _DATASET_PROVIDER_REGISTRY:
-    if dataset_builder_provider.has_dataset(name):
-      return dataset_builder_provider.get_builder_cls(name)
-
+def _get_subclass_builder_cls(name: str) -> Type[RegisteredDataset] | None:
   if name in _ABSTRACT_DATASET_REGISTRY:
     # Will raise TypeError: Can't instantiate abstract class X with abstract
     # methods y, before __init__ even get called
@@ -435,7 +445,7 @@ def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
     # of the binary.
     _import_legacy_builders()
     if name not in _DATASET_REGISTRY:
-      raise DatasetNotFoundError(f'Dataset {name} not found.')
+      return None
 
   builder_cls = _DATASET_REGISTRY[name]
   if not _is_builder_available(builder_cls):
@@ -443,3 +453,24 @@ def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
     msg = f'Dataset {name} is not available. Only: {available_types}'
     raise PermissionError(msg)
   return builder_cls  # pytype: disable=bad-return-type
+
+
+def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
+  """Returns the Registered dataset class."""
+
+  # When the same name dataset builder is available through both
+  # _DATASET_REGISTRY and _DATASET_PROVIDER_REGISTRY, the priority is given to
+  # _DATASET_REGISTRY, for backward compatibility,
+  # since SKIP_REGISTERED_DATASET_SUBCLASSES defaults to False.
+  # However If SKIP_REGISTERED_DATASET_SUBCLASSES is set, _DATASET_REGISTRY is
+  # completely ignored enforcing dynamic dataset classes.
+  if not SKIP_REGISTERED_DATASET_SUBCLASSES.value:
+    builder_cls = _get_subclass_builder_cls(name)
+    if builder_cls:
+      return builder_cls
+
+  for dataset_builder_provider in _DATASET_PROVIDER_REGISTRY:
+    if dataset_builder_provider.has_dataset(name):
+      return dataset_builder_provider.get_builder_cls(name)
+
+  raise DatasetNotFoundError(f'Dataset {name} not found.')
