@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for read_only_builder."""
-
 import contextlib
 import functools
 import os
@@ -42,6 +40,13 @@ from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import file_utils
 from google.protobuf import json_format
+
+_DATA_DIR = epath.Path('path/to')
+_BUILDER_NAME = 'ds0'
+_BUILDER_DIR = _DATA_DIR / _BUILDER_NAME
+_VERSION = '1.0.0'
+_DATASET_DIR = _BUILDER_DIR / _VERSION
+_FEATURES_PATH = _DATASET_DIR / constants.FEATURES_FILENAME
 
 
 class DummyNoConfMnist(testing.DummyDataset):
@@ -298,9 +303,9 @@ def test_not_registered():
   assert read_only_builder.ReadOnlyBuilder.name not in load.list_builders()
 
 
-# We assume that all datasets are added into `data_dir='path/to'`
+# We assume that all datasets are added into `data_dir=_DATA_DIR`
 _find_builder_dir = functools.partial(
-    read_only_builder._find_builder_dir, data_dir='path/to'
+    read_only_builder._find_builder_dir, data_dir=_DATA_DIR
 )
 
 
@@ -330,82 +335,93 @@ def test_find_builder_dir_with_namespace_given():
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def test_find_builder_dir_with_multiple_data_dir(mock_fs: testing.MockFs):
-  mock_fs.add_file('path/to/ds0/1.0.0/features.json')
+  mock_fs.add_file(_FEATURES_PATH)
 
   # Dataset not found.
-  assert read_only_builder._find_builder_dir('ds0') is None
+  assert read_only_builder._find_builder_dir(_BUILDER_NAME) is None
 
   with mock.patch.object(
       file_utils,
       'list_data_dirs',
-      return_value=[constants.DATA_DIR, 'path/to'],
+      return_value=[constants.DATA_DIR, _DATA_DIR],
   ):
-    assert read_only_builder._find_builder_dir('ds0') == 'path/to/ds0/1.0.0'
+    assert read_only_builder._find_builder_dir(_BUILDER_NAME) == _DATASET_DIR
 
     # Dataset present in 2 different data_dir
-    duplicate_path = os.path.join(constants.DATA_DIR, 'ds0/1.0.0/features.json')
+    duplicate_path = os.path.join(
+        constants.DATA_DIR, _FEATURES_PATH.relative_to(_DATA_DIR)
+    )
     mock_fs.add_file(duplicate_path)
     with pytest.raises(ValueError, match='detected in multiple locations'):
-      read_only_builder._find_builder_dir('ds0')
+      read_only_builder._find_builder_dir(_BUILDER_NAME)
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def test_find_builder_dir_legacy_ds(mock_fs: testing.MockFs):
   """Legacy dataset should be ignored (no feature config file)."""
-  mock_fs.add_file('path/to/ds0/1.0.0/temp.txt')
-  assert _find_builder_dir('ds0') is None
+  mock_fs.add_file(_DATASET_DIR / 'temp.txt')
+  assert _find_builder_dir(_BUILDER_NAME) is None
 
-  mock_fs.add_file('path/to/ds0/1.0.0/features.json')
-  assert _find_builder_dir('ds0') == 'path/to/ds0/1.0.0'
+  mock_fs.add_file(_FEATURES_PATH)
+  assert _find_builder_dir(_BUILDER_NAME) == _DATASET_DIR
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def test_find_builder_dir_multi_versions(mock_fs: testing.MockFs):
   """Versions should be sorted numerically (10 > 9)."""
-  mock_fs.add_file('path/to/ds0/1.0.0/features.json')
-  mock_fs.add_file('path/to/ds0/9.9.9/features.json')
-  mock_fs.add_file('path/to/ds0/10.0.0/features.json')
-  assert _find_builder_dir('ds0') == 'path/to/ds0/10.0.0'
+  mock_fs.add_file(_FEATURES_PATH)
+  mock_fs.add_file(_BUILDER_DIR / '9.9.9' / constants.FEATURES_FILENAME)
+  mock_fs.add_file(_BUILDER_DIR / '10.0.0' / constants.FEATURES_FILENAME)
+  assert _find_builder_dir(_BUILDER_NAME) == _BUILDER_DIR / '10.0.0'
   # Explicitly given version
-  assert _find_builder_dir('ds0:9.9.9') == 'path/to/ds0/9.9.9'
+  assert _find_builder_dir(f'{_BUILDER_NAME}:9.9.9') == _BUILDER_DIR / '9.9.9'
   # Non-existing version
-  assert _find_builder_dir('ds0:9.9.0') is None
+  assert _find_builder_dir(f'{_BUILDER_NAME}:9.9.0') is None
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def test_find_builder_dir_bad_version_dir_name(mock_fs: testing.MockFs):
   """Ill-formatted folders should be ignored."""
-  mock_fs.add_file('path/to/ds0/9.9./features.json')
-  mock_fs.add_file('path/to/ds0/1.0.o/features.json')
-  mock_fs.add_file('path/to/ds0/other/features.json')
-  assert _find_builder_dir('ds0') is None
+  mock_fs.add_file(_BUILDER_DIR / '9.9.' / constants.FEATURES_FILENAME)
+  mock_fs.add_file(_BUILDER_DIR / '1.0.o' / constants.FEATURES_FILENAME)
+  mock_fs.add_file(_BUILDER_DIR / 'other' / constants.FEATURES_FILENAME)
+  assert _find_builder_dir(_BUILDER_NAME) is None
 
-  mock_fs.add_file('path/to/ds0/1.1.0/features.json')
-  assert _find_builder_dir('ds0') == 'path/to/ds0/1.1.0'
+  mock_fs.add_file(_BUILDER_DIR / '1.1.0' / constants.FEATURES_FILENAME)
+  assert _find_builder_dir(_BUILDER_NAME) == _BUILDER_DIR / '1.1.0'
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def test_find_builder_config_no_code(mock_fs: testing.MockFs):
   """When the code can't be reached, config should be explicit."""
-  mock_fs.add_file('path/to/ds0/config/1.0.0/features.json')
-  mock_fs.add_file('path/to/ds0/1.1.0/features.json')
+  mock_fs.add_file(
+      _BUILDER_DIR / 'config' / _VERSION / constants.FEATURES_FILENAME
+  )
+  mock_fs.add_file(_BUILDER_DIR / '1.1.0' / constants.FEATURES_FILENAME)
 
   # If the original code can't be reached, assume no config
-  assert _find_builder_dir('ds0') == 'path/to/ds0/1.1.0'
+  assert _find_builder_dir(_BUILDER_NAME) == _BUILDER_DIR / '1.1.0'
   # Config is explicitly given
-  assert _find_builder_dir('ds0/config') == 'path/to/ds0/config/1.0.0'
+  assert (
+      _find_builder_dir(f'{_BUILDER_NAME}/config')
+      == _BUILDER_DIR / 'config' / _VERSION
+  )
 
-  mock_fs.add_file('path/to/ds1/config/1.0.0/features.json')
+  mock_fs.add_file(
+      _DATA_DIR / 'ds1/config' / _VERSION / constants.FEATURES_FILENAME
+  )
   # Config not available, return None
   assert _find_builder_dir('ds1') is None
-  assert _find_builder_dir('ds1/config') == 'path/to/ds1/config/1.0.0'
+  assert _find_builder_dir('ds1/config') == _DATA_DIR / 'ds1/config' / _VERSION
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def test_find_builder_wrong_dir(mock_fs: testing.MockFs):
-  mock_fs.add_file('path/to/ds0/1.1.0/features.json')
-  assert _find_builder_dir('ds0') == 'path/to/ds0/1.1.0'
-  assert _find_builder_dir('ds0', data_dir='path/to/other/dir') is None
+  mock_fs.add_file(_BUILDER_DIR / '1.1.0' / constants.FEATURES_FILENAME)
+  assert _find_builder_dir(_BUILDER_NAME) == _BUILDER_DIR / '1.1.0'
+  assert (
+      _find_builder_dir(_BUILDER_NAME, data_dir=_DATA_DIR / 'other/dir') is None
+  )
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
@@ -423,43 +439,54 @@ def test_find_builder_config_code(mock_fs: testing.MockFs):
     ]
 
   # Old version from before there were configs.
-  mock_fs.add_file('path/to/my_dataset/0.0.1/features.json')
-  mock_fs.add_file('path/to/my_dataset/0.1.0/features.json')
-  mock_fs.add_file('path/to/my_dataset/default_config/0.1.0/features.json')
-  mock_fs.add_file('path/to/my_dataset/default_config/1.0.0/features.json')
-  mock_fs.add_file('path/to/my_dataset/other_config/1.0.0/features.json')
-  mock_fs.add_file('path/to/my_dataset/old_config/0.8.0/features.json')
-  mock_fs.add_file('path/to/my_dataset/old_config/1.0.0/features.json')
-  mock_fs.add_file('path/to/my_dataset/broken_config/features.json')
+  builder_dir = _DATA_DIR / 'my_dataset'
+  mock_fs.add_file(builder_dir / '0.0.1' / constants.FEATURES_FILENAME)
+  mock_fs.add_file(builder_dir / '0.1.0' / constants.FEATURES_FILENAME)
+  mock_fs.add_file(
+      builder_dir / 'default_config/0.1.0' / constants.FEATURES_FILENAME
+  )
+  mock_fs.add_file(
+      builder_dir / 'default_config' / _VERSION / constants.FEATURES_FILENAME
+  )
+  mock_fs.add_file(
+      builder_dir / 'other_config' / _VERSION / constants.FEATURES_FILENAME
+  )
+  mock_fs.add_file(
+      builder_dir / 'old_config/0.8.0' / constants.FEATURES_FILENAME
+  )
+  mock_fs.add_file(
+      builder_dir / 'old_config' / _VERSION / constants.FEATURES_FILENAME
+  )
+  mock_fs.add_file(builder_dir / 'broken_config' / constants.FEATURES_FILENAME)
 
   # If code can be reached, use it to load the default config name.
   # Note that the existing version is loaded, even if the code is at a
   # more recent version.
   assert (
       _find_builder_dir('my_dataset')
-      == 'path/to/my_dataset/default_config/1.0.0'
+      == builder_dir / 'default_config' / _VERSION
   )
   # Old version from previous configs.
-  assert _find_builder_dir('my_dataset:0.0.1') == 'path/to/my_dataset/0.0.1'
+  assert _find_builder_dir('my_dataset:0.0.1') == builder_dir / '0.0.1'
   # Explicitly given version with no config, use folder without config.
-  assert _find_builder_dir('my_dataset:0.1.0') == 'path/to/my_dataset/0.1.0'
+  assert _find_builder_dir('my_dataset:0.1.0') == builder_dir / '0.1.0'
   # Explicitly given version and config, use folder with config.
   assert (
       _find_builder_dir('my_dataset/default_config:0.1.0')
-      == 'path/to/my_dataset/default_config/0.1.0'
+      == builder_dir / 'default_config/0.1.0'
   )
   # When config is explicitly given, load the last detected version.
   assert (
       _find_builder_dir('my_dataset/other_config')
-      == 'path/to/my_dataset/other_config/1.0.0'
+      == builder_dir / 'other_config' / _VERSION
   )
   assert (
       _find_builder_dir('my_dataset/old_config')
-      == 'path/to/my_dataset/old_config/1.0.0'
+      == builder_dir / 'old_config' / _VERSION
   )
   assert (
       _find_builder_dir('my_dataset/old_config:0.8.0')
-      == 'path/to/my_dataset/old_config/0.8.0'
+      == builder_dir / 'old_config/0.8.0'
   )
   # When no config found, return None.
   assert _find_builder_dir('my_dataset/broken_config') is None
@@ -468,71 +495,67 @@ def test_find_builder_config_code(mock_fs: testing.MockFs):
 
 def test_get_default_config_name_permission_error():
   # Raise populated error message in case of PermissionError
-  builder_dir = epath.Path('builder/dir')
-  error_msg = f'Permission error when accessing: {builder_dir}'
+  error_msg = f'Permission error when accessing: {_BUILDER_DIR}'
   with _assert_raises(error_msg):
     with mock.patch.object(
         registered, 'imported_builder_cls', side_effect=PermissionError
     ):
-      actual_default_config_name = read_only_builder._get_default_config_name(
-          builder_dir=builder_dir, name='name'
+      assert (
+          read_only_builder._get_default_config_name(
+              data_dir=_DATA_DIR, builder_name=_BUILDER_NAME
+          )
+          is None
       )
-      assert actual_default_config_name is None
 
 
-def test_get_version_str(mock_fs: testing.MockFs):
-  mock_fs.add_file('path/to/ds/1.0.0/features.json')
-  mock_fs.add_file('path/to/ds/1.0.1/features.json')
-  mock_fs.add_file('path/to/ds/1.1.0/features.json')
-  mock_fs.add_file('path/to/ds/2.0.1/features.json')
+def test_get_version(mock_fs: testing.MockFs):
+  mock_fs.add_file(_FEATURES_PATH)
+  mock_fs.add_file(_BUILDER_DIR / '1.0.1' / constants.FEATURES_FILENAME)
+  mock_fs.add_file(_BUILDER_DIR / '1.1.0' / constants.FEATURES_FILENAME)
+  mock_fs.add_file(_BUILDER_DIR / '2.0.1' / constants.FEATURES_FILENAME)
 
-  get_version_str = functools.partial(
-      read_only_builder._get_version_str, 'path/to/ds/'  # pylint: disable=protected-access
+  get_version = functools.partial(
+      read_only_builder._get_version, _DATA_DIR, _BUILDER_NAME
   )
 
   with error_utils.reraise_with_context(registered.DatasetNotFoundError):
     # requested_version is None -> Returns last version
-    assert get_version_str(requested_version=None) == '2.0.1'
+    assert get_version(requested_version=None) == '2.0.1'
     # Returns highest matching version
-    assert get_version_str(requested_version='1.*.*') == '1.1.0'
-    assert get_version_str(requested_version='*.*.*') == '2.0.1'
-    assert get_version_str(requested_version='1.0.0') == '1.0.0'
+    assert get_version(requested_version='1.*.*') == '1.1.0'
+    assert get_version(requested_version='*.*.*') == '2.0.1'
+    assert get_version(requested_version=_VERSION) == _VERSION
     # No matching version found
-    assert get_version_str(requested_version='1.3.*') is None
-    assert get_version_str(requested_version='2.3.5') is None
+    assert get_version(requested_version='1.3.*') is None
+    assert get_version(requested_version='2.3.5') is None
 
-    assert _find_builder_dir('ds') == 'path/to/ds/2.0.1'
-    assert _find_builder_dir('ds:*.*.*') == 'path/to/ds/2.0.1'
-    assert _find_builder_dir('ds:1.*.*') == 'path/to/ds/1.1.0'
-    assert _find_builder_dir('ds:1.0.0') == 'path/to/ds/1.0.0'
-    assert _find_builder_dir('ds:1.3.*') is None
-    assert _find_builder_dir('ds:2.3.5') is None
+    assert _find_builder_dir(_BUILDER_NAME) == _BUILDER_DIR / '2.0.1'
+    assert _find_builder_dir(f'{_BUILDER_NAME}:*.*.*') == _BUILDER_DIR / '2.0.1'
+    assert _find_builder_dir(f'{_BUILDER_NAME}:1.*.*') == _BUILDER_DIR / '1.1.0'
+    assert (
+        _find_builder_dir(f'{_BUILDER_NAME}:{_VERSION}')
+        == _BUILDER_DIR / _VERSION
+    )
+    assert _find_builder_dir(f'{_BUILDER_NAME}:1.3.*') is None
+    assert _find_builder_dir(f'{_BUILDER_NAME}:2.3.5') is None
 
   # No matching version found, updated error context.
   requested_version = '1.3.*'
-  builder_dir = 'path/to/ds/'
   error_msg = (
       f'No version matching the requested {requested_version} was '
-      f'found in the builder directory: {builder_dir}.'
+      f'found in the builder directory: {_BUILDER_DIR}.'
   )
-
   with _assert_raises(error_msg):
-    assert get_version_str(requested_version=requested_version) is None
+    assert get_version(requested_version=requested_version) is None
 
 
-def test_get_version_str_empty_builder_dir(mock_fs: testing.MockFs):
-  builder_dir = 'path/to/ds/'
+def test_get_version_empty_builder_dir(mock_fs: testing.MockFs):
+  del mock_fs
   error_msg = (
-      f"The builder directory {builder_dir} doesn't contain any versions."
+      f"The builder directory {_BUILDER_DIR} doesn't contain any versions."
   )
-
-  mock_fs.add_file(f'{builder_dir}features.json')
-  get_version_str = functools.partial(
-      read_only_builder._get_version_str, 'path/to/ds/'  # pylint: disable=protected-access
-  )
-
   with _assert_raises(error_msg):
-    assert get_version_str() is None
+    assert read_only_builder._get_version(_DATA_DIR, _BUILDER_NAME) is None
 
 
 def test_builder_from_directories_splits(mock_fs: testing.MockFs):
@@ -554,7 +577,7 @@ def test_builder_from_directories_splits(mock_fs: testing.MockFs):
     )
     return proto.dataset_info_pb2.DatasetInfo(
         name='ds_name',
-        version='1.0.0',
+        version=_VERSION,
         file_format='tfrecord',
         splits=splits,
         features=features,

@@ -169,8 +169,8 @@ def builder_from_directory(
   above.
 
   Args:
-    builder_dir: `str`, path of the directory containing the dataset to read (
-      e.g. `~/tensorflow_datasets/mnist/3.0.0/`).
+    builder_dir: Path of the directory containing the dataset to read ( e.g.
+      `~/tensorflow_datasets/mnist/3.0.0/`).
 
   Returns:
     builder: `tfds.core.DatasetBuilder`, builder for dataset at the given path.
@@ -311,7 +311,7 @@ def builder_from_files(
   return builder_from_directory(builder_dir)
 
 
-def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
+def _find_builder_dir(name: str, **builder_kwargs: Any) -> epath.Path | None:
   """Search whether the given dataset is present on disk and return its path.
 
   Note:
@@ -363,13 +363,13 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
     return None
 
   # Search the dataset across all registered data_dirs
-  all_builder_dirs = set()
+  all_builder_dirs: set[epath.Path] = set()
   all_data_dirs = set(file_utils.list_data_dirs(given_data_dir=data_dir))
   find_builder_fn = functools.partial(
       _find_builder_dir_single_dir,
       builder_name=name.name,
-      version_str=str(version) if version else None,
       config_name=config,
+      version=version,
   )
   if len(all_data_dirs) <= 1:
     for current_data_dir in all_data_dirs:
@@ -398,14 +398,14 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
 
     # If the dataset root_dir exists, a common error is that the config name
     # was not specified. So we list the possible configs and display them.
-    possible_configs = _list_possible_configs(name, all_data_dirs)
+    possible_configs = _list_possible_configs(name.name, all_data_dirs)
     if possible_configs:
-      configs = '\n\t- '.join([''] + list(possible_configs))
+      configs_str = '\n\t- '.join([''] + possible_configs)
       error_msg = (
           f'However, a folder for "{name.name}" does exist. Is it possible that'
           ' you specified the wrong config? You can add a config by replacing'
           f' `tfds.load({name.name})` by `tfds.load("{name.name}/my_config")`.'
-          f' Possible configs are:{configs}\n'
+          f' Possible configs are:{configs_str}\n'
       )
 
     error_utils.add_context(error_msg)
@@ -431,32 +431,19 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> str | None:
 
 
 def _list_possible_configs(
-    name: naming.DatasetName, all_data_dirs: set[epath.PathLike]
-) -> Sequence[str]:
+    builder_name: str, all_data_dirs: set[epath.PathLike]
+) -> list[str]:
   configs = []
   for data_dir in all_data_dirs:
-    root_dir = epath.Path(data_dir) / name.name
-    if root_dir.exists():
-      for path in root_dir.iterdir():
+    builder_dir = epath.Path(data_dir) / builder_name
+    if builder_dir.exists():
+      for path in builder_dir.iterdir():
         if path.is_dir():
           configs.append(path.name)
   return configs
 
 
-def _get_dataset_dir(
-    builder_dir: epath.Path,
-    *,
-    version_str: str,
-    config_name: str | None = None,
-) -> epath.Path:
-  """Returns the path for the given dataset, config and version."""
-  dataset_dir = builder_dir
-  if config_name:
-    dataset_dir = dataset_dir / config_name
-  return dataset_dir / version_str
-
-
-def _contains_dataset(dataset_dir: epath.PathLike) -> bool:
+def _contains_dataset(dataset_dir: epath.Path) -> bool:
   try:
     return feature_lib.make_config_path(dataset_dir).exists()
   except (OSError, tf.errors.PermissionDeniedError):
@@ -467,49 +454,53 @@ def _find_builder_dir_single_dir(
     data_dir: epath.PathLike,
     builder_name: str,
     config_name: str | None = None,
-    version_str: str | None = None,
-) -> str | None:
+    version: version_lib.Version | str | None = None,
+) -> epath.Path | None:
   """Same as `find_builder_dir` but requires explicit dir."""
 
-  builder_dir = epath.Path(data_dir) / builder_name
-
   # If the version is specified, check if the dataset dir exists and return.
-  if version_str and version_lib.Version.is_valid(version_str):
-    dataset_dir = _get_dataset_dir(
-        builder_dir=builder_dir,
-        version_str=version_str,
+  if version_lib.Version.is_valid(version):
+    dataset_dir = file_utils.get_dataset_dir(
+        data_dir=data_dir,
+        builder_name=builder_name,
         config_name=config_name,
+        version=version,
     )
     if _contains_dataset(dataset_dir):
-      return os.fspath(dataset_dir)
+      return dataset_dir
 
   # If no config_name or an empty string was given, we try to find the default
   # config and load the dataset for that.
   if not config_name:
-    default_config_name = _get_default_config_name(
-        builder_dir=builder_dir, name=builder_name
+    config_name = _get_default_config_name(
+        data_dir=data_dir, builder_name=builder_name
     )
-    if default_config_name:
-      return _find_builder_dir_single_dir(
-          builder_name=builder_name,
+    if version_lib.Version.is_valid(version):
+      dataset_dir = file_utils.get_dataset_dir(
           data_dir=data_dir,
-          config_name=default_config_name,
-          version_str=version_str,
+          builder_name=builder_name,
+          config_name=config_name,
+          version=version,
       )
+      if _contains_dataset(dataset_dir):
+        return dataset_dir
 
   # Dataset wasn't found, try to find a suitable available version.
-  found_version_str = _get_version_str(
-      builder_dir, config_name=config_name, requested_version=version_str
+  found_version = _get_version(
+      data_dir=data_dir,
+      builder_name=builder_name,
+      config_name=config_name,
+      requested_version=version,
   )
-  if found_version_str and (
-      version_str is None or found_version_str != version_str
-  ):
-    return _find_builder_dir_single_dir(
-        builder_name=builder_name,
+  if found_version and str(found_version) != version:
+    dataset_dir = file_utils.get_dataset_dir(
         data_dir=data_dir,
+        builder_name=builder_name,
         config_name=config_name,
-        version_str=found_version_str,
+        version=found_version,
     )
+    if _contains_dataset(dataset_dir):
+      return dataset_dir
 
   # If no builder found, we populate the error_context with useful information
   # and return None.
@@ -521,16 +512,19 @@ def _find_builder_dir_single_dir(
 
 
 def _get_default_config_name(
-    builder_dir: epath.Path,
-    name: str,
+    data_dir: epath.Path,
+    builder_name: str,
 ) -> str | None:
   """Returns the default config of the given dataset, None if not found."""
+  builder_dir = file_utils.get_dataset_dir(
+      data_dir=data_dir, builder_name=builder_name
+  )
   # Search for the DatasetBuilder generation code
   try:
     # Warning: The registered dataset may not match the files (e.g. if
     # the imported datasets has the same name as the generated files while
     # being 2 differents datasets)
-    cls = registered.imported_builder_cls(name)
+    cls = registered.imported_builder_cls(builder_name)
     cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
   except registered.DatasetNotFoundError:
     pass
@@ -543,45 +537,43 @@ def _get_default_config_name(
       return cls.default_builder_config.name
 
   # Otherwise, try to load default config from common metadata
-  return dataset_builder.load_default_config_name(epath.Path(builder_dir))
+  return dataset_builder.load_default_config_name(builder_dir)
 
 
-def _get_version_str(
-    builder_dir: epath.Path,
-    *,
+def _get_version(
+    data_dir: epath.Path,
+    builder_name: str,
     config_name: str | None = None,
-    requested_version: str | None = None,
-) -> str | None:
-  """Returns the version name found in the directory.
+    requested_version: version_lib.Version | str | None = None,
+) -> version_lib.Version | None:
+  """Returns the version name found in the builder directory.
 
   Args:
-    builder_dir: Directory containing the versions (`builder_dir/1.0.0/`,...)
-    config_name: Optional name of the config that should be used. Will be
-      ignored if it is an empty string.
+    data_dir: Directory containing the builder.
+    builder_name: Name of the builder.
+    config_name: Name of the config.
     requested_version: Optional version to search (e.g. `1.0.0`, `2.*.*`,...)
-
-  Returns:
-    version_str: The version directory name found in `builder_dir`.
   """
-  if config_name:
-    builder_dir = builder_dir / config_name
-  all_versions = version_lib.list_all_versions(os.fspath(builder_dir))
+  config_dir = file_utils.get_dataset_dir(
+      data_dir=data_dir, builder_name=builder_name, config_name=config_name
+  )
+  all_versions = version_lib.list_all_versions(config_dir)
   # Version not given, using the latest one.
   if not requested_version and all_versions:
-    return str(all_versions[-1])
+    return all_versions[-1]
   # Version given, return the highest version matching `requested_version`.
   for v in reversed(all_versions):
     if v.match(requested_version):
-      return str(v)
+      return v
   # Directory doesn't have version, or requested_version doesn't match
   if requested_version:
     error_msg = (
         f'No version matching the requested {requested_version} was '
-        f'found in the builder directory: {builder_dir}.'
+        f'found in the builder directory: {config_dir}.'
     )
   else:
     error_msg = (
-        f"The builder directory {builder_dir} doesn't contain any versions."
+        f"The builder directory {config_dir} doesn't contain any versions."
     )
   error_utils.add_context(error_msg)
   return None

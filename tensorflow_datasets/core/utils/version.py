@@ -189,12 +189,10 @@ class Version:
     )
 
   def __eq__(self, other):
+    if other is None:
+      return False
     other = self._validate_operand(other)
     return self.tuple == other.tuple
-
-  def __ne__(self, other):
-    other = self._validate_operand(other)
-    return self.tuple != other.tuple
 
   def __lt__(self, other):
     other = self._validate_operand(other)
@@ -230,8 +228,12 @@ class Version:
     )
 
   @classmethod
-  def is_valid(cls, version: str) -> bool:
+  def is_valid(cls, version: Version | str | None) -> bool:
     """Returns True if the version can be parsed."""
+    if isinstance(version, Version):
+      return True
+    elif version is None:
+      return False
     try:
       return cls(version) and True
     except ValueError:  # Invalid version (ex: incomplete data dir)

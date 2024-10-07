@@ -161,6 +161,21 @@ def get_default_data_dir(given_data_dir: str | None = None) -> str:
     return constants.DATA_DIR
 
 
+def get_dataset_dir(
+    data_dir: epath.PathLike,
+    builder_name: str,
+    config_name: str | None = None,
+    version: version_lib.Version | str | None = None,
+) -> epath.Path:
+  """Returns the data directory for the given dataset."""
+  dataset_dir = epath.Path(data_dir) / builder_name
+  if config_name:
+    dataset_dir /= config_name
+  if version:
+    dataset_dir /= str(version)
+  return dataset_dir
+
+
 def _looks_like_a_tfds_file(filename: str) -> bool:
   filename_has_shard_re = re.compile(r'.*\d{5,}-of-\d{5,}.*')
   return bool(filename_has_shard_re.match(filename)) or filename.endswith(
