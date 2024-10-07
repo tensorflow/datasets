@@ -20,7 +20,9 @@ import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
+from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import text_feature
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 
@@ -95,15 +97,17 @@ def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
 
 
 @pytest.mark.parametrize(
-    ["field", "feature_type"],
+    ["field", "feature_type", "subfield_types"],
     [
         (
             mlc.Field(data_types=mlc.DataType.TEXT, description="Text feature"),
             text_feature.Text,
+            None,
         ),
         (
             mlc.Field(data_types=mlc.DataType.DATE, description="Date feature"),
             text_feature.Text,
+            None,
         ),
         (
             mlc.Field(
@@ -111,12 +115,34 @@ def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
                 description="Image feature",
             ),
             image_feature.Image,
+            None,
+        ),
+        (
+            mlc.Field(
+                id="person",
+                data_types=[],
+                description="A field with subfields",
+                sub_fields=[
+                    mlc.Field(id="person/name", data_types=mlc.DataType.TEXT),
+                    mlc.Field(id="person/age", data_types=mlc.DataType.INTEGER),
+                ],
+            ),
+            features_dict.FeaturesDict,
+            {
+                "person/name": text_feature.Text,
+                "person/age": tensor_feature.Tensor,
+            },
         ),
     ],
 )
-def test_complex_datatype_converter(field, feature_type):
+def test_complex_datatype_converter(field, feature_type, subfield_types):
   actual_feature = croissant_builder.datatype_converter(field)
   assert isinstance(actual_feature, feature_type)
+  if subfield_types:
+    for feature_name in actual_feature.keys():
+      assert isinstance(
+          actual_feature[feature_name], subfield_types[feature_name]
+      )
 
 
 @pytest.fixture(name="crs_builder")

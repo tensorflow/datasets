@@ -61,7 +61,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 
 
 def datatype_converter(
-    field,
+    field: mlc.Field,
     int_dtype: Optional[type_utils.TfdsDType] = np.int64,
     float_dtype: Optional[type_utils.TfdsDType] = np.float32,
 ):
@@ -83,8 +83,15 @@ def datatype_converter(
     raise NotImplementedError('Not implemented yet.')
 
   field_data_type = field.data_type
-
   if not field_data_type:
+    # Fields with sub fields are of type None
+    if field.sub_fields:
+      return features_dict.FeaturesDict({
+          subfield.id: datatype_converter(
+              subfield, int_dtype=int_dtype, float_dtype=float_dtype
+          )
+          for subfield in field.sub_fields
+      })
     return None
   elif field_data_type == int:
     return int_dtype

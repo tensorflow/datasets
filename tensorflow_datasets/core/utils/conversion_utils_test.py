@@ -140,6 +140,14 @@ def test_convert_value_raises(value, feature):
             ),
             {'foo': b''},
         ),
+        (
+            {'name': b'Name', 'age': 100},
+            feature_lib.FeaturesDict({
+                'name': feature_lib.Text(),
+                'age': feature_lib.Scalar(dtype=np.int32),
+            }),
+            {'name': b'Name', 'age': 100},
+        ),
         # nan, but the feature type is not float
         (
             np.nan,
