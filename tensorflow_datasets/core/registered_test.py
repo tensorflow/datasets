@@ -17,7 +17,9 @@
 
 import abc
 import re
+from typing import Type
 from unittest import mock
+from absl.testing import flagsaver
 import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
@@ -60,6 +62,28 @@ class UnregisteredBuilder(EmptyDatasetBuilder):
   @abc.abstractmethod
   def an_abstract_property(self):
     pass
+
+
+class TestBuilderProvider(tfds.core.DatasetBuilderProvider):
+  """Test Builder provider."""
+
+  def __init__(
+      self,
+      name: str,
+      dataset_builder_cls: Type[tfds.core.registered.RegisteredDataset],
+  ):
+    self._builder_cls_cache = {name: dataset_builder_cls}
+    self._available_datasets = [name]
+
+  def has_dataset(self, name: str) -> bool:
+    return name in self._available_datasets
+
+  def get_builder_cls(
+      self, name: str
+  ) -> type[tfds.core.registered.RegisteredDataset]:
+    if not self.has_dataset(name):
+      raise ValueError(f"Dataset {name} is not available!")
+    return self._builder_cls_cache[name]
 
 
 class RegisteredTest(testing.TestCase):
@@ -228,6 +252,32 @@ class RegisteredTest(testing.TestCase):
 
       class DuplicateBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
         pass
+
+  @flagsaver.flagsaver((registered.SKIP_REGISTERED_DATASET_SUBCLASSES, False))
+  def test_duplicate_dataset_prioritize_non_dynamic(self):
+    """Redefining the same builder twice should raises error."""
+
+    class OriginalDataset(registered.RegisteredDataset):  # pylint: disable=unused-variable
+      pass
+
+    registered.add_dataset_builder_provider(
+        TestBuilderProvider("original_dataset", EmptyDatasetBuilder)
+    )
+    builder_cls = registered.imported_builder_cls("original_dataset")
+    self.assertEqual(builder_cls, OriginalDataset)
+
+  @flagsaver.flagsaver((registered.SKIP_REGISTERED_DATASET_SUBCLASSES, True))
+  def test_duplicate_dataset_prioritize_dynamic(self):
+    """Redefining the same builder twice should raises error."""
+
+    class MyDataset(registered.RegisteredDataset):  # pylint: disable=unused-variable
+      pass
+
+    registered.add_dataset_builder_provider(
+        TestBuilderProvider("my_dataset", EmptyDatasetBuilder)
+    )
+    builder_cls = registered.imported_builder_cls("my_dataset")
+    self.assertEqual(builder_cls, EmptyDatasetBuilder)
 
   def test_is_full_name(self):
     """Test for `is_full_name`."""
