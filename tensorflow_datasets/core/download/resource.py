@@ -17,7 +17,6 @@
 
 import base64
 import codecs
-from collections.abc import Mapping
 import enum
 import itertools
 import json
@@ -30,8 +29,7 @@ from etils import epath
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
 
-# Should be `Union[int, float, bool, str, Dict[str, Json], List[Json]]`
-Json = Mapping[str, Any]
+Json = dict[str, Any]
 
 _hex_codec = codecs.getdecoder('hex_codec')
 
@@ -205,9 +203,7 @@ def is_locally_cached(path: epath.Path) -> bool:
 
 def _read_info(info_path: epath.Path) -> Json:
   """Returns info dict."""
-  if not info_path.exists():
-    return {}
-  return json.loads(info_path.read_text())
+  return json.loads(info_path.read_text()) if info_path.exists() else {}
 
 
 # TODO(pierrot): one lock per info path instead of locking everything.
@@ -221,6 +217,22 @@ def replace_info_file(src_path: epath.Path, dst_path: epath.Path) -> None:
 @synchronize_decorator
 def read_info_file(info_path: epath.Path) -> Json:
   return _read_info(get_info_path(info_path))
+
+
+def _add_value_to_list(info: Json, key: str, value: str) -> None:
+  """Adds `value` to list `key` in `info` dict."""
+  if value and value not in (stored_values := info.get(key, [])):
+    info[key] = stored_values + [value]
+
+
+def _set_value(info_path: epath.Path, info: Json, key: str, value: Any) -> None:
+  """Sets `value` to `key` in `info` dict."""
+  if (stored_value := info.get(key)) and stored_value != value:
+    raise ValueError(
+        f'File info "{info_path}" contains a different "{key}" than the'
+        f' downloaded one: Stored: {stored_value}; Expected: {value}'
+    )
+  info[key] = value
 
 
 @synchronize_decorator
@@ -244,40 +256,21 @@ def write_info_file(
     original_fname: name of file as downloaded.
     url_info: checksums/size info of the url
   """
-  url_info_dict = url_info.asdict()
   info_path = get_info_path(path)
   info = _read_info(info_path)
-  urls = set(info.get('urls', []) + [url])
-  dataset_names = info.get('dataset_names', [])
-  if dataset_name:
-    dataset_names.append(dataset_name)
-  if info.get('original_fname', original_fname) != original_fname:
-    raise ValueError(
-        '`original_fname` "{}" stored in {} does NOT match "{}".'.format(
-            info['original_fname'], info_path, original_fname
-        )
-    )
-  if info.get('url_info', url_info_dict) != url_info_dict:
-    raise ValueError(
-        'File info {} contains a different checksum that the downloaded one: '
-        'Stored: {}; Expected: {}'.format(
-            info_path, info['url_info'], url_info_dict
-        )
-    )
-  info = dict(
-      urls=list(urls),
-      dataset_names=list(set(dataset_names)),
-      original_fname=original_fname,
-      url_info=url_info_dict,
-  )
+
+  _add_value_to_list(info, 'urls', url)
+  _add_value_to_list(info, 'dataset_names', dataset_name)
+  _set_value(info_path, info, 'original_fname', original_fname)
+  _set_value(info_path, info, 'url_info', url_info.asdict())
+
   with utils.atomic_write(info_path, 'w') as info_f:
     json.dump(info, info_f, sort_keys=True)
 
 
 def _get_extract_method(path: epath.Path) -> ExtractMethod:
   """Returns `ExtractMethod` to use on resource at path. Cannot be None."""
-  info_path = get_info_path(path)
-  info = _read_info(info_path)
+  info = _read_info(get_info_path(path))
   fname = info.get('original_fname', os.fspath(path))
   return guess_extract_method(fname)
 

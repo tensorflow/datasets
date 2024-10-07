@@ -361,12 +361,10 @@ def is_incomplete_file(path: epath.Path) -> bool:
 @contextlib.contextmanager
 def atomic_write(path: epath.PathLike, mode: str):
   """Writes to path atomically, by writing to temp file and renaming it."""
-  path = epath.Path(path)
   tmp_path = _tmp_file_name(path)
   with tmp_path.open(mode=mode) as file_:
     yield file_
-  path.unlink(missing_ok=True)
-  tmp_path.rename(path)
+  tmp_path.replace(path)
 
 
 def reraise(

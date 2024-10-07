@@ -553,7 +553,7 @@ class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
         register_checksums=False,
         force_download=True,
     )
-    with self.assertRaisesRegex(ValueError, 'contains a different checksum'):
+    with self.assertRaisesRegex(ValueError, 'contains a different "url_info"'):
       dl_manager.download(a.url)
 
     # If the url is re-downloaded with the same hash, no error is raised
