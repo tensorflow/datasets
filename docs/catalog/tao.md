@@ -33,7 +33,8 @@ requires at least 300 GB of free space to store.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   **`1.0.0`** (default): No release notes.
+    *   `1.1.0`: Added test split.
 
 *   **Download size**: `113.96 GiB`
 
