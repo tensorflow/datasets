@@ -762,6 +762,9 @@ class DatasetBuilder(registered.RegisteredDataset):
           self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self.data_dir)
+          print(f'XXXXXXXXXX: at end of temporary assignment')
+        print(f'XXXXXXXXXX: at end of with utils.incomplete_dir')
+      print(f'XXXXXXXXXX: utils.incomplete_dir ended')
       # The generated DatasetInfo contains references to `tmp_data_dir`
       self.info.update_data_dir(self.data_dir)
 
@@ -1411,11 +1414,13 @@ class DatasetBuilder(registered.RegisteredDataset):
       self, split_name: str
   ) -> naming.ShardedFileTemplate:
     """Returns a filename template for the given split."""
+    if self.info.file_format is None:
+      raise ValueError("File format is not set!")
     return naming.ShardedFileTemplate(
         split=split_name,
         dataset_name=self.name,
         data_dir=self.data_path,
-        filetype_suffix=self.info.file_format.file_suffix,  # pytype: disable=attribute-error
+        filetype_suffix=self.info.file_format.file_suffix,
     )
 
 

@@ -717,3 +717,91 @@ class BeamWriter:
       split_info_path.unlink()
 
     return self._split_info["shard_lengths"], self._split_info["total_size"]
+
+
+class NoShuffleBeamWriter:
+  """Shuffles / writes Examples beam collection to sharded files."""
+
+  _OUTPUT_TAG_BUCKETS_LEN_SIZE = "tag_buckets_len_size"
+
+  def __init__(
+      self,
+      serializer: example_serializer.Serializer,
+      filename_template: naming.ShardedFileTemplate,
+      file_format: file_adapters.FileFormat,
+  ):
+    """Init BeamWriter.
+
+    Note that file "{filepath_prefix}.shard_lengths.json" is also created. It
+    contains a list with the number of examples in each final shard. Eg:
+    "[10,11,10,11]".
+
+    Args:
+      serializer: class that can serialize examples.
+      filename_template: template to format sharded filenames.
+      file_format: the file format to use.
+    """
+    self._original_state = dict(
+        serializer=serializer,
+        filename_template=filename_template,
+        file_format=file_format,
+    )
+    self._file_format = file_format
+    self._file_adapter = file_adapters.ADAPTER_FOR_FORMAT[self._file_format]
+    self._filename_template = filename_template
+    self._serializer = serializer
+
+  @functools.lru_cache()
+  def _get_counter(self, name: str, namespace: str = "BeamWriter"):
+    return beam.metrics.Metrics.counter(namespace, name)
+
+  def inc_counter(self, name: str, value: int = 1) -> None:
+    self._get_counter(name).inc(value)
+
+  def __getstate__(self):
+    return self._original_state
+
+  def __setstate__(self, state):
+    self.__init__(**state)
+
+  def _serialize_example(
+      self,
+      key_example: tuple[hashing.HashKey, Example],
+  ) -> bytes:
+    """Returns (serialized_example)."""
+    _, example = key_example
+    self.inc_counter(name="serialized_examples")
+    return self._serializer.serialize_example(example)
+
+  def write_from_pcollection(self, examples_pcollection):
+    """Returns PTransform to write (key, example) PCollection."""
+    return (
+        examples_pcollection
+        | "Serialize" >> beam.Map(self._serialize_example)
+        | "Write"
+        >> self._file_adapter.beam_sink(
+            filename_template=self._filename_template
+        )
+    )
+
+  def finalize(self) -> tuple[list[int], int]:
+    """Returns the computed shard_lengths and total_size.
+
+    Returns:
+      List of length <number of shards> containing the number of examples stored
+      in each shard, and size of the files (in bytes).
+    """
+    # We don't know the number of shards, the length of each shard, nor the
+    # total size, so we compute them here.
+    length_per_shard = {}
+    total_size_bytes = 0
+    prefix = epath.Path(self._filename_template.filepath_prefix())
+    for shard in self._filename_template.data_dir.glob(f"{prefix.name}*"):
+      length = self._file_adapter.num_examples(shard)
+      length_per_shard[shard] = length
+      total_size_bytes += shard.stat().length
+    shard_lengths: list[int] = []
+    for _, length in sorted(length_per_shard.items()):
+      shard_lengths.append(length)
+
+    return shard_lengths, total_size_bytes

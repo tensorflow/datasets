@@ -35,6 +35,7 @@ with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
   from tensorflow_datasets.core import example_serializer
   from tensorflow_datasets.core import features as features_lib
+  from tensorflow_datasets.core import file_adapters
   from tensorflow_datasets.core import naming
   from tensorflow_datasets.core import splits as splits_lib
   from tensorflow_datasets.core import utils
@@ -530,17 +531,29 @@ class SplitBuilder:
   ) -> _SplitInfoFuture:
     """Split generator for `beam.PCollection`."""
     # TODO(tfds): Should try to add support to `max_examples_per_split`
-    beam_writer = writer_lib.BeamWriter(
-        serializer=example_serializer.ExampleSerializer(
-            self._features.get_serialized_info()
-        ),
-        filename_template=filename_template,
-        hash_salt=split_name,
-        disable_shuffling=disable_shuffling,
-        shard_config=self._shard_config,
-        example_writer=self._example_writer,
-        ignore_duplicates=self._ignore_duplicates,
-    )
+    # TODO(weide): DO NOT SUBMIT
+    if disable_shuffling:
+      beam_writer = writer_lib.NoShuffleBeamWriter(
+          serializer=example_serializer.ExampleSerializer(
+              self._features.get_serialized_info()
+          ),
+          file_format=file_adapters.FileFormat.from_value(
+              filename_template.filetype_suffix
+          ),
+          filename_template=filename_template,
+      )
+    else:
+      beam_writer = writer_lib.BeamWriter(
+          serializer=example_serializer.ExampleSerializer(
+              self._features.get_serialized_info()
+          ),
+          filename_template=filename_template,
+          hash_salt=split_name,
+          disable_shuffling=disable_shuffling,
+          shard_config=self._shard_config,
+          example_writer=self._example_writer,
+          ignore_duplicates=self._ignore_duplicates,
+      )
 
     def _encode_example(key_ex, encode_fn=self._features.encode_example):
       # We do not access self._features in this function to avoid pickling the
