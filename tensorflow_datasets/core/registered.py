@@ -300,6 +300,26 @@ class DatasetBuilderProvider(Protocol):
     ...
 
 
+class LegacyDatasetBuilderProvider(DatasetBuilderProvider):
+  """Provider of dataset builders that are defined in the legacy codebase."""
+
+  def has_dataset(self, name: str) -> bool:
+    if name not in _DATASET_REGISTRY:
+      # Dataset not found in the registry, try to import legacy builders.
+      # Dataset builders are imported lazily to avoid slowing down the startup
+      # of the binary.
+      _import_legacy_builders()
+    return name in _DATASET_REGISTRY
+
+  def get_builder_cls(self, name: str) -> Type[RegisteredDataset]:
+    builder_cls = _DATASET_REGISTRY[name]
+    if not _is_builder_available(builder_cls):
+      available_types = visibility.get_availables()
+      msg = f'Dataset {name} is not available. Only: {available_types}'
+      raise PermissionError(msg)
+    return builder_cls
+
+
 class SourceDirDatasetBuilderProvider(DatasetBuilderProvider):
   """Provider of dataset builders that are defined in the given source code folder."""
 
@@ -352,12 +372,26 @@ class SourceDirDatasetBuilderProvider(DatasetBuilderProvider):
 
 
 _DATASET_PROVIDER_REGISTRY: list[DatasetBuilderProvider] = [
-    SourceDirDatasetBuilderProvider(constants.DATASETS_TFDS_SRC_DIR)
+    SourceDirDatasetBuilderProvider(constants.DATASETS_TFDS_SRC_DIR),
+    LegacyDatasetBuilderProvider(),
 ]
 
 
-def add_dataset_builder_provider(provider: DatasetBuilderProvider) -> None:
-  _DATASET_PROVIDER_REGISTRY.append(provider)
+def add_dataset_builder_provider(
+    provider: DatasetBuilderProvider,
+    index: int | None = None,
+) -> None:
+  """Adds a dataset builder provider to the global registry.
+
+  Args:
+    provider: The provider to add.
+    index: The index at which to insert the provider. If `None`, the provider is
+      appended to the end of the registry.
+  """
+  if index is not None:
+    _DATASET_PROVIDER_REGISTRY.insert(index, provider)
+  else:
+    _DATASET_PROVIDER_REGISTRY.append(provider)
 
 
 def _is_builder_available(builder_cls: Type[RegisteredDataset]) -> bool:
@@ -429,17 +463,4 @@ def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
     # abstract methods.
     raise AssertionError(f'Dataset {name} is an abstract class.')
 
-  if name not in _DATASET_REGISTRY:
-    # Dataset not found in the registry, try to import legacy builders.
-    # Dataset builders are imported lazily to avoid slowing down the startup
-    # of the binary.
-    _import_legacy_builders()
-    if name not in _DATASET_REGISTRY:
-      raise DatasetNotFoundError(f'Dataset {name} not found.')
-
-  builder_cls = _DATASET_REGISTRY[name]
-  if not _is_builder_available(builder_cls):
-    available_types = visibility.get_availables()
-    msg = f'Dataset {name} is not available. Only: {available_types}'
-    raise PermissionError(msg)
-  return builder_cls  # pytype: disable=bad-return-type
+  raise DatasetNotFoundError(f'Dataset {name} not found.')
