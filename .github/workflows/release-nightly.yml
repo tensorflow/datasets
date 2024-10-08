@@ -13,34 +13,21 @@ on:
         default: ""
         required: false
 
+  pull_request:
+    branches:
+      - 'master'
+
 jobs:
   publish-job:
     # Prevents action from running on forks.
     if: github.repository == 'tensorflow/datasets'
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
+    - name: Publish the package
+      uses: etils-actions/pypi-auto-publish@v1
       with:
-        ref: ${{ github.event.inputs.git-ref }}
-
-    - name: Setup Python.
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.10'
-
-    - name: Install deps.
-      run: pip install setuptools wheel twine
-
-    - name: Create the source distribution and build the wheels.
-      run: |
-        python setup.py sdist --nightly
-        python setup.py bdist_wheel --nightly
-
-    - name: Publish the package.
-      run: |
-        twine check dist/*
-        twine upload dist/*
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.NIGHTLY_PYPI_PASSWORD }}
+        pypi-token: ${{ secrets.NIGHTLY_PYPI_PASSWORD }}
+        gh-token: ${{ secrets.GITHUB_TOKEN }}
+        parse-changelog: true
+        pkg-name: tfds-nightly
+        git-ref: ${{ github.event.inputs.git-ref }}
