@@ -17,12 +17,13 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping, MutableMapping
 import dataclasses
 import functools
 import os
 import re
 import textwrap
-from typing import Any, Dict, List, Mapping, MutableMapping, Optional, Tuple, Union
+from typing import Any
 
 from etils import epath
 from tensorflow_datasets.core.utils import py_utils
@@ -63,22 +64,22 @@ DEFAULT_FILENAME_TEMPLATE = '{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}'
 _first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
 _all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
-Value = Union[str, int, float, bool]
+Value = str | int | float | bool
 
 
 @dataclasses.dataclass(eq=True, order=True, frozen=True)
 class DatasetName:
   """Dataset namespace+name."""
 
-  namespace: Optional[str]
+  namespace: str | None
   name: str
 
   def __init__(
       self,
-      namespace_name: Optional[str] = None,
+      namespace_name: str | None = None,
       *,
-      namespace: Optional[str] = None,
-      name: Optional[str] = None,
+      namespace: str | None = None,
+      name: str | None = None,
   ):
     if namespace_name and bool(namespace or name):
       raise ValueError(
@@ -116,7 +117,7 @@ def is_valid_dataset_and_class_name(name_str: str) -> bool:
 def parse_builder_name_kwargs(
     name: str,
     **builder_kwargs: Any,
-) -> Tuple[DatasetName, Dict[str, Any]]:
+) -> tuple[DatasetName, dict[str, Any]]:
   """Normalize builder kwargs.
 
   Example:
@@ -145,7 +146,7 @@ def parse_builder_name_kwargs(
 
 def _dataset_name_and_kwargs_from_name_str(
     name_str: str,
-) -> Tuple[str, Dict[str, Value]]:
+) -> tuple[str, dict[str, Value]]:
   """Extract kwargs from name str."""
   err_msg = textwrap.dedent(f"""\
       Parsing builder name string {name_str} failed.
@@ -251,7 +252,7 @@ class DatasetReference:
 
   def dataset_dir(
       self,
-      data_dir: Optional[epath.PathLike] = None,
+      data_dir: epath.PathLike | None = None,
   ) -> epath.Path:
     """Returns the path where the data of this dataset lives.
 
@@ -286,8 +287,8 @@ class DatasetReference:
   def from_tfds_name(
       cls,
       tfds_name: str,
-      split_mapping: Optional[Mapping[str, str]] = None,
-      data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
+      split_mapping: Mapping[str, str] | None = None,
+      data_dir: str | os.PathLike | None = None,  # pylint: disable=g-bare-generic
   ) -> DatasetReference:
     """Returns the `DatasetReference` for the given TFDS dataset."""
     parsed_name, builder_kwargs = parse_builder_name_kwargs(tfds_name)
@@ -392,7 +393,7 @@ def _strip_encoding_suffix(path: str) -> str:
   return path[: path.rfind('%')]
 
 
-def _num_digits_needed(num_shards: Optional[int]) -> int:
+def _num_digits_needed(num_shards: int | None) -> int:
   return max(len(str(num_shards or 0)), _DEFAULT_NUM_DIGITS_FOR_SHARDS)
 
 
@@ -447,6 +448,13 @@ def _filename_template_to_regex(filename_template: str) -> str:
   return result
 
 
+def _regex_for_template(template: str) -> re.Pattern[str]:
+  """Returns the regular expression for the given template."""
+  # Strip the encoding suffix since it is only used for read/write operations.
+  template = _strip_encoding_suffix(template)
+  return re.compile(_filename_template_to_regex(template))
+
+
 @dataclasses.dataclass()
 class ShardedFileTemplate:
   """Template to produce filenames for sharded datasets.
@@ -463,9 +471,9 @@ class ShardedFileTemplate:
 
   data_dir: epath.Path
   template: str = DEFAULT_FILENAME_TEMPLATE
-  dataset_name: Optional[str] = None
-  split: Optional[str] = None
-  filetype_suffix: Optional[str] = None
+  dataset_name: str | None = None
+  split: str | None = None
+  filetype_suffix: str | None = None
 
   def __post_init__(self):
     self.data_dir = epath.Path(self.data_dir)
@@ -484,16 +492,14 @@ class ShardedFileTemplate:
       self.template = DEFAULT_FILENAME_TEMPLATE
 
   @functools.cached_property
-  def regex(self) -> 're.Pattern[str]':
+  def regex(self) -> re.Pattern[str]:
     """Returns the regular expression for this template.
 
     Can be used to test whether a filename matches to this template.
     """
-    # Strip the encoding suffix since it is only used for read/write operations.
-    template = _strip_encoding_suffix(self.template)
-    return re.compile(_filename_template_to_regex(template))
+    return _regex_for_template(self.template)
 
-  def parse_filename_info(self, filename: str) -> Optional[FilenameInfo]:
+  def parse_filename_info(self, filename: str) -> FilenameInfo | None:
     """Parses the filename using this template.
 
     Note that when the filename doesn't specify the dataset name, split, or
@@ -507,20 +513,26 @@ class ShardedFileTemplate:
       the FilenameInfo corresponding to the given file if it could be parsed.
       None otherwise.
     """
-    match = self.regex.fullmatch(filename)
-    if not match:
+
+    def filename_info_from_match(match: re.Match[str]) -> FilenameInfo:
+      groupdict = match.groupdict()
+      shard_index = groupdict.get('shard_index')
+      num_shards = groupdict.get('num_shards')
+      return FilenameInfo(
+          dataset_name=groupdict.get('dataset_name', self.dataset_name),
+          split=groupdict.get('split', self.split),
+          filetype_suffix=groupdict.get(
+              'filetype_suffix', self.filetype_suffix
+          ),
+          shard_index=int(shard_index) if shard_index is not None else None,
+          num_shards=int(num_shards) if num_shards is not None else None,
+          filename_template=self,
+      )
+
+    if match := self.regex.fullmatch(filename):
+      return filename_info_from_match(match)
+    else:
       return None
-    groupdict = match.groupdict()
-    shard_index = groupdict.get('shard_index')
-    num_shards = groupdict.get('num_shards')
-    return FilenameInfo(
-        dataset_name=groupdict.get('dataset_name', self.dataset_name),
-        split=groupdict.get('split', self.split),
-        filetype_suffix=groupdict.get('filetype_suffix', self.filetype_suffix),
-        shard_index=int(shard_index) if shard_index is not None else None,
-        num_shards=int(num_shards) if num_shards is not None else None,
-        filename_template=self,
-    )
 
   def is_valid(self, filename: str) -> bool:
     """Returns whether the given filename follows this template."""
@@ -564,7 +576,7 @@ class ShardedFileTemplate:
       self,
       *,
       shard_index: int,
-      num_shards: Optional[int],
+      num_shards: int | None,
   ) -> str:
     """Returns the path (relative to the data dir) of the shard."""
     mappings = self._default_mappings()
@@ -590,7 +602,7 @@ class ShardedFileTemplate:
       self,
       *,
       shard_index: int,
-      num_shards: Optional[int],
+      num_shards: int | None,
   ) -> epath.Path:
     """Returns the filename (including full path if `data_dir` is set) for the given shard."""
     return self.data_dir / self.relative_filepath(
@@ -600,7 +612,7 @@ class ShardedFileTemplate:
   def sharded_filepaths(
       self,
       num_shards: int,
-  ) -> List[epath.Path]:
+  ) -> list[epath.Path]:
     return [
         self.sharded_filepath(shard_index=i, num_shards=num_shards)
         for i in range(num_shards)
@@ -617,7 +629,7 @@ class ShardedFileTemplate:
   def sharded_filepaths_pattern(
       self,
       *,
-      num_shards: Optional[int] = None,
+      num_shards: int | None = None,
   ) -> str:
     """Returns a pattern describing all the file paths captured by this template.
 
@@ -640,7 +652,7 @@ class ShardedFileTemplate:
       replacement = '*'
     return _replace_shard_pattern(os.fspath(a_filepath), replacement)
 
-  def sharded_filenames(self, num_shards: int) -> List[str]:
+  def sharded_filenames(self, num_shards: int) -> list[str]:
     return [path.name for path in self.sharded_filepaths(num_shards=num_shards)]
 
   def replace(self, **kwargs: Any) -> 'ShardedFileTemplate':
@@ -653,8 +665,8 @@ def filepattern_for_dataset_split(
     dataset_name: str,
     split: str,
     data_dir: str,
-    filetype_suffix: Optional[str] = None,
-    num_shards: Optional[int] = None,
+    filetype_suffix: str | None = None,
+    num_shards: int | None = None,
 ) -> str:
   """Returns the file pattern for the given dataset.
 
@@ -682,8 +694,8 @@ def filenames_for_dataset_split(
     split: str,
     num_shards: int,
     filetype_suffix: str,
-    data_dir: Optional[epath.PathLike] = None,
-) -> List[str]:
+    data_dir: epath.PathLike | None = None,
+) -> list[str]:
   """Returns the list of filenames for the given dataset and split."""
   # TODO(tfds): remove this by start using ShardedFileTemplate
   template = ShardedFileTemplate(
@@ -703,7 +715,7 @@ def filepaths_for_dataset_split(
     num_shards: int,
     data_dir: str,
     filetype_suffix: str,
-) -> List[str]:
+) -> list[str]:
   """File paths of a given dataset split."""
   # TODO(tfds): remove this by start using ShardedFileTemplate
   template = ShardedFileTemplate(
@@ -718,7 +730,7 @@ def filepaths_for_dataset_split(
 
 
 def _get_filename_template(
-    filename: str, filename_template: Optional[ShardedFileTemplate]
+    filename: str, filename_template: ShardedFileTemplate | None
 ) -> ShardedFileTemplate:
   if filename_template is None:
     return ShardedFileTemplate(data_dir=epath.Path(os.path.dirname(filename)))
@@ -738,12 +750,12 @@ class FilenameInfo:
     filename_template: the template to which this file conforms.
   """
 
-  dataset_name: Optional[str] = None
-  split: Optional[str] = None
-  filetype_suffix: Optional[str] = None
-  shard_index: Optional[int] = None
-  num_shards: Optional[int] = None
-  filename_template: Optional[ShardedFileTemplate] = None
+  dataset_name: str | None = None
+  split: str | None = None
+  filetype_suffix: str | None = None
+  shard_index: int | None = None
+  num_shards: int | None = None
+  filename_template: ShardedFileTemplate | None = None
 
   def full_filename_template(self):
     template = self.filename_template or ShardedFileTemplate(
@@ -763,7 +775,7 @@ class FilenameInfo:
   def from_str(
       cls,
       filename: str,
-      filename_template: Optional[ShardedFileTemplate] = None,
+      filename_template: ShardedFileTemplate | None = None,
   ) -> 'FilenameInfo':
     """Factory to create a `FilenameInfo` from filename."""
     filename_template = _get_filename_template(filename, filename_template)
@@ -780,7 +792,7 @@ class FilenameInfo:
   @staticmethod
   def is_valid(
       filename: str,
-      filename_template: Optional[ShardedFileTemplate] = None,
+      filename_template: ShardedFileTemplate | None = None,
   ) -> bool:
     """Returns True if the filename follow the given pattern."""
     filename_template = _get_filename_template(filename, filename_template)
