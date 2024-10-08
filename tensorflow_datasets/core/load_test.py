@@ -173,3 +173,13 @@ def test_data_source_raises_error_for_other_file_formats(file_format):
       load.data_source(
           'mydataset', builder_kwargs={'file_format': file_format}
       )
+
+
+# def test_1():
+#   ds_name, kwargs = naming.parse_builder_name_kwargs('ddddddd:value1:1.2.34')
+#   load.builder_cls()
+#   print(
+#       f'********************** ds_name:{ds_name}, kwargs:{kwargs},'
+#       f' ds_name.namespace:{ds_name.namespace}'
+#   )
+#   assert False
