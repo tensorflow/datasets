@@ -27,6 +27,28 @@ import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
 
 
+class TestBuilderProvider(tfds.core.DatasetBuilderProvider):
+  """Test Builder provider."""
+
+  def __init__(
+      self,
+      name: str,
+      dataset_builder_cls: type[tfds.core.registered.RegisteredDataset],
+  ):
+    self._builder_cls_cache = {name: dataset_builder_cls}
+    self._available_datasets = [name]
+
+  def has_dataset(self, name: str) -> bool:
+    return name in self._available_datasets
+
+  def get_builder_cls(
+      self, name: str
+  ) -> type[tfds.core.registered.RegisteredDataset]:
+    if not self.has_dataset(name):
+      raise ValueError(f"Dataset {name} is not available!")
+    return self._builder_cls_cache[name]
+
+
 class EmptyDatasetBuilder(registered.RegisteredDataset):
 
   def __init__(self, **kwargs):
@@ -238,6 +260,32 @@ class RegisteredTest(testing.TestCase):
     self.assertTrue(load.is_full_name("ds/config/1.0.2"))
     self.assertTrue(load.is_full_name("ds/1.0.2"))
     self.assertTrue(load.is_full_name("ds_with_number123/1.0.2"))
+
+  def test_add_dataset_provider_to_end(self):
+    """Adding same name dataset through dataset provider to the end of the list."""
+
+    class OriginalDataset(registered.RegisteredDataset):  # pylint: disable=unused-variable
+      pass
+
+    registered.add_dataset_builder_provider(
+        TestBuilderProvider("original_dataset", EmptyDatasetBuilder),
+        None,  # end of the list
+    )
+    builder_cls = registered.imported_builder_cls("original_dataset")
+    self.assertEqual(builder_cls, OriginalDataset)
+
+  def test_add_dataset_provider_to_start(self):
+    """Adding same name dataset through dataset provider to the start of the list."""
+
+    class MyDataset(registered.RegisteredDataset):  # pylint: disable=unused-variable
+      pass
+
+    registered.add_dataset_builder_provider(
+        TestBuilderProvider("my_dataset", EmptyDatasetBuilder),
+        0,  # start of the list
+    )
+    builder_cls = registered.imported_builder_cls("my_dataset")
+    self.assertEqual(builder_cls, EmptyDatasetBuilder)
 
 
 def test_skip_regitration():
