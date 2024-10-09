@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.dataset_builder."""
-
 from collections.abc import Iterator, Mapping, Sequence
 import dataclasses
 import functools
@@ -353,28 +351,34 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       self.assertEqual(str(builder.info.version), "1.0.0")
-      builder_data_dir = os.path.join(tmp_dir, builder.name)
-      version_dir = os.path.join(builder_data_dir, "1.0.0")
+
+      builder_dir = file_utils.get_dataset_dir(
+          data_dir=tmp_dir, builder_name=builder.name
+      )
+      version_dir = builder_dir / "1.0.0"
 
       # The dataset folder contains multiple other versions
-      tf.io.gfile.makedirs(os.path.join(builder_data_dir, "14.0.0.invalid"))
-      tf.io.gfile.makedirs(os.path.join(builder_data_dir, "10.0.0"))
-      tf.io.gfile.makedirs(os.path.join(builder_data_dir, "9.0.0"))
-      tf.io.gfile.makedirs(os.path.join(builder_data_dir, "0.1.0"))
+      (builder_dir / "14.0.0.invalid").mkdir(parents=True, exist_ok=True)
+      (builder_dir / "10.0.0").mkdir(parents=True, exist_ok=True)
+      (builder_dir / "9.0.0").mkdir(parents=True, exist_ok=True)
+      (builder_dir / "0.1.0").mkdir(parents=True, exist_ok=True)
 
       # The builder's version dir is chosen
-      self.assertEqual(builder._build_data_dir(tmp_dir)[1], version_dir)
+      self.assertEqual(builder.data_path, version_dir)
 
   def test_get_data_dir_with_config(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       config_name = "plus1"
       builder = DummyDatasetWithConfigs(config=config_name, data_dir=tmp_dir)
 
-      builder_data_dir = os.path.join(tmp_dir, builder.name, config_name)
-      version_data_dir = os.path.join(builder_data_dir, "0.0.1")
+      version_dir = file_utils.get_dataset_dir(
+          data_dir=tmp_dir,
+          builder_name=builder.name,
+          config_name=config_name,
+          version="0.0.1",
+      )
 
-      tf.io.gfile.makedirs(version_data_dir)
-      self.assertEqual(builder._build_data_dir(tmp_dir)[1], version_data_dir)
+      self.assertEqual(builder.data_path, version_dir)
 
   def test_config_construction(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
@@ -775,12 +779,11 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
   def setUpClass(cls):
     super(DatasetBuilderMultiDirTest, cls).setUpClass()
     cls.builder = DummyDatasetSharedGenerator()
-    cls.version_dir = os.path.normpath(cls.builder.info.full_name)
 
   def setUp(self):
     super(DatasetBuilderMultiDirTest, self).setUp()
     # Sanity check to make sure that no dir is registered
-    self.assertEmpty(file_utils._registered_data_dir)
+    file_utils.clear_registered_data_dirs()
     # Create a new temp dir
     self.other_data_dir = os.path.join(self.get_temp_dir(), "other_dir")
     # Overwrite the default data_dir (as files get created)
@@ -800,102 +803,6 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
       tf.io.gfile.rmtree(self.default_data_dir)
     # Restore the orgininal data dir
     constants.DATA_DIR = self._original_data_dir
-
-  def assertBuildDataDir(self, build_data_dir_out, root_dir):
-    data_dir_root, data_dir = build_data_dir_out
-    self.assertEqual(data_dir_root, root_dir)
-    self.assertEqual(data_dir, os.path.join(root_dir, self.version_dir))
-
-  def test_default(self):
-    # No data_dir is passed
-    # -> use default path is used.
-    self.assertBuildDataDir(
-        self.builder._build_data_dir(None), self.default_data_dir
-    )
-
-  def test_explicitly_passed(self):
-    # When a dir is explicitly passed, use it.
-    self.assertBuildDataDir(
-        self.builder._build_data_dir(self.other_data_dir), self.other_data_dir
-    )
-
-  def test_default_multi_dir(self):
-    # No data_dir is passed
-    # Multiple data_dirs are registered
-    # -> use default path
-    file_utils.add_data_dir(self.other_data_dir)
-    self.assertBuildDataDir(
-        self.builder._build_data_dir(None), self.default_data_dir
-    )
-
-  def test_default_multi_dir_old_version_exists(self):
-    # No data_dir is passed
-    # Multiple data_dirs are registered
-    # Data dir contains old versions
-    # -> use default path
-    file_utils.add_data_dir(self.other_data_dir)
-    tf.io.gfile.makedirs(
-        os.path.join(
-            self.other_data_dir, "dummy_dataset_shared_generator", "0.1.0"
-        )
-    )
-    tf.io.gfile.makedirs(
-        os.path.join(
-            self.other_data_dir, "dummy_dataset_shared_generator", "0.2.0"
-        )
-    )
-    self.assertBuildDataDir(
-        self.builder._build_data_dir(None), self.default_data_dir
-    )
-
-  def test_default_multi_dir_version_exists(self):
-    # No data_dir is passed
-    # Multiple data_dirs are registered
-    # Data found
-    # -> Re-load existing data
-    file_utils.add_data_dir(self.other_data_dir)
-    tf.io.gfile.makedirs(
-        os.path.join(
-            self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"
-        )
-    )
-    self.assertBuildDataDir(
-        self.builder._build_data_dir(None), self.other_data_dir
-    )
-
-  def test_default_multi_dir_duplicate(self):
-    # If two data dirs contains the dataset, raise an error...
-    file_utils.add_data_dir(self.other_data_dir)
-    tf.io.gfile.makedirs(
-        os.path.join(
-            self.default_data_dir, "dummy_dataset_shared_generator", "1.0.0"
-        )
-    )
-    tf.io.gfile.makedirs(
-        os.path.join(
-            self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"
-        )
-    )
-    with self.assertRaisesRegex(ValueError, "found in more than one directory"):
-      self.builder._build_data_dir(None)
-
-  def test_explicit_multi_dir(self):
-    # If two data dirs contains the same version
-    # Data dir is explicitly passed
-    file_utils.add_data_dir(self.other_data_dir)
-    tf.io.gfile.makedirs(
-        os.path.join(
-            self.default_data_dir, "dummy_dataset_shared_generator", "1.0.0"
-        )
-    )
-    tf.io.gfile.makedirs(
-        os.path.join(
-            self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"
-        )
-    )
-    self.assertBuildDataDir(
-        self.builder._build_data_dir(self.other_data_dir), self.other_data_dir
-    )
 
   def test_load_data_dir(self):
     """Ensure that `tfds.load` also supports multiple data_dir."""

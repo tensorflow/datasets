@@ -29,11 +29,128 @@ from tensorflow_datasets.core.utils import read_config
 _DATA_DIR = epath.Path('/a')
 _DATASET_NAME = 'my_ds'
 _DATASET_DIR = _DATA_DIR / _DATASET_NAME
+_VERSION = '1.0.0'
 
 
 def test_default_data_dir():
   data_dir = file_utils.get_default_data_dir(given_data_dir=None)
   assert data_dir
+
+
+def _create_dataset_dir(
+    data_dir: epath.Path | None = None, version: str = _VERSION
+) -> epath.Path:
+  dataset_dir = file_utils.get_dataset_dir(
+      data_dir=data_dir,
+      builder_name=_DATASET_NAME,
+      config_name=None,
+      version=version,
+  )
+  dataset_dir.mkdir(parents=True, exist_ok=True)
+  return dataset_dir
+
+
+def _assert_data_dir(
+    given_data_dir: epath.Path | None, expected_data_dir: epath.Path
+) -> None:
+  data_dir, _ = file_utils.get_data_dir_and_dataset_dir(
+      given_data_dir=given_data_dir,
+      builder_name=_DATASET_NAME,
+      config_name=None,
+      version=_VERSION,
+  )
+  assert data_dir == expected_data_dir
+
+
+@pytest.fixture(name='default_data_dir')
+def mock_default_data_dir(monkeypatch, tmp_path):
+  """Sets the default data dir to a temp dir."""
+  default_data_dir = tmp_path / 'default_data_dir'
+  monkeypatch.setattr(constants, 'DATA_DIR', default_data_dir)
+  return default_data_dir
+
+
+@pytest.fixture(name='other_data_dir')
+def mock_other_data_dir(default_data_dir):
+  """Adds another data dir to the registered data dirs."""
+  other_data_dir = default_data_dir.parent / 'other_data_dir'
+  file_utils.add_data_dir(other_data_dir)
+  yield other_data_dir
+  file_utils.clear_registered_data_dirs()
+
+
+def test_get_data_dir(default_data_dir: epath.Path):
+  # No data_dir is passed
+  # -> use default data_dir
+  _assert_data_dir(given_data_dir=None, expected_data_dir=default_data_dir)
+
+
+def test_get_data_dir_multi_dir(
+    default_data_dir: epath.Path, other_data_dir: epath.Path
+):
+  del other_data_dir
+  # No data_dir is passed
+  # -> use default data_dir
+  _assert_data_dir(given_data_dir=None, expected_data_dir=default_data_dir)
+
+
+def test_get_data_dir_multi_dir_explicit(other_data_dir: epath.Path):
+  # data_dir is passed
+  # -> use data_dir
+  _assert_data_dir(
+      given_data_dir=other_data_dir, expected_data_dir=other_data_dir
+  )
+
+
+def test_get_data_dir_multi_dir_old_version_exists(
+    default_data_dir: epath.Path, other_data_dir: epath.Path
+):
+  # Other data dir contains old versions
+  _create_dataset_dir(data_dir=other_data_dir, version='0.1.0')
+  _create_dataset_dir(data_dir=other_data_dir, version='0.2.0')
+  _create_dataset_dir(data_dir=default_data_dir)
+  # No data_dir is passed
+  # -> use default data_dir
+  _assert_data_dir(given_data_dir=None, expected_data_dir=default_data_dir)
+
+
+def test_get_data_dir_multi_dir_version_exists(
+    other_data_dir: epath.Path,
+):
+  # Only one data dir contains the version
+  _create_dataset_dir(data_dir=other_data_dir)
+  # No data_dir is passed
+  # -> use existing data
+  _assert_data_dir(given_data_dir=None, expected_data_dir=other_data_dir)
+
+
+def test_get_data_dir_multi_dir_version_exists_explicit(
+    default_data_dir: epath.Path, other_data_dir: epath.Path
+):
+  # Two data dirs contain the version
+  _create_dataset_dir(data_dir=default_data_dir)
+  _create_dataset_dir(data_dir=other_data_dir)
+  # data_dir is passed
+  # -> use data_dir
+  _assert_data_dir(
+      given_data_dir=other_data_dir, expected_data_dir=other_data_dir
+  )
+
+
+def test_get_data_dir_multi_dir_version_exists_raises(
+    default_data_dir: epath.Path, other_data_dir: epath.Path
+):
+  # Two data dirs contain the version
+  _create_dataset_dir(data_dir=default_data_dir)
+  _create_dataset_dir(data_dir=other_data_dir)
+
+  with pytest.raises(ValueError, match='found in more than one directory'):
+    file_utils.get_data_dir_and_dataset_dir(
+        given_data_dir=None,
+        builder_name=_DATASET_NAME,
+        config_name=None,
+        version=_VERSION,
+    )
 
 
 def _add_dataset_info(mock_fs: testing.MockFs, dataset_dir: epath.Path) -> None:
@@ -48,7 +165,7 @@ def _add_features(
 
 def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
   configs_and_versions = {
-      'x': ['1.0.0', '1.0.1'],
+      'x': [_VERSION, '1.0.1'],
       'y': ['2.0.0'],
   }
   info_filenames = {
@@ -72,7 +189,7 @@ def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
       naming.DatasetReference(
           dataset_name=_DATASET_NAME,
           config='x',
-          version='1.0.0',
+          version=_VERSION,
           data_dir=_DATA_DIR,
           info_filenames=info_filenames,
       ),
@@ -97,7 +214,7 @@ def test_list_dataset_variants_with_configs_no_versions(
     mock_fs: testing.MockFs,
 ):
   configs_and_versions = {
-      'x': ['1.0.0', '1.0.1'],
+      'x': [_VERSION, '1.0.1'],
       'y': ['2.0.0'],
   }
   info_filenames = {
@@ -133,7 +250,7 @@ def test_list_dataset_variants_with_configs_no_versions(
 def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   # Version 1.0.0 doesn't have features.json, because it was generated with an
   # old version of TFDS.
-  _add_dataset_info(mock_fs, _DATASET_DIR / '1.0.0')
+  _add_dataset_info(mock_fs, _DATASET_DIR / _VERSION)
   _add_dataset_info(mock_fs, _DATASET_DIR / '1.0.1')
   _add_features(mock_fs, _DATASET_DIR / '1.0.1')
 
@@ -148,7 +265,7 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   assert references == [
       naming.DatasetReference(
           dataset_name=_DATASET_NAME,
-          version='1.0.0',
+          version=_VERSION,
           data_dir=_DATA_DIR,
           info_filenames={constants.DATASET_INFO_FILENAME},
       ),
@@ -185,15 +302,15 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
 
 
 def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
-  _add_dataset_info(mock_fs, _DATA_DIR / 'ds1' / 'config1' / '1.0.0')
-  _add_features(mock_fs, _DATA_DIR / 'ds1' / 'config1' / '1.0.0')
+  _add_dataset_info(mock_fs, _DATA_DIR / 'ds1' / 'config1' / _VERSION)
+  _add_features(mock_fs, _DATA_DIR / 'ds1' / 'config1' / _VERSION)
   _add_dataset_info(mock_fs, _DATA_DIR / 'ds1' / 'config1' / '2.0.0')
   _add_features(mock_fs, _DATA_DIR / 'ds1' / 'config1' / '2.0.0')
-  _add_dataset_info(mock_fs, _DATA_DIR / 'ds1' / 'config2' / '1.0.0')
-  _add_features(mock_fs, _DATA_DIR / 'ds1' / 'config2' / '1.0.0')
+  _add_dataset_info(mock_fs, _DATA_DIR / 'ds1' / 'config2' / _VERSION)
+  _add_features(mock_fs, _DATA_DIR / 'ds1' / 'config2' / _VERSION)
 
-  _add_dataset_info(mock_fs, _DATA_DIR / 'ds2' / '1.0.0')
-  _add_features(mock_fs, _DATA_DIR / 'ds2' / '1.0.0')
+  _add_dataset_info(mock_fs, _DATA_DIR / 'ds2' / _VERSION)
+  _add_features(mock_fs, _DATA_DIR / 'ds2' / _VERSION)
 
   info_filenames = {
       constants.DATASET_INFO_FILENAME,
@@ -201,7 +318,7 @@ def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
   }
 
   # The following are problematic and should thus be ignored.
-  _add_features(mock_fs, _DATA_DIR / 'invalid-name' / '1.0.0', content='x')
+  _add_features(mock_fs, _DATA_DIR / 'invalid-name' / _VERSION, content='x')
   _add_features(mock_fs, _DATA_DIR / 'invalid_version1' / '1.a.b', content='x')
   _add_features(
       mock_fs, _DATA_DIR / 'invalid_version2' / '1.2.3.4', content='x'
@@ -212,7 +329,7 @@ def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
       naming.DatasetReference(
           dataset_name='ds1',
           config='config1',
-          version='1.0.0',
+          version=_VERSION,
           data_dir=_DATA_DIR,
           info_filenames=info_filenames,
       ),
@@ -226,13 +343,13 @@ def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
       naming.DatasetReference(
           dataset_name='ds1',
           config='config2',
-          version='1.0.0',
+          version=_VERSION,
           data_dir=_DATA_DIR,
           info_filenames=info_filenames,
       ),
       naming.DatasetReference(
           dataset_name='ds2',
-          version='1.0.0',
+          version=_VERSION,
           data_dir=_DATA_DIR,
           info_filenames=info_filenames,
       ),
@@ -241,8 +358,8 @@ def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
 
 def test_list_datasets_in_data_dir_with_namespace(mock_fs: testing.MockFs):
   namespace = 'ns'
-  _add_dataset_info(mock_fs, _DATASET_DIR / 'config1' / '1.0.0')
-  _add_features(mock_fs, _DATASET_DIR / 'config1' / '1.0.0')
+  _add_dataset_info(mock_fs, _DATASET_DIR / 'config1' / _VERSION)
+  _add_features(mock_fs, _DATASET_DIR / 'config1' / _VERSION)
 
   references = sorted(
       file_utils.list_datasets_in_data_dir(
@@ -258,7 +375,7 @@ def test_list_datasets_in_data_dir_with_namespace(mock_fs: testing.MockFs):
           dataset_name=_DATASET_NAME,
           namespace=namespace,
           config='config1',
-          version='1.0.0',
+          version=_VERSION,
           data_dir=_DATA_DIR,
           info_filenames={
               constants.DATASET_INFO_FILENAME,
