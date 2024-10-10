@@ -668,6 +668,10 @@ class DatasetInfo(object):
           self.redistribution_info.license
       )
 
+    self.write_dataset_info_json(dataset_info_dir)
+
+  def write_dataset_info_json(self, dataset_info_dir: epath.PathLike) -> None:
+    """Writes only the dataset_info.json file to the given directory."""
     dataset_info_path(dataset_info_dir).write_text(self.as_json)
 
   def read_from_directory(self, dataset_info_dir: epath.PathLike) -> None:

@@ -178,7 +178,7 @@ def convert_metadata(
     # Add the file format to `alternative_file_formats` field.
     if out_file_format not in info.alternative_file_formats:
       info.add_alternative_file_format(out_file_format.value)
-      info.write_to_directory(out_path)
+      info.write_dataset_info_json(out_path)
     else:
       logging.info(
           'File format %s is already an alternative file format of the dataset'
