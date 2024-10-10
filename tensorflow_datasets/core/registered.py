@@ -371,10 +371,16 @@ class SourceDirDatasetBuilderProvider(DatasetBuilderProvider):
     return cls
 
 
-_DATASET_PROVIDER_REGISTRY: list[DatasetBuilderProvider] = [
-    SourceDirDatasetBuilderProvider(constants.DATASETS_TFDS_SRC_DIR),
-    LegacyDatasetBuilderProvider(),
-]
+def _get_inital_providers() -> list[DatasetBuilderProvider]:
+  return [
+      SourceDirDatasetBuilderProvider(constants.DATASETS_TFDS_SRC_DIR),
+      LegacyDatasetBuilderProvider(),
+  ]
+
+
+_DATASET_PROVIDER_REGISTRY: list[DatasetBuilderProvider] = (
+    _get_inital_providers()
+)
 
 
 def add_dataset_builder_provider(
@@ -392,6 +398,12 @@ def add_dataset_builder_provider(
     _DATASET_PROVIDER_REGISTRY.insert(index, provider)
   else:
     _DATASET_PROVIDER_REGISTRY.append(provider)
+
+
+def reset_dataset_builder_providers() -> None:
+  """Resets the list of dataset builder providers to remove added providers."""
+  global _DATASET_PROVIDER_REGISTRY
+  _DATASET_PROVIDER_REGISTRY = _get_inital_providers()
 
 
 def _is_builder_available(builder_cls: Type[RegisteredDataset]) -> bool:

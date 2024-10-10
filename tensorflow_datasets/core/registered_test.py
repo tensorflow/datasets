@@ -287,6 +287,28 @@ class RegisteredTest(testing.TestCase):
     builder_cls = registered.imported_builder_cls("my_dataset")
     self.assertEqual(builder_cls, EmptyDatasetBuilder)
 
+  def test_reset_dataset_builder_providers(self):
+    """Resetting dataset builder providers."""
+
+    class MyRegisteredDataset(registered.RegisteredDataset):  # pylint: disable=unused-variable
+      pass
+
+    registered.add_dataset_builder_provider(
+        TestBuilderProvider("my_registered_dataset", EmptyDatasetBuilder),
+        0,  # start of the list
+    )
+    builder_cls = registered.imported_builder_cls("my_registered_dataset")
+    self.assertEqual(builder_cls, EmptyDatasetBuilder)
+
+    registered.reset_dataset_builder_providers()
+
+    registered.add_dataset_builder_provider(
+        TestBuilderProvider("my_registered_dataset", EmptyDatasetBuilder),
+        None,  # end of the list
+    )
+    builder_cls = registered.imported_builder_cls("my_registered_dataset")
+    self.assertEqual(builder_cls, MyRegisteredDataset)
+
 
 def test_skip_regitration():
   """Test `skip_registration()`."""
