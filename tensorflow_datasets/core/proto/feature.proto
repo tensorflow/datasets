@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package tensorflow_datasets;
 
-option cc_enable_arenas = true;
-
 // Dictionary of features.
 message FeaturesDict {
   // Mapping between feature name and features.
@@ -65,6 +63,7 @@ message ClassLabel {
 message ImageFeature {
   Shape shape = 1;
   string dtype = 2;
+
   // Encoding of the image.
   string encoding_format = 3;
   bool use_colormap = 4;
@@ -75,15 +74,19 @@ message VideoFeature {
   // The shape of the video (num_frames, height, width, channels), where
   // channels is 1 or 3
   Shape shape = 1;
+
   // tf.uint16 or tf.uint8 (default). tf.uint16 can be used only with png
   // encoding_format
   string dtype = 2;
+
   // The video is stored as a sequence of encoded images. You can use any
   // encoding format supported by image_feature.Feature.
   string encoding_format = 3;
+
   // Forwarded to `tfds.features.Image`. If `True`, `tfds.as_dataframe` will
   // display each value in the image with a different color.
   bool use_colormap = 4;
+
   // A sequence of additional args to be passed to the ffmpeg binary.
   // Specifically, ffmpeg will be called as: `` ffmpeg -i <input_file>
   // <ffmpeg_extra_args> %010d.<encoding_format> ``
@@ -93,9 +96,11 @@ message VideoFeature {
 message AudioFeature {
   Shape shape = 1;
   string dtype = 2;
+
   // The audio file format. Can be any format ffmpeg understands. If
   // unspecified, it will attempt to infer from the file extension.
   string file_format = 3;
+
   // Additional metadata about the sample rate that was used to record this
   // audio. This value isn't used neither in encoding nor decoding.
   int64 sample_rate = 4;
@@ -116,6 +121,7 @@ message TextFeature {}
 message TranslationFeature {
   // Full list of languages for which there are translations.
   repeated string languages = 1;
+
   // Whether there's a variable or static list of languages per example.
   bool variable_languages_per_example = 2;
 }
