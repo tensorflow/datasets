@@ -1982,15 +1982,6 @@ def _save_default_config_name(
     tmp_config_path.write_text(json.dumps(data))
 
 
-def load_default_config_name(builder_dir: epath.Path) -> str | None:
-  """Load `builder_cls` metadata (common to all builder configs)."""
-  config_path = builder_dir / ".config" / constants.METADATA_FILENAME
-  if not config_path.exists():
-    return None
-  data = json.loads(config_path.read_text())
-  return data.get("default_config_name")
-
-
 def canonical_version_for_config(
     instance_or_cls: Union[DatasetBuilder, Type[DatasetBuilder]],
     config: Optional[BuilderConfig] = None,
