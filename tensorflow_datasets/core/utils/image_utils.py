@@ -20,6 +20,7 @@ Note: these functions are not meant to be used inside of a TF graph.
 from __future__ import annotations
 
 import csv
+import functools
 import subprocess
 from typing import Any, List, Optional
 
@@ -32,6 +33,21 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 PilImage = Any  # Require lazy deps.
 THUMBNAIL_SIZE = 128
+
+
+@functools.cache
+def _allow_pil_to_load_truncated_images():
+  """Allows truncated images.
+
+  The function is cached to be called only once. Activating this flag solves
+  issues where the image cannot be converted to RGB.
+  """
+  try:
+    from PIL import ImageFile  # pylint: disable=g-import-not-at-top
+
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
+  except ImportError:
+    pass
 
 
 @py_utils.memoize()
@@ -148,6 +164,7 @@ def _postprocess_noop(img: PilImage) -> PilImage:
 
 
 def _postprocess_convert_rgb(img: PilImage) -> PilImage:
+  _allow_pil_to_load_truncated_images()
   return img.convert('RGB')
 
 
