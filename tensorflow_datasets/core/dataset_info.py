@@ -40,7 +40,7 @@ import os
 import posixpath
 import tempfile
 import time
-from typing import Any, Optional
+from typing import Any
 
 from absl import logging
 from etils import epath
@@ -66,8 +66,7 @@ with epy.lazy_imports():
   # pylint: enable=g-import-not-at-top
 
 
-# TODO(b/109648354): Remove the "pytype: disable" comment.
-Nest = tuple["Nest", ...] | dict[str, "Nest"] | str  # pytype: disable=not-supported-yet
+Nest = tuple["Nest", ...] | dict[str, "Nest"] | str
 SupervisedKeysType = tuple[Nest, Nest] | tuple[Nest, Nest, Nest]
 
 
@@ -104,7 +103,7 @@ class Metadata(dict, metaclass=abc.ABCMeta):
     raise NotImplementedError()
 
 
-@dataclasses.dataclass()
+@dataclasses.dataclass
 class DatasetIdentity:
   """Identity of a dataset that completely identifies a dataset."""
 
@@ -167,7 +166,7 @@ class DatasetIdentity:
     )
 
 
-class DatasetInfo(object):
+class DatasetInfo:
   """Information about a dataset.
 
   `DatasetInfo` documents datasets, including its name, version, and features.
@@ -185,15 +184,15 @@ class DatasetInfo(object):
       *,
       builder: DatasetIdentity | Any,
       description: str | None = None,
-      features: Optional[feature_lib.FeatureConnector] = None,
-      supervised_keys: Optional[SupervisedKeysType] = None,
+      features: feature_lib.FeatureConnector | None = None,
+      supervised_keys: SupervisedKeysType | None = None,
       disable_shuffling: bool = False,
       homepage: str | None = None,
       citation: str | None = None,
       metadata: Metadata | None = None,
       license: str | None = None,  # pylint: disable=redefined-builtin
-      redistribution_info: Optional[dict[str, str]] = None,
-      split_dict: Optional[splits_lib.SplitDict] = None,
+      redistribution_info: dict[str, str] | None = None,
+      split_dict: splits_lib.SplitDict | None = None,
       alternative_file_formats: (
           Sequence[str | file_adapters.FileFormat] | None
       ) = None,
@@ -403,7 +402,7 @@ class DatasetInfo(object):
     return self.as_proto.disable_shuffling
 
   @property
-  def homepage(self):
+  def homepage(self) -> str:
     urls = self.as_proto.location.urls
     tfds_homepage = f"https://www.tensorflow.org/datasets/catalog/{self.name}"
     return urls and urls[0] or tfds_homepage
@@ -413,7 +412,7 @@ class DatasetInfo(object):
     return self.as_proto.citation
 
   @property
-  def data_dir(self):
+  def data_dir(self) -> str:
     return self._identity.data_dir
 
   @property
@@ -431,7 +430,7 @@ class DatasetInfo(object):
     )
 
   @download_size.setter
-  def download_size(self, size):
+  def download_size(self, size: int):
     self.as_proto.download_size = size
 
   @property
@@ -439,7 +438,7 @@ class DatasetInfo(object):
     return self._features
 
   @property
-  def alternative_file_formats(self) -> Sequence[file_adapters.FileFormat]:
+  def alternative_file_formats(self) -> list[file_adapters.FileFormat]:
     return self._alternative_file_formats
 
   @property
@@ -454,7 +453,7 @@ class DatasetInfo(object):
     self._is_blocked = is_blocked
 
   @property
-  def supervised_keys(self) -> Optional[SupervisedKeysType]:
+  def supervised_keys(self) -> SupervisedKeysType | None:
     if not self.as_proto.HasField("supervised_keys"):
       return None
     supervised_keys = self.as_proto.supervised_keys
@@ -576,8 +575,8 @@ class DatasetInfo(object):
     # into the new split_dict. Also add the filename template if it's not set.
     new_split_infos = []
     incomplete_filename_template = naming.ShardedFileTemplate(
+        data_dir=epath.Path(self.data_dir),
         dataset_name=self.name,
-        data_dir=self.data_dir,
         filetype_suffix=(
             self.as_proto.file_format or file_adapters.DEFAULT_FILE_FORMAT.value
         ),
@@ -728,22 +727,20 @@ class DatasetInfo(object):
 
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
-      self.features.load_metadata(dataset_info_dir)  # pytype: disable=missing-parameter  # always-use-property-annotation
+      self.features.load_metadata(dataset_info_dir, feature_name=None)
     # For `ReadOnlyBuilder`, reconstruct the features from the config.
     elif feature_lib.make_config_path(dataset_info_dir).exists():
-      self._features = feature_lib.FeatureConnector.from_config(
+      self._features = top_level_feature.TopLevelFeature.from_config(
           dataset_info_dir
       )
+
+    # If the dataset was loaded from file, self.metadata will be `None`, so
+    # we create a MetadataDict first.
+    if not self._metadata:
+      self._metadata = MetadataDict()
     # Restore the MetaDataDict from metadata.json if there is any
-    if (
-        self.metadata is not None
-        or _metadata_filepath(dataset_info_dir).exists()
-    ):
-      # If the dataset was loaded from file, self.metadata will be `None`, so
-      # we create a MetadataDict first.
-      if self.metadata is None:
-        self._metadata = MetadataDict()
-      self.metadata.load_metadata(dataset_info_dir)  # pytype: disable=attribute-error  # always-use-property-annotation
+    if _metadata_filepath(dataset_info_dir).exists():
+      self._metadata.load_metadata(dataset_info_dir)
 
     # Update fields which are not defined in the code. This means that
     # the code will overwrite fields which are present in
@@ -1215,7 +1212,7 @@ def pack_as_supervised_ds(
       and isinstance(ds.element_spec, tuple)
       and len(ds.element_spec) == 2
   ):
-    x_key, y_key = ds_info.supervised_keys  # pytype: disable=bad-unpacking  # always-use-property-annotation
+    x_key, y_key = ds_info.supervised_keys  # pytype: disable=bad-unpacking
     ds = ds.map(lambda x, y: {x_key: x, y_key: y})
     return ds
   else:  # If dataset isn't a supervised tuple (input, label), return as-is

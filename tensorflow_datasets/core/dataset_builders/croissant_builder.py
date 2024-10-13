@@ -238,7 +238,7 @@ class CroissantBuilder(
         disable_shuffling=self._disable_shuffling,
     )
 
-  def get_features(self) -> Optional[feature_lib.FeatureConnector]:
+  def get_features(self) -> features_dict.FeaturesDict:
     """Infers the features dict for the required record set."""
     record_set = croissant_utils.get_record_set(
         self.builder_config.name, metadata=self.metadata
