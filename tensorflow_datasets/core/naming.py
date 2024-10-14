@@ -26,7 +26,6 @@ import textwrap
 from typing import Any
 
 from etils import epath
-from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
 _NAME_CLASS = r'[a-zA-Z][\w]*'
@@ -185,8 +184,9 @@ def _dataset_name_and_kwargs_from_name_str(
         raise ValueError('Dataset %s: cannot pass %s twice.' % (name, attr))
       kwargs[attr] = val
     return name, kwargs
-  except Exception as e:  # pylint: disable=broad-except
-    py_utils.reraise(e, prefix=err_msg)  # pytype: disable=bad-return-type
+  except Exception as e:
+    e.add_note(err_msg)
+    raise e
 
 
 @dataclasses.dataclass(order=True)

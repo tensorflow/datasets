@@ -24,7 +24,6 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import file_utils
-from tensorflow_datasets.core.utils import read_config
 
 _DATA_DIR = epath.Path('/a')
 _DATASET_NAME = 'my_ds'
