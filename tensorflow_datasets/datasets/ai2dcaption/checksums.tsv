@@ -1,0 +1,6 @@
+http://ai2-website.s3.amazonaws.com/data/ai2d-all.zip	990965374	1a6b77eebb8b7dbdf76a0ba6ca76c2f97ce8f81d8ee33b06593aa722e54c4786	ai2d-all.zip
+https://huggingface.co/datasets/abhayzala/AI2D-Caption/resolve/main/ai2d_caption_auditor_llm_training_examples.json?download=true	77845	3af7ef3f3c9e48183b78c521541ac7097156dc80421a2ee21935c95d76c6221e	ai2d_caption_auditor_llm_training_examples.json
+https://huggingface.co/datasets/abhayzala/AI2D-Caption/resolve/main/ai2d_caption_gpt4v.json?download=true	29115582	10aac517f432f384dad6552a88e660ef5966ade75d1550581cc0ad3985d20b43	ai2d_caption_gpt4v.json
+https://huggingface.co/datasets/abhayzala/AI2D-Caption/resolve/main/ai2d_caption_llava_15.json?download=true	29925810	962c923b80bc4f62621ce5b3d572d3bd52d2daef3d68af0999a5ef01d8170a9f	ai2d_caption_llava_15.json
+https://huggingface.co/datasets/abhayzala/AI2D-Caption/resolve/main/ai2d_caption_planner_llm_training_examples.json?download=true	73533	43f1dd0e449f7bdf5c426ddefc8cb9f663757b22c77a4c305cba8c49a2c2ea8f	ai2d_caption_planner_llm_training_examples.json
+https://huggingface.co/datasets/abhayzala/AI2D-Caption/resolve/main/ai2d_caption_test.json?download=true	192643	54e279ba96177d78c4e9c4e8311c17272b94dc9c5ce5a1a1c701ad84e3a2db48	ai2d_caption_test.json
