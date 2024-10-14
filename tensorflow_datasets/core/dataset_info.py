@@ -734,12 +734,12 @@ class DatasetInfo:
           dataset_info_dir
       )
 
-    # If the dataset was loaded from file, self.metadata will be `None`, so
-    # we create a MetadataDict first.
-    if not self._metadata:
-      self._metadata = MetadataDict()
     # Restore the MetaDataDict from metadata.json if there is any
     if _metadata_filepath(dataset_info_dir).exists():
+      # If the dataset was loaded from file, self.metadata will be `None`, so
+      # we create a MetadataDict first.
+      if self._metadata is None:
+        self._metadata = MetadataDict()
       self._metadata.load_metadata(dataset_info_dir)
 
     # Update fields which are not defined in the code. This means that
