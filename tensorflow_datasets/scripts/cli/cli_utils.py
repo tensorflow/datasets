@@ -315,6 +315,8 @@ def download_and_prepare(
 
   if not download_config:
     download_config = download.DownloadConfig()
+  if overwrite and not download_config.download_mode.overwrite_dataset:
+    download_config.download_mode = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 
   # Add Apache Beam options to download config
   try:

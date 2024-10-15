@@ -76,7 +76,7 @@ def as_path(path: PathLike) -> Path:
       """
   )
   logging.warning(msg)
-  return epath.Path(path)
+  return Path(path)
 
 
 def add_data_dir(data_dir: PathLike) -> None:
@@ -94,7 +94,7 @@ def add_data_dir(data_dir: PathLike) -> None:
   Args:
     data_dir: New data_dir to register.
   """
-  _REGISTERED_DATA_DIRS.add(epath.Path(data_dir))
+  _REGISTERED_DATA_DIRS.add(Path(data_dir))
 
 
 def clear_registered_data_dirs() -> None:
@@ -107,21 +107,25 @@ def _get_incomplete_dir(dir_name: str) -> str:
   random_suffix = ''.join(
       random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
   )
-  dir_name = epath.Path(dir_name)
+  dir_name = Path(dir_name)
   return f'{dir_name.parent}/{constants.INCOMPLETE_PREFIX}{random_suffix}_{dir_name.name}/'
 
 
 @contextlib.contextmanager
 def incomplete_dir(
-    dirname: epath.PathLike, permissions: Permissions | None = None
+    dirname: PathLike,
+    permissions: Permissions | None = None,
+    overwrite: bool = False,
 ) -> Iterator[str]:
   """Create temporary dir for dirname and rename on exit."""
   dirname = os.fspath(dirname)
   tmp_dir = _get_incomplete_dir(dirname)
-  tmp_path = epath.Path(tmp_dir)
+  tmp_path = Path(tmp_dir)
   tmp_path.mkdir(parents=True, exist_ok=True)
   try:
     yield tmp_dir
+    if overwrite:
+      Path(dirname).rmtree(missing_ok=True)
     tmp_path.rename(dirname)
   finally:
     if tmp_path.exists():

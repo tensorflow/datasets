@@ -627,15 +627,16 @@ class DatasetBuilder(registered.RegisteredDataset):
       self._update_dataset_info()
       return
 
-    if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
-      logging.info("Reusing dataset %s (%s)", self.name, self.data_dir)
-      return
-    elif data_exists and download_config.download_mode == REUSE_CACHE_IF_EXISTS:
-      logging.info(
-          "Deleting pre-existing dataset %s (%s)", self.name, self.data_dir
-      )
-      data_path.rmtree()  # Delete pre-existing data.
-      data_exists = data_path.exists()
+    if data_exists:
+      if download_config.download_mode.overwrite_dataset:
+        logging.info(
+            "Deleting pre-existing dataset %s (%s)", self.name, self.data_dir
+        )
+        data_path.rmtree()  # Delete pre-existing data.
+        data_exists = data_path.exists()
+      else:
+        logging.info("Reusing dataset %s (%s)", self.name, self.data_dir)
+        return
 
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(
@@ -734,7 +735,9 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     # Create a tmp dir and rename to self.data_dir on successful exit.
     with utils.incomplete_dir(
-        dirname=self.data_dir, permissions=permissions
+        dirname=self.data_dir,
+        permissions=permissions,
+        overwrite=download_config.download_mode.overwrite_dataset,
     ) as tmp_data_dir:
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
@@ -1297,8 +1300,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         manual_dir=manual_dir,
         url_infos=self.url_infos,
         manual_dir_instructions=self.MANUAL_DOWNLOAD_INSTRUCTIONS,
-        force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
-        force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
+        force_download=download_config.download_mode.force_download,
+        force_extraction=download_config.download_mode.force_download,
         force_checksums_validation=download_config.force_checksums_validation,
         register_checksums=download_config.register_checksums,
         register_checksums_path=register_checksums_path,

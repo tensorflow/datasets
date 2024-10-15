@@ -16,13 +16,14 @@
 """Utils functions."""
 
 import enum
+from etils import epy
 
 
 class DownloadError(Exception):
   pass
 
 
-class GenerateMode(enum.Enum):
+class GenerateMode(epy.StrEnum):
   """`Enum` for how to treat pre-existing downloads and data.
 
   The default mode is `REUSE_DATASET_IF_EXISTS`, which will reuse both
@@ -46,10 +47,21 @@ class GenerateMode(enum.Enum):
   UPDATE_DATASET_INFO will fail if the data has never been prepared.
   """
 
-  REUSE_DATASET_IF_EXISTS = 'reuse_dataset_if_exists'
-  UPDATE_DATASET_INFO = 'update_dataset_info'
-  REUSE_CACHE_IF_EXISTS = 'reuse_cache_if_exists'
-  FORCE_REDOWNLOAD = 'force_redownload'
+  REUSE_DATASET_IF_EXISTS = enum.auto()
+  UPDATE_DATASET_INFO = enum.auto()
+  REUSE_CACHE_IF_EXISTS = enum.auto()
+  FORCE_REDOWNLOAD = enum.auto()
+
+  @property
+  def force_download(self) -> bool:
+    return self == GenerateMode.FORCE_REDOWNLOAD
+
+  @property
+  def overwrite_dataset(self) -> bool:
+    return self in [
+        GenerateMode.REUSE_CACHE_IF_EXISTS,
+        GenerateMode.FORCE_REDOWNLOAD,
+    ]
 
 
 class ComputeStatsMode(enum.Enum):
