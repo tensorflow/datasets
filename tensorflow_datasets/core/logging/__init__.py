@@ -20,7 +20,7 @@ import atexit
 import collections
 import functools
 import threading
-from typing import Any, Callable, Dict, List, Optional, Tuple, TypeVar
+from typing import Any, Callable, TypeVar
 
 from absl import flags
 from absl import logging
@@ -34,15 +34,15 @@ _Decorator = Callable[[_T], _T]
 _LoggerMethod = Callable[..., None]
 
 
-_registered_loggers: Optional[List[base_logger.Logger]] = None
+_registered_loggers: list[base_logger.Logger] | None = None
 
-_import_operations: List[Tuple[call_metadata.CallMetadata, int, int]] = []
+_import_operations: list[tuple[call_metadata.CallMetadata, int, int]] = []
 _import_operations_lock = threading.Lock()
 
 _thread_id_to_builder_init_count = collections.Counter()
 
 
-def _init_registered_loggers() -> List[base_logger.Logger]:
+def _init_registered_loggers() -> list[base_logger.Logger]:
   """Initializes the registered loggers if they are not set yet."""
   global _registered_loggers
   if _registered_loggers is None:
@@ -65,7 +65,7 @@ def _log_import_operation():
     _import_operations.clear()
 
 
-def _get_registered_loggers() -> List[base_logger.Logger]:
+def _get_registered_loggers() -> list[base_logger.Logger]:
   _log_import_operation()
   return _init_registered_loggers()
 
@@ -188,7 +188,7 @@ class _DsbuilderMethodDecorator(_FunctionDecorator):
   IS_PROPERTY: bool = False
 
   @staticmethod
-  def _get_info(dsbuilder: Any) -> Tuple[str, str, str, str]:
+  def _get_info(dsbuilder: Any) -> tuple[str, str, str, str]:
     """Gets information about the builder.
 
     Args:

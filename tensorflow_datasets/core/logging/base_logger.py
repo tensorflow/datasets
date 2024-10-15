@@ -17,7 +17,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 from etils import epy
 
@@ -51,7 +51,7 @@ class Logger:
       metadata: call_metadata.CallMetadata,
       import_time_ms_tensorflow: int,
       import_time_ms_dataset_builders: int,
-  ):
+  ) -> None:
     """Callback called when user calls `import tensorflow_datasets`."""
     pass
 
@@ -60,11 +60,11 @@ class Logger:
       *,
       metadata: call_metadata.CallMetadata,
       name: str,
-      data_dir: Optional[str],
-      config: Optional[str],
-      version: Optional[str],
+      data_dir: str | None,
+      config: str | None,
+      version: str | None,
       is_read_only_builder: bool,
-  ):
+  ) -> None:
     """Callback called when user calls `DatasetBuilder(...)`."""
     pass
 
@@ -73,10 +73,10 @@ class Logger:
       *,
       metadata: call_metadata.CallMetadata,
       name: str,
-      config_name: Optional[str],
+      config_name: str | None,
       version: str,
       data_path: str,
-  ):
+  ) -> None:
     """Callback called when user calls `builder.info()`."""
     pass
 
@@ -85,16 +85,16 @@ class Logger:
       *,
       metadata: call_metadata.CallMetadata,
       name: str,
-      config_name: Optional[str],
+      config_name: str | None,
       version: str,
       data_path: str,
-      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
-      batch_size: Optional[int],
+      split: type_utils.Tree[splits_lib.SplitArg] | None,
+      batch_size: int | None,
       shuffle_files: bool,
       read_config: read_config_lib.ReadConfig,
       as_supervised: bool,
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
-  ):
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
+  ) -> None:
     """Callback called when user calls `dataset_builder.as_dataset`.
 
     Callback is also triggered by `tfds.load`, which calls `as_dataset`.
@@ -122,13 +122,13 @@ class Logger:
       *,
       metadata: call_metadata.CallMetadata,
       name: str,
-      config_name: Optional[str],
+      config_name: str | None,
       version: str,
       data_path: str,
-      download_dir: Optional[str],
-      download_config: Optional[download_lib.DownloadConfig],
-      file_format: Union[None, str, file_adapters.FileFormat],
-  ):
+      download_dir: str | None,
+      download_config: download_lib.DownloadConfig | None,
+      file_format: str | file_adapters.FileFormat | None,
+  ) -> None:
     """Callback called when user calls `dataset_builder.download_and_prepare`."""
     pass
 
@@ -141,8 +141,8 @@ class Logger:
       *,
       metadata: call_metadata.CallMetadata,
       name: str,
-      try_gcs: Optional[bool],
-  ):
+      try_gcs: bool | None,
+  ) -> None:
     """Callback called when user calls `tfds.builder(...)`."""
     pass
 
@@ -150,8 +150,8 @@ class Logger:
       self,
       metadata: call_metadata.CallMetadata,
       name: str,
-      loader_kwargs: Optional[Dict[str, Any]],
-  ):
+      loader_kwargs: dict[str, Any] | None,
+  ) -> None:
     """Callback called when user calls `tfds.dataset_collection(...)`."""
     pass
 
@@ -160,17 +160,17 @@ class Logger:
       *,
       metadata: call_metadata.CallMetadata,
       name: str,
-      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
-      data_dir: Optional[str],
-      batch_size: Optional[int],
-      shuffle_files: Optional[bool],
-      download: Optional[bool],
-      as_supervised: Optional[bool],
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
-      read_config: Optional[read_config_lib.ReadConfig],
-      with_info: Optional[bool],
-      try_gcs: Optional[bool],
-  ):
+      split: type_utils.Tree[splits_lib.SplitArg] | None,
+      data_dir: str | None,
+      batch_size: int | None,
+      shuffle_files: bool | None,
+      download: bool | None,
+      as_supervised: bool | None,
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
+      read_config: read_config_lib.ReadConfig | None,
+      with_info: bool | None,
+      try_gcs: bool | None,
+  ) -> None:
     """Callback called when user calls `tfds.load(...)`."""
     pass
 
@@ -178,8 +178,8 @@ class Logger:
       self,
       *,
       metadata: call_metadata.CallMetadata,
-      with_community_datasets: Optional[bool],
-  ):
+      with_community_datasets: bool | None,
+  ) -> None:
     """Callback called when user calls `tfds.list_builders(...)`."""
     pass
 
@@ -192,12 +192,12 @@ class Logger:
       *,
       metadata: call_metadata.CallMetadata,
       name: str,
-      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
-      data_dir: Optional[str],
-      download: Optional[bool],
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
-      try_gcs: Optional[bool],
-  ):
+      split: type_utils.Tree[splits_lib.SplitArg] | None,
+      data_dir: str | None,
+      download: bool | None,
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
+      try_gcs: bool | None,
+  ) -> None:
     """Callback called when user calls `tfds.data_source(...)`."""
     pass
 
@@ -206,11 +206,11 @@ class Logger:
       *,
       metadata: call_metadata.CallMetadata,
       name: str,
-      config_name: Optional[str],
+      config_name: str | None,
       version: str,
       data_path: str,
-      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
-  ):
+      split: type_utils.Tree[splits_lib.SplitArg] | None,
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
+  ) -> None:
     """Callback called when user calls `dataset_builder.as_data_source(...)`."""
     pass
