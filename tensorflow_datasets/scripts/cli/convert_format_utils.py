@@ -280,6 +280,48 @@ def _remove_incomplete_files(path: epath.Path) -> None:
   logging.info('Removed %d incomplete files.', num_incomplete_files)
 
 
+def _get_info_for_dirs_to_convert(
+    from_dir: epath.Path,
+    to_dir: epath.Path,
+    out_file_format: file_adapters.FileFormat,
+    overwrite: bool,
+) -> dataset_info.DatasetInfo | None:
+  """Returns the dataset info for the given dataset dirs."""
+  builder = read_only_builder_lib.builder_from_directory(from_dir)
+  if out_file_format == builder.info.file_format:
+    raise ValueError(
+        f'The file format of the dataset ({builder.info.file_format}) is the'
+        f' same as the specified out file format! ({out_file_format})'
+    )
+  if out_file_format in builder.info.alternative_file_formats:
+    if overwrite:
+      logging.warning(
+          'The file format to convert to (%s) is already an alternative file'
+          ' format. Overwriting the shards!',
+          out_file_format.value,
+      )
+      return builder.info
+    elif os.fspath(from_dir) == os.fspath(to_dir):
+      logging.info(
+          'The file format to convert to (%s) is already an alternative file'
+          ' format of the dataset in %s. Skipping conversion.',
+          os.fspath(from_dir),
+          out_file_format.value,
+      )
+      # TODO(weide) add check whether data files are actually present.
+      return None
+    else:
+      logging.warning(
+          'The file format to convert to (%s) is already an alternative file'
+          ' format, but the converted output is being written to a different'
+          ' folder, so the shards will be converted anyway. From: %s, to: %s',
+          out_file_format.value,
+          os.fspath(from_dir),
+          os.fspath(to_dir),
+      )
+      return builder.info
+
+
 def _convert_dataset_dirs(
     from_to_dirs: Mapping[epath.Path, epath.Path],
     out_file_format: file_adapters.FileFormat,
@@ -303,36 +345,16 @@ def _convert_dataset_dirs(
   logging.info('Converting %d datasets.', len(from_to_dirs))
 
   found_dataset_versions: dict[epath.Path, dataset_info.DatasetInfo] = {}
+  # TODO(weide) parallelize this, because it's slow for dirs with many datasets.
   for from_dir, to_dir in from_to_dirs.items():
-    builder = read_only_builder_lib.builder_from_directory(from_dir)
-    if out_file_format == builder.info.file_format:
-      raise ValueError(
-          f'The file format of the dataset ({builder.info.file_format}) is the'
-          f' same as the specified out file format! ({out_file_format})'
-      )
-    if out_file_format in builder.info.alternative_file_formats:
-      if overwrite:
-        logging.warning(
-            'The file format to convert to (%s) is already an alternative file'
-            ' format. Overwriting the shards!',
-            out_file_format.value,
-        )
-      elif from_dir == to_dir:
-        logging.info(
-            'The file format to convert to (%s) is already an alternative file'
-            ' format of the dataset in %s. Skipping conversion.',
-            os.fspath(from_dir),
-            out_file_format.value,
-        )
-        continue
-      else:
-        logging.warning(
-            'The file format to convert to (%s) is already an alternative file'
-            ' format, but the converted output is being written to a different'
-            ' folder, so the shards will be converted anyway.',
-            out_file_format.value,
-        )
-    found_dataset_versions[from_dir] = builder.info
+    info = _get_info_for_dirs_to_convert(
+        from_dir=from_dir,
+        to_dir=to_dir,
+        out_file_format=out_file_format,
+        overwrite=overwrite,
+    )
+    if info is not None:
+      found_dataset_versions[from_dir] = info
 
   convert_dataset_fn = functools.partial(
       _convert_dataset,
