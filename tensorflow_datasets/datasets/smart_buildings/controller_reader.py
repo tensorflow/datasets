@@ -25,9 +25,9 @@ from absl import logging
 import pandas as pd
 from tensorflow_datasets.datasets.smart_buildings import constants
 from tensorflow_datasets.datasets.smart_buildings import reader_lib
-from tensorflow_datasets.datasets.smart_buildings import smart_control_building_pb2
-from tensorflow_datasets.datasets.smart_buildings import smart_control_normalization_pb2
-from tensorflow_datasets.datasets.smart_buildings import smart_control_reward_pb2
+from tensorflow_datasets.proto import smart_control_building_pb2
+from tensorflow_datasets.proto import smart_control_normalization_pb2
+from tensorflow_datasets.proto import smart_control_reward_pb2
 
 
 T = TypeVar('T')
