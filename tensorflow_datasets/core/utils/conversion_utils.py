@@ -152,7 +152,7 @@ def to_tfds_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
         case _:
           return [value]
     case feature_lib.Audio():
-      if array := value.get('array'):
+      if (array := value.get('array')) is not None:
         # Hugging Face uses floats, TFDS uses integers.
         return [int(sample * feature.sample_rate) for sample in array]
       elif (path := value.get('path')) and (path := epath.Path(path)).exists():
