@@ -300,8 +300,12 @@ class DatasetBuilderProvider(Protocol):
     ...
 
 
-class LegacyDatasetBuilderProvider(DatasetBuilderProvider):
-  """Provider of dataset builders that are defined in the legacy codebase."""
+class RegisteredDatasetBuilderProvider(DatasetBuilderProvider):
+  """Provider of dataset builders that are defined by builder classes.
+
+  If there's a builder class, then it will be registered because it's a subclass
+  of RegisteredDataset.
+  """
 
   def has_dataset(self, name: str) -> bool:
     if name not in _DATASET_REGISTRY:
@@ -373,8 +377,8 @@ class SourceDirDatasetBuilderProvider(DatasetBuilderProvider):
 
 def _get_inital_providers() -> list[DatasetBuilderProvider]:
   return [
+      RegisteredDatasetBuilderProvider(),
       SourceDirDatasetBuilderProvider(constants.DATASETS_TFDS_SRC_DIR),
-      LegacyDatasetBuilderProvider(),
   ]
 
 
