@@ -26,7 +26,7 @@ import inspect
 import json
 import os
 import sys
-from typing import Any, ClassVar, Dict, List, Optional, Tuple, Type, Union
+from typing import Any, ClassVar, Type
 
 from absl import logging
 from etils import epy
@@ -69,7 +69,7 @@ with epy.lazy_imports():
 ListOrTreeOrElem = type_utils.ListOrTreeOrElem
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
-VersionOrStr = Union[utils.Version, str]
+VersionOrStr = utils.Version | str
 
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
 REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
@@ -108,7 +108,7 @@ class BuilderConfig:
 
   name: str
   version: VersionOrStr | None = None
-  release_notes: Dict[str, str] | None = None
+  release_notes: dict[str, str] | None = None
   supported_versions: list[VersionOrStr] = dataclasses.field(
       default_factory=list
   )
@@ -192,12 +192,12 @@ class DatasetBuilder(registered.RegisteredDataset):
   """
 
   # Semantic version of the dataset (ex: tfds.core.Version('1.2.0'))
-  VERSION: Optional[utils.Version] = None
+  VERSION: utils.Version | None = None
 
   # Release notes
   # Metadata only used for documentation. Should be a dict[version,description]
   # Multi-lines are automatically dedent
-  RELEASE_NOTES: ClassVar[Dict[str, str]] = {}
+  RELEASE_NOTES: ClassVar[dict[str, str]] = {}
 
   # List dataset versions which can be loaded using current code.
   # Data can only be prepared with canonical VERSION or above.
@@ -209,7 +209,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   # Name of the builder config that should be used in case the user doesn't
   # specify a config when loading a dataset. If None, then the first config in
   # `BUILDER_CONFIGS` is used.
-  DEFAULT_BUILDER_CONFIG_NAME: Optional[str] = None
+  DEFAULT_BUILDER_CONFIG_NAME: str | None = None
 
   # Must be set for datasets that use 'manual_dir' functionality - the ones
   # that require users to do additional steps to download the data
@@ -222,15 +222,15 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   # Optional max number of simultaneous downloads. Setting this value will
   # override download config settings if necessary.
-  MAX_SIMULTANEOUS_DOWNLOADS: Optional[int] = None
+  MAX_SIMULTANEOUS_DOWNLOADS: int | None = None
 
   # If not set, pkg_dir_path is inferred. However, if user of class knows better
   # then this can be set directly before init, to avoid heuristic inferences.
   # Example: `imported_builder_cls` function in `registered.py` module sets it.
-  pkg_dir_path: Optional[epath.Path] = None
+  pkg_dir_path: epath.Path | None = None
 
   # Holds information on versions and configs that should not be used.
-  BLOCKED_VERSIONS: ClassVar[Optional[utils.BlockedVersions]] = None
+  BLOCKED_VERSIONS: ClassVar[utils.BlockedVersions | None] = None
 
   @classmethod
   def _get_pkg_dir_path(cls) -> epath.Path:
@@ -309,7 +309,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def code_path(cls) -> Optional[epath.Path]:
+  def code_path(cls) -> epath.Path | None:
     """Returns the path to the file where the Dataset class is located.
 
     Note: As the code can be run inside zip file. The returned value is
@@ -373,7 +373,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return self.SUPPORTED_VERSIONS
 
   @functools.cached_property
-  def versions(self) -> List[utils.Version]:
+  def versions(self) -> list[utils.Version]:
     """Versions (canonical + availables), in preference order."""
     return [
         utils.Version(v) if isinstance(v, str) else v
@@ -407,7 +407,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     return self._version
 
   @property
-  def release_notes(self) -> Dict[str, str]:
+  def release_notes(self) -> dict[str, str]:
     if self.builder_config and self.builder_config.release_notes:
       return self.builder_config.release_notes
     else:
@@ -452,7 +452,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.classproperty
   @classmethod
-  def _checksums_path(cls) -> Optional[epath.Path]:
+  def _checksums_path(cls) -> epath.Path | None:
     """Returns the checksums path."""
     # Used:
     # * To load the checksums (in url_infos)
@@ -476,7 +476,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   @utils.classproperty
   @classmethod
   @functools.lru_cache(maxsize=None)
-  def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
+  def url_infos(cls) -> dict[str, download.checksums.UrlInfo] | None:
     """Load `UrlInfo` from the given path."""
     # Note: If the dataset is downloaded with `record_checksums=True`, urls
     # might be updated but `url_infos` won't as it is memoized.
@@ -516,13 +516,13 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.classproperty
   @classmethod
-  def default_builder_config(cls) -> Optional[BuilderConfig]:
+  def default_builder_config(cls) -> BuilderConfig | None:
     return _get_default_config(
         builder_configs=cls.BUILDER_CONFIGS,
         default_config_name=cls.DEFAULT_BUILDER_CONFIG_NAME,
     )
 
-  def get_default_builder_config(self) -> Optional[BuilderConfig]:
+  def get_default_builder_config(self) -> BuilderConfig | None:
     """Returns the default builder config if there is one.
 
     Note that for dataset builders that cannot use the `cls.BUILDER_CONFIGS`, we
@@ -539,7 +539,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def get_reference(
       self,
-      namespace: Optional[str] = None,
+      namespace: str | None = None,
   ) -> naming.DatasetReference:
     """Returns a reference to the dataset produced by this dataset builder.
 
@@ -807,9 +807,9 @@ class DatasetBuilder(registered.RegisteredDataset):
   @tfds_logging.as_data_source()
   def as_data_source(
       self,
-      split: Optional[Tree[splits_lib.SplitArg]] = None,
+      split: Tree[splits_lib.SplitArg] | None = None,
       *,
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
       deserialize_method: decode.DeserializeMethod = decode.DeserializeMethod.DESERIALIZE_AND_DECODE,
   ) -> ListOrTreeOrElem[Sequence[Any]]:
     """Constructs an `ArrayRecordDataSource`.
@@ -818,7 +818,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       split: Which split of the data to load (e.g. `'train'`, `'test'`,
         `['train', 'test']`, `'train[80%:]'`,...). See our [split API
         guide](https://www.tensorflow.org/datasets/splits). If `None`, will
-        return all splits in a `Dict[Split, Sequence]`.
+        return all splits in a `dict[Split, Sequence]`.
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
         customized feature keys need to be present. See [the
@@ -913,12 +913,12 @@ class DatasetBuilder(registered.RegisteredDataset):
   @tfds_logging.as_dataset()
   def as_dataset(
       self,
-      split: Optional[Tree[splits_lib.SplitArg]] = None,
+      split: Tree[splits_lib.SplitArg] | None = None,
       *,
-      batch_size: Optional[int] = None,
+      batch_size: int | None = None,
       shuffle_files: bool = False,
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
-      read_config: Optional[read_config_lib.ReadConfig] = None,
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
+      read_config: read_config_lib.ReadConfig | None = None,
       as_supervised: bool = False,
   ):
     # pylint: disable=line-too-long
@@ -1029,9 +1029,9 @@ class DatasetBuilder(registered.RegisteredDataset):
   def _build_single_dataset(
       self,
       split: splits_lib.Split,
-      batch_size: Optional[int],
+      batch_size: int | None,
       shuffle_files: bool,
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
       read_config: read_config_lib.ReadConfig,
       as_supervised: bool,
   ) -> tf.data.Dataset:
@@ -1064,7 +1064,7 @@ class DatasetBuilder(registered.RegisteredDataset):
             "structure."
         )
 
-      def lookup_nest(features: Dict[str, Any]) -> Tuple[Any, ...]:
+      def lookup_nest(features: dict[str, Any]) -> tuple[Any, ...]:
         """Converts `features` to the structure described by `supervised_keys`.
 
         Note that there is currently no way to access features in nested
@@ -1208,7 +1208,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   def _download_and_prepare(
       self,
       dl_manager: download.DownloadManager,
-      download_config: Optional[download.DownloadConfig] = None,
+      download_config: download.DownloadConfig | None = None,
   ) -> None:
     """Downloads and prepares dataset for reading.
 
@@ -1228,8 +1228,8 @@ class DatasetBuilder(registered.RegisteredDataset):
   def _as_dataset(
       self,
       split: splits_lib.Split,
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
-      read_config: Optional[read_config_lib.ReadConfig] = None,
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
+      read_config: read_config_lib.ReadConfig | None = None,
       shuffle_files: bool = False,
   ) -> tf.data.Dataset:
     """Constructs a `tf.data.Dataset`.
@@ -1313,7 +1313,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   @utils.docs.do_not_doc_in_subclasses
   @utils.classproperty
   @classmethod
-  def builder_config_cls(cls) -> Optional[type[BuilderConfig]]:
+  def builder_config_cls(cls) -> type[BuilderConfig] | None:
     """Returns the builder config class."""
     if not cls.BUILDER_CONFIGS:
       return None
@@ -1328,7 +1328,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     return builder_cls
 
   @property
-  def builder_config(self) -> Optional[Any]:
+  def builder_config(self) -> Any | None:
     """`tfds.core.BuilderConfig` for this builder."""
     return self._builder_config
 
@@ -1410,6 +1410,19 @@ class DatasetBuilder(registered.RegisteredDataset):
       )
     return config_dict
 
+  @classmethod
+  def get_builder_config(
+      cls, name: str, version: str | utils.Version | None = None
+  ) -> BuilderConfig | None:
+    """Returns the builder config with the given name and version."""
+    if version is not None:
+      name_with_version = f"{name}:{version}"
+      if builder_config := cls.builder_configs.get(name_with_version):
+        return builder_config
+    if builder_config := cls.builder_configs.get(name):
+      return builder_config
+    return None
+
   def _get_filename_template(
       self, split_name: str
   ) -> naming.ShardedFileTemplate:
@@ -1437,7 +1450,7 @@ class FileReaderBuilder(DatasetBuilder):
   def __init__(
       self,
       *,
-      file_format: Union[None, str, file_adapters.FileFormat] = None,
+      file_format: str | file_adapters.FileFormat | None = None,
       **kwargs: Any,
   ):
     """Initializes an instance of FileReaderBuilder.
@@ -1460,7 +1473,7 @@ class FileReaderBuilder(DatasetBuilder):
   def _as_dataset(  # pytype: disable=signature-mismatch  # overriding-parameter-type-checks
       self,
       split: splits_lib.Split,
-      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
+      decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
       read_config: read_config_lib.ReadConfig,
       shuffle_files: bool,
   ) -> tf.data.Dataset:
@@ -1508,7 +1521,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
   def _split_generators(
       self,
       dl_manager: download.DownloadManager,
-  ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
+  ) -> dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     """Downloads the data and returns dataset splits with associated examples.
 
     Example:
@@ -1743,7 +1756,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     self.info.set_splits(split_dict)
 
   def read_text_file(
-      self, filename: epath.PathLike, encoding: Optional[str] = None
+      self, filename: epath.PathLike, encoding: str | None = None
   ) -> str:
     """Returns the text in the given file and records the lineage."""
     filename = epath.Path(filename)
@@ -1775,7 +1788,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
 
   def read_tfrecord_as_examples(
       self,
-      filenames: Union[str, Sequence[str]],
+      filenames: str | Sequence[str],
       compression_type: str | None = None,
       num_parallel_reads: int | None = None,
   ) -> Iterator[tf.train.Example]:
@@ -1932,9 +1945,9 @@ def _check_split_names(split_names: Iterable[str]) -> None:
 
 
 def _get_default_config(
-    builder_configs: List[BuilderConfig],
-    default_config_name: Optional[str],
-) -> Optional[BuilderConfig]:
+    builder_configs: list[BuilderConfig],
+    default_config_name: str | None,
+) -> BuilderConfig | None:
   """Returns the default config from the given builder configs.
 
   Arguments:
@@ -1995,8 +2008,8 @@ def load_default_config_name(builder_dir: epath.Path) -> str | None:
 
 
 def canonical_version_for_config(
-    instance_or_cls: Union[DatasetBuilder, Type[DatasetBuilder]],
-    config: Optional[BuilderConfig] = None,
+    instance_or_cls: DatasetBuilder | Type[DatasetBuilder],
+    config: BuilderConfig | None = None,
 ) -> utils.Version:
   """Get the canonical version for the given config.
 

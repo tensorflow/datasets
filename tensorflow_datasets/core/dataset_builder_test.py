@@ -453,6 +453,49 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
         set(DummyDatasetWithVersionedConfigs.builder_configs.keys()),
     )
 
+  def test_get_builder_config(self):
+    plus1 = DummyDatasetWithConfigs.get_builder_config("plus1")
+    self.assertEqual(plus1.name, "plus1")
+    plus2 = DummyDatasetWithConfigs.get_builder_config("plus2")
+    self.assertEqual(plus2.name, "plus2")
+
+    plus1_001 = DummyDatasetWithConfigs.get_builder_config(
+        "plus1", version="0.0.1"
+    )
+    self.assertEqual(plus1_001.name, "plus1")
+    self.assertEqual(str(plus1_001.version), "0.0.1")
+
+    plus2_002 = DummyDatasetWithConfigs.get_builder_config(
+        "plus2", version="0.0.2"
+    )
+    self.assertEqual(plus2_002.name, "plus2")
+    self.assertEqual(str(plus2_002.version), "0.0.2")
+
+    self.assertIsNone(
+        DummyDatasetWithConfigs.get_builder_config(
+            "i_dont_exist", version="0.0.1"
+        )
+    )
+
+    # DummyDatasetWithVersionedConfigs
+    cfg1_001 = DummyDatasetWithVersionedConfigs.get_builder_config(
+        "cfg1", version="0.0.1"
+    )
+    self.assertEqual(cfg1_001.name, "cfg1")
+    self.assertEqual(str(cfg1_001.version), "0.0.1")
+
+    cfg1_002 = DummyDatasetWithVersionedConfigs.get_builder_config(
+        "cfg1", version="0.0.2"
+    )
+    self.assertEqual(cfg1_002.name, "cfg1")
+    self.assertEqual(str(cfg1_002.version), "0.0.2")
+
+    self.assertIsNone(
+        DummyDatasetWithVersionedConfigs.get_builder_config(
+            "cfg1", version="0.0.3"
+        )
+    )
+
   def test_is_blocked(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       tmp_dir = epath.Path(tmp_dir)
