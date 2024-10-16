@@ -72,8 +72,9 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b' \x01(\t\x12\x13\n\x0bsample_rate\x18\x04'
     b' \x01(\x03\x12\x10\n\x08\x65ncoding\x18\x05'
     b' \x01(\t\x12\x13\n\x0blazy_decode\x18\x06'
-    b' \x01(\x08"N\n\x12\x42oundingBoxFeature\x12)\n\x05shape\x18\x01'
+    b' \x01(\x08"c\n\x12\x42oundingBoxFeature\x12)\n\x05shape\x18\x01'
     b' \x01(\x0b\x32\x1a.tensorflow_datasets.Shape\x12\r\n\x05\x64type\x18\x02'
+    b' \x01(\t\x12\x13\n\x0b\x62\x62ox_format\x18\x03'
     b' \x01(\t"\r\n\x0bTextFeature"O\n\x12TranslationFeature\x12\x11\n\tlanguages\x18\x01'
     b' \x03(\t\x12&\n\x1evariable_languages_per_example\x18\x02'
     b' \x01(\x08"I\n\x08Sequence\x12-\n\x07\x66\x65\x61ture\x18\x01'
@@ -110,11 +111,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _AUDIOFEATURE._serialized_start = 1500
   _AUDIOFEATURE._serialized_end = 1653
   _BOUNDINGBOXFEATURE._serialized_start = 1655
-  _BOUNDINGBOXFEATURE._serialized_end = 1733
-  _TEXTFEATURE._serialized_start = 1735
-  _TEXTFEATURE._serialized_end = 1748
-  _TRANSLATIONFEATURE._serialized_start = 1750
-  _TRANSLATIONFEATURE._serialized_end = 1829
-  _SEQUENCE._serialized_start = 1831
-  _SEQUENCE._serialized_end = 1904
+  _BOUNDINGBOXFEATURE._serialized_end = 1754
+  _TEXTFEATURE._serialized_start = 1756
+  _TEXTFEATURE._serialized_end = 1769
+  _TRANSLATIONFEATURE._serialized_start = 1771
+  _TRANSLATIONFEATURE._serialized_end = 1850
+  _SEQUENCE._serialized_start = 1852
+  _SEQUENCE._serialized_end = 1925
 # @@protoc_insertion_point(module_scope)

@@ -67,6 +67,19 @@ def test_convert_to_bbox(
     [
         ([1, 2, 3], None, 'Expected 4'),
         (TEST_INPUT_LIST, 'NonExistentConverter', 'Unsupported bbox format'),
+        (
+            TEST_INPUT_LIST,
+            bb_utils.BBoxFormat.XYXY,
+            'If normalize is True, img_shape must be provided, but got None.',
+        ),
+        (
+            TEST_INPUT_LIST,
+            bb_utils.BBoxFormat.REL_XYXY,
+            (
+                'If the input format is normalized, then normalize should be'
+                ' False.'
+            ),
+        ),
     ],
 )
 def test_convert_coordinates_to_bbox_valueerror(

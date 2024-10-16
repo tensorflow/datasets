@@ -37,6 +37,17 @@ PilImage = Any
 class BBoxFeature(tensor_feature.Tensor):
   """`FeatureConnector` for a normalized bounding box.
 
+  By default, TFDS uses normalized YXYX bbox format. This can be changed by
+  passing the `bbox_format` argument, e.g.
+  ```
+    features=features.FeatureDict({
+        'bbox': tfds.features.BBox(bbox_format=bb_utils.BBoxFormat.XYWH),
+    })
+  ```
+  If you don't know the format of the bbox, you can use `bbox_format=None`. In
+  this case, the only check that is done is that 4 floats coordinates are
+  provided.
+
   Note: If you have multiple bounding boxes, you may want to wrap the feature
   inside a `tfds.features.Sequence`.
 
@@ -69,12 +80,17 @@ class BBoxFeature(tensor_feature.Tensor):
       self,
       *,
       doc: feature_lib.DocArg = None,
+      bbox_format: (
+          bb_utils.BBoxFormatType | None
+      ) = bb_utils.BBoxFormat.REL_YXYX,
   ):
-    super(BBoxFeature, self).__init__(shape=(4,), dtype=np.float32, doc=doc)
+    if isinstance(bbox_format, str):
+      bbox_format = bb_utils.BBoxFormat(bbox_format)
+    self.bbox_format = bbox_format
+    super().__init__(shape=(4,), dtype=np.float32, doc=doc)
 
   def encode_example(self, bbox: Union[bb_utils.BBox, np.ndarray]):
     """See base class for details."""
-
     if isinstance(bbox, np.ndarray):
       if bbox.shape != (4,):
         raise ValueError(
@@ -88,14 +104,22 @@ class BBoxFeature(tensor_feature.Tensor):
 
     # Validate the coordinates
     for coordinate in bbox:
-      if not isinstance(coordinate, (float, np.floating)):
-        raise ValueError(
-            'BBox coordinates should be float. Got {}.'.format(bbox)
-        )
-      if not 0.0 <= coordinate <= 1.0:
-        raise ValueError(
-            'BBox coordinates should be between 0 and 1. Got {}.'.format(bbox)
-        )
+      if (
+          self.bbox_format == bb_utils.BBoxFormat.REL_YXYX
+          or self.bbox_format == bb_utils.BBoxFormat.REL_XYXY
+      ):
+        if not isinstance(coordinate, (float, np.floating)):
+          raise ValueError(
+              'BBox coordinates should be float. Got {}.'.format(bbox)
+          )
+        if not 0.0 <= coordinate <= 1.0:
+          raise ValueError(
+              'BBox coordinates should be between 0 and 1. Got {}.'.format(bbox)
+          )
+    if (
+        self.bbox_format == bb_utils.BBoxFormat.YXYX
+        or self.bbox_format == bb_utils.BBoxFormat.REL_YXYX
+    ):
       if bbox.xmax < bbox.xmin or bbox.ymax < bbox.ymin:
         raise ValueError(
             'BBox coordinates should have min <= max. Got {}.'.format(bbox)
@@ -108,28 +132,51 @@ class BBoxFeature(tensor_feature.Tensor):
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""
     ex = np.expand_dims(ex, axis=0)  # Expand single bounding box to batch.
-    return _repr_html(ex)
+    return _repr_html(ex, bbox_format=self.bbox_format)
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes (Sequence)."""
-    return _repr_html(ex)
+    return _repr_html(ex, bbox_format=self.bbox_format)
 
   @classmethod
   def from_json_content(
       cls, value: Union[Json, feature_pb2.BoundingBoxFeature]
   ) -> 'BBoxFeature':
-    del value  # Unused
-    return cls()
+    if isinstance(value, dict):
+      return cls(**value)
+    return cls(
+        bbox_format=bb_utils.BBoxFormat(value.bbox_format)
+        if value.bbox_format
+        else None
+    )
 
-  def to_json_content(self) -> feature_pb2.BoundingBoxFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  def to_json_content(
+      self,
+  ) -> (
+      feature_pb2.BoundingBoxFeature
+  ):  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+    bbox_format = None
+    if self.bbox_format:
+      bbox_format = (
+          self.bbox_format
+          if isinstance(self.bbox_format, str)
+          else self.bbox_format.value
+      )
     return feature_pb2.BoundingBoxFeature(
         shape=feature_lib.to_shape_proto(self._shape),
         dtype=feature_lib.dtype_to_str(self._dtype),
+        bbox_format=bbox_format,
     )
 
 
-def _repr_html(ex: np.ndarray) -> str:
+def _repr_html(
+    ex: np.ndarray, bbox_format: bb_utils.BBoxFormatType | None
+) -> str:
   """Returns the HTML str representation of an Image with BBoxes."""
+  # If the bbox format is not normalized, we don't draw the bbox on a blank
+  # image but we return a string representation of the bbox instead.
+  if bbox_format != bb_utils.BBoxFormat.REL_YXYX:
+    return repr(ex)
   img = _build_thumbnail_with_bbox(ex)
   img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
   return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'

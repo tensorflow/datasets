@@ -105,10 +105,12 @@ message AudioFeature {
 
 // A bounding box around an object in an image. Typically, bounding boxes are
 // tensors of type `tf.float32` and shape `[4,]` and contain the normalized
-// coordinates of the bounding box `[ymin, xmin, ymax, xmax]`.
+// coordinates of the bounding box `[ymin, xmin, ymax, xmax]`. Different formats
+// are supported through the `bbox_format` field.
 message BoundingBoxFeature {
   Shape shape = 1;
   string dtype = 2;
+  string bbox_format = 3;
 }
 
 message TextFeature {}

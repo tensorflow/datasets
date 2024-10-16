@@ -46,6 +46,8 @@ class BBoxFormat(enum.Enum):
   XYXY = 'XYXY'
   YXYX = 'YXYX'
   XYWH = 'XYWH'
+  REL_XYXY = 'REL_XYXY'
+  REL_YXYX = 'REL_YXYX'
 
 
 BBoxFormatType = Union[BBoxFormat, str]
@@ -77,7 +79,6 @@ def convert_coordinates_to_bbox(
   """
   if len(coordinates) != 4:
     raise ValueError(f'Expected 4 coordinates, got {coordinates}.')
-
   coordinates = coordinates.astype(np.float64)
 
   try:
@@ -88,15 +89,24 @@ def convert_coordinates_to_bbox(
         f'Unsupported bbox format: {format}. Currently supported bounding box'
         f' formats are: {[format.value for format in BBoxFormat]}'
     ) from e
-
-  if input_format == BBoxFormat.YXYX:
+  if (
+      input_format == BBoxFormat.REL_XYXY or input_format == BBoxFormat.REL_YXYX
+  ) and normalize:
+    raise ValueError(
+        'If the input format is normalized, then normalize should be False.'
+    )
+  if normalize and img_shape is None:
+    raise ValueError(
+        'If normalize is True, img_shape must be provided, but got None.'
+    )
+  if input_format == BBoxFormat.YXYX or input_format == BBoxFormat.REL_YXYX:
     bbox = BBox(
         ymin=coordinates[0],
         xmin=coordinates[1],
         ymax=coordinates[2],
         xmax=coordinates[3],
     )
-  elif input_format == BBoxFormat.XYXY:
+  elif input_format == BBoxFormat.XYXY or input_format == BBoxFormat.REL_XYXY:
     bbox = BBox(
         ymin=coordinates[1],
         xmin=coordinates[0],

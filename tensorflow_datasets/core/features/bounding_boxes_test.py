@@ -51,6 +51,24 @@ class BBoxFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
+  def test_unspecified_bbox_format_feature(self):
+    self.assertFeature(
+        feature=features.BBoxFeature(bbox_format=None),
+        shape=(4,),
+        dtype=np.float32,
+        tests=[
+            testing.FeatureExpectationItem(
+                # 1D numpy array, float32 unnormalized bbox
+                value=np.array(
+                    [200.46, 199.84, 77.71, 70.88], dtype=np.float32
+                ),
+                expected=np.array(
+                    [200.46, 199.84, 77.71, 70.88], dtype=np.float32
+                ),
+            ),
+        ],
+    )
+
 
 if __name__ == '__main__':
   testing.test_main()
