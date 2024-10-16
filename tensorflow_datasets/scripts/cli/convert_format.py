@@ -123,7 +123,7 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
 
   parser.set_defaults(
       subparser_fn=lambda args: convert_format_utils.convert_dataset(
-          out_dir=args.out_dir if args.out_dir else None,
+          out_dir=epath.Path(args.out_dir) if args.out_dir else None,
           out_file_format=args.out_file_format,
           dataset_dir=args.dataset_dir or None,
           root_data_dir=args.root_data_dir or None,

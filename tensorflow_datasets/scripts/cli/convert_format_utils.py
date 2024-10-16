@@ -428,7 +428,7 @@ def _create_from_to_dirs(
   from_to_dirs: dict[epath.Path, epath.Path] = {}
   for reference in references:
     dataset_dir = reference.dataset_dir()
-    if out_path is None:
+    if not out_path:
       out_dir = dataset_dir
     else:
       out_dir = _create_out_dir(
