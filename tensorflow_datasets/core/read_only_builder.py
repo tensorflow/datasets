@@ -20,6 +20,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 import concurrent.futures
 import functools
+import json
 import os
 import typing
 from typing import Any, Type
@@ -38,6 +39,8 @@ with epy.lazy_imports():
   from tensorflow_datasets.core import registered
   from tensorflow_datasets.core import splits as splits_lib
   from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core import constants
+
   from tensorflow_datasets.core.features import feature as feature_lib
   from tensorflow_datasets.core.proto import dataset_info_pb2
   from tensorflow_datasets.core.utils import error_utils
@@ -436,10 +439,10 @@ def _list_possible_configs(
   configs = []
   for data_dir in all_data_dirs:
     builder_dir = epath.Path(data_dir) / builder_name
-    if builder_dir.exists():
-      for path in builder_dir.iterdir():
-        if path.is_dir():
-          configs.append(path.name)
+    variants = file_utils.list_dataset_variants(
+        dataset_dir=builder_dir, include_versions=False
+    )
+    configs.extend(v.config for v in variants if v.config)
   return configs
 
 
@@ -537,7 +540,7 @@ def _get_default_config_name(
       return cls.default_builder_config.name
 
   # Otherwise, try to load default config from common metadata
-  return dataset_builder.load_default_config_name(builder_dir)
+  return load_default_config_name(builder_dir)
 
 
 def _get_version(
@@ -576,4 +579,20 @@ def _get_version(
         f"The builder directory {config_dir} doesn't contain any versions."
     )
   error_utils.add_context(error_msg)
+  return None
+
+
+def load_default_config_name(dataset_dir: epath.Path) -> str | None:
+  """Load `builder_cls` metadata (common to all builder configs)."""
+  config_path = dataset_dir / '.config' / constants.METADATA_FILENAME
+  if config_path.exists():
+    data = json.loads(config_path.read_text())
+    return data.get('default_config_name')
+  variants = list(
+      file_utils.list_dataset_variants(
+          dataset_dir=dataset_dir, include_versions=False
+      )
+  )
+  if len(variants) == 1:
+    return variants[0].config
   return None
