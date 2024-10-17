@@ -345,16 +345,39 @@ def _convert_dataset_dirs(
   logging.info('Converting %d datasets.', len(from_to_dirs))
 
   found_dataset_versions: dict[epath.Path, dataset_info.DatasetInfo] = {}
-  # TODO(weide) parallelize this, because it's slow for dirs with many datasets.
-  for from_dir, to_dir in from_to_dirs.items():
-    info = _get_info_for_dirs_to_convert(
-        from_dir=from_dir,
-        to_dir=to_dir,
-        out_file_format=out_file_format,
-        overwrite=overwrite,
-    )
-    if info is not None:
-      found_dataset_versions[from_dir] = info
+
+  if num_workers > 1:
+
+    def _process_get_infos(from_to_dir):
+      from_dir, to_dir = from_to_dir
+      return from_dir, _get_info_for_dirs_to_convert(
+          from_dir=from_dir,
+          to_dir=to_dir,
+          out_file_format=out_file_format,
+          overwrite=overwrite,
+      )
+
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=num_workers
+    ) as executor:
+      for from_dir, info in executor.map(
+          _process_get_infos,
+          from_to_dirs.items(),
+      ):
+        if info is not None:
+          found_dataset_versions[from_dir] = info
+  else:
+    for from_dir, to_dir in tqdm.tqdm(
+        from_to_dirs.items(), unit=' directories'
+    ):
+      info = _get_info_for_dirs_to_convert(
+          from_dir=from_dir,
+          to_dir=to_dir,
+          out_file_format=out_file_format,
+          overwrite=overwrite,
+      )
+      if info is not None:
+        found_dataset_versions[from_dir] = info
 
   convert_dataset_fn = functools.partial(
       _convert_dataset,
