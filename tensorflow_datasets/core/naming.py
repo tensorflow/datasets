@@ -292,7 +292,6 @@ class DatasetReference:
   ) -> DatasetReference:
     """Returns the `DatasetReference` for the given TFDS dataset."""
     parsed_name, builder_kwargs = parse_builder_name_kwargs(tfds_name)
-    version, config = None, None
     version = builder_kwargs.get('version')
     config = builder_kwargs.get('config')
     return cls(
@@ -302,6 +301,46 @@ class DatasetReference:
         config=config,
         split_mapping=split_mapping,
         data_dir=data_dir,
+    )
+
+  @classmethod
+  def from_path(
+      cls,
+      dataset_dir: epath.PathLike,
+      root_data_dir: epath.PathLike,
+  ) -> DatasetReference:
+    """Returns the `DatasetReference` for the given dataset directory.
+
+    Args:
+      dataset_dir: The path to the dataset directory, e.g.,
+        `/data/my_dataset/my_config/1.2.3`.
+      root_data_dir: The root data directory, e.g., `/data`.
+    """
+    dataset_dir = os.fspath(dataset_dir)
+    root_data_dir = os.fspath(root_data_dir)
+
+    if not dataset_dir.startswith(root_data_dir):
+      raise ValueError(f'{dataset_dir=} does not start with {root_data_dir=}!')
+
+    relative_path = dataset_dir.removeprefix(root_data_dir)
+    relative_path = relative_path.removeprefix('/').removesuffix('/')
+    parts = relative_path.split('/')
+    dataset_name = parts[0]
+    if len(parts) == 2:
+      config_name = None
+      version = parts[1]
+    elif len(parts) == 3:
+      config_name = parts[1]
+      version = parts[2]
+    else:
+      raise ValueError(
+          f'Invalid {relative_path=} for {root_data_dir=} and {dataset_dir=}'
+      )
+    return cls(
+        dataset_name=dataset_name,
+        config=config_name,
+        version=version,
+        data_dir=root_data_dir.removesuffix('/'),
     )
 
 

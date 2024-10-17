@@ -863,6 +863,100 @@ def test_dataset_reference_from_tfds_name(
 
 
 @pytest.mark.parametrize(
+    ('dataset_dir', 'root_data_dir', 'expected'),
+    [
+        # Dataset with a config and a version.
+        (
+            '/data/ds/config/1.2.3',
+            '/data',
+            naming.DatasetReference(
+                dataset_name='ds',
+                version='1.2.3',
+                config='config',
+                data_dir='/data',
+            ),
+        ),
+        # Dataset with no config and a version.
+        (
+            '/data/ds/1.2.3',
+            '/data',
+            naming.DatasetReference(
+                dataset_name='ds',
+                version='1.2.3',
+                config=None,
+                data_dir='/data',
+            ),
+        ),
+        # Dataset dir with trailing slash.
+        (
+            '/data/ds/config/1.2.3/',
+            '/data',
+            naming.DatasetReference(
+                dataset_name='ds',
+                version='1.2.3',
+                config='config',
+                data_dir='/data',
+            ),
+        ),
+        # Root data dir with trailing slash.
+        (
+            '/data/ds/config/1.2.3',
+            '/data/',
+            naming.DatasetReference(
+                dataset_name='ds',
+                version='1.2.3',
+                config='config',
+                data_dir='/data',
+            ),
+        ),
+        # Dataset dir and root data dir with trailing slash.
+        (
+            '/data/ds/config/1.2.3/',
+            '/data/',
+            naming.DatasetReference(
+                dataset_name='ds',
+                version='1.2.3',
+                config='config',
+                data_dir='/data',
+            ),
+        ),
+    ],
+)
+def test_dataset_reference_from_path(dataset_dir, root_data_dir, expected):
+  actual = naming.DatasetReference.from_path(
+      dataset_dir=dataset_dir, root_data_dir=root_data_dir
+  )
+  assert actual == expected
+
+
+@pytest.mark.parametrize(
+    ('dataset_dir', 'root_data_dir'),
+    [
+        # Root data dir is not a prefix of the dataset dir.
+        (
+            '/data/ds/config/1.2.3',
+            '/somewhere_else',
+        ),
+        # Too many nested folders.
+        (
+            '/data/ds/config/another_folder/1.2.3',
+            '/data',
+        ),
+        # Too few nested folders.
+        (
+            '/data/ds/',
+            '/data',
+        ),
+    ],
+)
+def test_dataset_reference_from_path_invalid(dataset_dir, root_data_dir):
+  with pytest.raises(ValueError):
+    naming.DatasetReference.from_path(
+        dataset_dir=dataset_dir, root_data_dir=root_data_dir
+    )
+
+
+@pytest.mark.parametrize(
     ('ds_name', 'namespace', 'version', 'config', 'tfds_name'),
     [
         ('ds', 'ns', '1.2.3', 'config', 'ns:ds/config:1.2.3'),
