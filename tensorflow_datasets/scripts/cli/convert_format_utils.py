@@ -320,6 +320,14 @@ def _get_info_for_dirs_to_convert(
           os.fspath(to_dir),
       )
       return builder.info
+  else:
+    logging.info(
+        'The file format to convert to (%s) is not an alternative file format'
+        ' of the dataset in %s. Converting the dataset.',
+        out_file_format.value,
+        os.fspath(from_dir),
+    )
+    return builder.info
 
 
 def _convert_dataset_dirs(
@@ -343,7 +351,6 @@ def _convert_dataset_dirs(
       desired.
   """
   logging.info('Converting %d datasets.', len(from_to_dirs))
-
   found_dataset_versions: dict[epath.Path, dataset_info.DatasetInfo] = {}
 
   if num_workers > 1:
@@ -378,7 +385,6 @@ def _convert_dataset_dirs(
       )
       if info is not None:
         found_dataset_versions[from_dir] = info
-
   convert_dataset_fn = functools.partial(
       _convert_dataset,
       out_file_format=out_file_format,
