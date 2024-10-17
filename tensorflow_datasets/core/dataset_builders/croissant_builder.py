@@ -46,6 +46,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.features import bounding_boxes
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
@@ -86,12 +87,15 @@ def datatype_converter(
   if not field_data_type:
     # Fields with sub fields are of type None
     if field.sub_fields:
-      return features_dict.FeaturesDict({
-          subfield.id: datatype_converter(
-              subfield, int_dtype=int_dtype, float_dtype=float_dtype
-          )
-          for subfield in field.sub_fields
-      })
+      return features_dict.FeaturesDict(
+          {
+              subfield.id: datatype_converter(
+                  subfield, int_dtype=int_dtype, float_dtype=float_dtype
+              )
+              for subfield in field.sub_fields
+          },
+          doc=field.description,
+      )
     return None
   elif field_data_type == int:
     return int_dtype
@@ -106,6 +110,9 @@ def datatype_converter(
     return text_feature.Text(doc=field.description)
   elif field_data_type == mlc.DataType.IMAGE_OBJECT:
     return image_feature.Image(doc=field.description)
+  elif field_data_type == mlc.DataType.BOUNDING_BOX:
+    # TFDS uses REL_YXYX by default, but Hugging Face doesn't enforce a format.
+    return bounding_boxes.BBoxFeature(doc=field.description, bbox_format=None)
   else:
     raise ValueError(f'Unknown data type: {field_data_type}.')
 
@@ -225,7 +232,9 @@ class CroissantBuilder(
   @property
   def builder_config(self) -> dataset_builder.BuilderConfig:
     """`tfds.core.BuilderConfig` for this builder."""
-    return self._builder_config  # pytype: disable=bad-return-type  # always-use-return-annotations
+    return (
+        self._builder_config
+    )  # pytype: disable=bad-return-type  # always-use-return-annotations
 
   def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(

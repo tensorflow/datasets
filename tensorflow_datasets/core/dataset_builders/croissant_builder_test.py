@@ -20,6 +20,7 @@ import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
+from tensorflow_datasets.core.features import bounding_boxes
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import tensor_feature
@@ -119,6 +120,14 @@ def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
         ),
         (
             mlc.Field(
+                data_types=mlc.DataType.BOUNDING_BOX,
+                description="Bounding box feature",
+            ),
+            bounding_boxes.BBoxFeature,
+            None,
+        ),
+        (
+            mlc.Field(
                 id="person",
                 data_types=[],
                 description="A field with subfields",
@@ -138,6 +147,7 @@ def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
 def test_complex_datatype_converter(field, feature_type, subfield_types):
   actual_feature = croissant_builder.datatype_converter(field)
   assert isinstance(actual_feature, feature_type)
+  assert actual_feature.doc.desc == field.description
   if subfield_types:
     for feature_name in actual_feature.keys():
       assert isinstance(
