@@ -140,26 +140,22 @@ def test_load_dataset_with_kwargs(
     assert loaded_dataset == expected
 
 
-@pytest.mark.parametrize(
-    'builder_kwargs',
-    [
-        None,
-        {'file_format': 'array_record'},
-        {'file_format': file_adapters.FileFormat.ARRAY_RECORD},
-    ],
-)
-def test_data_source_defaults_to_array_record_format(
-    builder_kwargs,
-):
+def test_data_source_defaults_to_array_record_format():
   with mock.patch.object(load, 'builder', autospec=True) as mock_builder:
-    load.data_source(
-        'mydataset', builder_kwargs=builder_kwargs,
-    )
+    load.data_source('mydataset', builder_kwargs=None)
     mock_builder.assert_called_with(
         'mydataset',
         data_dir=None,
         try_gcs=False,
         file_format=file_adapters.FileFormat.ARRAY_RECORD,
+    )
+def test_data_source_keeps_format_if_builder_kwargs():
+  with mock.patch.object(load, 'builder', autospec=True) as mock_builder:
+    load.data_source('mydataset', data_dir='/foo/bar')
+    mock_builder.assert_called_with(
+        'mydataset',
+        data_dir='/foo/bar',
+        try_gcs=False,
     )
 @pytest.mark.parametrize(
     'file_format',

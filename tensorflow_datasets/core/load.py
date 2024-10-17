@@ -21,14 +21,14 @@ from collections.abc import Sequence
 import dataclasses
 import difflib
 import json
-import os
 import posixpath
 import re
 import textwrap
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Mapping, Optional, Type, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Mapping, Optional, Type
 
 from absl import logging
+from etils import epath
 from tensorflow_datasets.core import community
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
@@ -225,7 +225,7 @@ def builder(
 
 
 def _try_load_from_files_first(
-    cls: Optional[Type[dataset_builder.DatasetBuilder]],
+    cls: Type[dataset_builder.DatasetBuilder] | None,
     **builder_kwargs: Any,
 ) -> bool:
   """Returns True if files should be used rather than code."""
@@ -487,8 +487,8 @@ def dataset_collection(
 
 def _fetch_builder(
     name: str,
-    data_dir: Union[None, str, os.PathLike],  # pylint: disable=g-bare-generic
-    builder_kwargs: Optional[Dict[str, Any]],
+    data_dir: epath.PathLike | None,
+    builder_kwargs: dict[str, Any] | None,
     try_gcs: bool,
 ) -> dataset_builder.DatasetBuilder:
   """Fetches the `tfds.core.DatasetBuilder` by name."""
@@ -521,18 +521,18 @@ def _download_and_prepare_builder(
 def load(
     name: str,
     *,
-    split: Optional[Tree[splits_lib.SplitArg]] = None,
-    data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
-    batch_size: Optional[int] = None,
+    split: Tree[splits_lib.SplitArg] | None = None,
+    data_dir: epath.PathLike | None = None,
+    batch_size: int | None = None,
     shuffle_files: bool = False,
     download: bool = True,
     as_supervised: bool = False,
-    decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
-    read_config: Optional[read_config_lib.ReadConfig] = None,
+    decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
+    read_config: read_config_lib.ReadConfig | None = None,
     with_info: bool = False,
-    builder_kwargs: Optional[Dict[str, Any]] = None,
-    download_and_prepare_kwargs: Optional[Dict[str, Any]] = None,
-    as_dataset_kwargs: Optional[Dict[str, Any]] = None,
+    builder_kwargs: dict[str, Any] | None = None,
+    download_and_prepare_kwargs: dict[str, Any] | None = None,
+    as_dataset_kwargs: dict[str, Any] | None = None,
     try_gcs: bool = False,
 ):
   # pylint: disable=line-too-long
@@ -677,37 +677,49 @@ def load(
 
 
 def _set_file_format_for_data_source(
-    builder_kwargs: Optional[Dict[str, Any]],
-) -> Dict[str, Any]:
+    data_dir: epath.PathLike | None,
+    builder_kwargs: dict[str, Any] | None,
+) -> dict[str, Any]:
   """Normalizes file format in builder_kwargs for `tfds.data_source`."""
   if builder_kwargs is None:
     builder_kwargs = {}
-  file_format = builder_kwargs.get(
-      'file_format', file_adapters.FileFormat.ARRAY_RECORD
-  )
+  # If the user specified a builder_kwargs or a data_dir, we don't want to
+  # overwrite it.
+  if builder_kwargs or data_dir:
+    return builder_kwargs
+  return {'file_format': file_adapters.FileFormat.ARRAY_RECORD}
+
+
+def _validate_file_format_for_data_source(
+    builder_kwargs: dict[str, Any],
+) -> None:
+  """Validates whether the file format supports random access."""
+  file_format = builder_kwargs.get('file_format')
+  if not file_format:
+    # We don't raise an error because we let TFDS handle the default (e.g.,
+    # when loading a dataset from files that support random access).
+    return
   file_format = file_adapters.FileFormat.from_value(file_format)
-  if file_format != file_adapters.FileFormat.ARRAY_RECORD:
+  if file_format not in file_adapters.FileFormat.with_random_access():
     raise NotImplementedError(
         f'No random access data source for file format {file_format}. Please,'
         ' use `tfds.data_source(...,'
         ' builder_kwargs={"file_format":'
         f' {file_adapters.FileFormat.ARRAY_RECORD}}})` instead.'
     )
-  builder_kwargs['file_format'] = file_format
-  return builder_kwargs
 
 
 @tfds_logging.data_source()
 def data_source(
     name: str,
     *,
-    split: Optional[Tree[splits_lib.SplitArg]] = None,
-    data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
+    split: Tree[splits_lib.SplitArg] | None = None,
+    data_dir: epath.PathLike | None = None,
     download: bool = True,
-    decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
+    decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
     deserialize_method: decode.DeserializeMethod = decode.DeserializeMethod.DESERIALIZE_AND_DECODE,
-    builder_kwargs: Optional[Dict[str, Any]] = None,
-    download_and_prepare_kwargs: Optional[Dict[str, Any]] = None,
+    builder_kwargs: dict[str, Any] | None = None,
+    download_and_prepare_kwargs: dict[str, Any] | None = None,
     try_gcs: bool = False,
 ) -> type_utils.ListOrTreeOrElem[Sequence[Any]]:
   """Gets a data source from the named dataset.
@@ -805,7 +817,8 @@ def data_source(
     `Sequence` if `split`,
     `dict<key: tfds.Split, value: Sequence>` otherwise.
   """  # fmt:skip
-  builder_kwargs = _set_file_format_for_data_source(builder_kwargs)
+  builder_kwargs = _set_file_format_for_data_source(data_dir, builder_kwargs)
+  _validate_file_format_for_data_source(builder_kwargs)
   dbuilder = _fetch_builder(
       name,
       data_dir,
