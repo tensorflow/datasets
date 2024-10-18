@@ -120,6 +120,16 @@ class SplitInfo:
     # Normalize bytes
     super().__setattr__('num_bytes', units.Size(self.num_bytes))
 
+  def get_available_shards(self, data_dir: epath.Path) -> list[epath.Path]:
+    if filename_template := self.filename_template:
+      return list(
+          data_dir.glob(
+              filename_template.sharded_filepaths_pattern(num_shards=None)
+          )
+      )
+    else:
+      raise ValueError(f'Filename template for split {self.name} is empty.')
+
   @classmethod
   def from_proto(
       cls,
@@ -382,7 +392,7 @@ class Split(str):
   """
 
   def __repr__(self) -> str:
-    return '{}({})'.format(type(self).__name__, super(Split, self).__repr__())  # pytype: disable=wrong-arg-types
+    return f'{type(self).__name__}({super().__repr__()})'
 
 
 Split.TRAIN = Split('train')
@@ -735,7 +745,9 @@ def _str_to_relative_instruction(spec: str) -> AbstractSplit:
   else:  # split='train[x:y]' or split='train[x]'
     slices = [_SLICE_RE.match(x) for x in split_selector.split(':')]
     # Make sure all slices are valid, and at least one is not empty
-    if not all(slices) or not any(x.group(0) for x in slices):  # pytype: disable=attribute-error  # re-none
+    if not all(slices) or not any(
+        x.group(0) for x in slices if x is not None
+    ):  # re-none
       raise ValueError(err_msg)
     if len(slices) == 1:  # split='train[x]'
       (from_match,) = slices

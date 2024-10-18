@@ -35,33 +35,30 @@ def test_shard_instructions_for_split():
           filetype_suffix='tfrecord',
       ),
   )
-  in_file_adapter = file_adapters.TfRecordFileAdapter
-  out_file_adapter = file_adapters.ArrayRecordFileAdapter
+  convert_config = convert_format_utils.ConvertConfig(
+      in_file_format=file_adapters.FileFormat.TFRECORD,
+      out_file_format=file_adapters.FileFormat.ARRAY_RECORD,
+  )
   actual = convert_format_utils._shard_instructions_for_split(
       split_info=split_info,
-      out_file_format=file_adapters.FileFormat.ARRAY_RECORD,
       out_path=epath.Path('/out'),
-      in_file_adapter=in_file_adapter,
-      out_file_adapter=out_file_adapter,
+      convert_config=convert_config,
   )
   assert actual == [
       convert_format_utils.ShardInstruction(
           in_path=epath.Path('/in/ds-train.tfrecord-00000-of-00003'),
-          in_file_adapter=in_file_adapter,
           out_path=epath.Path('/out/ds-train.array_record-00000-of-00003'),
-          out_file_adapter=out_file_adapter,
+          config=convert_config,
       ),
       convert_format_utils.ShardInstruction(
           in_path=epath.Path('/in/ds-train.tfrecord-00001-of-00003'),
-          in_file_adapter=in_file_adapter,
           out_path=epath.Path('/out/ds-train.array_record-00001-of-00003'),
-          out_file_adapter=out_file_adapter,
+          config=convert_config,
       ),
       convert_format_utils.ShardInstruction(
           in_path=epath.Path('/in/ds-train.tfrecord-00002-of-00003'),
-          in_file_adapter=in_file_adapter,
           out_path=epath.Path('/out/ds-train.array_record-00002-of-00003'),
-          out_file_adapter=out_file_adapter,
+          config=convert_config,
       ),
   ]
 
