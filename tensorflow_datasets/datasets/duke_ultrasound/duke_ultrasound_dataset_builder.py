@@ -42,7 +42,7 @@ _DEFAULT_SPLITS = {
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DAS beamformed phantom images and paired post-processed images."""
 
-  VERSION = tfds.core.Version('1.0.1')
+  VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '2.0.0': r'Fix timestamp_id from %Y%m%d%H%M%S to posix timestamp.',
       '1.0.1': 'Fixes parsing of boolean field `harmonic`.',
