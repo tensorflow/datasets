@@ -45,7 +45,7 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
 
   __count__ = 0
 
-  VERSION = tfds.core.Version('0.0.2')
+  VERSION = tfds.core.Version('0.0.3')
   RELEASE_NOTES = {
       '0.0.1': 'Initial release.',
       '0.0.2': (
