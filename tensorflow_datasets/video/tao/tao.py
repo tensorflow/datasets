@@ -281,7 +281,7 @@ class Tao(tfds.core.BeamBasedBuilder):
           width=None,
       ),
   ]
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
       '1.1.0': 'Added test split.',
   }
