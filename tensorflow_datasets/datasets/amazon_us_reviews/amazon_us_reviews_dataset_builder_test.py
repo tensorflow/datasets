@@ -21,12 +21,12 @@ from tensorflow_datasets.datasets.amazon_us_reviews import amazon_us_reviews_dat
 
 class AmazonUSReviewsTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = amazon_us_reviews_dataset_builder.Builder
-  BUILDER_CONFIG_NAMES_TO_TEST = ["Apparel_v1_00"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["Book"]
   SPLITS = {
       "train": 5,
   }
 
-  DL_EXTRACT_RESULT = "test.tsv"
+  DL_EXTRACT_RESULT = "test.json"
 
 
 if __name__ == "__main__":
