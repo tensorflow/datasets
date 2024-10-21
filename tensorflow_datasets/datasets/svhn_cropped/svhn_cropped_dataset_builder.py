@@ -26,7 +26,7 @@ URL = "http://ufldl.stanford.edu/housenumbers/"
 class Builder(tfds.core.GeneratorBasedBuilder):
   """Street View House Numbers (SVHN) Dataset, cropped version."""
 
-  VERSION = tfds.core.Version("3.0.0")
+  VERSION = tfds.core.Version("3.1.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("3.1.0"),
   ]

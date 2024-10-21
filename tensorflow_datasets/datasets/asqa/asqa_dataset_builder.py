@@ -80,7 +80,7 @@ def _features():
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for asqa dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '2.0.0': 'Sample ID goes from int32 (overflowing) to int64.',
       '1.0.0': 'Initial release.',

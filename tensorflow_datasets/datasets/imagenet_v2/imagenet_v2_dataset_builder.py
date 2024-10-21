@@ -69,7 +69,7 @@ def _create_builder_configs():
 class Builder(tfds.core.GeneratorBasedBuilder):
   """An ImageNet test set recollected by following the original protocol."""
 
-  VERSION = tfds.core.Version('3.0.0')
+  VERSION = tfds.core.Version('3.1.0')
   SUPPORTED_VERSIONS = [
       tfds.core.Version('2.0.0'),
   ]

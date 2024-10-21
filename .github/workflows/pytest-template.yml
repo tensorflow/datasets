@@ -61,6 +61,7 @@ jobs:
     # * github_api is run separately to not overuse API quota.
     # * wmt is run separately to avoid worker hanging.
     # * Huggingface requires `datasets` library.
+    # * version_test loads datasets that fail in OSS (e.g. smart_buildings).
     - name: Run core tests
       run: |
         pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ matrix.num-shards }} \
@@ -72,7 +73,8 @@ jobs:
           --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
           --ignore="tensorflow_datasets/translate/wmt19_test.py" \
           --ignore="tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/core/utils/huggingface_utils_test.py"
+          --ignore="tensorflow_datasets/core/utils/huggingface_utils_test.py" \
+          --ignore="tensorflow_datasets/testing/version_test.py"
 
     # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
     - name: Run leftover tests
