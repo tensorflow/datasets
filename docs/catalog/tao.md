@@ -12,6 +12,11 @@
 # `tao`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -33,10 +38,13 @@ requires at least 300 GB of free space to store.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): No release notes.
-    *   `1.1.0`: Added test split.
+    *   **`1.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Added test split.
 
-*   **Download size**: `113.96 GiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -53,14 +61,12 @@ and only the data not requiring manual download will be used.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'train'`      | 500
-`'validation'` | 988
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -69,6 +75,10 @@ Split          | Examples
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -91,8 +101,6 @@ Split          | Examples
 ## tao/480_640 (default config)
 
 *   **Config description**: All images are bilinearly resized to 480 X 640
-
-*   **Dataset size**: `482.30 GiB`
 
 *   **Feature structure**:
 
@@ -141,48 +149,9 @@ tracks/scale_category                | Tensor                |                  
 tracks/track_id                      | Tensor                |                     | int32   |
 video                                | Video(Image)          | (None, 480, 640, 3) | uint8   |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tao-480_640-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## tao/full_resolution
 
 *   **Config description**: The full resolution version of the dataset.
-
-*   **Dataset size**: `171.24 GiB`
 
 *   **Feature structure**:
 
@@ -230,40 +199,3 @@ tracks/is_crowd                      | Tensor                |                  
 tracks/scale_category                | Tensor                |                       | string  |
 tracks/track_id                      | Tensor                |                       | int32   |
 video                                | Video(Image)          | (None, None, None, 3) | uint8   |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tao-full_resolution-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->

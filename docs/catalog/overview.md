@@ -87,6 +87,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Biology`
 
+*   [`ai2dcaption`](ai2dcaption.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`ogbg_molpcba`](ogbg_molpcba.md)
 
 ### `Categorical`
@@ -114,6 +116,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Conditional image generation`
 
 *   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`webvid`](webvid.md)
 
 ### `Coreference resolution`
@@ -137,6 +140,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`caltech101`](caltech101.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012_subset`](imagenet2012_subset.md)
 
 ### `Dependency parsing`
 
@@ -200,6 +204,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`abstract_reasoning`](abstract_reasoning.md)
 *   [`aflw2k3d`](aflw2k3d.md)
+*   [`ai2dcaption`](ai2dcaption.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`bccd`](bccd.md)
 *   [`beans`](beans.md)
 *   [`bee_dataset`](bee_dataset.md)
@@ -319,6 +325,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`i_naturalist2018`](i_naturalist2018.md)
 *   [`i_naturalist2021`](i_naturalist2021.md)
 *   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`imagenet_resized`](imagenet_resized.md)
 *   [`imagenet_sketch`](imagenet_sketch.md)
 *   [`imagenette`](imagenette.md)
@@ -353,12 +360,14 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Image clustering`
 
 *   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`stanford_dogs`](stanford_dogs.md)
 *   [`stl10`](stl10.md)
 
 ### `Image compression`
 
 *   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`imagenet_resized`](imagenet_resized.md)
 *   [`oxford_iiit_pet`](oxford_iiit_pet.md)
 *   [`patch_camelyon`](patch_camelyon.md)
@@ -372,6 +381,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cityscapes`](cityscapes.md)
 *   [`clevr`](clevr.md)
 *   [`imagenet2012`](imagenet2012.md)
+*   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`oxford_flowers102`](oxford_flowers102.md)
 *   [`stanford_dogs`](stanford_dogs.md)
 *   [`stl10`](stl10.md)

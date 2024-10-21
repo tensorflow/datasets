@@ -99,6 +99,9 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/ai2dcaption
+    status: nightly
+    title: ai2dcaption
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
   title: Biology
@@ -135,6 +138,8 @@ toc:
 - section:
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
   - path: /datasets/catalog/webvid
     title: webvid (manual)
   title: Conditional image generation
@@ -169,6 +174,8 @@ toc:
     title: celeb_a_hq (manual)
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
   title: Density estimation
 - section:
   - path: /datasets/catalog/universal_dependencies
@@ -247,6 +254,9 @@ toc:
     title: abstract_reasoning (manual)
   - path: /datasets/catalog/aflw2k3d
     title: aflw2k3d
+  - path: /datasets/catalog/ai2dcaption
+    status: nightly
+    title: ai2dcaption
   - path: /datasets/catalog/bccd
     title: bccd
   - path: /datasets/catalog/beans
@@ -479,6 +489,8 @@ toc:
     title: i_naturalist2021
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
   - path: /datasets/catalog/imagenet_sketch
@@ -541,6 +553,8 @@ toc:
 - section:
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
   - path: /datasets/catalog/stanford_dogs
     title: stanford_dogs
   - path: /datasets/catalog/stl10
@@ -549,6 +563,8 @@ toc:
 - section:
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
   - path: /datasets/catalog/oxford_iiit_pet
@@ -571,6 +587,8 @@ toc:
     title: clevr
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
   - path: /datasets/catalog/oxford_flowers102
     title: oxford_flowers102
   - path: /datasets/catalog/stanford_dogs
