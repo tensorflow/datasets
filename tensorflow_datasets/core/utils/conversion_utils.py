@@ -154,7 +154,11 @@ def to_tfds_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
     case feature_lib.Audio():
       if (array := value.get('array')) is not None:
         # Hugging Face uses floats, TFDS uses integers.
-        return [int(sample * feature.sample_rate) for sample in array]
+        # Here we convert the float in [-1, 1] range into signed int32
+        # range [-2**32, 2**32-1]. Nevertheless, the mantissa size of
+        # float32 is 23 bits, therefore the maximum bit depth possible is 23.
+        dtype = feature.dtype
+        return (array * np.iinfo(dtype).max).astype(dtype=dtype)
       elif (path := value.get('path')) and (path := epath.Path(path)).exists():
         return path
     case feature_lib.Image():

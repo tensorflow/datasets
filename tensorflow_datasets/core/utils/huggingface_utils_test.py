@@ -100,7 +100,7 @@ def test_convert_hf_features_raises_value_error():
         ),
         (
             hf_datasets.Audio(sampling_rate=48000),
-            feature_lib.Audio(sample_rate=48000),
+            feature_lib.Audio(sample_rate=48000, dtype=np.int32),
         ),
     ],
 )

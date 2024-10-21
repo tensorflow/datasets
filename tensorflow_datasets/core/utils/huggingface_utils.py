@@ -113,7 +113,10 @@ def convert_hf_features(hf_features) -> feature_lib.FeatureConnector:
     case hf_datasets.Image():
       return feature_lib.Image(encoding_format=_IMAGE_ENCODING_FORMAT)
     case hf_datasets.Audio():
-      return feature_lib.Audio(sample_rate=hf_features.sampling_rate)
+      return feature_lib.Audio(
+          sample_rate=hf_features.sampling_rate,
+          dtype=np.int32,
+      )
 
   raise TypeError(f'Type {type(hf_features)} is not supported.')
 
