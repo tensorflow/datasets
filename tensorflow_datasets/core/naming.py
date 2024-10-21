@@ -691,6 +691,17 @@ class ShardedFileTemplate:
       replacement = '*'
     return _replace_shard_pattern(os.fspath(a_filepath), replacement)
 
+  def glob_pattern(self, num_shards: int | None = None) -> str:
+    """Returns a glob pattern for all the file paths captured by this template."""
+    if num_shards is None:
+      # e.g., `dataset_name-split.fileformat*`
+      return self.sharded_filepaths_pattern(num_shards=None)
+    first_shard = self.sharded_filepath(shard_index=0, num_shards=num_shards)
+    file_name = first_shard.name
+    file_pattern = re.sub(r'0{5,}-of-', '*-of-', file_name)
+    # e.g., `dataset_name-split.fileformat-*-of-00042`
+    return os.fspath(first_shard.parent / file_pattern)
+
   def sharded_filenames(self, num_shards: int) -> list[str]:
     return [path.name for path in self.sharded_filepaths(num_shards=num_shards)]
 

@@ -15,6 +15,8 @@
 
 """Tests for the Split API."""
 
+import os
+from etils import epath
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import proto
@@ -668,6 +670,32 @@ class SplitInfoTest(testing.TestCase):
       split_info.file_spec(
           file_format=tfds.core.file_adapters.FileFormat.TFRECORD
       )
+
+  def test_get_available_shards(self):
+    tmp_dir = epath.Path(self.tmp_dir)
+    train_shard1 = tmp_dir / 'ds-train.tfrecord-00000-of-00002'
+    train_shard1.touch()
+    train_shard_incorrect = tmp_dir / 'ds-train.tfrecord-00000-of-12345'
+    train_shard_incorrect.touch()
+    test_shard1 = tmp_dir / 'ds-test.tfrecord-00000-of-00001'
+    test_shard1.touch()
+
+    split_info = splits.SplitInfo(
+        name='train',
+        shard_lengths=[1, 2],
+        num_bytes=42,
+        filename_template=_filename_template(
+            split='train', data_dir=os.fspath(tmp_dir), dataset_name='ds'
+        ),
+    )
+    self.assertEqual(
+        [train_shard1, train_shard_incorrect],
+        split_info.get_available_shards(tmp_dir, strict_matching=False),
+    )
+    self.assertEqual(
+        [train_shard1],
+        split_info.get_available_shards(tmp_dir, strict_matching=True),
+    )
 
 
 if __name__ == '__main__':

@@ -516,6 +516,19 @@ def test_sharded_file_template_shard_index():
   )
 
 
+def test_glob_pattern():
+  template = naming.ShardedFileTemplate(
+      dataset_name='ds',
+      split='train',
+      filetype_suffix='tfrecord',
+      data_dir=epath.Path('/data'),
+  )
+  assert '/data/ds-train.tfrecord*' == template.glob_pattern()
+  assert '/data/ds-train.tfrecord-*-of-00042' == template.glob_pattern(
+      num_shards=42
+  )
+
+
 def test_sharded_file_template_sharded_filepath_shard_x_of_y():
   builder_dir = epath.Path('/my/path')
   template_explicit = naming.ShardedFileTemplate(

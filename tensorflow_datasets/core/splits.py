@@ -120,6 +120,38 @@ class SplitInfo:
     # Normalize bytes
     super().__setattr__('num_bytes', units.Size(self.num_bytes))
 
+  def get_available_shards(
+      self,
+      data_dir: epath.Path | None = None,
+      file_format: file_adapters.FileFormat | None = None,
+      strict_matching: bool = True,
+  ) -> list[epath.Path]:
+    """Returns the list of shards that are present in the data dir.
+
+    Args:
+      data_dir: The data directory to look for shards in. If not provided, the
+        data directory from the filename template is used.
+      file_format: The file format to look for shards in. If not provided, the
+        file format from the filename template is used.
+      strict_matching: If True, only shards that match the filename template
+        exactly are returned taking into account the number of shards.
+        Otherwise, shards that match the template with a wildcard for the shard
+        number are returned.
+    """
+    if filename_template := self.filename_template:
+      if file_format:
+        filename_template = filename_template.replace(
+            filetype_suffix=file_format.file_suffix
+        )
+      data_dir = data_dir or filename_template.data_dir
+      if strict_matching:
+        pattern = filename_template.glob_pattern(num_shards=self.num_shards)
+      else:
+        pattern = filename_template.sharded_filepaths_pattern(num_shards=None)
+      return list(data_dir.glob(pattern))
+    else:
+      raise ValueError(f'Filename template for split {self.name} is empty.')
+
   @classmethod
   def from_proto(
       cls,
@@ -382,7 +414,7 @@ class Split(str):
   """
 
   def __repr__(self) -> str:
-    return '{}({})'.format(type(self).__name__, super(Split, self).__repr__())  # pytype: disable=wrong-arg-types
+    return f'{type(self).__name__}({super().__repr__()})'
 
 
 Split.TRAIN = Split('train')
@@ -735,7 +767,9 @@ def _str_to_relative_instruction(spec: str) -> AbstractSplit:
   else:  # split='train[x:y]' or split='train[x]'
     slices = [_SLICE_RE.match(x) for x in split_selector.split(':')]
     # Make sure all slices are valid, and at least one is not empty
-    if not all(slices) or not any(x.group(0) for x in slices):  # pytype: disable=attribute-error  # re-none
+    if not all(slices) or not any(
+        x.group(0) for x in slices if x is not None
+    ):  # re-none
       raise ValueError(err_msg)
     if len(slices) == 1:  # split='train[x]'
       (from_match,) = slices

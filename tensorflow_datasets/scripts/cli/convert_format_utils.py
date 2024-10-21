@@ -15,6 +15,8 @@
 
 r"""Library to convert a dataset from one file format to another."""
 
+from __future__ import annotations
+
 from collections.abc import Iterable, Iterator, Mapping, Sequence
 import dataclasses
 import functools
@@ -50,41 +52,97 @@ ConvertFn = Callable[[tf.train.Example], bytes]
 
 
 @dataclasses.dataclass(frozen=True)
+class ConvertConfig:
+  """Configuration for the conversion of a shard.
+
+  Attributes:
+    out_file_format: the format to which the dataset should be converted to.
+    in_file_format: the format of the dataset to convert. If `None`, then the
+      config is not yet complete.
+    convert_fn: optional function to convert a single example.
+    overwrite: whether to overwrite existing shards.
+    fail_on_error: whether to fail on error when converting a shard or just log
+      the error.
+    use_beam: whether to use Beam to convert datasets. Useful for big datasets.
+    num_workers: number of workers to use when not using Beam. If `use_beam` is
+      set, this flag is ignored. If `num_workers=1`, the conversion will be done
+      sequentially.
+    in_file_adapter: file adapter for the `in_file_format`.
+    out_file_adapter: file adapter for the `out_file_format`.
+  """
+
+  out_file_format: file_adapters.FileFormat
+  in_file_format: file_adapters.FileFormat | None = None
+  convert_fn: ConvertFn | None = None
+  overwrite: bool = False
+  fail_on_error: bool = False
+  use_beam: bool = False
+  num_workers: int = 8
+
+  @property
+  def in_file_adapter(self) -> Type[file_adapters.FileAdapter]:
+    if self.in_file_format is None:
+      raise ValueError('in_file_format must be set!')
+    return file_adapters.ADAPTER_FOR_FORMAT[self.in_file_format]
+
+  @property
+  def out_file_adapter(self) -> Type[file_adapters.FileAdapter]:
+    return file_adapters.ADAPTER_FOR_FORMAT[self.out_file_format]
+
+  def with_in_file_format(
+      self, in_file_format: file_adapters.FileFormat
+  ) -> ConvertConfig:
+    """Returns a new config with the given `in_file_format`."""
+    return dataclasses.replace(self, in_file_format=in_file_format)
+
+
+@dataclasses.dataclass(frozen=True)
 class ShardInstruction:
   """Instruction for how one single shard should be converted."""
 
   in_path: epath.Path
-  in_file_adapter: Type[file_adapters.FileAdapter]
   out_path: epath.Path
-  out_file_adapter: Type[file_adapters.FileAdapter]
-  convert_fn: ConvertFn | None = None
+  config: ConvertConfig
 
   def convert(self) -> None:
     """Converts the shard to the desired file format."""
 
     def read_in() -> Iterator[type_utils.KeySerializedExample]:
-      in_dataset = self.in_file_adapter.make_tf_data(filename=self.in_path)
+      in_dataset = self.config.in_file_adapter.make_tf_data(
+          filename=self.in_path
+      )
       for i, row in tqdm.tqdm(
           enumerate(in_dataset),
           unit=' examples',
           desc=f'Shard {self.in_path.name}',
       ):
-        if self.convert_fn is not None:
-          yield i, self.convert_fn(row)
+        if self.config.convert_fn is not None:
+          yield i, self.config.convert_fn(row)
         else:
           yield i, row.numpy()
 
-    with py_utils.incomplete_file(self.out_path) as tmp_file:
-      self.out_file_adapter.write_examples(path=tmp_file, iterator=read_in())
+    try:
+      with py_utils.incomplete_file(self.out_path) as tmp_file:
+        self.config.out_file_adapter.write_examples(
+            path=tmp_file, iterator=read_in()
+        )
+    except Exception as e:  # pylint: disable=broad-except
+      if self.config.fail_on_error:
+        raise e
+      else:
+        logging.exception(
+            'Failed to convert shard %s (format=%s) to %s (format=%s!',
+            self.in_path,
+            self.config.in_file_adapter.FILE_SUFFIX,
+            self.out_path,
+            self.config.out_file_adapter.FILE_SUFFIX,
+        )
 
 
 def _shard_instructions_for_split(
     split_info: splits_lib.SplitInfo,
-    out_file_format: file_adapters.FileFormat,
     out_path: epath.Path,
-    in_file_adapter: Type[file_adapters.FileAdapter],
-    out_file_adapter: Type[file_adapters.FileAdapter],
-    convert_fn: ConvertFn | None = None,
+    convert_config: ConvertConfig,
 ) -> list[ShardInstruction]:
   """Returns shard instructions for the given split."""
 
@@ -93,7 +151,8 @@ def _shard_instructions_for_split(
 
   in_filename_template = split_info.filename_template
   out_filename_template = in_filename_template.replace(
-      data_dir=out_path, filetype_suffix=out_file_format.file_suffix
+      data_dir=out_path,
+      filetype_suffix=convert_config.out_file_format.file_suffix,
   )
   num_shards = len(split_info.shard_lengths)
   if num_shards <= 0:
@@ -114,10 +173,8 @@ def _shard_instructions_for_split(
     instructions.append(
         ShardInstruction(
             in_path=in_file_path,
-            in_file_adapter=in_file_adapter,
             out_path=out_path,
-            out_file_adapter=out_file_adapter,
-            convert_fn=convert_fn,
+            config=convert_config,
         )
     )
   return instructions
@@ -125,23 +182,20 @@ def _shard_instructions_for_split(
 
 def get_all_shard_instructions(
     info: dataset_info.DatasetInfo,
-    out_file_format: file_adapters.FileFormat,
     out_path: epath.Path,
-    convert_fn: ConvertFn | None = None,
+    convert_config: ConvertConfig,
 ) -> list[ShardInstruction]:
   """Returns all shard instructions for the given dataset info."""
-  in_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[info.file_format]
-  out_file_adapter = file_adapters.ADAPTER_FOR_FORMAT[out_file_format]
+  if info.file_format is None:
+    raise ValueError('in_file_format must be set!')
+  convert_config = convert_config.with_in_file_format(info.file_format)
   shard_instructions = []
   for split_info in info.splits.values():
     shard_instructions.extend(
         _shard_instructions_for_split(
             split_info=split_info,
-            out_file_format=out_file_format,
             out_path=out_path,
-            in_file_adapter=in_file_adapter,
-            out_file_adapter=out_file_adapter,
-            convert_fn=convert_fn,
+            convert_config=convert_config,
         )
     )
   return shard_instructions
@@ -173,7 +227,43 @@ def convert_metadata(
     out_file_format: the format to which the dataset should be converted to.
     out_path: folder where the converted dataset should be stored.
   """
+
+  missing_shards_per_split = {}
+  for split_info in info.splits.values():
+    available_shards = split_info.get_available_shards(
+        out_path, file_format=out_file_format
+    )
+    if len(available_shards) < split_info.num_shards:
+      missing_shards_per_split[split_info.name] = (
+          len(available_shards),
+          split_info.num_shards,
+      )
+      logging.warning(
+          'Found %d shards for split %s, but expected %d shards.',
+          len(available_shards),
+          split_info.name,
+          split_info.num_shards,
+      )
+    elif len(available_shards) > split_info.num_shards:
+      raise ValueError(
+          f'Found more shards ({len(available_shards)}) for split'
+          f' {split_info.name}, but expected only'
+          f' {split_info.num_shards} shards.'
+      )
+
   if in_dir == out_path:
+    if missing_shards_per_split:
+      missing_shard_info = [
+          f'split {name}: {available} / {total} shards'
+          for name, (available, total) in missing_shards_per_split.items()
+      ]
+      logging.error(
+          'Skipping updating metadata in %s because shards are missing: %s',
+          os.fspath(in_dir),
+          ', '.join(missing_shard_info),
+      )
+      return
+
     # File format was added to an existing dataset.
     # Add the file format to `alternative_file_formats` field.
     if out_file_format not in info.alternative_file_formats:
@@ -189,6 +279,8 @@ def convert_metadata(
     return
 
   # Copy all json files except dataset_info.json because it needs to be updated.
+  # Even if there are missing shards, it's better to copy the metadata than not
+  # copying it at all.
   for json_file in in_dir.glob('*.json'):
     if json_file.name == constants.DATASET_INFO_FILENAME:
       continue
@@ -219,28 +311,25 @@ def _convert_dataset(
     info: dataset_info.DatasetInfo,
     dataset_dir: epath.Path,
     out_dir: epath.Path,
-    out_file_format: file_adapters.FileFormat,
-    overwrite: bool = False,
+    convert_config: ConvertConfig,
     pipeline: beam.Pipeline | None = None,
-    convert_fn: ConvertFn | None = None,
 ) -> None:
   """Converts a single dataset version to the given file format."""
   logging.info(
       'Converting shards in %s to %s, saving in %s.',
       dataset_dir,
-      out_file_format.value,
+      convert_config.out_file_format.value,
       out_dir,
   )
   if dataset_dir != out_dir:
-    if overwrite:
+    if convert_config.overwrite:
       out_dir.unlink(missing_ok=True)
     out_dir.mkdir(parents=True, exist_ok=True)
 
   shard_instructions = get_all_shard_instructions(
       info=info,
-      out_file_format=out_file_format,
       out_path=out_dir,
-      convert_fn=convert_fn,
+      convert_config=convert_config,
   )
 
   if not shard_instructions:
@@ -332,40 +421,31 @@ def _get_info_for_dirs_to_convert(
 
 def _convert_dataset_dirs(
     from_to_dirs: Mapping[epath.Path, epath.Path],
-    out_file_format: file_adapters.FileFormat,
-    overwrite: bool = False,
-    use_beam: bool = False,
-    num_workers: int = 8,
-    convert_fn: ConvertFn | None = None,
+    convert_config: ConvertConfig,
 ) -> None:
   """Converts all datasets in the given `from_to_dirs` parameter.
 
   Args:
     from_to_dirs: mapping from specific input dataset folders to the folder
       where the converted dataset should be stored.
-    out_file_format: the format to which the datasets should be converted to.
-    overwrite: whether to overwrite the to_dirs if they exist.
-    use_beam: whether to use Beam to convert the datasets.
-    num_workers: number of workers to use if `use_beam` is `False`.
-    convert_fn: optional function to convert TF examples into whatever is
-      desired.
+    convert_config: configuration for the conversion.
   """
   logging.info('Converting %d datasets.', len(from_to_dirs))
   found_dataset_versions: dict[epath.Path, dataset_info.DatasetInfo] = {}
 
-  if num_workers > 1:
+  if convert_config.num_workers > 1:
 
     def _process_get_infos(from_to_dir):
       from_dir, to_dir = from_to_dir
       return from_dir, _get_info_for_dirs_to_convert(
           from_dir=from_dir,
           to_dir=to_dir,
-          out_file_format=out_file_format,
-          overwrite=overwrite,
+          out_file_format=convert_config.out_file_format,
+          overwrite=convert_config.overwrite,
       )
 
     with concurrent.futures.ThreadPoolExecutor(
-        max_workers=num_workers
+        max_workers=convert_config.num_workers
     ) as executor:
       for from_dir, info in executor.map(
           _process_get_infos,
@@ -380,20 +460,17 @@ def _convert_dataset_dirs(
       info = _get_info_for_dirs_to_convert(
           from_dir=from_dir,
           to_dir=to_dir,
-          out_file_format=out_file_format,
-          overwrite=overwrite,
+          out_file_format=convert_config.out_file_format,
+          overwrite=convert_config.overwrite,
       )
       if info is not None:
         found_dataset_versions[from_dir] = info
   convert_dataset_fn = functools.partial(
-      _convert_dataset,
-      out_file_format=out_file_format,
-      overwrite=overwrite,
-      convert_fn=convert_fn,
+      _convert_dataset, convert_config=convert_config
   )
 
   # First convert all shards (with or without Beam), then convert the metadata.
-  if use_beam:
+  if convert_config.use_beam:
     runner = None
     with beam.Pipeline(runner=runner) as pipeline:
       for dataset_dir, info in found_dataset_versions.items():
@@ -404,9 +481,9 @@ def _convert_dataset_dirs(
             out_dir=out_dir,
             pipeline=pipeline,
         )
-  elif num_workers > 1:
+  elif convert_config.num_workers > 1:
     with concurrent.futures.ThreadPoolExecutor(
-        max_workers=num_workers
+        max_workers=convert_config.num_workers
     ) as executor:
       for dataset_dir, info in found_dataset_versions.items():
         out_dir = from_to_dirs[dataset_dir]
@@ -436,7 +513,7 @@ def _convert_dataset_dirs(
     convert_metadata(
         in_dir=dataset_dir,
         info=info,
-        out_file_format=out_file_format,
+        out_file_format=convert_config.out_file_format,
         out_path=out_dir,
     )
 
@@ -472,11 +549,7 @@ def _create_from_to_dirs(
 def convert_root_data_dir(
     root_data_dir: epath.PathLike,
     out_dir: epath.PathLike | None,
-    out_file_format: str | file_adapters.FileFormat,
-    use_beam: bool,
-    overwrite: bool = False,
-    num_workers: int = 8,
-    convert_fn: ConvertFn | None = None,
+    convert_config: ConvertConfig,
 ) -> None:
   """Converts all datasets found in the given dataset dir.
 
@@ -487,18 +560,10 @@ def convert_root_data_dir(
       be stored with the same folder structure as the input folder. If `None`,
       the converted datasets will be stored in the same folder as the input
       datasets.
-    out_file_format: file format to which the dataset should be converted.
-    use_beam: whether to use Beam to convert datasets. Useful for big datasets.
-    overwrite: whether to overwrite folders in `out_dir` if they already exist.
-    num_workers: number of workers to use if `use_beam` is `False`.
-    convert_fn: optional function to convert TF examples into whatever is
-      desired.
+    convert_config: configuration for the conversion.
   """
   root_data_dir = epath.Path(root_data_dir)
   out_path = epath.Path(out_dir) if out_dir is not None else None
-
-  if isinstance(out_file_format, str):
-    out_file_format = file_adapters.file_format_from_suffix(out_file_format)
 
   references = file_utils.list_datasets_in_data_dir(
       data_dir=root_data_dir,
@@ -515,11 +580,7 @@ def convert_root_data_dir(
 
   _convert_dataset_dirs(
       from_to_dirs=from_to_dirs,
-      out_file_format=out_file_format,
-      overwrite=overwrite,
-      use_beam=use_beam,
-      num_workers=num_workers,
-      convert_fn=convert_fn,
+      convert_config=convert_config,
   )
 
 
@@ -537,11 +598,7 @@ def _create_out_dir(
 def convert_dataset_dir(
     dataset_dir: epath.PathLike,
     out_dir: epath.PathLike | None,
-    out_file_format: file_adapters.FileFormat,
-    use_beam: bool,
-    overwrite: bool = False,
-    num_workers: int = 8,
-    convert_fn: ConvertFn | None = None,
+    convert_config: ConvertConfig,
 ) -> None:
   """Converts all datasets found in the given dataset dir.
 
@@ -552,12 +609,7 @@ def convert_dataset_dir(
       be stored with the same folder structure as the input folder. If `None`,
       the converted shards will be stored in the same folder as the input
       datasets.
-    out_file_format: file format to which the dataset should be converted.
-    use_beam: whether to use Beam to convert datasets. Useful for big datasets.
-    overwrite: whether to overwrite folders in `out_dir` if they already exist.
-    num_workers: number of workers to use if `use_beam` is `False`.
-    convert_fn: optional function to convert TF examples into whatever is
-      desired.
+    convert_config: configuration for the conversion.
   """
   dataset_dir = epath.Path(dataset_dir)
   out_path = epath.Path(out_dir) if out_dir is not None else None
@@ -582,11 +634,7 @@ def convert_dataset_dir(
 
   _convert_dataset_dirs(
       from_to_dirs=from_to_dirs,
-      out_file_format=out_file_format,
-      overwrite=overwrite,
-      use_beam=use_beam,
-      num_workers=num_workers,
-      convert_fn=convert_fn,
+      convert_config=convert_config,
   )
 
 
@@ -602,6 +650,7 @@ def convert_dataset(
     use_beam: bool = False,
     num_workers: int = 8,
     convert_fn: ConvertFn | None = None,
+    fail_on_error: bool = True,
 ) -> None:
   """Convert a dataset from one file format to another format.
 
@@ -629,6 +678,9 @@ def convert_dataset(
       sequentially.
     convert_fn: optional function to convert TF examples into whatever is
       desired.
+    fail_on_error: whether to fail the entire pipeline when one shard fails to
+      convert. When converting an entire root data dir, setting this to `True`
+      will fail the entire pipeline if a single shard fails to convert.
   """
   if (
       root_data_dir is None
@@ -643,21 +695,27 @@ def convert_dataset(
   if isinstance(out_file_format, str):
     out_file_format = file_adapters.file_format_from_suffix(out_file_format)
 
+  convert_config = ConvertConfig(
+      overwrite=overwrite,
+      out_file_format=out_file_format,
+      in_file_format=None,  # Not yet known, will be set later.
+      convert_fn=convert_fn,
+      fail_on_error=fail_on_error,
+      use_beam=use_beam,
+      num_workers=num_workers,
+  )
+
   if root_data_dir:
     convert_root_data_dir(
         root_data_dir=root_data_dir,
         out_dir=out_dir,
-        out_file_format=out_file_format,
-        use_beam=use_beam,
-        overwrite=overwrite,
+        convert_config=convert_config,
     )
   elif dataset_dir:
     convert_dataset_dir(
         dataset_dir=dataset_dir,
         out_dir=out_dir,
-        out_file_format=out_file_format,
-        use_beam=use_beam,
-        overwrite=overwrite,
+        convert_config=convert_config,
     )
   elif dataset_version_dir:
     if isinstance(dataset_version_dir, str):
@@ -679,11 +737,7 @@ def convert_dataset(
 
     _convert_dataset_dirs(
         from_to_dirs=from_to_dirs,
-        out_file_format=out_file_format,
-        overwrite=overwrite,
-        use_beam=use_beam,
-        num_workers=num_workers,
-        convert_fn=convert_fn,
+        convert_config=convert_config,
     )
   else:
     raise ValueError(

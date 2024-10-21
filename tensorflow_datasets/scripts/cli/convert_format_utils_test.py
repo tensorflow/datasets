@@ -23,6 +23,59 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.scripts.cli import convert_format_utils
 
 
+def _create_dataset_info(
+    data_dir: epath.Path,
+    name: str = 'a',
+    version: str = '1.2.3',
+    config_name: str = 'cfg1',
+    file_format: file_adapters.FileFormat = file_adapters.FileFormat.TFRECORD,
+    split_lengths: dict[str, int] | None = None,
+) -> dataset_info.DatasetInfo:
+  filename_template = naming.ShardedFileTemplate(
+      data_dir=data_dir,
+      dataset_name=name,
+      split=None,  # will be set in _create_split_info
+      filetype_suffix=file_format.value,
+  )
+  split_lengths = split_lengths or {}
+  info = dataset_info.DatasetInfo(
+      builder=dataset_info.DatasetIdentity(
+          name=name,
+          version=version,
+          config_name=config_name,
+          data_dir=data_dir,
+          module_name='xyz',
+      ),
+      split_dict=splits_lib.SplitDict(
+          split_infos=[
+              _create_split_info(
+                  name=split_name,
+                  shard_lengths=[1] * split_length,
+                  filename_template=filename_template,
+              )
+              for split_name, split_length in split_lengths.items()
+          ]
+      ),
+  )
+  info.set_file_format(file_format)
+  data_dir.mkdir(parents=True, exist_ok=True)
+  info.write_to_directory(data_dir)
+  return info
+
+
+def _create_split_info(
+    name: str,
+    shard_lengths: list[int],
+    filename_template: naming.ShardedFileTemplate,
+) -> splits_lib.SplitInfo:
+  return splits_lib.SplitInfo(
+      name=name,
+      shard_lengths=shard_lengths,
+      num_bytes=1,
+      filename_template=filename_template.replace(split=name),
+  )
+
+
 def test_shard_instructions_for_split():
   split_info = splits_lib.SplitInfo(
       name='train',
@@ -35,33 +88,30 @@ def test_shard_instructions_for_split():
           filetype_suffix='tfrecord',
       ),
   )
-  in_file_adapter = file_adapters.TfRecordFileAdapter
-  out_file_adapter = file_adapters.ArrayRecordFileAdapter
+  convert_config = convert_format_utils.ConvertConfig(
+      in_file_format=file_adapters.FileFormat.TFRECORD,
+      out_file_format=file_adapters.FileFormat.ARRAY_RECORD,
+  )
   actual = convert_format_utils._shard_instructions_for_split(
       split_info=split_info,
-      out_file_format=file_adapters.FileFormat.ARRAY_RECORD,
       out_path=epath.Path('/out'),
-      in_file_adapter=in_file_adapter,
-      out_file_adapter=out_file_adapter,
+      convert_config=convert_config,
   )
   assert actual == [
       convert_format_utils.ShardInstruction(
           in_path=epath.Path('/in/ds-train.tfrecord-00000-of-00003'),
-          in_file_adapter=in_file_adapter,
           out_path=epath.Path('/out/ds-train.array_record-00000-of-00003'),
-          out_file_adapter=out_file_adapter,
+          config=convert_config,
       ),
       convert_format_utils.ShardInstruction(
           in_path=epath.Path('/in/ds-train.tfrecord-00001-of-00003'),
-          in_file_adapter=in_file_adapter,
           out_path=epath.Path('/out/ds-train.array_record-00001-of-00003'),
-          out_file_adapter=out_file_adapter,
+          config=convert_config,
       ),
       convert_format_utils.ShardInstruction(
           in_path=epath.Path('/in/ds-train.tfrecord-00002-of-00003'),
-          in_file_adapter=in_file_adapter,
           out_path=epath.Path('/out/ds-train.array_record-00002-of-00003'),
-          out_file_adapter=out_file_adapter,
+          config=convert_config,
       ),
   ]
 
@@ -116,21 +166,13 @@ def test_create_from_to_dirs_same_folder():
   assert actual == {expected_path: expected_path}
 
 
-def test_get_root_data_dir():
-  leaf_data_dir = epath.Path('/data/a/cfg1/1.2.3')
-  info = dataset_info.DatasetInfo(
-      builder=dataset_info.DatasetIdentity(
-          name='a',
-          version='1.2.3',
-          config_name='cfg1',
-          data_dir=leaf_data_dir,
-          module_name='xyz',
-      )
-  )
+def test_get_root_data_dir(tmpdir):
+  leaf_data_dir = epath.Path(tmpdir) / 'a/cfg1/1.2.3'
+  info = _create_dataset_info(data_dir=leaf_data_dir)
   actual = convert_format_utils._get_root_data_dir(
       in_dir=leaf_data_dir, info=info
   )
-  assert '/data' == os.fspath(actual)
+  assert os.fspath(tmpdir) == os.fspath(actual)
 
 
 def test_record_source_dataset(tmpdir):
@@ -140,17 +182,7 @@ def test_record_source_dataset(tmpdir):
   out_data_dir = tmpdir / 'out'
   in_data_dir.mkdir(parents=True)
   out_data_dir.mkdir(parents=True)
-  info = dataset_info.DatasetInfo(
-      builder=dataset_info.DatasetIdentity(
-          name='a',
-          version='1.2.3',
-          config_name='cfg1',
-          data_dir=in_data_dir,
-          module_name='xyz',
-      )
-  )
-  info.set_file_format(file_adapters.FileFormat.TFRECORD)
-  info.write_to_directory(in_data_dir)
+  info = _create_dataset_info(in_data_dir)
   convert_format_utils.convert_metadata(
       in_dir=in_data_dir,
       out_path=out_data_dir,
@@ -174,17 +206,12 @@ def test_record_source_dataset(tmpdir):
 def test_convert_metadata_add_to_existing(tmpdir):
   in_data_dir = epath.Path(tmpdir) / 'a/cfg1/1.2.3'
   in_data_dir.mkdir(parents=True)
-  info = dataset_info.DatasetInfo(
-      builder=dataset_info.DatasetIdentity(
-          name='a',
-          version='1.2.3',
-          config_name='cfg1',
-          data_dir=in_data_dir,
-          module_name='xyz',
-      )
-  )
-  info.set_file_format(file_adapters.FileFormat.TFRECORD)
-  info.write_to_directory(in_data_dir)
+  info = _create_dataset_info(data_dir=in_data_dir, split_lengths={'train': 1})
+
+  # Create a converted shard in the input directory.
+  converted_shard = in_data_dir / 'a-train.riegeli-00000-of-00001'
+  converted_shard.touch()
+
   convert_format_utils.convert_metadata(
       in_dir=in_data_dir,
       out_path=in_data_dir,
@@ -196,3 +223,21 @@ def test_convert_metadata_add_to_existing(tmpdir):
   assert converted_info.alternative_file_formats == [
       file_adapters.FileFormat.RIEGELI.value
   ]
+
+
+def test_convert_metadata_missing_shards(tmpdir):
+  in_data_dir = epath.Path(tmpdir) / 'a/cfg1/1.2.3'
+  in_data_dir.mkdir(parents=True)
+  info = _create_dataset_info(
+      in_data_dir, split_lengths={'train': 2, 'test': 1}
+  )
+  convert_format_utils.convert_metadata(
+      in_dir=in_data_dir,
+      out_path=in_data_dir,
+      info=info,
+      out_file_format=file_adapters.FileFormat.RIEGELI,
+  )
+  converted_info = dataset_info.read_proto_from_builder_dir(in_data_dir)
+  assert converted_info.file_format == file_adapters.FileFormat.TFRECORD.value
+  # Make sure no alternative file format was added.
+  assert not converted_info.alternative_file_formats
