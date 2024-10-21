@@ -669,6 +669,7 @@ class ShardedFileTemplate:
       self,
       *,
       num_shards: int | None = None,
+      use_at_notation: bool = False,
   ) -> str:
     """Returns a pattern describing all the file paths captured by this template.
 
@@ -680,6 +681,7 @@ class ShardedFileTemplate:
 
     Args:
       num_shards: optional specification of the number of shards.
+      use_at_notation: whether to return @* in case `num_shards` is `None`.
 
     Returns:
       the pattern describing all shards captured by this template.
@@ -687,6 +689,8 @@ class ShardedFileTemplate:
     a_filepath = self.sharded_filepath(shard_index=0, num_shards=1)
     if num_shards:
       replacement = f'@{num_shards}'
+    elif use_at_notation:
+      replacement = '@*'
     else:
       replacement = '*'
     return _replace_shard_pattern(os.fspath(a_filepath), replacement)
@@ -694,7 +698,7 @@ class ShardedFileTemplate:
   def sharded_filenames(self, num_shards: int) -> list[str]:
     return [path.name for path in self.sharded_filepaths(num_shards=num_shards)]
 
-  def replace(self, **kwargs: Any) -> 'ShardedFileTemplate':
+  def replace(self, **kwargs: Any) -> ShardedFileTemplate:
     """Returns a copy of the `ShardedFileTemplate` with updated attributes."""
     return dataclasses.replace(self, **kwargs)
 
