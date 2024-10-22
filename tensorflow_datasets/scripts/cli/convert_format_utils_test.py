@@ -16,10 +16,11 @@
 import os
 
 from etils import epath
-from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.scripts.cli import convert_format_utils
 
 
@@ -30,7 +31,7 @@ def _create_dataset_info(
     config_name: str = 'cfg1',
     file_format: file_adapters.FileFormat = file_adapters.FileFormat.TFRECORD,
     split_lengths: dict[str, int] | None = None,
-) -> dataset_info.DatasetInfo:
+) -> dataset_info_pb2.DatasetInfo:
   filename_template = naming.ShardedFileTemplate(
       data_dir=data_dir,
       dataset_name=name,
@@ -38,8 +39,8 @@ def _create_dataset_info(
       filetype_suffix=file_format.value,
   )
   split_lengths = split_lengths or {}
-  info = dataset_info.DatasetInfo(
-      builder=dataset_info.DatasetIdentity(
+  info = dataset_info_lib.DatasetInfo(
+      builder=dataset_info_lib.DatasetIdentity(
           name=name,
           version=version,
           config_name=config_name,
@@ -60,7 +61,7 @@ def _create_dataset_info(
   info.set_file_format(file_format)
   data_dir.mkdir(parents=True, exist_ok=True)
   info.write_to_directory(data_dir)
-  return info
+  return info.as_proto
 
 
 def _create_split_info(
@@ -189,7 +190,7 @@ def test_record_source_dataset(tmpdir):
       info=info,
       out_file_format=file_adapters.FileFormat.RIEGELI,
   )
-  converted_info = dataset_info.read_proto_from_builder_dir(out_data_dir)
+  converted_info = dataset_info_lib.read_proto_from_builder_dir(out_data_dir)
   assert converted_info.name == info.name
   assert converted_info.version == info.version
   assert converted_info.config_name == info.config_name
@@ -218,7 +219,7 @@ def test_convert_metadata_add_to_existing(tmpdir):
       info=info,
       out_file_format=file_adapters.FileFormat.RIEGELI,
   )
-  converted_info = dataset_info.read_proto_from_builder_dir(in_data_dir)
+  converted_info = dataset_info_lib.read_proto_from_builder_dir(in_data_dir)
   assert converted_info.file_format == file_adapters.FileFormat.TFRECORD.value
   assert converted_info.alternative_file_formats == [
       file_adapters.FileFormat.RIEGELI.value
@@ -237,7 +238,7 @@ def test_convert_metadata_missing_shards(tmpdir):
       info=info,
       out_file_format=file_adapters.FileFormat.RIEGELI,
   )
-  converted_info = dataset_info.read_proto_from_builder_dir(in_data_dir)
+  converted_info = dataset_info_lib.read_proto_from_builder_dir(in_data_dir)
   assert converted_info.file_format == file_adapters.FileFormat.TFRECORD.value
   # Make sure no alternative file format was added.
   assert not converted_info.alternative_file_formats

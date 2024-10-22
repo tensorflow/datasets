@@ -721,6 +721,32 @@ class GetSplitInfoFromProtoTest(testing.TestCase):
         ],
     )
 
+  def test_get_split_dict_from_proto(self):
+    actual = dataset_info.get_split_dict_from_proto(
+        dataset_info_proto=self._dataset_info_proto_with_splits(),
+        data_dir="/data",
+        file_format=file_adapters.FileFormat.PARQUET,
+    )
+    assert set(["train", "test"]) == set(actual.keys())
+
+    train = actual["train"]
+    assert train.name == "train"
+    assert train.shard_lengths == [1, 2, 3]
+    assert train.num_bytes == 42
+    assert train.filename_template.dataset_name == "dataset"
+    assert train.filename_template.template == naming.DEFAULT_FILENAME_TEMPLATE
+    assert train.filename_template.filetype_suffix == "parquet"
+
+    test = actual["test"]
+    assert test.name == "test"
+    assert test.shard_lengths == [1, 2, 3]
+    assert test.num_bytes == 42
+    assert test.filename_template.dataset_name == "dataset"
+    assert (
+        test.filename_template.template == "{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+    )
+    assert test.filename_template.filetype_suffix == "parquet"
+
   def test_get_split_info_from_proto_undefined_filename_template(self):
     actual = dataset_info.get_split_info_from_proto(
         dataset_info_proto=self._dataset_info_proto_with_splits(),

@@ -637,7 +637,7 @@ class DatasetInfo:
 
   @property
   def as_json(self) -> str:
-    return json_format.MessageToJson(self.as_proto, sort_keys=True)
+    return get_dataset_info_json(self.as_proto)
 
   def write_to_directory(
       self, dataset_info_dir: epath.PathLike, all_metadata=True
@@ -671,7 +671,7 @@ class DatasetInfo:
 
   def write_dataset_info_json(self, dataset_info_dir: epath.PathLike) -> None:
     """Writes only the dataset_info.json file to the given directory."""
-    dataset_info_path(dataset_info_dir).write_text(self.as_json)
+    write_dataset_info_proto(self.as_proto, dataset_info_dir=dataset_info_dir)
 
   def read_from_directory(self, dataset_info_dir: epath.PathLike) -> None:
     """Update DatasetInfo from the metadata files in `dataset_info_dir`.
@@ -852,18 +852,10 @@ class DatasetInfo:
       dataset_reference:
       url: a URL referring to the TFDS dataset.
     """
-    self._info_proto.data_source_accesses.append(
-        dataset_info_pb2.DataSourceAccess(
-            access_timestamp_ms=_now_in_milliseconds(),
-            tfds_dataset=dataset_info_pb2.TfdsDatasetReference(
-                name=dataset_reference.dataset_name,
-                config=dataset_reference.config,
-                version=str(dataset_reference.version),
-                data_dir=os.fspath(dataset_reference.data_dir),
-                ds_namespace=dataset_reference.namespace,
-            ),
-            url=dataset_info_pb2.Url(url=url),
-        )
+    add_tfds_data_source_access(
+        dataset_info_proto=self._info_proto,
+        dataset_reference=dataset_reference,
+        url=url,
     )
 
   def initialize_from_bucket(self) -> None:
@@ -1130,6 +1122,22 @@ def get_dataset_feature_statistics(builder, split):
   return statistics.datasets[0], schema
 
 
+def get_dataset_info_json(
+    dataset_info_proto: dataset_info_pb2.DatasetInfo,
+) -> str:
+  return json_format.MessageToJson(dataset_info_proto, sort_keys=True)
+
+
+def write_dataset_info_proto(
+    dataset_info_proto: dataset_info_pb2.DatasetInfo,
+    dataset_info_dir: epath.PathLike,
+) -> None:
+  """Writes the dataset info proto to the given path."""
+  dataset_info_dir = epath.Path(dataset_info_dir)
+  json_str = get_dataset_info_json(dataset_info_proto)
+  dataset_info_path(dataset_info_dir).write_text(json_str)
+
+
 def read_from_json(path: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
   """Read JSON-formatted proto into DatasetInfo proto.
 
@@ -1308,6 +1316,36 @@ def supports_file_format(
   return file_format in available_file_formats(dataset_info_proto)
 
 
+def get_split_dict_from_proto(
+    dataset_info_proto: dataset_info_pb2.DatasetInfo,
+    data_dir: epath.PathLike,
+    file_format: str | file_adapters.FileFormat | None = None,
+) -> splits_lib.SplitDict:
+  """Returns the split dict with all split infos from the given dataset.
+
+  Args:
+    dataset_info_proto: the proto with the dataset info and split infos.
+    data_dir: the directory where the data is stored.
+    file_format: the file format for which to get the split dict. If the file
+      format is not specified, the file format from the dataset info proto is
+      used.
+  """
+  if file_format:
+    file_format = file_adapters.FileFormat(file_format)
+  else:
+    file_format = file_adapters.FileFormat(dataset_info_proto.file_format)
+
+  filename_template = naming.ShardedFileTemplate(
+      dataset_name=dataset_info_proto.name,
+      data_dir=epath.Path(data_dir),
+      filetype_suffix=file_format.file_suffix,
+  )
+  return splits_lib.SplitDict.from_proto(
+      repeated_split_infos=dataset_info_proto.splits,
+      filename_template=filename_template,
+  )
+
+
 def get_split_info_from_proto(
     dataset_info_proto: dataset_info_pb2.DatasetInfo,
     split_name: str,
@@ -1328,22 +1366,40 @@ def get_split_info_from_proto(
         f"File format {file_format.value} does not match available dataset file"
         f" formats: {sorted(available_format)}."
     )
-  for split_info in dataset_info_proto.splits:
-    if split_info.name == split_name:
-      filename_template = naming.ShardedFileTemplate(
-          dataset_name=dataset_info_proto.name,
-          data_dir=epath.Path(data_dir),
-          filetype_suffix=file_format.file_suffix,
+
+  splits_dict = get_split_dict_from_proto(
+      dataset_info_proto=dataset_info_proto,
+      data_dir=data_dir,
+      file_format=file_format,
+  )
+  return splits_dict.get(split_name)
+
+
+def add_tfds_data_source_access(
+    dataset_info_proto: dataset_info_pb2.DatasetInfo,
+    dataset_reference: naming.DatasetReference,
+    url: str | None = None,
+) -> None:
+  """Records that the given query was used to generate this dataset.
+
+  Args:
+    dataset_info_proto: the proto with the dataset info to update.
+    dataset_reference: the dataset reference to record.
+    url: a URL referring to the TFDS dataset.
+  """
+  dataset_info_proto.data_source_accesses.append(
+      dataset_info_pb2.DataSourceAccess(
+          access_timestamp_ms=_now_in_milliseconds(),
+          tfds_dataset=dataset_info_pb2.TfdsDatasetReference(
+              name=dataset_reference.dataset_name,
+              config=dataset_reference.config,
+              version=str(dataset_reference.version),
+              data_dir=os.fspath(dataset_reference.data_dir),
+              ds_namespace=dataset_reference.namespace,
+          ),
+          url=dataset_info_pb2.Url(url=url),
       )
-      # Override the default file name template if it was set.
-      if split_info.filepath_template:
-        filename_template = filename_template.replace(
-            template=split_info.filepath_template
-        )
-      return splits_lib.SplitInfo.from_proto(
-          proto=split_info, filename_template=filename_template
-      )
-  return None
+  )
 
 
 class MetadataDict(Metadata, dict):

@@ -36,11 +36,11 @@ with epy.lazy_imports():
   from etils import epath
   import tensorflow as tf
   from tensorflow_datasets.core import constants
-  from tensorflow_datasets.core import dataset_info
+  from tensorflow_datasets.core import dataset_info as dataset_info_lib
   from tensorflow_datasets.core import file_adapters
   from tensorflow_datasets.core import naming
-  from tensorflow_datasets.core import read_only_builder as read_only_builder_lib
   from tensorflow_datasets.core import splits as splits_lib
+  from tensorflow_datasets.core.proto import dataset_info_pb2
   from tensorflow_datasets.core.utils import file_utils
   from tensorflow_datasets.core.utils import py_utils
   from tensorflow_datasets.core.utils import type_utils
@@ -90,9 +90,10 @@ class ConvertConfig:
     return file_adapters.ADAPTER_FOR_FORMAT[self.out_file_format]
 
   def with_in_file_format(
-      self, in_file_format: file_adapters.FileFormat
+      self, in_file_format: str | file_adapters.FileFormat
   ) -> ConvertConfig:
     """Returns a new config with the given `in_file_format`."""
+    in_file_format = file_adapters.FileFormat(in_file_format)
     return dataclasses.replace(self, in_file_format=in_file_format)
 
 
@@ -181,7 +182,8 @@ def _shard_instructions_for_split(
 
 
 def get_all_shard_instructions(
-    info: dataset_info.DatasetInfo,
+    info: dataset_info_pb2.DatasetInfo,
+    in_path: epath.Path,
     out_path: epath.Path,
     convert_config: ConvertConfig,
 ) -> list[ShardInstruction]:
@@ -190,7 +192,12 @@ def get_all_shard_instructions(
     raise ValueError('in_file_format must be set!')
   convert_config = convert_config.with_in_file_format(info.file_format)
   shard_instructions = []
-  for split_info in info.splits.values():
+  splits_dict = dataset_info_lib.get_split_dict_from_proto(
+      dataset_info_proto=info,
+      data_dir=in_path,
+      file_format=convert_config.in_file_format,
+  )
+  for split_info in splits_dict.values():
     shard_instructions.extend(
         _shard_instructions_for_split(
             split_info=split_info,
@@ -202,20 +209,20 @@ def get_all_shard_instructions(
 
 
 def _get_root_data_dir(
-    in_dir: epath.Path, info: dataset_info.DatasetInfo
+    in_dir: epath.Path, info: dataset_info_pb2.DatasetInfo
 ) -> epath.Path:
   in_dir = os.fspath(in_dir)
   if info.config_name:
-    parts = [info.name, info.config_name, str(info.version)]
+    parts = [info.name, info.config_name, info.version]
   else:
-    parts = [info.name, str(info.version)]
+    parts = [info.name, info.version]
   relative_data_dir = os.path.join(*parts)
   return epath.Path(re.sub(rf'{relative_data_dir}/?$', '', in_dir))
 
 
 def convert_metadata(
     in_dir: epath.Path,
-    info: dataset_info.DatasetInfo,
+    info: dataset_info_pb2.DatasetInfo,
     out_file_format: file_adapters.FileFormat,
     out_path: epath.Path,
 ) -> None:
@@ -227,9 +234,14 @@ def convert_metadata(
     out_file_format: the format to which the dataset should be converted to.
     out_path: folder where the converted dataset should be stored.
   """
+  splits_dict = dataset_info_lib.get_split_dict_from_proto(
+      dataset_info_proto=info,
+      data_dir=in_dir,
+      file_format=out_file_format,
+  )
 
   missing_shards_per_split = {}
-  for split_info in info.splits.values():
+  for split_info in splits_dict.values():
     available_shards = split_info.get_available_shards(
         out_path, file_format=out_file_format
     )
@@ -267,8 +279,8 @@ def convert_metadata(
     # File format was added to an existing dataset.
     # Add the file format to `alternative_file_formats` field.
     if out_file_format not in info.alternative_file_formats:
-      info.add_alternative_file_format(out_file_format.value)
-      info.write_dataset_info_json(out_path)
+      info.alternative_file_formats.append(out_file_format.value)
+      dataset_info_lib.write_dataset_info_proto(info, dataset_info_dir=out_path)
     else:
       logging.info(
           'File format %s is already an alternative file format of the dataset'
@@ -302,13 +314,16 @@ def convert_metadata(
   )
   # Record the source TFDS dataset. Note that existing data source accesses will
   # not be removed.
-  info.add_tfds_data_source_access(in_dataset_reference)
-  info.as_proto.file_format = out_file_format.value
-  info.write_to_directory(out_path)
+  dataset_info_lib.add_tfds_data_source_access(
+      dataset_info_proto=info,
+      dataset_reference=in_dataset_reference,
+  )
+  info.file_format = out_file_format.value
+  dataset_info_lib.write_dataset_info_proto(info, dataset_info_dir=out_path)
 
 
 def _convert_dataset(
-    info: dataset_info.DatasetInfo,
+    info: dataset_info_pb2.DatasetInfo,
     dataset_dir: epath.Path,
     out_dir: epath.Path,
     convert_config: ConvertConfig,
@@ -328,6 +343,7 @@ def _convert_dataset(
 
   shard_instructions = get_all_shard_instructions(
       info=info,
+      in_path=dataset_dir,
       out_path=out_dir,
       convert_config=convert_config,
   )
@@ -374,31 +390,33 @@ def _get_info_for_dirs_to_convert(
     to_dir: epath.Path,
     out_file_format: file_adapters.FileFormat,
     overwrite: bool,
-) -> dataset_info.DatasetInfo | None:
+) -> dataset_info_pb2.DatasetInfo | None:
   """Returns the dataset info for the given dataset dirs."""
-  builder = read_only_builder_lib.builder_from_directory(from_dir)
-  if out_file_format == builder.info.file_format:
+  try:
+    dataset_info_proto = dataset_info_lib.read_proto_from_builder_dir(from_dir)
+  except Exception:  # pylint: disable=broad-except
+    logging.exception('Failed to read dataset info from %s', from_dir)
+    return None
+  in_file_format = file_adapters.FileFormat(dataset_info_proto.file_format)
+  if out_file_format == in_file_format:
     raise ValueError(
-        f'The file format of the dataset ({builder.info.file_format}) is the'
+        f'The file format of the dataset ({in_file_format}) is the'
         f' same as the specified out file format! ({out_file_format})'
     )
-  if out_file_format in builder.info.alternative_file_formats:
+  if out_file_format.file_suffix in dataset_info_proto.alternative_file_formats:
     if overwrite:
       logging.warning(
           'The file format to convert to (%s) is already an alternative file'
           ' format. Overwriting the shards!',
           out_file_format.value,
       )
-      return builder.info
     elif os.fspath(from_dir) == os.fspath(to_dir):
       logging.info(
           'The file format to convert to (%s) is already an alternative file'
-          ' format of the dataset in %s. Skipping conversion.',
+          ' format of the dataset in %s. Converting missing shards if present.',
           os.fspath(from_dir),
           out_file_format.value,
       )
-      # TODO(weide) add check whether data files are actually present.
-      return None
     else:
       logging.warning(
           'The file format to convert to (%s) is already an alternative file'
@@ -408,7 +426,6 @@ def _get_info_for_dirs_to_convert(
           os.fspath(from_dir),
           os.fspath(to_dir),
       )
-      return builder.info
   else:
     logging.info(
         'The file format to convert to (%s) is not an alternative file format'
@@ -416,7 +433,7 @@ def _get_info_for_dirs_to_convert(
         out_file_format.value,
         os.fspath(from_dir),
     )
-    return builder.info
+  return dataset_info_proto
 
 
 def _convert_dataset_dirs(
@@ -431,7 +448,7 @@ def _convert_dataset_dirs(
     convert_config: configuration for the conversion.
   """
   logging.info('Converting %d datasets.', len(from_to_dirs))
-  found_dataset_versions: dict[epath.Path, dataset_info.DatasetInfo] = {}
+  found_dataset_versions: dict[epath.Path, dataset_info_pb2.DatasetInfo] = {}
 
   if convert_config.num_workers > 1:
 

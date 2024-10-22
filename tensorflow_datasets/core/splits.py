@@ -336,7 +336,7 @@ class MultiSplitInfo(SplitInfo):
       result.extend(split_info.filepaths)
     return result
 
-  def replace(self, **kwargs: Any) -> 'MultiSplitInfo':
+  def replace(self, **kwargs: Any) -> MultiSplitInfo:
     raise RuntimeError('replace is not supported on MultiSplitInfo')
 
 
@@ -471,7 +471,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
       cls,
       repeated_split_infos: Iterable[proto_lib.SplitInfo],
       filename_template: naming.ShardedFileTemplate,
-  ) -> 'SplitDict':
+  ) -> SplitDict:
     """Returns a new SplitDict initialized from the `repeated_split_infos`."""
     split_infos = [
         SplitInfo.from_proto(
@@ -491,7 +491,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
     return sum(s.num_examples for s in self.values())
 
   @classmethod
-  def merge_multiple(cls, split_dicts: list['SplitDict']) -> 'SplitDict':
+  def merge_multiple(cls, split_dicts: list[SplitDict]) -> SplitDict:
     info_per_split = []
     for split in set(itertools.chain(*split_dicts)):
       infos_of_split = []
