@@ -413,18 +413,6 @@ def snake_to_camelcase(name: str) -> str:
   return ''.join(n.capitalize() for n in name.split('_'))
 
 
-def filename_prefix_for_name(name: str) -> str:
-  if os.path.basename(name) != name:
-    raise ValueError('Should be a dataset name, not a path: %s' % name)
-  return camelcase_to_snakecase(name)
-
-
-def filename_prefix_for_split(name: str, split: str) -> str:
-  if os.path.basename(name) != name:
-    raise ValueError('Should be a dataset name, not a path: %s' % name)
-  return '%s-%s' % (filename_prefix_for_name(name), split)
-
-
 def _strip_encoding_suffix(path: str) -> str:
   """Strips the encoding suffix from the path."""
   if '%' not in path:
@@ -708,75 +696,6 @@ class ShardedFileTemplate:
   def replace(self, **kwargs: Any) -> 'ShardedFileTemplate':
     """Returns a copy of the `ShardedFileTemplate` with updated attributes."""
     return dataclasses.replace(self, **kwargs)
-
-
-def filepattern_for_dataset_split(
-    *,
-    dataset_name: str,
-    split: str,
-    data_dir: str,
-    filetype_suffix: str | None = None,
-    num_shards: int | None = None,
-) -> str:
-  """Returns the file pattern for the given dataset.
-
-  TODO(tfds): remove this by start using ShardedFileTemplate
-
-  Args:
-    dataset_name: Name of the dataset
-    split: Name of the requested split
-    data_dir: The base folder that contains the dataset.
-    filetype_suffix: Optional suffix, e.g. tfrecord
-    num_shards: Optional argument. If specified, will return file@num_shards
-      notation, otherwise file*.
-  """
-  template = ShardedFileTemplate(
-      data_dir=epath.Path(data_dir),
-      dataset_name=dataset_name,
-      split=split,
-      filetype_suffix=filetype_suffix,
-  )
-  return os.fspath(template.sharded_filepaths_pattern(num_shards=num_shards))
-
-
-def filenames_for_dataset_split(
-    dataset_name: str,
-    split: str,
-    num_shards: int,
-    filetype_suffix: str,
-    data_dir: epath.PathLike | None = None,
-) -> list[str]:
-  """Returns the list of filenames for the given dataset and split."""
-  # TODO(tfds): remove this by start using ShardedFileTemplate
-  template = ShardedFileTemplate(
-      dataset_name=dataset_name,
-      split=split,
-      filetype_suffix=filetype_suffix,
-      data_dir=epath.Path(data_dir),
-  )
-  return [
-      os.fspath(fp) for fp in template.sharded_filenames(num_shards=num_shards)
-  ]
-
-
-def filepaths_for_dataset_split(
-    dataset_name: str,
-    split: str,
-    num_shards: int,
-    data_dir: str,
-    filetype_suffix: str,
-) -> list[str]:
-  """File paths of a given dataset split."""
-  # TODO(tfds): remove this by start using ShardedFileTemplate
-  template = ShardedFileTemplate(
-      dataset_name=dataset_name,
-      split=split,
-      filetype_suffix=filetype_suffix,
-      data_dir=epath.Path(data_dir),
-  )
-  return [
-      os.fspath(fp) for fp in template.sharded_filepaths(num_shards=num_shards)
-  ]
 
 
 def _get_filename_template(

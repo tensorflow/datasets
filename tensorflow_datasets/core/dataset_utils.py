@@ -200,15 +200,3 @@ def as_numpy(dataset: Tree[TensorflowElem]) -> Tree[NumpyElem]:
     return tree.map_structure(_elem_to_numpy_eager, dataset)
   else:
     return _nested_to_numpy_graph(dataset)
-
-
-def dataset_shape_is_fully_defined(ds):
-  output_shapes = tf.compat.v1.data.get_output_shapes(ds)
-  return all([ts.is_fully_defined() for ts in tf.nest.flatten(output_shapes)])
-
-
-def features_shape_is_fully_defined(features):
-  return all([
-      tf.TensorShape(info.shape).is_fully_defined()
-      for info in tf.nest.flatten(features.get_tensor_info())
-  ])

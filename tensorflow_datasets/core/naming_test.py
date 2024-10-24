@@ -21,7 +21,6 @@ from etils import epath
 import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
-from tensorflow_datasets.core import splits
 
 _FILENAME_TEMPLATE_DEFAULT = naming.ShardedFileTemplate(data_dir='.')
 _FILENAME_TEMPLATE_MNIST_DEFAULT = naming.ShardedFileTemplate(
@@ -106,54 +105,6 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     self.assertAllEqual(
         [os.fspath(n) for n in names],
         [path_template % s + encryption_suffix for s in shards],
-    )
-
-  @parameterized.parameters(
-      ('foo', 'foo-train'),
-      ('Foo', 'foo-train'),
-      ('FooBar', 'foo_bar-train'),
-  )
-  def test_filename_prefix_for_split(self, prefix, expected):
-    split = splits.Split.TRAIN
-    self.assertEqual(expected, naming.filename_prefix_for_split(prefix, split))
-
-  def test_filenames_for_dataset_split(self):
-    actual = naming.filenames_for_dataset_split(
-        dataset_name='foo',
-        split=splits.Split.TRAIN,
-        num_shards=2,
-        filetype_suffix='bar',
-        data_dir='/path',
-    )
-    self.assertEqual(
-        actual, ['foo-train.bar-00000-of-00002', 'foo-train.bar-00001-of-00002']
-    )
-
-  def test_filepaths_for_dataset_split(self):
-    actual = naming.filepaths_for_dataset_split(
-        dataset_name='foo',
-        split=splits.Split.TRAIN,
-        num_shards=2,
-        data_dir='/tmp/bar/',
-        filetype_suffix='bar',
-    )
-    self.assertEqual(
-        actual,
-        [
-            '/tmp/bar/foo-train.bar-00000-of-00002',
-            '/tmp/bar/foo-train.bar-00001-of-00002',
-        ],
-    )
-
-  def test_filepattern_for_dataset_split(self):
-    self.assertEqual(
-        '/tmp/bar/foo-test.bar*',
-        naming.filepattern_for_dataset_split(
-            dataset_name='foo',
-            split=splits.Split.TEST,
-            data_dir='/tmp/bar/',
-            filetype_suffix='bar',
-        ),
     )
 
 

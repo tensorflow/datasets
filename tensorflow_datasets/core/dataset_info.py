@@ -47,7 +47,6 @@ from etils import epath
 from etils import epy
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -1077,49 +1076,6 @@ def _populate_shape(shape_or_dict, prefix, schema_features):
     prefix.append(name)
     _populate_shape(val, prefix, schema_features)
     prefix.pop()
-
-
-def get_dataset_feature_statistics(builder, split):
-  """Calculate statistics for the specified split."""
-  tfdv = lazy_imports_lib.lazy_imports.tensorflow_data_validation
-  # TODO(epot): Avoid hardcoding file format.
-  filetype_suffix = "tfrecord"
-  if filetype_suffix not in ["tfrecord", "csv"]:
-    raise ValueError(
-        "Cannot generate statistics for filetype {}".format(filetype_suffix)
-    )
-  filename_template = naming.ShardedFileTemplate(
-      data_dir=builder.data_dir,
-      dataset_name=builder.name,
-      split=split,
-      filetype_suffix=filetype_suffix,
-  )
-  filepattern = filename_template.sharded_filepaths_pattern()
-  # Avoid generating a large number of buckets in rank histogram
-  # (default is 1000).
-  stats_options = tfdv.StatsOptions(
-      num_top_values=10,
-      num_rank_histogram_buckets=10,
-      use_sketch_based_topk_uniques=False,
-  )
-  if filetype_suffix == "csv":
-    statistics = tfdv.generate_statistics_from_csv(
-        filepattern, stats_options=stats_options
-    )
-  else:
-    statistics = tfdv.generate_statistics_from_tfrecord(
-        filepattern, stats_options=stats_options
-    )
-  schema = tfdv.infer_schema(statistics)
-  schema_features = {feature.name: feature for feature in schema.feature}
-  # Override shape in the schema.
-  for feature_name, feature in builder.info.features.items():
-    _populate_shape(feature.shape, [feature_name], schema_features)
-
-  # Remove legacy field.
-  if getattr(schema, "generate_legacy_feature_spec", None) is not None:
-    schema.ClearField("generate_legacy_feature_spec")
-  return statistics.datasets[0], schema
 
 
 def get_dataset_info_json(
