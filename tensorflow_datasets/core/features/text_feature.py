@@ -41,6 +41,7 @@ class Text(tensor_feature.Tensor):
       encoder_config=None,
       *,
       doc: feature_lib.DocArg = None,
+      optional: bool = False,
   ):
     """Constructs a Text FeatureConnector.
 
@@ -50,6 +51,7 @@ class Text(tensor_feature.Tensor):
       encoder_config: `tfds.deprecated.text.TextEncoderConfig`, needed if
         restoring from a file with `load_metadata`.
       doc: Documentation of this feature (e.g. description).
+      optional: Whether the feature is optional.
     """
     if encoder and encoder_config:
       raise ValueError("If encoder is provided, encoder_config must be None.")
@@ -75,6 +77,7 @@ class Text(tensor_feature.Tensor):
         shape=(None,) if has_encoder else (),
         dtype=np.int64 if has_encoder else np.object_,
         doc=doc,
+        optional=optional,
     )
 
   @property
