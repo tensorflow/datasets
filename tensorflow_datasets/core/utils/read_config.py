@@ -18,7 +18,6 @@
 from __future__ import annotations
 
 import dataclasses
-import enum
 from typing import Callable, Optional, Sequence, Union, cast
 
 from tensorflow_datasets.core.utils import shard_utils

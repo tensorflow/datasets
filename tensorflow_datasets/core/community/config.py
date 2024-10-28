@@ -26,7 +26,7 @@ from etils import epath
 # Make sure that github paths are registered. This import makes sure that epath
 # understands paths that start with github://.
 from tensorflow_datasets.core import github_api  # pylint: disable=unused-import
-from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import resource_utils
 import toml
 
 
@@ -120,4 +120,6 @@ COMMUNITY_CONFIG_PATH = 'community-datasets.toml'
 
 @functools.lru_cache(maxsize=1)
 def get_community_config() -> NamespaceRegistry:
-  return NamespaceRegistry(config_path=utils.tfds_path(COMMUNITY_CONFIG_PATH))
+  return NamespaceRegistry(
+      config_path=resource_utils.tfds_path(COMMUNITY_CONFIG_PATH)
+  )

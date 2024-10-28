@@ -21,7 +21,6 @@ import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 
 
@@ -334,20 +333,6 @@ def test_flatten_with_path():
   assert [v for _, v in _flatten_with_path(complex_dict)] == tf.nest.flatten(
       complex_dict
   )
-
-
-@pytest.mark.parametrize(
-    ['url', 'filename'],
-    [
-        (
-            'http://test.com/appspot.com/tsvsWithoutLabels%2FAX.tsv?'  # pylint: disable=implicit-str-concat
-            'Id=firebase&Expires=2498860800',
-            'tsvsWithoutLabels_AX.tsv',  # `%2F` -> `_`
-        ),
-    ],
-)
-def test_basename_from_url(url: str, filename: str):
-  assert utils.basename_from_url(url) == filename
 
 
 def test_incomplete_file(tmp_path: pathlib.Path):

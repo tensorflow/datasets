@@ -125,7 +125,7 @@ def _get_filename(response: Response) -> str:
     if filename:
       return filename
   # Otherwise, fallback on extracting the name from the url.
-  return utils.basename_from_url(response.url)
+  return _basename_from_url(response.url)
 
 
 class _Downloader:
@@ -351,3 +351,13 @@ def _assert_status(response: requests.Response) -> None:
             response.url, response.status_code
         )
     )
+
+
+def _basename_from_url(url: str) -> str:
+  """Returns file name of file at given url."""
+  filename = urllib.parse.urlparse(url).path
+  filename = os.path.basename(filename)
+  # Replace `%2F` (html code for `/`) by `_`.
+  # This is consistent with how Chrome rename downloaded files.
+  filename = filename.replace('%2F', '_')
+  return filename or 'unknown_name'

@@ -26,7 +26,7 @@ from collections.abc import Sequence
 import dataclasses
 import math
 import os
-from typing import Any, List
+from typing import Any
 
 DEFAULT_MIN_SHARD_SIZE: int = 64 << 20  # 64 MiB
 DEFAULT_MAX_SHARD_SIZE: int = 1024 << 20  # 1 GiB
@@ -179,7 +179,7 @@ class FileInstruction:
 def split_file_instruction(
     file_instruction: FileInstruction,
     num_splits: int,
-) -> List[FileInstruction]:
+) -> list[FileInstruction]:
   """Instructions for reading the given file instruction in several splits.
 
   Note that this function may return fewer splits than `num_splits` in case the
@@ -215,7 +215,7 @@ def get_file_instructions(
     to: int,
     filenames: Sequence[str],
     shard_lengths: Sequence[int],
-) -> List[FileInstruction]:
+) -> list[FileInstruction]:
   """Returns a list of files (+skip/take) to read [from_:to] items from shards.
 
   Args:

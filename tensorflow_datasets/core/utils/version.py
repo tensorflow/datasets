@@ -20,7 +20,6 @@ from __future__ import annotations
 import dataclasses
 import enum
 import re
-from typing import List, Tuple, Union
 
 from etils import epath
 
@@ -132,7 +131,7 @@ class Version:
 
   def __init__(
       self,
-      version: Union[Version, str],
+      version: Version | str,
       experiments=None,
       tfds_version_to_prepare=None,
   ):
@@ -242,7 +241,7 @@ class Version:
 
 def _str_to_version(
     version_str: str, allow_wildcard=False
-) -> Tuple[Union[int, str], Union[int, str], Union[int, str]]:
+) -> tuple[int | str, int | str, int | str]:
   """Return the tuple (major, minor, patch) version extracted from the str."""
   if not isinstance(version_str, str):
     raise TypeError(
@@ -264,7 +263,7 @@ def _str_to_version(
   )
 
 
-def list_all_versions(root_dir: epath.PathLike) -> List[Version]:
+def list_all_versions(root_dir: epath.PathLike) -> list[Version]:
   """Lists all dataset versions present on disk, sorted."""
   root_dir = epath.Path(root_dir)
   versions = []

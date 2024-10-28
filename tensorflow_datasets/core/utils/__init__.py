@@ -30,7 +30,6 @@ from tensorflow_datasets.core.utils.image_utils import png_to_jpeg
 from tensorflow_datasets.core.utils.image_utils import THUMBNAIL_SIZE
 from tensorflow_datasets.core.utils.py_utils import add_sys_path
 from tensorflow_datasets.core.utils.py_utils import atomic_write
-from tensorflow_datasets.core.utils.py_utils import basename_from_url
 from tensorflow_datasets.core.utils.py_utils import build_synchronize_decorator
 from tensorflow_datasets.core.utils.py_utils import classproperty
 from tensorflow_datasets.core.utils.py_utils import dedent

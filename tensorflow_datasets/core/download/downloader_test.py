@@ -240,3 +240,17 @@ def test_filename_from_headers(
     headers = None
   resp = _FakeResponse('http://foo.bar/baz.zip', b'content', headers=headers)
   assert downloader._get_filename(resp), filename
+
+
+@pytest.mark.parametrize(
+    ['url', 'filename'],
+    [
+        (
+            'http://test.com/appspot.com/tsvsWithoutLabels%2FAX.tsv?'  # pylint: disable=implicit-str-concat
+            'Id=firebase&Expires=2498860800',
+            'tsvsWithoutLabels_AX.tsv',  # `%2F` -> `_`
+        ),
+    ],
+)
+def test_basename_from_url(url: str, filename: str):
+  assert downloader._basename_from_url(url) == filename

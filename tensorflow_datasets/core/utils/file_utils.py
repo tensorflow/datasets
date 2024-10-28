@@ -35,7 +35,6 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import docs
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.core.utils import read_config
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
@@ -343,7 +342,7 @@ def _find_references_with_glob(
     namespace: Optional namespace to which the found datasets belong to.
     include_old_tfds_version: include datasets that have been generated with
       TFDS before 4.0.0.
-    glob_suffixes: list of file suffixes to use to create the the glob for
+    glob_suffixes: list of file suffixes to use to create the glob for
       interesting TFDS files. Defaults to json files.
 
   Yields:
@@ -450,7 +449,7 @@ def list_dataset_variants(
     include_versions: whether to list what versions are available.
     include_old_tfds_version: include datasets that have been generated with
       TFDS before 4.0.0.
-    glob_suffixes: list of file suffixes to use to create the the glob for
+    glob_suffixes: list of file suffixes to use to create the glob for
       interesting TFDS files. Defaults to json files.
 
   Yields:

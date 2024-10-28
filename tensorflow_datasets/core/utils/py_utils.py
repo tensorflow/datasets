@@ -36,14 +36,8 @@ import uuid
 
 from absl import logging as absl_logging
 from etils import epath
-from etils import epy
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
-
-with epy.lazy_imports():
-  # pylint: disable=g-import-not-at-top
-  from six.moves import urllib
-  # pylint: enable=g-import-not-at-top
 
 
 Tree = type_utils.Tree
@@ -498,16 +492,6 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
     return lock_decorated
 
   return lock_decorator
-
-
-def basename_from_url(url: str) -> str:
-  """Returns file name of file at given url."""
-  filename = urllib.parse.urlparse(url).path
-  filename = os.path.basename(filename)
-  # Replace `%2F` (html code for `/`) by `_`.
-  # This is consistent with how Chrome rename downloaded files.
-  filename = filename.replace('%2F', '_')
-  return filename or 'unknown_name'
 
 
 def list_info_files(dir_path: epath.PathLike) -> Sequence[str]:
