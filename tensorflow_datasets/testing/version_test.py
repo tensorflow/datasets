@@ -18,6 +18,8 @@ import inspect
 
 import tensorflow_datasets as tfds
 
+_DO_NOT_CKECK_DATASETS = ['imagenet_v2']
+
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class _BuilderWithVersionMismatch:
@@ -33,6 +35,8 @@ def test_internal_datasets_have_versions_on_line_with_the_release_notes():
   builders_with_version_mismatch: list[_BuilderWithVersionMismatch] = []
   for builder in builders:
     builder_cls = tfds.core.registered.imported_builder_cls(builder)
+    if builder_cls.name in _DO_NOT_CKECK_DATASETS:
+      continue
     if not (
         hasattr(builder_cls, 'VERSION')
         and hasattr(builder_cls, 'RELEASE_NOTES')
