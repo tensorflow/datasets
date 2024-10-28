@@ -585,7 +585,7 @@ def publish_data(
       config and version.
     overwrite: whether to overwrite existing data in the `publish_root_dir` if
       it exists.
-  """
+  """  # fmt: skip
   to_data_dir.mkdir(parents=True, exist_ok=True)
   for filepath in from_data_dir.iterdir():
     filepath.copy(dst=to_data_dir / filepath.name, overwrite=overwrite)
