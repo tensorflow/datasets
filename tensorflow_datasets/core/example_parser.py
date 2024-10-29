@@ -154,7 +154,6 @@ def _features_to_numpy(
   parsed_example = {}
   feature_map = features.feature
   for key in feature_map:
-    ragged_row_length = _RAGGED_ROW_LENGTH_REGEX.match(key)
     ragged_flat_values = _RAGGED_FLAT_VALUES_REGEX.match(key)
     # For ragged arrays we need to reshape the np.arrays using
     # ragged_flat_values/ragged_row_lengths_*. `features` can look like:
@@ -173,14 +172,13 @@ def _features_to_numpy(
             flat_example_specs[feature_name],
             key,
         )
-    elif ragged_row_length:
-      # Lengths are extracted later for each feature in _feature_to_numpy.
-      continue
     else:
-      raise KeyError(
-          f"Malformed input: {key} is found in the feature, but not in"
-          f" {flat_example_specs}"
-      )
+      # Possible cases when we land here:
+      # 1. Case ragged: Lengths are extracted later for each feature in
+      #    _feature_to_numpy. So we continue.
+      # 2. Other case: a key was found in the feature, but not in the specs. We
+      #    just ignore this feature and continue.
+      continue
   return parsed_example
 
 
