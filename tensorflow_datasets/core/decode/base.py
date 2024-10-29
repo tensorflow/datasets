@@ -115,7 +115,7 @@ class Decoder(abc.ABC):
 
 
 class SkipDecoding(Decoder):
-  """Transformation which skip the decoding entirelly.
+  """Transformation which skips the decoding entirely.
 
   Example of usage:
 
