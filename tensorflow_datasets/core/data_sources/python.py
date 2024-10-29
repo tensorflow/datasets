@@ -22,7 +22,7 @@ import dataclasses
 from typing import Any, Callable
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(repr=False)
 class PythonDataSource(MappingView, Sequence):
   """Python data source backed by Python objects: length and __getitem__."""
 
@@ -41,3 +41,6 @@ class PythonDataSource(MappingView, Sequence):
 
   def __getitem__(self, i: int) -> Any:
     return self.getitem(i)
+
+  def __repr__(self) -> str:
+    return f'PythonDataSource(length={self.length})'

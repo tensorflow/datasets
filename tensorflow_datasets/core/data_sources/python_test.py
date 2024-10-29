@@ -54,3 +54,8 @@ def test_tree_map_structure():
   tree.map_structure(func, source)
   calls = [mock.call(0), mock.call(1), mock.call(2)]
   func.assert_has_calls(calls)
+
+
+def test_repr():
+  source = python.PythonDataSource(length=3, getitem=getitem)
+  assert repr(source) == 'PythonDataSource(length=3)'
