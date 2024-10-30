@@ -20,6 +20,26 @@ and this project adheres to
 
 ### Security
 
+## [4.9.7] - 2024-10-30
+
+### Added
+
+- New datasets.
+
+### Changed
+
+- `CroissantBuilder`'s API to generate TFDS datasets from Croissant files.
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+- Versions for existing datasets.
+
+### Security
+
 ## [4.9.6] - 2024-06-04
 
 ### Added
