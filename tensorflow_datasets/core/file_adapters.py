@@ -26,14 +26,17 @@ import re
 from typing import Any, ClassVar, Type, TypeVar
 
 from etils import epy
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
 from tensorflow_datasets.core.utils.lazy_imports_utils import parquet as pq
 from tensorflow_datasets.core.utils.lazy_imports_utils import pyarrow as pa
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
+
 with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
   from etils import epath
+  from tensorflow_datasets.core import naming
   from tensorflow_datasets.core.utils import file_utils
   from tensorflow_datasets.core.utils import type_utils
 
@@ -167,6 +170,23 @@ class FileAdapter(abc.ABC):
     """
     return tf.train.Example.FromString(raw_example)
 
+  @classmethod
+  def beam_sink(
+      cls,
+      filename_template: naming.ShardedFileTemplate,
+      num_shards: int | None = None,
+  ) -> beam.PTransform:
+    """Returns a Beam sink for writing examples in the given file format."""
+    raise NotImplementedError()
+
+  @classmethod
+  def num_examples(cls, filename: epath.PathLike) -> int:
+    """Returns the number of examples in the given file."""
+    n = 0
+    for _ in cls.make_tf_data(filename):
+      n += 1
+    return n
+
 
 class TfRecordFileAdapter(FileAdapter):
   """File adapter for TFRecord file format."""
@@ -204,6 +224,20 @@ class TfRecordFileAdapter(FileAdapter):
       for _, serialized_example in iterator:
         writer.write(serialized_example)
       writer.flush()
+
+  @classmethod
+  def beam_sink(
+      cls,
+      filename_template: naming.ShardedFileTemplate,
+      num_shards: int | None = None,
+  ) -> beam.PTransform:
+    """Returns a Beam sink for writing examples in the given file format."""
+    file_path_prefix = filename_template.sharded_filepaths_pattern(
+        num_shards=num_shards, use_at_notation=True
+    ).removesuffix('@*')
+    return beam.io.WriteToTFRecord(
+        file_path_prefix=file_path_prefix, num_shards=num_shards
+    )
 
 
 class RiegeliFileAdapter(FileAdapter):

@@ -29,40 +29,40 @@ from etils import epath
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
-_NAME_CLASS = r'[a-zA-Z][\w]*'
-_NAME_CLASS_REG = re.compile(r'^' + _NAME_CLASS + r'$')
+_NAME_CLASS = r"[a-zA-Z][\w]*"
+_NAME_CLASS_REG = re.compile(r"^" + _NAME_CLASS + r"$")
 
 # Regex matching 'dataset/config:1.*.*/arg=123'
 _NAME_REG = re.compile(
-    r'^'
-    r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
-    r'(/(?P<config>[\w\+\-\.]+))?'
-    r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
-    r'(/(?P<kwargs>(\w+=[^,]+,?)+))?'
-    r'$'
+    r"^"
+    r"(?P<dataset_name>([\w\-]+:)?" + _NAME_CLASS + r")"
+    r"(/(?P<config>[\w\+\-\.]+))?"
+    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
+    r"(/(?P<kwargs>(\w+=[^,]+,?)+))?"
+    r"$"
 )
 
 _DEFAULT_NUM_DIGITS_FOR_SHARDS = 5
 
-_VAR_DATASET = 'DATASET'
-_VAR_SPLIT = 'SPLIT'
-_VAR_SHARD_INDEX = 'SHARD_INDEX'
-_VAR_NUM_SHARDS = 'NUM_SHARDS'
-_VAR_SHARD_X_OF_Y = 'SHARD_X_OF_Y'
-_VAR_FILEFORMAT = 'FILEFORMAT'
+_VAR_DATASET = "DATASET"
+_VAR_SPLIT = "SPLIT"
+_VAR_SHARD_INDEX = "SHARD_INDEX"
+_VAR_NUM_SHARDS = "NUM_SHARDS"
+_VAR_SHARD_X_OF_Y = "SHARD_X_OF_Y"
+_VAR_FILEFORMAT = "FILEFORMAT"
 _VAR_REGEX_MAPPING = {
-    _VAR_DATASET: rf'(?P<dataset_name>{_NAME_CLASS})',
-    _VAR_FILEFORMAT: r'(?P<filetype_suffix>\w+)',
-    _VAR_SPLIT: r'(?P<split>(\w|-)+)',
-    _VAR_SHARD_INDEX: r'(?P<shard_index>\d{5,})',
-    _VAR_NUM_SHARDS: r'(?P<num_shards>\d{5,})',
-    _VAR_SHARD_X_OF_Y: r'(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})',
+    _VAR_DATASET: rf"(?P<dataset_name>{_NAME_CLASS})",
+    _VAR_FILEFORMAT: r"(?P<filetype_suffix>\w+)",
+    _VAR_SPLIT: r"(?P<split>(\w|-)+)",
+    _VAR_SHARD_INDEX: r"(?P<shard_index>\d{5,})",
+    _VAR_NUM_SHARDS: r"(?P<num_shards>\d{5,})",
+    _VAR_SHARD_X_OF_Y: r"(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})",
 }
 
-DEFAULT_FILENAME_TEMPLATE = '{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}'
+DEFAULT_FILENAME_TEMPLATE = "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
 
-_first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
-_all_cap_re = re.compile('([a-z0-9])([A-Z])')
+_first_cap_re = re.compile("(.)([A-Z][a-z0-9]+)")
+_all_cap_re = re.compile("([a-z0-9])([A-Z])")
 
 Value = str | int | float | bool
 
@@ -85,21 +85,21 @@ class DatasetName:
       raise ValueError(
           "Name should be defined by `DatasetName('ns:name')` or "
           "`DatasetName(namespace='ns', name='name'). Mixing args and kwargs "
-          'is invalid.'
+          "is invalid."
       )
     if namespace_name:
-      if ':' in namespace_name:
-        namespace, name = namespace_name.split(':')
+      if ":" in namespace_name:
+        namespace, name = namespace_name.split(":")
       else:
         namespace, name = None, namespace_name
-    super().__setattr__('namespace', namespace)
-    super().__setattr__('name', name)
+    super().__setattr__("namespace", namespace)
+    super().__setattr__("name", name)
 
   def __str__(self) -> str:
-    return f'{self.namespace}:{self.name}' if self.namespace else self.name
+    return f"{self.namespace}:{self.name}" if self.namespace else self.name
 
   def __repr__(self) -> str:
-    return f'{type(self).__name__}({str(self)!r})'
+    return f"{type(self).__name__}({str(self)!r})"
 
 
 def is_valid_dataset_name(name_str: str) -> bool:
@@ -172,17 +172,17 @@ def _dataset_name_and_kwargs_from_name_str(
   res = _NAME_REG.match(name_str)
   if not res:
     raise ValueError(err_msg)
-  name = res.group('dataset_name')
+  name = res.group("dataset_name")
   # Normalize the name to accept CamelCase
   name = camelcase_to_snakecase(name)
-  kwargs = _kwargs_str_to_kwargs(res.group('kwargs'))
+  kwargs = _kwargs_str_to_kwargs(res.group("kwargs"))
   try:
-    for attr in ['config', 'version']:
+    for attr in ["config", "version"]:
       val = res.group(attr)
       if val is None:
         continue
       if attr in kwargs:
-        raise ValueError('Dataset %s: cannot pass %s twice.' % (name, attr))
+        raise ValueError("Dataset %s: cannot pass %s twice." % (name, attr))
       kwargs[attr] = val
     return name, kwargs
   except Exception as e:  # pylint: disable=broad-except
@@ -238,11 +238,11 @@ class DatasetReference:
     """
     dataset_name = self.dataset_name
     if self.namespace:
-      dataset_name = f'{self.namespace}:{dataset_name}'
+      dataset_name = f"{self.namespace}:{dataset_name}"
     if self.config:
-      dataset_name += f'/{self.config}'
+      dataset_name += f"/{self.config}"
     if self.version and include_version:
-      dataset_name += f':{self.version}'
+      dataset_name += f":{self.version}"
     return dataset_name
 
   def get_split(self, split: str) -> str:
@@ -268,7 +268,7 @@ class DatasetReference:
     """
     data_dir = data_dir or self.data_dir
     if data_dir is None:
-      raise ValueError('No data dir was specified!')
+      raise ValueError("No data dir was specified!")
     dataset_dir: epath.Path = epath.Path(data_dir) / self.dataset_name
     if self.config:
       dataset_dir = dataset_dir / self.config
@@ -292,8 +292,8 @@ class DatasetReference:
   ) -> DatasetReference:
     """Returns the `DatasetReference` for the given TFDS dataset."""
     parsed_name, builder_kwargs = parse_builder_name_kwargs(tfds_name)
-    version = builder_kwargs.get('version')
-    config = builder_kwargs.get('config')
+    version = builder_kwargs.get("version")
+    config = builder_kwargs.get("config")
     return cls(
         dataset_name=parsed_name.name,
         namespace=parsed_name.namespace,
@@ -320,11 +320,11 @@ class DatasetReference:
     root_data_dir = os.fspath(root_data_dir)
 
     if not dataset_dir.startswith(root_data_dir):
-      raise ValueError(f'{dataset_dir=} does not start with {root_data_dir=}!')
+      raise ValueError(f"{dataset_dir=} does not start with {root_data_dir=}!")
 
     relative_path = dataset_dir.removeprefix(root_data_dir)
-    relative_path = relative_path.removeprefix('/').removesuffix('/')
-    parts = relative_path.split('/')
+    relative_path = relative_path.removeprefix("/").removesuffix("/")
+    parts = relative_path.split("/")
     dataset_name = parts[0]
     if len(parts) == 2:
       config_name = None
@@ -334,13 +334,13 @@ class DatasetReference:
       version = parts[2]
     else:
       raise ValueError(
-          f'Invalid {relative_path=} for {root_data_dir=} and {dataset_dir=}'
+          f"Invalid {relative_path=} for {root_data_dir=} and {dataset_dir=}"
       )
     return cls(
         dataset_name=dataset_name,
         config=config_name,
         version=version,
-        data_dir=root_data_dir.removesuffix('/'),
+        data_dir=root_data_dir.removesuffix("/"),
     )
 
 
@@ -380,17 +380,17 @@ def _kwargs_str_to_kwargs(kwargs_str: str):
   """Converts given `kwargs` as str into kwargs dict."""
   if not kwargs_str:
     return {}
-  kwarg_strs = kwargs_str.split(',')
+  kwarg_strs = kwargs_str.split(",")
   kwargs = {}
   for kwarg_str in kwarg_strs:
-    kwarg_name, kwarg_val = kwarg_str.split('=')
+    kwarg_name, kwarg_val = kwarg_str.split("=")
     kwargs[kwarg_name] = _cast_to_pod(kwarg_val)
   return kwargs
 
 
 def _cast_to_pod(val: str) -> Value:
   """Try cast to bool, int, float, str, in that order."""
-  bools = {'True': True, 'False': False}
+  bools = {"True": True, "False": False}
   if val in bools:
     return bools[val]
   try:
@@ -404,20 +404,20 @@ def _cast_to_pod(val: str) -> Value:
 
 def camelcase_to_snakecase(name: str) -> str:
   """Convert camel-case string to snake-case."""
-  s1 = _first_cap_re.sub(r'\1_\2', name)
-  return _all_cap_re.sub(r'\1_\2', s1).lower()
+  s1 = _first_cap_re.sub(r"\1_\2", name)
+  return _all_cap_re.sub(r"\1_\2", s1).lower()
 
 
 def snake_to_camelcase(name: str) -> str:
   """Convert snake-case string to camel-case string."""
-  return ''.join(n.capitalize() for n in name.split('_'))
+  return "".join(n.capitalize() for n in name.split("_"))
 
 
 def _strip_encoding_suffix(path: str) -> str:
   """Strips the encoding suffix from the path."""
-  if '%' not in path:
+  if "%" not in path:
     return path
-  return path[: path.rfind('%')]
+  return path[: path.rfind("%")]
 
 
 def _num_digits_needed(num_shards: int | None) -> int:
@@ -426,10 +426,10 @@ def _num_digits_needed(num_shards: int | None) -> int:
 
 def _replace_shard_pattern(filepath: str, replacement: str) -> str:
   """Replaces the shard pattern with the given string."""
-  pattern = r'^(?P<prefix>.+?)-?\d{5,}(-of-\d{5,})?(?P<suffix>.+)?$'
+  pattern = r"^(?P<prefix>.+?)-?\d{5,}(-of-\d{5,})?(?P<suffix>.+)?$"
 
   def replace_func(matchobj):
-    if matchobj.group('suffix') is None:
+    if matchobj.group("suffix") is None:
       return f"{matchobj.group('prefix')}{replacement}"
     return f"{matchobj.group('prefix')}{replacement}{matchobj.group('suffix')}"
 
@@ -441,15 +441,15 @@ def _replace_shard_pattern(filepath: str, replacement: str) -> str:
   )
   if num_subs != 1:
     raise RuntimeError(
-        f'Should do 1 shard suffix substitution, but did {num_subs}! '
-        f'Filepath was {filepath}'
+        f"Should do 1 shard suffix substitution, but did {num_subs}! "
+        f"Filepath was {filepath}"
     )
   return os.fspath(filepath.parent / new_string)
 
 
 def _remove_extension(filepath: str) -> str:
-  pattern = r'\.[^.]+$'
-  return re.sub(pattern, '', filepath)
+  pattern = r"\.[^.]+$"
+  return re.sub(pattern, "", filepath)
 
 
 def _filename_template_to_regex(filename_template: str) -> str:
@@ -464,13 +464,13 @@ def _filename_template_to_regex(filename_template: str) -> str:
   Raises:
     ValueError: when not all variables in the template were substituted.
   """
-  result = filename_template.replace('.', r'\.')
+  result = filename_template.replace(".", r"\.")
   for var, regex in _VAR_REGEX_MAPPING.items():
-    result = result.replace(f'{{{var}}}', regex)
-  if re.match(re.compile(r'\{\w+\}'), result):
+    result = result.replace(f"{{{var}}}", regex)
+  if re.match(re.compile(r"\{\w+\}"), result):
     raise ValueError(
-        'Regex still contains variables '
-        f'that have not been substituted: {result}'
+        "Regex still contains variables "
+        f"that have not been substituted: {result}"
     )
   return result
 
@@ -505,16 +505,16 @@ class ShardedFileTemplate:
   def __post_init__(self):
     self.data_dir = epath.Path(self.data_dir)
     if self.split is not None and not self.split:
-      raise ValueError(f'Split must be a non-empty string: {self}')
+      raise ValueError(f"Split must be a non-empty string: {self}")
     if self.split is not None and not any(
         char.isalnum() for char in self.split
     ):
       raise ValueError(
-          'Split name should contain at least one alphanumeric character.'
-          f' Given split name: {self.split}'
+          "Split name should contain at least one alphanumeric character."
+          f" Given split name: {self.split}"
       )
     if self.filetype_suffix is not None and not self.filetype_suffix:
-      raise ValueError(f'Filetype suffix must be a non-empty string: {self}')
+      raise ValueError(f"Filetype suffix must be a non-empty string: {self}")
     if not self.template:
       self.template = DEFAULT_FILENAME_TEMPLATE
 
@@ -543,13 +543,13 @@ class ShardedFileTemplate:
 
     def filename_info_from_match(match: re.Match[str]) -> FilenameInfo:
       groupdict = match.groupdict()
-      shard_index = groupdict.get('shard_index')
-      num_shards = groupdict.get('num_shards')
+      shard_index = groupdict.get("shard_index")
+      num_shards = groupdict.get("num_shards")
       return FilenameInfo(
-          dataset_name=groupdict.get('dataset_name', self.dataset_name),
-          split=groupdict.get('split', self.split),
+          dataset_name=groupdict.get("dataset_name", self.dataset_name),
+          split=groupdict.get("split", self.split),
           filetype_suffix=groupdict.get(
-              'filetype_suffix', self.filetype_suffix
+              "filetype_suffix", self.filetype_suffix
           ),
           shard_index=int(shard_index) if shard_index is not None else None,
           num_shards=int(num_shards) if num_shards is not None else None,
@@ -609,18 +609,18 @@ class ShardedFileTemplate:
     mappings = self._default_mappings()
 
     # Add shard related information that is formatted consistently
-    shard_number_template = '{n:0%d}' % _num_digits_needed(num_shards)
+    shard_number_template = "{n:0%d}" % _num_digits_needed(num_shards)
     mappings[_VAR_SHARD_INDEX] = shard_number_template.format(n=shard_index)
     if num_shards:
       mappings[_VAR_NUM_SHARDS] = shard_number_template.format(n=num_shards)
       mappings[_VAR_SHARD_X_OF_Y] = (
-          f'{mappings[_VAR_SHARD_INDEX]}-of-{mappings[_VAR_NUM_SHARDS]}'
+          f"{mappings[_VAR_SHARD_INDEX]}-of-{mappings[_VAR_NUM_SHARDS]}"
       )
     try:
       filepath = self.template.format(**mappings)
     except KeyError as e:
       raise ValueError(
-          f'Could not format template {self.template} with mappings {mappings}!'
+          f"Could not format template {self.template} with mappings {mappings}!"
       ) from e
 
     return filepath
@@ -650,13 +650,14 @@ class ShardedFileTemplate:
   ) -> str:
     """Returns the path of the data shards without the shard suffix."""
     a_filepath = self.sharded_filepath(shard_index=0, num_shards=1)
-    prefix = _replace_shard_pattern(os.fspath(a_filepath), '')
+    prefix = _replace_shard_pattern(os.fspath(a_filepath), "")
     return _remove_extension(prefix)
 
   def sharded_filepaths_pattern(
       self,
       *,
       num_shards: int | None = None,
+      use_at_notation: bool = False,
   ) -> str:
     """Returns a pattern describing all the file paths captured by this template.
 
@@ -668,15 +669,18 @@ class ShardedFileTemplate:
 
     Args:
       num_shards: optional specification of the number of shards.
+      use_at_notation: whether to return @* in case `num_shards` is `None`.
 
     Returns:
       the pattern describing all shards captured by this template.
     """
     a_filepath = self.sharded_filepath(shard_index=0, num_shards=1)
     if num_shards:
-      replacement = f'@{num_shards}'
+      replacement = f"@{num_shards}"
+    elif use_at_notation:
+      replacement = "@*"
     else:
-      replacement = '*'
+      replacement = "*"
     return _replace_shard_pattern(os.fspath(a_filepath), replacement)
 
   def glob_pattern(self, num_shards: int | None = None) -> str:
@@ -686,14 +690,14 @@ class ShardedFileTemplate:
       return self.sharded_filepaths_pattern(num_shards=None)
     first_shard = self.sharded_filepath(shard_index=0, num_shards=num_shards)
     file_name = first_shard.name
-    file_pattern = re.sub(r'0{5,}-of-', '*-of-', file_name)
+    file_pattern = re.sub(r"0{5,}-of-", "*-of-", file_name)
     # e.g., `dataset_name-split.fileformat-*-of-00042`
     return os.fspath(first_shard.parent / file_pattern)
 
   def sharded_filenames(self, num_shards: int) -> list[str]:
     return [path.name for path in self.sharded_filepaths(num_shards=num_shards)]
 
-  def replace(self, **kwargs: Any) -> 'ShardedFileTemplate':
+  def replace(self, **kwargs: Any) -> ShardedFileTemplate:
     """Returns a copy of the `ShardedFileTemplate` with updated attributes."""
     return dataclasses.replace(self, **kwargs)
 
@@ -728,7 +732,7 @@ class FilenameInfo:
 
   def full_filename_template(self):
     template = self.filename_template or ShardedFileTemplate(
-        data_dir=epath.Path('')
+        data_dir=epath.Path("")
     )
     return template.replace(
         dataset_name=self.dataset_name,
@@ -736,7 +740,7 @@ class FilenameInfo:
         filetype_suffix=self.filetype_suffix,
     )
 
-  def replace(self, **kwargs: Any) -> 'FilenameInfo':
+  def replace(self, **kwargs: Any) -> "FilenameInfo":
     """Returns a copy with updated attributes."""
     return dataclasses.replace(self, **kwargs)
 
@@ -745,7 +749,7 @@ class FilenameInfo:
       cls,
       filename: str,
       filename_template: ShardedFileTemplate | None = None,
-  ) -> 'FilenameInfo':
+  ) -> "FilenameInfo":
     """Factory to create a `FilenameInfo` from filename."""
     filename_template = _get_filename_template(filename, filename_template)
     # Strip off the directory if the filename contains it.
@@ -753,8 +757,8 @@ class FilenameInfo:
     filename_info = filename_template.parse_filename_info(filename)
     if filename_info is None:
       raise ValueError(
-          f'Could not parse filename {filename} '
-          f'with template {filename_template}'
+          f"Could not parse filename {filename} "
+          f"with template {filename_template}"
       )
     return filename_info
 

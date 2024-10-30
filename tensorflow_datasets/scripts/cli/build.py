@@ -32,7 +32,13 @@ from tensorflow_datasets.scripts.cli import cli_utils
 
 
 def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: disable=protected-access
-  """Add subparser for `build` command."""
+  """Add subparser for `build` command.
+
+  New flags should be added to `cli_utils` module.
+
+  Args:
+    parsers: The subparsers object to add the parser to.
+  """
   build_parser = parsers.add_parser(
       'build', help='Commands for downloading and preparing datasets.'
   )
@@ -357,6 +363,7 @@ def _download_and_prepare(
       skip_if_published=args.skip_if_published,
       overwrite=args.overwrite,
       beam_pipeline_options=args.beam_pipeline_options,
+      nondeterministic_order=args.nondeterministic_order,
   )
 
 
