@@ -235,5 +235,9 @@ message DatasetInfo {
   // the dataset is not blocked.
   string is_blocked = 23;
 
-  // Next available: 24
+  // If True, it will not assure deterministic order when writing examples to
+  // disk. This might result in quicker dataset preparation.
+  bool nondeterministic_order = 24;
+
+  // Next available: 25
 }
