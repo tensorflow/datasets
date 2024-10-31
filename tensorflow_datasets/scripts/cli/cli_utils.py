@@ -261,6 +261,14 @@ def add_generation_argument_group(parser: argparse.ArgumentParser):
       default=1,
       help='Number of parallel build processes.',
   )
+  generation_group.add_argument(
+      '--nondeterministic_order',
+      action='store_false',
+      help=(
+          'If True, it will not assure deterministic ordering when writing'
+          ' examples to disk. This might result in quicker dataset preparation.'
+      ),
+  )
 
 
 def add_publish_argument_group(parser: argparse.ArgumentParser):
@@ -300,6 +308,7 @@ def download_and_prepare(
     skip_if_published: bool,
     overwrite: bool,
     beam_pipeline_options: str | None,
+    nondeterministic_order: bool = False,
 ) -> None:
   """Generate a single builder."""
   dataset = builder.info.full_name
@@ -317,6 +326,8 @@ def download_and_prepare(
     download_config = download.DownloadConfig()
   if overwrite and not download_config.download_mode.overwrite_dataset:
     download_config.download_mode = download.GenerateMode.REUSE_CACHE_IF_EXISTS
+  if nondeterministic_order:
+    download_config.nondeterministic_order = True
 
   # Add Apache Beam options to download config
   try:

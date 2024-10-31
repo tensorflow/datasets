@@ -108,6 +108,9 @@ class DownloadConfig:
       used.
     ignore_duplicates: whether to ignore duplicated examples with the same key.
       If there are multiple examples with the same key, the first one is kept.
+    nondeterministic_order: If True, it will not assure deterministic ordering
+      when writing' examples to disk in the case of beam datasets. This might
+      result in quicker dataset preparation.
   """
 
   extract_dir: epath.PathLike | None = None
@@ -126,6 +129,7 @@ class DownloadConfig:
   min_shard_size: int = shard_utils.DEFAULT_MIN_SHARD_SIZE
   max_shard_size: int = shard_utils.DEFAULT_MAX_SHARD_SIZE
   ignore_duplicates: bool = False
+  nondeterministic_order: bool = False
 
   def get_shard_config(self) -> shard_utils.ShardConfig:
     return shard_utils.ShardConfig(
