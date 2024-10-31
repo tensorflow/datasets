@@ -170,9 +170,6 @@ def builder(
   name, builder_kwargs = naming.parse_builder_name_kwargs(
       name, **builder_kwargs
   )
-  # Make sure that `data_dir` is not set to an empty string or None.
-  if 'data_dir' in builder_kwargs and not builder_kwargs['data_dir']:
-    builder_kwargs.pop('data_dir')
 
   def get_dataset_repr() -> str:
     return f'dataset "{name}", builder_kwargs "{builder_kwargs}"'
