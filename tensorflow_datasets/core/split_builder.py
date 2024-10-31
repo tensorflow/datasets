@@ -35,7 +35,6 @@ with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
   from tensorflow_datasets.core import example_serializer
   from tensorflow_datasets.core import features as features_lib
-  from tensorflow_datasets.core import file_adapters
   from tensorflow_datasets.core import naming
   from tensorflow_datasets.core import splits as splits_lib
   from tensorflow_datasets.core import utils
@@ -411,18 +410,14 @@ class SplitBuilder:
       generator: SplitGenerator,
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
-      nondeterministic_order: bool,
   ) -> _SplitInfoFuture:
     """Start the split generation.
 
     Args:
-      split_name: Name of the split to generate.
-      generator: Generator, beam.PTransform,... yielding the examples.
+      split_name: Name of the split to generate
+      generator: Generator, beam.PTransform,... yielding the examples
       filename_template: Template to format the filename for a shard.
-      disable_shuffling: Specifies whether to shuffle the examples.
-      nondeterministic_order: If True, it will not assure deterministic ordering
-        when writing' examples to disk. This might result in quicker dataset
-        preparation
+      disable_shuffling: Specifies whether to shuffle the examples
 
     Returns:
       split_info_future: Future containing the `split_info`, once generation
@@ -438,11 +433,6 @@ class SplitBuilder:
     # Depending on the type of generator, we use the corresponding
     # `_build_from_xyz` method.
     if isinstance(generator, Iterable):
-      if nondeterministic_order:
-        logging.warning(
-            'Enabling `nondeterministic_order` for a dataset that does not use'
-            ' beam has no effect.'
-        )
       return self._build_from_generator(**build_kwargs)
     else:  # Otherwise, beam required
       unknown_generator_type = TypeError(
@@ -450,7 +440,6 @@ class SplitBuilder:
           'Expected generator or apache_beam object. Got: '
           f'{type(generator)}'
       )
-      build_kwargs['nondeterministic_order'] = nondeterministic_order
       if isinstance(generator, beam.PTransform):
         # Generate the beam.PCollection
         pcollection = self.beam_pipeline | split_name >> generator
@@ -538,35 +527,20 @@ class SplitBuilder:
       generator: 'beam.PCollection[KeyExample]',
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
-      nondeterministic_order: bool,
   ) -> _SplitInfoFuture:
     """Split generator for `beam.PCollection`."""
     # TODO(tfds): Should try to add support to `max_examples_per_split`
-    serializer = example_serializer.ExampleSerializer(
-        self._features.get_serialized_info()
+    beam_writer = writer_lib.BeamWriter(
+        serializer=example_serializer.ExampleSerializer(
+            self._features.get_serialized_info()
+        ),
+        filename_template=filename_template,
+        hash_salt=split_name,
+        disable_shuffling=disable_shuffling,
+        shard_config=self._shard_config,
+        example_writer=self._example_writer,
+        ignore_duplicates=self._ignore_duplicates,
     )
-    if nondeterministic_order:
-      logging.info(
-          'Order of examples does not matter, using NoShuffleBeamWriter'
-      )
-      beam_writer = writer_lib.NoShuffleBeamWriter(
-          serializer=serializer,
-          file_format=file_adapters.FileFormat.from_value(
-              filename_template.filetype_suffix
-          ),
-          filename_template=filename_template,
-      )
-    else:
-      logging.info('Deterministic ordering is enabled, using BeamWriter')
-      beam_writer = writer_lib.BeamWriter(
-          serializer=serializer,
-          filename_template=filename_template,
-          hash_salt=split_name,
-          disable_shuffling=disable_shuffling,
-          shard_config=self._shard_config,
-          example_writer=self._example_writer,
-          ignore_duplicates=self._ignore_duplicates,
-      )
 
     def _encode_example(key_ex, encode_fn=self._features.encode_example):
       # We do not access self._features in this function to avoid pickling the
