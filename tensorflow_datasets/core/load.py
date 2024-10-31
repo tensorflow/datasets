@@ -17,20 +17,18 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Iterable, Iterator, Mapping, Sequence
 import dataclasses
 import difflib
-import json
 import posixpath
 import re
 import textwrap
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Mapping, Optional, Type
+from typing import Any, Callable, Optional, Type
 
 from absl import logging
 from etils import epath
 from tensorflow_datasets.core import community
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import decode
@@ -40,7 +38,6 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder  # pylint:disable=unused-import
 from tensorflow_datasets.core.download import util
@@ -49,7 +46,7 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils import version
+from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # pylint: disable=logging-format-interpolation
@@ -74,7 +71,7 @@ _FULL_NAME_REG = re.compile(
 def list_builders(
     *,
     with_community_datasets: bool = True,
-) -> List[str]:
+) -> list[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   datasets = registered.list_imported_builders()
   if with_community_datasets:
@@ -83,7 +80,7 @@ def list_builders(
   return datasets
 
 
-def list_dataset_collections() -> List[str]:
+def list_dataset_collections() -> list[str]:
   """Returns the string names of all `tfds.core.DatasetCollectionBuilder`s."""
   collections = registered.list_imported_dataset_collections()
   return collections
@@ -124,7 +121,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
       cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
       return cls
     except registered.DatasetNotFoundError:
-      _add_list_builders_context(name=ds_name)  # pytype: disable=bad-return-type
+      _add_list_builders_context(name=ds_name)
       raise
 
 
@@ -173,6 +170,9 @@ def builder(
   name, builder_kwargs = naming.parse_builder_name_kwargs(
       name, **builder_kwargs
   )
+  # Make sure that `data_dir` is not set to an empty string or None.
+  if 'data_dir' in builder_kwargs and not builder_kwargs['data_dir']:
+    builder_kwargs.pop('data_dir')
 
   def get_dataset_repr() -> str:
     return f'dataset "{name}", builder_kwargs "{builder_kwargs}"'
@@ -263,7 +263,7 @@ class DatasetCollectionLoader:
 
   collection: dataset_collection_builder.DatasetCollection
   requested_version: Optional[str] = None
-  loader_kwargs: Optional[Dict[str, Any]] = None
+  loader_kwargs: dict[str, Any] | None = None
 
   def __post_init__(self):
     self.datasets = self.collection.get_collection(self.requested_version)
@@ -298,14 +298,14 @@ class DatasetCollectionLoader:
     )
     return info
 
-  def set_loader_kwargs(self, loader_kwargs: Dict[str, Any]):
+  def set_loader_kwargs(self, loader_kwargs: dict[str, Any]):
     self.loader_kwargs = loader_kwargs
 
   def load_dataset(
       self,
       dataset: str,
       split: Optional[Tree[splits_lib.SplitArg]] = None,
-      loader_kwargs: Optional[Dict[str, Any]] = None,
+      loader_kwargs: dict[str, Any] | None = None,
   ) -> Mapping[str, tf.data.Dataset]:
     """Loads the named dataset from a dataset collection by calling `tfds.load`.
 
@@ -388,7 +388,7 @@ class DatasetCollectionLoader:
       self,
       datasets: Iterable[str],
       split: Optional[Tree[splits_lib.SplitArg]] = None,
-      loader_kwargs: Optional[Dict[str, Any]] = None,
+      loader_kwargs: dict[str, Any] | None = None,
   ) -> Mapping[str, Mapping[str, tf.data.Dataset]]:
     """Loads a number of datasets from the dataset collection.
 
@@ -418,7 +418,7 @@ class DatasetCollectionLoader:
   def load_all_datasets(
       self,
       split: Optional[Tree[splits_lib.SplitArg]] = None,
-      loader_kwargs: Optional[Dict[str, Any]] = None,
+      loader_kwargs: dict[str, Any] | None = None,
   ) -> Mapping[str, Mapping[str, tf.data.Dataset]]:
     """Loads all datasets of a collection.
 
@@ -440,7 +440,7 @@ class DatasetCollectionLoader:
 @tfds_logging.dataset_collection()
 def dataset_collection(
     name: str,
-    loader_kwargs: Optional[Dict[str, Any]] = None,
+    loader_kwargs: Optional[dict[str, Any]] = None,
 ) -> DatasetCollectionLoader:
   """Instantiates a DatasetCollectionLoader.
 
@@ -500,7 +500,7 @@ def _fetch_builder(
 def _download_and_prepare_builder(
     dbuilder: dataset_builder.DatasetBuilder,
     download: bool,
-    download_and_prepare_kwargs: Optional[Dict[str, Any]],
+    download_and_prepare_kwargs: Optional[dict[str, Any]],
 ) -> None:
   """Downloads and prepares the dataset builder if necessary."""
   if dbuilder.is_prepared():
@@ -594,7 +594,7 @@ def load(
     split: Which split of the data to load (e.g. `'train'`, `'test'`, `['train',
       'test']`, `'train[80%:]'`,...). See our [split API
       guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
-      all splits in a `Dict[Split, tf.data.Dataset]`
+      all splits in a `dict[Split, tf.data.Dataset]`
     data_dir: directory to read/write data. Defaults to the value of the
       environment variable TFDS_DATA_DIR, if set, otherwise falls back to
       '~/tensorflow_datasets'.
@@ -776,7 +776,7 @@ def data_source(
     split: Which split of the data to load (e.g. `'train'`, `'test'`, `['train',
       'test']`, `'train[80%:]'`,...). See our [split API
       guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
-      all splits in a `Dict[Split, Sequence]`
+      all splits in a `dict[Split, Sequence]`
     data_dir: directory to read/write data. Defaults to the value of the
       environment variable TFDS_DATA_DIR, if set, otherwise falls back to
       '~/tensorflow_datasets'.
@@ -832,11 +832,11 @@ def data_source(
 
 
 def _get_all_versions(
-    current_version: version.Version | None,
-    extra_versions: Iterable[version.Version],
+    current_version: version_lib.Version | None,
+    extra_versions: Iterable[version_lib.Version],
     current_version_only: bool,
-) -> Iterable[str]:
-  """Returns the list of all current versions."""
+) -> set[str]:
+  """Returns the set of all current versions."""
   # Merge current version with all extra versions
   version_list = [current_version] if current_version else []
   if not current_version_only:
@@ -881,7 +881,7 @@ def _iter_full_names(current_version_only: bool) -> Iterator[str]:
       yield full_name
 
 
-def list_full_names(current_version_only: bool = False) -> List[str]:
+def list_full_names(current_version_only: bool = False) -> list[str]:
   """Lists all registered datasets full_names.
 
   Args:
@@ -896,7 +896,7 @@ def list_full_names(current_version_only: bool = False) -> List[str]:
 def single_full_names(
     builder_name: str,
     current_version_only: bool = True,
-) -> List[str]:
+) -> list[str]:
   """Returns the list `['ds/c0/v0',...]` or `['ds/v']` for a single builder."""
   return sorted(
       _iter_single_full_names(
