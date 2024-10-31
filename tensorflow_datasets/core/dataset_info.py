@@ -186,7 +186,6 @@ class DatasetInfo:
       features: feature_lib.FeatureConnector | None = None,
       supervised_keys: SupervisedKeysType | None = None,
       disable_shuffling: bool = False,
-      nondeterministic_order: bool = False,
       homepage: str | None = None,
       citation: str | None = None,
       metadata: Metadata | None = None,
@@ -229,11 +228,7 @@ class DatasetInfo:
 
         Note that selecting features in nested `tfds.features.FeaturesDict`
         objects is not supported.
-      disable_shuffling: `bool`, specifies whether to shuffle the examples.
-      nondeterministic_order: `bool`, if True and the dataset uses beam, it will
-        use `NoShuffleBeamWriter` which does not assure deterministic
-        shuffling when writing' examples to disk. This might result in quicker
-        dataset preparation.
+      disable_shuffling: `bool`, specify whether to shuffle the examples.
       homepage: `str`, optional, the homepage for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
@@ -273,7 +268,6 @@ class DatasetInfo:
         version=str(self._identity.version),
         release_notes=self._identity.release_notes,
         disable_shuffling=disable_shuffling,
-        nondeterministic_order=nondeterministic_order,
         config_name=self._identity.config_name,
         config_description=self._identity.config_description,
         config_tags=self._identity.config_tags,
@@ -348,7 +342,6 @@ class DatasetInfo:
         features=features,
         supervised_keys=supervised_keys,
         disable_shuffling=proto.disable_shuffling,
-        nondeterministic_order=proto.nondeterministic_order,
         citation=proto.citation,
         license=proto.redistribution_info.license,
         split_dict=splits_lib.SplitDict.from_proto(
@@ -406,13 +399,6 @@ class DatasetInfo:
   @property
   def disable_shuffling(self) -> bool:
     return self.as_proto.disable_shuffling
-
-  @property
-  def nondeterministic_order(self) -> bool:
-    return self._info_proto.nondeterministic_order
-
-  def set_nondeterministic_order(self, nondeterministic_order: bool) -> None:
-    self._info_proto.nondeterministic_order = nondeterministic_order
 
   @property
   def homepage(self) -> str:
@@ -937,7 +923,6 @@ class DatasetInfo:
         ("features", _indent(repr(self.features))),
         ("supervised_keys", self.supervised_keys),
         ("disable_shuffling", self.disable_shuffling),
-        ("nondeterministic_order", self.nondeterministic_order),
         ("splits", splits),
         ("citation", _indent(f'"""{self.citation}"""')),
         # Proto add a \n that we strip.
@@ -955,7 +940,6 @@ class DatasetInfo:
         "features": self.features,
         "supervised_keys": self.supervised_keys,
         "disable_shuffling": self.disable_shuffling,
-        "nondeterministic_order": self.nondeterministic_order,
         "homepage": self.homepage,
         "citation": self.citation,
         "metadata": self.metadata,
@@ -972,7 +956,6 @@ class DatasetInfo:
         features=state["features"],
         supervised_keys=state["supervised_keys"],
         disable_shuffling=state["disable_shuffling"],
-        nondeterministic_order=state["nondeterministic_order"],
         homepage=state["homepage"],
         citation=state["citation"],
         metadata=state["metadata"],

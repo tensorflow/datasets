@@ -13,20 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Tests for tensorflow_datasets.core.writer."""
+
 import json
 import os
-import tempfile
 from typing import Optional
 from unittest import mock
 
 from absl.testing import parameterized
-import apache_beam as beam
 from etils import epath
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import shard_utils
@@ -408,10 +409,6 @@ class WriterTest(testing.TestCase):
       self._write(to_write=to_write)
 
 
-def _get_runner() -> beam.runners.PipelineRunner:
-  return beam.runners.DirectRunner()
-
-
 class TfrecordsWriterBeamTest(testing.TestCase):
   NUM_SHARDS = 3
   RECORDS_TO_WRITE = [(i, str(i).encode('utf-8')) for i in range(10)]
@@ -458,6 +455,7 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     shard_config = shard_config or shard_utils.ShardConfig(
         num_shards=self.NUM_SHARDS
     )
+    beam = lazy_imports_lib.lazy_imports.apache_beam
     writer = writer_lib.BeamWriter(
         serializer=testing.DummySerializer('dummy specs'),
         filename_template=filename_template,
@@ -581,50 +579,6 @@ class TfrecordsWriterBeamTest(testing.TestCase):
     self.assertEqual(all_recs, expected_shards)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
-
-
-class NoShuffleBeamWriterTest(parameterized.TestCase):
-
-  @parameterized.named_parameters(
-      ('tfrecord', file_adapters.FileFormat.TFRECORD),
-  )
-  def test_write_beam(self, file_format: file_adapters.FileFormat):
-
-    with tempfile.TemporaryDirectory() as tmp_dir:
-      tmp_dir = epath.Path(tmp_dir)
-      filename_template = naming.ShardedFileTemplate(
-          dataset_name='foo',
-          split='train',
-          filetype_suffix=file_format.file_suffix,
-          data_dir=tmp_dir,
-      )
-      writer = writer_lib.NoShuffleBeamWriter(
-          serializer=testing.DummySerializer('dummy specs'),
-          filename_template=filename_template,
-          file_format=file_format,
-      )
-      to_write = [(i, str(i).encode('utf-8')) for i in range(10)]
-      # Here we need to disable type check as `beam.Create` is not capable of
-      # inferring the type of the PCollection elements.
-      options = beam.options.pipeline_options.PipelineOptions(
-          pipeline_type_check=False
-      )
-      with beam.Pipeline(options=options, runner=_get_runner()) as pipeline:
-
-        @beam.ptransform_fn
-        def _build_pcollection(pipeline):
-          pcollection = pipeline | 'Start' >> beam.Create(to_write)
-          return writer.write_from_pcollection(pcollection)
-
-        _ = pipeline | 'test' >> _build_pcollection()  # pylint: disable=no-value-for-parameter
-      shard_lengths, total_size = writer.finalize()
-      self.assertNotEmpty(shard_lengths)
-      self.assertEqual(sum(shard_lengths), 10)
-      self.assertGreater(total_size, 10)
-      files = list(tmp_dir.iterdir())
-      self.assertGreaterEqual(len(files), 1)
-      for f in files:
-        self.assertIn(file_format.file_suffix, f.name)
 
 
 class CustomExampleWriter(writer_lib.ExampleWriter):
