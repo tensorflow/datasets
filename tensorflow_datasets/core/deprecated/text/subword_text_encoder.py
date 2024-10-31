@@ -22,8 +22,11 @@ from __future__ import unicode_literals
 import collections
 
 from absl import logging
+from etils import epy
 from tensorflow_datasets.core.deprecated.text import text_encoder
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+
+with epy.lazy_imports():
+  import tensorflow as tf  # pylint: disable=g-import-not-at-top
 
 # Internally, an underscore indicates a single space, so, to ensure
 # user-supplied underscores are encoded properly, they are replaced with this

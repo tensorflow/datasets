@@ -22,7 +22,10 @@ import hashlib
 import json
 import re
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from etils import epy
+
+with epy.lazy_imports():
+  import tensorflow as tf  # pylint: disable=g-import-not-at-top
 
 
 def _re_compile(pattern):
