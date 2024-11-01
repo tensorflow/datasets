@@ -25,9 +25,9 @@ import uuid
 from absl import logging
 from etils import epath
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import c4_utils
-import tree
 
 PageFeatures = c4_utils.PageFeatures
 

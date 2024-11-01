@@ -26,8 +26,8 @@ from xml.etree import ElementTree
 
 from absl import logging
 from etils import epath
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 import tensorflow_datasets.public_api as tfds
-import tree
 
 _DESCRIPTION = """\
 Translate dataset based on the data from statmt.org.

@@ -28,12 +28,11 @@ import uuid
 from absl import logging
 from etils import epath
 from etils import epy
+from tensorflow_datasets.core.utils.lazy_imports_utils import promise
 from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
-  import promise
-
   from tensorflow_datasets.core import utils
   from tensorflow_datasets.core.download import checksums
   from tensorflow_datasets.core.download import downloader
