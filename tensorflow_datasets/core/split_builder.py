@@ -28,7 +28,6 @@ from absl import logging
 from etils import epath
 from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
-from tensorflow_datasets.core.utils.lazy_imports_utils import click
 from tensorflow_datasets.core.utils.lazy_imports_utils import psutil
 
 with epy.lazy_imports():
@@ -341,13 +340,14 @@ class SplitBuilder:
 
       total_memory = psutil.virtual_memory().total
       if self._dataset_size >= total_memory:
-        if not click.confirm(
+        value = input(
             (
                 f'The dataset is {self._dataset_size} in size, but your machine'
                 f' has only {utils.Size(total_memory)} of memory. Continue?'
+                '[Y/n] > '
             ),
-            default=True,
-        ):
+        )
+        if value.lower() in ('n', 'no'):
           sys.exit(1)
 
     beam_options = (

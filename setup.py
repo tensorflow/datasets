@@ -63,7 +63,6 @@ REQUIRED_PKGS = [
     # platform except 'x86_64'. See
     # https://github.com/google/array_record/issues/71
     'array_record>=0.5.0;platform_system=="Linux"',
-    'click',
     'dm-tree',
     'etils[edc,enp,epath,epy,etree]>=1.6.0;python_version<"3.11"',
     'etils[edc,enp,epath,epy,etree]>=1.9.1;python_version>="3.11"',
