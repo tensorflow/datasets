@@ -15,6 +15,7 @@
 
 """ClassLabel feature."""
 
+from collections.abc import Iterable
 from typing import Optional, Union
 
 from etils import epath
@@ -35,8 +36,8 @@ class ClassLabel(tensor_feature.Tensor):
       self,
       *,
       num_classes: int | None = None,
-      names=None,
-      names_file: str | epath.PathLike | None = None,
+      names: Iterable[str] | None = None,
+      names_file: epath.PathLike | None = None,
       doc: feature_lib.DocArg = None,
   ):
     """Constructs a ClassLabel FeatureConnector.
@@ -51,11 +52,11 @@ class ClassLabel(tensor_feature.Tensor):
     Note: On python2, the strings are encoded as utf-8.
 
     Args:
-      num_classes: `int`, number of classes. All labels must be < num_classes.
-      names: `list<str>`, string names for the integer classes. The order in
-        which the names are provided is kept.
-      names_file: `str` or `epath.PathLike`, path to a file with names for the
-        integer classes, one per line.
+      num_classes: Number of classes. All labels must be < num_classes.
+      names: String names for the integer classes. The order in which the names
+        are provided is kept.
+      names_file: Path to a file with names for the integer classes, one per
+        line.
       doc: Documentation of this feature (e.g. description).
     """
     super(ClassLabel, self).__init__(shape=(), dtype=np.int64, doc=doc)
@@ -76,7 +77,7 @@ class ClassLabel(tensor_feature.Tensor):
     if num_classes is not None:
       self._num_classes = num_classes
     elif names is not None:
-      self.names = names
+      self.names = list(names)
     elif names_file is not None:
       self.names = _load_names_from_file(epath.Path(names_file))
 
@@ -85,10 +86,10 @@ class ClassLabel(tensor_feature.Tensor):
     return self._num_classes
 
   @property
-  def names(self) -> Optional[list[str]]:
+  def names(self) -> list[str]:
     if not self._int2str:
       return [str(i) for i in range(self._num_classes)]
-    return list(self._int2str)
+    return self._int2str
 
   @names.setter
   def names(self, new_names: list[str]):
@@ -224,5 +225,7 @@ def _load_names_from_file(names_filepath: epath.Path) -> list[str]:
   ]
 
 
-def _write_names_to_file(names_filepath: epath.Path, names) -> None:
+def _write_names_to_file(
+    names_filepath: epath.Path, names: Iterable[str]
+) -> None:
   names_filepath.write_text("\n".join(names) + "\n")

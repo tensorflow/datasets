@@ -99,7 +99,9 @@ def convert_hf_features(hf_features) -> feature_lib.FeatureConnector:
       return feature_lib.Scalar(dtype=_convert_to_np_dtype(hf_features.dtype))
     case hf_datasets.ClassLabel():
       if hf_features.names:
-        return feature_lib.ClassLabel(names=hf_features.names)
+        return feature_lib.ClassLabel(
+            names=[str(name) for name in hf_features.names]
+        )
       if hf_features.names_file:
         return feature_lib.ClassLabel(names_file=hf_features.names_file)
       if hf_features.num_classes:
