@@ -111,7 +111,7 @@ jobs:
         use-cache: false
 
     # Test each notebook sequentially.
-    - name: Run notebook
+    - name: Run notebooks sequentially
       run: |
         ipython kernel install --user --name tfds-notebook
         for notebook in docs/*ipynb
