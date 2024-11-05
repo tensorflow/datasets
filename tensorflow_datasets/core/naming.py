@@ -189,7 +189,7 @@ def _dataset_name_and_kwargs_from_name_str(
     raise e
 
 
-@dataclasses.dataclass(order=True)
+@dataclasses.dataclass(frozen=True, order=True)
 class DatasetReference:
   """Reference to a dataset.
 
@@ -214,16 +214,31 @@ class DatasetReference:
   """  # fmt: skip
 
   dataset_name: str
-  namespace: None | str = None
-  config: None | str = None
-  version: None | str | version_lib.Version = None
-  data_dir: None | str | os.PathLike = None  # pylint: disable=g-bare-generic
-  split_mapping: None | Mapping[str, str] = None
+  namespace: str | None = None
+  config: str | None = None
+  version: str | None = None
+  data_dir: str | None | os.PathLike = None  # pylint: disable=g-bare-generic
+  split_mapping: Mapping[str, str] | None = None
   info_filenames: set[str] | None = None
 
-  def __post_init__(self):
-    if isinstance(self.version, version_lib.Version):
-      self.version = str(self.version)
+  def __init__(
+      self,
+      *,
+      dataset_name: str,
+      namespace: str | None = None,
+      config: str | None = None,
+      version: str | version_lib.Version | None = None,
+      data_dir: str | os.PathLike | None = None,  # pylint: disable=g-bare-generic
+      split_mapping: Mapping[str, str] | None = None,
+      info_filenames: set[str] | None = None,
+  ):
+    self.dataset_name = dataset_name
+    self.namespace = namespace
+    self.config = config
+    self.version = str(version)
+    self.data_dir = data_dir
+    self.split_mapping = split_mapping
+    self.info_filenames = info_filenames
 
   def tfds_name(self, include_version: bool = True) -> str:
     """Returns the TFDS name of the referenced dataset.
