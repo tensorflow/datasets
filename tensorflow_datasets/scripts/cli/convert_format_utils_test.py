@@ -184,11 +184,14 @@ def test_record_source_dataset(tmpdir):
   in_data_dir.mkdir(parents=True)
   out_data_dir.mkdir(parents=True)
   info = _create_dataset_info(in_data_dir)
+  convert_config = convert_format_utils.ConvertConfig(
+      out_file_format=file_adapters.FileFormat.RIEGELI
+  )
   convert_format_utils.convert_metadata(
       in_dir=in_data_dir,
       out_path=out_data_dir,
       info=info,
-      out_file_format=file_adapters.FileFormat.RIEGELI,
+      convert_config=convert_config,
   )
   converted_info = dataset_info_lib.read_proto_from_builder_dir(out_data_dir)
   assert converted_info.name == info.name
@@ -212,12 +215,15 @@ def test_convert_metadata_add_to_existing(tmpdir):
   # Create a converted shard in the input directory.
   converted_shard = in_data_dir / 'a-train.riegeli-00000-of-00001'
   converted_shard.touch()
+  convert_config = convert_format_utils.ConvertConfig(
+      out_file_format=file_adapters.FileFormat.RIEGELI
+  )
 
   convert_format_utils.convert_metadata(
       in_dir=in_data_dir,
       out_path=in_data_dir,
       info=info,
-      out_file_format=file_adapters.FileFormat.RIEGELI,
+      convert_config=convert_config,
   )
   converted_info = dataset_info_lib.read_proto_from_builder_dir(in_data_dir)
   assert converted_info.file_format == file_adapters.FileFormat.TFRECORD.value
@@ -232,11 +238,14 @@ def test_convert_metadata_missing_shards(tmpdir):
   info = _create_dataset_info(
       in_data_dir, split_lengths={'train': 2, 'test': 1}
   )
+  convert_config = convert_format_utils.ConvertConfig(
+      out_file_format=file_adapters.FileFormat.RIEGELI
+  )
   convert_format_utils.convert_metadata(
       in_dir=in_data_dir,
       out_path=in_data_dir,
       info=info,
-      out_file_format=file_adapters.FileFormat.RIEGELI,
+      convert_config=convert_config,
   )
   converted_info = dataset_info_lib.read_proto_from_builder_dir(in_data_dir)
   assert converted_info.file_format == file_adapters.FileFormat.TFRECORD.value

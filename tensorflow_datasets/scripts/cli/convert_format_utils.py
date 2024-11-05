@@ -105,8 +105,16 @@ class ShardInstruction:
   out_path: epath.Path
   config: ConvertConfig
 
-  def convert(self) -> None:
-    """Converts the shard to the desired file format."""
+  def convert(self) -> epath.Path | None:
+    """Converts the shard to the desired file format.
+
+    Returns:
+      The path of the converted shard or `None` if the shard was not converted.
+
+    Raises:
+      Exception: if the shard conversion failed and `config.fail_on_error` is
+        `True`, else logs the error.
+    """
 
     def read_in() -> Iterator[type_utils.KeySerializedExample]:
       in_dataset = self.config.in_file_adapter.make_tf_data(
@@ -127,12 +135,13 @@ class ShardInstruction:
         self.config.out_file_adapter.write_examples(
             path=tmp_file, iterator=read_in()
         )
+      return self.out_path
     except Exception as e:  # pylint: disable=broad-except
       if self.config.fail_on_error:
         raise e
       else:
         logging.exception(
-            'Failed to convert shard %s (format=%s) to %s (format=%s!',
+            'Failed to convert shard %s (format=%s) to %s (format=%s)!',
             self.in_path,
             self.config.in_file_adapter.FILE_SUFFIX,
             self.out_path,
@@ -220,45 +229,87 @@ def _get_root_data_dir(
   return epath.Path(re.sub(rf'{relative_data_dir}/?$', '', in_dir))
 
 
+class ConvertMetadataFn(beam.DoFn):
+  """Beam DoFn to convert metadata for a single dataset version."""
+
+  def process(
+      self,
+      count,
+      in_dir: epath.Path,
+      info: dataset_info_pb2.DatasetInfo,
+      out_path: epath.Path,
+      convert_config: ConvertConfig,
+  ):
+    # This is necessary because sometimes `beam.combiners.Count.Globally()`
+    # returned an integer and not a pCollection.
+    if not isinstance(count, int):
+      count = beam.pvalue.AsSingleton(count)
+    convert_metadata(
+        in_dir=in_dir,
+        info=info,
+        out_path=out_path,
+        convert_config=convert_config,
+        num_converted_shards=count,
+    )
+
+
 def convert_metadata(
     in_dir: epath.Path,
     info: dataset_info_pb2.DatasetInfo,
-    out_file_format: file_adapters.FileFormat,
     out_path: epath.Path,
+    convert_config: ConvertConfig,
+    num_converted_shards: int | None = None,
 ) -> None:
   """Converts all metadata to the converted dataset.
 
   Args:
     in_dir: folder that contains the dataset to convert.
     info: dataset info of the dataset to convert.
-    out_file_format: the format to which the dataset should be converted to.
     out_path: folder where the converted dataset should be stored.
+    convert_config: configuration for the conversion.
+    num_converted_shards: number of shards that were successfully converted,
+      which is used to check that the conversion was successful. If part of a
+      beam pipeline, this comes from `beam.combiners.Count.Globally()`.
   """
   splits_dict = dataset_info_lib.get_split_dict_from_proto(
       dataset_info_proto=info,
       data_dir=in_dir,
-      file_format=out_file_format,
+      file_format=convert_config.out_file_format,
   )
 
   missing_shards_per_split = {}
   for split_info in splits_dict.values():
-    available_shards = split_info.get_available_shards(
-        out_path, file_format=out_file_format
+    num_available_shards = len(
+        split_info.get_available_shards(
+            out_path, file_format=convert_config.out_file_format
+        )
     )
-    if len(available_shards) < split_info.num_shards:
-      missing_shards_per_split[split_info.name] = (
-          len(available_shards),
-          split_info.num_shards,
-      )
+    if num_converted_shards != num_available_shards:
       logging.warning(
-          'Found %d shards for split %s, but expected %d shards.',
-          len(available_shards),
-          split_info.name,
+          'Amount of converted shards calculated during conversion (%d) does'
+          ' not match the amount of available shards in the data dir (%d) for'
+          ' split %s.'
+      )
+    if num_available_shards < split_info.num_shards:
+      missing_shards_per_split[split_info.name] = (
+          num_available_shards,
           split_info.num_shards,
       )
-    elif len(available_shards) > split_info.num_shards:
+      error_message = (
+          (
+              f'Found {num_available_shards} shards for split'
+              f' {split_info.name}, but expected'
+              f' {split_info.num_shards} shards.'
+          ),
+      )
+      if convert_config.fail_on_error:
+        raise ValueError(error_message)
+      else:
+        logging.warning(error_message)
+
+    elif num_available_shards > split_info.num_shards:
       raise ValueError(
-          f'Found more shards ({len(available_shards)}) for split'
+          f'Found more shards ({num_available_shards}) for split'
           f' {split_info.name}, but expected only'
           f' {split_info.num_shards} shards.'
       )
@@ -278,14 +329,14 @@ def convert_metadata(
 
     # File format was added to an existing dataset.
     # Add the file format to `alternative_file_formats` field.
-    if out_file_format not in info.alternative_file_formats:
-      info.alternative_file_formats.append(out_file_format.value)
+    if convert_config.out_file_format not in info.alternative_file_formats:
+      info.alternative_file_formats.append(convert_config.out_file_format.value)
       dataset_info_lib.write_dataset_info_proto(info, dataset_info_dir=out_path)
     else:
       logging.info(
           'File format %s is already an alternative file format of the dataset'
           ' in %s. Skipping updating metadata..',
-          out_file_format.value,
+          convert_config.out_file_format.value,
           os.fspath(in_dir),
       )
     return
@@ -318,7 +369,7 @@ def convert_metadata(
       dataset_info_proto=info,
       dataset_reference=in_dataset_reference,
   )
-  info.file_format = out_file_format.value
+  info.file_format = convert_config.out_file_format.value
   dataset_info_lib.write_dataset_info_proto(info, dataset_info_dir=out_path)
 
 
@@ -359,21 +410,46 @@ def _convert_dataset(
     logging.info('Found %d shards to convert.', len(shard_instructions))
 
   if pipeline is not None:
-    _ = (
+    converted_shards = (
         pipeline
         | f'CreateShardInstructions for {dataset_dir}'
         >> beam.Create(shard_instructions)
         | f'ConvertShards for {dataset_dir}'
         >> beam.Map(lambda shard_instruction: shard_instruction.convert())
+        | f'Filter out shards that were not successfully converted for {dataset_dir}'
+        >> beam.Filter(lambda shard_instruction: shard_instruction is not None)
+    )
+    count_shards = (
+        converted_shards
+        | f'CountConvertedShards for {dataset_dir}'
+        >> beam.combiners.Count.Globally()
+    )
+    _ = count_shards | f'ConvertMetadata for {dataset_dir}' >> beam.ParDo(
+        ConvertMetadataFn(),
+        in_dir=dataset_dir,
+        info=info,
+        out_path=out_dir,
+        convert_config=convert_config,
     )
 
   else:
+    converted_shards = 0
     for shard_instruction in tqdm.tqdm(
         shard_instructions,
         unit=' shards',
         desc=f'Shards in {os.fspath(dataset_dir)}',
     ):
-      shard_instruction.convert()
+      result = shard_instruction.convert()
+      if result is not None:
+        converted_shards += 1
+    logging.info('Converting metadata in %s.', dataset_dir)
+    convert_metadata(
+        in_dir=dataset_dir,
+        info=info,
+        out_path=out_dir,
+        convert_config=convert_config,
+        num_converted_shards=converted_shards,
+    )
 
 
 def _remove_incomplete_files(path: epath.Path) -> None:
@@ -521,21 +597,9 @@ def _convert_dataset_dirs(
           out_dir=out_dir,
       )
 
-  logging.info('All shards have been converted. Now converting metadata.')
-  for dataset_dir, info in tqdm.tqdm(
-      found_dataset_versions.items(), unit=' datasets'
-  ):
-    out_dir = from_to_dirs[dataset_dir]
-    logging.info('Converting metadata in %s.', dataset_dir)
-    convert_metadata(
-        in_dir=dataset_dir,
-        info=info,
-        out_file_format=convert_config.out_file_format,
-        out_path=out_dir,
-    )
-
   logging.info(
-      'All metadata has been converted. Now removing incomplete files.'
+      'All metadata and shards have been converted. Now removing incomplete'
+      ' files.'
   )
   for out_dir in from_to_dirs.values():
     logging.info('Removing incomplete files in %s.', out_dir)
