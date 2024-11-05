@@ -38,6 +38,7 @@ import simple_parsing
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
 from tensorflow_datasets.core.utils import croissant_utils
+from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.scripts.cli import cli_utils
 
 
@@ -112,6 +113,15 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
         self.dataset.metadata
     )
 
+  @functools.cached_property
+  def version(self) -> version_lib.Version:
+    # In TFDS, version is a mandatory attribute, while in Croissant it is only a
+    # recommended attribute. If the version is unspecified in Croissant, we set
+    # it to `1.0.0` in TFDS.
+    return version_lib.Version(
+        self.overwrite_version or self.dataset.metadata.version or '1.0.0'
+    )
+
 
 def register_subparser(parsers: argparse._SubParsersAction):
   """Add subparser for `convert_format` command."""
@@ -146,7 +156,7 @@ def prepare_croissant_builder(
       file_format=args.file_format,
       data_dir=args.data_dir,
       mapping=args.mapping_json,
-      overwrite_version=args.overwrite_version,
+      overwrite_version=args.version,
   )
   cli_utils.download_and_prepare(
       builder=builder,

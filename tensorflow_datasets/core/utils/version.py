@@ -20,6 +20,7 @@ from __future__ import annotations
 import dataclasses
 import enum
 import re
+from typing import Union
 
 from etils import epath
 
@@ -39,6 +40,7 @@ class DatasetVariantBlockedError(ValueError):
 # The key is a version or config string, the value is a short sentence
 # explaining why that version or config should not be used (or None).
 BlockedWithMsg = dict[str, str | None]
+VersionOrStr = Union["Version", str]
 
 
 @dataclasses.dataclass(frozen=True)
@@ -73,7 +75,7 @@ class BlockedVersions:
   configs: dict[str, BlockedWithMsg] = dataclasses.field(default_factory=dict)
 
   def is_blocked(
-      self, version: str | Version, config: str | None = None
+      self, version: VersionOrStr, config: str | None = None
   ) -> IsBlocked:
     """Checks whether a version or config is blocked.
 
@@ -131,7 +133,7 @@ class Version:
 
   def __init__(
       self,
-      version: Version | str,
+      version: VersionOrStr,
       experiments=None,
       tfds_version_to_prepare=None,
   ):
@@ -227,7 +229,7 @@ class Version:
     )
 
   @classmethod
-  def is_valid(cls, version: Version | str | None) -> bool:
+  def is_valid(cls, version: VersionOrStr | None) -> bool:
     """Returns True if the version can be parsed."""
     if isinstance(version, Version):
       return True

@@ -88,3 +88,4 @@ from tensorflow_datasets.core.utils.version import DatasetVariantBlockedError
 from tensorflow_datasets.core.utils.version import Experiment
 from tensorflow_datasets.core.utils.version import IsBlocked
 from tensorflow_datasets.core.utils.version import Version
+from tensorflow_datasets.core.utils.version import VersionOrStr

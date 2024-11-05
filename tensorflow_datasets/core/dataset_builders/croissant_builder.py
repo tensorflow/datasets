@@ -55,7 +55,7 @@ from tensorflow_datasets.core.features import text_feature
 from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils import croissant_utils
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils import version as version_utils
+from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
@@ -165,7 +165,7 @@ class CroissantBuilder(
       int_dtype: type_utils.TfdsDType | None = np.int64,
       float_dtype: type_utils.TfdsDType | None = np.float32,
       mapping: Mapping[str, epath.PathLike] | None = None,
-      overwrite_version: str | None = None,
+      overwrite_version: version_lib.VersionOrStr | None = None,
       filters: Mapping[str, Any] | None = None,
       **kwargs: Any,
   ):
@@ -203,7 +203,7 @@ class CroissantBuilder(
     # In TFDS, version is a mandatory attribute, while in Croissant it is only a
     # recommended attribute. If the version is unspecified in Croissant, we set
     # it to `1.0.0` in TFDS.
-    self.VERSION = version_utils.Version(  # pylint: disable=invalid-name
+    self.VERSION = version_lib.Version(  # pylint: disable=invalid-name
         overwrite_version or self.dataset.metadata.version or '1.0.0'
     )
     self.RELEASE_NOTES = {}  # pylint: disable=invalid-name

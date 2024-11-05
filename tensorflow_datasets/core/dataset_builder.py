@@ -69,7 +69,6 @@ with epy.lazy_imports():
 ListOrTreeOrElem = type_utils.ListOrTreeOrElem
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
-VersionOrStr = utils.Version | str
 
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
 REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
@@ -107,9 +106,9 @@ class BuilderConfig:
   # * Kwargs-only (https://bugs.python.org/issue33129)
 
   name: str
-  version: VersionOrStr | None = None
+  version: utils.VersionOrStr | None = None
   release_notes: dict[str, str] | None = None
-  supported_versions: list[VersionOrStr] = dataclasses.field(
+  supported_versions: list[utils.VersionOrStr] = dataclasses.field(
       default_factory=list
   )
   description: str | None = None
