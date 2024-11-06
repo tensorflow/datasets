@@ -17,8 +17,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 import concurrent.futures
-from typing import Dict, List, Union
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -33,7 +33,7 @@ Json = type_utils.Json
 WORKER_COUNT = 16
 
 
-class _DictGetCounter(object):
+class _DictGetCounter:
   """Wraps dict.get and counts successful key accesses."""
 
   def __init__(self, d):
@@ -114,15 +114,15 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   def __init__(
       self,
-      feature_dict: Dict[str, feature_lib.FeatureConnectorArg],
+      feature_dict: Mapping[str, feature_lib.FeatureConnectorArg],
       *,
       doc: feature_lib.DocArg = None,
   ):
     """Initialize the features.
 
     Args:
-      feature_dict (dict): Dictionary containing the feature connectors of a
-        example. The keys should correspond to the data dict as returned by
+      feature_dict: Mapping containing the feature connectors of a example. The
+        keys should correspond to the data dict as returned by
         tf.data.Dataset(). Types (np.int32,...) and dicts will automatically be
         converted into FeatureConnector.
       doc: Documentation of this feature (e.g. description).
@@ -173,7 +173,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   def catalog_documentation(
       self,
-  ) -> List[feature_lib.CatalogFeatureDocumentation]:
+  ) -> list[feature_lib.CatalogFeatureDocumentation]:
     feature_docs = [
         feature_lib.CatalogFeatureDocumentation(
             name='',
@@ -210,7 +210,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   @classmethod
   def from_json_content(
-      cls, value: Union[Json, feature_pb2.FeaturesDict]
+      cls, value: Json | feature_pb2.FeaturesDict
   ) -> 'FeaturesDict':
     if isinstance(value, dict):
       features = {

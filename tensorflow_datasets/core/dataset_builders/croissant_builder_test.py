@@ -91,8 +91,8 @@ DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
 def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
   actual_feature = croissant_builder.datatype_converter(
       field,
-      int_dtype=int_dtype if int_dtype else np.int64,
-      float_dtype=float_dtype if float_dtype else np.float32,
+      int_dtype=int_dtype or np.int64,
+      float_dtype=float_dtype or np.float32,
   )
   assert actual_feature == feature_type
 
@@ -221,6 +221,6 @@ def test_download_and_prepare(crs_builder, expected_entries, split_name):
   crs_builder.download_and_prepare()
   data_source = crs_builder.as_data_source(split=split_name)
   assert len(data_source) == 2
-  for i in range(2):
-    assert data_source[i]["jsonl/index"] == expected_entries[i]["index"]
-    assert data_source[i]["jsonl/text"].decode() == expected_entries[i]["text"]
+  for entry, expected_entry in zip(data_source, expected_entries):
+    assert entry["index"] == expected_entry["index"]
+    assert entry["text"].decode() == expected_entry["text"]

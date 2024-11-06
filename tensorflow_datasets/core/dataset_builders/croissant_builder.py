@@ -36,8 +36,8 @@ print(ds['default'][0])
 
 from __future__ import annotations
 
-from collections.abc import Mapping
-from typing import Any, Dict, Optional, Sequence
+from collections.abc import Mapping, Sequence
+from typing import Any
 
 from etils import epath
 import numpy as np
@@ -61,10 +61,23 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import pandas as pd
 
 
+_RecordOrFeature = Mapping[str, Any]
+
+
+def _strip_record_set_prefix(
+    record_or_feature: _RecordOrFeature, record_set_id: str
+) -> _RecordOrFeature:
+  """Removes the record set prefix from the field ids of a record or feature."""
+  return {
+      field_id.removeprefix(f'{record_set_id}/'): value
+      for field_id, value in record_or_feature.items()
+  }
+
+
 def datatype_converter(
     field: mlc.Field,
-    int_dtype: Optional[type_utils.TfdsDType] = np.int64,
-    float_dtype: Optional[type_utils.TfdsDType] = np.float32,
+    int_dtype: type_utils.TfdsDType = np.int64,
+    float_dtype: type_utils.TfdsDType = np.float32,
 ):
   """Converts a Croissant field to a TFDS-compatible feature.
 
@@ -162,8 +175,8 @@ class CroissantBuilder(
       jsonld: epath.PathLike | Mapping[str, Any],
       record_set_ids: Sequence[str] | None = None,
       disable_shuffling: bool | None = False,
-      int_dtype: type_utils.TfdsDType | None = np.int64,
-      float_dtype: type_utils.TfdsDType | None = np.float32,
+      int_dtype: type_utils.TfdsDType = np.int64,
+      float_dtype: type_utils.TfdsDType = np.float32,
       mapping: Mapping[str, epath.PathLike] | None = None,
       overwrite_version: version_lib.VersionOrStr | None = None,
       filters: Mapping[str, Any] | None = None,
@@ -214,7 +227,7 @@ class CroissantBuilder(
         conversion_utils.to_tfds_name(record_set_id)
         for record_set_id in record_set_ids
     ]
-    self.BUILDER_CONFIGS: Sequence[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
+    self.BUILDER_CONFIGS: list[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
         dataset_builder.BuilderConfig(name=config_name)
         for config_name in config_names
     ]
@@ -261,13 +274,14 @@ class CroissantBuilder(
       if field.repeated:
         feature = sequence_feature.Sequence(feature)
       features[field.id] = feature
+    features = _strip_record_set_prefix(features, record_set.id)
     return features_dict.FeaturesDict(features)
 
   def _split_generators(
       self,
       dl_manager: download.DownloadManager,
       pipeline: beam.Pipeline,
-  ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
+  ) -> dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     # If a split recordset is joined for the required record set, we generate
     # splits accordingly. Otherwise, it generates a single `default` split with
     # all the records.
@@ -317,11 +331,15 @@ class CroissantBuilder(
 
     def convert_to_tfds_format(
         global_index: int,
-        record: Any,
+        record: _RecordOrFeature,
         features: feature_lib.FeatureConnector | None = None,
-    ) -> tuple[int, Any]:
+        record_set_id: str | None = None,
+    ) -> tuple[int, _RecordOrFeature]:
       if not features:
         raise ValueError('features should not be None.')
+      if not record_set_id:
+        raise ValueError('record_set_id should not be None.')
+      record = _strip_record_set_prefix(record, record_set_id)
       return (
           global_index,
           conversion_utils.to_tfds_value(record, features),
@@ -330,5 +348,7 @@ class CroissantBuilder(
     return records.beam_reader(
         pipeline=pipeline
     ) | 'Convert to TFDS format' >> beam.MapTuple(
-        convert_to_tfds_format, features=self.info.features
+        convert_to_tfds_format,
+        features=self.info.features,
+        record_set_id=record_set.id,
     )
