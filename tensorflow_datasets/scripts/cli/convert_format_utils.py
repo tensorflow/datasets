@@ -475,16 +475,32 @@ def _get_info_for_dirs_to_convert(
     return None
   in_file_format = file_adapters.FileFormat(dataset_info_proto.file_format)
   if out_file_format == in_file_format:
-    raise ValueError(
-        f'The file format of the dataset ({in_file_format}) is the'
-        f' same as the specified out file format! ({out_file_format})'
-    )
+    if os.fspath(from_dir) == os.fspath(to_dir):
+      logging.warning(
+          'The file format to convert to (%s) is already the default file'
+          ' format of the dataset in %s, and no different output folder is'
+          ' specified. Skipping conversion.',
+          out_file_format.value,
+          os.fspath(from_dir),
+      )
+      return None
+    else:
+      logging.info(
+          'The file format to convert to (%s) is the same as the default file'
+          ' format, but the converted output is being written to a different'
+          ' folder. The shards will be converted anyway from: %s, to: %s',
+          out_file_format.value,
+          os.fspath(from_dir),
+          os.fspath(to_dir),
+      )
+      return dataset_info_proto
   if out_file_format.file_suffix in dataset_info_proto.alternative_file_formats:
     if overwrite:
       logging.warning(
           'The file format to convert to (%s) is already an alternative file'
-          ' format. Overwriting the shards!',
+          ' format for the dataset in %s. Overwriting the shards!',
           out_file_format.value,
+          os.fspath(from_dir),
       )
     elif os.fspath(from_dir) == os.fspath(to_dir):
       logging.info(
