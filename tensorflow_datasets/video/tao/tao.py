@@ -94,7 +94,7 @@ def _merge_categories_map(annotations: NestedDict) -> dict[str, str]:
 
 def _maybe_prepare_manual_data(
     dl_manager: tfds.download.DownloadManager,
-) -> tuple[epath.Path | None, epath.Path | None]:
+) -> tuple[epath.Path | None, epath.Path | None, epath.Path | None]:
   """Return paths to the manually downloaded data if it is available."""
 
   # The file has a different name each time it is downloaded.
@@ -107,7 +107,7 @@ def _maybe_prepare_manual_data(
   for file in manually_downloaded_files:
     file_glob = [_ for _ in dl_manager.manual_dir.glob(file)]
     if not file_glob:  # No manually downloaded files.
-      return None, None
+      return None, None, None
     if len(file_glob) == 1:
       files.append(file_glob[0])
     else:
@@ -341,7 +341,9 @@ class Tao(tfds.core.BeamBasedBuilder):
         'annotations': _ANNOTATIONS_URL,
     })
 
-    manual_train, manual_val = _maybe_prepare_manual_data(dl_manager)
+    manual_train, manual_val, manual_test = _maybe_prepare_manual_data(
+        dl_manager
+    )
     id_map = _get_category_id_map(data['annotations'] / 'annotations-1.2')
 
     return {
@@ -363,7 +365,7 @@ class Tao(tfds.core.BeamBasedBuilder):
         ),
         tfds.Split.TEST: self._generate_examples(
             data_path=data['test'],
-            manual_path=None,
+            manual_path=manual_test,
             annotations_path=data['annotations']
             / 'annotations-1.2'
             / 'test_without_annotations.json',
