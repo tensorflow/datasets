@@ -39,14 +39,16 @@ class DummyBeamDataset(dataset_builder.GeneratorBasedBuilder):
       'valid_725': 725,
   }
 
+  FEATURE_DICT = features.FeaturesDict({
+      'image': features.Image(shape=(16, 16, 1)),
+      'label': features.ClassLabel(names=['dog', 'cat']),
+      'id': tf.int32,
+  })
+
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict({
-            'image': features.Image(shape=(16, 16, 1)),
-            'label': features.ClassLabel(names=['dog', 'cat']),
-            'id': tf.int32,
-        }),
+        features=self.FEATURE_DICT,
         supervised_keys=('x', 'x'),
         metadata=dataset_info.BeamMetadataDict(),
     )
@@ -69,6 +71,18 @@ class DummyBeamDataset(dataset_builder.GeneratorBasedBuilder):
     ):
       self.info.metadata[f'invalid_{num_examples}'] = _compute_sum(examples)
     return examples
+
+
+class UnshuffledDummyBeamDataset(DummyBeamDataset):
+
+  def _info(self) -> dataset_info.DatasetInfo:
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=self.FEATURE_DICT,
+        supervised_keys=('x', 'x'),
+        metadata=dataset_info.BeamMetadataDict(),
+        disable_shuffling=True,
+    )
 
 
 class CommonPipelineDummyBeamDataset(DummyBeamDataset):
@@ -151,12 +165,21 @@ def _compute_mean(examples):
   )
 
 
+def get_id(ex):
+  return ex['id']
+
+
 def make_default_config():
   return download.DownloadConfig()
 
 
 @pytest.mark.parametrize(
-    'dataset_cls', [DummyBeamDataset, CommonPipelineDummyBeamDataset]
+    'dataset_cls',
+    [
+        DummyBeamDataset,
+        CommonPipelineDummyBeamDataset,
+        UnshuffledDummyBeamDataset,
+    ],
 )
 @pytest.mark.parametrize(
     'make_dl_config',
@@ -178,29 +201,23 @@ def test_beam_datasets(
   assert data_path.exists()  # Dataset has been generated
 
   # Check number of shards/generated files
-  _test_shards(
-      data_path,
-      pattern='%s-test.tfrecord-{:05}-of-{:05}' % dataset_name,
-      # Liquid sharding is not guaranteed to always use the same number.
-      num_shards=builder.info.splits['test'].num_shards,
-  )
-  _test_shards(
-      data_path,
-      pattern='%s-train.tfrecord-{:05}-of-{:05}' % dataset_name,
-      num_shards=1,
-  )
+  for split in ['test', 'train']:
+    _test_shards(
+        data_path,
+        pattern='%s-%s.tfrecord-{:05}-of-{:05}' % (dataset_name, split),
+        num_shards=builder.info.splits[split].num_shards,
+    )
 
   ds = dataset_utils.as_numpy(builder.as_dataset())
 
-  def get_id(ex):
-    return ex['id']
-
+  test_examples = list(ds['test'])
+  train_examples = list(ds['train'])
   _assert_values_equal(
-      sorted(list(ds['test']), key=get_id),
+      sorted(test_examples, key=get_id),
       sorted([_gen_example(i)[1] for i in range(725)], key=get_id),
   )
   _assert_values_equal(
-      sorted(list(ds['train']), key=get_id),
+      sorted(train_examples, key=get_id),
       sorted([_gen_example(i)[1] for i in range(1000)], key=get_id),
   )
 

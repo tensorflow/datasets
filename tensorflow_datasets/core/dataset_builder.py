@@ -622,6 +622,10 @@ class DatasetBuilder(registered.RegisteredDataset):
     data_path = self.data_path
     data_exists = data_path.exists()
 
+    # Saving nondeterministic_order in the DatasetInfo for documentation.
+    if download_config.nondeterministic_order:
+      self.info.set_nondeterministic_order(True)
+
     if download_config.download_mode == UPDATE_DATASET_INFO:
       self._update_dataset_info()
       return
@@ -1426,6 +1430,8 @@ class DatasetBuilder(registered.RegisteredDataset):
       self, split_name: str
   ) -> naming.ShardedFileTemplate:
     """Returns a filename template for the given split."""
+    if self.info.file_format is None:
+      raise ValueError("File format is not set!")
     return naming.ShardedFileTemplate(
         split=split_name,
         dataset_name=self.name,
@@ -1728,6 +1734,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
             generator=generator,
             filename_template=filename_template,
             disable_shuffling=self.info.disable_shuffling,
+            nondeterministic_order=download_config.nondeterministic_order,
         )
         split_info_futures.append(future)
 
