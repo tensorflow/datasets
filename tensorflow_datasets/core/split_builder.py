@@ -545,7 +545,8 @@ class SplitBuilder:
     serializer = example_serializer.ExampleSerializer(
         self._features.get_serialized_info()
     )
-    if nondeterministic_order:
+    # TODO(weide): temporary disable this feature
+    if False and nondeterministic_order:
       logging.info(
           'Order of examples does not matter, using NoShuffleBeamWriter'
       )
