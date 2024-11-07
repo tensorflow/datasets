@@ -1877,7 +1877,7 @@ class ShardBasedBuilder(FileReaderBuilder):
   ) -> None:
     download_config = download_config or download.DownloadConfig()
 
-    split_builder = split_builder_lib.SplitBuilder(
+    split_builder = split_builder_lib.SplitBuilder(  # pytype: disable=wrong-arg-types
         split_dict=self.info.splits,
         features=self.info.features,
         dataset_size=self.info.dataset_size,
