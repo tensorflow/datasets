@@ -16,13 +16,14 @@
 """`tfds build` command."""
 
 import argparse
+from collections.abc import Iterator
 import functools
 import importlib
 import itertools
 import json
 import multiprocessing
 import os
-from typing import Any, Dict, Iterator, Optional, Tuple, Type, Union
+from typing import Any, Type
 
 from absl import logging
 import tensorflow_datasets as tfds
@@ -132,7 +133,7 @@ def _build_datasets(args: argparse.Namespace) -> None:
 def _make_builders(
     args: argparse.Namespace,
     builder_cls: Type[tfds.core.DatasetBuilder],
-    builder_kwargs: Dict[str, Any],
+    builder_kwargs: dict[str, Any],
 ) -> Iterator[tfds.core.DatasetBuilder]:
   """Yields builders to generate.
 
@@ -185,7 +186,7 @@ def _get_builder_cls_and_kwargs(
     ds_to_build: str,
     *,
     has_imports: bool,
-) -> Tuple[Type[tfds.core.DatasetBuilder], Dict[str, Any]]:
+) -> tuple[Type[tfds.core.DatasetBuilder], dict[str, Any]]:
   """Infer the builder class to build and its kwargs.
 
   Args:
@@ -232,7 +233,7 @@ def _get_builder_cls_and_kwargs(
   return builder_cls, builder_kwargs
 
 
-def _search_script_path(ds_to_build: str) -> Optional[tfds.core.Path]:
+def _search_script_path(ds_to_build: str) -> tfds.core.Path | None:
   """Check whether the requested dataset match a file on disk."""
   # If the dataset file exists, use it. Valid values are:
   # * Empty string (use default directory)
@@ -274,7 +275,7 @@ def _search_script_path(ds_to_build: str) -> Optional[tfds.core.Path]:
 
 def _validate_script_path(
     path: tfds.core.Path,
-) -> Optional[tfds.core.Path]:
+) -> tfds.core.Path | None:
   """Validates and returns the `dataset_builder.py` generation script path."""
   if path.suffix != '.py':
     raise ValueError(f'Expected `.py` file. Invalid dataset path: {path}.')
@@ -292,17 +293,17 @@ def _make_builder(
     **builder_kwargs,
 ) -> tfds.core.DatasetBuilder:
   """Builder factory, eventually deleting pre-existing dataset."""
-  builder = builder_cls(**builder_kwargs)  # pytype: disable=not-instantiable
-  data_exists = builder.data_path.exists()
-  if fail_if_exists and data_exists:
+  builder = builder_cls(**builder_kwargs)
+  is_prepared = builder.is_prepared()
+  if fail_if_exists and is_prepared:
     raise RuntimeError(
         'The `fail_if_exists` flag was True and '
         f'the data already exists in {builder.data_path}'
     )
-  if overwrite and data_exists:
+  if overwrite and is_prepared:
     builder.data_path.rmtree()  # Delete pre-existing data
     # Re-create the builder with clean state
-    builder = builder_cls(**builder_kwargs)  # pytype: disable=not-instantiable
+    builder = builder_cls(**builder_kwargs)
   return builder
 
 
@@ -404,10 +405,10 @@ def _make_download_config(
 
 def _get_config_name(
     builder_cls: Type[tfds.core.DatasetBuilder],
-    config_kwarg: Optional[str],
-    config_name: Optional[str],
-    config_idx: Optional[int],
-) -> Optional[Union[str, tfds.core.BuilderConfig]]:
+    config_kwarg: str | None,
+    config_name: str | None,
+    config_idx: int | None,
+) -> str | tfds.core.BuilderConfig | None:
   """Extract the config name.
 
   Args:

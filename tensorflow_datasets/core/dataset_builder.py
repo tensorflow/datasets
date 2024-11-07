@@ -21,6 +21,7 @@ import abc
 import collections
 from collections.abc import Iterable, Iterator, Mapping, Sequence
 import dataclasses
+import difflib
 import functools
 import inspect
 import json
@@ -1347,39 +1348,50 @@ class DatasetBuilder(registered.RegisteredDataset):
   ) -> BuilderConfig | None:
     """Create and validate BuilderConfig object."""
     if builder_config is None:
-      builder_config = self.get_default_builder_config()
-      if builder_config is not None:
+      if builder_config := self.get_default_builder_config():
         logging.info(
             "No config specified, defaulting to config: %s/%s",
             self.name,
             builder_config.name,
         )
-    if not builder_config:
-      return None
+        return builder_config
+      else:
+        return None
+
     if isinstance(builder_config, str):
-      name = builder_config
-      builder_config = self.builder_configs.get(name)
-      if builder_config is None and version is not None:
-        builder_config = self.builder_configs.get(f"{name}:{version}")
-      if builder_config is None:
-        raise ValueError(
-            "BuilderConfig %s not found with version %s. Available: %s"
-            % (name, version, list(self.builder_configs.keys()))
+      config = self.get_builder_config(name=builder_config, version=version)
+      if config is not None:
+        return config
+      else:
+        close_matches = difflib.get_close_matches(
+            builder_config, self.builder_configs.keys(), n=10
         )
-    name = builder_config.name
-    if not name:
-      raise ValueError("BuilderConfig must have a name, got %s" % name)
-    is_custom = name not in self.builder_configs
-    if is_custom:
-      logging.warning("Using custom data configuration %s", name)
+        raise ValueError(
+            f"BuilderConfig {builder_config} not found with version {version}."
+            " Here are 10 BuilderConfigs whose name closely match:"
+            f" {close_matches}"
+        )
+
+    if not isinstance(builder_config, BuilderConfig):
+      raise ValueError(
+          f"BuilderConfig {builder_config} is not a BuilderConfig or string"
+      )
+
+    cls_builder_config = self.get_builder_config(
+        name=builder_config.name, version=version
+    )
+    if cls_builder_config is None:
+      logging.warning("Using custom data configuration: %s", builder_config)
+      return builder_config
+    elif builder_config is not cls_builder_config:
+      raise ValueError(
+          "Cannot name a custom BuilderConfig the same as an available"
+          " BuilderConfig. Change the name.\n"
+          f"Requested: {builder_config}\n"
+          f"BuilderConfig in class: {cls_builder_config}"
+      )
     else:
-      if builder_config is not self.builder_configs[name]:
-        raise ValueError(
-            "Cannot name a custom BuilderConfig the same as an available "
-            "BuilderConfig. Change the name. Available BuilderConfigs: %s"
-            % (list(self.builder_configs.keys()))
-        )
-    return builder_config
+      return builder_config
 
   @utils.classproperty
   @classmethod
@@ -2019,7 +2031,7 @@ def canonical_version_for_config(
 ) -> utils.Version:
   """Get the canonical version for the given config.
 
-  This allow to get the version without instanciating the class.
+  This allows getting the version without instantiating the class.
   The version can be stored either at the class or in the config object.
 
   Args:
@@ -2030,14 +2042,15 @@ def canonical_version_for_config(
   Returns:
     version: The extracted version.
   """
-  if instance_or_cls.BUILDER_CONFIGS and config is None:
+  if config and config.version:
+    return utils.Version(config.version)
+
+  if config is None and instance_or_cls.BUILDER_CONFIGS:
     raise ValueError(
         f"Cannot infer version on {instance_or_cls.name}. Unknown config."
     )
 
-  if config and config.version:
-    return utils.Version(config.version)
-  elif instance_or_cls.VERSION:
+  if instance_or_cls.VERSION:
     return utils.Version(instance_or_cls.VERSION)
   else:
     raise ValueError(

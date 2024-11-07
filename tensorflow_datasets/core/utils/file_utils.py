@@ -247,10 +247,14 @@ def get_data_dir_and_dataset_dir(
   if all_versions:
     logging.warning(
         (
-            'Found a different version of the requested dataset:\n'
-            '%s\n'
-            'Using %s instead.'
+            'Found a different version of the requested dataset'
+            ' (given_data_dir=%s,dataset=%s, config=%s, version=%s):\n'
+            '%s\nUsing %s instead.'
         ),
+        given_data_dir,
+        builder_name,
+        config_name,
+        version,
         '\n'.join(str(v) for v in sorted(all_versions)),
         dataset_dir,
     )
