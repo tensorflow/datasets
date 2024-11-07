@@ -1372,11 +1372,6 @@ class DatasetBuilder(registered.RegisteredDataset):
             f" {close_matches}"
         )
 
-    if not isinstance(builder_config, BuilderConfig):
-      raise ValueError(
-          f"BuilderConfig {builder_config} is not a BuilderConfig or string"
-      )
-
     cls_builder_config = self.get_builder_config(
         name=builder_config.name, version=version
     )
