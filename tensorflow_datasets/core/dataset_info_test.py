@@ -818,7 +818,6 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     }),
     supervised_keys=('image', 'label'),
     disable_shuffling=False,
-    nondeterministic_order=False,
     splits={
         'test': <SplitInfo num_examples=20, num_shards=1>,
         'train': <SplitInfo num_examples=20, num_shards=1>,
