@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.dataset_info."""
-
 import json
 import os
 import pathlib
@@ -22,7 +20,9 @@ import re
 import tempfile
 import time
 from typing import Union
+from unittest import mock
 
+from etils import epath
 import numpy as np
 import pytest
 import tensorflow as tf
@@ -834,6 +834,60 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     redistribution_info=license: "test license",
 )'''
 # pylint: enable=g-inconsistent-quotes
+
+
+class LazyMetadataDictTest(testing.TestCase):
+
+  def setUp(self):
+    super().setUp()
+    self.data_dir = epath.Path(self.tmp_dir)
+    metadata_file = self.data_dir / "metadata.json"
+    metadata_file.write_text(json.dumps({"test": "test123"}))
+
+  def test_load_metadata(self):
+    metadata_dict = dataset_info.LazyMetadataDict(self.data_dir)
+    self.assertEqual(metadata_dict["test"], "test123")
+
+  @mock.patch.object(dataset_info, "_load_metadata_from_file")
+  def test_get_item(self, mock_load_metadata_from_file):
+    mock_load_metadata_from_file.return_value = {"test": "test123"}
+
+    metadata_dict = dataset_info.LazyMetadataDict(self.data_dir)
+    mock_load_metadata_from_file.assert_not_called()
+
+    self.assertEqual(metadata_dict["test"], "test123")
+    mock_load_metadata_from_file.assert_called_with(self.data_dir)
+
+    self.assertEqual(sorted(metadata_dict.keys()), ["test"])
+
+    # Update the metadata.
+    metadata_dict["abc"] = "def"
+    self.assertEqual(metadata_dict["abc"], "def")
+
+  @mock.patch.object(dataset_info, "_load_metadata_from_file")
+  def test_keys(self, mock_load_metadata_from_file):
+    mock_load_metadata_from_file.return_value = {"test": "test123"}
+    metadata_dict = dataset_info.LazyMetadataDict(self.data_dir)
+    mock_load_metadata_from_file.assert_not_called()
+    actual_keys = sorted(metadata_dict.keys())
+    mock_load_metadata_from_file.assert_called_with(self.data_dir)
+    self.assertEqual(actual_keys, ["test"])
+
+  @mock.patch.object(dataset_info, "_load_metadata_from_file")
+  def test_items(self, mock_load_metadata_from_file):
+    mock_load_metadata_from_file.return_value = {"test": "test123"}
+    metadata_dict = dataset_info.LazyMetadataDict(self.data_dir)
+    mock_load_metadata_from_file.assert_not_called()
+    self.assertNotEmpty(metadata_dict.items())
+    mock_load_metadata_from_file.assert_called_with(self.data_dir)
+
+  @mock.patch.object(dataset_info, "_load_metadata_from_file")
+  def test_updating_before_loading(self, mock_load_metadata_from_file):
+    metadata_dict = dataset_info.LazyMetadataDict(self.data_dir)
+    mock_load_metadata_from_file.assert_not_called()
+
+    metadata_dict.update({"abc": "def", "ghi": "jkl"})
+    mock_load_metadata_from_file.assert_not_called()
 
 
 if __name__ == "__main__":

@@ -747,12 +747,16 @@ class DatasetInfo:
           dataset_info_dir
       )
 
-    # Restore the MetaDataDict from metadata.json if there is any
-    if _metadata_filepath(dataset_info_dir).exists():
-      # If the dataset was loaded from file, self.metadata will be `None`, so
-      # we create a MetadataDict first.
-      if self._metadata is None:
-        self._metadata = MetadataDict()
+    # If the dataset was loaded from file, self.metadata will be `None`, so
+    # we create a MetadataDict first.
+    if self._metadata is None:
+      self._metadata = LazyMetadataDict(dataset_info_dir)
+    elif isinstance(self._metadata, MetadataDict):
+      lazy_metadata = LazyMetadataDict(dataset_info_dir)
+      lazy_metadata.update(self._metadata)
+      self._metadata = lazy_metadata
+    elif _metadata_filepath(dataset_info_dir).exists():
+      # Restore the MetaDataDict from metadata.json if there is any
       self._metadata.load_metadata(dataset_info_dir)
 
     # Update fields which are not defined in the code. This means that
@@ -1375,6 +1379,12 @@ def add_tfds_data_source_access(
   )
 
 
+def _load_metadata_from_file(data_dir: epath.PathLike) -> dict[str, Any]:
+  """Loads metadata from file."""
+  with _metadata_filepath(data_dir).open(mode="r") as f:
+    return json.load(f)
+
+
 class MetadataDict(Metadata, dict):
   """A `tfds.core.Metadata` object that acts as a `dict`.
 
@@ -1389,8 +1399,41 @@ class MetadataDict(Metadata, dict):
   def load_metadata(self, data_dir):
     """Restore the metadata."""
     self.clear()
-    with _metadata_filepath(data_dir).open(mode="r") as f:
-      self.update(json.load(f))
+    self.update(_load_metadata_from_file(data_dir))
+
+
+class LazyMetadataDict(MetadataDict):
+  """A `tfds.core.Metadata` object that acts as a `dict`.
+
+  Content is lazily loaded from the given data directory.
+  """
+
+  def __init__(self, data_dir: epath.PathLike) -> None:
+    self._data_dir = epath.Path(data_dir)
+    self._data_is_loaded = False
+    super().__init__()
+
+  def _load_metadata(self):
+    if not self._data_is_loaded:
+      if _metadata_filepath(self._data_dir).exists():
+        self.load_metadata(self._data_dir)
+      self._data_is_loaded = True
+
+  def __getitem__(self, key, /):
+    self._load_metadata()
+    return super().__getitem__(key)
+
+  def __eq__(self, value, /):
+    self._load_metadata()
+    return super().__eq__(value)
+
+  def keys(self):
+    self._load_metadata()
+    return super().keys()
+
+  def items(self):
+    self._load_metadata()
+    return super().items()
 
 
 class BeamMetadataDict(MetadataDict):
