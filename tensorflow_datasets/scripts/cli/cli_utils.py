@@ -263,7 +263,8 @@ def add_generation_argument_group(parser: argparse.ArgumentParser):
   )
   generation_group.add_argument(
       '--nondeterministic_order',
-      action='store_false',
+      action='store_true',
+      default=False,
       help=(
           'If True, it will not assure deterministic ordering when writing'
           ' examples to disk. This might result in quicker dataset preparation.'
