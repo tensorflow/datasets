@@ -308,17 +308,32 @@ def _tmp_file_prefix() -> str:
   return f'{constants.INCOMPLETE_PREFIX}{uuid.uuid4().hex}'
 
 
-def _tmp_file_name(path: epath.PathLike) -> epath.Path:
+def _tmp_file_name(
+    path: epath.PathLike,
+    subfolder: str | None = None,
+) -> epath.Path:
+  """Returns the temporary file name for the given path.
+
+  Args:
+    path: The path to the file.
+    subfolder: The subfolder to use. If None, then the parent of the path will
+      be used.
+  """
   path = epath.Path(path)
-  return path.parent / f'{_tmp_file_prefix()}.{path.name}'
+  file_name = f'{_tmp_file_prefix()}.{path.name}'
+  if subfolder:
+    return path.parent / subfolder / file_name
+  else:
+    return path.parent / file_name
 
 
 @contextlib.contextmanager
 def incomplete_file(
     path: epath.Path,
+    subfolder: str | None = None,
 ) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = _tmp_file_name(path)
+  tmp_path = _tmp_file_name(path, subfolder=subfolder)
   try:
     yield tmp_path
     tmp_path.replace(path)
