@@ -15,19 +15,23 @@
 
 """smart_buildings_dataset dataset."""
 
-# from tensorflow_datasets.datasets.smart_buildings
-# import smart_buildingsdataset_builder
-# import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.datasets.smart_buildings import smart_buildings_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
 
-# class SmartBuildingsDatasetTest(tfds.testing.DatasetBuilderTestCase):
-#   """Tests for smart_buildings_dataset dataset."""
+class SmartBuildingsDatasetTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for smart_buildings_dataset dataset."""
 
-#   DATASET_CLASS = smart_buildings_dataset_dataset_builder.Builder
-#   SPLITS = {
-#       'sb1_23': 12,  # Number of fake train example
-#       'sb1_24': 12,  # Number of fake train example
-#   }
+  DATASET_CLASS = smart_buildings_dataset_builder.Builder
+  SPLITS = {
+      'sb1_19': 12,  # Number of fake train examples
+      'sb1_20': 12,  # Number of fake train examples
+      'sb1_21': 12,  # Number of fake train examples
+      'sb1_22': 12,  # Number of fake train examples
+      'sb1_23': 12,  # Number of fake train examples
+      'sb1_24': 12,  # Number of fake train examples
+  }
+
 
 # If you are calling `download/download_and_extract` with a dict, like:
 #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
@@ -37,4 +41,4 @@
 
 
 if __name__ == '__main__':
-  pass  # tfds.testing.test_main()
+  tfds.testing.test_main()
