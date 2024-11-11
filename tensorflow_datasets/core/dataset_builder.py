@@ -1359,6 +1359,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         return None
 
     if isinstance(builder_config, str):
+      if version is None and ":" in builder_config:
+        builder_config, version = builder_config.split(":")
       config = self.get_builder_config(name=builder_config, version=version)
       if config is not None:
         return config
