@@ -25,7 +25,7 @@ ConfigBuilder.
 ```python
 import tensorflow_datasets as tfds
 builder = tfds.dataset_builders.CroissantBuilder(
-    jsonld="https://raw.githubusercontent.com/mlcommons/croissant/main/datasets/0.8/huggingface-mnist/metadata.json",
+    jsonld="https://raw.githubusercontent.com/mlcommons/croissant/main/datasets/1.0/huggingface-mnist/metadata.json",
     file_format='array_record',
 )
 builder.download_and_prepare()
