@@ -889,6 +889,11 @@ class LazyMetadataDictTest(testing.TestCase):
     metadata_dict.update({"abc": "def", "ghi": "jkl"})
     mock_load_metadata_from_file.assert_not_called()
 
+  def test_copy(self):
+    metadata_dict = dataset_info.LazyMetadataDict(self.data_dir)
+    metadata_dict_copy = metadata_dict.copy()
+    self.assertEqual(metadata_dict_copy["test"], "test123")
+
 
 if __name__ == "__main__":
   testing.test_main()

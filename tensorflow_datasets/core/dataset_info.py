@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import abc
 from collections.abc import Iterable, Sequence
+import copy
 import dataclasses
 import json
 import os
@@ -1434,6 +1435,9 @@ class LazyMetadataDict(MetadataDict):
   def items(self):
     self._load_metadata()
     return super().items()
+
+  def copy(self):
+    return copy.deepcopy(self)
 
 
 class BeamMetadataDict(MetadataDict):
