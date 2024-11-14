@@ -1361,13 +1361,18 @@ class DatasetBuilder(registered.RegisteredDataset):
     if isinstance(builder_config, str):
       if version is None and ":" in builder_config:
         builder_config, version = builder_config.split(":")
+      elif version is None:
+        version = self.VERSION
       config = self.get_builder_config(name=builder_config, version=version)
       if config is not None:
         return config
       else:
         close_matches = difflib.get_close_matches(
-            builder_config, self.builder_configs.keys(), n=10
+            f"{builder_config}:{version}",
+            [f"{bc.name}:{bc.version}" for bc in self.builder_configs.values()],
+            n=100,
         )
+        close_matches = "\n".join(sorted(close_matches))
         raise ValueError(
             f"BuilderConfig {builder_config} not found with version {version}."
             " Here are 10 BuilderConfigs whose name closely match:"
@@ -1375,7 +1380,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         )
 
     cls_builder_config = self.get_builder_config(
-        name=builder_config.name, version=version
+        name=builder_config.name, version=builder_config.version
     )
     if cls_builder_config is None:
       logging.warning("Using custom data configuration: %s", builder_config)
@@ -1384,7 +1389,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       raise ValueError(
           "Cannot name a custom BuilderConfig the same as an available"
           " BuilderConfig. Change the name.\n"
-          f"Requested: {builder_config}\n"
+          f"Requested: {builder_config}\n\n"
           f"BuilderConfig in class: {cls_builder_config}"
       )
     else:
