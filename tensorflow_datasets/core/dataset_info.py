@@ -457,6 +457,8 @@ class DatasetInfo:
 
   @property
   def metadata(self) -> Metadata | None:
+    if isinstance(self._metadata, LazyMetadataDict):
+      self._metadata.load_metadata_if_needed()
     return self._metadata
 
   @property
@@ -1414,26 +1416,30 @@ class LazyMetadataDict(MetadataDict):
     self._data_is_loaded = False
     super().__init__()
 
-  def _load_metadata(self):
+  def load_metadata_if_needed(self):
     if not self._data_is_loaded:
       if _metadata_filepath(self._data_dir).exists():
         self.load_metadata(self._data_dir)
       self._data_is_loaded = True
 
   def __getitem__(self, key, /):
-    self._load_metadata()
+    self.load_metadata_if_needed()
     return super().__getitem__(key)
 
   def __eq__(self, value, /):
-    self._load_metadata()
+    self.load_metadata_if_needed()
     return super().__eq__(value)
 
   def keys(self):
-    self._load_metadata()
+    self.load_metadata_if_needed()
     return super().keys()
 
+  def values(self):
+    self.load_metadata_if_needed()
+    return super().values()
+
   def items(self):
-    self._load_metadata()
+    self.load_metadata_if_needed()
     return super().items()
 
   def copy(self):

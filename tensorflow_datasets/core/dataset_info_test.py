@@ -318,6 +318,14 @@ class DatasetInfoTest(testing.TestCase):
       )
       self.assertEqual(builder3.info.metadata, {"some_key": 123})
 
+      # Test whether the metadata is copyable.
+      builder = RandomShapedImageGenerator(data_dir=tmp_dir)
+      self.assertIsInstance(
+          builder.info.metadata, dataset_info.LazyMetadataDict
+      )
+      metadata_copy = {**builder.info.metadata}
+      self.assertEqual(metadata_copy, {"some_key": 123})
+
   def test_redistribution_info(self):
     info = dataset_info.DatasetInfo(
         builder=self._builder, license="some license"
