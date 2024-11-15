@@ -31,7 +31,7 @@ GCS_ROOT_DIR = 'gs://tfds-data'
 GCS_DATASET_INFO_DIR = 'dataset_info'
 GCS_DATASETS_DIR = 'datasets'
 
-_is_gcs_disabled = False
+_is_gcs_disabled = True
 
 
 # Exception raised when GCS isn't available

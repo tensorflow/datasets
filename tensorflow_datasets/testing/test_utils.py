@@ -444,6 +444,9 @@ def disable_gcs_access() -> Iterator[None]:
   ), mock.patch(
       'tensorflow_datasets.core.utils.gcs_utils.is_dataset_on_gcs',
       _GCS_ACCESS_FNS['dummy_datasets'],
+  ), mock.patch(
+      'tensorflow_datasets.core.utils.gcs_utils._is_gcs_disabled',
+      True,
   ):
     yield
 
@@ -457,6 +460,9 @@ def enable_gcs_access() -> Iterator[None]:
   ), mock.patch(
       'tensorflow_datasets.core.utils.gcs_utils.is_dataset_on_gcs',
       _GCS_ACCESS_FNS['original_datasets'],
+  ), mock.patch(
+      'tensorflow_datasets.core.utils.gcs_utils._is_gcs_disabled',
+      False,
   ):
     yield
 

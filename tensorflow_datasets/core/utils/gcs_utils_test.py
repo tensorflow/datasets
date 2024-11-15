@@ -19,16 +19,18 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.testing import test_utils
 
-
 import os
 import tempfile
 import tensorflow_datasets as tfds
 class GcsUtilsTest(testing.TestCase):
   DO_NOT_APPLY_FIXTURES = [test_utils.disable_gcs_access]
   def test_is_dataset_accessible(self):
+    gcs_utils._is_gcs_disabled = False
     self.assertTrue(gcs_utils.is_dataset_on_gcs('mnist/1.0.0'))
     self.assertFalse(gcs_utils.is_dataset_on_gcs('non_dataset/1.0.0'))
+    gcs_utils._is_gcs_disabled = True
   def test_download_dataset(self):
+    gcs_utils._is_gcs_disabled = False
     files = [
         'gs://tfds-data/dataset_info/mnist/2.0.0/dataset_info.json',
         'gs://tfds-data/dataset_info/mnist/2.0.0/image.image.json',
@@ -50,6 +52,7 @@ class GcsUtilsTest(testing.TestCase):
               'image.image.json',
           ],
       )
+    gcs_utils._is_gcs_disabled = True
   def test_mnist(self):
     mnist = tfds.image_classification.MNIST(
         data_dir=gcs_utils.gcs_path('datasets')
@@ -65,7 +68,7 @@ class GcsUtilsDisabledTest(testing.TestCase):
 
   def test_is_dataset_accessible(self):
     is_ds_on_gcs = gcs_utils.is_dataset_on_gcs('mnist/1.0.0')
-    self.assertTrue(is_ds_on_gcs)
+    self.assertFalse(is_ds_on_gcs)
 
 
 if __name__ == '__main__':
