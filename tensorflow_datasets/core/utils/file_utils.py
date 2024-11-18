@@ -467,7 +467,6 @@ def list_dataset_versions(
       globs=[glob],
       file_names=[constants.DATASET_INFO_FILENAME],
   ):
-    print(f'XXXXXXXX: {dataset_info_file=}')
     version_folder = dataset_info_file.parent.name
     if version_lib.Version.is_valid(version_folder):
       found_versions.append(version_lib.Version(version_folder))
