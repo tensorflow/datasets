@@ -156,7 +156,7 @@ def list_data_dirs(
     return sorted(d.expanduser() for d in all_data_dirs)
 
 
-def get_default_data_dir(given_data_dir: str | None = None) -> Path:
+def get_default_data_dir(given_data_dir: epath.PathLike | None = None) -> Path:
   """Returns the default data_dir."""
   if given_data_dir:
     data_dir = os.path.expanduser(given_data_dir)
@@ -202,29 +202,36 @@ def get_data_dir_and_dataset_dir(
     dataset_dir: Dataset data directory (e.g.
       `<data_dir>/<ds_name>/<config>/<version>`)
   """
-  all_data_dirs = list_data_dirs(given_data_dir=given_data_dir)
-  all_versions: set[version_lib.Version] = set()
-  dataset_dir_by_data_dir: dict[Path, Path] = {}
+  if version is not None:
+    version = version_lib.Version(version)
 
-  for data_dir in all_data_dirs:
+  # If the data dir is explicitly given, no need to search everywhere.
+  if given_data_dir is not None:
+    given_data_dir = epath.Path(given_data_dir)
+    given_dataset_dir = get_dataset_dir(
+        data_dir=given_data_dir,
+        builder_name=builder_name,
+        config_name=config_name,
+        version=version,
+    )
+    return given_data_dir, given_dataset_dir
+
+  # Check whether the dataset is in other data dirs.
+  dataset_dir_by_data_dir: dict[Path, Path] = {}
+  all_found_versions: set[version_lib.Version] = set()
+  for data_dir in list_data_dirs(given_data_dir=None):
     data_dir = Path(data_dir)
-    # List all existing versions
-    dataset_config_dir = get_dataset_dir(
+    dataset_dir = get_dataset_dir(
         data_dir=data_dir,
         builder_name=builder_name,
         config_name=config_name,
         version=None,
     )
-    versions = version_lib.list_all_versions(dataset_config_dir)
-    # Check for existence of the requested version
-    if version in versions:
-      dataset_dir_by_data_dir[data_dir] = get_dataset_dir(
-          data_dir=data_dir,
-          builder_name=builder_name,
-          config_name=config_name,
-          version=version,
-      )
-    all_versions.update(versions)
+    # Get all versions of the dataset in this dataset dir.
+    found_versions = version_lib.list_all_versions(dataset_dir)
+    if version in found_versions:
+      dataset_dir_by_data_dir[data_dir] = dataset_dir / str(version)
+    all_found_versions.update(found_versions)
 
   if len(dataset_dir_by_data_dir) > 1:
     raise ValueError(
@@ -237,25 +244,25 @@ def get_data_dir_and_dataset_dir(
     return next(iter(dataset_dir_by_data_dir.items()))
 
   # No dataset found, use default directory
-  default_data_dir = get_default_data_dir(given_data_dir=given_data_dir)
+  default_data_dir = get_default_data_dir()
   dataset_dir = get_dataset_dir(
       data_dir=default_data_dir,
       builder_name=builder_name,
       config_name=config_name,
       version=version,
   )
-  if all_versions:
+  if all_found_versions:
     logging.warning(
         (
             'Found a different version of the requested dataset'
-            ' (given_data_dir=%s,dataset=%s, config=%s, version=%s):\n'
-            '%s\nUsing %s instead.'
+            ' (given_data_dir=%s, dataset=%s, config=%s, version=%s):\n'
+            '%s\nUsing default data dir %s instead.'
         ),
         given_data_dir,
         builder_name,
         config_name,
         version,
-        '\n'.join(str(v) for v in sorted(all_versions)),
+        '\n'.join(str(v) for v in sorted(all_found_versions)),
         dataset_dir,
     )
   return default_data_dir, dataset_dir
@@ -285,12 +292,15 @@ def _find_files_without_glob(
   Yields:
     the matching file paths.
   """
+  if not folder.is_dir():
+    return
   for glob in globs:
     glob_parts = glob.split('/')
     if len(glob_parts) == 1:
       try:
-        for file in folder.iterdir():
-          if file.name in file_names:
+        for file_name in file_names:
+          file = folder / file_name
+          if file.exists():
             yield file
       except OSError:
         logging.exception('Could not find files in %s', folder)
@@ -313,10 +323,10 @@ def _find_files_with_glob(
     globs: list[str],
     file_names: list[str],
 ) -> Iterator[epath.Path]:
-  """Finds files matching any of the given globs and given file names."""
+  """Returns files matching any of the given globs and given file names."""
   for glob in globs:
-    found_files = folder.glob(glob)
     try:
+      found_files = folder.glob(glob)
       for file in found_files:
         if file.name in file_names:
           yield file
@@ -436,6 +446,32 @@ def _find_references_with_glob(
         version=version,
         info_filenames=matched_files,
     )
+
+
+def list_dataset_versions(
+    dataset_config_dir: epath.PathLike,
+) -> list[version_lib.Version]:
+  """Returns all dataset versions (sorted ascendingly) found in `dataset_config_dir`.
+
+  Checks whether the version is a valid TFDS version and whether the folder
+  contains a dataset_info.json file.
+
+  Arguments:
+    dataset_config_dir: the folder that contains version subfolders.
+  """
+  dataset_config_dir = epath.Path(dataset_config_dir)
+  glob = f'*/{constants.DATASET_INFO_FILENAME}'
+  found_versions: list[version_lib.Version] = []
+  for dataset_info_file in _find_files_with_glob(
+      dataset_config_dir,
+      globs=[glob],
+      file_names=[constants.DATASET_INFO_FILENAME],
+  ):
+    print(f'XXXXXXXX: {dataset_info_file=}')
+    version_folder = dataset_info_file.parent.name
+    if version_lib.Version.is_valid(version_folder):
+      found_versions.append(version_lib.Version(version_folder))
+  return sorted(found_versions)
 
 
 def list_dataset_variants(

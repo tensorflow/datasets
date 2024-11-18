@@ -70,7 +70,7 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
         root_dir
     )
 
-    super(TranslateFolder, self).__init__()
+    super(TranslateFolder, self).__init__(data_dir=root_dir)
     # Reset `_data_dir` as it should not change to DATA_DIR/Version
     self._data_dir = root_dir
 

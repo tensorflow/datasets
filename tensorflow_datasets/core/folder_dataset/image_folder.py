@@ -89,11 +89,11 @@ class ImageFolder(dataset_builder.DatasetBuilder):
     """
     self._image_shape = shape
     self._image_dtype = dtype
-    super(ImageFolder, self).__init__()
+    root_dir = os.path.expanduser(root_dir)
+    super(ImageFolder, self).__init__(data_dir=root_dir)
     self._data_dir = root_dir  # Set data_dir to the existing dir.
 
     # Extract the splits, examples, labels
-    root_dir = os.path.expanduser(root_dir)
     self._split_examples, labels = _get_split_label_images(root_dir)
 
     # Update DatasetInfo labels

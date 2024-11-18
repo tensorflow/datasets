@@ -13,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for conllu_dataset_builder."""
 import textwrap
-from unittest import mock
 
 from etils import epath
 import pytest
@@ -26,8 +24,7 @@ import tensorflow_datasets.public_api as tfds
 
 _FOLDER_PATH = "mock/path"
 
-_VALID_INPUT = textwrap.dedent(
-    """
+_VALID_INPUT = textwrap.dedent("""
 # sent_id = VIT-9558
 # text = Il futuro.
 1	Il	il	DET	RD	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
@@ -42,21 +39,16 @@ _VALID_INPUT = textwrap.dedent(
 3	di	di	ADP	E	_	6	case	_	_
 4	l'	il	DET	RD	Definite=Def|Number=Sing|PronType=Art	6	det	_	_
 5	ambiente	ambiente	NOUN	S	Gender=Masc|Number=Sing	3	nmod	_	_
-"""
-)
+""")
 
 # The error making this invalid is the missing lemma field in line 1.
-_INVALID_INPUT = textwrap.dedent(
-    """
+_INVALID_INPUT = textwrap.dedent("""
 # sent_id = VIT-9558
 # text = Il futuro.
 1	Il	DET	RD	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	futuro	futuro	NOUN	S	Gender=Masc|Number=Sing	0	root	_	SpaceAfter=No
 3	.	.	PUNCT	FS	_	2	punct	_	_
-"""
-)
-
-_INPUT_PATH = epath.Path(_FOLDER_PATH, "input_path.txt")
+""")
 
 
 class DummyConllUDataset(conllu_dataset_builder.ConllUDatasetBuilder):
@@ -78,100 +70,97 @@ class DummyConllUDataset(conllu_dataset_builder.ConllUDatasetBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     del dl_manager
-    return {"train": self._generate_examples(_INPUT_PATH)}
+    return {"train": self._generate_examples("/tmp/input.txt")}
 
 
-def test_generate_example():
-  tf_mock = mock.Mock()
-  tf_mock.gfile.GFile.return_value = _VALID_INPUT
-  expected_examples = []
+def test_generate_example(tmpdir):
+  tmpdir = epath.Path(tmpdir)
+  input_path = tmpdir / "input.txt"
+  input_path.write_text(_VALID_INPUT)
 
-  dataset = DummyConllUDataset()
+  dataset = DummyConllUDataset(data_dir=tmpdir)
 
-  with tfds.testing.MockFs() as fs:
-    fs.add_file(path=_INPUT_PATH, content=_VALID_INPUT)
-    examples = list(dataset._generate_examples(_INPUT_PATH))
-    expected_examples = [
-        (
-            0,
-            {
-                "idx": "VIT-9558",
-                "text": "Il futuro.",
-                "tokens": ["Il", "futuro", "."],
-                "lemmas": ["il", "futuro", "."],
-                "upos": ["DET", "NOUN", "PUNCT"],
-                "xpos": ["RD", "S", "FS"],
-                "feats": [
-                    "{'Definite': 'Def', 'Gender': 'Masc', 'Number': 'Sing', "  # pylint:disable=implicit-str-concat
-                    "'PronType': 'Art'}",
-                    "{'Gender': 'Masc', 'Number': 'Sing'}",
-                    "None",
-                ],
-                "head": ["2", "0", "2"],
-                "deprel": ["det", "root", "punct"],
-                "deps": ["None", "None", "None"],
-                "misc": ["None", "{'SpaceAfter': 'No'}", "None"],
-            },
-        ),
-        (
-            1,
-            {
-                "idx": "VIT-9478",
-                "text": "il responsabile dell'ambiente",
-                "tokens": [
-                    "il",
-                    "responsabile",
-                    "dell'",
-                    "di",
-                    "l'",
-                    "ambiente",
-                ],
-                "lemmas": ["il", "responsabile", "_", "di", "il", "ambiente"],
-                "upos": ["DET", "NOUN", "_", "ADP", "DET", "NOUN"],
-                "xpos": ["RD", "S", "None", "E", "RD", "S"],
-                "feats": [
-                    "{'Definite': 'Def', 'Gender': 'Masc', 'Number': 'Sing', "  # pylint:disable=implicit-str-concat
-                    "'PronType': 'Art'}",
-                    "{'Number': 'Sing'}",
-                    "None",
-                    "None",
-                    "{'Definite': 'Def', 'Number': 'Sing', 'PronType': 'Art'}",
-                    "{'Gender': 'Masc', 'Number': 'Sing'}",
-                ],
-                "head": ["3", "1", "None", "6", "6", "3"],
-                "deprel": ["det", "nsubj", "_", "case", "det", "nmod"],
-                "deps": ["None", "None", "None", "None", "None", "None"],
-                "misc": [
-                    "None",
-                    "None",
-                    "{'SpaceAfter': 'No'}",
-                    "None",
-                    "None",
-                    "None",
-                ],
-            },
-        ),
-    ]
+  examples = list(dataset._generate_examples(input_path))
+  expected_examples = [
+      (
+          0,
+          {
+              "idx": "VIT-9558",
+              "text": "Il futuro.",
+              "tokens": ["Il", "futuro", "."],
+              "lemmas": ["il", "futuro", "."],
+              "upos": ["DET", "NOUN", "PUNCT"],
+              "xpos": ["RD", "S", "FS"],
+              "feats": [
+                  "{'Definite': 'Def', 'Gender': 'Masc', 'Number': 'Sing', "  # pylint:disable=implicit-str-concat
+                  "'PronType': 'Art'}",
+                  "{'Gender': 'Masc', 'Number': 'Sing'}",
+                  "None",
+              ],
+              "head": ["2", "0", "2"],
+              "deprel": ["det", "root", "punct"],
+              "deps": ["None", "None", "None"],
+              "misc": ["None", "{'SpaceAfter': 'No'}", "None"],
+          },
+      ),
+      (
+          1,
+          {
+              "idx": "VIT-9478",
+              "text": "il responsabile dell'ambiente",
+              "tokens": [
+                  "il",
+                  "responsabile",
+                  "dell'",
+                  "di",
+                  "l'",
+                  "ambiente",
+              ],
+              "lemmas": ["il", "responsabile", "_", "di", "il", "ambiente"],
+              "upos": ["DET", "NOUN", "_", "ADP", "DET", "NOUN"],
+              "xpos": ["RD", "S", "None", "E", "RD", "S"],
+              "feats": [
+                  "{'Definite': 'Def', 'Gender': 'Masc', 'Number': 'Sing', "  # pylint:disable=implicit-str-concat
+                  "'PronType': 'Art'}",
+                  "{'Number': 'Sing'}",
+                  "None",
+                  "None",
+                  "{'Definite': 'Def', 'Number': 'Sing', 'PronType': 'Art'}",
+                  "{'Gender': 'Masc', 'Number': 'Sing'}",
+              ],
+              "head": ["3", "1", "None", "6", "6", "3"],
+              "deprel": ["det", "nsubj", "_", "case", "det", "nmod"],
+              "deps": ["None", "None", "None", "None", "None", "None"],
+              "misc": [
+                  "None",
+                  "None",
+                  "{'SpaceAfter': 'No'}",
+                  "None",
+                  "None",
+                  "None",
+              ],
+          },
+      ),
+  ]
 
-    assert examples == expected_examples
+  assert examples == expected_examples
 
-    for _, example in examples:
-      assert len(example) == len(conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES)
+  for _, example in examples:
+    assert len(example) == len(conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES)
 
   assert len(examples) == 2
 
 
-def test_generate_corrupted_example():
-  conllu = lazy_imports_lib.lazy_imports.conllu
+def test_generate_corrupted_example(tmpdir):
+  tmpdir = epath.Path(tmpdir)
+  input_path = tmpdir / "input.txt"
+  input_path.write_text(_INVALID_INPUT)
 
-  tf_mock = mock.Mock()
-  tf_mock.gfile.GFile.return_value = _VALID_INPUT
+  conllu = lazy_imports_lib.lazy_imports.conllu
   dataset = DummyConllUDataset()
 
   with pytest.raises(conllu.exceptions.ParseException):
-    with tfds.testing.MockFs() as fs:
-      fs.add_file(path=_INPUT_PATH, content=_INVALID_INPUT)
-      list(dataset._generate_examples(_INPUT_PATH))
+    list(dataset._generate_examples(input_path))
 
 
 class DummyXtremePosConllUDataset(conllu_dataset_builder.ConllUDatasetBuilder):
@@ -194,62 +183,59 @@ class DummyXtremePosConllUDataset(conllu_dataset_builder.ConllUDatasetBuilder):
     del dl_manager
     return {
         "train": self._generate_examples(
-            filepaths=_INPUT_PATH,
+            filepaths="/tmp/input.txt",
             process_example_fn=conllu_dataset_builder.get_xtreme_pos_example,
         )
     }
 
 
-def test_generate_xtreme_pos_example():
-  tf_mock = mock.Mock()
-  tf_mock.gfile.GFile.return_value = _VALID_INPUT
-  expected_examples = []
+def test_generate_xtreme_pos_example(tmpdir):
+  tmpdir = epath.Path(tmpdir)
+  input_path = tmpdir / "input.txt"
+  input_path.write_text(_VALID_INPUT)
 
-  dataset = DummyXtremePosConllUDataset()
+  dataset = DummyXtremePosConllUDataset(data_dir=tmpdir)
 
-  with tfds.testing.MockFs() as fs:
-    fs.add_file(path=_INPUT_PATH, content=_VALID_INPUT)
-    examples = list(dataset._generate_examples(_INPUT_PATH))
-    expected_examples = [
-        (
-            0,
-            {
-                "tokens": ["Il", "futuro", "."],
-                "upos": ["DET", "NOUN", "PUNCT"],
-            },
-        ),
-        (
-            1,
-            {
-                "tokens": [
-                    "il",
-                    "responsabile",
-                    "dell'",
-                    "di",
-                    "l'",
-                    "ambiente",
-                ],
-                "upos": ["DET", "NOUN", "_", "ADP", "DET", "NOUN"],
-            },
-        ),
-    ]
+  examples = list(dataset._generate_examples(input_path))
+  expected_examples = [
+      (
+          0,
+          {
+              "tokens": ["Il", "futuro", "."],
+              "upos": ["DET", "NOUN", "PUNCT"],
+          },
+      ),
+      (
+          1,
+          {
+              "tokens": [
+                  "il",
+                  "responsabile",
+                  "dell'",
+                  "di",
+                  "l'",
+                  "ambiente",
+              ],
+              "upos": ["DET", "NOUN", "_", "ADP", "DET", "NOUN"],
+          },
+      ),
+  ]
 
-    assert examples == expected_examples
+  assert examples == expected_examples
 
-    for _, example in examples:
-      assert len(example) == len(conllu_lib.XTREME_POS_FEATURES)
+  for _, example in examples:
+    assert len(example) == len(conllu_lib.XTREME_POS_FEATURES)
 
   assert len(examples) == 2
 
 
-def test_generate_corrupted_xtreme_pos_example():
+def test_generate_corrupted_xtreme_pos_example(tmpdir):
+  tmpdir = epath.Path(tmpdir)
+  input_path = tmpdir / "input.txt"
+  input_path.write_text(_INVALID_INPUT)
   conllu = lazy_imports_lib.lazy_imports.conllu
 
-  tf_mock = mock.Mock()
-  tf_mock.gfile.GFile.return_value = _VALID_INPUT
-  dataset = DummyXtremePosConllUDataset()
+  dataset = DummyXtremePosConllUDataset(data_dir=tmpdir)
 
   with pytest.raises(conllu.exceptions.ParseException):
-    with tfds.testing.MockFs() as fs:
-      fs.add_file(path=_INPUT_PATH, content=_INVALID_INPUT)
-      list(dataset._generate_examples(_INPUT_PATH))
+    list(dataset._generate_examples(input_path))

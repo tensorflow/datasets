@@ -274,7 +274,7 @@ def builder_from_files(
     name: str,
     **builder_kwargs: Any,
 ) -> dataset_builder.DatasetBuilder:
-  """Loads a `tfds.core.DatasetBuilder` from files, auto-infering location.
+  """Loads a `tfds.core.DatasetBuilder` from files, auto-inferring location.
 
   This function is similar to `tfds.builder` (same signature), but creates
   the `tfds.core.DatasetBuilder` directly from files, without loading
@@ -336,6 +336,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> epath.Path | None:
       name, **builder_kwargs
   )
   version = builder_kwargs.pop('version', None)
+  version = str(version) if version else None
   config = builder_kwargs.pop('config', None)
   data_dir = builder_kwargs.pop('data_dir', None)
 
@@ -492,7 +493,7 @@ def _find_builder_dir_single_dir(
       config_name=config_name,
       requested_version=version,
   )
-  if found_version and str(found_version) != version:
+  if found_version and str(found_version) != str(version):
     dataset_dir = file_utils.get_dataset_dir(
         data_dir=data_dir,
         builder_name=builder_name,

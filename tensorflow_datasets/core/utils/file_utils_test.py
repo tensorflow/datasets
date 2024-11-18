@@ -24,6 +24,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import file_utils
+from tensorflow_datasets.core.utils import version as version_lib
 
 _DATA_DIR = epath.Path('/a')
 _DATASET_NAME = 'my_ds'
@@ -160,6 +161,34 @@ def _add_features(
     mock_fs: testing.MockFs, dataset_dir: epath.Path, content: str = None
 ) -> None:
   mock_fs.add_file(dataset_dir / constants.FEATURES_FILENAME, content=content)
+
+
+def _touch(path: epath.Path) -> None:
+  path.parent.mkdir(parents=True, exist_ok=True)
+  path.touch()
+
+
+def test_list_dataset_versions(tmpdir):
+  tmpdir = epath.Path(tmpdir)
+  _touch(tmpdir / '1.0.0' / constants.DATASET_INFO_FILENAME)
+  _touch(tmpdir / '1.0.1' / constants.DATASET_INFO_FILENAME)
+  _touch(tmpdir / '3.0.0' / constants.DATASET_INFO_FILENAME)
+
+  # Does not have dataset_info.json, so ignored.
+  _touch(tmpdir / '4.0.0' / 'other_file.json')
+
+  # Version folder is inside a subfolder, so ignored.
+  _touch(tmpdir / 'xxx' / '1.0.0' / constants.DATASET_INFO_FILENAME)
+
+  # Subfolder name is not a valid version, so ignored.
+  _touch(tmpdir / 'not_valid_version' / constants.DATASET_INFO_FILENAME)
+
+  actual_versions = file_utils.list_dataset_versions(tmpdir)
+  assert actual_versions == [
+      version_lib.Version('1.0.0'),
+      version_lib.Version('1.0.1'),
+      version_lib.Version('3.0.0'),
+  ]
 
 
 def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
