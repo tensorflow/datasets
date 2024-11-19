@@ -26,14 +26,6 @@ runs:
       run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       shell: bash
 
-    # Install deps.
-    - name: Workaround for connectivity issues in Azure  # https://github.com/actions/runner-images/issues/675#issuecomment-1419388451
-      if: ${{ runner.os == 'Linux' }}
-      run: |
-        sudo gem install apt-spy2
-        sudo apt-spy2 fix --commit --launchpad --country=US
-        sudo apt-get update
-      shell: bash
     # Install protobuf-compiler for gcld3 library and graphviz for mlcroissant.
     - if: ${{ runner.os == 'Linux' }}
       run: |
