@@ -334,7 +334,7 @@ class DownloadManager:
         name in the path.
     """
     download_dir = self._download_dir
-    if not legacy_mode:
+    if not legacy_mode and self._dataset_name:
       download_dir /= self._dataset_name
     download_dir /= resource.relative_download_dir
     return download_dir / resource_lib.get_dl_fname(resource.url, checksum)
