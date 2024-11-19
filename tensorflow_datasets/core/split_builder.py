@@ -434,15 +434,11 @@ class SplitBuilder:
         generator=generator,
         filename_template=filename_template,
         disable_shuffling=disable_shuffling,
+        nondeterministic_order=nondeterministic_order,
     )
     # Depending on the type of generator, we use the corresponding
     # `_build_from_xyz` method.
     if isinstance(generator, Iterable):
-      if nondeterministic_order:
-        logging.warning(
-            'Enabling `nondeterministic_order` for a dataset that does not use'
-            ' beam has no effect.'
-        )
       return self._build_from_generator(**build_kwargs)
     else:  # Otherwise, beam required
       unknown_generator_type = TypeError(
@@ -450,7 +446,6 @@ class SplitBuilder:
           'Expected generator or apache_beam object. Got: '
           f'{type(generator)}'
       )
-      build_kwargs['nondeterministic_order'] = nondeterministic_order
       if isinstance(generator, beam.PTransform):
         # Generate the beam.PCollection
         pcollection = self.beam_pipeline | split_name >> generator
@@ -467,6 +462,7 @@ class SplitBuilder:
       generator: Iterable[KeyExample],
       filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
+      nondeterministic_order: bool,
   ) -> _SplitInfoFuture:
     """Split generator for example generators.
 
@@ -474,7 +470,10 @@ class SplitBuilder:
       split_name: str,
       generator: Iterable[KeyExample],
       filename_template: Template to format the filename for a shard.
-      disable_shuffling: Specifies whether to shuffle the examples,
+      disable_shuffling: Specifies whether to shuffle the examples.
+      nondeterministic_order: If True, it will not assure deterministic ordering
+        when writing' examples to disk. This might result in quicker dataset
+        preparation
 
     Returns:
       future: The future containing the `tfds.core.SplitInfo`.
@@ -495,35 +494,71 @@ class SplitBuilder:
         total_num_examples = None
 
     serialized_info = self._features.get_serialized_info()
-    writer = writer_lib.Writer(
-        serializer=example_serializer.ExampleSerializer(serialized_info),
-        filename_template=filename_template,
-        hash_salt=split_name,
-        disable_shuffling=disable_shuffling,
-        shard_config=self._shard_config,
-        example_writer=self._example_writer,
-        ignore_duplicates=self._ignore_duplicates,
-    )
-    for key, example in utils.tqdm(
-        generator,
-        desc=f'Generating {split_name} examples...',
-        unit=' examples',
-        total=total_num_examples,
-        leave=False,
-        mininterval=1.0,
-    ):
-      try:
-        example = self._features.encode_example(example)
-      except Exception as e:  # pylint: disable=broad-except
-        utils.reraise(e, prefix=f'Failed to encode example:\n{example}\n')
-      writer.write(key, example)
-    try:
-      shard_lengths, total_size = writer.finalize()
-    except Exception as e:  # pylint: disable=broad-except
-      utils.reraise(
-          e, prefix=f'Failed to finalize writing of split "{split_name}": '
+    if nondeterministic_order:
+      logging.info(
+          'Order of examples does not matter, writing to a single shard using'
+          ' NoShuffleWriter.'
       )
-
+      writer = writer_lib.NoShuffleWriter(
+          serializer=example_serializer.ExampleSerializer(serialized_info),
+          filename_template=filename_template,
+          example_writer=self._example_writer,
+      )
+      # Encode and serialize the examples.
+      serialized_examples = []
+      for key, example in utils.tqdm(
+          generator,
+          desc=f'Generating {split_name} examples...',
+          unit=' examples',
+          total=total_num_examples,
+          leave=False,
+          mininterval=1.0,
+      ):
+        try:
+          example = self._features.encode_example(example)
+        except Exception as e:  # pylint: disable=broad-except
+          utils.reraise(e, prefix=f'Failed to encode example:\n{example}\n')
+        serialized_examples.append(writer.write(key, example))
+      # Write the examples to a single shard.
+      shard_path = writer.finalize(examples=serialized_examples)
+      shard_lengths = [len(serialized_examples)]
+      total_size = shard_path.stat().length
+      logging.info(
+          'Done writing %s. Number of examples: %s (shards: %s)',
+          shard_path,
+          shard_lengths,
+          total_size,
+      )
+    else:
+      logging.info('Deterministic ordering is enabled, using Writer')
+      writer = writer_lib.Writer(
+          serializer=example_serializer.ExampleSerializer(serialized_info),
+          filename_template=filename_template,
+          hash_salt=split_name,
+          disable_shuffling=disable_shuffling,
+          shard_config=self._shard_config,
+          example_writer=self._example_writer,
+          ignore_duplicates=self._ignore_duplicates,
+      )
+      for key, example in utils.tqdm(
+          generator,
+          desc=f'Generating {split_name} examples...',
+          unit=' examples',
+          total=total_num_examples,
+          leave=False,
+          mininterval=1.0,
+      ):
+        try:
+          example = self._features.encode_example(example)
+        except Exception as e:  # pylint: disable=broad-except
+          utils.reraise(e, prefix=f'Failed to encode example:\n{example}\n')
+        writer.write(key, example)
+      try:
+        shard_lengths, total_size = writer.finalize()
+      except Exception as e:  # pylint: disable=broad-except
+        utils.reraise(
+            e, prefix=f'Failed to finalize writing of split "{split_name}": '
+        )
     split_info = splits_lib.SplitInfo(
         name=split_name,
         shard_lengths=shard_lengths,

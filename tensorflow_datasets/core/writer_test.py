@@ -627,6 +627,41 @@ class NoShuffleBeamWriterTest(parameterized.TestCase):
         self.assertIn(file_format.file_suffix, f.name)
 
 
+class NoShuffleWriterTest(parameterized.TestCase):
+
+  @parameterized.named_parameters(
+      ('tfrecord', file_adapters.FileFormat.TFRECORD),
+  )
+  def test_write_beam(self, file_format: file_adapters.FileFormat):
+
+    with tempfile.TemporaryDirectory() as tmp_dir:
+      tmp_dir = epath.Path(tmp_dir)
+      filename_template = naming.ShardedFileTemplate(
+          dataset_name='foo',
+          split='train',
+          filetype_suffix=file_format.file_suffix,
+          data_dir=tmp_dir,
+      )
+      writer = writer_lib.NoShuffleWriter(
+          serializer=testing.DummySerializer('dummy specs'),
+          filename_template=filename_template,
+          example_writer=writer_lib.ExampleWriter(file_format=file_format),
+      )
+      to_write = [(i, str(i).encode('utf-8')) for i in range(10)]
+      examples = []
+      for key, record in to_write:
+        examples.append(writer.write(key, record))
+      shard_path = writer.finalize(examples)
+      self.assertEqual(len(to_write), len(examples))
+      self.assertEqual(
+          set([key for key, _ in examples]), set([key for key, _ in to_write])
+      )
+      files = list(tmp_dir.iterdir())
+      self.assertLen(files, 1)
+      self.assertIn(file_format.file_suffix, files[0].name)
+      self.assertIn(file_format.file_suffix, shard_path.name)
+
+
 class CustomExampleWriter(writer_lib.ExampleWriter):
 
   def __init__(self):
