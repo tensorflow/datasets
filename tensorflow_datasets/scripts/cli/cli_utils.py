@@ -270,6 +270,16 @@ def add_generation_argument_group(parser: argparse.ArgumentParser):
           ' examples to disk. This might result in quicker dataset preparation.'
       ),
   )
+  # For compatibility with absl.flags (which generates --foo and --nofoo).
+  generation_group.add_argument(
+      '--nonondeterministic_order',
+      dest='nondeterministic_order',
+      action='store_false',
+      help=(
+          'If specified, it will assure deterministic ordering when writing'
+          ' examples to disk.'
+      ),
+  )
 
 
 def add_publish_argument_group(parser: argparse.ArgumentParser):
