@@ -23,6 +23,7 @@ from tensorflow_datasets.core.dataset_builders import croissant_builder
 from tensorflow_datasets.core.features import bounding_boxes
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
+from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import text_feature
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
@@ -146,13 +147,24 @@ def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
 )
 def test_complex_datatype_converter(field, feature_type, subfield_types):
   actual_feature = croissant_builder.datatype_converter(field)
-  assert isinstance(actual_feature, feature_type)
   assert actual_feature.doc.desc == field.description
+  assert isinstance(actual_feature, feature_type)
   if subfield_types:
     for feature_name in actual_feature.keys():
       assert isinstance(
           actual_feature[feature_name], subfield_types[feature_name]
       )
+
+
+def test_sequence_feature_datatype_converter():
+  field = mlc.Field(
+      data_types=mlc.DataType.TEXT,
+      description="Text feature",
+      repeated=True,
+  )
+  actual_feature = croissant_builder.datatype_converter(field)
+  assert isinstance(actual_feature, sequence_feature.Sequence)
+  assert isinstance(actual_feature.feature, text_feature.Text)
 
 
 @pytest.fixture(name="crs_builder")

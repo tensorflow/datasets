@@ -100,7 +100,7 @@ def datatype_converter(
   if not field_data_type:
     # Fields with sub fields are of type None
     if field.sub_fields:
-      return features_dict.FeaturesDict(
+      feature = features_dict.FeaturesDict(
           {
               subfield.id: datatype_converter(
                   subfield, int_dtype=int_dtype, float_dtype=float_dtype
@@ -109,25 +109,32 @@ def datatype_converter(
           },
           doc=field.description,
       )
-    return None
+    else:
+      feature = None
   elif field_data_type == int:
-    return int_dtype
+    feature = int_dtype
   elif field_data_type == float:
-    return float_dtype
+    feature = float_dtype
   elif field_data_type == bool:
-    return np.bool_
+    feature = np.bool_
   elif field_data_type == bytes:
-    return text_feature.Text(doc=field.description)
+    feature = text_feature.Text(doc=field.description)
   # We return a text feature for mlc.DataType.DATE features.
   elif field_data_type == pd.Timestamp:
-    return text_feature.Text(doc=field.description)
+    feature = text_feature.Text(doc=field.description)
   elif field_data_type == mlc.DataType.IMAGE_OBJECT:
-    return image_feature.Image(doc=field.description)
+    feature = image_feature.Image(doc=field.description)
   elif field_data_type == mlc.DataType.BOUNDING_BOX:
     # TFDS uses REL_YXYX by default, but Hugging Face doesn't enforce a format.
-    return bounding_boxes.BBoxFeature(doc=field.description, bbox_format=None)
+    feature = bounding_boxes.BBoxFeature(
+        doc=field.description, bbox_format=None
+    )
   else:
     raise ValueError(f'Unknown data type: {field_data_type}.')
+
+  if feature and field.repeated:
+    feature = sequence_feature.Sequence(feature, doc=field.description)
+  return feature
 
 
 def _extract_license(license_: Any) -> str | None:
@@ -271,8 +278,6 @@ class CroissantBuilder(
       feature = datatype_converter(
           field, int_dtype=self._int_dtype, float_dtype=self._float_dtype
       )
-      if field.repeated:
-        feature = sequence_feature.Sequence(feature)
       features[field.id] = feature
     features = _strip_record_set_prefix(features, record_set.id)
     return features_dict.FeaturesDict(features)
