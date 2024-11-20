@@ -436,6 +436,40 @@ class Writer:
     return shard_lengths, self._shuffler.size
 
 
+class NoShuffleWriter:
+  """Shuffles / writes Examples to one single file."""
+
+  def __init__(
+      self,
+      serializer: example_serializer.Serializer,
+      filename_template: naming.ShardedFileTemplate,
+      example_writer: ExampleWriter,
+  ):
+    """Initializes Writer.
+
+    Args:
+      serializer: class that can serialize examples.
+      filename_template: template to format sharded filenames.
+      example_writer: class that writes examples to disk or elsewhere.
+    """
+    self._serializer = serializer
+    self._filename_template = filename_template
+    self._example_writer = example_writer
+
+  def write(self, key: int | bytes, example: Example):
+    """Writes given example."""
+    serialized_example = self._serializer.serialize_example(example=example)
+    return key, serialized_example
+
+  def finalize(self, examples: Iterable[KeyExample]) -> epath.Path:
+    """Writes the examples to a single shard and returns its path."""
+    shard_path = self._filename_template.sharded_filepath(
+        shard_index=0, num_shards=1
+    )
+    self._example_writer.write(path=shard_path, examples=examples)
+    return shard_path
+
+
 @dataclasses.dataclass
 class _ShardInfo:
   id: int
