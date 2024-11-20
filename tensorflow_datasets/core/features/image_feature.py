@@ -417,7 +417,7 @@ class Image(feature_lib.FeatureConnector):
   ) -> 'Image':
     if isinstance(value, dict):
       # For backwards compatibility
-      return cls(
+      return cls(  # pytype: disable=wrong-arg-types
           shape=tuple(value['shape']),
           dtype=feature_lib.dtype_from_str(value['dtype']),
           encoding_format=value['encoding_format'],
