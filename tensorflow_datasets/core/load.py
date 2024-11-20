@@ -480,8 +480,6 @@ def dataset_collection(
   )
 
 
-
-
 def _fetch_builder(
     name: str,
     data_dir: epath.PathLike | None,
