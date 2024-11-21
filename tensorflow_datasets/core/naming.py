@@ -426,7 +426,8 @@ def _num_digits_needed(num_shards: int | None) -> int:
 
 def _replace_shard_pattern(filepath: str, replacement: str) -> str:
   """Replaces the shard pattern with the given string."""
-  pattern = r'^(?P<prefix>.+?)-?\d{5,}(-of-\d{5,})?(?P<suffix>.+)?$'
+  # Note that the suffix cannot contain any numbers.
+  pattern = r'^(?P<prefix>.+?)-?\d{5,}(-of-\d{5,})?(?P<suffix>\D+)?$'
 
   def replace_func(matchobj):
     if matchobj.group('suffix') is None:

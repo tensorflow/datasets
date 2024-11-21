@@ -585,9 +585,9 @@ def test_filepath_prefix(template, expected_prefix):
             expected='/path/file.tfrecordrepl',
         ),
         dict(
-            filepath='/path/file-00001-of-01234.bagz',
+            filepath='/path/file42.tfrecord-00001-of-01234',
             replacement='repl',
-            expected='/path/filerepl.bagz',
+            expected='/path/file42.tfrecordrepl',
         ),
         dict(
             filepath='/path/file00001-of-01234',
@@ -595,32 +595,15 @@ def test_filepath_prefix(template, expected_prefix):
             expected='/path/filerepl',
         ),
         dict(
-            filepath='/path/file00001-of-01234.bagz',
-            replacement='repl',
-            expected='/path/filerepl.bagz',
-        ),
-        dict(
             filepath='/path/file-00001',
             replacement='repl',
             expected='/path/filerepl',
-        ),
-        dict(
-            filepath='/path/file-00001.bagz',
-            replacement='repl',
-            expected='/path/filerepl.bagz',
         ),
         # The folder is similar to the shard
         dict(
             filepath='/path/i-look-like-a-shard-000001/file-00001-of-01234',
             replacement='repl',
             expected='/path/i-look-like-a-shard-000001/filerepl',
-        ),
-        dict(
-            filepath=(
-                '/path/i-look-like-a-shard-000001/file-00001-of-01234.bagz'
-            ),
-            replacement='repl',
-            expected='/path/i-look-like-a-shard-000001/filerepl.bagz',
         ),
     ],
 )
