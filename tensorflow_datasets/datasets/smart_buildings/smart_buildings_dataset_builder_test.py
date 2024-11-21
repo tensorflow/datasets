@@ -32,12 +32,14 @@ class SmartBuildingsDatasetTest(tfds.testing.DatasetBuilderTestCase):
       'sb1_24': 12,  # Number of fake train examples
   }
 
-
-# If you are calling `download/download_and_extract` with a dict, like:
-#   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
-# then the tests needs to provide the fake output paths relative to the
-# fake data directory
-# DL_EXTRACT_RESULT = {'some_key': 'output_file1.txt', ...}
+  DL_EXTRACT_RESULT = {
+      19: '',
+      20: '',
+      21: '',
+      22: '',
+      23: '',
+      24: '',
+  }
 
 
 if __name__ == '__main__':

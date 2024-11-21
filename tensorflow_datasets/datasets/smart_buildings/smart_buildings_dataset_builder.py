@@ -15,27 +15,44 @@
 
 """smart_buildings dataset."""
 
+from collections.abc import Iterable
 import datetime
+from typing import Any
+
 from absl import logging
+from etils import epath
 from google.protobuf import json_format
 import numpy as np
 import pandas as pd
+from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.datasets.smart_buildings import controller_reader
 import tensorflow_datasets.public_api as tfds
 
 # The years in the dataset.
 YEARS = [19, 20, 21, 22, 23, 24]
 
+_REWARD_RESPONSES = [
+    'agentRewardValue',
+    'productivityReward',
+    'electricityEnergyCost',
+    'carbonEmitted',
+    'productivityWeight',
+    'energyCostWeight',
+    'carbonEmissionWeight',
+    'personProductivity',
+    'totalOccupancy',
+    'rewardScale',
+    'productivityRegret',
+    'normalizedProductivityRegret',
+    'normalizedEnergyCost',
+    'normalizedCarbonEmission',
+    'naturalGasEnergyCost',
+]
 
-# helper function to convert a protobuf.Timestamp to Pandas Timestamp
-def proto_to_pandas_timestamp(
-    proto_timestamp,
-) -> pd.Timestamp:
-  """Converts a protobuf.Timestamp to Pandas Timestamp."""
 
-  return pd.Timestamp(
-      proto_timestamp.seconds, unit='s', tz='UTC'
-  ) + pd.Timedelta(proto_timestamp.nanos, unit='ns')
+def to_ns_timestamp(proto_timestamp) -> int:
+  """Converts a protobuf.Timestamp to number of nanoseconds since epoch."""
+  return proto_timestamp.seconds * 1e9 + proto_timestamp.nanos
 
 
 class BuilderConfig(tfds.core.BuilderConfig):
@@ -148,129 +165,99 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         disable_shuffling=True,  # our dataset needs to be in order
     )
 
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+  def _split_generators(
+      self, dl_manager: tfds.download.DownloadManager, pipeline
+  ):
     """Download the data and define splits."""
     building = self.builder_config.building
     building_upper = building.upper()
 
-    paths = {}
-    for year in YEARS:
-      path = dl_manager.download_and_extract(
-          f'https://storage.googleapis.com/gresearch/smart_buildings_dataset/{building_upper}/{building_upper}_{year}.zip'
-      )
-      paths[year] = path
+    path_by_year: dict[int, epath.Path] = dl_manager.download_and_extract({
+        year: f'https://storage.googleapis.com/gresearch/smart_buildings_dataset/{building_upper}/{building_upper}_{year}.zip'
+        for year in YEARS
+    })
 
     splits_dict = {}
-    for year in YEARS:
+    for year, path in path_by_year.items():
       splits_dict[f'{building}_{year}'] = self._generate_examples(
-          path=paths[year] / f'dataset/{building_upper}/{year}'
+          path=path / 'dataset' / building_upper / str(year),
+          year=year,
+          pipeline=pipeline,
       )
     return splits_dict
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, path: epath.Path, year: int, pipeline):
     """Yields examples."""
-    count = 0
+    logging.info('Processing year %d in path %s', year, path)
 
-    def daterange(start_date: datetime.date, end_date: datetime.date):
-      days = int((end_date - start_date).days)
-      for n in range(days):
-        yield start_date + datetime.timedelta(n)
+    start_date = datetime.date(2000 + year, 1, 1)
+    end_date = datetime.date(2000 + year + 1, 1, 1)
+    all_dates = pd.date_range(start_date, end_date)
 
-    # define the reader
-    self.reader = controller_reader.ProtoReader(path)
-    logging.info(str(path))
+    return (
+        pipeline
+        | f'CreateDates_{year}' >> beam.Create(all_dates)
+        | f'ProcessDate_{year}' >> beam.FlatMap(process_date, path=path)
+    )
 
-    building = self.builder_config.building
-    building_upper = building.upper()
 
-    start_date = None
-    end_date = None
-    for year in YEARS:
-      if f'dataset/{building_upper}/{year}' in str(path):
-        start_date = datetime.date(2000 + year, 1, 1)
-        end_date = datetime.date(2000 + year + 1, 1, 1)
+def process_date(
+    start_time: pd.Timestamp,
+    path: epath.Path,
+) -> Iterable[tuple[int, dict[str, Any]]]:
+  """Process a single date."""
+  end_time = start_time + pd.Timedelta(hours=23)
 
-    if start_date is None:
-      raise ValueError('Invalid Split.')
+  reader = controller_reader.ProtoReader(path)
+  observation_responses = reader.read_observation_responses(
+      start_time, end_time
+  )
+  action_responses = reader.read_action_responses(start_time, end_time)
+  reward_responses = reader.read_reward_responses(start_time, end_time)
 
-    for single_date in daterange(start_date, end_date):
-      date = single_date.strftime('%Y.%m.%d')
-      start_time = pd.Timestamp(date)
-      end_time = pd.Timestamp(date) + pd.Timedelta(hours=23)
+  # make sure all are sorted by data
+  observation_responses = sorted(
+      observation_responses,
+      key=lambda o: to_ns_timestamp(o.timestamp),
+  )
+  action_responses = sorted(
+      action_responses,
+      key=lambda o: to_ns_timestamp(o.timestamp),
+  )
+  reward_responses = sorted(
+      reward_responses,
+      key=lambda o: to_ns_timestamp(o.start_timestamp),
+  )
 
-      observation_responses = self.reader.read_observation_responses(
-          start_time, end_time
-      )
+  for i in range(len(observation_responses)):
+    observation_response = json_format.MessageToDict(observation_responses[i])
+    action_response = json_format.MessageToDict(action_responses[i])
+    reward_response = json_format.MessageToDict(reward_responses[i])
 
-      action_responses = self.reader.read_action_responses(start_time, end_time)
-      reward_responses = self.reader.read_reward_responses(start_time, end_time)
+    # fill missing values
+    for single_observation_response in observation_response[
+        'singleObservationResponses'
+    ]:
+      if 'continuousValue' not in single_observation_response:
+        single_observation_response['continuousValue'] = 0.0
+      if 'observationValid' not in single_observation_response:
+        single_observation_response['observationValid'] = 'False'
+      else:
+        single_observation_response['observationValid'] = str(
+            single_observation_response['observationValid']
+        )  # parse bool to string
+      if 'timestamp' not in single_observation_response:
+        single_observation_response['timestamp'] = observation_response[
+            'timestamp'
+        ]
+    for val in _REWARD_RESPONSES:
+      if val not in reward_response:
+        reward_response[val] = -1  # sentinal value
 
-      # make sure all are sorted by data
-      observation_responses = sorted(
-          observation_responses,
-          key=lambda o: proto_to_pandas_timestamp(o.timestamp),
-      )
-      action_responses = sorted(
-          action_responses,
-          key=lambda o: proto_to_pandas_timestamp(o.timestamp),
-      )
-      reward_responses = sorted(
-          reward_responses,
-          key=lambda o: proto_to_pandas_timestamp(o.start_timestamp),
-      )
-
-      for i in range(len(observation_responses)):
-        observation_response = json_format.MessageToDict(
-            observation_responses[i]
-        )
-        action_response = json_format.MessageToDict(action_responses[i])
-
-        reward_response = json_format.MessageToDict(reward_responses[i])
-
-        # fill missing values
-        for single_observation_response in observation_response[
-            'singleObservationResponses'
-        ]:
-          if 'continuousValue' not in single_observation_response:
-            single_observation_response['continuousValue'] = 0.0
-          if 'observationValid' not in single_observation_response:
-            single_observation_response['observationValid'] = 'False'
-          else:
-            single_observation_response['observationValid'] = str(
-                single_observation_response['observationValid']
-            )  # parse bool to string
-          if 'timestamp' not in single_observation_response:
-            single_observation_response['timestamp'] = observation_response[
-                'timestamp'
-            ]
-        for val in [
-            'agentRewardValue',
-            'productivityReward',
-            'electricityEnergyCost',
-            'carbonEmitted',
-            'productivityWeight',
-            'energyCostWeight',
-            'carbonEmissionWeight',
-            'personProductivity',
-            'totalOccupancy',
-            'rewardScale',
-            'productivityRegret',
-            'normalizedProductivityRegret',
-            'normalizedEnergyCost',
-            'normalizedCarbonEmission',
-            'naturalGasEnergyCost',
-        ]:
-          if val not in reward_response:
-            reward_response[val] = -1  # sentinal value
-
-        count += 1
-
-        logging.info(
-            'SAMPLE NUMBER %s %s', str(count), observation_response['timestamp']
-        )
-
-        yield count, {
-            'observation': observation_response,
-            'action': action_response,
-            'reward': reward_response,
-        }
+    beam.metrics.Metrics.counter(f'date_{start_time}', 'example_count').inc()
+    key = int(f'{start_time.toordinal()}{i:05d}')
+    yield key, {
+        'observation': observation_response,
+        'action': action_response,
+        'reward': reward_response,
+    }
