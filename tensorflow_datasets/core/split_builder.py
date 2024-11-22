@@ -440,9 +440,10 @@ class SplitBuilder:
     if isinstance(generator, Iterable):
       if nondeterministic_order:
         logging.warning(
-            'Enabling `nondeterministic_order` for a dataset that does not use'
-            ' beam has no effect.'
+            '`nondeterministic_order` is set to True for a dataset that does'
+            ' not use beam. Setting `disable_shuffling` to True.'
         )
+        build_kwargs['disable_shuffling'] = True
       return self._build_from_generator(**build_kwargs)
     else:  # Otherwise, beam required
       unknown_generator_type = TypeError(
@@ -547,7 +548,7 @@ class SplitBuilder:
     )
     if nondeterministic_order:
       logging.info(
-          'Order of examples does not matter, using NoShuffleBeamWriter'
+          '`nondeterministic_order` is set to True, using NoShuffleBeamWriter'
       )
       beam_writer = writer_lib.NoShuffleBeamWriter(
           serializer=serializer,
