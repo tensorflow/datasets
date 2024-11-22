@@ -296,12 +296,15 @@ class CroissantBuilder(
     if split_reference := croissant_utils.get_split_recordset(
         record_set, metadata=self.metadata
     ):
+      # The key used in the split recordset's data is referenced in the
+      # reference field.
+      split_key = split_reference.reference_field.references.field
       return {
-          split['name']: self._generate_examples(
+          split[split_key]: self._generate_examples(
               pipeline=pipeline,
               filters={
                   **self._filters,
-                  split_reference.reference_field.id: split['name'],
+                  split_reference.reference_field.id: split[split_key],
               },
           )
           for split in split_reference.split_record_set.data
