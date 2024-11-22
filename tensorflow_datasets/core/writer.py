@@ -777,6 +777,7 @@ class NoShuffleBeamWriter:
     """Returns PTransform to write (key, example) PCollection."""
     return (
         examples_pcollection
+        | "Shuffle" >> beam.Reshuffle()
         | "Serialize" >> beam.Map(self._serialize_example)
         | "Write"
         >> self._file_adapter.beam_sink(
