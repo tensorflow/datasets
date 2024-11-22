@@ -146,7 +146,7 @@ class ProtoReader(reader_lib.BaseReader):
       self, input_dir: epath.Path, file_prefix: str
   ) -> Sequence[epath.Path]:
     """Returns full paths in input_dir of files starting with file_prefix."""
-    return list(epath.Path(input_dir).glob(f'{file_prefix}*'))
+    return list(input_dir.glob(f'{file_prefix}*'))
 
   def _select_shards(
       self,
