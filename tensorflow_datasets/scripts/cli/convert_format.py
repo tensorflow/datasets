@@ -104,6 +104,16 @@ def add_parser_arguments(parser: argparse.ArgumentParser) -> None:
           ' will be done sequentially.'
       ),
   )
+  parser.add_argument(
+      '--only_log_errors',
+      action='store_true',
+      default=False,
+      help=(
+          'If set, errors during the conversion will be logged as errors and'
+          ' will not crash the conversion. If you are converting a large number'
+          ' of datasets, you might want to set this flag to true.'
+      ),
+  )
 
 
 def register_subparser(parsers: argparse._SubParsersAction) -> None:
@@ -133,5 +143,6 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:
           overwrite=args.overwrite,
           use_beam=args.use_beam,
           num_workers=args.num_workers,
+          fail_on_error=not args.only_log_errors,
       )
   )
