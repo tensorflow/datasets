@@ -157,7 +157,12 @@ def _shard_instructions_for_split(
   """Returns shard instructions for the given split."""
 
   if split_info.filename_template is None:
-    raise ValueError(f'Filename template for split {split_info.name} is empty.')
+    msg = f'Filename template for split {split_info.name} is empty.'
+    if convert_config.fail_on_error:
+      raise ValueError(msg)
+    else:
+      logging.error(msg)
+      return []
 
   in_filename_template = split_info.filename_template
   out_filename_template = in_filename_template.replace(
@@ -166,7 +171,12 @@ def _shard_instructions_for_split(
   )
   num_shards = len(split_info.shard_lengths)
   if num_shards <= 0:
-    raise ValueError('num_shards must be positive.')
+    msg = f'{num_shards=} must be positive!'
+    if convert_config.fail_on_error:
+      raise ValueError(msg)
+    else:
+      logging.error(msg)
+      return []
 
   instructions = []
   existing_files = set(out_filename_template.data_dir.glob('*'))
@@ -198,7 +208,13 @@ def get_all_shard_instructions(
 ) -> list[ShardInstruction]:
   """Returns all shard instructions for the given dataset info."""
   if info.file_format is None:
-    raise ValueError('in_file_format must be set!')
+    msg = 'No file format was found in the dataset info!'
+    if convert_config.fail_on_error:
+      raise ValueError(msg)
+    else:
+      logging.error(msg)
+      return []
+
   convert_config = convert_config.with_in_file_format(info.file_format)
   shard_instructions = []
   splits_dict = dataset_info_lib.get_split_dict_from_proto(
@@ -305,14 +321,19 @@ def convert_metadata(
       if convert_config.fail_on_error:
         raise ValueError(error_message)
       else:
-        logging.warning(error_message)
+        logging.error(error_message)
 
     elif num_available_shards > split_info.num_shards:
-      raise ValueError(
+      msg = (
           f'Found more shards ({num_available_shards}) for split'
           f' {split_info.name}, but expected only'
           f' {split_info.num_shards} shards.'
       )
+      if convert_config.fail_on_error:
+        raise ValueError(msg)
+      else:
+        logging.error(msg)
+        return
 
   if in_dir == out_path:
     if missing_shards_per_split:
