@@ -500,13 +500,15 @@ class DownloadManager:
       self, url: str, url_info: checksums.UrlInfo, path: epath.Path
   ) -> None:
     """Registers or validates checksums depending on `self._register_checksums`."""
+    # Used both in `.downloaded_size` and `_record_url_infos()`
+    self._recorded_url_infos[url] = url_info
+
     if self._register_checksums:
       # Note:
       # * We save even if `expected_url_info == url_info` as
       #   `expected_url_info` might have been loaded from another dataset.
       # * `register_checksums_path` was validated in `__init__` so this
       #   shouldn't fail.
-      self._recorded_url_infos[url] = url_info
       self._record_url_infos()
     elif expected_url_info := self._url_infos.get(url):
       # Eventually validate checksums
