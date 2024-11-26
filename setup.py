@@ -25,7 +25,6 @@ Usage outside of TensorFlow is also supported.
 See the README on GitHub for further documentation.
 """
 
-import datetime
 import itertools
 import os
 import sys
@@ -33,27 +32,18 @@ import sys
 import pkg_resources
 import setuptools
 
-if '--nightly' in sys.argv:
-  nightly = True
-  sys.argv.remove('--nightly')
-else:
-  nightly = False
-
-project_name = 'tensorflow-datasets'
-
 # To enable importing version.py directly, we add its path to sys.path.
 version_path = os.path.join(os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
 from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
 
-if nightly:
+if datestring := os.environ.get('TFDS_NIGHTLY_TIMESTAMP'):
   project_name = 'tfds-nightly'
   # Version as `X.Y.Z.dev199912312459`
-  datestring = os.environ.get(
-      'TFDS_NIGHTLY_TIMESTAMP'
-  ) or datetime.datetime.now().strftime('%Y%m%d%H%M')
   curr_version = pkg_resources.parse_version(__version__)
   __version__ = f'{curr_version.base_version}.dev{datestring}'
+else:
+  project_name = 'tensorflow-datasets'
 
 DOCLINES = __doc__.split('\n')
 
