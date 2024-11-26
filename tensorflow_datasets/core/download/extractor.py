@@ -29,11 +29,11 @@ import zipfile
 
 from absl import logging
 from etils import epath
-import promise
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.utils import file_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import promise
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 

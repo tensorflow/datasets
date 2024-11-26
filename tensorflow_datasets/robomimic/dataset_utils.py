@@ -22,8 +22,8 @@ from typing import Any, Dict, List, Mapping
 from etils import epath
 import h5py
 import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 import tensorflow_datasets.public_api as tfds
-import tree
 
 
 
