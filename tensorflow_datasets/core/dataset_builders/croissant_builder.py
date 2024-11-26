@@ -37,6 +37,7 @@ print(ds['default'][0])
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+import json
 from typing import Any
 
 from etils import epath
@@ -355,7 +356,7 @@ class CroissantBuilder(
 
     return records.beam_reader(
         pipeline=pipeline
-    ) | 'Convert to TFDS format' >> beam.MapTuple(
+    ) | f'Convert to TFDS format for filters: {json.dumps(filters)}' >> beam.MapTuple(
         convert_to_tfds_format,
         features=self.info.features,
         record_set_id=record_set.id,
