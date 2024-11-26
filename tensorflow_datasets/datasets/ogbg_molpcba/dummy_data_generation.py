@@ -140,7 +140,7 @@ def save_to_path(path: Path, graphs: Iterable[ArrayDict], splits: ArrayDict):
   for column, column_vals in graphs_dict.items():
     column_save_name = data_path / get_save_name(column)
     column_df = pd.DataFrame(column_vals)
-    column_df.to_csv(
+    column_df.to_csv(  # pytype: disable=wrong-arg-types
         column_save_name, compression='gzip', header=False, index=None
     )
 
@@ -148,7 +148,7 @@ def save_to_path(path: Path, graphs: Iterable[ArrayDict], splits: ArrayDict):
   for split, split_indices in splits.items():
     split_save_name = split_path / ('%s.csv.gz' % split)
     split_df = pd.DataFrame(split_indices)
-    split_df.to_csv(
+    split_df.to_csv(  # pytype: disable=wrong-arg-types
         split_save_name, compression='gzip', header=False, index=None
     )
 
