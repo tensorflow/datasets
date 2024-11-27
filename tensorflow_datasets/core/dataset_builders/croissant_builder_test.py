@@ -31,16 +31,21 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 FileFormat = file_adapters.FileFormat
 
 
-DUMMY_ENTRIES = entries = [
-    {"index": i, "text": f"Dummy example {i}"} for i in range(2)
+DUMMY_ENTRIES = [
+    {
+        "index": i,
+        "text": f"Dummy example {i}",
+        "split": "train" if i == 0 else "test",
+    }
+    for i in range(2)
 ]
 DUMMY_ENTRIES_WITH_NONE_VALUES = [
-    {"index": 0, "text": "Dummy example 0"},
-    {"index": 1, "text": None},
+    {"split": "train", "index": 0, "text": "Dummy example 0"},
+    {"split": "test", "index": 1, "text": None},
 ]
 DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
-    {"index": 0, "text": "Dummy example 0"},
-    {"index": 1, "text": ""},
+    {"split": "train", "index": 0, "text": "Dummy example 0"},
+    {"split": "test", "index": 1, "text": ""},
 ]
 
 
@@ -173,6 +178,7 @@ def mock_croissant_dataset_builder(tmp_path, request):
   with testing.dummy_croissant_file(
       dataset_name=dataset_name,
       entries=request.param["entries"],
+      split_names=["train", "test"],
   ) as croissant_file:
     builder = croissant_builder.CroissantBuilder(
         jsonld=croissant_file,
@@ -203,8 +209,12 @@ def test_croissant_builder(crs_builder):
   assert crs_builder._info().description == "Dummy description."
   assert crs_builder._info().homepage == "https://dummy_url"
   assert crs_builder._info().redistribution_info.license == "Public"
-  assert len(crs_builder.metadata.record_sets) == 1
-  assert crs_builder.metadata.record_sets[0].id == "jsonl"
+  # One `split` and one `jsonl` recordset.
+  assert len(crs_builder.metadata.record_sets) == 2
+  assert set([rs.id for rs in crs_builder.metadata.record_sets]) == {
+      "jsonl",
+      "split",
+  }
   assert (
       crs_builder.metadata.ctx.conforms_to.value
       == "http://mlcommons.org/croissant/1.0"
@@ -228,11 +238,11 @@ def test_croissant_builder(crs_builder):
     ],
     indirect=["crs_builder"],
 )
-@pytest.mark.parametrize("split_name", ["all", "default"])
+@pytest.mark.parametrize("split_name", ["train", "test"])
 def test_download_and_prepare(crs_builder, expected_entries, split_name):
   crs_builder.download_and_prepare()
   data_source = crs_builder.as_data_source(split=split_name)
-  assert len(data_source) == 2
+  assert len(data_source) == 1
   for entry, expected_entry in zip(data_source, expected_entries):
     assert entry["index"] == expected_entry["index"]
     assert entry["text"].decode() == expected_entry["text"]

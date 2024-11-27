@@ -723,6 +723,7 @@ def dummy_croissant_file(
     entries: Sequence[dict[str, Any]] | None = None,
     raw_data_filename: epath.PathLike = 'raw_data.jsonl',
     croissant_filename: epath.PathLike = 'croissant.json',
+    split_names: Sequence[str] | None = None,
 ) -> Iterator[epath.Path]:
   """Yields temporary path to a dummy Croissant file.
 
@@ -732,13 +733,29 @@ def dummy_croissant_file(
   Args:
     dataset_name: The name of the dataset.
     entries: A list of dictionaries representing the dataset's entries. Each
-      dictionary should contain an 'index' and a 'text' key. If None, the
-      function will create two entries with indices 0 and 1 and dummy text.
-    raw_data_filename: Filename of the raw data file.
+      dictionary should contain an 'index', a 'text', and a `split` key. If
+      None, the function will create two entries with indices 0 and 1 and dummy
+      text, and with the first entry belonging to the split `train` and the
+      second to `test`.
+    raw_data_filename: Filename of the raw data file. If `split_names` is True,
+      the function will create a raw data file for each split, including the
+      split name before the file extension.
     croissant_filename: Filename of the Croissant JSON-LD file.
+    split_names: A list of split names to populate the split record set with. If
+      split_names are defined, they must match the `split` key in the entries.
+      If None, the function will create a split record set with the default
+      split names `train` and `test`. If `split_names` is defined, the `split`
+      key in the entries must match one of the split names.
   """
   if entries is None:
-    entries = [{'index': i, 'text': f'Dummy example {i}'} for i in range(2)]
+    entries = [
+        {
+            'index': i,
+            'text': f'Dummy example {i}',
+            'split': 'train' if i % 2 == 0 else 'test',
+        }
+        for i in range(2)
+    ]
 
   fields = [
       mlc.Field(
@@ -771,6 +788,39 @@ def dummy_croissant_file(
           fields=fields,
       )
   ]
+  if split_names:
+    record_sets[0].fields.append(
+        mlc.Field(
+            id='jsonl/split',
+            name='jsonl/split',
+            description='The dummy split.',
+            data_types=mlc.DataType.TEXT,
+            source=mlc.Source(
+                file_object='raw_data',
+                extract=mlc.Extract(file_property='fullpath'),
+                transforms=[mlc.Transform(regex='.*(.+).+jsonl$')],
+            ),
+            references=mlc.Source(field='split/name'),
+        ),
+    )
+    record_sets.append(
+        mlc.RecordSet(
+            id='split',
+            name='split',
+            key='split/name',
+            data_types=[mlc.DataType.SPLIT],
+            description='Dummy split.',
+            fields=[
+                mlc.Field(
+                    id='split/name',
+                    name='split/name',
+                    description='The dummy split name.',
+                    data_types=mlc.DataType.TEXT,
+                )
+            ],
+            data=[{'split/name': split_name} for split_name in split_names],
+        )
+    )
 
   with tempfile.TemporaryDirectory() as tempdir:
     tempdir = epath.Path(tempdir)
@@ -778,22 +828,42 @@ def dummy_croissant_file(
     # Write raw examples to tempdir/data.
     raw_data_dir = tempdir / 'data'
     raw_data_dir.mkdir()
-    raw_data_file = raw_data_dir / raw_data_filename
-    raw_data_file.write_text('\n'.join(map(json.dumps, entries)))
-
-    # Get the actual raw file's hash, set distribution and metadata.
-    raw_data_file_content = raw_data_file.read_text()
-    sha256 = hashlib.sha256(raw_data_file_content.encode()).hexdigest()
-    distribution = [
-        mlc.FileObject(
-            id='raw_data',
-            name='raw_data',
-            description='File with the data.',
-            encoding_format='application/jsonlines',
-            content_url=f'data/{raw_data_filename}',
-            sha256=sha256,
-        ),
-    ]
+    if split_names:
+      parts = str(raw_data_filename).split('.')
+      file_name, extension = '.'.join(parts[:-1]), parts[-1]
+      for split_name in split_names:
+        raw_data_file = raw_data_dir / (
+            file_name + '_' + split_name + '.' + extension
+        )
+        split_entries = [
+            entry for entry in entries if entry['split'] == split_name
+        ]
+        raw_data_file.write_text('\n'.join(map(json.dumps, split_entries)))
+      distribution = [
+          mlc.FileSet(
+              id='raw_data',
+              name='raw_data',
+              description='Files with the data.',
+              encoding_format='application/jsonlines',
+              includes=f'data/{file_name}*.{extension}',
+          ),
+      ]
+    else:
+      raw_data_file = raw_data_dir / raw_data_filename
+      raw_data_file.write_text('\n'.join(map(json.dumps, entries)))
+      # Get the actual raw file's hash, set distribution and metadata.
+      raw_data_file_content = raw_data_file.read_text()
+      sha256 = hashlib.sha256(raw_data_file_content.encode()).hexdigest()
+      distribution = [
+          mlc.FileObject(
+              id='raw_data',
+              name='raw_data',
+              description='File with the data.',
+              encoding_format='application/jsonlines',
+              content_url=f'data/{raw_data_filename}',
+              sha256=sha256,
+          ),
+      ]
     dummy_metadata = mlc.Metadata(
         name=dataset_name,
         description='Dummy description.',
@@ -807,7 +877,6 @@ def dummy_croissant_file(
         version='1.2.0',
         license='Public',
     )
-
     # Write Croissant JSON-LD to tempdir.
     croissant_file = tempdir / croissant_filename
     croissant_file.write_text(json.dumps(dummy_metadata.to_json(), indent=2))
