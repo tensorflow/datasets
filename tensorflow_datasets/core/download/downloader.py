@@ -15,6 +15,8 @@
 
 """Async download API with checksum verification. No business logic."""
 
+from __future__ import annotations
+
 from collections.abc import Iterable, Iterator
 import concurrent.futures
 import contextlib
@@ -57,7 +59,7 @@ class DownloadResult:
 
 
 @utils.memoize()
-def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
+def get_downloader(*args: Any, **kwargs: Any) -> _Downloader:
   return _Downloader(*args, **kwargs)
 
 
