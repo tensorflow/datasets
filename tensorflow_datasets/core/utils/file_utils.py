@@ -45,6 +45,11 @@ Path = epath.Path
 _REGISTERED_DATA_DIRS: set[Path] = set()
 _GLOB_CHARS = ['*', '?', '[']
 
+_INFO_FILE_NAMES = [
+    constants.FEATURES_FILENAME,
+    constants.DATASET_INFO_FILENAME,
+]
+
 
 @dataclasses.dataclass(frozen=True)
 class Permissions:
@@ -358,9 +363,6 @@ def _find_references_with_glob(
       TFDS before 4.0.0.
     glob_suffixes: list of file suffixes to use to create the glob for
       interesting TFDS files. Defaults to json files.
-
-  Yields:
-    all dataset references in the given folder.
   """
   if is_dataset_dir and is_data_dir:
     raise ValueError('Folder cannot be both a data dir and dataset dir!')
@@ -376,19 +378,19 @@ def _find_references_with_glob(
     dataset_name = folder.name
     stars = ['*/*/*', '*/*']
 
-  globs = [f'{star}.{suffix}' for star in stars for suffix in glob_suffixes]  # pylint:disable=g-complex-comprehension
+  globs: list[str] = []
+  for star in stars:
+    if glob_suffixes:
+      globs.extend([f'{star}.{suffix}' for suffix in glob_suffixes])
+    else:
+      globs.append(star)
 
   # Check files matching the globs and are files we are interested in.
   matched_files_per_folder = collections.defaultdict(set)
-  file_names = [
-      constants.FEATURES_FILENAME,
-      constants.DATASET_INFO_FILENAME,
-  ]
-
   for file in _find_files_with_glob(
       folder,
       globs=globs,
-      file_names=file_names,
+      file_names=_INFO_FILE_NAMES,
   ):
     matched_files_per_folder[file.parent].add(file.name)
 
