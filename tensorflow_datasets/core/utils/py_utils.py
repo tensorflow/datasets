@@ -334,6 +334,7 @@ def incomplete_file(
 ) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
   tmp_path = _tmp_file_name(path, subfolder=subfolder)
+  tmp_path.parent.mkdir(exist_ok=True)
   try:
     yield tmp_path
     tmp_path.replace(path)
