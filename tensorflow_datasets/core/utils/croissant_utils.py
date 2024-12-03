@@ -53,13 +53,15 @@ def get_tfds_dataset_name(dataset: mlc.Dataset) -> str:
   return conversion_utils.to_tfds_name(dataset_name)
 
 
-def get_record_set(record_set_id: str, metadata: mlc.Metadata) -> mlc.RecordSet:
+def get_record_set(
+    tfds_config_name: str, metadata: mlc.Metadata
+) -> mlc.RecordSet:
   """Returns the desired record set from a dataset's metadata."""
   for record_set in metadata.record_sets:
-    if conversion_utils.to_tfds_name(record_set.id) == record_set_id:
+    if conversion_utils.to_tfds_name(record_set.id) == tfds_config_name:
       return record_set
   raise ValueError(
-      f"Did not find any record set with the name {record_set_id}."
+      f"Did not find any record set with the name {tfds_config_name}."
   )
 
 
