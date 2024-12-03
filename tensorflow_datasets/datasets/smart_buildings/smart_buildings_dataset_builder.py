@@ -198,6 +198,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         pipeline
         | f'CreateDates_{year}' >> beam.Create(all_dates)
         | f'ProcessDate_{year}' >> beam.FlatMap(process_date, path=path)
+        | f'Reshuffle_{year}' >> beam.Reshuffle()
     )
 
 
