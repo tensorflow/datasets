@@ -256,6 +256,9 @@ def add_generation_argument_group(parser: argparse.ArgumentParser):
       '--max_shard_size_mb', type=int, help='The max shard size in megabytes.'
   )
   generation_group.add_argument(
+      '--num_shards', type=int, help='The number of shards to write to.'
+  )
+  generation_group.add_argument(
       '--num-processes',
       type=int,
       default=1,

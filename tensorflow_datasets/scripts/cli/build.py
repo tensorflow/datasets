@@ -381,6 +381,8 @@ def _make_download_config(
   kwargs = {}
   if args.max_shard_size_mb:
     kwargs['max_shard_size'] = args.max_shard_size_mb << 20
+  if args.num_shards:
+    kwargs['num_shards'] = args.num_shards
   if args.download_config:
     kwargs.update(json.loads(args.download_config))
 
