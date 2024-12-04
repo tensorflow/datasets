@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for dataset_metadata."""
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_metadata
 from tensorflow_datasets.core.utils import resource_utils
