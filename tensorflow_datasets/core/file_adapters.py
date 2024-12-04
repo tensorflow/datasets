@@ -27,11 +27,11 @@ from typing import Any, ClassVar, Type, TypeVar
 
 from etils import epy
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
+from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_module
 from tensorflow_datasets.core.utils.lazy_imports_utils import parquet as pq
 from tensorflow_datasets.core.utils.lazy_imports_utils import pyarrow as pa
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-
 
 with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
@@ -324,6 +324,14 @@ class ArrayRecordFileAdapter(FileAdapter):
     for _, serialized_example in iterator:
       writer.write(serialized_example)
     writer.close()
+
+  @classmethod
+  def num_examples(cls, filename: epath.PathLike) -> int:
+    """Returns the number of examples in the given file."""
+    data_source = array_record_data_source.ArrayRecordDataSource(
+        paths=[os.fspath(filename)]
+    )
+    return len(data_source)
 
 
 class ParquetFileAdapter(FileAdapter):
