@@ -550,12 +550,14 @@ class SplitBuilder:
       logging.info(
           '`nondeterministic_order` is set to True, using NoShuffleBeamWriter'
       )
+      num_shards = self._shard_config.num_shards if self._shard_config else None
       beam_writer = writer_lib.NoShuffleBeamWriter(
           serializer=serializer,
           file_format=file_adapters.FileFormat.from_value(
               filename_template.filetype_suffix
           ),
           filename_template=filename_template,
+          num_shards=num_shards,
       )
     else:
       logging.info('Deterministic ordering is enabled, using BeamWriter')

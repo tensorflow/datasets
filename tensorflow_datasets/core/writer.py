@@ -729,6 +729,7 @@ class NoShuffleBeamWriter:
       serializer: example_serializer.Serializer,
       filename_template: naming.ShardedFileTemplate,
       file_format: file_adapters.FileFormat,
+      num_shards: int | None = None,
   ):
     """Init BeamWriter.
 
@@ -740,6 +741,8 @@ class NoShuffleBeamWriter:
       serializer: class that can serialize examples.
       filename_template: template to format sharded filenames.
       file_format: the file format to use.
+      num_shards: the number of shards to use. If `None`, then the number of
+        shards is calculated automatically.
     """
     self._original_state = dict(
         serializer=serializer,
@@ -750,6 +753,7 @@ class NoShuffleBeamWriter:
     self._file_adapter = file_adapters.ADAPTER_FOR_FORMAT[self._file_format]
     self._filename_template = filename_template
     self._serializer = serializer
+    self._num_shards = num_shards
 
   @functools.lru_cache()
   def _get_counter(self, name: str, namespace: str = "BeamWriter"):
@@ -775,14 +779,17 @@ class NoShuffleBeamWriter:
 
   def write_from_pcollection(self, examples_pcollection):
     """Returns PTransform to write (key, example) PCollection."""
-    return (
+    serialized_examples = (
         examples_pcollection
         | "Shuffle" >> beam.Reshuffle()
         | "Serialize" >> beam.Map(self._serialize_example)
-        | "Write"
-        >> self._file_adapter.beam_sink(
-            filename_template=self._filename_template
-        )
+    )
+    if self._num_shards is not None:
+      serialized_examples = serialized_examples | "Reshard" >> beam.Reshuffle(
+          self._num_shards
+      )
+    return serialized_examples | "Write" >> self._file_adapter.beam_sink(
+        filename_template=self._filename_template
     )
 
   def finalize(self) -> tuple[list[int], int]:
