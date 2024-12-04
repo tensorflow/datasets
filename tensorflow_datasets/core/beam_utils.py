@@ -19,7 +19,6 @@ import functools
 from typing import Any
 
 from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
@@ -30,15 +29,13 @@ __all__ = [
 ]
 
 
-@lazy_imports_lib.beam_ptransform_fn
 def ReadFromTFDS(  # pylint: disable=invalid-name
-    pipeline,
     builder: dataset_builder.DatasetBuilder,
     split: str,
     workers_per_shard: int = 1,
     **as_dataset_kwargs: Any,
 ):
-  """Creates a beam pipeline yielding TFDS examples.
+  """Creates a beam PCollection yielding TFDS examples.
 
   Each dataset shard will be processed in parallel.
 
@@ -63,7 +60,6 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
   examples will be used.
 
   Args:
-    pipeline: beam pipeline (automatically set)
     builder: Dataset builder to load
     split: Split name to load (e.g. `train+test`, `train`)
     workers_per_shard: number of workers that should read a shard in parallel.
@@ -132,7 +128,7 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
         value=len(file_instructions),
         namespace='ReadFromTFDS',
     )
-  return pipeline | beam.Create(file_instructions) | beam.FlatMap(load_shard)
+  return beam.Create(file_instructions) | beam.FlatMap(load_shard)
 
 
 @functools.lru_cache(None)
