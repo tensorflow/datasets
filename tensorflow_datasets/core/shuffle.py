@@ -21,9 +21,8 @@ import os
 import struct
 from typing import Optional
 import uuid
-
 from absl import logging
-import six
+from etils import epath
 from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import type_utils
@@ -57,14 +56,14 @@ class DuplicatedKeysError(Exception):
     self.item2 = item2
 
 
-def _hkey_to_bytes(hkey):
+def _hkey_to_bytes(hkey: int) -> bytes:
   """Converts 128 bits integer hkey to binary representation."""
   max_int64 = 0xFFFFFFFFFFFFFFFF
   return struct.pack('=QQ', (hkey >> 64) & max_int64, hkey & max_int64)
 
 
-def _read_hkey(buff):
-  """Reads from fobj and returns hkey (128 bites integer)."""
+def _read_hkey(buff: bytes) -> int:
+  """Reads from fobj and returns hkey (128 bits integer)."""
   a, b = struct.unpack('=QQ', buff)
   return (a << 64) | b
 
@@ -99,7 +98,7 @@ def _increase_open_files_limit():
 
 
 def get_bucket_number(
-    hkey,
+    hkey: int,
     num_buckets: int,
     max_hkey: Optional[int] = None,
 ) -> int:
@@ -130,11 +129,11 @@ class _Bucket(object):
     ...
   """
 
-  def __init__(self, path):
+  def __init__(self, path: epath.Path):
     """Initialize a _Bucket instance.
 
     Args:
-      path (str): path to bucket file, where to write to or read from.
+      path: Path to bucket file, where to write to or read from.
     """
     self._path = path
     self._fobj = None
@@ -142,13 +141,13 @@ class _Bucket(object):
     self._size = 0
 
   @property
-  def size(self):
+  def size(self) -> int:
     return self._size
 
-  def __len__(self):
+  def __len__(self) -> int:
     return self._length
 
-  def add(self, key, data):
+  def add(self, key: type_utils.Key, data: bytes):
     """Adds (key, data) to bucket.
 
     Args:
@@ -216,18 +215,18 @@ class Shuffler(object):
 
   def __init__(
       self,
-      dirpath,
-      hash_salt,
+      dirpath: epath.PathLike,
+      hash_salt: str | bytes,
       disable_shuffling: bool = False,
       ignore_duplicates: bool = False,
   ):
     """Initialize Shuffler.
 
     Args:
-      dirpath (string): directory in which to store temporary files.
-      hash_salt (string or bytes): salt to hash keys.
-      disable_shuffling (bool): specify whether to shuffle by hashing the key.
-      ignore_duplicates: whether to ignore duplicated examples with the same
+      dirpath: Path to the directory in which to store temporary files.
+      hash_salt: Salt to hash keys.
+      disable_shuffling: Specifies whether to shuffle by hashing the key.
+      ignore_duplicates: Whether to ignore duplicated examples with the same
         key. If there are multiple examples with the same key, the first one is
         kept. If this is False, then a `DuplicatedKeysError` is raised.
     """
@@ -238,7 +237,7 @@ class Shuffler(object):
     self._buckets: list[_Bucket] = []
     for i in range(BUCKETS_NUMBER):
       bucket_name = 'bucket_%s_%03d.tmp' % (grp_name, i)
-      path = os.path.join(dirpath, bucket_name)
+      path = epath.Path(dirpath) / bucket_name
       self._buckets.append(_Bucket(path))
     self._read_only = False
     self._total_bytes = 0
@@ -263,11 +262,11 @@ class Shuffler(object):
   def num_examples(self) -> int:
     return self._num_examples
 
-  def _add_to_bucket(self, hkey, data) -> None:
+  def _add_to_bucket(self, hkey: int, data: bytes) -> None:
     bucket_number = get_bucket_number(hkey=hkey, num_buckets=BUCKETS_NUMBER)
     self._buckets[bucket_number].add(hkey, data)
 
-  def _add_to_mem_buffer(self, hkey, data) -> None:
+  def _add_to_mem_buffer(self, hkey: int, data: bytes) -> None:
     self._mem_buffer.append((hkey, data))
     if self._total_bytes > MAX_MEM_BUFFER_SIZE:
       for hkey, data in self._mem_buffer:
@@ -275,13 +274,13 @@ class Shuffler(object):
       self._mem_buffer = None
       self._in_memory = False
 
-  def add(self, key, data) -> bool:
+  def add(self, key: type_utils.Key, data: bytes) -> bool:
     """Add (key, data) to shuffler."""
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
-    if not isinstance(data, six.binary_type):
+    if not isinstance(data, bytes):
       raise AssertionError(
-          'Only bytes (not %s) can be stored in Shuffler!' % (type(data))
+          f'Only bytes (not {type(data)}) can be stored in Shuffler!'
       )
     hkey = self._hasher.hash_key(key)
     if self._ignore_duplicates:

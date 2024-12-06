@@ -24,6 +24,8 @@ import apache_beam as beam
 import psutil
 import pytest
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import writer as writer_lib
 

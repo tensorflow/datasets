@@ -505,18 +505,23 @@ class SplitBuilder:
         example_writer=self._example_writer,
         ignore_duplicates=self._ignore_duplicates,
     )
-    for key, example in utils.tqdm(
-        generator,
-        desc=f'Generating {split_name} examples...',
-        unit=' examples',
-        total=total_num_examples,
-        leave=False,
-        mininterval=1.0,
+    for i, (key, example) in enumerate(
+        utils.tqdm(
+            generator,
+            desc=f'Generating {split_name} examples...',
+            unit=' examples',
+            total=total_num_examples,
+            leave=False,
+            mininterval=1.0,
+        )
     ):
       try:
         example = self._features.encode_example(example)
       except Exception as e:  # pylint: disable=broad-except
         utils.reraise(e, prefix=f'Failed to encode example:\n{example}\n')
+      if disable_shuffling and not isinstance(key, int):
+        # If `disable_shuffling` is set to True, the key must be an integer.
+        key = i
       writer.write(key, example)
     try:
       shard_lengths, total_size = writer.finalize()
