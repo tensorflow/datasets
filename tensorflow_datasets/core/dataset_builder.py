@@ -924,6 +924,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
       read_config: read_config_lib.ReadConfig | None = None,
       as_supervised: bool = False,
+      file_format: str | file_adapters.FileFormat | None = None,
   ):
     # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
@@ -993,6 +994,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         a 2-tuple structure `(input, label)` according to
         `builder.info.supervised_keys`. If `False`, the default, the returned
         `tf.data.Dataset` will have a dictionary with all the features.
+      file_format: if the dataset is stored in multiple file formats, then this
+        argument can be used to specify the file format to load. If not
+        specified, the default file format is used.
 
     Returns:
       `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
@@ -1026,6 +1030,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         decoders=decoders,
         read_config=read_config,
         as_supervised=as_supervised,
+        file_format=file_format,
     )
     all_ds = tree.map_structure(build_single_dataset, split)
     return all_ds
@@ -1038,11 +1043,14 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
       read_config: read_config_lib.ReadConfig,
       as_supervised: bool,
+      file_format: str | file_adapters.FileFormat | None = None,
   ) -> tf.data.Dataset:
     """as_dataset for a single split."""
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
+
+    file_format = file_adapters.FileFormat.from_value(file_format)
 
     # Build base dataset
     ds = self._as_dataset(
@@ -1050,6 +1058,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         shuffle_files=shuffle_files,
         decoders=decoders,
         read_config=read_config,
+        file_format=file_format,
     )
     # Auto-cache small datasets which are small enough to fit in memory.
     if self._should_cache_ds(
@@ -1235,6 +1244,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
       read_config: read_config_lib.ReadConfig | None = None,
       shuffle_files: bool = False,
+      file_format: str | file_adapters.FileFormat | None = None,
   ) -> tf.data.Dataset:
     """Constructs a `tf.data.Dataset`.
 
@@ -1250,6 +1260,9 @@ class DatasetBuilder(registered.RegisteredDataset):
       read_config: `tfds.ReadConfig`
       shuffle_files: `bool`, whether to shuffle the input files. Optional,
         defaults to `False`.
+      file_format: if the dataset is stored in multiple file formats, then this
+        argument can be used to specify the file format to load. If not
+        specified, the default file format is used.
 
     Returns:
       `tf.data.Dataset`
@@ -1495,6 +1508,7 @@ class FileReaderBuilder(DatasetBuilder):
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
       read_config: read_config_lib.ReadConfig,
       shuffle_files: bool,
+      file_format: file_adapters.FileFormat | None = None,
   ) -> tf.data.Dataset:
     # Partial decoding
     # TODO(epot): Should be moved inside `features.decode_example`
@@ -1511,7 +1525,7 @@ class FileReaderBuilder(DatasetBuilder):
     reader = reader_lib.Reader(
         self.data_dir,
         example_specs=example_specs,
-        file_format=self.info.file_format,
+        file_format=file_format or self.info.file_format,
     )
     decode_fn = functools.partial(features.decode_example, decoders=decoders)
     return reader.read(

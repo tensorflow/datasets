@@ -226,7 +226,7 @@ def _try_load_from_files_first(
     **builder_kwargs: Any,
 ) -> bool:
   """Returns True if files should be used rather than code."""
-  if set(builder_kwargs) - {'version', 'config', 'data_dir'}:
+  if set(builder_kwargs) - {'version', 'config', 'data_dir', 'file_format'}:
     return False  # Has extra kwargs, requires original code.
   elif builder_kwargs.get('version') == 'experimental_latest':
     return False  # Requested version requires original code
@@ -529,6 +529,7 @@ def load(
     download_and_prepare_kwargs: dict[str, Any] | None = None,
     as_dataset_kwargs: dict[str, Any] | None = None,
     try_gcs: bool = False,
+    file_format: str | file_adapters.FileFormat | None = None,
 ):
   # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
@@ -636,6 +637,9 @@ def load(
       fully bypass GCS, please use `try_gcs=False` and
       `download_and_prepare_kwargs={'download_config':
       tfds.core.download.DownloadConfig(try_download_gcs=False)})`.
+    file_format: if the dataset is stored in multiple file formats, then this
+      argument can be used to specify the file format to load. If not specified,
+      the default file format is used.
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
