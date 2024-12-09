@@ -563,9 +563,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         data_dir=self.data_dir_root,
     )
 
-  def get_file_spec(self, split: str) -> str:
+  def get_file_spec(self, split: str) -> str | None:
     """Returns the file spec of the split."""
-    split_info: splits_lib.SplitInfo = self.info.splits[split]
+    split_info = self.info.splits[split]
     return split_info.file_spec(self.info.file_format)
 
   def is_prepared(self) -> bool:
@@ -815,6 +815,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       *,
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
       deserialize_method: decode.DeserializeMethod = decode.DeserializeMethod.DESERIALIZE_AND_DECODE,
+      file_format: str | file_adapters.FileFormat | None = None,
   ) -> ListOrTreeOrElem[Sequence[Any]]:
     """Constructs an `ArrayRecordDataSource`.
 
@@ -833,6 +834,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         the features. Decoding is only supported if the examples are tf
         examples. Note that if the deserialize_method method is other than
         PARSE_AND_DECODE, then the `decoders` argument is ignored.
+      file_format: if the dataset is stored in multiple file formats, then this
+        can be used to specify which format to use. If not provided, we will
+        default to the first available format.
 
     Returns:
       `Sequence` if `split`,
@@ -868,9 +872,19 @@ class DatasetBuilder(registered.RegisteredDataset):
           "Dataset info file format is not set! For random access, one of the"
           f" following formats is required: {random_access_formats_msg}"
       )
-
     suitable_formats = available_formats.intersection(random_access_formats)
-    if suitable_formats:
+    if not suitable_formats:
+      raise NotImplementedError(unsupported_format_msg)
+
+    if file_format is not None:
+      file_format = file_adapters.FileFormat.from_value(file_format)
+      if file_format not in suitable_formats:
+        raise ValueError(
+            f"Requested file format {file_format} is not available for this"
+            f" dataset. Available formats: {available_formats}"
+        )
+      chosen_format = file_format
+    else:
       chosen_format = suitable_formats.pop()
       logging.info(
           "Found random access formats: %s. Chose to use %s. Overriding file"
@@ -878,12 +892,11 @@ class DatasetBuilder(registered.RegisteredDataset):
           ", ".join([f.name for f in suitable_formats]),
           chosen_format,
       )
-      # Change the dataset info to read from a random access format.
-      info.set_file_format(
-          chosen_format, override=True, override_if_initialized=True
-      )
-    else:
-      raise NotImplementedError(unsupported_format_msg)
+
+    # Change the dataset info to read from a random access format.
+    info.set_file_format(
+        chosen_format, override=True, override_if_initialized=True
+    )
 
     # Create a dataset for each of the given splits
     def build_single_data_source(split: str) -> Sequence[Any]:
@@ -924,6 +937,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
       read_config: read_config_lib.ReadConfig | None = None,
       as_supervised: bool = False,
+      file_format: str | file_adapters.FileFormat | None = None,
   ):
     # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
@@ -993,6 +1007,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         a 2-tuple structure `(input, label)` according to
         `builder.info.supervised_keys`. If `False`, the default, the returned
         `tf.data.Dataset` will have a dictionary with all the features.
+      file_format: if the dataset is stored in multiple file formats, then this
+        argument can be used to specify the file format to load. If not
+        specified, the default file format is used.
 
     Returns:
       `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
@@ -1026,6 +1043,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         decoders=decoders,
         read_config=read_config,
         as_supervised=as_supervised,
+        file_format=file_format,
     )
     all_ds = tree.map_structure(build_single_dataset, split)
     return all_ds
@@ -1038,19 +1056,29 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
       read_config: read_config_lib.ReadConfig,
       as_supervised: bool,
+      file_format: str | file_adapters.FileFormat | None = None,
   ) -> tf.data.Dataset:
     """as_dataset for a single split."""
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
+    if file_format is not None:
+      file_format = file_adapters.FileFormat.from_value(file_format)
+
     # Build base dataset
-    ds = self._as_dataset(
-        split=split,
-        shuffle_files=shuffle_files,
-        decoders=decoders,
-        read_config=read_config,
-    )
+    as_dataset_kwargs = {
+        "split": split,
+        "shuffle_files": shuffle_files,
+        "decoders": decoders,
+        "read_config": read_config,
+    }
+    # Not all dataset builder classes support file_format, so only pass it if
+    # it's supported.
+    if "file_format" in inspect.signature(self._as_dataset).parameters:
+      as_dataset_kwargs["file_format"] = file_format
+    ds = self._as_dataset(**as_dataset_kwargs)
+
     # Auto-cache small datasets which are small enough to fit in memory.
     if self._should_cache_ds(
         split=split, shuffle_files=shuffle_files, read_config=read_config
@@ -1235,6 +1263,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None = None,
       read_config: read_config_lib.ReadConfig | None = None,
       shuffle_files: bool = False,
+      file_format: str | file_adapters.FileFormat | None = None,
   ) -> tf.data.Dataset:
     """Constructs a `tf.data.Dataset`.
 
@@ -1250,6 +1279,9 @@ class DatasetBuilder(registered.RegisteredDataset):
       read_config: `tfds.ReadConfig`
       shuffle_files: `bool`, whether to shuffle the input files. Optional,
         defaults to `False`.
+      file_format: if the dataset is stored in multiple file formats, then this
+        argument can be used to specify the file format to load. If not
+        specified, the default file format is used.
 
     Returns:
       `tf.data.Dataset`
@@ -1487,6 +1519,10 @@ class FileReaderBuilder(DatasetBuilder):
 
   @functools.cached_property
   def _example_specs(self):
+    if self.info.features is None:
+      raise ValueError(
+          f"Features are not set for dataset {self.name} in {self.data_dir}!"
+      )
     return self.info.features.get_serialized_info()
 
   def _as_dataset(  # pytype: disable=signature-mismatch  # overriding-parameter-type-checks
@@ -1495,6 +1531,7 @@ class FileReaderBuilder(DatasetBuilder):
       decoders: TreeDict[decode.partial_decode.DecoderArg] | None,
       read_config: read_config_lib.ReadConfig,
       shuffle_files: bool,
+      file_format: file_adapters.FileFormat | None = None,
   ) -> tf.data.Dataset:
     # Partial decoding
     # TODO(epot): Should be moved inside `features.decode_example`
@@ -1508,10 +1545,15 @@ class FileReaderBuilder(DatasetBuilder):
       example_specs = self._example_specs
       decoders = decoders  # pylint: disable=self-assigning-variable
 
+    if features is None:
+      raise ValueError(
+          f"Features are not set for dataset {self.name} in {self.data_dir}!"
+      )
+
     reader = reader_lib.Reader(
         self.data_dir,
         example_specs=example_specs,
-        file_format=self.info.file_format,
+        file_format=file_format or self.info.file_format,
     )
     decode_fn = functools.partial(features.decode_example, decoders=decoders)
     return reader.read(

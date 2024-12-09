@@ -20,6 +20,7 @@ from __future__ import annotations
 from collections.abc import Iterable, Iterator, Mapping, Sequence
 import dataclasses
 import difflib
+import inspect
 import posixpath
 import re
 import textwrap
@@ -226,7 +227,7 @@ def _try_load_from_files_first(
     **builder_kwargs: Any,
 ) -> bool:
   """Returns True if files should be used rather than code."""
-  if set(builder_kwargs) - {'version', 'config', 'data_dir'}:
+  if set(builder_kwargs) - {'version', 'config', 'data_dir', 'file_format'}:
     return False  # Has extra kwargs, requires original code.
   elif builder_kwargs.get('version') == 'experimental_latest':
     return False  # Requested version requires original code
@@ -485,10 +486,13 @@ def _fetch_builder(
     data_dir: epath.PathLike | None,
     builder_kwargs: dict[str, Any] | None,
     try_gcs: bool,
+    file_format: str | file_adapters.FileFormat | None = None,
 ) -> dataset_builder.DatasetBuilder:
   """Fetches the `tfds.core.DatasetBuilder` by name."""
   if builder_kwargs is None:
     builder_kwargs = {}
+  if file_format is not None:
+    builder_kwargs['file_format'] = file_format
   return builder(name, data_dir=data_dir, try_gcs=try_gcs, **builder_kwargs)
 
 
@@ -529,6 +533,7 @@ def load(
     download_and_prepare_kwargs: dict[str, Any] | None = None,
     as_dataset_kwargs: dict[str, Any] | None = None,
     try_gcs: bool = False,
+    file_format: str | file_adapters.FileFormat | None = None,
 ):
   # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
@@ -636,6 +641,9 @@ def load(
       fully bypass GCS, please use `try_gcs=False` and
       `download_and_prepare_kwargs={'download_config':
       tfds.core.download.DownloadConfig(try_download_gcs=False)})`.
+    file_format: if the dataset is stored in multiple file formats, then this
+      argument can be used to specify the file format to load. If not specified,
+      the default file format is used.
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
@@ -648,10 +656,10 @@ def load(
       Split-specific information is available in `ds_info.splits`.
   """  # fmt: skip
   dbuilder = _fetch_builder(
-      name,
-      data_dir,
-      builder_kwargs,
-      try_gcs,
+      name=name,
+      data_dir=data_dir,
+      builder_kwargs=builder_kwargs,
+      try_gcs=try_gcs,
   )
   _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
 
@@ -664,6 +672,8 @@ def load(
   as_dataset_kwargs.setdefault('decoders', decoders)
   as_dataset_kwargs.setdefault('shuffle_files', shuffle_files)
   as_dataset_kwargs.setdefault('read_config', read_config)
+  if 'file_format' in inspect.signature(dbuilder.as_dataset).parameters:
+    as_dataset_kwargs.setdefault('file_format', file_format)
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:

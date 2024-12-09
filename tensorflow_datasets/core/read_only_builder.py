@@ -33,6 +33,7 @@ with epy.lazy_imports():
   from etils import etree
   from tensorflow_datasets.core import dataset_builder
   from tensorflow_datasets.core import dataset_info
+  from tensorflow_datasets.core import file_adapters
   from tensorflow_datasets.core import logging as tfds_logging
   from tensorflow_datasets.core import naming
   from tensorflow_datasets.core import registered
@@ -57,6 +58,7 @@ class ReadOnlyBuilder(
       builder_dir: epath.PathLike,
       *,
       info_proto: dataset_info_pb2.DatasetInfo | None = None,
+      file_format: str | file_adapters.FileFormat | None = None,
   ):
     """Constructor.
 
@@ -66,6 +68,8 @@ class ReadOnlyBuilder(
       info_proto: DatasetInfo describing the name, config, etc of the requested
         dataset. Note that this overwrites dataset info that may be present in
         builder_dir.
+      file_format: The desired file format to use for the dataset. If not
+        specified, the file format in the DatasetInfo is used.
 
     Raises:
       FileNotFoundError: If the builder_dir does not exist.
@@ -74,6 +78,15 @@ class ReadOnlyBuilder(
     if not info_proto:
       info_proto = dataset_info.read_proto_from_builder_dir(builder_dir)
     self._info_proto = info_proto
+    if file_format is not None:
+      file_format = file_adapters.FileFormat.from_value(file_format)
+      available_formats = set([self._info_proto.file_format])
+      available_formats.update(self._info_proto.alternative_file_formats)
+      if file_format.file_suffix not in available_formats:
+        raise ValueError(
+            f'File format {file_format.file_suffix} does not match the file'
+            f' formats in the DatasetInfo: {sorted(available_formats)}.'
+        )
 
     self.name = info_proto.name
     self.VERSION = version_lib.Version(info_proto.version)  # pylint: disable=invalid-name
@@ -92,6 +105,7 @@ class ReadOnlyBuilder(
         data_dir=builder_dir,
         config=builder_config,
         version=info_proto.version,
+        file_format=file_format,
     )
     self.assert_is_not_blocked()
 
@@ -154,6 +168,7 @@ class ReadOnlyBuilder(
 
 def builder_from_directory(
     builder_dir: epath.PathLike,
+    file_format: str | file_adapters.FileFormat | None = None,
 ) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
@@ -171,11 +186,13 @@ def builder_from_directory(
   Args:
     builder_dir: Path of the directory containing the dataset to read ( e.g.
       `~/tensorflow_datasets/mnist/3.0.0/`).
+    file_format: The desired file format to use for the dataset. If not
+      specified, the default file format in the DatasetInfo is used.
 
   Returns:
     builder: `tfds.core.DatasetBuilder`, builder for dataset at the given path.
   """
-  return ReadOnlyBuilder(builder_dir=builder_dir)
+  return ReadOnlyBuilder(builder_dir=builder_dir, file_format=file_format)
 
 
 def builder_from_directories(
@@ -308,7 +325,8 @@ def builder_from_files(
         f'and that it has been generated in: {data_dirs}. If the dataset has'
         ' configs, you might have to specify the config name.'
     )
-  return builder_from_directory(builder_dir)
+  file_format = builder_kwargs.pop('file_format', None)
+  return builder_from_directory(builder_dir, file_format=file_format)
 
 
 def _find_builder_dir(name: str, **builder_kwargs: Any) -> epath.Path | None:
@@ -339,6 +357,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> epath.Path | None:
   version = str(version) if version else None
   config = builder_kwargs.pop('config', None)
   data_dir = builder_kwargs.pop('data_dir', None)
+  _ = builder_kwargs.pop('file_format', None)
 
   # Builder cannot be found if it uses:
   # * namespace
