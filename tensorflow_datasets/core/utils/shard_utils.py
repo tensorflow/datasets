@@ -20,9 +20,10 @@ This logic is shared between:
  - tfrecord_writer, to read sharded bucket files (temp files), based on final
  sharding needs.
 """
+
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Iterable, Sequence
 import dataclasses
 import math
 import os

@@ -240,6 +240,5 @@ class FileInstructionTest(testing.TestCase, parameterized.TestCase):
     with self.assertRaisesRegex(ValueError, expected_regex=msg):
       shard_utils.FileInstruction(filename, skip, take, examples_in_shard)
 
-
 if __name__ == '__main__':
   testing.test_main()
