@@ -612,6 +612,7 @@ class BeamWriter:
         hkey=key, num_buckets=num_shards, max_hkey=largest_key
     )
     self._get_distribution(name="ShardDistribution").update(shard_number)
+    self.inc_counter(f"{self._filename_template.split}.shard_{shard_number}")
     return (shard_number, key_serialized_example)
 
   def _store_split_info(
