@@ -495,7 +495,7 @@ def list_dataset_variants(
 
   Yields:
     all variants of the given dataset.
-  """
+  """  # fmt: skip
   dataset_dir = epath.Path(dataset_dir)
   references = {}
   for reference in _find_references_with_glob(
@@ -541,7 +541,7 @@ def list_datasets_in_data_dir(
   Yields:
     references to the datasets found in `data_dir`. The references include the
     data dir.
-  """
+  """  # fmt: skip
   num_datasets = 0
   num_variants = 0
   for dataset_dir in epath.Path(data_dir).iterdir():
