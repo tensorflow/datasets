@@ -17,9 +17,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 import dataclasses
-from typing import Callable, Optional, Sequence, Union, cast
+from typing import Callable, cast
 
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -91,32 +93,36 @@ class ReadConfig:
       False if input files have been tempered with and they don't mind missing
       records or have too many of them.
     override_buffer_size: number of bytes to pass to file readers for buffering.
+    file_format: if the dataset is stored in multiple file formats, then this
+      argument can be used to specify the file format to load. If not specified,
+      the default file format is used.
   """
   # pyformat: enable
 
   # General tf.data.Dataset parametters
-  options: Optional[tf.data.Options] = None
+  options: tf.data.Options | None = None
   try_autocache: bool = True
   repeat_filenames: bool = False
   add_tfds_id: bool = False
   # tf.data.Dataset.shuffle parameters
-  shuffle_seed: Optional[int] = None
-  shuffle_reshuffle_each_iteration: Optional[bool] = None
+  shuffle_seed: int | None = None
+  shuffle_reshuffle_each_iteration: bool | None = None
   # Interleave parameters
   # Ideally, we should switch interleave values to None to dynamically set
   # those value depending on the user system. However, this would make the
   # generation order non-deterministic accross machines.
-  interleave_cycle_length: Union[Optional[int], _MISSING] = MISSING
-  interleave_block_length: Optional[int] = 16
-  input_context: Optional[tf.distribute.InputContext] = None
-  experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None
+  interleave_cycle_length: int | None | _MISSING = MISSING
+  interleave_block_length: int | None = 16
+  input_context: tf.distribute.InputContext | None = None
+  experimental_interleave_sort_fn: InterleaveSortFn | None = None
   skip_prefetch: bool = False
-  num_parallel_calls_for_decode: Optional[int] = None
+  num_parallel_calls_for_decode: int | None = None
   # Cast to an `int`. `__post_init__` will ensure the type invariant.
-  num_parallel_calls_for_interleave_files: Optional[int] = cast(int, MISSING)
+  num_parallel_calls_for_interleave_files: int | None = cast(int, MISSING)
   enable_ordering_guard: bool = True
   assert_cardinality: bool = True
-  override_buffer_size: Optional[int] = None
+  override_buffer_size: int | None = None
+  file_format: str | file_adapters.FileFormat | None = None
 
   def __post_init__(self):
     self.options = self.options or tf.data.Options()
@@ -124,3 +130,8 @@ class ReadConfig:
       self.num_parallel_calls_for_decode = tf.data.AUTOTUNE
     if self.num_parallel_calls_for_interleave_files == MISSING:
       self.num_parallel_calls_for_interleave_files = tf.data.AUTOTUNE
+    if isinstance(self.file_format, str):
+      self.file_format = file_adapters.FileFormat.from_value(self.file_format)
+
+  def replace(self, **kwargs) -> ReadConfig:
+    return dataclasses.replace(self, **kwargs)

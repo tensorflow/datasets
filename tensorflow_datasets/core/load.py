@@ -20,7 +20,6 @@ from __future__ import annotations
 from collections.abc import Iterable, Iterator, Mapping, Sequence
 import dataclasses
 import difflib
-import inspect
 import posixpath
 import re
 import textwrap
@@ -671,9 +670,10 @@ def load(
   as_dataset_kwargs.setdefault('batch_size', batch_size)
   as_dataset_kwargs.setdefault('decoders', decoders)
   as_dataset_kwargs.setdefault('shuffle_files', shuffle_files)
+  if file_format is not None:
+    read_config = read_config or read_config_lib.ReadConfig()
+    read_config = read_config.replace(file_format=file_format)
   as_dataset_kwargs.setdefault('read_config', read_config)
-  if 'file_format' in inspect.signature(dbuilder.as_dataset).parameters:
-    as_dataset_kwargs.setdefault('file_format', file_format)
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:
