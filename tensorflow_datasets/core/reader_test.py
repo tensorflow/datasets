@@ -76,7 +76,7 @@ class ReaderTest(testing.TestCase):
     with mock.patch.object(
         example_parser, 'ExampleParser', testing.DummyParser
     ):
-      self.reader = reader_lib.Reader(self.tmp_dir, 'some_spec')
+      self.reader = reader_lib.Reader(self.tmp_dir, 'tfrecord')
       self.reader.read = functools.partial(
           self.reader.read,
           read_config=read_config_lib.ReadConfig(),

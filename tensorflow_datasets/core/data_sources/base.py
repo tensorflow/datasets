@@ -20,6 +20,7 @@ import dataclasses
 import typing
 from typing import Any, Generic, Iterable, Protocol, SupportsIndex, TypeVar
 
+from absl import logging
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits as splits_lib

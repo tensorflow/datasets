@@ -17,10 +17,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 import functools
 import os
 import re
-from typing import Any, Callable, List, NamedTuple, Optional, Sequence
+from typing import Any, Callable, NamedTuple
 
 from absl import logging
 import numpy as np
@@ -63,7 +64,7 @@ def _get_dataset_from_filename(
     do_take: bool,
     file_format: file_adapters.FileFormat,
     add_tfds_id: bool,
-    override_buffer_size: Optional[int] = None,
+    override_buffer_size: int | None = None,
 ) -> tf.data.Dataset:
   """Returns a tf.data.Dataset instance from given instructions."""
   ds = file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
@@ -361,7 +362,7 @@ def _verify_read_config_for_ordered_dataset(
       logging.warning(error_message)
 
 
-class Reader(object):
+class Reader:
   """Build a tf.data.Dataset object out of Instruction instance(s).
 
   This class should not typically be exposed to the TFDS user.
@@ -369,31 +370,30 @@ class Reader(object):
 
   def __init__(
       self,
-      path,  # TODO(b/216427814) remove this as it isn't used anymore
       example_specs,
-      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+      file_format: (
+          str | file_adapters.FileFormat
+      ) = file_adapters.DEFAULT_FILE_FORMAT,
   ):
     """Initializes Reader.
 
     Args:
-      path (str): path where tfrecords are stored.
       example_specs: spec to build ExampleParser.
       file_format: file_adapters.FileFormat, format of the record files in which
         the dataset will be read/written from.
     """
-    self._path = path
     self._parser = example_parser.ExampleParser(example_specs)
-    self._file_format = file_format
+    self._file_format = file_adapters.FileFormat.from_value(file_format)
 
   def read(
       self,
       *,
       instructions: Tree[splits_lib.SplitArg],
-      split_infos: List[splits_lib.SplitInfo],
+      split_infos: Sequence[splits_lib.SplitInfo],
       read_config: read_config_lib.ReadConfig,
       shuffle_files: bool,
       disable_shuffling: bool = False,
-      decode_fn: Optional[DecodeFn] = None,
+      decode_fn: DecodeFn | None = None,
   ) -> Tree[tf.data.Dataset]:
     """Returns tf.data.Dataset instance(s).
 
@@ -417,8 +417,11 @@ class Reader(object):
 
     splits_dict = splits_lib.SplitDict(split_infos=split_infos)
 
-    def _read_instruction_to_ds(instruction):
-      file_instructions = splits_dict[instruction].file_instructions
+    def _read_instruction_to_ds(
+        instruction: splits_lib.SplitArg,
+    ) -> tf.data.Dataset:
+      split_info = splits_dict[instruction]
+      file_instructions = split_info.file_instructions
       return self.read_files(
           file_instructions,
           read_config=read_config,
@@ -436,7 +439,7 @@ class Reader(object):
       read_config: read_config_lib.ReadConfig,
       shuffle_files: bool,
       disable_shuffling: bool = False,
-      decode_fn: Optional[DecodeFn] = None,
+      decode_fn: DecodeFn | None = None,
   ) -> tf.data.Dataset:
     """Returns single tf.data.Dataset instance for the set of file instructions.
 

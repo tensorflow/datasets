@@ -666,10 +666,11 @@ class SplitInfoTest(testing.TestCase):
         num_bytes=42,
         filename_template=None,
     )
-    with self.assertRaises(ValueError):
-      split_info.file_spec(
-          file_format=tfds.core.file_adapters.FileFormat.TFRECORD
-      )
+    self.assertIsNone(
+        split_info.file_spec(
+            file_format=tfds.core.file_adapters.FileFormat.TFRECORD
+        )
+    )
 
   def test_get_available_shards(self):
     tmp_dir = epath.Path(self.tmp_dir)

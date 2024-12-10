@@ -1543,7 +1543,6 @@ class FileReaderBuilder(DatasetBuilder):
       file_format = file_adapters.FileFormat.from_value(file_format)
 
     reader = reader_lib.Reader(
-        self.data_dir,
         example_specs=example_specs,
         file_format=file_format,
     )

@@ -18,7 +18,7 @@
 from __future__ import annotations
 
 import abc
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 import dataclasses
 import functools
 import itertools
@@ -123,7 +123,7 @@ class SplitInfo:
   def get_available_shards(
       self,
       data_dir: epath.Path | None = None,
-      file_format: file_adapters.FileFormat | None = None,
+      file_format: str | file_adapters.FileFormat | None = None,
       strict_matching: bool = True,
   ) -> list[epath.Path]:
     """Returns the list of shards that are present in the data dir.
@@ -140,6 +140,7 @@ class SplitInfo:
     """
     if filename_template := self.filename_template:
       if file_format:
+        file_format = file_adapters.FileFormat.from_value(file_format)
         filename_template = filename_template.replace(
             filetype_suffix=file_format.file_suffix
         )
@@ -250,7 +251,9 @@ class SplitInfo:
     """Returns a copy of the `SplitInfo` with updated attributes."""
     return dataclasses.replace(self, **kwargs)
 
-  def file_spec(self, file_format: file_adapters.FileFormat) -> str:
+  def file_spec(
+      self, file_format: str | file_adapters.FileFormat
+  ) -> str | None:
     """Returns the file spec of the split for the given file format.
 
     A file spec is the full path with sharded notation, e.g.,
@@ -259,6 +262,7 @@ class SplitInfo:
     Args:
       file_format: the file format for which to create the file spec for.
     """
+    file_format = file_adapters.FileFormat.from_value(file_format)
     if filename_template := self.filename_template:
       if filename_template.filetype_suffix != file_format.file_suffix:
         raise ValueError(
@@ -268,9 +272,7 @@ class SplitInfo:
       return filename_template.sharded_filepaths_pattern(
           num_shards=self.num_shards
       )
-    raise ValueError(
-        f'Could not get filename template for split from split info: {self}.'
-    )
+    return None
 
 
 @dataclasses.dataclass(eq=False, frozen=True)
@@ -425,7 +427,7 @@ Split.ALL = Split('all')
 if typing.TYPE_CHECKING:
   # For type checking, `tfds.Split` is an alias for `str` with additional
   # `.TRAIN`, `.TEST`,... attributes. All strings are valid split type.
-  Split = Union[Split, str]
+  Split = Split | str
 
 
 class SplitDict(utils.NonMutableDict[str, SplitInfo]):
@@ -438,7 +440,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
       # TODO(b/216470058): remove this parameter
       dataset_name: str | None = None,  # deprecated, please don't use
   ):
-    super(SplitDict, self).__init__(
+    super().__init__(
         {split_info.name: split_info for split_info in split_infos},
         error_msg='Split {key} already present',
     )
@@ -457,7 +459,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
       )
     # 1st case: The key exists: `info.splits['train']`
     elif str(key) in self.keys():
-      return super(SplitDict, self).__getitem__(str(key))
+      return super().__getitem__(str(key))
     # 2nd case: Uses instructions: `info.splits['train[50%]']`
     else:
       instructions = _make_file_instructions(
@@ -543,7 +545,7 @@ def _file_instructions_for_split(
 
 
 def _make_file_instructions(
-    split_infos: list[SplitInfo],
+    split_infos: Sequence[SplitInfo],
     instruction: SplitArg,
 ) -> list[shard_utils.FileInstruction]:
   """Returns file instructions by applying the given instruction on the given splits.
@@ -587,7 +589,7 @@ class AbstractSplit(abc.ABC):
   """
 
   @classmethod
-  def from_spec(cls, spec: SplitArg) -> 'AbstractSplit':
+  def from_spec(cls, spec: SplitArg) -> AbstractSplit:
     """Creates a ReadInstruction instance out of a string spec.
 
     Args:
@@ -632,7 +634,7 @@ class AbstractSplit(abc.ABC):
     """
     raise NotImplementedError
 
-  def __add__(self, other: Union[str, 'AbstractSplit']) -> 'AbstractSplit':
+  def __add__(self, other: str | AbstractSplit) -> AbstractSplit:
     """Sum of 2 splits."""
     if not isinstance(other, (str, AbstractSplit)):
       raise TypeError(f'Adding split {self!r} with non-split value: {other!r}')
