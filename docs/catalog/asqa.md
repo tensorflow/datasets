@@ -12,6 +12,11 @@
 # `asqa`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 ASQA is the first long-form question answering dataset that focuses on ambiguous
@@ -31,12 +36,14 @@ repostory we release the ASQA dataset, together with the evaluation code:
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
-    *   `2.0.0`: Sample ID goes from int32 (overflowing) to int64.
+    *   `1.0.0`: Initial release.
+    *   **`2.0.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Sample ID goes from int32 (overflowing) to int64.
 
 *   **Download size**: `17.86 MiB`
 
-*   **Dataset size**: `14.50 MiB`
+*   **Dataset size**: `14.51 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -114,7 +121,7 @@ wikipages/url                  | Text           |         | string | Link to the
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/asqa-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/asqa-2.0.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

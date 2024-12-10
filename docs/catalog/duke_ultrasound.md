@@ -12,6 +12,11 @@
 # `duke_ultrasound`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 DukeUltrasound is an ultrasound dataset collected at Duke University with a
@@ -32,8 +37,10 @@ under Grant 5T32GM007171-44. A usage example is available
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.0.1`** (default): Fixes parsing of boolean field `harmonic`.
-    *   `2.0.0`: Fix timestamp_id from %Y%m%d%H%M%S to posix timestamp.
+    *   `1.0.1`: Fixes parsing of boolean field `harmonic`.
+    *   **`2.0.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Fix timestamp_id from %Y%m%d%H%M%S to posix timestamp.
 
 *   **Download size**: `12.78 GiB`
 
@@ -124,7 +131,7 @@ width          | Tensor       |         | uint32  |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/duke_ultrasound-1.0.1.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/duke_ultrasound-2.0.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
