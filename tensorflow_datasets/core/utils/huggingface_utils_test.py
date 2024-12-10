@@ -113,7 +113,10 @@ def test_convert_hf_features(hf_features, tfds_features):
 @pytest.fixture(name='mock_list_datasets')
 def _list_datasets(monkeypatch):
   def mock_list_datasets():
-    return ['mnist', 'bigscience/P3', 'x', 'x/Y-z', 'fashion_mnist']
+    return [
+        huggingface_hub.DatasetInfo(id=name)
+        for name in ('mnist', 'bigscience/P3', 'x', 'x/Y-z', 'fashion_mnist')
+    ]
 
   monkeypatch.setattr(huggingface_hub, 'list_datasets', mock_list_datasets)
 

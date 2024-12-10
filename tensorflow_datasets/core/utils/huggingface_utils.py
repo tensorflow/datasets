@@ -139,12 +139,12 @@ def to_huggingface_name(tfds_dataset_name: str) -> str:
     DatasetNotFoundError: If the TFDS dataset name doesn't correspond to any
     existing Huggingface dataset.
   """
-  for hf_dataset_name in huggingface_hub.list_datasets():
+  for hf_dataset_info in huggingface_hub.list_datasets():
     if (
-        conversion_utils.to_tfds_name(hf_dataset_name)
+        conversion_utils.to_tfds_name(hf_dataset_info.id)
         == tfds_dataset_name.lower()
     ):
-      return hf_dataset_name
+      return hf_dataset_info.id
   raise registered.DatasetNotFoundError(
       f'"{tfds_dataset_name}" is not listed in Huggingface datasets.'
   )
