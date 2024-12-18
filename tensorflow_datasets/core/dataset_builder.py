@@ -570,7 +570,10 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def is_prepared(self) -> bool:
     """Returns whether this dataset is already downloaded and prepared."""
-    return self.data_path.exists()
+    return file_utils.is_valid_variant_dir(
+        variant_dir=self.data_path,
+        include_old_tfds_version=True,
+    )
 
   def is_blocked(self) -> utils.IsBlocked:
     """Returns whether this builder (version, config) is blocked."""
