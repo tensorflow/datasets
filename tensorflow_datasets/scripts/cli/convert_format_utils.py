@@ -740,7 +740,6 @@ def convert_dataset_dir(
 
   references = file_utils.list_dataset_variants(
       dataset_dir=dataset_dir,
-      include_versions=True,
       include_old_tfds_version=True,
   )
   from_to_dirs = _create_from_to_dirs(

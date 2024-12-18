@@ -200,18 +200,13 @@ def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
       constants.FEATURES_FILENAME,
       constants.DATASET_INFO_FILENAME,
   }
-  glob_suffixes = [
-      'json',
-  ]
   for config, versions in configs_and_versions.items():
     for version in versions:
       for info_filename in info_filenames:
         mock_fs.add_file(_DATASET_DIR / config / version / info_filename)
 
   references = sorted(
-      file_utils.list_dataset_variants(
-          dataset_dir=_DATASET_DIR, glob_suffixes=glob_suffixes
-      )
+      file_utils.list_dataset_variants(dataset_dir=_DATASET_DIR)
   )
   assert references == [
       naming.DatasetReference(
@@ -238,43 +233,6 @@ def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
   ]
 
 
-def test_list_dataset_variants_with_configs_no_versions(
-    mock_fs: testing.MockFs,
-):
-  configs_and_versions = {
-      'x': [_VERSION, '1.0.1'],
-      'y': ['2.0.0'],
-  }
-  info_filenames = {
-      constants.DATASET_INFO_FILENAME,
-      constants.FEATURES_FILENAME,
-  }
-  for config, versions in configs_and_versions.items():
-    for version in versions:
-      for filename in info_filenames:
-        mock_fs.add_file(_DATASET_DIR / config / version / filename)
-
-  references = sorted(
-      file_utils.list_dataset_variants(
-          dataset_dir=_DATASET_DIR, include_versions=False
-      )
-  )
-  assert references == [
-      naming.DatasetReference(
-          dataset_name=_DATASET_NAME,
-          config='x',
-          data_dir=_DATA_DIR,
-          info_filenames=info_filenames,
-      ),
-      naming.DatasetReference(
-          dataset_name=_DATASET_NAME,
-          config='y',
-          data_dir=_DATA_DIR,
-          info_filenames=info_filenames,
-      ),
-  ]
-
-
 def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   # Version 1.0.0 doesn't have features.json, because it was generated with an
   # old version of TFDS.
@@ -286,7 +244,6 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   references = sorted(
       file_utils.list_dataset_variants(
           dataset_dir=_DATASET_DIR,
-          include_versions=True,
           include_old_tfds_version=True,
       )
   )
@@ -312,7 +269,6 @@ def test_list_dataset_variants_without_configs(mock_fs: testing.MockFs):
   references = sorted(
       file_utils.list_dataset_variants(
           dataset_dir=_DATASET_DIR,
-          include_versions=True,
           include_old_tfds_version=False,
       )
   )
