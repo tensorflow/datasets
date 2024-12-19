@@ -368,6 +368,61 @@ def list_dataset_versions(
   return sorted(found_versions)
 
 
+def is_valid_variant_dir(
+    variant_dir: Path,
+    matched_files: set[str] | None = None,
+    include_old_tfds_version: bool = False,
+) -> bool:
+  """Returns whether the variant directory is valid.
+
+  Valid variant directories must:
+    - Contain a dataset_info.json file.
+    - Contain a features.json file.
+    - Have a valid version name.
+
+  Args:
+    variant_dir: The variant directory to check.
+    matched_files: The files that were matched in the variant directory. If
+      None, all json files in the directory are used.
+    include_old_tfds_version: include datasets that have been generated with
+      TFDS before 4.0.0.
+  """
+  version = variant_dir.name
+  if not version_lib.Version.is_valid(version):
+    logging.warning(
+        'Variant folder %s has invalid version %s',
+        variant_dir,
+        version,
+    )
+    return False
+
+  if matched_files is None:
+    matched_files = set(
+        matched_path.name for matched_path in variant_dir.glob('*.json')
+    )
+
+  if constants.DATASET_INFO_FILENAME not in matched_files:
+    logging.warning(
+        'Variant folder %s has no %s',
+        variant_dir,
+        constants.DATASET_INFO_FILENAME,
+    )
+    return False
+
+  if (
+      not include_old_tfds_version
+      and constants.FEATURES_FILENAME not in matched_files
+  ):
+    logging.warning(
+        'Variant folder %s has no %s',
+        variant_dir,
+        constants.FEATURES_FILENAME,
+    )
+    return False
+
+  return True
+
+
 def list_dataset_variants(
     dataset_dir: Path,
     namespace: str | None = None,
@@ -401,36 +456,17 @@ def list_dataset_variants(
     matched_files_by_variant_dir[file.parent].add(file.name)
 
   for variant_dir, matched_files in matched_files_by_variant_dir.items():
-    if constants.DATASET_INFO_FILENAME not in matched_files:
-      logging.warning(
-          'Ignoring variant folder %s, which has no %s',
-          variant_dir,
-          constants.DATASET_INFO_FILENAME,
-      )
-      continue
-
-    if (
-        not include_old_tfds_version
-        and constants.FEATURES_FILENAME not in matched_files
+    if not is_valid_variant_dir(
+        variant_dir=variant_dir,
+        matched_files=matched_files,
+        include_old_tfds_version=include_old_tfds_version,
     ):
-      logging.info(
-          'Ignoring variant folder %s, which has no %s',
-          variant_dir,
-          constants.FEATURES_FILENAME,
-      )
-      continue
-
-    version = variant_dir.name
-    if not version_lib.Version.is_valid(version):
-      logging.warning(
-          'Ignoring variant folder %s, which has invalid version %s',
-          variant_dir,
-          version,
-      )
+      logging.warning('Skipping invalid variant directory: %s', variant_dir)
       continue
 
     config_dir = variant_dir.parent
     config = config_dir.name if config_dir != dataset_dir else None
+    version = variant_dir.name
 
     yield naming.DatasetReference(
         namespace=namespace,
