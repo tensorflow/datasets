@@ -18,7 +18,7 @@ concurrency:
 jobs:
   activate-tests:
     name: Check whether we should run tests or not
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v3
@@ -36,10 +36,10 @@ jobs:
       fail-fast: false
       matrix:
         tf-version: [tensorflow, tf-nightly]
-        os-version: [ubuntu-latest, macos-latest]
+        os-version: [ubuntu-22.04, macos-latest]
         exclude:
           - tf-version: tensorflow
-            os-version: ubuntu-latest
+            os-version: ubuntu-22.04
 
     name: 'Core TFDS tests'
     uses: ./.github/workflows/pytest-template.yml

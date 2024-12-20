@@ -19,7 +19,7 @@ jobs:
   publish-job:
     # Prevents action from running on forks and non-master branches.
     if: github.repository == 'tensorflow/datasets'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
 

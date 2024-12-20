@@ -14,7 +14,7 @@ env:
 jobs:
   shards-job:
     name: Generate shards
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Create variables

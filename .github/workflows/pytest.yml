@@ -32,7 +32,7 @@ concurrency:
 jobs:
   activate-tests:
     name: Check whether we should run tests or not
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v3
@@ -50,7 +50,7 @@ jobs:
     uses: ./.github/workflows/pytest-template.yml
     with:
       tf-version: tensorflow
-      os-version: ubuntu-latest
+      os-version: ubuntu-22.04
 
   huggingface-pytest-job:
     needs: activate-tests
@@ -59,7 +59,7 @@ jobs:
     # HuggingFace tests need to be run separately because they're disabled without installed
     # `datasets` library.
     name: 'HuggingFace Python 3.10 tests'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
 
     steps:
@@ -81,7 +81,7 @@ jobs:
     if: ${{ needs.activate-tests.outputs.status }}
 
     name: 'Github API tests'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
 
     steps:
@@ -100,7 +100,7 @@ jobs:
     if: ${{ needs.activate-tests.outputs.status }}
 
     name: 'Notebook tests'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
 
     steps:
