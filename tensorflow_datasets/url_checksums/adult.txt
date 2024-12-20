@@ -1,0 +1,2 @@
+https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data 3974305 5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d
+https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test 2003153 a2a9044bc167a35b2361efbabec64e89d69ce82d9790d2980119aac5fd7e9c05
