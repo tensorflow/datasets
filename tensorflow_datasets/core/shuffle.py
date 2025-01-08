@@ -19,6 +19,7 @@ from collections.abc import Iterator, Sequence
 import math
 import os
 import struct
+import typing
 from typing import Optional
 import uuid
 from absl import logging
@@ -280,7 +281,9 @@ class Shuffler(object):
       raise AssertionError('add() cannot be called after __iter__.')
     if not isinstance(data, bytes):
       raise AssertionError(
-          f'Only bytes (not {type(data)}) can be stored in Shuffler!'
+          f'Only bytes (not {type(data)}) can be stored in Shuffler! This'
+          ' likely indicates that non-integer keys were used when generating'
+          ' the dataset.'
       )
     hkey = self._hasher.hash_key(key)
     if self._ignore_duplicates:
@@ -289,7 +292,7 @@ class Shuffler(object):
       self._seen_keys.add(hkey)
     if self._disable_shuffling:
       # Use the original key and not the hashed key to maintain the order.
-      hkey = key
+      hkey = typing.cast(int, key)
     self._total_bytes += len(data)
     if self._in_memory:
       self._add_to_mem_buffer(hkey, data)
