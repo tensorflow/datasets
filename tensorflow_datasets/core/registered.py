@@ -422,7 +422,11 @@ def list_imported_builders() -> list[str]:
       builder_name
       for builder_name, builder_cls in _DATASET_REGISTRY.items()
       if _is_builder_available(builder_cls)
-  ] + list(_get_existing_dataset_packages(constants.DATASETS_TFDS_SRC_DIR))
+  ]
+  if visibility.DatasetType.TFDS_PUBLIC.is_available():
+    all_builders += list(
+        _get_existing_dataset_packages(constants.DATASETS_TFDS_SRC_DIR)
+    )
   return sorted(all_builders)
 
 

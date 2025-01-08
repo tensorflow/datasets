@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.visibility."""
-
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import visibility
 
@@ -28,3 +26,9 @@ def test_visibility():
   # `absl.app` should detect the TFDS script and restrict the visibility
   # to TFDS public by default.
   assert visibility._current_available == {visibility.DatasetType.TFDS_PUBLIC}
+  assert 'mnist' in tfds.list_builders()
+  assert 'abstract_reasoning' in tfds.list_builders()
+  # Remove all visibility and check that the datasets are not available.
+  with visibility.set_availables_tmp([]):
+    assert 'mnist' not in tfds.list_builders()
+    assert 'abstract_reasoning' not in tfds.list_builders()
