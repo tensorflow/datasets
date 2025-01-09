@@ -27,7 +27,6 @@ jobs:
       uses: etils-actions/pypi-auto-publish@v1
       with:
         pypi-token: ${{ secrets.NIGHTLY_PYPI_PASSWORD }}
-        gh-token: ${{ secrets.GITHUB_TOKEN }}
         parse-changelog: true
         pkg-name: tfds-nightly
         git-ref: ${{ github.event.inputs.git-ref }}
