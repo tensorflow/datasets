@@ -1,0 +1,33 @@
+{
+  "citation": "@inproceedings{mendonca2023structured,\n              title={Structured World Models from Human Videos},\n              author={Mendonca, Russell  and Bahl, Shikhar and Pathak, Deepak},\n              journal={RSS},\n              year={2023}\n            }",
+  "description": "Franka exploring toy kitchens",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://human-world-model.github.io/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "cmu_franka_exploration_dataset_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "631489461",
+      "shardLengths": [
+        "28",
+        "33",
+        "22",
+        "20",
+        "31",
+        "30",
+        "20",
+        "15"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

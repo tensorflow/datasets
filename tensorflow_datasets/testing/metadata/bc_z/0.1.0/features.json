@@ -1,0 +1,217 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "steps": {
+                "pythonClassName": "tensorflow_datasets.core.features.dataset_feature.Dataset",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                        "featuresDict": {
+                            "features": {
+                                "action": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                    "featuresDict": {
+                                        "features": {
+                                            "future/axis_angle_residual": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "30"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The next 10 actions for the rotation. Each action is a 3D delta to add to the current axis angle."
+                                            },
+                                            "future/target_close": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "10"
+                                                        ]
+                                                    },
+                                                    "dtype": "int64",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The next 10 actions for the gripper. Each action is the value the gripper closure should be changed to (notably it is *not* a delta.)"
+                                            },
+                                            "future/xyz_residual": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "30"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The next 10 actions for the positions. Each action is a 3D delta to add to current position."
+                                            }
+                                        }
+                                    }
+                                },
+                                "is_last": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "is_terminal": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                    "featuresDict": {
+                                        "features": {
+                                            "natural_language_instruction": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {},
+                                                    "dtype": "string",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The task the robot was asked to do."
+                                            },
+                                            "present/axis_angle": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The current rotation of the end effector in axis-angle representation."
+                                            },
+                                            "sequence_length": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {},
+                                                    "dtype": "int64",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Length of the episode"
+                                            },
+                                            "present/intervention": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {},
+                                                    "dtype": "int64",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Episodes are collected via DAgger. This is a 0/1 label for whether the action is from the policy or the teleoperator. 1 = from teleoperator. This is exactly the opposite of present/autonomous"
+                                            },
+                                            "present/autonomous": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {},
+                                                    "dtype": "int64",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Episodes are collected via DAgger. This is a 0/1 label for whether the action is from the policy or the teleoperator. 1 = from policy."
+                                            },
+                                            "natural_language_embedding": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "512"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "An embedding of the task via Universal Sentence Encoder (https://tfhub.dev/google/universal-sentence-encoder/4)"
+                                            },
+                                            "image": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                                "image": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "171",
+                                                            "213",
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint8",
+                                                    "encodingFormat": "jpeg"
+                                                },
+                                                "description": "Camera image of the robot, downsampled 3x"
+                                            },
+                                            "episode_success": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {},
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "A 0-1 success label"
+                                            },
+                                            "present/xyz": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The current position of the end effector in axis-angle representation, in robot frame"
+                                            },
+                                            "present/sensed_close": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "1"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "How much the gripper is currently closed. Scaled from 0 to 1, but not all values from 0 to 1 are reachable. The range in the data is about 0.2 to 1"
+                                            }
+                                        }
+                                    }
+                                },
+                                "is_first": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "reward": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "length": "-1"
+                }
+            }
+        }
+    }
+}

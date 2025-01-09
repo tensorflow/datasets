@@ -1,0 +1,57 @@
+{
+  "citation": "@preprint{Feng2023Finetuning,\n\ttitle={Finetuning Offline World Models in the Real World},\n\tauthor={Yunhai Feng, Nicklas Hansen, Ziyan Xiong, Chandramouli Rajagopalan, Xiaolong Wang},\n\tyear={2023}\n}",
+  "description": "xArm picking and placing objects with distractors",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://owmcorl.github.io"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "ucsd_pick_and_place_dataset_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "3788052220",
+      "shardLengths": [
+        "48",
+        "36",
+        "47",
+        "31",
+        "45",
+        "44",
+        "36",
+        "40",
+        "40",
+        "39",
+        "42",
+        "44",
+        "43",
+        "53",
+        "34",
+        "50",
+        "38",
+        "42",
+        "40",
+        "43",
+        "42",
+        "47",
+        "43",
+        "46",
+        "42",
+        "42",
+        "44",
+        "40",
+        "52",
+        "44",
+        "45",
+        "33"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

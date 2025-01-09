@@ -1,0 +1,72 @@
+{
+  "citation": "@inproceedings{Zala2024DiagrammerGPT,\n        author = {Abhay Zala and Han Lin and Jaemin Cho and Mohit Bansal},\n        title = {DiagrammerGPT: Generating Open-Domain, Open-Platform Diagrams via LLM Planning},\n        year = {2024},\n        booktitle = {COLM},\n}",
+  "description": "This dataset is primarily based off the AI2D Dataset (see [here](\n  https://prior.allenai.org/projects/diagram-understanding)).\n\nSee [Section 4.1](https://arxiv.org/pdf/2310.12128) of our paper for\n the AI2D-Caption dataset annotation process.",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://huggingface.co/datasets/abhayzala/AI2D-Caption"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.ai2dcaption.ai2dcaption_dataset_builder",
+  "name": "ai2dcaption",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "auditor_llm_training_examples",
+      "numBytes": "3722704",
+      "shardLengths": [
+        "30"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "gpt4v",
+      "numBytes": "1070151906",
+      "shardLengths": [
+        "613",
+        "613",
+        "613",
+        "613",
+        "612",
+        "613",
+        "613",
+        "613"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "llava_15",
+      "numBytes": "1070743597",
+      "shardLengths": [
+        "613",
+        "613",
+        "612",
+        "613",
+        "613",
+        "612",
+        "613",
+        "613"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "planner_llm_training_examples",
+      "numBytes": "5696232",
+      "shardLengths": [
+        "30"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "12104046",
+      "shardLengths": [
+        "75"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

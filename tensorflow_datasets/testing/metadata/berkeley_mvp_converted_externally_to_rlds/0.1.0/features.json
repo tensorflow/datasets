@@ -1,0 +1,162 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "episode_metadata": {
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                "featuresDict": {
+                    "features": {
+                        "file_path": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {},
+                            "description": "Path to the original data file."
+                        }
+                    }
+                }
+            },
+            "steps": {
+                "pythonClassName": "tensorflow_datasets.core.features.dataset_feature.Dataset",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                        "featuresDict": {
+                            "features": {
+                                "language_embedding": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "512"
+                                            ]
+                                        },
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5"
+                                },
+                                "language_instruction": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Language Instruction."
+                                },
+                                "is_terminal": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "is_last": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "is_first": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "discount": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Discount if provided, default to 1."
+                                },
+                                "reward": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Reward if provided, 1 on final step for demos."
+                                },
+                                "action": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "8"
+                                            ]
+                                        },
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Robot action, consists of [7 delta joint pos,1x gripper binary state]."
+                                },
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                    "featuresDict": {
+                                        "features": {
+                                            "hand_image": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                                "image": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "480",
+                                                            "640",
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint8",
+                                                    "encodingFormat": "png"
+                                                },
+                                                "description": "Hand camera RGB observation."
+                                            },
+                                            "pose": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "7"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Gripper pose, robot frame, [3 position, 4 rotation]"
+                                            },
+                                            "gripper": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                                "tensor": {
+                                                    "shape": {},
+                                                    "dtype": "bool",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Binary gripper state (1 - closed, 0 - open)"
+                                            },
+                                            "joint_pos": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "7"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "xArm joint positions (7 DoF)."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "length": "-1"
+                }
+            }
+        }
+    }
+}

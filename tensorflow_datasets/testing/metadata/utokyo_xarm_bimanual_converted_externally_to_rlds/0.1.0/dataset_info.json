@@ -1,0 +1,34 @@
+{
+  "citation": "@misc{matsushima2023weblab,\n  title={Weblab xArm Dataset},\n  author={Tatsuya Matsushima and Hiroki Furuta and Yusuke Iwasawa and Yutaka Matsuo},\n  year={2023},\n}",
+  "description": "xArm bimanual setup folding towel",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "--"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "utokyo_xarm_bimanual_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "133052726",
+      "shardLengths": [
+        "64"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "val",
+      "numBytes": "12112890",
+      "shardLengths": [
+        "6"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,279 @@
+{
+    "featuresDict": {
+        "features": {
+            "Q1_whole_conversation_evaluation": {
+                "classLabel": {
+                    "numClasses": "4"
+                },
+                "description": "Rating about the understandability of a conversation.",
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_dangerous_content": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_derogation_of_boat": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_insensitive": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_medical_legal_financial_or_relationship_advice": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_obscene_and_profane": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_other": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_overall": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_personal_information": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_regulated_goods": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q2_harmful_content_sexually_suggestive_content": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q3_bias_other": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q3_bias_overall": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q3_bias_targeting_beliefs": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q3_bias_targeting_gender_sexual_orientation": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q3_bias_targeting_inherited_attributes": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q3_bias_targeting_status": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q4_misinformation": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q5_political_affiliation": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q6_policy_guidelines_making_endorsement": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q6_policy_guidelines_other": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q6_policy_guidelines_overall": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q6_policy_guidelines_polarizing_topics": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "Q_overall": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "answer_time_ms": {
+                "description": "Amount of time spent by each rater on each safety annotation question.",
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "dtype": "int64",
+                    "encoding": "none",
+                    "shape": {}
+                }
+            },
+            "answer_timestamp": {
+                "description": "Time when each conversation was rated by each rater.",
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "dtype": "int64",
+                    "encoding": "none",
+                    "shape": {}
+                }
+            },
+            "context": {
+                "description": "The conversation turns before the final chatbot response.",
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "degree_of_harm": {
+                "classLabel": {
+                    "numClasses": "5"
+                },
+                "description": "Hand-annotated rating of severity of safety risk.",
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "harm_type": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "classLabel": {
+                            "numClasses": "32"
+                        },
+                        "description": "Hand-annotated harm topic(s) of conversation.",
+                        "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+                    },
+                    "length": "-1"
+                }
+            },
+            "id": {
+                "description": "Numerical identifier for each row, representing all ratings by a single rater to a single conversation.",
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "dtype": "int64",
+                    "encoding": "none",
+                    "shape": {}
+                }
+            },
+            "item_id": {
+                "description": "Numerical identifier for each conversation.",
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "dtype": "int64",
+                    "encoding": "none",
+                    "shape": {}
+                }
+            },
+            "phase": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "description": "One of three distinct time periods.",
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "rater_age": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "description": "The age group of the rater.",
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "rater_education": {
+                "classLabel": {
+                    "numClasses": "3"
+                },
+                "description": "The education of the rater.",
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "rater_gender": {
+                "classLabel": {
+                    "numClasses": "4"
+                },
+                "description": "The gender of the rater.",
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "rater_id": {
+                "description": "Numerical identifier for each rater.",
+                "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                "tensor": {
+                    "dtype": "int64",
+                    "encoding": "none",
+                    "shape": {}
+                }
+            },
+            "rater_race": {
+                "classLabel": {
+                    "numClasses": "6"
+                },
+                "description": "The race/ethnicity of the rater.",
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "rater_raw_race": {
+                "description": "The self-reported raw race/ethnicity of the rater, before simplification to five categories.",
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "response": {
+                "description": "The final chatbot response in the conversation.",
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "safety_gold": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "description": "The gold standard safety label provided by experts.",
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "safety_gold_reason": {
+                "description": "The reason(s) (if given) for the gold safety label provided by experts.",
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
+        }
+    },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+}

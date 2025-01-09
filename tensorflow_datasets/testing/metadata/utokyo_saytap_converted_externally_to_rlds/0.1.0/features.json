@@ -1,0 +1,208 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "episode_metadata": {
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                "featuresDict": {
+                    "features": {
+                        "file_path": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {},
+                            "description": "Path to the original data file."
+                        }
+                    }
+                }
+            },
+            "steps": {
+                "pythonClassName": "tensorflow_datasets.core.features.dataset_feature.Dataset",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                        "featuresDict": {
+                            "features": {
+                                "is_terminal": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "reward": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Reward if provided, 1 on final step for demos."
+                                },
+                                "is_first": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                    "featuresDict": {
+                                        "features": {
+                                            "image": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                                "image": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "64",
+                                                            "64",
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint8",
+                                                    "encodingFormat": "png"
+                                                },
+                                                "description": "Dummy camera RGB observation."
+                                            },
+                                            "wrist_image": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                                "image": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "64",
+                                                            "64",
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint8",
+                                                    "encodingFormat": "png"
+                                                },
+                                                "description": "Dummy wrist camera RGB observation."
+                                            },
+                                            "desired_pattern": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "4",
+                                                            "5"
+                                                        ]
+                                                    },
+                                                    "dtype": "bool",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Desired foot contact pattern for the 4 legs, the 4 rows are for the front right, front left, rear right and rear left legs, the pattern length is 5 (=0.1s)."
+                                            },
+                                            "prev_act": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "12"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Actions applied in the previous step."
+                                            },
+                                            "desired_vel": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Desired velocites. The first 2 are linear velocities along and perpendicular to the heading direction, the 3rd is the desired angular velocity about the yaw axis."
+                                            },
+                                            "proj_grav_vec": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The gravity vector [0, 0, -1] in the robot base frame."
+                                            },
+                                            "state": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "30"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Robot state, consists of [3x robot base linear velocity, 3x base angular vel, 12x joint position, 12x joint velocity]."
+                                            }
+                                        }
+                                    }
+                                },
+                                "language_embedding": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "512"
+                                            ]
+                                        },
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5"
+                                },
+                                "is_last": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "language_instruction": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Language Instruction."
+                                },
+                                "discount": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Discount if provided, default to 1."
+                                },
+                                "action": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "12"
+                                            ]
+                                        },
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Robot action, consists of [12x joint positios]."
+                                }
+                            }
+                        }
+                    },
+                    "length": "-1"
+                }
+            }
+        }
+    }
+}

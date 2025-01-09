@@ -1,0 +1,75 @@
+{
+  "citation": "@article{sakaguchi2019winogrande,\n    title={WinoGrande: An Adversarial Winograd Schema Challenge at Scale},\n    author={Sakaguchi, Keisuke and Bras, Ronan Le and Bhagavatula, Chandra and Choi, Yejin},\n    journal={arXiv preprint arXiv:1907.10641},\n    year={2019}\n}",
+  "description": "The  WinoGrande, a large-scale dataset of 44k problems, inspired by the original\n Winograd Schema Challenge design, but adjusted to improve both the scale and\n the hardness of the dataset.",
+  "downloadSize": "3395492",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "http://winogrande.allenai.org/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.winogrande",
+  "name": "winogrande",
+  "releaseNotes": {
+    "1.2.0": "Updated source file with more data and new checksums."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_xs",
+      "numBytes": "29421",
+      "shardLengths": [
+        "160"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_s",
+      "numBytes": "117163",
+      "shardLengths": [
+        "640"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_m",
+      "numBytes": "468252",
+      "shardLengths": [
+        "2558"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_l",
+      "numBytes": "1876932",
+      "shardLengths": [
+        "10234"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_xl",
+      "numBytes": "7383787",
+      "shardLengths": [
+        "40398"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "341578",
+      "shardLengths": [
+        "1767"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "233250",
+      "shardLengths": [
+        "1267"
+      ]
+    }
+  ],
+  "version": "1.2.0"
+}

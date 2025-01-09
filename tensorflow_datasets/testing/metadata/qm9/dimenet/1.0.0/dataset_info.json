@@ -1,0 +1,46 @@
+{
+  "citation": "@article{ramakrishnan2014quantum,\n  title={Quantum chemistry structures and properties of 134 kilo molecules},\n  author={Ramakrishnan, Raghunathan and Dral, Pavlo O and Rupp, Matthias and von Lilienfeld, O Anatole},\n  journal={Scientific Data},\n  volume={1},\n  year={2014},\n  publisher={Nature Publishing Group}\n}",
+  "configDescription": "Dataset split used by DimeNet. 110,000 train, 10,000 validation, and 10,831 test samples. Splitting happens after shuffling with seed 42. Paper: https://arxiv.org/abs/2003.03123. Split: https://github.com/gasteigerjo/dimenet/blob/master/dimenet/training/data_provider.py",
+  "configName": "dimenet",
+  "description": "QM9 consists of computed geometric, energetic, electronic, and thermodynamic\nproperties for 134k stable small organic molecules made up of CHONF. As usual,\nwe remove the uncharacterized molecules and provide the remaining 130,831 in the\noriginal order (not shuffled). We provide a single 'train' split, users are\nexpected to make their own validation/test splits.",
+  "downloadSize": "86631943",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://doi.org/10.6084/m9.figshare.c.978904.v5"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.qm9.qm9_dataset_builder",
+  "name": "qm9",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "156203967",
+      "shardLengths": [
+        "55000",
+        "55000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "14194753",
+      "shardLengths": [
+        "10000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "15362614",
+      "shardLengths": [
+        "10831"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

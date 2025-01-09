@@ -1,0 +1,62 @@
+{
+    "featuresDict": {
+        "features": {
+            "file_name": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "head_bbox": {
+                "boundingBox": {
+                    "dtype": "float32",
+                    "shape": {
+                        "dimensions": [
+                            "4"
+                        ]
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.bounding_boxes.BBoxFeature"
+            },
+            "image": {
+                "image": {
+                    "dtype": "uint8",
+                    "encodingFormat": "jpeg",
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "-1",
+                            "3"
+                        ]
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image"
+            },
+            "label": {
+                "classLabel": {
+                    "numClasses": "37"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "segmentation_mask": {
+                "image": {
+                    "dtype": "uint8",
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "-1",
+                            "1"
+                        ]
+                    },
+                    "useColormap": true
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image"
+            },
+            "species": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            }
+        }
+    },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+}

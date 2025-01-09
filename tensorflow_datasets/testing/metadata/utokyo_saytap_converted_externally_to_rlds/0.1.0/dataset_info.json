@@ -1,0 +1,26 @@
+{
+  "citation": "@article{saytap2023,\n  author = {Yujin Tang and Wenhao Yu and Jie Tan and Heiga Zen and Aleksandra Faust and\nTatsuya Harada},\n  title  = {SayTap: Language to Quadrupedal Locomotion},\n  eprint = {arXiv:2306.07580},\n  url    = {https://saytap.github.io},\n  note   = \"{https://saytap.github.io}\",\n  year   = {2023}\n}",
+  "description": "A1 walking, no RGB",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://saytap.github.io/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "utokyo_saytap_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "58024866",
+      "shardLengths": [
+        "20"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,42 @@
+{
+  "citation": "@misc{oh2023pr2utokyodatasets,\n  author={Jihoon Oh and Naoaki Kanazawa and Kento Kawaharazuka},\n  title={X-Embodiment U-Tokyo PR2 Datasets},\n  year={2023},\n  url={https://github.com/ojh6404/rlds_dataset_builder},\n}",
+  "description": "PR2 tabletop manipulation (folding cloth, picking)",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "--"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "701002051",
+      "shardLengths": [
+        "23",
+        "22",
+        "21",
+        "16",
+        "29",
+        "24",
+        "32",
+        "25"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "val",
+      "numBytes": "168655249",
+      "shardLengths": [
+        "23",
+        "25"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

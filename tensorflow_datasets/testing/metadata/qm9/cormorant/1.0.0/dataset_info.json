@@ -1,0 +1,46 @@
+{
+  "citation": "@article{ramakrishnan2014quantum,\n  title={Quantum chemistry structures and properties of 134 kilo molecules},\n  author={Ramakrishnan, Raghunathan and Dral, Pavlo O and Rupp, Matthias and von Lilienfeld, O Anatole},\n  journal={Scientific Data},\n  volume={1},\n  year={2014},\n  publisher={Nature Publishing Group}\n}",
+  "configDescription": "Dataset split used by Cormorant. 100,000 train, 17,748 validation, and 13,083 test samples. Splitting happens after shuffling with seed 0. Paper: https://arxiv.org/abs/1906.04015. Split: https://github.com/risilab/cormorant/blob/master/src/cormorant/data/prepare/qm9.py",
+  "configName": "cormorant",
+  "description": "QM9 consists of computed geometric, energetic, electronic, and thermodynamic\nproperties for 134k stable small organic molecules made up of CHONF. As usual,\nwe remove the uncharacterized molecules and provide the remaining 130,831 in the\noriginal order (not shuffled). We provide a single 'train' split, users are\nexpected to make their own validation/test splits.",
+  "downloadSize": "86631943",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://doi.org/10.6084/m9.figshare.c.978904.v5"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.qm9.qm9_dataset_builder",
+  "name": "qm9",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "141984813",
+      "shardLengths": [
+        "50000",
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "25200583",
+      "shardLengths": [
+        "17748"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "18575938",
+      "shardLengths": [
+        "13083"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

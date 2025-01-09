@@ -1,0 +1,41 @@
+{
+  "citation": "@ARTICLE{ucsd_kitchens,\n  author = {Ge Yan, Kris Wu, and Xiaolong Wang},\n  title = {{ucsd kitchens Dataset}},\n  year = {2023},\n  month = {August}\n}",
+  "description": "xArm interacting with different toy kitchens",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      " "
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "ucsd_kitchen_dataset_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1423313304",
+      "shardLengths": [
+        "12",
+        "6",
+        "7",
+        "14",
+        "11",
+        "11",
+        "11",
+        "7",
+        "10",
+        "7",
+        "6",
+        "10",
+        "8",
+        "9",
+        "14",
+        "7"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

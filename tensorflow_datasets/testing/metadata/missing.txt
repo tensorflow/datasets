@@ -31,10 +31,13 @@ laion400m/images/1.0.0
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 reddit_disentanglement/2.0.0
-segment_anything/1.0.0
 so2sat/all/2.0.0
 so2sat/all/2.1.0
 so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
+tao/480_640/1.1.0
+tao/full_resolution/1.1.0
+toto/0.1.0
+vima_converted_externally_to_rlds/0.1.0
 voxforge/1.0.0
 webvid/1.0.0

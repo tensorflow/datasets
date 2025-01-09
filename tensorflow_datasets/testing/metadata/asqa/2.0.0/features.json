@@ -1,0 +1,126 @@
+{
+    "featuresDict": {
+        "features": {
+            "ambiguous_question": {
+                "description": "Disambiguated question from AmbigQA.",
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "annotations": {
+                "description": "Long-form answers to the ambiguous question constructed by ASQA annotators.",
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "featuresDict": {
+                            "features": {
+                                "knowledge": {
+                                    "description": "List of additional knowledge pieces.",
+                                    "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                                    "sequence": {
+                                        "feature": {
+                                            "featuresDict": {
+                                                "features": {
+                                                    "content": {
+                                                        "description": "A passage from Wikipedia.",
+                                                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                                        "text": {}
+                                                    },
+                                                    "wikipage": {
+                                                        "description": "Title of the Wikipedia page the passage was taken from.",
+                                                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                                        "text": {}
+                                                    }
+                                                }
+                                            },
+                                            "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+                                        },
+                                        "length": "-1"
+                                    }
+                                },
+                                "long_answer": {
+                                    "description": "Annotation.",
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {}
+                                }
+                            }
+                        },
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+                    },
+                    "length": "-1"
+                }
+            },
+            "qa_pairs": {
+                "description": "Q&A pairs from AmbigQA which are used for disambiguation.",
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "featuresDict": {
+                            "features": {
+                                "context": {
+                                    "description": "Additional context provided.",
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {}
+                                },
+                                "question": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {}
+                                },
+                                "short_answers": {
+                                    "description": "List of short answers from AmbigQA.",
+                                    "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                                    "sequence": {
+                                        "feature": {
+                                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                            "text": {}
+                                        },
+                                        "length": "-1"
+                                    }
+                                },
+                                "wikipage": {
+                                    "description": "Title of the Wikipedia page the additional context was taken from.",
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {}
+                                }
+                            }
+                        },
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+                    },
+                    "length": "-1"
+                }
+            },
+            "sample_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "dtype": "int64",
+                    "encoding": "none",
+                    "shape": {}
+                }
+            },
+            "wikipages": {
+                "description": "List of Wikipedia pages visited by AmbigQA annotators.",
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "featuresDict": {
+                            "features": {
+                                "title": {
+                                    "description": "Title of the Wikipedia page.",
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {}
+                                },
+                                "url": {
+                                    "description": "Link to the Wikipedia page.",
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {}
+                                }
+                            }
+                        },
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+                    },
+                    "length": "-1"
+                }
+            }
+        }
+    },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+}

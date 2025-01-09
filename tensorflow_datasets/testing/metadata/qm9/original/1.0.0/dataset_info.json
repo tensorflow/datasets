@@ -1,0 +1,31 @@
+{
+  "citation": "@article{ramakrishnan2014quantum,\n  title={Quantum chemistry structures and properties of 134 kilo molecules},\n  author={Ramakrishnan, Raghunathan and Dral, Pavlo O and Rupp, Matthias and von Lilienfeld, O Anatole},\n  journal={Scientific Data},\n  volume={1},\n  year={2014},\n  publisher={Nature Publishing Group}\n}",
+  "configDescription": "QM9 does not define any splits. So this variant puts the full QM9 dataset in the train split, without shuffling.",
+  "configName": "original",
+  "description": "QM9 consists of computed geometric, energetic, electronic, and thermodynamic\nproperties for 134k stable small organic molecules made up of CHONF. As usual,\nwe remove the uncharacterized molecules and provide the remaining 130,831 in the\noriginal order (not shuffled). We provide a single 'train' split, users are\nexpected to make their own validation/test splits.",
+  "disableShuffling": true,
+  "downloadSize": "86631943",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://doi.org/10.6084/m9.figshare.c.978904.v5"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.qm9.qm9_dataset_builder",
+  "name": "qm9",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "185761334",
+      "shardLengths": [
+        "65416",
+        "65415"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

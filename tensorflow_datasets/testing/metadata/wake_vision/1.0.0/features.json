@@ -1,0 +1,138 @@
+{
+    "featuresDict": {
+        "features": {
+            "age_unknown": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "body_part": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "bright": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "dark": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "depiction": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "far": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "filename": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "gender_unknown": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "image": {
+                "image": {
+                    "dtype": "uint8",
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "-1",
+                            "3"
+                        ]
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image"
+            },
+            "medium_distance": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "middle_age": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "near": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "non-person_depiction": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "non-person_non-depiction": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "normal_lighting": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "older": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "person": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "person_depiction": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "predominantly_female": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "predominantly_male": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "young": {
+                "classLabel": {
+                    "numClasses": "2"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            }
+        }
+    },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+}

@@ -1,0 +1,65 @@
+{
+  "citation": "@article{DBLP:journals/corr/ZhuPIE17,\n  author    = {Jun{-}Yan Zhu and\n               Taesung Park and\n               Phillip Isola and\n               Alexei A. Efros},\n  title     = {Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial\n               Networks},\n  journal   = {CoRR},\n  volume    = {abs/1703.10593},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1703.10593},\n  archivePrefix = {arXiv},\n  eprint    = {1703.10593},\n  timestamp = {Mon, 13 Aug 2018 16:48:06 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuPIE17},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "configName": "cezanne2photo",
+  "description": "A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)",
+  "downloadSize": "279885071",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://junyanz.github.io/CycleGAN/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.cycle_gan",
+  "name": "cycle_gan",
+  "releaseNotes": {
+    "3.0.0": "Cityscapes dataset is removed due to license issue."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "trainA",
+      "numBytes": "9090264",
+      "shardLengths": [
+        "525"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "trainB",
+      "numBytes": "246712940",
+      "shardLengths": [
+        "3144",
+        "3143"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "testA",
+      "numBytes": "997243",
+      "shardLengths": [
+        "58"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "testB",
+      "numBytes": "25849178",
+      "shardLengths": [
+        "751"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "3.0.0"
+}
