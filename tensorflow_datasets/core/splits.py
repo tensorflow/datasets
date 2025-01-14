@@ -282,9 +282,11 @@ class MultiSplitInfo(SplitInfo):
   This should only be used to read data and not when producing data.
   """
 
-  split_infos: list[SplitInfo] = dataclasses.field(default_factory=list)
+  split_infos: list[SplitInfo | SubSplitInfo] = dataclasses.field(
+      default_factory=list
+  )
 
-  def __init__(self, name: str, split_infos: list[SplitInfo]):
+  def __init__(self, name: str, split_infos: list[SplitInfo | SubSplitInfo]):
     if not split_infos:
       raise ValueError('Need to pass a non-empty list of SplitInfos')
     object.__setattr__(self, 'split_infos', split_infos)
