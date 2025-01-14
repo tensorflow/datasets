@@ -108,7 +108,7 @@ def get_split_recordset(
           if isinstance(node, mlc.RecordSet)
       ]
       if not record_sets:
-        raise ValueError("field {field.id} has no RecordSet")
+        raise ValueError(f"Field {field.id} has no RecordSet.")
       referenced_record_set = record_sets[0]
       if mlc.DataType.SPLIT in referenced_record_set.data_types:
         return SplitReference(referenced_record_set, field)
