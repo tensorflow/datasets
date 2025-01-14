@@ -142,7 +142,7 @@ DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
     'beir': ['apache-beam'],
-    'ble_wind_field': ['gcsfs', 'zarr'],
+    'ble_wind_field': ['gcsfs', 'zarr<3.0.0'],
     'c4': [
         'apache-beam',
         'gcld3',
