@@ -31,6 +31,7 @@ from typing import Any, ContextManager
 import urllib
 
 from etils import epath
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
@@ -128,6 +129,43 @@ def _get_filename(response: Response) -> str:
       return filename
   # Otherwise, fallback on extracting the name from the url.
   return _basename_from_url(response.url)
+
+
+def _process_gdrive_confirmation(original_url: str, contents: str) -> str:
+  """Process Google Drive confirmation page.
+
+  Extracts the download link from a Google Drive confirmation page.
+
+  Args:
+      original_url: The URL the confirmation page was originally retrieved from.
+      contents: The confirmation page's HTML.
+
+  Returns:
+      download_url: The URL for downloading the file.
+  """
+  bs4 = lazy_imports_lib.lazy_imports.bs4
+  soup = bs4.BeautifulSoup(contents, 'html.parser')
+  form = soup.find('form')
+  if not form:
+    raise ValueError(
+        f'Failed to obtain confirmation link for GDrive URL {original_url}.'
+    )
+  action = form.get('action', '')
+  if not action:
+    raise ValueError(
+        f'Failed to obtain confirmation link for GDrive URL {original_url}.'
+    )
+  # Find the <input>s named 'uuid', 'export', 'id' and 'confirm'
+  input_names = ['uuid', 'export', 'id', 'confirm']
+  params = {}
+  for name in input_names:
+    input_tag = form.find('input', {'name': name})
+    if input_tag:
+      params[name] = input_tag.get('value', '')
+  query_string = urllib.parse.urlencode(params)
+  download_url = f'{action}?{query_string}' if query_string else action
+  download_url = urllib.parse.urljoin(original_url, download_url)
+  return download_url
 
 
 class _Downloader:
@@ -318,11 +356,26 @@ def _open_with_requests(
     session.mount(
         'https://', requests.adapters.HTTPAdapter(max_retries=retries)
     )
-    if _DRIVE_URL.match(url):
-      url = _normalize_drive_url(url)
     with session.get(url, stream=True, **kwargs) as response:
-      _assert_status(response)
-      yield (response, response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE))
+      if (
+          _DRIVE_URL.match(url)
+          and 'Content-Disposition' not in response.headers
+      ):
+        download_url = _process_gdrive_confirmation(url, response.text)
+        with session.get(
+            download_url, stream=True, **kwargs
+        ) as download_response:
+          _assert_status(download_response)
+          yield (
+              download_response,
+              download_response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE),
+          )
+      else:
+        _assert_status(response)
+        yield (
+            response,
+            response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE),
+        )
 
 
 @contextlib.contextmanager
@@ -336,13 +389,6 @@ def _open_with_urllib(
         response,
         iter(functools.partial(response.read, io.DEFAULT_BUFFER_SIZE), b''),
     )
-
-
-def _normalize_drive_url(url: str) -> str:
-  """Returns Google Drive url with confirmation token."""
-  # This bypasses the "Google Drive can't scan this file for viruses" warning
-  # when dowloading large files.
-  return url + '&confirm=t'
 
 
 def _assert_status(response: requests.Response) -> None:

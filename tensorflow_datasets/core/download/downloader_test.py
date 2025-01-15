@@ -18,6 +18,7 @@ import io
 from typing import Optional
 from unittest import mock
 
+import bs4
 from etils import epath
 import pytest
 from tensorflow_datasets import testing
@@ -36,6 +37,7 @@ class _FakeResponse:
     self.status_code = status_code
     # For urllib codepath
     self.read = self.raw.read
+    self.text = ''
 
   def __enter__(self):
     return self
@@ -76,6 +78,14 @@ class DownloaderTest(testing.TestCase):
         downloader.urllib.request,
         'urlopen',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
+    ).start()
+
+    bs_mock = mock.MagicMock(spec=bs4.BeautifulSoup)
+    form_mock = mock.MagicMock()
+    form_mock.get.return_value = 'x'
+    bs_mock.find.return_value = form_mock
+    mock.patch.object(
+        bs4, 'BeautifulSoup', autospec=True, return_value=bs_mock
     ).start()
 
   def test_ok(self):
