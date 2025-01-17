@@ -242,7 +242,10 @@ def test_croissant_builder(crs_builder):
 def test_download_and_prepare(crs_builder, expected_entries, split_name):
   crs_builder.download_and_prepare()
   data_source = crs_builder.as_data_source(split=split_name)
-  assert len(data_source) == 1
+  expected_entries = [
+      entry for entry in expected_entries if entry["split"] == split_name
+  ]
+  assert len(data_source) == len(expected_entries) == 1
   for entry, expected_entry in zip(data_source, expected_entries):
     assert entry["index"] == expected_entry["index"]
     assert entry["text"].decode() == expected_entry["text"]

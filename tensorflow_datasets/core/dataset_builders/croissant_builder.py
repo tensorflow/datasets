@@ -217,15 +217,17 @@ class CroissantBuilder(
     """
     if mapping is None:
       mapping = {}
-    self.dataset = mlc.Dataset(jsonld, mapping=mapping)
-    self.name = croissant_utils.get_tfds_dataset_name(self.dataset)
-    self.metadata = self.dataset.metadata
+    self.jsonld = jsonld
+    self.mapping = mapping
+    dataset = mlc.Dataset(jsonld, mapping=mapping)
+    self.name = croissant_utils.get_tfds_dataset_name(dataset)
+    self.metadata = dataset.metadata
 
     # In TFDS, version is a mandatory attribute, while in Croissant it is only a
     # recommended attribute. If the version is unspecified in Croissant, we set
     # it to `1.0.0` in TFDS.
     self.VERSION = version_lib.Version(  # pylint: disable=invalid-name
-        overwrite_version or self.dataset.metadata.version or '1.0.0'
+        overwrite_version or self.metadata.version or '1.0.0'
     )
     self.RELEASE_NOTES = {}  # pylint: disable=invalid-name
 
@@ -260,11 +262,11 @@ class CroissantBuilder(
   def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(
         builder=self,
-        description=self.dataset.metadata.description,
+        description=self.metadata.description,
         features=self.get_features(),
-        homepage=self.dataset.metadata.url,
-        citation=self.dataset.metadata.cite_as,
-        license=_get_license(self.dataset.metadata),
+        homepage=self.metadata.url,
+        citation=self.metadata.cite_as,
+        license=_get_license(self.metadata),
         disable_shuffling=self._disable_shuffling,
     )
 
@@ -331,7 +333,8 @@ class CroissantBuilder(
     record_set = croissant_utils.get_record_set(
         self.builder_config.name, metadata=self.metadata
     )
-    records = self.dataset.records(record_set.id, filters=filters)
+    dataset = mlc.Dataset(self.jsonld, mapping=self.mapping)
+    records = dataset.records(record_set.id, filters=filters)
 
     def convert_to_tfds_format(
         global_index: int,
