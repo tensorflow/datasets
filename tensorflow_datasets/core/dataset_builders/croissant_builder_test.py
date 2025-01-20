@@ -245,7 +245,8 @@ def test_download_and_prepare(crs_builder, expected_entries, split_name):
   expected_entries = [
       entry for entry in expected_entries if entry["split"] == split_name
   ]
-  assert len(data_source) == len(expected_entries) == 1
+  assert len(data_source) == 1
+  assert len(expected_entries) == 1
   for entry, expected_entry in zip(data_source, expected_entries):
     assert entry["index"] == expected_entry["index"]
     assert entry["text"].decode() == expected_entry["text"]
