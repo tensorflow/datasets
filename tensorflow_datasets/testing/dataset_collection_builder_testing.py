@@ -49,7 +49,7 @@ class DatasetCollectionTestBase:
     the collection will be checked.
   """
 
-  DATASET_COLLECTION_CLASS = None
+  DATASET_COLLECTION_CLASS: type[dataset_collection_builder.DatasetCollection]
   VERSION: Optional[str] = None
   DATASETS_TO_TEST: List[str] = []
   CHECK_DATASETS_VERSION: bool = True
