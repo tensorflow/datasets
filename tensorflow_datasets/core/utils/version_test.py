@@ -23,6 +23,7 @@ from tensorflow_datasets.core.utils import version
 class VersionTest(testing.TestCase):
 
   def test_str_to_version(self):
+    self.assertEqual(version._str_to_version('0.0.0'), (0, 0, 0))
     self.assertEqual(version._str_to_version('1.2.3'), (1, 2, 3))
     self.assertEqual(version._str_to_version('1.2.*', True), (1, 2, '*'))
     self.assertEqual(version._str_to_version('1.*.3', True), (1, '*', 3))

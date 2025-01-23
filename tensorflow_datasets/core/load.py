@@ -501,6 +501,9 @@ def _download_and_prepare_builder(
     download_and_prepare_kwargs: Optional[dict[str, Any]],
 ) -> None:
   """Downloads and prepares the dataset builder if necessary."""
+  if isinstance(dbuilder, read_only_builder.ReadOnlyBuilder):
+    # read only builder can't be used to download and prepare datasets.
+    return
   if dbuilder.is_prepared():
     if not download_and_prepare_kwargs:
       return
