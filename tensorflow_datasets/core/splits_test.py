@@ -698,6 +698,5 @@ class SplitInfoTest(testing.TestCase):
         split_info.get_available_shards(tmp_dir, strict_matching=True),
     )
 
-
 if __name__ == '__main__':
   testing.test_main()
