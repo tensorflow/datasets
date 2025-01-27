@@ -43,8 +43,8 @@ _URL = (
 )
 _NUM_CORRUPT_IMAGES = 1738
 _DESCRIPTION = (
-    "A large set of images of cats and dogs. "
-    "There are %d corrupted images that are dropped." % _NUM_CORRUPT_IMAGES
+    f"A large set of images of cats and dogs. "
+    f"There are {_NUM_CORRUPT_IMAGES} corrupted images that are dropped."
 )
 
 _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
@@ -127,7 +127,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
       raise ValueError(
-          "Expected %d corrupt images, but found %d"
-          % (_NUM_CORRUPT_IMAGES, num_skipped)
+          f"Expected {_NUM_CORRUPT_IMAGES} corrupt images, but found"
+          f" {num_skipped}."
       )
     logging.warning("%d images were corrupted and were skipped", num_skipped)
