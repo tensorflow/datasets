@@ -43,7 +43,7 @@ _URL = (
 )
 _NUM_CORRUPT_IMAGES = 1738
 _DESCRIPTION = (
-    f"A large set of images of cats and dogs. "
+    "A large set of images of cats and dogs. "
     f"There are {_NUM_CORRUPT_IMAGES} corrupted images that are dropped."
 )
 
