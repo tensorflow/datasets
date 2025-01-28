@@ -16,6 +16,7 @@
 """Cats vs Dogs dataset."""
 
 import io
+import os
 import re
 import zipfile
 
@@ -43,7 +44,7 @@ _URL = (
 _NUM_CORRUPT_IMAGES = 1738
 _DESCRIPTION = (
     "A large set of images of cats and dogs. "
-    "There are %d corrupted images that are dropped." % _NUM_CORRUPT_IMAGES
+    f"There are {_NUM_CORRUPT_IMAGES} corrupted images that are dropped."
 )
 
 _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
@@ -94,7 +95,8 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
     """Generate Cats vs Dogs images and labels given a directory path."""
     num_skipped = 0
     for fname, fobj in archive:
-      res = _NAME_RE.match(fname)
+      norm_fname = os.path.normpath(fname)
+      res = _NAME_RE.match(norm_fname)
       if not res:  # README file, ...
         continue
       label = res.group(1).lower()
@@ -113,19 +115,19 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       # Converting the recoded image back into a zip file container.
       buffer = io.BytesIO()
       with zipfile.ZipFile(buffer, "w") as new_zip:
-        new_zip.writestr(fname, img_recoded.numpy())
-      new_fobj = zipfile.ZipFile(buffer).open(fname)
+        new_zip.writestr(norm_fname, img_recoded.numpy())
+      new_fobj = zipfile.ZipFile(buffer).open(norm_fname)
 
       record = {
           "image": new_fobj,
-          "image/filename": fname,
+          "image/filename": norm_fname,
           "label": label,
       }
-      yield fname, record
+      yield norm_fname, record
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
       raise ValueError(
-          "Expected %d corrupt images, but found %d"
-          % (_NUM_CORRUPT_IMAGES, num_skipped)
+          f"Expected {_NUM_CORRUPT_IMAGES} corrupt images, but found"
+          f" {num_skipped}."
       )
     logging.warning("%d images were corrupted and were skipped", num_skipped)
