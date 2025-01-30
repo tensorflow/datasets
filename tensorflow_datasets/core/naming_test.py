@@ -68,6 +68,7 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
       (2, '00000-of-00002', '00001-of-00002'),
       (12345, '00000-of-12345', '12344-of-12345'),
       (654321, '000000-of-654321', '654320-of-654321'),
+      (123456789, '000000000-of-123456789', '123456788-of-123456789'),
   )
   def test_sharded_filepaths(
       self,
