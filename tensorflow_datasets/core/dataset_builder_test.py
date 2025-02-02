@@ -743,28 +743,39 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
         "dummy_dataset_with_configs/plus1/0.0.1/dummy_dataset_with_configs-test.tfrecord@1",
     )
 
-  def test_load_as_data_source(self):
+  @parameterized.parameters(
+      (
+          file_adapters.FileFormat.ARRAY_RECORD,
+          array_record.ArrayRecordDataSource,
+      ),
+  )
+  def test_load_as_data_source(self, file_format, data_source_type):
     data_dir = self.get_temp_dir()
     builder = DummyDatasetWithConfigs(
         data_dir=data_dir,
         config="plus1",
-        file_format=file_adapters.FileFormat.ARRAY_RECORD,
+        file_format=file_format,
     )
     builder.download_and_prepare()
 
     data_source = builder.as_data_source()
     assert isinstance(data_source, dict)
-    assert isinstance(data_source["train"], array_record.ArrayRecordDataSource)
-    assert isinstance(data_source["test"], array_record.ArrayRecordDataSource)
+    assert isinstance(data_source["train"], data_source_type)
+    assert isinstance(data_source["test"], data_source_type)
     assert len(data_source["test"]) == 10
     assert data_source["test"][0]["x"] == 28
     assert len(data_source["train"]) == 20
     assert data_source["train"][0]["x"] == 7
 
     data_source = builder.as_data_source(split="test")
-    assert isinstance(data_source, array_record.ArrayRecordDataSource)
+    assert isinstance(data_source, data_source_type)
     assert len(data_source) == 10
     assert data_source[0]["x"] == 28
+
+    data_source = builder.as_data_source(split="all")
+    assert isinstance(data_source, data_source_type)
+    assert len(data_source) == 30
+    assert data_source[0]["x"] == 7
 
   def test_load_as_data_source_alternative_file_format(self):
     data_dir = self.get_temp_dir()
