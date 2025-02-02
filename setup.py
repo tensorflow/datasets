@@ -183,6 +183,7 @@ DATASET_EXTRAS = {
         'envlogger;python_version<"3.11" and sys_platform=="linux"'
     ],
     'smartwatch_gestures': ['pandas'],
+    'speech_commands' : ['pydub'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'wake_vision': ['pandas'],
