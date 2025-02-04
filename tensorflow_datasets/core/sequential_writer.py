@@ -156,7 +156,7 @@ def _initialize_split(
     filetype_suffix: file format.
     file_format: An entry in file_adapters.FileFormat.
     shard_lengths: if the split already has shards, it contains the list of the
-      shard lenghts. If None, it assumes that the split is empty.
+      shard lengths. If None, it assumes that the split is empty.
     num_bytes: number of bytes that have been written already.
 
   Returns:
