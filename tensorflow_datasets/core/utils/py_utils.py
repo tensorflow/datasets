@@ -208,17 +208,19 @@ def zip_nested(arg0, *args, **kwargs):
   return (arg0,) + args
 
 
-def flatten_nest_dict(d: type_utils.TreeDict[T]) -> dict[str, T]:
-  """Return the dict with all nested keys flattened joined with '/'."""
+def flatten_nest_dict(
+    d: type_utils.TreeDict[T], separator: str = '/'
+) -> dict[str, T]:
+  """Return the dict with all nested keys flattened joined with separator."""
   # Use NonMutableDict to ensure there is no collision between features keys
   flat_dict = NonMutableDict()
   for k, v in d.items():
     if isinstance(v, dict):
-      for k2, v2 in flatten_nest_dict(v).items():
-        flat_dict[f'{k}/{k2}'] = v2
+      for k2, v2 in flatten_nest_dict(v, separator=separator).items():
+        flat_dict[f'{k}{separator}{k2}'] = v2
     elif isinstance(v, list) and v and isinstance(v[0], dict):
       for k2 in v[0]:
-        flat_dict[f'{k}/{k2}'] = [v[i][k2] for i in range(len(v))]
+        flat_dict[f'{k}{separator}{k2}'] = [v[i][k2] for i in range(len(v))]
     else:
       flat_dict[k] = v
   return flat_dict
