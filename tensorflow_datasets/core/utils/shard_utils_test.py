@@ -22,16 +22,94 @@ from tensorflow_datasets.core.utils import shard_utils
 class ShardConfigTest(parameterized.TestCase):
 
   @parameterized.named_parameters(
-      ('imagenet train, 137 GiB', 137 << 30, 1281167, True, 1024),
-      ('imagenet evaluation, 6.3 GiB', 6300 * (1 << 20), 50000, True, 64),
-      ('very large, but few examples, 52 GiB', 52 << 30, 512, True, 512),
-      ('xxl, 10 TiB', 10 << 40, 10**9, True, 11264),
-      ('xxl, 10 PiB, 100B examples', 10 << 50, 10**11, True, 10487808),
-      ('xs, 100 MiB, 100K records', 10 << 20, 100 * 10**3, True, 1),
-      ('m, 499 MiB, 200K examples', 400 << 20, 200 * 10**3, True, 4),
+      dict(
+          testcase_name='imagenet train, 137 GiB',
+          total_size=137 << 30,
+          num_examples=1281167,
+          uses_precise_sharding=True,
+          max_size=None,
+          expected_num_shards=1024,
+      ),
+      dict(
+          testcase_name='imagenet evaluation, 6.3 GiB',
+          total_size=6300 * (1 << 20),
+          num_examples=50000,
+          uses_precise_sharding=True,
+          max_size=None,
+          expected_num_shards=64,
+      ),
+      dict(
+          testcase_name='very large, but few examples, 52 GiB',
+          total_size=52 << 30,
+          num_examples=512,
+          uses_precise_sharding=True,
+          max_size=None,
+          expected_num_shards=512,
+      ),
+      dict(
+          testcase_name='xxl, 10 TiB',
+          total_size=10 << 40,
+          num_examples=10**9,
+          uses_precise_sharding=True,
+          max_size=None,
+          expected_num_shards=11264,
+      ),
+      dict(
+          testcase_name='xxl, 10 PiB, 100B examples',
+          total_size=10 << 50,
+          num_examples=10**11,
+          uses_precise_sharding=True,
+          max_size=None,
+          expected_num_shards=10487808,
+      ),
+      dict(
+          testcase_name='xs, 100 MiB, 100K records',
+          total_size=10 << 20,
+          num_examples=100 * 10**3,
+          uses_precise_sharding=True,
+          max_size=None,
+          expected_num_shards=1,
+      ),
+      dict(
+          testcase_name='m, 499 MiB, 200K examples',
+          total_size=400 << 20,
+          num_examples=200 * 10**3,
+          uses_precise_sharding=True,
+          max_size=None,
+          expected_num_shards=4,
+      ),
+      dict(
+          testcase_name='100GiB, even example sizes',
+          num_examples=1e9,  # 1B examples
+          total_size=1e9 * 1000,  # On average 1000 bytes per example
+          max_size=1000,  # Max example size is 4000 bytes
+          uses_precise_sharding=True,
+          expected_num_shards=1024,
+      ),
+      dict(
+          testcase_name='100GiB, uneven example sizes',
+          num_examples=1e9,  # 1B examples
+          total_size=1e9 * 1000,  # On average 1000 bytes per example
+          max_size=4 * 1000,  # Max example size is 4000 bytes
+          uses_precise_sharding=True,
+          expected_num_shards=4096,
+      ),
+      dict(
+          testcase_name='100GiB, very uneven example sizes',
+          num_examples=1e9,  # 1B examples
+          total_size=1e9 * 1000,  # On average 1000 bytes per example
+          max_size=16 * 1000,  # Max example size is 16x the average bytes
+          uses_precise_sharding=True,
+          expected_num_shards=15360,
+      ),
   )
   def test_get_number_shards_default_config(
-      self, total_size, num_examples, uses_precise_sharding, expected_num_shards
+      self,
+      total_size: int,
+      num_examples: int,
+      uses_precise_sharding: bool,
+      max_size: int,
+      expected_num_shards: int,
   ):
     shard_config = shard_utils.ShardConfig()
     self.assertEqual(
@@ -39,6 +117,7 @@ class ShardConfigTest(parameterized.TestCase):
         shard_config.get_number_shards(
             total_size=total_size,
             num_examples=num_examples,
+            max_example_size=max_size,  # max(1, total_size // num_examples),
             uses_precise_sharding=uses_precise_sharding,
         ),
     )
@@ -48,7 +127,10 @@ class ShardConfigTest(parameterized.TestCase):
     self.assertEqual(
         42,
         shard_config.get_number_shards(
-            total_size=100, num_examples=1, uses_precise_sharding=True
+            total_size=100,
+            max_example_size=100,
+            num_examples=1,
+            uses_precise_sharding=True,
         ),
     )
 

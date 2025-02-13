@@ -116,6 +116,7 @@ def _get_index_path(path: str) -> epath.PathLike:
 def _get_shard_specs(
     num_examples: int,
     total_size: int,
+    max_example_size: int | None,
     bucket_lengths: Sequence[int],
     filename_template: naming.ShardedFileTemplate,
     shard_config: shard_utils.ShardConfig,
@@ -123,13 +124,18 @@ def _get_shard_specs(
   """Returns list of _ShardSpec instances, corresponding to shards to write.
 
   Args:
-    num_examples: int, number of examples in split.
-    total_size: int (bytes), sum of example sizes.
+    num_examples: number of examples in split.
+    total_size: total size in bytes, i.e., the sum of example sizes.
+    max_example_size: maximum size in bytes of a single example.
     bucket_lengths: list of ints, number of examples in each bucket.
     filename_template: template to format sharded filenames.
     shard_config: the configuration for creating shards.
   """
-  num_shards = shard_config.get_number_shards(total_size, num_examples)
+  num_shards = shard_config.get_number_shards(
+      total_size=total_size,
+      max_example_size=max_example_size,
+      num_examples=num_examples,
+  )
   shard_boundaries = shard_utils.get_shard_boundaries(num_examples, num_shards)
   shard_specs = []
   bucket_indexes = [str(i) for i in range(len(bucket_lengths))]
@@ -350,6 +356,7 @@ class Writer:
     self._filename_template = filename_template
     self._shard_config = shard_config or shard_utils.ShardConfig()
     self._example_writer = example_writer
+    self._max_example_size = 0
 
   def write(self, key: int | bytes, example: Example):
     """Writes given example.
@@ -363,6 +370,9 @@ class Writer:
     """
     serialized_example = self._serializer.serialize_example(example=example)
     self._shuffler.add(key, serialized_example)
+    self._max_example_size = max(
+        self._max_example_size, len(serialized_example)
+    )
 
   def finalize(self) -> tuple[list[int], int]:
     """Effectively writes examples to the shards."""
@@ -372,6 +382,7 @@ class Writer:
     shard_specs = _get_shard_specs(
         num_examples=self._shuffler.num_examples,
         total_size=self._shuffler.size,
+        max_example_size=self._max_example_size,
         bucket_lengths=self._shuffler.bucket_lengths,
         filename_template=self._filename_template,
         shard_config=self._shard_config,
@@ -589,10 +600,13 @@ class BeamWriter:
         id=shard_id, num_examples=len(example_by_key), size=shard_size
     )
 
-  def _number_of_shards(self, num_examples: int, total_size: int) -> int:
+  def _number_of_shards(
+      self, num_examples: int, total_size: int, max_example_size: int
+  ) -> int:
     """Returns the number of shards."""
     num_shards = self._shard_config.get_number_shards(
         total_size=total_size,
+        max_example_size=max_example_size,
         num_examples=num_examples,
         uses_precise_sharding=False,
     )
@@ -658,16 +672,26 @@ class BeamWriter:
         | "CountExamples" >> beam.combiners.Count.Globally()
         | "CheckValidNumExamples" >> beam.Map(self._check_num_examples)
     )
+    serialized_example_sizes = (
+        serialized_examples | beam.Values() | beam.Map(len)
+    )
     total_size = beam.pvalue.AsSingleton(
-        serialized_examples
-        | beam.Values()
-        | beam.Map(len)
-        | "TotalSize" >> beam.CombineGlobally(sum)
+        serialized_example_sizes | "TotalSize" >> beam.CombineGlobally(sum)
+    )
+
+    max_example_size = beam.pvalue.AsSingleton(
+        serialized_example_sizes
+        | "TopExampleSize" >> beam.combiners.Top.Largest(1)
+        | "MaxExampleSize" >> beam.CombineGlobally(_get_max_size)
     )
     ideal_num_shards = beam.pvalue.AsSingleton(
         num_examples
         | "NumberOfShards"
-        >> beam.Map(self._number_of_shards, total_size=total_size)
+        >> beam.Map(
+            self._number_of_shards,
+            total_size=total_size,
+            max_example_size=max_example_size,
+        )
     )
 
     examples_per_shard = (
@@ -826,3 +850,10 @@ class NoShuffleBeamWriter:
     )
 
     return shard_lengths, total_size_bytes
+
+
+def _get_max_size(sizes: Iterable[int]) -> int | None:
+  sizes = list(sizes)
+  if not sizes:
+    return None
+  return max(sizes)

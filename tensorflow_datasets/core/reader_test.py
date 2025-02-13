@@ -97,6 +97,7 @@ class ReaderTest(testing.TestCase):
     shard_specs = writer_lib._get_shard_specs(
         num_examples=num_examples,
         total_size=0,
+        max_example_size=None,
         bucket_lengths=[num_examples],
         filename_template=filename_template,
         shard_config=shard_utils.ShardConfig(num_shards=shards_number),
