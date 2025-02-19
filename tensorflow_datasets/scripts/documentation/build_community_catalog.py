@@ -579,7 +579,9 @@ def _get_formatter_per_namespace(
 ) -> Mapping[str, NamespaceFormatter]:
   """Returns the formatter per namespace."""
   formatters = {}
-  for namespace, datasets in _get_datasets_per_namespace().items():
+  for namespace, datasets in _get_datasets_per_namespace(
+      excluded_namespaces=['huggingface']
+  ).items():
     formatters[namespace] = formatter_for(
         namespace=namespace,
         datasets=datasets,
@@ -589,7 +591,9 @@ def _get_formatter_per_namespace(
   return formatters
 
 
-def _get_datasets_per_namespace() -> Mapping[str, Sequence[DatasetPackage]]:
+def _get_datasets_per_namespace(
+    excluded_namespaces: list[str] | None = None,
+) -> Mapping[str, Sequence[DatasetPackage]]:
   """Retrieves community datasets from GCS and groups them per namespace."""
   content = epath.Path(gcs_utils.GCS_COMMUNITY_INDEX_PATH).read_text()
   datasets_per_namespace: MutableMapping[str, List[DatasetPackage]] = {}
@@ -598,7 +602,9 @@ def _get_datasets_per_namespace() -> Mapping[str, Sequence[DatasetPackage]]:
     namespace = dataset_package.name.namespace
     if not namespace:
       raise ValueError(f'No namespace was specified for {dataset_package}')
-    if namespace not in datasets_per_namespace:
+    if excluded_namespaces and namespace in excluded_namespaces:
+      continue
+    elif namespace not in datasets_per_namespace:
       datasets_per_namespace[namespace] = [dataset_package]
     else:
       datasets_per_namespace[namespace].append(dataset_package)
