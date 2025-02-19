@@ -217,6 +217,44 @@ class SplitDictTest(testing.TestCase):
     assert merged.get('test').split_infos == [split_info_a2, split_info_b2]
     assert merged.get('banana').split_infos == [split_info_a3]
 
+  def test_multi_split_sub_split(self):
+    split_info = splits.MultiSplitInfo(
+        name='train',
+        split_infos=[
+            splits.SubSplitInfo(
+                name='train[:2]',
+                file_instructions=[
+                    shard_utils.FileInstruction(
+                        filename='/a/file-00000-of-00001',
+                        skip=0,
+                        take=2,
+                        examples_in_shard=10,
+                    )
+                ],
+            ),
+            splits.SubSplitInfo(
+                name='train[:10]',
+                file_instructions=[
+                    shard_utils.FileInstruction(
+                        filename='/b/file-00000-of-00001',
+                        skip=0,
+                        take=10,
+                        examples_in_shard=20,
+                    )
+                ],
+            ),
+        ],
+    )
+    split_dict = splits.SplitDict([split_info])
+    sub_split = split_dict['train[:2]']
+    self.assertEqual(sub_split.name, 'train[:2]')
+    self.assertLen(sub_split.file_instructions, 1)
+    file_instruction = sub_split.file_instructions[0]
+    self.assertEqual(file_instruction.filename, '/a/file-00000-of-00001')
+    self.assertEqual(file_instruction.skip, 0)
+    self.assertEqual(file_instruction.take, 2)
+    self.assertEqual(file_instruction.examples_in_shard, 10)
+
 
 class SplitsTest(testing.TestCase):
 

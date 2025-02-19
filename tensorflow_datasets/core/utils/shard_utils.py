@@ -216,6 +216,7 @@ def get_file_instructions(
     to: int,
     filenames: Sequence[str],
     shard_lengths: Sequence[int],
+    examples_in_shards: Sequence[int] | None = None,
 ) -> list[FileInstruction]:
   """Returns a list of files (+skip/take) to read [from_:to] items from shards.
 
@@ -225,6 +226,8 @@ def get_file_instructions(
     filenames: list of strings or ints, the filenames of the shards. Not really
       used, but to place in result.
     shard_lengths: the number of elements in every shard.
+    examples_in_shards: the number of examples in every shard. If not provided,
+      then `shard_lengths` is used.
 
   Returns:
     list of dict(filename, skip, take).
@@ -232,7 +235,9 @@ def get_file_instructions(
   index_start = 0  # Beginning (included) of moving window.
   index_end = 0  # End (excluded) of moving window.
   file_instructions = []
-  for filename, length in zip(filenames, shard_lengths):
+  for shard_index, (filename, length) in enumerate(
+      zip(filenames, shard_lengths)
+  ):
     if not length:
       continue  # Empty shard - can happen with temporary buckets.
     index_end += length
@@ -241,9 +246,18 @@ def get_file_instructions(
       take = to - index_start - skip if to < index_end else -1
       if take == 0:
         continue
+      if examples_in_shards is not None:
+        examples_in_shard = examples_in_shards[shard_index]
+        if take == -1 and examples_in_shard != length:
+          take = length
+      else:
+        examples_in_shard = length
       file_instructions.append(
           FileInstruction(
-              filename=filename, skip=skip, take=take, examples_in_shard=length
+              filename=filename,
+              skip=skip,
+              take=take,
+              examples_in_shard=examples_in_shard,
           )
       )
     index_start += length

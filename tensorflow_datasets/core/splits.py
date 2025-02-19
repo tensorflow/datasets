@@ -536,11 +536,18 @@ def _file_instructions_for_split(
     )
     return []
   to = split_info.num_examples if instruction.to is None else instruction.to
+  if isinstance(split_info, (SubSplitInfo, MultiSplitInfo)):
+    examples_in_shards = [
+        f.examples_in_shard for f in split_info.file_instructions
+    ]
+  else:
+    examples_in_shards = None
   return shard_utils.get_file_instructions(
       from_=instruction.from_ or 0,
       to=to,
       filenames=[os.fspath(fp) for fp in split_info.filepaths],
       shard_lengths=split_info.shard_lengths,
+      examples_in_shards=examples_in_shards,
   )
 
 
