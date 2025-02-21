@@ -72,6 +72,8 @@ class DatasetImporterBuilder(
     pass
 
   def get_dataset_location(self):
+    if self._data_dir and tf.io.gfile.exists(self._data_dir):
+      return self._data_dir
     return os.path.join(
         str(self._GCS_BUCKET), self.get_relative_dataset_location()
     )
