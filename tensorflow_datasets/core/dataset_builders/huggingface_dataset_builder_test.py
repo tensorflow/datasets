@@ -18,6 +18,7 @@ from unittest import mock
 import datasets as hf_datasets
 import numpy as np
 import pytest
+from tensorflow_datasets.core import download
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
 from tensorflow_datasets.core.utils.lazy_imports_utils import huggingface_hub
