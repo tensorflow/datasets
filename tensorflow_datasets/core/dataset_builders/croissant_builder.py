@@ -52,6 +52,7 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import text_feature
 from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils import croissant_utils
@@ -73,6 +74,51 @@ def _strip_record_set_prefix(
       field_id.removeprefix(f'{record_set_id}/'): value
       for field_id, value in record_or_feature.items()
   }
+
+
+def array_datatype_converter(
+    feature: type_utils.TfdsDType | feature_lib.FeatureConnector | None,
+    field: mlc.Field,
+    int_dtype: type_utils.TfdsDType = np.int64,
+    float_dtype: type_utils.TfdsDType = np.float32,
+):
+  """Includes the given feature in a sequence or tensor feature.
+
+  Single-dimensional arrays are converted to sequences. Multi-dimensional arrays
+  with unknown dimensions, or with non-native dtypes are converted to sequences
+  of sequences. Otherwise, they are converted to tensors.
+
+  Args:
+    feature: The inner feature to include in a sequence or tensor feature.
+    field: The mlc.Field object.
+    int_dtype: The dtype to use for TFDS integer features. Defaults to np.int64.
+    float_dtype: The dtype to use for TFDS float features. Defaults to
+      np.float32.
+
+  Returns:
+    A sequence or tensor feature including the inner feature.
+  """
+  dtype_mapping = {
+      int: int_dtype,
+      float: float_dtype,
+      bool: np.bool_,
+      bytes: np.str_,
+  }
+  dtype = dtype_mapping.get(field.data_type, None)
+  if len(field.array_shape_tuple) == 1:
+    return sequence_feature.Sequence(feature, doc=field.description)
+  elif (-1 in field.array_shape_tuple) or (
+      field.data_type not in dtype_mapping
+  ):
+    for _ in range(len(field.array_shape_tuple)):
+      feature = sequence_feature.Sequence(feature, doc=field.description)
+    return feature
+  else:
+    return tensor_feature.Tensor(
+        shape=field.array_shape_tuple,
+        dtype=dtype,
+        doc=field.description,
+    )
 
 
 def datatype_converter(
@@ -133,6 +179,16 @@ def datatype_converter(
   else:
     raise ValueError(f'Unknown data type: {field_data_type}.')
 
+  if feature and field.is_array:
+    feature = array_datatype_converter(
+        feature=feature,
+        field=field,
+        int_dtype=int_dtype,
+        float_dtype=float_dtype,
+    )
+  # If the field is repeated, we return a sequence feature. `field.repeated` is
+  # deprecated starting from Croissant 1.1, but we still support it for
+  # backwards compatibility.
   if feature and field.repeated:
     feature = sequence_feature.Sequence(feature, doc=field.description)
   return feature

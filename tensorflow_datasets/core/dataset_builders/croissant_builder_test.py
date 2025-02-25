@@ -161,6 +161,57 @@ def test_complex_datatype_converter(field, feature_type, subfield_types):
       )
 
 
+def test_multidimensional_datatype_converter():
+  field = mlc.Field(
+      data_types=mlc.DataType.TEXT,
+      description="Text feature",
+      is_array=True,
+      array_shape="2,2",
+  )
+  actual_feature = croissant_builder.datatype_converter(field)
+  assert isinstance(actual_feature, tensor_feature.Tensor)
+  assert actual_feature.shape == (2, 2)
+  assert actual_feature.dtype == np.str_
+
+
+def test_multidimensional_datatype_converter_image_object():
+  field = mlc.Field(
+      data_types=mlc.DataType.IMAGE_OBJECT,
+      description="Text feature",
+      is_array=True,
+      array_shape="2,2",
+  )
+  actual_feature = croissant_builder.datatype_converter(field)
+  assert isinstance(actual_feature, sequence_feature.Sequence)
+  assert isinstance(actual_feature.feature, sequence_feature.Sequence)
+  assert isinstance(actual_feature.feature.feature, image_feature.Image)
+
+
+def test_multidimensional_datatype_converter_plain_list():
+  field = mlc.Field(
+      data_types=mlc.DataType.TEXT,
+      description="Text feature",
+      is_array=True,
+      array_shape="-1",
+  )
+  actual_feature = croissant_builder.datatype_converter(field)
+  assert isinstance(actual_feature, sequence_feature.Sequence)
+  assert isinstance(actual_feature.feature, text_feature.Text)
+
+
+def test_multidimensional_datatype_converter_unknown_shape():
+  field = mlc.Field(
+      data_types=mlc.DataType.TEXT,
+      description="Text feature",
+      is_array=True,
+      array_shape="-1,2",
+  )
+  actual_feature = croissant_builder.datatype_converter(field)
+  assert isinstance(actual_feature, sequence_feature.Sequence)
+  assert isinstance(actual_feature.feature, sequence_feature.Sequence)
+  assert isinstance(actual_feature.feature.feature, text_feature.Text)
+
+
 def test_sequence_feature_datatype_converter():
   field = mlc.Field(
       data_types=mlc.DataType.TEXT,
