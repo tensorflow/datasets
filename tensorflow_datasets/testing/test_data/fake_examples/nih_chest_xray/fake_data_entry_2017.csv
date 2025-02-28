@@ -1,0 +1,5 @@
+Image Index,Finding Labels,Follow-up #,Patient ID,Patient Age,Patient Gender,View Position,OriginalImage[Width,Height],OriginalImagePixelSpacing[x,y]
+00030323_029.png,No Finding,1,8,70,F,PA,2048,2500,0.171,0.171
+00030345_000.png,Nodule,2,8,72,F,PA,2048,2500,0.168,0.168
+00030346_001.png,Emphysema,0,9,72,M,PA,2992,2991,0.14300000000000002,0.14300000000000002
+00030358_000.png,Infiltration,0,10,84,F,PA,2992,2991,0.14300000000000002,0.14300000000000002
