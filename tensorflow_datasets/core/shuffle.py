@@ -244,9 +244,10 @@ class Shuffler(object):
     self._total_bytes = 0
     # To keep data in memory until enough data has been gathered.
     self._in_memory = True
-    self._mem_buffer = []
+    self._mem_buffer: list[type_utils.KeySerializedExample] = []
     self._seen_keys: set[int] = set()
     self._num_examples = 0
+    self._max_size = 0
 
   @property
   def size(self) -> int:
@@ -263,6 +264,10 @@ class Shuffler(object):
   def num_examples(self) -> int:
     return self._num_examples
 
+  @property
+  def max_size(self) -> int:
+    return self._max_size
+
   def _add_to_bucket(self, hkey: int, data: bytes) -> None:
     bucket_number = get_bucket_number(hkey=hkey, num_buckets=BUCKETS_NUMBER)
     self._buckets[bucket_number].add(hkey, data)
@@ -272,10 +277,10 @@ class Shuffler(object):
     if self._total_bytes > MAX_MEM_BUFFER_SIZE:
       for hkey, data in self._mem_buffer:
         self._add_to_bucket(hkey, data)
-      self._mem_buffer = None
+      self._mem_buffer = []
       self._in_memory = False
 
-  def add(self, key: type_utils.Key, data: bytes) -> bool:
+  def add(self, key: type_utils.Key, data: bytes) -> None:
     """Add (key, data) to shuffler."""
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
@@ -299,6 +304,7 @@ class Shuffler(object):
     else:
       self._add_to_bucket(hkey, data)
     self._num_examples += 1  # pytype: disable=bad-return-type
+    self._max_size = max(self._max_size, len(data))
 
   def __iter__(self) -> Iterator[type_utils.KeySerializedExample]:
     self._read_only = True
