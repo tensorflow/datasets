@@ -15,6 +15,7 @@
 
 """Robotics datasets."""
 
+from tensorflow_datasets.robotics.asimov import AsimovInjury
 from tensorflow_datasets.robotics.mt_opt import MtOpt
 from tensorflow_datasets.robotics.rtx import AlohaMobile
 from tensorflow_datasets.robotics.rtx import AsuTableTopConvertedExternallyToRlds
