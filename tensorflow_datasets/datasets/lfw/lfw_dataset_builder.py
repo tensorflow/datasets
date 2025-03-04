@@ -28,7 +28,7 @@ LFW_IMAGE_SHAPE = (250, 250, 3)
 class Builder(tfds.core.GeneratorBasedBuilder):
   """LFW Builder class."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.1")
 
   def _info(self):
     return self.dataset_info_from_configs(
