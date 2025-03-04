@@ -20,6 +20,8 @@ import os
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
+# URL where the data is hosted. This is the same also used e.g. by scikit-learn:
+# https://github.com/scikit-learn/scikit-learn/blob/98ed9dc73a86f5f11781a0e21f24c8f47979ec67/sklearn/datasets/_lfw.py#L36
 _URL = "https://ndownloader.figshare.com/files/5976018"
 
 LFW_IMAGE_SHAPE = (250, 250, 3)
