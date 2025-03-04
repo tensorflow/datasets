@@ -20,7 +20,7 @@ import os
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = "http://vis-www.cs.umass.edu/lfw/lfw.tgz"
+_URL = "https://ndownloader.figshare.com/files/5976018"
 
 LFW_IMAGE_SHAPE = (250, 250, 3)
 
@@ -28,7 +28,7 @@ LFW_IMAGE_SHAPE = (250, 250, 3)
 class Builder(tfds.core.GeneratorBasedBuilder):
   """LFW Builder class."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.1")
 
   def _info(self):
     return self.dataset_info_from_configs(
