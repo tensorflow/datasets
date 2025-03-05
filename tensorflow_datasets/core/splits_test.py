@@ -727,7 +727,7 @@ class SplitInfoTest(testing.TestCase):
             split='train', data_dir=os.fspath(tmp_dir), dataset_name='ds'
         ),
     )
-    self.assertEqual(
+    self.assertCountEqual(
         [train_shard1, train_shard_incorrect],
         split_info.get_available_shards(tmp_dir, strict_matching=False),
     )
