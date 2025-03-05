@@ -28,6 +28,7 @@ glue/wnli/1.0.1
 imagenet_pi/1.0.0
 laion400m/embeddings/1.0.0
 laion400m/images/1.0.0
+lfw/0.1.1
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 reddit_disentanglement/2.0.0
