@@ -40,6 +40,7 @@ from collections.abc import Mapping, Sequence
 import json
 from typing import Any
 
+from etils import enp
 from etils import epath
 import numpy as np
 from tensorflow_datasets.core import dataset_builder
@@ -79,8 +80,7 @@ def _strip_record_set_prefix(
 def array_datatype_converter(
     feature: type_utils.TfdsDType | feature_lib.FeatureConnector | None,
     field: mlc.Field,
-    int_dtype: type_utils.TfdsDType = np.int64,
-    float_dtype: type_utils.TfdsDType = np.float32,
+    dtype_mapping: Mapping[type_utils.TfdsDType, type_utils.TfdsDType],
 ):
   """Includes the given feature in a sequence or tensor feature.
 
@@ -91,32 +91,28 @@ def array_datatype_converter(
   Args:
     feature: The inner feature to include in a sequence or tensor feature.
     field: The mlc.Field object.
-    int_dtype: The dtype to use for TFDS integer features. Defaults to np.int64.
-    float_dtype: The dtype to use for TFDS float features. Defaults to
-      np.float32.
+    dtype_mapping: A mapping of dtypes to the corresponding dtypes that will be
+      used in TFDS.
 
   Returns:
     A sequence or tensor feature including the inner feature.
   """
-  dtype_mapping = {
-      int: int_dtype,
-      float: float_dtype,
-      bool: np.bool_,
-      bytes: np.str_,
-  }
-  dtype = dtype_mapping.get(field.data_type, None)
+  field_dtype = None
+  if field.data_type in dtype_mapping:
+    field_dtype = dtype_mapping[field.data_type]
+  elif enp.lazy.is_np_dtype(field.data_type):
+    field_dtype = field.data_type
+
   if len(field.array_shape_tuple) == 1:
     return sequence_feature.Sequence(feature, doc=field.description)
-  elif (-1 in field.array_shape_tuple) or (
-      field.data_type not in dtype_mapping
-  ):
+  elif (-1 in field.array_shape_tuple) or (field_dtype is None):
     for _ in range(len(field.array_shape_tuple)):
       feature = sequence_feature.Sequence(feature, doc=field.description)
     return feature
   else:
     return tensor_feature.Tensor(
         shape=field.array_shape_tuple,
-        dtype=dtype,
+        dtype=field_dtype,
         doc=field.description,
     )
 
@@ -142,8 +138,15 @@ def datatype_converter(
   """
   if field.is_enumeration:
     raise NotImplementedError('Not implemented yet.')
+  dtype_mapping = {
+      bool: np.bool_,
+      bytes: np.str_,
+      float: float_dtype,
+      int: int_dtype,
+  }
 
   field_data_type = field.data_type
+
   if not field_data_type:
     # Fields with sub fields are of type None
     if field.sub_fields:
@@ -158,14 +161,12 @@ def datatype_converter(
       )
     else:
       feature = None
-  elif field_data_type == int:
-    feature = int_dtype
-  elif field_data_type == float:
-    feature = float_dtype
-  elif field_data_type == bool:
-    feature = np.bool_
   elif field_data_type == bytes:
     feature = text_feature.Text(doc=field.description)
+  elif field_data_type in dtype_mapping:
+    feature = dtype_mapping[field_data_type]
+  elif enp.lazy.is_np_dtype(field_data_type):
+    feature = field_data_type
   # We return a text feature for mlc.DataType.DATE features.
   elif field_data_type == pd.Timestamp:
     feature = text_feature.Text(doc=field.description)
@@ -183,8 +184,7 @@ def datatype_converter(
     feature = array_datatype_converter(
         feature=feature,
         field=field,
-        int_dtype=int_dtype,
-        float_dtype=float_dtype,
+        dtype_mapping=dtype_mapping,
     )
   # If the field is repeated, we return a sequence feature. `field.repeated` is
   # deprecated starting from Croissant 1.1, but we still support it for

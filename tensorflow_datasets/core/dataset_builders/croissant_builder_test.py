@@ -50,13 +50,21 @@ DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
 
 
 @pytest.mark.parametrize(
-    ["field", "feature_type", "int_dtype", "float_dtype"],
+    ["field", "expected_feature", "int_dtype", "float_dtype"],
     [
         (
             mlc.Field(
                 data_types=mlc.DataType.INTEGER, description="Integer feature"
             ),
             np.int64,
+            None,
+            None,
+        ),
+        (
+            mlc.Field(
+                data_types=mlc.DataType.INT16, description="Int16 feature"
+            ),
+            np.int16,
             None,
             None,
         ),
@@ -78,6 +86,14 @@ DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
         ),
         (
             mlc.Field(
+                data_types=mlc.DataType.FLOAT16, description="Float16 feature"
+            ),
+            np.float16,
+            None,
+            None,
+        ),
+        (
+            mlc.Field(
                 data_types=mlc.DataType.FLOAT, description="Float feature"
             ),
             np.float64,
@@ -94,13 +110,15 @@ DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
         ),
     ],
 )
-def test_simple_datatype_converter(field, feature_type, int_dtype, float_dtype):
+def test_simple_datatype_converter(
+    field, expected_feature, int_dtype, float_dtype
+):
   actual_feature = croissant_builder.datatype_converter(
       field,
       int_dtype=int_dtype or np.int64,
       float_dtype=float_dtype or np.float32,
   )
-  assert actual_feature == feature_type
+  assert actual_feature == expected_feature
 
 
 @pytest.mark.parametrize(
