@@ -1092,6 +1092,7 @@ kitti/3.3.0
 kmnist/3.0.1
 kuka/0.1.0
 lambada/1.0.0
+lfw/0.1.1
 librispeech/default/2.1.1
 librispeech/lazy_decode/2.1.2
 librispeech_lm/0.1.0
