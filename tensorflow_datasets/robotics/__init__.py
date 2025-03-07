@@ -15,6 +15,12 @@
 
 """Robotics datasets."""
 
+from tensorflow_datasets.robotics.asimov.asimov import AsimovDilemmasAutoVal
+from tensorflow_datasets.robotics.asimov.asimov import AsimovDilemmasScifiTrain
+from tensorflow_datasets.robotics.asimov.asimov import AsimovDilemmasScifiVal
+from tensorflow_datasets.robotics.asimov.asimov import AsimovInjuryVal
+from tensorflow_datasets.robotics.asimov.asimov import AsimovMultimodalAutoVal
+from tensorflow_datasets.robotics.asimov.asimov import AsimovMultimodalManualVal
 from tensorflow_datasets.robotics.mt_opt import MtOpt
 from tensorflow_datasets.robotics.rtx import AlohaMobile
 from tensorflow_datasets.robotics.rtx import AsuTableTopConvertedExternallyToRlds
