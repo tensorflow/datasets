@@ -1,0 +1,2 @@
+https://zenodo.org/record/3893508/files/ribfrac-train-images-1.zip 36605667168 4ba8d33d32962267d294ec4aa5cd50073b06cf310832e9683d9f8d2075ccfe75
+https://zenodo.org/record/3893508/files/ribfrac-train-labels-1.zip 7858072 0350a55f51a908ec71ade64d2fdb7aba490903acbc0907e10697f0b61412ebb1
