@@ -25,7 +25,7 @@ import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_DOWNLOAD_URL = "http://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip"
+_DOWNLOAD_URL = "https://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip"
 _HOMEPAGE_URL = "http://help.sentiment140.com/home"
 
 
