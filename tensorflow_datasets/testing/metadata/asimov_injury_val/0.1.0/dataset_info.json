@@ -1,0 +1,26 @@
+{
+  "citation": "@article{Sermanet2025RobotConstitutions,\n  author    = {Pierre Sermanet and Anirudha Majumdar and Alex Irpan and Dmitry Kalashnikov and Vikas Sindhwani},\n  title     = {Generating Robot Constitutions & Benchmarks for Semantic Safety},\n  journal   = {arXiv preprint arXiv:FIXME},\n  url       = {https://arxiv.org/abs/FIXME},\n  year      = {2025},\n}",
+  "description": "Situations generated from real hospital injury reports (validation set).",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://asimov-benchmark.github.io/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.asimov.asimov",
+  "name": "asimov_injury_val",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "val",
+      "numBytes": "5451196",
+      "shardLengths": [
+        "304"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}
