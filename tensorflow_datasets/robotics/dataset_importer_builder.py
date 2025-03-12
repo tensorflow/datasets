@@ -28,6 +28,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
+import tree
 
 
 
@@ -218,7 +219,7 @@ class TFDSDatasetImporterBuilder(
     read_config = read_config_lib.ReadConfig(add_tfds_id=True)
 
     def converter_fn(example):
-      example_out = dataset_utils.as_numpy(example)
+      example_out = tree.map_structure(to_np, example)
       example_id = example_out['tfds_id'].decode('utf-8')
       del example_out['tfds_id']
 
@@ -235,3 +236,10 @@ class TFDSDatasetImporterBuilder(
     ds_location = self.get_dataset_location()
     ds_builder = tfds.builder_from_directory(ds_location)
     return ds_builder
+
+
+def to_np(tensor):
+  """Convert tensor to numpy."""
+  if isinstance(tensor, tf.Tensor) or isinstance(tensor, tf.RaggedTensor):
+    return tensor.numpy()
+  return tensor

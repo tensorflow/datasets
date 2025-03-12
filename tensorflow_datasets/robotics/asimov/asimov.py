@@ -18,11 +18,11 @@
 from tensorflow_datasets.robotics import dataset_importer_builder
 
 ASIMOV_CITATION = """
-@article{Sermanet2025RobotConstitutions,
+@article{sermanet2025asimov,
   author    = {Pierre Sermanet and Anirudha Majumdar and Alex Irpan and Dmitry Kalashnikov and Vikas Sindhwani},
   title     = {Generating Robot Constitutions & Benchmarks for Semantic Safety},
-  journal   = {arXiv preprint arXiv:FIXME},
-  url       = {https://arxiv.org/abs/FIXME},
+  journal   = {arXiv preprint arXiv:2503.08663},
+  url       = {https://arxiv.org/abs/2503.08663},
   year      = {2025},
 }
 """
