@@ -20,6 +20,30 @@ and this project adheres to
 
 ### Security
 
+## [4.9.8] - 2025-03-13
+
+### Added
+
+- New Beam writer `NoShuffleBeamWriter` that doesn't shuffle, which speeds up
+  dataset generation significantly, but does not have deterministic order
+  guarantees. Can be enabled with the flag `--nondeterministic_order`.
+- CroissantBuilder now supports Croissant files that define splits; and new
+  feature types: feature dictionaries and multidimensional arrays.
+- New datasets.
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+- Various small bug fixes.
+- Various performance improvements.
+
+### Security
+
 ## [4.9.7] - 2024-10-30
 
 ### Added

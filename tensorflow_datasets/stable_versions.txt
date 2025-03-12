@@ -14,6 +14,7 @@ ai2_arc/ARC-Challenge/1.0.0
 ai2_arc/ARC-Easy/1.0.0
 ai2_arc_with_ir/ARC-Challenge-IR/1.0.0
 ai2_arc_with_ir/ARC-Easy-IR/1.0.0
+ai2dcaption/1.0.0
 aloha_mobile/0.1.0
 amazon_us_reviews/Apparel_v1_00/0.1.0
 amazon_us_reviews/Automotive_v1_00/0.1.0
@@ -66,7 +67,13 @@ anli/r2/0.1.0
 anli/r3/0.1.0
 answer_equivalence/1.0.0
 arc/2019-12-06/1.0.0
-asqa/1.0.0
+asimov_dilemmas_auto_val/0.1.0
+asimov_dilemmas_scifi_train/0.1.0
+asimov_dilemmas_scifi_val/0.1.0
+asimov_injury_val/0.1.0
+asimov_multimodal_auto_val/0.1.0
+asimov_multimodal_manual_val/0.1.0
+asqa/2.0.0
 asset/ratings/1.0.0
 asset/simplification/1.0.0
 assin2/1.0.0
@@ -711,7 +718,8 @@ dlr_sara_pour_converted_externally_to_rlds/0.1.0
 dmlab/2.0.1
 dobbe/0.1.0
 doc_nli/1.0.0
-dolphin_number_word/0.0.2
+dolma/1.0.0
+dolphin_number_word/0.0.3
 domainnet/clipart/1.0.0
 domainnet/infograph/1.0.0
 domainnet/painting/1.0.0
@@ -724,7 +732,7 @@ drop/2.0.0
 dsprites/2.0.0
 dsprites/2.1.0
 dtd/3.0.1
-duke_ultrasound/1.0.1
+duke_ultrasound/2.0.0
 e2e_cleaned/0.1.0
 efron_morris75/1.0.0
 emnist/balanced/3.1.0
@@ -1098,10 +1106,7 @@ imagenette/full-size/1.0.0
 imagewang/160px/2.0.0
 imagewang/320px/2.0.0
 imagewang/full-size/2.0.0
-imdb_reviews/bytes/1.0.0
 imdb_reviews/plain_text/1.0.0
-imdb_reviews/subwords32k/1.0.0
-imdb_reviews/subwords8k/1.0.0
 imperialcollege_sawyer_wrist_cam/0.1.0
 io_ai_tech/0.1.0
 irc_disentanglement/2.0.0
@@ -1120,7 +1125,7 @@ kuka/0.1.0
 laion400m/embeddings/1.0.0
 laion400m/images/1.0.0
 lambada/1.0.0
-lfw/0.1.0
+lfw/0.1.1
 librispeech/default/2.1.1
 librispeech/lazy_decode/2.1.2
 librispeech_lm/0.1.0
@@ -1344,7 +1349,7 @@ opus/law/0.1.0
 opus/medical/0.1.0
 opus/subtitles/0.1.0
 oxford_flowers102/2.1.1
-oxford_iiit_pet/3.2.0
+oxford_iiit_pet/4.0.0
 para_crawl/enbg/1.2.0
 para_crawl/encs/1.2.0
 para_crawl/enda/1.2.0
@@ -1394,6 +1399,7 @@ plant_leaves/0.1.1
 plant_village/1.0.2
 plantae_k/0.1.0
 plex_robosuite/0.1.0
+pneumonia_mnist/1.0.0
 protein_net/casp10/1.0.0
 protein_net/casp11/1.0.0
 protein_net/casp12/1.0.0
@@ -2289,6 +2295,7 @@ siscore/rotation/1.0.0
 siscore/size/1.0.0
 smallnorb/2.0.0
 smallnorb/2.1.0
+smart_buildings/sb1/1.0.0
 smartwatch_gestures/1.0.0
 snli/1.1.0
 so2sat/all/2.0.0
@@ -3233,12 +3240,11 @@ super_glue/rte/1.0.2
 super_glue/wic/1.0.2
 super_glue/wsc.fixed/1.0.2
 super_glue/wsc/1.0.2
-svhn_cropped/3.0.0
 svhn_cropped/3.1.0
 symmetric_solids/1.0.0
 taco_play/0.1.0
-tao/480_640/1.0.0
-tao/full_resolution/1.0.0
+tao/480_640/1.1.0
+tao/full_resolution/1.1.0
 tatoeba/tatoeba_af/1.0.0
 tatoeba/tatoeba_ar/1.0.0
 tatoeba/tatoeba_bg/1.0.0
@@ -3611,6 +3617,7 @@ voc/2007/4.0.0
 voc/2012/4.0.0
 voxceleb/1.2.1
 voxforge/1.0.0
+wake_vision/1.0.0
 waymo_open_dataset/v1.0/0.2.0
 waymo_open_dataset/v1.1/0.2.0
 waymo_open_dataset/v1.2/0.2.0
