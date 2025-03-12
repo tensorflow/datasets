@@ -722,7 +722,19 @@ class BeamWriter:
 
 
 class NoShuffleBeamWriter:
-  """Shuffles / writes Examples beam collection to sharded files."""
+  """Writes examples to sharded files using Beam in a non-deterministic way.
+
+  The number of shards and in what shard an example is written is
+  non-deterministic. This means that there may be a shards with few examples
+  and other shards with many examples.
+
+  This writer class should only be used when the ordering of the examples is not
+  important, e.g., when a file format that supports random access is used.
+
+  The speed of writing is faster than the Writer class because it does not need
+  to shuffle the examples and make sure that the examples are written to the
+  correct shard.
+  """
 
   _OUTPUT_TAG_BUCKETS_LEN_SIZE = "tag_buckets_len_size"
 
