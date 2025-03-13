@@ -12,11 +12,6 @@
 # `duke_ultrasound`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 DukeUltrasound is an ultrasound dataset collected at Duke University with a
@@ -38,9 +33,8 @@ under Grant 5T32GM007171-44. A usage example is available
 
     *   `1.0.0`: Initial release.
     *   `1.0.1`: Fixes parsing of boolean field `harmonic`.
-    *   **`2.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix timestamp_id from %Y%m%d%H%M%S to posix timestamp.
+    *   **`2.0.0`** (default): Fix timestamp_id from %Y%m%d%H%M%S to posix
+        timestamp.
 
 *   **Download size**: `12.78 GiB`
 

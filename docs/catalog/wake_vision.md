@@ -12,10 +12,6 @@
 # `wake_vision`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 Wake Vision is a large, high-quality dataset featuring over 6 million images,

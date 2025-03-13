@@ -12,11 +12,6 @@
 # `dolphin_number_word`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Dolphin Math Word Problem dataset (2015), as presented in
@@ -33,10 +28,8 @@ https://www.microsoft.com/en-us/research/uploads/prod/2016/02//dolphin-sigmadolp
     *   `0.0.1`: Initial release.
     *   `0.0.2`: RaggedTensor fix. Equations and Sources represented as a
         singlestring with components delimited by spaces
-    *   **`0.0.3`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Reintroduced logic to handle edge-case involving examples without
-        sources.
+    *   **`0.0.3`** (default): Reintroduced logic to handle edge-case involving
+        examples without sources.
 
 *   **Download size**: `280.42 KiB`
 

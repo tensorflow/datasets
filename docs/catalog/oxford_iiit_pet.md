@@ -12,11 +12,6 @@
 # `oxford_iiit_pet`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
@@ -40,9 +35,8 @@ split, the bounding boxes are empty.
 
 *   **Versions**:
 
-    *   **`4.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add head bounding boxes. Fix corrupt images. Update dataset URL.
+    *   **`4.0.0`** (default): Add head bounding boxes. Fix corrupt images.
+        Update dataset URL.
 
 *   **Download size**: `773.52 MiB`
 

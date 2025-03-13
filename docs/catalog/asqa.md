@@ -12,11 +12,6 @@
 # `asqa`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 ASQA is the first long-form question answering dataset that focuses on ambiguous
@@ -37,9 +32,7 @@ repostory we release the ASQA dataset, together with the evaluation code:
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`2.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Sample ID goes from int32 (overflowing) to int64.
+    *   **`2.0.0`** (default): Sample ID goes from int32 (overflowing) to int64.
 
 *   **Download size**: `17.86 MiB`
 

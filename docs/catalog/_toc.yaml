@@ -37,7 +37,6 @@ toc:
   - path: /datasets/catalog/dices
     title: dices
   - path: /datasets/catalog/wake_vision
-    status: nightly
     title: wake_vision
   title: Age
 - section:
@@ -100,7 +99,6 @@ toc:
   title: Audio
 - section:
   - path: /datasets/catalog/ai2dcaption
-    status: nightly
     title: ai2dcaption
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
@@ -111,7 +109,6 @@ toc:
   - path: /datasets/catalog/sift1m
     title: sift1m
   - path: /datasets/catalog/wake_vision
-    status: nightly
     title: wake_vision
   title: Categorical
 - section:
@@ -132,7 +129,6 @@ toc:
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
   - path: /datasets/catalog/smart_buildings
-    status: nightly
     title: smart_buildings
   title: Computer science
 - section:
@@ -207,7 +203,6 @@ toc:
   title: Document summarization
 - section:
   - path: /datasets/catalog/wake_vision
-    status: nightly
     title: wake_vision
   title: Facial attributes
 - section:
@@ -224,14 +219,12 @@ toc:
   - path: /datasets/catalog/sun397
     title: sun397
   - path: /datasets/catalog/wake_vision
-    status: nightly
     title: wake_vision
   title: Fine grained image classification
 - section:
   - path: /datasets/catalog/dices
     title: dices
   - path: /datasets/catalog/wake_vision
-    status: nightly
     title: wake_vision
   title: Gender
 - section:
@@ -246,7 +239,6 @@ toc:
   title: Graphs
 - section:
   - path: /datasets/catalog/pneumonia_mnist
-    status: nightly
     title: pneumonia_mnist
   title: Health
 - section:
@@ -255,7 +247,6 @@ toc:
   - path: /datasets/catalog/aflw2k3d
     title: aflw2k3d
   - path: /datasets/catalog/ai2dcaption
-    status: nightly
     title: ai2dcaption
   - path: /datasets/catalog/bccd
     title: bccd
@@ -360,7 +351,6 @@ toc:
   - path: /datasets/catalog/plantae_k
     title: plantae_k
   - path: /datasets/catalog/pneumonia_mnist
-    status: nightly
     title: pneumonia_mnist
   - path: /datasets/catalog/quickdraw_bitmap
     title: quickdraw_bitmap
@@ -405,7 +395,6 @@ toc:
   - path: /datasets/catalog/the300w_lp
     title: the300w_lp
   - path: /datasets/catalog/wake_vision
-    status: nightly
     title: wake_vision
   title: Image
 - section:
@@ -524,7 +513,6 @@ toc:
   - path: /datasets/catalog/plant_village
     title: plant_village
   - path: /datasets/catalog/pneumonia_mnist
-    status: nightly
     title: pneumonia_mnist
   - path: /datasets/catalog/resisc45
     title: resisc45 (manual)
@@ -547,7 +535,6 @@ toc:
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
   - path: /datasets/catalog/wake_vision
-    status: nightly
     title: wake_vision
   title: Image classification
 - section:
@@ -640,7 +627,6 @@ toc:
   - path: /datasets/catalog/dices
     title: dices
   - path: /datasets/catalog/dolma
-    status: nightly
     title: dolma
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -701,7 +687,6 @@ toc:
   - path: /datasets/catalog/dices
     title: dices
   - path: /datasets/catalog/dolma
-    status: nightly
     title: dolma
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -992,7 +977,6 @@ toc:
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
   - path: /datasets/catalog/smart_buildings
-    status: nightly
     title: smart_buildings
   title: Reinforcement learning
 - section:
@@ -1032,6 +1016,18 @@ toc:
 - section:
   - path: /datasets/catalog/aloha_mobile
     title: aloha_mobile
+  - path: /datasets/catalog/asimov_dilemmas_auto_val
+    title: asimov_dilemmas_auto_val
+  - path: /datasets/catalog/asimov_dilemmas_scifi_train
+    title: asimov_dilemmas_scifi_train
+  - path: /datasets/catalog/asimov_dilemmas_scifi_val
+    title: asimov_dilemmas_scifi_val
+  - path: /datasets/catalog/asimov_injury_val
+    title: asimov_injury_val
+  - path: /datasets/catalog/asimov_multimodal_auto_val
+    title: asimov_multimodal_auto_val
+  - path: /datasets/catalog/asimov_multimodal_manual_val
+    title: asimov_multimodal_manual_val
   - path: /datasets/catalog/asu_table_top_converted_externally_to_rlds
     title: asu_table_top_converted_externally_to_rlds
   - path: /datasets/catalog/austin_buds_dataset_converted_externally_to_rlds
@@ -1201,7 +1197,6 @@ toc:
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
   - path: /datasets/catalog/smart_buildings
-    status: nightly
     title: smart_buildings
   title: Sequence modeling
 - section:
@@ -1394,7 +1389,6 @@ toc:
   - path: /datasets/catalog/doc_nli
     title: doc_nli
   - path: /datasets/catalog/dolma
-    status: nightly
     title: dolma
   - path: /datasets/catalog/dolphin_number_word
     title: dolphin_number_word
@@ -1751,7 +1745,6 @@ toc:
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
   - path: /datasets/catalog/smart_buildings
-    status: nightly
     title: smart_buildings
   - path: /datasets/catalog/smartwatch_gestures
     title: smartwatch_gestures
