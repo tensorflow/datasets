@@ -702,20 +702,12 @@ class DatasetInfo:
         be the root directory of a specific dataset version.
 
     Raises:
-      FileNotFoundError: If the dataset_info.json can't be found.
+      DatasetInfoFileError: If the dataset_info.json can't be read.
     """
     logging.info("Load dataset info from %s", dataset_info_dir)
 
     # Load the metadata from disk
-    try:
-      parsed_proto = read_from_json(dataset_info_path(dataset_info_dir))
-    except Exception as e:
-      raise FileNotFoundError(
-          "Tried to load `DatasetInfo` from a directory which does not exist or"
-          " does not contain `dataset_info.json`. Please delete the directory "
-          f"`{dataset_info_dir}`  if you are trying to re-generate the "
-          "dataset."
-      ) from e
+    parsed_proto = read_from_json(dataset_info_path(dataset_info_dir))
 
     if str(self.version) != parsed_proto.version:
       raise AssertionError(
@@ -1128,12 +1120,14 @@ def read_from_json(path: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
     the DatasetInfo proto.
 
   Raises:
-    FileNotFoundError: If the builder_dir does not exist.
+    DatasetInfoFileError: If the dataset info file cannot be read.
   """
   try:
     json_str = epath.Path(path).read_text()
   except OSError as e:
-    raise FileNotFoundError(f"Could not load dataset info from {path}") from e
+    raise DatasetInfoFileError(
+        f"Could not read dataset info from {path}"
+    ) from e
   # Parse it back into a proto.
   parsed_proto = json_format.Parse(json_str, dataset_info_pb2.DatasetInfo())
   return parsed_proto
@@ -1151,7 +1145,7 @@ def read_proto_from_builder_dir(
     The DatasetInfo proto as read from the builder dir.
 
   Raises:
-    FileNotFoundError: If the builder_dir does not exist.
+    DatasetInfoFileError: If the dataset info file cannot be read.
   """
   builder_dir = epath.Path(builder_dir).expanduser()
   info_path = builder_dir / constants.DATASET_INFO_FILENAME
@@ -1173,8 +1167,7 @@ def read_full_proto_from_builder_dir(
     dir.
 
   Raises:
-    FileNotFoundError: If the builder_dir does not exist or it doesn't contain
-    dataset_info.json.
+    DatasetInfoFileError: If the dataset info file cannot be read.
   """
   builder_dir = epath.Path(builder_dir).expanduser()
   info_path = builder_dir / constants.DATASET_INFO_FILENAME
@@ -1513,3 +1506,12 @@ class BeamMetadataDict(MetadataDict):
           self[key] = json.load(f)
     self._tempdir.rmtree()
     super(BeamMetadataDict, self).save_metadata(data_dir)
+
+
+class DatasetInfoFileError(OSError):
+  """Raised when the dataset info file cannot be read.
+
+  We use a custom exception rather than native exceptions, because different
+  backend of etils.epath will throw different exceptions. This exception
+  catches them all.
+  """

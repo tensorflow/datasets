@@ -28,6 +28,7 @@ import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import proto
@@ -275,7 +276,10 @@ def test_restore_blocked_versions(
 
 
 def test_builder_from_directory_dir_not_exists(tmp_path: pathlib.Path):
-  with pytest.raises(FileNotFoundError, match='Could not load dataset info'):
+  with pytest.raises(
+      dataset_info_lib.DatasetInfoFileError,
+      match='Could not read dataset info from',
+  ):
     read_only_builder.builder_from_directory(tmp_path)
 
 

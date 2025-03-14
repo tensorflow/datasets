@@ -256,7 +256,7 @@ class SequentialWriter:
               f'Trying to append a dataset with name {ds_info.name}'
               f' to an existing dataset with name {self._ds_info.name}'
           )
-      except FileNotFoundError:
+      except dataset_info.DatasetInfoFileError:
         self._ds_info.set_file_format(
             file_format=self._file_format,
             # if it was set, we want this to fail to warn the user

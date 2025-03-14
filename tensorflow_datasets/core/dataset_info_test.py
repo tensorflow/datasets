@@ -97,7 +97,8 @@ class DatasetInfoTest(testing.TestCase):
   def test_non_existent_dir(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
     with self.assertRaisesWithPredicateMatch(
-        FileNotFoundError, "from a directory which does not exist"
+        dataset_info.DatasetInfoFileError,
+        "Could not read dataset info from",
     ):
       info.read_from_directory(_NON_EXISTENT_DIR)
 
