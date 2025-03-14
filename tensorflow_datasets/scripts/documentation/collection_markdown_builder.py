@@ -176,15 +176,11 @@ class CollectionCitationSection(CollectionSection):
   def content(self, loader: tfds.core.DatasetCollectionLoader):
     if not loader.collection.info.citation:
       return ''
-    return dmb.Block(
-        textwrap.dedent(
-            f"""
+    return dmb.Block(textwrap.dedent(f"""
             ```
             {tfds.core.utils.indent(loader.collection.info.citation, '            ')}
             ```
-            """
-        )
-    )
+            """))
 
 
 # --------------------------- Main page ---------------------------
