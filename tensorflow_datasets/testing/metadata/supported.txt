@@ -73,6 +73,8 @@ asimov_dilemmas_auto_val/0.1.0
 asimov_dilemmas_scifi_train/0.1.0
 asimov_dilemmas_scifi_val/0.1.0
 asimov_injury_val/0.1.0
+asimov_multimodal_auto_val/0.1.0
+asimov_multimodal_manual_val/0.1.0
 asqa/2.0.0
 asset/ratings/1.0.0
 asset/simplification/1.0.0
